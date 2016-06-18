@@ -26,10 +26,11 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 {
     targets.setAllowWaypointSelection();
 
+#ifndef __ANDROID__
     // Render the radar shadow and background decorations.
     background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
     background_gradient->setTextureCenter("gui/BackgroundGradientOffset");
-
+#endif
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
     background_crosses->setTextureTiled("gui/BackgroundCrosses");
 
