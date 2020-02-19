@@ -485,6 +485,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
     default:
         break;
     }
+
     click_and_drag_state = CD_None;
     box_selection_overlay->hide();
 }
@@ -528,6 +529,7 @@ string GameMasterScreen::getScriptExport(bool selected_only)
 {
     string output;
     PVector<SpaceObject> objs;
+
     if (selected_only)
         objs = targets.getTargets();
     else
@@ -540,5 +542,6 @@ string GameMasterScreen::getScriptExport(bool selected_only)
             continue;
         output += "    " + line + "\n";
     }
+
     return output;
 }

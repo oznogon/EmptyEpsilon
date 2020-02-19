@@ -765,7 +765,10 @@ void GuiObjectTweakRadar::open(P<SpaceObject> target)
     this->target = target;
     
     visibility_toggle->setValue(target->isVisible());
+    INFO(LOG) << "target->getRadarSignatureElectrical(): " << target->getRadarSignatureElectrical();
     electrical_slider->setValue(target->getRadarSignatureElectrical());
+    INFO(LOG) << "target->getRadarSignatureGravity(): " << target->getRadarSignatureGravity();
     gravity_slider->setValue(target->getRadarSignatureGravity());
+    INFO(LOG) << "target->getRadarSignatureBiological(): " << target->target->getRadarSignatureBiological();
     biological_slider->setValue(target->getRadarSignatureBiological());
 }
