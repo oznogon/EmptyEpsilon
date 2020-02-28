@@ -235,6 +235,7 @@ set(SOURCES
 	src/spaceObjects/shipTemplateBasedObject.cpp
 	src/spaceObjects/planet.cpp
 	src/spaceObjects/zone.cpp
+	src/spaceObjects/spaceshipParts/beamHardpoint.cpp
 	src/spaceObjects/spaceshipParts/weaponTube.cpp
 	src/ai/fighterAI.cpp
 	src/ai/ai.cpp
