@@ -1,3 +1,122 @@
+#ifndef BEAM_WEAPON_H
+#define BEAM_WEAPON_H
+
+#include "SFML/System/NonCopyable.hpp"
+#include "shipTemplate.h"
+
+class SpaceShip;
+
+enum EBeamHardpointState
+{
+    BHS_Empty,
+    BHS_Configuring,
+    BHS_Cycling,
+    BHS_Cooldown,
+    BHS_Ready,
+    BHS_Firing
+};
+
+class BeamHardpoint : public sf::NonCopyable
+{
+public:
+    BeamHardpoint();
+
+    void setParent(SpaceShip* parent);
+    void setIndex(int index);
+
+    void setDirection(float direction);
+    float getDirection();
+
+    void setRange(float range);
+    float getRange();
+
+    void setTurretArc(float arc);
+    float getTurretArc();
+
+    void setTurretDirection(float direction);
+    float getTurretDirection();
+
+    void setTurretRotationRate(float rotation_rate);
+    float getTurretRotationRate();
+
+    void setConfigTime(float config_time);
+    float getConfigTime();
+
+    void setCycleTime(float cycle_time);
+    float getCycleTime();
+
+    /*!
+     * Configure a beam hardpoint.
+     * \param type Beam weapon type that is configured.
+     */
+    void configureBeam(EBeamWeapons type);
+
+    /*!
+     * Fire a beam weapon at a specific target.
+     * \param target Space object to fire at.
+     * \param system_target If the target is a ship, the targeted system.
+     */
+    void fire(P<SpaceObject> target, ESystem system_target);
+
+    /*!
+     * Fire a beam weapon at a given angle.
+     * \param target_angle Angle in degrees to where the beam is fired.
+     */
+    void fire(float target_angle);
+
+    //TODO: Continue here
+
+    bool canLoad(EBeamWeapons type);
+    bool canOnlyLoad(EBeamWeapons type);
+    void allowLoadOf(EBeamWeapons type);
+    void disallowLoadOf(EBeamWeapons type);
+    
+    void setSize(EMissileSizes size);
+    EMissileSizes getSize();
+    
+    void forceUnload();
+    
+    void update(float delta);
+
+    bool isEmpty();
+    bool isLoaded();
+    bool isLoading();
+    bool isUnloading();
+    bool isFiring();
+    
+    float getLoadProgress();
+    float getUnloadProgress();
+
+    EBeamWeapons getLoadType();
+    
+    string getTubeName(); //Get the tube name based on the direction of the tube.
+
+    //Calculate a possible firing solution towards the target for this missile tube.
+    //Will return the angle that the missile needs to turn to to possibly hit this target.
+    //Will return infinity when no solution is found.
+    float calculateFiringSolution(P<SpaceObject> target);
+private:
+    void spawnProjectile(float target_angle);
+
+    SpaceShip* parent;
+    int tube_index;
+    
+    //Configuration
+    float load_time;
+    uint32_t type_allowed_mask;
+    float direction;
+
+    //Runtime state
+    EBeamWeapons type_loaded;
+    
+    EMissileSizes size; 
+    float getSizeCategoryModifier();
+    EBeamHardpointState state;
+    float delay;
+    int fire_count;
+};
+
+#endif//BEAM_HARDPOINT_H
 #ifndef BEAM_HARDPOINT_H
 #define BEAM_HARDPOINT_H
 
@@ -18,23 +137,6 @@ public:
     void setArc(float arc);
     float getArc();
 
-    void setDirection(float direction);
-    float getDirection();
-
-    void setRange(float range);
-    float getRange();
-
-    void setTurretArc(float arc);
-    float getTurretArc();
-
-    void setTurretDirection(float direction);
-    float getTurretDirection();
-
-    void setTurretRotationRate(float rotation_rate);
-    float getTurretRotationRate();
-
-    void setCycleTime(float cycle_time);
-    float getCycleTime();
     
     void setDamage(float damage);
     float getDamage();
