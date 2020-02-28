@@ -3,7 +3,7 @@
 
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
-#include "spaceshipParts/beamWeapon.h"
+#include "beams/beamWeapon.h"
 #include "spaceshipParts/weaponTube.h"
 
 enum EMainScreenSetting

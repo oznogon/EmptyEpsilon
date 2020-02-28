@@ -209,6 +209,7 @@ set(SOURCES
 	src/gui/gui2_container.cpp
 	src/gui/gui2_panel.cpp
 	src/gui/gui2_overlay.cpp
+	src/spaceObjects/beams/beamWeapon.cpp
 	src/spaceObjects/missiles/missileWeapon.cpp
 	src/spaceObjects/missiles/EMPMissile.cpp
 	src/spaceObjects/missiles/homingMissile.cpp
@@ -234,7 +235,6 @@ set(SOURCES
 	src/spaceObjects/shipTemplateBasedObject.cpp
 	src/spaceObjects/planet.cpp
 	src/spaceObjects/zone.cpp
-	src/spaceObjects/spaceshipParts/beamWeapon.cpp
 	src/spaceObjects/spaceshipParts/weaponTube.cpp
 	src/ai/fighterAI.cpp
 	src/ai/ai.cpp
