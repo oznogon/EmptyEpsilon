@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 
@@ -169,6 +170,9 @@ void GameGlobalInfo::startScenario(string filename)
 {
     reset();
 
+    i18n::reset();
+    i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
+    i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
     P<ScriptObject> script = new ScriptObject();
     script->run(filename);
     engine->registerObject("scenario", script);
@@ -186,6 +190,13 @@ void GameGlobalInfo::destroy()
     MultiplayerObject::destroy();
     if (state_logger)
         state_logger->destroy();
+}
+
+void GameGlobalInfo::setLongRangeRadarRange(float range)
+{
+    // Disallow ranges <= 5000.0f (zoom misbehavior, crashes)
+    // or > 125U (unreadable)
+    long_range_radar_range = std::max(5000.0f, std::min(125000.0f, range));
 }
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
