@@ -29,12 +29,18 @@ enum ECrewPosition
 
 class PlayerInfo;
 class PlayerSpaceship;
+class ScreenMainScreen;
+class CrewStationScreen;
+
 extern P<PlayerInfo> my_player_info;
 extern P<PlayerSpaceship> my_spaceship;
 extern PVector<PlayerInfo> player_info_list;
 
 class PlayerInfo : public MultiplayerObject
 {
+private:
+    ScreenMainScreen* main_screen;
+    CrewStationScreen* screen;
 public:
     int32_t client_id;
 
@@ -46,6 +52,8 @@ public:
     PlayerInfo();
 
     bool isMainScreen();
+    ScreenMainScreen* getMainScreen() { return main_screen; }
+    CrewStationScreen* getCrewScreen() { return screen; }
     void commandSetCrewPosition(ECrewPosition position, bool active);
     void commandSetShipId(int32_t id);
     void commandSetMainScreenControl(bool control);

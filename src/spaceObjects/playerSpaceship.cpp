@@ -7,6 +7,9 @@
 #include "main.h"
 #include "preferenceManager.h"
 
+#include "screens/mainScreen.h"
+#include "screens/crewStationScreen.h"
+
 #include "scriptInterface.h"
 
 // PlayerSpaceship are ships controlled by a player crew.
@@ -135,6 +138,10 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getShortRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShortRangeRadarRange);
+    // Play music on this ship's clients.
+    // Requires a string of the music's filename relative to the Resources path.
+    // Example: player:playMusic("music/ambient/example.ogg");
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, playMusic);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -772,6 +779,14 @@ void PlayerSpaceship::addHeat(ESystem system, float amount)
 
     if (systems[system].heat_level < 0.0)
         systems[system].heat_level = 0.0;
+}
+
+void PlayerSpaceship::playMusic(string music_name)
+{
+    sf::Packet packet;
+    packet << CMD_PLAY_CLIENT_MUSIC;
+    packet << music_name;
+    broadcastServerCommand(packet);
 }
 
 void PlayerSpaceship::playSoundOnMainScreen(string sound_name)
@@ -1891,6 +1906,18 @@ void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
             {
                 soundManager->playSound(sound_name);
             }
+        }
+        break;
+    case CMD_PLAY_CLIENT_MUSIC:
+        if (my_spaceship == this && my_player_info)
+        {
+            string music_name;
+            packet >> music_name;
+
+            if (my_player_info->isMainScreen())
+                my_player_info->getMainScreen()->playMusic(music_name);
+            else
+                my_player_info->getCrewScreen()->playMusic(music_name);
         }
         break;
     }

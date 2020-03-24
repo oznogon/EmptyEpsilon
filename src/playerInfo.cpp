@@ -20,6 +20,7 @@
 #include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
 
+#include "screenComponents/music.h"
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
 
@@ -129,10 +130,9 @@ void PlayerInfo::spawnUI()
 {
     if (my_player_info->isMainScreen())
     {
-        new ScreenMainScreen();
+        main_screen = new ScreenMainScreen();
     }else{
-
-        CrewStationScreen* screen = new CrewStationScreen();
+        screen = new CrewStationScreen();
         
         //Crew 6/5
         if (crew_position[helmsOfficer])
