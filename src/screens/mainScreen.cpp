@@ -13,6 +13,7 @@
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
+#include "screenComponents/music.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_overlay.h"
@@ -51,18 +52,11 @@ ScreenMainScreen::ScreenMainScreen()
 
     keyboard_help->setText(keyboard_general);
 
-    if (PreferencesManager::get("music_enabled") != "0")
-    {
-        threat_estimate = new ThreatLevelEstimate();
-        threat_estimate->setCallbacks([](){
-            LOG(INFO) << "Switching to ambient music";
-            soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
-        }, []() {
-            LOG(INFO) << "Switching to combat music";
-            soundManager->playMusicSet(findResources("music/combat/*.ogg"));
-        });
-    }
+    // Initialize music and play based on the current threat level,
+    // if enabled.
+    music = new Music(PreferencesManager::get("music_enabled") != "0");
 
+    // Set first person view based on preferences.
     first_person = PreferencesManager::get("first_person") == "1";
 }
 
@@ -70,7 +64,7 @@ void ScreenMainScreen::update(float delta)
 {
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
-        soundManager->stopMusic();
+        music->stop();
         soundManager->stopSound(impulse_sound);
         destroy();
         disconnectFromServer();
@@ -268,7 +262,7 @@ void ScreenMainScreen::onKey(sf::Event::KeyEvent key, int unicode)
     //TODO: This is more generic code and is duplicated.
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
-        soundManager->stopMusic();
+        music->stop();
         soundManager->stopSound(impulse_sound);
         destroy();
         returnToShipSelection();
