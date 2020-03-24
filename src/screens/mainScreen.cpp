@@ -55,6 +55,7 @@ ScreenMainScreen::ScreenMainScreen()
     // Initialize music and play based on the current threat level,
     // if enabled.
     music = new Music(PreferencesManager::get("music_enabled") != "0");
+    music->playThreatSet();
 
     // Set first person view based on preferences.
     first_person = PreferencesManager::get("first_person") == "1";
