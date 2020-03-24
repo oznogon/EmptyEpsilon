@@ -55,6 +55,9 @@ public:
     
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
     constexpr static int16_t CMD_PLAY_CLIENT_MUSIC = 0x0002;
+    constexpr static int16_t CMD_STOP_CLIENT_MUSIC = 0x0003;
+    constexpr static int16_t CMD_ENABLE_CLIENT_THREAT_MUSIC = 0x0004;
+    constexpr static int16_t CMD_DISABLE_CLIENT_THREAT_MUSIC = 0x0005;
 
     // Content of a line in the ship's log
     class ShipLogEntry
@@ -275,6 +278,9 @@ public:
     // Call on the server to play a sound on the main screen.
     void playSoundOnMainScreen(string sound_name);
     void playMusic(string music_name);
+    void stopMusic();
+    void enableThreatMusic();
+    void disableThreatMusic();
 
     float getNetSystemEnergyUsage();
 

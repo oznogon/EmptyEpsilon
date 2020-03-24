@@ -142,6 +142,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     // Requires a string of the music's filename relative to the Resources path.
     // Example: player:playMusic("music/ambient/example.ogg");
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, playMusic);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, stopMusic);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, enableThreatMusic);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, disableThreatMusic);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -786,6 +789,27 @@ void PlayerSpaceship::playMusic(string music_name)
     sf::Packet packet;
     packet << CMD_PLAY_CLIENT_MUSIC;
     packet << music_name;
+    broadcastServerCommand(packet);
+}
+
+void PlayerSpaceship::stopMusic()
+{
+    sf::Packet packet;
+    packet << CMD_STOP_CLIENT_MUSIC;
+    broadcastServerCommand(packet);
+}
+
+void PlayerSpaceship::enableThreatMusic()
+{
+    sf::Packet packet;
+    packet << CMD_ENABLE_CLIENT_THREAT_MUSIC;
+    broadcastServerCommand(packet);
+}
+
+void PlayerSpaceship::disableThreatMusic()
+{
+    sf::Packet packet;
+    packet << CMD_DISABLE_CLIENT_THREAT_MUSIC;
     broadcastServerCommand(packet);
 }
 
@@ -1915,9 +1939,42 @@ void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
             packet >> music_name;
 
             if (my_player_info->isMainScreen())
+            {
+                my_player_info->getMainScreen()->disableThreatMusic();
                 my_player_info->getMainScreen()->playMusic(music_name);
-            else
+            } else {
+                my_player_info->getCrewScreen()->disableThreatMusic();
                 my_player_info->getCrewScreen()->playMusic(music_name);
+            }
+        }
+        break;
+    case CMD_STOP_CLIENT_MUSIC:
+        if (my_spaceship == this && my_player_info)
+        {
+            if (my_player_info->isMainScreen())
+                my_player_info->getMainScreen()->stopMusic();
+            else
+                my_player_info->getCrewScreen()->stopMusic();
+        }
+        break;
+    case CMD_ENABLE_CLIENT_THREAT_MUSIC:
+        if (my_spaceship == this && my_player_info)
+        {
+            if (my_player_info->isMainScreen())
+            {
+                my_player_info->getMainScreen()->enableThreatMusic();
+            } else {
+                my_player_info->getCrewScreen()->enableThreatMusic();
+            }
+        }
+        break;
+    case CMD_DISABLE_CLIENT_THREAT_MUSIC:
+        if (my_spaceship == this && my_player_info)
+        {
+            if (my_player_info->isMainScreen())
+                my_player_info->getMainScreen()->disableThreatMusic();
+            else
+                my_player_info->getCrewScreen()->disableThreatMusic();
         }
         break;
     }

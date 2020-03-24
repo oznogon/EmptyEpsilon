@@ -122,7 +122,17 @@ void CrewStationScreen::playMusic(string filename)
     music->play(filename);
 }
 
-void CrewStationScreen::resetMusic()
+void CrewStationScreen::stopMusic()
+{
+    music->stop();
+}
+
+void CrewStationScreen::disableThreatMusic()
+{
+    music->disableThreatSet();
+}
+
+void CrewStationScreen::enableThreatMusic()
 {
     music->enableThreatSet();
 }

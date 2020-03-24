@@ -66,7 +66,17 @@ void ScreenMainScreen::playMusic(string filename)
     music->play(filename);
 }
 
-void ScreenMainScreen::resetMusic()
+void ScreenMainScreen::stopMusic()
+{
+    music->stop();
+}
+
+void ScreenMainScreen::disableThreatMusic()
+{
+    music->disableThreatSet();
+}
+
+void ScreenMainScreen::enableThreatMusic()
 {
     music->enableThreatSet();
 }
