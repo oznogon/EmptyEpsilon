@@ -9,14 +9,16 @@ class Music
 private:
     P<ThreatLevelEstimate> threat_estimate;
     string music_file;
+    bool music_enabled;
+    bool threat_set_enabled;
 public:
     Music(bool enabled);
-    bool is_enabled;
 
     virtual void play(string music_file);
     virtual void playSet(string music_files);
     virtual void stop();
-    virtual void playThreatSet();
+    virtual void enableThreatSet();
+    virtual void disableThreatSet();
 };
 
 #endif//MUSIC_H
