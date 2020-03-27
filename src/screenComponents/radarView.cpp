@@ -182,7 +182,7 @@ void GuiRadarView::updateGhostDots()
 
 void GuiRadarView::drawBackground(sf::RenderTarget& window)
 {
-    window.clear(sf::Color(20, 20, 20, 255));
+    window.clear(sf::Color(20, 20, 20, 128));
 }
 
 void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)

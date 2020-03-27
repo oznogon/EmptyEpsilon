@@ -7,12 +7,15 @@
 
 class GuiKeyValueDisplay;
 class GuiLabel;
+class GuiViewport3D;
 
 class HelmsScreen : public GuiOverlay
 {
 private:
+    bool first_person;
     GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
+    GuiViewport3D* viewport;
 
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
