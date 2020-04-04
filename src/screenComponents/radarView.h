@@ -55,6 +55,9 @@ private:
     bool show_target_projection;
     bool show_missile_tubes;
     bool show_callsigns;
+    bool show_gravitational_signals;
+    bool show_electrical_signals;
+    bool show_thermal_signals;
     bool show_heading_indicators;
     bool show_game_master_data;
     bool auto_center_on_my_ship;
