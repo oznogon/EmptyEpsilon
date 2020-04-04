@@ -93,9 +93,9 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
     for(int n = 0; n < point_count; n++)
     {
         // ... initialize its values in the array ...
-        signatures[n].gravity = std::max(0.0f, std::min(1.0f, signatures[n].gravity));
+        signatures[n].gravitational = std::max(0.0f, std::min(1.0f, signatures[n].gravitational));
         signatures[n].electrical = std::max(0.0f, std::min(1.0f, signatures[n].electrical));
-        signatures[n].biological = std::max(0.0f, std::min(1.0f, signatures[n].biological));
+        signatures[n].thermal = std::max(0.0f, std::min(1.0f, signatures[n].thermal));
 
         // ... make some noise ...
         float r = random(-1, 1);
@@ -103,19 +103,21 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
         float b = random(-1, 1);
 
         // ... and then modify the bands' values based on the object's signature.
-        // Biological signatures amplify the red and green bands.
-        r += signatures[n].biological * 30;
-        g += signatures[n].biological * 30;
+        // Thermal signatures primarily amplify the red band and secondarily
+        // amplify the blue band.
+        r += signatures[n].thermal * 30;
+        b += signatures[n].thermal * 15;
 
-        // Electrical signatures amplify the red and blue bands.
-        r += random(-20, 20) * signatures[n].electrical;
+        // Electrical signatures primarily modify the blue band and secondarily
+        // modify the red band.
         b += random(-20, 20) * signatures[n].electrical;
+        r += random(-10, 10) * signatures[n].electrical;
 
-        // Gravitational signatures amplify all bands, but especially modify
-        // the green and blue bands.
-        r = r * (1.0f - signatures[n].gravity);
-        g = g * (1.0f - signatures[n].gravity) + 40 * signatures[n].gravity;
-        b = b * (1.0f - signatures[n].gravity) + 40 * signatures[n].gravity;
+        // Gravitational signatures amplify all bands, but primarily modify
+        // the green band, then the blue band.
+        g = g * (1.0f - signatures[n].gravitational) + 40 * signatures[n].gravitational;
+        b = b * (1.0f - signatures[n].gravitational) + 20 * signatures[n].gravitational;
+        r = r * (1.0f - signatures[n].gravitational);
 
         // Apply the values to the radar bands.
         amp_r[n] = r;

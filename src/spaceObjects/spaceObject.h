@@ -36,32 +36,32 @@ public:
 class RawRadarSignatureInfo
 {
 public:
-    float gravity;
-    float electrical;
-    float biological;
+    float gravitational; // Green band
+    float electrical;    // Blue band
+    float thermal;       // Red band
 
     RawRadarSignatureInfo()
-    : gravity(0), electrical(0), biological(0) {}
+    : gravitational(0.0f), electrical(0.0f), thermal(0.0f) {}
 
-    RawRadarSignatureInfo(float gravity, float electrical, float biological)
-    : gravity(gravity), electrical(electrical), biological(biological) {}
+    RawRadarSignatureInfo(float gravitational, float electrical, float thermal)
+    : gravitational(gravitational), electrical(electrical), thermal(thermal) {}
 
     RawRadarSignatureInfo& operator+=(const RawRadarSignatureInfo& o)
     {
-        gravity += o.gravity;
+        gravitational += o.gravitational;
         electrical += o.electrical;
-        biological += o.biological;
+        thermal += o.thermal;
         return *this;
     }
 
     bool operator!=(const RawRadarSignatureInfo& o)
     {
-        return gravity != o.gravity || electrical != o.electrical || biological != o.biological;
+        return gravitational != o.gravitational || electrical != o.electrical || thermal != o.thermal;
     }
 
     RawRadarSignatureInfo operator*(const float f) const
     {
-        return RawRadarSignatureInfo(gravity * f, electrical * f, biological * f);
+        return RawRadarSignatureInfo(gravitational * f, electrical * f, thermal * f);
     }
 };
 
@@ -114,10 +114,13 @@ public:
 
     // Return the object's raw radar signature. The default signature is 0,0,0.
     virtual RawRadarSignatureInfo getRadarSignatureInfo() { return radar_signature; }
-    void setRadarSignatureInfo(float grav, float elec, float bio) { radar_signature = RawRadarSignatureInfo(grav, elec, bio); }
-    float getRadarSignatureGravity() { return radar_signature.gravity; }
+    void setRadarSignatureInfo(float gravitational, float electrical, float thermal) { radar_signature = RawRadarSignatureInfo(gravitational, electrical, thermal); }
+    float getRadarSignatureGravitational() { return radar_signature.gravitational; }
     float getRadarSignatureElectrical() { return radar_signature.electrical; }
-    float getRadarSignatureBiological() { return radar_signature.biological; }
+    float getRadarSignatureThermal() { return radar_signature.thermal; }
+    // Deprecated aliases
+    float getRadarSignatureGravity() { return getRadarSignatureGravitational(); }
+    float getRadarSignatureBiological() { return getRadarSignatureThermal(); }
 
     string getDescription(EScannedState state)
     {

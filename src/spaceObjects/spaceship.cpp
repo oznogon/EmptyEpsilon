@@ -85,9 +85,13 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
     /// Get the dynamic radar signature values for each component band.
     /// Returns a float.
-    /// Example: obj:getDynamicRadarSignatureGravity()
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureGravity);
+    /// Example: obj:getDynamicRadarSignatureGravitational()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureGravitational);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureElectrical);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureThermal);
+    /// [Deprecated] Use getDynamicRadarSignatureGravitational
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureGravity);
+    /// [Deprecated] Use getDynamicRadarSignatureThermal
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureBiological);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
     /// Set the scan state of this ship for every faction.
@@ -294,9 +298,9 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
     {
         ESystem ship_system = static_cast<ESystem>(n);
 
-        // ... increase the biological band based on system heat, offset by
+        // ... increase the thermal band based on system heat, offset by
         // coolant.
-        signature_delta.biological += std::max(
+        signature_delta.thermal += std::max(
             0.0f,
             std::min(
                 1.0f,
@@ -335,7 +339,7 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
     // actively warping.
     if (jump_delay > 0.0f)
     {
-        signature_delta.gravity += std::max(
+        signature_delta.gravitational += std::max(
             0.0f,
             std::min(
                 (1.0f / jump_delay + 0.01f) + 0.25f,
@@ -344,7 +348,7 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
         );
     } else if (current_warp > 0.0f)
     {
-        signature_delta.gravity += current_warp;
+        signature_delta.gravitational += current_warp;
     }
 
     // Update the signature by adding the delta to its baseline.

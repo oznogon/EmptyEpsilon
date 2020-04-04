@@ -184,9 +184,12 @@ public:
      * systems and current activity.
      */
     virtual RawRadarSignatureInfo getDynamicRadarSignatureInfo();
-    float getDynamicRadarSignatureGravity() { return getDynamicRadarSignatureInfo().gravity; }
+    float getDynamicRadarSignatureGravitational() { return getDynamicRadarSignatureInfo().gravitational; }
     float getDynamicRadarSignatureElectrical() { return getDynamicRadarSignatureInfo().electrical; }
-    float getDynamicRadarSignatureBiological() { return getDynamicRadarSignatureInfo().biological; }
+    float getDynamicRadarSignatureThermal() { return getDynamicRadarSignatureInfo().thermal; }
+    // Deprecated aliases
+    float getDynamicRadarSignatureGravity() { return getDynamicRadarSignatureGravitational(); }
+    float getDynamicRadarSignatureBiological() { return getDynamicRadarSignatureThermal(); }
 
     /*!
      * Draw this ship on the radar.

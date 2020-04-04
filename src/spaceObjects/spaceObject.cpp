@@ -200,18 +200,22 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Certain SpaceObject types might modify their signatures using this value
     /// as a baseline. Default values also depend on the SpaceObject type.
     /// Requires numeric values ranging from 0.0 to 1.0 for the gravitational,
-    /// electrical, and biological radar bands.
+    /// electrical, and thermal radar bands.
     /// Example: obj:setRadarSignatureInfo(0.0, 0.5, 1.0)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setRadarSignatureInfo);
     /// Gets this object's component values from its radar signature.
     /// Returns a numeric value between 0.0 and 1.0; larger and negative values
     /// are possible, but currently have no visual effect on the bands.
     /// Examples:
-    ///   local grav_band = obj:getRadarSignatureGravity()
+    ///   local grav_band = obj:getRadarSignatureGravitational()
     ///   local elec_band = obj:getRadarSignatureElectrical()
-    ///   local bio_band = obj:getRadarSignatureBiological()
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureGravity);
+    ///   local bio_band = obj:getRadarSignatureThermal()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureGravitational);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureElectrical);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureThermal);
+    /// [Deprecated] Use getRadarSignatureGravitational
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureGravity);
+    /// [Deprecated] Use getRadarSignatureThermal
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureBiological);
     /// Sets this object's scanning complexity (number of bars in the scanning
     /// minigame) and depth (number of scanning minigames to complete).
@@ -273,9 +277,9 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerMemberReplication(&object_description.friend_of_foe_identified);
     registerMemberReplication(&object_description.simple_scan);
     registerMemberReplication(&object_description.full_scan);
-    registerMemberReplication(&radar_signature.gravity);
+    registerMemberReplication(&radar_signature.gravitational);
     registerMemberReplication(&radar_signature.electrical);
-    registerMemberReplication(&radar_signature.biological);
+    registerMemberReplication(&radar_signature.thermal);
     registerMemberReplication(&scanning_complexity_value);
     registerMemberReplication(&scanning_depth_value);
     registerCollisionableReplication(multiplayer_significant_range);

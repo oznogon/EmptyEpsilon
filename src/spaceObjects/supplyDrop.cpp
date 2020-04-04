@@ -84,7 +84,7 @@ void SupplyDrop::onPickUp(ScriptSimpleCallback callback)
 void SupplyDrop::setEnergy(float amount)
 {
     energy = amount;
-    setRadarSignatureInfo(getRadarSignatureGravity(), getRadarSignatureElectrical() + (amount / 1000.0f), getRadarSignatureBiological());
+    setRadarSignatureInfo(getRadarSignatureGravitational(), getRadarSignatureElectrical() + (amount / 1000.0f), getRadarSignatureThermal());
 }
 
 void SupplyDrop::setWeaponStorage(EMissileWeapons weapon, int amount)
@@ -92,7 +92,7 @@ void SupplyDrop::setWeaponStorage(EMissileWeapons weapon, int amount)
     if (weapon != MW_None)
     {
         weapon_storage[weapon] = amount;
-        setRadarSignatureInfo(getRadarSignatureGravity() + (0.05f * amount), getRadarSignatureElectrical(), getRadarSignatureBiological());
+        setRadarSignatureInfo(getRadarSignatureGravitational() + (0.05f * amount), getRadarSignatureElectrical(), getRadarSignatureThermal());
     }
 }
 
