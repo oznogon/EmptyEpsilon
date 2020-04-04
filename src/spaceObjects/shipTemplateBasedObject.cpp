@@ -100,10 +100,12 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         shield_hit_effect[n] = 0.0;
     }
     hull_strength = hull_max = 100.0;
+    can_cloak = false;
 
     registerMemberReplication(&template_name);
     registerMemberReplication(&type_name);
     registerMemberReplication(&shield_count);
+    registerMemberReplication(&can_cloak);
     for(int n=0; n<max_shield_count; n++)
     {
         registerMemberReplication(&shield_level[n], 0.5);

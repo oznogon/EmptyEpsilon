@@ -67,7 +67,6 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Set this ship's minimum and maximum jump drive distances.
     /// Example: template:setJumpDrive(5000.0, 50000.0)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDriveRange);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCloaking);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
@@ -82,6 +81,14 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanCombatManeuver);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanLaunchProbe);
+    /// Set whether this ship can cloak, which hidesits visible radar trace.
+    /// A cloaked ship can be detected only by its signal emissions, and
+    /// its position pinpointed only by an advanced signal scanner.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanCloak(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanCloak);
+    /// [Deprecated] Use setCanCloak
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCloaking);
     /// Return a new template with the given name, which is an exact copy of this template.
     /// Used to make easy variations of templates.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, copy);
@@ -122,7 +129,7 @@ ShipTemplate::ShipTemplate()
     has_jump_drive = false;
     jump_drive_min_distance = 5000.0;
     jump_drive_max_distance = 50000.0;
-    has_cloaking = false;
+    can_cloak = false;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
     radar_trace = "RadarArrow.png";
@@ -419,11 +426,6 @@ void ShipTemplate::setJumpDrive(bool enabled)
     has_jump_drive = enabled;
 }
 
-void ShipTemplate::setCloaking(bool enabled)
-{
-    has_cloaking = enabled;
-}
-
 void ShipTemplate::setWeaponStorage(EMissileWeapons weapon, int amount)
 {
     if (weapon != MW_None)
@@ -513,7 +515,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->repair_docked = repair_docked;
     result->restocks_scan_probes = restocks_scan_probes;
     result->has_jump_drive = has_jump_drive;
-    result->has_cloaking = has_cloaking;
+    result->can_cloak = can_cloak;
     for(int n=0; n<MW_Count; n++)
         result->weapon_storage[n] = weapon_storage[n];
     result->radar_trace = radar_trace;

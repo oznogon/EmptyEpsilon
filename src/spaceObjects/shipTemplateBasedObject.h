@@ -26,6 +26,7 @@ public:
     float shield_max[max_shield_count];
     float hull_strength, hull_max;
     float shield_hit_effect[max_shield_count];
+    bool can_cloak;
     bool can_be_destroyed;
 
     bool shares_energy_with_docked;       //[config]
@@ -90,6 +91,8 @@ public:
     void setRearShieldMax(float amount) { if (amount < 0) return; shield_max[1] = amount; shield_level[1] = std::min(shield_level[1], shield_max[1]); }
 
     void setRadarTrace(string trace) { radar_trace = trace; }
+    virtual bool getCanCloak() { return can_cloak; }
+    virtual void setCanCloak(bool enabled) { can_cloak = enabled; }
     void setImpulseSoundFile(string sound) { impulse_sound_file = sound; }
 
     bool getSharesEnergyWithDocked() { return shares_energy_with_docked; }

@@ -60,6 +60,7 @@ private:
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;
     GuiToggleButton* can_be_destroyed_toggle;
+    GuiToggleButton* can_cloak_toggle;
 public:
     GuiShipTweakBase(GuiContainer* owner);
 

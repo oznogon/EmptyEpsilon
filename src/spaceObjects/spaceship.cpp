@@ -118,6 +118,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     jump_drive_charge = jump_drive_max_distance;
     jump_distance = 0.0;
     jump_delay = 0.0;
+    can_cloak = false;
     wormhole_alpha = 0.0;
     weapon_tube_count = 0;
     turn_speed = 10.0;
@@ -151,6 +152,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&jump_delay, 0.5);
     registerMemberReplication(&jump_drive_min_distance);
     registerMemberReplication(&jump_drive_max_distance);
+    registerMemberReplication(&can_cloak);
     registerMemberReplication(&wormhole_alpha, 0.5);
     registerMemberReplication(&weapon_tube_count);
     registerMemberReplication(&target_id);
@@ -248,6 +250,8 @@ void SpaceShip::applyTemplateValues()
     has_jump_drive = ship_template->has_jump_drive;
     jump_drive_min_distance = ship_template->jump_drive_min_distance;
     jump_drive_max_distance = ship_template->jump_drive_max_distance;
+    can_cloak = ship_template->can_cloak;
+
     for(int n=0; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
@@ -261,7 +265,6 @@ void SpaceShip::applyTemplateValues()
                 weapon_tube[n].disallowLoadOf(EMissileWeapons(m));
         }
     }
-    //shipTemplate->has_cloaking;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = weapon_storage_max[n] = ship_template->weapon_storage[n];
 

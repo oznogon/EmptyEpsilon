@@ -98,6 +98,7 @@ public:
     bool can_combat_maneuver = true;
     bool can_self_destruct = true;
     bool can_launch_probe = true;
+    bool can_cloak = false;
     
     float energy_storage_amount;
     int repair_crew_count;
@@ -112,7 +113,7 @@ public:
     float impulse_acceleration;
     float combat_maneuver_boost_speed;
     float combat_maneuver_strafe_speed;
-    bool has_jump_drive, has_cloaking;
+    bool has_jump_drive;
     float jump_drive_min_distance;
     float jump_drive_max_distance;
     int weapon_storage[MW_Count];
@@ -143,6 +144,9 @@ public:
     void setCanCombatManeuver(bool enabled) { can_combat_maneuver = enabled; }
     void setCanSelfDestruct(bool enabled) { can_self_destruct = enabled; }
     void setCanLaunchProbe(bool enabled) { can_launch_probe = enabled; }
+    void setCanCloak(bool enabled) { can_cloak = enabled; }
+    // Deprecated alias
+    void setCloaking(bool enabled) { setCanCloak(enabled); }
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);
@@ -173,7 +177,6 @@ public:
     void setWarpSpeed(float warp);
     void setJumpDrive(bool enabled);
     void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
-    void setCloaking(bool enabled);
     void setWeaponStorage(EMissileWeapons weapon, int amount);
     void addRoom(sf::Vector2i position, sf::Vector2i size);
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
