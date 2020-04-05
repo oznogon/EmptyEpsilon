@@ -13,7 +13,9 @@
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
+#include "screenComponents/impulseSound.h"
 
+#include "gui/gui2_panel.h"
 #include "gui/gui2_overlay.h"
 
 ScreenMainScreen::ScreenMainScreen()
@@ -24,12 +26,12 @@ ScreenMainScreen::ScreenMainScreen()
     viewport->showCallsigns()->showHeadings()->showSpacedust();
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    (new GuiRadarView(viewport, "VIEWPORT_RADAR", 5000.0f, nullptr))->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, ATopRight);
+    (new GuiRadarView(viewport, "VIEWPORT_RADAR", nullptr))->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, ATopRight);
     
-    tactical_radar = new GuiRadarView(this, "TACTICAL", 5000.0f, nullptr);
+    tactical_radar = new GuiRadarView(this, "TACTICAL", nullptr);
     tactical_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
-    long_range_radar = new GuiRadarView(this, "TACTICAL", gameGlobalInfo->long_range_radar_range, nullptr);
+    long_range_radar = new GuiRadarView(this, "TACTICAL", nullptr);
     long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
@@ -43,6 +45,13 @@ ScreenMainScreen::ScreenMainScreen()
     new GuiGlobalMessage(this);
     new GuiIndicatorOverlays(this);
 
+    keyboard_help = new GuiHelpOverlay(this, "Keyboard Shortcuts");
+
+    for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Main Screen"))
+        keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
+
+    keyboard_help->setText(keyboard_general);
+
     if (PreferencesManager::get("music_enabled") != "0")
     {
         threat_estimate = new ThreatLevelEstimate();
@@ -55,7 +64,10 @@ ScreenMainScreen::ScreenMainScreen()
         });
     }
 
-    first_person = false;
+    // Initialize and play the impulse engine sound.
+    impulse_sound = std::unique_ptr<ImpulseSound>( new ImpulseSound(PreferencesManager::get("impulse_sound_enabled", "2") != "0") );
+
+    first_person = PreferencesManager::get("first_person") == "1";
 }
 
 void ScreenMainScreen::update(float delta)
@@ -63,7 +75,7 @@ void ScreenMainScreen::update(float delta)
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         soundManager->stopMusic();
-        soundManager->stopSound(impulse_sound);
+        impulse_sound->stop();
         destroy();
         disconnectFromServer();
         returnToMainMenu();
@@ -155,29 +167,12 @@ void ScreenMainScreen::update(float delta)
             break;
         }
 
-        // If we have an impulse power, loop the engine sound.
-        float impulse_ability = std::max(0.0f, std::min(my_spaceship->getSystemEffectiveness(SYS_Impulse), my_spaceship->getSystemPower(SYS_Impulse)));
-        string impulse_sound_file = my_spaceship->impulse_sound_file;
-        if (impulse_ability > 0 && impulse_sound_file.length() > 0)
-        {
-            if (impulse_sound > -1)
-            {
-                soundManager->setSoundVolume(impulse_sound, std::max(10.0f * impulse_ability, fabsf(my_spaceship->current_impulse) * 10.0f * std::max(0.1f, impulse_ability)));
-                soundManager->setSoundPitch(impulse_sound, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * std::max(0.1f, impulse_ability)));
-            }
-            else
-            {
-                impulse_sound = soundManager->playSound(impulse_sound_file, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * impulse_ability), std::max(30.0f, fabsf(my_spaceship->current_impulse) * 10.0f * impulse_ability), true);
-            }
-        }
-        // If we don't have impulse available, stop the engine sound.
-        else if (impulse_sound > -1)
-        {
-            soundManager->stopSound(impulse_sound);
-            // TODO: Play an engine failure sound.
-            impulse_sound = -1;
-        }
-
+        // Update impulse sound volume and pitch.
+        impulse_sound->update(delta);
+    } else {
+        // If we're not the player ship (ie. we exploded), don't play impulse
+        // engine sounds.
+        impulse_sound->stop();
     }
 }
 
@@ -230,49 +225,45 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
     }
 }
 
+void ScreenMainScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "MAIN_SCREEN" && my_spaceship)
+    {
+        if (key.hotkey == "VIEW_FORWARD")
+            my_spaceship->commandMainScreenSetting(MSS_Front);
+        else if (key.hotkey == "VIEW_LEFT")
+            my_spaceship->commandMainScreenSetting(MSS_Left);
+        else if (key.hotkey == "VIEW_RIGHT")
+            my_spaceship->commandMainScreenSetting(MSS_Right);
+        else if (key.hotkey == "VIEW_BACK")
+            my_spaceship->commandMainScreenSetting(MSS_Back);
+        else if (key.hotkey == "VIEW_TARGET")
+            my_spaceship->commandMainScreenSetting(MSS_Target);
+        else if (key.hotkey == "TACTICAL_RADAR")
+            my_spaceship->commandMainScreenSetting(MSS_Tactical);
+        else if (key.hotkey == "LONG_RANGE_RADAR")
+            my_spaceship->commandMainScreenSetting(MSS_LongRange);
+        else if (key.hotkey == "FIRST_PERSON")
+            first_person = !first_person;
+    }
+}
+
 void ScreenMainScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key.code)
+    switch (key.code)
     {
-    case sf::Keyboard::Up:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Front);
-        break;
-    case sf::Keyboard::Left:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Left);
-        break;
-    case sf::Keyboard::Right:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Right);
-        break;
-    case sf::Keyboard::Down:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Back);
-        break;
-    case sf::Keyboard::T:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Target);
-        break;
-    case sf::Keyboard::Tab:
-        if (my_spaceship && gameGlobalInfo->allow_main_screen_tactical_radar)
-            my_spaceship->commandMainScreenSetting(MSS_Tactical);
-        break;
-    case sf::Keyboard::Q:
-        if (my_spaceship && gameGlobalInfo->allow_main_screen_long_range_radar)
-            my_spaceship->commandMainScreenSetting(MSS_LongRange);
-        break;
-    case sf::Keyboard::F:
-        first_person = !first_person;
-        break;
-    
     //TODO: This is more generic code and is duplicated.
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         soundManager->stopMusic();
-        soundManager->stopSound(impulse_sound);
+        impulse_sound->stop();
         destroy();
         returnToShipSelection();
+        break;
+    case sf::Keyboard::Slash:
+    case sf::Keyboard::F1:
+        // Toggle keyboard help.
+        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
         break;
     case sf::Keyboard::P:
         if (game_server)

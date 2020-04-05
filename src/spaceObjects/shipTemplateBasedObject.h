@@ -18,7 +18,7 @@ public:
     string template_name;
     string type_name;
     string radar_trace;
-    string impulse_sound_file = "engine.wav";
+    string impulse_sound_file;
     P<ShipTemplate> ship_template;
 
     int shield_count;
@@ -40,7 +40,7 @@ public:
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
 #endif
-    virtual void drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float sprite_scale, bool show_levels);
+    virtual void drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, float sprite_scale, bool show_levels);
     virtual void update(float delta) override;
 
     virtual std::unordered_map<string, string> getGMInfo() override;
@@ -90,6 +90,7 @@ public:
     void setRearShieldMax(float amount) { if (amount < 0) return; shield_max[1] = amount; shield_level[1] = std::min(shield_level[1], shield_max[1]); }
 
     void setRadarTrace(string trace) { radar_trace = trace; }
+    void setImpulseSoundFile(string sound) { impulse_sound_file = sound; }
 
     bool getSharesEnergyWithDocked() { return shares_energy_with_docked; }
     void setSharesEnergyWithDocked(bool enabled) { shares_energy_with_docked = enabled; }

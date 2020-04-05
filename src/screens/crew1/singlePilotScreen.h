@@ -3,6 +3,7 @@
 
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
+#include "gui/joystickConfig.h"
 
 class GuiViewport3D;
 class GuiMissileTubeControls;
@@ -10,10 +11,13 @@ class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
+class GuiCombatManeuver;
 
 class SinglePilotScreen : public GuiOverlay
 {
 private:
+    bool first_person;
+
     GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
 
@@ -26,6 +30,7 @@ private:
     GuiKeyValueDisplay* shields_display;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
+    GuiCombatManeuver* combat_maneuver;
     
     TargetsContainer targets;
     GuiRadarView* radar;
@@ -35,8 +40,9 @@ private:
 public:
     SinglePilotScreen(GuiContainer* owner);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
+    virtual bool onJoystickAxis(const AxisAction& axisAction) override;
 };
 
 #endif//SINGLE_PILOT_SCREEN_H

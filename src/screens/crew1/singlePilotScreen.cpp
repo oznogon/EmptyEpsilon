@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "singlePilotScreen.h"
+#include "preferenceManager.h"
 
 #include "screenComponents/viewport3d.h"
 
@@ -34,6 +35,8 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     viewport = new GuiViewport3D(this, "3D_VIEW");
     viewport->setPosition(1000, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    first_person = PreferencesManager::get("first_person") == "1";
+
     // Create left panel for controls.
     left_panel = new GuiElement(this, "LEFT_PANEL");
     left_panel->setPosition(0, 0, ATopLeft)->setSize(1000, GuiElement::GuiSizeMax);
@@ -50,7 +53,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // 5U tactical radar with piloting features.
-    radar = new GuiRadarView(left_panel, "TACTICAL_RADAR", 5000.0, &targets);
+    radar = new GuiRadarView(left_panel, "TACTICAL_RADAR", &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 650);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
@@ -71,52 +74,17 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         }
     );
 
-    // Joystick controls.
-    radar->setJoystickCallbacks(
-        [this](float x_position) {
-            if (my_spaceship)
-            {
-                float angle = my_spaceship->getRotation() + x_position;
-                my_spaceship->commandTargetRotation(angle);
-            }
-        },
-        [this](float y_position) {
-            if (my_spaceship && (fabs(y_position) > 20))
-            {
-                // Add some more hysteresis, since y-axis can be hard to keep at 0
-                float value;
-                if (y_position > 0)
-                    value = (y_position-20) * 1.25 / 100;
-                else
-                    value = (y_position+20) * 1.25 / 100;
-
-                my_spaceship->commandCombatManeuverBoost(-value);
-            }
-            else if (my_spaceship)
-            {
-                my_spaceship->commandCombatManeuverBoost(0.0);
-            }
-        },
-        [this](float z_position) {
-            if (my_spaceship)
-                my_spaceship->commandImpulse(-(z_position / 100));
-        },
-        [this](float r_position) {
-            if (my_spaceship)
-                my_spaceship->commandCombatManeuverStrafe(r_position / 100);
-        }
-    );
-
     // Ship stats and combat maneuver at bottom right corner of left panel.
-    (new GuiCombatManeuver(left_panel, "COMBAT_MANEUVER"))->setPosition(-20, -180, ABottomRight)->setSize(200, 150);
+    combat_maneuver = new GuiCombatManeuver(left_panel, "COMBAT_MANEUVER");
+    combat_maneuver->setPosition(-20, -180, ABottomRight)->setSize(200, 150)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
 
-    energy_display = new GuiKeyValueDisplay(left_panel, "ENERGY_DISPLAY", 0.45, "Energy", "");
+    energy_display = new GuiKeyValueDisplay(left_panel, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(-20, -140, ABottomRight)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(left_panel, "HEADING_DISPLAY", 0.45, "Heading", "");
+    heading_display = new GuiKeyValueDisplay(left_panel, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
     heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setPosition(-20, -100, ABottomRight)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(left_panel, "VELOCITY_DISPLAY", 0.45, "Speed", "");
+    velocity_display = new GuiKeyValueDisplay(left_panel, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
     velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setPosition(-20, -60, ABottomRight)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(left_panel, "SHIELDS_DISPLAY", 0.45, "Shields", "");
+    shields_display = new GuiKeyValueDisplay(left_panel, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
     shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(240, 40);
 
     // Unlocked missile aim dial and lock controls.
@@ -139,7 +107,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 
     // Docking, comms, and shields buttons across top.
     (new GuiDockingButton(left_panel, "DOCKING"))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
-    (new GuiOpenCommsButton(left_panel, "OPEN_COMMS_BUTTON", "Open Comms", &targets))->setPosition(270, 20, ATopLeft)->setSize(250, 50);
+    (new GuiOpenCommsButton(left_panel, "OPEN_COMMS_BUTTON", tr("Open Comms"), &targets))->setPosition(270, 20, ATopLeft)->setSize(250, 50);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiShieldsEnableButton(left_panel, "SHIELDS_ENABLE"))->setPosition(520, 20, ATopLeft)->setSize(250, 50);
 
@@ -175,9 +143,7 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
     {
         viewport->hide();
         left_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    }
-    else
-    {
+    } else {
         viewport->show();
         left_panel->setSize(1000, GuiElement::GuiSizeMax);
     }
@@ -187,8 +153,16 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         float target_camera_yaw = my_spaceship->getRotation();
         camera_pitch = 30.0f;
 
-        const float camera_ship_distance = 420.0f;
-        const float camera_ship_height = 420.0f;
+        float camera_ship_distance = 420.0f;
+        float camera_ship_height = 420.0f;
+
+        if (first_person)
+        {
+            camera_ship_distance = -(my_spaceship->getRadius() * 1.5);
+            camera_ship_height = my_spaceship->getRadius() / 10.f;
+            camera_pitch = 0;
+        }
+
         sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(target_camera_yaw) * -camera_ship_distance;
         sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
 #ifdef DEBUG
@@ -200,9 +174,39 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
             camera_pitch = 90.0f;
         }
 #endif
-        camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
-        camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
+        if (first_person)
+        {
+            camera_position = targetCameraPosition;
+            camera_yaw = target_camera_yaw;
+        } else {
+            camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
+            camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
+        }
     }
+}
+
+bool SinglePilotScreen::onJoystickAxis(const AxisAction& axisAction){
+    if(my_spaceship){
+        if (axisAction.category == "HELMS"){
+            if (axisAction.action == "IMPULSE"){
+                my_spaceship->commandImpulse(axisAction.value);  
+                return true;
+            } 
+            if (axisAction.action == "ROTATE"){
+                my_spaceship->commandTurnSpeed(axisAction.value);
+                return true;
+            } 
+            if (axisAction.action == "STRAFE"){
+                my_spaceship->commandCombatManeuverStrafe(axisAction.value);
+                return true;
+            } 
+            if (axisAction.action == "BOOST"){
+                my_spaceship->commandCombatManeuverBoost(axisAction.value);
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 void SinglePilotScreen::onHotkey(const HotkeyResult& key)
@@ -226,7 +230,7 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                     current_found = true;
                     continue;
                 }
-                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
                     my_spaceship->commandSetTarget(targets.get());
@@ -239,7 +243,7 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                 {
                     continue;
                 }
-                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
                     my_spaceship->commandSetTarget(targets.get());
@@ -259,7 +263,7 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                 }
                 if (obj == my_spaceship)
                     continue;
-                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && obj->canBeTargetedBy(my_spaceship))
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
                     my_spaceship->commandSetTarget(targets.get());
@@ -270,7 +274,7 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
             {
                 if (obj == targets.get() || obj == my_spaceship)
                     continue;
-                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && obj->canBeTargetedBy(my_spaceship))
+                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
                     my_spaceship->commandSetTarget(targets.get());

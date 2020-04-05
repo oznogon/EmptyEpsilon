@@ -7,6 +7,7 @@
 #include "screens/windowScreen.h"
 #include "screens/topDownScreen.h"
 #include "screens/cinematicViewScreen.h"
+#include "screens/spectatorScreen.h"
 #include "screens/gm/gameMasterScreen.h"
 
 #include "gui/gui2_autolayout.h"
@@ -37,7 +38,7 @@ ShipSelectionScreen::ShipSelectionScreen()
 
     // List the station types and stations in the right column.
     GuiAutoLayout* stations_layout = new GuiAutoLayout(right_container, "CREW_POSITION_BUTTON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    stations_layout->setPosition(0, 50, ATopCenter)->setSize(400, 500);
+    stations_layout->setPosition(0, 50, ATopCenter)->setSize(400, 600);
     (new GuiLabel(stations_layout, "CREW_POSITION_SELECT_LABEL", "Select your station", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
     // Crew type selector
@@ -78,6 +79,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         window_button->setValue(false);
         topdown_button->setValue(false);
         cinematic_view_button->setValue(false);
+        spectator_button->setValue(false);
     });
     game_master_button->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -88,6 +90,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         game_master_button->setValue(false);
         topdown_button->setValue(false);
         cinematic_view_button->setValue(false);
+        spectator_button->setValue(false);
     });
     window_button->setSize(175, 50);
 
@@ -103,6 +106,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         game_master_button->setValue(false);
         window_button->setValue(false);
         cinematic_view_button->setValue(false);
+        spectator_button->setValue(false);
     });
     topdown_button->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -111,8 +115,27 @@ ShipSelectionScreen::ShipSelectionScreen()
         game_master_button->setValue(false);
         window_button->setValue(false);
         topdown_button->setValue(false);
+        spectator_button->setValue(false);
     });
     cinematic_view_button->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Spectator view button
+    spectator_button = new GuiToggleButton(stations_layout, "SPECTATOR_BUTTON", "Spectate (view all)", [this](bool value) {
+        game_master_button->setValue(false);
+        window_button->setValue(false);
+        topdown_button->setValue(false);
+        cinematic_view_button->setValue(false);
+
+        if (gameGlobalInfo->gm_control_code.length() > 0)
+        {
+            LOG(INFO) << "Player selected Spectate mode, which has a control code.";
+            password_label->setText("Enter the GM control code:");
+            left_container->hide();
+            right_container->hide();
+            password_overlay->show();
+        }
+    });
+    spectator_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // If this is the server, add a panel to create player ships.
     if (game_server)
@@ -232,6 +255,8 @@ ShipSelectionScreen::ShipSelectionScreen()
         // Unselect player ship if cancelling.
         player_ship_list->setSelectionIndex(-1);
         my_player_info->commandSetShipId(-1);
+        // Unselect GM station if cancelling.
+        spectator_button->setValue(false);
     });
     password_cancel->setPosition(0, -20, ABottomCenter)->setSize(300, 50);
 
@@ -240,11 +265,31 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(player_ship_list->getEntryValue(player_ship_list->getSelectionIndex()).toInt());
 
-        if (ship)
-        {
-            // Get the password.
-            string password = password_entry->getText();
+        // Get the password.
+        string password = password_entry->getText().upper();
+
+        if (spectator_button->getValue() == true) {
+            if (password != gameGlobalInfo->gm_control_code)
+            {
+                LOG(INFO) << "Password doesn't match GM control code. Attempt: " << password;
+                password_label->setText("Incorrect control code. Re-enter GM code:");
+                password_entry->setText("");
+            } else {
+                // Password matches.
+                LOG(INFO) << "Password matches GM control code.";
+                // Notify the player.
+                password_label->setText("Control code accepted.\nGranting access.");
+                // Reset and hide the password field.
+                password_entry->setText("");
+                password_entry->hide();
+                password_cancel->hide();
+                password_entry_ok->hide();
+                // Show a confirmation button.
+                password_confirmation->show();
+            }
+        } else if (ship) {
             string control_code = ship->control_code;
+            password_label->setText("Enter this ship's control code:");
 
             if (password != control_code)
             {
@@ -255,9 +300,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 password_label->setText("Incorrect control code. Re-enter code for " + ship->getCallSign() + ":");
                 // Reset the dialog.
                 password_entry->setText("");
-            }
-            else
-            {
+            } else {
                 // Password matches.
                 LOG(INFO) << "Password matches control code.";
                 // Set the player ship.
@@ -340,9 +383,17 @@ void ShipSelectionScreen::update(float delta)
         string button_text = getCrewPositionName(ECrewPosition(n));
         if (my_spaceship)
         {
-            if (my_spaceship->hasPlayerAtPosition(ECrewPosition(n)))
+            std::vector<string> players;
+            foreach(PlayerInfo, i, player_info_list)
             {
-                crew_position_button[n]->setText(button_text + " (occupied)");
+                if (i->ship_id == my_spaceship->getMultiplayerId() && i->crew_position[n])
+                {
+                    players.push_back(i->name);
+                }
+            }
+            if (players.size() > 0)
+            {
+                crew_position_button[n]->setText(button_text + " (" + string(", ").join(players) + ")");
             } else {
                 crew_position_button[n]->setText(button_text);
             }
@@ -360,6 +411,10 @@ void ShipSelectionScreen::update(float delta)
     // Update the Ready button's state, which might have changed based on the
     // presence or absence of player ships.
     updateReadyButton();
+
+    //Sync our configured user name with the server
+    if (my_player_info->name != PreferencesManager::get("username"))
+        my_player_info->commandSetName(PreferencesManager::get("username"));
 }
 
 void ShipSelectionScreen::updateReadyButton()
@@ -375,7 +430,7 @@ void ShipSelectionScreen::updateReadyButton()
             ready_button->enable();
         // If the GM or spectator buttons are enabled, enable the Ready button.
         // TODO: Allow GM or spectator screens to require a control code.
-        else if (game_master_button->getValue() || topdown_button->getValue() || cinematic_view_button->getValue())
+        else if (game_master_button->getValue() || topdown_button->getValue() || cinematic_view_button->getValue() || spectator_button->getValue())
             ready_button->enable();
         // If a player ship and the window view are selected, enable the Ready
         // button.
@@ -403,6 +458,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     window_angle->hide();
     topdown_button->hide();
     cinematic_view_button->hide();
+    spectator_button->hide();
     main_screen_button->setVisible(canDoMainScreen());
     main_screen_button->setValue(false);
     main_screen_controls_button->setVisible(crew_type_selector->getSelectionIndex() != 3);
@@ -410,6 +466,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     window_button->setValue(false);
     topdown_button->setValue(false);
     cinematic_view_button->setValue(false);
+    spectator_button->setValue(false);
 
     // Hide and unselect each crew position button.
     for(int n = 0; n < max_crew_positions; n++)
@@ -446,6 +503,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         window_angle->setVisible(canDoMainScreen());
         topdown_button->setVisible(canDoMainScreen());
         cinematic_view_button->setVisible(canDoMainScreen());
+        spectator_button->setVisible(true);
         break;
     }
 
@@ -490,6 +548,11 @@ void ShipSelectionScreen::onReadyClick()
         my_player_info->commandSetShipId(-1);
         destroy();
         new CinematicViewScreen();
+    }else if(spectator_button->getValue())
+    {
+        my_player_info->commandSetShipId(-1);
+        destroy();
+        new SpectatorScreen();
     }else{
         destroy();
         my_player_info->spawnUI();
