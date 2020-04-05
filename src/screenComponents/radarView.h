@@ -84,8 +84,6 @@ public:
     GuiRadarView* shortRange() { long_range = false; return this; }
     GuiRadarView* enableGhostDots() { show_ghost_dots = true; return this; }
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
-    GuiRadarView* enableVisualObjects() { show_visual_objects = true; return this; }
-    GuiRadarView* disableVisualObjects() { show_visual_objects = false; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
@@ -96,15 +94,33 @@ public:
     GuiRadarView* disableCallsigns() { show_callsigns = false; return this; }
     GuiRadarView* showCallsigns(bool value) { show_callsigns = value; return this; }
     bool getCallsigns() { return show_callsigns; }
+
+    // Enable lenses only if signal details are enabled.
+    bool getSignalDetailsEnabled() { return show_signal_details; }
+    GuiRadarView* setSignalDetailsEnabled(bool enabled) { show_signal_details = enabled; return this; }
     GuiRadarView* enableSignalDetails() { show_signal_details = true; return this; }
     GuiRadarView* disableSignalDetails() { show_signal_details = false; return this; }
-    // Enable lenses only if signal details are enabled.
+
+    bool getVisualObjectsEnabled() { return show_visual_objects; }
+    GuiRadarView* setVisualObjectsEnabled(bool enabled) { show_visual_objects = enabled; return this; }
+    GuiRadarView* enableVisualObjects() { show_visual_objects = true; return this; }
+    GuiRadarView* disableVisualObjects() { show_visual_objects = false; return this; }
+
+    bool getGravitationalSignalsEnabled() { return show_gravitational_signals; }
+    GuiRadarView* setGravitationalSignalsEnabled(bool enabled) { show_signal_details ? show_gravitational_signals = enabled : show_gravitational_signals = false; return this; }
     GuiRadarView* enableGravitationalSignals() { show_signal_details ? show_gravitational_signals = true : show_gravitational_signals = false; return this; }
     GuiRadarView* disableGravitationalSignals() { show_gravitational_signals = false; return this; }
+
+    bool getElectricalSignalsEnabled() { return show_electrical_signals; }
+    GuiRadarView* setElectricalSignalsEnabled(bool enabled) { show_signal_details ? show_electrical_signals = enabled : show_electrical_signals = false; return this; }
     GuiRadarView* enableElectricalSignals() { show_signal_details ? show_electrical_signals = true : show_electrical_signals = false; return this; }
     GuiRadarView* disableElectricalSignals() { show_electrical_signals = false; return this; }
+
+    bool getThermalSignalsEnabled() { return show_thermal_signals; }
+    GuiRadarView* setThermalSignalsEnabled(bool enabled) { show_signal_details ? show_thermal_signals = enabled : show_thermal_signals = false; return this; }
     GuiRadarView* enableThermalSignals() { show_signal_details ? show_thermal_signals = true : show_thermal_signals = false; return this; }
     GuiRadarView* disableThermalSignals() { show_thermal_signals = false; return this; }
+
     GuiRadarView* enableHeadingIndicators() { show_heading_indicators = true; return this; }
     GuiRadarView* disableHeadingIndicators() { show_heading_indicators = false; return this; }
     GuiRadarView* gameMaster() { show_game_master_data = true; return this; }
