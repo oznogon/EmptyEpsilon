@@ -233,23 +233,14 @@ void GuiRadarView::updateGhostDots()
     }
 }
 
-sf::Color GuiRadarView::radarBandToColor(const RawRadarSignatureInfo &info)
+void GuiRadarView::calculateColorFromBand(sf::Uint8 &band_color, sf::Uint8 &band_alpha, float band_info)
 {
-    // Set a base color.
-    sf::Color band_color(32, 32, 32, 223);
+    band_color = 128;
 
-    // Show a signal only if its value is > 0.
-    // Gravitational (green)
-    if (show_gravitational_signals && info.gravitational > 0.0f)
-        band_color.g += 32 + std::min(0.0f, info.gravitational) * 132;
-    // Electrical (blue)
-    else if (show_electrical_signals && info.electrical > 0.0f)
-        band_color.b += 32 + std::min(0.0f, info.electrical) * 132;
-    // Thermal (red)
-    else if (show_thermal_signals && info.thermal > 0.0f)
-        band_color.r += 32 + std::min(0.0f, info.thermal) * 132;
+    if (band_info > 1.0f)
+        band_color += std::max(0, std::min(128, int(128.0f * band_info - 1.0f)));
 
-    return band_color;
+    band_alpha = 223;
 }
 
 void GuiRadarView::drawBackground(sf::RenderTarget& window)
@@ -677,7 +668,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
 
             // If the object is a ship, get its dynamic radar signature info.
             // Otherwise, use the baseline only.
-            if (ship != NULL)
+            if (ship)
                 info = ship->getDynamicRadarSignatureInfo();
             else
                 info = obj->getRadarSignatureInfo();
@@ -696,11 +687,26 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             } else if (show_signal_details && (show_gravitational_signals || show_electrical_signals || show_thermal_signals)) {
                 // Visualize signal details, but only if a lens is selected.
                 // Set the band visualization's default color base and radius.
-                float band_radius = std::max(2.0f, r);
-                sf::Color band_color = radarBandToColor(info);
+                sf::CircleShape circle(0.2, std::max(6, int(r * 2.0f)));
+                float band_radius = std::max(3.0f, r);
+
+                // Set a base color.
+                sf::Color band_color(32, 32, 32, 0);
+
+                // Show a signal only if its value is > 0.
+                // Gravitational (green)
+                if (show_gravitational_signals && info.gravitational > 0.0f)
+                    calculateColorFromBand(band_color.g, band_color.a, info.gravitational);
+
+                // Electrical (blue)
+                if (show_electrical_signals && info.electrical > 0.0f)
+                    calculateColorFromBand(band_color.b, band_color.a, info.electrical);
+
+                // Thermal (red)
+                if (show_thermal_signals && info.thermal > 0.0f)
+                    calculateColorFromBand(band_color.r, band_color.a, info.thermal);
 
                 // Draw a circle based on the enabled bands' values.
-                sf::CircleShape circle(0.1, 10);
                 circle.setPosition(object_position_on_screen);
                 circle.setRadius(band_radius);
                 circle.setOrigin(band_radius, band_radius);

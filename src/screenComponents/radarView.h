@@ -144,7 +144,7 @@ public:
     virtual void onMouseUp(sf::Vector2f position);
 private:
     void updateGhostDots();
-    sf::Color radarBandToColor(const RawRadarSignatureInfo &info);
+    void calculateColorFromBand(sf::Uint8 &band_color, sf::Uint8 &band_alpha, float band_info);
 
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
