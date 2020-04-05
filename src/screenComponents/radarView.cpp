@@ -2,6 +2,7 @@
 
 #include "main.h"
 #include "gameGlobalInfo.h"
+#include "spaceObjects/spaceObject.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/scanProbe.h"
 #include "playerInfo.h"
@@ -16,11 +17,13 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
   missile_tube_controls(nullptr),
   distance(5000.0f),
   long_range(false),
+  show_visual_objects(true),
   show_ghost_dots(false),
   show_waypoints(false),
   show_target_projection(false),
   show_missile_tubes(false),
   show_callsigns(false),
+  show_signal_details(false),
   show_gravitational_signals(false),
   show_electrical_signals(false),
   show_thermal_signals(false),
@@ -47,11 +50,13 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
   missile_tube_controls(nullptr),
   distance(distance),
   long_range(false),
+  show_visual_objects(true),
   show_ghost_dots(false),
   show_waypoints(false),
   show_target_projection(false),
   show_missile_tubes(false),
   show_callsigns(false),
+  show_signal_details(false),
   show_gravitational_signals(false),
   show_electrical_signals(false),
   show_thermal_signals(false),
@@ -226,6 +231,25 @@ void GuiRadarView::updateGhostDots()
             }
         }
     }
+}
+
+sf::Color GuiRadarView::radarBandToColor(const RawRadarSignatureInfo &info)
+{
+    // Set a base color.
+    sf::Color band_color(32, 32, 32, 223);
+
+    // Show a signal only if its value is > 0.
+    // Gravitational (green)
+    if (show_gravitational_signals && info.gravitational > 0.0f)
+        band_color.g += 32 + std::min(0.0f, info.gravitational) * 132;
+    // Electrical (blue)
+    else if (show_electrical_signals && info.electrical > 0.0f)
+        band_color.b += 32 + std::min(0.0f, info.electrical) * 132;
+    // Thermal (red)
+    else if (show_thermal_signals && info.thermal > 0.0f)
+        band_color.r += 32 + std::min(0.0f, info.thermal) * 132;
+
+    return band_color;
 }
 
 void GuiRadarView::drawBackground(sf::RenderTarget& window)
@@ -638,19 +662,51 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
         break;
     }
 
-    for(SpaceObject* obj : visible_objects)
+    for(P<SpaceObject> obj : visible_objects)
     {
         sf::Vector2f object_position_on_screen = worldToScreen(obj->getPosition());
         float r = obj->getRadius() * scale;
         sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
+
+        // Draw visible objects within radar range.
         if (obj != *my_spaceship && rect.intersects(object_rect))
         {
             sf::RenderTarget* window = &window_normal;
+            RawRadarSignatureInfo info;
+            P<SpaceShip> ship = obj;
+
+            // If the object is a ship, get its dynamic radar signature info.
+            // Otherwise, use the baseline only.
+            if (ship != NULL)
+                info = ship->getDynamicRadarSignatureInfo();
+            else
+                info = obj->getRadarSignatureInfo();
+
+            // If the object can't hide in nebulae, draw it regardless.
             if (!obj->canHideInNebula())
                 window = &window_alpha;
-            obj->drawOnRadar(*window, object_position_on_screen, scale, view_rotation, long_range);
-            if (show_callsigns && obj->getCallSign() != "")
-                drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+
+            // Visual objects can be filtered out to focus on signals.
+            if (show_visual_objects)
+            {
+                obj->drawOnRadar(*window, object_position_on_screen, scale, view_rotation, long_range);
+
+                if (show_callsigns && obj->getCallSign() != "")
+                    drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+            } else if (show_signal_details && (show_gravitational_signals || show_electrical_signals || show_thermal_signals)) {
+                // Visualize signal details, but only if a lens is selected.
+                // Set the band visualization's default color base and radius.
+                float band_radius = std::max(2.0f, r);
+                sf::Color band_color = radarBandToColor(info);
+
+                // Draw a circle based on the enabled bands' values.
+                sf::CircleShape circle(0.1, 10);
+                circle.setPosition(object_position_on_screen);
+                circle.setRadius(band_radius);
+                circle.setOrigin(band_radius, band_radius);
+                circle.setFillColor(band_color);
+                window->draw(circle); 
+            }
         }
     }
     if (my_spaceship)

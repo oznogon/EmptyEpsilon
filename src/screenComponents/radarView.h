@@ -4,6 +4,7 @@
 #include "gui/gui2_element.h"
 
 class GuiMissileTubeControls;
+class RawRadarSignatureInfo;
 class TargetsContainer;
 
 class GuiRadarView : public GuiElement
@@ -50,11 +51,13 @@ private:
     sf::Vector2f view_position;
     float view_rotation;
     bool long_range;
+    bool show_visual_objects;
     bool show_ghost_dots;
     bool show_waypoints;
     bool show_target_projection;
     bool show_missile_tubes;
     bool show_callsigns;
+    bool show_signal_details;
     bool show_gravitational_signals;
     bool show_electrical_signals;
     bool show_thermal_signals;
@@ -81,6 +84,8 @@ public:
     GuiRadarView* shortRange() { long_range = false; return this; }
     GuiRadarView* enableGhostDots() { show_ghost_dots = true; return this; }
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
+    GuiRadarView* enableVisualObjects() { show_visual_objects = true; return this; }
+    GuiRadarView* disableVisualObjects() { show_visual_objects = false; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
@@ -91,6 +96,15 @@ public:
     GuiRadarView* disableCallsigns() { show_callsigns = false; return this; }
     GuiRadarView* showCallsigns(bool value) { show_callsigns = value; return this; }
     bool getCallsigns() { return show_callsigns; }
+    GuiRadarView* enableSignalDetails() { show_signal_details = true; return this; }
+    GuiRadarView* disableSignalDetails() { show_signal_details = false; return this; }
+    // Enable lenses only if signal details are enabled.
+    GuiRadarView* enableGravitationalSignals() { show_signal_details ? show_gravitational_signals = true : show_gravitational_signals = false; return this; }
+    GuiRadarView* disableGravitationalSignals() { show_gravitational_signals = false; return this; }
+    GuiRadarView* enableElectricalSignals() { show_signal_details ? show_electrical_signals = true : show_electrical_signals = false; return this; }
+    GuiRadarView* disableElectricalSignals() { show_electrical_signals = false; return this; }
+    GuiRadarView* enableThermalSignals() { show_signal_details ? show_thermal_signals = true : show_thermal_signals = false; return this; }
+    GuiRadarView* disableThermalSignals() { show_thermal_signals = false; return this; }
     GuiRadarView* enableHeadingIndicators() { show_heading_indicators = true; return this; }
     GuiRadarView* disableHeadingIndicators() { show_heading_indicators = false; return this; }
     GuiRadarView* gameMaster() { show_game_master_data = true; return this; }
@@ -114,6 +128,7 @@ public:
     virtual void onMouseUp(sf::Vector2f position);
 private:
     void updateGhostDots();
+    sf::Color radarBandToColor(const RawRadarSignatureInfo &info);
 
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
