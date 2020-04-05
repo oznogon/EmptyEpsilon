@@ -24,6 +24,8 @@ class GuiCustomShipFunctions;
 class ScienceScreen : public GuiOverlay
 {
 public:
+    ScienceScreen(GuiContainer* owner, ECrewPosition crew_position=scienceOfficer);
+
     GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
 
@@ -35,6 +37,8 @@ public:
     GuiRadarView* probe_radar;
     GuiSlider* zoom_slider;
     GuiLabel* zoom_label;
+
+    GuiSelector* signal_lens_selector;
 
     GuiSelector* sidebar_selector;
     GuiAutoLayout* info_sidebar;
@@ -59,8 +63,6 @@ public:
     GuiToggleButton* probe_view_button;
     P<ScanProbe> observation_point;
     GuiListbox* view_mode_selection;
-public:
-    ScienceScreen(GuiContainer* owner, ECrewPosition crew_position=scienceOfficer);
 
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;

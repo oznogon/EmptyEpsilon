@@ -53,6 +53,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
+    science_radar->enableSignalDetails();
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
     new RawScannerDataRadarOverlay(science_radar, "", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f);
 
@@ -206,8 +207,24 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    // Signal lens selector.
+    signal_lens_selector = new GuiSelector(radar_view, "SIGNAL_LENS_SELECTOR", [this](int index, string value)
+    {
+        science_radar->setVisualObjectsEnabled(index == 0);
+        science_radar->setGravitationalSignalsEnabled(index == 1);
+        science_radar->setElectricalSignalsEnabled(index == 2);
+        science_radar->setThermalSignalsEnabled(index == 3);
+    });
+    signal_lens_selector->setOptions({
+        tr("Visual"),
+        tr("Gravitational"),
+        tr("Electrical"),
+        tr("Thermal") })->setSelectionIndex(0);
+    signal_lens_selector->setPosition(-300, -20, ABottomRight)->setSize(300, 50)->show();
+
     // Radar/database view toggle.
-    view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
+    view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value)
+    {
         radar_view->setVisible(index == 0);
         background_gradient->setVisible(index == 0);
         database_view->setVisible(index == 1);
