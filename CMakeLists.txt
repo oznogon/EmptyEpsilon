@@ -30,6 +30,9 @@ if(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
  string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
 endif(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
 
+set(VERSION_NUMBER ${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
+message(STATUS "EmptyEpsilon Verison = ${VERSION_NUMBER}")
+
 # Set our optimization flags.
 set(OPTIMIZER_FLAGS)
 if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
@@ -52,6 +55,11 @@ if(APPLE)
 elseif(UNIX)
     # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
     add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
+endif()
+
+# Set minimum target macOS version
+if(APPLE)
+	set(MACOSX_DEPLOYMENT_TARGET "10.10")
 endif()
 
 if(CONFIG_DIR)
@@ -242,7 +250,6 @@ set(SOURCES
 	src/ai/missileVolleyAI.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
-	src/hardware/hardwareOutputDevice.cpp
 	src/hardware/serialDriver.cpp
 	src/hardware/devices/dmx512SerialDevice.cpp
 	src/hardware/devices/enttecDMXProDevice.cpp
@@ -252,7 +259,7 @@ set(SOURCES
 	src/hardware/devices/philipsHueDevice.cpp
 )
 if(WIN32)
-    list(APPEND SOURCES EmptyEpsilon.rc)
+    list(APPEND SOURCES EmptyEpsilon.rc src/discord.cpp)
 endif()
 
 foreach(SP_SOURCE
@@ -370,7 +377,7 @@ foreach(SP_SOURCE
 endforeach()
 
 add_definitions(-DWINDOW_TITLE="EmptyEpsilon")
-add_definitions(-DVERSION_NUMBER=${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
+add_definitions(-DVERSION_NUMBER=${VERSION_NUMBER})
 if(ENABLE_CRASH_LOGGER)
   add_definitions(-DENABLE_CRASH_LOGGER)
   if(WIN32)
@@ -421,6 +428,12 @@ if(WIN32)
     include_directories(${DRMINGW_ROOT}/include/)
     target_link_libraries(${EXECUTABLE_NAME} exchndl)
   endif()
+  if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/discord/lib/x86/discord_game_sdk.dll.lib")
+    file(DOWNLOAD "https://dl-game-sdk.discordapp.net/latest/discord_game_sdk.zip" "${CMAKE_CURRENT_BINARY_DIR}/discord/game_sdk.zip" TIMEOUT 60 TLS_VERIFY ON)
+    execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf "${CMAKE_CURRENT_BINARY_DIR}/discord/game_sdk.zip" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/discord")
+  endif()
+  target_link_libraries(${EXECUTABLE_NAME} "${CMAKE_CURRENT_BINARY_DIR}/discord/lib/x86/discord_game_sdk.dll.lib")
+  target_include_directories(${EXECUTABLE_NAME} PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/discord/c/")
 elseif(ANDROID)
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--whole-archive ${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-main.a -Wl,--no-whole-archive")
   target_link_libraries(${EXECUTABLE_NAME} log android EGL)
@@ -457,6 +470,7 @@ if(WIN32)
     install(FILES ${DRMINGW_ROOT}/bin/symsrv.dll DESTINATION .)
     install(FILES ${DRMINGW_ROOT}/bin/symsrv.yes DESTINATION .)
   endif()
+  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/discord/lib/x86/discord_game_sdk.dll" DESTINATION .)
 
   install(DIRECTORY resources DESTINATION .)
   install(DIRECTORY scripts DESTINATION .)

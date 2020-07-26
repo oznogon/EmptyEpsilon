@@ -13,15 +13,16 @@
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 {
-    //[DEPRECATED]
+    /// [DEPRECATED]
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
-    //[DEPRECATED]
+    /// [DEPRECATED]
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedBy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedBy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedByFaction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedByFaction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockedWith);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorageMax);
@@ -36,6 +37,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealth);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealth);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealthMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealthMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPower);
@@ -46,10 +49,19 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setImpulseMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRotationMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRotationMaxSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getAcceleration);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setAcceleration);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCombatManeuver);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveRange);
+    /// sets the current jump range charged.
+    /// ships will be able to jump when this is equal to their max jump drive range. 
+    /// Example ship:setJumpCharge(50000)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveCharge);
+    /// returns the current amount of jump charged. 
+    /// Example ship:getJumpCharge()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDriveCharge);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpDrive);
     /// Set the warp speed for this ship's warp level 1.
@@ -58,6 +70,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Requires a numeric value.
     /// Example: ship:setWarpSpeed(500);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWarpSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponArc);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDirection);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponRange);
@@ -79,6 +92,13 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeDisallowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeExclusiveFor);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeDirection);
+    /// Set the tube size
+    /// Example: ship:setTubeSize(0,"small")
+    /// Valid Sizes: "small" "medium" "large"
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTubeSize);
+    /// Returns the size of the tube
+    /// Example: local size = ship:getTubeSize(0)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTubeSize);
     /// Set the icon to be used for this ship on the radar.
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
@@ -169,6 +189,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].health = 1.0;
+        systems[n].health_max = 1.0;
         systems[n].power_level = 1.0;
         systems[n].power_request = 1.0;
         systems[n].coolant_level = 0.0;
@@ -177,6 +198,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         systems[n].hacked_level = 0.0;
 
         registerMemberReplication(&systems[n].health, 0.1);
+        registerMemberReplication(&systems[n].health_max, 0.1);
         registerMemberReplication(&systems[n].hacked_level, 0.1);
     }
 
@@ -210,6 +232,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         setCallSign(gameGlobalInfo->getNextShipCallsign());
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 SpaceShip::~SpaceShip()
 {
 }
@@ -620,7 +643,7 @@ void SpaceShip::update(float delta)
                 current_impulse -= delta * (impulse_acceleration / impulse_max_speed);
             if (current_impulse < 0.0)
                 current_impulse = 0.0;
-        }else if (current_impulse > 0.0)
+        }else if (current_impulse < 0.0)
         {
             if (impulse_max_speed > 0)
                 current_impulse += delta * (impulse_acceleration / impulse_max_speed);
@@ -756,6 +779,7 @@ void SpaceShip::update(float delta)
     for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].hacked_level = std::max(0.0f, systems[n].hacked_level - delta / unhack_time);
+        systems[n].health = std::min(systems[n].health,systems[n].health_max);
     }
 
     model_info.engine_scale = std::min(1.0f, (float) std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse)));
@@ -1231,6 +1255,20 @@ void SpaceShip::setWeaponTubeDirection(int index, float direction)
     weapon_tube[index].setDirection(direction);
 }
 
+void SpaceShip::setTubeSize(int index, EMissileSizes size)
+{
+    if (index < 0 || index >= max_weapon_tubes)
+        return;
+    weapon_tube[index].setSize(size);
+}
+
+EMissileSizes SpaceShip::getTubeSize(int index)
+{
+    if (index < 0 || index >= max_weapon_tubes)
+        return MS_Medium;
+    return weapon_tube[index].getSize();
+}
+
 void SpaceShip::addBroadcast(int threshold, string message)
 {
     if ((threshold < 0) || (threshold > 2))     //if an invalid threshold is defined, alert and default to ally only
@@ -1289,7 +1327,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     // If traits don't differ from the ship template, don't bother exporting
     // them.
     if (getTypeName() != ship_template->getName())
-        ret += ":setTypeName(" + getTypeName() + ")";
+        ret += ":setTypeName(\"" + getTypeName() + "\")";
     if (hull_max != ship_template->hull)
         ret += ":setHullMax(" + string(hull_max, 0) + ")";
     if (hull_strength != ship_template->hull)
@@ -1364,10 +1402,17 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     for(int n=0; n<weapon_tube_count; n++)
     {
         WeaponTube& tube = weapon_tube[n];
-        if (tube.getDirection() != ship_template->weapon_tube[n].direction)
+        auto& template_tube = ship_template->weapon_tube[n];
+        if (tube.getDirection() != template_tube.direction)
+        {
             ret += ":setWeaponTubeDirection(" + string(n) + ", " + string(tube.getDirection(), 0) + ")";
+        }
         //TODO: Weapon tube "type_allowed_mask"
         //TODO: Weapon tube "load_time"
+        if (tube.getSize() != template_tube.size)
+        {
+            ret += ":setTubeSize(" + string(n) + ",\"" + getMissileSizeString(tube.getSize()) + "\")";
+        }
     }
     for(int n=0; n<MW_Count; n++)
     {

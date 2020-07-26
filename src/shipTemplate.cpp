@@ -53,6 +53,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Example: setShieldData(400) setShieldData(100, 80) setShieldData(100, 50, 50)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
     /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
+    /// Compare SpaceShip:setImpulseMaxSpeed, :setRotationMaxSpeed, :setAcceleration.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
     /// Sets the combat maneuver power of this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
@@ -60,8 +61,12 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
     /// Set if this ship shares energy with docked ships. Example: template:setSharesEnergyWithDocked(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSharesEnergyWithDocked);
+    /// Set if this ship repairs docked ships. Example: template:setRepairDocked(false)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRepairDocked);
     /// Set if this ship restocks scan probes on docked ships. Example: template:setRestocksScanProbes(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRestocksScanProbes);
+    /// Set if this ship restores missiles on docked cpuships. Example template:setRestocksMissilesDocked(false)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRestocksMissilesDocked);
     /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
     /// Set this ship's minimum and maximum jump drive distances.
@@ -94,11 +99,12 @@ ShipTemplate::ShipTemplate()
     if (game_server) { LOG(ERROR) << "ShipTemplate objects can not be created during a scenario."; destroy(); return; }
     
     type = Ship;
-    class_name = "No class";
-    class_name = "No sub-class";
+    class_name = tr("No class");
+    sub_class_name = tr("No sub-class");
     shares_energy_with_docked = true;
     repair_docked = false;
     restocks_scan_probes = false;
+    restocks_missiles_docked = false;
     energy_storage_amount = 1000;
     repair_crew_count = 3;
     weapon_tube_count = 0;
@@ -414,6 +420,11 @@ void ShipTemplate::setRestocksScanProbes(bool enabled)
     restocks_scan_probes = enabled;
 }
 
+void ShipTemplate::setRestocksMissilesDocked(bool enabled)
+{
+    restocks_missiles_docked = enabled;
+}
+
 void ShipTemplate::setJumpDrive(bool enabled)
 {
     has_jump_drive = enabled;
@@ -512,6 +523,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->shares_energy_with_docked = shares_energy_with_docked;
     result->repair_docked = repair_docked;
     result->restocks_scan_probes = restocks_scan_probes;
+    result->restocks_missiles_docked = restocks_missiles_docked;
     result->has_jump_drive = has_jump_drive;
     result->has_cloaking = has_cloaking;
     for(int n=0; n<MW_Count; n++)
@@ -537,6 +549,11 @@ void ShipTemplate::setRepairCrewCount(int amount)
 string ShipTemplate::getName()
 {
     return this->name;
+}
+
+string ShipTemplate::getLocaleName()
+{
+    return this->locale_name;
 }
 
 string ShipTemplate::getDescription()

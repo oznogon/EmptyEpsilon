@@ -37,6 +37,7 @@ class ShipSystem
 {
 public:
     float health; //1.0-0.0, where 0.0 is fully broken.
+    float health_max; //1.0-0.0, where 0.0 is fully broken.
     float power_level; //0.0-3.0, default 1.0
     float power_request;
     float heat_level; //0.0-1.0, system will damage at 1.0
@@ -301,6 +302,7 @@ public:
     virtual std::unordered_map<string, string> getGMInfo() override;
 
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
+    P<SpaceObject> getDockedWith() { if (docking_state == DS_Docked) return docking_target; return NULL; }
     bool canStartDocking() { return current_warp <= 0.0 && (!has_jump_drive || jump_delay <= 0.0); }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
@@ -312,6 +314,8 @@ public:
     void setEnergy(float amount) { if ( (amount > 0.0) && (amount <= max_energy_level)) { energy_level = amount; } }
     float getSystemHealth(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].health; }
     void setSystemHealth(ESystem system, float health) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].health = std::min(1.0f, std::max(-1.0f, health)); }
+    float getSystemHealthMax(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].health_max; }
+    void setSystemHealthMax(ESystem system, float health_max) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].health_max = std::min(1.0f, std::max(-1.0f, health_max)); }
     float getSystemHeat(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].heat_level; }
     void setSystemHeat(ESystem system, float heat) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].heat_level = std::min(1.0f, std::max(0.0f, heat)); }
     float getSystemPower(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].power_level; }
@@ -322,6 +326,8 @@ public:
     void setImpulseMaxSpeed(float speed) { impulse_max_speed = speed; }
     float getRotationMaxSpeed() { return turn_speed; }
     void setRotationMaxSpeed(float speed) { turn_speed = speed; }
+    float getAcceleration() { return impulse_acceleration; }
+    void setAcceleration(float acceleration) { impulse_acceleration = acceleration; }
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
 
     bool hasJumpDrive() { return has_jump_drive; }
@@ -341,6 +347,15 @@ public:
         }
     }
     void setWarpSpeed(float speed) { warp_speed_per_warp_level = std::max(0.0f, speed); }
+    float getWarpSpeed() {
+        if (has_warp_drive) {
+            return warp_speed_per_warp_level;
+        } else {
+            return 0.0f;
+        }
+     }
+    float getJumpDriveCharge() { return jump_drive_charge; }
+    void setJumpDriveCharge(float charge) { jump_drive_charge = charge; }
 
     float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getArc(); }
     float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }
@@ -417,6 +432,8 @@ public:
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
     void setWeaponTubeDirection(int index, float direction);
     void setWeaponTubeSize(int index, EMissileSizes size);
+    void setTubeSize(int index, EMissileSizes size);
+    EMissileSizes getTubeSize(int index);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 

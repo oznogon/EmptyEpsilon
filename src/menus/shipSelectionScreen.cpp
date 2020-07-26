@@ -176,33 +176,39 @@ ShipSelectionScreen::ShipSelectionScreen()
     // If this is the server, add buttons and a selector to create player ships.
     if (game_server)
     {
-        GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", nullptr);
-        // List only ships with templates designated for player use.
-        std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
-        std::sort(template_names.begin(), template_names.end());
-
-        for(string& template_name : template_names)
+        if (gameGlobalInfo->allow_new_player_ships)
         {
-            P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
-            ship_template_selector->addEntry(template_name + " (" + ship_template->getClass() + ":" + ship_template->getSubClass() + ")", template_name);
-        }
-        ship_template_selector->setSelectionIndex(0);
-        ship_template_selector->setPosition(0, 630, ATopCenter)->setSize(490, 50);
+            GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", nullptr);
+            // List only ships with templates designated for player use.
+            std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
+            std::sort(template_names.begin(), template_names.end());
 
-        // Spawn a ship of the selected template near 0,0 and give it a random
-        // heading.
-        (new GuiButton(left_container, "CREATE_SHIP_BUTTON", "Spawn player ship", [this, ship_template_selector]() {
-            P<PlayerSpaceship> ship = new PlayerSpaceship();
-
-            if (ship)
+            for(string& template_name : template_names)
             {
-                ship->setTemplate(ship_template_selector->getSelectionValue());
-                ship->setRotation(random(0, 360));
-                ship->target_rotation = ship->getRotation();
-                ship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
-                my_player_info->commandSetShipId(ship->getMultiplayerId());
+                P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
+                ship_template_selector->addEntry(template_name + " (" + ship_template->getClass() + ":" + ship_template->getSubClass() + ")", template_name);
             }
-        }))->setPosition(0, 680, ATopCenter)->setSize(490, 50);
+            ship_template_selector->setSelectionIndex(0);
+            ship_template_selector->setPosition(0, 630, ATopCenter)->setSize(490, 50);
+
+            // Spawn a ship of the selected template near 0,0 and give it a random
+            // heading.
+            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", "Spawn player ship", [this, ship_template_selector]() {
+                if (!gameGlobalInfo->allow_new_player_ships)
+                    return;
+                P<PlayerSpaceship> ship = new PlayerSpaceship();
+
+                if (ship)
+                {
+                    ship->setTemplate(ship_template_selector->getSelectionValue());
+                    ship->setRotation(random(0, 360));
+                    ship->target_rotation = ship->getRotation();
+                    ship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
+                    my_player_info->commandSetShipId(ship->getMultiplayerId());
+                    gameGlobalInfo->on_new_player_ship.call(ship);
+                }
+            }))->setPosition(0, 680, ATopCenter)->setSize(490, 50);
+        }
 
         // If this is the server, the "back" button goes to the scenario
         // selection/server creation screen.
@@ -420,33 +426,34 @@ void ShipSelectionScreen::update(float delta)
 void ShipSelectionScreen::updateReadyButton()
 {
     // Update the Ready button based on crew position button states.
-    // If the player is capable of displaying the main screen...
-    if (my_player_info->isOnlyMainScreen())
+    // If the GM, Top-Down, Cinematic, or Spectate views are selected ...
+    if (game_master_button->getValue()
+        || topdown_button->getValue()
+        || cinematic_view_button->getValue()
+        || spectator_button->getValue())
     {
-        // If the main screen button is both available and selected and a
-        // player ship is also selected, and the player isn't being asked for a
-        // command code, enable the Ready button.
-        if (my_spaceship && main_screen_button->isVisible() && main_screen_button->getValue())
-            ready_button->enable();
-        // If the GM or spectator buttons are enabled, enable the Ready button.
-        // TODO: Allow GM or spectator screens to require a control code.
-        else if (game_master_button->getValue() || topdown_button->getValue() || cinematic_view_button->getValue() || spectator_button->getValue())
-            ready_button->enable();
-        // If a player ship and the window view are selected, enable the Ready
-        // button.
-        else if (my_spaceship && window_button->getValue())
-            ready_button->enable();
-        // Otherwise, disable the Ready button.
-        else
-            ready_button->disable();
-    // If the player can't display the main screen...
-    }else{
-        // If a player ship is selected and the player isn't being asked for a
-        // control code, enable the Ready button. Otherwise, disable it.
-        if (my_spaceship)
-            ready_button->enable();
-        else
-            ready_button->disable();
+        // ... enable the Ready button.
+        ready_button->enable();
+    // Else if a player ship is selected ...
+    } else if (my_spaceship) {
+        // ... and main screen, ship's window, or any crew station is selected ...
+        bool ready_enabled = false;
+
+        for(int n = 0; n < max_crew_positions; n++)
+            if (crew_position_button[n]->getValue())
+                ready_enabled = true;
+
+        if (main_screen_button->isVisible() && main_screen_button->getValue())
+            ready_enabled = true;
+
+        if (window_button->getValue())
+            ready_enabled = true;
+
+        // ... enable the Ready button.
+        ready_button->setEnable(ready_enabled);
+    } else {
+        // ... disable the Ready button.
+        ready_button->disable();
     }
 }
 

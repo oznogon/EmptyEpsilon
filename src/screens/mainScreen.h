@@ -1,3 +1,4 @@
+#include <memory>
 #ifndef MAIN_SCREEN_H
 #define MAIN_SCREEN_H
 
@@ -21,7 +22,6 @@ private:
     string keyboard_general = "";
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
-    bool first_person;
     GuiCommsOverlay* onscreen_comms;
     std::unique_ptr<ImpulseSound> impulse_sound;
 public:

@@ -39,6 +39,8 @@ private:
     GuiObjectTweak* player_tweak_dialog;
     GuiObjectTweak* ship_tweak_dialog;
     GuiObjectTweak* object_tweak_dialog;
+    GuiObjectTweak* station_tweak_dialog;
+    GuiObjectTweak* jammer_tweak_dialog;
     
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
@@ -68,9 +70,10 @@ private:
     } click_and_drag_state;
     sf::Vector2f drag_start_position;
     sf::Vector2f drag_previous_position;
-public:
+
     GuiButton* create_button;
-    GuiButton* cancel_create_button;
+    GuiButton* cancel_action_button;
+public:
 
     GameMasterScreen();
     virtual ~GameMasterScreen();

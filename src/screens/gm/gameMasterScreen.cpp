@@ -86,11 +86,10 @@ GameMasterScreen::GameMasterScreen()
     });
     copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
-    cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
-        create_button->show();
-        cancel_create_button->hide();
+    cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
+        gameGlobalInfo->on_gm_click = nullptr;
     });
-    cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
+    cancel_action_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -104,6 +103,14 @@ GameMasterScreen::GameMasterScreen()
             {
                 ship_tweak_dialog->open(obj);
                 break;
+            }
+            else if (P<SpaceStation>(obj))
+            {
+                station_tweak_dialog->open(obj);
+            }
+            else if (P<WarpJammer>(obj))
+            {
+                jammer_tweak_dialog->open(obj);
             }
             else
             {
@@ -129,7 +136,7 @@ GameMasterScreen::GameMasterScreen()
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
-    info_clock = new GuiKeyValueDisplay(info_layout, "INFO_CLOCK", 0.5, tr("Mission Clock"), "");
+    info_clock = new GuiKeyValueDisplay(info_layout, "INFO_CLOCK", 0.5, tr("Clock"), "");
     info_clock->setSize(GuiElement::GuiSizeMax, 30);
 
     gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [this](int index, string value)
@@ -187,14 +194,14 @@ GameMasterScreen::GameMasterScreen()
     ship_tweak_dialog->hide();
     object_tweak_dialog = new GuiObjectTweak(this, TW_Object);
     object_tweak_dialog->hide();
+    station_tweak_dialog = new GuiObjectTweak(this, TW_Station);
+    station_tweak_dialog->hide();
+    jammer_tweak_dialog = new GuiObjectTweak(this, TW_Jammer);
+    jammer_tweak_dialog->hide();
 
     global_message_entry = new GuiGlobalMessageEntryView(this);
     global_message_entry->hide();
-    object_creation_view = new GuiObjectCreationView(this, [this](){
-        create_button->hide();
-        cancel_create_button->show();
-        object_creation_view->hide();
-    });
+    object_creation_view = new GuiObjectCreationView(this);
     object_creation_view->hide();
 
     message_frame = new GuiPanel(this, "");
@@ -212,6 +219,7 @@ GameMasterScreen::GameMasterScreen()
     message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 GameMasterScreen::~GameMasterScreen()
 {
 }
@@ -349,6 +357,18 @@ void GameMasterScreen::update(float delta)
     } else {
         message_frame->hide();
     }
+
+    if (gameGlobalInfo->on_gm_click)
+    {
+        create_button->hide();
+        object_creation_view->hide();
+        cancel_action_button->show();
+    }
+    else
+    {
+        create_button->show();
+        cancel_action_button->hide();
+    }
 }
 
 void GameMasterScreen::onMouseDown(sf::Vector2f position)
@@ -361,9 +381,9 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
     }
     else
     {
-        if (cancel_create_button->isVisible())
+        if (gameGlobalInfo->on_gm_click)
         {
-            object_creation_view->createObject(position);
+            gameGlobalInfo->on_gm_click(position);
         }else{
             click_and_drag_state = CD_BoxSelect;
             

@@ -1,6 +1,7 @@
 #ifndef CREW_STATION_SCREEN_H
 #define CREW_STATION_SCREEN_H
 
+#include <memory>
 #include "engine.h"
 #include "threatLevelEstimate.h"
 #include "playerInfo.h"
@@ -50,7 +51,7 @@ private:
         ECrewPosition position;
     };
 
-    ECrewPosition current_position;
+    ECrewPosition current_position = helmsOfficer;
     std::vector<CrewTabInfo> tabs;
     string keyboard_general = "";
     void showNextTab(int offset=1);
@@ -59,6 +60,7 @@ private:
     GuiElement* findTab(string name);
     
     string listHotkeysLimited(string station);
+    void tileViewport();
     std::vector<std::pair<string, string>> listControlsByCategory(string category);
 };
 
