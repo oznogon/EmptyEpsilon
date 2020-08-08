@@ -73,7 +73,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     sidebar_selector = new GuiSelector(radar_view, "", [this](int index, string value)
     {
-        info_sidebar->setVisible(index == 0);    
+        info_sidebar->setVisible(index == 0);
         custom_function_sidebar->setVisible(index == 1);
     });
     sidebar_selector->setOptions({"Scanning", "Other"});
@@ -181,7 +181,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
         else
             probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
-        
+
         if (value && probe)
         {
             sf::Vector2f probe_position = probe->getPosition();
@@ -255,7 +255,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))
             targets.clear();
     }
-    
+
     sidebar_selector->setVisible(sidebar_selector->getSelectionIndex() > 0 || custom_function_sidebar->hasEntries());
 
     info_callsign->setValue("-");
@@ -370,7 +370,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     {
                         info_system[n]->show();
                     }
-                    
+
                     info_description->hide();
                 }
                 else if (sidebar_pager_selection == "Description")
@@ -397,7 +397,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     info_shield_frequency->setFrequency(ship->shield_frequency);
                     info_beam_frequency->setFrequency(ship->beam_frequency);
                 }
-                
+
                 // Show the status of each subsystem.
                 for(int n = 0; n < SYS_COUNT; n++)
                 {
