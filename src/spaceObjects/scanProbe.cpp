@@ -4,15 +4,21 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// A scan probe.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
 {
-    // Callback when the probe's lifetime expires.
-    // Returns the probe.
-    // Example: probe:onExpiration(probeExpired)
+    /// Set the remaining lifetime (in seconds).
+    /// The default initial lifetime is 10 minutes.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setLifetime);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getLifetime);
+    /// Callback when the probe's lifetime expires.
+    /// Returns the probe.
+    /// Example: probe:onExpiration(probeExpired)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onExpiration);
-    // Callback when the probe is destroyed by damage.
-    // Returns the probe and instigator.
-    // Example: probe:onDestruction(probeDestroyed)
+    /// Callback when the probe is destroyed by damage.
+    /// Returns the probe and instigator.
+    /// Example: probe:onDestruction(probeDestroyed)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onDestruction);
 }
 
@@ -26,7 +32,7 @@ ScanProbe::ScanProbe()
     registerMemberReplication(&target_position);
     registerMemberReplication(&lifetime, 60.0);
     setRadarSignatureInfo(0.0, 0.2, 0.0);
-    
+
     switch(irandom(1, 3))
     {
     case 1:
@@ -43,8 +49,19 @@ ScanProbe::ScanProbe()
     setCallSign(string(getMultiplayerId()) + "P");
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 ScanProbe::~ScanProbe()
 {
+}
+
+void ScanProbe::setLifetime(float lifetime)
+{
+    this->lifetime = lifetime;
+}
+
+float ScanProbe::getLifetime()
+{
+    return this->lifetime;
 }
 
 void ScanProbe::update(float delta)
@@ -126,4 +143,3 @@ void ScanProbe::onExpiration(ScriptSimpleCallback callback)
 {
     this->on_expiration = callback;
 }
-

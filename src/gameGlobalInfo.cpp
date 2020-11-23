@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "scienceDatabase.h"
 
 P<GameGlobalInfo> gameGlobalInfo;
 
@@ -61,6 +62,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&reputation_points, 1.0);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 GameGlobalInfo::~GameGlobalInfo()
 {
 }
@@ -153,6 +155,8 @@ void GameGlobalInfo::addScript(P<Script> script)
 void GameGlobalInfo::reset()
 {
     gm_callback_functions.clear();
+    gm_messages.clear();
+    on_gm_click = nullptr;
 
     foreach(GameEntity, e, entityList)
         e->destroy();
@@ -170,6 +174,7 @@ void GameGlobalInfo::reset()
     elapsed_time = 0.0f;
     callsign_counter = 0;
     victory_faction = -1;
+    allow_new_player_ships = true;
 }
 
 void GameGlobalInfo::startScenario(string filename)
@@ -179,6 +184,14 @@ void GameGlobalInfo::startScenario(string filename)
     i18n::reset();
     i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+
+    flushDatabaseData();
+    fillDefaultDatabaseData();
+
+    P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
+    if (scienceInfoScript->getError() != "") exit(1);
+    scienceInfoScript->destroy();
+
     P<ScriptObject> script = new ScriptObject();
     script->run(filename);
     engine->registerObject("scenario", script);
@@ -233,6 +246,17 @@ string getSectorName(sf::Vector2f position)
     return y + x;
 }
 
+int getSectorName(lua_State* L)
+{
+    float x = luaL_checknumber(L, 1);
+    float y = luaL_checknumber(L, 2);
+    lua_pushstring(L, getSectorName(sf::Vector2f(x, y)).c_str());
+    return 1;
+}
+/// getSectorName(x, y)
+/// Return the sector name for the point with coordinates (x, y). Compare SpaceObject:getSectorName().
+REGISTER_SCRIPT_FUNCTION(getSectorName);
+
 static int victory(lua_State* L)
 {
     gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
@@ -253,6 +277,7 @@ static int globalMessage(lua_State* L)
 }
 /// globalMessage(string)
 /// Show a global message on the main screens of all active player ships.
+/// The message is shown for 5 sec; new messages replace the old immediately.
 REGISTER_SCRIPT_FUNCTION(globalMessage);
 
 static int setBanner(lua_State* L)
@@ -263,6 +288,15 @@ static int setBanner(lua_State* L)
 /// setBanner(string)
 /// Show a scrolling banner containing this text on the cinematic and top down views.
 REGISTER_SCRIPT_FUNCTION(setBanner);
+
+static int getScenarioTime(lua_State* L)
+{
+    lua_pushnumber(L, gameGlobalInfo->elapsed_time);
+    return 1;
+}
+/// getScenarioTime()
+/// Return the elapsed time of the scenario.
+REGISTER_SCRIPT_FUNCTION(getScenarioTime);
 
 static int getPlayerShip(lua_State* L)
 {
@@ -398,3 +432,122 @@ static int playSoundFile(lua_State* L)
 /// Play a sound file on the server. Will work with any file supported by SFML (.wav, .ogg, .flac)
 /// Note that the sound is only played on the server. Not on any of the clients.
 REGISTER_SCRIPT_FUNCTION(playSoundFile);
+
+template<> int convert<EScanningComplexity>::returnType(lua_State* L, EScanningComplexity complexity)
+{
+    switch(complexity)
+    {
+    case SC_None:
+        lua_pushstring(L, "none");
+        return 1;
+    case SC_Simple:
+        lua_pushstring(L, "simple");
+        return 1;
+    case SC_Normal:
+        lua_pushstring(L, "normal");
+        return 1;
+    case SC_Advanced:
+        lua_pushstring(L, "advanced");
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+static int getScanningComplexity(lua_State* L)
+{
+    return convert<EScanningComplexity>::returnType(L, gameGlobalInfo->scanning_complexity);
+}
+/// Get the scanning complexity setting (returns an EScanningComplexity representation)
+REGISTER_SCRIPT_FUNCTION(getScanningComplexity);
+
+static int getHackingDifficulty(lua_State* L)
+{
+    lua_pushinteger(L, gameGlobalInfo->hacking_difficulty);
+    return 1;
+}
+/// Get the hacking difficulty setting (returns an integer between 0 and 3)
+REGISTER_SCRIPT_FUNCTION(getHackingDifficulty);
+
+template<> int convert<EHackingGames>::returnType(lua_State* L, EHackingGames game)
+{
+    switch(game)
+    {
+    case HG_Mine:
+        lua_pushstring(L, "mines");
+        return 1;
+    case HG_Lights:
+        lua_pushstring(L, "lights");
+        return 1;
+    case HG_All:
+        lua_pushstring(L, "all");
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+static int getHackingGames(lua_State* L)
+{
+    return convert<EHackingGames>::returnType(L, gameGlobalInfo->hacking_games);
+}
+/// Get the hacking games setting (returns an EHackingGames representation)
+REGISTER_SCRIPT_FUNCTION(getHackingGames);
+
+static int areBeamShieldFrequenciesUsed(lua_State* L)
+{
+    lua_pushboolean(L, gameGlobalInfo->use_beam_shield_frequencies);
+    return 1;
+}
+/// returns if the "Beam/Shield Frequencies" setting is enabled
+REGISTER_SCRIPT_FUNCTION(areBeamShieldFrequenciesUsed);
+
+static int isPerSystemDamageUsed(lua_State* L)
+{
+    lua_pushboolean(L, gameGlobalInfo->use_system_damage);
+    return 1;
+}
+/// returns if the "Per-System Damage" setting is enabled
+REGISTER_SCRIPT_FUNCTION(isPerSystemDamageUsed);
+
+static int isTacticalRadarAllowed(lua_State* L)
+{
+    lua_pushboolean(L, gameGlobalInfo->allow_main_screen_tactical_radar);
+    return 1;
+}
+/// returns if the "Tactical Radar" setting is enabled
+REGISTER_SCRIPT_FUNCTION(isTacticalRadarAllowed);
+
+static int isLongRangeRadarAllowed(lua_State* L)
+{
+    lua_pushboolean(L, gameGlobalInfo->allow_main_screen_long_range_radar);
+    return 1;
+}
+/// returns if the "Long Range Radar" setting is enabled
+REGISTER_SCRIPT_FUNCTION(isLongRangeRadarAllowed);
+
+static int onNewPlayerShip(lua_State* L)
+{
+    int idx = 1;
+    convert<ScriptSimpleCallback>::param(L, idx, gameGlobalInfo->on_new_player_ship);
+    return 0;
+}
+/// Register a callback function that is called when a new ship is created on the ship selection screen.
+REGISTER_SCRIPT_FUNCTION(onNewPlayerShip);
+
+static int allowNewPlayerShips(lua_State* L)
+{
+    gameGlobalInfo->allow_new_player_ships = lua_toboolean(L, 1);
+    return 0;
+}
+/// Set if the server is allowed to create new player ships from the ship creation screen.
+/// allowNewPlayerShip(false) -- disallow new player ships to be created
+REGISTER_SCRIPT_FUNCTION(allowNewPlayerShips);
+
+static int getEEVersion(lua_State* L)
+{
+    lua_pushinteger(L, VERSION_NUMBER);
+    return 1;
+}
+/// Get a string with the current version number, like "20191231"
+REGISTER_SCRIPT_FUNCTION(getEEVersion);

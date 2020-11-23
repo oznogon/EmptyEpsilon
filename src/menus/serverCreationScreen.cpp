@@ -197,15 +197,25 @@ ServerCreationScreen::ServerCreationScreen()
     // Fetch and sort all Lua files starting with "scenario_".
     std::vector<string> scenario_filenames = findResources("scenario_*.lua");
     std::sort(scenario_filenames.begin(), scenario_filenames.end());
+    // remove duplicates
+    scenario_filenames.erase(std::unique(scenario_filenames.begin(), scenario_filenames.end()), scenario_filenames.end());
 
+    // We select the same mission as we had previously selected
+    // unless that one doesnt exist in which case we select the first by default
+    int mission_selected = 0;
     // For each scenario file, extract its name, then add it to the list.
     for(string filename : scenario_filenames)
     {
         ScenarioInfo info(filename);
         scenario_list->addEntry(info.name, filename);
+        if (info.name == gameGlobalInfo->scenario)
+        {
+            mission_selected=scenario_list->entryCount()-1;
+        }
     }
-    // Select the first scenario in the list by default.
-    scenario_list->setSelectionIndex(0);
+
+    scenario_list->setSelectionIndex(mission_selected);
+    scenario_list->scrollTo(mission_selected);
     selectScenario(scenario_list->getSelectionValue());
 
     gameGlobalInfo->reset();
@@ -216,27 +226,42 @@ void ServerCreationScreen::selectScenario(string filename)
     // When a scenario is selected, display its description and variations.
     selected_scenario_filename = filename;
 
-    // Initialize variables.
-    scenario_description->setText("");
-
-    variation_selection->setSelectionIndex(0);
-    variation_names_list = {tr("variation", "None")};
-    gameGlobalInfo->variation = variation_names_list[0];
-
-    variation_descriptions_list = {tr("No variation.")};
-    variation_description->setText(tr("No variation selected. Play the scenario as intended."));
-
     // Open the scenario file.
     ScenarioInfo info(selected_scenario_filename);
     scenario_description->setText(info.description);
 
+    // Initialize variables.
+    variation_selection->setSelectionIndex(0);
+    variation_names_list = {tr("variation", "None")};
+
+    string variation_requested = variation_names_list[0];
+    if (gameGlobalInfo->scenario == info.name)
+    {
+        variation_requested = gameGlobalInfo->variation;
+    }
+
+    variation_descriptions_list = {tr("No variation selected. Play the scenario as intended.")};
+    variation_description->setText(variation_descriptions_list[0]);
+
+    int selected_variation = 0;
     for(auto variation : info.variations)
     {
         variation_names_list.push_back(variation.first);
         variation_descriptions_list.push_back(variation.second);
+        if (variation_requested == variation.first)
+        {
+            selected_variation=variation_names_list.size()-1;
+        }
     }
 
     variation_selection->setOptions(variation_names_list);
+
+    gameGlobalInfo->scenario = info.name;
+    gameGlobalInfo->variation = variation_names_list[selected_variation];
+
+    variation_selection->setSelectionIndex(selected_variation);
+    variation_description->setText(variation_descriptions_list[selected_variation]);
+
     // Show the variation information only if there's more than 1.
     variation_container->setVisible(variation_names_list.size() > 1);
 }
@@ -246,6 +271,8 @@ void ServerCreationScreen::startScenario()
     // Set these settings to use as future defaults.
     PreferencesManager::set("server_config_warp_jump_drive_setting", string(int(gameGlobalInfo->player_warp_jump_drive_setting)));
     PreferencesManager::set("server_config_scanning_complexity", string(int(gameGlobalInfo->scanning_complexity)));
+    PreferencesManager::set("server_config_hacking_difficulty", string(int(gameGlobalInfo->hacking_difficulty)));
+    PreferencesManager::set("server_config_hacking_games", string(int(gameGlobalInfo->hacking_games)));
     PreferencesManager::set("server_config_use_beam_shield_frequencies", string(int(gameGlobalInfo->use_beam_shield_frequencies)));
     PreferencesManager::set("server_config_use_system_damage", string(int(gameGlobalInfo->use_system_damage)));
     PreferencesManager::set("server_config_allow_main_screen_tactical_radar", string(int(gameGlobalInfo->allow_main_screen_tactical_radar)));

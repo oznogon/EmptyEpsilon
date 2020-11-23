@@ -39,7 +39,7 @@ public:
     CpuShip* owner;
 
     ShipAI(CpuShip* owner);
-    virtual ~ShipAI();
+    virtual ~ShipAI() = default;
 
     /**!
      * Run is called every frame to update the AI state and let the AI take actions.
@@ -77,6 +77,22 @@ protected:
      * Used for missiles, as they require some intelligence to fire.
      */
     float calculateFiringSolution(P<SpaceObject> target, int tube_index);
+    P<SpaceObject> findBestMissileRestockTarget(sf::Vector2f position, float radius);
+
+    static float getMissileWeaponStrength(EMissileWeapons type)
+    {
+        switch(type)
+        {
+        case MW_Nuke:
+            return 250;
+        case MW_EMP:
+            return 150;
+        case MW_HVLI:
+            return 20;
+        default:
+            return 35;
+        }
+    }
 };
 
 #endif//AI_H

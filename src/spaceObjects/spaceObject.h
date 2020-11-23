@@ -112,6 +112,8 @@ public:
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
 
+    bool hasWeight() { return has_weight; }
+
     // Return the object's raw radar signature. The default signature is 0,0,0.
     virtual RawRadarSignatureInfo getRadarSignatureInfo() { return radar_signature; }
     void setRadarSignatureInfo(float grav, float elec, float bio) { radar_signature = RawRadarSignatureInfo(grav, elec, bio); }
@@ -176,6 +178,7 @@ public:
     virtual void setCallSign(string new_callsign) { callsign = new_callsign; }
     virtual string getCallSign() { return callsign; }
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
+    virtual bool canRestockMissiles() { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
     virtual bool canBeTargetedBy(P<SpaceObject> other);
@@ -227,6 +230,7 @@ public:
 
 protected:
     ModelInfo model_info;
+    bool has_weight = true;
 };
 
 // Define a script conversion function for the DamageInfo structure.

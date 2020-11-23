@@ -3,7 +3,7 @@ These are older ship templates, going to be replaced soon.
 ----------------------------------------------------------]]
 
 --[[ Player ships --]]
-template = ShipTemplate():setName("Player Cruiser"):setLocaleName(_("Player Fighter")):setModel("battleship_destroyer_5_upgraded"):setType("playership")
+template = ShipTemplate():setName("Player Cruiser"):setLocaleName(_("Player Cruiser")):setModel("battleship_destroyer_5_upgraded"):setType("playership")
 template:setRadarTrace("radar_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
@@ -554,5 +554,6 @@ for type=1,5 do
         template:setShields(50, 50)
         template:setSpeed(60 - 5 * cnt, 6, 10)
         template:setRadarTrace("radar_transport.png")
+        template:setDefaultAI("evasion")
     end
 end

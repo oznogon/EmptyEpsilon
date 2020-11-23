@@ -38,6 +38,8 @@ REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderAttack);
     /// Order this ship to dock at a specific object (station or otherwise)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDock);
+    /// Order this ship to restock missiles at a specific station or finds a close station
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRetreat);
     /// Get the order this ship is executing
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrder);
     /// Get the target location of the currently executed order
@@ -56,6 +58,7 @@ CpuShip::CpuShip()
     setRotation(random(0, 360));
     target_rotation = getRotation();
 
+    restocks_missiles_docked = true;
     comms_script_name = "comms_ship.lua";
 
     missile_resupply = 0.0;
@@ -91,13 +94,13 @@ void CpuShip::update(float delta)
     }
     ai->run(delta);
 
-    //recharge missiles of CPU ships docked to station. uses the same trick as player ships. VERY hackish.
+    //recharge missiles of CPU ships docked to station. Can be disabled setting the restocks_missiles_docked flag to false.
     if (docking_state == DS_Docked)
     {
         P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
         P<SpaceShip> docked_with_ship = docking_target;
 
-        if (docked_with_template_based && !docked_with_ship)
+        if (docked_with_template_based && docked_with_template_based->restocks_missiles_docked)
         {
             bool needs_missile = 0;
 
@@ -157,6 +160,20 @@ void CpuShip::orderRoamingAt(sf::Vector2f position)
     order_target = NULL;
     order_target_location = position;
     this->addBroadcast(FVF_Friendly, "Searching for hostiles around " + string(position.x) + "," + string(position.y) + ".");
+}
+
+void CpuShip::orderRetreat(P<SpaceObject> object)
+{
+    orders = AI_Retreat;
+    if (!object)
+    {
+        order_target = NULL;
+        this->addBroadcast(FVF_Friendly, "Searching for supplies.");
+    }else{
+        order_target = object;
+        this->addBroadcast(FVF_Friendly, "Docking to " + object->getCallSign() + ".");
+    }
+    order_target_location = sf::Vector2f();
 }
 
 void CpuShip::orderStandGround()
@@ -253,6 +270,7 @@ string CpuShip::getExportLine()
     {
     case AI_Idle: break;
     case AI_Roaming: ret += ":orderRoaming()"; break;
+    case AI_Retreat: ret += ":orderRetreat(?)"; break;
     case AI_StandGround: ret += ":orderStandGround()"; break;
     case AI_DefendLocation: ret += ":orderDefendLocation(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
     case AI_DefendTarget: ret += ":orderDefendTarget(?)"; break;
@@ -271,6 +289,7 @@ string getAIOrderString(EAIOrder order)
     {
     case AI_Idle: return "Idle";
     case AI_Roaming: return "Roaming";
+    case AI_Retreat: return "Retreat";
     case AI_StandGround: return "Stand Ground";
     case AI_DefendLocation: return "Defend Location";
     case AI_DefendTarget: return "Defend Target";

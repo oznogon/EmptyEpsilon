@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "playerInfo.h"
 #include "screens/mainScreen.h"
 #include "screens/crewStationScreen.h"
@@ -70,7 +71,7 @@ void PlayerInfo::commandSetCrewPosition(ECrewPosition position, bool active)
     sf::Packet packet;
     packet << CMD_UPDATE_CREW_POSITION << int32_t(position) << active;
     sendClientCommand(packet);
-    
+
     crew_position[position] = active;
 }
 
@@ -95,7 +96,7 @@ void PlayerInfo::commandSetMainScreenControl(bool control)
     sf::Packet packet;
     packet << CMD_UPDATE_MAIN_SCREEN_CONTROL << control;
     sendClientCommand(packet);
-    
+
     main_screen_control = control;
 }
 
@@ -161,7 +162,7 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new ScienceScreen(container), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
         if (crew_position[relayOfficer])
             screen->addStationTab(new RelayScreen(container, true), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
-        
+
         //Crew 4/3
         if (crew_position[tacticalOfficer])
             screen->addStationTab(new TacticalScreen(container), tacticalOfficer, getCrewPositionName(tacticalOfficer), getCrewPositionIcon(tacticalOfficer));
@@ -187,7 +188,7 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new CommsScreen(container), commsOnly, getCrewPositionName(commsOnly), getCrewPositionIcon(commsOnly));
         if (crew_position[shipLog])
             screen->addStationTab(new ShipLogScreen(container), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
- 
+
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)
             if (crew_position[n])
@@ -218,21 +219,21 @@ string getCrewPositionName(ECrewPosition position)
 {
     switch(position)
     {
-    case helmsOfficer: return "Helms";
-    case weaponsOfficer: return "Weapons";
-    case engineering: return "Engineering";
-    case scienceOfficer: return "Science";
-    case relayOfficer: return "Relay";
-    case tacticalOfficer: return "Tactical";
-    case engineeringAdvanced: return "Engineering+";
-    case operationsOfficer: return "Operations";
-    case singlePilot: return "Single Pilot";
-    case damageControl: return "Damage Control";
-    case powerManagement: return "Power Management";
-    case databaseView: return "Database";
-    case altRelay: return "Strategic Map";
-    case commsOnly: return "Comms";
-    case shipLog: return "Ship's Log";
+    case helmsOfficer: return tr("station","Helms");
+    case weaponsOfficer: return tr("station","Weapons");
+    case engineering: return tr("station","Engineering");
+    case scienceOfficer: return tr("station","Science");
+    case relayOfficer: return tr("station","Relay");
+    case tacticalOfficer: return tr("station","Tactical");
+    case engineeringAdvanced: return tr("station","Engineering+");
+    case operationsOfficer: return tr("station","Operations");
+    case singlePilot: return tr("station","Single Pilot");
+    case damageControl: return tr("station","Damage Control");
+    case powerManagement: return tr("station","Power Management");
+    case databaseView: return tr("station","Database");
+    case altRelay: return tr("station","Strategic Map");
+    case commsOnly: return tr("station","Comms");
+    case shipLog: return tr("station","Ship's Log");
     default: return "ErrUnk: " + string(position);
     }
 }

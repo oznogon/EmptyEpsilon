@@ -7,24 +7,27 @@
 REGISTER_SCRIPT_SUBCLASS(ElectricExplosionEffect, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ElectricExplosionEffect, setSize);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ElectricExplosionEffect, setOnRadar);
 }
 
 REGISTER_MULTIPLAYER_CLASS(ElectricExplosionEffect, "ElectricExplosionEffect");
 ElectricExplosionEffect::ElectricExplosionEffect()
 : SpaceObject(1000.0, "ElectricExplosionEffect")
 {
+    has_weight = false;
     on_radar = false;
     size = 1.0;
-    
+
     setCollisionRadius(1.0);
     lifetime = maxLifetime;
     for(int n=0; n<particleCount; n++)
         particleDirections[n] = sf::normalize(sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);
-    
+
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 ElectricExplosionEffect::~ElectricExplosionEffect()
 {
 }
@@ -42,11 +45,11 @@ void ElectricExplosionEffect::draw3DTransparent()
         scale = Tween<float>::easeOutQuad(f, 0.2, 1.0, 0.8f, 1.0f);
         alpha = Tween<float>::easeInQuad(f, 0.2, 1.0, 0.5f, 0.0f);
     }
-    
+
     glPushMatrix();
     glScalef(scale * size, scale * size, scale * size);
     glColor3f(alpha, alpha, alpha);
-    
+
     ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("electric_sphere_texture.png"));
     sf::Shader::bind(ShaderManager::getShader("basicShader"));
     Mesh* m = Mesh::getMesh("sphere.obj");
@@ -54,7 +57,7 @@ void ElectricExplosionEffect::draw3DTransparent()
     glScalef(0.5, 0.5, 0.5);
     m->render();
     glPopMatrix();
-    
+
     ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("particle.png"));
     sf::Shader::bind(ShaderManager::getShader("billboardShader"));
     scale = Tween<float>::easeInCubic(f, 0.0, 1.0, 0.3f, 3.0f);

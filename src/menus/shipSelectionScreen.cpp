@@ -68,7 +68,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         my_player_info->commandSetMainScreenControl(value);
     });
     main_screen_controls_button->setValue(my_player_info->main_screen_control)->setSize(GuiElement::GuiSizeMax, 50);
-    
+
     // Game master button
     game_master_button = new GuiToggleButton(stations_layout, "GAME_MASTER_BUTTON", "Game master", [this](bool value) {
         window_button->setValue(false);
@@ -176,33 +176,39 @@ ShipSelectionScreen::ShipSelectionScreen()
     // If this is the server, add buttons and a selector to create player ships.
     if (game_server)
     {
-        GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", nullptr);
-        // List only ships with templates designated for player use.
-        std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
-        std::sort(template_names.begin(), template_names.end());
-
-        for(string& template_name : template_names)
+        if (gameGlobalInfo->allow_new_player_ships)
         {
-            P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
-            ship_template_selector->addEntry(template_name + " (" + ship_template->getClass() + ":" + ship_template->getSubClass() + ")", template_name);
-        }
-        ship_template_selector->setSelectionIndex(0);
-        ship_template_selector->setPosition(0, 630, ATopCenter)->setSize(490, 50);
+            GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", nullptr);
+            // List only ships with templates designated for player use.
+            std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
+            std::sort(template_names.begin(), template_names.end());
 
-        // Spawn a ship of the selected template near 0,0 and give it a random
-        // heading.
-        (new GuiButton(left_container, "CREATE_SHIP_BUTTON", "Spawn player ship", [this, ship_template_selector]() {
-            P<PlayerSpaceship> ship = new PlayerSpaceship();
-
-            if (ship)
+            for(string& template_name : template_names)
             {
-                ship->setTemplate(ship_template_selector->getSelectionValue());
-                ship->setRotation(random(0, 360));
-                ship->target_rotation = ship->getRotation();
-                ship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
-                my_player_info->commandSetShipId(ship->getMultiplayerId());
+                P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
+                ship_template_selector->addEntry(template_name + " (" + ship_template->getClass() + ":" + ship_template->getSubClass() + ")", template_name);
             }
-        }))->setPosition(0, 680, ATopCenter)->setSize(490, 50);
+            ship_template_selector->setSelectionIndex(0);
+            ship_template_selector->setPosition(0, 630, ATopCenter)->setSize(490, 50);
+
+            // Spawn a ship of the selected template near 0,0 and give it a random
+            // heading.
+            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", "Spawn player ship", [this, ship_template_selector]() {
+                if (!gameGlobalInfo->allow_new_player_ships)
+                    return;
+                P<PlayerSpaceship> ship = new PlayerSpaceship();
+
+                if (ship)
+                {
+            // set the position before the template so that onNewPlayerShip has as much data as possible
+                    ship->setRotation(random(0, 360));
+                    ship->target_rotation = ship->getRotation();
+                    ship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
+                    ship->setTemplate(ship_template_selector->getSelectionValue());
+                    my_player_info->commandSetShipId(ship->getMultiplayerId());
+                }
+            }))->setPosition(0, 680, ATopCenter)->setSize(490, 50);
+        }
 
         // If this is the server, the "back" button goes to the scenario
         // selection/server creation screen.
@@ -342,7 +348,7 @@ void ShipSelectionScreen::update(float delta)
         returnToMainMenu();
         return;
     }
-    
+
     // Update the player ship list with all player ships.
     for(int n = 0; n < GameGlobalInfo::max_player_ships; n++)
     {

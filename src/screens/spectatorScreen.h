@@ -16,10 +16,10 @@ private:
     sf::Vector2f drag_previous_position;
 public:
     SpectatorScreen();
-    virtual ~SpectatorScreen();
-    
+    virtual ~SpectatorScreen() = default;
+
     virtual void update(float delta);
-    
+
     void onMouseDown(sf::Vector2f position);
     void onMouseDrag(sf::Vector2f position);
     void onMouseUp(sf::Vector2f position);

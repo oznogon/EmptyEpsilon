@@ -116,6 +116,7 @@ Planet::Planet()
     cloud_texture = "";
     atmosphere_texture = "";
     atmosphere_color = sf::Color(0, 0, 0);
+    atmosphere_size = 0;
     distance_from_movement_plane = 0;
     axial_rotation_time = 0.0;
     orbit_target_id = -1;
@@ -356,4 +357,24 @@ void Planet::updateCollisionSize()
         setCollisionRadius(collision_size);
         setCollisionPhysics(true, true);
     }
+}
+
+string Planet::getExportLine()
+{
+    string ret="Planet():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + "):setPlanetRadius(" + string(getPlanetRadius(), 0) + ")";
+    if (atmosphere_color.r != 0 || atmosphere_color.g != 0 || atmosphere_color.b != 0)
+    {
+        ret += ":setPlanetAtmosphereColor(" + string(atmosphere_color.r/255.0f) + "," + string(atmosphere_color.g/255.0f) + "," + string(atmosphere_color.b/255.0f) + ")";
+    }
+    if (distance_from_movement_plane!=0)
+    {
+        ret += ":setDistanceFromMovementPlane("  + string(distance_from_movement_plane) + ")";
+    }
+    //TODO setPlanetAtmosphereTexture
+    //TODO setPlanetSurfaceTexture
+    //TODO setPlanetCloudTexture
+    //TODO setPlanetCloudRadius
+    //TODO setAxialRotationTime
+    //TODO setOrbit
+    return ret;
 }
