@@ -7,12 +7,14 @@
 REGISTER_SCRIPT_SUBCLASS(ElectricExplosionEffect, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ElectricExplosionEffect, setSize);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ElectricExplosionEffect, setOnRadar);
 }
 
 REGISTER_MULTIPLAYER_CLASS(ElectricExplosionEffect, "ElectricExplosionEffect");
 ElectricExplosionEffect::ElectricExplosionEffect()
 : SpaceObject(1000.0, "ElectricExplosionEffect")
 {
+    has_weight = false;
     on_radar = false;
     size = 1.0;
 

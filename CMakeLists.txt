@@ -31,7 +31,7 @@ if(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
 endif(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
 
 set(VERSION_NUMBER ${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
-message(STATUS "EmptyEpsilon Verison = ${VERSION_NUMBER}")
+message(STATUS "EmptyEpsilon Version = ${VERSION_NUMBER}")
 
 # Set our optimization flags.
 set(OPTIMIZER_FLAGS)
@@ -105,7 +105,7 @@ set(SOURCES
 	src/GMScriptCallback.cpp
 	src/GMMessage.cpp
 	src/tutorialGame.cpp
-    src/scriptDataStorage.cpp
+	src/scriptDataStorage.cpp
 	src/menus/joinServerMenu.cpp
 	src/menus/serverBrowseMenu.cpp
 	src/menus/mainMenus.cpp
@@ -247,6 +247,7 @@ set(SOURCES
 	src/ai/fighterAI.cpp
 	src/ai/ai.cpp
 	src/ai/aiFactory.cpp
+	src/ai/evasionAI.cpp
 	src/ai/missileVolleyAI.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
@@ -258,6 +259,7 @@ set(SOURCES
 	src/hardware/devices/virtualOutputDevice.cpp
 	src/hardware/devices/philipsHueDevice.cpp
 )
+
 if(WIN32)
     list(APPEND SOURCES EmptyEpsilon.rc src/discord.cpp)
 endif()

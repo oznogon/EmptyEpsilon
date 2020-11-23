@@ -224,23 +224,26 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     GuiOverlay::onDraw(window);
     P<ScanProbe> probe;
 
-    // Handle mouse wheel
-    float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0 && my_spaceship)
-    {
-        float view_distance = science_radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        if (view_distance > my_spaceship->getLongRangeRadarRange())
-            view_distance = my_spaceship->getLongRangeRadarRange();
-        if (view_distance < my_spaceship->getShortRangeRadarRange())
-            view_distance = my_spaceship->getShortRangeRadarRange();
-        science_radar->setDistance(view_distance);
-        // Keep the zoom slider in sync.
-        zoom_slider->setValue(view_distance);
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / view_distance, 1)}}));
-    }
-
     if (!my_spaceship)
         return;
+
+    float view_distance = science_radar->getDistance();
+    float mouse_wheel_delta=InputHandler::getMouseWheelDelta();
+    if (mouse_wheel_delta!=0)
+    {
+        view_distance *= (1.0 - (mouse_wheel_delta * 0.1f));
+    }
+    view_distance = std::min(view_distance,my_spaceship->getLongRangeRadarRange());
+    view_distance = std::max(view_distance,my_spaceship->getShortRangeRadarRange());
+    if (view_distance!=science_radar->getDistance() || previous_long_range_radar != my_spaceship->getLongRangeRadarRange() || previous_short_range_radar != my_spaceship->getShortRangeRadarRange())
+    {
+        previous_short_range_radar=my_spaceship->getShortRangeRadarRange();
+        previous_long_range_radar=my_spaceship->getLongRangeRadarRange();
+        science_radar->setDistance(view_distance);
+        // Keep the zoom slider in sync.
+        zoom_slider->setValue(view_distance)->setRange(my_spaceship->getLongRangeRadarRange(),my_spaceship->getShortRangeRadarRange());
+        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / view_distance, 1)}}));
+    }
 
     if (game_server)
         probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
@@ -339,7 +342,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 info_type->setValue(ship->getTypeName());
                 info_type_button->show();
                 info_shields->setValue(ship->getShieldDataString());
-                info_hull->setValue(int(ship->getHull()));
+                info_hull->setValue(int(ceil(ship->getHull())));
             }
 
             // On a full scan, show tactical and systems data (if any), and its
@@ -418,7 +421,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             {
                 info_type->setValue(station->template_name);
                 info_shields->setValue(station->getShieldDataString());
-                info_hull->setValue(int(station->getHull()));
+                info_hull->setValue(int(ceil(station->getHull())));
             }
         }
     }
