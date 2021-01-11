@@ -39,7 +39,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             }
             mouse_down_position = position;
         },
-        [this, science](sf::Vector2f position) { // Drag
+        [this](sf::Vector2f position) { // Drag
             // If we're dragging a waypoint, move it.
             if (mode == MoveWaypoint && my_spaceship)
                 my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
@@ -67,12 +67,12 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", tr("Open Comms"), &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
 
     // Manage waypoints.
-    place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this, science]() {
-        mode = WaypointPlacement;
+    place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
+        this->mode = WaypointPlacement;
     });
     place_waypoint_button->setPosition(-270, -70, ABottomRight)->setSize(200, 50);
 
-    delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this, science]() {
+    delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [science]() {
         if (my_spaceship && science->targets.getWaypointIndex() >= 0)
         {
             my_spaceship->commandRemoveWaypoint(science->targets.getWaypointIndex());

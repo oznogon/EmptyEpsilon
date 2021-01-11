@@ -51,11 +51,11 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
             else if (my_spaceship)
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
         },
-        [this](sf::Vector2f position) {
+        [](sf::Vector2f position) {
             if (my_spaceship)
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
         },
-        [this](sf::Vector2f position) {
+        [](sf::Vector2f position) {
             if (my_spaceship)
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
         }

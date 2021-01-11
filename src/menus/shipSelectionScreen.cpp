@@ -48,7 +48,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     crew_type_selector->setOptions({tr("6/5 player crew"), tr("4/3 player crew"), tr("1 player crew/extras"), tr("Alternative options")})->setSize(GuiElement::GuiSizeMax, 50);
 
     // Main screen button
-    main_screen_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_BUTTON", tr("Main screen"), [this](bool value) {
+    main_screen_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_BUTTON", tr("Main screen"), [](bool value) {
         my_player_info->commandSetMainScreen(value);
     });
     main_screen_button->setSize(GuiElement::GuiSizeMax, 50);
@@ -56,7 +56,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     // Crew position buttons, with icons if they have them
     for(int n = 0; n < max_crew_positions; n++)
     {
-        crew_position_button[n] = new GuiToggleButton(stations_layout, "CREW_" + getCrewPositionName(ECrewPosition(n)) + "_BUTTON", getCrewPositionName(ECrewPosition(n)), [this, n](bool value){
+        crew_position_button[n] = new GuiToggleButton(stations_layout, "CREW_" + getCrewPositionName(ECrewPosition(n)) + "_BUTTON", getCrewPositionName(ECrewPosition(n)), [n](bool value){
             my_player_info->commandSetCrewPosition(ECrewPosition(n), value);
         });
         crew_position_button[n]->setSize(GuiElement::GuiSizeMax, 50);
@@ -193,7 +193,7 @@ ShipSelectionScreen::ShipSelectionScreen()
 
             // Spawn a ship of the selected template near 0,0 and give it a random
             // heading.
-            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [this, ship_template_selector]() {
+            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [ship_template_selector]() {
                 if (!gameGlobalInfo->allow_new_player_ships)
                     return;
                 P<PlayerSpaceship> ship = new PlayerSpaceship();
