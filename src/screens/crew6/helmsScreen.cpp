@@ -12,7 +12,6 @@
 #include "screenComponents/dockingButton.h"
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
-#include "screenComponents/viewport3d.h"
 
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
@@ -22,19 +21,12 @@
 HelmsScreen::HelmsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "HELMS_SCREEN", colorConfig.background)
 {
-/*
     // Render the radar shadow and background decorations.
     background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
     background_gradient->setTextureCenter("gui/BackgroundGradient");
 
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
     background_crosses->setTextureTiled("gui/BackgroundCrosses");
-*/
-
-    viewport = new GuiViewport3D(this, "3D_VIEW");
-    viewport->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    viewport->show();
-    first_person = false;
 
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
@@ -43,8 +35,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
-    
-    radar->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 400);
+
+    radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
@@ -105,41 +97,6 @@ void HelmsScreen::onDraw(sf::RenderTarget& window)
 
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);
-    }
-    if (my_spaceship)
-    {
-        float target_camera_yaw = my_spaceship->getRotation();
-        camera_pitch = 30.0f;
-
-        float camera_ship_distance = 420.0f;
-        float camera_ship_height = 420.0f;
-
-        if (first_person)
-        {
-            camera_ship_distance = -(my_spaceship->getRadius() * 1.5);
-            camera_ship_height = my_spaceship->getRadius() / 10.f;
-            camera_pitch = 0;
-        }
-
-        sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(target_camera_yaw) * -camera_ship_distance;
-        sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
-#ifdef DEBUG
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-        {
-            targetCameraPosition.x = my_spaceship->getPosition().x;
-            targetCameraPosition.y = my_spaceship->getPosition().y;
-            targetCameraPosition.z = 3000.0;
-            camera_pitch = 90.0f;
-        }
-#endif
-        if (first_person)
-        {
-            camera_position = targetCameraPosition;
-            camera_yaw = target_camera_yaw;
-        } else {
-            camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
-            camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
-        }
     }
     GuiOverlay::onDraw(window);
 }
