@@ -310,6 +310,8 @@ string CrewStationScreen::listHotkeysLimited(string station)
             if (shortcut.first != "Toggle shields")
                 ret += shortcut.second + ":\t" + shortcut.first + "\n";
         }
+        for (std::pair<string, string> shortcut : listControlsByCategory("Tactical"))
+            ret += shortcut.second + ":\t" + shortcut.first + "\n";
     } else if (station == "Engineering+") {
         for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Engineering"))
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
@@ -330,6 +332,8 @@ string CrewStationScreen::listHotkeysLimited(string station)
         for (std::pair<string, string> shortcut : listControlsByCategory("Helms"))
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
         for (std::pair<string, string> shortcut : listControlsByCategory("Weapons"))
+            ret += shortcut.second + ":\t" + shortcut.first + "\n";
+        for (std::pair<string, string> shortcut : listControlsByCategory("Tactical"))
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
     }
 

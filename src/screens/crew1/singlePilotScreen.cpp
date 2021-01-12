@@ -25,8 +25,11 @@
 
 #include "screenComponents/customShipFunctions.h"
 
+#include "gui/gui2_label.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_rotationdial.h"
+#include "gui/gui2_button.h"
+
 
 SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SINGLEPILOT_SCREEN", colorConfig.background)
@@ -47,22 +50,56 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
         [this](sf::Vector2f position) {
-            targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
-            if (my_spaceship && targets.get())
-                my_spaceship->commandSetTarget(targets.get());
-            else if (my_spaceship)
-                my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+            // On single tap/click...
+            if (my_spaceship)
+            {
+                // If we're in targeting mode...
+                if (this->targeting_mode)
+                {
+                    // If a target is near the tap location, select it.
+                    targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
+
+                    if (targets.get())
+                    {
+                        // Set the target if we have one now.
+                        my_spaceship->commandSetTarget(targets.get());
+                    }
+                    else
+                    {
+                        // Otherwise, deselect target.
+                        my_spaceship->commandSetTarget(NULL);
+                    }
+                }
+                else
+                {
+                    // Otherwise, turn toward the click/tap location.
+                    my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+                }
+            }
         },
         [this](sf::Vector2f position) {
-            if (my_spaceship)
+            // On tap/click and hold, show heading hint and turn toward heading.
+            if (my_spaceship && !this->targeting_mode)
+            {
+                float angle = sf::vector2ToAngle(position - my_spaceship->getPosition());
+                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+            }
         },
         [this](sf::Vector2f position) {
-            if (my_spaceship)
+            // On release of tap/click and hold, remove heading hint and turn toward heading.
+            if (my_spaceship && !this->targeting_mode)
+            {
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+            }
+            heading_hint->hide();
         }
     );
     radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
+
+    // Heading hint shown on radar on navigational click/tap.
+    heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
+    heading_hint->setAlignment(ACenter)->setSize(0, 0);
 
     // Ship stats and combat maneuver at bottom right corner of left panel.
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
@@ -106,6 +143,16 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     // Missile lock button near top right of left panel.
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 70, ATopCenter)->setSize(130, 50);
+
+    // Targeting mode toggle; target on radar tap when enabled, navigate when disabled.
+    targeting_mode = false;
+    targeting_mode_button = new GuiButton(this, "TARGETING_MODE", tr("mode", "Maneuver"), [this]()
+    {
+        targeting_mode = !targeting_mode;
+        this->targeting_mode_button->setText(targeting_mode ? tr("mode", "Target") : tr("mode", "Maneuver"));
+        this->targeting_mode_button->setIcon(targeting_mode ? "gui/icons/station-weapons" : "gui/icons/station-helm");
+    });
+    targeting_mode_button->setIcon("gui/icons/station-helm")->setPosition(770, 20, ATopLeft)->setSize(160, 50);
 
     (new GuiCustomShipFunctions(this, singlePilot, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
@@ -175,86 +222,112 @@ bool SinglePilotScreen::onJoystickAxis(const AxisAction& axisAction)
 
 void SinglePilotScreen::onHotkey(const HotkeyResult& key)
 {
-    if (key.category == "HELMS" && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "TURN_LEFT")
-            my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
-        else if (key.hotkey == "TURN_RIGHT")
-            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
-    }
-    if (key.category == "WEAPONS" && my_spaceship)
-    {
-        if (key.hotkey == "NEXT_ENEMY_TARGET")
+        if (key.category == "HELMS")
         {
-            bool current_found = false;
-            foreach(SpaceObject, obj, space_object_list)
+            if (key.hotkey == "TURN_LEFT")
+                my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
+            else if (key.hotkey == "TURN_RIGHT")
+                my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
+        }
+
+        if (key.category == "WEAPONS")
+        {
+            if (key.hotkey == "NEXT_ENEMY_TARGET")
             {
-                if (obj == targets.get())
+                bool current_found = false;
+                foreach(SpaceObject, obj, space_object_list)
                 {
-                    current_found = true;
-                    continue;
+                    if (obj == targets.get())
+                    {
+                        current_found = true;
+                        continue;
+                    }
+                    if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                    {
+                        targets.set(obj);
+                        my_spaceship->commandSetTarget(targets.get());
+                        return;
+                    }
                 }
-                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                foreach(SpaceObject, obj, space_object_list)
                 {
-                    targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
-                    return;
+                    if (obj == targets.get())
+                    {
+                        continue;
+                    }
+                    if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                    {
+                        targets.set(obj);
+                        my_spaceship->commandSetTarget(targets.get());
+                        return;
+                    }
                 }
             }
-            foreach(SpaceObject, obj, space_object_list)
+            if (key.hotkey == "NEXT_TARGET")
             {
-                if (obj == targets.get())
+                bool current_found = false;
+                foreach(SpaceObject, obj, space_object_list)
                 {
-                    continue;
+                    if (obj == targets.get())
+                    {
+                        current_found = true;
+                        continue;
+                    }
+                    if (obj == my_spaceship)
+                        continue;
+                    if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
+                    {
+                        targets.set(obj);
+                        my_spaceship->commandSetTarget(targets.get());
+                        return;
+                    }
                 }
-                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                foreach(SpaceObject, obj, space_object_list)
                 {
-                    targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
-                    return;
+                    if (obj == targets.get() || obj == my_spaceship)
+                        continue;
+                    if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
+                    {
+                        targets.set(obj);
+                        my_spaceship->commandSetTarget(targets.get());
+                        return;
+                    }
                 }
+            }
+            if (key.hotkey == "AIM_MISSILE_LEFT")
+            {
+                missile_aim->setValue(missile_aim->getValue() - 5.0f);
+                tube_controls->setMissileTargetAngle(missile_aim->getValue());
+            }
+            if (key.hotkey == "AIM_MISSILE_RIGHT")
+            {
+                missile_aim->setValue(missile_aim->getValue() + 5.0f);
+                tube_controls->setMissileTargetAngle(missile_aim->getValue());
             }
         }
-        if (key.hotkey == "NEXT_TARGET")
+
+        if (key.category == "TACTICAL")
         {
-            bool current_found = false;
-            foreach(SpaceObject, obj, space_object_list)
+            if (key.hotkey == "TOGGLE_TARGETING_MODE")
             {
-                if (obj == targets.get())
-                {
-                    current_found = true;
-                    continue;
-                }
-                if (obj == my_spaceship)
-                    continue;
-                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
-                {
-                    targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
-                    return;
-                }
+                targeting_mode = !targeting_mode;
+                this->targeting_mode_button->setText(targeting_mode ? tr("mode", "Target") : tr("mode", "Maneuver"));
+                this->targeting_mode_button->setIcon(targeting_mode ? "gui/icons/station-weapons" : "gui/icons/station-helm");
             }
-            foreach(SpaceObject, obj, space_object_list)
+            if (key.hotkey == "ENABLE_TARGETING_MODE")
             {
-                if (obj == targets.get() || obj == my_spaceship)
-                    continue;
-                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
-                {
-                    targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
-                    return;
-                }
+                targeting_mode = true;
+                this->targeting_mode_button->setText(tr("mode", "Target"));
+                this->targeting_mode_button->setIcon("gui/icons/station-weapons");
             }
-        }
-        if (key.hotkey == "AIM_MISSILE_LEFT")
-        {
-            missile_aim->setValue(missile_aim->getValue() - 5.0f);
-            tube_controls->setMissileTargetAngle(missile_aim->getValue());
-        }
-        if (key.hotkey == "AIM_MISSILE_RIGHT")
-        {
-            missile_aim->setValue(missile_aim->getValue() + 5.0f);
-            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+            if (key.hotkey == "DISABLE_TARGETING_MODE")
+            {
+                targeting_mode = false;
+                this->targeting_mode_button->setText(tr("mode", "Maneuver"));
+                this->targeting_mode_button->setIcon("gui/icons/station-helm");
+            }
         }
     }
 }

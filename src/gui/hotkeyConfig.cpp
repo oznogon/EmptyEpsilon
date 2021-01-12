@@ -115,6 +115,10 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELF_DESTRUCT_CONFIRM", std::make_tuple("Confirm self-destruct", ""));
     newKey("SELF_DESTRUCT_CANCEL", std::make_tuple("Cancel self-destruct", ""));
 
+    newCategory("TACTICAL", "Tactical");
+    newKey("TOGGLE_TARGETING_MODE", std::make_tuple("Toggle radar targeting/maneuvering modes", ""));
+    newKey("ENABLE_TARGETING_MODE", std::make_tuple("Set radar to targeting mode", ""));
+    newKey("DISABLE_TARGETING_MODE", std::make_tuple("Set radar to maneuvering mode", ""));
 }
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
