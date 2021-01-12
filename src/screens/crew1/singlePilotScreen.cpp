@@ -25,44 +25,79 @@
 
 #include "screenComponents/customShipFunctions.h"
 
+#include "gui/gui2_label.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_rotationdial.h"
 
 SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SINGLEPILOT_SCREEN", colorConfig.background)
 {
-    // Render the radar shadow and background decorations.
-    background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
-    background_gradient->setTextureCenter("gui/BackgroundGradientSingle");
-
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
-    background_crosses->setTextureTiled("gui/BackgroundCrosses");
+    // Render the 3D viewport across the entire window
+    viewport = new GuiViewport3D(this, "3D_VIEW");
+    viewport->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    viewport->show();
+    first_person = false;
 
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
     // 5U tactical radar with piloting features.
     radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets);
-    radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 650);
+    radar->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 400);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
+    radar->enableMissileTubeIndicators();
     radar->setCallbacks(
         [this](sf::Vector2f position) {
-            targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
-            if (my_spaceship && targets.get())
-                my_spaceship->commandSetTarget(targets.get());
-            else if (my_spaceship)
-                my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+            // On single tap/click...
+            if (my_spaceship)
+            {
+                // If we're in targeting mode...
+                if (this->targeting_mode->getValue())
+                {
+                    // If a target is near the tap location, select it.
+                    targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
+
+                    if (targets.get())
+                    {
+                        // Set the target if we have one now.
+                        my_spaceship->commandSetTarget(targets.get());
+                    }
+                    else
+                    {
+                        // Otherwise, deselect target.
+                        my_spaceship->commandSetTarget(NULL);
+                    }
+                }
+                else
+                {
+                    // Otherwise, turn toward the click/tap location.
+                    my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+                }
+            }
         },
         [this](sf::Vector2f position) {
-            if (my_spaceship)
+            // On tap/click and hold, show heading hint and turn toward heading.
+            if (my_spaceship && !this->targeting_mode->getValue())
+            {
+                float angle = sf::vector2ToAngle(position - my_spaceship->getPosition());
+                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+            }
         },
         [this](sf::Vector2f position) {
-            if (my_spaceship)
+            // On release of tap/click and hold, remove heading hint and turn toward heading.
+            if (my_spaceship && !this->targeting_mode->getValue())
+            {
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+            }
+            heading_hint->hide();
         }
     );
     radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
+
+    // Heading hint shown on radar on click/tap.
+    heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
+    heading_hint->setAlignment(ACenter)->setSize(0, 0);
 
     // Ship stats and combat maneuver at bottom right corner of left panel.
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
@@ -83,7 +118,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
-    missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 700);
+    missile_aim->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 400);
 
     // Weapon tube controls.
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
@@ -103,9 +138,13 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(520, 20, ATopLeft)->setSize(250, 50);
 
-    // Missile lock button near top right of left panel.
+    // Missile lock toggle; auto-aim at target when enabled, manually aim when disabled.
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
-    lock_aim->setPosition(250, 70, ATopCenter)->setSize(130, 50);
+    lock_aim->setPosition(-180, -20, ABottomCenter)->setSize(110, 50);
+
+    // Targeting mode toggle; target on radar tap when enabled, navigate when disabled.
+    targeting_mode = new GuiToggleButton(this, "TARGETING_MODE", tr("target", "TGT"), [this](bool value){});
+    targeting_mode->setValue(false)->setIcon("gui/icons/lock")->setPosition(180, -20, ABottomCenter)->setSize(110, 50);
 
     (new GuiCustomShipFunctions(this, singlePilot, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
@@ -114,37 +153,89 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
+        // Update energy and navigation stats.
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(string(velocity, 1) + DISTANCE_UNIT_1K + "/min");
 
+        // Update warp/jump control visibility if it's changed.
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);
 
+        // Third-person view settings.
+        float target_camera_yaw = my_spaceship->getRotation();
+        camera_pitch = 30.0f;
+
+        float camera_ship_distance = 420.0f;
+        float camera_ship_height = 420.0f;
+
+        // Toggle first person view if enabled.
+        if (first_person)
+        {
+            camera_ship_distance = -(my_spaceship->getRadius() * 1.5);
+            camera_ship_height = my_spaceship->getRadius() / 10.f;
+            camera_pitch = 0;
+        }
+
+        sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(target_camera_yaw) * -camera_ship_distance;
+        sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
+#ifdef DEBUG
+        // Allow top-down view in debug mode on Z key.
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+        {
+            targetCameraPosition.x = my_spaceship->getPosition().x;
+            targetCameraPosition.y = my_spaceship->getPosition().y;
+            targetCameraPosition.z = 3000.0;
+            camera_pitch = 90.0f;
+        }
+#endif
+        // Show first person perspective if enabled.
+        // Coordinates are hardcoded, which might cause problems with some ships.
+        if (first_person)
+        {
+            camera_position = targetCameraPosition;
+            camera_yaw = target_camera_yaw;
+        }
+        else
+        {
+            camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
+            camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
+        }
+
+        // Update shield indicators.
         string shields_value = string(my_spaceship->getShieldPercentage(0)) + "%";
+
         if (my_spaceship->hasSystem(SYS_RearShield))
         {
             shields_value += " " + string(my_spaceship->getShieldPercentage(1)) + "%";
         }
+
         shields_display->setValue(shields_value);
+
         if (my_spaceship->hasSystem(SYS_FrontShield) || my_spaceship->hasSystem(SYS_RearShield))
         {
             shields_display->show();
-        } else {
+        }
+        else
+        {
             shields_display->hide();
         }
 
+        // Set missile aim if tube controls are unlocked.
         missile_aim->setVisible(tube_controls->getManualAim());
 
+        // Indicate our selected target.
         targets.set(my_spaceship->getTarget());
     }
+
+    // Draw the view.
     GuiOverlay::onDraw(window);
 }
 
 bool SinglePilotScreen::onJoystickAxis(const AxisAction& axisAction)
 {
-    if(my_spaceship)
+    if (my_spaceship)
     {
         if (axisAction.category == "HELMS")
         {

@@ -12,12 +12,13 @@ class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
 class GuiCombatManeuver;
+class GuiLabel;
 
 class SinglePilotScreen : public GuiOverlay
 {
 private:
-    GuiOverlay* background_gradient;
-    GuiOverlay* background_crosses;
+    bool first_person;
+    GuiViewport3D* viewport;
 
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
@@ -25,6 +26,7 @@ private:
     GuiKeyValueDisplay* shields_display;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
+    GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
 
     TargetsContainer targets;
@@ -32,6 +34,7 @@ private:
     GuiRotationDial* missile_aim;
     GuiMissileTubeControls* tube_controls;
     GuiToggleButton* lock_aim;
+    GuiToggleButton* targeting_mode;
 public:
     SinglePilotScreen(GuiContainer* owner);
 
