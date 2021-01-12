@@ -36,10 +36,10 @@ CinematicViewScreen::CinematicViewScreen()
     camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->hide();
 
     // Toggle whether to lock the camera onto a ship.
-    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", "Lock camera on ship", [this](bool value) {});
+    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [this](bool value) {});
     camera_lock_toggle->setValue(true)->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
 
-    camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", "Lock camera on ship's target", [this](bool value) {});
+    camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Lock camera on ship's target"), [this](bool value) {});
     camera_lock_tot_toggle->setValue(true)->setPosition(320, -20, ABottomLeft)->setSize(350, 50)->hide();
 
     new GuiIndicatorOverlays(this);
@@ -163,7 +163,7 @@ void CinematicViewScreen::update(float delta)
             tot_position_3D.x = tot_position_2D.x;
             tot_position_3D.y = tot_position_3D.y;
             tot_position_3D.z = 0;
-            
+
             // Get the diff, distance, and angle between the ToT and camera.
             tot_diff_2D = tot_position_2D - camera_position_2D;
             tot_diff_3D = tot_position_3D - camera_position;
@@ -182,8 +182,8 @@ void CinematicViewScreen::update(float delta)
             }
 
             angle_pitch = (atan(camera_position.z / tot_distance_3D)) * (180 / pi);
-        } 
-        
+        }
+
         if (distance_2D > max_camera_distance)
         // If the selected ship moves more than 1U from the camera ...
         {
@@ -204,7 +204,7 @@ void CinematicViewScreen::update(float delta)
                 camera_position.x -= diff_2D.x / distance_2D * (min_camera_distance - distance_3D);
                 camera_position.y -= diff_2D.y / distance_2D * (min_camera_distance - distance_3D);
             }
-            
+
             if (!camera_lock_tot_toggle->getValue() || !target_of_target)
             {
                 // Calculate the angles between the camera and the ship.

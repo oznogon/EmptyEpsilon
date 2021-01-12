@@ -78,6 +78,9 @@ public:
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
+    string gm_control_code;
+    float elapsed_time;
+    string scenario;
     string variation = "None";
 
     //List of script functions that can be called from the GM interface (Server only!)
@@ -85,6 +88,12 @@ public:
     std::list<GMMessage> gm_messages;
     //When active, all comms request goto the GM as chat, and normal scripted converstations are disabled. This does not disallow player<->player ship comms.
     bool intercept_all_comms_to_gm;
+
+    //Callback called when a new player ship is created on the ship selection screen.
+    ScriptSimpleCallback on_new_player_ship;
+    bool allow_new_player_ships = true;
+
+    std::function<void(sf::Vector2f)> on_gm_click;
 
     GameGlobalInfo();
     virtual ~GameGlobalInfo();
@@ -121,5 +130,8 @@ string getSectorName(sf::Vector2f position);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
 REGISTER_MULTIPLAYER_ENUM(EHackingGames);
+
+template<> int convert<EScanningComplexity>::returnType(lua_State* L, EScanningComplexity complexity);
+template<> int convert<EHackingGames>::returnType(lua_State* L, EHackingGames games);
 
 #endif//GAME_GLOBAL_INFO_H

@@ -1,3 +1,4 @@
+#include <memory>
 #include <time.h>
 
 //We need a really fast float to string conversion. dtoa from milo does this very well.
@@ -11,6 +12,7 @@
 #include "spaceObjects/blackHole.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/spaceship.h"
+#include "spaceObjects/missiles/missileWeapon.h"
 #include "spaceObjects/planet.h"
 
 class JSONGenerator
@@ -21,12 +23,12 @@ public:
     {
         *ptr++ = '{';
     }
-    
+
     ~JSONGenerator()
     {
         *ptr++ = '}';
     }
-    
+
     template<typename T> void write(const char* key, const T& value)
     {
         if (!first)
@@ -95,7 +97,7 @@ private:
     void writeValue(int i) { ptr += sprintf(ptr, "%d", i); }
     void writeValue(float _f) { dtoa_milo(_f, ptr); ptr += strlen(ptr); }
     void writeValue(const char* value)
-    { /*ptr += sprintf(ptr, "\"%s\"", value);*/ 
+    { /*ptr += sprintf(ptr, "\"%s\"", value);*/
         *ptr++ = '"';
         while(*value)
             *ptr++ = *value++;
@@ -154,12 +156,12 @@ void GameStateLogger::update(float delta)
 {
     if (!log_file || delta == 0.0)
         return;
-    
+
     logging_delay -= delta;
     if (logging_delay > 0.0)
         return;
     logging_delay = logging_interval;
-    
+
     logGameState();
 }
 
@@ -177,7 +179,7 @@ void GameStateLogger::logGameState()
 {
     static char log_line_buffer[1024*1024*10];
     char* ptr = log_line_buffer;
-    
+
     {
         JSONGenerator json(ptr);
         json.write("type", "state");
@@ -190,7 +192,7 @@ void GameStateLogger::logGameState()
                 static_objects[obj->getMultiplayerId()] = obj->getPosition();
                 JSONGenerator entry = json.arrayCreateDict();
                 writeObjectEntry(entry, obj);
-                
+
                 if ((unsigned int)(ptr - log_line_buffer) > sizeof(log_line_buffer) / 2)
                 {
                     fwrite(log_line_buffer, 1, ptr - log_line_buffer, log_file);
@@ -214,7 +216,7 @@ void GameStateLogger::logGameState()
             static_objects.erase(id);
         }
         json.endArray();
-        
+
         json.startArray("objects");
         foreach(SpaceObject, obj, space_object_list)
         {
@@ -234,7 +236,7 @@ void GameStateLogger::logGameState()
         }
         json.endArray();
     }
-    
+
     *ptr++ = '\n';
     *ptr = '\0';
     fwrite(log_line_buffer, 1, ptr - log_line_buffer, log_file);
@@ -267,28 +269,44 @@ void GameStateLogger::writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj)
     json.endArray();
     json.write("rotation", obj->getRotation());
     P<SpaceShip> ship = obj;
+
     if (ship)
     {
         writeShipEntry(json, ship);
-    }else{
+    }
+    else
+    {
         P<SpaceStation> station = obj;
+
         if (station)
         {
             writeStationEntry(json, station);
-        }else{
-            P<Planet> planet = obj;
-            if (planet)
+        }
+        else
+        {
+            P<MissileWeapon> missile = obj;
+
+            if (missile)
             {
-                writePlanetEntry(json, planet);
+                writeMissileEntry(json, missile);
             }
-	}
+            else
+            {
+                P<Planet> planet = obj;
+
+                if (planet)
+                {
+                    writePlanetEntry(json, planet);
+                }
+            }
+        }
     }
 }
 
 void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
 {
     bool has_beam_weapons = false;
-    
+
     json.write("callsign", ship->getCallSign());
     json.write("faction", ship->getFaction());
     json.write("ship_type", ship->type_name);
@@ -453,7 +471,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
                 json.arrayWrite(ship->shield_max[n]);
             config.endArray();
         }
-        
+
         has_beam_weapons = false;
         for(int n=0; n<max_beam_weapons; n++)
         {
@@ -509,6 +527,23 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
                 json.arrayWrite(station->shield_max[n]);
             config.endArray();
         }
+    }
+}
+
+void GameStateLogger::writeMissileEntry(JSONGenerator& json, P<MissileWeapon> missile)
+{
+    json.write("category_modifier", missile->category_modifier);
+
+    // A missile's owner might not exist when we log data. Skip the owner_id if so.
+    if (missile->owner)
+    {
+        json.write("owner_id", missile->owner->getMultiplayerId());
+    }
+
+    // Don't bother writing a target ID if it's unguided or targetless.
+    if (missile->target_id != -1)
+    {
+        json.write("target_id", missile->target_id);
     }
 }
 

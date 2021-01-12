@@ -112,6 +112,8 @@ public:
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
 
+    bool hasWeight() { return has_weight; }
+
     // Return the object's raw radar signature. The default signature is 0,0,0.
     virtual RawRadarSignatureInfo getRadarSignatureInfo() { return radar_signature; }
     void setRadarSignatureInfo(float grav, float elec, float bio) { radar_signature = RawRadarSignatureInfo(grav, elec, bio); }
@@ -162,17 +164,21 @@ public:
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
 
-#if FEATURE_3D_RENDERING
+    void onDestroyed(ScriptSimpleCallback callback)
+    {
+        on_destroyed = callback;
+    }
+
     virtual void draw3D();
     virtual void draw3DTransparent() {}
-#endif//FEATURE_3D_RENDERING
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
     virtual void destroy();
 
     virtual void setCallSign(string new_callsign) { callsign = new_callsign; }
     virtual string getCallSign() { return callsign; }
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
+    virtual bool canRestockMissiles() { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
     virtual bool canBeTargetedBy(P<SpaceObject> other);
@@ -192,7 +198,7 @@ public:
     void setScannedByFaction(string faction_name, bool scanned);
     virtual void scannedBy(P<SpaceObject> other);
     virtual bool canBeHackedBy(P<SpaceObject> other);
-    virtual std::vector<std::pair<string, float> > getHackingTargets();
+    virtual std::vector<std::pair<ESystem, float> > getHackingTargets();
     virtual void hackFinished(P<SpaceObject> source, string target);
     virtual void takeDamage(float damage_amount, DamageInfo info) {}
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
@@ -220,10 +226,11 @@ public:
     bool openCommsTo(P<PlayerSpaceship> target);
     bool sendCommsMessage(P<PlayerSpaceship> target, string message);
 
-    ScriptCallback onDestroyed;
+    ScriptSimpleCallback on_destroyed;
 
 protected:
     ModelInfo model_info;
+    bool has_weight = true;
 };
 
 // Define a script conversion function for the DamageInfo structure.

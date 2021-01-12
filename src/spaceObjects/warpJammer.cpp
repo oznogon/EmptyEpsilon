@@ -5,6 +5,8 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// A warp jammer.
 REGISTER_SCRIPT_SUBCLASS(WarpJammer, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setRange);
@@ -30,11 +32,16 @@ WarpJammer::WarpJammer()
     setRadarSignatureInfo(0.05, 0.5, 0.0);
 
     registerMemberReplication(&range);
-    
+
     model_info.setData("shield_generator");
 }
 
-void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+// Due to a suspected compiler bug this desconstructor needs to be explicity defined
+WarpJammer::~WarpJammer()
+{
+}
+
+void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");

@@ -5,6 +5,8 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// A supply drop.
 REGISTER_SCRIPT_SUBCLASS(SupplyDrop, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, setEnergy);
@@ -28,7 +30,7 @@ SupplyDrop::SupplyDrop()
     model_info.setData("ammo_box");
 }
 
-void SupplyDrop::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void SupplyDrop::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");

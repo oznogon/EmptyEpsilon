@@ -1,5 +1,9 @@
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "operationsScreen.h"
+#include "preferenceManager.h"
+
+#include "gui/gui2_keyvaluedisplay.h"
 
 #include "screens/crew6/scienceScreen.h"
 
@@ -58,24 +62,40 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             }
         }
     );
-    (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", "Open Comms", &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
+    science->science_radar->setAutoRotating(PreferencesManager::get("operations_radar_lock","0")=="1");
+
+    (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", tr("Open Comms"), &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
 
     // Manage waypoints.
-    place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", "Place waypoint", [this, science]() {
+    place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this, science]() {
         mode = WaypointPlacement;
     });
     place_waypoint_button->setPosition(-270, -70, ABottomRight)->setSize(200, 50);
 
-    delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", "Delete waypoint", [this, science]() {
+    delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this, science]() {
         if (my_spaceship && science->targets.getWaypointIndex() >= 0)
         {
             my_spaceship->commandRemoveWaypoint(science->targets.getWaypointIndex());
         }
     });
     delete_waypoint_button->setPosition(-270, -120, ABottomRight)->setSize(200, 50);
-    
+
+    // Reputation display.
+    info_reputation = new GuiKeyValueDisplay(this, "INFO_REPUTATION", 0.7, tr("Reputation") + ":", "");
+    info_reputation->setPosition(20, 20, ATopLeft)->setSize(175, 30);
+
+    // Scenario clock display.
+    info_clock = new GuiKeyValueDisplay(this, "INFO_CLOCK", 0.7, tr("Clock") + ":", "");
+    info_clock->setPosition(20, 50, ATopLeft)->setSize(175, 30);
+
     mode = TargetSelection;
-    
+
     new ShipsLog(this);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+}
+
+void OperationScreen::onDraw(sf::RenderTarget& window)
+{
+    info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
+    info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
 }

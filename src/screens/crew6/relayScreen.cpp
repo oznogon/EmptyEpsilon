@@ -1,4 +1,5 @@
 #include "relayScreen.h"
+#include "gameGlobalInfo.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
@@ -100,7 +101,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", tr("Open Comms"), &targets))->setSize(GuiElement::GuiSizeMax, 50);
     else
         (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", tr("Link to Comms"), &targets))->setSize(GuiElement::GuiSizeMax, 50);
-    
+
 
     // Hack target
     hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"), [this](){
@@ -119,7 +120,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         else
             my_spaceship->commandSetScienceLink(-1);
     });
-    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50);
+    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
 
     // Manage waypoints.
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
@@ -140,11 +141,15 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         mode = LaunchProbe;
         option_buttons->hide();
     });
-    launch_probe_button->setSize(GuiElement::GuiSizeMax, 50);
+    launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
 
     // Reputation display.
-    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, tr("Reputation:"), "");
+    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, tr("Reputation") + ":", "");
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Scenario clock display.
+    info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.7, tr("Clock") + ":", "");
+    info_clock->setSize(GuiElement::GuiSizeMax, 40);
 
     // Bottom layout.
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalBottomToTop);
@@ -161,7 +166,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     for(int level=AL_Normal; level < AL_MAX; level++)
     {
-        GuiButton* alert_button = new GuiButton(layout, "", alertLevelToString(EAlertLevel(level)), [this, level]()
+        GuiButton* alert_button = new GuiButton(layout, "", alertLevelToLocaleString(EAlertLevel(level)), [this, level]()
         {
             if (my_spaceship)
                 my_spaceship->commandSetAlertLevel(EAlertLevel(level));
@@ -250,7 +255,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
             info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
         }
 
-        if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))
+        if (probe && my_spaceship && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))
         {
             link_to_science_button->setValue(my_spaceship->linked_science_probe_id == probe->getMultiplayerId());
             link_to_science_button->enable();
@@ -274,8 +279,14 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     }
     if (my_spaceship)
     {
+        // Toggle ship capabilities.
+        launch_probe_button->setVisible(my_spaceship->getCanLaunchProbe());
+        link_to_science_button->setVisible(my_spaceship->getCanLaunchProbe());
+        hack_target_button->setVisible(my_spaceship->getCanHack());
+
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
-        launch_probe_button->setText("Launch probe (" + string(my_spaceship->scan_probe_stock) + ")");
+        info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
+        launch_probe_button->setText(tr("Launch Probe") + " (" + string(my_spaceship->scan_probe_stock) + ")");
     }
 
     if (targets.getWaypointIndex() >= 0)

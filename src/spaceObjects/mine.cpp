@@ -26,7 +26,7 @@ Mine::Mine()
     particleTimeout = 0.0;
     setRadarSignatureInfo(0.0, 0.05, 0.0);
 
-    PathPlannerManager::getInstance()->addAvoidObject(this, trigger_range * 1.2f);
+    PathPlannerManager::getInstance()->addAvoidObject(this, blastRange * 1.2f);
 }
 
 void Mine::draw3D()
@@ -37,7 +37,7 @@ void Mine::draw3DTransparent()
 {
 }
 
-void Mine::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Mine::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite objectSprite;
     textureManager.setTexture(objectSprite, "RadarBlip.png");
@@ -47,7 +47,7 @@ void Mine::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float sc
     window.draw(objectSprite);
 }
 
-void Mine::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Mine::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::CircleShape hitRadius(trigger_range * scale);
     hitRadius.setOrigin(trigger_range * scale, trigger_range * scale);

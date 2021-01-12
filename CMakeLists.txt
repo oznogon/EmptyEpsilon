@@ -1,6 +1,14 @@
 project(EmptyEpsilon)
 cmake_minimum_required(VERSION 2.8.12)
 
+if(${CMAKE_VERSION} VERSION_LESS 3.2)
+	# `MINGW` exists starting 3.2.
+	set(MINGW FALSE)
+	if(WIN32 AND CMAKE_COMPILER_IS_GNUCC)
+		set(MINGW TRUE)
+	endif()
+endif()
+
 option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
 message(STATUS "ENABLE_CRASH_LOGGER is " ${ENABLE_CRASH_LOGGER})
 
@@ -17,11 +25,11 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 
 if(ENABLE_CRASH_LOGGER)
- if(WIN32)
+ if(MINGW)
   if(NOT DEFINED DRMINGW_ROOT)
    message(FATAL_ERROR "DRMINGW_ROOT was not set. Unable to continue")
   endif(NOT DEFINED DRMINGW_ROOT)
- endif(WIN32)
+ endif(MINGW)
 endif(ENABLE_CRASH_LOGGER)
 
 if(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
@@ -30,9 +38,12 @@ if(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
  string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
 endif(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
 
+set(VERSION_NUMBER ${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
+message(STATUS "EmptyEpsilon Version = ${VERSION_NUMBER}")
+
 # Set our optimization flags.
 set(OPTIMIZER_FLAGS)
-if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
+if(CMAKE_COMPILER_IS_GNUCC)
     # On gcc, we want some general optimalizations that improve speed a lot.
     set(OPTIMIZER_FLAGS ${OPTIMIZER_FLAGS} -O3 -flto -funsafe-math-optimizations)
 
@@ -43,8 +54,12 @@ if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
     endif()
 endif()
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror=return-type")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror=return-type")
+if(MSVC)
+	add_definitions(-DNOMINMAX)
+else()
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror=return-type")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror=return-type")
+endif()
 
 # install resources, scripts, and packs to app bundle instead of system dir.
 if(APPLE)
@@ -52,6 +67,11 @@ if(APPLE)
 elseif(UNIX)
     # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
     add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
+endif()
+
+# Set minimum target macOS version
+if(APPLE)
+	set(MACOSX_DEPLOYMENT_TARGET "10.10")
 endif()
 
 if(CONFIG_DIR)
@@ -97,7 +117,7 @@ set(SOURCES
 	src/GMScriptCallback.cpp
 	src/GMMessage.cpp
 	src/tutorialGame.cpp
-    src/scriptDataStorage.cpp
+	src/scriptDataStorage.cpp
 	src/menus/joinServerMenu.cpp
 	src/menus/serverBrowseMenu.cpp
 	src/menus/mainMenus.cpp
@@ -137,6 +157,7 @@ set(SOURCES
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp
+	src/screenComponents/viewportMainScreen.cpp
 	src/screenComponents/selfDestructEntry.cpp
 	src/screenComponents/dockingButton.cpp
 	src/screenComponents/shieldsEnableButton.cpp
@@ -176,6 +197,7 @@ set(SOURCES
 	src/screenComponents/lightsOut.cpp
 	src/screenComponents/miniGame.cpp
 	src/screenComponents/mineSweeper.cpp
+	src/screenComponents/impulseSound.cpp
 	src/gui/colorConfig.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/joystickConfig.cpp
@@ -237,10 +259,10 @@ set(SOURCES
 	src/ai/fighterAI.cpp
 	src/ai/ai.cpp
 	src/ai/aiFactory.cpp
+	src/ai/evasionAI.cpp
 	src/ai/missileVolleyAI.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
-	src/hardware/hardwareOutputDevice.cpp
 	src/hardware/serialDriver.cpp
 	src/hardware/devices/dmx512SerialDevice.cpp
 	src/hardware/devices/enttecDMXProDevice.cpp
@@ -249,8 +271,9 @@ set(SOURCES
 	src/hardware/devices/virtualOutputDevice.cpp
 	src/hardware/devices/philipsHueDevice.cpp
 )
+
 if(WIN32)
-    list(APPEND SOURCES EmptyEpsilon.rc)
+    list(APPEND SOURCES EmptyEpsilon.rc src/discord.cpp)
 endif()
 
 foreach(SP_SOURCE
@@ -368,10 +391,10 @@ foreach(SP_SOURCE
 endforeach()
 
 add_definitions(-DWINDOW_TITLE="EmptyEpsilon")
-add_definitions(-DVERSION_NUMBER=${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
+add_definitions(-DVERSION_NUMBER=${VERSION_NUMBER})
 if(ENABLE_CRASH_LOGGER)
   add_definitions(-DENABLE_CRASH_LOGGER)
-  if(WIN32)
+  if(MINGW)
     link_directories(${DRMINGW_ROOT}/lib/)
   endif()
 endif()
@@ -388,8 +411,12 @@ endif()
 
 target_include_directories(${EXECUTABLE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
 target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SERIOUS_PROTON_DIR}/src)
-target_compile_options(${EXECUTABLE_NAME} PUBLIC $<$<CONFIG:Release>:${OPTIMIZER_FLAGS}>)
-target_compile_options(${EXECUTABLE_NAME} PUBLIC $<$<CONFIG:RelWithDebInfo>:-g1 ${OPTIMIZER_FLAGS}>)
+target_compile_options(${EXECUTABLE_NAME}
+	PUBLIC
+	$<$<AND:$<NOT:$<BOOL:${MSVC}>>,$<CONFIG:RelWithDebInfo>>:-g1>
+	$<$<AND:$<NOT:$<BOOL:${MSVC}>>,$<OR:$<CONFIG:RelWithDebInfo>,$<CONFIG:Release>>>:${OPTIMIZER_FLAGS}>
+	$<$<BOOL:${MSVC}>:/MP /permissive->
+)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
@@ -416,9 +443,29 @@ target_link_libraries(${EXECUTABLE_NAME} opus)
 if(WIN32)
   target_link_libraries(${EXECUTABLE_NAME} wsock32 iphlpapi)
   if(ENABLE_CRASH_LOGGER)
-    include_directories(${DRMINGW_ROOT}/include/)
+	if(MINGW)
+		include_directories(${DRMINGW_ROOT}/include/)
+	endif()
     target_link_libraries(${EXECUTABLE_NAME} exchndl)
   endif()
+  set(DISCORD_ARCH "x86_64")
+  if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
+	set(DISCORD_ARCH "x86")
+  endif()
+  set(DISCORD_LIB_PATH "${CMAKE_CURRENT_BINARY_DIR}/discord/lib/${DISCORD_ARCH}")
+  if(NOT EXISTS "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib")
+    file(DOWNLOAD "https://dl-game-sdk.discordapp.net/latest/discord_game_sdk.zip" "${CMAKE_CURRENT_BINARY_DIR}/discord/game_sdk.zip" TIMEOUT 60 TLS_VERIFY ON)
+    execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf "${CMAKE_CURRENT_BINARY_DIR}/discord/game_sdk.zip" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/discord")
+    if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+      # Discord uses Windows.h (capital W) and that does not play nice when cross-compiling.
+      # we want to patch with a lowercase windows.h
+      message(STATUS "Patching discord_game._sdk.h, using a lowercase Windows.h (cross-compilation compatibility)")
+      execute_process(COMMAND sed -i "s/<Windows.h>/<windows.h>/g" c/discord_game_sdk.h WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/discord")
+    endif()
+  endif()
+  
+  target_link_libraries(${EXECUTABLE_NAME} "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib")
+  target_include_directories(${EXECUTABLE_NAME} PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/discord/c/")
 elseif(ANDROID)
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--whole-archive ${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-main.a -Wl,--no-whole-archive")
   target_link_libraries(${EXECUTABLE_NAME} log android EGL)
@@ -431,11 +478,12 @@ endif()
 include(InstallRequiredSystemLibraries)
 
 if(WIN32)
-  execute_process(COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=libstdc++-6.dll OUTPUT_VARIABLE MINGW_STDCPP_DLL OUTPUT_STRIP_TRAILING_WHITESPACE)
-  execute_process(COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=libgcc_s_sjlj-1.dll OUTPUT_VARIABLE MINGW_LIBGCC_DLL OUTPUT_STRIP_TRAILING_WHITESPACE)
-  execute_process(COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=libwinpthread-1.dll OUTPUT_VARIABLE MINGW_PTHREAD_DLL OUTPUT_STRIP_TRAILING_WHITESPACE)
-  install(FILES ${MINGW_STDCPP_DLL} ${MINGW_LIBGCC_DLL} ${MINGW_PTHREAD_DLL} DESTINATION .)
-  install(FILES /usr/i686-w64-mingw32/lib/libwinpthread-1.dll DESTINATION .)
+  if(MINGW)
+	execute_process(COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=libstdc++-6.dll OUTPUT_VARIABLE MINGW_STDCPP_DLL OUTPUT_STRIP_TRAILING_WHITESPACE)
+	execute_process(COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=libgcc_s_sjlj-1.dll OUTPUT_VARIABLE MINGW_LIBGCC_DLL OUTPUT_STRIP_TRAILING_WHITESPACE)
+	execute_process(COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=libwinpthread-1.dll OUTPUT_VARIABLE MINGW_PTHREAD_DLL OUTPUT_STRIP_TRAILING_WHITESPACE)
+	install(FILES ${MINGW_STDCPP_DLL} ${MINGW_LIBGCC_DLL} ${MINGW_PTHREAD_DLL} DESTINATION .)
+  endif()
   install(FILES ${SFML_ROOT}/bin/OpenAL32.dll DESTINATION .)
   #install(FILES ${SFML_ROOT}/bin/libFLAC-8.dll DESTINATION .)
   #install(FILES ${SFML_ROOT}/bin/libjpeg-62.dll DESTINATION .)
@@ -448,13 +496,14 @@ if(WIN32)
   install(FILES ${SFML_ROOT}/bin/sfml-network-2.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/sfml-system-2.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/sfml-window-2.dll DESTINATION .)
-  if(ENABLE_CRASH_LOGGER)
+  if(ENABLE_CRASH_LOGGER AND MINGW)
     install(FILES ${DRMINGW_ROOT}/bin/dbghelp.dll DESTINATION .)
     install(FILES ${DRMINGW_ROOT}/bin/exchndl.dll DESTINATION .)
     install(FILES ${DRMINGW_ROOT}/bin/mgwhelp.dll DESTINATION .)
     install(FILES ${DRMINGW_ROOT}/bin/symsrv.dll DESTINATION .)
     install(FILES ${DRMINGW_ROOT}/bin/symsrv.yes DESTINATION .)
   endif()
+  install(FILES "${DISCORD_LIB_PATH}/discord_game_sdk.dll" DESTINATION .)
 
   install(DIRECTORY resources DESTINATION .)
   install(DIRECTORY scripts DESTINATION .)
@@ -484,10 +533,21 @@ if(PYTHONINTERP_FOUND)
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Building script reference documentation.")
   add_custom_target(script_reference ALL DEPENDS ${CMAKE_BINARY_DIR}/script_reference.html)
-  install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
+  
+  # Matches install logic above.
+  if(WIN32)
+  	install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
+  elseif(APPLE)
+  	install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION "EmptyEpsilon.app/Contents/Resources")
+  elseif(NOT ANDROID)
+	# DOCDIR already has PROJECT_NAME (EmptyEpsilon) appended (from CMake docs)
+  	install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION "${CMAKE_INSTALL_FULL_DOCDIR}")
+  endif()
 endif()
 
 add_custom_target(update_locale
+	COMMAND sed -i "/^#: /d" resources/locale/en.po
+	COMMAND sed -i "/^#: /d" resources/locale/tutorial.en.po
 	COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trMark:1c,2 --keyword=trMark:1 --omit-header -j -d resources/locale/en ${SOURCES}
 	COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/en scripts/shipTemplates_*.lua scripts/comms_ship.lua scripts/comms_station.lua scripts/comms_supply_drop.lua scripts/factionInfo.lua scripts/science_db.lua
 	COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/tutorial.en scripts/tutorial_*.lua

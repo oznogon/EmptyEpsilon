@@ -8,7 +8,13 @@ class ScriptStorage : public PObject
 public:
     ScriptStorage()
     {
-        FILE* f = fopen("scriptstorage.json", "rt");
+        if (getenv("HOME"))
+        {
+            scriptstorage_path = string(getenv("HOME")) + "/.emptyepsilon/" + scriptstorage_path;
+        }
+
+        FILE* f = fopen(scriptstorage_path.c_str(), "rt");
+
         if (f)
         {
             std::string s;
@@ -32,10 +38,13 @@ public:
     void set(string key, string value)
     {
         if (data[key] == value)
+        {
             return;
-        data[key] = value;
+        }
 
-        FILE* f = fopen("scriptstorage.json", "wt");
+        data[key] = value;
+        FILE* f = fopen(scriptstorage_path.c_str(), "wt");
+
         if (f)
         {
             json11::Json json{data};
@@ -54,6 +63,7 @@ public:
     }
 
 private:
+    string scriptstorage_path = "scriptstorage.json";
     std::unordered_map<std::string, std::string> data;
 };
 
@@ -63,14 +73,14 @@ REGISTER_SCRIPT_CLASS(ScriptStorage)
     /// Requires the key as a string.
     /// Returns the value as a JSON string.
     /// Returns nothing if the key is not found.
-    /// Example: storage = getScriptStorage();
-    ///          storage.get('key');
+    /// Example: storage = getScriptStorage()
+    ///          storage:get('key')
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptStorage, get);
     /// Set a value in persistent script storage.
     /// Requires the key and value as strings.
     /// Creates scriptstorage.json if it doesn't exist.
-    /// Example: storage = getScriptStorage();
-    ///          storage.set('key', 'value');
+    /// Example: storage = getScriptStorage()
+    ///          storage:set('key', 'value')
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptStorage, set);
 }
 

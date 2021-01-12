@@ -14,15 +14,15 @@ JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sf::I
 : ip(ip)
 {
     this->source = source;
-    
-    status_label = new GuiLabel(this, "STATUS", "Connecting...", 30);
+
+    status_label = new GuiLabel(this, "STATUS", tr("connectserver", "Connecting..."), 30);
     status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);
-    (new GuiButton(this, "BTN_CANCEL", "Cancel", [this]() {
+    (new GuiButton(this, "BTN_CANCEL", tr("button", "Cancel"), [this]() {
         destroy();
         disconnectFromServer();
         new ServerBrowserMenu(this->source);
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
-    
+
     password_entry_box = new GuiPanel(this, "PASSWORD_ENTRY_BOX");
     password_entry_box->setPosition(0, 350, ATopCenter)->setSize(600, 100);
     password_entry_box->hide();
@@ -34,7 +34,7 @@ JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sf::I
         password_focused = false;
         game_client->sendPassword(password_entry->getText().upper());
     }))->setPosition(420, 0, ACenterLeft)->setSize(160, 50);
-    
+
     new GameClient(VERSION_NUMBER, ip);
 }
 
@@ -48,7 +48,7 @@ void JoinServerScreen::update(float delta)
         //If we are still trying to connect, do nothing.
         break;
     case GameClient::WaitingForPassword:
-        status_label->setText("Please enter the server password:");
+        status_label->setText(tr("Please enter the server password:"));
         password_entry_box->show();
         if (!password_focused)
         {

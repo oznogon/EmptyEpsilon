@@ -12,7 +12,7 @@ GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* ra
 {
     this->player_index = index;
     this->radar = radar;
-    
+
     text_entry = new GuiTextEntry(contents, "", "");
     text_entry->setTextSize(23)->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 30);
     text_entry->enterCallback([this](string text){
@@ -25,13 +25,13 @@ GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* ra
         }
         text_entry->setText("");
     });
-    
+
     chat_text = new GuiScrollText(contents, "", "");
     chat_text->setTextSize(20)->setPosition(0, -30, ABottomLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     chat_text->enableAutoScrollDown()->setScrollbarWidth(30);
 
     min_size.y += 100;
-    
+
     notification = false;
 }
 
@@ -43,38 +43,38 @@ void GameMasterChatDialog::onDraw(sf::RenderTarget& window)
 
     if (!player)
     {
-        disableComms("Target - Destroyed");
+        disableComms(tr("chatGM", "Target - Destroyed"));
         return;
     }
-    
+
     if (!isMinimized())
         notification = false;
-    
+
     switch(player->getCommsState())
     {
     case CS_Inactive:
     case CS_ChannelFailed:
     case CS_ChannelBroken:
     case CS_ChannelClosed:
-        chat_text->setText("Channel not open, enter name to hail as to hail target.");
-        disableComms(player->getCallSign() + " - Inactive");
+        chat_text->setText(tr("chatGM", "Channel not open, enter name to hail as to hail target."));
+        disableComms(tr("chatGM", "{callsign} - Inactive").format({{"callsign", player->getCallSign()}}));
         break;
     case CS_OpeningChannel:
     case CS_BeingHailed:
-        disableComms(player->getCallSign() + " - Opening communications with " + player->getCommsTargetName());
+        disableComms(tr("chatGM", "{callsign} - Opening communications with {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         break;
     case CS_BeingHailedByGM:
-        disableComms(player->getCallSign() + " - Hailing as " + player->getCommsTargetName());
+        disableComms(tr("chatGM", "{callsign} - Hailing as {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         break;
     case CS_ChannelOpen:
     case CS_ChannelOpenPlayer:
-        disableComms(player->getCallSign() + " - Communicating with " + player->getCommsTargetName());
+        disableComms(tr("chatGM", "{callsign} - Communicating with {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         break;
     case CS_ChannelOpenGM:
         if (notification)
-            setTitle("**" + player->getCallSign() + " - Communicating as " + player->getCommsTargetName() + "**");
+            setTitle(tr("chatGM", "**{callsign} - Communicating as {target}**").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         else
-            setTitle(player->getCallSign() + " - Communicating as " + player->getCommsTargetName());
+            setTitle(tr("chatGM", "{callsign} - Communicating as {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         chat_text->enable();
         text_entry->enable();
         if (chat_text->getText() != player->getCommsIncommingMessage())

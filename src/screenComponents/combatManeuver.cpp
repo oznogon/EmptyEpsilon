@@ -23,9 +23,14 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
         }
     });
     slider->setPosition(0, -50, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 165);
-    
+
     (new GuiPowerDamageIndicator(slider, id + "_STRAFE_INDICATOR", SYS_Maneuver, ACenterLeft))->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiPowerDamageIndicator(slider, id + "_BOOST_INDICATOR", SYS_Impulse, ABottomLeft))->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+}
+
+void GuiCombatManeuver::onUpdate()
+{
+    setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
 }
 
 void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
@@ -45,7 +50,7 @@ void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
 
 void GuiCombatManeuver::onHotkey(const HotkeyResult& key)
 {
-    if (key.category == "HELMS" && my_spaceship)
+    if (key.category == "HELMS" && my_spaceship && isVisible())
     {
         if (key.hotkey == "COMBAT_LEFT")
         {}//TODO

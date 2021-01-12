@@ -16,9 +16,9 @@ public:
 
     virtual void update(float delta) override;
 
-    virtual void draw3D();
+    virtual void draw3D() override;
 
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
     virtual void collide(Collisionable* target, float force) override;
 
@@ -26,7 +26,7 @@ public:
     void setSpin(float spin=0.0);
     void explode();
     void allowPickup(bool allow);
-    
+
     virtual string getExportLine() override;
     void onPickUp(ScriptSimpleCallback callback);
 };

@@ -4,15 +4,21 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// A scan probe.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
 {
-    // Callback when the probe's lifetime expires.
-    // Returns the probe.
-    // Example: probe:onExpiration(probeExpired)
+    /// Set the remaining lifetime (in seconds).
+    /// The default initial lifetime is 10 minutes.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setLifetime);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getLifetime);
+    /// Callback when the probe's lifetime expires.
+    /// Returns the probe.
+    /// Example: probe:onExpiration(probeExpired)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onExpiration);
-    // Callback when the probe is destroyed by damage.
-    // Returns the probe and instigator.
-    // Example: probe:onDestruction(probeDestroyed)
+    /// Callback when the probe is destroyed by damage.
+    /// Returns the probe and instigator.
+    /// Example: probe:onDestruction(probeDestroyed)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onDestruction);
 }
 
@@ -26,7 +32,7 @@ ScanProbe::ScanProbe()
     registerMemberReplication(&target_position);
     registerMemberReplication(&lifetime, 60.0);
     setRadarSignatureInfo(0.0, 0.2, 0.0);
-    
+
     switch(irandom(1, 3))
     {
     case 1:
@@ -43,8 +49,19 @@ ScanProbe::ScanProbe()
     setCallSign(string(getMultiplayerId()) + "P");
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 ScanProbe::~ScanProbe()
 {
+}
+
+void ScanProbe::setLifetime(float lifetime)
+{
+    this->lifetime = lifetime;
+}
+
+float ScanProbe::getLifetime()
+{
+    return this->lifetime;
 }
 
 void ScanProbe::update(float delta)
@@ -83,7 +100,7 @@ void ScanProbe::takeDamage(float damage_amount, DamageInfo info)
     destroy();
 }
 
-void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "ProbeBlip.png");
@@ -92,6 +109,21 @@ void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     float size = 0.3;
     object_sprite.setScale(size, size);
     window.draw(object_sprite);
+}
+
+void ScanProbe::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+{
+    SpaceObject::drawOnGMRadar(window, position, scale, rotation, long_range);
+    if (long_range)
+    {
+        sf::CircleShape radar_radius(5000 * scale);
+        radar_radius.setOrigin(5000 * scale, 5000 * scale);
+        radar_radius.setPosition(position);
+        radar_radius.setFillColor(sf::Color::Transparent);
+        radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
+        radar_radius.setOutlineThickness(3.0);
+        window.draw(radar_radius);
+    }
 }
 
 void ScanProbe::setOwner(P<SpaceObject> owner)
@@ -111,4 +143,3 @@ void ScanProbe::onExpiration(ScriptSimpleCallback callback)
 {
     this->on_expiration = callback;
 }
-

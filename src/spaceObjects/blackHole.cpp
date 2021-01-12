@@ -46,7 +46,7 @@ void BlackHole::draw3DTransparent()
 }
 #endif
 
-void BlackHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void BlackHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "blackHole.png");
@@ -65,21 +65,31 @@ void BlackHole::collide(Collisionable* target, float collision_force)
     if (update_delta == 0.0)
         return;
 
+    P<SpaceObject> obj = P<Collisionable>(target);
+    if (!obj) return;
+    if (!obj->hasWeight()) { return; } // the object is not affected by gravitation
+
     sf::Vector2f diff = getPosition() - target->getPosition();
     float distance = sf::length(diff);
     float force = (getRadius() * getRadius() * 50.0f) / (distance * distance);
+    DamageInfo info(NULL, DT_Kinetic, getPosition());
     if (force > 10000.0)
     {
         force = 10000.0;
         if (isServer())
-            target->destroy();
+        {
+            obj->takeDamage(100000.0, info); //try to destroy the object by inflicting a huge amount of damage
+            if (target)
+            {
+                target->destroy();
+                return;
+            }
+        }
     }
-    DamageInfo info(NULL, DT_Kinetic, getPosition());
     if (force > 100.0 && isServer())
     {
-        P<SpaceObject> obj = P<Collisionable>(target);
-        if (obj)
-            obj->takeDamage(force * update_delta / 10.0f, info);
+        obj->takeDamage(force * update_delta / 10.0f, info);
     }
-    target->setPosition(target->getPosition() + diff / distance * update_delta * force);
+    if (!obj) {return;}
+    obj->setPosition(obj->getPosition() + diff / distance * update_delta * force);
 }
