@@ -13,11 +13,22 @@ class GuiToggleButton;
 class GuiRotationDial;
 class GuiCombatManeuver;
 class GuiLabel;
+class GuiButton;
 
 class SinglePilotScreen : public GuiOverlay
 {
 private:
-    bool first_person;
+    enum ESinglePilotView
+    {
+        SPV_Forward = 0,
+        SPV_Right,
+        SPV_Back,
+        SPV_Left,
+        SPV_FirstPerson,
+        SPV_Target
+    };
+
+    ESinglePilotView view_state;
     GuiViewport3D* viewport;
 
     GuiKeyValueDisplay* energy_display;
@@ -34,7 +45,8 @@ private:
     GuiRotationDial* missile_aim;
     GuiMissileTubeControls* tube_controls;
     GuiToggleButton* lock_aim;
-    GuiToggleButton* targeting_mode;
+    bool targeting_mode;
+    GuiButton* targeting_mode_button;
 public:
     SinglePilotScreen(GuiContainer* owner);
 
