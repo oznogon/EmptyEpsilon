@@ -30,6 +30,7 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_rotationdial.h"
 #include "gui/gui2_button.h"
+#include "gui/gui2_image.h"
 
 SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SINGLEPILOT_SCREEN", colorConfig.background)
@@ -42,27 +43,22 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
     background_crosses->setTextureTiled("gui/BackgroundCrosses");
 */
+    targeting_mode = true;
+    view_state = SPV_Target;
+    first_person = PreferencesManager::get("first_person") == "1" ? true : false;
+
     // Render the 3D viewport across the entire window
     viewport = new GuiViewport3D(this, "3D_VIEW");
     viewport->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     viewport->showCallsigns()->showHeadings()->showSpacedust();
     viewport->show();
 
-    if (PreferencesManager::get("first_person") == "1")
-    {
-        view_state = SPV_FirstPerson;
-    }
-    else
-    {
-        view_state = SPV_Forward;
-    }
-
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
     // 5U tactical radar with piloting features.
     radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets);
-    radar->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 400);
+    radar->setPosition(0, -20, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 300);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
@@ -89,13 +85,15 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
                 }
                 else
                 {
-                    // Otherwise, turn toward the click/tap location.
-                    my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+                    // Navigate by turning toward the radar click/tap location.
+                    float target_angle = sf::vector2ToAngle(position - my_spaceship->getPosition());
+                    my_spaceship->commandTargetRotation(target_angle);
+                    steering_wheel->setValue(target_angle);
                 }
             }
         },
         [this](sf::Vector2f position) {
-            // On tap/click and hold, show heading hint and turn toward heading.
+            // On tap/click and hold in maneuvering mode, show heading hint and turn toward heading.
             if (my_spaceship && !this->targeting_mode)
             {
                 float angle = sf::vector2ToAngle(position - my_spaceship->getPosition());
@@ -104,7 +102,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
             }
         },
         [this](sf::Vector2f position) {
-            // On release of tap/click and hold, remove heading hint and turn toward heading.
+            // On release of tap/click and hold in maneuvering mode, remove heading hint and turn toward heading.
             if (my_spaceship && !this->targeting_mode)
             {
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
@@ -137,7 +135,18 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
-    missile_aim->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 400);
+    missile_aim->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 340);
+
+    steering_wheel = new GuiRotationDial(this, "STEERING_WHEEL", -90, 360 - 90, 0, [this](float value){
+        my_spaceship->commandTargetRotation(value);
+    });
+    steering_wheel->setPosition(0, -20, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 300);
+
+    missile_aim_icon = new GuiImage(missile_aim, "MISSILE_AIM_ICON", "gui/icons/lock");
+    missile_aim_icon->setColor(sf::Color::Red)->setPosition(0, 0, ATopCenter)->setSize(GuiElement::GuiSizeMatchHeight, 20);
+
+    steering_wheel_icon = new GuiImage(steering_wheel, "STEERING_WHEEL_ICON", "gui/icons/system_maneuver");
+    steering_wheel_icon->setColor(sf::Color::Black)->setPosition(0, 0, ATopCenter)->setSize(GuiElement::GuiSizeMatchHeight, 20);
 
     // Weapon tube controls.
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
@@ -162,13 +171,9 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     lock_aim->setPosition(-180, -20, ABottomCenter)->setSize(110, 50);
 
     // Targeting mode toggle; target on radar tap when enabled, navigate when disabled.
-    targeting_mode_button = new GuiButton(this, "TARGETING_MODE", tr("maneuver", "MOV"), [this]()
+    targeting_mode_button = new GuiButton(this, "TARGETING_MODE", tr("target", "TGT"), [this]()
         {
-            targeting_mode = !targeting_mode;
-            view_state = targeting_mode ? SPV_Target : SPV_Forward;
-
-            this->targeting_mode_button->setText(targeting_mode ? tr("target", "TGT") : tr("maneuver", "MOV"));
-            this->targeting_mode_button->setIcon(targeting_mode ? "gui/icons/station-weapons" : "gui/icons/station-helm");
+            this->setTargetingMode(!targeting_mode);
         });
     targeting_mode_button->setIcon("gui/icons/station-helm")->setPosition(180, -20, ABottomCenter)->setSize(110, 50);
 
@@ -191,25 +196,50 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
 
         // Third-person view settings.
         float target_camera_yaw = my_spaceship->getRotation();
-
-        // Point camera at target.
-        P<SpaceObject> target_ship = my_spaceship->getTarget();
+        float camera_ship_distance = 420.0f;
+        float camera_ship_height = 420.0f;
 
         // Set camera angle and position.
         camera_pitch = 30.0f;
 
-        float camera_ship_distance = 420.0f;
-        float camera_ship_height = 420.0f;
-
-        // Set target lock viewpoint position if enabled.
-        if (target_ship && view_state == SPV_Target)
+        // Get view state.
+        switch (view_state)
         {
-            sf::Vector2f target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();
-            target_camera_yaw = sf::vector2ToAngle(target_camera_diff) + 180;
+            case SPV_Back:
+            {
+                target_camera_yaw += 180;
+                break;
+            }
+            case SPV_Left:
+            {
+                target_camera_yaw -= 90;
+                break;
+            }
+            case SPV_Right:
+            {
+                target_camera_yaw += 90;
+                break;
+            }
+            case SPV_Target:
+            {
+                // Point camera at target.
+                P<SpaceObject> target_ship = my_spaceship->getTarget();
+
+                if (target_ship)
+                {
+                    sf::Vector2f target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();
+                    target_camera_yaw = sf::vector2ToAngle(target_camera_diff) + 180;
+                }
+                break;
+            }
+            default:
+            {
+                break;
+            }
         }
-        // Set first person viewpoint position if enabled.
-        // Positioning might cause problems with some ships.
-        if (view_state == SPV_FirstPerson)
+
+        // Move camera if first person.
+        if (first_person)
         {
             camera_ship_distance = -(my_spaceship->getRadius() * 1.5);
             camera_ship_height = my_spaceship->getRadius() / 10.f;
@@ -230,8 +260,9 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
             camera_pitch = 90.0f;
         }
 #endif
+
         // Display first person perspective if enabled.
-        if (view_state == SPV_FirstPerson)
+        if (first_person)
         {
             camera_position = targetCameraPosition;
             camera_yaw = target_camera_yaw;
@@ -308,47 +339,23 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
 {
     if (my_spaceship)
     {
-        if (key.category == "MAIN_SCREEN" && my_spaceship)
-        {
-            if (key.hotkey == "VIEW_FORWARD")
-            {
-                //
-            }
-            else if (key.hotkey == "VIEW_LEFT")
-            {
-                //
-            }
-            else if (key.hotkey == "VIEW_RIGHT")
-            {
-                //
-            }
-            else if (key.hotkey == "VIEW_BACK")
-            {
-                // 
-            }
-            else if (key.hotkey == "VIEW_TARGET")
-            {
-                view_state = SPV_Target;
-            }
-            else if (key.hotkey == "FIRST_PERSON")
-            {
-                view_state = view_state == SPV_FirstPerson ? SPV_Forward : SPV_FirstPerson;
-            }
-        }
-
-        if (key.category == "HELMS" && my_spaceship)
+        if (key.category == "HELMS")
         {
             if (key.hotkey == "TURN_LEFT")
             {
-                my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
+                float target_angle = my_spaceship->getRotation() - 5.0f;
+                my_spaceship->commandTargetRotation(target_angle);
+                steering_wheel->setValue(target_angle);
             }
             else if (key.hotkey == "TURN_RIGHT")
             {
-                my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
+                float target_angle = my_spaceship->getRotation() + 5.0f;
+                my_spaceship->commandTargetRotation(target_angle);
+                steering_wheel->setValue(target_angle);
             }
         }
 
-        if (key.category == "WEAPONS" && my_spaceship)
+        if (key.category == "WEAPONS")
         {
             if (key.hotkey == "NEXT_ENEMY_TARGET")
             {
@@ -385,6 +392,7 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                     }
                 }
             }
+
             if (key.hotkey == "NEXT_TARGET")
             {
                 bool current_found = false;
@@ -396,8 +404,12 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                         current_found = true;
                         continue;
                     }
+
                     if (obj == my_spaceship)
+                    {
                         continue;
+                    }
+
                     if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
                     {
                         targets.set(obj);
@@ -405,10 +417,14 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                         return;
                     }
                 }
-                foreach(SpaceObject, obj, space_object_list)
+
+                for(P<SpaceObject> obj : space_object_list)
                 {
                     if (obj == targets.get() || obj == my_spaceship)
+                    {
                         continue;
+                    }
+
                     if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
                     {
                         targets.set(obj);
@@ -417,16 +433,63 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                     }
                 }
             }
+
             if (key.hotkey == "AIM_MISSILE_LEFT")
             {
                 missile_aim->setValue(missile_aim->getValue() - 5.0f);
                 tube_controls->setMissileTargetAngle(missile_aim->getValue());
             }
+
             if (key.hotkey == "AIM_MISSILE_RIGHT")
             {
                 missile_aim->setValue(missile_aim->getValue() + 5.0f);
                 tube_controls->setMissileTargetAngle(missile_aim->getValue());
             }
         }
+
+        if (key.category == "SINGLE_PILOT")
+        {
+            if (key.hotkey == "VIEW_FORWARD")
+            {
+                view_state = SPV_Forward;
+            }
+            else if (key.hotkey == "VIEW_LEFT")
+            {
+                view_state = SPV_Left;
+            }
+            else if (key.hotkey == "VIEW_RIGHT")
+            {
+                view_state = SPV_Right;
+            }
+            else if (key.hotkey == "VIEW_BACK")
+            {
+                view_state = SPV_Back;
+            }
+            else if (key.hotkey == "VIEW_TARGET")
+            {
+                view_state = SPV_Target;
+            }
+            else if (key.hotkey == "FIRST_PERSON")
+            {
+                first_person = !first_person;
+            }
+            else if (key.hotkey == "TOGGLE_TARGETING_MODE")
+            {
+                setTargetingMode(!targeting_mode);
+            }
+        }
+    }
+}
+
+void SinglePilotScreen::setTargetingMode(bool new_mode)
+{
+    if (targeting_mode != new_mode)
+    {
+        targeting_mode = new_mode;
+        steering_wheel->setVisible(targeting_mode);
+        view_state = targeting_mode ? SPV_Target : SPV_Forward;
+
+        targeting_mode_button->setText(targeting_mode ? tr("target", "TGT") : tr("maneuver", "MOV"));
+        targeting_mode_button->setIcon(targeting_mode ? "gui/icons/station-weapons" : "gui/icons/station-helm");
     }
 }

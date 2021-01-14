@@ -14,6 +14,7 @@ class GuiRotationDial;
 class GuiCombatManeuver;
 class GuiLabel;
 class GuiButton;
+class GuiImage;
 
 class SinglePilotScreen : public GuiOverlay
 {
@@ -24,11 +25,11 @@ private:
         SPV_Right,
         SPV_Back,
         SPV_Left,
-        SPV_FirstPerson,
         SPV_Target
     };
 
     ESinglePilotView view_state;
+    bool first_person;
     GuiViewport3D* viewport;
 
     GuiKeyValueDisplay* energy_display;
@@ -43,6 +44,9 @@ private:
     TargetsContainer targets;
     GuiRadarView* radar;
     GuiRotationDial* missile_aim;
+    GuiRotationDial* steering_wheel;
+    GuiImage* missile_aim_icon;
+    GuiImage* steering_wheel_icon;
     GuiMissileTubeControls* tube_controls;
     GuiToggleButton* lock_aim;
     bool targeting_mode;
@@ -53,6 +57,8 @@ public:
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
     virtual bool onJoystickAxis(const AxisAction& axisAction) override;
+
+    void setTargetingMode(bool new_mode);
 };
 
 #endif//SINGLE_PILOT_SCREEN_H
