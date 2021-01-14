@@ -222,14 +222,24 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
             }
             case SPV_Target:
             {
-                // Point camera at target.
-                P<SpaceObject> target_ship = my_spaceship->getTarget();
-
-                if (target_ship)
+                // Don't allow target tracking mode in first person.
+                // It's not very useful and makes it difficult to tell if your ship is rotating.
+                if (first_person)
                 {
-                    sf::Vector2f target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();
-                    target_camera_yaw = sf::vector2ToAngle(target_camera_diff) + 180;
+                    view_state = SPV_Forward;
                 }
+                else
+                {
+                    // Point camera at target.
+                    P<SpaceObject> target_ship = my_spaceship->getTarget();
+
+                    if (target_ship)
+                    {
+                        sf::Vector2f target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();
+                        target_camera_yaw = sf::vector2ToAngle(target_camera_diff) + 180;
+                    }
+                }
+
                 break;
             }
             default:
