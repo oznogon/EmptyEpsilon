@@ -5,7 +5,6 @@
 #include "preferenceManager.h"
 
 #include "screenComponents/viewport3d.h"
-#include "screenComponents/impulseSound.h"
 
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/combatManeuver.h"
