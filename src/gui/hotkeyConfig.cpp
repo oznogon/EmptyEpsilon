@@ -119,8 +119,8 @@ HotkeyConfig::HotkeyConfig()
     newCategory("SINGLE_PILOT", "Single Pilot");
     newKey("VIEW_FORWARD", std::make_tuple("View forward", "I"));
     newKey("VIEW_LEFT", std::make_tuple("View left", "J"));
-    newKey("VIEW_RIGHT", std::make_tuple("View right", "K"));
-    newKey("VIEW_BACK", std::make_tuple("View backward", "L"));
+    newKey("VIEW_RIGHT", std::make_tuple("View right", "L"));
+    newKey("VIEW_BACK", std::make_tuple("View backward", "K"));
     newKey("VIEW_TARGET", std::make_tuple("Lock view on weapons target", "T"));
     newKey("FIRST_PERSON", std::make_tuple("Toggle first-person view", "F"));
     newKey("TOGGLE_TARGETING_MODE", std::make_tuple("Toggle first-person view", "O"));
