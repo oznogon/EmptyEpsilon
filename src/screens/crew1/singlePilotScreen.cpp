@@ -28,7 +28,7 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_rotationdial.h"
-#include "gui/gui2_button.h"
+#include "gui/gui2_togglebutton.h"
 #include "gui/gui2_image.h"
 
 SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
@@ -42,8 +42,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
     background_crosses->setTextureTiled("gui/BackgroundCrosses");
 */
-    targeting_mode = true;
-    view_state = SPV_Target;
+    targeting_mode = false;
     first_person = PreferencesManager::get("first_person") == "1" ? true : false;
 
     // Render the 3D viewport across the entire window
@@ -65,55 +64,25 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
             // On single tap/click...
             if (my_spaceship)
             {
-                // If we're in targeting mode...
-                if (this->targeting_mode)
-                {
-                    // If a target is near the tap location, select it.
-                    targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
+                // If a target is near the tap location, select it.
+                targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
 
-                    if (targets.get())
-                    {
-                        // Set the target if we have one now.
-                        my_spaceship->commandSetTarget(targets.get());
-                    }
-                    else
-                    {
-                        // Otherwise, deselect target.
-                        my_spaceship->commandSetTarget(NULL);
-                    }
+                if (targets.get())
+                {
+                    // Set the target if we have one now.
+                    my_spaceship->commandSetTarget(targets.get());
                 }
                 else
                 {
-                    // Navigate by turning toward the radar click/tap location.
-                    float target_angle = sf::vector2ToAngle(position - my_spaceship->getPosition());
-                    my_spaceship->commandTargetRotation(target_angle);
-                    steering_wheel->setValue(target_angle);
+                    // Otherwise, deselect target.
+                    my_spaceship->commandSetTarget(NULL);
                 }
             }
         },
-        [this](sf::Vector2f position) {
-            // On tap/click and hold in maneuvering mode, show heading hint and turn toward heading.
-            if (my_spaceship && !this->targeting_mode)
-            {
-                float angle = sf::vector2ToAngle(position - my_spaceship->getPosition());
-                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
-                my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
-            }
-        },
-        [this](sf::Vector2f position) {
-            // On release of tap/click and hold in maneuvering mode, remove heading hint and turn toward heading.
-            if (my_spaceship && !this->targeting_mode)
-            {
-                my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
-            }
-            heading_hint->hide();
-        }
+        [this](sf::Vector2f position) {},
+        [this](sf::Vector2f position) {}
     );
-    radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
-
-    // Heading hint shown on radar on click/tap.
-    heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
-    heading_hint->setAlignment(ACenter)->setSize(0, 0);
+    radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock", "0") == "1");
 
     // Ship stats and combat maneuver at bottom right corner of left panel.
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
@@ -131,7 +100,8 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setSize(240, 40);
 
     // Unlocked missile aim dial and lock controls.
-    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
+    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value)
+    {
         tube_controls->setMissileTargetAngle(value);
     });
     missile_aim->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 340);
@@ -154,10 +124,11 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 
     // Engine layout in top left corner of left panel.
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    engine_layout->setPosition(20, 80, ATopLeft)->setSize(GuiElement::GuiSizeMax, 250);
-    (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
-    warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
-    jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
+    engine_layout->setPosition(255, -80, ABottomCenter)->setSize(200, 240);
+    warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(90, GuiElement::GuiSizeMax);
+    jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(90, GuiElement::GuiSizeMax);
+
+    (new GuiImpulseControls(this, "IMPULSE"))->setPosition(-190, -80, ABottomCenter)->setSize(110, 240);
 
     // Docking, comms, and shields buttons across top.
     (new GuiDockingButton(this, "DOCKING"))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
@@ -170,11 +141,12 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     lock_aim->setPosition(-180, -20, ABottomCenter)->setSize(110, 50);
 
     // Targeting mode toggle; target on radar tap when enabled, navigate when disabled.
-    targeting_mode_button = new GuiButton(this, "TARGETING_MODE", tr("target", "TGT"), [this]()
+    targeting_mode_button = new GuiToggleButton(this, "TARGETING_MODE", tr("target", "TGT"), [this](bool value)
         {
-            this->setTargetingMode(!targeting_mode);
+            this->setTargetingMode(value);
         });
-    targeting_mode_button->setIcon("gui/icons/station-helm")->setPosition(180, -20, ABottomCenter)->setSize(110, 50);
+    targeting_mode_button->setValue(targeting_mode)->setIcon("gui/icons/station-weapons")->setPosition(180, -20, ABottomCenter)->setSize(110, 50);
+    setTargetingMode(targeting_mode);
 
     (new GuiCustomShipFunctions(this, singlePilot, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
@@ -492,13 +464,8 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
 
 void SinglePilotScreen::setTargetingMode(bool new_mode)
 {
-    if (targeting_mode != new_mode)
-    {
-        targeting_mode = new_mode;
-        steering_wheel->setVisible(targeting_mode);
-        view_state = targeting_mode ? SPV_Target : SPV_Forward;
-
-        targeting_mode_button->setText(targeting_mode ? tr("target", "TGT") : tr("maneuver", "MOV"));
-        targeting_mode_button->setIcon(targeting_mode ? "gui/icons/station-weapons" : "gui/icons/station-helm");
-    }
+    // Toggle target camera mode.
+    targeting_mode = new_mode;
+    targeting_mode_button->setValue(targeting_mode);
+    view_state = targeting_mode ? SPV_Target : SPV_Forward;
 }

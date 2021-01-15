@@ -13,7 +13,6 @@ class GuiToggleButton;
 class GuiRotationDial;
 class GuiCombatManeuver;
 class GuiLabel;
-class GuiButton;
 class GuiImage;
 
 class SinglePilotScreen : public GuiOverlay
@@ -38,7 +37,6 @@ private:
     GuiKeyValueDisplay* shields_display;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
-    GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
 
     TargetsContainer targets;
@@ -50,7 +48,7 @@ private:
     GuiMissileTubeControls* tube_controls;
     GuiToggleButton* lock_aim;
     bool targeting_mode;
-    GuiButton* targeting_mode_button;
+    GuiToggleButton* targeting_mode_button;
 public:
     SinglePilotScreen(GuiContainer* owner);
 
