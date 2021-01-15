@@ -204,31 +204,21 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
                 target_camera_yaw += 90;
                 break;
             }
-            case SPV_Target:
-            {
-                // Don't allow target tracking mode in first person.
-                // It's not very useful and makes it difficult to tell if your ship is rotating.
-                if (first_person)
-                {
-                    view_state = SPV_Forward;
-                }
-                else
-                {
-                    // Point camera at target.
-                    P<SpaceObject> target_ship = my_spaceship->getTarget();
-
-                    if (target_ship)
-                    {
-                        sf::Vector2f target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();
-                        target_camera_yaw = sf::vector2ToAngle(target_camera_diff) + 180;
-                    }
-                }
-
-                break;
-            }
             default:
             {
                 break;
+            }
+        }
+
+        if (targeting_mode)
+        {
+            // Point camera at target.
+            P<SpaceObject> target_ship = my_spaceship->getTarget();
+
+            if (target_ship)
+            {
+                sf::Vector2f target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();
+                target_camera_yaw = sf::vector2ToAngle(target_camera_diff) + 180;
             }
         }
 
@@ -463,10 +453,6 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
             {
                 view_state = SPV_Back;
             }
-            else if (key.hotkey == "VIEW_TARGET")
-            {
-                view_state = SPV_Target;
-            }
             else if (key.hotkey == "FIRST_PERSON")
             {
                 first_person = !first_person;
@@ -484,5 +470,4 @@ void SinglePilotScreen::setTargetingMode(bool new_mode)
     // Toggle target camera mode.
     targeting_mode = new_mode;
     targeting_mode_button->setValue(targeting_mode);
-    view_state = targeting_mode ? SPV_Target : SPV_Forward;
 }

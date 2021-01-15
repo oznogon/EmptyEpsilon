@@ -24,11 +24,11 @@ private:
         SPV_Right,
         SPV_Back,
         SPV_Left,
-        SPV_Target
     };
 
     ESinglePilotView view_state;
     bool first_person;
+    bool targeting_mode;
     GuiViewport3D* viewport;
 
     GuiKeyValueDisplay* energy_display;
@@ -49,7 +49,6 @@ private:
     GuiImage* steering_wheel_icon;
     GuiMissileTubeControls* tube_controls;
     GuiToggleButton* lock_aim;
-    bool targeting_mode;
     GuiToggleButton* targeting_mode_button;
 public:
     SinglePilotScreen(GuiContainer* owner);
