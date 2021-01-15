@@ -90,7 +90,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -180, ABottomRight)->setSize(200, 150)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
 
-    GuiAutoLayout* stats = new GuiAutoLayout(this, "STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
+    stats = new GuiAutoLayout(this, "STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
     stats->setPosition(-20, -20, ABottomRight)->setSize(240, 160);
     energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
@@ -101,6 +101,25 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     shields_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
     shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setSize(240, 40);
 
+    target_stats = new GuiAutoLayout(this, "TARGET_STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
+    target_stats->setPosition(20, 80, ATopLeft)->setSize(240, 160)->hide();
+    target_callsign_display = new GuiKeyValueDisplay(target_stats, "CALLSIGN_DISPLAY", 0.4, tr("Callsign"), "");
+    target_callsign_display->setSize(GuiElement::GuiSizeMax, 30);
+    target_distance_display = new GuiKeyValueDisplay(target_stats, "DISTANCE_DISPLAY", 0.4, tr("Distance"), "");
+    target_distance_display->setSize(GuiElement::GuiSizeMax, 30);
+    target_bearing_display = new GuiKeyValueDisplay(target_stats, "BEARING_DISPLAY", 0.4, tr("Bearing"), "");
+    target_bearing_display->setSize(GuiElement::GuiSizeMax, 30);
+    target_relspeed_display = new GuiKeyValueDisplay(target_stats, "RELATIVE_SPEED_DISPLAY", 0.4, tr("Rel. Speed"), "");
+    target_relspeed_display->setSize(GuiElement::GuiSizeMax, 30);
+    target_faction_display = new GuiKeyValueDisplay(target_stats, "FACTION_DISPLAY", 0.4, tr("Faction"), "");
+    target_faction_display->setSize(GuiElement::GuiSizeMax, 30);
+    target_type_display = new GuiKeyValueDisplay(target_stats, "TYPE_DISPLAY", 0.4, tr("Type"), "");
+    target_type_display->setSize(GuiElement::GuiSizeMax, 30);
+    target_shields_display = new GuiKeyValueDisplay(target_stats, "SCIENCE_SHIELDS", 0.4, tr("science", "Shields"), "");
+    target_shields_display->setSize(GuiElement::GuiSizeMax, 30);
+    target_hull_display = new GuiKeyValueDisplay(target_stats, "SCIENCE_HULL", 0.4, tr("science", "Hull"), "");
+    target_hull_display->setSize(GuiElement::GuiSizeMax, 30);
+
     // Unlocked missile aim dial and lock controls.
     missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value)
     {
@@ -108,6 +127,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     });
     missile_aim->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 340);
 
+    // Heading target rotation dial for maneuvering. A steering wheel!
     steering_wheel = new GuiRotationDial(this, "STEERING_WHEEL", -90, 360 - 90, 0, [this](float value)
     {
         target_rotation = (value - 270.0f) + (view_rotation - 90.0f);
@@ -115,6 +135,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     });
     steering_wheel->setPosition(0, -20, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 300);
 
+    // Icons to distinguish between the two dials.
     missile_aim_icon = new GuiImage(missile_aim, "MISSILE_AIM_ICON", "gui/icons/lock");
     missile_aim_icon->setColor(sf::Color::Red)->setPosition(0, 0, ATopCenter)->setSize(GuiElement::GuiSizeMatchHeight, 20);
 
@@ -126,7 +147,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     tube_controls->setPosition(20, -20, ABottomLeft);
     radar->enableTargetProjections(tube_controls);
 
-    // Engine layout in top left corner of left panel.
+    // Engine controls on either side of the radar.
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
     engine_layout->setPosition(255, -80, ABottomCenter)->setSize(200, 240);
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(90, GuiElement::GuiSizeMax);
@@ -144,7 +165,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(-180, -20, ABottomCenter)->setSize(110, 50);
 
-    // Targeting mode toggle; target on radar tap when enabled, navigate when disabled.
+    // Targeting camera toggle. Camera tracks selected target when enabled.
     targeting_mode_button = new GuiToggleButton(this, "TARGETING_MODE", tr("target", "TGT"), [this](bool value)
         {
             this->setTargetingMode(value);
@@ -160,6 +181,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         steering_wheel->setValue(270.0f + (target_rotation - view_rotation));
     }
 
+    // Display custom GM ship functions on right under station selection/main screen controls.
     (new GuiCustomShipFunctions(this, singlePilot, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
@@ -245,7 +267,7 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         }
 #endif
 
-        // Display first person perspective if enabled.
+        // Display first-person perspective if enabled.
         if (first_person)
         {
             camera_position = targetCameraPosition;
@@ -285,6 +307,104 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
 
         // Indicate our selected target.
         targets.set(my_spaceship->getTarget());
+
+        // Populate target stats.
+        target_callsign_display->setValue("-");
+        target_distance_display->setValue("-");
+        target_bearing_display->setValue("-");
+        target_relspeed_display->setValue("-");
+        target_faction_display->setValue("-");
+        target_type_display->setValue("-");
+        target_shields_display->setValue("-");
+        target_hull_display->setValue("-");
+
+        if (targets.get())
+        {
+            P<SpaceObject> obj = targets.get();
+            P<SpaceShip> ship = obj;
+            P<SpaceStation> station = obj;
+
+            sf::Vector2f position_diff = obj->getPosition() - my_spaceship->getPosition();
+            float distance = sf::length(position_diff);
+            float heading = sf::vector2ToAngle(position_diff) - 270;
+
+            while(heading < 0) heading += 360;
+
+            float rel_velocity = dot(obj->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
+
+            if (fabs(rel_velocity) < 0.01)
+            {
+                rel_velocity = 0.0;
+            }
+
+            target_callsign_display->setValue(obj->getCallSign());
+            target_distance_display->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
+            target_bearing_display->setValue(string(int(heading)));
+            target_relspeed_display->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+
+            // If the target is a ship, show information about the ship based on how
+            // deeply we've scanned it.
+            if (ship)
+            {
+                // On a simple scan or deeper, show the faction, ship type, shields,
+                // hull integrity, and database reference button.
+                if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
+                {
+                    target_faction_display->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
+                    target_type_display->setValue(ship->getTypeName());
+                    target_shields_display->setValue(ship->getShieldDataString());
+                    target_hull_display->setValue(int(ceil(ship->getHull())));
+                }
+            }
+            // If the target isn't a ship, show basic info.
+            else
+            {
+                target_faction_display->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
+
+                // If the target is a station, show basic tactical info.
+                if (station)
+                {
+                    target_type_display->setValue(station->template_name);
+                    target_shields_display->setValue(station->getShieldDataString());
+                    target_hull_display->setValue(int(ceil(station->getHull())));
+                }
+            }
+
+            // Show target info if targeting mode is on.
+            target_stats->setVisible(targeting_mode);
+        }
+        // If the target is a waypoint, show its heading and distance, and our
+        // velocity toward it.
+        else if (targets.getWaypointIndex() >= 0)
+        {
+            sf::Vector2f position_diff = my_spaceship->waypoints[targets.getWaypointIndex()] - my_spaceship->getPosition();
+            float distance = sf::length(position_diff);
+            float heading = sf::vector2ToAngle(position_diff) - 270;
+
+            while (heading < 0)
+            {
+                heading += 360;
+            }
+
+            float rel_velocity = -dot(my_spaceship->getVelocity(), position_diff / distance);
+
+            if (fabs(rel_velocity) < 0.01)
+            {
+                rel_velocity = 0.0;
+            }
+
+            target_distance_display->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
+            target_bearing_display->setValue(string(int(heading)));
+            target_relspeed_display->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+
+            // Show target info if targeting mode is on.
+            target_stats->setVisible(targeting_mode);
+        }
+        else
+        {
+            // Hide target info if no targets are selected.
+            target_stats->hide();
+        }
     }
 
     // Draw the view.
@@ -302,20 +422,26 @@ bool SinglePilotScreen::onJoystickAxis(const AxisAction& axisAction)
                 my_spaceship->commandImpulse(axisAction.value);
                 return true;
             }
+
             if (axisAction.action == "ROTATE")
             {
                 my_spaceship->commandTurnSpeed(axisAction.value);
                 return true;
             }
-            if (axisAction.action == "STRAFE")
+
+            if (my_spaceship->getCanCombatManeuver())
             {
-                my_spaceship->commandCombatManeuverStrafe(axisAction.value);
-                return true;
-            }
-            if (axisAction.action == "BOOST")
-            {
-                my_spaceship->commandCombatManeuverBoost(axisAction.value);
-                return true;
+                if (axisAction.action == "STRAFE")
+                {
+                    my_spaceship->commandCombatManeuverStrafe(axisAction.value);
+                    return true;
+                }
+
+                if (axisAction.action == "BOOST")
+                {
+                    my_spaceship->commandCombatManeuverBoost(axisAction.value);
+                    return true;
+                }
             }
         }
     }
@@ -331,15 +457,15 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
         {
             if (key.hotkey == "TURN_LEFT")
             {
-                float target_angle = my_spaceship->getRotation() - 5.0f;
-                my_spaceship->commandTargetRotation(target_angle);
-                steering_wheel->setValue(target_angle + view_rotation);
+                target_rotation -= 5.0f;
+                my_spaceship->commandTargetRotation(target_rotation);
+                steering_wheel->setValue(target_rotation - view_rotation);
             }
             else if (key.hotkey == "TURN_RIGHT")
             {
-                float target_angle = my_spaceship->getRotation() + 5.0f;
-                my_spaceship->commandTargetRotation(target_angle);
-                steering_wheel->setValue(target_angle + view_rotation);
+                target_rotation += 5.0f;
+                my_spaceship->commandTargetRotation(target_rotation);
+                steering_wheel->setValue(target_rotation - view_rotation);
             }
         }
 

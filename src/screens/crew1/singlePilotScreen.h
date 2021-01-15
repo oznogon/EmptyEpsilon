@@ -14,6 +14,7 @@ class GuiRotationDial;
 class GuiCombatManeuver;
 class GuiLabel;
 class GuiImage;
+class GuiAutoLayout;
 
 class SinglePilotScreen : public GuiOverlay
 {
@@ -31,10 +32,22 @@ private:
     bool targeting_mode;
     GuiViewport3D* viewport;
 
+    GuiAutoLayout* stats;
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
     GuiKeyValueDisplay* velocity_display;
     GuiKeyValueDisplay* shields_display;
+
+    GuiAutoLayout* target_stats;
+    GuiKeyValueDisplay* target_callsign_display;
+    GuiKeyValueDisplay* target_distance_display;
+    GuiKeyValueDisplay* target_bearing_display;
+    GuiKeyValueDisplay* target_relspeed_display;
+    GuiKeyValueDisplay* target_faction_display;
+    GuiKeyValueDisplay* target_type_display;
+    GuiKeyValueDisplay* target_shields_display;
+    GuiKeyValueDisplay* target_hull_display;
+
     GuiElement* warp_controls;
     GuiElement* jump_controls;
     GuiCombatManeuver* combat_maneuver;
