@@ -59,7 +59,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     // 5U tactical radar with piloting features.
     radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets);
     radar->setPosition(0, -20, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 300);
-    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
+    radar->setBackgroundAlpha(192)->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
         [this](sf::Vector2f position) {
