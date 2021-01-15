@@ -44,6 +44,8 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 */
     targeting_mode = false;
     first_person = PreferencesManager::get("first_person") == "1" ? true : false;
+    view_rotation = 0.0f;
+    target_rotation = 0.0f;
 
     // Render the 3D viewport across the entire window
     viewport = new GuiViewport3D(this, "3D_VIEW");
@@ -106,8 +108,10 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     });
     missile_aim->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 340);
 
-    steering_wheel = new GuiRotationDial(this, "STEERING_WHEEL", -90, 360 - 90, 0, [this](float value){
-        my_spaceship->commandTargetRotation(value);
+    steering_wheel = new GuiRotationDial(this, "STEERING_WHEEL", -90, 360 - 90, 0, [this](float value)
+    {
+        target_rotation = (value - 270.0f) + (view_rotation - 90.0f);
+        my_spaceship->commandTargetRotation(target_rotation);
     });
     steering_wheel->setPosition(0, -20, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 300);
 
@@ -148,6 +152,14 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     targeting_mode_button->setValue(targeting_mode)->setIcon("gui/icons/station-weapons")->setPosition(180, -20, ABottomCenter)->setSize(110, 50);
     setTargetingMode(targeting_mode);
 
+    // Initialize steering wheel rotation to initial rotation.
+    if (my_spaceship)
+    {
+        view_rotation = radar->getViewRotation();
+        target_rotation = my_spaceship->getRotation();
+        steering_wheel->setValue(270.0f + (target_rotation - view_rotation));
+    }
+
     (new GuiCustomShipFunctions(this, singlePilot, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
@@ -166,7 +178,8 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         jump_controls->setVisible(my_spaceship->has_jump_drive);
 
         // Third-person view settings.
-        float target_camera_yaw = my_spaceship->getRotation();
+        float ship_rotation = my_spaceship->getRotation();
+        float target_camera_yaw = ship_rotation;
         float camera_ship_distance = 420.0f;
         float camera_ship_height = 420.0f;
 
@@ -276,6 +289,10 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         // Set missile aim if tube controls are unlocked.
         missile_aim->setVisible(tube_controls->getManualAim());
 
+        // Rotate steering wheel if radar rotation is enabled.
+        view_rotation = radar->getViewRotation();
+        steering_wheel->setValue(target_rotation - view_rotation);
+
         // Indicate our selected target.
         targets.set(my_spaceship->getTarget());
     }
@@ -326,13 +343,13 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
             {
                 float target_angle = my_spaceship->getRotation() - 5.0f;
                 my_spaceship->commandTargetRotation(target_angle);
-                steering_wheel->setValue(target_angle);
+                steering_wheel->setValue(target_angle + view_rotation);
             }
             else if (key.hotkey == "TURN_RIGHT")
             {
                 float target_angle = my_spaceship->getRotation() + 5.0f;
                 my_spaceship->commandTargetRotation(target_angle);
-                steering_wheel->setValue(target_angle);
+                steering_wheel->setValue(target_angle + view_rotation);
             }
         }
 
@@ -342,7 +359,7 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
             {
                 bool current_found = false;
 
-                for(P<SpaceObject> obj : space_object_list)
+                for (P<SpaceObject> obj : space_object_list)
                 {
                     if (obj == targets.get())
                     {
@@ -358,7 +375,7 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                     }
                 }
 
-                for(P<SpaceObject> obj : space_object_list)
+                for (P<SpaceObject> obj : space_object_list)
                 {
                     if (obj == targets.get())
                     {
