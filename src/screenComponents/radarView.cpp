@@ -29,6 +29,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     show_heading_indicators(false),
     show_game_master_data(false),
     range_indicator_step_size(0.0f),
+    background_alpha(255),
     style(Circular),
     fog_style(NoFogOfWar),
     mouse_down_func(nullptr),
@@ -224,7 +225,7 @@ void GuiRadarView::updateGhostDots()
 
 void GuiRadarView::drawBackground(sf::RenderTarget& window)
 {
-    window.clear(sf::Color(20, 20, 20, 192));
+    window.clear(sf::Color(20, 20, 20, background_alpha));
 }
 
 void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
