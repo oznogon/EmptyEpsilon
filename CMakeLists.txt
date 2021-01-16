@@ -181,6 +181,7 @@ set(SOURCES
 	src/screenComponents/rotatingModelView.cpp
 	src/screenComponents/shipDestroyedPopup.cpp
 	src/screenComponents/warpControls.cpp
+	src/screenComponents/targetInfo.cpp
 	src/screenComponents/targetsContainer.cpp
 	src/screenComponents/globalMessage.cpp
 	src/screenComponents/commsOverlay.cpp
