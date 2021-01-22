@@ -24,7 +24,9 @@ class GuiCustomShipFunctions;
 class ScienceScreen : public GuiOverlay
 {
 public:
+#ifndef __ANDROID__
     GuiOverlay* background_gradient;
+#endif
     GuiOverlay* background_crosses;
 
     GuiElement* radar_view;

@@ -27,8 +27,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 {
     targets.setAllowWaypointSelection();
 
-#ifndef __ANDROID__
     // Render the radar shadow and background decorations.
+#ifndef __ANDROID__
     background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
     background_gradient->setTextureCenter("gui/BackgroundGradientOffset");
 #endif
@@ -112,7 +112,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             {
                 view_mode_selection->setSelectionIndex(1);
                 radar_view->hide();
+#ifndef __ANDROID__
                 background_gradient->hide();
+#endif
                 database_view->show();
             }
         }
@@ -210,7 +212,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // Radar/database view toggle.
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
         radar_view->setVisible(index == 0);
+#ifndef __ANDROID__
         background_gradient->setVisible(index == 0);
+#endif
         database_view->setVisible(index == 1);
     });
     view_mode_selection->setOptions({tr("button", "Radar"), tr("button", "Database")})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
