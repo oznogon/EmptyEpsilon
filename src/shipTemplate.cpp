@@ -99,7 +99,19 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Example: template:addDoor(2, 2, false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
+    /// Set the ship's long-range radar range.
+    /// Requires a float value. 1000.0 = 1U. Default value is 30000.0.
+    /// Passing a value less than the short-range radar range sets the value to
+    /// equal the short-range radar range.
+    /// The value also cannot be less than 100.0.
+    /// Example: template:setLongRangeRadarRange(30000.0)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
+    /// Set the ship's short-range radar range.
+    /// Requires a float value. 1000.0 = 1U. Default value is 5000.0.
+    /// Passing a value greater than the long-range radar range sets the value to
+    /// equal the long-range radar range.
+    /// The value also cannot be less than 100.0.
+    /// Example: template:setShortRangeRadarRange(10000.0)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShortRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setImpulseSoundFile);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanScan);
@@ -487,6 +499,7 @@ void ShipTemplate::setRadarTrace(string trace)
 
 void ShipTemplate::setLongRangeRadarRange(float range)
 {
+    // Logic duplicated from ShipTemplateBasedObject::setLongRangeRadarRange()
     range = std::max(range, 100.0f);
     long_range_radar_range = range;
     short_range_radar_range = std::min(short_range_radar_range, range);
@@ -494,6 +507,7 @@ void ShipTemplate::setLongRangeRadarRange(float range)
 
 void ShipTemplate::setShortRangeRadarRange(float range)
 {
+    // Logic duplicated from ShipTemplateBasedObject::setShortRangeRadarRange()
     range = std::max(range, 100.0f);
     short_range_radar_range = range;
     long_range_radar_range = std::max(long_range_radar_range, range);
@@ -551,6 +565,8 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     for(int n=0; n<MW_Count; n++)
         result->weapon_storage[n] = weapon_storage[n];
     result->radar_trace = radar_trace;
+    result->long_range_radar_range = long_range_radar_range;
+    result->short_range_radar_range = short_range_radar_range;
 
     result->rooms = rooms;
     result->doors = doors;

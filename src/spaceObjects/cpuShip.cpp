@@ -265,7 +265,22 @@ std::unordered_map<string, string> CpuShip::getGMInfo()
 
 string CpuShip::getExportLine()
 {
-    string ret = "CpuShip():setFaction(\"" + getFaction() + "\"):setTemplate(\"" + template_name + "\"):setCallSign(\"" + getCallSign() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    string ret = "CpuShip():setFaction(\"" + getFaction() + "\")";
+    ret += ":setTemplate(\"" + template_name + "\")";
+    ret += ":setCallSign(\"" + getCallSign() + "\")";
+    ret += ":setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+
+    // Export radar ranges if they differ from the template's.
+    if (getShortRangeRadarRange() != ship_template->short_range_radar_range)
+    {
+        ret += ":setShortRangeRadarRange(" + string(getShortRangeRadarRange(), 0) + ")";
+    }
+
+    if (getLongRangeRadarRange() != ship_template->long_range_radar_range)
+    {
+        ret += ":setLongRangeRadarRange(" + string(getLongRangeRadarRange(), 0) + ")";
+    }
+
     switch(orders)
     {
     case AI_Idle: break;
@@ -280,6 +295,7 @@ string CpuShip::getExportLine()
     case AI_Attack: ret += ":orderAttack(?)"; break;
     case AI_Dock: ret += ":orderDock(?)"; break;
     }
+
     return ret + getScriptExportModificationsOnTemplate();
 }
 

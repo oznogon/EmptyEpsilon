@@ -35,6 +35,9 @@ public:
 
     ScriptSimpleCallback on_destruction;
     ScriptSimpleCallback on_taking_damage;
+private:
+    float long_range_radar_range;
+    float short_range_radar_range;    
 public:
     ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range=-1);
 
@@ -93,6 +96,12 @@ public:
 
     void setRadarTrace(string trace) { radar_trace = trace; }
     void setImpulseSoundFile(string sound) { impulse_sound_file = sound; }
+
+    // Radar range
+    virtual float getLongRangeRadarRange(){ return long_range_radar_range; }
+    virtual float getShortRangeRadarRange(){ return short_range_radar_range; }
+    virtual void setLongRangeRadarRange(float range);
+    virtual void setShortRangeRadarRange(float range);
 
     bool getSharesEnergyWithDocked() { return shares_energy_with_docked; }
     void setSharesEnergyWithDocked(bool enabled) { shares_energy_with_docked = enabled; }

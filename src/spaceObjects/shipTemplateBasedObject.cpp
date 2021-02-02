@@ -62,6 +62,32 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     /// Are the shields online or not. Currently always returns true except for player ships, as only players can turn off shields.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldsActive);
 
+    /// Get the ship's long-range radar range. Primarily used for
+    /// PlayerSpaceship Science radar ranges.
+    /// Returns a float value. 1000.0 = 1U.
+    /// Example: local radar_range = ship:getLongRangeRadarRange()
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getLongRangeRadarRange);
+    /// Get the ship's short-range radar range. Primarily used for shared radar
+    /// visibility from friendly ships on Relay radar, and for PlayerSpaceship
+    /// radar ranges.
+    /// Returns a float value. 1000.0 = 1U.
+    /// Example: local radar_range = ship:getShortRangeRadarRange()
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShortRangeRadarRange);
+    /// Set the ship's long-range radar range.
+    /// Requires a float value. 1000.0 = 1U. Default value is 30000.0.
+    /// Passing a value less than the short-range radar range sets the value to
+    /// equal the short-range radar range.
+    /// The value also cannot be less than 100.0.
+    /// Example: ship:setLongRangeRadarRange(30000.0)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setLongRangeRadarRange);
+    /// Set the ship's short-range radar range.
+    /// Requires a float value. 1000.0 = 1U. Default value is 5000.0.
+    /// Passing a value greater than the long-range radar range sets the value to
+    /// equal the long-range radar range.
+    /// The value also cannot be less than 100.0.
+    /// Example: ship:setShortRangeRadarRange(10000.0)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShortRangeRadarRange);
+
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getSharesEnergyWithDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setSharesEnergyWithDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRepairDocked);
@@ -109,6 +135,9 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     }
     hull_strength = hull_max = 100.0;
 
+    long_range_radar_range = 30000.0f;
+    short_range_radar_range = 5000.0f;
+
     registerMemberReplication(&template_name);
     registerMemberReplication(&type_name);
     registerMemberReplication(&shield_count);
@@ -120,6 +149,8 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     }
     registerMemberReplication(&radar_trace);
     registerMemberReplication(&impulse_sound_file);
+    registerMemberReplication(&long_range_radar_range, 0.5);
+    registerMemberReplication(&short_range_radar_range, 0.5);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
 
@@ -263,6 +294,20 @@ std::unordered_map<string, string> ShipTemplateBasedObject::getGMInfo()
         ret["Shield" + string(n + 1)] = string(shield_level[n]) + "/" + string(shield_max[n]);
     }
     return ret;
+}
+
+void ShipTemplateBasedObject::setLongRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    long_range_radar_range = range;
+    short_range_radar_range = std::min(short_range_radar_range, range);
+}
+
+void ShipTemplateBasedObject::setShortRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    short_range_radar_range = range;
+    long_range_radar_range = std::max(long_range_radar_range, range);
 }
 
 bool ShipTemplateBasedObject::hasShield()
