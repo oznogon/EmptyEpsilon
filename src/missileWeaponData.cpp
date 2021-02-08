@@ -22,7 +22,45 @@ const MissileWeaponData& MissileWeaponData::getDataFor(EMissileWeapons type)
     return missile_data[type];
 }
 
-#ifndef _MSC_VER
-// MFC: GCC does proper external template instantiation, VC++ doesn't.
+string getMissileSizeString(EMissileSizes size)
+{
+    switch (size)
+    {
+        case MS_Small:
+            return "small";
+        case MS_Medium:
+            return "medium";
+        case MS_Large:
+            return "large";
+        default:
+            return "unknown size:" + size;
+    }
+}
+
+const float MissileWeaponData::convertSizeToCategoryModifier(EMissileSizes size)
+{
+    switch(size)
+    {
+        case MS_Small:
+            return 0.5;
+        case MS_Medium:
+            return 1.0;
+        case MS_Large:
+            return 2.0;
+        default:
+            return 1.0;
+    }
+}
+
+const EMissileSizes MissileWeaponData::convertCategoryModifierToSize(float size)
+{
+    if (std::abs(size - 0.5) < 0.1)
+        return MS_Small;
+    if (std::abs(size - 1.0) < 0.1)
+        return MS_Medium;
+    if (std::abs(size - 2.0) < 0.1)
+        return MS_Large;
+    return MS_Medium;
+}
+
 #include "missileWeaponData.hpp"
-#endif

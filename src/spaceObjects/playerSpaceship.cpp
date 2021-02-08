@@ -1,6 +1,5 @@
 #include "playerSpaceship.h"
 #include "gui/colorConfig.h"
-#include "scanProbe.h"
 #include "repairCrew.h"
 #include "explosionEffect.h"
 #include "gameGlobalInfo.h"
@@ -12,28 +11,28 @@
 // PlayerSpaceship are ships controlled by a player crew.
 REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
 {
-    // Returns the sf::Vector2f of a specific waypoint set by this ship.
-    // Takes the index of the waypoint as its parameter.
+    /// Returns the sf::Vector2f of a specific waypoint set by this ship.
+    /// Takes the index of the waypoint as its parameter.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypoint);
-    // Returns the total number of this ship's active waypoints.
+    /// Returns the total number of this ship's active waypoints.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypointCount);
-    // Returns the ship's EAlertLevel.
+    /// Returns the ship's EAlertLevel.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getAlertLevel);
-    // Sets whether this ship's shields are raised or lowered.
-    // Takes a Boolean value.
+    /// Sets whether this ship's shields are raised or lowered.
+    /// Takes a Boolean value.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShieldsActive);
-    // Adds a message to the ship's log. Takes a string as the message and a
-    // sf::Color.
+    /// Adds a message to the ship's log. Takes a string as the message and a
+    /// sf::Color.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addToShipLog);
-    // Move all players connected to this ship to the same stations on a
-    // different PlayerSpaceship. If the target isn't a PlayerSpaceship, this
-    // function does nothing.
-    // This can be used in scenarios to change the crew's ship.
+    /// Move all players connected to this ship to the same stations on a
+    /// different PlayerSpaceship. If the target isn't a PlayerSpaceship, this
+    /// function does nothing.
+    /// This can be used in scenarios to change the crew's ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, transferPlayersToShip);
-    // Transfers only the crew members who fill a specific station to another
-    // PlayerSpaceship.
+    /// Transfers only the crew members who fill a specific station to another
+    /// PlayerSpaceship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, transferPlayersAtPositionToShip);
-    // Returns true if a station is occupied by a player, and false if not.
+    /// Returns true if a station is occupied by a player, and false if not.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, hasPlayerAtPosition);
 
     // Comms functions return Boolean values if true.
@@ -68,7 +67,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessage);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessageWithCallback);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, removeCustom);
-    
+
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTarget);
     /// Gets the name of the target system, instead of the ID
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTargetName);
@@ -87,6 +86,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenOverlay);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandScan);
+    /// Set power of the system to e.g. 1.5 ("150 percent")
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemPowerRequest);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemCoolantRequest);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandDock);
@@ -97,9 +97,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAnswerCommHail);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSendComm);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSendCommPlayer);
-    // Command repair crews to automatically move to damaged subsystems.
-    // Use this command on ships to require less player interaction, especially
-    // when combined with setAutoCoolant/auto_coolant_enabled.
+    /// Command repair crews to automatically move to damaged subsystems.
+    /// is command on ships to require less player interaction, especially
+    /// when combined with setAutoCoolant/auto_coolant_enabled.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAutoRepair);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamSystemTarget);
@@ -111,39 +111,126 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCancelSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLaunchProbe);
+    /// Command the science screen to link to the given ScanProbe object.
+    /// This is equivalent of selecting a probe on Relay and clicking
+    /// "Link to Science".
+    /// Example: player:commandSetScienceLink(probeObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
+    /// Command the science screen to clear its link to any ScanProbe object.
+    /// This is equivalent to clicking "Link to Science" on Relay when a link
+    /// is already active.
+    /// Example: player:commandClearScienceLink()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandClearScienceLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
 
-    // Return the number of Engineering repair crews on the ship.
+    /// Return the number of Engineering repair crews on the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getRepairCrewCount);
-    // Set the total number of Engineering repair crews. If this value is less
-    // than the number of repair crews, this function removes repair crews.
-    // If the value is greater, it adds new repair crews at random locations.
+    /// Set the total number of Engineering repair crews. If this value is less
+    /// than the number of repair crews, this function removes repair crews.
+    /// If the value is greater, it adds new repair crews at random locations.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setRepairCrewCount);
-    // Sets whether automatic coolant distribution is enabled. This sets the
-    // amount of coolant proportionally to the amount of heat in that system.
-    // Use this command on ships to require less player interaction, especially
-    // when combined with commandSetAutoRepair/auto_repair_enabled.
+    /// Sets whether automatic coolant distribution is enabled. This sets the
+    /// amount of coolant proportionally to the amount of heat in that system.
+    /// Use this command on ships to require less player interaction, especially
+    /// when combined with commandSetAutoRepair/auto_repair_enabled.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setAutoCoolant);
-    // Set a password to join the ship.
+    /// Set a password to join the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setControlCode);
-    // Callback when this ship launches a probe.
-    // Returns the launching PlayerSpaceship and launched ScanProbe.
-    // Example: player:onProbeLaunch(trackProbe)
+    /// Callback when this ship launches a probe.
+    /// Passes the launching PlayerSpaceship and launched ScanProbe.
+    /// Example:
+    /// player:onProbeLaunch(function (player, probe)
+    ///     print("Probe " .. probe:getCallSign() .. " launched from ship " .. player:getCallSign())
+    /// end)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
+    /// Callback when this ship links a probe to the Science screen.
+    /// Passes the PlayerShip and linked ScanProbe.
+    /// Example:
+    /// player:onProbeLink(function (player, probe)
+    ///     print("Probe " .. probe:getCallSign() .. " linked to Science on ship " .. player:getCallSign())
+    /// end)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLink);
+    /// Callback when this ship unlinks a probe on the Science screen.
+    /// Passes the PlayerShip and previously linked ScanProbe.
+    /// Does _not_ fire when the probe is destroyed or expires;
+    /// see ScanProbe:onDestruction() and ScanProbe:onExpiration().
+    /// Example:
+    /// player:onProbeUnlink(function (player, probe)
+    ///     print("Probe " .. probe:getCallSign() .. " unlinked from Science on ship " .. player:getCallSign())
+    /// end)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeUnlink);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShortRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShortRangeRadarRange);
+    /// Set whether the object can scan other objects.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanScan(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanScan);
+    /// Get whether the object can scan other objects.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanScan()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanScan);
+    /// Set whether the object can hack other objects.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanHack(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanHack);
+    /// Get whether the object can hack other objects.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanHack()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanHack);
+    /// Set whether the object can dock with other objects.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanDock(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanDock);
+    /// Get whether the object can dock with other objects.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanDock()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanDock);
+    /// Set whether the object can perform combat maneuvers.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanCombatManeuver(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanCombatManeuver);
+    /// Get whether the object can perform combat maneuvers.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanCombatManeuver()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanCombatManeuver);
+    /// Set whether the object can self destruct.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanSelfDestruct(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanSelfDestruct);
+    /// Get whether the object can self destruct.
+    /// This returns false if self destruct size and damage are both 0, even if
+    /// you set setCanSelfDestruct(true).
+    /// Returns a Boolean value.
+    /// Example: ship:getCanSelfDestruct()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanSelfDestruct);
+    /// Set whether the object can launch probes.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanLaunchProbe(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanLaunchProbe);
+    /// Get whether the object can launch probes.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanLaunchProbe()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanLaunchProbe);
+    /// Set the amount of damage done by self destruction.
+    /// Requires a float; the value used is randomized +/- 33%.
+    /// Example: ship:setSelfDestructDamage(150)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setSelfDestructDamage);
+    /// Get the amount of damage done by self destruction.
+    /// Returns a float.
+    /// Example: ship:getSelfDestructDamage()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getSelfDestructDamage);
+    /// Set the size of the explosion created by self destruction.
+    /// Requires a float.
+    /// Example: ship:setSelfDestructSize(1500)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setSelfDestructSize);
+    /// Get the size of the explosion created by self destruction.
+    /// Returns a float.
+    /// Example: ship:getSelfDestructSize()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getSelfDestructSize);
 }
-
-float PlayerSpaceship::system_power_user_factor[] = {
-    /*SYS_Reactor*/     -25.0 * 0.08,
-    /*SYS_BeamWeapons*/   3.0 * 0.08,
-    /*SYS_MissileSystem*/ 1.0 * 0.08,
-    /*SYS_Maneuver*/      2.0 * 0.08,
-    /*SYS_Impulse*/       4.0 * 0.08,
-    /*SYS_Warp*/          5.0 * 0.08,
-    /*SYS_JumpDrive*/     5.0 * 0.08,
-    /*SYS_FrontShield*/   5.0 * 0.08,
-    /*SYS_RearShield*/    5.0 * 0.08,
-};
 
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
 static const int16_t CMD_IMPULSE = 0x0002;
@@ -186,6 +273,7 @@ static const int16_t CMD_ABORT_DOCK = 0x0026;
 static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
+static const int16_t CMD_TURN_SPEED = 0x002A;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -195,6 +283,19 @@ string alertLevelToString(EAlertLevel level)
     case AL_RedAlert: return "RED ALERT";
     case AL_YellowAlert: return "YELLOW ALERT";
     case AL_Normal: return "Normal";
+    default:
+        return "???";
+    }
+}
+
+string alertLevelToLocaleString(EAlertLevel level)
+{
+    // Convert an EAlertLevel to a translated string.
+    switch(level)
+    {
+    case AL_RedAlert: return tr("alert","RED ALERT");
+    case AL_YellowAlert: return tr("alert","YELLOW ALERT");
+    case AL_Normal: return tr("alert","Normal");
     default:
         return "???";
     }
@@ -219,14 +320,7 @@ PlayerSpaceship::PlayerSpaceship()
     auto_repair_enabled = false;
     auto_coolant_enabled = false;
     max_coolant = max_coolant_per_system;
-    activate_self_destruct = false;
-    self_destruct_countdown = 0.0;
-    scanning_delay = 0.0;
-    scanning_complexity = 0;
-    scanning_depth = 0;
-    max_scan_probes = 8;
     scan_probe_stock = max_scan_probes;
-    scan_probe_recharge = 0.0;
     alert_level = AL_Normal;
     shields_active = false;
     control_code = "";
@@ -238,6 +332,12 @@ PlayerSpaceship::PlayerSpaceship()
         setScannedStateForFaction(faction_id, SS_FullScan);
 
     updateMemberReplicationUpdateDelay(&target_rotation, 0.1);
+    registerMemberReplication(&can_scan);
+    registerMemberReplication(&can_hack);
+    registerMemberReplication(&can_dock);
+    registerMemberReplication(&can_combat_maneuver);
+    registerMemberReplication(&can_self_destruct);
+    registerMemberReplication(&can_launch_probe);
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&jump_indicator, 0.5);
     registerMemberReplication(&energy_level, 0.1);
@@ -282,20 +382,23 @@ PlayerSpaceship::PlayerSpaceship()
     }
 
     // Initialize each subsystem to be powered with no coolant or heat.
-    for(int n = 0; n < SYS_COUNT; n++)
+    for(unsigned int n = 0; n < SYS_COUNT; n++)
     {
-        systems[n].health = 1.0;
-        systems[n].power_level = 1.0;
-        systems[n].power_request = 1.0;
-        systems[n].coolant_level = 0.0;
-        systems[n].coolant_level = 0.0;
-        systems[n].heat_level = 0.0;
+        assert(n < default_system_power_factors.size());
+        systems[n].health = 1.0f;
+        systems[n].power_level = 1.0f;
+        systems[n].power_request = 1.0f;
+        systems[n].coolant_level = 0.0f;
+        systems[n].coolant_level = 0.0f;
+        systems[n].heat_level = 0.0f;
+        systems[n].power_factor = default_system_power_factors[n];
 
         registerMemberReplication(&systems[n].power_level);
         registerMemberReplication(&systems[n].power_request);
         registerMemberReplication(&systems[n].coolant_level);
         registerMemberReplication(&systems[n].coolant_request);
         registerMemberReplication(&systems[n].heat_level, 1.0);
+        registerMemberReplication(&systems[n].power_factor);
     }
 
     if (game_server)
@@ -304,15 +407,16 @@ PlayerSpaceship::PlayerSpaceship()
         {
             destroy();
         }
+
+        // Initialize the ship's log.
+        addToShipLog(tr("shiplog", "Start of log"), colorConfig.log_generic);
     }
 
     // Initialize player ship callsigns with a "PL" designation.
     setCallSign("PL" + string(getMultiplayerId()));
-
-    // Initialize the ship's log.
-    addToShipLog("Start of log", colorConfig.log_generic);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 PlayerSpaceship::~PlayerSpaceship()
 {
 }
@@ -512,7 +616,7 @@ void PlayerSpaceship::update(float delta)
         {
             // If warping, consume energy at a rate of 120% the warp request.
             // If shields are up, that rate is increased by an additional 50%.
-            if (!useEnergy(energy_warp_per_second * delta * powf(warp_request, 1.2f) * (shields_active ? 1.5 : 1.0)))
+            if (!useEnergy(energy_warp_per_second * delta * getSystemEffectiveness(SYS_Warp) * powf(current_warp, 1.2f) * (shields_active ? 1.5 : 1.0)))
                 // If there's not enough energy, fall out of warp.
                 warp_request = 0;
         }
@@ -556,20 +660,20 @@ void PlayerSpaceship::update(float delta)
                 // If the countdown has started, tick the clock.
                 self_destruct_countdown -= delta;
 
-                // When time runs out, blow up the ship and damage a 1.5U
-                // radius.
+                // When time runs out, blow up the ship and damage a
+                // configurable radius.
                 if (self_destruct_countdown <= 0.0)
                 {
                     for(int n = 0; n < 5; n++)
                     {
                         ExplosionEffect* e = new ExplosionEffect();
-                        e->setSize(1000.0f);
-                        e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
+                        e->setSize(self_destruct_size * 0.67f);
+                        e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, self_destruct_size * 0.33f)), random(0, 360)));
                         e->setRadarSignatureInfo(0.0, 0.6, 0.6);
                     }
 
                     DamageInfo info(this, DT_Kinetic, getPosition());
-                    SpaceObject::damageArea(getPosition(), 1500, 100, 200, info, 0.0);
+                    SpaceObject::damageArea(getPosition(), self_destruct_size, self_destruct_damage - (self_destruct_damage / 3.0f), self_destruct_damage + (self_destruct_damage / 3.0f), info, 0.0);
 
                     destroy();
                     return;
@@ -632,6 +736,19 @@ void PlayerSpaceship::applyTemplateValues()
     // Set the ship's number of repair crews in Engineering from the ship's
     // template.
     setRepairCrewCount(ship_template->repair_crew_count);
+
+    // Set the ship's capabilities.
+    can_scan = ship_template->can_scan;
+    can_hack = ship_template->can_hack;
+    can_dock = ship_template->can_dock;
+    can_combat_maneuver = ship_template->can_combat_maneuver;
+    can_self_destruct = ship_template->can_self_destruct;
+    can_launch_probe = ship_template->can_launch_probe;
+    if (!on_new_player_ship_called)
+    {
+        on_new_player_ship_called = true;
+        gameGlobalInfo->on_new_player_ship.call(P<PlayerSpaceship>(this));
+    }
 }
 
 void PlayerSpaceship::executeJump(float distance)
@@ -709,15 +826,15 @@ void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
             systems[n].coolant_request *= (max_coolant - request) / total_coolant;
         }
     }else{
-        if (total_coolant > 0)
+        for(int n = 0; n < SYS_COUNT; n++)
         {
-            for(int n = 0; n < SYS_COUNT; n++)
-            {
-                if (!hasSystem(ESystem(n))) continue;
-                if (n == system) continue;
+            if (!hasSystem(ESystem(n))) continue;
+            if (n == system) continue;
 
+            if (total_coolant > 0)
                 systems[n].coolant_request = std::min(systems[n].coolant_request * (max_coolant - request) / total_coolant, (float) max_coolant_per_system);
-            }
+            else
+                systems[n].coolant_request = std::min((max_coolant - request) / float(cnt), float(max_coolant_per_system));
         }
     }
 
@@ -781,18 +898,22 @@ float PlayerSpaceship::getNetSystemEnergyUsage()
     // Determine each subsystem's energy draw.
     for(int n = 0; n < SYS_COUNT; n++)
     {
+        
         if (!hasSystem(ESystem(n))) continue;
+
+        const auto& system = systems[n];
         // Factor the subsystem's health into energy generation.
-        if (system_power_user_factor[n] < 0)
+        auto power_user_factor = system.getPowerUserFactor();
+        if (power_user_factor < 0)
         {
             float f = getSystemEffectiveness(ESystem(n));
             if (f > 1.0f)
                 f = (1.0f + f) / 2.0f;
-            net_power -= system_power_user_factor[n] * f;
+            net_power -= power_user_factor * f;
         }
         else
         {
-            net_power -= system_power_user_factor[n] * systems[n].power_level;
+            net_power -= power_user_factor * system.power_level;
         }
     }
 
@@ -826,6 +947,12 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
         crew.update();
     }
 
+    if (ship_template->rooms.size() == 0 && amount != 0)
+    {
+        LOG(WARNING) << "Not adding repair crew to ship \"" << callsign << "\", because it has no rooms. Fix this by adding rooms to the ship template \"" << template_name << "\".";
+        return;
+    }
+
     // Add crews until we reach the provided amount.
     for(int create_amount = amount - crew.size(); create_amount > 0; create_amount--)
     {
@@ -842,7 +969,7 @@ void PlayerSpaceship::addToShipLog(string message, sf::Color color)
         ships_log.erase(ships_log.begin());
 
     // Timestamp a log entry, color it, and add it to the end of the log.
-    ships_log.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color);
+    ships_log.emplace_back(string(gameGlobalInfo->elapsed_time, 1) + string(": "), message, color);
 }
 
 void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)
@@ -1014,7 +1141,7 @@ bool PlayerSpaceship::hailCommsByGM(string target_name)
         return false;
 
     // Log the hail.
-    addToShipLog("Hailed by " + target_name, colorConfig.log_generic);
+    addToShipLog(tr("shiplog", "Hailed by {name}").format({{"name", target_name}}), colorConfig.log_generic);
 
     // Set comms to the hail state and notify Relay/comms.
     comms_state = CS_BeingHailedByGM;
@@ -1052,6 +1179,13 @@ bool PlayerSpaceship::hailByObject(P<SpaceObject> object, string opening_message
     return true;
 }
 
+void PlayerSpaceship::switchCommsToGM()
+{
+    comms_state = CS_ChannelOpenGM;
+    if (comms_incomming_message == "?")
+        comms_incomming_message = "";
+}
+
 void PlayerSpaceship::closeComms()
 {
     // If comms are closed, state it and log it to the ship's log.
@@ -1061,7 +1195,7 @@ void PlayerSpaceship::closeComms()
         {
             P<PlayerSpaceship> player_ship = comms_target;
             player_ship->comms_state = CS_ChannelClosed;
-            player_ship->addToShipLog("Communication channel closed by other side", colorConfig.log_generic);
+            player_ship->addToShipLog(tr("shiplog", "Communication channel closed by other side"), colorConfig.log_generic);
         }
         if (comms_state == CS_OpeningChannel && comms_target)
         {
@@ -1071,11 +1205,11 @@ void PlayerSpaceship::closeComms()
                 if (player_ship->comms_state == CS_BeingHailed && player_ship->comms_target == this)
                 {
                     player_ship->comms_state = CS_Inactive;
-                    player_ship->addToShipLog("Hailing from " + getCallSign() + " stopped", colorConfig.log_generic);
+                    player_ship->addToShipLog(tr("shiplog", "Hailing from {callsign} stopped").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
                 }
             }
         }
-        addToShipLog("Communication channel closed", colorConfig.log_generic);
+        addToShipLog(tr("shiplog", "Communication channel closed"), colorConfig.log_generic);
         if (comms_state == CS_ChannelOpenGM)
             comms_state = CS_ChannelClosed;
         else
@@ -1093,7 +1227,12 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     switch(command)
     {
     case CMD_TARGET_ROTATION:
+        turnSpeed = 0;
         packet >> target_rotation;
+        break;
+    case CMD_TURN_SPEED:
+        target_rotation = getRotation();
+        packet >> turnSpeed;
         break;
     case CMD_IMPULSE:
         packet >> impulse_request;
@@ -1187,7 +1326,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SCAN_DONE:
         if (scanning_target && scanning_complexity > 0)
         {
-            scanning_target->scannedBy(this);
+            if (scanning_complexity == scanning_target->scanningComplexity(this) && scanning_depth == scanning_target->scanningChannelDepth(this))
+                scanning_target->scannedBy(this);
             scanning_target = nullptr;
         }
         break;
@@ -1240,8 +1380,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 comms_state = CS_OpeningChannel;
                 comms_open_delay = comms_channel_open_time;
                 comms_target_name = comms_target->getCallSign();
-                comms_incomming_message = "Opened comms with " + comms_target_name;
-                addToShipLog("Hailing: " + comms_target_name, colorConfig.log_generic);
+                comms_incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", comms_target_name}});
+                addToShipLog(tr("shiplog", "Hailing: {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
             }else{
                 comms_state = CS_Inactive;
             }
@@ -1264,13 +1404,13 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     comms_state = CS_ChannelOpenPlayer;
                     playerShip->comms_state = CS_ChannelOpenPlayer;
 
-                    comms_incomming_message = "Opened comms to " + playerShip->getCallSign();
-                    playerShip->comms_incomming_message = "Opened comms to " + getCallSign();
-                    addToShipLog("Opened communication channel to " + playerShip->getCallSign(), colorConfig.log_generic);
-                    playerShip->addToShipLog("Opened communication channel to " + getCallSign(), colorConfig.log_generic);
+                    comms_incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", playerShip->getCallSign()}});
+                    playerShip->comms_incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", getCallSign()}});
+                    addToShipLog(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", playerShip->getCallSign()}}), colorConfig.log_generic);
+                    playerShip->addToShipLog(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
                 }else{
-                    addToShipLog("Refused communications from " + playerShip->getCallSign(), colorConfig.log_generic);
-                    playerShip->addToShipLog("Refused communications to " + getCallSign(), colorConfig.log_generic);
+                    addToShipLog(tr("shiplog", "Refused communications from {callsign}").format({{"callsign", playerShip->getCallSign()}}), colorConfig.log_generic);
+                    playerShip->addToShipLog(tr("shiplog", "Refused communications to {callsign}").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
                     comms_state = CS_Inactive;
                     playerShip->comms_state = CS_ChannelFailed;
                 }
@@ -1279,10 +1419,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 {
                     if (!comms_target)
                     {
-                        addToShipLog("Hail suddenly went dead.", colorConfig.log_generic);
+                        addToShipLog(tr("shiplog", "Hail suddenly went dead."), colorConfig.log_generic);
                         comms_state = CS_ChannelBroken;
                     }else{
-                        addToShipLog("Accepted hail from " + comms_target->getCallSign(), colorConfig.log_generic);
+                        addToShipLog(tr("shiplog", "Accepted hail from {callsign}").format({{"callsign", comms_target->getCallSign()}}), colorConfig.log_generic);
                         comms_reply_id.clear();
                         comms_reply_message.clear();
                         if (comms_incomming_message == "")
@@ -1302,7 +1442,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     }
                 }else{
                     if (comms_target)
-                        addToShipLog("Refused hail from " + comms_target->getCallSign(), colorConfig.log_generic);
+                        addToShipLog(tr("shiplog", "Refused hail from {callsign}").format({{"callsign", comms_target->getCallSign()}}), colorConfig.log_generic);
                     comms_state = CS_Inactive;
                 }
             }
@@ -1316,10 +1456,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 comms_state = CS_ChannelOpenGM;
 
-                addToShipLog("Opened communication channel to " + comms_target_name, colorConfig.log_generic);
-                comms_incomming_message = "Opened comms with " + comms_target_name;
+                addToShipLog(tr("shiplog", "Opened communication channel to {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
+                comms_incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", comms_target_name}});
             }else{
-                addToShipLog("Refused hail from " + comms_target_name, colorConfig.log_generic);
+                addToShipLog(tr("shiplog", "Refused hail from {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
                 comms_state = CS_Inactive;
             }
         }
@@ -1500,7 +1640,29 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_SET_SCIENCE_LINK:
         {
+            // Capture previously linked probe, if there is one.
+            P<ScanProbe> old_linked_probe;
+
+            if (linked_science_probe_id != -1)
+            {
+                old_linked_probe = game_server->getObjectById(linked_science_probe_id);
+            }
+
             packet >> linked_science_probe_id;
+
+            if (linked_science_probe_id != -1 && on_probe_link.isSet())
+            {
+                P<ScanProbe> new_linked_probe = game_server->getObjectById(linked_science_probe_id);
+
+                if (new_linked_probe)
+                {
+                    on_probe_link.call(P<PlayerSpaceship>(this), P<ScanProbe>(new_linked_probe));
+                }
+            }
+            else if (linked_science_probe_id == -1 && on_probe_unlink.isSet())
+            {
+                on_probe_unlink.call(P<PlayerSpaceship>(this), P<ScanProbe>(old_linked_probe));
+            }
         }
         break;
     case CMD_HACKING_FINISHED:
@@ -1542,6 +1704,13 @@ void PlayerSpaceship::commandTargetRotation(float target)
 {
     sf::Packet packet;
     packet << CMD_TARGET_ROTATION << target;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandTurnSpeed(float turnSpeed)
+{
+    sf::Packet packet;
+    packet << CMD_TURN_SPEED << turnSpeed;
     sendClientCommand(packet);
 }
 
@@ -1600,15 +1769,15 @@ void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_an
 void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target)
 {
   float targetAngle = 0.0;
-  
+
   if (!target || tubeNumber < 0 || tubeNumber >= getWeaponTubeCount())
     return;
-  
+
   targetAngle = weapon_tube[tubeNumber].calculateFiringSolution(target);
-  
+
   if (targetAngle == std::numeric_limits<float>::infinity())
       targetAngle = getRotation() + weapon_tube[tubeNumber].getDirection();
-    
+
   commandFireTube(tubeNumber, targetAngle);
 }
 
@@ -1846,9 +2015,30 @@ void PlayerSpaceship::commandCustomFunction(string name)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetScienceLink(int32_t id){
+void PlayerSpaceship::commandSetScienceLink(P<ScanProbe> probe)
+{
     sf::Packet packet;
-    packet << CMD_SET_SCIENCE_LINK << id;
+
+    // Pass the probe's multiplayer ID if the probe isn't nullptr.
+    if (probe)
+    {
+        packet << CMD_SET_SCIENCE_LINK;
+        packet << probe->getMultiplayerId();
+        sendClientCommand(packet);
+    }
+    // Otherwise, it's invalid. Warn and do nothing.
+    else
+    {
+        LOG(WARNING) << "commandSetScienceLink received a null or invalid ScanProbe, so no command was sent.";
+    }
+}
+
+void PlayerSpaceship::commandClearScienceLink()
+{
+    sf::Packet packet;
+
+    packet << CMD_SET_SCIENCE_LINK;
+    packet << int32_t(-1);
     sendClientCommand(packet);
 }
 
@@ -1864,7 +2054,7 @@ void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
             ECrewPosition position;
             string sound_name;
             packet >> position >> sound_name;
-            if ((position == max_crew_positions && my_player_info->isMainScreen()) || my_player_info->crew_position[position])
+            if ((position == max_crew_positions && my_player_info->main_screen) || (position < sizeof(my_player_info->crew_position) && my_player_info->crew_position[position]))
             {
                 soundManager->playSound(sound_name);
             }
@@ -1873,21 +2063,27 @@ void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
     }
 }
 
-void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
-    SpaceShip::drawOnGMRadar(window, position, scale, long_range);
+    SpaceShip::drawOnGMRadar(window, position, scale, rotation, long_range);
+
     if (long_range)
     {
-        sf::CircleShape radar_radius(gameGlobalInfo->long_range_radar_range * scale);
-        radar_radius.setOrigin(gameGlobalInfo->long_range_radar_range * scale, gameGlobalInfo->long_range_radar_range * scale);
+        float long_radar_indicator_radius = getLongRangeRadarRange() * scale;
+        float short_radar_indicator_radius = getShortRangeRadarRange() * scale;
+
+        // Draw long-range radar radius indicator
+        sf::CircleShape radar_radius(long_radar_indicator_radius);
+        radar_radius.setOrigin(long_radar_indicator_radius, long_radar_indicator_radius);
         radar_radius.setPosition(position);
         radar_radius.setFillColor(sf::Color::Transparent);
         radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
         radar_radius.setOutlineThickness(3.0);
         window.draw(radar_radius);
 
-        sf::CircleShape short_radar_radius(5000 * scale);
-        short_radar_radius.setOrigin(5000 * scale, 5000 * scale);
+        // Draw short-range radar radius indicator
+        sf::CircleShape short_radar_radius(short_radar_indicator_radius);
+        short_radar_radius.setOrigin(short_radar_indicator_radius, short_radar_indicator_radius);
         short_radar_radius.setPosition(position);
         short_radar_radius.setFillColor(sf::Color::Transparent);
         short_radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
@@ -1898,7 +2094,45 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
 
 string PlayerSpaceship::getExportLine()
 {
-    return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();;
+    string result = "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();
+    if (getShortRangeRadarRange() != ship_template->short_range_radar_range)
+        result += ":setShortRangeRadarRange(" + string(getShortRangeRadarRange(), 0) + ")";
+    if (getLongRangeRadarRange() != ship_template->long_range_radar_range)
+        result += ":setLongRangeRadarRange(" + string(getLongRangeRadarRange(), 0) + ")";
+    if (can_scan != ship_template->can_scan)
+        result += ":setCanScan(" + string(can_scan, true) + ")";
+    if (can_hack != ship_template->can_hack)
+        result += ":setCanHack(" + string(can_hack, true) + ")";
+    if (can_dock != ship_template->can_dock)
+        result += ":setCanDock(" + string(can_dock, true) + ")";
+    if (can_combat_maneuver != ship_template->can_combat_maneuver)
+        result += ":setCanCombatManeuver(" + string(can_combat_maneuver, true) + ")";
+    if (can_self_destruct != ship_template->can_self_destruct)
+        result += ":setCanSelfDestruct(" + string(can_self_destruct, true) + ")";
+    if (can_launch_probe != ship_template->can_launch_probe)
+        result += ":setCanLaunchProbe(" + string(can_launch_probe, true) + ")";
+    if (auto_coolant_enabled)
+        result += ":setAutoCoolant(true)";
+    if (auto_repair_enabled)
+        result += ":commandSetAutoRepair(true)";
+
+    // Update power factors, only for the systems where it changed.
+    for (unsigned int sys_index = 0; sys_index < SYS_COUNT; ++sys_index)
+    {
+        auto system = static_cast<ESystem>(sys_index);
+        if (hasSystem(system))
+        {
+            assert(sys_index < default_system_power_factors.size());
+            auto default_factor = default_system_power_factors[sys_index];
+            auto current_factor = getSystemPowerFactor(system);
+            auto difference = std::fabs(current_factor - default_factor) > std::numeric_limits<float>::epsilon();
+            if (difference)
+            {
+                result += ":setSystemPowerFactor(" + string(system) + ", " + string(current_factor, 1) + ")";
+            }
+        }
+    }
+    return result;
 }
 
 void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
@@ -1906,6 +2140,14 @@ void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
     this->on_probe_launch = callback;
 }
 
-#ifndef _MSC_VER
+void PlayerSpaceship::onProbeLink(ScriptSimpleCallback callback)
+{
+    this->on_probe_link = callback;
+}
+
+void PlayerSpaceship::onProbeUnlink(ScriptSimpleCallback callback)
+{
+    this->on_probe_unlink = callback;
+}
+
 #include "playerSpaceship.hpp"
-#endif /* _MSC_VER */

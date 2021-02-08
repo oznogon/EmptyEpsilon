@@ -29,7 +29,7 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
     if (rect.height <= 0) return;
     if (rect.width <= 0) return;
     if (!model) return;
-    
+
     window.popGLStates();
 
     float camera_fov = 60.0f;
@@ -80,7 +80,7 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
         {
             sf::Vector3f offset = ee.position * model->scale;
             float r = model->scale * ee.scale * 0.5;
-            
+
             glColor3f(ee.color.x, ee.color.y, ee.color.z);
             glBegin(GL_LINES);
             glVertex3f(offset.x + r, offset.y, offset.z);
@@ -96,7 +96,7 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
         for (const sf::Vector3f& position : model->beam_position)
         {
             sf::Vector3f offset = position * model->scale;
-            
+
             glBegin(GL_LINES);
             glVertex3f(offset.x + r, offset.y, offset.z);
             glVertex3f(offset.x - r, offset.y, offset.z);
@@ -109,7 +109,7 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
         for (const sf::Vector3f& position : model->tube_position)
         {
             sf::Vector3f offset = position * model->scale;
-            
+
             glBegin(GL_LINES);
             glVertex3f(offset.x + r * 3, offset.y, offset.z);
             glVertex3f(offset.x - r, offset.y, offset.z);
@@ -121,7 +121,7 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
         }
 #endif
     }
-    
+
     sf::Shader::bind(NULL);
     glDisable(GL_DEPTH_TEST);
 

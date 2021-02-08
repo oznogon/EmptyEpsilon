@@ -43,8 +43,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Example: local heading = obj:getHeading(0)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getHeading);
     /// Gets this object's directional velocity within 2D space.
-    /// Returns a value in meters/second.
-    /// Example: local velocity = obj:getVelocity()
+    /// Returns a pair of values x, y which are relative x, y coordinates from current position (2D velocity vector).
+    /// Example: local vx, vy = obj:getVelocity()
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getVelocity);
     /// Gets this object's rotational velocity within 2D space.
     /// Returns a value in degrees/second.
@@ -59,6 +59,9 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Gets the name of the faction to which this object belongs.
     /// Example: local faction = obj:getFaction()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFaction);
+    /// Gets the localized name of the faction to which this object belongs, for displaying to the players.
+    /// Example: local faction = obj:getLocaleFaction()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getLocaleFaction);
     /// Sets the faction to which this object belongs, by the faction's index
     /// in the faction list.
     /// Requires the index of a faction in the faction list.
@@ -83,15 +86,30 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Sets the communications script used when this object is hailed.
     /// Accepts the filename of a Lua script as a string, or can be set to an
     /// empty string to disable comms with this object.
+    /// In the script, `comms_source` (or `player`, deprecated) (PlayerSpaceship)
+    /// and `comms_target` (SpaceObject) are available.
+    /// Compare `setCommsFunction`.
     /// Examples:
     ///   obj:setCommsScript("")
     ///   obj:setCommsScript("comms_custom_script.lua")
+    /// Defaults:
+    ///   "comms_station.lua" (in `spaceStation.cpp`)
+    ///   "comms_ship.lua" (in `cpuShip.cpp`)
+    /// Call `setCommsMessage` once and `addCommsReply` zero or more times in each dialogue.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsScript);
     /// Defines a callback function to use when handling hails, in lieu of any
     /// current or default comms script.
     /// For a detailed example, see scenario_53_escape.lua.
-    /// Requires the name of a function to call back to when hailed.
+    /// Requires a function to call back to when hailed.
+    /// The globals `comms_source` (PlayerSpaceship)
+    /// and `comms_target` (SpaceObject) are made available in the scenario script.
+    /// (Note: They remain as globals. As usual, such globals are not accessible in required files.)
+    /// Compare `setCommsScript`.
     /// Example: obj:setCommsFunction(commsStation)
+    /// where commsStation is a function
+    /// calling `setCommsMessage` once and `addCommsReply` zero or more times.
+    /// Instead of using the globals, the callback can take two parameters.
+    /// Example: obj:setCommsFunction(function(comms_source, comms_target) ... end)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsFunction);
     /// Set this object's callsign. Objects are assigned random callsigns at
     /// creation; this function overrides that default.
@@ -212,6 +230,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureBiological);
     /// Sets this object's scanning complexity (number of bars in the scanning
     /// minigame) and depth (number of scanning minigames to complete).
+    /// Also clears the scanned state.
     /// Requires two integer values.
     /// Example: obj:setScanningParameters(2, 3)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanningParameters);
@@ -249,6 +268,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Returns a boolean value.
     /// Example: obj:isScannedByFaction("Human Navy")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedByFaction);
+    // Register a callback that is called when this object is destroyed, by any means.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, onDestroyed);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -278,28 +299,29 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerCollisionableReplication(multiplayer_significant_range);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 SpaceObject::~SpaceObject()
 {
 }
 
-#if FEATURE_3D_RENDERING
 void SpaceObject::draw3D()
 {
+#if FEATURE_3D_RENDERING
     model_info.render(getPosition(), getRotation());
-}
 #endif//FEATURE_3D_RENDERING
+}
 
-void SpaceObject::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)
+void SpaceObject::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange)
 {
 }
 
-void SpaceObject::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)
+void SpaceObject::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange)
 {
 }
 
 void SpaceObject::destroy()
 {
-    onDestroyed();
+    on_destroyed.call(P<SpaceObject>(this));
     MultiplayerObject::destroy();
 }
 
@@ -335,9 +357,9 @@ bool SpaceObject::canBeHackedBy(P<SpaceObject> other)
     return false;
 }
 
-std::vector<std::pair<string, float> > SpaceObject::getHackingTargets()
+std::vector<std::pair<ESystem, float> > SpaceObject::getHackingTargets()
 {
-    return std::vector<std::pair<string, float> >();
+    return std::vector<std::pair<ESystem, float> >();
 }
 
 void SpaceObject::hackFinished(P<SpaceObject> source, string target)

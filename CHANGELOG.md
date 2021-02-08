@@ -4,22 +4,238 @@
 
 ### Added
 
-- `ScanProbe:onExpiration`, `ScanProbe:onDestruction`, and
-  `PlayerSpaceship:onProbeLaunch` callback scripting functions.
-- Scan object and cycle selected object hotkeys added to Science.
+- updates in the script reference documentation
+- more variations of the "Adder" ship line and new frigates
+- `getEEVersion()` returns the EE release version
+- mission settings can be read from scripts (like `areBeamShieldFrequenciesUsed()`, etc) #1038
+- german translation
+- `getSectorName()` that can be called without needing a SpaceObject
+- `Zone:getLabel()`
+- `ScanProbe:getLifetime()` and `ScanProbe:setLifeTime()`
+- `CpuShip:orderRetreat()`
+- new AI "evasion" for unarmed transports which tries to avoid enemies
+
+### Changed
+
+- Missiles and nukes explode at the end of their lifetime
+- nukes and EMPs try to avoid areas
+- control code is no longer case sensitive
+- ships without beams will try to restock their missiles when they ran out
+- all transport ships use the new AI "evasion" by default
+
+### Fixed
+
+- aim lock is now working with auto rotate
+- hull strength is rounded up before it is displayed to avoid ships with `0` health #1099
+- hacking difficulty and selected games are stored #1011
+- `BlackHole`s and `WormHole`s no longer affect `Zones`, `Beams` and `ElectricExplosions`
+- scenarios with the same file name as a default scenario don't show up twice #1010
+
+## [2020-08-25]
+
+### Added
+
+- `SpaceShip:hasSystem()`
+- `SpaceShip:getTubeLoadTime()` and `SpaceShip:setTubeLoadTime()
+
+### Fixed
+
+- fix a crash on restarting due to an invalid iterator in the database
+
+
+## [2020-08-07]
+
+### Added
+
+- Script function `commsSwitchToGM()` that allows to switch to a GM chat in comms
+- translations added to ship templates and station names
+- french translation
+- `ShipTemplate::getLocaleName()`
+- Script function `getScenarioTime()` allows to retrieve the game time
+- Science database can be filled and edited from within scenarios. Additional methods have been added to the Lua API
+  - `destroy()` can be used to remove selective entries or the whole pre-filled database from within scenarios
+  - `getScienceDatabases()` returns a table of all databases at the root level.
+  - sub entries can be traversed with `getEntries()` and `getEntryByName()`
+  - key value pairs can be inquired and manipulated through `setKeyValue()`, `getKeyValue()`, `getKeyValues()` and `removeKey`.
+  - `queryScienceDatabase()` allows to easily query for deeply nested entries
+- Science database entries allow to display an image `ScienceDatabase:setImage()`
+  - The image files have to be available on all clients in order to be displayed.
+- more descriptions in the script reference
+- allow to set a callback function when a new player ship is created on the ship selection screen `onNewPlayerShip`
+- `allowNewPlayerShips()` can be used in scenarios to disable ship creation from ship selection screen
+- tube size can be changed by GM
+- GM tweak menu has been updated and is now able to modify much more settings
+- GM can create VisualAsteroid, Planet and Artifact
+- GM can create Player ships
+- GM can limit the maximal health of a system
+- added script functions `SpaceShip:setTubeSize()` and `SpaceShip:getTubeSize()`
+- added the option to set hotkeys to reset system power to 100% or other discrete values
+- added `SpaceShip::getJumpDriveCharge()` and `SpaceShip::setJumpDriveCharge()`
+- added `SpaceShip:getAcceleration()` and `SpaceShip:setAcceleration()`
+- Scenario "Unwanted Visitors" added
+- added `SpaceShip:getDockedWith()`
+- added `SpaceShip:getSystemHackedLevel()` and `SpaceShip:setSystemHackedLevel()`
+- script function `onGMClick()` is capable of capturing GM click locations
+- new file `ee.lua` that has constants for the most enums
+- ships can repair and restock missiles on docked ships (`setRepairDocked()`, `setRestocksMissilesDocked()`)
+
+
+### Changed
+
+- Science database entries are sorted alphabetically.
+- Minimum MacOS compatibility version has been set to `10.10`
+- scrollbars are hidden if all text fits on screen
+- layout of the science database was changed
+- `local` is used more in all lua scripts
+- the last selected scenario is pre-selected when exiting a scenario
+- assets from `HOME` directory are read before `RESOURCE_BASE_DIR`
+- missiles can not be fired during warp
+- radar rotation option is also used by operations and single pilot
+
+### Fixed
+
+- _Ready_ button can no longer be clicked without having a ship selected
+- Translations with context are no longer ignored #879
+- calculate energy drain of the warp drive by its actual speed
+- it is no longer possible to warp instantly out of a backwards movement
+- entered IP addresses in the server browse menu are stripped of whitepaces
+- fixed misplacement of the red/yellow alert overlay on split screen #902
+- the `util_random_transports.lua` now selects all possible transports
+- planets generate valid lua code again when exporting
+- GM messages are deleted on mission resets
+- `WormHole::onTeleportation()` is called for all SpaceObjects, not just ships
+- Wormhole effect is no longer visible after exiting the wormHole
+- beam positions for `battleship_destroyer_5_upgraded` fixed
+
+
+## [2020-04-09]
+
+### Added
+
+- Options menu settings to allow radar views on Helms, Weapons, and Science stations (and their derivative crew 3/4 stations) to rotate around the player ship, instead of the ship rotating within the radar view.
+- Adjustable and customizable impulse engine sounds.
+  - Options menu settings for enabling impulse engine sounds across all stations, main screen only, or disabled, as well as setting its volume separate from master sound and music.
+  - `setImpulseSoundFile()` ship template function to set a custom engine sound.
+  - Default impulse sound moved from `resources/engine.wav` to `resources/sfx/engine.wav`.
+  - New engine sound for the MP52 Hornet.
+- Power Management station keybindings, sharing Engineering's.
+- `SpaceShip::setWarpSpeed()` scripting function to set a ship's speed per warp level.
+- Optional control code for the Spectate station.
+- Translation markers added to many more game features, including player stations and weapon names.
+- Custom functions added to Ship Log screen.
+- `autoconnect_address` option to specify a server to autoconnect to, instead of relying on server autodiscovery.
+- Toggleable player ship capabilities in ship templates, scripting, and the GM tweak menu: scanning (`canScan()`), hacking (`canHack()`), docking (`canDock()`), combat maneuvering (`canCombatManeuver()`), self destruction (`canSelfDestruct()`), and probe launching (`canLaunchProbe()`)
+- `set` and `getSelfDestructDamage` and `SelfDestructSize` scripting functions to modify player ship self-destruction explosion size and damage.
+- Probe radar radius is now visible on the GM screen.
+- Mission clock on Relay and GM screens counts up from 0 seconds at the start of each scenario. Ship's Log UI is now also synchronized to this clock for consistency.
+- `SpaceObject::onDestroyed()` callback when an object is destroyed, even if not by damage.
+
+### Changed
+
+- Reducing coolant in a system distributes it automatically to other systems, even if they are all empty.
+- Warp drive energy usage scales to system damage and power level.
+- Options menu is paginated to accommodate additional options.
+- Black holes do even more damage closer to their center; more objects sucked into a black hole should be destroyed by damage and trigger the appropriate callback.
+- Borderline Fever scenario refactoring
+  - Added expedite dock function to Relay, added show player ship details on player console, added enemy behavior change option, reorganized GM buttons, GM buttons to display player ship details, take advantage of resizable asteroids by randomly resizing them, Added cartography office to relay for stations when docked, added possibility to revive repair crew, added possibility to recover lost coolant, handle rare nil case for angle of attack, reduce average size of warp jammer range
+- Delta Quadrant Patrol Duty scenario refactoring
+  - Add status summary to relay screen, Localize variables, Take advantage of resizable asteroids through randomization, fix beam presence recognition code, Add goods randomization arrays, Add list of player ship names for Crucible and Maverick as well as set up code, fix check for warp drive presence on player ship, fix placement of station Research-19, Change station Maverick to Malthus, Switch to placing station data in comms_data structure, fix transport handling, Add cartography office, fix Kojak mission, remove old diagnostic code, simplify freighter cargo interaction, fix reference to global getLongRangeRadarRange (deprecated), add chance for repair crew to be revived
+- Defender Hunter scenario refactoring
+  - Move constant definitions to their own function, Fix player ship beam determination code, Add goods randomization tables, move station placement function list creation to its own function, localize variables, move station data to comms_data structure, take advantage of resizable asteroids through randomization, add possibility of repair crew revival, add possibility of coolant recovery
+- Escape scenario refactoring
+  - Update goods handling, switch to putting more data in comms_data structure for stations, add use case for another set of debris, make asteroids vary in size at random, add freighter communication options, add more junk yard dogs, add more harassing Exuari during repair journey, add Engineering messages when max repairable health reached
+
+### Fixed
+
+- Tutorial no longer crashes when started.
+- Missile tube sizes and HVLI projectiles are properly replicated to clients.
+- Warp/glitch shaders no longer affect paused games.
+- Persistent scripting storage (ie. `ScriptStorage.get()`) is no longer wiped upon load in a new EE instance.
+- Engineering station no longer sometimes crashes while loading.
+- Fixed some situations that could cause crew screens to crash when selecting Main Screen controls on Linux builds.
+- Ship's Log screen no longer overlaps some station selection controls.
+- Destroyed player ships no longer persist and appear multiple times in the ship selection screen.
+- Joystick event handling no longer results in crew stations persisting after a player exits them.
+- When the window is resized, the rendered area no longer shifts out of the window's bounds when warp/jump/glitch effects occur.
+
+## [2020-03-22]
+
+### Added
+
+- Localization functions.
+- Mappable joystick controls.
+- Push-to-talk voice chat using opus.
+  - Server chat is mapped to the Backspace key.
+  - Same-ship crew chat is mapped to the Tilde (~) key.
+- `proxy` and `serverproxy` preferences to run an EmptyEpsilon instance as a
+  proxy or reverse proxy server.
+- `getScriptStorage()` scripting function to access persistent data storage,
+  and `:get()` and `:set()` functions to retrieve and add or modify it.
 - `setColors()` and `getColors()` GUI functions, and R/G/B color profiles, for
   GuiButtons.
 - `SpaceShip:getDynamicRadarSignatureGravity()`, `...Electrical()`, and
   `...Biological()` scripting functions.
+- Shield generator frequency selector to Engineering+.
+- Strategic Map (Relay without comms), Comms Only (Relay without map),
+  and Spectator (GM without editing) stations in the alternative/extras
+  category.
+- GMs can tweak coolant and short/long-range radar range on player ships.
 
 ### Changed
 
-- Moved shield calibration hotkey configs in options.ini from Engineering to
-  Weapons. **This is a breaking change** if these hotkeys are set in
-  options.ini:
+- Long-range radar range (and short-range radar range) are now per-ship
+  settings, rather than server-wide. Long-range radar range option no
+  longer appears on the scenario selection menu.
+  - `get...`, `setLongRangeRadarRange()` and `setShortRangeRadarRange()`
+    scripting functions added to ShipTemplate and PlayerSpaceship.
+- Clients set a username on the main menu, which also appears in the ship
+  selection screen.
+- DB button for targeted ship information appears to the left of the info
+  on the Science and Operations stations.
+- Callsigns appear on the cinematic view.
+- Android always uses landscape mode.
+- Fixes to patrol duty scenario.
+- `instance_name` now also appears in the window title.
+
+### Fixed
+
+- OpenGL crash issue with mesh views.
+- Alignment of touchscreen calibration button text.
+
+## [2020-02-18]
+
+### Added
+
+- `ScanProbe:onExpiration()`, `ScanProbe:onDestruction()`, and
+  `PlayerSpaceship:onProbeLaunch()` callback scripting functions.
+- Scan object (`s`) and cycle objects not yet fully scanned (`c`) hotkeys
+  added to Science and Operations.
+- `Artifact:setSpin()` scripting function.
+- Scripting reference docs for SpaceObjects.
+- Beam frequency and system target selectors added to the Tactical station.
+- `pauseGame()` and `unpauseGame()` scripting functions.
+- `startpaused` option for `headless` servers.
+- A simple Discord bot, located in `/discordbot` within the git repository.
+
+### Changed
+
+- Moved shield calibration hotkey configs in the preferences file from
+  Engineering to Weapons. **This is a breaking change** if these hotkeys
+  are already set in the preferences file:
   - `SHIELD_CAL_INC`
   - `SHIELD_CAL_DEC`
   - `SHIELD_CAL_START`
+- Radar signatures for AI and player ships change dynamically based on
+  ship activity, such as impulse power and jump drive activation.
+
+### Fixed
+
+- `Asteroid:setSize()` now works as expected.
+- Pathfinding objects that start a scenario on the same coordinates are no
+  longer flung millions of units away when the game is unpaused.
+- Hacking settings are now replicated to clients.
+- Raw radar signature waveforms when objects are beyond long-range radar range.
+- `headless` servers no longer attempt to use or require graphics.
 
 ## [2020-01-15]
 

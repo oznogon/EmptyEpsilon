@@ -14,16 +14,16 @@ public:
 
     SupplyDrop();
 
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
     virtual void collide(Collisionable* target, float force) override;
 
-    void setEnergy(float amount); 
+    void setEnergy(float amount);
     void setWeaponStorage(EMissileWeapons weapon, int amount);
 
     void onPickUp(ScriptSimpleCallback callback);
 
-    virtual string getExportLine();
+    virtual string getExportLine() override;
 };
 
 #endif//SUPPLY_DROP_H

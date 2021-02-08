@@ -10,6 +10,8 @@
 /// A mine object. Simple, effective, deadly.
 REGISTER_SCRIPT_SUBCLASS(Mine, SpaceObject)
 {
+  // Get the mine's owner's object.
+  REGISTER_SCRIPT_CLASS_FUNCTION(Mine, getOwner);
   // Set a function that will be called if the mine explodes.
   // First argument is the mine, second argument is the mine's owner/instigator (or nil).
   REGISTER_SCRIPT_CLASS_FUNCTION(Mine, onDestruction);
@@ -26,7 +28,11 @@ Mine::Mine()
     particleTimeout = 0.0;
     setRadarSignatureInfo(0.0, 0.05, 0.0);
 
-    PathPlannerManager::getInstance()->addAvoidObject(this, trigger_range * 1.2f);
+    PathPlannerManager::getInstance()->addAvoidObject(this, blastRange * 1.2f);
+}
+
+Mine::~Mine()
+{
 }
 
 void Mine::draw3D()
@@ -37,7 +43,7 @@ void Mine::draw3DTransparent()
 {
 }
 
-void Mine::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Mine::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite objectSprite;
     textureManager.setTexture(objectSprite, "RadarBlip.png");
@@ -47,7 +53,7 @@ void Mine::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float sc
     window.draw(objectSprite);
 }
 
-void Mine::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Mine::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::CircleShape hitRadius(trigger_range * scale);
     hitRadius.setOrigin(trigger_range * scale, trigger_range * scale);
@@ -130,4 +136,29 @@ void Mine::explode()
 void Mine::onDestruction(ScriptSimpleCallback callback)
 {
     this->on_destruction = callback;
+}
+
+P<SpaceObject> Mine::getOwner()
+{
+    if (game_server)
+    {
+        return owner;
+    }
+
+    LOG(ERROR) << "Mine::getOwner(): owner not replicated to clients.";
+    return nullptr;
+}
+
+std::unordered_map<string, string> Mine::getGMInfo()
+{
+    std::unordered_map<string, string> ret;
+
+    if (owner)
+    {
+        ret["Owner"] = owner->getCallSign();
+    }
+
+    ret["Faction"] = getLocaleFaction();
+
+    return ret;
 }

@@ -2,6 +2,7 @@
 #define BEAM_EFFECT_H
 
 #include "spaceObject.h"
+#include "glObjects.h"
 
 class BeamEffect : public SpaceObject, public Updatable
 {
@@ -12,6 +13,11 @@ class BeamEffect : public SpaceObject, public Updatable
     sf::Vector3f targetOffset;
     sf::Vector2f targetLocation;
     sf::Vector3f hitNormal;
+#if FEATURE_3D_RENDERING
+    static sf::Shader* shader;
+    static uint32_t shaderPositionAttribute;
+    static uint32_t shaderTexCoordsAttribute;
+#endif
 public:
     bool fire_ring;
     string beam_texture;
@@ -37,6 +43,8 @@ public:
     ///Control Duration of the beam. Default is 1 second
     void setDuration(float duration) {this->lifetime = duration;}
     void setRing(bool ring) {this->fire_ring = ring;}
+protected:
+    bool beam_sound_played;
 };
 
 #endif//BEAM_EFFECT_H

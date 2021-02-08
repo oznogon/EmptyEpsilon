@@ -10,7 +10,7 @@ static uint32_t hashSector(uint32_t x, uint32_t y)
 
 static uint32_t positionToSector(float f)
 {
-    return uint32_t(f / small_object_grid_size);
+    return std::lrint(f / small_object_grid_size);
 }
 
 static uint32_t hashPosition(sf::Vector2f position)
@@ -44,7 +44,7 @@ void PathPlannerManager::update(float delta)
             i = big_objects.erase(i);
         }
     }
-    
+
     std::vector<PathPlannerAvoidObject> add_list;
     for(auto h_it = small_objects.begin(); h_it != small_objects.end(); h_it++)
     {
@@ -70,7 +70,8 @@ void PathPlannerManager::update(float delta)
     }
 }
 
-PathPlanner::PathPlanner()
+PathPlanner::PathPlanner(float my_size)
+: my_size(my_size)
 {
     manager = PathPlannerManager::getInstance();
 }
@@ -83,20 +84,20 @@ void PathPlanner::plan(sf::Vector2f start, sf::Vector2f end)
         int recursion_counter = 0;
         recursivePlan(start, end, recursion_counter);
         route.push_back(end);
-        
+
         insert_idx = 0;
         remove_idx = 1;
         remove_idx2 = 1;
     }else{
         route.back() = end;
-        
+
         sf::Vector2f p0 = start;
         if (insert_idx < route.size())
         {
             if (insert_idx > 0)
                 p0 = route[insert_idx - 1];
             sf::Vector2f p1 = route[insert_idx];
-            
+
             sf::Vector2f new_point;
             if (checkToAvoid(p0, p1, new_point))
             {
@@ -173,7 +174,7 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
             if (f > 0 && f < startEndLength - i->size)
             {
                 sf::Vector2f q = start + startEndDiff / startEndLength * f;
-                if ((q - position) < i->size)
+                if ((q - position) < i->size + my_size)
                 {
                     if (f < firstAvoidF)
                     {
@@ -188,9 +189,9 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
             i = manager->big_objects.erase(i);
         }
     }
-    
+
     {
-        // Bresenham's line algorithm to 
+        // Bresenham's line algorithm to
         int x1 = positionToSector(start.x);
         int y1 = positionToSector(start.y);
         int x2 = positionToSector(end.x);
@@ -227,7 +228,7 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
             {
                 hash = hashSector(x, y);
             }
-            
+
             for(std::list<PathPlannerManager::PathPlannerAvoidObject>::iterator i = manager->small_objects[hash].begin(); i != manager->small_objects[hash].end(); )
             {
                 if (i->source)
@@ -237,7 +238,7 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
                     if (f > 0 && f < startEndLength - i->size)
                     {
                         sf::Vector2f q = start + startEndDiff / startEndLength * f;
-                        if ((q - position) < i->size)
+                        if ((q - position) < i->size + my_size)
                         {
                             if (f < firstAvoidF)
                             {
@@ -261,15 +262,15 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
             }
         }
     }
-    
+
     if (firstAvoidF < startEndLength)
     {
         sf::Vector2f position = avoidObject.source->getPosition();
         if (firstAvoidQ.x == position.x && firstAvoidQ.y == position.y)
             firstAvoidQ.x += 0.1f;
-        new_point = position + sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
+        new_point = position + sf::normalize(firstAvoidQ - position) * (avoidObject.size * 1.1f + my_size);
         if (alt_point)
-            *alt_point = position - sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
+            *alt_point = position - sf::normalize(firstAvoidQ - position) * (avoidObject.size * 1.1f + my_size);
         return true;
     }
     return false;

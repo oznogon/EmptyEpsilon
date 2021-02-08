@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "shieldFreqencySelect.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
@@ -19,7 +20,7 @@ GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string i
     new_frequency = new GuiSelector(calibration_row, "", nullptr);
     new_frequency->setSize(120, 50);
 
-    calibrate_button = new GuiButton(calibration_row, "", "Calibrate", [this]() {
+    calibrate_button = new GuiButton(calibration_row, "", tr("shields","Calibrate"), [this]() {
         if (my_spaceship)
             my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());
     });
@@ -44,22 +45,32 @@ void GuiShieldFrequencySelect::onDraw(sf::RenderTarget& window)
 
 void GuiShieldFrequencySelect::onHotkey(const HotkeyResult& key)
 {
-    if (key.category == "ENGINEERING" && my_spaceship)
+    if ((key.category == "ENGINEERING" || key.category == "WEAPONS") && my_spaceship)
     {
         if (key.hotkey == "SHIELD_CAL_INC")
         {
             if (new_frequency->getSelectionIndex() >= new_frequency->entryCount() - 1)
+            {
                 new_frequency->setSelectionIndex(0);
+            }
             else
+            {
                 new_frequency->setSelectionIndex(new_frequency->getSelectionIndex() + 1);
+            }
         }
+
         if (key.hotkey == "SHIELD_CAL_DEC")
         {
             if (new_frequency->getSelectionIndex() <= 0)
+            {
                 new_frequency->setSelectionIndex(new_frequency->entryCount() - 1);
+            }
             else
+            {
                 new_frequency->setSelectionIndex(new_frequency->getSelectionIndex() - 1);
+            }
         }
+
         if (key.hotkey == "SHIELD_CAL_START")
         {
             my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());

@@ -12,7 +12,7 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
 {
     if (!my_spaceship)
         return;
-    
+
     sf::Color color;
     string display_text;
 
@@ -30,36 +30,36 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     if (health <= 0.0)
     {
         color = colorConfig.overlay_damaged;
-        display_text = "DAMAGED";
+        display_text = tr("systems", "DAMAGED");
     }else if ((system == SYS_Warp || system == SYS_JumpDrive) && WarpJammer::isWarpJammed(my_spaceship->getPosition()))
     {
         color = colorConfig.overlay_jammed;
-        display_text = "JAMMED";
+        display_text = tr("systems", "JAMMED");
     }else if (power == 0.0)
     {
         color = colorConfig.overlay_no_power;
-        display_text = "NO POWER";
+        display_text = tr("systems", "NO POWER");
     }else if (my_spaceship->energy_level < 10)
     {
         color = colorConfig.overlay_low_energy;
-        display_text = "LOW ENERGY";
+        display_text = tr("systems", "LOW ENERGY");
     }else if (power < 0.3)
     {
         color = colorConfig.overlay_low_power;
-        display_text = "LOW POWER";
+        display_text = tr("systems", "LOW POWER");
     }else if (heat > 0.90)
     {
         color = colorConfig.overlay_overheating;
-        display_text = "OVERHEATING";
+        display_text = tr("systems", "OVERHEATING");
     }else if (hacked_level > 0.1)
     {
         color = colorConfig.overlay_hacked;
-        display_text = "HACKED";
+        display_text = tr("systems", "HACKED");
     }else{
         return;
     }
     drawStretched(window, rect, "gui/damage_power_overlay", color);
-    
+
     if (rect.height > rect.width)
         drawVerticalText(window, rect, display_text, ACenter, text_size, bold_font, color);
     else
@@ -141,6 +141,6 @@ void GuiPowerDamageIndicator::drawIcon(sf::RenderTarget& window, string icon_nam
     icon.setPosition(icon_position);
     icon.setColor(color);
     window.draw(icon);
-    
+
     icon_position += icon_offset;
 }

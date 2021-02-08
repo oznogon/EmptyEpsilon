@@ -27,18 +27,23 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
-    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
-    hull_display = new GuiKeyValueDisplay(this, "HULL_DISPLAY", 0.45, "Hull", "");
-    hull_display->setIcon("gui/icons/hull")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
-    front_shield_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Front", "");
-    front_shield_display->setIcon("gui/icons/shields-fore")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
-    rear_shield_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Rear", "");
-    rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
-    coolant_display = new GuiKeyValueDisplay(this, "COOLANT_DISPLAY", 0.45, "Coolant", "");
-    coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setPosition(20, 260, ATopLeft)->setSize(240, 40);
 
-    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 20, ATopLeft)->setSize(240, 100);
+    GuiAutoLayout* stats = new GuiAutoLayout(this, "ENGINEER_STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
+    stats->setPosition(20, 100, ATopLeft)->setSize(240, 200);
+
+    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
+    hull_display = new GuiKeyValueDisplay(stats, "HULL_DISPLAY", 0.45, tr("health","Hull"), "");
+    hull_display->setIcon("gui/icons/hull")->setTextSize(20)->setSize(240, 40);
+    front_shield_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("shields", "Front"), "");
+    front_shield_display->setIcon("gui/icons/shields-fore")->setTextSize(20)->setSize(240, 40);
+    rear_shield_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("shields", "Rear"), "");
+    rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setSize(240, 40);
+    coolant_display = new GuiKeyValueDisplay(stats, "COOLANT_DISPLAY", 0.45, tr("total","Coolant"), "");
+    coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setSize(240, 40);
+
+    self_destruct_button = new GuiSelfDestructButton(this, "SELF_DESTRUCT");
+    self_destruct_button->setPosition(20, 20, ATopLeft)->setSize(240, 100)->setVisible(my_spaceship && my_spaceship->getCanSelfDestruct());
 
     GuiElement* system_config_container = new GuiElement(this, "");
     system_config_container->setPosition(0, -20, ABottomCenter)->setSize(750 + 300, GuiElement::GuiSizeMax);
@@ -52,12 +57,14 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.layout = new GuiAutoLayout(system_row_layouts, id, GuiAutoLayout::LayoutHorizontalLeftToRight);
         info.layout->setSize(GuiElement::GuiSizeMax, 50);
 
-        info.button = new GuiToggleButton(info.layout, id + "_SELECT", getSystemName(ESystem(n)), [this, n](bool value){
+        info.button = new GuiToggleButton(info.layout, id + "_SELECT", getLocaleSystemName(ESystem(n)), [this, n](bool value){
             selectSystem(ESystem(n));
         });
         info.button->setSize(300, GuiElement::GuiSizeMax);
         info.damage_bar = new GuiProgressbar(info.layout, id + "_DAMAGE", 0.0, 1.0, 0.0);
         info.damage_bar->setSize(150, GuiElement::GuiSizeMax);
+        info.damage_icon = new GuiImage(info.damage_bar, "", "gui/icons/system_health");
+        info.damage_icon->setColor(colorConfig.overlay_damaged)->setPosition(0, 0, ACenterRight)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
         info.damage_label = new GuiLabel(info.damage_bar, id + "_DAMAGE_LABEL", "...", 20);
         info.damage_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.heat_bar = new GuiProgressbar(info.layout, id + "_HEAT", 0.0, 1.0, 0.0);
@@ -78,6 +85,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.coolant_bar->setColor(sf::Color(32, 128, 128, 128))->setSize(100, GuiElement::GuiSizeMax);
         if (!gameGlobalInfo->use_system_damage){
             info.damage_bar->hide();
+            info.health_max_bar->hide();
             info.heat_bar->setSize(150, GuiElement::GuiSizeMax);
             info.power_bar->setSize(150, GuiElement::GuiSizeMax);
             info.coolant_bar->setSize(150, GuiElement::GuiSizeMax);
@@ -115,9 +123,9 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     system_effects_container->setPosition(0, -400, ABottomRight)->setSize(270, 400);
     GuiPanel* box = new GuiPanel(system_config_container, "POWER_COOLANT_BOX");
     box->setPosition(0, 0, ABottomRight)->setSize(270, 400);
-    power_label = new GuiLabel(box, "POWER_LABEL", "Power", 30);
+    power_label = new GuiLabel(box, "POWER_LABEL", tr("slider", "Power"), 30);
     power_label->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
-    coolant_label = new GuiLabel(box, "COOLANT_LABEL", "Coolant", 30);
+    coolant_label = new GuiLabel(box, "COOLANT_LABEL", tr("slider", "Coolant"), 30);
     coolant_label->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
 
     power_slider = new GuiSlider(box, "POWER_SLIDER", 3.0, 0.0, 1.0, [this](float value) {
@@ -150,7 +158,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
-        //Update the energy usage.
+        // Update the energy usage.
         if (previous_energy_measurement == 0.0)
         {
             previous_energy_level = my_spaceship->energy_level;
@@ -168,19 +176,31 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             }
         }
 
-        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(int(average_energy_delta * 60.0f)) + "/m)");
+        energy_display->setValue(toNearbyIntString(my_spaceship->energy_level) + " (" + tr("{energy}/min").format({{"energy", toNearbyIntString(average_energy_delta * 60.0f)}}) + ")");
         if (my_spaceship->energy_level < 100)
             energy_display->setColor(sf::Color::Red);
         else
             energy_display->setColor(sf::Color::White);
-        hull_display->setValue(string(int(100 * my_spaceship->hull_strength / my_spaceship->hull_max)) + "%");
+        hull_display->setValue(toNearbyIntString(100 * my_spaceship->hull_strength / my_spaceship->hull_max) + "%");
         if (my_spaceship->hull_strength < my_spaceship->hull_max / 4.0f)
             hull_display->setColor(sf::Color::Red);
         else
             hull_display->setColor(sf::Color::White);
         front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
+        if (my_spaceship->hasSystem(SYS_FrontShield))
+        {
+            front_shield_display->show();
+        } else {
+            front_shield_display->hide();
+        }
         rear_shield_display->setValue(string(my_spaceship->getShieldPercentage(1)) + "%");
-        coolant_display->setValue(string(int(my_spaceship->max_coolant * 10)) + "%");
+        if (my_spaceship->hasSystem(SYS_RearShield))
+        {
+            rear_shield_display->show();
+        } else {
+            rear_shield_display->hide();
+        }
+        coolant_display->setValue(toNearbyIntString(my_spaceship->max_coolant * 10) + "%");
 
         for(int n=0; n<SYS_COUNT; n++)
         {
@@ -192,7 +212,12 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 info.damage_bar->setValue(-health)->setColor(sf::Color(128, 32, 32, 192));
             else
                 info.damage_bar->setValue(health)->setColor(sf::Color(64, 128 * health, 64 * health, 192));
-            info.damage_label->setText(string(int(health * 100)) + "%");
+            info.damage_label->setText(toNearbyIntString(health * 100) + "%");
+            float health_max = my_spaceship->systems[n].health_max;
+            if (health_max < 1.0)
+                info.damage_icon->show();
+            else
+                info.damage_icon->hide();
 
             float heat = my_spaceship->systems[n].heat_level;
             info.heat_bar->setValue(heat)->setColor(sf::Color(128, 32 + 96 * (1.0 - heat), 32, 192));
@@ -215,81 +240,83 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
         if (selected_system != SYS_None)
         {
             ShipSystem& system = my_spaceship->systems[selected_system];
-            power_label->setText("Power: " + string(int(system.power_level * 100)) + "%/" + string(int(system.power_request * 100)) + "%");
+            power_label->setText("Power: " + toNearbyIntString(system.power_level * 100) + "%/" + toNearbyIntString(system.power_request * 100) + "%");
             power_slider->setValue(system.power_request);
-            coolant_label->setText("Coolant: " + string(int(system.coolant_level / PlayerSpaceship::max_coolant_per_system * 100)) + "%/" + string(int(std::min(system.coolant_request, my_spaceship->max_coolant) / PlayerSpaceship::max_coolant_per_system * 100)) + "%");
+            coolant_label->setText("Coolant: " + toNearbyIntString(system.coolant_level / PlayerSpaceship::max_coolant_per_system * 100) + "%/" + toNearbyIntString(std::min(system.coolant_request, my_spaceship->max_coolant) / PlayerSpaceship::max_coolant_per_system * 100) + "%");
             coolant_slider->setEnable(!my_spaceship->auto_coolant_enabled);
             coolant_slider->setValue(std::min(system.coolant_request, my_spaceship->max_coolant));
 
             system_effects_index = 0;
             float effectiveness = my_spaceship->getSystemEffectiveness(selected_system);
+            float health_max = my_spaceship->getSystemHealthMax(selected_system);
+            if (health_max < 1.0)
+                addSystemEffect("Maximal health", toNearbyIntString(health_max * 100) + "%");
             switch(selected_system)
             {
             case SYS_Reactor:
                 if (effectiveness > 1.0f)
                     effectiveness = (1.0f + effectiveness) / 2.0f;
-                addSystemEffect("Energy production", string(effectiveness * -PlayerSpaceship::system_power_user_factor[SYS_Reactor] * 60.0, 1) + "/m");
+                addSystemEffect(tr("Energy production"),  tr("{energy}/min").format({{"energy", string(effectiveness * - my_spaceship->getSystemPowerUserFactor(selected_system) * 60.0, 1)}}));
                 break;
             case SYS_BeamWeapons:
-                addSystemEffect("Firing rate", string(int(effectiveness * 100)) + "%");
+                addSystemEffect(tr("Firing rate"), toNearbyIntString(effectiveness * 100) + "%");
                 // If the ship has a turret, also note that the rotation rate
                 // is affected.
                 for(int n = 0; n < max_beam_weapons; n++)
                 {
                     if (my_spaceship->beam_weapons[n].getTurretArc() > 0)
                     {
-                        addSystemEffect("Turret rotation rate", string(int(effectiveness * 100)) + "%");
+                        addSystemEffect("Turret rotation rate", toNearbyIntString(effectiveness * 100) + "%");
                         break;
                     }
                 }
                 break;
             case SYS_MissileSystem:
-                addSystemEffect("Reload rate", string(int(effectiveness * 100)) + "%");
+                addSystemEffect(tr("missile","Reload rate"), toNearbyIntString(effectiveness * 100) + "%");
                 break;
             case SYS_Maneuver:
-                addSystemEffect("Turning speed", string(int(effectiveness * 100)) + "%");
+                addSystemEffect(tr("Turning speed"), toNearbyIntString(effectiveness * 100) + "%");
                 if (my_spaceship->combat_maneuver_boost_speed > 0.0 || my_spaceship->combat_maneuver_strafe_speed)
-                    addSystemEffect("Combat recharge rate", string(int(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100)) + "%");
+                    addSystemEffect(tr("Combat recharge rate"), toNearbyIntString(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100) + "%");
                 break;
             case SYS_Impulse:
-                addSystemEffect("Impulse speed", string(int(effectiveness * 100)) + "%");
+                addSystemEffect(tr("Impulse speed"), toNearbyIntString(effectiveness * 100) + "%");
                 if (my_spaceship->combat_maneuver_boost_speed > 0.0 || my_spaceship->combat_maneuver_strafe_speed)
-                    addSystemEffect("Combat recharge rate", string(int(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100)) + "%");
+                    addSystemEffect(tr("Combat recharge rate"), toNearbyIntString(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100) + "%");
                 break;
             case SYS_Warp:
-                addSystemEffect("Warp drive speed", string(int(effectiveness * 100)) + "%");
+                addSystemEffect(tr("Warp drive speed"), toNearbyIntString(effectiveness * 100) + "%");
                 break;
             case SYS_JumpDrive:
-                addSystemEffect("Jump drive recharge rate", string(int(my_spaceship->getJumpDriveRechargeRate() * 100)) + "%");
-                addSystemEffect("Jump drive jump speed", string(int(effectiveness * 100)) + "%");
+                addSystemEffect(tr("Jump drive recharge rate"), toNearbyIntString(my_spaceship->getJumpDriveRechargeRate() * 100) + "%");
+                addSystemEffect(tr("Jump drive jump speed"), toNearbyIntString(effectiveness * 100) + "%");
                 break;
             case SYS_FrontShield:
                 if (gameGlobalInfo->use_beam_shield_frequencies)
-                    addSystemEffect("Calibration speed", string(int((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0 * 100)) + "%");
-                addSystemEffect("Charge rate", string(int(effectiveness * 100)) + "%");
+                    addSystemEffect(tr("shields","Calibration speed"), toNearbyIntString((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0 * 100) + "%");
+                addSystemEffect(tr("shields","Charge rate"), toNearbyIntString(effectiveness * 100) + "%");
                 {
                     DamageInfo di;
                     di.type = DT_Kinetic;
                     float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, 0);
                     if (damage_negate < 0.0)
-                        addSystemEffect("Extra damage", string(int(-damage_negate * 100)) + "%");
+                        addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
                     else
-                        addSystemEffect("Damage negate", string(int(damage_negate * 100)) + "%");
+                        addSystemEffect(tr("Damage negate"), toNearbyIntString(damage_negate * 100) + "%");
                 }
                 break;
             case SYS_RearShield:
                 if (gameGlobalInfo->use_beam_shield_frequencies)
-                    addSystemEffect("Calibration speed", string(int((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0 * 100)) + "%");
-                addSystemEffect("Charge rate", string(int(effectiveness * 100)) + "%");
+                    addSystemEffect(tr("shields","Calibration speed"), toNearbyIntString((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0 * 100) + "%");
+                addSystemEffect(tr("shields","Charge rate"), toNearbyIntString(effectiveness * 100) + "%");
                 {
                     DamageInfo di;
                     di.type = DT_Kinetic;
-                    float damage_negate = 1.0f - 
-my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
+                    float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
                     if (damage_negate < 0.0)
-                        addSystemEffect("Extra damage", string(int(-damage_negate * 100)) + "%");
+                        addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
                     else
-                        addSystemEffect("Damage negate", string(int(damage_negate * 100)) + "%");
+                        addSystemEffect(tr("Damage negate"), toNearbyIntString(damage_negate * 100) + "%");
                 }
                 break;
             default:
@@ -300,6 +327,39 @@ my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
         }
     }
     GuiOverlay::onDraw(window);
+}
+
+bool EngineeringScreen::onJoystickAxis(const AxisAction& axisAction){
+    if(my_spaceship){
+        if (axisAction.category == "ENGINEERING"){
+            if (selected_system != SYS_None){
+                if (axisAction.action == "POWER" || axisAction.action == std::string("POWER_") + getSystemName(selected_system)){
+                    power_slider->setValue((axisAction.value + 1) * 3.0 / 2.0);
+                    my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                    return true;
+                }
+                if (axisAction.action == "COOLANT" || axisAction.action == std::string("COOLANT_") + getSystemName(selected_system)){
+                    coolant_slider->setValue((axisAction.value + 1) * 10.0 / 2.0);
+                    my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                    return true;
+                }
+            } else {
+                for(int n=0; n<SYS_COUNT; n++)
+                {
+                    ESystem system = ESystem(n);
+                    if (axisAction.action == std::string("POWER_") + getSystemName(system)){
+                        my_spaceship->commandSetSystemPowerRequest(system, (axisAction.value + 1) * 3.0 / 2.0);
+                        return true;
+                    }
+                    if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
+                        my_spaceship->commandSetSystemCoolantRequest(system, (axisAction.value + 1) * 10.0 / 2.0);
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
 }
 
 void EngineeringScreen::onHotkey(const HotkeyResult& key)
@@ -315,9 +375,50 @@ void EngineeringScreen::onHotkey(const HotkeyResult& key)
         if (key.hotkey == "SELECT_JUMP_DRIVE") selectSystem(SYS_JumpDrive);
         if (key.hotkey == "SELECT_FRONT_SHIELDS") selectSystem(SYS_FrontShield);
         if (key.hotkey == "SELECT_REAR_SHIELDS") selectSystem(SYS_RearShield);
-        
+
         if (selected_system != SYS_None)
         {
+            // Note the code duplication with extra/powerManagement
+            if (key.hotkey == "SET_POWER_000")
+            {
+                power_slider->setValue(0.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_030")
+            {
+                power_slider->setValue(0.3f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_050")
+            {
+                power_slider->setValue(0.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_100")
+            {
+                power_slider->setValue(1.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_150")
+            {
+                power_slider->setValue(1.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_200")
+            {
+                power_slider->setValue(2.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_250")
+            {
+                power_slider->setValue(2.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_300")
+            {
+                power_slider->setValue(3.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
             if (key.hotkey == "INCREASE_POWER")
             {
                 power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
@@ -346,7 +447,7 @@ void EngineeringScreen::selectSystem(ESystem system)
 {
     if (my_spaceship && !my_spaceship->hasSystem(system))
         return;
-    
+
     for(int idx=0; idx<SYS_COUNT; idx++)
     {
         system_rows[idx].button->setValue(idx == system);
@@ -364,7 +465,7 @@ void EngineeringScreen::addSystemEffect(string key, string value)
 {
     if (system_effects_index == system_effects.size())
     {
-        GuiKeyValueDisplay* item = new GuiKeyValueDisplay(system_effects_container, "", 0.75, key, value);
+        GuiKeyValueDisplay* item = new GuiKeyValueDisplay(system_effects_container, "", 0.7, key, value);
         item->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 40);
         system_effects.push_back(item);
     }else{
@@ -373,4 +474,9 @@ void EngineeringScreen::addSystemEffect(string key, string value)
         system_effects[system_effects_index]->show();
     }
     system_effects_index++;
+}
+
+string EngineeringScreen::toNearbyIntString(float value)
+{
+    return string(int(nearbyint(value)));
 }

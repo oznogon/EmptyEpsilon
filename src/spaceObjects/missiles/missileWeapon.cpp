@@ -2,6 +2,30 @@
 #include "particleEffect.h"
 #include "spaceObjects/explosionEffect.h"
 
+
+/// Base class for every missile (mines are not missiles)
+/// You cannot create a missile in script with this class, use derived classes
+/// like HomingMissile, HVLI etc.
+REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
+{
+  /// Get the missile's owner's object.
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getOwner);
+  /// Get the missile's target object.
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getTarget);
+  /// Must be an existing target, else does nothing. It does not check if really targetable or not.
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setTarget);
+  /// Lifetime is a number in seconds
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getLifetime);
+  /// Lifetime is a number in seconds
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setLifetime);
+  /// Set the missile size as for tube size.
+  /// Valid sizes: see EMissileSizes
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getMissileSize);
+  /// Get the missile size as for tube size.
+  /// Valid sizes: see EMissileSizes
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setMissileSize);
+}
+
 MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& data)
 : SpaceObject(10, multiplayer_name), data(data)
 {
@@ -9,7 +33,7 @@ MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& d
     target_angle = 0;
     category_modifier = 1;
     lifetime = data.lifetime;
-    
+
     registerMemberReplication(&target_id);
     registerMemberReplication(&target_angle);
     registerMemberReplication(&category_modifier);
@@ -17,13 +41,13 @@ MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& d
     launch_sound_played = false;
 }
 
-void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (long_range) return;
 
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarArrow.png");
-    object_sprite.setRotation(getRotation());
+    object_sprite.setRotation(getRotation()-rotation);
     object_sprite.setPosition(position);
     object_sprite.setColor(data.color);
     object_sprite.setScale(0.25 + 0.25 * category_modifier, 0.25 + 0.25 * category_modifier);
@@ -33,16 +57,16 @@ void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position,
 void MissileWeapon::update(float delta)
 {
     updateMovement();
-    
+
     // Small missiles have a larger speed & rotational speed, large ones are slower and turn less fast
     float size_speed_modifier = 1 / category_modifier;
 
     if (!launch_sound_played)
     {
-        soundManager->playSound(data.fire_sound, getPosition(), 200.0, 1.0, 1.0f + random(-0.2f, 0.2f));
+        soundManager->playSound(data.fire_sound, getPosition(), 400.0, 60.0, 1.0f + random(-0.2f, 0.2f));
         launch_sound_played = true;
     }
-    
+
     // Since we do want the range to remain the same, ensure that slow missiles don't die down as fast.
     lifetime -= delta * size_speed_modifier;
     if (lifetime < 0)
@@ -107,4 +131,75 @@ void MissileWeapon::updateMovement()
         else
             setAngularVelocity(angle_diff * data.turnrate * size_speed_modifier);
     }
+}
+
+P<SpaceObject> MissileWeapon::getOwner()
+{
+    // Owner is assigned by the weapon tube upon firing.
+    if (game_server)
+    {
+        return owner;
+    }
+
+    LOG(ERROR) << "MissileWeapon::getOwner(): owner not replicated to clients.";
+    return nullptr;
+}
+
+P<SpaceObject> MissileWeapon::getTarget()
+{
+    if (game_server)
+        return game_server->getObjectById(target_id);
+    return game_client->getObjectById(target_id);
+}
+
+void MissileWeapon::setTarget(P<SpaceObject> target)
+{
+    if (!target)
+    {
+        return;
+    }
+    target_id = target->getMultiplayerId();
+}
+
+float MissileWeapon::getLifetime()
+{
+    return lifetime;
+}
+
+void MissileWeapon::setLifetime(float lifetime)
+{
+    this->lifetime = lifetime;
+}
+
+EMissileSizes MissileWeapon::getMissileSize()
+{
+    return MissileWeaponData::convertCategoryModifierToSize(category_modifier);
+}
+
+void MissileWeapon::setMissileSize(EMissileSizes missile_size)
+{
+    category_modifier = MissileWeaponData::convertSizeToCategoryModifier(missile_size);
+}
+
+std::unordered_map<string, string> MissileWeapon::getGMInfo()
+{
+    std::unordered_map<string, string> ret;
+
+    if (owner)
+    {
+        ret["Owner"] = owner->getCallSign();
+    }
+
+    P<SpaceObject> target = game_server->getObjectById(target_id);
+
+    if (target)
+    {
+        ret["Target"] = target->getCallSign();
+    }
+
+    ret["Faction"] = getLocaleFaction();
+    ret["Lifetime"] = lifetime;
+    ret["Size"] = getMissileSize();
+
+    return ret;
 }

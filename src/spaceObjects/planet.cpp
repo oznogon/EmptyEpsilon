@@ -1,9 +1,23 @@
+#include <GL/glew.h>
 #include "planet.h"
 #include <SFML/OpenGL.hpp>
 #include "main.h"
 #include "pathPlanner.h"
 
 #include "scriptInterface.h"
+#include "glObjects.h"
+
+#if FEATURE_3D_RENDERING
+sf::Shader* Planet::billboardShader = nullptr;
+uint32_t Planet::billboardShaderPositionAttribute = 0;
+uint32_t Planet::billboardShaderTexCoordsAttribute = 0;
+
+struct VertexAndTexCoords
+{
+    sf::Vector3f vertex;
+    sf::Vector2f texcoords;
+};
+#endif
 
 static Mesh* planet_mesh[16];
 
@@ -116,6 +130,7 @@ Planet::Planet()
     cloud_texture = "";
     atmosphere_texture = "";
     atmosphere_color = sf::Color(0, 0, 0);
+    atmosphere_size = 0;
     distance_from_movement_plane = 0;
     axial_rotation_time = 0.0;
     orbit_target_id = -1;
@@ -138,6 +153,15 @@ Planet::Planet()
     registerMemberReplication(&orbit_target_id);
     registerMemberReplication(&orbit_time);
     registerMemberReplication(&orbit_distance);
+
+#if FEATURE_3D_RENDERING
+    if (!billboardShader && gl::isAvailable())
+    {
+        billboardShader = ShaderManager::getShader("shaders/billboard");
+        billboardShaderPositionAttribute = glGetAttribLocation(billboardShader->getNativeHandle(), "position");
+        billboardShaderTexCoordsAttribute = glGetAttribLocation(billboardShader->getNativeHandle(), "texcoords");
+    }
+#endif
 }
 
 void Planet::setPlanetAtmosphereColor(float r, float g, float b)
@@ -297,24 +321,29 @@ void Planet::draw3DTransparent()
     }
     if (atmosphere_texture != "" && atmosphere_size > 0)
     {
-        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture(atmosphere_texture));
-        sf::Shader::bind(ShaderManager::getShader("billboardShader"));
-        glColor4f(atmosphere_color.r / 255.0f, atmosphere_color.g / 255.0f, atmosphere_color.b / 255.0f, atmosphere_size * 2.0f);
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex3f(0, 0, 0);
-        glTexCoord2f(1, 0);
-        glVertex3f(0, 0, 0);
-        glTexCoord2f(1, 1);
-        glVertex3f(0, 0, 0);
-        glTexCoord2f(0, 1);
-        glVertex3f(0, 0, 0);
-        glEnd();
+        static std::array<VertexAndTexCoords, 4> quad{
+        sf::Vector3f(), {0.f, 0.f},
+        sf::Vector3f(), {1.f, 0.f},
+        sf::Vector3f(), {1.f, 1.f},
+        sf::Vector3f(), {0.f, 1.f}
+        };
+
+        gl::ScopedVertexAttribArray positions(billboardShaderPositionAttribute);
+        gl::ScopedVertexAttribArray texcoords(billboardShaderTexCoordsAttribute);
+
+        billboardShader->setUniform("textureMap", *textureManager.getTexture(atmosphere_texture));
+        billboardShader->setUniform("color", sf::Glsl::Vec4(atmosphere_color.r / 255.0f, atmosphere_color.g / 255.0f, atmosphere_color.b / 255.0f, atmosphere_size * 2.0f));
+        sf::Shader::bind(billboardShader);
+        
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));
+
+        glDrawArrays(GL_QUADS, 0, quad.size());
     }
 }
 #endif
 
-void Planet::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Planet::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (collision_size > 0)
     {
@@ -326,7 +355,7 @@ void Planet::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float 
     }
 }
 
-void Planet::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Planet::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::CircleShape radar_radius(planet_size * scale);
     radar_radius.setOrigin(planet_size * scale, planet_size * scale);
@@ -356,4 +385,24 @@ void Planet::updateCollisionSize()
         setCollisionRadius(collision_size);
         setCollisionPhysics(true, true);
     }
+}
+
+string Planet::getExportLine()
+{
+    string ret="Planet():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + "):setPlanetRadius(" + string(getPlanetRadius(), 0) + ")";
+    if (atmosphere_color.r != 0 || atmosphere_color.g != 0 || atmosphere_color.b != 0)
+    {
+        ret += ":setPlanetAtmosphereColor(" + string(atmosphere_color.r/255.0f) + "," + string(atmosphere_color.g/255.0f) + "," + string(atmosphere_color.b/255.0f) + ")";
+    }
+    if (distance_from_movement_plane!=0)
+    {
+        ret += ":setDistanceFromMovementPlane("  + string(distance_from_movement_plane) + ")";
+    }
+    //TODO setPlanetAtmosphereTexture
+    //TODO setPlanetSurfaceTexture
+    //TODO setPlanetCloudTexture
+    //TODO setPlanetCloudRadius
+    //TODO setAxialRotationTime
+    //TODO setOrbit
+    return ret;
 }
