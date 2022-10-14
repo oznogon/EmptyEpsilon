@@ -799,6 +799,16 @@ void OptionsMenu::setupGraphicsOptions()
         graphics_draw_distance_overlay_label
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
+
+    // Multimonitor toggle.
+    (new GuiToggleButton(graphics_page, "MULTIMONITOR", tr("Multimonitor"),
+        [](bool value)
+        {
+            PreferencesManager::set("multimonitor", value ? "1" : "0");
+        }
+    ))
+        ->setValue(PreferencesManager::get("multimonitor", "1") == "1")
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 }
 
 void OptionsMenu::setupAudioOptions()
