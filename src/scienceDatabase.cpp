@@ -9,34 +9,44 @@
 
 REGISTER_SCRIPT_CLASS(ScienceDatabase)
 {
+    /// Sets an entry's name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setName);
+    /// Returns an entry's name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getName);
-    // Return an entry's unique multiplayer_id.
+    /// Returns an entry's unique multiplayer_id.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getId);
-    // Return an entry's parent's unique multiplayer_id.
+    /// Returns an entry's parent's unique multiplayer_id.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getParentId);
+    /// Adds an entry to the science database with the given name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addEntry);
-    /// returns a child entry by its case-insensitive name
+    /// Returns a child entry by its case-insensitive name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getEntryByName);
-    /// returns a table of all child entries in arbitrary order
+    /// Returns a table of all child entries in arbitrary order.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getEntries);
-    /// returns true if this entry has child entries
+    /// Returns true if this entry has child entries.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, hasEntries);
-    /// add a new key-value pair in the center column of the database
+    /// Adds a new key-value pair in the center column of the database.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addKeyValue);
-    /// if an entry with this key exists already, its value will be changed. If not, the pair is created.
+    /// If an entry with this key exists already, change its value.
+    /// If not, create the key/value pair.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setKeyValue);
-    /// get the value of the key value-pair with the given key. returns empty string when key does not exist.
+    /// Set the value of the key/value pair with the given key.
+    /// Returns an empty string when the key does not exist.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getKeyValue);
-    /// get all the key value pairs as a table. Warning: if there are duplicate keys only appear once with the last value.
+    /// Returns a table containing all key/value pairs.
+    /// Warning: Duplicate keys appear only once, with the last value.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getKeyValues);
-    /// remove all key value pairs with the case-insensitive key value name
+    /// Removes all key/value pairs with the given case-insensitive key/value name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, removeKey);
+    /// Sets an entry's long description, which is displayed when its entry is selected.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setLongDescription);
+    /// Returns an entry's long description.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getLongDescription);
+    /// Sets an entry's image.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setImage);
+    /// Returns an entry's image.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getImage);
-
+    /// Sets an entry's associated ModelData by name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setModelDataName);
 }
 

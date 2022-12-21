@@ -12,19 +12,39 @@
 
 REGISTER_SCRIPT_CLASS(ModelData)
 {
+    /// Sets the model's name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setName);
+    /// Sets the model's mesh by name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setMesh);
+    /// Sets the model's texture by name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setTexture);
+    /// Sets the model's specular map by name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setSpecular);
+    /// Sets the model's illumination map by name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setIllumination);
+    /// Sets the 3D offset by which this model data is rendered.
+    /// Use this to compensate when a model's origin coordinates aren't 0,0.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setRenderOffset);
+    /// Sets the model's uniform scale.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setScale);
+    /// Sets the model's radius for its 2D collision box.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setRadius);
+    /// Sets the origin point for the model's 2D collision box.
+    /// Defaults to 0,0.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setCollisionBox);
-
+    /// Adds an origin point for a beam weapon for 3D views.
+    /// The position_x, _y, and _z coordinates here are equivalent to -X, Y, Z
+    /// respectively when you load the mesh in Blender.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addBeamPosition);
+    /// Adds an origin point for a weapons tube for 3D views.
+    /// The position_x, _y, and _z coordinates here are equivalent to -X, Y, Z
+    /// respectively when you load the mesh in Blender.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addTubePosition);
+    /// Deprecated: Use ModelData:addEngineEmitter().
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addEngineEmitor);
+    /// Adds an origin point for an engine's particle emitter in 3D views.
+    /// The position_x, _y, and _z coordinates here are equivalent to -X, Y, Z
+    /// respectively when you load the mesh in Blender.
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addEngineEmitter);
 }
 

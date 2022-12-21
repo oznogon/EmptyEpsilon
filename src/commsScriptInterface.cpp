@@ -33,12 +33,14 @@ static int commsSwitchToGM(lua_State* L)
 }
 
 /// void setCommsMessage(string message)
-/// Sets the message/reply shown to the comms officer.
+/// Sets the message/reply to send to the comms officer when hailed.
 /// Not setting the message leads to "no reply" (when trying to open comms)
 /// or a dialog with the message "?" (in a reply).
+/// Use in a comms script or callback function; see SpaceObject:setCommsScript()
+/// and SpaceObject:setCommsFunction().
 REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 /// void addCommsReply(string message, ScriptSimpleCallback callback)
-/// Add an reply option for communications.
+/// Adds a reply option to a communications dialogue.
 /// Within the callback function, `comms_source` and `comms_target` are available.
 /// Deprecated: In a CommsScript, `player` can be used for `comms_source`.
 /// (In a CommsFunction, only `comms_source` is provided.)
@@ -46,8 +48,8 @@ REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 /// Example: addCommsReply(message, function(comms_source, comms_target) ... end)
 REGISTER_SCRIPT_FUNCTION(addCommsReply);
 /// void commsSwitchToGM()
-/// Use this function from a communication callback function to switch the current
-/// communication from scripted to a GM based chat.
+/// Switches the current communication from scripted to a GM-based chat.
+/// Use this function from a communication callback function.
 REGISTER_SCRIPT_FUNCTION(commsSwitchToGM);
 
 bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObject> target)

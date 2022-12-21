@@ -5,11 +5,17 @@
 
 REGISTER_SCRIPT_CLASS(FactionInfo)
 {
+    /// Sets the faction's referenced name.
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setName);
+    /// Sets the faction's displayed name.
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setLocaleName);
+    /// Sets the faction's color as it appears on the GM console.
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setGMColor);
+    /// Sets the faction's description in the science database.
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setDescription);
+    /// Toggles whether this faction is hostile to the given faction.
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setEnemy);
+    /// Toggles whether this faction is friendly with the given faction.
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setFriendly);
 }
 
@@ -24,7 +30,7 @@ static int getFactionInfo(lua_State* L)
     return 0;
 }
 /// P<FactionInfo> getFactionInfo(string faction_name)
-/// Get a reference to a FactionInfo object, which can be used to modify faction to faction states.
+/// Returns a reference to a FactionInfo object, which can be used to modify faction to faction states.
 REGISTER_SCRIPT_FUNCTION(getFactionInfo);
 
 
