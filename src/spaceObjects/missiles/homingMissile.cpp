@@ -2,7 +2,8 @@
 #include "particleEffect.h"
 #include "spaceObjects/explosionEffect.h"
 
-/// Homing missile
+/// A homing missile is a nimble missile weapon that pursues a target.
+/// It inherits all functions from its parent MissileWeapon class.
 REGISTER_SCRIPT_SUBCLASS(HomingMissile, MissileWeapon)
 {
   //registered for typeName and creation

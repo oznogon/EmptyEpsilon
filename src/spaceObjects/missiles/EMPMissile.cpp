@@ -3,7 +3,8 @@
 #include "spaceObjects/electricExplosionEffect.h"
 #include "pathPlanner.h"
 
-/// EMP missile
+/// An EMPMissile is an electromagnetic pulse missile that deals damage only to shields.
+/// It inherits all functions from its parent MissileWeapon class.
 REGISTER_SCRIPT_SUBCLASS(EMPMissile, MissileWeapon)
 {
   //registered for typeName and creation

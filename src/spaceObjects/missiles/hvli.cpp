@@ -2,7 +2,9 @@
 #include "particleEffect.h"
 #include "spaceObjects/explosionEffect.h"
 
-/// HVLI missile
+/// An HVLI is a high-velocity lead impactor, a fancy name for a bullet that deals kinetic damage.
+/// Unlike other missile weapons, it has no homing capability.
+/// It inherits all functions from its parent MissileWeapon class.
 REGISTER_SCRIPT_SUBCLASS(HVLI, MissileWeapon)
 {
   //registered for typeName and creation

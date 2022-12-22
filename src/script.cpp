@@ -4,15 +4,19 @@
 #include "script.h"
 #include "resources.h"
 
-/// Object which can be used to create and run another script.
-/// Other scripts have their own lifetime, update and init functions.
-/// Scripts can destroy themselves (destroyScript()), or be destroyed by the main script.
+/// An object that can create and run another script.
+/// Other scripts have their own lifetime, update, and init functions.
+/// Scripts can destroy themselves (destroyScript()) or be destroyed by the main script.
 /// Example: local script = Script():run("script.lua"); script:destroy();
 REGISTER_SCRIPT_CLASS(Script)
 {
-    /// Run a script with a certain filename
+    /// Runs a script with the given filename.
+    /// Loads the localized version if it exists at locale/<filename>.<language>.po.
+    /// Returns true if the resulting SeriousProton ScriptObject was successfully run.
+    /// Example: script = Script():run("script.lua")
     REGISTER_SCRIPT_CLASS_FUNCTION(Script, run);
-    /// Set a global variable in this script instance, this variable can be accessed in the main script.
+    /// Sets a global variable in this script instance.
+    /// This variable can be accessed in the main script.
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptObject, setVariable);
 }
 

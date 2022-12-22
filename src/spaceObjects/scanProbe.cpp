@@ -6,49 +6,50 @@
 
 #include "scriptInterface.h"
 
-/// A scan probe.
+/// A ScanProbe deploys a short-range radar with a limited lifetime at a high speed to a specific point.
+/// It's typically launched by the relay officer and can be linked to the science radar, but can also be created by scripts.
+/// PlayerSpaceships have a limited stock of ScanProbes typically replinished automatically when docked to a SpaceStation.
 REGISTER_SCRIPT_SUBCLASS(ScanProbe, SpaceObject)
 {
-    /// Set the probe's speed. A value of 1000 = 1U/second.
+    /// Sets the probe's speed.
     /// Probes move at a fixed rate of speed and ignore physics.
-    /// Requires a float value. The default vaule is 1000.
+    /// The default value of 1000 = 1U/second.
     /// Example: probe:setSpeed(2000)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setSpeed);
-    /// Get the probe's speed. A value of 1000 = 1U/second.
-    /// Returns a float value.
+    /// Returns the probe's speed.
     /// Example: local speed = probe:getSpeed()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getSpeed);
-    /// Set the probe's remaining lifetime, in seconds.
-    /// The default initial lifetime is 10 minutes.
+    /// Sets the probe's remaining lifetime, in seconds.
+    /// A probe's default initial lifetime is 600 seconds (10 minutes).
     /// Example: probe:setLifetime(60 * 5)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setLifetime);
-    /// Get the probe's remaining lifetime.
+    /// Returns the probe's remaining lifetime.
     /// Example: local lifetime = probe:getLifetime()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getLifetime);
-    /// Set the probe's target coordinates.
+    /// Sets the probe's target coordinates.
+    /// If the probe has already reached a target, ScanProbe:setTarget() will move it again toward the new target coordinates.
     /// Example: probe:setTarget(1000, 5000)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setTarget);
-    /// Get the probe's target coordinates.
+    /// Returns the probe's target coordinates.
     /// Example: local targetX, targetY = probe:getTarget()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getTarget);
-    /// Set the probe's owner SpaceObject.
-    /// Requires a SpaceObject.
+    /// Sets the probe's owner SpaceObject.
     /// Example: probe:setOwner(owner_ship)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setOwner);
-    /// Get the probe's owner SpaceObject.
+    /// Returns the probe's owner SpaceObject.
     /// Example: local owner_ship = probe:getOwner()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getOwner);
-    /// Callback when the probe arrives to its target coordinates.
-    /// Passes the probe and position as arguments to the callback.
-    /// Example: probe:onArrival(probeArrived)
+    /// Defines a function to call when the probe arrives to its target coordinates.
+    /// Passes the probe and position as arguments to the function.
+    /// Example: probe:onArrival(function(this_probe, coords) print("Probe arrived!") end)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onArrival);
-    /// Callback when the probe's lifetime expires.
-    /// Passes the probe as an argument to the callback.
-    /// Example: probe:onExpiration(probeExpired)
+    /// Defines a function to call when the probe's lifetime expires.
+    /// Passes the probe as an argument to the function.
+    /// Example: probe:onExpiration(function(this_probe) print("Probe expired!") end)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onExpiration);
-    /// Callback when the probe is destroyed by damage.
-    /// Passes the probe and instigator as arguments to the callback.
-    /// Example: probe:onDestruction(probeDestroyed)
+    /// Defines a function to call when the probe is destroyed by damage.
+    /// Passes the probe and instigator as arguments to the function.
+    /// Example: probe:onDestruction(function(this_probe, instigator) print("Probe destroyed!") end)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onDestruction);
 }
 

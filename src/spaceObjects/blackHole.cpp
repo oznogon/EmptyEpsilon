@@ -17,8 +17,9 @@ struct VertexAndTexCoords
     glm::vec2 texcoords;
 };
 
-/// A blackhole has a 5km radius where it pulls in all near objects. At the center of the black hole everything gets a lot of damage.
-/// Which will lead to the eventual destruction of said object.
+/// A BlackHole has a 5U radius of gravitational pull affecting all nearby SpaceObjects, including otherwise immoble objects like SpaceStations.
+/// A SpaceObject capable of taking damage is dealt an increasing amount of damage as it approaches the BlackHole's origin point.
+/// A SpaceObject that reaches the center of a BlackHole is instantly destroyed, even if it's incapable of taking damage.
 REGISTER_SCRIPT_SUBCLASS(BlackHole, SpaceObject)
 {
 }

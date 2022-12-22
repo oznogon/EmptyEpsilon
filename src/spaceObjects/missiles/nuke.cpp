@@ -3,7 +3,8 @@
 #include "spaceObjects/explosionEffect.h"
 #include "pathPlanner.h"
 
-/// Nuke missile
+/// A Nuke is a powerful homing missile weapon that deals significant damage to a large radius.
+/// It inherits all functions from its parent MissileWeapon class.
 REGISTER_SCRIPT_SUBCLASS(Nuke, MissileWeapon)
 {
   //registered for typeName and creation

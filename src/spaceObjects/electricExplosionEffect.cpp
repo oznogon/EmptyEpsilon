@@ -9,11 +9,16 @@
 #include "soundManager.h"
 #include "textureManager.h"
 
-/// ElectricExplosionEffect is a visible electrical explosion, as seen from EMP missiles
+/// An ElectricExplosionEffect is a visual electrical explosion used by EMP missiles.
+/// This is a cosmetic effect and does not deal damage on its own.
 /// Example: ElectricExplosionEffect():setPosition(500,5000):setSize(20)
 REGISTER_SCRIPT_SUBCLASS(ElectricExplosionEffect, SpaceObject)
 {
+    /// Sets the size of explosion effect.
+    /// Optional; defaults to 1.0.
     REGISTER_SCRIPT_CLASS_FUNCTION(ElectricExplosionEffect, setSize);
+    /// Defines whether to draw the explosion effect on short-range radar.
+    /// Optional; defaults to false.
     REGISTER_SCRIPT_CLASS_FUNCTION(ElectricExplosionEffect, setOnRadar);
 }
 

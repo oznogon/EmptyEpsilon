@@ -13,15 +13,16 @@
 
 #include <glm/ext/matrix_transform.hpp>
 
-/// An asteroid in space. Which you can fly into and hit. Will do damage.
+/// An asteroid in space. Deals damage and is destroyed upon collision with another SpaceObject.
+/// To create a customizable object with more complex actions upon collisions, use an Artifact.
 REGISTER_SCRIPT_SUBCLASS(Asteroid, SpaceObject)
 {
-    /// Set the radius of this asteroid
-    /// The default radius for an asteroid is between 110 and 130
-    /// Example: Asteroid():setSize(50)
+    /// Sets the asteroid's radius.
+    /// The default radius of a newly created asteroid is a random value between 110 and 130.
+    /// Example: asteroid:setSize(50)
     REGISTER_SCRIPT_CLASS_FUNCTION(Asteroid, setSize);
-    /// Gets the current radius of this asteroid
-    /// Example: local size=Asteroid():getSize()
+    /// Returns the asteroid's radius.
+    /// Example: local size=asteroid:getSize()
     REGISTER_SCRIPT_CLASS_FUNCTION(Asteroid, getSize);
 }
 

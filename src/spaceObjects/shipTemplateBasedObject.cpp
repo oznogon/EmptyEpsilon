@@ -5,103 +5,134 @@
 #include "tween.h"
 #include "i18n.h"
 
-
+/// A ShipTemplateBasedObject (STBO) is an object created from a ShipTemplate.
+/// This is the parent class of SpaceShip and SpaceStation objects, and can't be created by scripts on its own.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
 {
-    /// Set the template to be used for this ship or station. Templates define hull/shields/looks etc.
+    /// Sets the template used to define this STBO's traits.
+    /// Templates define the ship's class, weapons, hull and shield strength, 3D model, and more.
+    /// See the ShipTemplate class for details.
     /// Examples:
     /// CpuShip():setTemplate("Phobos T3")
     /// PlayerSpaceship():setTemplate("Phobos M3P")
     /// SpaceStation():setTemplate("Large Station")
-    /// WARNING: Using a string that is not a valid template name lets the game crash! This is case-sensitive.
-    /// See `scripts/shipTemplates.lua` for the existing templates.
+    /// WARNING: Using a string that is not a valid template name will crash the game!
+    /// ShipTemplate string names are case-sensitive.
+    /// See scripts/shipTemplates.lua and scripts/shiptemplates/ for the default templates.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setTemplate);
-    /// [Depricated]
+    /// [DEPRECATED]
+    /// Use ShipTemplateBasedObject:setTemplate()
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShipTemplate);
-    /// Set the class name of this object. Normally the class name is copied from the template name (Ex "Cruiser") but you can override it with this function.
+    /// Sets the STBO's classification name, such as "Starfighter" or "Cruiser".
+    /// This overrides the class name provided in the ShipTemplate.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setTypeName);
+    /// Gets the STBO's classification name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getTypeName);
-    /// Get the current amount of hull
+    /// Gets the STBO's hull points.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getHull);
-    /// Get the maximum hull value
+    /// Gets the STBO's maximum limit of hull points.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getHullMax);
-    /// Set the current hull value, note that setting this to 0 does not destroy the station.
+    /// Sets the STBO's hull points.
+    /// Setting this to 0 does not destroy the STBO.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHull);
-    /// Set the maximum amount of hull for this station. Stations never repair hull damage, so this only effects the percentage displays
+    /// Sets the STBO's maximum limit of hull points.
+    /// Note: Stations never repair hull damage, so this only affects their percentage displays.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHullMax);
-    /// Set whether the object can be destroyed.
-    /// Requires a Boolean value.
+    /// Sets whether the STBO can be destroyed.
     /// Example: ship:setCanBeDestroyed(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setCanBeDestroyed);
-    /// Get whether the object can be destroyed.
-    /// Returns a Boolean value.
+    /// Returns whether the STBO can be destroyed.
     /// Example: ship:getCanBeDestroyed()
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getCanBeDestroyed);
-    /// Get the specified shield's current level.
-    /// Requires an integer index value.
-    /// Returns a float value.
-    /// Example to get shield level on front shields of a ship with two shields:
-    ///     ship:getShieldLevel(0)
-    /// Rear shields: ship:getShieldLevel(1)
+    /// Returns the STBO's given shield segment's points.
+    /// Requires an integer shield segment index value.
+    /// Example for a ship with two shield segments, front and rear:
+    ///     ship:getShieldLevel(0) -- returns front shield points
+    ///     ship:getShieldLevel(1) -- returns rear shield points
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldLevel);
-    /// Get the number of shields on this object.
-    /// For example, a ship with 1 shield count has a single shield covering
-    /// all angles, a ship with 2 covers front and back, etc.
-    /// Returns an integer count.
+    /// Returns the STBO's number of shield segments.
+    /// For example, a ship with 1 shield segment has a single shield covering all angles.
+    /// A ship with 2 shield segments has separate shields covering the front and back.
     /// Example: ship:getShieldCount()
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldCount);
-    /// Get the maxium shield level.
+    /// Returns the STBO's given shield segment's maximum points.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldMax);
-    /// Set the current amount of shields.
+    /// Sets the STBO's shield points.
+    /// Each number provided as a parameter sets the points for a corersponding shield segment.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShields);
-    /// Set the maximum shield level, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields). Note that this does low the current shield level when the max becomes lower, but it does not increase the shield level.
+    /// Sets the STBO's maximum shield points.
+    /// The number of parameters defines the number of shield segments, to a maximum of 8 segments.
+    /// Setting a lower maximum value than the segment's current number of points reduces the points, but increasing the maximum value to a higher value than the current points does NOT automatically increase the current points.
     /// A seperate call to setShield is needed for that.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShieldsMax);
-    /// Set the icon to be used for this object on the radar.
-    /// For example, station:setRadarTrace("arrow.png") will show an arrow instead of a dot for this station.
+    /// Sets the STBO's radar trace image.
+    /// Valid values are filenames of PNG files relative to the resources/radar/ directory.
+    /// Example: obj:setRadarTrace("arrow.png") -- sets the radar trace to resources/radar/arrow.png
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRadarTrace);
-    /// Set the sound file to be used for this object's impulse engines.
-    /// Requires a string for a filename relative to the resources path.
-    /// Example: setImpulseSoundFile("engine.wav")
+    /// Sets the sound file for this object's impulse engines.
+    /// Valid values are filenames of WAV files relative to the resources/ directory.
+    /// Example: setImpulseSoundFile("sfx/engine.wav") -- sets the impulse sound to resources/sfx/engine.wav
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setImpulseSoundFile);
-    /// Are the shields online or not. Currently always returns true except for player ships, as only players can turn off shields.
+    /// Defines whether the STBO's shields are activated.
+    /// Always returns true except for PlayerSpaceships, because only players can turn off shields.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldsActive);
-
+    /// Returns whether the STBO supplies energy to docked ships.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getSharesEnergyWithDocked);
+    /// Defines whether the STBO supplies energy to docked ships.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setSharesEnergyWithDocked);
+    /// Returns whether the STBO repairs docked ships.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRepairDocked);
+    /// Sets whether the STBO repairs docked ships.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRepairDocked);
+    /// Returns whether the STBO restocks scan probes for docked ships.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRestocksScanProbes);
+    /// Sets whether the STBO restocks scan probes for docked ships.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRestocksScanProbes);
+    /// Returns whether the STBO restocks missiles for docked ships.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRestocksMissilesDocked);
+    /// Sets whether the STBO restocks missiles for docked ships.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRestocksMissilesDocked);
-
+    /// Returns the STBO's long-range radar range. 
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getLongRangeRadarRange);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShortRangeRadarRange);
+    /// Sets the STBO's long-range radar range.
+    /// PlayerSpaceships use this range on the science and operations screens' radar.
+    /// CpuShips use this range to detect potential targets.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setLongRangeRadarRange);
+    /// Returns the STBO's short-range radar range.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShortRangeRadarRange);
+    /// Sets the STBO's short-range radar range.
+    /// PlayerSpaceships use this range on the helms, weapons, and single pilot screens' radar.
+    /// This also defines the radar radius on the relay screen for friendly ships and stations.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShortRangeRadarRange);
-
-    /// [Depricated]
+    /// [DEPRECATED]
+    /// Use ShipTemplateBasedObject:getShieldLevel() with an index value.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getFrontShield);
-    /// [Depricated]
+    /// [DEPRECATED]
+    /// Use ShipTemplateBasedObject:setShieldsMax().
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getFrontShieldMax);
-    /// [Depricated]
+    /// [DEPRECATED]
+    /// Use ShipTemplateBasedObject:setShieldLevel() with an index value.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setFrontShield);
-    /// [Depricated]
+    /// [DEPRECATED]
+    /// Use ShipTemplateBasedObject:setShieldsMax().
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setFrontShieldMax);
-    /// [Depricated]
+    /// [DEPRECATED]
+    /// Use ShipTemplateBasedObject:getShieldLevel() with an index value.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRearShield);
-    /// [Depricated]
+    /// [DEPRECATED]
+    /// Use ShipTemplateBasedObject:setShieldsMax().
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRearShieldMax);
-    /// [Depricated]
+    /// [DEPRECATED]
+    /// Use ShipTemplateBasedObject:setShieldLevel() with an index value.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRearShield);
-    /// [Depricated]
+    /// [DEPRECATED]
+    /// Use ShipTemplateBasedObject:setShieldsMax().
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRearShieldMax);
-    /// Set a function that will be called if the object is taking damage.
-    /// First argument given to the function will be the object taking damage, the second the instigator SpaceObject (or nil).
+    /// Defines a function to call when the STBO takes damage.
+    /// Passes the object taking damage and the instigator SpaceObject (or nil) to the function.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, onTakingDamage);
-    /// Set a function that will be called if the object is destroyed by taking damage.
-    /// First argument given to the function will be the object taking damage, the second the instigator SpaceObject that gave the final blow (or nil).
+    /// Defines a function to call when the STBO is destroyed by taking damage.
+    /// Passes the object taking damage and the instigator SpaceObject that delivered the destroying damage (or nil) to the function.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, onDestruction);
 }
 

@@ -9,26 +9,28 @@
 #include "i18n.h"
 
 
-/// Base class for every missile (mines are not missiles)
-/// You cannot create a missile in script with this class, use derived classes
-/// like HomingMissile, HVLI etc.
+/// The MissileWeapon class defines core features for every missile weapon.
+/// (While launchable from weapon tubes, mines are not missiles. See the Mine class.)
+/// To create a missile in a script, use the subclasses derived from MissileWeapon, such as HomingMissile, HVLI, etc.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
 {
-  /// Get the missile's owner's object.
+  /// Returns the missile's owner.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getOwner);
-  /// Get the missile's target object.
+  /// Returns the missile's target.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getTarget);
-  /// Must be an existing target, else does nothing. It does not check if really targetable or not.
+  /// Sets the missile's target.
+  /// The target must already exist. If it does not, this has no effect.
+  /// setTarget() does not check whether the target can be targeted.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setTarget);
-  /// Lifetime is a number in seconds
+  /// Returns the missile's lifetime, in seconds.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getLifetime);
-  /// Lifetime is a number in seconds
+  /// Sets the missile's lifetime, in seconds.
+  /// A missile that can explode does so at the end of its lifetime if it don't hit another object first.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setLifetime);
-  /// Set the missile size as for tube size.
-  /// Valid sizes: see EMissileSizes
+  /// Sets the missile's size.
+  /// For valid values, see EMissileSizes.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getMissileSize);
-  /// Get the missile size as for tube size.
-  /// Valid sizes: see EMissileSizes
+  /// Returns the missile's size as an EMissileSizes string.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setMissileSize);
 }
 

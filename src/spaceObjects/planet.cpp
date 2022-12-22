@@ -104,19 +104,41 @@ public:
     }
 };
 
-/// A planet.
+/// Planets are SpaceObjects with special visual effects that can orbit other SpaceObjects.
+/// Several planetary textures are included in the resources/planets/ directory.
 REGISTER_SCRIPT_SUBCLASS(Planet, SpaceObject)
 {
+    /// Sets the planet's atmospheric effect color.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetAtmosphereColor);
+    /// Sets the planet's atmospheric effect texture.
+    /// Valid values are filenames of PNG files relative to the resources/ directory.
+    /// Optional; if defined, atmosphere textures should be transparent or translucent.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetAtmosphereTexture);
+    /// Sets the planet's surface texture.
+    /// Valid values are filenames of PNG files relative to the resources/ directory.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetSurfaceTexture);
+    /// Sets the planet's cloud layer effect texture, which rotates independently of the planet.
+    /// Valid values are filenames of PNG files relative to the resources/ directory.
+    /// Optional; if defined, cloud layer textures should be transparent or translucent.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetCloudTexture);
+    /// Returns the planet's radius.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, getPlanetRadius);
+    /// Sets the planet's radius, and its cloud radius to 1.05x the plent radius, and its atmosphere radius to 1.2x the planet radius.
+    /// Optional; defaults to 5000.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetRadius);
+    /// Sets the planet's collisonable radius.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, getCollisionSize);
+    /// Sets the planet's cloud radius, overriding Planet:setPlanetRadius().
+    /// Optional; defaults to a function of the planet's radius and its distance from the movement plane.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetCloudRadius);
+    /// Sets the distance that the planet is offset above (positive) or below (negative) the ship movement plane.
+    /// Optional; defaults to 0.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setDistanceFromMovementPlane);
+    /// Sets the planet's axial rotation time, in degrees per tick.
+    /// Optional; defaults to 0.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setAxialRotationTime);
+    /// Sets a SpaceObject around which the planet orbits, as well as its orbital period in orbital degrees per tick.
+    /// Optional.
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setOrbit);
 }
 

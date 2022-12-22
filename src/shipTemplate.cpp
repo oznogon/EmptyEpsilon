@@ -7,123 +7,194 @@
 
 #include "scriptInterface.h"
 
-/// ShipTemplates are created when EmptyEpsilon is started.
-/// And used to fill the ship starting statistics, and other information.
+/// ShipTemplates define the base functionality, stats, models, and other details for ships created from them.
+/// They create ShipTemplateBasedObjects, which typically belong to either the SpaceStation or SpaceShip subclasses.
+/// SpaceShips in turn can belong to the CpuShip or PlayerSpaceship classes.
+/// EmptyEpsilon loads scripts/shipTemplates.lua at launch, which lists files to load that are located in scripts/shiptemplates/.
+/// ShipTemplates cannot be created while a scenario is running.
 REGISTER_SCRIPT_CLASS(ShipTemplate)
 {
+    /// Sets the ship template's reference name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
+    /// Sets the ship template's displayed name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLocaleName);
-    /// Set the class name, and subclass name for the ship. Used to divide ships into different classes.
+    /// Sets the class and subclass names for ships created from this template.
+    /// Ship classes define certain traits, such as dockability.
+    /// See also ShipTemplate:setExternalDockClasses() and ShipTemplate:setInternalDockClasses().
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setClass);
-    /// Set the description shown for this ship in the science database.
+    /// Sets the description shown in the science databse for ships created from this template.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDescription);
-    /// Sets the type of template. Defaults to normal ships, so then it does not need to be set.
-    /// Example: template:setType("ship"), template:setType("playership"), template:setType("station")
+    /// Sets the type of ship created from this template.
+    /// Optional. Defaults to "ship" (CpuShip).
+    /// Valid values are "ship", "playership" (PlayerSpaceship), and "station" (SpaceStation).
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setType);
-    /// Hides this template from GM creation features and science database.
-    /// Hidden templates exists mainly for backwards compatibility of scripts.
+    /// Hides this template from GM creation features and the science database.
+    /// Hidden templates provide backward compatibility to older scenario scripts.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, hidden);
-    /// Set the default AI behaviour. EE has 3 types of AI coded into the game right now: "default", "fighter", "missilevolley"
+    /// Sets the default combat AI state for CpuShips created from this template.
+    /// AI state determines the AI's combat tactics and responses.
+    /// It is distinct from orders, which determine the ship's active objectives and are defined by CpuShip:order...() functions.
+    /// Valid AI states are:
+    /// - "default" directly pursues enemies at beam range while making opportunistic missile attacks
+    /// - "evasion" maintains distance from enemy weapons and evades attacks
+    /// - "fighter" prefers strafing maneuvers to attack briefly at close range while passing
+    /// - "missilevolley" prefers lining up missile attacks from long range
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDefaultAI);
-    /// Set the 3D model to be used for this template. The model referers to data set in the model_data.lua file.
+    /// Sets the 3D model data by name for ships created from this template.
+    /// Model data is set in ModelData objects and loaded from the model_data.lua file.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setModel);
-    /// Supply a list of ship classes that can be docked to this ship. setDockClasses("Starfighter") will allow all small starfighter type ships to dock with this ship.
-    /// (Same as setExternalDockClasses)
+    /// Alias of ShipTemplate:setExternalDockClasses().
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDockClasses);
-    /// Supply a list of ship classes that can be docked to this ship. setExternalDockClasses("Starfighter") will allow all small starfighter type ships to dock with this ship.
-    /// External docking will keep the ship attached to the side of this ship.
+    /// Defines a list of ship classes that can be externally docked to ships created from this template.
+    /// External docking keeps the docked ship attached to the outside of the carrier.
+    /// Example: setDockClasses("Starfighter") allows all small starfighter-type ships to dock to the outside of this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setExternalDockClasses);
-    /// Supply a list of ship classes that can be docked to this ship. setInternalDockClasses("Starfighter") will allow all small starfighter type ships to dock with this ship.
-    /// Internal docking will hide the docked ship inside the other ship.
+    /// Defines a list of ship classes that can be docked inside of ships created from this template.
+    /// Internal docking hides the docked ship inside of the carrier.
+    /// Example: setInternalDockClasses("Starfighter") allows all small starfighter-type ships to dock inside this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setInternalDockClasses);
-    /// Set the amount of energy available for this ship. Note that only player ships use energy. So setting this for anything else is useless.
+    /// Sets the amount of energy available for ships created from this template.
+    /// Only player ships use energy, so setting this for other ship types has no effect.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setEnergyStorage);
+    /// Sets the default number of repair crew for ships created from this template.
+    /// Only player ships use repair crews, so setting this for other ship types has no effect.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRepairCrewCount);
-    /// Setup a beam weapon.
+    /// Alias of ShipTemplate:setBeamWeapon().
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
-    /// Setup a beam weapon.
+    /// Defines the traits of a beam weapon for ships created from this template.
+    /// - index: Each beam weapon in this ShipTemplate must have a unique index.
+    /// - arc: Sets the arc of its firing capability, in degrees.
+    /// - direction: Sets the default center angle of the arc, relative to the ship's forward bearing.
+    /// - range: Sets how far away the beam can fire.
+    /// - cycle_time: Sets the base firing delay, in seconds. System damage and power can modify the effective cycle_time.
+    /// - damage: Sets the base damage done by the beam to the target. System damage and power can modify the effective damage.
+    /// To create a turreted beam, also add ShipTemplate:setBeamWeaponTurret(), and set the beam weapon's arc to be smaller than the turret's arc.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeapon);
-    /// Setup a beam's turret.
+    /// Converts a beam weapon into a turret and defines its traits for ships created from this template.
+    /// - index: Must match the index of an existing beam weapon.
+    /// - arc: Sets the turret's maximum targeting angles, in degrees. The turret arc must be larger than the associated beam weapon's arc.
+    /// - direction: Sets the default center angle of the turret arc, relative to the ship's forward bearing.
+    /// - rotation_rate: Sets how many degrees per tick that the associated beam weapon's direction can rotate toward the target within the turret arc. System damage and power can modify a turret's rotation rate.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponTurret);
-    /// Setup a beam weapon texture
+    /// Sets the texture, by name, of the beam weapon with the matching index.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
+    /// Sets how much of the ship's energy is drained each time the beam weapon with the given index is fired.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponEnergyPerFire);
+    /// Sets how much beam weapon system heat is generated each time the beam weapon with the given index is fired.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponHeatPerFire);
-
-    /// Set the amount of missile tubes, limited to a maximum of 16.
+    /// Sets the number of weapon tubes for ships created from this template, and the default delay for loading and unloading the tube, in seconds.
+    /// Ships are limited to a maximum of 16 weapon tubes.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
+    /// Sets the delay, in seconds, for loading and unloading the tube with the given index.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeLoadTime);
+    /// Sets which weapon types the tube with the given index can load.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeAllowMissle);
+    /// Sets which weapon types the tube with the given index can't load.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeDisallowMissle);
+    /// Sets a weapon tube with the given index to allow loading only the given weapon type.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponTubeExclusiveFor);
+    /// Sets the angle, relative to the ship's forward bearing, toward which the tube with the given index points.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeDirection);
+    /// Sets the size of the weapon launched from the tube.
+    /// Optional. Defaults to "medium".
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeSize);
-
-    /// Set the amount of starting hull
+    /// Sets the amount of default hull points for ships created from this template.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
-    /// Set the shield levels, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields)
-    /// Example: setShieldData(400) setShieldData(100, 80) setShieldData(100, 50, 50)
+    /// Sets the default shield points for ships created from this template.
+    /// Each setShieldData() segments the shield, dividing the arc equally for each segment, up to a maximum of 8 segments.
+    /// Ships with one shield segment have only "front" shield systems, and ships with two or more all have only "front" and "rear" shield systems.
+    /// Example:
+    /// setShieldData(400) -- one shield segment; hits from all angles degrade the sole shield value
+    /// setShieldData(100, 80) -- two shield segments; the front shield has 100 points, the rear 80
+    /// setShieldData(100, 50, 50, 50) -- four shield segments; the front shield has 100, rear and sides 50 each
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
-    /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
-    /// Optional fourth and fifth arguments are reverse speed and reverse acceeleration.
-    /// If not explicitely set, reverse speed and reverse acceleration are set to forward speed and acceleration
-    /// Compare SpaceShip:setImpulseMaxSpeed, :setRotationMaxSpeed, :setAcceleration.
+    /// Sets the impulse speed, rotational speed, and impulse acceleration for ships created from this template.
+    /// The optional fourth and fifth arguments set the reverse speed and reverse acceleration.
+    /// If not explicitly set, the reverse speed and acceleration are equal to the forward speed and acceleration
+    /// See also SpaceShip:setImpulseMaxSpeed(), SpaceShip:setRotationMaxSpeed(), SpaceShip:setAcceleration().
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
-    /// Sets the combat maneuver power of this ship.
+    /// Sets the combat maneuver capacity for ships created from this template.
+    /// The boost value sets the forward maneuver capacity, and the strafe value sets the lateral maneuver capacity.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
-    /// Set the warp speed for warp level 1 for this ship. Setting this will indicate that this ship has a warpdrive. (normal value is 1000)
+    /// Sets the warp speed of warp level 1 for ships created from this template.
+    /// The typical warp speed value for a warp-capable ship is 1000.
+    /// Setting any value also enables the "warpdrive" system and controls.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
-    /// Set if this ship shares energy with docked ships. Example: template:setSharesEnergyWithDocked(false)
+    /// Defines whether ships created from this template send energy to docked ships.
+    /// Example: template:setSharesEnergyWithDocked(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSharesEnergyWithDocked);
-    /// Set if this ship repairs docked ships. Example: template:setRepairDocked(false)
+    /// Defines whether ships created from this template repair docked ships.
+    /// Example: template:setRepairDocked(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRepairDocked);
-    /// Set if this ship restocks scan probes on docked ships. Example: template:setRestocksScanProbes(false)
+    /// Defines whether ships created from this template restock scan probes on docked ships.
+    /// Example: template:setRestocksScanProbes(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRestocksScanProbes);
-    /// Set if this ship restores missiles on docked cpuships. Example template:setRestocksMissilesDocked(false)
+    /// Defines whether ships created from this template restore missiles on docked CpuShips.
+    /// To restock player ships' weapons, use a comms script.
+    /// Example template:setRestocksMissilesDocked(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRestocksMissilesDocked);
-    /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
+    /// Defines whether ships created from this template have a jump drive.
+    /// Example: template:setJumpDrive(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
-    /// Set this ship's minimum and maximum jump drive distances.
-    /// Example: template:setJumpDrive(5000.0, 50000.0)
+    /// Sets the minimum and maximum jump distances for ships created from this template.
+    /// Example: template:setJumpDriveRange(5000, 50000) -- sets the minimum jump to 5U and maximum to 50U
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDriveRange);
+    /// Not implemented.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCloaking);
+    /// Sets the storage capacity of the given weapon type for ships created from this template.
+    /// For valid values, see the EMissileWeapons type.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponStorage);
-    /// Add an empty room to a ship template.
-    /// Rooms are shown on the engineering and damcon screens.
-    /// If a system room isn't accessible via other rooms connected by doors, that system
-    /// might not be repairable.
+    /// Adds an empty room to a ship template.
+    /// Rooms are displayed on the engineering and damcon screens.
+    /// If a system room isn't accessible via other rooms connected by doors, repair crews on player ships might not be able to repair that system.
     /// Rooms are placed on an integer x/y grid. The minimum size for a room is 1x1.
-    /// Accepts four parameters: the room's x coordinate, y coordinate, width, and height.
     /// Example: template:addRoom(1, 2, 3, 4)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
-    /// Add a room containing a ship system to a ship template.
-    /// Rooms are shown on the engineering and damcon screens.
-    /// If a system doesn't have a room, or repair crews can't reach a system's room, it
-    /// might not be repairable.
-    /// Accepts five parameters: the room's x coordinate, y coordinate, width, height, and
-    /// the ship system as the string equivalent of an ESystem value.
-    /// Example: template:addRoomSystem(1, 2, 3, 4, "Reactor")
+    /// Adds a room containing a ship system to a ship template.
+    /// Rooms are displayed on the engineering and damcon screens.
+    /// If a system doesn't have a room, or repair crews can't reach a system's room, the system might not be repairable on player ships.
+    /// Rooms are placed on an integer x/y grid. The minimum size for a room is 1x1.
+    /// For valid system values, see the ESystem type.
+    /// Example: template:addRoomSystem(1, 2, 3, 4, "reactor")
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
-    /// Add a door between rooms in a ship template.
-    /// Rooms are shown on the engineering and damcon screens.
-    /// If a system room doesn't have a door connecting it to other rooms, repair crews
-    /// might not be able to reach it for repairs.
-    /// Accepts three parameters: the door's x coordinate, y coordinate, and a Boolean
-    /// value for whether it's horizontal (true) or vertical (false).
+    /// Adds a door between rooms in a ship template.
+    /// Rooms are displayed on the engineering and damcon screens.
+    /// If a system room doesn't have a door connecting it to other rooms, repair crews on player ships might not be able to repair the system.
+    /// The horizontal value defines whether the door is oriented horizontally (true) or vertically (false).
     /// Example: template:addDoor(2, 2, false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
+    /// Sets the default radar trace image for ships created from this template.
+    /// Valid values are filenames to PNG images relative to the resources/radar directory.
+    /// Radar trace images should be white with a transparent background.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
+    /// Sets the long-range radar range of ships created from this template.
+    /// PlayerSpaceships use this range on the science and operations screens' radar.
+    /// CpuShips use this range to detect potential targets.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
+    /// Sets the short-range radar range of ships created from this template.
+    /// PlayerSpaceships use this range on the helms, weapons, and single pilot screens' radar.
+    /// This also defines the radar radius on the relay screen for friendly ships and stations.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShortRangeRadarRange);
+    /// Sets the sound file used for the impulse drive on ships created from this template.
+    /// Valid values are filenames to WAV files relative to the resources directory.
+    /// Use a looping sound file that tolerates being pitched up and down as the ship's impulse speed changes.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setImpulseSoundFile);
+    /// Defines whether ships created from this template can scan other objects.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanScan);
+    /// Defines whether ships created from this template can hack other objects.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanHack);
+    /// Defines whether ships created from this template can dock with other objects.
+    /// To allow ships created from this template to dock with other ships, it must be of a class defined by the carrier ship's setExternalDockClasses() or setInternalDockClasses().
+    /// Setting this to false prevents ships created from this template from docking with anything, including stations.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanDock);
+    /// Defines whether ships created from this template have combat maneuver controls.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanCombatManeuver);
+    /// Defines whether ships created from this template can activate the self-destruct sequence.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanSelfDestruct);
+    /// Defines whether ships created from this template can launch probes.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanLaunchProbe);
-    /// Return a new template with the given name, which is an exact copy of this template.
-    /// Used to make easy variations of templates.
+    /// Returns an exact copy of the template with the given name.
+    /// Use copy to create variations of a template under a different name.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, copy);
 }
 

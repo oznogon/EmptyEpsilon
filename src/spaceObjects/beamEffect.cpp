@@ -20,16 +20,34 @@ struct VertexAndTexCoords
     glm::vec2 texcoords;
 };
 
-/// BeamEffect is a beam weapon fire effect that will fade after 1 seond
+/// A BeamEffect is a beam weapon firing audio/visual effect that fades after its duration expires.
+/// This is a cosmetic effect and does not deal damage on its own.
 /// Example: BeamEffect():setSource(player, 0, 0, 0):setTarget(enemy_ship, 0, 0)
 REGISTER_SCRIPT_SUBCLASS(BeamEffect, SpaceObject)
 {
+    /// Sets the origin SpaceObject of the beam effect.
+    /// Requires a 3D x/y/z vector positional offset relative to the object's origin point.
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setSource);
+    /// Sets the target SpaceObject of the beam effect.
+    /// Requires a 3D x/y/z vector positional offset relative to the object's origin point.
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTarget);
+    /// Sets the texture of the beam effect.
+    /// Valid values are filenames of PNG files relative to the resources/ directory.
+    /// Optional; defaults to "texture/beam_orange.png".
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTexture);
+    /// Sets the sound effect of the beam effect.
+    /// Valid values are filenames of WAV files relative to the resources/ directory.
+    /// Optional; defaults to "sfx/laser_fire.wav".
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setBeamFireSound);
+    /// Sets the magnitude of the beam fire sound effect.
+    /// Optional; defaults to 1.
+    /// Larger values are louder and can be heard from larger distances.
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setBeamFireSoundPower);
+    /// Sets the beam effect's duration in seconds.
+    /// Optional; defaults to 1.0.
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setDuration);
+    /// Defines whether the beam effect generates an impact ring on the target end.
+    /// Optional; defaults to true.
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setRing);
 }
 

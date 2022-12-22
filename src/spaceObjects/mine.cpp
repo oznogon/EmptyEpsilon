@@ -11,13 +11,15 @@
 
 #include "i18n.h"
 
-/// A mine object. Simple, effective, deadly.
+/// A Mine is an explosive weapon that detonates when a SpaceObject moves within its trigger range.
+/// Mines can be launched from a ship's weapon tube or added by a GM or scenario script.
 REGISTER_SCRIPT_SUBCLASS(Mine, SpaceObject)
 {
-  // Get the mine's owner's object.
+  /// Returns the mine's owner's SpaceObject.
   REGISTER_SCRIPT_CLASS_FUNCTION(Mine, getOwner);
-  // Set a function that will be called if the mine explodes.
-  // First argument is the mine, second argument is the mine's owner/instigator (or nil).
+  /// Sets a function to call when the mine explodes.
+  /// Passes the mine object and the object of the mine's owner/instigator (or nil) to the function.
+  /// Example: mine:onDestruction(function(this_mine, instigator) print("Tripped a mine!") end)
   REGISTER_SCRIPT_CLASS_FUNCTION(Mine, onDestruction);
 }
 

@@ -21,7 +21,7 @@ struct VertexAndTexCoords
 };
 
 
-/// Nebulae block long-range radar in a 5U range.
+/// Nebulae are dense clouds of gas that block long-range radar across a 5U radius.
 REGISTER_SCRIPT_SUBCLASS(Nebula, SpaceObject)
 {
 }

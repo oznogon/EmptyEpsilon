@@ -72,20 +72,25 @@ private:
     std::unordered_map<std::string, std::string> data;
 };
 
+/// Persistent script storage permanently saves key/value pairs in a file and
+/// can retrieve them in later runs of EmptyEpsilon. The default file path is
+/// $HOME/.emptyepsilon/scriptstorage.json. See also getScriptStorage().
 REGISTER_SCRIPT_CLASS(ScriptStorage)
 {
-    /// Get a value from persistent script storage.
+    /// Gets a value from persistent script storage.
     /// Requires the key as a string.
     /// Returns the value as a JSON string.
     /// Returns nothing if the key is not found.
-    /// Example: storage = getScriptStorage()
-    ///          storage:get('key')
+    /// Example:
+    /// storage = getScriptStorage()
+    /// storage:get('key')
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptStorage, get);
-    /// Set a value in persistent script storage.
+    /// Sets a value in persistent script storage.
     /// Requires the key and value as strings.
     /// Creates scriptstorage.json if it doesn't exist.
-    /// Example: storage = getScriptStorage()
-    ///          storage:set('key', 'value')
+    /// Example:
+    /// storage = getScriptStorage()
+    /// storage:set('key', 'value')
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptStorage, set);
 }
 
@@ -99,8 +104,8 @@ static int getScriptStorage(lua_State* L)
 }
 
 /// P<ScriptStorage> getScriptStorage()
-/// Expose the ScriptStorage object, which can save and load key-value pairs
-/// These key-value pairs are permanently stored and survive server restarts.
-/// Returns a ScriptStorage object; see also ScriptStorage.get() and .set().
+/// Exposes the ScriptStorage object, which can save and load key/value pairs.
+/// These key/value pairs are permanently stored and survive server restarts.
+/// Returns a ScriptStorage object; see also ScriptStorage:get() and :set().
 /// Example: storage = getScriptStorage();
 REGISTER_SCRIPT_FUNCTION(getScriptStorage);

@@ -21,145 +21,270 @@
 
 #include <SDL_assert.h>
 
+/// A SpaceShip is a ShipTemplateBasedObject controlled by either the AI (CpuShip) or player (PlayerSpaceship).
+/// SpaceShips can carry and deploys weapons, dock with or carry docked ships, and move using impulse, jump, or warp drives.
+/// The SpaceShip class is the parent class of CpuShip and PlayerSpaceship, and can't be created by scripts on its own.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 {
     /// [DEPRECATED]
+    /// Use SpaceShip:isFriendOrFoeIdentifiedBy() or SpaceShip:isFriendOrFoeIdentifiedByFaction().
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
     /// [DEPRECATED]
+    /// Use SpaceShip:isFullyScannedBy() or SpaceShip:isFullyScannedByFaction().
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);
+    /// Returns whether this SpaceShip has been identified by the given ship as either hostile or friendly.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedBy);
+    /// Returns whether this SpaceShip has been fully scanned by the given ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedBy);
+    /// Returns whether this SpaceShip has been identified by the given faction as either hostile or friendly.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedByFaction);
+    /// Returns whether this SpaceShip has been fully scanned by the given faction.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedByFaction);
+    /// Returns whether this SpaceShip is docked with a station or another ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
+    /// Returns the object with which this SpaceShip is docked.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockedWith);
+    /// Returns the EDockingState value of this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockingState);
-    /// Returns gets this ship target.
-    /// For example enemy targetted by player ship's weapons.
+    /// Returns this SpaceShip's weapons target.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTarget);
+    /// Returns the number of the given weapon type stocked by this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorage);
+    /// Returns this SpaceShip's capacity for the given weapon type.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorageMax);
+    /// Sets the number of the given weapon type stocked by this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorage);
+    /// Sets this SpaceShip's capacity for the given weapon type.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorageMax);
+    /// Returns this SpaceShip's shield frequency.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsFrequency);
+    /// Sets this SpaceShip's shield frequency.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsFrequency);
+    /// Returns this SpaceShip's beam weapon frequency.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamFrequency);
+    /// Returns this SpaceShip's energy capacity.
+    /// CpuShips don't consume energy, so setting this has no effect on them.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getMaxEnergy);
+    /// Sets this SpaceShip's energy capacity.
+    /// CpuShips don't consume energy, so setting this has no effect on them.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setMaxEnergy);
+    /// Returns this SpaceShip's energy level.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getEnergy);
+    /// Sets this SpaceShip's energy level.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setEnergy);
+    /// Returns whether this SpaceShip has the given system.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasSystem);
+    /// Returns the hacked level for the given system on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHackedLevel);
+    /// Sets the hacked level for the given system on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHackedLevel);
+    /// Returns the given system's health on this SpaceShip.
+    /// System health is related to damage, and is separate from its hacked level.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealth);
+    /// Sets the given system's health on this SpaceShip.
+    /// System health is related to damage, and is separate from its hacked level.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealth);
+    /// Returns the given system's maximum health on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealthMax);
+    /// Sets the given system's maximum health on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealthMax);
+    /// Returns the given system's heat level on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeat);
+    /// Sets the given system's heat level on this SpaceShip.
+    /// CpuShips don't incur or manage heat, so setting this has no effect on them.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeat);
+    /// Returns the given system's rate of heating or cooling.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeatRate);
+    /// Sets the given system's rate of heating or cooling.
+    /// CpuShips don't incur or manage heat, so setting this has no effect on them.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeatRate);
+    /// Returns the given system's power level.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPower);
+    /// Sets the given system's power level.
+    /// CpuShips don't incur or manage heat, so setting this has no effect on them.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPower);
+    /// Returns the given system's rate of consuming power, in points per second.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPowerRate);
+    /// Sets the given system's rate of consuming power, in points per second.
+    /// CpuShips don't consume energy, so setting this has no effect on them.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPowerRate);
+    /// Returns the relative power drain factor for the given system.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPowerFactor);
+    /// Sets the relative power drain factor for the given system.
+    /// "reactor" has a negative value because it generates power rather than draining it.
+    /// CpuShips don't consume energy, so setting this has no effect on them.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPowerFactor);
+    /// Returns the coolant quantity for the given system.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemCoolant);
+    /// Sets the coolant quantity for the given system.
+    /// CpuShips don't incur or manage heat, so setting this has no effect on them.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolant);
+    /// Returns the rate at which the given system takes coolant, in points per second.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemCoolantRate);
+    /// Sets the rate at which the given system takes coolant, in points per second.
+    /// CpuShips don't incur or manage heat, so setting this has no effect on them.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolantRate);
-    ///Get multiple results, first one is forward speed and second one is reverse speed.
-    ///ex : forward,reverse = getImpulseMaxSpeed() (you can also use select or _ to get only reverse speed)
-    ///You can also only get forward speed, reverse speed will just be discarded : 
-    ///forward = getImpulseMaxSpeed()
+    /// Returns the SpaceShip's forward and reverse impulse speed limits.
+    /// Examples:
+    ///     forward,reverse = getImpulseMaxSpeed()
+    ///     forward = getImpulseMaxSpeed() -- forward speed only
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getImpulseMaxSpeed);
-    ///Sets max speed.
-    ///If called with only one argument, sets forward and reverse speed to equal values.
-    ///If called with two arguments, first one is forward speed and second one is reverse speed.
+    /// Sets the SpaceShip's maximum forward and reverse impulse speeds.
+    /// The reverse maximum speed value is optional.
+    /// Calling with a single argument sets both forward and reverse maximum speeds to the same value.
+    /// Examples:
+    ///     ship:setImpulseMaxSpeed(30,20) -- sets the max forward speed to 30 and reverse to 20
+    ///     ship:setImpulseMaxSpeed(30) -- sets the max forward and reverse speed to 30
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setImpulseMaxSpeed);
+    /// Returns the SpaceShip's maximum rotational speed.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRotationMaxSpeed);
+    /// Sets the SpaceShip's maximum rotational speed.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRotationMaxSpeed);
-    ///Get multiple resulsts, first one is forward acceleration and second one is reverse acceleration.
-    ///ex : forward, reverse = getAcceleration (you can also use select or _ to get only reverse speed)
-    ///You can also only get forward speed, reverse speed will just be discarded : 
-    ///forward = getAcceleration()
+    /// Returns the SpaceShip's forward and reverse impulse acceleration values.
+    /// Examples:
+    ///     forward,reverse = getAcceleration()
+    ///     forward = getAcceleration() -- forward speed only
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getAcceleration);
-    ///Sets acceleration.
-    ///If called with one argument, sets forward and reverse acceleration to equal values.
-    ///If called with two arguments, first one is forward acceleration and second one is reverse acceleration.
+    /// Sets the SpaceShip's forward and reverse impulse acceleration values.
+    /// The reverse acceleration value is optional.
+    /// Calling with a single argument sets both forward and reverse acceleration to the same value.
+    /// Examples:
+    ///     ship:setAcceleration(5,3.5) -- sets the max forward speed to 5 and reverse to 3.5
+    ///     ship:setAcceleration(5) -- sets the max forward and reverse speed to 5
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setAcceleration);
+    /// Sets the SpaceShip's combat maneuvering capacities.
+    /// The boost value sets the forward maneuver capacity, and the strafe value sets the lateral maneuver capacity.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCombatManeuver);
+    /// Returns whether the SpaceShip has a jump drive.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
+    /// Defines whether the SpaceShip has a jump drive.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
+    /// Sets the SpaceShip's minimum and maximum jump ranges.
+    /// Example: ship:setJumpDriveRange(5000, 50000) -- sets the minimum jump to 5U and maximum to 50U
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveRange);
-    /// sets the current jump range charged.
-    /// ships will be able to jump when this is equal to their max jump drive range.
-    /// Example ship:setJumpDriveCharge(50000)
+    /// Sets the SpaceShip's jump charge.
+    /// A SpaceShip with a jump drive can jump only when this value recharges to be equal to the ship's maximum jump range.
+    /// Example: ship:setJumpDriveCharge(50000)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveCharge);
-    /// returns the current amount of jump charged.
-    /// Example ship:getJumpDriveCharge()
+    /// Returns the SpaceShip's jump charge.
+    /// Example: local jump_charge = ship:getJumpDriveCharge()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDriveCharge);
+    /// Returns the time this SpaceShip requires from initiating a jump to completing the jump.
+    /// A ship can't perform certain actions, such as docking, while its jump delay is active.
+    /// This base value can be modified by system damage or energy levels.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDelay);
+    /// Returns whether this ship has a warp drive.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
+    /// Defines whether this ship has a warp drive.
+    /// If SpaceShip:setWarpSpeed() is set, setting this is unnecessary.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpDrive);
-    /// Set the warp speed for this ship's warp level 1.
-    /// Setting this is equivalent to also setting setWarpDrive(true).
-    /// If a value isn't specified in the ship template, the default is 1000.
-    /// Requires a numeric value.
+    /// Sets the warp speed for this SpaceShip's warp level 1.
+    /// Setting this is equivalent to also setting SpaceShip:setWarpDrive(true).
+    /// Optional. The default value is 1000.
     /// Example: ship:setWarpSpeed(500);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpSpeed);
+    /// Returns this SpaceShip's level 1 warp speed.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWarpSpeed);
+    /// Returns the arc, in degrees, for the beam weapon with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponArc);
+    /// Returns the direction, in degrees relative to the ship's forward bearing, for the center of the arc for the beam weapon with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDirection);
+    /// Returns the range for the beam weapon with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponRange);
+    /// Returns the turret arc, in degrees, for the beam weapon with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponTurretArc);
+    /// Returns the direction, in degrees relative to the ship's forward bearing, for the center of the arc of the turret with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponTurretDirection);
+    /// Returns the base firing delay, in seconds, for the beam weapon with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponCycleTime);
+    /// Returns the base damage dealt by the beam weapon with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamage);
+    /// Returns how much of this SpaceShip's energy is drained each time the beam weapon with the given index is fired.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponEnergyPerFire);
+    /// Returns the heat generated by each firing of the beam weapon with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponHeatPerFire);
+    /// Defines the traits of a beam weapon with the given index on this SpaceShip.
+    /// - index: Each beam weapon on this SpaceShip must have a unique index.
+    /// - arc: Sets the arc of its firing capability, in degrees.
+    /// - direction: Sets the default center angle of the arc, relative to the ship's forward bearing.
+    /// - range: Sets how far away the beam can fire.
+    /// - cycle_time: Sets the base firing delay, in seconds. System damage and power can modify the effective cycle_time.
+    /// - damage: Sets the base damage done by the beam to the target. System damage and power can modify the effective damage.
+    /// To create a turreted beam, also add SpaceShip:setBeamWeaponTurret(), and set the beam weapon's arc to be smaller than the turret's arc.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeapon);
+    /// Converts a beam weapon with the given index on this SpaceShip into a turret and defines its traits.
+    /// - index: Must match the index of an existing beam weapon on this SpaceShip.
+    /// - arc: Sets the turret's maximum targeting angles, in degrees. The turret arc must be larger than the associated beam weapon's arc.
+    /// - direction: Sets the default center angle of the turret arc, relative to the ship's forward bearing.
+    /// - rotation_rate: Sets how many degrees per tick that the associated beam weapon's direction can rotate toward the target within the turret arc. System damage and power can modify a turret's rotation rate.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponTurret);
+    /// Sets the texture, by name, of the beam weapon with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponTexture);
+    /// Sets how much of this SpaceShip's energy is drained each time the beam weapon with the given index is fired.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponEnergyPerFire);
+    /// Sets how much heat is generated each time the beam weapon with the given index on this SpaceShip is fired.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponHeatPerFire);
+    /// Sets the color used to draw the arc on radar for the beam weapon with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponArcColor);
+    /// Sets the damage type dealt by the beam weapon with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponDamageType);
+    /// Sets the number of weapon tubes on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
+    /// Returns the number of weapon tubes on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
+    /// Returns the weapon type loaded into the weapon tube with the given index on this SpaceShip.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeLoadType);
+    /// Sets which weapon types the tube with the given index on this SpaceShip can load.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeAllowMissle);
+    /// Sets which weapon types the tube with the given index on this SpacesShip can't load.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeDisallowMissle);
+    /// Sets a weapon tube with the given index on this SpaceShip to allow loading only the given weapon type.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeExclusiveFor);
+    /// Sets the angle, relative to this SpaceShip's forward bearing, toward which the tube with the given index points.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeDirection);
-    /// Set the tube size
-    /// Example: ship:setTubeSize(0,"small")
-    /// Valid Sizes: "small" "medium" "large"
+    /// Sets the size of the weapon tube with the given index on this SpaceShip.
+    /// Optional. Defaults to "medium".
+    /// Example: ship:setTubeSize(0, "small") -- sets the size of tube 0 to small
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTubeSize);
-    /// Returns the size of the tube
+    /// Returns the size of the weapon tube with the given index on this SpaceShip.
     /// Example: local size = ship:getTubeSize(0)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTubeSize);
-    // Returns the time for a tube load
-    // Example: load_time = ship:getTubeLoadTime(0)
+    /// Returns the time, in seconds, required to load the weapon tube with the given index on this SpaceShip.
+    /// Example: load_time = ship:getTubeLoadTime(0)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTubeLoadTime);
-    // Sets the load time for a tube
-    // Example ship:setTubeLoadTime(0, 15)
+    /// Sets the time, in seconds, required to load the weapon tube with the given index on this SpaceShip.
+    /// Example: ship:setTubeLoadTime(0, 15)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTubeLoadTime);
-    /// Set the icon to be used for this ship on the radar.
-    /// For example, ship:setRadarTrace("blip.png") will show a dot instead of an arrow for this ship.
-    /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
+    /// Sets the radar trace image for this SpaceShip.
+    /// Valid values are filenames to PNG images relative to the resources/radar/ directory.
+    /// Only scanned SpaceShips use a specific radar trace image.
+    /// Unscanned SpaceShips always display as an arrow.
+    /// Example: ship:setRadarTrace("blip.png") -- displays a dot for this ship on radar when scanned
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
-    /// Get the dynamic radar signature values for each component band.
-    /// Returns a float.
-    /// Example: obj:getDynamicRadarSignatureGravity()
+    /// Returns the dynamic gravitational radar signature value emitted by this SpaceShip.
+    /// Ship functions can dynamically modify this SpaceShip's radar signature values.
+    /// Example: ship_grav = ship:getDynamicRadarSignatureGravity()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureGravity);
+    /// Returns the dynamic electrical radar signature value emitted by this SpaceShip.
+    /// Ship functions can dynamically modify this SpaceShip's radar signature values.
+    /// Example: ship_elec = ship:getDynamicRadarSignatureElectrical()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureElectrical);
+    /// Returns the dynamic biologial radar signature value emitted by this SpaceShip.
+    /// Ship functions can dynamically modify this SpaceShip's radar signature values.
+    /// Example: ship_bio = ship:getDynamicRadarSignatureBiological()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureBiological);
+    /// Broadcasts a message from this SpaceShip to the comms of all other SpaceShips matching the threshold.
+    /// The threshhold value can be an integer equivalent of EFactionVsFactionState:
+    /// - 0: Broadcast to all friendly SpaceShips
+    /// - 1: Broadcast to all friendly and neutral SpaceShips
+    /// - 2: Broadcast to all SpaceShips, including enemies
+    /// Providing an invalid threshold value defaults to broadcasting only to friendly SpaceShips.
+    /// Example: ship:addBroadcast(1, "Help!")
+    /// Example: ship:addBroadcast(2, "We're taking over!")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
-    /// Set the scan state of this ship for every faction.
+    /// Sets the scan state of this SpaceShip for every faction.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanState);
-    /// Set the scane state of this ship for a particular faction.
+    /// Sets the scan state of this SpaceShip for a given faction.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanStateByFaction);
 }
 

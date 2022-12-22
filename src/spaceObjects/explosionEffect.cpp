@@ -8,11 +8,17 @@
 #include "soundManager.h"
 #include "textureManager.h"
 
-/// ExplosionEffect is a visible explosion, like from nukes, missiles, ship destruction, etc
+/// An ExplosionEffect is a visual explosion used by nukes, homing missiles, ship destruction, and other similar events.
+/// This is a cosmetic effect and does not deal damage on its own.
+/// See also the ElectricExplosionEffect class for EMP missile effects.
 /// Example: ExplosionEffect():setPosition(500,5000):setSize(20)
 REGISTER_SCRIPT_SUBCLASS(ExplosionEffect, SpaceObject)
 {
+    /// Sets the size of explosion effect.
+    /// Optional; defaults to 1.0.
     REGISTER_SCRIPT_CLASS_FUNCTION(ExplosionEffect, setSize);
+    /// Defines whether to draw the explosion effect on short-range radar.
+    /// Optional; defaults to false.
     REGISTER_SCRIPT_CLASS_FUNCTION(ExplosionEffect, setOnRadar);
 }
 
