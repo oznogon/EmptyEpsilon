@@ -168,8 +168,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Example: obj:setDescription("A refitted Atlantis X23 for more ...")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
     /// Sets a description for a specific EScannedState.
-    /// String equivalents for EScannedState are defined in the convert<EScannedState> function of
-    /// src/spaceObjects/spaceObject.cpp:
+    /// Note that only SpaceShip objects are created in an unscanned state. Other SpaceObjects are created as fully scanned.
     /// - "notscanned" or "not": The object has not been scanned.
     /// - "friendorfoeidentified": The object has been identified as hostile or friendly, but has not been scanned.
     /// - "simplescan" or "simple": The object has been scanned once under default server settings, displaying only basic information about the object.
@@ -216,6 +215,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Example: local scan_depth = obj:scanningChannelDepth(obj)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningChannelDepth);
     /// Defines whether all factions consider this object as having been scanned.
+    /// Note that only SpaceShip objects are created in an unscanned state. Other SpaceObjects are created as fully scanned.
     /// If false, all factions treat this object as unscanned.
     /// If true, all factions treat this object as fully scanned.
     /// Example: obj:setScanned(true)
@@ -235,7 +235,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Requires a faction name string value as defined by its FactionInfo.
     /// Example: obj:isScannedByFaction("Human Navy")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedByFaction);
-    // Register a callback function that is called when this object is destroyed by any means.
+    /// Defines a function to call when this object is destroyed by any means.
+    /// Example: obj:onDestroyed(function() print("Object destroyed!") end)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, onDestroyed);
 }
 
