@@ -189,7 +189,7 @@ def translate_type(c_type, name):
     if res is not None:
         return VariadicType(translate_type(res.group(1).strip(), name))
 
-    if c_type in ('EAlertLevel', 'ECrewPosition', 'EMissileSizes', 'EMissileWeapons', 'EScannedState', 'ESystem', 'EDockingState', 'ScriptSimpleCallback'):
+    if c_type in ('EAlertLevel', 'ECrewPosition', 'EMissileSizes', 'EMissileWeapons', 'EScannedState', 'ESystem', 'EMainScreenSetting', 'EMainScreenOverlay', 'EDockingState', 'ScriptSimpleCallback'):
         return EnumType(c_type)
 
     if c_type in ('int', 'float', 'double', 'int32_t', 'int8_t', 'uint32_t', 'uint8_t'):
@@ -519,7 +519,6 @@ rel="stylesheet"
         stream.write("</div>\n")
 
         stream.write('<div class="section">\n')
-        stream.write('<h2>Objects <a href="#">^</a></h2>\n')
         stream.write("<ul>")
         for d in self._definitions:
             if isinstance(d, ScriptClass) and d.parent is None:
