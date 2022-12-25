@@ -10,17 +10,22 @@
 
 #include "scriptInterface.h"
 
-/// A zone area
+/// A Zone is a polygonal area of space defined by a series of coordinates.
+/// Zones are drawn on comms and long-range radar screens, can have a text label, and can return SpaceObjects within their bounds.
 REGISTER_SCRIPT_SUBCLASS(Zone, SpaceObject)
 {
-    /// Set corners of n-gon to x_1, y_1, x_2, y_2, ..., x_n, y_n.
-    /// Recall that x goes right and y goes down.
+    /// Sets the corners of this Zone n-gon to x_1, y_1, x_2, y_2, ... x_n, y_n.
+    /// Note that positive x coordinates are right/"east" of the origin, and positive y coordinates are down/"south" of the origin in space.
     /// Example: zone = Zone():setPoints(2000, 0, 0, 3000, -2000, 0)
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setPoints);
+    /// Sets this Zone's color when drawn on radar.
     /// Example: zone:setColor(255, 140, 0)
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setColor);
+    /// Sets this Zone's text label.
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setLabel);
+    /// Returns this Zone's text label.
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, getLabel);
+    /// Returns whether the given SpaceObject is inside this Zone.
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, isInside);
 }
 

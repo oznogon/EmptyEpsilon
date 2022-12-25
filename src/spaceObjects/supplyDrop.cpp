@@ -6,13 +6,19 @@
 
 #include "scriptInterface.h"
 
-/// A supply drop.
+/// A SupplyDrop is a collectible item picked up on collision with a friendly SpaceShip.
+/// On pickup, the SupplyDrop restocks one type of the colliding SpaceShip's weapons.
+/// If the ship is a PlayerSpaceship, it can also recharge its energy.
+/// A SupplyDrop can also trigger a scripting function upon pickup.
+/// For a more generic object with similar collision properties, see Artifact.
 REGISTER_SCRIPT_SUBCLASS(SupplyDrop, SpaceObject)
 {
+    /// Sets the amount of energy recharged upon pickup when a PlayerSpaceship collides with this SupplyDrop.
     REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, setEnergy);
+    /// Sets the weapon type and amount restocked upon pickup when a SpaceShip collides with this SupplyDrop.
     REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, setWeaponStorage);
-    /// Set a function that will be called if a player picks up the supply drop.
-    /// First argument given to the function will be the supply drop, the second the player.
+    /// Defines a function to call when a SpaceShip collides with the supply drop.
+    /// Passes the supply drop and the colliding ship (if it's a PlayerSpaceship) to the function.
     REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, onPickUp);
 }
 

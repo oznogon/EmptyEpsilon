@@ -24,20 +24,32 @@
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_button.h"
 
-///The TutorialGame object is normally never created.
-/// And it only used to setup the special tutorial level.
-/// It contains functions to assist in explaining the game, but do not work outside of the tutorial.
+/// A TutorialGame is a local guided game mode designed to teach players how to play EmptyEpsilon.
+/// The TutorialGame object is not normally created, and is used only to set up tutorial levels.
+/// Its functions aid in explaining the game and don't work outside of a TutorialGame.
 REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
 {
+    /// Sets the PlayerSpaceship to use during this tutorial.
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setPlayerShip);
+    /// Changes the player's view to the Main Screen.
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToMainScreen);
+    /// Changes the player's view to the Tactical view.
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToTactical);
+    /// Changes the player's view to the Long-Range Radar.
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToLongRange);
+    /// Changes the player's view to the crew screen with the given index.
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToScreen);
+    /// Displays a message to the player.
+    /// If show_next is true, the message includes a button to trigger the TutorialGame:onNext() function.
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, showMessage);
+    /// Moves the message displayed by TutorialGame:showMessage() to the top of the screen.
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToTopPosition);
+    /// Moves the message displayed by TutorialGame:showMessage() to the bottom of the screen.
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToBottomPosition);
+    /// Defines a function to call when the player clicks the Next button.
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, onNext);
+    /// For a repeated tutorial, finish() reinitializes the scene and reloads the tutorial.
+    /// Otherwise, this ends the tutorial game.
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, finish);
 }
 

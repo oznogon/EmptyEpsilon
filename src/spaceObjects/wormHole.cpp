@@ -26,15 +26,16 @@ struct VertexAndTexCoords
     glm::vec2 texcoords;
 };
 
-/// A wormhole object that drags objects toward it like a black hole, and then
-/// teleports them to another point when they reach its center.
+/// A WormHole teleports any SpaceObject that reaches its center to another point in space.
+/// WormHoles drag objects toward them like a BlackHole, but do not deal damage.
 REGISTER_SCRIPT_SUBCLASS(WormHole, SpaceObject)
 {
-    /// Set the target of this wormhole
+    /// Sets the target teleportation coordinates for objects that pass through the center of this WormHole.
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, setTargetPosition);
+    /// Returns the target teleportation coordinates for objects that pass through the center of this WormHole.
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, getTargetPosition);
-    /// Set a function that will be called if a SpaceObject is teleported.
-    /// First argument given to the function will be the WormHole, the second the SpaceObject that has been teleported.
+    /// Defines a function to call when this WormHole teleports a SpaceObject.
+    /// Passes the WormHole object and the teleported SpaceObject.
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, onTeleportation);
 }
 

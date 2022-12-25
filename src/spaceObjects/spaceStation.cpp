@@ -8,8 +8,9 @@
 #include "mesh.h"
 #include "main.h"
 #include "pathPlanner.h"
-
 #include "scriptInterface.h"
+
+/// A SpaceStation is an immobile ship-like object that repairs, resupplies, and recharges docked ships.
 REGISTER_SCRIPT_SUBCLASS(SpaceStation, ShipTemplateBasedObject)
 {
 }

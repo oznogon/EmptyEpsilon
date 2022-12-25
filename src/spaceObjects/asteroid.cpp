@@ -118,14 +118,14 @@ glm::mat4 Asteroid::getModelMatrix() const
     return glm::scale(asteroid_matrix, glm::vec3(getRadius()));
 }
 
-/// An asteroid in space. Outside of hit range, just for visuals.
+/// A decorative asteroid in space that exists outside of the movement plane and can't be collided with.
 REGISTER_SCRIPT_SUBCLASS(VisualAsteroid, SpaceObject)
 {
-    /// Set the radius of this asteroid
-    /// The default radius for an VisualAsteroid is between 110 and 130
+    /// Sets the asteroid's radius.
+    /// Optional. Defaults to a random radius between 110 and 130.
     /// Example: VisualAsteroid():setSize(50)
     REGISTER_SCRIPT_CLASS_FUNCTION(VisualAsteroid, setSize);
-    /// Gets the current radius of this asteroid
+    /// Returns the asteroid's radius.
     /// Example: local size=VisualAsteroid():getSize()
     REGISTER_SCRIPT_CLASS_FUNCTION(VisualAsteroid, getSize);
 }
