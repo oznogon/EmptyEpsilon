@@ -13,84 +13,85 @@
 
 #include "scriptInterface.h"
 
-/// CpuShips are AI controlled ships.
-/// They can get different orders.
-/// Example: CpuShip():setTemplate("Fighter"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
+/// CpuShips are AI-controlled SpaceShips.
+/// The AI can be assigned an order (be idle, roam freely, defend location, etc.) and a combat behavior state (attack at close range, at long range, be evasive).
+/// AI behaviors are defined in ai.cpp.
+/// CpuShip:order... functions also broadcast their orders over friendly comms.
+/// Autonomous combat AI orders use the CpuShip's short- and long-range radar ranges to acquire targets, which can be affected by nebulae.
+/// They also rank prospective targets by their type, distance, and capabilities.
+/// Example: CpuShip():setTemplate("Fighter"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setAI("evasive"):setScanned(true)
 REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
 {
-    /// Switch the AI to a different state. AI state can be set per ship,
-    /// defined in the shipTemplate, or left to "default". AI state is distinct
-    /// from orders, and determines the AI's tactics and responses in combat.
-    /// Valid values are "default", "missileVolley", "fighter", and "evasion".
-    /// "missileVolley" prefers lining up missile attacks from long range.
-    /// "fighter" prefers attacking at close range with strafing maneuvers.
-    /// "evasion" maintains distance from enemy weapons and evades attacks.
+    /// Sets the default combat AI state for this CpuShip.
+    /// AI state determines the AI's combat tactics and responses.
+    /// It's distinct from orders, which determine the ship's active objectives and are defined by CpuShip:order...() functions.
+    /// AI state can be set per ship, defined in the shipTemplate, or left to "default".
+    /// Valid AI states are:
+    /// - "default" directly pursues enemies at beam range while making opportunistic missile attacks
+    /// - "evasion" maintains distance from enemy weapons and evades attacks
+    /// - "fighter" prefers strafing maneuvers to attack briefly at close range while passing
+    /// - "missilevolley" prefers lining up missile attacks from long range
     /// Example: enemy:setAI("fighter")
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, setAI);
-    /// Order this ship to hold the current position. Do nothing; don't attack.
-    /// Orders are distinct from AI state, and determines what the ship's
-    /// current objectives.
+    /// Orders this CpuShip to stay at its current position and do nothing
+    /// Idle CpuShips don't target or attack nearby enemies.
     /// Example: enemy:orderIdle()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderIdle);
-    /// Order this ship to roam and engage at will, without a specific target.
+    /// Orders this CpuShip to roam and engage at will, without a specific target.
+    /// A Roaming ship can acquire hostile targets within its long-range radar range, and prefers a hostile target within 2U of its short-range radar range.
+    /// If this ship has weapon tubes but is out of weapons stock and has no beam weapons, it attempts to Retreat to a weapons restock target within long-range radar range.
     /// Example: enemy:orderRoaming()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRoaming);
-    /// Order this ship to dock at [order_target] to re-stock missiles and
-    /// repair its hull. If neccessary, roam to locate a dockable target.
-    /// Continue roaming after repairs and re-stocking, or if no dockable
-    /// target is found.
-    /// Requires a target ShipTemplateBasedObject that supports docking.
+    /// Orders this CpuShip to move toward the given SpaceObject and dock, re-stock weapons, and repair its hull.
+    /// If the SpaceObject is a dockable ShipTemplateBasedObject, this ship moves directly toward it and docks with it as soon as possible.
+    /// If not, this ship moves toward the best weapons restocking target within twice its long-range radar range.
+    /// If this ship still can't find a restocking target, or it is fully repaired and re-stocked, this ship reverts to Roaming orders.
     /// Example: enemy:orderRetreat(spaceStation)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRetreat);
-    /// Order this ship to hold the current position. Do not retreat, and
-    /// attack nearby targets.
+    /// Orders this CpuShip to stay at its current position and attack nearby hostiles.
+    /// This ship will rotate to face a target and fires missiles within 4.5U if it has any, but won't move, roam, or patrol.
     /// Example: enemy:orderStandGround()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderStandGround);
-    /// Order this ship to defend [order_target_location] against enemies that
-    /// get too close.
-    /// Requires x,y coordinates to defend.
+    /// Orders this CpuShip to move to the given coordinates, patrol within a 1.5U radius, and attack any hostiles that move within 2U of its short-range radar range.
+    /// If a targeted hostile moves more than 3U out of this ship's short-range radar range, this ship drops the targeet and resumes defending its position.
     /// Example: enemy:orderDefendLocation(500, 1000)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendLocation);
-    /// Order this ship to defend [order_target] against enemies that get too
-    /// close. Default to AI_Roaming if the defense target is destroyed.
-    /// Requires a SpaceObject to defend.
+    /// Orders this CpuShip to maintain a 2U escort distance from the given SpaceObject and attack nearby hostiles.
+    /// If a targeted hostile moves more than 3U out of this ship's short-range radar range, this ship drops the targeet and resumes escorting.
+    /// If the SpaceObject being defended is destroyed, this ship reverts to Roaming orders.
     /// Example: enemy:orderDefendTarget(enemy2)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendTarget);
-    /// Order this ship to follow [order_target] from a specified distance, and
-    /// to use [order_target]'s target if one is selected.
-    /// Requires a SpaceObject to serve as the formation's flight leader, and a
-    /// float value for the offset distance to maintain.
-    /// Example: enemy:orderFlyFormation(enemy2, 500)
+    /// Orders this CpuShip to fly toward the given SpaceObject and follow it from the given offset distance.
+    /// This ship also targets anything its given SpaceObject targets.
+    /// If the SpaceObject being followed is destroyed, this ship reverts to Roaming orders.
+    /// Give multiple CpuShips the same SpaceObject and different offsets to create a formation.
+    /// Example: enemy:orderFlyFormation(enemy2, 500, 250)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyFormation);
-    /// Order this ship to move towards [order_target_location] and attack
-    /// enemies that get too close during transit. Disengage from combat and
-    /// continue towards the destination if enemies are too distant.
-    /// Requires x,y coordinates to move towards.
+    /// Orders this CpuShip to move toward the given coordinates, and to attack hostiles that approach within its short-range radar range during transit.
+    /// This ship uses any warp or jump drive capabilities to arrive near its destination.
+    /// This ship disengages from combat and continues toward its destination if its target moves more than 3U out of its short-range radar range.
+    /// Upon arrival, this ship reverts to the Defend Location orders at its destination.
     /// Example: enemy:orderFlyTowards(500, 1000)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowards);
-    /// Order this ship to move towards [order_target_location] while ignoring
-    /// all enemies. Don't attack.
-    /// Requires x,y coordinates to move towards.
+    /// Orders this CpuShip to move toward the given coordinates, ignoring all hostiles on the way.
+    /// Upon arrival, this ship reverts to the Idle orders.
     /// Example: enemy:orderFlyTowardsBlind(500, 1000)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowardsBlind);
-    /// Order this ship to attack the specified [order_target].
-    /// Requires a SpaceObject to attack.
+    /// Orders this CpuShip to attack the given SpaceObject.
     /// Example: enemy:orderAttack(player)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderAttack);
-    /// Order this ship to dock with the specified target, if possible.
-    /// Requires a dockable SpaceObject to dock with.
+    /// Orders this CpuShip to Fly Toward and dock with the given SpaceObject, if possible.
+    /// If its target doesn't exist, revert to Roaming orders.
     /// Example: enemy:orderDock(spaceStation)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDock);
-    /// Get this ship's current orders.
-    /// Returns a string representation of the ship's current EAIOrder value.
+    /// Returns this CpuShip's current orders.
     /// Example: local ship_orders = enemy:getOrder()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrder);
-    /// Get the target location of this ship's current orders.
-    /// Returns the targeted x,y coordinates, or 0,0 if not defined.
+    /// Returns the coordinates for this CpuShip's orders.
+    /// Returns the order's x,y coordinates, or 0,0 if not defined.
     /// Example: local x, y = enemy:getOrderTargetLocation()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrderTargetLocation);
-    /// Get the target SpaceObject of this ship's current orders.
-    /// Returns the targeted SpaceObject.
+    /// Returns the target SpaceObject for this CpuShip's orders.
     /// Example: local target = enemy:getOrderTarget()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrderTarget);
 }

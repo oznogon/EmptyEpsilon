@@ -33,12 +33,14 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, hidden);
     /// Sets the default combat AI state for CpuShips created from this template.
     /// AI state determines the AI's combat tactics and responses.
-    /// It is distinct from orders, which determine the ship's active objectives and are defined by CpuShip:order...() functions.
+    /// It's distinct from orders, which determine the ship's active objectives and are defined by CpuShip:order...() functions.
+    /// AI state can be set per ship, defined in the shipTemplate, or left to "default".
     /// Valid AI states are:
     /// - "default" directly pursues enemies at beam range while making opportunistic missile attacks
     /// - "evasion" maintains distance from enemy weapons and evades attacks
     /// - "fighter" prefers strafing maneuvers to attack briefly at close range while passing
     /// - "missilevolley" prefers lining up missile attacks from long range
+    /// Example: enemy:setAI("fighter")
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDefaultAI);
     /// Sets the 3D model data by name for ships created from this template.
     /// Model data is set in ModelData objects and loaded from the model_data.lua file.
