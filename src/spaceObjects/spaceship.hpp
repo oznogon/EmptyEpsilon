@@ -33,6 +33,24 @@ template<> void convert<EMainScreenOverlay>::param(lua_State* L, int& idx, EMain
         mso = MSO_HideComms;
 }
 
+template<> int convert<EDockingState>::returnType(lua_State* L, EDockingState &ds)
+{
+    switch(ds)
+    {
+    case DS_NotDocking:
+        lua_pushstring(L, "notdocking");
+        return 1;
+    case DS_Docking:
+        lua_pushstring(L, "docking");
+        return 1;
+    case DS_Docked:
+        lua_pushstring(L, "docked");
+        return 1;
+    default:
+        return 0;
+    }
+}
+
 template<> int convert<Speeds>::returnType(lua_State* L,const Speeds &speeds)
 {
     lua_pushnumber(L, speeds.forward);

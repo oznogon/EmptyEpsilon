@@ -37,6 +37,7 @@ enum EDockingState
     DS_Docking,
     DS_Docked
 };
+template<> int convert<EDockingState>::returnType(lua_State* L, EDockingState &ds);
 
 struct Speeds
 {
