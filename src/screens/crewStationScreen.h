@@ -17,6 +17,7 @@ class GuiPanel;
 class GuiToggleButton;
 class GuiViewport3D;
 class ImpulseSound;
+class ShipSound;
 
 class CrewStationScreen : public GuiCanvas, public Updatable
 {
@@ -41,6 +42,7 @@ private:
     GuiScrollText* message_text;
     GuiButton* message_close_button;
     std::unique_ptr<ImpulseSound> impulse_sound;
+    std::unique_ptr<ShipSound> ship_sound;
 
     struct CrewTabInfo {
         GuiToggleButton* button;

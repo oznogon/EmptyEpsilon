@@ -11,6 +11,7 @@
 #include "screenComponents/noiseOverlay.h"
 #include "screenComponents/shipDestroyedPopup.h"
 #include "screenComponents/helpOverlay.h"
+#include "screenComponents/shipSound.h"
 #include "screenComponents/impulseSound.h"
 #include "screenComponents/viewportMainScreen.h"
 
@@ -87,6 +88,7 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
 
     // Initialize and play the impulse engine sound.
     impulse_sound = std::unique_ptr<ImpulseSound>( new ImpulseSound(PreferencesManager::get("impulse_sound_enabled", "2") == "1") );
+    ship_sound = std::unique_ptr<ShipSound>( new ShipSound() );
 }
 
 void CrewStationScreen::destroy()
@@ -163,6 +165,7 @@ void CrewStationScreen::update(float delta)
         destroy();
         soundManager->stopMusic();
         impulse_sound->stop();
+        ship_sound->stop();
         disconnectFromServer();
         returnToMainMenu(getRenderLayer());
         return;
@@ -173,6 +176,7 @@ void CrewStationScreen::update(float delta)
         destroy();
         soundManager->stopMusic();
         impulse_sound->stop();
+        ship_sound->stop();
         returnToShipSelection(getRenderLayer());
     }
     if (keys.help.getDown())
@@ -220,12 +224,32 @@ void CrewStationScreen::update(float delta)
             }
         }
 
-        // Update the impulse engine sound.
+        // If the custom sound is triggered on the ship...
+        if (my_spaceship->custom_sound_triggered && !ship_sound->hasPlayed()) {
+            // ... set it up ...
+            ship_sound->setFilename(my_spaceship->custom_sound_filename);
+            // TODO: Make these configurable
+            ship_sound->setVolume(100.0f);
+            ship_sound->setPitch(1.0f);
+            ship_sound->setLooping(false);
+            // ... and play the sound.
+            ship_sound->play();
+        } else if (!my_spaceship->custom_sound_triggered && ship_sound->hasPlayed()) {
+            // If the custom sound trigger was reset on the ship but we've
+            // already played a custom sound, stop and reset playback.
+            ship_sound->stop();
+            ship_sound->setPlayed(false);
+        }
+
+        // Update the impulse engine and custom sounds.
         impulse_sound->update(delta);
+        ship_sound->update(delta);
     } else {
         // If we're not the player ship (ie. we exploded), stop playing the
-        // impulse engine sound.
+        // impulse engine and custom sounds.
         impulse_sound->stop();
+        ship_sound->stop();
+        ship_sound->setPlayed(false);
     }
 
     if (keys.next_station.getDown())

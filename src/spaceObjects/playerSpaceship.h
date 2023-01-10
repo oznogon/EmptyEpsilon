@@ -116,6 +116,8 @@ private:
     float energy_warp_per_second = default_energy_warp_per_second;
 public:
     std::vector<CustomShipFunction> custom_functions;
+    string custom_sound_filename;
+    bool custom_sound_triggered;
 
     std::vector<glm::vec2> waypoints;
 
@@ -230,6 +232,9 @@ public:
     void onProbeLink(ScriptSimpleCallback callback);
     void onProbeUnlink(ScriptSimpleCallback callback);
 
+    void triggerCustomSound(string filename);
+    void resetCustomSound();
+    void setCustomSoundTrigger(bool triggered);
     void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> order);
     void addCustomInfo(ECrewPosition position, string name, string caption, std::optional<int> order);
     void addCustomMessage(ECrewPosition position, string name, string caption);

@@ -72,6 +72,20 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setMaxScanProbeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getMaxScanProbeCount);
 
+    // Trigger a custom sound at this PlayerSpaceship's crew positions using the audio file with the given filename.
+    // Paths are relative to the resources/ directory.
+    // Client crew positions play the sound if they have the same file locally.
+    // The sound plays immediately if the position is connected, or upon connection of a new client after the trigger.
+    // The sound is played once on the client and won't be played again, even if this function is run again.
+    // To stop or reset playback, or to trigger a new sound, use PlayerSpaceship::resetCustomSound() first.
+    // Example: player:triggerCustomSound("audio/scenario/48/sa_48_Avery01.ogg")
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, triggerCustomSound);
+    // Resets the custom sound for this PlayerSpaceship.
+    // If a custom sound is playing on the player ship, this stops it.
+    // Reset the custom sound before triggering a new sound.
+    // Resetting the custom sound also prevents it from playing upon new client connection/reconnection.
+    // Example: player:resetCustomSound()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, resetCustomSound);
     /// add a custom Button to the according station. Use order to sort (shared with custom info).
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomButton);
     /// add a custom Info Label to the according station. Use order to sort (shared with custom button).
@@ -337,6 +351,7 @@ PlayerSpaceship::PlayerSpaceship()
     alert_level = AL_Normal;
     shields_active = false;
     control_code = "";
+    custom_sound_triggered = false;
 
     setFactionId(1);
 
@@ -382,6 +397,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&linked_science_probe_id);
     registerMemberReplication(&control_code);
     registerMemberReplication(&custom_functions);
+    registerMemberReplication(&custom_sound_filename, 1.0);
+    registerMemberReplication(&custom_sound_triggered);
 
     // Determine which stations must provide self-destruct confirmation codes.
     for(int n = 0; n < max_self_destruct_codes; n++)
@@ -988,6 +1005,28 @@ bool PlayerSpaceship::hasPlayerAtPosition(ECrewPosition position)
         }
     }
     return false;
+}
+
+void PlayerSpaceship::resetCustomSound()
+{
+    LOG(INFO) << "PlayerSpaceship::stopCustomSound(): Custom ship sound stopped";
+    custom_sound_filename = "";
+    custom_sound_triggered = false;
+    LOG(INFO) << "PlayerSpaceship::stopCustomSound(): Custom ship sound trigger reset";
+}
+
+void PlayerSpaceship::triggerCustomSound(string filename)
+{
+    LOG(INFO) << "PlayerSpaceship::playCustomSound(): Custom ship sound <" + filename + "> requested";
+    custom_sound_filename = filename;
+    custom_sound_triggered = true;
+    LOG(INFO) << "PlayerSpaceship::playCustomSound(): Custom ship sound triggered";
+}
+
+void PlayerSpaceship::setCustomSoundTrigger(bool triggered)
+{
+    custom_sound_triggered = triggered;
+    LOG(INFO) << "PlayerSpaceship::setCustomSoundTrigger(): Custom ship sound triggered = " << custom_sound_triggered;
 }
 
 void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> order)

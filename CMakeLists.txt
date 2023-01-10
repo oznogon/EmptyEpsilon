@@ -326,6 +326,7 @@ set(MAIN_SOURCES
     src/screenComponents/miniGame.cpp
     src/screenComponents/mineSweeper.cpp
     src/screenComponents/impulseSound.cpp
+    src/screenComponents/shipSound.cpp
     src/spaceObjects/missiles/missileWeapon.cpp
     src/spaceObjects/missiles/EMPMissile.cpp
     src/spaceObjects/missiles/homingMissile.cpp
@@ -460,6 +461,7 @@ set(MAIN_SOURCES
     src/screenComponents/shieldsEnableButton.h
     src/screenComponents/shipDestroyedPopup.h
     src/screenComponents/shipInternalView.h
+    src/screenComponents/shipSound.h
     src/screenComponents/shipsLogControl.h
     src/screenComponents/signalQualityIndicator.h
     src/screenComponents/snapSlider.h
