@@ -387,13 +387,21 @@ int main(int argc, char** argv)
     new SteamRichPresence();
 #endif //STEAMSDK
 
+    // If server_scenario isn't set, launch from the main menu (or headless).
     if (PreferencesManager::get("server_scenario") == "")
+    {
         returnToMainMenu(defaultRenderLayer);
-    else
+    }
+    else if (PreferencesManager::get("headless") == "")
     {
         new EpsilonServer(defaultServerPort);
         gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"));
         new ShipSelectionScreen();
+    }
+    else
+    {
+        LOG(Error, "Tried to launch with both server_scenario and headless preferences set. Headless mode takes priority.");
+        returnToMainMenu(defaultRenderLayer);
     }
 
     engine->runMainLoop();
