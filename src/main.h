@@ -17,9 +17,11 @@ extern PostProcessor* glitchPostProcessor;
 extern PostProcessor* warpPostProcessor;
 extern PVector<Window> windows;
 extern std::vector<RenderLayer*> window_render_layers;
+extern string available_upgrade;
 
 void returnToMainMenu(RenderLayer*);
 void returnToShipSelection(RenderLayer*);
 void returnToOptionMenu();
+string getAvailableUpgradeVersion();
 
 #endif//MAIN_H

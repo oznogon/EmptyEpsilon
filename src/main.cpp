@@ -1,6 +1,7 @@
 #include <memory>
 #include <set>
 #include <filesystem>
+#include <regex>
 #include <string.h>
 #include <i18n.h>
 #include <multiplayer_proxy.h>
@@ -35,6 +36,8 @@
 #include "networkRecorder.h"
 #include "tutorialGame.h"
 #include "windowManager.h"
+#include "io/http/request.h"
+#include "io/json.h"
 
 #include "graphics/opengl.h"
 
@@ -66,6 +69,7 @@ PostProcessor* glitchPostProcessor;
 PostProcessor* warpPostProcessor;
 PVector<Window> windows;
 std::vector<RenderLayer*> window_render_layers;
+string available_upgrade = "";
 
 #include "gui/layout/vertical.h"
 #include "gui/layout/horizontal.h"
@@ -202,6 +206,8 @@ int main(int argc, char** argv)
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
+
+    available_upgrade = getAvailableUpgradeVersion();
 
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {
@@ -490,4 +496,81 @@ void returnToShipSelection(RenderLayer* render_layer)
 void returnToOptionMenu()
 {
     new OptionsMenu();
+}
+
+string getAvailableUpgradeVersion()
+{
+    string latest_tag = "";
+    string github_api_domain = "api.github.com";
+    string github_api_path = "/repos/daid/emptyepsilon/releases/latest";
+
+    sp::io::http::Request http(github_api_domain, 443);
+    auto response = http.get(github_api_path);
+
+    if (response.status == 200) // OK
+    {
+        // Looking for "tag_name": "EE-2022.10.28"
+        const auto& body = response.body;
+        std::string err;
+
+        if (auto json = sp::json::parse(body, err); json)
+        {
+            auto release_json = json.value();
+
+            for (const auto& entry : release_json.items())
+            {
+                if (string(entry.key()) == "tag_name")
+                {
+                    auto parsed_tag = string(entry.value());
+                    std::regex tag_format ("EE-([0-9]{4}).([0-9]{2}).([0-9]{2}).*");
+                    std::smatch version_numbers;
+
+                    if (std::regex_match (parsed_tag, version_numbers, tag_format))
+                    {
+                        // Convert the tag to a version number by appending the matches
+                        for (size_t i = 1; i < version_numbers.size(); i++)
+                        {
+                            string piece = version_numbers[i].str();
+                            latest_tag += piece;
+                        }
+
+                        // Compare the latest GitHub tag to this version
+                        // Ignore if this version is 0, which means this is a dev build
+                        if (int(VERSION_NUMBER) != 0 && latest_tag.toInt() > int(VERSION_NUMBER))
+                        {
+                            LOG(WARNING) << "EmptyEpsilon upgrade available! Latest version is " << latest_tag;
+                            return latest_tag;
+                        }
+                        else
+                        {
+                            return "";
+                        }
+                    }
+                    else
+                    {
+                        LOG(ERROR) << "GitHub latest version tag doesn't match EE version format";
+                        return "";
+                    }
+                }
+            }
+
+            if (latest_tag == "")
+            {
+                LOG(ERROR) << "GitHub latest version data doesn't contain a tag_name";
+                return "";
+            }
+        }
+        else
+        {
+            LOG(ERROR) << "GitHub update check JSON parsing failed: " << err;
+            return "";
+        }
+    }
+    else
+    {
+        LOG(INFO) << "GitHub version check request returned HTTP error code " << response.status;
+        return "";
+    }
+
+    return "";
 }
