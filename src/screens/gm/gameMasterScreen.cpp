@@ -240,11 +240,8 @@ void GameMasterScreen::update(float delta)
     float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
     if (mouse_wheel_delta != 0.0f)
     {
-        float view_distance = main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 100000)
-            view_distance = 100000;
-        if (view_distance < 5000)
-            view_distance = 5000;
+        // Set zoom limits to 5U and 1000U
+        float view_distance = std::max(5000.0f, std::min(1000000.0f, main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f))));
         main_radar->setDistance(view_distance);
         if (view_distance < 10000)
             main_radar->shortRange();

@@ -314,14 +314,17 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.position.y) / scale) / sector_size) + 1;
     int sector_y_max = floor((view_position.y + (rect.position.y + rect.size.y - radar_screen_center.y) / scale) / sector_size);
     glm::u8vec4 color(64, 64, 128, 128);
-    for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
-    {
-        float x = sector_x * sector_size;
-        for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
+    // Stop drawing sector names when zoomed out too far
+    if (distance < 130000.0f) {
+        for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
         {
-            float y = sector_y * sector_size;
-            auto pos = worldToScreen(glm::vec2(x+(30/scale),y+(30/scale)));
-            renderer.drawText(sp::Rect(pos.x-10, pos.y-10, 20, 20), getSectorName(glm::vec2(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), sp::Alignment::Center, 30, bold_font, color);
+            float x = sector_x * sector_size;
+            for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
+            {
+                float y = sector_y * sector_size;
+                auto pos = worldToScreen(glm::vec2(x+(30/scale),y+(30/scale)));
+                renderer.drawText(sp::Rect(pos.x-10, pos.y-10, 20, 20), getSectorName(glm::vec2(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), sp::Alignment::Center, 30, bold_font, color);
+            }
         }
     }
 
