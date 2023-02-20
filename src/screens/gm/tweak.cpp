@@ -407,7 +407,7 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
     });
     size_selector->addEntry(tr("tube", "Small"),MS_Small);
     size_selector->addEntry(tr("tube", "Medium"),MS_Medium);
-    size_selector->addEntry(tr("tube", "large"),MS_Large);
+    size_selector->addEntry(tr("tube", "Large"),MS_Large);
     size_selector->setSelectionIndex(MS_Medium);
     size_selector->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -553,7 +553,7 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
         if (value > 0)
             target->beam_weapons[beam_index].setTurretRotationRate(value / 10.0f);
         else
-            target->beam_weapons[beam_index].setTurretRotationRate(0.0);
+            target->beam_weapons[beam_index].setTurretRotationRate(0.0f);
     });
     turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 30);
     // Override overlay label.
@@ -572,11 +572,40 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     });
     cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
+    (new GuiLabel(right_col, "", tr("beam", "Energy used per fire:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+    energy_per_fire_slider = new GuiSlider(right_col, "", 0.0, 20.0, 0.0, [this](float value) {
+        target->beam_weapons[beam_index].setEnergyPerFire(value);
+    });
+    energy_per_fire_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
+
+    (new GuiLabel(right_col, "", tr("beam", "Heat generated per fire:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+    heat_per_fire_slider = new GuiSlider(right_col, "", 0.0, 250.0, 0.0, [this](float value) {
+        // Divide a large value for granularity.
+        if (value > 0)
+            target->beam_weapons[beam_index].setHeatPerFire(value / 100.0f);
+        else
+            target->beam_weapons[beam_index].setHeatPerFire(0.0f);
+    });
+    heat_per_fire_slider->setSize(GuiElement::GuiSizeMax, 30);
+    // Override overlay label.
+    heat_per_fire_overlay_label = new GuiLabel(heat_per_fire_slider, "", "", 30);
+    heat_per_fire_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
     (new GuiLabel(right_col, "", tr("beam", "Damage:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     damage_slider = new GuiSlider(right_col, "", 0.1, 50.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setDamage(value);
     });
     damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
+
+    (new GuiLabel(right_col, "", tr("beam", "Damage Type:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+    damage_type_selector = new GuiSelector(right_col, "", [this](int index, string value) {
+        target->beam_weapons[beam_index].setDamageType(EDamageType(index));
+    });
+    damage_type_selector->addEntry(tr("damagetype", "Energy"), DT_Energy);
+    damage_type_selector->addEntry(tr("damagetype", "Kinetic"), DT_Kinetic);
+    damage_type_selector->addEntry(tr("damagetype", "EMP"), DT_EMP);
+    damage_type_selector->setSelectionIndex(DT_Energy);
+    damage_type_selector->setSize(GuiElement::GuiSizeMax, 30);
 }
 
 void GuiShipTweakBeamweapons::onDraw(sp::RenderTarget& renderer)
@@ -591,7 +620,11 @@ void GuiShipTweakBeamweapons::onDraw(sp::RenderTarget& renderer)
     turret_rotation_rate_slider->setValue(target->beam_weapons[beam_index].getTurretRotationRate() * 10.0f);
     turret_rotation_rate_overlay_label->setText(string(target->beam_weapons[beam_index].getTurretRotationRate()));
     cycle_time_slider->setValue(target->beam_weapons[beam_index].getCycleTime());
+    energy_per_fire_slider->setValue(target->beam_weapons[beam_index].getEnergyPerFire());
+    heat_per_fire_slider->setValue(target->beam_weapons[beam_index].getHeatPerFire() * 100.0f);
+    heat_per_fire_overlay_label->setText(string(target->beam_weapons[beam_index].getHeatPerFire()));
     damage_slider->setValue(target->beam_weapons[beam_index].getDamage());
+    damage_type_selector->setSelectionIndex(target->beam_weapons[beam_index].getDamageType());
 }
 
 void GuiShipTweakBeamweapons::open(P<SpaceObject> target)
