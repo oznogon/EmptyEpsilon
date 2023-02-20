@@ -491,7 +491,9 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     layout = new GuiElement(three, "");
     layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     for(int n=int(singlePilot) + 1; n<int(max_crew_positions); n++)
+    {
         create_crew_position_button(layout, n);
+    }
 
     // Main screen controls button
     main_screen_controls_button = new GuiToggleButton(layout, "MAIN_SCREEN_CONTROLS_ENABLE", tr("Main screen controls"), [this](bool value) {

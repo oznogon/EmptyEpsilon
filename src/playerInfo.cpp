@@ -20,6 +20,7 @@
 #include "screens/extra/databaseScreen.h"
 #include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
+#include "screens/extra/hangarScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
@@ -219,6 +220,8 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new CommsScreen(container), commsOnly, getCrewPositionName(commsOnly), getCrewPositionIcon(commsOnly));
         if (crew_position[shipLog] & (1 << monitor_index))
             screen->addStationTab(new ShipLogScreen(container), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
+        if (crew_position[hangarScreen] & (1 << monitor_index))
+            screen->addStationTab(new HangarScreen(container), hangarScreen, getCrewPositionName(hangarScreen), getCrewPositionIcon(hangarScreen));
 
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)
@@ -265,6 +268,7 @@ string getCrewPositionName(ECrewPosition position)
     case altRelay: return tr("station","Strategic Map");
     case commsOnly: return tr("station","Comms");
     case shipLog: return tr("station","Ship's Log");
+    case hangarScreen: return tr("station","Hangar Control");
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -288,6 +292,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case altRelay: return "";
     case commsOnly: return "";
     case shipLog: return "";
+    case hangarScreen: return "";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -334,6 +339,8 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = commsOnly;
     else if (str == "shiplog")
         cp = shipLog;
+    else if (str == "hangarscreen")
+        cp = hangarScreen;
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());
 }

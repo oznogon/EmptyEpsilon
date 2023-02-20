@@ -1,0 +1,47 @@
+Added vectors to spaceship recording which ships are docked. Need to read from those vectors to populate the hangarView
+
+--
+
+Create a hangar view for ships with docking classes
+Enable hangar view option on ship selection screen as an extra screen
+
+If length of internal dock classes or external dock classes for this ship type is > 0
+	Enable hangar view button on this ship's relay? weapons? crew screens
+
+	On hangar view:
+		Show this ship's stocks of transferable resources:
+		  - energy
+		  - weapons
+		  - scan probes
+		  - repair crew
+
+		For each docked ship
+			Display the ship's 3D model, faction, class, and callsign
+			Make the model, class, and callsign clickable
+
+		On clicking a ship's model, class, or callsign:
+			Open a view that displays the docked ship's details:
+			  - weapons
+			  - weapon storage
+			  - shields
+			  - hull
+			  - system damage
+			If player, also display:
+			  - energy
+			  - heat
+			  - repair crew
+			  - scan probes
+			Provide custom script hooks for scenarios
+			Provide controls to force the ship to undock
+			Provide controls to toggle (if this ship is capable of it):
+			  - energy sharing
+			  - repairs
+			  - restocking cpuship weapons
+			If player, also provide controls to:
+			  - open comms (link to relay)
+			  - restock scan probes
+			  - transfer repair crews
+			Provide control to return to hangar view
+
+If length of internal/external dock classes for this ship type is 0
+	Disable hangar view button on this ship's relay? weapons? crew screens

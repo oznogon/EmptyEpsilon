@@ -25,6 +25,7 @@ enum ECrewPosition
     altRelay,
     commsOnly,
     shipLog,
+    hangarScreen,
     max_crew_positions
 };
 

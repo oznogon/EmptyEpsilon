@@ -63,7 +63,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Returns whether this SpaceShip is docked with the given SpaceObject.
     /// Example: ship:isDocked(base) -- returns true if `ship` is fully docked with `base`
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
-    /// Returns the SoaceObject with which this SpaceShip is docked.
+    /// Returns the SpaceObject with which this SpaceShip is docked.
     /// Example: base = ship:getDockedWith()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockedWith);
     /// Returns the EDockingState value of this SpaceShip.
@@ -943,6 +943,12 @@ void SpaceShip::update(float delta)
 {
     ShipTemplateBasedObject::update(delta);
 
+    if (shipsDockedExternally.size() > 0)
+        LOG(INFO) << "Ships docked externally to " << callsign << ": " << shipsDockedExternally.size();
+
+    if (shipsDockedInternally.size() > 0)
+        LOG(INFO) << "Ships docked internally to " << callsign << ": " << shipsDockedInternally.size();
+
     if (hasCollisionShape() != (docked_style != DockStyle::Internal))
     {
         if (docked_style == DockStyle::Internal)
@@ -1262,6 +1268,7 @@ void SpaceShip::collide(Collisionable* other, float force)
     if (docking_state == DS_Docking && fabs(angleDifference(target_rotation, getRotation())) < 10.0f)
     {
         P<SpaceObject> dock_object = P<Collisionable>(other);
+
         if (dock_object == docking_target)
         {
             docking_state = DS_Docked;
@@ -1269,6 +1276,25 @@ void SpaceShip::collide(Collisionable* other, float force)
             docking_offset = rotateVec2(getPosition() - other->getPosition(), -other->getRotation());
             float length = glm::length(docking_offset);
             docking_offset = docking_offset / length * (length + 2.0f);
+
+            P<SpaceShip> carrier_ship = dock_object;
+            if (carrier_ship) {
+                if (docked_style == DockStyle::Internal) {
+                    carrier_ship->shipsDockedInternally.push_back(this);
+
+                    for (auto& ship : carrier_ship->shipsDockedInternally)
+                    {
+                        LOG(INFO) << "Ships docked internally to " << carrier_ship->getCallSign() << ": " << ship->getCallSign();
+                    }
+                } else {
+                    carrier_ship->shipsDockedExternally.push_back(this);
+
+                    for (auto& ship : carrier_ship->shipsDockedExternally)
+                    {
+                        LOG(INFO) << "Ships docked externally to " << carrier_ship->getCallSign() << ": " << ship->getCallSign();
+                    }
+                }
+            }
         }
     }
 }
@@ -1310,6 +1336,33 @@ void SpaceShip::requestUndock()
 {
     if (docking_state == DS_Docked && getSystemEffectiveness(SYS_Impulse) > 0.1f)
     {
+        P<SpaceObject> dock_object = this->getDockedWith();
+        P<SpaceShip> carrier_ship = dock_object;
+
+        if (carrier_ship) {
+            if (docked_style == DockStyle::Internal) {
+                for (auto& ship : carrier_ship->shipsDockedInternally)
+                {
+                    if (ship == this) {
+                        remove(carrier_ship->shipsDockedInternally.begin(), carrier_ship->shipsDockedInternally.end(), ship);
+                        LOG(INFO) << "Removing internal " << ship->getCallSign() << " from carrier " << carrier_ship->getCallSign();
+                    } else {
+                        LOG(INFO) << "Ships docked internally to " << carrier_ship->getCallSign() << ": " << ship->getCallSign();
+                    }
+                }
+            } else {
+                for (auto& ship : carrier_ship->shipsDockedExternally)
+                {
+                    if (ship == this) {
+                        remove(carrier_ship->shipsDockedExternally.begin(), carrier_ship->shipsDockedExternally.end(), ship);
+                        LOG(INFO) << "Removing external " << ship->getCallSign() << " from carrier " << carrier_ship->getCallSign();
+                    } else {
+                        LOG(INFO) << "Ships docked externally to " << carrier_ship->getCallSign() << ": " << ship->getCallSign();
+                    }
+                }
+            }
+        }
+
         docked_style = DockStyle::None;
         docking_state = DS_NotDocking;
         impulse_request = 0.5;

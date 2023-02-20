@@ -271,6 +271,7 @@ set(MAIN_SOURCES
     src/screens/extra/damcon.cpp
     src/screens/extra/powerManagement.cpp
     src/screens/extra/databaseScreen.cpp
+    src/screens/extra/hangarScreen.cpp
     src/screens/extra/commsScreen.cpp
     src/screens/extra/shipLogScreen.cpp
     src/screens/gm/gameMasterScreen.cpp
@@ -317,6 +318,7 @@ set(MAIN_SOURCES
     src/screenComponents/signalQualityIndicator.cpp
     src/screenComponents/mainScreenControls.cpp
     src/screenComponents/databaseView.cpp
+    src/screenComponents/hangarView.cpp
     src/screenComponents/shipsLogControl.cpp
     src/screenComponents/onScreenKeyboard.cpp
     src/screenComponents/hackingDialog.cpp
