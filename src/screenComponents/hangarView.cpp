@@ -20,8 +20,11 @@ HangarViewComponent::HangarViewComponent(GuiContainer* owner)
         // P<ScienceDatabase> entry;
 
         // int32_t id = std::stoul(value, nullptr, 10);
-        // selected_entry = findEntryById(id);
-        LOG(INFO) << "HVC button index " << index << ", value " << value;
+        if (game_server)
+            selected_entry = game_server->getObjectById(value.toInt());
+        else
+            selected_entry = game_client->getObjectById(value.toInt());
+        // LOG(INFO) << "HVC button index " << index << ", value " << value;
         display();
     });
     setAttribute("layout", "horizontal");
@@ -29,108 +32,42 @@ HangarViewComponent::HangarViewComponent(GuiContainer* owner)
     display();
 }
 
-bool HangarViewComponent::findAndDisplayEntry(string name)
-{
-/*
-    for(auto sd : ScienceDatabase::science_databases)
-    {
-        if (!sd) continue;
-        if (sd->getName() == name)
-        {
-            selected_entry = sd;
-            display();
-            return true;
-        }
-    }
-*/
-    return false;
-}
-
 void HangarViewComponent::fillListBox()
 {
-    /*
-    item_list->setOptions({});
-    item_list->setSelectionIndex(-1);
+    std::vector<string> docked_labels, docked_ids;
 
-    if (my_spaceship)
+    if (game_server)
     {
-        LOG(INFO) << "HVC::fillListBox(): my_spaceship " << my_spaceship->getCallSign();
-
-        for (auto& ship : my_spaceship->ships_docked_externally)
+        for (auto& object_id : my_spaceship->docked_object_ids)
         {
-            //item_list->addEntry("x " + ship->getCallSign(), std::to_string(ship->getMultiplayerId()));
-        }
-
-        for (auto& ship : my_spaceship->ships_docked_internally)
-        {
-            item_list->addEntry("i " + ship->getCallSign(), std::to_string(ship->getMultiplayerId()));
+            P<ShipTemplateBasedObject> ship = game_server->getObjectById(object_id);
+            if (ship)
+            {
+                string ship_label = ship->getTypeName() + " " + ship->getCallSign();
+                docked_labels.push_back(ship_label);
+                docked_ids.push_back(string(object_id));
+            }
         }
     }
-    */
-    /*
-    // indices of child or sibling pages in the science_databases vector
-    std::vector<unsigned> children_idx;
-    std::vector<unsigned> siblings_idx;
-    P<ScienceDatabase> parent_entry;
-
-    for (unsigned idx=0; idx<ScienceDatabase::science_databases.size(); idx++)
+    else
     {
-        P<ScienceDatabase> sd = ScienceDatabase::science_databases[idx];
-        if (!sd) continue;
-
-        if(selected_entry)
+        for (auto& object_id : my_spaceship->docked_object_ids)
         {
-            if(sd->getId() == selected_entry->getParentId())
+            P<ShipTemplateBasedObject> ship = game_client->getObjectById(object_id);
+            if (ship)
             {
-                parent_entry = sd;
-            }
-            if(sd->getParentId() == selected_entry->getParentId())
-            {
-                siblings_idx.push_back(idx);
-            }
-            if(sd->getParentId() == selected_entry->getId())
-            {
-                children_idx.push_back(idx);
-            }
-        }
-        else
-        {
-            if(sd->getParentId() == 0)
-            {
-                siblings_idx.push_back(idx);
+                string ship_label = ship->getTypeName() + " " + ship->getCallSign();
+                docked_labels.push_back(ship_label);
+                docked_ids.push_back(string(object_id));
             }
         }
     }
 
-    if(selected_entry)
-    {
-        if (children_idx.size() != 0)
-        {
-            item_list->addEntry(tr("button", "Back"), std::to_string(selected_entry->getParentId()));
-        }
-        else if(parent_entry)
-        {
-            item_list->addEntry(tr("button", "Back"), std::to_string(parent_entry->getParentId()));
-        }
-    }
+    // Flip the list so newly docked ships appear at the bottom.
+    std::reverse(docked_labels.begin(), docked_labels.end());
+    std::reverse(docked_ids.begin(), docked_ids.end());
 
-    // the indices we actually want to display
-    std::vector<unsigned> display_idx = children_idx.size() > 0 ? children_idx : siblings_idx;
-
-    sort(display_idx.begin(), display_idx.end(), [](unsigned idxA, unsigned idxB) -> bool {
-        return ScienceDatabase::science_databases[idxA] < ScienceDatabase::science_databases[idxB];
-    });
-
-    for (auto idx : display_idx)
-    {
-        P<ScienceDatabase> sd = ScienceDatabase::science_databases[idx];
-        int item_list_idx = item_list->addEntry(sd->getName(), std::to_string(sd->getId()));
-        if (selected_entry && selected_entry->getId() == sd->getId())
-        {
-            item_list->setSelectionIndex(item_list_idx);
-        }
-    }
-    */
+    item_list->setOptions(docked_labels, docked_ids);
 }
 
 void HangarViewComponent::display()
@@ -148,9 +85,10 @@ void HangarViewComponent::display()
     details_container->layout.padding.top = 50;
 
     fillListBox();
-    /*
+
     if (!selected_entry)
         return;
+    /*
 
     bool has_key_values = selected_entry->keyValuePairs.size() > 0;
     bool has_image_or_model = selected_entry->hasModelData() || selected_entry->getImage() != "";
@@ -198,38 +136,5 @@ void HangarViewComponent::onDraw(sp::RenderTarget& window)
     // REFACTOR ME
     // - designate internal or external
 
-    std::vector<string> docked_labels, docked_ids;
-
-    if (game_server)
-    {
-        for (auto& object_id : my_spaceship->docked_object_ids)
-        {
-            P<ShipTemplateBasedObject> ship = game_server->getObjectById(object_id);
-            if (ship)
-            {
-                string ship_label = ship->getTypeName() + " " + ship->getCallSign();
-                docked_labels.push_back(ship_label);
-                docked_ids.push_back(string(object_id));
-            }
-        }
-    }
-    else
-    {
-        for (auto& object_id : my_spaceship->docked_object_ids)
-        {
-            P<ShipTemplateBasedObject> ship = game_client->getObjectById(object_id);
-            if (ship)
-            {
-                string ship_label = ship->getTypeName() + " " + ship->getCallSign();
-                docked_labels.push_back(ship_label);
-                docked_ids.push_back(string(object_id));
-            }
-        }
-    }
-
-    // Flip the list so newly docked ships appear at the bottom.
-    std::reverse(docked_labels.begin(), docked_labels.end());
-    std::reverse(docked_ids.begin(), docked_ids.end());
-
-    item_list->setOptions(docked_labels, docked_ids);
+    fillListBox();
 }

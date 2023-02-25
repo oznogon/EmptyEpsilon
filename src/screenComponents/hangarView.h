@@ -9,17 +9,12 @@ class HangarViewComponent : public GuiElement
 {
 public:
     HangarViewComponent(GuiContainer* owner);
-
-    bool findAndDisplayEntry(string name);
-
 private:
-    // P<ScienceDatabase> findEntryById(int32_t id);
-    //Fill the selection listbox with options from the selected_entry, or the main database list if selected_entry is nullptr
     void fillListBox();
     void display();
     virtual void onDraw(sp::RenderTarget& window) override;
 
-    // P<ScienceDatabase> selected_entry;
+    P<ShipTemplateBasedObject> selected_entry;
     GuiListbox* item_list = nullptr;
     GuiElement* keyvalue_container = nullptr;
     GuiElement* details_container = nullptr;
