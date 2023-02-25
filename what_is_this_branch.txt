@@ -1,4 +1,6 @@
-Added vectors to spaceship recording which ships are docked. Need to read from those vectors to populate the hangarView
+HangarView populates from internal/external dock lists stored on SpaceShip. Need to move those lists to STBO
+
+Can't replicate the lists because they're ships; need to collect and replicate MultiplayerObjectIds, then populate the lists with those instead (which also means removing those from the lists on object destruction). Also means we should set and enforce limits on the vector size, measure impact on network
 
 --
 

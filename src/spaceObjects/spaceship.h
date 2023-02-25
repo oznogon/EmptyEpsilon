@@ -11,7 +11,6 @@
 #include "spaceshipParts/weaponTube.h"
 #include "tween.h"
 
-
 enum EMainScreenSetting
 {
     MSS_Front = 0,

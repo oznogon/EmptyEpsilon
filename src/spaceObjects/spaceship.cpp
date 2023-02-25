@@ -942,13 +942,7 @@ void SpaceShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, fl
 void SpaceShip::update(float delta)
 {
     ShipTemplateBasedObject::update(delta);
-/*
-    if (ships_docked_externally.size() > 0)
-        LOG(INFO) << "Ships docked externally to " << callsign << ": " << ships_docked_externally.size();
 
-    if (ships_docked_internally.size() > 0)
-        LOG(INFO) << "Ships docked internally to " << callsign << ": " << ships_docked_internally.size();
-*/
     if (hasCollisionShape() != (docked_style != DockStyle::Internal))
     {
         if (docked_style == DockStyle::Internal)
@@ -1278,24 +1272,12 @@ void SpaceShip::collide(Collisionable* other, float force)
             docking_offset = docking_offset / length * (length + 2.0f);
 
             P<SpaceShip> carrier_ship = dock_object;
-            if (carrier_ship) {
-                LOG(INFO) << "-- collide() ";
-                if (docked_style == DockStyle::Internal) {
+            if (carrier_ship)
+            {
+                if (docked_style == DockStyle::Internal)
                     carrier_ship->ships_docked_internally.push_back(this);
-                    LOG(INFO) << "Adding internal " << this->getCallSign() << " to carrier " << carrier_ship->getCallSign();
-                    for (auto& ship : carrier_ship->ships_docked_internally)
-                    {
-                        LOG(INFO) << "Ships docked internally to " << carrier_ship->getCallSign() << ": " << ship->getCallSign();
-                    }
-                } else {
+                else
                     carrier_ship->ships_docked_externally.push_back(this);
-                    LOG(INFO) << "Adding external " << this->getCallSign() << " to carrier " << carrier_ship->getCallSign();
-                    for (auto& ship : carrier_ship->ships_docked_externally)
-                    {
-                        LOG(INFO) << "Ships docked externally to " << carrier_ship->getCallSign() << ": " << ship->getCallSign();
-                    }
-                }
-                LOG(INFO) << "-- END collide() ";
             }
         }
     }
@@ -1342,33 +1324,25 @@ void SpaceShip::requestUndock()
         P<SpaceShip> carrier_ship = dock_object;
 
         if (carrier_ship) {
-            LOG(INFO) << "-- requestUndock() ";
             if (docked_style == DockStyle::Internal) {
                 for (auto& ship : carrier_ship->ships_docked_internally)
                 {
                     if (ship == this) {
-                        LOG(INFO) << "Removing internal " << ship->getCallSign() << " from carrier " << carrier_ship->getCallSign();
+                        // Removing internally docked ship from carrier list
                         std::vector<P<SpaceObject>>::iterator new_end = std::remove(carrier_ship->ships_docked_internally.begin(), carrier_ship->ships_docked_internally.end(), ship);
                         carrier_ship->ships_docked_internally.erase(new_end, carrier_ship->ships_docked_internally.end());
-                        // carrier_ship->ships_docked_internally.erase(std::remove(carrier_ship->ships_docked_internally.begin(), carrier_ship->ships_docked_internally.end(), ship), carrier_ship->ships_docked_internally.end());
-                    } else {
-                        LOG(INFO) << "Ships docked internally to " << carrier_ship->getCallSign() << ": " << ship->getCallSign();
                     }
                 }
             } else {
                 for (auto& ship : carrier_ship->ships_docked_externally)
                 {
                     if (ship == this) {
-                        LOG(INFO) << "Removing external " << ship->getCallSign() << " from carrier " << carrier_ship->getCallSign();
+                        // Removing externally docked ship from carrier list
                         std::vector<P<SpaceObject>>::iterator new_end = std::remove(carrier_ship->ships_docked_externally.begin(), carrier_ship->ships_docked_externally.end(), ship);
                         carrier_ship->ships_docked_externally.erase(new_end, carrier_ship->ships_docked_externally.end());
-                        // carrier_ship->ships_docked_externally.erase(std::remove(carrier_ship->ships_docked_externally.begin(), carrier_ship->ships_docked_externally.end(), ship), carrier_ship->ships_docked_externally.end());
-                    } else {
-                        LOG(INFO) << "Ships docked externally to " << carrier_ship->getCallSign() << ": " << ship->getCallSign();
                     }
                 }
             }
-            LOG(INFO) << "-- END requestUndock() ";
         }
 
         docked_style = DockStyle::None;
