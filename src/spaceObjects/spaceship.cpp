@@ -1272,13 +1272,31 @@ void SpaceShip::collide(Collisionable* other, float force)
             docking_offset = docking_offset / length * (length + 2.0f);
 
             P<SpaceShip> carrier_ship = dock_object;
+            P<ShipTemplateBasedObject> carrier_object = dock_object;
             if (carrier_ship)
             {
                 if (docked_style == DockStyle::Internal)
+                {
                     carrier_ship->ships_docked_internally.push_back(this);
+                }
                 else
+                {
                     carrier_ship->ships_docked_externally.push_back(this);
+                }
             }
+
+            if (carrier_object)
+            {
+                LOG(INFO) << "Docking object id " << string(this->getMultiplayerId());
+                carrier_object->docked_object_ids.push_back(this->getMultiplayerId());
+            }
+
+            // LOG(INFO)
+            for (auto& object_id : carrier_object->docked_object_ids)
+            {
+                LOG(INFO) << "Carrier docked object IDs include: " << string(object_id);
+            }
+            LOG(INFO) << "-- END collide() if docking";
         }
     }
 }
@@ -1321,6 +1339,7 @@ void SpaceShip::requestUndock()
     if (docking_state == DS_Docked && getSystemEffectiveness(SYS_Impulse) > 0.1f)
     {
         P<SpaceObject> dock_object = this->getDockedWith();
+        P<ShipTemplateBasedObject> carrier_object = dock_object;
         P<SpaceShip> carrier_ship = dock_object;
 
         if (carrier_ship) {
@@ -1343,6 +1362,24 @@ void SpaceShip::requestUndock()
                     }
                 }
             }
+        }
+
+        if (carrier_object)
+        {
+            // Remove this object from the carrier's list of docked objects.
+            carrier_object->docked_object_ids.erase(
+                std::remove_if(carrier_object->docked_object_ids.begin(),
+                                carrier_object->docked_object_ids.end(),
+                                [this](int32_t object_id){ return object_id == this->getMultiplayerId(); }
+                ), carrier_object->docked_object_ids.end()
+            );
+
+            // LOG(INFO)
+            for (auto& object_id : carrier_object->docked_object_ids)
+            {
+                LOG(INFO) << "Carrier docked object IDs include: " << string(object_id);
+            }
+            LOG(INFO) << "-- END requestUndock()";
         }
 
         docked_style = DockStyle::None;

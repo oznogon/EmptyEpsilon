@@ -1,6 +1,7 @@
 #include <algorithm>
 
 #include <i18n.h>
+#include "multiplayer_client.h"
 #include "hangarView.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
@@ -195,42 +196,40 @@ void HangarViewComponent::display()
 void HangarViewComponent::onDraw(sp::RenderTarget& window)
 {
     // REFACTOR ME
-    // - separate lists for internal and external
+    // - designate internal or external
 
-    // std::vector<string> externally_docked_callsigns;
-    // std::vector<string> internally_docked_callsigns;
-    std::vector<string> docked_callsigns;
-    std::vector<string> docked_multiplayer_ids;
+    std::vector<string> docked_labels, docked_ids;
 
-    for (auto& object : my_spaceship->ships_docked_externally)
+    if (game_server)
     {
-        P<ShipTemplateBasedObject> ship = object;
-        if (ship)
+        for (auto& object_id : my_spaceship->docked_object_ids)
         {
-            // LOG(INFO) << "docked_callsigns: " << ship->getCallSign() << " ships_docked_externally.size(): " << my_spaceship->ships_docked_externally.size();
-            // item_list->addEntry("x " + ship->getCallSign(), std::to_string(ship->getMultiplayerId()));
-            string ship_label = "x " + ship->getTypeName() + " " + ship->getCallSign();
-            docked_multiplayer_ids.push_back(string(ship->getMultiplayerId()));
-            docked_callsigns.push_back(ship_label);
+            P<ShipTemplateBasedObject> ship = game_server->getObjectById(object_id);
+            if (ship)
+            {
+                string ship_label = ship->getTypeName() + " " + ship->getCallSign();
+                docked_labels.push_back(ship_label);
+                docked_ids.push_back(string(object_id));
+            }
         }
     }
-
-    for (auto& object : my_spaceship->ships_docked_internally)
+    else
     {
-        P<ShipTemplateBasedObject> ship = object;
-        if (ship)
+        for (auto& object_id : my_spaceship->docked_object_ids)
         {
-            // LOG(INFO) << "docked_callsigns: " << ship->getCallSign() << " ships_docked_internally.size(): " << my_spaceship->ships_docked_internally.size();
-            // item_list->addEntry("i " + ship->getCallSign(), std::to_string(ship->getMultiplayerId()));
-            string ship_label = "i " + ship->getTypeName() + " " + ship->getCallSign();
-            docked_multiplayer_ids.push_back(string(ship->getMultiplayerId()));
-            docked_callsigns.push_back(ship_label);
+            P<ShipTemplateBasedObject> ship = game_client->getObjectById(object_id);
+            if (ship)
+            {
+                string ship_label = ship->getTypeName() + " " + ship->getCallSign();
+                docked_labels.push_back(ship_label);
+                docked_ids.push_back(string(object_id));
+            }
         }
     }
 
     // Flip the list so newly docked ships appear at the bottom.
-    std::reverse(docked_callsigns.begin(), docked_callsigns.end());
-    std::reverse(docked_multiplayer_ids.begin(), docked_multiplayer_ids.end());
+    std::reverse(docked_labels.begin(), docked_labels.end());
+    std::reverse(docked_ids.begin(), docked_ids.end());
 
-    item_list->setOptions(docked_callsigns, docked_multiplayer_ids);
+    item_list->setOptions(docked_labels, docked_ids);
 }

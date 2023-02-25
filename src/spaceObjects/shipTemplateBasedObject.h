@@ -31,6 +31,8 @@ public:
     float shield_hit_effect[max_shield_count];
     bool can_be_destroyed;
 
+    std::vector<int32_t> docked_object_ids; // list of docked objects' MultiplayerObjectIDs
+
     bool shares_energy_with_docked;       //[config]
     bool repair_docked;                   //[config]
     bool restocks_scan_probes;

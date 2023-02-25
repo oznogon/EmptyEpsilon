@@ -217,6 +217,8 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
 
     can_be_destroyed = true;
     registerMemberReplication(&can_be_destroyed);
+
+    registerMemberReplication(&docked_object_ids, 0.5);
 }
 
 void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, float sprite_scale, bool show_levels)
