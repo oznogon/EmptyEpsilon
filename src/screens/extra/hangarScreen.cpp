@@ -13,6 +13,6 @@ HangarScreen::HangarScreen(GuiContainer* owner)
 
     if (my_spaceship)
     {
-        LOG(INFO) << "HEY BUDDY WE IN A SHIP LMFOA";
+        // LOG(INFO) << "HEY BUDDY WE IN A SHIP LMFOA";
     }
 }

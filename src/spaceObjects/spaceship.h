@@ -207,8 +207,8 @@ public:
     /// MultiplayerObjectID of the targeted object, or -1 when no target is selected.
     int32_t target_id;
 
-    std::vector<P<SpaceObject>> shipsDockedExternally;
-    std::vector<P<SpaceObject>> shipsDockedInternally;
+    std::vector<P<SpaceObject>> ships_docked_externally;
+    std::vector<P<SpaceObject>> ships_docked_internally;
 
     EDockingState docking_state;
     DockStyle docked_style = DockStyle::None;

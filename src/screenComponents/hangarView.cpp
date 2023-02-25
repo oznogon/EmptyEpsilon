@@ -18,6 +18,7 @@ HangarViewComponent::HangarViewComponent(GuiContainer* owner)
 
         // int32_t id = std::stoul(value, nullptr, 10);
         // selected_entry = findEntryById(id);
+        LOG(INFO) << "HVC button index " << index << ", value " << value;
         display();
     });
     setAttribute("layout", "horizontal");
@@ -44,14 +45,26 @@ bool HangarViewComponent::findAndDisplayEntry(string name)
 
 void HangarViewComponent::fillListBox()
 {
+    /*
     item_list->setOptions({});
     item_list->setSelectionIndex(-1);
 
     if (my_spaceship)
     {
         LOG(INFO) << "HVC::fillListBox(): my_spaceship " << my_spaceship->getCallSign();
+
+        for (auto& ship : my_spaceship->ships_docked_externally)
+        {
+            //item_list->addEntry("x " + ship->getCallSign(), std::to_string(ship->getMultiplayerId()));
+        }
+
+        for (auto& ship : my_spaceship->ships_docked_internally)
+        {
+            item_list->addEntry("i " + ship->getCallSign(), std::to_string(ship->getMultiplayerId()));
+        }
     }
-/*
+    */
+    /*
     // indices of child or sibling pages in the science_databases vector
     std::vector<unsigned> children_idx;
     std::vector<unsigned> siblings_idx;
@@ -132,7 +145,7 @@ void HangarViewComponent::display()
     details_container->layout.padding.top = 50;
 
     fillListBox();
-/*
+    /*
     if (!selected_entry)
         return;
 
@@ -158,6 +171,7 @@ void HangarViewComponent::display()
             image->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
     }
+
     if (has_text)
     {
         (new GuiScrollText(details_container, "HANGAR_LONG_DESCRIPTION", selected_entry->getLongDescription()))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -165,7 +179,7 @@ void HangarViewComponent::display()
 
     if (has_key_values)
     {
-        for(unsigned int n=0; n<selected_entry->keyValuePairs.size(); n++)
+        for (unsigned int n=0; n<selected_entry->keyValuePairs.size(); n++)
         {
             (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, selected_entry->keyValuePairs[n].key, selected_entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
         }
@@ -174,4 +188,27 @@ void HangarViewComponent::display()
         keyvalue_container = nullptr;
     }
     */
+}
+
+void HangarViewComponent::onDraw(sp::RenderTarget& window)
+{
+    // std::vector<string> externally_docked_callsigns;
+    // std::vector<string> internally_docked_callsigns;
+    std::vector<string> docked_callsigns;
+
+    for (auto& ship : my_spaceship->ships_docked_externally)
+    {
+        LOG(INFO) << "docked_callsigns: " << ship->getCallSign() << " ships_docked_externally.size(): " << my_spaceship->ships_docked_externally.size();
+        // item_list->addEntry("x " + ship->getCallSign(), std::to_string(ship->getMultiplayerId()));
+        docked_callsigns.push_back(ship->getCallSign());
+    }
+
+    for (auto& ship : my_spaceship->ships_docked_internally)
+    {
+        LOG(INFO) << "docked_callsigns: " << ship->getCallSign() << " ships_docked_internally.size(): " << my_spaceship->ships_docked_internally.size();
+        // item_list->addEntry("i " + ship->getCallSign(), std::to_string(ship->getMultiplayerId()));
+        docked_callsigns.push_back(ship->getCallSign());
+    }
+
+    item_list->setOptions(docked_callsigns);
 }
