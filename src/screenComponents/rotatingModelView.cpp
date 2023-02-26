@@ -19,6 +19,18 @@ GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, P<Mod
 {
 }
 
+GuiRotatingModelView* GuiRotatingModelView::rotateTo(float angle)
+{
+    rotation_angle = angle;
+    return this;
+}
+
+GuiRotatingModelView* GuiRotatingModelView::setRotationRate(float rate)
+{
+    rotation_rate = rate;
+    return this;
+}
+
 void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 {
     if (rect.size.x <= 0) return;
@@ -41,11 +53,13 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     glEnable(GL_CULL_FACE);
 
     auto projection = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
-    auto view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.f), glm::vec3(1.f, 0.f, 0.f));
+    auto view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.0f), glm::vec3(1.f, 0.f, 0.f));
     view_matrix = glm::scale(view_matrix, glm::vec3(1.f, 1.f, -1.f));
     view_matrix = glm::translate(view_matrix, glm::vec3(0.f, -200.f, 0.f));
-    view_matrix = glm::rotate(view_matrix, glm::radians(-30.f), glm::vec3(1.f, 0.f, 0.f));
-    view_matrix = glm::rotate(view_matrix, glm::radians(engine->getElapsedTime() * 360.0f / 10.0f), glm::vec3(0.f, 0.f, 1.f));
+    view_matrix = glm::rotate(view_matrix, glm::radians(-30.0f), glm::vec3(1.f, 0.f, 0.f));
+    view_matrix = glm::rotate(view_matrix, glm::radians(rotation_angle), glm::vec3(0.f, 0.f, 1.f));
+    if (rotation_rate != 0.0f)
+        view_matrix = glm::rotate(view_matrix, glm::radians(engine->getElapsedTime() * 360.0f / rotation_rate), glm::vec3(0.f, 0.f, 1.f));
 
     glDisable(GL_BLEND);
     glBindTexture(GL_TEXTURE_2D, 0);
