@@ -17,14 +17,13 @@ HangarViewComponent::HangarViewComponent(GuiContainer* owner)
 : GuiElement(owner, "HANGAR_VIEW")
 {
     item_list = new GuiListbox(this, "HANGAR_ITEM_LIST", [this](int index, string value) {
-        // P<ScienceDatabase> entry;
+        int32_t id = std::stoul(value, nullptr, 10);
 
-        // int32_t id = std::stoul(value, nullptr, 10);
         if (game_server)
-            selected_entry = game_server->getObjectById(value.toInt());
+            selected_entry = game_server->getObjectById(id);
         else
-            selected_entry = game_client->getObjectById(value.toInt());
-        // LOG(INFO) << "HVC button index " << index << ", value " << value;
+            selected_entry = game_client->getObjectById(id);
+
         display();
     });
     setAttribute("layout", "horizontal");
@@ -63,10 +62,6 @@ void HangarViewComponent::fillListBox()
         }
     }
 
-    // Flip the list so newly docked ships appear at the bottom.
-    std::reverse(docked_labels.begin(), docked_labels.end());
-    std::reverse(docked_ids.begin(), docked_ids.end());
-
     item_list->setOptions(docked_labels, docked_ids);
 }
 
@@ -76,65 +71,65 @@ void HangarViewComponent::display()
         keyvalue_container->destroy();
     if (details_container)
         details_container->destroy();
+    if (selection_container)
+        selection_container->destroy();
 
-    keyvalue_container = new GuiElement(this, "KEY_VALUE_CONTAINER");
-    keyvalue_container->setMargins(20)->setSize(400, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    /*
+    +---------------------------------------+    +----------------------------------------+ 
+    | (  SHIP  )  3d-model-view  ( undock ) |    | 3D-MODEL 3d-model 3d-model  ( undock ) |
+    | (  ship  )  3d-model-view  ( energy ) |    | 3D-MODEL 3d-model 3d-model  ( energy ) |
+    | (  ship  )  3d-model-view  ( repair ) |    | 3D-MODEL 3d-model 3d-model  ( repair ) |
+    | (  ship  )  3d-model-view  ( weapon ) |    |                             ( weapon ) |
+    | (  ship  )  3d-model-view  ( probes ) |    | 3d-model 3d-model 3d-model  ( probes ) |
+    | (  ship  )                            | OR | 3d-model 3d-model 3d-model             |
+    | (  ship  )  === k: v === === k: v === |    | 3d-model 3d-model 3d-model  == k: v == |
+    | (  ship  )  === k: v === === k: v === |    |                             == k: v == |
+    | (  ship  )  === k: v === === k: v === |    | 3d-model 3d-model 3d-model  == k: v == |
+    | (  ship  )  === k: v === === k: v === |    | 3d-model 3d-model 3d-model  == k: v == |
+    | (  ship  )  === k: v === === k: v === |    | 3d-model 3d-model 3d-model  == k: v == |
+    +---------------------------------------+    +----------------------------------------+
+    */
 
-    details_container = new GuiElement(this, "DETAILS_CONTAINER");
-    details_container->setMargins(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-    details_container->layout.padding.top = 50;
+    selection_container = new GuiElement(this, "SELECTION_CONTAINER");
+    selection_container->setMargins(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+
+    details_container = new GuiElement(selection_container, "DETAILS_CONTAINER");
+    details_container->setMargins(0)->setSize(GuiElement::GuiSizeMax, 400)->setAttribute("layout", "horizontal");
+
+    keyvalue_container = new GuiElement(selection_container, "KEY_VALUE_CONTAINER");
+    keyvalue_container->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     fillListBox();
 
     if (!selected_entry)
         return;
-    /*
 
-    bool has_key_values = selected_entry->keyValuePairs.size() > 0;
-    bool has_image_or_model = selected_entry->hasModelData() || selected_entry->getImage() != "";
-    bool has_text = selected_entry->getLongDescription().length() > 0;
+    // Details container (horizontal)
+    // Model view
+    (new GuiRotatingModelView(details_container, "HANGAR_MODEL_VIEW", selected_entry->ship_template->model_data))->setRotationRate(0.0f)->rotateTo(90.0f)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    if (has_image_or_model)
-    {
-        GuiElement* visual = (new GuiElement(details_container, "HANGAR_VISUAL_ELEMENT"))->setMargins(0, 0, 0, 40)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    // Key/value container (vertical)
+    // Key/value list
+    if (selected_entry->getDockedStyle() == DockStyle::Internal)
+        (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, tr("Docked"), "In hangar"))->setSize(GuiElement::GuiSizeMax, 40);
+    else
+        (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, tr("Docked"), "At airlock"))->setSize(GuiElement::GuiSizeMax, 40);
 
-        if (selected_entry->hasModelData())
-        {
-            (new GuiRotatingModelView(visual, "HANGAR_MODEL_VIEW", selected_entry->getModelData()))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-            if(selected_entry->getImage() != "")
-            {
-                (new GuiImage(visual, "HANGAR_IMAGE", selected_entry->image))->setMargins(0)->setSize(32, 32);
-            }
-        }
-        else if(selected_entry->getImage() != "")
-        {
-            auto image = new GuiImage(visual, "HANGAR_IMAGE", selected_entry->image);
-            image->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        }
-    }
+    // GMInfo is a shortcut to k/v content we want
+    std::unordered_map<string, string> gm_info = selected_entry->getGMInfo();
 
-    if (has_text)
-    {
-        (new GuiScrollText(details_container, "HANGAR_LONG_DESCRIPTION", selected_entry->getLongDescription()))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    }
+    // - Hull
+    (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, tr("gm_info", "Hull"), gm_info[trMark("gm_info", "Hull")]))->setSize(GuiElement::GuiSizeMax, 40);
 
-    if (has_key_values)
-    {
-        for (unsigned int n=0; n<selected_entry->keyValuePairs.size(); n++)
-        {
-            (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, selected_entry->keyValuePairs[n].key, selected_entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
-        }
-    } else {
-        keyvalue_container->destroy();
-        keyvalue_container = nullptr;
-    }
-    */
+    // - Shield segments
+    for (int n = 0; n < selected_entry->shield_count; n++)
+        (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, tr("gm_info", "Shield") + " " + string(n + 1), gm_info[trMark("gm_info", "Shield") + string(n + 1)]))->setSize(GuiElement::GuiSizeMax, 40);
+
+    // - Systems status
+    // - Weapons storage
 }
 
 void HangarViewComponent::onDraw(sp::RenderTarget& window)
 {
-    // REFACTOR ME
-    // - designate internal or external
-
     fillListBox();
 }
