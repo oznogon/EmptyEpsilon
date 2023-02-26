@@ -1,5 +1,7 @@
 HangarView populates from a list of docked MultiplayerObjectIds, stored in STBO and updated in SpaceShip's requestUndock and collide (when docking).
 
+Selecting a ship lists and updates its hull, shield, systems damage, and weapons storage as key/value items. This list overflows WITHOUT scrolling, which should be fixed.
+
 We should set and enforce docking ship count limits on the vector size, and/or measure impact on network.
 
 --
@@ -32,8 +34,8 @@ If length of internal dock classes or external dock classes for this ship type i
 			Open a view that displays the docked ship's details:
 			  [x] hull
 			  [x] shields
-			  - system damage
-			  - weapon storage
+			  [x] systems damage
+			  [x] weapons storage
 			If player, also display:
 			  - energy
 			  - heat
