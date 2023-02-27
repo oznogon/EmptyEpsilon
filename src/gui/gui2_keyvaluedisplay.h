@@ -16,7 +16,7 @@ public:
     GuiKeyValueDisplay* setValue(const string& value);
     GuiKeyValueDisplay* setTextSize(float text_size);
     GuiKeyValueDisplay* setColor(glm::u8vec4 color);
-    GuiKeyValueDisplay* setIcon(const string& icon_texture);
+    GuiKeyValueDisplay* setIcon(const string& icon_name, const sp::Alignment icon_alignment = sp::Alignment::CenterLeft, const float rotation = 0.0f);
 
 private:
     const GuiThemeStyle* back_style;
@@ -25,10 +25,13 @@ private:
 
     string key;
     string value;
-    string icon_texture;
+    string icon_name;
+    sp::Alignment icon_alignment = sp::Alignment::CenterLeft;
+    float icon_rotation = 0.0f;
     float text_size{};
     float div_distance{};
     glm::u8vec4 color{255,255,255,255};
+    bool custom_color_defined = false;
 };
 
 #endif//GUI_KEYVALUEDISPLAY_H

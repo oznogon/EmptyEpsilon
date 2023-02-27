@@ -2,7 +2,6 @@
 #include "gui2_keyvaluedisplay.h"
 #include "theme.h"
 
-
 GuiKeyValueDisplay::GuiKeyValueDisplay(GuiContainer* owner, const string& id, float div_distance, const string& key, const string& value)
 : GuiElement(owner, id), key(key), value(value), text_size(20.f), div_distance(div_distance), color(glm::u8vec4{255,255,255,255})
 {
@@ -19,20 +18,34 @@ void GuiKeyValueDisplay::onDraw(sp::RenderTarget& renderer)
 
     float div_size = 5.f;
 
-    renderer.drawStretched(rect, back.texture, color != glm::u8vec4{255, 255, 255, 255} ? color : back.color);
+    renderer.drawStretched(rect, back.texture, custom_color_defined ? color : back.color);
     if (rect.size.x >= rect.size.y)
     {
-        renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x * div_distance - div_size, rect.size.y), this->key, sp::Alignment::CenterRight, text_size, key.font, key.color);
-        renderer.drawText(sp::Rect(rect.position.x + rect.size.x * div_distance + div_size, rect.position.y, rect.size.x * (1.f - div_distance), rect.size.y), this->value, sp::Alignment::CenterLeft, text_size, value.font, value.color);
-        if (icon_texture != "")
+        renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x * div_distance - div_size, rect.size.y), this->key, sp::Alignment::CenterRight, text_size, key.font, custom_color_defined ? color : key.color);
+        renderer.drawText(sp::Rect(rect.position.x + rect.size.x * div_distance + div_size, rect.position.y, rect.size.x * (1.f - div_distance), rect.size.y), this->value, sp::Alignment::CenterLeft, text_size, value.font, custom_color_defined ? color : value.color);
+
+        if (icon_name != "")
         {
-            renderer.drawSprite(icon_texture, glm::vec2(rect.position.x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y * 0.8f, key.color);
+            float icon_x;
+
+            switch(icon_alignment)
+            {
+            case sp::Alignment::CenterLeft:
+            case sp::Alignment::TopLeft:
+            case sp::Alignment::BottomLeft:
+                icon_x = rect.position.x + rect.size.y * 0.5f;
+                break;
+            default:
+                icon_x = rect.position.x + rect.size.x - rect.size.y * 0.5f;
+            }
+
+            renderer.drawRotatedSprite(icon_name, glm::vec2(icon_x, rect.position.y + rect.size.y * 0.5f), rect.size.y * 0.8f, icon_rotation, custom_color_defined ? color : key.color);
         }
     }
     else
     {
-        renderer.drawText(sp::Rect(rect.position.x, rect.position.y + rect.size.y * (1.f - div_distance) + div_size, rect.size.x, rect.size.y * div_distance - div_size), this->key, sp::Alignment::TopCenter, text_size, key.font, key.color, sp::Font::FlagVertical);
-        renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x, rect.size.y * (1.f - div_distance) - div_size), this->value, sp::Alignment::BottomCenter, text_size, value.font, value.color, sp::Font::FlagVertical);
+        renderer.drawText(sp::Rect(rect.position.x, rect.position.y + rect.size.y * (1.f - div_distance) + div_size, rect.size.x, rect.size.y * div_distance - div_size), this->key, sp::Alignment::TopCenter, text_size, key.font, custom_color_defined ? color : key.color, sp::Font::FlagVertical);
+        renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x, rect.size.y * (1.f - div_distance) - div_size), this->value, sp::Alignment::BottomCenter, text_size, value.font, custom_color_defined ? color : value.color, sp::Font::FlagVertical);
     }
 }
 
@@ -57,11 +70,15 @@ GuiKeyValueDisplay* GuiKeyValueDisplay::setTextSize(float text_size)
 GuiKeyValueDisplay* GuiKeyValueDisplay::setColor(glm::u8vec4 color)
 {
     this->color = color;
+    // Override theme colors if setColor is called.
+    this->custom_color_defined = true;
     return this;
 }
 
-GuiKeyValueDisplay* GuiKeyValueDisplay::setIcon(const string& icon_texture)
+GuiKeyValueDisplay* GuiKeyValueDisplay::setIcon(const string& icon_name, const sp::Alignment icon_alignment, const float rotation)
 {
-    this->icon_texture = icon_texture;
+    this->icon_name = icon_name;
+    this->icon_alignment = icon_alignment;
+    this->icon_rotation = rotation;
     return this;
 }
