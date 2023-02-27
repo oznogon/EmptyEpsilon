@@ -164,23 +164,7 @@ GuiKeyValueDisplay* GuiKeyValueDisplay::setValue(const string& value)
     return this;
 }
 
-<<<<<<< HEAD
 GuiKeyValueDisplay* GuiKeyValueDisplay::setDivDistance(const float div_distance)
-=======
-GuiKeyValueDisplay* GuiKeyValueDisplay::setDivDistance(float div_distance)
-{
-    this->div_distance = div_distance;
-    return this;
-}
-
-GuiKeyValueDisplay* GuiKeyValueDisplay::setDivSize(float div_size)
-{
-    this->div_size = div_size;
-    return this;
-}
-
-GuiKeyValueDisplay* GuiKeyValueDisplay::setTextSize(float text_size)
->>>>>>> 988ba132 ([GuiKeyValueDisplay] Make div_size, div_distance settable)
 {
     this->div_distance = std::max(0.1f, div_distance);
     return this;
