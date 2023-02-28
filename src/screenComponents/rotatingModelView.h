@@ -8,12 +8,21 @@ class GuiRotatingModelView : public GuiElement
 {
 private:
     P<ModelData> model;
-    float rotation_rate = 10.0f;
-    float rotation_angle = 0.0f;
+
+    const float camera_fov;
+    glm::vec3 translation;
+    float rotation_rate;
+    float x_rotation_angle;
+    float y_rotation_angle;
+    float z_rotation_angle;
 public:
     GuiRotatingModelView(GuiContainer* owner, string id, P<ModelData> model);
+
     GuiRotatingModelView* setRotationRate(float rate);
-    GuiRotatingModelView* rotateTo(float angle);
+    GuiRotatingModelView* translateTo(glm::vec3 coordinates);
+    GuiRotatingModelView* rotateXTo(float angle);
+    GuiRotatingModelView* rotateYTo(float angle);
+    GuiRotatingModelView* rotateZTo(float angle);
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };

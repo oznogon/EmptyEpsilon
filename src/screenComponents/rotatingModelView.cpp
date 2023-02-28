@@ -15,19 +15,37 @@
 #include <glm/gtc/type_ptr.hpp>
 
 GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, P<ModelData> model)
-: GuiElement(owner, id), model(model)
+: GuiElement(owner, id), model(model), camera_fov(60.0f), translation(glm::vec3(0.f, -200.f, 0.f)), rotation_rate(10.0f), x_rotation_angle(-30.0f), y_rotation_angle(0.0f), z_rotation_angle(0.0f)
 {
 }
 
-GuiRotatingModelView* GuiRotatingModelView::rotateTo(float angle)
+GuiRotatingModelView* GuiRotatingModelView::translateTo(glm::vec3 coordinates)
 {
-    rotation_angle = angle;
+    this->translation = coordinates;
+    return this;
+}
+
+GuiRotatingModelView* GuiRotatingModelView::rotateXTo(float angle)
+{
+    this->x_rotation_angle = angle;
+    return this;
+}
+
+GuiRotatingModelView* GuiRotatingModelView::rotateYTo(float angle)
+{
+    this->y_rotation_angle = angle;
+    return this;
+}
+
+GuiRotatingModelView* GuiRotatingModelView::rotateZTo(float angle)
+{
+    this->z_rotation_angle = angle;
     return this;
 }
 
 GuiRotatingModelView* GuiRotatingModelView::setRotationRate(float rate)
 {
-    rotation_rate = rate;
+    this->rotation_rate = rate;
     return this;
 }
 
@@ -38,7 +56,6 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     if (!model) return;
     renderer.finish();
 
-    float camera_fov = 60.0f;
     auto p0 = renderer.virtualToPixelPosition(rect.position);
     auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size);
     glViewport(p0.x, renderer.getPhysicalSize().y - p1.y, p1.x - p0.x, p1.y - p0.y);
@@ -55,9 +72,10 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     auto projection = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
     auto view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.0f), glm::vec3(1.f, 0.f, 0.f));
     view_matrix = glm::scale(view_matrix, glm::vec3(1.f, 1.f, -1.f));
-    view_matrix = glm::translate(view_matrix, glm::vec3(0.f, -200.f, 0.f));
-    view_matrix = glm::rotate(view_matrix, glm::radians(-30.0f), glm::vec3(1.f, 0.f, 0.f));
-    view_matrix = glm::rotate(view_matrix, glm::radians(rotation_angle), glm::vec3(0.f, 0.f, 1.f));
+    view_matrix = glm::translate(view_matrix, translation);
+    view_matrix = glm::rotate(view_matrix, glm::radians(x_rotation_angle), glm::vec3(1.f, 0.f, 0.f));
+    view_matrix = glm::rotate(view_matrix, glm::radians(y_rotation_angle), glm::vec3(0.f, 1.f, 0.f));
+    view_matrix = glm::rotate(view_matrix, glm::radians(z_rotation_angle), glm::vec3(0.f, 0.f, 1.f));
     if (rotation_rate != 0.0f)
         view_matrix = glm::rotate(view_matrix, glm::radians(engine->getElapsedTime() * 360.0f / rotation_rate), glm::vec3(0.f, 0.f, 1.f));
 
