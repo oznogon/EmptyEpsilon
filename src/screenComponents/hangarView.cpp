@@ -15,9 +15,9 @@
 HangarViewComponent::HangarViewComponent(GuiContainer* owner)
 : GuiElement(owner, "HANGAR_VIEW")
 {
-    item_list = new GuiListbox(
+    object_list = new GuiListbox(
         this,
-        "HANGAR_ITEM_LIST",
+        "HANGAR_VIEW_OBJECT_LIST",
         [this](int index, string value)
         {
             int32_t id = std::stoul(value, nullptr, 10);
@@ -33,7 +33,7 @@ HangarViewComponent::HangarViewComponent(GuiContainer* owner)
 
     setAttribute("layout", "horizontal");
 
-    item_list
+    object_list
         ->setMargins(20, 20, 20, 120)
         ->setSize(navigation_width, GuiElement::GuiSizeMax);
 
@@ -63,7 +63,7 @@ void HangarViewComponent::fillListBox()
         }
     }
 
-    item_list->setOptions(docked_labels, docked_ids);
+    object_list->setOptions(docked_labels, docked_ids);
 }
 
 void HangarViewComponent::destroyContainers()
@@ -109,7 +109,7 @@ void HangarViewComponent::display()
     controls_container = new GuiElement(selection_container, "HANGAR_VIEW_CONTROLS_CONTAINER");
     controls_container
         ->setMargins(0)
-        ->setSize(GuiElement::GuiSizeMax, 300)
+        ->setSize(GuiElement::GuiSizeMax, 400.0f)
         ->setAttribute("layout", "horizontal");
 
     keyvalue_container = new GuiElement(selection_container, "HANGAR_VIEW_KEY_VALUE_CONTAINER");
@@ -138,6 +138,26 @@ void HangarViewComponent::display()
     P<PlayerSpaceship> selected_entry_player = selected_entry_spaceship;
 
     // Details container (horizontal)
+    // Global controls
+    global_controls = new GuiElement(controls_container, "HANGAR_VIEW_CONTROLS");
+    global_controls
+        ->setMargins(0)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    share_energy_toggle = new GuiToggleButton(
+        global_controls,
+        "HANGAR_VIEW_CONTROL_ENERGY",
+        tr("hangar_view", "Share energy"),
+        [this](bool value)
+        {
+            my_spaceship->setSharesEnergyWithDocked(value);
+        }
+    );
+    share_energy_toggle
+        ->setValue(my_spaceship->shares_energy_with_docked)
+        ->setSize(GuiElement::GuiSizeMax, 40);
+
     // Model view
     selected_entry_model = new GuiRotatingModelView(
         controls_container,
@@ -146,7 +166,8 @@ void HangarViewComponent::display()
     );
     selected_entry_model
         ->setRotationRate(0.0f)
-        ->rotateTo(90.0f)
+        ->rotateZTo(90.0f)
+        ->translateTo(glm::vec3(0.0f, -150.0f, 33.0f))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Key/value container (vertical)
@@ -182,8 +203,8 @@ void HangarViewComponent::display()
     );
     launch_button
         ->setTextSize(20)
-        ->setPosition(0, 6, sp::Alignment::TopRight)
-        ->setSize(80, 28);
+        ->setPosition(-10, 6, sp::Alignment::TopRight)
+        ->setSize(80, 30);
 
     // - Hull
     selected_entry_hull = new GuiKeyValueDisplay(
@@ -319,62 +340,65 @@ void HangarViewComponent::display()
                 ->setVisible(false);
         }
 
-        if (selected_entry_player)
-        {
-            // - Energy
-            selected_entry_energy = new GuiKeyValueDisplay(
-                keyvalue_left_container,
-                "HANGAR_VIEW_SHIP_ENERGY",
-                keyvalue_left_divider,
-                tr("hangar_view", "Energy"),
-                "-" // selected_entry->energy_level;
-            );
-            selected_entry_energy
-                ->setIcon("gui/icons/energy")
-                ->setSize(GuiElement::GuiSizeMax, 40);
+        // Player
+        // - Energy
+        selected_entry_energy = new GuiKeyValueDisplay(
+            keyvalue_left_container,
+            "HANGAR_VIEW_SHIP_ENERGY",
+            keyvalue_left_divider,
+            tr("hangar_view", "Energy"),
+            "-" // selected_entry->energy_level;
+        );
+        selected_entry_energy
+            ->setIcon("gui/icons/energy")
+            ->setSize(GuiElement::GuiSizeMax, 40)
+            ->setVisible(false);
 
-            // - Repair crew
-            selected_entry_repair_crew = new GuiKeyValueDisplay(
-                keyvalue_left_container,
-                "HANGAR_VIEW_REPAIR_CREWS",
-                keyvalue_left_divider,
-                tr("hangar_view", "Repair crews"),
-                "-" // selected_entry->getRepairCrewCount();
-            );
-            selected_entry_repair_crew
-                ->setIcon("gui/icons/system_health")
-                ->setSize(GuiElement::GuiSizeMax, 40);
+        // - Repair crew
+        selected_entry_repair_crew = new GuiKeyValueDisplay(
+            keyvalue_left_container,
+            "HANGAR_VIEW_REPAIR_CREWS",
+            keyvalue_left_divider,
+            tr("hangar_view", "Repair crews"),
+            "-" // selected_entry->getRepairCrewCount();
+        );
+        selected_entry_repair_crew
+            ->setIcon("gui/icons/system_health")
+            ->setSize(GuiElement::GuiSizeMax, 40)
+            ->setVisible(false);
 
-            // - Scan probes
-            selected_entry_scan_probes = new GuiKeyValueDisplay(
-                keyvalue_left_container,
-                "HANGAR_VIEW_SCAN_PROBES",
-                keyvalue_left_divider,
-                tr("hangar_view", "Scan probes"),
-                "-" // selected_entry->scan_probe_stock;
-            );
-            selected_entry_scan_probes
-                ->setIcon("gui/icons/probe")
-                ->setSize(GuiElement::GuiSizeMax, 40);
-        }
+        // - Scan probes
+        selected_entry_scan_probes = new GuiKeyValueDisplay(
+            keyvalue_left_container,
+            "HANGAR_VIEW_SCAN_PROBES",
+            keyvalue_left_divider,
+            tr("hangar_view", "Scan probes"),
+            "-" // selected_entry->scan_probe_stock;
+        );
+        selected_entry_scan_probes
+            ->setIcon("gui/icons/probe")
+            ->setSize(GuiElement::GuiSizeMax, 40)
+            ->setVisible(false);
     }
 }
 
 void HangarViewComponent::onDraw(sp::RenderTarget& window)
 {
+    // share_energy_toggle->setValue(my_spaceship->shares_energy_with_docked);
+
     if (selected_entry)
     {
         // If the list changes, the selected_entry state doesn't, so check and
         // if necessary update the entry to match the list's current selection.
-        int32_t id = item_list->getSelectionValue().toInt();
+        int32_t id = object_list->getSelectionValue().toInt();
 
-        if (selected_entry->getMultiplayerId() != item_list->getSelectionValue().toInt())
+        if (selected_entry->getMultiplayerId() != object_list->getSelectionValue().toInt())
         {
             // If selected_entry doesn't match selected item's ID, it's no
             // longer docked. If another ship is docked, the list automatically
             // selects the next ship down if one exists, so either update the
             // view with the new selection, or wipe the view.
-            if (item_list->getSelectionValue().toInt() > 0) {
+            if (object_list->getSelectionValue().toInt() > 0) {
                 if (game_server)
                     selected_entry = game_server->getObjectById(id);
                 else
@@ -384,7 +408,7 @@ void HangarViewComponent::onDraw(sp::RenderTarget& window)
             }
             else
             {
-                item_list->setSelectionIndex(-1);
+                object_list->setSelectionIndex(-1);
                 selected_entry = nullptr;
                 display();
                 return;
@@ -396,20 +420,37 @@ void HangarViewComponent::onDraw(sp::RenderTarget& window)
 
         // Update object traits
         // - Hull
-        selected_entry_hull->setValue(
-            string(100.0f * selected_entry->hull_strength / selected_entry->hull_max, 0)
-            + "%"
-        );
+        const float hull_percentage = 100.0f * selected_entry->hull_strength / selected_entry->hull_max;
+
+        selected_entry_hull->setValue(string(hull_percentage, 0) + "%");
+
+        if (hull_percentage < 10)
+            selected_entry_hull->setColor(glm::u8vec4(255, 0, 0, 255));
+        else if (hull_percentage < 90)
+            selected_entry_hull->setColor(glm::u8vec4(255, 255, 0, 255));
+        else
+            selected_entry_hull->setColor(glm::u8vec4(255, 255, 255, 255));
 
         // - Shield segments
-        selected_entry_front_shield->setValue(
-            string(selected_entry->getShieldPercentage(0))
-            + "%"
-        );
-        selected_entry_rear_shield->setValue(
-            string(selected_entry->getShieldPercentage(1))
-            + "%"
-        );
+        const int front_shield_percentage = selected_entry->getShieldPercentage(0);
+        const int rear_shield_percentage = selected_entry->getShieldPercentage(1);
+
+        selected_entry_front_shield->setValue(string(front_shield_percentage) + "%");
+        selected_entry_rear_shield->setValue(string(rear_shield_percentage) + "%");
+
+        if (front_shield_percentage < 10)
+            selected_entry_front_shield->setColor(glm::u8vec4(255, 0, 0, 255));
+        else if (front_shield_percentage < 90)
+            selected_entry_front_shield->setColor(glm::u8vec4(255, 255, 0, 255));
+        else
+            selected_entry_front_shield->setColor(glm::u8vec4(255, 255, 255, 255));
+
+        if (rear_shield_percentage < 10)
+            selected_entry_rear_shield->setColor(glm::u8vec4(255, 0, 0, 255));
+        else if (rear_shield_percentage < 90)
+            selected_entry_rear_shield->setColor(glm::u8vec4(255, 255, 0, 255));
+        else
+            selected_entry_rear_shield->setColor(glm::u8vec4(255, 255, 255, 255));
 
         if (selected_entry_spaceship)
         {
@@ -433,20 +474,13 @@ void HangarViewComponent::onDraw(sp::RenderTarget& window)
                         ->setValue(string(selected_entry_system_health) + "%")
                         ->setVisible(true);
 
-                    // Color damaged systems
+                    // Color based on damage
                     if (selected_entry_system_health < 0)
-                    {
                         selected_entry_systems[n]->setColor(glm::u8vec4(255, 0, 0, 255));
-                    }
                     else if (selected_entry_system_health < 100)
-                    {
-                        LOG(INFO) << "I should be yellow but I'm not";
                         selected_entry_systems[n]->setColor(glm::u8vec4(255, 255, 0, 255));
-                    }
                     else
-                    {
                         selected_entry_systems[n]->setColor(glm::u8vec4(255, 255, 255, 255));
-                    }
                 }
                 else
                 {
@@ -458,14 +492,17 @@ void HangarViewComponent::onDraw(sp::RenderTarget& window)
             // - Weapons storage
             for (unsigned int n = 0; n < MW_Count; n++)
             {
+                const int weapon_storage = selected_entry_spaceship->weapon_storage[n];
+                const int weapon_storage_max = selected_entry_spaceship->weapon_storage_max[n];
+
                 // Show and update only weapons with a storage capacity.
-                if (selected_entry_spaceship->weapon_storage_max[n] > 0)
+                if (weapon_storage_max > 0)
                 {
                     selected_entry_weapons[n]
                         ->setValue(
-                            string(selected_entry_spaceship->weapon_storage[n])
+                            string(weapon_storage)
                             + "/"
-                            + string(selected_entry_spaceship->weapon_storage_max[n])
+                            + string(weapon_storage_max)
                         )
                         ->setVisible(true);
                 }
@@ -475,9 +512,9 @@ void HangarViewComponent::onDraw(sp::RenderTarget& window)
                 }
 
                 // Color based on count
-                if (selected_entry_spaceship->weapon_storage[n] == 0)
+                if (weapon_storage == 0)
                     selected_entry_weapons[n]->setColor(glm::u8vec4(255, 0, 0, 255));
-                else if (selected_entry_spaceship->weapon_storage[n] < selected_entry_spaceship->weapon_storage_max[n])
+                else if (weapon_storage < weapon_storage_max)
                     selected_entry_weapons[n]->setColor(glm::u8vec4(255, 255, 0, 255));
                 else
                     selected_entry_weapons[n]->setColor(glm::u8vec4(255, 255, 255, 255));
@@ -486,20 +523,55 @@ void HangarViewComponent::onDraw(sp::RenderTarget& window)
             if (selected_entry_player)
             {
                 // - Energy
+                const float energy_level = selected_entry_player->energy_level;
+                const float energy_max = selected_entry_player->max_energy_level;
+
                 selected_entry_energy
-                    ->setValue(string(selected_entry_player->energy_level, 0));
+                    ->setValue(
+                        string(energy_level, 0)
+                        + "/"
+                        + string(energy_max, 0)
+                    )
+                    ->setVisible(true);
+
+                // Color based on energy level
+                if (energy_level < energy_max * 0.1f)
+                    selected_entry_energy->setColor(glm::u8vec4(255, 0, 0, 255));
+                else if (energy_level < energy_max * 0.9f)
+                    selected_entry_energy->setColor(glm::u8vec4(255, 255, 0, 255));
+                else
+                    selected_entry_energy->setColor(glm::u8vec4(255, 255, 255, 255));
 
                 // - Repair crew
                 selected_entry_repair_crew
-                    ->setValue(string(selected_entry_player->getRepairCrewCount()));
+                    ->setValue(string(selected_entry_player->getRepairCrewCount()))
+                    ->setVisible(true);
 
                 // - Scan probes
+                const int scan_probe_count = selected_entry_player->getScanProbeCount();
+                const int scan_probe_max = selected_entry_player->getMaxScanProbeCount();
+
                 selected_entry_scan_probes
                     ->setValue(
-                        string(selected_entry_player->getScanProbeCount())
+                        string(scan_probe_count)
                         + "/"
-                        + string(selected_entry_player->getMaxScanProbeCount())
-                    );
+                        + string(scan_probe_max)
+                    )
+                    ->setVisible(true);
+
+                // Color based on count
+                if (scan_probe_count == 0)
+                    selected_entry_scan_probes->setColor(glm::u8vec4(255, 0, 0, 255));
+                else if (scan_probe_count < scan_probe_max)
+                    selected_entry_scan_probes->setColor(glm::u8vec4(255, 255, 0, 255));
+                else
+                    selected_entry_scan_probes->setColor(glm::u8vec4(255, 255, 255, 255));
+            }
+            else
+            {
+                selected_entry_energy->setVisible(false);
+                selected_entry_repair_crew->setVisible(false);
+                selected_entry_scan_probes->setVisible(false);
             }
         }
     }

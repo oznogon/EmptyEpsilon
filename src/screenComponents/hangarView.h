@@ -19,6 +19,7 @@ public:
 private:
     const float keyvalue_left_divider = 0.4f;
     const float keyvalue_right_divider = 0.75f;
+    static constexpr int navigation_width = 400;
 
     void fillListBox();
     void destroyContainers();
@@ -26,7 +27,7 @@ private:
     virtual void onDraw(sp::RenderTarget& window) override;
 
     P<ShipTemplateBasedObject> selected_entry;
-    GuiListbox* item_list = nullptr;
+    GuiListbox* object_list = nullptr;
     GuiElement* selection_container = nullptr;
     GuiElement* controls_container = nullptr;
     GuiElement* keyvalue_container = nullptr;
@@ -34,6 +35,8 @@ private:
     GuiElement* keyvalue_right_container = nullptr;
 
     GuiRotatingModelView* selected_entry_model;
+    GuiElement* global_controls;
+    GuiToggleButton* share_energy_toggle;
     GuiKeyValueDisplay* selected_entry_dockstyle;
     GuiButton* launch_button;
     GuiKeyValueDisplay* selected_entry_hull;
@@ -44,8 +47,6 @@ private:
     GuiKeyValueDisplay* selected_entry_scan_probes;
     GuiKeyValueDisplay* selected_entry_weapons[MW_Count];
     GuiKeyValueDisplay* selected_entry_systems[SYS_COUNT];
-
-    static constexpr int navigation_width = 400;
 };
 
 #endif // HANGAR_VIEW_H
