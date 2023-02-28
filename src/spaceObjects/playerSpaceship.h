@@ -2,6 +2,7 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
+#include "cpuShip.h"
 #include "scanProbe.h"
 #include "commsScriptInterface.h"
 #include "playerInfo.h"
@@ -134,8 +135,18 @@ public:
 
     // Capable of hacking a target
     bool can_hack = true;
+
     // Capable of docking with a target
     bool can_dock = true;
+    // Capable of toggling energy sharing with docked targets
+    bool can_toggle_energy_sharing = true;
+    // Capable of toggling repairs with docked targets
+    bool can_toggle_repairs = true;
+    // Capable of toggling weapon restocking with docked targets
+    bool can_toggle_weapon_restocking = true;
+    // Capable of toggling probe restocking with docked targets
+    bool can_toggle_probe_restocking = true;
+
     // Capable of combat maneuvers
     bool can_combat_maneuver = true;
 
@@ -198,6 +209,8 @@ public:
     void switchCommsToGM();
     void closeComms();
 
+    bool launchShip(P<SpaceObject> docked_object);
+
     void setEnergyLevel(float amount) { energy_level = std::max(0.0f, std::min(max_energy_level, amount)); }
     void setEnergyLevelMax(float amount) { max_energy_level = std::max(0.0f, amount); energy_level = std::min(energy_level, max_energy_level); }
     float getEnergyLevel() { return energy_level; }
@@ -215,6 +228,15 @@ public:
     bool getCanSelfDestruct() { return can_self_destruct && self_destruct_size > 0 && self_destruct_damage > 0; }
     void setCanLaunchProbe(bool enabled) { can_launch_probe = enabled; }
     bool getCanLaunchProbe() { return can_launch_probe; }
+
+    void setCanToggleEnergySharing(bool enabled) { can_toggle_energy_sharing = enabled; }
+    bool getCanToggleEnergySharing() { return can_toggle_energy_sharing; }
+    void setCanToggleRepairs(bool enabled) { can_toggle_repairs = enabled; }
+    bool getCanToggleRepairs() { return can_toggle_repairs; }
+    void setCanToggleWeaponRestocking(bool enabled) { can_toggle_weapon_restocking = enabled; }
+    bool getCanToggleWeaponRestocking() { return can_toggle_weapon_restocking; }
+    void setCanToggleProbeRestocking(bool enabled) { can_toggle_probe_restocking = enabled; }
+    bool getCanToggleProbeRestocking() { return can_toggle_probe_restocking; }
 
     void setSelfDestructDamage(float amount) { self_destruct_damage = std::max(0.0f, amount); }
     float getSelfDestructDamage() { return self_destruct_damage; }
@@ -260,6 +282,8 @@ public:
     void commandSetSystemCoolantRequest(ESystem system, float coolant_level);
     void commandDock(P<SpaceObject> station);
     void commandUndock();
+    void commandLaunchShip(P<SpaceObject> object);
+    void commandToggleEnergySharing();
     void commandAbortDock();
     void commandOpenTextComm(P<SpaceObject> obj);
     void commandCloseTextComm();

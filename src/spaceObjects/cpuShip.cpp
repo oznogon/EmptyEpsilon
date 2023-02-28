@@ -311,6 +311,30 @@ void CpuShip::orderDock(P<SpaceObject> object)
     this->addBroadcast(FVF_Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
 }
 
+bool CpuShip::launchShip(P<SpaceObject> docked_object)
+{
+    if (docked_object)
+    {
+        P<CpuShip> docked_cpuship = docked_object;
+        P<PlayerSpaceship> docked_player = docked_object;
+
+        if (docked_cpuship)
+        {
+            // Launch CpuShips to escort this ship by default.
+            docked_cpuship->orderDefendTarget(this);
+            return true;
+        }
+        else if (docked_player)
+        {
+            // Force players to undock.
+            docked_player->commandUndock();
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void CpuShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     if (docked_style == DockStyle::Internal) return;

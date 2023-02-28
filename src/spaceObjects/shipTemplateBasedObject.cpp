@@ -218,7 +218,11 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     can_be_destroyed = true;
     registerMemberReplication(&can_be_destroyed);
 
-    registerMemberReplication(&docked_object_ids, 0.5);
+    registerMemberReplication(&docked_object_ids, 0.5f);
+    registerMemberReplication(&shares_energy_with_docked, 0.5f);
+    registerMemberReplication(&repair_docked, 0.5f);
+    registerMemberReplication(&restocks_scan_probes, 0.5f);
+    registerMemberReplication(&restocks_missiles_docked, 0.5f);
 }
 
 void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, float sprite_scale, bool show_levels)

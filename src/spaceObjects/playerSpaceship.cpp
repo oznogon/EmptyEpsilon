@@ -257,6 +257,12 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Commands this PlayerSpaceship to abort an in-progress docking operation.
     /// Example: player:commandAbortDock()
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAbortDock);
+    /// Commands this PlayerSpaceship to launch the given docked ship.
+    /// Example: player:commandLaunchShip(docked_ship) -- commands docked_ship to undock from player
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLaunchShip);
+    /// Commands this PlayerSpaceship to toggle whether it shares energy with docked ships.
+    /// Example: player:commandToggleEnergySharing() -- disables if enabled, or vice versa
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandToggleEnergySharing);
     /// Commands this PlayerSpaceship to hail the given SpaceObject.
     /// If the target object is a PlayerSpaceship or the GM is intercepting all comms, open text chat comms.
     /// Example: player:commandOpenTextComm(base)
@@ -492,6 +498,8 @@ static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const int16_t CMD_TURN_SPEED = 0x002A;
+static const int16_t CMD_LAUNCH_SHIP = 0x002B;
+static const int16_t CMD_TOGGLE_ENERGY_SHARING = 0x002C;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -553,6 +561,10 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&can_scan);
     registerMemberReplication(&can_hack);
     registerMemberReplication(&can_dock);
+    registerMemberReplication(&can_toggle_energy_sharing, 1.0f);
+    registerMemberReplication(&can_toggle_repairs, 1.0f);
+    registerMemberReplication(&can_toggle_weapon_restocking, 1.0f);
+    registerMemberReplication(&can_toggle_probe_restocking, 1.0f);
     registerMemberReplication(&can_combat_maneuver);
     registerMemberReplication(&can_self_destruct);
     registerMemberReplication(&can_launch_probe);
@@ -675,16 +687,16 @@ void PlayerSpaceship::update(float delta)
 
         // If we're docked with a shipTemplateBasedObject, and that object is
         // set to share its energy with docked ships, transfer energy from the
-        // mothership to docked ships until the mothership runs out of energy
-        // or the docked ship doesn't require any.
+        // carrier to docked ships until the carrier runs out of energy or the
+        // docked ship doesn't require any.
         if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked)
         {
             if (!docked_with_ship || docked_with_ship->useEnergy(energy_request))
                 energy_level += energy_request;
         }
 
-        // If a shipTemplateBasedObject and is allowed to restock
-        // scan probes with docked ships.
+        // If we're docked with a shipTemplateBasedObject, and we can restock
+        // scan probes with docked ships, restock 1 scan probe per 10 seconds.
         if (docked_with_template_based && docked_with_template_based->restocks_scan_probes)
         {
             if (scan_probe_stock < max_scan_probes)
@@ -955,6 +967,10 @@ void PlayerSpaceship::applyTemplateValues()
     can_scan = ship_template->can_scan;
     can_hack = ship_template->can_hack;
     can_dock = ship_template->can_dock;
+    can_toggle_energy_sharing = ship_template->shares_energy_with_docked;
+    can_toggle_repairs = ship_template->repair_docked;
+    can_toggle_weapon_restocking = ship_template->restocks_scan_probes;
+    can_toggle_probe_restocking = ship_template->restocks_missiles_docked;
     can_combat_maneuver = ship_template->can_combat_maneuver;
     can_self_destruct = ship_template->can_self_destruct;
     can_launch_probe = ship_template->can_launch_probe;
@@ -1377,6 +1393,30 @@ void PlayerSpaceship::closeComms()
     }
 }
 
+bool PlayerSpaceship::launchShip(P<SpaceObject> docked_object)
+{
+    if (docked_object)
+    {
+        P<CpuShip> docked_cpuship = docked_object;
+        P<PlayerSpaceship> docked_player = docked_object;
+
+        if (docked_cpuship)
+        {
+            // Launch CpuShips to escort this ship by default.
+            docked_cpuship->orderDefendTarget(this);
+            return true;
+        }
+        else if (docked_player)
+        {
+            // Force players to undock.
+            docked_player->commandUndock();
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
 {
     // Receive a command from a client. Code in this function is executed on
@@ -1527,6 +1567,32 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         break;
     case CMD_ABORT_DOCK:
         abortDock();
+        break;
+    case CMD_LAUNCH_SHIP:
+        {
+            int32_t id;
+            packet >> id;
+            P<SpaceObject> docked_object = game_server->getObjectById(id);
+
+            launchShip(docked_object);
+/*
+            if (docked_object)
+            {
+                P<CpuShip> docked_cpuship = docked_object;
+                P<PlayerSpaceship> docked_player = docked_object;
+
+                if (docked_cpuship && docked_cpuship->getDockedWith() == this)
+                    // Launch CpuShips to escort this ship by default.
+                    docked_cpuship->orderDefendTarget(this);
+                else if (docked_player && docked_player->getDockedWith() == this)
+                    // Force players to undock.
+                    docked_player->commandUndock();
+            }
+            */
+        }
+        break;
+    case CMD_TOGGLE_ENERGY_SHARING:
+        setSharesEnergyWithDocked(!getSharesEnergyWithDocked());
         break;
     case CMD_OPEN_TEXT_COMM:
         if (comms_state == CS_Inactive || comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM || comms_state == CS_ChannelClosed)
@@ -2007,6 +2073,21 @@ void PlayerSpaceship::commandAbortDock()
 {
     sp::io::DataBuffer packet;
     packet << CMD_ABORT_DOCK;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandLaunchShip(P<SpaceObject> object)
+{
+    if (!object) return;
+    sp::io::DataBuffer packet;
+    packet << CMD_LAUNCH_SHIP << object->getMultiplayerId();
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandToggleEnergySharing()
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_TOGGLE_ENERGY_SHARING;
     sendClientCommand(packet);
 }
 

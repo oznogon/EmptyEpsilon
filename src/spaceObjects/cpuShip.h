@@ -2,6 +2,7 @@
 #define CPU_SHIP_H
 
 #include "pathPlanner.h"
+#include "playerSpaceship.h"
 #include "spaceship.h"
 
 enum EAIOrder
@@ -52,6 +53,7 @@ public:
     void orderFlyTowardsBlind(glm::vec2 target);
     void orderAttack(P<SpaceObject> object);
     void orderDock(P<SpaceObject> object);
+    bool launchShip(P<SpaceObject> docked_object);
 
     EAIOrder getOrder() { return orders; }
     glm::vec2 getOrderTargetLocation() { return order_target_location; }
