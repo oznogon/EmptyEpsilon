@@ -3,7 +3,7 @@
 #include "theme.h"
 
 GuiKeyValueDisplay::GuiKeyValueDisplay(GuiContainer* owner, const string& id, float div_distance, const string& key, const string& value)
-: GuiElement(owner, id), key(key), value(value), text_size(20.f), div_distance(div_distance), color(glm::u8vec4{255,255,255,255})
+: GuiElement(owner, id), div_distance(div_distance), key(key), value(value), text_size(20.f), color(glm::u8vec4{255,255,255,255})
 {
     back_style = theme->getStyle("keyvalue.back");
     key_style = theme->getStyle("keyvalue.key");

@@ -36,8 +36,8 @@ private:
     float div_distance{};
     string key;
     string value;
-    float text_size{};
-    glm::u8vec4 color{255,255,255,255};
+    float text_size;
+    glm::u8vec4 color;
     bool custom_color_defined = false;
     string icon_name;
     sp::Alignment icon_alignment = sp::Alignment::CenterLeft;
