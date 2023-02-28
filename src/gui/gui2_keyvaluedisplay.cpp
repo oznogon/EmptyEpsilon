@@ -75,10 +75,32 @@ GuiKeyValueDisplay* GuiKeyValueDisplay::setColor(glm::u8vec4 color)
     return this;
 }
 
-GuiKeyValueDisplay* GuiKeyValueDisplay::setIcon(const string& icon_name, const sp::Alignment icon_alignment, const float rotation)
+GuiKeyValueDisplay* GuiKeyValueDisplay::setIcon(const string& name, const sp::Alignment alignment, const float rotation)
 {
-    this->icon_name = icon_name;
-    this->icon_alignment = icon_alignment;
-    this->icon_rotation = rotation;
+    this->icon_name = name;
+    this
+        ->setIconAlignment(alignment)
+        ->setIconRotation(rotation);
+    return this;
+}
+
+GuiKeyValueDisplay* GuiKeyValueDisplay::setIconAlignment(const sp::Alignment alignment)
+{
+    this->icon_alignment = alignment;
+    return this;
+}
+
+GuiKeyValueDisplay* GuiKeyValueDisplay::setIconRotation(const float rotation)
+{
+    this->icon_rotation = std::clamp(rotation, 0.0f, 360.0f);
+    return this;
+}
+
+GuiKeyValueDisplay* GuiKeyValueDisplay::removeIcon()
+{
+    this->icon_name = "";
+    // Reinitialize alignment, rotation
+    this->icon_alignment = sp::Alignment::CenterLeft;
+    this->icon_rotation = 0.0f;
     return this;
 }
