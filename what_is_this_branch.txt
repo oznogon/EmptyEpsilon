@@ -1,6 +1,8 @@
 HangarView populates from a list of docked MultiplayerObjectIds, stored in STBO and updated in SpaceShip's requestUndock and collide (when docking).
 
-Selecting a ship lists and updates its hull, shield, systems damage, and weapons storage as key/value items. This list runs across two columns
+Selecting a ship lists and updates its hull, shield, systems damage, and weapons storage as key/value items. This list runs across two columns.
+
+Global controls to toggle things like energy sharing go alongside the model view.
 
 We should set and enforce docking ship count limits on the vector size, and/or measure impact on network.
 
@@ -42,11 +44,12 @@ If length of internal dock classes or external dock classes for this ship type i
 			  [x] scan probes
 			[x] Provide controls to force the ship to undock
 			Provide controls to toggle (if this ship is capable of it):
-			  - energy sharing
+			  [x] energy sharing
 			  - repairs
 			  - restocking cpuship weapons
 			If PlayerSpaceship, also provide controls to:
 			  - restocking scan probes
+			  - restocking playership weapons
 			  - opening comms (link to relay)
 			  - transferring repair crews
 			Provide control to return to hangar view (if a 2nd view is necessary)
