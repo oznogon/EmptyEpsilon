@@ -3,7 +3,6 @@
 
 #include "gui2_element.h"
 
-
 class GuiThemeStyle;
 class GuiKeyValueDisplay : public GuiElement
 {
@@ -12,19 +11,23 @@ public:
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
 
-    string getKey() { return key; }
+    string getKey() const { return key; }
     GuiKeyValueDisplay* setKey(const string& key);
-    string getValue() { return value; }
+    string getValue() const { return value; }
     GuiKeyValueDisplay* setValue(const string& value);
-    float getTextSize() { return text_size; }
+    float getTextSize() const { return text_size; }
     GuiKeyValueDisplay* setTextSize(float text_size);
-    glm::u8vec4 getColor() { return color; }
+    float getDivDistance() const { return div_distance; }
+    GuiKeyValueDisplay* setDivDistance(float div_distance);
+    float getDivSize() const { return div_size; }
+    GuiKeyValueDisplay* setDivSize(float div_size);
+    glm::u8vec4 getColor() const { return color; }
     GuiKeyValueDisplay* setColor(glm::u8vec4 color);
     GuiKeyValueDisplay* setIcon(const string& name, const sp::Alignment alignment = sp::Alignment::CenterLeft, const float rotation = 0.0f);
-    string getIconName() { return icon_name; }
+    string getIconName() const { return icon_name; }
     sp::Alignment getIconAlignment() { return icon_alignment; }
     GuiKeyValueDisplay* setIconAlignment(const sp::Alignment alignment);
-    float getIconRotation() { return icon_rotation; }
+    float getIconRotation() const { return icon_rotation; }
     GuiKeyValueDisplay* setIconRotation(const float rotation);
     GuiKeyValueDisplay* removeIcon();
 
@@ -34,6 +37,7 @@ private:
     const GuiThemeStyle* value_style;
 
     float div_distance;
+    float div_size;
     string key;
     string value;
     float text_size;
