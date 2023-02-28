@@ -16,16 +16,16 @@ public:
     string getValue() const { return value; }
     GuiKeyValueDisplay* setValue(const string& value);
     float getTextSize() const { return text_size; }
-    GuiKeyValueDisplay* setTextSize(float text_size);
+    GuiKeyValueDisplay* setTextSize(const float text_size);
     float getDivDistance() const { return div_distance; }
-    GuiKeyValueDisplay* setDivDistance(float div_distance);
+    GuiKeyValueDisplay* setDivDistance(const float div_distance);
     float getDivSize() const { return div_size; }
-    GuiKeyValueDisplay* setDivSize(float div_size);
+    GuiKeyValueDisplay* setDivSize(const float div_size);
     glm::u8vec4 getColor() const { return color; }
-    GuiKeyValueDisplay* setColor(glm::u8vec4 color);
+    GuiKeyValueDisplay* setColor(const glm::u8vec4 color);
     GuiKeyValueDisplay* setIcon(const string& name, const sp::Alignment alignment = sp::Alignment::CenterLeft, const float rotation = 0.0f);
     string getIconName() const { return icon_name; }
-    sp::Alignment getIconAlignment() { return icon_alignment; }
+    sp::Alignment getIconAlignment() const { return icon_alignment; }
     GuiKeyValueDisplay* setIconAlignment(const sp::Alignment alignment);
     float getIconRotation() const { return icon_rotation; }
     GuiKeyValueDisplay* setIconRotation(const float rotation);

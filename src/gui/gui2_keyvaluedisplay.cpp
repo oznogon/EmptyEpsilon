@@ -164,25 +164,25 @@ GuiKeyValueDisplay* GuiKeyValueDisplay::setValue(const string& value)
     return this;
 }
 
-GuiKeyValueDisplay* GuiKeyValueDisplay::setDivDistance(float div_distance)
+GuiKeyValueDisplay* GuiKeyValueDisplay::setDivDistance(const float div_distance)
 {
-    this->div_distance = div_distance;
+    this->div_distance = std::max(0.1f, div_distance);
     return this;
 }
 
-GuiKeyValueDisplay* GuiKeyValueDisplay::setDivSize(float div_size)
+GuiKeyValueDisplay* GuiKeyValueDisplay::setDivSize(const float div_size)
 {
-    this->div_size = div_size;
+    this->div_size = std::max(0.1f, div_size);
     return this;
 }
 
-GuiKeyValueDisplay* GuiKeyValueDisplay::setTextSize(float text_size)
+GuiKeyValueDisplay* GuiKeyValueDisplay::setTextSize(const float text_size)
 {
-    this->text_size = text_size;
+    this->text_size = std::max(0.1f, text_size);
     return this;
 }
 
-GuiKeyValueDisplay* GuiKeyValueDisplay::setColor(glm::u8vec4 color)
+GuiKeyValueDisplay* GuiKeyValueDisplay::setColor(const glm::u8vec4 color)
 {
     this->color = color;
     // Override theme colors if setColor is called.
