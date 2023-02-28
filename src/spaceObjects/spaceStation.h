@@ -12,6 +12,7 @@ public:
     virtual DockStyle canBeDockedBy(P<SpaceObject> obj) override;
     virtual void destroyedByDamage(DamageInfo& info) override;
     virtual void applyTemplateValues() override;
+    bool launchShip(P<SpaceObject> docked_object);
 
     virtual string getExportLine() override;
 };

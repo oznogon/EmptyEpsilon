@@ -2,6 +2,7 @@
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "spaceObjects/cpuShip.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
@@ -98,6 +99,31 @@ DockStyle SpaceStation::canBeDockedBy(P<SpaceObject> obj)
     if (!ship)
         return DockStyle::None;
     return DockStyle::External;
+}
+
+bool SpaceStation::launchShip(P<SpaceObject> docked_object)
+{
+    if (docked_object)
+    {
+        P<CpuShip> docked_cpuship = docked_object;
+        P<PlayerSpaceship> docked_player = docked_object;
+        P<SpaceObject> this_station = this;
+
+        if (docked_cpuship && docked_cpuship->getDockedWith() == this_station)
+        {
+            // Launch CpuShips to escort this station by default.
+            docked_cpuship->orderDefendTarget(this);
+            return true;
+        }
+        else if (docked_player && docked_player->getDockedWith() == this_station)
+        {
+            // Force players to undock.
+            docked_player->commandUndock();
+            return true;
+        }
+    }
+
+    return false;
 }
 
 string SpaceStation::getExportLine()

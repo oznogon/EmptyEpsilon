@@ -109,7 +109,7 @@ void HangarViewComponent::display()
     controls_container = new GuiElement(selection_container, "HANGAR_VIEW_CONTROLS_CONTAINER");
     controls_container
         ->setMargins(0)
-        ->setSize(GuiElement::GuiSizeMax, 400.0f)
+        ->setSize(GuiElement::GuiSizeMax, controls_height)
         ->setAttribute("layout", "horizontal");
 
     keyvalue_container = new GuiElement(selection_container, "HANGAR_VIEW_KEY_VALUE_CONTAINER");
@@ -151,12 +151,12 @@ void HangarViewComponent::display()
         tr("hangar_view", "Share energy"),
         [this](bool value)
         {
-            my_spaceship->setSharesEnergyWithDocked(value);
+            my_spaceship->commandToggleEnergySharing();
         }
     );
     share_energy_toggle
         ->setValue(my_spaceship->shares_energy_with_docked)
-        ->setSize(GuiElement::GuiSizeMax, 40);
+        ->setSize(GuiElement::GuiSizeMax, 50);
 
     // Model view
     selected_entry_model = new GuiRotatingModelView(
@@ -171,7 +171,7 @@ void HangarViewComponent::display()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Key/value container (vertical)
-    // Key/value list
+    // - Docking style
     selected_entry_dockstyle = new GuiKeyValueDisplay(
         keyvalue_left_container,
         "HANGAR_VIEW_SHIP_DOCKSTYLE",
@@ -180,25 +180,21 @@ void HangarViewComponent::display()
         "-"
     );
     selected_entry_dockstyle
+        ->setValue(
+            selected_entry->getDockedStyle() == DockStyle::Internal
+                ? tr("hangar_view", "In hangar")
+                : tr("hangar_view", "At airlock")
+        )
         ->setIcon("gui/icons/docking")
         ->setSize(GuiElement::GuiSizeMax, 40);
 
-    if (selected_entry->getDockedStyle() == DockStyle::Internal)
-        selected_entry_dockstyle->setValue(tr("hangar_view", "In hangar"));
-    else
-        selected_entry_dockstyle->setValue(tr("hangar_view", "At airlock"));
-
+    // - Launch ship (force undocking)
     launch_button = new GuiButton(
         selected_entry_dockstyle,
-        "HANGAR_VIEW_LAUNCH_BUTTON",
-        "LAUNCH",
-        [selected_entry_cpuship, selected_entry_player, this]() {
-            if (selected_entry_cpuship)
-                // Launch CpuShips to escort this ship by default.
-                selected_entry_cpuship->orderDefendTarget(my_spaceship);
-            else if (selected_entry_player)
-                // Force players to undock.
-                selected_entry_player->commandUndock();
+        "HANGAR_VIEW_SHIP_LAUNCH_BUTTON",
+        tr("hangar_view", "LAUNCH"),
+        [this]() {
+            my_spaceship->commandLaunchShip(selected_entry);
         }
     );
     launch_button
@@ -384,10 +380,10 @@ void HangarViewComponent::display()
 
 void HangarViewComponent::onDraw(sp::RenderTarget& window)
 {
-    // share_energy_toggle->setValue(my_spaceship->shares_energy_with_docked);
-
     if (selected_entry)
     {
+        share_energy_toggle->setValue(my_spaceship->shares_energy_with_docked);
+
         // If the list changes, the selected_entry state doesn't, so check and
         // if necessary update the entry to match the list's current selection.
         int32_t id = object_list->getSelectionValue().toInt();

@@ -20,6 +20,7 @@ private:
     const float keyvalue_left_divider = 0.4f;
     const float keyvalue_right_divider = 0.75f;
     static constexpr int navigation_width = 400;
+    const float controls_height = 380.0f;
 
     void fillListBox();
     void destroyContainers();

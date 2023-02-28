@@ -317,14 +317,15 @@ bool CpuShip::launchShip(P<SpaceObject> docked_object)
     {
         P<CpuShip> docked_cpuship = docked_object;
         P<PlayerSpaceship> docked_player = docked_object;
+        P<SpaceObject> this_ship = this;
 
-        if (docked_cpuship)
+        if (docked_cpuship && docked_cpuship->getDockedWith() == this_ship)
         {
             // Launch CpuShips to escort this ship by default.
             docked_cpuship->orderDefendTarget(this);
             return true;
         }
-        else if (docked_player)
+        else if (docked_player && docked_player->getDockedWith() == this_ship)
         {
             // Force players to undock.
             docked_player->commandUndock();
