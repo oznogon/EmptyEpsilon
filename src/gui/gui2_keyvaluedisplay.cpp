@@ -18,16 +18,49 @@ void GuiKeyValueDisplay::onDraw(sp::RenderTarget& renderer)
 
     float div_size = 5.f;
 
+    // Draw background texture.
     renderer.drawStretched(rect, back.texture, custom_color_defined ? color : back.color);
+
+    // If sized horizontally, also draw text horizontally.
     if (rect.size.x >= rect.size.y)
     {
-        renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x * div_distance - div_size, rect.size.y), this->key, sp::Alignment::CenterRight, text_size, key.font, custom_color_defined ? color : key.color);
-        renderer.drawText(sp::Rect(rect.position.x + rect.size.x * div_distance + div_size, rect.position.y, rect.size.x * (1.f - div_distance), rect.size.y), this->value, sp::Alignment::CenterLeft, text_size, value.font, custom_color_defined ? color : value.color);
+        // Draw key text.
+        renderer.drawText(
+            sp::Rect(
+                rect.position.x,
+                rect.position.y,
+                rect.size.x * div_distance - div_size,
+                rect.size.y
+            ),
+            this->key,
+            sp::Alignment::CenterRight,
+            text_size,
+            key.font,
+            custom_color_defined ? color : key.color
+        );
 
+        // Draw value text.
+        renderer.drawText(
+            sp::Rect(
+                rect.position.x + rect.size.x * div_distance + div_size,
+                rect.position.y,
+                rect.size.x * (1.f - div_distance),
+                rect.size.y
+            ),
+            this->value,
+            sp::Alignment::CenterLeft,
+            text_size,
+            value.font,
+            custom_color_defined ? color : value.color
+        );
+
+        // Draw icon, if defined.
         if (icon_name != "")
         {
             float icon_x;
 
+            // Align the icon to the right if given any non-left alignment.
+            // Discard any specified vertical alignment - always center it.
             switch(icon_alignment)
             {
             case sp::Alignment::CenterLeft:
@@ -39,13 +72,85 @@ void GuiKeyValueDisplay::onDraw(sp::RenderTarget& renderer)
                 icon_x = rect.position.x + rect.size.x - rect.size.y * 0.5f;
             }
 
-            renderer.drawRotatedSprite(icon_name, glm::vec2(icon_x, rect.position.y + rect.size.y * 0.5f), rect.size.y * 0.8f, icon_rotation, custom_color_defined ? color : key.color);
+            // Draw the icon, with the given rotation if defined.
+            // - pad the left or right by half the k/v's height
+            // - size the icon 80% of the k/v's height
+            // - center it vertically within the k/v
+            // - rotate it; 0.0f = up
+            // - use the same color as the bg and text, custom if defined
+            renderer.drawRotatedSprite(
+                icon_name,
+                glm::vec2(
+                    icon_x,
+                    rect.position.y + rect.size.y * 0.5f
+                ),
+                rect.size.y * 0.8f,
+                icon_rotation,
+                custom_color_defined ? color : key.color
+            );
         }
     }
     else
     {
-        renderer.drawText(sp::Rect(rect.position.x, rect.position.y + rect.size.y * (1.f - div_distance) + div_size, rect.size.x, rect.size.y * div_distance - div_size), this->key, sp::Alignment::TopCenter, text_size, key.font, custom_color_defined ? color : key.color, sp::Font::FlagVertical);
-        renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x, rect.size.y * (1.f - div_distance) - div_size), this->value, sp::Alignment::BottomCenter, text_size, value.font, custom_color_defined ? color : value.color, sp::Font::FlagVertical);
+        // If sized vertically, also draw text vertically.
+        renderer.drawText(
+            sp::Rect(
+                rect.position.x,
+                rect.position.y + rect.size.y * (1.f - div_distance) + div_size,
+                rect.size.x,
+                rect.size.y * div_distance - div_size
+            ),
+            this->key,
+            sp::Alignment::TopCenter,
+            text_size,
+            key.font,
+            custom_color_defined ? color : key.color,
+            sp::Font::FlagVertical
+        );
+        renderer.drawText(
+            sp::Rect(
+                rect.position.x,
+                rect.position.y,
+                rect.size.x,
+                rect.size.y * (1.f - div_distance) - div_size
+            ),
+            this->value,
+            sp::Alignment::BottomCenter,
+            text_size,
+            value.font,
+            custom_color_defined ? color : value.color,
+            sp::Font::FlagVertical
+        );
+
+        // If sized vertically and an icon's defined, draw it.
+        if (icon_name != "")
+        {
+            float icon_y;
+
+            // If given any non-bottom alignment, draw at the top.
+            // Discard any specified horizontal alignment - always center it.
+            switch(icon_alignment)
+            {
+            case sp::Alignment::BottomLeft:
+            case sp::Alignment::BottomCenter:
+            case sp::Alignment::BottomRight:
+                icon_y = rect.position.y + rect.size.x * 0.5f;
+                break;
+            default:
+                icon_y = rect.position.y + rect.size.y - rect.size.x * 0.5f;
+            }
+
+            renderer.drawRotatedSprite(
+                icon_name,
+                glm::vec2(
+                    rect.position.x + rect.size.x * 0.5f,
+                    icon_y
+                ),
+                rect.size.x * 0.8f,
+                icon_rotation, // still 0.0f = up, unlike the text
+                custom_color_defined ? color : key.color
+            );
+        }
     }
 }
 
