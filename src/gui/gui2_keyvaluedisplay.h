@@ -33,15 +33,15 @@ private:
     const GuiThemeStyle* key_style;
     const GuiThemeStyle* value_style;
 
-    float div_distance{};
+    float div_distance;
     string key;
     string value;
     float text_size;
     glm::u8vec4 color;
-    bool custom_color_defined = false;
+    bool custom_color_defined;
     string icon_name;
-    sp::Alignment icon_alignment = sp::Alignment::CenterLeft;
-    float icon_rotation = 0.0f;
+    sp::Alignment icon_alignment;
+    float icon_rotation;
 };
 
 #endif//GUI_KEYVALUEDISPLAY_H
