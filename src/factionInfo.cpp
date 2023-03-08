@@ -24,9 +24,15 @@
 /// faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
 REGISTER_SCRIPT_CLASS(FactionInfo)
 {
+    /// Returns this faction's internal string name, used to reference this faction regardless of EmptyEpsilon's language setting.
+    /// Example: faction:getName()
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getName);
     /// Sets this faction's internal string name, used to reference this faction regardless of EmptyEpsilon's language setting.
     /// Example: faction:setName("USN")
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setName);
+    /// Returns this faction's name as presented in the user interface.
+    /// Example: faction:getLocaleName()
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getLocaleName);
     /// Sets this faction's name as presented in the user interface.
     /// Wrap the string in the _() function to make it available for translation.
     /// Example: faction:setLocaleName(_("USN"))
@@ -35,6 +41,9 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     /// Defaults to white (255,255,255).
     /// Example: faction:setGMColor(255,0,0) -- sets the color to red
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setGMColor);
+    /// Returns this faction's longform description as shown in its Factions ScienceDatabase child entry.
+    /// Example: faction:getDescription()
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getDescription);
     /// Sets this faction's longform description as shown in its Factions ScienceDatabase child entry.
     /// Wrap the string in the _() function to make it available for translation.
     /// Example: faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
@@ -67,6 +76,21 @@ static int getFactionInfo(lua_State* L)
 /// Use this to modify faction details and relationships with FactionInfo functions.
 /// Example: faction = getFactionInfo("Human Navy") -- faction = the Human Navy FactionInfo object
 REGISTER_SCRIPT_FUNCTION(getFactionInfo);
+
+static int getAllFactionInfos(lua_State* L)
+{
+    PVector<FactionInfo> faction_infos;
+
+    for (unsigned int n = 0; n < factionInfo.size(); n++)
+        if (factionInfo[n])
+            faction_infos.push_back(factionInfo[n]);
+
+    return convert<PVector<FactionInfo>>::returnType(L, faction_infos);
+}
+/// PVector<FactionInfo> getAllFactionInfos()
+/// Returns a 1-indexed table containing all FactionInfo objects.
+/// Example: faction:getAllFactionInfos() -- returns all FactionInfo objects
+REGISTER_SCRIPT_FUNCTION(getAllFactionInfos);
 
 REGISTER_MULTIPLAYER_CLASS(FactionInfo, "FactionInfo");
 FactionInfo::FactionInfo()
