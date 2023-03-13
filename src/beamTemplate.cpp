@@ -1,19 +1,20 @@
 #include "beamTemplate.h"
 
 BeamTemplate::BeamTemplate()
+: beam_texture("texture/beam_orange.png"),
+  direction(0.0F),
+  arc(0.0F),
+  range(0.0F),
+  turret_direction(0.0F),
+  turret_arc(0.0F),
+  turret_rotation_rate(0.0F),
+  cycle_time(0.0F),
+  damage(0.0F),
+  energy_per_beam_fire(3.0F),
+  heat_per_beam_fire(0.02F)
 {
-    arc = 0;
-    direction = 0;
-    range = 0;
-    turret_arc = 0;
-    turret_direction = 0;
-    turret_rotation_rate = 0;
-    cycle_time = 0;
-    damage = 0;
-    beam_texture = "texture/beam_orange.png";
+}
 
-    energy_per_beam_fire = 3.0;
-    heat_per_beam_fire = 0.02;
 }
 
 string BeamTemplate::getBeamTexture()
