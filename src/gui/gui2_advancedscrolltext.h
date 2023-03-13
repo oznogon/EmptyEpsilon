@@ -26,7 +26,7 @@ public:
     GuiAdvancedScrollText* disableAutoScrollDown() { auto_scroll_down = false; return this; }
 
     GuiAdvancedScrollText* addEntry(string prefix, string text, glm::u8vec4 color);
-    GuiAdvancedScrollText* setTextSize(float text_size) { this->text_size = text_size; return this; }
+    GuiAdvancedScrollText* setTextSize(float text_size);
 
     unsigned int getEntryCount() const;
     string getEntryText(int index) const;
