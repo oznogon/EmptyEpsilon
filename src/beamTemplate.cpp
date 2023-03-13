@@ -93,14 +93,8 @@ float BeamTemplate::getTurretRotationRate() const
 
 void BeamTemplate::setTurretRotationRate(float rotation_rate)
 {
-    if (rotation_rate < 0.0f)
-        this->turret_rotation_rate = 0.0f;
-    // 25 is an arbitrary limit. Values greater than 25.0 are nearly
-    // instantaneous.
-    else if (rotation_rate > 25.0f)
-        this->turret_rotation_rate = 25.0f;
-    else
-        this->turret_rotation_rate = rotation_rate;
+    // 25 deg/tick is arbitrary. Any faster and it looks instantaneous.
+    this->turret_rotation_rate = rotation_rate < 0.0F ? 0.0F : rotation_rate > 25.0F ? 25.0F : rotation_rate;
 }
 
 float BeamTemplate::getCycleTime() const
@@ -121,10 +115,7 @@ float BeamTemplate::getDamage() const
 
 void BeamTemplate::setDamage(float damage)
 {
-    if(damage < 0)
-        this->damage = 0;
-    else
-        this->damage = damage;
+    this->damage = std::max(0.0F, damage);
 }
 
 float BeamTemplate::getEnergyPerFire() const
