@@ -136,9 +136,9 @@ float BeamTemplate::getEnergyPerFire() const
     return energy_per_beam_fire;
 }
 
-void BeamTemplate::setEnergyPerFire(float energy)
+void BeamTemplate::setEnergyPerFire(float energy_per_beam_fire)
 {
-    energy_per_beam_fire = energy;
+    this->energy_per_beam_fire = std::max(0.0F, energy_per_beam_fire);
 }
 
 float BeamTemplate::getHeatPerFire() const
@@ -146,9 +146,9 @@ float BeamTemplate::getHeatPerFire() const
     return heat_per_beam_fire;
 }
 
-void BeamTemplate::setHeatPerFire(float heat)
+void BeamTemplate::setHeatPerFire(float heat_per_beam_fire)
 {
-    heat_per_beam_fire = heat;
+    this->heat_per_beam_fire = std::max(0.0F, heat_per_beam_fire);
 }
 
 BeamTemplate& BeamTemplate::operator=(const BeamTemplate& other)

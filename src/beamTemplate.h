@@ -42,11 +42,11 @@ public:
     float getDamage() const;
     void setDamage(float damage);
 
-    void setEnergyPerFire(float energy);
     float getEnergyPerFire() const;
+    void setEnergyPerFire(float energy_per_beam_fire);
 
-    void setHeatPerFire(float heat);
     float getHeatPerFire() const;
+    void setHeatPerFire(float heat_per_beam_fire);
 
     BeamTemplate& operator=(const BeamTemplate& other);
 
