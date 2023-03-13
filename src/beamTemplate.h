@@ -16,12 +16,7 @@ public:
 
     /**
      * Beam weapons are 'arc-ed' weapons, the direction is the center of the arc.
-     * Will always return values between 0 and 360
-     */
-    float getDirection();
-
-    /**
-     * Set the direction of the beam weapon.
+     * Always sets values in degrees between 0 and 360.
      */
     float getDirection() const;
     void setDirection(float direction);
@@ -61,10 +56,10 @@ protected:
     float arc; // Value between 0 and 360
     float range; // Value greater than 0
     float turret_direction; // Value between 0 and 360 (degrees)
-    float turret_arc; // Value between 0 and 360
+    float turret_arc; // Value between 0 and 360 (degrees)
     float turret_rotation_rate; // Value between 0 and 25 (degrees/tick)
     float cycle_time; // Value greater than 0
-    float damage;
+    float damage; // Value greater than or equal to 0
     float energy_per_beam_fire;
     float heat_per_beam_fire;
 };

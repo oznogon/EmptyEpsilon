@@ -30,7 +30,8 @@ string BeamTemplate::getBeamTexture() const
 
 void BeamTemplate::setBeamTexture(string texture)
 {
-    //TODO: Add some more inteligent input checking
+    // TODO: Validate filename input
+    // Should contain a path relative to the resources directory.
     beam_texture = texture;
 }
 
