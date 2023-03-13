@@ -62,10 +62,8 @@ float BeamTemplate::getRange() const
 
 void BeamTemplate::setRange(float range)
 {
-    if(range <= 0)
-        this->range = 0.1;
-    else
-        this->range = range;
+    // Too-small values can cause unusual behavior.
+    this->range = std::max(range, 0.1F);
 }
 
 float BeamTemplate::getTurretDirection() const
@@ -112,10 +110,8 @@ float BeamTemplate::getCycleTime() const
 
 void BeamTemplate::setCycleTime(float cycle_time)
 {
-    if(cycle_time <= 0)
-        this->cycle_time = 0.1;
-    else
-        this->cycle_time = cycle_time;
+    // Too-small values can cause unusual behavior.
+    this->cycle_time = std::max(cycle_time, 0.1F);
 }
 
 float BeamTemplate::getDamage() const
