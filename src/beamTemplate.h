@@ -11,8 +11,7 @@ class BeamTemplate : sp::NonCopyable
 public:
     BeamTemplate();
 
-    string getBeamTexture();
-
+    string getBeamTexture() const;
     void setBeamTexture(string texture);
 
     /**
@@ -24,34 +23,35 @@ public:
     /**
      * Set the direction of the beam weapon.
      */
+    float getDirection() const;
     void setDirection(float direction);
 
-    float getArc();
+    float getArc() const;
     void setArc(float arc);
 
-    float getRange();
+    float getRange() const;
     void setRange(float range);
 
-    float getTurretDirection();
+    float getTurretDirection() const;
     void setTurretDirection(float direction);
 
-    float getTurretArc();
+    float getTurretArc() const;
     void setTurretArc(float arc);
 
-    float getTurretRotationRate();
+    float getTurretRotationRate() const;
     void setTurretRotationRate(float rotation_rate);
 
-    float getCycleTime();
+    float getCycleTime() const;
     void setCycleTime(float cycle_time);
 
-    float getDamage();
+    float getDamage() const;
     void setDamage(float damage);
 
-    float getEnergyPerFire();
     void setEnergyPerFire(float energy);
+    float getEnergyPerFire() const;
 
-    float getHeatPerFire();
     void setHeatPerFire(float heat);
+    float getHeatPerFire() const;
 
     BeamTemplate& operator=(const BeamTemplate& other);
 
