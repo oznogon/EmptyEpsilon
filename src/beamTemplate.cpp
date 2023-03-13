@@ -15,6 +15,12 @@ BeamTemplate::BeamTemplate()
 {
 }
 
+float BeamTemplate::clampDegrees(float value)
+{
+    // Clamp value to 0-360. If 360, set to 0.
+    while (value < 0.0F)   { value += 360.0F; }
+    while (value > 360.0F) { value -= 360.0F; }
+    return value == 360.0F ? 0.0F : value;
 }
 
 string BeamTemplate::getBeamTexture()
@@ -35,12 +41,7 @@ float BeamTemplate::getDirection()
 
 void BeamTemplate::setDirection(float direction)
 {
-    // Clamp values
-    while(direction < 0)
-        direction += 360;
-    while(direction > 360)
-        direction -= 360;
-    this->direction = direction;
+    this->direction = clampDegrees(direction);
 }
 
 float BeamTemplate::getArc()
@@ -50,11 +51,7 @@ float BeamTemplate::getArc()
 
 void BeamTemplate::setArc(float arc)
 {
-    while(arc < 0)
-        arc += 360;
-    while(arc > 360)
-        arc -=360;
-    this->arc = arc;
+    this->arc = clampDegrees(arc);
 }
 
 float BeamTemplate::getRange()
@@ -77,12 +74,7 @@ float BeamTemplate::getTurretDirection()
 
 void BeamTemplate::setTurretDirection(float direction)
 {
-    // Clamp values
-    while(direction < 0)
-        direction += 360;
-    while(direction > 360)
-        direction -= 360;
-    this->turret_direction = direction;
+    this->turret_direction = clampDegrees(direction);
 }
 
 float BeamTemplate::getTurretArc()
@@ -92,11 +84,7 @@ float BeamTemplate::getTurretArc()
 
 void BeamTemplate::setTurretArc(float arc)
 {
-    while(arc < 0)
-        arc += 360;
-    while(arc > 360)
-        arc -=360;
-    this->turret_arc = arc;
+    this->turret_arc = clampDegrees(arc);
 }
 
 float BeamTemplate::getTurretRotationRate()

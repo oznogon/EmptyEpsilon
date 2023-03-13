@@ -6,6 +6,8 @@
 
 class BeamTemplate : sp::NonCopyable
 {
+    static float clampDegrees(float value);
+
 public:
     BeamTemplate();
 
