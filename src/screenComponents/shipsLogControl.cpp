@@ -30,7 +30,6 @@ void ShipsLog::onDraw(sp::RenderTarget& renderer)
 
     if (open)
     {
-        const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog();
         if (log_text->getEntryCount() > 0 && logs.size() == 0)
             log_text->clearEntries();
 
