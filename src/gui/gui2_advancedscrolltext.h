@@ -31,6 +31,7 @@ public:
 
     unsigned int getEntryCount() const;
     string getEntryText(int index) const;
+    string getEntryPrefix(int index) const;
     GuiAdvancedScrollText* removeEntry(int index);
     GuiAdvancedScrollText* clearEntries();
 

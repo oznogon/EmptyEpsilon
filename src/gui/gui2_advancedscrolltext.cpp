@@ -41,6 +41,13 @@ string GuiAdvancedScrollText::getEntryText(int index) const
     return entries[index].text;
 }
 
+string GuiAdvancedScrollText::getEntryPrefix(int index) const
+{
+    if (index < 0 || index >= int(getEntryCount()))
+        return "";
+    return entries[index].prefix;
+}
+
 GuiAdvancedScrollText* GuiAdvancedScrollText::removeEntry(int index)
 {
     // Check if the max prefix width should change with this entry's removal.
