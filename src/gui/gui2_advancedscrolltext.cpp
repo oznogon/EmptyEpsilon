@@ -9,8 +9,7 @@ GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string text, glm::u8vec4 color)
 {
-    entries.emplace_back();
-    Entry& entry = entries.back();
+    Entry& entry = entries.emplace_back();
     entry.prefix = prefix;
     entry.text = text;
     entry.color = color;
@@ -109,9 +108,8 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::clearEntries()
 
 void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 {
-    // If the window's been horizontally resized, recalculate prepared text by
-    // clearing and re-adding all entries.
-    /*
+    // If the window's been horizontally resized, recalculate prepared text for
+    // wrapping and entry height by clearing and re-adding all entries.
     if (rect_width != rect.size.x)
     {
         LOG(INFO) << "onResize";
@@ -119,13 +117,14 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
         const std::vector<Entry> cache_entries = entries;
         this->clearEntries();
 
-        for (Entry& entry : entries)
-            entries.emplace_back(entry);
+        for (const Entry& entry : cache_entries)
+            addEntry(entry.prefix, entry.text, entry.color);
+        
+        return;
     }
-    */
 
     // Draw the visible entries.
-    float draw_offset = -scrollbar->getValue();
+    float draw_offset = -scrollbar->getValue() + text_size + 10.0f;
 
     // Prepare the text for each entry, and use that to estimate the total
     // height of all entries.
@@ -139,10 +138,12 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 
             for (auto& g : e.prepared_prefix.data)
             {
+                LOG(INFO) << e.text << ": y_start: " << y_start << " g.position.y: " << g.position.y;
                 if (y_start != g.position.y)
                     g.position.y = (g.position.y - y_start) + draw_offset;
                 else
                     g.position.y = draw_offset;
+                LOG(INFO) << "g.position.y updated: " << g.position.y;
             }
             for (auto& g : e.prepared_text.data)
             {
