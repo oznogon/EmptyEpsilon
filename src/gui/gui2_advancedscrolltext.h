@@ -12,9 +12,14 @@ protected:
     public:
         string prefix;
         string text;
+        float height;
+        float prefix_width;
+        sp::Font::PreparedFontString prepared_prefix;
+        sp::Font::PreparedFontString prepared_text;
         glm::u8vec4 color;
     };
 
+    float rect_width;
     std::vector<Entry> entries;
     GuiScrollbar* scrollbar;
     float text_size;

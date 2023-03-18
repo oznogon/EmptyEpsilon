@@ -1,7 +1,7 @@
 #include "gui2_advancedscrolltext.h"
 
 GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
-: GuiElement(owner, id), text_size(30), max_prefix_width(0.0f)
+: GuiElement(owner, id), rect_width(rect.size.x), text_size(30), max_prefix_width(0.0f)
 {
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
     scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
@@ -10,21 +10,35 @@ GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
 GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string text, glm::u8vec4 color)
 {
     entries.emplace_back();
-    entries.back().prefix = prefix;
-    entries.back().text = text;
-    entries.back().color = color;
+    Entry& entry = entries.back();
+    entry.prefix = prefix;
+    entry.text = text;
+    entry.color = color;
 
-    // Set the maximum prefix width on each new entry so we know how much space
-    // we have for the text.
-    auto prepared = sp::RenderTarget::getDefaultFont()->prepare(
-        prefix,
-        32,
-        text_size,
-        {0, 0},
-        sp::Alignment::TopLeft,
-        0
+    // Set the entry's height by preparing to render it.
+    // This must be updated if the control is resized!
+    entry.prepared_prefix = sp::RenderTarget::getDefaultFont()
+        ->prepare(
+            prefix,
+            32,
+            text_size,
+            {rect.size.x, 800.0f},
+            sp::Alignment::TopLeft
     );
-    max_prefix_width = std::max(max_prefix_width, prepared.getUsedAreaSize().x);
+    entry.prefix_width = entry.prepared_prefix.getUsedAreaSize().x;
+    max_prefix_width = std::max(max_prefix_width, entry.prefix_width);
+
+    entry.prepared_text = sp::RenderTarget::getDefaultFont()
+        ->prepare(
+            text,
+            32,
+            text_size,
+            {rect.size.x - max_prefix_width - 50, 800.0f},
+            sp::Alignment::TopLeft,
+            sp::Font::FlagLineWrap | sp::Font::FlagClip
+    );
+    entry.height = entry.prepared_text.getUsedAreaSize().y;
+    LOG(INFO) << "entry.height: " << entry.height;
 
     return this;
 }
@@ -95,43 +109,58 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::clearEntries()
 
 void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 {
+    // If the window's been horizontally resized, recalculate prepared text by
+    // clearing and re-adding all entries.
+    /*
+    if (rect_width != rect.size.x)
+    {
+        LOG(INFO) << "onResize";
+        rect_width = rect.size.x;
+        const std::vector<Entry> cache_entries = entries;
+        this->clearEntries();
+
+        for (Entry& entry : entries)
+            entries.emplace_back(entry);
+    }
+    */
+
     // Draw the visible entries.
     float draw_offset = -scrollbar->getValue();
 
+    // Prepare the text for each entry, and use that to estimate the total
+    // height of all entries.
     for (Entry& e : entries)
     {
-        auto prepared_prefix = sp::RenderTarget::getDefaultFont()
-            ->prepare(
-                e.prefix,
-                32,
-                text_size,
-                rect.size,
-                sp::Alignment::TopLeft
-            );
-        auto prepared_text = sp::RenderTarget::getDefaultFont()
-            ->prepare(
-                e.text,
-                32,
-                text_size,
-                {rect.size.x - max_prefix_width - 50, rect.size.y},
-                sp::Alignment::TopLeft,
-                sp::Font::FlagLineWrap | sp::Font::FlagClip
-            );
-        const auto height = prepared_text.getUsedAreaSize().y;
-
-        if (draw_offset + height > 0)
+        if (draw_offset + e.height > 0)
         {
-            for (auto& g : prepared_prefix.data)
-                g.position.y += draw_offset;
-            for (auto& g : prepared_text.data)
-                g.position.y += draw_offset;
+            // Set the position of each character of each entry based on the
+            // scrollbar offset.
+            const float y_start = e.prepared_prefix.data[0].position.y;
+
+            for (auto& g : e.prepared_prefix.data)
+            {
+                if (y_start != g.position.y)
+                    g.position.y = (g.position.y - y_start) + draw_offset;
+                else
+                    g.position.y = draw_offset;
+            }
+            for (auto& g : e.prepared_text.data)
+            {
+                if (y_start != g.position.y)
+                    g.position.y = (g.position.y - y_start) + draw_offset;
+                else
+                    g.position.y = draw_offset;
+            }
+
+            // Render each entry, clipping it if it's not visible in the scroll offset.
             renderer.drawText(
                 rect,
-                prepared_prefix,
+                e.prepared_prefix,
                 text_size,
                 {255, 255, 255, 255},
                 sp::Font::FlagClip
             );
+
             renderer.drawText(
                 sp::Rect(
                     rect.position.x + max_prefix_width,
@@ -139,14 +168,14 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
                     rect.size.x - 50 - max_prefix_width,
                     rect.size.y
                 ),
-                prepared_text,
+                e.prepared_text,
                 text_size,
                 e.color,
                 sp::Font::FlagClip
             );
         }
 
-        draw_offset += height;
+        draw_offset += e.height;
     }
 
     // Calculate how many lines we have to display in total.
@@ -161,5 +190,7 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
+
+    // Hide the scrollbar if the scroll is less than 100px.
     scrollbar->setVisible(rect.size.y > 100);
 }
