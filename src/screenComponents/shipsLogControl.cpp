@@ -42,25 +42,33 @@ void ShipsLog::onDraw(sp::RenderTarget& renderer)
         while (log_text->getEntryCount() > log_entry_count)
             log_text->removeEntry(0);
 
-        if (log_text->getEntryCount() > 0 && log_entry_count > 0 && log_text->getEntryText(0) != logs[0].text)
+        // If the scroll and log have entries, and the first scroll entry isn't
+        // the earliest log entry, update the scroll.
+        if (log_text->getEntryCount() > 0
+            && log_entry_count > 0
+            && log_text->getEntryPrefix(0) != logs[0].prefix
+            && log_text->getEntryText(0) != logs[0].text)
         {
             bool updated = false;
 
             for (unsigned int n = 1; n < log_text->getEntryCount(); n++)
             {
-                if (log_text->getEntryText(n) == logs[0].text)
+                if (log_text->getEntryPrefix(n) == logs[0].prefix
+                    && log_text->getEntryText(n) == logs[0].text)
                 {
-                    for(unsigned int m=0; m<n; m++)
+                    for (unsigned int m = 0; m < n; m++)
                         log_text->removeEntry(0);
+
                     updated = true;
                     break;
                 }
             }
+
             if (!updated)
                 log_text->clearEntries();
         }
 
-        while(log_text->getEntryCount() < log_entry_count)
+        while (log_text->getEntryCount() < log_entry_count)
         {
             int n = log_text->getEntryCount();
             log_text->addEntry(logs[n].prefix, logs[n].text, logs[n].color);
@@ -71,9 +79,13 @@ void ShipsLog::onDraw(sp::RenderTarget& renderer)
         // If minimized, display only the first entry.
         if (log_text->getEntryCount() > 0 && log_entry_count > 0)
         {
-            if (log_text->getEntryText(0) != logs.back().text)
+            if (log_text->getEntryPrefix(0) != logs.back().prefix
+                || log_text->getEntryText(0) != logs.back().text)
+            {
                 log_text->clearEntries();
+            }
         }
+
         if (log_text->getEntryCount() == 0 && log_entry_count > 0)
             log_text->addEntry(logs.back().prefix, logs.back().text, logs.back().color);
     }
