@@ -13,6 +13,9 @@
 /// The Collisionable class is provided by SeriousProton.
 REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
 {
+    /// Returns this object's radius. A value of 1000 = 1U.
+    /// Example: obj:getRadius()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadius);
     /// Sets this SpaceObject's position on the map, in meters from the origin.
     /// Example: obj:setPosition(x,y)
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setPosition);
