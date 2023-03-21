@@ -271,8 +271,8 @@ public:
     void commandSetBeamSystemTarget(ESystem system);
     void commandSetShieldFrequency(int32_t frequency);
     void commandAddWaypoint(glm::vec2 position);
-    void commandRemoveWaypoint(int32_t index);
-    void commandMoveWaypoint(int32_t index, glm::vec2 position);
+    void commandRemoveWaypoint(int32_t index, bool is_1_indexed = false);
+    void commandMoveWaypoint(int32_t index, glm::vec2 position, bool is_1_indexed = false);
     void commandActivateSelfDestruct();
     void commandCancelSelfDestruct();
     void commandConfirmDestructCode(int8_t index, uint32_t code);

@@ -297,12 +297,22 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Example: player:commandAddWaypoint(1000,2000)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAddWaypoint);
     /// Commands this PlayerSpaceship to remove the waypoint with the given index.
-    /// This uses a 0-index, while waypoints are numbered on player screens with a 1-index.
-    /// Example: player:commandRemoveWaypoint(0) -- removes waypoint 1
+    /// This defaults to use of a 0-indexed value, so the is_1_indexed parameter defaults to false.
+    /// Use of 0-indexed values is deprecated and might be changed to 1-indexed values in a future version.
+    /// Waypoints are numbered on player screens with a 1-indexed value.
+    /// To use 1-indexed values in a manner that will remain compatible, increment the index value and pass true for the is_1_indexed parameter.
+    /// Examples:
+    /// player:commandRemoveWaypoint(0) -- removes waypoint 1
+    /// player:commandRemoveWaypoint(1, true) -- removes waypoint 1
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandRemoveWaypoint);
     /// Commands this PlayerSpaceship to move the waypoint with the given index to the given coordinates.
-    /// This uses a 0-index, while waypoints are numbered on player screens with a 1-index.
-    /// Example: player:commandMoveWaypoint(0,-1000,-2000) -- moves waypoint 1 to -1000,-2000
+    /// This defaults to use of a 0-indexed value, so the is_1_indexed parameter defaults to false.
+    /// Use of 0-indexed values is deprecated and might be changed to 1-indexed values in a future version.
+    /// Waypoints are numbered on player screens with a 1-indexed value.
+    /// To use 1-indexed values in a manner that will remain compatible, increment the index value and pass true for the is_1_indexed parameter.
+    /// Examples:
+    /// player:commandMoveWaypoint(0,-1000,-2000) -- moves waypoint 1 to -1000,-2000
+    /// player:commandMoveWaypoint(1,-1000,-2000,true) -- moves waypoint 1 to -1000,-2000
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMoveWaypoint);
     /// Commands this PlayerSpaceship to activate its self-destruct sequence.
     /// Example: player:commandActivateSelfDestruct()
@@ -2081,16 +2091,20 @@ void PlayerSpaceship::commandAddWaypoint(glm::vec2 position)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandRemoveWaypoint(int32_t index)
+void PlayerSpaceship::commandRemoveWaypoint(int32_t index, bool is_1_indexed)
 {
     sp::io::DataBuffer packet;
+    if (is_1_indexed) { index -= 1; }
+    else { LOG(WARNING) << "Zero-indexed use of commandRemoveWaypoint is deprecated and might change to one-indexed use in a future version. Use commandRemoveWaypoint(" << (index + 1) << ", true) instead."; }
     packet << CMD_REMOVE_WAYPOINT << index;
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandMoveWaypoint(int32_t index, glm::vec2 position)
+void PlayerSpaceship::commandMoveWaypoint(int32_t index, glm::vec2 position, bool is_1_indexed)
 {
     sp::io::DataBuffer packet;
+    if (is_1_indexed) { index -= 1; }
+    else { LOG(WARNING) << "Zero-indexed use of commandMoveWaypoint is deprecated and might change to one-indexed use in a future version. Use commandMoveWaypoint(" << (index + 1) << ", " << position.x << ", " << position.y << ", true) instead."; }
     packet << CMD_MOVE_WAYPOINT << index << position;
     sendClientCommand(packet);
 }
