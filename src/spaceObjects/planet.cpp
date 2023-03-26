@@ -404,9 +404,15 @@ void Planet::draw3DTransparent()
 
 void Planet::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    if (collision_size > 0)
+    if (game_server && collision_size > 0.0f)
     {
         renderer.fillCircle(position, collision_size * scale, glm::u8vec4(atmosphere_color * 255.f, 128));
+    }
+    else
+    {
+        const float collision_size_update = std::abs(distance_from_movement_plane) >= planet_size ? -1.0f : sqrt((planet_size * planet_size) - (distance_from_movement_plane * distance_from_movement_plane)) * 1.1f;
+        if (collision_size_update > 0.0f)
+            renderer.fillCircle(position, collision_size_update * scale, glm::u8vec4(atmosphere_color * 255.f, 128));
     }
 }
 
