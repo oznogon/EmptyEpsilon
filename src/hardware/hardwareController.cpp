@@ -54,7 +54,7 @@ void HardwareController::loadConfiguration(string filename)
 
     std::unordered_map<string, string> settings;
     string section = "";
-    char buffer[512];
+    char buffer[8192];
     while (fgets(buffer, sizeof(buffer), f))
     {
         string line = string(buffer).strip();
