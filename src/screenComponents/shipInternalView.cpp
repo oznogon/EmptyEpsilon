@@ -173,7 +173,7 @@ void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
         switch(system)
         {
         case ShipSystem::Type::Reactor:
-            icon = "gui/icons/system_reactor.png";
+            icon = "gui/icons/system_reactor";
             break;
         case ShipSystem::Type::BeamWeapons:
             icon = "gui/icons/system_beam";
@@ -198,6 +198,9 @@ void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
             break;
         case ShipSystem::Type::RearShield:
             icon = "gui/icons/shields-aft";
+            break;
+        case ShipSystem::Type::UtilityBeam:
+            icon = "gui/icons/system_utilitybeam";
             break;
         default:
             icon = "particle.png";

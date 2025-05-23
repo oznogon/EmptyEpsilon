@@ -2,6 +2,7 @@
 #include "multiplayer_server.h"
 #include "components/reactor.h"
 #include "components/beamweapon.h"
+#include "components/utilityBeam.h"
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
 #include "components/jumpdrive.h"
@@ -17,6 +18,8 @@ void ShipSystemsSystem::update(float delta)
     for(auto [entity, system] : sp::ecs::Query<Reactor>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
     for(auto [entity, system] : sp::ecs::Query<BeamWeaponSys>())
+        updateSystem(system, delta, entity.hasComponent<Coolant>());
+    for(auto [entity, system] : sp::ecs::Query<UtilityBeam>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
     for(auto [entity, system] : sp::ecs::Query<MissileTubes>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
