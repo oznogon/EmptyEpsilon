@@ -7,6 +7,7 @@
 #include "components/beamweapon.h"
 #include "components/collision.h"
 #include "components/docking.h"
+#include "components/utilityBeam.h"
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/missiletubes.h"

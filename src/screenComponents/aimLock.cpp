@@ -65,10 +65,10 @@ void AimLock::onDraw(sp::RenderTarget& renderer)
 {
     auto center = getCenterPoint();
     float view_rotation = radar->getViewRotation();
-    float radius = std::min(rect.size.x, rect.size.y);
+    float radius = std::min(rect.size.x, rect.size.y) * 0.5f;
 
-    renderer.drawSprite("gui/widget/dial_background.png", center, radius);
-    renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius, (value - min_value) / (max_value - min_value) * 360.0f - view_rotation);
+    renderer.drawCircleOutline(center, radius, 16, glm::u8vec4(255, 255, 255, 64));
+    renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius * 2.0f, (value - min_value) / (max_value - min_value) * 360.0f - view_rotation);
 }
 
 bool AimLock::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)

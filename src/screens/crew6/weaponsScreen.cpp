@@ -39,7 +39,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-    radar = new GuiRadarView(this, "HELMS_RADAR", &targets);
+    radar = new GuiRadarView(this, "WEAPONS_RADAR", &targets);
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(

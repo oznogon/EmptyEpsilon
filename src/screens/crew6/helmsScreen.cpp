@@ -88,7 +88,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
                 else{
                     draw_position = (position - transform->getPosition());
                 }
-                draw_position = rect.center() + draw_position / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
+                draw_position = rect.center() + draw_position / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;
+                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
                 my_player_info->commandTargetRotation(angle);
             }
         },

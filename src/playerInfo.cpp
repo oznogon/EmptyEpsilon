@@ -39,6 +39,7 @@
 #include "components/reactor.h"
 #include "components/coolant.h"
 #include "components/beamweapon.h"
+#include "components/utilityBeam.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/shields.h"
@@ -113,6 +114,13 @@ static const uint16_t CMD_TRANSFER_MISSILE = 0x0030;
 static const uint16_t CMD_TRANSFER_PROBE = 0x0031;
 static const uint16_t CMD_GENERATE_SUPPLY_DROP = 0x0032;
 static const uint16_t CMD_CANCEL_INTERNAL_MOVE = 0x0033;
+
+static const uint16_t CMD_SET_UTILITY_BEAM = 0x002D;
+static const uint16_t CMD_SET_UTILITY_BEAM_MODE = 0x002E;
+static const uint16_t CMD_SET_CUSTOM_UTILITY_BEAM_MODE = 0x002F;
+static const uint16_t CMD_SET_UTILITY_BEAM_BEARING = 0x0030;
+static const uint16_t CMD_SET_UTILITY_BEAM_ARC = 0x0031;
+static const uint16_t CMD_SET_UTILITY_BEAM_RANGE = 0x0032;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -664,6 +672,41 @@ void PlayerInfo::commandCrewSetTargetPosition(sp::ecs::Entity crew, glm::ivec2 p
 {
     sp::io::DataBuffer packet;
     packet << CMD_CREW_SET_TARGET << crew << position;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetUtilityBeam(bool enabled)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_UTILITY_BEAM << enabled;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetCustomUtilityBeamMode(string name)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_CUSTOM_UTILITY_BEAM_MODE << name;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetUtilityBeamBearing(float bearing)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_UTILITY_BEAM_BEARING << bearing;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetUtilityBeamArc(float arc)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_UTILITY_BEAM_ARC << arc;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetUtilityBeamRange(float range)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_UTILITY_BEAM_RANGE << range;
     sendClientCommand(packet);
 }
 
@@ -1358,6 +1401,67 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             if (auto ic = crew.getComponent<InternalCrew>())
                 ic->target_position = position;
         }break;
+    case CMD_SET_UTILITY_BEAM:
+        {
+            bool active;
+            packet >> active;
+
+            if (auto utility = ship.getComponent<UtilityBeam>())
+            {
+                utility->active = active;
+
+                // TODO: Sound effects
+                if (active)
+                    gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
+                else
+                    gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
+            }
+        }
+        break;
+    case CMD_SET_CUSTOM_UTILITY_BEAM_MODE:
+        {
+            string name;
+            packet >> name;
+
+            if (auto utility_beam = ship.getComponent<UtilityBeam>())
+                utility_beam->custom_beam_mode = name;
+        }
+        break;
+    case CMD_SET_UTILITY_BEAM_BEARING:
+        {
+            float f;
+            packet >> f;
+
+            if (auto utility = ship.getComponent<UtilityBeam>())
+            {
+                if (!utility->fixed_bearing)
+                    utility->bearing = f;
+            }
+        }
+        break;
+    case CMD_SET_UTILITY_BEAM_ARC:
+        {
+            float f;
+            packet >> f;
+
+            if (auto utility = ship.getComponent<UtilityBeam>())
+            {
+                utility->setArcAndAdjustRange(f);
+            }
+        }
+        break;
+    case CMD_SET_UTILITY_BEAM_RANGE:
+        {
+            float f;
+            packet >> f;
+
+            if (auto utility = ship.getComponent<UtilityBeam>())
+            {
+                utility->setRangeAndAdjustArc(f);
+            }
+        }
+        break;
+
     }
 }
 

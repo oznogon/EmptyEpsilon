@@ -44,6 +44,7 @@ protected:
     };
     std::vector<TSnapPoint> snap_points;
     GuiLabel* overlay_label;
+    string overlay_label_text = "";
     unsigned int overlay_label_precision = 0;
     const GuiThemeStyle* tick_style;
 public:
@@ -57,7 +58,7 @@ public:
     GuiSlider* setValueSnapped(float value);
     GuiSlider* clearSnapValues();
     GuiSlider* addSnapValue(float value, float range);
-    GuiSlider* addOverlay(unsigned int precision = 0u, float font_size = 30.0f);
+    GuiSlider* addOverlay(unsigned int precision = 0u, float font_size = 30.0f, string label_text = "");
 };
 
 class GuiSlider2D : public GuiElement

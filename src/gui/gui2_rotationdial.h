@@ -22,6 +22,7 @@ public:
 
     GuiRotationDial* setValue(float value);
     float getValue() const;
+    GuiRotationDial* setRange(float min_value, float max_value);
 };
 
 #endif//GUI2_ROTATIONDIAL_H

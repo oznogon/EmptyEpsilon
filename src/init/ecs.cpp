@@ -4,6 +4,7 @@
 
 #include "ecs/multiplayer.h"
 #include "multiplayer/beamweapon.h"
+#include "multiplayer/utilityBeam.h"
 #include "multiplayer/shields.h"
 #include "multiplayer/collision.h"
 #include "multiplayer/faction.h"
@@ -46,6 +47,7 @@
 #include "systems/warpsystem.h"
 #include "systems/jumpsystem.h"
 #include "systems/beamweapon.h"
+#include "systems/utilityBeam.h"
 #include "systems/shieldsystem.h"
 #include "systems/shipsystemssystem.h"
 #include "systems/coolantsystem.h"
@@ -73,6 +75,8 @@ void initSystemsAndComponents()
 {
     sp::ecs::MultiplayerReplication::registerComponentReplication<BeamWeaponSysReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<BeamEffectReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<UtilityBeamReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<UtilityBeamEffectReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsReceiverReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsTransmitterReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CoolantReplication>();
@@ -141,6 +145,7 @@ void initSystemsAndComponents()
     engine->registerSystem<ManeuveringSystem>();
     engine->registerSystem<WarpSystem>();
     engine->registerSystem<BeamWeaponSystem>();
+    engine->registerSystem<UtilityBeamSystem>();
     engine->registerSystem<MissileSystem>();
     engine->registerSystem<ShieldSystem>();
     engine->registerSystem<CoolantSystem>();
