@@ -345,6 +345,8 @@ set(MAIN_SOURCES
     src/components/shields.cpp
     src/components/beamweapon.h
     src/components/beamweapon.cpp
+    src/components/tractorbeam.h
+    src/components/tractorbeam.cpp
     src/components/target.h
     src/components/missiletubes.h
     src/components/selfdestruct.h
@@ -391,6 +393,8 @@ set(MAIN_SOURCES
     src/systems/maneuvering.cpp
     src/systems/beamweapon.h
     src/systems/beamweapon.cpp
+    src/systems/tractorbeam.h
+    src/systems/tractorbeam.cpp
     src/systems/missilesystem.h
     src/systems/missilesystem.cpp
     src/systems/warpsystem.h

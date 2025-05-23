@@ -31,6 +31,7 @@
 #include "components/selfdestruct.h"
 #include "components/shields.h"
 #include "components/spin.h"
+#include "components/tractorbeam.h"
 #include "components/warpdrive.h"
 
 
@@ -345,6 +346,10 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret arc:"), BeamWeaponSys, mounts, 0.0f, 360.0f, turret_arc);
     ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret direction:"), BeamWeaponSys, mounts, 0.0f, 360.0f, turret_direction);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), BeamWeaponSys, mounts, turret_rotation_rate);
+
+    ADD_PAGE(tr("tweak-tab", "Tractor beam system"), TractorBeamSys);
+    ADD_LABEL(tr("tweak-text", "Tractor beam system"));
+    ADD_SHIP_SYSTEM_TWEAK(TractorBeamSys);
 
     ADD_PAGE(tr("tweak-tab", "Missile system"), MissileTubes);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Homing missiles:"), MissileTubes, storage[MW_Homing]);

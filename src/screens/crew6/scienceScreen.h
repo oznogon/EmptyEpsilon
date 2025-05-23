@@ -38,13 +38,14 @@ public:
     GuiSelector* sidebar_selector;
     GuiElement* info_sidebar;
     GuiCustomShipFunctions* custom_function_sidebar;
+    GuiElement* tractor_sidebar;
     GuiSelector* sidebar_pager;
+    // info_sidebar
     GuiScanTargetButton* scan_button;
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_heading;
     GuiKeyValueDisplay* info_relspeed;
-
     GuiKeyValueDisplay* info_faction;
     GuiKeyValueDisplay* info_type;
     GuiButton* info_type_button;
@@ -54,6 +55,9 @@ public:
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];
+    // tractor_sidebar
+    GuiToggleButton* tractor_toggle;
+    GuiRotationDial* tractor_bearing;
 
     GuiToggleButton* probe_view_button;
     sp::ecs::Entity observation_point;

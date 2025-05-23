@@ -13,6 +13,7 @@
 #include "components/radar.h"
 #include "components/scanning.h"
 #include "components/name.h"
+#include "components/tractorbeam.h"
 
 #include "systems/radarblock.h"
 
@@ -32,6 +33,7 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_image.h"
+#include "gui/gui2_rotationdial.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 : GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
@@ -88,17 +90,21 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     {
         info_sidebar->setVisible(index == 0);
         custom_function_sidebar->setVisible(index == 1);
+        tractor_sidebar->setVisible(index == 2);
     });
+
     sidebar_selector->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Other")});
+
+    if (my_spaceship.hasComponent<TractorBeamSys>())
+    {
+        sidebar_selector->addEntry(tr("scienceTab", "Tractor"), tr("scienceTab", "Tractor"));
+    }
     sidebar_selector->setSelectionIndex(0);
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50);
 
     // Target scan data sidebar.
     info_sidebar = new GuiElement(radar_view, "SIDEBAR");
     info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-
-    custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
-    custom_function_sidebar->setPosition(-15, 210, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
 
     // Scan button.
     scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
@@ -137,8 +143,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_hull->setSize(GuiElement::GuiSizeMax, 30);
 
     // Full scan data
-
-    // Draw and hide the sidebar pager.
+    // Draw and hide the scan results pager.
     sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [this](int index, string value) {});
     sidebar_pager->setSize(GuiElement::GuiSizeMax, 50)->hide();
 
@@ -181,6 +186,44 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Prep and hide the description text area.
     info_description = new GuiScrollFormattedText(info_sidebar, "SCIENCE_DESC", "");
     info_description->setTextSize(28)->setMargins(20, 20, 0, 0)->setSize(GuiElement::GuiSizeMax, 400)->hide();
+
+    // END info_sidebar
+
+    // Custom function sidebar.
+    custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
+    custom_function_sidebar->setPosition(-15, 210, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
+
+    // END custom_function_sidebar
+
+    // Tractor sidebar.
+    tractor_sidebar = new GuiElement(radar_view, "SIDEBAR");
+    tractor_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+
+    // Tractor toggle button.
+    tractor_toggle = new GuiToggleButton(tractor_sidebar, "TRACTOR_TOGGLE", tr("scienceButton", "Activate"), [this](bool value){
+        auto tractor_system = my_spaceship.getComponent<TractorBeamSys>();
+        if (tractor_system) {
+            if (value)
+            {
+                LOG(WARNING) << "Tractor beam activated";
+            }
+            else
+            {
+                LOG(WARNING) << "Tractor beam deactivated";
+            };
+        };
+    });
+    tractor_toggle->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
+
+    // Tractor bearing dial.
+    tractor_bearing = new GuiRotationDial(radar_view, "TRACTOR_BEARING", -90, 360 - 90, 0, [this](float value){
+        auto tractor_system = my_spaceship.getComponent<TractorBeamSys>();
+        tractor_system->tractor_direction = value;
+        LOG(WARNING) << "Tractor direction set to " << value << " (" << tractor_system->tractor_direction << ")";
+    });
+    tractor_bearing->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
+
+    // END tractor_sidebar
 
     // Prep and hide the database view.
     database_view = new DatabaseViewComponent(this);
@@ -272,14 +315,16 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     // Responsive layout for custom button sidebar. 1440x900 vpixels is 16:10, so this would roughly be the threshold.
 
     int current_width = getRect().size.x;
-    sidebar_selector->setVisible(current_width < 1435 && (sidebar_selector->getSelectionIndex() > 0 || custom_function_sidebar->hasEntries()));
-    if (current_width < 1435 || !custom_function_sidebar->hasEntries())
+    sidebar_selector->setVisible(current_width < 1435);
+    if (current_width < 1435)
     {
-        info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
         sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight);
-        custom_function_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 1);
-        custom_function_sidebar->setPosition(-20, 210, sp::Alignment::TopRight);
+        info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
         info_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 0);
+        custom_function_sidebar->setPosition(-20, 210, sp::Alignment::TopRight);
+        custom_function_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 1);
+        tractor_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
+        tractor_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 2);
     }
     else
     {
