@@ -44,6 +44,7 @@ function Entity:setTemplate(template_name)
             comp.shields.front_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
             comp.shields.rear_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
         end
+        if comp.utility_beam then comp.utility_beam.power_factor = 1.0; reactor_power_factor = reactor_power_factor - 1.0 end
         comp.reactor.power_factor = reactor_power_factor
     end
     if comp.internal_rooms and template.__repair_crew_count and template.__repair_crew_count > 0 then
@@ -67,6 +68,7 @@ function Entity:setTemplate(template_name)
             comp.shields.front_auto_repair_per_second = 0.005
             comp.shields.rear_auto_repair_per_second = 0.005
         end
+        if comp.utility_beam then comp.utility_beam.auto_repair_per_second = 0.005 end
         if comp.reactor then comp.reactor.auto_repair_per_second = 0.005 end
     end
     return self
@@ -280,6 +282,56 @@ end
 --- Example: stbo:setRestocksMissilesDocked(true)
 function Entity:setRestocksMissilesDocked(allow_restock)
     if self.components.docking_bay then self.components.docking_bay.restock_missiles = allow_restock end
+    return self
+end
+--- Defines this ship's utility beam, a scenario-defined scriptable ship system.
+--- Example: stbo:setUtilityBeam(180, 5000, 1, 500)
+function Entity:setUtilityBeam(max_arc, max_range, cycle_time, strength)
+    if self.components.utility_beam == nil then self.components.utility_beam = {} end
+
+    self.components.utility_beam.max_arc = max_arc
+    self.components.utility_beam.max_range = max_range
+    self.components.utility_beam.cycle_time = cycle_time
+    self.components.utility_beam.strength = strength
+
+    return self
+end
+--- Adds a custom utility beam mode.
+--- Example:
+--- stbo:addCustomUtilityBeamMode(
+---   "Pull", 5.0,  0.02, true,
+---   function(beam_emitter, beam_target, distance, angle_diff)
+---     local emitter_utility_beam = beam_emitter.components.utility_beam
+---     local drag_distance,
+---       position_x, position_y,
+---       target_position_x, target_position_y,
+---       norm = tractorBeamSetup(beam_emitter, beam_target, emitter_utility_beam.energy_use_per_second, emitter_utility_beam.heat_add_rate_per_second, distance, angle_diff)
+---     if drag_distance <= 0 then return end
+---     -- Pull mode: move target toward emitter
+---     local destination = {x = position_x, y = position_y}
+---     if distance <= 1.1 * global_delta / drag_distance then
+---       if beam_emitter.components.docking_bay and beam_target.components.docking_port then
+---         if beam_target:getDockingState() < 1 then
+---           -- If dockable and within docking range, dock
+---           commandDock(beam_target, beam_emitter)
+---           return
+---         else
+---           -- Already docking, so leave it alone
+---           return
+---         end
+---       end
+---     end
+---     tractorBeamMove(beam_emitter, beam_target, target_position_x, target_position_y, destination, drag_distance)
+---   -- end callback
+---   end
+--- )
+function Entity:addCustomUtilityBeamMode(name, energy_per_sec, heat_per_sec, requires_target, callback)
+    setCustomUtilityBeamMode(self, name, 0, energy_per_sec, heat_per_sec, requires_target, callback)
+    return self
+end
+
+function Entity:setCustomUtilityBeamModeProgress(name, progress)
+    setCustomUtilityBeamModeProgress(self, name, progress)
     return self
 end
 --- [DEPRECATED]

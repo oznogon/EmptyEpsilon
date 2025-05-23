@@ -31,6 +31,7 @@
 #include "components/selfdestruct.h"
 #include "components/shields.h"
 #include "components/spin.h"
+#include "components/utilityBeam.h"
 #include "components/warpdrive.h"
 
 
@@ -349,6 +350,20 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret arc:"), BeamWeaponSys, mounts, 0.0f, 360.0f, turret_arc);
     ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret direction:"), BeamWeaponSys, mounts, 0.0f, 360.0f, turret_direction);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), BeamWeaponSys, mounts, turret_rotation_rate);
+
+    ADD_PAGE(tr("tweak-tab", "Utility beam system"), UtilityBeam);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Active:"), UtilityBeam, active);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Arc:"), UtilityBeam, arc);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max arc:"), UtilityBeam, max_arc);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Bearing:"), UtilityBeam, bearing);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), UtilityBeam, range);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max range:"), UtilityBeam, max_range);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), UtilityBeam, cycle_time);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Strength:"), UtilityBeam, strength);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy use per sec.:"), UtilityBeam, energy_use_per_second);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat per sec.:"), UtilityBeam, heat_per_second);
+    ADD_LABEL(tr("tweak-text", "Utility beam system"));
+    ADD_SHIP_SYSTEM_TWEAK(UtilityBeam);
 
     ADD_PAGE(tr("tweak-tab", "Missile system"), MissileTubes);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Homing missiles:"), MissileTubes, storage[MW_Homing]);

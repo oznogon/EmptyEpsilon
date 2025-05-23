@@ -16,7 +16,7 @@ GuiRotationDial::GuiRotationDial(GuiContainer* owner, string id, float min_value
 void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
 {
     auto center = getCenterPoint();
-    float radius = std::min(rect.size.x, rect.size.y) * 0.5f;
+    float diameter = std::min(rect.size.x, rect.size.y);
 
     const auto& back = back_style->get(getState());
     const auto& front = front_style->get(getState());
@@ -28,12 +28,12 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
 bool GuiRotationDial::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     auto center = getCenterPoint();
-    float radius = std::min(rect.size.x, rect.size.y) / 2.0f;
-
+    float diameter = std::min(rect.size.x, rect.size.y);
     auto diff = position - center;
-    if (glm::length(diff) > radius)
+
+    if (glm::length(diff) > diameter * 0.5f)
         return false;
-    if (glm::length(diff) < radius * 0.875f)
+    if (glm::length(diff) < diameter * 0.438f)
         return false;
 
     onMouseDrag(position, id);
@@ -43,30 +43,19 @@ bool GuiRotationDial::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
 void GuiRotationDial::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     auto center = getCenterPoint();
-
     auto diff = position - center;
 
     float new_value = (vec2ToAngle(diff) + 90.0f) / 360.0f;
-    if (new_value < 0.0f)
-        new_value += 1.0f;
+
+    if (new_value < 0.0f) new_value += 1.0f;
+    if (new_value > 1.0f) new_value -= 1.0f;
+
     new_value = min_value + (max_value - min_value) * new_value;
-    if (min_value < max_value)
-    {
-        if (new_value < min_value)
-            new_value = min_value;
-        if (new_value > max_value)
-            new_value = max_value;
-    }else{
-        if (new_value > min_value)
-            new_value = min_value;
-        if (new_value < max_value)
-            new_value = max_value;
-    }
+
     if (value != new_value)
     {
         value = new_value;
-        if (func)
-            func(value);
+        if (func) func(value);
     }
 }
 
@@ -89,6 +78,16 @@ GuiRotationDial* GuiRotationDial::setValue(float value)
             value -= (min_value - max_value);
     }
     this->value = value;
+    return this;
+}
+
+GuiRotationDial* GuiRotationDial::setRange(float min_value, float max_value)
+{
+    while (min_value < 0.0f) min_value += 360.0f;
+    while (max_value > 360.0f) max_value -= 360.0f;
+
+    this->min_value = min_value;
+    this->max_value = max_value;
     return this;
 }
 

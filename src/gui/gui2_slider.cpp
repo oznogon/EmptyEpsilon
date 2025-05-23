@@ -149,9 +149,7 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
     }
 
     if (overlay_label)
-    {
-        overlay_label->setText(string(value, int(overlay_label_precision)));
-    }
+        overlay_label->setText(overlay_label_text + string(value, int(overlay_label_precision)));
 }
 
 bool GuiSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
@@ -214,12 +212,13 @@ GuiSlider* GuiSlider::addSnapValue(float value, float range)
     return this;
 }
 
-GuiSlider* GuiSlider::addOverlay(unsigned int precision, float font_size)
+GuiSlider* GuiSlider::addOverlay(unsigned int precision, float font_size, string label_text)
 {
     if (!overlay_label)
     {
-        overlay_label = new GuiLabel(this, "", "", font_size);
+        overlay_label = new GuiLabel(this, "", label_text, font_size);
         overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        overlay_label_text = label_text;
         overlay_label_precision = precision;
     }
     return this;

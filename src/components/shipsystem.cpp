@@ -3,6 +3,7 @@
 #include "gameGlobalInfo.h"
 #include "components/reactor.h"
 #include "components/beamweapon.h"
+#include "components/utilityBeam.h"
 #include "components/missiletubes.h"
 #include "components/shields.h"
 #include "components/impulse.h"
@@ -86,6 +87,8 @@ ShipSystem* ShipSystem::get(sp::ecs::Entity entity, Type type)
                 return &shields->rear_system;
             return nullptr;
         }
+    case Type::UtilityBeam:
+        return entity.getComponent<UtilityBeam>();
     }
     return nullptr;
 }
@@ -103,6 +106,7 @@ string getSystemName(ShipSystem::Type system)
     case ShipSystem::Type::JumpDrive: return "jumpdrive";
     case ShipSystem::Type::FrontShield: return "frontshield";
     case ShipSystem::Type::RearShield: return "rearshield";
+    case ShipSystem::Type::UtilityBeam: return "utilitybeam";
     default:
         return "UNKNOWN";
     }
@@ -121,6 +125,7 @@ string getLocaleSystemName(ShipSystem::Type system)
     case ShipSystem::Type::JumpDrive: return tr("system", "Jump Drive");
     case ShipSystem::Type::FrontShield: return tr("system", "Front Shield Generator");
     case ShipSystem::Type::RearShield: return tr("system", "Rear Shield Generator");
+    case ShipSystem::Type::UtilityBeam: return tr("system", "Utility Beam");
     default:
         return "UNKNOWN";
     }

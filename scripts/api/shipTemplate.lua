@@ -286,6 +286,14 @@ function ShipTemplate:setBeamWeaponHeatPerFire(index, amount)
     self.beam_weapons[index + 1].heat_per_beam_fire = amount
     return self
 end
+
+--- Defines the ship's Utility Beam and sets its maximum arc, range, cycle_time, and strength.
+function ShipTemplate:setUtilityBeam(max_arc, max_range, cycle_time, strength)
+    if self.utility_beam == nil then self.utility_beam = {} end
+    self.utility_beam = {max_arc=max_arc, max_range=max_range, cycle_time=cycle_time, strength=strength}
+    return self
+end
+
 --- Sets the number of WeaponTubes for ShipTemplateBasedObjects created from this ShipTemplate, and the default delay for loading and unloading each tube, in seconds.
 --- Weapon tubes are 0-indexed. For example, 3 tubes would be indexed 0, 1, and 2.
 --- Ships are limited to a maximum of 16 weapon tubes.

@@ -20,6 +20,7 @@
 #include "components/shields.h"
 #include "components/docking.h"
 #include "components/beamweapon.h"
+#include "components/utilityBeam.h"
 #include "components/target.h"
 #include "components/reactor.h"
 #include "components/impulse.h"
@@ -531,6 +532,34 @@ void initComponentScriptBindings()
     BIND_MEMBER(BeamEffect, fire_ring);
     BIND_MEMBER(BeamEffect, beam_texture);
 
+    sp::script::ComponentHandler<UtilityBeam>::name("utility_beam");
+    BIND_SHIP_SYSTEM(UtilityBeam);
+    BIND_MEMBER(UtilityBeam, active);
+    BIND_MEMBER(UtilityBeam, is_firing);
+    BIND_MEMBER(UtilityBeam, arc);
+    BIND_MEMBER(UtilityBeam, max_arc);
+    BIND_MEMBER(UtilityBeam, fixed_arc);
+    BIND_MEMBER(UtilityBeam, bearing);
+    BIND_MEMBER(UtilityBeam, fixed_bearing);
+    BIND_MEMBER(UtilityBeam, range);
+    BIND_MEMBER(UtilityBeam, max_range);
+    BIND_MEMBER(UtilityBeam, fixed_range);
+    BIND_MEMBER(UtilityBeam, cycle_time);
+    BIND_MEMBER(UtilityBeam, strength);
+    BIND_MEMBER(UtilityBeam, energy_use_per_second);
+    BIND_MEMBER(UtilityBeam, heat_per_second);
+    BIND_MEMBER(UtilityBeam, arc_color);
+    BIND_MEMBER(UtilityBeam, arc_color_fire);
+    BIND_ARRAY(UtilityBeam, custom_beam_modes);
+    BIND_ARRAY_DIRTY_FLAG(UtilityBeam, custom_beam_modes, custom_beam_modes_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, name, custom_beam_modes_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, callback, custom_beam_modes_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, order, custom_beam_modes_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, energy_per_sec, custom_beam_modes_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, heat_per_sec, custom_beam_modes_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, requires_target, custom_beam_modes_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, progress, custom_beam_modes_dirty);
+
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);
     BIND_MEMBER(Reactor, max_energy);
@@ -614,6 +643,10 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, state);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, delay);
+
+    sp::script::ComponentHandler<MissileFlight>::name("missile_flight");
+    BIND_MEMBER(MissileFlight, speed);
+    BIND_MEMBER(MissileFlight, timeout);
 
     sp::script::ComponentHandler<Coolant>::name("coolant");
     BIND_MEMBER(Coolant, max);

@@ -26,7 +26,7 @@ public:
     uint32_t flags = 0;
 };
 
-// Component to indicate that we can do to things.
+// Component to indicate that we can dock to things.
 class DockingPort
 {
 public:

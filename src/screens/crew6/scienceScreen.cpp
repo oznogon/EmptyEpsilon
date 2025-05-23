@@ -7,6 +7,8 @@
 #include "featureDefs.h"
 
 #include "components/beamweapon.h"
+#include "components/customshipfunction.h"
+#include "components/utilityBeam.h"
 #include "components/shields.h"
 #include "components/hull.h"
 #include "components/collision.h"
@@ -24,6 +26,8 @@
 #include "screenComponents/databaseView.h"
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
+#include "screenComponents/powerDamageIndicator.h"
+#include "screenComponents/utilityBeamControls.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_togglebutton.h"
@@ -32,6 +36,7 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_image.h"
+#include "gui/gui2_rotationdial.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 : GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
@@ -67,7 +72,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         }, nullptr, nullptr
     );
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
-    new RawScannerDataRadarOverlay(science_radar, "");
+    science_raw_signals = new RawScannerDataRadarOverlay(science_radar, "");
 
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
@@ -82,14 +87,43 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
-    new RawScannerDataRadarOverlay(probe_radar, "");
+    probe_raw_signals = new RawScannerDataRadarOverlay(probe_radar, "");
 
     sidebar_selector = new GuiSelector(radar_view, "", [this](int index, string value)
     {
-        info_sidebar->setVisible(index == 0);
-        custom_function_sidebar->setVisible(index == 1);
+        if (value == "scan")
+        {
+            info_sidebar->show();
+            custom_function_sidebar->hide();
+            utility_beam_sidebar->hide();
+            utility_beam_dial->hide();
+        }
+        else if (value == "func")
+        {
+            info_sidebar->hide();
+            custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+            utility_beam_sidebar->hide();
+            utility_beam_dial->hide();
+        }
+        else if (value == "util")
+        {
+            info_sidebar->hide();
+            custom_function_sidebar->hide();
+            utility_beam_sidebar->setVisible(my_spaceship.hasComponent<UtilityBeam>());
+            utility_beam_dial->setVisible(my_spaceship.hasComponent<UtilityBeam>());
+        }
+        else
+        {
+            LOG(WARNING) << "Science sidebar selector is bad: " << value;
+        }
     });
-    sidebar_selector->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Other")});
+    sidebar_selector->setOptions({tr("scienceTab", "Scanning")}, {"scan"});
+
+    if (my_spaceship.hasComponent<CustomShipFunctions>())
+        sidebar_selector->addEntry(tr("scienceTab", "Functions"), "func");
+    if (my_spaceship.hasComponent<UtilityBeam>())
+        sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");
+
     sidebar_selector->setSelectionIndex(0);
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50);
 
@@ -138,8 +172,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_hull->setSize(GuiElement::GuiSizeMax, 30);
 
     // Full scan data
-
-    // Draw and hide the sidebar pager.
+    // Draw and hide the scan results pager.
     sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [this](int index, string value) {});
     sidebar_pager->setSize(GuiElement::GuiSizeMax, 50)->hide();
 
@@ -183,6 +216,35 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_description = new GuiScrollFormattedText(info_sidebar, "SCIENCE_DESC", "");
     info_description->setTextSize(28)->setMargins(20, 0, 0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
 
+    // END info_sidebar
+
+    // Custom function sidebar.
+    custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
+    custom_function_sidebar->setPosition(-15, 210, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
+
+    // END custom_function_sidebar
+
+    // Utility sidebar.
+    utility_beam_sidebar = new GuiUtilityBeamControls(radar_view, CrewPosition::scienceOfficer, "UTILITY_BEAM_CONTROLS");
+    utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+
+    utility_beam_dial = new GuiRotationDial(science_radar, "UTILITY_BEAM_DIAL", 0.0f, 360.0f, 0.0f, [this](float value)
+    {
+        auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+        auto my_transform = my_spaceship.getComponent<sp::Transform>();
+
+        if (utility_beam && my_transform)
+        {
+            float new_value = value - my_transform->getRotation() + science_radar->getViewRotation() - 90.0f;
+            while (new_value < 0.0f) new_value += 360.0f;
+            while (new_value > 360.0f) new_value -= 360.0f;
+
+            my_player_info->commandSetUtilityBeamBearing(new_value);
+        }
+    });
+    utility_beam_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    // END utility_beam_sidebar
+
     // Prep and hide the database view.
     database_view = new DatabaseViewComponent(this);
     database_view
@@ -214,7 +276,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
                 probe_radar->show();
                 probe_radar->setViewPosition(transform->getPosition())->show();
             }
-        }else{
+        }
+        else
+        {
             probe_view_button->setValue(false);
             science_radar->show();
             probe_radar->hide();
@@ -259,13 +323,13 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
     float view_distance = science_radar->getDistance();
     float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-    if (mouse_wheel_delta!=0)
-    {
+
+    if (mouse_wheel_delta != 0)
         view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
-    }
-    view_distance = std::min(view_distance, lrr->long_range);
-    view_distance = std::max(view_distance, lrr->short_range);
-    if (view_distance!=science_radar->getDistance() || previous_long_range_radar != lrr->long_range || previous_short_range_radar != lrr->short_range)
+
+    view_distance = std::max(std::min(view_distance, lrr->long_range), lrr->short_range);
+
+    if (view_distance != science_radar->getDistance() || previous_long_range_radar != lrr->long_range || previous_short_range_radar != lrr->short_range)
     {
         previous_short_range_radar = lrr->long_range;
         previous_long_range_radar = lrr->short_range;
@@ -279,33 +343,46 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     {
         auto probe_transform = rl->linked_entity.getComponent<sp::Transform>();
         auto target_transform = targets.get().getComponent<sp::Transform>();
+
         if (!probe_transform || !target_transform || glm::length2(probe_transform->getPosition() - target_transform->getPosition()) > 5000.0f * 5000.0f)
             targets.clear();
-    }else{
+    }
+    else
+    {
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
+
         if (!my_transform || RadarBlockSystem::isRadarBlockedFrom(my_transform->getPosition(), targets.get(), lrr->short_range))
             targets.clear();
     }
 
+    if (view_distance <= lrr->short_range)
+        science_radar->shortRange();
+    else
+        science_radar->longRange();
+
     // Responsive layout for custom button sidebar. 1440x900 vpixels is 16:10, so this would roughly be the threshold.
 
     int current_width = getRect().size.x;
-    sidebar_selector->setVisible(current_width < 1435 && (sidebar_selector->getSelectionIndex() > 0 || custom_function_sidebar->hasEntries()));
-    if (current_width < 1435 || !custom_function_sidebar->hasEntries())
+    sidebar_selector->setVisible(current_width < 1435 || my_spaceship.hasComponent<UtilityBeam>());
+    if (current_width < 1435)
     {
-        info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
         sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight);
-        custom_function_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 1);
-        custom_function_sidebar->setPosition(-20, 210, sp::Alignment::TopRight);
+        info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
         info_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 0);
+        custom_function_sidebar->setPosition(-20, 210, sp::Alignment::TopRight);
+        custom_function_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 1);
+        utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
+        utility_beam_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 2);
     }
     else
     {
-        info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
-        sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight);
-        custom_function_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
+        sidebar_selector->setPosition(-280, 120, sp::Alignment::TopRight);
+        info_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
+        info_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 0);
+        custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
         custom_function_sidebar->show();
-        info_sidebar->show();
+        utility_beam_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
+        utility_beam_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 2);
     }
 
     info_callsign->setValue("-");
@@ -533,6 +610,12 @@ void ScienceScreen::onUpdate()
 {
     if (my_spaceship)
     {
+        auto my_transform = my_spaceship.getComponent<sp::Transform>();
+
+        // Update utility beam dial.
+        if (auto utility_beam = my_spaceship.getComponent<UtilityBeam>())
+            utility_beam_dial->setValue(utility_beam->bearing + my_transform->getRotation() - science_radar->getViewRotation() + 90.0f);
+
         // Initiate a scan on scannable objects.
         if (keys.science_scan_object.getDown() &&
             my_spaceship.hasComponent<ScienceScanner>() &&
@@ -543,6 +626,7 @@ void ScienceScreen::onUpdate()
             // Allow scanning only if the object is scannable, and if the player
             // isn't already scanning something.
             auto scanstate = obj.getComponent<ScanState>();
+
             if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
             {
                 my_player_info->commandScan(obj);
@@ -555,9 +639,10 @@ void ScienceScreen::onUpdate()
             my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+            if (my_transform)
+            {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-                targets.setNext(transform->getPosition(), lrr ? lrr->long_range : 25000.0f, TargetsContainer::ESelectionType::Scannable);
+                targets.setNext(my_transform->getPosition(), lrr ? lrr->long_range : 25000.0f, TargetsContainer::ESelectionType::Scannable);
             }
         }
     }

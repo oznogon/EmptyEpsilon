@@ -279,6 +279,7 @@ function Entity:addCustomButton(station, key, label, callback)
     setPlayerShipCustomFunction(self, "button", key, label, station, callback, 0)
     return self
 end
+
 --- Adds a custom non-interactive info label with the given reference name to the given crew position screen.
 --- By default, custom buttons and info are stacked in order of creation. Use the order value to specify a priority.
 --- If the reference name is unique, this creates a new info. If the reference name exists, this modifies the existing info.

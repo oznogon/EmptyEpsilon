@@ -64,7 +64,13 @@ end
 --- Requires a faction name string.
 --- Example: obj:setFaction("Human Navy")
 function Entity:setFaction(faction_name)
+    if faction_name == nil then
+        print("No faction name passed, so no action taken")
+        return self
+    end
+
     local faction = getFactionInfo(faction_name)
+
     if faction == nil then
         print("Failed to find faction: " .. faction_name)
         self.components.faction = nil

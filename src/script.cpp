@@ -28,6 +28,7 @@
 #include "components/shields.h"
 #include "components/coolant.h"
 #include "components/beamweapon.h"
+#include "components/utilityBeam.h"
 #include "components/internalrooms.h"
 #include "components/zone.h"
 #include "components/shiplog.h"
@@ -1041,6 +1042,126 @@ void luaCommandSetBeamSystemTarget(sp::ecs::Entity ship, ShipSystem::Type type) 
         beamweapons->system_target = type;
 }
 
+void luaCommandSetUtilityBeam(sp::ecs::Entity ship, bool active) {
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetUtilityBeam(active);
+        return;
+    }
+
+    if (auto utility = ship.getComponent<UtilityBeam>())
+    {
+        // TODO: sfx
+        if (active != utility->active)
+            gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
+        else
+            gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
+    }
+}
+
+void luaCommandSetUtilityBeamBearing(sp::ecs::Entity ship, float bearing) {
+    auto utility_beam = ship.getComponent<UtilityBeam>();
+    if (!utility_beam) return;
+
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetUtilityBeamBearing(bearing);
+        return;
+    }
+
+    utility_beam->bearing = bearing;
+}
+
+void luaCommandSetUtilityBeamArc(sp::ecs::Entity ship, float arc) {
+    auto utility_beam = ship.getComponent<UtilityBeam>();
+    if (!utility_beam) return;
+
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetUtilityBeamArc(arc);
+        return;
+    }
+
+    utility_beam->arc = arc;
+}
+
+void luaCommandSetUtilityBeamRange(sp::ecs::Entity ship, float range) {
+    auto utility_beam = ship.getComponent<UtilityBeam>();
+    if (!utility_beam) return;
+
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetUtilityBeamRange(range);
+        return;
+    }
+
+    utility_beam->range = range;
+}
+
+void luaSetCustomUtilityBeamMode(sp::ecs::Entity ship, string name, int order, float energy_per_sec, float heat_per_sec, bool requires_target, sp::script::Callback callback) {
+    auto utility_beam = ship.getComponent<UtilityBeam>();
+    if (!utility_beam) return;
+    auto& cbm = utility_beam->custom_beam_modes;
+
+    int idx = -1;
+    for (int n = 0; n < int(cbm.size()); n++)
+    {
+        if (cbm[n].name == name)
+            idx = n;
+    }
+
+    if (idx == -1)
+    {
+        idx = int(cbm.size());
+        cbm.emplace_back();
+    }
+
+    auto& f = cbm[idx];
+    f.name = name;
+    f.energy_per_sec = energy_per_sec;
+    f.heat_per_sec = heat_per_sec;
+    f.callback = callback;
+    f.order = order;
+    f.requires_target = requires_target;
+    std::stable_sort(cbm.begin(), cbm.end());
+    utility_beam->custom_beam_modes_dirty = true;
+}
+
+void luaSetCustomUtilityBeamModeProgress(sp::ecs::Entity ship, string name, float progress) {
+    auto utility_beam = ship.getComponent<UtilityBeam>();
+    if (!utility_beam) return;
+    auto& cbm = utility_beam->custom_beam_modes;
+
+    int idx = -1;
+    for (int n = 0; n < int(cbm.size()); n++)
+    {
+        if (cbm[n].name == name)
+            idx = n;
+    }
+    if (idx == -1) return;
+
+    auto& f = cbm[idx];
+    f.progress = progress;
+    LOG(INFO) << "f.progress: " << f.progress;
+    utility_beam->custom_beam_modes_dirty = true;
+}
+
+void luaRemoveCustomUtilityBeamMode(sp::ecs::Entity ship, string name) {
+    auto utility_beam = ship.getComponent<UtilityBeam>();
+    if (!utility_beam) return;
+    auto cbm = utility_beam->custom_beam_modes;
+    if (cbm.size() < 1) return;
+
+    auto it = std::remove_if(cbm.begin(), cbm.end(), [cbm, name](const UtilityBeam::CustomBeamMode& f) {
+        return f.name == name;
+    });
+
+    if (it != cbm.end()) {
+        cbm.erase(it, cbm.end());
+        utility_beam->custom_beam_modes_dirty = true;
+    }
+}
+
 void luaCommandSetShieldFrequency(sp::ecs::Entity ship, int frequency) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetShieldFrequency(frequency); return; }
     auto shields = ship.getComponent<Shields>();
@@ -1319,6 +1440,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandSetScienceLink", &luaCommandSetScienceLink);
     env.setGlobal("commandClearScienceLink", &luaCommandClearScienceLink);
     env.setGlobal("commandSetAlertLevel", &luaCommandSetAlertLevel);
+
+    env.setGlobal("setCustomUtilityBeamMode", &luaSetCustomUtilityBeamMode);
+    env.setGlobal("setCustomUtilityBeamModeProgress", &luaSetCustomUtilityBeamModeProgress);
+    env.setGlobal("removeCustomUtilityBeamMode", &luaRemoveCustomUtilityBeamMode);
 
     env.setGlobal("transferPlayersFromShipToShip", &luaTransferPlayers);
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);

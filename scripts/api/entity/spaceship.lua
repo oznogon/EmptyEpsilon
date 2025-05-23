@@ -96,7 +96,7 @@ function Entity:isDocked(target)
     end
     return false
 end
---- Returns the SoaceObject with which this SpaceShip is docked.
+--- Returns the SpaceObject with which this SpaceShip is docked.
 --- Example: base = ship:getDockedWith()
 function Entity:getDockedWith()
     if self.components.docking_port and self.components.docking_port.state == "docked" then
@@ -272,6 +272,7 @@ function __getSystemByName(entity, system_name)
     if system_name == "jumpdrive" then return entity.components.jump_drive end
     if system_name == "frontshield" then return entity.components.shields end
     if system_name == "rearshield" and entity.components.shields and #entity.components.shields > 1 then return entity.components.shields end
+    if system_name == "utilitybeam" then return entity.components.utility_beam end
     return nil
 end
 
@@ -713,6 +714,7 @@ function Entity:setBeamWeaponDamageType(index, damage_type)
     self.components.beam_weapons[index + 1].damage_type = damage_type
     return self
 end
+
 --- Sets the number of WeaponTubes for this SpaceShip.
 --- Weapon tubes are 0-indexed. For example, 3 tubes would be indexed 0, 1, and 2.
 --- Example: ship:setWeaponTubeCount(4)
