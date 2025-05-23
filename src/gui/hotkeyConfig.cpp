@@ -1,6 +1,5 @@
 #include <i18n.h>
 #include "hotkeyConfig.h"
-#include "preferenceManager.h"
 
 Keys keys;
 extern sp::io::Keybinding fullscreen_key;
@@ -254,6 +253,7 @@ Keys::Keys() :
     engineering_select_system{
         {"ENGINEERING_SELECT_SYSTEM_REACTOR", "1"},
         {"ENGINEERING_SELECT_SYSTEM_BEAM_WEAPONS", "2"},
+        {"ENGINEERING_SELECT_SYSTEM_UTILITY_BEAM", "2"},
         {"ENGINEERING_SELECT_SYSTEM_MISSILE", "3"},
         {"ENGINEERING_SELECT_SYSTEM_MANEUVERING", "4"},
         {"ENGINEERING_SELECT_SYSTEM_IMPULSE", "5"},
@@ -289,6 +289,7 @@ Keys::Keys() :
     engineering_set_power_for_system{
         {"ENGINEERING_SET_SYSTEM_POWER_REACTOR"},
         {"ENGINEERING_SET_SYSTEM_POWER_BEAM_WEAPONS"},
+        {"ENGINEERING_SET_SYSTEM_POWER_UTILITY_BEAM"},
         {"ENGINEERING_SET_SYSTEM_POWER_MISSILE"},
         {"ENGINEERING_SET_SYSTEM_POWER_MANEUVERING"},
         {"ENGINEERING_SET_SYSTEM_POWER_IMPULSE"},
@@ -300,6 +301,7 @@ Keys::Keys() :
     engineering_set_coolant_for_system{
         {"ENGINEERING_SET_SYSTEM_COOLANT_REACTOR"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_BEAM_WEAPONS"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_UTILITY_BEAM"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_MISSILE"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_MANEUVERING"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_IMPULSE"},
@@ -313,6 +315,17 @@ Keys::Keys() :
     relay_alert_level_none("RELAY_ALERT_NONE"),
     relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
     relay_alert_level_red("RELAY_ALERT_RED"),
+
+    // Utility beam
+    utilitybeam_toggle_active("UTILITYBEAM_TOGGLE_ACTIVE", "T"),
+    utilitybeam_bearing_right("UTILITYBEAM_BEARING_RIGHT", "Right"),
+    utilitybeam_bearing_left("UTILITYBEAM_BEARING_LEFT", "Left"),
+    utilitybeam_arc_increase("UTILITYBEAM_ARC_INCREASE", "Up"),
+    utilitybeam_arc_decrease("UTILITYBEAM_ARC_DECREASE", "Down"),
+    utilitybeam_range_increase("UTILITYBEAM_RANGE_INCREASE", "R"),
+    utilitybeam_range_decrease("UTILITYBEAM_RANGE_DECREASE", "F"),
+    utilitybeam_mode_next("UTILITYBEAM_MODE_NEXT", "E"),
+    utilitybeam_mode_prev("UTILITYBEAM_MODE_PREV", "W"),
 
     // GM screen
     gm_delete("GM_DELETE", "Delete"),
@@ -502,6 +515,17 @@ void Keys::init()
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
     relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
+
+    // Utility beam
+    utilitybeam_toggle_active.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Activate utility beam"));
+    utilitybeam_bearing_right.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Rotate utility beam right"));
+    utilitybeam_bearing_left.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Rotate utility beam left"));
+    utilitybeam_arc_increase.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Increase utility beam arc"));
+    utilitybeam_arc_decrease.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Decrease utility beam arc"));
+    utilitybeam_range_increase.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Increase utility beam range"));
+    utilitybeam_range_decrease.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Decrease utility beam range"));
+    utilitybeam_mode_next.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Set next utility beam mode"));
+    utilitybeam_mode_prev.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Set previous utility beam mode"));
 
     // Cinematic view
     cinematic.init();

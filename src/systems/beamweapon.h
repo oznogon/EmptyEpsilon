@@ -14,3 +14,5 @@ public:
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, BeamWeaponSys& beamsystem) override;
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, BeamEffect& beam_effect) override;
 };
+
+void drawArc(sp::RenderTarget& renderer, glm::vec2 arc_center, float angle0, float arc_angle, float arc_radius, glm::u8vec4 color);

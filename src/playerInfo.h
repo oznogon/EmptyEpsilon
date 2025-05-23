@@ -3,6 +3,7 @@
 #include "multiplayer.h"
 #include "components/player.h"
 #include "systems/shipsystemssystem.h"
+#include "systems/utilityBeam.h"
 #include "missileWeaponData.h"
 #include "crewPosition.h"
 
@@ -94,6 +95,12 @@ public:
     void commandSetName(const string& name);
 
     void commandCrewSetTargetPosition(sp::ecs::Entity crew, glm::ivec2 target);
+
+    void commandSetUtilityBeam(bool enabled);
+    void commandSetCustomUtilityBeamMode(string name);
+    void commandSetUtilityBeamBearing(float bearing);
+    void commandSetUtilityBeamArc(float arc);
+    void commandSetUtilityBeamRange(float range);
 
     virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
 

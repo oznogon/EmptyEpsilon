@@ -159,6 +159,17 @@ public:
     sp::io::Keybinding relay_alert_level_yellow;
     sp::io::Keybinding relay_alert_level_red;
 
+    // Utility beam
+    sp::io::Keybinding utilitybeam_toggle_active;
+    sp::io::Keybinding utilitybeam_bearing_right;
+    sp::io::Keybinding utilitybeam_bearing_left;
+    sp::io::Keybinding utilitybeam_arc_increase;
+    sp::io::Keybinding utilitybeam_arc_decrease;
+    sp::io::Keybinding utilitybeam_range_increase;
+    sp::io::Keybinding utilitybeam_range_decrease;
+    sp::io::Keybinding utilitybeam_mode_next;
+    sp::io::Keybinding utilitybeam_mode_prev;
+
     // Cinematic view binds
     struct CinematicKeys {
         CinematicKeys();

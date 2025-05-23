@@ -327,6 +327,7 @@ set(MAIN_SOURCES
     src/screenComponents/miniGame.cpp
     src/screenComponents/mineSweeper.cpp
     src/screenComponents/impulseSound.cpp
+    src/screenComponents/utilityBeamControls.cpp
     src/components/faction.h
     src/components/faction.cpp
     src/components/radar.h
@@ -346,6 +347,8 @@ set(MAIN_SOURCES
     src/components/shields.cpp
     src/components/beamweapon.h
     src/components/beamweapon.cpp
+    src/components/utilityBeam.h
+    src/components/utilityBeam.cpp
     src/components/target.h
     src/components/missiletubes.h
     src/components/selfdestruct.h
@@ -393,6 +396,8 @@ set(MAIN_SOURCES
     src/systems/maneuvering.cpp
     src/systems/beamweapon.h
     src/systems/beamweapon.cpp
+    src/systems/utilityBeam.h
+    src/systems/utilityBeam.cpp
     src/systems/missilesystem.h
     src/systems/missilesystem.cpp
     src/systems/warpsystem.h
@@ -439,6 +444,8 @@ set(MAIN_SOURCES
     src/systems/destroy.cpp
     src/multiplayer/beamweapon.h
     src/multiplayer/beamweapon.cpp
+    src/multiplayer/utilityBeam.h
+    src/multiplayer/utilityBeam.cpp
     src/multiplayer/shields.h
     src/multiplayer/shields.cpp
     src/multiplayer/faction.h
@@ -621,6 +628,7 @@ set(MAIN_SOURCES
     src/screenComponents/viewport3d.h
     src/screenComponents/viewportMainScreen.h
     src/screenComponents/warpControls.h
+    src/screenComponents/utilityBeamControls.h
     src/screens/cinematicViewScreen.h
     src/screens/crew1/singlePilotScreen.h
     src/screens/crew4/engineeringAdvancedScreen.h
