@@ -235,11 +235,27 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     // Tractor bearing dial.
     tractor_bearing = new GuiRotationDial(radar_view, "TRACTOR_BEARING", -90, 360 - 90, 0, [this](float value){
-        auto tractor_system = my_spaceship.getComponent<TractorBeamSys>();
-        tractor_system->tractor_direction = value;
-        LOG(WARNING) << "Tractor direction set to " << value << " (" << tractor_system->tractor_direction << ")";
+        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
+        {
+            tractor_system->tractor_direction = value;
+            LOG(WARNING) << "Tractor direction set to " << value << " (" << tractor_system->tractor_direction << ")";
+        }
     });
     tractor_bearing->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(900,GuiElement::GuiSizeMax)->setVisible(false);
+
+    // Tractor range slider.
+    tractor_range = new GuiSlider(tractor_sidebar, "TRACTOR_RANGE", 0.0f, 3000.0f, 1000.0f, [this](float value)
+    {
+        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
+        {
+            tractor_system->tractor_range = value;
+            tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->tractor_range, 1)}}));
+            LOG(WARNING) << "Tractor range set to " << value << " (" << tractor_system->tractor_range << ")";
+        }
+    });
+    tractor_range->setSize(GuiElement::GuiSizeMax, 50);
+    tractor_range_label = new GuiLabel(tractor_range, "TRACTOR_RANGE_LABEL", "Range: 1000", 30);
+    tractor_range_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // END tractor_sidebar
 
@@ -333,7 +349,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     // Responsive layout for custom button sidebar. 1440x900 vpixels is 16:10, so this would roughly be the threshold.
 
     int current_width = getRect().size.x;
-    sidebar_selector->setVisible(current_width < 1435);
+    sidebar_selector->setVisible(current_width < 1435 || my_spaceship.hasComponent<TractorBeamSys>());
     if (current_width < 1435)
     {
         sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight);
@@ -346,11 +362,13 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     }
     else
     {
-        info_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
         sidebar_selector->setPosition(-280, 120, sp::Alignment::TopRight);
+        info_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
+        info_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 0);
         custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
         custom_function_sidebar->show();
-        info_sidebar->show();
+        tractor_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
+        tractor_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 2);
     }
 
     info_callsign->setValue("-");

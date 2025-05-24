@@ -4,6 +4,7 @@
 
 #include "ecs/multiplayer.h"
 #include "multiplayer/beamweapon.h"
+#include "multiplayer/tractorbeam.h"
 #include "multiplayer/shields.h"
 #include "multiplayer/collision.h"
 #include "multiplayer/faction.h"
@@ -45,6 +46,7 @@
 #include "systems/warpsystem.h"
 #include "systems/jumpsystem.h"
 #include "systems/beamweapon.h"
+#include "systems/tractorbeam.h"
 #include "systems/shieldsystem.h"
 #include "systems/shipsystemssystem.h"
 #include "systems/coolantsystem.h"
@@ -70,6 +72,7 @@
 void initSystemsAndComponents()
 {
     sp::ecs::MultiplayerReplication::registerComponentReplication<BeamWeaponSysReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<TractorBeamSysReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<BeamEffectReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsReceiverReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsTransmitterReplication>();

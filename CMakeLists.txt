@@ -437,6 +437,8 @@ set(MAIN_SOURCES
     src/systems/debugrender.cpp
     src/multiplayer/beamweapon.h
     src/multiplayer/beamweapon.cpp
+    src/multiplayer/tractorbeam.h
+    src/multiplayer/tractorbeam.cpp
     src/multiplayer/shields.h
     src/multiplayer/shields.cpp
     src/multiplayer/faction.h

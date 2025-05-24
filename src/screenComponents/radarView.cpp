@@ -14,6 +14,7 @@
 #include "components/radarblock.h"
 #include "components/impulse.h"
 #include "components/scanning.h"
+#include "components/tractorbeam.h"
 #include "systems/missilesystem.h"
 #include "systems/radarblock.h"
 #include "systems/radar.h"

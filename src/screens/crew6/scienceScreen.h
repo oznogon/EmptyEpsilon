@@ -61,6 +61,8 @@ public:
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];
     // tractor_sidebar
     GuiToggleButton* tractor_toggle;
+    GuiSlider* tractor_range;
+    GuiLabel* tractor_range_label;
     GuiRotationDial* tractor_bearing;
 
     GuiToggleButton* probe_view_button;

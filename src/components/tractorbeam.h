@@ -39,7 +39,20 @@ public:
 
     std::vector<MountPoint> mounts;
 
+    glm::vec3 tractor_position = glm::vec3(0, 0, 0);
+    float tractor_arc = 18.0f;
     float tractor_direction = 0.0f;
+    float tractor_range = 1000.0f;
+    float tractor_cycle_time = 6.0f;
+    float tractor_damage = 1.0f;//Server side only
+    float tractor_energy_per_tick = 3.0f;//Server side only
+    float tractor_heat_per_tick = 0.02f;//Server side only
+    glm::u8vec4 tractor_arc_color{0, 255, 255, 128};
+    glm::u8vec4 tractor_arc_color_fire{255, 0, 255, 128};
+
+    //Beam runtime state
+    float tractor_cooldown = 0.0f;
+    string tractor_texture = "texture/beam_orange.png";
 };
 
 class TractorBeamEffect

@@ -349,7 +349,7 @@ static void drawArc(sp::RenderTarget& renderer, glm::vec2 arc_center, float angl
     }
 };
 
-void TractorBeamSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, TractorBeamSys& tractorsystem)
+void TractorBeamSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, TractorBeamSys& tractor_system)
 {
     if (entity != my_spaceship) {
         auto scanstate = entity.getComponent<ScanState>();
@@ -357,40 +357,23 @@ void TractorBeamSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entit
             return;
     }
 
-    // For each beam ...
-    for(auto& mount : tractorsystem.mounts) {
-        // Draw beam arcs only if the beam has a range. A beam with range 0
-        // effectively doesn't exist; exit if that's the case.
-        if (mount.range == 0.0f) continue;
-
+    // Draw beam arcs only if the beam has a range. A beam with range 0
+    // effectively doesn't exist; exit if that's the case.
+    if (tractor_system.tractor_range > 0.0f) {
         // If the beam is cooling down, flash and fade the arc color.
-        glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, mount.cooldown), 0, mount.cycle_time, mount.arc_color, mount.arc_color_fire);
-
+        glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, tractor_system.tractor_cooldown), 0, tractor_system.tractor_cycle_time, tractor_system.tractor_arc_color, tractor_system.tractor_arc_color_fire);
         
         // Initialize variables from the beam's data.
-        float beam_direction = mount.direction;
-        float beam_arc = mount.arc;
-        float beam_range = mount.range;
+        float beam_direction = tractor_system.tractor_direction;
+        float beam_arc = tractor_system.tractor_arc;
+        float beam_range = tractor_system.tractor_range;
 
         // Set the beam's origin on radar to its relative position on the mesh.
-        auto beam_offset = rotateVec2(glm::vec2(mount.position.x, mount.position.y) * scale, rotation);
+        auto beam_offset = rotateVec2(glm::vec2(tractor_system.tractor_position.x, tractor_system.tractor_position.y) * scale, rotation);
         auto arc_center = beam_offset + screen_position;
 
+        LOG(WARNING) << "Rendering tractor beam " << beam_direction << " " << beam_arc << " " << beam_range << " " << arc_center << " " << scale;
+
         drawArc(renderer, arc_center, rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
-    
-
-        // If the beam is turreted, draw the turret's arc. Otherwise, exit.
-        if (mount.turret_arc == 0.0f)
-            continue;
-
-        // Initialize variables from the turret data.
-        float turret_arc = mount.turret_arc;
-        float turret_direction = mount.turret_direction;
-
-        // Draw the turret's bounds, at half the transparency of the beam's.
-        // TODO: Make this color configurable.
-        color.a /= 4;
-
-        drawArc(renderer, arc_center, rotation + (turret_direction - turret_arc / 2.0f), turret_arc, beam_range * scale, color);
     }
 }
