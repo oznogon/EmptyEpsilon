@@ -69,7 +69,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         }, nullptr, nullptr
     );
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
-    new RawScannerDataRadarOverlay(science_radar, "");
+    science_raw_signals = new RawScannerDataRadarOverlay(science_radar, "");
 
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
@@ -84,20 +84,37 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
-    new RawScannerDataRadarOverlay(probe_radar, "");
+    probe_raw_signals = new RawScannerDataRadarOverlay(probe_radar, "");
 
     sidebar_selector = new GuiSelector(radar_view, "", [this](int index, string value)
     {
-        info_sidebar->setVisible(index == 0);
-        custom_function_sidebar->setVisible(index == 1);
-        tractor_sidebar->setVisible(index == 2);
+        if (value == "scan") {
+            info_sidebar->setVisible(true);
+            science_raw_signals->setVisible(true);
+            probe_raw_signals->setVisible(true);
+        }
+        else if (value == "func") {
+            custom_function_sidebar->setVisible(true);
+            science_raw_signals->setVisible(true);
+            probe_raw_signals->setVisible(true);
+        }
+        else if (value == "trac") {
+            auto has_tractor = my_spaceship.hasComponent<TractorBeamSys>();
+            tractor_sidebar->setVisible(has_tractor);
+            tractor_bearing->setVisible(has_tractor);
+            science_raw_signals->setVisible(!has_tractor);
+            probe_raw_signals->setVisible(!has_tractor);
+        }
+        else
+        {
+            LOG(WARNING) << "Science sidebar selector is bad: " << value;
+        }
     });
 
-    sidebar_selector->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Other")});
-
+    sidebar_selector->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Other")}, {"scan","func"});
     if (my_spaceship.hasComponent<TractorBeamSys>())
     {
-        sidebar_selector->addEntry(tr("scienceTab", "Tractor"), tr("scienceTab", "Tractor"));
+        sidebar_selector->addEntry(tr("scienceTab", "Tractor"), "trac");
     }
     sidebar_selector->setSelectionIndex(0);
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50);
@@ -196,12 +213,13 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // END custom_function_sidebar
 
     // Tractor sidebar.
-    tractor_sidebar = new GuiElement(radar_view, "SIDEBAR");
+    tractor_sidebar = new GuiElement(radar_view, "TRACTOR_SIDEBAR");
     tractor_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     // Tractor toggle button.
     tractor_toggle = new GuiToggleButton(tractor_sidebar, "TRACTOR_TOGGLE", tr("scienceButton", "Activate"), [this](bool value){
         auto tractor_system = my_spaceship.getComponent<TractorBeamSys>();
+
         if (tractor_system) {
             if (value)
             {
@@ -221,7 +239,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         tractor_system->tractor_direction = value;
         LOG(WARNING) << "Tractor direction set to " << value << " (" << tractor_system->tractor_direction << ")";
     });
-    tractor_bearing->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
+    tractor_bearing->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(900,GuiElement::GuiSizeMax)->setVisible(false);
 
     // END tractor_sidebar
 

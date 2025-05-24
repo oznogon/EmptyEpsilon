@@ -11,6 +11,7 @@ class GuiKeyValueDisplay;
 class GuiFrequencyCurve;
 class GuiScrollText;
 class GuiButton;
+class GuiRotationDial;
 class GuiScanTargetButton;
 class GuiToggleButton;
 class GuiSelector;
@@ -19,6 +20,7 @@ class GuiLabel;
 class GuiImage;
 class DatabaseViewComponent;
 class GuiCustomShipFunctions;
+class RawScannerDataRadarOverlay;
 
 class ScienceScreen : public GuiOverlay
 {
@@ -31,7 +33,9 @@ public:
 
     TargetsContainer targets;
     GuiRadarView* science_radar;
+    RawScannerDataRadarOverlay* science_raw_signals;
     GuiRadarView* probe_radar;
+    RawScannerDataRadarOverlay* probe_raw_signals;
     GuiSlider* zoom_slider;
     GuiLabel* zoom_label;
 

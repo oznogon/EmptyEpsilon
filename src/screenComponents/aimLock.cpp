@@ -67,7 +67,7 @@ void AimLock::onDraw(sp::RenderTarget& renderer)
     float view_rotation = radar->getViewRotation();
     float radius = std::min(rect.size.x, rect.size.y);
 
-    renderer.drawSprite("gui/widget/dial_background.png", center, radius);
+    renderer.drawCircleOutline(center, radius, 16, glm::u8vec4(255, 255, 255, 64));
     renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius, (value - min_value) / (max_value - min_value) * 360.0f - view_rotation);
 }
 

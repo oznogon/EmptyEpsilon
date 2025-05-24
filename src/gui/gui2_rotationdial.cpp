@@ -14,7 +14,7 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
     auto center = getCenterPoint();
     float radius = std::min(rect.size.x, rect.size.y) * 0.5f;
 
-    renderer.drawSprite("gui/widget/dial_background.png", center, radius * 2.0f);
+    renderer.drawCircleOutline(center, radius, 16, glm::u8vec4(255, 255, 255, 64));
     renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius * 2.0f, (value - min_value) / (max_value - min_value) * 360.0f);
 }
 
