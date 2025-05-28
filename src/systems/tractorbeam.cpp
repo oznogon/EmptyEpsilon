@@ -11,6 +11,7 @@
 #include "components/faction.h"
 #include "components/coolant.h"
 #include "components/sfx.h"
+#include "systems/beamweapon.h"
 #include "ecs/query.h"
 #include "main.h"
 #include "textureManager.h"
@@ -19,11 +20,6 @@
 #include "tween.h"
 #include "random.h"
 #include "playerInfo.h"
-
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <graphics/opengl.h>
-
 
 void TractorBeamSystem::update(float delta)
 {
@@ -116,111 +112,8 @@ void TractorBeamSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Tr
     LOG(WARNING) << "In TractorBeamSystem start/end of render3D";
 }
 
-static void drawArc(sp::RenderTarget& renderer, glm::vec2 arc_center, float angle0, float arc_angle, float arc_radius, glm::u8vec4 color)
-{
-    LOG(WARNING) << "In TractorBeamSystem start of drawArc";
-    // Set the beam's origin on radar to its relative position on the mesh.
-    float outline_thickness = std::min(20.0f, arc_radius * 0.2f);
-    float beam_arc_curve_length = arc_radius * arc_angle / 180.0f * glm::pi<float>();
-    outline_thickness = std::min(outline_thickness, beam_arc_curve_length * 0.25f);
-
-    size_t curve_point_count = 0;
-    if (outline_thickness > 0.f)
-        curve_point_count = static_cast<size_t>(beam_arc_curve_length / (outline_thickness * 0.9f));
-
-    struct ArcPoint {
-        glm::vec2 point;
-        glm::vec2 normal; // Direction towards the center.
-    };
-
-    //Arc points
-    std::vector<ArcPoint> arc_points;
-    arc_points.reserve(curve_point_count + 1);
-    
-    for (size_t i = 0; i < curve_point_count; i++)
-    {
-        auto angle = vec2FromAngle(angle0 + i * arc_angle / curve_point_count) * arc_radius;
-        arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
-    }
-    {
-        auto angle = vec2FromAngle(angle0 + arc_angle) * arc_radius;
-        arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
-    }
-
-    for (size_t n = 0; n < arc_points.size() - 1; n++)
-    {
-        const auto& p0 = arc_points[n].point;
-        const auto& p1 = arc_points[n + 1].point;
-        const auto& n0 = arc_points[n].normal;
-        const auto& n1 = arc_points[n + 1].normal;
-        renderer.drawTexturedQuad("gradient.png",
-            p0, p0 - n0 * outline_thickness,
-            p1 - n1 * outline_thickness, p1,
-            { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
-            color);
-    }
-
-    if (arc_radius < 360.f)
-    {
-        // Arc bounds.
-        // We use the left- and right-most edges as lines, going inwards, parallel to the center.
-        const auto left_edge = vec2FromAngle(angle0) * arc_radius;
-        const auto right_edge = vec2FromAngle(angle0 + arc_radius) * arc_radius;
-    
-        // Compute the half point, always going clockwise from the left edge.
-        // This makes sure the algorithm never takes the short road.
-        auto halfway_angle = vec2FromAngle(angle0 + arc_radius / 2.f) * arc_radius;
-        auto middle = glm::normalize(halfway_angle);
-
-        // Edge vectors.
-        const auto left_edge_vector = glm::normalize(left_edge);
-        const auto right_edge_vector = glm::normalize(right_edge);
-
-        // Edge normals, inwards.
-        auto left_edge_normal = glm::vec2{ left_edge_vector.y, -left_edge_vector.x };
-        const auto right_edge_normal = glm::vec2{ -right_edge_vector.y, right_edge_vector.x };
-
-        // Initial offset, follow along the edges' normals, inwards.
-        auto left_inner_offset = -left_edge_normal * outline_thickness;
-        auto right_inner_offset = -right_edge_normal * outline_thickness;
-
-        if (arc_radius < 180.f)
-        {
-            // The thickness being perpendicular from the edges,
-            // the inner lines just crosses path on the height,
-            // so just use that point.
-            left_inner_offset = middle * outline_thickness / sinf(glm::radians(arc_radius / 2.f));
-            right_inner_offset = left_inner_offset;
-        }
-        else
-        {
-            // Make it shrink nicely as it grows up to 360 deg.
-            // For that, we use the edge's normal against the height which will change from 0 to 90deg.
-            // Also flip the direction so our points stay inside the beam.
-            auto thickness_scale = -glm::dot(middle, right_edge_normal);
-            left_inner_offset *= thickness_scale;
-            right_inner_offset *= thickness_scale;
-        }
-
-        renderer.drawTexturedQuad("gradient.png",
-            arc_center, arc_center + left_inner_offset,
-            arc_center + left_edge - left_edge_normal * outline_thickness, arc_center + left_edge,
-            { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
-            color);
-
-        renderer.drawTexturedQuad("gradient.png",
-            arc_center, arc_center + right_inner_offset,
-            arc_center + right_edge - right_edge_normal * outline_thickness, arc_center + right_edge,
-            { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
-            color);
-    }
-    LOG(WARNING) << "In TractorBeamSystem end of drawArc";
-}
-
 void TractorBeamSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, TractorBeamSys& tractor_system)
 {
-    LOG(WARNING) << "Inside TractorBeamSystem start of renderOnRadar";
-
     if (entity != my_spaceship) {
         auto scanstate = entity.getComponent<ScanState>();
         if (scanstate && my_spaceship && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
@@ -229,24 +122,19 @@ void TractorBeamSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entit
 
     // Draw beam arcs only if the beam has a range. A beam with range 0
     // effectively doesn't exist; exit if that's the case.
-    LOG(WARNING) << "tractor_system.range = " << tractor_system.range;
-    if (tractor_system.range > 0.0f) {
-        LOG(WARNING) << "Inside renderOnRadar if to render on radar";
-        // If the beam is cooling down, flash and fade the arc color.
-        glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, tractor_system.cooldown), 0, tractor_system.cycle_time, tractor_system.arc_color, tractor_system.arc_color_fire);
-        
-        // Initialize variables from the beam's data.
-        float beam_direction = tractor_system.bearing;
-        float beam_arc = tractor_system.arc;
-        float beam_range = tractor_system.range;
+    if (tractor_system.range == 0.0f) return;
 
-        // Set the beam's origin on radar to its relative position on the mesh.
-        auto beam_offset = rotateVec2(glm::vec2(tractor_system.position.x, tractor_system.position.y) * scale, rotation);
-        auto arc_center = beam_offset + screen_position;
+    // If the beam is cooling down, flash and fade the arc color.
+    glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, tractor_system.cooldown), 0, tractor_system.cycle_time, tractor_system.arc_color, tractor_system.arc_color_fire);
+    
+    // Initialize variables from the beam's data.
+    float beam_direction = tractor_system.bearing;
+    float beam_arc = tractor_system.arc;
+    float beam_range = tractor_system.range;
 
-        LOG(WARNING) << "Rendering tractor beam\nbeam_offset: " << beam_offset << "\narc_center: " << arc_center << "\nbeam_direction: " << beam_direction << "\nbeam_arc: " << beam_arc << "\nbeam_range: " << beam_range << "\nscale: " << scale;
+    // Set the beam's origin on radar to its relative position on the mesh.
+    auto beam_offset = rotateVec2(glm::vec2(tractor_system.position.x, tractor_system.position.y) * scale, rotation);
+    auto arc_center = beam_offset + screen_position;
 
-        drawArc(renderer, arc_center, rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
-    }
-    LOG(WARNING) << "Inside TractorBeamSystem end of renderOnRadar";
+    drawArc(renderer, arc_center, rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
 }

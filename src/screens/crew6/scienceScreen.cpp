@@ -90,17 +90,28 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     {
         if (value == "scan") {
             info_sidebar->setVisible(true);
+            custom_function_sidebar->setVisible(false);
+            tractor_sidebar->setVisible(false);
+
+            tractor_bearing->setVisible(false);
             science_raw_signals->setVisible(true);
             probe_raw_signals->setVisible(true);
         }
         else if (value == "func") {
+            info_sidebar->setVisible(false);
             custom_function_sidebar->setVisible(true);
+            tractor_sidebar->setVisible(false);
+
+            tractor_bearing->setVisible(false);
             science_raw_signals->setVisible(true);
             probe_raw_signals->setVisible(true);
         }
         else if (value == "trac") {
             auto has_tractor = my_spaceship.hasComponent<TractorBeamSys>();
+            info_sidebar->setVisible(false);
+            custom_function_sidebar->setVisible(false);
             tractor_sidebar->setVisible(has_tractor);
+
             tractor_bearing->setVisible(has_tractor);
             science_raw_signals->setVisible(!has_tractor);
             probe_raw_signals->setVisible(!has_tractor);
