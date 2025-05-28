@@ -18,23 +18,19 @@ BASIC_REPLICATION_IMPL(TractorBeamSysReplication, TractorBeamSys)
     BASIC_REPLICATION_FIELD(auto_repair_per_second);
     BASIC_REPLICATION_FIELD(damage_per_second_on_overheat);
 
-    BASIC_REPLICATION_FIELD(frequency);
-    BASIC_REPLICATION_FIELD(system_target);
-
-    BASIC_REPLICATION_FIELD(tractor_position);
-    BASIC_REPLICATION_FIELD(tractor_arc);
-    BASIC_REPLICATION_FIELD(tractor_direction);
-    BASIC_REPLICATION_FIELD(tractor_range);
-    BASIC_REPLICATION_FIELD(tractor_cycle_time);
-    BASIC_REPLICATION_FIELD(tractor_damage);
-    BASIC_REPLICATION_FIELD(tractor_energy_per_tick);
-    BASIC_REPLICATION_FIELD(tractor_heat_per_tick);
-    BASIC_REPLICATION_FIELD(tractor_arc_color);
-    BASIC_REPLICATION_FIELD(tractor_arc_color_fire);
-    BASIC_REPLICATION_FIELD(tractor_cooldown);
-    BASIC_REPLICATION_FIELD(tractor_texture);
+    BASIC_REPLICATION_FIELD(position);
+    BASIC_REPLICATION_FIELD(arc);
+    BASIC_REPLICATION_FIELD(bearing);
+    BASIC_REPLICATION_FIELD(range);
+    BASIC_REPLICATION_FIELD(cycle_time);
+    BASIC_REPLICATION_FIELD(strength);
+    BASIC_REPLICATION_FIELD(energy_per_tick);
+    BASIC_REPLICATION_FIELD(heat_per_tick);
+    BASIC_REPLICATION_FIELD(arc_color);
+    BASIC_REPLICATION_FIELD(arc_color_fire);
+    BASIC_REPLICATION_FIELD(cooldown);
+    BASIC_REPLICATION_FIELD(texture);
 }
-
 
 BASIC_REPLICATION_IMPL(TractorBeamEffectReplication, TractorBeamEffect)
     BASIC_REPLICATION_FIELD(lifetime);

@@ -28,6 +28,7 @@
 #include "components/shields.h"
 #include "components/coolant.h"
 #include "components/beamweapon.h"
+#include "components/tractorbeam.h"
 #include "components/internalrooms.h"
 #include "components/zone.h"
 #include "components/shiplog.h"
@@ -1002,6 +1003,56 @@ void luaCommandSetBeamSystemTarget(sp::ecs::Entity ship, ShipSystem::Type type) 
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetBeamSystemTarget(type); return; }
     if (auto beamweapons = ship.getComponent<BeamWeaponSys>())
         beamweapons->system_target = type;
+}
+
+void luaCommandSetTractor(sp::ecs::Entity ship, bool active) {
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetTractor(active);
+        return;
+    }
+
+    auto tractor = ship.getComponent<TractorBeamSys>();
+    if (tractor)
+    {
+        if (active != tractor->active)
+        {
+            gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
+
+        }
+        else
+        {
+            gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
+        }
+    }
+}
+
+void luaCommandSetTractorBearing(sp::ecs::Entity ship, float bearing) {
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetTractorBearing(bearing);
+        return;
+    }
+
+    auto tractor = ship.getComponent<TractorBeamSys>();
+    if (tractor)
+    {
+        tractor->bearing = bearing;
+    }
+}
+
+void luaCommandSetTractorRange(sp::ecs::Entity ship, float range) {
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetTractorRange(range);
+        return;
+    }
+
+    auto tractor = ship.getComponent<TractorBeamSys>();
+    if (tractor)
+    {
+        tractor->range = range;
+    }
 }
 
 void luaCommandSetShieldFrequency(sp::ecs::Entity ship, int frequency) {

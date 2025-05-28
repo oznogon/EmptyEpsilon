@@ -7,13 +7,13 @@
 #include "featureDefs.h"
 
 #include "components/beamweapon.h"
+#include "components/tractorbeam.h"
 #include "components/shields.h"
 #include "components/hull.h"
 #include "components/collision.h"
 #include "components/radar.h"
 #include "components/scanning.h"
 #include "components/name.h"
-#include "components/tractorbeam.h"
 
 #include "systems/radarblock.h"
 
@@ -221,14 +221,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         auto tractor_system = my_spaceship.getComponent<TractorBeamSys>();
 
         if (tractor_system) {
-            if (value)
-            {
-                LOG(WARNING) << "Tractor beam activated";
-            }
-            else
-            {
-                LOG(WARNING) << "Tractor beam deactivated";
-            };
+            tractor_system->active = value;
+            LOG(WARNING) << "Tractor beam " << tractor_system->active;
         };
     });
     tractor_toggle->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
@@ -237,8 +231,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     tractor_bearing = new GuiRotationDial(radar_view, "TRACTOR_BEARING", -90, 360 - 90, 0, [this](float value){
         if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
         {
-            tractor_system->tractor_direction = value;
-            LOG(WARNING) << "Tractor direction set to " << value << " (" << tractor_system->tractor_direction << ")";
+            tractor_system->bearing = value;
+            LOG(WARNING) << "Tractor direction set to " << value << " (" << tractor_system->bearing << ")";
         }
     });
     tractor_bearing->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(900,GuiElement::GuiSizeMax)->setVisible(false);
@@ -248,9 +242,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     {
         if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
         {
-            tractor_system->tractor_range = value;
-            tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->tractor_range, 1)}}));
-            LOG(WARNING) << "Tractor range set to " << value << " (" << tractor_system->tractor_range << ")";
+            tractor_system->range = value;
+            tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
+            LOG(WARNING) << "Tractor range set to " << value << " (" << tractor_system->range << ")";
         }
     });
     tractor_range->setSize(GuiElement::GuiSizeMax, 50);

@@ -87,6 +87,10 @@ public:
 
     void commandCrewSetTargetPosition(sp::ecs::Entity crew, glm::ivec2 target);
 
+    void commandSetTractor(bool enabled);
+    void commandSetTractorBearing(float bearing);
+    void commandSetTractorRange(float range);
+
     virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
 
     void spawnUI(int monitor_index, RenderLayer* render_layer);

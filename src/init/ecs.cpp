@@ -72,8 +72,9 @@
 void initSystemsAndComponents()
 {
     sp::ecs::MultiplayerReplication::registerComponentReplication<BeamWeaponSysReplication>();
-    sp::ecs::MultiplayerReplication::registerComponentReplication<TractorBeamSysReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<BeamEffectReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<TractorBeamSysReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<TractorBeamEffectReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsReceiverReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsTransmitterReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CoolantReplication>();
@@ -140,6 +141,7 @@ void initSystemsAndComponents()
     engine->registerSystem<ManeuveringSystem>();
     engine->registerSystem<WarpSystem>();
     engine->registerSystem<BeamWeaponSystem>();
+    engine->registerSystem<TractorBeamSystem>();
     engine->registerSystem<MissileSystem>();
     engine->registerSystem<ShieldSystem>();
     engine->registerSystem<CoolantSystem>();

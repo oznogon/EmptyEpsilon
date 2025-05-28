@@ -6,6 +6,7 @@
 #include "components/docking.h"
 #include "components/missiletubes.h"
 #include "components/beamweapon.h"
+#include "components/tractorbeam.h"
 #include "components/collision.h"
 #include "components/jumpdrive.h"
 #include "components/warpdrive.h"
@@ -148,9 +149,10 @@ bool EvasionAI::evadeIfNecessary()
 // calculate how much of a threat an enemy ship is
 float EvasionAI::evasionDangerScore(sp::ecs::Entity ship, float scan_radius)
 {
-    float enemy_max_beam_range = 0.0;
-    float enemy_beam_dps = 0.0;
-    float enemy_missile_strength = 0.0;
+    float enemy_max_beam_range = 0.0f;
+    float enemy_beam_dps = 0.0f;
+    float enemy_max_tractor_range = 0.0f;
+    float enemy_missile_strength = 0.0f;
 
     auto tubes = ship.getComponent<MissileTubes>();
     if (tubes) {
@@ -172,7 +174,15 @@ float EvasionAI::evasionDangerScore(sp::ecs::Entity ship, float scan_radius)
         }
     }
 
-    if (enemy_missile_strength <= 0.0f && (enemy_beam_dps <= 0.0f || enemy_max_beam_range <= 0.0f))
+    auto tractor = ship.getComponent<TractorBeamSys>();
+    if (tractor) {
+        if (tractor->range > 0.0f)
+        {
+            enemy_max_tractor_range = std::max(enemy_max_tractor_range, tractor->range);
+        }
+    }
+
+    if (enemy_missile_strength <= 0.0f && (enemy_beam_dps <= 0.0f || enemy_max_beam_range <= 0.0f || enemy_max_tractor_range <= 0.0f))
     {
         // enemy is not a threat
         return 0.0;
@@ -199,6 +209,12 @@ float EvasionAI::evasionDangerScore(sp::ecs::Entity ship, float scan_radius)
     {
         // danger falls off the further we are away from beam range
         danger += enemy_beam_dps * (4*enemy_max_beam_range - std::max(distance, enemy_max_beam_range)) / (3 * enemy_max_beam_range);
+    }
+
+    if (enemy_max_tractor_range > 0.0f && distance < 4.0f * enemy_max_tractor_range)
+    {
+        // danger falls off the further we are away from beam range
+        danger += (4.0f * enemy_max_tractor_range - std::max(distance, enemy_max_tractor_range)) / (3 * enemy_max_tractor_range);
     }
 
     if (auto oi = owner.getComponent<ImpulseEngine>()) {

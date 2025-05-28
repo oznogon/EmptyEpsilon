@@ -12,6 +12,7 @@ public:
         None = -1,
         Reactor = 0,
         BeamWeapons,
+        TractorBeam,
         MissileSystem,
         Maneuver,
         Impulse,

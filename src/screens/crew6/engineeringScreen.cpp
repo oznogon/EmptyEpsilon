@@ -7,6 +7,7 @@
 #include "components/reactor.h"
 #include "components/coolant.h"
 #include "components/beamweapon.h"
+#include "components/tractorbeam.h"
 #include "components/hull.h"
 #include "components/jumpdrive.h"
 #include "components/shields.h"
@@ -150,6 +151,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
 
     system_rows[int(ShipSystem::Type::Reactor)].button->setIcon("gui/icons/system_reactor");
     system_rows[int(ShipSystem::Type::BeamWeapons)].button->setIcon("gui/icons/system_beam");
+    system_rows[int(ShipSystem::Type::TractorBeam)].button->setIcon("gui/icons/system_beam");
     system_rows[int(ShipSystem::Type::MissileSystem)].button->setIcon("gui/icons/system_missile");
     system_rows[int(ShipSystem::Type::Maneuver)].button->setIcon("gui/icons/system_maneuver");
     system_rows[int(ShipSystem::Type::Impulse)].button->setIcon("gui/icons/system_impulse");
@@ -285,6 +287,9 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                             }
                         }
                     }
+                    break;
+                case ShipSystem::Type::TractorBeam:
+                    addSystemEffect(tr("Force"), toNearbyIntString(effectiveness * 100) + "%");
                     break;
                 case ShipSystem::Type::MissileSystem:
                     addSystemEffect(tr("missile","Reload rate"), toNearbyIntString(effectiveness * 100) + "%");

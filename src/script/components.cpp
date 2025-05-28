@@ -19,6 +19,7 @@
 #include "components/shields.h"
 #include "components/docking.h"
 #include "components/beamweapon.h"
+#include "components/tractorbeam.h"
 #include "components/target.h"
 #include "components/reactor.h"
 #include "components/impulse.h"
@@ -485,6 +486,33 @@ void initComponentScriptBindings()
     BIND_MEMBER(BeamEffect, hit_normal);
     BIND_MEMBER(BeamEffect, fire_ring);
     BIND_MEMBER(BeamEffect, beam_texture);
+
+    sp::script::ComponentHandler<TractorBeamSys>::name("tractor_beam");
+    BIND_SHIP_SYSTEM(TractorBeamSys);
+    BIND_MEMBER(TractorBeamSys, active);
+    BIND_MEMBER(TractorBeamSys, arc);
+    BIND_MEMBER(TractorBeamSys, bearing);
+    BIND_MEMBER(TractorBeamSys, range);
+    BIND_MEMBER(TractorBeamSys, cycle_time);
+    BIND_MEMBER(TractorBeamSys, strength);
+    BIND_MEMBER(TractorBeamSys, energy_per_tick);
+    BIND_MEMBER(TractorBeamSys, heat_per_tick);
+    BIND_MEMBER(TractorBeamSys, arc_color);
+    BIND_MEMBER(TractorBeamSys, arc_color_fire);
+    /*
+    BIND_MEMBER(TractorBeamSys, texture);
+    sp::script::ComponentHandler<TractorBeamEffect>::name("tractor_beam_effect");
+    BIND_MEMBER(TractorBeamSys, lifetime);
+    BIND_MEMBER(TractorBeamSys, fade_speed);
+    BIND_MEMBER(TractorBeamSys, source);
+    BIND_MEMBER(TractorBeamSys, target);
+    BIND_MEMBER(TractorBeamSys, source_offset);
+    BIND_MEMBER(TractorBeamSys, target_offset);
+    BIND_MEMBER(TractorBeamSys, target_location);
+    BIND_MEMBER(TractorBeamSys, hit_normal);
+    BIND_MEMBER(TractorBeamSys, fire_ring);
+    BIND_MEMBER(TractorBeamSys, beam_texture);
+    */
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);

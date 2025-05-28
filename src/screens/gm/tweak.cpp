@@ -348,6 +348,9 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), BeamWeaponSys, mounts, turret_rotation_rate);
 
     ADD_PAGE(tr("tweak-tab", "Tractor beam system"), TractorBeamSys);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Arc:"), TractorBeamSys, arc);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Bearing:"), TractorBeamSys, bearing);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), TractorBeamSys, range);
     ADD_LABEL(tr("tweak-text", "Tractor beam system"));
     ADD_SHIP_SYSTEM_TWEAK(TractorBeamSys);
 

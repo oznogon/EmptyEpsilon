@@ -38,6 +38,7 @@
 #include "components/reactor.h"
 #include "components/coolant.h"
 #include "components/beamweapon.h"
+#include "components/tractorbeam.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/shields.h"
@@ -104,6 +105,10 @@ static const uint16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
+
+static const uint16_t CMD_SET_TRACTOR = 0x002C;
+static const uint16_t CMD_SET_TRACTOR_BEARING = 0x002D;
+static const uint16_t CMD_SET_TRACTOR_RANGE = 0x002E;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -578,6 +583,27 @@ void PlayerInfo::commandCrewSetTargetPosition(sp::ecs::Entity crew, glm::ivec2 p
 {
     sp::io::DataBuffer packet;
     packet << CMD_CREW_SET_TARGET << crew << position;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetTractor(bool enabled)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_TRACTOR << enabled;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetTractorBearing(float bearing)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_TRACTOR_BEARING << bearing;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetTractorRange(float range)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_TRACTOR_RANGE << range;
     sendClientCommand(packet);
 }
 
@@ -1060,6 +1086,49 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             if (auto ic = crew.getComponent<InternalCrew>())
                 ic->target_position = position;
         }break;
+    case CMD_SET_TRACTOR:
+        {
+            bool active;
+            packet >> active;
+
+            auto tractor = ship.getComponent<TractorBeamSys>();
+            if (tractor) {
+                tractor->active = active;
+
+                if (active)
+                {
+                    gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
+                }
+                else
+                {
+                    gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
+                }
+            }
+        }
+        break;
+    case CMD_SET_TRACTOR_BEARING:
+        {
+            float f;
+            packet >> f;
+
+            auto tractor = ship.getComponent<TractorBeamSys>();
+            if (tractor) {
+                tractor->bearing = f;
+            }
+        }
+        break;
+    case CMD_SET_TRACTOR_RANGE:
+        {
+            float f;
+            packet >> f;
+
+            auto tractor = ship.getComponent<TractorBeamSys>();
+            if (tractor) {
+                tractor->range = f;
+            }
+        }
+        break;
+
     }
 }
 

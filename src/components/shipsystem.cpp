@@ -3,6 +3,7 @@
 #include "gameGlobalInfo.h"
 #include "components/reactor.h"
 #include "components/beamweapon.h"
+#include "components/tractorbeam.h"
 #include "components/missiletubes.h"
 #include "components/shields.h"
 #include "components/impulse.h"
@@ -62,6 +63,8 @@ ShipSystem* ShipSystem::get(sp::ecs::Entity entity, Type type)
         return entity.getComponent<Reactor>();
     case Type::BeamWeapons:
         return entity.getComponent<BeamWeaponSys>();
+    case Type::TractorBeam:
+        return entity.getComponent<TractorBeamSys>();
     case Type::MissileSystem:
         return entity.getComponent<MissileTubes>();
     case Type::Maneuver:
@@ -96,6 +99,7 @@ string getSystemName(ShipSystem::Type system)
     {
     case ShipSystem::Type::Reactor: return "reactor";
     case ShipSystem::Type::BeamWeapons: return "beamweapons";
+    case ShipSystem::Type::TractorBeam: return "tractorbeam";
     case ShipSystem::Type::MissileSystem: return "missilesystem";
     case ShipSystem::Type::Maneuver: return "maneuvering";
     case ShipSystem::Type::Impulse: return "impulse";
@@ -114,6 +118,7 @@ string getLocaleSystemName(ShipSystem::Type system)
     {
     case ShipSystem::Type::Reactor: return tr("system", "Reactor");
     case ShipSystem::Type::BeamWeapons: return tr("system", "Beam Weapons");
+    case ShipSystem::Type::TractorBeam: return tr("system", "Tractor Beam");
     case ShipSystem::Type::MissileSystem: return tr("system", "Missile System");
     case ShipSystem::Type::Maneuver: return tr("system", "Maneuvering");
     case ShipSystem::Type::Impulse: return tr("system", "Impulse Engines");
