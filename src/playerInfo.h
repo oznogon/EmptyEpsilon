@@ -89,6 +89,7 @@ public:
 
     void commandSetTractor(bool enabled);
     void commandSetTractorBearing(float bearing);
+    void commandSetTractorArc(float arc);
     void commandSetTractorRange(float range);
 
     virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;

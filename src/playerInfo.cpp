@@ -108,7 +108,8 @@ static const uint16_t CMD_ABORT_JUMP = 0x002C;
 
 static const uint16_t CMD_SET_TRACTOR = 0x002C;
 static const uint16_t CMD_SET_TRACTOR_BEARING = 0x002D;
-static const uint16_t CMD_SET_TRACTOR_RANGE = 0x002E;
+static const uint16_t CMD_SET_TRACTOR_ARC = 0x002E;
+static const uint16_t CMD_SET_TRACTOR_RANGE = 0x002F;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -597,6 +598,13 @@ void PlayerInfo::commandSetTractorBearing(float bearing)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_TRACTOR_BEARING << bearing;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetTractorArc(float arc)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_TRACTOR_ARC << arc;
     sendClientCommand(packet);
 }
 
@@ -1114,6 +1122,17 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             auto tractor = ship.getComponent<TractorBeamSys>();
             if (tractor) {
                 tractor->bearing = f;
+            }
+        }
+        break;
+    case CMD_SET_TRACTOR_ARC:
+        {
+            float f;
+            packet >> f;
+
+            auto tractor = ship.getComponent<TractorBeamSys>();
+            if (tractor) {
+                tractor->arc = f;
             }
         }
         break;

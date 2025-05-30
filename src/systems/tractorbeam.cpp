@@ -23,7 +23,6 @@
 
 void TractorBeamSystem::update(float delta)
 {
-    LOG(WARNING) << "TractorBeamSystem start of update " << delta;
     if (!game_server) return;
     if (delta <= 0.0f) return;
 
@@ -104,7 +103,6 @@ void TractorBeamSystem::update(float delta)
             entity.destroy();
     }
     */
-    LOG(WARNING) << "In TractorBeamSystem end of update " << delta;
 }
 
 void TractorBeamSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, TractorBeamEffect& be)

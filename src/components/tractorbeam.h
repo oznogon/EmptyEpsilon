@@ -6,10 +6,18 @@
 #include "glm/gtc/type_precision.hpp"
 
 
+enum class TractorMode
+{
+    Hold,
+    Pull,
+    Push
+};
+
 class TractorBeamSys : public ShipSystem {
 public:
     glm::vec3 position = glm::vec3(0.01f, 0.01f, 0.01f);
     bool active = false;
+    TractorMode mode = TractorMode::Hold;
     float arc = 18.0f;
     float bearing = 0.0f;
     float range = 1000.0f;
