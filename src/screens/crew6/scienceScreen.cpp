@@ -92,37 +92,23 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
             info_sidebar->setVisible(true);
             custom_function_sidebar->setVisible(false);
             tractor_sidebar->setVisible(false);
-
-            tractor_bearing->setVisible(false);
-            science_raw_signals->setVisible(true);
-            probe_raw_signals->setVisible(true);
         }
         else if (value == "func") {
             info_sidebar->setVisible(false);
-            custom_function_sidebar->setVisible(true);
+            custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
             tractor_sidebar->setVisible(false);
-
-            tractor_bearing->setVisible(false);
-            science_raw_signals->setVisible(true);
-            probe_raw_signals->setVisible(true);
         }
         else if (value == "trac") {
-            auto has_tractor = my_spaceship.hasComponent<TractorBeamSys>();
             info_sidebar->setVisible(false);
             custom_function_sidebar->setVisible(false);
-            tractor_sidebar->setVisible(has_tractor);
-
-            tractor_bearing->setVisible(has_tractor);
-            science_raw_signals->setVisible(!has_tractor);
-            probe_raw_signals->setVisible(!has_tractor);
+            tractor_sidebar->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
         }
         else
         {
             LOG(WARNING) << "Science sidebar selector is bad: " << value;
         }
     });
-
-    sidebar_selector->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Other")}, {"scan","func"});
+    sidebar_selector->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Functions")}, {"scan", "func"});
     if (my_spaceship.hasComponent<TractorBeamSys>())
     {
         sidebar_selector->addEntry(tr("scienceTab", "Tractor"), "trac");
@@ -238,15 +224,57 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     });
     tractor_toggle->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
 
-    // Tractor bearing dial.
-    tractor_bearing = new GuiRotationDial(radar_view, "TRACTOR_BEARING", -90, 360 - 90, 0, [this](float value){
+    tractor_mode = new GuiSelector(tractor_sidebar, "TRACTOR_MODE", [this](int index, string value)
+    {
+        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
+        {
+            if (value == "hold") {
+                tractor_system->mode = TractorMode::Hold;
+            }
+            else if (value == "pull") {
+                tractor_system->mode = TractorMode::Pull;
+            }
+            else if (value == "push") {
+                tractor_system->mode = TractorMode::Push;
+            }
+            else
+            {
+                LOG(WARNING) << "Tractor mode selector is bad: " << value;
+            }
+        }
+    });
+
+    tractor_mode->setOptions({tr("tractorMode", "Hold"), tr("tractorMode", "Pull"), tr("tractorMode", "Push")}, {"hold", "pull", "push"});
+    tractor_mode->setSelectionIndex(0);
+    tractor_mode->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
+
+    // Tractor bearing slider.
+    tractor_bearing = new GuiSlider(tractor_sidebar, "TRACTOR_BEARING", 0.0f, 360.0f, 0.0f, [this](float value)
+    {
         if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
         {
             tractor_system->bearing = value;
-            LOG(WARNING) << "Tractor direction set to " << value << " (" << tractor_system->bearing << ")";
+            tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
+            LOG(WARNING) << "Tractor bearing set to " << value << " (" << tractor_system->bearing << ")";
         }
     });
-    tractor_bearing->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(900,GuiElement::GuiSizeMax)->setVisible(false);
+    tractor_bearing->setSize(GuiElement::GuiSizeMax, 50);
+    tractor_bearing_label = new GuiLabel(tractor_bearing, "TRACTOR_BEARING_LABEL", "Bearing: 0.0 deg", 30);
+    tractor_bearing_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Tractor arc slider.
+    tractor_arc = new GuiSlider(tractor_sidebar, "TRACTOR_ARC", 0.0f, 180.0f, 0.0f, [this](float value)
+    {
+        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
+        {
+            tractor_system->arc = value;
+            tractor_arc_label->setText(tr("scienceButton", "Arc: {arc} deg").format({{"arc", string(tractor_system->arc, 1)}}));
+            LOG(WARNING) << "Tractor arc set to " << value << " (" << tractor_system->arc << ")";
+        }
+    });
+    tractor_arc->setSize(GuiElement::GuiSizeMax, 50);
+    tractor_arc_label = new GuiLabel(tractor_arc, "TRACTOR_ARC_LABEL", "Arc: 18.0 deg", 30);
+    tractor_arc_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Tractor range slider.
     tractor_range = new GuiSlider(tractor_sidebar, "TRACTOR_RANGE", 0.0f, 3000.0f, 1000.0f, [this](float value)
@@ -271,6 +299,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Probe view button
     probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"), [this](bool value){
         auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+
         if (value && lrr && lrr->radar_view_linked_entity)
         {
             auto transform = lrr->radar_view_linked_entity.getComponent<sp::Transform>();

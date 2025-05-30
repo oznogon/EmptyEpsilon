@@ -31,6 +31,7 @@ void BeamWeaponSystem::update(float delta)
     if (delta <= 0.0f) return;
 
     for(auto [entity, beamsys, target, transform, reactor, docking_port] : sp::ecs::Query<BeamWeaponSys, Target, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>>()) {
+        LOG(WARNING) << "In BeamWeaponSystem entity for loop";
         auto warp = entity.getComponent<WarpDrive>();
 
         for(auto& mount : beamsys.mounts) {

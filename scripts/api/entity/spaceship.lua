@@ -96,7 +96,7 @@ function Entity:isDocked(target)
     end
     return false
 end
---- Returns the SoaceObject with which this SpaceShip is docked.
+--- Returns the SpaceObject with which this SpaceShip is docked.
 --- Example: base = ship:getDockedWith()
 function Entity:getDockedWith()
     if self.components.docking_port and self.components.docking_port.state == "docked" then
@@ -688,6 +688,19 @@ function Entity:setBeamWeaponDamageType(index, damage_type)
     self.components.beam_weapons[index + 1].damage_type = damage_type
     return self
 end
+
+function Entity:setTractorBeam(arc, bearing, range, cycle_time, strength)
+    if self.components.tractor_beam == nil then self.components.tractor_beam = {} end
+
+    self.components.tractor_beam.arc = arc
+    self.components.tractor_beam.bearing = bearing
+    self.components.tractor_beam.range = range
+    self.components.tractor_beam.cycle_time = cycle_time
+    self.components.tractor_beam.strength = strength
+
+    return self
+end
+
 --- Sets the number of WeaponTubes for this SpaceShip.
 --- Weapon tubes are 0-indexed. For example, 3 tubes would be indexed 0, 1, and 2.
 --- Example: ship:setWeaponTubeCount(4)

@@ -11,7 +11,6 @@ class GuiKeyValueDisplay;
 class GuiFrequencyCurve;
 class GuiScrollText;
 class GuiButton;
-class GuiRotationDial;
 class GuiScanTargetButton;
 class GuiToggleButton;
 class GuiSelector;
@@ -61,9 +60,13 @@ public:
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];
     // tractor_sidebar
     GuiToggleButton* tractor_toggle;
+    GuiSelector* tractor_mode;
+    GuiSlider* tractor_bearing;
+    GuiLabel* tractor_bearing_label;
     GuiSlider* tractor_range;
     GuiLabel* tractor_range_label;
-    GuiRotationDial* tractor_bearing;
+    GuiSlider* tractor_arc;
+    GuiLabel* tractor_arc_label;
 
     GuiToggleButton* probe_view_button;
     sp::ecs::Entity observation_point;

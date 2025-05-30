@@ -12,6 +12,7 @@
 #include "components/coolant.h"
 #include "components/sfx.h"
 #include "systems/beamweapon.h"
+#include "systems/collision.h"
 #include "ecs/query.h"
 #include "main.h"
 #include "textureManager.h"
@@ -23,70 +24,124 @@
 
 void TractorBeamSystem::update(float delta)
 {
+    LOG(WARNING) << "In TractorBeamSystem update start";
     if (!game_server) return;
+    LOG(WARNING) << "-     if (!game_server) return;";
     if (delta <= 0.0f) return;
+    LOG(WARNING) << "-     if (delta <= 0.0f) return;";
 
-    for(auto [entity, tractorsys, target, transform, reactor, docking_port] : sp::ecs::Query<TractorBeamSys, Target, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>>()) {
-        LOG(WARNING) << "In TractorBeamSystem update for loop";
+    for(auto [entity, tractorsys, transform, reactor, docking_port] : sp::ecs::Query<TractorBeamSys, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>>()) {
+        LOG(WARNING) << "In TractorBeamSystem entity for loop";
+        if (!tractorsys.active) continue;
+        LOG(WARNING) << "- passed tractor beam active check";
+        if (tractorsys.range <= 0.0f) continue;
+        LOG(WARNING) << "- passed tractor beam range check";
+        if (tractorsys.arc <= 0.0f) continue;
+        LOG(WARNING) << "- passed tractor beam arc check";
+        /*
+        if (docking_port || docking_port->state != DockingPort::State::NotDocking) continue;
+        LOG(WARNING) << "- passed docking check";
         auto warp = entity.getComponent<WarpDrive>();
-        auto distance = 0.0f; // TODO
-        auto angle_diff = 0.0f; // TODO
+        if (warp || warp->current != 0.0f) continue;
+        LOG(WARNING) << "- passed warp check";
+        */
+    
+        auto position = transform.getPosition();
+        auto rotation = transform.getRotation();
+        float drag_capability = delta * tractorsys.strength * 1000.0f;
 
-        // Check on tractor beam only if we are on the server and aren't
-        // paused, and if the beams are cooled down.
-        if (tractorsys.range > 0.0f && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
+        for(auto entity_in_range : sp::CollisionSystem::queryArea(position - glm::vec2(tractorsys.range, tractorsys.range), position + glm::vec2(tractorsys.range, tractorsys.range)))
         {
+            LOG(WARNING) << "In TractorBeamSystem entity_in_range for loop";
+            auto target_transform = entity_in_range.getComponent<sp::Transform>();
+
+            // Get the angle to the target.
+            auto diff = target_transform->getPosition() - (position + rotateVec2(glm::vec2(tractorsys.position.x, tractorsys.position.y), rotation));
+            float distance = glm::length(diff);
+            if (auto physics = entity_in_range.getComponent<sp::Physics>())
+                distance += physics->getSize().x;
+            float angle = vec2ToAngle(diff);
+            float angle_diff = angleDifference(tractorsys.bearing + rotation, angle);
+            LOG(WARNING) << "float distance: " << distance << "float angle: " << angle << "float angle_diff: " << angle_diff;
+
             LOG(WARNING) << "In TractorBeamSystem update firing check if statement";
             // If the target is in the beam's arc and range, the beam has cooled
             // down, and the beam can consume enough energy to fire ...
-            if (distance < tractorsys.range && tractorsys.cooldown <= 0.0f && fabsf(angle_diff) < tractorsys.arc / 2.0f && (!reactor || reactor->useEnergy(tractorsys.energy_per_tick)))
+            if (fabsf(angle_diff) < tractorsys.arc / 2.0f && (!reactor || reactor->useEnergy(tractorsys.energy_per_tick)))
             {
                 LOG(WARNING) << "In TractorBeamSystem update firing if statement";
                 // ... add heat to the beam and zap the target.
                 if (entity.hasComponent<Coolant>())
                     tractorsys.addHeat(tractorsys.heat_per_tick);
 
+                glm::vec2 destination;
+                auto target_position = target_transform->getPosition();
+
+                switch (tractorsys.mode) {
+                    case TractorMode::Pull: 
+                        destination = position;
+                        break;
+                    case TractorMode::Push:
+                        destination = position + glm::normalize(target_position - position) * (tractorsys.range * 2);
+                        break;
+                    case TractorMode::Hold:
+                        destination = position + glm::normalize(target_position - position) * (tractorsys.range / 2);
+                        break;
+                    default:
+                        break;
+                }
+
+                auto drag_diff = target_position - destination;
+                float drag_distance = std::min(distance, drag_capability);
+                /*
+                if (target_distance < dragCapability && target_ship && mode == TBM_Pull)
+                {
+                    // if tractor beam is dragging a ship into parent, force docking
+                    target_ship->requestDock(parent);
+                }
+                */
+                target_transform->setPosition(target_position - (drag_distance * glm::normalize(drag_diff)));
+                
                 //When we fire a beam, and we hit an enemy, check if we are not scanned yet, if we are not, and we hit something that we know is an enemy or friendly,
                 //  we now know if this ship is an enemy or friend.
-                Faction::didAnOffensiveAction(entity);
-
-                tractorsys.cooldown = tractorsys.cycle_time; // Reset time of weapon
-                /*
-                auto hit_location = target_transform->getPosition();
-                auto r = 100.0f;
-                if (auto physics = target.entity.getComponent<sp::Physics>()) {
-                    hit_location -= glm::normalize(target_transform->getPosition() - transform.getPosition()) * physics->getSize().x;
-                    r = physics->getSize().x;
-                }
-                */
-                auto e = sp::ecs::Entity::create();
-                e.addComponent<sp::Transform>(transform);
-                /*
-                auto& be = e.addComponent<TractorBeamEffect>();
-                be.source = entity;
-                be.target = target.entity;
-                be.source_offset = tractorsys.position;
-                be.target_location = hit_location;
-                be.beam_texture = tractorsys.texture;
-                auto& sfx = e.addComponent<Sfx>();
-                sfx.sound = "sfx/laser_fire.wav";
-                {
-                    auto local_hit_location = hit_location - target_transform->getPosition();
-                    be.target_offset = glm::vec3(local_hit_location.x + random(-r/2.0f, r/2.0f), local_hit_location.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
-                    auto shield = target.entity.getComponent<Shields>();
-                    if (shield && shield->active)
-                    be.target_offset = glm::normalize(be.target_offset) * r;
-                    else
-                    be.target_offset = glm::normalize(be.target_offset) * random(0, r / 2.0f);
-                    be.hit_normal = glm::normalize(be.target_offset);
-                }
+                // Faction::didAnOffensiveAction(entity);
                 
-                DamageInfo info(entity, mount.damage_type, hit_location);
-                DamageSystem::applyDamage(target.entity, mount.damage, info);
-                */
+                tractorsys.cooldown = tractorsys.cycle_time; // Reset time of weapon
             }
+            /*
+            auto hit_location = target_transform->getPosition();
+            auto r = 100.0f;
+            if (auto physics = target.entity.getComponent<sp::Physics>()) {
+                hit_location -= glm::normalize(target_transform->getPosition() - transform.getPosition()) * physics->getSize().x;
+                r = physics->getSize().x;
+            }
+            auto e = sp::ecs::Entity::create();
+            e.addComponent<sp::Transform>(transform);
+            auto& be = e.addComponent<TractorBeamEffect>();
+            be.source = entity;
+            be.target = target.entity;
+            be.source_offset = tractorsys.position;
+            be.target_location = hit_location;
+            be.beam_texture = tractorsys.texture;
+            auto& sfx = e.addComponent<Sfx>();
+            sfx.sound = "sfx/laser_fire.wav";
+            {
+                auto local_hit_location = hit_location - target_transform->getPosition();
+                be.target_offset = glm::vec3(local_hit_location.x + random(-r/2.0f, r/2.0f), local_hit_location.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
+                auto shield = target.entity.getComponent<Shields>();
+                if (shield && shield->active)
+                be.target_offset = glm::normalize(be.target_offset) * r;
+                else
+                be.target_offset = glm::normalize(be.target_offset) * random(0, r / 2.0f);
+                be.hit_normal = glm::normalize(be.target_offset);
+            }
+            
+            DamageInfo info(entity, mount.damage_type, hit_location);
+            DamageSystem::applyDamage(target.entity, mount.damage, info);
+            */
         }
     }
+
     /*
     for(auto [entity, be, transform] : sp::ecs::Query<TractorBeamEffect, sp::Transform>()) {
         if (be.source) {
