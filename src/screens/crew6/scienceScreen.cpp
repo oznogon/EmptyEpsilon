@@ -628,6 +628,14 @@ void ScienceScreen::onUpdate()
 {
     if (my_spaceship)
     {
+        if (!tractor_toggle->getValue() && my_spaceship.getComponent<TractorBeamSys>()->cooldown > 0.0f)
+        {
+            tractor_toggle->disable();
+        }
+        else
+        {
+            tractor_toggle->enable();
+        }
         // Initiate a scan on scannable objects.
         if (keys.science_scan_object.getDown() &&
             my_spaceship.hasComponent<ScienceScanner>() &&
