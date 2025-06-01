@@ -24,8 +24,8 @@ BASIC_REPLICATION_IMPL(TractorBeamSysReplication, TractorBeamSys)
     BASIC_REPLICATION_FIELD(range);
     BASIC_REPLICATION_FIELD(cycle_time);
     BASIC_REPLICATION_FIELD(strength);
-    BASIC_REPLICATION_FIELD(energy_per_tick);
-    BASIC_REPLICATION_FIELD(heat_per_tick);
+    BASIC_REPLICATION_FIELD(energy_use_per_second);
+    BASIC_REPLICATION_FIELD(heat_per_second);
     BASIC_REPLICATION_FIELD(arc_color);
     BASIC_REPLICATION_FIELD(arc_color_fire);
     BASIC_REPLICATION_FIELD(cooldown);

@@ -27,8 +27,8 @@ public:
 
     // Server-side only
     float strength = 1.0f;
-    float energy_per_tick = 0.05f;
-    float heat_per_tick = 0.02f;
+    float energy_use_per_second = 1.0f;
+    float heat_per_second = 0.02f;
 
     // Beam runtime state
     float cooldown = 0.0f;

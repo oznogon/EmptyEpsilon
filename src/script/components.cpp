@@ -495,8 +495,8 @@ void initComponentScriptBindings()
     BIND_MEMBER(TractorBeamSys, range);
     BIND_MEMBER(TractorBeamSys, cycle_time);
     BIND_MEMBER(TractorBeamSys, strength);
-    BIND_MEMBER(TractorBeamSys, energy_per_tick);
-    BIND_MEMBER(TractorBeamSys, heat_per_tick);
+    BIND_MEMBER(TractorBeamSys, energy_use_per_second);
+    BIND_MEMBER(TractorBeamSys, heat_per_second);
     BIND_MEMBER(TractorBeamSys, arc_color);
     BIND_MEMBER(TractorBeamSys, arc_color_fire);
     /*
