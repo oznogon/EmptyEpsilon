@@ -216,10 +216,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     // Tractor toggle button.
     tractor_toggle = new GuiToggleButton(tractor_sidebar, "TRACTOR_TOGGLE", tr("scienceButton", "Activate"), [this](bool value){
-        auto tractor_system = my_spaceship.getComponent<TractorBeamSys>();
-
-        if (tractor_system) {
-            tractor_system->active = value;
+        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
+        {
+            my_player_info->commandSetTractor(value);
             LOG(WARNING) << "Tractor beam " << tractor_system->active;
         };
     });
@@ -228,16 +227,16 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     tractor_mode = new GuiSelector(tractor_sidebar, "TRACTOR_MODE", [this](int index, string value)
     {
-        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
+        if (my_spaceship.hasComponent<TractorBeamSys>())
         {
             if (value == "hold") {
-                tractor_system->mode = TractorMode::Hold;
+                my_player_info->commandSetTractorMode(TractorMode::Hold);
             }
             else if (value == "pull") {
-                tractor_system->mode = TractorMode::Pull;
+                my_player_info->commandSetTractorMode(TractorMode::Pull);
             }
             else if (value == "push") {
-                tractor_system->mode = TractorMode::Push;
+                my_player_info->commandSetTractorMode(TractorMode::Push);
             }
             else
             {
@@ -255,7 +254,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     {
         if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
         {
-            tractor_system->bearing = value;
+            my_player_info->commandSetTractorBearing(value);
             tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
             LOG(WARNING) << "Tractor bearing set to " << value << " (" << tractor_system->bearing << ")";
         }
@@ -269,7 +268,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     {
         if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
         {
-            tractor_system->arc = value;
+            my_player_info->commandSetTractorArc(value);
             tractor_arc_label->setText(tr("scienceButton", "Arc: {arc} deg").format({{"arc", string(tractor_system->arc, 1)}}));
             LOG(WARNING) << "Tractor arc set to " << value << " (" << tractor_system->arc << ")";
         }
@@ -283,7 +282,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     {
         if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
         {
-            tractor_system->range = value;
+            my_player_info->commandSetTractorRange(value);
             tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
             LOG(WARNING) << "Tractor range set to " << value << " (" << tractor_system->range << ")";
         }
@@ -292,6 +291,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     tractor_range_label = new GuiLabel(tractor_range, "TRACTOR_RANGE_LABEL", "Range: 1000", 30);
     tractor_range_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    // Update initial tractor values with known values.
     if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>()) {
         tractor_toggle->setValue(tractor_system->active);
         tractor_bearing->setValue(tractor_system->bearing);
@@ -652,22 +652,8 @@ void ScienceScreen::onUpdate()
 {
     if (my_spaceship)
     {
-        // Disable tractor activation control if it's not active and the system
-        // is in its cooldown, unpowered, or fully damaged.
         if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
         {
-          if (!tractor_system->active &&
-              (tractor_system->cooldown > 0.0f ||
-               tractor_system->health <= 0.0f ||
-               tractor_system->power_level <= 0.0f))
-            {
-                tractor_toggle->disable();
-            }
-            else
-            {
-                tractor_toggle->enable();
-            }
-
             // Enforce any changes to arc and range limits.
             if (tractor_arc->getRangeMax() != tractor_system->max_arc)
             {

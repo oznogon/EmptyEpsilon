@@ -107,9 +107,10 @@ static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
 
 static const uint16_t CMD_SET_TRACTOR = 0x002C;
-static const uint16_t CMD_SET_TRACTOR_BEARING = 0x002D;
-static const uint16_t CMD_SET_TRACTOR_ARC = 0x002E;
-static const uint16_t CMD_SET_TRACTOR_RANGE = 0x002F;
+static const uint16_t CMD_SET_TRACTOR_MODE = 0x002D;
+static const uint16_t CMD_SET_TRACTOR_BEARING = 0x002E;
+static const uint16_t CMD_SET_TRACTOR_ARC = 0x002F;
+static const uint16_t CMD_SET_TRACTOR_RANGE = 0x0030;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -591,6 +592,13 @@ void PlayerInfo::commandSetTractor(bool enabled)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_TRACTOR << enabled;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetTractorMode(TractorMode mode)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_TRACTOR_MODE << mode;
     sendClientCommand(packet);
 }
 
@@ -1099,8 +1107,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             bool active;
             packet >> active;
 
-            auto tractor = ship.getComponent<TractorBeamSys>();
-            if (tractor) {
+            if (auto tractor = ship.getComponent<TractorBeamSys>())
+            {
                 tractor->active = active;
 
                 if (active)
@@ -1114,13 +1122,24 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             }
         }
         break;
+    case CMD_SET_TRACTOR_MODE:
+        {
+            TractorMode mode;
+            packet >> mode;
+
+            if (auto tractor = ship.getComponent<TractorBeamSys>())
+            {
+                tractor->mode = mode;
+            }
+        }
+        break;
     case CMD_SET_TRACTOR_BEARING:
         {
             float f;
             packet >> f;
 
-            auto tractor = ship.getComponent<TractorBeamSys>();
-            if (tractor) {
+            if (auto tractor = ship.getComponent<TractorBeamSys>())
+            {
                 tractor->bearing = f;
             }
         }
@@ -1130,8 +1149,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float f;
             packet >> f;
 
-            auto tractor = ship.getComponent<TractorBeamSys>();
-            if (tractor) {
+            if (auto tractor = ship.getComponent<TractorBeamSys>())
+            {
                 tractor->arc = f;
             }
         }
@@ -1141,8 +1160,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float f;
             packet >> f;
 
-            auto tractor = ship.getComponent<TractorBeamSys>();
-            if (tractor) {
+            if (auto tractor = ship.getComponent<TractorBeamSys>())
+            {
                 tractor->range = f;
             }
         }

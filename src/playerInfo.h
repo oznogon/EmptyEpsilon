@@ -4,6 +4,7 @@
 #include "multiplayer.h"
 #include "components/player.h"
 #include "systems/shipsystemssystem.h"
+#include "systems/tractorbeam.h"
 #include "missileWeaponData.h"
 #include "crewPosition.h"
 
@@ -88,6 +89,7 @@ public:
     void commandCrewSetTargetPosition(sp::ecs::Entity crew, glm::ivec2 target);
 
     void commandSetTractor(bool enabled);
+    void commandSetTractorMode(TractorMode mode);
     void commandSetTractorBearing(float bearing);
     void commandSetTractorArc(float arc);
     void commandSetTractorRange(float range);
