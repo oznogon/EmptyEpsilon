@@ -349,8 +349,10 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     ADD_PAGE(tr("tweak-tab", "Tractor beam system"), TractorBeamSys);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Arc:"), TractorBeamSys, arc);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max arc:"), TractorBeamSys, max_arc);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Bearing:"), TractorBeamSys, bearing);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), TractorBeamSys, range);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max range:"), TractorBeamSys, max_range);
     ADD_LABEL(tr("tweak-text", "Tractor beam system"));
     ADD_SHIP_SYSTEM_TWEAK(TractorBeamSys);
 

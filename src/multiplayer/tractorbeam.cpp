@@ -20,8 +20,10 @@ BASIC_REPLICATION_IMPL(TractorBeamSysReplication, TractorBeamSys)
 
     BASIC_REPLICATION_FIELD(position);
     BASIC_REPLICATION_FIELD(arc);
+    BASIC_REPLICATION_FIELD(max_arc);
     BASIC_REPLICATION_FIELD(bearing);
     BASIC_REPLICATION_FIELD(range);
+    BASIC_REPLICATION_FIELD(max_range);
     BASIC_REPLICATION_FIELD(cycle_time);
     BASIC_REPLICATION_FIELD(strength);
     BASIC_REPLICATION_FIELD(energy_use_per_second);

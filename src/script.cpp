@@ -1012,8 +1012,7 @@ void luaCommandSetTractor(sp::ecs::Entity ship, bool active) {
         return;
     }
 
-    auto tractor = ship.getComponent<TractorBeamSys>();
-    if (tractor)
+    if (auto tractor = ship.getComponent<TractorBeamSys>())
     {
         if (active != tractor->active)
         {
@@ -1034,10 +1033,22 @@ void luaCommandSetTractorBearing(sp::ecs::Entity ship, float bearing) {
         return;
     }
 
-    auto tractor = ship.getComponent<TractorBeamSys>();
-    if (tractor)
+    if (auto tractor = ship.getComponent<TractorBeamSys>())
     {
         tractor->bearing = bearing;
+    }
+}
+
+void luaCommandSetTractorArc(sp::ecs::Entity ship, float arc) {
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetTractorArc(arc);
+        return;
+    }
+
+    if (auto tractor = ship.getComponent<TractorBeamSys>())
+    {
+        tractor->bearing = arc;
     }
 }
 

@@ -12,7 +12,6 @@ public:
         None = -1,
         Reactor = 0,
         BeamWeapons,
-        TractorBeam,
         MissileSystem,
         Maneuver,
         Impulse,
@@ -20,6 +19,7 @@ public:
         JumpDrive,
         FrontShield,
         RearShield,
+        TractorBeam,
         COUNT
     };
     static constexpr int COUNT = static_cast<int>(Type::COUNT);

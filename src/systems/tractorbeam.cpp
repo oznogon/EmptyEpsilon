@@ -12,6 +12,7 @@
 #include "components/coolant.h"
 #include "components/sfx.h"
 #include "systems/beamweapon.h"
+#include "systems/docking.h"
 #include "systems/collision.h"
 #include "ecs/query.h"
 #include "main.h"
@@ -49,7 +50,8 @@ void TractorBeamSystem::update(float delta)
             */
             auto position = transform.getPosition();
             auto rotation = transform.getRotation();
-            float drag_capability = delta * tractorsys.strength * 100.0f;
+            float drag_capability = (delta * tractorsys.strength * 100.0f) * tractorsys.getSystemEffectiveness();
+            float heat_generated = 0.0f;
 
             // Get a list of all collisonable entities possibly within range to
             // reduce to those we'll tractor.
@@ -58,88 +60,109 @@ void TractorBeamSystem::update(float delta)
                 // Don't match ourselves or we'll tractor ourselves to NaN.
                 if (entity_in_range == entity) continue;
 
-                auto target_transform = entity_in_range.getComponent<sp::Transform>();
+                auto target_size = 1.0f;
+                auto target_physics = entity_in_range.getComponent<sp::Physics>();
 
-                // Get the angle to the target.
-                auto diff = target_transform->getPosition() - (position + rotateVec2(glm::vec2(tractorsys.position.x, tractorsys.position.y), rotation));
-                float angle = vec2ToAngle(diff);
-                float angle_diff = angleDifference(tractorsys.bearing + rotation, angle);
-
-                LOG(WARNING) << "fabsf(angle_diff) < tractorsys.arc: " << (fabsf(angle_diff) < tractorsys.arc) << " tractorsys.cooldown: " << tractorsys.cooldown;
-                // If the entity is in the beam's arc and range, and if the
-                // beam has cooled down, calculate the distance between us and
-                // the entity.
-                if (fabsf(angle_diff) < tractorsys.arc / 2.0f)
+                if (target_physics)
                 {
-                    float distance = glm::length(diff);
+                    // Don't bother tractoring entities with static physics.
+                    if (target_physics->getType() == sp::Physics::Type::Static) continue;
 
-                    // If we or the entity have a physics body, factor its size
-                    // into the distance between us.
-                    if (auto physics = entity_in_range.getComponent<sp::Physics>())
-                    {
-                        distance -= physics->getSize().x;
-                    }
-                    if (auto my_physics = entity.getComponent<sp::Physics>())
-                    {
-                        distance -= my_physics->getSize().x;
-                    }
+                    // Get the size of the target entity.
+                    target_size = target_physics->getSize().x;
+                }
 
-                    // Narrow the group to entities that are also within
-                    // tractor range. These are the only entities that we'll
-                    // tractor.
-                    if (distance < tractorsys.range)
+                // If the target is too big to move, skip it.
+                LOG(WARNING) << "target_size * delta > drag_capability: " << (target_size * delta > drag_capability) << " target_size * delta: " << target_size * delta << " drag_capability: " << drag_capability;
+                if (target_size * delta > drag_capability) continue;
+
+                // Get the angle to the target, if it has a transform.
+                // If not, skip it.
+                if (auto target_transform = entity_in_range.getComponent<sp::Transform>())
+                {
+                    auto diff = target_transform->getPosition() - (position + rotateVec2(glm::vec2(tractorsys.position.x, tractorsys.position.y), rotation));
+                    float angle = vec2ToAngle(diff);
+                    float angle_diff = angleDifference(tractorsys.bearing + rotation, angle);
+
+                    LOG(WARNING) << "fabsf(angle_diff) < tractorsys.arc: " << (fabsf(angle_diff) < tractorsys.arc) << " tractorsys.cooldown: " << tractorsys.cooldown;
+                    // If the entity is in the beam's arc and range, and if the
+                    // beam has cooled down, calculate the distance between us and
+                    // the entity. If we have a reactor, also consume additional
+                    // energy per matching entity.
+                    if (fabsf(angle_diff) < tractorsys.arc / 2.0f && (!reactor || reactor->useEnergy(delta * tractorsys.energy_use_per_second)))
                     {
-                        LOG(WARNING) << "float distance: " << distance << " float angle: " << angle << " float angle_diff: " << angle_diff;
-                        // If we're an entity that uses coolant, generate heat per
-                        // tractored entity.
-                        if (entity.hasComponent<Coolant>())
+                        float distance = glm::length(diff);
+
+                        // If we or the entity have a physics body, factor its size
+                        // into the distance between us.
+                        if (target_physics)
                         {
-                            auto heat_per_tick = tractorsys.heat_per_second * delta;
-                            LOG(WARNING) << "heat_per_tick: " << heat_per_tick;
-                            tractorsys.addHeat(tractorsys.heat_per_second * delta);
+                            auto target_size = target_physics->getSize().x;
+                            distance -= target_size;
+                        }
+                        if (auto my_physics = entity.getComponent<sp::Physics>())
+                        {
+                            distance -= my_physics->getSize().x;
                         }
 
-                        // Determine the destination point for the tractored entity
-                        // based on the tractor mode.
-                        glm::vec2 destination;
-                        auto target_position = target_transform->getPosition();
-
-                        switch (tractorsys.mode)
+                        // Narrow the group to entities that are also within
+                        // tractor range. These are the only entities that we'll
+                        // tractor.
+                        if (distance <= tractorsys.range)
                         {
-                            // Pull mode tractors entities toward us.
-                            case TractorMode::Pull:
-                                if (distance > tractorsys.range * 0.1f) destination = position;
-                                break;
-                            // Push mode tractors entities away from us.
-                            case TractorMode::Push:
-                                destination = position + glm::normalize(target_position - position) * tractorsys.range * 2.0f;
-                                break;
-                            // Hold mode tractors entities to a point halfway
-                            // between us and the tractor's range limit.
-                            case TractorMode::Hold:
-                                destination = position + glm::normalize(target_position - position) * (tractorsys.range / 2.0f);
-                                break;
-                            default:
-                                break;
+                            LOG(WARNING) << "float distance: " << distance << " float angle: " << angle << " float angle_diff: " << angle_diff;
+                            
+                            // If we're an entity that uses coolant, generate heat per
+                            // tractored entity.
+                            if (entity.hasComponent<Coolant>()) heat_generated += tractorsys.heat_per_second;
+
+                            // Determine the destination point for the tractored entity
+                            // based on the tractor mode.
+                            glm::vec2 destination;
+                            auto target_position = target_transform->getPosition();
+                            switch (tractorsys.mode)
+                            {
+                                // Pull mode tractors entities toward us.
+                                case TractorMode::Pull:
+                                    destination = position;
+                                    break;
+                                // Push mode tractors entities away from us.
+                                case TractorMode::Push:
+                                    destination = position + glm::normalize(target_position - position) * tractorsys.range * 2.0f;
+                                    break;
+                                // Hold mode tractors entities to a point halfway
+                                // between us and the tractor's range limit.
+                                case TractorMode::Hold:
+                                    destination = position + glm::normalize(target_position - position) * (tractorsys.range / 2.0f);
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            // Define the vector and distance of tractor influence.
+                            auto drag_diff = target_position - destination;
+                            float drag_distance = std::min(distance, drag_capability);
+
+                            if (distance <= 1.1f * drag_distance &&
+                                entity.hasComponent<DockingBay>() &&
+                                entity_in_range.hasComponent<DockingPort>() &&
+                                tractorsys.mode == TractorMode::Pull)
+                            {
+                                // If we've tractored a dockable entity into
+                                // contact with us, force it to dock with us.
+                                DockingSystem::requestDock(entity_in_range, entity);
+                            }
+                            else
+                            {
+                                // Move the tractored object to the destination.
+                                target_transform->setPosition(target_position - (drag_distance * glm::normalize(drag_diff)));
+                            }
                         }
-
-                        // Define the vector and distance of tractor influence.
-                        auto drag_diff = target_position - destination;
-                        float drag_distance = std::min(distance, drag_capability);
-
-                        /*
-                        if (target_distance < dragCapability && target_ship && mode == TBM_Pull)
-                        {
-                            // if tractor beam is dragging a ship into parent, force docking
-                            target_ship->requestDock(parent);
-                        }
-                        */
-
-                        // Move the tractored object to the destination.
-                        target_transform->setPosition(target_position - (drag_distance * glm::normalize(drag_diff)));
                     }
                 }
             }
+
+            tractorsys.addHeat(delta * heat_generated);
             /*
             auto hit_location = target_transform->getPosition();
             auto r = 100.0f;
@@ -176,7 +199,6 @@ void TractorBeamSystem::update(float delta)
         {
             // The tractor is off. Tick its cooldown toward 0.
             if (tractorsys.cooldown > 0.0f) tractorsys.cooldown -= delta;
-            LOG(WARNING) << "Tractor is off. tractorsys.cooldown: " << tractorsys.cooldown;
         }
         /*
         for(auto [entity, be, transform] : sp::ecs::Query<TractorBeamEffect, sp::Transform>()) {

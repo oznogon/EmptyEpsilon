@@ -491,8 +491,10 @@ void initComponentScriptBindings()
     BIND_SHIP_SYSTEM(TractorBeamSys);
     BIND_MEMBER(TractorBeamSys, active);
     BIND_MEMBER(TractorBeamSys, arc);
+    BIND_MEMBER(TractorBeamSys, max_arc);
     BIND_MEMBER(TractorBeamSys, bearing);
     BIND_MEMBER(TractorBeamSys, range);
+    BIND_MEMBER(TractorBeamSys, max_range);
     BIND_MEMBER(TractorBeamSys, cycle_time);
     BIND_MEMBER(TractorBeamSys, strength);
     BIND_MEMBER(TractorBeamSys, energy_use_per_second);

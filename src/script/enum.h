@@ -190,6 +190,7 @@ template<> struct Convert<ShipSystem::Type> {
         case ShipSystem::Type::JumpDrive: lua_pushstring(L, "jumpdrive"); break;
         case ShipSystem::Type::FrontShield: lua_pushstring(L, "frontshield"); break;
         case ShipSystem::Type::RearShield: lua_pushstring(L, "rearshield"); break;
+        case ShipSystem::Type::TractorBeam: lua_pushstring(L, "tractorbeam"); break;
         default: lua_pushstring(L, "none"); break;
         }
         return 1;
@@ -216,6 +217,8 @@ template<> struct Convert<ShipSystem::Type> {
             return ShipSystem::Type::FrontShield;
         else if (str == "rearshield")
             return ShipSystem::Type::RearShield;
+        else if (str == "tractorbeam")
+            return ShipSystem::Type::TractorBeam;
         luaL_error(L, "Unknown ShipSystem::Type: %s", str.c_str());
         return ShipSystem::Type::None;
     }
