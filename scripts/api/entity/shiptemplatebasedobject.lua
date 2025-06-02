@@ -44,6 +44,7 @@ function Entity:setTemplate(template_name)
             comp.shields.front_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
             comp.shields.rear_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
         end
+        if comp.tractor_beam then comp.tractor_beam.power_factor = 1.0; reactor_power_factor = reactor_power_factor - 1.0 end
         comp.reactor.power_factor = reactor_power_factor
     end
     if comp.internal_rooms and template.__repair_crew_count and template.__repair_crew_count > 0 then
@@ -67,6 +68,7 @@ function Entity:setTemplate(template_name)
             comp.shields.front_auto_repair_per_second = 0.005
             comp.shields.rear_auto_repair_per_second = 0.005
         end
+        if comp.tractor_beam then comp.tractor_beam.auto_repair_per_second = 0.005 end
         if comp.reactor then comp.reactor.auto_repair_per_second = 0.005 end
     end
     return self

@@ -245,6 +245,7 @@ function __getSystemByName(entity, system_name)
     if system_name == "jumpdrive" then return entity.components.jump_drive end
     if system_name == "frontshield" then return entity.components.shields end
     if system_name == "rearshield" and #entity.components.shields > 1 then return entity.components.shields end
+    if system_name == "tractorbeam" then return entity.components.tractor_beam end
     return nil
 end
 
@@ -689,14 +690,16 @@ function Entity:setBeamWeaponDamageType(index, damage_type)
     return self
 end
 
-function Entity:setTractorBeam(arc, bearing, range, cycle_time, strength)
+function Entity:setTractorBeam(arc, max_arc, bearing, range, max_range, cycle_time, strength)
     if self.components.tractor_beam == nil then self.components.tractor_beam = {} end
 
-    self.components.tractor_beam.arc = arc
-    self.components.tractor_beam.bearing = bearing
-    self.components.tractor_beam.range = range
-    self.components.tractor_beam.cycle_time = cycle_time
-    self.components.tractor_beam.strength = strength
+    self.components.tractor_beam.arc = arc;
+    self.components.tractor_beam.max_arc = max_arc;
+    self.components.tractor_beam.bearing = bearing;
+    self.components.tractor_beam.range = range;
+    self.components.tractor_beam.max_range = max_range;
+    self.components.tractor_beam.cycle_time = cycle_time;
+    self.components.tractor_beam.strength = strength;
 
     return self
 end

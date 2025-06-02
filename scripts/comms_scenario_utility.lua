@@ -657,6 +657,7 @@ function initializePrettySystems()
 		["jumpdrive"] = _("stationServices-comms","jump drive"),
 		["frontshield"] = _("stationServices-comms","front shield"),
 		["rearshield"] = _("stationServices-comms","rear shield"),
+		["tractorbeam"] = _("stationServices-comms","tractor beam"),
 	}
 	pretty_short_system = {
 		["reactor"] = _("stationServices-comms","reactor"),
@@ -668,10 +669,11 @@ function initializePrettySystems()
 		["jumpdrive"] = _("stationServices-comms","jump"),
 		["frontshield"] = _("stationServices-comms","front shield"),
 		["rearshield"] = _("stationServices-comms","rear shield"),
+		["tractorbeam"] = _("stationServices-comms","tractor beam"),
 	}
 end
 function initializeSystemList()
-	system_list = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
+	system_list = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield","tractorbeam"}
 end
 function initializeUpgradeDowngrade()
 	upgrade_price = 3
@@ -965,6 +967,7 @@ function stationStatusReport()
 				["jumpdrive"] =		_("situationReport-comms","jump drive"),
 				["frontshield"] =	_("situationReport-comms","front shield"),
 				["rearshield"] =	_("situationReport-comms","rear shield"),
+				["tractorbeam"] =	_("situationReport-comms","tractor beam"),
 			}
 			local major_repairs = _("situationReport-comms","Repair these major systems:")
 			for i,system in ipairs(system_list) do
