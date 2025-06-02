@@ -524,7 +524,7 @@ rel="stylesheet"
         stream.write('<li><a name="enum_EMissileSizes">EMissileSizes</a>: "small", "medium", "large" (<code>missileWeaponData.hpp</code>)</li>\n')
         stream.write('<li><a name="enum_EMissileWeapons">EMissileWeapons</a>: "Homing", "Nuke", "Mine", "EMP", "HVLI" (<code>missileWeaponData.hpp</code>)</li>\n')
         stream.write('<li><a name="enum_EScannedState">EScannedState</a>: "notscanned", "friendorfoeidentified", "simplescan", "fullscan" (<code>spaceObject.h</code>)</li>\n')
-        stream.write('<li><a name="enum_ESystem">ESystem</a>: "reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"</li>\n')
+        stream.write('<li><a name="enum_ESystem">ESystem</a>: "reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield", "tractorbeam"</li>\n')
         stream.write('<li><a name="enum_Factions">Factions</a>: "Independent", "Kraylor", "Arlenians", "Exuari", "Ghosts", "Ktlitans", "TSN", "USN", "CUF" (<code>factionInfo.lua</code>)</li>\n')
         stream.write('<li><a name="enum_ScriptSimpleCallback">ScriptSimpleCallback</a> / function: Note that the callback function must reference something global, otherwise you get an error like "??[convert&lt;ScriptSimpleCallback&gt;::param] Upvalue 1 of function is not a table...". Use e.g. `math.abs(0) -- Provides global context for SeriousProton` to do nothing.</li>\n')
         stream.write("</ul>\n")
