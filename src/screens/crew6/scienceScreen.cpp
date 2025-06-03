@@ -288,11 +288,12 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         }
     });
     tractor_range->setSize(GuiElement::GuiSizeMax, 50);
-    tractor_range_label = new GuiLabel(tractor_range, "TRACTOR_RANGE_LABEL", "Range: 1000", 30);
+    tractor_range_label = new GuiLabel(tractor_range, "TRACTOR_RANGE_LABEL", "Range: 1000.0", 30);
     tractor_range_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Update initial tractor values with known values.
-    if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>()) {
+    if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
+    {
         tractor_toggle->setValue(tractor_system->active);
         tractor_bearing->setValue(tractor_system->bearing);
         tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
@@ -314,6 +315,22 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         else tractor_mode->setSelectionIndex(2);
     }
 
+    tractor_dial = new GuiRotationDial(science_radar, "TRACTOR_DIAL", 0.0f, 360.0f, 0.0f, [this](float value)
+    {
+        auto tractor_system = my_spaceship.getComponent<TractorBeamSys>();
+        auto my_transform = my_spaceship.getComponent<sp::Transform>();
+
+        if (tractor_system && my_transform)
+        {
+            LOG(WARNING) << "tractor_dial value: " << value;
+            float new_value = value - my_transform->getRotation() + science_radar->getViewRotation() - 90.0f;
+            while (new_value < 0.0f) new_value += 360.0f;
+            while (new_value > 360.0f) new_value -= 360.0f;
+            my_player_info->commandSetTractorBearing(new_value);
+            LOG(WARNING) << "tractor_bearing value in dial set: " << tractor_system->bearing;
+        }
+    });
+    tractor_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     // END tractor_sidebar
 
     // Prep and hide the database view.
@@ -321,18 +338,21 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Probe view button
-    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"), [this](bool value){
+    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"), [this](bool value)
+    {
         auto lrr = my_spaceship.getComponent<LongRangeRadar>();
 
         if (value && lrr && lrr->radar_view_linked_entity)
         {
-            auto transform = lrr->radar_view_linked_entity.getComponent<sp::Transform>();
-            if (transform) {
+            if (auto transform = lrr->radar_view_linked_entity.getComponent<sp::Transform>())
+            {
                 science_radar->hide();
                 probe_radar->show();
                 probe_radar->setViewPosition(transform->getPosition())->show();
             }
-        }else{
+        }
+        else
+        {
             probe_view_button->setValue(false);
             science_radar->show();
             probe_radar->hide();
@@ -654,6 +674,9 @@ void ScienceScreen::onUpdate()
     {
         if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
         {
+            tractor_bearing->setValue(tractor_system->bearing);
+            tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
+
             // Enforce any changes to arc and range limits.
             if (tractor_arc->getRangeMax() != tractor_system->max_arc)
             {
@@ -679,6 +702,8 @@ void ScienceScreen::onUpdate()
                 tractor_mode->setSelectionIndex(1);
             }
             else tractor_mode->setSelectionIndex(2);
+
+            // nope nope nope tractor_dial->setRange(science_radar->getViewRotation(), science_radar->getViewRotation() + 360.0f);
         }
 
         // Initiate a scan on scannable objects.

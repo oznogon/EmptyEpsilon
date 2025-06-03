@@ -17,6 +17,7 @@ class GuiSelector;
 class GuiSlider;
 class GuiLabel;
 class GuiImage;
+class GuiRotationDial;
 class DatabaseViewComponent;
 class GuiCustomShipFunctions;
 class RawScannerDataRadarOverlay;
@@ -67,6 +68,7 @@ public:
     GuiLabel* tractor_range_label;
     GuiSlider* tractor_arc;
     GuiLabel* tractor_arc_label;
+    GuiRotationDial* tractor_dial;
 
     GuiToggleButton* probe_view_button;
     sp::ecs::Entity observation_point;

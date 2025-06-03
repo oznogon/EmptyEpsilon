@@ -85,6 +85,16 @@ GuiRotationDial* GuiRotationDial::setValue(float value)
     return this;
 }
 
+GuiRotationDial* GuiRotationDial::setRange(float min_value, float max_value)
+{
+    while (min_value < 0.0f) min_value += 360.0f;
+    while (max_value > 360.0f) max_value -= 360.0f;
+
+    this->min_value = min_value;
+    this->max_value = max_value;
+    return this;
+}
+
 float GuiRotationDial::getValue() const
 {
     return value;

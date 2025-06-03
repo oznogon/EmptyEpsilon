@@ -274,9 +274,9 @@ function ShipTemplate:setBeamWeaponHeatPerFire(index, amount)
 end
 
 
-function ShipTemplate:setTractorBeam(arc, direction, range, cycle_time, strength)
+function ShipTemplate:setTractorBeam(arc, max_arc, direction, range, max_range, cycle_time, strength)
     if self.tractor_beam == nil then self.tractor_beam = {} end
-    self.tractor_beam = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, strength=strength}
+    self.tractor_beam = {arc=arc, max_arc=max_arc, direction=direction, range=range, max_range=max_range, cycle_time=cycle_time, strength=strength}
     return self
 end
 

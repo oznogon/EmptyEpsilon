@@ -348,11 +348,16 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), BeamWeaponSys, mounts, turret_rotation_rate);
 
     ADD_PAGE(tr("tweak-tab", "Tractor beam system"), TractorBeamSys);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Active:"), TractorBeamSys, active);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Arc:"), TractorBeamSys, arc);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max arc:"), TractorBeamSys, max_arc);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Bearing:"), TractorBeamSys, bearing);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), TractorBeamSys, range);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max range:"), TractorBeamSys, max_range);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), TractorBeamSys, cycle_time);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Strength:"), TractorBeamSys, strength);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy use per sec.:"), TractorBeamSys, energy_use_per_second);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat per sec.:"), TractorBeamSys, heat_per_second);
     ADD_LABEL(tr("tweak-text", "Tractor beam system"));
     ADD_SHIP_SYSTEM_TWEAK(TractorBeamSys);
 
