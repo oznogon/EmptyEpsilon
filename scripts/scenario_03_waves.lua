@@ -39,7 +39,7 @@ function init()
     enemyList = {}
     friendlyList = {}
 
-    PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setTractorBeam(18.0, 180.0, 0.0, 1000.0, 3000.0, 0.6, 1.0)
+    PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 
     -- Give the mission to the (first) player ship
     local text = _("goal-shipLog", [[At least one friendly base must survive.
