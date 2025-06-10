@@ -225,6 +225,20 @@ int main(int argc, char** argv)
         new ShipSelectionScreen();
     }
 
+    SDL_DisplayMode currentMode;
+    // Get the current display mode for the primary display index
+    int success = SDL_GetCurrentDisplayMode(0, &currentMode);
+
+    if (success != 0)
+    {
+        // Handle error if display mode retrieval fails
+        LOG(ERROR) << "Could not get display mode for display 0: " << SDL_GetError();
+    } else {
+        // Set font texture size to 32px or 3% of the vertical display
+        // resolution, whichever is greater.
+        sp::RenderTarget::setDefaultFontPixelSize(std::max(32, (int)(float(currentMode.h) * 0.03f)));
+    }
+
     engine->runMainLoop();
 
     // Set FSAA and fullscreen defaults from windowManager.
