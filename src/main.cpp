@@ -167,6 +167,20 @@ int main(int argc, char** argv)
     }
 
     sp::RenderTarget::setDefaultFont(main_font);
+    sp::RenderTarget::setDefaultFontPixelSize(32);
+
+    SDL_DisplayMode currentMode;
+    // Get the current display mode for the primary display index
+    int success = SDL_GetCurrentDisplayMode(0, &currentMode);
+
+    if (success != 0)
+    {
+        // Handle error if display mode retrieval fails
+        LOG(ERROR) << "Could not get display mode for display 0: " << SDL_GetError();
+    } else if (currentMode.h > 1080) {
+        LOG(INFO) << "High-res display detected. Using higher-resolution font glyphs";
+        sp::RenderTarget::setDefaultFontPixelSize(64);
+    }
 
     // On Android, this requires the 'record audio' permissions,
     // which is always a scary thing for users.
@@ -223,20 +237,6 @@ int main(int argc, char** argv)
         // Load the scenario and open the ship selection screen.
         gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"), loadScenarioSettingsFromPrefs());
         new ShipSelectionScreen();
-    }
-
-    SDL_DisplayMode currentMode;
-    // Get the current display mode for the primary display index
-    int success = SDL_GetCurrentDisplayMode(0, &currentMode);
-
-    if (success != 0)
-    {
-        // Handle error if display mode retrieval fails
-        LOG(ERROR) << "Could not get display mode for display 0: " << SDL_GetError();
-    } else {
-        // Set font texture size to 32px or 3% of the vertical display
-        // resolution, whichever is greater.
-        sp::RenderTarget::setDefaultFontPixelSize(std::max(32, (int)(float(currentMode.h) * 0.03f)));
     }
 
     engine->runMainLoop();
