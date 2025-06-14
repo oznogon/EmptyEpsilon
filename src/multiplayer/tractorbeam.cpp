@@ -18,6 +18,7 @@ BASIC_REPLICATION_IMPL(TractorBeamSysReplication, TractorBeamSys)
     BASIC_REPLICATION_FIELD(auto_repair_per_second);
     BASIC_REPLICATION_FIELD(damage_per_second_on_overheat);
 
+    BASIC_REPLICATION_FIELD(mode);
     BASIC_REPLICATION_FIELD(position);
     BASIC_REPLICATION_FIELD(arc);
     BASIC_REPLICATION_FIELD(max_arc);

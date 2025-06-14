@@ -305,13 +305,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
 
         if (tractor_system->mode == TractorMode::Hold)
-        {
             tractor_mode->setSelectionIndex(0);
-        }
         else if (tractor_system->mode == TractorMode::Pull)
-        {
             tractor_mode->setSelectionIndex(1);
-        }
         else tractor_mode->setSelectionIndex(2);
     }
 
