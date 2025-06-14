@@ -1,14 +1,14 @@
 --[[                  Tug
-Tugs are small ships with a powerful reactor and tractor beam, and few or no weapons.
-They rely on carrier ships or space stations, and are invaluable for recovering or salvaging disabled, abandoned, or derelict ships.
-Tugs deployed into hazardous areas might have shields, and those tasked with salvaging partially operational ships might have shield-draining beams or EMP launchers. 
+Tugs are small ships that each have a powerful reactor and tractor beam, and few or no weapons.
+Without FTL drives they rely on carrier ships or space stations. Their ability to tow and move objects make them invaluable for recovering cargo and abandoned or disabled ships, clearing paths through asteroid fields, or disrupting minefields.
+Tugs deployed into hazardous areas might have shields, and those tasked with salvaging partially operational ships might have shield-draining beams or EMP launchers.
 ----------------------------------------------------------]]
 
-local template = ShipTemplate():setName("Hylas"):setLocaleName(_("ship", "Hylas")):setClass(_("class", "Tug")):setModel("battleship_destroyer_1_upgraded")
-template:setDescription(_([[The Hylas is the smallest functional model of tug. Its powerful reactor is almost entirely dedicated to its tractor beam, leaving only minimal impulse engines to slowly move it and the objects it tows.]]))
+local template = ShipTemplate():setName("Hylas"):setLocaleName(_("ship", "Hylas")):setClass(_("class", "Tug")):setModel("space_tug")
 template:setRadarTrace("tug.png")
-template:setHull(40)
-template:setSpeed(30, 5, 8)
+template:setHull(50)
+template:setShields(20)
+template:setSpeed(100, 10, 15)
 --[[                   arc, max_arc, bearing, range, max_range, cycle_time, strength]]
 template:setTractorBeam(18,     180,       0,  3000,      5000,        6.0, 10.0)
 
