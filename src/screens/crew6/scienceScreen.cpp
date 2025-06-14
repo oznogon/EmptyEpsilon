@@ -676,6 +676,7 @@ void ScienceScreen::onUpdate()
         {
             tractor_bearing->setValue(tractor_system->bearing);
             tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
+            tractor_dial->setValue(tractor_system->bearing);
 
             // Enforce any changes to arc and range limits.
             if (tractor_arc->getRangeMax() != tractor_system->max_arc)
@@ -694,16 +695,10 @@ void ScienceScreen::onUpdate()
 
             // Synchronize tractor mode.
             if (tractor_system->mode == TractorMode::Hold)
-            {
                 tractor_mode->setSelectionIndex(0);
-            }
             else if (tractor_system->mode == TractorMode::Pull)
-            {
                 tractor_mode->setSelectionIndex(1);
-            }
             else tractor_mode->setSelectionIndex(2);
-
-            // nope nope nope tractor_dial->setRange(science_radar->getViewRotation(), science_radar->getViewRotation() + 360.0f);
         }
 
         // Initiate a scan on scannable objects.

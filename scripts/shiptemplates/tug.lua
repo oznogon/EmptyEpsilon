@@ -8,8 +8,9 @@ local template = ShipTemplate():setName("Hylas"):setLocaleName(_("ship", "Hylas"
 template:setDescription(_([[The Hylas is the smallest functional model of tug. Its powerful reactor is almost entirely dedicated to its tractor beam, leaving only minimal impulse engines to slowly move it and the objects it tows.]]))
 template:setRadarTrace("tug.png")
 template:setHull(40)
-template:setSpeed(10, 2.5, 4)
-template:setTractorBeam(18, 180, 0, 3000, 5000, 6.0, 1.0)
+template:setSpeed(30, 5, 8)
+--[[                   arc, max_arc, bearing, range, max_range, cycle_time, strength]]
+template:setTractorBeam(18,     180,       0,  3000,      5000,        6.0, 10.0)
 
 local variation = template:copy("Hylas"):setName("Heracles"):setLocaleName(_("playerShip", "Heracles")):setType("playership")
 variation:setDescription(_([[The Heracles tug model is a Hylas suited for carrier use in deep-space operations. Improvements include a stronger hull, minimal shield system, full sensor suite, and a shield-disrupting beam for use on abandoned hostile or unknown ships.]]))
