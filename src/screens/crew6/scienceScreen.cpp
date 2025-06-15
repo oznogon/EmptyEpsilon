@@ -320,12 +320,11 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
         if (tractor_system && my_transform)
         {
-            LOG(WARNING) << "tractor_dial value: " << value;
             float new_value = value - my_transform->getRotation() + science_radar->getViewRotation() - 90.0f;
             while (new_value < 0.0f) new_value += 360.0f;
             while (new_value > 360.0f) new_value -= 360.0f;
+
             my_player_info->commandSetTractorBearing(new_value);
-            LOG(WARNING) << "tractor_bearing value in dial set: " << tractor_system->bearing;
         }
     });
     tractor_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
