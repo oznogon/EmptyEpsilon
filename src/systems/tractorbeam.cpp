@@ -145,7 +145,7 @@ void TractorBeamSystem::update(float delta)
                                 default:
                                     break;
                             }
- 
+
                             // Define the vector and distance of tractor influence.
                             auto drag_diff = target_position - destination;
                             float drag_distance = std::min(distance, drag_capability);

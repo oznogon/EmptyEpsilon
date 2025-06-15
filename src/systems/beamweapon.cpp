@@ -181,7 +181,7 @@ void BeamWeaponSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Bea
 
     glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), be.lifetime, be.lifetime, be.lifetime, 1.f);
     glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, false, glm::value_ptr(model_matrix));
-    
+
     gl::ScopedVertexAttribArray positions(beamShader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(beamShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
@@ -263,7 +263,6 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
         // If the beam is cooling down, flash and fade the arc color.
         glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, mount.cooldown), 0, mount.cycle_time, mount.arc_color, mount.arc_color_fire);
 
-        
         // Initialize variables from the beam's data.
         float beam_direction = mount.direction;
         float beam_arc = mount.arc;
@@ -274,7 +273,6 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
         auto arc_center = beam_offset + screen_position;
 
         drawArc(renderer, arc_center, rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
-    
 
         // If the beam is turreted, draw the turret's arc. Otherwise, exit.
         if (mount.turret_arc == 0.0f)
@@ -315,7 +313,7 @@ void drawArc(sp::RenderTarget& renderer, glm::vec2 arc_center, float angle0, flo
     //Arc points
     std::vector<ArcPoint> arc_points;
     arc_points.reserve(curve_point_count + 1);
-    
+
     for (size_t i = 0; i < curve_point_count; i++)
     {
         auto angle = vec2FromAngle(angle0 + i * beam_arc / curve_point_count) * beam_range;
@@ -345,7 +343,7 @@ void drawArc(sp::RenderTarget& renderer, glm::vec2 arc_center, float angle0, flo
         // We use the left- and right-most edges as lines, going inwards, parallel to the center.
         const auto left_edge = vec2FromAngle(angle0) * beam_range;
         const auto right_edge = vec2FromAngle(angle0 + beam_arc) * beam_range;
-    
+
         // Compute the half point, always going clockwise from the left edge.
         // This makes sure the algorithm never takes the short road.
         auto halfway_angle = vec2FromAngle(angle0 + beam_arc / 2.f) * beam_range;
