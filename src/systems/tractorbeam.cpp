@@ -89,10 +89,7 @@ void TractorBeamSystem::update(float delta)
                         // If we or the entity have a physics body, factor its size
                         // into the distance between us.
                         if (target_physics)
-                        {
-                            auto target_size = target_physics->getSize().x;
                             distance -= target_size;
-                        }
 
                         if (auto my_physics = entity.getComponent<sp::Physics>())
                             distance -= my_physics->getSize().x;
@@ -102,18 +99,19 @@ void TractorBeamSystem::update(float delta)
                         // tractor.
                         if (distance <= tractorsys.range)
                         {
-                            
                             // If we're an entity that uses coolant, generate heat per
                             // tractored entity.
                             if (entity.hasComponent<Coolant>()) heat_generated += tractorsys.heat_per_second;
 
                             // Determine the destination point for the tractored entity
                             // based on the tractor mode.
-                            glm::vec2 destination;
+                            glm::vec2 destination = position;
                             auto target_position = target_transform->getPosition();
-                            auto tractor_heading = tractorsys.bearing + rotation + 90.0f;
+                            auto tractor_heading = tractorsys.bearing + rotation;
                             while (tractor_heading > 360.0f) tractor_heading -= 360.0f;
                             while (tractor_heading < 0.0f) tractor_heading += 360.0f;
+                            auto tractor_vector = vec2FromAngle(tractor_heading);
+                            auto destination_coordinates = position + tractor_vector * (tractorsys.range * 0.5f);
 
                             switch (tractorsys.mode)
                             {
@@ -129,23 +127,25 @@ void TractorBeamSystem::update(float delta)
                                     destination = position + glm::normalize(target_position - position) * tractorsys.range * 1.2f;
                                     break;
                                 }
-                                // Hold mode tractors entities to a point halfway
-                                // between us and the tractor's range limit.
+                                // Hold mode tractors entities to a point
+                                // halfway between us and the tractor's range,
+                                // without changing its relative angle to us.
                                 case TractorMode::Hold:
                                 {
-                                    destination = position + glm::normalize(target_position - position) * (tractorsys.range / 2.0f);
+                                    destination = position + glm::normalize(target_position - position) * (tractorsys.range * 0.5f);
                                     break;
                                 }
-                                /* TODO: Reposition mode to a specific point.
+                                // Reposition mode tractors all entities in the
+                                // arc to its center point.
                                 case TractorMode::Reposition:
                                 {
+                                    destination = destination_coordinates;
                                     break;
                                 }
-                                */
                                 default:
                                     break;
                             }
-
+ 
                             // Define the vector and distance of tractor influence.
                             auto drag_diff = target_position - destination;
                             float drag_distance = std::min(distance, drag_capability);
@@ -226,7 +226,7 @@ void TractorBeamSystem::update(float delta)
 
 void TractorBeamSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, TractorBeamEffect& be)
 {
-        /* TODO: Beam 3D drawing effects. */
+    /* TODO: Beam 3D drawing effects. */
 }
 
 void TractorBeamSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, TractorBeamSys& tractor_system)

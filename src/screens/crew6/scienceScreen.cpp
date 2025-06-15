@@ -242,12 +242,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
                 my_player_info->commandSetTractorMode(TractorMode::Pull);
             else if (value == "push")
                 my_player_info->commandSetTractorMode(TractorMode::Push);
+            else if (value == "reposition")
+                my_player_info->commandSetTractorMode(TractorMode::Reposition);
             else
                 LOG(WARNING) << "Tractor mode selector is bad: " << value;
         }
     });
 
-    tractor_mode->setOptions({tr("tractorMode", "Hold"), tr("tractorMode", "Pull"), tr("tractorMode", "Push")}, {"hold", "pull", "push"});
+    tractor_mode->setOptions({tr("tractorMode", "Hold"), tr("tractorMode", "Pull"), tr("tractorMode", "Push"), tr("tractorMode", "Reposition")}, {"hold", "pull", "push", "reposition"});
     tractor_mode->setSelectionIndex(0);
     tractor_mode->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
 
@@ -258,7 +260,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         {
             my_player_info->commandSetTractorBearing(value);
             tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
-            LOG(WARNING) << "Tractor bearing set to " << value << " (" << tractor_system->bearing << ")";
         }
     });
     tractor_bearing->setSize(GuiElement::GuiSizeMax, 50);
@@ -305,12 +306,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         tractor_range->setRange(0.0f, tractor_system->max_range);
         tractor_range->setValue(tractor_system->range);
         tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
-
-        if (tractor_system->mode == TractorMode::Hold)
-            tractor_mode->setSelectionIndex(0);
-        else if (tractor_system->mode == TractorMode::Pull)
-            tractor_mode->setSelectionIndex(1);
-        else tractor_mode->setSelectionIndex(2);
     }
 
     tractor_dial = new GuiRotationDial(science_radar, "TRACTOR_DIAL", 0.0f, 360.0f, 0.0f, [this](float value)
@@ -705,7 +700,9 @@ void ScienceScreen::onUpdate()
                 tractor_mode->setSelectionIndex(0);
             else if (tractor_system->mode == TractorMode::Pull)
                 tractor_mode->setSelectionIndex(1);
-            else tractor_mode->setSelectionIndex(2);
+            else if (tractor_system->mode == TractorMode::Push)
+                tractor_mode->setSelectionIndex(2);
+            else tractor_mode->setSelectionIndex(3);
         }
 
         // Initiate a scan on scannable objects.

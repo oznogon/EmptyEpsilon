@@ -10,7 +10,8 @@ enum class TractorMode
 {
     Hold,
     Pull,
-    Push
+    Push,
+    Reposition
 };
 
 class TractorBeamSys : public ShipSystem {
@@ -24,6 +25,7 @@ public:
     float range = 1000.0f;
     float max_range = 3000.0f;
     float cycle_time = 6.0f;
+    glm::vec2 tractor_target_coordinates{0.0f, 0.0f};
     glm::u8vec4 arc_color{0, 255, 255, 128};
     glm::u8vec4 arc_color_fire{255, 0, 255, 128};
 
