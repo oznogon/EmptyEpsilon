@@ -89,31 +89,38 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     sidebar_selector = new GuiSelector(radar_view, "", [this](int index, string value)
     {
-        if (value == "scan") {
-            info_sidebar->setVisible(true);
-            custom_function_sidebar->setVisible(false);
-            tractor_sidebar->setVisible(false);
+        if (value == "scan")
+        {
+            info_sidebar->show();
+            custom_function_sidebar->hide();
+            tractor_sidebar->hide();
+            tractor_dial->hide();
         }
-        else if (value == "func") {
-            info_sidebar->setVisible(false);
+        else if (value == "func")
+        {
+            info_sidebar->hide();
             custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
-            tractor_sidebar->setVisible(false);
+            tractor_sidebar->hide();
+            tractor_dial->hide();
         }
-        else if (value == "trac") {
-            info_sidebar->setVisible(false);
-            custom_function_sidebar->setVisible(false);
+        else if (value == "trac")
+        {
+            info_sidebar->hide();
+            custom_function_sidebar->hide();
             tractor_sidebar->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
+            tractor_dial->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
         }
         else
         {
             LOG(WARNING) << "Science sidebar selector is bad: " << value;
         }
     });
+
     sidebar_selector->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Functions")}, {"scan", "func"});
+
     if (my_spaceship.hasComponent<TractorBeamSys>())
-    {
         sidebar_selector->addEntry(tr("scienceTab", "Tractor"), "trac");
-    }
+
     sidebar_selector->setSelectionIndex(0);
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50);
 
@@ -229,19 +236,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     {
         if (my_spaceship.hasComponent<TractorBeamSys>())
         {
-            if (value == "hold") {
+            if (value == "hold")
                 my_player_info->commandSetTractorMode(TractorMode::Hold);
-            }
-            else if (value == "pull") {
+            else if (value == "pull")
                 my_player_info->commandSetTractorMode(TractorMode::Pull);
-            }
-            else if (value == "push") {
+            else if (value == "push")
                 my_player_info->commandSetTractorMode(TractorMode::Push);
-            }
             else
-            {
                 LOG(WARNING) << "Tractor mode selector is bad: " << value;
-            }
         }
     });
 
@@ -326,7 +328,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
             LOG(WARNING) << "tractor_bearing value in dial set: " << tractor_system->bearing;
         }
     });
-    tractor_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    tractor_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
     // END tractor_sidebar
 
     // Prep and hide the database view.
@@ -668,11 +670,21 @@ void ScienceScreen::onUpdate()
 {
     if (my_spaceship)
     {
+        auto my_transform = my_spaceship.getComponent<sp::Transform>();
+
         if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
         {
             tractor_bearing->setValue(tractor_system->bearing);
             tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
-            tractor_dial->setValue(tractor_system->bearing);
+
+            // TODO: Rel/abs bearing controls
+            // On radar lock, the tractor beam's bearing is already relative.
+            // Without radar lock, reset the dial's value on update to align
+            // the tractor beam's bearing with the ship's rotation.
+            if (science_radar->getAutoRotating())
+                tractor_dial->setValue(tractor_system->bearing);
+            else if (my_transform)
+                tractor_dial->setValue(tractor_system->bearing + (90.0f + my_transform->getRotation()));
 
             // Enforce any changes to arc and range limits.
             if (tractor_arc->getRangeMax() != tractor_system->max_arc)
@@ -720,10 +732,10 @@ void ScienceScreen::onUpdate()
             my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            if (my_transform)
             {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-                targets.setNext(transform->getPosition(), lrr ? lrr->long_range : 25000.0f, TargetsContainer::ESelectionType::Scannable);
+                targets.setNext(my_transform->getPosition(), lrr ? lrr->long_range : 25000.0f, TargetsContainer::ESelectionType::Scannable);
             }
         }
     }

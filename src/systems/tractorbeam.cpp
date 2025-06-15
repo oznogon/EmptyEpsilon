@@ -32,18 +32,13 @@ void TractorBeamSystem::update(float delta)
         if (tractorsys.active) {
             // The tractor is active. Reset its cooldown period.
             tractorsys.cooldown = tractorsys.cycle_time;
-            LOG(WARNING) << "Tractor is on. tractorsys.cooldown: " << tractorsys.cooldown << " tractorsys.cycle_time: " << tractorsys.cycle_time;
 
             // If the tractor's range or arc are 0, or if we're docked, don't
             // tractor anything.
-            LOG(WARNING) << "- passed tractor beam active check";
             if (tractorsys.range <= 0.0f) continue;
-            LOG(WARNING) << "- passed tractor beam range check";
             if (tractorsys.arc <= 0.0f) continue;
-            LOG(WARNING) << "- passed tractor beam arc check";
             if (docking_port && docking_port->state != DockingPort::State::NotDocking) continue;
-            LOG(WARNING) << "- passed docking check";
-            /*
+            /* TODO: Don't allow tractor during warp.
             auto warp = entity.getComponent<WarpDrive>();
             if (warp || warp->current != 0.0f) continue;
             LOG(WARNING) << "- passed warp check";
@@ -55,7 +50,7 @@ void TractorBeamSystem::update(float delta)
 
             // Get a list of all collisonable entities possibly within range to
             // reduce to those we'll tractor.
-            for(auto entity_in_range : sp::CollisionSystem::queryArea(position - glm::vec2(tractorsys.range, tractorsys.range), position + glm::vec2(tractorsys.range, tractorsys.range)))
+            for (auto entity_in_range : sp::CollisionSystem::queryArea(position - glm::vec2(tractorsys.range, tractorsys.range), position + glm::vec2(tractorsys.range, tractorsys.range)))
             {
                 // Don't match ourselves or we'll tractor ourselves to NaN.
                 if (entity_in_range == entity) continue;
@@ -73,7 +68,6 @@ void TractorBeamSystem::update(float delta)
                 }
 
                 // If the target is too big to move, skip it.
-                LOG(WARNING) << "target_size * delta > drag_capability: " << (target_size * delta > drag_capability) << " target_size * delta: " << target_size * delta << " drag_capability: " << drag_capability;
                 if (target_size * delta > drag_capability) continue;
 
                 // Get the angle to the target, if it has a transform.
@@ -84,7 +78,6 @@ void TractorBeamSystem::update(float delta)
                     float angle = vec2ToAngle(diff);
                     float angle_diff = angleDifference(tractorsys.bearing + rotation, angle);
 
-                    LOG(WARNING) << "fabsf(angle_diff) < tractorsys.arc: " << (fabsf(angle_diff) < tractorsys.arc) << " tractorsys.cooldown: " << tractorsys.cooldown;
                     // If the entity is in the beam's arc and range, and if the
                     // beam has cooled down, calculate the distance between us and
                     // the entity. If we have a reactor, also consume additional
@@ -100,17 +93,15 @@ void TractorBeamSystem::update(float delta)
                             auto target_size = target_physics->getSize().x;
                             distance -= target_size;
                         }
+
                         if (auto my_physics = entity.getComponent<sp::Physics>())
-                        {
                             distance -= my_physics->getSize().x;
-                        }
 
                         // Narrow the group to entities that are also within
                         // tractor range. These are the only entities that we'll
                         // tractor.
                         if (distance <= tractorsys.range)
                         {
-                            LOG(WARNING) << "float distance: " << distance << " float angle: " << angle << " float angle_diff: " << angle_diff;
                             
                             // If we're an entity that uses coolant, generate heat per
                             // tractored entity.
@@ -120,21 +111,37 @@ void TractorBeamSystem::update(float delta)
                             // based on the tractor mode.
                             glm::vec2 destination;
                             auto target_position = target_transform->getPosition();
+                            auto tractor_heading = tractorsys.bearing + rotation + 90.0f;
+                            while (tractor_heading > 360.0f) tractor_heading -= 360.0f;
+                            while (tractor_heading < 0.0f) tractor_heading += 360.0f;
+
                             switch (tractorsys.mode)
                             {
                                 // Pull mode tractors entities toward us.
                                 case TractorMode::Pull:
+                                {
                                     destination = position;
                                     break;
+                                }
                                 // Push mode tractors entities away from us.
                                 case TractorMode::Push:
-                                    destination = position + glm::normalize(target_position - position) * tractorsys.range * 2.0f;
+                                {
+                                    destination = position + glm::normalize(target_position - position) * tractorsys.range * 1.2f;
                                     break;
+                                }
                                 // Hold mode tractors entities to a point halfway
                                 // between us and the tractor's range limit.
                                 case TractorMode::Hold:
+                                {
                                     destination = position + glm::normalize(target_position - position) * (tractorsys.range / 2.0f);
                                     break;
+                                }
+                                /* TODO: Reposition mode to a specific point.
+                                case TractorMode::Reposition:
+                                {
+                                    break;
+                                }
+                                */
                                 default:
                                     break;
                             }
@@ -163,7 +170,8 @@ void TractorBeamSystem::update(float delta)
             }
 
             tractorsys.addHeat(delta * heat_generated);
-            /*
+            /* TODO: Beam 3D drawing and sound effects.
+
             auto hit_location = target_transform->getPosition();
             auto r = 100.0f;
             if (auto physics = target.entity.getComponent<sp::Physics>()) {
@@ -190,9 +198,6 @@ void TractorBeamSystem::update(float delta)
                 be.target_offset = glm::normalize(be.target_offset) * random(0, r / 2.0f);
                 be.hit_normal = glm::normalize(be.target_offset);
             }
-
-            DamageInfo info(entity, mount.damage_type, hit_location);
-            DamageSystem::applyDamage(target.entity, mount.damage, info);
             */
         }
         else
@@ -200,7 +205,7 @@ void TractorBeamSystem::update(float delta)
             // The tractor is off. Tick its cooldown toward 0.
             if (tractorsys.cooldown > 0.0f) tractorsys.cooldown -= delta;
         }
-        /*
+        /* TODO: Beam 3D drawing effects.
         for(auto [entity, be, transform] : sp::ecs::Query<TractorBeamEffect, sp::Transform>()) {
             if (be.source) {
                 if (auto st = be.source.getComponent<sp::Transform>())
@@ -221,13 +226,15 @@ void TractorBeamSystem::update(float delta)
 
 void TractorBeamSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, TractorBeamEffect& be)
 {
-    LOG(WARNING) << "In TractorBeamSystem start/end of render3D";
+        /* TODO: Beam 3D drawing effects. */
 }
 
 void TractorBeamSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, TractorBeamSys& tractor_system)
 {
+    // Render other ships' tractor beams only if they're fully scanned.
     if (entity != my_spaceship) {
         auto scanstate = entity.getComponent<ScanState>();
+
         if (scanstate && my_spaceship && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
             return;
     }
