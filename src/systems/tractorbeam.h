@@ -5,7 +5,7 @@
 #include "systems/radar.h"
 #include "components/tractorbeam.h"
 
-class TractorBeamSystem : public sp::ecs::System, public Render3DInterface<TractorBeamEffect, true>, public RenderRadarInterface<TractorBeamSys, 21, RadarRenderSystem::FlagLongRange>
+class TractorBeamSystem : public sp::ecs::System, public Render3DInterface<TractorBeamEffect, true>, public RenderRadarInterface<TractorBeamSys, 21, RadarRenderSystem::FlagNone>
 {
 public:
     void update(float delta) override;

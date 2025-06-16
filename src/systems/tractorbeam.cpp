@@ -7,6 +7,7 @@
 #include "components/reactor.h"
 #include "components/warpdrive.h"
 #include "components/target.h"
+#include "components/hull.h"
 #include "components/shields.h"
 #include "components/faction.h"
 #include "components/coolant.h"
@@ -28,7 +29,7 @@ void TractorBeamSystem::update(float delta)
     if (!game_server) return;
     if (delta <= 0.0f) return;
 
-    for(auto [entity, tractorsys, transform, reactor, docking_port] : sp::ecs::Query<TractorBeamSys, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>>()) {
+    for(auto [entity, tractorsys, transform, reactor, docking_port, warp] : sp::ecs::Query<TractorBeamSys, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, sp::ecs::optional<WarpDrive>>()) {
         if (tractorsys.active) {
             // The tractor is active. Reset its cooldown period.
             tractorsys.cooldown = tractorsys.cycle_time;
@@ -38,14 +39,11 @@ void TractorBeamSystem::update(float delta)
             if (tractorsys.range <= 0.0f) continue;
             if (tractorsys.arc <= 0.0f) continue;
             if (docking_port && docking_port->state != DockingPort::State::NotDocking) continue;
-            /* TODO: Don't allow tractor during warp.
-            auto warp = entity.getComponent<WarpDrive>();
-            if (warp || warp->current != 0.0f) continue;
-            LOG(WARNING) << "- passed warp check";
-            */
+            if (warp && warp->current != 0.0f) continue;
+
             auto position = transform.getPosition();
             auto rotation = transform.getRotation();
-            float drag_capability = (delta * tractorsys.strength * 100.0f) * tractorsys.getSystemEffectiveness();
+            float drag_capability = tractorsys.strength * tractorsys.getSystemEffectiveness();
             float heat_generated = 0.0f;
 
             // Get a list of all collisonable entities possibly within range to
@@ -55,26 +53,27 @@ void TractorBeamSystem::update(float delta)
                 // Don't match ourselves or we'll tractor ourselves to NaN.
                 if (entity_in_range == entity) continue;
 
-                auto target_size = 1.0f;
                 auto target_physics = entity_in_range.getComponent<sp::Physics>();
+                auto target_size = 1.0f;
 
                 if (target_physics)
                 {
                     // Don't bother tractoring entities with static physics.
                     if (target_physics->getType() == sp::Physics::Type::Static) continue;
 
-                    // Get the size of the target entity.
+                    // In lieu of mass, get the entity's physics engine size.
+                    // If the entity is larger than the tractor's drag capability,
+                    // skip it.
                     target_size = target_physics->getSize().x;
+                    if (target_size > drag_capability) continue;
                 }
-
-                // If the target is too big to move, skip it.
-                if (target_size * delta > drag_capability) continue;
 
                 // Get the angle to the target, if it has a transform.
                 // If not, skip it.
                 if (auto target_transform = entity_in_range.getComponent<sp::Transform>())
                 {
-                    auto diff = target_transform->getPosition() - (position + rotateVec2(glm::vec2(tractorsys.position.x, tractorsys.position.y), rotation));
+                    auto target_position = target_transform->getPosition();
+                    auto diff = target_position - (position + rotateVec2(glm::vec2(tractorsys.position.x, tractorsys.position.y), rotation));
                     float angle = vec2ToAngle(diff);
                     float angle_diff = angleDifference(tractorsys.bearing + rotation, angle);
 
@@ -85,6 +84,11 @@ void TractorBeamSystem::update(float delta)
                     if (fabsf(angle_diff) < tractorsys.arc / 2.0f && (!reactor || reactor->useEnergy(delta * tractorsys.energy_use_per_second)))
                     {
                         float distance = glm::length(diff);
+                        float target_force, target_velocity, target_mass = 1.0f;
+
+                        // In lieu of mass, get the entity's size and velocity.
+                        target_velocity = glm::length(target_physics->getVelocity());
+                        target_mass = target_size;
 
                         // If we or the entity have a physics body, factor its size
                         // into the distance between us.
@@ -96,9 +100,38 @@ void TractorBeamSystem::update(float delta)
 
                         // Narrow the group to entities that are also within
                         // tractor range. These are the only entities that we'll
-                        // tractor.
+                        // potentially tractor.
                         if (distance <= tractorsys.range)
                         {
+                            // Shielded entities are harder to tractor.
+                            auto shields = entity_in_range.getComponent<Shields>();
+                            float shield_angle = 0.0f;
+
+                            if (shields && shields->active && !shields->entries.empty())
+                            {
+                                auto hit_location = target_position;
+
+                                if (target_physics)
+                                    hit_location -= glm::normalize(target_position - position) * target_physics->getSize().x;
+
+                                shield_angle = angleDifference(target_transform->getRotation(), vec2ToAngle(hit_location - target_position));
+                                while (shield_angle < 0.0f) shield_angle += 360.0f;
+
+                                float shield_arc = 360.0f / float(shields->entries.size());
+                                int shield_index = int((shield_angle + shield_arc / 2.0f) / shield_arc);
+                                shield_index %= shields->entries.size();
+                                auto& shield = shields->entries[shield_index];
+                                target_mass += shield.level;
+                            }
+
+                            // Hulled entities are harder to tractor.
+                            // Hulls get a multiplier because they represent
+                            // dense mass.
+                            auto hull = entity_in_range.getComponent<Hull>();
+
+                            if (hull && hull->current > 0.0f)
+                                target_mass += hull->current * 5.0f;
+
                             // If we're an entity that uses coolant, generate heat per
                             // tractored entity.
                             if (entity.hasComponent<Coolant>()) heat_generated += tractorsys.heat_per_second;
@@ -106,7 +139,6 @@ void TractorBeamSystem::update(float delta)
                             // Determine the destination point for the tractored entity
                             // based on the tractor mode.
                             glm::vec2 destination = position;
-                            auto target_position = target_transform->getPosition();
                             auto tractor_heading = tractorsys.bearing + rotation;
                             while (tractor_heading > 360.0f) tractor_heading -= 360.0f;
                             while (tractor_heading < 0.0f) tractor_heading += 360.0f;
@@ -148,7 +180,19 @@ void TractorBeamSystem::update(float delta)
 
                             // Define the vector and distance of tractor influence.
                             auto drag_diff = target_position - destination;
-                            float drag_distance = std::min(distance, drag_capability);
+                            // Determine effective drag capability by factoring
+                            // in target's shields, hull, and velocity.
+                            target_force = target_mass * target_velocity;
+                            float effective_drag_capability = drag_capability - target_force == 0.0f ? 0.0f : (drag_capability - target_force) / drag_capability;
+                            if (effective_drag_capability <= 0.0f) continue;
+                            float drag_distance = std::min(distance, (effective_drag_capability * effective_drag_capability * effective_drag_capability) * drag_capability);
+
+                            LOG(INFO) << "drag_capability: " << drag_capability
+                                << ", target_force: " << target_force
+                                << ", effective_drag_capability: " << effective_drag_capability
+                                << ", distance: " << distance
+                                << ", drag_distance: " << drag_distance
+                                << ", drag_distance * delta: " << drag_distance * delta;
 
                             if (distance <= 1.1f * drag_distance &&
                                 entity.hasComponent<DockingBay>() &&
@@ -162,7 +206,7 @@ void TractorBeamSystem::update(float delta)
                             else
                             {
                                 // Move the tractored object to the destination.
-                                target_transform->setPosition(target_position - (drag_distance * glm::normalize(drag_diff)));
+                                target_transform->setPosition(target_position - ((drag_distance * delta) * glm::normalize(drag_diff)));
                             }
                         }
                     }

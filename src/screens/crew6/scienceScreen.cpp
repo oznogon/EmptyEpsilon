@@ -224,10 +224,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Tractor toggle button.
     tractor_toggle = new GuiToggleButton(tractor_sidebar, "TRACTOR_TOGGLE", tr("scienceButton", "Activate"), [this](bool value){
         if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
-        {
             my_player_info->commandSetTractor(value);
-            LOG(WARNING) << "Tractor beam " << tractor_system->active;
-        };
     });
     tractor_toggle->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
     (new GuiPowerDamageIndicator(tractor_toggle, "TRACTOR_TOGGLE_PDI", ShipSystem::Type::TractorBeam, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -287,7 +284,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         {
             my_player_info->commandSetTractorRange(value);
             tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
-            LOG(WARNING) << "Tractor range set to " << value << " (" << tractor_system->range << ")";
         }
     });
     tractor_range->setSize(GuiElement::GuiSizeMax, 50);
@@ -388,13 +384,13 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
     float view_distance = science_radar->getDistance();
     float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-    if (mouse_wheel_delta!=0)
-    {
+
+    if (mouse_wheel_delta != 0)
         view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
-    }
-    view_distance = std::min(view_distance, lrr->long_range);
-    view_distance = std::max(view_distance, lrr->short_range);
-    if (view_distance!=science_radar->getDistance() || previous_long_range_radar != lrr->long_range || previous_short_range_radar != lrr->short_range)
+
+    view_distance = std::max(std::min(view_distance, lrr->long_range), lrr->short_range);
+
+    if (view_distance != science_radar->getDistance() || previous_long_range_radar != lrr->long_range || previous_short_range_radar != lrr->short_range)
     {
         previous_short_range_radar = lrr->long_range;
         previous_long_range_radar = lrr->short_range;
@@ -408,13 +404,22 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     {
         auto probe_transform = lrr->radar_view_linked_entity.getComponent<sp::Transform>();
         auto target_transform = targets.get().getComponent<sp::Transform>();
+
         if (!probe_transform || !target_transform || glm::length2(probe_transform->getPosition() - target_transform->getPosition()) > 5000.0f * 5000.0f)
             targets.clear();
-    }else{
+    }
+    else
+    {
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
+
         if (!my_transform || RadarBlockSystem::isRadarBlockedFrom(my_transform->getPosition(), targets.get(), lrr->short_range))
             targets.clear();
     }
+
+    if (view_distance <= lrr->short_range)
+        science_radar->shortRange();
+    else
+        science_radar->longRange();
 
     // Responsive layout for custom button sidebar. 1440x900 vpixels is 16:10, so this would roughly be the threshold.
 
