@@ -206,7 +206,7 @@ void TractorBeamSystem::update(float delta)
                             else
                             {
                                 // Move the tractored object to the destination.
-                                target_transform->setPosition(target_position - ((drag_distance * delta) * glm::normalize(drag_diff)));
+                                target_transform->setPosition(target_position - ((0.1f * drag_distance * delta) * glm::normalize(drag_diff)));
                             }
                         }
                     }

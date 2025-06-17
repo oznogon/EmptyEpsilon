@@ -20,18 +20,18 @@ public:
     bool active = false;
     TractorMode mode = TractorMode::Hold;
     float arc = 18.0f;
-    float max_arc = 180.0f;
+    float max_arc = 90.0f;
     float bearing = 0.0f;
     float range = 1000.0f;
-    float max_range = 3000.0f;
+    float max_range = 2000.0f;
     float cycle_time = 6.0f;
     glm::vec2 tractor_target_coordinates{0.0f, 0.0f};
     glm::u8vec4 arc_color{0, 255, 255, 128};
     glm::u8vec4 arc_color_fire{255, 0, 255, 128};
 
     // Server-side only
-    float strength = 2.0f;
-    float energy_use_per_second = 1.0f;
+    float strength = 500.0f;
+    float energy_use_per_second = 10.0f;
     float heat_per_second = 0.02f;
 
     // Beam runtime state
