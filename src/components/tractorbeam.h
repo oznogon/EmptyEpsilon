@@ -19,11 +19,12 @@ public:
     glm::vec3 position = glm::vec3(0.01f, 0.01f, 0.01f);
     bool active = false;
     TractorMode mode = TractorMode::Hold;
-    float arc = 18.0f;
+    static constexpr float MIN_ARC = 6.0f;
     float max_arc = 90.0f;
+    float arc = max_arc;
     float bearing = 0.0f;
-    float range = 1000.0f;
     float max_range = 2000.0f;
+    float range = max_range * 0.25f;
     float cycle_time = 6.0f;
     glm::vec2 tractor_target_coordinates{0.0f, 0.0f};
     glm::u8vec4 arc_color{0, 255, 255, 128};
@@ -37,6 +38,9 @@ public:
     // Beam runtime state
     float cooldown = 0.0f;
     string texture = "texture/beam_orange.png";
+
+    void setArcAndAdjustRange(float arc_request);
+    void setRangeAndAdjustArc(float range_request);
 };
 
 class TractorBeamEffect

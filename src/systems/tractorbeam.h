@@ -12,4 +12,7 @@ public:
 
     void render3D(sp::ecs::Entity e, sp::Transform& transform, TractorBeamEffect& be) override;
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, TractorBeamSys& tractor_system) override;
+
+    void setArcAndAdjustRange(float arc_request, TractorBeamSys& tractor_system);
+    void setRangeAndAdjustArc(float range_request, TractorBeamSys& tractor_system);
 };

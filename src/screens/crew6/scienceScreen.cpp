@@ -296,10 +296,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         tractor_toggle->setValue(tractor_system->active);
         tractor_bearing->setValue(tractor_system->bearing);
         tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
-        tractor_arc->setRange(0.0f, tractor_system->max_arc);
+        tractor_arc->setRange(tractor_system->MIN_ARC, tractor_system->max_arc);
         tractor_arc->setValue(tractor_system->arc);
         tractor_arc_label->setText(tr("scienceButton", "Arc: {arc} deg").format({{"arc", string(tractor_system->arc, 1)}}));
-        tractor_range->setRange(0.0f, tractor_system->max_range);
+        tractor_range->setRange(tractor_system->max_range * 0.25f, tractor_system->max_range);
         tractor_range->setValue(tractor_system->range);
         tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
     }
@@ -685,20 +685,17 @@ void ScienceScreen::onUpdate()
             else if (my_transform)
                 tractor_dial->setValue(tractor_system->bearing + (90.0f + my_transform->getRotation()));
 
+            tractor_arc->setValue(std::min(tractor_system->arc, tractor_system->max_arc));
+            tractor_arc_label->setText(tr("scienceButton", "Arc: {arc} deg").format({{"arc", string(tractor_system->arc, 1)}}));
+            tractor_range->setValue(std::min(tractor_system->range, tractor_system->max_range));
+            tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
+
             // Enforce any changes to arc and range limits.
             if (tractor_arc->getRangeMax() != tractor_system->max_arc)
-            {
-                tractor_arc->setRange(0.0f, tractor_system->max_arc);
-                tractor_arc->setValue(std::min(tractor_system->arc, tractor_system->max_arc));
-                tractor_arc_label->setText(tr("scienceButton", "Arc: {arc} deg").format({{"arc", string(tractor_system->arc, 1)}}));
-            }
+                tractor_arc->setRange(tractor_system->MIN_ARC, tractor_system->max_arc);
 
             if (tractor_range->getRangeMax() != tractor_system->max_range)
-            {
-                tractor_range->setRange(0.0f, tractor_system->max_range);
-                tractor_range->setValue(std::min(tractor_system->range, tractor_system->max_range));
-                tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
-            }
+                tractor_range->setRange(tractor_system->max_range * 0.25f, tractor_system->max_range);
 
             // Synchronize tractor mode.
             if (tractor_system->mode == TractorMode::Hold)

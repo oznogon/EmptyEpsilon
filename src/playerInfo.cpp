@@ -1151,7 +1151,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
 
             if (auto tractor = ship.getComponent<TractorBeamSys>())
             {
-                tractor->arc = f;
+                tractor->setArcAndAdjustRange(f);
             }
         }
         break;
@@ -1162,7 +1162,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
 
             if (auto tractor = ship.getComponent<TractorBeamSys>())
             {
-                tractor->range = f;
+                tractor->setRangeAndAdjustArc(f);
             }
         }
         break;
