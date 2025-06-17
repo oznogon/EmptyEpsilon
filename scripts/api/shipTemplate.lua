@@ -273,10 +273,10 @@ function ShipTemplate:setBeamWeaponHeatPerFire(index, amount)
     return self
 end
 
-
-function ShipTemplate:setTractorBeam(arc, max_arc, bearing, range, max_range, cycle_time, strength)
+--- Defines the ship's Tractor Beam and sets its maximum arc, range, cycle_time, and strength.
+function ShipTemplate:setTractorBeam(max_arc, max_range, cycle_time, strength)
     if self.tractor_beam == nil then self.tractor_beam = {} end
-    self.tractor_beam = {arc=arc, max_arc=max_arc, bearing=bearing, range=range, max_range=max_range, cycle_time=cycle_time, strength=strength}
+    self.tractor_beam = {max_arc=max_arc, max_range=max_range, cycle_time=cycle_time, strength=strength}
     return self
 end
 

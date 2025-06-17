@@ -9,8 +9,8 @@ template:setRadarTrace("tug.png")
 template:setHull(50)
 template:setShields(20)
 template:setSpeed(100, 10, 15)
---[[                   arc, max_arc, bearing, range, max_range, cycle_time, strength]]
-template:setTractorBeam(18,     180,       0,  3000,      5000,        6.0, 10.0)
+--[[               max_arc, max_range, cycle_time, strength]]
+template:setTractorBeam(90,      2000,        6.0, 1000.0)
 
 local variation = template:copy("Hylas"):setName("Heracles"):setLocaleName(_("playerShip", "Heracles")):setType("playership")
 variation:setDescription(_([[The Heracles tug model is a Hylas suited for carrier use in deep-space operations. Improvements include a stronger hull, minimal shield system, full sensor suite, and a shield-disrupting beam for use on abandoned hostile or unknown ships.]]))
