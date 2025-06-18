@@ -212,7 +212,6 @@ void BeamWeaponSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Bea
         // Draw the beam
         std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
-
     }
 
     // Fire ring
@@ -366,7 +365,6 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
         // If the beam is cooling down, flash and fade the arc color.
         glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, mount.cooldown), 0, mount.cycle_time, mount.arc_color, mount.arc_color_fire);
 
-        
         // Initialize variables from the beam's data.
         float beam_direction = mount.direction;
         float beam_arc = mount.arc;
@@ -377,7 +375,6 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
         auto arc_center = beam_offset + screen_position;
 
         drawArc(renderer, arc_center, rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
-    
 
         // If the beam is turreted, draw the turret's arc. Otherwise, exit.
         if (mount.turret_arc == 0.0f)
@@ -393,4 +390,15 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
 
         drawArc(renderer, arc_center, rotation + (turret_direction - turret_arc / 2.0f), turret_arc, beam_range * scale, color);
     }
+}
+
+void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, BeamEffect& beam_effect)
+{
+    auto transform = entity.getComponent<sp::Transform>();
+    if (!transform) return;
+
+    std::vector<glm::vec2> outline_points;
+    outline_points.push_back(screen_position);
+    outline_points.push_back(screen_position - (scale * (transform->getPosition() - beam_effect.target_location)));
+    renderer.drawLine(outline_points, glm::u8vec4(255, 0, 0, 128));
 }
