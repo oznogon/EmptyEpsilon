@@ -396,9 +396,21 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
 {
     auto transform = entity.getComponent<sp::Transform>();
     if (!transform) return;
+    auto end_point = screen_position - (scale * (transform->getPosition() - beam_effect.target_location));
 
-    std::vector<glm::vec2> outline_points;
-    outline_points.push_back(screen_position);
-    outline_points.push_back(screen_position - (scale * (transform->getPosition() - beam_effect.target_location)));
-    renderer.drawLine(outline_points, glm::u8vec4(255, 0, 0, 128));
+    glm::u8vec4 color = Tween<glm::u8vec4>::linear(
+        std::max(0.0f, beam_effect.lifetime),
+        1.0f, 0.0f,
+        glm::u8vec4(255, 255, 255, 192),
+        glm::u8vec4(255, 0, 0, 64)
+    );
+
+    renderer.drawLine(screen_position, end_point, color, glm::u8vec4(255, 0, 0, 16));
+/*
+    renderer.drawTexturedQuad("texture/beam_orange.png",
+            arc_center, arc_center + right_inner_offset,
+            arc_center + right_edge - right_edge_normal * outline_thickness, arc_center + right_edge,
+            { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
+            color);
+*/
 }

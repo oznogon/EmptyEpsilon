@@ -9,7 +9,7 @@ class BeamWeaponSystem :
     public sp::ecs::System,
     public Render3DInterface<BeamEffect, true>,
     public RenderRadarInterface<BeamWeaponSys, 20, RadarRenderSystem::FlagShortRange>,
-    public RenderRadarInterface<BeamEffect, 20, RadarRenderSystem::FlagShortRange>
+    public RenderRadarInterface<BeamEffect, 20, RadarRenderSystem::FlagNone>
 {
 public:
     void update(float delta) override;
