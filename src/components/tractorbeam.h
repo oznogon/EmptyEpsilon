@@ -16,16 +16,18 @@ enum class TractorMode
 
 class TractorBeamSys : public ShipSystem {
 public:
-    glm::vec3 position = glm::vec3(0.01f, 0.01f, 0.01f);
+    glm::vec3 position = glm::vec3(0.01f, 0.01f, 0.01f); // hack
     bool active = false;
     TractorMode mode = TractorMode::Hold;
+    float bearing = 0.0f;
     static constexpr float MIN_ARC = 6.0f;
     float max_arc = 90.0f;
-    float arc = max_arc;
-    float bearing = 0.0f;
+    float arc = 90.0f;
+    static constexpr float MIN_RANGE = 500.0f;
     float max_range = 2000.0f;
-    float range = max_range * 0.25f;
+    float range = 500.0f;
     float cycle_time = 6.0f;
+    // TODOs
     glm::vec2 tractor_target_coordinates{0.0f, 0.0f};
     glm::u8vec4 arc_color{0, 255, 255, 128};
     glm::u8vec4 arc_color_fire{255, 0, 255, 128};

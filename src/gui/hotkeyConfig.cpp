@@ -97,7 +97,7 @@ Keys::Keys() :
     mainscreen_long_range_radar("MAINSCREEN_LONG_RANGE", "Q"),
     mainscreen_first_person("MAINSCREEN_FIRST_PERSON", "F"),
 
-    //helms
+    //Helms
     helms_increase_impulse("HELMS_IMPULSE_INCREASE", "Up"),
     helms_increase_impulse_1("HELMS_IMPULSE_INCREASE_1"),
     helms_increase_impulse_10("HELMS_IMPULSE_INCREASE_10"),
@@ -128,7 +128,7 @@ Keys::Keys() :
     helms_combat_right("HELMS_COMBAT_RIGHT"),
     helms_combat_boost("HELMS_COMBAT_BOOST"),
 
-    //weapons
+    //Weapons
     weapons_select_homing("WEAPONS_SELECT_HOMING", "1"),
     weapons_select_nuke("WEAPONS_SELECT_NUKE", "2"),
     weapons_select_mine("WEAPONS_SELECT_MINE", "3"),
@@ -291,15 +291,34 @@ Keys::Keys() :
         {"ENGINEERING_SET_SYSTEM_COOLANT_READ_SHIELD"},
     },
 
+    //Relay
     relay_alert_level_none("RELAY_ALERT_NONE"),
     relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
     relay_alert_level_red("RELAY_ALERT_RED"),
 
+    //Utility beam
+    utilitybeam_toggle_active("UTILITYBEAM_TOGGLE_ACTIVE", "T"),
+    utilitybeam_bearing_right("UTILITYBEAM_BEARING_RIGHT", "Right"),
+    utilitybeam_bearing_left("UTILITYBEAM_BEARING_LEFT", "Left"),
+    utilitybeam_arc_increase("UTILITYBEAM_ARC_INCREASE", "Up"),
+    utilitybeam_arc_decrease("UTILITYBEAM_ARC_DECREASE", "Down"),
+    utilitybeam_range_increase("UTILITYBEAM_RANGE_INCREASE", "R"),
+    utilitybeam_range_decrease("UTILITYBEAM_RANGE_DECREASE", "F"),
+    utilitybeam_mode_next("UTILITYBEAM_MODE_NEXT", "E"),
+    utilitybeam_mode_prev("UTILITYBEAM_MODE_PREV", "W"),
+    utilitybeam_mode_hold("UTILITYBEAM_MODE_HOLD"),
+    utilitybeam_mode_pull("UTILITYBEAM_MODE_PUSH"),
+    utilitybeam_mode_push("UTILITYBEAM_MODE_PULL"),
+    utilitybeam_mode_reposition("UTILITYBEAM_MODE_REPOSITION"),
+
+    //GM
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
 
+    //Spectator
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
 
+    //Debug
     debug_show_fps("DEBUG_SHOW_FPS", "F10"),
     debug_show_timing("DEBUG_SHOW_TIMING", "F11")
 {
@@ -335,7 +354,7 @@ void Keys::init()
     mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View long-range radar"));
     mainscreen_first_person.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
 
-    //helms
+    //Helms
     helms_increase_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse"));
     helms_increase_impulse_1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse 1%"));
     helms_increase_impulse_10.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse 10%"));
@@ -366,7 +385,7 @@ void Keys::init()
     helms_combat_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost right"));
     helms_combat_boost.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost forwards"));
 
-    //weapons
+    //Weapons
     weapons_select_homing.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select homing"));
     weapons_select_nuke.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select nuke"));
     weapons_select_mine.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select mine"));
@@ -462,17 +481,37 @@ void Keys::init()
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields coolant (joystick)"));
 
+    //Relay
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
     relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
 
+    //Utility beam
+    utilitybeam_toggle_active.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Activate utility beam"));
+    utilitybeam_bearing_right.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Rotate utility beam right"));
+    utilitybeam_bearing_left.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Rotate utility beam left"));
+    utilitybeam_arc_increase.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Increase utility beam arc"));
+    utilitybeam_arc_decrease.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Decrease utility beam arc"));
+    utilitybeam_range_increase.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Increase utility beam range"));
+    utilitybeam_range_decrease.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Decrease utility beam range"));
+    utilitybeam_mode_next.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Set next utility beam mode"));
+    utilitybeam_mode_prev.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Set previous utility beam mode"));
+    utilitybeam_mode_hold.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Set tractor beam to hold position"));
+    utilitybeam_mode_pull.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Set tractor beam to pull"));
+    utilitybeam_mode_push.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Set tractor beam to push"));
+    utilitybeam_mode_reposition.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Set tractor beam to reposition"));
+
+    //Cinematic view
     cinematic.init();
+
+    //Top-down view
     topdown.init();
+
     //GM
     gm_delete.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Delete"));
     gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Copy to clipboard"));
 
-    //Various
+    //Spectator
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_various", "Show callsigns (spectator)"));
 
     //Debug

@@ -43,7 +43,7 @@ public:
     sp::io::Keybinding mainscreen_long_range_radar;
     sp::io::Keybinding mainscreen_first_person;
 
-    //helms
+    //Helms
     sp::io::Keybinding helms_increase_impulse;
     sp::io::Keybinding helms_increase_impulse_1;
     sp::io::Keybinding helms_increase_impulse_10;
@@ -74,7 +74,7 @@ public:
     sp::io::Keybinding helms_combat_right;
     sp::io::Keybinding helms_combat_boost;
 
-    //weapons
+    //Weapons
     sp::io::Keybinding weapons_select_homing;
     sp::io::Keybinding weapons_select_nuke;
     sp::io::Keybinding weapons_select_mine;
@@ -143,6 +143,21 @@ public:
     sp::io::Keybinding relay_alert_level_none;
     sp::io::Keybinding relay_alert_level_yellow;
     sp::io::Keybinding relay_alert_level_red;
+
+    //Utility beam
+    sp::io::Keybinding utilitybeam_toggle_active;
+    sp::io::Keybinding utilitybeam_bearing_right;
+    sp::io::Keybinding utilitybeam_bearing_left;
+    sp::io::Keybinding utilitybeam_arc_increase;
+    sp::io::Keybinding utilitybeam_arc_decrease;
+    sp::io::Keybinding utilitybeam_range_increase;
+    sp::io::Keybinding utilitybeam_range_decrease;
+    sp::io::Keybinding utilitybeam_mode_next;
+    sp::io::Keybinding utilitybeam_mode_prev;
+    sp::io::Keybinding utilitybeam_mode_hold;
+    sp::io::Keybinding utilitybeam_mode_pull;
+    sp::io::Keybinding utilitybeam_mode_push;
+    sp::io::Keybinding utilitybeam_mode_reposition;
 
     // Cinematic View
     struct CinematicKeys {

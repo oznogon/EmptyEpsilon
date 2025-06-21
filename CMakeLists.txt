@@ -326,6 +326,7 @@ set(MAIN_SOURCES
     src/screenComponents/miniGame.cpp
     src/screenComponents/mineSweeper.cpp
     src/screenComponents/impulseSound.cpp
+    src/screenComponents/utilityBeamControls.cpp
     src/components/faction.h
     src/components/faction.cpp
     src/components/radar.h
@@ -617,6 +618,7 @@ set(MAIN_SOURCES
     src/screenComponents/viewport3d.h
     src/screenComponents/viewportMainScreen.h
     src/screenComponents/warpControls.h
+    src/screenComponents/utilityBeamControls.h
     src/screens/cinematicViewScreen.h
     src/screens/crew1/singlePilotScreen.h
     src/screens/crew4/engineeringAdvancedScreen.h
