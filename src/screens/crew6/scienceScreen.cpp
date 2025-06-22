@@ -26,6 +26,7 @@
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
 #include "screenComponents/powerDamageIndicator.h"
+#include "screenComponents/utilityBeamControls.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_togglebutton.h"
@@ -115,7 +116,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
             LOG(WARNING) << "Science sidebar selector is bad: " << value;
         }
     });
-
     sidebar_selector->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Functions")}, {"scan", "func"});
 
     if (my_spaceship.hasComponent<TractorBeamSys>())
@@ -218,91 +218,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // END custom_function_sidebar
 
     // Tractor sidebar.
-    tractor_sidebar = new GuiElement(radar_view, "TRACTOR_SIDEBAR");
+    tractor_sidebar = new GuiUtilityBeamControls(radar_view, "TRACTOR_CONTROLS");
     tractor_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-
-    // Tractor toggle button.
-    tractor_toggle = new GuiToggleButton(tractor_sidebar, "TRACTOR_TOGGLE", tr("scienceButton", "Activate"), [this](bool value){
-        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
-            my_player_info->commandSetTractor(value);
-    });
-    tractor_toggle->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
-    (new GuiPowerDamageIndicator(tractor_toggle, "TRACTOR_TOGGLE_PDI", ShipSystem::Type::TractorBeam, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    tractor_mode = new GuiSelector(tractor_sidebar, "TRACTOR_MODE", [this](int index, string value)
-    {
-        if (my_spaceship.hasComponent<TractorBeamSys>())
-        {
-            if (value == "hold")
-                my_player_info->commandSetTractorMode(TractorMode::Hold);
-            else if (value == "pull")
-                my_player_info->commandSetTractorMode(TractorMode::Pull);
-            else if (value == "push")
-                my_player_info->commandSetTractorMode(TractorMode::Push);
-            else if (value == "reposition")
-                my_player_info->commandSetTractorMode(TractorMode::Reposition);
-            else
-                LOG(WARNING) << "Tractor mode selector is bad: " << value;
-        }
-    });
-
-    tractor_mode->setOptions({tr("tractorMode", "Hold"), tr("tractorMode", "Pull"), tr("tractorMode", "Push"), tr("tractorMode", "Reposition")}, {"hold", "pull", "push", "reposition"});
-    tractor_mode->setSelectionIndex(0);
-    tractor_mode->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<TractorBeamSys>());
-
-    // Tractor bearing slider.
-    tractor_bearing = new GuiSlider(tractor_sidebar, "TRACTOR_BEARING", 0.0f, 360.0f, 0.0f, [this](float value)
-    {
-        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
-        {
-            my_player_info->commandSetTractorBearing(value);
-            tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
-        }
-    });
-    tractor_bearing->setSize(GuiElement::GuiSizeMax, 50);
-    tractor_bearing_label = new GuiLabel(tractor_bearing, "TRACTOR_BEARING_LABEL", "Bearing: 0.0 deg", 30);
-    tractor_bearing_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    // Tractor arc slider.
-    tractor_arc = new GuiSlider(tractor_sidebar, "TRACTOR_ARC", 0.0f, 180.0f, 0.0f, [this](float value)
-    {
-        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
-        {
-            my_player_info->commandSetTractorArc(value);
-            tractor_arc_label->setText(tr("scienceButton", "Arc: {arc} deg").format({{"arc", string(tractor_system->arc, 1)}}));
-            LOG(WARNING) << "Tractor arc set to " << value << " (" << tractor_system->arc << ")";
-        }
-    });
-    tractor_arc->setSize(GuiElement::GuiSizeMax, 50);
-    tractor_arc_label = new GuiLabel(tractor_arc, "TRACTOR_ARC_LABEL", "Arc: 18.0 deg", 30);
-    tractor_arc_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    // Tractor range slider.
-    tractor_range = new GuiSlider(tractor_sidebar, "TRACTOR_RANGE", 0.0f, 3000.0f, 1000.0f, [this](float value)
-    {
-        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
-        {
-            my_player_info->commandSetTractorRange(value);
-            tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
-        }
-    });
-    tractor_range->setSize(GuiElement::GuiSizeMax, 50);
-    tractor_range_label = new GuiLabel(tractor_range, "TRACTOR_RANGE_LABEL", "Range: 1000.0", 30);
-    tractor_range_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    // Update initial tractor values with known values.
-    if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
-    {
-        tractor_toggle->setValue(tractor_system->active);
-        tractor_bearing->setValue(tractor_system->bearing);
-        tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
-        tractor_arc->setRange(tractor_system->MIN_ARC, tractor_system->max_arc);
-        tractor_arc->setValue(tractor_system->arc);
-        tractor_arc_label->setText(tr("scienceButton", "Arc: {arc} deg").format({{"arc", string(tractor_system->arc, 1)}}));
-        tractor_range->setRange(tractor_system->max_range * 0.25f, tractor_system->max_range);
-        tractor_range->setValue(tractor_system->range);
-        tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
-    }
 
     tractor_dial = new GuiRotationDial(science_radar, "TRACTOR_DIAL", 0.0f, 360.0f, 0.0f, [this](float value)
     {
@@ -670,42 +587,6 @@ void ScienceScreen::onUpdate()
     if (my_spaceship)
     {
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
-
-        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
-        {
-            tractor_bearing->setValue(tractor_system->bearing);
-            tractor_bearing_label->setText(tr("scienceButton", "Bearing: {bearing} deg").format({{"bearing", string(tractor_system->bearing, 1)}}));
-
-            // TODO: Rel/abs bearing controls
-            // On radar lock, the tractor beam's bearing is already relative.
-            // Without radar lock, reset the dial's value on update to align
-            // the tractor beam's bearing with the ship's rotation.
-            if (science_radar->getAutoRotating())
-                tractor_dial->setValue(tractor_system->bearing);
-            else if (my_transform)
-                tractor_dial->setValue(tractor_system->bearing + (90.0f + my_transform->getRotation()));
-
-            tractor_arc->setValue(std::min(tractor_system->arc, tractor_system->max_arc));
-            tractor_arc_label->setText(tr("scienceButton", "Arc: {arc} deg").format({{"arc", string(tractor_system->arc, 1)}}));
-            tractor_range->setValue(std::min(tractor_system->range, tractor_system->max_range));
-            tractor_range_label->setText(tr("scienceButton", "Range: {range}").format({{"range", string(tractor_system->range, 1)}}));
-
-            // Enforce any changes to arc and range limits.
-            if (tractor_arc->getRangeMax() != tractor_system->max_arc)
-                tractor_arc->setRange(tractor_system->MIN_ARC, tractor_system->max_arc);
-
-            if (tractor_range->getRangeMax() != tractor_system->max_range)
-                tractor_range->setRange(tractor_system->max_range * 0.25f, tractor_system->max_range);
-
-            // Synchronize tractor mode.
-            if (tractor_system->mode == TractorMode::Hold)
-                tractor_mode->setSelectionIndex(0);
-            else if (tractor_system->mode == TractorMode::Pull)
-                tractor_mode->setSelectionIndex(1);
-            else if (tractor_system->mode == TractorMode::Push)
-                tractor_mode->setSelectionIndex(2);
-            else tractor_mode->setSelectionIndex(3);
-        }
 
         // Initiate a scan on scannable objects.
         if (keys.science_scan_object.getDown() &&

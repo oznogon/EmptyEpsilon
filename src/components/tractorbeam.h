@@ -34,7 +34,7 @@ public:
 
     // Server-side only
     float strength = 500.0f;
-    float energy_use_per_second = 10.0f;
+    float energy_use_per_second = 6.0f;
     float heat_per_second = 0.02f;
 
     // Beam runtime state

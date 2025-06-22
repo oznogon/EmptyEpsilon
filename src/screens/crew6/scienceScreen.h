@@ -21,6 +21,7 @@ class GuiRotationDial;
 class DatabaseViewComponent;
 class GuiCustomShipFunctions;
 class RawScannerDataRadarOverlay;
+class GuiUtilityBeamControls;
 
 class ScienceScreen : public GuiOverlay
 {
@@ -42,7 +43,7 @@ public:
     GuiSelector* sidebar_selector;
     GuiElement* info_sidebar;
     GuiCustomShipFunctions* custom_function_sidebar;
-    GuiElement* tractor_sidebar;
+    GuiUtilityBeamControls* tractor_sidebar;
     GuiSelector* sidebar_pager;
     // info_sidebar
     GuiScanTargetButton* scan_button;
@@ -60,14 +61,6 @@ public:
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];
     // tractor_sidebar
-    GuiToggleButton* tractor_toggle;
-    GuiSelector* tractor_mode;
-    GuiSlider* tractor_bearing;
-    GuiLabel* tractor_bearing_label;
-    GuiSlider* tractor_range;
-    GuiLabel* tractor_range_label;
-    GuiSlider* tractor_arc;
-    GuiLabel* tractor_arc_label;
     GuiRotationDial* tractor_dial;
 
     GuiToggleButton* probe_view_button;

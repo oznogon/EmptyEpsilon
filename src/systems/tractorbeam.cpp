@@ -183,16 +183,8 @@ void TractorBeamSystem::update(float delta)
                             // Determine effective drag capability by factoring
                             // in target's shields, hull, and velocity.
                             target_force = target_mass * target_velocity;
-                            float effective_drag_capability = drag_capability - target_force == 0.0f ? 0.0f : (drag_capability - target_force) / drag_capability;
-                            if (effective_drag_capability <= 0.0f) continue;
-                            float drag_distance = std::min(distance, (effective_drag_capability * effective_drag_capability * effective_drag_capability) * drag_capability);
-
-                            LOG(INFO) << "drag_capability: " << drag_capability
-                                << ", target_force: " << target_force
-                                << ", effective_drag_capability: " << effective_drag_capability
-                                << ", distance: " << distance
-                                << ", drag_distance: " << drag_distance
-                                << ", drag_distance * delta: " << drag_distance * delta;
+                            float effective_drag_capability = std::max(0.1f, drag_capability - target_force == 0.0f ? 0.0f : (drag_capability - target_force) / drag_capability);
+                            float drag_distance = std::min(distance, effective_drag_capability * drag_capability);
 
                             if (distance <= 1.1f * drag_distance &&
                                 entity.hasComponent<DockingBay>() &&
@@ -206,7 +198,7 @@ void TractorBeamSystem::update(float delta)
                             else
                             {
                                 // Move the tractored object to the destination.
-                                target_transform->setPosition(target_position - ((0.1f * drag_distance * delta) * glm::normalize(drag_diff)));
+                                target_transform->setPosition(target_position - ((drag_distance * delta) * glm::normalize(drag_diff)));
                             }
                         }
                     }
