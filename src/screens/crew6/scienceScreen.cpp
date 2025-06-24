@@ -588,6 +588,10 @@ void ScienceScreen::onUpdate()
     {
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
 
+        // Update tractor beam dial.
+        if (auto tractor_system = my_spaceship.getComponent<TractorBeamSys>())
+            tractor_dial->setValue(tractor_system->bearing + my_transform->getRotation() - science_radar->getViewRotation() + 90.0f);
+
         // Initiate a scan on scannable objects.
         if (keys.science_scan_object.getDown() &&
             my_spaceship.hasComponent<ScienceScanner>() &&
