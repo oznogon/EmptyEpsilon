@@ -106,11 +106,11 @@ static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
 
-static const uint16_t CMD_SET_TRACTOR = 0x002C;
-static const uint16_t CMD_SET_TRACTOR_MODE = 0x002D;
-static const uint16_t CMD_SET_TRACTOR_BEARING = 0x002E;
-static const uint16_t CMD_SET_TRACTOR_ARC = 0x002F;
-static const uint16_t CMD_SET_TRACTOR_RANGE = 0x0030;
+static const uint16_t CMD_SET_TRACTOR = 0x002D;
+static const uint16_t CMD_SET_TRACTOR_MODE = 0x002E;
+static const uint16_t CMD_SET_TRACTOR_BEARING = 0x002F;
+static const uint16_t CMD_SET_TRACTOR_ARC = 0x0030;
+static const uint16_t CMD_SET_TRACTOR_RANGE = 0x0031;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
