@@ -14,13 +14,6 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
     auto center = getCenterPoint();
     float radius = std::min(rect.size.x, rect.size.y) * 0.5f;
 
-    // If the left mouse button is held down, treat it like a click event.
-    // If this dial's value is dynamic, this ensures that the value isn't
-    // changed while a player clicks and holds the dial in a given position.
-    int mouse_x, mouse_y;
-    if (SDL_GetMouseState(&mouse_x, &mouse_y) & SDL_BUTTON_LMASK)
-        onMouseDown(sp::io::Pointer::Button::Left, glm::vec2((float)mouse_x, (float)mouse_y), -1);
-
     renderer.drawCircleOutline(center, radius, 16, glm::u8vec4(255, 255, 255, 64));
     renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius * 2.0f, (value - min_value) / (max_value - min_value) * 360.0f);
 }
