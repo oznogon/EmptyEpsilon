@@ -22,6 +22,7 @@ public:
     sp::io::Keybinding zoom_out;
     sp::io::Keybinding voice_all;
     sp::io::Keybinding voice_ship;
+    sp::io::Keybinding debug_modifier;
     sp::io::Keybinding debug_show_fps;
     sp::io::Keybinding debug_show_timing;
 #ifdef DEBUG

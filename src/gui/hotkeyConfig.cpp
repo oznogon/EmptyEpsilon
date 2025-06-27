@@ -221,6 +221,7 @@ Keys::Keys() :
     zoom_out("ZOOM_OUT"),
     voice_all("VOICE_ALL", "Backspace"),
     voice_ship("VOICE_SHIP"),
+    debug_modifier("DEBUG_MODIFIER", "Left Ctrl"),
     debug_show_fps("DEBUG_SHOW_FPS", "F10"),
     debug_show_timing("DEBUG_SHOW_TIMING", "F11"),
 #ifdef DEBUG
