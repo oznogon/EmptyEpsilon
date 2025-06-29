@@ -1048,7 +1048,7 @@ void luaCommandSetTractorArc(sp::ecs::Entity ship, float arc) {
 
     if (auto tractor = ship.getComponent<TractorBeamSys>())
     {
-        tractor->bearing = arc;
+        tractor->arc = arc;
     }
 }
 
