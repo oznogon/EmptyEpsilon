@@ -6,6 +6,7 @@
 class GuiCanvas;
 class GuiPanel;
 class GuiScrollText;
+class GuiToggleButton;
 
 class GuiHelpOverlay : public GuiElement
 {
@@ -16,6 +17,7 @@ private:
 public:
     GuiHelpOverlay(GuiContainer* owner, string title = "", string contents = "");
     GuiPanel* frame;
+    GuiToggleButton* radar_lock_toggle;
 
     virtual void setText(string new_text);
     virtual void onDraw(sp::RenderTarget& target) override;

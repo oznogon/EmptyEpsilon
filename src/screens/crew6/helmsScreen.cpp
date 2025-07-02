@@ -38,7 +38,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
+    radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
 
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 215)->setVisible(my_spaceship.hasComponent<CombatManeuveringThrusters>());
@@ -47,7 +47,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
-        [radar, this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
             {
                 auto r = radar->getRect();
@@ -70,7 +70,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
                 my_player_info->commandTargetRotation(angle);
             }
         },
-        [radar, this](glm::vec2 position) {
+        [this](glm::vec2 position) {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
             {
                 auto r = radar->getRect();
@@ -98,7 +98,6 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             heading_hint->hide();
         }
     );
-    radar->setAutoRotating(PreferencesManager::get("helms_radar_lock","0")=="1");
 
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(sp::Alignment::Center)->setSize(0, 0);
@@ -136,7 +135,13 @@ void HelmsScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
+        if (PreferencesManager::get("helms_radar_lock","0") == "1")
+            radar->setAutoRotating(true);
+        else
+            radar->setAutoRotating(false)->setViewRotation(0.0f);
+
         auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+
         if (angle != 0.0f)
         {
             auto transform = my_spaceship.getComponent<sp::Transform>();

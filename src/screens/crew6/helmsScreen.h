@@ -8,6 +8,7 @@ class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiDockingButton;
 class GuiCombatManeuver;
+class GuiRadarView;
 
 class HelmsScreen : public GuiOverlay
 {
@@ -19,6 +20,7 @@ private:
     GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
     GuiDockingButton* docking_button;
+    GuiRadarView* radar;
 public:
     HelmsScreen(GuiContainer* owner);
 
