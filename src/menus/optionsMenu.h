@@ -35,7 +35,7 @@ private:
     void setupGraphicsOptions();
     void setupAudioOptions();
 public:
-    OptionsMenu();
+    OptionsMenu(string return_to="");
 
     virtual void update(float delta) override;
 };
