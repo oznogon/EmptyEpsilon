@@ -91,9 +91,9 @@ public:
         if (update_func) {
             int count = update_func();
             while(count > entryCount())
-                addEntry(string(entryCount()+1), entryCount());
-            while(count < entryCount())
-                removeEntry(entryCount()-1);
+                addEntry(string(entryCount() + 1), entryCount());
+            while(count < entryCount() && entryCount() > 0)
+                removeEntry(entryCount() - 1);
         }
         GuiSelector::onDraw(target);
     }
