@@ -24,9 +24,7 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
     drawElements(mouse_position, window_rect, renderer);
 
     if (enable_debug_rendering)
-    {
         drawDebugElements(window_rect, renderer);
-    }
 }
 
 bool GuiCanvas::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
