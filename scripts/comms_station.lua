@@ -21,6 +21,9 @@ local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
 -- @tparam PlayerSpaceship comms_source
 -- @tparam SpaceStation comms_target
 function commsStationMainMenu(comms_source, comms_target)
+    commsImageByFactionOf(comms_source, comms_target)
+    comms_source.components.comms_transmitter.incoming_image = comms_target.components.comms_receiver.outgoing_image
+
     if comms_target.comms_data == nil then
         comms_target.comms_data = {}
     end
@@ -87,6 +90,7 @@ end
 -- @tparam SpaceStation comms_target
 function commsStationDocked(comms_source, comms_target)
     local message
+
     if comms_source:isFriendly(comms_target) then
         message = string.format(_("station-comms", "Good day, officer! Welcome to %s.\nWhat can we do for you today?"), comms_target:getCallSign())
     else

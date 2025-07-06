@@ -32,6 +32,7 @@ class FactionInfo
 public:
     glm::u8vec4 gm_color = {255,255,255,255};
     string name;
+    string image = "comms/placeholder.png";
     string locale_name;
     string description;
 

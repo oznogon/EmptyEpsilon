@@ -35,11 +35,16 @@ end
 -- @tparam SpaceStation comms_target
 function commsShipFriendly(comms_source, comms_target)
     local comms_data = comms_target.comms_data
+
+    commsImageByFactionOf(comms_source, comms_target)
+    comms_source.components.comms_transmitter.incoming_image = comms_target.components.comms_receiver.outgoing_image
+
     if comms_data.friendlyness < 20 then
         setCommsMessage(_("shipAssist-comms", "What do you want?"))
     else
         setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"))
     end
+
     addCommsReply(
         _("shipAssist-comms", "Defend a waypoint"),
         function(comms_source, comms_target)
@@ -139,6 +144,9 @@ Stand down or prepare to donate your corpses toward our nutrition.]])
         else
             message = _("shipEnemy-comms", "Mind your own business!")
         end
+
+        commsImageByFactionOf(comms_source, comms_target)
+        comms_source.components.comms_transmitter.incoming_image = comms_target.components.comms_receiver.outgoing_image
         setCommsMessage(message)
 
         comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
@@ -173,6 +181,9 @@ We are on an important mission.]])
 
 Good day.]])
     end
+
+    commsImageByFactionOf(comms_source, comms_target)
+    comms_source.components.comms_transmitter.incoming_image = comms_target.components.comms_receiver.outgoing_image
     setCommsMessage(message)
     return true
 end

@@ -11,6 +11,7 @@ local Entity = getLuaEntityFunctionTable()
 function Entity:setName(name)
     if self.components.faction_info then
         self.components.faction_info.name = name
+        self.components.faction_info.image = string.format("comms/%s_1.png", string.lower(name:gsub("%s+", "_")))
         __faction_info[name] = self
     end
     if self.components.science_database then

@@ -8,6 +8,7 @@ class CommsReceiver
 public:
     string script; // "comms_ship.lua" / "comms_station.lua"
     sp::script::Callback callback;
+    string outgoing_image = "comms/placeholder.png";
 };
 
 class CommsTransmitter
@@ -34,6 +35,7 @@ public:
 
     State state = State::Inactive;
     float open_delay = 0.0f;
+    string incoming_image = "comms/placeholder.png";
     string target_name;
     string incomming_message;
     sp::ecs::Entity target; // Server only

@@ -14,6 +14,7 @@ public:
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
 
+    GuiImage* setImage(string texture_name) { this->texture_name = texture_name; return this; }
     GuiImage* setColor(glm::u8vec4 color) { this->color = color; return this; }
     GuiImage* setAngle(float angle) { this->angle = angle; return this; }
 };

@@ -2,9 +2,11 @@
 #include "i18n.h"
 #include "commsOverlay.h"
 #include "gui/gui2_canvas.h"
+#include "gui/gui2_element.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_progressbar.h"
 #include "gui/gui2_button.h"
+#include "gui/gui2_image.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_listbox.h"
@@ -87,29 +89,38 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     }))->setSize(100, 50)->setPosition(-20, -10, sp::Alignment::BottomRight);
 
     // Panel for chat communications with GMs and other player ships.
-    chat_comms_box = new GuiPanel(this, "COMMS_CHAT_BOX");
+    chat_comms_box = new GuiElement(this, "COMMS_CHAT_BOX");
     chat_comms_box->hide()->setSize(800, 600)->setPosition(0, -100, sp::Alignment::BottomCenter);
 
+    chat_comms_content = new GuiPanel(chat_comms_box, "COMMS_CHAT_CONTENT");
+    chat_comms_content->setSize(675, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopRight)->setAttribute("layout", "vertical");
+
+    chat_comms_context = new GuiPanel(chat_comms_box, "COMMS_CHAT_CONTEXT");
+    chat_comms_context->setSize(120, 135)->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(20)->setAttribute("layout", "vertical");
+
+    // Text of incoming chat messages.
+    chat_comms_text = new GuiScrollFormattedText(chat_comms_content, "COMMS_CHAT_TEXT", "");
+    chat_comms_text->enableAutoScrollDown()->setSize(GuiElement::GuiSizeMax, 500)->setMargins(20);
+
+    chat_comms_response = new GuiElement(chat_comms_content, "COMMS_CHAT_RESPONSE");
+    chat_comms_response->setSize(GuiElement::GuiSizeMax, 50)->setMargins(20, 0, 20, 20)->setAttribute("layout", "horizontal");
+
     // Message entry field for chat.
-    chat_comms_message_entry = new GuiTextEntry(chat_comms_box, "COMMS_CHAT_MESSAGE_ENTRY", "");
-    chat_comms_message_entry->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(640, 50);
+    chat_comms_message_entry = new GuiTextEntry(chat_comms_response, "COMMS_CHAT_MESSAGE_ENTRY", "");
+    chat_comms_message_entry->setSize(590, GuiElement::GuiSizeMax);
     chat_comms_message_entry->enterCallback([this](string text){
         if (my_spaceship)
             my_player_info->commandSendCommPlayer(chat_comms_message_entry->getText());
         chat_comms_message_entry->setText("");
     });
 
-    // Text of incoming chat messages.
-    chat_comms_text = new GuiScrollFormattedText(chat_comms_box, "COMMS_CHAT_TEXT", "");
-    chat_comms_text->enableAutoScrollDown()->setPosition(20, 30, sp::Alignment::TopLeft)->setSize(760, 500);
-
     // Button to send a message.
-    chat_comms_send_button = new GuiButton(chat_comms_box, "SEND_BUTTON", tr("button", "Send"), [this]() {
+    chat_comms_send_button = new GuiButton(chat_comms_response, "SEND_BUTTON", tr("button", "Send"), [this]() {
         if (my_spaceship)
             my_player_info->commandSendCommPlayer(chat_comms_message_entry->getText());
         chat_comms_message_entry->setText("");
     });
-    chat_comms_send_button->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(120, 50);
+    chat_comms_send_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Button to close chat comms.
     chat_comms_close_button = new GuiButton(chat_comms_box, "CLOSE_BUTTON", tr("button", "Close"), []() {
@@ -117,6 +128,12 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
             my_player_info->commandCloseTextComm();
     });
     chat_comms_close_button->setTextSize(20)->setPosition(-10, 0, sp::Alignment::TopRight)->setSize(70, 30);
+
+    chat_comms_image = new GuiImage(chat_comms_context, "COMMS_CHAT_IMAGE", "comms/placeholder.png");
+    chat_comms_image->setMargins(20, 20, 20, 0)->setSize(80, 80);
+
+    chat_comms_callsign = new GuiLabel(chat_comms_context, "COMMS_CHAT_CALLSIGN", "", 16);
+    chat_comms_callsign->setMargins(20, 0, 20, 20)->setSize(80, 25);
 
     if (!engine->getObject("mouseRenderer")) //If we are a touch screen, add a on screen keyboard.
     {
@@ -129,17 +146,30 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 
     // Panel for scripted comms with objects.
     script_comms_box = new GuiPanel(this, "COMMS_SCRIPT_BOX");
-    script_comms_box->hide()->setSize(800, 600)->setPosition(0, -100, sp::Alignment::BottomCenter);
+    script_comms_box->hide()->setSize(GuiElement::GuiSizeMax, 600)->setPosition(0, 0, sp::Alignment::BottomCenter)->setMargins(200, 100)->setAttribute("layout", "vertical");
+    script_comms_box->setAttribute("padding", "20");
 
-    script_comms_text = new GuiScrollFormattedText(script_comms_box, "COMMS_SCRIPT_TEXT", "");
-    script_comms_text->setPosition(20, 30, sp::Alignment::TopLeft)->setSize(760, 500);
+    script_comms_content = new GuiElement(script_comms_box, "COMMS_SCRIPT_CONTENT");
+    script_comms_content->setSize(GuiElement::GuiSizeMax, 500)->setAttribute("layout", "horizontal");
+
+    script_comms_context = new GuiElement(script_comms_content, "COMMS_SCRIPT_CONTEXT");
+    script_comms_context->setSize(120, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+
+    script_comms_image = new GuiImage(script_comms_context, "COMMS_SCRIPT_IMAGE", "comms/placeholder.png");
+    script_comms_image->setSize(100, 100);
+
+    script_comms_callsign = new GuiLabel(script_comms_context, "COMMS_SCRIPT_CALLSIGN", "", 16);
+    script_comms_callsign->setSize(100, 25);
+
+    script_comms_text = new GuiScrollFormattedText(script_comms_content, "COMMS_SCRIPT_TEXT", "");
+    script_comms_text->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // List possible responses to a scripted communication.
-    script_comms_options = new GuiListbox(script_comms_box, "COMMS_SCRIPT_LIST", [this](int index, string value) {
+    script_comms_options = new GuiListbox(script_comms_box, "COMMS_SCRIPT_OPTIONS", [this](int index, string value) {
         script_comms_options->setOptions({});
         my_player_info->commandSendComm(index);
     });
-    script_comms_options->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(700, 400);
+    script_comms_options->setSize(GuiElement::GuiSizeMax, 0)->setAttribute("alignment", "bottomleft");
 
     // Button to close scripted comms.
     script_comms_close = new GuiButton(script_comms_box, "CLOSE_BUTTON", tr("button", "Close"), [this]() {
@@ -147,7 +177,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         if (my_spaceship)
             my_player_info->commandCloseTextComm();
     });
-    script_comms_close->setTextSize(20)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(150, 50);
+    script_comms_close->setTextSize(20)->setSize(150, 50)->setAttribute("alignment", "bottomright");
 }
 
 void GuiCommsOverlay::onUpdate()
@@ -169,6 +199,8 @@ void GuiCommsOverlay::onUpdate()
         const bool is_open = transmitter->state == CommsTransmitter::State::ChannelOpenGM || transmitter->state == CommsTransmitter::State::ChannelOpenPlayer;
         chat_comms_box->setVisible(is_open);
         chat_comms_text->setText(transmitter->incomming_message);
+        chat_comms_image->setImage(transmitter->incoming_image);
+        chat_comms_callsign->setText(transmitter->target_name);
         if (is_open && !chat_open_last_update)
         {
           // Chat window has just opened, let's auto-focus the text input
@@ -179,6 +211,8 @@ void GuiCommsOverlay::onUpdate()
 
         script_comms_box->setVisible(transmitter->state == CommsTransmitter::State::ChannelOpen);
         script_comms_text->setText(transmitter->incomming_message);
+        script_comms_image->setImage(transmitter->incoming_image);
+        script_comms_callsign->setText(transmitter->target_name);
 
         // Show the scripted comms options. If they've changed, update the lsit
         bool changed = script_comms_options->entryCount() != int(transmitter->script_replies.size());
@@ -192,8 +226,8 @@ void GuiCommsOverlay::onUpdate()
                 script_comms_options->addEntry(reply.message, reply.message);
             script_comms_options->setSelectionIndex(-1);
             int display_options_count = std::min(5, script_comms_options->entryCount());
-            script_comms_options->setSize(760, display_options_count * 50);
-            script_comms_text->setSize(760, 500 - display_options_count * 50);
+            script_comms_options->setSize(GuiElement::GuiSizeMax, display_options_count * 50);
+            script_comms_content->setSize(GuiElement::GuiSizeMax, 500 - display_options_count * 50);
         }
     }
 }

@@ -408,3 +408,39 @@ function isObjectType(obj,typ)
 		return false
 	end
 end
+
+function commsImageByFactionOf(comms_source, comms_target)
+    if comms_target:isFriendly(comms_source) or comms_target:isFriendOrFoeIdentifiedBy(comms_source) then
+        local faction_info = getFactionInfo(comms_target:getFaction())
+
+        if faction_info ~= nil
+        and comms_target.components.comms_receiver
+        and comms_target.components.comms_receiver.outgoing_image == "comms/placeholder.png"
+        then
+            local fi = faction_info.components.faction_info
+            local human_factions = {
+                ["Human Navy"] = true,
+                ["TSN"] = true,
+                ["USN"] = true,
+                ["CUF"] = true,
+            }
+            local factions = { "Independent", "Human Navy", "Kraylor", "Arlenians", "Exuari", "Ghosts", "Ktlitans", "TSN", "USN", "CUF" }
+
+            if human_factions[fi.name] then
+                comms_target.components.comms_receiver.outgoing_image = string.format("comms/human_%d.png", math.floor(random(1,17)))
+            elseif fi.name == "Independent" then
+                comms_target.components.comms_receiver.outgoing_image = string.format("comms/human_civilian_%d.png", math.floor(random(1,7)))
+            -- Logic must change if number of available portraits changes.
+            -- Knowing what portraits are available through a table provided by EE might be better.
+            elseif fi.name == "Kraylor" then
+                comms_target.components.comms_receiver.outgoing_image = fi.image
+            elseif fi.name == "Exuari" or fi.name == "Ktlitans" then
+                comms_target.components.comms_receiver.outgoing_image = string.format(fi.image:gsub(1, math.floor(random(1,2))))
+            else
+                comms_target.components.comms_receiver.outgoing_image = string.format(fi.image:gsub(1, math.floor(random(1,4))))
+            end
+        end
+    else
+        comms_target.components.comms_receiver.outgoing_image = "comms/placeholder.png"
+    end
+end

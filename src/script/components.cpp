@@ -456,11 +456,13 @@ void initComponentScriptBindings()
     BIND_MEMBER(CommsTransmitter, open_delay);
     BIND_MEMBER(CommsTransmitter, target_name);
     BIND_MEMBER(CommsTransmitter, incomming_message);
+    BIND_MEMBER(CommsTransmitter, incoming_image);
     BIND_MEMBER(CommsTransmitter, target);
 
     sp::script::ComponentHandler<CommsReceiver>::name("comms_receiver");
     BIND_MEMBER(CommsReceiver, script);
     BIND_MEMBER(CommsReceiver, callback);
+    BIND_MEMBER(CommsReceiver, outgoing_image);
 
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);
@@ -633,6 +635,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<FactionInfo>::name("faction_info");
     BIND_MEMBER(FactionInfo, gm_color);
     BIND_MEMBER(FactionInfo, name);
+    BIND_MEMBER(FactionInfo, image);
     BIND_MEMBER(FactionInfo, locale_name);
     BIND_MEMBER(FactionInfo, description);
     BIND_MEMBER(FactionInfo, reputation_points);

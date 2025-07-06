@@ -209,6 +209,15 @@ function Entity:sendCommsMessageNoLog(target, message)
     end
     return false
 end
+--- Set the image associated with comms sent from this entity.
+--- Example: obj:setCommsImage("comms/kraylor.png")
+function Entity:setCommsImage(target, image)
+    if target and target.components.comms_transmitter then
+        target.components.comms_transmitter.incoming_image = image
+        return true
+    end
+    return false
+end
 --- As SpaceObject:sendCommsMessage(), but sends an empty string as the message.
 --- This calls the SpaceObject's comms function.
 --- Example: obj:openCommsTo(player)

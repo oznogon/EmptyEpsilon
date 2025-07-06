@@ -253,7 +253,8 @@ function __fillDefaultDatabaseData()
 	-- Populate the Factions top-level entry.
 	local faction_database = ScienceDatabase():setName(_("database", "Factions"))
 	for name, info in pairs(__faction_info) do
-        local entry = faction_database:addEntry(info.components.faction_info.locale_name);
+        local entry = faction_database:addEntry(info.components.faction_info.locale_name)
+				entry:setImage(info.components.faction_info.image or "comms/placeholder.png")
 		for name2, info2 in pairs(__faction_info) do
             if info ~= info2 then
 				local stance = _("stance", "Neutral");

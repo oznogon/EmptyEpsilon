@@ -14,6 +14,7 @@ namespace sp::io {
 BASIC_REPLICATION_IMPL(FactionInfoReplication, FactionInfo)
     BASIC_REPLICATION_FIELD(gm_color);
     BASIC_REPLICATION_FIELD(name);
+    BASIC_REPLICATION_FIELD(image);
     BASIC_REPLICATION_FIELD(locale_name);
     BASIC_REPLICATION_FIELD(description);
     BASIC_REPLICATION_FIELD(reputation_points);

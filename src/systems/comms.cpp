@@ -60,6 +60,7 @@ void CommsSystem::update(float delta)
 void CommsSystem::openTo(sp::ecs::Entity player, sp::ecs::Entity target)
 {
     auto transmitter = player.getComponent<CommsTransmitter>();
+    auto receiver = target.getComponent<CommsReceiver>();
     if (!transmitter) return;
 
     if (transmitter->state == CommsTransmitter::State::Inactive || transmitter->state == CommsTransmitter::State::BeingHailed || transmitter->state == CommsTransmitter::State::BeingHailedByGM || transmitter->state == CommsTransmitter::State::ChannelClosed) {
@@ -70,12 +71,17 @@ void CommsSystem::openTo(sp::ecs::Entity player, sp::ecs::Entity target)
                 transmitter->target_name = cs->callsign;
             else
                 transmitter->target_name = "?";
+
+            if (receiver)
+                transmitter->incoming_image = receiver->outgoing_image;
+
             transmitter->incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", transmitter->target_name}});
             transmitter->target = target;
             if (auto log = player.getComponent<ShipLog>())
                 log->add(tr("shiplog", "Hailing: {name}").format({{"name", transmitter->target_name}}), colorConfig.log_generic);
         } else {
             transmitter->state = CommsTransmitter::State::Inactive;
+            transmitter->incoming_image = "comms/placeholder.png";
         }
     }
 }
@@ -348,6 +354,8 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
 
     player.removeComponent<CommsTransmitterEnvironment>();
     transmitter->incomming_message = "???";
+    if (receiver->outgoing_image != "comms/placeholder.png")
+        transmitter->incoming_image = receiver->outgoing_image;
 
     if (script_name != "")
     {

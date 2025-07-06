@@ -1,12 +1,15 @@
 -- A FactionInfo object contains presentation details and faction relationships for member SpaceObjects.
 -- This file is loaded upon launching a scenario.
 -- For details, see the FactionInfo class and getFactionInfo() global function in the scripting reference.
+-- To set a default faction image, put a square image at resources/comms/<setName>_1.png, with the name lowercased and spaces replaced by underscores. setFactionImage overrides the default.
 local neutral = FactionInfo():setName("Independent"):setLocaleName(_("Independent"))
 neutral:setGMColor(128, 128, 128)
+neutral:setFactionImage('comms/human_18.png')
 neutral:setDescription(_([[Despite appearing as a faction, independents are distinguished primarily by having no strong affiliation with any faction at all. Most traders consider themselves independent, though certain voices have started to speak up about creating a merchant faction.]]))
 
 local human = FactionInfo():setName("Human Navy"):setLocaleName(_("Human Navy"))
 human:setGMColor(255, 255, 255)
+human:setFactionImage('comms/human_1.png')
 human:setDescription(_([[The remnants of the human navy.
 
 While all other races were driven to the stars out of greed or scientific research, humans where the only race to start exploring the galaxy because their homeworld could no longer sustain their population. Some other races view humans as a sort of virus or plague due to the rate at which they can breed and spread.
@@ -72,6 +75,7 @@ TSN:setEnemy(kraylor)
 TSN:setEnemy(exuari)
 TSN:setEnemy(arlenians)
 TSN:setEnemy(Hive)
+TSN:setFactionImage('comms/human_6.png')
 TSN:setDescription(_([[The Terran Stellar Navy, or TSN, consists of naval forces based near Terra. Its members are primarily human.
 
 These humans and other races have banded together to form a navy to protect and enforce common philosophies. They are friendly with the human navy but do not follow the same command structure. Military actions taken in the past have made them enemies of the Arlenians, but they've got a better relationship with the Ghosts than the Human Navy does.
@@ -85,6 +89,7 @@ USN:setEnemy(exuari)
 USN:setEnemy(GITM)
 USN:setEnemy(Hive)
 USN:setEnemy(TSN)
+USN:setFactionImage('comms/human_16.png')
 USN:setDescription(_([[The United Stellar Navy, or USN, is a naval force near the boundary of human and Kraylor space consisting of mostly humans. The USN is friendly with the human navy and uses a similar command structure.
 
 The USN is primarily human but includes other races. This includes some Kraylor, which has made the TSN an enemy of the USN.]]))
@@ -95,6 +100,7 @@ CUF:setFriendly(human)
 CUF:setEnemy(exuari)
 CUF:setEnemy(kraylor)
 CUF:setEnemy(GITM)
+CUF:setFactionImage('comms/human_15.png')
 CUF:setDescription(_([[The Celestial Unified Fleet, or CUF, is the farthest-ranging primarily human fleet as well as the least xenophobic. The CUF's goals center on exploration and trade, but since it's a dangerous galaxy, they recognize the need for strong warships.
 
 The CUF is friendly with the human navy, and neutral toward the TSN and USN. They are less structured than the other primarily human navies.

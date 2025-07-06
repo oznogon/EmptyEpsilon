@@ -322,6 +322,7 @@ function init()
             DF3 = "MT52 Hornet",
         }
     }
+    station_1.components.comms_receiver.outgoing_image = "comms/human_1.png"
     table.insert(stationList, station_1)
     table.insert(friendlyList, station_1)
     n = 1
@@ -334,6 +335,7 @@ function init()
             DF3 = "Adder MK5",
         }
     }
+    station_2.components.comms_receiver.outgoing_image = "comms/human_4.png"
     table.insert(stationList, station_2)
     table.insert(friendlyList, station_2)
     n = 2
@@ -348,6 +350,7 @@ function init()
     }
     table.insert(stationList, station_3)
     table.insert(friendlyList, station_3)
+    station_3.components.comms_receiver.outgoing_image = "comms/human_17.png"
 
     -- Start the players with 300 reputation.
     friendlyList[1]:addReputationPoints(300.0)
@@ -474,6 +477,9 @@ function init()
 
 
     local station = friendlyList[1]
+    log(station.components.comms_receiver.outgoing_image)
+    station:setCommsImage(player, station.components.comms_receiver.outgoing_image)
+
     if gametimeleft ~= nil then
         station:sendCommsMessage(
             player, string.format(_("goal-incCall", [[%s, your objective is to fend off the incoming Kraylor attack.

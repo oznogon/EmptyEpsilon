@@ -24,12 +24,14 @@ local Entity = getLuaEntityFunctionTable()
 --- faction:setFriendly(human_navy):setEnemy(exuari) -- sets this faction's friendly and hostile relationships
 --- faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
 __faction_info = {}
+
 function FactionInfo()
     local fi = createEntity()
     fi.components.faction_info = {}
     fi:__setFactionRelation(fi, "friendly")
     return fi
 end
+
 function getFactionInfo(name)
     return __faction_info[name]
 end
@@ -83,6 +85,17 @@ function Entity:setNeutral(other_faction)
     if other_faction.components.faction_info == nil then error("setNeutral can only be called on factions.", 2) end
     self:__setFactionRelation(other_faction, "neutral")
     other_faction:__setFactionRelation(self, "neutral")
+    return self
+end
+--- Sets an image to associate with the given faction.
+--- Example: faction:setFactionImage("comms/kraylor.png") -- associates the image at that path with the faction
+function Entity:setFactionImage(image)
+    if self.components.faction_info == nil then
+        error("setFactionImage can only be called on factions.")
+    else
+        self.components.faction_info.image = image
+    end
+
     return self
 end
 

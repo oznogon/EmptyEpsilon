@@ -3,6 +3,7 @@
 
 #include "gui/gui2_element.h"
 
+class GuiElement;
 class GuiPanel;
 class GuiProgressbar;
 class GuiButton;
@@ -10,6 +11,7 @@ class GuiLabel;
 class GuiScrollText;
 class GuiListbox;
 class GuiTextEntry;
+class GuiImage;
 
 class GuiCommsOverlay : public GuiElement
 {
@@ -27,16 +29,27 @@ private:
     GuiPanel* broken_box;
     GuiPanel* closed_box;
 
-    GuiPanel* chat_comms_box;
+    GuiElement* chat_comms_box;
+    GuiPanel* chat_comms_content;
+    GuiElement* chat_comms_response;
+    GuiPanel* chat_comms_context;
+
     GuiTextEntry* chat_comms_message_entry;
     GuiScrollText* chat_comms_text;
     GuiButton* chat_comms_send_button;
     GuiButton* chat_comms_close_button;
+    GuiImage* chat_comms_image;
+    GuiLabel* chat_comms_callsign;
 
-    GuiPanel* script_comms_box;
+    GuiElement* script_comms_box;
+    GuiElement* script_comms_content;
+    GuiElement* script_comms_context;
+
     GuiScrollText* script_comms_text;
     GuiListbox* script_comms_options;
     GuiButton* script_comms_close;
+    GuiImage* script_comms_image;
+    GuiLabel* script_comms_callsign;
 
     bool chat_open_last_update;
 public:
