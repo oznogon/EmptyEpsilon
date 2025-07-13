@@ -134,7 +134,7 @@ ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationSc
 
     (new GuiButton(this, "CLOSE_SERVER", tr("Close"), [this]() {
         disconnectFromServer();
-        new ServerSetupScreen();        
+        new ServerSetupScreen();
         destroy();
     }))->setPosition(-250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
 
@@ -241,6 +241,13 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
         }
     });
     start_button->setPosition(250, -50, sp::Alignment::BottomCenter)->setSize(300, 50)->disable();
+
+    // Replay server button.
+    (new GuiButton(this, "REPLAY_SERVER", tr("Replay server"), [this]() {
+        game_server->setIsServerReplay(true);
+        destroy();
+        returnToShipSelection(getRenderLayer());
+    }))->setPosition(250, -100, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     // Select the previously selected scenario.
     for(const auto& info : ScenarioInfo::getScenarios()) {
