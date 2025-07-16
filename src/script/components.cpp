@@ -578,6 +578,16 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(MissileTubes, mounts, state);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, delay);
 
+    sp::script::ComponentHandler<MissileFlight>::name("missile_flight");
+    BIND_MEMBER(MissileFlight, speed);
+    BIND_MEMBER(MissileFlight, timeout);
+
+    sp::script::ComponentHandler<MissileHoming>::name("missile_homing");
+    BIND_MEMBER(MissileHoming, turn_rate);
+    BIND_MEMBER(MissileHoming, range);
+    BIND_MEMBER(MissileHoming, target);
+    BIND_MEMBER(MissileHoming, target_angle);
+
     sp::script::ComponentHandler<Coolant>::name("coolant");
     BIND_MEMBER(Coolant, max);
     BIND_MEMBER(Coolant, max_coolant_per_system);
