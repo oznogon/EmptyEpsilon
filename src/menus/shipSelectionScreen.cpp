@@ -410,6 +410,7 @@ void ShipSelectionScreen::update(float delta)
     }
 
     // Update the player ship list with all player ships.
+    player_ship_list->clear();
     for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
         string ship_name = Faction::getInfo(entity).locale_name;
@@ -418,14 +419,9 @@ void ShipSelectionScreen::update(float delta)
         if (auto cs = entity.getComponent<CallSign>())
             ship_name += " " + cs->callsign;
 
-        int index = player_ship_list->indexByValue(entity.toString());
-        // If a player ship isn't in already in the list, add it.
-        if (index == -1)
-        {
-            index = player_ship_list->addEntry(ship_name, entity.toString());
-            if (my_spaceship == entity)
-                player_ship_list->setSelectionIndex(index);
-        }
+        int index = player_ship_list->addEntry(ship_name, entity.toString());
+        if (my_spaceship == entity)
+            player_ship_list->setSelectionIndex(index);
 
         // If the ship is crewed, count how many positions are filled.
         int ship_position_count = 0;
