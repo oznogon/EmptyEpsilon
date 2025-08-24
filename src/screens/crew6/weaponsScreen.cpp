@@ -22,14 +22,18 @@
 #include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_rotationdial.h"
+#include "gui/gui2_progressbar.h"
+#include "gui/gui2_slider.h"
+#include "gui/gui2_button.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 
 
 WeaponsScreen::WeaponsScreen(GuiContainer* owner)
-: GuiOverlay(owner, "WEAPONS_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "WEAPONS_SCREEN", colorConfig.background), elapsed_time(0.0f), timing_value(0.0f), timing_direction(1)
 {
+    elapsed_time = engine->getElapsedTime();
     // Render the radar shadow and background decorations.
     (new GuiImage(this, "BACKGROUND_GRADIENT", "gui/background/gradient.png"))->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);
 
@@ -68,17 +72,70 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
         beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
-        beam_info_box->setPosition(-20, -120, sp::Alignment::BottomRight)->setSize(280, 150);
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam info"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, -50, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 50);
+        beam_info_box
+            ->setPosition(-20, -170, sp::Alignment::BottomRight)
+            ->setSize(280, 200);
+        beam_info_box->setAttribute("layout", "vertical");
+
+        // Label
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam targeting"), 30.0f))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        // Manual frequency controls
+        auto beam_manual_freq_controls = new GuiElement(beam_info_box, "BEAM_MANUAL_FREQUENCY_CONTROLS");
+        beam_manual_freq_controls
+            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setAttribute("layout", "horizontal");
+        // Frequency selector
+        beam_manual_frequency = new GuiBeamFrequencySelector(beam_manual_freq_controls, "BEAM_MANUAL_FREQUENCY_SELECTOR");
+        beam_manual_frequency
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        // Frequency lock toggle button
+        beam_manual_freq_toggle = new GuiToggleButton(beam_manual_freq_controls, "BEAM_MANUAL_FREQUENCY_TOGGLE", tr("Modulating"), [this](bool value) {
+            LOG(INFO) << "Beam manual frequency toggled " << value;
+        });
+        beam_manual_freq_toggle
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        // Manual fire controls
+        auto beam_manual_fire_controls = new GuiElement(beam_info_box, "BEAM_MANUAL_CONTROLS");
+        beam_manual_fire_controls
+            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setAttribute("layout", "horizontal");
+        // Fire button
+        beam_manual_fire = new GuiButton(beam_manual_fire_controls, "BEAM_MANUAL_FIRE", tr("Fire"), [this]() {
+            LOG(INFO) << "Beam firing, frequency " << beam_manual_frequency->getSelectionValue();
+        } );
+        beam_manual_fire
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        // Cooldown overlay
+        beam_manual_cooldown = new GuiProgressbar(beam_manual_fire, "BEAM_MANUAL_COOLDOWN", 0.0f, 1.0f, 0.0f);
+        beam_manual_cooldown
+            ->setColor(glm::u8vec4(128, 128, 128, 255))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+            ->hide();
+        beam_manual_cooldown_label = new GuiLabel(beam_manual_cooldown, "BEAM_MANUAL_COOLDOWN_LABEL", "0.0 sec.", 30.0f);
+        beam_manual_cooldown_label
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        // Fire lock toggle button
+        beam_manual_fire_toggle = new GuiToggleButton(beam_manual_fire_controls, "BEAM_MANUAL_FIRE_TOGGLE", tr("Auto"), [this](bool value) {
+            LOG(INFO) << "Beam manual firing toggled " << value;
+        });
+        beam_manual_fire_toggle
+            ->setSize(150.0f, GuiElement::GuiSizeMax);
+        // PDI overlay
+        (new GuiPowerDamageIndicator(beam_manual_fire, "BEAM_PDI", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // Systems targeting selector
+        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
         if (!gameGlobalInfo->use_beam_shield_frequencies)
-        {   //If we do have system damage, but no shield frequencies, we can partially overlap this with the shield button.
-            //So move the beam configuration a bit down.
+        {   // If we do have system damage, but no shield frequencies, we can partially overlap this with the shield button.
+            // So move the beam configuration a bit down.
             beam_info_box->setPosition(-20, -50, sp::Alignment::BottomRight);
         }
+
     }
 
     auto stats = new GuiElement(this, "WEAPONS_STATS");
@@ -139,6 +196,81 @@ void WeaponsScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
+        // Update the beam timing slider.
+        if (elapsed_time != engine->getElapsedTime())
+        {
+            const auto delta = engine->getElapsedTime() - elapsed_time;
+            bool can_fire = false;
+            float max_cooldown = 0.0f;
+
+            if (auto* beam_system = my_spaceship.getComponent<BeamWeaponSys>())
+            {
+                for (auto& mount : beam_system->mounts)
+                {
+                    if (mount.cooldown <= 0.0f)
+                    {
+                        can_fire = true;
+                        continue;
+                    }
+                    else if (mount.cooldown > max_cooldown)
+                    {
+                        max_cooldown = mount.cooldown;
+                        beam_manual_cooldown->setRange(0.0f, mount.cycle_time);
+                    }
+                }
+            }
+
+            beam_manual_fire->setEnable(can_fire);
+            beam_manual_cooldown->setVisible(!can_fire);
+
+            if (!can_fire)
+            {
+                beam_manual_cooldown
+                    ->setValue(max_cooldown);
+                beam_manual_cooldown_label
+                    ->setText(tr("{cooldown} sec.").format({{"cooldown", string(max_cooldown, 1)}}));
+            }
+
+            if (!beam_manual_freq_toggle->getValue())
+            {
+                beam_manual_freq_toggle
+                    ->setText(tr("Modulating"));
+
+                if (timing_value >= 19.5f && timing_direction == 1)
+                    timing_direction = -1;
+                if (timing_value <= 0.5f && timing_direction == -1)
+                    timing_direction = 1;
+
+                timing_value = timing_value + (timing_direction * delta);
+                beam_manual_frequency
+                    ->setSelectionIndex(std::floor(timing_value))
+                    ->disable();
+            }
+            else
+            {
+                beam_manual_freq_toggle
+                    ->setText(tr("Freq. locked"));
+                beam_manual_frequency
+                    ->enable();
+                timing_value = float(beam_manual_frequency->getSelectionIndex());
+            }
+
+            beam_manual_fire->setEnable(beam_manual_fire_toggle->getValue());
+
+            if (beam_manual_fire_toggle->getValue())
+            {
+                beam_manual_fire_toggle
+                    ->setText(tr("Manual"));
+            }
+            else
+            {
+                beam_manual_fire_toggle
+                    ->setText(tr("Auto"));
+            }
+
+            elapsed_time = engine->getElapsedTime();
+        }
+
         if (keys.weapons_enemy_next_target.getDown())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
