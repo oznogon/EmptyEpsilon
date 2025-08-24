@@ -1,8 +1,8 @@
 #include "packResourceProvider.h"
 
 #include <cstdio>
-#include <SDL_endian.h>
-#include <SDL_rwops.h>
+#include <SDL3/SDL_endian.h>
+#include <SDL3/SDL_iostream.h>
 
 #ifdef _WIN32
 #include <malloc.h>
@@ -14,25 +14,25 @@
 #include <jni.h>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #else
 #include <filesystem>
 #endif
 
-static inline int readInt(SDL_RWops* f)
+static inline int readInt(SDL_IOStream* f)
 {
     int32_t ret = 0;
-    SDL_RWread(f, &ret, sizeof(int32_t), 1);
-    return SDL_SwapBE32(ret);
+    SDL_ReadIO(f, &ret, sizeof(int32_t));
+    return SDL_Swap32BE(ret);
 }
 
-static inline string readString(SDL_RWops *f)
+static inline string readString(SDL_IOStream *f)
 {
     int8_t len = 0;
-    SDL_RWread(f, &len, sizeof(int8_t), 1);
+    SDL_ReadIO(f, &len, sizeof(int8_t));
     // MFC - MSVC doesn't support non-const [] initializers
     char *buffer = (char*)alloca(len + 1);
-    SDL_RWread(f, buffer, len, 1);
+    SDL_ReadIO(f, buffer, len);
     buffer[len] = '\0';
     return string(buffer);
 }
@@ -40,7 +40,7 @@ static inline string readString(SDL_RWops *f)
 PackResourceProvider::PackResourceProvider(string filename)
 : filename(filename)
 {
-    auto f = SDL_RWFromFile(filename.c_str(), "rb");
+    auto f = SDL_IOFromFile(filename.c_str(), "rb");
     if (!f)
     {
         LOG(WARNING) << "Failed to open " << filename << ": " << SDL_GetError();
@@ -64,7 +64,7 @@ PackResourceProvider::PackResourceProvider(string filename)
     {
         LOG(WARNING) << filename << " has unknown version " << version;
     }
-    SDL_RWclose(f);
+    SDL_CloseIO(f);
 }
 
 P<ResourceStream> PackResourceProvider::getResourceStream(const string filename)
@@ -146,7 +146,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 PackResourceStream::PackResourceStream(string filename, PackResourceInfo info)
 : position(info.position), size(info. size)
 {
-    f = SDL_RWFromFile(filename.c_str(), "rb");
+    f = SDL_IOFromFile(filename.c_str(), "rb");
     if (!f)
         destroy();
     else
@@ -155,14 +155,14 @@ PackResourceStream::PackResourceStream(string filename, PackResourceInfo info)
 PackResourceStream::~PackResourceStream()
 {
     if (f)
-        SDL_RWclose(f);
+        SDL_CloseIO(f);
 }
 
 size_t PackResourceStream::read(void* data, size_t size)
 {
     if (read_position + size > this->size)
         size = this->size - read_position;
-    auto ret = SDL_RWread(f, data, 1, size);
+    auto ret = SDL_ReadIO(f, data, size);
     read_position += ret;
     return ret;
 }
@@ -170,7 +170,7 @@ size_t PackResourceStream::read(void* data, size_t size)
 size_t PackResourceStream::seek(size_t position)
 {
     read_position = position;
-    SDL_RWseek(f, this->position + read_position, RW_SEEK_SET);
+    SDL_SeekIO(f, this->position + read_position, SDL_IO_SEEK_SET);
     return read_position;
 }
 

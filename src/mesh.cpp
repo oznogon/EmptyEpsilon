@@ -1,6 +1,6 @@
 #include <graphics/opengl.h>
 #include <unordered_map>
-#include <SDL_endian.h>
+#include <SDL3/SDL_endian.h>
 #include <meshoptimizer.h>
 #include <glm/gtx/norm.hpp>
 
@@ -14,7 +14,7 @@ namespace
     {
         int32_t ret = 0;
         stream->read(&ret, sizeof(int32_t));
-        return SDL_SwapBE32(ret);
+        return SDL_Swap32BE(ret);
     }
 
     constexpr uint32_t NO_BUFFER = 0;

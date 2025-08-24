@@ -12,7 +12,7 @@
 #include "ecs/query.h"
 #include "menus/luaConsole.h"
 #include "playerInfo.h"
-#include <SDL_assert.h>
+#include <SDL3/SDL_assert.h>
 
 P<GameGlobalInfo> gameGlobalInfo;
 

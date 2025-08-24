@@ -50,8 +50,11 @@ bool createDisplayWindows()
     if (PreferencesManager::get("multimonitor", "0").toInt() != 0)
     {
         auto n = PreferencesManager::get("multimonitor", "0").toInt();
-        if (n < 2)
-            n = SDL_GetNumVideoDisplays();
+        if (n < 2) {
+            int display_count;
+            SDL_GetDisplays(&display_count);
+            n = display_count;
+        }
         while(int(windows.size()) < n)
         {
             auto wrl = new RenderLayer();

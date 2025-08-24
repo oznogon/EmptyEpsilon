@@ -2,7 +2,7 @@
 
 #include "engine.h"
 #include "gameGlobalInfo.h"
-#include <SDL_assert.h>
+#include <SDL3/SDL_assert.h>
 
 const static int16_t CMD_RUN_SCRIPT = 0x0000;
 const static int16_t CMD_SEND_GLOBAL_MESSAGE = 0x0001;

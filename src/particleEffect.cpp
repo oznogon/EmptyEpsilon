@@ -6,7 +6,7 @@
 #include "textureManager.h"
 #include "tween.h"
 
-#include <SDL_assert.h>
+#include <SDL3/SDL_assert.h>
 
 #include <glm/gtx/norm.hpp>
 #include <glm/gtc/type_ptr.hpp>

@@ -1,5 +1,5 @@
 # Set minimum target macOS version: https://cmake.org/cmake/help/v3.8/variable/CMAKE_OSX_DEPLOYMENT_TARGET.html#variable:CMAKE_OSX_DEPLOYMENT_TARGET
-# SDL2 targets 10.5, however EE targets C++17 features only available in 10.15+ (Catalina, June 2019).
+# SDL3 targets 10.15+, matching EE's C++17 requirement (Catalina, June 2019).
 # Must be first!
 if(APPLE)
   if(NOT DEFINED ENV{MACOSX_DEPLOYMENT_TARGET})
@@ -810,17 +810,17 @@ set(CPACK_PROJECT_CONFIG_FILE "${PROJECT_BINARY_DIR}/CPackProjectConfig.cmake")
 
 if(APPLE)
   if("DragNDrop" IN_LIST CPACK_GENERATOR)
-    if(SDL2_LIBRARIES MATCHES "\\.framework$")
-      # SDL2_LIBRARIES points to the framework itself.
+    if(SDL3_LIBRARIES MATCHES "\\.framework$")
+      # SDL3_LIBRARIES points to the framework itself.
       # For fixup_bundle to pick it up, we need to get its parent directory as the 'root'.
-      # SDL2 also depends on hidapi.framework, which comes with the official DMG (https://libsdl.org/download-2.0.php)
+      # SDL3 also depends on hidapi.framework, which comes with the official distribution
       # Same idea - need the path to it for the dependency manager to pick it up.
       install(CODE "
         include(BundleUtilities)
-        fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/EmptyEpsilon.app\" \"\" \"${SDL2_LIBRARIES}/..;${SDL2_LIBRARIES}/Versions/Current/Frameworks\")
+        fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/EmptyEpsilon.app\" \"\" \"${SDL3_LIBRARIES}/..;${SDL3_LIBRARIES}/Versions/Current/Frameworks\")
       ")
     else()
-      message(WARNING "macOS DMG packaging: ${SDL2_LIBRARIES} does not appear to be a framework. The bundle will not be fixed up properly.")
+      message(WARNING "macOS DMG packaging: ${SDL3_LIBRARIES} does not appear to be a framework. The bundle will not be fixed up properly.")
     endif()
   endif()
 endif()

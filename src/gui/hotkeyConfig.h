@@ -3,7 +3,7 @@
 
 #include <tuple>
 #include <array>
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include <io/keybinding.h>
 #include "stringImproved.h"
 #include "components/shipsystem.h"

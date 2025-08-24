@@ -1,7 +1,7 @@
 #include "preferenceManager.h"
 
 #if defined(ANDROID)
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #endif
 
 std::unordered_map<string, string> PreferencesManager::preference;

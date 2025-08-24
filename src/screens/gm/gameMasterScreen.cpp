@@ -468,9 +468,9 @@ void GameMasterScreen::update(float delta)
         cancel_action_button->hide();
         if (mouse_renderer)
         {
-            if (SDL_GetModState() & KMOD_CTRL) mouse_renderer->setSpriteImage("mouse_ship.png");
-            else if (SDL_GetModState() & KMOD_ALT) mouse_renderer->setSpriteImage("mouse_faction.png");
-            else if (SDL_GetModState() & KMOD_SHIFT) mouse_renderer->setSpriteImage("mouse_add.png");
+            if (SDL_GetModState() & SDL_KMOD_CTRL) mouse_renderer->setSpriteImage("mouse_ship.png");
+            else if (SDL_GetModState() & SDL_KMOD_ALT) mouse_renderer->setSpriteImage("mouse_faction.png");
+            else if (SDL_GetModState() & SDL_KMOD_SHIFT) mouse_renderer->setSpriteImage("mouse_add.png");
             else mouse_renderer->setSpriteImage("mouse.png");
         }
     }
@@ -547,7 +547,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     case CD_DragViewOrOrder:
         {
             //Right click
-            bool shift_down = SDL_GetModState() & KMOD_SHIFT;
+            bool shift_down = SDL_GetModState() & SDL_KMOD_SHIFT;
             sp::ecs::Entity target;
             glm::vec2 target_position;
 
@@ -617,9 +617,9 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
         break;
     case CD_BoxSelect:
         {
-            bool shift_down = SDL_GetModState() & KMOD_SHIFT;
-            bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
-            bool alt_down = SDL_GetModState() & KMOD_ALT;
+            bool shift_down = SDL_GetModState() & SDL_KMOD_SHIFT;
+            bool ctrl_down = SDL_GetModState() & SDL_KMOD_CTRL;
+            bool alt_down = SDL_GetModState() & SDL_KMOD_ALT;
             std::vector<sp::ecs::Entity> entities;
 
             for(auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
