@@ -110,6 +110,7 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("headless") != "") {
         textureManager.setDisabled(true);
         Logging::setLogStdout();
+        new StdinLuaConsole();
     }
 
     initResourcePaths();
@@ -150,8 +151,6 @@ int main(int argc, char** argv)
     {
         if (!createDisplayWindows())
             return 1;
-    } else {
-        new StdinLuaConsole();
     }
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());

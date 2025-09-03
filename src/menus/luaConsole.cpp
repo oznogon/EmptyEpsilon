@@ -1,6 +1,7 @@
 #include "luaConsole.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
+#include "stdinLuaConsole.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_panel.h"
@@ -64,6 +65,8 @@ LuaConsole::LuaConsole()
 
 void LuaConsole::addLog(const string& message)
 {
+    StdinLuaConsole::addLuaLogLine(message);
+    
     if (!console) return;
     for(auto msg : message.split("\n"))
         console->log_messages.push_back(msg);
