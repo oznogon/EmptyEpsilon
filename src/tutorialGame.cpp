@@ -70,16 +70,17 @@ void TutorialGame::createScreens()
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
 
-    station_screen[0] = new HelmsScreen(this);
-    station_screen[1] = new WeaponsScreen(this);
-    station_screen[2] = new EngineeringScreen(this);
-    station_screen[3] = new ScienceScreen(this);
-    station_screen[4] = new RelayScreen(this, true);
-    station_screen[5] = new TacticalScreen(this);
-    station_screen[6] = new EngineeringAdvancedScreen(this);
-    station_screen[7] = new OperationScreen(this);
-    for(int n=0; n<8; n++)
-        station_screen[n]->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft);
+    station_screens.clear();
+    station_screens.push_back(new HelmsScreen(this));
+    station_screens.push_back(new WeaponsScreen(this));
+    station_screens.push_back(new EngineeringScreen(this));
+    station_screens.push_back(new ScienceScreen(this));
+    station_screens.push_back(new RelayScreen(this, true));
+    station_screens.push_back(new TacticalScreen(this));
+    station_screens.push_back(new EngineeringAdvancedScreen(this));
+    station_screens.push_back(new OperationScreen(this));
+    for (auto* screen : station_screens)
+        screen->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft);
 
     new GuiIndicatorOverlays(this);
 
@@ -195,7 +196,7 @@ void TutorialGame::switchViewToScreen(int n)
     if (n < 0 || n >= 8)
         return;
     instance->hideAllScreens();
-    instance->station_screen[n]->show();
+    instance->station_screens[n]->show();
 }
 
 void TutorialGame::setMessageToTopPosition()
@@ -252,10 +253,8 @@ void TutorialGame::hideAllScreens()
     tactical_radar->hide();
     long_range_radar->hide();
 
-    for(int n=0; n<8; n++)
-    {
-        station_screen[n]->hide();
-    }
+    for (auto* screen : station_screens)
+        screen->hide();
 }
 
 void LocalOnlyGame::update(float delta)
