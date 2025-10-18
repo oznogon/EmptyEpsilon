@@ -53,7 +53,7 @@ function transferHomingMissile(beam_emitter, mode_name, sending_entity, receivin
             receiving_entity.components.missile_tubes.storage_homing = receiving_entity.components.missile_tubes.storage_homing + 1
             receiving_entity.amount_restocked = receiving_entity.amount_restocked - 1
             beam_emitter:setCustomUtilityBeamModeProgress(mode_name, 0)
-            log("Transferred 1 homing missile from sender to receiver. Sender:", sending_entity.components.missile_tubes.storage_homing, "receiver:", receiving_entity.components.missile_tubes.storage_homing)
+            -- log("Sender transferred 1 homing missile to receiver. Sender:", sending_entity.components.missile_tubes.storage_homing, "receiver:", receiving_entity.components.missile_tubes.storage_homing)
         else
             emitter_utility_beam.is_firing = false
         end
@@ -82,7 +82,7 @@ function transferRepairCrew(beam_emitter, mode_name, sending_entity, receiving_e
             receiving_entity:setRepairCrewCount(receiving_entity:getRepairCrewCount() + 1)
             receiving_entity.transfer_progress = receiving_entity.transfer_progress - 1
             beam_emitter:setCustomUtilityBeamModeProgress(mode_name, 0)
-            log("Transferred 1 repair crew from sender to receiver. Sender:", sending_entity:getRepairCrewCount(), "receiver:", receiving_entity:getRepairCrewCount())
+            -- log("Sender transferred 1 repair crew to receiver. Sender:", sending_entity:getRepairCrewCount(), "receiver:", receiving_entity:getRepairCrewCount())
         else
             emitter_utility_beam.is_firing = false
         end
@@ -114,7 +114,7 @@ function convertFaction(beam_emitter, mode_name, target_entity, emitter_utility_
             target_entity:setFaction(new_faction)
             target_entity.faction_change_progress = 0
             beam_emitter:setCustomUtilityBeamModeProgress(mode_name, 0)
-            log("Converted target faction")
+            -- log("Converted target faction")
         else
             emitter_utility_beam.is_firing = false
         end
@@ -283,11 +283,10 @@ function init()
                     if not beam_emitter.components.reactor then return end
 
                     local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta = checkBeamCapability(beam_emitter)
-
                     local drain_amount = emitter_utility_beam.heat_add_rate_per_second * 100 * global_delta
 
                     if can_fire and beam_target:getEnergy() > drain_amount then
-                        log("beam_target:getEnergy():", beam_target:getEnergy(), "beam_target:getMaxEnergy():", beam_target:getMaxEnergy())
+                        -- log("beam_target:getEnergy():", beam_target:getEnergy(), "beam_target:getMaxEnergy():", beam_target:getMaxEnergy())
                         emitter_utility_beam.is_firing = true
                         beam_target:setEnergy(beam_target:getEnergy() - drain_amount)
                         beam_emitter:setEnergy(beam_emitter:getEnergy() + drain_amount)
@@ -309,7 +308,7 @@ function init()
                     end
 
                     if emitter_utility_beam.is_firing == true then
-                        log("Giving missile from player to target")
+                        -- log("Player giving missile to target")
                     end
                 end
             )
@@ -325,7 +324,7 @@ function init()
                     end
 
                     if emitter_utility_beam.is_firing == true then
-                        log("Taking missile from target to player")
+                        -- log("Player taking missile from target")
                     end
                 end
             )
@@ -337,13 +336,13 @@ function init()
                     local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta = checkBeamCapability(beam_emitter)
 
                     if can_fire and isObjectType(beam_target, "Asteroid") == true then
-                        log("Inside mine asteroid - isObjectType Asteroid is true")
+                        -- log("Inside mine asteroid - isObjectType Asteroid is true")
                         -- Beam strength = amount mined per 10 seconds
                         local amount_mined_per_tick = emitter_utility_beam.strength * 0.01 * emitter_utility_beam_effectiveness * global_delta
                         local hull = beam_emitter.components.hull
 
                         if hull then
-                            log("- Hull component check passed. hull.current = " .. hull.current .. " hull.max = " .. hull.max)
+                            -- log("- Hull component check passed. hull.current = " .. hull.current .. " hull.max = " .. hull.max)
 
                             if hull.current < hull.max then
                                 beam_emitter:setEnergy(beam_emitter:getEnergy() - emitter_utility_beam_energy_use_per_delta)
@@ -354,29 +353,29 @@ function init()
 
                                 if amount_mined_per_tick > asteroid_size then
                                     incremental_effect = incremental_effect + asteroid_size
-                                    log("- amount_mined: " .. incremental_effect .. " and asteroid destroyed")
+                                    -- log("- amount_mined: " .. incremental_effect .. " and asteroid destroyed")
                                     beam_target:destroy()
                                 else
                                     incremental_effect = incremental_effect + amount_mined_per_tick
-                                    log("- amount_mined: " .. incremental_effect .. ", asteroid_size: " .. asteroid_size)
+                                    -- log("- amount_mined: " .. incremental_effect .. ", asteroid_size: " .. asteroid_size)
                                     beam_target:setSize(asteroid_size - amount_mined_per_tick)
                                 end
 
                                 if incremental_effect > 1 then
                                     incremental_effect = incremental_effect - 1
                                     hull.current = hull.current + 0.1
-                                    log("- amount_mined: " .. incremental_effect .. " after repairing hull")
+                                    -- log("- amount_mined: " .. incremental_effect .. " after repairing hull")
                                 end
                             else
-                                log("- Hull component capacity check failed. hull.current = " .. hull.current .. " hull.max = " .. hull.max)
+                                -- log("- Hull component capacity check failed. hull.current = " .. hull.current .. " hull.max = " .. hull.max)
                                 emitter_utility_beam.is_firing = false
                             end
                         else
-                            log("- Hull component presence check failed.")
+                            -- log("- Hull component presence check failed.")
                             emitter_utility_beam.is_firing = false
                         end
                     else
-                        log("Inside mine asteroid - isObjectType Asteroid is false")
+                        -- log("Inside mine asteroid - isObjectType Asteroid is false")
                         emitter_utility_beam.is_firing = false
                     end
                 end
@@ -403,9 +402,9 @@ function init()
                         transferRepairCrew(beam_emitter, "Send repair crew", beam_emitter, beam_target, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta)
                     end
 
-                    if emitter_utility_beam.is_firing == true then
-                        log("Sending repair crew from player to target")
-                    end
+                    --[[ if emitter_utility_beam.is_firing == true then
+                        log("Player sending repair crew to target")
+                    end ]]
                 end
             )
             :addCustomUtilityBeamMode(
@@ -458,7 +457,7 @@ function init()
                     if can_fire then
                         beam_emitter:setEnergy(beam_emitter:getEnergy() - emitter_utility_beam_energy_use_per_delta)
                         beam_emitter:setSystemHeat("utilitybeam", beam_emitter:getSystemHeat("utilitybeam") + emitter_utility_beam.heat_add_rate_per_second * beam_emitter:getSystemPower("utilitybeam") * global_delta)
-                        log("Generating radar disruption")
+                        -- log("Generating radar disruption")
 
                         if emitter_utility_beam_effectiveness > 0.0 then
                             beam_target.components.warp_jammer = nil
@@ -478,7 +477,7 @@ function init()
                     else
                         beam_target.components.radar_trace = nil
                         beam_target.components.radar_block = nil
-                        beam_target.components.warp_jammer = nil
+                        beam_target.components.warp_jammer = nil -- Avoid carrying over Interdict component
                     end
                 end
             )
@@ -490,7 +489,7 @@ function init()
                     if can_fire then
                         beam_emitter:setEnergy(beam_emitter:getEnergy() - emitter_utility_beam_energy_use_per_delta)
                         beam_emitter:setSystemHeat("utilitybeam", beam_emitter:getSystemHeat("utilitybeam") + emitter_utility_beam.heat_add_rate_per_second * beam_emitter:getSystemPower("utilitybeam") * global_delta)
-                        log("Generating warp/jump disruption")
+                        -- log("Generating warp/jump disruption")
 
                         if emitter_utility_beam_effectiveness > 0.0 then
                             beam_target.components.radar_block = nil
@@ -509,7 +508,7 @@ function init()
                     else
                         beam_target.components.radar_trace = nil
                         beam_target.components.warp_jammer = nil
-                        beam_target.components.radar_block = nil
+                        beam_target.components.radar_block = nil -- Avoid carrying over Disrupt radar component
                     end
                 end
             )
@@ -547,9 +546,23 @@ function init()
                 "Repair", 1.0, 1.0, true,
                 function(beam_emitter, beam_target, distance, angle_diff)
                     local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta = checkBeamCapability(beam_emitter)
+                    local hull = beam_emitter.components.hull
 
-                    if can_fire then
-                        print("This is the custom beam mode Repair " .. beam_emitter:getCallSign() .. " repairs the hull and systems of " .. beam_target:getCallSign() or "unknown entity")
+                    if can_fire and hull then
+                        if hull.current < hull.max then
+                            beam_emitter:setEnergy(beam_emitter:getEnergy() - emitter_utility_beam_energy_use_per_delta)
+                            beam_emitter:setSystemHeat("utilitybeam", beam_emitter:getSystemHeat("utilitybeam") + emitter_utility_beam.heat_add_rate_per_second * beam_emitter:getSystemPower("utilitybeam") * global_delta)
+                            emitter_utility_beam.is_firing = true
+
+                            hull.current = math.min(hull.max, hull.current + 0.1)
+                            -- log("- Hull repaired. hull.current = " .. hull.current .. " hull.max = " .. hull.max)
+                        else
+                            -- log("- Hull component capacity check failed. hull.current = " .. hull.current .. " hull.max = " .. hull.max)
+                            emitter_utility_beam.is_firing = false
+                        end
+                    else
+                        -- log("- Hull component presence check failed.")
+                        emitter_utility_beam.is_firing = false
                     end
                 end
             )
@@ -716,7 +729,7 @@ function tractorBeamSetup(beam_emitter, beam_target, energy_per_delta, heat_per_
             return 0, position_x, position_y, target_position_x, target_position_y, {x = 0, y = 0}
         end
 
-        log("Consuming energy " .. energy_per_delta)
+        -- log("Consuming energy " .. energy_per_delta)
         local new_energy = beam_emitter:getEnergy() - energy_per_delta
 
         if new_energy < 0 then
@@ -728,7 +741,7 @@ function tractorBeamSetup(beam_emitter, beam_target, energy_per_delta, heat_per_
 
     -- If emitter uses coolant, generate heat
     if coolant then
-        log("Adding utility beam system heat " .. heat_per_sec * global_delta)
+        -- log("Adding utility beam system heat " .. heat_per_sec * global_delta)
         beam_emitter:setSystemHeat("utilitybeam", beam_emitter:getSystemHeat("utilitybeam") + heat_per_sec * global_delta)
     end
 
@@ -779,7 +792,7 @@ function tractorBeamSetup(beam_emitter, beam_target, energy_per_delta, heat_per_
 
     -- Drag calculations
     local drag_capability = utility_beam.strength * emitter_utility_beam_effectiveness
-    log("drag_capability: " .. drag_capability)
+    -- log("drag_capability: " .. drag_capability)
     target_force = target_mass
     local effective_drag_capability = math.max(0.1, (drag_capability - target_force == 0 and 0 or (drag_capability - target_force) / drag_capability))
     local drag_distance = math.min(distance, effective_drag_capability * drag_capability) * global_delta
