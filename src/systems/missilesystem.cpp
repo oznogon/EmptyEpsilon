@@ -135,6 +135,7 @@ void MissileSystem::update(float delta)
 void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
 {
     if (!game_server) return;
+    if (b.hasComponent<DelayedExplodeOnTouch>()) return;
     auto deot = a.getComponent<DelayedExplodeOnTouch>();
     if (deot && deot->trigger_holdoff_delay <= 0.0f) {
         auto hull = b.getComponent<Hull>();
@@ -163,11 +164,10 @@ void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, Expl
     auto transform = source.getComponent<sp::Transform>();
     if (!transform) return;
     DamageInfo info(eot.owner, eot.damage_type, transform->getPosition());
-    if (eot.blast_range > 100.0f || !target) {
+    if (eot.blast_range > 100.0f || !target)
         DamageSystem::damageArea(transform->getPosition(), eot.blast_range, eot.damage_at_edge, eot.damage_at_center, info, eot.blast_range / 2);
-    } else {
+    else
         DamageSystem::applyDamage(target, eot.damage_at_center, info);
-    }
 
     auto e = sp::ecs::Entity::create();
     e.addComponent<sp::Transform>(*transform);
@@ -187,14 +187,11 @@ void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, Expl
 
 void MissileSystem::startLoad(sp::ecs::Entity source, MissileTubes::MountPoint& tube, EMissileWeapons type)
 {
-    if (!tube.canLoad(type))
-        return;
-    if (tube.state != MissileTubes::MountPoint::State::Empty)
-        return;
+    if (!tube.canLoad(type)) return;
+    if (tube.state != MissileTubes::MountPoint::State::Empty) return;
     auto tubes = source.getComponent<MissileTubes>();
     if (!tubes) return;
-    if (tubes->storage[type] <= 0)
-        return;
+    if (tubes->storage[type] <= 0) return;
 
     tube.state = MissileTubes::MountPoint::State::Loading;
     tube.delay = tube.load_time;
