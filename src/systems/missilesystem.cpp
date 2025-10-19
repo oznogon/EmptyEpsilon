@@ -145,7 +145,7 @@ void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
     if (!eot) return;
     if (eot->owner == b) return;
     auto hull = b.getComponent<Hull>();
-    if (!hull) return;
+    if (!hull && !eot) return;
 
     explode(a, b, *eot);
 }
