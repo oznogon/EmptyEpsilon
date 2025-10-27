@@ -38,6 +38,8 @@ namespace ShaderRegistry
 		ObjectSpecularNormal,
 		ObjectSpecularIlluminationNormal,
 		Planet,
+		Scrolling,
+		VolumetricExplosion,
 
 		Count
 	};
@@ -61,6 +63,15 @@ namespace ShaderRegistry
 
 		AmbientLightDirection,
 		SpecularLightDirection,
+
+		ScrollOffset,
+
+		Time,
+		Resolution,
+		StartColor,
+		BillboardSize,
+		ExplosionAlpha,
+		QualityFactor,
 
 		Count
 	};

@@ -74,13 +74,23 @@ public:
 class ExplosionEffect
 {
 public:
+    enum class ExplosionType
+    {
+        SmallThermal,
+        LargeThermal,
+        Electric,
+        Kinetic
+    };
+
     constexpr static float max_lifetime = 2.f;
     constexpr static int particle_count = 1000;
 
     float lifetime = max_lifetime;
     float size = 1.0;
+    glm::vec3 color{1.0,0.6,0.3};
     glm::vec3 particle_directions[particle_count];
     bool radar = false;
+    ExplosionType type = ExplosionType::LargeThermal;
     bool electrical = false;
 
     // Fit elements in a uint8 - at 4 vertices per quad, that's (256 / 4 =) 64 quads.

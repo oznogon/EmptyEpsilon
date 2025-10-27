@@ -3,7 +3,7 @@
 #include <ecs/entity.h>
 #include <glm/vec3.hpp>
 #include "systems/damage.h"
-
+#include "systems/rendering.h"
 
 class MissileFlight
 {
@@ -29,6 +29,7 @@ public:
     float damage_at_edge = 35.0f;
     float blast_range = 100.0f;
     sp::ecs::Entity owner;
+    ExplosionEffect::ExplosionType explosion_type = ExplosionEffect::ExplosionType::Kinetic;
     DamageType damage_type = DamageType::Kinetic;
     string explosion_sfx;
 };

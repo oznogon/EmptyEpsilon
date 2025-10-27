@@ -27,6 +27,7 @@ BASIC_REPLICATION_IMPL(NebulaRendererReplication, NebulaRenderer)
 BASIC_REPLICATION_IMPL(ExplosionEffectReplication, ExplosionEffect)
     BASIC_REPLICATION_FIELD(size);
     BASIC_REPLICATION_FIELD(radar);
+    BASIC_REPLICATION_FIELD(type);
     BASIC_REPLICATION_FIELD(electrical);
 }
 BASIC_REPLICATION_IMPL(PlanetRenderReplication, PlanetRender)

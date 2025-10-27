@@ -7,6 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "tween.h"
 #include "random.h"
+#include "gameGlobalInfo.h"
 
 
 std::vector<RenderSystem::RenderHandler> RenderSystem::render_handlers;
@@ -214,17 +215,25 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 {
     float f = (1.0f - (ee.lifetime / ee.max_lifetime));
     float scale;
-    float alpha = 0.5f;
-    if (f < 0.2f) {
+    float alpha = 1.0f;
+    if (f < 0.2f)
+    {
         scale = (f / 0.2f);
-        if (ee.electrical)
+        if (ee.type == ExplosionEffect::ExplosionType::Electric)
             scale *= 0.8f;
-    } else {
-        if (ee.electrical)
+    }
+    else
+    {
+        if (ee.type == ExplosionEffect::ExplosionType::Electric)
             scale = Tween<float>::easeOutQuad(f, 0.2f, 1.f, 0.8f, 1.0f);
         else
             scale = Tween<float>::easeOutQuad(f, 0.2f, 1.f, 1.0f, 1.3f);
-        alpha = Tween<float>::easeInQuad(f, 0.2f, 1.f, 0.5f, 0.0f);
+    }
+
+    // Remain fully opaque until last 20% of lifetime, then fade quickly
+    if (f > 0.8f) {
+        float fadeProgress = (f - 0.8f) / 0.2f; // 0 to 1 in last 20%
+        alpha = 1.0f - fadeProgress;
     }
 
     auto position = transform.getPosition();
@@ -233,31 +242,83 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
 
     auto explosion_matrix = glm::scale(model_matrix, glm::vec3(scale * ee.size));
-    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
+
+    // Render billboard with volumetric explosion shader
+    if (ee.type != ExplosionEffect::ExplosionType::Kinetic)
     {
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
-        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        if (ee.electrical)
-            textureManager.getTexture("texture/electric_sphere_texture.png")->bind();
+        struct VertexAndTexCoords
+        {
+            glm::vec3 vertex;
+            glm::vec2 texcoords;
+        };
+        static std::array<VertexAndTexCoords, 4> quad{
+            glm::vec3{}, {0.f, 1.f},
+            glm::vec3{}, {1.f, 1.f},
+            glm::vec3{}, {1.f, 0.f},
+            glm::vec3{}, {0.f, 0.f}
+        };
+
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::VolumetricExplosion);
+
+        if (ee.type == ExplosionEffect::ExplosionType::Electric)
+            glUniform3f(shader.get().uniform(ShaderRegistry::Uniforms::StartColor), 0.6f, 0.6f, 1.0f);
         else
-            textureManager.getTexture("texture/fire_sphere_texture.png")->bind();
+            glUniform3f(shader.get().uniform(ShaderRegistry::Uniforms::StartColor), ee.color.r, ee.color.g, ee.color.b);
+
+        // Set model matrix (position only, billboard handles rotation and scale)
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+
+        // Set billboard size (scale of the explosion)
+        float billboardSize = scale * ee.size * 3.0f;
+        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::BillboardSize), billboardSize);
+
+        // Get viewport dimensions
+        GLint viewport[4];
+        glGetIntegerv(GL_VIEWPORT, viewport);
+        float viewportWidth = static_cast<float>(viewport[2]);
+        float viewportHeight = static_cast<float>(viewport[3]);
+        glUniform2f(shader.get().uniform(ShaderRegistry::Uniforms::Resolution),
+                    viewportWidth, viewportHeight);
+
+        // Calculate quality factor based on screen-space coverage
+        // Small on screen (far) = high quality (1.0), Large (close) = low quality (0.3)
+        // Quality ranges from 1.0 (< 1% coverage) to 0.3 (> 20% coverage)
+        float qualityFactor = glm::clamp(1.0f - ((billboardSize * billboardSize) / (viewportWidth * viewportHeight) - 0.01f) / 0.19f, 0.3f, 1.0f);
+        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::QualityFactor), qualityFactor);
+
+        // Set time uniform based on explosion progress (0 to max_lifetime)
+        // Multiply by speed factor to complete animation within lifetime
+        float explosionTime = (ee.max_lifetime - ee.lifetime) * 10.0f;
+        if (ee.type != ExplosionEffect::ExplosionType::Electric) explosionTime /= 2.0f;
+
+        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::Time), explosionTime);
+
+        // Set alpha for fade effect
+        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::ExplosionAlpha), alpha);
+
+        // Bind noise texture for volumetric effect
+        textureManager.getTexture("texture/rgbnoise.png")->bind();
 
         gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-        gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
-        gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
-        Mesh* m = Mesh::getMesh("mesh/sphere.obj");
-        m->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
-        if (ee.electrical) {
-            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::scale(explosion_matrix, glm::vec3(.5f))));
-            m->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
-        }
+        // Use additive blending for bloom effect
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+
+        std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+
+        // Restore default blending
+        glBlendFunc(GL_ONE, GL_ONE);
     }
     std::vector<glm::vec3> vertices(4 * ee.max_quad_count);
 
-    if (!ee.particles_buffers) {
-        for(int n=0; n<ee.particle_count; n++)
+    if (!ee.particles_buffers)
+    {
+        for(int n = 0; n < ee.particle_count; n++)
             ee.particle_directions[n] = glm::normalize(glm::vec3(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8f, 1.2f);
 
         ee.particles_buffers = std::make_shared<gl::Buffers<2>>();
@@ -299,13 +360,15 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, (*ee.particles_buffers)[0]);
     gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, (*ee.particles_buffers)[1]);
 
-    // Fire ring
-    if (!ee.electrical)
+    // Fire ring with basic shader (no scrolling)
+    if (ee.type == ExplosionEffect::ExplosionType::LargeThermal)
     {
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
         textureManager.getTexture("texture/fire_ring.png")->bind();
 
         explosion_matrix = glm::scale(explosion_matrix, glm::vec3(1.5f));
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
 
         vertices[0] = glm::vec3(-1, -1, 0);
         vertices[1] = glm::vec3(1, -1, 0);
@@ -325,48 +388,68 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         }
     }
 
-    shader = ShaderRegistry::ScopedShader(ShaderRegistry::Shaders::Billboard);
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-
-    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-
-    textureManager.getTexture("particle.png")->bind();
-
-    scale = Tween<float>::easeInCubic(f, 0.f, 1.f, 0.3f, 5.0f);
-    float r = Tween<float>::easeInQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-    float g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-    float b = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-    if (ee.electrical) {
-        scale = Tween<float>::easeInCubic(f, 0.f, 1.f, 0.3f, 3.0f);
-        r = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-        g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-        b = Tween<float>::easeInQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-    }
-    glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, ee.size / 32.0f);
-
-    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
-    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(vertices.size() * sizeof(glm::vec3)));
-
-    const size_t quad_count = ee.max_quad_count;
-    // We're drawing particles `quad_count` at a time.
-    for (size_t n = 0; n < ee.particle_count;)
+    // Debris/spark particles
+    if (ee.type != ExplosionEffect::ExplosionType::SmallThermal)
     {
-        auto active_quads = std::min(quad_count, ee.particle_count - n);
-        // setup quads
-        for (auto p = 0U; p < active_quads; ++p)
-        {
-            glm::vec3 v = ee.particle_directions[n + p] * scale * ee.size;
-            vertices[4 * p + 0] = v;
-            vertices[4 * p + 1] = v;
-            vertices[4 * p + 2] = v;
-            vertices[4 * p + 3] = v;
-        }
-        // upload
-        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(6 * active_quads), GL_UNSIGNED_SHORT, nullptr);
-        n += active_quads;
+        gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
+        textureManager.getTexture("particle.png")->bind();
+
+        float r = 0.0f;
+        float g = 0.0f;
+        float b = 0.0f;
+
+        if (ee.type == ExplosionEffect::ExplosionType::Electric)
+        {
+            scale = Tween<float>::easeOutCubic(f, 0.f, 1.f, 0.3f, 3.0f);
+            r = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+            g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+            b = Tween<float>::easeInQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+        }
+        else if (ee.type == ExplosionEffect::ExplosionType::Kinetic)
+        {
+            scale = Tween<float>::easeOutCubic(f, 0.f, 1.f, 0.3f, 2.0f);
+            r = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+            g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+            b = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+        }
+        else
+        {
+            scale = Tween<float>::easeOutCubic(f, 0.f, 1.f, 0.3f, 5.0f);
+            r = Tween<float>::easeInQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+            g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+            b = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+        }
+
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, ee.size / 32.0f);
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(vertices.size() * sizeof(glm::vec3)));
+
+        const size_t quad_count = ee.max_quad_count;
+        // We're drawing particles `quad_count` at a time.
+        for (size_t n = 0; n < ee.particle_count;)
+        {
+            auto active_quads = std::min(quad_count, ee.particle_count - n);
+            // setup quads
+            for (auto p = 0U; p < active_quads; ++p)
+            {
+                glm::vec3 v = ee.particle_directions[n + p] * scale * ee.size;
+                vertices[4 * p + 0] = v;
+                vertices[4 * p + 1] = v;
+                vertices[4 * p + 2] = v;
+                vertices[4 * p + 3] = v;
+            }
+            // upload
+            glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
+
+            glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(6 * active_quads), GL_UNSIGNED_SHORT, nullptr);
+            n += active_quads;
+        }
     }
 }
 

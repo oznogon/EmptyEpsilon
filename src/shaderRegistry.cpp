@@ -34,7 +34,9 @@ namespace ShaderRegistry
             "shaders/objectShader:ILLUMINATION:NORMAL",
             "shaders/objectShader:SPECULAR:NORMAL",
             "shaders/objectShader:ILLUMINATION:SPECULAR:NORMAL",
-            "shaders/planet"
+            "shaders/planet",
+            "shaders/scrolling",
+            "shaders/volumetricExplosion",
         };
 
         std::array<const char*, Uniforms_t(Uniforms::Count)> uniform_names{
@@ -53,6 +55,15 @@ namespace ShaderRegistry
 
             "u_ambientLightDirection",
             "u_specularLightDirection"
+
+            "u_scrollOffset",
+
+            "u_time",
+            "u_resolution",
+            "u_startColor",
+            "u_billboardSize",
+            "u_explosionAlpha",
+            "u_qualityFactor"
         };
 
         std::array<const char*, Attributes_t(Attributes::Count)> attribute_names{
@@ -62,7 +73,7 @@ namespace ShaderRegistry
             "a_tangent",
         };
 
-        std::array<std::tuple<Uniforms, int32_t>, 5> texture_units{
+        std::array<std::tuple<Uniforms, int32_t>, 6> texture_units{
             std::make_tuple(Uniforms::TextureMap, 0),
             std::make_tuple(Uniforms::BaseMap, 0),
             std::make_tuple(Uniforms::SpecularMap, 1),

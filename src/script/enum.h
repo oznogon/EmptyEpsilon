@@ -11,6 +11,7 @@
 #include "components/player.h"
 #include "components/missiletubes.h"
 #include "components/customshipfunction.h"
+#include "components/rendering.h"
 #include "missileWeaponData.h"
 
 
@@ -430,6 +431,30 @@ template<> struct Convert<MainScreenOverlay> {
             return MainScreenOverlay::ShowComms;
         luaL_error(L, "Unknown MainScreenOverlay: %s", str.c_str());
         return MainScreenOverlay::HideComms;
+    }
+};
+template<> struct Convert<ExplosionEffect::ExplosionType> {
+    static int toLua(lua_State* L, ExplosionEffect::ExplosionType value) {
+        switch(value) {
+        case ExplosionEffect::ExplosionType::SmallThermal: lua_pushstring(L, "small_thermal"); break;
+        case ExplosionEffect::ExplosionType::LargeThermal: lua_pushstring(L, "large_thermal"); break;
+        case ExplosionEffect::ExplosionType::Electric: lua_pushstring(L, "electric"); break;
+        case ExplosionEffect::ExplosionType::Kinetic: lua_pushstring(L, "kinetic"); break;
+        }
+        return 1;
+    }
+    static ExplosionEffect::ExplosionType fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "small_thermal")
+            return ExplosionEffect::ExplosionType::SmallThermal;
+        else if (str == "large_thermal")
+            return ExplosionEffect::ExplosionType::LargeThermal;
+        else if (str == "electric")
+            return ExplosionEffect::ExplosionType::Electric;
+        else if (str == "kinetic")
+            return ExplosionEffect::ExplosionType::Kinetic;
+        luaL_error(L, "Unknown ExplosionEffect::ExplosionType: %s", str.c_str());
+        return ExplosionEffect::ExplosionType::LargeThermal;
     }
 };
 

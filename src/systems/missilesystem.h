@@ -25,6 +25,6 @@ public:
     static float calculateFiringSolution(sp::ecs::Entity source, const MissileTubes::MountPoint& tube, sp::ecs::Entity target);
 
 private:
-    static void explode(sp::ecs::Entity source, sp::ecs::Entity target, ExplodeOnTouch& eot);
+    static void explode(sp::ecs::Entity source, sp::ecs::Entity target, ExplodeOnTouch& eot, ExplosionEffect::ExplosionType explosion_type = ExplosionEffect::ExplosionType::Kinetic);
     static void spawnProjectile(sp::ecs::Entity source, MissileTubes::MountPoint& tube, float angle, sp::ecs::Entity target);
 };

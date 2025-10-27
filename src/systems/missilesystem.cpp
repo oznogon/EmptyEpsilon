@@ -158,28 +158,43 @@ void MissileSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e,
     renderer.drawCircleOutline(screen_position, r * scale, 3.0, component.triggered ? glm::u8vec4(255, 0, 0, 128) : glm::u8vec4(255, 255, 255, 128));
 }
 
-void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, ExplodeOnTouch& eot)
+void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, ExplodeOnTouch& eot, ExplosionEffect::ExplosionType explosion_type)
 {
     auto transform = source.getComponent<sp::Transform>();
     if (!transform) return;
+
     DamageInfo info(eot.owner, eot.damage_type, transform->getPosition());
-    if (eot.blast_range > 100.0f || !target) {
+
+    if (eot.blast_range > 100.0f || !target)
         DamageSystem::damageArea(transform->getPosition(), eot.blast_range, eot.damage_at_edge, eot.damage_at_center, info, eot.blast_range / 2);
-    } else {
+    else
         DamageSystem::applyDamage(target, eot.damage_at_center, info);
-    }
 
     auto e = sp::ecs::Entity::create();
     e.addComponent<sp::Transform>(*transform);
     auto& ee = e.addComponent<ExplosionEffect>();
+    ee.type = explosion_type;
     ee.size = eot.blast_range;
     ee.radar = true;
-    if (!eot.explosion_sfx.empty()) {
+
+    if (!eot.explosion_sfx.empty())
+    {
+        //soundManager->playSound(explosion_sound, getPosition(), size * 2, 0.6);
         e.addComponent<Sfx>().sound = eot.explosion_sfx;
     }
-    if (eot.damage_type == DamageType::EMP) {
-        ee.electrical = true;
+/*
+    if (eot.damage_type == DamageType::EMP)
+    {
+        e.addComponent<Sfx>().sound = "sfx/emp_explosion.wav";
+        ee.type = ExplosionEffect::ExplosionType::Electric;
     }
+
+    if (eot.damage_type == DamageType::Kinetic)
+    {
+        e.addComponent<Sfx>().sound = "sfx/explosion.wav"; // TODO: Kinetic impact sound
+        ee.type = ExplosionEffect::ExplosionType::Kinetic;
+    }
+*/
     source.destroy();
 }
 
@@ -252,6 +267,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_edge = 5 * category_modifier;
             mc.blast_range = 30 * category_modifier;
             mc.explosion_sfx = "sfx/explosion.wav";
+            mc.explosion_type = ExplosionEffect::ExplosionType::SmallThermal;
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.1f, 0.2f);
         }
         break;
@@ -263,6 +279,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_center = 160.0f * category_modifier;
             mc.damage_at_edge = 30.0f * category_modifier;
             mc.blast_range = 1000.0f * category_modifier;
+            mc.explosion_type = ExplosionEffect::ExplosionType::LargeThermal;
             mc.explosion_sfx = "sfx/nuke_explosion.wav";
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.7f, 0.1f);
             missile.addComponent<DelayedAvoidObject>(10.0f, 1000.0f);
@@ -280,6 +297,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_edge = 30.0f * category_modifier;
             mc.blast_range = 1000.0f * category_modifier;
             mc.explosion_sfx = "sfx/explosion.wav";
+            mc.explosion_type = ExplosionEffect::ExplosionType::LargeThermal;
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.05f, 0.0f);
         }
         break;
@@ -292,6 +310,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_edge = 10.0f * category_modifier;
             mc.blast_range = 20.0f * category_modifier;
             mc.explosion_sfx = "sfx/explosion.wav";
+            mc.explosion_type = ExplosionEffect::ExplosionType::Kinetic;
             missile.addComponent<RawRadarSignatureInfo>(0.1f, 0.0f, 0.0f);
         }
         break;
@@ -305,6 +324,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.blast_range = 1000.0f * category_modifier;
             mc.damage_type = DamageType::EMP;
             mc.explosion_sfx = "sfx/emp_explosion.wav";
+            mc.explosion_type = ExplosionEffect::ExplosionType::Electric;
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 1.0f, 0.0f);
             missile.addComponent<ExplodeOnTimeout>();
         }

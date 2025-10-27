@@ -306,6 +306,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(ExplodeOnTouch, blast_range);
     BIND_MEMBER(ExplodeOnTouch, owner);
     BIND_MEMBER(ExplodeOnTouch, damage_type);
+    BIND_MEMBER(ExplodeOnTouch, explosion_type);
     BIND_MEMBER(ExplodeOnTouch, explosion_sfx);
 
     sp::script::ComponentHandler<DelayedExplodeOnTouch>::name("delayed_explode_on_touch");
@@ -316,11 +317,13 @@ void initComponentScriptBindings()
     BIND_MEMBER(DelayedExplodeOnTouch, blast_range);
     BIND_MEMBER(DelayedExplodeOnTouch, owner);
     BIND_MEMBER(DelayedExplodeOnTouch, damage_type);
+    BIND_MEMBER(DelayedExplodeOnTouch, explosion_type);
     BIND_MEMBER(DelayedExplodeOnTouch, explosion_sfx);
 
     sp::script::ComponentHandler<ExplosionEffect>::name("explosion_effect");
     BIND_MEMBER(ExplosionEffect, size);
     BIND_MEMBER(ExplosionEffect, radar);
+    BIND_MEMBER(ExplosionEffect, type);
     BIND_MEMBER(ExplosionEffect, electrical);
 
     sp::script::ComponentHandler<Sfx>::name("sfx");
