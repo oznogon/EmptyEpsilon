@@ -26,6 +26,7 @@ namespace ShaderRegistry
             "shaders/basic",
             "shaders/basicColor",
             "shaders/billboard",
+            "shaders/billboardAnimated",
             "shaders/objectShader",
             "shaders/objectShader:ILLUMINATION",
             "shaders/objectShader:SPECULAR",
@@ -41,14 +42,16 @@ namespace ShaderRegistry
             "view",
             "camera_position",
             "atmosphereColor",
-            
+
             "textureMap",
             "baseMap",
             "specularMap",
             "illuminationMap",
 
             "ambientLightDirection",
-            "specularLightDirection"
+            "specularLightDirection",
+
+            "spriteSheetParams"
         };
 
         std::array<const char*, Attributes_t(Attributes::Count)> attribute_names{

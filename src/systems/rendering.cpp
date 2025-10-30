@@ -391,3 +391,76 @@ void BillboardRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
     glBlendFunc(GL_ONE, GL_ONE);
 }
+
+void BillboardExplosionRenderSystem::update(float delta)
+{
+    for(auto [entity, be] : sp::ecs::Query<BillboardExplosion>())
+    {
+        be.lifetime -= delta;
+        if (be.lifetime <= 0.0f)
+        {
+            entity.destroy();
+        }
+    }
+}
+
+void BillboardExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, BillboardExplosion& be)
+{
+    struct VertexAndTexCoords
+    {
+        glm::vec3 vertex;
+        glm::vec2 texcoords;
+    };
+    static std::array<VertexAndTexCoords, 4> quad{
+        glm::vec3{}, {0.f, 1.f},
+        glm::vec3{}, {1.f, 1.f},
+        glm::vec3{}, {1.f, 0.f},
+        glm::vec3{}, {0.f, 0.f}
+    };
+
+    // Bind texture
+    textureManager.getTexture(be.texture)->bind();
+
+    // Use the animated billboard shader
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BillboardAnimated);
+
+    auto position = transform.getPosition();
+    auto rotation = transform.getRotation();
+    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
+    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
+
+    // Set uniforms
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+    glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), be.color.r, be.color.g, be.color.b, be.size);
+
+    // Calculate current frame based on lifetime and FPS
+    float time_elapsed = be.max_lifetime - be.lifetime;
+    int total_frames = be.sprite_columns * be.sprite_rows;
+    int current_frame = static_cast<int>(time_elapsed * be.fps);
+    // Clamp to last frame instead of wrapping (explosions play once)
+    if (current_frame >= total_frames)
+        current_frame = total_frames - 1;
+
+    // Set sprite sheet parameters (columns, rows, current frame, unused)
+    glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::SpriteSheetParams),
+        static_cast<float>(be.sprite_columns),
+        static_cast<float>(be.sprite_rows),
+        static_cast<float>(current_frame),
+        0.0f);
+
+    // Set up vertex attributes
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
+    // Use alpha blending for smooth edges
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+
+    std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+
+    // Restore additive blending for other effects
+    glBlendFunc(GL_ONE, GL_ONE);
+}
