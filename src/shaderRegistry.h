@@ -29,6 +29,7 @@ namespace ShaderRegistry
 		Basic = 0,
 		BasicColor,
 		Billboard,
+		BillboardAnimated,
 		Object,
 		ObjectIllumination,
 		ObjectSpecular,
@@ -72,6 +73,7 @@ namespace ShaderRegistry
 		BillboardSize,
 		ExplosionAlpha,
 		QualityFactor,
+		SpriteSheetParams,
 
 		Count
 	};

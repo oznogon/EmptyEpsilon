@@ -326,6 +326,17 @@ void initComponentScriptBindings()
     BIND_MEMBER(ExplosionEffect, type);
     BIND_MEMBER(ExplosionEffect, electrical);
 
+    sp::script::ComponentHandler<BillboardExplosion>::name("billboard_explosion");
+    BIND_MEMBER(BillboardExplosion, lifetime);
+    BIND_MEMBER(BillboardExplosion, max_lifetime);
+    BIND_MEMBER(BillboardExplosion, size);
+    BIND_MEMBER(BillboardExplosion, fps);
+    BIND_MEMBER(BillboardExplosion, sprite_columns);
+    BIND_MEMBER(BillboardExplosion, sprite_rows);
+    BIND_MEMBER(BillboardExplosion, color);
+    BIND_MEMBER(BillboardExplosion, texture);
+    BIND_MEMBER(BillboardExplosion, radar);
+
     sp::script::ComponentHandler<Sfx>::name("sfx");
     sp::script::ComponentHandler<Sfx>::members["sound"] = {
         [](lua_State* L, const void* ptr) {

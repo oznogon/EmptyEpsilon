@@ -26,6 +26,7 @@ namespace ShaderRegistry
             "shaders/basic",
             "shaders/basicColor",
             "shaders/billboard",
+            "shaders/billboardAnimated",
             "shaders/objectShader",
             "shaders/objectShader:ILLUMINATION",
             "shaders/objectShader:SPECULAR",
@@ -64,6 +65,7 @@ namespace ShaderRegistry
             "u_billboardSize",
             "u_explosionAlpha",
             "u_qualityFactor"
+            "u_spriteSheetParams"
         };
 
         std::array<const char*, Attributes_t(Attributes::Count)> attribute_names{
