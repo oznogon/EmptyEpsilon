@@ -4,7 +4,6 @@
 #include "io/dataBuffer.h"
 #include "multiplayer.h"
 
-// Component that indicates things can dock to this.
 enum class DockingStyle
 {
     None,
@@ -12,6 +11,7 @@ enum class DockingStyle
     Internal,
 };
 
+// DockingBay component allows other entities to dock to this entity.
 class DockingBay
 {
 public:
@@ -28,10 +28,11 @@ public:
 
     uint32_t flags = 0;
     std::vector<sp::ecs::Entity> docked_entities;
-    // addToInternal(sp::ecs::Entity entity);
+    bool docked_entities_dirty = true;
+    // addEntityToInternalBay(sp::ecs::Entity entity);
 };
 
-// Component to indicate that we can do to things.
+// DockingPort component allows this entity to dock to other entities.
 class DockingPort
 {
 public:
