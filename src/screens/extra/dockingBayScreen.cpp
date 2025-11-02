@@ -71,5 +71,9 @@ void DockingBayScreen::onUpdate()
             for (auto docked_entity: docked_entities) docked_entities_str.emplace_back(docked_entity.toString());
             docking_bay_ships->setOptions(docked_entities_str);
         }
+        else
+        {
+            docking_bay_ships->clear();
+        }
     }
 }
