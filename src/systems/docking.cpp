@@ -237,8 +237,12 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
     if (auto bay = docking_port->target.getComponent<DockingBay>())
     {
         LOG(Debug, "Undocking entity ", entity.toString(), " from ", docking_port->target.toString());
-        auto docked_entities = bay->docked_entities;
-        docked_entities.erase(std::remove(docked_entities.begin(), docked_entities.end(), entity));
+        auto& docked_entities = bay->docked_entities;
+        docked_entities.erase(
+            std::remove(docked_entities.begin(), docked_entities.end(), entity),
+            docked_entities.end()
+        );
+        bay->docked_entities_dirty = true;
     }
 
     if (impulse) impulse->request = 0.5f;
