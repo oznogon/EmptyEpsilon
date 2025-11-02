@@ -10,7 +10,7 @@ class Client:
         "none", "helms", "weapons", "engineering", "science", "relay",
         "tactical", "engineering+", "operations",
         "single",
-        "damageControl", "powerManagement", "databaseView"
+        "damageControl", "powerManagement", "databaseView", "dockingBay"
     ]
 
     def __init__(self, mac, ip):

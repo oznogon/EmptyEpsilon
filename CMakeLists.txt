@@ -269,6 +269,7 @@ set(MAIN_SOURCES
     src/screens/extra/damcon.cpp
     src/screens/extra/powerManagement.cpp
     src/screens/extra/databaseScreen.cpp
+    src/screens/extra/dockingBay.cpp
     src/screens/extra/commsScreen.cpp
     src/screens/extra/shipLogScreen.cpp
     src/screens/gm/gameMasterScreen.cpp
@@ -627,6 +628,7 @@ set(MAIN_SOURCES
     src/screens/extra/commsScreen.h
     src/screens/extra/damcon.h
     src/screens/extra/databaseScreen.h
+    src/screens/extra/dockingBay.h
     src/screens/extra/powerManagement.h
     src/screens/extra/shipLogScreen.h
     src/screens/gm/chatDialog.h

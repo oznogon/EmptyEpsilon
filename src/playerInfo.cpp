@@ -21,6 +21,7 @@
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
+#include "screens/extra/dockingBay.h"
 #include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
 
@@ -1101,6 +1102,8 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new PowerManagementScreen(container), CrewPosition::powerManagement, getCrewPositionName(CrewPosition::powerManagement), getCrewPositionIcon(CrewPosition::powerManagement));
         if (cps.has(CrewPosition::databaseView))
             screen->addStationTab(new DatabaseScreen(container), CrewPosition::databaseView, getCrewPositionName(CrewPosition::databaseView), getCrewPositionIcon(CrewPosition::databaseView));
+        if (cps.has(CrewPosition::dockingBay))
+            screen->addStationTab(new DockingBayScreen(container), CrewPosition::dockingBay, getCrewPositionName(CrewPosition::dockingBay), getCrewPositionIcon(CrewPosition::dockingBay));
         if (cps.has(CrewPosition::altRelay))
             screen->addStationTab(new RelayScreen(container, false), CrewPosition::altRelay, getCrewPositionName(CrewPosition::altRelay), getCrewPositionIcon(CrewPosition::altRelay));
         if (cps.has(CrewPosition::commsOnly))
@@ -1150,6 +1153,7 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::damageControl: return tr("station","Damage Control");
     case CrewPosition::powerManagement: return tr("station","Power Management");
     case CrewPosition::databaseView: return tr("station","Database");
+    case CrewPosition::dockingBay: return tr("station","Docking Bay");
     case CrewPosition::altRelay: return tr("station","Strategic Map");
     case CrewPosition::commsOnly: return tr("station","Comms");
     case CrewPosition::shipLog: return tr("station","Ship's Log");
@@ -1173,6 +1177,7 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::damageControl: return "";
     case CrewPosition::powerManagement: return "";
     case CrewPosition::databaseView: return "";
+    case CrewPosition::dockingBay: return "gui/icons/docking.png";
     case CrewPosition::altRelay: return "";
     case CrewPosition::commsOnly: return "";
     case CrewPosition::shipLog: return "";
