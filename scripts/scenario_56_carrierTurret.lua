@@ -5360,12 +5360,20 @@ function closestPlayerTo(obj)
 -- Return nil if no valid result
 	if obj ~= nil and obj:isValid() then
 		local closest_player = nil
+		local closest_distance = nil
 		for i,p in ipairs(getActivePlayerShips()) do
-			if closest_player == nil then
-				closest_player = p
-			else
-				if distance(p,obj) < distance(obj,closest_player) then
-					closest_player = p
+			-- Recheck obj validity inside loop
+			if not obj:isValid() then
+				return nil
+			end
+			if p ~= nil and p:isValid() then
+				-- Use pcall to safely calculate distance
+				local success, dist = pcall(distance, p, obj)
+				if success and dist then
+					if closest_distance == nil or dist < closest_distance then
+						closest_player = p
+						closest_distance = dist
+					end
 				end
 			end
 		end
@@ -5378,12 +5386,20 @@ function farthestPlayerFrom(obj)
 -- Return the player ship farthest from the passed object parameter
 	if obj ~= nil and obj:isValid() then
 		local farthest_player = nil
+		local farthest_distance = nil
 		for i,p in ipairs(getActivePlayerShips()) do
-			if farthest_player == nil then
-				farthest_player = p
-			else
-				if distance(p,obj) > distance(obj,farthest_player) then
-					farthest_player = p
+			-- Recheck obj validity inside loop
+			if not obj:isValid() then
+				return nil
+			end
+			if p ~= nil and p:isValid() then
+				-- Use pcall to safely calculate distance
+				local success, dist = pcall(distance, p, obj)
+				if success and dist then
+					if farthest_distance == nil or dist > farthest_distance then
+						farthest_player = p
+						farthest_distance = dist
+					end
 				end
 			end
 		end
@@ -5396,13 +5412,19 @@ function closestStationTo(obj)
 -- Return station closest to object
 	if obj ~= nil and obj :isValid() then
 		local closest_station = nil
+		local closest_distance = nil
 		for i,station in ipairs(stationList) do
+			-- Recheck obj validity inside loop
+			if not obj:isValid() then
+				return nil
+			end
 			if station:isValid() then
-				if closest_station == nil then
-					closest_station = station
-				else
-					if distance(station,obj) < distance(obj,closest_station) then
+				-- Use pcall to safely calculate distance
+				local success, dist = pcall(distance, station, obj)
+				if success and dist then
+					if closest_distance == nil or dist < closest_distance then
 						closest_station = station
+						closest_distance = dist
 					end
 				end
 			end
@@ -5416,13 +5438,19 @@ function farthestStationTo(obj)
 -- Return the station farthest from object
 	if obj ~= nil and obj :isValid() then
 		local farthest_station = nil
+		local farthest_distance = nil
 		for i,station in ipairs(stationList) do
+			-- Recheck obj validity inside loop
+			if not obj:isValid() then
+				return nil
+			end
 			if station:isValid() then
-				if farthest_station == nil then
-					farthest_station = station
-				else
-					if distance(station,obj) > distance(obj,farthest_station) then
+				-- Use pcall to safely calculate distance
+				local success, dist = pcall(distance, station, obj)
+				if success and dist then
+					if farthest_distance == nil or dist > farthest_distance then
 						farthest_station = station
+						farthest_distance = dist
 					end
 				end
 			end
