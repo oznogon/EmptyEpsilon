@@ -5,8 +5,11 @@
 #include "multiplayer.h"
 
 // Component that indicates things can dock to this.
-enum class DockingStyle {
-    None, External, Internal,
+enum class DockingStyle
+{
+    None,
+    External,
+    Internal,
 };
 
 class DockingBay
@@ -24,6 +27,8 @@ public:
     bool internal_dock_classes_dirty = true;
 
     uint32_t flags = 0;
+    std::vector<sp::ecs::Entity> docked_entities;
+    // addToInternal(sp::ecs::Entity entity);
 };
 
 // Component to indicate that we can do to things.

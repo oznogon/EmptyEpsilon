@@ -161,24 +161,29 @@ bool DockingSystem::canStartDocking(sp::ecs::Entity entity)
     return true;
 }
 
-void DockingSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
+void DockingSystem::collision(sp::ecs::Entity carried, sp::ecs::Entity carrier, float force)
 {
-    auto port = a.getComponent<DockingPort>();
-    if (port && port->state == DockingPort::State::Docking && port->target == b) {
-        auto position = a.getComponent<sp::Transform>();
-        auto other_position = b.getComponent<sp::Transform>();
-        auto thrusters = a.getComponent<ManeuveringThrusters>();
+    auto port = carried.getComponent<DockingPort>();
+    if (port && port->state == DockingPort::State::Docking && port->target == carrier)
+    {
+        auto position = carried.getComponent<sp::Transform>();
+        auto other_position = carrier.getComponent<sp::Transform>();
+        auto thrusters = carried.getComponent<ManeuveringThrusters>();
 
         if (position && other_position && thrusters && fabs(angleDifference(thrusters->target, position->getRotation())) < 10.0f)
         {
             port->state = DockingPort::State::Docked;
-            auto bay = b.getComponent<DockingBay>();
             port->docked_offset = rotateVec2(position->getPosition() - other_position->getPosition(), -other_position->getRotation());
             float length = glm::length(port->docked_offset);
             port->docked_offset = port->docked_offset / length * (length + 2.0f);
 
-            if (bay && port->canDockOn(*bay) == DockingStyle::Internal)
-                a.removeComponent<sp::Transform>();
+            if (auto bay = carrier.getComponent<DockingBay>())
+            {
+                LOG(Debug, "Docking entity ", carried.toString(), " to ", carrier.toString());
+                bay->docked_entities.emplace_back(carried);
+                if (port->canDockOn(*bay) == DockingStyle::Internal)
+                    carried.removeComponent<sp::Transform>();
+            }
         }
     }
 }
@@ -229,7 +234,14 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
     if (thrusters) thrusters->stop();
 
     docking_port->state = DockingPort::State::NotDocking;
-    if (impulse) impulse->request = 0.5;
+    if (auto bay = docking_port->target.getComponent<DockingBay>())
+    {
+        LOG(Debug, "Undocking entity ", entity.toString(), " from ", docking_port->target.toString());
+        auto docked_entities = bay->docked_entities;
+        docked_entities.erase(std::remove(docked_entities.begin(), docked_entities.end(), entity));
+    }
+
+    if (impulse) impulse->request = 0.5f;
 }
 
 void DockingSystem::abortDock(sp::ecs::Entity entity)
