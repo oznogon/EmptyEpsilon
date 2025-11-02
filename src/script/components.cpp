@@ -473,6 +473,29 @@ void initComponentScriptBindings()
             p->internal_dock_classes_dirty = true;
         }
     };
+    sp::script::ComponentHandler<DockingBay>::members["docked_entities"] = {
+        [](lua_State* L, const void* ptr) {
+            auto bay = reinterpret_cast<const DockingBay*>(ptr);
+            lua_createtable(L, bay->docked_entities.size(), 0);
+            int idx = 1;
+            for(const auto& c : bay->docked_entities) {
+                lua_pushstring(L, c.toString().c_str());
+                lua_seti(L, -2, idx++);
+            }
+            return 1;
+        }, [](lua_State* L, void* ptr) {
+            auto p = reinterpret_cast<DockingBay*>(ptr);
+            p->docked_entities.clear();
+            if (lua_istable(L, -1)) {
+                for(int idx = 1; lua_geti(L, -1, idx); idx++) {
+                    p->docked_entities.emplace_back(sp::ecs::Entity::fromString(lua_tostring(L, -1)));
+                    lua_pop(L, 1);
+                }
+                lua_pop(L, 1);
+            }
+            p->docked_entities_dirty = true;
+        }
+    };
     sp::script::ComponentHandler<CommsTransmitter>::name("comms_transmitter");
     BIND_MEMBER(CommsTransmitter, state);
     BIND_MEMBER(CommsTransmitter, open_delay);

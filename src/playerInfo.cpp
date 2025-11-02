@@ -21,7 +21,7 @@
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
-#include "screens/extra/dockingBay.h"
+#include "screens/extra/dockingBayScreen.h"
 #include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
 
