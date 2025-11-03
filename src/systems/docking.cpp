@@ -149,6 +149,22 @@ void DockingSystem::update(float delta)
     }
 }
 
+bool DockingSystem::moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Entity carrier)
+{
+    auto bay = carrier.getComponent<DockingBay>();
+    if (!bay) return false;
+
+    auto port = entity.getComponent<DockingPort>();
+    if (!port || !(port->canDockOn(*bay) == DockingStyle::Internal)) return false;
+
+    port->state = DockingPort::State::Docked;
+    port->target = carrier;
+    bay->docked_entities.emplace_back(entity);
+    if (entity.hasComponent<sp::Transform>())
+        entity.removeComponent<sp::Transform>();
+    return true;
+}
+
 bool DockingSystem::canStartDocking(sp::ecs::Entity entity)
 {
     auto port = entity.getComponent<DockingPort>();

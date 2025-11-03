@@ -1177,7 +1177,7 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::damageControl: return "";
     case CrewPosition::powerManagement: return "";
     case CrewPosition::databaseView: return "";
-    case CrewPosition::dockingBay: return "gui/icons/docking.png";
+    case CrewPosition::dockingBay: return "gui/icons/docking";
     case CrewPosition::altRelay: return "";
     case CrewPosition::commsOnly: return "";
     case CrewPosition::shipLog: return "";
