@@ -306,6 +306,7 @@ set(MAIN_SOURCES
     src/screenComponents/indicatorOverlays.cpp
     src/screenComponents/openCommsButton.cpp
     src/screenComponents/combatManeuver.cpp
+    src/screenComponents/entityInfoPanel.cpp
     src/screenComponents/rotatingModelView.cpp
     src/screenComponents/shipDestroyedPopup.cpp
     src/screenComponents/warpControls.cpp
@@ -596,6 +597,7 @@ set(MAIN_SOURCES
     src/screenComponents/powerDamageIndicator.h
     src/screenComponents/radarView.h
     src/screenComponents/rawScannerDataRadarOverlay.h
+    src/screenComponents/entityInfoPanel.h
     src/screenComponents/rotatingModelView.h
     src/screenComponents/scanningDialog.h
     src/screenComponents/scanTargetButton.h

@@ -27,6 +27,7 @@ public:
     bool internal_dock_classes_dirty = true;
 
     uint32_t flags = 0;
+
     std::vector<sp::ecs::Entity> docked_entities;
     bool docked_entities_dirty = true;
     // addEntityToInternalBay(sp::ecs::Entity entity);
