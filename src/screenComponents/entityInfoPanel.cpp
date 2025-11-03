@@ -19,6 +19,7 @@ GuiEntityInfoPanel::GuiEntityInfoPanel(GuiContainer* owner, string id, sp::ecs::
 {
     setAttribute("layout", "vertical");
     setAttribute("padding", "20, 20, 0, 20");
+    setSize(default_panel_size, default_panel_size);
 
     // Create a container for the 3D model view
     model_view_container = new GuiElement(this, id + "_MODEL_VIEW");
@@ -30,7 +31,6 @@ GuiEntityInfoPanel::GuiEntityInfoPanel(GuiContainer* owner, string id, sp::ecs::
     callsign_label = new GuiLabel(this, id + "_CALLSIGN", "", 25.0f);
     callsign_label
         ->setSize(GuiElement::GuiSizeMax, 25.0f);
-
     type_label = new GuiLabel(this, id + "_TYPE", "", 20.0f);
     type_label
         ->setSize(GuiElement::GuiSizeMax, 20.0f);
@@ -46,15 +46,13 @@ void GuiEntityInfoPanel::onUpdate()
     }
 
     // Update callsign
-    auto callsign = entity.getComponent<CallSign>();
-    if (callsign)
+    if (auto callsign = entity.getComponent<CallSign>())
         callsign_label->setText(callsign->callsign);
     else
         callsign_label->setText("");
 
     // Update type name
-    auto type_name = entity.getComponent<TypeName>();
-    if (type_name)
+    if (auto type_name = entity.getComponent<TypeName>())
         type_label->setText(type_name->localized.empty() ? type_name->type_name : type_name->localized);
     else
         type_label->setText("");
@@ -69,12 +67,14 @@ void GuiEntityInfoPanel::onDraw(sp::RenderTarget& renderer)
     auto mrc = entity.getComponent<MeshRenderComponent>();
     if (!mrc) return;
 
+    // Draw the rotating 3D mesh (can we use rotatingModelView for this?)
     // Get the model view container's rect
     auto container_rect = model_view_container->getRect();
     if (container_rect.size.x <= 0 || container_rect.size.y <= 0) return;
 
     renderer.finish();
 
+    // Configure camera
     float camera_fov = 60.0f;
     auto p0 = renderer.virtualToPixelPosition(container_rect.position);
     auto p1 = renderer.virtualToPixelPosition(container_rect.position + container_rect.size);
@@ -167,34 +167,53 @@ void GuiEntityInfoPanelGrid::onDraw(sp::RenderTarget& target)
 
 void GuiEntityInfoPanelGrid::onUpdate()
 {
-    children.clear();
-    if (entities.empty()) return;
+    // Rebuild only if entities actually changed
+    if (entities == cached_entities) return;
 
-    int max_cols = static_cast<int>(rect.size.x / 200.0f);
-    int max_rows = static_cast<int>(rect.size.y / 200.0f);
+    // Destroy old panels and rows (do we actually need to destroy rows?)
+    for (auto panel : cached_panels) if (panel) panel->destroy();
+    cached_panels.clear();
+
+    for (auto row : cached_rows) if (row) row->destroy();
+    cached_rows.clear();
+
+    if (entities.empty())
+    {
+        cached_entities.clear();
+        return;
+    }
+
+    // Build new grid with at least 1 column
+    int max_cols = std::max(1, static_cast<int>(rect.size.x / GuiEntityInfoPanel::default_panel_size));
+
     int col = 0;
-    int row = 0;
-    std::vector<GuiElement*> rows;
-    rows.emplace_back(new GuiElement(this, ""));
-    rows[row]
-        ->setSize(GuiElement::GuiSizeMax, 200.0f)
-        ->setAttribute("layout", "horizontal");
+    GuiElement* current_row = nullptr;
 
     for (auto entity : entities)
     {
-        col++;
+        if (!entity) continue;
 
-        if (col > max_cols)
+        // Create a new layout row on the first column
+        if (col == 0 || col >= max_cols)
         {
-            col = 1;
-            row++;
-            rows.emplace_back(new GuiElement(this, ""));
-            rows[row]
-                ->setSize(GuiElement::GuiSizeMax, 200.0f)
+            current_row = new GuiElement(this, "");
+            current_row
+                ->setSize(GuiElement::GuiSizeMax, GuiEntityInfoPanel::default_panel_size)
                 ->setAttribute("layout", "horizontal");
+            cached_rows.push_back(current_row);
+            col = 0;
         }
-        (new GuiEntityInfoPanel(rows[row], "", entity, func))->setSize(200.0f, 200.0f);
+
+        // Populate this column
+        auto panel = new GuiEntityInfoPanel(current_row, "", entity, func);
+        panel->setSize(GuiEntityInfoPanel::default_panel_size,
+                      GuiEntityInfoPanel::default_panel_size);
+        cached_panels.push_back(panel);
+        col++;
     }
+
+    // Update entity cache
+    cached_entities = entities;
 }
 
 GuiEntityInfoPanelGrid* GuiEntityInfoPanelGrid::setEntities(std::vector<sp::ecs::Entity> new_entities)

@@ -1,18 +1,22 @@
 #pragma once
 
 #include "gui/gui2_overlay.h"
+#include "missileWeaponData.h"
 
 class GuiListbox;
 class GuiKeyValueDisplay;
 class GuiEntityInfoPanel;
 class GuiEntityInfoPanelGrid;
+class MissileTubes;
 
 class DockingBayScreen : public GuiOverlay
 {
 private:
+    static constexpr float kv_size = 40.0f;
+    static constexpr float kv_split = 0.5f;
+
     GuiElement* left_column;
     GuiElement* right_column;
-    GuiListbox* docking_bay_controls;
     GuiEntityInfoPanelGrid* docking_bay_ships;
     GuiElement* docking_bay_info;
 
@@ -25,7 +29,16 @@ private:
     GuiKeyValueDisplay* entity_hvli;
     GuiKeyValueDisplay* entity_mine;
 
-    std::vector<sp::ecs::Entity> entities;
+    // State tracking
+    sp::ecs::Entity selected_entity;
+    std::vector<sp::ecs::Entity> cached_docked_entities;
+
+    // Helper methods
+    void selectEntity(sp::ecs::Entity entity);
+    void updateSelectedEntityDisplay();
+    void updateDockedEntitiesList();
+    void updateMissileDisplay(GuiKeyValueDisplay* display, MissileTubes* tubes, EMissileWeapons type);
+
 public:
     DockingBayScreen(GuiContainer* owner);
 

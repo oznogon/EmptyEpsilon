@@ -19,6 +19,8 @@ private:
 public:
     GuiEntityInfoPanel(GuiContainer* owner, string id, sp::ecs::Entity entity, func_t func);
 
+    static constexpr float default_panel_size = 200.0f;
+
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
@@ -35,6 +37,9 @@ public:
 
 private:
     std::vector<sp::ecs::Entity> entities;
+    std::vector<sp::ecs::Entity> cached_entities;
+    std::vector<GuiEntityInfoPanel*> cached_panels;
+    std::vector<GuiElement*> cached_rows;
     func_t func;
 
 public:

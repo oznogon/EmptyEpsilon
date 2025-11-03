@@ -13,11 +13,9 @@
 #include "systems/docking.h"
 
 DockingBayScreen::DockingBayScreen(GuiContainer* owner)
-: GuiOverlay(owner, "DOCKING_BAY_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "DOCKING_BAY_SCREEN", colorConfig.background),
+  selected_entity()
 {
-    const float kv_size = 40.0f;
-    const float kv_split = 0.5f;
-
     // Layout elements
     GuiElement* layout = new GuiElement(this, "DOCKING_BAY_LAYOUT");
     layout
@@ -37,25 +35,11 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
-    // Left column: Docking bay controls
-    docking_bay_controls = new GuiListbox(left_column, "DOCKING_BAY_CONTROLS",
-        [](int index, string value)
-        {
-            LOG(Info, "docking_bay_controls index ", index, ", value ", value);
-        }
-    );
-    docking_bay_controls->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
-
-    docking_bay_ships = new GuiEntityInfoPanelGrid(left_column, "DOCKING_BAY_SHIPS", entities,
+    // Left column: Docking bay ships
+    docking_bay_ships = new GuiEntityInfoPanelGrid(left_column, "DOCKING_BAY_SHIPS", {},
     [this](sp::ecs::Entity entity)
     {
-        LOG(Info, "docking_bay_ships ", entity.toString());
-        if (entity)
-        {
-            // DockingSystem::requestUndock(entity);
-            docking_bay_info->show();
-            top_row_info->setEntity(entity);
-        }
+        selectEntity(entity);
     }
     );
     docking_bay_ships
@@ -80,7 +64,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     // Top row; is there a better placeholder than my_spaceship?
     top_row_info = new GuiEntityInfoPanel(top_row, "", my_spaceship, [](sp::ecs::Entity entity) {});
     top_row_info
-        ->setSize(200.0f, GuiElement::GuiSizeMax)
+        ->setSize(GuiEntityInfoPanel::default_panel_size, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "10, 0");
 
     GuiElement* top_row_kvs_1 = new GuiElement(top_row, "");
@@ -109,23 +93,28 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     entity_homing = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(MW_Homing), "");
     entity_homing
         ->setIcon("gui/icons/weapon-homing")
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, kv_size)
+        ->hide();
     entity_nuke = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(MW_Nuke), "");
     entity_nuke
         ->setIcon("gui/icons/weapon-nuke")
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, kv_size)
+        ->hide();
     entity_emp = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(MW_EMP), "");
     entity_emp
         ->setIcon("gui/icons/weapon-emp")
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, kv_size)
+        ->hide();
     entity_hvli = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(MW_HVLI), "");
     entity_hvli
         ->setIcon("gui/icons/weapon-hvli")
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, kv_size)
+        ->hide();
     entity_mine = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(MW_Mine), "");
     entity_mine
         ->setIcon("gui/icons/weapon-mine")
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, kv_size)
+        ->hide();
 
     // Custom ship functions
     /*
@@ -143,86 +132,149 @@ void DockingBayScreen::onUpdate()
 {
     if (!my_spaceship) return;
 
-    if (auto bay = my_spaceship.getComponent<DockingBay>())
+    auto bay = my_spaceship.getComponent<DockingBay>();
+    if (!bay) return;
+
+    // Check for changes in the docked entities list.
+    bool list_changed = false;
+    if (bay->docked_entities_dirty ||
+        bay->docked_entities.size() != cached_docked_entities.size())
     {
-        auto docked_entities = bay->docked_entities;
-
-        docking_bay_ships->children.clear();
-
-        if (!docked_entities.empty())
+        list_changed = true;
+    }
+    else
+    {
+        for (size_t i = 0; i < bay->docked_entities.size(); i++)
         {
-            std::vector<string> docked_entities_str;
-
-            for (auto docked_entity: docked_entities)
+            if (bay->docked_entities[i] != cached_docked_entities[i])
             {
-                docked_entities_str.emplace_back(docked_entity.toString());
-                if (docking_bay_info->isVisible() && docked_entity == top_row_info->getEntity())
+                list_changed = true;
+                break;
+            }
+        }
+    }
+
+    // Update the grid only when the list of ships changes.
+    if (list_changed)
+    {
+        updateDockedEntitiesList();
+        cached_docked_entities = bay->docked_entities;
+
+        // If selected entity is no longer docked, deselect it.
+        if (selected_entity)
+        {
+            bool still_docked = false;
+            for (auto entity : bay->docked_entities)
+            {
+                if (entity == selected_entity)
                 {
-                    auto reactor = docked_entity.getComponent<Reactor>();
-                    if (reactor)
-                    {
-                        entity_energy->setValue(static_cast<string>("{energy}/{max_energy}").format({
-                            {"energy", static_cast<int>(reactor->energy)},
-                            {"max_energy", static_cast<int>(reactor->max_energy)}
-                        }));
-                    }
-
-                    auto hull = docked_entity.getComponent<Hull>();
-                    if (hull)
-                    {
-                        entity_hull->setValue(static_cast<string>("{hull}%").format({
-                            {"hull", static_cast<int>((hull->current / hull->max) * 100.0f)}
-                        }));
-                    }
-
-                    auto tubes = docked_entity.getComponent<MissileTubes>();
-                    if (tubes->storage_max[MW_Homing] > 0)
-                    {
-                        entity_homing
-                            ->setValue(static_cast<string>(tubes->storage[MW_Homing]) + "/" + static_cast<string>(tubes->storage_max[MW_Homing]))
-                            ->show();
-                    }
-                    else entity_homing->hide();
-
-                    if (tubes->storage_max[MW_Nuke] > 0)
-                    {
-                        entity_nuke
-                            ->setValue(static_cast<string>(tubes->storage[MW_Nuke]) + "/" + static_cast<string>(tubes->storage_max[MW_Nuke]))
-                            ->show();
-                    }
-                    else entity_nuke->hide();
-
-                    if (tubes->storage_max[MW_EMP] > 0)
-                    {
-                        entity_emp
-                            ->setValue(static_cast<string>(tubes->storage[MW_EMP]) + "/" + static_cast<string>(tubes->storage_max[MW_EMP]))
-                            ->show();
-                    }
-                    else entity_emp->hide();
-
-                    if (tubes->storage_max[MW_HVLI] > 0)
-                    {
-                        entity_hvli
-                            ->setValue(static_cast<string>(tubes->storage[MW_HVLI]) + "/" + static_cast<string>(tubes->storage_max[MW_HVLI]))
-                            ->show();
-                    }
-                    else entity_hvli->hide();
-
-                    if (tubes->storage_max[MW_Mine] > 0)
-                    {
-                        entity_mine
-                            ->setValue(static_cast<string>(tubes->storage[MW_Mine]) + "/" + static_cast<string>(tubes->storage_max[MW_Mine]))
-                            ->show();
-                    }
-                    else entity_mine->hide();
+                    still_docked = true;
+                    break;
                 }
             }
 
-            docking_bay_ships->setEntities(docked_entities);
-        }
-        else
-        {
-            docking_bay_ships->setEntities({});
+            if (!still_docked) selectEntity(sp::ecs::Entity());
         }
     }
+
+    // Update the display only if an entity is selected.
+    if (selected_entity) updateSelectedEntityDisplay();
+}
+
+void DockingBayScreen::selectEntity(sp::ecs::Entity entity)
+{
+    if (!entity)
+    {
+        docking_bay_info->hide();
+        selected_entity = sp::ecs::Entity();
+        return;
+    }
+
+    selected_entity = entity;
+    docking_bay_info->show();
+    top_row_info->setEntity(entity);
+
+    // Force immediate update of displays
+    updateSelectedEntityDisplay();
+}
+
+void DockingBayScreen::updateDockedEntitiesList()
+{
+    if (!my_spaceship) return;
+
+    auto bay = my_spaceship.getComponent<DockingBay>();
+    if (!bay) return;
+
+    // GuiEntityInfoPanelGrid will handle this efficiently now
+    docking_bay_ships->setEntities(bay->docked_entities);
+}
+
+void DockingBayScreen::updateSelectedEntityDisplay()
+{
+    if (!selected_entity)
+    {
+        docking_bay_info->hide();
+        selected_entity = sp::ecs::Entity();
+        return;
+    }
+
+    // Update reactor/energy display
+    if (auto reactor = selected_entity.getComponent<Reactor>())
+    {
+        entity_energy
+            ->setValue(static_cast<string>("{energy}/{max_energy}").format({
+                {"energy", static_cast<int>(reactor->energy)},
+                {"max_energy", static_cast<int>(reactor->max_energy)}
+            }))
+            ->show();
+    }
+    else entity_energy->hide();
+
+    // Update hull display
+    if (auto hull = selected_entity.getComponent<Hull>())
+    {
+        if (hull->max > 0.0f)
+        {
+            entity_hull
+                ->setValue(static_cast<string>("{hull}%").format({
+                    {"hull", static_cast<int>((hull->current / hull->max) * 100.0f)}
+                }))
+                ->show();
+        }
+        else entity_hull->hide();
+    }
+    else entity_hull->hide();
+
+    // Update missile displays
+    if (auto tubes = selected_entity.getComponent<MissileTubes>())
+    {
+        updateMissileDisplay(entity_homing, tubes, MW_Homing);
+        updateMissileDisplay(entity_nuke, tubes, MW_Nuke);
+        updateMissileDisplay(entity_emp, tubes, MW_EMP);
+        updateMissileDisplay(entity_hvli, tubes, MW_HVLI);
+        updateMissileDisplay(entity_mine, tubes, MW_Mine);
+    }
+    else
+    {
+        entity_homing->hide();
+        entity_nuke->hide();
+        entity_emp->hide();
+        entity_hvli->hide();
+        entity_mine->hide();
+    }
+}
+
+void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display,
+                                            MissileTubes* tubes,
+                                            EMissileWeapons type)
+{
+    // LOG(Info, "In updateMissileDisplay");
+    if (tubes->storage_max[type] > 0)
+    {
+        display
+            ->setValue(static_cast<string>(tubes->storage[type]) + "/" +
+                      static_cast<string>(tubes->storage_max[type]))
+            ->show();
+    }
+    else display->hide();
 }
