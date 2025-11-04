@@ -5,6 +5,7 @@
 #include "ecs/entity.h"
 
 class GuiRotatingModelView;
+class GuiScrollbar;
 
 class GuiEntityInfoPanel : public GuiPanel
 {
@@ -41,7 +42,13 @@ private:
     std::vector<sp::ecs::Entity> cached_entities;
     std::vector<GuiEntityInfoPanel*> cached_panels;
     std::vector<GuiElement*> cached_rows;
+    glm::vec2 cached_rect_size;
     func_t func;
+
+    GuiElement* content_container;
+    GuiScrollbar* scrollbar;
+
+    void updateScrollbar();
 
 public:
     GuiEntityInfoPanelGrid(GuiContainer* owner, string id, std::vector<sp::ecs::Entity> entities, func_t func);

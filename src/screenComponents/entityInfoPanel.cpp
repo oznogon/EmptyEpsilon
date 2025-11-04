@@ -2,6 +2,7 @@
 #include "entityInfoPanel.h"
 #include "rotatingModelView.h"
 #include "components/name.h"
+#include "gui/gui2_scrollbar.h"
 
 GuiEntityInfoPanel::GuiEntityInfoPanel(GuiContainer* owner, string id, sp::ecs::Entity entity, func_t func)
 : GuiPanel(owner, id), entity(entity), func(func)
@@ -74,15 +75,38 @@ void GuiEntityInfoPanel::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 GuiEntityInfoPanelGrid::GuiEntityInfoPanelGrid(GuiContainer* owner, string id, std::vector<sp::ecs::Entity> entities, func_t func)
 : GuiElement(owner, id), entities(entities), func(func)
 {
-    setAttribute("layout", "vertical");
+    // Create a content container that will hold all the rows
+    content_container = new GuiElement(this, id + "_CONTENT");
+    content_container
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    // Create scrollbar on the right side
+    scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {
+        // Update content container position based on scroll value
+        content_container->setPosition(0.0f, -value, sp::Alignment::TopLeft);
+    });
+    scrollbar
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setSize(50.0f, GuiElement::GuiSizeMax)
+        ->hide();
+    scrollbar->setClickChange(static_cast<int>(GuiEntityInfoPanel::default_panel_size));
 }
 
 void GuiEntityInfoPanelGrid::onUpdate()
 {
-    // Rebuild only if entities actually changed
-    if (entities == cached_entities) return;
+    int max_cols = std::max(1, static_cast<int>(rect.size.x / GuiEntityInfoPanel::default_panel_size));
+    int max_rows = std::max(1, static_cast<int>(rect.size.y / GuiEntityInfoPanel::default_panel_size));
 
-    // Destroy old panels and rows (do we actually need to destroy rows?)
+    // Rebuild the grid only if entities or rect size changed
+    if (entities == cached_entities && rect.size == cached_rect_size)
+    {
+        updateScrollbar();
+        return;
+    }
+
+    // Destroy old panels and rows
     for (auto panel : cached_panels) if (panel) panel->destroy();
     cached_panels.clear();
 
@@ -92,13 +116,13 @@ void GuiEntityInfoPanelGrid::onUpdate()
     if (entities.empty())
     {
         cached_entities.clear();
+        scrollbar->hide();
         return;
     }
 
     // Build new grid with at least 1 column
-    int max_cols = std::max(1, static_cast<int>(rect.size.x / GuiEntityInfoPanel::default_panel_size));
-
     int col = 0;
+    int row = 0;
     GuiElement* current_row = nullptr;
 
     // Add a panel for each entity
@@ -109,11 +133,13 @@ void GuiEntityInfoPanelGrid::onUpdate()
         // Create a new layout row on the first column
         if (col == 0 || col >= max_cols)
         {
-            current_row = new GuiElement(this, "");
+            current_row = new GuiElement(content_container, "");
             current_row
                 ->setSize(GuiElement::GuiSizeMax, GuiEntityInfoPanel::default_panel_size)
                 ->setAttribute("layout", "horizontal");
             cached_rows.push_back(current_row);
+            row++;
+            if (row >= max_rows) LOG(Debug, "Row ", row, " and onward should not be visible unless scrolled to via the scrollbar");
             col = 0;
         }
 
@@ -125,8 +151,38 @@ void GuiEntityInfoPanelGrid::onUpdate()
         col++;
     }
 
-    // Update entity cache
+    // Update entity and rect size caches
     cached_entities = entities;
+    cached_rect_size = rect.size;
+
+    // Update scrollbar
+    updateScrollbar();
+}
+
+void GuiEntityInfoPanelGrid::updateScrollbar()
+{
+    // Calculate total content height
+    float total_height = cached_rows.size() * GuiEntityInfoPanel::default_panel_size;
+    float visible_height = rect.size.y;
+
+    // Set scrollbar range
+    scrollbar->setValueSize(static_cast<int>(visible_height));
+    scrollbar->setRange(0, static_cast<int>(total_height));
+
+    // Show/hide scrollbar based on whether the content fits
+    if (total_height > visible_height)
+    {
+        scrollbar->show();
+        // Adjust content container width to account for scrollbar
+        content_container->setSize(rect.size.x - scrollbar->getRect().size.x, GuiElement::GuiSizeMax);
+    }
+    else
+    {
+        scrollbar->hide();
+        scrollbar->setValue(0);
+        content_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        content_container->setPosition(0, 0, sp::Alignment::TopLeft);
+    }
 }
 
 GuiEntityInfoPanelGrid* GuiEntityInfoPanelGrid::setEntities(std::vector<sp::ecs::Entity> new_entities)
