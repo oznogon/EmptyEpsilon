@@ -26,7 +26,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     left_column = new GuiElement(layout, "DOCKING_BAY_LEFT_COLUMN");
     left_column
-        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->setSize(240.0f, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
     left_column
         ->setAttribute("margin", "0, 10, 0, 0");
@@ -107,31 +107,34 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     top_row_kvs_2
         ->setAttribute("margin", "10, 0");
 
-    entity_homing = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(MW_Homing), "");
-    entity_homing
-        ->setIcon("gui/icons/weapon-homing")
-        ->setSize(GuiElement::GuiSizeMax, kv_size)
-        ->hide();
-    entity_nuke = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(MW_Nuke), "");
-    entity_nuke
-        ->setIcon("gui/icons/weapon-nuke")
-        ->setSize(GuiElement::GuiSizeMax, kv_size)
-        ->hide();
-    entity_emp = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(MW_EMP), "");
-    entity_emp
-        ->setIcon("gui/icons/weapon-emp")
-        ->setSize(GuiElement::GuiSizeMax, kv_size)
-        ->hide();
-    entity_hvli = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(MW_HVLI), "");
-    entity_hvli
-        ->setIcon("gui/icons/weapon-hvli")
-        ->setSize(GuiElement::GuiSizeMax, kv_size)
-        ->hide();
-    entity_mine = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(MW_Mine), "");
-    entity_mine
-        ->setIcon("gui/icons/weapon-mine")
-        ->setSize(GuiElement::GuiSizeMax, kv_size)
-        ->hide();
+    for (int i = MW_Homing; i < MW_Count; i++)
+    {
+        entity_missiles[i] = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(static_cast<EMissileWeapons>(i)), "");
+        entity_missiles[i]
+            ->setSize(GuiElement::GuiSizeMax, kv_size)
+            ->hide();
+
+        switch (static_cast<EMissileWeapons>(i))
+        {
+            case MW_Homing:
+                entity_missiles[i]->setIcon("gui/icons/weapon-homing");
+                break;
+            case MW_Nuke:
+                entity_missiles[i]->setIcon("gui/icons/weapon-nuke");
+                break;
+            case MW_EMP:
+                entity_missiles[i]->setIcon("gui/icons/weapon-emp");
+                break;
+            case MW_HVLI:
+                entity_missiles[i]->setIcon("gui/icons/weapon-hvli");
+                break;
+            case MW_Mine:
+                entity_missiles[i]->setIcon("gui/icons/weapon-mine");
+                break;
+            default:
+                break;
+        }
+    }
 
     // Custom ship functions
     /*
@@ -262,27 +265,17 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     // Update missile displays
     if (auto tubes = selected_entity.getComponent<MissileTubes>())
     {
-        updateMissileDisplay(entity_homing, tubes, MW_Homing);
-        updateMissileDisplay(entity_nuke, tubes, MW_Nuke);
-        updateMissileDisplay(entity_emp, tubes, MW_EMP);
-        updateMissileDisplay(entity_hvli, tubes, MW_HVLI);
-        updateMissileDisplay(entity_mine, tubes, MW_Mine);
+        for (int i = MW_Homing; i < MW_Count; i++)
+            updateMissileDisplay(entity_missiles[i], tubes, static_cast<EMissileWeapons>(i));
     }
     else
-    {
-        entity_homing->hide();
-        entity_nuke->hide();
-        entity_emp->hide();
-        entity_hvli->hide();
-        entity_mine->hide();
-    }
+        for (auto kv : entity_missiles) kv->hide();
 }
 
 void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display,
                                             MissileTubes* tubes,
                                             EMissileWeapons type)
 {
-    // LOG(Info, "In updateMissileDisplay");
     if (tubes->storage_max[type] > 0)
     {
         display
