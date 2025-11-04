@@ -1,12 +1,21 @@
-#include "soundManager.h"
 #include "entityInfoPanel.h"
+
+#include "soundManager.h"
+
 #include "rotatingModelView.h"
-#include "components/name.h"
+#include "gui/theme.h"
 #include "gui/gui2_scrollbar.h"
 
+#include "components/name.h"
+
 GuiEntityInfoPanel::GuiEntityInfoPanel(GuiContainer* owner, string id, sp::ecs::Entity entity, func_t func)
-: GuiPanel(owner, id), entity(entity), func(func)
+: GuiPanel(owner, id), entity(entity), func(func), selected(false)
 {
+    back_style = theme->getStyle("entityinfopanel.back");
+    front_style = theme->getStyle("entityinfopanel.front");
+    back_selected_style = theme->getStyle("entityinfopanel.selected.back");
+    front_selected_style = theme->getStyle("entityinfopanel.selected.front");
+
     setAttribute("layout", "vertical");
     setAttribute("padding", "20, 20, 0, 20");
     setSize(default_panel_size, default_panel_size);
@@ -24,6 +33,29 @@ GuiEntityInfoPanel::GuiEntityInfoPanel(GuiContainer* owner, string id, sp::ecs::
 
     type_label = new GuiLabel(this, id + "_TYPE", "", 20.0f);
     type_label->setSize(GuiElement::GuiSizeMax, 20.0f);
+}
+
+void GuiEntityInfoPanel::onDraw(sp::RenderTarget& renderer)
+{
+    hover = false;
+    const auto& back = back_style->get(getState());
+    const auto& back_hover = back_style->get(State::Hover);
+    const auto& back_selected = back_selected_style->get(getState());
+    const auto& back_selected_hover = back_selected_style->get(State::Hover);
+
+    auto* b = rect.contains(hover_coordinates) ? &back_hover : &back;
+    const GuiThemeStyle* f = front_style;
+
+    // If this is the selected button, change the back and foreground.
+    if (selected)
+    {
+        b = rect.contains(hover_coordinates) ? &back_selected_hover : &back_selected;
+        f = front_selected_style;
+    }
+
+    renderer.drawStretchedHV(rect, b->size, b->texture, b->color);
+    callsign_label->setFrontStyle(f);
+    type_label->setFrontStyle(f);
 }
 
 void GuiEntityInfoPanel::onUpdate()
@@ -94,6 +126,13 @@ GuiEntityInfoPanelGrid::GuiEntityInfoPanelGrid(GuiContainer* owner, string id, s
     scrollbar->setClickChange(static_cast<int>(GuiEntityInfoPanel::default_panel_size));
 }
 
+bool GuiEntityInfoPanelGrid::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    float range = scrollbar->getCorrectedMax() - scrollbar->getMin();
+    scrollbar->setValue((scrollbar->getValue() - value * range / 25.0f) );
+    return true;
+}
+
 void GuiEntityInfoPanelGrid::onUpdate()
 {
     int max_cols = std::max(1, static_cast<int>(rect.size.x / GuiEntityInfoPanel::default_panel_size));
@@ -157,6 +196,12 @@ void GuiEntityInfoPanelGrid::onUpdate()
 
     // Update scrollbar
     updateScrollbar();
+}
+
+void GuiEntityInfoPanelGrid::selectEntityPanel(sp::ecs::Entity selected_entity)
+{
+    for (auto panel : cached_panels)
+        panel->selected = panel->getEntity() == selected_entity;
 }
 
 void GuiEntityInfoPanelGrid::updateScrollbar()

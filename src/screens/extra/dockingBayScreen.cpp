@@ -218,7 +218,6 @@ void DockingBayScreen::updateDockedEntitiesList()
     auto bay = my_spaceship.getComponent<DockingBay>();
     if (!bay) return;
 
-    // GuiEntityInfoPanelGrid will handle this efficiently now
     docking_bay_ships->setEntities(bay->docked_entities);
 }
 
@@ -230,6 +229,8 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         selected_entity = sp::ecs::Entity();
         return;
     }
+
+    docking_bay_ships->selectEntityPanel(selected_entity);
 
     // Update reactor/energy display
     if (auto reactor = selected_entity.getComponent<Reactor>())
