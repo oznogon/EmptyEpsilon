@@ -13,6 +13,7 @@
 #include "components/name.h"
 #include "components/reactor.h"
 #include "systems/docking.h"
+#include "multiplayer_server.h"
 
 DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DOCKING_BAY_SCREEN", colorConfig.background),
@@ -167,7 +168,8 @@ void DockingBayScreen::onUpdate()
     if (!bay) return;
 
     // Initialize berths if empty (using default configuration)
-    if (bay->berths.empty())
+    // Only initialize on server side - clients will receive via multiplayer sync
+    if (game_server && bay->berths.empty())
     {
         bay->berths.resize(DockingBay::default_berth_count);
         for (size_t i = 0; i < bay->berths.size(); i++)
