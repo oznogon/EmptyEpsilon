@@ -1,6 +1,7 @@
 #include "dockingBayScreen.h"
 #include "i18n.h"
 
+#include "gui/gui2_button.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_listbox.h"
 #include "screenComponents/customShipFunctions.h"
@@ -25,7 +26,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     left_column = new GuiElement(layout, "DOCKING_BAY_LEFT_COLUMN");
     left_column
-        ->setSize(200.0f, GuiElement::GuiSizeMax)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
     left_column
         ->setAttribute("margin", "0, 10, 0, 0");
@@ -37,13 +38,29 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     // Left column: Docking bay ships
     docking_bay_ships = new GuiEntityInfoPanelGrid(left_column, "DOCKING_BAY_SHIPS", {},
-    [this](sp::ecs::Entity entity)
-    {
-        selectEntity(entity);
-    }
+        [this](sp::ecs::Entity entity)
+        {
+            selectEntity(entity);
+        }
     );
     docking_bay_ships
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    docking_bay_scramble = new GuiButton(left_column, "DOCKING_BAY_SCRAMBLE", tr("dockingbay", "Scramble"),
+        []()
+        {
+            if (!my_spaceship) return;
+
+            if (auto bay = my_spaceship.getComponent<DockingBay>())
+            {
+                while (!bay->docked_entities.empty())
+                    for (auto entity : bay->docked_entities) DockingSystem::requestUndock(entity);
+            }
+        }
+    );
+    docking_bay_scramble
+        ->setStyle("button.dockingbay_scramble")
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Right column: Docked ship, cargo info
     docking_bay_info = new GuiElement(right_column, "DOCKING_BAY_INFO_PANEL");
@@ -122,10 +139,6 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, GuiElement::GuiSizeMax);
     */
-}
-
-void DockingBayScreen::onDraw(sp::RenderTarget& target)
-{
 }
 
 void DockingBayScreen::onUpdate()

@@ -3,6 +3,7 @@
 #include "gui/gui2_overlay.h"
 #include "missileWeaponData.h"
 
+class GuiButton;
 class GuiListbox;
 class GuiKeyValueDisplay;
 class GuiEntityInfoPanel;
@@ -18,6 +19,7 @@ private:
     GuiElement* left_column;
     GuiElement* right_column;
     GuiEntityInfoPanelGrid* docking_bay_ships;
+    GuiButton* docking_bay_scramble;
     GuiElement* docking_bay_info;
 
     GuiEntityInfoPanel* top_row_info;
@@ -42,6 +44,5 @@ private:
 public:
     DockingBayScreen(GuiContainer* owner);
 
-    virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 };

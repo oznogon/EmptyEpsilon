@@ -2,7 +2,7 @@
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
     
     [button] {
-        color: #ffffff
+        color: #ff9999
         size: 30
         [button.back] {
             image: gui/widget/ButtonBackground.png
@@ -14,10 +14,6 @@
                 color.disabled: #A08080
             }
             [button.jump_abort.back] {
-                color: #FF0000
-                color.disabled: #A08080
-            }
-            [button.dockingbay_scramble.back] {
                 color: #FF0000
                 color.disabled: #A08080
             }
@@ -38,11 +34,6 @@
                 color.disabled: #FF00004D
             }
             [button.jump_abort.front] {
-                color: #FF0000
-                color.active: #120000
-                color.disabled: #FF00004D
-            }
-            [button.dockingbay_scramble.front] {
                 color: #FF0000
                 color.active: #120000
                 color.disabled: #FF00004D
