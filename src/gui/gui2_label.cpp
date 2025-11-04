@@ -29,6 +29,18 @@ string GuiLabel::getText() const
     return text;
 }
 
+GuiLabel* GuiLabel::setFrontStyle(const GuiThemeStyle* style)
+{
+    front_style = style;
+    return this;
+}
+
+GuiLabel* GuiLabel::setBackStyle(const GuiThemeStyle* style)
+{
+    back_style = style;
+    return this;
+}
+
 GuiLabel* GuiLabel::setAlignment(sp::Alignment alignment)
 {
     text_alignment = alignment;
