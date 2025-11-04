@@ -27,6 +27,8 @@ private:
     GuiKeyValueDisplay* entity_hull;
     GuiKeyValueDisplay* entity_missiles[MW_Count];
 
+    GuiListbox* berths;
+
     // State tracking
     sp::ecs::Entity selected_entity;
     std::vector<sp::ecs::Entity> cached_docked_entities;

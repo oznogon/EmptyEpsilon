@@ -10,6 +10,7 @@
 #include "components/docking.h"
 #include "components/hull.h"
 #include "components/missiletubes.h"
+#include "components/name.h"
 #include "components/reactor.h"
 #include "systems/docking.h"
 
@@ -69,16 +70,13 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
+    // Right column, top row
     GuiElement* top_row = new GuiElement(docking_bay_info, "");
     top_row
         ->setSize(GuiElement::GuiSizeMax, 200.0f)
         ->setAttribute("layout", "horizontal");
-    GuiElement* bottom_row = new GuiElement(docking_bay_info, "");
-    bottom_row
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setAttribute("layout", "horizontal");
 
-    // Top row; is there a better placeholder than my_spaceship?
+    // Is there a better placeholder than my_spaceship?
     top_row_info = new GuiEntityInfoPanel(top_row, "", my_spaceship, [](sp::ecs::Entity entity) {});
     top_row_info
         ->setSize(GuiEntityInfoPanel::default_panel_size, GuiElement::GuiSizeMax)
@@ -136,6 +134,23 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         }
     }
 
+    // Right column, bottom row
+    GuiElement* bottom_row = new GuiElement(right_column, "");
+    bottom_row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "horizontal");
+
+    berths = new GuiListbox(bottom_row, "",
+        [this](int index, string value)
+        {
+            LOG(Debug, "index: ", index, " value: ", value);
+            if (selected_entity != sp::ecs::Entity())
+                DockingSystem::assignInternalEntityToBerth(selected_entity, value.toInt());
+        }
+    );
+    berths
+        ->setSize(500.0f, GuiElement::GuiSizeMax);
+
     // Custom ship functions
     /*
     (new GuiCustomShipFunctions(this, CrewPosition::dockingBay, "DOCKING_BAY_CSF"))
@@ -150,6 +165,24 @@ void DockingBayScreen::onUpdate()
 
     auto bay = my_spaceship.getComponent<DockingBay>();
     if (!bay) return;
+
+    // Initialize berths if empty (using default configuration)
+    if (bay->berths.empty())
+    {
+        bay->berths.resize(DockingBay::default_berth_count);
+        for (size_t i = 0; i < bay->berths.size(); i++)
+        {
+            // Set up default berth types based on position
+            if (i < 3)
+                bay->berths[i].type = DockingBay::BerthType::Launcher;
+            else if (i < 5)
+                bay->berths[i].type = DockingBay::BerthType::Energy;
+            else if (i < 7)
+                bay->berths[i].type = DockingBay::BerthType::Missiles;
+            else
+                bay->berths[i].type = DockingBay::BerthType::Storage;
+        }
+    }
 
     // Check for changes in the docked entities list.
     bool list_changed = false;
@@ -195,6 +228,57 @@ void DockingBayScreen::onUpdate()
 
     // Update the display only if an entity is selected.
     if (selected_entity) updateSelectedEntityDisplay();
+
+    // Update berths listbox.
+    std::vector<string> berths_keys;
+    std::vector<string> berths_values;
+
+    for (size_t i = 0; i < bay->berths.size(); i++)
+    {
+        const auto& berth = bay->berths[i];
+
+        // Create berth type label.
+        string type_label;
+        switch (berth.type)
+        {
+            case DockingBay::BerthType::Launcher:
+                type_label = tr("dockingbay", "Launcher");
+                break;
+            case DockingBay::BerthType::Energy:
+                type_label = tr("dockingbay", "Energy");
+                break;
+            case DockingBay::BerthType::Missiles:
+                type_label = tr("dockingbay", "Missiles");
+                break;
+            case DockingBay::BerthType::Thermal:
+                type_label = tr("dockingbay", "Thermal");
+                break;
+            case DockingBay::BerthType::Repair:
+                type_label = tr("dockingbay", "Repair");
+                break;
+            case DockingBay::BerthType::Storage:
+                type_label = tr("dockingbay", "Storage");
+                break;
+        }
+
+        // Format: "Berth 1 (Type): Occupant or Empty"
+        string value = static_cast<string>(static_cast<int>(i));
+        string callsign = tr("dockingbay", "Unknown");
+        if (berth.docked_entity == sp::ecs::Entity())
+            callsign = tr("dockingbay", "Empty");
+        else if (auto callsign_component = berth.docked_entity.getComponent<CallSign>())
+            callsign = callsign_component->callsign;
+        string key = tr("Berth {index} ({type}): {callsign}").format({
+            {"index", static_cast<int>(i + 1)},
+            {"type", type_label},
+            {"callsign", callsign}
+        });
+
+        berths_keys.push_back(key);
+        berths_values.push_back(value);
+    }
+
+    berths->setOptions(berths_keys, berths_values);
 }
 
 void DockingBayScreen::selectEntity(sp::ecs::Entity entity)
