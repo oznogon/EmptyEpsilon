@@ -1,5 +1,4 @@
 #include "systems/docking.h"
-#include "components/docking.h"
 #include "components/collision.h"
 #include "components/impulse.h"
 #include "components/maneuveringthrusters.h"
@@ -31,7 +30,6 @@ void DockingSystem::update(float delta)
                 docking_port.state = DockingPort::State::NotDocking;
             } else {
                 auto engine = entity.getComponent<ImpulseEngine>();
-                auto warp = entity.getComponent<WarpDrive>();
                 auto thrusters = entity.getComponent<ManeuveringThrusters>();
                 if (thrusters)
                     thrusters->target = vec2ToAngle(transform->getPosition() - target_transform->getPosition());
@@ -41,7 +39,7 @@ void DockingSystem::update(float delta)
                     else
                         engine->request = 0.f;
                 }
-                if (warp)
+                if (auto warp = entity.getComponent<WarpDrive>())
                     warp->request = 0;
             }
             break;
@@ -160,9 +158,131 @@ bool DockingSystem::moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Ent
     port->state = DockingPort::State::Docked;
     port->target = carrier;
     bay->docked_entities.emplace_back(entity);
+
     if (entity.hasComponent<sp::Transform>())
         entity.removeComponent<sp::Transform>();
+
+    assignInternalEntityToBerth(entity);
+
     return true;
+}
+
+bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity)
+{
+    auto port = entity.getComponent<DockingPort>();
+    if (!port) return false;
+
+    auto carrier = port->target;
+    auto bay = carrier.getComponent<DockingBay>();
+    if (!bay || !(port->canDockOn(*bay) == DockingStyle::Internal) || bay->berths.empty()) return false;
+
+    // Find first empty berth
+    for (auto& berth : bay->berths)
+    {
+        if (!berth.docked_entity)
+        {
+            berth.docked_entity = entity;
+            return true;
+        }
+    }
+
+    // No empty berth found
+    LOG(Debug, "No empty berth available for ", entity.toString(), ", undocking.");
+    requestUndock(entity);
+    return false;
+}
+
+bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity, DockingBay::BerthType berth_type)
+{
+    auto port = entity.getComponent<DockingPort>();
+    if (!port || !port->target) return false;
+
+    auto carrier = port->target;
+    auto bay = carrier.getComponent<DockingBay>();
+    if (!bay || !(port->canDockOn(*bay) == DockingStyle::Internal) || bay->berths.empty()) return false;
+
+    // First, clear entity from any berth it's currently in
+    for (auto& berth : bay->berths)
+    {
+        if (berth.docked_entity == entity)
+            berth.docked_entity = sp::ecs::Entity();
+    }
+
+    // Find an empty berth of the requested type
+    for (auto& berth : bay->berths)
+    {
+        // TODO: move_time delay
+        if (berth.type == berth_type && !berth.docked_entity)
+        {
+            berth.docked_entity = entity;
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity, int index)
+{
+    auto port = entity.getComponent<DockingPort>();
+    if (!port || !port->target) return false;
+
+    auto carrier = port->target;
+    auto bay = carrier.getComponent<DockingBay>();
+    if (!bay || !(port->canDockOn(*bay) == DockingStyle::Internal) || bay->berths.empty() || index < 0 || index >= int(bay->berths.size())) return false;
+
+    auto& berth = bay->berths[index];
+
+    // If the berth is occupied by a different entity, can't assign
+    if (berth.docked_entity && berth.docked_entity != entity) return false;
+
+    // Clear entity from any other berth it's currently in
+    for (size_t i = 0; i < bay->berths.size(); i++)
+    {
+        if (int(i) != index && bay->berths[i].docked_entity == entity)
+            bay->berths[i].docked_entity = sp::ecs::Entity();
+    }
+
+    // Assign to the requested berth
+    berth.docked_entity = entity;
+    return true;
+}
+
+void DockingSystem::assignInternalEntitiesToBerths(std::vector<sp::ecs::Entity> entities, sp::ecs::Entity carrier)
+{
+    auto bay = carrier.getComponent<DockingBay>();
+    if (!bay || bay->berths.empty()) return;
+
+    for (auto& entity : entities)
+    {
+        auto port = entity.getComponent<DockingPort>();
+        if (!port || !(port->canDockOn(*bay) == DockingStyle::Internal)) continue;
+
+        // First, clear entity from any berth it's currently in
+        for (auto& berth : bay->berths)
+        {
+            if (berth.docked_entity == entity)
+                berth.docked_entity = sp::ecs::Entity();
+        }
+
+        // Then try to assign it to an empty berth
+        bool was_assigned = false;
+        for (auto& berth : bay->berths)
+        {
+            if (!berth.docked_entity)
+            {
+                berth.docked_entity = entity;
+                was_assigned = true;
+                break;
+            }
+        }
+
+        if (!was_assigned)
+        {
+            LOG(Debug, "More ships than berths, undocking.");
+            if (port->target == carrier) requestUndock(entity);
+        }
+    }
 }
 
 bool DockingSystem::canStartDocking(sp::ecs::Entity entity)
@@ -198,12 +318,14 @@ void DockingSystem::collision(sp::ecs::Entity carried, sp::ecs::Entity carrier, 
                 LOG(Debug, "Docking entity ", carried.toString(), " to ", carrier.toString());
                 bay->docked_entities.emplace_back(carried);
                 if (port->canDockOn(*bay) == DockingStyle::Internal)
+                {
                     carried.removeComponent<sp::Transform>();
+                    assignInternalEntityToBerth(carried);
+                }
             }
         }
     }
 }
-
 
 void DockingSystem::requestDock(sp::ecs::Entity entity, sp::ecs::Entity target)
 {
@@ -227,8 +349,9 @@ void DockingSystem::requestDock(sp::ecs::Entity entity, sp::ecs::Entity target)
 
     docking_port->state = DockingPort::State::Docking;
     docking_port->target = target;
-    auto warp = entity.getComponent<WarpDrive>();
-    if (warp) warp->request = 0;
+
+    if (auto warp = entity.getComponent<WarpDrive>())
+        warp->request = 0;
 }
 
 void DockingSystem::requestUndock(sp::ecs::Entity entity)
@@ -254,6 +377,10 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
     {
         LOG(Debug, "Undocking entity ", entity.toString(), " from ", docking_port->target.toString());
         auto& docked_entities = bay->docked_entities;
+
+        for (auto& berth : bay->berths)
+            if (berth.docked_entity == entity) berth.docked_entity = sp::ecs::Entity();
+
         docked_entities.erase(
             std::remove(docked_entities.begin(), docked_entities.end(), entity),
             docked_entities.end()

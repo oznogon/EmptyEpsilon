@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_set>
+#include <vector>
 #include "io/dataBuffer.h"
 #include "multiplayer.h"
 
@@ -30,6 +31,27 @@ public:
 
     std::vector<sp::ecs::Entity> docked_entities;
     bool docked_entities_dirty = true;
+
+    enum class BerthType
+    {
+        Launcher,
+        Energy,
+        Missiles,
+        Thermal,
+        Repair,
+        Storage
+    };
+
+    struct Berth
+    {
+        sp::ecs::Entity docked_entity;
+        BerthType type = BerthType::Launcher;
+        float move_time = 10.0f;
+        float move_progress = 0.0f;
+        float transfer_rate = 0.0f;
+    };
+    static constexpr int default_berth_count = 9;
+    std::vector<Berth> berths;
 };
 
 // DockingPort component allows this entity to dock to other entities.
