@@ -121,7 +121,7 @@ GuiEntityInfoPanelGrid::GuiEntityInfoPanelGrid(GuiContainer* owner, string id, s
     });
     scrollbar
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
-        ->setSize(50.0f, GuiElement::GuiSizeMax)
+        ->setSize(40.0f, GuiElement::GuiSizeMax)
         ->hide();
     scrollbar->setClickChange(static_cast<int>(GuiEntityInfoPanel::default_panel_size));
 }

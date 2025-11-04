@@ -25,11 +25,7 @@ private:
     GuiEntityInfoPanel* top_row_info;
     GuiKeyValueDisplay* entity_energy;
     GuiKeyValueDisplay* entity_hull;
-    GuiKeyValueDisplay* entity_homing;
-    GuiKeyValueDisplay* entity_nuke;
-    GuiKeyValueDisplay* entity_emp;
-    GuiKeyValueDisplay* entity_hvli;
-    GuiKeyValueDisplay* entity_mine;
+    GuiKeyValueDisplay* entity_missiles[MW_Count];
 
     // State tracking
     sp::ecs::Entity selected_entity;
