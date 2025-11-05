@@ -16,11 +16,12 @@ interval = 5.0
 elapsed = 0.0
 
 carrier = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Benedict")
+fighter_classes = {"Striker", "MT52 Hornet", "MU52 Hornet", "Adder MK5", "Adder MK6", "Adder MK7", "Adder MK8", "Adder MK9", "WX-Lindworm", "ZX-Lindworm"}
 
 for i=1,10 do
     local fighter = CpuShip()
         :setFaction("Human Navy")
-        :setTemplate("Striker")
+        :setTemplate(fighter_classes[i])
         :setScannedByFaction("Human Navy", true)
         :setWeaponTubeCount(7)
     fighter
@@ -52,8 +53,8 @@ function update(delta)
     if elapsed > interval then
         entity.components.docking_bay = {
             berths = {
-                {type = "launcher", move_time = 5.0, transfer_rate = 1.0},
-                {type = "launcher", move_time = 5.0, transfer_rate = 1.0},
+                {type = "hangar", move_time = 5.0, transfer_rate = 1.0},
+                {type = "hangar", move_time = 5.0, transfer_rate = 1.0},
                 {type = "energy", move_time = 5.0, transfer_rate = 1.0},
                 {type = "missiles", move_time = 10.0, transfer_rate = 2.0},
                 {type = "thermal", move_time = 10.0, transfer_rate = 2.0},

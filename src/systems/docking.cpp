@@ -1,4 +1,5 @@
 #include "systems/docking.h"
+#include "components/ai.h"
 #include "components/collision.h"
 #include "components/impulse.h"
 #include "components/maneuveringthrusters.h"
@@ -157,7 +158,6 @@ bool DockingSystem::moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Ent
 
     port->state = DockingPort::State::Docked;
     port->target = carrier;
-    bay->docked_entities.emplace_back(entity);
 
     if (entity.hasComponent<sp::Transform>())
         entity.removeComponent<sp::Transform>();
@@ -174,12 +174,13 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity)
 
     auto carrier = port->target;
     auto bay = carrier.getComponent<DockingBay>();
-    if (!bay || !(port->canDockOn(*bay) == DockingStyle::Internal) || bay->berths.empty()) return false;
+    if (!bay || !(port->canDockOn(*bay) == DockingStyle::Internal) || bay->berths.empty())
+        return false;
 
     // Find first empty berth
     for (auto& berth : bay->berths)
     {
-        if (!berth.docked_entity)
+        if (berth.docked_entity == sp::ecs::Entity())
         {
             berth.docked_entity = entity;
             return true;
@@ -189,6 +190,11 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity)
     // No empty berth found
     LOG(Debug, "No empty berth available for ", entity.toString(), ", undocking.");
     requestUndock(entity);
+    port->state = DockingPort::State::NotDocking;
+    // If the docking ship is AI-controlled, revert to roaming if denied docking.
+    // Should this revert to defending the carrier instead?
+    // Should AIs roaming for supplies ignore carriers with no unoccupied berths?
+    if (auto ai = entity.getComponent<AIController>()) ai->orders = AIOrder::Roaming;
     return false;
 }
 
@@ -315,8 +321,6 @@ void DockingSystem::collision(sp::ecs::Entity carried, sp::ecs::Entity carrier, 
 
             if (auto bay = carrier.getComponent<DockingBay>())
             {
-                LOG(Debug, "Docking entity ", carried.toString(), " to ", carrier.toString());
-                bay->docked_entities.emplace_back(carried);
                 if (port->canDockOn(*bay) == DockingStyle::Internal)
                 {
                     carried.removeComponent<sp::Transform>();
@@ -375,17 +379,8 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
     docking_port->state = DockingPort::State::NotDocking;
     if (auto bay = docking_port->target.getComponent<DockingBay>())
     {
-        LOG(Debug, "Undocking entity ", entity.toString(), " from ", docking_port->target.toString());
-        auto& docked_entities = bay->docked_entities;
-
         for (auto& berth : bay->berths)
             if (berth.docked_entity == entity) berth.docked_entity = sp::ecs::Entity();
-
-        docked_entities.erase(
-            std::remove(docked_entities.begin(), docked_entities.end(), entity),
-            docked_entities.end()
-        );
-        bay->docked_entities_dirty = true;
     }
 
     if (impulse) impulse->request = 0.5f;
