@@ -55,14 +55,29 @@ public:
     DockingBay()
     {
         berths.resize(default_berth_count);
+        /*
+                        {type = "hangar", move_time = 5.0, transfer_rate = 1.0},
+                {type = "hangar", move_time = 5.0, transfer_rate = 1.0},
+                {type = "energy", move_time = 5.0, transfer_rate = 1.0},
+                {type = "missiles", move_time = 10.0, transfer_rate = 2.0},
+                {type = "thermal", move_time = 10.0, transfer_rate = 2.0},
+                {type = "repair", move_time = 15.0, transfer_rate = 1.5},
+                {type = "storage", move_time = 15.0, transfer_rate = 1.5},
+                {type = "storage", move_time = 20.0, transfer_rate = 0.5},
+                {type = "storage", move_time = 10.0, transfer_rate = 1.0}
+*/
         for (size_t i = 0; i < berths.size(); i++)
         {
             if (i < 2)
                 berths[i].type = BerthType::Hangar;
-            else if (i < 4)
+            else if (i < 3)
                 berths[i].type = BerthType::Energy;
-            else if (i < 6)
+            else if (i < 4)
                 berths[i].type = BerthType::Missiles;
+            else if (i < 5)
+                berths[i].type = BerthType::Thermal;
+            else if (i < 6)
+                berths[i].type = BerthType::Repair;
             else
                 berths[i].type = BerthType::Storage;
         }
