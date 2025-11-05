@@ -3,7 +3,6 @@
 
 #include "gui/gui2_button.h"
 #include "gui/gui2_keyvaluedisplay.h"
-#include "gui/gui2_listbox.h"
 #include "screenComponents/customShipFunctions.h"
 #include "screenComponents/entityInfoPanel.h"
 
@@ -108,8 +107,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     {
         entity_missiles[i] = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, getLocaleMissileWeaponName(static_cast<EMissileWeapons>(i)), "");
         entity_missiles[i]
-            ->setSize(GuiElement::GuiSizeMax, kv_size)
-            ->hide();
+            ->setSize(GuiElement::GuiSizeMax, kv_size);
 
         switch (static_cast<EMissileWeapons>(i))
         {
@@ -138,16 +136,6 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     bottom_row
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "horizontal");
-
-    berths = new GuiListbox(bottom_row, "",
-        [this](int index, string value)
-        {
-            if (selected_entity != sp::ecs::Entity())
-                DockingSystem::assignInternalEntityToBerth(selected_entity, value.toInt());
-        }
-    );
-    berths
-        ->setSize(500.0f, GuiElement::GuiSizeMax);
 
     // Custom ship functions
     /*
@@ -279,9 +267,9 @@ void DockingBayScreen::updateSelectedEntityDisplay()
             ->setCustomLabel(0, "")
             ->setCustomIcon(1, "")
             ->setCustomLabel(2, "");
-        entity_energy->hide();
-        entity_hull->hide();
-        for (auto kv : entity_missiles) kv->hide();
+        entity_energy->setValue("");
+        entity_hull->setValue("");
+        for (auto kv : entity_missiles) kv->setValue("");
         return;
     }
 
@@ -303,10 +291,9 @@ void DockingBayScreen::updateSelectedEntityDisplay()
             ->setValue(static_cast<string>("{energy}/{max_energy}").format({
                 {"energy", static_cast<int>(reactor->energy)},
                 {"max_energy", static_cast<int>(reactor->max_energy)}
-            }))
-            ->show();
+            }));
     }
-    else entity_energy->hide();
+    else entity_energy->setValue(tr("dockingbay", "No reactor"));
 
     // Update hull display
     if (auto hull = selected_entity.getComponent<Hull>())
@@ -316,12 +303,11 @@ void DockingBayScreen::updateSelectedEntityDisplay()
             entity_hull
                 ->setValue(static_cast<string>("{hull}%").format({
                     {"hull", static_cast<int>((hull->current / hull->max) * 100.0f)}
-                }))
-                ->show();
+                }));
         }
-        else entity_hull->hide();
+        else entity_hull->setValue("");
     }
-    else entity_hull->hide();
+    else entity_hull->setValue(tr("dockingbay", "N/A"));
 
     // Update missile displays
     if (auto tubes = selected_entity.getComponent<MissileTubes>())
@@ -330,7 +316,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
             updateMissileDisplay(entity_missiles[i], tubes, static_cast<EMissileWeapons>(i));
     }
     else
-        for (auto kv : entity_missiles) kv->hide();
+        for (auto kv : entity_missiles) kv->setValue("-");
 }
 
 void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display,
@@ -341,8 +327,7 @@ void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display,
     {
         display
             ->setValue(static_cast<string>(tubes->storage[type]) + "/" +
-                      static_cast<string>(tubes->storage_max[type]))
-            ->show();
+                      static_cast<string>(tubes->storage_max[type]));
     }
-    else display->hide();
+    else display->setValue("-");
 }
