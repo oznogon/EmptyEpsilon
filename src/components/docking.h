@@ -2,6 +2,7 @@
 
 #include <unordered_set>
 #include <vector>
+#include "i18n.h"
 #include "io/dataBuffer.h"
 #include "multiplayer.h"
 
@@ -29,12 +30,9 @@ public:
 
     uint32_t flags = 0;
 
-    std::vector<sp::ecs::Entity> docked_entities;
-    bool docked_entities_dirty = true;
-
     enum class BerthType
     {
-        Launcher,
+        Hangar,
         Energy,
         Missiles,
         Thermal,
@@ -45,13 +43,88 @@ public:
     struct Berth
     {
         sp::ecs::Entity docked_entity;
-        BerthType type = BerthType::Launcher;
+        BerthType type = BerthType::Hangar;
         float move_time = 10.0f;
         float move_progress = 0.0f;
         float transfer_rate = 0.0f;
     };
     static constexpr int default_berth_count = 9;
     std::vector<Berth> berths;
+
+    // Constructor to initialize default berths
+    DockingBay()
+    {
+        berths.resize(default_berth_count);
+        for (size_t i = 0; i < berths.size(); i++)
+        {
+            if (i < 2)
+                berths[i].type = BerthType::Hangar;
+            else if (i < 4)
+                berths[i].type = BerthType::Energy;
+            else if (i < 6)
+                berths[i].type = BerthType::Missiles;
+            else
+                berths[i].type = BerthType::Storage;
+        }
+    }
+
+    string getTypeIcon(DockingBay::BerthType type)
+    {
+        string type_icon = "";
+
+        switch (type)
+        {
+            case DockingBay::BerthType::Hangar:
+                type_icon = "gui/icons/docking";
+                break;
+            case DockingBay::BerthType::Energy:
+                type_icon = "gui/icons/energy";
+                break;
+            case DockingBay::BerthType::Missiles:
+                type_icon = "gui/icons/system_missile";
+                break;
+            case DockingBay::BerthType::Thermal:
+                type_icon = "gui/icons/status_overheat";
+                break;
+            case DockingBay::BerthType::Repair:
+                type_icon = "gui/icons/status_damaged";
+                break;
+            case DockingBay::BerthType::Storage:
+                type_icon = "gui/icons/hull";
+                break;
+        }
+
+        return type_icon;
+    }
+
+    string getTypeName(DockingBay::BerthType type)
+    {
+        string type_name = tr("dockingbay", "Unknown type");
+
+        switch (type)
+        {
+            case DockingBay::BerthType::Hangar:
+                type_name = tr("dockingbay", "Hangar");
+                break;
+            case DockingBay::BerthType::Energy:
+                type_name = tr("dockingbay", "Energy");
+                break;
+            case DockingBay::BerthType::Missiles:
+                type_name = tr("dockingbay", "Missiles");
+                break;
+            case DockingBay::BerthType::Thermal:
+                type_name = tr("dockingbay", "Thermal");
+                break;
+            case DockingBay::BerthType::Repair:
+                type_name = tr("dockingbay", "Repair");
+                break;
+            case DockingBay::BerthType::Storage:
+                type_name = tr("dockingbay", "Storage");
+                break;
+        }
+
+        return type_name;
+    }
 };
 
 // DockingPort component allows this entity to dock to other entities.

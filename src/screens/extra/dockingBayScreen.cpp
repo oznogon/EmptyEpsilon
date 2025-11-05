@@ -13,12 +13,13 @@
 #include "components/name.h"
 #include "components/reactor.h"
 #include "systems/docking.h"
-#include "multiplayer_server.h"
 
 DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DOCKING_BAY_SCREEN", colorConfig.background),
   selected_entity()
 {
+    if (!my_spaceship.hasComponent<DockingBay>()) return;
+
     // Layout elements
     GuiElement* layout = new GuiElement(this, "DOCKING_BAY_LAYOUT");
     layout
@@ -39,13 +40,13 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAttribute("layout", "vertical");
 
     // Left column: Docking bay ships
-    docking_bay_ships = new GuiEntityInfoPanelGrid(left_column, "DOCKING_BAY_SHIPS", {},
-        [this](sp::ecs::Entity entity)
+    docking_bay_berths = new GuiEntityInfoPanelGrid(left_column, "DOCKING_BAY_SHIPS", {},
+        [this](int index)
         {
-            selectEntity(entity);
+            selectBerth(index);
         }
     );
-    docking_bay_ships
+    docking_bay_berths
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     docking_bay_scramble = new GuiButton(left_column, "DOCKING_BAY_SCRAMBLE", tr("dockingbay", "Scramble"),
@@ -55,8 +56,12 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
             if (auto bay = my_spaceship.getComponent<DockingBay>())
             {
-                while (!bay->docked_entities.empty())
-                    for (auto entity : bay->docked_entities) DockingSystem::requestUndock(entity);
+                // Undock all entities from berths
+                for (auto& berth : bay->berths)
+                {
+                    if (berth.docked_entity)
+                        DockingSystem::requestUndock(berth.docked_entity);
+                }
             }
         }
     );
@@ -67,23 +72,16 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     // Right column: Docked ship, cargo info
     docking_bay_info = new GuiElement(right_column, "DOCKING_BAY_INFO_PANEL");
     docking_bay_info
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->hide()
-        ->setAttribute("layout", "vertical");
-
-    // Right column, top row
-    GuiElement* top_row = new GuiElement(docking_bay_info, "");
-    top_row
         ->setSize(GuiElement::GuiSizeMax, 200.0f)
         ->setAttribute("layout", "horizontal");
 
     // Is there a better placeholder than my_spaceship?
-    top_row_info = new GuiEntityInfoPanel(top_row, "", my_spaceship, [](sp::ecs::Entity entity) {});
+    top_row_info = new GuiEntityInfoPanel(docking_bay_info, "", sp::ecs::Entity(), [](sp::ecs::Entity entity) {});
     top_row_info
         ->setSize(GuiEntityInfoPanel::default_panel_size, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "10, 0");
 
-    GuiElement* top_row_kvs_1 = new GuiElement(top_row, "");
+    GuiElement* top_row_kvs_1 = new GuiElement(docking_bay_info, "");
     top_row_kvs_1
         ->setSize(200.0f, 200.0f)
         ->setAttribute("layout", "vertical");
@@ -99,7 +97,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setIcon("gui/icons/hull")
         ->setSize(GuiElement::GuiSizeMax, kv_size);
 
-    GuiElement* top_row_kvs_2 = new GuiElement(top_row, "");
+    GuiElement* top_row_kvs_2 = new GuiElement(docking_bay_info, "");
     top_row_kvs_2
         ->setSize(200.0f, 200.0f)
         ->setAttribute("layout", "vertical");
@@ -144,7 +142,6 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     berths = new GuiListbox(bottom_row, "",
         [this](int index, string value)
         {
-            LOG(Debug, "index: ", index, " value: ", value);
             if (selected_entity != sp::ecs::Entity())
                 DockingSystem::assignInternalEntityToBerth(selected_entity, value.toInt());
         }
@@ -167,37 +164,13 @@ void DockingBayScreen::onUpdate()
     auto bay = my_spaceship.getComponent<DockingBay>();
     if (!bay) return;
 
-    // Initialize berths if empty (using default configuration)
-    // Only initialize on server side - clients will receive via multiplayer sync
-    if (game_server && bay->berths.empty())
+    // Check for changes in the berths.
+    bool list_changed = cached_berth_entities.size() != bay->berths.size();
+    if (!list_changed)
     {
-        bay->berths.resize(DockingBay::default_berth_count);
         for (size_t i = 0; i < bay->berths.size(); i++)
         {
-            // Set up default berth types based on position
-            if (i < 3)
-                bay->berths[i].type = DockingBay::BerthType::Launcher;
-            else if (i < 5)
-                bay->berths[i].type = DockingBay::BerthType::Energy;
-            else if (i < 7)
-                bay->berths[i].type = DockingBay::BerthType::Missiles;
-            else
-                bay->berths[i].type = DockingBay::BerthType::Storage;
-        }
-    }
-
-    // Check for changes in the docked entities list.
-    bool list_changed = false;
-    if (bay->docked_entities_dirty ||
-        bay->docked_entities.size() != cached_docked_entities.size())
-    {
-        list_changed = true;
-    }
-    else
-    {
-        for (size_t i = 0; i < bay->docked_entities.size(); i++)
-        {
-            if (bay->docked_entities[i] != cached_docked_entities[i])
+            if (bay->berths[i].docked_entity != cached_berth_entities[i])
             {
                 list_changed = true;
                 break;
@@ -208,118 +181,120 @@ void DockingBayScreen::onUpdate()
     // Update the grid only when the list of ships changes.
     if (list_changed)
     {
-        updateDockedEntitiesList();
-        cached_docked_entities = bay->docked_entities;
+        updateBerthsList();
 
-        // If selected entity is no longer docked, deselect it.
-        if (selected_entity)
+        // Build cached list from berths
+        cached_berth_entities.resize(bay->berths.size());
+        for (size_t i = 0; i < bay->berths.size(); i++)
+            cached_berth_entities[i] = bay->berths[i].docked_entity;
+
+        // If selected berth index is now out of range, deselect it
+        if (selected_berth_index >= static_cast<int>(bay->berths.size()))
         {
-            bool still_docked = false;
-            for (auto entity : bay->docked_entities)
-            {
-                if (entity == selected_entity)
-                {
-                    still_docked = true;
-                    break;
-                }
-            }
-
-            if (!still_docked) selectEntity(sp::ecs::Entity());
+            selectBerth(-1);
         }
     }
 
-    // Update the display only if an entity is selected.
-    if (selected_entity) updateSelectedEntityDisplay();
+    // Update berth labels every frame to ensure they're set after panels are created
+    updateBerthsLabels();
 
-    // Update berths listbox.
-    std::vector<string> berths_keys;
-    std::vector<string> berths_values;
-
-    for (size_t i = 0; i < bay->berths.size(); i++)
-    {
-        const auto& berth = bay->berths[i];
-
-        // Create berth type label.
-        string type_label;
-        switch (berth.type)
-        {
-            case DockingBay::BerthType::Launcher:
-                type_label = tr("dockingbay", "Launcher");
-                break;
-            case DockingBay::BerthType::Energy:
-                type_label = tr("dockingbay", "Energy");
-                break;
-            case DockingBay::BerthType::Missiles:
-                type_label = tr("dockingbay", "Missiles");
-                break;
-            case DockingBay::BerthType::Thermal:
-                type_label = tr("dockingbay", "Thermal");
-                break;
-            case DockingBay::BerthType::Repair:
-                type_label = tr("dockingbay", "Repair");
-                break;
-            case DockingBay::BerthType::Storage:
-                type_label = tr("dockingbay", "Storage");
-                break;
-        }
-
-        // Format: "Berth 1 (Type): Occupant or Empty"
-        string value = static_cast<string>(static_cast<int>(i));
-        string callsign = tr("dockingbay", "Unknown");
-        if (berth.docked_entity == sp::ecs::Entity())
-            callsign = tr("dockingbay", "Empty");
-        else if (auto callsign_component = berth.docked_entity.getComponent<CallSign>())
-            callsign = callsign_component->callsign;
-        string key = tr("Berth {index} ({type}): {callsign}").format({
-            {"index", static_cast<int>(i + 1)},
-            {"type", type_label},
-            {"callsign", callsign}
-        });
-
-        berths_keys.push_back(key);
-        berths_values.push_back(value);
-    }
-
-    berths->setOptions(berths_keys, berths_values);
+    // Update the display if a berth is selected
+    if (selected_berth_index >= 0) updateSelectedEntityDisplay();
 }
 
-void DockingBayScreen::selectEntity(sp::ecs::Entity entity)
+void DockingBayScreen::selectBerth(int berth_index)
 {
-    if (!entity)
-    {
-        docking_bay_info->hide();
-        selected_entity = sp::ecs::Entity();
-        return;
-    }
+    auto bay = my_spaceship.getComponent<DockingBay>();
+    if (!bay) return;
 
-    selected_entity = entity;
-    docking_bay_info->show();
-    top_row_info->setEntity(entity);
+    // Validate index and update selection
+    if (berth_index >= 0 && berth_index < static_cast<int>(bay->berths.size()))
+    {
+        selected_berth_index = berth_index;
+        selected_entity = bay->berths[berth_index].docked_entity;
+    }
+    else
+    {
+        selected_berth_index = -1;
+        selected_entity = sp::ecs::Entity();
+    }
 
     // Force immediate update of displays
     updateSelectedEntityDisplay();
 }
 
-void DockingBayScreen::updateDockedEntitiesList()
+void DockingBayScreen::updateBerthsList()
 {
     if (!my_spaceship) return;
 
     auto bay = my_spaceship.getComponent<DockingBay>();
     if (!bay) return;
 
-    docking_bay_ships->setEntities(bay->docked_entities);
+    // Build vector of entities docked at berths
+    std::vector<sp::ecs::Entity> berths_entities(bay->berths.size());
+    for (size_t i = 0; i < bay->berths.size(); i++)
+        berths_entities[i] = bay->berths[i].docked_entity;
+
+    // Set entities (this triggers rebuild of panels)
+    docking_bay_berths->setEntities(berths_entities);
+}
+
+void DockingBayScreen::updateBerthsLabels()
+{
+    if (!my_spaceship) return;
+
+    auto bay = my_spaceship.getComponent<DockingBay>();
+    if (!bay) return;
+
+    // Set custom labels on each panel
+    for (size_t i = 0; i < bay->berths.size(); i++)
+    {
+        const auto& berth = bay->berths[i];
+        const string type_icon = bay->getTypeIcon(berth.type);
+        const string type_name = bay->getTypeName(berth.type);
+
+        // Number the panel and set berth type info
+        const int idx = static_cast<int>(i);
+        docking_bay_berths
+            ->setCustomLabel(idx, 0, tr("Berth {i}").format({{"i", static_cast<string>(idx + 1)}}))
+            ->setCustomIcon(idx, 1, type_icon)
+            ->setCustomLabel(idx, 2, type_name);
+    }
 }
 
 void DockingBayScreen::updateSelectedEntityDisplay()
 {
-    if (!selected_entity)
+    auto bay = my_spaceship.getComponent<DockingBay>();
+    if (!bay) return;
+
+    // Select the panel by index
+    docking_bay_berths->selectPanelByIndex(selected_berth_index);
+
+    // Validate berth index
+    if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size()))
     {
-        docking_bay_info->hide();
         selected_entity = sp::ecs::Entity();
+        top_row_info
+            ->setEntity(selected_entity)
+            ->setCustomLabel(0, "")
+            ->setCustomIcon(1, "")
+            ->setCustomLabel(2, "");
+        entity_energy->hide();
+        entity_hull->hide();
+        for (auto kv : entity_missiles) kv->hide();
         return;
     }
 
-    docking_bay_ships->selectEntityPanel(selected_entity);
+    // Update selected_entity from the berth
+    selected_entity = bay->berths[selected_berth_index].docked_entity;
+
+    const string type_icon = bay->getTypeIcon(bay->berths[selected_berth_index].type);
+    const string type_name = bay->getTypeName(bay->berths[selected_berth_index].type);
+    top_row_info
+        ->setEntity(selected_entity)
+        ->setCustomLabel(0, tr("Berth {i}").format({{"i", selected_berth_index + 1}}))
+        ->setCustomIcon(1, type_icon)
+        ->setCustomLabel(2, type_name);
 
     // Update reactor/energy display
     if (auto reactor = selected_entity.getComponent<Reactor>())

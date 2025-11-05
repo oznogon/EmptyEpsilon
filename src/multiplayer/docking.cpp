@@ -24,7 +24,6 @@ namespace sp::io {
 BASIC_REPLICATION_IMPL(DockingBayReplication, DockingBay)
     REPLICATE_VECTOR_IF_DIRTY(external_dock_classes, external_dock_classes_dirty);
     REPLICATE_VECTOR_IF_DIRTY(internal_dock_classes, internal_dock_classes_dirty);
-    REPLICATE_VECTOR_IF_DIRTY(docked_entities, docked_entities_dirty);
 
     BASIC_REPLICATION_VECTOR(berths)
         VECTOR_REPLICATION_FIELD(docked_entity);

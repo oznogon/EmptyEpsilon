@@ -18,7 +18,7 @@ private:
 
     GuiElement* left_column;
     GuiElement* right_column;
-    GuiEntityInfoPanelGrid* docking_bay_ships;
+    GuiEntityInfoPanelGrid* docking_bay_berths;
     GuiButton* docking_bay_scramble;
     GuiElement* docking_bay_info;
 
@@ -31,12 +31,14 @@ private:
 
     // State tracking
     sp::ecs::Entity selected_entity;
-    std::vector<sp::ecs::Entity> cached_docked_entities;
+    int selected_berth_index = -1;
+    std::vector<sp::ecs::Entity> cached_berth_entities;
 
     // Helper methods
-    void selectEntity(sp::ecs::Entity entity);
+    void selectBerth(int berth_index);
     void updateSelectedEntityDisplay();
-    void updateDockedEntitiesList();
+    void updateBerthsList();
+    void updateBerthsLabels();
     void updateMissileDisplay(GuiKeyValueDisplay* display, MissileTubes* tubes, EMissileWeapons type);
 
 public:

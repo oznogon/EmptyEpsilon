@@ -293,20 +293,22 @@ template<> struct Convert<DockingPort::State> {
 };
 template<> struct Convert<DockingBay::BerthType> {
     static int toLua(lua_State* L, DockingBay::BerthType value) {
-        switch(value) {
-        case DockingBay::BerthType::Launcher: lua_pushstring(L, "launcher"); break;
+        switch(value)
+        {
+        case DockingBay::BerthType::Hangar: lua_pushstring(L, "hangar"); break;
         case DockingBay::BerthType::Energy: lua_pushstring(L, "energy"); break;
         case DockingBay::BerthType::Missiles: lua_pushstring(L, "missiles"); break;
         case DockingBay::BerthType::Thermal: lua_pushstring(L, "thermal"); break;
         case DockingBay::BerthType::Repair: lua_pushstring(L, "repair"); break;
         case DockingBay::BerthType::Storage: lua_pushstring(L, "storage"); break;
         }
+
         return 1;
     }
     static DockingBay::BerthType fromLua(lua_State* L, int idx) {
         string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "launcher")
-            return DockingBay::BerthType::Launcher;
+        if (str == "hangar")
+            return DockingBay::BerthType::Hangar;
         else if (str == "energy")
             return DockingBay::BerthType::Energy;
         else if (str == "missiles")
