@@ -3,10 +3,11 @@
 #include "gui/gui2_overlay.h"
 #include "missileWeaponData.h"
 
-class GuiButton;
 class GuiKeyValueDisplay;
 class GuiEntityInfoPanel;
 class GuiEntityInfoPanelGrid;
+class GuiSelector;
+class GuiToggleButton;
 class MissileTubes;
 
 class DockingBayScreen : public GuiOverlay
@@ -18,13 +19,22 @@ private:
     GuiElement* left_column;
     GuiElement* right_column;
     GuiEntityInfoPanelGrid* docking_bay_berths;
-    GuiButton* docking_bay_scramble;
     GuiElement* docking_bay_info;
 
     GuiEntityInfoPanel* top_row_info;
     GuiKeyValueDisplay* entity_energy;
     GuiKeyValueDisplay* entity_hull;
     GuiKeyValueDisplay* entity_missiles[MW_Count];
+
+    GuiElement* bottom_row;
+    GuiSelector* target_berth;
+    GuiToggleButton* scramble;
+    GuiElement* hangar_controls;
+    GuiElement* energy_controls;
+    GuiElement* thermal_controls;
+    GuiElement* missile_controls;
+    GuiElement* repair_controls;
+    GuiElement* storage_controls;
 
     // State tracking
     sp::ecs::Entity selected_entity;
