@@ -4,7 +4,6 @@
 #include "missileWeaponData.h"
 
 class GuiButton;
-class GuiListbox;
 class GuiKeyValueDisplay;
 class GuiEntityInfoPanel;
 class GuiEntityInfoPanelGrid;
@@ -26,8 +25,6 @@ private:
     GuiKeyValueDisplay* entity_energy;
     GuiKeyValueDisplay* entity_hull;
     GuiKeyValueDisplay* entity_missiles[MW_Count];
-
-    GuiListbox* berths;
 
     // State tracking
     sp::ecs::Entity selected_entity;
