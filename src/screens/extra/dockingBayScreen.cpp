@@ -138,20 +138,17 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     move_controls_row
         ->setAttribute("margin", "0, 0, 0, 10");
 
-    (new GuiLabel(move_controls_row, "", tr("dockingbay", "Move to: "), 30.0f))
-        ->setSize(100.0f, 50.0f);
-
-    target_berth = new GuiSelector(move_controls_row, "", [](int index, string value) {} );
-    target_berth
-        ->setSize(250.0f, GuiElement::GuiSizeMax);
-
-    (new GuiButton(move_controls_row, "", tr("dockingbay", "Move"),
+    (new GuiButton(move_controls_row, "", tr("dockingbay", "Move to:"),
         [this]()
         {
             if (selected_entity && selected_entity != sp::ecs::Entity() && my_player_info)
                 my_player_info->commandMoveInternalToBerth(selected_entity, target_berth->getSelectionValue().toInt());
         }
-    ))->setSize(100.0f, 50.0f);
+    ))->setSize(150.0f, 50.0f);
+
+    target_berth = new GuiSelector(move_controls_row, "", [](int index, string value) {} );
+    target_berth
+        ->setSize(250.0f, GuiElement::GuiSizeMax);
 
     // Scramble button launches all ships in all hangar berths.
     // As an emergency control, it should always be visible.
@@ -218,8 +215,12 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(energy_controls, "DOCKING_BAY_ENERGY_LABEL", tr("dockingbay", "Energy operations"), 30.0f))
+    (new GuiLabel(energy_controls, "DOCKING_BAY_ENERGY_CONTROLS_LABEL", tr("dockingbay", "Energy operations"), 30.0f))
         ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 0, 10");
+
+    (new GuiLabel(energy_controls, "DOCKING_BAY_ENERGY_TRANSFER_LABEL", tr("dockingbay", "Transfer energy"), 30.0f))
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
 
@@ -228,11 +229,12 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("layout", "horizontal");
 
-    // TODO: Energy transfer controls between carrier and docked entity.
+    (new GuiElement(energy_transfer_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
     energy_carrier = new GuiKeyValueDisplay(energy_transfer_row, "", kv_split, tr("dockingbay", "Carrier"), "");
     energy_carrier
         ->setIcon("gui/icons/energy")
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        ->setSize(200.0f, GuiElement::GuiSizeMax);
 
     energy_transfer_direction = new GuiSlider(energy_transfer_row, "DOCKING_BAY_ENERGY_SLIDER",
         static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
@@ -256,12 +258,30 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->addSnapValue(static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier), 0.75f)
         ->addSnapValue(static_cast<float>(DockingBay::Berth::TransferDirection::None), 0.5f)
         ->addSnapValue(static_cast<float>(DockingBay::Berth::TransferDirection::ToDocked), 0.75f)
-        ->setSize(250.0f, GuiElement::GuiSizeMax);
+        ->setSize(400.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "10, 0");
 
     energy_docked = new GuiKeyValueDisplay(energy_transfer_row, "", kv_split, tr("dockingbay", "Docked"), "");
     energy_docked
         ->setIcon("gui/icons/energy")
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        ->setSize(200.0f, GuiElement::GuiSizeMax);
+
+    (new GuiElement(energy_transfer_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    GuiElement* energy_transfer_labels_row = new GuiElement(energy_controls, "DOCKING_BAY_ENERGY_TRANSFER_LABELS");
+    energy_transfer_labels_row
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("layout", "horizontal");
+
+    (new GuiElement(energy_transfer_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "< to carrier"), 30.0f))
+        ->setSize(200.0f, 50.0f);
+
+    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "to berth >"), 30.0f))
+        ->setSize(200.0f, 50.0f);
+
+    (new GuiElement(energy_transfer_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Thermal-specific berth controls.
     thermal_controls = new GuiElement(right_column, "DOCKING_BAY_THERMAL_CONTROLS");
@@ -548,28 +568,39 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         ->setCustomLabel(2, type_name);
 
     // Update reactor/energy displays
-    if (auto docked_reactor = selected_entity.getComponent<Reactor>())
+    auto carrier_reactor = my_spaceship.getComponent<Reactor>();
+    auto docked_reactor = selected_entity.getComponent<Reactor>();
+    if (docked_reactor && carrier_reactor) energy_transfer_direction->enable();
+
+    if (docked_reactor)
     {
         entity_energy
             ->setValue(static_cast<string>("{energy}/{max_energy}").format({
                 {"energy", static_cast<int>(docked_reactor->energy)},
                 {"max_energy", static_cast<int>(docked_reactor->max_energy)}
             }));
-        energy_docked
-            ->setValue(static_cast<string>("{energy}/{max_energy}").format({
-                {"energy", static_cast<int>(docked_reactor->energy)},
-                {"max_energy", static_cast<int>(docked_reactor->max_energy)}
-            }));
+
+        if (energy_controls->isVisible())
+        {
+            energy_docked
+                ->setValue(static_cast<string>("{energy}/{max_energy}").format({
+                    {"energy", static_cast<int>(docked_reactor->energy)},
+                    {"max_energy", static_cast<int>(docked_reactor->max_energy)}
+                }));
+        }
     }
     else
     {
         entity_energy->setValue(tr("dockingbay", "No reactor"));
         energy_docked->setValue(tr("dockingbay", "No reactor"));
+        energy_transfer_direction
+            ->setValue(static_cast<float>(DockingBay::Berth::TransferDirection::None))
+            ->disable();
     }
 
-    if (auto carrier_reactor = my_spaceship.getComponent<Reactor>())
+    if (carrier_reactor)
     {
-        if (energy_carrier->isVisible())
+        if (energy_controls->isVisible())
         {
             energy_carrier
                 ->setValue(static_cast<string>("{energy}/{max_energy}").format({
@@ -577,6 +608,13 @@ void DockingBayScreen::updateSelectedEntityDisplay()
                     {"max_energy", static_cast<int>(carrier_reactor->max_energy)}
                 }));
         }
+    }
+    else
+    {
+        energy_carrier->setValue(tr("dockingbay", "No reactor"));
+        energy_transfer_direction
+            ->setValue(static_cast<float>(DockingBay::Berth::TransferDirection::None))
+            ->disable();
     }
 
     // Update hull display

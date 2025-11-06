@@ -125,33 +125,21 @@ void DockingSystem::update(float delta)
 
                         // Transfer energy in the configured direction if both
                         // the recipient has a reactor and the sender has energy.
-                        // Reactorless ships are treated as if they have infinite
+                        // Reactorless ships are treated as if they have no
                         // energy. The berth's transfer_rate is in energy/sec.
                         if (docked_reactor && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToDocked)
                         {
-                            LOG(Debug, "docked_reactor && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToDocked");
-                            LOG(Debug, "energy_transfer: ", energy_transfer);
-                            LOG(Debug, "std::min(docked_reactor->max_energy, energy_transfer): ", std::min(docked_reactor->max_energy, energy_transfer));
                             if (docked_reactor->energy + energy_transfer >= docked_reactor->max_energy) continue;
-                            LOG(Debug, "Passed docked_reactor->energy >= docked_reactor->max_energy");
-                            if (my_reactor && !my_reactor->useEnergy(energy_transfer)) continue;
-                            LOG(Debug, "Passed my_reactor && !my_reactor->useEnergy(energy_transfer)");
-                            LOG(Debug, "docked_reactor->energy before: ", docked_reactor->energy);
+                            if (!my_reactor) continue;
+                            if (!my_reactor->useEnergy(energy_transfer)) continue;
                             docked_reactor->energy = std::min(docked_reactor->max_energy, docked_reactor->energy + energy_transfer);
-                            LOG(Debug, "docked_reactor->energy after: ", docked_reactor->energy);
                         }
                         else if (my_reactor && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToCarrier)
                         {
-                            LOG(Debug, "my_reactor && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToCarrier");
-                            LOG(Debug, "energy_transfer: ", energy_transfer);
-                            LOG(Debug, "std::min(my_reactor->max_energy, energy_transfer): ", std::min(my_reactor->max_energy, energy_transfer));
                             if (my_reactor->energy >= my_reactor->max_energy) continue;
-                            LOG(Debug, "Passed my_reactor->energy >= my_reactor->max_energy");
-                            if (docked_reactor && !docked_reactor->useEnergy(energy_transfer)) continue;
-                            LOG(Debug, "Passed docked_reactor && !docked_reactor->useEnergy(energy_transfer");
-                            LOG(Debug, "my_reactor->energy before: ", my_reactor->energy);
+                            if (!docked_reactor) continue;
+                            if (!docked_reactor->useEnergy(energy_transfer)) continue;
                             my_reactor->energy = std::min(my_reactor->max_energy, my_reactor->energy + energy_transfer);
-                            LOG(Debug, "my_reactor->energy after: ", my_reactor->energy);
                         }
                     }
 
