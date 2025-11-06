@@ -12,6 +12,8 @@ class GuiViewport3D : public GuiElement
     bool show_callsigns;
     bool show_headings;
     bool show_spacedust;
+    bool use_particle_trails;
+    float camera_fov;
 
     glm::mat4 projection_matrix;
     glm::mat4 view_matrix;
@@ -62,6 +64,18 @@ class GuiViewport3D : public GuiElement
     std::array<uint32_t, static_cast<size_t>(VertexAttributes::SpacedustCount)> spacedust_vertex_attributes;
     gl::Buffers<static_cast<size_t>(Buffers::SpacedustCount)> spacedust_buffer;
     sp::Shader* spacedust_shader = nullptr;
+
+    // Engine trail
+    sp::Shader* trail_shader = nullptr;
+    uint32_t trail_projection_uniform;
+    uint32_t trail_view_uniform;
+    uint32_t trail_texture_uniform;
+    uint32_t trail_position_attrib;
+    uint32_t trail_color_attrib;
+    uint32_t trail_texcoord_attrib;
+    gl::Buffers<2> trail_buffers; // [0] = vertex/color/texcoord data, [1] = element indices
+    uint32_t trail_vao = 0; // Vertex Array Object to cache attribute state
+    inline static const std::vector<glm::vec3> default_trail_polygon = {{0.0f, -0.5f, 0.0f}, {0.0f, 0.5f, 0.0f}};
 
 public:
     GuiViewport3D(GuiContainer* owner, string id);

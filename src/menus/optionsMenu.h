@@ -34,6 +34,7 @@ private:
 
     GuiBasicSlider* graphics_fov_slider{};
     GuiLabel* graphics_fov_overlay_label{};
+    GuiSelector* engine_trails_selector;
 
     std::vector<string> hotkey_categories;
     GuiLabel* impulse_volume_overlay_label;

@@ -5,6 +5,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "viewport3d.h"
+#include "tween.h"
 #include "shaderManager.h"
 #include "soundManager.h"
 #include "textureManager.h"
@@ -18,6 +19,8 @@
 #include "components/hull.h"
 #include "components/rendering.h"
 #include "components/impulse.h"
+#include "components/warpdrive.h"
+#include "components/missile.h"
 #include "components/name.h"
 #include "components/zone.h"
 #include "systems/rendering.h"
@@ -33,12 +36,8 @@ static std::unordered_map<string, std::unique_ptr<gl::CubemapTexture>> skybox_te
 
 
 GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
-: GuiElement(owner, id)
+: GuiElement(owner, id), show_callsigns(false), show_headings(false), show_spacedust(false), use_particle_trails(false), camera_fov(PreferencesManager::get("main_screen_camera_fov", "60").toFloat())
 {
-    show_callsigns = false;
-    show_headings = false;
-    show_spacedust = false;
-
     // Load up our starbox into a cubemap.
     // Setup shader.
     starbox_shader = ShaderManager::getShader("shaders/starbox");
@@ -129,6 +128,34 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         glBufferSubData(GL_ARRAY_BUFFER, 0, 2 * spacedust_particle_count * sizeof(glm::vec3), zeroed_positions.data());
     }
     glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+
+    // Setup engine trail shader
+    trail_shader = ShaderManager::getShader("shaders/engineTrail");
+    trail_shader->bind();
+    trail_projection_uniform = trail_shader->getUniformLocation("projection");
+    trail_view_uniform = trail_shader->getUniformLocation("view");
+    trail_texture_uniform = trail_shader->getUniformLocation("texture");
+    trail_position_attrib = trail_shader->getAttributeLocation("position");
+    trail_color_attrib = trail_shader->getAttributeLocation("color");
+    trail_texcoord_attrib = trail_shader->getAttributeLocation("texcoord");
+
+    // Create and configure VAO for trail rendering to cache vertex attribute state
+    glGenVertexArrays(1, &trail_vao);
+    glBindVertexArray(trail_vao);
+
+    // Bind buffers and configure vertex attributes
+    glBindBuffer(GL_ARRAY_BUFFER, trail_buffers[0]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, trail_buffers[1]);
+
+    // Enable and configure vertex attributes
+    glEnableVertexAttribArray(trail_position_attrib);
+    glEnableVertexAttribArray(trail_color_attrib);
+    glEnableVertexAttribArray(trail_texcoord_attrib);
+
+    // Unbind VAO to avoid accidental modification
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
 }
 
 void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
@@ -152,7 +179,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     
     glActiveTexture(GL_TEXTURE0);
 
-    float camera_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
     {
         auto p0 = renderer.virtualToPixelPosition(rect.position);
         auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size);
@@ -257,33 +283,409 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
     glDepthMask(GL_TRUE);
 
-    // Emit engine particles.
-    for(auto [entity, ee, transform, impulse] : sp::ecs::Query<EngineEmitter, sp::Transform, ImpulseEngine>()) {
-        if (impulse.actual != 0.0f) {
-            float engine_scale = std::abs(impulse.actual);
-            if (engine->getElapsedTime() - ee.last_engine_particle_time > 0.1f)
-            {
-                for(auto ed : ee.emitters)
-                {
-                    glm::vec3 offset = ed.position;
-                    glm::vec2 pos2d = transform.getPosition() + rotateVec2(glm::vec2(offset.x, offset.y), transform.getRotation());
-                    glm::vec3 color = ed.color;
-                    glm::vec3 pos3d = glm::vec3(pos2d.x, pos2d.y, offset.z);
-                    float scale = ed.scale * engine_scale;
-                    ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
-                }
-                ee.last_engine_particle_time = engine->getElapsedTime();
-            }
-        }
-    }
-
     // Update view matrix in shaders.
     ShaderRegistry::updateProjectionView({}, view_matrix);
 
     RenderSystem render_system;
     render_system.render3D(rect.size.x / rect.size.y, camera_fov);
 
-    ParticleEngine::render(projection_matrix, view_matrix);
+    if (PreferencesManager::get("use_particle_trails", "1") == "1")
+    {
+        // Emit engine particles.
+        // TODO: DRY vs. polygonal
+        for (auto [entity, ee, transform] : sp::ecs::Query<EngineEmitter, sp::Transform>())
+        {
+            auto warp = entity.getComponent<WarpDrive>();
+            auto impulse = entity.getComponent<ImpulseEngine>();
+            auto missile = entity.getComponent<MissileFlight>();
+            if (!warp && !impulse && !missile) continue;
+
+            const bool using_impulse = impulse && impulse->actual != 0.0f;
+            const bool using_warp = warp && warp->current != 0.0f;
+            float propulsion_actual = 0.0f;
+
+            if (ee.velocity_override > 0.0f)
+                propulsion_actual = ee.velocity_override;
+            else if (using_impulse || using_warp)
+            {
+                if (using_impulse)
+                    propulsion_actual = std::abs(impulse->actual) * impulse->getSystemEffectiveness();
+                if (using_warp)
+                    propulsion_actual = (warp->current / static_cast<float>(warp->max_level)) * warp->getSystemEffectiveness();
+            }
+            else if (missile)
+                propulsion_actual = 1.0f;
+
+            if (propulsion_actual != 0.0f && engine->getElapsedTime() - ee.last_engine_particle_time > 0.1f)
+            {
+                for (auto ed : ee.emitters)
+                {
+                    glm::vec3 offset = ed.position;
+                    glm::vec2 pos2d = transform.getPosition() + rotateVec2(glm::vec2(offset.x, offset.y), transform.getRotation());
+                    glm::vec3 color = ed.color;
+                    glm::vec3 pos3d = glm::vec3(pos2d.x, pos2d.y, offset.z);
+                    ParticleEngine::spawn(pos3d, pos3d, color, color, ed.scale, 0.0, 5.0);
+                }
+
+                ee.last_engine_particle_time = engine->getElapsedTime();
+            }
+        }
+
+        // Render emitter particles
+        ParticleEngine::render(projection_matrix, view_matrix);
+    }
+    else
+    {
+        // Prep EngineEmitter trail renderer
+        std::vector<glm::vec3> all_vertices;
+        std::vector<glm::vec3> all_colors;
+        std::vector<glm::vec2> all_texcoords;
+        std::vector<int> all_indices;
+
+        // Extract camera position from view matrix for billboarding
+        glm::mat4 inv_view = glm::inverse(view_matrix);
+        glm::vec3 camera_world_pos = glm::vec3(inv_view[3]);
+
+        const float current_time = engine->getElapsedTime();
+
+        // TODO: DRY vs. particle
+        for (auto [entity, ee, transform] : sp::ecs::Query<EngineEmitter, sp::Transform>())
+        {
+            auto warp = entity.getComponent<WarpDrive>();
+            auto impulse = entity.getComponent<ImpulseEngine>();
+            auto missile = entity.getComponent<MissileFlight>();
+            if (!warp && !impulse && !missile) continue;
+
+            const bool using_impulse = impulse && impulse->actual != 0.0f;
+            const bool using_warp = warp && warp->current != 0.0f;
+            float propulsion_actual = 0.0f;
+
+            if (ee.velocity_override > 0.0f)
+                propulsion_actual = ee.velocity_override;
+            else if (using_impulse || using_warp)
+            {
+                if (using_impulse)
+                    propulsion_actual = std::abs(impulse->actual) * impulse->getSystemEffectiveness();
+                if (using_warp)
+                    propulsion_actual = (warp->current / static_cast<float>(warp->max_level)) * warp->getSystemEffectiveness();
+            }
+            else if (missile)
+                propulsion_actual = 1.0f;
+
+            // Calculate distance-based sampling for smooth trails at all speeds
+            bool should_add_point = false;
+
+            if (ee.trail_history.empty())
+                should_add_point = true;
+            else
+            {
+                // Add point if moved at least 1 units
+                const auto& last_point = ee.trail_history.back();
+                float distance = glm::length(transform.getPosition() - last_point.position);
+                if (distance > 1.0f) should_add_point = true;
+            }
+
+            // Update trail history
+            if (should_add_point)
+            {
+                EngineEmitter::TrailPoint point;
+                point.position = transform.getPosition();
+                point.rotation = transform.getRotation();
+                point.timestamp = current_time;
+                ee.trail_history.push_back(point);
+                ee.last_engine_particle_time = current_time;
+            }
+
+            // Remove old trail points based on time
+            ee.trail_history.erase(
+                std::remove_if(ee.trail_history.begin(), ee.trail_history.end(),
+                    [current_time](const EngineEmitter::TrailPoint& p) {
+                        return (current_time - p.timestamp) > EngineEmitter::trail_lifetime;
+                    }),
+                ee.trail_history.end()
+            );
+
+            // Build trail geometry for each emitter
+            if (ee.trail_history.size() >= 2)
+            {
+                for (auto& ed : ee.emitters)
+                {
+                    // Whatever the emitter color is, the warp trail should be
+                    // brighter.
+                    glm::vec3 color = using_warp
+                        ? ed.color * 1.2f
+                        : ed.color;
+
+                    // Render trail twice at different scales for bright center
+                    // effect, if impulse is >80% engaged.
+                    int exhaust_cones = propulsion_actual > 0.5f ? 2 : 1;
+
+                    if (ed.trail_polygon.empty())
+                    {
+                        // Use billboarded quads for default trail (no polygon defined)
+                        const float scale_multiplier = 1.0f;
+                        const float scale_factor = ed.scale * std::min(1.0f, std::abs(propulsion_actual)) * scale_multiplier;
+
+                        // Pre-calculate per-segment data that's shared across both axes
+                        struct SegmentData {
+                            glm::vec3 pos0, pos1;
+                            glm::vec3 trail_color0, trail_color1;
+                            float scale0, scale1;
+                            glm::vec3 billboard_right_axis0;
+                            glm::vec3 billboard_right_axis1;
+                        };
+                        std::vector<SegmentData> segment_cache;
+                        segment_cache.reserve(ee.trail_history.size() - 1);
+
+                        // Build segment cache with shared calculations
+                        for (size_t i = 0; i < ee.trail_history.size() - 1; ++i)
+                        {
+                            const auto& point0 = ee.trail_history[i];
+                            const auto& point1 = ee.trail_history[i + 1];
+
+                            // Calculate age factors
+                            const float age0 = current_time - point0.timestamp;
+                            const float age1 = current_time - point1.timestamp;
+                            const float age_factor0 = Tween<float>::easeInOutCubic(age0, 0.0f, EngineEmitter::trail_lifetime, 1.0f, 0.0f);
+                            const float age_factor1 = Tween<float>::easeInOutCubic(age1, 0.0f, EngineEmitter::trail_lifetime, 1.0f, 0.0f);
+
+                            // Calculate colors with temporal fade
+                            glm::vec3 trail_color0 = Tween<glm::vec3>::easeOutCubic(age_factor0, 1.0f, 0.0f, color, glm::vec3{0.0f, 0.0f, 0.0f});
+                            glm::vec3 trail_color1 = Tween<glm::vec3>::easeOutCubic(age_factor1, 1.0f, 0.0f, color, glm::vec3{0.0f, 0.0f, 0.0f});
+
+                            // Calculate scales
+                            float scale0 = scale_factor * age_factor0;
+                            float scale1 = scale_factor * age_factor1;
+
+                            // Apply emitter offset in entity space
+                            glm::vec2 emitter_offset0 = rotateVec2(glm::vec2(ed.position.x, ed.position.y), point0.rotation);
+                            glm::vec2 emitter_offset1 = rotateVec2(glm::vec2(ed.position.x, ed.position.y), point1.rotation);
+                            glm::vec2 center0 = point0.position + emitter_offset0;
+                            glm::vec2 center1 = point1.position + emitter_offset1;
+
+                            glm::vec3 pos0 = glm::vec3(center0.x, center0.y, ed.position.z);
+                            glm::vec3 pos1 = glm::vec3(center1.x, center1.y, ed.position.z);
+
+                            // Calculate billboard directions once per segment
+                            glm::vec3 segment_center = (pos0 + pos1) * 0.5f;
+                            glm::vec3 to_camera = glm::normalize(camera_world_pos - segment_center);
+                            glm::vec3 segment_dir = glm::normalize(pos1 - pos0);
+
+                            // Pre-calculate both billboard axes
+                            glm::vec3 billboard_right_axis0 = glm::normalize(glm::cross(segment_dir, to_camera));
+                            glm::vec3 billboard_right_axis1 = glm::normalize(glm::cross(billboard_right_axis0, segment_dir));
+
+                            segment_cache.push_back({pos0, pos1, trail_color0, trail_color1, scale0, scale1, billboard_right_axis0, billboard_right_axis1});
+                        }
+
+                        // Create two perpendicular billboarded trails using cached data
+                        for (int trail_axis = 0; trail_axis < 2; ++trail_axis)
+                        {
+                            size_t vertex_base = all_vertices.size();
+
+                            // Build billboarded quads along the trail
+                            for (size_t i = 0; i < segment_cache.size(); ++i)
+                            {
+                                const auto& seg = segment_cache[i];
+
+                                // Select the appropriate billboard direction for this axis
+                                glm::vec3 billboard_right = (trail_axis == 0) ? seg.billboard_right_axis0 : seg.billboard_right_axis1;
+
+                                // Create quad vertices (4 vertices per segment)
+                                float half_width0 = seg.scale0 * 0.5f;
+                                float half_width1 = seg.scale1 * 0.5f;
+
+                                // Bottom-left
+                                all_vertices.push_back(seg.pos0 - billboard_right * half_width0);
+                                all_colors.push_back(seg.trail_color0);
+                                all_texcoords.push_back(glm::vec2(0.0f, float(i) / segment_cache.size()));
+
+                                // Bottom-right
+                                all_vertices.push_back(seg.pos0 + billboard_right * half_width0);
+                                all_colors.push_back(seg.trail_color0);
+                                all_texcoords.push_back(glm::vec2(1.0f, float(i) / segment_cache.size()));
+
+                                // Top-right
+                                all_vertices.push_back(seg.pos1 + billboard_right * half_width1);
+                                all_colors.push_back(seg.trail_color1);
+                                all_texcoords.push_back(glm::vec2(1.0f, float(i + 1) / segment_cache.size()));
+
+                                // Top-left
+                                all_vertices.push_back(seg.pos1 - billboard_right * half_width1);
+                                all_colors.push_back(seg.trail_color1);
+                                all_texcoords.push_back(glm::vec2(0.0f, float(i + 1) / segment_cache.size()));
+
+                                // Generate indices for this quad (two triangles)
+                                int base = vertex_base + i * 4;
+                                all_indices.push_back(base + 0);
+                                all_indices.push_back(base + 1);
+                                all_indices.push_back(base + 2);
+
+                                all_indices.push_back(base + 0);
+                                all_indices.push_back(base + 2);
+                                all_indices.push_back(base + 3);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Use polygon extrusion for custom trail shapes
+                        const std::vector<glm::vec3>& polygon = ed.trail_polygon;
+                        size_t points_per_segment = polygon.size();
+
+                        // Pre-calculate per-point data shared across all scale passes
+                        struct PointData {
+                            glm::vec2 center;
+                            glm::vec2 perp_dir;
+                            glm::vec2 forward_dir;
+                            glm::vec3 trail_color;
+                            float age_factor;
+                        };
+                        std::vector<PointData> point_cache;
+                        point_cache.reserve(ee.trail_history.size());
+
+                        const float base_scale_factor = ed.scale * std::min(1.0f, std::abs(propulsion_actual));
+
+                        // Build point cache
+                        for (size_t i = 0; i < ee.trail_history.size(); ++i)
+                        {
+                            const auto& point = ee.trail_history[i];
+
+                            // Calculate age factor
+                            const float age = current_time - point.timestamp;
+                            const float age_factor = Tween<float>::easeInOutCubic(age, 0.0f, EngineEmitter::trail_lifetime, 1.0f, 0.0f);
+
+                            // Calculate color with temporal fade
+                            glm::vec3 trail_color = Tween<glm::vec3>::easeOutCubic(age_factor, 1.0f, 0.0f, color, glm::vec3{0.0f, 0.0f, 0.0f});
+
+                            // Apply emitter offset in entity space
+                            glm::vec2 emitter_offset = rotateVec2(glm::vec2(ed.position.x, ed.position.y), point.rotation);
+                            glm::vec2 center = point.position + emitter_offset;
+
+                            // Pre-calculate rotation vectors
+                            float perp_angle_rad = glm::radians(point.rotation + 90.0f);
+                            glm::vec2 perp_dir = glm::vec2(cosf(perp_angle_rad), sinf(perp_angle_rad));
+                            float forward_angle_rad = glm::radians(point.rotation);
+                            glm::vec2 forward_dir = glm::vec2(cosf(forward_angle_rad), sinf(forward_angle_rad));
+
+                            point_cache.push_back({center, perp_dir, forward_dir, trail_color, age_factor});
+                        }
+
+                        // Generate geometry for each scale pass using cached data
+                        for (int scale_pass = 0; scale_pass < exhaust_cones; ++scale_pass)
+                        {
+                            float scale_multiplier = (scale_pass == 0) ? 1.0f : propulsion_actual - 0.5f;
+                            size_t vertex_base = all_vertices.size();
+
+                            // Extrude the polygon along the trail path using cached calculations
+                            for (size_t i = 0; i < point_cache.size(); ++i)
+                            {
+                                const auto& pt = point_cache[i];
+
+                                // Scale based on age factor and current pass multiplier
+                                float scale = base_scale_factor * pt.age_factor * scale_multiplier;
+
+                                // Transform each polygon point to world space
+                                for (const auto& poly_point : polygon)
+                                {
+                                    glm::vec2 world_pos = pt.center +
+                                                          pt.perp_dir * (poly_point.y * scale) +
+                                                          pt.forward_dir * (poly_point.x * scale);
+
+                                    float world_z = ed.position.z + poly_point.z * scale;
+
+                                    all_vertices.push_back(glm::vec3(world_pos.x, world_pos.y, world_z));
+                                    all_colors.push_back(pt.trail_color);
+                                    // Hacky: For custom polygons, sample the
+                                    // center of the texture, which should be
+                                    // bright/opaque
+                                    all_texcoords.push_back(glm::vec2(0.5f, 0.5f));
+                                }
+                            }
+
+                            // Generate triangle indices for polygon extrusion
+                            for (size_t i = 0; i < point_cache.size() - 1; ++i)
+                            {
+                                for (size_t j = 0; j < points_per_segment; ++j)
+                                {
+                                    size_t next_j = (j + 1) % points_per_segment;
+                                    size_t base0 = vertex_base + i * points_per_segment;
+                                    size_t base1 = vertex_base + (i + 1) * points_per_segment;
+
+                                    // Two triangles per quad segment
+                                    all_indices.push_back(base0 + j);
+                                    all_indices.push_back(base1 + j);
+                                    all_indices.push_back(base0 + next_j);
+
+                                    all_indices.push_back(base0 + next_j);
+                                    all_indices.push_back(base1 + j);
+                                    all_indices.push_back(base1 + next_j);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Render all trails in a single batched draw call
+        if (!all_indices.empty())
+        {
+            // Setup OpenGL state for trail rendering
+            glEnable(GL_DEPTH_TEST);
+            glDisable(GL_CULL_FACE);
+            glDepthMask(GL_FALSE);
+            glEnable(GL_BLEND);
+            // Additive blending
+            glBlendFunc(GL_ONE, GL_ONE);
+            // Alpha blending
+            // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+            trail_shader->bind();
+            glUniformMatrix4fv(trail_projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
+            glUniformMatrix4fv(trail_view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
+
+            // Bind trail texture
+            glActiveTexture(GL_TEXTURE0);
+            textureManager.getTexture("particle.png")->bind();
+            glUniform1i(trail_texture_uniform, 0);
+
+            // Bind VAO - restores vertex attribute enabled state automatically
+            glBindVertexArray(trail_vao);
+
+            // Upload vertex data to GPU buffer
+            glBindBuffer(GL_ARRAY_BUFFER, trail_buffers[0]);
+            size_t vertex_size = all_vertices.size() * sizeof(glm::vec3);
+            size_t color_size = all_colors.size() * sizeof(glm::vec3);
+            size_t texcoord_size = all_texcoords.size() * sizeof(glm::vec2);
+            glBufferData(GL_ARRAY_BUFFER, vertex_size + color_size + texcoord_size, nullptr, GL_STREAM_DRAW);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, vertex_size, all_vertices.data());
+            glBufferSubData(GL_ARRAY_BUFFER, vertex_size, color_size, all_colors.data());
+            glBufferSubData(GL_ARRAY_BUFFER, vertex_size + color_size, texcoord_size, all_texcoords.data());
+
+            // Upload index data to element buffer
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, trail_buffers[1]);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, all_indices.size() * sizeof(unsigned int), all_indices.data(), GL_STREAM_DRAW);
+
+            // Update vertex attribute pointers (VAO already has attributes enabled)
+            glVertexAttribPointer(trail_position_attrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+            glVertexAttribPointer(trail_color_attrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)vertex_size);
+            glVertexAttribPointer(trail_texcoord_attrib, 2, GL_FLOAT, GL_FALSE, 0, (void*)(vertex_size + color_size));
+
+            glDrawElements(GL_TRIANGLES, all_indices.size(), GL_UNSIGNED_INT, (void*)0);
+
+            // Unbind VAO
+            glBindVertexArray(0);
+
+            // Render emitter particles
+            ParticleEngine::render(projection_matrix, view_matrix);
+
+            // Restore OpenGL state
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glDisable(GL_BLEND);
+            glDepthMask(GL_TRUE);
+        }
+    }
 
     if (show_spacedust && my_spaceship)
     {
@@ -301,7 +703,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         for (auto n = 0U; n < space_dust.size(); n += 2)
         {
-            //
             auto delta = space_dust[n] - dust_center;
             if (glm::length2(delta) > maxDustDist*maxDustDist || glm::length2(delta) < minDustDist*minDustDist)
             {
@@ -326,9 +727,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
             
             if (update_required)
-            {
                 glBufferSubData(GL_ARRAY_BUFFER, 0, space_dust.size() * sizeof(glm::vec3), space_dust.data());
-            }
+
             glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
             glVertexAttribPointer(signs.get(), 1, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(2 * spacedust_particle_count * sizeof(glm::vec3)));
             
@@ -342,6 +742,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     {
         ShaderRegistry::ScopedShader billboard(ShaderRegistry::Shaders::Billboard);
 
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glDisable(GL_DEPTH_TEST);
         glm::mat4 model_matrix = glm::identity<glm::mat4>();
         if (auto transform = target_comp->entity.getComponent<sp::Transform>())

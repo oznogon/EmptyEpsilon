@@ -274,6 +274,15 @@ void OptionsMenu::setupGraphicsOptions()
     // Override overlay label.
     graphics_fov_overlay_label = new GuiLabel(graphics_fov_slider, "GRAPHICS_FOV_SLIDER_LABEL", tr("FoV: {fov}").format({ {"fov", string(initial_fov, 0)} }), 30);
     graphics_fov_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Engine trails toggle.
+    engine_trails_selector = new GuiSelector(graphics_page, "ENGINE_TRAILS_TOGGLE", [](int index, string value) {
+        PreferencesManager::set("use_particle_trails", static_cast<string>(index));
+    });
+    engine_trails_selector
+        ->setOptions({tr("Engine trails: Ribbons (prettier)"), tr("Engine trails: Particles (faster)")})
+        ->setSelectionIndex(PreferencesManager::get("use_particle_trails", "1").toInt())
+        ->setSize(GuiElement::GuiSizeMax, 50);
 }
 
 void OptionsMenu::setupAudioOptions()

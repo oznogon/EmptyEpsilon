@@ -243,6 +243,8 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     auto& mwd = MissileWeaponData::getDataFor(tube.type_loaded);
 
     sp::ecs::Entity missile;
+    glm::vec3 missile_color = glm::vec3(mwd.color) / 255.0f;
+
     switch(tube.type_loaded)
     {
     case MW_Homing:
@@ -250,10 +252,15 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             missile = sp::ecs::Entity::create();
             auto& mc = missile.addComponent<ExplodeOnTouch>();
             mc.owner = source;
-            mc.damage_at_center = 35 * category_modifier;
-            mc.damage_at_edge = 5 * category_modifier;
-            mc.blast_range = 30 * category_modifier;
+            mc.damage_at_center = 35.0f * category_modifier;
+            mc.damage_at_edge = 5.0f * category_modifier;
+            mc.blast_range = 30.0f * category_modifier;
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.1f, 0.2f);
+            auto& ee = missile.addComponent<EngineEmitter>();
+            ee.emitters.resize(1);
+            ee.emitters[0].color = glm::vec3{missile_color};
+            ee.emitters[0].position = glm::vec3{0.0f};
+            ee.emitters[0].scale = 15.0f;
         }
         break;
     case MW_Nuke:
@@ -268,6 +275,11 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.7f, 0.1f);
             missile.addComponent<DelayedAvoidObject>(10.0f, 1000.0f);
             missile.addComponent<ExplodeOnTimeout>();
+            auto& ee = missile.addComponent<EngineEmitter>();
+            ee.emitters.resize(1);
+            ee.emitters[0].color = glm::vec3{missile_color};
+            ee.emitters[0].position = glm::vec3{0.0f};
+            ee.emitters[0].scale = 20.0f;
         }
         break;
     case MW_Mine:
@@ -305,6 +317,11 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_type = DamageType::EMP;
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 1.0f, 0.0f);
             missile.addComponent<ExplodeOnTimeout>();
+            auto& ee = missile.addComponent<EngineEmitter>();
+            ee.emitters.resize(1);
+            ee.emitters[0].color = glm::vec3{missile_color};
+            ee.emitters[0].position = glm::vec3{0.0f};
+            ee.emitters[0].scale = 20.0f;
         }
         break;
     default:
@@ -316,7 +333,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         if (tube.type_loaded == MW_Mine)
             physics.setCircle(sp::Physics::Type::Sensor, 1000.0f * 0.6f);
         else
-            physics.setRectangle(sp::Physics::Type::Sensor, {10, 30});
+            physics.setRectangle(sp::Physics::Type::Sensor, {10.0f, 30.0f});
 
         auto& mf = missile.addComponent<MissileFlight>();
         mf.speed = mwd.speed / category_modifier;
@@ -332,37 +349,47 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
 
         if (auto f = source.getComponent<Faction>())
             missile.addComponent<Faction>().entity = f->entity;
+
         auto& t = missile.addComponent<sp::Transform>();
         t.setPosition(fireLocation);
         t.setRotation(source_transform->getRotation() + tube.direction);
+
+        auto& trace = missile.addComponent<RadarTrace>();
         auto& cpe = missile.addComponent<ConstantParticleEmitter>();
-        if (tube.type_loaded == MW_Mine) {
+        if (tube.type_loaded == MW_Mine)
+        {
+            trace.icon = "radar/mine.png";
             cpe.travel_random_range = 100.0f;
-            cpe.start_color = {1, 1, 1};
-            cpe.end_color = {0, 0, 1};
-            cpe.interval = 0.4;
+            cpe.start_color = {1.0f, 1.0f, 1.0f};
+            cpe.end_color = {0.0f, 0.0f, 1.0f};
+            cpe.interval = 0.4f;
             cpe.start_size = 30.0f;
             cpe.end_size = 0.0f;
             cpe.life_time = 10.0f;
         }
-
-        if (tube.type_loaded != MW_Mine)
-            missile.addComponent<LifeTime>().lifetime = mwd.lifetime * category_modifier;
-
-        if (tube.type_loaded != MW_Mine) {
-            auto& dbad = missile.addComponent<DestroyedByAreaDamage>();
-            dbad.damaged_by_flags = (1 << int(DamageType::EMP)) | (1 << int(DamageType::Energy));
+        else
+        {
+            trace.icon = "radar/missile.png";
+            cpe.travel_random_range = 10.0f;
+            cpe.start_color = {1.0f, 1.0f, 1.0f};
+            cpe.end_color = missile_color;
+            cpe.interval = 0.05f;
+            cpe.start_size = 20.0f * category_modifier;
+            cpe.end_size = 5.0f;
+            cpe.life_time = 0.5f;
         }
 
-        auto& trace = missile.addComponent<RadarTrace>();
-        if (tube.type_loaded == MW_Mine)
-            trace.icon = "radar/mine.png";
-        else
-            trace.icon = "radar/missile.png";
         trace.radius = 32.0f;
         trace.max_size = trace.min_size = 32 * (0.25f + 0.25f * category_modifier);
         trace.flags = RadarTrace::Rotate;
         trace.color = mwd.color;
+
+        if (tube.type_loaded != MW_Mine)
+        {
+            missile.addComponent<LifeTime>().lifetime = mwd.lifetime * category_modifier;
+            auto& dbad = missile.addComponent<DestroyedByAreaDamage>();
+            dbad.damaged_by_flags = (1 << int(DamageType::EMP)) | (1 << int(DamageType::Energy));
+        }
     }
 }
 
