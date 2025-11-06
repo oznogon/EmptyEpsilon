@@ -16,6 +16,11 @@
 #include "components/reactor.h"
 #include "systems/docking.h"
 
+static string toNearbyIntString(float value)
+{
+    return static_cast<string>(static_cast<int>(nearbyint(value)));
+}
+
 DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DOCKING_BAY_SCREEN", colorConfig.background),
   selected_entity()
@@ -57,34 +62,45 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Right column: Docked ship, cargo info
-    (new GuiLabel(right_column, "DOCKING_BAY_INFO_LABEL", tr("Selected berth"), 30.0f))
+    GuiElement* top_row = new GuiElement(right_column, "");
+    top_row
+        ->setSize(GuiElement::GuiSizeMax, 260.0f)
+        ->setAttribute("layout", "horizontal");
+    top_row
+        ->setAttribute("margin", "0, 10, 0, 10");
+
+    GuiElement* docking_bay_info_layout = new GuiElement(top_row, "DOCKING_BAY_INFO_LAYOUT");
+    docking_bay_info_layout
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    (new GuiElement(top_row, "SPACER"))->setSize(250.0f, GuiElement::GuiSizeMax);
+
+    (new GuiLabel(docking_bay_info_layout, "DOCKING_BAY_INFO_LABEL", tr("Selected berth"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
 
-    docking_bay_info = new GuiElement(right_column, "DOCKING_BAY_INFO_PANEL");
+    docking_bay_info = new GuiElement(docking_bay_info_layout, "DOCKING_BAY_INFO_PANEL");
     docking_bay_info
-        ->setSize(GuiElement::GuiSizeMax, 200.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "horizontal");
-    docking_bay_info
-        ->setAttribute("margin", "0, 0, 0, 10");
 
-    // Is there a better placeholder than my_spaceship?
-    top_row_info = new GuiEntityInfoPanel(docking_bay_info, "", sp::ecs::Entity(), [](sp::ecs::Entity entity) {});
-    top_row_info
+    selected_entity_info = new GuiEntityInfoPanel(docking_bay_info, "", sp::ecs::Entity(), [](sp::ecs::Entity entity) {});
+    selected_entity_info
         ->setSize(GuiEntityInfoPanel::default_panel_size, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 10, 0, 0");
 
-    GuiElement* top_row_kvs_1 = new GuiElement(docking_bay_info, "");
-    top_row_kvs_1
+    GuiElement* selected_entity_kvs_1 = new GuiElement(docking_bay_info, "");
+    selected_entity_kvs_1
         ->setSize(200.0f, 200.0f)
         ->setAttribute("layout", "vertical");
-    top_row_kvs_1
+    selected_entity_kvs_1
         ->setAttribute("margin", "0, 10, 0, 0");
 
     for (int i = MW_Homing; i < MW_Count; i++)
     {
-        entity_missiles[i] = new GuiKeyValueDisplay(top_row_kvs_1, "", kv_split, getLocaleMissileWeaponName(static_cast<EMissileWeapons>(i)), "");
+        entity_missiles[i] = new GuiKeyValueDisplay(selected_entity_kvs_1, "", kv_split, getLocaleMissileWeaponName(static_cast<EMissileWeapons>(i)), "");
         entity_missiles[i]
             ->setSize(GuiElement::GuiSizeMax, kv_size);
 
@@ -110,16 +126,16 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         }
     }
 
-    GuiElement* top_row_kvs_2 = new GuiElement(docking_bay_info, "");
-    top_row_kvs_2
+    GuiElement* selected_entity_kvs_2 = new GuiElement(docking_bay_info, "");
+    selected_entity_kvs_2
         ->setSize(200.0f, 200.0f)
         ->setAttribute("layout", "vertical");
 
-    entity_energy = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, tr("dockingbay", "Energy"), "");
+    entity_energy = new GuiKeyValueDisplay(selected_entity_kvs_2, "", kv_split, tr("dockingbay", "Energy"), "");
     entity_energy
         ->setIcon("gui/icons/energy")
         ->setSize(GuiElement::GuiSizeMax, kv_size);
-    entity_hull = new GuiKeyValueDisplay(top_row_kvs_2, "", kv_split, tr("dockingbay", "Hull"), "");
+    entity_hull = new GuiKeyValueDisplay(selected_entity_kvs_2, "", kv_split, tr("dockingbay", "Hull"), "");
     entity_hull
         ->setIcon("gui/icons/hull")
         ->setSize(GuiElement::GuiSizeMax, kv_size);
@@ -275,11 +291,17 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiElement(energy_transfer_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "< to carrier"), 30.0f))
-        ->setSize(200.0f, 50.0f);
+    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "to carrier"), 20.0f))
+        ->setAlignment(sp::Alignment::CenterLeft)
+        ->setSize(150.0f, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "to berth >"), 30.0f))
-        ->setSize(200.0f, 50.0f);
+    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "none"), 20.0f))
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(100.0f, GuiElement::GuiSizeMax);
+
+    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "to berth"), 20.0f))
+        ->setAlignment(sp::Alignment::CenterRight)
+        ->setSize(150.0f, GuiElement::GuiSizeMax);
 
     (new GuiElement(energy_transfer_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -544,7 +566,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size()))
     {
         selected_entity = sp::ecs::Entity();
-        top_row_info
+        selected_entity_info
             ->setEntity(selected_entity)
             ->setCustomLabel(0, "")
             ->setCustomIcon(1, "")
@@ -561,7 +583,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
 
     const string type_icon = bay->getTypeIcon(bay->berths[selected_berth_index].type);
     const string type_name = bay->getTypeName(bay->berths[selected_berth_index].type);
-    top_row_info
+    selected_entity_info
         ->setEntity(selected_entity)
         ->setCustomLabel(0, tr("Berth {i}").format({{"i", selected_berth_index + 1}}))
         ->setCustomIcon(1, type_icon)
@@ -576,16 +598,16 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     {
         entity_energy
             ->setValue(static_cast<string>("{energy}/{max_energy}").format({
-                {"energy", static_cast<int>(docked_reactor->energy)},
-                {"max_energy", static_cast<int>(docked_reactor->max_energy)}
+                {"energy", toNearbyIntString(docked_reactor->energy)},
+                {"max_energy", toNearbyIntString(docked_reactor->max_energy)}
             }));
 
         if (energy_controls->isVisible())
         {
             energy_docked
                 ->setValue(static_cast<string>("{energy}/{max_energy}").format({
-                    {"energy", static_cast<int>(docked_reactor->energy)},
-                    {"max_energy", static_cast<int>(docked_reactor->max_energy)}
+                    {"energy", toNearbyIntString(docked_reactor->energy)},
+                    {"max_energy", toNearbyIntString(docked_reactor->max_energy)}
                 }));
         }
     }
@@ -604,8 +626,8 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         {
             energy_carrier
                 ->setValue(static_cast<string>("{energy}/{max_energy}").format({
-                    {"energy", static_cast<int>(carrier_reactor->energy)},
-                    {"max_energy", static_cast<int>(carrier_reactor->max_energy)}
+                    {"energy", toNearbyIntString(carrier_reactor->energy)},
+                    {"max_energy", toNearbyIntString(carrier_reactor->max_energy)}
                 }));
         }
     }

@@ -22,7 +22,7 @@ private:
     GuiEntityInfoPanelGrid* docking_bay_berths;
     GuiElement* docking_bay_info;
 
-    GuiEntityInfoPanel* top_row_info;
+    GuiEntityInfoPanel* selected_entity_info;
     GuiKeyValueDisplay* entity_energy;
     GuiKeyValueDisplay* entity_hull;
     GuiKeyValueDisplay* entity_missiles[MW_Count];
