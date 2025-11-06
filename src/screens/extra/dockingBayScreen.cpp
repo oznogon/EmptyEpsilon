@@ -4,6 +4,7 @@
 #include "gui/gui2_button.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_selector.h"
+#include "gui/gui2_slider.h"
 #include "gui/gui2_togglebutton.h"
 #include "screenComponents/customShipFunctions.h"
 #include "screenComponents/entityInfoPanel.h"
@@ -129,6 +130,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
 
+    // Controls to move ships between berths.
     GuiElement* move_controls_row = new GuiElement(right_column, "DOCKING_BAY_MOVE_CONTROLS");
     move_controls_row
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
@@ -139,37 +141,35 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     (new GuiLabel(move_controls_row, "", tr("dockingbay", "Move to: "), 30.0f))
         ->setSize(100.0f, 50.0f);
 
-    target_berth = new GuiSelector(move_controls_row, "",
-        [](int index, string value)
-        {
-        }
-    );
+    target_berth = new GuiSelector(move_controls_row, "", [](int index, string value) {} );
     target_berth
         ->setSize(250.0f, GuiElement::GuiSizeMax);
 
     (new GuiButton(move_controls_row, "", tr("dockingbay", "Move"),
         [this]()
         {
-            if (selected_entity && selected_entity != sp::ecs::Entity())
-                DockingSystem::assignInternalEntityToBerth(selected_entity, target_berth->getSelectionValue().toInt());
+            if (selected_entity && selected_entity != sp::ecs::Entity() && my_player_info)
+                my_player_info->commandMoveInternalToBerth(selected_entity, target_berth->getSelectionValue().toInt());
         }
     ))->setSize(100.0f, 50.0f);
 
+    // Scramble button launches all ships in all hangar berths.
+    // As an emergency control, it should always be visible.
     scramble = new GuiToggleButton(move_controls_row, "DOCKING_BAY_SCRAMBLE", tr("dockingbay", "Scramble hangars"),
         [this](bool value)
         {
             if (!value)
             {
                 scramble->setText(tr("dockingbay", "Scramble hangars"));
-                if (!my_spaceship) return;
+                if (!my_spaceship || !my_player_info) return;
 
                 if (auto bay = my_spaceship.getComponent<DockingBay>())
                 {
                     // Undock all entities from hangar berths
                     for (auto& berth : bay->berths)
                     {
-                        if (berth.docked_entity && berth.docked_entity != sp::ecs::Entity() && berth.type == DockingBay::BerthType::Hangar)
-                            DockingSystem::requestUndock(berth.docked_entity);
+                        if (berth.docked_entity && berth.docked_entity != sp::ecs::Entity() && berth.type == DockingBay::Berth::Type::Hangar)
+                            my_player_info->commandUndockInternal(berth.docked_entity);
                     }
                 }
             }
@@ -183,13 +183,14 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setStyle("button.dockingbay_scramble")
         ->setSize(220.0f, 50.0f);
 
+    // Hangar-specific berth controls.
     hangar_controls = new GuiElement(right_column, "DOCKING_BAY_HANGAR_CONTROLS");
     hangar_controls
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(hangar_controls, "DOCKING_BAY_HANGAR_LABEL", tr("Hangar operations"), 30.0f))
+    (new GuiLabel(hangar_controls, "DOCKING_BAY_HANGAR_LABEL", tr("dockingbay", "Hangar operations"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -202,56 +203,108 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     (new GuiButton(undock_controls_row, "", tr("dockingbay", "Undock"),
         [this]()
         {
-            if (selected_entity && selected_entity != sp::ecs::Entity())
-                DockingSystem::requestUndock(selected_entity);
+            if (selected_entity && selected_entity != sp::ecs::Entity() && my_player_info)
+                my_player_info->commandUndockInternal(selected_entity);
         }
     ))->setIcon("gui/icons/docking")
         ->setSize(150.0f, 50.0f);
 
+    // TODO: "Approve docking" to detect internally dockable ships within 1U, select from them, and compel docking
+
+    // Energy-specific berth controls.
     energy_controls = new GuiElement(right_column, "DOCKING_BAY_ENERGY_CONTROLS");
     energy_controls
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(energy_controls, "DOCKING_BAY_ENERGY_LABEL", tr("Energy operations"), 30.0f))
+    (new GuiLabel(energy_controls, "DOCKING_BAY_ENERGY_LABEL", tr("dockingbay", "Energy operations"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
 
+    GuiElement* energy_transfer_row = new GuiElement(energy_controls, "DOCKING_BAY_ENERGY_TRANSFER_CONTROLS");
+    energy_transfer_row
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("layout", "horizontal");
+
+    // TODO: Energy transfer controls between carrier and docked entity.
+    energy_carrier = new GuiKeyValueDisplay(energy_transfer_row, "", kv_split, tr("dockingbay", "Carrier"), "");
+    energy_carrier
+        ->setIcon("gui/icons/energy")
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    energy_transfer_direction = new GuiSlider(energy_transfer_row, "DOCKING_BAY_ENERGY_SLIDER",
+        static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
+        static_cast<float>(DockingBay::Berth::TransferDirection::ToDocked),
+        static_cast<float>(DockingBay::Berth::TransferDirection::None),
+        [this](float value)
+        {
+            LOG(Debug, "Energy transferring ", value > 0 ? "to docked entity" : value < 0 ? "to carrier entity" : "inactive");
+            if (!my_spaceship || !my_player_info) return;
+
+            if (auto bay = my_spaceship.getComponent<DockingBay>())
+            {
+                if (selected_berth_index >= 0 && selected_berth_index < static_cast<int>(bay->berths.size()))
+                {
+                    my_player_info->commandSetBerthTransferDirection(selected_berth_index, static_cast<int>(value));
+                }
+            }
+        }
+    );
+    energy_transfer_direction
+        ->addSnapValue(static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier), 0.75f)
+        ->addSnapValue(static_cast<float>(DockingBay::Berth::TransferDirection::None), 0.5f)
+        ->addSnapValue(static_cast<float>(DockingBay::Berth::TransferDirection::ToDocked), 0.75f)
+        ->setSize(250.0f, GuiElement::GuiSizeMax);
+
+    energy_docked = new GuiKeyValueDisplay(energy_transfer_row, "", kv_split, tr("dockingbay", "Docked"), "");
+    energy_docked
+        ->setIcon("gui/icons/energy")
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Thermal-specific berth controls.
     thermal_controls = new GuiElement(right_column, "DOCKING_BAY_THERMAL_CONTROLS");
     thermal_controls
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(thermal_controls, "DOCKING_BAY_THERMAL_LABEL", tr("Thermal operations"), 30.0f))
+    (new GuiLabel(thermal_controls, "DOCKING_BAY_THERMAL_LABEL", tr("dockingbay", "Thermal operations"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
 
+    // TODO: Heat transfer controls between carrier and docked entity.
+    // TODO: More functionality if there's a docking bay system to vent into.
+
+    // Repair-specific berth controls.
     repair_controls = new GuiElement(right_column, "DOCKING_BAY_REPAIR_CONTROLS");
     repair_controls
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(repair_controls, "DOCKING_BAY_REPAIR_LABEL", tr("Repair operations"), 30.0f))
+    (new GuiLabel(repair_controls, "DOCKING_BAY_REPAIR_LABEL", tr("dockingbay", "Repair operations"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
 
+    // Missile-specific berth controls.
     missile_controls = new GuiElement(right_column, "DOCKING_BAY_MISSILE_CONTROLS");
     missile_controls
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(missile_controls, "DOCKING_BAY_MISSILE_LABEL", tr("Missile operations"), 30.0f))
+    (new GuiLabel(missile_controls, "DOCKING_BAY_MISSILE_LABEL", tr("dockingbay", "Missile operations"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
 
+    // TODO: Weapon stocks transfer controls between carrier and docked entity.
+
+    // Storage-specific berth controls.
     storage_controls = new GuiElement(right_column, "DOCKING_BAY_STORAGE_CONTROLS");
     storage_controls
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -262,6 +315,8 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
+
+    // TODO: Are controls necessary for this berth type?
 
     // Custom ship functions
     /*
@@ -304,15 +359,13 @@ void DockingBayScreen::onUpdate()
 
         // If selected berth index is now out of range, deselect it
         if (selected_berth_index >= static_cast<int>(bay->berths.size()))
-        {
             selectBerth(-1);
-        }
     }
 
-    // Update berth labels every frame to ensure they're set after panels are created
+    // Update berth labels every frame to ensure they're set after panels are created.
     updateBerthsLabels();
 
-    // Update the display if a berth is selected
+    // Update the display if a berth is selected.
     if (selected_berth_index >= 0) updateSelectedEntityDisplay();
 }
 
@@ -336,7 +389,7 @@ void DockingBayScreen::selectBerth(int berth_index)
     // Update berth type operations
     switch (bay->berths[berth_index].type)
     {
-        case DockingBay::BerthType::Hangar:
+        case DockingBay::Berth::Type::Hangar:
             hangar_controls->show();
             energy_controls->hide();
             thermal_controls->hide();
@@ -344,7 +397,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             repair_controls->hide();
             storage_controls->hide();
             break;
-        case DockingBay::BerthType::Energy:
+        case DockingBay::Berth::Type::Energy:
             hangar_controls->hide();
             energy_controls->show();
             thermal_controls->hide();
@@ -352,7 +405,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             repair_controls->hide();
             storage_controls->hide();
             break;
-        case DockingBay::BerthType::Thermal:
+        case DockingBay::Berth::Type::Thermal:
             hangar_controls->hide();
             energy_controls->hide();
             thermal_controls->show();
@@ -360,7 +413,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             repair_controls->hide();
             storage_controls->hide();
             break;
-        case DockingBay::BerthType::Missiles:
+        case DockingBay::Berth::Type::Missiles:
             hangar_controls->hide();
             energy_controls->hide();
             thermal_controls->hide();
@@ -368,7 +421,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             repair_controls->hide();
             storage_controls->hide();
             break;
-        case DockingBay::BerthType::Repair:
+        case DockingBay::Berth::Type::Repair:
             hangar_controls->hide();
             energy_controls->hide();
             thermal_controls->hide();
@@ -376,7 +429,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             repair_controls->show();
             storage_controls->hide();
             break;
-        case DockingBay::BerthType::Storage:
+        case DockingBay::Berth::Type::Storage:
             hangar_controls->hide();
             energy_controls->hide();
             thermal_controls->hide();
@@ -459,6 +512,8 @@ void DockingBayScreen::updateBerthsLabels()
 
 void DockingBayScreen::updateSelectedEntityDisplay()
 {
+    if (!my_spaceship) return;
+
     auto bay = my_spaceship.getComponent<DockingBay>();
     if (!bay) return;
 
@@ -475,6 +530,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
             ->setCustomIcon(1, "")
             ->setCustomLabel(2, "");
         entity_energy->setValue("");
+        energy_docked->setValue("");
         entity_hull->setValue("");
         for (auto kv : entity_missiles) kv->setValue("");
         return;
@@ -491,16 +547,37 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         ->setCustomIcon(1, type_icon)
         ->setCustomLabel(2, type_name);
 
-    // Update reactor/energy display
-    if (auto reactor = selected_entity.getComponent<Reactor>())
+    // Update reactor/energy displays
+    if (auto docked_reactor = selected_entity.getComponent<Reactor>())
     {
         entity_energy
             ->setValue(static_cast<string>("{energy}/{max_energy}").format({
-                {"energy", static_cast<int>(reactor->energy)},
-                {"max_energy", static_cast<int>(reactor->max_energy)}
+                {"energy", static_cast<int>(docked_reactor->energy)},
+                {"max_energy", static_cast<int>(docked_reactor->max_energy)}
+            }));
+        energy_docked
+            ->setValue(static_cast<string>("{energy}/{max_energy}").format({
+                {"energy", static_cast<int>(docked_reactor->energy)},
+                {"max_energy", static_cast<int>(docked_reactor->max_energy)}
             }));
     }
-    else entity_energy->setValue(tr("dockingbay", "No reactor"));
+    else
+    {
+        entity_energy->setValue(tr("dockingbay", "No reactor"));
+        energy_docked->setValue(tr("dockingbay", "No reactor"));
+    }
+
+    if (auto carrier_reactor = my_spaceship.getComponent<Reactor>())
+    {
+        if (energy_carrier->isVisible())
+        {
+            energy_carrier
+                ->setValue(static_cast<string>("{energy}/{max_energy}").format({
+                    {"energy", static_cast<int>(carrier_reactor->energy)},
+                    {"max_energy", static_cast<int>(carrier_reactor->max_energy)}
+                }));
+        }
+    }
 
     // Update hull display
     if (auto hull = selected_entity.getComponent<Hull>())

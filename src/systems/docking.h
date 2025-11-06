@@ -18,7 +18,7 @@ public:
 
     static bool moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Entity carrier);
     static bool assignInternalEntityToBerth(sp::ecs::Entity entity);
-    static bool assignInternalEntityToBerth(sp::ecs::Entity entity, DockingBay::BerthType berth_type);
+    static bool assignInternalEntityToBerth(sp::ecs::Entity entity, DockingBay::Berth::Type berth_type);
     static bool assignInternalEntityToBerth(sp::ecs::Entity entity, int index);
     static void assignInternalEntitiesToBerths(std::vector<sp::ecs::Entity> entities, sp::ecs::Entity carrier);
 

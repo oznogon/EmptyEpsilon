@@ -9,6 +9,7 @@
 #include "components/jumpdrive.h"
 #include "components/missiletubes.h"
 #include "components/probe.h"
+#include "components/reactor.h"
 #include "ecs/query.h"
 #include "multiplayer_server.h"
 
@@ -21,7 +22,7 @@ void DockingSystem::update(float delta)
 {
     if (!game_server) return;
 
-    for(auto [entity, docking_port, transform] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Transform>>()) {
+    for (auto [entity, docking_port, transform] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Transform>>()) {
         sp::Transform* target_transform;
         switch(docking_port.state) {
         case DockingPort::State::NotDocking:
@@ -45,103 +46,168 @@ void DockingSystem::update(float delta)
             }
             break;
         case DockingPort::State::Docked:
-            if (!docking_port.target || !(target_transform = docking_port.target.getComponent<sp::Transform>()))
+            auto& carrier_entity = docking_port.target;
+
+            if (!carrier_entity || !(target_transform = carrier_entity.getComponent<sp::Transform>()))
             {
                 docking_port.state = DockingPort::State::NotDocking;
-                if (!transform) { // Internal docking and our bay is destroyed. So, destroy ourselves as well.
-                    entity.destroy();
-                }
-            }else{
-                if (transform) {
+                // We're internally docked and our bay was destroyed, so destroy
+                // ourselves as well.
+                if (!transform) entity.destroy();
+            }
+            else
+            {
+                // Manage our position if we're externally docked, indicated by
+                // our ship still having a Transform.
+                if (transform)
+                {
                     transform->setPosition(target_transform->getPosition() + rotateVec2(docking_port.docked_offset, target_transform->getRotation()));
                     transform->setRotation(vec2ToAngle(transform->getPosition() - target_transform->getPosition()));
-                    auto thrusters = entity.getComponent<ManeuveringThrusters>();
-                    if (thrusters) thrusters->stop();
+                    if (auto thrusters = entity.getComponent<ManeuveringThrusters>()) thrusters->stop();
                 }
 
-                auto bay = docking_port.target.getComponent<DockingBay>();
-                if (bay && (bay->flags & DockingBay::Repair))  //Check if what we are docked to allows hull repairs, and if so, do it.
+                if (auto bay = carrier_entity.getComponent<DockingBay>())
                 {
-                    auto hull = entity.getComponent<Hull>();
-                    if (hull && hull->current < hull->max)
+                    // Determine whether we're in a docking bay berth.
+                    DockingBay::Berth my_berth;
+                    bool is_berthed = false;
+
+                    for (auto berth : bay->berths)
                     {
-                        hull->current += delta;
-                        if (hull->current > hull->max)
-                            hull->current = hull->max;
-                    }
-                }
-
-                if (bay && (bay->flags & DockingBay::ShareEnergy)) {
-                    auto my_reactor = entity.getComponent<Reactor>();
-                    if (my_reactor) {
-                        auto other_reactor = docking_port.target.getComponent<Reactor>();
-                        // Derive a base energy request rate from the player ship's maximum
-                        // energy capacity.
-                        float energy_request = std::min(delta * 10.0f, my_reactor->max_energy - my_reactor->energy);
-
-                        // If we're docked with a shipTemplateBasedObject, and that object is
-                        // set to share its energy with docked ships, transfer energy from the
-                        // mothership to docked ships until the mothership runs out of energy
-                        // or the docked ship doesn't require any.
-                        if (!other_reactor || other_reactor->useEnergy(energy_request))
-                            my_reactor->energy += energy_request;
-                    }
-                }
-
-                if (bay && (bay->flags & DockingBay::RestockProbes)) {
-                    // If a shipTemplateBasedObject and is allowed to restock
-                    // scan probes with docked ships.
-                    if (auto spl = entity.getComponent<ScanProbeLauncher>()) {
-                        if (spl->stock < spl->max)
+                        if (berth.docked_entity == entity)
                         {
-                            spl->recharge += delta;
-
-                            if (spl->recharge > spl->charge_time)
-                            {
-                                spl->stock += 1;
-                                spl->recharge = 0.0;
-                            }
+                            my_berth = berth;
+                            is_berthed = true;
                         }
                     }
-                }
 
-                //recharge missiles of CPU ships docked to station. Can be disabled
-                if (docking_port.auto_reload_missiles && bay && (bay->flags & DockingBay::RestockMissiles)) {
-                    auto tubes = entity.getComponent<MissileTubes>();
-                    if (tubes) {
-                        bool needs_missile = false;
-                        for(int n=0; n<MW_Count; n++)
+                    // Check if what we're docked to allows hull repairs, and if
+                    // so, do it.
+                    if (bay->flags & DockingBay::Repair)
+                    {
+                        auto hull = entity.getComponent<Hull>();
+                        if (hull && hull->current < hull->max)
                         {
-                            if  (tubes->storage[n] < tubes->storage_max[n])
+                            hull->current += delta;
+                            if (hull->current > hull->max)
+                                hull->current = hull->max;
+                        }
+                    }
+
+                    // Use DockingBay flag for energy transfer if set.
+                    // This should override energy docking bay berth behavior.
+                    if (bay->flags & DockingBay::ShareEnergy)
+                    {
+                        auto docked_reactor = entity.getComponent<Reactor>();
+                        if (docked_reactor)
+                        {
+                            auto carrier_reactor = carrier_entity.getComponent<Reactor>();
+                            // Derive a base energy request rate from the player ship's maximum
+                            // energy capacity.
+                            float energy_request = std::min(delta * 10.0f, docked_reactor->max_energy - docked_reactor->energy);
+
+                            // If we're docked with a shipTemplateBasedObject, and that object is
+                            // set to share its energy with docked ships, transfer energy from the
+                            // mothership to docked ships until the mothership runs out of energy
+                            // or the docked ship doesn't require any.
+                            if (!carrier_reactor || carrier_reactor->useEnergy(energy_request))
+                                docked_reactor->energy += energy_request;
+                        }
+                    }
+                    // Otherwise, determine whether we're in a docking bay
+                    // energy berth set to transfer energy and use that if so.
+                    else if (is_berthed && my_berth.type == DockingBay::Berth::Type::Energy)
+                    {
+                        auto my_reactor = carrier_entity.getComponent<Reactor>();
+                        auto docked_reactor = entity.getComponent<Reactor>();
+                        if (!my_reactor && !docked_reactor) continue;
+                        const float energy_transfer = my_berth.transfer_rate * delta;
+
+                        // Transfer energy in the configured direction if both
+                        // the recipient has a reactor and the sender has energy.
+                        // Reactorless ships are treated as if they have infinite
+                        // energy. The berth's transfer_rate is in energy/sec.
+                        if (docked_reactor && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToDocked)
+                        {
+                            LOG(Debug, "docked_reactor && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToDocked");
+                            LOG(Debug, "energy_transfer: ", energy_transfer);
+                            LOG(Debug, "std::min(docked_reactor->max_energy, energy_transfer): ", std::min(docked_reactor->max_energy, energy_transfer));
+                            if (docked_reactor->energy + energy_transfer >= docked_reactor->max_energy) continue;
+                            LOG(Debug, "Passed docked_reactor->energy >= docked_reactor->max_energy");
+                            if (my_reactor && !my_reactor->useEnergy(energy_transfer)) continue;
+                            LOG(Debug, "Passed my_reactor && !my_reactor->useEnergy(energy_transfer)");
+                            LOG(Debug, "docked_reactor->energy before: ", docked_reactor->energy);
+                            docked_reactor->energy = std::min(docked_reactor->max_energy, docked_reactor->energy + energy_transfer);
+                            LOG(Debug, "docked_reactor->energy after: ", docked_reactor->energy);
+                        }
+                        else if (my_reactor && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToCarrier)
+                        {
+                            LOG(Debug, "my_reactor && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToCarrier");
+                            LOG(Debug, "energy_transfer: ", energy_transfer);
+                            LOG(Debug, "std::min(my_reactor->max_energy, energy_transfer): ", std::min(my_reactor->max_energy, energy_transfer));
+                            if (my_reactor->energy >= my_reactor->max_energy) continue;
+                            LOG(Debug, "Passed my_reactor->energy >= my_reactor->max_energy");
+                            if (docked_reactor && !docked_reactor->useEnergy(energy_transfer)) continue;
+                            LOG(Debug, "Passed docked_reactor && !docked_reactor->useEnergy(energy_transfer");
+                            LOG(Debug, "my_reactor->energy before: ", my_reactor->energy);
+                            my_reactor->energy = std::min(my_reactor->max_energy, my_reactor->energy + energy_transfer);
+                            LOG(Debug, "my_reactor->energy after: ", my_reactor->energy);
+                        }
+                    }
+
+                    if (bay->flags & DockingBay::RestockProbes) {
+                        // If a shipTemplateBasedObject and is allowed to restock
+                        // scan probes with docked ships.
+                        if (auto spl = entity.getComponent<ScanProbeLauncher>()) {
+                            if (spl->stock < spl->max)
                             {
-                                if (docking_port.auto_reload_missile_delay <= 0.0f)
+                                spl->recharge += delta;
+
+                                if (spl->recharge > spl->charge_time)
                                 {
-                                    tubes->storage[n] += 1;
-                                    docking_port.auto_reload_missile_delay = docking_port.auto_reload_missile_time;
-                                    break;
+                                    spl->stock += 1;
+                                    spl->recharge = 0.0;
                                 }
-                                else
-                                    needs_missile = true;
                             }
                         }
+                    }
 
-                        if (needs_missile)
-                            docking_port.auto_reload_missile_delay -= delta;
+                    //recharge missiles of CPU ships docked to station. Can be disabled
+                    if (docking_port.auto_reload_missiles && (bay->flags & DockingBay::RestockMissiles)) {
+                        auto tubes = entity.getComponent<MissileTubes>();
+                        if (tubes) {
+                            bool needs_missile = false;
+                            for(int n=0; n<MW_Count; n++)
+                            {
+                                if  (tubes->storage[n] < tubes->storage_max[n])
+                                {
+                                    if (docking_port.auto_reload_missile_delay <= 0.0f)
+                                    {
+                                        tubes->storage[n] += 1;
+                                        docking_port.auto_reload_missile_delay = docking_port.auto_reload_missile_time;
+                                        break;
+                                    }
+                                    else
+                                        needs_missile = true;
+                                }
+                            }
+
+                            if (needs_missile)
+                                docking_port.auto_reload_missile_delay -= delta;
+                        }
                     }
                 }
             }
 
-            auto engine = entity.getComponent<ImpulseEngine>();
-            if (engine)
+            if (auto engine = entity.getComponent<ImpulseEngine>())
             {
-                engine->request = 0.f;
-                engine->actual = 0.f;
+                engine->request = 0.0f;
+                engine->actual = 0.0f;
             }
-            auto warp = entity.getComponent<WarpDrive>();
-            if (warp)
+            if (auto warp = entity.getComponent<WarpDrive>())
             {
                 warp->request = 0;
-                warp->current = 0;
+                warp->current = 0.0f;
             }
             break;
         }
@@ -198,7 +264,7 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity)
     return false;
 }
 
-bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity, DockingBay::BerthType berth_type)
+bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity, DockingBay::Berth::Type berth_type)
 {
     auto port = entity.getComponent<DockingPort>();
     if (!port || !port->target) return false;

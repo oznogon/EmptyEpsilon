@@ -105,6 +105,9 @@ static const uint16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
+static const uint16_t CMD_UNDOCK_INTERNAL = 0x002D;
+static const uint16_t CMD_MOVE_INTERNAL_TO_BERTH = 0x002E;
+static const uint16_t CMD_SET_BERTH_TRANSFER_DIRECTION = 0x002F;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -310,6 +313,29 @@ void PlayerInfo::commandUndock()
 {
     sp::io::DataBuffer packet;
     packet << CMD_UNDOCK;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandUndockInternal(sp::ecs::Entity entity)
+{
+    if (!entity) return;
+    sp::io::DataBuffer packet;
+    packet << CMD_UNDOCK_INTERNAL << entity;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandMoveInternalToBerth(sp::ecs::Entity entity, int berth_index)
+{
+    if (!entity) return;
+    sp::io::DataBuffer packet;
+    packet << CMD_MOVE_INTERNAL_TO_BERTH << entity << static_cast<int32_t>(berth_index);
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetBerthTransferDirection(int berth_index, int direction)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_BERTH_TRANSFER_DIRECTION << static_cast<int32_t>(berth_index) << static_cast<int32_t>(direction);
     sendClientCommand(packet);
 }
 
@@ -758,6 +784,65 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         break;
     case CMD_UNDOCK:
         DockingSystem::requestUndock(ship);
+        break;
+    case CMD_UNDOCK_INTERNAL:
+        {
+            sp::ecs::Entity internal_entity;
+            packet >> internal_entity;
+            if (internal_entity)
+            {
+                // Verify the entity is actually docked in this ship's bay
+                if (auto port = internal_entity.getComponent<DockingPort>())
+                {
+                    if (port->target == ship && port->state == DockingPort::State::Docked)
+                        DockingSystem::requestUndock(internal_entity);
+                }
+            }
+        }
+        break;
+    case CMD_MOVE_INTERNAL_TO_BERTH:
+        {
+            sp::ecs::Entity internal_entity;
+            int32_t berth_index;
+            packet >> internal_entity >> berth_index;
+            if (internal_entity)
+            {
+                // Verify the entity is actually docked in this ship's bay
+                if (auto port = internal_entity.getComponent<DockingPort>())
+                {
+                    if (port->target == ship && port->state == DockingPort::State::Docked)
+                    {
+                        // Verify berth index is valid
+                        if (auto bay = ship.getComponent<DockingBay>())
+                        {
+                            if (berth_index >= 0 && berth_index < static_cast<int32_t>(bay->berths.size()))
+                                DockingSystem::assignInternalEntityToBerth(internal_entity, berth_index);
+                        }
+                    }
+                }
+            }
+        }
+        break;
+    case CMD_SET_BERTH_TRANSFER_DIRECTION:
+        {
+            int32_t berth_index;
+            int32_t direction_int;
+            packet >> berth_index >> direction_int;
+
+            // Verify berth index is valid
+            if (auto bay = ship.getComponent<DockingBay>())
+            {
+                if (berth_index >= 0 && berth_index < static_cast<int32_t>(bay->berths.size()))
+                {
+                    // Verify direction is valid
+                    if (direction_int >= static_cast<int32_t>(DockingBay::Berth::TransferDirection::ToCarrier) &&
+                        direction_int <= static_cast<int32_t>(DockingBay::Berth::TransferDirection::ToDocked))
+                    {
+                        bay->berths[berth_index].transfer_direction = static_cast<DockingBay::Berth::TransferDirection>(direction_int);
+                    }
+                }
+            }
+        }
         break;
     case CMD_ABORT_DOCK:
         DockingSystem::abortDock(ship);
