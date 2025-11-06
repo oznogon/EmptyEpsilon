@@ -166,6 +166,8 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     target_berth
         ->setSize(250.0f, GuiElement::GuiSizeMax);
 
+    (new GuiElement(move_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
     // Scramble button launches all ships in all hangar berths.
     // As an emergency control, it should always be visible.
     scramble = new GuiToggleButton(move_controls_row, "DOCKING_BAY_SCRAMBLE", tr("dockingbay", "Scramble hangars"),
@@ -182,7 +184,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
                     for (auto& berth : bay->berths)
                     {
                         if (berth.docked_entity && berth.docked_entity != sp::ecs::Entity() && berth.type == DockingBay::Berth::Type::Hangar)
-                            my_player_info->commandUndockInternal(berth.docked_entity);
+                            my_player_info->commandLaunchInternal(berth.docked_entity);
                     }
                 }
             }
@@ -213,11 +215,11 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiButton(undock_controls_row, "", tr("dockingbay", "Undock"),
+    (new GuiButton(undock_controls_row, "", tr("dockingbay", "Launch"),
         [this]()
         {
             if (selected_entity && selected_entity != sp::ecs::Entity() && my_player_info)
-                my_player_info->commandUndockInternal(selected_entity);
+                my_player_info->commandLaunchInternal(selected_entity);
         }
     ))->setIcon("gui/icons/docking")
         ->setSize(150.0f, 50.0f);
@@ -264,9 +266,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             if (auto bay = my_spaceship.getComponent<DockingBay>())
             {
                 if (selected_berth_index >= 0 && selected_berth_index < static_cast<int>(bay->berths.size()))
-                {
                     my_player_info->commandSetBerthTransferDirection(selected_berth_index, static_cast<int>(value));
-                }
             }
         }
     );
@@ -316,6 +316,25 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
+
+    GuiElement* vent_controls_row = new GuiElement(thermal_controls, "DOCKING_BAY_VENT_CONTROLS");
+    vent_controls_row
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("layout", "horizontal");
+
+    (new GuiButton(vent_controls_row, "", tr("dockingbay", "Vent heat"),
+        [this]()
+        {
+            if (!my_spaceship || !my_player_info) return;
+
+            if (auto bay = my_spaceship.getComponent<DockingBay>())
+            {
+                if (selected_berth_index >= 0 && selected_berth_index < static_cast<int>(bay->berths.size()))
+                    my_player_info->commandVentBerthHeat(selected_berth_index, bay->berths[selected_berth_index].transfer_rate);
+            }
+        }
+    ))->setIcon("gui/icons/status_overheat")
+        ->setSize(150.0f, 50.0f);
 
     // TODO: Heat transfer controls between carrier and docked entity.
     // TODO: More functionality if there's a docking bay system to vent into.

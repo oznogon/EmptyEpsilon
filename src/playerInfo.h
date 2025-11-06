@@ -54,9 +54,10 @@ public:
     void commandSetSystemCoolantRequest(ShipSystem::Type system, float coolant_level);
     void commandDock(sp::ecs::Entity station);
     void commandUndock();
-    void commandUndockInternal(sp::ecs::Entity entity);
+    void commandLaunchInternal(sp::ecs::Entity entity);
     void commandMoveInternalToBerth(sp::ecs::Entity entity, int berth_index);
     void commandSetBerthTransferDirection(int berth_index, int direction);
+    void commandVentBerthHeat(int berth_index, float vent_amount);
     void commandAbortDock();
     void commandOpenTextComm(sp::ecs::Entity obj);
     void commandCloseTextComm();

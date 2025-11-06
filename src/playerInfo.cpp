@@ -105,9 +105,10 @@ static const uint16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
-static const uint16_t CMD_UNDOCK_INTERNAL = 0x002D;
+static const uint16_t CMD_LAUNCH_INTERNAL = 0x002D;
 static const uint16_t CMD_MOVE_INTERNAL_TO_BERTH = 0x002E;
 static const uint16_t CMD_SET_BERTH_TRANSFER_DIRECTION = 0x002F;
+static const uint16_t CMD_VENT_BERTH_HEAT = 0x0030;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -316,11 +317,11 @@ void PlayerInfo::commandUndock()
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandUndockInternal(sp::ecs::Entity entity)
+void PlayerInfo::commandLaunchInternal(sp::ecs::Entity entity)
 {
     if (!entity) return;
     sp::io::DataBuffer packet;
-    packet << CMD_UNDOCK_INTERNAL << entity;
+    packet << CMD_LAUNCH_INTERNAL << entity;
     sendClientCommand(packet);
 }
 
@@ -336,6 +337,13 @@ void PlayerInfo::commandSetBerthTransferDirection(int berth_index, int direction
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_BERTH_TRANSFER_DIRECTION << static_cast<int32_t>(berth_index) << static_cast<int32_t>(direction);
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandVentBerthHeat(int berth_index, float vent_amount)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_VENT_BERTH_HEAT << static_cast<int32_t>(berth_index) << vent_amount;
     sendClientCommand(packet);
 }
 
@@ -785,7 +793,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_UNDOCK:
         DockingSystem::requestUndock(ship);
         break;
-    case CMD_UNDOCK_INTERNAL:
+    case CMD_LAUNCH_INTERNAL:
         {
             sp::ecs::Entity internal_entity;
             packet >> internal_entity;
@@ -839,6 +847,68 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                         direction_int <= static_cast<int32_t>(DockingBay::Berth::TransferDirection::ToDocked))
                     {
                         bay->berths[berth_index].transfer_direction = static_cast<DockingBay::Berth::TransferDirection>(direction_int);
+                    }
+                }
+            }
+        }
+        break;
+    case CMD_VENT_BERTH_HEAT:
+        {
+            int32_t berth_index;
+            float vent_amount;
+            packet >> berth_index >> vent_amount;
+
+            // If the carrier doesn't manage heat, don't bother
+            auto carrier_coolant = ship.getComponent<Coolant>();
+            if (!carrier_coolant) break;
+
+            // Verify berth index is valid
+            if (auto bay = ship.getComponent<DockingBay>())
+            {
+                if (berth_index >= 0 && berth_index < static_cast<size_t>(bay->berths.size()))
+                {
+                    auto berth = bay->berths[berth_index];
+                    auto docked_entity = berth.docked_entity;
+                    if (!docked_entity) break;
+                    if (docked_entity == sp::ecs::Entity()) break;
+                    auto docked_coolant = docked_entity.getComponent<Coolant>();
+                    if (!docked_coolant) break;
+
+                    // Remove heat from the docked entity's systems.
+                    float amount_vented = 0.0f;
+                    LOG(Debug, "Total amount to be vented from docked entity: ", vent_amount);
+                    for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
+                    {
+                        if (auto docked_sys = ShipSystem::get(docked_entity, static_cast<ShipSystem::Type>(i)))
+                        {
+                            if (docked_sys->heat_level > 0.0f)
+                            {
+                                float capped_vent_amount = std::min(vent_amount, docked_sys->heat_level);
+                                docked_sys->heat_level -= capped_vent_amount;
+                                amount_vented += capped_vent_amount;
+                                vent_amount -= capped_vent_amount;
+                            }
+                        }
+                    }
+                    LOG(Debug, "Leftover vented amount: ", vent_amount);
+
+                    // Distribute heat across all carrier systems.
+                    // TODO: Distribute heat to future docking bay system
+                    float system_count = 0.0f;
+                    for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
+                    {
+                        if (auto carrier_sys = ShipSystem::get(ship, static_cast<ShipSystem::Type>(i)))
+                            system_count++;
+                    }
+
+                    LOG(Debug, "Total amount vented from docked entity: ", amount_vented);
+                    amount_vented = amount_vented / system_count;
+                    LOG(Debug, "Amount to vent to each carrier system: ", amount_vented);
+
+                    for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
+                    {
+                        if (auto carrier_sys = ShipSystem::get(ship, static_cast<ShipSystem::Type>(i)))
+                            carrier_sys->addHeat(amount_vented);
                     }
                 }
             }
