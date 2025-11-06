@@ -45,6 +45,16 @@ public:
     };
     std::vector<Emitter> emitters;
     bool emitters_dirty = true;
+
+    // Trail history for procedural rendering
+    struct TrailPoint {
+        glm::vec2 position{};
+        float rotation = 0.0f;
+        float timestamp = 0.0f;
+    };
+    static constexpr size_t max_trail_points = 30;
+    static constexpr float trail_lifetime = 3.0f; // seconds
+    std::vector<TrailPoint> trail_history;
 };
 
 class BillboardRenderer

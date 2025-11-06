@@ -63,6 +63,14 @@ class GuiViewport3D : public GuiElement
     gl::Buffers<static_cast<size_t>(Buffers::SpacedustCount)> spacedust_buffer;
     sp::Shader* spacedust_shader = nullptr;
 
+    // Engine trail
+    sp::Shader* trail_shader = nullptr;
+    uint32_t trail_projection_uniform;
+    uint32_t trail_view_uniform;
+    uint32_t trail_position_attrib;
+    uint32_t trail_color_attrib;
+    gl::Buffers<1> trail_buffers;
+
 public:
     GuiViewport3D(GuiContainer* owner, string id);
 

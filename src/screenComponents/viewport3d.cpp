@@ -129,6 +129,14 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         glBufferSubData(GL_ARRAY_BUFFER, 0, 2 * spacedust_particle_count * sizeof(glm::vec3), zeroed_positions.data());
     }
     glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+
+    // Setup engine trail shader
+    trail_shader = ShaderManager::getShader("shaders/engineTrail");
+    trail_shader->bind();
+    trail_projection_uniform = trail_shader->getUniformLocation("projection");
+    trail_view_uniform = trail_shader->getUniformLocation("view");
+    trail_position_attrib = trail_shader->getAttributeLocation("position");
+    trail_color_attrib = trail_shader->getAttributeLocation("color");
 }
 
 void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
@@ -257,26 +265,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
     glDepthMask(GL_TRUE);
 
-    // Emit engine particles.
-    for(auto [entity, ee, transform, impulse] : sp::ecs::Query<EngineEmitter, sp::Transform, ImpulseEngine>()) {
-        if (impulse.actual != 0.0f) {
-            float engine_scale = std::abs(impulse.actual);
-            if (engine->getElapsedTime() - ee.last_engine_particle_time > 0.1f)
-            {
-                for(auto ed : ee.emitters)
-                {
-                    glm::vec3 offset = ed.position;
-                    glm::vec2 pos2d = transform.getPosition() + rotateVec2(glm::vec2(offset.x, offset.y), transform.getRotation());
-                    glm::vec3 color = ed.color;
-                    glm::vec3 pos3d = glm::vec3(pos2d.x, pos2d.y, offset.z);
-                    float scale = ed.scale * engine_scale;
-                    ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
-                }
-                ee.last_engine_particle_time = engine->getElapsedTime();
-            }
-        }
-    }
-
     // Update view matrix in shaders.
     ShaderRegistry::updateProjectionView({}, view_matrix);
 
@@ -284,6 +272,138 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     render_system.render3D(rect.size.x / rect.size.y, camera_fov);
 
     ParticleEngine::render(projection_matrix, view_matrix);
+
+    for (auto [entity, ee, transform, impulse] : sp::ecs::Query<EngineEmitter, sp::Transform, ImpulseEngine>())
+    {
+        if (impulse.actual != 0.0f)
+        {
+            float current_time = engine->getElapsedTime();
+
+            // Calculate distance-based sampling for smooth trails at all speeds
+            bool should_add_point = false;
+            if (ee.trail_history.empty())
+                should_add_point = true;
+            else
+            {
+                const auto& last_point = ee.trail_history.back();
+                float distance = glm::length(transform.getPosition() - last_point.position);
+                // Add point if moved at least 5 units OR 0.0167 seconds elapsed (60 Hz minimum)
+                float time_since_last = current_time - ee.last_engine_particle_time;
+                if (distance > 5.0f || time_since_last > 0.0167f)
+                    should_add_point = true;
+            }
+
+            // Update trail history
+            if (should_add_point)
+            {
+                EngineEmitter::TrailPoint point;
+                point.position = transform.getPosition();
+                point.rotation = transform.getRotation();
+                point.timestamp = current_time;
+                ee.trail_history.push_back(point);
+                ee.last_engine_particle_time = current_time;
+            }
+
+            // Remove old trail points based on time
+            ee.trail_history.erase(
+                std::remove_if(ee.trail_history.begin(), ee.trail_history.end(),
+                    [current_time](const EngineEmitter::TrailPoint& p) {
+                        return (current_time - p.timestamp) > EngineEmitter::trail_lifetime;
+                    }),
+                ee.trail_history.end()
+            );
+
+            // Render trail for each emitter
+            if (ee.trail_history.size() >= 2)
+            {
+                for (auto& ed : ee.emitters)
+                {
+                    // Build triangle strip vertices
+                    std::vector<glm::vec3> vertices;
+                    std::vector<glm::vec3> colors;
+
+                    // Trail width relative to ship scale and impulse power
+                    float base_width = ed.scale * 0.5f * std::abs(impulse.actual);
+
+                    for (size_t i = 0; i < ee.trail_history.size(); ++i)
+                    {
+                        const auto& point = ee.trail_history[i];
+
+                        // Calculate age factor (0 = oldest, 1 = newest)
+                        float age_factor = (current_time - point.timestamp) / EngineEmitter::trail_lifetime;
+                        age_factor = 1.0f - age_factor;
+
+                        // Calculate width with tapering - approaches zero as trail ages
+                        float width = base_width * age_factor;
+
+                        // Apply emitter offset in entity space
+                        glm::vec2 emitter_offset = rotateVec2(glm::vec2(ed.position.x, ed.position.y), point.rotation);
+                        glm::vec2 center = point.position + emitter_offset;
+
+                        // Calculate perpendicular offset using direct trig
+                        float perp_angle_rad = glm::radians(point.rotation + 90.0f);
+                        glm::vec2 perp_dir = glm::vec2(cosf(perp_angle_rad), sinf(perp_angle_rad)) * (width * 0.5f);
+
+                        // Create left and right vertices
+                        glm::vec2 left = center + perp_dir;
+                        glm::vec2 right = center - perp_dir;
+
+                        // Push vertices
+                        vertices.push_back(glm::vec3(left.x, left.y, ed.position.z));
+                        vertices.push_back(glm::vec3(right.x, right.y, ed.position.z));
+
+                        // Color fades completely with age
+                        glm::vec3 trail_color = ed.color * age_factor;
+                        colors.push_back(trail_color);
+                        colors.push_back(trail_color);
+                    }
+
+                    // Render the triangle strip
+                    if (vertices.size() >= 4)
+                    {
+                        // Setup OpenGL state for trail rendering
+                        glEnable(GL_DEPTH_TEST); // Enable depth test so trails render behind ships
+                        glDisable(GL_CULL_FACE);
+                        glDepthMask(GL_FALSE); // Don't write to depth buffer
+                        glEnable(GL_BLEND);
+                        glBlendFunc(GL_ONE, GL_ONE); // Additive blending
+
+                        trail_shader->bind();
+                        glUniformMatrix4fv(trail_projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
+                        glUniformMatrix4fv(trail_view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
+
+                        // Upload data to GPU buffer
+                        glBindBuffer(GL_ARRAY_BUFFER, trail_buffers[0]);
+                        size_t vertex_size = vertices.size() * sizeof(glm::vec3);
+                        size_t color_size = colors.size() * sizeof(glm::vec3);
+                        glBufferData(GL_ARRAY_BUFFER, vertex_size + color_size, nullptr, GL_STREAM_DRAW);
+                        glBufferSubData(GL_ARRAY_BUFFER, 0, vertex_size, vertices.data());
+                        glBufferSubData(GL_ARRAY_BUFFER, vertex_size, color_size, colors.data());
+
+                        // Enable and setup vertex attributes
+                        glEnableVertexAttribArray(trail_position_attrib);
+                        glEnableVertexAttribArray(trail_color_attrib);
+
+                        glVertexAttribPointer(trail_position_attrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+                        glVertexAttribPointer(trail_color_attrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)vertex_size);
+
+                        glDrawArrays(GL_TRIANGLE_STRIP, 0, vertices.size());
+
+                        // Cleanup
+                        glDisableVertexAttribArray(trail_position_attrib);
+                        glDisableVertexAttribArray(trail_color_attrib);
+                        glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+
+                        // Restore OpenGL state
+                        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                        glDisable(GL_BLEND);
+                        glDepthMask(GL_TRUE);
+                        glEnable(GL_DEPTH_TEST);
+                    }
+                }
+            }
+        }
+    }
 
     if (show_spacedust && my_spaceship)
     {
@@ -326,9 +446,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
             
             if (update_required)
-            {
                 glBufferSubData(GL_ARRAY_BUFFER, 0, space_dust.size() * sizeof(glm::vec3), space_dust.data());
-            }
+
             glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
             glVertexAttribPointer(signs.get(), 1, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(2 * spacedust_particle_count * sizeof(glm::vec3)));
             
