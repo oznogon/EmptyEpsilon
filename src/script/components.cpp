@@ -484,7 +484,7 @@ void initComponentScriptBindings()
                 lua_pushstring(L, berth.docked_entity.toString().c_str());
                 lua_setfield(L, -2, "docked_entity");
 
-                sp::script::Convert<DockingBay::BerthType>::toLua(L, berth.type);
+                sp::script::Convert<DockingBay::Berth::Type>::toLua(L, berth.type);
                 lua_setfield(L, -2, "type");
 
                 lua_pushnumber(L, berth.move_time);
@@ -514,7 +514,7 @@ void initComponentScriptBindings()
 
                         lua_getfield(L, -1, "type");
                         if (!lua_isnil(L, -1))
-                            berth.type = sp::script::Convert<DockingBay::BerthType>::fromLua(L, -1);
+                            berth.type = sp::script::Convert<DockingBay::Berth::Type>::fromLua(L, -1);
                         lua_pop(L, 1);
 
                         lua_getfield(L, -1, "move_time");

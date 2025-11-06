@@ -7,6 +7,7 @@ class GuiKeyValueDisplay;
 class GuiEntityInfoPanel;
 class GuiEntityInfoPanelGrid;
 class GuiSelector;
+class GuiSlider;
 class GuiToggleButton;
 class MissileTubes;
 
@@ -31,6 +32,9 @@ private:
     GuiToggleButton* scramble;
     GuiElement* hangar_controls;
     GuiElement* energy_controls;
+    GuiSlider* energy_transfer_direction;
+    GuiKeyValueDisplay* energy_carrier;
+    GuiKeyValueDisplay* energy_docked;
     GuiElement* thermal_controls;
     GuiElement* missile_controls;
     GuiElement* repair_controls;

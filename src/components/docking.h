@@ -30,23 +30,30 @@ public:
 
     uint32_t flags = 0;
 
-    enum class BerthType
-    {
-        Hangar,
-        Energy,
-        Missiles,
-        Thermal,
-        Repair,
-        Storage
-    };
-
     struct Berth
     {
+        enum class Type
+        {
+            Hangar,
+            Energy,
+            Missiles,
+            Thermal,
+            Repair,
+            Storage
+        };
+        enum class TransferDirection
+        {
+            ToCarrier = -1,
+            None,
+            ToDocked
+        };
+
         sp::ecs::Entity docked_entity;
-        BerthType type = BerthType::Hangar;
+        Type type = Type::Hangar;
         float move_time = 10.0f;
         float move_progress = 0.0f;
-        float transfer_rate = 0.0f;
+        float transfer_rate = 5.0f;
+        TransferDirection transfer_direction = TransferDirection::None;
     };
     static constexpr int default_berth_count = 9;
     std::vector<Berth> berths;
@@ -55,56 +62,45 @@ public:
     DockingBay()
     {
         berths.resize(default_berth_count);
-        /*
-                        {type = "hangar", move_time = 5.0, transfer_rate = 1.0},
-                {type = "hangar", move_time = 5.0, transfer_rate = 1.0},
-                {type = "energy", move_time = 5.0, transfer_rate = 1.0},
-                {type = "missiles", move_time = 10.0, transfer_rate = 2.0},
-                {type = "thermal", move_time = 10.0, transfer_rate = 2.0},
-                {type = "repair", move_time = 15.0, transfer_rate = 1.5},
-                {type = "storage", move_time = 15.0, transfer_rate = 1.5},
-                {type = "storage", move_time = 20.0, transfer_rate = 0.5},
-                {type = "storage", move_time = 10.0, transfer_rate = 1.0}
-*/
         for (size_t i = 0; i < berths.size(); i++)
         {
             if (i < 2)
-                berths[i].type = BerthType::Hangar;
+                berths[i].type = Berth::Type::Hangar;
             else if (i < 3)
-                berths[i].type = BerthType::Energy;
+                berths[i].type = Berth::Type::Energy;
             else if (i < 4)
-                berths[i].type = BerthType::Missiles;
+                berths[i].type = Berth::Type::Missiles;
             else if (i < 5)
-                berths[i].type = BerthType::Thermal;
+                berths[i].type = Berth::Type::Thermal;
             else if (i < 6)
-                berths[i].type = BerthType::Repair;
+                berths[i].type = Berth::Type::Repair;
             else
-                berths[i].type = BerthType::Storage;
+                berths[i].type = Berth::Type::Storage;
         }
     }
 
-    string getTypeIcon(DockingBay::BerthType type)
+    string getTypeIcon(DockingBay::Berth::Type type)
     {
         string type_icon = "";
 
         switch (type)
         {
-            case DockingBay::BerthType::Hangar:
+            case DockingBay::Berth::Type::Hangar:
                 type_icon = "gui/icons/docking";
                 break;
-            case DockingBay::BerthType::Energy:
+            case DockingBay::Berth::Type::Energy:
                 type_icon = "gui/icons/energy";
                 break;
-            case DockingBay::BerthType::Missiles:
+            case DockingBay::Berth::Type::Missiles:
                 type_icon = "gui/icons/system_missile";
                 break;
-            case DockingBay::BerthType::Thermal:
+            case DockingBay::Berth::Type::Thermal:
                 type_icon = "gui/icons/status_overheat";
                 break;
-            case DockingBay::BerthType::Repair:
+            case DockingBay::Berth::Type::Repair:
                 type_icon = "gui/icons/status_damaged";
                 break;
-            case DockingBay::BerthType::Storage:
+            case DockingBay::Berth::Type::Storage:
                 type_icon = "gui/icons/hull";
                 break;
         }
@@ -112,28 +108,28 @@ public:
         return type_icon;
     }
 
-    string getTypeName(DockingBay::BerthType type)
+    string getTypeName(DockingBay::Berth::Type type)
     {
         string type_name = tr("dockingbay", "Unknown type");
 
         switch (type)
         {
-            case DockingBay::BerthType::Hangar:
+            case DockingBay::Berth::Type::Hangar:
                 type_name = tr("dockingbay", "Hangar");
                 break;
-            case DockingBay::BerthType::Energy:
+            case DockingBay::Berth::Type::Energy:
                 type_name = tr("dockingbay", "Energy");
                 break;
-            case DockingBay::BerthType::Missiles:
+            case DockingBay::Berth::Type::Missiles:
                 type_name = tr("dockingbay", "Missiles");
                 break;
-            case DockingBay::BerthType::Thermal:
+            case DockingBay::Berth::Type::Thermal:
                 type_name = tr("dockingbay", "Thermal");
                 break;
-            case DockingBay::BerthType::Repair:
+            case DockingBay::Berth::Type::Repair:
                 type_name = tr("dockingbay", "Repair");
                 break;
-            case DockingBay::BerthType::Storage:
+            case DockingBay::Berth::Type::Storage:
                 type_name = tr("dockingbay", "Storage");
                 break;
         }

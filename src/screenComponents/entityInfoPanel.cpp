@@ -263,13 +263,16 @@ void GuiEntityInfoPanelGrid::onUpdate()
         // Create a new layout row on the first column
         if (col == 0 || col >= max_cols)
         {
+            row++;
+            if (row > max_rows)
+                LOG(Debug, "There are more rows in the list than can be shown at once");
+
             current_row = new GuiElement(content_container, "");
             current_row
                 ->setSize(GuiElement::GuiSizeMax, GuiEntityInfoPanel::default_panel_size)
                 ->setAttribute("layout", "horizontal");
+
             cached_rows.push_back(current_row);
-            row++;
-            if (row >= max_rows) LOG(Debug, "Row ", row, " and onward should not be visible unless scrolled to via the scrollbar");
             col = 0;
         }
 
