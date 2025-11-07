@@ -297,8 +297,8 @@ void CinematicViewScreen::update(float delta)
     // Plot headings from the camera to the locked player ship.
     // Set camera_yaw and camera_pitch to those values.
 
-    // If lock is enabled and a ship is selected...
-    if (camera_lock_toggle->getValue() && target)
+    // If lock is enabled and a ship is selected (but not in mouselook mode)...
+    if (camera_lock_toggle->getValue() && target && !mouselook)
     {
         setMouselook(false);
         mouselook_toggle->setValue(false)->disable();
@@ -498,4 +498,151 @@ void CinematicViewScreen::setMouselook(bool value)
         mouselook_toggle->setValue(false);
         SDL_SetRelativeMouseMode(SDL_FALSE);
     }
+}
+
+bool CinematicViewScreen::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
+{
+    // Handle mouselook if enabled.
+    if (mouselook)
+    {
+        if (!camera_lock_toggle->getValue())
+        {
+            // Mouselook enables SDL relative mouse mode, which reports movement
+            // deltas instead of positions. This makes the position variable oddly
+            // named for the moment.
+
+            // Get camera control inversion and sensitivity prefs.
+            float mouse_sensitivity = 0.15f;
+            LOG(Info, "camera_mouse_sensitivity: ", PreferencesManager::get("camera_mouse_sensitivity"));
+            float pref_sens = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
+
+            if (pref_sens > 0.0f) mouse_sensitivity = pref_sens;
+            else LOG(Warning, "camera_mouse_sensitivity value invalid. pref_sens result: ", pref_sens);
+
+            // Yaw (mouse x, horizontal rotation normalized)
+            camera_yaw += position.x * mouse_sensitivity;
+            camera_yaw = std::fmod(camera_yaw, 360.0f);
+            if (camera_yaw < 0.0f) camera_yaw += 360.0f;
+
+            // Pitch (mouse y, vertical rotation)
+            // Clamp pitch to 90 degrees up/down prevent flipping upside down.
+            if (PreferencesManager::get("camera_mouse_inverted", "0") == "1")
+                camera_pitch += position.y * mouse_sensitivity;
+            else
+                camera_pitch -= position.y * mouse_sensitivity;
+
+            camera_pitch = std::clamp(camera_pitch, -89.9f, 89.9f);
+        }
+        else
+        {
+            // Rotate around the locked entity's center point instead of freelook.
+        }
+    }
+
+    return false;
+}
+
+void CinematicViewScreen::setTargetTransform(sp::Transform* transform)
+{
+    // Get the target transform's current position and heading.
+    target_rotation = transform->getRotation();
+    target_position_2D = transform->getPosition();
+
+    // Copy the selected transform's position into a vec3 for camera angle
+    // calculations.
+    target_position_3D = {target_position_2D.x, target_position_2D.y, 0.0f};
+
+    // Copy the camera position into a vec2 for camera angle
+    // calculations.
+    camera_position_2D = {camera_position.x, camera_position.y};
+
+    // Calculate the distance from the camera to the selected transform.
+    diff_2D = target_position_2D - camera_position_2D;
+    diff_3D = target_position_3D - camera_position;
+
+    distance_2D = glm::length(diff_2D);
+    distance_3D = glm::length(diff_3D);
+
+    // Always keep the camera less than 1U from the selected transform.
+    // If it has a physics collider, factor that into the distance.
+    float max_dimension = 0.0f;
+    max_camera_distance = 1000.0f;
+
+    if (auto physics = target.getComponent<sp::Physics>())
+    {
+        max_dimension = std::max(physics->getSize().x, physics->getSize().y);
+        max_camera_distance = 1000.0f + max_dimension + glm::length(physics->getVelocity());
+    }
+
+    min_camera_distance = std::max(300.0f, max_dimension * 2.0f);
+}
+
+void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform)
+{
+    // If we're tracking a target-of-target, keep both the main and ToT
+    // transforms in view.
+    if (camera_lock_tot_toggle->getValue() && tot_transform)
+    {
+        // Get the position of the selected ship's target.
+        tot_position_2D = tot_transform->getPosition();
+        // Convert it to a 3D vector.
+        tot_position_3D = {tot_position_2D, 0.0f};
+
+        // Get the diff, distance, and angle between the ToT and camera.
+        tot_diff_2D = tot_position_2D - camera_position_2D;
+        tot_diff_3D = tot_position_3D - camera_position;
+        tot_angle = vec2ToAngle(tot_diff_2D);
+        tot_distance_2D = glm::length(tot_diff_2D);
+        tot_distance_3D = glm::length(tot_diff_3D);
+
+        // Point the camera aiming between the target ship and the target of the target.
+        angle_yaw = tot_angle + angleDifference(tot_angle, vec2ToAngle(diff_2D)) / 2.0f;
+
+        // If it's somehow out of view, reset the camera to the player ship.
+        if (std::abs(angleDifference(angle_yaw, tot_angle)) > 40.0f)
+            setTargetTransform(main_transform);
+
+        angle_pitch = glm::degrees(atan(camera_position.z / tot_distance_2D));
+    }
+
+    // If the selected transform moves more than 1U from the camera ...
+    if (distance_2D > max_camera_distance)
+    {
+        // Set a vector 10 degrees to the right of the selected transform's
+        // rotation, then plot a destination on that vector at a distance of
+        // 1U.
+        camera_destination = target_position_2D + vec2FromAngle(target_rotation + 10.0f) * max_camera_distance;
+
+        // Move the camera's X and Y coordinates to this destination.
+        camera_position = {camera_destination.x, camera_destination.y, camera_position.z};
+    }
+    else
+    {
+        // If we are too close to the ship, move away from it.
+        if (distance_3D < min_camera_distance && distance_2D > 0.0f)
+        {
+            camera_position.x -= diff_2D.x / distance_2D * (min_camera_distance - distance_3D);
+            camera_position.y -= diff_2D.y / distance_2D * (min_camera_distance - distance_3D);
+        }
+    }
+
+    // Calculate the angles between the camera and the ship.
+    // Do this after camera repositioning so angles reflect final camera
+    // position.
+    if (!camera_lock_tot_toggle->getValue() || !target_of_target)
+    {
+        // Recalculate diff with potentially updated camera position.
+        diff_2D = target_position_2D - glm::vec2(camera_position.x, camera_position.y);
+        diff_3D = target_position_3D - camera_position;
+        distance_2D = glm::length(diff_2D);
+        distance_3D = glm::length(diff_3D);
+
+        angle_yaw = vec2ToAngle(diff_2D);
+        angle_pitch = glm::degrees(atan(camera_position.z / distance_2D));
+    }
+    // TODO: Park the camera at a photogenic angle at high speeds.
+
+    // Point the camera.
+    camera_yaw = angle_yaw;
+    camera_pitch = angle_pitch;
 }

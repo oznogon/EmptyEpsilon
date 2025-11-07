@@ -132,29 +132,6 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 
     // Interface page, left column
 
-    // Radar rotation options.
-    (new GuiLabel(interface_left_column, "CONTROL_OPTIONS_LABEL", tr("Radar rotation"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    // Helms rotation lock.
-    (new GuiToggleButton(interface_left_column, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
-    {
-        PreferencesManager::set(       "helms_radar_lock", value ? "1" : "");
-        PreferencesManager::set(    "tactical_radar_lock", value ? "1" : "");
-        PreferencesManager::set("single_pilot_radar_lock", value ? "1" : "");
-    }))->setValue(PreferencesManager::get("helms_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Weapons rotation lock.
-    (new GuiToggleButton(interface_left_column, "WEAPONS_RADAR_LOCK", tr("Weapons Radar Lock"), [](bool value)
-    {
-        PreferencesManager::set("weapons_radar_lock", value ? "1" : "");
-    }))->setValue(PreferencesManager::get("weapons_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Science rotation lock.
-    (new GuiToggleButton(interface_left_column, "SCIENCE_RADAR_LOCK", tr("Science Radar Lock"), [](bool value)
-    {
-        PreferencesManager::set("science_radar_lock", value ? "1" : "");
-        PreferencesManager::set("operations_radar_lock", value ? "1" : "");
-    }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
-
     // Select language
     {
         (new GuiLabel(interface_left_column, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))
@@ -365,6 +342,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
     {
         LOG(Warning, "camera_mouse_sensitivity value invalid: ", PreferencesManager::get("camera_mouse_sensitivity", "0.15"));
         initial_mouselook_sensitivity = 0.15f;
+    }
 
     mouselook_sensitivity_slider = new GuiBasicSlider(interface_right_column, "MOUSELOOK_SENSITIVITY_SLIDER", 0.01f, 1.0f, initial_mouselook_sensitivity,
         [this](float sensitivity)
