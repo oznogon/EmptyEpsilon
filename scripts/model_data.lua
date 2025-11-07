@@ -139,6 +139,68 @@ model:addEngineEmitter(-33,-12, -1,  1.0, 0.2, 0.1, 17.0)
 model:addEngineEmitter(-33, 22, -1,  1.0, 0.2, 0.1, 14.0)
 model:addEngineEmitter(-33,-22, -1,  1.0, 0.2, 0.1, 14.0)
 
+--[[ trail_polygon points are relative to their addEngineEmitter coordinates.
+
+     x = +front, -back (0 unless the emitter surface isn't flat)
+     y = -left, +right
+     z = +top, -bottom
+
+     For example, a 1.0-size square's points from top left:
+        {x = 0.0, y = -0.5, z =  0.5}, -- top left
+        {x = 0.0, y =  0.5, z =  0.5}, -- top right
+        {x = 0.0, y =  0.5, z = -0.5}, -- bottom right
+        {x = 0.0, y = -0.5, z = -0.5}, -- bottom left
+--]]
+model.engine_emitter[1]
+    .trail_polygon = {
+        {x = 0.0, y = -0.40, z = -0.05},
+        {x = 0.0, y = -0.40, z =  0.30},
+        {x = 0.0, y =  0.40, z =  0.30},
+        {x = 0.0, y =  0.40, z = -0.05},
+        {x = 0.0, y =  0.17, z = -0.45},
+        {x = 0.0, y = -0.17, z = -0.45}
+    }
+
+model.engine_emitter[2]
+    .trail_polygon = {
+        {x = 0.0, y = -0.15, z =  0.22},
+        {x = 0.0, y = -0.07, z =  0.31},
+        {x = 0.0, y =  0.12, z =  0.31},
+        {x = 0.0, y =  0.12, z = -0.27},
+        {x = 0.0, y = -0.07, z = -0.27},
+        {x = 0.0, y = -0.15, z = -0.20}
+    }
+
+model.engine_emitter[3]
+    .trail_polygon = {
+        {x = 0.0, y =  0.15, z =  0.22},
+        {x = 0.0, y =  0.07, z =  0.31},
+        {x = 0.0, y = -0.12, z =  0.31},
+        {x = 0.0, y = -0.12, z = -0.27},
+        {x = 0.0, y =  0.07, z = -0.27},
+        {x = 0.0, y =  0.15, z = -0.20}
+    }
+
+model.engine_emitter[4]
+    .trail_polygon = {
+        {x = 0.0, y =  0.43, z =  0.23},
+        {x = 0.0, y = -0.10, z =  0.37},
+        {x = 0.0, y = -0.30, z =  0.37},
+        {x = 0.0, y = -0.30, z = -0.33},
+        {x = 0.0, y = -0.10, z = -0.33},
+        {x = 0.0, y =  0.43, z = -0.18}
+    }
+
+model.engine_emitter[5]
+    .trail_polygon = {
+        {x = 0.0, y = -0.43, z =  0.23},
+        {x = 0.0, y =  0.10, z =  0.37},
+        {x = 0.0, y =  0.30, z =  0.37},
+        {x = 0.0, y =  0.30, z = -0.33},
+        {x = 0.0, y =  0.10, z = -0.33},
+        {x = 0.0, y = -0.43, z = -0.18}
+    }
+
 model = ModelData()
 model:setName("battleship_destroyer_2_upgraded")
 model:setMesh("battleship_destroyer_2_upgraded/battleship_destroyer_2_upgraded.model")

@@ -318,44 +318,82 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             {
                 for (auto& ed : ee.emitters)
                 {
-                    // Build triangle strip vertices
+                    // Build vertices by extruding a polygon along the trail path.
                     std::vector<glm::vec3> vertices;
                     std::vector<glm::vec3> colors;
+                    std::vector<unsigned int> indices;
 
-                    // Trail width relative to ship scale and impulse power
-                    float base_width = ed.scale * 0.5f * std::abs(impulse.actual);
+                    // Use a custom trail_polygon to shape the trail if defined.
+                    // Otherwise, default to a flat horizontal strip.
+                    std::vector<glm::vec3> polygon = ed.trail_polygon;
+                    if (polygon.empty())
+                        polygon = {
+                            {0.0f, -0.5f, 0.0f},
+                            {0.0f, 0.5f, 0.0f}
+                        };
 
+                    // Extrude the polygon along the trail path.
                     for (size_t i = 0; i < ee.trail_history.size(); ++i)
                     {
                         const auto& point = ee.trail_history[i];
 
-                        // Calculate age factor (0 = oldest, 1 = newest)
+                        // Calculate the age factor (0 to 1 = oldest to newest).
+                        // The age factor scales the polygon and fades it out toward the end.
                         float age_factor = (current_time - point.timestamp) / EngineEmitter::trail_lifetime;
                         age_factor = 1.0f - age_factor;
 
-                        // Calculate width with tapering - approaches zero as trail ages
-                        float width = base_width * age_factor;
+                        // Scale based on emitter scale, impulse power, and age
+                        float scale = ed.scale * std::abs(impulse.actual) * age_factor;
 
                         // Apply emitter offset in entity space
                         glm::vec2 emitter_offset = rotateVec2(glm::vec2(ed.position.x, ed.position.y), point.rotation);
                         glm::vec2 center = point.position + emitter_offset;
 
-                        // Calculate perpendicular offset using direct trig
+                        // Transform each polygon point to world space
+                        // Polygon coordinates: x = along trail direction, y = perpendicular to trail, z = vertical
                         float perp_angle_rad = glm::radians(point.rotation + 90.0f);
-                        glm::vec2 perp_dir = glm::vec2(cosf(perp_angle_rad), sinf(perp_angle_rad)) * (width * 0.5f);
+                        glm::vec2 perp_dir = glm::vec2(cosf(perp_angle_rad), sinf(perp_angle_rad));
+                        float forward_angle_rad = glm::radians(point.rotation);
+                        glm::vec2 forward_dir = glm::vec2(cosf(forward_angle_rad), sinf(forward_angle_rad));
 
-                        // Create left and right vertices
-                        glm::vec2 left = center + perp_dir;
-                        glm::vec2 right = center - perp_dir;
+                        for (const auto& poly_point : polygon)
+                        {
+                            // poly_point.x = offset along trail direction (toward emitter)
+                            // poly_point.y = offset perpendicular to trail
+                            // poly_point.z = vertical offset
+                            glm::vec2 world_pos = center +
+                                                  perp_dir * (poly_point.y * scale) +
+                                                  forward_dir * (poly_point.x * scale);
 
-                        // Push vertices
-                        vertices.push_back(glm::vec3(left.x, left.y, ed.position.z));
-                        vertices.push_back(glm::vec3(right.x, right.y, ed.position.z));
+                            float world_z = ed.position.z + poly_point.z * scale;
 
-                        // Color fades completely with age
-                        glm::vec3 trail_color = ed.color * age_factor;
-                        colors.push_back(trail_color);
-                        colors.push_back(trail_color);
+                            vertices.push_back(glm::vec3(world_pos.x, world_pos.y, world_z));
+
+                            // Color fades completely with age
+                            glm::vec3 trail_color = ed.color * age_factor;
+                            colors.push_back(trail_color);
+                        }
+                    }
+
+                    // Generate triangle indices for polygon extrusion
+                    size_t points_per_segment = polygon.size();
+                    for (size_t i = 0; i < ee.trail_history.size() - 1; ++i)
+                    {
+                        for (size_t j = 0; j < points_per_segment; ++j)
+                        {
+                            size_t next_j = (j + 1) % points_per_segment;
+                            size_t base0 = i * points_per_segment;
+                            size_t base1 = (i + 1) * points_per_segment;
+
+                            // Two triangles per quad segment
+                            indices.push_back(base0 + j);
+                            indices.push_back(base1 + j);
+                            indices.push_back(base0 + next_j);
+
+                            indices.push_back(base0 + next_j);
+                            indices.push_back(base1 + j);
+                            indices.push_back(base1 + next_j);
+                        }
                     }
 
                     // Render the triangle strip
@@ -372,13 +410,17 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                         glUniformMatrix4fv(trail_projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
                         glUniformMatrix4fv(trail_view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
 
-                        // Upload data to GPU buffer
+                        // Upload vertex data to GPU buffer
                         glBindBuffer(GL_ARRAY_BUFFER, trail_buffers[0]);
                         size_t vertex_size = vertices.size() * sizeof(glm::vec3);
                         size_t color_size = colors.size() * sizeof(glm::vec3);
                         glBufferData(GL_ARRAY_BUFFER, vertex_size + color_size, nullptr, GL_STREAM_DRAW);
                         glBufferSubData(GL_ARRAY_BUFFER, 0, vertex_size, vertices.data());
                         glBufferSubData(GL_ARRAY_BUFFER, vertex_size, color_size, colors.data());
+
+                        // Upload index data to element buffer
+                        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, trail_buffers[1]);
+                        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STREAM_DRAW);
 
                         // Enable and setup vertex attributes
                         glEnableVertexAttribArray(trail_position_attrib);
@@ -387,12 +429,13 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                         glVertexAttribPointer(trail_position_attrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
                         glVertexAttribPointer(trail_color_attrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)vertex_size);
 
-                        glDrawArrays(GL_TRIANGLE_STRIP, 0, vertices.size());
+                        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 
                         // Cleanup
                         glDisableVertexAttribArray(trail_position_attrib);
                         glDisableVertexAttribArray(trail_color_attrib);
                         glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+                        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
 
                         // Restore OpenGL state
                         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

@@ -273,6 +273,48 @@ void initComponentScriptBindings()
     BIND_ARRAY_DIRTY_FLAG_MEMBER(EngineEmitter, emitters, position, emitters_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(EngineEmitter, emitters, color, emitters_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(EngineEmitter, emitters, scale, emitters_dirty);
+    // Custom binding for trail_polygon - converts std::vector<glm::vec3> to/from Lua table
+    sp::script::ComponentHandler<EngineEmitter>::indexed_members["trail_polygon"] = {
+        [](lua_State* L, const void* ptr, int n) {
+            auto t = reinterpret_cast<const EngineEmitter*>(ptr);
+            const auto& polygon = t->emitters[n].trail_polygon;
+            lua_createtable(L, polygon.size(), 0);
+            for (size_t i = 0; i < polygon.size(); ++i) {
+                lua_createtable(L, 0, 3);
+                lua_pushnumber(L, polygon[i].x);
+                lua_setfield(L, -2, "x");
+                lua_pushnumber(L, polygon[i].y);
+                lua_setfield(L, -2, "y");
+                lua_pushnumber(L, polygon[i].z);
+                lua_setfield(L, -2, "z");
+                lua_rawseti(L, -2, i + 1);
+            }
+            return 1;
+        }, [](lua_State* L, void* ptr, int n) {
+            auto t = reinterpret_cast<EngineEmitter*>(ptr);
+            t->emitters[n].trail_polygon.clear();
+            if (lua_istable(L, -1)) {
+                size_t len = lua_rawlen(L, -1);
+                for (size_t i = 1; i <= len; ++i) {
+                    lua_rawgeti(L, -1, i);
+                    if (lua_istable(L, -1)) {
+                        lua_getfield(L, -1, "x");
+                        float x = lua_tonumber(L, -1);
+                        lua_pop(L, 1);
+                        lua_getfield(L, -1, "y");
+                        float y = lua_tonumber(L, -1);
+                        lua_pop(L, 1);
+                        lua_getfield(L, -1, "z");
+                        float z = lua_tonumber(L, -1);
+                        lua_pop(L, 1);
+                        t->emitters[n].trail_polygon.push_back(glm::vec3(x, y, z));
+                    }
+                    lua_pop(L, 1);
+                }
+            }
+            t->emitters_dirty = true;
+        }
+    };
 
     sp::script::ComponentHandler<PlanetRender>::name("planet_render");
     BIND_MEMBER(PlanetRender, size);

@@ -42,6 +42,11 @@ public:
         glm::vec3 position{};
         glm::vec3 color{};
         float scale;
+        // Cross-section polygon for trail extrusion
+        // Points define shape in 3D space relative to trail direction
+        // x = along trail direction (toward emitter), y = perpendicular left/right, z = vertical
+        // If empty, defaults to flat horizontal strip
+        std::vector<glm::vec3> trail_polygon;
     };
     std::vector<Emitter> emitters;
     bool emitters_dirty = true;

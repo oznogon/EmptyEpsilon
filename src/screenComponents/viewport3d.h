@@ -69,7 +69,7 @@ class GuiViewport3D : public GuiElement
     uint32_t trail_view_uniform;
     uint32_t trail_position_attrib;
     uint32_t trail_color_attrib;
-    gl::Buffers<1> trail_buffers;
+    gl::Buffers<2> trail_buffers; // [0] = vertex/color data, [1] = element indices
 
 public:
     GuiViewport3D(GuiContainer* owner, string id);
