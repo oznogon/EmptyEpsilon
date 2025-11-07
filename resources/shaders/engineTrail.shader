@@ -24,8 +24,5 @@ varying vec3 fragcolor;
 
 void main()
 {
-    // Output color for additive blending - alpha controls intensity
-    // The fragcolor already has age_factor baked in, so we output full alpha
-    // for additive blending (GL_SRC_ALPHA, GL_ONE)
     gl_FragColor = vec4(fragcolor, 1.0);
 }

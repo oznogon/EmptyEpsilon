@@ -70,6 +70,7 @@ class GuiViewport3D : public GuiElement
     uint32_t trail_position_attrib;
     uint32_t trail_color_attrib;
     gl::Buffers<2> trail_buffers; // [0] = vertex/color data, [1] = element indices
+    inline static const std::vector<glm::vec3> default_trail_polygon = {{0.0f, -0.5f, 0.0f}, {0.0f, 0.5f, 0.0f}};
 
 public:
     GuiViewport3D(GuiContainer* owner, string id);
