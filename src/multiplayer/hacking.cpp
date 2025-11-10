@@ -3,5 +3,6 @@
 
 
 BASIC_REPLICATION_IMPL(HackingDeviceReplication, HackingDevice)
-    BASIC_REPLICATION_FIELD(effectiveness);
+    // Config field: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(effectiveness, 0.01f);
 }

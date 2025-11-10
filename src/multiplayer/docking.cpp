@@ -27,9 +27,12 @@ BASIC_REPLICATION_IMPL(DockingBayReplication, DockingBay)
 }
 
 BASIC_REPLICATION_IMPL(DockingPortReplication, DockingPort)
-    BASIC_REPLICATION_FIELD(dock_class);
-    BASIC_REPLICATION_FIELD(dock_subclass);
-    BASIC_REPLICATION_FIELD(state);
-    BASIC_REPLICATION_FIELD(target);
-    BASIC_REPLICATION_FIELD(docked_offset);
+    // Config fields: 1Hz
+    CONFIG_REPLICATION_FIELD(dock_class);
+    CONFIG_REPLICATION_FIELD(dock_subclass);
+
+    // System fields: 5Hz
+    SYSTEM_REPLICATION_FIELD(docked_offset);
+    SYSTEM_REPLICATION_FIELD(target);
+    SYSTEM_REPLICATION_FIELD(state);
 }

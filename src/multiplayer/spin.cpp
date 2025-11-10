@@ -3,5 +3,6 @@
 
 
 BASIC_REPLICATION_IMPL(SpinReplication, Spin)
-    BASIC_REPLICATION_FIELD(rate);
+    // Config field: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(rate, 0.01f);
 }

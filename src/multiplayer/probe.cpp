@@ -3,6 +3,8 @@
 
 
 BASIC_REPLICATION_IMPL(ScanProbeLauncherReplication, ScanProbeLauncher)
-    BASIC_REPLICATION_FIELD(max);
-    BASIC_REPLICATION_FIELD(stock);
+    // Config field: 1Hz
+    CONFIG_REPLICATION_FIELD(max);
+    // System field: 5Hz
+    SYSTEM_REPLICATION_FIELD(stock);
 }

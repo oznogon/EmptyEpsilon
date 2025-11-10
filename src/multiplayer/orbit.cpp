@@ -3,8 +3,9 @@
 
 
 BASIC_REPLICATION_IMPL(OrbitReplication, Orbit)
-    BASIC_REPLICATION_FIELD(target);
-    BASIC_REPLICATION_FIELD(center);
-    BASIC_REPLICATION_FIELD(distance);
-    BASIC_REPLICATION_FIELD(time);
+    // System fields: 5Hz with epsilon tolerance
+    SYSTEM_REPLICATION_FIELD(target);
+    SYSTEM_REPLICATION_FIELD(center);
+    SYSTEM_REPLICATION_FIELD_EPSILON(distance, 1.0f);
+    SYSTEM_REPLICATION_FIELD_EPSILON(time, 0.01f);
 }

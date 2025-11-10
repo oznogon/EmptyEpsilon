@@ -3,10 +3,12 @@
 
 
 BASIC_REPLICATION_IMPL(CallSignReplication, CallSign)
-    BASIC_REPLICATION_FIELD(callsign);
+    // Config field: 1Hz
+    CONFIG_REPLICATION_FIELD(callsign);
 }
 
 BASIC_REPLICATION_IMPL(TypeNameReplication, TypeName)
-    BASIC_REPLICATION_FIELD(type_name);
-    BASIC_REPLICATION_FIELD(localized);
+    // Config fields: 1Hz
+    CONFIG_REPLICATION_FIELD(type_name);
+    CONFIG_REPLICATION_FIELD(localized);
 }

@@ -809,4 +809,9 @@ void initComponentScriptBindings()
             zone->zone_dirty = true;
         }
     };
+
+    // MultiplayerSignificant component for marking entities (like player ships)
+    // that are used for significance-based network replication rate limiting
+    sp::script::ComponentHandler<sp::MultiplayerSignificant>::name("multiplayer_significant");
+    BIND_MEMBER(sp::MultiplayerSignificant, range);
 }

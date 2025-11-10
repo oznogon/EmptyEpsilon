@@ -9,10 +9,11 @@ namespace sp::io {
 
 
 BASIC_REPLICATION_IMPL(DatabaseReplication, Database)
-    BASIC_REPLICATION_FIELD(parent);
+    // Config fields: 1Hz
+    CONFIG_REPLICATION_FIELD(parent);
 
-    BASIC_REPLICATION_FIELD(name);
+    CONFIG_REPLICATION_FIELD(name);
     REPLICATE_VECTOR_IF_DIRTY(key_values, key_values_dirty);
-    BASIC_REPLICATION_FIELD(description);
-    BASIC_REPLICATION_FIELD(image);
+    CONFIG_REPLICATION_FIELD(description);
+    CONFIG_REPLICATION_FIELD(image);
 }

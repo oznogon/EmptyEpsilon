@@ -3,6 +3,7 @@
 
 
 BASIC_REPLICATION_IMPL(GravityReplication, Gravity)
-    BASIC_REPLICATION_FIELD(range);
-    BASIC_REPLICATION_FIELD(force);
+    // Config fields: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(range, 1.0f);
+    CONFIG_REPLICATION_FIELD_EPSILON(force, 0.1f);
 }

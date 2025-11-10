@@ -17,16 +17,23 @@ namespace sp::io {
 }
 
 BASIC_REPLICATION_IMPL(InternalRoomsReplication, InternalRooms)
-    BASIC_REPLICATION_FIELD(auto_repair_enabled);
+    // Config field: 1Hz
+    CONFIG_REPLICATION_FIELD(auto_repair_enabled);
+
     REPLICATE_VECTOR_IF_DIRTY(rooms, rooms_dirty);
     REPLICATE_VECTOR_IF_DIRTY(doors, doors_dirty);
 }
 
 BASIC_REPLICATION_IMPL(InternalCrewReplication, InternalCrew)
-    BASIC_REPLICATION_FIELD(move_speed);
-    BASIC_REPLICATION_FIELD(position);
-    BASIC_REPLICATION_FIELD(target_position);
+    // Config fields: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(move_speed, 0.1f);
+
+    // System fields: 5Hz
+    SYSTEM_REPLICATION_FIELD(target_position);
+    SYSTEM_REPLICATION_FIELD(ship);
+
+    // Fast fields: 20Hz
     BASIC_REPLICATION_FIELD(action);
+    BASIC_REPLICATION_FIELD(position);
     BASIC_REPLICATION_FIELD(direction);
-    BASIC_REPLICATION_FIELD(ship);
 }

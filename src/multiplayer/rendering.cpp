@@ -9,33 +9,40 @@ namespace sp::io {
 }
 
 BASIC_REPLICATION_IMPL(MeshRenderComponentReplication, MeshRenderComponent)
-    BASIC_REPLICATION_FIELD(mesh.name);
-    BASIC_REPLICATION_FIELD(texture.name);
-    BASIC_REPLICATION_FIELD(specular_texture.name);
-    BASIC_REPLICATION_FIELD(illumination_texture.name);
-    BASIC_REPLICATION_FIELD(mesh_offset);
-    BASIC_REPLICATION_FIELD(scale);
+    // Config fields: 1Hz
+    CONFIG_REPLICATION_FIELD(mesh.name);
+    CONFIG_REPLICATION_FIELD(texture.name);
+    CONFIG_REPLICATION_FIELD(specular_texture.name);
+    CONFIG_REPLICATION_FIELD(illumination_texture.name);
+    CONFIG_REPLICATION_FIELD(mesh_offset);
+
+    // System field: 5Hz with epsilon tolerance
+    SYSTEM_REPLICATION_FIELD_EPSILON(scale, 0.01f);
 }
 
 BASIC_REPLICATION_IMPL(EngineEmitterReplication, EngineEmitter)
     REPLICATE_VECTOR_IF_DIRTY(emitters, emitters_dirty);
 }
 BASIC_REPLICATION_IMPL(NebulaRendererReplication, NebulaRenderer)
-    BASIC_REPLICATION_FIELD(render_range);
+    // Config fields: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(render_range, 1.0f);
+
     REPLICATE_VECTOR_IF_DIRTY(clouds, clouds_dirty);
 }
 BASIC_REPLICATION_IMPL(ExplosionEffectReplication, ExplosionEffect)
-    BASIC_REPLICATION_FIELD(size);
-    BASIC_REPLICATION_FIELD(radar);
-    BASIC_REPLICATION_FIELD(electrical);
+    // Config fields: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(size, 1.0f);
+    CONFIG_REPLICATION_FIELD(radar);
+    CONFIG_REPLICATION_FIELD(electrical);
 }
 BASIC_REPLICATION_IMPL(PlanetRenderReplication, PlanetRender)
-    BASIC_REPLICATION_FIELD(size);
-    BASIC_REPLICATION_FIELD(cloud_size);
-    BASIC_REPLICATION_FIELD(atmosphere_size);
-    BASIC_REPLICATION_FIELD(texture);
-    BASIC_REPLICATION_FIELD(cloud_texture);
-    BASIC_REPLICATION_FIELD(atmosphere_texture);
-    BASIC_REPLICATION_FIELD(atmosphere_color);
-    BASIC_REPLICATION_FIELD(distance_from_movement_plane);
+    // Config fields: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(size, 1.0f);
+    CONFIG_REPLICATION_FIELD_EPSILON(cloud_size, 1.0f);
+    CONFIG_REPLICATION_FIELD_EPSILON(atmosphere_size, 1.0f);
+    CONFIG_REPLICATION_FIELD(texture);
+    CONFIG_REPLICATION_FIELD(cloud_texture);
+    CONFIG_REPLICATION_FIELD(atmosphere_texture);
+    CONFIG_REPLICATION_FIELD(atmosphere_color);
+    CONFIG_REPLICATION_FIELD_EPSILON(distance_from_movement_plane, 1.0f);
 }

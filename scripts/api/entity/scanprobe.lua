@@ -8,6 +8,7 @@
 function ScanProbe()
     local e = createEntity()
     e.components = {
+        multiplayer_significant = {range=5000},
         transform = {},
         lifetime = {lifetime=60*10},
         radar_trace = {

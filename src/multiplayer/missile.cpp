@@ -3,22 +3,26 @@
 
 
 BASIC_REPLICATION_IMPL(MissileFlightReplication, MissileFlight)
-    BASIC_REPLICATION_FIELD(speed);
+    // Config field: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(speed, 0.1f);
 }
 
 BASIC_REPLICATION_IMPL(MissileHomingReplication, MissileHoming)
-    BASIC_REPLICATION_FIELD(turn_rate);
-    BASIC_REPLICATION_FIELD(range);
-    BASIC_REPLICATION_FIELD(target);
-    BASIC_REPLICATION_FIELD(target_angle);
+    // Config fields: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(turn_rate, 0.1f);
+    CONFIG_REPLICATION_FIELD_EPSILON(range, 1.0f);
+    CONFIG_REPLICATION_FIELD(target);
+    // Fast field: 20Hz with epsilon tolerance
+    BASIC_REPLICATION_FIELD_EPSILON(target_angle, 0.01f);
 }
 
 BASIC_REPLICATION_IMPL(ConstantParticleEmitterReplication, ConstantParticleEmitter)
-    BASIC_REPLICATION_FIELD(interval);
-    BASIC_REPLICATION_FIELD(travel_random_range);
-    BASIC_REPLICATION_FIELD(start_color);
-    BASIC_REPLICATION_FIELD(end_color);
-    BASIC_REPLICATION_FIELD(start_size);
-    BASIC_REPLICATION_FIELD(end_size);
-    BASIC_REPLICATION_FIELD(life_time);
+    // Config fields: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(interval, 0.1f);
+    CONFIG_REPLICATION_FIELD_EPSILON(travel_random_range, 0.1f);
+    CONFIG_REPLICATION_FIELD(start_color);
+    CONFIG_REPLICATION_FIELD(end_color);
+    CONFIG_REPLICATION_FIELD_EPSILON(start_size, 0.1f);
+    CONFIG_REPLICATION_FIELD_EPSILON(end_size, 0.1f);
+    CONFIG_REPLICATION_FIELD_EPSILON(life_time, 0.1f);
 }

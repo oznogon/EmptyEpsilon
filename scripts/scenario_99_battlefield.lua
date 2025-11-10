@@ -12,6 +12,9 @@
 -- @script scenario_99_battlefield
 
 function init()
+    player = PlayerSpaceship():setTemplate("Atlantis"):setPosition(0,0):setFaction("Human Navy")
+    player.components.multiplayer_significant = {range = 20000}
+
     neutral_station = SpaceStation():setTemplate("Large Station"):setPosition(0, -15000):setRotation(random(0, 360)):setFaction("Independent")
     -- Set up the neutral station to provide supplydrops to anyone, but mines only to friendlies (which rules out the player).
     neutral_station.comms_data = {supplydrop = "neutral", weapons = {Mine = "friend"}}

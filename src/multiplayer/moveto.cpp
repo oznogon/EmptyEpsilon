@@ -3,6 +3,7 @@
 
 
 BASIC_REPLICATION_IMPL(MoveToReplication, MoveTo)
-    BASIC_REPLICATION_FIELD(speed);
-    BASIC_REPLICATION_FIELD(target);
+    // System fields: 5Hz with epsilon tolerance
+    SYSTEM_REPLICATION_FIELD_EPSILON(speed, 0.1f);
+    SYSTEM_REPLICATION_FIELD(target);
 }

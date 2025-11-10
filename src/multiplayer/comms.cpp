@@ -10,9 +10,12 @@ namespace sp::io {
 
 EMPTY_REPLICATION_IMPL(CommsReceiverReplication, CommsReceiver)
 BASIC_REPLICATION_IMPL(CommsTransmitterReplication, CommsTransmitter)
-    BASIC_REPLICATION_FIELD(state);
-    BASIC_REPLICATION_FIELD(open_delay);
-    BASIC_REPLICATION_FIELD(target_name);
+    // System fields: 5Hz
+    SYSTEM_REPLICATION_FIELD(state);
+    SYSTEM_REPLICATION_FIELD(target_name);
+
+    // Fast fields: 20Hz with epsilon tolerance
+    BASIC_REPLICATION_FIELD_EPSILON(open_delay, 0.01f);
     BASIC_REPLICATION_FIELD(incomming_message);
     REPLICATE_VECTOR_IF_DIRTY(script_replies, script_replies_dirty);
 }

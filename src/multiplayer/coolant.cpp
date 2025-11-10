@@ -3,7 +3,8 @@
 
 
 BASIC_REPLICATION_IMPL(CoolantReplication, Coolant)
-    BASIC_REPLICATION_FIELD(max);
-    BASIC_REPLICATION_FIELD(max_coolant_per_system);
-    BASIC_REPLICATION_FIELD(auto_levels);
+    // Config fields: 1Hz
+    CONFIG_REPLICATION_FIELD_EPSILON(max, 0.01f);
+    CONFIG_REPLICATION_FIELD_EPSILON(max_coolant_per_system, 0.01f);
+    CONFIG_REPLICATION_FIELD(auto_levels);
 }

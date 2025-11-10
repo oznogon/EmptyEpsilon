@@ -12,10 +12,14 @@ namespace sp::io {
 }
 
 BASIC_REPLICATION_IMPL(FactionInfoReplication, FactionInfo)
-    BASIC_REPLICATION_FIELD(gm_color);
-    BASIC_REPLICATION_FIELD(name);
-    BASIC_REPLICATION_FIELD(locale_name);
-    BASIC_REPLICATION_FIELD(description);
-    BASIC_REPLICATION_FIELD(reputation_points);
+    // Config fields: 1Hz
+    CONFIG_REPLICATION_FIELD(gm_color);
+    CONFIG_REPLICATION_FIELD(name);
+    CONFIG_REPLICATION_FIELD(locale_name);
+    CONFIG_REPLICATION_FIELD(description);
+
+    // System field: 5Hz with epsilon tolerance
+    SYSTEM_REPLICATION_FIELD_EPSILON(reputation_points, 0.5f);
+
     REPLICATE_VECTOR_IF_DIRTY(relations, relations_dirty);
 }

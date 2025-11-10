@@ -16,6 +16,7 @@ function PlayerSpaceship()
 
     e.components = {
         player_control = {},
+        multiplayer_significant = {range=20000},
         ship_log = {},
         custom_ship_functions = {},
         transform = {rotation=random(0, 360)},

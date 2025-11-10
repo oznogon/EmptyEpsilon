@@ -8,12 +8,16 @@ namespace sp::io {
 
 
 BASIC_REPLICATION_IMPL(PlayerControlReplication, PlayerControl)
-    BASIC_REPLICATION_FIELD(main_screen_setting);
-    BASIC_REPLICATION_FIELD(main_screen_overlay);
-    BASIC_REPLICATION_FIELD(alert_level);
+    // System fields: 5Hz
+    SYSTEM_REPLICATION_FIELD(main_screen_setting);
+    SYSTEM_REPLICATION_FIELD(main_screen_overlay);
+    SYSTEM_REPLICATION_FIELD(alert_level);
 
-    BASIC_REPLICATION_FIELD(control_code); //TODO: Instead of replicating this to clients, check it on receiving the commandSetShip in playerinfo
-    BASIC_REPLICATION_FIELD(allowed_positions.mask);
+    // Config fields: 1Hz
+    // TODO: Instead of replicating control_code to clients, check it upon
+    // receiving commandSetShip in playerinfo
+    CONFIG_REPLICATION_FIELD(control_code);
+    CONFIG_REPLICATION_FIELD(allowed_positions.mask);
 }
 
 BASIC_REPLICATION_IMPL(WaypointsReplication, Waypoints)

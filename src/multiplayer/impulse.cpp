@@ -3,27 +3,31 @@
 
 
 BASIC_REPLICATION_IMPL(ImpulseEngineReplication, ImpulseEngine)
-    BASIC_REPLICATION_FIELD(health);
-    BASIC_REPLICATION_FIELD(health_max);
-    BASIC_REPLICATION_FIELD(power_level);
-    BASIC_REPLICATION_FIELD(power_request);
-    BASIC_REPLICATION_FIELD(heat_level);
-    BASIC_REPLICATION_FIELD(coolant_level);
-    BASIC_REPLICATION_FIELD(coolant_request);
-    BASIC_REPLICATION_FIELD(can_be_hacked);
-    BASIC_REPLICATION_FIELD(hacked_level);
-    BASIC_REPLICATION_FIELD(power_factor);
-    BASIC_REPLICATION_FIELD(coolant_change_rate_per_second);
-    BASIC_REPLICATION_FIELD(heat_add_rate_per_second);
-    BASIC_REPLICATION_FIELD(power_change_rate_per_second);
-    BASIC_REPLICATION_FIELD(auto_repair_per_second);
-    BASIC_REPLICATION_FIELD(damage_per_second_on_overheat);
+    // Config fields: 1Hz with epsilon tolerance
+    CONFIG_REPLICATION_FIELD_EPSILON(health_max, 0.001f);
+    CONFIG_REPLICATION_FIELD(can_be_hacked);
+    CONFIG_REPLICATION_FIELD_EPSILON(power_factor, 0.001f);
+    CONFIG_REPLICATION_FIELD_EPSILON(coolant_change_rate_per_second, 0.001f);
+    CONFIG_REPLICATION_FIELD_EPSILON(heat_add_rate_per_second, 0.001f);
+    CONFIG_REPLICATION_FIELD_EPSILON(power_change_rate_per_second, 0.001f);
+    CONFIG_REPLICATION_FIELD_EPSILON(auto_repair_per_second, 0.001f);
+    CONFIG_REPLICATION_FIELD_EPSILON(damage_per_second_on_overheat, 0.001f);
+    CONFIG_REPLICATION_FIELD_EPSILON(max_speed_forward, 0.01f);
+    CONFIG_REPLICATION_FIELD_EPSILON(max_speed_reverse, 0.01f);
+    CONFIG_REPLICATION_FIELD_EPSILON(acceleration_forward, 0.01f);
+    CONFIG_REPLICATION_FIELD_EPSILON(acceleration_reverse, 0.01f);
+    CONFIG_REPLICATION_FIELD(sound);
 
-    BASIC_REPLICATION_FIELD(max_speed_forward);
-    BASIC_REPLICATION_FIELD(max_speed_reverse);
-    BASIC_REPLICATION_FIELD(acceleration_forward);
-    BASIC_REPLICATION_FIELD(acceleration_reverse);
-    BASIC_REPLICATION_FIELD(sound);
-    BASIC_REPLICATION_FIELD(request);
-    BASIC_REPLICATION_FIELD(actual);
+    // System fields: 5Hz with epsilon tolerance
+    SYSTEM_REPLICATION_FIELD_EPSILON(power_request, 0.001f);
+    SYSTEM_REPLICATION_FIELD_EPSILON(coolant_request, 0.001f);
+
+    // Fast fields: 20Hz with epsilon tolerance
+    BASIC_REPLICATION_FIELD_EPSILON(health, 0.001f);
+    BASIC_REPLICATION_FIELD_EPSILON(heat_level, 0.001f);
+    BASIC_REPLICATION_FIELD_EPSILON(power_level, 0.001f);
+    BASIC_REPLICATION_FIELD_EPSILON(coolant_level, 0.001f);
+    BASIC_REPLICATION_FIELD_EPSILON(hacked_level, 0.001f);
+    BASIC_REPLICATION_FIELD_EPSILON(request, 0.001f);
+    BASIC_REPLICATION_FIELD_EPSILON(actual, 0.01f);
 }
