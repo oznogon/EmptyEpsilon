@@ -9,8 +9,7 @@
 void AISystem::update(float delta)
 {
     if (delta <= 0.0f) return;
-    if (!game_server)
-        return;
+    if (!game_server) return;
 
     for(auto [entity, ai] : sp::ecs::Query<AIController>()) {
         if (ai.new_name.length() && (!ai.ai || ai.ai->canSwitchAI()))

@@ -25,14 +25,16 @@ MissileSystem::MissileSystem()
 
 void MissileSystem::update(float delta)
 {
-    for(auto [entity, tubes] : sp::ecs::Query<MissileTubes>())
+    if (!game_server) return;
+
+    for (auto [entity, tubes] : sp::ecs::Query<MissileTubes>())
     {
-        for(auto& tube : tubes.mounts)
+        for (auto& tube : tubes.mounts)
         {
             if (tube.delay > 0.0f)
-            {
                 tube.delay -= delta * tubes.getSystemEffectiveness();
-            }else{
+            else
+            {
                 switch(tube.state)
                 {
                 case MissileTubes::MountPoint::State::Loading:
@@ -45,20 +47,14 @@ void MissileSystem::update(float delta)
                     tube.type_loaded = MW_None;
                     break;
                 case MissileTubes::MountPoint::State::Firing:
-                    if (game_server)
-                    {
-                        spawnProjectile(entity, tube, 0, {});
+                    spawnProjectile(entity, tube, 0, {});
 
-                        tube.fire_count -= 1;
-                        if (tube.fire_count > 0)
-                        {
-                            tube.delay = 1.5;
-                        }
-                        else
-                        {
-                            tube.state = MissileTubes::MountPoint::State::Empty;
-                            tube.type_loaded = MW_None;
-                        }
+                    tube.fire_count -= 1;
+                    if (tube.fire_count > 0) tube.delay = 1.5f;
+                    else
+                    {
+                        tube.state = MissileTubes::MountPoint::State::Empty;
+                        tube.type_loaded = MW_None;
                     }
                     break;
                 default:
@@ -68,21 +64,27 @@ void MissileSystem::update(float delta)
         }
     }
 
-    for(auto [entity, flight, transform, physics] : sp::ecs::Query<MissileFlight, sp::Transform, sp::Physics>()) {
+    for (auto [entity, flight, transform, physics] : sp::ecs::Query<MissileFlight, sp::Transform, sp::Physics>())
+    {
         physics.setVelocity(vec2FromAngle(transform.getRotation()) * flight.speed);
-        if (flight.timeout > 0.0f) {
+        if (flight.timeout > 0.0f)
+        {
             flight.timeout -= delta;
-            if (flight.timeout <= 0.0f && game_server) {
+
+            if (flight.timeout <= 0.0f)
+            {
                 entity.removeComponent<MissileFlight>();
                 physics.setVelocity({0.0f, 0.0f});
             }
         }
     }
 
-    for(auto [entity, homing, transform, physics] : sp::ecs::Query<MissileHoming, sp::Transform, sp::Physics>()) {
-        if (auto tt = homing.target.getComponent<sp::Transform>()) {
+    for (auto [entity, homing, transform, physics] : sp::ecs::Query<MissileHoming, sp::Transform, sp::Physics>())
+    {
+        if (auto tt = homing.target.getComponent<sp::Transform>())
+        {
             float r = homing.range + 10.0f;
-            if (glm::length2(tt->getPosition() - transform.getPosition()) < r*r)
+            if (glm::length2(tt->getPosition() - transform.getPosition()) < r * r)
                 homing.target_angle = vec2ToAngle(tt->getPosition() - transform.getPosition());
         }
         float angle_diff = angleDifference(transform.getRotation(), homing.target_angle);
@@ -96,38 +98,39 @@ void MissileSystem::update(float delta)
     }
 
     // TODO: Not really part of missile
-    for(auto [entity, emitter, transform] : sp::ecs::Query<ConstantParticleEmitter, sp::Transform>()) {
+    for (auto [entity, emitter, transform] : sp::ecs::Query<ConstantParticleEmitter, sp::Transform>())
+    {
         emitter.delay -= delta;
-        if (emitter.delay <= 0.0f) {
+        if (emitter.delay <= 0.0f)
+        {
             emitter.delay = emitter.interval;
             auto pos = glm::vec3(transform.getPosition().x, transform.getPosition().y, 0);
             ParticleEngine::spawn(pos, pos + glm::vec3(random(-emitter.travel_random_range, emitter.travel_random_range), random(-emitter.travel_random_range, emitter.travel_random_range), random(-emitter.travel_random_range, emitter.travel_random_range)), emitter.start_color, emitter.end_color, emitter.start_size, emitter.end_size, emitter.life_time);
         }
     }
 
-    if (game_server) {
-        for(auto [entity, deot, transform] : sp::ecs::Query<DelayedExplodeOnTouch, sp::Transform>()) {
-            if (deot.trigger_holdoff_delay > 0.0f) deot.trigger_holdoff_delay -= delta;
-            if (!deot.triggered) continue;
-            deot.delay -= delta;
-            if (deot.delay >= 0.0f) continue;
+    for(auto [entity, deot, transform] : sp::ecs::Query<DelayedExplodeOnTouch, sp::Transform>())
+    {
+        if (deot.trigger_holdoff_delay > 0.0f) deot.trigger_holdoff_delay -= delta;
+        if (!deot.triggered) continue;
+        deot.delay -= delta;
+        if (deot.delay >= 0.0f) continue;
 
-            explode(entity, {}, deot);
-        }
+        explode(entity, {}, deot);
     }
 
-    if (game_server) {
-        // TODO: Not really part of missile
-        for(auto [entity, lifetime] : sp::ecs::Query<LifeTime>()) {
-            lifetime.lifetime -= delta;
-            if (lifetime.lifetime <= 0.0f) {
-                if (entity.hasComponent<ExplodeOnTimeout>()) {
-                    if (auto eot = entity.getComponent<ExplodeOnTouch>()) {
-                        explode(entity, {}, *eot);
-                    }
-                }
-                entity.destroy();
+    // TODO: Not really part of missile
+    for(auto [entity, lifetime] : sp::ecs::Query<LifeTime>())
+    {
+        lifetime.lifetime -= delta;
+        if (lifetime.lifetime <= 0.0f)
+        {
+            if (entity.hasComponent<ExplodeOnTimeout>())
+            {
+                if (auto eot = entity.getComponent<ExplodeOnTouch>())
+                    explode(entity, {}, *eot);
             }
+            entity.destroy();
         }
     }
 }

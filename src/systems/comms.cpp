@@ -16,43 +16,43 @@ static sp::ecs::Entity script_active_entity;
 
 void CommsSystem::update(float delta)
 {
-    for(auto [entity, comms] : sp::ecs::Query<CommsTransmitter>()) {
-        if (comms.open_delay > 0.0f)
-            comms.open_delay -= delta;
-        if (game_server) {
-            if (comms.state == CommsTransmitter::State::OpeningChannel && comms.open_delay <= 0.0f) {
-                if (!comms.target) {
-                    comms.state = CommsTransmitter::State::ChannelBroken;
-                }else{
-                    comms.script_replies.clear();
-                    comms.script_replies_dirty = true;
-                    if (auto other_transmitter = comms.target.getComponent<CommsTransmitter>())
-                    {
-                        comms.open_delay = channel_open_time;
+    for (auto [entity, comms] : sp::ecs::Query<CommsTransmitter>())
+    {
+        if (comms.open_delay > 0.0f) comms.open_delay -= delta;
+        if (!game_server) return;
 
-                        if (other_transmitter->state == CommsTransmitter::State::Inactive || other_transmitter->state == CommsTransmitter::State::ChannelFailed || other_transmitter->state == CommsTransmitter::State::ChannelBroken || other_transmitter->state == CommsTransmitter::State::ChannelClosed)
-                        {
-                            other_transmitter->state = CommsTransmitter::State::BeingHailed;
-                            other_transmitter->target = entity;
-                            if (auto callsign = entity.getComponent<CallSign>())
-                                other_transmitter->target_name = callsign->callsign;
-                            else
-                                other_transmitter->target_name = "?";
-                        }
-                    }else if (gameGlobalInfo->intercept_all_comms_to_gm) {
-                        comms.state = CommsTransmitter::State::ChannelOpenGM;
-                    }else if (openChannel(entity, comms.target)) {
-                        comms.state = CommsTransmitter::State::ChannelOpen;
-                    } else {
-                        comms.state = CommsTransmitter::State::ChannelFailed;
+        if (comms.state == CommsTransmitter::State::OpeningChannel && comms.open_delay <= 0.0f) {
+            if (!comms.target) {
+                comms.state = CommsTransmitter::State::ChannelBroken;
+            }else{
+                comms.script_replies.clear();
+                comms.script_replies_dirty = true;
+                if (auto other_transmitter = comms.target.getComponent<CommsTransmitter>())
+                {
+                    comms.open_delay = channel_open_time;
+
+                    if (other_transmitter->state == CommsTransmitter::State::Inactive || other_transmitter->state == CommsTransmitter::State::ChannelFailed || other_transmitter->state == CommsTransmitter::State::ChannelBroken || other_transmitter->state == CommsTransmitter::State::ChannelClosed)
+                    {
+                        other_transmitter->state = CommsTransmitter::State::BeingHailed;
+                        other_transmitter->target = entity;
+                        if (auto callsign = entity.getComponent<CallSign>())
+                            other_transmitter->target_name = callsign->callsign;
+                        else
+                            other_transmitter->target_name = "?";
                     }
+                }else if (gameGlobalInfo->intercept_all_comms_to_gm) {
+                    comms.state = CommsTransmitter::State::ChannelOpenGM;
+                }else if (openChannel(entity, comms.target)) {
+                    comms.state = CommsTransmitter::State::ChannelOpen;
+                } else {
+                    comms.state = CommsTransmitter::State::ChannelFailed;
                 }
             }
-            if (comms.state == CommsTransmitter::State::ChannelOpen || comms.state == CommsTransmitter::State::ChannelOpenPlayer)
-            {
-                if (!comms.target)
-                    comms.state = CommsTransmitter::State::ChannelBroken;
-            }
+        }
+        if (comms.state == CommsTransmitter::State::ChannelOpen || comms.state == CommsTransmitter::State::ChannelOpenPlayer)
+        {
+            if (!comms.target)
+                comms.state = CommsTransmitter::State::ChannelBroken;
         }
     }
 }

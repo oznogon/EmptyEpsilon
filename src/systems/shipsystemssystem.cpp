@@ -1,4 +1,5 @@
 #include "shipsystemssystem.h"
+#include "multiplayer_server.h"
 #include "components/reactor.h"
 #include "components/beamweapon.h"
 #include "components/missiletubes.h"
@@ -12,21 +13,24 @@
 
 void ShipSystemsSystem::update(float delta)
 {
-    for(auto [entity, system] : sp::ecs::Query<Reactor>())
+    if (!game_server) return;
+
+    for (auto [entity, system] : sp::ecs::Query<Reactor>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
-    for(auto [entity, system] : sp::ecs::Query<BeamWeaponSys>())
+    for (auto [entity, system] : sp::ecs::Query<BeamWeaponSys>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
-    for(auto [entity, system] : sp::ecs::Query<MissileTubes>())
+    for (auto [entity, system] : sp::ecs::Query<MissileTubes>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
-    for(auto [entity, system] : sp::ecs::Query<ManeuveringThrusters>())
+    for (auto [entity, system] : sp::ecs::Query<ManeuveringThrusters>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
-    for(auto [entity, system] : sp::ecs::Query<ImpulseEngine>())
+    for (auto [entity, system] : sp::ecs::Query<ImpulseEngine>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
-    for(auto [entity, system] : sp::ecs::Query<WarpDrive>())
+    for (auto [entity, system] : sp::ecs::Query<WarpDrive>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
-    for(auto [entity, system] : sp::ecs::Query<JumpDrive>())
+    for (auto [entity, system] : sp::ecs::Query<JumpDrive>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
-    for(auto [entity, system] : sp::ecs::Query<Shields>()) {
+    for (auto [entity, system] : sp::ecs::Query<Shields>())
+    {
         updateSystem(system.front_system, delta, entity.hasComponent<Coolant>());
         if (system.entries.size() > 1)
             updateSystem(system.rear_system, delta, entity.hasComponent<Coolant>());

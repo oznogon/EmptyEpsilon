@@ -11,6 +11,8 @@
 
 void EnergySystem::update(float delta)
 {
+    if (!game_server) return;
+
     for(auto[entity, reactor] : sp::ecs::Query<Reactor>()) {
         // Consume power based on subsystem requests and state.
         float net_power = 0.0;
@@ -39,26 +41,29 @@ void EnergySystem::update(float delta)
         // Cap energy at the max_energy_level.
         reactor.energy = std::clamp(reactor.energy, 0.0f, reactor.max_energy);
 
-        if (reactor.energy < 10) {
+        if (reactor.energy < 10.0f)
+        {
             // Depower all systems except the reactor once energy level drops below 10.
-            for(int n=0; n<ShipSystem::COUNT; n++) {
+            for (int n=0; n<ShipSystem::COUNT; n++)
+            {
                 auto type = ShipSystem::Type(n);
-                if (type != ShipSystem::Type::Reactor) {
-                    auto system = ShipSystem::get(entity, type);
-                    if (system)
-                        system->power_request = 0;
+                if (type != ShipSystem::Type::Reactor)
+                {
+                    if (auto system = ShipSystem::get(entity, type))
+                        system->power_request = 0.0f;
                 }
             }
         }
 
         // If reactor health is worse than -90% and overheating, it explodes,
         // destroying the ship and damaging a 0.5U radius.
-        if (reactor.health < -0.9f && reactor.heat_level == 1.0f && reactor.overload_explode && game_server)
+        if (reactor.health < -0.9f && reactor.heat_level == 1.0f && reactor.overload_explode)
         {
             auto hull = entity.getComponent<Hull>();
-            if (hull && hull->allow_destruction) {
-                auto transform = entity.getComponent<sp::Transform>();
-                if (transform) {
+            if (hull && hull->allow_destruction)
+            {
+                if (auto transform = entity.getComponent<sp::Transform>())
+                {
                     auto e = sp::ecs::Entity::create();
                     e.addComponent<ExplosionEffect>().size = 1000.0;
                     e.addComponent<sp::Transform>(*transform);

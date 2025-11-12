@@ -1,4 +1,5 @@
 #include "systems/pathfinding.h"
+#include "multiplayer_server.h"
 #include "components/avoidobject.h"
 #include "components/collision.h"
 #include "ecs/query.h"
@@ -24,6 +25,7 @@ PathFindingSystem::PathFindingSystem()
 
 void PathFindingSystem::update(float delta)
 {
+    if (!game_server) return;
     // Remove any entities that where destroyed.
     big_entities.erase(std::remove_if(big_entities.begin(), big_entities.end(), [](sp::ecs::Entity e) { return !bool(e); } ), big_entities.end());
     for(auto it : small_entities)

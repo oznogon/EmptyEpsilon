@@ -1,4 +1,5 @@
 #include "systems/jumpsystem.h"
+#include "multiplayer_server.h"
 #include "components/docking.h"
 #include "components/collision.h"
 #include "components/impulse.h"
@@ -13,6 +14,8 @@
 
 void JumpSystem::update(float delta)
 {
+    if (!game_server) return;
+
     for(auto [entity, jump, position, physics] : sp::ecs::Query<JumpDrive, sp::Transform, sp::Physics>())
     {
         if (jump.delay > 0.0f)

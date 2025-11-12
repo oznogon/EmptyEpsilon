@@ -8,7 +8,8 @@
 class ShipSystemsSystem : public sp::ecs::System
 {
 public:
-    constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
+    // Seconds required for a system to recover from 100% hacked to 0%.
+    constexpr static float unhack_time = 180.0f;
 
     void update(float delta) override;
 private:

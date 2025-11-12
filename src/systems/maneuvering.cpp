@@ -1,4 +1,5 @@
 #include "systems/maneuvering.h"
+#include "multiplayer_server.h"
 #include "components/collision.h"
 #include "components/maneuveringthrusters.h"
 #include "components/impulse.h"
@@ -9,6 +10,7 @@
 
 void ManeuveringSystem::update(float delta)
 {
+    if (!game_server) return;
     if (delta <= 0.0f) return;
 
     for(auto [entity, thrusters, transform, physics] : sp::ecs::Query<ManeuveringThrusters, sp::Transform, sp::Physics>()) {

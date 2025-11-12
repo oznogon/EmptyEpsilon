@@ -16,6 +16,7 @@ void GravitySystem::update(float delta)
     static constexpr float max_force = 10000.0f;
     static constexpr float wormhole_target_spread = 500.0f;
     if (delta <= 0.0f) return;
+    if (!game_server) return;
 
     for(auto [source, grav, source_transform] : sp::ecs::Query<Gravity, sp::Transform>()) {
         for(auto target : sp::CollisionSystem::queryArea(source_transform.getPosition() - glm::vec2(grav.range, grav.range), source_transform.getPosition() + glm::vec2(grav.range, grav.range))) {
@@ -39,21 +40,20 @@ void GravitySystem::update(float delta)
 
                 if (force >= max_force)
                 {
-                    if (game_server) {
-                        tt->setPosition( (grav.wormhole_target + glm::vec2(random(-wormhole_target_spread, wormhole_target_spread), random(-wormhole_target_spread, wormhole_target_spread))));
-                        if (grav.on_teleportation)
-                        {
-                            LuaConsole::checkResult(grav.on_teleportation.call<void>(source, target));
-                            continue; //callback could destroy the entity, so do no extra processing.
-                        }
-                        //if (spaceship)
-                        //    spaceship->wormhole_alpha = 0.0;
+                    tt->setPosition( (grav.wormhole_target + glm::vec2(random(-wormhole_target_spread, wormhole_target_spread), random(-wormhole_target_spread, wormhole_target_spread))));
+                    if (grav.on_teleportation)
+                    {
+                        LuaConsole::checkResult(grav.on_teleportation.call<void>(source, target));
+                        continue; //callback could destroy the entity, so do no extra processing.
                     }
+                    //if (spaceship)
+                    //    spaceship->wormhole_alpha = 0.0;
                 }
             }
 
             // Damage at center
-            if (grav.damage && game_server) {
+            if (grav.damage)
+            {
                 DamageInfo info({}, DamageType::Kinetic, source_transform.getPosition());
                 if (force >= max_force)
                 {

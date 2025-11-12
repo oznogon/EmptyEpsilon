@@ -1,11 +1,13 @@
 #include "coolantsystem.h"
+#include "multiplayer_server.h"
 #include "ecs/query.h"
 #include "components/coolant.h"
 #include "components/shipsystem.h"
 
-
 void CoolantSystem::update(float delta)
 {
+    if (!game_server) return;
+
     for(auto[entity, coolant] : sp::ecs::Query<Coolant>()) {
         // Automate cooling if auto_coolant_enabled is true. Distributes coolant to
         // subsystems proportionally to their share of the total generated heat.

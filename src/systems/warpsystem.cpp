@@ -1,4 +1,5 @@
 #include "systems/warpsystem.h"
+#include "multiplayer_server.h"
 #include "components/docking.h"
 #include "components/collision.h"
 #include "components/impulse.h"
@@ -13,7 +14,9 @@
 
 void WarpSystem::update(float delta)
 {
-    for(auto [entity, warp, impulse, position, physics] : sp::ecs::Query<WarpDrive, sp::ecs::optional<ImpulseEngine>, sp::Transform, sp::Physics>())
+    if (!game_server) return;
+
+    for (auto [entity, warp, impulse, position, physics] : sp::ecs::Query<WarpDrive, sp::ecs::optional<ImpulseEngine>, sp::Transform, sp::Physics>())
     {
         // Cap warp request to max factor.
         warp.request = std::min(warp.request, warp.max_level);

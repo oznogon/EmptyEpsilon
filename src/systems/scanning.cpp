@@ -8,19 +8,24 @@
 
 void ScanningSystem::update(float delta)
 {
-    for(auto [entity, scanner] : sp::ecs::Query<ScienceScanner>()) {
-        if (auto ss = scanner.target.getComponent<ScanState>()) {
+    if (!game_server) return;
+
+    for (auto [entity, scanner] : sp::ecs::Query<ScienceScanner>())
+    {
+        if (auto ss = scanner.target.getComponent<ScanState>())
+        {
             // If the scan setting or a target's scan complexity is none/0,
             // complete the scan after a delay.
             if (ss->complexity == 0 || (ss->complexity < 0 && gameGlobalInfo->scanning_complexity == SC_None))
             {
                 scanner.delay -= delta;
-                if (scanner.delay < 0 && game_server)
-                    scanningFinished(entity);
+                if (scanner.delay < 0.0f) scanningFinished(entity);
             }
-        }else{
+        }
+        else
+        {
             // Otherwise, ignore the scanning_delay setting.
-            scanner.delay = 0.0;
+            scanner.delay = 0.0f;
         }
     }
 }

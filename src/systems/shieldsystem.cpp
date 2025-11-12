@@ -1,5 +1,6 @@
 #include "systems/shieldsystem.h"
 
+#include "multiplayer_server.h"
 #include "components/shields.h"
 #include "components/docking.h"
 #include "components/reactor.h"
@@ -18,6 +19,8 @@
 
 void ShieldSystem::update(float delta)
 {
+    if (!game_server) return;
+
     for(auto [entity, shields, reactor] : sp::ecs::Query<Shields, sp::ecs::optional<Reactor>>())
     {
         // If shields are calibrating, tick the calibration delay. Factor shield
@@ -55,7 +58,6 @@ void ShieldSystem::update(float delta)
                 shield.hit_effect -= delta;
             n++;
         }
-
     }
 }
 
