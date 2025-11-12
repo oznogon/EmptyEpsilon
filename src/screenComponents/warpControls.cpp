@@ -26,14 +26,6 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
     slider->addSnapValue(0.0, 0.5);
     slider->addSnapValue(1.0, 0.5);
 
-    if (my_spaceship)
-    {
-        auto warp = my_spaceship.getComponent<WarpDrive>();
-        // Set the slider's value to the current warp request.
-        if (warp)
-            slider->setValue(warp->request);
-    }
-
     // Label the warp slider.
     label = new GuiKeyValueDisplay(this, id + "_LABEL", 0.5, tr("slider", "Warp"), "0.0");
     label->setTextSize(30)->setPosition(50, 0, sp::Alignment::TopLeft)->setSize(40, GuiElement::GuiSizeMax);
@@ -45,15 +37,20 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
 void GuiWarpControls::onDraw(sp::RenderTarget& target)
 {
     // Update the label with the current warp factor.
-    if (my_spaceship) {
-        auto warp = my_spaceship.getComponent<WarpDrive>();
-        if (warp) {
+    if (my_spaceship)
+    {
+        if (auto warp = my_spaceship.getComponent<WarpDrive>())
+        {
             label->setValue(string(warp->current, 1));
-            slider->setValue(warp->request);
-            if (slider->getRangeMin() != warp->max_level) {
-                slider->setRange(warp->max_level, 0);
-                for(int n=0; n<=warp->max_level; n++)
-                    slider->addSnapValue(n, 0.5);
+
+            if (!slider->isBeingDragged())
+                slider->setValue(warp->request);
+
+            if (slider->getRangeMin() != warp->max_level)
+            {
+                slider->setRange(warp->max_level, 0.0f);
+                for (int n = 0; n <= warp->max_level; n++)
+                    slider->addSnapValue(n, 0.5f);
             }
         }
     }

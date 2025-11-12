@@ -1,5 +1,4 @@
-#ifndef BEAM_TARGET_SELECTOR_H
-#define BEAM_TARGET_SELECTOR_H
+#pragma once
 
 #include "gui/gui2_selector.h"
 
@@ -10,5 +9,3 @@ public:
 
     virtual void onUpdate() override;
 };
-
-#endif//BEAM_TARGET_SELECTOR_H

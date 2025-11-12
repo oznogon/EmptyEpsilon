@@ -8,16 +8,10 @@
 GuiBeamTargetSelector::GuiBeamTargetSelector(GuiContainer* owner, string id)
 : GuiSelector(owner, id, [](int index, string value) { if (my_spaceship) my_player_info->commandSetBeamSystemTarget(ShipSystem::Type(index + int(ShipSystem::Type::None))); })
 {
-    addEntry(tr("target","Hull"), "-1");
-    for(int n=0; n<ShipSystem::COUNT; n++)
+    setVisible(gameGlobalInfo->use_system_damage);
+    addEntry(tr("target", "Hull"), "-1");
+    for (int n = 0; n < ShipSystem::COUNT; n++)
         addEntry(getLocaleSystemName(ShipSystem::Type(n)), string(n));
-    if (my_spaceship) {
-        auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>();
-        if (beamweapons)
-            setSelectionIndex(int(beamweapons->system_target) - int(ShipSystem::Type::None));
-    }
-    if (!gameGlobalInfo->use_system_damage)
-        hide();
 }
 
 void GuiBeamTargetSelector::onUpdate()
@@ -32,6 +26,7 @@ void GuiBeamTargetSelector::onUpdate()
                 setSelectionIndex(getSelectionIndex() + 1);
             callback();
         }
+
         if (keys.weapons_beam_subsystem_target_previous.getDown())
         {
             if (getSelectionIndex() <= 0)
@@ -39,5 +34,8 @@ void GuiBeamTargetSelector::onUpdate()
             else
                 setSelectionIndex(getSelectionIndex() - 1);
         }
+
+        if (auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>())
+            setSelectionIndex(static_cast<int>(beamweapons->system_target) - static_cast<int>(ShipSystem::Type::None));
     }
 }

@@ -7,15 +7,10 @@
 GuiBeamFrequencySelector::GuiBeamFrequencySelector(GuiContainer* owner, string id)
 : GuiSelector(owner, id, [](int index, string value) { if (my_spaceship) my_player_info->commandSetBeamFrequency(index); })
 {
-    for(int n=0; n<=BeamWeaponSys::max_frequency; n++)
+    for (int n = 0; n <= BeamWeaponSys::max_frequency; n++)
         addEntry(frequencyToString(n), frequencyToString(n));
-    if (my_spaceship) {
-        auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>();
-        if (beamweapons)
-            setSelectionIndex(beamweapons->frequency);
-    }
-    if (!gameGlobalInfo->use_beam_shield_frequencies)
-        hide();
+
+    setVisible(gameGlobalInfo->use_beam_shield_frequencies);
 }
 
 void GuiBeamFrequencySelector::onUpdate()
@@ -30,12 +25,19 @@ void GuiBeamFrequencySelector::onUpdate()
                 setSelectionIndex(getSelectionIndex() + 1);
             callback();
         }
+
         if (keys.weapons_beam_frequence_decrease.getDown())
         {
             if (getSelectionIndex() <= 0)
                 setSelectionIndex(entries.size() - 1);
             else
                 setSelectionIndex(getSelectionIndex() - 1);
+        }
+
+        if (my_spaceship)
+        {
+            if (auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>())
+                setSelectionIndex(beamweapons->frequency);
         }
     }
 }
