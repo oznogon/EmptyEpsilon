@@ -6,7 +6,7 @@
 
 
 GuiBasicSlider::GuiBasicSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
-: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
+: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func), is_being_dragged(false)
 {
     front_style = theme->getStyle("slider.front");
     back_style = theme->getStyle("slider.back");
@@ -35,6 +35,7 @@ void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
 
 bool GuiBasicSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
+    is_being_dragged = true;
     onMouseDrag(position, id);
     return true;
 }
@@ -72,6 +73,7 @@ void GuiBasicSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiBasicSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    is_being_dragged = false;
 }
 
 GuiBasicSlider* GuiBasicSlider::setValue(float value)
@@ -156,8 +158,7 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
 
 bool GuiSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    onMouseDrag(position, id);
-    return true;
+    return GuiBasicSlider::onMouseDown(button, position, id);
 }
 
 void GuiSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
@@ -198,6 +199,7 @@ void GuiSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    return GuiBasicSlider::onMouseUp(position, id);
 }
 
 GuiSlider* GuiSlider::clearSnapValues()
@@ -227,7 +229,7 @@ GuiSlider* GuiSlider::addOverlay(unsigned int precision, float font_size)
 
 
 GuiSlider2D::GuiSlider2D(GuiContainer* owner, string id, glm::vec2 min_value, glm::vec2 max_value, glm::vec2 start_value, func_t func)
-: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
+: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func), is_being_dragged(false)
 {
     front_style = theme->getStyle("slider.front");
     back_style = theme->getStyle("slider.back");
@@ -248,6 +250,7 @@ void GuiSlider2D::onDraw(sp::RenderTarget& renderer)
 
 bool GuiSlider2D::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
+    is_being_dragged = true;
     onMouseDrag(position, id);
     return true;
 }
@@ -298,6 +301,7 @@ void GuiSlider2D::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiSlider2D::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    is_being_dragged = false;
 }
 
 GuiSlider2D* GuiSlider2D::clearSnapValues()

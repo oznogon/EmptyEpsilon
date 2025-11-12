@@ -1,5 +1,4 @@
-#ifndef GUI2_SLIDER_H
-#define GUI2_SLIDER_H
+#pragma once
 
 #include "gui2_element.h"
 #include "gui2_label.h"
@@ -14,6 +13,7 @@ protected:
     float max_value;
     float value;
     func_t func;
+    bool is_being_dragged;
 
     const GuiThemeStyle* front_style;
     const GuiThemeStyle* back_style;
@@ -30,6 +30,7 @@ public:
     float getValue() const;
     float getRangeMin() const { return min_value; }
     float getRangeMax() const { return max_value; }
+    bool isBeingDragged() const { return is_being_dragged; }
 };
 
 class GuiSlider : public GuiBasicSlider
@@ -76,6 +77,7 @@ protected:
     glm::vec2 value;
     std::vector<TSnapPoint> snap_points;
     func_t func;
+    bool is_being_dragged;
 
     const GuiThemeStyle* front_style;
     const GuiThemeStyle* back_style;
@@ -91,6 +93,5 @@ public:
     GuiSlider2D* addSnapValue(glm::vec2 value, glm::vec2 range);
     GuiSlider2D* setValue(glm::vec2 value);
     glm::vec2 getValue();
+    bool isBeingDragged() const { return is_being_dragged; }
 };
-
-#endif//GUI2_SLIDER_H

@@ -1,5 +1,4 @@
-#ifndef GUI2_PROGRESSSLIDER_H
-#define GUI2_PROGRESSSLIDER_H
+#pragma once
 
 #include "gui2_element.h"
 #include "gui2_progressbar.h"
@@ -15,8 +14,9 @@ public:
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 
+    bool isBeingDragged() const { return is_being_dragged; }
+
 private:
     func_t callback;
+    bool is_being_dragged;
 };
-
-#endif//GUI2_PROGRESSSLIDER_H

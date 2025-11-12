@@ -3,12 +3,13 @@
 
 
 GuiProgressSlider::GuiProgressSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
-: GuiProgressbar(owner, id, min_value, max_value, start_value), callback(func)
+: GuiProgressbar(owner, id, min_value, max_value, start_value), callback(func), is_being_dragged(false)
 {
 }
 
 bool GuiProgressSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
+    is_being_dragged = true;
     onMouseDrag(position, id);
     return true;
 }
@@ -46,4 +47,5 @@ void GuiProgressSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiProgressSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    is_being_dragged = false;
 }

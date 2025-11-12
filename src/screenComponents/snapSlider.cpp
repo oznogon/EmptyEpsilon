@@ -7,11 +7,11 @@ GuiSnapSlider::GuiSnapSlider(GuiContainer* owner, string id, float min_value, fl
 
 void GuiSnapSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    GuiSlider::onMouseUp(position, id);
     if (value != snap_value)
     {
         value = snap_value;
-        if (func)
-            func(value);
+        if (func) func(value);
     }
 }
 
@@ -22,10 +22,10 @@ GuiSnapSlider2D::GuiSnapSlider2D(GuiContainer* owner, string id, glm::vec2 min_v
 
 void GuiSnapSlider2D::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    GuiSlider2D::onMouseUp(position, id);
     if (value != snap_value)
     {
         value = snap_value;
-        if (func)
-            func(value);
+        if (func) func(value);
     }
 }

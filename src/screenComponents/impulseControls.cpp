@@ -25,10 +25,11 @@ void GuiImpulseControls::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        auto engine = my_spaceship.getComponent<ImpulseEngine>();
-        if (engine) {
+        if (auto engine = my_spaceship.getComponent<ImpulseEngine>())
+        {
             label->setValue(string(int(std::round(engine->actual * 100.0f))) + "%");
-            slider->setValue(engine->request);
+            if (!slider->isBeingDragged())
+                slider->setValue(engine->request);
         }
     }
 }
