@@ -21,7 +21,9 @@
 #include "screens/cinematicViewScreen.h"
 #include "screens/spectatorScreen.h"
 #include "screens/gm/gameMasterScreen.h"
+#include "components/collision.h"
 #include "components/database.h"
+#include "components/radar.h"
 #include "menus/luaConsole.h"
 #include "menus/optionsMenu.h"
 
@@ -455,6 +457,14 @@ ShipSelectionScreen::ShipSelectionScreen()
                     if (res.isOk())
                     {
                         //TODO: Apply some player properties like faction/position.
+                        if (auto entity = res.value())
+                        {
+                            auto sig = entity.getOrAddComponent<sp::MultiplayerSignificant>();
+                            if (auto radar = entity.getComponent<LongRangeRadar>())
+                                sig.range = radar->long_range;
+                            else
+                                sig.range = 30000.0f;
+                        }
                     }
                 }
             });

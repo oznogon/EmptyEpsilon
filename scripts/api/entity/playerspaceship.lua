@@ -16,7 +16,7 @@ function PlayerSpaceship()
 
     e.components = {
         player_control = {},
-        multiplayer_significant = {range=20000},
+        multiplayer_significant = {range=30000},
         ship_log = {},
         custom_ship_functions = {},
         transform = {rotation=random(0, 360)},
@@ -711,11 +711,13 @@ function Entity:getShortRangeRadarRange()
     if self.components.long_range_radar then return self.components.long_range_radar.short_range end
     return 5000
 end
---- Sets this PlayerSpaceship's long-range radar range.
+--- Sets this entity's long-range radar range.
 --- PlayerSpaceships use this range on the science and operations screens' radar.
+--- CpuShips use this range for detection, pursuit, and roaming.
 --- Example: player:setLongRangeRadarRange(30000) -- sets the ship's long-range radar range to 30U
 function Entity:setLongRangeRadarRange(range)
     if self.components.long_range_radar then self.components.long_range_radar.long_range = range end
+    if self.components.multiplayer_significant then self.components.multiplayer_significant.range = range end
     return self
 end
 --- Sets this PlayerSpaceship's short-range radar range.
