@@ -1,5 +1,4 @@
-#ifndef GUI2_PROGRESSBAR_H
-#define GUI2_PROGRESSBAR_H
+#pragma once
 
 #include "gui2_element.h"
 
@@ -22,11 +21,10 @@ public:
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
 
+    float getValue() const { return value; }
     GuiProgressbar* setValue(float value);
     GuiProgressbar* setRange(float min_value, float max_value);
     GuiProgressbar* setText(string text);
     GuiProgressbar* setColor(glm::u8vec4 color);
     GuiProgressbar* setDrawBackground(bool drawBackground);
 };
-
-#endif//GUI2_PROGRESSBAR_H
