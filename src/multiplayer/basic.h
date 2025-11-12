@@ -126,10 +126,7 @@ enum class BasicReplicationRequest {
         } \
     } break; \
     case BasicReplicationRequest::Receive: { \
-        if (flags & flag) { \
-            float old_val = target.FIELD; \
-            packet >> target.FIELD; \
-        } \
+        if (flags & flag) packet >> target.FIELD; \
     } break; \
     } \
     flag <<= 1;
