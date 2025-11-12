@@ -222,7 +222,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 info.heat_arrow->setAngle(90);
             else
                 info.heat_arrow->setAngle(-90);
-            info.heat_arrow->setVisible(heat > 0);
+            info.heat_arrow->setVisible(heat > 0.01f);
             info.heat_arrow->setColor(glm::u8vec4(255, 255, 255, std::min(255, int(255.0f * fabs(heating_diff)))));
             if (heat > 0.9f && fmod(engine->getElapsedTime(), 0.5f) < 0.25f)
                 info.heat_icon->show();
@@ -250,16 +250,18 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
 
         if (selected_system != ShipSystem::Type::None)
         {
-            auto system = ShipSystem::get(my_spaceship, selected_system);
-            if (system) {
+            if (auto system = ShipSystem::get(my_spaceship, selected_system))
+            {
                 power_label->setText(tr("slider", "Power: {current_level}% / {requested}%").format({{"current_level", toNearbyIntString(system->power_level * 100)}, {"requested", toNearbyIntString(system->power_request * 100)}}));
-                power_slider->setValue(system->power_request);
+                if (!power_slider->isBeingDragged())
+                    power_slider->setValue(system->power_request);
                 coolant_label->setVisible(coolant);
                 coolant_slider->setVisible(coolant);
                 if (coolant) {
                     coolant_label->setText(tr("slider", "Coolant: {current_level}% / {requested}%").format({{"current_level", toNearbyIntString(system->coolant_level / coolant->max_coolant_per_system * 100.0f)}, {"requested", toNearbyIntString(std::min(system->coolant_request, coolant->max) / coolant->max_coolant_per_system * 100)}}));
                     coolant_slider->setEnable(!coolant->auto_levels);
-                    coolant_slider->setValue(std::min(system->coolant_request, coolant->max));
+                    if (!coolant_slider->isBeingDragged())
+                        coolant_slider->setValue(std::min(system->coolant_request, coolant->max));
                 }
 
                 system_effects_index = 0;
