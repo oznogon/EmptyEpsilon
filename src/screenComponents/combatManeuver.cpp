@@ -49,11 +49,15 @@ void GuiCombatManeuver::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        auto thrusters = my_spaceship.getComponent<CombatManeuveringThrusters>();
-        if (thrusters) {
+        if (auto thrusters = my_spaceship.getComponent<CombatManeuveringThrusters>())
+        {
             charge_bar->setValue(thrusters->charge)->show();
             slider->show();
-        } else {
+            if (!slider->isBeingDragged())
+                slider->setValue(glm::vec2(thrusters->strafe.request, thrusters->boost.request));
+        }
+        else
+        {
             charge_bar->hide();
             slider->hide();
         }
