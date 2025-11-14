@@ -1,5 +1,4 @@
-#ifndef INDICATOR_OVERLAYS_H
-#define INDICATOR_OVERLAYS_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -27,6 +26,11 @@ private:
     GuiLabel* victory_label;
     bool has_global_message = false;
 
+    // Client-side prediction for jump delay
+    float last_jump_delay;
+    float predicted_jump_delay;
+    float jump_delay_update_time;
+
 public:
     GuiIndicatorOverlays(GuiContainer* owner);
     virtual ~GuiIndicatorOverlays();
@@ -38,5 +42,3 @@ public:
 private:
     void drawAlertLevel(sp::RenderTarget& renderer);
 };
-
-#endif//INDICATOR_OVERLAYS_H

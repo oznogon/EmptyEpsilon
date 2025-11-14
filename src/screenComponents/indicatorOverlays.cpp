@@ -18,7 +18,7 @@
 #include "gui/gui2_button.h"
 
 GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
-: GuiElement(owner, "INDICATOR_OVERLAYS")
+: GuiElement(owner, "INDICATOR_OVERLAYS"), last_jump_delay(0.0f), predicted_jump_delay(0.0f), jump_delay_update_time(0.0f)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -92,6 +92,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
     {
         auto jump = my_spaceship.getComponent<JumpDrive>();
         auto warp = my_spaceship.getComponent<WarpDrive>();
+
         if (jump && jump->just_jumped > 0.0f)
         {
             glitchPostProcessor->enabled = true;
@@ -100,6 +101,8 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
         }else{
             glitchPostProcessor->enabled = false;
         }
+        else glitchPostProcessor->enabled = false;
+
         if (warp && warp->current > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
@@ -111,7 +114,50 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
         }else{
             warpPostProcessor->enabled = false;
         }
-    }else{
+        else if (jump && jump->delay > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
+        {
+            // Client-side prediction for smooth jump delay countdown
+            float current_time = engine->getElapsedTime();
+
+            // Check if we received a new delay value from the server
+            if (jump->delay != last_jump_delay)
+            {
+                // New value from server - reset prediction
+                last_jump_delay = jump->delay;
+                predicted_jump_delay = jump->delay;
+                jump_delay_update_time = current_time;
+            }
+            else if (predicted_jump_delay > 0.0f)
+            {
+                // Predict current delay based on elapsed time and system effectiveness
+                float elapsed = current_time - jump_delay_update_time;
+                const float effectiveness = jump->getSystemEffectiveness();
+
+                // The delay counts down at a rate affected by system effectiveness.
+                // Don't predict beyond what server has told us.
+                if (effectiveness > 0.0f)
+                    predicted_jump_delay = std::clamp(last_jump_delay - (elapsed * effectiveness), 0.0f, jump->delay);
+            }
+
+            // Use predicted delay for visual effect if it's in the activation window
+            float visual_delay = predicted_jump_delay;
+            if (visual_delay > 0.0f && visual_delay < 2.0f)
+            {
+                warpPostProcessor->enabled = true;
+                warpPostProcessor->setUniform("amount", (2.0f - visual_delay) * 0.1f);
+            }
+            else warpPostProcessor->enabled = false;
+        }
+        else
+        {
+            warpPostProcessor->enabled = false;
+            // Reset prediction when not jumping
+            last_jump_delay = 0.0f;
+            predicted_jump_delay = 0.0f;
+        }
+    }
+    else
+    {
         warpPostProcessor->enabled = false;
         glitchPostProcessor->enabled = false;
     }
