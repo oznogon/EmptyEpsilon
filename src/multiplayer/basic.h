@@ -3,7 +3,7 @@
 #include "ecs/multiplayer.h"
 #include "ecs/query.h"
 #include "engine.h"
-#include "components/collision.h"  // Includes SignificanceCache
+#include "components/collision.h"
 
 namespace sp::io {
     template<typename T> static inline DataBuffer& operator << (DataBuffer& packet, const std::vector<T>& v) { packet << uint32_t(v.size()); for(size_t n=0; n<v.size(); n++) packet << v[n]; return packet;} \

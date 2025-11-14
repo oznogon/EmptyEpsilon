@@ -714,6 +714,7 @@ end
 --- Sets this entity's long-range radar range.
 --- PlayerSpaceships use this range on the science and operations screens' radar.
 --- CpuShips use this range for detection, pursuit, and roaming.
+--- This also defines multiplayer significance range on ships with the MultiplayerSignificant component.
 --- Example: player:setLongRangeRadarRange(30000) -- sets the ship's long-range radar range to 30U
 function Entity:setLongRangeRadarRange(range)
     if self.components.long_range_radar then self.components.long_range_radar.long_range = range end
