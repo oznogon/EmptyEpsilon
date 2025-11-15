@@ -19,6 +19,7 @@
 #include "components/hull.h"
 #include "components/rendering.h"
 #include "components/impulse.h"
+#include "components/warpdrive.h"
 #include "components/name.h"
 #include "components/zone.h"
 #include "systems/rendering.h"
@@ -283,20 +284,30 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
     for (auto [entity, ee, transform, impulse] : sp::ecs::Query<EngineEmitter, sp::Transform, ImpulseEngine>())
     {
-        if (impulse.actual != 0.0f)
+        auto warp = entity.getComponent<WarpDrive>();
+        const bool using_impulse = impulse.actual != 0.0f;
+        const bool using_warp = warp && warp->current != 0.0f;
+
+        if (using_impulse || using_warp)
         {
+            float propulsion_actual = 0.0f;
+
+            if (using_impulse)
+                propulsion_actual = impulse.actual * impulse.getSystemEffectiveness();
+            if (using_warp)
+                propulsion_actual = (warp->current / static_cast<float>(warp->max_level)) * warp->getSystemEffectiveness();
+
             // Calculate distance-based sampling for smooth trails at all speeds
             bool should_add_point = false;
+
             if (ee.trail_history.empty())
                 should_add_point = true;
             else
             {
+                // Add point if moved at least 1 units
                 const auto& last_point = ee.trail_history.back();
                 float distance = glm::length(transform.getPosition() - last_point.position);
-                // Add point if moved at least 5 units OR 0.0167 seconds elapsed (60 Hz minimum)
-                float time_since_last = current_time - ee.last_engine_particle_time;
-                if (distance > 5.0f || time_since_last > 0.0167f)
-                    should_add_point = true;
+                if (distance > 1.0f) should_add_point = true;
             }
 
             // Update trail history
@@ -324,35 +335,44 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             {
                 for (auto& ed : ee.emitters)
                 {
+                    // Whatever the emitter color is, the warp trail should be
+                    // brighter.
+                    glm::vec3 color = using_warp
+                        ? ed.color * 1.2f
+                        : ed.color;
                     // Use a custom trail_polygon to shape the trail if defined.
                     // Otherwise, default to a flat horizontal strip.
-                    const std::vector<glm::vec3>& polygon = ed.trail_polygon.empty()
-                        ? default_trail_polygon
-                        : ed.trail_polygon;
+                    const std::vector<glm::vec3>& polygon = ed.trail_polygon.empty() ? default_trail_polygon : ed.trail_polygon;
 
                     size_t points_per_segment = polygon.size();
 
-                    // Render trail twice at different scales for bright center effect
-                    // Full-size for outer glow, half-size for bright core (additive blending)
-                    for (int scale_pass = 0; scale_pass < 2; ++scale_pass)
+                    // Render trail twice at different scales for bright center
+                    // effect, if impulse is >80% engaged.
+                    int exhaust_cones = propulsion_actual > 0.5f ? 2 : 1;
+
+                    for (int scale_pass = 0; scale_pass < exhaust_cones; ++scale_pass)
                     {
-                        float scale_multiplier = (scale_pass == 0) ? 1.0f : 0.5f;
+                        float scale_multiplier = (scale_pass == 0) ? 1.0f : propulsion_actual - 0.5f;
                         size_t vertex_base = all_vertices.size();
 
                         // Extrude the polygon along the trail path.
                         for (size_t i = 0; i < ee.trail_history.size(); ++i)
                         {
                             const auto& point = ee.trail_history[i];
+                            // Calculate the age factor, 0 to 1 = oldest to newest
+                            // Linear:
+                            // const float age_factor = 1.0f - ((current_time - point.timestamp) / EngineEmitter::trail_lifetime);
+                            // Or with easing:
+                            // const float age_factor = Tween<float>::easeInOutQuad(current_time - point.timestamp, 0.0f, EngineEmitter::trail_lifetime, 1.0f, 0.0f);
+                            const float age = current_time - point.timestamp;
+                            const float age_factor = Tween<float>::easeCubicBezier(age, 0.0f, EngineEmitter::trail_lifetime, glm::vec2{0.0f, 1.0f}, glm::vec2{1.0f, 0.0f}, 1.0f, 0.0f);
 
-                            // Calculate the age factor (0 to 1 = oldest to newest).
-                            //const float age = 1.0f - ((current_time - point.timestamp) / EngineEmitter::trail_lifetime);
-                            const float age_factor = Tween<float>::easeInOutQuad(current_time - point.timestamp, 0.0f, EngineEmitter::trail_lifetime, 1.0f, 0.0f);
+                            // Calculate color for this segment with temporal fade
+                            // glm::vec3 trail_color = Tween<glm::vec3>::easeOutBack(age_factor, 1.0f, 0.0f, color, glm::vec3{0.0f, 0.0f, 0.0f});
+                            glm::vec3 trail_color = Tween<glm::vec3>::easeCubicBezier(age, 1.0f, 0.0f, glm::vec2{0.2f, 1.0f}, glm::vec2{0.8f, 1.05f}, glm::vec3{0.0f, 0.0f, 0.0f}, color);
 
-                            // Calculate color for this segment (temporal fade)
-                            glm::vec3 trail_color = Tween<glm::vec3>::easeOutBack(age_factor, 1.0f, 0.0f, ed.color, glm::vec3{0.0f, 0.0f, 0.0f});
-
-                            // Scale based on emitter scale, impulse power, age, and pass multiplier
-                            float scale = ed.scale * std::abs(impulse.actual) * age_factor * scale_multiplier;
+                            // Scale based on emitter scale, impulse/warp power, age, and pass multiplier
+                            float scale = ed.scale * std::min(1.0f, std::abs(propulsion_actual)) * age_factor * scale_multiplier;
 
                             // Apply emitter offset in entity space
                             glm::vec2 emitter_offset = rotateVec2(glm::vec2(ed.position.x, ed.position.y), point.rotation);
@@ -468,7 +488,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         for (auto n = 0U; n < space_dust.size(); n += 2)
         {
-            //
             auto delta = space_dust[n] - dust_center;
             if (glm::length2(delta) > maxDustDist*maxDustDist || glm::length2(delta) < minDustDist*minDustDist)
             {
