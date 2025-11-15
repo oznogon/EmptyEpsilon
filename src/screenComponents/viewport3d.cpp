@@ -19,6 +19,8 @@
 #include "components/hull.h"
 #include "components/rendering.h"
 #include "components/impulse.h"
+#include "components/missile.h"
+#include "components/jumpdrive.h"
 #include "components/warpdrive.h"
 #include "components/name.h"
 #include "components/zone.h"
@@ -285,17 +287,21 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     for (auto [entity, ee, transform, impulse] : sp::ecs::Query<EngineEmitter, sp::Transform, ImpulseEngine>())
     {
         auto warp = entity.getComponent<WarpDrive>();
+        auto jump = entity.getComponent<JumpDrive>();
         const bool using_impulse = impulse.actual != 0.0f;
         const bool using_warp = warp && warp->current != 0.0f;
+        const bool using_jump = jump && (jump->delay != jump->activation_delay || jump->just_jumped != 0.0f);
 
-        if (using_impulse || using_warp)
+        if (using_impulse || using_warp || using_jump)
         {
             float propulsion_actual = 0.0f;
 
-            if (using_impulse)
-                propulsion_actual = impulse.actual * impulse.getSystemEffectiveness();
+            if (using_jump)
+                propulsion_actual = std::max(jump->delay / jump->activation_delay, jump->just_jumped * 2.0f);
             if (using_warp)
                 propulsion_actual = (warp->current / static_cast<float>(warp->max_level)) * warp->getSystemEffectiveness();
+            if (using_impulse)
+                propulsion_actual = impulse.actual * impulse.getSystemEffectiveness();
 
             // Calculate distance-based sampling for smooth trails at all speeds
             bool should_add_point = false;
@@ -324,7 +330,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             // Remove old trail points based on time
             ee.trail_history.erase(
                 std::remove_if(ee.trail_history.begin(), ee.trail_history.end(),
-                    [current_time](const EngineEmitter::TrailPoint& p) {
+                    [current_time, using_jump](const EngineEmitter::TrailPoint& p) {
                         return (current_time - p.timestamp) > EngineEmitter::trail_lifetime;
                     }),
                 ee.trail_history.end()
@@ -340,6 +346,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                     glm::vec3 color = using_warp
                         ? ed.color * 1.2f
                         : ed.color;
+
                     // Use a custom trail_polygon to shape the trail if defined.
                     // Otherwise, default to a flat horizontal strip.
                     const std::vector<glm::vec3>& polygon = ed.trail_polygon.empty() ? default_trail_polygon : ed.trail_polygon;
@@ -361,15 +368,15 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                             const auto& point = ee.trail_history[i];
                             // Calculate the age factor, 0 to 1 = oldest to newest
                             // Linear:
-                            // const float age_factor = 1.0f - ((current_time - point.timestamp) / EngineEmitter::trail_lifetime);
+                            // const float age_factor = 1.0f - ((current_time - point.timestamp) / lifetime);
                             // Or with easing:
-                            // const float age_factor = Tween<float>::easeInOutQuad(current_time - point.timestamp, 0.0f, EngineEmitter::trail_lifetime, 1.0f, 0.0f);
+                            // const float age_factor = Tween<float>::easeInOutQuad(current_time - point.timestamp, 0.0f, lifetime, 1.0f, 0.0f);
                             const float age = current_time - point.timestamp;
                             const float age_factor = Tween<float>::easeCubicBezier(age, 0.0f, EngineEmitter::trail_lifetime, glm::vec2{0.0f, 1.0f}, glm::vec2{1.0f, 0.0f}, 1.0f, 0.0f);
 
                             // Calculate color for this segment with temporal fade
                             // glm::vec3 trail_color = Tween<glm::vec3>::easeOutBack(age_factor, 1.0f, 0.0f, color, glm::vec3{0.0f, 0.0f, 0.0f});
-                            glm::vec3 trail_color = Tween<glm::vec3>::easeCubicBezier(age, 1.0f, 0.0f, glm::vec2{0.2f, 1.0f}, glm::vec2{0.8f, 1.05f}, glm::vec3{0.0f, 0.0f, 0.0f}, color);
+                            glm::vec3 trail_color = Tween<glm::vec3>::easeCubicBezier(age, EngineEmitter::trail_lifetime, 0.0f, glm::vec2{0.2f, 1.0f}, glm::vec2{0.8f, 1.05f}, glm::vec3{0.0f, 0.0f, 0.0f}, color);
 
                             // Scale based on emitter scale, impulse/warp power, age, and pass multiplier
                             float scale = ed.scale * std::min(1.0f, std::abs(propulsion_actual)) * age_factor * scale_multiplier;
