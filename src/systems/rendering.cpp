@@ -370,7 +370,13 @@ void BillboardRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     };
 
     textureManager.getTexture(bbr.texture)->bind();
-    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+
+    // Choose shader based on constrained flag
+    ShaderRegistry::ScopedShader shader(
+        bbr.constrained ?
+        ShaderRegistry::Shaders::BillboardConstrained :
+        ShaderRegistry::Shaders::Billboard
+    );
 
     auto position = transform.getPosition();
     auto rotation = transform.getRotation();
@@ -379,6 +385,15 @@ void BillboardRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, bbr.size);
+
+    // Set constrained axis uniform if using constrained billboard
+    if (bbr.constrained) {
+        auto axis_uniform = shader.get().uniform(ShaderRegistry::Uniforms::ConstrainedAxis);
+        if (axis_uniform >= 0) {
+            glUniform3f(axis_uniform, bbr.constrained_axis.x, bbr.constrained_axis.y, bbr.constrained_axis.z);
+        }
+    }
+
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 

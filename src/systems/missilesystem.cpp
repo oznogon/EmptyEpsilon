@@ -335,8 +335,10 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         auto& t = missile.addComponent<sp::Transform>();
         t.setPosition(fireLocation);
         t.setRotation(source_transform->getRotation() + tube.direction);
-        auto& cpe = missile.addComponent<ConstantParticleEmitter>();
+
+        // Use billboard renderer for missiles, particle emitter for mines
         if (tube.type_loaded == MW_Mine) {
+            auto& cpe = missile.addComponent<ConstantParticleEmitter>();
             cpe.travel_random_range = 100.0f;
             cpe.start_color = {1, 1, 1};
             cpe.end_color = {0, 0, 1};
@@ -344,6 +346,13 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             cpe.start_size = 30.0f;
             cpe.end_size = 0.0f;
             cpe.life_time = 10.0f;
+        } else {
+            // Use constrained billboard for missiles
+            auto& billboard = missile.addComponent<BillboardRenderer>();
+            billboard.texture = "texture/missile_trail.png";
+            billboard.size = 50.0f * category_modifier;  // Scale with missile size
+            billboard.constrained = true;
+            billboard.constrained_axis = glm::vec3(1.0f, 0.0f, 0.0f);  // Billboard around forward axis
         }
 
         if (tube.type_loaded != MW_Mine)

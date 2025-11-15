@@ -29,6 +29,7 @@ namespace ShaderRegistry
 		Basic = 0,
 		BasicColor,
 		Billboard,
+		BillboardConstrained,
 		Object,
 		ObjectIllumination,
 		ObjectSpecular,
@@ -57,6 +58,8 @@ namespace ShaderRegistry
 
 		AmbientLightDirection,
 		SpecularLightDirection,
+
+		ConstrainedAxis,
 
 		Count
 	};

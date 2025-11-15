@@ -52,6 +52,8 @@ class BillboardRenderer
 public:
     string texture;
     float size = 512.0f;
+    bool constrained = false;
+    glm::vec3 constrained_axis{1.0f, 0.0f, 0.0f};  // Default to X-axis (forward)
 };
 
 class NebulaRenderer
