@@ -298,7 +298,11 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             auto warp = entity.getComponent<WarpDrive>();
             auto impulse = entity.getComponent<ImpulseEngine>();
             auto missile = entity.getComponent<MissileFlight>();
-            if (!warp && !impulse && !missile) continue;
+            if (!warp && !impulse && !missile && ee.velocity_override <= 0.0f)
+            {
+                LOG(Warning, "Entity ", entity.toString(), " has an EngineEmitter component but no propulsion systems or velocity_override, so it does nothing");
+                continue;
+            }
 
             const bool using_impulse = impulse && impulse->actual != 0.0f;
             const bool using_warp = warp && warp->current != 0.0f;
@@ -306,15 +310,12 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
             if (ee.velocity_override > 0.0f)
                 propulsion_actual = ee.velocity_override;
-            else if (using_impulse || using_warp)
-            {
-                if (using_impulse)
-                    propulsion_actual = std::abs(impulse->actual) * impulse->getSystemEffectiveness();
-                if (using_warp)
-                    propulsion_actual = (warp->current / static_cast<float>(warp->max_level)) * warp->getSystemEffectiveness();
-            }
             else if (missile)
                 propulsion_actual = 1.0f;
+            else if (using_warp)
+                propulsion_actual = (warp->current / static_cast<float>(warp->max_level)) * warp->getSystemEffectiveness();
+            else if (using_impulse)
+                propulsion_actual = std::abs(impulse->actual) * impulse->getSystemEffectiveness();
 
             if (propulsion_actual != 0.0f && engine->getElapsedTime() - ee.last_engine_particle_time > 0.1f)
             {
@@ -422,11 +423,12 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
                     if (ed.trail_polygon.empty())
                     {
-                        // Use billboarded quads for default trail (no polygon defined)
+                        // Use billboarded quads for default trail
                         const float scale_multiplier = 1.0f;
                         const float scale_factor = ed.scale * std::min(1.0f, std::abs(propulsion_actual)) * scale_multiplier;
 
-                        // Pre-calculate per-segment data that's shared across both axes
+                        // Pre-calculate per-segment data that's shared across
+                        // both axes
                         struct SegmentData {
                             glm::vec3 pos0, pos1;
                             glm::vec3 trail_color0, trail_color1;
@@ -478,7 +480,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                             segment_cache.push_back({pos0, pos1, trail_color0, trail_color1, scale0, scale1, billboard_right_axis0, billboard_right_axis1});
                         }
 
-                        // Create two perpendicular billboarded trails using cached data
+                        // Create two perpendicular billboarded trails using
+                        // cached data
                         for (int trail_axis = 0; trail_axis < 2; ++trail_axis)
                         {
                             size_t vertex_base = all_vertices.size();
@@ -488,10 +491,11 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                             {
                                 const auto& seg = segment_cache[i];
 
-                                // Select the appropriate billboard direction for this axis
+                                // Select the appropriate billboard direction
+                                // for this axis
                                 glm::vec3 billboard_right = (trail_axis == 0) ? seg.billboard_right_axis0 : seg.billboard_right_axis1;
 
-                                // Create quad vertices (4 vertices per segment)
+                                // Create quad vertices
                                 float half_width0 = seg.scale0 * 0.5f;
                                 float half_width1 = seg.scale1 * 0.5f;
 
@@ -515,7 +519,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                                 all_colors.push_back(seg.trail_color1);
                                 all_texcoords.push_back(glm::vec2(0.0f, float(i + 1) / segment_cache.size()));
 
-                                // Generate indices for this quad (two triangles)
+                                // Generate indices for this quad
                                 int base = vertex_base + i * 4;
                                 all_indices.push_back(base + 0);
                                 all_indices.push_back(base + 1);
@@ -533,7 +537,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                         const std::vector<glm::vec3>& polygon = ed.trail_polygon;
                         size_t points_per_segment = polygon.size();
 
-                        // Pre-calculate per-point data shared across all scale passes
+                        // Pre-calculate per-point data shared across all scale
+                        // passes
                         struct PointData {
                             glm::vec2 center;
                             glm::vec2 perp_dir;
@@ -571,18 +576,21 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                             point_cache.push_back({center, perp_dir, forward_dir, trail_color, age_factor});
                         }
 
-                        // Generate geometry for each scale pass using cached data
+                        // Generate geometry for each scale pass using cached
+                        // data
                         for (int scale_pass = 0; scale_pass < exhaust_cones; ++scale_pass)
                         {
                             float scale_multiplier = (scale_pass == 0) ? 1.0f : propulsion_actual - 0.5f;
                             size_t vertex_base = all_vertices.size();
 
-                            // Extrude the polygon along the trail path using cached calculations
+                            // Extrude the polygon along the trail path using
+                            // cached calculations
                             for (size_t i = 0; i < point_cache.size(); ++i)
                             {
                                 const auto& pt = point_cache[i];
 
-                                // Scale based on age factor and current pass multiplier
+                                // Scale based on age factor and current pass
+                                // multiplier
                                 float scale = base_scale_factor * pt.age_factor * scale_multiplier;
 
                                 // Transform each polygon point to world space
@@ -638,8 +646,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             glEnable(GL_BLEND);
             // Additive blending
             glBlendFunc(GL_ONE, GL_ONE);
-            // Alpha blending
-            // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
             trail_shader->bind();
             glUniformMatrix4fv(trail_projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
@@ -667,7 +673,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, trail_buffers[1]);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, all_indices.size() * sizeof(unsigned int), all_indices.data(), GL_STREAM_DRAW);
 
-            // Update vertex attribute pointers (VAO already has attributes enabled)
+            // Update vertex attribute pointers
             glVertexAttribPointer(trail_position_attrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
             glVertexAttribPointer(trail_color_attrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)vertex_size);
             glVertexAttribPointer(trail_texcoord_attrib, 2, GL_FLOAT, GL_FALSE, 0, (void*)(vertex_size + color_size));
