@@ -34,6 +34,7 @@ namespace ShaderRegistry
 		ObjectSpecular,
 		ObjectSpecularIllumination,
 		Planet,
+		Shield,
 
 		Count
 	};
