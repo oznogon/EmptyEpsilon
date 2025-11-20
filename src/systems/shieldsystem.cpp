@@ -118,6 +118,19 @@ void ShieldSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Shields
                     glUniform1f(shellOffsetLoc, shellOffset);
                 }
 
+                // Set impact angle for texture animation (scrolls opposite to impact direction)
+                auto impactAngleLoc = shieldShader.get().get()->getUniformLocation("impactAngle");
+                if (impactAngleLoc != -1) {
+                    glUniform1f(impactAngleLoc, angle);
+                }
+
+                // Set impact time for texture scrolling animation
+                auto impactTimeLoc = shieldShader.get().get()->getUniformLocation("impactTime");
+                if (impactTimeLoc != -1) {
+                    // Use elapsed time for continuous animation
+                    glUniform1f(impactTimeLoc, engine->getElapsedTime());
+                }
+
                 // Bind shield texture
                 textureManager.getTexture("texture/shield_hit_effect.png")->bind();
 

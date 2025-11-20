@@ -3,6 +3,8 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 uniform float shellOffset;
+uniform float impactAngle;
+uniform float impactTime;
 
 attribute vec3 position;
 attribute vec3 normal;
@@ -20,7 +22,16 @@ void main()
     vec4 worldpos = model * vec4(displacedPos, 1.0);
     fragnormal = normalize((model * vec4(normal, 0.0)).xyz);
     fragposition = worldpos.xyz;
-    fragtexcoords = texcoords;
+
+    // Animate texture coordinates based on impact angle
+    // Convert impact angle to radians and create scroll direction
+    float angleRad = radians(impactAngle);
+    vec2 scrollDir = vec2(cos(angleRad), sin(angleRad));
+
+    // Scroll texture in opposite direction of impact
+    float scrollSpeed = 2.0;
+    vec2 scrollOffset = -scrollDir * impactTime * scrollSpeed;
+    fragtexcoords = texcoords + scrollOffset;
 
     gl_Position = projection * view * worldpos;
 }
