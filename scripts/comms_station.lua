@@ -1,7 +1,7 @@
 --- Basic station comms.
 --
--- Station comms that allows buying ordnance, supply drop, and reinforcements.
--- Default script for any `SpaceStation`.
+-- Station comms that allow for buying ordnance and requesting supply drops or reinforcements.
+-- Default script for any SpaceStation entity.
 --
 -- @script comms_station
 
@@ -9,7 +9,13 @@
 require("utils.lua")
 
 -- NOTE this could be imported
-local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
+local MISSILE_TYPES = {
+    "Homing",
+    "Nuke",
+    "Mine",
+    "EMP",
+    "HVLI"
+}
 
 --- Main menu of communication.
 --
@@ -48,11 +54,20 @@ function commsStationMainMenu(comms_source, comms_target)
             },
             service_cost = {
                 supplydrop = 100,
-                reinforcements = 150,
-                phobos_reinforcement = 300,
-                amk3_reinforcement = 100,
-                hornet_reinforcement = 100,
-                amk8_reinforcement = 200,
+                reinforcements = {
+                    hornet = 100,
+                    amk3 = 100,
+                    amk5 = 150,
+                    amk8 = 200,
+                    phobos = 300
+                }
+            },
+            reinforcement_templates = {
+                hornet = "MU52 Hornet",
+                amk3 = "Adder MK3",
+                amk5 = "Adder MK5",
+                amk8 = "Adder MK8",
+                phobos = "Phobos T3",
             },
             reputation_cost_multipliers = {
                 friend = 1.0,
@@ -65,14 +80,18 @@ function commsStationMainMenu(comms_source, comms_target)
         }
     )
 
+    -- Hostile stations don't provide services.
     if comms_source:isEnemy(comms_target) then
         return false
     end
 
+    -- Disrupt comms if hostile entities are in default short-range radar range.
+    -- This triggers even when moving between comms replies in relaxed comms.
     if comms_target:areEnemiesInRange(5000) then
         setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"))
         return true
     end
+
     if not comms_source:isDocked(comms_target) then
         commsStationUndocked(comms_source, comms_target)
     else
@@ -87,6 +106,8 @@ end
 -- @tparam SpaceStation comms_target
 function commsStationDocked(comms_source, comms_target)
     local message
+
+    -- Greetings
     if comms_source:isFriendly(comms_target) then
         message = string.format(_("station-comms", "Good day, officer! Welcome to %s.\nWhat can we do for you today?"), comms_target:getCallSign())
     else
@@ -94,6 +115,7 @@ function commsStationDocked(comms_source, comms_target)
     end
     setCommsMessage(message)
 
+    -- Reply options
     local reply_messages = {
         ["Homing"] = _("ammo-comms", "Do you have spare homing missiles for us?"),
         ["HVLI"] = _("ammo-comms", "Can you restock us with HVLI?"),
@@ -102,6 +124,7 @@ function commsStationDocked(comms_source, comms_target)
         ["EMP"] = _("ammo-comms", "Please re-stock our EMP missiles.")
     }
 
+    -- Actions
     for idx, missile_type in ipairs(MISSILE_TYPES) do
         if comms_source:getWeaponStorageMax(missile_type) > 0 then
             addCommsReply(
@@ -114,7 +137,7 @@ function commsStationDocked(comms_source, comms_target)
     end
 end
 
---- Handle weapon restock.
+--- Handle weapon restocking requests.
 --
 -- @tparam PlayerSpaceship comms_source
 -- @tparam SpaceStation comms_target
@@ -125,6 +148,7 @@ function handleWeaponRestock(comms_source, comms_target, weapon)
         return
     end
 
+    -- Denials
     if not isAllowedTo(comms_source, comms_target, comms_target.comms_data.weapons[weapon]) then
         local message
         if weapon == "Nuke" then
@@ -138,6 +162,7 @@ function handleWeaponRestock(comms_source, comms_target, weapon)
         return
     end
 
+    -- Transactions
     local points_per_item = getWeaponCost(comms_source, comms_target, weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus(comms_source, comms_target)]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
@@ -166,6 +191,30 @@ function handleWeaponRestock(comms_source, comms_target, weapon)
     end
 end
 
+--- Handle requests for reinforcements and supply ships.
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function handleShipRequests(comms_source, comms_target)
+    -- Supply drop
+    if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.supplydrop) then
+        addCommsReply(
+            string.format(_("stationAssist-comms", "Can you send a supply drop? (%d rep)"), getServiceCost(comms_source, comms_target, "supplydrop")),
+            --
+            commsStationSupplyDrop
+        )
+    end
+
+    -- Reinforcements
+    if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.reinforcements) then
+        addCommsReply(
+            string.format(_("stationAssist-comms", "Please send reinforcements! (%d+ rep)"), getReinforcementsCost(comms_source, comms_target, "reinforcements")),
+            --
+            commsStationReinforcements
+        )
+    end
+end
+
 --- Handle communications when we are not docked with the station.
 --
 -- @tparam PlayerSpaceship comms_source
@@ -179,26 +228,10 @@ function commsStationUndocked(comms_source, comms_target)
     end
     setCommsMessage(message)
 
-    -- supply drop
-    if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.supplydrop) then
-        addCommsReply(
-            string.format(_("stationAssist-comms", "Can you send a supply drop? (%d rep)"), getServiceCost(comms_source, comms_target, "supplydrop")),
-            --
-            commsStationSupplyDrop
-        )
-    end
-
-    -- reinforcements
-    if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.reinforcements) then
-        addCommsReply(
-            string.format(_("stationAssist-comms", "Please send reinforcements! (%d rep)"), getServiceCost(comms_source, comms_target, "reinforcements")),
-            --
-            commsStationReinforcements
-        )
-    end
+    handleShipRequests(comms_source, comms_target)
 end
 
---- Ask for a waypoint and deliver supply drop to it.
+--- Ask for a waypoint and deliver a supply drop to it.
 --
 -- Uses the script `supply_drop.lua`
 --
@@ -206,7 +239,7 @@ end
 -- @tparam SpaceStation comms_target
 function commsStationSupplyDrop(comms_source, comms_target)
     if comms_source:getWaypointCount() < 1 then
-        setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request backup."))
+        setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request supplies."))
     else
         setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"))
         for n = 1, comms_source:getWaypointCount() do
@@ -220,7 +253,7 @@ function commsStationSupplyDrop(comms_source, comms_target)
                         local script = Script()
                         script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                         script:setVariable("target_x", target_x):setVariable("target_y", target_y)
-                        script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
+                        script:setVariable("faction", comms_target:getFaction()):run("supply_drop.lua")
                         message = string.format(_("stationAssist-comms", "We have dispatched a supply ship toward %s."), formatWaypoint(n))
                     else
                         message = _("needRep-comms", "Not enough reputation!")
@@ -234,34 +267,46 @@ function commsStationSupplyDrop(comms_source, comms_target)
     addCommsReply(_("Back"), commsStationMainMenu)
 end
 
---- Ask for a waypoint and send reinforcements to defend it.
+--- Offer reinforcement options to the player.
 --
 -- @tparam PlayerSpaceship comms_source
 -- @tparam SpaceStation comms_target
 function commsStationReinforcements(comms_source, comms_target)
 	setCommsMessage(_("stationAssist-comms", "What kind of reinforcement ship would you like?"))
-	addCommsReply(string.format(_("stationAssist-comms", "Adder MK3 (%d rep)"), getServiceCost(comms_source, comms_target, "amk3_reinforcement")), function()
-		string.format("")
-		commsStationSpecificReinforcement(comms_source, comms_target, "amk3_reinforcement")
-	end)
-	addCommsReply(string.format(_("stationAssist-comms", "MU52 Hornet (%d rep)"), getServiceCost(comms_source, comms_target, "hornet_reinforcement")), function()
-		string.format("")
-		commsStationSpecificReinforcement(comms_source, comms_target, "hornet_reinforcement")
-	end)
-	addCommsReply(string.format(_("stationAssist-comms", "Standard Adder MK5 (%d rep)"), getServiceCost(comms_source, comms_target, "reinforcements")), function()
-		string.format("")
-		commsStationSpecificReinforcement(comms_source, comms_target, "reinforcements")
-	end)
-	addCommsReply(string.format(_("stationAssist-comms", "Adder MK8 (%d rep)"), getServiceCost(comms_source, comms_target, "amk8_reinforcement")), function()
-		string.format("")
-		commsStationSpecificReinforcement(comms_source, comms_target, "amk8_reinforcement")
-	end)
-	addCommsReply(string.format(_("stationAssist-comms", "Phobos T3 (%d rep)"), getServiceCost(comms_source, comms_target, "phobos_reinforcement")), function()
-		string.format("")
-		commsStationSpecificReinforcement(comms_source, comms_target, "phobos_reinforcement")
-	end)
+    -- List reinforcement options using localized ship template names
+    local sorted_reinforcements = {}
+    for key, value in pairs(comms_target.comms_data.reinforcement_templates) do
+        sorted_reinforcements[#sorted_reinforcements + 1] = {
+            key = key,
+            template = value,
+            cost = comms_target.comms_data.service_cost.reinforcements[key]
+        }
+    end
+
+    -- Sort options by ascending reputation cost
+    table.sort(sorted_reinforcements,
+        function(a, b)
+            return a.cost < b.cost
+        end
+    )
+
+    -- Present options
+    for i, value in ipairs(sorted_reinforcements) do
+        addCommsReply(
+            string.format(_("stationAssist-comms", "%s (%d rep)"), __ship_templates[comms_target.comms_data.reinforcement_templates[value.key]].typename.localized, getReinforcementsCost(comms_source, comms_target, value.key)),
+            function(comms_source, comms_target)
+                commsStationSpecificReinforcement(comms_source, comms_target, value.key)
+            end
+        )
+    end
     addCommsReply(_("Back"), commsStationMainMenu)
 end
+
+--- Validate that a waypoint exists and order reinforcements to defend a target waypoint.
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+-- @tparam string reinforcement_type
 function commsStationSpecificReinforcement(comms_source, comms_target, reinforcement_type)
     if comms_source:getWaypointCount() < 1 then
         setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request reinforcements."))
@@ -272,16 +317,9 @@ function commsStationSpecificReinforcement(comms_source, comms_target, reinforce
                 formatWaypoint(n),
                 function(comms_source, comms_target)
                     local message
-                    if comms_source:takeReputationPoints(getServiceCost(comms_source, comms_target, reinforcement_type)) then
-                    	local reinforcement_template = {
-                    		["amk3_reinforcement"] = 	"Adder MK3",
-                    		["hornet_reinforcement"] =	"MU52 Hornet",
-                    		["reinforcements"] =		"Adder MK5",
-                    		["amk8_reinforcement"] =	"Adder MK8",
-                    		["phobos_reinforcement"] =	"Phobos T3",
-                    	}
-                        local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate(reinforcement_template[reinforcement_type]):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
-                        message = string.format(_("stationAssist-comms", "We have dispatched %s to assist at %s."), ship:getCallSign(), formatWaypoint(n))
+                    if comms_source:takeReputationPoints(getReinforcementsCost(comms_source, comms_target, reinforcement_type)) then
+                        local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate(comms_target.comms_data.reinforcement_templates[reinforcement_type]):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
+                        message = string.format(_("stationAssist-comms", "We have dispatched %s %s to assist at %s."), __ship_templates[comms_target.comms_data.reinforcement_templates[reinforcement_type]].typename.localized, ship:getCallSign(), formatWaypoint(n))
                     else
                         message = _("needRep-comms", "Not enough reputation!")
                     end
@@ -294,7 +332,9 @@ function commsStationSpecificReinforcement(comms_source, comms_target, reinforce
     addCommsReply(_("Back"), commsStationMainMenu)
 end
 
---- isAllowedTo
+--- Returns true if the player ship is allowed to do something.
+--- For now this returns true if the player ship matches either valid passed
+--- `state` of "friend" or "neutral", and false otherwise.
 --
 -- @tparam PlayerSpaceship comms_source
 -- @tparam SpaceStation comms_target
@@ -332,6 +372,25 @@ end
 -- @treturn integer the cost
 function getServiceCost(comms_source, comms_target, service)
     return math.ceil(comms_target.comms_data.service_cost[service])
+end
+
+--- Return the number of reputation points that a specified reinforcement type
+-- costs for the current player.
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+-- @tparam string service the reinforcement type
+-- @treturn integer the cost
+function getReinforcementsCost(comms_source, comms_target, service)
+    -- If generically requesting reinforcements, return the lowest-value type.
+    if service == "reinforcements" then
+        local smallest = math.huge
+        for _, value in pairs(comms_target.comms_data.service_cost.reinforcements) do
+            if value < smallest and value > 0 then smallest = value end
+        end
+        return math.ceil(smallest)
+    end
+    return math.ceil(comms_target.comms_data.service_cost.reinforcements[service])
 end
 
 --- Return "friend" or "neutral".
