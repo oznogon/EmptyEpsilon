@@ -125,7 +125,7 @@ void GuiTextEntry::onTextInput(const string& text)
         blink_timer.repeat(blink_rate);
     }
     this->text = this->text.substr(0, std::min(selection_start, selection_end)) + text + this->text.substr(std::max(selection_start, selection_end));
-    selection_end = selection_start = std::min(selection_start, selection_end) + text.length();
+    selection_end = selection_start = std::min(selection_start, selection_end) + static_cast<int>(text.length());
     runChangeCallback();
 }
 
@@ -199,7 +199,7 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
             return;
         int end_of_end_line = text.find("\n", end_of_current_line + 1);
         if (end_of_end_line == -1)
-            end_of_end_line = text.length();
+            end_of_end_line = static_cast<int>(text.length());
         int offset = selection_end - start_of_current_line;
         selection_end = end_of_current_line + 1 + std::min(offset, end_of_end_line - (end_of_current_line + 1));
         if (e != sp::TextInputEvent::DownWithSelection)
@@ -215,7 +215,7 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
     case sp::TextInputEvent::LineEndWithSelection:
         selection_end = text.find("\n", selection_start);
         if (selection_end == -1)
-            selection_end = text.length();
+            selection_end = static_cast<int>(text.length());
         if (e != sp::TextInputEvent::LineEndWithSelection)
             selection_start = selection_end;
         break;
@@ -227,13 +227,13 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
         break;
     case sp::TextInputEvent::TextEnd:
     case sp::TextInputEvent::TextEndWithSelection:
-        selection_end = text.length();
+        selection_end = static_cast<int>(text.length());
         if (e != sp::TextInputEvent::TextEndWithSelection)
             selection_start = selection_end;
         break;
     case sp::TextInputEvent::SelectAll:
         selection_end = 0;
-        selection_start = text.length();
+        selection_start = static_cast<int>(text.length());
         break;
     case sp::TextInputEvent::Delete:
         if (readonly)
@@ -276,7 +276,7 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
             int start_of_line = text.substr(0, std::min(selection_start, selection_end)).rfind("\n") + 1;
             auto data = text.substr(start_of_line, std::max(selection_start, selection_end));
             data = "    " + data.replace("\n", "\n    ");
-            int extra_length = data.length() - (std::max(selection_start, selection_end) - start_of_line) - 4;
+            int extra_length = static_cast<int>(data.length()) - (std::max(selection_start, selection_end) - start_of_line) - 4;
             text = text.substr(0, start_of_line) + data + text.substr(std::max(selection_start, selection_end));
 
             if (start_of_line != selection_start)
@@ -306,7 +306,7 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
                     data = data.substr(1);
                 data = data.replace("\n ", "\n");
             }
-            int removed_length = (std::max(selection_start, selection_end) - start_of_line) - data.length();
+            int removed_length = (std::max(selection_start, selection_end) - start_of_line) - static_cast<int>(data.length());
             text = text.substr(0, start_of_line) + data + text.substr(std::max(selection_start, selection_end));
 
             if (selection_start > selection_end)
@@ -351,7 +351,7 @@ void GuiTextEntry::onFocusGained()
 {
     if (select_on_focus) {
 		selection_end = 0;
-		selection_start = text.length();
+		selection_start = static_cast<int>(text.length());
     }
     typing_indicator = true;
     blink_timer.repeat(blink_rate);
@@ -445,7 +445,7 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
 {
     position -= rect.position;
     position.x -= 16.0f;
-    int result = text.size();
+    int result = static_cast<int>(text.size());
     //if (vertical_scroll)
     //    position.y -= vertical_scroll->getValue();
     std::string shown_text = text;
@@ -462,7 +462,7 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
     }
     if (n == pfs.data.size())
     {
-        return text.size();
+        return static_cast<int>(text.size());
     }
     float line_y = pfs.data[n].position.y;
     for(; n<pfs.data.size(); n++)

@@ -95,14 +95,14 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     auto sidebar = new GuiElement(this, "SIDE_BAR");
     sidebar->setPosition(-20, 150, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
-    info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, tr("Callsign"), "");
+    info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4f, tr("Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
 
-    info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, tr("Faction"), "");
+    info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4f, tr("Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
 
     zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 1.0f)}}));
+        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 1)}}));
         radar->setDistance(value);
     });
     zoom_slider->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50);
@@ -206,7 +206,7 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         radar->setDistance(view_distance);
         // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance);
-        zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
+        zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1) + "x");
     }
     ///!
 

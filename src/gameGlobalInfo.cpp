@@ -50,7 +50,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
-    registerMemberReplication(&elapsed_time, 0.1);
+    registerMemberReplication(&elapsed_time, 0.1f);
     registerMemberReplication(&default_skybox);
 }
 
@@ -355,7 +355,7 @@ void GameGlobalInfo::destroy()
 }
 
 string GameGlobalInfo::getMissionTime() {
-    unsigned int seconds = gameGlobalInfo->elapsed_time;
+    unsigned int seconds = static_cast<unsigned int>(gameGlobalInfo->elapsed_time);
     unsigned int minutes = (seconds / 60) % 60;
     unsigned int hours = (seconds / 60 / 60) % 24;
     seconds = seconds % 60;
@@ -367,8 +367,8 @@ string GameGlobalInfo::getMissionTime() {
 string getSectorName(glm::vec2 position)
 {
     constexpr float sector_size = 20000;
-    int sector_x = floorf(position.x / sector_size) + 5;
-    int sector_y = floorf(position.y / sector_size) + 5;
+    int sector_x = static_cast<int>(floorf(position.x / sector_size)) + 5;
+    int sector_y = static_cast<int>(floorf(position.y / sector_size)) + 5;
     string y;
     string x;
     if (sector_y >= 0)

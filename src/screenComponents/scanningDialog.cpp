@@ -33,7 +33,7 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     for(int n=0; n<max_sliders; n++)
     {
         sliders[n] = new GuiSlider(box, id + "_SLIDER_" + string(n), 0.0, 1.0, 0.0, nullptr);
-        sliders[n]->setPosition(0, 200 + n * 70, sp::Alignment::TopCenter)->setSize(450, 50);
+        sliders[n]->setPosition(0, static_cast<float>(200 + n * 70), sp::Alignment::TopCenter)->setSize(450, 50);
     }
     cancel_button = new GuiButton(box, id + "_CANCEL", tr("button", "Cancel"), []() {
         if (my_spaceship)
@@ -118,7 +118,7 @@ void GuiScanningDialog::setupParameters()
         else
             sliders[n]->hide();
     }
-    box->setSize(500, 265 + 70 * complexity);
+    box->setSize(500, static_cast<float>(265 + 70 * complexity));
 
     for(int n=0; n<max_sliders; n++)
     {

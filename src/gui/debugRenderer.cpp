@@ -114,7 +114,7 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
         index = 0;
         for(const auto& key : key_order) {
             renderer.drawText(
-                sp::Rect(0, 0, 0, 96 + 16 * index),
+                sp::Rect(0, 0, 0, 96.0f + 16.0f * static_cast<float>(index)),
                 key + ": " + string(timing_graph_points[key].back() * 1000, 5) + "ms",
                 sp::Alignment::BottomLeft, 16, nullptr, line_colors[index % 6]);
             index += 1;

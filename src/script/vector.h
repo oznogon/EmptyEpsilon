@@ -20,10 +20,10 @@ template<> struct Convert<glm::vec2> {
         glm::vec2 result{};
         luaL_checktype(L, idx, LUA_TTABLE);
         lua_geti(L, idx, 1);
-        result.x = lua_tonumber(L, -1);
+        result.x = static_cast<float>(lua_tonumber(L, -1));
         lua_pop(L, 1);
         lua_geti(L, idx, 2);
-        result.y = lua_tonumber(L, -1);
+        result.y = static_cast<float>(lua_tonumber(L, -1));
         lua_pop(L, 1);
         return result;
     }
@@ -43,13 +43,13 @@ template<> struct Convert<glm::vec3> {
         glm::vec3 result{};
         luaL_checktype(L, idx, LUA_TTABLE);
         lua_geti(L, idx, 1);
-        result.x = lua_tonumber(L, -1);
+        result.x = static_cast<float>(lua_tonumber(L, -1));
         lua_pop(L, 1);
         lua_geti(L, idx, 2);
-        result.y = lua_tonumber(L, -1);
+        result.y = static_cast<float>(lua_tonumber(L, -1));
         lua_pop(L, 1);
         lua_geti(L, idx, 3);
-        result.z = lua_tonumber(L, -1);
+        result.z = static_cast<float>(lua_tonumber(L, -1));
         lua_pop(L, 1);
         return result;
     }
@@ -96,24 +96,24 @@ template<> struct Convert<glm::u8vec4> {
                 }
             }
         } else if (lua_isinteger(L, idx)) {
-            int n = lua_tointeger(L, idx);
-            result.r = float(n & 0xFF) / 255.0f;
-            result.g = float((n >> 8) & 0xFF) / 255.0f;
-            result.b = float((n >> 16) & 0xFF) / 255.0f;
-            result.a = 1.0f;
+            int n = static_cast<int>(lua_tointeger(L, idx));
+            result.r = static_cast<uint8_t>(n & 0xFF);
+            result.g = static_cast<uint8_t>((n >> 8) & 0xFF);
+            result.b = static_cast<uint8_t>((n >> 16) & 0xFF);
+            result.a = 255;
         } else {
             luaL_checktype(L, idx, LUA_TTABLE);
             lua_geti(L, idx, 1);
-            result.r = lua_tonumber(L, -1);
+            result.r = static_cast<uint8_t>(lua_tonumber(L, -1));
             lua_pop(L, 1);
             lua_geti(L, idx, 2);
-            result.g = lua_tonumber(L, -1);
+            result.g = static_cast<uint8_t>(lua_tonumber(L, -1));
             lua_pop(L, 1);
             lua_geti(L, idx, 3);
-            result.b = lua_tonumber(L, -1);
+            result.b = static_cast<uint8_t>(lua_tonumber(L, -1));
             lua_pop(L, 1);
             lua_geti(L, idx, 4);
-            result.a = lua_tonumber(L, -1);
+            result.a = static_cast<uint8_t>(lua_tonumber(L, -1));
             lua_pop(L, 1);
         }
         return result;
@@ -132,10 +132,10 @@ template<> struct Convert<glm::ivec2> {
         glm::ivec2 result{};
         luaL_checktype(L, idx, LUA_TTABLE);
         lua_geti(L, idx, 1);
-        result.x = lua_tointeger(L, -1);
+        result.x = static_cast<int>(lua_tointeger(L, -1));
         lua_pop(L, 1);
         lua_geti(L, idx, 2);
-        result.y = lua_tointeger(L, -1);
+        result.y = static_cast<int>(lua_tointeger(L, -1));
         lua_pop(L, 1);
         return result;
     }

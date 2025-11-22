@@ -6,7 +6,7 @@ GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
     scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
     // Calculate scrolling a one-line entry by scrollbar arrow buttons.
-    scrollbar->setClickChange(sp::RenderTarget::getDefaultFont()->prepare("1", 32, text_size, {255, 255, 255, 255}, rect.size, sp::Alignment::TopLeft).getUsedAreaSize().y);
+    scrollbar->setClickChange(static_cast<int>(sp::RenderTarget::getDefaultFont()->prepare("1", 32, text_size, {255, 255, 255, 255}, rect.size, sp::Alignment::TopLeft).getUsedAreaSize().y));
 }
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string text, glm::u8vec4 color, unsigned int seq)
@@ -22,13 +22,13 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string tex
 
 unsigned int GuiAdvancedScrollText::getEntryCount() const
 {
-    return entries.size();
+    return static_cast<unsigned int>(entries.size());
 }
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::setTextSize(float text_size)
 {
     this->text_size = std::max(1.0F, text_size);
-    scrollbar->setClickChange(sp::RenderTarget::getDefaultFont()->prepare("1", 32, text_size, {255, 255, 255, 255}, rect.size, sp::Alignment::TopLeft).getUsedAreaSize().y);
+    scrollbar->setClickChange(static_cast<int>(sp::RenderTarget::getDefaultFont()->prepare("1", 32, text_size, {255, 255, 255, 255}, rect.size, sp::Alignment::TopLeft).getUsedAreaSize().y));
     return this;
 }
 
@@ -126,14 +126,14 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     }
 
     //Calculate how many lines we have to display in total.
-    const int line_count = (draw_offset - text_size - 12.0f) + scrollbar->getValue();
+    const int line_count = static_cast<int>((draw_offset - text_size - 12.0f) + scrollbar->getValue());
 
     //Check if we need to update the scroll bar.
-    if (scrollbar->getMax() != line_count)
+    if (static_cast<int>(scrollbar->getMax()) != line_count)
     {
-        const int diff = line_count - scrollbar->getMax();
+        const int diff = line_count - static_cast<int>(scrollbar->getMax());
         scrollbar->setRange(0, line_count);
-        scrollbar->setValueSize(rect.size.y);
+        scrollbar->setValueSize(static_cast<int>(rect.size.y));
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
@@ -143,7 +143,7 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 
 bool GuiAdvancedScrollText::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    float range = scrollbar->getCorrectedMax() - scrollbar->getMin();
-    scrollbar->setValue((scrollbar->getValue() - value * range / mouse_scroll_steps) );
+    float range = static_cast<float>(scrollbar->getCorrectedMax() - scrollbar->getMin());
+    scrollbar->setValue(static_cast<int>(scrollbar->getValue() - value * range / static_cast<float>(mouse_scroll_steps)));
     return true;
 }

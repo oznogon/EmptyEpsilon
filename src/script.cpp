@@ -319,24 +319,24 @@ static int luaSectorToXY(lua_State* L)
         char a2 = sector[1];
         try{
             intpart = stoi(sector.substr(2));
-        } catch(const std::exception& e) {
+        } catch(const std::exception&) {
             lua_pushnumber(L, 0);
             lua_pushnumber(L, 0);
             return 2;
         }
         if(a1 > char('a')){
             // Case with two lowercase letters (zz10) counting down towards the North
-            y = (((char('z') - a1) * 26) + (char('z') - a2 + 6)) * -sector_size; // 6 is the offset from F5 to zz5
+            y = static_cast<int>((((char('z') - a1) * 26) + (char('z') - a2 + 6)) * -sector_size); // 6 is the offset from F5 to zz5
         }else{
             // Case with two uppercase letters (AB20) counting up towards the South
-            y = (((a1 - char('A')) * 26) + (a2 - char('A') + 21)) * sector_size; // 21 is the offset from F5 to AA5
+            y = static_cast<int>((((a1 - char('A')) * 26) + (a2 - char('A') + 21)) * sector_size); // 21 is the offset from F5 to AA5
         }
     }else{
         //Case with just one letter (A9/a9 - these are the same sector, as case only matters in the two-letter sectors)
         char alphaPart = toupper(sector[0]);
         try{
             intpart = stoi(sector.substr(1));
-        }catch(const std::exception& e){
+        }catch(const std::exception&){
             lua_pushnumber(L, 0);
             lua_pushnumber(L, 0);
             return 2;
@@ -387,9 +387,9 @@ static int luaGetAllObjects(lua_State* L)
 
 static int luaGetObjectsInRadius(lua_State* L)
 {
-    float x = luaL_checknumber(L, 1);
-    float y = luaL_checknumber(L, 2);
-    float r = luaL_checknumber(L, 3);
+    float x = static_cast<float>(luaL_checknumber(L, 1));
+    float y = static_cast<float>(luaL_checknumber(L, 2));
+    float r = static_cast<float>(luaL_checknumber(L, 3));
 
     glm::vec2 position(x, y);
     lua_newtable(L);
@@ -412,7 +412,7 @@ static int luaGetEnemiesInRadiusFor(lua_State* L)
     int idx = 1;
     auto source = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
     if (!source) return 1;
-    float r = luaL_checknumber(L, 2);
+    float r = static_cast<float>(luaL_checknumber(L, 2));
     auto source_transform = source.getComponent<sp::Transform>();
     if (!source_transform) return 1;
     auto position = source_transform->getPosition();
@@ -662,7 +662,7 @@ static nlohmann::json luaToJSONImpl(lua_State* L, int lua_index) {
                 is_array = false;
                 lua_pop(L, 1);
             } else {
-                int idx = lua_tointeger(L, -2);
+                int idx = static_cast<int>(lua_tointeger(L, -2));
                 index_max = std::max(idx, index_max);
                 index_min = std::min(idx, index_min);
             }

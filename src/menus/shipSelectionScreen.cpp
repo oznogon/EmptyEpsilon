@@ -294,7 +294,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         extra_settings_button->setSize(GuiElement::GuiSizeMax, 50);
     }
 
-    right_panel->setSize(GuiElement::GuiSizeMax, 30 + right_panel->children.size() * 50);
+    right_panel->setSize(GuiElement::GuiSizeMax, static_cast<float>(30 + right_panel->children.size() * 50));
 
     right_panel_2 = new GuiPanel(right_column, "RIGHT_PANEL_2");
     right_panel_2->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -850,7 +850,7 @@ void CrewPositionSelection::spawnUI(RenderLayer* render_layer)
     {
         destroy();
         uint8_t window_flags = PreferencesManager::get("ship_window_flags", "1").toInt();
-        new WindowScreen(render_layer, window_angle->getText().toInt(), window_flags);
+        new WindowScreen(render_layer, static_cast<float>(window_angle->getText().toInt()), window_flags);
     }else if(topdown_button->getValue())
     {
         my_player_info->commandSetShip({});

@@ -89,7 +89,7 @@ public:
     }
     virtual void onDraw(sp::RenderTarget& target) override {
         if (update_func) {
-            int count = update_func();
+            int count = static_cast<int>(update_func());
             while(count > entryCount())
                 addEntry(string(entryCount()+1), entryCount());
             while(count < entryCount())
@@ -149,6 +149,15 @@ public:
         ui->update_func = [this]() -> string { auto v = entity.getComponent<COMPONENT>(); if (v) return string(v->VALUE, 3); return ""; }; \
         ui->callback([this](string text) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = text.toFloat(); }); \
     } while(0)
+#define ADD_INT_TEXT_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiTextTweak(row); \
+        ui->update_func = [this]() -> string { auto v = entity.getComponent<COMPONENT>(); if (v) return string(v->VALUE); return ""; }; \
+        ui->callback([this](string text) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = text.toInt(); }); \
+    } while(0)
 #define ADD_NUM_SLIDER_TWEAK(LABEL, COMPONENT, MIN_VALUE, MAX_VALUE, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
@@ -163,11 +172,11 @@ public:
         row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
         auto label = new GuiLabel(row, "", LABEL, 20); \
         label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
-        auto ui = new GuiSliderTweak(row, "", MIN_VALUE, MAX_VALUE, 0u, [this](float number) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = number; }); \
-        for (float i = MIN_VALUE; i <= MAX_VALUE; i++) \
+        auto ui = new GuiSliderTweak(row, "", static_cast<float>(MIN_VALUE), static_cast<float>(MAX_VALUE), 0.0f, [this](float number) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = static_cast<decltype(v->VALUE)>(number); }); \
+        for (float i = static_cast<float>(MIN_VALUE); i <= static_cast<float>(MAX_VALUE); i++) \
             ui->addSnapValue(i, 0.5f); \
         ui->addOverlay(0u, 20.0f); \
-        ui->update_func = [this]() -> float { auto v = entity.getComponent<COMPONENT>(); if (v) return v->VALUE; return 0u; }; \
+        ui->update_func = [this]() -> float { auto v = entity.getComponent<COMPONENT>(); if (v) return static_cast<float>(v->VALUE); return 0.0f; }; \
     } while(0)
 #define ADD_BOOL_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
@@ -184,7 +193,7 @@ public:
         label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
         vector_selector = new GuiVectorTweak(row, "VECTOR_SELECTOR"); \
         vector_selector->update_func = [this]() -> size_t { auto v = entity.getComponent<COMPONENT>(); if (v) return v->VECTOR.size(); return 0; }; \
-        auto add = new GuiButton(row, "", "Add", [this, vector_selector](){ auto v = entity.getComponent<COMPONENT>(); if (v) { v->VECTOR.emplace_back(); vector_selector->setSelectionIndex(v->VECTOR.size()); } }); \
+        auto add = new GuiButton(row, "", "Add", [this, vector_selector](){ auto v = entity.getComponent<COMPONENT>(); if (v) { v->VECTOR.emplace_back(); vector_selector->setSelectionIndex(static_cast<int>(v->VECTOR.size())); } }); \
         add->setTextSize(20)->setSize(50, 30); \
         auto del = new GuiButton(row, "", "Del", [this](){ auto v = entity.getComponent<COMPONENT>(); if (v && v->VECTOR.size() > 0) v->VECTOR.pop_back(); }); \
         del->setTextSize(20)->setSize(50, 30); \
@@ -262,8 +271,8 @@ public:
             ui->addEntry(STRING_CONVERT_FUNCTION(static_cast<decltype(decltype(COMPONENT::VECTOR)::value_type::VALUE)>(enum_value)), string(enum_value)); \
         ui->update_func = [this, vector_selector]() -> float { auto v = entity.getComponent<COMPONENT>(); \
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
-                return int(v->VECTOR[vector_selector->getSelectionIndex()].VALUE) - int(MIN_VALUE); \
-            return -1; \
+                return static_cast<float>(int(v->VECTOR[vector_selector->getSelectionIndex()].VALUE) - int(MIN_VALUE)); \
+            return -1.0f; \
         }; \
     } while(0)
 #define ADD_SHIP_SYSTEM_TWEAK(SYSTEM) \
@@ -351,16 +360,16 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), BeamWeaponSys, mounts, turret_rotation_rate);
 
     ADD_PAGE(tr("tweak-tab", "Missile system"), MissileTubes);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Homing missiles:"), MissileTubes, storage[MW_Homing]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Homing capacity:"), MissileTubes, storage_max[MW_Homing]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Nuke missiles:"), MissileTubes, storage[MW_Nuke]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Nuke capacity:"), MissileTubes, storage_max[MW_Nuke]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "EMP missiles:"), MissileTubes, storage[MW_EMP]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "EMP capacity:"), MissileTubes, storage_max[MW_EMP]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "HVLI missiles:"), MissileTubes, storage[MW_HVLI]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "HVLI capacity:"), MissileTubes, storage_max[MW_HVLI]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Mines:"), MissileTubes, storage[MW_Mine]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Mines capacity:"), MissileTubes, storage_max[MW_Mine]);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "Homing missiles:"), MissileTubes, storage[MW_Homing]);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "Homing capacity:"), MissileTubes, storage_max[MW_Homing]);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "Nuke missiles:"), MissileTubes, storage[MW_Nuke]);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "Nuke capacity:"), MissileTubes, storage_max[MW_Nuke]);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "EMP missiles:"), MissileTubes, storage[MW_EMP]);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "EMP capacity:"), MissileTubes, storage_max[MW_EMP]);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "HVLI missiles:"), MissileTubes, storage[MW_HVLI]);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "HVLI capacity:"), MissileTubes, storage_max[MW_HVLI]);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "Mines:"), MissileTubes, storage[MW_Mine]);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "Mines capacity:"), MissileTubes, storage_max[MW_Mine]);
     ADD_LABEL(tr("tweak-text", "Missile weapons system"));
     ADD_SHIP_SYSTEM_TWEAK(MissileTubes);
 
@@ -389,7 +398,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Shields, entries, max);
 
     ADD_PAGE(tr("tweak-tab", "Warp drive"), WarpDrive);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max level:"), WarpDrive, max_level);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "Max level:"), WarpDrive, max_level);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed per level:"), WarpDrive, speed_per_level);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy per second:"), WarpDrive, energy_warp_per_second);
     ADD_LABEL(tr("tweak-text", "Warp drive system"));
@@ -427,7 +436,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_PAGE(tr("tweak-tab", "Comms transmitter"), CommsTransmitter);
 
     ADD_PAGE(tr("tweak-tab", "Scan probe launcher"), ScanProbeLauncher);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Stored probes:"), ScanProbeLauncher, stock);
+    ADD_INT_TEXT_TWEAK(tr("tweak-text", "Stored probes:"), ScanProbeLauncher, stock);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max probe storage:"), ScanProbeLauncher, max);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Probe restocking delay:"), ScanProbeLauncher, charge_time);
 

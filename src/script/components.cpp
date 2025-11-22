@@ -91,12 +91,12 @@
         } \
     };
 #define BIND_ARRAY(T, A) \
-    sp::script::ComponentHandler<T>::array_count_func = [](const T& t) -> int { return t.A.size(); }; \
+    sp::script::ComponentHandler<T>::array_count_func = [](const T& t) -> int { return static_cast<int>(t.A.size()); }; \
     sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); }; \
     sp::script::ComponentHandler<T>::indexed_members["length"] = { \
         [](lua_State* L, const void* ptr, int n) { \
             auto t = reinterpret_cast<const T*>(ptr); \
-            return sp::script::Convert<int>::toLua(L, t->A.size()); \
+            return sp::script::Convert<int>::toLua(L, static_cast<int>(t->A.size())); \
         }, [](lua_State* L, void* ptr, int n) { \
             auto t = reinterpret_cast<T*>(ptr); \
             t->A.resize(std::max(0, sp::script::Convert<int>::fromLua(L, -1))); \
@@ -135,7 +135,7 @@
         } \
     };
 #define BIND_ARRAY_DIRTY_FLAG(T, A, DIRTY) \
-    sp::script::ComponentHandler<T>::array_count_func = [](const T& t) -> int { return t.A.size(); }; \
+    sp::script::ComponentHandler<T>::array_count_func = [](const T& t) -> int { return static_cast<int>(t.A.size()); }; \
     sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); t.DIRTY = true; };
 #define BIND_ARRAY_DIRTY_FLAG_MEMBER(T, A, MEMBER, DIRTY) \
     sp::script::ComponentHandler<T>::indexed_members[STRINGIFY(MEMBER)] = { \
@@ -414,7 +414,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<DockingBay>::members["external_dock_classes"] = {
         [](lua_State* L, const void* ptr) {
             auto bay = reinterpret_cast<const DockingBay*>(ptr);
-            lua_createtable(L, bay->external_dock_classes.size(), 0);
+            lua_createtable(L, static_cast<int>(bay->external_dock_classes.size()), 0);
             int idx = 1;
             for(const auto& c : bay->external_dock_classes) {
                 lua_pushstring(L, c.c_str());
@@ -437,7 +437,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<DockingBay>::members["internal_dock_classes"] = {
         [](lua_State* L, const void* ptr) {
             auto bay = reinterpret_cast<const DockingBay*>(ptr);
-            lua_createtable(L, bay->internal_dock_classes.size(), 0);
+            lua_createtable(L, static_cast<int>(bay->internal_dock_classes.size()), 0);
             int idx = 1;
             for(const auto& c : bay->internal_dock_classes) {
                 lua_pushstring(L, c.c_str());

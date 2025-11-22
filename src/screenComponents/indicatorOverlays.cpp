@@ -71,17 +71,17 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
             }
         }
         shield_hit = (shield_hit - 0.5f) / 0.5f;
-        shield_hit_overlay->setAlpha(32 * shield_hit);
+        shield_hit_overlay->setAlpha(static_cast<int>(32 * shield_hit));
 
         if (low_shields)
         {
-            shield_low_warning_overlay->setAlpha(glow(16, 48, 0.5));
+            shield_low_warning_overlay->setAlpha(static_cast<int>(glow(16, 48, 0.5)));
         }else{
             shield_low_warning_overlay->setAlpha(0);
         }
 
         if (auto hull = my_spaceship.getComponent<Hull>())
-            hull_hit_overlay->setAlpha(128 * (hull->damage_indicator / 1.5f));
+            hull_hit_overlay->setAlpha(static_cast<int>(128 * (hull->damage_indicator / 1.5f)));
     }else{
         shield_hit_overlay->setAlpha(0);
         shield_low_warning_overlay->setAlpha(0);

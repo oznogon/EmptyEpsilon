@@ -15,7 +15,7 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
 {
     renderer.drawStretchedHV(rect, 25.0f, "gui/widget/PanelBackground.png");
 
-    int point_count = rect.size.x / 4 - 1;
+    int point_count = static_cast<int>(rect.size.x / 4) - 1;
     std::vector<glm::vec2> r;
     std::vector<glm::vec2> g;
     std::vector<glm::vec2> b;

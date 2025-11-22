@@ -50,12 +50,12 @@ LuaConsole::LuaConsole()
     entry->upCallback([this](string s) {
         string text = history.movePrevious(s);
         entry->setText(text);
-        entry->setCursorPosition(text.size());
+        entry->setCursorPosition(static_cast<int>(text.size()));
     });
     entry->downCallback([this](string s) {
         string text = history.moveNext(s);
         entry->setText(text);
-        entry->setCursorPosition(text.size());
+        entry->setCursorPosition(static_cast<int>(text.size()));
     });
 
     top->hide();
@@ -70,7 +70,7 @@ void LuaConsole::addLog(const string& message)
     while(console->log_messages.size() > 50)
         console->log_messages.erase(console->log_messages.begin());
     console->log->setText(string("\n").join(console->log_messages));
-    console->log->setCursorPosition(console->log->getText().size());
+    console->log->setCursorPosition(static_cast<int>(console->log->getText().size()));
     if (!console->is_open) {
         console->message_show_timers.emplace_back();
         console->message_show_timers.back().start(5.0f);
@@ -139,6 +139,6 @@ string ConsoleHistory::moveNext(string s) {
 void ConsoleHistory::append(string s)
 {
     entries.push_back(s);
-    position = entries.size();
+    position = static_cast<unsigned int>(entries.size());
     pending = "";
 }

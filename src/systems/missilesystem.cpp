@@ -340,7 +340,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             cpe.travel_random_range = 100.0f;
             cpe.start_color = {1, 1, 1};
             cpe.end_color = {0, 0, 1};
-            cpe.interval = 0.4;
+            cpe.interval = 0.4f;
             cpe.start_size = 30.0f;
             cpe.end_size = 0.0f;
             cpe.life_time = 10.0f;

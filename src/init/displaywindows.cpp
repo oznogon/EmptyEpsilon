@@ -59,7 +59,7 @@ bool createDisplayWindows()
             new MouseRenderer(ml);
             windows.push_back(new Window({width, height}, fullscreen, ml, fsaa));
             window_render_layers.push_back(wrl);
-            new SecondMonitorScreen(windows.size() - 1);
+            new SecondMonitorScreen(static_cast<int>(windows.size()) - 1);
         }
     }
 

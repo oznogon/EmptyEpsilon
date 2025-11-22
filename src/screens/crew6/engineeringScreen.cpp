@@ -42,15 +42,15 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     auto stats = new GuiElement(this, "ENGINEER_STATS");
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 200)->setAttribute("layout", "vertical");
 
-    auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45, true);
+    auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45f, true);
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
-    auto hull_display = new HullInfoDisplay(stats, "HULL_DISPLAY", 0.45);
+    auto hull_display = new HullInfoDisplay(stats, "HULL_DISPLAY", 0.45f);
     hull_display->setTextSize(20)->setSize(240, 40);
-    auto front_shield_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45, 0);
+    auto front_shield_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45f, 0);
     front_shield_display->setSize(240, 40);
-    auto rear_shield_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45, 1);
+    auto rear_shield_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45f, 1);
     rear_shield_display->setSize(240, 40);
-    auto coolant_display = new CoolantInfoDisplay(stats, "COOLANT_DISPLAY", 0.45);
+    auto coolant_display = new CoolantInfoDisplay(stats, "COOLANT_DISPLAY", 0.45f);
     coolant_display->setSize(240, 40);
 
     self_destruct_button = new GuiSelfDestructButton(this, "SELF_DESTRUCT");
@@ -61,7 +61,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     GuiElement* system_row_layouts = new GuiElement(system_config_container, "SYSTEM_ROWS");
     system_row_layouts->setPosition(0, 0, sp::Alignment::BottomLeft)->setAttribute("layout", "verticalbottom");
     system_row_layouts->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    float column_width = gameGlobalInfo->use_system_damage ? 100 : 150;
+    float column_width = gameGlobalInfo->use_system_damage ? 100.0f : 150.0f;
     for(int n=0; n<ShipSystem::COUNT; n++)
     {
         string id = "SYSTEM_ROW_" + getSystemName(ShipSystem::Type(n));
@@ -348,7 +348,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                         {
                             DamageInfo di;
                             di.type = DamageType::Kinetic;
-                            float damage_negate = 1.0f - shields->getDamageFactor(shields->entries.size() - 1);
+                            float damage_negate = 1.0f - shields->getDamageFactor(static_cast<int>(shields->entries.size()) - 1);
                             if (damage_negate < 0.0f)
                                 addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
                             else
@@ -513,7 +513,7 @@ void EngineeringScreen::addSystemEffect(string key, string value)
 {
     if (system_effects_index == system_effects.size())
     {
-        GuiKeyValueDisplay* item = new GuiKeyValueDisplay(system_effects_container, "", 0.7, key, value);
+        GuiKeyValueDisplay* item = new GuiKeyValueDisplay(system_effects_container, "", 0.7f, key, value);
         item->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 40);
         system_effects.push_back(item);
     }else{

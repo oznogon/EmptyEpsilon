@@ -13,14 +13,14 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
     // Build warp request slider.
     slider = new GuiSlider(this, id + "_SLIDER", 1.0, 0.0, 0.0, [this](float value) {
         // Round the slider value to an int.
-        int warp_level = value;
+        int warp_level = static_cast<int>(value);
 
         // Send a warp request command to our ship.
         if (my_spaceship)
             my_player_info->commandWarp(warp_level);
 
         // Set the slider value to the warp level.
-        slider->setValue(warp_level);
+        slider->setValue(static_cast<float>(warp_level));
     });
     slider->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(50, GuiElement::GuiSizeMax);
     slider->addSnapValue(0.0, 0.5);
@@ -31,7 +31,7 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
         auto warp = my_spaceship.getComponent<WarpDrive>();
         // Set the slider's value to the current warp request.
         if (warp)
-            slider->setValue(warp->request);
+            slider->setValue(static_cast<float>(warp->request));
     }
 
     // Label the warp slider.
@@ -49,11 +49,11 @@ void GuiWarpControls::onDraw(sp::RenderTarget& target)
         auto warp = my_spaceship.getComponent<WarpDrive>();
         if (warp) {
             label->setValue(string(warp->current, 1));
-            slider->setValue(warp->request);
-            if (slider->getRangeMin() != warp->max_level) {
-                slider->setRange(warp->max_level, 0);
+            slider->setValue(static_cast<float>(warp->request));
+            if (slider->getRangeMin() != static_cast<float>(warp->max_level)) {
+                slider->setRange(static_cast<float>(warp->max_level), 0);
                 for(int n=0; n<=warp->max_level; n++)
-                    slider->addSnapValue(n, 0.5);
+                    slider->addSnapValue(static_cast<float>(n), 0.5f);
             }
         }
     }
@@ -96,14 +96,14 @@ void GuiWarpControls::onUpdate()
         {
             if (warp->request < 4) {
                 my_player_info->commandWarp(warp->request+1);
-                slider->setValue(warp->request+1);
+                slider->setValue(static_cast<float>(warp->request+1));
             }
         }
         else if (keys.helms_decrease_warp.getDown())
         {
             if (warp->request > 0) {
                 my_player_info->commandWarp(warp->request-1);
-                slider->setValue(warp->request-1);
+                slider->setValue(static_cast<float>(warp->request-1));
             }
         }
     }

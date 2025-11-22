@@ -28,7 +28,7 @@ void DebugRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, sp
         for(size_t idx=0; idx<point_count; idx++) {
             float f = float(idx) / float(point_count) * static_cast<float>(M_PI) * 2.0f;
             vertices.push_back({std::sin(f) * radius, std::cos(f) * radius, 0.0f});
-            indices.push_back(idx);
+            indices.push_back(static_cast<uint16_t>(idx));
         }
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<GLvoid*>(&vertices[0]));
         

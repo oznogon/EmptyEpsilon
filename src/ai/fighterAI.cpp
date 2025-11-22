@@ -79,7 +79,7 @@ void FighterAI::runAttack(sp::ecs::Entity target)
 
         if (distance < 500 + (target_physics ? target_physics->getSize().x : 0.0f))
         {
-            aggression += random(0, 0.05);
+            aggression += random(0.0f, 0.05f);
 
             attack_state = State::Evade;
             timeout = 30.0f - std::min(aggression, 1.0f) * 20.0f;
@@ -94,7 +94,7 @@ void FighterAI::runAttack(sp::ecs::Entity target)
         if (shields && !shields->entries.empty() && shields->entries[0].level < shields->entries[0].max * (1.0f - aggression))
         {
             attack_state = State::Recharge;
-            aggression += random(0.1, 0.25);
+            aggression += random(0.1f, 0.25f);
             timeout = 60.0f - std::min(aggression, 1.0f) * 20.0f;
         }
         break;

@@ -15,20 +15,20 @@ namespace gl
     {
         void createBuffers(size_t count, uint32_t* buffers)
         {
-            GL_CHECK(glGenBuffers(count, buffers));
+            GL_CHECK(glGenBuffers(static_cast<GLsizei>(count), buffers));
         }
         void deleteBuffers(size_t count, const uint32_t* buffers)
         {
-            GL_CHECK(glDeleteBuffers(count, buffers));
+            GL_CHECK(glDeleteBuffers(static_cast<GLsizei>(count), buffers));
         }
 
         void createTextures(size_t count, uint32_t* textures)
         {
-            GL_CHECK(glGenTextures(count, textures));
+            GL_CHECK(glGenTextures(static_cast<GLsizei>(count), textures));
         }
         void deleteTextures(size_t count, const uint32_t* textures)
         {
-            GL_CHECK(glDeleteTextures(count, textures));
+            GL_CHECK(glDeleteTextures(static_cast<GLsizei>(count), textures));
         }
     }
 

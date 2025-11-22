@@ -237,7 +237,7 @@ void CrewStationScreen::addStationTab(GuiElement* element, CrewPosition position
         button_strip->hide();
     });
     info.button->setIcon(icon);
-    info.button->setPosition(0, tabs.size() * 50, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    info.button->setPosition(0, static_cast<float>(tabs.size() * 50), sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 50);
 
     if (tabs.size() == 0)
     {
@@ -264,7 +264,7 @@ void CrewStationScreen::finishCreation()
 {
     select_station_button->moveToFront();
     button_strip->moveToFront();
-    button_strip->setSize(button_strip->getSize().x, 50 * tabs.size());
+    button_strip->setSize(button_strip->getSize().x, static_cast<float>(50 * tabs.size()));
 
     message_frame->moveToFront();
 
@@ -385,7 +385,7 @@ void CrewStationScreen::showNextTab(int offset)
             current = n;
     }
 
-    int next = (current + offset + tabs.size()) % tabs.size();
+    int next = static_cast<int>((current + offset + tabs.size()) % tabs.size());
 
     showTab(tabs[next].element);
 }

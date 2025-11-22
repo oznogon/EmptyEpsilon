@@ -17,7 +17,7 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
         {
             FieldItem* item = new FieldItem(owner, "", "", [this, x, y](bool value) { getFieldItem(x, y)->setValue(!value); onFieldClick(x, y); });
             item->setSize(50, 50);
-            item->setPosition(x * 50 - field_size * 25, 25 + y * 50 - field_size * 25, sp::Alignment::Center);
+            item->setPosition(static_cast<float>(x * 50 - field_size * 25), static_cast<float>(25 + y * 50 - field_size * 25), sp::Alignment::Center);
             board.emplace_back(item);
         }
     }

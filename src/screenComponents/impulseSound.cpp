@@ -9,7 +9,7 @@ ImpulseSound::ImpulseSound(bool enabled)
 {
     impulse_sound_id = -1;
     impulse_sound_enabled = enabled;
-    impulse_sound_volume = PreferencesManager::get("impulse_sound_volume", "50").toInt();
+    impulse_sound_volume = static_cast<float>(PreferencesManager::get("impulse_sound_volume", "50").toInt());
 
     // If defined, use this ship's impulse sound file.
     ImpulseEngine* engine;

@@ -8,7 +8,7 @@ GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
 {
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {});
     scroll->setPosition(0, 0, sp::Alignment::TopRight)->setSize(button_height, GuiSizeMax)->hide();
-    scroll->setClickChange(button_height);
+    scroll->setClickChange(static_cast<int>(button_height));
 
     back_style = theme->getStyle("listbox.back");
     front_style = theme->getStyle("listbox.front");
@@ -25,14 +25,14 @@ GuiListbox* GuiListbox::setTextSize(float size)
 GuiListbox* GuiListbox::setButtonHeight(float height)
 {
     button_height = height;
-    scroll->setClickChange(button_height);
+    scroll->setClickChange(static_cast<int>(button_height));
     scroll->setSize(button_height, GuiSizeMax);
     return this;
 }
 
 GuiListbox* GuiListbox::scrollTo(int index)
 {
-    scroll->setValue(index * button_height);
+    scroll->setValue(static_cast<int>(index * button_height));
     return this;
 }
 
@@ -46,8 +46,8 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
     const auto& back_selected_hover = back_selected_style->get(State::Hover);
     const auto& front_selected = front_selected_style->get(getState());
 
-    scroll->setValueSize(rect.size.y);
-    scroll->setRange(0, entries.size() * button_height);
+    scroll->setValueSize(static_cast<int>(rect.size.y));
+    scroll->setRange(0, static_cast<int>(entries.size() * button_height));
 
     // Determine whether to show the scrollbar based on the total height of all
     // items in the list.
@@ -118,13 +118,13 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
 
 bool GuiListbox::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    int offset = (position.y - rect.position.y + scroll->getValue()) / button_height;
+    int offset = static_cast<int>((position.y - rect.position.y + scroll->getValue()) / button_height);
     return offset >= 0 && offset < int(entries.size());
 }
 
 void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
-    int offset = (position.y - rect.position.y + scroll->getValue()) / button_height;
+    int offset = static_cast<int>((position.y - rect.position.y + scroll->getValue()) / button_height);
     if (offset >= 0 && offset < int(entries.size())) {
         soundManager->playSound("sfx/button.wav");
         setSelectionIndex(offset);
@@ -134,7 +134,7 @@ void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 
 bool GuiListbox::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    float range = scroll->getCorrectedMax() - scroll->getMin();
-    scroll->setValue((scroll->getValue() - value * range / mouse_scroll_steps) );
+    float range = static_cast<float>(scroll->getCorrectedMax() - scroll->getMin());
+    scroll->setValue(static_cast<int>(scroll->getValue() - value * range / static_cast<float>(mouse_scroll_steps)));
     return true;
 }

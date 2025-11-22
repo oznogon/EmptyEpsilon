@@ -23,7 +23,7 @@ void RenderSystem::render3D(float aspect, float camera_fov)
     for(auto& handler : render_handlers)
         (this->*(handler.func))(handler.rif);
 
-    for(int n=render_lists.size() - 1; n >= 0; n--)
+    for(int n=static_cast<int>(render_lists.size()) - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
         std::sort(render_list.begin(), render_list.end(), [](const RenderEntry& a, const RenderEntry& b) { return a.depth > b.depth; });

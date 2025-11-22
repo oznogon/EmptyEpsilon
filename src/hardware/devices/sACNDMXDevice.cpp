@@ -75,8 +75,8 @@ void StreamingAcnDMXDevice::updateLoop()
     {
         std::vector<uint8_t> buffer;
         auto addU8 = [&buffer](uint8_t d) { buffer.resize(buffer.size() + 1); buffer[buffer.size()-1] = d; };
-        auto addU16 = [&buffer](uint16_t d) { buffer.resize(buffer.size() + 2); buffer[buffer.size()-2] = d >> 8; buffer[buffer.size()-1] = d; };
-        auto addU32 = [&buffer](uint16_t d) { buffer.resize(buffer.size() + 4); buffer[buffer.size()-4] = d >> 24; buffer[buffer.size()-3] = d >> 16; buffer[buffer.size()-2] = d >> 8; buffer[buffer.size()-1] = d; };
+        auto addU16 = [&buffer](uint16_t d) { buffer.resize(buffer.size() + 2); buffer[buffer.size()-2] = static_cast<uint8_t>(d >> 8); buffer[buffer.size()-1] = static_cast<uint8_t>(d); };
+        auto addU32 = [&buffer](uint32_t d) { buffer.resize(buffer.size() + 4); buffer[buffer.size()-4] = static_cast<uint8_t>(d >> 24); buffer[buffer.size()-3] = static_cast<uint8_t>(d >> 16); buffer[buffer.size()-2] = static_cast<uint8_t>(d >> 8); buffer[buffer.size()-1] = static_cast<uint8_t>(d); };
 
         //Root layer
         addU16(0x0010); //RLP Size

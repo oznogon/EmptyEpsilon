@@ -88,7 +88,7 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
                     if (!target || glm::length2(position - lrr->waypoints[n]) < glm::length2(position - target_position))
                     {
                         clear();
-                        waypoint_selection_index = n;
+                        waypoint_selection_index = static_cast<int>(n);
                         waypoint_selection_position = lrr->waypoints[n];
                         return;
                     }

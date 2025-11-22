@@ -12,8 +12,8 @@ static PathFindingSystem* path_finding_system;
 
 static uint32_t hashPosition(glm::vec2 position)
 {
-    uint32_t x = std::floor(position.x / small_object_grid_size);
-    uint32_t y = std::floor(position.y / small_object_grid_size);
+    uint32_t x = static_cast<uint32_t>(std::floor(position.x / small_object_grid_size));
+    uint32_t y = static_cast<uint32_t>(std::floor(position.y / small_object_grid_size));
     return x ^ (y << 16);
 }
 
@@ -186,10 +186,10 @@ bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_po
 
     {
         // Bresenham's line algorithm to
-        int x1 = std::floor(start.x / small_object_grid_size);
-        int y1 = std::floor(start.y / small_object_grid_size);
-        int x2 = std::floor(end.x / small_object_grid_size);
-        int y2 = std::floor(end.y / small_object_grid_size);
+        int x1 = static_cast<int>(std::floor(start.x / small_object_grid_size));
+        int y1 = static_cast<int>(std::floor(start.y / small_object_grid_size));
+        int x2 = static_cast<int>(std::floor(end.x / small_object_grid_size));
+        int y2 = static_cast<int>(std::floor(end.y / small_object_grid_size));
 
         const bool steep = abs(y2 - y1) > abs(x2 - x1);
         if(steep)

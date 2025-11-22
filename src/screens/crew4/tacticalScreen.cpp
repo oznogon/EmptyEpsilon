@@ -81,13 +81,13 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 160)->setAttribute("layout", "vertical");
 
     // Ship statistics in the top left corner.
-    auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45);
+    auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45f);
     energy_display->setSize(240, 40);
-    auto heading_display = new HeadingInfoDisplay(stats, "HEADING_DISPLAY", 0.45);
+    auto heading_display = new HeadingInfoDisplay(stats, "HEADING_DISPLAY", 0.45f);
     heading_display->setSize(240, 40);
-    auto velocity_display = new VelocityInfoDisplay(stats, "VELOCITY_DISPLAY", 0.45);
+    auto velocity_display = new VelocityInfoDisplay(stats, "VELOCITY_DISPLAY", 0.45f);
     velocity_display->setSize(240, 40);
-    auto shields_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45);
+    auto shields_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45f);
     shields_display->setSize(240, 40);
 
     // Weapon tube loading controls in the bottom left corner.

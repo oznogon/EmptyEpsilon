@@ -37,9 +37,9 @@ static_assert(static_cast<int>(CrewPosition::MAX) <= 64);
 class CrewPositions
 {
 public:
-    void add(CrewPosition cp) { mask |= 1 << static_cast<int>(cp); }
-    void remove(CrewPosition cp) { mask &=~(1 << static_cast<int>(cp)); }
-    bool has(CrewPosition cp) const { return mask & (1 << static_cast<int>(cp)); }
+    void add(CrewPosition cp) { mask |= 1ULL << static_cast<int>(cp); }
+    void remove(CrewPosition cp) { mask &=~(1ULL << static_cast<int>(cp)); }
+    bool has(CrewPosition cp) const { return mask & (1ULL << static_cast<int>(cp)); }
 
     uint64_t mask = 0;
 
@@ -49,14 +49,14 @@ public:
     class Iterator {
     public:
         Iterator(uint64_t _mask, CrewPosition _cp) : mask(_mask), cp(_cp) {
-            if(cp != CrewPosition::MAX && (mask & (1 << int(cp))) == 0) {
+            if(cp != CrewPosition::MAX && (mask & (1ULL << int(cp))) == 0) {
                 ++(*this);
             }
         }
         bool operator!=(const Iterator& other) const { return cp != other.cp; }
         void operator++() {
             cp = CrewPosition(int(cp)+1);
-            while(cp != CrewPosition::MAX && (mask & (1 << int(cp))) == 0) {
+            while(cp != CrewPosition::MAX && (mask & (1ULL << int(cp))) == 0) {
                 cp = CrewPosition(int(cp)+1);
             }
         }
@@ -68,7 +68,7 @@ public:
     Iterator begin() { return {mask, CrewPosition(0)}; }
     Iterator end() { return {mask, CrewPosition::MAX}; }
 
-    static CrewPositions all() { return CrewPositions{(1 << int(CrewPosition::MAX)) - 1}; }
+    static CrewPositions all() { return CrewPositions{(1ULL << int(CrewPosition::MAX)) - 1}; }
 };
 
 namespace sp::io {

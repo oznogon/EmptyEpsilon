@@ -155,8 +155,8 @@ void HotkeyMenu::setCategory(int cat)
     }
 
     // Resize the rendering UI panel based on the number of columns.
-    rebinding_ui_width = KEY_COLUMN_WIDTH * rebinding_columns.size() + FRAME_MARGIN;
-    rebinding_ui->setSize(rebinding_ui_width, KEY_COLUMN_HEIGHT);
+    rebinding_ui_width = static_cast<int>(KEY_COLUMN_WIDTH * rebinding_columns.size() + FRAME_MARGIN);
+    rebinding_ui->setSize(static_cast<float>(rebinding_ui_width), KEY_COLUMN_HEIGHT);
 
     // Enable pagination buttons if pagination is necessary.
     // TODO: Detect viewport width instead of hardcoding breakpoint at
@@ -182,7 +182,7 @@ void HotkeyMenu::pageHotkeys(int direction)
     }
 
     // Move the frame left if the direction is negative, right if it's positive
-    int new_offset = frame_position.x + KEY_COLUMN_WIDTH * direction;
+    float new_offset = frame_position.x + KEY_COLUMN_WIDTH * static_cast<float>(direction);
 
     if (new_offset >= 0)
     {

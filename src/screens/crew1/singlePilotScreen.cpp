@@ -89,13 +89,13 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 
     auto stats = new GuiElement(this, "STATS");
     stats->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(240, 160)->setAttribute("layout", "vertical");
-    auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45);
+    auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45f);
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
-    auto heading_display = new HeadingInfoDisplay(stats, "HEADING_DISPLAY", 0.45);
+    auto heading_display = new HeadingInfoDisplay(stats, "HEADING_DISPLAY", 0.45f);
     heading_display->setSize(240, 40);
-    auto velocity_display = new VelocityInfoDisplay(stats, "VELOCITY_DISPLAY", 0.45);
+    auto velocity_display = new VelocityInfoDisplay(stats, "VELOCITY_DISPLAY", 0.45f);
     velocity_display->setSize(240, 40);
-    auto shields_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45);
+    auto shields_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45f);
     shields_display->setSize(240, 40);
 
     // Unlocked missile aim dial and lock controls.

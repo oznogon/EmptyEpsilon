@@ -202,7 +202,7 @@ bool GuiMissileTubeControls::getManualAim()
 
 void GuiMissileTubeControls::createTubeRow()
 {
-    int n = rows.size();
+    int n = static_cast<int>(rows.size());
 
     TubeRow row;
     row.layout = new GuiElement(tube_rows_layout, id + "_ROW_" + string(n));

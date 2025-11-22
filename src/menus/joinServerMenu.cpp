@@ -45,10 +45,10 @@ JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
 
     if (target.type == ServerScanner::ServerType::SteamFriend) {
 #ifdef STEAMSDK
-        new GameClient(VERSION_NUMBER, target.port);
+        new GameClient(VERSION_NUMBER, static_cast<int>(target.port));
 #endif
     } else {
-        new GameClient(VERSION_NUMBER, target.address, target.port);
+        new GameClient(VERSION_NUMBER, target.address, static_cast<int>(target.port));
     }
 }
 

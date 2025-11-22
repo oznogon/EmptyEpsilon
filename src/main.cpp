@@ -261,7 +261,7 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("headless") == "")
     {
 #ifdef _WIN32
-        mkdir(configuration_path.c_str());
+        _mkdir(configuration_path.c_str());
 #else
         mkdir(configuration_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 #endif
@@ -329,7 +329,7 @@ void returnToShipSelection(RenderLayer* render_layer)
     {
         for(size_t n=0; n<window_render_layers.size(); n++)
             if (window_render_layers[n] == render_layer)
-                new SecondMonitorScreen(n);
+                new SecondMonitorScreen(static_cast<int>(n));
     } else {
         if (PreferencesManager::get("autoconnect") != "")
         {

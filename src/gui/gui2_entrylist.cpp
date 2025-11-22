@@ -67,7 +67,7 @@ int GuiEntryList::addEntry(string name, string value)
 {
     entries.emplace_back(name, value);
     entriesChanged();
-    return entries.size() - 1;
+    return static_cast<int>(entries.size()) - 1;
 }
 
 int GuiEntryList::indexByValue(string value) const
@@ -99,7 +99,7 @@ void GuiEntryList::clear()
 
 int GuiEntryList::entryCount() const
 {
-    return entries.size();
+    return static_cast<int>(entries.size());
 }
 
 string GuiEntryList::getEntryName(int index) const

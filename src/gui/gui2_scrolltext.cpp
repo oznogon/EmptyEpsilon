@@ -33,12 +33,12 @@ void GuiScrollText::onDraw(sp::RenderTarget& renderer)
     auto prepared = sp::RenderTarget::getDefaultFont()->prepare(this->text, 32, text_size, selectColor(colorConfig.textbox.forground), text_rect.size, sp::Alignment::TopLeft, sp::Font::FlagClip | sp::Font::FlagLineWrap);
     auto text_draw_size = prepared.getUsedAreaSize();
 
-    int scroll_max = text_draw_size.y;
+    int scroll_max = static_cast<int>(text_draw_size.y);
     if (scrollbar->getMax() != scroll_max)
     {
-        int diff = scroll_max - scrollbar->getMax();
+        int diff = scroll_max - static_cast<int>(scrollbar->getMax());
         scrollbar->setRange(0, scroll_max);
-        scrollbar->setValueSize(text_rect.size.y);
+        scrollbar->setValueSize(static_cast<int>(text_rect.size.y));
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
@@ -59,8 +59,8 @@ void GuiScrollText::onDraw(sp::RenderTarget& renderer)
 
 bool GuiScrollText::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    float range = scrollbar->getCorrectedMax() - scrollbar->getMin();
-    scrollbar->setValue((scrollbar->getValue() - value * range / mouse_scroll_steps) );
+    float range = static_cast<float>(scrollbar->getCorrectedMax() - scrollbar->getMin());
+    scrollbar->setValue(static_cast<int>(scrollbar->getValue() - value * range / static_cast<float>(mouse_scroll_steps)));
     return true;
 }
 
@@ -115,12 +115,12 @@ void GuiScrollFormattedText::onDraw(sp::RenderTarget& renderer)
     prepared.finish();
     auto text_draw_size = prepared.getUsedAreaSize();
 
-    int scroll_max = text_draw_size.y;
+    int scroll_max = static_cast<int>(text_draw_size.y);
     if (scrollbar->getMax() != scroll_max)
     {
-        int diff = scroll_max - scrollbar->getMax();
+        int diff = scroll_max - static_cast<int>(scrollbar->getMax());
         scrollbar->setRange(0, scroll_max);
-        scrollbar->setValueSize(text_rect.size.y);
+        scrollbar->setValueSize(static_cast<int>(text_rect.size.y));
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }

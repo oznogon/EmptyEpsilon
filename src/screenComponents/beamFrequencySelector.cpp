@@ -33,7 +33,7 @@ void GuiBeamFrequencySelector::onUpdate()
         if (keys.weapons_beam_frequence_decrease.getDown())
         {
             if (getSelectionIndex() <= 0)
-                setSelectionIndex(entries.size() - 1);
+                setSelectionIndex(static_cast<int>(entries.size()) - 1);
             else
                 setSelectionIndex(getSelectionIndex() - 1);
         }

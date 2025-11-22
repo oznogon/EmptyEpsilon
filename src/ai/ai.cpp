@@ -660,7 +660,7 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
         if ((warp || jump) && !WarpSystem::isWarpJammed(owner))
         {
             if (warp)
-                warp->request = (rotation_diff < 30.0f && distance > 2000.0f) ? 1.0f : 0.0f;
+                warp->request = (rotation_diff < 30.0f && distance > 2000.0f) ? 1 : 0;
             if (distance > 10000 && jump && jump->delay <= 0.0f && jump->charge >= jump->max_distance)
             {
                 if (rotation_diff < 1.0f)

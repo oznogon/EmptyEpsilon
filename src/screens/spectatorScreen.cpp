@@ -90,7 +90,7 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
     info_position_lock->setTextSize(16)->setSize(50, 27)->setPosition(0, 0, sp::Alignment::CenterRight);
 
     zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 100000.0f, 5000.0f, 50000.0f, [this](float value) {
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 2.0f)}}));
+        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 2)}}));
         main_radar->setDistance(value);
     });
     zoom_slider->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(350, 50)->hide();
@@ -138,7 +138,7 @@ void SpectatorScreen::update(float delta)
             main_radar->longRange();
         // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance);
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / view_distance, 2.0f)}}));
+        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / view_distance, 2)}}));
     }
 
     if (keys.help.getDown())

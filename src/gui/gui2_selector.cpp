@@ -10,7 +10,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
     left = new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this]() {
         soundManager->playSound("sfx/button.wav");
         if (getSelectionIndex() <= 0)
-            setSelectionIndex(entries.size() - 1);
+            setSelectionIndex(static_cast<int>(entries.size()) - 1);
         else
             setSelectionIndex(getSelectionIndex() - 1);
         callback();
@@ -46,7 +46,7 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     if (!focus)
         popup->hide();
     float top = rect.position.y;
-    float height = entries.size() * 50;
+    float height = static_cast<float>(entries.size()) * 50.0f;
     if (selection_index >= 0)
         top -= selection_index * 50;
     top = std::max(0.0f, top);
@@ -86,9 +86,9 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
                 popup_buttons[n]->show();
             }
             popup_buttons[n]->setValue(int(n) == selection_index);
-            popup_buttons[n]->setPosition(0, n * 50, sp::Alignment::TopLeft);
+            popup_buttons[n]->setPosition(0, static_cast<float>(n) * 50.0f, sp::Alignment::TopLeft);
         }
-        for(unsigned int n=entries.size(); n<popup_buttons.size(); n++)
+        for(size_t n=entries.size(); n<popup_buttons.size(); n++)
         {
             popup_buttons[n]->hide();
         }

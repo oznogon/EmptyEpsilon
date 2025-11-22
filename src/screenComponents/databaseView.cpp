@@ -165,7 +165,7 @@ void DatabaseViewComponent::display()
     if (has_key_values)
     {
         for(auto& kv : database->key_values)
-            (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, kv.key, kv.value))->setSize(GuiElement::GuiSizeMax, 40);
+            (new GuiKeyValueDisplay(keyvalue_container, "", 0.37f, kv.key, kv.value))->setSize(GuiElement::GuiSizeMax, 40);
     } else {
         keyvalue_container->destroy();
         keyvalue_container = nullptr;

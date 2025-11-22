@@ -106,17 +106,17 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     scan_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<ScienceScanner>());
 
     // Simple scan data.
-    info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4, tr("science", "Callsign"), "");
+    info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4f, tr("science", "Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
-    info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4, tr("science", "Distance"), "");
+    info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4f, tr("science", "Distance"), "");
     info_distance->setSize(GuiElement::GuiSizeMax, 30);
-    info_heading = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEADING", 0.4, tr("science", "Bearing"), "");
+    info_heading = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEADING", 0.4f, tr("science", "Bearing"), "");
     info_heading->setSize(GuiElement::GuiSizeMax, 30);
-    info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4, tr("science", "Rel. Speed"), "");
+    info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4f, tr("science", "Rel. Speed"), "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
-    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4, tr("science", "Faction"), "");
+    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4f, tr("science", "Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
-    info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, tr("science", "Type"), "");
+    info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4f, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
     info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("scienceButton", "DB"), [this]() {
         auto ship = targets.get();
@@ -132,9 +132,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         }
     });
     info_type_button->setTextSize(20)->setPosition(0, 1, sp::Alignment::TopLeft)->setSize(50, 28);
-    info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4, tr("science", "Shields"), "");
+    info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4f, tr("science", "Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
-    info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4, tr("science", "Hull"), "");
+    info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4f, tr("science", "Hull"), "");
     info_hull->setSize(GuiElement::GuiSizeMax, 30);
 
     // Full scan data
@@ -272,7 +272,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
     // Responsive layout for custom button sidebar. 1440x900 vpixels is 16:10, so this would roughly be the threshold.
 
-    int current_width = getRect().size.x;
+    int current_width = static_cast<int>(getRect().size.x);
     sidebar_selector->setVisible(current_width < 1435 && (sidebar_selector->getSelectionIndex() > 0 || custom_function_sidebar->hasEntries()));
     if (current_width < 1435 || !custom_function_sidebar->hasEntries())
     {

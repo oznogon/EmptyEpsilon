@@ -19,9 +19,9 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
 {
     selected_system = ShipSystem::Type::None;
 
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45f, tr("Energy"), "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(285, 40);
-    coolant_display = new GuiKeyValueDisplay(this, "COOLANT_DISPLAY", 0.45, tr("Coolant"), "");
+    coolant_display = new GuiKeyValueDisplay(this, "COOLANT_DISPLAY", 0.45f, tr("Coolant"), "");
     coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setPosition(315, 20, sp::Alignment::TopLeft)->setSize(280, 40);
     GuiElement* layout = new GuiElement(this, "");
     layout->setPosition(20, 60, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 400)->setAttribute("layout", "horizontal");
@@ -49,7 +49,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         systems[n].power_slider = new GuiSlider(box, "", 3.0, 0.0, 1.0, [n](float value) {
             my_player_info->commandSetSystemPowerRequest(ShipSystem::Type(n), value);
         });
-        systems[n].power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 50, sp::Alignment::TopLeft)->setSize(55, 340);
+        systems[n].power_slider->addSnapValue(1.0f, 0.1f)->setPosition(50, 50, sp::Alignment::TopLeft)->setSize(55, 340);
 
         systems[n].coolant_bar = new GuiProgressbar(box, "", 0.0, 10.0, 0.0);
         systems[n].coolant_bar->setDrawBackground(false)->setPosition(132.5, 60, sp::Alignment::TopLeft)->setSize(50, 320);
