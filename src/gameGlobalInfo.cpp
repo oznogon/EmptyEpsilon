@@ -102,18 +102,26 @@ void GameGlobalInfo::update(float delta)
     }
     elapsed_time += delta;
 
-    if (main_scenario_script && main_script_error_count < max_repeated_script_errors) {
-        auto res = main_scenario_script->call<void>("update", delta);
-        if (res.isErr() && res.error() != "Not a function") {
-            LuaConsole::checkResult(res);
-            main_script_error_count += 1;
-            if (main_script_error_count == max_repeated_script_errors) {
-                LuaConsole::addLog("5 repeated script update errors, stopping updates.");
+    if (main_scenario_script && main_script_error_count < max_repeated_script_errors)
+    {
+        // Warn and ignore if the main scenario script attempts to destroy
+        // itself with destroyScript().
+        if (main_scenario_script->isMarkedForDestruction())
+            LuaConsole::addLog("Main script incorrectly marked for destruction.");
+        else
+        {
+            auto res = main_scenario_script->call<void>("update", delta);
+            if (res.isErr() && res.error() != "Not a function")
+            {
+                LuaConsole::checkResult(res);
+                main_script_error_count += 1;
+                if (main_script_error_count == max_repeated_script_errors)
+                    LuaConsole::addLog("5 repeated script update errors, stopping updates.");
             }
-        } else {
-            main_script_error_count = 0;
+            else main_script_error_count = 0;
         }
     }
+
     script_threads.insert(script_threads.end(), new_script_threads.begin(), new_script_threads.end());
     new_script_threads.clear();
     for(auto it = script_threads.begin(); it != script_threads.end(); )
@@ -126,11 +134,26 @@ void GameGlobalInfo::update(float delta)
             ++it;
         }
     }
-    for(auto& as : additional_scripts) {
+
+    // Run each additional script alongside the main script.
+    for (auto& as : additional_scripts)
+    {
         auto res = as->call<void>("update", delta);
         if (res.isErr() && res.error() != "Not a function")
             LuaConsole::checkResult(res);
     }
+
+    // Remove additional scripts that have been marked for destruction.
+    additional_scripts.erase
+    (
+        std::remove_if(additional_scripts.begin(), additional_scripts.end(),
+            [](const std::unique_ptr<sp::script::Environment>& script)
+            {
+                return script->isMarkedForDestruction();
+            }
+        ),
+        additional_scripts.end()
+    );
 }
 
 string GameGlobalInfo::getNextShipCallsign()
@@ -339,7 +362,9 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
         }
     }
 
+    // Designate main scenario script.
     main_scenario_script = std::make_unique<sp::script::Environment>(script_environment_base.get());
+    main_scenario_script->setScriptName("main_scenario:" + filename);
     setupSubEnvironment(*main_scenario_script.get());
     //TODO: int max_cycles = PreferencesManager::get("script_cycle_limit", "0").toInt();
     //TODO: if (max_cycles > 0)
@@ -348,14 +373,18 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     // Initialize scenario settings.
     setScenarioSettings(filename, new_settings);
 
+    // Run the scenario script and call its init() function.
     auto res = main_scenario_script->runFile<void>(filename);
     LuaConsole::checkResult(res);
-    if (res.isOk() && main_scenario_script->isFunction("init")) {
+    if (res.isOk() && main_scenario_script->isFunction("init"))
+    {
         res = main_scenario_script->call<void>("init");
         LuaConsole::checkResult(res);
-        if (res.isErr()) {
+
+        if (res.isErr())
+        {
             main_script_error_count = max_repeated_script_errors;
-            LuaConsole::addLog("init() function failed, not going to call update()");
+            LuaConsole::addLog("Main scenario script init() function failed, not going to call update().");
         }
     }
 }

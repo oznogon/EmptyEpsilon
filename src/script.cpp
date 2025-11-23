@@ -258,28 +258,49 @@ static void luaClearGMFunctions()
 static int luaCreateAdditionalScript(lua_State* L)
 {
     auto env = std::make_unique<sp::script::Environment>(gameGlobalInfo->script_environment_base.get());
+    // Index this additional script.
+    env->setScriptName("additional_script_" + std::to_string(gameGlobalInfo->additional_scripts.size() + 1));
+
+    // Setup the additional script's environment.
     setupSubEnvironment(*env.get());
     auto ptr = reinterpret_cast<sp::script::Environment**>(lua_newuserdata(L, sizeof(sp::script::Environment*)));
     *ptr = env.get();
     luaL_getmetatable(L, "ScriptObject");
-    if (lua_isnil(L, -1)) {
+
+    // Create the additional script and implement Script():run(script_filename).
+    if (lua_isnil(L, -1))
+    {
         lua_pop(L, 1);
         luaL_newmetatable(L, "ScriptObject");
         lua_newtable(L);
-        lua_pushcfunction(L, [](lua_State* LL) {
+        lua_pushcfunction(L, [](lua_State* LL)
+        {
             auto ptr = reinterpret_cast<sp::script::Environment**>(luaL_checkudata(LL, 1, "ScriptObject"));
             if (!ptr) return 0;
+
+            // Get the script filename, designate it as an additional script,
+            // and load the localized version if available.
             string filename = luaL_checkstring(LL, 2);
+            (*ptr)->setScriptName("additional:" + filename);
             i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+
+            // Run the script and call its init() function.
             auto res = (*ptr)->runFile<void>(filename);
             LuaConsole::checkResult(res);
-            if (res.isOk()) {
+            if (res.isOk())
+            {
                 res = (*ptr)->call<void>("init");
                 LuaConsole::checkResult(res);
+                if (res.isErr())
+                {
+                    LuaConsole::addLog("Additional script init() function failed, not going to call update().");
+                }
             }
             return 0;
         });
         lua_setfield(L, -2, "run");
+
+        // Implement Script():setVariable(name, value).
         lua_pushcfunction(L, [](lua_State* LL)
         {
             auto ptr = reinterpret_cast<sp::script::Environment**>(luaL_checkudata(LL, 1, "ScriptObject"));
@@ -1368,6 +1389,16 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("addGMFunction", &luaAddGMFunction);
     env.setGlobal("clearGMFunctions", &luaClearGMFunctions);
 
+    /// void Script()
+    /// Creates an additional script.
+    /// Use this to set up Lua scripts to execute alongside the current script.
+    /// Use Script()'s setVariable function to pass values to the additional script.
+    /// Use Script()'s run function to pass the script's filename and begin running it.
+    /// Additional scripts run until they are destroyed, and can flag themselves for self-destruction by invoking destroyScript() in their update() loop.
+    /// Example:
+    /// local script = Script()
+    /// script:setVariable("callsign", player:getCallSign()) -- passes the value into the variable "callsign" in the additional script
+    /// script:run("some_script.lua") -- runs scripts/some_script.lua
     env.setGlobal("Script", &luaCreateAdditionalScript);
 
     /// void setCommsMessage(string message)
