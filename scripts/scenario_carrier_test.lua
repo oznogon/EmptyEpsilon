@@ -33,33 +33,7 @@ fighter_classes = {
     "ZX-Lindworm"
 }
 
-player_fighter = PlayerSpaceship()
-    :setFaction("Human Navy")
-    :setTemplate("Striker")
-    :setCallSign("Player fighter")
-    :setWeaponTubeCount(7)
-    :weaponTubeAllowMissle(0,"Homing")
-    :weaponTubeAllowMissle(1,"Nuke")
-    :weaponTubeAllowMissle(2,"Nuke")
-    :weaponTubeAllowMissle(3,"EMP")
-    :weaponTubeAllowMissle(4,"EMP")
-    :weaponTubeAllowMissle(5,"HVLI")
-    :weaponTubeAllowMissle(6,"Homing")
-    :setWeaponStorageMax("Homing", 4)
-    :setWeaponStorageMax("Nuke", 4)
-    :setWeaponStorageMax("EMP", 4)
-    :setWeaponStorageMax("HVLI", 4)
-    :setWeaponStorageMax("Mine", 4)
-    :setWeaponStorage("Homing", math.random(1,4))
-    :setWeaponStorage("Nuke", math.random(1,4))
-    :setWeaponStorage("EMP", math.random(1,4))
-    :setWeaponStorage("HVLI", math.random(1,4))
-    :setWeaponStorage("Mine", math.random(1,4))
-player_fighter
-    :setHull(math.random(10, player_fighter:getHullMax()))
-moveEntityToInternalBay(player_fighter, carrier)
-
-for i=1,9 do
+for i=1,5 do
     local fighter = CpuShip()
         :setFaction("Human Navy")
         :setTemplate(fighter_classes[i])
@@ -86,6 +60,61 @@ for i=1,9 do
         :setHull(math.random(10, fighter:getHullMax()))
     moveEntityToInternalBay(fighter, carrier)
 end
+
+player_fighter = PlayerSpaceship()
+    :setFaction("Human Navy")
+    :setTemplate("Striker")
+    :setCallSign("Player fighter")
+    :setWeaponTubeCount(7)
+    :weaponTubeAllowMissle(0,"Homing")
+    :weaponTubeAllowMissle(1,"Nuke")
+    :weaponTubeAllowMissle(2,"Nuke")
+    :weaponTubeAllowMissle(3,"EMP")
+    :weaponTubeAllowMissle(4,"EMP")
+    :weaponTubeAllowMissle(5,"HVLI")
+    :weaponTubeAllowMissle(6,"Homing")
+    :setWeaponStorageMax("Homing", 4)
+    :setWeaponStorageMax("Nuke", 4)
+    :setWeaponStorageMax("EMP", 4)
+    :setWeaponStorageMax("HVLI", 4)
+    :setWeaponStorageMax("Mine", 4)
+    :setWeaponStorage("Homing", math.random(1,4))
+    :setWeaponStorage("Nuke", math.random(1,4))
+    :setWeaponStorage("EMP", math.random(1,4))
+    :setWeaponStorage("HVLI", math.random(1,4))
+    :setWeaponStorage("Mine", math.random(1,4))
+player_fighter
+    :setHull(math.random(10, player_fighter:getHullMax()))
+moveEntityToInternalBay(player_fighter, carrier)
+
+for i=7,9 do
+    local fighter = CpuShip()
+        :setFaction("Human Navy")
+        :setTemplate(fighter_classes[i])
+        :setScannedByFaction("Human Navy", true)
+        :setWeaponTubeCount(7)
+        :weaponTubeAllowMissle(0,"Homing")
+        :weaponTubeAllowMissle(1,"Nuke")
+        :weaponTubeAllowMissle(2,"Nuke")
+        :weaponTubeAllowMissle(3,"EMP")
+        :weaponTubeAllowMissle(4,"EMP")
+        :weaponTubeAllowMissle(5,"HVLI")
+        :weaponTubeAllowMissle(6,"Homing")
+        :setWeaponStorageMax("Homing", 4)
+        :setWeaponStorageMax("Nuke", 4)
+        :setWeaponStorageMax("EMP", 4)
+        :setWeaponStorageMax("HVLI", 4)
+        :setWeaponStorageMax("Mine", 4)
+        :setWeaponStorage("Homing", math.random(1,4))
+        :setWeaponStorage("Nuke", math.random(1,4))
+        :setWeaponStorage("EMP", math.random(1,4))
+        :setWeaponStorage("HVLI", math.random(1,4))
+        :setWeaponStorage("Mine", math.random(1,4))
+    fighter
+        :setHull(math.random(10, fighter:getHullMax()))
+    moveEntityToInternalBay(fighter, carrier)
+end
+
 --[[
 for i=1,10 do
   local fighter = CpuShip()

@@ -23,22 +23,24 @@ private:
     GuiElement* docking_bay_info;
 
     GuiEntityInfoPanel* selected_entity_info;
+    GuiKeyValueDisplay* entity_missiles[MW_Count];
     GuiKeyValueDisplay* entity_energy;
     GuiKeyValueDisplay* entity_hull;
-    GuiKeyValueDisplay* entity_missiles[MW_Count];
 
     GuiElement* bottom_row;
+    GuiKeyValueDisplay* energy_carrier;
     GuiSelector* target_berth;
     GuiToggleButton* scramble;
     GuiElement* hangar_controls;
     GuiElement* energy_controls;
     GuiSlider* energy_transfer_direction;
-    GuiKeyValueDisplay* energy_carrier;
     GuiKeyValueDisplay* energy_docked;
     GuiElement* thermal_controls;
     GuiElement* missile_controls;
     GuiElement* repair_controls;
     GuiElement* storage_controls;
+    GuiSlider* repair_prioritization_direction;
+    GuiKeyValueDisplay* hull_docked;
 
     // State tracking
     sp::ecs::Entity selected_entity;

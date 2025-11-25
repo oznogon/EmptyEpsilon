@@ -93,6 +93,39 @@ void DockingSystem::update(float delta)
                                 hull->current = hull->max;
                         }
                     }
+                    // Otherwise, determine whether we're in a docking bay
+                    // energy berth set to transfer energy and use that if so.
+                    else if (is_berthed && my_berth.type == DockingBay::Berth::Type::Repair)
+                    {
+                        auto my_reactor = carrier_entity.getComponent<Reactor>();
+                        auto docked_hull = entity.getComponent<Hull>();
+                        const float energy_transfer = my_berth.transfer_rate * delta;
+
+                        // The configured direction determine whether to repair
+                        // the berthed ship's hull first (ToDocked) or systems
+                        // first (ToBerth).
+                        if (docked_hull && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToDocked)
+                        {
+                            if (docked_hull->current + energy_transfer >= docked_hull->max) continue;
+                            if (my_reactor && !my_reactor->useEnergy(energy_transfer)) continue;
+                            docked_hull->current = std::min(docked_hull->max, docked_hull->current + energy_transfer);
+                        }
+                        else if (my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToCarrier)
+                        {
+                            for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
+                            {
+                                if (auto docked_sys = ShipSystem::get(entity, static_cast<ShipSystem::Type>(i)))
+                                {
+                                    if (docked_sys->health < docked_sys->health_max)
+                                    {
+                                        if (docked_sys->health + energy_transfer >= docked_sys->health_max) continue;
+                                        if (my_reactor && !my_reactor->useEnergy(energy_transfer)) continue;
+                                        docked_sys->health = std::min(docked_sys->health_max, docked_sys->health + energy_transfer);
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     // Use DockingBay flag for energy transfer if set.
                     // This should override energy docking bay berth behavior.
