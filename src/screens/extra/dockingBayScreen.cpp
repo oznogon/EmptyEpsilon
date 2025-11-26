@@ -324,19 +324,50 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiButton(vent_controls_row, "", tr("dockingbay", "Vent heat"),
-        [this]()
+    thermal_venting_direction = new GuiSlider(vent_controls_row, "DOCKING_BAY_VENT_SLIDER",
+        static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
+        static_cast<float>(DockingBay::Berth::TransferDirection::ToDocked),
+        static_cast<float>(DockingBay::Berth::TransferDirection::None),
+        [this](float value)
         {
             if (!my_spaceship || !my_player_info) return;
 
             if (auto bay = my_spaceship.getComponent<DockingBay>())
             {
                 if (selected_berth_index >= 0 && selected_berth_index < static_cast<int>(bay->berths.size()))
-                    my_player_info->commandVentBerthHeat(selected_berth_index, bay->berths[selected_berth_index].transfer_rate);
+                    my_player_info->commandSetBerthTransferDirection(selected_berth_index, static_cast<int>(value));
             }
         }
-    ))->setIcon("gui/icons/status_overheat")
-        ->setSize(250.0f, 50.0f);
+    );
+    thermal_venting_direction
+        ->addSnapValue(static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier), 0.75f)
+        ->addSnapValue(static_cast<float>(DockingBay::Berth::TransferDirection::None), 0.5f)
+        ->addSnapValue(static_cast<float>(DockingBay::Berth::TransferDirection::ToDocked), 0.75f)
+        ->setSize(400.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "10, 0");
+
+    (new GuiElement(vent_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    GuiElement* thermal_venting_labels_row = new GuiElement(thermal_controls, "DOCKING_BAY_HEAT_TRANSFER_LABELS");
+    thermal_venting_labels_row
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("layout", "horizontal");
+
+    (new GuiElement(thermal_venting_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    (new GuiLabel(thermal_venting_labels_row, "", tr("dockingbay", "to carrier"), 20.0f))
+        ->setAlignment(sp::Alignment::CenterLeft)
+        ->setSize(150.0f, GuiElement::GuiSizeMax);
+
+    (new GuiLabel(thermal_venting_labels_row, "", tr("dockingbay", "none"), 20.0f))
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(100.0f, GuiElement::GuiSizeMax);
+
+    (new GuiLabel(thermal_venting_labels_row, "", tr("dockingbay", "to docked"), 20.0f))
+        ->setAlignment(sp::Alignment::CenterRight)
+        ->setSize(150.0f, GuiElement::GuiSizeMax);
+
+    (new GuiElement(thermal_venting_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     GuiElement* heat_gauges_row = new GuiElement(thermal_controls, "THERMAL_HEAT_GAUGES");
     heat_gauges_row
@@ -368,7 +399,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             ->setSize(GuiElement::GuiSizeMax, 50.0f)
             ->setAttribute("layout", "horizontal");
 
-        info.label = new GuiKeyValueDisplay(info.row, id + "_LABEL", 0.1f, "", getLocaleSystemName(ShipSystem::Type(n)));
+        info.label = new GuiKeyValueDisplay(info.row, id + "_LABEL", 0.175f, "", getLocaleSystemName(ShipSystem::Type(n)));
         info.label
             ->setIcon("") // TODO: System icon
             ->setSize(250.0f, GuiElement::GuiSizeMax);
@@ -389,6 +420,15 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     }
     // TODO: Heat transfer controls between carrier and docked entity.
     // TODO: More functionality if there's a docking bay system to vent into.
+    thermal_rows[int(ShipSystem::Type::Reactor)].label->setIcon("gui/icons/system_reactor");
+    thermal_rows[int(ShipSystem::Type::BeamWeapons)].label->setIcon("gui/icons/system_beam");
+    thermal_rows[int(ShipSystem::Type::MissileSystem)].label->setIcon("gui/icons/system_missile");
+    thermal_rows[int(ShipSystem::Type::Maneuver)].label->setIcon("gui/icons/system_maneuver");
+    thermal_rows[int(ShipSystem::Type::Impulse)].label->setIcon("gui/icons/system_impulse");
+    thermal_rows[int(ShipSystem::Type::Warp)].label->setIcon("gui/icons/system_warpdrive");
+    thermal_rows[int(ShipSystem::Type::JumpDrive)].label->setIcon("gui/icons/system_jumpdrive");
+    thermal_rows[int(ShipSystem::Type::FrontShield)].label->setIcon("gui/icons/shields-fore");
+    thermal_rows[int(ShipSystem::Type::RearShield)].label->setIcon("gui/icons/shields-aft");
 
     // Repair-specific berth controls.
     repair_controls = new GuiElement(right_column, "DOCKING_BAY_REPAIR_CONTROLS");
@@ -494,7 +534,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             ->setSize(GuiElement::GuiSizeMax, 50.0f)
             ->setAttribute("layout", "horizontal");
 
-        info.label = new GuiKeyValueDisplay(info.row, id + "_LABEL", 0.1f, "", getLocaleSystemName(ShipSystem::Type(n)));
+        info.label = new GuiKeyValueDisplay(info.row, id + "_LABEL", 0.175f, "", getLocaleSystemName(ShipSystem::Type(n)));
         info.label
             ->setIcon("") // TODO: System icon
             ->setSize(250.0f, GuiElement::GuiSizeMax);
@@ -512,6 +552,16 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         // info.row->moveToBack();
         repair_rows.push_back(info);
     }
+
+    repair_rows[int(ShipSystem::Type::Reactor)].label->setIcon("gui/icons/system_reactor");
+    repair_rows[int(ShipSystem::Type::BeamWeapons)].label->setIcon("gui/icons/system_beam");
+    repair_rows[int(ShipSystem::Type::MissileSystem)].label->setIcon("gui/icons/system_missile");
+    repair_rows[int(ShipSystem::Type::Maneuver)].label->setIcon("gui/icons/system_maneuver");
+    repair_rows[int(ShipSystem::Type::Impulse)].label->setIcon("gui/icons/system_impulse");
+    repair_rows[int(ShipSystem::Type::Warp)].label->setIcon("gui/icons/system_warpdrive");
+    repair_rows[int(ShipSystem::Type::JumpDrive)].label->setIcon("gui/icons/system_jumpdrive");
+    repair_rows[int(ShipSystem::Type::FrontShield)].label->setIcon("gui/icons/shields-fore");
+    repair_rows[int(ShipSystem::Type::RearShield)].label->setIcon("gui/icons/shields-aft");
 
     // Missile-specific berth controls.
     missile_controls = new GuiElement(right_column, "DOCKING_BAY_MISSILE_CONTROLS");

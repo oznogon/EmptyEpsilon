@@ -54,6 +54,7 @@ private:
     GuiKeyValueDisplay* energy_carrier;
     GuiKeyValueDisplay* energy_docked;
     GuiElement* thermal_controls;
+    GuiSlider* thermal_venting_direction;
     GuiElement* missile_controls;
     GuiElement* repair_controls;
     GuiKeyValueDisplay* energy_carrier_repair;
