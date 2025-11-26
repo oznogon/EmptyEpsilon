@@ -57,7 +57,6 @@ public:
     void commandLaunchInternal(sp::ecs::Entity entity);
     void commandMoveInternalToBerth(sp::ecs::Entity entity, int berth_index);
     void commandSetBerthTransferDirection(int berth_index, int direction);
-    void commandVentBerthHeat(int berth_index, float vent_amount);
     void commandAbortDock();
     void commandOpenTextComm(sp::ecs::Entity obj);
     void commandCloseTextComm();
