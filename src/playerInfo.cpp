@@ -865,7 +865,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             // Verify berth index is valid
             if (auto bay = ship.getComponent<DockingBay>())
             {
-                if (berth_index >= 0 && berth_index < static_cast<size_t>(bay->berths.size()))
+                if (berth_index >= 0 && berth_index < static_cast<int32_t>(bay->berths.size()))
                 {
                     auto berth = bay->berths[berth_index];
                     auto docked_entity = berth.docked_entity;
@@ -897,8 +897,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                     float system_count = 0.0f;
                     for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
                     {
-                        if (auto carrier_sys = ShipSystem::get(ship, static_cast<ShipSystem::Type>(i)))
-                            system_count++;
+                        auto carrier_sys = ShipSystem::get(ship, static_cast<ShipSystem::Type>(i));
+                        if (carrier_sys) system_count++;
                     }
 
                     LOG(Debug, "Total amount vented from docked entity: ", amount_vented);

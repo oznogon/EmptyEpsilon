@@ -103,26 +103,73 @@ void DockingSystem::update(float delta)
 
                         // The configured direction determine whether to repair
                         // the berthed ship's hull first (ToDocked) or systems
-                        // first (ToBerth).
+                        // first (ToCarrier).
                         if (docked_hull && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToDocked)
                         {
-                            if (docked_hull->current + energy_transfer >= docked_hull->max) continue;
-                            if (my_reactor && !my_reactor->useEnergy(energy_transfer)) continue;
-                            docked_hull->current = std::min(docked_hull->max, docked_hull->current + energy_transfer);
+                            float transfer_remaining = energy_transfer;
+
+                            if (docked_hull->current < docked_hull->max)
+                            {
+                                float amount_repaired = std::min(transfer_remaining, docked_hull->max - docked_hull->current);
+                                if (my_reactor && !my_reactor->useEnergy(amount_repaired)) continue;
+
+                                transfer_remaining = std::max(0.0f, transfer_remaining - amount_repaired);
+
+                                docked_hull->current = std::min(docked_hull->max, docked_hull->current + amount_repaired);
+                            }
+
+                            if (transfer_remaining > 0.0f)
+                            {
+                                // TODO: DRY
+                                for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
+                                {
+                                    if (auto docked_sys = ShipSystem::get(entity, static_cast<ShipSystem::Type>(i)))
+                                    {
+                                        if (docked_sys->health < docked_sys->health_max)
+                                        {
+                                            float amount_repaired = std::min(transfer_remaining, docked_sys->health_max - docked_sys->health);
+
+                                            if (my_reactor && !my_reactor->useEnergy(amount_repaired)) continue;
+
+                                            docked_sys->health = std::min(docked_sys->health_max, docked_sys->health + transfer_remaining);
+
+                                            if (transfer_remaining <= 0.0f) continue;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         else if (my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToCarrier)
                         {
+                            // TODO: DRY
+                            float transfer_remaining = energy_transfer;
+
                             for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
                             {
                                 if (auto docked_sys = ShipSystem::get(entity, static_cast<ShipSystem::Type>(i)))
                                 {
-                                    if (docked_sys->health < docked_sys->health_max)
+                                    if (transfer_remaining > 0.0f && docked_sys->health < docked_sys->health_max)
                                     {
-                                        if (docked_sys->health + energy_transfer >= docked_sys->health_max) continue;
-                                        if (my_reactor && !my_reactor->useEnergy(energy_transfer)) continue;
+                                        float amount_repaired = std::min(transfer_remaining, docked_sys->health_max - docked_sys->health);
+
+                                        if (my_reactor && !my_reactor->useEnergy(amount_repaired)) continue;
+
+                                        transfer_remaining = std::max(0.0f, transfer_remaining - amount_repaired);
+                                        
                                         docked_sys->health = std::min(docked_sys->health_max, docked_sys->health + energy_transfer);
+
+                                        if (transfer_remaining <= 0.0f) continue;
                                     }
                                 }
+                            }
+
+                            if (transfer_remaining > 0.0f && docked_hull->current < docked_hull->max)
+                            {
+                                float amount_repaired = std::min(transfer_remaining, docked_hull->max - docked_hull->current);
+
+                                if (my_reactor && !my_reactor->useEnergy(amount_repaired)) continue;
+
+                                docked_hull->current = std::min(docked_hull->max, docked_hull->current + amount_repaired);
                             }
                         }
                     }
