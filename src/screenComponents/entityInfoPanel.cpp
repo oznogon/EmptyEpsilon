@@ -265,7 +265,7 @@ void GuiEntityInfoPanelGrid::onUpdate()
         {
             row++;
             if (row > max_rows)
-                LOG(Debug, "There are more rows in the list than can be shown at once");
+                LOG(Debug, "There are more rows in the list than can be shown at once, and the excess rows shouldn't be visible");
 
             current_row = new GuiElement(content_container, "");
             current_row

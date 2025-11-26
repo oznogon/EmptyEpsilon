@@ -1,8 +1,12 @@
 #include "dockingBayScreen.h"
 #include "i18n.h"
 
+#include "gui/gui2_arrow.h"
 #include "gui/gui2_button.h"
+#include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_progressbar.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_togglebutton.h"
@@ -166,11 +170,6 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     target_berth
         ->setSize(250.0f, GuiElement::GuiSizeMax);
 
-    energy_carrier = new GuiKeyValueDisplay(move_controls_row, "", kv_split, tr("dockingbay", "Carrier energy"), "");
-    energy_carrier
-        ->setIcon("gui/icons/energy")
-        ->setSize(250.0f, GuiElement::GuiSizeMax);
-
     (new GuiElement(move_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Scramble button launches all ships in all hangar berths.
@@ -236,7 +235,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(energy_controls, "DOCKING_BAY_ENERGY_CONTROLS_LABEL", tr("dockingbay", "Energy operations"), 30.0f))
+    (new GuiLabel(energy_controls, "DOCKING_BAY_ENERGY_OPERATIONS_LABEL", tr("dockingbay", "Energy operations"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -251,6 +250,11 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAttribute("layout", "horizontal");
 
     (new GuiElement(energy_transfer_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    energy_carrier = new GuiKeyValueDisplay(energy_transfer_row, "", kv_split, tr("dockingbay", "Carrier"), "");
+    energy_carrier
+        ->setIcon("gui/icons/energy")
+        ->setSize(200.0f, GuiElement::GuiSizeMax);
 
     energy_transfer_direction = new GuiSlider(energy_transfer_row, "DOCKING_BAY_ENERGY_SLIDER",
         static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
@@ -332,8 +336,57 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             }
         }
     ))->setIcon("gui/icons/status_overheat")
-        ->setSize(150.0f, 50.0f);
+        ->setSize(250.0f, 50.0f);
 
+    GuiElement* heat_gauges_row = new GuiElement(thermal_controls, "THERMAL_HEAT_GAUGES");
+    heat_gauges_row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "horizontal");
+
+    GuiElement* heat_gauges_left = new GuiElement(heat_gauges_row, "THERMAL_HEAT_GAUGES_LEFT");
+    heat_gauges_left
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, 10, 0, 0");
+    heat_gauges_left
+        ->setAttribute("layout", "vertical");
+
+    GuiElement* heat_gauges_right = new GuiElement(heat_gauges_row, "THERMAL_HEAT_GAUGES_RIGHT");
+    heat_gauges_right
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "10, 0, 0, 0");
+    heat_gauges_right
+        ->setAttribute("layout", "vertical");
+
+    for (int n = 0; n < ShipSystem::COUNT; n++)
+    {
+        // TODO: DRY with repair
+        string id = "THERMAL_SYSTEM_ROW_" + getSystemName(ShipSystem::Type(n));
+        SystemRow info;
+
+        info.row = new GuiElement(n < ShipSystem::COUNT / 2 ? heat_gauges_left : heat_gauges_right, id);
+        info.row
+            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setAttribute("layout", "horizontal");
+
+        info.label = new GuiKeyValueDisplay(info.row, id + "_LABEL", 0.1f, "", getLocaleSystemName(ShipSystem::Type(n)));
+        info.label
+            ->setIcon("") // TODO: System icon
+            ->setSize(250.0f, GuiElement::GuiSizeMax);
+
+        info.heat_bar = new GuiProgressbar(info.row, id + "_HEAT", 0.0f, 1.0f, 0.0f);
+        info.heat_bar->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        info.heat_arrow = new GuiArrow(info.heat_bar, id + "_HEAT_ARROW", 0.0f);
+        info.heat_arrow->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        info.heat_icon = new GuiImage(info.heat_bar, "", "gui/icons/status_overheat");
+        info.heat_icon
+            ->setColor(colorConfig.overlay_overheating)
+            ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+            ->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
+
+        thermal_rows.push_back(info);
+    }
     // TODO: Heat transfer controls between carrier and docked entity.
     // TODO: More functionality if there's a docking bay system to vent into.
 
@@ -355,6 +408,12 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAttribute("layout", "horizontal");
 
     (new GuiElement(repair_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // TODO: DRY with energy_carrier
+    energy_carrier_repair = new GuiKeyValueDisplay(repair_controls_row, "", kv_split, tr("dockingbay", "Carrier"), "");
+    energy_carrier_repair
+        ->setIcon("gui/icons/energy")
+        ->setSize(200.0f, GuiElement::GuiSizeMax);
 
     repair_prioritization_direction = new GuiSlider(repair_controls_row, "DOCKING_BAY_REPAIR_SLIDER",
         static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
@@ -406,6 +465,54 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiElement(repair_prioritization_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    GuiElement* damage_gauges_row = new GuiElement(repair_controls, "REPAIR_DAMAGE_GAUGES");
+    damage_gauges_row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "horizontal");
+
+    GuiElement* damage_gauges_left = new GuiElement(damage_gauges_row, "REPAIR_DAMAGE_GAUGES_LEFT");
+    damage_gauges_left
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, 10, 0, 0");
+    damage_gauges_left
+        ->setAttribute("layout", "vertical");
+
+    GuiElement* damage_gauges_right = new GuiElement(damage_gauges_row, "REPAIR_DAMAGE_GAUGES_RIGHT");
+    damage_gauges_right
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "10, 0, 0, 0");
+    damage_gauges_right
+        ->setAttribute("layout", "vertical");
+
+    for (int n = 0; n < ShipSystem::COUNT; n++)
+    {
+        string id = "REPAIR_SYSTEM_ROW_" + getSystemName(ShipSystem::Type(n));
+        SystemRow info;
+
+        info.row = new GuiElement(n < ShipSystem::COUNT / 2 ? damage_gauges_left : damage_gauges_right, id);
+        info.row
+            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setAttribute("layout", "horizontal");
+
+        info.label = new GuiKeyValueDisplay(info.row, id + "_LABEL", 0.1f, "", getLocaleSystemName(ShipSystem::Type(n)));
+        info.label
+            ->setIcon("") // TODO: System icon
+            ->setSize(250.0f, GuiElement::GuiSizeMax);
+
+        info.damage_bar = new GuiProgressbar(info.row, id + "_DAMAGE", 0.0f, 1.0f, 0.0f);
+        info.damage_bar->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        info.damage_icon = new GuiImage(info.damage_bar, "", "gui/icons/system_health");
+        info.damage_icon
+            ->setColor(colorConfig.overlay_damaged)
+            ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+            ->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
+        info.damage_label = new GuiLabel(info.damage_bar, id + "_DAMAGE_LABEL", "...", 20.0f);
+        info.damage_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // info.row->moveToBack();
+        repair_rows.push_back(info);
+    }
+
     // Missile-specific berth controls.
     missile_controls = new GuiElement(right_column, "DOCKING_BAY_MISSILE_CONTROLS");
     missile_controls
@@ -442,10 +549,9 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     */
 }
 
-void DockingBayScreen::onUpdate()
+void DockingBayScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship) return;
-
     auto bay = my_spaceship.getComponent<DockingBay>();
     if (!bay) return;
 
@@ -494,6 +600,15 @@ void DockingBayScreen::onUpdate()
                     {"max_energy", toNearbyIntString(carrier_reactor->max_energy)}
                 }));
         }
+        // TODO: DRY
+        if (energy_carrier_repair->isVisible())
+        {
+            energy_carrier_repair
+                ->setValue(static_cast<string>("{energy}/{max_energy}").format({
+                    {"energy", toNearbyIntString(carrier_reactor->energy)},
+                    {"max_energy", toNearbyIntString(carrier_reactor->max_energy)}
+                }));
+        }
     }
     else if (energy_controls->isVisible())
     {
@@ -502,8 +617,10 @@ void DockingBayScreen::onUpdate()
             ->setValue(static_cast<float>(DockingBay::Berth::TransferDirection::None))
             ->disable();
     }
+}
 
-
+void DockingBayScreen::onUpdate()
+{
 }
 
 void DockingBayScreen::selectBerth(int berth_index)
@@ -654,10 +771,10 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     auto bay = my_spaceship.getComponent<DockingBay>();
     if (!bay) return;
 
-    // Select the panel by index
+    // Select the panel by index.
     docking_bay_berths->selectPanelByIndex(selected_berth_index);
 
-    // Validate berth index
+    // Validate berth index.
     if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size()))
     {
         selected_entity = sp::ecs::Entity();
@@ -673,7 +790,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         return;
     }
 
-    // Update selected_entity from the berth
+    // Update selected_entity from the berth.
     selected_entity = bay->berths[selected_berth_index].docked_entity;
 
     const string type_icon = bay->getTypeIcon(bay->berths[selected_berth_index].type);
@@ -684,7 +801,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         ->setCustomIcon(1, type_icon)
         ->setCustomLabel(2, type_name);
 
-    // Update reactor/energy displays
+    // Update reactor/energy displays.
     auto carrier_reactor = my_spaceship.getComponent<Reactor>();
     auto docked_reactor = selected_entity.getComponent<Reactor>();
     if (docked_reactor && carrier_reactor) energy_transfer_direction->enable();
@@ -715,21 +832,25 @@ void DockingBayScreen::updateSelectedEntityDisplay()
             ->disable();
     }
 
-    // Update hull display
+    // Update hull display.
     if (auto hull = selected_entity.getComponent<Hull>())
     {
         if (hull->max > 0.0f)
         {
-            entity_hull
-                ->setValue(static_cast<string>("{hull}%").format({
-                    {"hull", static_cast<int>((hull->current / hull->max) * 100.0f)}
-                }));
+            const string hull_value = static_cast<string>("{hull}%").format({
+                {"hull", static_cast<int>((hull->current / hull->max) * 100.0f)}
+            });
+
+            entity_hull->setValue(hull_value);
+
+            if (repair_controls->isVisible())
+                hull_docked->setValue(hull_value);
         }
         else entity_hull->setValue("");
     }
     else entity_hull->setValue(tr("dockingbay", "N/A"));
 
-    // Update missile displays
+    // Update missile displays.
     if (auto tubes = selected_entity.getComponent<MissileTubes>())
     {
         for (int i = MW_Homing; i < MW_Count; i++)
@@ -737,11 +858,66 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     }
     else
         for (auto kv : entity_missiles) kv->setValue("-");
+
+    // Update repair and thermal systems displays.
+    if (repair_controls->isVisible())
+    {
+        for (int n = 0; n < ShipSystem::COUNT; n++)
+        {
+            SystemRow info = repair_rows[n];
+            auto system = ShipSystem::get(selected_entity, ShipSystem::Type(n));
+            info.row->setVisible(system);
+            if (!system) continue;
+
+            float health = system->health;
+            if (health < 0.0f)
+            {
+                info.damage_bar
+                    ->setValue(-health)
+                    ->setColor(glm::u8vec4(128, 32, 32, 192));
+            }
+            else
+            {
+                info.damage_bar
+                    ->setValue(health)
+                    ->setColor(glm::u8vec4(64, static_cast<int>(128.0f * health), static_cast<int>(64.0f * health), 192));
+            }
+
+            info.damage_label->setText(toNearbyIntString(health * 100.0f) + "%");
+            info.damage_icon->setVisible(system->health_max < 1.0f);
+        }
+    }
+
+    if (thermal_controls->isVisible())
+    {
+        for (int n = 0; n < ShipSystem::COUNT; n++)
+        {
+            SystemRow info = thermal_rows[n];
+            auto system = ShipSystem::get(selected_entity, ShipSystem::Type(n));
+            info.row->setVisible(system);
+            if (!system) continue;
+
+            float heat = system->heat_level;
+            info.heat_bar
+                ->setValue(heat)
+                ->setColor(glm::u8vec4(128, 32 + static_cast<int>(96.0f * 1.0f - heat), 32, 192));
+
+            float heating_diff = system->getHeatingDelta();
+            if (heating_diff > 0.0f)
+                info.heat_arrow->setAngle(90.0f);
+            else
+                info.heat_arrow->setAngle(-90.0f);
+
+            info.heat_arrow
+                ->setColor(glm::u8vec4(255, 255, 255, std::min(255, int(255.0f * fabs(heating_diff)))))
+                ->setVisible(heat > 0.0f);
+
+            info.heat_icon->setVisible(heat > 0.9f);
+        }
+    }
 }
 
-void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display,
-                                            MissileTubes* tubes,
-                                            EMissileWeapons type)
+void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display, MissileTubes* tubes, EMissileWeapons type)
 {
     if (tubes->storage_max[type] > 0)
     {

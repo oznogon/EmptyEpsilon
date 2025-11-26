@@ -3,9 +3,13 @@
 #include "gui/gui2_overlay.h"
 #include "missileWeaponData.h"
 
-class GuiKeyValueDisplay;
+class GuiArrow;
 class GuiEntityInfoPanel;
 class GuiEntityInfoPanelGrid;
+class GuiImage;
+class GuiKeyValueDisplay;
+class GuiLabel;
+class GuiProgressbar;
 class GuiSelector;
 class GuiSlider;
 class GuiToggleButton;
@@ -17,6 +21,21 @@ private:
     static constexpr float kv_size = 40.0f;
     static constexpr float kv_split = 0.5f;
 
+    class SystemRow
+    {
+    public:
+        GuiElement* row;
+        GuiKeyValueDisplay* label;
+        GuiProgressbar* damage_bar;
+        GuiImage* damage_icon;
+        GuiLabel* damage_label;
+        GuiProgressbar* heat_bar;
+        GuiArrow* heat_arrow;
+        GuiImage* heat_icon;
+    };
+    std::vector<SystemRow> thermal_rows;
+    std::vector<SystemRow> repair_rows;
+
     GuiElement* left_column;
     GuiElement* right_column;
     GuiEntityInfoPanelGrid* docking_bay_berths;
@@ -27,17 +46,17 @@ private:
     GuiKeyValueDisplay* entity_energy;
     GuiKeyValueDisplay* entity_hull;
 
-    GuiElement* bottom_row;
-    GuiKeyValueDisplay* energy_carrier;
     GuiSelector* target_berth;
     GuiToggleButton* scramble;
     GuiElement* hangar_controls;
     GuiElement* energy_controls;
     GuiSlider* energy_transfer_direction;
+    GuiKeyValueDisplay* energy_carrier;
     GuiKeyValueDisplay* energy_docked;
     GuiElement* thermal_controls;
     GuiElement* missile_controls;
     GuiElement* repair_controls;
+    GuiKeyValueDisplay* energy_carrier_repair;
     GuiElement* storage_controls;
     GuiSlider* repair_prioritization_direction;
     GuiKeyValueDisplay* hull_docked;
@@ -57,5 +76,6 @@ private:
 public:
     DockingBayScreen(GuiContainer* owner);
 
+    virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual void onUpdate() override;
 };
