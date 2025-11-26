@@ -48,19 +48,19 @@ private:
 
     GuiSelector* target_berth;
     GuiToggleButton* scramble;
+    GuiKeyValueDisplay* energy_carrier;
+
     GuiElement* hangar_controls;
     GuiElement* energy_controls;
     GuiSlider* energy_transfer_direction;
-    GuiKeyValueDisplay* energy_carrier;
-    GuiKeyValueDisplay* energy_docked;
     GuiElement* thermal_controls;
     GuiSlider* thermal_venting_direction;
+    GuiElement* heat_gauges_row;
     GuiElement* missile_controls;
     GuiElement* repair_controls;
-    GuiKeyValueDisplay* energy_carrier_repair;
+    GuiElement* damage_gauges_row;
     GuiElement* storage_controls;
     GuiSlider* repair_prioritization_direction;
-    GuiKeyValueDisplay* hull_docked;
 
     // State tracking
     sp::ecs::Entity selected_entity;
