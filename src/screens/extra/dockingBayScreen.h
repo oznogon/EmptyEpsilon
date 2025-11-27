@@ -56,7 +56,8 @@ private:
     GuiElement* thermal_controls;
     GuiSlider* thermal_venting_direction;
     GuiElement* heat_gauges_row;
-    GuiElement* missile_controls;
+    GuiElement* supply_controls;
+    GuiKeyValueDisplay* supply_missiles[MW_Count];
     GuiElement* repair_controls;
     GuiElement* damage_gauges_row;
     GuiElement* storage_controls;

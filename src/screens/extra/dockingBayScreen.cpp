@@ -2,6 +2,7 @@
 #include "i18n.h"
 
 #include "gui/gui2_arrow.h"
+#include "gui/gui2_arrowbutton.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -116,30 +117,14 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     for (int i = MW_Homing; i < MW_Count; i++)
     {
         entity_missiles[i] = new GuiKeyValueDisplay(selected_entity_kvs_1, "", kv_split, getLocaleMissileWeaponName(static_cast<EMissileWeapons>(i)), "");
-        entity_missiles[i]
-            ->setSize(GuiElement::GuiSizeMax, kv_size);
-
-        switch (static_cast<EMissileWeapons>(i))
-        {
-            case MW_Homing:
-                entity_missiles[i]->setIcon("gui/icons/weapon-homing");
-                break;
-            case MW_Nuke:
-                entity_missiles[i]->setIcon("gui/icons/weapon-nuke");
-                break;
-            case MW_EMP:
-                entity_missiles[i]->setIcon("gui/icons/weapon-emp");
-                break;
-            case MW_HVLI:
-                entity_missiles[i]->setIcon("gui/icons/weapon-hvli");
-                break;
-            case MW_Mine:
-                entity_missiles[i]->setIcon("gui/icons/weapon-mine");
-                break;
-            default:
-                break;
-        }
+        entity_missiles[i]->setSize(GuiElement::GuiSizeMax, kv_size);
     }
+
+    entity_missiles[MW_Homing]->setIcon("gui/icons/weapon-homing");
+    entity_missiles[MW_Nuke]->setIcon("gui/icons/weapon-nuke");
+    entity_missiles[MW_EMP]->setIcon("gui/icons/weapon-emp");
+    entity_missiles[MW_HVLI]->setIcon("gui/icons/weapon-hvli");
+    entity_missiles[MW_Mine]->setIcon("gui/icons/weapon-mine");
 
     GuiElement* selected_entity_kvs_2 = new GuiElement(docking_bay_info, "");
     selected_entity_kvs_2
@@ -561,19 +546,34 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     }
     setSystemRowIcons(repair_rows);
 
-    // Missile-specific berth controls.
-    missile_controls = new GuiElement(right_column, "DOCKING_BAY_MISSILE_CONTROLS");
-    missile_controls
+    // Restocking-specific berth controls.
+    supply_controls = new GuiElement(right_column, "DOCKING_BAY_SUPPLY_CONTROLS");
+    supply_controls
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(missile_controls, "DOCKING_BAY_MISSILE_LABEL", tr("dockingbay", "Missile operations"), 30.0f))
+    (new GuiLabel(supply_controls, "DOCKING_BAY_SUPPLY_LABEL", tr("dockingbay", "Supply operations"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
 
+    for (int i = MW_Homing; i < MW_Count; i++)
+    {
+        supply_missiles[i] = new GuiKeyValueDisplay(supply_controls, "", kv_split, getLocaleMissileWeaponName(static_cast<EMissileWeapons>(i)), "");
+        supply_missiles[i]->setSize(250.0f, kv_size);
+        
+    }
+
+    supply_missiles[MW_Homing]->setIcon("gui/icons/weapon-homing");
+    supply_missiles[MW_Nuke]->setIcon("gui/icons/weapon-nuke");
+    supply_missiles[MW_EMP]->setIcon("gui/icons/weapon-emp");
+    supply_missiles[MW_HVLI]->setIcon("gui/icons/weapon-hvli");
+    supply_missiles[MW_Mine]->setIcon("gui/icons/weapon-mine");
+
     // TODO: Weapon stocks transfer controls between carrier and docked entity.
+    // TODO: Scan probe stock transfer controls between carrier and docked entity.
+    // TODO: Fill berth with supply drop?
 
     // Storage-specific berth controls.
     storage_controls = new GuiElement(right_column, "DOCKING_BAY_STORAGE_CONTROLS");
@@ -684,7 +684,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             hangar_controls->show();
             energy_controls->hide();
             thermal_controls->hide();
-            missile_controls->hide();
+            supply_controls->hide();
             repair_controls->hide();
             storage_controls->hide();
             break;
@@ -692,7 +692,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             hangar_controls->hide();
             energy_controls->show();
             thermal_controls->hide();
-            missile_controls->hide();
+            supply_controls->hide();
             repair_controls->hide();
             storage_controls->hide();
             break;
@@ -700,7 +700,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             hangar_controls->hide();
             energy_controls->hide();
             thermal_controls->show();
-            missile_controls->hide();
+            supply_controls->hide();
             repair_controls->hide();
             storage_controls->hide();
             break;
@@ -708,7 +708,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             hangar_controls->hide();
             energy_controls->hide();
             thermal_controls->hide();
-            missile_controls->show();
+            supply_controls->show();
             repair_controls->hide();
             storage_controls->hide();
             break;
@@ -716,7 +716,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             hangar_controls->hide();
             energy_controls->hide();
             thermal_controls->hide();
-            missile_controls->hide();
+            supply_controls->hide();
             repair_controls->show();
             storage_controls->hide();
             break;
@@ -724,7 +724,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             hangar_controls->hide();
             energy_controls->hide();
             thermal_controls->hide();
-            missile_controls->hide();
+            supply_controls->hide();
             repair_controls->hide();
             storage_controls->show();
             break;
