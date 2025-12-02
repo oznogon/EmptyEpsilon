@@ -21,6 +21,7 @@
 #include "components/hull.h"
 #include "components/missiletubes.h"
 #include "components/name.h"
+#include "components/probe.h"
 #include "components/reactor.h"
 
 #include "systems/docking.h"
@@ -600,9 +601,11 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         return supply_missiles;
     };
 
+    // Populate missile key/value displays
     populateMissiles(berth_missiles, supply_controls_left);
     populateMissiles(carrier_missiles, supply_controls_right);
 
+    // Populate missile transfer buttons
     GuiButton* to_berth[MW_Count];
     GuiButton* to_carrier[MW_Count];
 
@@ -612,7 +615,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         supply_controls_center_row
             ->setSize(GuiElement::GuiSizeMax, kv_size)
             ->setAttribute("layout", "horizontal");
-        to_berth[i] = new GuiButton(supply_controls_center_row, "", "<", 
+        to_berth[i] = new GuiButton(supply_controls_center_row, "", "<",
             [this, i]()
             {
                 LOG(Info, "Send MW ", i, " to berthed ship");
@@ -635,43 +638,81 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             }
         );
         to_berth[i]->setSize(kv_size, kv_size);
-        to_carrier[i] = new GuiButton(supply_controls_center_row, "", ">", 
+        to_carrier[i] = new GuiButton(supply_controls_center_row, "", ">",
             [this, i]()
             {
-                LOG(Info, "Send MW ", i, " to carrier ship");
-
                 if (!my_spaceship || !my_player_info) return;
-                LOG(Info, "past if (!my_spaceship || !my_player_info) return;");
                 auto bay = my_spaceship.getComponent<DockingBay>();
                 if (!bay) return;
-                LOG(Info, "past if (!bay) return");
                 if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
-                LOG(Info, "past if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;");
 
                 auto selected_entity = bay->berths[selected_berth_index].docked_entity;
                 auto berth_tubes = selected_entity.getComponent<MissileTubes>();
                 if (!berth_tubes) return;
-                LOG(Info, "past if (!berth_tubes) return;");
                 if (berth_tubes->storage[i] <= 0) return;
-                LOG(Info, "past if (berth_tubes->storage[i] <= 0) return;");
                 auto carrier_tubes = my_spaceship.getComponent<MissileTubes>();
                 if (!carrier_tubes) return;
-                LOG(Info, "past if (!carrier_tubes) return;");
                 if (carrier_tubes->storage[i] >= carrier_tubes->storage_max[i]) return;
-                LOG(Info, "past if (carrier_tubes->storage[i] >= carrier_tubes->storage_max[i]) return;");
 
-                LOG(Info, "BEFORE: carrier_tubes->storage[i]: ", carrier_tubes->storage[i], " berth_tubes->storage[i]: ", berth_tubes->storage[i]);
                 carrier_tubes->storage[i] += 1;
                 berth_tubes->storage[i] -= 1;
-                LOG(Info, "AFTER: carrier_tubes->storage[i]: ", carrier_tubes->storage[i], " berth_tubes->storage[i]: ", berth_tubes->storage[i]);
             }
         );
         to_carrier[i]->setSize(kv_size, kv_size);
     }
 
-    // TODO: Weapon stocks transfer controls between carrier and docked entity.
-    // TODO: Scan probe stock transfer controls between carrier and docked entity.
-    // TODO: Fill berth with supply drop?
+    // Populate scan probe key/value displays
+    berth_scan_probes = new GuiKeyValueDisplay(supply_controls_left, "", kv_split, tr("Scan probes"), "-");
+    carrier_scan_probes = new GuiKeyValueDisplay(supply_controls_right, "", kv_split, tr("Scan probes"), "-");
+
+    // Populate scan probe transfer buttons
+    (new GuiButton(supply_controls_center, "", "<",
+        [this]()
+        {
+            LOG(Info, "Send scan probe to berthed ship");
+
+            if (!my_spaceship || !my_player_info) return;
+            auto bay = my_spaceship.getComponent<DockingBay>();
+            if (!bay) return;
+            if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
+
+            auto selected_entity = bay->berths[selected_berth_index].docked_entity;
+            auto berth_probes = selected_entity.getComponent<ScanProbeLauncher>();
+            if (!berth_probes) return;
+            if (berth_probes->stock >= berth_probes->max) return;
+            auto carrier_probes = my_spaceship.getComponent<ScanProbeLauncher>();
+            if (!carrier_probes) return;
+            if (carrier_probes->stock <= 0) return;
+
+            carrier_probes->stock -= 1;
+            berth_probes->stock += 1;
+        }
+    ))->setSize(kv_size, kv_size);
+
+    (new GuiButton(supply_controls_center, "", "<",
+        [this]()
+        {
+            LOG(Info, "Send scan probe to berthed ship");
+
+            if (!my_spaceship || !my_player_info) return;
+            auto bay = my_spaceship.getComponent<DockingBay>();
+            if (!bay) return;
+            if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
+
+            auto selected_entity = bay->berths[selected_berth_index].docked_entity;
+            auto berth_probes = selected_entity.getComponent<ScanProbeLauncher>();
+            if (!berth_probes) return;
+            if (berth_probes->stock <= 0) return;
+            auto carrier_probes = my_spaceship.getComponent<ScanProbeLauncher>();
+            if (!carrier_probes) return;
+            if (carrier_probes->stock >= carrier_probes->max) return;
+
+            carrier_probes->stock += 1;
+            berth_probes->stock -= 1;
+        }
+    ))->setSize(kv_size, kv_size);
+
+    // TODO: Fill berth with supply drop
 
     // Storage-specific berth controls.
     storage_controls = new GuiElement(right_column, "DOCKING_BAY_STORAGE_CONTROLS");
@@ -993,6 +1034,17 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         for (int i = MW_Homing; i < MW_Count; i++)
             updateMissileDisplay(carrier_missiles[i], tubes, static_cast<EMissileWeapons>(i));
     }
+
+    // Update scan probe displays.
+    if (auto scan_probes = selected_entity.getComponent<ScanProbeLauncher>())
+        berth_scan_probes->setValue(scan_probes->stock);
+    else
+        berth_scan_probes->setValue("-");
+
+    if (auto scan_probes = my_spaceship.getComponent<ScanProbeLauncher>())
+        carrier_scan_probes->setValue(scan_probes->stock);
+    else
+        carrier_scan_probes->setValue("-");
 
     // Update repair and thermal systems displays.
     if (repair_controls->isVisible())

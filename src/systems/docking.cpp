@@ -273,10 +273,12 @@ void DockingSystem::update(float delta)
                             transfer_heat(entity, carrier_entity, docked_coolant, my_coolant);
                     }
 
-                    // If a shipTemplateBasedObject and is allowed to restock
-                    // scan probes with docked ships.
-                    if (bay->flags & DockingBay::RestockProbes) {
-                        if (auto spl = entity.getComponent<ScanProbeLauncher>()) {
+                    // Use DockingBay flag for scan probe restocking if set.
+                    // This should override supply docking bay berth behavior.
+                    if (bay->flags & DockingBay::RestockProbes)
+                    {
+                        if (auto spl = entity.getComponent<ScanProbeLauncher>())
+                        {
                             if (spl->stock < spl->max)
                             {
                                 spl->recharge += delta;
@@ -284,10 +286,16 @@ void DockingSystem::update(float delta)
                                 if (spl->recharge > spl->charge_time)
                                 {
                                     spl->stock += 1;
-                                    spl->recharge = 0.0;
+                                    spl->recharge = 0.0f;
                                 }
                             }
                         }
+                    }
+                    // Otherwise, determine whether we're in a docking bay
+                    // supply berth and use that if so.
+                    else if (is_berthed && my_berth.type == DockingBay::Berth::Type::Supply)
+                    {
+                        // Don't do anything, docking bay screen/API handles this.
                     }
 
                     // Use DockingBay flag for missile restocking if set.
@@ -317,7 +325,7 @@ void DockingSystem::update(float delta)
                         }
                     }
                     // Otherwise, determine whether we're in a docking bay
-                    // energy berth set to transfer energy and use that if so.
+                    // supply berth and use that if so.
                     else if (is_berthed && my_berth.type == DockingBay::Berth::Type::Supply)
                     {
                         // Don't do anything, docking bay screen/API handles this.
