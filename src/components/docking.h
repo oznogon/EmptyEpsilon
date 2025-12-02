@@ -36,7 +36,7 @@ public:
         {
             Hangar,
             Energy,
-            Missiles,
+            Supply,
             Thermal,
             Repair,
             Storage
@@ -69,7 +69,7 @@ public:
             else if (i < 3)
                 berths[i].type = Berth::Type::Energy;
             else if (i < 4)
-                berths[i].type = Berth::Type::Missiles;
+                berths[i].type = Berth::Type::Supply;
             else if (i < 5)
                 berths[i].type = Berth::Type::Thermal;
             else if (i < 6)
@@ -91,7 +91,7 @@ public:
             case DockingBay::Berth::Type::Energy:
                 type_icon = "gui/icons/energy";
                 break;
-            case DockingBay::Berth::Type::Missiles:
+            case DockingBay::Berth::Type::Supply:
                 type_icon = "gui/icons/system_missile";
                 break;
             case DockingBay::Berth::Type::Thermal:
@@ -120,8 +120,8 @@ public:
             case DockingBay::Berth::Type::Energy:
                 type_name = tr("dockingbay", "Energy");
                 break;
-            case DockingBay::Berth::Type::Missiles:
-                type_name = tr("dockingbay", "Missiles");
+            case DockingBay::Berth::Type::Supply:
+                type_name = tr("dockingbay", "Supply");
                 break;
             case DockingBay::Berth::Type::Thermal:
                 type_name = tr("dockingbay", "Thermal");

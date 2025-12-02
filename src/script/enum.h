@@ -297,7 +297,7 @@ template<> struct Convert<DockingBay::Berth::Type> {
         {
         case DockingBay::Berth::Type::Hangar: lua_pushstring(L, "hangar"); break;
         case DockingBay::Berth::Type::Energy: lua_pushstring(L, "energy"); break;
-        case DockingBay::Berth::Type::Missiles: lua_pushstring(L, "missiles"); break;
+        case DockingBay::Berth::Type::Supply: lua_pushstring(L, "missiles"); break;
         case DockingBay::Berth::Type::Thermal: lua_pushstring(L, "thermal"); break;
         case DockingBay::Berth::Type::Repair: lua_pushstring(L, "repair"); break;
         case DockingBay::Berth::Type::Storage: lua_pushstring(L, "storage"); break;
@@ -312,7 +312,7 @@ template<> struct Convert<DockingBay::Berth::Type> {
         else if (str == "energy")
             return DockingBay::Berth::Type::Energy;
         else if (str == "missiles")
-            return DockingBay::Berth::Type::Missiles;
+            return DockingBay::Berth::Type::Supply;
         else if (str == "thermal")
             return DockingBay::Berth::Type::Thermal;
         else if (str == "repair")

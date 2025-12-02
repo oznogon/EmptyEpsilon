@@ -290,12 +290,14 @@ void DockingSystem::update(float delta)
                         }
                     }
 
-                    // Recharge missiles of CPU ships docked to station. Can be disabled
-                    if (docking_port.auto_reload_missiles && (bay->flags & DockingBay::RestockMissiles)) {
-                        auto tubes = entity.getComponent<MissileTubes>();
-                        if (tubes) {
+                    // Use DockingBay flag for missile restocking if set.
+                    // This should override supply docking bay berth behavior.
+                    if (docking_port.auto_reload_missiles && (bay->flags & DockingBay::RestockMissiles))
+                    {
+                        if (auto tubes = entity.getComponent<MissileTubes>())
+                        {
                             bool needs_missile = false;
-                            for(int n=0; n<MW_Count; n++)
+                            for (int n = 0; n < MW_Count; n++)
                             {
                                 if  (tubes->storage[n] < tubes->storage_max[n])
                                 {
@@ -313,6 +315,12 @@ void DockingSystem::update(float delta)
                             if (needs_missile)
                                 docking_port.auto_reload_missile_delay -= delta;
                         }
+                    }
+                    // Otherwise, determine whether we're in a docking bay
+                    // energy berth set to transfer energy and use that if so.
+                    else if (is_berthed && my_berth.type == DockingBay::Berth::Type::Supply)
+                    {
+                        // Don't do anything, docking bay screen/API handles this.
                     }
                 }
             }
