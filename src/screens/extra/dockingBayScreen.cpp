@@ -21,6 +21,7 @@
 #include "components/hull.h"
 #include "components/missiletubes.h"
 #include "components/name.h"
+#include "components/probe.h"
 #include "components/reactor.h"
 
 #include "systems/docking.h"
@@ -558,22 +559,160 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
 
+    GuiElement* supply_controls_row = new GuiElement(supply_controls, "DOCKING_BAY_SUPPLY_CONTROLS_ROW");
+    supply_controls_row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "horizontal");
+
+    (new GuiElement(supply_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    GuiElement* supply_controls_left = new GuiElement(supply_controls_row, "DOCKING_BAY_SUPPLY_CONTROLS_LEFT");
+    supply_controls_left
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    GuiElement* supply_controls_center = new GuiElement(supply_controls_row, "DOCKING_BAY_SUPPLY_CONTROLS_CENTER");
+    supply_controls_center
+        ->setSize(kv_size * 2.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    supply_controls_center
+        ->setAttribute("margin", "10, 0");
+
+    GuiElement* supply_controls_right = new GuiElement(supply_controls_row, "DOCKING_BAY_SUPPLY_CONTROLS_RIGHT");
+    supply_controls_right
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    (new GuiElement(supply_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    auto populateMissiles = [](GuiKeyValueDisplay* supply_missiles[MW_Count], GuiElement* column) {
+        for (int i = MW_Homing; i < MW_Count; i++)
+        {
+            supply_missiles[i] = new GuiKeyValueDisplay(column, "", kv_split, getLocaleMissileWeaponName(static_cast<EMissileWeapons>(i)), "");
+            supply_missiles[i]->setSize(200.0f, kv_size);
+        }
+
+        supply_missiles[MW_Homing]->setIcon("gui/icons/weapon-homing");
+        supply_missiles[MW_Nuke]->setIcon("gui/icons/weapon-nuke");
+        supply_missiles[MW_EMP]->setIcon("gui/icons/weapon-emp");
+        supply_missiles[MW_HVLI]->setIcon("gui/icons/weapon-hvli");
+        supply_missiles[MW_Mine]->setIcon("gui/icons/weapon-mine");
+
+        return supply_missiles;
+    };
+
+    // Populate missile key/value displays
+    populateMissiles(berth_missiles, supply_controls_left);
+    populateMissiles(carrier_missiles, supply_controls_right);
+
+    // Populate missile transfer buttons
+    GuiButton* to_berth[MW_Count];
+    GuiButton* to_carrier[MW_Count];
+
     for (int i = MW_Homing; i < MW_Count; i++)
     {
-        supply_missiles[i] = new GuiKeyValueDisplay(supply_controls, "", kv_split, getLocaleMissileWeaponName(static_cast<EMissileWeapons>(i)), "");
-        supply_missiles[i]->setSize(250.0f, kv_size);
-        
+        GuiElement* supply_controls_center_row = new GuiElement(supply_controls_center, "");
+        supply_controls_center_row
+            ->setSize(GuiElement::GuiSizeMax, kv_size)
+            ->setAttribute("layout", "horizontal");
+        to_berth[i] = new GuiButton(supply_controls_center_row, "", "<",
+            [this, i]()
+            {
+                LOG(Info, "Send MW ", i, " to berthed ship");
+
+                if (!my_spaceship || !my_player_info) return;
+                auto bay = my_spaceship.getComponent<DockingBay>();
+                if (!bay) return;
+                if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
+
+                auto selected_entity = bay->berths[selected_berth_index].docked_entity;
+                auto berth_tubes = selected_entity.getComponent<MissileTubes>();
+                if (!berth_tubes) return;
+                if (berth_tubes->storage[i] >= berth_tubes->storage_max[i]) return;
+                auto carrier_tubes = my_spaceship.getComponent<MissileTubes>();
+                if (!carrier_tubes) return;
+                if (carrier_tubes->storage[i] <= 0) return;
+
+                carrier_tubes->storage[i] -= 1;
+                berth_tubes->storage[i] += 1;
+            }
+        );
+        to_berth[i]->setSize(kv_size, kv_size);
+        to_carrier[i] = new GuiButton(supply_controls_center_row, "", ">",
+            [this, i]()
+            {
+                if (!my_spaceship || !my_player_info) return;
+                auto bay = my_spaceship.getComponent<DockingBay>();
+                if (!bay) return;
+                if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
+
+                auto selected_entity = bay->berths[selected_berth_index].docked_entity;
+                auto berth_tubes = selected_entity.getComponent<MissileTubes>();
+                if (!berth_tubes) return;
+                if (berth_tubes->storage[i] <= 0) return;
+                auto carrier_tubes = my_spaceship.getComponent<MissileTubes>();
+                if (!carrier_tubes) return;
+                if (carrier_tubes->storage[i] >= carrier_tubes->storage_max[i]) return;
+
+                carrier_tubes->storage[i] += 1;
+                berth_tubes->storage[i] -= 1;
+            }
+        );
+        to_carrier[i]->setSize(kv_size, kv_size);
     }
 
-    supply_missiles[MW_Homing]->setIcon("gui/icons/weapon-homing");
-    supply_missiles[MW_Nuke]->setIcon("gui/icons/weapon-nuke");
-    supply_missiles[MW_EMP]->setIcon("gui/icons/weapon-emp");
-    supply_missiles[MW_HVLI]->setIcon("gui/icons/weapon-hvli");
-    supply_missiles[MW_Mine]->setIcon("gui/icons/weapon-mine");
+    // Populate scan probe key/value displays
+    berth_scan_probes = new GuiKeyValueDisplay(supply_controls_left, "", kv_split, tr("Scan probes"), "-");
+    carrier_scan_probes = new GuiKeyValueDisplay(supply_controls_right, "", kv_split, tr("Scan probes"), "-");
 
-    // TODO: Weapon stocks transfer controls between carrier and docked entity.
-    // TODO: Scan probe stock transfer controls between carrier and docked entity.
-    // TODO: Fill berth with supply drop?
+    // Populate scan probe transfer buttons
+    (new GuiButton(supply_controls_center, "", "<",
+        [this]()
+        {
+            LOG(Info, "Send scan probe to berthed ship");
+
+            if (!my_spaceship || !my_player_info) return;
+            auto bay = my_spaceship.getComponent<DockingBay>();
+            if (!bay) return;
+            if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
+
+            auto selected_entity = bay->berths[selected_berth_index].docked_entity;
+            auto berth_probes = selected_entity.getComponent<ScanProbeLauncher>();
+            if (!berth_probes) return;
+            if (berth_probes->stock >= berth_probes->max) return;
+            auto carrier_probes = my_spaceship.getComponent<ScanProbeLauncher>();
+            if (!carrier_probes) return;
+            if (carrier_probes->stock <= 0) return;
+
+            carrier_probes->stock -= 1;
+            berth_probes->stock += 1;
+        }
+    ))->setSize(kv_size, kv_size);
+
+    (new GuiButton(supply_controls_center, "", "<",
+        [this]()
+        {
+            LOG(Info, "Send scan probe to berthed ship");
+
+            if (!my_spaceship || !my_player_info) return;
+            auto bay = my_spaceship.getComponent<DockingBay>();
+            if (!bay) return;
+            if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
+
+            auto selected_entity = bay->berths[selected_berth_index].docked_entity;
+            auto berth_probes = selected_entity.getComponent<ScanProbeLauncher>();
+            if (!berth_probes) return;
+            if (berth_probes->stock <= 0) return;
+            auto carrier_probes = my_spaceship.getComponent<ScanProbeLauncher>();
+            if (!carrier_probes) return;
+            if (carrier_probes->stock >= carrier_probes->max) return;
+
+            carrier_probes->stock += 1;
+            berth_probes->stock -= 1;
+        }
+    ))->setSize(kv_size, kv_size);
+
+    // TODO: Fill berth with supply drop
 
     // Storage-specific berth controls.
     storage_controls = new GuiElement(right_column, "DOCKING_BAY_STORAGE_CONTROLS");
@@ -704,7 +843,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             repair_controls->hide();
             storage_controls->hide();
             break;
-        case DockingBay::Berth::Type::Missiles:
+        case DockingBay::Berth::Type::Supply:
             hangar_controls->hide();
             energy_controls->hide();
             thermal_controls->hide();
@@ -879,10 +1018,33 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     if (auto tubes = selected_entity.getComponent<MissileTubes>())
     {
         for (int i = MW_Homing; i < MW_Count; i++)
+        {
             updateMissileDisplay(entity_missiles[i], tubes, static_cast<EMissileWeapons>(i));
+            updateMissileDisplay(berth_missiles[i], tubes, static_cast<EMissileWeapons>(i));
+        }
     }
     else
+    {
         for (auto kv : entity_missiles) kv->setValue("-");
+        for (auto kv : berth_missiles) kv->setValue("-");
+    }
+
+    if (auto tubes = my_spaceship.getComponent<MissileTubes>())
+    {
+        for (int i = MW_Homing; i < MW_Count; i++)
+            updateMissileDisplay(carrier_missiles[i], tubes, static_cast<EMissileWeapons>(i));
+    }
+
+    // Update scan probe displays.
+    if (auto scan_probes = selected_entity.getComponent<ScanProbeLauncher>())
+        berth_scan_probes->setValue(scan_probes->stock);
+    else
+        berth_scan_probes->setValue("-");
+
+    if (auto scan_probes = my_spaceship.getComponent<ScanProbeLauncher>())
+        carrier_scan_probes->setValue(scan_probes->stock);
+    else
+        carrier_scan_probes->setValue("-");
 
     // Update repair and thermal systems displays.
     if (repair_controls->isVisible())

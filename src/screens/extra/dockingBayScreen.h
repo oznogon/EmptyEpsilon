@@ -57,7 +57,10 @@ private:
     GuiSlider* thermal_venting_direction;
     GuiElement* heat_gauges_row;
     GuiElement* supply_controls;
-    GuiKeyValueDisplay* supply_missiles[MW_Count];
+    GuiKeyValueDisplay* berth_missiles[MW_Count];
+    GuiKeyValueDisplay* carrier_missiles[MW_Count];
+    GuiKeyValueDisplay* berth_scan_probes;
+    GuiKeyValueDisplay* carrier_scan_probes;
     GuiElement* repair_controls;
     GuiElement* damage_gauges_row;
     GuiElement* storage_controls;

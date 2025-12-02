@@ -273,10 +273,12 @@ void DockingSystem::update(float delta)
                             transfer_heat(entity, carrier_entity, docked_coolant, my_coolant);
                     }
 
-                    // If a shipTemplateBasedObject and is allowed to restock
-                    // scan probes with docked ships.
-                    if (bay->flags & DockingBay::RestockProbes) {
-                        if (auto spl = entity.getComponent<ScanProbeLauncher>()) {
+                    // Use DockingBay flag for scan probe restocking if set.
+                    // This should override supply docking bay berth behavior.
+                    if (bay->flags & DockingBay::RestockProbes)
+                    {
+                        if (auto spl = entity.getComponent<ScanProbeLauncher>())
+                        {
                             if (spl->stock < spl->max)
                             {
                                 spl->recharge += delta;
@@ -284,18 +286,26 @@ void DockingSystem::update(float delta)
                                 if (spl->recharge > spl->charge_time)
                                 {
                                     spl->stock += 1;
-                                    spl->recharge = 0.0;
+                                    spl->recharge = 0.0f;
                                 }
                             }
                         }
                     }
+                    // Otherwise, determine whether we're in a docking bay
+                    // supply berth and use that if so.
+                    else if (is_berthed && my_berth.type == DockingBay::Berth::Type::Supply)
+                    {
+                        // Don't do anything, docking bay screen/API handles this.
+                    }
 
-                    // Recharge missiles of CPU ships docked to station. Can be disabled
-                    if (docking_port.auto_reload_missiles && (bay->flags & DockingBay::RestockMissiles)) {
-                        auto tubes = entity.getComponent<MissileTubes>();
-                        if (tubes) {
+                    // Use DockingBay flag for missile restocking if set.
+                    // This should override supply docking bay berth behavior.
+                    if (docking_port.auto_reload_missiles && (bay->flags & DockingBay::RestockMissiles))
+                    {
+                        if (auto tubes = entity.getComponent<MissileTubes>())
+                        {
                             bool needs_missile = false;
-                            for(int n=0; n<MW_Count; n++)
+                            for (int n = 0; n < MW_Count; n++)
                             {
                                 if  (tubes->storage[n] < tubes->storage_max[n])
                                 {
@@ -313,6 +323,12 @@ void DockingSystem::update(float delta)
                             if (needs_missile)
                                 docking_port.auto_reload_missile_delay -= delta;
                         }
+                    }
+                    // Otherwise, determine whether we're in a docking bay
+                    // supply berth and use that if so.
+                    else if (is_berthed && my_berth.type == DockingBay::Berth::Type::Supply)
+                    {
+                        // Don't do anything, docking bay screen/API handles this.
                     }
                 }
             }
