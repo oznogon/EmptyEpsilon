@@ -10,9 +10,9 @@ function BillboardExplosion()
             lifetime = 1.0,
             max_lifetime = 1.0,
             size = 1000.0,
-            fps = 88.0,
+            fps = 64.0,
             sprite_columns = 8,
-            sprite_rows = 11,
+            sprite_rows = 8,
             color = {1.0, 1.0, 1.0},
             texture = "texture/explosion_sprite.png",
             radar = false
