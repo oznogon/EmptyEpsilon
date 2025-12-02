@@ -231,7 +231,8 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     }
 
     // Remain fully opaque until last 20% of lifetime, then fade quickly
-    if (f > 0.8f) {
+    if (f > 0.8f)
+    {
         float fadeProgress = (f - 0.8f) / 0.2f; // 0 to 1 in last 20%
         alpha = 1.0f - fadeProgress;
     }

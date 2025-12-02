@@ -105,16 +105,16 @@ class BillboardExplosion
 public:
     constexpr static float default_lifetime = 1.0f;
     constexpr static int default_columns = 8;
-    constexpr static int default_rows = 11;
+    constexpr static int default_rows = 8;
 
     float lifetime = default_lifetime;
     float max_lifetime = default_lifetime;
     float size = 100.0f;
-    float fps = 88.0f; // Animation speed (frames per second) - 88 frames total
+    float fps = 64.0f; // Animation speed (frames per second)
     int sprite_columns = default_columns;
     int sprite_rows = default_rows;
     glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
-    string texture = "explosion_sprite.png";
+    string texture = "texture/explosion_sprite.png";
     bool radar = false;
 };
 

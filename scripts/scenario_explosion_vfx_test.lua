@@ -27,6 +27,7 @@ function update(delta)
     -- Spawn VFX explosions periodically at origin
     time_since_explosion = time_since_explosion + delta
     if (time_since_explosion > explosion_period) then
+        BillboardExplosion():setSize(250):setPosition(1500,0)
         if explosion_index > 4 then explosion_index = 1 end
         if explosion_index == 1 then ExplosionEffect():setPosition(0, 0):setSize(100):setOnRadar(true) end
         if explosion_index == 2 then SmallExplosionEffect():setPosition(0, 0):setSize(100):setOnRadar(true) end
