@@ -78,6 +78,9 @@ void ShieldSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Shields
         if (shield.hit_effect > 0)
         {
             auto shield_matrix = glm::rotate(model_matrix, glm::radians(angle), glm::vec3(0.f, 0.f, 1.f));
+            // For multi-segment shields using half-spheres, flip alternate segments so they face outward
+            if (shields.entries.size() > 1)
+                shield_matrix = glm::rotate(shield_matrix, glm::radians(180.0f), glm::vec3(0.f, 1.f, 0.f));
             shield_matrix = glm::rotate(shield_matrix, glm::radians(engine->getElapsedTime() * 5), glm::vec3(1.f, 0.f, 0.f));
             shield_matrix = glm::scale(shield_matrix, 1.2f * glm::vec3(radius));
             auto mesh = shields.entries.size() > 1 ? Mesh::getMesh("mesh/half_sphere.obj") : Mesh::getMesh("mesh/sphere.obj");
