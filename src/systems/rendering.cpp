@@ -204,10 +204,10 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
 
 void ExplosionRenderSystem::update(float delta)
 {
-    for(auto [entity, ee] : sp::ecs::Query<ExplosionEffect>()) {
+    for (auto [entity, ee] : sp::ecs::Query<ExplosionEffect>())
+    {
         ee.lifetime -= delta;
-        if (ee.lifetime < 0.0f)
-            entity.destroy();
+        if (ee.lifetime < 0.0f) entity.destroy();
     }
 }
 
@@ -496,13 +496,12 @@ void BillboardRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
 void BillboardExplosionRenderSystem::update(float delta)
 {
-    for(auto [entity, be] : sp::ecs::Query<BillboardExplosion>())
+    for (auto [entity, be] : sp::ecs::Query<BillboardExplosion>())
     {
         be.lifetime -= delta;
+
         if (be.lifetime <= 0.0f)
-        {
             entity.destroy();
-        }
     }
 }
 
