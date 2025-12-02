@@ -10,36 +10,36 @@
 //-------------------------------------------------------------------------------------
 
 [vertex]
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
-uniform vec2 resolution;
-uniform float billboardSize;
+uniform mat4 u_model;
+uniform mat4 u_view;
+uniform mat4 u_projection;
+uniform vec2 u_resolution;
+uniform float u_billboardSize;
 
-attribute vec3 position;
-attribute vec2 texcoords;
+attribute vec3 a_position;
+attribute vec2 a_texcoords;
 
 varying vec2 fragCoord;
 
 void main()
 {
     // Convert normalized texcoords [0,1] to pixel coordinates
-    fragCoord = texcoords * resolution;
+    fragCoord = a_texcoords * u_resolution;
 
     // Billboard-style vertex positioning (camera-facing quad)
-    gl_Position = projection * ((view * model * vec4(position, 1.0)) + vec4((texcoords.x - 0.5) * billboardSize, (texcoords.y - 0.5) * billboardSize, 0.0, 0.0));
+    gl_Position = u_projection * ((u_view * u_model * vec4(a_position, 1.0)) + vec4((a_texcoords.x - 0.5) * u_billboardSize, (a_texcoords.y - 0.5) * u_billboardSize, 0.0, 0.0));
 }
 
 [fragment]
 #define pi 3.14159265
 #define R(p, a) p=cos(a)*p+sin(a)*vec2(p.y, -p.x)
 
-uniform vec2 resolution;
-uniform vec3 startColor;
-uniform float time;
-uniform float explosionAlpha;
-uniform float qualityFactor;  // 0.0 (low) to 1.0 (high)
-uniform sampler2D textureMap;
+uniform vec2 u_resolution;
+uniform vec3 u_startColor;
+uniform float u_time;
+uniform float u_explosionAlpha;
+uniform float u_qualityFactor;  // 0.0 (low) to 1.0 (high)
+uniform sampler2D u_textureMap;
 
 varying vec2 fragCoord;
 
@@ -50,7 +50,7 @@ float noise(in vec3 x)
     vec3 f = fract(x);
     f = f * f * (3.0 - 2.0 * f);
     vec2 uv = (p.xy + vec2(37.0, 17.0) * p.z) + f.xy;
-    vec2 rg = texture2D( textureMap, (uv+ 0.5) / 256.0).yx;
+    vec2 rg = texture2D( u_textureMap, (uv+ 0.5) / 256.0).yx;
     return 1. - 0.82 * mix(rg.x, rg.y, f.z);
 }
 
@@ -68,7 +68,7 @@ float nudge = 4.;	// size of perpendicular vector
 float normalizer = 1.0 / sqrt(1.0 + nudge * nudge);	// pythagorean theorem on that perpendicular to maintain scale
 float SpiralNoiseC(vec3 p)
 {
-    float n = -mod(time * 0.2, -2.); // noise amount
+    float n = -mod(u_time * 0.2, -2.); // noise amount
     float iter = 2.0;
 
     for (int i = 0; i < 6; i++)
@@ -98,7 +98,7 @@ float VolumetricExplosion(vec3 p)
 
 float map(vec3 p)
 {
-    R(p.xz, time * 0.1);
+    R(p.xz, u_time * 0.1);
 
     float VolExplosion = VolumetricExplosion(p / 0.5) * 0.5; // scale
 
@@ -138,11 +138,11 @@ void main()
 {
     float key = 0.0;
 
-    vec2 uv = fragCoord/resolution;
+    vec2 uv = fragCoord/u_resolution;
 
     // ro: ray origin
     // rd: direction of the ray
-    vec3 rd = normalize(vec3((fragCoord.xy - 0.5 * resolution) / resolution.y, 1.));
+    vec3 rd = normalize(vec3((fragCoord.xy - 0.5 * u_resolution) / u_resolution.y, 1.));
     vec3 ro = vec3(0., 0., -6. + key * 1.6);
 
     // ld, td: local, total density
@@ -167,9 +167,9 @@ void main()
     // Dynamic quality adjustment based on screen-space size
     // High quality (far): More iterations, tighter thresholds
     // Low quality (close): Fewer iterations, looser thresholds
-    float maxIterations = 16.0 + qualityFactor * 40.0;  // 16-56 iterations
-    float densityThreshold = 1.0 - qualityFactor * 0.15;  // 1.0-0.85
-    float alphaThreshold = 1.0 - qualityFactor * 0.08;    // 1.0-0.92
+    float maxIterations = 16.0 + u_qualityFactor * 40.0;  // 16-56 iterations
+    float densityThreshold = 1.0 - u_qualityFactor * 0.15;  // 1.0-0.85
+    float alphaThreshold = 1.0 - u_qualityFactor * 0.08;    // 1.0-0.92
 
     // raymarch loop
     for (int i = 0; i < 56; i++)
@@ -204,7 +204,7 @@ void main()
         // the color of light
         vec3 lightColor = vec3(1.0, 0.5, 0.25);
 
-        sum.rgb += (startColor / exp(lDist*lDist*lDist*.08) / 30.); // bloom
+        sum.rgb += (u_startColor / exp(lDist*lDist*lDist*.08) / 30.); // bloom
 
         if (d < h)
         {
@@ -233,7 +233,7 @@ void main()
         td += 1./70.;
 
         // Dynamic step size: larger steps for lower quality (faster traversal)
-        float stepMultiplier = 1.0 + (1.0 - qualityFactor) * 0.5;  // 1.0x-1.5x
+        float stepMultiplier = 1.0 + (1.0 - u_qualityFactor) * 0.5;  // 1.0x-1.5x
         t += max(d * 0.25 * stepMultiplier, 0.01);
     }
 
@@ -246,5 +246,5 @@ void main()
 
     }
 
-    gl_FragColor = vec4(sum.xyz, explosionAlpha);
+    gl_FragColor = vec4(sum.xyz, u_explosionAlpha);
 }

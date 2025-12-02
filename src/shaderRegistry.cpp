@@ -54,7 +54,7 @@ namespace ShaderRegistry
             "u_normalMap",
 
             "u_ambientLightDirection",
-            "u_specularLightDirection"
+            "u_specularLightDirection",
 
             "u_scrollOffset",
 
@@ -73,7 +73,7 @@ namespace ShaderRegistry
             "a_tangent",
         };
 
-        std::array<std::tuple<Uniforms, int32_t>, 6> texture_units{
+        std::array<std::tuple<Uniforms, int32_t>, 5> texture_units{
             std::make_tuple(Uniforms::TextureMap, 0),
             std::make_tuple(Uniforms::BaseMap, 0),
             std::make_tuple(Uniforms::SpecularMap, 1),
