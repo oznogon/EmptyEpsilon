@@ -64,7 +64,7 @@ namespace ShaderRegistry
             "u_startColor",
             "u_billboardSize",
             "u_explosionAlpha",
-            "u_qualityFactor"
+            "u_qualityFactor",
             "u_spriteSheetParams"
         };
 

@@ -82,6 +82,8 @@ public:
         Kinetic
     };
 
+    bool advanced_explosion = false;
+
     constexpr static float max_lifetime = 2.f;
     constexpr static int particle_count = 1000;
 

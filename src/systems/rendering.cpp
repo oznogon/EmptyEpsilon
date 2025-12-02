@@ -301,9 +301,13 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
         gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+        gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
-        // Use additive blending for bloom effect
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        if (ee.advanced_explosion)
+        {
+            // Use additive blending for bloom effect
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
@@ -311,8 +315,42 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
 
-        // Restore default blending
-        glBlendFunc(GL_ONE, GL_ONE);
+            // Restore default blending
+            glBlendFunc(GL_ONE, GL_ONE);
+        }
+    }
+
+    // Render old-style textured sphere explosion (non-advanced)
+    if (ee.type != ExplosionEffect::ExplosionType::Kinetic && !ee.advanced_explosion)
+    {
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Scrolling);
+
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+
+        // Scroll texture over time based on explosion progress
+        float scrollSpeed = ee.type == ExplosionEffect::ExplosionType::Electric ? 0.5f : 1.0f;
+        float scrollOffset = (ee.max_lifetime - ee.lifetime) * scrollSpeed;
+        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::ScrollOffset), scrollOffset);
+
+        if (ee.type == ExplosionEffect::ExplosionType::Electric)
+            textureManager.getTexture("texture/electric_sphere_texture.png")->bind();
+        else
+            textureManager.getTexture("texture/fire_sphere_texture.png")->bind();
+
+        gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+        gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
+
+        Mesh* m = Mesh::getMesh("mesh/sphere.obj");
+        m->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
+
+        if (ee.type == ExplosionEffect::ExplosionType::Electric)
+        {
+            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::scale(explosion_matrix, glm::vec3(.5f))));
+            m->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
+        }
     }
     std::vector<glm::vec3> vertices(4 * ee.max_quad_count);
 
