@@ -4,7 +4,7 @@
 #include "gui/gui2_label.h"
 #include "ecs/entity.h"
 
-class GuiRotatingModelView;
+class GuiRenderedModelSprite;
 class GuiScrollbar;
 class GuiImage;
 
@@ -15,7 +15,7 @@ public:
 
 private:
     sp::ecs::Entity entity;
-    GuiRotatingModelView* model_view;
+    GuiRenderedModelSprite* model_view;
     GuiElement* custom_label_row;
     GuiLabel* custom_labels[4];
     GuiImage* custom_icons[4];
@@ -45,6 +45,12 @@ public:
     GuiEntityInfoPanel* setCustomLabel(int index, string new_label);
     GuiEntityInfoPanel* setCustomIcon(int index, string new_image);
     GuiEntityInfoPanel* clearCustomLabels();
+
+    // Allow grid to access styling info for clipped rendering
+    const GuiThemeStyle* getBackStyle() const { return selected ? back_selected_style : back_style; }
+    const GuiThemeStyle* getFrontStyle() const { return selected ? front_selected_style : front_style; }
+    State getPanelState() const { return getState(); }
+    float getBackSize() const;
 };
 
 class GuiEntityInfoPanelGrid : public GuiElement
@@ -71,6 +77,7 @@ public:
     GuiEntityInfoPanelGrid(GuiContainer* owner, string id, std::vector<sp::ecs::Entity> entities, func_t func);
     GuiEntityInfoPanelGrid(GuiContainer* owner, string id, std::vector<sp::ecs::Entity> entities, index_func_t func);
 
+    // virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual void onUpdate() override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 

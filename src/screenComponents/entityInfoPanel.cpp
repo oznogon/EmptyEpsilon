@@ -2,7 +2,7 @@
 
 #include "soundManager.h"
 
-#include "rotatingModelView.h"
+#include "renderedModelSprite.h"
 #include "gui/theme.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_scrollbar.h"
@@ -43,7 +43,7 @@ GuiEntityInfoPanel::GuiEntityInfoPanel(GuiContainer* owner, string id, sp::ecs::
     }
 
     // Create the 3D model view
-    model_view = new GuiRotatingModelView(this, id + "_MODEL_VIEW", this->entity);
+    model_view = new GuiRenderedModelSprite(this, id + "_MODEL_VIEW", this->entity);
     model_view
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -63,30 +63,29 @@ GuiEntityInfoPanel::GuiEntityInfoPanel(GuiContainer* owner, string id, sp::ecs::
 void GuiEntityInfoPanel::onDraw(sp::RenderTarget& renderer)
 {
     hover = false;
-    const auto& back = back_style->get(getState());
-    const auto& back_hover = back_style->get(State::Hover);
-    const auto& back_selected = back_selected_style->get(getState());
-    const auto& back_selected_hover = back_selected_style->get(State::Hover);
 
-    auto* b = rect.contains(hover_coordinates) ? &back_hover : &back;
-    const GuiThemeStyle* f = front_style;
+    const GuiThemeStyle* back_style = getBackStyle();
+    const auto& back = back_style->get(getPanelState());
 
-    // If this is the selected button, change the back and foreground.
-    if (selected)
-    {
-        b = rect.contains(hover_coordinates) ? &back_selected_hover : &back_selected;
-        f = front_selected_style;
-    }
+    // Draw the panel background clipped to the grid's rect
+    renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
 
-    renderer.drawStretchedHV(rect, b->size, b->texture, b->color);
-    callsign_label->setFrontStyle(f);
-    type_label->setFrontStyle(f);
+    const GuiThemeStyle* front = getFrontStyle();
+
+    callsign_label->setFrontStyle(front);
+    type_label->setFrontStyle(front);
 
     for (auto i = 0; i < 4; i++)
     {
-        custom_labels[i]->setFrontStyle(f);
-        custom_icons[i]->setColor(f->get(getState()).color);
+        custom_labels[i]->setFrontStyle(front);
+        custom_icons[i]->setColor(front->get(getState()).color);
     }
+}
+
+float GuiEntityInfoPanel::getBackSize() const
+{
+    const auto& back = getBackStyle()->get(getState());
+    return back.size;
 }
 
 void GuiEntityInfoPanel::onUpdate()
@@ -177,58 +176,128 @@ void GuiEntityInfoPanel::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 GuiEntityInfoPanelGrid::GuiEntityInfoPanelGrid(GuiContainer* owner, string id, std::vector<sp::ecs::Entity> entities, func_t func)
 : GuiElement(owner, id), entities(entities), func(func), index_func(nullptr)
 {
-    // Create a content container that will hold all the rows
+    // Create a scrolling content container that holds every row.
     content_container = new GuiElement(this, id + "_CONTENT");
     content_container
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
-    // Create scrollbar on the right side
-    scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {
-        // Update content container position based on scroll value
-        content_container->setPosition(0.0f, -value, sp::Alignment::TopLeft);
-    });
+    scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0,
+        [this](int value)
+        {
+            // Snap scroll value to panel increments.
+            float panel_height = GuiEntityInfoPanel::default_panel_size;
+            int snapped_value = static_cast<int>(std::round(value / panel_height) * panel_height);
+
+            // Update scrollbar to snapped position
+            if (scrollbar->getValue() != snapped_value)
+            {
+                scrollbar->setValue(snapped_value);
+                return;
+            }
+
+            // Update content container position based on snapped scroll value
+            content_container->setPosition(0.0f, -snapped_value, sp::Alignment::TopLeft);
+        }
+    );
+    scrollbar->setClickChange(static_cast<int>(GuiEntityInfoPanel::default_panel_size));
     scrollbar
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
         ->setSize(40.0f, GuiElement::GuiSizeMax)
         ->hide();
-    scrollbar->setClickChange(static_cast<int>(GuiEntityInfoPanel::default_panel_size));
 }
 
 GuiEntityInfoPanelGrid::GuiEntityInfoPanelGrid(GuiContainer* owner, string id, std::vector<sp::ecs::Entity> entities, index_func_t func)
 : GuiElement(owner, id), entities(entities), func(nullptr), index_func(func)
 {
-    // Create a content container that will hold all the rows
+    // Create a scrolling content container that holds every row.
     content_container = new GuiElement(this, id + "_CONTENT");
     content_container
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
-    // Create scrollbar on the right side
-    scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {
-        // Update content container position based on scroll value
-        content_container->setPosition(0.0f, -value, sp::Alignment::TopLeft);
-    });
+    scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0,
+        [this](int value)
+        {
+            // Snap scroll value to panel increments
+            float panel_height = GuiEntityInfoPanel::default_panel_size;
+            int snapped_value = static_cast<int>(std::round(value / panel_height) * panel_height);
+
+            // Update scrollbar to snapped position
+            if (scrollbar->getValue() != snapped_value)
+            {
+                scrollbar->setValue(snapped_value);
+                return;
+            }
+
+            // Update content container position based on snapped scroll value
+            content_container->setPosition(0.0f, -snapped_value, sp::Alignment::TopLeft);
+        }
+    );
+    scrollbar->setClickChange(static_cast<int>(GuiEntityInfoPanel::default_panel_size));
     scrollbar
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
         ->setSize(40.0f, GuiElement::GuiSizeMax)
         ->hide();
-    scrollbar->setClickChange(static_cast<int>(GuiEntityInfoPanel::default_panel_size));
 }
 
 bool GuiEntityInfoPanelGrid::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    float range = scrollbar->getCorrectedMax() - scrollbar->getMin();
-    scrollbar->setValue((scrollbar->getValue() - value * range / 25.0f) );
+    // Scroll by exactly one panel height at a time.
+    float current_value = scrollbar->getValue();
+    float panel_height = GuiEntityInfoPanel::default_panel_size;
+
+    if (value > 0) // Scroll up (negative direction)
+        scrollbar->setValue(current_value - panel_height);
+    else if (value < 0) // Scroll down (positive direction)
+        scrollbar->setValue(current_value + panel_height);
+
     return true;
 }
+
+/*
+void GuiEntityInfoPanelGrid::onDraw(sp::RenderTarget& renderer)
+{
+    for (auto panel : cached_panels)
+    {
+        if (!panel->isVisible()) continue;
+
+        auto panel_rect = panel->getRect();
+        auto back_style = panel->getBackStyle();
+        const auto& back = back_style->get(panel->getPanelState());
+
+        // Draw the panel background clipped to the grid's rect
+        renderer.drawStretchedHVClipped(panel_rect, rect, back.size, back.texture, back.color);
+    }
+}
+*/
 
 void GuiEntityInfoPanelGrid::onUpdate()
 {
     int max_cols = std::max(1, static_cast<int>(rect.size.x / GuiEntityInfoPanel::default_panel_size));
     int max_rows = std::max(1, static_cast<int>(rect.size.y / GuiEntityInfoPanel::default_panel_size));
+
+    // Update panel visibility based on scroll position
+    float panel_size = GuiEntityInfoPanel::default_panel_size;
+    float scroll_offset = scrollbar->getValue();
+
+    for (auto panel : cached_panels)
+    {
+        if (!panel) continue;
+
+        // Calculate expected panel position based on index, not current rect
+        // (rect doesn't update when panel is hidden)
+        int row = panel->panel_index / max_cols;
+        float expected_y = rect.position.y + (row * panel_size) - scroll_offset;
+
+        // Check if entire panel is completely within the visible grid area
+        bool is_visible = (expected_y >= rect.position.y) &&
+                         (expected_y + panel_size <= rect.position.y + rect.size.y);
+
+        panel->setVisible(is_visible);
+    }
 
     // Rebuild the grid only if entities or rect size changed
     if (entities == cached_entities && rect.size == cached_rect_size)
@@ -258,14 +327,12 @@ void GuiEntityInfoPanelGrid::onUpdate()
     GuiElement* current_row = nullptr;
 
     // Populate a berth panel for each entity
-    for (auto entity : entities)
+    for (auto& entity : entities)
     {
         // Create a new layout row on the first column
         if (col == 0 || col >= max_cols)
         {
             row++;
-            if (row > max_rows)
-                LOG(Debug, "There are more rows in the list than can be shown at once, and the excess rows shouldn't be visible");
 
             current_row = new GuiElement(content_container, "");
             current_row
@@ -286,10 +353,7 @@ void GuiEntityInfoPanelGrid::onUpdate()
                 index_func(captured_index);
             };
         }
-        else
-        {
-            panel_callback = func;
-        }
+        else panel_callback = func;
 
         // Populate this column
         auto panel = new GuiEntityInfoPanel(current_row, "", entity, panel_callback);
