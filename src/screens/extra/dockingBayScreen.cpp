@@ -33,7 +33,7 @@ static string toNearbyIntString(float value)
 
 DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DOCKING_BAY_SCREEN", colorConfig.background),
-  selected_entity()
+  selected_entity(sp::ecs::Entity())
 {
     // Render the background decorations.
     (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
@@ -664,10 +664,14 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     }
 
     // Populate scan probe key/value displays
-    berth_scan_probes = new GuiKeyValueDisplay(supply_controls_left, "", kv_split, tr("Scan probes"), "-");
-    berth_scan_probes->setSize(GuiElement::GuiSizeMax, kv_size);
-    carrier_scan_probes = new GuiKeyValueDisplay(supply_controls_right, "", kv_split, tr("Scan probes"), "-");
-    carrier_scan_probes->setSize(GuiElement::GuiSizeMax, kv_size);
+    berth_scan_probes = new GuiKeyValueDisplay(supply_controls_left, "", kv_split, tr("dockingbay", "Probes"), "-");
+    berth_scan_probes
+        ->setIcon("/radar/probe.png")
+        ->setSize(200.0f, kv_size);
+    carrier_scan_probes = new GuiKeyValueDisplay(supply_controls_right, "", kv_split, tr("dockingbay", "Probes"), "-");
+    carrier_scan_probes
+        ->setIcon("/radar/probe.png")
+        ->setSize(200.0f, kv_size);
 
     supply_controls_center_row = new GuiElement(supply_controls_center, "");
         supply_controls_center_row
@@ -678,8 +682,6 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     (new GuiButton(supply_controls_center_row, "", "<",
         [this]()
         {
-            LOG(Info, "Send scan probe to berthed ship");
-
             if (!my_spaceship || !my_player_info) return;
             auto bay = my_spaceship.getComponent<DockingBay>();
             if (!bay) return;
@@ -701,8 +703,6 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     (new GuiButton(supply_controls_center_row, "", ">",
         [this]()
         {
-            LOG(Info, "Send scan probe to carrier ship");
-
             if (!my_spaceship || !my_player_info) return;
             auto bay = my_spaceship.getComponent<DockingBay>();
             if (!bay) return;
@@ -802,6 +802,7 @@ void DockingBayScreen::onDraw(sp::RenderTarget& renderer)
             ->setColor(glm::u8vec4(128, 128, 128, 255))
             ->setValue(tr("dockingbay", "No reactor"));
     }
+    GuiOverlay::onDraw(renderer);
 }
 
 void DockingBayScreen::onUpdate()
