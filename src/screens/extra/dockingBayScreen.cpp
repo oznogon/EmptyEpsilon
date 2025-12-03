@@ -608,15 +608,17 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     // Populate missile transfer buttons
     GuiButton* to_berth[MW_Count];
     GuiButton* to_carrier[MW_Count];
+    GuiElement* supply_controls_center_row;
 
     for (int i = MW_Homing; i < MW_Count; i++)
     {
-        GuiElement* supply_controls_center_row = new GuiElement(supply_controls_center, "");
+        supply_controls_center_row = new GuiElement(supply_controls_center, "");
         supply_controls_center_row
             ->setSize(GuiElement::GuiSizeMax, kv_size)
             ->setAttribute("layout", "horizontal");
+
         to_berth[i] = new GuiButton(supply_controls_center_row, "", "<",
-            [this, i]()
+            [this, supply_controls_center_row, i]()
             {
                 LOG(Info, "Send MW ", i, " to berthed ship");
 
@@ -639,7 +641,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         );
         to_berth[i]->setSize(kv_size, kv_size);
         to_carrier[i] = new GuiButton(supply_controls_center_row, "", ">",
-            [this, i]()
+            [this, supply_controls_center_row, i]()
             {
                 if (!my_spaceship || !my_player_info) return;
                 auto bay = my_spaceship.getComponent<DockingBay>();
@@ -663,10 +665,17 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     // Populate scan probe key/value displays
     berth_scan_probes = new GuiKeyValueDisplay(supply_controls_left, "", kv_split, tr("Scan probes"), "-");
+    berth_scan_probes->setSize(GuiElement::GuiSizeMax, kv_size);
     carrier_scan_probes = new GuiKeyValueDisplay(supply_controls_right, "", kv_split, tr("Scan probes"), "-");
+    carrier_scan_probes->setSize(GuiElement::GuiSizeMax, kv_size);
+
+    supply_controls_center_row = new GuiElement(supply_controls_center, "");
+        supply_controls_center_row
+            ->setSize(GuiElement::GuiSizeMax, kv_size)
+            ->setAttribute("layout", "horizontal");
 
     // Populate scan probe transfer buttons
-    (new GuiButton(supply_controls_center, "", "<",
+    (new GuiButton(supply_controls_center_row, "", "<",
         [this]()
         {
             LOG(Info, "Send scan probe to berthed ship");
@@ -689,10 +698,10 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         }
     ))->setSize(kv_size, kv_size);
 
-    (new GuiButton(supply_controls_center, "", "<",
+    (new GuiButton(supply_controls_center_row, "", ">",
         [this]()
         {
-            LOG(Info, "Send scan probe to berthed ship");
+            LOG(Info, "Send scan probe to carrier ship");
 
             if (!my_spaceship || !my_player_info) return;
             auto bay = my_spaceship.getComponent<DockingBay>();
