@@ -310,7 +310,8 @@ Keys::Keys() :
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
 
     debug_show_fps("DEBUG_SHOW_FPS", "F10"),
-    debug_show_timing("DEBUG_SHOW_TIMING", "F11")
+    debug_show_timing("DEBUG_SHOW_TIMING", "F11"),
+    debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12")
 {
 }
 
