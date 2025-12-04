@@ -26,6 +26,7 @@ enum class CrewPosition
     altRelay,
     commsOnly,
     shipLog,
+    easingDebug,
 
     MAX
 };

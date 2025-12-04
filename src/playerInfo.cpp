@@ -23,6 +23,7 @@
 #include "screens/extra/databaseScreen.h"
 #include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
+#include "screens/extra/easingDebugScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
@@ -1107,6 +1108,8 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new CommsScreen(container), CrewPosition::commsOnly, getCrewPositionName(CrewPosition::commsOnly), getCrewPositionIcon(CrewPosition::commsOnly));
         if (cps.has(CrewPosition::shipLog))
             screen->addStationTab(new ShipLogScreen(container), CrewPosition::shipLog, getCrewPositionName(CrewPosition::shipLog), getCrewPositionIcon(CrewPosition::shipLog));
+        if (cps.has(CrewPosition::easingDebug))
+            screen->addStationTab(new EasingDebugScreen(container), CrewPosition::easingDebug, getCrewPositionName(CrewPosition::easingDebug), getCrewPositionIcon(CrewPosition::easingDebug));
 
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<static_cast<int>(CrewPosition::MAX); n++)
@@ -1153,6 +1156,7 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::altRelay: return tr("station","Strategic Map");
     case CrewPosition::commsOnly: return tr("station","Comms");
     case CrewPosition::shipLog: return tr("station","Ship's Log");
+    case CrewPosition::easingDebug: return tr("station","Easing Debug");
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }
@@ -1176,6 +1180,7 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::altRelay: return "";
     case CrewPosition::commsOnly: return "";
     case CrewPosition::shipLog: return "";
+    case CrewPosition::easingDebug: return "";
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }
