@@ -225,9 +225,9 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     else
     {
         if (ee.type == ExplosionEffect::ExplosionType::Electric)
-            scale = Tween<float>::easeOutQuad(f, 0.2f, 1.f, 0.8f, 1.0f);
+            scale = Tween<float>::easeInOutQuintic(f, 0.2f, 1.f, 0.8f, 1.0f);
         else
-            scale = Tween<float>::easeOutQuad(f, 0.2f, 1.f, 1.0f, 1.3f);
+            scale = Tween<float>::easeOutQuintic(f, 0.2f, 1.f, 1.0f, 1.3f);
     }
 
     // Remain fully opaque until last 20% of lifetime, then fade quickly
@@ -297,16 +297,16 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         // Set alpha for fade effect
         glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::ExplosionAlpha), alpha);
 
-        // Bind noise texture for volumetric effect
-        textureManager.getTexture("texture/rgbnoise.png")->bind();
-
-        gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-        gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-        gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
-        gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
-
         if (ee.advanced_explosion)
         {
+            // Bind noise texture for volumetric effect
+            textureManager.getTexture("texture/rgbnoise.png")->bind();
+
+            gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+            gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+            gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+            gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
+
             // Use additive blending for bloom effect
             glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
@@ -354,17 +354,18 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         }
     }
     std::vector<glm::vec3> vertices(4 * ee.max_quad_count);
+    std::vector<glm::vec3> normals(4 * ee.max_quad_count);
 
     if (!ee.particles_buffers)
     {
-        for(int n = 0; n < ee.particle_count; n++)
+        for (int n = 0; n < ee.particle_count; n++)
             ee.particle_directions[n] = glm::normalize(glm::vec3(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8f, 1.2f);
 
         ee.particles_buffers = std::make_shared<gl::Buffers<2>>();
 
-        // Each vertex is a position and a texcoords.
-        // The two arrays are maintained separately (texcoords are fixed, vertices position change).
-        constexpr size_t vertex_size = sizeof(glm::vec3) + sizeof(glm::vec2);
+        // Each vertex is a position, texcoords, and normal (direction).
+        // The arrays are maintained separately (texcoords are fixed, vertices and normals change).
+        constexpr size_t vertex_size = sizeof(glm::vec3) + sizeof(glm::vec2) + sizeof(glm::vec3);
         gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, (*ee.particles_buffers)[0]);
         gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, (*ee.particles_buffers)[1]);
 
@@ -399,7 +400,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, (*ee.particles_buffers)[0]);
     gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, (*ee.particles_buffers)[1]);
 
-    // Fire ring with basic shader (no scrolling)
+    // Fire ring with basic shader
     if (ee.type == ExplosionEffect::ExplosionType::LargeThermal)
     {
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
@@ -435,8 +436,10 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
         gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals_attrib(shader.get().attribute(ShaderRegistry::Attributes::Normal));
 
-        textureManager.getTexture("particle.png")->bind();
+        // textureManager.getTexture("particle.png")->bind();
+        textureManager.getTexture("texture/trace_01.png")->bind();
 
         float r = 0.0f;
         float g = 0.0f;
@@ -444,30 +447,37 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
         if (ee.type == ExplosionEffect::ExplosionType::Electric)
         {
-            scale = Tween<float>::easeOutCubic(f, 0.f, 1.f, 0.3f, 3.0f);
-            r = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-            g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-            b = Tween<float>::easeInQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+            scale = Tween<float>::linear(f, 0.f, 1.f, 0.3f, 3.0f);
+            r = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
+            g = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
+            b = Tween<float>::easeInExponential(f, 0.f, 1.f, 1.0f, 0.0f);
         }
         else if (ee.type == ExplosionEffect::ExplosionType::Kinetic)
         {
-            scale = Tween<float>::easeOutCubic(f, 0.f, 1.f, 0.3f, 2.0f);
-            r = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-            g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-            b = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+            scale = Tween<float>::linear(f, 0.f, 1.f, 0.3f, 2.0f);
+            r = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
+            g = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
+            b = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
         }
         else
         {
-            scale = Tween<float>::easeOutCubic(f, 0.f, 1.f, 0.3f, 5.0f);
-            r = Tween<float>::easeInQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-            g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-            b = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+            scale = Tween<float>::linear(f, 0.f, 1.f, 0.3f, 5.0f);
+            r = Tween<float>::easeInExponential(f, 0.f, 1.f, 1.0f, 0.0f);
+            g = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
+            b = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
         }
 
-        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, ee.size / 32.0f);
+        // Size and color each individual particle.
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, ee.size / 8.0f);
+
+        // Set up vertex attribute pointers
+        // Layout: positions, texcoords, normals
+        size_t texcoords_offset = vertices.size() * sizeof(glm::vec3);
+        size_t normals_offset = texcoords_offset + (vertices.size() * sizeof(glm::vec2));
 
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
-        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(vertices.size() * sizeof(glm::vec3)));
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)texcoords_offset);
+        glVertexAttribPointer(normals_attrib.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)normals_offset);
 
         const size_t quad_count = ee.max_quad_count;
         // We're drawing particles `quad_count` at a time.
@@ -478,13 +488,22 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
             for (auto p = 0U; p < active_quads; ++p)
             {
                 glm::vec3 v = ee.particle_directions[n + p] * scale * ee.size;
+                glm::vec3 dir = ee.particle_directions[n + p];
+
+                // All 4 vertices of the quad share the same position and direction
                 vertices[4 * p + 0] = v;
                 vertices[4 * p + 1] = v;
                 vertices[4 * p + 2] = v;
                 vertices[4 * p + 3] = v;
+
+                normals[4 * p + 0] = dir;
+                normals[4 * p + 1] = dir;
+                normals[4 * p + 2] = dir;
+                normals[4 * p + 3] = dir;
             }
-            // upload
+            // upload positions and normals
             glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
+            glBufferSubData(GL_ARRAY_BUFFER, normals_offset, normals.size() * sizeof(glm::vec3), normals.data());
 
             glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(6 * active_quads), GL_UNSIGNED_SHORT, nullptr);
             n += active_quads;
@@ -600,6 +619,48 @@ void BillboardExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& 
 
     std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+
+    // Render flash effect with additive blending
+    {
+        // Pick random flash texture if not already set
+        if (be.flash_texture.empty())
+        {
+            int flash_index = rand() % 9; // 0-8
+            be.flash_texture = "texture/kenney_smoke-particles/PNG/Flash/flash0" + std::to_string(flash_index) + ".png";
+        }
+
+        // Calculate animation progress (0.0 to 1.0)
+        float progress = (be.max_lifetime - be.lifetime) / be.max_lifetime;
+
+        // Linear scale up from 0.5x to 2.0x
+        float flash_scale = 0.5f + (progress * 1.5f);
+
+        // Linear fade out from 1.0 to 0.0
+        float flash_alpha = 1.0f - progress;
+
+        // Use additive blending for the flash
+        glBlendFunc(GL_ONE, GL_ONE);
+
+        // Use basic billboard shader
+        ShaderRegistry::ScopedShader flash_shader(ShaderRegistry::Shaders::Billboard);
+
+        // Bind flash texture
+        textureManager.getTexture(be.flash_texture)->bind();
+
+        // Set uniforms - size in alpha channel, RGB for color/intensity
+        glUniformMatrix4fv(flash_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniform4f(flash_shader.get().uniform(ShaderRegistry::Uniforms::Color),
+                    flash_alpha, flash_alpha, flash_alpha, be.size * flash_scale * 2.0f);
+
+        // Set up vertex attributes
+        gl::ScopedVertexAttribArray flash_positions(flash_shader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray flash_texcoords(flash_shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
+        glVertexAttribPointer(flash_positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(flash_texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+    }
 
     // Restore additive blending for other effects
     glBlendFunc(GL_ONE, GL_ONE);

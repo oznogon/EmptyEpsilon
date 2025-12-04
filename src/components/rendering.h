@@ -115,6 +115,7 @@ public:
     int sprite_rows = default_rows;
     glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
     string texture = "texture/explosion_sprite.png";
+    string flash_texture = ""; // Random flash texture, empty means pick one
     bool radar = false;
 };
 

@@ -57,11 +57,11 @@ void main()
 {
     vec4 texColor = texture2D(u_textureMap, fragtexcoords.st);
 
-    // Fade out in the final 20% of the animation
-    float fadeStart = 0.8;
+    // Fade out in the second half of the animation
+    float fadeStart = 0.5;
     float fadeAmount = 1.0;
     if (animProgress > fadeStart) {
-        // Map progress from [0.8, 1.0] to [1.0, 0.0]
+        // Map progress from [0.5, 1.0] to [1.0, 0.0]
         fadeAmount = 1.0 - ((animProgress - fadeStart) / (1.0 - fadeStart));
     }
 
