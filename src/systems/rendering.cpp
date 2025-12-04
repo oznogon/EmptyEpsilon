@@ -215,27 +215,22 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 {
     float f = (1.0f - (ee.lifetime / ee.max_lifetime));
     float scale;
-    float alpha = 1.0f;
-    if (f < 0.2f)
-    {
-        scale = (f / 0.2f);
-        if (ee.type == ExplosionEffect::ExplosionType::Electric)
-            scale *= 0.8f;
-    }
-    else
-    {
-        if (ee.type == ExplosionEffect::ExplosionType::Electric)
-            scale = Tween<float>::easeInOutQuintic(f, 0.2f, 1.f, 0.8f, 1.0f);
-        else
-            scale = Tween<float>::easeOutQuintic(f, 0.2f, 1.f, 1.0f, 1.3f);
-    }
 
-    // Remain fully opaque until last 20% of lifetime, then fade quickly
-    if (f > 0.8f)
-    {
-        float fadeProgress = (f - 0.8f) / 0.2f; // 0 to 1 in last 20%
-        alpha = 1.0f - fadeProgress;
-    }
+    // Linear scale growth from 0 to final size
+    if (ee.type == ExplosionEffect::ExplosionType::Electric)
+        scale = f * 1.0f;  // Electric explosions grow to 1.0x
+    else
+        scale = f * 1.3f;  // Other explosions grow to 1.3x
+
+    // Different fade rates for each element (particles fade first, then sphere, then fire ring)
+    // Particles: start fading at 40% progress, fully faded by 70%
+    float particles_alpha = 1.0f - glm::clamp((f - 0.4f) / 0.3f, 0.0f, 1.0f);
+
+    // Sphere/Sprite: start fading at 60% progress, fully faded by 90%
+    float sphere_alpha = 1.0f - glm::clamp((f - 0.6f) / 0.3f, 0.0f, 1.0f);
+
+    // Fire ring: start fading at 70% progress, fully faded by 100%
+    float fire_ring_alpha = 1.0f - glm::clamp((f - 0.7f) / 0.3f, 0.0f, 1.0f);
 
     auto position = transform.getPosition();
     auto rotation = transform.getRotation();
@@ -244,8 +239,108 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
     auto explosion_matrix = glm::scale(model_matrix, glm::vec3(scale * ee.size));
 
-    // Render billboard with volumetric explosion shader
-    if (ee.type != ExplosionEffect::ExplosionType::Kinetic)
+    // Render animated sprite billboard explosion
+    if (ee.render_mode & ExplosionEffect::Sprite)
+    {
+        struct VertexAndTexCoords
+        {
+            glm::vec3 vertex;
+            glm::vec2 texcoords;
+        };
+        static std::array<VertexAndTexCoords, 4> quad{
+            glm::vec3{}, {0.f, 1.f},
+            glm::vec3{}, {1.f, 1.f},
+            glm::vec3{}, {1.f, 0.f},
+            glm::vec3{}, {0.f, 0.f}
+        };
+
+        // Bind texture
+        textureManager.getTexture(ee.sprite_texture)->bind();
+
+        // Use the animated billboard shader
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BillboardAnimated);
+
+        // Set uniforms
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), ee.color.r, ee.color.g, ee.color.b, ee.size);
+
+        // Calculate current frame based on lifetime and FPS
+        float time_elapsed = ee.max_lifetime - ee.lifetime;
+        int total_frames = ee.sprite_columns * ee.sprite_rows;
+        int current_frame = static_cast<int>(time_elapsed * ee.fps);
+        // Clamp to last frame instead of wrapping (explosions play once)
+        if (current_frame >= total_frames)
+            current_frame = total_frames - 1;
+
+        // Set sprite sheet parameters (columns, rows, current frame, unused)
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::SpriteSheetParams),
+            static_cast<float>(ee.sprite_columns),
+            static_cast<float>(ee.sprite_rows),
+            static_cast<float>(current_frame),
+            0.0f);
+
+        // Set up vertex attributes
+        gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
+        // Use alpha blending for smooth edges
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+
+        std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+
+        // Render flash effect if enabled
+        if (ee.render_mode & ExplosionEffect::Flash)
+        {
+            // Pick random flash texture if not already set
+            if (ee.flash_texture.empty())
+            {
+                int flash_index = rand() % 9; // 0-8
+                ee.flash_texture = "texture/kenney_smoke-particles/PNG/Flash/flash0" + std::to_string(flash_index) + ".png";
+            }
+
+            // Calculate animation progress (0.0 to 1.0)
+            float progress = (ee.max_lifetime - ee.lifetime) / ee.max_lifetime;
+
+            // Linear scaling
+            float flash_scale = Tween<float>::easeInOutExponential(progress, 0.0f, 0.5f, 0.0f, 0.15f);
+
+            // Fade out
+            float flash_alpha = Tween<float>::easeInOutExponential(progress, 0.0f, 0.5f, 1.0f, 0.0f);
+
+            // Use additive blending for the flash
+            glBlendFunc(GL_ONE, GL_ONE);
+
+            // Use basic billboard shader
+            ShaderRegistry::ScopedShader flash_shader(ShaderRegistry::Shaders::Billboard);
+
+            // Bind flash texture
+            textureManager.getTexture(ee.flash_texture)->bind();
+
+            // Set uniforms - size in alpha channel, RGB for color/intensity
+            glUniformMatrix4fv(flash_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+            glUniform4f(flash_shader.get().uniform(ShaderRegistry::Uniforms::Color),
+                        flash_alpha, flash_alpha, flash_alpha, ee.size * flash_scale * 2.0f);
+
+            // Set up vertex attributes
+            gl::ScopedVertexAttribArray flash_positions(flash_shader.get().attribute(ShaderRegistry::Attributes::Position));
+            gl::ScopedVertexAttribArray flash_texcoords(flash_shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
+            glVertexAttribPointer(flash_positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+            glVertexAttribPointer(flash_texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+        }
+
+        // Restore additive blending for other effects
+        glBlendFunc(GL_ONE, GL_ONE);
+    }
+
+    // Render billboard with optional volumetric explosion shader
+    if ((ee.render_mode & (ExplosionEffect::Basic | ExplosionEffect::Advanced)) && ee.type != ExplosionEffect::ExplosionType::Kinetic)
     {
         struct VertexAndTexCoords
         {
@@ -295,9 +390,9 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::Time), explosionTime);
 
         // Set alpha for fade effect
-        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::ExplosionAlpha), alpha);
+        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::ExplosionAlpha), sphere_alpha);
 
-        if (ee.advanced_explosion)
+        if (ee.render_mode & ExplosionEffect::Advanced)
         {
             // Bind noise texture for volumetric effect
             textureManager.getTexture("texture/rgbnoise.png")->bind();
@@ -321,13 +416,13 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         }
     }
 
-    // Render old-style textured sphere explosion (non-advanced)
-    if (ee.type != ExplosionEffect::ExplosionType::Kinetic && !ee.advanced_explosion)
+    // Render old-style textured sphere explosion (basic mode)
+    if ((ee.render_mode & ExplosionEffect::Basic) && ee.type != ExplosionEffect::ExplosionType::Kinetic)
     {
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Scrolling);
 
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
-        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), sphere_alpha, sphere_alpha, sphere_alpha, 1.f);
 
         // Scroll texture over time based on explosion progress
         float scrollSpeed = ee.type == ExplosionEffect::ExplosionType::Electric ? 0.5f : 1.0f;
@@ -375,6 +470,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         // Create initial data.
         std::vector<uint16_t> indices(6 * ee.max_quad_count);
         std::vector<glm::vec2> texcoords(4 * ee.max_quad_count);
+
         for (auto i = 0U; i < ee.max_quad_count; ++i)
         {
             auto quad_offset = 4 * i;
@@ -408,12 +504,13 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
         explosion_matrix = glm::scale(explosion_matrix, glm::vec3(1.5f));
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
-        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), fire_ring_alpha, fire_ring_alpha, fire_ring_alpha, 1.f);
 
         vertices[0] = glm::vec3(-1, -1, 0);
-        vertices[1] = glm::vec3(1, -1, 0);
-        vertices[2] = glm::vec3(1, 1, 0);
-        vertices[3] = glm::vec3(-1, 1, 0);
+        vertices[1] = glm::vec3( 1, -1, 0);
+        vertices[2] = glm::vec3( 1,  1, 0);
+        vertices[3] = glm::vec3(-1,  1, 0);
+
         {
             gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
             gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -429,7 +526,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     }
 
     // Debris/spark particles
-    if (ee.type != ExplosionEffect::ExplosionType::SmallThermal)
+    if ((ee.render_mode & ExplosionEffect::Particles) && ee.type != ExplosionEffect::ExplosionType::SmallThermal)
     {
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
@@ -448,23 +545,23 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         if (ee.type == ExplosionEffect::ExplosionType::Electric)
         {
             scale = Tween<float>::linear(f, 0.f, 1.f, 0.3f, 3.0f);
-            r = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
-            g = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
-            b = Tween<float>::easeInExponential(f, 0.f, 1.f, 1.0f, 0.0f);
+            r = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
+            g = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
+            b = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.5f) * particles_alpha;
         }
         else if (ee.type == ExplosionEffect::ExplosionType::Kinetic)
         {
             scale = Tween<float>::linear(f, 0.f, 1.f, 0.3f, 2.0f);
-            r = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
-            g = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
-            b = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
+            r = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
+            g = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
+            b = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
         }
         else
         {
             scale = Tween<float>::linear(f, 0.f, 1.f, 0.3f, 5.0f);
-            r = Tween<float>::easeInExponential(f, 0.f, 1.f, 1.0f, 0.0f);
-            g = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
-            b = Tween<float>::easeOutExponential(f, 0.f, 1.f, 1.0f, 0.0f);
+            r = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.5f) * particles_alpha;
+            g = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
+            b = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
         }
 
         // Size and color each individual particle.
@@ -549,119 +646,5 @@ void BillboardRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
     std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
-    glBlendFunc(GL_ONE, GL_ONE);
-}
-
-void BillboardExplosionRenderSystem::update(float delta)
-{
-    for (auto [entity, be] : sp::ecs::Query<BillboardExplosion>())
-    {
-        be.lifetime -= delta;
-
-        if (be.lifetime <= 0.0f)
-            entity.destroy();
-    }
-}
-
-void BillboardExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, BillboardExplosion& be)
-{
-    struct VertexAndTexCoords
-    {
-        glm::vec3 vertex;
-        glm::vec2 texcoords;
-    };
-    static std::array<VertexAndTexCoords, 4> quad{
-        glm::vec3{}, {0.f, 1.f},
-        glm::vec3{}, {1.f, 1.f},
-        glm::vec3{}, {1.f, 0.f},
-        glm::vec3{}, {0.f, 0.f}
-    };
-
-    // Bind texture
-    textureManager.getTexture(be.texture)->bind();
-
-    // Use the animated billboard shader
-    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BillboardAnimated);
-
-    auto position = transform.getPosition();
-    auto rotation = transform.getRotation();
-    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
-    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
-
-    // Set uniforms
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-    glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), be.color.r, be.color.g, be.color.b, be.size);
-
-    // Calculate current frame based on lifetime and FPS
-    float time_elapsed = be.max_lifetime - be.lifetime;
-    int total_frames = be.sprite_columns * be.sprite_rows;
-    int current_frame = static_cast<int>(time_elapsed * be.fps);
-    // Clamp to last frame instead of wrapping (explosions play once)
-    if (current_frame >= total_frames)
-        current_frame = total_frames - 1;
-
-    // Set sprite sheet parameters (columns, rows, current frame, unused)
-    glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::SpriteSheetParams),
-        static_cast<float>(be.sprite_columns),
-        static_cast<float>(be.sprite_rows),
-        static_cast<float>(current_frame),
-        0.0f);
-
-    // Set up vertex attributes
-    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-
-    // Use alpha blending for smooth edges
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
-    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
-
-    std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
-
-    // Render flash effect with additive blending
-    {
-        // Pick random flash texture if not already set
-        if (be.flash_texture.empty())
-        {
-            int flash_index = rand() % 9; // 0-8
-            be.flash_texture = "texture/kenney_smoke-particles/PNG/Flash/flash0" + std::to_string(flash_index) + ".png";
-        }
-
-        // Calculate animation progress (0.0 to 1.0)
-        float progress = (be.max_lifetime - be.lifetime) / be.max_lifetime;
-
-        // Linear scale up from 0.5x to 2.0x
-        float flash_scale = 0.5f + (progress * 1.5f);
-
-        // Linear fade out from 1.0 to 0.0
-        float flash_alpha = 1.0f - progress;
-
-        // Use additive blending for the flash
-        glBlendFunc(GL_ONE, GL_ONE);
-
-        // Use basic billboard shader
-        ShaderRegistry::ScopedShader flash_shader(ShaderRegistry::Shaders::Billboard);
-
-        // Bind flash texture
-        textureManager.getTexture(be.flash_texture)->bind();
-
-        // Set uniforms - size in alpha channel, RGB for color/intensity
-        glUniformMatrix4fv(flash_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-        glUniform4f(flash_shader.get().uniform(ShaderRegistry::Uniforms::Color),
-                    flash_alpha, flash_alpha, flash_alpha, be.size * flash_scale * 2.0f);
-
-        // Set up vertex attributes
-        gl::ScopedVertexAttribArray flash_positions(flash_shader.get().attribute(ShaderRegistry::Attributes::Position));
-        gl::ScopedVertexAttribArray flash_texcoords(flash_shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-
-        glVertexAttribPointer(flash_positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
-        glVertexAttribPointer(flash_texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
-
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
-    }
-
-    // Restore additive blending for other effects
     glBlendFunc(GL_ONE, GL_ONE);
 }

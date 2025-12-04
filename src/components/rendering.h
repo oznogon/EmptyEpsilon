@@ -82,14 +82,27 @@ public:
         Kinetic
     };
 
-    bool advanced_explosion = false;
+    // Bitwise mask for explosion rendering modes
+    enum RenderMode : uint8_t
+    {
+        None = 0x00,
+        Basic = 0x01,     // Original textured-sphere explosion
+        Advanced = 0x02,  // Volumetric shader explosion
+        Sprite = 0x04,    // Animated sprite sheet explosion
+        Particles = 0x08, // Debris/spark particles
+        Flash = 0x10      // Flash effect
+    };
 
     constexpr static float max_lifetime = 2.f;
     constexpr static int particle_count = 1000;
 
+    // Rendering mode mask
+    uint8_t render_mode = Basic | Particles;
+
+    // Generic properties
     float lifetime = max_lifetime;
-    float size = 1.0;
-    glm::vec3 color{1.0,0.6,0.3};
+    float size = 1.0f;
+    glm::vec3 color{1.0f, 0.6f, 0.3f};
     glm::vec3 particle_directions[particle_count];
     bool radar = false;
     ExplosionType type = ExplosionType::LargeThermal;
@@ -98,27 +111,15 @@ public:
     // Fit elements in a uint8 - at 4 vertices per quad, that's (256 / 4 =) 64 quads.
     static constexpr size_t max_quad_count = particle_count * 4;
     std::shared_ptr<gl::Buffers<2>> particles_buffers;
+
+    // Sprite animation properties
+    float fps = 64.0f;
+    int sprite_columns = 8;
+    int sprite_rows = 8;
+    string sprite_texture = "texture/explosion_sprite.png";
+    // Empty flash texture value results in random selection
+    string flash_texture = "";
 };
-
-class BillboardExplosion
-{
-public:
-    constexpr static float default_lifetime = 1.0f;
-    constexpr static int default_columns = 8;
-    constexpr static int default_rows = 8;
-
-    float lifetime = default_lifetime;
-    float max_lifetime = default_lifetime;
-    float size = 100.0f;
-    float fps = 64.0f; // Animation speed (frames per second)
-    int sprite_columns = default_columns;
-    int sprite_rows = default_rows;
-    glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
-    string texture = "texture/explosion_sprite.png";
-    string flash_texture = ""; // Random flash texture, empty means pick one
-    bool radar = false;
-};
-
 
 class PlanetRender
 {

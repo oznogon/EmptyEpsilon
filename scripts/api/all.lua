@@ -22,7 +22,6 @@ require("api/entity/supplydrop.lua")
 require("api/entity/zone.lua")
 require("api/entity/beameffect.lua")
 require("api/entity/explosioneffect.lua")
-require("api/entity/billboardexplosion.lua")
 
 require("api/gm.lua")
 require("api/callsign.lua")

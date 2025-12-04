@@ -154,7 +154,6 @@ void initSystemsAndComponents()
     engine->registerSystem<NebulaRenderSystem>();
     engine->registerSystem<ExplosionRenderSystem>();
     engine->registerSystem<BillboardRenderSystem>();
-    engine->registerSystem<BillboardExplosionRenderSystem>();
     engine->registerSystem<PlanetRenderSystem>();
     engine->registerSystem<PlanetTransparentRenderSystem>();
     engine->registerSystem<MeshRenderSystem>();

@@ -325,17 +325,36 @@ void initComponentScriptBindings()
     BIND_MEMBER(ExplosionEffect, radar);
     BIND_MEMBER(ExplosionEffect, type);
     BIND_MEMBER(ExplosionEffect, electrical);
-
-    sp::script::ComponentHandler<BillboardExplosion>::name("billboard_explosion");
-    BIND_MEMBER(BillboardExplosion, lifetime);
-    BIND_MEMBER(BillboardExplosion, max_lifetime);
-    BIND_MEMBER(BillboardExplosion, size);
-    BIND_MEMBER(BillboardExplosion, fps);
-    BIND_MEMBER(BillboardExplosion, sprite_columns);
-    BIND_MEMBER(BillboardExplosion, sprite_rows);
-    BIND_MEMBER(BillboardExplosion, color);
-    BIND_MEMBER(BillboardExplosion, texture);
-    BIND_MEMBER(BillboardExplosion, radar);
+    BIND_MEMBER(ExplosionEffect, fps);
+    BIND_MEMBER(ExplosionEffect, sprite_columns);
+    BIND_MEMBER(ExplosionEffect, sprite_rows);
+    BIND_MEMBER(ExplosionEffect, sprite_texture);
+    BIND_MEMBER(ExplosionEffect, flash_texture);
+    BIND_MEMBER(ExplosionEffect, color);
+    // Manual binding for render_mode (uint8_t requires conversion to int)
+    sp::script::ComponentHandler<ExplosionEffect>::members["render_mode"] = {
+        [](lua_State* L, const void* ptr) {
+            auto ee = reinterpret_cast<const ExplosionEffect*>(ptr);
+            return sp::script::Convert<int>::toLua(L, static_cast<int>(ee->render_mode));
+        }, [](lua_State* L, void* ptr) {
+            auto ee = reinterpret_cast<ExplosionEffect*>(ptr);
+            ee->render_mode = static_cast<uint8_t>(sp::script::Convert<int>::fromLua(L, -1));
+        }
+    };
+    // Backwards compatibility: expose advanced_explosion as a flag that sets/clears the Advanced bit
+    sp::script::ComponentHandler<ExplosionEffect>::members["advanced_explosion"] = {
+        [](lua_State* L, const void* ptr) {
+            auto ee = reinterpret_cast<const ExplosionEffect*>(ptr);
+            return sp::script::Convert<bool>::toLua(L, (ee->render_mode & ExplosionEffect::Advanced) != 0);
+        }, [](lua_State* L, void* ptr) {
+            auto ee = reinterpret_cast<ExplosionEffect*>(ptr);
+            bool advanced = sp::script::Convert<bool>::fromLua(L, -1);
+            if (advanced)
+                ee->render_mode = (ee->render_mode & ~ExplosionEffect::Basic) | ExplosionEffect::Advanced;
+            else
+                ee->render_mode = (ee->render_mode & ~ExplosionEffect::Advanced) | ExplosionEffect::Basic;
+        }
+    };
 
     sp::script::ComponentHandler<Sfx>::name("sfx");
     sp::script::ComponentHandler<Sfx>::members["sound"] = {
