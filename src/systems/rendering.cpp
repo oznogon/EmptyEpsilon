@@ -214,13 +214,20 @@ void ExplosionRenderSystem::update(float delta)
 void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, ExplosionEffect& ee)
 {
     float f = (1.0f - (ee.lifetime / ee.max_lifetime));
-    float scale;
 
-    // Linear scale growth from 0 to final size
+    // Different scale rates for each element
+    float particles_scale = f * 3.0f;
+    float sphere_scale = f * 1.2f;
+    float fire_ring_scale = f * 1.5f;
+
     if (ee.type == ExplosionEffect::ExplosionType::Electric)
-        scale = f * 1.0f;  // Electric explosions grow to 1.0x
-    else
-        scale = f * 1.3f;  // Other explosions grow to 1.3x
+    {
+        sphere_scale = f;
+        particles_scale = f * 2.0f;
+    }
+
+    if (ee.type == ExplosionEffect::ExplosionType::Kinetic)
+        particles_scale = f;
 
     // Different fade rates for each element (particles fade first, then sphere, then fire ring)
     // Particles: start fading at 40% progress, fully faded by 70%
@@ -237,7 +244,10 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
     model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
 
-    auto explosion_matrix = glm::scale(model_matrix, glm::vec3(scale * ee.size));
+    // Create separate matrices for each element with different scales
+    auto sphere_matrix = glm::scale(model_matrix, glm::vec3(sphere_scale * ee.size));
+    auto particles_matrix = glm::scale(model_matrix, glm::vec3(particles_scale * ee.size));
+    auto fire_ring_matrix = glm::scale(model_matrix, glm::vec3(fire_ring_scale * ee.size));
 
     // Render animated sprite billboard explosion
     if (ee.render_mode & ExplosionEffect::Sprite)
@@ -260,9 +270,9 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         // Use the animated billboard shader
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BillboardAnimated);
 
-        // Set uniforms
+        // Set uniforms (sprite scales at same rate as sphere)
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), ee.color.r, ee.color.g, ee.color.b, ee.size);
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), ee.color.r, ee.color.g, ee.color.b, ee.size * sphere_scale * 3.0f);
 
         // Calculate current frame based on lifetime and FPS
         float time_elapsed = ee.max_lifetime - ee.lifetime;
@@ -339,8 +349,8 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         glBlendFunc(GL_ONE, GL_ONE);
     }
 
-    // Render billboard with optional volumetric explosion shader
-    if ((ee.render_mode & (ExplosionEffect::Basic | ExplosionEffect::Advanced)) && ee.type != ExplosionEffect::ExplosionType::Kinetic)
+    // Render volumetric explosion shader (Advanced mode only)
+    if ((ee.render_mode & ExplosionEffect::Advanced) && ee.type != ExplosionEffect::ExplosionType::Kinetic)
     {
         struct VertexAndTexCoords
         {
@@ -364,8 +374,8 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         // Set model matrix (position only, billboard handles rotation and scale)
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
-        // Set billboard size (scale of the explosion)
-        float billboardSize = scale * ee.size * 3.0f;
+        // Set billboard size (scale of the explosion) based on sphere scale
+        float billboardSize = sphere_scale * ee.size * 3.0f;
         glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::BillboardSize), billboardSize);
 
         // Get viewport dimensions
@@ -384,26 +394,24 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
         // Set time uniform based on explosion progress (0 to max_lifetime)
         // Multiply by speed factor to complete animation within lifetime
-        float explosionTime = (ee.max_lifetime - ee.lifetime) * 10.0f;
-        if (ee.type != ExplosionEffect::ExplosionType::Electric) explosionTime /= 2.0f;
+        float explosion_time = (ee.max_lifetime - ee.lifetime) * 10.0f;
+        if (ee.type != ExplosionEffect::ExplosionType::Electric) explosion_time /= 2.0f;
 
-        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::Time), explosionTime);
+        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::Time), explosion_time);
 
         // Set alpha for fade effect
         glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::ExplosionAlpha), sphere_alpha);
 
-        if (ee.render_mode & ExplosionEffect::Advanced)
-        {
-            // Bind noise texture for volumetric effect
-            textureManager.getTexture("texture/rgbnoise.png")->bind();
+        // Bind noise texture for volumetric effect
+        textureManager.getTexture("texture/rgbnoise.png")->bind();
 
-            gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-            gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-            gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
-            gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
+        gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+        gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
-            // Use additive blending for bloom effect
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        // Use additive blending for bloom effect
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
@@ -411,23 +419,29 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
 
-            // Restore default blending
-            glBlendFunc(GL_ONE, GL_ONE);
-        }
+        // Restore default blending
+        glBlendFunc(GL_ONE, GL_ONE);
     }
 
-    // Render old-style textured sphere explosion (basic mode)
+    // Render textured sphere explosion with vertex noise (basic mode)
     if ((ee.render_mode & ExplosionEffect::Basic) && ee.type != ExplosionEffect::ExplosionType::Kinetic)
     {
-        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Scrolling);
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ExplosionSphere);
 
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(sphere_matrix));
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), sphere_alpha, sphere_alpha, sphere_alpha, 1.f);
 
         // Scroll texture over time based on explosion progress
         float scrollSpeed = ee.type == ExplosionEffect::ExplosionType::Electric ? 0.5f : 1.0f;
         float scrollOffset = (ee.max_lifetime - ee.lifetime) * scrollSpeed;
         glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::ScrollOffset), scrollOffset);
+
+        // Time for noise animation (0 to max_lifetime)
+        float explosion_time = (ee.max_lifetime - ee.lifetime);
+        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::Time), explosion_time);
+
+        // Sphere vertex noise scales up over time
+        glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::NoiseScale), f * 0.12f);
 
         if (ee.type == ExplosionEffect::ExplosionType::Electric)
             textureManager.getTexture("texture/electric_sphere_texture.png")->bind();
@@ -444,7 +458,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
         if (ee.type == ExplosionEffect::ExplosionType::Electric)
         {
-            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::scale(explosion_matrix, glm::vec3(.5f))));
+            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::scale(sphere_matrix, glm::vec3(.5f))));
             m->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
         }
     }
@@ -502,8 +516,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
         textureManager.getTexture("texture/fire_ring.png")->bind();
 
-        explosion_matrix = glm::scale(explosion_matrix, glm::vec3(1.5f));
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(fire_ring_matrix));
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), fire_ring_alpha, fire_ring_alpha, fire_ring_alpha, 1.f);
 
         vertices[0] = glm::vec3(-1, -1, 0);
@@ -544,21 +557,18 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
         if (ee.type == ExplosionEffect::ExplosionType::Electric)
         {
-            scale = Tween<float>::linear(f, 0.f, 1.f, 0.3f, 3.0f);
             r = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
             g = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
             b = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.5f) * particles_alpha;
         }
         else if (ee.type == ExplosionEffect::ExplosionType::Kinetic)
         {
-            scale = Tween<float>::linear(f, 0.f, 1.f, 0.3f, 2.0f);
             r = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
             g = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
             b = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
         }
         else
         {
-            scale = Tween<float>::linear(f, 0.f, 1.f, 0.3f, 5.0f);
             r = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.5f) * particles_alpha;
             g = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
             b = Tween<float>::easeOutSine(f, 0.f, 1.f, 1.0f, 0.0f) * particles_alpha;
@@ -584,7 +594,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
             // setup quads
             for (auto p = 0U; p < active_quads; ++p)
             {
-                glm::vec3 v = ee.particle_directions[n + p] * scale * ee.size;
+                glm::vec3 v = ee.particle_directions[n + p] * particles_scale * ee.size;
                 glm::vec3 dir = ee.particle_directions[n + p];
 
                 // All 4 vertices of the quad share the same position and direction

@@ -41,6 +41,7 @@ namespace ShaderRegistry
 		Planet,
 		Scrolling,
 		VolumetricExplosion,
+		ExplosionSphere,
 
 		Count
 	};
@@ -74,6 +75,7 @@ namespace ShaderRegistry
 		ExplosionAlpha,
 		QualityFactor,
 		SpriteSheetParams,
+		NoiseScale,
 
 		Count
 	};

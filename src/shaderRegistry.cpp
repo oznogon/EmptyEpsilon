@@ -38,6 +38,7 @@ namespace ShaderRegistry
             "shaders/planet",
             "shaders/scrolling",
             "shaders/volumetricExplosion",
+            "shaders/explosionSphere",
         };
 
         std::array<const char*, Uniforms_t(Uniforms::Count)> uniform_names{
@@ -47,7 +48,7 @@ namespace ShaderRegistry
             "u_view",
             "u_camera_position",
             "u_atmosphereColor",
-            
+
             "u_textureMap",
             "u_baseMap",
             "u_specularMap",
@@ -65,7 +66,8 @@ namespace ShaderRegistry
             "u_billboardSize",
             "u_explosionAlpha",
             "u_qualityFactor",
-            "u_spriteSheetParams"
+            "u_spriteSheetParams",
+            "u_noiseScale"
         };
 
         std::array<const char*, Attributes_t(Attributes::Count)> attribute_names{
