@@ -37,6 +37,11 @@ bool GuiElement::onMouseWheelScroll(glm::vec2 position, float value)
     return false;
 }
 
+bool GuiElement::onMultiGesture(glm::vec2 position, float dTheta, float dDist, int numFingers)
+{
+    return false;
+}
+
 void GuiElement::onTextInput(const string& text)
 {
 }

@@ -49,7 +49,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
                 my_player_info->commandSetTarget(targets.get());
             else if (my_spaceship)
                 my_player_info->commandSetTarget({});
-        }, nullptr, nullptr
+        }, nullptr, nullptr, nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("weapons_radar_lock","0")=="1");
 

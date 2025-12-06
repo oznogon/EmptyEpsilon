@@ -96,7 +96,9 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
                 my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
             heading_hint->hide();
-        }
+        },
+        // Multigesture
+        nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("helms_radar_lock","0")=="1");
 

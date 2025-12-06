@@ -1,4 +1,5 @@
 #include "relayScreen.h"
+#include "engine.h"
 #include "i18n.h"
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
@@ -45,25 +46,30 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) { //down
-            if (mode == TargetSelection && targets.getWaypointIndex() > -1) {
-                if (auto waypoints = my_spaceship.getComponent<Waypoints>()) {
-                    if (auto waypoint_position = waypoints->get(targets.getWaypointIndex())) {
-                        if (glm::length(waypoint_position.value() - position) < 1000.0f) {
-                            mode = MoveWaypoint;
-                            drag_waypoint_index = targets.getWaypointIndex();
-                        }
+            if (is_gesturing > 0.0f) return;
+            if (mode != TargetSelection || targets.getWaypointIndex() < 0) return;
+            if (auto waypoints = my_spaceship.getComponent<Waypoints>())
+            {
+                if (auto waypoint_position = waypoints->get(targets.getWaypointIndex()))
+                {
+                    if (glm::length(waypoint_position.value() - position) < 1000.0f)
+                    {
+                        mode = MoveWaypoint;
+                        drag_waypoint_index = targets.getWaypointIndex();
                     }
                 }
             }
             mouse_down_position = position;
         },
         [this](glm::vec2 position) { //drag
+            if (is_gesturing > 0.0f) return;
             if (mode == TargetSelection)
                 radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
             if (mode == MoveWaypoint && my_spaceship)
                 my_player_info->commandMoveWaypoint(drag_waypoint_index, position);
         },
         [this](glm::vec2 position) { //up
+            if (is_gesturing > 0.0f) return;
             switch(mode)
             {
             case TargetSelection:
@@ -86,6 +92,33 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                 option_buttons->show();
                 break;
             }
+        },
+        // Multigesture
+        [this](glm::vec2 position, float dTheta, float dDist, int numFingers)
+        {
+            is_gesturing = 0.2f;
+            printf("[DEBUG] GuiRadarView::onMultiGesture: fingers=%d, dDist=%f, radar->getDistance()=%f\n",
+                numFingers, dDist, radar->getDistance());
+
+            // Only process pinch gestures with 2 or more fingers
+            // Apply threshold to filter out unintentional micro-movements
+            if (numFingers > 1 && fabs(dDist) > 0.002f)
+            {
+                float view_distance = std::clamp(radar->getDistance() * (1.0f - (dDist * 20.0f)), 6250.0f, 50000.0f);
+                radar->setDistance(view_distance);
+                // Keep the zoom slider in sync.
+                zoom_slider->setValue(view_distance);
+                zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
+
+                printf("[DEBUG] GuiRadarView: Zoom applied - new distance=%f\n", view_distance);
+                return;
+            }
+            else
+            {
+                printf("[DEBUG] GuiRadarView: Ignoring - dDist too small (%f)\n", dDist);
+                return;
+            }
+
         }
     );
 
@@ -194,7 +227,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
 void RelayScreen::onDraw(sp::RenderTarget& renderer)
 {
-    ///Handle mouse wheel
+    // Handle mouse wheel
     float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
     if (mouse_wheel_delta != 0.0f)
     {
@@ -208,7 +241,6 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         zoom_slider->setValue(view_distance);
         zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
     }
-    ///!
 
     GuiOverlay::onDraw(renderer);
 
@@ -307,6 +339,8 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
 
         // Update mission clock
         info_clock->setValue(gameGlobalInfo->getMissionTime());
+        if (is_gesturing > 0.0f) is_gesturing -= engine->getElapsedTime() - former_time;
+        former_time = engine->getElapsedTime();
 
         if (auto spl = my_spaceship.getComponent<ScanProbeLauncher>())
             launch_probe_button->setText(tr("Launch Probe") + " (" + string(spl->stock) + ")");

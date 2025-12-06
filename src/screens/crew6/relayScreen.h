@@ -1,5 +1,4 @@
-#ifndef RELAY_SCREEN_H
-#define RELAY_SCREEN_H
+#pragma once
 
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
@@ -46,10 +45,10 @@ private:
     GuiHackingDialog* hacking_dialog;
 
     glm::vec2 mouse_down_position{};
+    float former_time;
+    float is_gesturing;
 public:
     RelayScreen(GuiContainer* owner, bool allow_comms);
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };
-
-#endif//RELAY_SCREEN_H

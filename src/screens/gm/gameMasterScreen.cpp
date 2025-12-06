@@ -73,7 +73,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     main_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(button, position); },
         [this](glm::vec2 position) { this->onMouseDrag(position); },
-        [this](glm::vec2 position) { this->onMouseUp(position); }
+        [this](glm::vec2 position) { this->onMouseUp(position); },
+        nullptr // Multigesture
     );
     box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", glm::u8vec4(255, 255, 255, 32));
     box_selection_overlay->layout.fill_height = false;

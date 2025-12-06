@@ -71,6 +71,12 @@ void GuiCanvas::onMouseWheelScroll(glm::vec2 position, float value)
     executeScrollOnElement(position, value);
 }
 
+void GuiCanvas::onMultiGesture(glm::vec2 position, float dTheta, float dDist, int numFingers)
+{
+    mouse_position = position;
+    executeMultiGestureOnElement(position, dTheta, dDist, numFingers);
+}
+
 void GuiCanvas::onTextInput(const string& text)
 {
     if (focus_element)

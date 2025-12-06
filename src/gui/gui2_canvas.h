@@ -1,5 +1,4 @@
-#ifndef GUI2_CANVAS_H
-#define GUI2_CANVAS_H
+#pragma once
 
 #include "Renderable.h"
 #include "gui2_container.h"
@@ -24,6 +23,7 @@ public:
     virtual void onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onPointerUp(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseWheelScroll(glm::vec2 position, float value) override;
+    virtual void onMultiGesture(glm::vec2 position, float dTheta, float dDist, int numFingers) override;
     virtual void onTextInput(const string& text) override;
     virtual void onTextInput(sp::TextInputEvent e) override;
 
@@ -34,5 +34,3 @@ public:
 private:
     void runUpdates(GuiContainer* parent);
 };
-
-#endif//GUI2_CANVAS_H

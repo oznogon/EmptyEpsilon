@@ -30,7 +30,8 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
     main_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(position); },
         [this](glm::vec2 position) { this->onMouseDrag(position); },
-        [this](glm::vec2 position) { this->onMouseUp(position); }
+        [this](glm::vec2 position) { this->onMouseUp(position); },
+        nullptr
     );
 
     ui_toggle = new GuiToggleButton(this, "UI_TOGGLE", "", [this](bool value) {

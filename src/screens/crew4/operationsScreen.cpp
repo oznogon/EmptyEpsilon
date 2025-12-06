@@ -68,7 +68,9 @@ OperationScreen::OperationScreen(GuiContainer* owner)
                 science->targets.setWaypointIndex(drag_waypoint_index);
                 break;
             }
-        }
+        },
+        // Multigesture
+        nullptr
     );
     science->science_radar->setAutoRotating(PreferencesManager::get("operations_radar_lock","0")=="1");
 

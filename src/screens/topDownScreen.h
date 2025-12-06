@@ -21,4 +21,5 @@ public:
     TopDownScreen(RenderLayer* render_layer);
 
     virtual void update(float delta) override;
+    virtual void onMultiGesture(glm::vec2 position, float dTheta, float dDist, int numFingers) override;
 };

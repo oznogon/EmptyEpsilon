@@ -97,6 +97,22 @@ GuiElement* GuiContainer::executeScrollOnElement(glm::vec2 position, float value
     return nullptr;
 }
 
+GuiElement* GuiContainer::executeMultiGestureOnElement(glm::vec2 position, float dTheta, float dDist, int numFingers)
+{
+    for(auto it = children.rbegin(); it != children.rend(); it++)
+    {
+        GuiElement* element = *it;
+
+        if (element->visible && element->enabled && element->rect.contains(position))
+        {
+            GuiElement* gestured = element->executeMultiGestureOnElement(position, dTheta, dDist, numFingers);
+            if (gestured) return gestured;
+            if (element->onMultiGesture(position, dTheta, dDist, numFingers)) return element;
+        }
+    }
+    return nullptr;
+}
+
 void GuiContainer::updateLayout(const sp::Rect& rect)
 {
     this->rect = rect;

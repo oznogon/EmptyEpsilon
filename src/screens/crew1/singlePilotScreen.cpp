@@ -60,7 +60,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 650);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) { // down
             auto last_target = targets.get();
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get() && (targets.get() != last_target)) {
@@ -71,15 +71,17 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
                 drag_rotate = true;
             }
         },
-        [this](glm::vec2 position) {
+        [this](glm::vec2 position) { // drag
             if (drag_rotate) {
                 if (auto transform = my_spaceship.getComponent<sp::Transform>())
                     my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
             }
         },
-        [this](glm::vec2 position) {
+        [this](glm::vec2 position) { // up
            drag_rotate=false;
-        }
+        },
+        // multigesture
+        nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
 

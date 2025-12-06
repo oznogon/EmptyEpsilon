@@ -64,7 +64,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
                     return;
 
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
-        }, nullptr, nullptr
+        }, nullptr, nullptr, nullptr
     );
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
     new RawScannerDataRadarOverlay(science_radar, "");
@@ -80,7 +80,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
                     return;
 
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
-        }, nullptr, nullptr
+        }, nullptr, nullptr, nullptr
     );
     new RawScannerDataRadarOverlay(probe_radar, "");
 

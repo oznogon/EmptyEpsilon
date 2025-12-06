@@ -194,3 +194,35 @@ void TopDownScreen::update(float delta)
         }
     }
 }
+
+void TopDownScreen::onMultiGesture(glm::vec2 position, float dTheta, float dDist, int numFingers)
+{
+    printf("[DEBUG] TopDownScreen::onMultiGesture: fingers=%d, dDist=%f, camera_z=%f\n",
+           numFingers, dDist, camera_position.z);
+
+    // Only process pinch gestures with 2 or more fingers
+    if (numFingers < 2) {
+        printf("[DEBUG] TopDownScreen: Ignoring - not enough fingers\n");
+        return;
+    }
+
+    // Apply threshold to filter out unintentional micro-movements
+    if (fabs(dDist) > 0.002f)
+    {
+        float old_z = camera_position.z;
+        // Pinch in (negative dDist) = zoom out (increase camera height)
+        // Pinch out (positive dDist) = zoom in (decrease camera height)
+        // Scale factor of 50 provides smooth, controllable zoom
+        camera_position.z = camera_position.z * (1.0f - (dDist * 50.0f));
+
+        // Apply bounds (same as mouse wheel zoom)
+        if (camera_position.z > 10000)
+            camera_position.z = 10000;
+        if (camera_position.z < 1000)
+            camera_position.z = 1000;
+
+        printf("[DEBUG] TopDownScreen: Zoom applied - old z=%f, new z=%f\n", old_z, camera_position.z);
+    } else {
+        printf("[DEBUG] TopDownScreen: Ignoring - dDist too small (%f)\n", dDist);
+    }
+}

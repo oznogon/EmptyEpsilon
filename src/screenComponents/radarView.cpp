@@ -69,7 +69,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     fog_style(NoFogOfWar),
     mouse_down_func(nullptr),
     mouse_drag_func(nullptr),
-    mouse_up_func(nullptr)
+    mouse_up_func(nullptr),
+    multi_gesture_func(nullptr)
 {
 }
 
@@ -98,7 +99,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     fog_style(NoFogOfWar),
     mouse_down_func(nullptr),
     mouse_drag_func(nullptr),
-    mouse_up_func(nullptr)
+    mouse_up_func(nullptr),
+    multi_gesture_func(nullptr)
 {
 }
 
@@ -847,4 +849,12 @@ void GuiRadarView::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (mouse_up_func)
         mouse_up_func(screenToWorld(position));
+}
+
+bool GuiRadarView::onMultiGesture(glm::vec2 position, float dTheta, float dDist, int numFingers)
+{
+    if (multi_gesture_func)
+        multi_gesture_func(screenToWorld(position), dTheta, dDist, numFingers);
+
+    return false;
 }

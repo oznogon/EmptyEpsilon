@@ -1,5 +1,4 @@
-#ifndef RADAR_VIEW_H
-#define RADAR_VIEW_H
+#pragma once
 
 #include "gui/gui2_element.h"
 #include "engine.h"
@@ -26,6 +25,7 @@ public:
     typedef std::function<void(sp::io::Pointer::Button button, glm::vec2 position)> bpfunc_t;
     typedef std::function<void(glm::vec2 position)> pfunc_t;
     typedef std::function<void(float position)>     ffunc_t;
+    typedef std::function<void(glm::vec2 position, float dTheta, float dDist, int numFingers)> mgfunc_t;
 private:
     class GhostDot
     {
@@ -65,6 +65,7 @@ private:
     bpfunc_t mouse_down_func;
     pfunc_t mouse_drag_func;
     pfunc_t mouse_up_func;
+    mgfunc_t multi_gesture_func;
 public:
     GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
@@ -100,7 +101,7 @@ public:
     GuiRadarView* setAutoCenterTarget(sp::ecs::Entity target) { this->auto_center_target = target; return this; }
     bool getAutoRotating() { return auto_rotate_on_ship; }
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_ship = value; return this; }
-    GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
+    GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func, mgfunc_t multi_gesture_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; this->multi_gesture_func = multi_gesture_func; return this; }
     GuiRadarView* setViewPosition(glm::vec2 view_position) { this->view_position = view_position; return this; }
     glm::vec2 getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
@@ -112,6 +113,7 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual bool onMultiGesture(glm::vec2 position, float dTheta, float dDist, int numFingers) override;
 private:
     void updateGhostDots();
 
@@ -130,5 +132,3 @@ private:
     void drawTargets(sp::RenderTarget& target);
     void drawHeadingIndicators(sp::RenderTarget& target);
 };
-
-#endif//RADAR_VIEW_H

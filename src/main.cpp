@@ -47,6 +47,7 @@
 glm::vec3 camera_position;
 float camera_yaw;
 float camera_pitch;
+float camera_fov = 60.0f;
 sp::Font* main_font;
 sp::Font* bold_font;
 RenderLayer* consoleRenderLayer;

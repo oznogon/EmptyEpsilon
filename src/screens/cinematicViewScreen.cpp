@@ -32,6 +32,8 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     // toward heading 0.
     camera_yaw = -90.0f;
     camera_pitch = 45.0f;
+    // Initialize FOV to default value
+    camera_fov = 60.0f;
 
     // Lock onto player ship to start.
     for(auto [entity, pc] : sp::ecs::Query<PlayerControl>()) {
@@ -360,5 +362,38 @@ void CinematicViewScreen::update(float delta)
         // Hide the target-of-target camera lock button.
         camera_lock_tot_toggle->hide();
         camera_lock_cycle_toggle->hide();
+    }
+}
+
+void CinematicViewScreen::onMultiGesture(glm::vec2 position, float dTheta, float dDist, int numFingers)
+{
+    printf("[DEBUG] CinematicViewScreen::onMultiGesture: fingers=%d, dDist=%f, camera_fov=%f\n",
+           numFingers, dDist, camera_fov);
+
+    // Only process pinch gestures with 2 or more fingers
+    if (numFingers < 2) {
+        printf("[DEBUG] CinematicViewScreen: Ignoring - not enough fingers\n");
+        return;
+    }
+
+    // Apply threshold to filter out unintentional micro-movements
+    if (fabs(dDist) > 0.002f)
+    {
+        float old_fov = camera_fov;
+        // Pinch in (negative dDist) = zoom out (increase FOV for wider view)
+        // Pinch out (positive dDist) = zoom in (decrease FOV for narrower view)
+        // Scale factor of 100 provides smooth, controllable zoom
+        camera_fov = camera_fov * (1.0f + (dDist * 100.0f));
+
+        // Apply reasonable FOV bounds (10-120 degrees)
+        // Narrower than 10° becomes distorted, wider than 120° is fisheye
+        if (camera_fov > 120.0f)
+            camera_fov = 120.0f;
+        if (camera_fov < 10.0f)
+            camera_fov = 10.0f;
+
+        printf("[DEBUG] CinematicViewScreen: Zoom applied - old fov=%f, new fov=%f\n", old_fov, camera_fov);
+    } else {
+        printf("[DEBUG] CinematicViewScreen: Ignoring - dDist too small (%f)\n", dDist);
     }
 }

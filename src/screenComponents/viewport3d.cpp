@@ -152,7 +152,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     
     glActiveTexture(GL_TEXTURE0);
 
-    float camera_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
+    // Note: camera_fov is now a global variable (defined in main.cpp)
+    // that can be modified by screens like CinematicViewScreen for pinch-to-zoom
     {
         auto p0 = renderer.virtualToPixelPosition(rect.position);
         auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size);

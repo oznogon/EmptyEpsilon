@@ -48,6 +48,7 @@ public:
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id);
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id);
     virtual bool onMouseWheelScroll(glm::vec2 position, float value);
+    virtual bool onMultiGesture(glm::vec2 position, float dTheta, float dDist, int numFingers);
     virtual void onTextInput(const string& text);
     virtual void onTextInput(sp::TextInputEvent e);
     virtual void onFocusGained() {}
