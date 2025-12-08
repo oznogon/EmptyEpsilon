@@ -474,6 +474,73 @@ void initComponentScriptBindings()
             p->internal_dock_classes_dirty = true;
         }
     };
+    sp::script::ComponentHandler<DockingBay>::members["berths"] = {
+        [](lua_State* L, const void* ptr) {
+            auto bay = reinterpret_cast<const DockingBay*>(ptr);
+            lua_createtable(L, bay->berths.size(), 0);
+            int idx = 1;
+            for(const auto& berth : bay->berths) {
+                lua_createtable(L, 0, 5);
+
+                lua_pushstring(L, berth.docked_entity.toString().c_str());
+                lua_setfield(L, -2, "docked_entity");
+
+                sp::script::Convert<DockingBay::Berth::Type>::toLua(L, berth.type);
+                lua_setfield(L, -2, "type");
+
+                lua_pushnumber(L, berth.move_time);
+                lua_setfield(L, -2, "move_time");
+
+                lua_pushnumber(L, berth.move_progress);
+                lua_setfield(L, -2, "move_progress");
+
+                lua_pushnumber(L, berth.transfer_rate);
+                lua_setfield(L, -2, "transfer_rate");
+
+                lua_seti(L, -2, idx++);
+            }
+            return 1;
+        }, [](lua_State* L, void* ptr) {
+            auto p = reinterpret_cast<DockingBay*>(ptr);
+            p->berths.clear();
+            if (lua_istable(L, -1)) {
+                for(int idx = 1; lua_geti(L, -1, idx); idx++) {
+                    if (lua_istable(L, -1)) {
+                        DockingBay::Berth berth;
+
+                        lua_getfield(L, -1, "docked_entity");
+                        if (lua_isstring(L, -1))
+                            berth.docked_entity = sp::ecs::Entity::fromString(lua_tostring(L, -1));
+                        lua_pop(L, 1);
+
+                        lua_getfield(L, -1, "type");
+                        if (!lua_isnil(L, -1))
+                            berth.type = sp::script::Convert<DockingBay::Berth::Type>::fromLua(L, -1);
+                        lua_pop(L, 1);
+
+                        lua_getfield(L, -1, "move_time");
+                        if (lua_isnumber(L, -1))
+                            berth.move_time = lua_tonumber(L, -1);
+                        lua_pop(L, 1);
+
+                        lua_getfield(L, -1, "move_progress");
+                        if (lua_isnumber(L, -1))
+                            berth.move_progress = lua_tonumber(L, -1);
+                        lua_pop(L, 1);
+
+                        lua_getfield(L, -1, "transfer_rate");
+                        if (lua_isnumber(L, -1))
+                            berth.transfer_rate = lua_tonumber(L, -1);
+                        lua_pop(L, 1);
+
+                        p->berths.push_back(berth);
+                    }
+                    lua_pop(L, 1);
+                }
+                lua_pop(L, 1);
+            }
+        }
+    };
     sp::script::ComponentHandler<CommsTransmitter>::name("comms_transmitter");
     BIND_MEMBER(CommsTransmitter, state);
     BIND_MEMBER(CommsTransmitter, open_delay);
@@ -756,6 +823,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(PickupCallback, callback);
     BIND_MEMBER(PickupCallback, player);
     BIND_MEMBER(PickupCallback, give_energy);
+    BIND_MEMBER(PickupCallback, give_probe);
     BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Homing)], "give_homing");
     BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Nuke)], "give_nuke");
     BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Mine)], "give_mine");

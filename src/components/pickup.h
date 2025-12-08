@@ -12,6 +12,7 @@ public:
     sp::script::Callback callback;
     float give_energy = 0;
     int give_missile[MW_Count] = {0};
+    int give_probe = 0;
 };
 
 // Simple component that allows a callback when an entity is touched

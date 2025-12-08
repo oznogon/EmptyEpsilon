@@ -21,6 +21,7 @@
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
+#include "screens/extra/dockingBayScreen.h"
 #include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
 
@@ -44,6 +45,7 @@
 #include "components/target.h"
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
+#include "components/pickup.h"
 #include "components/selfdestruct.h"
 #include "components/hacking.h"
 #include "components/scanning.h"
@@ -104,6 +106,12 @@ static const uint16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
+static const uint16_t CMD_LAUNCH_INTERNAL = 0x002D;
+static const uint16_t CMD_MOVE_INTERNAL_TO_BERTH = 0x002E;
+static const uint16_t CMD_SET_BERTH_TRANSFER_DIRECTION = 0x002F;
+static const uint16_t CMD_TRANSFER_MISSILE = 0x0030;
+static const uint16_t CMD_TRANSFER_PROBE = 0x0031;
+static const uint16_t CMD_GENERATE_SUPPLY_DROP = 0x0032;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -276,6 +284,13 @@ void PlayerInfo::commandFireTubeAtTarget(uint32_t tubeNumber, sp::ecs::Entity ta
     commandFireTube(tubeNumber, targetAngle);
 }
 
+void PlayerInfo::commandTransferMissile(sp::ecs::Entity target, EMissileWeapons missile_type, int quantity)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_TRANSFER_MISSILE << target << missile_type << quantity;
+    sendClientCommand(packet);
+}
+
 void PlayerInfo::commandSetShields(bool enabled)
 {
     sp::io::DataBuffer packet;
@@ -334,6 +349,36 @@ void PlayerInfo::commandUndock()
 {
     sp::io::DataBuffer packet;
     packet << CMD_UNDOCK;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandLaunchInternal(sp::ecs::Entity entity)
+{
+    if (!entity) return;
+    sp::io::DataBuffer packet;
+    packet << CMD_LAUNCH_INTERNAL << entity;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandMoveInternalToBerth(sp::ecs::Entity entity, int berth_index)
+{
+    if (!entity) return;
+    sp::io::DataBuffer packet;
+    packet << CMD_MOVE_INTERNAL_TO_BERTH << entity << static_cast<int32_t>(berth_index);
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetBerthTransferDirection(int berth_index, int direction)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_BERTH_TRANSFER_DIRECTION << static_cast<int32_t>(berth_index) << static_cast<int32_t>(direction);
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandGenerateSupplyDrop(int berth_index)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_GENERATE_SUPPLY_DROP << static_cast<int32_t>(berth_index);
     sendClientCommand(packet);
 }
 
@@ -474,6 +519,13 @@ void PlayerInfo::commandLaunchProbe(glm::vec2 target_position)
 {
     sp::io::DataBuffer packet;
     packet << CMD_LAUNCH_PROBE << target_position;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandTransferProbe(sp::ecs::Entity target, int quantity)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_TRANSFER_PROBE << target << quantity;
     sendClientCommand(packet);
 }
 
@@ -698,6 +750,115 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             }
         }
         break;
+    case CMD_TRANSFER_MISSILE:
+        {
+            sp::ecs::Entity target;
+            EMissileWeapons type;
+            int quantity;
+            packet >> target >> type >> quantity;
+
+            auto my_missile_tubes = ship.getComponent<MissileTubes>();
+
+            if (quantity != 0 && target && my_missile_tubes)
+            {
+                auto target_missile_tubes = target.getComponent<MissileTubes>();
+                auto target_pickup = target.getComponent<PickupCallback>();
+
+                if (target_missile_tubes || target_pickup)
+                {
+                    // To player
+                    if (quantity < 0 && my_missile_tubes->storage[type] < my_missile_tubes->storage_max[type])
+                    {
+                        const int available_space = my_missile_tubes->storage_max[type] - my_missile_tubes->storage[type];
+                        quantity = std::abs(quantity);
+
+                        if (target_missile_tubes && target_missile_tubes->storage[type] > 0)
+                        {
+                            quantity = std::min({quantity, available_space, target_missile_tubes->storage[type]});
+                            my_missile_tubes->storage[type] += quantity;
+                            target_missile_tubes->storage[type] -= quantity;
+                        }
+                        else if (target_pickup && target_pickup->give_missile[type] > 0)
+                        {
+                            quantity = std::min({quantity, available_space, target_pickup->give_missile[type]});
+                            my_missile_tubes->storage[type] += quantity;
+                            target_pickup->give_missile[type] -= quantity;
+                        }
+                    }
+                    // To target
+                    else if (quantity > 0 && my_missile_tubes->storage[type] > 0)
+                    {
+                        if (target_missile_tubes && target_missile_tubes->storage[type] < target_missile_tubes->storage_max[type])
+                        {
+                            quantity = std::min({quantity, target_missile_tubes->storage_max[type] - target_missile_tubes->storage[type], my_missile_tubes->storage[type]});
+                            my_missile_tubes->storage[type] -= quantity;
+                            target_missile_tubes->storage[type] += quantity;
+                        }
+                        else if (target_pickup)
+                        {
+                            quantity = std::min(quantity, my_missile_tubes->storage[type]);
+                            my_missile_tubes->storage[type] -= quantity;
+                            target_pickup->give_missile[type] += quantity;
+                        }
+                    }
+                }
+            }
+        }
+        break;
+    case CMD_TRANSFER_PROBE:
+        {
+            sp::ecs::Entity target;
+            int quantity;
+            packet >> target >> quantity;
+
+            auto my_launcher = ship.getComponent<ScanProbeLauncher>();
+
+            if (quantity != 0 && target && my_launcher)
+            {
+                auto target_launcher = target.getComponent<ScanProbeLauncher>();
+                auto target_pickup = target.getComponent<PickupCallback>();
+
+                if (target_launcher || target_pickup)
+                {
+                    // To player
+                    if (quantity < 0 && my_launcher->stock < my_launcher->max)
+                    {
+                        const int available_space = my_launcher->max - my_launcher->stock;
+                        quantity = std::abs(quantity);
+
+                        if (target_launcher && target_launcher->stock > 0)
+                        {
+                            quantity = std::min({quantity, available_space, target_launcher->stock});
+                            my_launcher->stock += quantity;
+                            target_launcher->stock -= quantity;
+                        }
+                        else if (target_pickup && target_pickup->give_probe > 0)
+                        {
+                            quantity = std::min({quantity, available_space, target_pickup->give_probe});
+                            my_launcher->stock += quantity;
+                            target_pickup->give_probe -= quantity;
+                        }
+                    }
+                    // To target
+                    else if (quantity > 0 && my_launcher->stock > 0)
+                    {
+                        if (target_launcher && target_launcher->stock < target_launcher->max)
+                        {
+                            quantity = std::min({quantity, target_launcher->max - target_launcher->stock, my_launcher->stock});
+                            my_launcher->stock -= quantity;
+                            target_launcher->stock += quantity;
+                        }
+                        else if (target_pickup)
+                        {
+                            quantity = std::min(quantity, my_launcher->stock);
+                            my_launcher->stock -= quantity;
+                            target_pickup->give_probe += quantity;
+                        }
+                    }
+                }
+            }
+        }
+        break;
     case CMD_SET_SHIELDS:
         {
             bool active;
@@ -782,6 +943,100 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         break;
     case CMD_UNDOCK:
         DockingSystem::requestUndock(ship);
+        break;
+    case CMD_LAUNCH_INTERNAL:
+        {
+            sp::ecs::Entity internal_entity;
+            packet >> internal_entity;
+            if (internal_entity)
+            {
+                // Verify the entity is actually docked in this ship's bay
+                if (auto port = internal_entity.getComponent<DockingPort>())
+                {
+                    if (port->target == ship && port->state == DockingPort::State::Docked)
+                        DockingSystem::requestUndock(internal_entity);
+                }
+            }
+        }
+        break;
+    case CMD_MOVE_INTERNAL_TO_BERTH:
+        {
+            sp::ecs::Entity internal_entity;
+            int32_t berth_index;
+            packet >> internal_entity >> berth_index;
+            if (internal_entity)
+            {
+                // Verify the entity is actually docked in this ship's bay
+                if (auto port = internal_entity.getComponent<DockingPort>())
+                {
+                    if (port->target == ship && port->state == DockingPort::State::Docked)
+                    {
+                        // Verify berth index is valid
+                        if (auto bay = ship.getComponent<DockingBay>())
+                        {
+                            if (berth_index >= 0 && berth_index < static_cast<int32_t>(bay->berths.size()))
+                                DockingSystem::assignInternalEntityToBerth(internal_entity, berth_index);
+                        }
+                    }
+                }
+            }
+        }
+        break;
+    case CMD_SET_BERTH_TRANSFER_DIRECTION:
+        {
+            int32_t berth_index;
+            int32_t direction_int;
+            packet >> berth_index >> direction_int;
+
+            // Verify berth index is valid
+            if (auto bay = ship.getComponent<DockingBay>())
+            {
+                if (berth_index >= 0 && berth_index < static_cast<int32_t>(bay->berths.size()))
+                {
+                    // Verify direction is valid
+                    if (direction_int >= static_cast<int32_t>(DockingBay::Berth::TransferDirection::ToCarrier) &&
+                        direction_int <= static_cast<int32_t>(DockingBay::Berth::TransferDirection::ToDocked))
+                    {
+                        bay->berths[berth_index].transfer_direction = static_cast<DockingBay::Berth::TransferDirection>(direction_int);
+                    }
+                }
+            }
+        }
+        break;
+    case CMD_GENERATE_SUPPLY_DROP:
+        {
+            int32_t berth_index;
+            packet >> berth_index;
+
+            // TODO: Either make resilient or replace with manual reconstruction
+            auto result = gameGlobalInfo->main_scenario_script->call<sp::ecs::Entity>("SupplyDrop");
+
+            if (result.isOk())
+            {
+                auto supply_drop = result.value();
+                auto port = supply_drop.getComponent<DockingPort>();
+
+                float carrier_radius = 200.0f;
+                float supply_drop_radius = 50.0f;
+                auto carrier_physics = ship.getComponent<sp::Physics>();
+                auto supply_drop_physics = supply_drop.getComponent<sp::Physics>();
+                if (carrier_physics) carrier_radius = carrier_physics->getSize().y;
+                if (supply_drop_physics) supply_drop_radius = supply_drop_physics->getSize().y;
+                // When launched, drop it behind us
+                port->docked_offset = {-(carrier_radius + supply_drop_radius + 10.0f), 0.0f};
+
+                // Move supply drop to the berth
+                if (DockingSystem::moveEntityToInternalBay(supply_drop, ship))
+                    DockingSystem::assignInternalEntityToBerth(supply_drop, berth_index);
+                else
+                {
+                    LOG(Warning, "Supply drop couldn't be moved to supply berth ", berth_index, " and was destroyed");
+                    supply_drop.destroy();
+                }
+            }
+            else
+                LOG(Error, "Failed to create SupplyDrop() via Lua: ", result.error());
+        }
         break;
     case CMD_ABORT_DOCK:
         DockingSystem::abortDock(ship);
@@ -1126,6 +1381,8 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new PowerManagementScreen(container), CrewPosition::powerManagement, getCrewPositionName(CrewPosition::powerManagement), getCrewPositionIcon(CrewPosition::powerManagement));
         if (cps.has(CrewPosition::databaseView))
             screen->addStationTab(new DatabaseScreen(container), CrewPosition::databaseView, getCrewPositionName(CrewPosition::databaseView), getCrewPositionIcon(CrewPosition::databaseView));
+        if (cps.has(CrewPosition::dockingBay))
+            screen->addStationTab(new DockingBayScreen(container), CrewPosition::dockingBay, getCrewPositionName(CrewPosition::dockingBay), getCrewPositionIcon(CrewPosition::dockingBay));
         if (cps.has(CrewPosition::altRelay))
             screen->addStationTab(new RelayScreen(container, false), CrewPosition::altRelay, getCrewPositionName(CrewPosition::altRelay), getCrewPositionIcon(CrewPosition::altRelay));
         if (cps.has(CrewPosition::commsOnly))
@@ -1175,6 +1432,7 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::damageControl: return tr("station","Damage Control");
     case CrewPosition::powerManagement: return tr("station","Power Management");
     case CrewPosition::databaseView: return tr("station","Database");
+    case CrewPosition::dockingBay: return tr("station","Docking Bay");
     case CrewPosition::altRelay: return tr("station","Strategic Map");
     case CrewPosition::commsOnly: return tr("station","Comms");
     case CrewPosition::shipLog: return tr("station","Ship's Log");
@@ -1198,6 +1456,7 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::damageControl: return "";
     case CrewPosition::powerManagement: return "";
     case CrewPosition::databaseView: return "";
+    case CrewPosition::dockingBay: return "gui/icons/docking";
     case CrewPosition::altRelay: return "";
     case CrewPosition::commsOnly: return "";
     case CrewPosition::shipLog: return "";

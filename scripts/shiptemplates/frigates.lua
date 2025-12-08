@@ -315,6 +315,7 @@ template:setDescription(_([[Popular among traders and smugglers, the Flavia is a
 template:setHull(50)
 template:setShields(50, 50)
 template:setSpeed(30, 8, 10)
+template:setInternalDockClasses(_("class", "Cargo"))
 
 variation = template:copy("Flavia Falcon"):setLocaleName(_("ship", "Flavia Falcon"))
 variation:setDescription(_([[The Flavia Falcon is a Flavia transport modified for faster flight, and adds rear-mounted lasers to keep enemies off its back.]]))
@@ -372,6 +373,8 @@ template:setDescription(_("Jump/Turret version of Flavia Falcon"))
 template:setHull(120)
 template:setShields(80, 80)
 template:setSpeed(55, 9, 10)
+template:setInternalDockClasses(_("class", "Cargo"))
+
 --                 Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 10, 90, 1200.0, 6.0, 5)
 template:setBeam(1, 10,-90, 1200.0, 6.0, 5)
