@@ -68,35 +68,63 @@ bool GuiSelector::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position
 {
     return true;
 }
-
+/*
+            if (e.icon_name != "")
+            {
+                renderer.drawSpriteClipped(
+                    e.icon_name,               // icon
+                    glm::vec2(                 // center position
+                        button_rect.position.x + button_rect.size.y * 0.8f,
+                        button_rect.position.y + button_rect.size.y * 0.5f
+                    ),
+                    button_rect.size.y * 0.6f, // size
+                    rect,                      // clipping rectangle
+                    f->color                   // color
+                );
+            }
+*/
 void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position))
     {
         soundManager->playSound("sfx/button.wav");
-        for(unsigned int n=0; n<entries.size(); n++)
+        for (int n = 0; n < entries.size(); n++)
         {
             if (popup_buttons.size() <= n)
             {
-                popup_buttons.push_back(new GuiToggleButton(popup, "", entries[n].name, [this, n](bool b)
-                {
-                    setSelectionIndex(n);
-                    callback();
-                }));
-                popup_buttons[n]->setSize(GuiElement::GuiSizeMax, 50);
-                popup_buttons[n]->setTextSize(text_size);
-            }else{
-                popup_buttons[n]->setText(entries[n].name);
-                popup_buttons[n]->show();
+                popup_buttons.push_back(new GuiToggleButton(popup, "", entries[n].name,
+                    [this, n](bool b)
+                    {
+                        setSelectionIndex(n);
+                        callback();
+                    }
+                ));
+                popup_buttons[n]
+                    ->setTextSize(text_size)
+                    ->setSize(GuiElement::GuiSizeMax, 50.0f);
             }
-            popup_buttons[n]->setValue(int(n) == selection_index);
-            popup_buttons[n]->setPosition(0, n * 50, sp::Alignment::TopLeft);
+            else
+            {
+                popup_buttons[n]
+                    ->setText(entries[n].name)
+                    ->show();
+            }
+
+            if (entries[n].icon_name != "")
+                popup_buttons[n]->setIcon(entries[n].icon_name);
+            else
+                popup_buttons[n]->setIcon("");
+
+            popup_buttons[n]
+                ->setValue(int(n) == selection_index)
+                ->setPosition(0.0f, n * 50.0f, sp::Alignment::TopLeft);
         }
-        for(unsigned int n=entries.size(); n<popup_buttons.size(); n++)
-        {
+        for (int n = entries.size(); n < popup_buttons.size(); n++)
             popup_buttons[n]->hide();
-        }
-        popup->show()->moveToFront();
+
+        popup
+            ->show()
+            ->moveToFront();
     }
 }
 

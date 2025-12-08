@@ -3,6 +3,7 @@
 #include "gui2_element.h"
 
 class GuiThemeStyle;
+
 class GuiLabel : public GuiElement
 {
 protected:
@@ -21,6 +22,8 @@ public:
 
     GuiLabel* setText(string text);
     string getText() const;
+    GuiLabel* setFrontStyle(const GuiThemeStyle* style);
+    GuiLabel* setBackStyle(const GuiThemeStyle* style);
     GuiLabel* setAlignment(sp::Alignment alignment);
     GuiLabel* addBackground();
     GuiLabel* setVertical();

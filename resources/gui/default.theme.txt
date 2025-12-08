@@ -151,6 +151,10 @@
                 color: #FF0000
                 color.disabled: #A08080
             }
+            [button.dockingbay_scramble.back] {
+                color: #FF0000
+                color.disabled: #A08080
+            }
             [button.toggle.off.back] {
             }
             [button.toggle.on.back] {
@@ -168,6 +172,11 @@
                 color.disabled: #FF00004D
             }
             [button.jump_abort.front] {
+                color: #FF0000
+                color.active: #120000
+                color.disabled: #FF00004D
+            }
+            [button.dockingbay_scramble.front] {
                 color: #FF0000
                 color.active: #120000
                 color.disabled: #FF00004D
@@ -448,6 +457,33 @@
     [scrollingbanner] {
         image: gui/widget/LabelBackground.png
         size: 25.0
+
+    # GuiEntityInfoPanel
+    [entityinfopanel] {
+        color: #ffffff
+        size: 25.0
+        [entityinfopanel.back] {
+            image: gui/widget/PanelBackground.png
+            image.hover: gui/widget/ButtonBackground.hover.png
+            image.disabled: gui/widget/PanelBackground.png
+
+            [entityinfopanel.selected.back] {
+                image: gui/widget/ButtonBackground.active.png
+                image.hover: gui/widget/ButtonBackground.active.png
+                image.disabled: gui/widget/PanelBackground.png
+            }
+        }
+        [entityinfopanel.front] {
+            color.disabled: #FFFFFF4D
+
+            [entityinfopanel.selected.front] {
+                color: #120A00
+            }
+        }
+    }
+
+    # Stronger font used at a few locations without UI widgets.
+    [bold] {
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
         offset: 0.0
         color: #FFFFFF

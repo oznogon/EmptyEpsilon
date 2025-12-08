@@ -291,6 +291,38 @@ template<> struct Convert<DockingPort::State> {
         return DockingPort::State::NotDocking;
     }
 };
+template<> struct Convert<DockingBay::Berth::Type> {
+    static int toLua(lua_State* L, DockingBay::Berth::Type value) {
+        switch(value)
+        {
+        case DockingBay::Berth::Type::Hangar: lua_pushstring(L, "hangar"); break;
+        case DockingBay::Berth::Type::Energy: lua_pushstring(L, "energy"); break;
+        case DockingBay::Berth::Type::Supply: lua_pushstring(L, "missiles"); break;
+        case DockingBay::Berth::Type::Thermal: lua_pushstring(L, "thermal"); break;
+        case DockingBay::Berth::Type::Repair: lua_pushstring(L, "repair"); break;
+        case DockingBay::Berth::Type::Storage: lua_pushstring(L, "storage"); break;
+        }
+
+        return 1;
+    }
+    static DockingBay::Berth::Type fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "hangar")
+            return DockingBay::Berth::Type::Hangar;
+        else if (str == "energy")
+            return DockingBay::Berth::Type::Energy;
+        else if (str == "missiles")
+            return DockingBay::Berth::Type::Supply;
+        else if (str == "thermal")
+            return DockingBay::Berth::Type::Thermal;
+        else if (str == "repair")
+            return DockingBay::Berth::Type::Repair;
+        else if (str == "storage")
+            return DockingBay::Berth::Type::Storage;
+        luaL_error(L, "Unknown DockingBay::Berth::Type: %s", str.c_str());
+        return DockingBay::Berth::Type::Storage;
+    }
+};
 template<> struct Convert<CommsTransmitter::State> {
     static int toLua(lua_State* L, CommsTransmitter::State value) {
         switch(value) {

@@ -17,7 +17,10 @@ function SupplyDrop()
             rotate=false,
             color_by_faction=true,
         },
-        pickup={}
+        pickup={},
+        docking_port={
+            dock_class = _("class", "Cargo")
+        },
     }
     for k, v in pairs(__model_data["ammo_box"]) do
         if string.sub(k, 1, 2) ~= "__" then
