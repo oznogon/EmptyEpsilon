@@ -23,6 +23,7 @@ enum class CrewPosition
     damageControl,
     powerManagement,
     databaseView,
+    dockingBay,
     altRelay,
     commsOnly,
     shipLog,

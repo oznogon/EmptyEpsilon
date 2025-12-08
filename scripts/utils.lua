@@ -305,14 +305,26 @@ function _fourArgumentsIntoCoordinates(a, b, c, d)
     if type(a) == table_or_userdata and type(b) == table_or_userdata then
         -- a and b are bth tables.
         -- Assume function(obj1, obj2)
+        if a.isValid and not a:isValid() then
+            error("First object passed to distance/angle function is not valid (destroyed?)", 2)
+        end
+        if b.isValid and not b:isValid() then
+            error("Second object passed to distance/angle function is not valid (destroyed?)", 2)
+        end
         x1, y1 = a:getPosition()
         x2, y2 = b:getPosition()
     elseif type(a) == table_or_userdata and type(b) == "number" and type(c) == "number" then
         -- Assume function(obj1, x2, y2)
+        if a.isValid and not a:isValid() then
+            error("Object passed to distance/angle function is not valid (destroyed?)", 2)
+        end
         x1, y1 = a:getPosition()
         x2, y2 = b, c
     elseif type(a) == "number" and type(b) == "number" and type(c) == table_or_userdata then
         -- Assume function(x1, y1, obj2)
+        if c.isValid and not c:isValid() then
+            error("Object passed to distance/angle function is not valid (destroyed?)", 2)
+        end
         x1, y1 = a, b
         x2, y2 = c:getPosition()
     elseif type(a) == "number" and type(b) == "number" and type(c) == "number" and type(d) == "number" then
@@ -324,6 +336,12 @@ function _fourArgumentsIntoCoordinates(a, b, c, d)
         print(type(a), type(b), type(c), type(d))
         error("_fourArgumentsIntoCoordinates() function used incorrectly", 2)
     end
+
+    -- Validate that getPosition() returned valid coordinates
+    if x1 == nil or y1 == nil or x2 == nil or y2 == nil then
+        error("getPosition() returned nil coordinates - object may be invalid", 2)
+    end
+
     return x1, y1, x2, y2
 end
 

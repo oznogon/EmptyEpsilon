@@ -24,6 +24,15 @@ namespace sp::io {
 BASIC_REPLICATION_IMPL(DockingBayReplication, DockingBay)
     REPLICATE_VECTOR_IF_DIRTY(external_dock_classes, external_dock_classes_dirty);
     REPLICATE_VECTOR_IF_DIRTY(internal_dock_classes, internal_dock_classes_dirty);
+
+    BASIC_REPLICATION_VECTOR(berths)
+        VECTOR_REPLICATION_FIELD(docked_entity);
+        VECTOR_REPLICATION_FIELD(type);
+        VECTOR_REPLICATION_FIELD(move_time);
+        VECTOR_REPLICATION_FIELD(move_progress);
+        VECTOR_REPLICATION_FIELD(transfer_rate);
+        VECTOR_REPLICATION_FIELD(transfer_direction);
+    VECTOR_REPLICATION_END();
 }
 
 BASIC_REPLICATION_IMPL(DockingPortReplication, DockingPort)

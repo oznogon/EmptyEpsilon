@@ -239,6 +239,7 @@ for cnt=1,5 do
     template:setSpeed(60 - 5 * cnt, 6, 10)
     template:setRadarTrace("transport.png")
     template:setDefaultAI("evasion")
+    template:setInternalDockClasses(_("class", "Cargo"))
 
     if cnt > 2 then
         variation = template:copy("Personnel Jump Freighter " .. cnt):setLocaleName(string.format(_("ship", "Personnel Jump Freighter %d"), cnt))
@@ -252,6 +253,7 @@ for cnt=1,5 do
     template:setSpeed(60 - 5 * cnt, 6, 10)
     template:setRadarTrace("transport.png")
     template:setDefaultAI("evasion")
+    template:setInternalDockClasses(_("class", "Cargo"))
 
     if cnt > 2 then
         variation = template:copy("Goods Jump Freighter " .. cnt):setLocaleName(string.format(_("ship", "Goods Jump Freighter %d"), cnt))
@@ -265,6 +267,7 @@ for cnt=1,5 do
     template:setSpeed(60 - 5 * cnt, 6, 10)
     template:setRadarTrace("transport.png")
     template:setDefaultAI("evasion")
+    template:setInternalDockClasses(_("class", "Cargo"))
 
     if cnt > 2 then
         variation = template:copy("Garbage Jump Freighter " .. cnt):setLocaleName(string.format(_("ship", "Garbage Jump Freighter %d"), cnt))
@@ -278,6 +281,7 @@ for cnt=1,5 do
     template:setSpeed(60 - 5 * cnt, 6, 10)
     template:setRadarTrace("transport.png")
     template:setDefaultAI("evasion")
+    template:setInternalDockClasses(_("class", "Cargo"))
 
     if cnt > 2 then
         variation = template:copy("Equipment Jump Freighter " .. cnt):setLocaleName(string.format(_("ship", "Equipment Jump Freighter %d"), cnt))
@@ -291,6 +295,7 @@ for cnt=1,5 do
     template:setSpeed(60 - 5 * cnt, 6, 10)
     template:setRadarTrace("transport.png")
     template:setDefaultAI("evasion")
+    template:setInternalDockClasses(_("class", "Cargo"))
 
     if cnt > 2 then
         variation = template:copy("Fuel Jump Freighter " .. cnt):setLocaleName(string.format(_("ship", "Fuel Jump Freighter %d"), cnt))
@@ -308,7 +313,7 @@ template:setRadarTrace("transport.png")
 template:setJumpDrive(true)
 template:setJumpDriveRange(5000, 100 * 50000) -- The jump carrier can jump a 100x longer distance then normal jump drives.
 template:setExternalDockClasses(_("class", "Frigate"), _("class", "Corvette"))
-template:setInternalDockClasses(_("class", "Starfighter"))
+template:setInternalDockClasses(_("class", "Starfighter"), _("class", "Cargo"))
 template:setDefaultAI("evasion")
 
 
@@ -366,7 +371,7 @@ template:setSpeed(80, 10, 20)
 template:setJumpDrive(true)
 template:setCombatManeuver(400, 250)
 template:setExternalDockClasses(_("class", "Frigate"))		--frigates dock outside
-template:setInternalDockClasses(_("class", "Starfighter"))	--there's room inside for starfighters
+template:setInternalDockClasses(_("class", "Starfighter"), _("class", "Cargo"))	--there's room inside for starfighters
 template:setSharesEnergyWithDocked(false)
 template:setRepairDocked(true)
 template:setRestocksScanProbes(false)

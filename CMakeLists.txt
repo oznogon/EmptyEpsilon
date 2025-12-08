@@ -267,6 +267,7 @@ set(MAIN_SOURCES
     src/screens/extra/damcon.cpp
     src/screens/extra/powerManagement.cpp
     src/screens/extra/databaseScreen.cpp
+    src/screens/extra/dockingBayScreen.cpp
     src/screens/extra/commsScreen.cpp
     src/screens/extra/shipLogScreen.cpp
     src/screens/gm/gameMasterScreen.cpp
@@ -304,7 +305,9 @@ set(MAIN_SOURCES
     src/screenComponents/indicatorOverlays.cpp
     src/screenComponents/openCommsButton.cpp
     src/screenComponents/combatManeuver.cpp
+    src/screenComponents/entityInfoPanel.cpp
     src/screenComponents/rotatingModelView.cpp
+    src/screenComponents/renderedModelSprite.cpp
     src/screenComponents/shipDestroyedPopup.cpp
     src/screenComponents/warpControls.cpp
     src/screenComponents/targetsContainer.cpp
@@ -598,7 +601,9 @@ set(MAIN_SOURCES
     src/screenComponents/radarView.h
     src/screenComponents/radarZoomSlider.h
     src/screenComponents/rawScannerDataRadarOverlay.h
+    src/screenComponents/entityInfoPanel.h
     src/screenComponents/rotatingModelView.h
+    src/screenComponents/renderedModelSprite.h
     src/screenComponents/scanningDialog.h
     src/screenComponents/scanTargetButton.h
     src/screenComponents/scrollingBanner.h
@@ -630,6 +635,7 @@ set(MAIN_SOURCES
     src/screens/extra/commsScreen.h
     src/screens/extra/damcon.h
     src/screens/extra/databaseScreen.h
+    src/screens/extra/dockingBayScreen.h
     src/screens/extra/powerManagement.h
     src/screens/extra/shipLogScreen.h
     src/screens/gm/chatDialog.h

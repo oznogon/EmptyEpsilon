@@ -1,5 +1,4 @@
-#ifndef GUI2_IMAGE_H
-#define GUI2_IMAGE_H
+#pragma once
 
 #include "gui2_element.h"
 
@@ -17,6 +16,5 @@ public:
     GuiImage* setColor(glm::u8vec4 color) { this->color = color; return this; }
     GuiImage* setAngle(float angle) { this->angle = angle; return this; }
     GuiImage* setTextureThemed(string theme_element, GuiElement::State state = GuiElement::State::Normal);
+    GuiImage* setImage(string texture_name) { this->texture_name = texture_name; return this; }
 };
-
-#endif//GUI2_IMAGE_H
