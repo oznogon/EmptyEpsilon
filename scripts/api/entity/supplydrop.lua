@@ -22,7 +22,10 @@ function SupplyDrop()
             rotate=false,
             color_by_faction=true,
         },
-        pickup={}
+        pickup={},
+        docking_port={
+            dock_class = _("class", "Cargo")
+        },
     }
 
     return e

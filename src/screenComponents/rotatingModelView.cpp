@@ -18,14 +18,12 @@
 #include <glm/gtc/type_ptr.hpp>
 
 GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, sp::ecs::Entity& entity)
-
-: GuiElement(owner, id), entity(entity)
+: GuiElement(owner, id), entity(entity), zoom_factor(1.0f), height(-1.f), angle(90.f), is_rotating(true)
 {
 }
 
 void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 {
-
     if (rect.size.x <= 0) return;
     if (rect.size.y <= 0) return;
 
@@ -55,14 +53,20 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     float near_clip_boundary = 1.f;
 
     auto projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, near_clip_boundary, 25000.f);
-    float view_distance = mesh_diameter / glm::tan(glm::radians(camera_fov / 2.f));
+    float view_distance = zoom_factor * (mesh_diameter / glm::tan(glm::radians(camera_fov / 2.f)));
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
-    auto view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.f), glm::vec3(1.f, 0.f, 0.f)); // -> X across (l-t-r), Y "towards", Z down
-    view_matrix = glm::scale(view_matrix, glm::vec3(1.f, 1.f, -1.f)); // -> X across (l-t-r), Y "towards", Z up
+    auto view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.f), glm::vec3(1.f, 0.f, 0.f));
+    view_matrix = glm::scale(view_matrix, glm::vec3(1.f, 1.f, -1.f));
+    // TODO: This could be better
+    if (height)
+        view_matrix = glm::translate(view_matrix, glm::vec3(0.f, height, height));
     view_matrix = glm::translate(view_matrix, glm::vec3(0.f, -1.f * view_distance - near_clip_boundary, 0.f));
     view_matrix = glm::rotate(view_matrix, glm::radians(-30.f), glm::vec3(1.f, 0.f, 0.f));
-    view_matrix = glm::rotate(view_matrix, glm::radians(engine->getElapsedTime() * 360.0f / 10.0f), glm::vec3(0.f, 0.f, 1.f));
+    if (is_rotating)
+        view_matrix = glm::rotate(view_matrix, glm::radians(engine->getElapsedTime() * 360.0f / 10.0f), glm::vec3(0.f, 0.f, 1.f));
+    else if (angle)
+        view_matrix = glm::rotate(view_matrix, glm::radians(angle), glm::vec3(0.f, 0.f, 1.f));
 
     glDisable(GL_BLEND);
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -115,4 +119,22 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glViewport(0, 0, renderer.getPhysicalSize().x, renderer.getPhysicalSize().y);
+}
+
+void GuiRotatingModelView::setCameraZoomFactor(float new_factor)
+{
+    zoom_factor = std::max(0.1f, new_factor);
+}
+
+void GuiRotatingModelView::setCameraRotation(float new_angle)
+{
+    // Validate angle
+    angle = std::fmod(new_angle, 360.0f);
+    if (angle < 0.0f) angle += 360.0f;
+    angle = new_angle;
+}
+
+void GuiRotatingModelView::setCameraHeight(float new_height)
+{
+    height = new_height;
 }

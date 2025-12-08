@@ -109,6 +109,14 @@ static sp::ecs::Entity luaCreateEntity()
     return sp::ecs::Entity::create();
 }
 
+// Move an entity into another entity's internal docking bay.
+// This succeeds only if the carrier entity supports internal docking with the
+// docking entity.
+static bool luaMoveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Entity carrier)
+{
+    return DockingSystem::moveEntityToInternalBay(entity, carrier);
+}
+
 static int luaQueryEntities(lua_State* L)
 {
     auto key = luaL_checkstring(L, 1);
@@ -1152,6 +1160,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     ///   getEntitiesWithComponent("beam_weapons") -- returns a table of all entities with the BeamWeapons component.
     ///   getEntitiesWithComponent("beam_weapons")[1]:getCallSign() -- returns the callsign of the first identified entity with beam weapons
     env.setGlobal("getEntitiesWithComponent", &luaQueryEntities);
+    env.setGlobal("moveEntityToInternalBay", &luaMoveEntityToInternalBay);
     env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
     env.setGlobal("startThread", &luaStartThread);
     env.setGlobal("yield", &luaYield);

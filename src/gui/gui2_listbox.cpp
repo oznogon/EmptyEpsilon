@@ -69,7 +69,7 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
     int index = 0;
 
     for(auto& e : entries) {
-        // Draw the button only if it will visible within the container.
+        // Draw the button only if it will be visible within the container.
         if (button_rect.position.y + button_rect.size.y >= rect.position.y
             && button_rect.position.y <= rect.position.y + rect.size.y)
         {

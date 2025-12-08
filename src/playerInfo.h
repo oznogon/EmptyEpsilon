@@ -1,5 +1,4 @@
-#ifndef PLAYER_INFO_H
-#define PLAYER_INFO_H
+#pragma once
 
 #include "multiplayer.h"
 #include "components/player.h"
@@ -48,6 +47,7 @@ public:
     void commandUnloadTube(uint32_t tubeNumber);
     void commandFireTube(uint32_t tubeNumber, float missile_target_angle);
     void commandFireTubeAtTarget(uint32_t tubeNumber, sp::ecs::Entity target);
+    void commandTransferMissile(sp::ecs::Entity target, EMissileWeapons missile_type, int quantity);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(MainScreenSetting mainScreen);
     void commandMainScreenOverlay(MainScreenOverlay mainScreen);
@@ -56,6 +56,10 @@ public:
     void commandSetSystemCoolantRequest(ShipSystem::Type system, float coolant_level);
     void commandDock(sp::ecs::Entity station);
     void commandUndock();
+    void commandLaunchInternal(sp::ecs::Entity entity);
+    void commandMoveInternalToBerth(sp::ecs::Entity entity, int berth_index);
+    void commandSetBerthTransferDirection(int berth_index, int direction);
+    void commandGenerateSupplyDrop(int berth_index);
     void commandAbortDock();
     void commandOpenTextComm(sp::ecs::Entity obj);
     void commandCloseTextComm();
@@ -75,6 +79,7 @@ public:
     void commandCombatManeuverBoost(float amount);
     void commandCombatManeuverStrafe(float strafe);
     void commandLaunchProbe(glm::vec2 target_position);
+    void commandTransferProbe(sp::ecs::Entity target, int quantity);
     void commandScanDone();
     void commandScanCancel();
     void commandSetAlertLevel(AlertLevel level);
@@ -98,5 +103,3 @@ public:
 
 string getCrewPositionName(CrewPosition position);
 string getCrewPositionIcon(CrewPosition position);
-
-#endif//PLAYER_INFO_H
