@@ -146,7 +146,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, kv_size);
     entity_probes = new GuiKeyValueDisplay(selected_entity_kvs_2, "", kv_split, tr("dockingbay", "Probes"), "");
     entity_probes
-        ->setIcon("/radar/probe.png") // TODO: Better icon
+        ->setIcon("/gui/icons/scan-probe.png")
         ->setSize(GuiElement::GuiSizeMax, kv_size);
 
     // Right column, bottom row
@@ -663,11 +663,11 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     // Populate scan probe key/value displays
     berth_scan_probes = new GuiKeyValueDisplay(supply_controls_left, "", kv_split, tr("dockingbay", "Probes"), "-");
     berth_scan_probes
-        ->setIcon("/radar/probe.png") // TODO: Better icon
+        ->setIcon("/gui/icons/scan-probe.png")
         ->setSize(200.0f, kv_size);
     carrier_scan_probes = new GuiKeyValueDisplay(supply_controls_right, "", kv_split, tr("dockingbay", "Probes"), "-");
     carrier_scan_probes
-        ->setIcon("/radar/probe.png")
+        ->setIcon("/gui/icons/scan-probe.png")
         ->setSize(200.0f, kv_size);
 
     supply_controls_center_row = new GuiElement(supply_controls_center, "");
