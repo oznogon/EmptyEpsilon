@@ -50,10 +50,9 @@ void MissileSystem::update(float delta)
                         spawnProjectile(entity, tube, 0, {});
 
                         tube.fire_count -= 1;
+                        // HVPE fires very rapidly
                         if (tube.fire_count > 0)
-                        {
-                            tube.delay = 1.5;
-                        }
+                            tube.delay = tube.type_loaded == MW_HVPE ? 0.5 : 1.5;
                         else
                         {
                             tube.state = MissileTubes::MountPoint::State::Empty;
@@ -220,7 +219,7 @@ void MissileSystem::fire(sp::ecs::Entity source, MissileTubes::MountPoint& tube,
     if (warp && warp->current > 0.0f) return;
     if (tube.state != MissileTubes::MountPoint::State::Loaded) return;
 
-    if (tube.type_loaded == MW_HVLI)
+    if (tube.type_loaded == MW_HVLI || tube.type_loaded == MW_HVPE)
     {
         tube.fire_count = 5;
         tube.state = MissileTubes::MountPoint::State::Firing;
@@ -295,6 +294,19 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             missile.addComponent<RawRadarSignatureInfo>(0.1f, 0.0f, 0.0f);
         }
         break;
+    case MW_HVPE:
+        {
+            missile = sp::ecs::Entity::create();
+            auto& mc = missile.addComponent<ExplodeOnTouch>();
+            mc.owner = source;
+            mc.damage_type = DamageType::Energy;
+            mc.damage_at_center = 5.0f * category_modifier;
+            mc.damage_at_edge = 5.0f * category_modifier;
+            mc.blast_range = 10.0f * category_modifier;
+            mc.explosion_sfx = "sfx/emp_explosion.wav";
+            missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.2f, 0.0f);
+        }
+        break;
     case MW_EMP:
         {
             missile = sp::ecs::Entity::create();
@@ -338,7 +350,9 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         t.setPosition(fireLocation);
         t.setRotation(source_transform->getRotation() + tube.direction);
         auto& cpe = missile.addComponent<ConstantParticleEmitter>();
-        if (tube.type_loaded == MW_Mine) {
+
+        if (tube.type_loaded == MW_Mine)
+        {
             cpe.travel_random_range = 100.0f;
             cpe.start_color = {1, 1, 1};
             cpe.end_color = {0, 0, 1};
@@ -346,6 +360,16 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             cpe.start_size = 30.0f;
             cpe.end_size = 0.0f;
             cpe.life_time = 10.0f;
+        }
+        if (tube.type_loaded == MW_HVPE)
+        {
+            cpe.travel_random_range = 0.0f;
+            cpe.start_color = {1.0f, 0.8f, 0.8f};
+            cpe.end_color = {1.0f, 0.0f, 0.0f};
+            cpe.interval = 0.01f;
+            cpe.start_size = 15.0f;
+            cpe.end_size = 0.0f;
+            cpe.life_time = 3.0f;
         }
 
         if (tube.type_loaded != MW_Mine)

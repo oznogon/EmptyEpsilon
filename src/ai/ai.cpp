@@ -136,6 +136,8 @@ void ShipAI::updateWeaponState(float delta)
                 MissileSystem::startLoad(owner, tube, MW_Homing);
             else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
                 MissileSystem::startLoad(owner, tube, MW_HVLI);
+            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_HVPE] > 0 && tube.canLoad(MW_HVPE))
+                MissileSystem::startLoad(owner, tube, MW_HVPE);
 
             //When the tube is loading or loaded, add the relative strenght of this tube to the direction of this tube.
             if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded)
@@ -575,6 +577,8 @@ void ShipAI::runAttack(sp::ecs::Entity target)
     float attack_distance = 4000.0;
     if (has_missiles && best_missile_type == MW_HVLI)
         attack_distance = 2500.0;
+    if (has_missiles && best_missile_type == MW_HVPE)
+        attack_distance = 2500.0;
     if (has_beams)
         attack_distance = beam_weapon_range * 0.7f;
 
@@ -886,7 +890,7 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
         }
     }
 
-    if (type == MW_HVLI)    //Custom HVLI targeting for AI, as the calculate firing solution
+    if (type == MW_HVLI || type == MW_HVPE)    //Custom HVLI targeting for AI, as the calculate firing solution
     {
         const MissileWeaponData& data = MissileWeaponData::getDataFor(type);
 

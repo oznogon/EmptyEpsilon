@@ -586,6 +586,8 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_EMP)], "max_emp");
     BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_HVLI)], "storage_hvli");
     BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_HVLI)], "max_hvli");
+    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_HVPE)], "storage_hvpe");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_HVPE)], "max_hvpe");
     BIND_ARRAY(MissileTubes, mounts);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, position);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, load_time);
@@ -594,6 +596,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_mine", 1 << MW_Mine);
     BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_emp", 1 << MW_EMP);
     BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_hvli", 1 << MW_HVLI);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_hvpe", 1 << MW_HVPE);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, direction);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, size);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
@@ -760,6 +763,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Mine)], "give_mine");
     BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_EMP)], "give_emp");
     BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_HVLI)], "give_hvli");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_HVPE)], "give_hvpe");
 
     sp::script::ComponentHandler<CollisionCallback>::name("collision_callback");
     BIND_MEMBER(CollisionCallback, callback);

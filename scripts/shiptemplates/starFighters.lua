@@ -20,15 +20,15 @@ template:setDefaultAI('fighter')
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30, 0, 700.0, 4.0, 2)
 
-local variation = template:copy("MU52 Hornet"):setLocaleName(_("ship", "MU52 Hornet"))
-variation:setModel("WespeScoutRed")
-variation:setDescription(_([[The MU52 Hornet is a new, upgraded version of the MT52. All of its systems are slightly improved over the MT52 model.]]))
-variation:setHull(35)
-variation:setShields(22)
-variation:setSpeed(125, 32, 25)
-variation:setBeam(0, 30, 0, 900.0, 4.0, 2.5)
+local variation_mu = template:copy("MU52 Hornet"):setLocaleName(_("ship", "MU52 Hornet"))
+variation_mu:setModel("WespeScoutRed")
+variation_mu:setDescription(_([[The MU52 Hornet is a new, upgraded version of the MT52. All of its systems are slightly improved over the MT52 model.]]))
+variation_mu:setHull(35)
+variation_mu:setShields(22)
+variation_mu:setSpeed(125, 32, 25)
+variation_mu:setBeam(0, 30, 0, 900.0, 4.0, 2.5)
 
-variation = variation:copy("MP52 Hornet"):setLocaleName(_("playerShip", "MP52 Hornet")):setType("playership")
+local variation = variation_mu:copy("MP52 Hornet"):setLocaleName(_("playerShip", "MP52 Hornet")):setType("playership")
 variation:setDescription(_([[The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength, nearly three times the shielding, better acceleration, impulse boosters, and a second laser cannon.]]))
 variation:setImpulseSoundFile("sfx/engine_fighter.wav")
 variation:setHull(70)
@@ -37,6 +37,42 @@ variation:setSpeed(125, 32, 40)
 variation:setCombatManeuver(600, 0)
 variation:setBeam(0, 30, 5, 900.0, 4.0, 2.5)
 variation:setBeam(1, 30,-5, 900.0, 4.0, 2.5)
+variation:setEnergyStorage(400)
+
+variation:setRepairCrewCount(1)
+variation:addRoomSystem(3, 0, 1, 1, "Maneuver");
+variation:addRoomSystem(1, 0, 2, 1, "BeamWeapons");
+
+variation:addRoomSystem(0, 1, 1, 2, "RearShield");
+variation:addRoomSystem(1, 1, 2, 2, "Reactor");
+variation:addRoomSystem(3, 1, 2, 1, "Warp");
+variation:addRoomSystem(3, 2, 2, 1, "JumpDrive");
+variation:addRoomSystem(5, 1, 1, 2, "FrontShield");
+
+variation:addRoomSystem(1, 3, 2, 1, "MissileSystem");
+variation:addRoomSystem(3, 3, 1, 1, "Impulse");
+
+variation:addDoor(2, 1, true);
+variation:addDoor(3, 1, true);
+variation:addDoor(1, 1, false);
+variation:addDoor(3, 1, false);
+variation:addDoor(3, 2, false);
+variation:addDoor(3, 3, true);
+variation:addDoor(2, 3, true);
+variation:addDoor(5, 1, false);
+variation:addDoor(5, 2, false);
+
+variation = variation_mu:copy("XP52 Hornet"):setLocaleName(_("playerShip", "XP52 Hornet")):setType("playership")
+variation:setDescription(_([[The XP52 Hornet is an experimental test platform based on the MU52 Hornet. Instead of beam weapons, it is armed with two prototype HVPE launchers with accelerated reloading times.]]))
+variation:setImpulseSoundFile("sfx/engine_fighter.wav")
+variation:setHull(70)
+variation:setShields(60)
+variation:setSpeed(125, 32, 40)
+variation:setCombatManeuver(600, 0)
+variation:setTubes(2, 1.0) -- Amount of torpedo tubes, and loading time of the tubes.
+variation:setWeaponStorage("HVPE", 20)
+variation:setTubeDirection(0, 0):setWeaponTubeExclusiveFor(0, "HVPE")
+variation:setTubeDirection(1, 0):setWeaponTubeExclusiveFor(0, "HVPE")
 variation:setEnergyStorage(400)
 
 variation:setRepairCrewCount(1)

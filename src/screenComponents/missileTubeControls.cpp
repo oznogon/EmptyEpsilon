@@ -43,6 +43,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
     load_type_rows[MW_EMP].button->setIcon("gui/icons/weapon-emp.png");
     load_type_rows[MW_Nuke].button->setIcon("gui/icons/weapon-nuke.png");
     load_type_rows[MW_HVLI].button->setIcon("gui/icons/weapon-hvli.png");
+    load_type_rows[MW_HVPE].button->setIcon("gui/icons/weapon-hvpe.png");
 }
 
 static string getTubeName(float direction)
@@ -156,6 +157,8 @@ void GuiMissileTubeControls::onUpdate()
         selectMissileWeapon(MW_EMP);
     if (keys.weapons_select_hvli.getDown())
         selectMissileWeapon(MW_HVLI);
+    if (keys.weapons_select_hvpe.getDown())
+        selectMissileWeapon(MW_HVPE);
 
     for (unsigned int n = 0; n < std::min(tubes->mounts.size(), size_t(16)); n++)
     {

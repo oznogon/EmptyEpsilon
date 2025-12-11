@@ -1,5 +1,4 @@
-#ifndef AI_H
-#define AI_H
+#pragma once
 
 #include "nonCopyable.h"
 #include "graphics/renderTarget.h"
@@ -94,11 +93,10 @@ protected:
         case MW_EMP:
             return 150;
         case MW_HVLI:
+        case MW_HVPE:
             return 20;
         default:
             return 35;
         }
     }
 };
-
-#endif//AI_H

@@ -359,6 +359,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "EMP capacity:"), MissileTubes, storage_max[MW_EMP]);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "HVLI missiles:"), MissileTubes, storage[MW_HVLI]);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "HVLI capacity:"), MissileTubes, storage_max[MW_HVLI]);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "HVPE missiles:"), MissileTubes, storage[MW_HVPE]);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "HVPE capacity:"), MissileTubes, storage_max[MW_HVPE]);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Mines:"), MissileTubes, storage[MW_Mine]);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Mines capacity:"), MissileTubes, storage_max[MW_Mine]);
     ADD_LABEL(tr("tweak-text", "Missile weapons system"));
@@ -374,6 +376,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow mine:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_Mine);
     ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow EMP:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_EMP);
     ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow HVLI:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_HVLI);
+    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow HVPE:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_HVPE);
 
     ADD_PAGE(tr("tweak-tab", "Shields"), Shields);
     // Unsure how to access the shield component's front/rear systems

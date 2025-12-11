@@ -156,6 +156,7 @@ template<> struct Convert<EMissileWeapons> {
         case EMissileWeapons::MW_Mine: lua_pushstring(L, "mine"); break;
         case EMissileWeapons::MW_EMP: lua_pushstring(L, "emp"); break;
         case EMissileWeapons::MW_HVLI: lua_pushstring(L, "hvli"); break;
+        case EMissileWeapons::MW_HVPE: lua_pushstring(L, "hvpe"); break;
         case EMissileWeapons::MW_Count: lua_pushstring(L, "none"); break;
         }
         return 1;
@@ -174,6 +175,8 @@ template<> struct Convert<EMissileWeapons> {
             return EMissileWeapons::MW_EMP;
         else if (str == "hvli")
             return EMissileWeapons::MW_HVLI;
+        else if (str == "hvpe")
+            return EMissileWeapons::MW_HVPE;
         luaL_error(L, "Unknown EMissileWeapons type: %s", str.c_str());
         return EMissileWeapons::MW_None;
     }

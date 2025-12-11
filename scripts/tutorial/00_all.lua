@@ -225,9 +225,9 @@ end)
 
 addToSequence(weaponsTutorial, function() player:setWeaponStorage("homing", 0):setWeaponStorageMax("homing", 0) end)
 addToSequence(weaponsTutorial, function() tutorial_setMessageToTopPosition() end)
-addToSequence(weaponsTutorial, _([[In addition to homing missiles, your ship might have HVLIs, nukes, EMPs, and mines.
-HVLI stands for "High Velocity Lead Impactor". They fire in straight lines and do not have homing abilities.
-Nukes and EMPs also have homing abilities and have a 1u-radius blast and do more damage.
+addToSequence(weaponsTutorial, _([[In addition to homing missiles, your ship might have HVLIs, HVPEs, nukes, EMPs, and mines.
+HVLI stands for "High Velocity Lead Impactor", and HVPE stands for "High Velocity Plasma Ejector". HVLIs are slow kinetic weapons most effective at range, and HVPEs are fast energy weapons that expire quickly. Both fire in straight lines and lack homing abilities.
+Nukes and EMPs also have homing abilities, have a 1u-radius blast, and do more damage.
 EMPs damage only shields, and thus are great for weakening heavily shielded enemies.]]))
 
 engineeringTutorial = createSequence()

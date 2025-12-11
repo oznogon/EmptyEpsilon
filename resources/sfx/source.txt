@@ -8,6 +8,11 @@ Sounds (c) by Michel Baradari apollo-music.de
 Licensed under CC BY 3.0 http://creativecommons.org/licenses/by/3.0/
 explodemini.wav, hosted on opengameart.org
 
+==hvpe_fire.wav==
+Sounds (c) Daniel SoundsGood https://linktr.ee/danielsoundsgood
+Licensed for free use in games by the artist
+Retrieved from https://danielsoundsgood.itch.io/laser-weapon-sound-library
+
 ==laser_fire.wav==
 Sounds (c) by Christian "Crystan" Hoffmann
 Creative Commons Attribution-Share Alike 3.0

@@ -60,6 +60,8 @@ MISSILE_MINE = "Mine"
 MISSILE_EMP = "EMP"
 --- `"HVLI"`
 MISSILE_HVLI = "HVLI"
+--- `"HVPE"`
+MISSILE_HVPE = "HVPE"
 
 --- Array of the missile types.
 MISSILE_TYPES = {
@@ -67,7 +69,7 @@ MISSILE_TYPES = {
   MISSILE_NUKE,
   MISSILE_MINE,
   MISSILE_EMP,
-  MISSILE_HVLI
+  MISSILE_HVPE
 }
 
 --- Systems.

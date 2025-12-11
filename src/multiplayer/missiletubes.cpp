@@ -24,11 +24,13 @@ BASIC_REPLICATION_IMPL(MissileTubesReplication, MissileTubes)
     BASIC_REPLICATION_FIELD(storage[MW_Mine]);
     BASIC_REPLICATION_FIELD(storage[MW_EMP]);
     BASIC_REPLICATION_FIELD(storage[MW_HVLI]);
+    BASIC_REPLICATION_FIELD(storage[MW_HVPE]);
     BASIC_REPLICATION_FIELD(storage_max[MW_Homing]);
     BASIC_REPLICATION_FIELD(storage_max[MW_Nuke]);
     BASIC_REPLICATION_FIELD(storage_max[MW_Mine]);
     BASIC_REPLICATION_FIELD(storage_max[MW_EMP]);
     BASIC_REPLICATION_FIELD(storage_max[MW_HVLI]);
+    BASIC_REPLICATION_FIELD(storage_max[MW_HVPE]);
 
     BASIC_REPLICATION_VECTOR(mounts)
         VECTOR_REPLICATION_FIELD(position);
