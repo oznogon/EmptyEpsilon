@@ -21,6 +21,7 @@ public:
     static bool assignInternalEntityToBerth(sp::ecs::Entity entity, DockingBay::Berth::Type berth_type);
     static bool assignInternalEntityToBerth(sp::ecs::Entity entity, int index);
     static void assignInternalEntitiesToBerths(std::vector<sp::ecs::Entity> entities, sp::ecs::Entity carrier);
+    static bool cancelInternalEntityMove(sp::ecs::Entity entity);
 
     void collision(sp::ecs::Entity a, sp::ecs::Entity b, float force) override;
 };

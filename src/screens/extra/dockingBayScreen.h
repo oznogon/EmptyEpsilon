@@ -49,9 +49,14 @@ private:
     GuiKeyValueDisplay* entity_hull;
     GuiKeyValueDisplay* entity_probes;
 
+    GuiElement* move_controls_row;
     GuiSelector* target_berth;
     GuiToggleButton* scramble;
     GuiKeyValueDisplay* energy_carrier;
+
+    GuiElement* move_progress_row;
+    GuiProgressbar* move_progress_bar;
+    GuiButton* cancel_move_button;
 
     GuiElement* hangar_controls;
     GuiElement* energy_controls;
