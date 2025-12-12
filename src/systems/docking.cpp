@@ -370,6 +370,47 @@ void DockingSystem::update(float delta)
             break;
         }
     }
+
+    // Process in-progress berth moves
+    for (auto [carrier, bay] : sp::ecs::Query<DockingBay>())
+    {
+        for (size_t i = 0; i < bay.berths.size(); i++)
+        {
+            auto& berth = bay.berths[i];
+
+            // Check if this berth has an entity moving to another berth
+            if (berth.move_target_berth >= 0
+                && berth.move_target_berth < static_cast<int>(bay.berths.size()))
+            {
+                auto& target_berth = bay.berths[berth.move_target_berth];
+
+                // Validate target berth is still empty
+                if (target_berth.docked_entity && target_berth.docked_entity != sp::ecs::Entity())
+                {
+                    // Target berth occupied, cancel move
+                    berth.move_target_berth = -1;
+                    berth.move_progress = 0.0f;
+                    target_berth.move_progress = 0.0f;
+                    continue;
+                }
+
+                // Update progress
+                berth.move_progress += delta;
+                target_berth.move_progress += delta;
+
+                // Check if move completed
+                if (berth.move_progress >= berth.move_time)
+                {
+                    // Complete the move
+                    target_berth.docked_entity = berth.docked_entity;
+                    berth.docked_entity = sp::ecs::Entity();
+                    berth.move_target_berth = -1;
+                    berth.move_progress = 0.0f;
+                    target_berth.move_progress = 0.0f;
+                }
+            }
+        }
+    }
 }
 
 bool DockingSystem::moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Entity carrier)
@@ -402,10 +443,10 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity)
     if (!bay || !(port->canDockOn(*bay) == DockingStyle::Internal) || bay->berths.empty())
         return false;
 
-    // Find first empty berth
+    // Find first empty berth (not occupied and not receiving a ship)
     for (auto& berth : bay->berths)
     {
-        if (berth.docked_entity == sp::ecs::Entity())
+        if (berth.docked_entity == sp::ecs::Entity() && berth.move_progress <= 0.0f)
         {
             berth.docked_entity = entity;
             return true;
@@ -432,20 +473,36 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity, DockingB
     auto bay = carrier.getComponent<DockingBay>();
     if (!bay || !(port->canDockOn(*bay) == DockingStyle::Internal) || bay->berths.empty()) return false;
 
-    // First, clear entity from any berth it's currently in
-    for (auto& berth : bay->berths)
+    // Find which berth currently contains this entity (if any)
+    int origin_berth_index = -1;
+    for (size_t i = 0; i < bay->berths.size(); i++)
     {
-        if (berth.docked_entity == entity)
-            berth.docked_entity = sp::ecs::Entity();
+        if (bay->berths[i].docked_entity == entity)
+        {
+            origin_berth_index = static_cast<int>(i);
+            break;
+        }
     }
 
-    // Find an empty berth of the requested type
-    for (auto& berth : bay->berths)
+    // Find an empty berth of the requested type (not occupied and not receiving a ship)
+    for (size_t i = 0; i < bay->berths.size(); i++)
     {
-        // TODO: move_time delay
-        if (berth.type == berth_type && !berth.docked_entity)
+        auto& berth = bay->berths[i];
+        if (berth.type == berth_type && !berth.docked_entity && berth.move_progress <= 0.0f)
         {
-            berth.docked_entity = entity;
+            // If entity is already in a berth and it's a different berth, initiate move
+            if (origin_berth_index >= 0 && origin_berth_index != static_cast<int>(i))
+            {
+                auto& origin_berth = bay->berths[origin_berth_index];
+                origin_berth.move_target_berth = static_cast<int>(i);
+                origin_berth.move_progress = 0.0f;
+            }
+            // If entity not in any berth, assign directly (instant)
+            else if (origin_berth_index == -1)
+            {
+                berth.docked_entity = entity;
+            }
+            // If already in this berth, no-op but return success
             return true;
         }
     }
@@ -462,20 +519,38 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity, int inde
     auto bay = carrier.getComponent<DockingBay>();
     if (!bay || !(port->canDockOn(*bay) == DockingStyle::Internal) || bay->berths.empty() || index < 0 || index >= int(bay->berths.size())) return false;
 
-    auto& berth = bay->berths[index];
+    auto& target_berth = bay->berths[index];
 
-    // If the berth is occupied by a different entity, can't assign
-    if (berth.docked_entity && berth.docked_entity != entity) return false;
+    // If the target berth is occupied by a different entity or receiving a ship, can't assign
+    if (target_berth.docked_entity && target_berth.docked_entity != entity) return false;
+    if (target_berth.move_progress > 0.0f) return false;
 
-    // Clear entity from any other berth it's currently in
+    // Find which berth currently contains this entity (if any)
+    int origin_berth_index = -1;
     for (size_t i = 0; i < bay->berths.size(); i++)
     {
-        if (int(i) != index && bay->berths[i].docked_entity == entity)
-            bay->berths[i].docked_entity = sp::ecs::Entity();
+        if (bay->berths[i].docked_entity == entity)
+        {
+            origin_berth_index = static_cast<int>(i);
+            break;
+        }
     }
 
-    // Assign to the requested berth
-    berth.docked_entity = entity;
+    // If entity not found in any berth, assign directly (instant, not a move)
+    if (origin_berth_index == -1)
+    {
+        target_berth.docked_entity = entity;
+        return true;
+    }
+
+    // If assigning to same berth, no-op
+    if (origin_berth_index == index)
+        return true;
+
+    // Otherwise, it's a move between berths - initiate progress tracking
+    auto& origin_berth = bay->berths[origin_berth_index];
+    origin_berth.move_target_berth = index;
+    origin_berth.move_progress = 0.0f;
     return true;
 }
 
@@ -496,11 +571,11 @@ void DockingSystem::assignInternalEntitiesToBerths(std::vector<sp::ecs::Entity> 
                 berth.docked_entity = sp::ecs::Entity();
         }
 
-        // Then try to assign it to an empty berth
+        // Then try to assign it to an empty berth (not occupied and not receiving a ship)
         bool was_assigned = false;
         for (auto& berth : bay->berths)
         {
-            if (!berth.docked_entity)
+            if (!berth.docked_entity && berth.move_progress <= 0.0f)
             {
                 berth.docked_entity = entity;
                 was_assigned = true;
@@ -514,6 +589,33 @@ void DockingSystem::assignInternalEntitiesToBerths(std::vector<sp::ecs::Entity> 
             if (port->target == carrier) requestUndock(entity);
         }
     }
+}
+
+bool DockingSystem::cancelInternalEntityMove(sp::ecs::Entity entity)
+{
+    auto port = entity.getComponent<DockingPort>();
+    if (!port || !port->target) return false;
+
+    auto carrier = port->target;
+    auto bay = carrier.getComponent<DockingBay>();
+    if (!bay) return false;
+
+    // Find the berth that has this entity and is in the middle of a move
+    for (size_t i = 0; i < bay->berths.size(); i++)
+    {
+        auto& berth = bay->berths[i];
+        if (berth.docked_entity == entity && berth.move_target_berth >= 0)
+        {
+            // Reset target berth's progress before cancelling
+            if (berth.move_target_berth < static_cast<int>(bay->berths.size()))
+                bay->berths[berth.move_target_berth].move_progress = 0.0f;
+
+            berth.move_target_berth = -1;
+            berth.move_progress = 0.0f;
+            return true;
+        }
+    }
+    return false;
 }
 
 bool DockingSystem::canStartDocking(sp::ecs::Entity entity)
@@ -604,8 +706,22 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
     docking_port->state = DockingPort::State::NotDocking;
     if (auto bay = docking_port->target.getComponent<DockingBay>())
     {
-        for (auto& berth : bay->berths)
-            if (berth.docked_entity == entity) berth.docked_entity = sp::ecs::Entity();
+        for (size_t i = 0; i < bay->berths.size(); i++)
+        {
+            auto& berth = bay->berths[i];
+            if (berth.docked_entity == entity)
+            {
+                berth.docked_entity = sp::ecs::Entity();
+                // Cancel any pending move from this berth
+                if (berth.move_target_berth >= 0 && berth.move_target_berth < static_cast<int>(bay->berths.size()))
+                {
+                    // Reset target berth's progress before cancelling
+                    bay->berths[berth.move_target_berth].move_progress = 0.0f;
+                }
+                berth.move_target_berth = -1;
+                berth.move_progress = 0.0f;
+            }
+        }
     }
 }
 

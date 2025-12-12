@@ -58,6 +58,7 @@ public:
     void commandUndock();
     void commandLaunchInternal(sp::ecs::Entity entity);
     void commandMoveInternalToBerth(sp::ecs::Entity entity, int berth_index);
+    void commandCancelInternalMove(sp::ecs::Entity entity);
     void commandSetBerthTransferDirection(int berth_index, int direction);
     void commandGenerateSupplyDrop(int berth_index);
     void commandAbortDock();

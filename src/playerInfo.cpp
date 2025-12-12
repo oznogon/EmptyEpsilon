@@ -112,6 +112,7 @@ static const uint16_t CMD_SET_BERTH_TRANSFER_DIRECTION = 0x002F;
 static const uint16_t CMD_TRANSFER_MISSILE = 0x0030;
 static const uint16_t CMD_TRANSFER_PROBE = 0x0031;
 static const uint16_t CMD_GENERATE_SUPPLY_DROP = 0x0032;
+static const uint16_t CMD_CANCEL_INTERNAL_MOVE = 0x0033;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -365,6 +366,14 @@ void PlayerInfo::commandMoveInternalToBerth(sp::ecs::Entity entity, int berth_in
     if (!entity) return;
     sp::io::DataBuffer packet;
     packet << CMD_MOVE_INTERNAL_TO_BERTH << entity << static_cast<int32_t>(berth_index);
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandCancelInternalMove(sp::ecs::Entity entity)
+{
+    if (!entity) return;
+    sp::io::DataBuffer packet;
+    packet << CMD_CANCEL_INTERNAL_MOVE << entity;
     sendClientCommand(packet);
 }
 
@@ -964,6 +973,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity internal_entity;
             int32_t berth_index;
             packet >> internal_entity >> berth_index;
+
             if (internal_entity)
             {
                 // Verify the entity is actually docked in this ship's bay
@@ -978,6 +988,21 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                                 DockingSystem::assignInternalEntityToBerth(internal_entity, berth_index);
                         }
                     }
+                }
+            }
+        }
+        break;
+    case CMD_CANCEL_INTERNAL_MOVE:
+        {
+            sp::ecs::Entity internal_entity;
+            packet >> internal_entity;
+            if (internal_entity)
+            {
+                // Verify the entity is actually docked in this ship's bay
+                if (auto port = internal_entity.getComponent<DockingPort>())
+                {
+                    if (port->target == ship && port->state == DockingPort::State::Docked)
+                        DockingSystem::cancelInternalEntityMove(internal_entity);
                 }
             }
         }
