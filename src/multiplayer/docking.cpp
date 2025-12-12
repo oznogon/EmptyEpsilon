@@ -30,6 +30,7 @@ BASIC_REPLICATION_IMPL(DockingBayReplication, DockingBay)
         VECTOR_REPLICATION_FIELD(type);
         VECTOR_REPLICATION_FIELD(move_time);
         VECTOR_REPLICATION_FIELD(move_progress);
+        VECTOR_REPLICATION_FIELD(move_target_berth);
         VECTOR_REPLICATION_FIELD(transfer_rate);
         VECTOR_REPLICATION_FIELD(transfer_direction);
     VECTOR_REPLICATION_END();

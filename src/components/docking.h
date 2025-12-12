@@ -52,6 +52,7 @@ public:
         Type type = Type::Hangar;
         float move_time = 10.0f;
         float move_progress = 0.0f;
+        int move_target_berth = -1; // Index of destination berth during move, -1 if not moving
         float transfer_rate = 5.0f;
         TransferDirection transfer_direction = TransferDirection::None;
     };
