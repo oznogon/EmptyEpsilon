@@ -23,6 +23,8 @@ private:
     float manual_rotation_x = -30.0f;
     float manual_rotation_z = 0.0f;
 
+    float height = -1.0f;
+    float angle = 90.0f;
 public:
     GuiRotatingModelView(GuiContainer* owner, string id, sp::ecs::Entity& entity);
 
@@ -35,4 +37,10 @@ public:
     GuiRotatingModelView* setFillPercentage(float percentage);
     GuiRotatingModelView* setZoom(float zoom);
     GuiRotatingModelView* setManualRotationAllowed(bool allowed);
+
+    bool is_rotating = true;
+    GuiRotatingModelView* setCameraRotation(float new_angle);
+    float getCameraRotation() { return angle; }
+    GuiRotatingModelView* setCameraHeight(float new_height);
+    float getCameraHeight() { return height; }
 };
