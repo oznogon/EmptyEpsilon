@@ -156,7 +156,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     // Controls to move ships between berths.
-    GuiElement* move_controls_row = new GuiElement(right_column, "DOCKING_BAY_MOVE_CONTROLS");
+    move_controls_row = new GuiElement(right_column, "DOCKING_BAY_MOVE_CONTROLS");
     move_controls_row
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("layout", "horizontal");
@@ -184,6 +184,60 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAttribute("alignment", "center");
 
     (new GuiElement(move_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Progress row (initially hidden, replaces move controls during moves)
+    move_progress_row = new GuiElement(right_column, "DOCKING_BAY_MOVE_PROGRESS");
+    move_progress_row
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+    move_progress_row
+        ->setAttribute("layout", "horizontal");
+    move_progress_row
+        ->setAttribute("margin", "0, 0, 0, 10");
+    move_progress_row->hide();
+
+    move_progress_bar = new GuiProgressbar(move_progress_row, "MOVE_PROGRESS", 0.0f, 1.0f, 0.0f);
+    move_progress_bar
+        ->setSize(400.0f, 50.0f);
+
+    cancel_move_button = new GuiButton(move_progress_row, "CANCEL_MOVE", tr("dockingbay", "Cancel move"),
+        [this]()
+        {
+            // Get the entity that's moving (from either origin or destination berth)
+            sp::ecs::Entity entity_to_cancel;
+
+            if (!my_spaceship || !my_player_info) return;
+            auto bay = my_spaceship.getComponent<DockingBay>();
+            if (!bay || selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
+
+            const auto& selected_berth = bay->berths[selected_berth_index];
+
+            // If viewing origin berth (entity is here and moving out)
+            if (selected_berth.move_target_berth >= 0 && selected_berth.docked_entity)
+            {
+                entity_to_cancel = selected_berth.docked_entity;
+            }
+            // If viewing destination berth (entity is moving here)
+            else
+            {
+                for (const auto& berth : bay->berths)
+                {
+                    if (berth.move_target_berth == selected_berth_index && berth.docked_entity)
+                    {
+                        entity_to_cancel = berth.docked_entity;
+                        break;
+                    }
+                }
+            }
+
+            if (entity_to_cancel && entity_to_cancel != sp::ecs::Entity())
+                my_player_info->commandCancelInternalMove(entity_to_cancel);
+        }
+    );
+    cancel_move_button
+        ->setSize(150.0f, 50.0f)
+        ->setAttribute("margin", "10, 0, 0, 0");
+
+    (new GuiElement(move_progress_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Scramble button launches all ships in all hangar berths.
     // As an emergency control, it should always be visible.
@@ -932,7 +986,7 @@ void DockingBayScreen::updateBerthsLabels()
 
         target_berth->setEntryIcon(i, bay->getTypeIcon(berth.type));
 
-        if (berth.docked_entity == sp::ecs::Entity())
+        if (berth.docked_entity == sp::ecs::Entity() && berth.move_progress <= 0.0f)
         {
             target_berth->setEntryName(
                 i,
@@ -1183,6 +1237,61 @@ void DockingBayScreen::updateSelectedEntityDisplay()
 
             thermal_venting_direction->setEnable(selected_entity.hasComponent<Coolant>() && my_spaceship.hasComponent<Coolant>());
         }
+    }
+
+    // Update move controls and progress bar visibility
+    bool is_moving_out = false;
+    bool is_moving_in = false;
+    float progress = 0.0f;
+    string move_text = "";
+    sp::ecs::Entity moving_entity;
+
+    if (bay && selected_berth_index >= 0 && selected_berth_index < static_cast<int>(bay->berths.size())) {
+        const auto& selected_berth = bay->berths[selected_berth_index];
+
+        // Check if selected berth is moving an entity OUT
+        if (selected_berth.move_target_berth >= 0 && selected_entity)
+        {
+            is_moving_out = true;
+            moving_entity = selected_entity;
+            progress = selected_berth.move_time > 0.0f ? selected_berth.move_progress / selected_berth.move_time : 0.0f;
+            move_text = static_cast<string>(tr("dockingbay", "Moving to berth {target}")).format({
+                {"target", selected_berth.move_target_berth + 1}
+            });
+        }
+        // Check if selected berth is receiving an entity (moving IN)
+        else
+        {
+            for (size_t i = 0; i < bay->berths.size(); i++)
+            {
+                if (bay->berths[i].move_target_berth == selected_berth_index)
+                {
+                    is_moving_in = true;
+                    moving_entity = bay->berths[i].docked_entity;
+                    progress = bay->berths[i].move_time > 0 ? bay->berths[i].move_progress / bay->berths[i].move_time : 0.0f;
+                    move_text = static_cast<string>(tr("dockingbay", "Receiving from berth {origin}")).format({
+                        {"origin", static_cast<int>(i) + 1}
+                    });
+                    break;
+                }
+            }
+        }
+    }
+
+    // Show/hide appropriate controls
+    if (is_moving_out || is_moving_in)
+    {
+        // Hide move controls, show progress bar with cancel button enabled
+        move_controls_row->hide();
+        move_progress_row->show();
+        move_progress_bar->setValue(progress)->setText(move_text);
+        cancel_move_button->setEnable(true);
+    }
+    else
+    {
+        // Show move controls, hide progress bar
+        move_controls_row->show();
+        move_progress_row->hide();
     }
 }
 
