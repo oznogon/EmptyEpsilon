@@ -16,12 +16,23 @@ class MouseRenderer;
 
 class CinematicViewScreen : public GuiCanvas, public Updatable
 {
+public:
+    enum CameraMode {
+        CAMERA_MODE_ORBITAL = 0,
+        CAMERA_MODE_FLYBY,
+        CAMERA_MODE_CHASE,
+        CAMERA_MODE_ISOMETRIC,
+        CAMERA_MODE_TOPDOWN
+    };
+
 private:
     GuiViewport3D* viewport;
     sp::ecs::Entity target;
 
     GuiElement* camera_controls;
     GuiSelector* camera_lock_selector;
+    GuiSelector* camera_mode_selector;
+    GuiButton* camera_mode_option;
     GuiToggleButton* camera_lock_toggle;
     GuiToggleButton* camera_lock_tot_toggle;
     GuiToggleButton* camera_lock_cycle_toggle;
@@ -29,6 +40,7 @@ private:
     GuiToggleButton* mouselook_toggle;
     GuiButton* ui_toggle;
     GuiHelpOverlay* keyboard_help;
+    CameraMode camera_mode = CAMERA_MODE_ORBITAL;
 
     float min_camera_distance = 300.0f;
     float max_camera_distance = 1000.0f;
@@ -67,8 +79,71 @@ private:
     float tot_distance_2D = 0.0f;
     float tot_distance_3D = 0.0f;
 
-    float cycle_time = 0.0f;
-    const float cycle_period = 30.0f;
+    // Shared cinematic cycle timer for auto-orbit, flyby, and target cycling
+    float cinematic_cycle_timer = 0.0f;
+    const float cinematic_cycle_period = 20.0f;
+
+    // Orbital camera mode state
+    float orbit_yaw = -90.0f;
+    float orbit_pitch = 45.0f;
+    float orbit_distance = 700.0f;
+    glm::vec2 orbit_center{0.0f, 0.0f};
+    bool orbit_auto_rotate = false;
+    float orbit_target_yaw = -90.0f;
+    float orbit_target_pitch = 45.0f;
+    float orbit_target_distance = 700.0f;
+
+    // Fly-by camera mode state
+    float flyby_height = 200.0f;
+    float flyby_distance = 1000.0f;
+    float flyby_fov = 60.0f;
+    glm::vec2 flyby_camera_pos{0.0f, 0.0f};
+
+    // Chase camera mode state
+    enum class Angle {
+        Front = 0,
+        Right = 1,
+        Back = 2,
+        Left = 3
+    };
+
+    float chase_distance = 700.0f;
+    float chase_height = 200.0f;
+    Angle chase_direction = Angle::Back;
+
+    // Isometric camera mode state
+    enum class IsometricAngle {
+        FrontRight = 0,
+        BackRight = 1,
+        BackLeft = 2,
+        FrontLeft = 3
+    };
+
+    float isometric_distance = 1000.0f;
+    IsometricAngle isometric_direction = IsometricAngle::FrontRight;
+
+    // Top-down camera mode state
+    glm::vec2 topdown_offset{0.0f, 0.0f};
+    float topdown_zoom = 1000.0f;
+
+    // Camera constraints
+    const float orbit_distance_min = 300.0f;
+    const float orbit_distance_max = 1200.0f;
+    const float flyby_height_min = 50.0f;
+    const float flyby_height_max = 500.0f;
+    const float flyby_fov_min = 30.0f;
+    const float flyby_fov_max = 120.0f;
+    const float chase_distance_min = 300.0f;
+    const float chase_distance_max = 2000.0f;
+    const float chase_height_min = 50.0f;
+    const float chase_height_max = 500.0f;
+    const float isometric_distance_min = 500.0f;
+    const float isometric_distance_max = 3000.0f;
+    const float topdown_zoom_min = 500.0f;
+    const float topdown_zoom_max = 5000.0f;
+
+    // Max ToT tracking distance
+    const float tot_max_distance = 10000.0f;
 
 public:
     explicit CinematicViewScreen(RenderLayer* render_layer);
@@ -76,7 +151,12 @@ public:
 
     void setTargetTransform(sp::Transform* transform);
     void setMouselook(bool value);
-    void updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform);
+    void updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
+    void updateOrbitCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
+    void updateFlybyCamera(sp::Transform* main_transform, float delta);
+    void updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform);
+    void updateIsometricCamera(sp::Transform* main_transform);
+    void updateTopdownCamera(sp::Transform* main_transform);
 
     virtual void update(float delta) override;
     virtual bool onPointerMove(glm::vec2 position, sp::io::Pointer::ID id) override;
