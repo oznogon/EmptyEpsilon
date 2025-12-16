@@ -32,32 +32,28 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
         if (!transform) return;
         auto pc = my_spaceship.getComponent<PlayerControl>();
         auto target_ship = my_spaceship.getComponent<Target>();
-        float target_camera_yaw = transform->getRotation();
 
         switch(pc ? pc->main_screen_setting : MainScreenSetting::Front)
         {
-        case MainScreenSetting::Back:  target_camera_yaw += 180.0f; break;
-        case MainScreenSetting::Left:  target_camera_yaw -= 90.0f; break;
-        case MainScreenSetting::Right: target_camera_yaw += 90.0f; break;
+        case MainScreenSetting::Front: target_camera_yaw = transform->getRotation(); break;
+        case MainScreenSetting::Back:  target_camera_yaw = transform->getRotation() + 180.0f; break;
+        case MainScreenSetting::Left:  target_camera_yaw = transform->getRotation() - 90.0f; break;
+        case MainScreenSetting::Right: target_camera_yaw = transform->getRotation() + 90.0f; break;
         case MainScreenSetting::Target:
             if ((target_ship && target_ship->entity) || linger_timer > 0.0f)
             {
-                // Update ToT coordinates and reset linger period.
                 if (auto tt = target_ship->entity.getComponent<sp::Transform>())
                 {
                     linger_timer = linger_period;
-                    tot_coordinates = tt->getPosition();
+                    auto target_camera_diff = transform->getPosition() - tt->getPosition();
+                    target_camera_yaw = vec2ToAngle(target_camera_diff) + 180.0f;
                 }
                 else linger_timer -= delta;
-
-                // Point camera over ship's shoulder toward ToT or its last
-                // recorded coordinates.
-                target_camera_yaw = vec2ToAngle(transform->getPosition() - tot_coordinates) + 180.0f;
             }
-            else
-                tot_coordinates = {0.0f, 0.0f}; // Reset ToT coordinates
+            else target_camera_yaw = transform->getRotation();
             break;
-        default: break;
+        default:
+            break;
         }
         camera_pitch = 30.0f;
 

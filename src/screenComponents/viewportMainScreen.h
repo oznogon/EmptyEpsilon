@@ -17,6 +17,7 @@ public:
 
 private:
     glm::vec2 tot_coordinates{0.0f, 0.0f};
+    float target_camera_yaw = 0.0f;
     const float linger_period = 3.0f;
     float linger_timer = 0.0f;
     float previous_draw = 0.0f;
