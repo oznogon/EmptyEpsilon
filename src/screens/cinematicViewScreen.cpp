@@ -967,31 +967,32 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
 
     // Get ship dimensions for focal point calculation
     float ship_half_width = 250.0f;
+    float ship_half_length = 250.0f;
     if (auto physics = target.getComponent<sp::Physics>())
-        ship_half_width = std::max(physics->getSize().x, physics->getSize().y) / 2.0f;
+    {
+        ship_half_width = physics->getSize().y * 0.5f;
+        ship_half_length = physics->getSize().x * 0.5f;
+    }
 
     // Calculate focal point based on chase direction
-    // Front/Back look at ship center (stable behavior at all distances)
-    // Left/Right look at point offset to the side (for better side view)
     const float focal_lead_distance = 500.0f;
-    const float focal_point_distance = ship_half_width + focal_lead_distance;
-    glm::vec2 front = vec2FromAngle(target_rotation - 180.0f);
-    glm::vec2 right = vec2FromAngle(target_rotation + 90.0f);
+    glm::vec2 front = vec2FromAngle(target_rotation - 180.0f) * (ship_half_length + focal_lead_distance);
+    glm::vec2 right = vec2FromAngle(target_rotation + 90.0f) * (ship_half_width + focal_lead_distance);
     glm::vec2 focal_point;
 
     switch (chase_direction)
     {
-    case Angle::Front:  // Camera behind ship, looking at ship center
-        focal_point = target_position_2D + front * focal_point_distance;
+    case Angle::Front:  // Camera behind ship, looking ahead of ship
+        focal_point = target_position_2D + front;
         break;
-    case Angle::Back:   // Camera in front, looking at ship center
-        focal_point = target_position_2D - front * focal_point_distance;
+    case Angle::Back:   // Camera in front, looking behind
+        focal_point = target_position_2D - front;
         break;
-    case Angle::Right:  // Camera on left side, looking right
-        focal_point = target_position_2D + right * focal_point_distance;
+    case Angle::Right:  // Camera on left side, looking off right side
+        focal_point = target_position_2D + right;
         break;
-    case Angle::Left:   // Camera on right side, looking left
-        focal_point = target_position_2D - right * focal_point_distance;
+    case Angle::Left:   // Camera on right side, looking off left side
+        focal_point = target_position_2D - right;
         break;
     }
 
