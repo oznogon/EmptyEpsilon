@@ -360,6 +360,12 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
     mouselook_sensitivity_overlay_label = new GuiLabel(mouselook_sensitivity_slider, "MOUSELOOK_SENSITIVITY_SLIDER_LABEL",
         tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(initial_mouselook_sensitivity * 100.0f)))} }), 30.0f);
     mouselook_sensitivity_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Cinematic fly-by randomization
+    (new GuiToggleButton(interface_right_column, "RANDOMIZE_CINEMATIC_FLYBY", tr("Randomize cinematic fly-by angles"), [this](bool value)
+    {
+        PreferencesManager::set("camera_flyby_randomized", value ? "1" : "0");
+    }))->setValue(PreferencesManager::get("camera_flyby_randomized", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50.0f);
 }
 
 void OptionsMenu::setupGraphicsOptions()
