@@ -29,6 +29,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     // Capture mouse_renderer so we can hide it in mouselook.
     mouse_renderer = engine->getObject("mouseRenderer");
     invert_mouselook_y = (PreferencesManager::get("camera_mouse_inverted", "0") == "1");
+    random_flyby_angle = (PreferencesManager::get("camera_flyby_randomized", "0") == "1");
 
     // Create a full-screen viewport.
     viewport = new GuiViewport3D(this, "VIEWPORT");
@@ -41,8 +42,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
         target = entity;
-        auto transform = target.getComponent<sp::Transform>();
-        if (transform) setTargetTransform(transform);
+        if (auto target_transform = target.getComponent<sp::Transform>()) setTargetTransform(target_transform);
         break;
     }
 
@@ -70,11 +70,17 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         ->setSize(300.0f, 50.0f);
 
     // Mode-context option trigger
-    camera_mode_option = new GuiButton(camera_controls, "CAMERA_MODE_OPTION", "...",
+    camera_mode_option = new GuiButton(camera_controls, "CAMERA_MODE_OPTION", tr("button", "Reset camera"),
         [this]()
         {
-            switch(camera_mode)
+            switch (camera_mode)
             {
+                case CAMERA_MODE_FLYBY:
+                    // Force fly-by reposition
+                    if (target)
+                        if (auto target_transform = target.getComponent<sp::Transform>()) updateFlybyCamera(target_transform, 0.0f, OptionState::Force);
+
+                    break;
                 case CAMERA_MODE_ORBITAL:
                     // Toggle auto-rotate orbital camera
                     orbit_auto_rotate = !orbit_auto_rotate;
@@ -86,10 +92,6 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
                         orbit_target_pitch = random(-10.0f, 60.0f);
                         orbit_target_distance = random(orbit_distance_min, orbit_distance_max);
                     }
-                    break;
-                case CAMERA_MODE_FLYBY:
-                    // Force fly-by reposition
-                    cinematic_cycle_timer = cinematic_cycle_period;
                     break;
                 case CAMERA_MODE_CHASE:
                     // Rotate chase camera
@@ -118,12 +120,12 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
             camera_mode = static_cast<CameraMode>(index);
             switch(camera_mode)
             {
-                case CAMERA_MODE_ORBITAL:
-                    camera_mode_option->setText(tr("button", "Auto-rotate orbit"));
-                    break;
                 case CAMERA_MODE_FLYBY:
                     // Force fly-by reposition
                     camera_mode_option->setText(tr("button", "Reset camera"));
+                    break;
+                case CAMERA_MODE_ORBITAL:
+                    camera_mode_option->setText(tr("button", "Auto-rotate orbit"));
                     break;
                 case CAMERA_MODE_CHASE:
                     // Rotate chase camera
@@ -144,8 +146,8 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
             }
         }
     );
-    camera_mode_selector->addEntry(tr("button", "Orbital camera"), "0");
-    camera_mode_selector->addEntry(tr("button", "Fly-by camera"), "1");
+    camera_mode_selector->addEntry(tr("button", "Fly-by camera"), "0");
+    camera_mode_selector->addEntry(tr("button", "Orbital camera"), "1");
     camera_mode_selector->addEntry(tr("button", "Chase camera"), "2");
     camera_mode_selector->addEntry(tr("button", "Isometric camera"), "3");
     camera_mode_selector->addEntry(tr("button", "Top-down camera"), "4");
@@ -161,16 +163,16 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
-    camera_lock_tot_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Lock camera on ship's target"), [this](bool value) {});
+    camera_lock_tot_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Point at ship's target"), [this](bool value) {});
     camera_lock_tot_toggle
-        ->setValue(true)
+        ->setValue(false)
         ->setPosition(320.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
     camera_lock_cycle_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [this](bool value) {});
     camera_lock_cycle_toggle
-        ->setValue(true)
-        ->setPosition(670.0f, -20.0f, sp::Alignment::BottomLeft)
+        ->setValue(false)
+        ->setPosition(620.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
     // Toggle callsigns.
@@ -178,7 +180,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         [this]() {
             viewport->toggleCallsigns();
         });
-    callsigns_toggle->setPosition(20, -140, sp::Alignment::BottomLeft)->setSize(300, 50);
+    callsigns_toggle->setPosition(20, -200, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     // Toggle mouselook.
     mouselook_toggle = new GuiToggleButton(camera_controls, "CAMERA_MOUSELOOK_TOGGLE", tr("button", "Mouselook"),
@@ -278,18 +280,43 @@ void CinematicViewScreen::update(float delta)
     {
         switch (camera_mode)
         {
+        case CAMERA_MODE_FLYBY:
+            if (keys.cinematic.move_forward.get() || keys.cinematic.tilt_up.get() || mouse_wheel_delta > 0.0f)
+            {
+                is_camera_moving = true;
+                flyby_fov_modifier = viewport->modifyFoV(flyby_fov_modifier - delta * camera_zoom_speed);
+            }
+            if (keys.cinematic.move_backward.get() || keys.cinematic.tilt_down.get() || mouse_wheel_delta < 0.0f)
+            {
+                is_camera_moving = true;
+                flyby_fov_modifier = viewport->modifyFoV(flyby_fov_modifier + delta * camera_zoom_speed);
+            }
+
+            // Up/down
+            if (keys.cinematic.move_up.get())
+            {
+                is_camera_moving = true;
+                flyby_height = std::min(flyby_height_max, flyby_height + camera_translation_speed);
+            }
+            if (keys.cinematic.move_down.get())
+            {
+                is_camera_moving = true;
+                flyby_height = std::max(flyby_height_min, flyby_height - camera_translation_speed);
+            }
+            break;
+
         // Orbital camera fixed on target ship
         case CAMERA_MODE_ORBITAL:
             // Rotate left/right
             if (keys.cinematic.strafe_left.get() || keys.cinematic.rotate_left.get())
             {
                 is_camera_moving = true;
-                orbit_yaw -= camera_rotation_speed;
+                orbit_yaw += camera_rotation_speed;
             }
             if (keys.cinematic.strafe_right.get() || keys.cinematic.rotate_right.get())
             {
                 is_camera_moving = true;
-                orbit_yaw += camera_rotation_speed;
+                orbit_yaw -= camera_rotation_speed;
             }
 
             // Over/under
@@ -308,38 +335,12 @@ void CinematicViewScreen::update(float delta)
             if (keys.cinematic.move_forward.get() || keys.cinematic.tilt_up.get() || mouse_wheel_delta > 0.0f)
             {
                 is_camera_moving = true;
-                orbit_distance = std::max(orbit_distance_min, orbit_distance - camera_translation_speed);
+                orbit_distance = std::max(getScaledCameraDistance(orbit_distance_min), orbit_distance - camera_translation_speed);
             }
             if (keys.cinematic.move_backward.get() || keys.cinematic.tilt_down.get() || mouse_wheel_delta < 0.0f)
             {
                 is_camera_moving = true;
-                orbit_distance = std::min(orbit_distance_max, orbit_distance + camera_translation_speed);
-            }
-            break;
-
-        case CAMERA_MODE_FLYBY:
-            // Modify FoV to zoom in/out
-            if (keys.cinematic.move_forward.get() || keys.cinematic.tilt_up.get() || mouse_wheel_delta > 0.0f)
-            {
-                is_camera_moving = true;
-                flyby_fov = std::max(flyby_fov_min, flyby_fov - delta * 30.0f); // TODO: Zoom with FoV instead of movement
-            }
-            if (keys.cinematic.move_backward.get() || keys.cinematic.tilt_down.get() || mouse_wheel_delta < 0.0f)
-            {
-                is_camera_moving = true;
-                flyby_fov = std::min(flyby_fov_max, flyby_fov + delta * 30.0f); // TODO: Zoom with FoV instead of movement
-            }
-
-            // Up/down
-            if (keys.cinematic.move_up.get())
-            {
-                is_camera_moving = true;
-                flyby_height = std::min(flyby_height_max, flyby_height + camera_translation_speed);
-            }
-            if (keys.cinematic.move_down.get())
-            {
-                is_camera_moving = true;
-                flyby_height = std::max(flyby_height_min, flyby_height - camera_translation_speed);
+                orbit_distance = std::min(getScaledCameraDistance(orbit_distance_max), orbit_distance + camera_translation_speed);
             }
             break;
 
@@ -349,12 +350,12 @@ void CinematicViewScreen::update(float delta)
             if (keys.cinematic.move_forward.get() || keys.cinematic.tilt_up.get() || mouse_wheel_delta > 0.0f)
             {
                 is_camera_moving = true;
-                chase_distance = std::max(chase_distance_min, chase_distance - camera_translation_speed);
+                chase_distance = std::max(getScaledCameraDistance(chase_distance_min), chase_distance - camera_translation_speed);
             }
             if (keys.cinematic.move_backward.get() || keys.cinematic.tilt_down.get() || mouse_wheel_delta < 0.0f)
             {
                 is_camera_moving = true;
-                chase_distance = std::min(chase_distance_max, chase_distance + camera_translation_speed);
+                chase_distance = std::min(getScaledCameraDistance(chase_distance_max), chase_distance + camera_translation_speed);
             }
 
             // Orbit horizontally at snapped 90-degree increments
@@ -376,6 +377,7 @@ void CinematicViewScreen::update(float delta)
             }
             break;
 
+        // Isometric
         case CAMERA_MODE_ISOMETRIC:
             // Closer/farther
             if (keys.cinematic.move_forward.get() || keys.cinematic.tilt_up.get() || mouse_wheel_delta > 0.0f)
@@ -513,6 +515,8 @@ void CinematicViewScreen::update(float delta)
             camera_translation_speed = std::min(camera_translation_max, camera_translation_speed + delta * camera_translation_max);
         if (camera_rotation_speed < camera_rotation_max)
             camera_rotation_speed = std::min(camera_rotation_max, camera_rotation_speed + delta * camera_rotation_max);
+        if (camera_zoom_speed < camera_zoom_max)
+            camera_zoom_speed = std::min(camera_zoom_max, camera_zoom_speed + delta * camera_zoom_max);
     }
     else if (is_camera_moving)
     {
@@ -520,11 +524,14 @@ void CinematicViewScreen::update(float delta)
             camera_translation_speed = std::max(camera_translation_min, camera_translation_speed - delta * camera_translation_max * 2.0f);
         if (camera_rotation_speed > camera_rotation_min)
             camera_rotation_speed = std::max(camera_rotation_min, camera_rotation_speed - delta * camera_rotation_max * 2.0f);
+        if (camera_zoom_speed > camera_zoom_min)
+            camera_zoom_speed = std::max(camera_zoom_min, camera_zoom_speed - delta * camera_zoom_max * 2.0f);
     }
     else
     {
         camera_translation_speed = camera_translation_min;
         camera_rotation_speed = camera_rotation_min;
+        camera_zoom_speed = camera_zoom_min;
     }
 
     if (keys.cinematic.toggle_mouselook.getDown())
@@ -615,27 +622,63 @@ void CinematicViewScreen::update(float delta)
     }
 }
 
+void CinematicViewScreen::setMouselook(bool value)
+{
+    // Allow toggling of mouse capture and mouselook, but only if camera
+    // lock is disabled or no camera lock target exists.
+    if (value && !camera_lock_toggle->getValue() || !target)
+    {
+        mouselook = true;
+        mouselook_toggle->setValue(true);
+        SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode() ? SDL_FALSE : SDL_TRUE);
+    }
+    else
+    {
+        mouselook = false;
+        mouselook_toggle->setValue(false);
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
+}
+
 bool CinematicViewScreen::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
 {
     // Handle mouselook if enabled and the camera lock is off.
+    // Mouselook enables SDL relative mouse mode, which reports movement
+    // deltas instead of positions. This makes the position variable oddly
+    // named for the moment.
     if (mouselook && !camera_lock_toggle->getValue())
     {
-        // Mouselook enables SDL relative mouse mode, which reports movement
-        // deltas instead of positions. This makes the position variable oddly
-        // named for the moment.
+        // ORBIT MODE: Mouse rotates camera around target
+        if (camera_lock_toggle->getValue() && target)
+        {
+            // Mouse X (horizontal) rotates camera left/right around target
+            orbit_yaw += position.x * camera_sensitivity;
 
-        // Yaw (mouse x, horizontal rotation normalized)
-        camera_yaw += position.x * camera_sensitivity;
-        camera_yaw = std::fmod(camera_yaw, 360.0f);
-        if (camera_yaw < 0.0f) camera_yaw += 360.0f;
+            // Mouse Y (vertical) rotates camera over/under target
+            if (PreferencesManager::get("camera_mouse_inverted", "0") == "1")
+                orbit_pitch += position.y * camera_sensitivity;
+            else
+                orbit_pitch -= position.y * camera_sensitivity;
 
-        // Pitch (mouse y, vertical rotation)
-        // Clamp pitch to 90 degrees up/down prevent flipping upside down.
-        if (invert_mouselook_y)
-            camera_pitch += position.y * camera_sensitivity;
+            // Clamp pitch to prevent flipping
+            orbit_pitch = std::clamp(orbit_pitch, -89.0f, 89.0f);
+        }
+        // FREE CAMERA: Mouse controls yaw and pitch
         else
-            camera_pitch -= position.y * camera_sensitivity;
-        camera_pitch = std::clamp(camera_pitch, -89.9f, 89.9f);
+        {
+            // Yaw (mouse x, horizontal rotation normalized)
+            camera_yaw += position.x * camera_sensitivity;
+            camera_yaw = std::fmod(camera_yaw, 360.0f);
+            if (camera_yaw < 0.0f) camera_yaw += 360.0f;
+
+            // Pitch (mouse y, vertical rotation)
+            // Clamp pitch to 90 degrees up/down prevent flipping upside down.
+            if (invert_mouselook_y)
+                camera_pitch += position.y * camera_sensitivity;
+            else
+                camera_pitch -= position.y * camera_sensitivity;
+            camera_pitch = std::clamp(camera_pitch, -89.9f, 89.9f);
+        }
     }
 
     return false;
@@ -686,182 +729,17 @@ void CinematicViewScreen::setTargetTransform(sp::Transform* transform)
     min_camera_distance = std::max(300.0f, max_dimension * 2.0f);
 }
 
-void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform)
+float CinematicViewScreen::getScaledCameraDistance(float base_distance) const
 {
-    // If we're tracking a target-of-target, keep both the main and ToT
-    // transforms in view.
-    if (camera_lock_tot_toggle->getValue() && tot_transform)
-    {
-        // Get the position of the selected ship's target.
-        tot_position_2D = tot_transform->getPosition();
-        // Convert it to a 3D vector.
-        tot_position_3D = {tot_position_2D, 0.0f};
+    // Scale camera distances based on ship size (defaults tuned for radius 200)
+    // Uses square root scaling to provide more balanced values across ship sizes
+    float ship_radius = 200.0f;
+    if (target && target.getComponent<sp::Physics>())
+        ship_radius = std::max(target.getComponent<sp::Physics>()->getSize().x,
+                              target.getComponent<sp::Physics>()->getSize().y) / 2.0f;
 
-        // Get the diff, distance, and angle between the ToT and camera.
-        tot_diff_2D = tot_position_2D - camera_position_2D;
-        tot_diff_3D = tot_position_3D - camera_position;
-        tot_angle = vec2ToAngle(tot_diff_2D);
-        tot_distance_2D = glm::length(tot_diff_2D);
-        tot_distance_3D = glm::length(tot_diff_3D);
-
-        // Point the camera aiming between the target ship and the target of the target.
-        angle_yaw = tot_angle + angleDifference(tot_angle, vec2ToAngle(diff_2D)) / 2.0f;
-
-        // If it's somehow out of view, reset the camera to the player ship.
-        if (std::abs(angleDifference(angle_yaw, tot_angle)) > 40.0f)
-            setTargetTransform(main_transform);
-
-        angle_pitch = glm::degrees(atan(camera_position.z / tot_distance_2D));
-    }
-
-    // If the selected transform moves more than 1U from the camera ...
-    if (distance_2D > max_camera_distance)
-    {
-        // Set a vector 10 degrees to the right of the selected transform's
-        // rotation, then plot a destination on that vector at a distance of
-        // 1U.
-        camera_destination = target_position_2D + vec2FromAngle(target_rotation + 10.0f) * max_camera_distance;
-
-        // Move the camera's X and Y coordinates to this destination.
-        camera_position = {camera_destination.x, camera_destination.y, camera_position.z};
-    }
-    else
-    {
-        // If we are too close to the ship, move away from it.
-        if (distance_3D < min_camera_distance && distance_2D > 0.0f)
-        {
-            camera_position.x -= diff_2D.x / distance_2D * (min_camera_distance - distance_3D);
-            camera_position.y -= diff_2D.y / distance_2D * (min_camera_distance - distance_3D);
-        }
-    }
-
-    // Calculate the angles between the camera and the ship.
-    // Do this after camera repositioning so angles reflect final camera
-    // position.
-    if (!camera_lock_tot_toggle->getValue() || !target_of_target)
-    {
-        // Recalculate diff with potentially updated camera position.
-        diff_2D = target_position_2D - glm::vec2(camera_position.x, camera_position.y);
-        diff_3D = target_position_3D - camera_position;
-        distance_2D = glm::length(diff_2D);
-        distance_3D = glm::length(diff_3D);
-
-        angle_yaw = vec2ToAngle(diff_2D);
-        angle_pitch = glm::degrees(atan(camera_position.z / distance_2D));
-    }
-    // TODO: Park the camera at a photogenic angle at high speeds.
-
-    // Point the camera.
-    camera_yaw = angle_yaw;
-    camera_pitch = angle_pitch;
-}
-
-void CinematicViewScreen::setMouselook(bool value)
-{
-    // Allow toggling of mouse capture and mouselook, but only if camera
-    // lock is disabled or no camera lock target exists.
-    if (value && !camera_lock_toggle->getValue() || !target)
-    {
-        mouselook = true;
-        mouselook_toggle->setValue(true);
-        SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode() ? SDL_FALSE : SDL_TRUE);
-    }
-    else
-    {
-        mouselook = false;
-        mouselook_toggle->setValue(false);
-        SDL_SetRelativeMouseMode(SDL_FALSE);
-    }
-}
-
-bool CinematicViewScreen::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
-{
-    // Handle mouselook if enabled.
-    if (mouselook)
-    {
-        // Get camera control inversion and sensitivity prefs.
-        float mouse_sensitivity = 0.15f;
-        float pref_sens = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
-        if (pref_sens > 0.0f) mouse_sensitivity = pref_sens;
-        else LOG(Warning, "camera_mouse_sensitivity value invalid. pref_sens result: ", pref_sens);
-
-        if (camera_lock_toggle->getValue() && target)
-        {
-            // ORBIT MODE: Mouse rotates camera around target
-            // Mouselook enables SDL relative mouse mode, which reports movement
-            // deltas instead of positions.
-
-            // Mouse X (horizontal) rotates camera left/right around target
-            orbit_yaw += position.x * mouse_sensitivity;
-
-            // Mouse Y (vertical) rotates camera over/under target
-            if (PreferencesManager::get("camera_mouse_inverted", "0") == "1")
-                orbit_pitch += position.y * mouse_sensitivity;
-            else
-                orbit_pitch -= position.y * mouse_sensitivity;
-
-            // Clamp pitch to prevent flipping
-            orbit_pitch = std::clamp(orbit_pitch, -89.0f, 89.0f);
-        }
-        else
-        {
-            // FREE CAMERA: Mouse controls yaw and pitch
-            // Mouselook enables SDL relative mouse mode, which reports movement
-            // deltas instead of positions. This makes the position variable oddly
-            // named for the moment.
-
-            // Yaw (mouse x, horizontal rotation normalized)
-            camera_yaw += position.x * mouse_sensitivity;
-            camera_yaw = std::fmod(camera_yaw, 360.0f);
-            if (camera_yaw < 0.0f) camera_yaw += 360.0f;
-
-            // Pitch (mouse y, vertical rotation)
-            // Clamp pitch to 90 degrees up/down prevent flipping upside down.
-            if (PreferencesManager::get("camera_mouse_inverted", "0") == "1")
-                camera_pitch += position.y * mouse_sensitivity;
-            else
-                camera_pitch -= position.y * mouse_sensitivity;
-
-            camera_pitch = std::clamp(camera_pitch, -89.9f, 89.9f);
-        }
-    }
-
-    return false;
-}
-
-void CinematicViewScreen::setTargetTransform(sp::Transform* transform)
-{
-    // Get the target transform's current position and heading.
-    target_rotation = transform->getRotation();
-    target_position_2D = transform->getPosition();
-
-    // Copy the selected transform's position into a vec3 for camera angle
-    // calculations.
-    target_position_3D = {target_position_2D.x, target_position_2D.y, 0.0f};
-
-    // Copy the camera position into a vec2 for camera angle
-    // calculations.
-    camera_position_2D = {camera_position.x, camera_position.y};
-
-    // Calculate the distance from the camera to the selected transform.
-    diff_2D = target_position_2D - camera_position_2D;
-    diff_3D = target_position_3D - camera_position;
-
-    distance_2D = glm::length(diff_2D);
-    distance_3D = glm::length(diff_3D);
-
-    // Always keep the camera less than 1U from the selected transform.
-    // If it has a physics collider, factor that into the distance.
-    float max_dimension = 0.0f;
-    max_camera_distance = 1000.0f;
-
-    if (auto physics = target.getComponent<sp::Physics>())
-    {
-        max_dimension = std::max(physics->getSize().x, physics->getSize().y);
-        max_camera_distance = 1000.0f + max_dimension + glm::length(physics->getVelocity());
-    }
-
-    min_camera_distance = std::max(300.0f, max_dimension * 2.0f);
+    float size_scale = sqrtf(ship_radius / 200.0f);
+    return base_distance * size_scale;
 }
 
 void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
@@ -869,11 +747,11 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
     // Route to appropriate camera mode
     switch (camera_mode)
     {
+    case CAMERA_MODE_FLYBY:
+        updateFlybyCamera(main_transform, delta, OptionState::None);
+        break;
     case CAMERA_MODE_ORBITAL:
         updateOrbitCamera(main_transform, tot_transform, delta);
-        break;
-    case CAMERA_MODE_FLYBY:
-        updateFlybyCamera(main_transform, delta);
         break;
     case CAMERA_MODE_CHASE:
         updateChaseCamera(main_transform, tot_transform);
@@ -889,13 +767,18 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
 
 void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
+    // Clamp orbit_distance to valid scaled range for current ship size
+    float scaled_min = getScaledCameraDistance(orbit_distance_min);
+    float scaled_max = getScaledCameraDistance(orbit_distance_max);
+    orbit_distance = std::clamp(orbit_distance, scaled_min, scaled_max);
+
     // Auto-rotate mode: smoothly transition camera to random positions
     if (orbit_auto_rotate && cinematic_cycle_timer == 0.0f)
     {
         // Randomize on cycle (cycle timer reset happens in update())
         orbit_target_yaw = random(0.0f, 360.0f);
         orbit_target_pitch = random(-10.0f, 60.0f);
-        orbit_target_distance = random(orbit_distance_min, orbit_distance_max);
+        orbit_target_distance = random(scaled_min, scaled_max);
     }
 
     if (orbit_auto_rotate)
@@ -970,64 +853,92 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
     camera_pitch = angle_pitch;
 }
 
-void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float delta)
+void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float delta, OptionState reposition)
 {
     // Fly-by camera: Stationary camera positioned at various points.
     // Camera pans to follow the moving ship as it passes.
 
-    // Get target's velocity for distance calculation
+    // Get target's velocity for distance calculation.
     glm::vec2 target_velocity{0.0f, 0.0f};
     float target_speed = 0.0f;
-    if (auto physics = target.getComponent<sp::Physics>())
+
+    if (auto target_physics = target.getComponent<sp::Physics>())
     {
-        target_velocity = physics->getVelocity();
+        target_velocity = target_physics->getVelocity();
         target_speed = glm::length(target_velocity);
     }
 
-    // Lambda to reposition camera at a new flyby point
-    auto repositionCamera = [this, target_speed]() {
-        // Random angle offset from target's forward vector (-180 to +180 degrees)
-        float random_angle = target_rotation + (random(0.0f, 360.0f) - 180.0f);
+    // Lambda to reposition camera at a new flyby point.
+    auto repositionCamera = [this, target_velocity]()
+    {
+        LOG(Info, "flyby_camera_pos before: ", flyby_camera_pos.x, ",", flyby_camera_pos.y);
 
-        // Scale distance based on target velocity (min 500, max 3000)
-        // Higher speed = farther camera placement for better cinematic effect
-        float velocity_based_distance = std::clamp(500.0f + target_speed * 2.0f, 500.0f, 3000.0f);
+        // Get ship dimensions
+        float ship_half_width = 250.0f;
+        if (auto physics = target.getComponent<sp::Physics>())
+            ship_half_width = std::max(physics->getSize().x, physics->getSize().y) / 2.0f;
 
-        flyby_camera_pos = target_position_2D + vec2FromAngle(random_angle) * velocity_based_distance;
+        // Calculate lead point: midpoint of where ship will be in 20 seconds
+        glm::vec2 forward = vec2FromAngle(target_rotation);
+        glm::vec2 ship_front = target_position_2D + forward * ship_half_width;
+        glm::vec2 lead_point = ship_front + target_velocity * 10.0f;
+
+        // Position camera perpendicular to forward direction
+        // Scale distance from ship edge based on ship size for consistent visual framing
+        float distance_from_edge = ship_half_width * 2.0f;
+        float perpendicular_angle = target_rotation + 90.0f + random_flyby_angle ? random(-20.0f, 20.0f) : 0.0f;
+        glm::vec2 perpendicular_offset = vec2FromAngle(perpendicular_angle) * (distance_from_edge + ship_half_width);
+
+        flyby_camera_pos = lead_point + perpendicular_offset;
+        LOG(Info, "perpendicular_angle: ", perpendicular_angle, " ship_half_width: ", ship_half_width, " flyby_camera_pos: ", flyby_camera_pos.x, ",", flyby_camera_pos.y);
     };
 
-    // Initial position or explicit reset
-    if (flyby_camera_pos == glm::vec2{0.0f, 0.0f})
+    // Set initial position or explicitly reset.
+    if (flyby_camera_pos == glm::vec2{0.0f, 0.0f} || reposition == OptionState::Force)
     {
+        cinematic_cycle_timer = 0.0f;
+        flyby_fov_modifier = 0.0f;
         repositionCamera();
-        cinematic_cycle_timer = 0.0f;  // Start cooldown
     }
 
-    // Calculate velocity-based distance threshold
-    // Scales with ship's forward velocity, minimum 1U (1000 units), no upper cap
-    glm::vec2 forward_direction = vec2FromAngle(target_rotation);
-    float forward_velocity = glm::dot(target_velocity, forward_direction);
-    float distance_threshold = std::max(1000.0f, std::abs(forward_velocity) * 3.0f);
+    // Get ship size for scaling transition distance
+    float ship_half_width = 250.0f;
+    if (auto physics = target.getComponent<sp::Physics>())
+        ship_half_width = std::max(physics->getSize().x, physics->getSize().y) / 2.0f;
 
-    // Check if ship has moved beyond velocity-scaled threshold
-    // Enforce minimum 5-second cooldown using shared timer
+    // Calculate velocity-based distance threshold.
+    // Camera is positioned at lead point (forward*ship_half_width + velocity*10) + perpendicular offset.
+    // As ship moves forward, calculate the expected distance after desired travel time.
+    float forward_lead = ship_half_width + glm::length(target_velocity) * 10.0f;
+    float perpendicular_dist = ship_half_width * 3.0f;
+
+    // Calculate distance after ship travels the desired amount (20 seconds of forward motion)
+    float forward_velocity = std::abs(glm::dot(target_velocity, vec2FromAngle(target_rotation)));
+    float desired_travel_time = 20.0f;  // Reposition every 20 seconds
+    float forward_travel = forward_velocity * desired_travel_time;
+    float remaining_forward_offset = forward_lead - forward_travel;  // Can be negative if ship passes lead point
+    float distance_after_travel = sqrtf(remaining_forward_offset * remaining_forward_offset + perpendicular_dist * perpendicular_dist);
+
+    // Threshold is the greater of: distance after desired travel, or a minimum based on ship size
+    float distance_threshold = std::max(distance_after_travel, perpendicular_dist + 500.0f);
+
+    // Check if ship has moved beyond velocity-scaled threshold.
+    // Enforce minimum 5-second cooldown using shared timer.
     glm::vec2 camera_to_ship = target_position_2D - flyby_camera_pos;
     float horizontal_dist = glm::length(camera_to_ship);
 
     if (horizontal_dist > distance_threshold && cinematic_cycle_timer >= 5.0f)
     {
         repositionCamera();
-        cinematic_cycle_timer = 0.0f;  // Reset cooldown
+        cinematic_cycle_timer = 0.0f;
         camera_to_ship = target_position_2D - flyby_camera_pos;
         horizontal_dist = glm::length(camera_to_ship);
     }
 
-    // Camera remains stationary (unless repositioned above)
-    camera_position.x = flyby_camera_pos.x;
-    camera_position.y = flyby_camera_pos.y;
-    camera_position.z = flyby_height;
+    // Camera otherwise remains stationary
+    camera_position = {flyby_camera_pos, flyby_height};
 
-    // Pan camera to point at moving ship
+    // Pan camera to point at moving ship.
     if (horizontal_dist > 0.1f)
     {
         camera_yaw = vec2ToAngle(camera_to_ship);
@@ -1042,76 +953,87 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float
 
 void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform)
 {
+    // Clamp chase_distance to valid scaled range for current ship size
+    chase_distance = std::clamp(chase_distance, getScaledCameraDistance(chase_distance_min), getScaledCameraDistance(chase_distance_max));
+
+    // Get ship dimensions for focal point calculation
+    float ship_half_width = 250.0f;
+    if (auto physics = target.getComponent<sp::Physics>())
+        ship_half_width = std::max(physics->getSize().x, physics->getSize().y) / 2.0f;
+
+    // Calculate focal point based on chase direction
+    // Front/Back look at ship center (stable behavior at all distances)
+    // Left/Right look at point offset to the side (for better side view)
+    const float focal_lead_distance = 500.0f;
+    const float focal_point_distance = ship_half_width + focal_lead_distance;
+    glm::vec2 front = vec2FromAngle(target_rotation - 180.0f);
+    glm::vec2 right = vec2FromAngle(target_rotation + 90.0f);
+    glm::vec2 focal_point;
+
+    switch (chase_direction)
+    {
+    case Angle::Front:  // Camera behind ship, looking at ship center
+        focal_point = target_position_2D + front * focal_point_distance;
+        break;
+    case Angle::Back:   // Camera in front, looking at ship center
+        focal_point = target_position_2D - front * focal_point_distance;
+        break;
+    case Angle::Right:  // Camera on left side, looking right
+        focal_point = target_position_2D + right * focal_point_distance;
+        break;
+    case Angle::Left:   // Camera on right side, looking left
+        focal_point = target_position_2D - right * focal_point_distance;
+        break;
+    }
+
     // Chase camera: Follow ship like main screen camera.
+    float camera_angle = target_rotation - (static_cast<int>(chase_direction) * 90.0f);
 
-    float camera_angle = target_rotation + (static_cast<int>(chase_direction) * 90.0f);
+    // Position camera at chase_distance from ship
+    glm::vec2 camera_offset = vec2FromAngle(camera_angle) * chase_distance;
+    camera_position.x = target_position_2D.x + camera_offset.x;
+    camera_position.y = target_position_2D.y + camera_offset.y;
+    camera_position.z = chase_height;
 
+    // Determine what to point the camera at
+    glm::vec2 camera_target;
     if (camera_lock_tot_toggle->getValue() && tot_transform)
     {
-        // With ToT: orbit around ship pointing at target
+        // With ToT: point at target if within range
         glm::vec2 tot_pos = tot_transform->getPosition();
-
-        // Only track ToTs within range
         if (glm::length(tot_pos - target_position_2D) <= tot_max_distance)
-        {
-            // Position camera behind ship at chase_distance
-            glm::vec2 camera_offset = vec2FromAngle(camera_angle) * chase_distance;
-            camera_position.x = target_position_2D.x + camera_offset.x;
-            camera_position.y = target_position_2D.y + camera_offset.y;
-            camera_position.z = chase_height;
-
-            // Point camera at target
-            glm::vec2 camera_to_target = tot_pos - glm::vec2(camera_position.x, camera_position.y);
-            float horizontal_dist = glm::length(camera_to_target);
-
-            if (horizontal_dist > 0.1f)
-            {
-                camera_yaw = vec2ToAngle(camera_to_target);
-                camera_pitch = glm::degrees(atan(chase_height / horizontal_dist));
-            }
-        }
+            camera_target = tot_pos;
         else
-        {
-            // ToT too far, default to normal chase behavior
-            glm::vec2 camera_offset = vec2FromAngle(camera_angle) * chase_distance;
-            camera_position.x = target_position_2D.x + camera_offset.x;
-            camera_position.y = target_position_2D.y + camera_offset.y;
-            camera_position.z = chase_height;
-
-            glm::vec2 camera_to_ship = target_position_2D - glm::vec2(camera_position.x, camera_position.y);
-            float horizontal_dist = glm::length(camera_to_ship);
-
-            if (horizontal_dist > 0.1f)
-            {
-                camera_yaw = vec2ToAngle(camera_to_ship);
-                camera_pitch = glm::degrees(atan(chase_height / horizontal_dist));
-            }
-        }
+            camera_target = focal_point;
     }
     else
     {
-        // Normal chase: position camera at angle behind ship, pointing at ship
-        glm::vec2 camera_offset = vec2FromAngle(camera_angle) * chase_distance;
-        camera_position.x = target_position_2D.x + camera_offset.x;
-        camera_position.y = target_position_2D.y + camera_offset.y;
-        camera_position.z = chase_height;
+        // Normal chase: point at focal point ahead of ship
+        camera_target = focal_point;
+    }
 
-        glm::vec2 camera_to_ship = target_position_2D - glm::vec2(camera_position.x, camera_position.y);
-        float horizontal_dist = glm::length(camera_to_ship);
+    // Point camera at target
+    glm::vec2 camera_to_target = camera_target - glm::vec2(camera_position.x, camera_position.y);
+    float horizontal_dist = glm::length(camera_to_target);
 
-        if (horizontal_dist > 0.1f)
-        {
-            camera_yaw = vec2ToAngle(camera_to_ship);
-            camera_pitch = glm::degrees(atan(chase_height / horizontal_dist));
-        }
+    if (horizontal_dist > 0.1f)
+    {
+        camera_yaw = vec2ToAngle(camera_to_target);
+        camera_pitch = glm::degrees(atan(chase_height / horizontal_dist));
+    }
+    else
+    {
+        // Fallback if camera is at focal point
+        camera_yaw = target_rotation;
+        camera_pitch = 0.0f;
     }
 }
 
 void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform)
 {
-    // Isometric camera: Diagonal view from above at 45-degree elevation
+    // Isometric camera: Diagonal view from above at fixed 45-degree elevation
     const float isometric_elevation = 45.0f;
-    float horizontal_angle = target_rotation + (static_cast<int>(isometric_direction) * 90.0f) + 45.0f;
+    float horizontal_angle = target_rotation + ((static_cast<int>(isometric_direction) * 90.0f) + 45.0f);
 
     // Calculate camera position using spherical coordinates
     float horizontal_distance = isometric_distance * cos(glm::radians(isometric_elevation));
