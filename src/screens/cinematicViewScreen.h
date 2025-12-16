@@ -151,7 +151,10 @@ private:
     const float topdown_zoom_max = 5000.0f;
 
     // Max ToT tracking distance
-    const float tot_max_distance = 10000.0f;
+    glm::vec2 tot_pos;
+    const float tot_max_distance = 6000.0f;
+    const float tot_linger_period = 5.0f;
+    float tot_linger_timer = 0.0f;
 
 public:
     explicit CinematicViewScreen(RenderLayer* render_layer);
@@ -162,7 +165,7 @@ public:
     void updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateOrbitCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateFlybyCamera(sp::Transform* main_transform, float delta, OptionState reposition);
-    void updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform);
+    void updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateIsometricCamera(sp::Transform* main_transform);
     void updateTopdownCamera(sp::Transform* main_transform);
 
