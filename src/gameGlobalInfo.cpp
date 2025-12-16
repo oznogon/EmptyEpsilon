@@ -36,6 +36,7 @@ GameGlobalInfo::GameGlobalInfo()
     allow_main_screen_strategic_map = true;
     gm_control_code = "";
     elapsed_time = 0.0f;
+    elapsed_delta = 0.0f;
 
     intercept_all_comms_to_gm = false;
 
