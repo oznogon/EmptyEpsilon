@@ -16,7 +16,7 @@ class GuiViewport3D : public GuiElement
     glm::mat4 projection_matrix;
     glm::mat4 view_matrix;
 
-    float base_fov; // set by main_screen_camera_fov preference on init
+    float base_fov;
     float fov_modifier = 0.0f;
 
     enum class Uniforms : uint8_t
@@ -78,6 +78,7 @@ public:
 
     float getModifiedFoV() { return base_fov + fov_modifier; }
     float getFoVModifier() { return fov_modifier; }
+    // base_fov set by main_screen_camera_fov preference on Viewport init
     float modifyFoV(float modifier) { fov_modifier = std::clamp(base_fov + modifier, 30.0f, 140.0f) - base_fov; return fov_modifier; }
 private:
     glm::vec3 worldToScreen(sp::RenderTarget& window, glm::vec3 world);
