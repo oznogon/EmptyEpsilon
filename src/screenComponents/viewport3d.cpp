@@ -169,7 +169,16 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
-    projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
+    if (projection_type == ProjectionType::Ortho)
+    {
+        // Calculate orthographic bounds based on camera height and FOV
+        float reference_distance = std::max(100.0f, camera_position.z);
+        float height = reference_distance * glm::tan(glm::radians(camera_fov / 2.0f));
+        float width = height * (rect.size.x / rect.size.y);
+        projection_matrix = glm::ortho(-width, width, -height, height, 1.f, 25000.f);
+    }
+    else
+        projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
     view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.0f), {1.f, 0.f, 0.f}); // -> X across (l-t-r), Y "towards", Z down 
@@ -184,7 +193,11 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glDepthMask(GL_FALSE);
     {
         starbox_shader->bind();
-        glUniform1f(starbox_shader->getUniformLocation("u_scale"), 100.0f);
+        // Scale skybox appropriately for orthographic vs perspective projection
+        float skybox_scale = (projection_type == ProjectionType::Ortho)
+            ? std::max(100.0f, camera_position.z * 2.0f)  // Scale with camera distance for ortho
+            : 100.0f;                                      // Fixed scale for perspective
+        glUniform1f(starbox_shader->getUniformLocation("u_scale"), skybox_scale);
 
         string skybox_name = "skybox/default";
         if (gameGlobalInfo)
@@ -230,8 +243,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         
         // Uniform
         // Upload matrices (only float 4x4 supported in es2)
+        // For skybox, remove translation from view matrix to make it appear infinitely far away
+        glm::mat4 skybox_view = glm::mat4(glm::mat3(view_matrix));
         glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
-        glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::View)], 1, GL_FALSE, glm::value_ptr(view_matrix));
+        glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::View)], 1, GL_FALSE, glm::value_ptr(skybox_view));
         
         // Bind our cube
         {
@@ -280,7 +295,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     ShaderRegistry::updateProjectionView({}, view_matrix);
 
     RenderSystem render_system;
-    render_system.render3D(rect.size.x / rect.size.y, camera_fov);
+    render_system.render3D(rect.size.x / rect.size.y, camera_fov, projection_type == ProjectionType::Ortho);
 
     ParticleEngine::render(projection_matrix, view_matrix);
 
