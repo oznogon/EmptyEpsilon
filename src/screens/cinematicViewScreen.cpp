@@ -542,7 +542,7 @@ void CinematicViewScreen::update(float delta)
 
     // Add and remove entries from the player ship list.
     // TODO: Allow any ship or station to be the camera target.
-    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+    for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
         if (camera_lock_selector->indexByValue(entity.toString()) == -1)
         {
@@ -554,7 +554,8 @@ void CinematicViewScreen::update(float delta)
             camera_lock_selector->addEntry(label, entity.toString());
         }
     }
-    for(int n=0; n<camera_lock_selector->entryCount(); n++) {
+    for (int n = 0; n < camera_lock_selector->entryCount(); n++)
+    {
         if (!sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(n)))
             camera_lock_selector->removeEntry(n);
     }
@@ -589,6 +590,8 @@ void CinematicViewScreen::update(float delta)
         auto target_transform = target.getComponent<sp::Transform>();
         if (!target_transform)
         {
+            camera_mode_selector->disable();
+            camera_mode_option->disable();
             camera_lock_tot_toggle->setValue(false)->disable();
             camera_lock_cycle_toggle->setValue(false)->disable();
             if (camera_controls->isVisible()) mouselook_toggle->enable();
@@ -596,7 +599,9 @@ void CinematicViewScreen::update(float delta)
             return;
         }
 
-        // Enable the target-of-target lock button.
+        // Disable target lock controls.
+        camera_mode_selector->enable();
+        camera_mode_option->enable();
         camera_lock_tot_toggle->enable();
         camera_lock_cycle_toggle->enable();
 
@@ -614,8 +619,9 @@ void CinematicViewScreen::update(float delta)
     }
     else
     {
-        // Disable the target-of-target camera lock button and enable the
-        // mouselook button.
+        // Disable target lock controls and enable the mouselook button.
+        camera_mode_selector->disable();
+        camera_mode_option->disable();
         camera_lock_tot_toggle->setValue(false)->disable();
         camera_lock_cycle_toggle->setValue(false)->disable();
         if (camera_controls->isVisible()) mouselook_toggle->enable();
