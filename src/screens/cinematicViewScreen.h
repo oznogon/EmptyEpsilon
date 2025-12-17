@@ -32,7 +32,8 @@ private:
     GuiElement* camera_controls;
     GuiSelector* camera_lock_selector;
     GuiSelector* camera_mode_selector;
-    GuiToggleButton* camera_mode_option;
+    GuiToggleButton* camera_reset;
+    GuiToggleButton* camera_auto_zoom_toggle;
     GuiToggleButton* camera_lock_toggle;
     GuiToggleButton* camera_lock_tot_toggle;
     GuiToggleButton* camera_lock_cycle_toggle;
@@ -63,7 +64,6 @@ private:
     bool mouselook = false;
     bool invert_mouselook_y = false;
     bool random_flyby_angle = false;
-    bool flyby_auto_zoom = false;
 
     glm::vec2 diff_2D{0.0f, 0.0f};
     glm::vec3 diff_3D{0.0f, 0.0f, 0.0f};
@@ -167,12 +167,19 @@ public:
     void updateOrbitCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateFlybyCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta, OptionState reposition);
     void updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
-    void updateIsometricCamera(sp::Transform* main_transform);
-    void updateTopdownCamera(sp::Transform* main_transform);
+    void updateIsometricCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
+    void updateTopdownCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
 
 private:
     // Helper function to scale camera distances based on ship size (defaults tuned for radius 200)
     float getScaledCameraDistance(float base_distance) const;
+
+    // ToT (Target of Target) helper functions
+    bool updateToTState(sp::Transform* tot_transform, float delta);
+    bool isToTActive(sp::Transform* tot_transform) const;
+    bool isToTInRange(sp::Transform* tot_transform) const;
+    glm::vec2 getMedianPoint() const;
+    float getToTDistance() const;
 
     virtual void update(float delta) override;
     virtual bool onPointerMove(glm::vec2 position, sp::io::Pointer::ID id) override;
