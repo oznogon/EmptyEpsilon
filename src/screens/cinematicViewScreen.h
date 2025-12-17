@@ -76,13 +76,6 @@ private:
     float target_rotation = 0.0f;
 
     sp::ecs::Entity target_of_target;
-    glm::vec2 tot_position_2D{0.0f, 0.0f};
-    glm::vec3 tot_position_3D{0.0f, 0.0f, 0.0f};
-    glm::vec2 tot_diff_2D{0.0f, 0.0f};
-    glm::vec3 tot_diff_3D{0.0f, 0.0f, 0.0f};
-    float tot_angle = 0.0f;
-    float tot_distance_2D = 0.0f;
-    float tot_distance_3D = 0.0f;
 
     // Shared cinematic cycle timer for auto-orbit, flyby, and target cycling
     float cinematic_cycle_timer = 0.0f;
@@ -97,6 +90,11 @@ private:
     float orbit_target_yaw = -90.0f;
     float orbit_target_pitch = 45.0f;
     float orbit_target_distance = 700.0f;
+    // Cached orbital transform values (updated when angles change)
+    float orbit_horizontal_distance_cached = 0.0f;
+    float orbit_vertical_offset_cached = 0.0f;
+    float orbit_last_computed_pitch = -999.0f;  // Invalid value to force initial computation
+    float orbit_last_computed_distance = -999.0f;
 
     // Fly-by camera mode state
     float flyby_height = 200.0f;
@@ -152,7 +150,7 @@ private:
     const float topdown_zoom_max = 5000.0f;
 
     // Max ToT tracking distance
-    glm::vec2 tot_pos;
+    glm::vec2 tot_cached_position_2D;
     const float tot_max_distance = 6000.0f;
     const float tot_linger_period = 5.0f;
     float tot_linger_timer = 0.0f;
@@ -173,6 +171,9 @@ public:
 private:
     // Helper function to scale camera distances based on ship size (defaults tuned for radius 200)
     float getScaledCameraDistance(float base_distance) const;
+
+    // Camera aiming helper function
+    void pointCameraAt(const glm::vec2& aim_point, float fallback_yaw = 0.0f);
 
     // ToT (Target of Target) helper functions
     bool updateToTState(sp::Transform* tot_transform, float delta);

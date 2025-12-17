@@ -157,6 +157,8 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
                         ->setValue(false)
                         ->setText(tr("button", "Rotate camera"));
                     isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 1) % 4);
+                    // Disable mouselook for orthographic modes
+                    setMouselook(false);
                     break;
                 case CAMERA_MODE_TOPDOWN:
                     camera_reset
@@ -164,6 +166,8 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
                         ->setText(tr("button", "Reset camera"));
                     topdown_offset = {0.0f, 0.0f};
                     topdown_zoom = 1000.0f;
+                    // Disable mouselook for orthographic modes
+                    setMouselook(false);
                     break;
             }
         }
@@ -576,7 +580,8 @@ void CinematicViewScreen::update(float delta)
             camera_lock_selector->addEntry(label, entity.toString());
         }
     }
-    for (int n = 0; n < camera_lock_selector->entryCount(); n++)
+    // Remove invalid entries by iterating backwards to avoid index invalidation
+    for (int n = camera_lock_selector->entryCount() - 1; n >= 0; n--)
     {
         if (!sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(n)))
             camera_lock_selector->removeEntry(n);
@@ -657,8 +662,10 @@ void CinematicViewScreen::update(float delta)
 void CinematicViewScreen::setMouselook(bool value)
 {
     // Allow toggling of mouse capture and mouselook, but only if camera
-    // lock is disabled or no camera lock target exists.
-    if (value && (!camera_lock_toggle->getValue() || !target))
+    // lock is disabled or no camera lock target exists, and not in
+    // orthographic camera modes (isometric, top-down).
+    if (value && (!camera_lock_toggle->getValue() || !target) &&
+        camera_mode != CAMERA_MODE_ISOMETRIC && camera_mode != CAMERA_MODE_TOPDOWN)
     {
         mouselook = true;
         mouselook_toggle->setValue(true);
@@ -687,7 +694,7 @@ bool CinematicViewScreen::onPointerMove(glm::vec2 position, sp::io::Pointer::ID 
             orbit_yaw += position.x * camera_sensitivity;
 
             // Mouse Y (vertical) rotates camera over/under target
-            if (PreferencesManager::get("camera_mouse_inverted", "0") == "1")
+            if (invert_mouselook_y)
                 orbit_pitch += position.y * camera_sensitivity;
             else
                 orbit_pitch -= position.y * camera_sensitivity;
@@ -766,9 +773,11 @@ float CinematicViewScreen::getScaledCameraDistance(float base_distance) const
     // Scale camera distances based on ship size (defaults tuned for radius 200)
     // Uses square root scaling to provide more balanced values across ship sizes
     float ship_radius = 200.0f;
-    if (target && target.getComponent<sp::Physics>())
-        ship_radius = std::max(target.getComponent<sp::Physics>()->getSize().x,
-                              target.getComponent<sp::Physics>()->getSize().y) / 2.0f;
+    if (target)
+    {
+        if (auto physics = target.getComponent<sp::Physics>())
+            ship_radius = std::max(physics->getSize().x, physics->getSize().y) / 2.0f;
+    }
 
     float size_scale = sqrtf(ship_radius / 200.0f);
     return base_distance * size_scale;
@@ -859,37 +868,25 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
     }
 
     // Convert orbit angles to 3D position around the target.
-    // Horizontal component (XY plane)
-    float horizontal_distance = orbit_distance * cos(glm::radians(orbit_pitch));
-    glm::vec2 horizontal_offset = vec2FromAngle(orbit_yaw) * horizontal_distance;
+    // Cache trigonometric calculations - only recompute when angles change
+    if (orbit_pitch != orbit_last_computed_pitch || orbit_distance != orbit_last_computed_distance)
+    {
+        orbit_horizontal_distance_cached = orbit_distance * cos(glm::radians(orbit_pitch));
+        orbit_vertical_offset_cached = orbit_distance * sin(glm::radians(orbit_pitch));
+        orbit_last_computed_pitch = orbit_pitch;
+        orbit_last_computed_distance = orbit_distance;
+    }
 
-    // Vertical component (Z axis)
-    float vertical_offset = orbit_distance * sin(glm::radians(orbit_pitch));
+    // Horizontal component (XY plane) - yaw still needs to be computed each frame due to vec2FromAngle
+    glm::vec2 horizontal_offset = vec2FromAngle(orbit_yaw) * orbit_horizontal_distance_cached;
 
     // Update camera 3D position
     camera_position.x = orbit_center.x + horizontal_offset.x;
     camera_position.y = orbit_center.y + horizontal_offset.y;
-    camera_position.z = vertical_offset;
+    camera_position.z = orbit_vertical_offset_cached;
 
-    // Calculate camera orientation to face orbit center
-    glm::vec2 camera_to_center = orbit_center - glm::vec2(camera_position.x, camera_position.y);
-    float horizontal_dist_to_center = glm::length(camera_to_center);
-
-    // Guard against division by zero
-    if (horizontal_dist_to_center > 0.1f)
-    {
-        angle_yaw = vec2ToAngle(camera_to_center);
-        angle_pitch = glm::degrees(atan(camera_position.z / horizontal_dist_to_center));
-    }
-    else
-    {
-        angle_yaw = orbit_yaw;
-        angle_pitch = (camera_position.z > 0) ? 90.0f : -90.0f;
-    }
-
-    // Apply calculated orientation to camera
-    camera_yaw = angle_yaw;
-    camera_pitch = angle_pitch;
+    // Point camera at orbit center
+    pointCameraAt(orbit_center, orbit_yaw);
 }
 
 void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta, OptionState reposition)
@@ -924,7 +921,7 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::T
         // Position camera perpendicular to forward direction
         // Scale distance from ship edge based on ship size for consistent visual framing
         float distance_from_edge = ship_half_width * 2.0f;
-        float perpendicular_angle = target_rotation + 90.0f + random_flyby_angle ? random(-20.0f, 20.0f) : 0.0f;
+        float perpendicular_angle = target_rotation + 90.0f + (random_flyby_angle ? random(-20.0f, 20.0f) : 0.0f);
         glm::vec2 perpendicular_offset = vec2FromAngle(perpendicular_angle) * (distance_from_edge + ship_half_width);
 
         flyby_camera_pos = lead_point + perpendicular_offset;
@@ -1013,11 +1010,12 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::T
             }
         }
 
-        camera_yaw = vec2ToAngle(camera_to_aim);
-        camera_pitch = glm::degrees(atan(flyby_height / aim_horizontal_dist));
+        // Point camera at aim point
+        pointCameraAt(aim_point, target_rotation);
     }
     else
     {
+        // Camera at aim point, point straight down
         camera_yaw = target_rotation;
         camera_pitch = 90.0f;
     }
@@ -1060,14 +1058,14 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
             // Active tracking: only use ToT if in range
             should_use_tot_target = isToTInRange(tot_transform);
         }
-        // else: lingering - always use cached tot_pos
+        // else: lingering - always use cached tot_cached_position_2D
     }
 
     // Set camera target based on ToT state
     if (should_use_tot_target)
     {
-        camera_angle = vec2ToAngle(target_position_2D - tot_pos) + 180.0f;
-        camera_target = tot_pos;
+        camera_angle = vec2ToAngle(target_position_2D - tot_cached_position_2D) + 180.0f;
+        camera_target = tot_cached_position_2D;
     }
     else
     {
@@ -1096,20 +1094,7 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
     camera_position = {target_position_2D + camera_offset, chase_height};
 
     // Point camera at target
-    glm::vec2 camera_to_target = camera_target - glm::vec2(camera_position.x, camera_position.y);
-    float horizontal_dist = glm::length(camera_to_target);
-
-    if (horizontal_dist > 0.1f)
-    {
-        camera_yaw = vec2ToAngle(camera_to_target);
-        camera_pitch = glm::degrees(atan(chase_height / horizontal_dist));
-    }
-    else
-    {
-        // Fallback if camera is at focal point
-        camera_yaw = target_rotation;
-        camera_pitch = 0.0f;
-    }
+    pointCameraAt(camera_target, target_rotation);
 }
 
 void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
@@ -1148,19 +1133,7 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform, s
     camera_position = {camera_aim_point + horizontal_offset, vertical_offset};
 
     // Point at aim point (ship or median)
-    glm::vec2 camera_to_aim = camera_aim_point - glm::vec2(camera_position.x, camera_position.y);
-    float horizontal_dist = glm::length(camera_to_aim);
-
-    if (horizontal_dist > 0.1f)
-    {
-        camera_yaw = vec2ToAngle(camera_to_aim);
-        camera_pitch = glm::degrees(atan(camera_position.z / horizontal_dist));
-    }
-    else
-    {
-        camera_yaw = target_rotation;
-        camera_pitch = 90.0f;
-    }
+    pointCameraAt(camera_aim_point, target_rotation);
 }
 
 void CinematicViewScreen::updateTopdownCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
@@ -1193,7 +1166,13 @@ void CinematicViewScreen::updateTopdownCamera(sp::Transform* main_transform, sp:
     camera_position = {camera_aim_point, topdown_zoom};
 
     // Point camera straight down at aim point
-    glm::vec2 camera_to_aim = camera_aim_point - glm::vec2(camera_position.x, camera_position.y);
+    pointCameraAt(camera_aim_point, target_rotation);
+}
+
+// Camera aiming helper function
+void CinematicViewScreen::pointCameraAt(const glm::vec2& aim_point, float fallback_yaw)
+{
+    glm::vec2 camera_to_aim = aim_point - glm::vec2(camera_position.x, camera_position.y);
     float horizontal_dist = glm::length(camera_to_aim);
 
     if (horizontal_dist > 0.1f)
@@ -1203,7 +1182,7 @@ void CinematicViewScreen::updateTopdownCamera(sp::Transform* main_transform, sp:
     }
     else
     {
-        camera_yaw = target_rotation;
+        camera_yaw = fallback_yaw;
         camera_pitch = 90.0f;
     }
 }
@@ -1221,7 +1200,7 @@ bool CinematicViewScreen::updateToTState(sp::Transform* tot_transform, float del
         if (is_tracking_active_target)
         {
             // Update cached position from active target
-            tot_pos = tot_transform->getPosition();
+            tot_cached_position_2D = tot_transform->getPosition();
             tot_linger_timer = tot_linger_period;
             return true;
         }
@@ -1249,10 +1228,10 @@ bool CinematicViewScreen::isToTInRange(sp::Transform* tot_transform) const
 
 glm::vec2 CinematicViewScreen::getMedianPoint() const
 {
-    return (target_position_2D + tot_pos) * 0.5f;
+    return (target_position_2D + tot_cached_position_2D) * 0.5f;
 }
 
 float CinematicViewScreen::getToTDistance() const
 {
-    return glm::length(tot_pos - target_position_2D);
+    return glm::length(tot_cached_position_2D - target_position_2D);
 }

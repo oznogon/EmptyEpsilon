@@ -82,7 +82,7 @@ public:
         Ortho
     };
 
-    float getFoV() { return base_fov + fov_modifier; }
+    float getFoV() { return std::clamp(base_fov + fov_modifier, 30.0f, 140.0f); }
     float getFoVModifier() { return fov_modifier; }
     float getBaseFoV() { return base_fov; }
     // base_fov set by main_screen_camera_fov preference on Viewport init
