@@ -70,20 +70,19 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         ->setSize(300.0f, 50.0f);
 
     // Mode-context option trigger
-    camera_mode_option = new GuiButton(camera_controls, "CAMERA_MODE_OPTION", tr("button", "Reset camera"),
-        [this]()
+    camera_mode_option = new GuiToggleButton(camera_controls, "CAMERA_MODE_OPTION", tr("button", "Toggle auto-zoom"),
+        [this](bool value)
         {
             switch (camera_mode)
             {
                 case CAMERA_MODE_FLYBY:
-                    // Force fly-by reposition
-                    if (target)
-                        if (auto target_transform = target.getComponent<sp::Transform>()) updateFlybyCamera(target_transform, 0.0f, OptionState::Force);
-
+                    // Toggle auto-zoom
+                    flyby_auto_zoom = value;
+                    if (flyby_auto_zoom) cinematic_cycle_timer = 0.0f;
                     break;
                 case CAMERA_MODE_ORBITAL:
                     // Toggle auto-rotate orbital camera
-                    orbit_auto_rotate = !orbit_auto_rotate;
+                    orbit_auto_rotate = value;
                     if (orbit_auto_rotate)
                     {
                         // Initialize auto-orbit with first random target
@@ -96,20 +95,24 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
                 case CAMERA_MODE_CHASE:
                     // Rotate chase camera
                     chase_direction = static_cast<Angle>((static_cast<int>(chase_direction) + 1) % 4);
+                    camera_mode_option->setValue(false);
                     break;
                 case CAMERA_MODE_ISOMETRIC:
                     // Rotate isometric camera
                     isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 1) % 4);
+                    camera_mode_option->setValue(false);
                     break;
                 case CAMERA_MODE_TOPDOWN:
                     // Reset top-down camera to center on ship
                     topdown_offset = {0.0f, 0.0f};
                     topdown_zoom = 1000.0f;
+                    camera_mode_option->setValue(false);
                     break;
             }
         }
     );
     camera_mode_option
+        ->setValue(false)
         ->setPosition(320.0f, -80.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
@@ -118,30 +121,36 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         [this](int index, string value)
         {
             camera_mode = static_cast<CameraMode>(index);
-            switch(camera_mode)
+            switch (camera_mode)
             {
                 case CAMERA_MODE_FLYBY:
-                    // Force fly-by reposition
-                    camera_mode_option->setText(tr("button", "Reset camera"));
+                    camera_mode_option
+                        ->setValue(flyby_auto_zoom)
+                        ->setText(tr("button", "Toggle auto-zoom"));
                     break;
                 case CAMERA_MODE_ORBITAL:
-                    camera_mode_option->setText(tr("button", "Auto-rotate orbit"));
+                    camera_mode_option
+                        ->setValue(orbit_auto_rotate)
+                        ->setText(tr("button", "Auto-rotate orbit"));
                     break;
                 case CAMERA_MODE_CHASE:
-                    // Rotate chase camera
-                    camera_mode_option->setText(tr("button", "Rotate camera"));
+                    camera_mode_option
+                        ->setValue(false)
+                        ->setText(tr("button", "Rotate camera"));
                     chase_direction = static_cast<Angle>((static_cast<int>(chase_direction) + 1) % 4);
                     break;
                 case CAMERA_MODE_ISOMETRIC:
-                    // Rotate isometric camera
-                    camera_mode_option->setText(tr("button", "Rotate camera"));
+                    camera_mode_option
+                        ->setValue(false)
+                        ->setText(tr("button", "Rotate camera"));
                     isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 1) % 4);
                     break;
                 case CAMERA_MODE_TOPDOWN:
-                    // Reset top-down camera when switching to this mode
                     topdown_offset = {0.0f, 0.0f};
                     topdown_zoom = 1000.0f;
-                    camera_mode_option->setText(tr("button", "Reset camera"));
+                    camera_mode_option
+                        ->setValue(false)
+                        ->setText(tr("button", "Reset camera"));
                     break;
             }
         }
@@ -754,7 +763,7 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
     switch (camera_mode)
     {
     case CAMERA_MODE_FLYBY:
-        updateFlybyCamera(main_transform, delta, OptionState::None);
+        updateFlybyCamera(main_transform, tot_transform, delta, OptionState::None);
         break;
     case CAMERA_MODE_ORBITAL:
         updateOrbitCamera(main_transform, tot_transform, delta);
@@ -858,7 +867,7 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
     camera_pitch = angle_pitch;
 }
 
-void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float delta, OptionState reposition)
+void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta, OptionState reposition)
 {
     // Fly-by camera: Stationary camera positioned at various points.
     // Camera pans to follow the moving ship as it passes.
@@ -933,14 +942,55 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float
         horizontal_dist = glm::length(camera_to_ship);
     }
 
-    // Position, pan, and zoom camera at moving ship.
+    // Position camera at flyby position
     camera_position = {flyby_camera_pos, flyby_height};
-    if (horizontal_dist > 0.1f)
+
+    // Check if ship has a weapons target and ToT lock is enabled
+    glm::vec2 aim_point = target_position_2D;
+    float frame_distance = horizontal_dist;
+
+    if (camera_lock_tot_toggle->getValue() && tot_transform)
     {
-        float fov_goal = ((1 - (std::clamp(horizontal_dist, 500.0f, 2000.0f) / std::clamp(distance_after_travel, 500.0f, 2000.0f))) * 60.0f) - 30.0f;
-        flyby_fov_modifier = viewport->modifyFoV(flyby_fov_modifier + ((fov_goal - viewport->getFoVModifier()) * delta));
-        camera_yaw = vec2ToAngle(camera_to_ship);
-        camera_pitch = glm::degrees(atan(flyby_height / horizontal_dist));
+        glm::vec2 weapons_target_pos = tot_transform->getPosition();
+        // Aim at median point between ship and its target
+        aim_point = (target_position_2D + weapons_target_pos) * 0.5f;
+
+        // For auto-zoom, calculate distance between the two ships
+        if (flyby_auto_zoom)
+        {
+            frame_distance = glm::length(weapons_target_pos - target_position_2D);
+        }
+    }
+
+    // Pan and zoom camera at aim point
+    glm::vec2 camera_to_aim = aim_point - flyby_camera_pos;
+    float aim_horizontal_dist = glm::length(camera_to_aim);
+
+    if (aim_horizontal_dist > 0.1f)
+    {
+        // Auto-zoom: adjust FoV to fit both ships in frame
+        if (flyby_auto_zoom && frame_distance > horizontal_dist)
+        {
+            // Calculate FoV needed to fit both ships from camera position
+            float camera_to_median = aim_horizontal_dist;
+            // Use atan to calculate required half-FOV angle, then convert to full FOV modifier
+            float required_half_fov = glm::degrees(atan((frame_distance * 0.5f) / camera_to_median));
+            float fov_goal = (required_half_fov * 2.0f) - viewport->getBaseFoV();
+            fov_goal = std::clamp(fov_goal, -30.0f, 60.0f);  // Limit FoV adjustment range
+            flyby_fov_modifier = viewport->modifyFoV(flyby_fov_modifier + ((fov_goal - viewport->getFoVModifier()) * delta * 2.0f));
+        }
+        else
+        {
+            if (flyby_auto_zoom)
+            {
+                // Standard zoom based on distance
+                float fov_goal = ((1 - (std::clamp(horizontal_dist, 500.0f, 2000.0f) / std::clamp(distance_after_travel, 500.0f, 2000.0f))) * 60.0f) - 30.0f;
+                flyby_fov_modifier = viewport->modifyFoV(flyby_fov_modifier + ((fov_goal - viewport->getFoVModifier()) * delta));
+            }
+        }
+
+        camera_yaw = vec2ToAngle(camera_to_aim);
+        camera_pitch = glm::degrees(atan(flyby_height / aim_horizontal_dist));
     }
     else
     {

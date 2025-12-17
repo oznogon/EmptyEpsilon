@@ -32,7 +32,7 @@ private:
     GuiElement* camera_controls;
     GuiSelector* camera_lock_selector;
     GuiSelector* camera_mode_selector;
-    GuiButton* camera_mode_option;
+    GuiToggleButton* camera_mode_option;
     GuiToggleButton* camera_lock_toggle;
     GuiToggleButton* camera_lock_tot_toggle;
     GuiToggleButton* camera_lock_cycle_toggle;
@@ -63,6 +63,7 @@ private:
     bool mouselook = false;
     bool invert_mouselook_y = false;
     bool random_flyby_angle = false;
+    bool flyby_auto_zoom = false;
 
     glm::vec2 diff_2D{0.0f, 0.0f};
     glm::vec3 diff_3D{0.0f, 0.0f, 0.0f};
@@ -164,7 +165,7 @@ public:
     void setMouselook(bool value);
     void updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateOrbitCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
-    void updateFlybyCamera(sp::Transform* main_transform, float delta, OptionState reposition);
+    void updateFlybyCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta, OptionState reposition);
     void updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateIsometricCamera(sp::Transform* main_transform);
     void updateTopdownCamera(sp::Transform* main_transform);
