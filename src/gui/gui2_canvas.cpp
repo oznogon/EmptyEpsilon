@@ -55,6 +55,19 @@ void GuiCanvas::onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id)
         click_element->onMouseDrag(position, id);
 }
 
+bool GuiCanvas::onRelativeMove(glm::vec2 raw_delta, sp::io::Pointer::ID id)
+{
+    mouse_delta = raw_delta;
+    return false;
+}
+
+void GuiCanvas::onRelativeDrag(glm::vec2 raw_delta, sp::io::Pointer::ID id)
+{
+    mouse_delta = raw_delta;
+    if (click_element)
+        click_element->onRelativeMouseDrag(raw_delta, id);
+}
+
 void GuiCanvas::onPointerUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     mouse_position = position;

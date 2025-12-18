@@ -28,6 +28,10 @@ void GuiElement::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }
 
+void GuiElement::onRelativeMouseDrag(glm::ivec2 raw_delta, sp::io::Pointer::ID id)
+{
+}
+
 void GuiElement::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }

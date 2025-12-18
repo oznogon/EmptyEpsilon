@@ -11,7 +11,7 @@ void MouseRenderer::render(sp::RenderTarget& renderer)
 {
     if (!visible) return;
 
-    renderer.drawSprite(sprite, position, 32.0);
+    renderer.drawSprite(sprite, position, 32.0f);
 }
 
 bool MouseRenderer::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
@@ -35,4 +35,21 @@ void MouseRenderer::onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id)
         this->position = position;
         visible = true;
     }
+}
+
+void MouseRenderer::onRelativeDrag(glm::vec2 raw_delta, sp::io::Pointer::ID id)
+{
+    if (id == -1) {
+        this->raw_delta = raw_delta;
+        visible = false;
+    }
+}
+
+bool MouseRenderer::onRelativeMove(glm::vec2 raw_delta, sp::io::Pointer::ID id)
+{
+    if (id == -1) {
+        this->raw_delta = raw_delta;
+        visible = false;
+    }
+    return false;
 }

@@ -650,23 +650,26 @@ void CinematicViewScreen::setMouselook(bool value)
 
 bool CinematicViewScreen::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    return false;
+}
+
+bool CinematicViewScreen::onRelativeMove(glm::vec2 raw_delta, sp::io::Pointer::ID id)
+{
     // Handle mouselook if enabled and the camera lock is off.
-    // Mouselook enables SDL relative mouse mode, which reports movement
-    // deltas instead of positions. This makes the position variable oddly
-    // named for the moment.
+    // Mouselook enables SDL relative mouse mode.
     if (mouselook && !camera_lock_toggle->getValue())
     {
         // ORBIT MODE: Mouse rotates camera around target
         if (camera_lock_toggle->getValue() && target)
         {
             // Mouse X (horizontal) rotates camera left/right around target
-            orbit_yaw += position.x * camera_sensitivity;
+            orbit_yaw += raw_delta.x * camera_sensitivity;
 
             // Mouse Y (vertical) rotates camera over/under target
             if (invert_mouselook_y)
-                orbit_pitch += position.y * camera_sensitivity;
+                orbit_pitch += raw_delta.y * camera_sensitivity;
             else
-                orbit_pitch -= position.y * camera_sensitivity;
+                orbit_pitch -= raw_delta.y * camera_sensitivity;
 
             // Clamp pitch to prevent flipping
             orbit_pitch = std::clamp(orbit_pitch, -89.0f, 89.0f);
@@ -675,16 +678,16 @@ bool CinematicViewScreen::onPointerMove(glm::vec2 position, sp::io::Pointer::ID 
         else
         {
             // Yaw (mouse x, horizontal rotation normalized)
-            camera_yaw += position.x * camera_sensitivity;
+            camera_yaw += raw_delta.x * camera_sensitivity;
             camera_yaw = std::fmod(camera_yaw, 360.0f);
             if (camera_yaw < 0.0f) camera_yaw += 360.0f;
 
             // Pitch (mouse y, vertical rotation)
             // Clamp pitch to 90 degrees up/down prevent flipping upside down.
             if (invert_mouselook_y)
-                camera_pitch += position.y * camera_sensitivity;
+                camera_pitch += raw_delta.y * camera_sensitivity;
             else
-                camera_pitch -= position.y * camera_sensitivity;
+                camera_pitch -= raw_delta.y * camera_sensitivity;
             camera_pitch = std::clamp(camera_pitch, -89.9f, 89.9f);
         }
     }
@@ -758,7 +761,7 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
     switch (camera_mode)
     {
     case CAMERA_MODE_FLYBY:
-        updateFlybyCamera(main_transform, tot_transform, delta, OptionState::None);
+        updateFlybyCamera(main_transform, tot_transform, delta);
         break;
     case CAMERA_MODE_ORBITAL:
         updateOrbitCamera(main_transform, tot_transform, delta);
@@ -858,7 +861,7 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
     pointCameraAt(orbit_center, orbit_yaw);
 }
 
-void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta, OptionState reposition)
+void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
     // Fly-by camera: Stationary camera positioned at various points.
     // Camera pans to follow the moving ship as it passes.
@@ -897,7 +900,7 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::T
     };
 
     // Set initial position or explicitly reset.
-    if (flyby_camera_pos == glm::vec2{0.0f, 0.0f} || reposition == OptionState::Force)
+    if (flyby_camera_pos == glm::vec2{0.0f, 0.0f})
     {
         cinematic_cycle_timer = 0.0f;
         flyby_fov_modifier = viewport->modifyFoV(0.0f);
@@ -1070,7 +1073,6 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform, s
 {
     // Isometric camera: Diagonal view from above at fixed 45-degree elevation
     viewport->setProjectionType(GuiViewport3D::ProjectionType::Ortho);
-    const float isometric_elevation = 35.264f;
     float horizontal_angle = target_rotation + ((static_cast<int>(isometric_direction) * 90.0f) + 45.0f);
 
     // Auto-zoom: adjust distance to keep both ships visible when ToT is active
