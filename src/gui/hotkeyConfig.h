@@ -172,6 +172,7 @@ public:
         sp::io::Keybinding tilt_down;
         sp::io::Keybinding tilt_up;
         sp::io::Keybinding move_faster;
+        sp::io::Keybinding move_faster_axis;
         sp::io::Keybinding toggle_mouselook;
     } cinematic;
 

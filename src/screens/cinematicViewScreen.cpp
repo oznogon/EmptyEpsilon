@@ -307,81 +307,74 @@ void CinematicViewScreen::update(float delta)
         switch (camera_mode)
         {
         case CAMERA_MODE_FLYBY:
-            if (keys.cinematic.move_forward.get() || keys.cinematic.tilt_up.get() || mouse_wheel_delta > 0.0f)
+            if (keys.cinematic.move_forward.getValue() || keys.cinematic.tilt_up.getValue()
+                || keys.cinematic.move_backward.getValue() || keys.cinematic.tilt_down.getValue()
+                || mouse_wheel_delta < 0.0f)
             {
                 is_camera_moving = true;
-                flyby_fov_modifier = viewport->modifyFoV(flyby_fov_modifier - delta * camera_zoom_speed);
-            }
-            if (keys.cinematic.move_backward.get() || keys.cinematic.tilt_down.get() || mouse_wheel_delta < 0.0f)
-            {
-                is_camera_moving = true;
-                flyby_fov_modifier = viewport->modifyFoV(flyby_fov_modifier + delta * camera_zoom_speed);
+                flyby_fov_modifier = viewport->modifyFoV(flyby_fov_modifier - (delta * camera_zoom_speed * (
+                    keys.cinematic.move_forward.getValue() + keys.cinematic.tilt_up.getValue()
+                    - keys.cinematic.move_backward.getValue() - keys.cinematic.tilt_down.getValue()
+                    + mouse_wheel_delta
+                )));
             }
 
             // Up/down
-            if (keys.cinematic.move_up.get())
+            if (keys.cinematic.move_up.getValue() || keys.cinematic.move_down.getValue())
             {
                 is_camera_moving = true;
-                flyby_height = std::min(flyby_height_max, flyby_height + camera_translation_speed);
-            }
-            if (keys.cinematic.move_down.get())
-            {
-                is_camera_moving = true;
-                flyby_height = std::max(flyby_height_min, flyby_height - camera_translation_speed);
+                flyby_height = std::clamp(flyby_height + camera_translation_speed * (
+                    keys.cinematic.move_up.getValue() - keys.cinematic.move_down.getValue()
+                ), flyby_height_min, flyby_height_max);
             }
             break;
 
         // Orbital camera fixed on target ship
         case CAMERA_MODE_ORBITAL:
             // Rotate left/right
-            if (keys.cinematic.strafe_left.get() || keys.cinematic.rotate_left.get())
+            if (keys.cinematic.strafe_left.getValue() || keys.cinematic.rotate_left.getValue()
+                || keys.cinematic.strafe_right.getValue() || keys.cinematic.rotate_right.getValue())
             {
                 is_camera_moving = true;
-                orbit_yaw += camera_rotation_speed;
-            }
-            if (keys.cinematic.strafe_right.get() || keys.cinematic.rotate_right.get())
-            {
-                is_camera_moving = true;
-                orbit_yaw -= camera_rotation_speed;
+                orbit_yaw += camera_rotation_speed * (
+                    keys.cinematic.strafe_left.getValue() + keys.cinematic.rotate_left.getValue()
+                    - keys.cinematic.strafe_right.getValue() - keys.cinematic.rotate_right.getValue()
+                );
             }
 
             // Over/under
-            if (keys.cinematic.move_up.get())
+            if (keys.cinematic.move_up.getValue() || keys.cinematic.move_down.getValue())
             {
                 is_camera_moving = true;
-                orbit_pitch = std::min(89.0f, orbit_pitch + camera_rotation_speed);
-            }
-            if (keys.cinematic.move_down.get())
-            {
-                is_camera_moving = true;
-                orbit_pitch = std::max(-89.0f, orbit_pitch - camera_rotation_speed);
+                orbit_pitch = std::clamp(orbit_pitch + camera_rotation_speed * (keys.cinematic.move_up.getValue() - keys.cinematic.move_down.getValue()), -19.9f, 89.9f); // No full range because of culling issues viewing models from beneath
             }
 
             // Closer/farther
-            if (keys.cinematic.move_forward.get() || keys.cinematic.tilt_up.get() || mouse_wheel_delta > 0.0f)
+            if (keys.cinematic.move_forward.getValue() || keys.cinematic.tilt_up.getValue()
+                || keys.cinematic.move_backward.getValue() || keys.cinematic.tilt_down.getValue()
+                || mouse_wheel_delta != 0.0f)
             {
                 is_camera_moving = true;
-                orbit_distance = std::max(getScaledCameraDistance(orbit_distance_min), orbit_distance - camera_translation_speed);
+                orbit_distance = std::clamp(orbit_distance - camera_translation_speed * (
+                    keys.cinematic.move_forward.getValue() + keys.cinematic.tilt_up.getValue()
+                    - keys.cinematic.move_backward.getValue() - keys.cinematic.tilt_down.getValue()
+                    + mouse_wheel_delta
+                ), getScaledCameraDistance(orbit_distance_min), getScaledCameraDistance(orbit_distance_max));
             }
-            if (keys.cinematic.move_backward.get() || keys.cinematic.tilt_down.get() || mouse_wheel_delta < 0.0f)
-            {
-                is_camera_moving = true;
-                orbit_distance = std::min(getScaledCameraDistance(orbit_distance_max), orbit_distance + camera_translation_speed);
-            }
-            break;
 
         // Chase mode, similar to main screen view
         case CAMERA_MODE_CHASE:
             // Closer/farther
-            if (keys.cinematic.move_forward.get() || keys.cinematic.tilt_up.get() || mouse_wheel_delta > 0.0f)
+            if (keys.cinematic.move_forward.getValue() || keys.cinematic.tilt_up.getValue()
+                || keys.cinematic.move_backward.getValue() || keys.cinematic.tilt_down.getValue()
+                || mouse_wheel_delta < 0.0f)
             {
                 is_camera_moving = true;
-                chase_distance = std::max(getScaledCameraDistance(chase_distance_min), chase_distance - camera_translation_speed);
-            }
-            if (keys.cinematic.move_backward.get() || keys.cinematic.tilt_down.get() || mouse_wheel_delta < 0.0f)
-            {
-                is_camera_moving = true;
-                chase_distance = std::min(getScaledCameraDistance(chase_distance_max), chase_distance + camera_translation_speed);
+                chase_distance = std::clamp(chase_distance - camera_translation_speed * (
+                    keys.cinematic.move_forward.getValue() + keys.cinematic.tilt_up.getValue()
+                    - keys.cinematic.move_backward.getValue() - keys.cinematic.tilt_down.getValue()
+                    + mouse_wheel_delta
+                ), getScaledCameraDistance(chase_distance_min), getScaledCameraDistance(chase_distance_max));
             }
 
             // Orbit horizontally at snapped 90-degree increments
@@ -391,37 +384,33 @@ void CinematicViewScreen::update(float delta)
                 chase_direction = static_cast<Angle>((static_cast<int>(chase_direction) + 1) % 4);
 
             // Up/down
-            if (keys.cinematic.move_up.get())
+            if (keys.cinematic.move_up.getValue() || keys.cinematic.move_down.getValue())
             {
                 is_camera_moving = true;
-                chase_height = std::min(chase_height_max, chase_height + camera_translation_speed);
-            }
-            if (keys.cinematic.move_down.get())
-            {
-                is_camera_moving = true;
-                chase_height = std::max(chase_height_min, chase_height - camera_translation_speed);
+                chase_height = std::clamp(chase_height + camera_rotation_speed * (keys.cinematic.move_up.getValue() - keys.cinematic.move_down.getValue()), chase_height_min, chase_height_max);
             }
             break;
 
         // Isometric
         case CAMERA_MODE_ISOMETRIC:
             // Closer/farther
-            if (keys.cinematic.move_forward.get() || keys.cinematic.tilt_up.get() || mouse_wheel_delta > 0.0f)
+            if (keys.cinematic.move_forward.getValue() || keys.cinematic.tilt_up.getValue()
+                || keys.cinematic.move_backward.getValue() || keys.cinematic.tilt_down.getValue()
+                || mouse_wheel_delta < 0.0f)
             {
                 is_camera_moving = true;
-                isometric_distance = std::max(isometric_distance_min, isometric_distance - camera_translation_speed);
-            }
-            if (keys.cinematic.move_backward.get() || keys.cinematic.tilt_down.get() || mouse_wheel_delta < 0.0f)
-            {
-                is_camera_moving = true;
-                isometric_distance = std::min(isometric_distance_max, isometric_distance + camera_translation_speed);
+                isometric_distance = std::clamp(isometric_distance - camera_translation_speed * (
+                    keys.cinematic.move_forward.getValue() + keys.cinematic.tilt_up.getValue()
+                    - keys.cinematic.move_backward.getValue() - keys.cinematic.tilt_down.getValue()
+                    + mouse_wheel_delta
+                ), isometric_distance_min, isometric_distance_max);
             }
 
             // Orbit horizontally at 90-degree increments
             if (keys.cinematic.strafe_left.getDown() || keys.cinematic.rotate_left.getDown())
-                isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 3) % 4);
-            if (keys.cinematic.strafe_right.getDown() || keys.cinematic.rotate_right.getDown())
                 isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 1) % 4);
+            if (keys.cinematic.strafe_right.getDown() || keys.cinematic.rotate_right.getDown())
+                isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 3) % 4);
             break;
 
         case CAMERA_MODE_TOPDOWN:
@@ -449,110 +438,91 @@ void CinematicViewScreen::update(float delta)
             }
             */
 
-            // R/F: Zoom out/in
-            if (keys.cinematic.move_up.get() || mouse_wheel_delta < 0.0f)
+            // W/S or R/F: Zoom out/in
+            if (keys.cinematic.move_forward.getValue() || keys.cinematic.move_up.getValue()
+                || keys.cinematic.move_backward.getValue() || keys.cinematic.move_down.getValue()
+                || mouse_wheel_delta < 0.0f)
             {
                 is_camera_moving = true;
-                topdown_zoom = std::min(topdown_zoom_max, topdown_zoom + camera_translation_speed);
-            }
-            if (keys.cinematic.move_down.get() || mouse_wheel_delta > 0.0f)
-            {
-                is_camera_moving = true;
-                topdown_zoom = std::max(topdown_zoom_min, topdown_zoom - camera_translation_speed);
+                topdown_zoom = std::clamp(topdown_zoom - camera_translation_speed * (
+                    keys.cinematic.move_forward.getValue() + keys.cinematic.move_up.getValue()
+                    - keys.cinematic.move_backward.getValue() - keys.cinematic.move_down.getValue()
+                    + mouse_wheel_delta
+                ), topdown_zoom_min, topdown_zoom_max);
             }
             break;
         }
     }
     else
     {
+        // Detect axis vs. digital input
+        auto calculateAxis = [&](float pos, float neg)
+        {
+            if ((pos > 0.0f && neg > 0.0f) || (pos < 0.0f && neg < 0.0f))
+                return (pos + neg) * 0.5f;
+            else
+                return pos - neg;
+        };
+
         // Free camera
-        if (keys.cinematic.move_forward.get())
+        if (keys.cinematic.move_forward.getValue() || keys.cinematic.move_backward.getValue())
         {
             is_camera_moving = true;
-            glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * camera_translation_speed;
+            glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * camera_translation_speed * calculateAxis(keys.cinematic.move_forward.getValue(), keys.cinematic.move_backward.getValue());
             camera_position.x += xy_vector.x;
             camera_position.y += xy_vector.y;
         }
 
-        if (keys.cinematic.move_backward.get())
+        if (keys.cinematic.strafe_left.getValue() || keys.cinematic.strafe_right.getValue())
         {
             is_camera_moving = true;
-            glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * camera_translation_speed;
-            camera_position.x -= xy_vector.x;
-            camera_position.y -= xy_vector.y;
-        }
-
-        if (keys.cinematic.strafe_left.get())
-        {
-            is_camera_moving = true;
-            glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * camera_translation_speed;
+            glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * camera_translation_speed * calculateAxis(keys.cinematic.strafe_left.getValue(), keys.cinematic.strafe_right.getValue());
             camera_position.x += xy_vector.y;
             camera_position.y -= xy_vector.x;
         }
 
-        if (keys.cinematic.strafe_right.get())
+        if (keys.cinematic.move_up.getValue() || keys.cinematic.move_down.getValue())
         {
             is_camera_moving = true;
-            glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * camera_translation_speed;
-            camera_position.x -= xy_vector.y;
-            camera_position.y += xy_vector.x;
+            camera_position.z += camera_translation_speed * calculateAxis(keys.cinematic.move_up.getValue(), keys.cinematic.move_down.getValue());
         }
 
-        if (keys.cinematic.move_up.get())
+        if (keys.cinematic.rotate_left.getValue() || keys.cinematic.rotate_right.getValue())
         {
             is_camera_moving = true;
-            camera_position.z += camera_translation_speed;
+            camera_yaw -= camera_rotation_speed * calculateAxis(keys.cinematic.rotate_left.getValue(), keys.cinematic.rotate_right.getValue());
         }
 
-        if (keys.cinematic.move_down.get())
+        if (keys.cinematic.tilt_down.getValue() || keys.cinematic.tilt_up.getValue())
         {
             is_camera_moving = true;
-            camera_position.z -= camera_translation_speed;
-        }
-
-        if (keys.cinematic.rotate_left.get())
-        {
-            is_camera_moving = true;
-            camera_yaw -= camera_rotation_speed;
-        }
-
-        if (keys.cinematic.rotate_right.get())
-        {
-            is_camera_moving = true;
-            camera_yaw += camera_rotation_speed;
-        }
-
-        if (keys.cinematic.tilt_up.get())
-        {
-            is_camera_moving = true;
-            camera_pitch = std::max(-89.9f, camera_pitch - camera_rotation_speed);
-        }
-
-        if (keys.cinematic.tilt_down.get())
-        {
-            is_camera_moving = true;
-            camera_pitch = std::min(89.9f, camera_pitch + camera_rotation_speed);
+            camera_pitch = std::clamp(camera_pitch - camera_rotation_speed * calculateAxis(keys.cinematic.tilt_down.getValue(), keys.cinematic.tilt_up.getValue()), -89.9f, 89.9f);
         }
     }
 
-    if (keys.cinematic.move_faster.get())
+    // Boost speed ("run") for camera movement.
+    // Positive values speed up, negative values slow down.
+    const float key_faster = std::max(keys.cinematic.move_faster.get() ? 1.0f : 0.0f, keys.cinematic.move_faster_axis.getValue() + 1.0f);
+    if (key_faster >= 0.0f)
     {
-        if (camera_translation_speed < camera_translation_max)
-            camera_translation_speed = std::min(camera_translation_max, camera_translation_speed + delta * camera_translation_max);
-        if (camera_rotation_speed < camera_rotation_max)
-            camera_rotation_speed = std::min(camera_rotation_max, camera_rotation_speed + delta * camera_rotation_max);
-        if (camera_zoom_speed < camera_zoom_max)
-            camera_zoom_speed = std::min(camera_zoom_max, camera_zoom_speed + delta * camera_zoom_max);
+        // Translate axis to target speed value.
+        auto targetValue = [&](const float min, const float max, const float factor)
+        {
+            return min + ((max - min) * (factor * 0.5f));
+        };
+
+        camera_translation_speed = std::clamp(camera_translation_speed + camera_translation_min * delta, camera_translation_min, targetValue(camera_translation_min, camera_translation_max, key_faster));
+        camera_rotation_speed = std::clamp(camera_rotation_speed + delta * camera_rotation_min, camera_rotation_min, targetValue(camera_rotation_min, camera_rotation_max, key_faster));
+        camera_zoom_speed = std::clamp(camera_zoom_speed + delta * camera_zoom_min, camera_zoom_min, targetValue(camera_zoom_min, camera_zoom_max, key_faster));
     }
+    // If nothing is pressed, decay boost to original value.
     else if (is_camera_moving)
     {
-        if (camera_translation_speed > camera_translation_min)
-            camera_translation_speed = std::max(camera_translation_min, camera_translation_speed - delta * camera_translation_max * 2.0f);
-        if (camera_rotation_speed > camera_rotation_min)
-            camera_rotation_speed = std::max(camera_rotation_min, camera_rotation_speed - delta * camera_rotation_max * 2.0f);
-        if (camera_zoom_speed > camera_zoom_min)
-            camera_zoom_speed = std::max(camera_zoom_min, camera_zoom_speed - delta * camera_zoom_max * 2.0f);
+        camera_translation_speed = std::max(camera_translation_min, camera_translation_speed - delta * camera_translation_max * 2.0f);
+        camera_rotation_speed = std::max(camera_rotation_min, camera_rotation_speed - delta * camera_rotation_max * 2.0f);
+        camera_zoom_speed = std::max(camera_zoom_min, camera_zoom_speed - delta * camera_zoom_max * 2.0f);
     }
+    // Fallback to minimum speed as default.
     else
     {
         camera_translation_speed = camera_translation_min;
@@ -560,8 +530,7 @@ void CinematicViewScreen::update(float delta)
         camera_zoom_speed = camera_zoom_min;
     }
 
-    if (keys.cinematic.toggle_mouselook.getDown())
-        setMouselook(!mouselook);
+    if (keys.cinematic.toggle_mouselook.getDown()) setMouselook(!mouselook);
 
     // Hide the mouse renderer while in mouselook.
     if (mouse_renderer) mouse_renderer->visible = !mouselook;
