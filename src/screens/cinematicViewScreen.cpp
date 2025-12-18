@@ -391,7 +391,7 @@ void CinematicViewScreen::update(float delta)
             }
             break;
 
-        // Isometric
+        // Isometric and axonometric angles with orthographic projection
         case CAMERA_MODE_ISOMETRIC:
             // Closer/farther
             if (keys.cinematic.move_forward.getValue() || keys.cinematic.tilt_up.getValue()
@@ -411,8 +411,23 @@ void CinematicViewScreen::update(float delta)
                 isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 1) % 4);
             if (keys.cinematic.strafe_right.getDown() || keys.cinematic.rotate_right.getDown())
                 isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 3) % 4);
+
+            // Up/down
+            if (keys.cinematic.move_up.getDown())
+            {
+                LOG(Info, "keys.cinematic.move_up.getDown() isometric");
+                is_camera_moving = true;
+                elev = static_cast<AxonometricElevation>((static_cast<int>(elev) + 1) % 6);
+            }
+            if (keys.cinematic.move_down.getDown())
+            {
+                LOG(Info, "keys.cinematic.move_down.getDown() isometric");
+                is_camera_moving = true;
+                elev = static_cast<AxonometricElevation>((static_cast<int>(elev) + 5) % 6);
+            }
             break;
 
+        // Overhead angle with orthographic projection
         case CAMERA_MODE_TOPDOWN:
             // Pan camera if unlocked
             /*
@@ -781,7 +796,7 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
 void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
     // Orbit camera: Position using spherical coordinates.
-    viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
+    viewport->setProjectionType(ProjectionType::Perspective);
 
     // Clamp orbit_distance to valid scaled range for current ship size
     float scaled_min = getScaledCameraDistance(orbit_distance_min);
@@ -865,7 +880,7 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::T
 {
     // Fly-by camera: Stationary camera positioned at various points.
     // Camera pans to follow the moving ship as it passes.
-    viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
+    viewport->setProjectionType(ProjectionType::Perspective);
 
     // Get target's velocity for distance calculation.
     glm::vec2 target_velocity{0.0f, 0.0f};
@@ -996,7 +1011,7 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::T
 void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
     // Chase camera: Follow ship like main screen camera.
-    viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
+    viewport->setProjectionType(ProjectionType::Perspective);
 
     // Clamp chase_distance to a valid scaled range for the current ship size.
     chase_distance = std::clamp(chase_distance, getScaledCameraDistance(chase_distance_min), getScaledCameraDistance(chase_distance_max));
@@ -1071,8 +1086,8 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
 
 void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
-    // Isometric camera: Diagonal view from above at fixed 45-degree elevation
-    viewport->setProjectionType(GuiViewport3D::ProjectionType::Ortho);
+    // Isometric camera: Diagonal view from above at fixed elevation
+    viewport->setProjectionType(ProjectionType::Orthographic);
     float horizontal_angle = target_rotation + ((static_cast<int>(isometric_direction) * 90.0f) + 45.0f);
 
     // Auto-zoom: adjust distance to keep both ships visible when ToT is active
@@ -1085,10 +1100,9 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform, s
 
         if (camera_auto_zoom_toggle->getValue())
         {
-            float ship_to_tot_distance = getToTDistance();
             // For orthographic projection, distance determines visible area
             // Need distance large enough that both ships fit in frame with padding (1.5x)
-            target_distance = std::clamp(ship_to_tot_distance * 0.75f, isometric_distance_min, isometric_distance_max);
+            target_distance = std::clamp(getToTDistance() * 0.75f, isometric_distance_min, isometric_distance_max);
         }
     }
 
@@ -1097,9 +1111,10 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform, s
         isometric_distance += (target_distance - isometric_distance) * delta * 0.5f;
 
     // Calculate camera position using spherical coordinates
-    float horizontal_distance = isometric_distance * cos(glm::radians(isometric_elevation));
+    const float elevation_rad = glm::radians(isometric_elevations[static_cast<int>(elev)]);
+    float horizontal_distance = isometric_distance * cos(elevation_rad);
     glm::vec2 horizontal_offset = vec2FromAngle(horizontal_angle) * horizontal_distance;
-    float vertical_offset = isometric_distance * sin(glm::radians(isometric_elevation));
+    float vertical_offset = isometric_distance * sin(elevation_rad);
 
     camera_position = {camera_aim_point + horizontal_offset, vertical_offset};
 
@@ -1110,7 +1125,7 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform, s
 void CinematicViewScreen::updateTopdownCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
     // Top-down camera: Follow ship from directly above.
-    viewport->setProjectionType(GuiViewport3D::ProjectionType::Ortho);
+    viewport->setProjectionType(ProjectionType::Orthographic);
 
     // Auto-zoom: adjust zoom to keep both ships visible when ToT is active
     float target_zoom = topdown_zoom;
@@ -1158,7 +1173,7 @@ void CinematicViewScreen::pointCameraAt(const glm::vec2& aim_point, float fallba
     }
 }
 
-// ToT (Target of Target) helper functions
+// Target-of-target functions
 
 // Updates ToT state and returns true if we should use ToT data
 bool CinematicViewScreen::updateToTState(sp::Transform* tot_transform, float delta)

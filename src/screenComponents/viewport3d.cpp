@@ -169,7 +169,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
-    if (projection_type == ProjectionType::Ortho)
+    if (projection_type == ProjectionType::Orthographic)
     {
         // Calculate orthographic bounds based on camera height and FOV
         float reference_distance = std::max(100.0f, camera_position.z);
@@ -194,7 +194,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     {
         starbox_shader->bind();
         // Scale skybox appropriately for orthographic vs perspective projection
-        float skybox_scale = (projection_type == ProjectionType::Ortho)
+        float skybox_scale = (projection_type == ProjectionType::Orthographic)
             ? std::max(100.0f, camera_position.z * 2.0f)  // Scale with camera distance for ortho
             : 100.0f;                                      // Fixed scale for perspective
         glUniform1f(starbox_shader->getUniformLocation("u_scale"), skybox_scale);
@@ -295,7 +295,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     ShaderRegistry::updateProjectionView({}, view_matrix);
 
     RenderSystem render_system;
-    render_system.render3D(rect.size.x / rect.size.y, camera_fov, projection_type == ProjectionType::Ortho);
+    render_system.render3D(rect.size.x / rect.size.y, camera_fov, projection_type);
 
     ParticleEngine::render(projection_matrix, view_matrix);
 

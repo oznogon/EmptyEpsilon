@@ -135,7 +135,7 @@ private:
     float chase_distance = 700.0f;
     float chase_height = 200.0f;
 
-    // Isometric camera mode state
+    // Isometric mode camera angle increments, all 45°
     enum class IsometricAngle {
         FrontRight = 0,
         BackRight,
@@ -143,7 +143,19 @@ private:
         FrontLeft,
     } isometric_direction = IsometricAngle::FrontRight;
 
+    // Isometric mode camera elevations
+    enum class AxonometricElevation {
+        ArcTan12 = 0, // 26.565°; arctan(1/2) or arctan(sin(30°))
+        Thirty,       // 30°
+        Isometric,    // 35.264°; arctan(sin(45°))
+        Cabinet,      // 45°
+        ArcTan43,     // 53.13°; arctan(4/3)
+        Complement    // 63.435°; 90° - arctan(1/2)
+    } elev = AxonometricElevation::Isometric;
+    const float isometric_elevations[6] = {26.565f, 30.0f, 35.264f, 45.0f, 53.13f, 63.435f};
+
     float isometric_distance = 1000.0f;
+    IsometricAngle isometric_direction = IsometricAngle::FrontRight;
 
     // Top-down camera mode state
     glm::vec2 topdown_offset{0.0f, 0.0f};
