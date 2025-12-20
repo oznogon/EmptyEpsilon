@@ -14,10 +14,18 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
 
 bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    if (button != sp::io::Pointer::Button::Middle)
-        key->clearKeys();
+    if (button != sp::io::Pointer::Button::Middle) key->clearKeys();
     if (button != sp::io::Pointer::Button::Right)
-        key->startUserRebind(sp::io::Keybinding::Type::Keyboard | sp::io::Keybinding::Type::Joystick | sp::io::Keybinding::Type::Controller | sp::io::Keybinding::Type::Virtual);
+    {
+        key->startUserRebind(
+            sp::io::Keybinding::Type::Keyboard
+            | sp::io::Keybinding::Type::Joystick
+            | sp::io::Keybinding::Type::Controller
+            | sp::io::Keybinding::Type::MouseMovement
+            // | sp::io::Keybinding::Type::MouseWheel // Doesn't behave well due to UI bindings
+            | sp::io::Keybinding::Type::Virtual
+        );
+    }
     return true;
 }
 

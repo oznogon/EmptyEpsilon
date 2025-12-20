@@ -45,7 +45,6 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) {}
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id);
-    virtual void onRelativeMouseDrag(glm::ivec2 raw_delta, sp::io::Pointer::ID id);
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id);
     virtual bool onMouseWheelScroll(glm::vec2 position, float value);
     virtual void onTextInput(const string& text);

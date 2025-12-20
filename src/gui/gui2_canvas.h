@@ -23,8 +23,6 @@ public:
     virtual bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onPointerUp(glm::vec2 position, sp::io::Pointer::ID id) override;
-    virtual bool onRelativeMove(glm::vec2 raw_delta, sp::io::Pointer::ID id) override;
-    virtual void onRelativeDrag(glm::vec2 raw_delta, sp::io::Pointer::ID id) override;
     virtual void onMouseWheelScroll(glm::vec2 position, float value) override;
     virtual void onTextInput(const string& text) override;
     virtual void onTextInput(sp::TextInputEvent e) override;

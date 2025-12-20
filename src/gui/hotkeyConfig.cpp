@@ -13,19 +13,56 @@ Keys::CinematicKeys::CinematicKeys() :
     cycle_camera("CINEMATIC_CYCLE_CAMERA", "C"),
     previous_player_ship("CINEMATIC_PREVIOUS_PLAYER_SHIP", "J"),
     next_player_ship("CINEMATIC_NEXT_PLAYER_SHIP", "K"),
-    move_forward("CINEMATIC_MOVE_FORWARD", {"joy:0:axis:1", "gamecontroller:0:axis:lefty", "W"}),
-    move_backward("CINEMATIC_MOVE_BACKWARD", {"joy:0:axis:1", "gamecontroller:0:axis:lefty", "S"}),
-    strafe_left("CINEMATIC_STRAFE_LEFT", {"joy:0:axis:0", "gamecontroller:0:axis:leftx", "A"}),
-    strafe_right("CINEMATIC_STRAFE_RIGHT", {"joy:0:axis:0", "gamecontroller:0:axis:leftx", "D"}),
+    move_forward("CINEMATIC_MOVE_FORWARD", {
+        "joy:0:axis:1",
+        "gamecontroller:0:axis:lefty",
+        "W"
+    }),
+    move_backward("CINEMATIC_MOVE_BACKWARD", {
+        "joy:0:axis:1",
+        "gamecontroller:0:axis:lefty",
+        "S"
+    }),
+    strafe_left("CINEMATIC_STRAFE_LEFT", {
+        "joy:0:axis:0",
+        "gamecontroller:0:axis:leftx",
+        "A"
+    }),
+    strafe_right("CINEMATIC_STRAFE_RIGHT", {
+        "joy:0:axis:0",
+        "gamecontroller:0:axis:leftx",
+        "D"
+    }),
     move_up("CINEMATIC_MOVE_UP", "R"),
     move_down("CINEMATIC_MOVE_DOWN", "F"),
-    rotate_left("CINEMATIC_TILT_LEFT", "Left"),
-    rotate_right("CINEMATIC_TILT_RIGHT", "Right"),
-    tilt_down("CINEMATIC_TILT_DOWN", "Down"),
-    tilt_up("CINEMATIC_TILT_UP", "Up"),
-    move_faster("CINEMATIC_MOVE_FASTER", "Left Shift"),
-    move_faster_axis("CINEMATIC_MOVE_FASTER_AXIS"),
-    toggle_mouselook("CINEMATIC_TOGGLE_MOUSELOOK", "M")
+    rotate_left("CINEMATIC_ROTATE_LEFT", {
+        "gamecontroller:1:axis:rightx",
+        "mouse:x",
+        "Left"
+    }),
+    rotate_right("CINEMATIC_ROTATE_RIGHT", {
+        "gamecontroller:1:axis:rightx",
+        "mouse:x",
+        "Right"
+    }),
+    tilt_down("CINEMATIC_TILT_DOWN", {
+        "gamecontroller:1:axis:righty",
+        "mouse:y",
+        "Down"
+    }),
+    tilt_up("CINEMATIC_TILT_UP", {
+        "gamecontroller:1:axis:righty",
+        "mouse:y",
+        "Up"
+    }),
+    move_faster("CINEMATIC_MOVE_FASTER", {
+        "gamecontroller:1:axis:triggerright",
+        "Left Shift"
+    }),
+    move_slower("CINEMATIC_MOVE_SLOWER", {
+        "gamecontroller:1:axis:triggerleft",
+        "Right Shift"
+    })
 {}
 
 void Keys::CinematicKeys::init()
@@ -48,8 +85,7 @@ void Keys::CinematicKeys::init()
     tilt_down.setLabel(localized_category, tr("hotkey_Cinematic", "Tilt down"));
     tilt_up.setLabel(localized_category, tr("hotkey_Cinematic", "Tilt up"));
     move_faster.setLabel(localized_category, tr("hotkey_Cinematic", "Move faster"));
-    move_faster_axis.setLabel(localized_category, tr("hotkey_Cinematic", "Camera speed (joystick)"));
-    toggle_mouselook.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle mouselook"));
+    move_slower.setLabel(localized_category, tr("hotkey_Cinematic", "Move slower"));
 }
 
 Keys::TopDownKeys::TopDownKeys() :

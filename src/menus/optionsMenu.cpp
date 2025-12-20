@@ -337,6 +337,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         PreferencesManager::set("camera_mouse_inverted", value ? "1" : "0");
     }))->setValue(PreferencesManager::get("camera_mouse_inverted", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50.0f);
 
+    // TODO: Rename to generic camera sensitivity
     auto initial_mouselook_sensitivity = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
     if (initial_mouselook_sensitivity <= 0.0f)
     {

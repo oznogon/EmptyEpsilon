@@ -18,11 +18,13 @@ class CinematicViewScreen : public GuiCanvas, public Updatable
 {
 public:
     enum CameraMode {
-        CAMERA_MODE_FLYBY = 0,
-        CAMERA_MODE_ORBITAL,
-        CAMERA_MODE_CHASE,
-        CAMERA_MODE_ISOMETRIC,
-        CAMERA_MODE_TOPDOWN
+        Flyby = 0,
+        Orbital,
+        Chase,
+        Isometric,
+        Topdown,
+        Free,
+        Static
     };
 
 private:
@@ -38,10 +40,9 @@ private:
     GuiToggleButton* camera_lock_tot_toggle;
     GuiToggleButton* camera_lock_cycle_toggle;
     GuiButton* callsigns_toggle;
-    GuiToggleButton* mouselook_toggle;
     GuiButton* ui_toggle;
     GuiHelpOverlay* keyboard_help;
-    CameraMode camera_mode = CAMERA_MODE_FLYBY;
+    CameraMode camera_mode = Flyby;
 
     // Camera constraints
     // Movement rates
@@ -79,10 +80,9 @@ private:
     float angle_yaw = -90.0f;
     float angle_pitch = 45.0f;
     P<MouseRenderer> mouse_renderer;
-    bool mouselook = false;
 
     // Initialize pref-defined options
-    bool invert_mouselook_y = false;
+    bool invert_mouselook_y = false; // TODO: Rename
     bool random_flyby_angle = false;
 
     // Initialize measurement caches
@@ -173,13 +173,13 @@ public:
     virtual ~CinematicViewScreen();
 
     void setTargetTransform(sp::Transform* transform);
-    void setMouselook(bool value);
     void updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateOrbitCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateFlybyCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateIsometricCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateTopdownCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
+    void updateFreeCamera(float delta);
 
 private:
     // Scale camera distances based on ship size relative to radius 200
@@ -195,8 +195,10 @@ private:
     glm::vec2 getMedianPoint() const;
     float getToTDistance() const;
 
+    // UI toggle
+    void setUIVisibility(bool is_visible);
+
     virtual void update(float delta) override;
     virtual bool onPointerMove(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onPointerUp(glm::vec2 position, sp::io::Pointer::ID id) override;
-    virtual bool onRelativeMove(glm::vec2 raw_delta, sp::io::Pointer::ID id) override;
 };

@@ -70,7 +70,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     // Bottom: Menu navigation
 
     // Back button to return to the Options menu
-    (new GuiScrollText(info_container, "INFO_LABEL", tr("Left Click: Assign input. Middle Click: Add input. Right Click: Delete inputs.\nPossible inputs: Keyboard keys, joystick buttons, joystick axes.")))->setPosition(10, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT*3);
+    (new GuiScrollText(info_container, "INFO_LABEL", tr("Left click: Assign input. Middle click: Add input. Right click: Delete inputs.\nPossible inputs: Keyboard keys, joystick buttons, joystick axes, mouse axes.")))->setPosition(10, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT*3);
     (new GuiButton(bottom_row, "BACK", tr("button", "Back"), [this, return_to]()
     {
         // Close this menu, stop the music, and return to the main menu.
