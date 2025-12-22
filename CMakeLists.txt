@@ -545,6 +545,7 @@ set(MAIN_SOURCES
     src/httpScriptAccess.h
     src/main.h
     src/math/centerOfMass.h
+    src/math/damp.h
     src/math/triangulate.h
     src/menus/autoConnectScreen.h
     src/menus/hotkeyMenu.h
