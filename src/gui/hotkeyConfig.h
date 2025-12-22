@@ -157,6 +157,7 @@ public:
         void init();
         sp::io::Keybinding toggle_ui;
         sp::io::Keybinding toggle_callsigns;
+        sp::io::Keybinding toggle_manual_controls;
         sp::io::Keybinding lock_camera;
         sp::io::Keybinding cycle_camera;
         sp::io::Keybinding previous_player_ship;

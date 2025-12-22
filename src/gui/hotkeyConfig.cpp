@@ -9,6 +9,7 @@ extern sp::io::Keybinding fullscreen_key;
 Keys::CinematicKeys::CinematicKeys() :
     toggle_ui("CINEMATIC_TOGGLE_UI", "H"),
     toggle_callsigns("CINEMATIC_TOGGLE_CALLSIGNS", "G"),
+    toggle_manual_controls("CINEMATIC_TOGGLE_MANUAL_CONTROLS", "M"),
     lock_camera("CINEMATIC_LOCK_CAMERA", "L"),
     cycle_camera("CINEMATIC_CYCLE_CAMERA", "C"),
     previous_player_ship("CINEMATIC_PREVIOUS_PLAYER_SHIP", "J"),
@@ -70,6 +71,7 @@ void Keys::CinematicKeys::init()
     const auto localized_category = tr("hotkey_menu", "Cinematic View");
     toggle_ui.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle UI"));
     toggle_callsigns.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle callsigns"));
+    toggle_manual_controls.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle manual controls"));
     lock_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera lock"));
     cycle_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera cycle"));
     previous_player_ship.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle previous player ship"));
