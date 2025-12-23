@@ -685,7 +685,7 @@ void CinematicViewScreen::update(float delta)
 
     // Boost speed ("run") for camera movement, -1.0 to 1.0.
     // Positive values speed up, negative values slow down.
-    const float move_speed_factor = calculateAxis(keys.cinematic.move_faster.getValue(), keys.cinematic.move_slower.getValue());
+    const float move_speed_factor = keys.cinematic.move_faster.getValue() - keys.cinematic.move_slower.getValue();
 
     // Translate axis to target speed value.
     // factor ranges from -1 (returns min), to 1 (returns max)
