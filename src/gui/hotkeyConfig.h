@@ -160,6 +160,7 @@ public:
         sp::io::Keybinding toggle_manual_controls;
         sp::io::Keybinding lock_camera;
         sp::io::Keybinding cycle_camera;
+        sp::io::Keybinding cycle_camera_mode;
         sp::io::Keybinding previous_player_ship;
         sp::io::Keybinding next_player_ship;
         sp::io::Keybinding previous_camera_mode;

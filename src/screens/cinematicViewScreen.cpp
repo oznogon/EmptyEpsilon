@@ -20,6 +20,7 @@
 #include "gui/gui2_button.h"
 #include "gui/gui2_element.h"
 #include "gui/gui2_panel.h"
+#include "gui/gui2_progressbar.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/mouseRenderer.h"
@@ -68,7 +69,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     });
     camera_lock_selector
         ->setSelectionIndex(camera_mode_flyby_int)
-        ->setPosition(20.0f, -140.0f, sp::Alignment::BottomLeft)
+        ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
     // Auto-zoom toggle (works across all camera modes)
@@ -79,7 +80,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     );
     camera_auto_zoom_toggle
         ->setValue(false)
-        ->setPosition(320.0f, -80.0f, sp::Alignment::BottomLeft)
+        ->setPosition(320.0f, -70.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
     // Mode-context option trigger
@@ -153,13 +154,13 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     );
     camera_reset
         ->setValue(false)
-        ->setPosition(320.0f, -140.0f, sp::Alignment::BottomLeft)
+        ->setPosition(320.0f, -120.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
     // Camera mode selector
     camera_mode_selector = new GuiSelector(camera_controls, "CAMERA_MODE_SELECTOR", [this](int index, string value) {});
     camera_mode_selector
-        ->setPosition(20.0f, -80.0f, sp::Alignment::BottomLeft)
+        ->setPosition(20.0f, -70.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
     // Toggle whether to lock the camera onto a ship.
@@ -179,20 +180,40 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         ->setPosition(320.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
+    // Progress bar for cinematic cycle
+    cycle_progress = new GuiProgressbar(camera_controls, "CYCLE_PROGRESS", 0.0f, cinematic_cycle_period, cinematic_cycle_period);
+    cycle_progress
+        ->setPosition(920.0f, -20.0f, sp::Alignment::BottomLeft)
+        ->setSize(30.0f, 150.0f)
+        ->hide();
+    (new GuiLabel(cycle_progress, "", tr("button", "Time to next cycle"), 20.0f))
+        ->setVertical()
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center);
+
     camera_lock_cycle_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [this](bool value) {});
     camera_lock_cycle_toggle
         ->setValue(false)
         ->setPosition(620.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
-    // Toggle callsigns.
-    callsigns_toggle = new GuiButton(camera_controls, "CAMERA_CALLSIGNS_TOGGLE", tr("button", "Toggle callsigns"),
-        [this]() {
-            viewport->toggleCallsigns();
-        });
-    callsigns_toggle->setPosition(20, -200, sp::Alignment::BottomLeft)->setSize(300, 50);
+    camera_mode_cycle_toggle = new GuiToggleButton(camera_controls, "CAMERA_MODE_CYCLE_TOGGLE", tr("button", "Cycle camera modes"), [this](bool value) {});
+    camera_mode_cycle_toggle
+        ->setValue(false)
+        ->setPosition(620.0f, -70.0f, sp::Alignment::BottomLeft)
+        ->setSize(300.0f, 50.0f);
 
-    // Toggle UI controls.
+    // Toggle callsign visibility.
+    callsigns_toggle = new GuiToggleButton(camera_controls, "CAMERA_CALLSIGNS_TOGGLE", tr("button", "Show callsigns"),
+        [this](bool value) {
+            viewport->setCallsignVisibility(value);
+        });
+    callsigns_toggle
+        ->setValue(viewport->areCallsignsVisible())
+        ->setPosition(620.0f, -120.0f, sp::Alignment::BottomLeft)
+        ->setSize(300.0f, 50.0f);
+
+    // Toggle UI controls. Once invisible, the toggle_ui keybind or any mouse
+    // click reveals them.
     ui_toggle = new GuiButton(camera_controls, "UI_TOGGLE", tr("button", "Toggle controls"),
         [this]()
         {
@@ -275,31 +296,36 @@ void CinematicViewScreen::update(float delta)
 
     // Toggle callsign visibility.
     if (keys.cinematic.toggle_callsigns.getDown())
+    {
         viewport->toggleCallsigns();
+        callsigns_toggle->setValue(viewport->areCallsignsVisible());
+    }
 
     // Toggle manual camera controls when UI is hidden.
     if (keys.cinematic.toggle_manual_controls.getDown())
-    {
-        if (!camera_controls->isVisible())
-            manual_camera_controls_enabled = !manual_camera_controls_enabled;
-    }
+        setManualCameraControl(!manual_camera_controls_enabled);
 
     // Update keybind hint label.
-    bool ui_visible = camera_controls->isVisible();
-    if (!ui_visible && !manual_camera_controls_enabled && keybind_hint_timer > 0.0f)
+    if (!camera_controls->isVisible() && keybind_hint_timer > 0.0f)
     {
         // Build hint text from keybinds.
         string hint_text = "";
 
-        string manual_key = keys.cinematic.toggle_manual_controls.getHumanReadableKeyName(0);
-        if (!manual_key.empty())
-            hint_text += tr("label", "Press {key} to control camera").format({{"key", manual_key}});
+        const auto& toggle_ui_key = keys.cinematic.toggle_ui;
+        string ui_key = toggle_ui_key.getHumanReadableKeyName(0);
+        for (int n = 1; toggle_ui_key.getKeyType(n) != sp::io::Keybinding::Type::None; n++)
+            ui_key += ", " + toggle_ui_key.getHumanReadableKeyName(n);
+        if (!ui_key.empty() || active_camera_mode == CameraMode::Static)
+            hint_text += tr("ui_hidden", "Click mouse or press {key} to display controls").format({{"key", ui_key}});
 
-        string ui_key = keys.cinematic.toggle_ui.getHumanReadableKeyName(0);
-        if (!ui_key.empty())
+        const auto& toggle_manual_key = keys.cinematic.toggle_manual_controls;
+        string manual_key = toggle_manual_key.getHumanReadableKeyName(0);
+        for (int n = 1; toggle_manual_key.getKeyType(n) != sp::io::Keybinding::Type::None; n++)
+            manual_key += ", " + toggle_manual_key.getHumanReadableKeyName(n);
+        if (!manual_key.empty())
         {
             if (!hint_text.empty()) hint_text += "\n";
-            hint_text += tr("label", "Click mouse or press {key} to display controls").format({{"key", ui_key}});
+            hint_text += tr("ui_hidden", "Press {key} to toggle manual control of camera").format({{"key", manual_key}});
         }
 
         // Show label if we have any text.
@@ -317,7 +343,7 @@ void CinematicViewScreen::update(float delta)
     {
         keybind_hint_label->hide();
 
-        if (ui_visible || manual_camera_controls_enabled)
+        if (camera_controls->isVisible() || manual_camera_controls_enabled)
             keybind_hint_timer = 5.0f;
     }
 
@@ -330,6 +356,9 @@ void CinematicViewScreen::update(float delta)
 
     if (keys.cinematic.cycle_camera.getDown())
         camera_lock_cycle_toggle->setValue(!camera_lock_cycle_toggle->getValue());
+
+    if (keys.cinematic.cycle_camera_mode.getDown())
+        camera_mode_cycle_toggle->setValue(!camera_mode_cycle_toggle->getValue());
 
     if (keys.cinematic.previous_player_ship.getDown())
     {
@@ -450,16 +479,16 @@ void CinematicViewScreen::update(float delta)
         // TODO: Can I use Keybinding::inverted?
         if (invert) value = -value;
 
-        // Apply sensitivity normalized to 0.15 default.
+        // Apply normalized sensitivity to manual camera controls.
         return value * (camera_sensitivity / 0.15f);
     };
 
-    // Determine if ToT tracking is currently active for orbital camera.
-    // This is used to disable manual orbital adjustments when ToT tracking is controlling the camera.
+    // Determine if ToT tracking is active for the orbital camera, and disable
+    // manual orbital adjustments if so.
     bool is_orbital_tot_tracking_active = false;
     if (active_camera_mode == CameraMode::Orbital && camera_lock_toggle->getValue() && camera_lock_tot_toggle->getValue())
     {
-        // Check if target has a weapons target
+        // Check if target has a weapons target.
         auto target_entity_target_component = target.getComponent<Target>();
         if (target_entity_target_component && target_entity_target_component->entity)
         {
@@ -486,8 +515,9 @@ void CinematicViewScreen::update(float delta)
     orbit_tot_tracking_was_active = is_orbital_tot_tracking_active;
 
     // When camera is locked, keybinds control camera position and angle based
-    // on camera mode. Manual control is toggled via hotkey (default: M).
-    // This prevents accidental camera movement from mouse/controller input.
+    // on camera mode. Manual controls are toggled via hotkey.
+    // Hide mouse if camera is manually controlled.
+    mouse_renderer->should_be_visible = !manual_camera_controls_enabled;
     if (manual_camera_controls_enabled)
     {
         switch (active_camera_mode)
@@ -754,8 +784,17 @@ void CinematicViewScreen::update(float delta)
     // If the list of selectable entities is empty, disable the selector.
     camera_lock_selector->setEnable(camera_lock_selector->entryCount() > 0);
 
-    // Update shared cinematic cycle timer
+    // Update shared cinematic cycle timer and progress bar.
     cinematic_cycle_timer += delta;
+    if (camera_lock_cycle_toggle->getValue()
+        || camera_mode_cycle_toggle->getValue()
+        || active_camera_mode == CameraMode::Orbital && camera_reset->getValue())
+    {
+        cycle_progress->setValue(cinematic_cycle_period - cinematic_cycle_timer);
+        cycle_progress->show();
+    }
+    else cycle_progress->hide();
+
     if (cinematic_cycle_timer >= cinematic_cycle_period)
     {
         cinematic_cycle_timer = 0.0f;
@@ -767,6 +806,23 @@ void CinematicViewScreen::update(float delta)
             if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
                 camera_lock_selector->setSelectionIndex(0);
             target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
+        }
+
+        // If camera mode cycling is enabled, switch to a random mode
+        if (camera_mode_cycle_toggle->getValue() && camera_lock_toggle->getValue())
+        {
+            // Select a random new CameraMode from the list of locked-mode
+            // CameraModes.
+            CameraMode new_mode = active_camera_mode;
+            if (locked_modes.size() > 1)
+            {
+                do {
+                    new_mode = locked_modes[irandom(0, locked_modes.size() - 1)];
+                } while (new_mode == active_camera_mode);
+            }
+
+            active_camera_mode = new_mode;
+            camera_mode_selector->setSelectionIndex(camera_mode_selector->indexByValue(std::to_string(static_cast<int>(new_mode))));
         }
     }
 
@@ -795,6 +851,7 @@ void CinematicViewScreen::update(float delta)
             camera_auto_zoom_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
             camera_lock_tot_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
             camera_lock_cycle_toggle->setValue(false)->setEnable(camera_lock_selector->entryCount() > 1);
+            camera_mode_cycle_toggle->setValue(false)->setEnable(false);
             return;
         }
 
@@ -804,6 +861,7 @@ void CinematicViewScreen::update(float delta)
         camera_auto_zoom_toggle->enable();
         camera_lock_tot_toggle->enable();
         camera_lock_cycle_toggle->enable();
+        camera_mode_cycle_toggle->enable();
 
         setTargetTransform(target_transform, delta);
 
@@ -831,6 +889,7 @@ void CinematicViewScreen::update(float delta)
         camera_auto_zoom_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
         camera_lock_tot_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
         camera_lock_cycle_toggle->setValue(false)->setEnable(camera_lock_selector->entryCount() > 1);
+        camera_mode_cycle_toggle->setValue(false)->setEnable(false);
 
         updateCamera(nullptr, nullptr, delta);
     }
@@ -844,6 +903,7 @@ bool CinematicViewScreen::onPointerMove(glm::vec2 position, sp::io::Pointer::ID 
 
 void CinematicViewScreen::onPointerUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    // Restore GUI on any mouse click.
     if (!camera_controls->isVisible()) setUIVisibility(true);
     GuiCanvas::onPointerUp(position, id);
 }
@@ -1491,14 +1551,37 @@ float CinematicViewScreen::calculateOrthographicAutoZoomDistance(float horizonta
 // Set the visibility of UI camera controls.
 void CinematicViewScreen::setUIVisibility(bool is_visible)
 {
-    // Bind relative mouse state to UI visiblity state.
-    SDL_SetRelativeMouseMode(is_visible ? SDL_FALSE : SDL_TRUE);
-    mouse_renderer->should_be_visible = is_visible;
     camera_controls->setVisible(is_visible);
 
-    // Disable manual camera controls when UI becomes visible
-    if (is_visible)
+    // UI visible and manual control are mutually exclusive.
+    if (is_visible && manual_camera_controls_enabled)
+    {
+        // Disable manual control when showing UI.
         manual_camera_controls_enabled = false;
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
+
+    // Bind mouse visibility.
+    mouse_renderer->should_be_visible = !manual_camera_controls_enabled;
+}
+
+void CinematicViewScreen::setManualCameraControl(bool is_manual)
+{
+    if (manual_camera_controls_enabled != is_manual)
+    {
+        manual_camera_controls_enabled = is_manual;
+
+        // UI visible and manual control are mutually exclusive.
+        if (is_manual && camera_controls->isVisible())
+        {
+            // Hide UI when enabling manual control
+            camera_controls->setVisible(false);
+        }
+
+        // Bind relative mouse state and visibility.
+        SDL_SetRelativeMouseMode(is_manual ? SDL_TRUE : SDL_FALSE);
+        mouse_renderer->should_be_visible = !is_manual;
+    }
 }
 
 // Manage the state of camera mode selector options between locked and unlocked
