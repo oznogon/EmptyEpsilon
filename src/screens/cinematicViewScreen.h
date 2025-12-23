@@ -33,6 +33,21 @@ private:
     GuiHelpOverlay* keyboard_help;
     GuiLabel* keybind_hint_label;
 
+#ifdef DEBUG
+    // Debug-only damping function selector
+    enum class DampingType {
+        Exponential = 0,
+        CriticalSpring
+    };
+    GuiSelector* damping_selector;
+    DampingType current_damping_type = DampingType::Exponential;
+
+    // Velocity tracking for critical spring damper
+    glm::vec2 camera_velocity_2d{0.0f, 0.0f};
+    float camera_velocity_angle = 0.0f;
+    float camera_velocity_zoom = 0.0f;
+#endif
+
     // Camera modes and convenience conversions
     enum class CameraMode {
         Flyby = 0,
@@ -218,6 +233,11 @@ private:
 
     // Populate camera mode selector based on lock state
     void updateCameraModeSelector(bool is_locked);
+
+    // Damping dispatch functions (debug-switchable in DEBUG builds, direct calls in release)
+    float applyDamping(float source, float target, float speed, float delta);
+    glm::vec2 applyDamping(const glm::vec2& source, const glm::vec2& target, float speed, float delta);
+    float applyAngleDamping(float source, float target, float speed, float delta);
 
     virtual void update(float delta) override;
     virtual bool onPointerMove(glm::vec2 position, sp::io::Pointer::ID id) override;
