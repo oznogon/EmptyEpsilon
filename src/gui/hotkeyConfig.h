@@ -162,6 +162,11 @@ public:
         sp::io::Keybinding cycle_camera;
         sp::io::Keybinding previous_player_ship;
         sp::io::Keybinding next_player_ship;
+        sp::io::Keybinding previous_camera_mode;
+        sp::io::Keybinding next_camera_mode;
+        sp::io::Keybinding toggle_auto_zoom;
+        sp::io::Keybinding toggle_target_lock;
+        sp::io::Keybinding camera_option;
         sp::io::Keybinding move_forward;
         sp::io::Keybinding move_backward;
         sp::io::Keybinding strafe_left;
