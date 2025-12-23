@@ -101,7 +101,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
                     {
                         // Initialize auto-orbit state machine
                         orbit_is_lingering = false;
-                        orbit_movement_timer = 0.0f;
+                        orbit_linger_timer = 0.0f;
 
                         // Store current positions as start positions
                         orbit_start_yaw = orbit_yaw;
@@ -212,9 +212,8 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
             camera_velocity_zoom = 0.0f;
         }
     });
-    damping_selector->addEntry("Power Damping", "0");
-    damping_selector->addEntry("Exponential Damping", "1");
-    damping_selector->addEntry("Critical Spring Damping", "2");
+    damping_selector->addEntry("Exponential Damping", "0");
+    damping_selector->addEntry("Critical Spring Damping", "1");
     damping_selector
         ->setSelectionIndex(static_cast<int>(DampingType::Exponential))
         ->setPosition(-20, -80, sp::Alignment::BottomRight)
@@ -958,13 +957,13 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
         if (orbit_is_lingering)
         {
             // Linger phase: hold position and count down
-            orbit_movement_timer += delta;
+            orbit_linger_timer += delta;
 
-            if (orbit_movement_timer >= orbit_linger_duration)
+            if (orbit_linger_timer >= orbit_linger_duration)
             {
                 // Linger complete, start new movement
                 orbit_is_lingering = false;
-                orbit_movement_timer = 0.0f;
+                orbit_linger_timer = 0.0f;
 
                 // Store current positions as start positions
                 orbit_start_yaw = orbit_yaw;
@@ -979,23 +978,21 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
         }
         else
         {
-            // Movement phase: ease-in-ease-out interpolation
-            orbit_movement_timer += delta;
-
-            if (orbit_movement_timer >= orbit_movement_duration)
+            // Movement phase: interpolate from start to target
+            // When timer is reset (< small threshold), enter linger instead of snapping back
+            if (cinematic_cycle_timer < 0.1f && orbit_linger_timer == 0.0f)
             {
-                // Movement complete, snap to target and enter linger phase
+                // Timer was just reset, movement complete - enter linger phase at target
                 orbit_yaw = orbit_target_yaw;
                 orbit_pitch = orbit_target_pitch;
                 orbit_distance = orbit_target_distance;
                 orbit_is_lingering = true;
-                orbit_movement_timer = 0.0f;
             }
             else
             {
                 // Calculate smootherstep interpolation factor.
                 // TODO: Replace with SP tween.h smoothstep if merged.
-                float t = orbit_movement_timer / orbit_movement_duration;
+                float t = cinematic_cycle_timer / cinematic_cycle_period;
                 t = std::clamp(t, 0.0f, 1.0f);
                 float eased_t = t * t * t * (t * (t * 6.0f - 15.0f) + 10.0f);
 
