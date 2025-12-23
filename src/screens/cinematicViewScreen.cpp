@@ -246,100 +246,44 @@ void CinematicViewScreen::update(float delta)
         return;
     }
 
-    // Sync selector with active camera mode (bidirectional)
-    // If selector changed (user input), update active mode
-    int selector_index = camera_mode_selector->getSelectionIndex();
-    if (selector_index >= 0)
-    {
-        int selector_mode_value = std::stoi(camera_mode_selector->getEntryValue(selector_index));
-        CameraMode selector_mode = static_cast<CameraMode>(selector_mode_value);
-
-        if (selector_mode != active_camera_mode)
-        {
-            // Selector changed, update active mode
-            active_camera_mode = selector_mode;
-        }
-    }
-
-    // If active mode changed programmatically, update selector
-    // Find the index of the entry with the active mode's value
-    int active_mode_index = camera_mode_selector->indexByValue(std::to_string(static_cast<int>(active_camera_mode)));
-    if (active_mode_index >= 0 && active_mode_index != selector_index)
-    {
-        camera_mode_selector->setSelectionIndex(active_mode_index);
-    }
-
-    switch (active_camera_mode)
-    {
-        case CameraMode::Flyby:
-        case CameraMode::Topdown:
-            camera_reset
-                ->setValue(false)
-                ->setText(tr("button", "Reset camera"));
-            break;
-        case CameraMode::Orbital:
-            camera_reset
-                ->setValue(orbit_auto_rotate)
-                ->setText(tr("button", "Auto-rotate orbit"));
-            break;
-        case CameraMode::Chase:
-        case CameraMode::Isometric:
-            camera_reset
-                ->setValue(false)
-                ->setText(tr("button", "Rotate camera"));
-            break;
-        case CameraMode::Free:
-        case CameraMode::Static:
-            if (!camera_lock_toggle->getValue())
-            {
-                camera_reset
-                    ->setValue(false)
-                    ->setText(tr("button", "Go to target"));
-            }
-            break;
-        default:
-            LOG(Warning, "Invalid case for camera mode in CinematicViewScreen update() mode_selector label assignment: ", static_cast<int>(active_camera_mode));
-            break;
-    }
-
     // Toggle keyboard help.
     if (keys.help.getDown())
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
 
+    // Toggle UI visibility.
     if (keys.cinematic.toggle_ui.getDown())
         setUIVisibility(!camera_controls->isVisible());
 
+    // Toggle callsign visibility.
     if (keys.cinematic.toggle_callsigns.getDown())
         viewport->toggleCallsigns();
 
+    // Toggle manual camera controls when UI is hidden.
     if (keys.cinematic.toggle_manual_controls.getDown())
     {
-        // Only allow toggling manual controls when UI is hidden
         if (!camera_controls->isVisible())
             manual_camera_controls_enabled = !manual_camera_controls_enabled;
     }
 
-    // Update keybind hint label
+    // Update keybind hint label.
     bool ui_visible = camera_controls->isVisible();
     if (!ui_visible && !manual_camera_controls_enabled && keybind_hint_timer > 0.0f)
     {
-        // Build hint text from actual keybinds
+        // Build hint text from keybinds.
         string hint_text = "";
 
-        // Get manual controls key
         string manual_key = keys.cinematic.toggle_manual_controls.getHumanReadableKeyName(0);
         if (!manual_key.empty())
             hint_text += tr("label", "Press {key} to control camera").format({{"key", manual_key}});
 
-        // Get UI toggle key
         string ui_key = keys.cinematic.toggle_ui.getHumanReadableKeyName(0);
         if (!ui_key.empty())
         {
             if (!hint_text.empty()) hint_text += "\n";
-            hint_text += tr("label", "Click or press {key} to display controls").format({{"key", ui_key}});
+            hint_text += tr("label", "Click mouse or press {key} to display controls").format({{"key", ui_key}});
         }
 
-        // Show label if we have any text
+        // Show label if we have any text.
         if (!hint_text.empty())
         {
             keybind_hint_label->setText(hint_text);
@@ -347,22 +291,22 @@ void CinematicViewScreen::update(float delta)
             keybind_hint_timer -= delta;
         }
         else
-        {
             keybind_hint_label->hide();
-        }
     }
+    // Reset timer when UI becomes visible or manual controls are enabled.
     else
     {
         keybind_hint_label->hide();
 
-        // Reset timer when UI becomes visible or manual controls enabled
         if (ui_visible || manual_camera_controls_enabled)
             keybind_hint_timer = 5.0f;
     }
 
+    // Toggle camera lock.
     if (keys.cinematic.lock_camera.getDown())
     {
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
+        updateCameraModeSelector(camera_lock_toggle->getValue());
     }
 
     if (keys.cinematic.cycle_camera.getDown())
@@ -416,10 +360,58 @@ void CinematicViewScreen::update(float delta)
     if (keys.pause.getDown())
         if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
+    // Sync selector with active camera mode.
+    // If selector changed, update active mode.
+    int selector_index = camera_mode_selector->getSelectionIndex();
+    if (selector_index >= 0)
+    {
+        int selector_mode_value = std::stoi(camera_mode_selector->getEntryValue(selector_index));
+        CameraMode selector_mode = static_cast<CameraMode>(selector_mode_value);
+
+        // Selector changed, update active mode.
+        if (selector_mode != active_camera_mode) active_camera_mode = selector_mode;
+    }
+
+    // If active mode changed programmatically, update selector.
+    int active_mode_index = camera_mode_selector->indexByValue(std::to_string(static_cast<int>(active_camera_mode)));
+    if (active_mode_index >= 0 && active_mode_index != selector_index)
+        camera_mode_selector->setSelectionIndex(active_mode_index);
+
+    switch (active_camera_mode)
+    {
+        case CameraMode::Flyby:
+        case CameraMode::Topdown:
+            camera_reset
+                ->setValue(false)
+                ->setText(tr("button", "Reset camera"));
+            break;
+        case CameraMode::Orbital:
+            camera_reset
+                ->setValue(orbit_auto_rotate)
+                ->setText(tr("button", "Auto-rotate orbit"));
+            break;
+        case CameraMode::Chase:
+        case CameraMode::Isometric:
+            camera_reset
+                ->setValue(false)
+                ->setText(tr("button", "Rotate camera"));
+            break;
+        case CameraMode::Free:
+        case CameraMode::Static:
+            camera_reset
+                ->setValue(false)
+                ->setText(tr("button", "Go to target"));
+            break;
+        default:
+            LOG(Warning, "Invalid case for camera mode in CinematicViewScreen update() mode_selector label assignment: ", static_cast<int>(active_camera_mode));
+            break;
+    }
+
+    // Handle camera movement.
     bool is_camera_moving = false;
 
     // Map mouse wheel input to zoom in/out.
-    // TODO: Enable keybind mapping of mouse wheel , which might be problematic
+    // TODO: Enable keybind mapping of mouse wheel, which might be problematic
     // for other player screens.
     float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
 
@@ -671,7 +663,7 @@ void CinematicViewScreen::update(float delta)
             if (keys.cinematic.rotate_left.getValue() || keys.cinematic.rotate_right.getValue())
             {
                 is_camera_moving = true;
-                camera_yaw += camera_rotation_speed * calculateAxis(keys.cinematic.rotate_left.getValue(), keys.cinematic.rotate_right.getValue());
+                camera_yaw -= camera_rotation_speed * calculateAxis(keys.cinematic.rotate_left.getValue(), keys.cinematic.rotate_right.getValue());
             }
 
             if (keys.cinematic.tilt_down.getValue() || keys.cinematic.tilt_up.getValue())
@@ -778,6 +770,7 @@ void CinematicViewScreen::update(float delta)
 
             const bool is_camera_lock_selector_populated = camera_lock_selector->entryCount() > 0;
             camera_lock_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
+            updateCameraModeSelector(false);
             camera_mode_selector->setEnable(is_camera_lock_selector_populated);
             camera_reset->setEnable(is_camera_lock_selector_populated);
             camera_auto_zoom_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
@@ -814,6 +807,7 @@ void CinematicViewScreen::update(float delta)
         camera_mode_selector->setEnable(true);
 
         camera_lock_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
+        updateCameraModeSelector(false);
         camera_reset->setEnable(is_camera_lock_selector_populated);
         camera_auto_zoom_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
         camera_lock_tot_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
