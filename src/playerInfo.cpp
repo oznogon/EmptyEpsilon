@@ -115,12 +115,12 @@ static const uint16_t CMD_TRANSFER_PROBE = 0x0031;
 static const uint16_t CMD_GENERATE_SUPPLY_DROP = 0x0032;
 static const uint16_t CMD_CANCEL_INTERNAL_MOVE = 0x0033;
 
-static const uint16_t CMD_SET_UTILITY_BEAM = 0x002D;
-static const uint16_t CMD_SET_UTILITY_BEAM_MODE = 0x002E;
-static const uint16_t CMD_SET_CUSTOM_UTILITY_BEAM_MODE = 0x002F;
-static const uint16_t CMD_SET_UTILITY_BEAM_BEARING = 0x0030;
-static const uint16_t CMD_SET_UTILITY_BEAM_ARC = 0x0031;
-static const uint16_t CMD_SET_UTILITY_BEAM_RANGE = 0x0032;
+static const uint16_t CMD_SET_UTILITY_BEAM = 0x0034;
+static const uint16_t CMD_SET_UTILITY_BEAM_MODE = 0x0035;
+static const uint16_t CMD_SET_CUSTOM_UTILITY_BEAM_MODE = 0x0036;
+static const uint16_t CMD_SET_UTILITY_BEAM_BEARING = 0x0037;
+static const uint16_t CMD_SET_UTILITY_BEAM_ARC = 0x0038;
+static const uint16_t CMD_SET_UTILITY_BEAM_RANGE = 0x0039;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
