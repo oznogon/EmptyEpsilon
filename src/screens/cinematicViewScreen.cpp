@@ -788,7 +788,7 @@ void CinematicViewScreen::update(float delta)
     cinematic_cycle_timer += delta;
     if (camera_lock_cycle_toggle->getValue()
         || camera_mode_cycle_toggle->getValue()
-        || active_camera_mode == CameraMode::Orbital && camera_reset->getValue())
+        || (active_camera_mode == CameraMode::Orbital && camera_reset->getValue()))
     {
         cycle_progress->setValue(cinematic_cycle_period - cinematic_cycle_timer);
         cycle_progress->show();
