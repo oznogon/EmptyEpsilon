@@ -227,18 +227,19 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     damping_selector = new GuiSelector(camera_controls, "DAMPING_SELECTOR", [this](int index, string value) {
         current_damping_type = static_cast<DampingType>(index);
         // Reset velocity tracking when switching to critical spring damper
-        if (current_damping_type == DampingType::CriticalSpring) {
+        if (current_damping_type == DampingType::CriticalSpring)
+        {
             camera_velocity_2d = {0.0f, 0.0f};
             camera_velocity_angle = 0.0f;
             camera_velocity_zoom = 0.0f;
         }
     });
-    damping_selector->addEntry("Exponential Damping", "0");
-    damping_selector->addEntry("Critical Spring Damping", "1");
+    damping_selector->addEntry("Exponential damp", "0");
+    damping_selector->addEntry("Critical spring damp", "1");
     damping_selector
         ->setSelectionIndex(static_cast<int>(DampingType::Exponential))
-        ->setPosition(-20, -80, sp::Alignment::BottomRight)
-        ->setSize(300, 50);
+        ->setPosition(-20.0f, -70.0f, sp::Alignment::BottomRight)
+        ->setSize(250.0f, 50.0f);
 #endif
 
     // Overlays
