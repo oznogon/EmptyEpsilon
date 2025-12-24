@@ -197,7 +197,6 @@ private:
     const float isometric_elevations[6] = {26.565f, 30.0f, 35.264f, 45.0f, 53.13f, 63.435f};
 
     float isometric_distance = 1000.0f;
-    IsometricAngle isometric_direction = IsometricAngle::FrontRight;
 
     // Top-down camera mode state
     glm::vec2 topdown_offset{0.0f, 0.0f};
