@@ -18,7 +18,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, sp::ecs::Entity& entity)
-: GuiElement(owner, id), entity(entity), zoom_factor(1.0f), height(-1.f), angle(90.f), is_rotating(true)
+: GuiElement(owner, id), entity(entity)
 {
 }
 
