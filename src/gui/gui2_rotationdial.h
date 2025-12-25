@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GUI2_ROTATIONDIAL_H
+#define GUI2_ROTATIONDIAL_H
 
 #include "gui2_element.h"
 
@@ -27,3 +28,5 @@ public:
     float getValue() const;
     GuiRotationDial* setRange(float min_value, float max_value);
 };
+
+#endif//GUI2_ROTATIONDIAL_H

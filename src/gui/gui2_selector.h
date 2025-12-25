@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GUI2_SELECTOR_H
+#define GUI2_SELECTOR_H
 
 #include "gui2_entrylist.h"
 
@@ -33,3 +34,5 @@ public:
     // If less than the GuiSelector's width, this value is ignored.
     GuiSelector* setPopupWidth(float width);
 };
+
+#endif//GUI2_SELECTOR_H
