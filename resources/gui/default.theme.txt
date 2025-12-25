@@ -1,6 +1,18 @@
 [base] {
+    # Font used across EmptyEpsilon.
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
+    
+    # Stronger font used at a few locations without UI widgets.
+    [bold] {
+        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+    }
 
+    # Background color for all screens.
+    [background] {
+        color: #1F252D
+    }
+
+    # GuiButton
     [button] {
         color: #FFFFFF
         size: 30
@@ -59,13 +71,15 @@
             color.disabled: #FFFFFF4D
         }
     }
-
+    
+    # GuiLabel
     [label] {
         [label.back] {
             image: gui/widget/LabelBackground.png
         }
     }
-
+    
+    # GuiTextEntry
     [textentry] {
         size: 30
         [textentry.back] {
@@ -74,6 +88,7 @@
         }
     }
 
+    # Lua console
     [luaconsole] {
         size: 12
         font: gui/fonts/RobotoMono-SemiBold.ttf
@@ -85,17 +100,7 @@
         }
     }
 
-    [luaconsole] {
-        size: 12
-        font: gui/fonts/RobotoMono-SemiBold.ttf
-        [luaconsole.log.back] {
-        }
-        [luaconsole.entry.back] {
-            image: gui/widget/TextEntryBackground.png
-            image.focus: gui/widget/TextEntryBackground.focused.png
-        }
-    }
-
+    # GuiSlider
     [slider] {
         [slider.back] {
             size: 25
@@ -110,7 +115,8 @@
             color.hover: #CCCCCC
         }
     }
-
+    
+    # GuiScrollbar
     [scrollbar] {
         [scrollbar.back] {
             image: gui/widget/ScrollbarBackground.png
@@ -121,12 +127,14 @@
             color.hover: #CCCCCC
         }
     }
-
+    
+    # GuiPanel, used as a base for several other classes.
     [panel] {
         size: 25.0
         image: gui/widget/PanelBackground.png
     }
-
+    
+    # GuiProgressbar
     [progressbar] {
         [progressbar.back] {
             image: gui/widget/ProgressbarBackground.png
@@ -136,7 +144,8 @@
             image: gui/widget/ProgressbarFill.png
         }
     }
-
+    
+    # GuiKeyValueDisplay
     [keyvalue] {
         [keyvalue.back] {
             image: gui/widget/KeyValueBackground.png
@@ -148,6 +157,7 @@
         }
     }
 
+    # GuiListbox
     [listbox] {
         color: #FFFFFF
         [listbox.back] {
@@ -193,10 +203,90 @@
         }
     }
     
+    # GuiTextbox
+    [textbox] {
+        [textbox.back] {
+            color: #000000
+            color.hover: #000000
+            color.focus: #000000
+            color.disabled: #808080
+        }
+        [textbox.front] {
+            color: #FFFFFF
+            color.hover: #FFFFFF
+            color.focus: #FFFFFF
+            color.disabled: #808080
+        }
+    }
+
+    # GuiPowerDamageIndicator overlays
+    [overlay] {
+        [overlay.damaged] {
+            color: #FF0000
+        }
+        [overlay.docked] {
+            color: #40C040
+        }
+        [overlay.jammed] {
+            color: #FF0000
+        }
+        [overlay.hacked] {
+            color: #4040FF
+        }
+        [overlay.no_power] {
+            color: #FF0000
+        }
+        [overlay.low_energy] {
+            color: #FF8000
+        }
+        [overlay.low_power] {
+            color: #FF8000
+        }
+        [overlay.overheating] {
+            color: #FF8000
+        }
+    }
+
+    # ShipsLog
+    [log] {
+        [log.generic] {
+            color: #FFFFFF
+        }
+        [log.send] {
+            color: #C0FFC0
+        }
+        [log.receive_friendly] {
+            color: #C0C0FF
+        }
+        [log.receive_enemy] {
+            color: #FFC0C0
+        }
+        [log.receive_neutral] {
+            color: #C0C0FF
+        }
+    }
+
+    # Waypoints
+    [ship_waypoint] {
+        [ship_waypoint.background] {
+            color: #8080FFD0
+        }
+        [ship_waypoint.text] {
+            color: #000000D0
+        }
+    }
+
+    # Outermost border of circular radars
+    [radar_outline] {
+        color: #FFFFFF
+    }
+
+    # GuiArrow
     [arrow] {
         image: gui/widget/IndicatorArrow.png
     }
 
+    # GuiSelector
     [selector] {
         [selector.back] {
             image: gui/widget/SelectorBackground.png
@@ -208,6 +298,7 @@
         }
     }
 
+    # GuiRotationDial
     [rotationdial] {
         [rotationdial.back] {
             image: gui/widget/dial_background.png
@@ -219,14 +310,10 @@
         }
     }
 
+    # GuiResizableDialog
     [resizabledialog] {
         [resizabledialog.corner] {
             image: gui/widget/ResizeDialogCorner.png
         }
-    }
-
-    # Stronger font used at a few locations without UI widgets.
-    [bold] {
-        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
     }
 }
