@@ -1,7 +1,8 @@
-#ifndef GUI2_ROTATIONDIAL_H
-#define GUI2_ROTATIONDIAL_H
+#pragma once
 
 #include "gui2_element.h"
+
+class GuiThemeStyle;
 
 class GuiRotationDial : public GuiElement
 {
@@ -12,6 +13,8 @@ protected:
     float max_value;
     float value;
     func_t func;
+    const GuiThemeStyle* back_style;
+    const GuiThemeStyle* front_style;
 public:
     GuiRotationDial(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);
 
@@ -24,5 +27,3 @@ public:
     float getValue() const;
     GuiRotationDial* setRange(float min_value, float max_value);
 };
-
-#endif//GUI2_ROTATIONDIAL_H

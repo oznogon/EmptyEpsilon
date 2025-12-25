@@ -1,4 +1,5 @@
 #include "gui2_resizabledialog.h"
+#include "theme.h"
 
 #include "gui2_label.h"
 #include "gui2_togglebutton.h"
@@ -6,6 +7,8 @@
 GuiResizableDialog::GuiResizableDialog(GuiContainer* owner, string id, string title)
 : GuiPanel(owner, id)
 {
+    resize_corner_style = theme->getStyle("resizabledialog.corner");
+
     auto layout = new GuiElement(this, "RESIZABLE_LAYOUT");
     layout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     layout->setAttribute("layout", "vertical");
@@ -87,7 +90,8 @@ void GuiResizableDialog::onDraw(sp::RenderTarget& renderer)
 
     if (minimized) return;
 
-    renderer.drawSprite("gui/widget/ResizeDialogCorner.png", rect.position + rect.size - glm::vec2(resize_icon_size * 0.5f, resize_icon_size * 0.5f), resize_icon_size);
+    const auto& corner = resize_corner_style->get(getState());
+    renderer.drawSprite(corner.texture, rect.position + rect.size - glm::vec2(resize_icon_size * 0.5f, resize_icon_size * 0.5f), resize_icon_size, corner.color);
 }
 
 bool GuiResizableDialog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)

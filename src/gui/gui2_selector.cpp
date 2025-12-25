@@ -1,12 +1,17 @@
 #include "gui2_arrowbutton.h"
-#include "gui2_selector.h"
+#include "soundManager.h"
+#include "theme.h"
+
 #include "gui2_label.h"
 #include "gui2_panel.h"
-#include "soundManager.h"
+#include "gui2_selector.h"
+#include "gui2_togglebutton.h"
 
 GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
 : GuiEntryList(owner, id, func)
 {
+    back_style = theme->getStyle("selector.back");
+    front_style = theme->getStyle("selector.front");
     left = new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this]() {
         if (getSelectionIndex() <= 0)
             setSelectionIndex(entries.size() - 1);
@@ -33,16 +38,15 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     left->setEnable(enabled);
     right->setEnable(enabled);
 
-    glm::u8vec4 color = glm::u8vec4{255, 255, 255, 255};
-    if (entries.size() < 1 || !enabled)
-        color = glm::u8vec4(128, 128, 128, 255);
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
 
-    renderer.drawStretched(rect, "gui/widget/SelectorBackground.png", color);
+    renderer.drawStretched(rect, back.texture, back.color);
 
     // Fit selector text between the arrow buttons.
     sp::Rect text_rect(rect.position.x + rect.size.y * 0.5f, rect.position.y, rect.size.x - rect.size.y, rect.size.y);
     if (selection_index >= 0 && selection_index < static_cast<int>(entries.size()))
-        renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, color, sp::Font::FlagClip);
+        renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color, sp::Font::FlagClip);
 
     if (!focus) popup->hide();
 

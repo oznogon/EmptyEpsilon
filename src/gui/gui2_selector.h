@@ -1,10 +1,11 @@
 #pragma once
 
 #include "gui2_entrylist.h"
-#include "gui2_togglebutton.h"
 
 
 class GuiArrowButton;
+class GuiThemeStyle;
+class GuiToggleButton;
 
 class GuiSelector : public GuiEntryList
 {
@@ -17,6 +18,8 @@ protected:
     GuiArrowButton* right;
     GuiElement* popup;
     std::vector<GuiToggleButton*> popup_buttons;
+    const GuiThemeStyle* back_style;
+    const GuiThemeStyle* front_style;
 public:
     GuiSelector(GuiContainer* owner, string id, func_t func);
 
