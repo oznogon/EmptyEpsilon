@@ -13,6 +13,7 @@ class GuiLabel;
 class GuiProgressbar;
 class GuiSelector;
 class GuiSlider;
+class GuiThemeStyle;
 class GuiToggleButton;
 class MissileTubes;
 class PickupCallback;
@@ -22,6 +23,8 @@ class DockingBayScreen : public GuiOverlay
 private:
     static constexpr float kv_size = 40.0f;
     static constexpr float kv_split = 0.5f;
+    const GuiThemeStyle* overlay_damaged_style;
+    const GuiThemeStyle* overlay_overheating_style;
 
     class SystemRow
     {
