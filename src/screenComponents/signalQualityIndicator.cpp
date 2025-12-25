@@ -15,6 +15,9 @@ GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string
 
 void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
 {
+    const auto& signalquality = signalquality_style->get(getState());
+    renderer.drawStretchedHV(rect, signalquality.size, signalquality.texture);
+
     int point_count = rect.size.x / 4 - 1;
     // Bail if there's not enough space to draw the signal.
     if (point_count < 2) return;
