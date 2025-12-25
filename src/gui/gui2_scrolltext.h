@@ -1,5 +1,4 @@
-#ifndef GUI_SCROLLTEXT_H
-#define GUI_SCROLLTEXT_H
+#pragma once
 
 #include "gui2_element.h"
 
@@ -40,5 +39,3 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
-
-#endif//GUI_SCROLLTEXT_H

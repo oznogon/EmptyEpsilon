@@ -83,6 +83,9 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     ship_waypoint_background_style(theme->getStyle("ship_waypoint.background")),
     ship_waypoint_text_style(theme->getStyle("ship_waypoint.text"))
 {
+    radar_outline_style = theme->getStyle("radar_outline");
+    ship_waypoint_background_style = theme->getStyle("ship_waypoint.background");
+    ship_waypoint_text_style = theme->getStyle("ship_waypoint.text");
 }
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
@@ -119,6 +122,9 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     ship_waypoint_background_style(theme->getStyle("ship_waypoint.background")),
     ship_waypoint_text_style(theme->getStyle("ship_waypoint.text"))
 {
+    radar_outline_style = theme->getStyle("radar_outline");
+    ship_waypoint_background_style = theme->getStyle("ship_waypoint.background");
+    ship_waypoint_text_style = theme->getStyle("ship_waypoint.text");
 }
 
 void GuiRadarView::onDraw(sp::RenderTarget& renderer)

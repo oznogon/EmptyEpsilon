@@ -249,7 +249,7 @@
         }
     }
 
-    # GuiPanel
+    # GuiPanel, used as a base for several other classes.
     [panel] {
         size: 25.0
         image: gui/widget/PanelBackground.png
