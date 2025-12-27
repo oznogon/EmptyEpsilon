@@ -11,6 +11,7 @@ protected:
     GuiScrollbar* scrollbar;
     string text;
     float text_size = 30.0f;
+    glm::u8vec4 text_color = {255, 255, 255, 255};
     bool auto_scroll_down = false;
     int mouse_scroll_steps = 25;
     const GuiThemeStyle* text_theme;

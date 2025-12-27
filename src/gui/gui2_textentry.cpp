@@ -4,11 +4,13 @@
 
 
 GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
-: GuiElement(owner, id), text(text), text_size(30), func(nullptr)
+: GuiElement(owner, id), text(text), func(nullptr)
 {
     blink_timer.repeat(blink_rate);
     front_style = theme->getStyle("textentry.front");
     back_style = theme->getStyle("textentry.back");
+    text_size = front_style->get(GuiElement::State::Normal).size;
+    text_color = front_style->get(GuiElement::State::Normal).color;
 }
 
 GuiTextEntry::~GuiTextEntry()
@@ -28,12 +30,12 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
         typing_indicator = !typing_indicator;
 
     std::string shown_text = text;
-    if (hide_password) {
+    if (hide_password)
         shown_text = std::string(text.size(), '*');
-    }
     if (shown_text.empty()) shown_text = " ";
+
     sp::Rect text_rect(rect.position.x + 16, rect.position.y, rect.size.x - 32, rect.size.y);
-    auto prepared = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip);
+    auto prepared = front.font->prepare(shown_text, 32, text_size, text_color, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip);
     for(auto& d : prepared.data)
         d.position += render_offset;
     auto linespacing = front.font->getLineSpacing(32) * text_size / float(32);
@@ -76,7 +78,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
                     renderer.fillRect(
                         sp::Rect(rect.position + glm::vec2{start_x + 16, start_y},
                         glm::vec2{end_x - start_x, end_y - start_y}),
-                        {255, 255, 255, 128});
+                        {text_color.r, text_color.g, text_color.b, text_color.a / 2});
                 }
                 if (d.string_offset == selection_max)
                     start_x = -1.0f;
@@ -97,7 +99,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
                 renderer.fillRect(
                     sp::Rect(rect.position + glm::vec2{d.position.x + 16 - text_size * 0.05f, start_y},
                     glm::vec2{text_size * 0.1f, end_y - start_y}),
-                    {255, 255, 255, 255});
+                    text_color);
             }
         }
     }
@@ -453,7 +455,7 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
     if (hide_password) {
         shown_text = std::string(text.size(), '*');
     }
-    auto pfs = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
+    auto pfs = front.font->prepare(shown_text, 32, text_size, text_color, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
     unsigned int n;
     for(n=0; n<pfs.data.size(); n++)
     {
