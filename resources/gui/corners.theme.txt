@@ -223,7 +223,7 @@
         [textentry.front] {
             # Default; elements might override this size.
             size: 30.0f
-            # font: gui/themes/corners/fonts/IBMPlexSansCondensed-Regular.ttf
+            # font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
             color: #FFFFFF
         }
     }
@@ -316,7 +316,7 @@
     # GuiTextbox, GuiScrollText, GuiAdvancedScrollText
     [textbox] {
         [textbox.front] {
-            font: gui/themes/corners/fonts/IBMPlexSansCondensed-Regular.ttf
+            font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
             # Defaults; elements can override
             size: 30.0
             color: #FFFFFF
@@ -426,7 +426,7 @@
             color.disabled: #808080
         }
         [selector.front] {
-            # font: gui/themes/corners/fonts/IBMPlexSansCondensed-Regular.ttf
+            # font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
             color: #FFFFFF
             color.disabled: #808080
         }
