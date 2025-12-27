@@ -325,7 +325,7 @@
     # Icons are all automatically suffixed with .png and should have transparent backgrounds.
     [overlay] {
         image: gui/themes/corners/widget/DamagePowerOverlay.normal.png
-        font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
+        # font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
         size: 30.0
 
         # Icons are all automatically suffixed with .png and should have transparent backgrounds.
@@ -449,7 +449,7 @@
     [scrollingbanner] {
         image: gui/themes/corners/widget/LabelBackground.png
         size: 25.0
-        font: gui/fonts/BebasNeue Bold.otf
+        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
         color: #FFFFFF
     }
 
