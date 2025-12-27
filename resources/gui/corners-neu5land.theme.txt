@@ -212,10 +212,18 @@
 
     # GuiTextEntry
     [textentry] {
+        # Background texture size.
         size: 30.0
         [textentry.back] {
+            color: #FFFFFF
             image: gui/widget/TextEntryBackground.png
             image.focus: gui/widget/TextEntryBackground.focused.png
+        }
+        [textentry.front] {
+            # Default; elements might override this size.
+            size: 30.0f
+            # font: gui/themes/corners/fonts/Neu5land-Norm.ttf
+            color: #FFFFFF
         }
     }
 
@@ -304,15 +312,12 @@
         }
     }
 
-    # GuiTextbox
+    # GuiTextbox, GuiScrollText, GuiAdvancedScrollText
     [textbox] {
-        [textbox.back] {
-            color: #000000
-            color.hover: #000000
-            color.focus: #000000
-            color.disabled: #808080
-        }
         [textbox.front] {
+            font: gui/themes/corners/fonts/Neu5land-Norm.ttf
+            # Defaults; elements can override
+            size: 30.0
             color: #FFFFFF
             color.hover: #FFFFFF
             color.focus: #FFFFFF
@@ -416,9 +421,11 @@
             image: gui/themes/corners/widget/SelectorBackground.normal.png
             image.hover: gui/themes/corners/widget/SelectorBackground.normal.hover.png
             image.disabled: gui/themes/corners/widget/SelectorBackground.normal.disabled.png
+            color: #FFFFFF
             color.disabled: #808080
         }
         [selector.front] {
+            # font: gui/themes/corners/fonts/Neu5land-Norm.ttf
             color: #FFFFFF
             color.disabled: #808080
         }
