@@ -1,5 +1,4 @@
-#ifndef GUI_SCROLLTEXT_H
-#define GUI_SCROLLTEXT_H
+#pragma once
 
 #include "gui2_element.h"
 
@@ -12,6 +11,7 @@ protected:
     GuiScrollbar* scrollbar;
     string text;
     float text_size = 30.0f;
+    glm::u8vec4 text_color = {255, 255, 255, 255};
     bool auto_scroll_down = false;
     int mouse_scroll_steps = 25;
     const GuiThemeStyle* text_theme;
@@ -40,5 +40,3 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
-
-#endif//GUI_SCROLLTEXT_H

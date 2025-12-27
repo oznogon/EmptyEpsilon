@@ -16,7 +16,8 @@ protected:
     int selection_start = 0;
     int selection_end = 0;
 
-    float text_size;
+    float text_size = 30.0f;
+    glm::u8vec4 text_color = {255, 255, 255, 255};
     bool multiline = false;
     bool select_on_focus = false;
     bool readonly = false;
