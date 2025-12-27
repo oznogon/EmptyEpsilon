@@ -265,6 +265,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             global_style.color = toColor(input["color"]);
         else
             global_style.color = {255, 255, 255, 255};
+
         if (input.find("font") != input.end())
         {
             string font_path = input["font"];
@@ -337,6 +338,10 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             }
             if (input.find("size." + postfix) != input.end())
                 style.states[n].size = input["size." + postfix].toFloat();
+            /* Pending SP support
+            if (input.find("offset." + postfix) != input.end())
+                style.states[n].offset = input["offset." + postfix].toFloat();
+            */
             if (input.find("sound." + postfix) != input.end())
                 style.states[n].sound = input["sound." + postfix];
         }

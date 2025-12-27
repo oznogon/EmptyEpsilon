@@ -448,7 +448,7 @@
     [scrollingbanner] {
         image: gui/themes/corners/widget/LabelBackground.png
         size: 25.0
-        font: gui/fonts/BebasNeue Bold.otf
+        font: gui/themes/corners/fonts/teko/Teko-SemiBold.ttf
         color: #FFFFFF
     }
 
