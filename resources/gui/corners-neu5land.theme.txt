@@ -103,7 +103,35 @@
             font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
             size: 30.0
             # Main grid line alpha; subsector line alpha is half of this.
-            color: #404080FF
+            color: #404040FF
+        }
+    }
+
+    [missile_data] {
+        [missile_data.homing] {
+            color: #FFC800
+            image: radar/missile.png
+            sound: sfx/rlaunch.wav
+        }
+        [missile_data.nuke] {
+            color: #FF6420
+            image: radar/missile.png
+            sound: sfx/rlaunch.wav
+        }
+        [missile_data.mine] {
+            color: #FFFFFF
+            image: radar/mine.png
+            sound: sfx/missile_launch.wav
+        }
+        [missile_data.emp] {
+            color: #6420FF
+            image: radar/missile.png
+            sound: sfx/rlaunch.wav
+        }
+        [missile_data.hvli] {
+            color: #C8C8C8
+            image: radar/missile.png
+            sound: sfx/hvli_fire.wav
         }
     }
 

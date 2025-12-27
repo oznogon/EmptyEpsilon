@@ -107,8 +107,7 @@
         }
     }
 
-    [missile_data]
-    {
+    [missile_data] {
         [missile_data.homing] {
             color: #FFC800
             image: radar/missile.png
