@@ -333,7 +333,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 string state_font_path = input["font." + postfix];
                 style.states[n].font = cacheFont(state_font_path);
                 if (!style.states[n].font)
-                    LOG(Debug, "State-specific font '", state_font_path, "' failed to load for element ", element_name, " state ", postfix, " in theme ", name);
+                    LOG(Warning, "State-specific font '", state_font_path, "' failed to load for element ", element_name, " state ", postfix, " in theme ", name);
             }
             if (input.find("size." + postfix) != input.end())
                 style.states[n].size = input["size." + postfix].toFloat();
