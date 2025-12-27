@@ -77,9 +77,34 @@
         }
     }
 
-    # Outermost border of circular radars
-    [radar_outline] {
-        color: #FFFFFF
+    [radar] {
+        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+
+        # Outermost border of circular radars
+        [radar.outline] {
+            color: #FFFFFF
+        }
+        [radar.range_indicators] {
+            # Font and font size.
+            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+            size: 20.0
+            # Circle alpha; text alpha is half of this.
+            color: #FFFFFF20
+        }
+        [radar.target_projections] {
+            # Distance tick line alpha; path alpha is half of this.
+            color: #FFFFFFFF
+        }
+        [radar.missile_tubes] {
+            color: #80808080
+        }
+        [radar.sector_grid] {
+            # Font and font size.
+            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+            size: 30.0
+            # Main grid line alpha; subsector line alpha is half of this.
+            color: #404080FF
+        }
     }
 
     # Signal bands, used in radar views and sensor locking
