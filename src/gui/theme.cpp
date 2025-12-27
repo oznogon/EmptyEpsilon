@@ -129,6 +129,95 @@ GuiTheme* GuiTheme::getCurrentTheme()
     return GuiTheme::getTheme(GuiTheme::current_theme);
 }
 
+// Helper function to recursively load parent themes
+// Returns false if circular dependency detected
+bool GuiTheme::loadParentThemes(GuiTheme* theme,
+                                const std::vector<string>& parent_names,
+                                std::unordered_set<string>& loading_chain)
+{
+    for (const string& parent_name : parent_names)
+    {
+        // Check if parent already loaded
+        if (GuiTheme::themes.find(parent_name) == GuiTheme::themes.end())
+        {
+            // Circular dependency check
+            if (loading_chain.find(parent_name) != loading_chain.end())
+            {
+                LOG(Error, "Circular theme inheritance detected: ", parent_name);
+                return false;
+            }
+
+            // Load parent theme
+            string parent_resource = "gui/" + parent_name + ".theme.txt";
+            loading_chain.insert(parent_name);
+            if (!GuiTheme::loadTheme(parent_name, parent_resource))
+            {
+                LOG(Error, "Failed to load parent theme: ", parent_name);
+                return false;
+            }
+            loading_chain.erase(parent_name);
+        }
+
+        theme->parent_themes.push_back(parent_name);
+    }
+    return true;
+}
+
+// Merge style from all parent themes.
+GuiThemeStyle GuiTheme::getMergedParentStyle(GuiTheme* theme, const string& element_name)
+{
+    GuiThemeStyle merged;
+
+    // Initialize with fallback defaults.
+    for (int n = 0; n < int(GuiElement::State::COUNT); n++)
+    {
+        merged.states[n].color = {255, 255, 255, 255};
+        merged.states[n].size = 30.0f;
+        /* Pending SP support
+        merged.states[n].offset = 0.0f;
+        */
+        merged.states[n].font = nullptr;
+        merged.states[n].texture = "";
+        merged.states[n].sound = "";
+    }
+
+
+    // Merge from each parent in precedence order.
+    for (const string& parent_name : theme->parent_themes)
+    {
+        GuiTheme* parent = GuiTheme::getTheme(parent_name);
+        if (!parent)
+            continue;
+
+        const GuiThemeStyle* parent_style = parent->getStyle(element_name);
+        if (!parent_style)
+            continue;
+
+        // Merge each state's properties.
+        for (int n = 0; n < int(GuiElement::State::COUNT); n++)
+        {
+            const GuiThemeStyle::StateStyle& ps = parent_style->states[n];
+            GuiThemeStyle::StateStyle& ms = merged.states[n];
+
+            // Override only if parent has non-default value.
+            if (ps.texture != "")
+                ms.texture = ps.texture;
+            if (ps.font != nullptr)
+                ms.font = ps.font;
+            if (ps.sound != "")
+                ms.sound = ps.sound;
+            // Always override these (can't detect "default")
+            ms.color = ps.color;
+            ms.size = ps.size;
+            /* Pending SP support
+            ms.offset = ps.offset;
+            */
+        }
+    }
+
+    return merged;
+}
+
 bool GuiTheme::loadTheme(const string& name, const string& resource_name)
 {
     LOG(Debug, "Loading theme ", name, " from ", resource_name);
