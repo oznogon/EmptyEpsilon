@@ -2,12 +2,12 @@
     # Full-game interface properties:
 
     # Font used across EmptyEpsilon.
-    font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
+    font: gui/themes/corners/fonts/neu5land/N5L_Norm.ttf
 
     # Stronger font used at a few locations without UI widgets.
     # UI widgets with their own font theme properties might set this on their own.
     [bold] {
-        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+        font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
     }
 
     # Background color and images
@@ -55,7 +55,7 @@
     # Lua console
     [luaconsole] {
         size: 12.0
-        font: gui/fonts/RobotoMono-SemiBold.ttf
+        font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
         [luaconsole.log.back] {
         }
         [luaconsole.entry.back] {
@@ -78,7 +78,7 @@
     }
 
     [radar] {
-        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+        font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
 
         # Outermost border of circular radars
         [radar.outline] {
@@ -86,7 +86,7 @@
         }
         [radar.range_indicators] {
             # Font and font size.
-            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+            font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
             size: 20.0
             # Circle alpha; text alpha is half of this.
             color: #FFFFFF20
@@ -100,7 +100,7 @@
         }
         [radar.sector_grid] {
             # Font and font size.
-            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+            font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
             size: 30.0
             # Main grid line alpha; subsector line alpha is half of this.
             color: #404080FF
@@ -249,7 +249,7 @@
         [keyvalue.key] {
         }
         [keyvalue.value] {
-            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+            font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
         }
     }
 
@@ -296,7 +296,7 @@
     # Icons are all automatically suffixed with .png and should have transparent backgrounds.
     [overlay] {
         image: gui/themes/corners/widget/DamagePowerOverlay.normal.png
-        font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
+        font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
         size: 30.0
 
         # Icons are all automatically suffixed with .png and should have transparent backgrounds.
@@ -420,7 +420,7 @@
     [scrollingbanner] {
         image: gui/themes/corners/widget/LabelBackground.png
         size: 25.0
-        font: gui/fonts/BebasNeue Bold.otf
+        font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
         color: #FFFFFF
     }
 
