@@ -1,0 +1,48 @@
+[base] {
+    inherit: corners
+
+    # Dimkin font variant of the Corners theme.
+    # Only font paths are overridden; all other properties inherited from corners
+
+    font: gui/themes/corners/fonts/dimkin_font/Dimkin Regular.ttf
+    offset: -2.0
+
+    [bold] {
+        font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+    }
+
+    [radar] {
+        font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+        [radar.range_indicators] {
+            font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+        }
+        [radar.sector_grid] {
+            font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+        }
+    }
+
+    [label] {
+        [label.front] {
+            font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+        }
+    }
+    [keyvalue] {
+        [keyvalue.value] {
+            font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+        }
+    }
+
+    [overlay] {
+        font: gui/themes/corners/fonts/dimkin_font/Dimkin Black.ttf
+    }
+
+    [scrollingbanner] {
+        font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+    }
+
+    [ship_waypoint] {
+        [ship_waypoint.text] {
+            font: gui/themes/corners/fonts/dimkin_font/Dimkin Black.ttf
+        }
+    }
+}
