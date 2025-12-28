@@ -22,7 +22,7 @@ glm::u8vec4 GuiTheme::toColor(const string& s)
     return {255, 255, 255, 255};
 }
 
-static sp::Font* cacheFont(const string& s)
+static sp::Font* cacheFont(const string& s, float offset = 0.0f)
 {
     auto it = fonts.find(s);
     if (it != fonts.end())
@@ -35,8 +35,9 @@ static sp::Font* cacheFont(const string& s)
         return nullptr;
     }
     auto result = new sp::FreetypeFont(s, font_stream);
+    result->setBaselineOffset(offset);
     fonts[s] = result;
-    LOG(Debug, "Loaded font ", s);
+    LOG(Debug, "Loaded font ", s, " with baseline offset ", offset);
     return result;
 }
 
@@ -173,9 +174,7 @@ GuiThemeStyle GuiTheme::getMergedParentStyle(GuiTheme* theme, const string& elem
     {
         merged.states[n].color = {255, 255, 255, 255};
         merged.states[n].size = 30.0f;
-        /* Pending SP support
         merged.states[n].offset = 0.0f;
-        */
         merged.states[n].font = nullptr;
         merged.states[n].texture = "";
         merged.states[n].sound = "";
@@ -209,9 +208,7 @@ GuiThemeStyle GuiTheme::getMergedParentStyle(GuiTheme* theme, const string& elem
             // Always override these (can't detect "default")
             ms.color = ps.color;
             ms.size = ps.size;
-            /* Pending SP support
             ms.offset = ps.offset;
-            */
         }
     }
 
@@ -355,10 +352,16 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
         else
             global_style.color = {255, 255, 255, 255};
 
+        // Read offset first (needed for font loading)
+        if (input.find("offset") != input.end())
+            global_style.offset = input["offset"].toFloat();
+        else
+            global_style.offset = 0.0f; // Default offset
+
         if (input.find("font") != input.end())
         {
-            string font_path = input["font"];
-            global_style.font = cacheFont(font_path);
+            const string font_path = input["font"];
+            global_style.font = cacheFont(font_path, global_style.offset);
             // Fallback if font failed to load.
             if (!global_style.font)
             {
@@ -366,10 +369,6 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 global_style.font = theme->styles["fallback"].states[0].font;
             }
         }
-        /* TODO: 
-        if (input.find("font_offset") != input.end())
-            global_style.font_offset = input["font_offset"].toFloat();
-        */
         if (input.find("size") != input.end())
             global_style.size = input["size"].toFloat();
         if (input.find("sound") != input.end())
@@ -418,19 +417,18 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 style.states[n].texture = input["image." + postfix];
             if (input.find("color." + postfix) != input.end())
                 style.states[n].color = toColor(input["color." + postfix]);
+            // Read state-specific offset before loading font
+            if (input.find("offset." + postfix) != input.end())
+                style.states[n].offset = input["offset." + postfix].toFloat();
             if (input.find("font." + postfix) != input.end())
             {
                 string state_font_path = input["font." + postfix];
-                style.states[n].font = cacheFont(state_font_path);
+                style.states[n].font = cacheFont(state_font_path, style.states[n].offset);
                 if (!style.states[n].font)
                     LOG(Debug, "State-specific font '", state_font_path, "' failed to load for element ", element_name, " state ", postfix, " in theme ", name);
             }
             if (input.find("size." + postfix) != input.end())
                 style.states[n].size = input["size." + postfix].toFloat();
-            /* Pending SP support
-            if (input.find("offset." + postfix) != input.end())
-                style.states[n].offset = input["offset." + postfix].toFloat();
-            */
             if (input.find("sound." + postfix) != input.end())
                 style.states[n].sound = input["sound." + postfix];
         }
