@@ -391,12 +391,13 @@
     [ship_room] {
         # Sliced square image
         image: gui/themes/corners/room_background_bw.png
-        color: #EEEEFF
+        color: #FFFFFF
     }
 
     # GuiShipDoor (internal ship door)
     [ship_door] {
-        image: room_door.png
+        image: gui/themes/corners/room_door_bw.png
+        color: #FFFFFF
     }
 
     # GuiShipCrew (internal ship repair crew)
