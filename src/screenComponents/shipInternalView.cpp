@@ -163,7 +163,8 @@ void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
     ShipSystem* sys = nullptr;
     if (ship) sys = ShipSystem::get(ship, system);
     if (sys) f = std::max(0.0f, sys->health);
-    renderer.drawStretchedHV(rect, rect.size.x * 0.25f, room_theme->get(getState()).texture, glm::u8vec4(255, 255 * f, 255 * f, 255));
+    auto room_style = room_theme->get(GuiElement::State::Normal);
+    renderer.drawStretchedHV(rect, rect.size.x * 0.25f, room_style.texture, glm::u8vec4(room_style.color.r, room_style.color.g * f, room_style.color.b * f, room_style.color.a));
 
     if (system != ShipSystem::Type::None && ship && sys)
     {
