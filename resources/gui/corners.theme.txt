@@ -396,7 +396,7 @@
 
     # GuiShipDoor (internal ship door)
     [ship_door] {
-        image: gui/themes/corners/room_door_bw.png
+        image: gui/themes/corners/room_background_bw.png
         color: #FFFFFF
     }
 
