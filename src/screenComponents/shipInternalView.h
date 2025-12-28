@@ -45,7 +45,7 @@ public:
     typedef std::function<void(glm::ivec2 room_position)> func_t;
 private:
     sp::ecs::Entity ship;
-    ShipSystem::Type system;
+    ShipSystem::Type system = ShipSystem::Type::None;
     float room_size;
     func_t func;
     const GuiThemeStyle* room_theme;
@@ -66,7 +66,7 @@ public:
     typedef std::function<void()> func_t;
 
 private:
-    bool horizontal;
+    bool horizontal = false;
     func_t func;
     const GuiThemeStyle* door_theme;
 public:
