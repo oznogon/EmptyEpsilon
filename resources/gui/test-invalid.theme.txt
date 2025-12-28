@@ -1,0 +1,9 @@
+[base] {
+    font: gui/fonts/INVALID_FONT.ttf
+}
+
+[textbox] {
+    [textbox.front] {
+        font: gui/fonts/ANOTHER_INVALID.ttf
+    }
+}
