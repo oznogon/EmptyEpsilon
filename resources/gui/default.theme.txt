@@ -3,6 +3,8 @@
 
     # Font used across EmptyEpsilon.
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
+    # Uncomment to adjust font baseline (positive = down, negative = up):
+    # offset: 0.0
 
     # Stronger font used at a few locations without UI widgets.
     # UI widgets with their own font theme properties might set this on their own.
