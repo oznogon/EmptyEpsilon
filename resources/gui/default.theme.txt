@@ -55,6 +55,7 @@
             color: #8080FFD0
         }
         [ship_waypoint.text] {
+            font: gui/fonts/gui/fonts/BigShouldersDisplay-ExtraBold.ttf
             color: #000000D0
         }
     }
