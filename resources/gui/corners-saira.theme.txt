@@ -1,0 +1,43 @@
+[base] {
+    inherit: corners
+
+    # Saira font variant of the corners theme
+    # Only font paths are overridden; all other properties inherited from corners
+
+    font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Light.ttf
+    offset: -7.0
+
+    [bold] {
+        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+    }
+
+    [radar] {
+        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+        [radar.range_indicators] {
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+        }
+        [radar.sector_grid] {
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+        }
+    }
+
+    [textbox] {
+        [textbox.front] {
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Light.ttf
+        }
+    }
+
+    [keyvalue] {
+        [keyvalue.value] {
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+        }
+    }
+
+    [overlay] {
+        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Bold.ttf
+    }
+
+    [scrollingbanner] {
+        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+    }
+}

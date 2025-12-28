@@ -5,6 +5,7 @@
     # Only font paths are overridden; all other properties inherited from corners
 
     font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedLight.ttf
+    offset: -2.0
 
     [bold] {
         font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedHeavy.ttf
