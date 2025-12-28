@@ -390,7 +390,8 @@
     # GuiShipRoom (internal ship room)
     [ship_room] {
         # Sliced square image
-        image: room_background.png
+        image: gui/themes/corners/room_background_bw.png
+        color: #EEEEFF
     }
 
     # GuiShipDoor (internal ship door)
@@ -402,7 +403,7 @@
     [ship_crew] {
         # Sprite frame filename prefix, to be followed by 0.png, 1.png ... 5.png for each frame.
         # For example, the default value is topdownCrew, and the files are topdownCrew0.png, topdownCrew1.png ... topdownCrew5.png.
-        image: topdownCrew
+        image: gui/themes/corners/Magnesus_Technopeasant_
         [ship_crew.selected] {
             # Must have a transparent background.
             image: redicule.png
