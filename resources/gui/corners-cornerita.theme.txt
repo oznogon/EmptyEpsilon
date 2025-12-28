@@ -1,0 +1,59 @@
+[base] {
+    inherit: corners
+
+    # Cornerita font variant of the Corners theme.
+    # Only font paths are overridden; all other properties inherited from corners
+
+    font: gui/themes/corners/fonts/cornerita/Cornerita Thin.ttf
+
+    [bold] {
+        font: gui/themes/corners/fonts/cornerita/Cornerita Bold.ttf
+    }
+
+    [radar] {
+        font: gui/themes/corners/fonts/cornerita/Cornerita Bold.ttf
+        [radar.range_indicators] {
+            font: gui/themes/corners/fonts/cornerita/Cornerita Bold.ttf
+        }
+        [radar.sector_grid] {
+            font: gui/themes/corners/fonts/cornerita/Cornerita Bold.ttf
+        }
+    }
+
+    [button] {
+        [button.toggle.on.front] {
+            font: gui/themes/corners/fonts/cornerita/Cornerita Bold.ttf
+        }
+    }
+
+    [listbox] {
+        [listbox.selected.front] {
+            font: gui/themes/corners/fonts/cornerita/Cornerita Bold.ttf
+        }
+    }
+
+    [label] {
+        [label.front] {
+            font: gui/themes/corners/fonts/cornerita/Cornerita Bold.ttf
+        }
+    }
+    [keyvalue] {
+        [keyvalue.value] {
+            font: gui/themes/corners/fonts/cornerita/Cornerita Bold.ttf
+        }
+    }
+
+    [overlay] {
+        font: gui/themes/corners/fonts/cornerita/Cornerita Black.ttf
+    }
+
+    [scrollingbanner] {
+        font: gui/themes/corners/fonts/cornerita/Cornerita Bold.ttf
+    }
+
+    [ship_waypoint] {
+        [ship_waypoint.text] {
+            font: gui/themes/corners/fonts/cornerita/Cornerita Black.ttf
+        }
+    }
+}
