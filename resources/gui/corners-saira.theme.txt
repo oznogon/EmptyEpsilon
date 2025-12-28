@@ -4,40 +4,57 @@
     # Saira font variant of the corners theme
     # Only font paths are overridden; all other properties inherited from corners
 
-    font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Light.ttf
+    font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Medium.ttf
     offset: -7.0
 
     [bold] {
-        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-ExtraBold.ttf
     }
 
     [radar] {
-        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-ExtraBold.ttf
         [radar.range_indicators] {
-            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-ExtraBold.ttf
         }
         [radar.sector_grid] {
-            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-ExtraBold.ttf
         }
     }
 
-    [textbox] {
-        [textbox.front] {
-            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Light.ttf
+    [button] {
+        [button.toggle.on.front] {
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Bold.ttf
         }
     }
 
+    [listbox] {
+        [listbox.selected.front] {
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Bold.ttf
+        }
+    }
+
+    [label] {
+        [label.front] {
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Bold.ttf
+        }
+    }
     [keyvalue] {
         [keyvalue.value] {
-            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-ExtraBold.ttf
         }
     }
 
     [overlay] {
-        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Bold.ttf
+        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
     }
 
     [scrollingbanner] {
-        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+        font: gui/themes/corners/fonts/saira/SairaExtraCondensed-ExtraBold.ttf
+    }
+
+    [ship_waypoint] {
+        [ship_waypoint.text] {
+            font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Black.ttf
+        }
     }
 }
