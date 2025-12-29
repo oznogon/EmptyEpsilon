@@ -1,8 +1,8 @@
+# D-DIN font variant of the Corners theme.
+# Only font paths are overridden; all other properties inherited from corners
+
 [base] {
     inherit: corners
-
-    # D-DIN font variant of the Corners theme.
-    # Only font paths are overridden; all other properties inherited from corners
 
     font: gui/themes/corners/fonts/d-din/D-DINCondensed.otf
     offset: -1.0
@@ -17,6 +17,12 @@
             font: gui/themes/corners/fonts/d-din/D-DINCondensed-Bold.otf
         }
         [radar.sector_grid] {
+            font: gui/themes/corners/fonts/d-din/D-DINCondensed-Bold.otf
+        }
+    }
+
+    [ship_waypoint] {
+        [ship_waypoint.text] {
             font: gui/themes/corners/fonts/d-din/D-DINCondensed-Bold.otf
         }
     }
@@ -50,11 +56,5 @@
 
     [scrollingbanner] {
         font: gui/themes/corners/fonts/d-din/D-DINCondensed-Bold.otf
-    }
-
-    [ship_waypoint] {
-        [ship_waypoint.text] {
-            font: gui/themes/corners/fonts/d-din/D-DINCondensed-Bold.otf
-        }
     }
 }

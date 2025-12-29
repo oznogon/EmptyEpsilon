@@ -1,8 +1,8 @@
+# Saira font variant of the corners theme
+# Only font paths are overridden; all other properties inherited from corners
+
 [base] {
     inherit: corners
-
-    # Saira font variant of the corners theme
-    # Only font paths are overridden; all other properties inherited from corners
 
     font: gui/themes/corners/fonts/saira/SairaExtraCondensed-Medium.ttf
     offset: -7.0
