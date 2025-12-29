@@ -1,0 +1,65 @@
+# Iosevka font variant of the corners theme
+# Only font paths are overridden; all other properties inherited from corners
+
+[base] {
+    inherit: corners
+
+    font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Regular.ttf
+    offset: -2.0
+
+    [bold] {
+        font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+    }
+
+    [radar] {
+        font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+        [radar.range_indicators] {
+            font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+        }
+        [radar.sector_grid] {
+            font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+        }
+    }
+
+    [ship_waypoint] {
+        [ship_waypoint.text] {
+            font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+        }
+    }
+
+    [button] {
+        [button.front] {
+            [button.toggle.on.front] {
+                font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+            }
+        }
+    }
+
+    [label] {
+        [label.front] {
+            font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+        }
+    }
+
+    [keyvalue] {
+        [keyvalue.value] {
+            font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+        }
+    }
+
+    [listbox] {
+        [listbox.front] {
+            [listbox.selected.front] {
+                font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+            }
+        }
+    }
+
+    [overlay] {
+        font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+    }
+
+    [scrollingbanner] {
+        font: gui/themes/corners/fonts/ptsans/PTSansNarrow-Bold.ttf
+    }
+}
