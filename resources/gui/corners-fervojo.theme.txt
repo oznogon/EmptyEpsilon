@@ -1,0 +1,65 @@
+# Iosevka font variant of the corners theme
+# Only font paths are overridden; all other properties inherited from corners
+
+[base] {
+    inherit: corners
+
+    font: gui/themes/corners/fonts/fervojo/Fervojo-Light.otf
+    offset: -3.0
+
+    [bold] {
+        font: gui/themes/corners/fonts/fervojo/Fervojo-Bold.otf
+    }
+
+    [radar] {
+        font: gui/themes/corners/fonts/fervojo/Fervojo-Bold.otf
+        [radar.range_indicators] {
+            font: gui/themes/corners/fonts/fervojo/Fervojo-Bold.otf
+        }
+        [radar.sector_grid] {
+            font: gui/themes/corners/fonts/fervojo/Fervojo-Bold.otf
+        }
+    }
+
+    [ship_waypoint] {
+        [ship_waypoint.text] {
+            font: gui/themes/corners/fonts/fervojo/Fervojo-Bold.otf
+        }
+    }
+
+    [button] {
+        [button.front] {
+            [button.toggle.on.front] {
+                font: gui/themes/corners/fonts/fervojo/Fervojo-Medium.otf
+            }
+        }
+    }
+
+    [label] {
+        [label.front] {
+            font: gui/themes/corners/fonts/fervojo/Fervojo-Medium.otf
+        }
+    }
+
+    [keyvalue] {
+        [keyvalue.value] {
+            font: gui/themes/corners/fonts/fervojo/Fervojo-Medium.otf
+        }
+    }
+
+    [listbox] {
+        [listbox.front] {
+            [listbox.selected.front] {
+                font: gui/themes/corners/fonts/fervojo/Fervojo-Medium.otf
+            }
+        }
+    }
+
+    [overlay] {
+        font: gui/themes/corners/fonts/fervojo/Fervojo-Medium.otf
+    }
+
+    [scrollingbanner] {
+        font: gui/themes/corners/fonts/fervojo/Fervojo-Bold.otf
+    }
+}
