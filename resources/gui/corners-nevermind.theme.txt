@@ -1,0 +1,69 @@
+# Iosevka font variant of the corners theme
+# Only font paths are overridden; all other properties inherited from corners
+
+[base] {
+    inherit: corners
+
+    font: gui/themes/corners/fonts/nevermind/NeverMindDisplayExtraCondensed-Light.ttf
+    offset: -1.0
+
+    [bold] {
+        font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-Bold.ttf
+    }
+
+    [radar] {
+        font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-Bold.ttf
+        [radar.range_indicators] {
+            font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-Bold.ttf
+        }
+        [radar.sector_grid] {
+            font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-Bold.ttf
+        }
+    }
+
+    [ship_waypoint] {
+        [ship_waypoint.text] {
+            font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-Bold.ttf
+        }
+    }
+
+    [button] {
+        [button.front] {
+            [button.toggle.on.front] {
+                font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-DemiBold.ttf
+            }
+        }
+    }
+
+    [label] {
+        [label.front] {
+            font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-DemiBold.ttf
+        }
+    }
+
+    [keyvalue] {
+        [keyvalue.value] {
+            font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-Bold.ttf
+        }
+    }
+
+    [listbox] {
+        [listbox.front] {
+            [listbox.selected.front] {
+                font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-DemiBold.ttf
+            }
+        }
+    }
+
+    [textbox] {
+        font: gui/themes/corners/fonts/nevermind/NeverMindDisplayCondensed-Light.ttf
+    }
+
+    [overlay] {
+        font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-DemiBold.ttf
+    }
+
+    [scrollingbanner] {
+        font: gui/themes/corners/fonts/nevermind/NeverMindDisplayUltraCondensed-Bold.ttf
+    }
+}
