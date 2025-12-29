@@ -1,47 +1,69 @@
+# Iosevka font variant of the corners theme
+# Only font paths are overridden; all other properties inherited from corners
+
 [base] {
     inherit: corners
 
-    # Iosevka font variant of the corners theme
-    # Only font paths are overridden; all other properties inherited from corners
-
-    font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedLight.ttf
+    font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedLight.ttf
     offset: -2.0
 
     [bold] {
-        font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedHeavy.ttf
+        font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedHeavy.ttf
     }
 
     [luaconsole] {
-        font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-Regular.ttf
+        font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-Condensed.ttf
     }
 
     [radar] {
-        font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedHeavy.ttf
+        font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedHeavy.ttf
         [radar.range_indicators] {
-            font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedHeavy.ttf
+            font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedHeavy.ttf
         }
         [radar.sector_grid] {
-            font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedHeavy.ttf
+            font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedHeavy.ttf
         }
     }
 
-    [textbox] {
-        [textbox.front] {
-            font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedLight.ttf
+    [ship_waypoint] {
+        [ship_waypoint.text] {
+            font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedHeavy.ttf
+        }
+    }
+
+    [button] {
+        [button.front] {
+            [button.toggle.on.front] {
+                font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedSemiBold.ttf
+            }
+        }
+    }
+
+    [label] {
+        [label.front] {
+            font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedSemiBold.ttf
         }
     }
 
     [keyvalue] {
         [keyvalue.value] {
-            font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedHeavy.ttf
+            font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedSemiBold.ttf
+        }
+    }
+
+    [listbox] {
+        [listbox.front] {
+            [listbox.selected.front] {
+                font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedSemiBold.ttf
+            }
         }
     }
 
     [overlay] {
-        font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedSemiBold.ttf
+        font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedSemiBold.ttf
     }
 
     [scrollingbanner] {
-        font: gui/themes/corners/fonts/iosevka-emptyepsilon/TTF/IosevkaEmptyEpsilon-CondensedHeavy.ttf
+        font: gui/themes/corners/fonts/iosevka-emptyepsilon/IosevkaEmptyEpsilon-CondensedHeavy.ttf
     }
 }

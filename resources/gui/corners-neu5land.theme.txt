@@ -1,16 +1,12 @@
+# Neu5land font variant of the corners theme
+# Only font paths are overridden; all other properties inherited from corners
+
 [base] {
     inherit: corners
-
-    # Neu5land font variant of the corners theme
-    # Only font paths are overridden; all other properties inherited from corners
 
     font: gui/themes/corners/fonts/neu5land/N5L_Norm.ttf
 
     [bold] {
-        font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
-    }
-
-    [luaconsole] {
         font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
     }
 
@@ -24,9 +20,17 @@
         }
     }
 
-    [textbox] {
-        [textbox.front] {
-            font: gui/themes/corners/fonts/neu5land/N5L_Norm.ttf
+    [ship_waypoint] {
+        [ship_waypoint.text] {
+            font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
+        }
+    }
+
+    [button] {
+        [button.front] {
+            [button.toggle.on.front] {
+                font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
+            }
         }
     }
 
@@ -36,8 +40,22 @@
         }
     }
 
+    [listbox] {
+        [listbox.front] {
+            [listbox.selected.front] {
+                font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
+            }
+        }
+    }
+
     [overlay] {
         font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
+    }
+
+    [selector] {
+        [selector.front] {
+            font: gui/themes/corners/fonts/neu5land/N5L_Fett.ttf
+        }
     }
 
     [scrollingbanner] {
