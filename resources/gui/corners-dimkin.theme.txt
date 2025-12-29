@@ -4,45 +4,68 @@
 [base] {
     inherit: corners
 
-    font: gui/themes/corners/fonts/dimkin_font/Dimkin Regular.ttf
-    offset: -2.0
+    font: gui/themes/corners/fonts/dimkin/Dimkin Regular.ttf
+    offset: -1.0
 
     [bold] {
-        font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+        font: gui/themes/corners/fonts/dimkin/Dimkin Semibold.ttf
     }
 
     [radar] {
-        font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+        font: gui/themes/corners/fonts/dimkin/Dimkin Semibold.ttf
         [radar.range_indicators] {
-            font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+            font: gui/themes/corners/fonts/dimkin/Dimkin Semibold.ttf
         }
         [radar.sector_grid] {
-            font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+            font: gui/themes/corners/fonts/dimkin/Dimkin Semibold.ttf
         }
     }
 
     [ship_waypoint] {
         [ship_waypoint.text] {
-            font: gui/themes/corners/fonts/dimkin_font/Dimkin Black.ttf
+            font: gui/themes/corners/fonts/dimkin/Dimkin Bold.ttf
+        }
+    }
+
+    [button] {
+        [button.front] {
+            [button.toggle.on.front] {
+                font: gui/themes/corners/fonts/dimkin/Dimkin Semibold.ttf
+            }
         }
     }
 
     [label] {
         [label.front] {
-            font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+            font: gui/themes/corners/fonts/dimkin/Dimkin Semibold.ttf
         }
     }
+
+    [listbox] {
+        [listbox.front] {
+            [listbox.selected.front] {
+                font: gui/themes/corners/fonts/dimkin/Dimkin Semibold.ttf
+            }
+        }
+    }
+
+    [label] {
+        [label.front] {
+            font: gui/themes/corners/fonts/dimkin/Dimkin Semibold.ttf
+        }
+    }
+
     [keyvalue] {
         [keyvalue.value] {
-            font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+            font: gui/themes/corners/fonts/dimkin/Dimkin Semibold.ttf
         }
     }
 
     [overlay] {
-        font: gui/themes/corners/fonts/dimkin_font/Dimkin Black.ttf
+        font: gui/themes/corners/fonts/dimkin/Dimkin Bold.ttf
     }
 
     [scrollingbanner] {
-        font: gui/themes/corners/fonts/dimkin_font/Dimkin Bold.ttf
+        font: gui/themes/corners/fonts/dimkin/Dimkin Semibold.ttf
     }
 }
