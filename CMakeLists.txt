@@ -149,6 +149,7 @@ set(GUI_LIB_SOURCES
     src/gui/gui2_togglebutton.cpp
     src/gui/gui2_arrow.cpp
     src/gui/gui2_selector.cpp
+    src/gui/gui2_toggleslider.cpp
     src/gui/gui2_canvas.cpp
     src/gui/gui2_rotationdial.cpp
     src/gui/gui2_textentry.cpp
@@ -198,6 +199,7 @@ set(GUI_LIB_SOURCES
     src/gui/gui2_scrollbar.h
     src/gui/gui2_scrolltext.h
     src/gui/gui2_selector.h
+    src/gui/gui2_toggleslider.h
     src/gui/gui2_slider.h
     src/gui/gui2_textentry.h
     src/gui/gui2_togglebutton.h
