@@ -22,7 +22,8 @@ function SupplyDrop()
             rotate=false,
             color_by_faction=true,
         },
-        pickup={}
+        pickup={},
+        health={current=1, max=1},
     }
 
     return e
