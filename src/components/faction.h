@@ -10,7 +10,8 @@ enum class FactionRelation
 {
     Friendly,
     Neutral,
-    Enemy
+    Enemy,
+    None
 };
 
 // Component to set our current faction,

@@ -36,6 +36,13 @@ enum EHackingGames
     HG_Lights,
     HG_All
 };
+enum class TargetingMode
+{
+    WeaponsTight = 0,    // Target confirmed Enemy entities only
+    EnemyAndUnknown = 1, // Target Enemy + Unknown FoF entities only
+    WeaponsFree = 2,     // Target Enemy + Unknown + Neutral entities
+    All = 3              // Target all entities, including Friendlies
+};
 
 class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
@@ -51,6 +58,9 @@ public:
     EHackingGames hacking_games;
     bool use_beam_shield_frequencies;
     bool use_system_damage;
+    TargetingMode default_weapons_targeting_mode;
+    bool use_weapons_targeting_control;
+    bool use_legacy_beam_targeting;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
     string default_skybox = "default";

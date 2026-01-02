@@ -338,7 +338,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     if (game_server)
     {
         auto extra_settings_panel = new GuiPanel(this, "");
-        extra_settings_panel->setSize(600, 325)->setPosition(0, 0, sp::Alignment::Center)->hide();
+        extra_settings_panel->setSize(600, 425)->setPosition(0, 0, sp::Alignment::Center)->hide();
         auto extra_settings = new GuiElement(extra_settings_panel, "");
         extra_settings->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(25)->setAttribute("layout", "vertical");
         // Science scan complexity selector.
@@ -375,6 +375,24 @@ ShipSelectionScreen::ShipSelectionScreen()
         (new GuiToggleButton(row, "GAME_SYS_DAMAGE_TOGGLE", tr("Per-system damage"), [](bool value) {
             gameGlobalInfo->use_system_damage = value == 1;
         }))->setValue(gameGlobalInfo->use_system_damage)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::CenterRight);
+
+        row = new GuiElement(extra_settings, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
+        (new GuiToggleButton(row, "GAME_TARGETING_TOGGLE", tr("Weapon targeting control"), [](bool value) {
+            gameGlobalInfo->use_weapons_targeting_control = value == 1;
+        }))->setValue(gameGlobalInfo->use_weapons_targeting_control)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        (new GuiToggleButton(row, "GAME_LEGACY_TARGETING", tr("Legacy beam targeting"), [](bool value) {
+            gameGlobalInfo->use_legacy_beam_targeting = value == 1;
+        }))->setValue(gameGlobalInfo->use_legacy_beam_targeting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // Default weapons targeting mode selector.
+        row = new GuiElement(extra_settings, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "GAME_TARGETING_MODE_LABEL", tr("Default targeting mode: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+        (new GuiSelector(row, "GAME_TARGETING_MODE", [](int index, string value) {
+            gameGlobalInfo->default_weapons_targeting_mode = TargetingMode(index);
+        }))->setOptions({tr("targeting", "Confirmed enemies only"), tr("targeting", "Enemies + unknown"), tr("targeting", "All but confirmed friendlies"), tr("targeting", "All")})->setSelectionIndex((int)gameGlobalInfo->default_weapons_targeting_mode)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         auto close_button = new GuiButton(extra_settings_panel, "", tr("Close"), [this, extra_settings_panel](){
             extra_settings_panel->hide();
