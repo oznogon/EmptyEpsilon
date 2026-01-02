@@ -9,6 +9,7 @@
 #include "components/hacking.h"
 #include "components/scanning.h"
 #include "components/radar.h"
+#include "components/relaytarget.h"
 #include "components/name.h"
 
 #include "screenComponents/radarView.h"
@@ -24,29 +25,6 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
-
-//TODO: This function does not belong here.
-static bool canHack(sp::ecs::Entity entity)
-{
-    if (!my_spaceship) return false;
-    if (my_spaceship == entity || !my_spaceship.hasComponent<HackingDevice>()) return false;
-    auto scanstate = entity.getComponent<ScanState>();
-    if (scanstate && scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
-        return true;
-
-    // Check for hackable ShipSystems.
-    bool has_hackable_systems = false;
-    for (int n = 0; n < static_cast<int>(ShipSystem::Type::COUNT); n++)
-    {
-        auto sys = ShipSystem::get(entity, ShipSystem::Type(n));
-        if (sys && sys->can_be_hacked) has_hackable_systems = true;
-    };
-
-    if (Faction::getRelation(entity, my_spaceship) == FactionRelation::Friendly)
-        return false;
-    else
-        return has_hackable_systems;
-}
 
 RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
@@ -80,7 +58,10 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             switch(mode)
             {
             case TargetSelection:
-                targets.setToClosestTo(position, 1000, TargetsContainer::Targetable);
+                targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
+                if (my_spaceship && my_spaceship.hasComponent<HackingDevice>() && targets.getTargets().empty()) targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
+                if (my_player_info)
+                    my_player_info->commandSetRelayTarget(targets.get());
                 break;
             case WaypointPlacement:
                 if (my_spaceship)
@@ -136,7 +117,8 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     // Hack target
     hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"), [this](){
         auto target = targets.get();
-        if (canHack(target)) {
+        if (HackingDevice::canHack(my_spaceship, target)) {
+            my_player_info->commandSetHackTarget(target);
             hacking_dialog->open(target);
         }
     });
@@ -223,6 +205,15 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     }
     ///!
 
+    // Sync targets container with RelayTarget component
+    if (my_spaceship) {
+        if (auto relay_target = my_spaceship.getComponent<RelayTarget>()) {
+            if (relay_target->entity != targets.get()) {
+                targets.set(relay_target->entity);
+            }
+        }
+    }
+
     GuiOverlay::onDraw(renderer);
 
     info_faction->setValue("-");
@@ -295,7 +286,7 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
             link_to_science_button->setValue(false);
             link_to_science_button->disable();
         }
-        if (canHack(target))
+        if (HackingDevice::canHack(my_spaceship, target))
         {
             hack_target_button->enable();
         }else{

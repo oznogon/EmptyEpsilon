@@ -14,7 +14,7 @@
 #include "glObjects.h"
 #include "shaderRegistry.h"
 #include "components/collision.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "components/hull.h"
 #include "components/rendering.h"
 #include "components/impulse.h"
@@ -337,7 +337,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         }
     }
 
-    auto target_comp = my_spaceship.getComponent<Target>();
+    auto target_comp = my_spaceship.getComponent<WeaponsTarget>();
     if (target_comp && target_comp->entity)
     {
         ShaderRegistry::ScopedShader billboard(ShaderRegistry::Shaders::Billboard);

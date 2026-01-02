@@ -4,7 +4,7 @@
 #include "gui/gui2_button.h"
 #include "gui/gui2_progressbar.h"
 #include "components/scanning.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "i18n.h"
 
 

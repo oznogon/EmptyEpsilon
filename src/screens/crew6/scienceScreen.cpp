@@ -13,6 +13,7 @@
 #include "components/collision.h"
 #include "components/radar.h"
 #include "components/scanning.h"
+#include "components/sciencetarget.h"
 #include "components/name.h"
 
 #include "systems/radarblock.h"
@@ -65,6 +66,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
                     return;
 
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
+            if (my_player_info)
+                my_player_info->commandSetScienceTarget(targets.get());
         }, nullptr, nullptr
     );
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
@@ -81,6 +84,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
                     return;
 
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
+            if (my_player_info)
+                my_player_info->commandSetScienceTarget(targets.get());
         }, nullptr, nullptr
     );
     new RawScannerDataRadarOverlay(probe_radar, "");
@@ -264,12 +269,18 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     {
         auto probe_transform = rl->linked_entity.getComponent<sp::Transform>();
         auto target_transform = targets.get().getComponent<sp::Transform>();
-        if (!probe_transform || !target_transform || glm::length2(probe_transform->getPosition() - target_transform->getPosition()) > 5000.0f * 5000.0f)
+        if (!probe_transform || !target_transform || glm::length2(probe_transform->getPosition() - target_transform->getPosition()) > 5000.0f * 5000.0f) {
             targets.clear();
+            if (my_player_info)
+                my_player_info->commandSetScienceTarget(sp::ecs::Entity());
+        }
     }else{
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
-        if (!my_transform || RadarBlockSystem::isRadarBlockedFrom(my_transform->getPosition(), targets.get(), lrr->short_range))
+        if (!my_transform || RadarBlockSystem::isRadarBlockedFrom(my_transform->getPosition(), targets.get(), lrr->short_range)) {
             targets.clear();
+            if (my_player_info)
+                my_player_info->commandSetScienceTarget(sp::ecs::Entity());
+        }
     }
 
     // Responsive layout for custom button sidebar. 1440x900 vpixels is 16:10, so this would roughly be the threshold.
@@ -522,6 +533,13 @@ void ScienceScreen::onUpdate()
 {
     if (my_spaceship)
     {
+        // Sync targets container with ScienceTarget component
+        if (auto science_target = my_spaceship.getComponent<ScienceTarget>()) {
+            if (science_target->entity != targets.get()) {
+                targets.set(science_target->entity);
+            }
+        }
+
         // Initiate a scan on scannable objects.
         if (keys.science_scan_object.getDown() &&
             my_spaceship.hasComponent<ScienceScanner>() &&
@@ -547,6 +565,8 @@ void ScienceScreen::onUpdate()
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
                 targets.setNext(transform->getPosition(), lrr ? lrr->long_range : 25000.0f, TargetsContainer::ESelectionType::Scannable);
+                if (my_player_info)
+                    my_player_info->commandSetScienceTarget(targets.get());
             }
         }
     }

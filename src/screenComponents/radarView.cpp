@@ -10,7 +10,7 @@
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/missiletubes.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "components/radar.h"
 #include "components/radarblock.h"
 #include "components/impulse.h"
@@ -503,7 +503,7 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                     if (missile_tube_controls->getManualAim())
                     {
                         missile_target_angle = missile_tube_controls->getMissileTargetAngle();
-                    }else if (auto target = my_spaceship.getComponent<Target>()) {
+                    }else if (auto target = my_spaceship.getComponent<WeaponsTarget>()) {
                         float firing_solution = MissileSystem::calculateFiringSolution(my_spaceship, mount, target->entity);
                         if (firing_solution != std::numeric_limits<float>::infinity())
                             missile_target_angle = firing_solution;

@@ -2,7 +2,7 @@
 #include "playerInfo.h"
 #include "preferenceManager.h"
 #include "components/collision.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "main.h"
 
 GuiViewportMainScreen::GuiViewportMainScreen(GuiContainer* owner, string id)
@@ -28,7 +28,7 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
         auto transform = my_spaceship.getComponent<sp::Transform>();
         if (!transform)
             return;
-        auto target_ship = my_spaceship.getComponent<Target>();
+        auto target_ship = my_spaceship.getComponent<WeaponsTarget>();
         float target_camera_yaw = transform->getRotation();
         switch(pc ? pc->main_screen_setting : MainScreenSetting::Front)
         {
