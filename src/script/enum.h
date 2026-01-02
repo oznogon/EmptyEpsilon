@@ -11,6 +11,8 @@
 #include "components/player.h"
 #include "components/missiletubes.h"
 #include "components/customshipfunction.h"
+#include "components/weaponstargetingmode.h"
+#include "systems/damage.h"
 #include "missileWeaponData.h"
 
 
@@ -63,6 +65,7 @@ template<> struct Convert<FactionRelation> {
         case FactionRelation::Friendly: lua_pushstring(L, "friendly"); break;
         case FactionRelation::Neutral: lua_pushstring(L, "neutral"); break;
         case FactionRelation::Enemy: lua_pushstring(L, "enemy"); break;
+        case FactionRelation::None: lua_pushstring(L, "none"); break;
         }
         return 1;
     }
@@ -74,6 +77,8 @@ template<> struct Convert<FactionRelation> {
             return FactionRelation::Neutral;
         else if (str == "enemy")
             return FactionRelation::Enemy;
+        else if (str == "none")
+            return FactionRelation::None;
         luaL_error(L, "Unknown relation type: %s", str.c_str());
         return FactionRelation::Neutral;
     }
@@ -430,6 +435,32 @@ template<> struct Convert<MainScreenOverlay> {
             return MainScreenOverlay::ShowComms;
         luaL_error(L, "Unknown MainScreenOverlay: %s", str.c_str());
         return MainScreenOverlay::HideComms;
+    }
+};
+
+template<> struct Convert<TargetingMode> {
+    static int toLua(lua_State* L, TargetingMode value) {
+        switch(value) {
+        case TargetingMode::WeaponsTight: lua_pushstring(L, "enemy_only"); break;
+        case TargetingMode::EnemyAndUnknown: lua_pushstring(L, "enemy_and_unknown"); break;
+        case TargetingMode::WeaponsFree: lua_pushstring(L, "include_neutral"); break;
+        case TargetingMode::All: lua_pushstring(L, "target_all"); break;
+        default: lua_pushstring(L, "enemy_and_unknown"); break;
+        }
+        return 1;
+    }
+    static TargetingMode fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "enemy_only" || str == "0")
+            return TargetingMode::WeaponsTight;
+        else if (str == "enemy_and_unknown" || str == "1")
+            return TargetingMode::EnemyAndUnknown;
+        else if (str == "include_neutral" || str == "2")
+            return TargetingMode::WeaponsFree;
+        else if (str == "target_all" || str == "3")
+            return TargetingMode::All;
+        luaL_error(L, "Unknown TargetingMode: %s", str.c_str());
+        return TargetingMode::EnemyAndUnknown;
     }
 };
 

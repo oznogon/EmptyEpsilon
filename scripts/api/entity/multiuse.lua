@@ -116,3 +116,189 @@ function Entity:setTarget(a, b, c, d)
     end
     return self
 end
+
+--- Returns this entity's weapons radar target.
+--- Example: target = ship:getWeaponsTarget()
+function Entity:getWeaponsTarget()
+    if self.components.weapons_target then
+        return self.components.weapons_target.entity
+    end
+    return nil
+end
+
+--- Sets this entity's weapons radar target.
+--- Only sets the target if the entity is valid and not own ship.
+--- To clear the target, use clearWeaponsTarget().
+--- Example: ship:setWeaponsTarget(enemy)
+function Entity:setWeaponsTarget(target)
+    if target and target:isValid() and target ~= self then
+        self.components.weapons_target = {entity = target}
+    end
+    return self
+end
+
+--- Clears this entity's weapons radar target.
+--- Example: ship:clearWeaponsTarget()
+function Entity:clearWeaponsTarget()
+    self.components.weapons_target = nil
+    return self
+end
+
+--- Returns this entity's Science/Operations radar selection target.
+--- This is the entity selected on the Science/Operations radar, separate from active scanning.
+--- Example: target = ship:getScienceTarget()
+function Entity:getScienceTarget()
+    if self.components.science_target then
+        return self.components.science_target.entity
+    end
+    return nil
+end
+
+--- Sets this entity's Science/Operations radar selection target.
+--- This is the entity selected on the Science/Operations radar, separate from active scanning.
+--- Only sets the target if the entity is valid and not own ship.
+--- To clear the target, use clearScienceTarget().
+--- Example: ship:setScienceTarget(unknown_object)
+function Entity:setScienceTarget(target)
+    if target and target:isValid() and target ~= self then
+        self.components.science_target = {entity = target}
+    end
+    return self
+end
+
+--- Clears this entity's Science/Operations radar selection target.
+--- Example: ship:clearScienceTarget()
+function Entity:clearScienceTarget()
+    self.components.science_target = nil
+    return self
+end
+
+--- Returns the target of this entity's active science scan.
+--- This is the entity currently being scanned, separate from radar selection.
+--- Example: target = ship:getScienceScannerTarget()
+function Entity:getScienceScannerTarget()
+    if self.components.science_scanner then
+        return self.components.science_scanner.target
+    end
+    return nil
+end
+
+--- Sets the target of this entity's active science scan.
+--- This is the entity currently being scanned, separate from radar selection.
+--- Only sets the target if the entity is valid and not own ship.
+--- To clear the target, use clearScienceScannerTarget().
+--- Example: ship:setScienceScannerTarget(target_obj)
+function Entity:setScienceScannerTarget(target)
+    if self.components.science_scanner then
+        if target and target:isValid() and target ~= self then
+            self.components.science_scanner.target = target
+        end
+    end
+    return self
+end
+
+--- Clears the target of this entity's active science scan.
+--- Example: ship:clearScienceScannerTarget()
+function Entity:clearScienceScannerTarget()
+    if self.components.science_scanner then
+        self.components.science_scanner.target = nil
+    end
+    return self
+end
+
+--- Returns this PlayerSpaceship's relay radar selection target.
+--- This is the entity selected on the Relay/Strategic Map radar.
+--- This is separate from active comms or hacking operations.
+--- Example: target = ship:getRelayTarget()
+function Entity:getRelayTarget()
+    if self.components.relay_target then
+        return self.components.relay_target.entity
+    end
+    return nil
+end
+
+--- Sets this PlayerSpaceship's relay radar selection target.
+--- This is the entity selected on the Relay/Strategic Map radar.
+--- This is separate from active comms or hacking operations.
+--- Only sets the target if the entity is valid and not own ship.
+--- To clear the target, use clearRelayTarget().
+--- Example: ship:setRelayTarget(station)
+function Entity:setRelayTarget(target)
+    if target and target:isValid() and target ~= self then
+        self.components.relay_target = {entity = target}
+    end
+    return self
+end
+
+--- Clears this PlayerSpaceship's relay radar selection target.
+--- Example: ship:clearRelayTarget()
+function Entity:clearRelayTarget()
+    self.components.relay_target = nil
+    return self
+end
+
+--- Returns this PlayerSpaceship's active hacking target.
+--- This is the entity currently being hacked.
+--- Example: target = ship:getHackTarget()
+function Entity:getHackTarget()
+    if self.components.hacking_device then
+        return self.components.hacking_device.target
+    end
+    return nil
+end
+
+--- Sets this PlayerSpaceship's active hacking target.
+--- This is the entity currently being hacked.
+--- Only sets the target if the entity is valid and not own ship.
+--- To clear the target, use clearHackTarget().
+--- Example: ship:setHackTarget(station)
+function Entity:setHackTarget(target)
+    if self.components.hacking_device then
+        if target and target:isValid() and target ~= self then
+            self.components.hacking_device.target = target
+        end
+    end
+    return self
+end
+
+--- Clears this PlayerSpaceship's active hacking target.
+--- Example: ship:clearHackTarget()
+function Entity:clearHackTarget()
+    if self.components.hacking_device then
+        self.components.hacking_device.target = nil
+    end
+    return self
+end
+
+--- Returns this PlayerSpaceship's active comms target.
+--- This is the entity with an active comms channel open.
+--- Example: target = ship:getCommsTarget()
+function Entity:getCommsTarget()
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.target
+    end
+    return nil
+end
+
+--- Sets this PlayerSpaceship's active comms target.
+--- This is the entity with an active comms channel open.
+--- Only sets the target if the entity is valid and not own ship.
+--- To clear the target, use clearCommsTarget().
+--- Example: ship:setCommsTarget(station)
+function Entity:setCommsTarget(target)
+    if self.components.comms_transmitter then
+        if target and target:isValid() and target ~= self then
+            self.components.comms_transmitter.target = target
+        end
+    end
+    return self
+end
+
+--- Clears this PlayerSpaceship's active comms target.
+--- Example: ship:clearCommsTarget()
+function Entity:clearCommsTarget()
+    if self.components.comms_transmitter then
+        self.components.comms_transmitter.target = nil
+    end
+    return self
+end

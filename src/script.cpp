@@ -24,7 +24,7 @@
 #include "components/impulse.h"
 #include "components/warpdrive.h"
 #include "components/maneuveringthrusters.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "components/shields.h"
 #include "components/coolant.h"
 #include "components/beamweapon.h"
@@ -242,6 +242,23 @@ static void luaGlobalMessage(string message, std::optional<float> timeout)
 {
     gameGlobalInfo->global_message = message;
     gameGlobalInfo->global_message_timeout = timeout.has_value() ? timeout.value() : 5.0f;
+}
+
+static string luaGetDefaultWeaponsTargetingMode()
+{
+    switch (gameGlobalInfo->default_weapons_targeting_mode)
+    {
+        case TargetingMode::WeaponsTight:
+            return "WeaponsTight";
+        case TargetingMode::EnemyAndUnknown:
+            return "EnemyAndUnknown";
+        case TargetingMode::WeaponsFree:
+            return "WeaponsFree";
+        case TargetingMode::All:
+            return "All";
+        default:
+            return "WeaponsFree";
+    }
 }
 
 static void luaAddGMFunction(string label, sp::script::Callback callback)
@@ -848,6 +865,16 @@ static bool luaIsPerSystemDamageUsed()
     return gameGlobalInfo->use_system_damage;
 }
 
+static bool luaIsWeaponsTargetingControlUsed()
+{
+    return gameGlobalInfo->use_weapons_targeting_control;
+}
+
+static bool luaIsLegacyBeamTargetingUsed()
+{
+    return gameGlobalInfo->use_legacy_beam_targeting;
+}
+
 static bool luaIsTacticalRadarAllowed()
 {
     return gameGlobalInfo->allow_main_screen_tactical_radar;
@@ -888,7 +915,7 @@ void luaCommandAbortJump(sp::ecs::Entity ship) {
 
 void luaCommandSetTarget(sp::ecs::Entity ship, sp::ecs::Entity target) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetTarget(target); return; }
-    ship.getOrAddComponent<Target>().entity = target;
+    ship.getOrAddComponent<WeaponsTarget>().entity = target;
 }
 
 void luaCommandLoadTube(sp::ecs::Entity ship, int tube_nr, EMissileWeapons type) {
@@ -910,7 +937,7 @@ void luaCommandFireTube(sp::ecs::Entity ship, int tube_nr, float missile_target_
     auto missiletubes = ship.getComponent<MissileTubes>();
     if (missiletubes && tube_nr >= 0 && tube_nr < int(missiletubes->mounts.size())) {
         sp::ecs::Entity target;
-        if (auto t = ship.getComponent<Target>())
+        if (auto t = ship.getComponent<WeaponsTarget>())
             target = t->entity;
         MissileSystem::fire(ship, missiletubes->mounts[tube_nr], missile_target_angle, target);
     }
@@ -1174,6 +1201,11 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// The message appears for 5 seconds, but new messages immediately replace any displayed message.
     /// Example: globalMessage("You will soon die!")
     env.setGlobal("globalMessage", &luaGlobalMessage);
+    /// string getDefaultWeaponsTargetingMode()
+    /// Returns the server's default weapons targeting mode as a string.
+    /// Possible values: "WeaponsTight", "EnemyAndUnknown", "WeaponsFree", "All"
+    /// Example: getDefaultWeaponsTargetingMode() -- returns "WeaponsFree" if that's the server default
+    env.setGlobal("getDefaultWeaponsTargetingMode", &luaGetDefaultWeaponsTargetingMode);
     /// void victory(string faction_name)
     /// Sets the given faction as the scenario's victor and ends the scenario.
     /// (The GM can unpause the game, but the scenario with its update function is destroyed.)
@@ -1355,6 +1387,15 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns whether the "Per-System Damage" setting is enabled in the running scenario.
     /// Example: isPerSystemDamageUsed() -- returns true by default
     env.setGlobal("isPerSystemDamageUsed", &luaIsPerSystemDamageUsed);
+    /// bool isWeaponsTargetingControlUsed()
+    /// Returns whether the "Weapons Targeting Control" setting is enabled in the running scenario.
+    /// Example: isWeaponsTargetingControlUsed() -- returns true by default
+    env.setGlobal("isWeaponsTargetingControlUsed", &luaIsWeaponsTargetingControlUsed);
+    /// bool isLegacyBeamTargetingUsed()
+    /// Returns whether the "Legacy Beam Targeting" setting is enabled in the running scenario.
+    /// Legacy beam targeting prevents beams from firing at anything but hostile targets, even if they're unscanned and their FoF is unknown.
+    /// Example: isWeaponsTargetingControlUsed() -- returns true by default
+    env.setGlobal("isLegacyBeamTargetingUsed", &luaIsLegacyBeamTargetingUsed);
     /// bool isTacticalRadarAllowed()
     /// Returns whether the "Tactical Radar" setting for main screens is enabled in the running scenario.
     /// Example: isTacticalRadarAllowed() -- returns true by default
