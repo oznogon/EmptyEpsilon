@@ -1,16 +1,5 @@
 #include "beamweapon.h"
 #include "multiplayer_server.h"
-#include "components/scanning.h"
-#include "components/beamweapon.h"
-#include "components/collision.h"
-#include "components/docking.h"
-#include "components/reactor.h"
-#include "components/warpdrive.h"
-#include "components/target.h"
-#include "components/shields.h"
-#include "components/faction.h"
-#include "components/coolant.h"
-#include "components/sfx.h"
 #include "ecs/query.h"
 #include "main.h"
 #include "textureManager.h"
@@ -19,6 +8,19 @@
 #include "tween.h"
 #include "random.h"
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
+
+#include "components/scanning.h"
+#include "components/beamweapon.h"
+#include "components/collision.h"
+#include "components/docking.h"
+#include "components/reactor.h"
+#include "components/warpdrive.h"
+#include "components/weaponstarget.h"
+#include "components/shields.h"
+#include "components/faction.h"
+#include "components/coolant.h"
+#include "components/sfx.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -30,7 +32,7 @@ void BeamWeaponSystem::update(float delta)
     if (!game_server) return;
     if (delta <= 0.0f) return;
 
-    for(auto [entity, beamsys, target, transform, reactor, docking_port] : sp::ecs::Query<BeamWeaponSys, sp::ecs::optional<Target>, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>>()) {
+    for(auto [entity, beamsys, target, transform, reactor, docking_port] : sp::ecs::Query<BeamWeaponSys, sp::ecs::optional<WeaponsTarget>, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>>()) {
         auto warp = entity.getComponent<WarpDrive>();
 
         for(auto& mount : beamsys.mounts) {
@@ -38,9 +40,20 @@ void BeamWeaponSystem::update(float delta)
                 mount.cooldown -= delta * beamsys.getSystemEffectiveness();
             if (!target || !target->entity) continue;
 
-            // Check on beam weapons only if we are on the server, have a target, and
-            // not paused, and if the beams are cooled down or have a turret arc.
-            if (mount.range > 0.0f && Faction::getRelation(entity, target->entity) == FactionRelation::Enemy && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
+            // Check on beam weapons only if we are on the server, have a
+            // target, and not paused, and if the beams are cooled down or have
+            // a turret arc.
+            // If weapons targeting control is enabled, anything the player can
+            // target with weapons can also be fired upon, and weapons targeting
+            // controls manage FactionRelation validity. Otherwise, fall back to
+            // the legacy behavior of firing only at targeted enemies, even if
+            // the FoF status of the target is unknown.
+            if (mount.range > 0.0f
+                && delta > 0.0f
+                && (!warp || warp->current == 0.0f)
+                && (!docking_port || docking_port->state == DockingPort::State::NotDocking)
+                && ((gameGlobalInfo->use_weapons_targeting_control && (!gameGlobalInfo->use_legacy_beam_targeting || Faction::getRelation(entity, target->entity) == FactionRelation::Enemy))
+                || (!gameGlobalInfo->use_weapons_targeting_control && gameGlobalInfo->use_legacy_beam_targeting && Faction::getRelation(entity, target->entity) == FactionRelation::Enemy)))
             {
                 if (auto target_transform = target->entity.getComponent<sp::Transform>()) {
                     // Get the angle to the target.

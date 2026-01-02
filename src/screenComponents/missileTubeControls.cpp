@@ -5,8 +5,7 @@
 #include "components/warpdrive.h"
 #include "components/missiletubes.h"
 #include "components/collision.h"
-#include "components/target.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "systems/missilesystem.h"
 
 #include "gui/gui2_button.h"
@@ -168,7 +167,7 @@ void GuiMissileTubeControls::onUpdate()
             float target_angle = missile_target_angle;
             if (!manual_aim)
             {
-                auto target = my_spaceship.getComponent<Target>();
+                auto target = my_spaceship.getComponent<WeaponsTarget>();
                 target_angle = MissileSystem::calculateFiringSolution(my_spaceship, tubes->mounts[n], target ? target->entity : sp::ecs::Entity{});
                 if (target_angle == std::numeric_limits<float>::infinity()) {
                     auto transform = my_spaceship.getComponent<sp::Transform>();
@@ -232,7 +231,7 @@ void GuiMissileTubeControls::createTubeRow()
         {
             float target_angle = missile_target_angle;
             if (!manual_aim) {
-                auto target = my_spaceship.getComponent<Target>();
+                auto target = my_spaceship.getComponent<WeaponsTarget>();
                 target_angle = MissileSystem::calculateFiringSolution(my_spaceship, tubes->mounts[n], target ? target->entity : sp::ecs::Entity{});
                 if (target_angle == std::numeric_limits<float>::infinity()) {
                     auto transform = my_spaceship.getComponent<sp::Transform>();

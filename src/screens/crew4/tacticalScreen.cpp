@@ -10,7 +10,7 @@
 #include "components/jumpdrive.h"
 #include "components/collision.h"
 #include "components/shields.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "components/radar.h"
 
 #include "screenComponents/combatManeuver.h"
@@ -28,6 +28,7 @@
 #include "screenComponents/shieldsEnableButton.h"
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
+#include "screenComponents/weaponsTargetingModeSelector.h"
 #include "screenComponents/powerDamageIndicator.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
@@ -78,7 +79,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
 
     auto stats = new GuiElement(this, "STATS");
-    stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 160)->setAttribute("layout", "vertical");
+    stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 220)->setAttribute("layout", "vertical");
 
     // Ship statistics in the top left corner.
     auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45);
@@ -89,6 +90,46 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     velocity_display->setSize(240, 40);
     auto shields_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45);
     shields_display->setSize(240, 40);
+
+    if (gameGlobalInfo->use_weapons_targeting_control)
+    {
+        auto targeting_mode_selector = new GuiWeaponsTargetingModeSelector(stats, "TARGETING_MODE_SELECTOR");
+        targeting_mode_selector->setSize(240, 40);
+
+       // Row of visual aids for the targeting mode selector.
+        auto icon_row = new GuiElement(stats, "TARGETING_ICONS");
+        icon_row
+            ->setSize(240.0f, 20.0f)
+            ->setAttribute("layout", "horizontal");
+        // TODO: Align colors to common source
+        // For now, using radar.cpp BasicRadarRendering's.
+        (new GuiElement(icon_row, "" /* Spacer */))
+            ->setSize(10.0f, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_row, "ICON_ENEMY", "radar/arrow.png"))
+            ->setColor(glm::u8vec4(255, 0, 0, 255))
+            ->setAngle(-90.0f)
+            ->setSize(20.0f, GuiElement::GuiSizeMax);
+        (new GuiElement(icon_row, "" /* Spacer */))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_row, "ICON_UNKNOWN", "radar/arrow.png"))
+            ->setColor(glm::u8vec4(192, 192, 192, 255))
+            ->setAngle(-90.0f)
+            ->setSize(20.0f, GuiElement::GuiSizeMax);
+        (new GuiElement(icon_row, "" /* Spacer */))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_row, "ICON_NEUTRAL", "radar/arrow.png"))
+            ->setColor(glm::u8vec4(128, 128, 255, 255))
+            ->setAngle(-90.0f)
+            ->setSize(20.0f, GuiElement::GuiSizeMax);
+        (new GuiElement(icon_row, "" /* Spacer */))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_row, "ICON_FRIENDLY", "radar/arrow.png"))
+            ->setColor(glm::u8vec4(128, 255, 128, 255))
+            ->setAngle(-90.0f)
+            ->setSize(20.0f, GuiElement::GuiSizeMax);
+        (new GuiElement(icon_row, "" /* Spacer */))
+            ->setSize(10.0f, GuiElement::GuiSizeMax);
+    }
 
     // Weapon tube loading controls in the bottom left corner.
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
@@ -133,7 +174,7 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
         warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
         jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
 
-        auto target = my_spaceship.getComponent<Target>();
+        auto target = my_spaceship.getComponent<WeaponsTarget>();
         targets.set(target ? target->entity : sp::ecs::Entity{});
     }
     GuiOverlay::onDraw(renderer);
@@ -143,6 +184,13 @@ void TacticalScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
+        // Sync targets container with WeaponsTarget component
+        if (auto weapons_target = my_spaceship.getComponent<WeaponsTarget>()) {
+            if (weapons_target->entity != targets.get()) {
+                targets.set(weapons_target->entity);
+            }
+        }
+
         auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
         if (angle != 0.0f)
         {

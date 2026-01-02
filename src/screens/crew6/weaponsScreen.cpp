@@ -6,7 +6,7 @@
 
 #include "components/reactor.h"
 #include "components/shields.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "components/radar.h"
 #include "components/beamweapon.h"
 #include "components/collision.h"
@@ -15,6 +15,7 @@
 #include "screenComponents/aimLock.h"
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
+#include "screenComponents/weaponsTargetingModeSelector.h"
 #include "screenComponents/powerDamageIndicator.h"
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shieldsEnableButton.h"
@@ -82,7 +83,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     }
 
     auto stats = new GuiElement(this, "WEAPONS_STATS");
-    stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 120)->setAttribute("layout", "vertical");
+    stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 180)->setAttribute("layout", "vertical");
 
     energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
@@ -91,6 +92,56 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     rear_shield_display = new GuiKeyValueDisplay(stats, "REAR_SHIELD_DISPLAY", 0.45, tr("shields", "Rear"), "");
     rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setSize(240, 40);
 
+    // Targeting mode selector.
+    targeting_mode_selector = new GuiWeaponsTargetingModeSelector(stats, "TARGETING_MODE_SELECTOR");
+    targeting_mode_selector->setSize(240.0f, 40.0f)->hide();
+
+    if (gameGlobalInfo->use_weapons_targeting_control)
+    {
+        targeting_mode_selector->show();
+
+        // Row of visual aids for the targeting mode selector.
+        auto icon_row = new GuiElement(stats, "TARGETING_ICONS");
+        icon_row
+            ->setSize(240.0f, 20.0f)
+            ->setAttribute("layout", "horizontal");
+        // TODO: Align colors to common source
+        // For now, using radar.cpp BasicRadarRendering's.
+        (new GuiElement(icon_row, "" /* Spacer */))
+            ->setSize(10.0f, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_row, "ICON_ENEMY", "radar/arrow.png"))
+            ->setColor(glm::u8vec4(255, 0, 0, 255))
+            ->setAngle(-90.0f)
+            ->setSize(20.0f, GuiElement::GuiSizeMax);
+        and_unknown_label = new GuiLabel(icon_row, "", "+", 20.0f);
+        and_unknown_label
+            ->setAlignment(sp::Alignment::Center)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_row, "ICON_UNKNOWN", "radar/arrow.png"))
+            ->setColor(glm::u8vec4(192, 192, 192, 255))
+            ->setAngle(-90.0f)
+            ->setSize(20.0f, GuiElement::GuiSizeMax);
+        and_neutral_label = new GuiLabel(icon_row, "", "+", 20.0f);
+        and_neutral_label
+            ->setAlignment(sp::Alignment::Center)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_row, "ICON_NEUTRAL", "radar/arrow.png"))
+            ->setColor(glm::u8vec4(128, 128, 255, 255))
+            ->setAngle(-90.0f)
+            ->setSize(20.0f, GuiElement::GuiSizeMax);
+        and_friendly_label = new GuiLabel(icon_row, "", "+", 20.0f);
+        and_friendly_label
+            ->setAlignment(sp::Alignment::Center)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_row, "ICON_FRIENDLY", "radar/arrow.png"))
+            ->setColor(glm::u8vec4(128, 255, 128, 255))
+            ->setAngle(-90.0f)
+            ->setSize(20.0f, GuiElement::GuiSizeMax);
+        (new GuiElement(icon_row, "" /* Spacer */))
+            ->setSize(10.0f, GuiElement::GuiSizeMax);
+    }
+
+    // Shield controls.
     if (gameGlobalInfo->use_beam_shield_frequencies)
     {
         //The shield frequency selection includes a shield enable button.
@@ -123,7 +174,7 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
         } else {
             rear_shield_display->hide();
         }
-        if (auto tg = my_spaceship.getComponent<Target>())
+        if (auto tg = my_spaceship.getComponent<WeaponsTarget>())
             targets.set(tg->entity);
         else
             targets.set(sp::ecs::Entity{});
@@ -155,6 +206,22 @@ void WeaponsScreen::onUpdate()
                 my_player_info->commandSetTarget(targets.get());
             }
         }
+
+        // Sync targets container with WeaponsTarget component
+        if (auto weapons_target = my_spaceship.getComponent<WeaponsTarget>())
+        {
+            if (weapons_target->entity != targets.get())
+                targets.set(weapons_target->entity);
+        }
+
+        if (targeting_mode_selector->isVisible())
+        {
+            const int idx = targeting_mode_selector->getSelectionIndex();
+            and_unknown_label->setText(idx > 0 ? "+" : "");
+            and_neutral_label->setText(idx > 1 ? "+" : "");
+            and_friendly_label->setText(idx > 2 ? "+" : "");
+        }
+
         auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
         if (aim_adjust != 0.0f)
         {
