@@ -1,5 +1,6 @@
 #include "targetsContainer.h"
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "ecs/query.h"
 
 #include "systems/collision.h"
@@ -9,6 +10,10 @@
 #include "components/hull.h"
 #include "components/scanning.h"
 #include "components/radar.h"
+#include "components/hacking.h"
+#include "components/weaponstargetingmode.h"
+#include "components/docking.h"
+#include "components/faction.h"
 
 TargetsContainer::TargetsContainer()
 {
@@ -204,19 +209,91 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
     switch (selection_type)
     {
     case Selectable: // Used by Relay
-        if (entity.hasComponent<Hull>()) return true;
-        if (entity.hasComponent<ShareShortRangeRadar>()) return true;
+        // Always select entities with both Health and Hull.
+        if (entity.hasComponent<Health>() && entity.hasComponent<Hull>()) return true;
+        // Always select entities if they have scan state or share radar.
         if (entity.hasComponent<ScanState>()) return true;
+        if (entity.getComponent<ShareShortRangeRadar>()) return true;
+        if (entity.hasComponent<ScanState>()) return true;
+
+        // Select entities if they can accept hails.
+        // Targeting logic should align with "Open comms" button enabling logic
+        // on Relay.
+        if ((my_spaceship && my_spaceship.hasComponent<CommsTransmitter>()) && (entity.hasComponent<CommsReceiver>() || entity.hasComponent<CommsTransmitter>())) return HackingDevice::canHack(my_spaceship, entity);
         break;
+
     case Targetable: // Used by Weapons
-        if (entity.hasComponent<Health>()) return true;
+        {
+            // Must have Health to be targetable.
+            if (!entity.hasComponent<Health>()) return false;
+
+            // Filter out our own probes.
+            if (auto radar_link = entity.getComponent<AllowRadarLink>())
+                if (radar_link->owner == my_spaceship) return false;
+
+            // Get targeting mode, default to gameGlobalInfo setting.
+            TargetingMode mode = gameGlobalInfo ? gameGlobalInfo->default_weapons_targeting_mode : TargetingMode::EnemyAndUnknown;
+            auto targeting_mode = my_spaceship.getComponent<WeaponsTargetingMode>();
+            if (targeting_mode) mode = targeting_mode->mode;
+
+            // Get faction relation and scan state.
+            FactionRelation relation = Faction::getRelation(my_spaceship, entity);
+            auto scanstate = entity.getComponent<ScanState>();
+
+            // Apply targeting mode filter.
+            switch (mode)
+            {
+                case TargetingMode::WeaponsTight:
+                    // Weapons tight: target only confirmed enemies (no unknown
+                    // FoF).
+                    if (!scanstate) return false;
+                    if (scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
+                        return false;
+
+                    if (relation == FactionRelation::Enemy) return true;
+
+                    return false;
+
+                case TargetingMode::EnemyAndUnknown:
+                    // Target only enemies and entities with no/unknown faction.
+                    if (scanstate && scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
+                        return true;
+
+                    if (relation == FactionRelation::Enemy || relation == FactionRelation::None)
+                        return true;
+
+                    return false;
+
+                case TargetingMode::WeaponsFree:
+                    // Weapons free: target all but confirmed friendlies
+                    // (enemies, neutrals, and unknown).
+                    if (scanstate && scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
+                        return true;
+
+                    if (relation != FactionRelation::Friendly) return true;
+
+                    return false;
+
+                case TargetingMode::All:
+                    // Target everything with Health, including friendly entities.
+                    return true;
+            }
+
+            return false;
+        }
         break;
+
     case Scannable: // Used by Science
-        if (entity.hasComponent<Hull>()) return true;
+        // Can scan entities that have both Health and Hull.
+        if (entity.hasComponent<Health>() && entity.hasComponent<Hull>()) return true;
+
+        // Can scan entities without Health and/or Hull if they have scan state
+        // or description, or share radar.
         if (entity.hasComponent<ScanState>()) return true;
         if (entity.hasComponent<ScienceDescription>()) return true;
         if (entity.hasComponent<ShareShortRangeRadar>()) return true;
         break;
     }
+
     return false;
 }
