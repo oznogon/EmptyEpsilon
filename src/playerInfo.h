@@ -7,6 +7,7 @@
 #include "missileWeaponData.h"
 #include "crewPosition.h"
 
+enum class TargetingMode;
 
 class PlayerInfo;
 class RenderLayer;
@@ -40,6 +41,11 @@ public:
     void commandJump(float distance);
     void commandAbortJump();
     void commandSetTarget(sp::ecs::Entity target);
+    void commandSetWeaponsTargetingMode(TargetingMode mode);
+    void commandSetHackTarget(sp::ecs::Entity target);
+    void commandSetCommsTarget(sp::ecs::Entity target);
+    void commandSetScienceTarget(sp::ecs::Entity target);
+    void commandSetRelayTarget(sp::ecs::Entity target);
     void commandSetScienceLink(sp::ecs::Entity probe);
     void commandClearScienceLink();
     void commandLoadTube(uint32_t tubeNumber, EMissileWeapons missileType);

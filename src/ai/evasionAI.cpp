@@ -10,7 +10,7 @@
 #include "components/jumpdrive.h"
 #include "components/warpdrive.h"
 #include "components/impulse.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "components/faction.h"
 #include "systems/radarblock.h"
 
@@ -207,7 +207,7 @@ float EvasionAI::evasionDangerScore(sp::ecs::Entity ship, float scan_radius)
                 danger *= 1.5f; //yes that sound stupid somebody had mounted its forward reactor on reverse but...
         }
     }
-    if (ship.hasComponent<Target>() && ship.getComponent<Target>()->entity == owner)
+    if (ship.hasComponent<WeaponsTarget>() && ship.getComponent<WeaponsTarget>()->entity == owner)
         danger = (danger + 1) * 2;
     return danger;
 }

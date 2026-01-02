@@ -7,7 +7,7 @@
 #include "ecs/query.h"
 #include "i18n.h"
 #include "components/collision.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "components/player.h"
 #include "components/name.h"
 
@@ -286,7 +286,7 @@ void CinematicViewScreen::update(float delta)
         min_camera_distance = radius * 2.0f;
 
         // Check if our selected ship has a weapons target.
-        auto target_of_target = target.getComponent<Target>() ? target.getComponent<Target>()->entity : sp::ecs::Entity{};
+        auto target_of_target = target.getComponent<WeaponsTarget>() ? target.getComponent<WeaponsTarget>()->entity : sp::ecs::Entity{};
         auto target_of_target_transform = target_of_target.getComponent<sp::Transform>();
         if (target_of_target && glm::length(target_of_target_transform->getPosition() - target_position_2D) > 10000.0f)
             target_of_target_transform = nullptr;

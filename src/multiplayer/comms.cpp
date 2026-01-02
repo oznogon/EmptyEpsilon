@@ -14,5 +14,6 @@ BASIC_REPLICATION_IMPL(CommsTransmitterReplication, CommsTransmitter)
     BASIC_REPLICATION_FIELD(open_delay);
     BASIC_REPLICATION_FIELD(target_name);
     BASIC_REPLICATION_FIELD(incomming_message);
+    BASIC_REPLICATION_FIELD(target);
     REPLICATE_VECTOR_IF_DIRTY(script_replies, script_replies_dirty);
 }

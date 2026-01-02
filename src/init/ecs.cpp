@@ -22,7 +22,7 @@
 #include "multiplayer/selfdestruct.h"
 #include "multiplayer/database.h"
 #include "multiplayer/maneuveringthrusters.h"
-#include "multiplayer/target.h"
+#include "multiplayer/weaponstarget.h"
 #include "multiplayer/jumpdrive.h"
 #include "multiplayer/hacking.h"
 #include "multiplayer/customshipfunction.h"
@@ -38,6 +38,9 @@
 #include "multiplayer/radarblock.h"
 #include "multiplayer/shiplog.h"
 #include "multiplayer/zone.h"
+#include "multiplayer/weaponstargetingmode.h"
+#include "multiplayer/sciencetarget.h"
+#include "multiplayer/relaytarget.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -124,7 +127,10 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShieldsReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShipLogReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<SpinReplication>();
-    sp::ecs::MultiplayerReplication::registerComponentReplication<TargetReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<WeaponsTargetReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<WeaponsTargetingModeReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceTargetReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<RelayTargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpDriveReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpJammerReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ZoneReplication>();

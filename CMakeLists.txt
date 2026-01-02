@@ -300,6 +300,7 @@ set(MAIN_SOURCES
     src/screenComponents/beamTargetSelector.cpp
     src/screenComponents/shipInternalView.cpp
     src/screenComponents/beamFrequencySelector.cpp
+    src/screenComponents/weaponsTargetingModeSelector.cpp
     src/screenComponents/radarView.cpp
     src/screenComponents/rawScannerDataRadarOverlay.cpp
     src/screenComponents/scanTargetButton.cpp
@@ -346,7 +347,9 @@ set(MAIN_SOURCES
     src/components/shields.cpp
     src/components/beamweapon.h
     src/components/beamweapon.cpp
-    src/components/target.h
+    src/components/weaponstarget.h
+    src/components/sciencetarget.h
+    src/components/relaytarget.h
     src/components/missiletubes.h
     src/components/selfdestruct.h
     src/components/player.h
@@ -365,6 +368,7 @@ set(MAIN_SOURCES
     src/components/internalrooms.cpp
     src/components/probe.h
     src/components/hacking.h
+    src/components/hacking.cpp
     src/components/ai.h
     src/components/radarblock.h
     src/components/gravity.h
@@ -472,8 +476,14 @@ set(MAIN_SOURCES
     src/multiplayer/selfdestruct.cpp
     src/multiplayer/hull.h
     src/multiplayer/hull.cpp
-    src/multiplayer/target.h
-    src/multiplayer/target.cpp
+    src/multiplayer/weaponstarget.h
+    src/multiplayer/weaponstarget.cpp
+    src/multiplayer/weaponstargetingmode.h
+    src/multiplayer/weaponstargetingmode.cpp
+    src/multiplayer/sciencetarget.h
+    src/multiplayer/sciencetarget.cpp
+    src/multiplayer/relaytarget.h
+    src/multiplayer/relaytarget.cpp
     src/multiplayer/database.h
     src/multiplayer/database.cpp
     src/multiplayer/maneuveringthrusters.h

@@ -42,11 +42,15 @@
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/shields.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
+#include "components/weaponstargetingmode.h"
+#include "components/sciencetarget.h"
+#include "components/relaytarget.h"
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
 #include "components/selfdestruct.h"
 #include "components/hacking.h"
+#include "components/comms.h"
 #include "components/scanning.h"
 #include "components/radar.h"
 #include "components/internalrooms.h"
@@ -105,6 +109,11 @@ static const uint16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
+static const uint16_t CMD_SET_WEAPONS_TARGETING_MODE = 0x002D;
+static const uint16_t CMD_SET_HACK_TARGET = 0x002E;
+static const uint16_t CMD_SET_COMMS_TARGET = 0x002F;
+static const uint16_t CMD_SET_SCIENCE_TARGET = 0x0030;
+static const uint16_t CMD_SET_RELAY_TARGET = 0x0031;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -211,6 +220,53 @@ void PlayerInfo::commandSetTarget(sp::ecs::Entity target)
         packet << CMD_SET_TARGET << target;
     else
         packet << CMD_SET_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetWeaponsTargetingMode(TargetingMode mode)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_WEAPONS_TARGETING_MODE << uint8_t(mode);
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetHackTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_HACK_TARGET << target;
+    else
+        packet << CMD_SET_HACK_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetCommsTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_COMMS_TARGET << target;
+    else
+        packet << CMD_SET_COMMS_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetScienceTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_SCIENCE_TARGET << target;
+    else
+        packet << CMD_SET_SCIENCE_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetRelayTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_RELAY_TARGET << target;
+    else
+        packet << CMD_SET_RELAY_TARGET << sp::ecs::Entity();
     sendClientCommand(packet);
 }
 
@@ -635,7 +691,116 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             sp::ecs::Entity target;
             packet >> target;
-            ship.getOrAddComponent<Target>().entity = target;
+            ship.getOrAddComponent<WeaponsTarget>().entity = target;
+        }
+        break;
+    case CMD_SET_WEAPONS_TARGETING_MODE:
+        {
+            uint8_t mode_value;
+            packet >> mode_value;
+            TargetingMode new_mode = TargetingMode(mode_value);
+            ship.getOrAddComponent<WeaponsTargetingMode>().mode = new_mode;
+
+            // Check if current target is still valid in new mode, clear if not
+            if (auto weapons_target = ship.getComponent<WeaponsTarget>())
+            {
+                sp::ecs::Entity target = weapons_target->entity;
+                if (target)
+                {
+                    // Check if target has Health
+                    if (!target.hasComponent<Health>())
+                    {
+                        ship.removeComponent<WeaponsTarget>();
+                        break;
+                    }
+
+                    // Check mode-specific validity
+                    FactionRelation relation = Faction::getRelation(ship, target);
+                    bool is_valid = false;
+
+                    switch (new_mode)
+                    {
+                        case TargetingMode::WeaponsTight:
+                            // Only confirmed enemies (must be scanned)
+                            if (relation == FactionRelation::Enemy)
+                            {
+                                if (auto scanstate = target.getComponent<ScanState>())
+                                {
+                                    if (scanstate->getStateFor(ship) != ScanState::State::NotScanned)
+                                        is_valid = true;
+                                }
+                            }
+                            break;
+
+                        case TargetingMode::EnemyAndUnknown:
+                            // Only enemies, entities with no faction, and unknown FoF
+                            if (auto scanstate = target.getComponent<ScanState>())
+                            {
+                                if (scanstate->getStateFor(ship) == ScanState::State::NotScanned)
+                                {
+                                    is_valid = true;
+                                    break;
+                                }
+                            }
+                            if (relation == FactionRelation::Enemy || relation == FactionRelation::None)
+                                is_valid = true;
+                            break;
+
+                        case TargetingMode::WeaponsFree:
+                            // All but confirmed friendlies (enemies, neutrals, and unknown)
+                            if (auto scanstate = target.getComponent<ScanState>())
+                            {
+                                if (scanstate->getStateFor(ship) == ScanState::State::NotScanned)
+                                {
+                                    is_valid = true;
+                                    break;
+                                }
+                            }
+                            if (relation != FactionRelation::Friendly)
+                                is_valid = true;
+                            break;
+
+                        case TargetingMode::All:
+                            // Any and all entities with Health, regardless of
+                            // FactionRelation or ScanState
+                            is_valid = true;
+                            break;
+                    }
+
+                    // Clear target if no longer valid.
+                    if (!is_valid) ship.removeComponent<WeaponsTarget>();
+                }
+            }
+        }
+        break;
+    case CMD_SET_HACK_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            if (auto hacking = ship.getComponent<HackingDevice>())
+                hacking->target = target;
+        }
+        break;
+    case CMD_SET_COMMS_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            if (auto comms = ship.getComponent<CommsTransmitter>())
+                comms->target = target;
+        }
+        break;
+    case CMD_SET_SCIENCE_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            ship.getOrAddComponent<ScienceTarget>().entity = target;
+        }
+        break;
+    case CMD_SET_RELAY_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            ship.getOrAddComponent<RelayTarget>().entity = target;
         }
         break;
     case CMD_LOAD_TUBE:
@@ -668,7 +833,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             auto missiletubes = ship.getComponent<MissileTubes>();
             if (missiletubes && tube_nr < missiletubes->mounts.size()) {
                 sp::ecs::Entity target;
-                if (auto t = ship.getComponent<Target>())
+                if (auto t = ship.getComponent<WeaponsTarget>())
                     target = t->entity;
                 MissileSystem::fire(ship, missiletubes->mounts[tube_nr], missile_target_angle, target);
             }

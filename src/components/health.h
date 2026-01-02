@@ -6,7 +6,7 @@
 // Component for entities that can take damage and be destroyed.
 // This component tracks current and max health values for all damageable
 // entities, and implements damage and destruction callbacks.
-// Entities are typically destroyed if daamaged while at zero health.
+// Entities are typically destroyed if damaged while at zero health.
 // Destructability can be disabled to prevent player ship destruction in LARP
 // scenarios or tutorials.
 // 

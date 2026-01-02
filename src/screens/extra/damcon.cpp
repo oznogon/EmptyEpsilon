@@ -38,8 +38,7 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         auto health = my_spaceship.getComponent<Health>();
-        auto hull = my_spaceship.hasComponent<Hull>();
-        if (health && hull)
+        if (health && my_spaceship.hasComponent<Hull>())
         {
             hull_display->setValue(string(int(100 * health->current / health->max)) + "%");
             if (health->current < health->max / 4.0f)

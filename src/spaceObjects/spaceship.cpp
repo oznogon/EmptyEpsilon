@@ -22,7 +22,7 @@
 #include "components/shields.h"
 #include "components/hull.h"
 #include "components/missiletubes.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "components/shiplog.h"
 #include "ecs/query.h"
 

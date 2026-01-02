@@ -11,7 +11,7 @@
 #include "components/beamweapon.h"
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "components/faction.h"
 #include "components/collision.h"
 #include "components/radar.h"
@@ -42,7 +42,7 @@ void ShipAI::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, 
     auto transform = owner.getComponent<sp::Transform>();
     if (!transform) return;
     auto world_position = transform->getPosition();
-    auto target = owner.getComponent<Target>();
+    auto target = owner.getComponent<WeaponsTarget>();
     if (target)
     {
         if (auto t = target->entity.getComponent<sp::Transform>()) {
@@ -89,9 +89,9 @@ void ShipAI::run(float delta)
     }
 
     //If we have a target and weapons, engage the target.
-    if (owner.hasComponent<Target>() && (has_missiles || has_beams))
+    if (owner.hasComponent<WeaponsTarget>() && (has_missiles || has_beams))
     {
-        runAttack(owner.getComponent<Target>()->entity);
+        runAttack(owner.getComponent<WeaponsTarget>()->entity);
     }else{
         runOrders();
     }
@@ -255,7 +255,7 @@ void ShipAI::updateWeaponState(float delta)
 
 void ShipAI::updateTarget()
 {
-    sp::ecs::Entity target = owner.hasComponent<Target>() ? owner.getComponent<Target>()->entity : sp::ecs::Entity{};
+    sp::ecs::Entity target = owner.hasComponent<WeaponsTarget>() ? owner.getComponent<WeaponsTarget>()->entity : sp::ecs::Entity{};
     sp::ecs::Entity new_target;
     auto ot = owner.getComponent<sp::Transform>();
     if (!ot) return;
@@ -310,7 +310,7 @@ void ShipAI::updateTarget()
     // radar range.
     if (ai->orders == AIOrder::FlyFormation && ai->order_target)
     {
-        auto order_target_target = ai->order_target.getComponent<Target>();
+        auto order_target_target = ai->order_target.getComponent<WeaponsTarget>();
 
         if (order_target_target) {
             if (auto ottt = order_target_target->entity.getComponent<sp::Transform>()) {
@@ -378,12 +378,12 @@ void ShipAI::updateTarget()
     // If we still don't have a target, set that on the owner.
     if (!target)
     {
-        owner.removeComponent<Target>();
+        owner.removeComponent<WeaponsTarget>();
     }
     // Otherwise, set the new target on the owner.
     else
     {
-        owner.getOrAddComponent<Target>().entity = target;
+        owner.getOrAddComponent<WeaponsTarget>().entity = target;
     }
 }
 
@@ -413,7 +413,7 @@ void ShipAI::runOrders()
             if (has_missiles || has_beams)
             {
                 if (auto new_target = findBestTarget(ot->getPosition(), relay_range))
-                    owner.getOrAddComponent<Target>().entity = new_target;
+                    owner.getOrAddComponent<WeaponsTarget>().entity = new_target;
                 else
                 {
                     // If our current target coords are 0,0, reinitalize them to

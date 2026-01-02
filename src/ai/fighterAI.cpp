@@ -3,7 +3,7 @@
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
 #include "components/collision.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "systems/missilesystem.h"
 #include "ai/fighterAI.h"
 #include "ai/aiFactory.h"
@@ -22,7 +22,7 @@ FighterAI::FighterAI(sp::ecs::Entity owner)
 
 bool FighterAI::canSwitchAI()
 {
-    if (owner.hasComponent<Target>() && (has_missiles || has_beams))
+    if (owner.hasComponent<WeaponsTarget>() && (has_missiles || has_beams))
     {
         if (attack_state == State::Dive)
             return false;

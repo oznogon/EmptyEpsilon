@@ -66,9 +66,8 @@ void DockingSystem::update(float delta)
                 // so, do it.
                 if (bay && (bay->flags & DockingBay::Repair))
                 {
-                    const auto hull = entity.hasComponent<Hull>();
                     auto health = entity.getComponent<Health>();
-                    if (hull && health && health->current < health->max)
+                    if (entity.hasComponent<Hull>() && health && health->current < health->max)
                     {
                         health->current += delta;
                         if (health->current > health->max)

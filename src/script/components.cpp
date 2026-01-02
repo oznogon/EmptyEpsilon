@@ -21,7 +21,10 @@
 #include "components/shields.h"
 #include "components/docking.h"
 #include "components/beamweapon.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
+#include "components/weaponstargetingmode.h"
+#include "components/sciencetarget.h"
+#include "components/relaytarget.h"
 #include "components/reactor.h"
 #include "components/impulse.h"
 #include "components/maneuveringthrusters.h"
@@ -506,8 +509,14 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color_fire);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage_type);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
-    sp::script::ComponentHandler<Target>::name("weapons_target");
-    BIND_MEMBER(Target, entity);
+    sp::script::ComponentHandler<WeaponsTarget>::name("weapons_target");
+    BIND_MEMBER(WeaponsTarget, entity);
+    sp::script::ComponentHandler<WeaponsTargetingMode>::name("weapons_targeting_mode");
+    BIND_MEMBER(WeaponsTargetingMode, mode);
+    sp::script::ComponentHandler<ScienceTarget>::name("science_target");
+    BIND_MEMBER(ScienceTarget, entity);
+    sp::script::ComponentHandler<RelayTarget>::name("relay_target");
+    BIND_MEMBER(RelayTarget, entity);
     sp::script::ComponentHandler<BeamEffect>::name("beam_effect");
     BIND_MEMBER(BeamEffect, lifetime);
     BIND_MEMBER(BeamEffect, fade_speed);
@@ -642,6 +651,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(PlayerControl, allowed_positions);
     sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
     BIND_MEMBER(HackingDevice, effectiveness);
+    BIND_MEMBER(HackingDevice, target);
     sp::script::ComponentHandler<ShipLog>::name("ship_log");
 
     sp::script::ComponentHandler<MoveTo>::name("move_to");

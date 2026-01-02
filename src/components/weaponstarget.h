@@ -2,7 +2,7 @@
 
 #include "ecs/entity.h"
 
-class Target
+class WeaponsTarget
 {
 public:
     sp::ecs::Entity entity;

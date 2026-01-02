@@ -12,7 +12,7 @@
 #include "components/collision.h"
 #include "components/maneuveringthrusters.h"
 #include "components/shields.h"
-#include "components/target.h"
+#include "components/weaponstarget.h"
 #include "components/radar.h"
 
 #include "screenComponents/viewport3d.h"
@@ -149,7 +149,7 @@ void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
 
         missile_aim->setVisible(tube_controls->getManualAim());
 
-        auto target = my_spaceship.getComponent<Target>();
+        auto target = my_spaceship.getComponent<WeaponsTarget>();
         if (target)
             targets.set(target->entity);
         else
