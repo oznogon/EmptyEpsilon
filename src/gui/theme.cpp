@@ -3,6 +3,7 @@
 #include <io/keyValueTreeLoader.h>
 #include <graphics/freetypefont.h>
 #include <logging.h>
+#include <unordered_set>
 
 static std::unordered_map<string, sp::Font*> fonts;
 std::unordered_map<string, GuiTheme*> GuiTheme::themes;
