@@ -239,7 +239,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(GuiElement::GuiSizeMax, 310.0f)
             ->setAttribute("layout", "vertical");
         radar_rotation_lock
-            ->setAttribute("margin", "0, 20");
+            ->setAttribute("margin", "0, 0, 20, 0");
 
         (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("Radar rotation lock"), 30.0f))
             ->addBackground()
@@ -301,8 +301,6 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         lock_row
             ->setSize(GuiElement::GuiSizeMax, row_height)
             ->setAttribute("layout", "horizontal");
-        lock_row
-            ->setAttribute("margin", "0, 0, 0, 10");
 
         (new GuiLabel(lock_row, "SCIENCE_LOCK_DETAILS", tr("radar_locks", "Science,\nOperations"), 25.0f))
             ->setAlignment(sp::Alignment::CenterRight)
@@ -322,16 +320,18 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(200.0f, 50.0f);
     }
 
-    (new GuiLabel(interface_right_column, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("Cinematic view options"), 30))
+    // TODO: Why the long space
+    (new GuiLabel(interface_right_column, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("Cinematic view options"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
-        ->setAttribute("margin", "0, 0, 20, 0");
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Mouselook camera axis inversion
     (new GuiToggleButton(interface_right_column, "TOGGLE_MOUSELOOK_INVERSION", tr("Invert camera y-axis"), [this](bool value)
     {
         PreferencesManager::set("camera_mouse_inverted", value ? "1" : "0");
-    }))->setValue(PreferencesManager::get("camera_mouse_inverted", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50.0f);
+    }))
+        ->setValue(PreferencesManager::get("camera_mouse_inverted", "0") == "1")
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // TODO: Rename to generic camera sensitivity
     auto initial_mouselook_sensitivity = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
@@ -362,7 +362,9 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
     (new GuiToggleButton(interface_right_column, "RANDOMIZE_CINEMATIC_FLYBY", tr("Randomize cinematic fly-by angles"), [this](bool value)
     {
         PreferencesManager::set("camera_flyby_randomized", value ? "1" : "0");
-    }))->setValue(PreferencesManager::get("camera_flyby_randomized", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50.0f);
+    }))
+        ->setValue(PreferencesManager::get("camera_flyby_randomized", "0") == "1")
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 }
 
 void OptionsMenu::setupGraphicsOptions()
