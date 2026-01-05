@@ -253,6 +253,7 @@ template<> struct Convert<MissileTubes::MountPoint::State> {
         case MissileTubes::MountPoint::State::Loaded: lua_pushstring(L, "loaded"); break;
         case MissileTubes::MountPoint::State::Unloading: lua_pushstring(L, "unloading"); break;
         case MissileTubes::MountPoint::State::Firing: lua_pushstring(L, "firing"); break;
+        case MissileTubes::MountPoint::State::Fired: lua_pushstring(L, "fired"); break;
         }
         return 1;
     }
@@ -268,6 +269,8 @@ template<> struct Convert<MissileTubes::MountPoint::State> {
             return MissileTubes::MountPoint::State::Unloading;
         else if (str == "firing")
             return MissileTubes::MountPoint::State::Firing;
+        else if (str == "fired")
+            return MissileTubes::MountPoint::State::Fired;
         luaL_error(L, "Unknown MissileTubes::MountPoint::State type: %s", str.c_str());
         return MissileTubes::MountPoint::State::Empty;
     }
