@@ -1,9 +1,8 @@
-#ifndef GUI_THEME_H
-#define GUI_THEME_H
+#pragma once
 
 #include <stringImproved.h>
 #include "gui2_element.h"
-#include <unordered_map>
+#include <unordered_set>
 
 class GuiThemeStyle
 {
@@ -13,7 +12,7 @@ public:
     public:
         string texture;
         glm::u8vec4 color;
-        float size; //general size parameter, depends on the widget type what it means.
+        float size; // General size parameter, depends on the widget type what it means.
         sp::Font* font;
         float font_offset = 0.0f;
         string sound;   //Sound effect played by the widget on certain actions.
@@ -26,6 +25,8 @@ public:
 
     Themes are loaded from a text resource, and referenced from GuiElement classes.
     A single theme contains information on how to style different widget elements.
+    A theme can inherit one or more parent themes. A child theme overrides only the
+    styles it defines.
 
     Each element describes the following properties:
     - texture
@@ -62,9 +63,9 @@ private:
 
     string name;
     std::unordered_map<string, GuiThemeStyle> styles;
+    std::vector<string> parent_themes;
 
     static std::unordered_map<string, GuiTheme*> themes;
     static string current_theme;
 };
 
-#endif//GUI_THEME_H
