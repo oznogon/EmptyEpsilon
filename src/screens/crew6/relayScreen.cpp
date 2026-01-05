@@ -115,11 +115,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     option_buttons->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     // Open comms button.
-    if (allow_comms == true)
-        (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", tr("Open Comms"), &targets))->setSize(GuiElement::GuiSizeMax, 50);
-    else
-        (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", tr("Link to Comms"), &targets))->setSize(GuiElement::GuiSizeMax, 50);
-
+    (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", tr("Open comms"), &targets, allow_comms))->setSize(GuiElement::GuiSizeMax, 50);
 
     // Hack target
     hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"), [this](){

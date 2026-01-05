@@ -133,13 +133,13 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 
     // Select language
     {
-        (new GuiLabel(interface_left_column, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))
+        (new GuiLabel(interface_left_column, "LANGUAGE_OPTIONS_LABEL", tr("Interface language"), 30.0f))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, 50.0f);
-        
+
         std::vector<string> languages = findResources("locale/main.*.po");
         // Strip extension
-        for(string &language : languages) 
+        for (string &language : languages)
             language = language.substr(language.find(".") + 1, language.rfind("."));
         std::sort(languages.begin(), languages.end());
 
@@ -244,9 +244,6 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("Radar rotation lock"), 30.0f))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, 50.0f);
-        (new GuiLabel(radar_rotation_lock, "RADAR_LOCK_DETAILS", tr("On: Top of radar points forward, radar rotates\nOff: Top of radar points to heading 0, ship rotates"), 20.0f))
-            ->setSize(GuiElement::GuiSizeMax, 60.0f)
-            ->setAttribute("margin", "0, 0, 0, 20");
 
         // Helms/Tactical/Single Pilot rotation lock.
         const float row_height = 50.0f;
@@ -255,7 +252,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(GuiElement::GuiSizeMax, row_height)
             ->setAttribute("layout", "horizontal");
         lock_row
-            ->setAttribute("margin", "0, 0, 0, 10");
+            ->setAttribute("margin", "0, 0, 20, 10");
 
         (new GuiLabel(lock_row, "HELMS_LOCK_DETAILS", tr("radar_locks", "Helms, Tactical,\nSingle Pilot"), 25.0f))
             ->setAlignment(sp::Alignment::CenterRight)
