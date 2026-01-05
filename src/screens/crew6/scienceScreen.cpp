@@ -10,6 +10,7 @@
 #include "components/customshipfunction.h"
 #include "components/utilityBeam.h"
 #include "components/shields.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/collision.h"
 #include "components/radar.h"
@@ -497,8 +498,12 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 }
                 info_shields->setValue(str);
             }
-            if (auto hull = target.getComponent<Hull>())
-                info_hull->setValue(int(ceil(hull->current)));
+            // Show health only if entity has both Health and Hull.
+            if (auto health = target.getComponent<Health>())
+            {
+                if (target.hasComponent<Hull>())
+                    info_hull->setValue(static_cast<int>(ceil(health->current)));
+            }
         }
 
         // On a full scan, show tactical and systems data (if any), and its

@@ -6,6 +6,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/pickup.h"
 #include "components/reactor.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
@@ -87,12 +88,13 @@ void DockingSystem::update(float delta)
                     // so, do it.
                     if (bay->flags & DockingBay::Repair)
                     {
-                        auto hull = entity.getComponent<Hull>();
-                        if (hull && hull->current < hull->max)
+                        const auto hull = entity.hasComponent<Hull>();
+                        auto health = entity.getComponent<Health>();
+                        if (hull && health && health->current < health->max)
                         {
-                            hull->current += delta;
-                            if (hull->current > hull->max)
-                                hull->current = hull->max;
+                            health->current += delta;
+                            if (health->current > health->max)
+                                health->current = health->max;
                         }
                     }
                     // Otherwise, determine whether we're in a docking bay
@@ -100,8 +102,8 @@ void DockingSystem::update(float delta)
                     else if (is_berthed && my_berth.type == DockingBay::Berth::Type::Repair)
                     {
                         auto my_reactor = carrier_entity.getComponent<Reactor>();
-                        auto docked_hull = entity.getComponent<Hull>();
-                        if (!docked_hull) continue;
+                        auto docked_health = entity.getComponent<Health>();
+                        if (!docked_health) continue;
                         const float energy_transfer = my_berth.transfer_rate * delta;
 
                         // Repair hull, returning any remaining energy.
@@ -109,13 +111,13 @@ void DockingSystem::update(float delta)
                         {
                             if (transfer_remaining <= 0.0f) return;
 
-                            if (docked_hull->current < docked_hull->max)
+                            if (docked_health->current < docked_health->max)
                             {
-                                float amount_repaired = std::min(transfer_remaining, docked_hull->max - docked_hull->current);
+                                float amount_repaired = std::min(transfer_remaining, docked_health->max - docked_health->current);
                                 if (my_reactor && !my_reactor->useEnergy(amount_repaired)) return;
 
                                 transfer_remaining = std::max(0.0f, transfer_remaining - amount_repaired);
-                                docked_hull->current = std::min(docked_hull->max, docked_hull->current + amount_repaired);
+                                docked_health->current = std::min(docked_health->max, docked_health->current + amount_repaired);
                             }
                         };
 
