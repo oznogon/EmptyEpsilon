@@ -50,9 +50,9 @@ void EnergyInfoDisplay::onUpdate()
             setValue(toNearbyIntString(reactor->energy));
         }
         if (reactor->energy < 100.0f)
-            setColor(glm::u8vec4(255, 0, 0, 255));
+            setBackColor(glm::u8vec4(255, 0, 0, 255));
         else
-            setColor(glm::u8vec4{255,255,255,255});
+            setBackColor(glm::u8vec4{255,255,255,255});
     }
 }
 
@@ -104,9 +104,9 @@ void HullInfoDisplay::onUpdate()
     {
         setValue(toNearbyIntString(100.0f * health->current / health->max) + "%");
         if (health->current < health->max / 4.0f)
-            setColor(glm::u8vec4(255, 0, 0, 255));
+            setBackColor(glm::u8vec4(255, 0, 0, 255));
         else
-            setColor(glm::u8vec4{255,255,255,255});
+            setBackColor(glm::u8vec4{255,255,255,255});
     }
 }
 
