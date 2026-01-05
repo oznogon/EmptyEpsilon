@@ -23,6 +23,7 @@
 #include "components/coolant.h"
 #include "components/docking.h"
 #include "components/hull.h"
+#include "components/health.h"
 #include "components/missiletubes.h"
 #include "components/name.h"
 #include "components/pickup.h"
@@ -144,8 +145,8 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     entity_energy
         ->setIcon("gui/icons/energy")
         ->setSize(GuiElement::GuiSizeMax, kv_size);
-    entity_hull = new GuiKeyValueDisplay(selected_entity_kvs_2, "", kv_split, tr("dockingbay", "Hull"), "");
-    entity_hull
+    entity_health = new GuiKeyValueDisplay(selected_entity_kvs_2, "", kv_split, tr("dockingbay", "Hull"), "");
+    entity_health
         ->setIcon("gui/icons/hull")
         ->setSize(GuiElement::GuiSizeMax, kv_size);
     entity_probes = new GuiKeyValueDisplay(selected_entity_kvs_2, "", kv_split, tr("dockingbay", "Probes"), "");
@@ -1029,7 +1030,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
             ->setCustomIcon(1, "")
             ->setCustomLabel(2, "");
         entity_energy->setValue("");
-        entity_hull->setValue("");
+        entity_health->setValue("");
         entity_probes->setValue("");
         for (auto kv : entity_missiles) kv->setValue("");
         
@@ -1083,19 +1084,19 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     }
 
     // Update hull display.
-    if (auto hull = selected_entity.getComponent<Hull>())
+    if (auto health = selected_entity.getComponent<Health>())
     {
-        if (hull->max > 0.0f)
+        if (health->max > 0.0f)
         {
-            const string hull_value = static_cast<string>("{hull}%").format({
-                {"hull", static_cast<int>((hull->current / hull->max) * 100.0f)}
+            const string health_value = static_cast<string>("{health}%").format({
+                {"health", static_cast<int>((health->current / health->max) * 100.0f)}
             });
 
-            entity_hull->setValue(hull_value);
+            entity_health->setValue(health_value);
         }
-        else entity_hull->setValue("");
+        else entity_health->setValue("");
     }
-    else entity_hull->setValue(tr("dockingbay", "N/A"));
+    else entity_health->setValue(tr("dockingbay", "N/A"));
 
     // Update missile displays.
     if (auto tubes = selected_entity.getComponent<MissileTubes>())
@@ -1200,7 +1201,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
                 info.damage_icon->setVisible(system->health_max < 1.0f);
             }
 
-            if (!selected_entity.hasComponent<Hull>() && repair_prioritization_direction->getValue() < 0.0f)
+            if (!selected_entity.hasComponent<Health>() && repair_prioritization_direction->getValue() < 0.0f)
                 repair_prioritization_direction->setValue(0.0f);
         }
     }

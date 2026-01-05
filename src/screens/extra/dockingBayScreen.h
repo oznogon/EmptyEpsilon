@@ -49,7 +49,7 @@ private:
     GuiEntityInfoPanel* selected_entity_info;
     GuiKeyValueDisplay* entity_missiles[MW_Count];
     GuiKeyValueDisplay* entity_energy;
-    GuiKeyValueDisplay* entity_hull;
+    GuiKeyValueDisplay* entity_health;
     GuiKeyValueDisplay* entity_probes;
 
     GuiElement* move_controls_row;
