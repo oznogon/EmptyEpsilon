@@ -9,7 +9,7 @@
 
 class GuiButton;
 class GuiElement;
-class GuiHelpOverlay;
+class GuiHotkeyHelpOverlay;
 class GuiProgressbar;
 class GuiSelector;
 class GuiToggleButton;
@@ -33,7 +33,7 @@ private:
     GuiProgressbar* cycle_progress;
     GuiToggleButton* callsigns_toggle;
     GuiButton* ui_toggle;
-    GuiHelpOverlay* keyboard_help;
+    GuiHotkeyHelpOverlay* keyboard_help;
     GuiLabel* keybind_hint_label;
 
 #ifdef DEBUG
