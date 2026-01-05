@@ -12,6 +12,9 @@
         color: #1F252D
     }
 
+    # Positive offset moves the font down, negative moves it up.
+    font_offset: 0.0
+
     # GuiButton
     [button] {
         color: #FFFFFF
