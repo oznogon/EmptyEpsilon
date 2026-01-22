@@ -52,6 +52,9 @@
     # Alert overlay
     [alert_overlay] {
         image: gui/alertOverlay.png
+        # Image height in virtual pixels (horizontal max 900); width scales
+        # proportionally
+        size: 772
     }
 
     # Lua console
