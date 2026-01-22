@@ -24,20 +24,21 @@ glm::u8vec4 GuiTheme::toColor(const string& s)
 
 static sp::Font* cacheFont(const string& s, float offset = 0.0f)
 {
-    auto it = fonts.find(s);
+    const string cache_key = s + ":" + string(offset);
+    auto it = fonts.find(cache_key);
     if (it != fonts.end())
         return it->second;
     P<ResourceStream> font_stream = getResourceStream(s);
     if (!font_stream)
     {
         LOG(Debug, "Failed to load font resource ", s);
-        fonts[s] = nullptr;
+        fonts[cache_key] = nullptr;
         return nullptr;
     }
     auto result = new sp::FreetypeFont(s, font_stream);
     result->setBaselineOffset(offset);
-    fonts[s] = result;
-    LOG(Debug, "Loaded font ", s, " with baseline offset ", offset);
+    fonts[cache_key] = result;
+    LOG(Debug, "Loaded font ", cache_key, " with baseline offset ", offset);
     return result;
 }
 
