@@ -40,7 +40,11 @@ static bool canHack(sp::ecs::Entity entity)
 RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 : GuiOverlay(owner, "RELAY_SCREEN", GuiTheme::getColor("background")), mode(TargetSelection)
 {
+    default_cursor = theme->getStyle("mouse.default")->get(GuiElement::State::Normal).texture;
+    waypoint_cursor = theme->getStyle("mouse.waypoint")->get(GuiElement::State::Normal).texture;
+    probe_cursor = theme->getStyle("mouse.probe")->get(GuiElement::State::Normal).texture;
     targets.setAllowWaypointSelection();
+
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
     radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
     radar->setAutoCentering(false);
@@ -208,7 +212,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 RelayScreen::~RelayScreen()
 {
     if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
-        mouse_renderer->setSpriteImage("mouse.png");
+        mouse_renderer->setSpriteImage(default_cursor);
 }
 
 void RelayScreen::onDraw(sp::RenderTarget& renderer)
@@ -341,13 +345,13 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         {
         case TargetSelection:
         case MoveWaypoint:
-            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteImage(default_cursor);
             break;
         case WaypointPlacement:
-            mouse_renderer->setSpriteImage("waypoint.png");
+            mouse_renderer->setSpriteImage(waypoint_cursor);
             break;
         case LaunchProbe:
-            mouse_renderer->setSpriteImage("radar/probe.png");
+            mouse_renderer->setSpriteImage(probe_cursor);
             break;
         }
     }

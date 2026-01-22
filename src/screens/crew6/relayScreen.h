@@ -10,10 +10,15 @@ class GuiToggleButton;
 class GuiSlider;
 class GuiLabel;
 class GuiHackingDialog;
+class GuiThemeStyle;
 
 class RelayScreen : public GuiOverlay
 {
 private:
+    string default_cursor;
+    string waypoint_cursor;
+    string probe_cursor;
+
     enum EMode
     {
         TargetSelection,
