@@ -161,6 +161,7 @@ set(GUI_LIB_SOURCES
     src/gui/gui2_scrolltext.cpp
     src/gui/gui2_advancedscrolltext.cpp
     src/gui/gui2_button.cpp
+    src/gui/gui2_indicatorlight.cpp
     src/gui/gui2_resizabledialog.cpp
     src/gui/debugRenderer.cpp
     src/gui/gui2_element.cpp

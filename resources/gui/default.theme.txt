@@ -187,6 +187,21 @@
         }
     }
 
+    [indicator] {
+        [indicator.back] {
+            size: 25
+            color: #FFFFFFFF
+            color.disabled: #FFFFFFFF
+            image: gui/widget/IndicatorBackground.active.png
+            image.disabled: gui/widget/IndicatorBackground.inactive.png
+        }
+        [indicator.front] {
+            size: 20
+            color: #FFFFFFFF
+            color.disabled: #FFFFFF80
+        }
+    }
+
     [resizabledialog] {
         [resizabledialog.corner] {
             image: gui/widget/ResizeDialogCorner.png
