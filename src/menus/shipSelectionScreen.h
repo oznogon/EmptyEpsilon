@@ -15,6 +15,7 @@ class GuiPanel;
 class GuiButton;
 class GuiToggleButton;
 class GuiTextEntry;
+class GuiIndicatorLight;
 class CrewPositionSelection;
 class PasswordDialog;
 
@@ -48,6 +49,7 @@ private:
 
     PasswordDialog* password_dialog;
     std::vector<GameGlobalInfo::ShipSpawnInfo> ship_spawn_info;
+    GuiIndicatorLight* server_indicator;
 
     int last_selection_index = -1;
 public:
