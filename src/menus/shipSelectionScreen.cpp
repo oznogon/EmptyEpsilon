@@ -25,10 +25,11 @@
 #include "menus/luaConsole.h"
 #include "menus/optionsMenu.h"
 
-#include "gui/gui2_panel.h"
+#include "gui/gui2_indicatorlight.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_overlay.h"
+#include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_textentry.h"
@@ -524,6 +525,16 @@ ShipSelectionScreen::ShipSelectionScreen()
 
     // Control code entry dialog.
     password_dialog = new PasswordDialog(this, "PASSWORD_DIALOG");
+
+    // Server/Client indicator light
+    // Lit if running as server, dim if running as client
+    server_indicator = new GuiIndicatorLight(this, "SERVER_INDICATOR", game_server != nullptr);
+    server_indicator
+        ->setActiveColor({255, 0, 0, 255})
+        ->setBlink(true, 0.25f)
+        ->setLabel(game_server ? tr("Server") : tr("Client"), IndicatorContentPosition::Inside())
+        ->setPosition(-20.0f, 20.0f, sp::Alignment::TopRight)
+        ->setSize(120.0f, 40.0f);
 
     crew_position_selection_overlay = new GuiOverlay(this, "", glm::u8vec4(0,0,0,64));
     crew_position_selection_overlay->hide();
