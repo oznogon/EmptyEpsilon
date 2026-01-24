@@ -526,16 +526,6 @@ ShipSelectionScreen::ShipSelectionScreen()
     // Control code entry dialog.
     password_dialog = new PasswordDialog(this, "PASSWORD_DIALOG");
 
-    // Server/Client indicator light
-    // Lit if running as server, dim if running as client
-    server_indicator = new GuiIndicatorLight(this, "SERVER_INDICATOR", game_server != nullptr);
-    server_indicator
-        ->setActiveColor({255, 0, 0, 255})
-        ->setBlink(true, 0.25f)
-        ->setLabel(game_server ? tr("Server") : tr("Client"), IndicatorContentPosition::Inside())
-        ->setPosition(-20.0f, 20.0f, sp::Alignment::TopRight)
-        ->setSize(120.0f, 40.0f);
-
     crew_position_selection_overlay = new GuiOverlay(this, "", glm::u8vec4(0,0,0,64));
     crew_position_selection_overlay->hide();
     crew_position_selection = new CrewPositionSelection(crew_position_selection_overlay, "", 0, [this](){

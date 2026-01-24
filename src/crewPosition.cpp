@@ -17,6 +17,7 @@ string crewPositionToString(CrewPosition value) {
     case CrewPosition::altRelay: return "altrelay";
     case CrewPosition::commsOnly: return "commsonly";
     case CrewPosition::shipLog: return "shiplog";
+    case CrewPosition::systemStatus: return "systemstatus";
     default: return "none";
     }
 }
@@ -59,6 +60,8 @@ std::optional<CrewPosition> tryParseCrewPosition(string value) {
         return CrewPosition::commsOnly;
     else if (value == "shiplog")
         return CrewPosition::shipLog;
+    else if (value == "systemstatus")
+        return CrewPosition::systemStatus;
     else
         return {};
 }
