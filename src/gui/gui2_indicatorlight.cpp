@@ -121,18 +121,6 @@ GuiIndicatorLight* GuiIndicatorLight::setDisabledColor(glm::u8vec4 color)
     return this;
 }
 
-GuiIndicatorLight* GuiIndicatorLight::setTextColor(glm::u8vec4 color)
-{
-    text_color_override = color;
-    return this;
-}
-
-GuiIndicatorLight* GuiIndicatorLight::clearTextColor()
-{
-    text_color_override.reset();
-    return this;
-}
-
 GuiIndicatorLight* GuiIndicatorLight::setLabel(const string& text, IndicatorContentPosition position, sp::Alignment alignment, sp::Font* font)
 {
     label_text = text;
@@ -319,25 +307,25 @@ void GuiIndicatorLight::drawContent(sp::RenderTarget& renderer)
             drawIcon(renderer, icon_name, adjusted_icon_pos, front.color);
         }
 
-        // Draw label
+        // Draw label (supports formatted text with color tags)
         if (has_label)
         {
-            // Use text color override if set, otherwise use theme color
-            glm::u8vec4 text_color = text_color_override.has_value() ? text_color_override.value() : front.color;
             drawLabel(renderer, label_text, label_position, label_alignment,
-                      label_font_override ? label_font_override : front.font, front.size, text_color);
+                      label_font_override ? label_font_override : front.font, front.size, front.color);
         }
     }
 }
 
-void GuiIndicatorLight::drawLabel(sp::RenderTarget& renderer, const string& text, const IndicatorContentPosition& pos, sp::Alignment alignment, sp::Font* font, float size, glm::u8vec4 color)
+void GuiIndicatorLight::drawLabel(sp::RenderTarget& renderer, const string& text, const IndicatorContentPosition& pos, sp::Alignment alignment, sp::Font* font, float size, glm::u8vec4 default_color)
 {
     if (text.empty()) return;
 
+    // Determine the text rect based on position
+    sp::Rect text_rect;
     if (pos.inside)
     {
-        // Draw inside the indicator bounds, with wrapping and clipping
-        sp::Rect text_rect = rect;
+        // Draw inside the indicator bounds
+        text_rect = rect;
 
         // If there's an icon inside, offset the text
         if (!icon_name.empty() && icon_position.inside)
@@ -346,8 +334,6 @@ void GuiIndicatorLight::drawLabel(sp::RenderTarget& renderer, const string& text
             text_rect.position.x += icon_size * 0.5f;
             text_rect.size.x -= icon_size * 0.5f;
         }
-
-        renderer.drawText(text_rect, text, alignment, size, font, color);
     }
     else
     {
@@ -358,12 +344,64 @@ void GuiIndicatorLight::drawLabel(sp::RenderTarget& renderer, const string& text
         float text_width = size * text.length() * 0.6f;
         float text_height = size * 1.2f;
 
-        sp::Rect text_rect;
         text_rect.position = glm::vec2(text_pos.x - text_width * 0.5f, text_pos.y - text_height * 0.5f);
         text_rect.size = glm::vec2(text_width, text_height);
-
-        renderer.drawText(text_rect, text, alignment, size, font, color);
     }
+
+    // Check if text contains format tags
+    if (text.find('<') == -1)
+    {
+        // No formatting - use simple text drawing
+        renderer.drawText(text_rect, text, alignment, size, font, default_color);
+        return;
+    }
+
+    // Parse formatted text with color tags (similar to GuiScrollFormattedText)
+    sp::Font* draw_font = font ? font : sp::RenderTarget::getDefaultFont();
+    auto prepared = draw_font->start(32, text_rect.size, alignment, sp::Font::FlagClip);
+
+    auto current_color = default_color;
+    int last_end = 0;
+
+    for (auto tag_start = text.find('<'); tag_start >= 0; tag_start = text.find('<', tag_start + 1))
+    {
+        // Append text before the tag
+        prepared.append(text.substr(last_end, tag_start), size, current_color);
+
+        auto tag_end = text.find('>', tag_start + 1);
+        if (tag_end != -1)
+        {
+            last_end = tag_end + 1;
+            auto tag = text.substr(tag_start + 1, tag_end);
+
+            if (tag == "/")
+            {
+                // Reset to default color
+                current_color = default_color;
+            }
+            else if (tag.startswith("color="))
+            {
+                // Parse color value
+                current_color = GuiTheme::toColor(tag.substr(6));
+            }
+            else
+            {
+                // Unknown tag - treat as literal text
+                last_end = tag_start;
+            }
+        }
+        else
+        {
+            // No closing '>' - treat as literal text
+            last_end = tag_start;
+        }
+    }
+
+    // Append remaining text after last tag
+    prepared.append(text.substr(last_end), size, current_color);
+    prepared.finish();
+
+    renderer.drawText(text_rect, prepared, sp::Font::FlagClip);
 }
 
 void GuiIndicatorLight::drawIcon(sp::RenderTarget& renderer, const string& icon, const IndicatorContentPosition& pos, glm::u8vec4 color)
