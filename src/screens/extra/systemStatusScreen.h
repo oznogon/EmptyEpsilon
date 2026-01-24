@@ -1,6 +1,7 @@
 #pragma once
 
 #include "gui/gui2_overlay.h"
+#include "gui/korryIndicatorPresets.h"
 #include "components/shipsystem.h"
 #include "components/missiletubes.h"
 #include "playerInfo.h"
@@ -11,24 +12,19 @@ class GuiElement;
 class GuiIndicatorLight;
 class GuiLabel;
 
-// Represents the status level of an indicator based on degradation
-enum class IndicatorStatusLevel
-{
-    Nominal,           // Full/100%
-    DegradedImproving, // <20% degraded, improving
-    DegradedStable,    // <20% degraded, stable
-    DegradedDeclining, // <20% degraded, declining
-    SignificantStable, // >=20% degraded, stable
-    SignificantDeclining, // >=20% degraded and <50%, declining
-    SignificantImproving, // >=20% degraded, improving
-    SevereStable,      // >=50% degraded, stable
-    SevereDeclining,   // >=50% degraded, declining
-    SevereImproving,   // >=50% degraded, improving
-    Critical,          // 100% degraded (flashing pattern)
-    Unpowered,         // System unpowered but has health, ship has energy
-    UnpoweredNoEnergy, // System unpowered, ship low on energy
-    Empty              // Weapon/probe stock empty
-};
+/**
+ * Aviation-style System Status Screen
+ *
+ * Follows the "Dark Cockpit" philosophy:
+ * - Black: Normal operation, no attention needed
+ * - Blue: Manual operation in progress
+ * - Green: Automatic operation active
+ * - White: System OFF when it should be ON
+ * - Amber: Caution - degraded system (flashing)
+ * - Red: Warning - critical condition (flashing)
+ *
+ * All indicators use Korry Standard 389 presets with 4:3 aspect ratio.
+ */
 
 // Tracks previous value for delta calculation
 struct TrackedValue
@@ -47,50 +43,36 @@ struct TrackedValue
     bool stable() const { return !improving() && !declining(); }
 };
 
-// System indicator group for a single ship system
-struct SystemIndicatorGroup
-{
-    GuiElement* container = nullptr;
-    GuiIndicatorLight* power_indicator = nullptr;
-    GuiIndicatorLight* heat_indicator = nullptr;
-    GuiIndicatorLight* damage_indicator = nullptr;
-    GuiIndicatorLight* hacked_indicator = nullptr;
-
-    TrackedValue power_value;
-    TrackedValue heat_value;
-    TrackedValue damage_value;
-    TrackedValue hacked_value;
-};
-
-// Beam indicator for individual beam weapons
-struct BeamIndicator
+// System indicator for a single ship system
+struct SystemIndicator
 {
     GuiIndicatorLight* indicator = nullptr;
-    TrackedValue cooldown_value;
-};
-
-// Missile tube indicator row - one row per tube with 5 type indicators
-struct TubeIndicatorRow
-{
-    GuiElement* container = nullptr;
-    GuiLabel* angle_label = nullptr;
-    GuiIndicatorLight* type_indicators[MW_Count] = {nullptr};
-    TrackedValue delay_value;
+    TrackedValue health_value;
+    TrackedValue heat_value;
+    TrackedValue power_value;
+    ShipSystem::Type system_type;
 };
 
 // Shield segment indicator
-struct ShieldSegmentIndicator
+struct ShieldIndicator
 {
     GuiIndicatorLight* indicator = nullptr;
     TrackedValue value;
     int segment_index = 0;
 };
 
-// Weapon storage indicator with count
-struct WeaponStorageIndicator
+// Weapon tube indicator
+struct TubeIndicator
 {
     GuiIndicatorLight* indicator = nullptr;
-    TrackedValue value;
+    TrackedValue delay_value;
+};
+
+// Beam weapon indicator
+struct BeamIndicator
+{
+    GuiIndicatorLight* indicator = nullptr;
+    TrackedValue cooldown_value;
 };
 
 class SystemStatusScreen : public GuiOverlay
@@ -98,115 +80,81 @@ class SystemStatusScreen : public GuiOverlay
 private:
     GuiOverlay* background_crosses;
 
-    // Panels for different indicator groups
+    // Panels
     GuiPanel* systems_panel;
-    GuiPanel* hull_shields_panel;
-    GuiPanel* energy_panel;
+    GuiPanel* defenses_panel;
     GuiPanel* weapons_panel;
-    GuiPanel* special_panel;
+    GuiPanel* status_panel;
+
+    // Standard indicator size (4:3 aspect ratio)
+    static constexpr float INDICATOR_WIDTH = 80.0f;
+    static constexpr float INDICATOR_HEIGHT = 60.0f;
+    static constexpr float INDICATOR_MARGIN = 4.0f;
 
     // System indicators (one per ship system)
-    std::vector<SystemIndicatorGroup> system_indicators;
+    std::vector<GuiElement*> system_rows;
+    std::vector<SystemIndicator> system_indicators;
 
     // Hull indicator
-    GuiIndicatorLight* hull_indicator;
+    GuiIndicatorLight* hull_indicator = nullptr;
     TrackedValue hull_value;
 
-    // Shield segment indicators (diamond layout)
-    std::vector<ShieldSegmentIndicator> shield_indicators;
-    GuiElement* shield_diamond_container = nullptr;
+    // Shield indicators
+    std::vector<ShieldIndicator> shield_indicators;
+    GuiIndicatorLight* shields_status_indicator = nullptr;
 
-    // Energy
-    GuiIndicatorLight* energy_indicator;
-    GuiIndicatorLight* energy_rate_indicator;
+    // Energy indicators
+    GuiIndicatorLight* energy_indicator = nullptr;
+    GuiIndicatorLight* charge_indicator = nullptr;
     TrackedValue energy_value;
-    TrackedValue energy_rate_value;
 
-    // Weapon storage indicators (section label + icon with count)
-    std::vector<WeaponStorageIndicator> weapon_storage_indicators;
+    // Weapon storage indicators
+    GuiIndicatorLight* weapon_storage_indicators[MW_Count] = {nullptr};
 
-    // Probe storage
-    GuiIndicatorLight* probe_indicator;
+    // Probe indicator
+    GuiIndicatorLight* probe_indicator = nullptr;
     TrackedValue probe_value;
 
-    // Missile tube indicators (1 row per tube)
-    std::vector<TubeIndicatorRow> tube_indicators;
-    GuiElement* tubes_container = nullptr;
-    GuiLabel* missiles_section_label = nullptr;
-    GuiElement* missiles_header_row = nullptr;
-    GuiElement* missiles_storage_row = nullptr;
+    // Tube indicators
+    std::vector<TubeIndicator> tube_indicators;
 
-    // Beam weapons (organized by angle, similar to missiles)
+    // Beam indicators
     std::vector<BeamIndicator> beam_indicators;
-    GuiElement* beams_container = nullptr;
-    GuiLabel* beams_section_label = nullptr;
 
-    // Jump drive
-    GuiIndicatorLight* jump_indicator;
-    TrackedValue jump_charge_value;
-
-    // Warp drive
-    GuiIndicatorLight* warp_indicator;
-    int last_warp_level = -1;
-
-    // Comms state
-    GuiIndicatorLight* comms_indicator;
-    int last_comms_state = -1;
-
-    // Scan indicator
-    GuiIndicatorLight* scan_indicator;
-
-    // Self-destruct indicator
-    GuiIndicatorLight* selfdestruct_indicator;
-
-    // Target indicator
-    GuiIndicatorLight* target_indicator;
-
-    // Combat maneuver indicator (consolidated boost and strafe)
-    GuiIndicatorLight* boost_indicator;
-
-    // Docking indicator
-    GuiIndicatorLight* dock_indicator;
+    // Special system indicators
+    GuiIndicatorLight* jump_indicator = nullptr;
+    GuiIndicatorLight* warp_indicator = nullptr;
+    GuiIndicatorLight* impulse_indicator = nullptr;
+    GuiIndicatorLight* comms_indicator = nullptr;
+    GuiIndicatorLight* scan_indicator = nullptr;
+    GuiIndicatorLight* selfdestruct_indicator = nullptr;
+    GuiIndicatorLight* target_indicator = nullptr;
+    GuiIndicatorLight* maneuver_indicator = nullptr;
+    GuiIndicatorLight* dock_indicator = nullptr;
 
     // Update timing
     float update_timer = 0.0f;
-    static constexpr float UPDATE_INTERVAL = 1.0f;
+    static constexpr float UPDATE_INTERVAL = 0.25f;  // Faster updates for responsiveness
 
     // Helper functions
-    void createSystemIndicators();
-    void createHullShieldIndicators();
-    void createEnergyIndicators();
-    void createWeaponIndicators();
-    void createSpecialIndicators();
+    void createSystemsPanel();
+    void createDefensesPanel();
+    void createWeaponsPanel();
+    void createStatusPanel();
 
     void updateSystemIndicators();
-    void updateHullShieldIndicators();
-    void updateEnergyIndicators();
+    void updateDefenseIndicators();
     void updateWeaponIndicators();
-    void updateSpecialIndicators();
+    void updateStatusIndicators();
 
-    IndicatorStatusLevel calculateStatusLevel(float value, float max_value, const TrackedValue& tracked, bool invert_direction = false);
-    void applyIndicatorStyle(GuiIndicatorLight* indicator, IndicatorStatusLevel level, const string& label);
-    void applyHeatIndicatorStyle(GuiIndicatorLight* indicator, float heat, float heat_delta);
+    // Apply Korry styling based on system state
+    // Uses dark cockpit philosophy: black=normal, blue=manual, green=auto, white=off, amber=caution, red=warning
+    void applyDarkCockpitStyle(GuiIndicatorLight* indicator, const string& label,
+                                float health_ratio, float threshold_caution = 0.8f,
+                                float threshold_warning = 0.3f);
 
-    // Shield-specific styling (different for shields up/down)
-    void applyShieldIndicatorStyle(GuiIndicatorLight* indicator, float level, float max_level, bool shields_up, const TrackedValue& tracked);
-
-    // Tube indicator styling
-    void applyTubeTypeIndicatorStyle(GuiIndicatorLight* indicator, bool is_loaded, MissileTubes::MountPoint::State tube_state, bool can_fire, const string& label);
-
-    // Color constants
-    static glm::u8vec4 colorGreen() { return {0, 200, 0, 255}; }
-    static glm::u8vec4 colorYellow() { return {220, 200, 0, 255}; }
-    static glm::u8vec4 colorOrange() { return {255, 140, 0, 255}; }
-    static glm::u8vec4 colorDarkRed() { return {180, 0, 0, 255}; }
-    static glm::u8vec4 colorBrightRed() { return {255, 50, 50, 255}; }
-    static glm::u8vec4 colorBlack() { return {20, 20, 20, 255}; }
-    static glm::u8vec4 textBlack() { return {0, 0, 0, 255}; }
-    static glm::u8vec4 textWhite() { return {255, 255, 255, 255}; }
-    static glm::u8vec4 textOrange() { return {255, 140, 0, 255}; }
-    static glm::u8vec4 textRed() { return {255, 50, 50, 255}; }
-    static glm::u8vec4 textGray() { return {128, 128, 128, 255}; }
+    // Create a standard 4:3 indicator
+    GuiIndicatorLight* createIndicator(GuiElement* parent, const string& id, const string& label);
 
 public:
     SystemStatusScreen(GuiContainer* owner);
