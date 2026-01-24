@@ -121,6 +121,18 @@ GuiIndicatorLight* GuiIndicatorLight::setDisabledColor(glm::u8vec4 color)
     return this;
 }
 
+GuiIndicatorLight* GuiIndicatorLight::setTextColor(glm::u8vec4 color)
+{
+    text_color_override = color;
+    return this;
+}
+
+GuiIndicatorLight* GuiIndicatorLight::clearTextColor()
+{
+    text_color_override.reset();
+    return this;
+}
+
 GuiIndicatorLight* GuiIndicatorLight::setLabel(const string& text, IndicatorContentPosition position, sp::Alignment alignment, sp::Font* font)
 {
     label_text = text;
@@ -310,8 +322,10 @@ void GuiIndicatorLight::drawContent(sp::RenderTarget& renderer)
         // Draw label
         if (has_label)
         {
+            // Use text color override if set, otherwise use theme color
+            glm::u8vec4 text_color = text_color_override.has_value() ? text_color_override.value() : front.color;
             drawLabel(renderer, label_text, label_position, label_alignment,
-                      label_font_override ? label_font_override : front.font, front.size, front.color);
+                      label_font_override ? label_font_override : front.font, front.size, text_color);
         }
     }
 }

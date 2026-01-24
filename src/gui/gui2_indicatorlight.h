@@ -63,6 +63,7 @@ protected:
     // Color overrides (optional)
     std::optional<glm::u8vec4> active_color_override;
     std::optional<glm::u8vec4> disabled_color_override;
+    std::optional<glm::u8vec4> text_color_override;
 
     // Label configuration
     string label_text;
@@ -110,6 +111,8 @@ public:
     // Color overrides
     GuiIndicatorLight* setActiveColor(glm::u8vec4 color);
     GuiIndicatorLight* setDisabledColor(glm::u8vec4 color);
+    GuiIndicatorLight* setTextColor(glm::u8vec4 color);
+    GuiIndicatorLight* clearTextColor();
 
     // Label configuration
     GuiIndicatorLight* setLabel(const string& text,
