@@ -258,6 +258,11 @@ void GuiIndicatorLight::drawBackground(sp::RenderTarget& renderer)
 
 void GuiIndicatorLight::drawContent(sp::RenderTarget& renderer)
 {
+    // When blinking and in "off" phase, skip drawing content entirely
+    // This makes text blink along with the indicator
+    if (blink_enabled && !blink_state)
+        return;
+
     if (use_multi_state && !states.empty())
     {
         // Multi-state mode: draw from current state
