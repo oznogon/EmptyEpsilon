@@ -50,7 +50,7 @@ SystemStatusScreen::SystemStatusScreen(GuiContainer* owner)
         tr("ship_system_abbreviation", "REACTOR"),
         tr("ship_system_abbreviation", "BEAM"),
         tr("ship_system_abbreviation", "MISSILE"),
-        tr("ship_system_abbreviation", "MANEUVER"),
+        tr("ship_system_abbreviation", "MANUVR"),
         tr("ship_system_abbreviation", "IMPULSE"),
         tr("ship_system_abbreviation", "WARP"),
         tr("ship_system_abbreviation", "JUMP"),
@@ -59,12 +59,15 @@ SystemStatusScreen::SystemStatusScreen(GuiContainer* owner)
     }};
 
     weapon_labels = {{
-        tr("missile_type_abbreviation", "HMNG"),
+        tr("missile_type_abbreviation", "HOMING"),
         tr("missile_type_abbreviation", "NUKE"),
         tr("missile_type_abbreviation", "MINE"),
         tr("missile_type_abbreviation", "EMP"),
         tr("missile_type_abbreviation", "HVLI")
     }};
+
+    // Default padding
+    setAttribute("padding", "20");
 
     // Background
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
@@ -102,12 +105,14 @@ string SystemStatusScreen::formatAngle(float degrees)
 void SystemStatusScreen::createSystemsPanel()
 {
     systems_panel = new GuiPanel(this, "SYSTEMS_PANEL");
-    systems_panel->setPosition(20.0f, 80.0f, sp::Alignment::TopLeft);
+    systems_panel
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft);
 
     auto* container = new GuiElement(systems_panel, "SYSTEMS_CONTAINER");
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    container->setMargins(PANEL_PADDING);
-    container->setAttribute("layout", "vertical");
+    container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setMargins(PANEL_PADDING)
+        ->setAttribute("layout", "vertical");
 
     (new GuiLabel(container, "", tr("SHIP SYSTEMS"), 24.0f))
         ->setSize(GuiElement::GuiSizeMax, 35.0f);
@@ -173,34 +178,32 @@ void SystemStatusScreen::createDefensesPanel()
 {
     defenses_panel = new GuiPanel(this, "DEFENSES_PANEL");
     defenses_panel
-        ->setPosition(20.0f, -200.0f, sp::Alignment::BottomLeft)
-        ->setSize(520.0f, 180.0f);
+        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
+        ->setSize(INDICATOR_WIDTH * 10 + PANEL_PADDING * 2, PANEL_HEADER_HEIGHT + ROW_HEIGHT + PANEL_PADDING * 2);
 
     auto* container = new GuiElement(defenses_panel, "DEFENSES_CONTAINER");
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    container->setMargins(PANEL_PADDING);
-    container->setAttribute("layout", "vertical");
+    container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setMargins(PANEL_PADDING)
+        ->setAttribute("layout", "vertical");
 
     (new GuiLabel(container, "", tr("DEFENSES"), 24.0f))
         ->setSize(GuiElement::GuiSizeMax, 35.0f);
 
     auto* row1 = new GuiElement(container, "DEF_ROW1");
-    row1->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-    row1->setAttribute("layout", "horizontal");
+    row1
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
+        ->setAttribute("layout", "horizontal");
 
     hull_indicator = createIndicator(row1, "HULL_IND", "HULL");
     shields_status_indicator = createIndicator(row1, "SHLD_STATUS", tr("shield_abbreviation", "SHIELDS"));
-
-    auto* row2 = new GuiElement(container, "DEF_ROW2");
-    row2->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-    row2->setAttribute("layout", "horizontal");
 
     // Shield segment indicators (up to 8)
     for (int i = 0; i < 8; i++)
     {
         ShieldIndicator si;
         si.segment_index = i;
-        si.indicator = createIndicator(row2, "SHLD_" + string(i), tr("shield_abbreviation", "SHIELD\n") + string(i + 1));
+        si.indicator = createIndicator(row1, "SHLD_" + string(i), tr("shield_abbreviation", "SHIELD\n") + string(i + 1));
         si.indicator->hide();
         shield_indicators.push_back(si);
     }
@@ -209,20 +212,26 @@ void SystemStatusScreen::createDefensesPanel()
 void SystemStatusScreen::createWeaponsPanel()
 {
     weapons_panel = new GuiPanel(this, "WEAPONS_PANEL");
-    weapons_panel->setPosition(600.0f, 80.0f, sp::Alignment::TopLeft);
+    weapons_panel
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight);
 
     auto* container = new GuiElement(weapons_panel, "WEAPONS_CONTAINER");
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    container->setMargins(PANEL_PADDING);
-    container->setAttribute("layout", "vertical");
+    container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setMargins(PANEL_PADDING)
+        ->setAttribute("layout", "vertical");
 
     (new GuiLabel(container, "", tr("WEAPONS"), 24.0f))
         ->setSize(GuiElement::GuiSizeMax, 35.0f);
 
     // Weapon storage row
     auto* storage_row = new GuiElement(container, "STORAGE_ROW");
-    storage_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-    storage_row->setAttribute("layout", "horizontal");
+    storage_row
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
+        ->setAttribute("layout", "horizontal");
+
+    (new GuiElement(storage_row, "SPACER"))
+        ->setSize(INDICATOR_WIDTH, INDICATOR_HEIGHT);
 
     for (int n = 0; n < MW_Count; n++)
         weapon_storage_indicators[n] = createIndicator(storage_row, "WPN_" + string(n), weapon_labels[n] + "\n" + tr("weapon_storage_abbreviation", "STORE"));
@@ -232,8 +241,9 @@ void SystemStatusScreen::createWeaponsPanel()
         ->setSize(GuiElement::GuiSizeMax, 25.0f);
 
     tubes_grid = new GuiElement(container, "TUBES_GRID");
-    tubes_grid->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 16);  // Max 16 tubes
-    tubes_grid->setAttribute("layout", "vertical");
+    tubes_grid
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 16)
+        ->setAttribute("layout", "vertical");
 
     // Create tube rows (up to 16)
     for (int i = 0; i < 16; i++)
@@ -244,7 +254,7 @@ void SystemStatusScreen::createWeaponsPanel()
         tir.row->setAttribute("layout", "horizontal");
         tir.row->hide();
 
-        tir.tube_indicator = createIndicator(tir.row, "TUBE_" + string(i), "---");
+        tir.tube_indicator = createIndicator(tir.row, "TUBE_" + string(i), "----");
 
         // Weapon type indicators for this tube
         for (int w = 0; w < MW_Count; w++)
@@ -261,8 +271,9 @@ void SystemStatusScreen::createWeaponsPanel()
         ->setSize(GuiElement::GuiSizeMax, 25.0f);
 
     beams_row = new GuiElement(container, "BEAMS_ROW");
-    beams_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-    beams_row->setAttribute("layout", "horizontal");
+    beams_row
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
+        ->setAttribute("layout", "horizontal");
 
     // Create beam indicators (up to 16)
     for (int i = 0; i < 16; i++)
@@ -282,44 +293,50 @@ void SystemStatusScreen::createWeaponsPanel()
 void SystemStatusScreen::createPropulsionPanel()
 {
     propulsion_panel = new GuiPanel(this, "PROPULSION_PANEL");
-    propulsion_panel->setPosition(600.0f, 600.0f, sp::Alignment::TopLeft);
-    propulsion_panel->setSize(INDICATOR_WIDTH * 4 + PANEL_PADDING * 2, PANEL_HEADER_HEIGHT + ROW_HEIGHT + PANEL_PADDING * 2);
+    propulsion_panel
+        ->setPosition(0.0f, -(PANEL_HEADER_HEIGHT + ROW_HEIGHT + PANEL_PADDING * 2), sp::Alignment::BottomRight)
+        ->setSize(INDICATOR_WIDTH * 4 + PANEL_PADDING * 2, PANEL_HEADER_HEIGHT + ROW_HEIGHT + PANEL_PADDING * 2);
 
     auto* container = new GuiElement(propulsion_panel, "PROPULSION_CONTAINER");
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    container->setMargins(PANEL_PADDING);
-    container->setAttribute("layout", "vertical");
+    container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setMargins(PANEL_PADDING)
+        ->setAttribute("layout", "vertical");
 
     (new GuiLabel(container, "", tr("PROPULSION"), 24.0f))
         ->setSize(GuiElement::GuiSizeMax, 35.0f);
 
     auto* row = new GuiElement(container, "PROP_ROW");
-    row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-    row->setAttribute("layout", "horizontal");
+    row
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
+        ->setAttribute("layout", "horizontal");
 
     impulse_indicator = createIndicator(row, "IMPULSE_IND", "IMPULSE");
     warp_indicator = createIndicator(row, "WARP_IND", "WARP");
     jump_indicator = createIndicator(row, "JUMP_IND", "JUMP");
-    maneuver_indicator = createIndicator(row, "MANEUVER_IND", "MNVR");
+    maneuver_indicator = createIndicator(row, "MANEUVER_IND", "MANUVR");
 }
 
 void SystemStatusScreen::createTransmitterPanel()
 {
     transmitter_panel = new GuiPanel(this, "TRANSMITTER_PANEL");
-    transmitter_panel->setPosition(600.0f, 720.0f, sp::Alignment::TopLeft);
-    transmitter_panel->setSize(INDICATOR_WIDTH * 5 + PANEL_PADDING * 2, PANEL_HEADER_HEIGHT + ROW_HEIGHT + PANEL_PADDING * 2);
+    transmitter_panel
+        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
+        ->setSize(INDICATOR_WIDTH * 5 + PANEL_PADDING * 2, PANEL_HEADER_HEIGHT + ROW_HEIGHT + PANEL_PADDING * 2);
 
     auto* container = new GuiElement(transmitter_panel, "TRANSMITTER_CONTAINER");
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    container->setMargins(PANEL_PADDING);
-    container->setAttribute("layout", "vertical");
+    container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setMargins(PANEL_PADDING)
+        ->setAttribute("layout", "vertical");
 
     (new GuiLabel(container, "", tr("TRANSMITTER"), 24.0f))
         ->setSize(GuiElement::GuiSizeMax, 35.0f);
 
     auto* row = new GuiElement(container, "TRANS_ROW");
-    row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-    row->setAttribute("layout", "horizontal");
+    row
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
+        ->setAttribute("layout", "horizontal");
 
     comms_indicator = createIndicator(row, "COMMS_IND", tr("comms_abbreviation", "COMMS"));
     scan_indicator = createIndicator(row, "SCAN_IND", tr("scan_abbreviation", "SCAN"));
@@ -1057,7 +1074,7 @@ void SystemStatusScreen::updatePropulsionIndicators()
     if (auto cm = my_spaceship.getComponent<CombatManeuveringThrusters>())
     {
         bool active = (cm->boost.active > 0.01f) || (std::abs(cm->strafe.active) > 0.01f);
-        const string label = tr("maneuver_abbreviation", "COMBAT\nMANEUNVER");
+        const string label = tr("maneuver_abbreviation", "COMBAT\nMANUVR");
 
         if (active)
         {
