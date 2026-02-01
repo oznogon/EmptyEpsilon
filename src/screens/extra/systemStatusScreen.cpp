@@ -3,22 +3,23 @@
 #include "gameGlobalInfo.h"
 #include "i18n.h"
 
-#include "components/reactor.h"
-#include "components/coolant.h"
 #include "components/beamweapon.h"
+#include "components/comms.h"
+#include "components/coolant.h"
+#include "components/docking.h"
 #include "components/hull.h"
-#include "components/jumpdrive.h"
-#include "components/warpdrive.h"
 #include "components/impulse.h"
-#include "components/shields.h"
+#include "components/internalrooms.h"
+#include "components/jumpdrive.h"
+#include "components/maneuveringthrusters.h"
 #include "components/missiletubes.h"
 #include "components/probe.h"
-#include "components/comms.h"
+#include "components/reactor.h"
 #include "components/scanning.h"
 #include "components/selfdestruct.h"
+#include "components/shields.h"
 #include "components/target.h"
-#include "components/maneuveringthrusters.h"
-#include "components/docking.h"
+#include "components/warpdrive.h"
 #include "systems/missilesystem.h"
 
 #include "screenComponents/alertOverlay.h"
@@ -88,7 +89,7 @@ GuiIndicatorLight* SystemStatusScreen::createIndicator(GuiElement* parent, const
 {
     auto* indicator = new GuiIndicatorLight(parent, id, false);
     indicator->setSize(INDICATOR_WIDTH, INDICATOR_HEIGHT);
-    KorryPresets::applyTypeS(indicator, label, KorryPresets::Color::Green, false);
+    AnnunciatorPresets::applyTypeS(indicator, label, AnnunciatorPresets::Color::Green, false);
     return indicator;
 }
 
@@ -99,7 +100,7 @@ string SystemStatusScreen::formatAngle(float degrees)
     while (degrees >= 360.0f) degrees -= 360.0f;
 
     // Always return degrees
-    return string(static_cast<int>(degrees)) + "\xC2\xB0";  // UTF-8 degree symbol
+    return string(static_cast<int>(degrees)) + "\xC2\xB0"; // UTF-8 degree symbol
 }
 
 void SystemStatusScreen::createSystemsPanel()
@@ -119,8 +120,9 @@ void SystemStatusScreen::createSystemsPanel()
 
     // Energy row (total energy and charge rate)
     energy_row = new GuiElement(container, "ENERGY_ROW");
-    energy_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-    energy_row->setAttribute("layout", "horizontal");
+    energy_row
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
+        ->setAttribute("layout", "horizontal");
 
     energy_indicator = createIndicator(energy_row, "ENERGY_IND", tr("energy_property_abbreviation", "ENERGY\nTOTAL"));
     charge_indicator = createIndicator(energy_row, "CHARGE_IND", tr("energy_property_abbreviation", "CHARGE\nRATE"));
@@ -137,15 +139,14 @@ void SystemStatusScreen::createSystemsPanel()
 
     createHeaderLabel(tr("system_property_abbreviation", "SYSTEM"), INDICATOR_WIDTH);
     createHeaderLabel(tr("system_property_abbreviation", "POWER"), INDICATOR_WIDTH);
-    createHeaderLabel(tr("system_property_abbreviation", "HEAT"), INDICATOR_WIDTH * 2);
-    createHeaderLabel(tr("system_property_abbreviation", "HEALTH"), INDICATOR_WIDTH);
-    createHeaderLabel(tr("system_property_abbreviation", "COOLANT"), INDICATOR_WIDTH);
-    createHeaderLabel(tr("system_property_abbreviation", "HACKED"), INDICATOR_WIDTH);
+    createHeaderLabel(tr("system_property_abbreviation", "HEAT"), INDICATOR_WIDTH * 3);
+    createHeaderLabel(tr("system_property_abbreviation", "DAMAGE"), INDICATOR_WIDTH * 2);
 
     // System indicator grid
     systems_grid = new GuiElement(container, "SYSTEMS_GRID");
-    systems_grid->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * ShipSystem::COUNT);
-    systems_grid->setAttribute("layout", "vertical");
+    systems_grid
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * ShipSystem::COUNT)
+        ->setAttribute("layout", "vertical");
 
     // Create rows for each ship system
     for (int n = 0; n < ShipSystem::COUNT; n++)
@@ -157,13 +158,16 @@ void SystemStatusScreen::createSystemsPanel()
         sir.row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
         sir.row->setAttribute("layout", "horizontal");
 
+        // TODO: Hide if components aren't used:
+        // - heat, heat_delta_ coolant if coolant isn't used
+        // - power if energy isn't used
         sir.name_indicator = createIndicator(sir.row, "SYS_NAME_" + string(n), system_labels[n]);
-        sir.power_indicator = createIndicator(sir.row, "SYS_PWR_" + string(n), tr("system_property_abbreviation", "POWER"));
+        sir.power_indicator = createIndicator(sir.row, "SYS_POWER_" + string(n), tr("system_property_abbreviation", "POWER"));
         sir.heat_indicator = createIndicator(sir.row, "SYS_HEAT_" + string(n), tr("system_property_abbreviation", "HEAT\nTOTAL"));
-        sir.heat_delta_indicator = createIndicator(sir.row, "SYS_DELTA_" + string(n), tr("system_property_abbreviation", "HEAT\nRATE"));
-        sir.health_indicator = createIndicator(sir.row, "SYS_HLTH_" + string(n), tr("system_property_abbreviation", "HEALTH"));
-        sir.coolant_indicator = createIndicator(sir.row, "SYS_COOL_" + string(n), tr("system_property_abbreviation", "COOLANT"));
-        sir.hacked_indicator = createIndicator(sir.row, "SYS_HACK_" + string(n), tr("system_property_abbreviation", "HACKED"));
+        sir.heat_delta_indicator = createIndicator(sir.row, "SYS_HEAT_RATE_" + string(n), tr("system_property_abbreviation", "HEAT\nRATE"));
+        sir.coolant_indicator = createIndicator(sir.row, "SYS_COOLANT_" + string(n), tr("system_property_abbreviation", "COOLANT"));
+        sir.damage_indicator = createIndicator(sir.row, "SYS_DAMAGE_" + string(n), tr("system_property_abbreviation", "DAMAGE"));
+        sir.repair_indicator = createIndicator(sir.row, "SYS_REPAIR_" + string(n), tr("system_property_abbreviation", "REPAIR"));
 
         system_rows.push_back(sir);
     }
@@ -213,7 +217,8 @@ void SystemStatusScreen::createWeaponsPanel()
 {
     weapons_panel = new GuiPanel(this, "WEAPONS_PANEL");
     weapons_panel
-        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight);
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setAttribute("layout", "vertical");
 
     auto* container = new GuiElement(weapons_panel, "WEAPONS_CONTAINER");
     container
@@ -250,9 +255,10 @@ void SystemStatusScreen::createWeaponsPanel()
     {
         TubeIndicatorRow tir;
         tir.row = new GuiElement(tubes_grid, "TUBE_ROW_" + string(i));
-        tir.row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-        tir.row->setAttribute("layout", "horizontal");
-        tir.row->hide();
+        tir.row
+            ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
+            ->hide()
+            ->setAttribute("layout", "horizontal");
 
         tir.tube_indicator = createIndicator(tir.row, "TUBE_" + string(i), "----");
 
@@ -313,6 +319,7 @@ void SystemStatusScreen::createPropulsionPanel()
 
     impulse_indicator = createIndicator(row, "IMPULSE_IND", "IMPULSE");
     warp_indicator = createIndicator(row, "WARP_IND", "WARP");
+    // warp_speed_indicator = createIndicator(row, "WARP_SPEED_IND", "WARP");
     jump_indicator = createIndicator(row, "JUMP_IND", "JUMP");
     maneuver_indicator = createIndicator(row, "MANEUVER_IND", "MANUVR");
 }
@@ -380,59 +387,57 @@ void SystemStatusScreen::updateSystemIndicators()
 
         if (ratio > 0.8f)
         {
-            KorryPresets::applyTypeS(energy_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(energy_indicator, label, AnnunciatorPresets::Color::Green, false);
             energy_indicator->setBlink(false);
         }
         else if (ratio > 0.34f)
         {
-            KorryPresets::applyTypeN(energy_indicator, label, KorryPresets::Color::Green, true);
+            AnnunciatorPresets::applyTypeN(energy_indicator, label, AnnunciatorPresets::Color::Green, true);
             energy_indicator->setBlink(false);
         }
         else if (ratio > 0.1f)
         {
-            KorryPresets::applyTypeB(energy_indicator, label, KorryPresets::Color::Amber, true);
+            AnnunciatorPresets::applyTypeB(energy_indicator, label, AnnunciatorPresets::Color::Amber, true);
             energy_indicator->setBlink(true, BLINK_CAUTION);
         }
         else
         {
-            KorryPresets::applyTypeB(energy_indicator, label, KorryPresets::Color::Red, true);
+            AnnunciatorPresets::applyTypeB(energy_indicator, label, AnnunciatorPresets::Color::Red, true);
             energy_indicator->setBlink(true, BLINK_WARNING);
         }
         energy_indicator->show();
 
         // Charge rate indicator with thresholds
-        // Calculate rate per minute: delta is change in ratio per UPDATE_INTERVAL
-        // rate_per_minute = delta * max_energy * (60 / UPDATE_INTERVAL)
         float rate_per_minute = energy_value.delta() * reactor->max_energy * (60.0f / UPDATE_INTERVAL);
         label = tr("energy_abbreviation", "CHARGE\nRATE");
         if (rate_per_minute >= 20.0f)
         {
             // Positive rate >= 20/min: black text on green background
-            KorryPresets::applyTypeB(charge_indicator, label, KorryPresets::Color::Green, true);
+            AnnunciatorPresets::applyTypeB(charge_indicator, label, AnnunciatorPresets::Color::Green, true);
             charge_indicator->setBlink(false);
         }
         else if (rate_per_minute > 3.0f)
         {
             // Positive rate < 20/min: green text on black background
-            KorryPresets::applyTypeN(charge_indicator, label, KorryPresets::Color::Green, true);
+            AnnunciatorPresets::applyTypeN(charge_indicator, label, AnnunciatorPresets::Color::Green, true);
             charge_indicator->setBlink(false);
         }
         else if (abs(rate_per_minute) <= 3.0f)
         {
             // Near zero: nominal (disabled)
-            KorryPresets::applyTypeS(charge_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(charge_indicator, label, AnnunciatorPresets::Color::Green, false);
             charge_indicator->setBlink(false);
         }
         else if (rate_per_minute >= -100.0f)
         {
             // Moderate negative rate (up to -100/min): amber text on black background
-            KorryPresets::applyTypeN(charge_indicator, label, KorryPresets::Color::Amber, true);
+            AnnunciatorPresets::applyTypeN(charge_indicator, label, AnnunciatorPresets::Color::Amber, true);
             charge_indicator->setBlink(false);
         }
         else
         {
             // Severe negative rate (< -100/min): black text on red background
-            KorryPresets::applyTypeB(charge_indicator, label, KorryPresets::Color::Red, true);
+            AnnunciatorPresets::applyTypeB(charge_indicator, label, AnnunciatorPresets::Color::Red, true);
             charge_indicator->setBlink(false);
         }
         charge_indicator->show();
@@ -463,39 +468,57 @@ void SystemStatusScreen::updateSystemIndicators()
         float heat = sys->heat_level;
         float power = sys->power_level;
         float coolant = sys->coolant_level;
-        float hacked = sys->hacked_level;
-        float heat_delta = sys->getHeatingDelta();
+
+        // TODO: Don't manage heat if there's no coolant
+        bool auto_coolant = false;
+        if (auto coolant_component = my_spaceship.getComponent<Coolant>())
+            if (coolant_component->auto_levels) auto_coolant = true;
+        bool auto_repair = false;
+        if (auto ir = my_spaceship.getComponent<InternalRooms>())
+            auto_repair = ir->auto_repair_enabled;
 
         sir.health_value.update(health);
         sir.heat_value.update(heat);
         sir.power_value.update(power);
         sir.coolant_value.update(coolant);
-        sir.hacked_value.update(hacked);
+
+        // Use actual heat delta instead of system heating delta to capture
+        // other heat sources.
+        float heat_delta = sir.heat_value.delta() * (60.0f / UPDATE_INTERVAL);
+        // Override heat_delta if heat is maxed out but the system reports a
+        // heating delta.
+        if (heat >= 0.99f && sys->getHeatingDelta() > 0.01f)
+            heat_delta = sys->getHeatingDelta();
 
         string label = system_labels[static_cast<int>(sir.system_type)];
 
         // Name indicator - overall system status
         if (power < 0.01f)
         {
-            KorryPresets::applyTypeW(sir.name_indicator, label, KorryPresets::Color::White, true);
+            AnnunciatorPresets::applyTypeW(sir.name_indicator, label, AnnunciatorPresets::Color::White, true);
             sir.name_indicator->setBlink(false);
         }
-        else if (health < 0.34f || heat > 0.9f)
+        else if (health <= 0.0f)
         {
-            KorryPresets::applyTypeB(sir.name_indicator, label, KorryPresets::Color::Red, true);
-            if (health <= 0.0f || heat >= 1.0f)
+            AnnunciatorPresets::applyTypeB(sir.name_indicator, label, AnnunciatorPresets::Color::Red, true);
+            if (heat >= 0.99f && heat_delta >= 0.01f)
                 sir.name_indicator->setBlink(true, BLINK_WARNING);
             else
                 sir.name_indicator->setBlink(false);
         }
-        else if (health < 0.8f || heat > 0.7f)
+        else if (health < 0.1f)
         {
-            KorryPresets::applyTypeB(sir.name_indicator, label, KorryPresets::Color::Amber, true);
-            sir.name_indicator->setBlink(true, BLINK_CAUTION);
+            AnnunciatorPresets::applyTypeS(sir.name_indicator, label, AnnunciatorPresets::Color::Red, true);
+            sir.name_indicator->setBlink(false);
+        }
+        else if (health < 0.95f)
+        {
+            AnnunciatorPresets::applyTypeS(sir.name_indicator, label, AnnunciatorPresets::Color::Amber, true);
+            sir.name_indicator->setBlink(false);
         }
         else
         {
-            KorryPresets::applyTypeN(sir.name_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeN(sir.name_indicator, label, AnnunciatorPresets::Color::Green, true);
             sir.name_indicator->setBlink(false);
         }
 
@@ -507,23 +530,23 @@ void SystemStatusScreen::updateSystemIndicators()
         label = tr("power_abbreviation", "POWER");
         if (power < 0.01f)
         {
-            KorryPresets::applyTypeN(sir.power_indicator, label, KorryPresets::Color::White, true);
+            AnnunciatorPresets::applyTypeN(sir.power_indicator, label, AnnunciatorPresets::Color::White, true);
             sir.power_indicator->setBlink(false);
         }
         else if (power < 0.99f)
         {
-            KorryPresets::applyTypeB(sir.power_indicator, label, KorryPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeB(sir.power_indicator, label, AnnunciatorPresets::Color::Blue, true);
             sir.power_indicator->setBlink(false);
         }
         else if (power > 1.01f)
         {
-            KorryPresets::applyTypeN(sir.power_indicator, label, KorryPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeN(sir.power_indicator, label, AnnunciatorPresets::Color::Blue, true);
             sir.power_indicator->setBlink(false);
         }
         else
         {
             // 100% - disabled/dark
-            KorryPresets::applyTypeS(sir.power_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(sir.power_indicator, label, AnnunciatorPresets::Color::Green, false);
             sir.power_indicator->setBlink(false);
         }
 
@@ -531,22 +554,22 @@ void SystemStatusScreen::updateSystemIndicators()
         label = tr("heat_abbreviation", "HEAT\nTOTAL");
         if (heat > 0.9f)
         {
-            KorryPresets::applyTypeB(sir.heat_indicator, label, KorryPresets::Color::Red, true);
+            AnnunciatorPresets::applyTypeB(sir.heat_indicator, label, AnnunciatorPresets::Color::Red, true);
             sir.heat_indicator->setBlink(true, BLINK_WARNING);
         }
         else if (heat > 0.7f)
         {
-            KorryPresets::applyTypeB(sir.heat_indicator, label, KorryPresets::Color::Amber, true);
+            AnnunciatorPresets::applyTypeB(sir.heat_indicator, label, AnnunciatorPresets::Color::Amber, true);
             sir.heat_indicator->setBlink(true, BLINK_CAUTION);
         }
         else if (heat > 0.34f)
         {
-            KorryPresets::applyTypeN(sir.heat_indicator, label, KorryPresets::Color::Amber, true);
+            AnnunciatorPresets::applyTypeN(sir.heat_indicator, label, AnnunciatorPresets::Color::Amber, true);
             sir.heat_indicator->setBlink(false);
         }
         else
         {
-            KorryPresets::applyTypeS(sir.heat_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(sir.heat_indicator, label, AnnunciatorPresets::Color::Green, false);
             sir.heat_indicator->setBlink(false);
         }
 
@@ -554,83 +577,94 @@ void SystemStatusScreen::updateSystemIndicators()
         label = tr("heat_abbreviation", "HEAT\nRATE");
         if (heat > 0.01f)
         {
-            if (heat_delta > 0.5f)
+            if (heat_delta > 5.0f || (heat >= 1.0f && heat_delta > 0.01f))
             {
-                KorryPresets::applyTypeB(sir.heat_delta_indicator, label, KorryPresets::Color::Red, true);
-                sir.heat_delta_indicator->setBlink(true, BLINK_WARNING);
+                AnnunciatorPresets::applyTypeB(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Red, true);
+                if (heat >= 1.0f)
+                    sir.heat_delta_indicator->setBlink(true, BLINK_WARNING);
+                else
+                    sir.heat_delta_indicator->setBlink(false);
+            }
+            else if (heat_delta > 3.0f)
+            {
+                AnnunciatorPresets::applyTypeN(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Red, true);
+                sir.heat_delta_indicator->setBlink(false);
             }
             else if (heat_delta > 0.1f)
             {
-                KorryPresets::applyTypeN(sir.heat_delta_indicator, label, KorryPresets::Color::Amber, true);
+                AnnunciatorPresets::applyTypeN(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Amber, true);
                 sir.heat_delta_indicator->setBlink(false);
             }
             else if (heat_delta < -0.1f)
             {
-                KorryPresets::applyTypeN(sir.heat_delta_indicator, label, KorryPresets::Color::Blue, true);
+                AnnunciatorPresets::applyTypeN(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Green, true);
                 sir.heat_delta_indicator->setBlink(false);
             }
             else
             {
-                KorryPresets::applyTypeS(sir.heat_delta_indicator, label, KorryPresets::Color::Green, false);
+                AnnunciatorPresets::applyTypeS(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Green, false);
                 sir.heat_delta_indicator->setBlink(false);
             }
         }
         else
         {
-            KorryPresets::applyTypeS(sir.heat_delta_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Green, false);
             sir.heat_delta_indicator->setBlink(false);
-        }
-
-        // Health indicator
-        label = tr("damage_abbreviation", "DAMAGE");
-        if (health < 0.34f)
-        {
-            KorryPresets::applyTypeB(sir.health_indicator, label, KorryPresets::Color::Red, true);
-            sir.health_indicator->setBlink(true, BLINK_WARNING);
-        }
-        else if (health < 0.8f)
-        {
-            KorryPresets::applyTypeB(sir.health_indicator, label, KorryPresets::Color::Amber, true);
-            if (sir.health_value.declining())
-                sir.health_indicator->setBlink(true, BLINK_CAUTION);
-            else
-                sir.health_indicator->setBlink(false);
-        }
-        else
-        {
-            KorryPresets::applyTypeS(sir.health_indicator, label, KorryPresets::Color::Green, false);
-            sir.health_indicator->setBlink(false);
         }
 
         // Coolant indicator - always blue if non-zero
         label = tr("coolant_abbreviation", "COOLANT");
         if (coolant > 0.1f)
         {
-            KorryPresets::applyTypeN(sir.coolant_indicator, label, KorryPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeN(sir.coolant_indicator, label, AnnunciatorPresets::Color::Blue, true);
             sir.coolant_indicator->setBlink(false);
         }
         else
         {
-            KorryPresets::applyTypeS(sir.coolant_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(sir.coolant_indicator, label, AnnunciatorPresets::Color::Green, false);
             sir.coolant_indicator->setBlink(false);
         }
 
-        // Hacked indicator
-        label = tr("hacked_abbreviation", "CPU");
-        if (hacked > 0.5f)
+        // Health indicator
+        label = tr("damage_abbreviation", "DAMAGE");
+        if (health < 0.34f)
         {
-            KorryPresets::applyTypeB(sir.hacked_indicator, "CPU", KorryPresets::Color::Red, true);
-            sir.hacked_indicator->setBlink(true, BLINK_WARNING);
+            AnnunciatorPresets::applyTypeB(sir.damage_indicator, label, AnnunciatorPresets::Color::Red, true);
+            if (sir.health_value.declining() || health <= 0.0f)
+                sir.damage_indicator->setBlink(true, BLINK_WARNING);
+            else
+                sir.damage_indicator->setBlink(false);
+           }
+        else if (health < 0.8f)
+        {
+            AnnunciatorPresets::applyTypeB(sir.damage_indicator, label, AnnunciatorPresets::Color::Amber, true);
+            if (sir.health_value.declining())
+                sir.damage_indicator->setBlink(true, BLINK_CAUTION);
+            else
+                sir.damage_indicator->setBlink(false);
         }
-        else if (hacked > 0.01f)
+        else if (health < 0.99f)
         {
-            KorryPresets::applyTypeB(sir.hacked_indicator, "CPU", KorryPresets::Color::Amber, true);
-            sir.hacked_indicator->setBlink(true, BLINK_CAUTION);
+            AnnunciatorPresets::applyTypeS(sir.damage_indicator, label, AnnunciatorPresets::Color::Amber, true);
+            sir.damage_indicator->setBlink(false);
         }
         else
         {
-            KorryPresets::applyTypeS(sir.hacked_indicator, "CPU", KorryPresets::Color::Green, false);
-            sir.hacked_indicator->setBlink(false);
+            AnnunciatorPresets::applyTypeS(sir.damage_indicator, label, AnnunciatorPresets::Color::Green, false);
+            sir.damage_indicator->setBlink(false);
+        }
+
+        // Repair indicator
+        label = tr("repair_abbreviation", "REPAIR");
+        if (health < 1.0f && sir.health_value.improving())
+        {
+            AnnunciatorPresets::applyTypeS(sir.repair_indicator, label, AnnunciatorPresets::Color::Blue, true);
+            sir.repair_indicator->setBlink(false);
+        }
+        else
+        {
+            AnnunciatorPresets::applyTypeS(sir.repair_indicator, label, AnnunciatorPresets::Color::Green, false);
+            sir.repair_indicator->setBlink(false);
         }
     }
 
@@ -651,13 +685,13 @@ void SystemStatusScreen::updateDefenseIndicators()
         if (ratio > 0.99f)
         {
             // Full health - nominal
-            KorryPresets::applyTypeS(hull_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(hull_indicator, label, AnnunciatorPresets::Color::Green, false);
             hull_indicator->setBlink(false);
         }
         else if (ratio > 0.34f)
         {
             // Any damage - degraded (amber)
-            KorryPresets::applyTypeB(hull_indicator, label, KorryPresets::Color::Amber, true);
+            AnnunciatorPresets::applyTypeB(hull_indicator, label, AnnunciatorPresets::Color::Amber, true);
             if (hull_value.declining())
                 hull_indicator->setBlink(true, BLINK_CAUTION);
             else
@@ -666,7 +700,7 @@ void SystemStatusScreen::updateDefenseIndicators()
         else
         {
             // Critical damage (red)
-            KorryPresets::applyTypeB(hull_indicator, label, KorryPresets::Color::Red, true);
+            AnnunciatorPresets::applyTypeB(hull_indicator, label, AnnunciatorPresets::Color::Red, true);
             hull_indicator->setBlink(true, BLINK_WARNING);
         }
         hull_indicator->show();
@@ -714,7 +748,7 @@ void SystemStatusScreen::updateDefenseIndicators()
                 // Shields down: text colors on black background
                 if (is_critical)
                 {
-                    KorryPresets::applyTypeN(si.indicator, label, KorryPresets::Color::Red, true);
+                    AnnunciatorPresets::applyTypeN(si.indicator, label, AnnunciatorPresets::Color::Red, true);
                     if (is_changing)
                         si.indicator->setBlink(true, BLINK_WARNING);
                     else
@@ -722,7 +756,7 @@ void SystemStatusScreen::updateDefenseIndicators()
                 }
                 else if (is_damaged)
                 {
-                    KorryPresets::applyTypeN(si.indicator, label, KorryPresets::Color::Amber, true);
+                    AnnunciatorPresets::applyTypeN(si.indicator, label, AnnunciatorPresets::Color::Amber, true);
                     if (is_changing)
                         si.indicator->setBlink(true, BLINK_CAUTION);
                     else
@@ -730,7 +764,7 @@ void SystemStatusScreen::updateDefenseIndicators()
                 }
                 else
                 {
-                    KorryPresets::applyTypeN(si.indicator, label, KorryPresets::Color::Green, true);
+                    AnnunciatorPresets::applyTypeN(si.indicator, label, AnnunciatorPresets::Color::Green, true);
                     if (is_changing)
                         si.indicator->setBlink(true, BLINK_CAUTION);
                     else
@@ -742,7 +776,7 @@ void SystemStatusScreen::updateDefenseIndicators()
                 // Shields up: black text on colored backgrounds
                 if (is_critical)
                 {
-                    KorryPresets::applyTypeB(si.indicator, label, KorryPresets::Color::Red, true);
+                    AnnunciatorPresets::applyTypeB(si.indicator, label, AnnunciatorPresets::Color::Red, true);
                     if (is_changing)
                         si.indicator->setBlink(true, BLINK_WARNING);
                     else
@@ -750,7 +784,7 @@ void SystemStatusScreen::updateDefenseIndicators()
                 }
                 else if (is_damaged)
                 {
-                    KorryPresets::applyTypeB(si.indicator, label, KorryPresets::Color::Amber, true);
+                    AnnunciatorPresets::applyTypeB(si.indicator, label, AnnunciatorPresets::Color::Amber, true);
                     if (is_changing)
                         si.indicator->setBlink(true, BLINK_CAUTION);
                     else
@@ -758,7 +792,7 @@ void SystemStatusScreen::updateDefenseIndicators()
                 }
                 else
                 {
-                    KorryPresets::applyTypeB(si.indicator, label, KorryPresets::Color::Green, true);
+                    AnnunciatorPresets::applyTypeB(si.indicator, label, AnnunciatorPresets::Color::Green, true);
                     if (is_changing)
                         si.indicator->setBlink(true, BLINK_CAUTION);
                     else
@@ -776,22 +810,22 @@ void SystemStatusScreen::updateDefenseIndicators()
         label = tr("shield_abbreviation", "SHIELDS");
         if (!shields_up)
         {
-            KorryPresets::applyTypeN(shields_status_indicator, label, KorryPresets::Color::White, true);
+            AnnunciatorPresets::applyTypeN(shields_status_indicator, label, AnnunciatorPresets::Color::White, true);
             shields_status_indicator->setBlink(false);
         }
         else if (ratio > 0.99f)
         {
-            KorryPresets::applyTypeN(shields_status_indicator, label, KorryPresets::Color::Green, true);
+            AnnunciatorPresets::applyTypeN(shields_status_indicator, label, AnnunciatorPresets::Color::Green, true);
             shields_status_indicator->setBlink(false);
         }
         else if (ratio > 0.34f)
         {
-            KorryPresets::applyTypeB(shields_status_indicator, label, KorryPresets::Color::Amber, true);
+            AnnunciatorPresets::applyTypeB(shields_status_indicator, label, AnnunciatorPresets::Color::Amber, true);
             shields_status_indicator->setBlink(true, BLINK_CAUTION);
         }
         else
         {
-            KorryPresets::applyTypeB(shields_status_indicator, label, KorryPresets::Color::Red, true);
+            AnnunciatorPresets::applyTypeB(shields_status_indicator, label, AnnunciatorPresets::Color::Red, true);
             shields_status_indicator->setBlink(true, BLINK_WARNING);
         }
         shields_status_indicator->show();
@@ -823,22 +857,22 @@ void SystemStatusScreen::updateWeaponIndicators()
 
             if (count == 0)
             {
-                KorryPresets::applyTypeB(weapon_storage_indicators[n], label, KorryPresets::Color::Red, true);
+                AnnunciatorPresets::applyTypeB(weapon_storage_indicators[n], label, AnnunciatorPresets::Color::Red, true);
                 weapon_storage_indicators[n]->setBlink(false);
             }
             else if (count == 1)
             {
-                KorryPresets::applyTypeN(weapon_storage_indicators[n], label, KorryPresets::Color::Red, true);
+                AnnunciatorPresets::applyTypeN(weapon_storage_indicators[n], label, AnnunciatorPresets::Color::Red, true);
                 weapon_storage_indicators[n]->setBlink(false);
             }
             else if (ratio < 0.5f)
             {
-                KorryPresets::applyTypeN(weapon_storage_indicators[n], label, KorryPresets::Color::Amber, true);
+                AnnunciatorPresets::applyTypeN(weapon_storage_indicators[n], label, AnnunciatorPresets::Color::Amber, true);
                 weapon_storage_indicators[n]->setBlink(false);
             }
             else
             {
-                KorryPresets::applyTypeS(weapon_storage_indicators[n], label, KorryPresets::Color::Green, false);
+                AnnunciatorPresets::applyTypeS(weapon_storage_indicators[n], label, AnnunciatorPresets::Color::Green, false);
                 weapon_storage_indicators[n]->setBlink(false);
             }
 
@@ -866,23 +900,23 @@ void SystemStatusScreen::updateWeaponIndicators()
             switch (mount.state)
             {
             case MissileTubes::MountPoint::State::Empty:
-                KorryPresets::applyTypeS(tir.tube_indicator, label, KorryPresets::Color::Green, false);
+                AnnunciatorPresets::applyTypeS(tir.tube_indicator, label, AnnunciatorPresets::Color::Green, false);
                 tir.tube_indicator->setBlink(false);
                 break;
             case MissileTubes::MountPoint::State::Loading:
-                KorryPresets::applyTypeN(tir.tube_indicator, label, KorryPresets::Color::Blue, true);
+                AnnunciatorPresets::applyTypeN(tir.tube_indicator, label, AnnunciatorPresets::Color::Blue, true);
                 tir.tube_indicator->setBlink(true, BLINK_CAUTION);
                 break;
             case MissileTubes::MountPoint::State::Loaded:
-                KorryPresets::applyTypeN(tir.tube_indicator, label, KorryPresets::Color::Blue, true);
+                AnnunciatorPresets::applyTypeN(tir.tube_indicator, label, AnnunciatorPresets::Color::Blue, true);
                 tir.tube_indicator->setBlink(false);
                 break;
             case MissileTubes::MountPoint::State::Unloading:
-                KorryPresets::applyTypeN(tir.tube_indicator, label, KorryPresets::Color::Blue, true);
+                AnnunciatorPresets::applyTypeN(tir.tube_indicator, label, AnnunciatorPresets::Color::Blue, true);
                 tir.tube_indicator->setBlink(true, BLINK_CAUTION);
                 break;
             case MissileTubes::MountPoint::State::Firing:
-                KorryPresets::applyTypeB(tir.tube_indicator, label, KorryPresets::Color::Blue, true);
+                AnnunciatorPresets::applyTypeB(tir.tube_indicator, label, AnnunciatorPresets::Color::Blue, true);
                 tir.tube_indicator->setBlink(true, BLINK_WARNING);
                 break;
             }
@@ -903,31 +937,31 @@ void SystemStatusScreen::updateWeaponIndicators()
                 if (!can_load)
                 {
                     // Tube doesn't support this weapon type - show disabled/hidden
-                    KorryPresets::applyTypeS(tir.weapon_indicators[w], "----", KorryPresets::Color::Green, false);
+                    AnnunciatorPresets::applyTypeS(tir.weapon_indicators[w], "----", AnnunciatorPresets::Color::Green, false);
                     tir.weapon_indicators[w]->setBlink(false);
                 }
                 else if (is_loading)
                 {
                     // Loading: blue text on black background, blinking
-                    KorryPresets::applyTypeN(tir.weapon_indicators[w], weapon_labels[w], KorryPresets::Color::Blue, true);
+                    AnnunciatorPresets::applyTypeN(tir.weapon_indicators[w], weapon_labels[w], AnnunciatorPresets::Color::Blue, true);
                     tir.weapon_indicators[w]->setBlink(true, BLINK_CAUTION);
                 }
                 else if (is_unloading)
                 {
                     // Unloading: black text on blue background, blinking
-                    KorryPresets::applyTypeB(tir.weapon_indicators[w], weapon_labels[w], KorryPresets::Color::Blue, true);
+                    AnnunciatorPresets::applyTypeB(tir.weapon_indicators[w], weapon_labels[w], AnnunciatorPresets::Color::Blue, true);
                     tir.weapon_indicators[w]->setBlink(true, BLINK_CAUTION);
                 }
                 else if (is_loaded)
                 {
                     // Loaded: blue text on black background, solid
-                    KorryPresets::applyTypeN(tir.weapon_indicators[w], weapon_labels[w], KorryPresets::Color::Blue, true);
+                    AnnunciatorPresets::applyTypeN(tir.weapon_indicators[w], weapon_labels[w], AnnunciatorPresets::Color::Blue, true);
                     tir.weapon_indicators[w]->setBlink(false);
                 }
                 else
                 {
                     // Available but not loaded
-                    KorryPresets::applyTypeS(tir.weapon_indicators[w], weapon_labels[w], KorryPresets::Color::Green, false);
+                    AnnunciatorPresets::applyTypeS(tir.weapon_indicators[w], weapon_labels[w], AnnunciatorPresets::Color::Green, false);
                     tir.weapon_indicators[w]->setBlink(false);
                 }
             }
@@ -945,6 +979,9 @@ void SystemStatusScreen::updateWeaponIndicators()
             tir.row->hide();
     }
 
+    tubes_grid
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * visible_tube_count);
+
     // Beam weapons
     if (auto beams = my_spaceship.getComponent<BeamWeaponSys>())
     {
@@ -961,17 +998,17 @@ void SystemStatusScreen::updateWeaponIndicators()
 
             if (cooldown_ratio > 0.8f)
             {
-                KorryPresets::applyTypeN(bi.indicator, angle_label, KorryPresets::Color::Blue, true);
+                AnnunciatorPresets::applyTypeN(bi.indicator, angle_label, AnnunciatorPresets::Color::Blue, true);
                 bi.indicator->setBlink(true, BLINK_WARNING);
             }
             else if (cooldown_ratio > 0.01f)
             {
-                KorryPresets::applyTypeN(bi.indicator, angle_label, KorryPresets::Color::Blue, true);
+                AnnunciatorPresets::applyTypeN(bi.indicator, angle_label, AnnunciatorPresets::Color::Blue, true);
                 bi.indicator->setBlink(false);
             }
             else
             {
-                KorryPresets::applyTypeS(bi.indicator, angle_label, KorryPresets::Color::Green, false);
+                AnnunciatorPresets::applyTypeS(bi.indicator, angle_label, AnnunciatorPresets::Color::Green, false);
                 bi.indicator->setBlink(false);
             }
 
@@ -1004,12 +1041,12 @@ void SystemStatusScreen::updatePropulsionIndicators()
 
         if (request > 0.01f)
         {
-            KorryPresets::applyTypeN(impulse_indicator, "IMPULSE", KorryPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeN(impulse_indicator, "IMPULSE", AnnunciatorPresets::Color::Blue, true);
             impulse_indicator->setBlink(false);
         }
         else
         {
-            KorryPresets::applyTypeS(impulse_indicator, "IMPULSE", KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(impulse_indicator, "IMPULSE", AnnunciatorPresets::Color::Green, false);
             impulse_indicator->setBlink(false);
         }
         impulse_indicator->show();
@@ -1024,12 +1061,12 @@ void SystemStatusScreen::updatePropulsionIndicators()
 
         if (level > 0)
         {
-            KorryPresets::applyTypeN(warp_indicator, "WARP", KorryPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeN(warp_indicator, "WARP", AnnunciatorPresets::Color::Blue, true);
             warp_indicator->setBlink(false);
         }
         else
         {
-            KorryPresets::applyTypeS(warp_indicator, "WARP", KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(warp_indicator, "WARP", AnnunciatorPresets::Color::Green, false);
             warp_indicator->setBlink(false);
         }
         warp_indicator->show();
@@ -1047,22 +1084,22 @@ void SystemStatusScreen::updatePropulsionIndicators()
 
         if (effectiveness <= 0.0f)
         {
-            KorryPresets::applyTypeB(jump_indicator, label, KorryPresets::Color::Red, true);
+            AnnunciatorPresets::applyTypeB(jump_indicator, label, AnnunciatorPresets::Color::Red, true);
             jump_indicator->setBlink(false);
         }
         else if (delay > 0)
         {
-            KorryPresets::applyTypeB(jump_indicator, label, KorryPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeB(jump_indicator, label, AnnunciatorPresets::Color::Blue, true);
             jump_indicator->setBlink(true, delay / 10.0f);
         }
         else if (charge_ratio < 0.99f)
         {
-            KorryPresets::applyTypeN(jump_indicator, label, KorryPresets::Color::Amber, true);
+            AnnunciatorPresets::applyTypeN(jump_indicator, label, AnnunciatorPresets::Color::Amber, true);
             jump_indicator->setBlink(false);
         }
         else
         {
-            KorryPresets::applyTypeS(jump_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(jump_indicator, label, AnnunciatorPresets::Color::Green, false);
             jump_indicator->setBlink(false);
         }
         jump_indicator->show();
@@ -1078,17 +1115,17 @@ void SystemStatusScreen::updatePropulsionIndicators()
 
         if (active)
         {
-            KorryPresets::applyTypeN(maneuver_indicator, label, KorryPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeN(maneuver_indicator, label, AnnunciatorPresets::Color::Blue, true);
             maneuver_indicator->setBlink(true, BLINK_WARNING);
         }
         else if (cm->charge < 0.99f)
         {
-            KorryPresets::applyTypeN(maneuver_indicator, label, KorryPresets::Color::Amber, true);
+            AnnunciatorPresets::applyTypeN(maneuver_indicator, label, AnnunciatorPresets::Color::Amber, true);
             maneuver_indicator->setBlink(false);
         }
         else
         {
-            KorryPresets::applyTypeS(maneuver_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(maneuver_indicator, label, AnnunciatorPresets::Color::Green, false);
             maneuver_indicator->setBlink(false);
         }
         maneuver_indicator->show();
@@ -1107,25 +1144,25 @@ void SystemStatusScreen::updateTransmitterIndicators()
         {
         case CommsTransmitter::State::Inactive:
         case CommsTransmitter::State::ChannelClosed:
-            KorryPresets::applyTypeS(comms_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(comms_indicator, label, AnnunciatorPresets::Color::Green, false);
             comms_indicator->setBlink(false);
             break;
         case CommsTransmitter::State::OpeningChannel:
-            KorryPresets::applyTypeN(comms_indicator, label, KorryPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeN(comms_indicator, label, AnnunciatorPresets::Color::Blue, true);
             comms_indicator->setBlink(true, BLINK_CAUTION);
             break;
         case CommsTransmitter::State::BeingHailed:
-            KorryPresets::applyTypeB(comms_indicator, label, KorryPresets::Color::Green, true);
+            AnnunciatorPresets::applyTypeB(comms_indicator, label, AnnunciatorPresets::Color::Green, true);
             comms_indicator->setBlink(true, BLINK_CAUTION);
             break;
         case CommsTransmitter::State::ChannelOpen:
         case CommsTransmitter::State::ChannelOpenPlayer:
-            KorryPresets::applyTypeN(comms_indicator, label, KorryPresets::Color::Green, true);
+            AnnunciatorPresets::applyTypeN(comms_indicator, label, AnnunciatorPresets::Color::Green, true);
             comms_indicator->setBlink(false);
             break;
         case CommsTransmitter::State::ChannelFailed:
         case CommsTransmitter::State::ChannelBroken:
-            KorryPresets::applyTypeB(comms_indicator, label, KorryPresets::Color::Red, true);
+            AnnunciatorPresets::applyTypeB(comms_indicator, label, AnnunciatorPresets::Color::Red, true);
             comms_indicator->setBlink(false);
             break;
         }
@@ -1140,12 +1177,12 @@ void SystemStatusScreen::updateTransmitterIndicators()
         const string label = tr("scan_abbreviation", "SCAN");
         if (scanner->target && scanner->delay > 0.0f)
         {
-            KorryPresets::applyTypeN(scan_indicator, label, KorryPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeN(scan_indicator, label, AnnunciatorPresets::Color::Blue, true);
             scan_indicator->setBlink(false);  // No blink
         }
         else
         {
-            KorryPresets::applyTypeS(scan_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(scan_indicator, label, AnnunciatorPresets::Color::Green, false);
             scan_indicator->setBlink(false);
         }
         scan_indicator->show();
@@ -1161,15 +1198,15 @@ void SystemStatusScreen::updateTransmitterIndicators()
         switch (dock_port->state)
         {
         case DockingPort::State::NotDocking:
-            KorryPresets::applyTypeS(dock_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(dock_indicator, label, AnnunciatorPresets::Color::Green, false);
             dock_indicator->setBlink(false);
             break;
         case DockingPort::State::Docking:
-            KorryPresets::applyTypeN(dock_indicator, label, KorryPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeN(dock_indicator, label, AnnunciatorPresets::Color::Blue, true);
             dock_indicator->setBlink(false);  // No blink
             break;
         case DockingPort::State::Docked:
-            KorryPresets::applyTypeN(dock_indicator, label, KorryPresets::Color::Green, true);
+            AnnunciatorPresets::applyTypeN(dock_indicator, label, AnnunciatorPresets::Color::Green, true);
             dock_indicator->setBlink(false);
             break;
         }
@@ -1188,22 +1225,22 @@ void SystemStatusScreen::updateTransmitterIndicators()
 
         if (count == 0)
         {
-            KorryPresets::applyTypeN(probe_indicator, label, KorryPresets::Color::Red, true);
+            AnnunciatorPresets::applyTypeN(probe_indicator, label, AnnunciatorPresets::Color::Red, true);
             probe_indicator->setBlink(false);
         }
         else if (count == 0)
         {
-            KorryPresets::applyTypeB(probe_indicator, label, KorryPresets::Color::Red, true);
+            AnnunciatorPresets::applyTypeB(probe_indicator, label, AnnunciatorPresets::Color::Red, true);
             probe_indicator->setBlink(false);
         }
         else if (ratio < 0.34f)
         {
-            KorryPresets::applyTypeB(probe_indicator, label, KorryPresets::Color::Amber, true);
+            AnnunciatorPresets::applyTypeB(probe_indicator, label, AnnunciatorPresets::Color::Amber, true);
             probe_indicator->setBlink(false);
         }
         else
         {
-            KorryPresets::applyTypeS(probe_indicator, label, KorryPresets::Color::Green, false);
+            AnnunciatorPresets::applyTypeS(probe_indicator, label, AnnunciatorPresets::Color::Green, false);
             probe_indicator->setBlink(false);
         }
         probe_indicator->show();
@@ -1220,7 +1257,7 @@ void SystemStatusScreen::updateSelfDestructIndicator()
 
         if (!sd->active)
         {
-            KorryPresets::applyTypeS(selfdestruct_indicator, label, KorryPresets::Color::Red, false);
+            AnnunciatorPresets::applyTypeS(selfdestruct_indicator, label, AnnunciatorPresets::Color::Red, false);
             selfdestruct_indicator->setBlink(false);
         }
         else
@@ -1237,12 +1274,12 @@ void SystemStatusScreen::updateSelfDestructIndicator()
 
             if (all_confirmed && sd->countdown > 0.0f)
             {
-                KorryPresets::applyTypeB(selfdestruct_indicator, label, KorryPresets::Color::Red, true);
+                AnnunciatorPresets::applyTypeB(selfdestruct_indicator, label, AnnunciatorPresets::Color::Red, true);
                 selfdestruct_indicator->setBlink(true, BLINK_WARNING);
             }
             else
             {
-                KorryPresets::applyTypeB(selfdestruct_indicator, label, KorryPresets::Color::Amber, true);
+                AnnunciatorPresets::applyTypeB(selfdestruct_indicator, label, AnnunciatorPresets::Color::Amber, true);
                 selfdestruct_indicator->setBlink(true, BLINK_CAUTION);
             }
         }

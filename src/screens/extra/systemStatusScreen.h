@@ -4,7 +4,7 @@
 #include "components/shipsystem.h"
 #include "components/missiletubes.h"
 #include "gui/gui2_overlay.h"
-#include "gui/korryIndicatorPresets.h"
+#include "gui/annunciatorIndicatorPresets.h"
 #include <array>
 #include <vector>
 
@@ -24,7 +24,7 @@ class GuiLabel;
  * - Amber: Caution - degraded system (flashing 0.5s)
  * - Red: Warning - critical condition (flashing 0.25s)
  *
- * All indicators use Korry Standard 389 presets with 4:3 aspect ratio.
+ * All indicators use Annunciator Standard 389 presets with 4:3 aspect ratio.
  * Blink intervals: 0.25s (warning) to 0.5s (caution), equal on/off.
  */
 
@@ -34,7 +34,8 @@ struct TrackedValue
     float current = 1.0f;
     float previous = 1.0f;
 
-    void update(float new_value) {
+    void update(float new_value)
+    {
         previous = current;
         current = new_value;
     }
@@ -53,9 +54,9 @@ struct SystemIndicatorRow
     GuiIndicatorLight* power_indicator = nullptr;
     GuiIndicatorLight* heat_indicator = nullptr;
     GuiIndicatorLight* heat_delta_indicator = nullptr;
-    GuiIndicatorLight* health_indicator = nullptr;
+    GuiIndicatorLight* damage_indicator = nullptr;
+    GuiIndicatorLight* repair_indicator = nullptr;
     GuiIndicatorLight* coolant_indicator = nullptr;
-    GuiIndicatorLight* hacked_indicator = nullptr;
 
     TrackedValue health_value;
     TrackedValue heat_value;

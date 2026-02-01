@@ -5,9 +5,9 @@
 #include <cstdio>
 
 /**
- * Korry Standard 389 Indicator Light Presets
+ * Annunciator Standard 389 Indicator Light Presets
  *
- * Based on Korry Standard 389 annunciator switch specifications.
+ * Based on Annunciator Standard 389 annunciator switch specifications.
  * Provides factory functions to create GuiIndicatorLight instances
  * configured for standard aviation indicator behaviors.
  *
@@ -21,9 +21,9 @@
  *
  * Colors: Red, Amber, Green, Blue, White
  */
-namespace KorryPresets
+namespace AnnunciatorPresets
 {
-    // Korry Standard 389 colors (approximated from chromaticity values)
+    // Annunciator Standard 389 colors (approximated from chromaticity values)
     // Based on CIE x,y coordinates from optical characteristics
     enum class Color
     {
@@ -34,7 +34,7 @@ namespace KorryPresets
         White
     };
 
-    // Legend types per Korry Standard 389
+    // Legend types per Annunciator Standard 389
     enum class LegendType
     {
         S,  // 1B - Hidden legend, colored text on black background when energized
@@ -45,7 +45,7 @@ namespace KorryPresets
         F   // 2F - White text on dark background, colored background when energized
     };
 
-    // Get RGB color value for a Korry color
+    // Get RGB color value for an Annunciator color
     inline glm::u8vec4 getColor(Color color)
     {
         switch (color)
@@ -249,7 +249,7 @@ namespace KorryPresets
     }
 
     /**
-     * Convenience struct to store a Korry indicator configuration
+     * Convenience struct to store an Annunciator indicator configuration
      */
     struct Config
     {
@@ -262,24 +262,24 @@ namespace KorryPresets
 
         void apply(GuiIndicatorLight* indicator, bool energized) const
         {
-            KorryPresets::apply(indicator, label, type, color, energized);
+            AnnunciatorPresets::apply(indicator, label, type, color, energized);
         }
     };
 
-}  // namespace KorryPresets
+}  // namespace AnnunciatorPresets
 
 
 /**
- * Korry Standard 389 Lens Configurations
+ * Annunciator Standard 389 Lens Configurations
  *
- * Multi-segment indicator panels following Korry lens configuration standards.
+ * Multi-segment indicator panels following Annunciator lens configuration standards.
  * Each configuration divides the indicator area into segments (A, B, C, D)
  * that can be independently controlled.
  */
-class KorryLensPanel : public GuiElement
+class AnnunciatorLensPanel : public GuiElement
 {
 public:
-    // Lens configuration types per Korry Standard 389
+    // Lens configuration types per Annunciator Standard 389
     enum class Configuration
     {
         Full,              // Single segment (A)
@@ -434,7 +434,7 @@ private:
     }
 
 public:
-    KorryLensPanel(GuiContainer* owner, const string& id, Configuration config = Configuration::Full)
+    AnnunciatorLensPanel(GuiContainer* owner, const string& id, Configuration config = Configuration::Full)
         : GuiElement(owner, id), config(config)
     {
         createSegments();
@@ -478,7 +478,7 @@ public:
     GuiIndicatorLight* D() { return getSegment(Segment::D); }
 
     // Change configuration
-    KorryLensPanel* setConfiguration(Configuration new_config)
+    AnnunciatorLensPanel* setConfiguration(Configuration new_config)
     {
         if (config != new_config)
         {
@@ -492,39 +492,39 @@ public:
     Configuration getConfiguration() const { return config; }
 
     // Set margin between segments
-    KorryLensPanel* setSegmentMargin(float margin)
+    AnnunciatorLensPanel* setSegmentMargin(float margin)
     {
         segment_margin = margin;
         layoutSegments();
         return this;
     }
 
-    // Apply Korry preset to a specific segment
-    KorryLensPanel* applyPreset(Segment seg, const string& label,
-                                 KorryPresets::LegendType type,
-                                 KorryPresets::Color color, bool energized)
+    // Apply Annunciator preset to a specific segment
+    AnnunciatorLensPanel* applyPreset(Segment seg, const string& label,
+                                       AnnunciatorPresets::LegendType type,
+                                       AnnunciatorPresets::Color color, bool energized)
     {
         if (auto* indicator = getSegment(seg))
         {
-            KorryPresets::apply(indicator, label, type, color, energized);
+            AnnunciatorPresets::apply(indicator, label, type, color, energized);
         }
         return this;
     }
 
-    // Apply Korry preset to all segments with same settings
-    KorryLensPanel* applyPresetToAll(KorryPresets::LegendType type,
-                                      KorryPresets::Color color, bool energized)
+    // Apply Annunciator preset to all segments with same settings
+    AnnunciatorLensPanel* applyPresetToAll(AnnunciatorPresets::LegendType type,
+                                            AnnunciatorPresets::Color color, bool energized)
     {
         for (auto* seg : segments)
         {
             // Keep existing label, just apply style
-            KorryPresets::apply(seg, "", type, color, energized);
+            AnnunciatorPresets::apply(seg, "", type, color, energized);
         }
         return this;
     }
 
     // Set energized state for a segment
-    KorryLensPanel* setEnergized(Segment seg, bool energized)
+    AnnunciatorLensPanel* setEnergized(Segment seg, bool energized)
     {
         if (auto* indicator = getSegment(seg))
         {
@@ -534,7 +534,7 @@ public:
     }
 
     // Set label for a segment
-    KorryLensPanel* setSegmentLabel(Segment seg, const string& label)
+    AnnunciatorLensPanel* setSegmentLabel(Segment seg, const string& label)
     {
         if (auto* indicator = getSegment(seg))
         {
@@ -557,127 +557,127 @@ public:
 
 
 /**
- * Factory functions for common Korry lens panel configurations
+ * Factory functions for common Annunciator lens panel configurations
  */
-namespace KorryLensPanels
+namespace AnnunciatorLensPanels
 {
     // Create a full (single-segment) indicator
-    inline KorryLensPanel* createFull(GuiContainer* owner, const string& id,
-                                       const string& label,
-                                       KorryPresets::LegendType type,
-                                       KorryPresets::Color color)
+    inline AnnunciatorLensPanel* createFull(GuiContainer* owner, const string& id,
+                                             const string& label,
+                                             AnnunciatorPresets::LegendType type,
+                                             AnnunciatorPresets::Color color)
     {
-        auto* panel = new KorryLensPanel(owner, id, KorryLensPanel::Configuration::Full);
-        panel->applyPreset(KorryLensPanel::Segment::A, label, type, color, false);
+        auto* panel = new AnnunciatorLensPanel(owner, id, AnnunciatorLensPanel::Configuration::Full);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::A, label, type, color, false);
         return panel;
     }
 
     // Create a vertical split (A|B) indicator
-    inline KorryLensPanel* createVerticalSplit(GuiContainer* owner, const string& id,
-                                                const string& labelA, const string& labelB,
-                                                KorryPresets::LegendType type,
-                                                KorryPresets::Color colorA,
-                                                KorryPresets::Color colorB)
+    inline AnnunciatorLensPanel* createVerticalSplit(GuiContainer* owner, const string& id,
+                                                      const string& labelA, const string& labelB,
+                                                      AnnunciatorPresets::LegendType type,
+                                                      AnnunciatorPresets::Color colorA,
+                                                      AnnunciatorPresets::Color colorB)
     {
-        auto* panel = new KorryLensPanel(owner, id, KorryLensPanel::Configuration::VerticalSplit);
-        panel->applyPreset(KorryLensPanel::Segment::A, labelA, type, colorA, false);
-        panel->applyPreset(KorryLensPanel::Segment::B, labelB, type, colorB, false);
+        auto* panel = new AnnunciatorLensPanel(owner, id, AnnunciatorLensPanel::Configuration::VerticalSplit);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::A, labelA, type, colorA, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::B, labelB, type, colorB, false);
         return panel;
     }
 
     // Create a horizontal split (A over B) indicator
-    inline KorryLensPanel* createHorizontalSplit(GuiContainer* owner, const string& id,
-                                                  const string& labelA, const string& labelB,
-                                                  KorryPresets::LegendType type,
-                                                  KorryPresets::Color colorA,
-                                                  KorryPresets::Color colorB)
+    inline AnnunciatorLensPanel* createHorizontalSplit(GuiContainer* owner, const string& id,
+                                                        const string& labelA, const string& labelB,
+                                                        AnnunciatorPresets::LegendType type,
+                                                        AnnunciatorPresets::Color colorA,
+                                                        AnnunciatorPresets::Color colorB)
     {
-        auto* panel = new KorryLensPanel(owner, id, KorryLensPanel::Configuration::HorizontalSplit);
-        panel->applyPreset(KorryLensPanel::Segment::A, labelA, type, colorA, false);
-        panel->applyPreset(KorryLensPanel::Segment::B, labelB, type, colorB, false);
+        auto* panel = new AnnunciatorLensPanel(owner, id, AnnunciatorLensPanel::Configuration::HorizontalSplit);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::A, labelA, type, colorA, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::B, labelB, type, colorB, false);
         return panel;
     }
 
     // Create a 3-way bottom split (A|B on top, C on bottom) indicator
-    inline KorryLensPanel* createThreeWayBottom(GuiContainer* owner, const string& id,
-                                                 const string& labelA, const string& labelB,
-                                                 const string& labelC,
-                                                 KorryPresets::LegendType type,
-                                                 KorryPresets::Color colorA,
-                                                 KorryPresets::Color colorB,
-                                                 KorryPresets::Color colorC)
+    inline AnnunciatorLensPanel* createThreeWayBottom(GuiContainer* owner, const string& id,
+                                                       const string& labelA, const string& labelB,
+                                                       const string& labelC,
+                                                       AnnunciatorPresets::LegendType type,
+                                                       AnnunciatorPresets::Color colorA,
+                                                       AnnunciatorPresets::Color colorB,
+                                                       AnnunciatorPresets::Color colorC)
     {
-        auto* panel = new KorryLensPanel(owner, id, KorryLensPanel::Configuration::ThreeWayBottom);
-        panel->applyPreset(KorryLensPanel::Segment::A, labelA, type, colorA, false);
-        panel->applyPreset(KorryLensPanel::Segment::B, labelB, type, colorB, false);
-        panel->applyPreset(KorryLensPanel::Segment::C, labelC, type, colorC, false);
+        auto* panel = new AnnunciatorLensPanel(owner, id, AnnunciatorLensPanel::Configuration::ThreeWayBottom);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::A, labelA, type, colorA, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::B, labelB, type, colorB, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::C, labelC, type, colorC, false);
         return panel;
     }
 
     // Create a 3-way top split (A on top, B|C on bottom) indicator
-    inline KorryLensPanel* createThreeWayTop(GuiContainer* owner, const string& id,
-                                              const string& labelA, const string& labelB,
-                                              const string& labelC,
-                                              KorryPresets::LegendType type,
-                                              KorryPresets::Color colorA,
-                                              KorryPresets::Color colorB,
-                                              KorryPresets::Color colorC)
+    inline AnnunciatorLensPanel* createThreeWayTop(GuiContainer* owner, const string& id,
+                                                   const string& labelA, const string& labelB,
+                                                   const string& labelC,
+                                                   AnnunciatorPresets::LegendType type,
+                                                   AnnunciatorPresets::Color colorA,
+                                                   AnnunciatorPresets::Color colorB,
+                                                   AnnunciatorPresets::Color colorC)
     {
-        auto* panel = new KorryLensPanel(owner, id, KorryLensPanel::Configuration::ThreeWayTop);
-        panel->applyPreset(KorryLensPanel::Segment::A, labelA, type, colorA, false);
-        panel->applyPreset(KorryLensPanel::Segment::B, labelB, type, colorB, false);
-        panel->applyPreset(KorryLensPanel::Segment::C, labelC, type, colorC, false);
+        auto* panel = new AnnunciatorLensPanel(owner, id, AnnunciatorLensPanel::Configuration::ThreeWayTop);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::A, labelA, type, colorA, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::B, labelB, type, colorB, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::C, labelC, type, colorC, false);
         return panel;
     }
 
     // Create a 3-way right split (A top-left, B right, C bottom-left) indicator
-    inline KorryLensPanel* createThreeWayRight(GuiContainer* owner, const string& id,
-                                                const string& labelA, const string& labelB,
-                                                const string& labelC,
-                                                KorryPresets::LegendType type,
-                                                KorryPresets::Color colorA,
-                                                KorryPresets::Color colorB,
-                                                KorryPresets::Color colorC)
+    inline AnnunciatorLensPanel* createThreeWayRight(GuiContainer* owner, const string& id,
+                                                      const string& labelA, const string& labelB,
+                                                      const string& labelC,
+                                                      AnnunciatorPresets::LegendType type,
+                                                      AnnunciatorPresets::Color colorA,
+                                                      AnnunciatorPresets::Color colorB,
+                                                      AnnunciatorPresets::Color colorC)
     {
-        auto* panel = new KorryLensPanel(owner, id, KorryLensPanel::Configuration::ThreeWayRight);
-        panel->applyPreset(KorryLensPanel::Segment::A, labelA, type, colorA, false);
-        panel->applyPreset(KorryLensPanel::Segment::B, labelB, type, colorB, false);
-        panel->applyPreset(KorryLensPanel::Segment::C, labelC, type, colorC, false);
+        auto* panel = new AnnunciatorLensPanel(owner, id, AnnunciatorLensPanel::Configuration::ThreeWayRight);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::A, labelA, type, colorA, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::B, labelB, type, colorB, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::C, labelC, type, colorC, false);
         return panel;
     }
 
     // Create a 3-way left split (A left, B top-right, C bottom-right) indicator
-    inline KorryLensPanel* createThreeWayLeft(GuiContainer* owner, const string& id,
-                                               const string& labelA, const string& labelB,
-                                               const string& labelC,
-                                               KorryPresets::LegendType type,
-                                               KorryPresets::Color colorA,
-                                               KorryPresets::Color colorB,
-                                               KorryPresets::Color colorC)
+    inline AnnunciatorLensPanel* createThreeWayLeft(GuiContainer* owner, const string& id,
+                                                     const string& labelA, const string& labelB,
+                                                     const string& labelC,
+                                                     AnnunciatorPresets::LegendType type,
+                                                     AnnunciatorPresets::Color colorA,
+                                                     AnnunciatorPresets::Color colorB,
+                                                     AnnunciatorPresets::Color colorC)
     {
-        auto* panel = new KorryLensPanel(owner, id, KorryLensPanel::Configuration::ThreeWayLeft);
-        panel->applyPreset(KorryLensPanel::Segment::A, labelA, type, colorA, false);
-        panel->applyPreset(KorryLensPanel::Segment::B, labelB, type, colorB, false);
-        panel->applyPreset(KorryLensPanel::Segment::C, labelC, type, colorC, false);
+        auto* panel = new AnnunciatorLensPanel(owner, id, AnnunciatorLensPanel::Configuration::ThreeWayLeft);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::A, labelA, type, colorA, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::B, labelB, type, colorB, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::C, labelC, type, colorC, false);
         return panel;
     }
 
     // Create a 4-way split (A|B on top, C|D on bottom) indicator
-    inline KorryLensPanel* createFourWay(GuiContainer* owner, const string& id,
-                                          const string& labelA, const string& labelB,
-                                          const string& labelC, const string& labelD,
-                                          KorryPresets::LegendType type,
-                                          KorryPresets::Color colorA,
-                                          KorryPresets::Color colorB,
-                                          KorryPresets::Color colorC,
-                                          KorryPresets::Color colorD)
+    inline AnnunciatorLensPanel* createFourWay(GuiContainer* owner, const string& id,
+                                                const string& labelA, const string& labelB,
+                                                const string& labelC, const string& labelD,
+                                                AnnunciatorPresets::LegendType type,
+                                                AnnunciatorPresets::Color colorA,
+                                                AnnunciatorPresets::Color colorB,
+                                                AnnunciatorPresets::Color colorC,
+                                                AnnunciatorPresets::Color colorD)
     {
-        auto* panel = new KorryLensPanel(owner, id, KorryLensPanel::Configuration::FourWay);
-        panel->applyPreset(KorryLensPanel::Segment::A, labelA, type, colorA, false);
-        panel->applyPreset(KorryLensPanel::Segment::B, labelB, type, colorB, false);
-        panel->applyPreset(KorryLensPanel::Segment::C, labelC, type, colorC, false);
-        panel->applyPreset(KorryLensPanel::Segment::D, labelD, type, colorD, false);
+        auto* panel = new AnnunciatorLensPanel(owner, id, AnnunciatorLensPanel::Configuration::FourWay);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::A, labelA, type, colorA, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::B, labelB, type, colorB, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::C, labelC, type, colorC, false);
+        panel->applyPreset(AnnunciatorLensPanel::Segment::D, labelD, type, colorD, false);
         return panel;
     }
 
-}  // namespace KorryLensPanels
+}  // namespace AnnunciatorLensPanels
