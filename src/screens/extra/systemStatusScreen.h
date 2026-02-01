@@ -8,10 +8,10 @@
 #include <array>
 #include <vector>
 
-class GuiPanel;
-class GuiElement;
 class GuiIndicatorLight;
 class GuiLabel;
+class GuiPanel;
+class GuiSelector;
 
 /**
  * Aviation-style System Status Screen
@@ -99,12 +99,16 @@ class SystemStatusScreen : public GuiOverlay
 private:
     GuiOverlay* background_crosses;
 
+    // Tabs
+    GuiSelector* tab_selector;
+    GuiElement* overview_tab;
+
     // Panels
-    GuiPanel* systems_panel;
-    GuiPanel* defenses_panel;
-    GuiPanel* weapons_panel;
-    GuiPanel* propulsion_panel;
-    GuiPanel* transmitter_panel;
+    GuiElement* systems_panel;
+    GuiElement* defenses_panel;
+    GuiElement* weapons_panel;
+    GuiElement* propulsion_panel;
+    GuiElement* transmitter_panel;
 
     // Standard indicator size (4:3 aspect ratio)
     static constexpr float INDICATOR_WIDTH = 80.0f;
@@ -138,7 +142,6 @@ private:
 
     // Shield indicators
     std::vector<ShieldIndicator> shield_indicators;
-    GuiIndicatorLight* shields_status_indicator = nullptr;
 
     // Weapon storage indicators
     GuiIndicatorLight* weapon_storage_indicators[MW_Count] = {nullptr};
@@ -176,6 +179,7 @@ private:
     static constexpr float UPDATE_INTERVAL = 0.25f;
 
     // Helper functions
+    void createOverviewTab();
     void createSystemsPanel();
     void createDefensesPanel();
     void createWeaponsPanel();

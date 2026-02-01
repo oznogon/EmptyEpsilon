@@ -24,9 +24,10 @@
 
 #include "screenComponents/alertOverlay.h"
 
-#include "gui/gui2_panel.h"
-#include "gui/gui2_label.h"
 #include "gui/gui2_indicatorlight.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_selector.h"
 
 #include <cmath>
 
@@ -55,8 +56,8 @@ SystemStatusScreen::SystemStatusScreen(GuiContainer* owner)
         tr("ship_system_abbreviation", "IMPULSE"),
         tr("ship_system_abbreviation", "WARP"),
         tr("ship_system_abbreviation", "JUMP"),
-        tr("ship_system_abbreviation", "SHIELD\nFORWARD"),
-        tr("ship_system_abbreviation", "SHIELD\nREAR")
+        tr("ship_system_abbreviation", "SHIELD\nFWD GEN"),
+        tr("ship_system_abbreviation", "SHIELD\nREAR GEN")
     }};
 
     weapon_labels = {{
@@ -77,12 +78,21 @@ SystemStatusScreen::SystemStatusScreen(GuiContainer* owner)
     // Alert overlay
     (new AlertLevelOverlay(this));
 
-    // Create panels
-    createSystemsPanel();
-    createDefensesPanel();
-    createWeaponsPanel();
-    createPropulsionPanel();
-    createTransmitterPanel();
+    tab_selector = new GuiSelector(this, "SYSTEMS_TAB_SELECTOR",
+        [this](int index, string value)
+        {
+            if (value == "overview")
+                overview_tab->show();
+        }
+    );
+
+    // Create tabs
+    createOverviewTab();
+
+    tab_selector
+        ->setSelectionIndex(0)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
+        ->setSize(150.0f, 50.0f);
 }
 
 GuiIndicatorLight* SystemStatusScreen::createIndicator(GuiElement* parent, const string& id, const string& label)
@@ -103,9 +113,24 @@ string SystemStatusScreen::formatAngle(float degrees)
     return string(static_cast<int>(degrees)) + "\xC2\xB0"; // UTF-8 degree symbol
 }
 
+void SystemStatusScreen::createOverviewTab()
+{
+    tab_selector->addEntry(tr("systems_status_tabs", "Overview"), "overview");
+    overview_tab = new GuiElement(this, "");
+    overview_tab
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Create panels
+    createSystemsPanel();
+    createDefensesPanel();
+    createWeaponsPanel();
+    createPropulsionPanel();
+    createTransmitterPanel();
+}
+
 void SystemStatusScreen::createSystemsPanel()
 {
-    systems_panel = new GuiPanel(this, "SYSTEMS_PANEL");
+    systems_panel = new GuiElement(overview_tab, "SYSTEMS_PANEL");
     systems_panel
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft);
 
@@ -155,8 +180,9 @@ void SystemStatusScreen::createSystemsPanel()
         sir.system_type = ShipSystem::Type(n);
 
         sir.row = new GuiElement(systems_grid, "SYS_ROW_" + string(n));
-        sir.row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-        sir.row->setAttribute("layout", "horizontal");
+        sir.row
+            ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
+            ->setAttribute("layout", "horizontal");
 
         // TODO: Hide if components aren't used:
         // - heat, heat_delta_ coolant if coolant isn't used
@@ -180,7 +206,7 @@ void SystemStatusScreen::createSystemsPanel()
 
 void SystemStatusScreen::createDefensesPanel()
 {
-    defenses_panel = new GuiPanel(this, "DEFENSES_PANEL");
+    defenses_panel = new GuiElement(overview_tab, "DEFENSES_PANEL");
     defenses_panel
         ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
         ->setSize(INDICATOR_WIDTH * 10 + PANEL_PADDING * 2, PANEL_HEADER_HEIGHT + ROW_HEIGHT + PANEL_PADDING * 2);
@@ -200,7 +226,6 @@ void SystemStatusScreen::createDefensesPanel()
         ->setAttribute("layout", "horizontal");
 
     hull_indicator = createIndicator(row1, "HULL_IND", "HULL");
-    shields_status_indicator = createIndicator(row1, "SHLD_STATUS", tr("shield_abbreviation", "SHIELDS"));
 
     // Shield segment indicators (up to 8)
     for (int i = 0; i < 8; i++)
@@ -215,7 +240,7 @@ void SystemStatusScreen::createDefensesPanel()
 
 void SystemStatusScreen::createWeaponsPanel()
 {
-    weapons_panel = new GuiPanel(this, "WEAPONS_PANEL");
+    weapons_panel = new GuiElement(overview_tab, "WEAPONS_PANEL");
     weapons_panel
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
         ->setAttribute("layout", "vertical");
@@ -298,7 +323,7 @@ void SystemStatusScreen::createWeaponsPanel()
 
 void SystemStatusScreen::createPropulsionPanel()
 {
-    propulsion_panel = new GuiPanel(this, "PROPULSION_PANEL");
+    propulsion_panel = new GuiElement(overview_tab, "PROPULSION_PANEL");
     propulsion_panel
         ->setPosition(0.0f, -(PANEL_HEADER_HEIGHT + ROW_HEIGHT + PANEL_PADDING * 2), sp::Alignment::BottomRight)
         ->setSize(INDICATOR_WIDTH * 4 + PANEL_PADDING * 2, PANEL_HEADER_HEIGHT + ROW_HEIGHT + PANEL_PADDING * 2);
@@ -326,7 +351,7 @@ void SystemStatusScreen::createPropulsionPanel()
 
 void SystemStatusScreen::createTransmitterPanel()
 {
-    transmitter_panel = new GuiPanel(this, "TRANSMITTER_PANEL");
+    transmitter_panel = new GuiElement(overview_tab, "TRANSMITTER_PANEL");
     transmitter_panel
         ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
         ->setSize(INDICATOR_WIDTH * 5 + PANEL_PADDING * 2, PANEL_HEADER_HEIGHT + ROW_HEIGHT + PANEL_PADDING * 2);
@@ -469,7 +494,7 @@ void SystemStatusScreen::updateSystemIndicators()
         float power = sys->power_level;
         float coolant = sys->coolant_level;
 
-        // TODO: Don't manage heat if there's no coolant
+        // TODO: Don't display heat or coolant indicators if there's no coolant
         bool auto_coolant = false;
         if (auto coolant_component = my_spaceship.getComponent<Coolant>())
             if (coolant_component->auto_levels) auto_coolant = true;
@@ -612,11 +637,11 @@ void SystemStatusScreen::updateSystemIndicators()
             sir.heat_delta_indicator->setBlink(false);
         }
 
-        // Coolant indicator - always blue if non-zero
+        // Coolant indicator lit if non-zero
         label = tr("coolant_abbreviation", "COOLANT");
         if (coolant > 0.1f)
         {
-            AnnunciatorPresets::applyTypeN(sir.coolant_indicator, label, AnnunciatorPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeN(sir.coolant_indicator, label, auto_coolant ? AnnunciatorPresets::Color::Green : AnnunciatorPresets::Color::Blue, true);
             sir.coolant_indicator->setBlink(false);
         }
         else
@@ -658,7 +683,7 @@ void SystemStatusScreen::updateSystemIndicators()
         label = tr("repair_abbreviation", "REPAIR");
         if (health < 1.0f && sir.health_value.improving())
         {
-            AnnunciatorPresets::applyTypeS(sir.repair_indicator, label, AnnunciatorPresets::Color::Blue, true);
+            AnnunciatorPresets::applyTypeS(sir.repair_indicator, label, auto_repair ? AnnunciatorPresets::Color::Green : AnnunciatorPresets::Color::Blue, true);
             sir.repair_indicator->setBlink(false);
         }
         else
@@ -709,7 +734,7 @@ void SystemStatusScreen::updateDefenseIndicators()
         hull_indicator->hide();
 
     // Shields
-    // Shields down: text colors on black background (nominal or degraded)
+    // Shields down: text colors on black background
     // Shields up: black text on colored backgrounds
     // Changing values should blink, any damage = degraded
     auto shields = my_spaceship.getComponent<Shields>();
@@ -741,11 +766,12 @@ void SystemStatusScreen::updateDefenseIndicators()
             label = tr("shield_abbreviation", "SHIELD") + "\n" + formatAngle(segment_direction);
             bool is_changing = !si.value.stable();
             bool is_damaged = seg_ratio < 0.99f;
-            bool is_critical = seg_ratio < 0.34f;
+            bool is_critical = seg_ratio < 0.25f;
 
             if (!shields_up)
             {
                 // Shields down: text colors on black background
+                // Red: Inactive shield charge is critically low (<25%)
                 if (is_critical)
                 {
                     AnnunciatorPresets::applyTypeN(si.indicator, label, AnnunciatorPresets::Color::Red, true);
@@ -754,6 +780,7 @@ void SystemStatusScreen::updateDefenseIndicators()
                     else
                         si.indicator->setBlink(false);
                 }
+                // Amber: Inactive shield charge is <99% but not critical
                 else if (is_damaged)
                 {
                     AnnunciatorPresets::applyTypeN(si.indicator, label, AnnunciatorPresets::Color::Amber, true);
@@ -762,18 +789,17 @@ void SystemStatusScreen::updateDefenseIndicators()
                     else
                         si.indicator->setBlink(false);
                 }
+                // Off: Inactive shield charge is >99% (nominal and automatic)
                 else
                 {
-                    AnnunciatorPresets::applyTypeN(si.indicator, label, AnnunciatorPresets::Color::Green, true);
-                    if (is_changing)
-                        si.indicator->setBlink(true, BLINK_CAUTION);
-                    else
-                        si.indicator->setBlink(false);
+                    AnnunciatorPresets::applyTypeN(si.indicator, label, AnnunciatorPresets::Color::White, false);
+                    si.indicator->setBlink(false);
                 }
             }
             else
             {
-                // Shields up: black text on colored backgrounds
+                // Shields up: Black text on colored backgrounds
+                // Red: Active shield charge is critically low (<25%)
                 if (is_critical)
                 {
                     AnnunciatorPresets::applyTypeB(si.indicator, label, AnnunciatorPresets::Color::Red, true);
@@ -782,6 +808,7 @@ void SystemStatusScreen::updateDefenseIndicators()
                     else
                         si.indicator->setBlink(false);
                 }
+                // Amber: Active shield charge is <99% but not critical
                 else if (is_damaged)
                 {
                     AnnunciatorPresets::applyTypeB(si.indicator, label, AnnunciatorPresets::Color::Amber, true);
@@ -790,13 +817,11 @@ void SystemStatusScreen::updateDefenseIndicators()
                     else
                         si.indicator->setBlink(false);
                 }
+                // Blue: Active shield charge is >99% (nominal but manual)
                 else
                 {
-                    AnnunciatorPresets::applyTypeB(si.indicator, label, AnnunciatorPresets::Color::Green, true);
-                    if (is_changing)
-                        si.indicator->setBlink(true, BLINK_CAUTION);
-                    else
-                        si.indicator->setBlink(false);
+                    AnnunciatorPresets::applyTypeB(si.indicator, label, AnnunciatorPresets::Color::Blue, true);
+                    si.indicator->setBlink(false);
                 }
             }
             si.indicator->show();
@@ -806,33 +831,9 @@ void SystemStatusScreen::updateDefenseIndicators()
             shield_indicators[i].indicator->hide();
 
         float ratio = total_max > 0.0f ? total_shield / total_max : 0.0f;
-
-        label = tr("shield_abbreviation", "SHIELDS");
-        if (!shields_up)
-        {
-            AnnunciatorPresets::applyTypeN(shields_status_indicator, label, AnnunciatorPresets::Color::White, true);
-            shields_status_indicator->setBlink(false);
-        }
-        else if (ratio > 0.99f)
-        {
-            AnnunciatorPresets::applyTypeN(shields_status_indicator, label, AnnunciatorPresets::Color::Green, true);
-            shields_status_indicator->setBlink(false);
-        }
-        else if (ratio > 0.34f)
-        {
-            AnnunciatorPresets::applyTypeB(shields_status_indicator, label, AnnunciatorPresets::Color::Amber, true);
-            shields_status_indicator->setBlink(true, BLINK_CAUTION);
-        }
-        else
-        {
-            AnnunciatorPresets::applyTypeB(shields_status_indicator, label, AnnunciatorPresets::Color::Red, true);
-            shields_status_indicator->setBlink(true, BLINK_WARNING);
-        }
-        shields_status_indicator->show();
     }
     else
     {
-        shields_status_indicator->hide();
         for (auto& si : shield_indicators)
             si.indicator->hide();
     }
@@ -900,8 +901,32 @@ void SystemStatusScreen::updateWeaponIndicators()
             switch (mount.state)
             {
             case MissileTubes::MountPoint::State::Empty:
-                AnnunciatorPresets::applyTypeS(tir.tube_indicator, label, AnnunciatorPresets::Color::Green, false);
-                tir.tube_indicator->setBlink(false);
+                {
+                    auto missile_sys = ShipSystem::get(my_spaceship, ShipSystem::Type::MissileSystem);
+                    float missile_power = missile_sys ? missile_sys->power_level : 1.0f;
+                    float missile_health = missile_sys ? missile_sys->health : 1.0f;
+
+                    if (missile_health <= 0.0f)
+                    {
+                        AnnunciatorPresets::applyTypeB(tir.tube_indicator, label, AnnunciatorPresets::Color::Red, true);
+                        tir.tube_indicator->setBlink(true, BLINK_WARNING);
+                    }
+                    else if (missile_power < 0.01f)
+                    {
+                        AnnunciatorPresets::applyTypeB(tir.tube_indicator, label, AnnunciatorPresets::Color::White, true);
+                        tir.tube_indicator->setBlink(false);
+                    }
+                    else if (missile_power < 1.0f || missile_health < 1.0f)
+                    {
+                        AnnunciatorPresets::applyTypeN(tir.tube_indicator, label, AnnunciatorPresets::Color::Amber, true);
+                        tir.tube_indicator->setBlink(false);
+                    }
+                    else
+                    {
+                        AnnunciatorPresets::applyTypeS(tir.tube_indicator, label, AnnunciatorPresets::Color::Green, false);
+                        tir.tube_indicator->setBlink(false);
+                    }
+                }
                 break;
             case MissileTubes::MountPoint::State::Loading:
                 AnnunciatorPresets::applyTypeN(tir.tube_indicator, label, AnnunciatorPresets::Color::Blue, true);
@@ -936,31 +961,31 @@ void SystemStatusScreen::updateWeaponIndicators()
 
                 if (!can_load)
                 {
-                    // Tube doesn't support this weapon type - show disabled/hidden
+                    // Tube doesn't support this weapon type, so indicate as much
                     AnnunciatorPresets::applyTypeS(tir.weapon_indicators[w], "----", AnnunciatorPresets::Color::Green, false);
                     tir.weapon_indicators[w]->setBlink(false);
                 }
                 else if (is_loading)
                 {
-                    // Loading: blue text on black background, blinking
+                    // Loading: Blue text on black background, blinking (manual, active progress)
                     AnnunciatorPresets::applyTypeN(tir.weapon_indicators[w], weapon_labels[w], AnnunciatorPresets::Color::Blue, true);
                     tir.weapon_indicators[w]->setBlink(true, BLINK_CAUTION);
                 }
                 else if (is_unloading)
                 {
-                    // Unloading: black text on blue background, blinking
+                    // Unloading: Black text on blue background, blinking (manual, active regress)
                     AnnunciatorPresets::applyTypeB(tir.weapon_indicators[w], weapon_labels[w], AnnunciatorPresets::Color::Blue, true);
                     tir.weapon_indicators[w]->setBlink(true, BLINK_CAUTION);
                 }
                 else if (is_loaded)
                 {
-                    // Loaded: blue text on black background, solid
+                    // Loaded: Blue text on black background, solid (manual, passive)
                     AnnunciatorPresets::applyTypeN(tir.weapon_indicators[w], weapon_labels[w], AnnunciatorPresets::Color::Blue, true);
                     tir.weapon_indicators[w]->setBlink(false);
                 }
                 else
                 {
-                    // Available but not loaded
+                    // Available but not loaded (nominal)
                     AnnunciatorPresets::applyTypeS(tir.weapon_indicators[w], weapon_labels[w], AnnunciatorPresets::Color::Green, false);
                     tir.weapon_indicators[w]->setBlink(false);
                 }
@@ -989,6 +1014,9 @@ void SystemStatusScreen::updateWeaponIndicators()
         {
             auto& mount = beams->mounts[i];
             auto& bi = beam_indicators[i];
+            bool valid_target = false;
+            auto target = my_spaceship.getComponent<Target>();
+            if (target && target->entity != sp::ecs::Entity()) valid_target = true;
 
             bi.direction = mount.direction;
             string angle_label = tr("beam_abbreviation", "BEAM") + "\n" + formatAngle(mount.direction);
@@ -999,11 +1027,31 @@ void SystemStatusScreen::updateWeaponIndicators()
             if (cooldown_ratio > 0.8f)
             {
                 AnnunciatorPresets::applyTypeN(bi.indicator, angle_label, AnnunciatorPresets::Color::Blue, true);
-                bi.indicator->setBlink(true, BLINK_WARNING);
+                bi.indicator->setBlink(true, BLINK_CAUTION);
             }
             else if (cooldown_ratio > 0.01f)
             {
                 AnnunciatorPresets::applyTypeN(bi.indicator, angle_label, AnnunciatorPresets::Color::Blue, true);
+                bi.indicator->setBlink(false);
+            }
+            else if (beams->health <= 0.0f)
+            {
+                AnnunciatorPresets::applyTypeB(bi.indicator, angle_label, AnnunciatorPresets::Color::Red, true);
+                bi.indicator->setBlink(true, BLINK_WARNING);
+            }
+            else if (beams->power_level <= 0.0f)
+            {
+                AnnunciatorPresets::applyTypeN(bi.indicator, angle_label, AnnunciatorPresets::Color::White, true);
+                bi.indicator->setBlink(false);
+            }
+            else if (beams->health < 0.99f || beams->power_level < 0.99f)
+            {
+                AnnunciatorPresets::applyTypeN(bi.indicator, angle_label, AnnunciatorPresets::Color::Amber, true);
+                bi.indicator->setBlink(false);
+            }
+            else if (valid_target)
+            {
+                AnnunciatorPresets::applyTypeS(bi.indicator, angle_label, AnnunciatorPresets::Color::Green, true);
                 bi.indicator->setBlink(false);
             }
             else
@@ -1152,12 +1200,14 @@ void SystemStatusScreen::updateTransmitterIndicators()
             comms_indicator->setBlink(true, BLINK_CAUTION);
             break;
         case CommsTransmitter::State::BeingHailed:
-            AnnunciatorPresets::applyTypeB(comms_indicator, label, AnnunciatorPresets::Color::Green, true);
+        case CommsTransmitter::State::BeingHailedByGM:
+            AnnunciatorPresets::applyTypeB(comms_indicator, label, AnnunciatorPresets::Color::Blue, true);
             comms_indicator->setBlink(true, BLINK_CAUTION);
             break;
         case CommsTransmitter::State::ChannelOpen:
+        case CommsTransmitter::State::ChannelOpenGM:
         case CommsTransmitter::State::ChannelOpenPlayer:
-            AnnunciatorPresets::applyTypeN(comms_indicator, label, AnnunciatorPresets::Color::Green, true);
+            AnnunciatorPresets::applyTypeN(comms_indicator, label, AnnunciatorPresets::Color::Blue, true);
             comms_indicator->setBlink(false);
             break;
         case CommsTransmitter::State::ChannelFailed:
