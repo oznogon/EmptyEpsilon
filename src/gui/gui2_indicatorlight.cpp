@@ -123,10 +123,36 @@ GuiIndicatorLight* GuiIndicatorLight::setDisabledColor(glm::u8vec4 color)
 
 GuiIndicatorLight* GuiIndicatorLight::setLabel(const string& text, IndicatorContentPosition position, sp::Alignment alignment, sp::Font* font)
 {
-    label_text = text;
-    label_position = position;
-    label_alignment = alignment;
-    label_font_override = font;
+    if (position.inside)
+    {
+        label_inside_text = text;
+        label_inside_alignment = alignment;
+        label_inside_font_override = font;
+    }
+    else
+    {
+        label_outside_text = text;
+        label_outside_position = position;
+        label_outside_alignment = alignment;
+        label_outside_font_override = font;
+    }
+    return this;
+}
+
+GuiIndicatorLight* GuiIndicatorLight::setLabelInside(const string& text, sp::Alignment alignment, sp::Font* font)
+{
+    label_inside_text = text;
+    label_inside_alignment = alignment;
+    label_inside_font_override = font;
+    return this;
+}
+
+GuiIndicatorLight* GuiIndicatorLight::setLabelOutside(const string& text, float angle, float distance, sp::Alignment alignment, sp::Font* font)
+{
+    label_outside_text = text;
+    label_outside_position = IndicatorContentPosition::Outside(angle, distance);
+    label_outside_alignment = alignment;
+    label_outside_font_override = font;
     return this;
 }
 
@@ -272,13 +298,22 @@ void GuiIndicatorLight::drawContent(sp::RenderTarget& renderer)
         if (current.icon_image.has_value())
             drawIcon(renderer, current.icon_image.value(), current.icon_position, current.icon_color);
 
-        // Draw label if defined
-        if (current.label_text.has_value())
+        // Draw inside label if defined
+        if (current.label_inside_text.has_value())
         {
             float size = front_style->get(getState()).size;
-            sp::Font* font = current.label_font ? current.label_font : front_style->get(getState()).font;
-            drawLabel(renderer, current.label_text.value(), current.label_position,
-                      sp::Alignment::Center, font, size, current.label_color);
+            sp::Font* font = current.label_inside_font ? current.label_inside_font : front_style->get(getState()).font;
+            drawLabel(renderer, current.label_inside_text.value(), IndicatorContentPosition::Inside(),
+                      current.label_inside_alignment, font, size, current.label_inside_color);
+        }
+
+        // Draw outside label if defined
+        if (current.label_outside_text.has_value())
+        {
+            float size = front_style->get(getState()).size;
+            sp::Font* font = current.label_outside_font ? current.label_outside_font : front_style->get(getState()).font;
+            drawLabel(renderer, current.label_outside_text.value(), current.label_outside_position,
+                      current.label_outside_alignment, font, size, current.label_outside_color);
         }
     }
     else
@@ -296,27 +331,29 @@ void GuiIndicatorLight::drawContent(sp::RenderTarget& renderer)
 
         const auto& front = front_style->get(style_state);
 
-        // Calculate layout for icon and label
+        // Draw icon if defined
         bool has_icon = !icon_name.empty();
-        bool has_label = !label_text.empty();
-        bool both_inside = has_icon && has_label && icon_position.inside && label_position.inside;
-        bool both_outside_same = has_icon && has_label && !icon_position.inside && !label_position.inside &&
-                                  std::abs(icon_position.angle - label_position.angle) < 1.0f &&
-                                  std::abs(icon_position.distance - label_position.distance) < 1.0f;
-
-        // Draw icon. Offset handled in the draw function
         if (has_icon)
         {
             IndicatorContentPosition adjusted_icon_pos = icon_position;
-
             drawIcon(renderer, icon_name, adjusted_icon_pos, front.color);
         }
 
-        // Draw label (supports formatted text with color tags)
-        if (has_label)
+        // Draw inside label if defined
+        bool has_inside_label = !label_inside_text.empty();
+        if (has_inside_label)
         {
-            drawLabel(renderer, label_text, label_position, label_alignment,
-                      label_font_override ? label_font_override : front.font, front.size, front.color);
+            drawLabel(renderer, label_inside_text, IndicatorContentPosition::Inside(),
+                      label_inside_alignment,
+                      label_inside_font_override ? label_inside_font_override : front.font, front.size, front.color);
+        }
+
+        // Draw outside label if defined
+        bool has_outside_label = !label_outside_text.empty();
+        if (has_outside_label)
+        {
+            drawLabel(renderer, label_outside_text, label_outside_position, label_outside_alignment,
+                      label_outside_font_override ? label_outside_font_override : front.font, front.size, front.color);
         }
     }
 }
@@ -420,7 +457,7 @@ void GuiIndicatorLight::drawIcon(sp::RenderTarget& renderer, const string& icon,
         glm::vec2 icon_center = getCenterPoint();
 
         // If there's also a label inside, offset the icon to the left
-        if (!label_text.empty() && label_position.inside)
+        if (!label_inside_text.empty())
             icon_center.x = rect.position.x + icon_size * 0.6f;
 
         renderer.drawSprite(icon, icon_center, icon_size, color);
@@ -429,11 +466,10 @@ void GuiIndicatorLight::drawIcon(sp::RenderTarget& renderer, const string& icon,
     {
         glm::vec2 icon_center = calculateContentPosition(pos, icon_size);
 
-        // If both icon and label are outside at the same position, offset icon
-        // toward indicator
-        if (!label_text.empty() && !label_position.inside
-            && std::abs(icon_position.angle - label_position.angle) < 1.0f
-            && std::abs(icon_position.distance - label_position.distance) < 1.0f)
+        // If icon and outside label are at the same position, offset icon toward indicator
+        if (!label_outside_text.empty()
+            && std::abs(icon_position.angle - label_outside_position.angle) < 1.0f
+            && std::abs(icon_position.distance - label_outside_position.distance) < 1.0f)
         {
             // Move icon closer to the indicator (toward center)
             glm::vec2 center = getCenterPoint();

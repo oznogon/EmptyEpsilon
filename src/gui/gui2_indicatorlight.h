@@ -32,11 +32,18 @@ struct GuiIndicatorState
     glm::u8vec4 icon_color{255, 255, 255, 255};
     IndicatorContentPosition icon_position;
 
-    // Label (optional)
-    std::optional<string> label_text;
-    glm::u8vec4 label_color{255, 255, 255, 255};
-    sp::Font* label_font = nullptr;
-    IndicatorContentPosition label_position;
+    // Inside label (optional)
+    std::optional<string> label_inside_text;
+    glm::u8vec4 label_inside_color{255, 255, 255, 255};
+    sp::Font* label_inside_font = nullptr;
+    sp::Alignment label_inside_alignment = sp::Alignment::Center;
+
+    // Outside label (optional)
+    std::optional<string> label_outside_text;
+    glm::u8vec4 label_outside_color{255, 255, 255, 255};
+    sp::Font* label_outside_font = nullptr;
+    IndicatorContentPosition label_outside_position;
+    sp::Alignment label_outside_alignment = sp::Alignment::Center;
 };
 
 class GuiIndicatorLight : public GuiElement
@@ -64,11 +71,16 @@ protected:
     std::optional<glm::u8vec4> active_color_override;
     std::optional<glm::u8vec4> disabled_color_override;
 
-    // Label configuration
-    string label_text;
-    IndicatorContentPosition label_position;
-    sp::Alignment label_alignment = sp::Alignment::Center;
-    sp::Font* label_font_override = nullptr;
+    // Inside label configuration
+    string label_inside_text;
+    sp::Alignment label_inside_alignment = sp::Alignment::Center;
+    sp::Font* label_inside_font_override = nullptr;
+
+    // Outside label configuration
+    string label_outside_text;
+    IndicatorContentPosition label_outside_position;
+    sp::Alignment label_outside_alignment = sp::Alignment::Center;
+    sp::Font* label_outside_font_override = nullptr;
 
     // Icon configuration
     string icon_name;
@@ -116,6 +128,14 @@ public:
                                  IndicatorContentPosition position = IndicatorContentPosition::Inside(),
                                  sp::Alignment alignment = sp::Alignment::Center,
                                  sp::Font* font = nullptr);
+    GuiIndicatorLight* setLabelInside(const string& text,
+                                      sp::Alignment alignment = sp::Alignment::Center,
+                                      sp::Font* font = nullptr);
+    GuiIndicatorLight* setLabelOutside(const string& text,
+                                       float angle,
+                                       float distance,
+                                       sp::Alignment alignment = sp::Alignment::Center,
+                                       sp::Font* font = nullptr);
 
     // Icon configuration
     GuiIndicatorLight* setIcon(const string& icon_name,
