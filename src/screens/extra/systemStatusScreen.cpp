@@ -132,19 +132,15 @@ void SystemStatusScreen::createSystemsPanel()
 {
     systems_panel = new GuiElement(overview_tab, "SYSTEMS_PANEL");
     systems_panel
-        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft);
-
-    auto* container = new GuiElement(systems_panel, "SYSTEMS_CONTAINER");
-    container
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setMargins(PANEL_PADDING)
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(container, "", tr("SHIP SYSTEMS"), 24.0f))
+    (new GuiLabel(systems_panel, "", tr("SHIP SYSTEMS"), 24.0f))
         ->setSize(GuiElement::GuiSizeMax, 35.0f);
 
-    // Energy row (total energy and charge rate)
-    energy_row = new GuiElement(container, "ENERGY_ROW");
+        // Energy row (total energy and charge rate)
+    energy_row = new GuiElement(systems_panel, "ENERGY_ROW");
     energy_row
         ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
         ->setAttribute("layout", "horizontal");
@@ -153,7 +149,7 @@ void SystemStatusScreen::createSystemsPanel()
     charge_indicator = createIndicator(energy_row, "CHARGE_IND", tr("energy_property_abbreviation", "CHARGE\nRATE"));
 
     // Column headers
-    auto* header_row = new GuiElement(container, "SYS_HEADER");
+    auto* header_row = new GuiElement(systems_panel, "SYS_HEADER");
     header_row->setSize(GuiElement::GuiSizeMax, 20.0f);
     header_row->setAttribute("layout", "horizontal");
 
@@ -168,7 +164,7 @@ void SystemStatusScreen::createSystemsPanel()
     createHeaderLabel(tr("system_property_abbreviation", "DAMAGE"), INDICATOR_WIDTH * 2);
 
     // System indicator grid
-    systems_grid = new GuiElement(container, "SYSTEMS_GRID");
+    systems_grid = new GuiElement(systems_panel, "SYSTEMS_GRID");
     systems_grid
         ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * ShipSystem::COUNT)
         ->setAttribute("layout", "vertical");
@@ -184,9 +180,6 @@ void SystemStatusScreen::createSystemsPanel()
             ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
             ->setAttribute("layout", "horizontal");
 
-        // TODO: Hide if components aren't used:
-        // - heat, heat_delta_ coolant if coolant isn't used
-        // - power if energy isn't used
         sir.name_indicator = createIndicator(sir.row, "SYS_NAME_" + string(n), system_labels[n]);
         sir.power_indicator = createIndicator(sir.row, "SYS_POWER_" + string(n), tr("system_property_abbreviation", "POWER"));
         sir.heat_indicator = createIndicator(sir.row, "SYS_HEAT_" + string(n), tr("system_property_abbreviation", "HEAT\nTOTAL"));
@@ -403,13 +396,14 @@ void SystemStatusScreen::onUpdate()
 
 void SystemStatusScreen::updateSystemIndicators()
 {
-    string label = tr("energy_abbreviation", "ENERGY\nSTORE");
+    string label = "";
     // Energy indicators
     if (auto reactor = my_spaceship.getComponent<Reactor>())
     {
         float ratio = reactor->energy / reactor->max_energy;
         energy_value.update(ratio);
-
+        energy_indicator->show();
+        label = tr("energy_abbreviation", "ENERGY\nSTORE");
         if (ratio > 0.8f)
         {
             AnnunciatorPresets::applyTypeS(energy_indicator, label, AnnunciatorPresets::Color::Green, false);
@@ -430,10 +424,10 @@ void SystemStatusScreen::updateSystemIndicators()
             AnnunciatorPresets::applyTypeB(energy_indicator, label, AnnunciatorPresets::Color::Red, true);
             energy_indicator->setBlink(true, BLINK_WARNING);
         }
-        energy_indicator->show();
 
         // Charge rate indicator with thresholds
         float rate_per_minute = energy_value.delta() * reactor->max_energy * (60.0f / UPDATE_INTERVAL);
+        charge_indicator->show();
         label = tr("energy_abbreviation", "CHARGE\nRATE");
         if (rate_per_minute >= 20.0f)
         {
@@ -465,14 +459,10 @@ void SystemStatusScreen::updateSystemIndicators()
             AnnunciatorPresets::applyTypeB(charge_indicator, label, AnnunciatorPresets::Color::Red, true);
             charge_indicator->setBlink(false);
         }
-        charge_indicator->show();
 
         energy_row->show();
     }
-    else
-    {
-        energy_row->hide();
-    }
+    else energy_row->hide();
 
     // System rows
     visible_system_count = 0;
@@ -489,31 +479,44 @@ void SystemStatusScreen::updateSystemIndicators()
         sir.row->show();
         visible_system_count++;
 
-        float health = sys->health;
-        float heat = sys->heat_level;
+        // Get ship system properties
+        // Power level
         float power = sys->power_level;
-        float coolant = sys->coolant_level;
-
-        // TODO: Don't display heat or coolant indicators if there's no coolant
-        bool auto_coolant = false;
-        if (auto coolant_component = my_spaceship.getComponent<Coolant>())
-            if (coolant_component->auto_levels) auto_coolant = true;
-        bool auto_repair = false;
-        if (auto ir = my_spaceship.getComponent<InternalRooms>())
-            auto_repair = ir->auto_repair_enabled;
-
-        sir.health_value.update(health);
-        sir.heat_value.update(heat);
         sir.power_value.update(power);
-        sir.coolant_value.update(coolant);
 
-        // Use actual heat delta instead of system heating delta to capture
-        // other heat sources.
-        float heat_delta = sir.heat_value.delta() * (60.0f / UPDATE_INTERVAL);
-        // Override heat_delta if heat is maxed out but the system reports a
-        // heating delta.
-        if (heat >= 0.99f && sys->getHeatingDelta() > 0.01f)
-            heat_delta = sys->getHeatingDelta();
+        // System health/damage (if enabled)
+        float health = 0.0f;
+        bool auto_repair = false;
+        bool uses_system_damage = gameGlobalInfo->use_system_damage;
+        if (uses_system_damage)
+        {
+            health = sys->health;
+            if (auto ir = my_spaceship.getComponent<InternalRooms>())
+                auto_repair = ir->auto_repair_enabled;
+            sir.health_value.update(health);
+        }
+
+        // Heat/coolant (if Coolant component is present)
+        float heat = 0.0f;
+        float coolant = 0.0f;
+        float heat_delta = 0.0f;
+        bool auto_coolant = false;
+        auto coolant_component = my_spaceship.getComponent<Coolant>();
+        if (coolant_component)
+        {
+            heat = sys->heat_level;
+            coolant = sys->coolant_level;
+            if (coolant_component->auto_levels) auto_coolant = true;
+            sir.heat_value.update(heat);
+            sir.coolant_value.update(coolant);
+            // Use actual heat delta instead of system heating delta to capture
+            // other heat sources.
+            // Override heat_delta if heat is maxed out but the system reports a
+            // heating delta.
+            heat_delta = sir.heat_value.delta() * (60.0f / UPDATE_INTERVAL);
+            if (heat >= 0.99f && sys->getHeatingDelta() > 0.01f)
+                heat_delta = sys->getHeatingDelta();
+        }
 
         string label = system_labels[static_cast<int>(sir.system_type)];
 
@@ -523,23 +526,31 @@ void SystemStatusScreen::updateSystemIndicators()
             AnnunciatorPresets::applyTypeW(sir.name_indicator, label, AnnunciatorPresets::Color::White, true);
             sir.name_indicator->setBlink(false);
         }
-        else if (health <= 0.0f)
+        else if (uses_system_damage)
         {
-            AnnunciatorPresets::applyTypeB(sir.name_indicator, label, AnnunciatorPresets::Color::Red, true);
-            if (heat >= 0.99f && heat_delta >= 0.01f)
-                sir.name_indicator->setBlink(true, BLINK_WARNING);
-            else
+            if (health <= 0.0f)
+            {
+                AnnunciatorPresets::applyTypeB(sir.name_indicator, label, AnnunciatorPresets::Color::Red, true);
+                if (coolant_component && heat >= 0.99f && heat_delta >= 0.01f)
+                    sir.name_indicator->setBlink(true, BLINK_WARNING);
+                else
+                    sir.name_indicator->setBlink(false);
+            }
+            else if (health < 0.1f)
+            {
+                AnnunciatorPresets::applyTypeS(sir.name_indicator, label, AnnunciatorPresets::Color::Red, true);
                 sir.name_indicator->setBlink(false);
-        }
-        else if (health < 0.1f)
-        {
-            AnnunciatorPresets::applyTypeS(sir.name_indicator, label, AnnunciatorPresets::Color::Red, true);
-            sir.name_indicator->setBlink(false);
-        }
-        else if (health < 0.95f)
-        {
-            AnnunciatorPresets::applyTypeS(sir.name_indicator, label, AnnunciatorPresets::Color::Amber, true);
-            sir.name_indicator->setBlink(false);
+            }
+            else if (health < 0.95f)
+            {
+                AnnunciatorPresets::applyTypeS(sir.name_indicator, label, AnnunciatorPresets::Color::Amber, true);
+                sir.name_indicator->setBlink(false);
+            }
+            else
+            {
+                AnnunciatorPresets::applyTypeN(sir.name_indicator, label, AnnunciatorPresets::Color::Green, true);
+                sir.name_indicator->setBlink(false);
+            }
         }
         else
         {
@@ -575,121 +586,141 @@ void SystemStatusScreen::updateSystemIndicators()
             sir.power_indicator->setBlink(false);
         }
 
-        // Heat indicator
-        label = tr("heat_abbreviation", "HEAT\nTOTAL");
-        if (heat > 0.9f)
+        // Heat and coolant indicators (if Coolant component is present)
+        if (coolant_component)
         {
-            AnnunciatorPresets::applyTypeB(sir.heat_indicator, label, AnnunciatorPresets::Color::Red, true);
-            sir.heat_indicator->setBlink(true, BLINK_WARNING);
-        }
-        else if (heat > 0.7f)
-        {
-            AnnunciatorPresets::applyTypeB(sir.heat_indicator, label, AnnunciatorPresets::Color::Amber, true);
-            sir.heat_indicator->setBlink(true, BLINK_CAUTION);
-        }
-        else if (heat > 0.34f)
-        {
-            AnnunciatorPresets::applyTypeN(sir.heat_indicator, label, AnnunciatorPresets::Color::Amber, true);
-            sir.heat_indicator->setBlink(false);
-        }
-        else
-        {
-            AnnunciatorPresets::applyTypeS(sir.heat_indicator, label, AnnunciatorPresets::Color::Green, false);
-            sir.heat_indicator->setBlink(false);
-        }
+            label = tr("heat_abbreviation", "HEAT\nTOTAL");
+            sir.heat_indicator->show();
+            if (heat > 0.9f)
+            {
+                AnnunciatorPresets::applyTypeB(sir.heat_indicator, label, AnnunciatorPresets::Color::Red, true);
+                sir.heat_indicator->setBlink(true, BLINK_WARNING);
+            }
+            else if (heat > 0.7f)
+            {
+                AnnunciatorPresets::applyTypeB(sir.heat_indicator, label, AnnunciatorPresets::Color::Amber, true);
+                sir.heat_indicator->setBlink(true, BLINK_CAUTION);
+            }
+            else if (heat > 0.34f)
+            {
+                AnnunciatorPresets::applyTypeN(sir.heat_indicator, label, AnnunciatorPresets::Color::Amber, true);
+                sir.heat_indicator->setBlink(false);
+            }
+            else
+            {
+                AnnunciatorPresets::applyTypeS(sir.heat_indicator, label, AnnunciatorPresets::Color::Green, false);
+                sir.heat_indicator->setBlink(false);
+            }
 
-        // Heat delta indicator
-        label = tr("heat_abbreviation", "HEAT\nRATE");
-        if (heat > 0.01f)
-        {
-            if (heat_delta > 5.0f || (heat >= 1.0f && heat_delta > 0.01f))
+            label = tr("heat_abbreviation", "HEAT\nRATE");
+            sir.heat_delta_indicator->show();
+            if (heat > 0.01f)
             {
-                AnnunciatorPresets::applyTypeB(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Red, true);
-                if (heat >= 1.0f)
-                    sir.heat_delta_indicator->setBlink(true, BLINK_WARNING);
-                else
+                if (heat_delta > 5.0f || (heat >= 1.0f && heat_delta > 0.01f))
+                {
+                    AnnunciatorPresets::applyTypeB(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Red, true);
+                    if (heat >= 1.0f)
+                        sir.heat_delta_indicator->setBlink(true, BLINK_WARNING);
+                    else
+                        sir.heat_delta_indicator->setBlink(false);
+                }
+                else if (heat_delta > 3.0f)
+                {
+                    AnnunciatorPresets::applyTypeN(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Red, true);
                     sir.heat_delta_indicator->setBlink(false);
-            }
-            else if (heat_delta > 3.0f)
-            {
-                AnnunciatorPresets::applyTypeN(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Red, true);
-                sir.heat_delta_indicator->setBlink(false);
-            }
-            else if (heat_delta > 0.1f)
-            {
-                AnnunciatorPresets::applyTypeN(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Amber, true);
-                sir.heat_delta_indicator->setBlink(false);
-            }
-            else if (heat_delta < -0.1f)
-            {
-                AnnunciatorPresets::applyTypeN(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Green, true);
-                sir.heat_delta_indicator->setBlink(false);
+                }
+                else if (heat_delta > 0.1f)
+                {
+                    AnnunciatorPresets::applyTypeN(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Amber, true);
+                    sir.heat_delta_indicator->setBlink(false);
+                }
+                else if (heat_delta < -0.1f)
+                {
+                    AnnunciatorPresets::applyTypeN(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Green, true);
+                    sir.heat_delta_indicator->setBlink(false);
+                }
+                else
+                {
+                    AnnunciatorPresets::applyTypeS(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Green, false);
+                    sir.heat_delta_indicator->setBlink(false);
+                }
             }
             else
             {
                 AnnunciatorPresets::applyTypeS(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Green, false);
                 sir.heat_delta_indicator->setBlink(false);
             }
-        }
-        else
-        {
-            AnnunciatorPresets::applyTypeS(sir.heat_delta_indicator, label, AnnunciatorPresets::Color::Green, false);
-            sir.heat_delta_indicator->setBlink(false);
-        }
 
-        // Coolant indicator lit if non-zero
-        label = tr("coolant_abbreviation", "COOLANT");
-        if (coolant > 0.1f)
-        {
-            AnnunciatorPresets::applyTypeN(sir.coolant_indicator, label, auto_coolant ? AnnunciatorPresets::Color::Green : AnnunciatorPresets::Color::Blue, true);
-            sir.coolant_indicator->setBlink(false);
-        }
-        else
-        {
-            AnnunciatorPresets::applyTypeS(sir.coolant_indicator, label, AnnunciatorPresets::Color::Green, false);
-            sir.coolant_indicator->setBlink(false);
-        }
-
-        // Health indicator
-        label = tr("damage_abbreviation", "DAMAGE");
-        if (health < 0.34f)
-        {
-            AnnunciatorPresets::applyTypeB(sir.damage_indicator, label, AnnunciatorPresets::Color::Red, true);
-            if (sir.health_value.declining() || health <= 0.0f)
-                sir.damage_indicator->setBlink(true, BLINK_WARNING);
+            label = tr("coolant_abbreviation", "COOLANT");
+            sir.coolant_indicator->show();
+            if (coolant > 0.1f)
+            {
+                AnnunciatorPresets::applyTypeN(sir.coolant_indicator, label, auto_coolant ? AnnunciatorPresets::Color::Green : AnnunciatorPresets::Color::Blue, true);
+                sir.coolant_indicator->setBlink(false);
+            }
             else
-                sir.damage_indicator->setBlink(false);
-           }
-        else if (health < 0.8f)
-        {
-            AnnunciatorPresets::applyTypeB(sir.damage_indicator, label, AnnunciatorPresets::Color::Amber, true);
-            if (sir.health_value.declining())
-                sir.damage_indicator->setBlink(true, BLINK_CAUTION);
-            else
-                sir.damage_indicator->setBlink(false);
-        }
-        else if (health < 0.99f)
-        {
-            AnnunciatorPresets::applyTypeS(sir.damage_indicator, label, AnnunciatorPresets::Color::Amber, true);
-            sir.damage_indicator->setBlink(false);
+            {
+                AnnunciatorPresets::applyTypeS(sir.coolant_indicator, label, AnnunciatorPresets::Color::Green, false);
+                sir.coolant_indicator->setBlink(false);
+            }
         }
         else
         {
-            AnnunciatorPresets::applyTypeS(sir.damage_indicator, label, AnnunciatorPresets::Color::Green, false);
-            sir.damage_indicator->setBlink(false);
+            sir.heat_indicator->hide();
+            sir.heat_delta_indicator->hide();
+            sir.coolant_indicator->hide();
         }
 
-        // Repair indicator
-        label = tr("repair_abbreviation", "REPAIR");
-        if (health < 1.0f && sir.health_value.improving())
+        // Health indicator if ship system damage is enabled
+        if (uses_system_damage)
         {
-            AnnunciatorPresets::applyTypeS(sir.repair_indicator, label, auto_repair ? AnnunciatorPresets::Color::Green : AnnunciatorPresets::Color::Blue, true);
-            sir.repair_indicator->setBlink(false);
+            label = tr("damage_abbreviation", "DAMAGE");
+            sir.damage_indicator->show();
+            if (health < 0.34f)
+            {
+                AnnunciatorPresets::applyTypeB(sir.damage_indicator, label, AnnunciatorPresets::Color::Red, true);
+                if (sir.health_value.declining() || health <= 0.0f)
+                    sir.damage_indicator->setBlink(true, BLINK_WARNING);
+                else
+                    sir.damage_indicator->setBlink(false);
+            }
+            else if (health < 0.8f)
+            {
+                AnnunciatorPresets::applyTypeB(sir.damage_indicator, label, AnnunciatorPresets::Color::Amber, true);
+                if (sir.health_value.declining())
+                    sir.damage_indicator->setBlink(true, BLINK_CAUTION);
+                else
+                    sir.damage_indicator->setBlink(false);
+            }
+            else if (health < 0.99f)
+            {
+                AnnunciatorPresets::applyTypeS(sir.damage_indicator, label, AnnunciatorPresets::Color::Amber, true);
+                sir.damage_indicator->setBlink(false);
+            }
+            else
+            {
+                AnnunciatorPresets::applyTypeS(sir.damage_indicator, label, AnnunciatorPresets::Color::Green, false);
+                sir.damage_indicator->setBlink(false);
+            }
+
+            // Repair indicator
+            label = tr("repair_abbreviation", "REPAIR");
+            sir.repair_indicator->show();
+            if (health < 1.0f && sir.health_value.improving())
+            {
+                AnnunciatorPresets::applyTypeS(sir.repair_indicator, label, auto_repair ? AnnunciatorPresets::Color::Green : AnnunciatorPresets::Color::Blue, true);
+                sir.repair_indicator->setBlink(false);
+            }
+            else
+            {
+                AnnunciatorPresets::applyTypeS(sir.repair_indicator, label, AnnunciatorPresets::Color::Green, false);
+                sir.repair_indicator->setBlink(false);
+            }
         }
         else
         {
-            AnnunciatorPresets::applyTypeS(sir.repair_indicator, label, AnnunciatorPresets::Color::Green, false);
-            sir.repair_indicator->setBlink(false);
+            sir.damage_indicator->hide();
+            sir.repair_indicator->hide();
         }
     }
 
