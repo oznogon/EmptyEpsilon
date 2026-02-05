@@ -1136,9 +1136,17 @@ void SystemStatusScreen::updatePropulsionIndicators()
     // Warp
     if (auto warp = my_spaceship.getComponent<WarpDrive>())
     {
-        int level = static_cast<int>(warp->current);
-
-        if (level > 0)
+        if (warp->current > 3.0f)
+        {
+            AnnunciatorPresets::applyTypeB(warp_indicator, "WARP", AnnunciatorPresets::Color::Blue, true);
+            warp_indicator->setBlink(true, BLINK_CAUTION);
+        }
+        else if (warp->current > 1.0f)
+        {
+            AnnunciatorPresets::applyTypeB(warp_indicator, "WARP", AnnunciatorPresets::Color::Blue, true);
+            warp_indicator->setBlink(false);
+        }
+        else if (warp->current > 0.0f)
         {
             AnnunciatorPresets::applyTypeN(warp_indicator, "WARP", AnnunciatorPresets::Color::Blue, true);
             warp_indicator->setBlink(false);
@@ -1284,10 +1292,10 @@ void SystemStatusScreen::updateTransmitterIndicators()
             break;
         case DockingPort::State::Docking:
             AnnunciatorPresets::applyTypeN(dock_indicator, label, AnnunciatorPresets::Color::Blue, true);
-            dock_indicator->setBlink(false);  // No blink
+            dock_indicator->setBlink(false);
             break;
         case DockingPort::State::Docked:
-            AnnunciatorPresets::applyTypeN(dock_indicator, label, AnnunciatorPresets::Color::Green, true);
+            AnnunciatorPresets::applyTypeB(dock_indicator, label, AnnunciatorPresets::Color::Green, true);
             dock_indicator->setBlink(false);
             break;
         }
