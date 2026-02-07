@@ -1146,6 +1146,12 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit distance:"), Orbit, distance);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit period (seconds):"), Orbit, time);
 
+    // Faction component - assigns entity to a faction
+    // Redundant with GM screen faction selector, but this allows addition/removal
+    // of the component itself
+    ADD_PAGE(tr("tweak-tab", "Faction"), Faction);
+    ADD_FACTION_SELECTOR_TWEAK(tr("tweak-text", "Faction:"), Faction, entity);
+
     // DockingBay component - allows other entities to dock with this entity
     ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
     ADD_LABEL(tr("tweak-text", "Dock classes (use scripts to edit)"));
