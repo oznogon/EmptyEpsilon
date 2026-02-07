@@ -935,6 +935,13 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_ENTITY_TWEAK(tr("tweak-text", "Order target:"), AIController, order_target);
     // ADD_TEXT_TWEAK(tr("tweak-text", "AI name:"), AIController, new_name);
 
+    // Orbit component - allows entities to orbit around a target or fixed point
+    ADD_PAGE(tr("tweak-tab", "Orbit"), Orbit);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Orbit target:"), Orbit, target);
+    ADD_VECTOR2_TWEAK(tr("tweak-text", "Orbit center:"), Orbit, center);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit distance:"), Orbit, distance);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit period (seconds):"), Orbit, time);
+
     ADD_PAGE(tr("tweak-tab", "Player ship"), PlayerControl);
     ADD_TEXT_TWEAK(tr("tweak-text", "Control code:"), PlayerControl, control_code);
 
