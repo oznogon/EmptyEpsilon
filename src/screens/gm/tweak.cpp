@@ -608,6 +608,82 @@ private:
     int selected_index = -1;
 };
 
+// Widget for editing std::vector<glm::vec2> (outline points)
+class GuiVec2VectorTweak : public GuiElement {
+public:
+    GuiVec2VectorTweak(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 150);
+        setAttribute("layout", "vertical");
+
+        // List of current points
+        item_list = new GuiListbox(this, "", [this](int index, string value) {
+            selected_index = index;
+        });
+        item_list
+            ->setTextSize(18.0f)
+            ->setButtonHeight(20.0f)
+            ->setSize(GuiElement::GuiSizeMax, 90);
+
+        // Add new point controls
+        auto add_row = new GuiElement(this, "");
+        add_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+
+        x_entry = new GuiTextEntry(add_row, "", "");
+        x_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        y_entry = new GuiTextEntry(add_row, "", "");
+        y_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        auto add_button = new GuiButton(add_row, "", tr("tweak-button", "Add"), [this]() {
+            string x_str = x_entry->getText();
+            string y_str = y_entry->getText();
+            if (!x_str.empty() && !y_str.empty() && on_add) {
+                glm::vec2 point(x_str.toFloat(), y_str.toFloat());
+                on_add(point);
+                x_entry->setText("");
+                y_entry->setText("");
+            }
+        });
+        add_button->setTextSize(18)->setSize(60, 30);
+
+        auto del_button = new GuiButton(add_row, "", tr("tweak-button", "Delete"), [this]() {
+            if (selected_index >= 0 && selected_index < item_list->entryCount() && on_remove) {
+                on_remove(selected_index);
+                selected_index = -1;
+            }
+        });
+        del_button->setTextSize(18)->setSize(60, 30);
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            auto current_vector = update_func();
+
+            // Rebuild list if vector size changed
+            if (current_vector.size() != static_cast<size_t>(item_list->entryCount())) {
+                item_list->setOptions({});
+                for(size_t i = 0; i < current_vector.size(); i++) {
+                    const auto& point = current_vector[i];
+                    string display = string(int(i)) + ": (" + string(point.x, 1) + ", " + string(point.y, 1) + ")";
+                    item_list->addEntry(display, string(int(i)));
+                }
+            }
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<std::vector<glm::vec2>()> update_func;
+    std::function<void(const glm::vec2&)> on_add;
+    std::function<void(int)> on_remove;  // Remove by index
+    std::function<void()> on_change;     // Called after any modification
+
+private:
+    GuiListbox* item_list;
+    GuiTextEntry* x_entry;
+    GuiTextEntry* y_entry;
+    int selected_index = -1;
+};
+
 
 #define ADD_PAGE(LABEL, COMPONENT) \
     new_page = new GuiTweakPage(content); \
@@ -915,6 +991,33 @@ private:
             auto v = entity.getComponent<COMPONENT>(); \
             if (v) { \
                 v->VALUE.erase(key); \
+            } \
+        }; \
+    } while(0)
+
+#define ADD_VEC2_VECTOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 150)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 150); \
+        auto ui = new GuiVec2VectorTweak(row); \
+        ui->update_func = [this]() -> std::vector<glm::vec2> { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return {}; \
+        }; \
+        ui->on_add = [this](const glm::vec2& point) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) { \
+                v->VALUE.push_back(point); \
+                v->updateTriangles(); \
+            } \
+        }; \
+        ui->on_remove = [this](int index) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v && index >= 0 && index < static_cast<int>(v->VALUE.size())) { \
+                v->VALUE.erase(v->VALUE.begin() + index); \
+                v->updateTriangles(); \
             } \
         }; \
     } while(0)
