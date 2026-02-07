@@ -117,6 +117,319 @@ public:
     std::function<int()> update_func;
 };
 
+// Widget for selecting entities from the game world
+class GuiEntityPicker : public GuiSelector {
+public:
+    GuiEntityPicker(GuiContainer* owner, string id, GuiSelector::func_t callback)
+    : GuiSelector(owner, id, callback) {
+        setSize(GuiElement::GuiSizeMax, 30);
+        setTextSize(20);
+        addEntry(tr("tweak-entity", "(None)"), "");
+    }
+    virtual void onDraw(sp::RenderTarget& target) override {
+        updateEntityList();
+        if (update_func) {
+            auto entity = update_func();
+            if (!entity) {
+                setSelectionIndex(0); // None
+            } else {
+                // Find entity in list
+                string search_key = getEntityKey(entity);
+                for(int i = 0; i < entryCount(); i++) {
+                    if (getEntryValue(i) == search_key) {
+                        if (getSelectionIndex() != i)
+                            setSelectionIndex(i);
+                        break;
+                    }
+                }
+            }
+        }
+        GuiSelector::onDraw(target);
+    }
+    std::function<sp::ecs::Entity()> update_func;
+
+private:
+    float last_update_time = 0.0f;
+
+    void updateEntityList() {
+        // Update entity list every 1 second to avoid performance issues
+        if (engine->getElapsedTime() - last_update_time < 1.0f)
+            return;
+        last_update_time = engine->getElapsedTime();
+
+        int current_selection = getSelectionIndex();
+        string current_value = current_selection >= 0 ? getEntryValue(current_selection) : "";
+
+        // Clear all except "(None)" entry
+        while(entryCount() > 1)
+            removeEntry(entryCount() - 1);
+
+        // Add all entities with callsigns
+        for(auto [entity, callsign] : sp::ecs::Query<CallSign>()) {
+            string label = callsign.callsign;
+            if (auto type_name = entity.getComponent<TypeName>())
+                label = label + " (" + type_name->type_name + ")";
+            addEntry(label, getEntityKey(entity));
+        }
+
+        // Restore selection if entity still exists
+        if (!current_value.empty()) {
+            for(int i = 0; i < entryCount(); i++) {
+                if (getEntryValue(i) == current_value) {
+                    setSelectionIndex(i);
+                    return;
+                }
+            }
+        }
+        setSelectionIndex(0); // Default to None
+    }
+
+    string getEntityKey(sp::ecs::Entity entity) {
+        return entity.toString();
+    }
+};
+
+// Widget for editing 2D vector values
+class GuiVec2Tweak : public GuiElement {
+public:
+    GuiVec2Tweak(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 30);
+        setAttribute("layout", "horizontal");
+
+        auto x_label = new GuiLabel(this, "", "X:", 20);
+        x_label->setSize(20, 30);
+
+        x_input = new GuiTextEntry(this, "", "");
+        x_input->setSize(GuiElement::GuiSizeMax, 30);
+        x_input->setTextSize(20);
+        x_input->callback([this](string text) {
+            if (callback) {
+                glm::vec2 value = update_func ? update_func() : glm::vec2(0, 0);
+                value.x = text.toFloat();
+                callback(value);
+            }
+        });
+
+        auto y_label = new GuiLabel(this, "", "Y:", 20);
+        y_label->setSize(20, 30);
+
+        y_input = new GuiTextEntry(this, "", "");
+        y_input->setSize(GuiElement::GuiSizeMax, 30);
+        y_input->setTextSize(20);
+        y_input->callback([this](string text) {
+            if (callback) {
+                glm::vec2 value = update_func ? update_func() : glm::vec2(0, 0);
+                value.y = text.toFloat();
+                callback(value);
+            }
+        });
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            glm::vec2 value = update_func();
+            // Only update if text hasn't been manually changed
+            if (x_input->getText().toFloat() != value.x)
+                x_input->setText(string(value.x, 1));
+            if (y_input->getText().toFloat() != value.y)
+                y_input->setText(string(value.y, 1));
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<glm::vec2()> update_func;
+    std::function<void(glm::vec2)> callback;
+
+private:
+    GuiTextEntry* x_input;
+    GuiTextEntry* y_input;
+};
+
+// Widget for editing RGBA color values
+class GuiColorPicker : public GuiElement {
+public:
+    GuiColorPicker(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 120);
+        setAttribute("layout", "vertical");
+
+        // Red slider
+        auto r_row = new GuiElement(this, "");
+        r_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto r_label = new GuiLabel(r_row, "", "R:", 20);
+        r_label->setSize(30, 30);
+        r_slider = new GuiSlider(r_row, "", 0.0f, 255.0f, 0.0f, [this](float value) {
+            if (callback && update_func) {
+                auto color = update_func();
+                color.r = static_cast<uint8_t>(value);
+                callback(color);
+            }
+        });
+        r_slider->setSize(GuiElement::GuiSizeMax, 30);
+        r_slider->addSnapValue(0.0f, 1.0f);
+        r_slider->addSnapValue(255.0f, 1.0f);
+        r_slider->addOverlay(0u, 20.0f);
+
+        // Green slider
+        auto g_row = new GuiElement(this, "");
+        g_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto g_label = new GuiLabel(g_row, "", "G:", 20);
+        g_label->setSize(30, 30);
+        g_slider = new GuiSlider(g_row, "", 0.0f, 255.0f, 0.0f, [this](float value) {
+            if (callback && update_func) {
+                auto color = update_func();
+                color.g = static_cast<uint8_t>(value);
+                callback(color);
+            }
+        });
+        g_slider->setSize(GuiElement::GuiSizeMax, 30);
+        g_slider->addSnapValue(0.0f, 1.0f);
+        g_slider->addSnapValue(255.0f, 1.0f);
+        g_slider->addOverlay(0u, 20.0f);
+
+        // Blue slider
+        auto b_row = new GuiElement(this, "");
+        b_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto b_label = new GuiLabel(b_row, "", "B:", 20);
+        b_label->setSize(30, 30);
+        b_slider = new GuiSlider(b_row, "", 0.0f, 255.0f, 0.0f, [this](float value) {
+            if (callback && update_func) {
+                auto color = update_func();
+                color.b = static_cast<uint8_t>(value);
+                callback(color);
+            }
+        });
+        b_slider->setSize(GuiElement::GuiSizeMax, 30);
+        b_slider->addSnapValue(0.0f, 1.0f);
+        b_slider->addSnapValue(255.0f, 1.0f);
+        b_slider->addOverlay(0u, 20.0f);
+
+        // Alpha slider
+        auto a_row = new GuiElement(this, "");
+        a_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto a_label = new GuiLabel(a_row, "", "A:", 20);
+        a_label->setSize(30, 30);
+        a_slider = new GuiSlider(a_row, "", 0.0f, 255.0f, 255.0f, [this](float value) {
+            if (callback && update_func) {
+                auto color = update_func();
+                color.a = static_cast<uint8_t>(value);
+                callback(color);
+            }
+        });
+        a_slider->setSize(GuiElement::GuiSizeMax, 30);
+        a_slider->addSnapValue(0.0f, 1.0f);
+        a_slider->addSnapValue(255.0f, 1.0f);
+        a_slider->addOverlay(0u, 20.0f);
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            auto color = update_func();
+            r_slider->setValue(static_cast<float>(color.r));
+            g_slider->setValue(static_cast<float>(color.g));
+            b_slider->setValue(static_cast<float>(color.b));
+            a_slider->setValue(static_cast<float>(color.a));
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<glm::u8vec4()> update_func;
+    std::function<void(glm::u8vec4)> callback;
+
+private:
+    GuiSlider* r_slider;
+    GuiSlider* g_slider;
+    GuiSlider* b_slider;
+    GuiSlider* a_slider;
+};
+
+// Widget for editing multiline text
+class GuiMultilineTextTweak : public GuiScrollText {
+public:
+    GuiMultilineTextTweak(GuiContainer* owner, int lines = 5)
+    : GuiScrollText(owner, "", "") {
+        setSize(GuiElement::GuiSizeMax, lines * 30);
+        setTextSize(18);
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            setText(update_func());
+        }
+        GuiScrollText::onDraw(target);
+    }
+
+    std::function<string()> update_func;
+    // Note: GuiScrollText is read-only; for editable multiline text,
+    // would need to create a custom widget or use GuiTextEntry with newlines enabled
+};
+
+// Widget for selecting from faction list
+class GuiFactionSelectorTweak : public GuiSelector {
+public:
+    GuiFactionSelectorTweak(GuiContainer* owner, string id, GuiSelector::func_t callback)
+    : GuiSelector(owner, id, callback) {
+        setSize(GuiElement::GuiSizeMax, 30);
+        setTextSize(20);
+        addEntry(tr("tweak-faction", "(None)"), "");
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        updateFactionList();
+        if (update_func) {
+            auto faction_entity = update_func();
+            if (!faction_entity) {
+                setSelectionIndex(0); // None
+            } else {
+                // Find faction in list
+                string search_key = faction_entity.toString();
+                for(int i = 0; i < entryCount(); i++) {
+                    if (getEntryValue(i) == search_key) {
+                        if (getSelectionIndex() != i)
+                            setSelectionIndex(i);
+                        break;
+                    }
+                }
+            }
+        }
+        GuiSelector::onDraw(target);
+    }
+
+    std::function<sp::ecs::Entity()> update_func;
+
+private:
+    float last_update_time = 0.0f;
+
+    void updateFactionList() {
+        // Update faction list every 1 second
+        if (engine->getElapsedTime() - last_update_time < 1.0f)
+            return;
+        last_update_time = engine->getElapsedTime();
+
+        int current_selection = getSelectionIndex();
+        string current_value = current_selection >= 0 ? getEntryValue(current_selection) : "";
+
+        // Clear all except "(None)" entry
+        while(entryCount() > 1)
+            removeEntry(entryCount() - 1);
+
+        // Add all factions
+        for(auto [entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
+            addEntry(faction_info.name, entity.toString());
+        }
+
+        // Restore selection if faction still exists
+        if (!current_value.empty()) {
+            for(int i = 0; i < entryCount(); i++) {
+                if (getEntryValue(i) == current_value) {
+                    setSelectionIndex(i);
+                    return;
+                }
+            }
+        }
+        setSelectionIndex(0); // Default to None
+    }
+};
+
 
 #define ADD_PAGE(LABEL, COMPONENT) \
     new_page = new GuiTweakPage(content); \
@@ -276,6 +589,105 @@ public:
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change rate:"), SYSTEM, coolant_change_rate_per_second); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), SYSTEM, power_change_rate_per_second); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair rate:"), SYSTEM, auto_repair_per_second);
+
+// New widget macros for additional component types
+
+#define ADD_ENTITY_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiEntityPicker(row, "ENTITY_PICKER", [this](int index, string value) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) v->VALUE = value.empty() ? sp::ecs::Entity() : sp::ecs::Entity::fromString(value); \
+        }); \
+        ui->update_func = [this]() -> sp::ecs::Entity { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return sp::ecs::Entity(); \
+        }; \
+    } while(0)
+
+#define ADD_VECTOR2_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiVec2Tweak(row); \
+        ui->update_func = [this]() -> glm::vec2 { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return glm::vec2(0, 0); \
+        }; \
+        ui->callback = [this](glm::vec2 val) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) v->VALUE = val; \
+        }; \
+    } while(0)
+
+#define ADD_COLOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 120)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 120); \
+        auto ui = new GuiColorPicker(row); \
+        ui->update_func = [this]() -> glm::u8vec4 { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return glm::u8vec4(255, 255, 255, 255); \
+        }; \
+        ui->callback = [this](glm::u8vec4 val) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) v->VALUE = val; \
+        }; \
+    } while(0)
+
+#define ADD_TEXT_MULTILINE_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 150)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 150); \
+        auto ui = new GuiMultilineTextTweak(row, 5); \
+        ui->update_func = [this]() -> string { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return ""; \
+        }; \
+    } while(0)
+
+#define ADD_FACTION_SELECTOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiFactionSelectorTweak(row, "FACTION_SELECTOR", [this](int index, string value) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) v->VALUE = value.empty() ? sp::ecs::Entity() : sp::ecs::Entity::fromString(value); \
+        }); \
+        ui->update_func = [this]() -> sp::ecs::Entity { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return sp::ecs::Entity(); \
+        }; \
+    } while(0)
+
+#define ADD_ENUM_TWEAK(LABEL, COMPONENT, VALUE, MIN_VALUE, MAX_VALUE, STRING_CONVERT_FUNCTION) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiSelectorTweak(row, "ENUM_SELECTOR", [this](int index, string value) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) v->VALUE = static_cast<decltype(v->VALUE)>(index + MIN_VALUE); \
+        }); \
+        for(int enum_value = MIN_VALUE; enum_value <= MAX_VALUE; enum_value++) \
+            ui->addEntry(STRING_CONVERT_FUNCTION(static_cast<decltype(COMPONENT{}.VALUE)>(enum_value)), string(enum_value)); \
+        ui->update_func = [this]() -> int { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return static_cast<int>(v->VALUE) - static_cast<int>(MIN_VALUE); \
+            return -1; \
+        }; \
+    } while(0)
 
 GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
