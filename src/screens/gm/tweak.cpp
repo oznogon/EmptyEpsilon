@@ -1154,7 +1154,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     // DockingBay component - allows other entities to dock with this entity
     ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
-    ADD_LABEL(tr("tweak-text", "Dock classes (use scripts to edit)"));
+    ADD_STRING_SET_TWEAK(tr("tweak-text", "External dock classes:"), DockingBay, external_dock_classes);
+    ADD_STRING_SET_TWEAK(tr("tweak-text", "Internal dock classes:"), DockingBay, internal_dock_classes);
     ADD_LABEL(tr("tweak-text", "Docking bay services:"));
     // DockingBay flags - custom toggle tweaks for bitfield
     {
