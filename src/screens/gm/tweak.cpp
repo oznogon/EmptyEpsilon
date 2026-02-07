@@ -1152,6 +1152,18 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_PAGE(tr("tweak-tab", "Faction"), Faction);
     ADD_FACTION_SELECTOR_TWEAK(tr("tweak-text", "Faction:"), Faction, entity);
 
+    // Spin component - makes entity rotate continuously
+    ADD_PAGE(tr("tweak-tab", "Spin"), Spin);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Rotation rate (degrees/second):"), Spin, rate);
+
+    // LifeTime component - entity expires after lifetime seconds
+    ADD_PAGE(tr("tweak-tab", "Life time"), LifeTime);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Remaining lifetime (seconds):"), LifeTime, lifetime);
+
+    // WarpJammer component - prevents ships from warping within range
+    ADD_PAGE(tr("tweak-tab", "Warp jammer"), WarpJammer);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Jamming range:"), WarpJammer, range);
+
     // DockingBay component - allows other entities to dock with this entity
     ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
     ADD_STRING_SET_TWEAK(tr("tweak-text", "External dock classes:"), DockingBay, external_dock_classes);
