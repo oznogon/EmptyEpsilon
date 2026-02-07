@@ -468,6 +468,146 @@ private:
     }
 };
 
+// Widget for editing unordered_set<string>
+class GuiStringSetTweak : public GuiElement {
+public:
+    GuiStringSetTweak(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 150);
+        setAttribute("layout", "vertical");
+
+        // List of current items
+        item_list = new GuiListbox(this, "", [this](int index, string value) {
+            selected_index = index;
+        });
+        item_list
+            ->setTextSize(18.0f)
+            ->setButtonHeight(20.0f)
+            ->setSize(GuiElement::GuiSizeMax, 90);
+
+        // Add new item controls
+        auto add_row = new GuiElement(this, "");
+        add_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+
+        new_item_entry = new GuiTextEntry(add_row, "", "");
+        new_item_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        auto add_button = new GuiButton(add_row, "", tr("tweak-button", "Add"), [this]() {
+            string new_item = new_item_entry->getText();
+            if (!new_item.empty() && on_add) {
+                on_add(new_item);
+                new_item_entry->setText("");
+            }
+        });
+        add_button->setTextSize(18)->setSize(60, 30);
+
+        auto del_button = new GuiButton(add_row, "", tr("tweak-button", "Delete"), [this]() {
+            if (selected_index >= 0 && selected_index < item_list->entryCount() && on_remove) {
+                string item = item_list->getEntryValue(selected_index);
+                on_remove(item);
+                selected_index = -1;
+            }
+        });
+        del_button->setTextSize(18)->setSize(60, 30);
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            auto current_set = update_func();
+
+            // Rebuild list if set changed
+            if (current_set.size() != static_cast<size_t>(item_list->entryCount())) {
+                item_list->setOptions({});
+                for(const auto& item : current_set) {
+                    item_list->addEntry(item, item);
+                }
+            }
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<std::unordered_set<string>()> update_func;
+    std::function<void(const string&)> on_add;
+    std::function<void(const string&)> on_remove;
+
+private:
+    GuiListbox* item_list;
+    GuiTextEntry* new_item_entry;
+    int selected_index = -1;
+};
+
+// Widget for editing unordered_map<string, string>
+class GuiStringMapTweak : public GuiElement {
+public:
+    GuiStringMapTweak(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 180);
+        setAttribute("layout", "vertical");
+
+        // List of current key-value pairs
+        item_list = new GuiListbox(this, "", [this](int index, string value) {
+            selected_index = index;
+        });
+        item_list
+            ->setTextSize(18.0f)
+            ->setButtonHeight(20.0f)
+            ->setSize(GuiElement::GuiSizeMax, 90);
+
+        // Add new item controls
+        auto add_row = new GuiElement(this, "");
+        add_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+
+        key_entry = new GuiTextEntry(add_row, "", "");
+        key_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        value_entry = new GuiTextEntry(add_row, "", "");
+        value_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        auto add_button = new GuiButton(add_row, "", tr("tweak-button", "Add"), [this]() {
+            string key = key_entry->getText();
+            string value = value_entry->getText();
+            if (!key.empty() && on_add) {
+                on_add(key, value);
+                key_entry->setText("");
+                value_entry->setText("");
+            }
+        });
+        add_button->setTextSize(18)->setSize(60, 30);
+
+        auto del_button = new GuiButton(add_row, "", tr("tweak-button", "Delete"), [this]() {
+            if (selected_index >= 0 && selected_index < item_list->entryCount() && on_remove) {
+                string key = item_list->getEntryValue(selected_index);
+                on_remove(key);
+                selected_index = -1;
+            }
+        });
+        del_button->setTextSize(18)->setSize(60, 30);
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            auto current_map = update_func();
+
+            // Rebuild list if map changed
+            if (current_map.size() != static_cast<size_t>(item_list->entryCount())) {
+                item_list->setOptions({});
+                for(const auto& [key, value] : current_map) {
+                    item_list->addEntry(key + " = " + value, key);
+                }
+            }
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<std::unordered_map<string, string>()> update_func;
+    std::function<void(const string&, const string&)> on_add;
+    std::function<void(const string&)> on_remove;
+
+private:
+    GuiListbox* item_list;
+    GuiTextEntry* key_entry;
+    GuiTextEntry* value_entry;
+    int selected_index = -1;
+};
+
 
 #define ADD_PAGE(LABEL, COMPONENT) \
     new_page = new GuiTweakPage(content); \
@@ -724,6 +864,58 @@ private:
             auto v = entity.getComponent<COMPONENT>(); \
             if (v) return static_cast<int>(v->VALUE) - static_cast<int>(MIN_VALUE); \
             return -1; \
+        }; \
+    } while(0)
+
+#define ADD_STRING_SET_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 150)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 150); \
+        auto ui = new GuiStringSetTweak(row); \
+        ui->update_func = [this]() -> std::unordered_set<string> { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return {}; \
+        }; \
+        ui->on_add = [this](const string& item) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) { \
+                v->VALUE.insert(item); \
+                v->VALUE##_dirty = true; \
+            } \
+        }; \
+        ui->on_remove = [this](const string& item) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) { \
+                v->VALUE.erase(item); \
+                v->VALUE##_dirty = true; \
+            } \
+        }; \
+    } while(0)
+
+#define ADD_STRING_MAP_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 180)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 180); \
+        auto ui = new GuiStringMapTweak(row); \
+        ui->update_func = [this]() -> std::unordered_map<string, string> { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return {}; \
+        }; \
+        ui->on_add = [this](const string& key, const string& value) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) { \
+                v->VALUE[key] = value; \
+            } \
+        }; \
+        ui->on_remove = [this](const string& key) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) { \
+                v->VALUE.erase(key); \
+            } \
         }; \
     } while(0)
 
