@@ -33,6 +33,7 @@
 #include "components/shields.h"
 #include "components/spin.h"
 #include "components/warpdrive.h"
+#include "components/zone.h"
 
 
 #include "gui/gui2_listbox.h"
@@ -1266,6 +1267,16 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     // WarpJammer component - prevents ships from warping within range
     ADD_PAGE(tr("tweak-tab", "Warp jammer"), WarpJammer);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Jamming range:"), WarpJammer, range);
+
+    // Zone component - defines areas with visual effects and properties
+    ADD_PAGE(tr("tweak-tab", "Zone"), Zone);
+    ADD_COLOR_TWEAK(tr("tweak-text", "Zone color:"), Zone, color);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Label:"), Zone, label);
+    ADD_VECTOR2_TWEAK(tr("tweak-text", "Label offset:"), Zone, label_offset);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Skybox:"), Zone, skybox);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Skybox fade distance:"), Zone, skybox_fade_distance);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), Zone, radius);
+    ADD_VEC2_VECTOR_TWEAK(tr("tweak-text", "Outline points:"), Zone, outline);
 
     // DockingBay component - allows other entities to dock with this entity
     ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
