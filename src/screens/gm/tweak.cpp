@@ -4,6 +4,7 @@
 #include "components/collision.h"
 #include "components/name.h"
 #include "components/ai.h"
+#include "ai/ai.h"
 #include "components/avoidobject.h"
 #include "components/beamweapon.h"
 #include "components/comms.h"
@@ -41,6 +42,31 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_togglebutton.h"
+#include "gui/gui2_scrolltext.h"
+#include "ecs/query.h"
+#include "components/faction.h"
+#include "engine.h"
+
+
+// Conversion function for AIOrder enum
+static string getAIOrderString(AIOrder order)
+{
+    switch(order)
+    {
+    case AIOrder::Idle: return tr("ai_order", "Idle");
+    case AIOrder::Roaming: return tr("ai_order", "Roaming");
+    case AIOrder::Retreat: return tr("ai_order", "Retreat");
+    case AIOrder::StandGround: return tr("ai_order", "Stand Ground");
+    case AIOrder::DefendLocation: return tr("ai_order", "Defend Location");
+    case AIOrder::DefendTarget: return tr("ai_order", "Defend Target");
+    case AIOrder::FlyFormation: return tr("ai_order", "Fly in formation");
+    case AIOrder::FlyTowards: return tr("ai_order", "Fly towards");
+    case AIOrder::FlyTowardsBlind: return tr("ai_order", "Fly towards (ignore all)");
+    case AIOrder::Dock: return tr("ai_order", "Dock");
+    case AIOrder::Attack: return tr("ai_order", "Attack");
+    }
+    return "Unknown";
+}
 
 
 class GuiTextTweak : public GuiTextEntry {
@@ -890,9 +916,24 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_LABEL(tr("tweak-text", "Jump drive system"));
     ADD_SHIP_SYSTEM_TWEAK(JumpDrive);
 
-    // This fails, so there's no way to remove the AI component from a CPU ship,
-    // which makes it difficult to convert a CPU ship to a player ship.
-    // ADD_PAGE(tr("tweak-tab", "AI ship"), AIController);
+    // AI Controller component
+    // Special handling: Component removal is disabled due to unique_ptr<ShipAI> destruction issues
+    new_page = new GuiTweakPage(content);
+    new_page->has_component = [](sp::ecs::Entity e) { return e.hasComponent<AIController>(); };
+    new_page->add_component = [](sp::ecs::Entity e) { e.addComponent<AIController>(); };
+    new_page->remove_component = [](sp::ecs::Entity e) {
+        // Removal disabled: AIController contains unique_ptr<ShipAI> which causes
+        // compilation issues with incomplete type. Use scripts to remove AI component.
+        LOG(Warning, "AIController component removal not supported via Tweaks dialog");
+    };
+    pages.push_back(new_page);
+    list->addEntry(tr("tweak-tab", "AI controller"), "");
+
+    ADD_ENUM_TWEAK(tr("tweak-text", "Orders:"), AIController, orders,
+        static_cast<int>(AIOrder::Idle), static_cast<int>(AIOrder::Attack), getAIOrderString);
+    ADD_VECTOR2_TWEAK(tr("tweak-text", "Order target location:"), AIController, order_target_location);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Order target:"), AIController, order_target);
+    // ADD_TEXT_TWEAK(tr("tweak-text", "AI name:"), AIController, new_name);
 
     ADD_PAGE(tr("tweak-tab", "Player ship"), PlayerControl);
     ADD_TEXT_TWEAK(tr("tweak-text", "Control code:"), PlayerControl, control_code);
