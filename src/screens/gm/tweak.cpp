@@ -68,6 +68,18 @@ static string getAIOrderString(AIOrder order)
     return "Unknown";
 }
 
+// Conversion function for DockingPort::State enum
+static string getDockingStateString(DockingPort::State state)
+{
+    switch(state)
+    {
+    case DockingPort::State::NotDocking: return tr("docking_state", "Not docking");
+    case DockingPort::State::Docking: return tr("docking_state", "Docking");
+    case DockingPort::State::Docked: return tr("docking_state", "Docked");
+    }
+    return "Unknown";
+}
+
 
 class GuiTextTweak : public GuiTextEntry {
 public:
@@ -941,6 +953,110 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR2_TWEAK(tr("tweak-text", "Orbit center:"), Orbit, center);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit distance:"), Orbit, distance);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit period (seconds):"), Orbit, time);
+
+    // DockingBay component - allows other entities to dock with this entity
+    ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
+    ADD_LABEL(tr("tweak-text", "Dock classes (use scripts to edit)"));
+    ADD_LABEL(tr("tweak-text", "Docking bay services:"));
+    // DockingBay flags - custom toggle tweaks for bitfield
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Share energy"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) {
+            auto v = entity.getComponent<DockingBay>();
+            if (v) {
+                if (value) v->flags |= DockingBay::ShareEnergy;
+                else v->flags &= ~DockingBay::ShareEnergy;
+            }
+        });
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<DockingBay>();
+            return v && (v->flags & DockingBay::ShareEnergy);
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Repair hull"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) {
+            auto v = entity.getComponent<DockingBay>();
+            if (v) {
+                if (value) v->flags |= DockingBay::Repair;
+                else v->flags &= ~DockingBay::Repair;
+            }
+        });
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<DockingBay>();
+            return v && (v->flags & DockingBay::Repair);
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Charge shields"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) {
+            auto v = entity.getComponent<DockingBay>();
+            if (v) {
+                if (value) v->flags |= DockingBay::ChargeShield;
+                else v->flags &= ~DockingBay::ChargeShield;
+            }
+        });
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<DockingBay>();
+            return v && (v->flags & DockingBay::ChargeShield);
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Restock probes"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) {
+            auto v = entity.getComponent<DockingBay>();
+            if (v) {
+                if (value) v->flags |= DockingBay::RestockProbes;
+                else v->flags &= ~DockingBay::RestockProbes;
+            }
+        });
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<DockingBay>();
+            return v && (v->flags & DockingBay::RestockProbes);
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Restock missiles"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) {
+            auto v = entity.getComponent<DockingBay>();
+            if (v) {
+                if (value) v->flags |= DockingBay::RestockMissiles;
+                else v->flags &= ~DockingBay::RestockMissiles;
+            }
+        });
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<DockingBay>();
+            return v && (v->flags & DockingBay::RestockMissiles);
+        };
+    }
+
+    // DockingPort component - allows this entity to dock with others
+    ADD_PAGE(tr("tweak-tab", "Docking port"), DockingPort);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Dock class:"), DockingPort, dock_class);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Dock subclass:"), DockingPort, dock_subclass);
+    ADD_ENUM_TWEAK(tr("tweak-text", "Docking state:"), DockingPort, state,
+        static_cast<int>(DockingPort::State::NotDocking),
+        static_cast<int>(DockingPort::State::Docked), getDockingStateString);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Dock target:"), DockingPort, target);
+    ADD_VECTOR2_TWEAK(tr("tweak-text", "Docked offset:"), DockingPort, docked_offset);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Auto reload missiles:"), DockingPort, auto_reload_missiles);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Reload delay (seconds):"), DockingPort, auto_reload_missile_delay);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Reload time (seconds):"), DockingPort, auto_reload_missile_time);
 
     ADD_PAGE(tr("tweak-tab", "Player ship"), PlayerControl);
     ADD_TEXT_TWEAK(tr("tweak-text", "Control code:"), PlayerControl, control_code);
