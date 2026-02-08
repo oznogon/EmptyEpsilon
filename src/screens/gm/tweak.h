@@ -33,10 +33,23 @@ public:
     void open(sp::ecs::Entity target, string select_component = "");
 
 private:
+    void showGroups();
+    void showGroupComponents(int group_index);
+
+    struct ComponentGroup
+    {
+        string name;
+        std::vector<int> page_indices;
+    };
+
     sp::ecs::Entity entity;
     GuiElement* content;
     std::vector<GuiTweakPage*> pages;
+    std::vector<string> page_labels;
+    std::vector<ComponentGroup> component_groups;
     GuiListbox* component_list;
+    bool in_group_view = true;
+    int current_group_index = -1;
 };
 
 #endif//SCREEN_GM_TWEAK_H

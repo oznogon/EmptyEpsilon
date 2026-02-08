@@ -1009,6 +1009,176 @@ private:
     int selected_index = -1;
 };
 
+// Widget for editing std::vector<EngineEmitter::Emitter>
+class GuiEngineEmittersTweak : public GuiElement {
+public:
+    GuiEngineEmittersTweak(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 210);
+        setAttribute("layout", "vertical");
+
+        item_list = new GuiListbox(this, "", [this](int index, string value) {
+            selected_index = index;
+        });
+        item_list
+            ->setTextSize(18.0f)
+            ->setButtonHeight(20.0f)
+            ->setSize(GuiElement::GuiSizeMax, 90);
+
+        auto pos_row = new GuiElement(this, "");
+        pos_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto pos_label = new GuiLabel(pos_row, "", tr("tweak-text", "Pos:"), 18);
+        pos_label->setSize(30, 30);
+        px_entry = new GuiTextEntry(pos_row, "", "");
+        px_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        py_entry = new GuiTextEntry(pos_row, "", "");
+        py_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        pz_entry = new GuiTextEntry(pos_row, "", "");
+        pz_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        auto color_row = new GuiElement(this, "");
+        color_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto color_label = new GuiLabel(color_row, "", tr("tweak-text", "Color:"), 18);
+        color_label->setSize(40, 30);
+        cr_entry = new GuiTextEntry(color_row, "", "");
+        cr_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        cg_entry = new GuiTextEntry(color_row, "", "");
+        cg_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        cb_entry = new GuiTextEntry(color_row, "", "");
+        cb_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        auto scale_row = new GuiElement(this, "");
+        scale_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto scale_label = new GuiLabel(scale_row, "", tr("tweak-text", "Scale:"), 18);
+        scale_label->setSize(40, 30);
+        scale_entry = new GuiTextEntry(scale_row, "", "");
+        scale_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        auto add_button = new GuiButton(scale_row, "", tr("tweak-button", "Add"), [this]() {
+            if (on_add) {
+                EngineEmitter::Emitter e;
+                e.position = glm::vec3(px_entry->getText().toFloat(), py_entry->getText().toFloat(), pz_entry->getText().toFloat());
+                e.color = glm::vec3(cr_entry->getText().toFloat(), cg_entry->getText().toFloat(), cb_entry->getText().toFloat());
+                e.scale = scale_entry->getText().toFloat();
+                on_add(e);
+            }
+        });
+        add_button->setTextSize(18)->setSize(60, 30);
+
+        auto del_button = new GuiButton(scale_row, "", tr("tweak-button", "Delete"), [this]() {
+            if (selected_index >= 0 && selected_index < item_list->entryCount() && on_remove) {
+                on_remove(selected_index);
+                selected_index = -1;
+            }
+        });
+        del_button->setTextSize(18)->setSize(60, 30);
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            auto current_vector = update_func();
+            if (current_vector.size() != static_cast<size_t>(item_list->entryCount())) {
+                item_list->setOptions({});
+                for(size_t i = 0; i < current_vector.size(); i++) {
+                    const auto& e = current_vector[i];
+                    string display = string(int(i)) + ": pos(" + string(e.position.x, 1) + "," + string(e.position.y, 1) + "," + string(e.position.z, 1) + ") scale=" + string(e.scale, 2);
+                    item_list->addEntry(display, string(int(i)));
+                }
+            }
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<std::vector<EngineEmitter::Emitter>()> update_func;
+    std::function<void(const EngineEmitter::Emitter&)> on_add;
+    std::function<void(int)> on_remove;
+
+private:
+    GuiListbox* item_list;
+    GuiTextEntry* px_entry;
+    GuiTextEntry* py_entry;
+    GuiTextEntry* pz_entry;
+    GuiTextEntry* cr_entry;
+    GuiTextEntry* cg_entry;
+    GuiTextEntry* cb_entry;
+    GuiTextEntry* scale_entry;
+    int selected_index = -1;
+};
+
+// Widget for editing std::vector<NebulaRenderer::Cloud>
+class GuiNebulaCloudsTweak : public GuiElement {
+public:
+    GuiNebulaCloudsTweak(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 150);
+        setAttribute("layout", "vertical");
+
+        item_list = new GuiListbox(this, "", [this](int index, string value) {
+            selected_index = index;
+        });
+        item_list
+            ->setTextSize(18.0f)
+            ->setButtonHeight(20.0f)
+            ->setSize(GuiElement::GuiSizeMax, 90);
+
+        auto input_row = new GuiElement(this, "");
+        input_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+
+        ox_entry = new GuiTextEntry(input_row, "", "");
+        ox_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        oy_entry = new GuiTextEntry(input_row, "", "");
+        oy_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        tex_entry = new GuiTextEntry(input_row, "", "");
+        tex_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        size_entry = new GuiTextEntry(input_row, "", "");
+        size_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        auto add_button = new GuiButton(input_row, "", tr("tweak-button", "Add"), [this]() {
+            if (on_add) {
+                NebulaRenderer::Cloud c;
+                c.offset = glm::vec2(ox_entry->getText().toFloat(), oy_entry->getText().toFloat());
+                c.texture.name = tex_entry->getText();
+                c.size = size_entry->getText().toFloat();
+                on_add(c);
+            }
+        });
+        add_button->setTextSize(18)->setSize(60, 30);
+
+        auto del_button = new GuiButton(input_row, "", tr("tweak-button", "Delete"), [this]() {
+            if (selected_index >= 0 && selected_index < item_list->entryCount() && on_remove) {
+                on_remove(selected_index);
+                selected_index = -1;
+            }
+        });
+        del_button->setTextSize(18)->setSize(60, 30);
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            auto current_vector = update_func();
+            if (current_vector.size() != static_cast<size_t>(item_list->entryCount())) {
+                item_list->setOptions({});
+                for(size_t i = 0; i < current_vector.size(); i++) {
+                    const auto& c = current_vector[i];
+                    string display = string(int(i)) + ": offset(" + string(c.offset.x, 1) + "," + string(c.offset.y, 1) + ") " + c.texture.name + " size=" + string(c.size, 1);
+                    item_list->addEntry(display, string(int(i)));
+                }
+            }
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<std::vector<NebulaRenderer::Cloud>()> update_func;
+    std::function<void(const NebulaRenderer::Cloud&)> on_add;
+    std::function<void(int)> on_remove;
+
+private:
+    GuiListbox* item_list;
+    GuiTextEntry* ox_entry;
+    GuiTextEntry* oy_entry;
+    GuiTextEntry* tex_entry;
+    GuiTextEntry* size_entry;
+    int selected_index = -1;
+};
+
 
 #define ADD_PAGE(LABEL, COMPONENT) \
     new_page = new GuiTweakPage(content); \
@@ -1016,7 +1186,7 @@ private:
     new_page->add_component = [](sp::ecs::Entity e) { e.addComponent<COMPONENT>(); }; \
     new_page->remove_component = [](sp::ecs::Entity e) { e.removeComponent<COMPONENT>(); }; \
     pages.push_back(new_page); \
-    component_list->addEntry(LABEL, "");
+    page_labels.push_back(LABEL);
 #define ADD_LABEL(LABEL) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
@@ -1217,6 +1387,33 @@ private:
         ui->callback = [this](glm::vec2 val) { \
             auto v = entity.getComponent<COMPONENT>(); \
             if (v) v->VALUE = val; \
+        }; \
+    } while(0)
+
+#define ADD_MISSILE_ARRAY_TWEAK(LABEL, COMPONENT, ARRAY, INDEX) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiTextTweak(row); \
+        ui->update_func = [this]() -> string { auto v = entity.getComponent<COMPONENT>(); if (v) return string(v->ARRAY[INDEX]); return ""; }; \
+        ui->callback([this](string text) { auto v = entity.getComponent<COMPONENT>(); if (v) v->ARRAY[INDEX] = text.toInt(); }); \
+    } while(0)
+
+#define ADD_IVEC2_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiVec2Tweak(row); \
+        ui->update_func = [this]() -> glm::vec2 { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return glm::vec2(v->VALUE); \
+            return glm::vec2(0, 0); \
+        }; \
+        ui->callback = [this](glm::vec2 val) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) v->VALUE = glm::ivec2(val); \
         }; \
     } while(0)
 
@@ -1444,6 +1641,42 @@ private:
         }; \
     } while(0)
 
+static string damageTypeToString(DamageType t)
+{
+    switch(t)
+    {
+    case DamageType::Energy: return tr("damage_type", "Energy");
+    case DamageType::Kinetic: return tr("damage_type", "Kinetic");
+    case DamageType::EMP: return tr("damage_type", "EMP");
+    default: return "?";
+    }
+}
+
+static string mainScreenSettingToLocaleString(MainScreenSetting setting)
+{
+    switch(setting)
+    {
+    case MainScreenSetting::Front: return tr("main_screen", "Front");
+    case MainScreenSetting::Back: return tr("main_screen", "Back");
+    case MainScreenSetting::Left: return tr("main_screen", "Left");
+    case MainScreenSetting::Right: return tr("main_screen", "Right");
+    case MainScreenSetting::Target: return tr("main_screen", "Target");
+    case MainScreenSetting::Tactical: return tr("main_screen", "Tactical");
+    case MainScreenSetting::LongRange: return tr("main_screen", "Long range");
+    default: return "?";
+    }
+}
+
+static string mainScreenOverlayToLocaleString(MainScreenOverlay overlay)
+{
+    switch(overlay)
+    {
+    case MainScreenOverlay::HideComms: return tr("main_screen", "Hide comms");
+    case MainScreenOverlay::ShowComms: return tr("main_screen", "Show comms");
+    default: return "?";
+    }
+}
+
 GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
 {
@@ -1456,9 +1689,21 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     component_list = new GuiListbox(content, "", [this](int index, string value)
     {
-        for(GuiTweakPage* page : pages)
-            page->hide();
-        pages[index]->show();
+        if (in_group_view)
+        {
+            showGroupComponents(index);
+        }
+        else if (index == 0)
+        {
+            showGroups();
+        }
+        else
+        {
+            int pi = component_groups[current_group_index].page_indices[index - 1];
+            for (auto page : pages)
+                page->hide();
+            pages[pi]->show();
+        }
     });
 
     component_list->setSize(300, GuiElement::GuiSizeMax);
@@ -1656,7 +1901,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         LOG(Warning, "AIController component removal not supported via Tweaks dialog");
     };
     pages.push_back(new_page);
-    component_list->addEntry(tr("tweak-tab", "AI controller"), "");
+    page_labels.push_back(tr("tweak-tab", "AI controller"));
 
     ADD_ENUM_TWEAK(tr("tweak-text", "Orders:"), AIController, orders,
         static_cast<int>(AIOrder::Idle), static_cast<int>(AIOrder::Attack), getAIOrderString);
@@ -1741,6 +1986,32 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto repair:"), InternalRooms, auto_repair_enabled);
     ADD_ROOM_VECTOR_TWEAK(tr("tweak-text", "Rooms:"), InternalRooms, rooms);
     ADD_DOOR_VECTOR_TWEAK(tr("tweak-text", "Doors:"), InternalRooms, doors);
+
+    // InternalRepairCrew component - crew member repair and unhack rates
+    ADD_PAGE(tr("tweak-tab", "Internal repair crew"), InternalRepairCrew);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Repair per second:"), InternalRepairCrew, repair_per_second);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Unhack per second:"), InternalRepairCrew, unhack_per_second);
+
+    // InternalCrew component - individual crew member inside a ship
+    ADD_PAGE(tr("tweak-tab", "Internal crew"), InternalCrew);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Ship:"), InternalCrew, ship);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Move speed:"), InternalCrew, move_speed);
+    ADD_VECTOR2_TWEAK(tr("tweak-text", "Position:"), InternalCrew, position);
+    ADD_IVEC2_TWEAK(tr("tweak-text", "Target position:"), InternalCrew, target_position);
+    
+    // PickupCallback component - entity that gives items on touch and destroys itself
+    ADD_PAGE(tr("tweak-tab", "Pickup"), PickupCallback);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Players only:"), PickupCallback, player);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Give energy:"), PickupCallback, give_energy);
+    ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give homing:"), PickupCallback, give_missile, MW_Homing);
+    ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give nuke:"), PickupCallback, give_missile, MW_Nuke);
+    ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give mine:"), PickupCallback, give_missile, MW_Mine);
+    ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give EMP:"), PickupCallback, give_missile, MW_EMP);
+    ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give HVLI:"), PickupCallback, give_missile, MW_HVLI);
+
+    // CollisionCallback component - entity that triggers a callback on touch
+    ADD_PAGE(tr("tweak-tab", "Collision callback"), CollisionCallback);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Players only:"), CollisionCallback, player);
 
     // DockingBay component - allows other entities to dock with this entity
     ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
@@ -1849,6 +2120,28 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     ADD_PAGE(tr("tweak-tab", "Player ship"), PlayerControl);
     ADD_TEXT_TWEAK(tr("tweak-text", "Control code:"), PlayerControl, control_code);
+    ADD_ENUM_TWEAK(tr("tweak-text", "Main screen:"), PlayerControl, main_screen_setting, 0, 6, mainScreenSettingToLocaleString);
+    ADD_ENUM_TWEAK(tr("tweak-text", "Main screen overlay:"), PlayerControl, main_screen_overlay, 0, 1, mainScreenOverlayToLocaleString);
+    ADD_ENUM_TWEAK(tr("tweak-text", "Alert level:"), PlayerControl, alert_level, 0, 2, alertLevelToLocaleString);
+    ADD_LABEL(tr("tweak-text", "Allowed crew positions:"));
+    for(int i = 0; i < int(CrewPosition::MAX); i++)
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto lbl = new GuiLabel(row, "", crewPositionToString(CrewPosition(i)), 20);
+        lbl->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this, i](bool value) {
+            auto v = entity.getComponent<PlayerControl>();
+            if (v) {
+                if (value) v->allowed_positions.add(CrewPosition(i));
+                else v->allowed_positions.remove(CrewPosition(i));
+            }
+        });
+        ui->update_func = [this, i]() -> bool {
+            auto v = entity.getComponent<PlayerControl>();
+            return v && v->allowed_positions.has(CrewPosition(i));
+        };
+    }
 
     ADD_PAGE(tr("tweak-tab", "Reactor"), Reactor);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy:"), Reactor, energy);
@@ -1871,7 +2164,15 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_PAGE(tr("tweak-tab", "Scan probe launcher"), ScanProbeLauncher);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Stored probes:"), ScanProbeLauncher, stock);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max probe storage:"), ScanProbeLauncher, max);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Recharge progress:"), ScanProbeLauncher, recharge);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Probe restocking delay:"), ScanProbeLauncher, charge_time);
+
+    // AllowRadarLink component - marks entity as a linkable radar probe
+    ADD_PAGE(tr("tweak-tab", "Allow radar link"), AllowRadarLink);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Owner:"), AllowRadarLink, owner);
+
+    // ShareShortRangeRadar component - entity shares its short-range radar data
+    ADD_PAGE(tr("tweak-tab", "Share short-range radar"), ShareShortRangeRadar);
 
     ADD_PAGE(tr("tweak-tab", "Hacking"), HackingDevice);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Effectiveness:"), HackingDevice, effectiveness);
@@ -1891,13 +2192,374 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Force:"), Gravity, force);
     ADD_BOOL_TWEAK(tr("tweak-text", "Black hole damage:"), Gravity, damage);
 
+    // RadarTrace component - radar display settings for this entity
+    ADD_PAGE(tr("tweak-tab", "Radar trace"), RadarTrace);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Icon:"), RadarTrace, icon);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Min size:"), RadarTrace, min_size);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max size:"), RadarTrace, max_size);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), RadarTrace, radius);
+    ADD_COLOR_TWEAK(tr("tweak-text", "Color:"), RadarTrace, color);
+    ADD_LABEL(tr("tweak-text", "Flags:"));
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Rotate"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) {
+            auto v = entity.getComponent<RadarTrace>();
+            if (v) {
+                if (value) v->flags |= RadarTrace::Rotate;
+                else v->flags &= ~RadarTrace::Rotate;
+            }
+        });
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<RadarTrace>();
+            return v && (v->flags & RadarTrace::Rotate);
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Color by faction"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) {
+            auto v = entity.getComponent<RadarTrace>();
+            if (v) {
+                if (value) v->flags |= RadarTrace::ColorByFaction;
+                else v->flags &= ~RadarTrace::ColorByFaction;
+            }
+        });
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<RadarTrace>();
+            return v && (v->flags & RadarTrace::ColorByFaction);
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Arrow if not scanned"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) {
+            auto v = entity.getComponent<RadarTrace>();
+            if (v) {
+                if (value) v->flags |= RadarTrace::ArrowIfNotScanned;
+                else v->flags &= ~RadarTrace::ArrowIfNotScanned;
+            }
+        });
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<RadarTrace>();
+            return v && (v->flags & RadarTrace::ArrowIfNotScanned);
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Blend add"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) {
+            auto v = entity.getComponent<RadarTrace>();
+            if (v) {
+                if (value) v->flags |= RadarTrace::BlendAdd;
+                else v->flags &= ~RadarTrace::BlendAdd;
+            }
+        });
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<RadarTrace>();
+            return v && (v->flags & RadarTrace::BlendAdd);
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Long range"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) {
+            auto v = entity.getComponent<RadarTrace>();
+            if (v) {
+                if (value) v->flags |= RadarTrace::LongRange;
+                else v->flags &= ~RadarTrace::LongRange;
+            }
+        });
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<RadarTrace>();
+            return v && (v->flags & RadarTrace::LongRange);
+        };
+    }
+
+    // RawRadarSignatureInfo component - raw radar signature values
+    ADD_PAGE(tr("tweak-tab", "Raw radar signature"), RawRadarSignatureInfo);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Gravity:"), RawRadarSignatureInfo, gravity);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Electrical:"), RawRadarSignatureInfo, electrical);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Biological:"), RawRadarSignatureInfo, biological);
+
+    // DynamicRadarSignatureInfo component - live radar signature values
+    ADD_PAGE(tr("tweak-tab", "Dynamic radar signature"), DynamicRadarSignatureInfo);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Gravity:"), DynamicRadarSignatureInfo, gravity);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Electrical:"), DynamicRadarSignatureInfo, electrical);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Biological:"), DynamicRadarSignatureInfo, biological);
+
+    // RadarLink component - entity is linked via radar probe
+    ADD_PAGE(tr("tweak-tab", "Radar link"), RadarLink);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Linked entity:"), RadarLink, linked_entity);
+
+    // MissileFlight component - in-flight missile parameters
+    ADD_PAGE(tr("tweak-tab", "Missile flight"), MissileFlight);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), MissileFlight, speed);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Timeout:"), MissileFlight, timeout);
+
+    // MissileHoming component - homing guidance parameters
+    ADD_PAGE(tr("tweak-tab", "Missile homing"), MissileHoming);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Turn rate:"), MissileHoming, turn_rate);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), MissileHoming, range);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Target:"), MissileHoming, target);
+
+    // ExplodeOnTouch component - explosion triggered on collision
+    ADD_PAGE(tr("tweak-tab", "Explode on touch"), ExplodeOnTouch);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Damage at center:"), ExplodeOnTouch, damage_at_center);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Damage at edge:"), ExplodeOnTouch, damage_at_edge);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Blast range:"), ExplodeOnTouch, blast_range);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Owner:"), ExplodeOnTouch, owner);
+    ADD_ENUM_TWEAK(tr("tweak-text", "Damage type:"), ExplodeOnTouch, damage_type,
+        static_cast<int>(DamageType::Energy), static_cast<int>(DamageType::EMP), damageTypeToString);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Explosion SFX:"), ExplodeOnTouch, explosion_sfx);
+
+    // ExplodeOnTimeout component - marker only, no properties
+    ADD_PAGE(tr("tweak-tab", "Explode on timeout"), ExplodeOnTimeout);
+
+    // DelayedExplodeOnTouch component - delayed explosion on collision
+    ADD_PAGE(tr("tweak-tab", "Delayed explode on touch"), DelayedExplodeOnTouch);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Damage at center:"), DelayedExplodeOnTouch, damage_at_center);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Damage at edge:"), DelayedExplodeOnTouch, damage_at_edge);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Blast range:"), DelayedExplodeOnTouch, blast_range);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Owner:"), DelayedExplodeOnTouch, owner);
+    ADD_ENUM_TWEAK(tr("tweak-text", "Damage type:"), DelayedExplodeOnTouch, damage_type,
+        static_cast<int>(DamageType::Energy), static_cast<int>(DamageType::EMP), damageTypeToString);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Explosion SFX:"), DelayedExplodeOnTouch, explosion_sfx);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Trigger holdoff delay:"), DelayedExplodeOnTouch, trigger_holdoff_delay);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Delay:"), DelayedExplodeOnTouch, delay);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Triggered:"), DelayedExplodeOnTouch, triggered);
+
+    // ConstantParticleEmitter component - continuous particle emission
+    ADD_PAGE(tr("tweak-tab", "Particle emitter"), ConstantParticleEmitter);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Interval:"), ConstantParticleEmitter, interval);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Delay:"), ConstantParticleEmitter, delay);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Travel random range:"), ConstantParticleEmitter, travel_random_range);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Start size:"), ConstantParticleEmitter, start_size);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "End size:"), ConstantParticleEmitter, end_size);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Life time:"), ConstantParticleEmitter, life_time);
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Start color:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto x_ui = new GuiTextTweak(row);
+        x_ui->update_func = [this]() -> string { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) return string(v->start_color.x, 3); return ""; };
+        x_ui->callback([this](string t) { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) v->start_color.x = t.toFloat(); });
+        auto y_ui = new GuiTextTweak(row);
+        y_ui->update_func = [this]() -> string { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) return string(v->start_color.y, 3); return ""; };
+        y_ui->callback([this](string t) { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) v->start_color.y = t.toFloat(); });
+        auto z_ui = new GuiTextTweak(row);
+        z_ui->update_func = [this]() -> string { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) return string(v->start_color.z, 3); return ""; };
+        z_ui->callback([this](string t) { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) v->start_color.z = t.toFloat(); });
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "End color:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto x_ui = new GuiTextTweak(row);
+        x_ui->update_func = [this]() -> string { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) return string(v->end_color.x, 3); return ""; };
+        x_ui->callback([this](string t) { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) v->end_color.x = t.toFloat(); });
+        auto y_ui = new GuiTextTweak(row);
+        y_ui->update_func = [this]() -> string { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) return string(v->end_color.y, 3); return ""; };
+        y_ui->callback([this](string t) { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) v->end_color.y = t.toFloat(); });
+        auto z_ui = new GuiTextTweak(row);
+        z_ui->update_func = [this]() -> string { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) return string(v->end_color.z, 3); return ""; };
+        z_ui->callback([this](string t) { auto v = entity.getComponent<ConstantParticleEmitter>(); if (v) v->end_color.z = t.toFloat(); });
+    }
+
+    // MeshRenderComponent - 3D mesh rendering
+    ADD_PAGE(tr("tweak-tab", "Mesh render"), MeshRenderComponent);
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Mesh:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string { auto v = entity.getComponent<MeshRenderComponent>(); if (v) return v->mesh.name; return ""; };
+        ui->callback([this](string text) { auto v = entity.getComponent<MeshRenderComponent>(); if (v) v->mesh.name = text; });
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Texture:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string { auto v = entity.getComponent<MeshRenderComponent>(); if (v) return v->texture.name; return ""; };
+        ui->callback([this](string text) { auto v = entity.getComponent<MeshRenderComponent>(); if (v) v->texture.name = text; });
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Specular texture:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string { auto v = entity.getComponent<MeshRenderComponent>(); if (v) return v->specular_texture.name; return ""; };
+        ui->callback([this](string text) { auto v = entity.getComponent<MeshRenderComponent>(); if (v) v->specular_texture.name = text; });
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Illumination texture:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string { auto v = entity.getComponent<MeshRenderComponent>(); if (v) return v->illumination_texture.name; return ""; };
+        ui->callback([this](string text) { auto v = entity.getComponent<MeshRenderComponent>(); if (v) v->illumination_texture.name = text; });
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Normal texture:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string { auto v = entity.getComponent<MeshRenderComponent>(); if (v) return v->normal_texture.name; return ""; };
+        ui->callback([this](string text) { auto v = entity.getComponent<MeshRenderComponent>(); if (v) v->normal_texture.name = text; });
+    }
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Scale:"), MeshRenderComponent, scale);
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Mesh offset:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto x_ui = new GuiTextTweak(row);
+        x_ui->update_func = [this]() -> string { auto v = entity.getComponent<MeshRenderComponent>(); if (v) return string(v->mesh_offset.x, 3); return ""; };
+        x_ui->callback([this](string t) { auto v = entity.getComponent<MeshRenderComponent>(); if (v) v->mesh_offset.x = t.toFloat(); });
+        auto y_ui = new GuiTextTweak(row);
+        y_ui->update_func = [this]() -> string { auto v = entity.getComponent<MeshRenderComponent>(); if (v) return string(v->mesh_offset.y, 3); return ""; };
+        y_ui->callback([this](string t) { auto v = entity.getComponent<MeshRenderComponent>(); if (v) v->mesh_offset.y = t.toFloat(); });
+        auto z_ui = new GuiTextTweak(row);
+        z_ui->update_func = [this]() -> string { auto v = entity.getComponent<MeshRenderComponent>(); if (v) return string(v->mesh_offset.z, 3); return ""; };
+        z_ui->callback([this](string t) { auto v = entity.getComponent<MeshRenderComponent>(); if (v) v->mesh_offset.z = t.toFloat(); });
+    }
+
+    // EngineEmitter component - engine particle effects
+    ADD_PAGE(tr("tweak-tab", "Engine emitter"), EngineEmitter);
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 210)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Emitters:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 210);
+        auto ui = new GuiEngineEmittersTweak(row);
+        ui->update_func = [this]() -> std::vector<EngineEmitter::Emitter> {
+            auto v = entity.getComponent<EngineEmitter>();
+            if (v) return v->emitters;
+            return {};
+        };
+        ui->on_add = [this](const EngineEmitter::Emitter& e) {
+            auto v = entity.getComponent<EngineEmitter>();
+            if (v) {
+                v->emitters.push_back(e);
+                v->emitters_dirty = true;
+            }
+        };
+        ui->on_remove = [this](int index) {
+            auto v = entity.getComponent<EngineEmitter>();
+            if (v && index >= 0 && index < static_cast<int>(v->emitters.size())) {
+                v->emitters.erase(v->emitters.begin() + index);
+                v->emitters_dirty = true;
+            }
+        };
+    }
+
+    // BillboardRenderer component - billboard sprite rendering
+    ADD_PAGE(tr("tweak-tab", "Billboard renderer"), BillboardRenderer);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Texture:"), BillboardRenderer, texture);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Size:"), BillboardRenderer, size);
+
+    // NebulaRenderer component - nebula cloud rendering
+    ADD_PAGE(tr("tweak-tab", "Nebula renderer"), NebulaRenderer);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Render range:"), NebulaRenderer, render_range);
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 150)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Clouds:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 150);
+        auto ui = new GuiNebulaCloudsTweak(row);
+        ui->update_func = [this]() -> std::vector<NebulaRenderer::Cloud> {
+            auto v = entity.getComponent<NebulaRenderer>();
+            if (v) return v->clouds;
+            return {};
+        };
+        ui->on_add = [this](const NebulaRenderer::Cloud& c) {
+            auto v = entity.getComponent<NebulaRenderer>();
+            if (v) {
+                v->clouds.push_back(c);
+                v->clouds_dirty = true;
+            }
+        };
+        ui->on_remove = [this](int index) {
+            auto v = entity.getComponent<NebulaRenderer>();
+            if (v && index >= 0 && index < static_cast<int>(v->clouds.size())) {
+                v->clouds.erase(v->clouds.begin() + index);
+                v->clouds_dirty = true;
+            }
+        };
+    }
+
+    // PlanetRender component - planet rendering
+    ADD_PAGE(tr("tweak-tab", "Planet render"), PlanetRender);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Size:"), PlanetRender, size);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Cloud size:"), PlanetRender, cloud_size);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Atmosphere size:"), PlanetRender, atmosphere_size);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Distance from movement plane:"), PlanetRender, distance_from_movement_plane);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Texture:"), PlanetRender, texture);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Cloud texture:"), PlanetRender, cloud_texture);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Atmosphere texture:"), PlanetRender, atmosphere_texture);
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Atmosphere color:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto x_ui = new GuiTextTweak(row);
+        x_ui->update_func = [this]() -> string { auto v = entity.getComponent<PlanetRender>(); if (v) return string(v->atmosphere_color.x, 3); return ""; };
+        x_ui->callback([this](string t) { auto v = entity.getComponent<PlanetRender>(); if (v) v->atmosphere_color.x = t.toFloat(); });
+        auto y_ui = new GuiTextTweak(row);
+        y_ui->update_func = [this]() -> string { auto v = entity.getComponent<PlanetRender>(); if (v) return string(v->atmosphere_color.y, 3); return ""; };
+        y_ui->callback([this](string t) { auto v = entity.getComponent<PlanetRender>(); if (v) v->atmosphere_color.y = t.toFloat(); });
+        auto z_ui = new GuiTextTweak(row);
+        z_ui->update_func = [this]() -> string { auto v = entity.getComponent<PlanetRender>(); if (v) return string(v->atmosphere_color.z, 3); return ""; };
+        z_ui->callback([this](string t) { auto v = entity.getComponent<PlanetRender>(); if (v) v->atmosphere_color.z = t.toFloat(); });
+    }
+
+    // ExplosionEffect component - in-progress explosion visual
+    ADD_PAGE(tr("tweak-tab", "Explosion effect"), ExplosionEffect);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Lifetime:"), ExplosionEffect, lifetime);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Size:"), ExplosionEffect, size);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Radar:"), ExplosionEffect, radar);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Electrical:"), ExplosionEffect, electrical);
+
     for(GuiTweakPage* page : pages)
     {
         page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
     }
 
-    pages[0]->show();
-    component_list->setSelectionIndex(0);
+    component_groups = {
+        {tr("tweak-group", "Core"), {0, 1}},
+        {tr("tweak-group", "Identity"), {2, 3, 18}},
+        {tr("tweak-group", "Movement"), {6, 7, 8, 14, 15, 19, 24}},
+        {tr("tweak-group", "AI & Targeting"), {16, 25, 26}},
+        {tr("tweak-group", "Combat"), {5, 13, 9, 10, 11, 12, 46, 45, 27}},
+        {tr("tweak-group", "Projectiles"), {53, 54, 55, 56, 57}},
+        {tr("tweak-group", "Ship systems"), {37, 4}},
+        {tr("tweak-group", "Player"), {36, 29, 30, 31, 23}},
+        {tr("tweak-group", "Sensors"), {38, 39, 49, 50, 51, 42, 43, 52, 44}},
+        {tr("tweak-group", "Comms & Docking"), {40, 41, 34, 35}},
+        {tr("tweak-group", "Countermeasures"), {47, 21}},
+        {tr("tweak-group", "World"), {22, 48, 17}},
+        {tr("tweak-group", "Rendering"), {59, 60, 61, 62, 63, 64, 58}},
+        {tr("tweak-group", "Scripting"), {32, 33, 28, 20}},
+    };
+    showGroups();
 
     (new GuiButton(this, "CLOSE_BUTTON", tr("button", "Close"), [this]() {
         hide();
@@ -1910,20 +2572,59 @@ void GuiEntityTweak::open(sp::ecs::Entity e, string select_component)
     for(auto page : pages)
         page->open(e);
 
-    // If a specific component was requested, select it
-    if (!select_component.empty()) {
-        for(int i = 0; i < component_list->entryCount(); i++) {
-            if (component_list->getEntryName(i).find(select_component) != std::string::npos) {
-                component_list->setSelectionIndex(i);
-                for(auto page : pages)
-                    page->hide();
-                pages[i]->show();
-                break;
+    if (!select_component.empty())
+    {
+        for (int g = 0; g < (int)component_groups.size(); g++)
+        {
+            for (int ci = 0; ci < (int)component_groups[g].page_indices.size(); ci++)
+            {
+                int pi = component_groups[g].page_indices[ci];
+                if (page_labels[pi].find(select_component) != -1)
+                {
+                    showGroupComponents(g);
+                    component_list->setSelectionIndex(ci + 1);
+                    for (auto page : pages)
+                        page->hide();
+                    pages[pi]->show();
+                    show();
+                    return;
+                }
             }
         }
     }
 
+    showGroups();
     show();
+}
+
+void GuiEntityTweak::showGroups()
+{
+    in_group_view = true;
+    current_group_index = -1;
+    for (auto page : pages)
+        page->hide();
+    component_list->clear();
+    for (auto& group : component_groups)
+        component_list->addEntry(group.name, "");
+    component_list->setSelectionIndex(0);
+}
+
+void GuiEntityTweak::showGroupComponents(int group_index)
+{
+    in_group_view = false;
+    current_group_index = group_index;
+    for (auto page : pages)
+        page->hide();
+    component_list->clear();
+    component_list->addEntry(tr("tweak-nav", "\u2190 Back"), "");
+    auto& group = component_groups[group_index];
+    for (int pi : group.page_indices)
+        component_list->addEntry(page_labels[pi], "");
+    if (!group.page_indices.empty())
+    {
+        component_list->setSelectionIndex(1);
+        pages[group.page_indices[0]]->show();
+    }
 }
 
 GuiTweakPage::GuiTweakPage(GuiContainer* owner)
