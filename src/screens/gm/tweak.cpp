@@ -15,6 +15,7 @@
 #include "components/hacking.h"
 #include "components/hull.h"
 #include "components/impulse.h"
+#include "components/internalrooms.h"
 #include "components/jumpdrive.h"
 #include "components/lifetime.h"
 #include "components/maneuveringthrusters.h"
@@ -837,6 +838,174 @@ private:
     int selected_index = -1;
 };
 
+// Widget for editing std::vector<InternalRooms::Room>
+class GuiRoomVectorTweak : public GuiElement {
+public:
+    GuiRoomVectorTweak(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 150);
+        setAttribute("layout", "vertical");
+
+        item_list = new GuiListbox(this, "", [this](int index, string value) {
+            selected_index = index;
+        });
+        item_list
+            ->setTextSize(18.0f)
+            ->setButtonHeight(20.0f)
+            ->setSize(GuiElement::GuiSizeMax, 90);
+
+        auto pos_size_row = new GuiElement(this, "");
+        pos_size_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+
+        pos_x_entry = new GuiTextEntry(pos_size_row, "", "");
+        pos_x_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        pos_y_entry = new GuiTextEntry(pos_size_row, "", "");
+        pos_y_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        size_x_entry = new GuiTextEntry(pos_size_row, "", "");
+        size_x_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        size_y_entry = new GuiTextEntry(pos_size_row, "", "");
+        size_y_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        auto sys_row = new GuiElement(this, "");
+        sys_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+
+        system_selector = new GuiSelector(sys_row, "ROOM_SYSTEM_SEL", nullptr);
+        system_selector->addEntry(tr("tweak-room", "None"), "-1");
+        for(int i = 0; i < ShipSystem::COUNT; i++)
+            system_selector->addEntry(getLocaleSystemName(static_cast<ShipSystem::Type>(i)), string(i));
+        system_selector->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        system_selector->setSelectionIndex(0);
+
+        auto add_button = new GuiButton(sys_row, "", tr("tweak-button", "Add"), [this]() {
+            if (on_add) {
+                InternalRooms::Room room;
+                room.position = glm::ivec2(pos_x_entry->getText().toInt(), pos_y_entry->getText().toInt());
+                room.size = glm::ivec2(size_x_entry->getText().toInt(), size_y_entry->getText().toInt());
+                room.system = static_cast<ShipSystem::Type>(system_selector->getSelectionIndex() - 1);
+                on_add(room);
+            }
+        });
+        add_button->setTextSize(18)->setSize(60, 30);
+
+        auto del_button = new GuiButton(sys_row, "", tr("tweak-button", "Delete"), [this]() {
+            if (selected_index >= 0 && selected_index < item_list->entryCount() && on_remove) {
+                on_remove(selected_index);
+                selected_index = -1;
+            }
+        });
+        del_button->setTextSize(18)->setSize(60, 30);
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            auto current_vector = update_func();
+            if (current_vector.size() != static_cast<size_t>(item_list->entryCount())) {
+                item_list->setOptions({});
+                for(size_t i = 0; i < current_vector.size(); i++) {
+                    const auto& room = current_vector[i];
+                    const string display = tr("tweak-room", "({position_x},{position_y} {size_w}x{size_h}) {system_name}").format({
+                        {"position_x", string(room.position.x)},
+                        {"position_y", string(room.position.y)},
+                        {"size_w", string(room.size.x)},
+                        {"size_h", string(room.size.y)},
+                        {"system_name", room.system == ShipSystem::Type::None ? "-" : getLocaleSystemName(room.system)}
+                    });
+                    item_list->addEntry(display, string(int(i)));
+                }
+            }
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<std::vector<InternalRooms::Room>()> update_func;
+    std::function<void(const InternalRooms::Room&)> on_add;
+    std::function<void(int)> on_remove;
+
+private:
+    GuiListbox* item_list;
+    GuiTextEntry* pos_x_entry;
+    GuiTextEntry* pos_y_entry;
+    GuiTextEntry* size_x_entry;
+    GuiTextEntry* size_y_entry;
+    GuiSelector* system_selector;
+    int selected_index = -1;
+};
+
+// Widget for editing std::vector<InternalRooms::Door>
+class GuiDoorVectorTweak : public GuiElement {
+public:
+    GuiDoorVectorTweak(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 120);
+        setAttribute("layout", "vertical");
+
+        item_list = new GuiListbox(this, "", [this](int index, string value) {
+            selected_index = index;
+        });
+        item_list
+            ->setTextSize(18.0f)
+            ->setButtonHeight(20.0f)
+            ->setSize(GuiElement::GuiSizeMax, 90);
+
+        auto input_row = new GuiElement(this, "");
+        input_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+
+        pos_x_entry = new GuiTextEntry(input_row, "", "");
+        pos_x_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+        pos_y_entry = new GuiTextEntry(input_row, "", "");
+        pos_y_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        horizontal_toggle = new GuiToggleButton(input_row, "DOOR_HORIZ", tr("tweak-door", "Horizontal"), nullptr);
+        horizontal_toggle->setTextSize(18)->setSize(80, 30);
+
+        auto add_button = new GuiButton(input_row, "", tr("tweak-button", "Add"), [this]() {
+            if (on_add) {
+                InternalRooms::Door door;
+                door.position = glm::ivec2(pos_x_entry->getText().toInt(), pos_y_entry->getText().toInt());
+                door.horizontal = horizontal_toggle->getValue();
+                on_add(door);
+            }
+        });
+        add_button->setTextSize(18)->setSize(60, 30);
+
+        auto del_button = new GuiButton(input_row, "", tr("tweak-button", "Delete"), [this]() {
+            if (selected_index >= 0 && selected_index < item_list->entryCount() && on_remove) {
+                on_remove(selected_index);
+                selected_index = -1;
+            }
+        });
+        del_button->setTextSize(18)->setSize(60, 30);
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            auto current_vector = update_func();
+            if (current_vector.size() != static_cast<size_t>(item_list->entryCount())) {
+                item_list->setOptions({});
+                for(size_t i = 0; i < current_vector.size(); i++) {
+                    const auto& door = current_vector[i];
+                    const string display = tr("tweak-door", "({position_x},{position_y}) {orientation}").format({
+                        {"position_x", string(door.position.x)},
+                        {"position_y", string(door.position.y)},
+                        {"orientation", door.horizontal ? tr("tweak-door", "Horizontal") : tr("tweak-door", "Vertical")}
+                    });
+                    item_list->addEntry(display, string(int(i)));
+                }
+            }
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<std::vector<InternalRooms::Door>()> update_func;
+    std::function<void(const InternalRooms::Door&)> on_add;
+    std::function<void(int)> on_remove;
+
+private:
+    GuiListbox* item_list;
+    GuiTextEntry* pos_x_entry;
+    GuiTextEntry* pos_y_entry;
+    GuiToggleButton* horizontal_toggle;
+    int selected_index = -1;
+};
+
 
 #define ADD_PAGE(LABEL, COMPONENT) \
     new_page = new GuiTweakPage(content); \
@@ -1218,6 +1387,60 @@ private:
         }; \
     } while(0)
 
+#define ADD_ROOM_VECTOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 150)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 150); \
+        auto ui = new GuiRoomVectorTweak(row); \
+        ui->update_func = [this]() -> std::vector<InternalRooms::Room> { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return {}; \
+        }; \
+        ui->on_add = [this](const InternalRooms::Room& room) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) { \
+                v->VALUE.push_back(room); \
+                v->VALUE##_dirty = true; \
+            } \
+        }; \
+        ui->on_remove = [this](int index) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v && index >= 0 && index < static_cast<int>(v->VALUE.size())) { \
+                v->VALUE.erase(v->VALUE.begin() + index); \
+                v->VALUE##_dirty = true; \
+            } \
+        }; \
+    } while(0)
+
+#define ADD_DOOR_VECTOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 120)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 120); \
+        auto ui = new GuiDoorVectorTweak(row); \
+        ui->update_func = [this]() -> std::vector<InternalRooms::Door> { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return {}; \
+        }; \
+        ui->on_add = [this](const InternalRooms::Door& door) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) { \
+                v->VALUE.push_back(door); \
+                v->VALUE##_dirty = true; \
+            } \
+        }; \
+        ui->on_remove = [this](int index) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v && index >= 0 && index < static_cast<int>(v->VALUE.size())) { \
+                v->VALUE.erase(v->VALUE.begin() + index); \
+                v->VALUE##_dirty = true; \
+            } \
+        }; \
+    } while(0)
+
 GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
 {
@@ -1481,6 +1704,12 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     // TODO: Replace with multiline text editor widget - single-line field can't handle linebreaks properly
     ADD_TEXT_TWEAK(tr("tweak-text", "Description:"), Database, description);
     ADD_TEXT_TWEAK(tr("tweak-text", "Image:"), Database, image);
+
+    // InternalRooms component - ship interior layout with rooms and doors
+    ADD_PAGE(tr("tweak-tab", "Internal rooms"), InternalRooms);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Auto repair:"), InternalRooms, auto_repair_enabled);
+    ADD_ROOM_VECTOR_TWEAK(tr("tweak-text", "Rooms:"), InternalRooms, rooms);
+    ADD_DOOR_VECTOR_TWEAK(tr("tweak-text", "Doors:"), InternalRooms, doors);
 
     // DockingBay component - allows other entities to dock with this entity
     ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
