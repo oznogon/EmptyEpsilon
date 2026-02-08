@@ -33,8 +33,10 @@
 #include "components/rendering.h"
 #include "components/scanning.h"
 #include "components/selfdestruct.h"
+#include "components/sfx.h"
 #include "components/shields.h"
 #include "components/spin.h"
+#include "components/target.h"
 #include "components/warpdrive.h"
 #include "components/zone.h"
 
@@ -1710,6 +1712,29 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_PAGE(tr("tweak-tab", "Move to"), MoveTo);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), MoveTo, speed);
     ADD_VECTOR2_TWEAK(tr("tweak-text", "Target position:"), MoveTo, target);
+
+    // AvoidObject component - entity is avoided by pathfinding AI
+    ADD_PAGE(tr("tweak-tab", "Avoid object"), AvoidObject);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Avoidance range:"), AvoidObject, range);
+
+    // DelayedAvoidObject component - entity becomes avoidable after delay
+    ADD_PAGE(tr("tweak-tab", "Delayed avoid object"), DelayedAvoidObject);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Activation delay (seconds):"), DelayedAvoidObject, delay);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Avoidance range:"), DelayedAvoidObject, range);
+
+    // Target component - entity reference for targeting systems
+    ADD_PAGE(tr("tweak-tab", "Target"), Target);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Target entity:"), Target, entity);
+
+    // Sfx component - plays a sound effect once
+    /* Unclear how to get this to work, since the sound plays immediately after
+       being added and toggling the played property doesn't seem to replay it.
+    ADD_PAGE(tr("tweak-tab", "Sound effect"), Sfx);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Sound file:"), Sfx, sound);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Volume:"), Sfx, volume);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Pitch:"), Sfx, pitch);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Played:"), Sfx, played);
+    */
 
     // InternalRooms component - ship interior layout with rooms and doors
     ADD_PAGE(tr("tweak-tab", "Internal rooms"), InternalRooms);
