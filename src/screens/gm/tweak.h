@@ -7,6 +7,7 @@
 
 class GuiButton;
 class GuiListbox;
+class GuiTextEntry;
 class GuiTweakPage : public GuiElement
 {
 public:
@@ -35,6 +36,7 @@ public:
 private:
     void showGroups();
     void showGroupComponents(int group_index);
+    void showSearchResults(const string& query);
 
     struct ComponentGroup
     {
@@ -47,8 +49,11 @@ private:
     std::vector<GuiTweakPage*> pages;
     std::vector<string> page_labels;
     std::vector<ComponentGroup> component_groups;
+    GuiTextEntry* search_filter;
     GuiListbox* component_list;
+    std::vector<int> search_result_indices;
     bool in_group_view = true;
+    bool in_search_view = false;
     int current_group_index = -1;
 };
 
