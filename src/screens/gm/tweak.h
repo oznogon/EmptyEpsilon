@@ -6,6 +6,7 @@
 
 
 class GuiButton;
+class GuiListbox;
 class GuiTweakPage : public GuiElement
 {
 public:
@@ -29,12 +30,13 @@ class GuiEntityTweak : public GuiPanel
 public:
     GuiEntityTweak(GuiContainer* owner);
 
-    void open(sp::ecs::Entity target);
+    void open(sp::ecs::Entity target, string select_component = "");
 
 private:
     sp::ecs::Entity entity;
     GuiElement* content;
     std::vector<GuiTweakPage*> pages;
+    GuiListbox* component_list;
 };
 
 #endif//SCREEN_GM_TWEAK_H
