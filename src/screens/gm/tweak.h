@@ -1,13 +1,13 @@
-#ifndef SCREEN_GM_TWEAK_H
-#define SCREEN_GM_TWEAK_H
+#pragma once
 
 #include "gui/gui2_panel.h"
 #include "ecs/entity.h"
 
-
 class GuiButton;
 class GuiListbox;
+class GuiScrollText;
 class GuiTextEntry;
+
 class GuiTweakPage : public GuiElement
 {
 public:
@@ -22,6 +22,7 @@ public:
 
     GuiButton* add_remove_button;
     GuiElement* tweaks;
+    string description;
 
     sp::ecs::Entity entity;
 };
@@ -37,6 +38,7 @@ private:
     void showGroups();
     void showGroupComponents(int group_index);
     void showSearchResults(const string& query);
+    void showPageDescription(int page_index);
 
     struct ComponentGroup
     {
@@ -51,10 +53,9 @@ private:
     std::vector<ComponentGroup> component_groups;
     GuiTextEntry* search_filter;
     GuiListbox* component_list;
+    GuiScrollText* component_description;
     std::vector<int> search_result_indices;
     bool in_group_view = true;
     bool in_search_view = false;
     int current_group_index = -1;
 };
-
-#endif//SCREEN_GM_TWEAK_H
