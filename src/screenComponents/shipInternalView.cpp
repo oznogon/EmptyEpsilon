@@ -12,7 +12,13 @@ GuiShipInternalView::GuiShipInternalView(GuiContainer* owner, string id, float r
 GuiShipInternalView* GuiShipInternalView::setShip(sp::ecs::Entity ship)
 {
     if (viewing_ship == ship)
-        return this;
+    {
+        auto ir = ship.getComponent<InternalRooms>();
+        if (!ir || (!ir->rooms_dirty && !ir->doors_dirty))
+            return this;
+        // Room or door layout changed; force rebuild below.
+        viewing_ship = sp::ecs::Entity();
+    }
     viewing_ship = ship;
     if (room_container)
     {
@@ -57,6 +63,8 @@ GuiShipInternalView* GuiShipInternalView::setShip(sp::ecs::Entity ship)
         }
     }
     room_container->setSize(glm::vec2(max_size) * room_size);
+    ir->rooms_dirty = false;
+    ir->doors_dirty = false;
 
     return this;
 }
