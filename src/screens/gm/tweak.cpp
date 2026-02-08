@@ -21,6 +21,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/missile.h"
 #include "components/missiletubes.h"
+#include "components/moveto.h"
 #include "components/name.h"
 #include "components/orbit.h"
 #include "components/pickup.h"
@@ -1704,6 +1705,11 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     // TODO: Replace with multiline text editor widget - single-line field can't handle linebreaks properly
     ADD_TEXT_TWEAK(tr("tweak-text", "Description:"), Database, description);
     ADD_TEXT_TWEAK(tr("tweak-text", "Image:"), Database, image);
+
+    // MoveTo component - move entity to target location at fixed speed
+    ADD_PAGE(tr("tweak-tab", "Move to"), MoveTo);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), MoveTo, speed);
+    ADD_VECTOR2_TWEAK(tr("tweak-text", "Target position:"), MoveTo, target);
 
     // InternalRooms component - ship interior layout with rooms and doors
     ADD_PAGE(tr("tweak-tab", "Internal rooms"), InternalRooms);
