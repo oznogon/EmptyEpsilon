@@ -25,6 +25,7 @@
 #include "screenComponents/helpOverlay.h"
 
 #include "components/ai.h"
+#include "components/database.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_listbox.h"
@@ -147,6 +148,47 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         }
     });
     tweak_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
+
+    // Database Browser button and panel
+    auto database_browser_panel = new GuiPanel(this, "DATABASE_BROWSER");
+    database_browser_panel->setPosition(300, 100, sp::Alignment::TopLeft)->setSize(500, 600)->hide();
+    (new GuiLabel(database_browser_panel, "", tr("Database Entries"), 30))
+        ->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, 50);
+
+    auto db_listbox = new GuiListbox(database_browser_panel, "", [this, database_browser_panel](int index, string value) {
+        // Get all database entities
+        auto db_entities = sp::ecs::Query<Database>();
+        int current = 0;
+        for(auto [entity, db] : db_entities) {
+            if (current == index) {
+                tweak_dialog->open(entity, "Database");
+                database_browser_panel->hide();
+                return;
+            }
+            current++;
+        }
+    });
+    db_listbox->setPosition(10, 60, sp::Alignment::TopLeft)->setSize(480, 480);
+
+    (new GuiButton(database_browser_panel, "", tr("button", "Close"), [database_browser_panel]() {
+        database_browser_panel->hide();
+    }))->setPosition(10, -10, sp::Alignment::BottomLeft)->setSize(200, 50);
+
+    (new GuiButton(this, "DATABASE_BROWSER_BTN", tr("button", "Database"), [db_listbox, database_browser_panel]() {
+        // Populate listbox with all database entries
+        db_listbox->setOptions({});
+        for(auto [entity, db] : sp::ecs::Query<Database>()) {
+            string display_name = db.name.empty() ? "(unnamed)" : db.name;
+            // Show parent name if available
+            if (db.parent) {
+                if (auto parent_db = db.parent.getComponent<Database>()) {
+                    display_name = parent_db->name + " > " + display_name;
+                }
+            }
+            db_listbox->addEntry(display_name, entity.toString());
+        }
+        database_browser_panel->show();
+    }))->setPosition(280, -120, sp::Alignment::BottomLeft)->setSize(120, 50);
 
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", tr("button", "Hail ship"), [this]() {
         for(auto obj : targets.getTargets())
