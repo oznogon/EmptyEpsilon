@@ -2,6 +2,7 @@
 #include "tweak.h"
 #include "playerInfo.h"
 #include "components/collision.h"
+#include "components/database.h"
 #include "components/name.h"
 #include "components/ai.h"
 #include "ai/ai.h"
@@ -208,6 +209,83 @@ private:
             string label = callsign.callsign;
             if (auto type_name = entity.getComponent<TypeName>())
                 label = label + " (" + type_name->type_name + ")";
+            addEntry(label, getEntityKey(entity));
+        }
+
+        // Restore selection if entity still exists
+        if (!current_value.empty()) {
+            for(int i = 0; i < entryCount(); i++) {
+                if (getEntryValue(i) == current_value) {
+                    setSelectionIndex(i);
+                    return;
+                }
+            }
+        }
+        setSelectionIndex(0); // Default to None
+    }
+
+    string getEntityKey(sp::ecs::Entity entity) {
+        return entity.toString();
+    }
+};
+
+// Widget for selecting Database entities as parent (filtered to only Database entities)
+class GuiDatabaseParentPicker : public GuiSelector {
+public:
+    GuiDatabaseParentPicker(GuiContainer* owner, string id, GuiSelector::func_t callback)
+    : GuiSelector(owner, id, callback) {
+        setSize(GuiElement::GuiSizeMax, 30);
+        setTextSize(20);
+        addEntry(tr("tweak-entity", "(None)"), "");
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        updateEntityList();
+        if (update_func) {
+            auto entity = update_func();
+            if (!entity) {
+                setSelectionIndex(0); // None
+            } else {
+                // Find entity in list
+                string search_key = getEntityKey(entity);
+                for(int i = 0; i < entryCount(); i++) {
+                    if (getEntryValue(i) == search_key) {
+                        if (getSelectionIndex() != i)
+                            setSelectionIndex(i);
+                        break;
+                    }
+                }
+            }
+        }
+        GuiSelector::onDraw(target);
+    }
+    std::function<sp::ecs::Entity()> update_func;
+
+private:
+    float last_update_time = 0.0f;
+
+    void updateEntityList() {
+        // Update entity list every 1 second to avoid performance issues
+        if (engine->getElapsedTime() - last_update_time < 1.0f)
+            return;
+        last_update_time = engine->getElapsedTime();
+
+        int current_selection = getSelectionIndex();
+        string current_value = current_selection >= 0 ? getEntryValue(current_selection) : "";
+
+        // Clear all except "(None)" entry
+        while(entryCount() > 1)
+            removeEntry(entryCount() - 1);
+
+        // Add all Database entities
+        for(auto [entity, db] : sp::ecs::Query<Database>()) {
+            string label = db.name.empty() ? "(unnamed)" : db.name;
+            // Show parent name if available
+            if (db.parent) {
+                if (auto parent_db = db.parent.getComponent<Database>()) {
+                    label = parent_db->name + " > " + label;
+                }
+            }
             addEntry(label, getEntityKey(entity));
         }
 
@@ -685,6 +763,80 @@ private:
     int selected_index = -1;
 };
 
+// Widget for editing std::vector<Database::KeyValue>
+class GuiDatabaseKeyValueTweak : public GuiElement {
+public:
+    GuiDatabaseKeyValueTweak(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 180);
+        setAttribute("layout", "vertical");
+
+        // List of current key-value pairs
+        item_list = new GuiListbox(this, "", [this](int index, string value) {
+            selected_index = index;
+        });
+        item_list
+            ->setTextSize(18.0f)
+            ->setButtonHeight(20.0f)
+            ->setSize(GuiElement::GuiSizeMax, 120);
+
+        // Add new key-value controls
+        auto add_row = new GuiElement(this, "");
+        add_row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+
+        key_entry = new GuiTextEntry(add_row, "", "");
+        key_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        value_entry = new GuiTextEntry(add_row, "", "");
+        value_entry->setTextSize(18)->setSize(GuiElement::GuiSizeMax, 30);
+
+        auto add_button = new GuiButton(add_row, "", tr("tweak-button", "Add"), [this]() {
+            string key = key_entry->getText();
+            string value = value_entry->getText();
+            if (!key.empty() && on_add) {
+                on_add(key, value);
+                key_entry->setText("");
+                value_entry->setText("");
+            }
+        });
+        add_button->setTextSize(18)->setSize(60, 30);
+
+        auto del_button = new GuiButton(add_row, "", tr("tweak-button", "Delete"), [this]() {
+            if (selected_index >= 0 && selected_index < item_list->entryCount() && on_remove) {
+                on_remove(selected_index);
+                selected_index = -1;
+            }
+        });
+        del_button->setTextSize(18)->setSize(60, 30);
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            auto current_vector = update_func();
+
+            // Rebuild list if vector size changed
+            if (current_vector.size() != static_cast<size_t>(item_list->entryCount())) {
+                item_list->setOptions({});
+                for(size_t i = 0; i < current_vector.size(); i++) {
+                    const auto& kv = current_vector[i];
+                    string display = kv.key + " = " + kv.value;
+                    item_list->addEntry(display, string(int(i)));
+                }
+            }
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<std::vector<Database::KeyValue>()> update_func;
+    std::function<void(const string&, const string&)> on_add;
+    std::function<void(int)> on_remove;  // Remove by index
+
+private:
+    GuiListbox* item_list;
+    GuiTextEntry* key_entry;
+    GuiTextEntry* value_entry;
+    int selected_index = -1;
+};
+
 
 #define ADD_PAGE(LABEL, COMPONENT) \
     new_page = new GuiTweakPage(content); \
@@ -863,6 +1015,22 @@ private:
         }; \
     } while(0)
 
+#define ADD_DATABASE_PARENT_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiDatabaseParentPicker(row, "DATABASE_PARENT_PICKER", [this](int index, string value) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) v->VALUE = value.empty() ? sp::ecs::Entity() : sp::ecs::Entity::fromString(value); \
+        }); \
+        ui->update_func = [this]() -> sp::ecs::Entity { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return sp::ecs::Entity(); \
+        }; \
+    } while(0)
+
 #define ADD_VECTOR2_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
@@ -1019,6 +1187,33 @@ private:
             if (v && index >= 0 && index < static_cast<int>(v->VALUE.size())) { \
                 v->VALUE.erase(v->VALUE.begin() + index); \
                 v->updateTriangles(); \
+            } \
+        }; \
+    } while(0)
+
+#define ADD_DATABASE_KEYVALUE_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 180)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 180); \
+        auto ui = new GuiDatabaseKeyValueTweak(row); \
+        ui->update_func = [this]() -> std::vector<Database::KeyValue> { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) return v->VALUE; \
+            return {}; \
+        }; \
+        ui->on_add = [this](const string& key, const string& value) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v) { \
+                v->VALUE.push_back({key, value}); \
+                v->VALUE##_dirty = true; \
+            } \
+        }; \
+        ui->on_remove = [this](int index) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v && index >= 0 && index < static_cast<int>(v->VALUE.size())) { \
+                v->VALUE.erase(v->VALUE.begin() + index); \
+                v->VALUE##_dirty = true; \
             } \
         }; \
     } while(0)
@@ -1277,6 +1472,15 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Skybox fade distance:"), Zone, skybox_fade_distance);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), Zone, radius);
     ADD_VEC2_VECTOR_TWEAK(tr("tweak-text", "Outline points:"), Zone, outline);
+
+    // Database component - science database entries
+    ADD_PAGE(tr("tweak-tab", "Database"), Database);
+    ADD_DATABASE_PARENT_TWEAK(tr("tweak-text", "Parent entry:"), Database, parent);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Name:"), Database, name);
+    ADD_DATABASE_KEYVALUE_TWEAK(tr("tweak-text", "Key-value pairs:"), Database, key_values);
+    // TODO: Replace with multiline text editor widget - single-line field can't handle linebreaks properly
+    ADD_TEXT_TWEAK(tr("tweak-text", "Description:"), Database, description);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Image:"), Database, image);
 
     // DockingBay component - allows other entities to dock with this entity
     ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
