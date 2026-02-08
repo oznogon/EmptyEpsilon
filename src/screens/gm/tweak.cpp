@@ -692,7 +692,7 @@ private:
     new_page->add_component = [](sp::ecs::Entity e) { e.addComponent<COMPONENT>(); }; \
     new_page->remove_component = [](sp::ecs::Entity e) { e.removeComponent<COMPONENT>(); }; \
     pages.push_back(new_page); \
-    list->addEntry(LABEL, "");
+    component_list->addEntry(LABEL, "");
 #define ADD_LABEL(LABEL) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
@@ -1033,15 +1033,15 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     content = new GuiElement(this, "GM_TWEAK_DIALOG_CONTENT");
     content->setSize(GuiElement::GuiSizeMax,GuiElement::GuiSizeMax)->setAttribute("layout", "horizontal");
 
-    GuiListbox* list = new GuiListbox(content, "", [this](int index, string value)
+    component_list = new GuiListbox(content, "", [this](int index, string value)
     {
         for(GuiTweakPage* page : pages)
             page->hide();
         pages[index]->show();
     });
 
-    list->setSize(300, GuiElement::GuiSizeMax);
-    list->setPosition(0, 0, sp::Alignment::TopLeft);
+    component_list->setSize(300, GuiElement::GuiSizeMax);
+    component_list->setPosition(0, 0, sp::Alignment::TopLeft);
 
     GuiTweakPage* new_page;
     GuiVectorTweak* vector_selector;
@@ -1235,7 +1235,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         LOG(Warning, "AIController component removal not supported via Tweaks dialog");
     };
     pages.push_back(new_page);
-    list->addEntry(tr("tweak-tab", "AI controller"), "");
+    component_list->addEntry(tr("tweak-tab", "AI controller"), "");
 
     ADD_ENUM_TWEAK(tr("tweak-text", "Orders:"), AIController, orders,
         static_cast<int>(AIOrder::Idle), static_cast<int>(AIOrder::Attack), getAIOrderString);
@@ -1433,18 +1433,32 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     }
 
     pages[0]->show();
-    list->setSelectionIndex(0);
+    component_list->setSelectionIndex(0);
 
     (new GuiButton(this, "CLOSE_BUTTON", tr("button", "Close"), [this]() {
         hide();
     }))->setTextSize(20)->setPosition(10, -20, sp::Alignment::TopRight)->setSize(70, 30);
 }
 
-void GuiEntityTweak::open(sp::ecs::Entity e)
+void GuiEntityTweak::open(sp::ecs::Entity e, string select_component)
 {
     entity = e;
     for(auto page : pages)
         page->open(e);
+
+    // If a specific component was requested, select it
+    if (!select_component.empty()) {
+        for(int i = 0; i < component_list->entryCount(); i++) {
+            if (component_list->getEntryName(i).find(select_component) != std::string::npos) {
+                component_list->setSelectionIndex(i);
+                for(auto page : pages)
+                    page->hide();
+                pages[i]->show();
+                break;
+            }
+        }
+    }
+
     show();
 }
 
