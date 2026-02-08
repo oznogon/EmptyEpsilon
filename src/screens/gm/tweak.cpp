@@ -366,6 +366,55 @@ private:
     GuiTextEntry* y_input;
 };
 
+// Widget for editing a value and its maximum on a single row as "value / max"
+class GuiValueMaxTweak : public GuiElement {
+public:
+    GuiValueMaxTweak(GuiContainer* owner) : GuiElement(owner, "") {
+        setSize(GuiElement::GuiSizeMax, 30);
+        setAttribute("layout", "horizontal");
+
+        val_input = new GuiTextEntry(this, "", "");
+        val_input->setSize(GuiElement::GuiSizeMax, 30);
+        val_input->setTextSize(20);
+        val_input->callback([this](string text) {
+            if (val_callback) val_callback(text.toFloat());
+        });
+
+        auto sep = new GuiLabel(this, "", "/", 20);
+        sep->setSize(20, 30);
+
+        max_input = new GuiTextEntry(this, "", "");
+        max_input->setSize(GuiElement::GuiSizeMax, 30);
+        max_input->setTextSize(20);
+        max_input->callback([this](string text) {
+            if (max_callback) max_callback(text.toFloat());
+        });
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (val_update_func) {
+            float val = val_update_func();
+            if (val_input->getText().toFloat() != val)
+                val_input->setText(string(val, 1));
+        }
+        if (max_update_func) {
+            float max = max_update_func();
+            if (max_input->getText().toFloat() != max)
+                max_input->setText(string(max, 1));
+        }
+        GuiElement::onDraw(target);
+    }
+
+    std::function<float()> val_update_func;
+    std::function<float()> max_update_func;
+    std::function<void(float)> val_callback;
+    std::function<void(float)> max_callback;
+
+private:
+    GuiTextEntry* val_input;
+    GuiTextEntry* max_input;
+};
+
 // Widget for editing RGBA color values
 class GuiColorPicker : public GuiElement {
 public:
@@ -1389,6 +1438,17 @@ private:
             if (v) v->VALUE = val; \
         }; \
     } while(0)
+#define ADD_VALUE_MAX_TWEAK(LABEL, COMPONENT, VALUE, MAX_VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiValueMaxTweak(row); \
+        ui->val_update_func = [this]() -> float { auto v = entity.getComponent<COMPONENT>(); if (v) return float(v->VALUE); return 0.0f; }; \
+        ui->max_update_func = [this]() -> float { auto v = entity.getComponent<COMPONENT>(); if (v) return float(v->MAX_VALUE); return 0.0f; }; \
+        ui->val_callback = [this](float val) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = static_cast<decltype(v->VALUE)>(val); }; \
+        ui->max_callback = [this](float val) { auto v = entity.getComponent<COMPONENT>(); if (v) v->MAX_VALUE = static_cast<decltype(v->MAX_VALUE)>(val); }; \
+    } while(0)
 
 #define ADD_MISSILE_ARRAY_TWEAK(LABEL, COMPONENT, ARRAY, INDEX) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
@@ -1802,8 +1862,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto levels:"), Coolant, auto_levels);
 
     ADD_PAGE(tr("tweak-tab", "Hull"), Hull);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Current:"), Hull, current);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Hull, max);
+    ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Hull:"), Hull, current, max);
     ADD_BOOL_TWEAK(tr("tweak-text", "Allow destruction:"), Hull, allow_destruction);
 
     ADD_PAGE(tr("tweak-tab", "Impulse engine"), ImpulseEngine);
@@ -2144,8 +2203,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     }
 
     ADD_PAGE(tr("tweak-tab", "Reactor"), Reactor);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy:"), Reactor, energy);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max energy:"), Reactor, max_energy);
+    ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Energy:"), Reactor, energy, max_energy);
     ADD_BOOL_TWEAK(tr("tweak-text", "Explode on overload:"), Reactor, overload_explode);
     ADD_LABEL(tr("tweak-text", "Reactor system"));
     ADD_SHIP_SYSTEM_TWEAK(Reactor);
@@ -2162,8 +2220,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_PAGE(tr("tweak-tab", "Comms transmitter"), CommsTransmitter);
 
     ADD_PAGE(tr("tweak-tab", "Scan probe launcher"), ScanProbeLauncher);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Stored probes:"), ScanProbeLauncher, stock);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max probe storage:"), ScanProbeLauncher, max);
+    ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Probes:"), ScanProbeLauncher, stock, max);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Recharge progress:"), ScanProbeLauncher, recharge);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Probe restocking delay:"), ScanProbeLauncher, charge_time);
 
