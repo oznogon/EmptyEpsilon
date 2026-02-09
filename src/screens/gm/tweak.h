@@ -23,6 +23,7 @@ public:
     GuiButton* add_remove_button;
     GuiElement* tweaks;
     string description;
+    std::vector<std::function<void()>> apply_functions;
 
     sp::ecs::Entity entity;
 };
