@@ -34,4 +34,5 @@ public:
     // Define a width for the popup, but only if it's larger than the
     // GuiSelector's width,
     GuiSelector* setPopupWidth(float width);
+    GuiSelector* setButtonHeight(float height);
 };

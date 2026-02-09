@@ -142,7 +142,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
                 ));
                 popup_buttons[n]
                     ->setTextSize(text_size)
-                    ->setSize(GuiElement::GuiSizeMax, 50.0f);
+                    ->setSize(GuiElement::GuiSizeMax, button_height);
             }
             else
             {
