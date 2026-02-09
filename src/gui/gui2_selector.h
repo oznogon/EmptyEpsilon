@@ -11,6 +11,7 @@ class GuiSelector : public GuiEntryList
 {
 protected:
     float text_size = 30.0f;
+    float button_height = 50.0f;
     sp::Alignment text_alignment;
     GuiArrowButton* left;
     GuiArrowButton* right;
@@ -27,4 +28,5 @@ public:
     virtual void onFocusLost() override;
 
     GuiSelector* setTextSize(float size);
+    GuiSelector* setButtonHeight(float height);
 };

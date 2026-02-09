@@ -50,17 +50,24 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     if (!focus)
         popup->hide();
     float top = rect.position.y;
-    float height = entries.size() * 50;
+    float height = entries.size() * button_height;
     if (selection_index >= 0)
-        top -= selection_index * 50;
-    top = std::max(0.0f, top);
-    top = std::min(900.0f - height, top);
-    popup->setPosition(rect.position.x, top, sp::Alignment::TopLeft)->setSize(rect.size.x, height);
+        top -= selection_index * button_height;
+    top = std::clamp(top, 0.0f, 900.0f - height);
+    popup
+        ->setPosition(rect.position.x, top, sp::Alignment::TopLeft)
+        ->setSize(rect.size.x, height);
 }
 
 GuiSelector* GuiSelector::setTextSize(float size)
 {
     text_size = size;
+    return this;
+}
+
+GuiSelector* GuiSelector::setButtonHeight(float height)
+{
+    button_height = height;
     return this;
 }
 
@@ -83,20 +90,26 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
                     setSelectionIndex(n);
                     callback();
                 }));
-                popup_buttons[n]->setSize(GuiElement::GuiSizeMax, 50);
-                popup_buttons[n]->setTextSize(text_size);
-            }else{
-                popup_buttons[n]->setText(entries[n].name);
-                popup_buttons[n]->show();
+                popup_buttons[n]
+                    ->setTextSize(text_size)
+                    ->setSize(GuiElement::GuiSizeMax, button_height);
             }
-            popup_buttons[n]->setValue(int(n) == selection_index);
-            popup_buttons[n]->setPosition(0, n * 50, sp::Alignment::TopLeft);
+            else
+            {
+                popup_buttons[n]
+                    ->setText(entries[n].name)
+                    ->show();
+            }
+            popup_buttons[n]
+                ->setValue(static_cast<int>(n) == selection_index)
+                ->setPosition(0.0f, n * button_height, sp::Alignment::TopLeft);
         }
-        for(unsigned int n=entries.size(); n<popup_buttons.size(); n++)
-        {
+        for (unsigned int n=entries.size(); n<popup_buttons.size(); n++)
             popup_buttons[n]->hide();
-        }
-        popup->show()->moveToFront();
+
+        popup
+            ->show()
+            ->moveToFront();
     }
 }
 
