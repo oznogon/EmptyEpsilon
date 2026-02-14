@@ -128,7 +128,7 @@ end
 function Entity:isCommsBeingHailed()
     if self.components.comms_transmitter then
         local state = self.components.comms_transmitter.state
-        return state == "hailed" or state == "hailed_player" or state == "hailed_gm"
+        return state == "hailed" or state == "hailed_gm"
     end
 end
 --- Returns whether this ship is being hailed by the GM.
