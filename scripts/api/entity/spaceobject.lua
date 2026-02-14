@@ -28,12 +28,17 @@ function Entity:getRotation()
     if self.components.transform then return self.components.transform.rotation end
 end
 --- Sets this entity's heading, in degrees ranging from 0 to 360.
---- Unlike setRotation(), a value of 0 points to the top of the map ("north").
+--- Unlike setRotation(), a value of 0 points to the top of the map ("north"), which matches player radars.
 --- Values that are negative or greater than 360 are converted to values within that range.
 --- setHeading() and setRotation() do not change the helm's target heading on player ships. To do that, use commandTargetRotation().
 --- Example: entity:setHeading(0)
 function Entity:setHeading(heading)
-    if self.components.transform then self.components.transform.rotation = heading + 270 end
+    if self.components.transform then
+        local heading = self.components.transform.rotation + 270
+        while heading < 0 do heading = heading + 360 end
+        while heading > 360 do heading = heading - 360 end
+        self.components.transform.rotation = heading
+    end
     return self
 end
 --- Returns this entity's heading, in degrees ranging from 0 to 360.
