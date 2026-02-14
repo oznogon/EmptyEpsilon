@@ -281,12 +281,12 @@ end
 --- [DEPRECATED]
 --- Use getShieldLevel() with an index value.
 function Entity:getFrontShield()
-    return self.getShieldLevel(0)
+    return self:getShieldLevel(0)
 end
 --- [DEPRECATED]
 --- Use getShieldMax() with an index value.
 function Entity:getFrontShieldMax()
-    return self.getShieldMax(0)
+    return self:getShieldMax(0)
 end
 --- [DEPRECATED]
 --- Use setShields() with an index value.
@@ -303,12 +303,12 @@ end
 --- [DEPRECATED]
 --- Use getShieldLevel() with an index value.
 function Entity:getRearShield()
-    return self.getShieldLevel(1)
+    return self:getShieldLevel(1)
 end
 --- [DEPRECATED]
 --- Use getShieldMax() with an index value.
 function Entity:getRearShieldMax()
-    return self.getShieldMax(1)
+    return self:getShieldMax(1)
 end
 --- [DEPRECATED]
 --- Use setShields() with an index value.
