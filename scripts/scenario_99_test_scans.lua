@@ -1,0 +1,5 @@
+CpuShip():setTemplate('Adder MK9'):setPosition(-69, 4059):setRotation(320):setFaction('Independent'):orderIdle()
+CpuShip():setTemplate('Adder MK9'):setPosition(3281, -23):setRotation(395):setFaction('Independent'):orderIdle()
+CpuShip():setTemplate('Adder MK9'):setPosition(-725, -3618):setRotation(266):setFaction('Independent'):orderIdle()
+CpuShip():setTemplate('Adder MK9'):setPosition(-3947, -149):setRotation(330):setFaction('Independent'):orderIdle()
+PlayerSpaceship():setTemplate('Atlantis'):setPosition(-598, 199):setRotation(265):setFaction('Human Navy')
