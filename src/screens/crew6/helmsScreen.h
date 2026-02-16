@@ -1,3 +1,7 @@
+// DEPRECATED: This C++ Helms screen is being replaced by a Lua implementation.
+// See scripts/screens/helmsScreen.lua for the new implementation.
+// This file remains as a fallback if the Lua screen fails to load.
+
 #ifndef HELMS_SCREEN_H
 #define HELMS_SCREEN_H
 

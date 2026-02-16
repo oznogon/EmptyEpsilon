@@ -28,6 +28,9 @@
 #include "screenComponents/selfDestructEntry.h"
 
 #include "components/internalrooms.h"
+#include "script/guiBindings.h"
+#include "gui/gui2_overlay.h"
+#include "gui/colorConfig.h"
 
 #include "components/collision.h"
 #include "components/impulse.h"
@@ -1082,6 +1085,21 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     }
 }
 
+static GuiElement* createLuaHelmsScreen(GuiContainer* container)
+{
+    // Try to create Lua-based Helms screen
+    GuiElement* lua_screen = createLuaHelmsScreenFromEnvironment(container);
+
+    // Fall back to C++ screen if Lua version fails
+    if (!lua_screen)
+    {
+        LOG(Warning, "Falling back to C++ Helms screen");
+        return new HelmsScreen(container);
+    }
+
+    return lua_screen;
+}
+
 void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
 {
     if (my_player_info->isOnlyMainScreen(monitor_index))
@@ -1098,7 +1116,7 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
 
         //Crew 6/5
         if (cps.has(CrewPosition::helmsOfficer))
-            screen->addStationTab(new HelmsScreen(container), CrewPosition::helmsOfficer, getCrewPositionName(CrewPosition::helmsOfficer), getCrewPositionIcon(CrewPosition::helmsOfficer));
+            screen->addStationTab(createLuaHelmsScreen(container), CrewPosition::helmsOfficer, getCrewPositionName(CrewPosition::helmsOfficer), getCrewPositionIcon(CrewPosition::helmsOfficer));
         if (cps.has(CrewPosition::weaponsOfficer))
             screen->addStationTab(new WeaponsScreen(container), CrewPosition::weaponsOfficer, getCrewPositionName(CrewPosition::weaponsOfficer), getCrewPositionIcon(CrewPosition::weaponsOfficer));
         if (cps.has(CrewPosition::engineering))
