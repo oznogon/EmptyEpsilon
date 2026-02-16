@@ -62,10 +62,13 @@ void GuiWarpControls::onDraw(sp::RenderTarget& target)
 void GuiWarpControls::onUpdate()
 {
     // Handle hotkey input. Warp is a HELMS-category shortcut.
-    if (my_spaceship && isVisible())
+    if (my_spaceship)
     {
         auto warp = my_spaceship.getComponent<WarpDrive>();
+        setVisible(warp != nullptr);
         if (!warp)
+            return;
+        if (!isVisible())
             return;
         if (keys.helms_warp0.getDown())
         {
