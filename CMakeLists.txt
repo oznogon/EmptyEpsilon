@@ -521,6 +521,8 @@ set(MAIN_SOURCES
     src/script/gm.cpp
     src/script/scriptRandom.h
     src/script/scriptRandom.cpp
+    src/script/guiBindings.h
+    src/script/guiBindings.cpp
 
     src/ai/aiFactory.h
     src/ai/ai.h

@@ -21,6 +21,7 @@
 #include "script/component.h"
 #include "script/damageInfo.h"
 #include "script/scriptRandom.h"
+#include "script/guiBindings.h"
 #include "components/impulse.h"
 #include "components/warpdrive.h"
 #include "components/maneuveringthrusters.h"
@@ -1425,6 +1426,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     registerScriptDataStorageFunctions(env);
     registerScriptGMFunctions(env);
     registerScriptRandomFunctions(env);
+    registerGuiBindings(env);
 
     auto res = env.runFile<void>("luax.lua");
     LuaConsole::checkResult(res);
