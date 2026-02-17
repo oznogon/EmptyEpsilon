@@ -4,6 +4,15 @@
 # and thus we use that.
 # This file just facilitates in setting up the SDK/NDK if we do not have it yet.
 
+# A Gradle build system is also located in the android/ directory. It provides
+# Android Studio integration and dependency management.
+#
+# To build with Gradle instead, run:
+#
+#     cd android/
+#     ./gradlew assembleWithoutPacksDebug
+#
+# Or see: android/README.md
 
 # We need the following things:
 # - Android SDK, with:

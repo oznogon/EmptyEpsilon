@@ -1,0 +1,4 @@
+/build
+/src/main/cpp/SDL2/
+/src/main/cpp/CMakeCache.txt
+/src/main/cpp/CMakeFiles/
