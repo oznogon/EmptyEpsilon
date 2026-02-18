@@ -140,9 +140,8 @@ private:
     float orbit_start_yaw = -90.0f;
     float orbit_start_pitch = 45.0f;
     float orbit_start_distance = 700.0f;
-    float orbit_movement_timer = 0.0f;
-    const float orbit_movement_duration = 5.0f; // Duration of movement phase in seconds
-    const float orbit_linger_duration = 3.0f; // Duration to linger at target position in seconds
+    float orbit_linger_timer = 0.0f;
+    const float orbit_linger_duration = 1.0f;
     bool orbit_is_lingering = false;
     // Cached orbital transform values
     float orbit_horizontal_distance_cached = 0.0f;
