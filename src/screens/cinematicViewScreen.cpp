@@ -728,6 +728,12 @@ void CinematicViewScreen::update(float delta)
                 is_camera_moving = true;
                 camera_pitch = std::clamp(camera_pitch - camera_rotation_speed * calculateAxis(keys.cinematic.tilt_down.getValue(), keys.cinematic.tilt_up.getValue(), invert_mouselook_y), -89.9f, 89.9f);
             }
+
+            if (mouse_wheel_delta != 0.0f)
+            {
+                is_camera_moving = true;
+                viewport->modifyFoV(viewport->getFoVModifier() + (2.0f * delta * camera_zoom_speed * -mouse_wheel_delta));
+            }
             break;
 
         case CameraMode::Static:
@@ -849,6 +855,12 @@ void CinematicViewScreen::update(float delta)
         }
     }
 
+    // Update lock button label based on whether the selected target is a camera entity
+    if (target && target.getComponent<CinematicCamera>())
+        camera_lock_toggle->setText(tr("button", "Lock camera"));
+    else
+        camera_lock_toggle->setText(tr("button", "Lock camera on ship"));
+
     // Plot headings from the camera to the locked player ship.
     // Set camera_yaw and camera_pitch to those values.
 
@@ -958,6 +970,18 @@ void CinematicViewScreen::update(float delta)
         camera_mode_cycle_toggle->setValue(false)->setEnable(false);
 
         updateCamera(nullptr, nullptr, delta);
+
+        // If a camera entity is selected with lock disabled and manual controls are active
+        // on the server, sync the camera state back to the entity's Transform and
+        // CinematicCamera component so the movements persist.
+        if (game_server && manual_camera_controls_enabled && target)
+        {
+            if (auto cam = target.getComponent<CinematicCamera>())
+            {
+                if (auto transform = target.getComponent<sp::Transform>())
+                    updateCameraFromUI(cam, transform);
+            }
+        }
     }
 
 }
