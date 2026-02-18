@@ -12,6 +12,7 @@ Keys::CinematicKeys::CinematicKeys() :
     toggle_manual_controls("CINEMATIC_TOGGLE_MANUAL_CONTROLS", "M"),
     lock_camera("CINEMATIC_LOCK_CAMERA", "L"),
     cycle_camera("CINEMATIC_CYCLE_CAMERA", "C"),
+    cycle_camera_mode("CINEMATIC_CYCLE_CAMERA_MODE", "V"),
     previous_player_ship("CINEMATIC_PREVIOUS_PLAYER_SHIP", "J"),
     next_player_ship("CINEMATIC_NEXT_PLAYER_SHIP", "K"),
     previous_camera_mode("CINEMATIC_PREVIOUS_CAMERA_MODE", "["),
@@ -79,6 +80,7 @@ void Keys::CinematicKeys::init()
     toggle_manual_controls.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle manual controls"));
     lock_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera lock"));
     cycle_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera cycle"));
+    cycle_camera_mode.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle camera modes"));
     previous_player_ship.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle previous player ship"));
     next_player_ship.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle next player ship"));
     previous_camera_mode.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle previous camera mode"));
