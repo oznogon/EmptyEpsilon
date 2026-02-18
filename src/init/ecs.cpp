@@ -38,6 +38,7 @@
 #include "multiplayer/radarblock.h"
 #include "multiplayer/shiplog.h"
 #include "multiplayer/zone.h"
+#include "multiplayer/cinematiccamera.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -68,6 +69,7 @@
 #include "systems/pickup.h"
 #include "systems/destroy.h"
 #include "systems/debugrender.h"
+#include "systems/cinematiccamera.h"
 
 
 void initSystemsAndComponents()
@@ -132,6 +134,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ZoneReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::TransformReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::PhysicsReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<CinematicCameraReplication>();
 
     sp::ecs::Entity::setPreDestroyCallback(OnDestroySystem::destroyCallback);
 
@@ -166,6 +169,7 @@ void initSystemsAndComponents()
     engine->registerSystem<RadarBlockSystem>();
     engine->registerSystem<ZoneSystem>();
     engine->registerSystem<GMRadarRender>();
+    engine->registerSystem<CinematicCameraSystem>();
     engine->registerSystem<PickupSystem>();
 #ifdef DEBUG
     engine->registerSystem<DebugRenderSystem>();

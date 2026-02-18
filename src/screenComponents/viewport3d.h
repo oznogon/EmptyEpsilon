@@ -77,7 +77,9 @@ public:
     GuiViewport3D* showCallsigns() { return setCallsignVisibility(true); }
     GuiViewport3D* toggleCallsigns() { return setCallsignVisibility(!areCallsignsVisible()); }
     GuiViewport3D* showHeadings() { show_headings = true; return this; }
+    GuiViewport3D* hideHeadings() { show_headings = false; return this; }
     GuiViewport3D* showSpacedust() { show_spacedust = true; return this; }
+    GuiViewport3D* hideSpacedust() { show_spacedust = false; return this; }
 
     enum class ProjectionType
     {

@@ -6,6 +6,8 @@
 #include "preferenceManager.h"
 #include "soundManager.h"
 #include "multiplayer_client.h"
+#include "components/cinematiccamera.h"
+#include "ecs/query.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/selfDestructIndicator.h"
@@ -131,6 +133,7 @@ void ScreenMainScreen::update(float delta)
             case MainScreenSetting::Left:
             case MainScreenSetting::Right:
             case MainScreenSetting::Target:
+            case MainScreenSetting::Camera:
                 viewport->show();
                 tactical_radar->hide();
                 long_range_radar->hide();
@@ -145,6 +148,45 @@ void ScreenMainScreen::update(float delta)
                 tactical_radar->hide();
                 long_range_radar->show();
                 break;
+            }
+
+            // Apply camera view if in Camera mode
+            if (pc->main_screen_setting == MainScreenSetting::Camera && pc->main_screen_camera)
+            {
+                // Get the camera and transform components
+                auto cam = pc->main_screen_camera.getComponent<CinematicCamera>();
+                auto transform = pc->main_screen_camera.getComponent<sp::Transform>();
+
+                if (cam && transform)
+                {
+                    // Apply camera position and orientation to global camera
+                    camera_position.x = transform->getPosition().x;
+                    camera_position.y = transform->getPosition().y;
+                    camera_position.z = cam->z_position;
+                    camera_yaw = cam->yaw;
+                    camera_pitch = cam->pitch;
+
+                    // Apply field of view
+                    viewport->modifyFoV(cam->field_of_view - viewport->getBaseFoV());
+
+                    // Disable ship-specific visual effects for camera view
+                    viewport->hideHeadings();
+                    viewport->hideSpacedust();
+                }
+            }
+            else
+            {
+                // Restore heading and spacedust settings when not in camera mode
+                uint8_t flags = PreferencesManager::get("main_screen_flags","7").toInt();
+                if (flags & GuiViewportMainScreen::flag_headings)
+                    viewport->showHeadings();
+                else
+                    viewport->hideHeadings();
+
+                if (flags & GuiViewportMainScreen::flag_spacedust)
+                    viewport->showSpacedust();
+                else
+                    viewport->hideSpacedust();
             }
 
             switch(pc->main_screen_overlay)

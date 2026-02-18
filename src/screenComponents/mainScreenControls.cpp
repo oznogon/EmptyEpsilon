@@ -2,13 +2,15 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "i18n.h"
+#include "components/cinematiccamera.h"
+#include "ecs/query.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_togglebutton.h"
 
 GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
 : GuiElement(owner, "MAIN_SCREEN_CONTROLS"), open_button(nullptr), target_lock_button(nullptr), tactical_button(nullptr),
-  long_range_button(nullptr), show_comms_button(nullptr), onscreen_comms_active(false)
+  long_range_button(nullptr), camera_button(nullptr), show_comms_button(nullptr), onscreen_comms_active(false)
 {
     setSize(250.0f, GuiElement::GuiSizeMax);
     setPosition(-20.0f, 70.0f, sp::Alignment::TopRight);
@@ -48,6 +50,31 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             long_range_button->setValue(active_mode == MainScreenSetting::LongRange);
             long_range_button->setVisible(gameGlobalInfo->allow_main_screen_long_range_radar);
+        }
+
+        // Camera control
+        if (camera_button)
+        {
+            camera_button->setValue(active_mode == MainScreenSetting::Camera);
+            // Only show camera button if player has a main screen camera assigned
+            string camera_name = "Camera";
+            bool has_camera = false;
+            if (my_spaceship)
+            {
+                if (auto pc = my_spaceship.getComponent<PlayerControl>())
+                {
+                    if (pc->main_screen_camera)
+                    {
+                        has_camera = true;
+                        if (auto cam = pc->main_screen_camera.getComponent<CinematicCamera>())
+                        {
+                            camera_name = cam->name;
+                        }
+                    }
+                }
+            }
+            camera_button->setText(camera_name);
+            camera_button->setVisible(has_camera);
         }
 
         // Overlay controls
@@ -148,6 +175,17 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         closePopup();
     }));
     long_range_button = buttons.back();
+
+    // Camera button.
+    buttons.push_back(new GuiToggleButton(button_strip, "MAIN_SCREEN_CAMERA_BUTTON", tr("mainscreen", "Camera"),
+    [this](bool value)
+    {
+        if (my_spaceship)
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Camera);
+
+        closePopup();
+    }));
+    camera_button = buttons.back();
 
     // If the player has control over comms, they can toggle the comms overlay
     // on the main screen.
