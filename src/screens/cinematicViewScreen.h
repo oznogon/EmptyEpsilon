@@ -227,6 +227,11 @@ private:
     glm::vec2 getMedianPoint() const;
     float getToTDistance() const;
 
+    // Auto-zoom helper functions
+    float getShipRadius(sp::ecs::Entity entity) const;
+    float calculatePerspectiveAutoZoomFoV(float camera_to_target_distance, float total_span, float delta);
+    float calculateOrthographicAutoZoomDistance(float horizontal_span);
+
     // UI toggle
     void setUIVisibility(bool is_visible);
 
