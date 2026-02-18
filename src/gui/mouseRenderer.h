@@ -1,5 +1,4 @@
-#ifndef MOUSE_RENDERER_H
-#define MOUSE_RENDERER_H
+#pragma once
 
 #include "Renderable.h"
 
@@ -18,7 +17,6 @@ public:
     void setSpriteImage(string sprite_image) { sprite = sprite_image; }
 private:
     glm::vec2 position;
+    glm::vec2 raw_delta;
     string sprite = "mouse.png";
 };
-
-#endif//MOUSE_RENDERER_H

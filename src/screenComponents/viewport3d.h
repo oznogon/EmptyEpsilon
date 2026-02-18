@@ -3,6 +3,7 @@
 #include "gui/gui2_element.h"
 #include "glObjects.h"
 #include "graphics/shader.h"
+#include "systems/rendering.h"
 
 #include <glm/mat4x4.hpp>
 #include <glm/vec4.hpp>
@@ -76,13 +77,7 @@ public:
     GuiViewport3D* showHeadings() { show_headings = true; return this; }
     GuiViewport3D* showSpacedust() { show_spacedust = true; return this; }
 
-    enum class ProjectionType
-    {
-        Perspective,
-        Ortho
-    };
-
-    float getFoV() { return base_fov + fov_modifier; }
+    float getFoV() { return std::clamp(base_fov + fov_modifier, 30.0f, 140.0f); }
     float getFoVModifier() { return fov_modifier; }
     float getBaseFoV() { return base_fov; }
     // base_fov set by main_screen_camera_fov preference on Viewport init

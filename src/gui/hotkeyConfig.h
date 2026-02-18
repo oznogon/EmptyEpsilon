@@ -1,5 +1,4 @@
-#ifndef HOTKEY_CONFIG_H
-#define HOTKEY_CONFIG_H
+#pragma once
 
 #include <tuple>
 #include <array>
@@ -174,7 +173,7 @@ public:
         sp::io::Keybinding tilt_down;
         sp::io::Keybinding tilt_up;
         sp::io::Keybinding move_faster;
-        sp::io::Keybinding toggle_mouselook;
+        sp::io::Keybinding move_slower;
     } cinematic;
 
     // Top-down View
@@ -206,5 +205,3 @@ public:
     sp::io::Keybinding debug_show_timing;
 };
 extern Keys keys;
-
-#endif//HOTKEY_CONFIG_H
