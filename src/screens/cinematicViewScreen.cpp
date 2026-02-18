@@ -773,7 +773,9 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
 
 void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
+    // Orbit camera: Position using spherical coordinates.
     viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
+
     // Clamp orbit_distance to valid scaled range for current ship size
     float scaled_min = getScaledCameraDistance(orbit_distance_min);
     float scaled_max = getScaledCameraDistance(orbit_distance_max);
@@ -788,19 +790,17 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
         orbit_target_distance = random(scaled_min, scaled_max);
     }
 
+    // Smoothly interpolate toward target values.
     if (orbit_auto_rotate)
     {
+        float blend_factor = delta * 0.1f;
 
-        // Smoothly interpolate toward target values
-        float blend_factor = delta * 0.1f; // Adjust for smooth transition speed
-
-        // Handle yaw wrapping (shortest path around 360 degrees)
+        // Handle yaw wrapping.
         float yaw_diff = orbit_target_yaw - orbit_yaw;
-        if (yaw_diff > 180.0f) yaw_diff -= 360.0f;
-        if (yaw_diff < -180.0f) yaw_diff += 360.0f;
+        if (yaw_diff > 180.0f) yaw_diff -= 360.0f; 
+        else if (yaw_diff < -180.0f) yaw_diff += 360.0f;
         orbit_yaw += yaw_diff * blend_factor;
-        if (orbit_yaw < 0.0f) orbit_yaw += 360.0f;
-        if (orbit_yaw >= 360.0f) orbit_yaw -= 360.0f;
+        orbit_yaw = fmod(orbit_yaw + 360.0f, 360.0f);
 
         orbit_pitch += (orbit_target_pitch - orbit_pitch) * blend_factor;
         orbit_distance += (orbit_target_distance - orbit_distance) * blend_factor;
@@ -824,9 +824,7 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
         orbit_center = target_position_2D;
     }
 
-    // Calculate camera position using spherical coordinates.
     // Convert orbit angles to 3D position around the target.
-
     // Horizontal component (XY plane)
     float horizontal_distance = orbit_distance * cos(glm::radians(orbit_pitch));
     glm::vec2 horizontal_offset = vec2FromAngle(orbit_yaw) * horizontal_distance;
@@ -862,9 +860,9 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
 
 void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float delta, OptionState reposition)
 {
-    viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
     // Fly-by camera: Stationary camera positioned at various points.
     // Camera pans to follow the moving ship as it passes.
+    viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
 
     // Get target's velocity for distance calculation.
     glm::vec2 target_velocity{0.0f, 0.0f};
@@ -876,16 +874,14 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float
         target_speed = glm::length(target_velocity);
     }
 
+    // Get ship size for scaling transition distance
+    float ship_half_width = 250.0f;
+    if (auto physics = target.getComponent<sp::Physics>())
+        ship_half_width = std::max(physics->getSize().x, physics->getSize().y) * 0.5f;
+
     // Lambda to reposition camera at a new flyby point.
-    auto repositionCamera = [this, target_velocity]()
+    auto repositionCamera = [this, ship_half_width, target_velocity]()
     {
-        LOG(Info, "flyby_camera_pos before: ", flyby_camera_pos.x, ",", flyby_camera_pos.y);
-
-        // Get ship dimensions
-        float ship_half_width = 250.0f;
-        if (auto physics = target.getComponent<sp::Physics>())
-            ship_half_width = std::max(physics->getSize().x, physics->getSize().y) / 2.0f;
-
         // Calculate lead point: midpoint of where ship will be in 20 seconds
         glm::vec2 forward = vec2FromAngle(target_rotation);
         glm::vec2 ship_front = target_position_2D + forward * ship_half_width;
@@ -898,36 +894,30 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float
         glm::vec2 perpendicular_offset = vec2FromAngle(perpendicular_angle) * (distance_from_edge + ship_half_width);
 
         flyby_camera_pos = lead_point + perpendicular_offset;
-        LOG(Info, "perpendicular_angle: ", perpendicular_angle, " ship_half_width: ", ship_half_width, " flyby_camera_pos: ", flyby_camera_pos.x, ",", flyby_camera_pos.y);
     };
 
     // Set initial position or explicitly reset.
     if (flyby_camera_pos == glm::vec2{0.0f, 0.0f} || reposition == OptionState::Force)
     {
         cinematic_cycle_timer = 0.0f;
-        flyby_fov_modifier = 0.0f;
+        flyby_fov_modifier = viewport->modifyFoV(0.0f);
         repositionCamera();
     }
 
-    // Get ship size for scaling transition distance
-    float ship_half_width = 250.0f;
-    if (auto physics = target.getComponent<sp::Physics>())
-        ship_half_width = std::max(physics->getSize().x, physics->getSize().y) / 2.0f;
-
-    // Calculate velocity-based distance threshold.
-    // Camera is positioned at lead point (forward*ship_half_width + velocity*10) + perpendicular offset.
+    // Calculate velocity-based distance threshold and place camera at lead point.
     // As ship moves forward, calculate the expected distance after desired travel time.
     float forward_lead = ship_half_width + glm::length(target_velocity) * 10.0f;
     float perpendicular_dist = ship_half_width * 3.0f;
 
-    // Calculate distance after ship travels the desired amount (20 seconds of forward motion)
+    // Calculate distance after ship travels the desired amount.
     float forward_velocity = std::abs(glm::dot(target_velocity, vec2FromAngle(target_rotation)));
-    float desired_travel_time = 20.0f;  // Reposition every 20 seconds
+    float desired_travel_time = 20.0f; // Reposition every 20 seconds
     float forward_travel = forward_velocity * desired_travel_time;
     float remaining_forward_offset = forward_lead - forward_travel;  // Can be negative if ship passes lead point
     float distance_after_travel = sqrtf(remaining_forward_offset * remaining_forward_offset + perpendicular_dist * perpendicular_dist);
 
-    // Threshold is the greater of: distance after desired travel, or a minimum based on ship size
+    // Threshold is the greater of distance after desired travel, or a minimum
+    // based on ship size.
     float distance_threshold = std::max(distance_after_travel, perpendicular_dist + 500.0f);
 
     // Check if ship has moved beyond velocity-scaled threshold.
@@ -943,12 +933,12 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float
         horizontal_dist = glm::length(camera_to_ship);
     }
 
-    // Camera otherwise remains stationary
+    // Position, pan, and zoom camera at moving ship.
     camera_position = {flyby_camera_pos, flyby_height};
-
-    // Pan camera to point at moving ship.
     if (horizontal_dist > 0.1f)
     {
+        float fov_goal = ((1 - (std::clamp(horizontal_dist, 500.0f, 2000.0f) / std::clamp(distance_after_travel, 500.0f, 2000.0f))) * 60.0f) - 30.0f;
+        flyby_fov_modifier = viewport->modifyFoV(flyby_fov_modifier + ((fov_goal - viewport->getFoVModifier()) * delta));
         camera_yaw = vec2ToAngle(camera_to_ship);
         camera_pitch = glm::degrees(atan(flyby_height / horizontal_dist));
     }
@@ -962,12 +952,12 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float
 void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
     // Chase camera: Follow ship like main screen camera.
-
     viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
-    // Clamp chase_distance to valid scaled range for current ship size
+
+    // Clamp chase_distance to a valid scaled range for the current ship size.
     chase_distance = std::clamp(chase_distance, getScaledCameraDistance(chase_distance_min), getScaledCameraDistance(chase_distance_max));
 
-    // Get ship dimensions for focal point calculation
+    // Get ship dimensions for focal point calculation.
     float ship_half_width = 250.0f;
     float ship_half_length = 250.0f;
     if (auto physics = target.getComponent<sp::Physics>())
@@ -976,7 +966,7 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
         ship_half_length = physics->getSize().x * 0.5f;
     }
 
-    // Calculate focal point based on chase direction
+    // Calculate focal point based on chase direction.
     const float focal_lead_distance = 500.0f;
     glm::vec2 front = vec2FromAngle(target_rotation - 180.0f) * (ship_half_length + focal_lead_distance);
     glm::vec2 right = vec2FromAngle(target_rotation + 90.0f) * (ship_half_width + focal_lead_distance);
@@ -984,7 +974,7 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
     glm::vec2 camera_offset;
     float camera_angle = 0.0f;
 
-    // Determine what to point the camera at
+    // Determine at what to point the camera.
     glm::vec2 camera_target;
     const bool is_tracking_active_target = camera_lock_tot_toggle->getValue() && tot_transform;
     const bool is_lingering_on_inactive_target = tot_linger_timer > 0.0f;
@@ -1052,7 +1042,6 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
 void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform)
 {
     // Isometric camera: Diagonal view from above at fixed 45-degree elevation
-
     viewport->setProjectionType(GuiViewport3D::ProjectionType::Ortho);
     const float isometric_elevation = 35.264f;
     float horizontal_angle = target_rotation + ((static_cast<int>(isometric_direction) * 90.0f) + 45.0f);
@@ -1082,8 +1071,8 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform)
 
 void CinematicViewScreen::updateTopdownCamera(sp::Transform* main_transform)
 {
-    viewport->setProjectionType(GuiViewport3D::ProjectionType::Ortho);
     // Top-down camera: Follow ship from directly above.
+    viewport->setProjectionType(GuiViewport3D::ProjectionType::Ortho);
 
     // Position camera above ship with pan offset
     camera_position = {target_position_2D, topdown_zoom};
