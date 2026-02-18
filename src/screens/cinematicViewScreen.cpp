@@ -310,7 +310,7 @@ void CinematicViewScreen::update(float delta)
     if (!camera_controls->isVisible() && keybind_hint_timer > 0.0f)
     {
         // Build hint text from keybinds.
-        string hint_text = "";
+        string hint_text = camera_mode_selector->getEntryName(camera_mode_selector->getSelectionIndex()) + "\n";
 
         const auto& toggle_ui_key = keys.cinematic.toggle_ui;
         string ui_key = toggle_ui_key.getHumanReadableKeyName(0);
@@ -323,10 +323,16 @@ void CinematicViewScreen::update(float delta)
         string manual_key = toggle_manual_key.getHumanReadableKeyName(0);
         for (int n = 1; toggle_manual_key.getKeyType(n) != sp::io::Keybinding::Type::None; n++)
             manual_key += ", " + toggle_manual_key.getHumanReadableKeyName(n);
-        if (!manual_key.empty())
+        if (!manual_key.empty() && active_camera_mode != CameraMode::Static)
         {
             if (!hint_text.empty()) hint_text += "\n";
             hint_text += tr("ui_hidden", "Press {key} to toggle manual control of camera").format({{"key", manual_key}});
+            if (camera_lock_toggle->getValue())
+            {
+                hint_text += tr("ui_hidden", "\n(limited; camera locked on {target})").format({
+                    {"target", camera_lock_selector->getEntryName(camera_lock_selector->getSelectionIndex())}
+                });
+            }
         }
 
         // Show label if we have any text.
@@ -344,7 +350,7 @@ void CinematicViewScreen::update(float delta)
     {
         keybind_hint_label->hide();
 
-        if (camera_controls->isVisible() || manual_camera_controls_enabled)
+        if (camera_controls->isVisible())
             keybind_hint_timer = 5.0f;
     }
 
