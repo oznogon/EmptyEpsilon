@@ -47,6 +47,9 @@ private:
     const int camera_mode_free_int = static_cast<int>(CameraMode::Free);
     const int camera_mode_static_int = static_cast<int>(CameraMode::Static);
 
+    // Active camera mode - the source of truth for which mode is currently active
+    CameraMode active_camera_mode = CameraMode::Flyby;
+
     // Camera constraints
     // Movement rates
     const float camera_translation_speed_min = 5.0f;
@@ -118,6 +121,14 @@ private:
     float orbit_target_yaw = -90.0f;
     float orbit_target_pitch = 45.0f;
     float orbit_target_distance = 700.0f;
+    // Auto-orbit movement state
+    float orbit_start_yaw = -90.0f;
+    float orbit_start_pitch = 45.0f;
+    float orbit_start_distance = 700.0f;
+    float orbit_movement_timer = 0.0f;
+    const float orbit_movement_duration = 5.0f; // Duration of movement phase in seconds
+    const float orbit_linger_duration = 3.0f; // Duration to linger at target position in seconds
+    bool orbit_is_lingering = false;
     // Cached orbital transform values
     float orbit_horizontal_distance_cached = 0.0f;
     float orbit_vertical_offset_cached = 0.0f;
@@ -132,12 +143,12 @@ private:
     glm::vec2 flyby_camera_pos{0.0f, 0.0f};
 
     // Chase camera mode state
-    enum class Angle {
+    enum class ChaseAngle {
         Front = 0,
         Right,
         Back,
         Left
-    } chase_direction = Angle::Back;
+    } chase_direction = ChaseAngle::Back;
 
     float chase_distance = 700.0f;
     float chase_height = 200.0f;
@@ -163,10 +174,6 @@ private:
 
     float isometric_distance = 1000.0f;
     IsometricAngle isometric_direction = IsometricAngle::FrontRight;
-
-    // Half-second rotation debouncing for chase/isometric cameras
-    float rotation_debounce_timer = 0.0f;
-    const float rotation_debounce_delay = 0.5f;
 
     // Top-down camera mode state
     glm::vec2 topdown_offset{0.0f, 0.0f};
@@ -208,6 +215,9 @@ private:
 
     // UI toggle
     void setUIVisibility(bool is_visible);
+
+    // Populate camera mode selector based on lock state
+    void updateCameraModeSelector(bool is_locked);
 
     virtual void update(float delta) override;
     virtual bool onPointerMove(glm::vec2 position, sp::io::Pointer::ID id) override;
