@@ -77,7 +77,9 @@ public:
     GuiViewport3D* showCallsigns() { return setCallsignVisibility(true); }
     GuiViewport3D* toggleCallsigns() { return setCallsignVisibility(!areCallsignsVisible()); }
     GuiViewport3D* showHeadings() { show_headings = true; return this; }
+    GuiViewport3D* hideHeadings() { show_headings = false; return this; }
     GuiViewport3D* showSpacedust() { show_spacedust = true; return this; }
+    GuiViewport3D* hideSpacedust() { show_spacedust = false; return this; }
 
     float getFoV() { return std::clamp(base_fov + fov_modifier, 30.0f, 140.0f); }
     float getFoVModifier() { return fov_modifier; }

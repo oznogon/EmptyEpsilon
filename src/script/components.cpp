@@ -45,6 +45,7 @@
 #include "components/customshipfunction.h"
 #include "components/zone.h"
 #include "components/shiplog.h"
+#include "components/cinematiccamera.h"
 
 
 #define STRINGIFY(n) #n
@@ -648,6 +649,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(ScanProbeLauncher, charge_time);
     BIND_MEMBER(ScanProbeLauncher, on_launch);
     sp::script::ComponentHandler<PlayerControl>::name("player_control");
+    BIND_MEMBER(PlayerControl, main_screen_camera);
     BIND_MEMBER(PlayerControl, alert_level);
     BIND_MEMBER(PlayerControl, control_code);
     BIND_MEMBER(PlayerControl, allowed_positions);
@@ -823,4 +825,17 @@ void initComponentScriptBindings()
             zone->zone_dirty = true;
         }
     };
+
+    sp::script::ComponentHandler<CinematicCamera>::name("cinematic_camera");
+    BIND_MEMBER(CinematicCamera, yaw);
+    BIND_MEMBER(CinematicCamera, pitch);
+    BIND_MEMBER(CinematicCamera, roll);
+    BIND_MEMBER(CinematicCamera, field_of_view);
+    BIND_MEMBER(CinematicCamera, z_position);
+    BIND_MEMBER(CinematicCamera, name);
+    BIND_MEMBER(CinematicCamera, radar_icon);
+    BIND_MEMBER(CinematicCamera, assigned_entity);
+    BIND_MEMBER(CinematicCamera, use_velocity_fov_scaling);
+    BIND_MEMBER(CinematicCamera, base_fov_for_velocity);
+    BIND_MEMBER(CinematicCamera, fov_velocity_range);
 }

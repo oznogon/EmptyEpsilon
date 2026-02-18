@@ -209,6 +209,14 @@ private:
     const float tot_linger_period = 5.0f;
     float tot_linger_timer = 0.0f;
 
+    // Camera entity smoothing state (client-side only, for network jitter)
+    sp::ecs::Entity previous_camera_entity;
+    glm::vec3 camera_entity_target_position{0.0f, 0.0f, 0.0f};
+    float camera_entity_target_yaw = -90.0f;
+    float camera_entity_target_pitch = 45.0f;
+    float camera_entity_target_fov = 60.0f;
+    const float camera_entity_smooth_speed = 10.0f; // Fast smoothing for network jitter only
+
 public:
     explicit CinematicViewScreen(RenderLayer* render_layer);
     virtual ~CinematicViewScreen();
@@ -254,6 +262,12 @@ private:
 
     // Populate camera mode selector based on lock state.
     void updateCameraModeSelector(bool is_locked);
+
+    // Camera entity helpers
+    void applyCameraView(class CinematicCamera* cam, sp::Transform* transform);
+    void updateCameraFromUI(class CinematicCamera* cam);
+    void updateCameraSmoothing(class CinematicCamera* cam, sp::Transform* transform, float delta);
+    void disableAllCameraControls();
 
     // Damping functions (debug-switchable in DEBUG builds)
     float applyDamping(float source, float target, float speed, float delta);

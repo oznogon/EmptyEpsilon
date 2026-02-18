@@ -2,6 +2,7 @@
 
 #include "stringImproved.h"
 #include "crewPosition.h"
+#include <ecs/entity.h>
 
 
 enum class MainScreenSetting
@@ -12,7 +13,8 @@ enum class MainScreenSetting
     Right,
     Target,
     Tactical,
-    LongRange
+    LongRange,
+    Camera
 };
 
 enum class MainScreenOverlay
@@ -37,6 +39,9 @@ public:
     MainScreenSetting main_screen_setting = MainScreenSetting::Front;
     // Content overlaid on the main screen, such as comms
     MainScreenOverlay main_screen_overlay = MainScreenOverlay::HideComms;
+
+    // Main screen camera entity - camera to use when main_screen_setting == Camera
+    sp::ecs::Entity main_screen_camera;
 
     AlertLevel alert_level = AlertLevel::Normal;
 
