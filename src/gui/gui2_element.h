@@ -56,6 +56,7 @@ public:
     GuiElement* setSize(glm::vec2 size);
     GuiElement* setSize(float x, float y);
     glm::vec2 getSize() const;
+    float getAspectRatio() const;
     GuiElement* setMargins(float n);
     GuiElement* setMargins(float x, float y);
     GuiElement* setMargins(float left, float top, float right, float bottom);
