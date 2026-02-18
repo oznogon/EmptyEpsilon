@@ -1,6 +1,6 @@
 #pragma once
 #include <ecs/system.h>
-#include "components/cinematiccamera.h"
+#include "components/cinematicCamera.h"
 #include "systems/radar.h"
 
 class CinematicCameraSystem : public sp::ecs::System,

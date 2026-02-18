@@ -14,11 +14,11 @@ function init()
     cam1:setPosition(5000, 0)
     cam1.components.cinematic_camera = {
         name = "Static Cam 1",
-        yaw = -90,
         pitch = 30,
         z_position = 500,
         field_of_view = 60
     }
+    cam1:setRotation(-90)
 
     -- Create another camera at (-5000, 0) with different angle
     local cam2 = createEntity()
@@ -26,11 +26,11 @@ function init()
     cam2:setPosition(-5000, 0)
     cam2.components.cinematic_camera = {
         name = "Static Cam 2",
-        yaw = 90,
         pitch = 45,
         z_position = 300,
         field_of_view = 70
     }
+    cam2:setRotation(90)
 
     -- Create a camera above the origin
     local cam3 = createEntity()
@@ -38,11 +38,11 @@ function init()
     cam3:setPosition(0, 3000)
     cam3.components.cinematic_camera = {
         name = "Top Cam",
-        yaw = -90,
         pitch = 80,
         z_position = 800,
         field_of_view = 50
     }
+    cam3:setRotation(-90)
 end
 
 function update(delta)

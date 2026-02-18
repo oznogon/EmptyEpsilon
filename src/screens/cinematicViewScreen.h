@@ -214,6 +214,7 @@ private:
     glm::vec3 camera_entity_target_position{0.0f, 0.0f, 0.0f};
     float camera_entity_target_yaw = -90.0f;
     float camera_entity_target_pitch = 45.0f;
+    float camera_entity_target_roll = 0.0f;
     float camera_entity_target_fov = 60.0f;
     const float camera_entity_smooth_speed = 10.0f; // Fast smoothing for network jitter only
 
@@ -265,9 +266,8 @@ private:
 
     // Camera entity helpers
     void applyCameraView(class CinematicCamera* cam, sp::Transform* transform);
-    void updateCameraFromUI(class CinematicCamera* cam);
+    void updateCameraFromUI(class CinematicCamera* cam, sp::Transform* transform);
     void updateCameraSmoothing(class CinematicCamera* cam, sp::Transform* transform, float delta);
-    void disableAllCameraControls();
 
     // Damping functions (debug-switchable in DEBUG builds)
     float applyDamping(float source, float target, float speed, float delta);

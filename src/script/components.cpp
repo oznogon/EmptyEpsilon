@@ -46,7 +46,7 @@
 #include "components/zone.h"
 #include "components/shiplog.h"
 #include "components/destroy.h"
-#include "components/cinematiccamera.h"
+#include "components/cinematicCamera.h"
 
 
 #define STRINGIFY(n) #n
@@ -834,7 +834,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<OnDestroyed>::name("on_destroyed");
     BIND_MEMBER(OnDestroyed, callback);
     sp::script::ComponentHandler<CinematicCamera>::name("cinematic_camera");
-    BIND_MEMBER(CinematicCamera, yaw);
+    // Note: yaw is accessed via entity:setRotation() / entity:getRotation()
     BIND_MEMBER(CinematicCamera, pitch);
     BIND_MEMBER(CinematicCamera, roll);
     BIND_MEMBER(CinematicCamera, field_of_view);

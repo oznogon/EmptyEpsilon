@@ -2,7 +2,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "i18n.h"
-#include "components/cinematiccamera.h"
+#include "components/cinematicCamera.h"
 #include "ecs/query.h"
 
 #include "gui/gui2_panel.h"
