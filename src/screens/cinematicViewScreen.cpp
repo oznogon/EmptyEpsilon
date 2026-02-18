@@ -854,28 +854,24 @@ void CinematicViewScreen::setTargetTransform(sp::Transform* transform, float del
     target_rotation = transform->getRotation();
     target_position_2D = transform->getPosition();
 
-    // Smooth the target position to eliminate stuttering from high-speed movement
-    // (warp) or network interpolation jitter. Use aggressive damping (15.0) to
-    // follow quickly while smoothing discrete jumps.
-    target_position_smoothed = applyDamping(target_position_smoothed, target_position_2D, 15.0f, delta);
+    // Smooth the target position to reduce stuttering from high-speed movement
+    // or network interpolation jitter. Use aggressive damping to follow quickly
+    // while smoothing discrete jumps.
+    target_position_smoothed = applyDamping(target_position_smoothed, target_position_2D, 10.0f, delta);
 
-    // Copy the selected transform's position into a vec3 for camera angle
-    // calculations.
+    // Copy the selected transform's position into a vec3 and camera position
+    // into a vec2 for camera angle calculations.
     target_position_3D = {target_position_smoothed.x, target_position_smoothed.y, 0.0f};
-
-    // Copy the camera position into a vec2 for camera angle
-    // calculations.
     camera_position_2D = {camera_position.x, camera_position.y};
 
-    // Calculate the distance from the camera to the selected transform.
+    // Calculate the 2D and 3D distances from the camera to the target.
     diff_2D = target_position_smoothed - camera_position_2D;
     diff_3D = target_position_3D - camera_position;
-
     distance_2D = glm::length(diff_2D);
     distance_3D = glm::length(diff_3D);
 
-    // Always keep the camera less than 1U from the selected transform.
-    // If it has a physics collider, factor that into the distance.
+    // Always keep the camera less than 1U from the lock target transform.
+    // If it has a physics collider and velocity, factor that into the distance.
     float max_dimension = 0.0f;
     max_camera_distance = 1000.0f;
 
@@ -890,13 +886,13 @@ void CinematicViewScreen::setTargetTransform(sp::Transform* transform, float del
 
 float CinematicViewScreen::getScaledCameraDistance(float base_distance) const
 {
-    // Scale camera distances based on ship size (defaults tuned for radius 200)
-    // Uses square root scaling to provide more balanced values across ship sizes
+    // Scale camera distances based on ship size, defaulting to for radius 200
+    // (Atlantis default mesh radius).
     float ship_radius = 200.0f;
     if (target)
     {
         if (auto physics = target.getComponent<sp::Physics>())
-            ship_radius = std::max(physics->getSize().x, physics->getSize().y) / 2.0f;
+            ship_radius = std::max(physics->getSize().x, physics->getSize().y) * 0.5f;
     }
 
     float size_scale = sqrtf(ship_radius / 200.0f);
@@ -905,7 +901,7 @@ float CinematicViewScreen::getScaledCameraDistance(float base_distance) const
 
 void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
-    // Route to appropriate camera mode
+    // Route to appropriate camera mode.
     switch (active_camera_mode)
     {
     case CameraMode::Flyby:
@@ -951,38 +947,37 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
     // Check if we should track the target-of-target.
     bool is_tracking_tot = updateToTState(tot_transform, delta) && (isToTInRange(tot_transform) || tot_linger_timer > 0.0f);
 
-    // Auto-rotate mode: state machine for movement → linger → new target
+    // Manage transitions to and from lingering and auto-rotation.
     if (orbit_auto_rotate)
     {
         if (orbit_is_lingering)
         {
-            // Linger phase: hold position and count down
+            // Linger phase: hold position and count down.
             orbit_linger_timer += delta;
 
             if (orbit_linger_timer >= orbit_linger_duration)
             {
-                // Linger complete, start new movement
+                // Linger complete, start new movement.
                 orbit_is_lingering = false;
                 orbit_linger_timer = 0.0f;
 
-                // Store current positions as start positions
+                // Store current positions as start positions.
                 orbit_start_yaw = orbit_yaw;
                 orbit_start_pitch = orbit_pitch;
                 orbit_start_distance = orbit_distance;
 
-                // Generate new random target positions
+                // Generate new random target positions.
                 orbit_target_yaw = random(0.0f, 360.0f);
-                orbit_target_pitch = random(-10.0f, 60.0f); // Cap underside pitch until culling issues are resolved
+                orbit_target_pitch = random(-10.0f, 60.0f); // Cap underside pitch until culling issues are resolved.
                 orbit_target_distance = random(scaled_min, scaled_max);
             }
         }
         else
         {
             // Movement phase: interpolate from start to target
-            // When timer is reset (< small threshold), enter linger instead of snapping back
+            // When timer resets, enter linger instead of snapping back
             if (cinematic_cycle_timer < 0.1f && orbit_linger_timer == 0.0f)
             {
-                // Timer was just reset, movement complete - enter linger phase at target
                 orbit_yaw = orbit_target_yaw;
                 orbit_pitch = orbit_target_pitch;
                 orbit_distance = orbit_target_distance;
@@ -991,10 +986,8 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
             else
             {
                 // Calculate smootherstep interpolation factor.
-                // TODO: Replace with SP tween.h smoothstep if merged.
-                float t = cinematic_cycle_timer / cinematic_cycle_period;
-                t = std::clamp(t, 0.0f, 1.0f);
-                float eased_t = t * t * t * (t * (t * 6.0f - 15.0f) + 10.0f);
+                // TODO: Replace with SP tween.h smootherstep if merged.
+                const float eased_t = glm::smoothstep(0.0f, 1.0f, std::clamp(cinematic_cycle_timer / cinematic_cycle_period, 0.0f, 1.0f));
 
                 // Interpolate using eased factor.
                 // For yaw, handle angle wrapping normalized to -180,180.
@@ -1009,11 +1002,9 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
             }
         }
     }
+    // Damp distance changes.
     else
-    {
-        // Manual mode: damp distance changes
         orbit_distance = applyDamping(orbit_distance, orbit_target_distance, 5.0f, delta);
-    }
 
     // When tracking ToT, position camera so that the locked camera target is
     // between the camera and ToT.
@@ -1025,24 +1016,18 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
 
         if (ship_to_tot_distance > 0.1f)
         {
-            // Calculate distance to frame both ships in camera.
-            float player_ship_radius = 200.0f;
-            if (auto physics = target.getComponent<sp::Physics>())
-                player_ship_radius = std::max(physics->getSize().x, physics->getSize().y) * 0.5f;
+            // Calculate total span including ship sizes with padding.
+            const float padding_factor = 1.2f;
+            float total_span = (ship_to_tot_distance + getShipRadius(target) + getShipRadius(target_of_target)) * padding_factor;
 
-            float tot_ship_radius = 200.0f;
-            if (auto tot_physics = target_of_target.getComponent<sp::Physics>())
-                tot_ship_radius = std::max(tot_physics->getSize().x, tot_physics->getSize().y) * 0.5f;
+            // Use current orbit_distance for camera positioning.
+            float effective_distance = orbit_distance;
 
-            // Calculate distance as a triangle defined by the camera pos and
-            // its FoV.
-            float base_distance = ((ship_to_tot_distance + player_ship_radius + tot_ship_radius) * 0.5f) / glm::tan(glm::radians(viewport->getFoV() * 0.5f));
+            // If auto-zoom is enabled, adjust FoV to fit both ships.
+            if (camera_auto_zoom_toggle->getValue())
+                viewport->modifyFoV(calculatePerspectiveAutoZoomFoV(effective_distance, total_span, delta));
 
-            // Clamp distance to valid range.
-            float effective_distance = std::clamp(base_distance, scaled_min, scaled_max);
-
-            // Position camera with player ship between camera and
-            // target-of-target.
+            // Position camera with player ship between camera and target-of-target.
             camera_position = {
                 target_position_smoothed + (tot_to_ship / ship_to_tot_distance) * effective_distance, // x,y
                 effective_distance * glm::tan(glm::radians(orbit_pitch)) // z
@@ -1052,6 +1037,10 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
     // Otherwise, use manual orbital positioning.
     else
     {
+        // Reset FoV modifier when not tracking ToT.
+        if (camera_auto_zoom_toggle->getValue())
+            viewport->modifyFoV(applyDamping(viewport->getFoVModifier(), 0.0f, 2.0f, delta));
+
         if (orbit_pitch != orbit_last_computed_pitch || orbit_distance != orbit_last_computed_distance)
         {
             orbit_horizontal_distance_cached = orbit_distance * cos(glm::radians(orbit_pitch));
@@ -1140,60 +1129,58 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::T
         horizontal_dist = glm::length(camera_to_ship);
     }
 
-    // Position camera at flyby position
+    // Move camera to flyby position.
     camera_position = {flyby_camera_pos, flyby_height};
 
-    // Check if ship has a weapons target and ToT lock is enabled
+    // Check if ship has a weapons target and ToT lock is enabled.
     glm::vec2 aim_point = target_position_smoothed;
     float frame_distance = horizontal_dist;
 
-    if (updateToTState(tot_transform, delta))
+    bool is_tracking_tot = updateToTState(tot_transform, delta);
+    if (is_tracking_tot)
     {
-        // Aim at median point between ship and its target
+        // Aim at median point between ship and its target.
         aim_point = getMedianPoint();
 
-        // For auto-zoom, calculate distance between the two ships
+        // Calculate total span including ship sizes for auto-zoom.
         if (camera_auto_zoom_toggle->getValue())
         {
-            frame_distance = getToTDistance();
+            const float padding_factor = 1.2f;
+            frame_distance = (getToTDistance() + getShipRadius(target) + getShipRadius(target_of_target)) * padding_factor;
         }
     }
 
-    // Pan and zoom camera at aim point
+    // Pan and zoom camera at aim point.
     glm::vec2 camera_to_aim = aim_point - flyby_camera_pos;
     float aim_horizontal_dist = glm::length(camera_to_aim);
 
     if (aim_horizontal_dist > 0.1f)
     {
-        // Auto-zoom: adjust FoV to fit both ships in frame
-        if (camera_auto_zoom_toggle->getValue() && frame_distance > horizontal_dist)
+        // Auto-zoom adjust FoV to fit ship or ship and ToT in frame.
+        if (camera_auto_zoom_toggle->getValue())
         {
-            // Calculate FoV needed to fit both ships from camera position
-            float camera_to_median = aim_horizontal_dist;
-            // Use atan to calculate required half-FOV angle, then convert to full FOV modifier
-            float required_half_fov = glm::degrees(atan((frame_distance * 0.5f) / camera_to_median));
-            float fov_goal = (required_half_fov * 2.0f) - viewport->getBaseFoV();
-            fov_goal = std::clamp(fov_goal, -30.0f, 60.0f);  // Limit FoV adjustment range
-            float new_fov = applyDamping(viewport->getFoVModifier(), fov_goal, 2.0f, delta);
-            flyby_fov_modifier = viewport->modifyFoV(new_fov);
-        }
-        else
-        {
-            if (camera_auto_zoom_toggle->getValue())
+            float fov_goal;
+
+            if (is_tracking_tot && frame_distance > horizontal_dist)
             {
-                // Standard zoom based on distance
-                float fov_goal = ((1 - (std::clamp(horizontal_dist, 500.0f, 2000.0f) / std::clamp(distance_after_travel, 500.0f, 2000.0f))) * 60.0f) - 30.0f;
-                float new_fov = applyDamping(viewport->getFoVModifier(), fov_goal, 1.0f, delta);
-                flyby_fov_modifier = viewport->modifyFoV(new_fov);
+                // Use helper function to calculate FoV for fitting both ships.
+                fov_goal = calculatePerspectiveAutoZoomFoV(aim_horizontal_dist, frame_distance, delta);
+                flyby_fov_modifier = viewport->modifyFoV(fov_goal);
+            }
+            else
+            {
+                // Standard zoom based on distance to single ship.
+                fov_goal = ((1.0f - (std::clamp(horizontal_dist, 500.0f, 2000.0f) / std::clamp(distance_after_travel, 500.0f, 2000.0f))) * 60.0f) - 20.0f;
+                flyby_fov_modifier = viewport->modifyFoV(applyDamping(viewport->getFoVModifier(), fov_goal, 1.0f, delta));
             }
         }
 
-        // Point camera at aim point
+        // Point camera at aim point.
         pointCameraAt(aim_point, target_rotation);
     }
     else
     {
-        // Camera at aim point, point straight down
+        // Move camera to aim point and point straight down.
         camera_yaw = target_rotation;
         camera_pitch = 90.0f;
     }
@@ -1228,18 +1215,15 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
     glm::vec2 camera_target;
     bool should_use_tot_target = updateToTState(tot_transform, delta);
 
-    // Only use ToT if in range or lingering
+    // Use ToT only if in range or lingering.
     if (should_use_tot_target)
     {
         if (isToTActive(tot_transform))
-        {
-            // Active tracking: only use ToT if in range
             should_use_tot_target = isToTInRange(tot_transform);
-        }
-        // else: lingering - always use cached tot_cached_position_2D
+        // else use cached tot_cached_position_2D
     }
 
-    // Set camera target based on ToT state
+    // Set camera target based on ToT state.
     if (should_use_tot_target)
     {
         camera_angle = vec2ToAngle(target_position_smoothed - tot_cached_position_2D) + 180.0f;
@@ -1249,21 +1233,21 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
     {
         switch (chase_direction)
         {
-        case ChaseAngle::Front:  // Camera behind ship, looking ahead of ship
+        case ChaseAngle::Front: // Camera behind ship, looking ahead of ship
             focal_point = target_position_smoothed + front;
             break;
-        case ChaseAngle::Back:   // Camera in front, looking behind
+        case ChaseAngle::Back:  // Camera in front, looking behind
             focal_point = target_position_smoothed - front;
             break;
-        case ChaseAngle::Right:  // Camera on left side, looking off right side
+        case ChaseAngle::Right: // Camera on left side, looking off right side
             focal_point = target_position_smoothed + right;
             break;
-        case ChaseAngle::Left:   // Camera on right side, looking off left side
+        case ChaseAngle::Left:  // Camera on right side, looking off left side
             focal_point = target_position_smoothed - right;
             break;
         }
 
-        // Position camera at chase_distance from ship
+        // Position camera at chase_distance from ship.
         camera_angle = target_rotation - (static_cast<int>(chase_direction) * 90.0f);
         camera_target = focal_point;
     }
@@ -1271,7 +1255,31 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
     camera_offset = vec2FromAngle(camera_angle) * chase_distance * (should_use_tot_target ? -1.0f : 1.0f);
     camera_position = {target_position_smoothed + camera_offset, chase_height};
 
-    // Point camera at target
+    // Apply aspect-ratio aware auto-zoom when tracking ToT.
+    if (should_use_tot_target && camera_auto_zoom_toggle->getValue())
+    {
+        // Calculate distance from camera to median point between ship and ToT.
+        glm::vec2 median_point = getMedianPoint();
+        glm::vec2 camera_to_median = median_point - glm::vec2(camera_position.x, camera_position.y);
+        float camera_to_median_dist = glm::length(camera_to_median);
+
+        if (camera_to_median_dist > 0.1f)
+        {
+            // Calculate total span including ship sizes with padding.
+            const float padding_factor = 1.2f;
+            float total_span = (getToTDistance() + getShipRadius(target) + getShipRadius(target_of_target)) * padding_factor;
+
+            // Adjust FoV to fit both ships.
+            viewport->modifyFoV(calculatePerspectiveAutoZoomFoV(camera_to_median_dist, total_span, delta));
+        }
+    }
+    else if (camera_auto_zoom_toggle->getValue())
+    {
+        // Reset FoV modifier when not tracking ToT.
+        viewport->modifyFoV(applyDamping(viewport->getFoVModifier(), 0.0f, 2.0f, delta));
+    }
+
+    // Point camera at target.
     pointCameraAt(camera_target, target_rotation);
 }
 
@@ -1291,9 +1299,13 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform, s
 
         if (camera_auto_zoom_toggle->getValue())
         {
-            // For orthographic projection, distance determines visible area
-            // Need distance large enough that both ships fit in frame with padding (1.5x)
-            target_distance = std::clamp(getToTDistance() * 0.75f, isometric_distance_min, isometric_distance_max);
+            // Calculate total horizontal span including ship sizes with padding.
+            const float padding_factor = 1.2f;
+            float horizontal_span = (getToTDistance() + getShipRadius(target) + getShipRadius(target_of_target)) * padding_factor;
+
+            // Calculate required distance for orthographic projection.
+            float required_distance = calculateOrthographicAutoZoomDistance(horizontal_span);
+            target_distance = std::clamp(required_distance, isometric_distance_min, isometric_distance_max);
         }
     }
 
@@ -1313,12 +1325,13 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform, s
     pointCameraAt(camera_aim_point, target_rotation);
 }
 
+// Update orthographic top-down camera to follow ship from above.
 void CinematicViewScreen::updateTopdownCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
-    // Top-down camera: Follow ship from directly above.
     viewport->setProjectionType(ProjectionType::Orthographic);
 
-    // Auto-zoom: adjust zoom to keep both ships visible when ToT is active
+    // Auto-zoom adjusts camera position and zoom to keep both camera lock
+    // target and ToT visible in the same frame.
     float target_zoom = topdown_zoom;
     glm::vec2 camera_aim_point = target_position_smoothed;
 
@@ -1328,27 +1341,28 @@ void CinematicViewScreen::updateTopdownCamera(sp::Transform* main_transform, sp:
 
         if (camera_auto_zoom_toggle->getValue())
         {
-            float ship_to_tot_distance = getToTDistance();
-            // For orthographic top-down view, zoom determines visible area
-            // Need zoom large enough that both ships fit in frame with padding (1.5x)
-            target_zoom = std::clamp(ship_to_tot_distance * 0.75f, topdown_zoom_min, topdown_zoom_max);
+            // Calculate total horizontal span including ship sizes with padding.
+            const float padding_factor = 1.2f;
+            float horizontal_span = (getToTDistance() + getShipRadius(target) + getShipRadius(target_of_target)) * padding_factor;
+
+            // Calculate required camera height (Z) for orthographic top-down view.
+            float required_z = calculateOrthographicAutoZoomDistance(horizontal_span);
+            target_zoom = std::clamp(required_z, topdown_zoom_min, topdown_zoom_max);
         }
     }
 
-    // Smoothly interpolate to target zoom with framerate-independent damping
+    // Smoothly interpolate to target zoom.
     if (camera_auto_zoom_toggle->getValue())
         topdown_zoom = applyDamping(topdown_zoom, target_zoom, 0.5f, delta);
 
-    // Position camera above aim point
+    // Position camera above aim point and point straight down.
     camera_position = {camera_aim_point, topdown_zoom};
-
-    // Point camera straight down at aim point
     pointCameraAt(camera_aim_point, target_rotation);
 }
 
+// Update directly controlled Free camera mode. Might be redundant?
 void CinematicViewScreen::updateFreeCamera(float delta)
 {
-    // Free camera: Directly control movement
     viewport->setProjectionType(ProjectionType::Perspective);
 }
 
@@ -1372,53 +1386,109 @@ void CinematicViewScreen::pointCameraAt(const glm::vec2& aim_point, float fallba
 
 // Target-of-target functions
 
-// Updates ToT state and returns true if we should use ToT data
+// Update ToT state and return true if we should use ToT data.
 bool CinematicViewScreen::updateToTState(sp::Transform* tot_transform, float delta)
 {
-    const bool is_tracking_active_target = isToTActive(tot_transform);
-    const bool is_lingering_on_inactive_target = tot_linger_timer > 0.0f;
-
-    if (is_tracking_active_target || is_lingering_on_inactive_target)
+    if (isToTActive(tot_transform))
     {
-        if (is_tracking_active_target)
-        {
-            // Update cached position from active target
-            tot_cached_position_2D = tot_transform->getPosition();
-            tot_linger_timer = tot_linger_period;
-            return true;
-        }
-        else  // lingering
-        {
-            // Use cached position, decrement linger timer
-            tot_linger_timer -= delta;
-            return true;
-        }
+        // Update cached position from active target
+        tot_cached_position_2D = tot_transform->getPosition();
+        tot_linger_timer = tot_linger_period;
+        return true;
+    }
+    // Linger. Use cached position, decrement linger timer.
+    else if (tot_linger_timer > 0.0f)
+    {
+        tot_linger_timer -= delta;
+        return true;
     }
 
     return false;
 }
 
+// Check if the ToT toggle is active and a ToT transform is available.
 bool CinematicViewScreen::isToTActive(sp::Transform* tot_transform) const
 {
     return camera_lock_tot_toggle->getValue() && tot_transform;
 }
 
+// Check if the selected ToT is within tracking range.
 bool CinematicViewScreen::isToTInRange(sp::Transform* tot_transform) const
 {
     if (!tot_transform) return false;
     return getToTDistance() <= tot_max_distance;
 }
 
+// Return a median point between the camera lock target and the ToT position to
+// serve as the camera's focal point.
 glm::vec2 CinematicViewScreen::getMedianPoint() const
 {
     return (target_position_smoothed + tot_cached_position_2D) * 0.5f;
 }
 
+// Return the distance from the camera lock target to the ToT.
 float CinematicViewScreen::getToTDistance() const
 {
     return glm::length(tot_cached_position_2D - target_position_smoothed);
 }
 
+// Auto-zoom helper functions
+
+// Get the radius (half of longest dimension) of a ship entity.
+float CinematicViewScreen::getShipRadius(sp::ecs::Entity entity) const
+{
+    // Default radius = Atlantis mesh radius
+    float radius = 200.0f;
+    if (auto physics = entity.getComponent<sp::Physics>())
+        radius = std::max(physics->getSize().x, physics->getSize().y) * 0.5f;
+    return radius;
+}
+
+// Calculate aspect-ratio aware FoV modifier for perspective cameras to fit a given span.
+float CinematicViewScreen::calculatePerspectiveAutoZoomFoV(float camera_to_target_distance, float total_span, float delta)
+{
+    // Get viewport aspect ratio.
+    float aspect_ratio = viewport->getAspectRatio();
+    if (aspect_ratio <= 0.0f)
+    {
+        LOG(Error, "Viewport has non-positive aspect ratio in auto-zoom, falling back to 4:3");
+        aspect_ratio = 4.0f / 3.0f;
+    }
+
+    // Calculate horizontal FoV needed to fit the span at the given distance.
+    float horizontal_fov_rad = 2.0f * atan((total_span * 0.5f) / camera_to_target_distance);
+
+    // Convert to vertical FoV using aspect ratio.
+    float vertical_fov_rad = 2.0f * atan(tan(horizontal_fov_rad * 0.5f) / aspect_ratio);
+    float fov_modifier_needed = glm::degrees(vertical_fov_rad) - viewport->getBaseFoV();
+
+    // Clamp FoV modifier to reasonable range.
+    fov_modifier_needed = std::clamp(fov_modifier_needed, -30.0f, 60.0f);
+
+    // Smoothly adjust FoV and return the new modifier.
+    return applyDamping(viewport->getFoVModifier(), fov_modifier_needed, 2.0f, delta);
+}
+
+// Calculate distance needed for orthographic cameras to fit a horizontal span.
+float CinematicViewScreen::calculateOrthographicAutoZoomDistance(float horizontal_span)
+{
+    // Get viewport aspect ratio.
+    float aspect_ratio = viewport->getAspectRatio();
+    if (aspect_ratio <= 0.0f)
+    {
+        LOG(Error, "Viewport has non-positive aspect ratio in orthographic auto-zoom, falling back to 4:3");
+        aspect_ratio = 4.0f / 3.0f;
+    }
+
+    // Convert horizontal span to required vertical half-height using aspect ratio.
+    float required_half_height = (horizontal_span * 0.5f) / aspect_ratio;
+
+    // Convert half-height to required distance using vertical FoV.
+    float vertical_fov_rad = glm::radians(viewport->getFoV() * 0.5f);
+    return required_half_height / tan(vertical_fov_rad);
+}
+
+// Set the visibility of UI camera controls.
 void CinematicViewScreen::setUIVisibility(bool is_visible)
 {
     // Bind relative mouse state to UI visiblity state.
@@ -1431,52 +1501,44 @@ void CinematicViewScreen::setUIVisibility(bool is_visible)
         manual_camera_controls_enabled = false;
 }
 
+// Manage the state of camera mode selector options between locked and unlocked
+// modes.
 void CinematicViewScreen::updateCameraModeSelector(bool is_locked)
 {
-    // Clear all entries
     camera_mode_selector->clear();
 
+    // If locked, list all CameraModes except Free and Static.
     if (is_locked)
     {
-        // Locked: Show all modes except Free and Static
         camera_mode_selector->addEntry(tr("button", "Fly-by camera"), static_cast<string>(static_cast<int>(CameraMode::Flyby)));
         camera_mode_selector->addEntry(tr("button", "Orbital camera"), static_cast<string>(static_cast<int>(CameraMode::Orbital)));
         camera_mode_selector->addEntry(tr("button", "Chase camera"), static_cast<string>(static_cast<int>(CameraMode::Chase)));
         camera_mode_selector->addEntry(tr("button", "Isometric camera"), static_cast<string>(static_cast<int>(CameraMode::Isometric)));
         camera_mode_selector->addEntry(tr("button", "Top-down camera"), static_cast<string>(static_cast<int>(CameraMode::Topdown)));
 
-        // If current active mode is Free or Static, switch to Flyby
+        // If active mode is Free or Static, default to Flyby.
         if (active_camera_mode == CameraMode::Free || active_camera_mode == CameraMode::Static)
             active_camera_mode = CameraMode::Flyby;
-
-        // Set selector to match active mode
-        int active_mode_index = camera_mode_selector->indexByValue(std::to_string(static_cast<int>(active_camera_mode)));
-        if (active_mode_index >= 0)
-            camera_mode_selector->setSelectionIndex(active_mode_index);
-        else
-            camera_mode_selector->setSelectionIndex(0); // Fallback to Flyby
     }
+    // If unlocked, list only Free and Static CameraModes.
     else
     {
-        // Unlocked: Show only Free and Static modes
         camera_mode_selector->addEntry(tr("button", "Free camera"), static_cast<string>(static_cast<int>(CameraMode::Free)));
         camera_mode_selector->addEntry(tr("button", "Static camera"), static_cast<string>(static_cast<int>(CameraMode::Static)));
 
-        // If current active mode is not Free or Static, switch to Free
+        // If active mode is not Free or Static, switch to Free.
         if (active_camera_mode != CameraMode::Free && active_camera_mode != CameraMode::Static)
             active_camera_mode = CameraMode::Free;
-
-        // Set selector to match active mode
-        int active_mode_index = camera_mode_selector->indexByValue(std::to_string(static_cast<int>(active_camera_mode)));
-        if (active_mode_index >= 0)
-            camera_mode_selector->setSelectionIndex(active_mode_index);
-        else
-            camera_mode_selector->setSelectionIndex(0); // Fallback to Free
     }
+
+    // Set selector to match active mode. Fallback to first option in selector.
+    const int active_mode_index = camera_mode_selector->indexByValue(std::to_string(static_cast<int>(active_camera_mode)));
+    if (active_mode_index >= 0) camera_mode_selector->setSelectionIndex(active_mode_index);
+    else camera_mode_selector->setSelectionIndex(0);
 }
 
 #ifdef DEBUG
-// Select damping type
+// Select damping type to apply.
 float CinematicViewScreen::applyDamping(float source, float target, float speed, float delta)
 {
     switch (current_damping_type)
@@ -1528,7 +1590,7 @@ float CinematicViewScreen::applyAngleDamping(float source, float target, float s
     }
 }
 #else
-// Use exponential damping
+// Apply exponential damping.
 float CinematicViewScreen::applyDamping(float source, float target, float speed, float delta)
 {
     return exponentialDamp(source, target, speed, delta);
