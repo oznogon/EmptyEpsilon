@@ -760,7 +760,7 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
         updateOrbitCamera(main_transform, tot_transform, delta);
         break;
     case CAMERA_MODE_CHASE:
-        updateChaseCamera(main_transform, tot_transform);
+        updateChaseCamera(main_transform, tot_transform, delta);
         break;
     case CAMERA_MODE_ISOMETRIC:
         updateIsometricCamera(main_transform);
@@ -812,7 +812,7 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
         // Orbit around the midpoint between ship and its target
         glm::vec2 tot_pos = tot_transform->getPosition();
 
-        // Don't track ToTs > 10U away
+        // Don't track ToTs > 6U away
         if (glm::length(tot_pos - target_position_2D) <= tot_max_distance)
             orbit_center = (target_position_2D + tot_pos) * 0.5f;
         else
@@ -824,8 +824,8 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
         orbit_center = target_position_2D;
     }
 
-    // Calculate camera position using spherical coordinates
-    // Convert orbit angles to 3D position around the target
+    // Calculate camera position using spherical coordinates.
+    // Convert orbit angles to 3D position around the target.
 
     // Horizontal component (XY plane)
     float horizontal_distance = orbit_distance * cos(glm::radians(orbit_pitch));
@@ -959,67 +959,78 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float
     }
 }
 
-void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform)
+void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
+    // Chase camera: Follow ship like main screen camera.
+
     viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
     // Clamp chase_distance to valid scaled range for current ship size
     chase_distance = std::clamp(chase_distance, getScaledCameraDistance(chase_distance_min), getScaledCameraDistance(chase_distance_max));
 
     // Get ship dimensions for focal point calculation
     float ship_half_width = 250.0f;
+    float ship_half_length = 250.0f;
     if (auto physics = target.getComponent<sp::Physics>())
-        ship_half_width = std::max(physics->getSize().x, physics->getSize().y) / 2.0f;
-
-    // Calculate focal point based on chase direction
-    // Front/Back look at ship center (stable behavior at all distances)
-    // Left/Right look at point offset to the side (for better side view)
-    const float focal_lead_distance = 500.0f;
-    const float focal_point_distance = ship_half_width + focal_lead_distance;
-    glm::vec2 front = vec2FromAngle(target_rotation - 180.0f);
-    glm::vec2 right = vec2FromAngle(target_rotation + 90.0f);
-    glm::vec2 focal_point;
-
-    switch (chase_direction)
     {
-    case Angle::Front:  // Camera behind ship, looking at ship center
-        focal_point = target_position_2D + front * focal_point_distance;
-        break;
-    case Angle::Back:   // Camera in front, looking at ship center
-        focal_point = target_position_2D - front * focal_point_distance;
-        break;
-    case Angle::Right:  // Camera on left side, looking right
-        focal_point = target_position_2D + right * focal_point_distance;
-        break;
-    case Angle::Left:   // Camera on right side, looking left
-        focal_point = target_position_2D - right * focal_point_distance;
-        break;
+        ship_half_width = physics->getSize().y * 0.5f;
+        ship_half_length = physics->getSize().x * 0.5f;
     }
 
-    // Chase camera: Follow ship like main screen camera.
-    float camera_angle = target_rotation - (static_cast<int>(chase_direction) * 90.0f);
-
-    // Position camera at chase_distance from ship
-    glm::vec2 camera_offset = vec2FromAngle(camera_angle) * chase_distance;
-    camera_position.x = target_position_2D.x + camera_offset.x;
-    camera_position.y = target_position_2D.y + camera_offset.y;
-    camera_position.z = chase_height;
+    // Calculate focal point based on chase direction
+    const float focal_lead_distance = 500.0f;
+    glm::vec2 front = vec2FromAngle(target_rotation - 180.0f) * (ship_half_length + focal_lead_distance);
+    glm::vec2 right = vec2FromAngle(target_rotation + 90.0f) * (ship_half_width + focal_lead_distance);
+    glm::vec2 focal_point;
+    glm::vec2 camera_offset;
+    float camera_angle = 0.0f;
 
     // Determine what to point the camera at
     glm::vec2 camera_target;
-    if (camera_lock_tot_toggle->getValue() && tot_transform)
+    const bool is_tracking_active_target = camera_lock_tot_toggle->getValue() && tot_transform;
+    const bool is_lingering_on_inactive_target = tot_linger_timer > 0.0f;
+
+    // With ToT: orbit camera and point at target if within range
+    if (is_tracking_active_target || is_lingering_on_inactive_target)
     {
-        // With ToT: point at target if within range
-        glm::vec2 tot_pos = tot_transform->getPosition();
-        if (glm::length(tot_pos - target_position_2D) <= tot_max_distance)
-            camera_target = tot_pos;
+        if (is_tracking_active_target)
+        {
+            tot_pos = tot_transform->getPosition();
+            tot_linger_timer = tot_linger_period;
+        }
         else
-            camera_target = focal_point;
+            tot_linger_timer -= delta;
+
+        if (glm::length(tot_pos - target_position_2D) <= tot_max_distance)
+        {
+            camera_angle = vec2ToAngle(target_position_2D - tot_pos) + 180.0f;
+            camera_target = tot_pos;
+        }
     }
     else
     {
-        // Normal chase: point at focal point ahead of ship
+        switch (chase_direction)
+        {
+        case Angle::Front:  // Camera behind ship, looking ahead of ship
+            focal_point = target_position_2D + front;
+            break;
+        case Angle::Back:   // Camera in front, looking behind
+            focal_point = target_position_2D - front;
+            break;
+        case Angle::Right:  // Camera on left side, looking off right side
+            focal_point = target_position_2D + right;
+            break;
+        case Angle::Left:   // Camera on right side, looking off left side
+            focal_point = target_position_2D - right;
+            break;
+        }
+
+        // Position camera at chase_distance from ship
+        camera_angle = target_rotation - (static_cast<int>(chase_direction) * 90.0f);
         camera_target = focal_point;
     }
+
+    camera_offset = vec2FromAngle(camera_angle) * chase_distance * (is_tracking_active_target || is_lingering_on_inactive_target ? -1.0f : 1.0f);
+    camera_position = {target_position_2D + camera_offset, chase_height};
 
     // Point camera at target
     glm::vec2 camera_to_target = camera_target - glm::vec2(camera_position.x, camera_position.y);
