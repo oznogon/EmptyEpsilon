@@ -22,7 +22,7 @@ public:
         render_handlers.push_back({rif, &RenderSystem::findRenderObjects<COMPONENT, TRANSPARENT>});
     }
 
-    void render3D(float aspect, float camera_fov);
+    void render3D(float aspect, float camera_fov, bool use_orthographic = false);
 private:
     float depth_cutoff_back;
     float depth_cutoff_front;

@@ -773,6 +773,7 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
 
 void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
+    viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
     // Clamp orbit_distance to valid scaled range for current ship size
     float scaled_min = getScaledCameraDistance(orbit_distance_min);
     float scaled_max = getScaledCameraDistance(orbit_distance_max);
@@ -861,6 +862,7 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
 
 void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float delta, OptionState reposition)
 {
+    viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
     // Fly-by camera: Stationary camera positioned at various points.
     // Camera pans to follow the moving ship as it passes.
 
@@ -959,6 +961,7 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float
 
 void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::Transform* tot_transform)
 {
+    viewport->setProjectionType(GuiViewport3D::ProjectionType::Perspective);
     // Clamp chase_distance to valid scaled range for current ship size
     chase_distance = std::clamp(chase_distance, getScaledCameraDistance(chase_distance_min), getScaledCameraDistance(chase_distance_max));
 
@@ -1038,7 +1041,9 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
 void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform)
 {
     // Isometric camera: Diagonal view from above at fixed 45-degree elevation
-    const float isometric_elevation = 45.0f;
+
+    viewport->setProjectionType(GuiViewport3D::ProjectionType::Ortho);
+    const float isometric_elevation = 35.264f;
     float horizontal_angle = target_rotation + ((static_cast<int>(isometric_direction) * 90.0f) + 45.0f);
 
     // Calculate camera position using spherical coordinates
@@ -1046,9 +1051,7 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform)
     glm::vec2 horizontal_offset = vec2FromAngle(horizontal_angle) * horizontal_distance;
     float vertical_offset = isometric_distance * sin(glm::radians(isometric_elevation));
 
-    camera_position.x = target_position_2D.x + horizontal_offset.x;
-    camera_position.y = target_position_2D.y + horizontal_offset.y;
-    camera_position.z = vertical_offset;
+    camera_position = {target_position_2D + horizontal_offset, vertical_offset};
 
     // Always point at ship
     glm::vec2 camera_to_ship = target_position_2D - glm::vec2(camera_position.x, camera_position.y);
@@ -1068,12 +1071,11 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform)
 
 void CinematicViewScreen::updateTopdownCamera(sp::Transform* main_transform)
 {
+    viewport->setProjectionType(GuiViewport3D::ProjectionType::Ortho);
     // Top-down camera: Follow ship from directly above.
 
     // Position camera above ship with pan offset
-    camera_position.x = target_position_2D.x + topdown_offset.x;
-    camera_position.y = target_position_2D.y + topdown_offset.y;
-    camera_position.z = topdown_zoom;
+    camera_position = {target_position_2D, topdown_zoom};
 
     // Point camera straight down at ship
     glm::vec2 camera_to_ship = target_position_2D - glm::vec2(camera_position.x, camera_position.y);
