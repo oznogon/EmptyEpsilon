@@ -430,8 +430,8 @@ set(MAIN_SOURCES
     src/systems/radar.cpp
     src/systems/zone.h
     src/systems/zone.cpp
-    src/systems/cinematiccamera.h
-    src/systems/cinematiccamera.cpp
+    src/systems/cinematicCamera.h
+    src/systems/cinematicCamera.cpp
     src/systems/debugrender.h
     src/systems/debugrender.cpp
     src/multiplayer/beamweapon.h
@@ -502,8 +502,8 @@ set(MAIN_SOURCES
     src/multiplayer/shiplog.cpp
     src/multiplayer/zone.h
     src/multiplayer/zone.cpp
-    src/multiplayer/cinematiccamera.h
-    src/multiplayer/cinematiccamera.cpp
+    src/multiplayer/cinematicCamera.h
+    src/multiplayer/cinematicCamera.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

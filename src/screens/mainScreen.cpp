@@ -6,7 +6,7 @@
 #include "preferenceManager.h"
 #include "soundManager.h"
 #include "multiplayer_client.h"
-#include "components/cinematiccamera.h"
+#include "components/cinematicCamera.h"
 #include "ecs/query.h"
 
 #include "screenComponents/indicatorOverlays.h"
@@ -163,8 +163,9 @@ void ScreenMainScreen::update(float delta)
                     camera_position.x = transform->getPosition().x;
                     camera_position.y = transform->getPosition().y;
                     camera_position.z = cam->z_position;
-                    camera_yaw = cam->yaw;
+                    camera_yaw = transform->getRotation(); // Yaw comes from Transform rotation
                     camera_pitch = cam->pitch;
+                    camera_roll = cam->roll;
 
                     // Apply field of view
                     viewport->modifyFoV(cam->field_of_view - viewport->getBaseFoV());

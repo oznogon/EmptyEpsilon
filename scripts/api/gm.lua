@@ -11,6 +11,18 @@ function getSpawnableGMObjects()
     result[#result+1] = {function() return BlackHole() end, _("create", "Black hole"), _("create", "Various"), "", "radar/blackHole.png"}
     result[#result+1] = {function() return Nebula() end, _("create", "Nebula"), _("create", "Various"), "", "Nebula1.png"}
     result[#result+1] = {function() return WormHole() end, _("create", "Worm hole"), _("create", "Various"), "", "radar/wormHole.png"}
+    result[#result+1] = {function()
+        local cam = createEntity()
+        cam.components.transform = {}
+        cam:setRotation(-90) -- Default yaw
+        cam.components.cinematic_camera = {
+            name = "Camera",
+            pitch = 30,
+            z_position = 200,
+            field_of_view = 60
+        }
+        return cam
+    end, _("create", "Camera"), _("create", "Various"), _("create", "Cinematic camera viewpoint"), "radar/blip.png"}
 
     for k, v in pairs(__ship_templates) do
         if not v.__hidden then
@@ -70,6 +82,22 @@ function getEntityExportString(entity)
     if entity.components.radar_block and entity.components.nebula_renderer then
         -- Likely an Nebula
         return "Nebula()" .. __exportBasics(entity)
+    end
+    if entity.components.cinematic_camera then
+        -- Camera entity
+        local x, y = entity:getPosition()
+        local yaw = entity:getRotation()
+        local cam = entity.components.cinematic_camera
+        return string.format([[local cam = createEntity()
+cam.components.transform = {}
+cam:setPosition(%.0f, %.0f)
+cam:setRotation(%.1f)
+cam.components.cinematic_camera = {
+    name = "%s",
+    pitch = %.1f,
+    z_position = %.1f,
+    field_of_view = %.1f
+}]], x, y, yaw, cam.name, cam.pitch, cam.z_position, cam.field_of_view)
     end
     return ""
 end

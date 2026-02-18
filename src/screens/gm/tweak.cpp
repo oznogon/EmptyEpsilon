@@ -32,6 +32,7 @@
 #include "components/shields.h"
 #include "components/spin.h"
 #include "components/warpdrive.h"
+#include "components/cinematicCamera.h"
 
 
 #include "gui/gui2_listbox.h"
@@ -448,6 +449,73 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), Gravity, range);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Force:"), Gravity, force);
     ADD_BOOL_TWEAK(tr("tweak-text", "Black hole damage:"), Gravity, damage);
+
+    // Transform component - custom implementation since it uses methods instead of direct member access
+    ADD_PAGE(tr("tweak-tab", "Transform"), sp::Transform);
+    {
+        // Position X slider
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Position X:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiSliderTweak(row, "", -50000.0f, 50000.0f, 0.0f, [this](float value) {
+            auto t = entity.getComponent<sp::Transform>();
+            if (t) {
+                auto pos = t->getPosition();
+                t->setPosition(glm::vec2(value, pos.y));
+            }
+        });
+        ui->addOverlay(0u, 20.0f);
+        ui->update_func = [this]() -> float {
+            auto t = entity.getComponent<sp::Transform>();
+            if (t) return t->getPosition().x;
+            return 0.0f;
+        };
+    }
+    {
+        // Position Y slider
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Position Y:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiSliderTweak(row, "", -50000.0f, 50000.0f, 0.0f, [this](float value) {
+            auto t = entity.getComponent<sp::Transform>();
+            if (t) {
+                auto pos = t->getPosition();
+                t->setPosition(glm::vec2(pos.x, value));
+            }
+        });
+        ui->addOverlay(0u, 20.0f);
+        ui->update_func = [this]() -> float {
+            auto t = entity.getComponent<sp::Transform>();
+            if (t) return t->getPosition().y;
+            return 0.0f;
+        };
+    }
+    {
+        // Rotation slider
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Rotation:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiSliderTweak(row, "", -180.0f, 180.0f, 0.0f, [this](float value) {
+            auto t = entity.getComponent<sp::Transform>();
+            if (t) t->setRotation(value);
+        });
+        ui->addOverlay(1u, 20.0f);
+        ui->update_func = [this]() -> float {
+            auto t = entity.getComponent<sp::Transform>();
+            if (t) return t->getRotation();
+            return 0.0f;
+        };
+    }
+
+    ADD_PAGE(tr("tweak-tab", "Camera"), CinematicCamera);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Name:"), CinematicCamera, name);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Pitch:"), CinematicCamera, -90.0f, 90.0f, pitch);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Roll:"), CinematicCamera, -180.0f, 180.0f, roll);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Z Position:"), CinematicCamera, -1000.0f, 1000.0f, z_position);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Field of View:"), CinematicCamera, 30.0f, 140.0f, field_of_view);
 
     for(GuiTweakPage* page : pages)
     {

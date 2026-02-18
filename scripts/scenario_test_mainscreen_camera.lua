@@ -23,9 +23,9 @@ function init()
     main_cam = createEntity()
     main_cam.components.transform = {}
     main_cam:setPosition(6000, 0)
+    main_cam:setRotation(180)  -- Looking back toward origin (yaw)
     main_cam.components.cinematic_camera = {
         name = "External View",  -- This name will appear on the main screen button!
-        yaw = 180,  -- Looking back toward origin
         pitch = 35, -- Angled downward
         z_position = 800,  -- Elevated viewpoint
         field_of_view = 75
@@ -38,9 +38,9 @@ function init()
     other_cam = createEntity()
     other_cam.components.transform = {}
     other_cam:setPosition(0, 5000)
+    other_cam:setRotation(-90)  -- Yaw
     other_cam.components.cinematic_camera = {
         name = "Top View (not main screen)",
-        yaw = -90,
         pitch = 80,
         z_position = 1000,
         field_of_view = 60

@@ -25,3 +25,4 @@ require("api/entity/explosioneffect.lua")
 
 require("api/gm.lua")
 require("api/callsign.lua")
+require("camera_api.lua")

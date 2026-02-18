@@ -38,7 +38,7 @@
 #include "multiplayer/radarblock.h"
 #include "multiplayer/shiplog.h"
 #include "multiplayer/zone.h"
-#include "multiplayer/cinematiccamera.h"
+#include "multiplayer/cinematicCamera.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -68,7 +68,7 @@
 #include "systems/gm.h"
 #include "systems/pickup.h"
 #include "systems/debugrender.h"
-#include "systems/cinematiccamera.h"
+#include "systems/cinematicCamera.h"
 
 
 void initSystemsAndComponents()

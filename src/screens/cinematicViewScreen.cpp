@@ -12,7 +12,7 @@
 #include "components/target.h"
 #include "components/player.h"
 #include "components/name.h"
-#include "components/cinematiccamera.h"
+#include "components/cinematicCamera.h"
 #include "math/damp.h"
 
 #include "screenComponents/indicatorOverlays.h"
@@ -783,9 +783,13 @@ void CinematicViewScreen::update(float delta)
         }
     }
 
-    // Add cameras with Transform component
-    for (auto [entity, cam, transform] : sp::ecs::Query<CinematicCamera, sp::Transform>())
+    // Add cameras (and ensure they have Transform component)
+    for (auto [entity, cam] : sp::ecs::Query<CinematicCamera>())
     {
+        // Ensure camera has Transform component (add if missing)
+        if (!entity.hasComponent<sp::Transform>())
+            entity.addComponent<sp::Transform>();
+
         if (camera_lock_selector->indexByValue(entity.toString()) == -1)
         {
             string label = "[CAM] " + cam.name;
@@ -886,28 +890,25 @@ void CinematicViewScreen::update(float delta)
                 previous_camera_entity = target;
             }
 
+            // Enable camera controls for both server and client
+            active_camera_mode = CameraMode::Free;
+            camera_mode_selector->enable();
+            camera_reset->enable();
+            camera_auto_zoom_toggle->disable();
+            camera_lock_tot_toggle->disable();
+            camera_lock_cycle_toggle->enable();
+            camera_mode_cycle_toggle->disable();
+
             if (game_server)
             {
-                // Server: Enable free camera mode and write changes back to component
-                active_camera_mode = CameraMode::Free;
-                camera_mode_selector->enable();
-                camera_reset->enable();
-                camera_auto_zoom_toggle->disable();
-                camera_lock_tot_toggle->disable();
-                camera_lock_cycle_toggle->enable();
-                camera_mode_cycle_toggle->disable();
-
-                // Server reads directly from camera, no smoothing
+                // Server: Read directly from camera, no smoothing
                 applyCameraView(camera_component, target_transform);
 
-                // Update camera component from any UI changes made this frame
-                updateCameraFromUI(camera_component);
+                // Server: Update camera entity from UI changes (position, yaw, pitch, FoV)
+                updateCameraFromUI(camera_component, target_transform);
             }
             else
             {
-                // Client: Disable all controls (read-only view)
-                disableAllCameraControls();
-
                 // Client: Apply smoothing to hide network jitter
                 updateCameraSmoothing(camera_component, target_transform, delta);
             }
@@ -1761,23 +1762,31 @@ void CinematicViewScreen::applyCameraView(CinematicCamera* cam, sp::Transform* t
     camera_position.x = transform->getPosition().x;
     camera_position.y = transform->getPosition().y;
     camera_position.z = cam->z_position;
-    camera_yaw = cam->yaw;
+    camera_yaw = transform->getRotation(); // Yaw comes from Transform rotation
     camera_pitch = cam->pitch;
+    camera_roll = cam->roll;
 
     // Apply field of view
     viewport->modifyFoV(cam->field_of_view - viewport->getBaseFoV());
 }
 
-void CinematicViewScreen::updateCameraFromUI(CinematicCamera* cam)
+void CinematicViewScreen::updateCameraFromUI(CinematicCamera* cam, sp::Transform* transform)
 {
-    // Server only: Write current UI state to camera component for replication
+    // Server only: Write current UI state to camera component and transform for replication
     if (!game_server) return;
 
+    // Update camera component fields
     cam->z_position = camera_position.z;
-    cam->yaw = camera_yaw;
     cam->pitch = camera_pitch;
-    cam->roll = 0.0f; // Current UI doesn't support roll
+    cam->roll = camera_roll;
     cam->field_of_view = viewport->getFoV();
+
+    // Update camera entity transform from UI
+    if (transform)
+    {
+        transform->setPosition(glm::vec2(camera_position.x, camera_position.y));
+        transform->setRotation(camera_yaw); // Yaw goes to Transform rotation
+    }
 }
 
 void CinematicViewScreen::updateCameraSmoothing(CinematicCamera* cam, sp::Transform* transform, float delta)
@@ -1790,8 +1799,9 @@ void CinematicViewScreen::updateCameraSmoothing(CinematicCamera* cam, sp::Transf
     camera_entity_target_position.x = transform->getPosition().x;
     camera_entity_target_position.y = transform->getPosition().y;
     camera_entity_target_position.z = cam->z_position;
-    camera_entity_target_yaw = cam->yaw;
+    camera_entity_target_yaw = transform->getRotation(); // Yaw comes from Transform rotation
     camera_entity_target_pitch = cam->pitch;
+    camera_entity_target_roll = cam->roll;
     camera_entity_target_fov = cam->field_of_view;
 
     // Smoothly interpolate toward target to hide network jitter
@@ -1801,6 +1811,7 @@ void CinematicViewScreen::updateCameraSmoothing(CinematicCamera* cam, sp::Transf
 
     camera_yaw = applyAngleDamping(camera_yaw, camera_entity_target_yaw, camera_entity_smooth_speed, delta);
     camera_pitch = applyDamping(camera_pitch, camera_entity_target_pitch, camera_entity_smooth_speed, delta);
+    camera_roll = applyAngleDamping(camera_roll, camera_entity_target_roll, camera_entity_smooth_speed, delta);
 
     float current_fov = viewport->getFoV();
     float target_fov_modifier = camera_entity_target_fov - viewport->getBaseFoV();
@@ -1808,20 +1819,3 @@ void CinematicViewScreen::updateCameraSmoothing(CinematicCamera* cam, sp::Transf
     viewport->modifyFoV(smoothed_fov_modifier);
 }
 
-void CinematicViewScreen::disableAllCameraControls()
-{
-    // Disable all camera control UI when viewing camera on client
-    camera_mode_selector->disable();
-    camera_reset->disable();
-    camera_auto_zoom_toggle->disable();
-    camera_lock_tot_toggle->disable();
-    camera_lock_cycle_toggle->disable();
-    camera_mode_cycle_toggle->disable();
-
-    // Show hint that controls are disabled
-    if (keybind_hint_label)
-    {
-        keybind_hint_label->setText("Viewing camera (read-only)");
-        keybind_hint_label->show();
-    }
-}

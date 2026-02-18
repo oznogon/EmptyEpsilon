@@ -11,9 +11,9 @@ function init()
     cam_static = createEntity()
     cam_static.components.transform = {}
     cam_static:setPosition(5000, 0)
+    cam_static:setRotation(180)
     cam_static.components.cinematic_camera = {
         name = "Static Right",
-        yaw = 180,
         pitch = 45,
         z_position = 500,
         field_of_view = 60
@@ -23,9 +23,9 @@ function init()
     cam_top = createEntity()
     cam_top.components.transform = {}
     cam_top:setPosition(0, 3000)
+    cam_top:setRotation(-90)  -- Yaw
     cam_top.components.cinematic_camera = {
         name = "Static Top",
-        yaw = -90,
         pitch = 80,
         z_position = 800,
         field_of_view = 50
@@ -35,9 +35,9 @@ function init()
     cam_orbit = createEntity()
     cam_orbit.components.transform = {}
     cam_orbit:setPosition(4000, 0)
+    cam_orbit:setRotation(180)  -- Yaw
     cam_orbit.components.cinematic_camera = {
         name = "Orbiting",
-        yaw = 180,
         pitch = 30,
         z_position = 300,
         field_of_view = 70
@@ -47,9 +47,9 @@ function init()
     cam_chase = createEntity()
     cam_chase.components.transform = {}
     cam_chase:setPosition(0, -500)  -- Will be updated to follow player
+    cam_chase:setRotation(0)  -- Yaw
     cam_chase.components.cinematic_camera = {
         name = "Chase Cam",
-        yaw = 0,
         pitch = 20,
         z_position = 200,
         field_of_view = 80,
@@ -78,7 +78,7 @@ function update(delta)
 
     -- Update orbit camera to look at origin
     local angle_to_origin = math.deg(math.atan2(-y, -x))
-    cam_orbit.components.cinematic_camera.yaw = angle_to_origin
+    cam_orbit:setRotation(angle_to_origin)  -- Yaw via Transform rotation
 
     -- Update chase camera position to follow player (offset behind)
     local px, py = player:getPosition()
@@ -90,5 +90,5 @@ function update(delta)
     local offset_y = math.cos(math.rad(player_heading)) * offset_distance
 
     cam_chase:setPosition(px + offset_x, py + offset_y)
-    cam_chase.components.cinematic_camera.yaw = player_heading - 90
+    cam_chase:setRotation(player_heading - 90)  -- Yaw via Transform rotation
 end

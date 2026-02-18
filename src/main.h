@@ -9,6 +9,7 @@
 extern glm::vec3 camera_position;
 extern float camera_yaw;
 extern float camera_pitch;
+extern float camera_roll;
 extern sp::Font* main_font;
 extern sp::Font* bold_font;
 extern RenderLayer* consoleRenderLayer;
