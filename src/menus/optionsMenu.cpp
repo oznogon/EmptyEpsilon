@@ -134,16 +134,14 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 
     // Select language
     {
-        (new GuiLabel(interface_left_column, "LANGUAGE_OPTIONS_LABEL", tr("Interface language"), 30.0f))
+        (new GuiLabel(interface_left_column, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
         std::vector<string> languages = findResources("locale/main.*.po");
         // Strip extension
-        for (string &language : languages)
-        {
+        for(string &language : languages)
             language = language.substr(language.find(".") + 1, language.rfind("."));
-        }
         std::sort(languages.begin(), languages.end());
 
         int default_index = 0;
@@ -241,7 +239,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
     {
         GuiElement* radar_rotation_lock = new GuiElement(interface_right_column, "RADAR_ROTATION_LOCK");
         radar_rotation_lock
-            ->setSize(GuiElement::GuiSizeMax, 310.0f)
+            ->setSize(GuiElement::GuiSizeMax, 220.0f)
             ->setAttribute("layout", "vertical");
         radar_rotation_lock
             ->setAttribute("margin", "0, 20");
@@ -257,7 +255,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(GuiElement::GuiSizeMax, row_height)
             ->setAttribute("layout", "horizontal");
         lock_row
-            ->setAttribute("margin", "0, 0, 20, 10");
+            ->setAttribute("margin", "0, 0, 10, 10");
 
         (new GuiLabel(lock_row, "HELMS_LOCK_DETAILS", tr("radar_locks", "Helms, Tactical,\nSingle Pilot"), 25.0f))
             ->setAlignment(sp::Alignment::CenterRight)
@@ -326,6 +324,40 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setText(science_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
             ->setSize(200.0f, 50.0f);
     }
+
+    (new GuiLabel(interface_right_column, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("Cinematic view options"), 30))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 20, 0");
+
+    auto initial_camera_sensitivity = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
+    if (initial_camera_sensitivity <= 0.0f)
+    {
+        LOG(Warning, "camera_mouse_sensitivity value invalid: ", PreferencesManager::get("camera_mouse_sensitivity", "0.15"));
+        initial_camera_sensitivity = 0.15f;
+    }
+
+    camera_sensitivity_slider = new GuiBasicSlider(interface_right_column, "CAMERA_SENSITIVITY_SLIDER", 0.01f, 1.0f, initial_camera_sensitivity,
+        [this](float sensitivity)
+        {
+            PreferencesManager::set("camera_mouse_sensitivity", sensitivity);
+            camera_sensitivity_overlay_label->setText(
+                tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f)))} })
+            );
+        }
+    );
+    camera_sensitivity_slider->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Override overlay label.
+    camera_sensitivity_overlay_label = new GuiLabel(camera_sensitivity_slider, "CAMERA_SENSITIVITY_SLIDER_LABEL",
+        tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(initial_camera_sensitivity * 100.0f)))} }), 30.0f);
+    camera_sensitivity_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Cinematic fly-by randomization
+    (new GuiToggleButton(interface_right_column, "RANDOMIZE_CINEMATIC_FLYBY", tr("Randomize cinematic fly-by angles"), [this](bool value)
+    {
+        PreferencesManager::set("camera_flyby_randomized", value ? "1" : "0");
+    }))->setValue(PreferencesManager::get("camera_flyby_randomized", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50.0f);
 }
 
 void OptionsMenu::setupGraphicsOptions()
@@ -366,6 +398,11 @@ void OptionsMenu::setupGraphicsOptions()
 
     // FoV slider.
     auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
+    if (initial_fov <= 30.0f || initial_fov >= 140.0f)
+    {
+        LOG(Warning, "main_screen_camera_fov value invalid: ", PreferencesManager::get("main_screen_camera_fov"));
+        initial_fov = std::clamp(initial_fov, 30.0f, 140.0f);
+    }
     graphics_fov_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_FOV_SLIDER", 30.f, 140.0f, initial_fov, [this](float fov) {
         fov = std::round(fov);
         graphics_fov_slider->setValue(fov);

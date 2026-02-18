@@ -1,5 +1,4 @@
-#ifndef HOTKEY_CONFIG_H
-#define HOTKEY_CONFIG_H
+#pragma once
 
 #include <tuple>
 #include <array>
@@ -159,10 +158,17 @@ public:
         void init();
         sp::io::Keybinding toggle_ui;
         sp::io::Keybinding toggle_callsigns;
+        sp::io::Keybinding toggle_manual_controls;
         sp::io::Keybinding lock_camera;
         sp::io::Keybinding cycle_camera;
+        sp::io::Keybinding cycle_camera_mode;
         sp::io::Keybinding previous_player_ship;
         sp::io::Keybinding next_player_ship;
+        sp::io::Keybinding previous_camera_mode;
+        sp::io::Keybinding next_camera_mode;
+        sp::io::Keybinding toggle_auto_zoom;
+        sp::io::Keybinding toggle_target_lock;
+        sp::io::Keybinding camera_option;
         sp::io::Keybinding move_forward;
         sp::io::Keybinding move_backward;
         sp::io::Keybinding strafe_left;
@@ -173,6 +179,8 @@ public:
         sp::io::Keybinding rotate_right;
         sp::io::Keybinding tilt_down;
         sp::io::Keybinding tilt_up;
+        sp::io::Keybinding move_faster;
+        sp::io::Keybinding move_slower;
     } cinematic;
 
     // Top-down View
@@ -204,5 +212,3 @@ public:
     sp::io::Keybinding debug_show_timing;
 };
 extern Keys keys;
-
-#endif//HOTKEY_CONFIG_H

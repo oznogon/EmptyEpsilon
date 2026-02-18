@@ -89,6 +89,13 @@ glm::vec2 GuiElement::getSize() const
     return layout.size;
 }
 
+float GuiElement::getAspectRatio() const
+{
+    if (layout.size.y > 0.0f) return layout.size.x / layout.size.y;
+    LOG(Warning, "GuiElement ", id ," has height of 0 and can't report its aspect ratio");
+    return 0.0f;
+}
+
 GuiElement* GuiElement::setMargins(float n)
 {
     layout.margin.left = layout.margin.top = layout.margin.right = layout.margin.bottom = n;
