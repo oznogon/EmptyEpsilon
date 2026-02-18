@@ -30,6 +30,8 @@ private:
     GuiToggleButton* helms_radar_lock_toggle;
     GuiToggleButton* weapons_radar_lock_toggle;
     GuiToggleButton* science_radar_lock_toggle;
+    GuiBasicSlider* mouselook_sensitivity_slider;
+    GuiLabel* mouselook_sensitivity_overlay_label;
     GuiSlider* sound_volume_slider;
     GuiSlider* music_volume_slider;
     GuiSlider* impulse_volume_slider;
