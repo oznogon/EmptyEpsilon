@@ -178,6 +178,8 @@ public:
         sp::io::Keybinding rotate_right;
         sp::io::Keybinding tilt_down;
         sp::io::Keybinding tilt_up;
+        sp::io::Keybinding move_faster;
+        sp::io::Keybinding toggle_mouselook;
     } cinematic;
 
     // Top-down view binds
