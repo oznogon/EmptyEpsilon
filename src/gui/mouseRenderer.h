@@ -58,4 +58,5 @@ private:
     CursorLayer primary{"cursors/mouse.png", {16.0f, 16.0f}, 32.0f, {255, 255, 255, 255}};
     // Overlay sprites drawn over the primary, offset from the cursor position.
     std::vector<CursorLayer> overlays;
+    glm::vec2 raw_delta;
 };

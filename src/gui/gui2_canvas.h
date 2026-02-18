@@ -1,5 +1,4 @@
-#ifndef GUI2_CANVAS_H
-#define GUI2_CANVAS_H
+#pragma once
 
 #include "Renderable.h"
 #include "gui2_container.h"
@@ -11,7 +10,8 @@ class GuiCanvas : public Renderable, public GuiContainer
 private:
     GuiElement* click_element;
     GuiElement* focus_element;
-    glm::vec2 mouse_position{0,0};
+    glm::vec2 mouse_position{0.0f, 0.0f};
+    glm::vec2 mouse_delta{0.0f, 0.0f};
     bool enable_debug_rendering;
 public:
     GuiCanvas(RenderLayer* renderLayer=nullptr);
@@ -34,5 +34,3 @@ public:
 private:
     void runUpdates(GuiContainer* parent);
 };
-
-#endif//GUI2_CANVAS_H

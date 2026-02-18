@@ -11,7 +11,7 @@
 
 std::vector<RenderSystem::RenderHandler> RenderSystem::render_handlers;
 
-void RenderSystem::render3D(float aspect, float camera_fov, bool use_orthographic)
+void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType projection_type)
 {
     view_vector = vec2FromAngle(camera_yaw);
     depth_cutoff_back = camera_position.z * -tanf(glm::radians(90+camera_pitch + camera_fov/2.f));
@@ -29,7 +29,7 @@ void RenderSystem::render3D(float aspect, float camera_fov, bool use_orthographi
         std::sort(render_list.begin(), render_list.end(), [](const RenderEntry& a, const RenderEntry& b) { return a.depth > b.depth; });
 
         glm::mat4 projection;
-        if (use_orthographic)
+        if (projection_type == ProjectionType::Orthographic)
         {
             // For orthographic projection, calculate view volume size based on FOV and reference distance
             // Use a reference distance to determine the viewport size that would be visible at that distance with perspective
