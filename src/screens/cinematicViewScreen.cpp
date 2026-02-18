@@ -48,11 +48,10 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         break;
     }
 
-    // Initialize main-defined camera.
+    // Initialize main()-defined camera parameters.
     camera_yaw = -90.0f;
     camera_pitch = 45.0f;
     camera_position = {0.0f, 0.0f, 200.0f};
-    camera_position += 0.1f;
 
     // Validate and apply camera control sensitivity pref.
     const float pref_sens = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
@@ -87,8 +86,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     camera_reset = new GuiToggleButton(camera_controls, "CAMERA_RESET", tr("button", "Reset camera"),
         [this](bool value)
         {
-            CameraMode camera_mode = static_cast<CameraMode>(camera_mode_selector->getSelectionIndex());
-            switch (camera_mode)
+            switch (active_camera_mode)
             {
                 case CameraMode::Flyby:
                     // Reset flyby camera
@@ -101,8 +99,16 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
                     orbit_auto_rotate = value;
                     if (orbit_auto_rotate)
                     {
-                        // Initialize auto-orbit with first random target
-                        cinematic_cycle_timer = 0.0f;
+                        // Initialize auto-orbit state machine
+                        orbit_is_lingering = false;
+                        orbit_movement_timer = 0.0f;
+
+                        // Store current positions as start positions
+                        orbit_start_yaw = orbit_yaw;
+                        orbit_start_pitch = orbit_pitch;
+                        orbit_start_distance = orbit_distance;
+
+                        // Generate first random target positions
                         orbit_target_yaw = random(0.0f, 360.0f);
                         orbit_target_pitch = random(-10.0f, 60.0f);
                         orbit_target_distance = random(orbit_distance_min, orbit_distance_max);
@@ -110,7 +116,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
                     break;
                 case CameraMode::Chase:
                     // Rotate camera
-                    chase_direction = static_cast<Angle>((static_cast<int>(chase_direction) + 1) % 4);
+                    chase_direction = static_cast<ChaseAngle>((static_cast<int>(chase_direction) + 1) % 4);
                     camera_reset->setValue(false);
                     break;
                 case CameraMode::Isometric:
@@ -140,7 +146,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
                     camera_reset->setValue(false);
                     break;
                 default:
-                    LOG(Warning, "Invalid case for camera mode in CinematicViewScreen camera_reset: ", camera_mode_selector->getSelectionIndex());
+                    LOG(Warning, "Invalid case for camera mode in CinematicViewScreen camera_reset: ", static_cast<int>(active_camera_mode));
                     break;
             }
         }
@@ -150,42 +156,17 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         ->setPosition(320.0f, -140.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
-    // Camera mode selector (only visible when camera is locked)
-    camera_mode_selector = new GuiSelector(camera_controls, "CAMERA_MODE_SELECTOR",
-        [this](int index, string value)
-        {
-            // If switching to a non-Free mode and there's a target available, enable camera lock
-            if (index != camera_mode_static_int && camera_lock_selector->entryCount() > 0)
-            {
-                // Select first target if none selected
-                if (camera_lock_selector->getSelectionIndex() < 0)
-                    camera_lock_selector->setSelectionIndex(0);
-
-                // Enable camera lock
-                camera_lock_toggle->setValue(true);
-                target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
-            }
-        }
-    );
-    camera_mode_selector->addEntry(tr("button", "Fly-by camera"), static_cast<string>(static_cast<int>(CameraMode::Flyby)));
-    camera_mode_selector->addEntry(tr("button", "Orbital camera"), static_cast<string>(static_cast<int>(CameraMode::Orbital)));
-    camera_mode_selector->addEntry(tr("button", "Chase camera"), static_cast<string>(static_cast<int>(CameraMode::Chase)));
-    camera_mode_selector->addEntry(tr("button", "Isometric camera"), static_cast<string>(static_cast<int>(CameraMode::Isometric)));
-    camera_mode_selector->addEntry(tr("button", "Top-down camera"), static_cast<string>(static_cast<int>(CameraMode::Topdown)));
-    camera_mode_selector->addEntry(tr("button", "Free camera"), static_cast<string>(static_cast<int>(CameraMode::Free)));
-    camera_mode_selector->addEntry(tr("button", "Static camera"), static_cast<string>(static_cast<int>(CameraMode::Static)));
+    // Camera mode selector
+    camera_mode_selector = new GuiSelector(camera_controls, "CAMERA_MODE_SELECTOR", [this](int index, string value) {});
     camera_mode_selector
-        ->setSelectionIndex(camera_mode_flyby_int)
         ->setPosition(20.0f, -80.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, 50.0f);
 
     // Toggle whether to lock the camera onto a ship.
     camera_lock_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"),
         [this](bool value) {
-            // Skip Free and Static modes if locked
-            const int camera_mode_int = camera_mode_selector->getSelectionIndex();
-            if (value && (camera_mode_int == camera_mode_free_int || camera_mode_int == camera_mode_static_int))
-                camera_mode_selector->setSelectionIndex(camera_mode_flyby_int);
+            // Repopulate mode selector with appropriate modes for lock state
+            updateCameraModeSelector(value);
         });
     camera_lock_toggle
         ->setValue(true)
@@ -240,6 +221,9 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         ->setPosition(0, -100, sp::Alignment::BottomCenter)
         ->setSize(800, 100);
     keybind_hint_label->hide();
+
+    // Initialize camera mode selector with modes for initial lock state (locked=true)
+    updateCameraModeSelector(true);
 }
 
 CinematicViewScreen::~CinematicViewScreen()
@@ -262,86 +246,44 @@ void CinematicViewScreen::update(float delta)
         return;
     }
 
-    CameraMode camera_mode = static_cast<CameraMode>(camera_mode_selector->getSelectionIndex());
-
-    // Enforce Free mode when camera lock is disabled
-    if (!camera_lock_toggle->getValue() && (camera_mode != CameraMode::Free || camera_mode != CameraMode::Static))
-    {
-        camera_mode_selector->setSelectionIndex(camera_mode_free_int);
-        camera_mode = CameraMode::Free;
-    }
-
-    switch (camera_mode)
-    {
-        case CameraMode::Flyby:
-        case CameraMode::Topdown:
-            camera_reset
-                ->setValue(false)
-                ->setText(tr("button", "Reset camera"));
-            break;
-        case CameraMode::Orbital:
-            camera_reset
-                ->setValue(orbit_auto_rotate)
-                ->setText(tr("button", "Auto-rotate orbit"));
-            break;
-        case CameraMode::Chase:
-        case CameraMode::Isometric:
-            camera_reset
-                ->setValue(false)
-                ->setText(tr("button", "Rotate camera"));
-            break;
-        case CameraMode::Free:
-        case CameraMode::Static:
-            if (!camera_lock_toggle->getValue())
-            {
-                camera_reset
-                    ->setValue(false)
-                    ->setText(tr("button", "Go to target"));
-            }
-            break;
-        default:
-            LOG(Warning, "Invalid case for camera mode in CinematicViewScreen update() mode_selector label assignment: ", camera_mode_selector->getSelectionIndex());
-            break;
-    }
-
     // Toggle keyboard help.
     if (keys.help.getDown())
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
 
+    // Toggle UI visibility.
     if (keys.cinematic.toggle_ui.getDown())
         setUIVisibility(!camera_controls->isVisible());
 
+    // Toggle callsign visibility.
     if (keys.cinematic.toggle_callsigns.getDown())
         viewport->toggleCallsigns();
 
+    // Toggle manual camera controls when UI is hidden.
     if (keys.cinematic.toggle_manual_controls.getDown())
     {
-        // Only allow toggling manual controls when UI is hidden
         if (!camera_controls->isVisible())
             manual_camera_controls_enabled = !manual_camera_controls_enabled;
     }
 
-    // Update keybind hint label
+    // Update keybind hint label.
     bool ui_visible = camera_controls->isVisible();
     if (!ui_visible && !manual_camera_controls_enabled && keybind_hint_timer > 0.0f)
     {
-        // Build hint text from actual keybinds
+        // Build hint text from keybinds.
         string hint_text = "";
 
-        // Get manual controls key
         string manual_key = keys.cinematic.toggle_manual_controls.getHumanReadableKeyName(0);
         if (!manual_key.empty())
             hint_text += tr("label", "Press {key} to control camera").format({{"key", manual_key}});
 
-        // Get UI toggle key
         string ui_key = keys.cinematic.toggle_ui.getHumanReadableKeyName(0);
         if (!ui_key.empty())
         {
             if (!hint_text.empty()) hint_text += "\n";
-            hint_text += tr("label", "Click or press {key} to display controls").format({{"key", ui_key}});
+            hint_text += tr("label", "Click mouse or press {key} to display controls").format({{"key", ui_key}});
         }
 
-        // Show label if we have any text
+        // Show label if we have any text.
         if (!hint_text.empty())
         {
             keybind_hint_label->setText(hint_text);
@@ -349,26 +291,22 @@ void CinematicViewScreen::update(float delta)
             keybind_hint_timer -= delta;
         }
         else
-        {
             keybind_hint_label->hide();
-        }
     }
+    // Reset timer when UI becomes visible or manual controls are enabled.
     else
     {
         keybind_hint_label->hide();
 
-        // Reset timer when UI becomes visible or manual controls enabled
         if (ui_visible || manual_camera_controls_enabled)
             keybind_hint_timer = 5.0f;
     }
 
+    // Toggle camera lock.
     if (keys.cinematic.lock_camera.getDown())
     {
-        // Skip Free and Static modes if locked
-        if (!camera_lock_toggle->getValue() && (camera_mode == CameraMode::Free || camera_mode == CameraMode::Static))
-            camera_mode_selector->setSelectionIndex(camera_mode_flyby_int);
-
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
+        updateCameraModeSelector(camera_lock_toggle->getValue());
     }
 
     if (keys.cinematic.cycle_camera.getDown())
@@ -389,7 +327,30 @@ void CinematicViewScreen::update(float delta)
             camera_lock_selector->setSelectionIndex(0);
         target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
-    // TODO: Keybind for option reset button, other new buttons
+
+    if (keys.cinematic.previous_camera_mode.getDown())
+    {
+        camera_mode_selector->setSelectionIndex(camera_mode_selector->getSelectionIndex() - 1);
+        if (camera_mode_selector->getSelectionIndex() < 0)
+            camera_mode_selector->setSelectionIndex(camera_mode_selector->entryCount() - 1);
+    }
+
+    if (keys.cinematic.next_camera_mode.getDown())
+    {
+        camera_mode_selector->setSelectionIndex(camera_mode_selector->getSelectionIndex() + 1);
+        if (camera_mode_selector->getSelectionIndex() >= camera_mode_selector->entryCount())
+            camera_mode_selector->setSelectionIndex(0);
+    }
+
+    if (keys.cinematic.toggle_auto_zoom.getDown())
+        camera_auto_zoom_toggle->setValue(!camera_auto_zoom_toggle->getValue());
+
+    if (keys.cinematic.toggle_target_lock.getDown())
+        camera_lock_tot_toggle->setValue(!camera_lock_tot_toggle->getValue());
+
+    if (keys.cinematic.camera_option.getDown())
+        camera_reset->setValue(!camera_reset->getValue());
+
     if (keys.escape.getDown())
     {
         destroy();
@@ -399,10 +360,58 @@ void CinematicViewScreen::update(float delta)
     if (keys.pause.getDown())
         if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
+    // Sync selector with active camera mode.
+    // If selector changed, update active mode.
+    int selector_index = camera_mode_selector->getSelectionIndex();
+    if (selector_index >= 0)
+    {
+        int selector_mode_value = std::stoi(camera_mode_selector->getEntryValue(selector_index));
+        CameraMode selector_mode = static_cast<CameraMode>(selector_mode_value);
+
+        // Selector changed, update active mode.
+        if (selector_mode != active_camera_mode) active_camera_mode = selector_mode;
+    }
+
+    // If active mode changed programmatically, update selector.
+    int active_mode_index = camera_mode_selector->indexByValue(std::to_string(static_cast<int>(active_camera_mode)));
+    if (active_mode_index >= 0 && active_mode_index != selector_index)
+        camera_mode_selector->setSelectionIndex(active_mode_index);
+
+    switch (active_camera_mode)
+    {
+        case CameraMode::Flyby:
+        case CameraMode::Topdown:
+            camera_reset
+                ->setValue(false)
+                ->setText(tr("button", "Reset camera"));
+            break;
+        case CameraMode::Orbital:
+            camera_reset
+                ->setValue(orbit_auto_rotate)
+                ->setText(tr("button", "Auto-rotate orbit"));
+            break;
+        case CameraMode::Chase:
+        case CameraMode::Isometric:
+            camera_reset
+                ->setValue(false)
+                ->setText(tr("button", "Rotate camera"));
+            break;
+        case CameraMode::Free:
+        case CameraMode::Static:
+            camera_reset
+                ->setValue(false)
+                ->setText(tr("button", "Go to target"));
+            break;
+        default:
+            LOG(Warning, "Invalid case for camera mode in CinematicViewScreen update() mode_selector label assignment: ", static_cast<int>(active_camera_mode));
+            break;
+    }
+
+    // Handle camera movement.
     bool is_camera_moving = false;
 
     // Map mouse wheel input to zoom in/out.
-    // TODO: Enable keybind mapping of mouse wheel , which might be problematic
+    // TODO: Enable keybind mapping of mouse wheel, which might be problematic
     // for other player screens.
     float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
 
@@ -411,23 +420,25 @@ void CinematicViewScreen::update(float delta)
     {
         float value = 0.0f;
 
-        if ((pos > 0.0f && neg > 0.0f) || (pos < 0.0f && neg < 0.0f))
+        // If one axis is bound to two inputs (i.e. left and right) and is
+        // engaged, it returns the same non-zero value to both inputs, so
+        // we can return a single value by averaging them.
+        if (pos == neg && ((pos > 0.0f && neg > 0.0f) || (pos < 0.0f && neg < 0.0f)))
             value = (pos + neg) * 0.5f;
         else
             value = pos - neg;
-        
+
+        // TODO: Can I use Keybinding::inverted?
         if (invert) value = -value;
 
-        return value;
+        // Apply sensitivity normalized to 0.15 default.
+        return value * (camera_sensitivity / 0.15f);
     };
-
-    // Update rotation debounce timer.
-    if (rotation_debounce_timer > 0.0f) rotation_debounce_timer -= delta;
 
     // Determine if ToT tracking is currently active for orbital camera.
     // This is used to disable manual orbital adjustments when ToT tracking is controlling the camera.
     bool is_orbital_tot_tracking_active = false;
-    if (camera_mode == CameraMode::Orbital && camera_lock_toggle->getValue() && camera_lock_tot_toggle->getValue())
+    if (active_camera_mode == CameraMode::Orbital && camera_lock_toggle->getValue() && camera_lock_tot_toggle->getValue())
     {
         // Check if target has a weapons target
         auto target_entity_target_component = target.getComponent<Target>();
@@ -460,7 +471,7 @@ void CinematicViewScreen::update(float delta)
     // This prevents accidental camera movement from mouse/controller input.
     if (manual_camera_controls_enabled)
     {
-        switch (camera_mode)
+        switch (active_camera_mode)
         {
         // Flyby camera tracking locked ship from fixed point
         case CameraMode::Flyby:
@@ -529,83 +540,59 @@ void CinematicViewScreen::update(float delta)
         // Chase mode, similar to main screen view
         case CameraMode::Chase:
             // Closer/farther
-            if (keys.cinematic.move_forward.getValue() || keys.cinematic.tilt_up.getValue()
-                || keys.cinematic.move_backward.getValue() || keys.cinematic.tilt_down.getValue()
-                || mouse_wheel_delta < 0.0f)
+            if (keys.cinematic.move_forward.getValue() || keys.cinematic.move_backward.getValue()
+                || mouse_wheel_delta != 0.0f)
             {
                 is_camera_moving = true;
                 chase_distance = std::clamp(chase_distance - camera_translation_speed * (
                     calculateAxis(keys.cinematic.move_forward.getValue(), keys.cinematic.move_backward.getValue())
-                    + calculateAxis(keys.cinematic.tilt_up.getValue(), keys.cinematic.tilt_down.getValue(), invert_mouselook_y)
                     + mouse_wheel_delta
                 ), getScaledCameraDistance(chase_distance_min), getScaledCameraDistance(chase_distance_max));
             }
 
-            // Orbit horizontally at snapped 90-degree increments.
-            // Apply debounce timer to axis inputs.
-            if (rotation_debounce_timer <= 0.0f)
-            {
-                if (keys.cinematic.strafe_left.getDown() || keys.cinematic.rotate_left.getDown())
-                {
-                    chase_direction = static_cast<Angle>((static_cast<int>(chase_direction) + 3) % 4);
-                    rotation_debounce_timer = rotation_debounce_delay;
-                }
-                else if (keys.cinematic.strafe_right.getDown() || keys.cinematic.rotate_right.getDown())
-                {
-                    chase_direction = static_cast<Angle>((static_cast<int>(chase_direction) + 1) % 4);
-                    rotation_debounce_timer = rotation_debounce_delay;
-                }
-            }
-
             // Up/down
-            if (keys.cinematic.move_up.getValue() || keys.cinematic.move_down.getValue())
+            if (keys.cinematic.move_up.getValue() || keys.cinematic.move_down.getValue()
+                || keys.cinematic.tilt_up.getValue() || keys.cinematic.tilt_down.getValue())
             {
                 is_camera_moving = true;
-                chase_height = std::clamp(chase_height + camera_rotation_speed * (calculateAxis(keys.cinematic.move_up.getValue(), keys.cinematic.move_down.getValue())), chase_height_min, chase_height_max);
+                chase_height = std::clamp(chase_height + camera_rotation_speed * (
+                    calculateAxis(keys.cinematic.move_up.getValue(), keys.cinematic.move_down.getValue())
+                    + calculateAxis(keys.cinematic.tilt_up.getValue(), keys.cinematic.tilt_down.getValue(), invert_mouselook_y)
+                ), chase_height_min, chase_height_max);
             }
+
+            // Orbit horizontally at 90-degree increments.
+            if (keys.cinematic.strafe_left.getDown() || keys.cinematic.rotate_right.getDown())
+                chase_direction = static_cast<ChaseAngle>((static_cast<int>(chase_direction) + 1) % 4);
+            else if (keys.cinematic.strafe_right.getDown() || keys.cinematic.rotate_left.getDown())
+                chase_direction = static_cast<ChaseAngle>((static_cast<int>(chase_direction) + 3) % 4);
+
             break;
 
         // Isometric and axonometric angles with orthographic projection
         case CameraMode::Isometric:
             // Closer/farther
-            if (keys.cinematic.move_forward.getValue() || keys.cinematic.tilt_up.getValue()
-                || keys.cinematic.move_backward.getValue() || keys.cinematic.tilt_down.getValue()
-                || mouse_wheel_delta < 0.0f)
+            if (keys.cinematic.move_forward.getValue() || keys.cinematic.move_backward.getValue()
+                || mouse_wheel_delta != 0.0f)
             {
                 is_camera_moving = true;
                 isometric_distance = std::clamp(isometric_distance - camera_translation_speed * (
                     calculateAxis(keys.cinematic.move_forward.getValue(), keys.cinematic.move_backward.getValue())
-                    + calculateAxis(keys.cinematic.tilt_up.getValue(), keys.cinematic.tilt_down.getValue(), invert_mouselook_y)
                     + mouse_wheel_delta
                 ), isometric_distance_min, isometric_distance_max);
             }
 
-            // Orbit horizontally at 90-degree increments with debouncing.
-            // Apply debounce timer to axis inputs.
-            if (rotation_debounce_timer <= 0.0f)
-            {
-                if (keys.cinematic.strafe_left.getDown() || keys.cinematic.rotate_left.getDown())
-                {
-                    isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 1) % 4);
-                    rotation_debounce_timer = rotation_debounce_delay;
-                }
-                else if (keys.cinematic.strafe_right.getDown() || keys.cinematic.rotate_right.getDown())
-                {
-                    isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 3) % 4);
-                    rotation_debounce_timer = rotation_debounce_delay;
-                }
-                // Up/down elevation changes
-                else if (keys.cinematic.move_up.getDown())
-                {
-                    elev = static_cast<AxonometricElevation>((static_cast<int>(elev) + 1) % 6);
-                    rotation_debounce_timer = rotation_debounce_delay;
-                }
-                else if (keys.cinematic.move_down.getDown())
-                {
-                    elev = static_cast<AxonometricElevation>((static_cast<int>(elev) + 5) % 6);
-                    rotation_debounce_timer = rotation_debounce_delay;
-                }
-            }
+            // Orbit horizontally at 90-degree increments.
+            if (keys.cinematic.strafe_left.getDown() || keys.cinematic.rotate_right.getDown())
+                isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 1) % 4);
+            else if (keys.cinematic.strafe_right.getDown() || keys.cinematic.rotate_left.getDown())
+                isometric_direction = static_cast<IsometricAngle>((static_cast<int>(isometric_direction) + 3) % 4);
+            // Change axonometric elevation angle presets.
+            else if (keys.cinematic.move_up.getDown() || keys.cinematic.tilt_down.getDown())
+                elev = static_cast<AxonometricElevation>(std::min(static_cast<int>(elev) + 1, static_cast<int>(AxonometricElevation::Complement)));
+            else if (keys.cinematic.move_down.getDown() || keys.cinematic.tilt_up.getDown())
+                elev = static_cast<AxonometricElevation>(std::max(static_cast<int>(elev) - 1, static_cast<int>(AxonometricElevation::ArcTan12)));
+
             break;
 
         // Overhead angle with orthographic projection
@@ -691,14 +678,14 @@ void CinematicViewScreen::update(float delta)
             break;
 
         default:
-            LOG(Warning, "Invalid case for camera mode in CinematicViewScreen update() when UI is not visible: ", camera_mode_selector->getSelectionIndex());
+            LOG(Warning, "Invalid case for camera mode in CinematicViewScreen update() when UI is not visible: ", static_cast<int>(active_camera_mode));
             break;
         }
     }
 
     // Boost speed ("run") for camera movement, -1.0 to 1.0.
     // Positive values speed up, negative values slow down.
-    const float move_speed_factor = calculateAxis(keys.cinematic.move_faster.getValue(), keys.cinematic.move_slower.getValue());
+    const float move_speed_factor = keys.cinematic.move_faster.getValue() - keys.cinematic.move_slower.getValue();
 
     // Translate axis to target speed value.
     // factor ranges from -1 (returns min), to 1 (returns max)
@@ -777,11 +764,13 @@ void CinematicViewScreen::update(float delta)
         if (!target_transform)
         {
             // No target available. Disable lock controls, reset mode to free camera.
-            camera_mode_selector->setSelectionIndex(camera_mode_free_int)->disable();
+            active_camera_mode = CameraMode::Free;
+            camera_mode_selector->disable();
             target = sp::ecs::Entity();
 
             const bool is_camera_lock_selector_populated = camera_lock_selector->entryCount() > 0;
             camera_lock_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
+            updateCameraModeSelector(false);
             camera_mode_selector->setEnable(is_camera_lock_selector_populated);
             camera_reset->setEnable(is_camera_lock_selector_populated);
             camera_auto_zoom_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
@@ -789,10 +778,6 @@ void CinematicViewScreen::update(float delta)
             camera_lock_cycle_toggle->setValue(false)->setEnable(camera_lock_selector->entryCount() > 1);
             return;
         }
-
-        // Skip Free and Static modes in selector when locked
-        if (camera_mode_selector->getSelectionIndex() == camera_mode_free_int || camera_mode_selector->getSelectionIndex() == camera_mode_static_int)
-            camera_mode_selector->setSelectionIndex(camera_mode_flyby_int);
 
         // Enable target lock controls.
         camera_mode_selector->enable();
@@ -815,11 +800,14 @@ void CinematicViewScreen::update(float delta)
     }
     else
     {
-        // No target available. Reset mode to Free camera. Disable lock controls
-        // if camera_lock_selector isn't populated.
+        // No target available. Disable lock controls if camera_lock_selector isn't populated.
         const bool is_camera_lock_selector_populated = camera_lock_selector->entryCount() > 0;
-        camera_mode_selector->setSelectionIndex(camera_mode_free_int)->setEnable(is_camera_lock_selector_populated);
+
+        // Allow Free and Static modes to remain selectable when unlocked
+        camera_mode_selector->setEnable(true);
+
         camera_lock_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
+        updateCameraModeSelector(false);
         camera_reset->setEnable(is_camera_lock_selector_populated);
         camera_auto_zoom_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
         camera_lock_tot_toggle->setValue(false)->setEnable(is_camera_lock_selector_populated);
@@ -898,10 +886,8 @@ float CinematicViewScreen::getScaledCameraDistance(float base_distance) const
 
 void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta)
 {
-    CameraMode camera_mode = static_cast<CameraMode>(camera_mode_selector->getSelectionIndex());
-
     // Route to appropriate camera mode
-    switch (camera_mode)
+    switch (active_camera_mode)
     {
     case CameraMode::Flyby:
         updateFlybyCamera(main_transform, tot_transform, delta);
@@ -925,7 +911,7 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
         // Do nothing.
         break;
     default:
-        LOG(Warning, "Invalid case for camera mode in CinematicViewScreen updateCamera(): ", camera_mode_selector->getSelectionIndex());
+        LOG(Warning, "Invalid case for camera mode in CinematicViewScreen updateCamera(): ", static_cast<int>(active_camera_mode));
         break;
     }
 }
@@ -946,30 +932,77 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
     // Check if we should track the target-of-target.
     bool is_tracking_tot = updateToTState(tot_transform, delta) && (isToTInRange(tot_transform) || tot_linger_timer > 0.0f);
 
-    // Auto-rotate mode: set random target positions on cycle reset.
-    if (orbit_auto_rotate && cinematic_cycle_timer == 0.0f)
-    {
-        // Randomize on cycle (cycle timer reset happens in update())
-        orbit_target_yaw = random(0.0f, 360.0f);
-        orbit_target_pitch = random(-10.0f, 60.0f); // Cap underside pitch until culling issues are resolved
-        orbit_target_distance = random(scaled_min, scaled_max);
-    }
-
-    // Smoothly interpolate toward target values with framerate-independent damping.
+    // Auto-rotate mode: state machine for movement → linger → new target
     if (orbit_auto_rotate)
     {
-        orbit_yaw = exponentialAngleDamp(orbit_yaw, orbit_target_yaw, 1.0f, delta);
-        orbit_pitch = exponentialDamp(orbit_pitch, orbit_target_pitch, 1.0f, delta);
-    }
+        if (orbit_is_lingering)
+        {
+            // Linger phase: hold position and count down
+            orbit_movement_timer += delta;
 
-    // Damp distance (works for both auto-rotate and manual modes).
-    orbit_distance = exponentialDamp(orbit_distance, orbit_target_distance, orbit_auto_rotate ? 1.0f : 5.0f, delta);
+            if (orbit_movement_timer >= orbit_linger_duration)
+            {
+                // Linger complete, start new movement
+                orbit_is_lingering = false;
+                orbit_movement_timer = 0.0f;
+
+                // Store current positions as start positions
+                orbit_start_yaw = orbit_yaw;
+                orbit_start_pitch = orbit_pitch;
+                orbit_start_distance = orbit_distance;
+
+                // Generate new random target positions
+                orbit_target_yaw = random(0.0f, 360.0f);
+                orbit_target_pitch = random(-10.0f, 60.0f); // Cap underside pitch until culling issues are resolved
+                orbit_target_distance = random(scaled_min, scaled_max);
+            }
+        }
+        else
+        {
+            // Movement phase: ease-in-ease-out interpolation
+            orbit_movement_timer += delta;
+
+            if (orbit_movement_timer >= orbit_movement_duration)
+            {
+                // Movement complete, snap to target and enter linger phase
+                orbit_yaw = orbit_target_yaw;
+                orbit_pitch = orbit_target_pitch;
+                orbit_distance = orbit_target_distance;
+                orbit_is_lingering = true;
+                orbit_movement_timer = 0.0f;
+            }
+            else
+            {
+                // Calculate smootherstep interpolation factor.
+                // TODO: Replace with SP tween.h smoothstep if merged.
+                float t = orbit_movement_timer / orbit_movement_duration;
+                t = std::clamp(t, 0.0f, 1.0f);
+                float eased_t = t * t * t * (t * (t * 6.0f - 15.0f) + 10.0f);
+
+                // Interpolate using eased factor.
+                // For yaw, handle angle wrapping normalized to -180,180.
+                float yaw_diff = orbit_target_yaw - orbit_start_yaw;
+                while (yaw_diff > 180.0f) yaw_diff -= 360.0f;
+                while (yaw_diff < -180.0f) yaw_diff += 360.0f;
+                orbit_yaw = orbit_start_yaw + yaw_diff * eased_t;
+
+                // Linear interpolation for pitch and distance.
+                orbit_pitch = orbit_start_pitch + (orbit_target_pitch - orbit_start_pitch) * eased_t;
+                orbit_distance = orbit_start_distance + (orbit_target_distance - orbit_start_distance) * eased_t;
+            }
+        }
+    }
+    else
+    {
+        // Manual mode: damp distance changes
+        orbit_distance = exponentialDamp(orbit_distance, orbit_target_distance, 5.0f, delta);
+    }
 
     // When tracking ToT, position camera so that the locked camera target is
     // between the camera and ToT.
     if (is_tracking_tot)
     {
-        // Calculate direction from ToT toward player ship (and beyond)
+        // Calculate direction from ToT toward player ship and beyond.
         glm::vec2 tot_to_ship = target_position_smoothed - tot_cached_position_2D;
         float ship_to_tot_distance = glm::length(tot_to_ship);
 
@@ -1199,16 +1232,16 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
     {
         switch (chase_direction)
         {
-        case Angle::Front:  // Camera behind ship, looking ahead of ship
+        case ChaseAngle::Front:  // Camera behind ship, looking ahead of ship
             focal_point = target_position_smoothed + front;
             break;
-        case Angle::Back:   // Camera in front, looking behind
+        case ChaseAngle::Back:   // Camera in front, looking behind
             focal_point = target_position_smoothed - front;
             break;
-        case Angle::Right:  // Camera on left side, looking off right side
+        case ChaseAngle::Right:  // Camera on left side, looking off right side
             focal_point = target_position_smoothed + right;
             break;
-        case Angle::Left:   // Camera on right side, looking off left side
+        case ChaseAngle::Left:   // Camera on right side, looking off left side
             focal_point = target_position_smoothed - right;
             break;
         }
@@ -1379,4 +1412,48 @@ void CinematicViewScreen::setUIVisibility(bool is_visible)
     // Disable manual camera controls when UI becomes visible
     if (is_visible)
         manual_camera_controls_enabled = false;
+}
+
+void CinematicViewScreen::updateCameraModeSelector(bool is_locked)
+{
+    // Clear all entries
+    camera_mode_selector->clear();
+
+    if (is_locked)
+    {
+        // Locked: Show all modes except Free and Static
+        camera_mode_selector->addEntry(tr("button", "Fly-by camera"), static_cast<string>(static_cast<int>(CameraMode::Flyby)));
+        camera_mode_selector->addEntry(tr("button", "Orbital camera"), static_cast<string>(static_cast<int>(CameraMode::Orbital)));
+        camera_mode_selector->addEntry(tr("button", "Chase camera"), static_cast<string>(static_cast<int>(CameraMode::Chase)));
+        camera_mode_selector->addEntry(tr("button", "Isometric camera"), static_cast<string>(static_cast<int>(CameraMode::Isometric)));
+        camera_mode_selector->addEntry(tr("button", "Top-down camera"), static_cast<string>(static_cast<int>(CameraMode::Topdown)));
+
+        // If current active mode is Free or Static, switch to Flyby
+        if (active_camera_mode == CameraMode::Free || active_camera_mode == CameraMode::Static)
+            active_camera_mode = CameraMode::Flyby;
+
+        // Set selector to match active mode
+        int active_mode_index = camera_mode_selector->indexByValue(std::to_string(static_cast<int>(active_camera_mode)));
+        if (active_mode_index >= 0)
+            camera_mode_selector->setSelectionIndex(active_mode_index);
+        else
+            camera_mode_selector->setSelectionIndex(0); // Fallback to Flyby
+    }
+    else
+    {
+        // Unlocked: Show only Free and Static modes
+        camera_mode_selector->addEntry(tr("button", "Free camera"), static_cast<string>(static_cast<int>(CameraMode::Free)));
+        camera_mode_selector->addEntry(tr("button", "Static camera"), static_cast<string>(static_cast<int>(CameraMode::Static)));
+
+        // If current active mode is not Free or Static, switch to Free
+        if (active_camera_mode != CameraMode::Free && active_camera_mode != CameraMode::Static)
+            active_camera_mode = CameraMode::Free;
+
+        // Set selector to match active mode
+        int active_mode_index = camera_mode_selector->indexByValue(std::to_string(static_cast<int>(active_camera_mode)));
+        if (active_mode_index >= 0)
+            camera_mode_selector->setSelectionIndex(active_mode_index);
+        else
+            camera_mode_selector->setSelectionIndex(0); // Fallback to Free
+    }
 }
