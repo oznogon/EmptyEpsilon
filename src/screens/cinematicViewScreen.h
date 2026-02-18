@@ -10,6 +10,7 @@
 class GuiButton;
 class GuiElement;
 class GuiHelpOverlay;
+class GuiProgressbar;
 class GuiSelector;
 class GuiToggleButton;
 class MouseRenderer;
@@ -28,7 +29,9 @@ private:
     GuiToggleButton* camera_lock_toggle;
     GuiToggleButton* camera_lock_tot_toggle;
     GuiToggleButton* camera_lock_cycle_toggle;
-    GuiButton* callsigns_toggle;
+    GuiToggleButton* camera_mode_cycle_toggle;
+    GuiProgressbar* cycle_progress;
+    GuiToggleButton* callsigns_toggle;
     GuiButton* ui_toggle;
     GuiHelpOverlay* keyboard_help;
     GuiLabel* keybind_hint_label;
@@ -57,6 +60,13 @@ private:
         Topdown,
         Free,
         Static
+    };
+    std::vector<CameraMode> locked_modes = {
+        CameraMode::Flyby,
+        CameraMode::Orbital,
+        CameraMode::Chase,
+        CameraMode::Isometric,
+        CameraMode::Topdown
     };
     const int camera_mode_flyby_int = static_cast<int>(CameraMode::Flyby);
     const int camera_mode_free_int = static_cast<int>(CameraMode::Free);
@@ -187,7 +197,6 @@ private:
     const float isometric_elevations[6] = {26.565f, 30.0f, 35.264f, 45.0f, 53.13f, 63.435f};
 
     float isometric_distance = 1000.0f;
-    IsometricAngle isometric_direction = IsometricAngle::FrontRight;
 
     // Top-down camera mode state
     glm::vec2 topdown_offset{0.0f, 0.0f};
@@ -228,17 +237,25 @@ private:
     float getToTDistance() const;
 
     // Auto-zoom helper functions
+
+    // Return the entity's physics radius, if any, with a defined default.
     float getShipRadius(sp::ecs::Entity entity) const;
+    // Calculate the FoV necessary in perspective projection mode to keep two
+    // targets within view.
     float calculatePerspectiveAutoZoomFoV(float camera_to_target_distance, float total_span, float delta);
+    // Calculate the distance necessary in orthographic projection mode to keep
+    // two targets within view.
     float calculateOrthographicAutoZoomDistance(float horizontal_span);
 
-    // UI toggle
+    // Set UI visibility.
     void setUIVisibility(bool is_visible);
+    // Set manual camera control mode.
+    void setManualCameraControl(bool is_manual);
 
-    // Populate camera mode selector based on lock state
+    // Populate camera mode selector based on lock state.
     void updateCameraModeSelector(bool is_locked);
 
-    // Damping dispatch functions (debug-switchable in DEBUG builds, direct calls in release)
+    // Damping functions (debug-switchable in DEBUG builds)
     float applyDamping(float source, float target, float speed, float delta);
     glm::vec2 applyDamping(const glm::vec2& source, const glm::vec2& target, float speed, float delta);
     float applyAngleDamping(float source, float target, float speed, float delta);

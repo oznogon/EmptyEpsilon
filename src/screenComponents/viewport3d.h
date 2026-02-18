@@ -72,8 +72,10 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
 
-    GuiViewport3D* showCallsigns() { show_callsigns = true; return this; }
-    GuiViewport3D* toggleCallsigns() { show_callsigns = !show_callsigns; return this; }
+    GuiViewport3D* setCallsignVisibility(bool is_visible) { show_callsigns = is_visible; return this; }
+    bool areCallsignsVisible() const { return show_callsigns; }
+    GuiViewport3D* showCallsigns() { return setCallsignVisibility(true); }
+    GuiViewport3D* toggleCallsigns() { return setCallsignVisibility(!areCallsignsVisible()); }
     GuiViewport3D* showHeadings() { show_headings = true; return this; }
     GuiViewport3D* showSpacedust() { show_spacedust = true; return this; }
 
