@@ -134,16 +134,14 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 
     // Select language
     {
-        (new GuiLabel(interface_left_column, "LANGUAGE_OPTIONS_LABEL", tr("Interface language"), 30.0f))
+        (new GuiLabel(interface_left_column, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, 50.0f);
-
+        
         std::vector<string> languages = findResources("locale/main.*.po");
         // Strip extension
-        for (string &language : languages)
-        {
+        for(string &language : languages) 
             language = language.substr(language.find(".") + 1, language.rfind("."));
-        }
         std::sort(languages.begin(), languages.end());
 
         int default_index = 0;
@@ -326,6 +324,41 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setText(science_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
             ->setSize(200.0f, 50.0f);
     }
+
+    (new GuiLabel(interface_right_column, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("Cinematic view options"), 30))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 20, 0");
+
+    // Mouselook camera axis inversion
+    (new GuiToggleButton(interface_right_column, "TOGGLE_MOUSELOOK_INVERSION", tr("Invert camera y-axis"), [this](bool value)
+    {
+        PreferencesManager::set("camera_mouse_inverted", value ? "1" : "0");
+    }))->setValue(PreferencesManager::get("camera_mouse_inverted", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    auto initial_mouselook_sensitivity = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
+    if (initial_mouselook_sensitivity <= 0.0f)
+    {
+        LOG(Warning, "camera_mouse_sensitivity value invalid: ", PreferencesManager::get("camera_mouse_sensitivity", "0.15"));
+        initial_mouselook_sensitivity = 0.15f;
+    }
+
+    mouselook_sensitivity_slider = new GuiBasicSlider(interface_right_column, "MOUSELOOK_SENSITIVITY_SLIDER", 0.01f, 1.0f, initial_mouselook_sensitivity,
+        [this](float sensitivity)
+        {
+            PreferencesManager::set("camera_mouse_sensitivity", sensitivity);
+            mouselook_sensitivity_overlay_label->setText(
+                tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f)))} })
+            );
+            LOG(Info, "sensitivity: ", sensitivity, " static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f))): ", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f))) );
+        }
+    );
+    mouselook_sensitivity_slider->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Override overlay label.
+    mouselook_sensitivity_overlay_label = new GuiLabel(mouselook_sensitivity_slider, "MOUSELOOK_SENSITIVITY_SLIDER_LABEL",
+        tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(initial_mouselook_sensitivity * 100.0f)))} }), 30.0f);
+    mouselook_sensitivity_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void OptionsMenu::setupGraphicsOptions()
@@ -366,6 +399,11 @@ void OptionsMenu::setupGraphicsOptions()
 
     // FoV slider.
     auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
+    if (initial_fov <= 30.0f || initial_fov >= 140.0f)
+    {
+        LOG(Warning, "main_screen_camera_fov value invalid: ", PreferencesManager::get("main_screen_camera_fov"));
+        initial_fov = std::clamp(initial_fov, 30.0f, 140.0f);
+    }
     graphics_fov_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_FOV_SLIDER", 30.f, 140.0f, initial_fov, [this](float fov) {
         fov = std::round(fov);
         graphics_fov_slider->setValue(fov);
