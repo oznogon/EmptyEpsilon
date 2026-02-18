@@ -76,10 +76,19 @@ public:
     GuiViewport3D* showHeadings() { show_headings = true; return this; }
     GuiViewport3D* showSpacedust() { show_spacedust = true; return this; }
 
+    enum class ProjectionType
+    {
+        Perspective,
+        Ortho
+    };
+
     float getFoV() { return base_fov + fov_modifier; }
     float getFoVModifier() { return fov_modifier; }
     // base_fov set by main_screen_camera_fov preference on Viewport init
     float modifyFoV(float modifier) { fov_modifier = std::clamp(base_fov + modifier, 30.0f, 140.0f) - base_fov; return fov_modifier; }
+    void setProjectionType(ProjectionType type) { projection_type = type; }
 private:
     glm::vec3 worldToScreen(sp::RenderTarget& window, glm::vec3 world);
+
+    ProjectionType projection_type = ProjectionType::Perspective;
 };
