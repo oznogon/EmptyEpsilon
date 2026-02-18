@@ -9,10 +9,16 @@ extern sp::io::Keybinding fullscreen_key;
 Keys::CinematicKeys::CinematicKeys() :
     toggle_ui("CINEMATIC_TOGGLE_UI", "H"),
     toggle_callsigns("CINEMATIC_TOGGLE_CALLSIGNS", "G"),
+    toggle_manual_controls("CINEMATIC_TOGGLE_MANUAL_CONTROLS", "M"),
     lock_camera("CINEMATIC_LOCK_CAMERA", "L"),
     cycle_camera("CINEMATIC_CYCLE_CAMERA", "C"),
     previous_player_ship("CINEMATIC_PREVIOUS_PLAYER_SHIP", "J"),
     next_player_ship("CINEMATIC_NEXT_PLAYER_SHIP", "K"),
+    previous_camera_mode("CINEMATIC_PREVIOUS_CAMERA_MODE", "["),
+    next_camera_mode("CINEMATIC_NEXT_CAMERA_MODE", "]"),
+    toggle_auto_zoom("CINEMATIC_TOGGLE_AUTO_ZOOM", "Z"),
+    toggle_target_lock("CINEMATIC_TOGGLE_TARGET_LOCK", "T"),
+    camera_option("CINEMATIC_CAMERA_OPTION", "O"),
     move_forward("CINEMATIC_MOVE_FORWARD", {
         "joy:0:axis:1",
         "gamecontroller:0:axis:lefty",
@@ -70,10 +76,16 @@ void Keys::CinematicKeys::init()
     const auto localized_category = tr("hotkey_menu", "Cinematic View");
     toggle_ui.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle UI"));
     toggle_callsigns.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle callsigns"));
+    toggle_manual_controls.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle manual controls"));
     lock_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera lock"));
     cycle_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera cycle"));
     previous_player_ship.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle previous player ship"));
     next_player_ship.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle next player ship"));
+    previous_camera_mode.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle previous camera mode"));
+    next_camera_mode.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle next camera mode"));
+    toggle_auto_zoom.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle auto-zoom"));
+    toggle_target_lock.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle target lock"));
+    camera_option.setLabel(localized_category, tr("hotkey_Cinematic", "Camera option"));
     move_forward.setLabel(localized_category, tr("hotkey_Cinematic", "Move forward"));
     move_backward.setLabel(localized_category, tr("hotkey_Cinematic", "Move backward"));
     strafe_left.setLabel(localized_category, tr("hotkey_Cinematic", "Strafe left"));
