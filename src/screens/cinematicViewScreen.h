@@ -16,17 +16,6 @@ class MouseRenderer;
 
 class CinematicViewScreen : public GuiCanvas, public Updatable
 {
-public:
-    enum CameraMode {
-        Flyby = 0,
-        Orbital,
-        Chase,
-        Isometric,
-        Topdown,
-        Free,
-        Static
-    };
-
 private:
     GuiViewport3D* viewport;
     sp::ecs::Entity target;
@@ -42,16 +31,30 @@ private:
     GuiButton* callsigns_toggle;
     GuiButton* ui_toggle;
     GuiHelpOverlay* keyboard_help;
-    CameraMode camera_mode = Flyby;
+    GuiLabel* keybind_hint_label;
+
+    // Camera modes and convenience conversions
+    enum class CameraMode {
+        Flyby = 0,
+        Orbital,
+        Chase,
+        Isometric,
+        Topdown,
+        Free,
+        Static
+    };
+    const int camera_mode_flyby_int = static_cast<int>(CameraMode::Flyby);
+    const int camera_mode_free_int = static_cast<int>(CameraMode::Free);
+    const int camera_mode_static_int = static_cast<int>(CameraMode::Static);
 
     // Camera constraints
     // Movement rates
-    const float camera_translation_min = 10.0f;
-    const float camera_translation_max = 50.0f;
-    const float camera_rotation_min = 1.0f;
-    const float camera_rotation_max = 4.0f;
-    const float camera_zoom_min = 20.0f;
-    const float camera_zoom_max = 60.0f;
+    const float camera_translation_speed_min = 5.0f;
+    const float camera_translation_speed_max = 50.0f;
+    const float camera_rotation_speed_min = 1.0f;
+    const float camera_rotation_speed_max = 4.0f;
+    const float camera_zoom_speed_min = 20.0f;
+    const float camera_zoom_speed_max = 60.0f;
     // Per-mode distance
     const float orbit_distance_min = 300.0f;
     const float orbit_distance_max = 1200.0f;
@@ -68,9 +71,9 @@ private:
     const float topdown_zoom_max = 5000.0f;
 
     // Initialize camera properties
-    float camera_translation_speed = camera_translation_min;
-    float camera_rotation_speed = camera_rotation_min;
-    float camera_zoom_speed = camera_zoom_min;
+    float camera_translation_speed = camera_translation_speed_min;
+    float camera_rotation_speed = camera_rotation_speed_min;
+    float camera_zoom_speed = camera_zoom_speed_min;
     float min_camera_distance = 300.0f;
     float max_camera_distance = 1000.0f;
     float camera_sensitivity = 0.15f;
@@ -84,6 +87,8 @@ private:
     // Initialize pref-defined options
     bool invert_mouselook_y = false; // TODO: Rename
     bool random_flyby_angle = false;
+    bool manual_camera_controls_enabled = false; // Toggled by hotkey
+    float keybind_hint_timer = 5.0f; // Show keybind hint for 5 seconds when UI is hidden
 
     // Initialize measurement caches
     glm::vec2 diff_2D{0.0f, 0.0f};
@@ -92,6 +97,7 @@ private:
     float distance_3D = 0.0f;
 
     glm::vec2 target_position_2D{0.0f, 0.0f};
+    glm::vec2 target_position_smoothed{0.0f, 0.0f}; // Damped version to smooth high-speed/network jitter
     glm::vec3 target_position_3D{0.0f, 0.0f, 0.0f};
     glm::vec2 camera_position_2D{0.0f, 0.0f};
     float target_rotation = 0.0f;
@@ -108,6 +114,7 @@ private:
     float orbit_distance = 700.0f;
     glm::vec2 orbit_center{0.0f, 0.0f};
     bool orbit_auto_rotate = false;
+    bool orbit_tot_tracking_was_active = false; // Tracks previous frame's ToT state for reset detection
     float orbit_target_yaw = -90.0f;
     float orbit_target_pitch = 45.0f;
     float orbit_target_distance = 700.0f;
@@ -157,6 +164,10 @@ private:
     float isometric_distance = 1000.0f;
     IsometricAngle isometric_direction = IsometricAngle::FrontRight;
 
+    // Half-second rotation debouncing for chase/isometric cameras
+    float rotation_debounce_timer = 0.0f;
+    const float rotation_debounce_delay = 0.5f;
+
     // Top-down camera mode state
     glm::vec2 topdown_offset{0.0f, 0.0f};
     float topdown_zoom = 1000.0f;
@@ -172,7 +183,7 @@ public:
     explicit CinematicViewScreen(RenderLayer* render_layer);
     virtual ~CinematicViewScreen();
 
-    void setTargetTransform(sp::Transform* transform);
+    void setTargetTransform(sp::Transform* transform, float delta);
     void updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateOrbitCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
     void updateFlybyCamera(sp::Transform* main_transform, sp::Transform* tot_transform, float delta);
