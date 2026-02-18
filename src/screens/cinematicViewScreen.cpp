@@ -201,6 +201,26 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     );
     ui_toggle->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(200, 50);
 
+#ifdef DEBUG
+    // Debug damping function selector
+    damping_selector = new GuiSelector(camera_controls, "DAMPING_SELECTOR", [this](int index, string value) {
+        current_damping_type = static_cast<DampingType>(index);
+        // Reset velocity tracking when switching to critical spring damper
+        if (current_damping_type == DampingType::CriticalSpring) {
+            camera_velocity_2d = {0.0f, 0.0f};
+            camera_velocity_angle = 0.0f;
+            camera_velocity_zoom = 0.0f;
+        }
+    });
+    damping_selector->addEntry("Power Damping", "0");
+    damping_selector->addEntry("Exponential Damping", "1");
+    damping_selector->addEntry("Critical Spring Damping", "2");
+    damping_selector
+        ->setSelectionIndex(static_cast<int>(DampingType::Exponential))
+        ->setPosition(-20, -80, sp::Alignment::BottomRight)
+        ->setSize(300, 50);
+#endif
+
     // Overlays
     new GuiIndicatorOverlays(this);
 
@@ -699,9 +719,9 @@ void CinematicViewScreen::update(float delta)
     {
         // Smoothly interpolate toward target speed based on boost input
         const float speed_interpolation = 10.0f;
-        camera_translation_speed = exponentialDamp(camera_translation_speed, targetValue(camera_translation_speed_min, camera_translation_speed_max, move_speed_factor), speed_interpolation, delta);
-        camera_rotation_speed = exponentialDamp(camera_rotation_speed, targetValue(camera_rotation_speed_min, camera_rotation_speed_max, move_speed_factor), speed_interpolation, delta);
-        camera_zoom_speed = exponentialDamp(camera_zoom_speed, targetValue(camera_zoom_speed_min, camera_zoom_speed_max, move_speed_factor), speed_interpolation, delta);
+        camera_translation_speed = applyDamping(camera_translation_speed, targetValue(camera_translation_speed_min, camera_translation_speed_max, move_speed_factor), speed_interpolation, delta);
+        camera_rotation_speed = applyDamping(camera_rotation_speed, targetValue(camera_rotation_speed_min, camera_rotation_speed_max, move_speed_factor), speed_interpolation, delta);
+        camera_zoom_speed = applyDamping(camera_zoom_speed, targetValue(camera_zoom_speed_min, camera_zoom_speed_max, move_speed_factor), speed_interpolation, delta);
     }
     else
     {
@@ -838,7 +858,7 @@ void CinematicViewScreen::setTargetTransform(sp::Transform* transform, float del
     // Smooth the target position to eliminate stuttering from high-speed movement
     // (warp) or network interpolation jitter. Use aggressive damping (15.0) to
     // follow quickly while smoothing discrete jumps.
-    target_position_smoothed = exponentialDamp(target_position_smoothed, target_position_2D, 15.0f, delta);
+    target_position_smoothed = applyDamping(target_position_smoothed, target_position_2D, 15.0f, delta);
 
     // Copy the selected transform's position into a vec3 for camera angle
     // calculations.
@@ -995,7 +1015,7 @@ void CinematicViewScreen::updateOrbitCamera(sp::Transform* main_transform, sp::T
     else
     {
         // Manual mode: damp distance changes
-        orbit_distance = exponentialDamp(orbit_distance, orbit_target_distance, 5.0f, delta);
+        orbit_distance = applyDamping(orbit_distance, orbit_target_distance, 5.0f, delta);
     }
 
     // When tracking ToT, position camera so that the locked camera target is
@@ -1157,7 +1177,7 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::T
             float required_half_fov = glm::degrees(atan((frame_distance * 0.5f) / camera_to_median));
             float fov_goal = (required_half_fov * 2.0f) - viewport->getBaseFoV();
             fov_goal = std::clamp(fov_goal, -30.0f, 60.0f);  // Limit FoV adjustment range
-            float new_fov = exponentialDamp(viewport->getFoVModifier(), fov_goal, 2.0f, delta);
+            float new_fov = applyDamping(viewport->getFoVModifier(), fov_goal, 2.0f, delta);
             flyby_fov_modifier = viewport->modifyFoV(new_fov);
         }
         else
@@ -1166,7 +1186,7 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, sp::T
             {
                 // Standard zoom based on distance
                 float fov_goal = ((1 - (std::clamp(horizontal_dist, 500.0f, 2000.0f) / std::clamp(distance_after_travel, 500.0f, 2000.0f))) * 60.0f) - 30.0f;
-                float new_fov = exponentialDamp(viewport->getFoVModifier(), fov_goal, 1.0f, delta);
+                float new_fov = applyDamping(viewport->getFoVModifier(), fov_goal, 1.0f, delta);
                 flyby_fov_modifier = viewport->modifyFoV(new_fov);
             }
         }
@@ -1282,7 +1302,7 @@ void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform, s
 
     // Smoothly interpolate to target distance with framerate-independent damping
     if (camera_auto_zoom_toggle->getValue())
-        isometric_distance = exponentialDamp(isometric_distance, target_distance, 0.5f, delta);
+        isometric_distance = applyDamping(isometric_distance, target_distance, 0.5f, delta);
 
     // Calculate camera position using spherical coordinates
     const float elevation_rad = glm::radians(isometric_elevations[static_cast<int>(elev)]);
@@ -1320,7 +1340,7 @@ void CinematicViewScreen::updateTopdownCamera(sp::Transform* main_transform, sp:
 
     // Smoothly interpolate to target zoom with framerate-independent damping
     if (camera_auto_zoom_toggle->getValue())
-        topdown_zoom = exponentialDamp(topdown_zoom, target_zoom, 0.5f, delta);
+        topdown_zoom = applyDamping(topdown_zoom, target_zoom, 0.5f, delta);
 
     // Position camera above aim point
     camera_position = {camera_aim_point, topdown_zoom};
@@ -1457,3 +1477,73 @@ void CinematicViewScreen::updateCameraModeSelector(bool is_locked)
             camera_mode_selector->setSelectionIndex(0); // Fallback to Free
     }
 }
+
+#ifdef DEBUG
+// Select damping type
+float CinematicViewScreen::applyDamping(float source, float target, float speed, float delta)
+{
+    switch (current_damping_type)
+    {
+    case DampingType::Exponential:
+        return exponentialDamp(source, target, speed, delta);
+    case DampingType::CriticalSpring:
+        {
+            float position = source;
+            criticalSpringDamp(position, camera_velocity_zoom, target, delta);
+            return position;
+        }
+    default:
+        return exponentialDamp(source, target, speed, delta);
+    }
+}
+
+glm::vec2 CinematicViewScreen::applyDamping(const glm::vec2& source, const glm::vec2& target, float speed, float delta)
+{
+    switch (current_damping_type)
+    {
+    case DampingType::Exponential:
+        return exponentialDamp(source, target, speed, delta);
+    case DampingType::CriticalSpring:
+        {
+            glm::vec2 position = source;
+            criticalSpringDamp(position, camera_velocity_2d, target, delta);
+            return position;
+        }
+    default:
+        return exponentialDamp(source, target, speed, delta);
+    }
+}
+
+float CinematicViewScreen::applyAngleDamping(float source, float target, float speed, float delta)
+{
+    switch (current_damping_type)
+    {
+    case DampingType::Exponential:
+        return exponentialAngleDamp(source, target, speed, delta);
+    case DampingType::CriticalSpring:
+        {
+            float position = source;
+            criticalSpringAngleDamp(position, camera_velocity_angle, target, delta);
+            return position;
+        }
+    default:
+        return exponentialAngleDamp(source, target, speed, delta);
+    }
+}
+#else
+// Use exponential damping
+float CinematicViewScreen::applyDamping(float source, float target, float speed, float delta)
+{
+    return exponentialDamp(source, target, speed, delta);
+}
+
+glm::vec2 CinematicViewScreen::applyDamping(const glm::vec2& source, const glm::vec2& target, float speed, float delta)
+{
+    return exponentialDamp(source, target, speed, delta);
+}
+
+float CinematicViewScreen::applyAngleDamping(float source, float target, float speed, float delta)
+{
+    return exponentialAngleDamp(source, target, speed, delta);
+}
+#endif
