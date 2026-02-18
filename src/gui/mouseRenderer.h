@@ -8,7 +8,7 @@ class MouseRenderer : public Renderable
 {
 public:
     // Show the mouse cursor.
-    bool visible = true;
+    bool should_be_visible = true;
     // Show sprite outline (yellow) and cursor hotspot (white crosshair) for
     // debugging. Set via GuiCanvas Copy input.
     bool show_bounds = false;
@@ -50,6 +50,7 @@ public:
     void addOverlay(string image, glm::vec2 offset = {0.0f, 0.0f}, float size = 32.0f, glm::u8vec4 color = {255, 255, 255, 255});
     // Remove all overlay sprites. Does not affect the primary sprite.
     void clearOverlays();
+    bool isVisible() { return is_visible; }
 private:
     // The cursor's screen-space position.
     glm::vec2 position;
@@ -59,4 +60,5 @@ private:
     // Overlay sprites drawn over the primary, offset from the cursor position.
     std::vector<CursorLayer> overlays;
     glm::vec2 raw_delta;
+    bool is_visible = true;
 };
