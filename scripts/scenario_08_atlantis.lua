@@ -3,7 +3,7 @@
 ---
 --- You must check out ship systems and complete an initial mission.
 ---
---- This scenario is limited to one player ship: the Atlantis Atlantis-1.
+--- This scenario is limited to one player ship: the Atlantis-1.
 -- Type: Mission
 
 --- Scenario
@@ -444,6 +444,7 @@ end
 function phase2WaitTillAwayFromObject(delta)
     if distance(player, b20_artifact) > 2200 then
         setCommsMessage(_("artifact-comms", [[It seems like the artifact is stabilizing.
+
 It would be good to get some more readings close to the object, as the nebula may be causing issues for your sensors.]]))
         mission_state = phase2WaitTillNearObject
     elseif distance(player, b20_artifact) > 2000 then
@@ -562,7 +563,7 @@ end
 
 --[[*********************************************************************--]]
 function phase4JumpBackToKraylorLine(delta)
-    if handleJumpCarrier(jc88, 24000, 125000, 10000, -210000, _("JumpCarrier-incCall", [[Hold on tight, heading for Kraylor defense line.]])) then
+    if handleJumpCarrier(jc88, 24000, 125000, 10000, -210000, _("JumpCarrier-incCall", [[Hold on tight, heading for the Kraylor defense line.]])) then
         -- Good, continue.
         jc88:sendCommsMessage(
             player,
@@ -804,7 +805,7 @@ function jc88Comms()
         artifactReportComms()
         return
     end
-    setCommsMessage(_("JumpCarrier-comms", [[Jump carrier JC-88 reporting. All system nominal.]]))
+    setCommsMessage(_("JumpCarrier-comms", [[Jump carrier JC-88 reporting. All systems nominal.]]))
 end
 
 function artifactReportComms()
@@ -843,7 +844,7 @@ These readings indicate it is very unstable! Please move away from it.]]))
                                                                 else
                                                                     setCommsMessage(_("artifact-comms", [[Are you sure? Those readings are really off the normal scale.
 
-Can you move close to the object and get a second readings? The nebula might be interfering with your sensors.]]))
+Can you move close to the object and get a second reading? The nebula might be interfering with your sensors.]]))
                                                                     mission_state = phase2WaitTillNearObject
                                                                 end
                                                             else
@@ -918,9 +919,9 @@ function handleJumpCarrier(jc, source_x, source_y, dest_x, dest_y, jumping_messa
             -- Good, continue.
             return true
         else
-            -- You idiot. JC-88 will fly back.
-            jc88:orderFlyTowardsBlind(source_x, source_y)
-            jc88:sendCommsMessage(
+            -- You idiot. The carrier will fly back.
+            jc:orderFlyTowardsBlind(source_x, source_y)
+            jc:sendCommsMessage(
                 player,
                 _("JumpCarrier-incCall", [[Looks like the docking couplers detached prematurely.
 
@@ -948,6 +949,9 @@ function putKraylorDefenseLineOnFullOffense()
 end
 
 function update(delta)
+    -- Game paused, skip update loop
+    if delta == 0 then return end
+
     if not player:isValid() or (not jc88:isValid() and mission_state ~= phase5OdinAttack) then
         defeat_timeout = defeat_timeout - delta
         if defeat_timeout < 0.0 then
