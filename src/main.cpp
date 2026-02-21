@@ -40,6 +40,9 @@
 #include "steam/steam_api.h"
 #include "steamrichpresence.h"
 #endif
+#ifdef __APPLE__
+#include "../osx/setDockIcon.h"
+#endif
 
 #include "shaderRegistry.h"
 #include "glObjects.h"
@@ -102,6 +105,10 @@ int main(int argc, char** argv)
     initSystemsAndComponents();
 
     auto configuration_path = initConfiguration(argc, argv);
+
+#ifdef __APPLE__
+    setMacOSDockIcon();
+#endif
 
     if (PreferencesManager::get("proxy") != "")
         return runProxyServer();
