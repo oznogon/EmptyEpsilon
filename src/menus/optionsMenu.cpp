@@ -169,55 +169,61 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         std::vector<string> themes = findResources("gui/*.theme.txt");
         
         auto iter = themes.begin();
-        while(iter != themes.end()) 
+        while (iter != themes.end())
         {
-            //strip extension
+            // Strip extension.
             *iter = iter->substr(iter->find("/")+1, iter->find("."));
             if (!GuiTheme::loadTheme(*iter, "gui/" + *iter +".theme.txt"))
             {
-                LOG(ERROR, "Failed to load theme : ", *iter);
+                LOG(Error, "Failed to load theme: ", *iter);
                 iter = themes.erase(iter);
             }
             else if (!GuiTheme::getTheme(*iter)->getStyle("base")->states[0].font 
              || !GuiTheme::getTheme(*iter)->getStyle("bold")->states[0].font)
             {
-                LOG(ERROR, "Missing base font or bold font for theme : ", *iter);
+                LOG(Error, "Missing base font or bold font for theme: ", *iter);
                 iter = themes.erase(iter);
             }
             else
-            {
                 ++iter;
-            }
         }
         
         std::sort(themes.begin(), themes.end());
-        if(0 == themes.size())
+        if (themes.size() == 0)
         {
-            LOG(ERROR, "Failed to load any theme, exiting");
-            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load any theme, resources missing ? Should be gui/*.theme.txt. and not contain errors.", nullptr);
+            LOG(Error, "Failed to load any theme, exiting.");
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load any theme, resources might be missing. Themes should be located in gui/*.theme.txt and not contain errors.", nullptr);
             exit(1);
         }
 
+        const bool multiple_themes_exist = themes.size() > 1;
         int default_index = 0;
         auto default_elem = std::find(themes.begin(), themes.end(), PreferencesManager::get("guitheme", "default"));
-        if(default_elem != themes.end())
-        {
+        if (default_elem != themes.end())
             default_index =  static_cast<int>(default_elem - themes.begin());
-        }
 
-        if (themes.size() > 1) {
-            (new GuiLabel(interface_left_column, "GUI_THEME_OPTIONS_LABEL", tr("Interface theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-            (new GuiSelector(interface_left_column, "GUI_THEME_SELECTOR", [](int index, string theme_name)
+        (new GuiLabel(interface_left_column, "GUI_THEME_OPTIONS_LABEL", tr("Interface theme"), 30))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setEnable(multiple_themes_exist)
+            ->setAttribute("margin", "0, 0, 20, 0");
+        (new GuiSelector(interface_left_column, "GUI_THEME_SELECTOR",
+            [](int index, string theme_name)
             {
                 GuiTheme::setCurrentTheme(theme_name);
                 main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
                 bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
-                //Render default font is applied on back only
+                // Changes to default font are applied only after clicking Back.
                 PreferencesManager::set("guitheme", theme_name);
-            }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
-            (new GuiLabel(interface_left_column, "THEME_APPLICATION_LABEL", tr("Click Back to apply change"), 20.0f))
-                ->setSize(GuiElement::GuiSizeMax, 30.0f);
-        }
+            }
+        ))
+            ->setOptions(themes)
+            ->setSelectionIndex(default_index)
+            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setEnable(multiple_themes_exist);
+        (new GuiLabel(interface_left_column, "THEME_APPLICATION_LABEL", tr("Click Back to apply change"), 20.0f))
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setVisible(multiple_themes_exist);
     }
 
     // Interface page, right column
@@ -235,11 +241,12 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
     }))
         ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
+    const float row_height = 50.0f;
     // Radar rotation lock options.
     {
         GuiElement* radar_rotation_lock = new GuiElement(interface_right_column, "RADAR_ROTATION_LOCK");
         radar_rotation_lock
-            ->setSize(GuiElement::GuiSizeMax, 310.0f)
+            ->setSize(GuiElement::GuiSizeMax, 240.0f)
             ->setAttribute("layout", "vertical");
         radar_rotation_lock
             ->setAttribute("margin", "0, 20");
@@ -249,18 +256,18 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
         // Helms/Tactical/Single Pilot rotation lock.
-        const float row_height = 50.0f;
         GuiElement* lock_row = new GuiElement(radar_rotation_lock, "HELMS_RADAR_LOCK_ROW");
         lock_row
             ->setSize(GuiElement::GuiSizeMax, row_height)
             ->setAttribute("layout", "horizontal");
         lock_row
-            ->setAttribute("margin", "0, 0, 20, 10");
+            ->setAttribute("margin", "0, 0, 10, 10");
 
         (new GuiLabel(lock_row, "HELMS_LOCK_DETAILS", tr("radar_locks", "Helms, Tactical,\nSingle Pilot"), 25.0f))
             ->setAlignment(sp::Alignment::CenterRight)
             ->setSize(GuiElement::GuiSizeMax, row_height)
             ->setAttribute("margin", "0, 10, 0, 0");
+
         helms_radar_lock_toggle = new GuiToggleButton(lock_row, "HELMS_RADAR_LOCK", tr("radar_locks", "Lock to 0"),
         [this](bool value)
         {
@@ -273,7 +280,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         helms_radar_lock_toggle
             ->setValue(PreferencesManager::get("helms_radar_lock", "0") == "1")
             ->setText(helms_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
-            ->setSize(200.0f, 50.0f);
+            ->setSize(200.0f, row_height);
 
         // Weapons rotation lock.
         lock_row = new GuiElement(radar_rotation_lock, "WEAPONS_RADAR_LOCK_ROW");
@@ -287,6 +294,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setAlignment(sp::Alignment::CenterRight)
             ->setSize(GuiElement::GuiSizeMax, row_height)
             ->setAttribute("margin", "0, 10, 0, 0");
+
         weapons_radar_lock_toggle = new GuiToggleButton(lock_row, "WEAPONS_RADAR_LOCK", tr("radar_locks", "Lock"),
         [this](bool value)
         {
@@ -297,7 +305,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         weapons_radar_lock_toggle
             ->setValue(PreferencesManager::get("weapons_radar_lock", "0") == "1")
             ->setText(weapons_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
-            ->setSize(200.0f, 50.0f);
+            ->setSize(200.0f, row_height);
 
         // Science/Ops rotation lock.
         lock_row = new GuiElement(radar_rotation_lock, "SCIENCE_RADAR_LOCK_ROW");
@@ -311,6 +319,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setAlignment(sp::Alignment::CenterRight)
             ->setSize(GuiElement::GuiSizeMax, row_height)
             ->setAttribute("margin", "0, 10, 0, 0");
+
         science_radar_lock_toggle = new GuiToggleButton(lock_row, "SCIENCE_RADAR_LOCK", tr("radar_locks", "Lock"),
         [this](bool value)
         {
@@ -322,13 +331,12 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         science_radar_lock_toggle
             ->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")
             ->setText(science_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
-            ->setSize(200.0f, 50.0f);
+            ->setSize(200.0f, row_height);
     }
 
-    (new GuiLabel(interface_right_column, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("Cinematic view options"), 30))
+    (new GuiLabel(interface_right_column, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("Cinematic view options"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
-        ->setAttribute("margin", "0, 0, 20, 0");
+        ->setSize(GuiElement::GuiSizeMax, row_height);
 
     // Mouselook camera axis inversion
     (new GuiToggleButton(interface_right_column, "TOGGLE_MOUSELOOK_INVERSION", tr("Invert camera y-axis"), [this](bool value)
