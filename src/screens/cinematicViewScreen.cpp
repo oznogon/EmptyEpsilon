@@ -879,8 +879,6 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float
     // Lambda to reposition camera at a new flyby point.
     auto repositionCamera = [this, target_velocity]()
     {
-        LOG(Info, "flyby_camera_pos before: ", flyby_camera_pos.x, ",", flyby_camera_pos.y);
-
         // Get ship dimensions
         float ship_half_width = 250.0f;
         if (auto physics = target.getComponent<sp::Physics>())
@@ -898,7 +896,6 @@ void CinematicViewScreen::updateFlybyCamera(sp::Transform* main_transform, float
         glm::vec2 perpendicular_offset = vec2FromAngle(perpendicular_angle) * (distance_from_edge + ship_half_width);
 
         flyby_camera_pos = lead_point + perpendicular_offset;
-        LOG(Info, "perpendicular_angle: ", perpendicular_angle, " ship_half_width: ", ship_half_width, " flyby_camera_pos: ", flyby_camera_pos.x, ",", flyby_camera_pos.y);
     };
 
     // Set initial position or explicitly reset.
