@@ -70,7 +70,7 @@ void GuiTheme::setCurrentTheme(const string &theme_name)
 {
     if(themes.find(theme_name) != themes.end())
     {
-        LOG(INFO, "Set theme to : ", theme_name);
+        LOG(Info, "Set theme to: ", theme_name);
         GuiTheme::current_theme = theme_name;
     }
 }
