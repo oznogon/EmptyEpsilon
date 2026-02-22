@@ -190,7 +190,13 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
             camera_controls->setVisible(!camera_controls->isVisible());
         }
     );
-    mouselook_toggle->setValue(false)->setPosition(-20, -80, sp::Alignment::BottomRight)->setSize(200, 50)->disable();
+    mouselook_toggle
+        ->setValue(false)
+        ->setPosition(-20.0f, -80.0f, sp::Alignment::BottomRight)
+        ->setSize(200.0f, 50.0f)
+        ->disable()
+        ->hide();
+
     ui_toggle = new GuiButton(camera_controls, "UI_TOGGLE", tr("button", "Toggle controls"),
         [this]()
         {
@@ -583,7 +589,9 @@ void CinematicViewScreen::update(float delta)
     if (camera_lock_toggle->getValue() && target && !mouselook)
     {
         setMouselook(false);
-        mouselook_toggle->setValue(false)->disable();
+        mouselook_toggle
+            ->setValue(false)
+            ->disable();
 
         // Set target position to target transform if available.
         // If the target lacks a transform, clear the target.
@@ -1049,7 +1057,6 @@ void CinematicViewScreen::updateChaseCamera(sp::Transform* main_transform, sp::T
 void CinematicViewScreen::updateIsometricCamera(sp::Transform* main_transform)
 {
     // Isometric camera: Diagonal view from above at fixed 45-degree elevation
-
     viewport->setProjectionType(GuiViewport3D::ProjectionType::Ortho);
     const float isometric_elevation = 35.264f;
     float horizontal_angle = target_rotation + ((static_cast<int>(isometric_direction) * 90.0f) + 45.0f);
