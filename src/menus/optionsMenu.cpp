@@ -330,36 +330,29 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 20, 0");
 
-    // Mouselook camera axis inversion
-    (new GuiToggleButton(interface_right_column, "TOGGLE_MOUSELOOK_INVERSION", tr("Invert camera y-axis"), [this](bool value)
-    {
-        PreferencesManager::set("camera_mouse_inverted", value ? "1" : "0");
-    }))->setValue(PreferencesManager::get("camera_mouse_inverted", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50.0f);
-
-    // TODO: Rename to generic camera sensitivity
-    auto initial_mouselook_sensitivity = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
-    if (initial_mouselook_sensitivity <= 0.0f)
+    auto initial_camera_sensitivity = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
+    if (initial_camera_sensitivity <= 0.0f)
     {
         LOG(Warning, "camera_mouse_sensitivity value invalid: ", PreferencesManager::get("camera_mouse_sensitivity", "0.15"));
-        initial_mouselook_sensitivity = 0.15f;
+        initial_camera_sensitivity = 0.15f;
     }
 
-    mouselook_sensitivity_slider = new GuiBasicSlider(interface_right_column, "MOUSELOOK_SENSITIVITY_SLIDER", 0.01f, 1.0f, initial_mouselook_sensitivity,
+    camera_sensitivity_slider = new GuiBasicSlider(interface_right_column, "CAMERA_SENSITIVITY_SLIDER", 0.01f, 1.0f, initial_camera_sensitivity,
         [this](float sensitivity)
         {
             PreferencesManager::set("camera_mouse_sensitivity", sensitivity);
-            mouselook_sensitivity_overlay_label->setText(
+            camera_sensitivity_overlay_label->setText(
                 tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f)))} })
             );
             LOG(Info, "sensitivity: ", sensitivity, " static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f))): ", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f))) );
         }
     );
-    mouselook_sensitivity_slider->setSize(GuiElement::GuiSizeMax, 50.0f);
+    camera_sensitivity_slider->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Override overlay label.
-    mouselook_sensitivity_overlay_label = new GuiLabel(mouselook_sensitivity_slider, "MOUSELOOK_SENSITIVITY_SLIDER_LABEL",
-        tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(initial_mouselook_sensitivity * 100.0f)))} }), 30.0f);
-    mouselook_sensitivity_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    camera_sensitivity_overlay_label = new GuiLabel(camera_sensitivity_slider, "CAMERA_SENSITIVITY_SLIDER_LABEL",
+        tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(initial_camera_sensitivity * 100.0f)))} }), 30.0f);
+    camera_sensitivity_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Cinematic fly-by randomization
     (new GuiToggleButton(interface_right_column, "RANDOMIZE_CINEMATIC_FLYBY", tr("Randomize cinematic fly-by angles"), [this](bool value)
