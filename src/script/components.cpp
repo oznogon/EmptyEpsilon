@@ -551,14 +551,13 @@ void initComponentScriptBindings()
     BIND_MEMBER(UtilityBeam, arc_color);
     BIND_MEMBER(UtilityBeam, arc_color_fire);
     BIND_ARRAY(UtilityBeam, custom_beam_modes);
-    BIND_ARRAY_DIRTY_FLAG(UtilityBeam, custom_beam_modes, custom_beam_modes_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, name, custom_beam_modes_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, callback, custom_beam_modes_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, order, custom_beam_modes_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, energy_per_sec, custom_beam_modes_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, heat_per_sec, custom_beam_modes_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, requires_target, custom_beam_modes_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(UtilityBeam, custom_beam_modes, progress, custom_beam_modes_dirty);
+    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, name);
+    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, callback);
+    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, order);
+    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, energy_per_sec);
+    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, heat_per_sec);
+    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, requires_target);
+    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, progress);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);
