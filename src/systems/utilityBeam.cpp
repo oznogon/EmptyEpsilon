@@ -44,9 +44,7 @@ void UtilityBeamSystem::update(float delta)
     {
         // Ensure effect_target_entity is valid, recreate if it was deleted
         if (!utility_beam.effect_target_entity)
-        {
             utility_beam.effect_target_entity = sp::ecs::Entity::create();
-        }
 
         if (utility_beam.active)
         {
@@ -163,12 +161,42 @@ void UtilityBeamSystem::fire(sp::ecs::Entity firing_entity, UtilityBeam& utility
     utility_beam.heat_per_second = beam_mode.heat_per_sec;
     utility_beam.energy_use_per_second = beam_mode.energy_per_sec;
 
+    utility_beam.is_firing = false;
     LuaConsole::checkResult(beam_mode.callback.call<void>(firing_entity, target_entity, distance, angle_diff));
+
+    if (utility_beam.is_firing)
+    {
+        if (auto target_transform = target_entity.getComponent<sp::Transform>())
+        {
+            auto hit_location = target_transform->getPosition();
+            if (auto target_physics = target_entity.getComponent<sp::Physics>())
+                hit_location -= glm::normalize(target_transform->getPosition() - transform.getPosition()) * target_physics->getSize().x;
+
+            auto& effect_entity = utility_beam.beam_effect_entities[target_entity];
+            if (!effect_entity || !effect_entity.hasComponent<BeamEffect>())
+            {
+                effect_entity = sp::ecs::Entity::create();
+                effect_entity.addComponent<sp::Transform>(transform);
+            }
+
+            auto& beam_effect = effect_entity.getOrAddComponent<BeamEffect>();
+            beam_effect.source = firing_entity;
+            beam_effect.target = target_entity;
+            beam_effect.beam_texture = utility_beam.texture;
+            beam_effect.fire_ring = false;
+            beam_effect.lifetime = 1.0f;
+
+            auto local_hit = hit_location - target_transform->getPosition();
+            beam_effect.target_location = hit_location;
+            beam_effect.target_offset = glm::vec3(local_hit.x, local_hit.y, 0.0f);
+            if (beam_effect.target_offset != glm::vec3(0.0f))
+                beam_effect.hit_normal = glm::normalize(beam_effect.target_offset);
+        }
+    }
 }
 
 void UtilityBeamSystem::render3D(sp::ecs::Entity entity, sp::Transform& transform, UtilityBeamEffect& beam_effect)
 {
-    /* TODO: Beam 3D drawing effects. */
     glm::vec3 startPoint(transform.getPosition().x, transform.getPosition().y, beam_effect.source_offset.z);
     glm::vec3 endPoint(beam_effect.target_location.x, beam_effect.target_location.y, beam_effect.target_offset.z);
     glm::vec3 eyeNormal = glm::normalize(glm::cross(camera_position - startPoint, endPoint - startPoint));

@@ -153,19 +153,23 @@ void BeamWeaponSystem::update(float delta)
         }
     }
 
-    for(auto [entity, be, transform] : sp::ecs::Query<BeamEffect, sp::Transform>()) {
-        if (be.source) {
+    for (auto [entity, be, transform] : sp::ecs::Query<BeamEffect, sp::Transform>())
+    {
+        if (be.source)
+        {
             if (auto st = be.source.getComponent<sp::Transform>())
                 transform.setPosition(st->getPosition() + rotateVec2(glm::vec2(be.source_offset.x, be.source_offset.y), st->getRotation()));
         }
-        if (be.target) {
+
+        if (be.target)
+        {
             if (auto tt = be.target.getComponent<sp::Transform>())
                 be.target_location = tt->getPosition() + glm::vec2(be.target_offset.x, be.target_offset.y);
         }
 
         be.lifetime -= delta * be.fade_speed;
-        if (be.lifetime < 0 && game_server)
-            entity.destroy();
+
+        if (be.lifetime < 0.0f && game_server) entity.destroy();
     }
 }
 
