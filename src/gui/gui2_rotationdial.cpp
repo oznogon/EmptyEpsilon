@@ -21,8 +21,8 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
     const auto& back = back_style->get(getState());
     const auto& front = front_style->get(getState());
 
-    renderer.drawSprite(back.texture, center, radius * 2.0f, back.color);
-    renderer.drawRotatedSprite(front.texture, center, radius * 2.0f, (value - min_value) / (max_value - min_value) * 360.0f, front.color);
+    renderer.drawSprite(back.texture, center, diameter, back.color);
+    renderer.drawRotatedSprite(front.texture, center, diameter, (value - min_value) / (max_value - min_value) * 360.0f, front.color);
 }
 
 bool GuiRotationDial::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
