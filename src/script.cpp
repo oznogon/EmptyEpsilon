@@ -1143,7 +1143,6 @@ void luaSetCustomUtilityBeamMode(sp::ecs::Entity ship, string name, int order, f
     f.order = order;
     f.requires_target = requires_target;
     std::stable_sort(cbm.begin(), cbm.end());
-    utility_beam->custom_beam_modes_dirty = true;
 }
 
 void luaSetCustomUtilityBeamModeProgress(sp::ecs::Entity ship, string name, float progress) {
@@ -1162,7 +1161,6 @@ void luaSetCustomUtilityBeamModeProgress(sp::ecs::Entity ship, string name, floa
     auto& f = cbm[idx];
     f.progress = progress;
     LOG(INFO) << "f.progress: " << f.progress;
-    utility_beam->custom_beam_modes_dirty = true;
 }
 
 void luaRemoveCustomUtilityBeamMode(sp::ecs::Entity ship, string name) {
@@ -1177,7 +1175,6 @@ void luaRemoveCustomUtilityBeamMode(sp::ecs::Entity ship, string name) {
 
     if (it != cbm.end()) {
         cbm.erase(it, cbm.end());
-        utility_beam->custom_beam_modes_dirty = true;
     }
 }
 
