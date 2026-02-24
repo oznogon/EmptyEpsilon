@@ -156,24 +156,6 @@ void UtilityBeamSystem::update(float delta)
         }
     }
 
-    for (auto [entity, beam_effect, transform] : sp::ecs::Query<BeamEffect, sp::Transform>())
-    {
-        if (beam_effect.source)
-        {
-            if (auto st = beam_effect.source.getComponent<sp::Transform>())
-                transform.setPosition(st->getPosition() + rotateVec2(glm::vec2(beam_effect.source_offset.x, beam_effect.source_offset.y), st->getRotation()));
-        }
-
-        if (beam_effect.target)
-        {
-            if (auto tt = beam_effect.target.getComponent<sp::Transform>())
-                beam_effect.target_location = tt->getPosition() + glm::vec2(beam_effect.target_offset.x, beam_effect.target_offset.y);
-        }
-
-        beam_effect.lifetime -= delta * beam_effect.fade_speed;
-        if (beam_effect.lifetime < 0.0f && game_server)
-            entity.destroy();
-    }
 }
 
 void UtilityBeamSystem::fire(sp::ecs::Entity firing_entity, UtilityBeam& utility_beam, UtilityBeam::CustomBeamMode& beam_mode, sp::Transform& transform, sp::ecs::Entity target_entity, float distance, float angle_diff)
@@ -182,41 +164,6 @@ void UtilityBeamSystem::fire(sp::ecs::Entity firing_entity, UtilityBeam& utility
     utility_beam.energy_use_per_second = beam_mode.energy_per_sec;
 
     LuaConsole::checkResult(beam_mode.callback.call<void>(firing_entity, target_entity, distance, angle_diff));
-
-    // 3D beam effect
-    if (utility_beam.is_firing)
-    {
-        if (auto target_transform = target_entity.getComponent<sp::Transform>())
-        {
-            auto hit_location = target_transform->getPosition();
-            // auto r = 100.0f;
-            if (auto target_physics = target_entity.getComponent<sp::Physics>())
-            {
-                hit_location -= glm::normalize(target_transform->getPosition() - transform.getPosition()) * target_physics->getSize().x;
-                // r = target_physics->getSize().x;
-            }
-
-            auto beam_effect_entity = sp::ecs::Entity::create();
-            beam_effect_entity.addComponent<sp::Transform>(transform);
-            auto& beam_effect = beam_effect_entity.addComponent<BeamEffect>();
-            beam_effect.source = firing_entity;
-            beam_effect.target = target_entity;
-            beam_effect.target_location = hit_location;
-            beam_effect.beam_texture = utility_beam.texture;
-            beam_effect.fire_ring = false;
-
-            {
-                auto local_hit_location = hit_location - target_transform->getPosition();
-                // entity.target_offset = glm::vec3(local_hit_location.x + random(-r/2.0f, r/2.0f), local_hit_location.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
-                beam_effect.target_offset = glm::vec3(local_hit_location.x, local_hit_location.y, 0.0f);
-                beam_effect.hit_normal = glm::normalize(beam_effect.target_offset);
-            }
-        }
-        else
-        {
-            LOG(DEBUG) << "Utility beam target has no Transform component";
-        }
-    }
 }
 
 void UtilityBeamSystem::render3D(sp::ecs::Entity entity, sp::Transform& transform, UtilityBeamEffect& beam_effect)
