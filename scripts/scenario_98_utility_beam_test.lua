@@ -5,18 +5,7 @@
 --- Scenario
 -- @script scenario_98_utility_beam_test
 
--- TODO: stolen from utils.lua, but requiring utils.lua creates collisions with var names in here, so refactor
-function vectorFromAngle(angle, length, angle_is_heading)
-    if angle_is_heading ~= nil and angle_is_heading == true then
-        angle=angle-90  -- if angle was set as heading, sanitize it.
-    end
-    return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
-end
-
-function setCirclePos(obj, x, y, angle, distance, angle_is_heading)
-    local dx, dy = vectorFromAngle(angle, distance, angle_is_heading)
-    return obj:setPosition(x + dx, y + dy)
-end
+require("utils.lua")
 
 function checkBeamCapability(beam_emitter)
     local emitter_utility_beam = beam_emitter.components.utility_beam
@@ -460,6 +449,7 @@ function init()
                         -- log("Generating radar disruption")
 
                         if emitter_utility_beam_effectiveness > 0.0 then
+                            emitter_utility_beam.is_firing = true
                             beam_target.components.warp_jammer = nil
                             beam_target.components = {
                                 radar_trace = {
@@ -492,6 +482,7 @@ function init()
                         -- log("Generating warp/jump disruption")
 
                         if emitter_utility_beam_effectiveness > 0.0 then
+                            emitter_utility_beam.is_firing = true
                             beam_target.components.radar_block = nil
                             beam_target.components = {
                                 radar_trace = {
@@ -609,6 +600,7 @@ function init()
     )
 end
 
+-- TODO: Replace this with the utils.lua version once it incorporates missile types (#2733)
 function isObjectType(obj,typ,qualifier)
     if obj ~= nil and obj:isValid() then
         if typ ~= nil then
