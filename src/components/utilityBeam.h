@@ -29,7 +29,6 @@ public:
 
     string custom_beam_mode = "";
     std::vector<CustomBeamMode> custom_beam_modes;
-    bool custom_beam_modes_dirty = true;
     sp::ecs::Entity effect_target_entity;
 
     bool active = false;

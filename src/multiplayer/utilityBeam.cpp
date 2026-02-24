@@ -125,7 +125,14 @@ template<BasicReplicationRequest BRR> void UtilityBeamReplication::field_impl(sp
     BASIC_REPLICATION_FIELD(cooldown);
     BASIC_REPLICATION_FIELD(texture);
     BASIC_REPLICATION_FIELD(custom_beam_mode);
-    REPLICATE_VECTOR_IF_DIRTY(custom_beam_modes, custom_beam_modes_dirty);
+    BASIC_REPLICATION_VECTOR(custom_beam_modes)
+        VECTOR_REPLICATION_FIELD(name)
+        VECTOR_REPLICATION_FIELD(order)
+        VECTOR_REPLICATION_FIELD(energy_per_sec)
+        VECTOR_REPLICATION_FIELD(heat_per_sec)
+        VECTOR_REPLICATION_FIELD(requires_target)
+        VECTOR_REPLICATION_FIELD(progress)
+    VECTOR_REPLICATION_END();
 }
 
 BASIC_REPLICATION_IMPL(UtilityBeamEffectReplication, UtilityBeamEffect)
@@ -141,13 +148,3 @@ BASIC_REPLICATION_IMPL(UtilityBeamEffectReplication, UtilityBeamEffect)
     BASIC_REPLICATION_FIELD(beam_texture);
 }
 
-static inline sp::io::DataBuffer& operator << (sp::io::DataBuffer& packet, const UtilityBeam::CustomBeamMode& cbm)
-{
-    return packet << cbm.name << cbm.order << cbm.energy_per_sec << cbm.heat_per_sec << cbm.requires_target;
-}
-
-static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, UtilityBeam::CustomBeamMode& cbm)
-{
-    packet >> cbm.name >> cbm.order >> cbm.energy_per_sec >> cbm.heat_per_sec >> cbm.requires_target;
-    return packet;
-}
