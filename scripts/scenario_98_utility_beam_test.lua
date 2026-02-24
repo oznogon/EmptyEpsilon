@@ -613,7 +613,6 @@ function isObjectType(obj,typ,qualifier)
     if obj ~= nil and obj:isValid() then
         if typ ~= nil then
             if ECS then
-                log("in isObjectType. typ: " .. typ)
                 if typ == "SpaceStation" then
                     return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
                 elseif typ == "PlayerSpaceship" then
@@ -623,7 +622,6 @@ function isObjectType(obj,typ,qualifier)
                 elseif typ == "CpuShip" then
                     return obj.ai_controller
                 elseif typ == "Asteroid" then
-                    log("in isObjectType Asteroid condition. string.sub(obj.components.mesh_render.mesh, 1): " .. string.sub(obj.components.mesh_render.mesh, 1))
                     return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 1, 7) == "Astroid"
                 elseif typ == "Nebula" then
                     return obj.components.nebula_renderer
