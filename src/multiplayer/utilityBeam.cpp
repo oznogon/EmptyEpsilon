@@ -107,6 +107,7 @@ template<BasicReplicationRequest BRR> void UtilityBeamReplication::field_impl(sp
     BASIC_REPLICATION_FIELD(auto_repair_per_second);
     BASIC_REPLICATION_FIELD(damage_per_second_on_overheat);
 
+    BASIC_REPLICATION_FIELD(crew_positions.mask);
     BASIC_REPLICATION_FIELD(active);
     BASIC_REPLICATION_FIELD(is_firing);
     BASIC_REPLICATION_FIELD(position);

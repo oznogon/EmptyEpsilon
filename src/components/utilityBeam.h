@@ -3,6 +3,7 @@
 #include "ecs/entity.h"
 #include "script/callback.h"
 #include "shipsystem.h"
+#include "crewPosition.h"
 #include "glm/vec3.hpp"
 #include "glm/gtc/type_precision.hpp"
 #include <unordered_map>
@@ -34,6 +35,10 @@ public:
     std::vector<CustomBeamMode> custom_beam_modes;
     sp::ecs::Entity effect_target_entity;
     std::unordered_map<sp::ecs::Entity, sp::ecs::Entity> beam_effect_entities; // server only
+
+    // Crew positions whose screens display the utility beam controls.
+    // Defaults to science officer and operations officer.
+    CrewPositions crew_positions = [] { CrewPositions cp; cp.add(CrewPosition::scienceOfficer); cp.add(CrewPosition::operationsOfficer); return cp; }();
 
     // State
     bool active = false;
