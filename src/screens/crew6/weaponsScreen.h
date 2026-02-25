@@ -10,6 +10,10 @@ class GuiMissileTubeControls;
 class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
+class GuiSelector;
+class GuiCustomShipFunctions;
+class GuiUtilityBeamControls;
+class GuiUtilityBeamRotationDial;
 
 class WeaponsScreen : public GuiOverlay
 {
@@ -25,6 +29,10 @@ private:
     GuiRotationDial* missile_aim;
     GuiToggleButton* lock_aim;
     GuiElement* beam_info_box;
+    GuiSelector* sidebar_selector;
+    GuiCustomShipFunctions* custom_function_sidebar;
+    GuiUtilityBeamControls* utility_beam_sidebar;
+    GuiUtilityBeamRotationDial* utility_beam_dial;
 public:
     WeaponsScreen(GuiContainer* owner);
 

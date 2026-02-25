@@ -10,6 +10,10 @@ class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
+class GuiSelector;
+class GuiCustomShipFunctions;
+class GuiUtilityBeamControls;
+class GuiUtilityBeamRotationDial;
 
 class TacticalScreen : public GuiOverlay
 {
@@ -24,6 +28,10 @@ private:
     GuiRotationDial* missile_aim;
     GuiMissileTubeControls* tube_controls;
     GuiToggleButton* lock_aim;
+    GuiSelector* sidebar_selector;
+    GuiCustomShipFunctions* custom_function_sidebar;
+    GuiUtilityBeamControls* utility_beam_sidebar;
+    GuiUtilityBeamRotationDial* utility_beam_dial;
     bool drag_rotate;
 public:
     TacticalScreen(GuiContainer* owner);

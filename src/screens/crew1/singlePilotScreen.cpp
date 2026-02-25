@@ -37,6 +37,13 @@
 #include "screenComponents/commsOverlay.h"
 
 #include "screenComponents/customShipFunctions.h"
+#include "screenComponents/utilityBeamControls.h"
+#include "screenComponents/utilityBeamRotationDial.h"
+
+#include "components/customshipfunction.h"
+#include "components/utilityBeam.h"
+
+#include "gui/gui2_selector.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_rotationdial.h"
@@ -137,7 +144,58 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 70, sp::Alignment::TopCenter)->setSize(130, 50);
 
-    (new GuiCustomShipFunctions(this, CrewPosition::singlePilot, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+    auto ub = my_spaceship.getComponent<UtilityBeam>();
+
+    sidebar_selector = new GuiSelector(this, "SINGLEPILOT_SIDEBAR_SELECTOR", [this](int index, string value)
+    {
+        if (value == "func")
+        {
+            custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+            utility_beam_sidebar->hide();
+            utility_beam_dial->hide();
+        }
+        else if (value == "util")
+        {
+            custom_function_sidebar->hide();
+            utility_beam_sidebar->show();
+            utility_beam_dial->show();
+        }
+    });
+    sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
+
+    custom_function_sidebar = new GuiCustomShipFunctions(this, CrewPosition::singlePilot, "SINGLEPILOT_CUSTOM_FUNCS");
+    custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
+
+    utility_beam_sidebar = new GuiUtilityBeamControls(this, CrewPosition::singlePilot, "UTILITY_BEAM_CONTROLS");
+    utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    utility_beam_sidebar->hide();
+
+    utility_beam_dial = new GuiUtilityBeamRotationDial(radar, "UTILITY_BEAM_DIAL", radar);
+    utility_beam_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+
+    if (custom_function_sidebar->hasEntries())
+    {
+        sidebar_selector->addEntry(tr("singlePilotTab", "Functions"), "func");
+        sidebar_selector->show();
+    }
+    if (ub && ub->crew_positions.has(CrewPosition::singlePilot))
+    {
+        sidebar_selector->addEntry(tr("singlePilotTab", "Utility Beam"), "util");
+        sidebar_selector->show();
+    }
+
+    // Set initial sidebar state by manually applying the first tab.
+    if (sidebar_selector->entryCount() > 0)
+    {
+        sidebar_selector->setSelectionIndex(0);
+        if (sidebar_selector->getSelectionValue() == "func")
+            custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+        else if (sidebar_selector->getSelectionValue() == "util")
+        {
+            utility_beam_sidebar->show();
+            utility_beam_dial->show();
+        }
+    }
 }
 
 void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
@@ -147,7 +205,10 @@ void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
         warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
         jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
 
-        missile_aim->setVisible(tube_controls->getManualAim());
+        if (utility_beam_dial->isVisible())
+            missile_aim->hide();
+        else
+            missile_aim->setVisible(tube_controls->getManualAim());
 
         auto target = my_spaceship.getComponent<Target>();
         if (target)
@@ -191,6 +252,72 @@ void SinglePilotScreen::onUpdate()
         {
             missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);
             tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+
+        auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+
+        // Synchronize the Functions sidebar tab with current custom ship functions.
+        bool should_have_func_tab = custom_function_sidebar->hasEntries();
+        bool has_func_tab = sidebar_selector->indexByValue("func") != -1;
+        if (should_have_func_tab && !has_func_tab)
+        {
+            sidebar_selector->addEntry(tr("singlePilotTab", "Functions"), "func");
+            sidebar_selector->show();
+        }
+        else if (!should_have_func_tab && has_func_tab)
+        {
+            bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
+            sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
+            custom_function_sidebar->hide();
+            if (func_was_selected)
+            {
+                int util_idx = sidebar_selector->indexByValue("util");
+                if (util_idx != -1)
+                {
+                    sidebar_selector->setSelectionIndex(util_idx);
+                    utility_beam_sidebar->show();
+                    utility_beam_dial->show();
+                }
+                else
+                {
+                    sidebar_selector->setSelectionIndex(-1);
+                    sidebar_selector->hide();
+                }
+            }
+            if (sidebar_selector->entryCount() == 0)
+                sidebar_selector->hide();
+        }
+
+        // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
+        bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(CrewPosition::singlePilot);
+        bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
+        if (should_have_util_tab && !has_util_tab)
+        {
+            sidebar_selector->addEntry(tr("singlePilotTab", "Utility Beam"), "util");
+            sidebar_selector->show();
+        }
+        else if (!should_have_util_tab && has_util_tab)
+        {
+            bool util_was_selected = sidebar_selector->getSelectionValue() == "util";
+            sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
+            utility_beam_sidebar->hide();
+            utility_beam_dial->hide();
+            if (util_was_selected)
+            {
+                int func_idx = sidebar_selector->indexByValue("func");
+                if (func_idx != -1)
+                {
+                    sidebar_selector->setSelectionIndex(func_idx);
+                    custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+                }
+                else
+                {
+                    sidebar_selector->setSelectionIndex(-1);
+                    sidebar_selector->hide();
+                }
+            }
+            if (sidebar_selector->entryCount() == 0)
+                sidebar_selector->hide();
         }
     }
 }

@@ -558,6 +558,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, heat_per_sec);
     BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, requires_target);
     BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, progress);
+    BIND_MEMBER(UtilityBeam, crew_positions);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);

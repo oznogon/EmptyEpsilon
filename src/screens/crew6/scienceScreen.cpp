@@ -36,12 +36,13 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_image.h"
-#include "gui/gui2_rotationdial.h"
+#include "screenComponents/utilityBeamRotationDial.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
-: GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background), crew_position(crew_position)
 {
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
     targets.setAllowWaypointSelection();
 
     // Render the radar shadow and background decorations.
@@ -89,7 +90,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     );
     probe_raw_signals = new RawScannerDataRadarOverlay(probe_radar, "");
 
-    sidebar_selector = new GuiSelector(radar_view, "", [this](int index, string value)
+    sidebar_selector = new GuiSelector(radar_view, "", [this, utility_beam](int index, string value)
     {
         if (value == "scan")
         {
@@ -109,20 +110,29 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         {
             info_sidebar->hide();
             custom_function_sidebar->hide();
-            utility_beam_sidebar->setVisible(my_spaceship.hasComponent<UtilityBeam>());
-            utility_beam_dial->setVisible(my_spaceship.hasComponent<UtilityBeam>());
+            if (utility_beam)
+            {
+                const bool show = utility_beam->crew_positions.has(this->crew_position);
+                utility_beam_sidebar->setVisible(show);
+                utility_beam_dial->setVisible(show);
+            }
+            else
+            {
+                LOG(Warning, "Utility beam controls requested on Science, but this entity lacks a UtilityBeam component");
+            }
         }
         else
         {
-            LOG(WARNING) << "Science sidebar selector is bad: " << value;
+            LOG(Warning, "Science sidebar selector is bad: ", value);
         }
     });
     sidebar_selector->setOptions({tr("scienceTab", "Scanning")}, {"scan"});
 
-    if (my_spaceship.hasComponent<CustomShipFunctions>())
-        sidebar_selector->addEntry(tr("scienceTab", "Functions"), "func");
-    if (my_spaceship.hasComponent<UtilityBeam>())
-        sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");
+    if (utility_beam)
+    {
+        if (utility_beam->crew_positions.has(crew_position))
+            sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");
+    }
 
     sidebar_selector->setSelectionIndex(0);
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50);
@@ -131,9 +141,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_sidebar = new GuiElement(radar_view, "SIDEBAR");
     info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     info_sidebar->setMargins(0, 0, 0, 75);
-    
-    custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
-    custom_function_sidebar->setPosition(-15, 210, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
 
     // Scan button.
     scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
@@ -222,26 +229,16 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
     custom_function_sidebar->setPosition(-15, 210, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
 
+    if (custom_function_sidebar->hasEntries())
+        sidebar_selector->addEntry(tr("scienceTab", "Functions"), "func");
+
     // END custom_function_sidebar
 
     // Utility sidebar.
-    utility_beam_sidebar = new GuiUtilityBeamControls(radar_view, CrewPosition::scienceOfficer, "UTILITY_BEAM_CONTROLS");
+    utility_beam_sidebar = new GuiUtilityBeamControls(radar_view, crew_position, "UTILITY_BEAM_CONTROLS");
     utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
-    utility_beam_dial = new GuiRotationDial(science_radar, "UTILITY_BEAM_DIAL", 0.0f, 360.0f, 0.0f, [this](float value)
-    {
-        auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
-        auto my_transform = my_spaceship.getComponent<sp::Transform>();
-
-        if (utility_beam && my_transform)
-        {
-            float new_value = value - my_transform->getRotation() + science_radar->getViewRotation() - 90.0f;
-            while (new_value < 0.0f) new_value += 360.0f;
-            while (new_value > 360.0f) new_value -= 360.0f;
-
-            my_player_info->commandSetUtilityBeamBearing(new_value);
-        }
-    });
+    utility_beam_dial = new GuiUtilityBeamRotationDial(science_radar, "UTILITY_BEAM_DIAL", science_radar);
     utility_beam_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
     // END utility_beam_sidebar
 
@@ -364,25 +361,28 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
     int current_width = getRect().size.x;
     sidebar_selector->setVisible(current_width < 1435 || my_spaceship.hasComponent<UtilityBeam>());
+    string sidebar_val = sidebar_selector->getSelectionValue();
     if (current_width < 1435)
     {
         sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight);
         info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
-        info_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 0);
+        info_sidebar->setVisible(sidebar_val == "scan");
         custom_function_sidebar->setPosition(-20, 210, sp::Alignment::TopRight);
-        custom_function_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 1);
+        custom_function_sidebar->setVisible(sidebar_val == "func");
         utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
-        utility_beam_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 2);
+        utility_beam_sidebar->setVisible(sidebar_val == "util");
+        utility_beam_dial->setVisible(sidebar_val == "util");
     }
     else
     {
         sidebar_selector->setPosition(-280, 120, sp::Alignment::TopRight);
         info_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
-        info_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 0);
+        info_sidebar->setVisible(sidebar_val == "scan");
         custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
         custom_function_sidebar->show();
         utility_beam_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
-        utility_beam_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 2);
+        utility_beam_sidebar->setVisible(sidebar_val == "util");
+        utility_beam_dial->setVisible(sidebar_val == "util");
     }
 
     info_callsign->setValue("-");
@@ -611,10 +611,47 @@ void ScienceScreen::onUpdate()
     if (my_spaceship)
     {
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
+        auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
 
-        // Update utility beam dial.
-        if (auto utility_beam = my_spaceship.getComponent<UtilityBeam>())
-            utility_beam_dial->setValue(utility_beam->bearing + my_transform->getRotation() - science_radar->getViewRotation() + 90.0f);
+        // Synchronize the Functions sidebar tab with current custom ship functions.
+        bool should_have_func_tab = custom_function_sidebar->hasEntries();
+        bool has_func_tab = sidebar_selector->indexByValue("func") != -1;
+        if (should_have_func_tab && !has_func_tab)
+        {
+            sidebar_selector->addEntry(tr("scienceTab", "Functions"), "func");
+        }
+        else if (!should_have_func_tab && has_func_tab)
+        {
+            bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
+            sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
+            custom_function_sidebar->hide();
+            if (func_was_selected)
+            {
+                sidebar_selector->setSelectionIndex(0);
+                info_sidebar->show();
+            }
+        }
+
+        // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
+        bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(crew_position);
+        bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
+        if (should_have_util_tab && !has_util_tab)
+        {
+            sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");
+        }
+        else if (!should_have_util_tab && has_util_tab)
+        {
+            bool util_was_selected = sidebar_selector->getSelectionValue() == "util";
+            sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
+            utility_beam_sidebar->hide();
+            utility_beam_dial->hide();
+            if (util_was_selected)
+            {
+                sidebar_selector->setSelectionIndex(0);
+                info_sidebar->show();
+                custom_function_sidebar->hide();
+            }
+        }
 
         // Initiate a scan on scannable objects.
         if (keys.science_scan_object.getDown() &&
