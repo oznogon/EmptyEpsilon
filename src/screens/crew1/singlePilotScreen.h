@@ -9,6 +9,10 @@ class AimLockButton;
 class GuiMissileTubeControls;
 class GuiRadarView;
 class GuiCombatManeuver;
+class GuiSelector;
+class GuiCustomShipFunctions;
+class GuiUtilityBeamControls;
+class GuiUtilityBeamRotationDial;
 
 class SinglePilotScreen : public GuiOverlay
 {
@@ -25,6 +29,10 @@ private:
     AimLockButton* lock_aim;
     GuiMissileTubeControls* tube_controls;
     GuiElement* beam_info_box;
+    GuiSelector* sidebar_selector;
+    GuiCustomShipFunctions* custom_function_sidebar;
+    GuiUtilityBeamControls* utility_beam_sidebar;
+    GuiUtilityBeamRotationDial* utility_beam_dial;
     bool drag_rotate;
 public:
     SinglePilotScreen(GuiContainer* owner);

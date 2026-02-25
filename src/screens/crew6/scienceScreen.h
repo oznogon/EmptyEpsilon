@@ -15,11 +15,11 @@ class GuiToggleButton;
 class GuiSelector;
 class GuiRadarZoomSlider;
 class GuiImage;
-class GuiRotationDial;
 class DatabaseViewComponent;
 class GuiCustomShipFunctions;
 class RawScannerDataRadarOverlay;
 class GuiUtilityBeamControls;
+class GuiUtilityBeamRotationDial;
 
 class ScienceScreen : public GuiOverlay
 {
@@ -62,7 +62,7 @@ public:
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];
     // Utility beam controls
-    GuiRotationDial* utility_beam_dial;
+    GuiUtilityBeamRotationDial* utility_beam_dial;
 
     GuiToggleButton* probe_view_button;
     sp::ecs::Entity observation_point;
@@ -73,6 +73,7 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 private:
+    CrewPosition crew_position;
     // Used to judge when to update the UI label and zoom
     float previous_long_range_radar = 0.0f;
     float previous_short_range_radar = 0.0f;
