@@ -12,6 +12,7 @@ class GuiRadarView;
 class GuiCommsOverlay;
 class GuiHelpOverlay;
 class ImpulseSound;
+class UtilityBeamSound;
 
 class ScreenMainScreen : public GuiCanvas, public Updatable
 {
@@ -25,6 +26,7 @@ private:
     GuiRadarView* strategic_map;
     GuiCommsOverlay* onscreen_comms;
     std::unique_ptr<ImpulseSound> impulse_sound;
+    std::unique_ptr<UtilityBeamSound> utility_beam_sound;
 public:
     ScreenMainScreen(RenderLayer* render_layer);
 
