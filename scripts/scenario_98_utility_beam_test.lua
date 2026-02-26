@@ -14,7 +14,7 @@ function checkBeamCapability(beam_emitter)
     local can_fire = true
 
     if emitter_utility_beam_effectiveness <= 0.0 or beam_emitter:getEnergy() < emitter_utility_beam_energy_use_per_delta then
-        log("X Utility beam can't fire, no effect, health:", beam_emitter:getSystemHealth("utilitybeam"), " energy:", beam_emitter:getEnergy())
+        --log("X Utility beam can't fire, no effect, health:", beam_emitter:getSystemHealth("utilitybeam"), " energy:", beam_emitter:getEnergy())
         emitter_utility_beam.is_firing = false
         can_fire = false
     end
