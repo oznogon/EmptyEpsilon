@@ -126,6 +126,11 @@ void GuiUtilityBeamControls::onDraw(sp::RenderTarget& target)
         utility_bearing->setValue(utility_beam->bearing)->setVisible(!utility_beam->fixed_bearing);
         utility_bearing_fixed->setValue(utility_beam->bearing)->setVisible(utility_beam->fixed_bearing);
 
+        // Sync the custom beam mode selector to the server-authoritative custom_beam_mode.
+        int mode_idx = custom_utility_mode->indexByValue(utility_beam->custom_beam_mode);
+        if (mode_idx >= 0 && mode_idx != custom_utility_mode->getSelectionIndex())
+            custom_utility_mode->setSelectionIndex(mode_idx);
+
         for (int i = 0; i < custom_utility_mode->entryCount(); i++)
         {
             if (custom_utility_mode->getEntryName(i) == utility_beam->custom_beam_mode)
