@@ -325,6 +325,7 @@ set(MAIN_SOURCES
     src/screenComponents/miniGame.cpp
     src/screenComponents/mineSweeper.cpp
     src/screenComponents/impulseSound.cpp
+    src/screenComponents/utilityBeamSound.cpp
     src/screenComponents/utilityBeamControls.cpp
     src/screenComponents/utilityBeamRotationDial.cpp
     src/components/faction.h
@@ -589,6 +590,7 @@ set(MAIN_SOURCES
     src/screenComponents/impulseControls.h
     src/screenComponents/infoDisplay.h
     src/screenComponents/impulseSound.h
+    src/screenComponents/utilityBeamSound.h
     src/screenComponents/indicatorOverlays.h
     src/screenComponents/jumpControls.h
     src/screenComponents/jumpIndicator.h

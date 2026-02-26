@@ -1,5 +1,5 @@
-#include <i18n.h>
 #include "utilityBeamControls.h"
+#include <i18n.h>
 #include "playerInfo.h"
 #include "powerDamageIndicator.h"
 #include "crewPosition.h"
@@ -136,10 +136,7 @@ void GuiUtilityBeamControls::onDraw(sp::RenderTarget& target)
             if (custom_utility_mode->getEntryName(i) == utility_beam->custom_beam_mode)
             {
                 if (utility_beam->custom_beam_modes[i].progress >= 0.0f)
-                {
-                    LOG(INFO) << "utility_beam->custom_beam_modes[i].progress >= 0.0f: " << utility_beam->custom_beam_modes[i].progress;
                     utility_progress_bar->setValue(utility_beam->custom_beam_modes[i].progress);
-                }
 //                else
 //                    utility_progress_bar->hide();
             }
@@ -151,8 +148,10 @@ void GuiUtilityBeamControls::onDraw(sp::RenderTarget& target)
 
 void GuiUtilityBeamControls::onUpdate()
 {
-    // Handle hotkey input
-    if (my_spaceship && isVisible())
+    if (!my_spaceship) return;
+
+    // Hotkey input only when visible.
+    if (isVisible())
     {
         if (auto utility_beam = my_spaceship.getComponent<UtilityBeam>())
         {

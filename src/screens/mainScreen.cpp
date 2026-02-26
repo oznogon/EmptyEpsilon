@@ -16,6 +16,7 @@
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
 #include "screenComponents/impulseSound.h"
+#include "screenComponents/utilityBeamSound.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_overlay.h"
@@ -84,6 +85,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
 
     // Initialize and play the impulse engine sound.
     impulse_sound = std::unique_ptr<ImpulseSound>( new ImpulseSound(PreferencesManager::get("impulse_sound_enabled", "2") != "0") );
+    utility_beam_sound = std::unique_ptr<UtilityBeamSound>( new UtilityBeamSound() );
 }
 
 void ScreenMainScreen::destroy()
@@ -169,6 +171,7 @@ void ScreenMainScreen::update(float delta)
         // engine sounds.
         impulse_sound->stop();
     }
+    utility_beam_sound->update(delta);
 
     if (my_spaceship)
     {

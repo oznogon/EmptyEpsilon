@@ -14,6 +14,7 @@
 #include "screenComponents/shipDestroyedPopup.h"
 #include "screenComponents/helpOverlay.h"
 #include "screenComponents/impulseSound.h"
+#include "screenComponents/utilityBeamSound.h"
 #include "screenComponents/viewportMainScreen.h"
 
 #include "gui/gui2_togglebutton.h"
@@ -93,6 +94,7 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
 
     // Initialize and play the impulse engine sound.
     impulse_sound = std::unique_ptr<ImpulseSound>( new ImpulseSound(PreferencesManager::get("impulse_sound_enabled", "2") == "1") );
+    utility_beam_sound = std::unique_ptr<UtilityBeamSound>( new UtilityBeamSound() );
 }
 
 void CrewStationScreen::destroy()
@@ -349,13 +351,14 @@ void CrewStationScreen::update(float delta)
     if (my_spaceship) {
         // Update the impulse engine sound.
         impulse_sound->update(delta);
-    } 
+    }
     else
     {
         // If we're not the player ship (ie. we exploded), stop playing the
         // impulse engine sound.
         impulse_sound->stop();
     }
+    utility_beam_sound->update(delta);
 
     if (keys.next_station.getDown())
         showNextTab(1);

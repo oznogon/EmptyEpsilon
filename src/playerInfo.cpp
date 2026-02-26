@@ -1129,12 +1129,6 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             if (auto utility = ship.getComponent<UtilityBeam>())
             {
                 utility->active = active;
-
-                // TODO: Sound effects
-                if (active)
-                    gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
-                else
-                    gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
             }
         }
         break;

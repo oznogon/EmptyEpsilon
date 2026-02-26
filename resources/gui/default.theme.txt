@@ -197,4 +197,8 @@
     [bold] {
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
     }
+
+    [utility_beam.active] {
+        sound: sfx/utility_beam.wav
+    }
 }
