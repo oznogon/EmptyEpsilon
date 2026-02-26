@@ -465,4 +465,8 @@
             image: gui/widget/IndicatorArrow.png
         }
     }
+
+    [utility_beam.active] {
+        sound: sfx/utility_beam.wav
+    }
 }

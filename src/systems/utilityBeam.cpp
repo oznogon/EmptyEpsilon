@@ -52,6 +52,7 @@ void UtilityBeamSystem::update(float delta)
             // The beam is active. Reset its cooldown period and tick its
             // activity time.
             utility_beam.cooldown = utility_beam.cycle_time;
+            utility_beam.is_firing = false;
 
             // If the beam's range or arc are 0, beam is no-op.
             if (utility_beam.range <= 0.0f) continue;
@@ -147,6 +148,7 @@ void UtilityBeamSystem::update(float delta)
             // The beam is off. Tick its cooldown toward 0 and reset its
             // activity timer if necessary.
             if (utility_beam.cooldown > 0.0f) utility_beam.cooldown -= delta;
+            utility_beam.is_firing = false;
             // Remove the transform from the targetless beam's spoofed entity
             // to prevent it from showing up (i.e. if assigned a trace) when
             // the beam is inactive.
