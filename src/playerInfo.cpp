@@ -116,7 +116,6 @@ static const uint16_t CMD_GENERATE_SUPPLY_DROP = 0x0032;
 static const uint16_t CMD_CANCEL_INTERNAL_MOVE = 0x0033;
 
 static const uint16_t CMD_SET_UTILITY_BEAM = 0x002D;
-static const uint16_t CMD_SET_UTILITY_BEAM_MODE = 0x002E;
 static const uint16_t CMD_SET_CUSTOM_UTILITY_BEAM_MODE = 0x002F;
 static const uint16_t CMD_SET_UTILITY_BEAM_BEARING = 0x0030;
 static const uint16_t CMD_SET_UTILITY_BEAM_ARC = 0x0031;
