@@ -107,7 +107,6 @@ static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
 
 static const uint16_t CMD_SET_UTILITY_BEAM = 0x002D;
-static const uint16_t CMD_SET_UTILITY_BEAM_MODE = 0x002E;
 static const uint16_t CMD_SET_CUSTOM_UTILITY_BEAM_MODE = 0x002F;
 static const uint16_t CMD_SET_UTILITY_BEAM_BEARING = 0x0030;
 static const uint16_t CMD_SET_UTILITY_BEAM_ARC = 0x0031;
