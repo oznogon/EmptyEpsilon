@@ -16,6 +16,7 @@
 #include "components/player.h"
 #include "components/selfdestruct.h"
 #include "components/missiletubes.h"
+#include "components/utilityBeam.h"
 
 #include "systems/warpsystem.h"
 #include "systems/radarblock.h"
@@ -404,6 +405,9 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("RedAlert", PlayerControl, c->alert_level != AlertLevel::RedAlert ? 1.0f : 0.0f);
     SHIP_VARIABLE("SelfDestruct", SelfDestruct, c->active ? 1.0f : 0.0f);
     SHIP_VARIABLE("SelfDestructCountdown", SelfDestruct, c->countdown / 10.0f);
+    SHIP_VARIABLE("UtilityBeamActive", UtilityBeam, c->active ? 1.0f : 0.0f);
+    SHIP_VARIABLE("UtilityBeamFiring", UtilityBeam, c->is_firing ? 1.0f : 0.0f);
+    SHIP_VARIABLE("UtilityBeamCooldown", UtilityBeam, c->cycle_time > 0.0f ? c->cooldown / c->cycle_time : 0.0f);
     for(unsigned int n=0; n<16; n++)
     {
         SHIP_VARIABLE("TubeLoaded" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Loaded ? 1.0f : 0.0f);
