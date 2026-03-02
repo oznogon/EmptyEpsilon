@@ -728,13 +728,35 @@
         <script>
           function exec_send()
           {
-	          $.post('exec.lua', $("#exec-script").val(), function(data) {
-		          $("#exec-output").text(JSON.stringify(data));
-	          }, "json")
-	          .fail(function(x, y, reason) {
-		          $("#exec-output").text("FAIL:" + reason);
-	          });
+            $.post('exec.lua', $("#exec-script").val(), function(raw) {
+              if (!raw.trim()) {
+                $("#exec-output").text("(no return value)");
+                $("#exec-output").css("color", "");
+                return;
+              }
+              try {
+                var data = JSON.parse(raw);
+                $("#exec-output").text(JSON.stringify(data, null, 2));
+                if (data.ERROR !== undefined)
+                  $("#exec-output").css("color", "red");
+                else
+                  $("#exec-output").css("color", "");
+              } catch(e) {
+                $("#exec-output").text("FAIL:" + e);
+                $("#exec-output").css("color", "red");
+              }
+            })
+            .fail(function(x, y, reason) {
+              $("#exec-output").text("FAIL:" + reason);
+            });
           }
+
+          document.getElementById("exec-script").addEventListener("keydown", function(e) {
+            if (e.ctrlKey && e.key === "Enter") {
+              e.preventDefault();
+              exec_send();
+            }
+          });
         </script>
       </section>
 
@@ -758,9 +780,9 @@
               .done(function(data) {
                 $("#get-output").text(JSON.stringify(JSON.parse(data), null, 2));
               })
-	            .fail(function(x, y, reason) {
-		            $("#get-output").text("FAIL:" + reason);
-	            });
+              .fail(function(x, y, reason) {
+                $("#get-output").text("FAIL:" + reason);
+              });
           }
         </script>
       </section>
@@ -786,8 +808,8 @@
               .done(function(data) {
                 $("#set-output").text(JSON.stringify(JSON.parse(data), null, 2));
               }).fail(function(x, y, reason) {
-		        $("#set-output").text("FAIL:" + reason);
-	          });
+            $("#set-output").text("FAIL:" + reason);
+            });
           }
         </script>
       </section>
