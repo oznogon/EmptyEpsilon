@@ -73,3 +73,5 @@ To learn EmptyEpsilon gameplay fundamentals, read the [website's stations profil
 For guidance in scripting scenarios, see the [website's mission scripting guide](https://daid.github.io/EmptyEpsilon/#tabs=4). For a scripting API reference, open the `script_reference.html` file included in your version's downloaded archive, which is specific to that version of EmptyEpsilon.
 
 For documentation on the game's preferences file and command-line options, hardware and DMX support, more complex internet play configurations like headless and proxy servers, enabling and using EmptyEpsilon's HTTP API server, or adding ship templates and models, see [this repository's wiki](https://github.com/daid/EmptyEpsilon/wiki).
+
+For code examples of hardware implementations, see [daid/EmptyEpsilonHardware](https://github.com/daid/EmptyEpsilonHardware).
