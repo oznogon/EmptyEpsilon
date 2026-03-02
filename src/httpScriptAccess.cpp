@@ -1,6 +1,7 @@
 #include "httpScriptAccess.h"
 #include "gameGlobalInfo.h"
 #include "script.h"
+#include "io/json.h"
 
 #define sOBJECT "_OBJECT_"
 
@@ -12,18 +13,17 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
     server.addURLHandler("/exec.lua", [](const sp::io::http::Server::Request& request) -> string
     {
         if (!gameGlobalInfo)
-            return "{\"ERROR\": \"No game\"}";
+            return nlohmann::json{{"ERROR", "No game"}}.dump();
 
         sp::script::Environment env(gameGlobalInfo->script_environment_base.get());
         setupSubEnvironment(env);
-        auto result = env.run<string>(request.post_data);
-        string output;
-        if (result.isErr()) {
-            output = "{\"ERROR\": \"Script error: " + result.error().replace("\"", "'") + "\"}";
-        } else {
-            output = result.value();
-        }
-        return output;
+        // Wrap in a closure so the return value is JSON-serialized via toJSON().
+        // env.run<string>() uses lua_tostring(), which silently returns "" for tables.
+        string wrapped = "local function __exec()\n" + request.post_data + "\nend\nreturn toJSON(__exec())";
+        auto result = env.run<string>(wrapped);
+        if (result.isErr())
+            return nlohmann::json{{"ERROR", "Script error: " + std::string(result.error())}}.dump();
+        return result.value();
     });
     server.addURLHandler("/get.lua", [](const sp::io::http::Server::Request& request) -> string
     {

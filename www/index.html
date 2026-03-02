@@ -719,7 +719,7 @@
         <p>You can send a script to this endpoint by entering it in the sandbox to the left and clicking the Send button to run it. The results appear in the text area to the right.</p>
         <div class="sandboxes">
           <textarea id="exec-script" style="width: 50%; height: 400px; float: left;">player = getPlayerShip(-1)
-  if player == nil then return {error = "No ship"} end
+  if not player:isValid() then return {error = "No ship"} end
   return {hull = player:getHull() / player:getHullMax()}</textarea>
           <pre class="code" id="exec-output" style="width: 50%; height: 400px; float: right;" readonly></textarea>
         </div>
