@@ -713,10 +713,11 @@
 
       <section id="tabs-2">
         <h2>/exec.lua endpoint</h2>
-        <p>The main API endpoint is <code>/exec.lua</code>, which can run any Lua code passed as the data in a POST request and returns the result. Regardless of whether the script is successful, the request returns HTTP code 200. Any output from the script is returned in the response body. See <!--<a href="script_reference.html">the script reference</a>-->the script reference for a list of functions you can call.</p>
+        <p>The main API endpoint is <code>/exec.lua</code>, which can run any Lua code passed as the data in a POST request and returns the result. Regardless of whether the script is successful, the request returns HTTP code 200. The return value of the script is JSON-serialized and returned in the response body.</p>
+        <p>Use <code>return {key = value}</code> to return data; there is no print/stdout capture. See <!--<a href="script_reference.html">the script reference</a>-->the script reference for a list of functions you can call.</p>
 
         <h2>Sandbox</h2>
-        <p>You can send a script to this endpoint by entering it in the sandbox to the left and clicking the Send button to run it. The results appear in the text area to the right.</p>
+        <p>You can send a script to this endpoint by entering it in the sandbox to the left and clicking the Send button (or pressing <kbd>Ctrl+Enter</kbd>) to run it. The results appear in the text area to the right.</p>
         <div class="sandboxes">
           <textarea id="exec-script" style="width: 50%; height: 400px; float: left;">player = getPlayerShip(-1)
   if not player:isValid() then return {error = "No ship"} end
