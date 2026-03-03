@@ -715,14 +715,22 @@
       <section id="tabs-2">
         <h2>/exec.lua endpoint</h2>
         <p>The main API endpoint is <code>/exec.lua</code>, which can run any Lua code passed as the data in a POST request and returns the result. Regardless of whether the script is successful, the request returns HTTP code 200. The return value of the script is JSON-serialized and returned in the response body.</p>
-        <p>Use <code>return {key = value}</code> to return data; there is no print/stdout capture. See <!--<a href="script_reference.html">the script reference</a>-->the script reference for a list of functions you can call.</p>
+
+        <p>Use <code>return {key = value}</code> to return data as JSON. The <code>print()</code> command prints to the in-game Lua console and to the server log, and <code>log()</code> writes to the server log only.</p>
+
+        <p>See <!--<a href="script_reference.html">the script reference</a>-->the script reference for a list of Lua scripting functions.</p>
 
         <h2>Sandbox</h2>
         <p>You can send a script to this endpoint by entering it in the sandbox to the left and clicking the Send button (or pressing <kbd>Ctrl+Enter</kbd>) to run it. The results appear in the text area to the right.</p>
+
+        <p>Scripts run through exec.lua do so in their own environment, which does not persist between requests and can't access values defined in the game's scripting environment.</p>
+
         <div class="sandboxes">
           <textarea id="exec-script" style="width: 50%; height: 400px; float: left;">player = getPlayerShip(-1)
-  if not player:isValid() then return {error = "No ship"} end
-  return {hull = player:getHull() / player:getHullMax()}</textarea>
+if not player:isValid() then
+  return {error = "No ship"}
+end
+return {hull = player:getHull() / player:getHullMax()}</textarea>
           <pre class="code" id="exec-output" style="width: 50%; height: 400px; float: right;" readonly></textarea>
         </div>
         <button onclick="exec_send()">Send</button>
