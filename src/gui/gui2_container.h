@@ -69,6 +69,7 @@ protected:
     // in subclass scope (where the compiler's protected-through-base restriction applies).
     static void clearElementOwner(GuiElement* e);
     static void setElementHover(GuiElement* e, bool h);
+    static void setElementFocus(GuiElement* e, bool f);
     static void callDrawElements(GuiContainer* c, glm::vec2 mp, sp::Rect r, sp::RenderTarget& rt);
     static GuiElement* callGetClickElement(GuiContainer* c, sp::io::Pointer::Button b, glm::vec2 p, sp::io::Pointer::ID id);
     static GuiElement* callExecuteScrollOnElement(GuiContainer* c, glm::vec2 p, float v);

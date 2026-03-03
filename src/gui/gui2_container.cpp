@@ -142,6 +142,11 @@ void GuiContainer::setElementHover(GuiElement* e, bool h)
     e->hover = h;
 }
 
+void GuiContainer::setElementFocus(GuiElement* e, bool f)
+{
+    e->focus = f;
+}
+
 void GuiContainer::callDrawElements(GuiContainer* c, glm::vec2 mp, sp::Rect r, sp::RenderTarget& rt)
 {
     c->drawElements(mp, r, rt);

@@ -187,24 +187,83 @@ GuiElement* GuiScrollContainer::getClickElement(sp::io::Pointer::Button button, 
         GuiElement* element = *it;
         if (element == scrollbar_v)
             continue;
-        if (element->isVisible() && element->isEnabled() && element->getRect().contains(layout_pos))
+        if (!element->isVisible() || !element->isEnabled())
+            continue;
+
+        // Always recurse into children regardless of the parent element's own
+        // rect — this lets us find children that extend outside their parent
+        // (e.g. GuiSelector popup menus that sit below the selector row).
+        GuiElement* clicked = callGetClickElement(element, button, layout_pos, id);
+        if (clicked)
         {
-            GuiElement* clicked = callGetClickElement(element, button, layout_pos, id);
-            if (clicked)
-            {
-                pressed_element = clicked;
-                pressed_scroll = scroll_offset;
-                return this;
-            }
-            if (element->onMouseDown(button, layout_pos, id))
-            {
-                pressed_element = element;
-                pressed_scroll = scroll_offset;
-                return this;
-            }
+            switchFocusTo(clicked);
+            pressed_element = clicked;
+            pressed_scroll = scroll_offset;
+            return this;
+        }
+
+        // Direct hit on the element itself still requires rect containment.
+        if (element->getRect().contains(layout_pos) && element->onMouseDown(button, layout_pos, id))
+        {
+            switchFocusTo(element);
+            pressed_element = element;
+            pressed_scroll = scroll_offset;
+            return this;
         }
     }
     return nullptr;
+}
+
+void GuiScrollContainer::switchFocusTo(GuiElement* new_element)
+{
+    if (focused_element == new_element)
+        return;
+    if (focused_element)
+    {
+        setElementFocus(focused_element, false);
+        focused_element->onFocusLost();
+    }
+    focused_element = new_element;
+    // If this scroll container already has canvas focus, forward focus gained
+    // to the new child now (canvas won't call our onFocusGained again).
+    if (focus)
+    {
+        setElementFocus(focused_element, true);
+        focused_element->onFocusGained();
+    }
+    // If this scroll container is not yet focused, canvas will call our
+    // onFocusGained after getClickElement returns, which will forward it.
+}
+
+void GuiScrollContainer::onFocusGained()
+{
+    if (focused_element)
+    {
+        setElementFocus(focused_element, true);
+        focused_element->onFocusGained();
+    }
+}
+
+void GuiScrollContainer::onFocusLost()
+{
+    if (focused_element)
+    {
+        setElementFocus(focused_element, false);
+        focused_element->onFocusLost();
+        focused_element = nullptr;
+    }
+}
+
+void GuiScrollContainer::onTextInput(const string& text)
+{
+    if (focused_element)
+        focused_element->onTextInput(text);
+}
+
+void GuiScrollContainer::onTextInput(sp::TextInputEvent e)
+{
+    if (focused_element)
+        focused_element->onTextInput(e);
 }
 
 void GuiScrollContainer::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)

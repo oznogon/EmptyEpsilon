@@ -20,6 +20,10 @@ public:
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onFocusGained() override;
+    virtual void onFocusLost() override;
+    virtual void onTextInput(const string& text) override;
+    virtual void onTextInput(sp::TextInputEvent e) override;
 
 protected:
     virtual void drawElements(glm::vec2 mouse_position, sp::Rect parent_rect,
@@ -39,9 +43,11 @@ private:
     float visible_height = 0.0f;
     bool scrollbar_visible = false;
 
+    GuiElement* focused_element = nullptr;
     GuiElement* pressed_element = nullptr;
     float pressed_scroll = 0.0f;
 
     sp::Rect getContentRect() const;
     float getEffectiveScrollbarWidth() const;
+    void switchFocusTo(GuiElement* new_element);
 };
