@@ -1,5 +1,4 @@
 #pragma once
-
 #include "gui2_element.h"
 
 class GuiScrollbar;
