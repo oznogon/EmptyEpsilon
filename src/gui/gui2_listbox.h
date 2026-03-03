@@ -2,32 +2,28 @@
 
 #include "gui2_entrylist.h"
 
-class GuiScrollbar;
+class GuiScrollContainer;
+class GuiToggleButton;
 
 class GuiListbox : public GuiEntryList
 {
 protected:
-    float text_size;
-    float button_height;
-    sp::Alignment text_alignment;
-    GuiScrollbar* scroll;
-    sp::Rect last_rect;
-    int mouse_scroll_steps;
-
-    const GuiThemeStyle* back_style;
-    const GuiThemeStyle* front_style;
-    const GuiThemeStyle* back_selected_style;
-    const GuiThemeStyle* front_selected_style;
+    float icon_size = 0.6f;
+    float text_size = 30.0f;
+    float button_height = 50.0f;
 public:
     GuiListbox(GuiContainer* owner, string id, func_t func);
 
     GuiListbox* setTextSize(float size);
+    // GuiListbox* setIconSize(float size);
     GuiListbox* setButtonHeight(float height);
 
     GuiListbox* scrollTo(int index);
 
-    virtual void onDraw(sp::RenderTarget& renderer) override;
-    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
-    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
-    virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
+private:
+    GuiScrollContainer* scroll_container;
+    std::vector<GuiToggleButton*> buttons;
+
+    virtual void entriesChanged() override;
+    void updateButtonStates();
 };

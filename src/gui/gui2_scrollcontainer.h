@@ -37,7 +37,7 @@ public:
     // Handle mousewheel scroll, with behavior depending on the ScrollMode.
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
     // Pass mouse down to child elements, but only if they're visible.
-    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     // Pass mouse drag to child elements. This relies on 
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     // Pass mouse up to child elements.
