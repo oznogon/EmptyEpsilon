@@ -50,17 +50,18 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     if (selection_index >= 0 && selection_index < (int)entries.size())
         renderer.drawText(rect, entries[selection_index].name, sp::Alignment::Center, text_size, front.font, front.color);
 
+    if (!focus)
+        popup->hide();
     // rect.position is in layout space; the popup lives at the canvas level
     // (no scroll translation), so convert to screen coordinates first.
     glm::vec2 screen_pos = rect.position + renderer.getTranslation();
-    const float max_popup_height = 450.0f;
-    float popup_height = std::min(static_cast<float>(entries.size()) * button_height, max_popup_height);
     float top = screen_pos.y;
+    float height = entries.size() * 50;
+    if (selection_index >= 0)
+        top -= selection_index * 50;
     top = std::max(0.0f, top);
-    top = std::min(900.0f - popup_height, top);
-    popup
-        ->setPosition(screen_pos.x, top, sp::Alignment::TopLeft)
-        ->setSize(rect.size.x, popup_height);
+    top = std::min(900.0f - height, top);
+    popup->setPosition(screen_pos.x, top, sp::Alignment::TopLeft)->setSize(rect.size.x, height);
 }
 
 GuiSelector* GuiSelector::setTextSize(float size)
