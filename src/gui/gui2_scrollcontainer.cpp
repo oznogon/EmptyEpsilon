@@ -44,6 +44,13 @@ void GuiScrollContainer::scrollToFraction(float fraction)
     if (scrollbar_v) scrollbar_v->setValue(static_cast<int>(scroll_offset));
 }
 
+void GuiScrollContainer::scrollToOffset(float pixel_offset)
+{
+    const float max_scroll = std::max(0.0f, content_height - visible_height);
+    scroll_offset = std::clamp(pixel_offset, 0.0f, max_scroll);
+    if (scrollbar_v) scrollbar_v->setValue(static_cast<int>(scroll_offset));
+}
+
 void GuiScrollContainer::updateLayout(const sp::Rect& rect)
 {
     this->rect = rect;
