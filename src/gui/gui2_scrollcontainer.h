@@ -28,6 +28,8 @@ public:
     // Value passed here represents where the top of the scrollbar pill goes
     // on the scrollbar.
     void scrollToFraction(float fraction);
+    // Scroll element to this pixel offset from the top (clamped to valid range).
+    void scrollToOffset(float pixel_offset);
 
     // Override layout updates to update child elements and juggle scrollbar
     // visibility.
