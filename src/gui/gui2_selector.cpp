@@ -49,19 +49,17 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
 
     if (!focus)
         popup->hide();
-    int max_visible = std::max(1, (int)(900.0f / button_height));
-    int visible_count = std::min((int)entries.size(), max_visible);
-    popup_scroll_offset = 0;
-    if (selection_index >= 0 && visible_count < (int)entries.size())
-        popup_scroll_offset = std::clamp(selection_index - visible_count / 2, 0, (int)entries.size() - visible_count);
-    float height = std::min((float)visible_count * button_height, 900.0f);
-    float top = rect.position.y;
+    // rect.position is in layout space; the popup lives at the canvas level
+    // (no scroll translation), so convert to screen coordinates first.
+    glm::vec2 screen_pos = rect.position + renderer.getTranslation();
+    float top = screen_pos.y;
+    float height = entries.size() * 50;
     if (selection_index >= 0)
         top -= (selection_index - popup_scroll_offset) * button_height;
     top = std::max(0.0f, top);
     top = std::min(900.0f - height, top);
     popup
-        ->setPosition(rect.position.x, top, sp::Alignment::TopLeft)
+        ->setPosition(screen_pos.x, top, sp::Alignment::TopLeft)
         ->setSize(rect.size.x, height);
 }
 

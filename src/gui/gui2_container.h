@@ -64,15 +64,13 @@ protected:
     virtual GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
     virtual GuiElement* executeScrollOnElement(glm::vec2 position, float value);
 
-    // Static helpers for derived classes that override the draw/input methods.
-    // These wrappers allow access to GuiElement/GuiContainer protected members
-    // in subclass scope (where the compiler's protected-through-base restriction applies).
-    static void clearElementOwner(GuiElement* e);
-    static void setElementHover(GuiElement* e, bool h);
-    static void setElementFocus(GuiElement* e, bool f);
-    static void callDrawElements(GuiContainer* c, glm::vec2 mp, sp::Rect r, sp::RenderTarget& rt);
-    static GuiElement* callGetClickElement(GuiContainer* c, sp::io::Pointer::Button b, glm::vec2 p, sp::io::Pointer::ID id);
-    static GuiElement* callExecuteScrollOnElement(GuiContainer* c, glm::vec2 p, float v);
+    // Static helpers for subclass access to protected members.
+    static void clearElementOwner(GuiElement* element);
+    static void setElementHover(GuiElement* element, bool has_hover);
+    static void setElementFocus(GuiElement* element, bool has_focus);
+    static void callDrawElements(GuiContainer* container, glm::vec2 mouse_pos, sp::Rect rect, sp::RenderTarget& render_target);
+    static GuiElement* callGetClickElement(GuiContainer* container, sp::io::Pointer::Button button, glm::vec2 pos, sp::io::Pointer::ID id);
+    static GuiElement* callExecuteScrollOnElement(GuiContainer* container, glm::vec2 pos, float value);
 
     friend class GuiElement;
 

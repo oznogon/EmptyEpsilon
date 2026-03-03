@@ -54,7 +54,7 @@ void GuiScrollContainer::scrollToOffset(float pixel_offset)
 void GuiScrollContainer::updateLayout(const sp::Rect& rect)
 {
     this->rect = rect;
-    visible_height = rect.size.y;
+    visible_height = rect.size.y - layout.padding.top - layout.padding.bottom;
 
     // Show the scrollbar only if we're clipping anything.
     scrollbar_visible = (scrollbar_v != nullptr) && (content_height > visible_height + 0.5f);
@@ -106,7 +106,7 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
         const float bottom = child->getRect().position.y + child->getRect().size.y + child->layout.margin.bottom - rect.position.y;
         if (bottom > max_bottom) max_bottom = bottom;
     }
-    content_height = max_bottom;
+    content_height = max_bottom + layout.padding.bottom;
 
     // Clamp scroll offset.
     scroll_offset = std::clamp(scroll_offset, 0.0f, std::max(0.0f, content_height - visible_height));
@@ -382,8 +382,14 @@ bool GuiScrollContainer::onMouseWheelScroll(glm::vec2 /* position */, float valu
 
 sp::Rect GuiScrollContainer::getContentRect() const
 {
-    // Return the rect, minus room for the scrollbar if it's visible.
-    return sp::Rect{rect.position, {rect.size.x - getEffectiveScrollbarWidth(), rect.size.y}};
+    // Return the rect, inset by padding and minus room for the scrollbar if it's visible.
+    return sp::Rect{
+        rect.position + glm::vec2{layout.padding.left, layout.padding.top},
+        {
+            rect.size.x - layout.padding.left - layout.padding.right - getEffectiveScrollbarWidth(),
+            rect.size.y - layout.padding.top - layout.padding.bottom
+        }
+    };
 }
 
 float GuiScrollContainer::getEffectiveScrollbarWidth() const
