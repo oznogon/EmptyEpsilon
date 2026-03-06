@@ -188,6 +188,7 @@ bool PlayerInfo::isOnlyMainScreen(int monitor_index)
 // Client-side functions to send a command to the server.
 void PlayerInfo::commandTargetRotation(float target)
 {
+    target = fmodf(target + 360.0f, 360.0f);
     sp::io::DataBuffer packet;
     packet << CMD_TARGET_ROTATION << target;
     sendClientCommand(packet);
