@@ -1620,7 +1620,6 @@ private:
         ui->update_func = [this, ui]() -> float { \
             if (auto v = entity.getComponent<COMPONENT>()) \
                 return v->VALUE; \
-\ 
             return ui->value_entry->getText().toFloat(); }; \
         new_page->apply_functions.push_back([this, ui]() { \
             string text = ui->value_entry->getText(); \
