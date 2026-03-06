@@ -5,6 +5,7 @@
 
 class GuiButton;
 class GuiListbox;
+class GuiScrollContainer;
 class GuiScrollText;
 class GuiTextEntry;
 
@@ -21,7 +22,7 @@ public:
     std::function<void(sp::ecs::Entity)> remove_component;
 
     GuiButton* add_remove_button;
-    GuiElement* tweaks;
+    GuiScrollContainer* tweaks;
     string description;
     std::vector<std::function<void()>> apply_functions;
 
