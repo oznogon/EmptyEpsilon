@@ -146,9 +146,17 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
             }
             else
             {
+                popup_buttons[n]->setText(entries[n].name);
+            }
+            int row = (int)n - popup_scroll_offset;
+            if (row < 0 || row >= visible_count)
+                popup_buttons[n]->hide();
+            else
+            {
+                popup_buttons[n]->show();
                 popup_buttons[n]
-                    ->setText(entries[n].name)
-                    ->show();
+                    ->setValue(static_cast<int>(n) == selection_index)
+                    ->setPosition(0.0f, row * button_height, sp::Alignment::TopLeft);
             }
 
             if (entries[n].icon_name != "")

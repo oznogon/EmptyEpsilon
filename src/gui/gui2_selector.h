@@ -20,6 +20,7 @@ protected:
     GuiElement* popup;
     GuiScrollContainer* popup_scroll;
     std::vector<GuiToggleButton*> popup_buttons;
+    int popup_scroll_offset = 0;
     const GuiThemeStyle* back_style;
     const GuiThemeStyle* front_style;
 public:
