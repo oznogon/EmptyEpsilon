@@ -12,6 +12,7 @@ protected:
     float min_value;
     float max_value;
     float value;
+    float thickness = 0.0f;
     func_t func;
     const GuiThemeStyle* back_style;
     const GuiThemeStyle* front_style;
@@ -25,4 +26,5 @@ public:
 
     GuiRotationDial* setValue(float value);
     float getValue() const;
+    GuiRotationDial* setThickness(float t) { thickness = std::max(0.0f, t); return this; }
 };
