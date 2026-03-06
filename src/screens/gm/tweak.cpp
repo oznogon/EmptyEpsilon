@@ -520,7 +520,7 @@ public:
             ->setAttribute("layout", "horizontal");
         auto g_label = new GuiLabel(g_row, "", tr("tweak-color-green", "G:"), 20.0f);
         g_label->setSize(30.0f, 30.0f);
-        g_slider = new GuiSlider(g_row, "", 0.0f, 255.0f, 0.0f, [this](float value)
+        g_slider = new GuiSliderTweak(g_row, "", 0.0f, 255.0f, 0.0f, [this](float value)
             {
                 if (callback && update_func)
                 {
@@ -542,7 +542,7 @@ public:
             ->setAttribute("layout", "horizontal");
         auto b_label = new GuiLabel(b_row, "", tr("tweak-color-blue", "B:"), 20.0f);
         b_label->setSize(30.0f, 30.0f);
-        b_slider = new GuiSlider(b_row, "", 0.0f, 255.0f, 0.0f, [this](float value)
+        b_slider = new GuiSliderTweak(b_row, "", 0.0f, 255.0f, 0.0f, [this](float value)
             {
                 if (callback && update_func)
                 {
@@ -564,7 +564,7 @@ public:
             ->setAttribute("layout", "horizontal");
         auto a_label = new GuiLabel(a_row, "", tr("tweak-color-alpha", "A:"), 20.0f);
         a_label->setSize(30.0f, 30.0f);
-        a_slider = new GuiSlider(a_row, "", 0.0f, 255.0f, 255.0f, [this](float value)
+        a_slider = new GuiSliderTweak(a_row, "", 0.0f, 255.0f, 255.0f, [this](float value)
             {
                 if (callback && update_func)
                 {
@@ -609,9 +609,9 @@ public:
     std::function<glm::u8vec4()> update_func;
     std::function<void(glm::u8vec4)> callback;
     GuiSliderTweak* r_slider;
-    GuiSlider* g_slider;
-    GuiSlider* b_slider;
-    GuiSlider* a_slider;
+    GuiSliderTweak* g_slider;
+    GuiSliderTweak* b_slider;
+    GuiSliderTweak* a_slider;
 };
 
 // Widget for editing RGB float (0-1) color values
@@ -652,7 +652,7 @@ public:
             ->setAttribute("layout", "horizontal");
         auto g_label = new GuiLabel(g_row, "", tr("tweak-color-green", "G:"), 20.0f);
         g_label->setSize(30, 30);
-        g_slider = new GuiSlider(g_row, "", 0.0f, 1.0f, 0.0f, [this](float value)
+        g_slider = new GuiSliderTweak(g_row, "", 0.0f, 1.0f, 0.0f, [this](float value)
             {
                 if (callback && update_func)
                 {
@@ -674,7 +674,7 @@ public:
             ->setAttribute("layout", "horizontal");
         auto b_label = new GuiLabel(b_row, "", tr("tweak-color-blue", "B:"), 20.0f);
         b_label->setSize(30.0f, 30.0f);
-        b_slider = new GuiSlider(b_row, "", 0.0f, 1.0f, 0.0f, [this](float value)
+        b_slider = new GuiSliderTweak(b_row, "", 0.0f, 1.0f, 0.0f, [this](float value)
             {
                 if (callback && update_func)
                 {
@@ -727,8 +727,8 @@ public:
     std::function<glm::vec3()> update_func;
     std::function<void(glm::vec3)> callback;
     GuiSliderTweak* r_slider;
-    GuiSlider* g_slider;
-    GuiSlider* b_slider;
+    GuiSliderTweak* g_slider;
+    GuiSliderTweak* b_slider;
 };
 
 // Widget for editing multiline text
