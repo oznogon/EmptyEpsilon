@@ -49,16 +49,20 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
 
     if (!focus)
         popup->hide();
-    // rect.position is in layout space; the popup lives at the canvas level
-    // (no scroll translation), so convert to screen coordinates first.
-    glm::vec2 screen_pos = rect.position + renderer.getTranslation();
-    float top = screen_pos.y;
-    float height = entries.size() * 50;
+    int max_visible = std::max(1, (int)(900.0f / button_height));
+    int visible_count = std::min((int)entries.size(), max_visible);
+    popup_scroll_offset = 0;
+    if (selection_index >= 0 && visible_count < (int)entries.size())
+        popup_scroll_offset = std::clamp(selection_index - visible_count / 2, 0, (int)entries.size() - visible_count);
+    float height = std::min((float)visible_count * button_height, 900.0f);
+    float top = rect.position.y;
     if (selection_index >= 0)
-        top -= selection_index * 50;
+        top -= (selection_index - popup_scroll_offset) * button_height;
     top = std::max(0.0f, top);
     top = std::min(900.0f - height, top);
-    popup->setPosition(screen_pos.x, top, sp::Alignment::TopLeft)->setSize(rect.size.x, height);
+    popup
+        ->setPosition(rect.position.x, top, sp::Alignment::TopLeft)
+        ->setSize(rect.size.x, height);
 }
 
 GuiSelector* GuiSelector::setTextSize(float size)
@@ -83,6 +87,8 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
     if (rect.contains(position))
     {
         soundManager->playSound("sfx/button.wav");
+        int max_visible = std::max(1, (int)(900.0f / button_height));
+        int visible_count = std::min((int)entries.size(), max_visible);
         for(unsigned int n=0; n<entries.size(); n++)
         {
             if (popup_buttons.size() <= n)
@@ -98,13 +104,18 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
             }
             else
             {
-                popup_buttons[n]
-                    ->setText(entries[n].name)
-                    ->show();
+                popup_buttons[n]->setText(entries[n].name);
             }
-            popup_buttons[n]
-                ->setValue(static_cast<int>(n) == selection_index)
-                ->setPosition(0.0f, n * button_height, sp::Alignment::TopLeft);
+            int row = (int)n - popup_scroll_offset;
+            if (row < 0 || row >= visible_count)
+                popup_buttons[n]->hide();
+            else
+            {
+                popup_buttons[n]->show();
+                popup_buttons[n]
+                    ->setValue(static_cast<int>(n) == selection_index)
+                    ->setPosition(0.0f, row * button_height, sp::Alignment::TopLeft);
+            }
         }
         for (unsigned int n=entries.size(); n<popup_buttons.size(); n++)
             popup_buttons[n]->hide();

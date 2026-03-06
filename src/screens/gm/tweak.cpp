@@ -46,14 +46,15 @@
 #include "components/warpdrive.h"
 #include "components/zone.h"
 
-#include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
-#include "gui/gui2_textentry.h"
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_scrollcontainer.h"
+#include "gui/gui2_scrolltext.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
+#include "gui/gui2_textentry.h"
 #include "gui/gui2_togglebutton.h"
-#include "gui/gui2_scrolltext.h"
 
 // Conversion function for AIOrder enum
 static string getAIOrderString(AIOrder order)
@@ -3566,9 +3567,12 @@ GuiTweakPage::GuiTweakPage(GuiContainer* owner)
     });
     add_remove_button->setSize(300, 50)->setAttribute("alignment", "topcenter");
 
-    tweaks = new GuiElement(this, "TWEAKS");
-    tweaks->setPosition(0, 75, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-    tweaks->setMargins(30, 0);
+    tweaks = new GuiScrollContainer(this, "TWEAKS");
+    tweaks
+        ->setPosition(0.0f, 75.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    tweaks->setMargins(30.0f, 0.0f);
 }
 
 void GuiTweakPage::open(sp::ecs::Entity e)
