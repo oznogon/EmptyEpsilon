@@ -1843,24 +1843,14 @@ private:
     page_labels.push_back(LABEL);
 #define ADD_LABEL(LABEL) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
-        row \
-            ->setSize(GuiElement::GuiSizeMax, 30.0f) \
-            ->setAttribute("layout", "horizontal"); \
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         row->setAttribute("margin", "0, 0, 10, 0"); \
-        auto label = new GuiLabel(row, "", LABEL, 20.0f); \
-        label \
-            ->addBackground() \
-            ->setAlignment(sp::Alignment::Center) \
-            ->setSize(GuiElement::GuiSizeMax, 30.0f); \
+        (new GuiLabel(row, "", LABEL, 20.0f))->addBackground()->setAlignment(sp::Alignment::Center)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
     } while(0)
 #define ADD_TEXT_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
-        row \
-            ->setSize(GuiElement::GuiSizeMax, 30.0f) \
-            ->setAttribute("layout", "horizontal"); \
-        (new GuiLabel(row, "", LABEL, 20.0f)) \
-            ->setAlignment(sp::Alignment::CenterRight) \
-            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
+        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiTextTweak(row); \
         ui->update_func = [this, ui]() -> string { if (auto v = entity.getComponent<COMPONENT>()) return v->VALUE; return ui->getText(); }; \
         ui->callback([this](string text) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = text; }); \
@@ -1871,12 +1861,8 @@ private:
     } while(0)
 #define ADD_NUM_TEXT_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
-        row \
-            ->setSize(GuiElement::GuiSizeMax, 30.0f) \
-            ->setAttribute("layout", "horizontal"); \
-        (new GuiLabel(row, "", LABEL, 20.0f)) \
-            ->setAlignment(sp::Alignment::CenterRight) \
-            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
+        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiTextTweak(row); \
         ui->update_func = [this, ui]() -> string { if (auto v = entity.getComponent<COMPONENT>()) return string(v->VALUE, 3); return ui->getText(); }; \
         ui->callback([this](string text) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = text.toFloat(); }); \
@@ -1887,12 +1873,8 @@ private:
     } while(0)
 #define ADD_NUM_SLIDER_TWEAK(LABEL, COMPONENT, MIN_VALUE, MAX_VALUE, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
-        row \
-            ->setSize(GuiElement::GuiSizeMax, 30.0f) \
-            ->setAttribute("layout", "horizontal"); \
-        (new GuiLabel(row, "", LABEL, 20.0f)) \
-            ->setAlignment(sp::Alignment::CenterRight) \
-            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
+        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiSliderTweak(row, "", MIN_VALUE, MAX_VALUE, 0.0f, [this](float number) { \
             if (auto v = entity.getComponent<COMPONENT>()) \
                 v->VALUE = number; \
@@ -1912,10 +1894,8 @@ private:
     } while(0)
 #define ADD_INT_SLIDER_TWEAK(LABEL, COMPONENT, MIN_VALUE, MAX_VALUE, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
-        row \
-            ->setSize(GuiElement::GuiSizeMax, 30.0f) \
-            ->setAttribute("layout", "horizontal"); \
-        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30.0f); \
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
+        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiSliderTweak(row, "", MIN_VALUE, MAX_VALUE, 0u, [this](float number) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = number; }); \
         for (float i = MIN_VALUE; i <= MAX_VALUE; i++) \
             ui->addSnapValue(i, 0.5f); \
@@ -1931,9 +1911,7 @@ private:
     } while(0)
 #define ADD_BOOL_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
-        row \
-            ->setSize(GuiElement::GuiSizeMax, 30.0f) \
-            ->setAttribute("layout", "horizontal"); \
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         auto ui = new GuiToggleTweak(row, LABEL, [this](bool value) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = value; }); \
         ui->update_func = [this, ui]() -> bool { \
             if (auto v = entity.getComponent<COMPONENT>()) \
@@ -1949,7 +1927,7 @@ private:
 #define ADD_VECTOR(LABEL, COMPONENT, VECTOR) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
-        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30.0f); \
+        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         vector_selector = new GuiVectorTweak(row, "VECTOR_SELECTOR"); \
         vector_selector->update_func = [this]() -> size_t { if (auto v = entity.getComponent<COMPONENT>()) return v->VECTOR.size(); return 0; }; \
         auto add = new GuiButton(row, "", tr("tweak-button", "Add"), [this, vector_selector](){ if (auto v = entity.getComponent<COMPONENT>()) { v->VECTOR.emplace_back(); vector_selector->setSelectionIndex(v->VECTOR.size()); } }); \
@@ -2089,6 +2067,23 @@ private:
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change/sec:"), SYSTEM, coolant_change_rate_per_second); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change/sec:"), SYSTEM, power_change_rate_per_second); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair/sec:"), SYSTEM, auto_repair_per_second);
+    // Like ADD_SHIP_SYSTEM_TWEAK, but for a ShipSystem that is a member of a
+    // larger component (i.e. front/rear shields as ship systems of the Shields
+    // component)
+    #define ADD_SHIP_SYSTEM_TWEAK_MEMBER(COMPONENT, SUBSYSTEM) \
+      ADD_BOOL_TWEAK(tr("tweak-text", "Hackable"), COMPONENT, SUBSYSTEM.can_be_hacked); \
+      ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Health current/max:"), COMPONENT, SUBSYSTEM.health, SUBSYSTEM.health_max); \
+      ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Heat:"), COMPONENT, 0.0f, 1.0f, SUBSYSTEM.heat_level); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy rate factor:"), COMPONENT, SUBSYSTEM.power_factor); \
+      { \
+          auto row = new GuiElement(new_page->tweaks, ""); \
+          row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
+          (new GuiLabel(row, "", tr("tweak-text", "Value x power level x 0.08 = energy drained/sec"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
+      } \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat added/sec:"), COMPONENT, SUBSYSTEM.heat_add_rate_per_second); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change/sec:"), COMPONENT, SUBSYSTEM.coolant_change_rate_per_second); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change/sec:"), COMPONENT, SUBSYSTEM.power_change_rate_per_second); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair/sec:"), COMPONENT, SUBSYSTEM.auto_repair_per_second);
 
 // New widget macros for additional component types
 
@@ -2728,16 +2723,16 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     ADD_PAGE(tr("tweak-tab", "Shields"), Shields);
     new_page->description = tr("tweak-shields", "Shield generators, including active state, frequency, calibration time, and energy cost. Multiple shield entries for front/rear arcs if an entity has 2 or more shield segments.");
-    // Unsure how to access the shield component's front/rear systems
-    // ADD_LABEL(tr("tweak-text", "Shields systems"));
-    // ADD_SHIP_SYSTEM_TWEAK(Shields, front_system);
-    // ADD_SHIP_SYSTEM_TWEAK(Shields, rear_system);
+    ADD_LABEL(tr("tweak-text", "Front shield system"));
+    ADD_SHIP_SYSTEM_TWEAK_MEMBER(Shields, front_system);
+    ADD_LABEL(tr("tweak-text", "Rear shield system (2+ segments only)"));
+    ADD_SHIP_SYSTEM_TWEAK_MEMBER(Shields, rear_system);
     ADD_BOOL_TWEAK(tr("tweak-text", "Active"), Shields, active);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Seconds to recalibrate:"), Shields, calibration_time);
     ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Frequency:"), Shields, 0u, 20u, frequency);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy use per second:"), Shields, energy_use_per_second);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy use/sec:"), Shields, energy_use_per_second);
     ADD_VECTOR(tr("tweak-vector", "Shield segments"), Shields, entries);
-    ADD_VECTOR_VALUE_MAX_TWEAK(tr("tweak-text", "Level:"), Shields, entries, level, max);
+    ADD_VECTOR_VALUE_MAX_TWEAK(tr("tweak-text", "Level current/max:"), Shields, entries, level, max);
 
     ADD_PAGE(tr("tweak-tab", "Warp drive"), WarpDrive);
     new_page->description = tr("tweak-warp", "Ship system for the warp propulsion drive. Max level sets the number of warp factors; speed per level and energy per second determine performance and efficiency.");
@@ -3055,7 +3050,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             ->setSize(GuiElement::GuiSizeMax, 30.0f)
             ->setAttribute("layout", "horizontal");
         auto ui = new GuiToggleTweak(row, tr("tweak-text", "Repair hull"),
-         [this](bool value)
+            [this](bool value)
             {
                 if (auto v = entity.getComponent<DockingBay>())
                 {
