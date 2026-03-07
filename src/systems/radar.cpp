@@ -20,7 +20,7 @@ void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Ent
 
     auto scanstate = entity.getComponent<ScanState>();
     auto size = trace.radius * scale * 2.0f;
-    size = std::clamp(size, trace.min_size, trace.max_size);
+    size = std::clamp(size, trace.min_size, std::max(trace.min_size, trace.max_size));
 
     auto color = trace.color;
     if (trace.flags & RadarTrace::ColorByFaction) {
