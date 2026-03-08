@@ -2556,6 +2556,46 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     GuiTweakPage* new_page;
     GuiVectorTweak* vector_selector;
 
+    const string identity_group = tr("tweak-group", "Identity");
+    const string position_movement_group = {tr("tweak-group", "Position & movement")};
+    const string ai_pathfinding_group = {tr("tweak-group", "AI & pathfinding")};
+    const string combat_group = {tr("tweak-group", "Combat")};
+    const string projectiles_group = {tr("tweak-group", "Projectiles")};
+    const string ship_systems_group = {tr("tweak-group", "Ship systems")};
+    const string player_group = {tr("tweak-group", "Player")};
+    const string sensors_group = {tr("tweak-group", "Sensors")};
+    const string comms_docking_group = {tr("tweak-group", "Comms & docking")};
+    const string countermeasures_group = {tr("tweak-group", "Countermeasures")};
+    const string world_group = {tr("tweak-group", "World")};
+    const string rendering_group = {tr("tweak-group", "Rendering")};
+    const string scripting_group = {tr("tweak-group", "Scripting")};
+
+    // Define navigation groups by tweak page indices.
+    component_groups = {
+        {identity_group, {}},
+        {position_movement_group, {}},
+        {ai_pathfinding_group, {}},
+        {combat_group, {}},
+        {projectiles_group, {}},
+        {ship_systems_group, {}},
+        {player_group, {}},
+        {sensors_group, {}},
+        {comms_docking_group, {}},
+        {countermeasures_group, {}},
+        {world_group, {}},
+        {rendering_group, {}},
+        {scripting_group, {}}
+    };
+
+    auto addPageToGroup = [&](const string& group_name) {
+        for (auto& g : component_groups)
+            if (g.name == group_name)
+            {
+                g.page_indices.push_back(static_cast<int>(pages.size()) - 1);
+                return;
+            }
+    };
+
     // Transform component, custom implementation since it uses functions
     // instead of direct access to members.
     ADD_PAGE(tr("tweak-tab", "Transform"), sp::Transform);
@@ -2573,7 +2613,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         ui->update_func = [this, ui]() -> glm::vec2 {
             if (auto t = entity.getComponent<sp::Transform>())
                 return t->getPosition();
-            // Component doesn't exist - return current widget values to preserve user input
+            // Component doesn't exist. Return current widget values to preserve user input.
             return glm::vec2(
                 ui->x_input->getText().toFloat(),
                 ui->y_input->getText().toFloat()
@@ -2584,18 +2624,23 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
                 t->setPosition(value);
         };
         // Register apply function to initialize from UI when component is created
-        new_page->apply_functions.push_back([this, ui]() {
-            string x_text = ui->x_input->getText();
-            string y_text = ui->y_input->getText();
-            if (!x_text.empty() || !y_text.empty()) {
-                if (auto t = entity.getComponent<sp::Transform>()) {
-                    glm::vec2 pos = t->getPosition();
-                    if (!x_text.empty()) pos.x = x_text.toFloat();
-                    if (!y_text.empty()) pos.y = y_text.toFloat();
-                    t->setPosition(pos);
+        new_page->apply_functions.push_back(
+            [this, ui]()
+            {
+                string x_text = ui->x_input->getText();
+                string y_text = ui->y_input->getText();
+                if (!x_text.empty() || !y_text.empty())
+                {
+                    if (auto t = entity.getComponent<sp::Transform>())
+                    {
+                        glm::vec2 pos = t->getPosition();
+                        if (!x_text.empty()) pos.x = x_text.toFloat();
+                        if (!y_text.empty()) pos.y = y_text.toFloat();
+                        t->setPosition(pos);
+                    }
                 }
             }
-        });
+        );
     }
     {
         // Rotation dial
@@ -2625,31 +2670,37 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             }
         });
     }
+    addPageToGroup(position_movement_group);
 
     // Physics component
     ADD_PAGE(tr("tweak-tab", "Physics"), sp::Physics);
     new_page->description = tr("tweak-physics", "If present, this component subjects this entity to physics interactions. This tweaks panel is incomplete; set properties in Lua scripting.");
     // TODO: Figure out how to set Physics values
+    addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Callsign"), CallSign);
     new_page->description = tr("tweak-callsign", "The callsign displayed on radar views and in communications.");
     ADD_TEXT_TWEAK(tr("tweak-text", "Callsign:"), CallSign, callsign);
+    addPageToGroup(identity_group);
 
     ADD_PAGE(tr("tweak-tab", "Type name"), TypeName);
     new_page->description = tr("tweak-typename", "The ship type name used internally by EmptyEpsilon, such as 'Atlantis', and its localized display string for the current locale, which appears in the science database.");
     ADD_TEXT_TWEAK(tr("tweak-text", "Type name:"), TypeName, type_name);
     ADD_TEXT_TWEAK(tr("tweak-text", "Localized:"), TypeName, localized);
+    addPageToGroup(identity_group);
 
     ADD_PAGE(tr("tweak-tab", "Coolant"), Coolant);
     new_page->description = tr("tweak-coolant", "Adds heat accumulation to ship systems possessed by this entity, and a coolant resource to manage it. If this component is absent, this entity's ship systems don't generate heat.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Coolant, max);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max per system:"), Coolant, max_coolant_per_system);
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto levels"), Coolant, auto_levels);
+    addPageToGroup(ship_systems_group);
 
     ADD_PAGE(tr("tweak-tab", "Hull"), Hull);
     new_page->description = tr("tweak-hull", "Structural hit points. If an entity with a hull has zero hull points, its Allow destruction property is enabled, and it takes damage, the entity can be destroyed. Docking to certain entities can restore hull points.");
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Hull:"), Hull, current, max);
     ADD_BOOL_TWEAK(tr("tweak-text", "Allow destruction"), Hull, allow_destruction);
+    addPageToGroup(ship_systems_group);
 
     // Custom impulse command control.
     ADD_PAGE(tr("tweak-tab", "Impulse engine"), ImpulseEngine);
@@ -2688,6 +2739,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             return ui->value_entry->getText().toFloat();
         };
     }
+    addPageToGroup(position_movement_group);
 
     // Custom heading command control, which is distinct from Transform rotation
     // setting.
@@ -2717,11 +2769,13 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             return ui->value_entry->getText().toFloat();
         };
     }
+    addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Combat thrusters"), CombatManeuveringThrusters);
     new_page->description =  tr("tweak-combatmaneuvering", "Boost and strafe capability. Charge is consumed on use and recharges over time (charge_time seconds to full). If this entity has the Coolant component, this generates heat in the Maneuvering thrusters system.");
     ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Charge available:"), CombatManeuveringThrusters, 0.0f, 1.0f, charge);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Seconds to full recharge from 0:"), CombatManeuveringThrusters, charge_time);
+    addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Beam system"), BeamWeaponSys);
     new_page->description =  tr("tweak-beam-system", "Ship system providing beam weapon configuration. Beam frequency affects damage against shields.\n\nEach beam weapon has a mount that defines its firing arc, the direction the arc points in, and its range, damage, and cycle time. It also optionally supports functioning as a rotating turret with a defined speed in tracking targets. If a turret arc is defined, the beam direction rotates the beam arc within the larger turret arc and direction. Beam and turret performance are affected by the Beam weapon system, and firing generates additional heat into the system.");
@@ -2739,6 +2793,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret arc:"), BeamWeaponSys, mounts, 0.0f, 360.0f, turret_arc);
     ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Turret direction:"), BeamWeaponSys, mounts, turret_direction);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), BeamWeaponSys, mounts, turret_rotation_rate);
+    addPageToGroup(combat_group);
 
     ADD_PAGE(tr("tweak-tab", "Missile system"), MissileTubes);
     new_page->description =  tr("tweak-missile-system", "Ship system and storage for missiles and mines. Defines current stock and maximum capacity for each type.\n\nEach missile launch tube has a mount that defines its fire direction, load time, size class, and allowed ammunition types. Performance is affected by, and firing generates heat into, the Missile weapon system.");
@@ -2761,6 +2816,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow mine"), MissileTubes, mounts, type_allowed_mask, 1 << MW_Mine);
     ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow EMP"), MissileTubes, mounts, type_allowed_mask, 1 << MW_EMP);
     ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow HVLI"), MissileTubes, mounts, type_allowed_mask, 1 << MW_HVLI);
+    addPageToGroup(combat_group);
 
     ADD_PAGE(tr("tweak-tab", "Shields"), Shields);
     new_page->description = tr("tweak-shields", "Shield generators, including active state, frequency, calibration time, and additional energy cost beyond ship system usage while activated. Ships can have a variable number of segments with equal arcs, and ships with 2 or more segments have separate front and rear shield ship systems.");
@@ -2774,6 +2830,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy use/sec:"), Shields, energy_use_per_second);
     ADD_VECTOR(tr("tweak-vector", "Shield segments"), Shields, entries);
     ADD_VECTOR_VALUE_MAX_TWEAK(tr("tweak-text", "Level current/max:"), Shields, entries, level, max);
+    addPageToGroup(combat_group);
 
     // Custom controls for warp drive tweaks.
     ADD_PAGE(tr("tweak-tab", "Warp drive"), WarpDrive);
@@ -2812,6 +2869,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             return ui->value_entry->getText().toFloat();
         };
     }
+    addPageToGroup(position_movement_group);
 
     // Custom controls for jump drive tweaks.
     ADD_PAGE(tr("tweak-tab", "Jump drive"), JumpDrive);
@@ -2919,6 +2977,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             ->setTextSize(20.0f)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
+    addPageToGroup(position_movement_group);
 
     // AI Controller component removal is disabled due to unique_ptr<ShipAI>
     // destruction issues that cause compilation issues due to incomplete type.
@@ -2939,6 +2998,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VEC2_TWEAK(tr("tweak-text", "Order target location:"), AIController, order_target_location);
     ADD_ENTITY_TWEAK(tr("tweak-text", "Order target:"), AIController, order_target);
     // ADD_TEXT_TWEAK(tr("tweak-text", "AI name:"), AIController, new_name);
+    addPageToGroup(ai_pathfinding_group);
 
     // Orbit component overrides position/propulsion controls.
     ADD_PAGE(tr("tweak-tab", "Orbit"), Orbit);
@@ -2947,25 +3007,30 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VEC2_TWEAK(tr("tweak-text", "Orbit center coordinates:"), Orbit, center);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit distance:"), Orbit, distance);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit period (seconds):"), Orbit, time);
+    addPageToGroup(world_group);
 
     // Redundant with GM screen faction selector, but this allows addition/removal
     // of the component itself.
     ADD_PAGE(tr("tweak-tab", "Faction"), Faction);
     new_page->description = tr("tweak-faction", "The faction to which this entity belongs. Determines which entities are friendly, neutral, or hostile in combat and interactions. This can also be set using the faction selector at the top left of the GM screen.");
     ADD_FACTION_SELECTOR_TWEAK(tr("tweak-text", "Faction:"), Faction, entity);
+    addPageToGroup(identity_group);
 
     // Spin component overrides other rotation controls.
     ADD_PAGE(tr("tweak-tab", "Spin"), Spin);
     new_page->description = tr("tweak-spin", "Makes the entity rotate continuously at the given rate in degrees per second. Useful for terrain and decorative objects, such as asteroids and debris. Ships should use the Manuvering thrusters component instead.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Rotation rate (degrees/second):"), Spin, rate);
+    addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Life time"), LifeTime);
     new_page->description = tr("tweak-lifetime", "Defines a time-limited existence for this entity, and automatically destroys it when the remaining lifetime in seconds expires.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Remaining lifetime (seconds):"), LifeTime, lifetime);
+    addPageToGroup(scripting_group);
 
     ADD_PAGE(tr("tweak-tab", "Warp jammer"), WarpJammer);
     new_page->description = tr("tweak-warp-jammer", "Creates an area in which where warp and jump drives cannot be activated. Useful for trapping or containing ships.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Jamming range:"), WarpJammer, range);
+    addPageToGroup(countermeasures_group);
 
     // TODO: Add a custom interface to draw zones on the map.
     ADD_PAGE(tr("tweak-tab", "Zone"), Zone);
@@ -2977,6 +3042,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Skybox fade distance:"), Zone, skybox_fade_distance);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), Zone, radius);
     ADD_VEC2_VECTOR_TWEAK(tr("tweak-text", "Outline points:"), Zone, outline);
+    addPageToGroup(world_group);
 
     // Database component adds entries to the science database. Designed for
     // entities that aren't selectable on the map, but can be applied to them.
@@ -2989,24 +3055,29 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     // TODO: Replace with multiline text editor widget - single-line field can't handle linebreaks properly
     ADD_TEXT_TWEAK(tr("tweak-text", "Description:"), Database, description);
     ADD_TEXT_TWEAK(tr("tweak-text", "Image:"), Database, image);
+    addPageToGroup(world_group);
 
     ADD_PAGE(tr("tweak-tab", "Move to"), MoveTo);
     new_page->description = tr("tweak-moveto", "Moves the entity to the target location in a straight line at a fixed rate of speed. Used by default for probes instead of propulsion. Ships should use the Impulse engine component instead.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), MoveTo, speed);
     ADD_VEC2_TWEAK(tr("tweak-text", "Target position:"), MoveTo, target);
+    addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Avoid object"), AvoidObject);
     new_page->description = tr("tweak-avoid-object", "Marks this entity as an obstacle for AI pathfinding. Ships with AI will route around entities with this component using the given range.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Avoidance range:"), AvoidObject, range);
+    addPageToGroup(ai_pathfinding_group);
 
     ADD_PAGE(tr("tweak-tab", "Delayed avoid object"), DelayedAvoidObject);
     new_page->description = tr("tweak-delayed-avoid-object", "Pathfinding obstacle with an activation delay period. Ships pass through this area until the activation delay countdown expires, then avoid it using the given range.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Activation delay (seconds):"), DelayedAvoidObject, delay);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Avoidance range:"), DelayedAvoidObject, range);
+    addPageToGroup(ai_pathfinding_group);
 
     ADD_PAGE(tr("tweak-tab", "Target"), Target);
     new_page->description = tr("tweak-target", "The entity targeted by this entity's weapons (beam/missile) or AI orders.");
     ADD_ENTITY_TWEAK(tr("tweak-text", "Target entity:"), Target, entity);
+    addPageToGroup(combat_group);
 
     /* Sfx component, plays a sound effect once
        Unclear how to get this to work, since the sound plays immediately after
@@ -3016,6 +3087,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Volume:"), Sfx, volume);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Pitch:"), Sfx, pitch);
     ADD_BOOL_TWEAK(tr("tweak-text", "Played"), Sfx, played);
+    addPageToGroup(world_group);
     */
 
     ADD_PAGE(tr("tweak-tab", "Internal rooms"), InternalRooms);
@@ -3023,11 +3095,13 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto repair"), InternalRooms, auto_repair_enabled);
     ADD_ROOM_VECTOR_TWEAK(tr("tweak-text", "Rooms:"), InternalRooms, rooms);
     ADD_DOOR_VECTOR_TWEAK(tr("tweak-text", "Doors:"), InternalRooms, doors);
+    addPageToGroup(ship_systems_group);
 
     ADD_PAGE(tr("tweak-tab", "Internal repair crew"), InternalRepairCrew);
     new_page->description = tr("tweak-internalrepaircrew", "Sets the repair and unhack rates for interior repair crew. Affects how quickly damage is repaired per second when a repair crew is in an Internal room for that system.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Repair per second:"), InternalRepairCrew, repair_per_second);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Unhack per second:"), InternalRepairCrew, unhack_per_second);
+    addPageToGroup(ship_systems_group);
 
     /* TODO: InternalCrew component disabled. Adding it via GM Tweaks destroys the entity.
        Needs a different approach before re-enabling.
@@ -3048,10 +3122,12 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give mine:"), PickupCallback, give_missile, MW_Mine);
     ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give EMP:"), PickupCallback, give_missile, MW_EMP);
     ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give HVLI:"), PickupCallback, give_missile, MW_HVLI);
+    addPageToGroup(scripting_group);
 
     ADD_PAGE(tr("tweak-tab", "Collision callback"), CollisionCallback);
     new_page->description = tr("tweak-collision-callback", "Triggers a Lua script callback when another entity touches this one. Callback must be set through Lua scripting. Optionally restricted to player-ship collisions only.");
     ADD_BOOL_TWEAK(tr("tweak-text", "Execute only if players collide"), CollisionCallback, player);
+    addPageToGroup(scripting_group);
 
     ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
     new_page->description = tr("tweak-docking-bay", "Allows ships to dock at this entity. Configures ship classes and services (energy transfer, repair, shields, probe restocking, AI ship missile restocking).");
@@ -3159,6 +3235,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             return v && (v->flags & DockingBay::RestockMissiles);
         };
     }
+    addPageToGroup(comms_docking_group);
 
     ADD_PAGE(tr("tweak-tab", "Docking port"), DockingPort);
     new_page->description = tr("tweak-docking-port", "Allows this entity to dock with an entity possessing a Docking bay component. Tracks current docking state, target, and optional missile auto-reload.");
@@ -3171,6 +3248,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VEC2_TWEAK(tr("tweak-text", "Docked offset:"), DockingPort, docked_offset);
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto reload missiles"), DockingPort, auto_reload_missiles);
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Reload timer:"), DockingPort, auto_reload_missile_delay, auto_reload_missile_time);
+    addPageToGroup(comms_docking_group);
 
     ADD_PAGE(tr("tweak-tab", "Player controller"), PlayerControl);
     new_page->description = tr("tweak-player-controller", "If present, this component enables player control of this entity. Entities with this component appear as selectable ships on the ship selection screen. Sets available crew positions, control code, main screen display, and alert level.");
@@ -3200,6 +3278,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             return v && v->allowed_positions.has(CrewPosition(i));
         };
     }
+    addPageToGroup(player_group);
 
     ADD_PAGE(tr("tweak-tab", "Reactor"), Reactor);
     new_page->description = tr("tweak-reactor", "Ship system that generates and stores energy. Sets energy capacity and current energy level. Reactor system health affects power output, and sufficiently negative health destroys the ship if Explode on overload is set. If this component is absent, ship systems on this ship don't require energy.");
@@ -3207,36 +3286,46 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_BOOL_TWEAK(tr("tweak-text", "Explode on overload"), Reactor, overload_explode);
     ADD_LABEL(tr("tweak-text", "Reactor system"));
     ADD_SHIP_SYSTEM_TWEAK(Reactor);
+    addPageToGroup(ship_systems_group);
 
     ADD_PAGE(tr("tweak-tab", "Radar range"), LongRangeRadar);
     new_page->description = tr("tweak-radar", "Sensor detection ranges. Short-range radar for nearby contacts, long-range radar for distant threats on tactical display. If this entity has the Allow radar link or Share short-range radar components, the short-range radar range determines what it shares. If this entity has the AI controller component, the long-range radar range determines the range at which it detects other entities.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Short-range radar range:"), LongRangeRadar, short_range);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Long-range radar range:"), LongRangeRadar, long_range);
+    addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Scanner"), ScienceScanner);
     new_page->description = tr("tweak-scanner", "Science scanner for detailed entity analysis. Sets the delay and max delay required for a player to complete a scan when not using the scanning minigame.");
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Scan delay:"), ScienceScanner, delay, max_scanning_delay);
+    addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Comms receiver"), CommsReceiver);
     new_page->description = tr("tweak-comms-receiver", "Allows this entity to communicate with other ships and stations.");
+    addPageToGroup(comms_docking_group);
+
     ADD_PAGE(tr("tweak-tab", "Comms transmitter"), CommsTransmitter);
     new_page->description = tr("tweak-comms-transmitter", "Allows this entity to communicate with other ships and stations.");
+    addPageToGroup(comms_docking_group);
 
     ADD_PAGE(tr("tweak-tab", "Scan probe launcher"), ScanProbeLauncher);
     new_page->description = tr("tweak-scan-probe-launcher", "If present, this component allows this ship lto launch sensor probes. Sets current and max probe stocks, and recharge and charge time control restocking speed when docked.");
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Probes:"), ScanProbeLauncher, stock, max);
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Recharge:"), ScanProbeLauncher, recharge, charge_time);
+    addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Allow radar link"), AllowRadarLink);
     new_page->description = tr("tweak-radar-link", "Marks this entity as a radar-linked probe. The defined owner entity receives the probe's sensor data, which can be viewed in Probe View on the Science or Operations player screens.");
     ADD_ENTITY_TWEAK(tr("tweak-text", "Owner:"), AllowRadarLink, owner);
+    addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Share short-range radar"), ShareShortRangeRadar);
     new_page->description = tr("tweak-share-radar", "Causes this entity to share its short-range radar sensor data with allied entities in sensor range.");
+    addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Hacking"), HackingDevice);
     new_page->description = tr("tweak-hacking", "If present, this component enables hacking minigames on the Relay player screen. Defines how effective a successful hacking attempt is at disabling the target ship system.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Effectiveness:"), HackingDevice, effectiveness);
+    addPageToGroup(combat_group);
 
     ADD_PAGE(tr("tweak-tab", "Self-destruct"), SelfDestruct);
     new_page->description = tr("tweak-self-destruct", "If present, this component enables the self-destruct function on player screens. When active, counts down in seconds and then triggers an explosion with configurable blast damage and radius.");
@@ -3244,17 +3333,20 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Countdown:"), SelfDestruct, countdown);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Blast damage:"), SelfDestruct, damage);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Blast radius:"), SelfDestruct, size);
+    addPageToGroup(countermeasures_group);
 
     ADD_PAGE(tr("tweak-tab", "Radar obstruction"), RadarBlock);
     new_page->description = tr("tweak-radar-block", "If present, this component causes this entity to block radar sensor signals around and behind it over the given radius.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), RadarBlock, range);
     ADD_BOOL_TWEAK(tr("tweak-text", "Obstructs radar behind"), RadarBlock, behind);
+    addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Gravity"), Gravity);
     new_page->description = tr("tweak-gravity", "Defines this entity's gravitational attraction, which pulls nearby entities toward this one. Can optionally deal damage like a black hole.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), Gravity, range);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Attraction force:"), Gravity, force);
     ADD_BOOL_TWEAK(tr("tweak-text", "Proximity damage"), Gravity, damage);
+    addPageToGroup(world_group);
 
     ADD_PAGE(tr("tweak-tab", "Radar trace"), RadarTrace);
     new_page->description = tr("tweak-radar-trace", "Controls how this entity appears on radar. Defines its icon, display size, color (if not set by faction), and visibility flags.");
@@ -3363,33 +3455,39 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             return v && (v->flags & RadarTrace::LongRange);
         };
     }
+    addPageToGroup(identity_group);
 
     ADD_PAGE(tr("tweak-tab", "Raw radar signature"), RawRadarSignatureInfo);
     new_page->description = tr("tweak-raw-radar-signature", "Permanent radar signature values (gravity, electrical, biological) that modify the sensor bands on Science and Operations radars. WIP; might not function.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Gravity:"), RawRadarSignatureInfo, gravity);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Electrical:"), RawRadarSignatureInfo, electrical);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Biological:"), RawRadarSignatureInfo, biological);
+    addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Dynamic radar signature"), DynamicRadarSignatureInfo);
     new_page->description = tr("tweak-dynamic-radar-signature", "Live radar signature values updated by the game engine during play, reflecting current ship state. For modifiable base values, see the Raw radar signature component. WIP; might not function.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Gravity:"), DynamicRadarSignatureInfo, gravity);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Electrical:"), DynamicRadarSignatureInfo, electrical);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Biological:"), DynamicRadarSignatureInfo, biological);
+    addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Radar link"), RadarLink);
     new_page->description = tr("tweak-radar-link", "Determines whether this entity is capable of receiving a radar link from another entity, such as a probe.");
     ADD_ENTITY_TWEAK(tr("tweak-text", "Linked entity:"), RadarLink, linked_entity);
+    addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Missile flight"), MissileFlight);
     new_page->description = tr("tweak-missile-flight", "Parameters relevant if this entity is a missile in flight. Defines maximum travel speed and flight timeout before self-destruction.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), MissileFlight, speed);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Timeout:"), MissileFlight, timeout);
+    addPageToGroup(projectiles_group);
 
     ADD_PAGE(tr("tweak-tab", "Missile homing"), MissileHoming);
     new_page->description = tr("tweak-missile-homing", "Defines this entity's homing guidance system, turn rate for tracking, acquisition range, and the current tracked target entity. Most relevant if this entity is a missile.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Turn rate:"), MissileHoming, turn_rate);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), MissileHoming, range);
     ADD_ENTITY_TWEAK(tr("tweak-text", "Target:"), MissileHoming, target);
+    addPageToGroup(projectiles_group);
 
     ADD_PAGE(tr("tweak-tab", "Explode on touch"), ExplodeOnTouch);
     new_page->description = tr("tweak-explode-on-touch", "Explodes upon collision with another entity. Defines center/edge damage falloff, blast radius, owner, damage type, and explosion sound.");
@@ -3400,9 +3498,11 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_ENUM_TWEAK(tr("tweak-text", "Damage type:"), ExplodeOnTouch, damage_type,
         static_cast<int>(DamageType::Energy), static_cast<int>(DamageType::EMP), damageTypeToString);
     ADD_TEXT_TWEAK(tr("tweak-text", "Explosion SFX:"), ExplodeOnTouch, explosion_sfx);
+    addPageToGroup(projectiles_group);
 
     ADD_PAGE(tr("tweak-tab", "Explode on timeout"), ExplodeOnTimeout);
     new_page->description = tr("tweak-explode-on-timeout", "Marker component for missiles or other weapons that detonate when their Missile flight component flight timer expires.");
+    addPageToGroup(projectiles_group);
 
     ADD_PAGE(tr("tweak-tab", "Delayed explode on touch"), DelayedExplodeOnTouch);
     new_page->description = tr("tweak-delayed-explode-on-touch", "Contact detonation with an arming period. Doesn't trigger until the trigger holdoff delay expires after first contact.");
@@ -3415,6 +3515,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_TEXT_TWEAK(tr("tweak-text", "Explosion SFX:"), DelayedExplodeOnTouch, explosion_sfx);
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Holdoff/delay:"), DelayedExplodeOnTouch, trigger_holdoff_delay, delay);
     ADD_BOOL_TWEAK(tr("tweak-text", "Triggered"), DelayedExplodeOnTouch, triggered);
+    addPageToGroup(projectiles_group);
 
     ADD_PAGE(tr("tweak-tab", "Particle emitter"), ConstantParticleEmitter);
     new_page->description = tr("tweak-constant-particle", "Defines a continuous particle effect that this entity emits. The color shifts from start to end colors linearly across each particle's lifetime.");
@@ -3425,6 +3526,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Lifetime:"), ConstantParticleEmitter, life_time);
     ADD_VEC3_COLOR_TWEAK(tr("tweak-text", "Start color:"), ConstantParticleEmitter, start_color);
     ADD_VEC3_COLOR_TWEAK(tr("tweak-text", "End color:"), ConstantParticleEmitter, end_color);
+    addPageToGroup(rendering_group);
 
     ADD_PAGE(tr("tweak-tab", "Mesh render"), MeshRenderComponent);
     new_page->description = tr("tweak-mesh-render", "3D mesh rendering. Defines the model file, its scale, and its offset, and also its texture and texture maps. Mesh and texture paths are relative to the resources directory.");
@@ -3572,6 +3674,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         z_ui->update_func = [this]() -> string { if (auto v = entity.getComponent<MeshRenderComponent>()) return string(v->mesh_offset.z, 3); return ""; };
         z_ui->callback([this](string t) { if (auto v = entity.getComponent<MeshRenderComponent>()) v->mesh_offset.z = t.toFloat(); });
     }
+    addPageToGroup(rendering_group);
 
     ADD_PAGE(tr("tweak-tab", "Engine emitter"), EngineEmitter);
     new_page->description = tr("tweak-energy-emitter", "Engine exhaust particle effects for ships. Each emitter has a position on the hull, a velocity direction, and a color.");
@@ -3612,15 +3715,18 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             }
         };
     }
+    addPageToGroup(rendering_group);
 
     ADD_PAGE(tr("tweak-tab", "Billboard renderer"), BillboardRenderer);
     new_page->description = tr("tweak-billboard-renderer", "Flat sprite billboard. Renders a 2D texture facing the camera at a configurable size.");
     ADD_TEXT_TWEAK(tr("tweak-text", "Texture:"), BillboardRenderer, texture);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Size:"), BillboardRenderer, size);
+    addPageToGroup(rendering_group);
 
     ADD_PAGE(tr("tweak-tab", "Nebula renderer"), NebulaRenderer);
     new_page->description = tr("tweak-nebula-renderer", "Nebula cloud rendering. Defines how far from the nebula it should be visible in 3D views.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Render range:"), NebulaRenderer, render_range);
+    addPageToGroup(rendering_group);
 
     ADD_PAGE(tr("tweak-tab", "Planet renderer"), PlanetRender);
     new_page->description = tr("tweak-planet-renderer", "Spherical planet rendering with surface texture, cloud layer, atmosphere glow, and size properties.");
@@ -3632,6 +3738,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_TEXT_TWEAK(tr("tweak-text", "Cloud texture:"), PlanetRender, cloud_texture);
     ADD_TEXT_TWEAK(tr("tweak-text", "Atmosphere texture:"), PlanetRender, atmosphere_texture);
     ADD_VEC3_COLOR_TWEAK(tr("tweak-text", "Atmosphere color:"), PlanetRender, atmosphere_color);
+    addPageToGroup(rendering_group);
 
     ADD_PAGE(tr("tweak-tab", "Explosion effect"), ExplosionEffect);
     new_page->description = tr("tweak-explosion-effect", "Defines and initates a visual effect for an explosion. Controls the explosion's size and remaining lifetime.");
@@ -3639,6 +3746,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Size:"), ExplosionEffect, size);
     ADD_BOOL_TWEAK(tr("tweak-text", "Radar"), ExplosionEffect, radar);
     ADD_BOOL_TWEAK(tr("tweak-text", "Electrical"), ExplosionEffect, electrical);
+    addPageToGroup(rendering_group);
 
     for (GuiTweakPage* page : pages)
     {
@@ -3653,24 +3761,6 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         ->setSize(300.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, -50, 20, 0");
 
-    // Define navigation groups by tweak page indices.
-    // TODO: Enum for tweak pages instead of brittle ints.
-    component_groups = {
-        {tr("tweak-group", "Core"), {0, 1}},
-        {tr("tweak-group", "Identity"), {2, 3, 18, 47}},
-        {tr("tweak-group", "Movement"), {6, 7, 8, 14, 15, 19, 24}},
-        {tr("tweak-group", "AI & Pathfinding"), {16, 25, 26}},
-        {tr("tweak-group", "Combat"), {5, 13, 9, 10, 11, 12, 44, 43, 27}},
-        {tr("tweak-group", "Projectiles"), {51, 52, 53, 54, 55}},
-        {tr("tweak-group", "Ship systems"), {35, 4}},
-        {tr("tweak-group", "Player"), {34, 28, 29, 23}},
-        {tr("tweak-group", "Sensors"), {36, 37, 48, 49, 40, 41, 50, 42}},
-        {tr("tweak-group", "Comms & Docking"), {38, 39, 32, 33}},
-        {tr("tweak-group", "Countermeasures"), {45, 21}},
-        {tr("tweak-group", "World"), {22, 46, 17}},
-        {tr("tweak-group", "Rendering"), {57, 58, 59, 60, 61, 62, 56}},
-        {tr("tweak-group", "Scripting"), {30, 31, 20}},
-    };
     showGroups();
 
     (new GuiButton(this, "CLOSE_BUTTON", tr("button", "Close"), [this]() {
