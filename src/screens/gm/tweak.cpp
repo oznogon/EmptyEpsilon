@@ -2834,7 +2834,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     // Custom controls for warp drive tweaks.
     ADD_PAGE(tr("tweak-tab", "Warp drive"), WarpDrive);
-    new_page->description = tr("tweak-warp", "Ship system for the warp propulsion drive. Maximum level sets the highest available warp factor, with 0-max selectable as integer factors. Energy consumption while active is in addition to ship system energy consumption. Warp usage also generates heat while active.");
+    new_page->description = tr("tweak-warp", "Ship system for the warp propulsion drive. Maximum level sets the highest available warp factor; all other factors are integers between 0 (inactive) and this maximum. Active warp usage consumes energy and generates heat while warp is active, in addition to normal ship system energy consumption and heat generation.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Maximum level:"), WarpDrive, max_level);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed/level:"), WarpDrive, speed_per_level);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy consumed per level/sec:"), WarpDrive, energy_warp_per_second);
@@ -2873,7 +2873,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     // Custom controls for jump drive tweaks.
     ADD_PAGE(tr("tweak-tab", "Jump drive"), JumpDrive);
-    new_page->description = tr("tweak-jump", "Ship system for the jump propulsion drive. Minimum and maximum distance values define the available range in the jump drive controls.");
+    new_page->description = tr("tweak-jump", "Ship system for the jump propulsion drive. Minimum and maximum distance values define the available range in the jump drive controls. Completing or aborting a jump in progress reduces jump charge and increases ship system heat.");
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Distance min/max:"), JumpDrive, min_distance, max_distance);
     {
         auto row = new GuiElement(new_page->tweaks, "");
@@ -2991,7 +2991,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     };
     pages.push_back(new_page);
     page_labels.push_back(tr("tweak-tab", "AI controller"));
-    new_page->description = tr("tweak-ai", "Autonomous ship behavior. Set orders (attack, defend, dock, etc.), target entity, and target location for AI control. This component cannot be removed from an entity using the tweaks menu.");
+    new_page->description = tr("tweak-ai", "Autonomous ship behavior. Set orders (attack, defend, dock, etc.), target entity, and target location for AI control.\n\nTo issue movement, attack entity, dock with entity, or defend entity orders, right-click on the target coordinates or entity while this entity is selected. To issue other orders, select it from the Orders menu at the bottom-right of the GM screen.\n\nThis component cannot be removed from an entity using the tweaks menu.");
 
     ADD_ENUM_TWEAK(tr("tweak-text", "Orders:"), AIController, orders,
         static_cast<int>(AIOrder::Idle), static_cast<int>(AIOrder::Attack), getAIOrderString);
@@ -3002,7 +3002,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     // Orbit component overrides position/propulsion controls.
     ADD_PAGE(tr("tweak-tab", "Orbit"), Orbit);
-    new_page->description = tr("tweak-orbit", "Defines simple orbital movement by this entity around another entity (orbit target) or specified coordinates (orbit coordinates) at a defined distance and period.");
+    new_page->description = tr("tweak-orbit", "Defines simple orbital movement by this entity around another entity (orbit target) or specified coordinates (orbit coordinates) at a defined distance and period.\n\nCombine with Spin and Planet renderer to roughly simulate planetary rotation.");
     ADD_ENTITY_TWEAK(tr("tweak-text", "Orbit center target:"), Orbit, target);
     ADD_VEC2_TWEAK(tr("tweak-text", "Orbit center coordinates:"), Orbit, center);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit distance:"), Orbit, distance);
@@ -3012,18 +3012,18 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     // Redundant with GM screen faction selector, but this allows addition/removal
     // of the component itself.
     ADD_PAGE(tr("tweak-tab", "Faction"), Faction);
-    new_page->description = tr("tweak-faction", "The faction to which this entity belongs. Determines which entities are friendly, neutral, or hostile in combat and interactions. This can also be set using the faction selector at the top left of the GM screen.");
+    new_page->description = tr("tweak-faction", "The faction to which this entity belongs. An entity's faction determines which entities are friendly, neutral, or hostile to this entity in combat and interactions. This can also be set using the faction selector at the top left of the GM screen.");
     ADD_FACTION_SELECTOR_TWEAK(tr("tweak-text", "Faction:"), Faction, entity);
     addPageToGroup(identity_group);
 
     // Spin component overrides other rotation controls.
     ADD_PAGE(tr("tweak-tab", "Spin"), Spin);
-    new_page->description = tr("tweak-spin", "Makes the entity rotate continuously at the given rate in degrees per second. Useful for terrain and decorative objects, such as asteroids and debris. Ships should use the Manuvering thrusters component instead.");
+    new_page->description = tr("tweak-spin", "Makes the entity rotate continuously at the given rate in degrees per second. Useful for terrain and decorative objects, such as asteroids and debris. Combine with Planet renderer to roughly simulate planetary rotation, particularly with other entities using Orbit.\n\nShips should instead use the Manuvering thrusters component to control their own rotation.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Rotation rate (degrees/second):"), Spin, rate);
     addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Life time"), LifeTime);
-    new_page->description = tr("tweak-lifetime", "Defines a time-limited existence for this entity, and automatically destroys it when the remaining lifetime in seconds expires.");
+    new_page->description = tr("tweak-lifetime", "Defines a time-limited existence for this entity, and automatically destroys this entity when the remaining lifetime in seconds expires. Typically used to expire probes.\n\nBE CAREFUL WHEN ADDING THIS COMPONENT TO AN ENTITY. If added to an entity while the game is running, the countdown begins immediately. Once destroyed, the entity can't be restored.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Remaining lifetime (seconds):"), LifeTime, lifetime);
     addPageToGroup(scripting_group);
 
@@ -3034,7 +3034,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     // TODO: Add a custom interface to draw zones on the map.
     ADD_PAGE(tr("tweak-tab", "Zone"), Zone);
-    new_page->description = tr("tweak-zone", "A named region, typically visible on radars as a colored region with a label. Can optionally change the skybox while within the zone, with an optional transition border. Scripts can determine whether an entity is within a Zone. Used for mission areas, hazard zones, map regions, and special effects.");
+    new_page->description = tr("tweak-zone", "A named region, typically visible on radar as a colored region with a label, defined by a list of coordinates connected in order. Scripts can determine whether an entity is within a Zone's bounds. Used for mission areas, hazard zones, map regions, and special effects.\n\nA Zone can optionally change the skybox texture while within the zone, with an optional transitional border to crossfade the skybox textures.");
     ADD_COLOR_TWEAK(tr("tweak-text", "Zone color:"), Zone, color);
     ADD_TEXT_TWEAK(tr("tweak-text", "Label:"), Zone, label);
     ADD_VEC2_TWEAK(tr("tweak-text", "Label offset:"), Zone, label_offset);
@@ -3048,7 +3048,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     // entities that aren't selectable on the map, but can be applied to them.
     // See GuiDatabaseParentPicker for an interface to select these entities.
     ADD_PAGE(tr("tweak-tab", "Database"), Database);
-    new_page->description = tr("tweak-database", "Science database entry for this entity. Defines the name, description, key-value data pairs, and image shown on the Science, Operations, and Database screens. To modify the main Science database entries, which aren't selectable on the map, use the Databse button on the GM screen.");
+    new_page->description = tr("tweak-database", "Adds a Science database entry for this entity. Defines the name, description, key-value data pairs, and image shown on the Science, Operations, and Database screens.\n\nTo modify the main entries of the Science database, which aren't selectable on the map, use the Databse button on the GM screen.");
     ADD_DATABASE_PARENT_TWEAK(tr("tweak-text", "Parent entry:"), Database, parent);
     ADD_TEXT_TWEAK(tr("tweak-text", "Name:"), Database, name);
     ADD_DATABASE_KEYVALUE_TWEAK(tr("tweak-text", "Key-value pairs:"), Database, key_values);
@@ -3058,18 +3058,18 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(world_group);
 
     ADD_PAGE(tr("tweak-tab", "Move to"), MoveTo);
-    new_page->description = tr("tweak-moveto", "Moves the entity to the target location in a straight line at a fixed rate of speed. Used by default for probes instead of propulsion. Ships should use the Impulse engine component instead.");
+    new_page->description = tr("tweak-moveto", "Moves the entity to the target location in a straight line at a fixed rate of speed. Used by default for probes instead of propulsion, and doesn't apply AI avoidance behaviors.\n\nFor AI-controlled entities, generally use propulsion components such as Impulse engine and Maneuvering thrusters instead of Move to, then apply movement orders by selecting this entity and right-clicking on the map.\n\nTo effect orbital movement around a point or another entity, use the Orbit component.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), MoveTo, speed);
     ADD_VEC2_TWEAK(tr("tweak-text", "Target position:"), MoveTo, target);
     addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Avoid object"), AvoidObject);
-    new_page->description = tr("tweak-avoid-object", "Marks this entity as an obstacle for AI pathfinding. Ships with AI will route around entities with this component using the given range.");
+    new_page->description = tr("tweak-avoid-object", "Marks this entity as an obstacle for AI pathfinding. AI-controlled entities will route this entity at the given avoidance range.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Avoidance range:"), AvoidObject, range);
     addPageToGroup(ai_pathfinding_group);
 
     ADD_PAGE(tr("tweak-tab", "Delayed avoid object"), DelayedAvoidObject);
-    new_page->description = tr("tweak-delayed-avoid-object", "Pathfinding obstacle with an activation delay period. Ships pass through this area until the activation delay countdown expires, then avoid it using the given range.");
+    new_page->description = tr("tweak-delayed-avoid-object", "Marks this entity as an obstacle for AI pathfinding after an activation delay period. AI-controlled entities pass through this area until the activation delay countdown expires, then avoid it using the given range.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Activation delay (seconds):"), DelayedAvoidObject, delay);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Avoidance range:"), DelayedAvoidObject, range);
     addPageToGroup(ai_pathfinding_group);
@@ -3099,8 +3099,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     ADD_PAGE(tr("tweak-tab", "Internal repair crew"), InternalRepairCrew);
     new_page->description = tr("tweak-internalrepaircrew", "Sets the repair and unhack rates for interior repair crew. Affects how quickly damage is repaired per second when a repair crew is in an Internal room for that system.");
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Repair per second:"), InternalRepairCrew, repair_per_second);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Unhack per second:"), InternalRepairCrew, unhack_per_second);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Repair/sec:"), InternalRepairCrew, repair_per_second);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Unhack/sec:"), InternalRepairCrew, unhack_per_second);
     addPageToGroup(ship_systems_group);
 
     /* TODO: InternalCrew component disabled. Adding it via GM Tweaks destroys the entity.
@@ -3114,8 +3114,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     */
     
     ADD_PAGE(tr("tweak-tab", "Pickup"), PickupCallback);
-    new_page->description = tr("tweak-pickup", "If present, this component makes this entity collectible by other entities. Can grant energy, missiles, or other resources to an entity that touches it, then immediately destroys itself. Can be set to be picked up only by player ships.");
-    ADD_BOOL_TWEAK(tr("tweak-text", "Only players can pickup"), PickupCallback, player);
+    new_page->description = tr("tweak-pickup", "If present, this component makes this entity collectible by other entities. Upon collision, this component grants energy, missiles, or other resources to the colliding entity, then immediately destroys itself. Can be set to be picked up only by player ships.");
+    ADD_BOOL_TWEAK(tr("tweak-text", "Only players can pick up this entity"), PickupCallback, player);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Give energy:"), PickupCallback, give_energy);
     ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give homing:"), PickupCallback, give_missile, MW_Homing);
     ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give nuke:"), PickupCallback, give_missile, MW_Nuke);
@@ -3130,11 +3130,11 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(scripting_group);
 
     ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
-    new_page->description = tr("tweak-docking-bay", "Allows ships to dock at this entity. Configures ship classes and services (energy transfer, repair, shields, probe restocking, AI ship missile restocking).");
+    new_page->description = tr("tweak-docking-bay", "Allows Docking port entities of a dock class that matches one of its lists to dock with this entity. Configures dock classes and services (energy transfer, repair, shields, probe restocking, AI ship missile restocking). Docking occurs upon collision while the Docking port entity is in a docking state.\n\nIf the Docking port entity's dock class is in the External dock classes list, the Docking port entity becomes attached to this entity at the offset and moves with this entity. If this entity is destroyed, externally docked entities persist.\n\nIf the dock class is in the Internal list, the Docking port entity loses its Transform and player views change to track this entity. Once undocked, this entity respaws at this entity's position relative to the docking offset. If this entity is destroyed, any internally docked entities are also destroyed.");
     ADD_STRING_SET_TWEAK(tr("tweak-text", "External dock classes:"), DockingBay, external_dock_classes);
     ADD_STRING_SET_TWEAK(tr("tweak-text", "Internal dock classes:"), DockingBay, internal_dock_classes);
     ADD_LABEL(tr("tweak-text", "Docking bay services"));
-    // DockingBay flags, custom toggle tweaks for bitfield
+    // DockingBay flags, custom toggle tweaks for bitwise field.
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row
@@ -3238,7 +3238,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(comms_docking_group);
 
     ADD_PAGE(tr("tweak-tab", "Docking port"), DockingPort);
-    new_page->description = tr("tweak-docking-port", "Allows this entity to dock with an entity possessing a Docking bay component. Tracks current docking state, target, and optional missile auto-reload.");
+    new_page->description = tr("tweak-docking-port", "Allows this entity to dock with an entity that possesses a Docking bay component. This entity's Docking class and subclass strings must match the Docking bay entity's to enable docking.\n\nTracks docking state, target, and positional offset of its docking position, and allows toggling and configuration of optional missile auto-reloading while docked.");
     ADD_TEXT_TWEAK(tr("tweak-text", "Dock class:"), DockingPort, dock_class);
     ADD_TEXT_TWEAK(tr("tweak-text", "Dock subclass:"), DockingPort, dock_subclass);
     ADD_ENUM_TWEAK(tr("tweak-text", "Docking state:"), DockingPort, state,
@@ -3246,12 +3246,12 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         static_cast<int>(DockingPort::State::Docked), getDockingStateString);
     ADD_ENTITY_TWEAK(tr("tweak-text", "Dock target:"), DockingPort, target);
     ADD_VEC2_TWEAK(tr("tweak-text", "Docked offset:"), DockingPort, docked_offset);
-    ADD_BOOL_TWEAK(tr("tweak-text", "Auto reload missiles"), DockingPort, auto_reload_missiles);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Auto-reload missiles"), DockingPort, auto_reload_missiles);
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Reload timer:"), DockingPort, auto_reload_missile_delay, auto_reload_missile_time);
     addPageToGroup(comms_docking_group);
 
     ADD_PAGE(tr("tweak-tab", "Player controller"), PlayerControl);
-    new_page->description = tr("tweak-player-controller", "If present, this component enables player control of this entity. Entities with this component appear as selectable ships on the ship selection screen. Sets available crew positions, control code, main screen display, and alert level.");
+    new_page->description = tr("tweak-player-controller", "If present, this component enables player control of this entity. Entities with this component are selectable on the ship selection screen. Sets available crew positions, control code, main screen display, and alert level.");
     ADD_TEXT_TWEAK(tr("tweak-text", "Control code:"), PlayerControl, control_code);
     ADD_ENUM_TWEAK(tr("tweak-text", "Main screen:"), PlayerControl, main_screen_setting, 0, 6, mainScreenSettingToLocaleString);
     ADD_ENUM_TWEAK(tr("tweak-text", "Main screen overlay:"), PlayerControl, main_screen_overlay, 0, 1, mainScreenOverlayToLocaleString);
@@ -3289,7 +3289,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(ship_systems_group);
 
     ADD_PAGE(tr("tweak-tab", "Radar range"), LongRangeRadar);
-    new_page->description = tr("tweak-radar", "Sensor detection ranges. Short-range radar for nearby contacts, long-range radar for distant threats on tactical display. If this entity has the Allow radar link or Share short-range radar components, the short-range radar range determines what it shares. If this entity has the AI controller component, the long-range radar range determines the range at which it detects other entities.");
+    new_page->description = tr("tweak-radar", "Enables radar on player screens. Short-range radar is used on Helms, Weapons and Tactical screens to see or target nearby contacts, long-range radar on Science and Operations screens for identifying or scanning distant contacts.\n\nIf this entity has the Allow radar link or Share short-range radar components, the short-range radar range determines what it shares in Probe view and Relay/Stragetic Map, respectively.\n\nIf this entity has the AI controller component, the long-range radar range determines the range at which it detects other entities.\n\nFor the scanning minigame component that relies on radar, see Scanner. For the weapons targeting component, see Target.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Short-range radar range:"), LongRangeRadar, short_range);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Long-range radar range:"), LongRangeRadar, long_range);
     addPageToGroup(sensors_group);
@@ -3300,15 +3300,17 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Comms receiver"), CommsReceiver);
+    // TODO: Better documentation of CommsReceiver vs. CommsTransmitter
     new_page->description = tr("tweak-comms-receiver", "Allows this entity to communicate with other ships and stations.");
     addPageToGroup(comms_docking_group);
 
     ADD_PAGE(tr("tweak-tab", "Comms transmitter"), CommsTransmitter);
+    // TODO: Better documentation of CommsReceiver vs. CommsTransmitter
     new_page->description = tr("tweak-comms-transmitter", "Allows this entity to communicate with other ships and stations.");
     addPageToGroup(comms_docking_group);
 
     ADD_PAGE(tr("tweak-tab", "Scan probe launcher"), ScanProbeLauncher);
-    new_page->description = tr("tweak-scan-probe-launcher", "If present, this component allows this ship lto launch sensor probes. Sets current and max probe stocks, and recharge and charge time control restocking speed when docked.");
+    new_page->description = tr("tweak-scan-probe-launcher", "If present, this component allows this ship to launch sensor probes. Defines current and max probe stocks, and the recharge and charge time controlling restocking speed when docked.");
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Probes:"), ScanProbeLauncher, stock, max);
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Recharge:"), ScanProbeLauncher, recharge, charge_time);
     addPageToGroup(sensors_group);
@@ -3319,16 +3321,16 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Share short-range radar"), ShareShortRangeRadar);
-    new_page->description = tr("tweak-share-radar", "Causes this entity to share its short-range radar sensor data with allied entities in sensor range.");
+    new_page->description = tr("tweak-share-radar", "Causes this entity to share its short-range radar sensor data with friendly entities, as viewed on the Relay and Strategic Map screens. Ships and probes should typically have this component.");
     addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Hacking"), HackingDevice);
-    new_page->description = tr("tweak-hacking", "If present, this component enables hacking minigames on the Relay player screen. Defines how effective a successful hacking attempt is at disabling the target ship system.");
+    new_page->description = tr("tweak-hacking", "If present, this component enables hacking minigames against neutral and hostile targets selected on the Relay player screen. The effectiveness defines how much a successful hacking attempt degrades the target ship system.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Effectiveness:"), HackingDevice, effectiveness);
     addPageToGroup(combat_group);
 
     ADD_PAGE(tr("tweak-tab", "Self-destruct"), SelfDestruct);
-    new_page->description = tr("tweak-self-destruct", "If present, this component enables the self-destruct function on player screens. When active, counts down in seconds and then triggers an explosion with configurable blast damage and radius.");
+    new_page->description = tr("tweak-self-destruct", "If present, this component enables the self-destruct function on player screens. When present, activated, and confirmed by players, this starts a countdown in seconds and then triggers an explosion with the defined blast damage and radius.");
     ADD_BOOL_TWEAK(tr("tweak-text", "Active"), SelfDestruct, active);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Countdown:"), SelfDestruct, countdown);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Blast damage:"), SelfDestruct, damage);
@@ -3336,9 +3338,9 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(countermeasures_group);
 
     ADD_PAGE(tr("tweak-tab", "Radar obstruction"), RadarBlock);
-    new_page->description = tr("tweak-radar-block", "If present, this component causes this entity to block radar sensor signals around and behind it over the given radius.");
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), RadarBlock, range);
-    ADD_BOOL_TWEAK(tr("tweak-text", "Obstructs radar behind"), RadarBlock, behind);
+    new_page->description = tr("tweak-radar-block", "If present, this component causes this entity to block radar sensor signals around, and optionally also behind, it over the given radius.");
+    ADD_BOOL_TWEAK(tr("tweak-text", "Radar obstruction casts shadow"), RadarBlock, behind);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Obstruction radius:"), RadarBlock, range);
     addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Gravity"), Gravity);
