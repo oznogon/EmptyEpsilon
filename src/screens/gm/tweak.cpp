@@ -770,6 +770,7 @@ public:
 
         (new GuiLabel(row, "", tr("tweak-color-green", "G:"), 20.0f))
             ->setSize(30.0f, GuiElement::GuiSizeMax);
+
         g_slider = new GuiSliderTweak(row, "", 0.0f, 255.0f, 0.0f,
             [this](float value)
             {
@@ -847,8 +848,7 @@ public:
             r_slider->setValue(static_cast<float>(color.r));
             g_slider->setValue(static_cast<float>(color.g));
             b_slider->setValue(static_cast<float>(color.b));
-            if (a_slider)
-                a_slider->setValue(static_cast<float>(color.a));
+            if (a_slider) a_slider->setValue(static_cast<float>(color.a));
         }
         GuiElement::onDraw(target);
 
@@ -885,7 +885,6 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override
     {
         if (update_func) setText(update_func());
-
         GuiScrollText::onDraw(target);
     }
 
@@ -1639,7 +1638,7 @@ public:
                         {"position_y", string(door.position.y)},
                         {"orientation", door.horizontal ? tr("tweak-door", "Horizontal") : tr("tweak-door", "Vertical")}
                     });
-                    item_list->addEntry(display, string(int(i)));
+                    item_list->addEntry(display, string(static_cast<int>(i)));
                 }
             }
         }
@@ -1668,6 +1667,7 @@ public:
         setSize(GuiElement::GuiSizeMax, 270.0f);
         setAttribute("layout", "vertical");
 
+        // List all emitters in a selectable Listbox.
         item_list = new GuiListbox(this, "",
             [this](int index, string value)
             {
@@ -1692,6 +1692,7 @@ public:
             ->setButtonHeight(20.0f)
             ->setSize(GuiElement::GuiSizeMax, 90.0f);
 
+        // Set the emitter's coordinates of relative to the model's center.
         auto row = new GuiElement(this, "");
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
 
@@ -1699,6 +1700,7 @@ public:
         createLabeledEntry(row, "Y:", pos_y_entry);
         createLabeledEntry(row, "Z:", pos_z_entry);
 
+        // Set the emitter's color.
         color_picker = new GuiColorPicker(this, false);
         color_picker->update_func = [this]() -> glm::u8vec4 {
             return glm::u8vec4(
@@ -1711,6 +1713,7 @@ public:
             edit_color = glm::vec3(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f);
         };
 
+        // Set the emitter's scale.
         row = new GuiElement(this, "");
         row
             ->setSize(GuiElement::GuiSizeMax, 30.0f)
@@ -1724,6 +1727,7 @@ public:
             ->setTextSize(20.0f)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+        // Add, apply changes to, or remove the selected emitter.
         row = new GuiElement(this, "");
         row
             ->setSize(GuiElement::GuiSizeMax, 30.0f)
@@ -1785,6 +1789,7 @@ public:
             std::vector<string> entries;
             entries.reserve(current_vector.size());
 
+            // Update the emitter list's entries.
             for (size_t i = 0; i < current_vector.size(); i++)
             {
                 const auto& e = current_vector[i];
@@ -1797,6 +1802,7 @@ public:
                 }));
             }
 
+            // Resize the emitter list.
             if (entries.size() != static_cast<size_t>(item_list->entryCount())
                 || entries != cached_entries)
             {
@@ -1831,6 +1837,7 @@ private:
 
 // BEGIN macros for GM tweak UI elements
 
+// Add a new tweak page for the given component.
 #define ADD_PAGE(LABEL, COMPONENT) \
     new_page = new GuiTweakPage(content); \
     new_page->has_component = [](sp::ecs::Entity e) { return e.hasComponent<COMPONENT>(); }; \
@@ -1841,12 +1848,14 @@ private:
     new_page->remove_component = [](sp::ecs::Entity e) { e.removeComponent<COMPONENT>(); }; \
     pages.push_back(new_page); \
     page_labels.push_back(LABEL);
+// Add a new label to this tweak page.
 #define ADD_LABEL(LABEL) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         row->setAttribute("margin", "0, 0, 10, 0"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->addBackground()->setAlignment(sp::Alignment::Center)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
     } while(0)
+// Add a field to tweak a string value for the given component.
 #define ADD_TEXT_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -1859,6 +1868,7 @@ private:
             if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = text; } \
         }); \
     } while(0)
+// Add a text field to tweak a float value for the given component.
 #define ADD_NUM_TEXT_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -1871,6 +1881,8 @@ private:
             if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = text.toFloat(); } \
         }); \
     } while(0)
+// Add a slider and text field to tweak a float value within a range for the
+// given component.
 #define ADD_NUM_SLIDER_TWEAK(LABEL, COMPONENT, MIN_VALUE, MAX_VALUE, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -1892,6 +1904,8 @@ private:
             } \
         }); \
     } while(0)
+// Add a slider and text field to tweak an integer value within a range for the
+// given component.
 #define ADD_INT_SLIDER_TWEAK(LABEL, COMPONENT, MIN_VALUE, MAX_VALUE, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -1909,6 +1923,7 @@ private:
             if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = static_cast<int>(text.toFloat()); } \
         }); \
     } while(0)
+// Add a toggle button to tweak a Boolean field for the given component.
 #define ADD_BOOL_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -1924,6 +1939,7 @@ private:
                 v->VALUE = ui->getValue(); \
         }); \
     } while(0)
+// Add a selector to select, add, and remove vector members of the given component.
 #define ADD_VECTOR(LABEL, COMPONENT, VECTOR) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -1931,25 +1947,28 @@ private:
         vector_selector = new GuiVectorTweak(row, "VECTOR_SELECTOR"); \
         vector_selector->update_func = [this]() -> size_t { if (auto v = entity.getComponent<COMPONENT>()) return v->VECTOR.size(); return 0; }; \
         auto add = new GuiButton(row, "", tr("tweak-button", "Add"), [this, vector_selector](){ if (auto v = entity.getComponent<COMPONENT>()) { v->VECTOR.emplace_back(); vector_selector->setSelectionIndex(v->VECTOR.size()); } }); \
-        add->setTextSize(20)->setSize(50, 30); \
+        add->setTextSize(20.0f)->setSize(50.0f, GuiElement::GuiSizeMax); \
         auto del = new GuiButton(row, "", tr("tweak-button", "Del"), [this](){ auto v = entity.getComponent<COMPONENT>(); if (v && v->VECTOR.size() > 0) v->VECTOR.pop_back(); }); \
-        del->setTextSize(20)->setSize(50, 30); \
+        del->setTextSize(20.0f)->setSize(50.0f, GuiElement::GuiSizeMax); \
     } while(0)
+// Add a text field to tweak a float value in a vector of the given component.
 #define ADD_VECTOR_NUM_TEXT_TWEAK(LABEL, COMPONENT, VECTOR, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiTextTweak(row); \
         ui->update_func = [this, vector_selector, ui]() -> string { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
                 return string(v->VECTOR[vector_selector->getSelectionIndex()].VALUE); \
             return ui->getText(); \
         }; \
         ui->callback([this, vector_selector](string text) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
                 v->VECTOR[vector_selector->getSelectionIndex()].VALUE = text.toFloat(); \
         }); \
     } while(0)
+// Add text fields to tweak a float value and its corresponding maximum value
+// in a vector of the given component.
 #define ADD_VECTOR_VALUE_MAX_TWEAK(LABEL, COMPONENT, VECTOR, VALUE, MAX_VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -1957,11 +1976,11 @@ private:
         auto ui = new GuiValueMaxTweak(row); \
         ui->val_update_func = [this, vector_selector, ui]() -> float { auto v = entity.getComponent<COMPONENT>(); \
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return float(v->VECTOR[vector_selector->getSelectionIndex()].VALUE); \
+                return static_cast<float>(v->VECTOR[vector_selector->getSelectionIndex()].VALUE); \
             return ui->val_input->getText().toFloat(); }; \
         ui->max_update_func = [this, vector_selector, ui]() -> float { auto v = entity.getComponent<COMPONENT>(); \
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return float(v->VECTOR[vector_selector->getSelectionIndex()].MAX_VALUE); \
+                return static_cast<float>(v->VECTOR[vector_selector->getSelectionIndex()].MAX_VALUE); \
             return ui->max_input->getText().toFloat(); }; \
         ui->val_callback = [this, vector_selector](float val) { auto v = entity.getComponent<COMPONENT>(); \
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
@@ -1970,6 +1989,8 @@ private:
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
                 v->VECTOR[vector_selector->getSelectionIndex()].MAX_VALUE = static_cast<std::remove_reference_t<decltype(v->VECTOR[0].MAX_VALUE)>>(val); }; \
     } while(0)
+// Add a toggle button to tweak a Boolean value in a vector of the given
+// component.
 #define ADD_VECTOR_BOOL_TWEAK(LABEL, COMPONENT, VECTOR, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row \
@@ -1984,6 +2005,8 @@ private:
                 return v->VECTOR[vector_selector->getSelectionIndex()]->VALUE; \
             return ui->getValue(); }; \
     } while(0)
+// Add toggle buttons to tweak a bitwise mask in a vector of the given
+// component.
 #define ADD_VECTOR_TOGGLE_MASK_TWEAK(LABEL, COMPONENT, VECTOR, VALUE, MASK) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -1996,6 +2019,8 @@ private:
                 return v->VECTOR[vector_selector->getSelectionIndex()].VALUE & (MASK); \
             return ui->getValue(); }; \
     } while(0)
+// Add a slider and text field to tweak a float value in a vector within a range
+// for the given component.
 #define ADD_VECTOR_NUM_SLIDER_TWEAK(LABEL, COMPONENT, VECTOR, MIN_VALUE, MAX_VALUE, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -2012,18 +2037,21 @@ private:
             return ui->value_entry->getText().toFloat(); \
         }; \
     } while(0)
+// Add a rotation dial to tweak a 0-360 float value for the given component.
 #define ADD_ROTATION_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 60.0f)->setAttribute("layout", "horizontal"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiRotationDialTweak(row); \
-        ui->update_func = [this, ui]() -> float { if (auto v = entity.getComponent<COMPONENT>()) return float(v->VALUE); return ui->value_entry->getText().toFloat(); }; \
+        ui->update_func = [this, ui]() -> float { if (auto v = entity.getComponent<COMPONENT>()) return static_cast<float>(v->VALUE); return ui->value_entry->getText().toFloat(); }; \
         ui->callback = [this](float val) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = static_cast<std::remove_reference_t<decltype(v->VALUE)>>(val); }; \
         new_page->apply_functions.push_back([this, ui]() { \
             string text = ui->value_entry->getText(); \
             if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = static_cast<std::remove_reference_t<decltype(v->VALUE)>>(fmodf(text.toFloat() + 360.0f, 360.0f)); } \
         }); \
     } while(0)
+// Add a rotation dial to tweak a 0-360 float value in a vector of the given
+// component.
 #define ADD_VECTOR_ROTATION_TWEAK(LABEL, COMPONENT, VECTOR, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 60.0f)->setAttribute("layout", "horizontal"); \
@@ -2031,12 +2059,14 @@ private:
         auto ui = new GuiRotationDialTweak(row); \
         ui->update_func = [this, vector_selector, ui]() -> float { auto v = entity.getComponent<COMPONENT>(); \
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return float(v->VECTOR[vector_selector->getSelectionIndex()].VALUE); \
+                return static_cast<float>(v->VECTOR[vector_selector->getSelectionIndex()].VALUE); \
             return ui->value_entry->getText().toFloat(); }; \
         ui->callback = [this, vector_selector](float val) { auto v = entity.getComponent<COMPONENT>(); \
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
                 v->VECTOR[vector_selector->getSelectionIndex()].VALUE = static_cast<std::remove_reference_t<decltype(v->VECTOR[0].VALUE)>>(val); }; \
     } while(0)
+// Add a selector to tweak an enumerated value in a vector of the given
+// component.
 #define ADD_VECTOR_ENUM_TWEAK(LABEL, COMPONENT, VECTOR, VALUE, MIN_VALUE, MAX_VALUE, STRING_CONVERT_FUNCTION) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -2053,7 +2083,9 @@ private:
             return ui->getSelectionIndex(); \
         }; \
     } while(0)
-    #define ADD_SHIP_SYSTEM_TWEAK(SYSTEM) \
+// Tweak the given ship system's properties using a collection of defined
+// fields.
+#define ADD_SHIP_SYSTEM_TWEAK(SYSTEM) \
       ADD_BOOL_TWEAK(tr("tweak-text", "Hackable"), SYSTEM, can_be_hacked); \
       ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Health current/max:"), SYSTEM, health, health_max); \
       ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Heat:"), SYSTEM, 0.0f, 1.0f, heat_level); \
@@ -2067,10 +2099,9 @@ private:
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change/sec:"), SYSTEM, coolant_change_rate_per_second); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change/sec:"), SYSTEM, power_change_rate_per_second); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair/sec:"), SYSTEM, auto_repair_per_second);
-    // Like ADD_SHIP_SYSTEM_TWEAK, but for a ShipSystem that is a member of a
-    // larger component (i.e. front/rear shields as ship systems of the Shields
-    // component)
-    #define ADD_SHIP_SYSTEM_TWEAK_MEMBER(COMPONENT, SUBSYSTEM) \
+// As ADD_SHIP_SYSTEM_TWEAK, but for a ShipSystem that is a member of another
+// component (i.e. front/rear shields as ship systems of the Shields component)
+#define ADD_SHIP_SYSTEM_TWEAK_MEMBER(COMPONENT, SUBSYSTEM) \
       ADD_BOOL_TWEAK(tr("tweak-text", "Hackable"), COMPONENT, SUBSYSTEM.can_be_hacked); \
       ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Health current/max:"), COMPONENT, SUBSYSTEM.health, SUBSYSTEM.health_max); \
       ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Heat:"), COMPONENT, 0.0f, 1.0f, SUBSYSTEM.heat_level); \
@@ -2084,9 +2115,8 @@ private:
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change/sec:"), COMPONENT, SUBSYSTEM.coolant_change_rate_per_second); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change/sec:"), COMPONENT, SUBSYSTEM.power_change_rate_per_second); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair/sec:"), COMPONENT, SUBSYSTEM.auto_repair_per_second);
-
-// New widget macros for additional component types
-
+// Select an entity from a list of extant entities as the value of a component
+// property.
 #define ADD_ENTITY_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -2109,7 +2139,8 @@ private:
             } \
         }); \
     } while(0)
-
+// Select an entity from a list of extant Database entities as the parent value
+// of an entity with the Database component.
 #define ADD_DATABASE_PARENT_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -2132,8 +2163,8 @@ private:
             } \
         }); \
     } while(0)
-
-#define ADD_VECTOR2_TWEAK(LABEL, COMPONENT, VALUE) do { \
+// Add fields to tweak a float X/Y-coordinate value for the given component.
+#define ADD_VEC2_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
@@ -2158,6 +2189,7 @@ private:
             } \
         }); \
     } while(0)
+// Add fields to tweak a float value and its corresponding maximum value.
 #define ADD_VALUE_MAX_TWEAK(LABEL, COMPONENT, VALUE, MAX_VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -2176,7 +2208,8 @@ private:
             } \
         }); \
     } while(0)
-
+// Add field a field to tweak the integer value of the given missile type array
+// index for the given component.
 #define ADD_MISSILE_ARRAY_TWEAK(LABEL, COMPONENT, ARRAY, INDEX) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -2185,7 +2218,7 @@ private:
         ui->update_func = [this]() -> string { if (auto v = entity.getComponent<COMPONENT>()) return string(v->ARRAY[INDEX]); return ""; }; \
         ui->callback([this](string text) { if (auto v = entity.getComponent<COMPONENT>()) v->ARRAY[INDEX] = text.toInt(); }); \
     } while(0)
-
+// Add fields to tweak an integer X/Y-coordinate value for the given component.
 #define ADD_IVEC2_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -2211,7 +2244,7 @@ private:
             } \
         }); \
     } while(0)
-
+// Add sliders and text fields to tweak an RGBA color value for a component.
 #define ADD_COLOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 150.0f)->setAttribute("layout", "horizontal"); \
@@ -2236,11 +2269,12 @@ private:
                 static_cast<uint8_t>(ui->a_slider->getValue())); \
         }); \
     } while(0)
-
+// Add sliders and text fields to tweak an RGB (no alpha) color value for a
+// component.
 #define ADD_VEC3_COLOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 120.0f)->setAttribute("layout", "horizontal"); \
-        (new GuiLabel(row, "", LABEL, 20))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
+        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiColorPicker(row, false); \
         ui->update_func = [this, ui]() -> glm::u8vec4 { \
             auto v = entity.getComponent<COMPONENT>(); \
@@ -2254,7 +2288,8 @@ private:
             if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = glm::vec3(ui->r_slider->getValue() / 255.0f, ui->g_slider->getValue() / 255.0f, ui->b_slider->getValue() / 255.0f); \
         }); \
     } while(0)
-
+// Add a scrolling text area to review the contents of a multiline text field.
+// TODO: Implement a multiline text editing GUI subclass to make this editable.
 #define ADD_TEXT_MULTILINE_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 150.0f)->setAttribute("layout", "horizontal"); \
@@ -2265,7 +2300,7 @@ private:
             return ui->getText(); \
         }; \
     } while(0)
-
+// Add a selector to tweak a faction-related value for a component.
 #define ADD_FACTION_SELECTOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -2288,7 +2323,7 @@ private:
             } \
         }); \
     } while(0)
-
+// Add a selector to tweak an enumerated value for a component.
 #define ADD_ENUM_TWEAK(LABEL, COMPONENT, VALUE, MIN_VALUE, MAX_VALUE, STRING_CONVERT_FUNCTION) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
@@ -2296,7 +2331,7 @@ private:
         auto ui = new GuiSelectorTweak(row, "ENUM_SELECTOR", [this](int index, string value) { \
             if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = static_cast<decltype(v->VALUE)>(index + MIN_VALUE); \
         }); \
-        for(int enum_value = MIN_VALUE; enum_value <= MAX_VALUE; enum_value++) \
+        for (int enum_value = MIN_VALUE; enum_value <= MAX_VALUE; enum_value++) \
             ui->addEntry(STRING_CONVERT_FUNCTION(static_cast<decltype(COMPONENT{}.VALUE)>(enum_value)), string(enum_value)); \
         ui->update_func = [this, ui]() -> int { \
             if (auto v = entity.getComponent<COMPONENT>()) return static_cast<int>(v->VALUE) - static_cast<int>(MIN_VALUE); \
@@ -2309,7 +2344,8 @@ private:
             } \
         }); \
     } while(0)
-
+// Add a selector to add or remove string values from an unordered set in a
+// component.
 #define ADD_STRING_SET_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 150.0f)->setAttribute("layout", "horizontal"); \
@@ -2332,7 +2368,8 @@ private:
             } \
         }; \
     } while(0)
-
+// Add a selector to add or remove string values from an unordered map in a
+// component.
 #define ADD_STRING_MAP_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 180.0f)->setAttribute("layout", "horizontal"); \
@@ -2353,7 +2390,8 @@ private:
             } \
         }; \
     } while(0)
-
+// Add fields to tweak a float X/Y-coordinate value of a vector for the given
+// component.
 #define ADD_VEC2_VECTOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 150.0f)->setAttribute("layout", "horizontal"); \
@@ -2377,7 +2415,7 @@ private:
             } \
         }; \
     } while(0)
-
+// Add fields to add, remove, and tweak key/value fields in a Database entity.
 #define ADD_DATABASE_KEYVALUE_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 180.0f)->setAttribute("layout", "horizontal"); \
@@ -2401,7 +2439,7 @@ private:
             } \
         }; \
     } while(0)
-
+// Add fields to add, remove, and tweak rooms in an InternalRooms entity.
 #define ADD_ROOM_VECTOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 150.0f)->setAttribute("layout", "horizontal"); \
@@ -2426,6 +2464,7 @@ private:
         }; \
     } while(0)
 
+// Add fields to add, remove, and tweak doors in an InternalRooms entity.
 #define ADD_DOOR_VECTOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 120.0f)->setAttribute("layout", "horizontal"); \
@@ -2472,9 +2511,6 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     search_filter = new GuiTextEntry(left_panel, "COMPONENT_SEARCH", "");
     search_filter
-        ->setTextSize(20.0f)
-        ->setSize(GuiElement::GuiSizeMax, 30.0f);
-    search_filter
         ->callback(
             [this](string value)
             {
@@ -2485,17 +2521,18 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
                 }
                 else showSearchResults(value);
             }
-        );
+        )
+        ->setTextSize(20.0f)
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     component_list = new GuiListbox(left_panel, "", [this](int index, string value)
     {
         if (in_search_view)
         {
-            if (index >= 0 && index < (int)search_result_indices.size())
+            if (index >= 0 && index < static_cast<int>(search_result_indices.size()))
             {
                 int pi = search_result_indices[index];
-                for (auto page : pages)
-                    page->hide();
+                for (auto page : pages) page->hide();
                 pages[pi]->show();
                 showPageDescription(pi);
             }
@@ -2520,7 +2557,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     GuiVectorTweak* vector_selector;
 
     // Transform component, custom implementation since it uses functions
-    // instead of direct access to members
+    // instead of direct access to members.
     ADD_PAGE(tr("tweak-tab", "Transform"), sp::Transform);
     new_page->description = tr("tweak-transform", "Sets the entity's position (X, Y) and rotation angle. Position is in game units (1000 = 1U), rotation in degrees (0 = right/east-facing/heading 90).");
     {
@@ -2531,7 +2568,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             ->setAttribute("layout", "horizontal");
         (new GuiLabel(row, "", tr("tweak-text", "Position:"), 20.0f))
             ->setAlignment(sp::Alignment::CenterRight)
-            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto ui = new GuiVec2Tweak(row);
         ui->update_func = [this, ui]() -> glm::vec2 {
             if (auto t = entity.getComponent<sp::Transform>())
@@ -2566,10 +2603,9 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         row
             ->setSize(GuiElement::GuiSizeMax, 60.0f)
             ->setAttribute("layout", "horizontal");
-        auto label = new GuiLabel(row, "", tr("tweak-text", "Rotation:"), 20.0f);
-        label
+        (new GuiLabel(row, "", tr("tweak-text", "Rotation:"), 20.0f))
             ->setAlignment(sp::Alignment::CenterRight)
-            ->setSize(GuiElement::GuiSizeMax, 60.0f);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto ui = new GuiRotationDialTweak(row);
         ui->update_func = [this, ui]() -> float {
             if (auto t = entity.getComponent<sp::Transform>())
@@ -2615,6 +2651,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Hull:"), Hull, current, max);
     ADD_BOOL_TWEAK(tr("tweak-text", "Allow destruction"), Hull, allow_destruction);
 
+    // Custom impulse command control.
     ADD_PAGE(tr("tweak-tab", "Impulse engine"), ImpulseEngine);
     new_page->description = tr("tweak-impulse", "Ship system for impulse propulsion. Controls forward/reverse max speeds and acceleration rates.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed forward:"), ImpulseEngine, max_speed_forward);
@@ -2623,16 +2660,15 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Acceleration reverse:"), ImpulseEngine, acceleration_reverse);
     ADD_LABEL(tr("tweak-text", "Impulse engine system"));
     ADD_SHIP_SYSTEM_TWEAK(ImpulseEngine);
-    ADD_LABEL(tr("tweak-text", "Impulse commands"));
+    ADD_LABEL(tr("tweak-text", "Impulse command"));
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row
             ->setSize(GuiElement::GuiSizeMax, 30.0f)
             ->setAttribute("layout", "horizontal");
-        auto label = new GuiLabel(row, "", tr("tweak-text", "Impulse speed:"), 20);
-        label
+        (new GuiLabel(row, "", tr("tweak-text", "Impulse speed:"), 20.0f))
             ->setAlignment(sp::Alignment::CenterRight)
-            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto ui = new GuiSliderTweak(row, "", -1.0f, 1.0f, 0.0f,
             [this](float value)
             {
@@ -2642,9 +2678,10 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         );
         ui
             ->addSnapValue(-1.0f, 0.1f)
+            ->addSnapValue(-0.5f, 0.1f)
             ->addSnapValue(0.0f, 0.1f)
-            ->addSnapValue(1.0f, 0.1f)
-            ->addOverlay(2u, 20.0f);
+            ->addSnapValue(0.5f, 0.1f)
+            ->addSnapValue(1.0f, 0.1f);
         ui->update_func = [this, ui]() -> float {
             if (auto v = entity.getComponent<ImpulseEngine>())
                 return v->request;
@@ -2652,19 +2689,23 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         };
     }
 
+    // Custom heading command control, which is distinct from Transform rotation
+    // setting.
     ADD_PAGE(tr("tweak-tab", "Maneuvering thrusters"), ManeuveringThrusters);
     new_page->description =  tr("tweak-maneuvering", "Ship system providing rotational thrusters for the ship. Speed is in degrees per second.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Rotational speed:"), ManeuveringThrusters, speed);
     ADD_LABEL(tr("tweak-text", "Maneuvering thrusters system"));
     ADD_SHIP_SYSTEM_TWEAK(ManeuveringThrusters);
-    ADD_LABEL(tr("tweak-text", "Heading control"));
+    ADD_LABEL(tr("tweak-text", "Heading command"));
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row->setSize(GuiElement::GuiSizeMax, 60.0f)->setAttribute("layout", "horizontal");
-        auto label = new GuiLabel(row, "", tr("tweak-text", "Target heading:"), 20.0f);
-        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 60.0f);
+        (new GuiLabel(row, "", tr("tweak-text", "Target heading:"), 20.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto ui = new GuiRotationDialTweak(row);
-        // Convert player heading (dial, 0=north) to/from internal angle (0=east)
+        // Convert player heading (0 = north) to/from internal rotation
+        // (0 = east).
         ui->callback = [this](float player_heading) {
             if (auto v = entity.getComponent<ManeuveringThrusters>())
                 v->target = fmodf(player_heading - 90.0f + 360.0f, 360.0f);
@@ -2683,15 +2724,15 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Seconds to full recharge from 0:"), CombatManeuveringThrusters, charge_time);
 
     ADD_PAGE(tr("tweak-tab", "Beam system"), BeamWeaponSys);
-    new_page->description =  tr("tweak-beam-system", "Ship system providing beam weapon configuration. Beam frequency affects damage against shields.\n\nEach beam weapon has a mount that defines its firing arc, the direction the arc points in, and its range, damage, and cycle time. It also optionally supports functioning as a rotating turret with a defined speed in tracking targets. Performance is affected by, and firing generates heat into, the Beam weapon system.");
+    new_page->description =  tr("tweak-beam-system", "Ship system providing beam weapon configuration. Beam frequency affects damage against shields.\n\nEach beam weapon has a mount that defines its firing arc, the direction the arc points in, and its range, damage, and cycle time. It also optionally supports functioning as a rotating turret with a defined speed in tracking targets. If a turret arc is defined, the beam direction rotates the beam arc within the larger turret arc and direction. Beam and turret performance are affected by the Beam weapon system, and firing generates additional heat into the system.");
     ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Frequency:"), BeamWeaponSys, 0u, 20u, frequency);
     ADD_LABEL(tr("tweak-text", "Beam weapons system"));
     ADD_SHIP_SYSTEM_TWEAK(BeamWeaponSys);
 
     ADD_LABEL(tr("tweak-text", "Beam mounts"));
     ADD_VECTOR(tr("tweak-vector", "Mount"), BeamWeaponSys, mounts);
-    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Arc:"), BeamWeaponSys, mounts, 0.0f, 360.0f, arc);
-    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Direction:"), BeamWeaponSys, mounts, direction);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Beam arc:"), BeamWeaponSys, mounts, 0.0f, 360.0f, arc);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Beam direction:"), BeamWeaponSys, mounts, direction);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), BeamWeaponSys, mounts, range);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), BeamWeaponSys, mounts, cycle_time);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Damage:"), BeamWeaponSys, mounts, damage);
@@ -2722,7 +2763,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow HVLI"), MissileTubes, mounts, type_allowed_mask, 1 << MW_HVLI);
 
     ADD_PAGE(tr("tweak-tab", "Shields"), Shields);
-    new_page->description = tr("tweak-shields", "Shield generators, including active state, frequency, calibration time, and energy cost. Multiple shield entries for front/rear arcs if an entity has 2 or more shield segments.");
+    new_page->description = tr("tweak-shields", "Shield generators, including active state, frequency, calibration time, and additional energy cost beyond ship system usage while activated. Ships can have a variable number of segments with equal arcs, and ships with 2 or more segments have separate front and rear shield ship systems.");
     ADD_LABEL(tr("tweak-text", "Front shield system"));
     ADD_SHIP_SYSTEM_TWEAK_MEMBER(Shields, front_system);
     ADD_LABEL(tr("tweak-text", "Rear shield system (2+ segments only)"));
@@ -2734,11 +2775,12 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR(tr("tweak-vector", "Shield segments"), Shields, entries);
     ADD_VECTOR_VALUE_MAX_TWEAK(tr("tweak-text", "Level current/max:"), Shields, entries, level, max);
 
+    // Custom controls for warp drive tweaks.
     ADD_PAGE(tr("tweak-tab", "Warp drive"), WarpDrive);
-    new_page->description = tr("tweak-warp", "Ship system for the warp propulsion drive. Max level sets the number of warp factors; speed per level and energy per second determine performance and efficiency.");
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max level:"), WarpDrive, max_level);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed per level:"), WarpDrive, speed_per_level);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy per second:"), WarpDrive, energy_warp_per_second);
+    new_page->description = tr("tweak-warp", "Ship system for the warp propulsion drive. Maximum level sets the highest available warp factor, with 0-max selectable as integer factors. Energy consumption while active is in addition to ship system energy consumption. Warp usage also generates heat while active.");
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Maximum level:"), WarpDrive, max_level);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed/level:"), WarpDrive, speed_per_level);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy consumed per level/sec:"), WarpDrive, energy_warp_per_second);
     ADD_LABEL(tr("tweak-text", "Warp drive system"));
     ADD_SHIP_SYSTEM_TWEAK(WarpDrive);
     ADD_LABEL(tr("tweak-text", "Warp commands"));
@@ -2771,8 +2813,9 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         };
     }
 
+    // Custom controls for jump drive tweaks.
     ADD_PAGE(tr("tweak-tab", "Jump drive"), JumpDrive);
-    new_page->description = tr("tweak-jump", "Ship system for the jump propulsion drive. Min and max distance define the available range in the jump drive controls.");
+    new_page->description = tr("tweak-jump", "Ship system for the jump propulsion drive. Minimum and maximum distance values define the available range in the jump drive controls.");
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Distance min/max:"), JumpDrive, min_distance, max_distance);
     {
         auto row = new GuiElement(new_page->tweaks, "");
@@ -2781,7 +2824,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             ->setAttribute("layout", "horizontal");
         (new GuiLabel(row, "", tr("tweak-text", "Charge:"), 20.0f))
             ->setAlignment(sp::Alignment::CenterRight)
-            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto ui = new GuiSliderTweak(row, "", 5000.0f, 50000.0f, 0.0f,
             [this](float value)
             {
@@ -2877,14 +2920,14 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
 
-    // AI Controller component
-    // Special handling: Component removal is disabled due to unique_ptr<ShipAI> destruction issues
+    // AI Controller component removal is disabled due to unique_ptr<ShipAI>
+    // destruction issues that cause compilation issues due to incomplete type.
+    // Use scripts to remove AI component.
+    // TODO: Surface this better in the UI.
     new_page = new GuiTweakPage(content);
     new_page->has_component = [](sp::ecs::Entity e) { return e.hasComponent<AIController>(); };
     new_page->add_component = [](sp::ecs::Entity e) { e.addComponent<AIController>(); };
     new_page->remove_component = [](sp::ecs::Entity e) {
-        // Removal disabled: AIController contains unique_ptr<ShipAI> which causes
-        // compilation issues with incomplete type. Use scripts to remove AI component.
         LOG(Warning, "AIController component removal not supported via Tweaks dialog");
     };
     pages.push_back(new_page);
@@ -2893,52 +2936,51 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     ADD_ENUM_TWEAK(tr("tweak-text", "Orders:"), AIController, orders,
         static_cast<int>(AIOrder::Idle), static_cast<int>(AIOrder::Attack), getAIOrderString);
-    ADD_VECTOR2_TWEAK(tr("tweak-text", "Order target location:"), AIController, order_target_location);
+    ADD_VEC2_TWEAK(tr("tweak-text", "Order target location:"), AIController, order_target_location);
     ADD_ENTITY_TWEAK(tr("tweak-text", "Order target:"), AIController, order_target);
     // ADD_TEXT_TWEAK(tr("tweak-text", "AI name:"), AIController, new_name);
 
-    // Orbit component - allows entities to orbit around a target or fixed point
+    // Orbit component overrides position/propulsion controls.
     ADD_PAGE(tr("tweak-tab", "Orbit"), Orbit);
     new_page->description = tr("tweak-orbit", "Defines simple orbital movement by this entity around another entity (orbit target) or specified coordinates (orbit coordinates) at a defined distance and period.");
     ADD_ENTITY_TWEAK(tr("tweak-text", "Orbit center target:"), Orbit, target);
-    ADD_VECTOR2_TWEAK(tr("tweak-text", "Orbit center coordinates:"), Orbit, center);
+    ADD_VEC2_TWEAK(tr("tweak-text", "Orbit center coordinates:"), Orbit, center);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit distance:"), Orbit, distance);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Orbit period (seconds):"), Orbit, time);
 
-    // Faction component - assigns entity to a faction
     // Redundant with GM screen faction selector, but this allows addition/removal
-    // of the component itself
+    // of the component itself.
     ADD_PAGE(tr("tweak-tab", "Faction"), Faction);
     new_page->description = tr("tweak-faction", "The faction to which this entity belongs. Determines which entities are friendly, neutral, or hostile in combat and interactions. This can also be set using the faction selector at the top left of the GM screen.");
     ADD_FACTION_SELECTOR_TWEAK(tr("tweak-text", "Faction:"), Faction, entity);
 
-    // Spin component - makes entity rotate continuously
+    // Spin component overrides other rotation controls.
     ADD_PAGE(tr("tweak-tab", "Spin"), Spin);
     new_page->description = tr("tweak-spin", "Makes the entity rotate continuously at the given rate in degrees per second. Useful for terrain and decorative objects, such as asteroids and debris. Ships should use the Manuvering thrusters component instead.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Rotation rate (degrees/second):"), Spin, rate);
 
-    // LifeTime component - entity expires after lifetime seconds
     ADD_PAGE(tr("tweak-tab", "Life time"), LifeTime);
     new_page->description = tr("tweak-lifetime", "Defines a time-limited existence for this entity, and automatically destroys it when the remaining lifetime in seconds expires.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Remaining lifetime (seconds):"), LifeTime, lifetime);
 
-    // WarpJammer component - prevents ships from warping within range
     ADD_PAGE(tr("tweak-tab", "Warp jammer"), WarpJammer);
     new_page->description = tr("tweak-warp-jammer", "Creates an area in which where warp and jump drives cannot be activated. Useful for trapping or containing ships.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Jamming range:"), WarpJammer, range);
 
-    // Zone component - defines areas with visual effects and properties
+    // TODO: Add a custom interface to draw zones on the map.
     ADD_PAGE(tr("tweak-tab", "Zone"), Zone);
     new_page->description = tr("tweak-zone", "A named region, typically visible on radars as a colored region with a label. Can optionally change the skybox while within the zone, with an optional transition border. Scripts can determine whether an entity is within a Zone. Used for mission areas, hazard zones, map regions, and special effects.");
     ADD_COLOR_TWEAK(tr("tweak-text", "Zone color:"), Zone, color);
     ADD_TEXT_TWEAK(tr("tweak-text", "Label:"), Zone, label);
-    ADD_VECTOR2_TWEAK(tr("tweak-text", "Label offset:"), Zone, label_offset);
+    ADD_VEC2_TWEAK(tr("tweak-text", "Label offset:"), Zone, label_offset);
     ADD_TEXT_TWEAK(tr("tweak-text", "Skybox:"), Zone, skybox);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Skybox fade distance:"), Zone, skybox_fade_distance);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), Zone, radius);
     ADD_VEC2_VECTOR_TWEAK(tr("tweak-text", "Outline points:"), Zone, outline);
 
-    // Database component - science database entries
+    // Database component adds entries to the science database. Designed for
+    // entities that aren't selectable on the map, but can be applied to them.
+    // See GuiDatabaseParentPicker for an interface to select these entities.
     ADD_PAGE(tr("tweak-tab", "Database"), Database);
     new_page->description = tr("tweak-database", "Science database entry for this entity. Defines the name, description, key-value data pairs, and image shown on the Science, Operations, and Database screens. To modify the main Science database entries, which aren't selectable on the map, use the Databse button on the GM screen.");
     ADD_DATABASE_PARENT_TWEAK(tr("tweak-text", "Parent entry:"), Database, parent);
@@ -2948,30 +2990,26 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_TEXT_TWEAK(tr("tweak-text", "Description:"), Database, description);
     ADD_TEXT_TWEAK(tr("tweak-text", "Image:"), Database, image);
 
-    // MoveTo component - move entity to target location at fixed speed
     ADD_PAGE(tr("tweak-tab", "Move to"), MoveTo);
     new_page->description = tr("tweak-moveto", "Moves the entity to the target location in a straight line at a fixed rate of speed. Used by default for probes instead of propulsion. Ships should use the Impulse engine component instead.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), MoveTo, speed);
-    ADD_VECTOR2_TWEAK(tr("tweak-text", "Target position:"), MoveTo, target);
+    ADD_VEC2_TWEAK(tr("tweak-text", "Target position:"), MoveTo, target);
 
-    // AvoidObject component - entity is avoided by pathfinding AI
     ADD_PAGE(tr("tweak-tab", "Avoid object"), AvoidObject);
     new_page->description = tr("tweak-avoid-object", "Marks this entity as an obstacle for AI pathfinding. Ships with AI will route around entities with this component using the given range.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Avoidance range:"), AvoidObject, range);
 
-    // DelayedAvoidObject component - entity becomes avoidable after delay
     ADD_PAGE(tr("tweak-tab", "Delayed avoid object"), DelayedAvoidObject);
     new_page->description = tr("tweak-delayed-avoid-object", "Pathfinding obstacle with an activation delay period. Ships pass through this area until the activation delay countdown expires, then avoid it using the given range.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Activation delay (seconds):"), DelayedAvoidObject, delay);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Avoidance range:"), DelayedAvoidObject, range);
 
-    // Target component - entity reference for targeting systems
     ADD_PAGE(tr("tweak-tab", "Target"), Target);
     new_page->description = tr("tweak-target", "The entity targeted by this entity's weapons (beam/missile) or AI orders.");
     ADD_ENTITY_TWEAK(tr("tweak-text", "Target entity:"), Target, entity);
 
-    // Sfx component - plays a sound effect once
-    /* Unclear how to get this to work, since the sound plays immediately after
+    /* Sfx component, plays a sound effect once
+       Unclear how to get this to work, since the sound plays immediately after
        being added and toggling the played property doesn't seem to replay it.
     ADD_PAGE(tr("tweak-tab", "Sound effect"), Sfx);
     ADD_TEXT_TWEAK(tr("tweak-text", "Sound file:"), Sfx, sound);
@@ -2980,28 +3018,27 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_BOOL_TWEAK(tr("tweak-text", "Played"), Sfx, played);
     */
 
-    // InternalRooms component - ship interior layout with rooms and doors
     ADD_PAGE(tr("tweak-tab", "Internal rooms"), InternalRooms);
     new_page->description = tr("tweak-missile-internalrooms", "Defines the ship's interior room layout, assigned ship systems for repair, and door positions. Coordinates are from the top-left, and rooms are sized from the top-left point of the room, where 1 unit = the size of 1 repair crew.");
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto repair"), InternalRooms, auto_repair_enabled);
     ADD_ROOM_VECTOR_TWEAK(tr("tweak-text", "Rooms:"), InternalRooms, rooms);
     ADD_DOOR_VECTOR_TWEAK(tr("tweak-text", "Doors:"), InternalRooms, doors);
 
-    // InternalRepairCrew component - crew member repair and unhack rates
     ADD_PAGE(tr("tweak-tab", "Internal repair crew"), InternalRepairCrew);
     new_page->description = tr("tweak-internalrepaircrew", "Sets the repair and unhack rates for interior repair crew. Affects how quickly damage is repaired per second when a repair crew is in an Internal room for that system.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Repair per second:"), InternalRepairCrew, repair_per_second);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Unhack per second:"), InternalRepairCrew, unhack_per_second);
 
-    // TODO: InternalCrew component disabled — adding it via GM Tweaks destroys the entity.
-    // Needs a different approach before re-enabling.
-    // ADD_PAGE(tr("tweak-tab", "Internal crew"), InternalCrew);
-    // ADD_ENTITY_TWEAK(tr("tweak-text", "Ship:"), InternalCrew, ship);
-    // ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Move speed:"), InternalCrew, move_speed);
-    // ADD_VECTOR2_TWEAK(tr("tweak-text", "Position:"), InternalCrew, position);
-    // ADD_IVEC2_TWEAK(tr("tweak-text", "Target position:"), InternalCrew, target_position);
+    /* TODO: InternalCrew component disabled. Adding it via GM Tweaks destroys the entity.
+       Needs a different approach before re-enabling.
+
+    ADD_PAGE(tr("tweak-tab", "Internal crew"), InternalCrew);
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Ship:"), InternalCrew, ship);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Move speed:"), InternalCrew, move_speed);
+    ADD_VEC2_TWEAK(tr("tweak-text", "Position:"), InternalCrew, position);
+    ADD_IVEC2_TWEAK(tr("tweak-text", "Target position:"), InternalCrew, target_position);
+    */
     
-    // PickupCallback component - entity that gives items on touch and destroys itself
     ADD_PAGE(tr("tweak-tab", "Pickup"), PickupCallback);
     new_page->description = tr("tweak-pickup", "If present, this component makes this entity collectible by other entities. Can grant energy, missiles, or other resources to an entity that touches it, then immediately destroys itself. Can be set to be picked up only by player ships.");
     ADD_BOOL_TWEAK(tr("tweak-text", "Only players can pickup"), PickupCallback, player);
@@ -3012,18 +3049,16 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give EMP:"), PickupCallback, give_missile, MW_EMP);
     ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give HVLI:"), PickupCallback, give_missile, MW_HVLI);
 
-    // CollisionCallback component - entity that triggers a callback on touch
     ADD_PAGE(tr("tweak-tab", "Collision callback"), CollisionCallback);
     new_page->description = tr("tweak-collision-callback", "Triggers a Lua script callback when another entity touches this one. Callback must be set through Lua scripting. Optionally restricted to player-ship collisions only.");
     ADD_BOOL_TWEAK(tr("tweak-text", "Execute only if players collide"), CollisionCallback, player);
 
-    // DockingBay component - allows other entities to dock with this entity
     ADD_PAGE(tr("tweak-tab", "Docking bay"), DockingBay);
     new_page->description = tr("tweak-docking-bay", "Allows ships to dock at this entity. Configures ship classes and services (energy transfer, repair, shields, probe restocking, AI ship missile restocking).");
     ADD_STRING_SET_TWEAK(tr("tweak-text", "External dock classes:"), DockingBay, external_dock_classes);
     ADD_STRING_SET_TWEAK(tr("tweak-text", "Internal dock classes:"), DockingBay, internal_dock_classes);
     ADD_LABEL(tr("tweak-text", "Docking bay services"));
-    // DockingBay flags - custom toggle tweaks for bitfield
+    // DockingBay flags, custom toggle tweaks for bitfield
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row
@@ -3125,7 +3160,6 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         };
     }
 
-    // DockingPort component - allows this entity to dock with others
     ADD_PAGE(tr("tweak-tab", "Docking port"), DockingPort);
     new_page->description = tr("tweak-docking-port", "Allows this entity to dock with an entity possessing a Docking bay component. Tracks current docking state, target, and optional missile auto-reload.");
     ADD_TEXT_TWEAK(tr("tweak-text", "Dock class:"), DockingPort, dock_class);
@@ -3134,7 +3168,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         static_cast<int>(DockingPort::State::NotDocking),
         static_cast<int>(DockingPort::State::Docked), getDockingStateString);
     ADD_ENTITY_TWEAK(tr("tweak-text", "Dock target:"), DockingPort, target);
-    ADD_VECTOR2_TWEAK(tr("tweak-text", "Docked offset:"), DockingPort, docked_offset);
+    ADD_VEC2_TWEAK(tr("tweak-text", "Docked offset:"), DockingPort, docked_offset);
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto reload missiles"), DockingPort, auto_reload_missiles);
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Reload timer:"), DockingPort, auto_reload_missile_delay, auto_reload_missile_time);
 
@@ -3145,7 +3179,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_ENUM_TWEAK(tr("tweak-text", "Main screen overlay:"), PlayerControl, main_screen_overlay, 0, 1, mainScreenOverlayToLocaleString);
     ADD_ENUM_TWEAK(tr("tweak-text", "Alert level:"), PlayerControl, alert_level, 0, 2, alertLevelToLocaleString);
     ADD_LABEL(tr("tweak-text", "Allowed crew positions"));
-    for (int i = 0; i < int(CrewPosition::MAX); i++)
+    for (int i = 0; i < static_cast<int>(CrewPosition::MAX); i++)
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row
@@ -3193,12 +3227,10 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Probes:"), ScanProbeLauncher, stock, max);
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Recharge:"), ScanProbeLauncher, recharge, charge_time);
 
-    // AllowRadarLink component - marks entity as a linkable radar probe
     ADD_PAGE(tr("tweak-tab", "Allow radar link"), AllowRadarLink);
     new_page->description = tr("tweak-radar-link", "Marks this entity as a radar-linked probe. The defined owner entity receives the probe's sensor data, which can be viewed in Probe View on the Science or Operations player screens.");
     ADD_ENTITY_TWEAK(tr("tweak-text", "Owner:"), AllowRadarLink, owner);
 
-    // ShareShortRangeRadar component - entity shares its short-range radar data
     ADD_PAGE(tr("tweak-tab", "Share short-range radar"), ShareShortRangeRadar);
     new_page->description = tr("tweak-share-radar", "Causes this entity to share its short-range radar sensor data with allied entities in sensor range.");
 
@@ -3224,7 +3256,6 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Attraction force:"), Gravity, force);
     ADD_BOOL_TWEAK(tr("tweak-text", "Proximity damage"), Gravity, damage);
 
-    // RadarTrace component - radar display settings for this entity
     ADD_PAGE(tr("tweak-tab", "Radar trace"), RadarTrace);
     new_page->description = tr("tweak-radar-trace", "Controls how this entity appears on radar. Defines its icon, display size, color (if not set by faction), and visibility flags.");
     ADD_TEXT_TWEAK(tr("tweak-text", "Icon:"), RadarTrace, icon);
@@ -3333,39 +3364,33 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         };
     }
 
-    // RawRadarSignatureInfo component - raw radar signature values
     ADD_PAGE(tr("tweak-tab", "Raw radar signature"), RawRadarSignatureInfo);
     new_page->description = tr("tweak-raw-radar-signature", "Permanent radar signature values (gravity, electrical, biological) that modify the sensor bands on Science and Operations radars. WIP; might not function.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Gravity:"), RawRadarSignatureInfo, gravity);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Electrical:"), RawRadarSignatureInfo, electrical);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Biological:"), RawRadarSignatureInfo, biological);
 
-    // DynamicRadarSignatureInfo component - live radar signature values
     ADD_PAGE(tr("tweak-tab", "Dynamic radar signature"), DynamicRadarSignatureInfo);
     new_page->description = tr("tweak-dynamic-radar-signature", "Live radar signature values updated by the game engine during play, reflecting current ship state. For modifiable base values, see the Raw radar signature component. WIP; might not function.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Gravity:"), DynamicRadarSignatureInfo, gravity);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Electrical:"), DynamicRadarSignatureInfo, electrical);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Biological:"), DynamicRadarSignatureInfo, biological);
 
-    // RadarLink component - entity is linked via radar probe
     ADD_PAGE(tr("tweak-tab", "Radar link"), RadarLink);
     new_page->description = tr("tweak-radar-link", "Determines whether this entity is capable of receiving a radar link from another entity, such as a probe.");
     ADD_ENTITY_TWEAK(tr("tweak-text", "Linked entity:"), RadarLink, linked_entity);
 
-    // MissileFlight component - in-flight missile parameters
     ADD_PAGE(tr("tweak-tab", "Missile flight"), MissileFlight);
     new_page->description = tr("tweak-missile-flight", "Parameters relevant if this entity is a missile in flight. Defines maximum travel speed and flight timeout before self-destruction.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), MissileFlight, speed);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Timeout:"), MissileFlight, timeout);
 
-    // MissileHoming component - homing guidance parameters
     ADD_PAGE(tr("tweak-tab", "Missile homing"), MissileHoming);
     new_page->description = tr("tweak-missile-homing", "Defines this entity's homing guidance system, turn rate for tracking, acquisition range, and the current tracked target entity. Most relevant if this entity is a missile.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Turn rate:"), MissileHoming, turn_rate);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), MissileHoming, range);
     ADD_ENTITY_TWEAK(tr("tweak-text", "Target:"), MissileHoming, target);
 
-    // ExplodeOnTouch component - explosion triggered on collision
     ADD_PAGE(tr("tweak-tab", "Explode on touch"), ExplodeOnTouch);
     new_page->description = tr("tweak-explode-on-touch", "Explodes upon collision with another entity. Defines center/edge damage falloff, blast radius, owner, damage type, and explosion sound.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Damage at center:"), ExplodeOnTouch, damage_at_center);
@@ -3376,11 +3401,9 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         static_cast<int>(DamageType::Energy), static_cast<int>(DamageType::EMP), damageTypeToString);
     ADD_TEXT_TWEAK(tr("tweak-text", "Explosion SFX:"), ExplodeOnTouch, explosion_sfx);
 
-    // ExplodeOnTimeout component - marker only, no properties
     ADD_PAGE(tr("tweak-tab", "Explode on timeout"), ExplodeOnTimeout);
     new_page->description = tr("tweak-explode-on-timeout", "Marker component for missiles or other weapons that detonate when their Missile flight component flight timer expires.");
 
-    // DelayedExplodeOnTouch component - delayed explosion on collision
     ADD_PAGE(tr("tweak-tab", "Delayed explode on touch"), DelayedExplodeOnTouch);
     new_page->description = tr("tweak-delayed-explode-on-touch", "Contact detonation with an arming period. Doesn't trigger until the trigger holdoff delay expires after first contact.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Damage at center:"), DelayedExplodeOnTouch, damage_at_center);
@@ -3393,7 +3416,6 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Holdoff/delay:"), DelayedExplodeOnTouch, trigger_holdoff_delay, delay);
     ADD_BOOL_TWEAK(tr("tweak-text", "Triggered"), DelayedExplodeOnTouch, triggered);
 
-    // ConstantParticleEmitter component - continuous particle emission
     ADD_PAGE(tr("tweak-tab", "Particle emitter"), ConstantParticleEmitter);
     new_page->description = tr("tweak-constant-particle", "Defines a continuous particle effect that this entity emits. The color shifts from start to end colors linearly across each particle's lifetime.");
     ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Delay/Interval:"), ConstantParticleEmitter, delay, interval);
@@ -3404,7 +3426,6 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VEC3_COLOR_TWEAK(tr("tweak-text", "Start color:"), ConstantParticleEmitter, start_color);
     ADD_VEC3_COLOR_TWEAK(tr("tweak-text", "End color:"), ConstantParticleEmitter, end_color);
 
-    // MeshRenderComponent - 3D mesh rendering
     ADD_PAGE(tr("tweak-tab", "Mesh render"), MeshRenderComponent);
     new_page->description = tr("tweak-mesh-render", "3D mesh rendering. Defines the model file, its scale, and its offset, and also its texture and texture maps. Mesh and texture paths are relative to the resources directory.");
     {
@@ -3422,7 +3443,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
             return "";
         };
-        ui->callback([this](string text)
+        ui->callback(
+            [this](string text)
             {
                 if (auto v = entity.getComponent<MeshRenderComponent>())
                     v->mesh.name = text;
@@ -3444,7 +3466,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
             return "";
         };
-        ui->callback([this](string text)
+        ui->callback(
+            [this](string text)
             {
                 if (auto v = entity.getComponent<MeshRenderComponent>())
                     v->texture.name = text;
@@ -3512,8 +3535,13 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
             return "";
         };
-        ui->callback([this](string text)
-            { if (auto v = entity.getComponent<MeshRenderComponent>()) v->normal_texture.name = text; });
+        ui->callback(
+            [this](string text)
+            {
+                if (auto v = entity.getComponent<MeshRenderComponent>())
+                    v->normal_texture.name = text;
+            }
+        );
     }
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Scale:"), MeshRenderComponent, scale);
     {
@@ -3545,7 +3573,6 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         z_ui->callback([this](string t) { if (auto v = entity.getComponent<MeshRenderComponent>()) v->mesh_offset.z = t.toFloat(); });
     }
 
-    // EngineEmitter component - engine particle effects
     ADD_PAGE(tr("tweak-tab", "Engine emitter"), EngineEmitter);
     new_page->description = tr("tweak-energy-emitter", "Engine exhaust particle effects for ships. Each emitter has a position on the hull, a velocity direction, and a color.");
     {
@@ -3555,7 +3582,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             ->setAttribute("layout", "horizontal");
         (new GuiLabel(row, "", tr("tweak-text", "Emitters:"), 20.0f))
             ->setAlignment(sp::Alignment::CenterRight)
-            ->setSize(GuiElement::GuiSizeMax, 210.0f);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto ui = new GuiEngineEmittersTweak(row);
         ui->update_func = [this]() -> std::vector<EngineEmitter::Emitter> {
             if (auto v = entity.getComponent<EngineEmitter>()) return v->emitters;
@@ -3586,18 +3613,15 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         };
     }
 
-    // BillboardRenderer component - billboard sprite rendering
     ADD_PAGE(tr("tweak-tab", "Billboard renderer"), BillboardRenderer);
     new_page->description = tr("tweak-billboard-renderer", "Flat sprite billboard. Renders a 2D texture facing the camera at a configurable size.");
     ADD_TEXT_TWEAK(tr("tweak-text", "Texture:"), BillboardRenderer, texture);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Size:"), BillboardRenderer, size);
 
-    // NebulaRenderer component - nebula cloud rendering
     ADD_PAGE(tr("tweak-tab", "Nebula renderer"), NebulaRenderer);
     new_page->description = tr("tweak-nebula-renderer", "Nebula cloud rendering. Defines how far from the nebula it should be visible in 3D views.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Render range:"), NebulaRenderer, render_range);
 
-    // PlanetRender component - planet rendering
     ADD_PAGE(tr("tweak-tab", "Planet renderer"), PlanetRender);
     new_page->description = tr("tweak-planet-renderer", "Spherical planet rendering with surface texture, cloud layer, atmosphere glow, and size properties.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Size:"), PlanetRender, size);
@@ -3609,7 +3633,6 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_TEXT_TWEAK(tr("tweak-text", "Atmosphere texture:"), PlanetRender, atmosphere_texture);
     ADD_VEC3_COLOR_TWEAK(tr("tweak-text", "Atmosphere color:"), PlanetRender, atmosphere_color);
 
-    // ExplosionEffect component - in-progress explosion visual
     ADD_PAGE(tr("tweak-tab", "Explosion effect"), ExplosionEffect);
     new_page->description = tr("tweak-explosion-effect", "Defines and initates a visual effect for an explosion. Controls the explosion's size and remaining lifetime.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Lifetime:"), ExplosionEffect, lifetime);
@@ -3630,6 +3653,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         ->setSize(300.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, -50, 20, 0");
 
+    // Define navigation groups by tweak page indices.
+    // TODO: Enum for tweak pages instead of brittle ints.
     component_groups = {
         {tr("tweak-group", "Core"), {0, 1}},
         {tr("tweak-group", "Identity"), {2, 3, 18, 47}},
@@ -3728,12 +3753,11 @@ void GuiEntityTweak::showSearchResults(const string& query)
     in_group_view = false;
     in_search_view = true;
     current_group_index = -1;
-    for (auto page : pages)
-        page->hide();
+    for (auto page : pages) page->hide();
     search_result_indices.clear();
     component_list->clear();
     string lower_query = query.lower();
-    for (int i = 0; i < (int)page_labels.size(); i++)
+    for (int i = 0; i < static_cast<int>(page_labels.size()); i++)
     {
         if (page_labels[i].lower().find(lower_query) != -1)
         {
@@ -3755,7 +3779,7 @@ void GuiEntityTweak::showSearchResults(const string& query)
 
 void GuiEntityTweak::showPageDescription(int page_index)
 {
-    if (page_index >= 0 && page_index < (int)pages.size())
+    if (page_index >= 0 && page_index < static_cast<int>(pages.size()))
         component_description->setText(pages[page_index]->description);
     else
         component_description->setText("");
@@ -3770,14 +3794,16 @@ GuiTweakPage::GuiTweakPage(GuiContainer* owner)
         else
             add_component(entity);
     });
-    add_remove_button->setSize(300, 50)->setAttribute("alignment", "topcenter");
+    add_remove_button
+        ->setSize(300.0f, 50.0f)
+        ->setAttribute("alignment", "topcenter");
 
     tweaks = new GuiScrollContainer(this, "TWEAKS");
     tweaks
         ->setPosition(0.0f, 75.0f, sp::Alignment::TopLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setMargins(30.0f, 0.0f)
         ->setAttribute("layout", "vertical");
-    tweaks->setMargins(30.0f, 0.0f);
 }
 
 void GuiTweakPage::open(sp::ecs::Entity e)
@@ -3787,12 +3813,16 @@ void GuiTweakPage::open(sp::ecs::Entity e)
 
 void GuiTweakPage::onDraw(sp::RenderTarget& target)
 {
-    if (has_component(entity)) {
+    if (has_component(entity))
+    {
         add_remove_button->setText(tr("tweak-button", "Remove component"));
         add_remove_button->setStyle("button.toggle.on");
-    } else {
+    }
+    else
+    {
         add_remove_button->setText(tr("tweak-button", "Create component"));
         add_remove_button->setStyle("button.toggle.off");
     }
+
     tweaks->show();
 }
