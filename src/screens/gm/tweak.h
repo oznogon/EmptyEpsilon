@@ -2,6 +2,7 @@
 
 #include "gui/gui2_panel.h"
 #include "ecs/entity.h"
+#include <vector>
 
 class GuiButton;
 class GuiListbox;
@@ -34,6 +35,8 @@ public:
     GuiButton* add_remove_button;
     // Scrolling container for tweak properties (center column).
     GuiScrollContainer* tweaks;
+    // The page's label, as used in the GuiEntityTweak vector of tweak pages.
+    string label;
     // A summary of the component's function and its notable properties
     // (right column).
     string description;
@@ -62,15 +65,6 @@ private:
     // Show the description for the given tweak page.
     void showPageDescription(int page_index);
 
-    // Groupings of tweak pages by index.
-    struct ComponentGroup
-    {
-        // Name of the group, as displayed in the component_list when in_group_view.
-        string name;
-        // Indices of tweak pages that belong to this group.
-        std::vector<int> page_indices;
-    };
-
     // Entity selected for tweaking.
     sp::ecs::Entity entity;
     GuiElement* content;
@@ -80,7 +74,11 @@ private:
     // TODO: Move to GuiTweakPage?
     std::vector<string> page_labels;
     // Groups of components to organize tweak page navigation.
-    std::vector<ComponentGroup> component_groups;
+    struct TweakGroup {
+        string name;
+        std::vector<int> page_indices;
+    };
+    std::vector<TweakGroup> component_groups;
     // Search field for selecting a component's tweak page.
     GuiTextEntry* search_filter;
     // List of components, populated by the group or search results.
@@ -93,6 +91,6 @@ private:
     // TODO: Should be a flag or single bool instead of two bools?
     bool in_group_view = true;
     bool in_search_view = false;
-    // Index of the selected ComponentGroup.
+    // Index of the selected component group.
     int current_group_index = -1;
 };
