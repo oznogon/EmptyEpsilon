@@ -234,6 +234,7 @@ public:
     GuiSliderTweak* setValue(float value)
     {
         slider->setValue(value);
+        // TODO: Don't show decimal digits if the slider tweak is for integers.
         value_entry->setText(string(value));
         return this;
     }
@@ -1913,14 +1914,13 @@ private:
         auto ui = new GuiSliderTweak(row, "", MIN_VALUE, MAX_VALUE, 0u, [this](float number) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = number; }); \
         for (float i = MIN_VALUE; i <= MAX_VALUE; i++) \
             ui->addSnapValue(i, 0.5f); \
-        ui->addOverlay(0u, 20.0f); \
         ui->update_func = [this, ui]() -> float { \
             if (auto v = entity.getComponent<COMPONENT>()) \
                 return v->VALUE; \
             return ui->value_entry->getText().toFloat(); }; \
         new_page->apply_functions.push_back([this, ui]() { \
             string text = ui->value_entry->getText(); \
-            if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = static_cast<int>(text.toFloat()); } \
+            if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = text.toInt(); } \
         }); \
     } while(0)
 // Add a toggle button to tweak a Boolean field for the given component.
@@ -2744,8 +2744,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     // Custom heading command control, which is distinct from Transform rotation
     // setting.
     ADD_PAGE(tr("tweak-tab", "Maneuvering thrusters"), ManeuveringThrusters);
-    new_page->description =  tr("tweak-maneuvering", "Ship system providing rotational thrusters for the ship. Speed is in degrees per second.");
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Rotational speed:"), ManeuveringThrusters, speed);
+    new_page->description =  tr("tweak-maneuvering", "Ship system providing rotational thrusters for the ship.");
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Rotational speed (deg/sec):"), ManeuveringThrusters, speed);
     ADD_LABEL(tr("tweak-text", "Maneuvering thrusters system"));
     ADD_SHIP_SYSTEM_TWEAK(ManeuveringThrusters);
     ADD_LABEL(tr("tweak-text", "Heading command"));
@@ -2772,7 +2772,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Combat thrusters"), CombatManeuveringThrusters);
-    new_page->description =  tr("tweak-combatmaneuvering", "Boost and strafe capability. Charge is consumed on use and recharges over time (charge_time seconds to full). If this entity has the Coolant component, this generates heat in the Maneuvering thrusters system.");
+    new_page->description =  tr("tweak-combatmaneuvering", "Boost and strafe capability. Charge is consumed on use and recharges over charge_time seconds to full). If this entity has the Coolant component, this generates heat in the Maneuvering thrusters system.");
     ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Charge available:"), CombatManeuveringThrusters, 0.0f, 1.0f, charge);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Seconds to full recharge from 0:"), CombatManeuveringThrusters, charge_time);
     addPageToGroup(position_movement_group);
@@ -3761,13 +3761,17 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     component_description
         ->setTextSize(26.0f)
         ->setSize(300.0f, GuiElement::GuiSizeMax)
-        ->setAttribute("margin", "0, -50, 20, 0");
+        ->setAttribute("margin", "0, 0, 20, 0");
 
     showGroups();
 
-    (new GuiButton(this, "CLOSE_BUTTON", tr("button", "Close"), [this]() {
-        hide();
-    }))
+    // Button to close the tweaks window.
+    (new GuiButton(this, "CLOSE_BUTTON", tr("button", "Close"),
+        [this]()
+        {
+            hide();
+        }
+    ))
         ->setTextSize(20.0f)
         ->setPosition(10.0f, -20.0f, sp::Alignment::TopRight)
         ->setSize(70.0f, 30.0f);
