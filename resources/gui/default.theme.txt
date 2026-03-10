@@ -145,7 +145,7 @@
             image: gui/widget/ButtonBackground.png
             image.hover: gui/widget/ButtonBackground.hover.png
             image.disabled: gui/widget/ButtonBackground.disabled.png
-            
+
             [listbox.selected.back] {
                 image: gui/widget/ButtonBackground.active.png
                 image.hover: gui/widget/ButtonBackground.active.png
@@ -160,7 +160,7 @@
             }
         }
     }
-    
+
     [arrow] {
         image: gui/widget/IndicatorArrow.png
     }
