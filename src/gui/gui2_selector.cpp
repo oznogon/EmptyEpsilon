@@ -45,6 +45,8 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
         ->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
 
     popup = new GuiPanel(getTopLevelContainer(), "");
+    popup_scroll = new GuiScrollContainer(popup, id + "_POPUP_SCROLL");
+    popup_scroll->setSize(GuiSizeMax, GuiSizeMax)->setAttribute("layout", "vertical");
     popup->hide();
 
     popup_scroll = new GuiScrollContainer(popup, id + "_POPUP_SCROLL");
@@ -146,17 +148,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
             }
             else
             {
-                popup_buttons[n]->setText(entries[n].name);
-            }
-            int row = (int)n - popup_scroll_offset;
-            if (row < 0 || row >= visible_count)
-                popup_buttons[n]->hide();
-            else
-            {
-                popup_buttons[n]->show();
-                popup_buttons[n]
-                    ->setValue(static_cast<int>(n) == selection_index)
-                    ->setPosition(0.0f, row * button_height, sp::Alignment::TopLeft);
+                popup_buttons[n]->setText(entries[n].name)->show();
             }
 
             if (entries[n].icon_name != "")
