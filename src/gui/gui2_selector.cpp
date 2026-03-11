@@ -4,6 +4,7 @@
 
 #include "gui2_label.h"
 #include "gui2_panel.h"
+#include "gui2_scrollcontainer.h"
 #include "gui2_selector.h"
 #include "gui2_togglebutton.h"
 
@@ -32,6 +33,8 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
     right->setPosition(0, 0, sp::Alignment::TopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
 
     popup = new GuiPanel(getTopLevelContainer(), "");
+    popup_scroll = new GuiScrollContainer(popup, id + "_POPUP_SCROLL");
+    popup_scroll->setSize(GuiSizeMax, GuiSizeMax)->setAttribute("layout", "vertical");
     popup->hide();
 }
 
@@ -52,15 +55,14 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     // rect.position is in layout space; the popup lives at the canvas level
     // (no scroll translation), so convert to screen coordinates first.
     glm::vec2 screen_pos = rect.position + renderer.getTranslation();
+    const float max_popup_height = 450.0f;
+    float popup_height = std::min(static_cast<float>(entries.size()) * button_height, max_popup_height);
     float top = screen_pos.y;
-    float height = entries.size() * 50;
-    if (selection_index >= 0)
-        top -= (selection_index - popup_scroll_offset) * button_height;
     top = std::max(0.0f, top);
-    top = std::min(900.0f - height, top);
+    top = std::min(900.0f - popup_height, top);
     popup
         ->setPosition(screen_pos.x, top, sp::Alignment::TopLeft)
-        ->setSize(rect.size.x, height);
+        ->setSize(rect.size.x, popup_height);
 }
 
 GuiSelector* GuiSelector::setTextSize(float size)
@@ -85,13 +87,11 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
     if (rect.contains(position))
     {
         soundManager->playSound("sfx/button.wav");
-        int max_visible = std::max(1, (int)(900.0f / button_height));
-        int visible_count = std::min((int)entries.size(), max_visible);
-        for(unsigned int n=0; n<entries.size(); n++)
+        for (unsigned int n = 0; n < entries.size(); n++)
         {
             if (popup_buttons.size() <= n)
             {
-                popup_buttons.push_back(new GuiToggleButton(popup, "", entries[n].name, [this, n](bool b)
+                popup_buttons.push_back(new GuiToggleButton(popup_scroll, "", entries[n].name, [this, n](bool b)
                 {
                     setSelectionIndex(n);
                     callback();
@@ -102,25 +102,18 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
             }
             else
             {
-                popup_buttons[n]->setText(entries[n].name);
+                popup_buttons[n]->setText(entries[n].name)->show();
             }
-            int row = (int)n - popup_scroll_offset;
-            if (row < 0 || row >= visible_count)
-                popup_buttons[n]->hide();
-            else
-            {
-                popup_buttons[n]->show();
-                popup_buttons[n]
-                    ->setValue(static_cast<int>(n) == selection_index)
-                    ->setPosition(0.0f, row * button_height, sp::Alignment::TopLeft);
-            }
+            popup_buttons[n]->setValue(static_cast<int>(n) == selection_index);
         }
-        for (unsigned int n=entries.size(); n<popup_buttons.size(); n++)
+        for (unsigned int n = entries.size(); n < popup_buttons.size(); n++)
             popup_buttons[n]->hide();
 
-        popup
-            ->show()
-            ->moveToFront();
+        // Scroll so the selected item is visible.
+        if (selection_index >= 0)
+            popup_scroll->scrollToOffset(selection_index * button_height);
+
+        popup->show()->moveToFront();
     }
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "gui2_entrylist.h"
+#include "gui2_scrollcontainer.h"
 
 
 class GuiArrowButton;
@@ -16,8 +17,8 @@ protected:
     GuiArrowButton* left;
     GuiArrowButton* right;
     GuiElement* popup;
+    GuiScrollContainer* popup_scroll;
     std::vector<GuiToggleButton*> popup_buttons;
-    int popup_scroll_offset = 0;
     const GuiThemeStyle* back_style;
     const GuiThemeStyle* front_style;
 public:
