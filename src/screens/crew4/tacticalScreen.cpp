@@ -1,8 +1,8 @@
+#include "tacticalScreen.h"
+#include <i18n.h>
 #include "playerInfo.h"
-#include "i18n.h"
 #include "featureDefs.h"
 #include "gameGlobalInfo.h"
-#include "tacticalScreen.h"
 #include "preferenceManager.h"
 
 #include "components/reactor.h"
@@ -13,27 +13,25 @@
 #include "components/target.h"
 #include "components/radar.h"
 
-#include "screenComponents/combatManeuver.h"
-#include "screenComponents/radarView.h"
-#include "screenComponents/impulseControls.h"
-#include "screenComponents/warpControls.h"
-#include "screenComponents/jumpControls.h"
-#include "screenComponents/dockingButton.h"
-#include "screenComponents/alertOverlay.h"
-#include "screenComponents/customShipFunctions.h"
-#include "screenComponents/infoDisplay.h"
-
-#include "screenComponents/missileTubeControls.h"
 #include "screenComponents/aimLock.h"
-#include "screenComponents/shieldsEnableButton.h"
+#include "screenComponents/alertOverlay.h"
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
+#include "screenComponents/combatManeuver.h"
+#include "screenComponents/customShipFunctions.h"
+#include "screenComponents/dockingButton.h"
+#include "screenComponents/impulseControls.h"
+#include "screenComponents/infoDisplay.h"
+#include "screenComponents/jumpControls.h"
+#include "screenComponents/missileTubeControls.h"
 #include "screenComponents/powerDamageIndicator.h"
+#include "screenComponents/radarView.h"
+#include "screenComponents/shieldsEnableButton.h"
+#include "screenComponents/warpControls.h"
 
+#include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
-#include "gui/gui2_image.h"
-#include "gui/gui2_rotationdial.h"
 
 TacticalScreen::TacticalScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TACTICAL_SCREEN", colorConfig.background)
