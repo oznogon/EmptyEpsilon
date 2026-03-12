@@ -154,7 +154,10 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
 
     custom_function_sidebar = new GuiCustomShipFunctions(this, CrewPosition::tacticalOfficer, "TACTICAL_CUSTOM_FUNCS");
-    custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
+    custom_function_sidebar
+        ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
+        ->setSize(250.0f, 100.0f)
+        ->hide();
 
     utility_beam_sidebar = new GuiUtilityBeamControls(this, CrewPosition::tacticalOfficer, "UTILITY_BEAM_CONTROLS");
     utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");

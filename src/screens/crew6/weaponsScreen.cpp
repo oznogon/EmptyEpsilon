@@ -129,11 +129,17 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
 
     custom_function_sidebar = new GuiCustomShipFunctions(this, CrewPosition::weaponsOfficer, "WEAPONS_CUSTOM_FUNCS");
-    custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
+    custom_function_sidebar
+        ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
+        ->setSize(250.0f, 450.0f)
+        ->hide();
 
     utility_beam_sidebar = new GuiUtilityBeamControls(this, CrewPosition::weaponsOfficer, "UTILITY_BEAM_CONTROLS");
-    utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-    utility_beam_sidebar->hide();
+    utility_beam_sidebar
+        ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
+        ->setSize(250.0f, 500.0f)
+        ->hide()
+        ->setAttribute("layout", "vertical");
 
     utility_beam_dial = new GuiUtilityBeamRotationDial(radar, "UTILITY_BEAM_DIAL", radar);
     utility_beam_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();

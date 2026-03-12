@@ -152,6 +152,15 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_sidebar = new GuiElement(radar_view, "SIDEBAR");
     info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     info_sidebar->setMargins(0, 0, 0, 75);
+    
+    custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
+    float height = crew_position == CrewPosition::operationsOfficer
+        ? 550.0f
+        : 600.0f;
+    custom_function_sidebar
+        ->setPosition(-15.0f, 210.0f, sp::Alignment::TopRight)
+        ->setSize(250.0f, height)
+        ->hide();
 
     // Scan button.
     scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
