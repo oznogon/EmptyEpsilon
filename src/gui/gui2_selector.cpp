@@ -1,11 +1,11 @@
-#include "gui2_arrowbutton.h"
+#include "gui2_selector.h"
 #include "soundManager.h"
 #include "theme.h"
 
+#include "gui2_arrowbutton.h"
 #include "gui2_label.h"
 #include "gui2_panel.h"
 #include "gui2_scrollcontainer.h"
-#include "gui2_selector.h"
 #include "gui2_togglebutton.h"
 
 GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
@@ -50,8 +50,6 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     if (selection_index >= 0 && selection_index < (int)entries.size())
         renderer.drawText(rect, entries[selection_index].name, sp::Alignment::Center, text_size, front.font, front.color);
 
-    if (!focus)
-        popup->hide();
     // rect.position is in layout space; the popup lives at the canvas level
     // (no scroll translation), so convert to screen coordinates first.
     glm::vec2 screen_pos = rect.position + renderer.getTranslation();
@@ -86,6 +84,12 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position))
     {
+        if (popup->isVisible())
+        {
+            popup->hide();
+            return;
+        }
+
         soundManager->playSound("sfx/button.wav");
         for (unsigned int n = 0; n < entries.size(); n++)
         {
@@ -95,6 +99,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
                 {
                     setSelectionIndex(n);
                     callback();
+                    popup->hide();
                 }));
                 popup_buttons[n]
                     ->setTextSize(text_size)
@@ -119,6 +124,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiSelector::onFocusLost()
 {
-    // Explicitly hide the popup when the selector loses focus.
-    popup->hide();
+    // Hide the popup on a focus change outside of the popup rect.
+    if (!popup->getRect().contains(hover_coordinates))
+        popup->hide();
 }
