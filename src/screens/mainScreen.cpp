@@ -172,21 +172,21 @@ void ScreenMainScreen::update(float delta)
 
     if (my_spaceship)
     {
-        if (keys.mainscreen_forward.getDown())
+        if (keys.mainscreen_forward.getSteppedDown())
             my_player_info->commandMainScreenSetting(MainScreenSetting::Front);
-        if (keys.mainscreen_left.getDown())
+        if (keys.mainscreen_left.getSteppedDown())
             my_player_info->commandMainScreenSetting(MainScreenSetting::Left);
-        if (keys.mainscreen_right.getDown())
+        if (keys.mainscreen_right.getSteppedDown())
             my_player_info->commandMainScreenSetting(MainScreenSetting::Right);
-        if (keys.mainscreen_back.getDown())
+        if (keys.mainscreen_back.getSteppedDown())
             my_player_info->commandMainScreenSetting(MainScreenSetting::Back);
-        if (keys.mainscreen_target.getDown())
+        if (keys.mainscreen_target.getSteppedDown())
             my_player_info->commandMainScreenSetting(MainScreenSetting::Target);
-        if (keys.mainscreen_tactical_radar.getDown())
+        if (keys.mainscreen_tactical_radar.getSteppedDown())
             my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
-        if (keys.mainscreen_long_range_radar.getDown())
+        if (keys.mainscreen_long_range_radar.getSteppedDown())
             my_player_info->commandMainScreenSetting(MainScreenSetting::LongRange);
-        if (keys.mainscreen_first_person.getDown())
+        if (keys.mainscreen_first_person.getSteppedDown())
             viewport->first_person = !viewport->first_person;
     }
 }

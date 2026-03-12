@@ -3,6 +3,7 @@
 #include "engine.h"
 #include "hotkeyConfig.h"
 #include "theme.h"
+#include "gui/gui2_selector.h"
 
 // Track which binder and which key are actively performing a rebind.
 static GuiHotkeyBinder* active_rebinder = nullptr;
@@ -17,6 +18,45 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
     // on text.
     front_style = theme->getStyle("textentry.front");
     back_style = theme->getStyle("textentry.back");
+
+    // Collect supported interactions in display order.
+    auto si = key->getSupportedInteractions();
+    if (si & sp::io::Keybinding::Interaction::Stepped)   interaction_selector_options.push_back(sp::io::Keybinding::Interaction::Stepped);
+    if (si & sp::io::Keybinding::Interaction::Sustained) interaction_selector_options.push_back(sp::io::Keybinding::Interaction::Sustained);
+    if (si & sp::io::Keybinding::Interaction::Axis0)     interaction_selector_options.push_back(sp::io::Keybinding::Interaction::Axis0);
+    if (si & sp::io::Keybinding::Interaction::Axis1)     interaction_selector_options.push_back(sp::io::Keybinding::Interaction::Axis1);
+
+    // Pre-select the first supported interaction.
+    if (!interaction_selector_options.empty())
+        selected_interaction = interaction_selector_options[0];
+
+    // Show a selector only when there are multiple interaction choices.
+    if (interaction_selector_options.size() > 1)
+    {
+        interaction_selector = new GuiSelector(this, id + "_INTERACTION", [this](int index, string value) {
+            selected_interaction = interaction_selector_options[index];
+        });
+
+        for (auto inter : interaction_selector_options)
+        {
+            string name;
+            switch (inter)
+            {
+            case sp::io::Keybinding::Interaction::Stepped:   name = tr("interaction", "Stepped"); break;
+            case sp::io::Keybinding::Interaction::Sustained: name = tr("interaction", "Sustained"); break;
+            case sp::io::Keybinding::Interaction::Axis0:     name = tr("interaction", "Axis 0 to 1"); break;
+            case sp::io::Keybinding::Interaction::Axis1:     name = tr("interaction", "Axis -1 to 1"); break;
+            default: break;
+            }
+            interaction_selector->addEntry(name, "");
+        }
+
+        interaction_selector->setSelectionIndex(0);
+        interaction_selector->setTextSize(18.0f);
+        interaction_selector
+            ->setPosition(0, 0, sp::Alignment::BottomLeft)
+            ->setSize(GuiElement::GuiSizeMax, SELECTOR_HEIGHT);
+    }
 }
 
 bool GuiHotkeyBinder::isAnyRebinding()
@@ -71,7 +111,7 @@ bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
         {
             active_rebinder = this;
             active_key = key;
-            key->startUserRebind(capture_filter);
+            key->startUserRebind(capture_filter, selected_interaction);
         }
     }
 
@@ -86,7 +126,7 @@ void GuiHotkeyBinder::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
         pending_rebind = false;
         active_rebinder = this;
         active_key = key;
-        key->startUserRebind(capture_filter);
+        key->startUserRebind(capture_filter, selected_interaction);
     }
 }
 
@@ -122,9 +162,26 @@ void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
             {
                 if (!text.empty()) text += ",";
                 text += key->getHumanReadableKeyName(n);
+                auto inter = key->getInteraction(n);
+                if (inter != sp::io::Keybinding::Interaction::None)
+                {
+                    string inter_name;
+                    switch (inter)
+                    {
+                    case sp::io::Keybinding::Interaction::Sustained: inter_name = tr("interaction-abbreviated", "Sst"); break;
+                    case sp::io::Keybinding::Interaction::Stepped:   inter_name = tr("interaction-abbreviated", "Stp"); break;
+                    case sp::io::Keybinding::Interaction::Axis0:     inter_name = tr("interaction-abbreviated", "A0"); break;
+                    case sp::io::Keybinding::Interaction::Axis1:     inter_name = tr("interaction-abbreviated", "A1"); break;
+                    default: break;
+                    }
+                    if (!inter_name.empty())
+                        text += " [" + inter_name + "]";
+                }
             }
         }
     }
 
-    renderer.drawText(sp::Rect(rect.position.x + 16.0f, rect.position.y, rect.size.x, rect.size.y), text, sp::Alignment::CenterLeft, front.size, front.font, front.color);
+    // When the selector is below, restrict text to the binding field portion only.
+    float text_height = interaction_selector ? (rect.size.y - SELECTOR_HEIGHT) : rect.size.y;
+    renderer.drawText(sp::Rect(rect.position.x + 16.0f, rect.position.y, rect.size.x, text_height), text, sp::Alignment::CenterLeft, front.size, front.font, front.color);
 }

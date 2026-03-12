@@ -90,14 +90,14 @@ void GuiScanningDialog::onUpdate()
     {
         for(int n=0; n<max_sliders; n++)
         {
-            float adjust = (keys.science_scan_param_increase[n].getValue() - keys.science_scan_param_decrease[n].getValue()) * 0.01f;
+            float adjust = (keys.science_scan_param_increase[n].getSteppedDown() - keys.science_scan_param_decrease[n].getSteppedDown()) * 0.01f;
             if (adjust != 0.0f)
             {
                 sliders[n]->setValue(sliders[n]->getValue() + adjust);
                 updateSignal();
             }
 
-            float set_value = keys.science_scan_param_set[n].getValue();
+            float set_value = keys.science_scan_param_set[n].getAxis0Value();
             if (set_value != sliders[n]->getValue() && (set_value != 0.0f || set_active[n]))
             {
                 sliders[n]->setValue(set_value);
@@ -105,7 +105,7 @@ void GuiScanningDialog::onUpdate()
                 set_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
         }
-        if (keys.science_scan_abort.getDown())
+        if (keys.science_scan_abort.getSteppedDown())
             my_player_info->commandScanCancel();
     }
 }

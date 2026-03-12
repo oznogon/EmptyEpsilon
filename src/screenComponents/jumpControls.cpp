@@ -134,32 +134,32 @@ void GuiJumpControls::onUpdate()
     setVisible(jump != nullptr);
     if (!isVisible()) return;
     // keybindings that work when the slider is visible, but disabked
-    if (keys.helms_abort_jump.getDown())
+    if (keys.helms_abort_jump.getSteppedDown())
         my_player_info->commandAbortJump();
     // ---
     if (!slider->isEnabled()) return;
     float value = slider->getValue();
 
     // Set jump distance by keybind.
-    float key_change = keys.helms_increase_jump_distance.getValue() - keys.helms_decrease_jump_distance.getValue();
+    float key_change = keys.helms_increase_jump_distance.getSustainedValue() - keys.helms_decrease_jump_distance.getSustainedValue();
     if (key_change != 0.0f)
         value = std::clamp(value + 1000.0f * key_change, slider->getRangeMin(), slider->getRangeMax());
-    if (keys.helms_increase_jump_100.getDown())
+    if (keys.helms_increase_jump_100.getSteppedDown())
         value = std::min(value + 100.0f, slider->getRangeMin());
-    if (keys.helms_decrease_jump_100.getDown())
+    if (keys.helms_decrease_jump_100.getSteppedDown())
         value = std::max(value - 100.0f, slider->getRangeMax());
-    if (keys.helms_increase_jump_1k.getDown())
+    if (keys.helms_increase_jump_1k.getSteppedDown())
         value = std::min(value + 1000.0f, slider->getRangeMin());
-    if (keys.helms_decrease_jump_1k.getDown())
+    if (keys.helms_decrease_jump_1k.getSteppedDown())
         value = std::max(value - 1000.0f, slider->getRangeMax());
-    if (keys.helms_min_jump.getDown())
+    if (keys.helms_min_jump.getSteppedDown())
         value = slider->getRangeMax();
-    if (keys.helms_max_jump.getDown())
+    if (keys.helms_max_jump.getSteppedDown())
         value = slider->getRangeMin();
 
     // Set jump distance by axis.
     // Get joystick axis map value (-1.0 to 1.0).
-    float axis_value = keys.helms_set_jump.getValue();
+    float axis_value = keys.helms_set_jump.getAxis0Value();
     // The jump slider's min/max range values are inverted because the
     // gui2_slider is coded for max to be on the bottom.
     // getRangeMin returns the jump range's max value, and vice versa.
@@ -179,6 +179,6 @@ void GuiJumpControls::onUpdate()
 
     slider->setValue(value);
 
-    if (keys.helms_execute_jump.getDown())
+    if (keys.helms_execute_jump.getSteppedDown())
         my_player_info->commandJump(slider->getValue());
 }

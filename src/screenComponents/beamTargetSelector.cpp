@@ -24,7 +24,7 @@ void GuiBeamTargetSelector::onUpdate()
 {
     if (my_spaceship && gameGlobalInfo->use_system_damage && isVisible())
     {
-        if (keys.weapons_beam_subsystem_target_next.getDown())
+        if (keys.weapons_beam_subsystem_target_next.getSteppedDown())
         {
             if (getSelectionIndex() >= (int)entries.size() - 1)
                 setSelectionIndex(0);
@@ -32,7 +32,7 @@ void GuiBeamTargetSelector::onUpdate()
                 setSelectionIndex(getSelectionIndex() + 1);
             callback();
         }
-        if (keys.weapons_beam_subsystem_target_previous.getDown())
+        if (keys.weapons_beam_subsystem_target_previous.getSteppedDown())
         {
             if (getSelectionIndex() <= 0)
                 setSelectionIndex(entries.size() - 1);

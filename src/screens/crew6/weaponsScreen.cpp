@@ -139,7 +139,7 @@ void WeaponsScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        if (keys.weapons_enemy_next_target.getDown())
+        if (keys.weapons_enemy_next_target.getSteppedDown())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
@@ -147,7 +147,7 @@ void WeaponsScreen::onUpdate()
                 my_player_info->commandSetTarget(targets.get());
             }
         }
-        if (keys.weapons_next_target.getDown())
+        if (keys.weapons_next_target.getSteppedDown())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
@@ -155,7 +155,7 @@ void WeaponsScreen::onUpdate()
                 my_player_info->commandSetTarget(targets.get());
             }
         }
-        auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
+        auto aim_adjust = keys.weapons_aim_left.getSustainedValue() - keys.weapons_aim_right.getSustainedValue();
         if (aim_adjust != 0.0f)
         {
             missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);

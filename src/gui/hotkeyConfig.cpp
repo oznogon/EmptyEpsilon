@@ -326,110 +326,196 @@ void Keys::init()
     help.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Show in-game help"));
     escape.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Return to ship options menu"));
     zoom_in.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Zoom in on zoomable stations"));
+    zoom_in.setSupportedInteractions(sp::io::Keybinding::Interaction::Sustained | sp::io::Keybinding::Interaction::Stepped);
     zoom_out.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Zoom out on zoomable stations"));
+    zoom_out.setSupportedInteractions(sp::io::Keybinding::Interaction::Sustained | sp::io::Keybinding::Interaction::Stepped);
     voice_all.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Broadcast voice chat to server"));
+    voice_all.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     voice_ship.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Broadcast voice chat to ship"));
+    voice_ship.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     fullscreen_key.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Fullscreen toggle"));
 
     //General
     next_station.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to next crew station"));
+    next_station.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     prev_station.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to previous crew station"));
+    prev_station.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     station_helms.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to helms station"));
+    station_helms.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     station_weapons.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to weapons station"));
+    station_weapons.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     station_engineering.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to engineering station"));
+    station_engineering.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     station_science.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to science station"));
+    station_science.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     station_relay.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to relay station"));
+    station_relay.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
 
     //Main screen
     mainscreen_forward.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View forward"));
+    mainscreen_forward.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     mainscreen_left.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View left"));
+    mainscreen_left.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     mainscreen_right.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View right"));
+    mainscreen_right.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     mainscreen_back.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View backward"));
+    mainscreen_back.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     mainscreen_target.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "Lock view on weapons target"));
+    mainscreen_target.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     mainscreen_tactical_radar.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View tactical radar"));
+    mainscreen_tactical_radar.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View long-range radar"));
+    mainscreen_long_range_radar.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     mainscreen_first_person.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
+    mainscreen_first_person.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
 
     //helms
     helms_increase_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse"));
+    helms_increase_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Sustained | sp::io::Keybinding::Interaction::Stepped);
     helms_increase_impulse_1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse 1%"));
+    helms_increase_impulse_1.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_increase_impulse_10.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse 10%"));
+    helms_increase_impulse_10.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_decrease_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse"));
+    helms_decrease_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Sustained | sp::io::Keybinding::Interaction::Stepped);
     helms_decrease_impulse_1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse 1%"));
+    helms_decrease_impulse_1.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_decrease_impulse_10.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse 10%"));
+    helms_decrease_impulse_10.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_set_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set impulse (joystick)"));
+    helms_set_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Axis1);
     helms_zero_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Zero impulse"));
+    helms_zero_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_max_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max impulse"));
+    helms_max_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_min_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max reverse impulse"));
+    helms_min_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_turn_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn left"));
+    helms_turn_left.setSupportedInteractions(sp::io::Keybinding::Interaction::Sustained | sp::io::Keybinding::Interaction::Axis1);
     helms_turn_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn right"));
+    helms_turn_right.setSupportedInteractions(sp::io::Keybinding::Interaction::Sustained | sp::io::Keybinding::Interaction::Axis1);
     helms_warp0.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Zero warp"));
+    helms_warp0.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_warp1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request warp 1"));
+    helms_warp1.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_warp2.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request warp 2"));
+    helms_warp2.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_warp3.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request warp 3"));
+    helms_warp3.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_warp4.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request warp 4"));
+    helms_warp4.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_warp_max.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request max warp"));
+    helms_warp_max.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_increase_warp.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase warp request"));
+    helms_increase_warp.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_decrease_warp.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease warp request"));
+    helms_decrease_warp.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_set_warp.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set warp request (joystick)"));
+    helms_set_warp.setSupportedInteractions(sp::io::Keybinding::Interaction::Axis0);
     helms_dock_action.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Dock request/abort/undock"));
+    helms_dock_action.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_dock_request.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Initiate docking"));
+    helms_dock_request.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_dock_abort.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Abort docking"));
+    helms_dock_abort.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_undock.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Undock"));
+    helms_undock.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_increase_jump_distance.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase jump distance"));
+    helms_increase_jump_distance.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped | sp::io::Keybinding::Interaction::Sustained);
     helms_decrease_jump_distance.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease jump distance"));
+    helms_decrease_jump_distance.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped | sp::io::Keybinding::Interaction::Sustained);
     helms_increase_jump_100.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase jump distance 0.1U"));
+    helms_increase_jump_100.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_increase_jump_1k.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase jump distance 1U"));
+    helms_increase_jump_1k.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_decrease_jump_100.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease jump distance 0.1U"));
+    helms_decrease_jump_100.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_decrease_jump_1k.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease jump distance 1U"));
+    helms_decrease_jump_1k.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_set_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set jump distance (joystick)"));
+    helms_set_jump.setSupportedInteractions(sp::io::Keybinding::Interaction::Axis0);
     helms_max_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Maximize jump distance"));
+    helms_max_jump.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_min_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Minimize jump distance"));
+    helms_min_jump.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_execute_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Initiate jump"));
+    helms_execute_jump.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_abort_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Abort jump"));
+    helms_abort_jump.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     helms_combat_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost left"));
     helms_combat_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost right"));
     helms_combat_boost.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost forwards"));
 
     //weapons
     weapons_select_homing.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select homing"));
+    weapons_select_homing.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_select_nuke.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select nuke"));
+    weapons_select_nuke.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_select_mine.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select mine"));
+    weapons_select_mine.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_select_emp.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select EMP"));
+    weapons_select_emp.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_select_hvli.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select HVLI"));
+    weapons_select_hvli.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     for(auto n = 0u; n < weapons_load_tube.size(); n++)
     {
         weapons_load_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Load tube {number}").format({{"number", string(n+1)}}));
+        weapons_load_tube[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
         weapons_unload_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Unload tube {number}").format({{"number", string(n+1)}}));
+        weapons_unload_tube[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
         weapons_fire_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Fire tube {number}").format({{"number", string(n+1)}}));
+        weapons_fire_tube[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     }
     weapons_enemy_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next hostile target"));
+    weapons_enemy_next_target.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next target (any)"));
+    weapons_next_target.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_toggle_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Toggle shields"));
+    weapons_toggle_shields.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_enable_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Enable shields"));
+    weapons_enable_shields.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_disable_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable shields"));
+    weapons_disable_shields.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_shield_calibration_increase.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Increase shield frequency target"));
+    weapons_shield_calibration_increase.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_shield_calibration_decrease.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Decrease shield frequency target"));
+    weapons_shield_calibration_decrease.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_shield_calibration_start.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Start shield calibration"));
+    weapons_shield_calibration_start.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_beam_subsystem_target_next.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Next beam subsystem target type"));
+    weapons_beam_subsystem_target_next.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_beam_subsystem_target_previous.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Previous beam subsystem target type"));
+    weapons_beam_subsystem_target_previous.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_beam_frequence_increase.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Increase beam frequency"));
+    weapons_beam_frequence_increase.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_beam_frequence_decrease.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Decrease beam frequency"));
+    weapons_beam_frequence_decrease.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_toggle_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Toggle missile aim lock"));
+    weapons_toggle_aim_lock.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_enable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Enable missile aim lock"));
+    weapons_enable_aim_lock.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_disable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable missile aim lock"));
+    weapons_disable_aim_lock.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     weapons_aim_left.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the left"));
+    weapons_aim_left.setSupportedInteractions(sp::io::Keybinding::Interaction::Sustained | sp::io::Keybinding::Interaction::Axis1);
     weapons_aim_right.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the right"));
+    weapons_aim_right.setSupportedInteractions(sp::io::Keybinding::Interaction::Sustained | sp::io::Keybinding::Interaction::Axis1);
 
     //Science
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
+    science_scan_object.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     science_scan_abort.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Abort scan"));
+    science_scan_abort.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
+    science_select_next_scannable.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     for(auto n = 0u; n < science_scan_param_increase.size(); n++)
     {
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n+1)}}));
+        science_scan_param_increase[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
         science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} decrease").format({{"number", string(n+1)}}));
+        science_scan_param_decrease[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
         science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Set scanning parameter {number} (joystick)").format({{"number", string(n+1)}}));
+        science_scan_param_set[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Axis0);
     }
 
     //Engineering
@@ -442,30 +528,56 @@ void Keys::init()
     engineering_select_system[static_cast<int>(ShipSystem::Type::JumpDrive)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select jump drive system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select front shields system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select rear shields system"));
+    for(int n = 0; n < ShipSystem::COUNT; n++)
+        engineering_select_system[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_select_system_next.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select next system"));
+    engineering_select_system_next.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_select_system_prev.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select previous system"));
+    engineering_select_system_prev.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_set_power_000.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 0%"));
+    engineering_set_power_000.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_set_power_030.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 30%"));
+    engineering_set_power_030.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_set_power_050.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 50%"));
+    engineering_set_power_050.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_set_power_100.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 100%"));
+    engineering_set_power_100.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_set_power_150.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 150%"));
+    engineering_set_power_150.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_set_power_200.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 200%"));
+    engineering_set_power_200.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_set_power_250.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 250%"));
+    engineering_set_power_250.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_set_power_300.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 300%"));
+    engineering_set_power_300.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_increase_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system power"));
+    engineering_increase_power.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped | sp::io::Keybinding::Interaction::Sustained);
     engineering_decrease_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system power"));
+    engineering_decrease_power.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped | sp::io::Keybinding::Interaction::Sustained);
     engineering_set_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power (joystick)"));
+    engineering_set_power.setSupportedInteractions(sp::io::Keybinding::Interaction::Axis0);
     engineering_increase_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system coolant"));
+    engineering_increase_coolant.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped | sp::io::Keybinding::Interaction::Sustained);
     engineering_decrease_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system coolant"));
+    engineering_decrease_coolant.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped | sp::io::Keybinding::Interaction::Sustained);
     engineering_set_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system coolant (joystick)"));
+    engineering_set_coolant.setSupportedInteractions(sp::io::Keybinding::Interaction::Axis0);
     engineering_next_repair_crew.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Next repair crew"));
+    engineering_next_repair_crew.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_repair_crew_up.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move up"));
+    engineering_repair_crew_up.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_repair_crew_down.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move down"));
+    engineering_repair_crew_down.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_repair_crew_left.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move left"));
+    engineering_repair_crew_left.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_repair_crew_right.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move right"));
+    engineering_repair_crew_right.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_self_destruct_start.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Start self-destruct"));
+    engineering_self_destruct_start.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_self_destruct_confirm.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Confirm self-destruct"));
+    engineering_self_destruct_confirm.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     engineering_self_destruct_cancel.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Cancel self-destruct"));
+    engineering_self_destruct_cancel.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
 
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::Reactor)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor power (joystick)"));
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::BeamWeapons)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam weapon power (joystick)"));
@@ -486,17 +598,27 @@ void Keys::init()
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::JumpDrive)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set jump drive coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields coolant (joystick)"));
+    for(int n = 0; n < ShipSystem::COUNT; n++)
+        engineering_set_power_for_system[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Axis0);
+    for(int n = 0; n < ShipSystem::COUNT; n++)
+        engineering_set_coolant_for_system[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Axis0);
 
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
+    relay_alert_level_none.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
+    relay_alert_level_yellow.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
+    relay_alert_level_red.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
 
     cinematic.init();
     topdown.init();
     //GM
     gm_delete.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Delete"));
+    gm_delete.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Copy to clipboard"));
+    gm_clipboardcopy.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
     gm_show_callsigns.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Show callsigns (GM)"));
+    gm_show_callsigns.setSupportedInteractions(sp::io::Keybinding::Interaction::Stepped);
 
     //Various
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_various", "Show callsigns (spectator)"));

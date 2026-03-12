@@ -48,26 +48,30 @@ void GuiImpulseControls::onUpdate()
     if (!slider->isEnabled()) return;
 
     // Change impulse value by keybind.
-    float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
+    float change = keys.helms_increase_impulse.getSustainedValue() - keys.helms_decrease_impulse.getSustainedValue();
     if (change != 0.0f)
         my_player_info->commandImpulse(std::clamp(slider->getValue() + change * 0.01f, -1.0f, 1.0f));
-    if (keys.helms_increase_impulse_1.getDown())
-        my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
-    if (keys.helms_decrease_impulse_1.getDown())
-        my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.01f));
-    if (keys.helms_increase_impulse_10.getDown())
+    if (keys.helms_increase_impulse.getSteppedDown())
         my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
-    if (keys.helms_decrease_impulse_10.getDown())
+    if (keys.helms_decrease_impulse.getSteppedDown())
         my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
-    if (keys.helms_zero_impulse.getDown())
+    if (keys.helms_increase_impulse_1.getSteppedDown())
+        my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
+    if (keys.helms_decrease_impulse_1.getSteppedDown())
+        my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.01f));
+    if (keys.helms_increase_impulse_10.getSteppedDown())
+        my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
+    if (keys.helms_decrease_impulse_10.getSteppedDown())
+        my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
+    if (keys.helms_zero_impulse.getSteppedDown())
         my_player_info->commandImpulse(0.0f);
-    if (keys.helms_max_impulse.getDown())
+    if (keys.helms_max_impulse.getSteppedDown())
         my_player_info->commandImpulse(1.0f);
-    if (keys.helms_min_impulse.getDown())
+    if (keys.helms_min_impulse.getSteppedDown())
         my_player_info->commandImpulse(-1.0f);
 
     // Change impulse value by axis.
-    float set_value = keys.helms_set_impulse.getValue();
+    float set_value = keys.helms_set_impulse.getAxis1Value();
     if (set_value != engine->request && (set_value != 0.0f || set_active))
     {
         my_player_info->commandImpulse(set_value);

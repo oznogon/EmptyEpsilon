@@ -72,7 +72,7 @@ void TopDownScreen::update(float delta)
     }
 
     // Enable mouse wheel zoom.
-    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    float mouse_wheel_delta = keys.zoom_in.getSustainedValue() - keys.zoom_out.getSustainedValue();
     if (mouse_wheel_delta != 0.0f)
     {
         camera_position.z = camera_position.z * (1.0f - (mouse_wheel_delta) * 4 * delta);

@@ -29,7 +29,7 @@ WindowScreen::WindowScreen(RenderLayer* render_layer, float angle, uint8_t flags
 
 void WindowScreen::update(float delta)
 {
-    angle += (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+    angle += (keys.helms_turn_right.getSustainedValue() - keys.helms_turn_left.getSustainedValue()) * 5.0f;
 
     if (keys.escape.getDown())
     {

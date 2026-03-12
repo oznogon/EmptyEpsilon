@@ -258,7 +258,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     auto rl = my_spaceship.getComponent<RadarLink>();
 
     float view_distance = science_radar->getDistance();
-    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    float mouse_wheel_delta = keys.zoom_in.getSustainedValue() - keys.zoom_out.getSustainedValue();
     if (mouse_wheel_delta!=0)
     {
         view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
@@ -534,7 +534,7 @@ void ScienceScreen::onUpdate()
     if (my_spaceship)
     {
         // Initiate a scan on scannable objects.
-        if (keys.science_scan_object.getDown() &&
+        if (keys.science_scan_object.getSteppedDown() &&
             my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
@@ -551,7 +551,7 @@ void ScienceScreen::onUpdate()
         }
 
         // Cycle selection through scannable objects.
-        if (keys.science_select_next_scannable.getDown() &&
+        if (keys.science_select_next_scannable.getSteppedDown() &&
             my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {

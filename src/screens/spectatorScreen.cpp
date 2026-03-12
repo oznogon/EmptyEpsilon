@@ -123,7 +123,7 @@ void SpectatorScreen::toggleUI()
 void SpectatorScreen::update(float delta)
 {
     auto view_position = main_radar->getViewPosition();
-    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    float mouse_wheel_delta = keys.zoom_in.getSustainedValue() - keys.zoom_out.getSustainedValue();
     if (mouse_wheel_delta != 0.0f)
     {
         float view_distance = main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));

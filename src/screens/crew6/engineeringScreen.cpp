@@ -373,9 +373,9 @@ void EngineeringScreen::onUpdate()
     {
         auto coolant = my_spaceship.getComponent<Coolant>();
         for(unsigned int n=0; n<ShipSystem::COUNT; n++) {
-            if (keys.engineering_select_system[n].getDown()) selectSystem(static_cast<ShipSystem::Type>(n));
+            if (keys.engineering_select_system[n].getSteppedDown()) selectSystem(static_cast<ShipSystem::Type>(n));
 
-            float set_value = keys.engineering_set_power_for_system[n].getValue() * 3.0f;
+            float set_value = keys.engineering_set_power_for_system[n].getAxis0Value() * 3.0f;
             auto sys = ShipSystem::get(my_spaceship, static_cast<ShipSystem::Type>(n));
             if (sys && set_value != sys->power_request && (set_value != 0.0f || set_power_active[n]))
             {
@@ -383,7 +383,7 @@ void EngineeringScreen::onUpdate()
                 set_power_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
             if (coolant) {
-                set_value = keys.engineering_set_coolant_for_system[n].getValue() * coolant->max_coolant_per_system;
+                set_value = keys.engineering_set_coolant_for_system[n].getAxis0Value() * coolant->max_coolant_per_system;
                 if (sys && set_value != sys->coolant_request && (set_value != 0.0f || set_coolant_active[n]))
                 {
                     my_player_info->commandSetSystemCoolantRequest(static_cast<ShipSystem::Type>(n), set_value);
@@ -392,7 +392,7 @@ void EngineeringScreen::onUpdate()
             }
         }
 
-        int navigate_system = keys.engineering_select_system_next.getDown() - keys.engineering_select_system_prev.getDown(); // +1 or -1
+        int navigate_system = keys.engineering_select_system_next.getSteppedDown() - keys.engineering_select_system_prev.getSteppedDown(); // +1 or -1
         if (navigate_system)
         {
             int n = static_cast<int>(selected_system);
@@ -409,48 +409,48 @@ void EngineeringScreen::onUpdate()
         if (selected_system != ShipSystem::Type::None)
         {
             // Note the code duplication with extra/powerManagement
-            if (keys.engineering_set_power_000.getDown())
+            if (keys.engineering_set_power_000.getSteppedDown())
             {
                 power_slider->setValue(0.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_030.getDown())
+            if (keys.engineering_set_power_030.getSteppedDown())
             {
                 power_slider->setValue(0.3f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_050.getDown())
+            if (keys.engineering_set_power_050.getSteppedDown())
             {
                 power_slider->setValue(0.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_100.getDown())
+            if (keys.engineering_set_power_100.getSteppedDown())
             {
                 power_slider->setValue(1.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_150.getDown())
+            if (keys.engineering_set_power_150.getSteppedDown())
             {
                 power_slider->setValue(1.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_200.getDown())
+            if (keys.engineering_set_power_200.getSteppedDown())
             {
                 power_slider->setValue(2.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_250.getDown())
+            if (keys.engineering_set_power_250.getSteppedDown())
             {
                 power_slider->setValue(2.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_300.getDown())
+            if (keys.engineering_set_power_300.getSteppedDown())
             {
                 power_slider->setValue(3.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
 
-            auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.1f;
+            auto power_adjust = (keys.engineering_increase_power.getSustainedValue() - keys.engineering_decrease_power.getSustainedValue()) * 0.1f;
             if (power_adjust != 0.0f)
             {
                 auto sys = ShipSystem::get(my_spaceship, selected_system);
@@ -459,7 +459,7 @@ void EngineeringScreen::onUpdate()
                     my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
                 }
             }
-            auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.5f;
+            auto coolant_adjust = (keys.engineering_increase_coolant.getSustainedValue() - keys.engineering_decrease_coolant.getSustainedValue()) * 0.5f;
             if (coolant_adjust != 0.0f)
             {
                 auto sys = ShipSystem::get(my_spaceship, selected_system);
@@ -469,7 +469,7 @@ void EngineeringScreen::onUpdate()
                 }
             }
 
-            float set_value = keys.engineering_set_power.getValue() * 3.0f;
+            float set_value = keys.engineering_set_power.getAxis0Value() * 3.0f;
             auto sys = ShipSystem::get(my_spaceship, selected_system);
             if (sys && set_value != sys->power_request && (set_value != 0.0f || set_power_active[static_cast<int>(selected_system)]))
             {
@@ -477,7 +477,7 @@ void EngineeringScreen::onUpdate()
                 set_power_active[static_cast<int>(selected_system)] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
             if (coolant && sys) {
-                set_value = keys.engineering_set_coolant.getValue() * coolant->max_coolant_per_system;
+                set_value = keys.engineering_set_coolant.getAxis0Value() * coolant->max_coolant_per_system;
                 if (set_value != sys->coolant_request && (set_value != 0.0f || set_coolant_active[static_cast<int>(selected_system)]))
                 {
                     my_player_info->commandSetSystemCoolantRequest(selected_system, set_value);

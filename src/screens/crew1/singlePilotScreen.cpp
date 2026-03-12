@@ -162,14 +162,14 @@ void SinglePilotScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+        auto angle = (keys.helms_turn_right.getSustainedValue() - keys.helms_turn_left.getSustainedValue()) * 5.0f;
         if (angle != 0.0f)
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
                 my_player_info->commandTargetRotation(transform->getRotation() + angle);
         }
 
-        if (keys.weapons_enemy_next_target.getDown())
+        if (keys.weapons_enemy_next_target.getSteppedDown())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
@@ -177,7 +177,7 @@ void SinglePilotScreen::onUpdate()
                 my_player_info->commandSetTarget(targets.get());
             }
         }
-        if (keys.weapons_next_target.getDown())
+        if (keys.weapons_next_target.getSteppedDown())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
@@ -186,7 +186,7 @@ void SinglePilotScreen::onUpdate()
             }
         }
 
-        auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
+        auto aim_adjust = keys.weapons_aim_left.getSustainedValue() - keys.weapons_aim_right.getSustainedValue();
         if (aim_adjust != 0.0f)
         {
             missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);

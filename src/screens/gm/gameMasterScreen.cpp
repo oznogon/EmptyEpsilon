@@ -321,7 +321,7 @@ GameMasterScreen::~GameMasterScreen()
 
 void GameMasterScreen::update(float delta)
 {
-    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    float mouse_wheel_delta = keys.zoom_in.getSustainedValue() - keys.zoom_out.getSustainedValue();
     if (mouse_wheel_delta != 0.0f)
     {
         float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f)), 5000.0f, 1000000.0f);
@@ -330,10 +330,10 @@ void GameMasterScreen::update(float delta)
         else main_radar->longRange();
     }
 
-    if (keys.gm_delete.getDown())
+    if (keys.gm_delete.getSteppedDown())
         for(auto obj : targets.getTargets()) obj.destroy();
 
-    if (keys.gm_clipboardcopy.getDown())
+    if (keys.gm_clipboardcopy.getSteppedDown())
         Clipboard::setClipboard(getScriptExport(false));
 
     // Toggle keyboard help.
@@ -352,7 +352,7 @@ void GameMasterScreen::update(float delta)
     pause_button->setValue(engine->getGameSpeed() == 0.0f);
 
     // Toggle callsigns.
-    if (keys.gm_show_callsigns.getDown())
+    if (keys.gm_show_callsigns.getSteppedDown())
         main_radar->showCallsigns(!main_radar->getCallsigns());
 
     bool has_object = false;
