@@ -64,9 +64,26 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     renderer.drawStretched(rect, back.texture, back.color);
 
     // Fit selector text between the arrow buttons.
-    sp::Rect text_rect(rect.position.x + rect.size.y * 0.5f, rect.position.y, rect.size.x - rect.size.y, rect.size.y);
+    sp::Rect inner_rect = {
+        {rect.position.x + rect.size.y * 0.5f, rect.position.y,},
+        {rect.size.x - rect.size.y, rect.size.y}
+    };
+    sp::Rect text_rect = inner_rect;
+
     if (selection_index >= 0 && selection_index < static_cast<int>(entries.size()))
-        renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color, sp::Font::FlagClip);
+    {
+        // Draw icon if one is defined and realign text.
+        const string& icon = entries[selection_index].icon_name;
+        if (icon != "")
+        {
+            renderer.drawRotatedSprite(icon, glm::vec2(inner_rect.position.x + inner_rect.size.y * 0.5f, inner_rect.position.y + inner_rect.size.y * 0.5f), inner_rect.size.y * 0.8f, 0.0f, front.color);
+            text_rect.position.x += inner_rect.size.y;
+            text_rect.size.x -= inner_rect.size.y;
+            renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::CenterLeft, text_size, nullptr, front.color, sp::Font::FlagClip);
+        }
+        else
+            renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color, sp::Font::FlagClip);
+    }
 
     // rect.position is in layout space; the popup lives at the canvas level
     // (no scroll translation), so convert to screen coordinates first.
@@ -131,7 +148,9 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
                     ->setText(entries[n].name)
                     ->show();
             }
-            popup_buttons[n]->setValue(static_cast<int>(n) == selection_index);
+            popup_buttons[n]
+                ->setValue(static_cast<int>(n) == selection_index)
+                ->setIcon(entries[n].icon_name);
         }
 
         // Hide each popup button.
@@ -152,6 +171,5 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 void GuiSelector::onFocusLost()
 {
     // Hide the popup on a focus change outside of the popup rect.
-    if (!popup->getRect().contains(hover_coordinates))
-        popup->hide();
+    if (!popup->getRect().contains(hover_coordinates)) popup->hide();
 }
