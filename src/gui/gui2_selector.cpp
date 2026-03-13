@@ -45,7 +45,25 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
 
     renderer.drawStretched(rect, back.texture, back.color);
     if (selection_index >= 0 && selection_index < (int)entries.size())
-        renderer.drawText(rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color);
+    {
+        sp::Rect inner_rect = {
+            {rect.position.x + rect.size.y, rect.position.y},
+            {rect.size.x - 2.0f * rect.size.y, rect.size.y}
+        };
+
+        // Draw icon if one is defined and realign text.
+        const string& icon = entries[selection_index].icon_name;
+        if (icon != "")
+        {
+            renderer.drawRotatedSprite(icon, glm::vec2(inner_rect.position.x + inner_rect.size.y * 0.5f, inner_rect.position.y + inner_rect.size.y * 0.5f), inner_rect.size.y * 0.8f, 0.0f, front.color);
+            sp::Rect text_rect = inner_rect;
+            text_rect.position.x += inner_rect.size.y;
+            text_rect.size.x -= inner_rect.size.y;
+            renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::CenterLeft, text_size, nullptr, front.color);
+        }
+        else
+            renderer.drawText(inner_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color);
+    }
 
     if (!focus)
         popup->hide();
@@ -92,6 +110,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
                 popup_buttons[n]->setText(entries[n].name);
                 popup_buttons[n]->show();
             }
+            popup_buttons[n]->setIcon(entries[n].icon_name);
             popup_buttons[n]->setValue(int(n) == selection_index);
             popup_buttons[n]->setPosition(0, n * 50, sp::Alignment::TopLeft);
         }
