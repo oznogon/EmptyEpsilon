@@ -32,7 +32,7 @@ public:
     // Height of the interaction selector row appended below the binding field.
     // The parent container must add this to the row height when the keybinding
     // has more than one supported interaction.
-    static constexpr float SELECTOR_HEIGHT = 50.0f;
+    static constexpr float SELECTOR_HEIGHT = 25.0f;
 
     static bool isAnyRebinding();
 

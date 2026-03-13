@@ -206,16 +206,11 @@ void HotkeyMenu::setCategory(int cat)
     // Begin rendering hotkey rebinding fields for this category.
     for (auto item : hotkey_list)
     {
-        // Rows for keybindings with multiple interaction options are taller to
-        // accommodate the interaction selector below each binding field.
-        auto si = static_cast<int>(item->getSupportedInteractions());
-        bool has_multiple_interactions = (si & (si - 1)) != 0;
-        float row_height = has_multiple_interactions ? (ROW_HEIGHT + GuiHotkeyBinder::SELECTOR_HEIGHT) : ROW_HEIGHT;
-
         // Add a rebinding row to the scroll container.
         rebinding_rows.push_back(new GuiElement(scroll_container, ""));
         rebinding_rows.back()
-            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT + GuiHotkeyBinder::SELECTOR_HEIGHT)
+            ->setMargins(0.0f, 5.0f)
             ->setAttribute("layout", "horizontal");
 
         // Add a label to the current row.
@@ -227,15 +222,21 @@ void HotkeyMenu::setCategory(int cat)
 
         // Keyboard-only binder.
         text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_KB_" + item->getName(), item, sp::io::Keybinding::Type::Keyboard, sp::io::Keybinding::Type::Keyboard));
-        text_entries.back()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
+        text_entries.back()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+            ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
 
         // Joystick/controller-only binder.
         text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_JS_" + item->getName(), item, joystick_type, joystick_type));
-        text_entries.back()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
+        text_entries.back()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+            ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
 
         // Mouse-only binder.
         text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_MS_" + item->getName(), item, mouse_type, mouse_type));
-        text_entries.back()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
+        text_entries.back()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+            ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
     }
 }
 
