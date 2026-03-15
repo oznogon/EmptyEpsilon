@@ -21,7 +21,7 @@ void GuiBeamFrequencySelector::onUpdate()
     // Handle inc/dec keybinds.
     if (keys.weapons_beam_frequency_increase.getDown())
     {
-        if (keys.weapons_beam_frequence_increase.getDiscreteStepDown() || keys.weapons_beam_frequence_increase.isRepeatReady())
+        if (keys.weapons_beam_frequency_increase.getDiscreteStepDown() || keys.weapons_beam_frequency_increase.isRepeatReady())
         {
             if (getSelectionIndex() >= static_cast<int>(entries.size()) - 1)
                 setSelectionIndex(0);
@@ -31,7 +31,7 @@ void GuiBeamFrequencySelector::onUpdate()
             callback();
         }
 
-        if (keys.weapons_beam_frequence_decrease.getDiscreteStepDown() || keys.weapons_beam_frequence_decrease.isRepeatReady())
+        if (keys.weapons_beam_frequency_decrease.getDiscreteStepDown() || keys.weapons_beam_frequency_decrease.isRepeatReady())
         {
             if (getSelectionIndex() <= 0)
                 setSelectionIndex(static_cast<int>(entries.size()) - 1);
