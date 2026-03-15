@@ -29,8 +29,13 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
 : GuiElement(owner, id), key(key), display_filter(display_filter), capture_filter(capture_filter)
 {
     // Use textentry theme styles for binder inputs.
-    // Someday, this should allow for icon representations instead of relying
-    // on text.
+    // TODO:
+    //    - Allow for icon representations instead of text.
+    //    - Populate a GuiSelector instead of a bespoke entry field with custom
+    //      drawing.
+    //    - Consolidate bind add/removal to +/- buttons instead of field click.
+    //    - Single list, scroll to section headers.
+    //    - Text filter for binds.
     front_style = theme->getStyle("textentry.front");
     back_style = theme->getStyle("textentry.back");
     setAttribute("layout", "vertical");
@@ -81,19 +86,19 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
         switch (inter)
         {
         case sp::io::Keybinding::Interaction::Discrete:
-            name = tr("interaction", "Discrete");
+            name = tr("interaction", "Discrete"); // Push-and-release?
             break;
         case sp::io::Keybinding::Interaction::Continuous:
-            name = tr("interaction", "Continuous");
+            name = tr("interaction", "Continuous"); // Push-and-hold? But that's also repeating
             break;
         case sp::io::Keybinding::Interaction::Repeating:
-            name = tr("interaction", "Repeating");
+            name = tr("interaction", "Repeating"); // Rapid fire?
             break;
         case sp::io::Keybinding::Interaction::Axis0:
-            name = tr("interaction", "Axis 0 to 1");
+            name = tr("interaction", "Axis 0 to 1"); // Throttle/trigger?
             break;
         case sp::io::Keybinding::Interaction::Axis1:
-            name = tr("interaction", "Axis -1 to 1");
+            name = tr("interaction", "Axis -1 to 1"); // Stick axis?
             break;
         default: break;
         }
