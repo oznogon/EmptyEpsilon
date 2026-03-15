@@ -59,10 +59,10 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
             sp::Rect text_rect = inner_rect;
             text_rect.position.x += inner_rect.size.y * 0.5f;
             text_rect.size.x -= inner_rect.size.y;
-            renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::CenterLeft, text_size, nullptr, front.color);
+            renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::CenterLeft, text_size, front.font, front.color);
         }
         else
-            renderer.drawText(inner_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color);
+            renderer.drawText(inner_rect, entries[selection_index].name, sp::Alignment::Center, text_size, front.font, front.color);
     }
 
     if (!focus)

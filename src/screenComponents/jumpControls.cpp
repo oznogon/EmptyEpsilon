@@ -145,7 +145,11 @@ void GuiJumpControls::onUpdate()
     // Set jump distance by keybind.
     float key_change = keys.helms_increase_jump_distance.getContinuousValue() - keys.helms_decrease_jump_distance.getContinuousValue()
         + keys.helms_increase_jump_distance.getAxis0Value() - keys.helms_decrease_jump_distance.getAxis0Value();
+    if (key_change != 0.0f)
+        value = std::clamp(value + 1000.0f * key_change, slider->getRangeMax(), slider->getRangeMin());
 
+    // TODO: Apply configurable step size instead of hardcoded 1U, then
+    // eliminate 1U/0.1U binds.
     if (keys.helms_increase_jump_distance.getDiscreteStepDown()
         || keys.helms_increase_jump_distance.isRepeatReady())
         value = std::min(value + 1000.0f, slider->getRangeMin());

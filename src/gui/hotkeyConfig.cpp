@@ -5,7 +5,7 @@
 Keys keys;
 extern sp::io::Keybinding fullscreen_key;
 
-// Cinematic Keys
+// Cinematic view binds
 Keys::CinematicKeys::CinematicKeys() :
     toggle_ui("CINEMATIC_TOGGLE_UI", "H"),
     toggle_callsigns("CINEMATIC_TOGGLE_CALLSIGNS", "G"),
@@ -27,7 +27,7 @@ Keys::CinematicKeys::CinematicKeys() :
 
 void Keys::CinematicKeys::init()
 {
-    const auto localized_category = tr("hotkey_menu", "Cinematic View");
+    const auto localized_category = tr("hotkey_menu", "Cinematic view");
     toggle_ui.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle UI"));
     toggle_ui.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     toggle_callsigns.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle callsigns"));
@@ -108,6 +108,7 @@ void Keys::CinematicKeys::init()
     );
 }
 
+// Top-down view binds
 Keys::TopDownKeys::TopDownKeys() :
     toggle_ui("TOPDOWN_TOGGLE_UI", "H"),
     toggle_callsigns("TOPDOWN_TOGGLE_CALLSIGNS", "G"),
@@ -122,7 +123,7 @@ Keys::TopDownKeys::TopDownKeys() :
 
 void Keys::TopDownKeys::init()
 {
-    const auto localized_category = tr("hotkey_menu", "Top-down View");
+    const auto localized_category = tr("hotkey_menu", "Top-down view");
     toggle_ui.setLabel(localized_category, tr("hotkey_Topdown", "Toggle UI"));
     toggle_ui.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     toggle_callsigns.setLabel(localized_category, tr("hotkey_Topdown", "Toggle callsigns"));
@@ -166,7 +167,7 @@ void Keys::TopDownKeys::init()
 }
 
 Keys::Keys() :
-    //Basic
+    // General game-wide binds
     pause("PAUSE", "P"),
     help("HELP", "F1"),
     escape("ESCAPE", {"Escape", "Home", "Keypad 7", "AC Back"}),
@@ -174,8 +175,13 @@ Keys::Keys() :
     zoom_out("ZOOM_OUT"),
     voice_all("VOICE_ALL", "Backspace"),
     voice_ship("VOICE_SHIP"),
+    debug_show_fps("DEBUG_SHOW_FPS", "F10"),
+    debug_show_timing("DEBUG_SHOW_TIMING", "F11"),
+#ifdef DEBUG
+    debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
+#endif
 
-    //General
+    // Crew screen binds
     next_station("STATION_NEXT", "Tab"),
     prev_station("STATION_PREVIOUS"),
     station_helms("STATION_HELMS", "F2"),
@@ -184,7 +190,7 @@ Keys::Keys() :
     station_science("STATION_SCIENCE", "F5"),
     station_relay("STATION_RELAY", "F6"),
 
-    //Main screen
+    // Main screen
     mainscreen_forward("MAINSCREEN_FORWARD", "Up"),
     mainscreen_left("MAINSCREEN_LEFT", "Left"),
     mainscreen_right("MAINSCREEN_RIGHT", "Right"),
@@ -194,7 +200,7 @@ Keys::Keys() :
     mainscreen_long_range_radar("MAINSCREEN_LONG_RANGE", "Q"),
     mainscreen_first_person("MAINSCREEN_FIRST_PERSON", "F"),
 
-    //helms
+    // Helms crew screen
     helms_increase_impulse("HELMS_IMPULSE_INCREASE", "Up"),
     helms_increase_impulse_1("HELMS_IMPULSE_INCREASE_1"),
     helms_increase_impulse_10("HELMS_IMPULSE_INCREASE_10"),
@@ -235,7 +241,7 @@ Keys::Keys() :
     helms_combat_right("HELMS_COMBAT_RIGHT"),
     helms_combat_boost("HELMS_COMBAT_BOOST"),
 
-    //weapons
+    // Weapons crew screen
     weapons_select_homing("WEAPONS_SELECT_HOMING", "1"),
     weapons_select_nuke("WEAPONS_SELECT_NUKE", "2"),
     weapons_select_mine("WEAPONS_SELECT_MINE", "3"),
@@ -305,15 +311,15 @@ Keys::Keys() :
     weapons_shield_calibration_start("WEAPONS_SHIELD_CALIBRATION_START", "/"),
     weapons_beam_subsystem_target_next("WEAPONS_SUBSYSTEM_TARGET_NEXT", '"'),
     weapons_beam_subsystem_target_previous("WEAPONS_SUBSYSTEM_TARGET_PREVIOUS", ";"),
-    weapons_beam_frequence_increase("WEAPONS_FREQUENCY_INCREASE", "M"),
-    weapons_beam_frequence_decrease("WEAPONS_FREQUENCY_DECREASE", "N"),
+    weapons_beam_frequency_increase("WEAPONS_FREQUENCY_INCREASE", "M"),
+    weapons_beam_frequency_decrease("WEAPONS_FREQUENCY_DECREASE", "N"),
     weapons_toggle_aim_lock("WEAPONS_AIM_LOCK_TOGGLE"),
     weapons_enable_aim_lock("WEAPONS_AIM_LOCK_ENABLE"),
     weapons_disable_aim_lock("WEAPONS_AIM_LOCK_DISABLE"),
     weapons_aim_left("WEAPONS_AIM_LEFT", "G"),
     weapons_aim_right("WEAPONS_AIM_RIGHT", "H"),
 
-    //Science
+    // Science crew screen
     science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
     science_scan_abort("SCIENCE_SCAN_ABORT", "D"),
     science_select_next_scannable("SCIENCE_SELECT_NEXT_SCANNABLE", "C"),
@@ -336,7 +342,7 @@ Keys::Keys() :
         {"SCIENCE_SCAN_PARAM_SET_4"},
     }},
 
-    //Engineering
+    // Engineering crew screen
     engineering_select_system{
         {"ENGINEERING_SELECT_SYSTEM_REACTOR", "1"},
         {"ENGINEERING_SELECT_SYSTEM_BEAM_WEAPONS", "2"},
@@ -395,33 +401,31 @@ Keys::Keys() :
         {"ENGINEERING_SET_SYSTEM_COOLANT_READ_SHIELD"},
     },
 
+    // Relay crew screen
     relay_alert_level_none("RELAY_ALERT_NONE"),
     relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
     relay_alert_level_red("RELAY_ALERT_RED"),
 
+    // GM screen
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
     gm_show_callsigns("GM_SHOW_CALLSIGNS", "C"),
 
-    spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
-
-#ifdef DEBUG
-    debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
-#endif
-    debug_show_fps("DEBUG_SHOW_FPS", "F10"),
-    debug_show_timing("DEBUG_SHOW_TIMING", "F11")
+    // Spectator screen
+    spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C")
 {
 }
 
 void Keys::init()
 {
-    pause.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Pause game"));
+    // Common binds game-wide
+    pause.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Pause game"));
     pause.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    help.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Show in-game help"));
+    help.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show in-game help"));
     help.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    escape.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Return to ship options menu"));
+    escape.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Return to ship options menu"));
     escape.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    zoom_in.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Zoom in on zoomable stations"));
+    zoom_in.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Zoom in on zoomable screens"));
     zoom_in.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Discrete |
@@ -429,7 +433,7 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to out
     );
-    zoom_out.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Zoom out on zoomable stations"));
+    zoom_out.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Zoom out on zoomable screens"));
     zoom_out.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Discrete |
@@ -437,45 +441,49 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to in
     );
-    voice_all.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Broadcast voice chat to server"));
+    voice_all.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Broadcast voice chat to server"));
     voice_all.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    voice_ship.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Broadcast voice chat to ship"));
+    voice_ship.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Broadcast voice chat to ship"));
     voice_ship.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    fullscreen_key.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Fullscreen toggle"));
+    fullscreen_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Fullscreen toggle"));
     fullscreen_key.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
+    debug_show_fps.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
+    debug_show_timing.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
-    //General
-    next_station.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to next crew screen"));
+    // Crew screens
+    next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));
     next_station.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    prev_station.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to previous crew screen"));
+    prev_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to previous crew screen"));
     prev_station.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    station_helms.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to helms screen"));
+    station_helms.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to helms screen"));
     station_helms.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    station_weapons.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to weapons screen"));
+    station_weapons.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to weapons screen"));
     station_weapons.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    station_engineering.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to engineering screen"));
+    station_engineering.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to engineering screen"));
     station_engineering.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    station_science.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to science screen"));
+    station_science.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to science screen"));
     station_science.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    station_relay.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to relay screen"));
+    station_relay.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to relay screen"));
     station_relay.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
-    //Main screen
-    mainscreen_forward.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View forward"));
+    // Main screen
+    mainscreen_forward.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View forward"));
     mainscreen_forward.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    mainscreen_left.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View left (port)"));
+    mainscreen_left.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View left"));
     mainscreen_left.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    mainscreen_right.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View right (starboard)"));
+    mainscreen_right.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View right"));
     mainscreen_right.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    mainscreen_back.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View backward (aft)"));
+    mainscreen_back.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View backward"));
     mainscreen_back.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    mainscreen_target.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "Lock view on weapons target"));
+    mainscreen_target.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Lock view on weapons target"));
     mainscreen_target.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    mainscreen_tactical_radar.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View tactical radar"));
+    mainscreen_tactical_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View tactical radar"));
     mainscreen_tactical_radar.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View long-range radar"));
+    mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View long-range radar"));
     mainscreen_long_range_radar.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    mainscreen_first_person.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
+    mainscreen_first_person.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
     mainscreen_first_person.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
     // Helms
@@ -497,23 +505,22 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to left
     );
 
-    // - Combat maneuvers
     helms_combat_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost left"));
-    helms_increase_impulse.setSupportedInteractions(
+    helms_combat_left.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to dec
     );
     helms_combat_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost right"));
-    helms_increase_impulse.setSupportedInteractions(
+    helms_combat_right.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to dec
     );
     helms_combat_boost.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost forwards"));
-    helms_increase_impulse.setSupportedInteractions(
+    helms_combat_boost.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating |
@@ -664,13 +671,13 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
-    weapons_beam_frequence_increase.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Increase beam frequency"));
-    weapons_beam_frequence_increase.setSupportedInteractions(
+    weapons_beam_frequency_increase.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Increase beam frequency"));
+    weapons_beam_frequency_increase.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
-    weapons_beam_frequence_decrease.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Decrease beam frequency"));
-    weapons_beam_frequence_decrease.setSupportedInteractions(
+    weapons_beam_frequency_decrease.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Decrease beam frequency"));
+    weapons_beam_frequency_decrease.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
@@ -888,20 +895,14 @@ void Keys::init()
     topdown.init();
 
     // GM screen
-    gm_delete.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Delete"));
+    gm_delete.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Delete"));
     gm_delete.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Copy to clipboard"));
+    gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Copy to clipboard"));
     gm_clipboardcopy.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    gm_show_callsigns.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Show callsigns (GM)"));
+    gm_show_callsigns.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show callsigns (GM)"));
     gm_show_callsigns.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
-    // Various (spectator)
-    spectator_show_callsigns.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_various", "Show callsigns (spectator)"));
+    // Spectator screen
+    spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_various", "Show callsigns"));
     spectator_show_callsigns.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-
-    // Debug
-    debug_show_fps.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_debug", "Show FPS"));
-    debug_show_fps.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    debug_show_timing.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_debug", "Show debug timing"));
-    debug_show_timing.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 }
