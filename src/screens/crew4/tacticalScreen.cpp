@@ -143,14 +143,18 @@ void TacticalScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        auto angle = (keys.helms_turn_right.getSustainedValue() - keys.helms_turn_left.getSustainedValue()) * 5.0f;
+        auto angle = (keys.helms_turn_right.getContinuousValue() - keys.helms_turn_left.getContinuousValue()) * 5.0f;
+        angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * 5.0f;
+        angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * 5.0f;
+        if (keys.helms_turn_right.getDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) angle += 5.0f;
+        if (keys.helms_turn_left.getDiscreteStepDown() || keys.helms_turn_left.isRepeatReady()) angle -= 5.0f;
         if (angle != 0.0f)
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
                 my_player_info->commandTargetRotation(transform->getRotation() + angle);
         }
 
-        if (keys.weapons_enemy_next_target.getSteppedDown())
+        if (keys.weapons_enemy_next_target.getDiscreteStepDown() || keys.weapons_enemy_next_target.isRepeatReady())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
@@ -158,7 +162,7 @@ void TacticalScreen::onUpdate()
                 my_player_info->commandSetTarget(targets.get());
             }
         }
-        if (keys.weapons_next_target.getSteppedDown())
+        if (keys.weapons_next_target.getDiscreteStepDown() || keys.weapons_next_target.isRepeatReady())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
@@ -167,7 +171,7 @@ void TacticalScreen::onUpdate()
             }
         }
 
-        auto aim_adjust = keys.weapons_aim_left.getSustainedValue() - keys.weapons_aim_right.getSustainedValue();
+        auto aim_adjust = keys.weapons_aim_left.getContinuousValue() - keys.weapons_aim_right.getContinuousValue();
         if (aim_adjust != 0.0f)
         {
             missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);

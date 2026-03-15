@@ -22,7 +22,7 @@ void GuiBeamFrequencySelector::onUpdate()
 {
     if (my_spaceship && gameGlobalInfo->use_beam_shield_frequencies && isVisible())
     {
-        if (keys.weapons_beam_frequence_increase.getSteppedDown())
+        if (keys.weapons_beam_frequence_increase.getDiscreteStepDown() || keys.weapons_beam_frequence_increase.isRepeatReady())
         {
             if (getSelectionIndex() >= (int)entries.size() - 1)
                 setSelectionIndex(0);
@@ -30,7 +30,7 @@ void GuiBeamFrequencySelector::onUpdate()
                 setSelectionIndex(getSelectionIndex() + 1);
             callback();
         }
-        if (keys.weapons_beam_frequence_decrease.getSteppedDown())
+        if (keys.weapons_beam_frequence_decrease.getDiscreteStepDown() || keys.weapons_beam_frequence_decrease.isRepeatReady())
         {
             if (getSelectionIndex() <= 0)
                 setSelectionIndex(entries.size() - 1);

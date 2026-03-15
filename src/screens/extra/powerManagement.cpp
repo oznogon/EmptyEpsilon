@@ -161,48 +161,48 @@ void PowerManagementScreen::onUpdate()
             GuiSlider* power_slider = systems[int(selected_system)].power_slider;
 
             // Note the code duplication with crew6/engineeringScreen
-            if (keys.engineering_set_power_000.getSteppedDown())
+            if (keys.engineering_set_power_000.getDiscreteStepDown())
             {
                 power_slider->setValue(0.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_030.getSteppedDown())
+            if (keys.engineering_set_power_030.getDiscreteStepDown())
             {
                 power_slider->setValue(0.3f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_050.getSteppedDown())
+            if (keys.engineering_set_power_050.getDiscreteStepDown())
             {
                 power_slider->setValue(0.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_100.getSteppedDown())
+            if (keys.engineering_set_power_100.getDiscreteStepDown())
             {
                 power_slider->setValue(1.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_150.getSteppedDown())
+            if (keys.engineering_set_power_150.getDiscreteStepDown())
             {
                 power_slider->setValue(1.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_200.getSteppedDown())
+            if (keys.engineering_set_power_200.getDiscreteStepDown())
             {
                 power_slider->setValue(2.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_250.getSteppedDown())
+            if (keys.engineering_set_power_250.getDiscreteStepDown())
             {
                 power_slider->setValue(2.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_300.getSteppedDown())
+            if (keys.engineering_set_power_300.getDiscreteStepDown())
             {
                 power_slider->setValue(3.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
 
-            auto power_adjust = (keys.engineering_increase_power.getSustainedValue() - keys.engineering_decrease_power.getSustainedValue()) * 0.1f;
+            auto power_adjust = (keys.engineering_increase_power.getContinuousValue() - keys.engineering_decrease_power.getContinuousValue()) * 0.1f;
             if (power_adjust != 0.0f)
             {
                 auto sys = ShipSystem::get(my_spaceship, selected_system);
@@ -213,7 +213,7 @@ void PowerManagementScreen::onUpdate()
             }
 
             GuiSlider* coolant_slider = systems[int(selected_system)].coolant_slider;
-            auto coolant_adjust = (keys.engineering_increase_coolant.getSustainedValue() - keys.engineering_decrease_coolant.getSustainedValue()) * 0.5f;
+            auto coolant_adjust = (keys.engineering_increase_coolant.getContinuousValue() - keys.engineering_decrease_coolant.getContinuousValue()) * 0.5f;
             if (coolant_adjust != 0.0f)
             {
                 auto sys = ShipSystem::get(my_spaceship, selected_system);

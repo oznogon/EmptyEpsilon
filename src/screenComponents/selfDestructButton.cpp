@@ -38,18 +38,18 @@ void GuiSelfDestructButton::onUpdate()
 
     if (my_spaceship && isVisible())
     {
-        if (keys.engineering_self_destruct_start.getSteppedDown() && activate_button->isVisible())
+        if (keys.engineering_self_destruct_start.getDiscreteStepDown() && activate_button->isVisible())
         {
             activate_button->hide();
             confirm_button->show();
             cancel_button->show();
         }
-        if (keys.engineering_self_destruct_confirm.getSteppedDown() && confirm_button->isVisible())
+        if (keys.engineering_self_destruct_confirm.getDiscreteStepDown() && confirm_button->isVisible())
         {
             confirm_button->hide();
             my_player_info->commandActivateSelfDestruct();
         }
-        if (keys.engineering_self_destruct_cancel.getSteppedDown() && cancel_button->isVisible())
+        if (keys.engineering_self_destruct_cancel.getDiscreteStepDown() && cancel_button->isVisible())
         {
             activate_button->show();
             confirm_button->hide();

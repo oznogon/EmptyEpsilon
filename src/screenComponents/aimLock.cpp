@@ -24,17 +24,17 @@ void AimLockButton::onUpdate()
 {
     if (!isVisible())
         return;
-    if (keys.weapons_toggle_aim_lock.getSteppedDown())
+    if (keys.weapons_toggle_aim_lock.getDiscreteStepDown())
     {
         setAimLock(!getValue());
         setValue(!getValue());
     }
-    if (keys.weapons_enable_aim_lock.getSteppedDown())
+    if (keys.weapons_enable_aim_lock.getDiscreteStepDown())
     {
         setAimLock(true);
         setValue(true);
     }
-    if (keys.weapons_disable_aim_lock.getSteppedDown())
+    if (keys.weapons_disable_aim_lock.getDiscreteStepDown())
     {
         setAimLock(false);
         setValue(false);

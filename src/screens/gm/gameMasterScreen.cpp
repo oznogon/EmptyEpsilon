@@ -321,7 +321,8 @@ GameMasterScreen::~GameMasterScreen()
 
 void GameMasterScreen::update(float delta)
 {
-    float mouse_wheel_delta = keys.zoom_in.getSustainedValue() - keys.zoom_out.getSustainedValue();
+    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value()
+        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value();
     if (mouse_wheel_delta != 0.0f)
     {
         float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f)), 5000.0f, 1000000.0f);
@@ -329,11 +330,25 @@ void GameMasterScreen::update(float delta)
         if (view_distance < 10000) main_radar->shortRange();
         else main_radar->longRange();
     }
+    if (keys.zoom_in.getDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+    {
+        float view_distance = std::clamp(main_radar->getDistance() * 0.9f, 5000.0f, 1000000.0f);
+        main_radar->setDistance(view_distance);
+        if (view_distance < 10000) main_radar->shortRange();
+        else main_radar->longRange();
+    }
+    if (keys.zoom_out.getDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+    {
+        float view_distance = std::clamp(main_radar->getDistance() * 1.1f, 5000.0f, 1000000.0f);
+        main_radar->setDistance(view_distance);
+        if (view_distance < 10000) main_radar->shortRange();
+        else main_radar->longRange();
+    }
 
-    if (keys.gm_delete.getSteppedDown())
+    if (keys.gm_delete.getDiscreteStepDown())
         for(auto obj : targets.getTargets()) obj.destroy();
 
-    if (keys.gm_clipboardcopy.getSteppedDown())
+    if (keys.gm_clipboardcopy.getDiscreteStepDown())
         Clipboard::setClipboard(getScriptExport(false));
 
     // Toggle keyboard help.
@@ -352,7 +367,7 @@ void GameMasterScreen::update(float delta)
     pause_button->setValue(engine->getGameSpeed() == 0.0f);
 
     // Toggle callsigns.
-    if (keys.gm_show_callsigns.getSteppedDown())
+    if (keys.gm_show_callsigns.getDiscreteStepDown())
         main_radar->showCallsigns(!main_radar->getCallsigns());
 
     bool has_object = false;

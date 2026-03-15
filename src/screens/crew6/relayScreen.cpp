@@ -207,7 +207,8 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 void RelayScreen::onDraw(sp::RenderTarget& renderer)
 {
     ///Handle mouse wheel
-    float mouse_wheel_delta = keys.zoom_in.getSustainedValue() - keys.zoom_out.getSustainedValue();
+    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value()
+        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value();
     if (mouse_wheel_delta != 0.0f)
     {
         float view_distance = radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
@@ -220,6 +221,10 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         zoom_slider->setValue(view_distance);
         zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
     }
+    if (keys.zoom_in.getDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+        radar->setDistance(std::max(6250.0f, radar->getDistance() * 0.9f));
+    if (keys.zoom_out.getDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+        radar->setDistance(std::min(50000.0f, radar->getDistance() * 1.1f));
     ///!
 
     GuiOverlay::onDraw(renderer);

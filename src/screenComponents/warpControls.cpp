@@ -81,34 +81,19 @@ void GuiWarpControls::onUpdate()
     int command_value = current_request_value;
 
     // Change warp request by keybind.
-    if (keys.helms_increase_warp.getSteppedDown())
+    if (keys.helms_increase_warp.getDiscreteStepDown() || keys.helms_increase_warp.isRepeatReady())
     {
         if (current_request_value < warp->max_level)
             command_value = current_request_value + 1;
     }
-    else if (keys.helms_decrease_warp.getSteppedDown())
+    else if (keys.helms_decrease_warp.getDiscreteStepDown() || keys.helms_decrease_warp.isRepeatReady())
     {
         if (current_request_value > 0)
             command_value = current_request_value - 1;
     }
-    if (keys.helms_warp0.getSteppedDown())
-        command_value = 0;
-    if (keys.helms_warp1.getSteppedDown())
-        command_value = 1;
-    if (keys.helms_warp2.getSteppedDown())
-        command_value = 2;
-    if (keys.helms_warp3.getSteppedDown())
-        command_value = 3;
-    if (keys.helms_warp4.getSteppedDown())
-        command_value = 4;
-
-    // The max warp keybind is redundant on default warp ships, but warp drives
-    // can be set to have factors beyond 4, and there aren't keybinds for them.
-    if (keys.helms_warp_max.getSteppedDown())
-        command_value = warp->max_level;
 
     // Set warp request by axis.
-    // Get joystick axis map value (-1.0 to 1.0).
+    // Get joystick axis map value (0.0 to 1.0).
     float axis_value = keys.helms_set_warp.getAxis0Value();
     // The warp slider's min/max range values are inverted because the
     // gui2_slider is coded for max to be on the bottom.
@@ -118,7 +103,7 @@ void GuiWarpControls::onUpdate()
     // -1.0 and 1.0.
     float slider_axis_pos = ((slider->getValue() - slider->getRangeMax()) / slider_range) * 2.0f - 1.0f;
 
-    // Translate the axis position between -1.0 and 1.0 to a value in the
+    // Translate the axis position between 0.0 and 1.0 to a value in the
     // slider's min/max range, with rounding to simulate detents.
     if (axis_value != slider_axis_pos && (axis_value != 0.0f || set_active))
     {
@@ -126,7 +111,7 @@ void GuiWarpControls::onUpdate()
         // valid range.
         command_value = static_cast<int>(
             std::clamp(
-                std::round((((axis_value + 1.0f) / 2.0f) * slider_range) + slider->getRangeMax()),
+                std::round(axis_value * slider_range + slider->getRangeMax()),
                 slider->getRangeMax(),
                 slider->getRangeMin()
             )
@@ -134,6 +119,21 @@ void GuiWarpControls::onUpdate()
         // Ensure the next update is sent, even if it's back to zero.
         set_active = axis_value != 0.0f;
     }
+
+    if (keys.helms_warp0.getDiscreteStepDown())
+        command_value = 0;
+    else if (keys.helms_warp1.getDiscreteStepDown())
+        command_value = 1;
+    else if (keys.helms_warp2.getDiscreteStepDown())
+        command_value = 2;
+    else if (keys.helms_warp3.getDiscreteStepDown())
+        command_value = 3;
+    else if (keys.helms_warp4.getDiscreteStepDown())
+        command_value = 4;
+    // The max warp keybind is redundant on default warp ships, but warp drives
+    // can be set to have factors beyond 4, and there aren't keybinds for them.
+    else if (keys.helms_warp_max.getDiscreteStepDown())
+        command_value = warp->max_level;
 
     // If the control request has diverged from the warp drive, send the warp
     // drive command.

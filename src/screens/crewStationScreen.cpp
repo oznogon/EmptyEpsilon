@@ -357,19 +357,19 @@ void CrewStationScreen::update(float delta)
         impulse_sound->stop();
     }
 
-    if (keys.next_station.getSteppedDown())
+    if (keys.next_station.getDiscreteStepDown())
         showNextTab(1);
-    else if (keys.prev_station.getSteppedDown())
+    else if (keys.prev_station.getDiscreteStepDown())
         showNextTab(-1);
-    else if (keys.station_helms.getSteppedDown())
+    else if (keys.station_helms.getDiscreteStepDown())
         showTab(findTab(getCrewPositionName(CrewPosition::helmsOfficer)));
-    else if (keys.station_weapons.getSteppedDown())
+    else if (keys.station_weapons.getDiscreteStepDown())
         showTab(findTab(getCrewPositionName(CrewPosition::weaponsOfficer)));
-    else if (keys.station_engineering.getSteppedDown())
+    else if (keys.station_engineering.getDiscreteStepDown())
         showTab(findTab(getCrewPositionName(CrewPosition::engineering)));
-    else if (keys.station_science.getSteppedDown())
+    else if (keys.station_science.getDiscreteStepDown())
         showTab(findTab(getCrewPositionName(CrewPosition::scienceOfficer)));
-    else if (keys.station_relay.getSteppedDown())
+    else if (keys.station_relay.getDiscreteStepDown())
         showTab(findTab(getCrewPositionName(CrewPosition::relayOfficer)));
 }
 
