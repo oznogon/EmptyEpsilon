@@ -79,10 +79,10 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
             renderer.drawRotatedSprite(icon, glm::vec2(inner_rect.position.x + inner_rect.size.y * 0.5f, inner_rect.position.y + inner_rect.size.y * 0.5f), inner_rect.size.y * 0.8f, 0.0f, front.color);
             text_rect.position.x += inner_rect.size.y;
             text_rect.size.x -= inner_rect.size.y;
-            renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::CenterLeft, text_size, nullptr, front.color, sp::Font::FlagClip);
+            renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::CenterLeft, text_size, front.font, front.color, sp::Font::FlagClip);
         }
         else
-            renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color, sp::Font::FlagClip);
+            renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::Center, text_size, front.font, front.color, sp::Font::FlagClip);
     }
 
     // rect.position is in layout space; the popup lives at the canvas level
