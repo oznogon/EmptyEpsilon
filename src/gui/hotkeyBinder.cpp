@@ -113,14 +113,11 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
     (new GuiButton(row2, "ADD_BIND", "+",
         [this]()
         {
-            // Copied from onMouseDown
-            const sp::io::Keybinding::Type mouse_types = sp::io::Keybinding::Type::Pointer | sp::io::Keybinding::Type::MouseMovement | sp::io::Keybinding::Type::MouseWheel;
-            if (this->capture_filter & mouse_types)
-            {
-                // Delay startUserRebind until onMouseUp so that the triggering
-                // mouse click is not immediately captured as the new binding.
+            // Copied from onMouseDown.
+            // Delay startUserRebind until onMouseUp so that the triggering
+            // mouse click is not immediately captured as the new binding.
+            if (this->capture_filter & sp::io::Keybinding::Type::Mouse)
                 pending_rebind = true;
-            }
             else
             {
                 active_rebinder = this;
@@ -191,13 +188,10 @@ bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
 
     if (button == sp::io::Pointer::Button::Left || button == sp::io::Pointer::Button::Middle)
     {
-        const sp::io::Keybinding::Type mouse_types = sp::io::Keybinding::Type::Pointer | sp::io::Keybinding::Type::MouseMovement | sp::io::Keybinding::Type::MouseWheel;
-        if (capture_filter & mouse_types)
-        {
-            // Delay startUserRebind until onMouseUp so that the triggering
-            // mouse click is not immediately captured as the new binding.
+        // Delay startUserRebind until onMouseUp so that the triggering
+        // mouse click is not immediately captured as the new binding.
+        if (capture_filter & sp::io::Keybinding::Type::Mouse)
             pending_rebind = true;
-        }
         else
         {
             active_rebinder = this;
