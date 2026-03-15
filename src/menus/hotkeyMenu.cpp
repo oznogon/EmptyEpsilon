@@ -48,7 +48,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 0.5f)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(header_row, "HOTKEY_HEADER_SPACER", "", 18.0f))
+    (new GuiElement(header_row, "HOTKEY_HEADER_SPACER"))
         ->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)
         ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
     (new GuiLabel(header_row, "HOTKEY_HEADER_KB", tr("Keyboard"), 18.0f))
@@ -109,7 +109,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 
     // Back button to return to the Options menu
     (new GuiScrollText(info_container, "INFO_LABEL",
-        tr("Left click: Assign input. Middle click: Add input. Right click: Remove last input.\nSupported inputs: Keyboard keys, joystick buttons and axes, mouse buttons and axes.")
+        tr("Left click: Assign input. Middle click: Add input. Right click: Remove last input.\nSupported inputs: Keyboard keys, joystick buttons and axes, mouse buttons and axes.\nUnidirectional axis: Throttles, triggers. Bidirectional axis: Joysticks. Continuous: Buttons that act continuously when held down. Discrete: Buttons that act once when pressed. Repeating: Buttons that act once when pressed, then repeat after a delay.")
     ))
         ->setPosition(10.0f, 0.0f, sp::Alignment::TopCenter)
         ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 3)
@@ -216,7 +216,8 @@ void HotkeyMenu::setCategory(int cat)
         // Add a label to the current row.
         label_entries.push_back(new GuiLabel(rebinding_rows.back(), "HOTKEY_LABEL_" + item->getName(), item->getLabel(), 30.0f));
         label_entries.back()
-            ->setAlignment(sp::Alignment::CenterRight)
+            ->setWrapped()
+            ->setAlignment(sp::Alignment::TopRight)
             ->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)
             ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
 

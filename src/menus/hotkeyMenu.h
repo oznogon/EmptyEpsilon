@@ -18,7 +18,7 @@ class HotkeyMenu : public GuiCanvas, public Updatable
 private:
     const float ROW_HEIGHT = 50.0f;
     const float FRAME_MARGIN = 50.0f;
-    const float KEY_LABEL_WIDTH = 400.0f;
+    const float KEY_LABEL_WIDTH = 200.0f;
     const float KEY_BINDER_MARGIN = 12.5f;
     const float RESET_LABEL_TIMEOUT = 5.0f;
 
