@@ -55,9 +55,9 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
         const string& icon = entries[selection_index].icon_name;
         if (icon != "")
         {
-            renderer.drawRotatedSprite(icon, glm::vec2(inner_rect.position.x + inner_rect.size.y * 0.5f, inner_rect.position.y + inner_rect.size.y * 0.5f), inner_rect.size.y * 0.8f, 0.0f, front.color);
+            renderer.drawRotatedSprite(icon, glm::vec2(inner_rect.position.x, inner_rect.position.y + inner_rect.size.y * 0.5f), inner_rect.size.y * 0.8f, 0.0f, front.color);
             sp::Rect text_rect = inner_rect;
-            text_rect.position.x += inner_rect.size.y;
+            text_rect.position.x += inner_rect.size.y * 0.5f;
             text_rect.size.x -= inner_rect.size.y;
             renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::CenterLeft, text_size, nullptr, front.color);
         }
