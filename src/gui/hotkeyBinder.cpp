@@ -15,8 +15,9 @@ static string interactionIcon(sp::io::Keybinding::Interaction inter)
 {
     switch (inter)
     {
-    case sp::io::Keybinding::Interaction::Sustained: return "gui/icons/key_sustained";
-    case sp::io::Keybinding::Interaction::Stepped: return "gui/icons/key_stepped";
+    case sp::io::Keybinding::Interaction::Continuous: return "gui/icons/key_sustained";
+    case sp::io::Keybinding::Interaction::Discrete: return "gui/icons/key_stepped";
+    case sp::io::Keybinding::Interaction::Repeating: return "gui/icons/key_repeating";
     case sp::io::Keybinding::Interaction::Axis0: return "gui/icons/axis_0";
     case sp::io::Keybinding::Interaction::Axis1: return "gui/icons/axis_1";
     default: return "";
@@ -45,10 +46,12 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
 
     // Collect supported interactions in display order.
     auto supported_interactions = key->getSupportedInteractions();
-    if (supported_interactions & sp::io::Keybinding::Interaction::Stepped)
-        interaction_selector_options.push_back(sp::io::Keybinding::Interaction::Stepped);
-    if (supported_interactions & sp::io::Keybinding::Interaction::Sustained)
-        interaction_selector_options.push_back(sp::io::Keybinding::Interaction::Sustained);
+    if (supported_interactions & sp::io::Keybinding::Interaction::Discrete)
+        interaction_selector_options.push_back(sp::io::Keybinding::Interaction::Discrete);
+    if (supported_interactions & sp::io::Keybinding::Interaction::Continuous)
+        interaction_selector_options.push_back(sp::io::Keybinding::Interaction::Continuous);
+    if (supported_interactions & sp::io::Keybinding::Interaction::Repeating)
+        interaction_selector_options.push_back(sp::io::Keybinding::Interaction::Repeating);
     if (supported_interactions & sp::io::Keybinding::Interaction::Axis0)
         interaction_selector_options.push_back(sp::io::Keybinding::Interaction::Axis0);
     if (supported_interactions & sp::io::Keybinding::Interaction::Axis1)
@@ -58,52 +61,49 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
     if (!interaction_selector_options.empty())
         selected_interaction = interaction_selector_options[0];
 
-    // Show a selector only when there are multiple interaction choices.
-    if (interaction_selector_options.size() > 1)
-    {
-        interaction_selector = new GuiSelector(row2, id + "_INTERACTION",
-            [this](int index, string value)
-            {
-                selected_interaction = interaction_selector_options[index];
-            }
-        );
-
-        for (auto inter : interaction_selector_options)
+    interaction_selector = new GuiSelector(row2, id + "_INTERACTION",
+        [this](int index, string value)
         {
-            string name = "";
+            selected_interaction = interaction_selector_options[index];
+        }
+    );
+    interaction_selector
+        ->setTextSize(18.0f)
+        ->setSelectionIndex(0)
+        ->setSize(GuiElement::GuiSizeMax, SELECTOR_HEIGHT)
+        ->disable();
 
-            switch (inter)
-            {
-            case sp::io::Keybinding::Interaction::Stepped:
-                name = tr("interaction", "Stepped");
-                break;
-            case sp::io::Keybinding::Interaction::Sustained:
-                name = tr("interaction", "Sustained");
-                break;
-            case sp::io::Keybinding::Interaction::Axis0:
-                name = tr("interaction", "Axis 0 to 1");
-                break;
-            case sp::io::Keybinding::Interaction::Axis1:
-                name = tr("interaction", "Axis -1 to 1");
-                break;
-            default: break;
-            }
+    // Populate selector. Enable it if it has multiple options.
+    for (auto inter : interaction_selector_options)
+    {
+        string name = "";
 
-            int entry_index = interaction_selector->addEntry(name, "");
-            interaction_selector->setEntryIcon(entry_index, interactionIcon(inter));
+        switch (inter)
+        {
+        case sp::io::Keybinding::Interaction::Discrete:
+            name = tr("interaction", "Discrete");
+            break;
+        case sp::io::Keybinding::Interaction::Continuous:
+            name = tr("interaction", "Continuous");
+            break;
+        case sp::io::Keybinding::Interaction::Repeating:
+            name = tr("interaction", "Repeating");
+            break;
+        case sp::io::Keybinding::Interaction::Axis0:
+            name = tr("interaction", "Axis 0 to 1");
+            break;
+        case sp::io::Keybinding::Interaction::Axis1:
+            name = tr("interaction", "Axis -1 to 1");
+            break;
+        default: break;
         }
 
-        interaction_selector
-            ->setTextSize(18.0f)
-            ->setSelectionIndex(0)
-            ->setSize(GuiElement::GuiSizeMax, SELECTOR_HEIGHT);
+        int entry_index = interaction_selector->addEntry(name, "");
+        interaction_selector->setEntryIcon(entry_index, interactionIcon(inter));
     }
-    else
-    {
-        // Pad for add/remove bind button alignment.
-        (new GuiElement(row2, "PAD"))
-            ->setSize(GuiElement::GuiSizeMax, SELECTOR_HEIGHT);
-    }
+
+    if (interaction_selector_options.size() > 1)
+        interaction_selector->enable();
 
     (new GuiButton(row2, "ADD_BIND", "+",
         [this]()
@@ -124,7 +124,7 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
             }
         }
     ))
-        ->setSize(25.0f, GuiElement::GuiSizeMax);
+        ->setSize(SELECTOR_HEIGHT, GuiElement::GuiSizeMax);
 
     (new GuiButton(row2, "REMOVE_BIND", "-",
         [this]()
@@ -142,7 +142,7 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
             }
         }
     ))
-        ->setSize(25.0f, GuiElement::GuiSizeMax);
+        ->setSize(SELECTOR_HEIGHT, GuiElement::GuiSizeMax);
 }
 
 bool GuiHotkeyBinder::isAnyRebinding()
