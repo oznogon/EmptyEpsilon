@@ -81,12 +81,12 @@ void GuiWarpControls::onUpdate()
     int command_value = current_request_value;
 
     // Change warp request by keybind.
-    if (keys.helms_increase_warp.getDiscreteStepDown() || keys.helms_increase_warp.isRepeatReady())
+    if (keys.helms_increase_warp.isDiscreteStepDown() || keys.helms_increase_warp.isRepeatReady())
     {
         if (current_request_value < warp->max_level)
             command_value = current_request_value + 1;
     }
-    else if (keys.helms_decrease_warp.getDiscreteStepDown() || keys.helms_decrease_warp.isRepeatReady())
+    else if (keys.helms_decrease_warp.isDiscreteStepDown() || keys.helms_decrease_warp.isRepeatReady())
     {
         if (current_request_value > 0)
             command_value = current_request_value - 1;
@@ -120,19 +120,19 @@ void GuiWarpControls::onUpdate()
         set_active = axis_value != 0.0f;
     }
 
-    if (keys.helms_warp0.getDiscreteStepDown())
+    if (keys.helms_warp0.isDiscreteStepDown())
         command_value = 0;
-    else if (keys.helms_warp1.getDiscreteStepDown())
+    else if (keys.helms_warp1.isDiscreteStepDown())
         command_value = 1;
-    else if (keys.helms_warp2.getDiscreteStepDown())
+    else if (keys.helms_warp2.isDiscreteStepDown())
         command_value = 2;
-    else if (keys.helms_warp3.getDiscreteStepDown())
+    else if (keys.helms_warp3.isDiscreteStepDown())
         command_value = 3;
-    else if (keys.helms_warp4.getDiscreteStepDown())
+    else if (keys.helms_warp4.isDiscreteStepDown())
         command_value = 4;
     // The max warp keybind is redundant on default warp ships, but warp drives
     // can be set to have factors beyond 4, and there aren't keybinds for them.
-    else if (keys.helms_warp_max.getDiscreteStepDown())
+    else if (keys.helms_warp_max.isDiscreteStepDown())
         command_value = warp->max_level;
 
     // If the control request has diverged from the warp drive, send the warp

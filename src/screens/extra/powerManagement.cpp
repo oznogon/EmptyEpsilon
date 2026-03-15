@@ -161,42 +161,42 @@ void PowerManagementScreen::onUpdate()
             GuiSlider* power_slider = systems[int(selected_system)].power_slider;
 
             // Note the code duplication with crew6/engineeringScreen
-            if (keys.engineering_set_power_000.getDiscreteStepDown())
+            if (keys.engineering_set_power_000.isDiscreteStepDown())
             {
                 power_slider->setValue(0.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_030.getDiscreteStepDown())
+            if (keys.engineering_set_power_030.isDiscreteStepDown())
             {
                 power_slider->setValue(0.3f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_050.getDiscreteStepDown())
+            if (keys.engineering_set_power_050.isDiscreteStepDown())
             {
                 power_slider->setValue(0.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_100.getDiscreteStepDown())
+            if (keys.engineering_set_power_100.isDiscreteStepDown())
             {
                 power_slider->setValue(1.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_150.getDiscreteStepDown())
+            if (keys.engineering_set_power_150.isDiscreteStepDown())
             {
                 power_slider->setValue(1.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_200.getDiscreteStepDown())
+            if (keys.engineering_set_power_200.isDiscreteStepDown())
             {
                 power_slider->setValue(2.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_250.getDiscreteStepDown())
+            if (keys.engineering_set_power_250.isDiscreteStepDown())
             {
                 power_slider->setValue(2.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_300.getDiscreteStepDown())
+            if (keys.engineering_set_power_300.isDiscreteStepDown())
             {
                 power_slider->setValue(3.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());

@@ -50,7 +50,7 @@ void GuiShieldFrequencySelect::onUpdate()
     setVisible(my_spaceship.hasComponent<Shields>());
     if (my_spaceship && isVisible())
     {
-        if (keys.weapons_shield_calibration_increase.getDiscreteStepDown() || keys.weapons_shield_calibration_increase.isRepeatReady())
+        if (keys.weapons_shield_calibration_increase.isDiscreteStepDown() || keys.weapons_shield_calibration_increase.isRepeatReady())
         {
             if (new_frequency->getSelectionIndex() >= new_frequency->entryCount() - 1)
             {
@@ -62,7 +62,7 @@ void GuiShieldFrequencySelect::onUpdate()
             }
         }
 
-        if (keys.weapons_shield_calibration_decrease.getDiscreteStepDown() || keys.weapons_shield_calibration_decrease.isRepeatReady())
+        if (keys.weapons_shield_calibration_decrease.isDiscreteStepDown() || keys.weapons_shield_calibration_decrease.isRepeatReady())
         {
             if (new_frequency->getSelectionIndex() <= 0)
             {
@@ -74,7 +74,7 @@ void GuiShieldFrequencySelect::onUpdate()
             }
         }
 
-        if (keys.weapons_shield_calibration_start.getDiscreteStepDown())
+        if (keys.weapons_shield_calibration_start.isDiscreteStepDown())
         {
             my_player_info->commandSetShieldFrequency(new_frequency->getSelectionIndex());
         }

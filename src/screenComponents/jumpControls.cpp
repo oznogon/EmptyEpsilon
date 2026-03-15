@@ -135,7 +135,7 @@ void GuiJumpControls::onUpdate()
     if (!isVisible()) return;
 
     // Binds that work when the slider is visible, but disabked
-    if (keys.helms_abort_jump.getDiscreteStepDown())
+    if (keys.helms_abort_jump.isDiscreteStepDown())
         my_player_info->commandAbortJump();
     // ---
 
@@ -150,26 +150,26 @@ void GuiJumpControls::onUpdate()
 
     // TODO: Apply configurable step size instead of hardcoded 1U, then
     // eliminate 1U/0.1U binds.
-    if (keys.helms_increase_jump_distance.getDiscreteStepDown()
+    if (keys.helms_increase_jump_distance.isDiscreteStepDown()
         || keys.helms_increase_jump_distance.isRepeatReady())
         value = std::min(value + 1000.0f, slider->getRangeMin());
-    if (keys.helms_decrease_jump_distance.getDiscreteStepDown()
+    if (keys.helms_decrease_jump_distance.isDiscreteStepDown()
         || keys.helms_decrease_jump_distance.isRepeatReady())
         value = std::max(value - 1000.0f, slider->getRangeMax());
 
     if (key_change != 0.0f)
         value = std::clamp(value + 1000.0f * key_change, slider->getRangeMax(), slider->getRangeMin());
-    if (keys.helms_increase_jump_100.getDiscreteStepDown())
+    if (keys.helms_increase_jump_100.isDiscreteStepDown())
         value = std::min(value + 100.0f, slider->getRangeMin());
-    if (keys.helms_decrease_jump_100.getDiscreteStepDown())
+    if (keys.helms_decrease_jump_100.isDiscreteStepDown())
         value = std::max(value - 100.0f, slider->getRangeMax());
-    if (keys.helms_increase_jump_1k.getDiscreteStepDown())
+    if (keys.helms_increase_jump_1k.isDiscreteStepDown())
         value = std::min(value + 1000.0f, slider->getRangeMin());
-    if (keys.helms_decrease_jump_1k.getDiscreteStepDown())
+    if (keys.helms_decrease_jump_1k.isDiscreteStepDown())
         value = std::max(value - 1000.0f, slider->getRangeMax());
-    if (keys.helms_min_jump.getDiscreteStepDown())
+    if (keys.helms_min_jump.isDiscreteStepDown())
         value = slider->getRangeMax();
-    if (keys.helms_max_jump.getDiscreteStepDown())
+    if (keys.helms_max_jump.isDiscreteStepDown())
         value = slider->getRangeMin();
 
     // Set jump distance by axis.
@@ -194,6 +194,6 @@ void GuiJumpControls::onUpdate()
 
     slider->setValue(value);
 
-    if (keys.helms_execute_jump.getDiscreteStepDown())
+    if (keys.helms_execute_jump.isDiscreteStepDown())
         my_player_info->commandJump(slider->getValue());
 }

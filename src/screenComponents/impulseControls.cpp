@@ -53,23 +53,23 @@ void GuiImpulseControls::onUpdate()
         - keys.helms_increase_impulse.getAxis1Value() + keys.helms_decrease_impulse.getAxis1Value();
     if (change != 0.0f)
         my_player_info->commandImpulse(std::clamp(slider->getValue() + change * 0.01f, -1.0f, 1.0f));
-    if (keys.helms_increase_impulse.getDiscreteStepDown() || keys.helms_increase_impulse.isRepeatReady())
+    if (keys.helms_increase_impulse.isDiscreteStepDown() || keys.helms_increase_impulse.isRepeatReady())
         my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
-    if (keys.helms_decrease_impulse.getDiscreteStepDown() || keys.helms_decrease_impulse.isRepeatReady())
+    if (keys.helms_decrease_impulse.isDiscreteStepDown() || keys.helms_decrease_impulse.isRepeatReady())
         my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
-    if (keys.helms_increase_impulse_1.getDiscreteStepDown())
+    if (keys.helms_increase_impulse_1.isDiscreteStepDown())
         my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
-    if (keys.helms_decrease_impulse_1.getDiscreteStepDown())
+    if (keys.helms_decrease_impulse_1.isDiscreteStepDown())
         my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.01f));
-    if (keys.helms_increase_impulse_10.getDiscreteStepDown())
+    if (keys.helms_increase_impulse_10.isDiscreteStepDown())
         my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
-    if (keys.helms_decrease_impulse_10.getDiscreteStepDown())
+    if (keys.helms_decrease_impulse_10.isDiscreteStepDown())
         my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
-    if (keys.helms_zero_impulse.getDiscreteStepDown())
+    if (keys.helms_zero_impulse.isDiscreteStepDown())
         my_player_info->commandImpulse(0.0f);
-    if (keys.helms_max_impulse.getDiscreteStepDown())
+    if (keys.helms_max_impulse.isDiscreteStepDown())
         my_player_info->commandImpulse(1.0f);
-    if (keys.helms_min_impulse.getDiscreteStepDown())
+    if (keys.helms_min_impulse.isDiscreteStepDown())
         my_player_info->commandImpulse(-1.0f);
 
     // Change impulse value by axis.

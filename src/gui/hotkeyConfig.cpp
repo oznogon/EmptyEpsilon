@@ -201,45 +201,37 @@ Keys::Keys() :
     mainscreen_first_person("MAINSCREEN_FIRST_PERSON", "F"),
 
     // Helms crew screen
-    helms_increase_impulse("HELMS_IMPULSE_INCREASE", "Up"),
-    helms_increase_impulse_1("HELMS_IMPULSE_INCREASE_1"),
-    helms_increase_impulse_10("HELMS_IMPULSE_INCREASE_10"),
-    helms_decrease_impulse("HELMS_IMPULSE_DECREASE", "Down"),
-    helms_decrease_impulse_1("HELMS_IMPULSE_DECREASE_1"),
-    helms_decrease_impulse_10("HELMS_IMPULSE_DECREASE_10"),
-    helms_set_impulse("HELMS_SET_IMPULSE", {"joy:0:axis:1", "gamecontroller:0:axis:lefty"}),
-    helms_zero_impulse("HELMS_IMPULSE_ZERO", "Space"),
-    helms_max_impulse("HELMS_IMPULSE_MAX"),
-    helms_min_impulse("HELMS_IMPULSE_MIN"),
-    helms_increase_jump_100("HELMS_JUMP_INCREASE_100"),
-    helms_increase_jump_1k("HELMS_JUMP_INCREASE_1K"),
-    helms_decrease_jump_100("HELMS_JUMP_DECREASE_100"),
-    helms_decrease_jump_1k("HELMS_JUMP_DECREASE_1K"),
-    helms_set_jump("HELMS_SET_JUMP"),
-    helms_max_jump("HELMS_JUMP_MAX"),
-    helms_min_jump("HELMS_JUMP_MIN"),
     helms_turn_left("HELMS_TURN_LEFT", "Left"),
     helms_turn_right("HELMS_TURN_RIGHT", "Right"),
-    helms_warp0("HELMS_WARP0", "6"),
-    helms_warp1("HELMS_WARP1", "7"),
-    helms_warp2("HELMS_WARP2", "8"),
-    helms_warp3("HELMS_WARP3", "9"),
-    helms_warp4("HELMS_WARP4", "0"),
-    helms_warp_max("HELMS_WARP_MAX"),
-    helms_increase_warp("HELMS_WARP_INCREASE"),
-    helms_decrease_warp("HELMS_WARP_DECREASE"),
-    helms_set_warp("HELMS_SET_WARP"),
+    helms_combat_left("HELMS_COMBAT_LEFT"),
+    helms_combat_right("HELMS_COMBAT_RIGHT"),
+    helms_combat_boost("HELMS_COMBAT_BOOST"),
+    helms_increase_impulse("HELMS_IMPULSE_INCREASE", "Up"),
+    helms_decrease_impulse("HELMS_IMPULSE_DECREASE", "Down"),
+    helms_set_impulse("HELMS_SET_IMPULSE", {"joy:0:axis:1", "gamecontroller:0:axis:lefty"}),
+    helms_min_impulse("HELMS_IMPULSE_MIN"),
+    helms_zero_impulse("HELMS_IMPULSE_ZERO", "Space"),
+    helms_max_impulse("HELMS_IMPULSE_MAX"),
     helms_dock_action("HELMS_DOCK_ACTION", "D"),
     helms_dock_request("HELMS_DOCK_REQUEST"),
     helms_dock_abort("HELMS_DOCK_ABORT"),
     helms_undock("HELMS_UNDOCK"),
     helms_increase_jump_distance("HELMS_JUMP_INCREASE", "]"),
     helms_decrease_jump_distance("HELMS_JUMP_DECREASE", "["),
+    helms_set_jump("HELMS_SET_JUMP"),
+    helms_min_jump("HELMS_JUMP_MIN"),
+    helms_max_jump("HELMS_JUMP_MAX"),
     helms_execute_jump("HELMS_JUMP_EXECUTE", "\\"),
     helms_abort_jump("HELMS_JUMP_ABORT"),
-    helms_combat_left("HELMS_COMBAT_LEFT"),
-    helms_combat_right("HELMS_COMBAT_RIGHT"),
-    helms_combat_boost("HELMS_COMBAT_BOOST"),
+    helms_increase_warp("HELMS_WARP_INCREASE"),
+    helms_decrease_warp("HELMS_WARP_DECREASE"),
+    helms_set_warp("HELMS_SET_WARP"),
+    helms_warp0("HELMS_WARP0", "6"),
+    helms_warp1("HELMS_WARP1", "7"),
+    helms_warp2("HELMS_WARP2", "8"),
+    helms_warp3("HELMS_WARP3", "9"),
+    helms_warp4("HELMS_WARP4", "0"),
+    helms_warp_max("HELMS_WARP_MAX"),
 
     // Weapons crew screen
     weapons_select_homing("WEAPONS_SELECT_HOMING", "1"),
@@ -546,6 +538,8 @@ void Keys::init()
     );
     helms_max_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max forward impulse (ahead full)"));
     helms_max_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    helms_set_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set impulse (axis)"));
+    helms_set_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Axis1);
     helms_zero_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Zero impulse (full stop)"));
     helms_zero_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     helms_min_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max reverse impulse (astern full)"));
@@ -734,6 +728,8 @@ void Keys::init()
             sp::io::Keybinding::Interaction::Axis0 |
             sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to right
         );
+        science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Tune scan parameter {number} axis").format({{"number", string(n + 1)}}));
+        science_scan_param_decrease[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Axis1);
     }
 
     // Engineering
@@ -768,6 +764,11 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Discrete
     );
     // - Power assignment by selection
+    engineering_set_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set selected system power to 0%"));
+    engineering_set_power.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Axis0 |
+        sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to dec
+    );
     engineering_set_power_000.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set selected system power to 0%"));
     engineering_set_power_000.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     engineering_set_power_030.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set selected system power to 30%"));
@@ -826,6 +827,10 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis0 // TODO: Connect to inc
+    );
+    engineering_set_coolant.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Axis0 |
+        sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to dec
     );
     // - Coolant assignment by system (interactions at top of section)
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::Reactor)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor coolant"));

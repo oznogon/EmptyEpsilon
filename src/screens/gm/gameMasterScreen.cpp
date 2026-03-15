@@ -330,14 +330,14 @@ void GameMasterScreen::update(float delta)
         if (view_distance < 10000) main_radar->shortRange();
         else main_radar->longRange();
     }
-    if (keys.zoom_in.getDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+    if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
     {
         float view_distance = std::clamp(main_radar->getDistance() * 0.9f, 5000.0f, 1000000.0f);
         main_radar->setDistance(view_distance);
         if (view_distance < 10000) main_radar->shortRange();
         else main_radar->longRange();
     }
-    if (keys.zoom_out.getDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+    if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
     {
         float view_distance = std::clamp(main_radar->getDistance() * 1.1f, 5000.0f, 1000000.0f);
         main_radar->setDistance(view_distance);
@@ -345,10 +345,10 @@ void GameMasterScreen::update(float delta)
         else main_radar->longRange();
     }
 
-    if (keys.gm_delete.getDiscreteStepDown())
+    if (keys.gm_delete.isDiscreteStepDown())
         for(auto obj : targets.getTargets()) obj.destroy();
 
-    if (keys.gm_clipboardcopy.getDiscreteStepDown())
+    if (keys.gm_clipboardcopy.isDiscreteStepDown())
         Clipboard::setClipboard(getScriptExport(false));
 
     // Toggle keyboard help.
@@ -367,7 +367,7 @@ void GameMasterScreen::update(float delta)
     pause_button->setValue(engine->getGameSpeed() == 0.0f);
 
     // Toggle callsigns.
-    if (keys.gm_show_callsigns.getDiscreteStepDown())
+    if (keys.gm_show_callsigns.isDiscreteStepDown())
         main_radar->showCallsigns(!main_radar->getCallsigns());
 
     bool has_object = false;

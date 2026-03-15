@@ -146,24 +146,24 @@ void GuiMissileTubeControls::onUpdate()
     while(rows.size() > tubes->mounts.size())
         removeTubeRow();
 
-    if (keys.weapons_select_homing.getDiscreteStepDown())
+    if (keys.weapons_select_homing.isDiscreteStepDown())
         selectMissileWeapon(MW_Homing);
-    if (keys.weapons_select_nuke.getDiscreteStepDown())
+    if (keys.weapons_select_nuke.isDiscreteStepDown())
         selectMissileWeapon(MW_Nuke);
-    if (keys.weapons_select_mine.getDiscreteStepDown())
+    if (keys.weapons_select_mine.isDiscreteStepDown())
         selectMissileWeapon(MW_Mine);
-    if (keys.weapons_select_emp.getDiscreteStepDown())
+    if (keys.weapons_select_emp.isDiscreteStepDown())
         selectMissileWeapon(MW_EMP);
-    if (keys.weapons_select_hvli.getDiscreteStepDown())
+    if (keys.weapons_select_hvli.isDiscreteStepDown())
         selectMissileWeapon(MW_HVLI);
 
     for (unsigned int n = 0; n < std::min(tubes->mounts.size(), size_t(16)); n++)
     {
-        if (keys.weapons_load_tube[n].getDiscreteStepDown())
+        if (keys.weapons_load_tube[n].isDiscreteStepDown())
             my_player_info->commandLoadTube(n, load_type);
-        if (keys.weapons_unload_tube[n].getDiscreteStepDown())
+        if (keys.weapons_unload_tube[n].isDiscreteStepDown())
             my_player_info->commandUnloadTube(n);
-        if (keys.weapons_fire_tube[n].getDiscreteStepDown())
+        if (keys.weapons_fire_tube[n].isDiscreteStepDown())
         {
             float target_angle = missile_target_angle;
             if (!manual_aim)

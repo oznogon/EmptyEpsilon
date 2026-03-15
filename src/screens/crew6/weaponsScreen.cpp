@@ -139,7 +139,7 @@ void WeaponsScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        if (keys.weapons_enemy_next_target.getDiscreteStepDown() || keys.weapons_enemy_next_target.isRepeatReady())
+        if (keys.weapons_enemy_next_target.isDiscreteStepDown() || keys.weapons_enemy_next_target.isRepeatReady())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
@@ -147,7 +147,7 @@ void WeaponsScreen::onUpdate()
                 my_player_info->commandSetTarget(targets.get());
             }
         }
-        if (keys.weapons_next_target.getDiscreteStepDown() || keys.weapons_next_target.isRepeatReady())
+        if (keys.weapons_next_target.isDiscreteStepDown() || keys.weapons_next_target.isRepeatReady())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();

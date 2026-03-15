@@ -82,9 +82,9 @@ void TopDownScreen::update(float delta)
         if (camera_position.z < 1000)
             camera_position.z = 1000;
     }
-    if (keys.zoom_in.getDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+    if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
         camera_position.z = std::max(1000.0f, camera_position.z * 0.9f);
-    if (keys.zoom_out.getDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+    if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
         camera_position.z = std::min(10000.0f, camera_position.z * 1.1f);
 
     if (keys.help.getDown())

@@ -222,9 +222,9 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         zoom_slider->setValue(view_distance);
         zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
     }
-    if (keys.zoom_in.getDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+    if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
         radar->setDistance(std::max(6250.0f, radar->getDistance() * 0.9f));
-    if (keys.zoom_out.getDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+    if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
         radar->setDistance(std::min(50000.0f, radar->getDistance() * 1.1f));
     ///!
 

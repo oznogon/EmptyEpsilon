@@ -32,8 +32,8 @@ void WindowScreen::update(float delta)
     angle += (keys.helms_turn_right.getContinuousValue() - keys.helms_turn_left.getContinuousValue()) * 5.0f;
     angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * 5.0f;
     angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * 5.0f;
-    if (keys.helms_turn_right.getDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) angle += 5.0f;
-    if (keys.helms_turn_left.getDiscreteStepDown() || keys.helms_turn_left.isRepeatReady()) angle -= 5.0f;
+    if (keys.helms_turn_right.isDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) angle += 5.0f;
+    if (keys.helms_turn_left.isDiscreteStepDown() || keys.helms_turn_left.isRepeatReady()) angle -= 5.0f;
 
     if (keys.escape.getDown())
     {

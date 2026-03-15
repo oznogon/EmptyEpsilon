@@ -37,11 +37,11 @@ void GuiAlertLevelSelect::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        if (keys.relay_alert_level_none.getDiscreteStepDown())
+        if (keys.relay_alert_level_none.isDiscreteStepDown())
             my_player_info->commandSetAlertLevel(AlertLevel::Normal);
-        if (keys.relay_alert_level_yellow.getDiscreteStepDown())
+        if (keys.relay_alert_level_yellow.isDiscreteStepDown())
             my_player_info->commandSetAlertLevel(AlertLevel::YellowAlert);
-        if (keys.relay_alert_level_red.getDiscreteStepDown())
+        if (keys.relay_alert_level_red.isDiscreteStepDown())
             my_player_info->commandSetAlertLevel(AlertLevel::RedAlert);
     }
 }

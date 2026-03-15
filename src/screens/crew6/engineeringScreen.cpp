@@ -381,7 +381,7 @@ void EngineeringScreen::onUpdate()
     {
         auto coolant = my_spaceship.getComponent<Coolant>();
         for(unsigned int n=0; n<ShipSystem::COUNT; n++) {
-            if (keys.engineering_select_system[n].getDiscreteStepDown()) selectSystem(static_cast<ShipSystem::Type>(n));
+            if (keys.engineering_select_system[n].isDiscreteStepDown()) selectSystem(static_cast<ShipSystem::Type>(n));
 
             float set_value = keys.engineering_set_power_for_system[n].getAxis0Value() * 3.0f;
             auto sys = ShipSystem::get(my_spaceship, static_cast<ShipSystem::Type>(n));
@@ -408,7 +408,7 @@ void EngineeringScreen::onUpdate()
             }
         }
 
-        int navigate_system = keys.engineering_select_system_next.getDiscreteStepDown() - keys.engineering_select_system_prev.getDiscreteStepDown(); // +1 or -1
+        int navigate_system = keys.engineering_select_system_next.isDiscreteStepDown() - keys.engineering_select_system_prev.isDiscreteStepDown(); // +1 or -1
         select_system_accum += (keys.engineering_select_system_next.getContinuousValue() - keys.engineering_select_system_prev.getContinuousValue()) * 0.1f;
         if (select_system_accum >= 1.0f) { navigate_system++; select_system_accum -= 1.0f; }
         else if (select_system_accum <= -1.0f) { navigate_system--; select_system_accum += 1.0f; }
@@ -428,42 +428,42 @@ void EngineeringScreen::onUpdate()
         if (selected_system != ShipSystem::Type::None)
         {
             // Note the code duplication with extra/powerManagement
-            if (keys.engineering_set_power_000.getDiscreteStepDown())
+            if (keys.engineering_set_power_000.isDiscreteStepDown())
             {
                 power_slider->setValue(0.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_030.getDiscreteStepDown())
+            if (keys.engineering_set_power_030.isDiscreteStepDown())
             {
                 power_slider->setValue(0.3f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_050.getDiscreteStepDown())
+            if (keys.engineering_set_power_050.isDiscreteStepDown())
             {
                 power_slider->setValue(0.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_100.getDiscreteStepDown())
+            if (keys.engineering_set_power_100.isDiscreteStepDown())
             {
                 power_slider->setValue(1.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_150.getDiscreteStepDown())
+            if (keys.engineering_set_power_150.isDiscreteStepDown())
             {
                 power_slider->setValue(1.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_200.getDiscreteStepDown())
+            if (keys.engineering_set_power_200.isDiscreteStepDown())
             {
                 power_slider->setValue(2.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_250.getDiscreteStepDown())
+            if (keys.engineering_set_power_250.isDiscreteStepDown())
             {
                 power_slider->setValue(2.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_300.getDiscreteStepDown())
+            if (keys.engineering_set_power_300.isDiscreteStepDown())
             {
                 power_slider->setValue(3.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());

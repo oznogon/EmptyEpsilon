@@ -153,9 +153,9 @@ void SpectatorScreen::update(float delta)
         zoom_slider->setValue(view_distance);
         zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / view_distance, 2.0f)}}));
     }
-    if (keys.zoom_in.getDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+    if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
         main_radar->setDistance(std::max(5000.0f, main_radar->getDistance() * 0.9f));
-    if (keys.zoom_out.getDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+    if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
         main_radar->setDistance(std::min(1000000.0f, main_radar->getDistance() * 1.1f));
 
     if (keys.help.getDown())

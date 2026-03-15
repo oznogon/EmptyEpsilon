@@ -167,15 +167,15 @@ void SinglePilotScreen::onUpdate()
         auto angle = (keys.helms_turn_right.getContinuousValue() - keys.helms_turn_left.getContinuousValue()) * 5.0f;
         angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * 5.0f;
         angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * 5.0f;
-        if (keys.helms_turn_right.getDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) angle += 5.0f;
-        if (keys.helms_turn_left.getDiscreteStepDown() || keys.helms_turn_left.isRepeatReady()) angle -= 5.0f;
+        if (keys.helms_turn_right.isDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) angle += 5.0f;
+        if (keys.helms_turn_left.isDiscreteStepDown() || keys.helms_turn_left.isRepeatReady()) angle -= 5.0f;
         if (angle != 0.0f)
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
                 my_player_info->commandTargetRotation(transform->getRotation() + angle);
         }
 
-        if (keys.weapons_enemy_next_target.getDiscreteStepDown() || keys.weapons_enemy_next_target.isRepeatReady())
+        if (keys.weapons_enemy_next_target.isDiscreteStepDown() || keys.weapons_enemy_next_target.isRepeatReady())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
@@ -183,7 +183,7 @@ void SinglePilotScreen::onUpdate()
                 my_player_info->commandSetTarget(targets.get());
             }
         }
-        if (keys.weapons_next_target.getDiscreteStepDown() || keys.weapons_next_target.isRepeatReady())
+        if (keys.weapons_next_target.isDiscreteStepDown() || keys.weapons_next_target.isRepeatReady())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();

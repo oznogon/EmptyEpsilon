@@ -43,7 +43,7 @@ void GuiDockingButton::onUpdate()
 
     if (isVisible())
     {
-        if (keys.helms_dock_action.getDiscreteStepDown())
+        if (keys.helms_dock_action.isDiscreteStepDown())
         {
             switch(port->state)
             {
@@ -58,11 +58,11 @@ void GuiDockingButton::onUpdate()
                 break;
             }
         }
-        else if (keys.helms_dock_request.getDiscreteStepDown())
+        else if (keys.helms_dock_request.isDiscreteStepDown())
             my_player_info->commandDock(findDockingTarget());
-        else if (keys.helms_dock_abort.getDiscreteStepDown())
+        else if (keys.helms_dock_abort.isDiscreteStepDown())
             my_player_info->commandAbortDock();
-        else if (keys.helms_undock.getDiscreteStepDown())
+        else if (keys.helms_undock.isDiscreteStepDown())
             my_player_info->commandUndock();
     }
 }

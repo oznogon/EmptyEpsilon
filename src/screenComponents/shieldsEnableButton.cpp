@@ -64,14 +64,14 @@ void GuiShieldsEnableButton::onUpdate()
     setVisible(my_spaceship.hasComponent<Shields>());
     if (my_spaceship && isVisible())
     {
-        if (keys.weapons_toggle_shields.getDiscreteStepDown()) {
+        if (keys.weapons_toggle_shields.isDiscreteStepDown()) {
             auto shields = my_spaceship.getComponent<Shields>();
             if (shields)
                 my_player_info->commandSetShields(!shields->active);
         }
-        if (keys.weapons_enable_shields.getDiscreteStepDown())
+        if (keys.weapons_enable_shields.isDiscreteStepDown())
             my_player_info->commandSetShields(true);
-        if (keys.weapons_disable_shields.getDiscreteStepDown())
+        if (keys.weapons_disable_shields.isDiscreteStepDown())
             my_player_info->commandSetShields(false);
     }
 }
