@@ -29,18 +29,19 @@
 #include "screenComponents/shieldsEnableButton.h"
 #include "screenComponents/warpControls.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
 
 TacticalScreen::TacticalScreen(GuiContainer* owner)
-: GuiOverlay(owner, "TACTICAL_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "TACTICAL_SCREEN", GuiTheme::getColor("background"))
 {
     // Render the radar shadow and background decorations.
-    (new GuiImage(this, "BACKGROUND_GRADIENT", "gui/background/gradientSingle.png"))->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);
+    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))->setTextureThemed("background.gradient_single")->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);
 
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiled("gui/background/crosses.png");
+    background_crosses->setTextureTiledThemed("background.crosses");
 
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));

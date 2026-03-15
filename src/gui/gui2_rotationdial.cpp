@@ -3,8 +3,9 @@
 #include "textureManager.h"
 #include "vectorUtils.h"
 #include "logging.h"
-#include "theme.h"
 #include "preferenceManager.h"
+#include "theme.h"
+
 
 GuiRotationDial::GuiRotationDial(GuiContainer* owner, string id, float min_value, float max_value, float start_value, float rotation_offset, float ring_thickness, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), rotation_offset(rotation_offset), ring_thickness(ring_thickness), func(func)

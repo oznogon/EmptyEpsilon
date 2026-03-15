@@ -1,9 +1,15 @@
-#include <i18n.h>
 #include "aimLock.h"
+#include <i18n.h>
 
 #include "playerInfo.h"
 #include "missileTubeControls.h"
 #include "components/collision.h"
+
+#include "gui/theme.h"
+#include "gui/gui2_rotationdial.h"
+
+#include "screenComponents/radarView.h"
+
 
 AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim)
 : GuiToggleButton(owner, id, tr("missile", "Lock"), [this](bool value)
