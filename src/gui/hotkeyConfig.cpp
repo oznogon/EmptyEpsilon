@@ -500,22 +500,18 @@ void Keys::init()
     helms_combat_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost left"));
     helms_combat_left.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
-        sp::io::Keybinding::Interaction::Discrete |
-        sp::io::Keybinding::Interaction::Repeating |
+        sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to dec
     );
     helms_combat_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost right"));
     helms_combat_right.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
-        sp::io::Keybinding::Interaction::Discrete |
-        sp::io::Keybinding::Interaction::Repeating |
+        sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to dec
     );
     helms_combat_boost.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost forwards"));
     helms_combat_boost.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
-        sp::io::Keybinding::Interaction::Discrete |
-        sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis0
     );
 
