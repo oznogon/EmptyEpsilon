@@ -159,14 +159,6 @@ void GuiJumpControls::onUpdate()
 
     if (key_change != 0.0f)
         value = std::clamp(value + 1000.0f * key_change, slider->getRangeMax(), slider->getRangeMin());
-    if (keys.helms_increase_jump_100.isDiscreteStepDown())
-        value = std::min(value + 100.0f, slider->getRangeMin());
-    if (keys.helms_decrease_jump_100.isDiscreteStepDown())
-        value = std::max(value - 100.0f, slider->getRangeMax());
-    if (keys.helms_increase_jump_1k.isDiscreteStepDown())
-        value = std::min(value + 1000.0f, slider->getRangeMin());
-    if (keys.helms_decrease_jump_1k.isDiscreteStepDown())
-        value = std::max(value - 1000.0f, slider->getRangeMax());
     if (keys.helms_min_jump.isDiscreteStepDown())
         value = slider->getRangeMax();
     if (keys.helms_max_jump.isDiscreteStepDown())
