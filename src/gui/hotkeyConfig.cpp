@@ -171,6 +171,7 @@ Keys::Keys() :
     pause("PAUSE", "P"),
     help("HELP", "F1"),
     escape("ESCAPE", {"Escape", "Home", "Keypad 7", "AC Back"}),
+    cancel_rebind("CANCEL_REBIND", {"Delete", "Backspace"}),
     zoom_in("ZOOM_IN", {"wheel:y"}),
     zoom_out("ZOOM_OUT"),
     voice_all("VOICE_ALL", "Backspace"),
@@ -417,6 +418,8 @@ void Keys::init()
     help.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     escape.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Return to ship options menu"));
     escape.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    cancel_rebind.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Cancel control binding"));
+    cancel_rebind.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     zoom_in.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Zoom in on zoomable screens"));
     zoom_in.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
