@@ -1,7 +1,5 @@
 #include "hotkeyBinder.h"
 #include <i18n.h>
-#include "engine.h"
-#include "hotkeyConfig.h"
 #include "theme.h"
 
 #include "gui/gui2_button.h"
