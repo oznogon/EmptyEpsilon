@@ -25,6 +25,7 @@ private:
     void clearFilteredKeys();
 public:
     GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key, sp::io::Keybinding::Type display_filter = sp::io::Keybinding::Type::Default, sp::io::Keybinding::Type capture_filter = sp::io::Keybinding::Type::Default);
+    virtual ~GuiHotkeyBinder();
 
     // Returns true if any binder is actively rebinding. Used to prevent
     // game-wide binds like escape from being handled while binding a key.

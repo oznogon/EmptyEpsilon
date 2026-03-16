@@ -147,6 +147,16 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
         ->setSize(SELECTOR_HEIGHT, GuiElement::GuiSizeMax);
 }
 
+GuiHotkeyBinder::~GuiHotkeyBinder()
+{
+    if (active_rebinder == this)
+    {
+        sp::io::Keybinding::cancelUserRebind();
+        active_rebinder = nullptr;
+        active_key = nullptr;
+    }
+}
+
 bool GuiHotkeyBinder::isAnyRebinding()
 {
     return active_rebinder != nullptr;
