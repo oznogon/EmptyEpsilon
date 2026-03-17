@@ -69,7 +69,7 @@ private:
     GuiScrollText* legend_text;
     GuiButton* replace_btn;
     GuiButton* add_btn;
-    GuiButton* ok_btn;
+    GuiButton* back_btn;
 
     void closeDialog();
     void startCapture();
@@ -88,7 +88,6 @@ private:
     sp::io::Keybinding::Interaction selected_interaction = sp::io::Keybinding::Interaction::None;
     GuiRebindDialog* rebind_dialog = nullptr;
 
-    GuiSelector* interaction_selector = nullptr;
     GuiElement* interaction_row = nullptr;
     std::vector<sp::io::Keybinding::Interaction> interaction_selector_options;
 

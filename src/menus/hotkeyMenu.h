@@ -3,6 +3,7 @@
 #include "optionsMenu.h"
 #include "gui/hotkeyBinder.h"
 #include "Updatable.h"
+#include <timer.h>
 
 class GuiButton;
 class GuiCanvas;
@@ -19,8 +20,9 @@ class HotkeyMenu : public GuiCanvas, public Updatable
 {
 private:
     const float ROW_HEIGHT = 50.0f;
+    const float ROW_MARGIN = 50.0f;
     const float FRAME_MARGIN = 50.0f;
-    const float KEY_LABEL_WIDTH = 200.0f;
+    const float KEY_LABEL_WIDTH = 250.0f;
     const float KEY_BINDER_MARGIN = 12.5f;
     const float RESET_LABEL_TIMEOUT = 5.0f;
 
@@ -38,7 +40,7 @@ private:
 
     string category = "";
     int category_index = 1;
-    float reset_label_timer = 0.0f;
+    sp::SystemTimer reset_label_timer;
     std::vector<string> category_list;
     std::vector<sp::io::Keybinding*> hotkey_list;
     OptionsMenu::ReturnTo return_to;
@@ -47,7 +49,7 @@ private:
     bool use_dialog_mode = true;
     GuiToggleButton* dialog_mode_toggle;
 
-    // Rebind dialog (child of this canvas, renders on top)
+    // Rebind dialog
     GuiRebindDialog* rebind_dialog = nullptr;
 
     void setCategory(int cat);

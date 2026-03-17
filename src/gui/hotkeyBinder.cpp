@@ -57,50 +57,6 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
     if (!interaction_selector_options.empty())
         selected_interaction = interaction_selector_options[0];
 
-    interaction_selector = new GuiSelector(row2, id + "_INTERACTION",
-        [this](int index, string value)
-        {
-            selected_interaction = interaction_selector_options[index];
-        }
-    );
-    interaction_selector
-        ->setTextSize(18.0f)
-        ->setSelectionIndex(0)
-        ->setSize(GuiElement::GuiSizeMax, SELECTOR_HEIGHT)
-        ->disable();
-
-    // Populate selector. Enable it if it has multiple options.
-    for (auto inter : interaction_selector_options)
-    {
-        string name = "";
-
-        switch (inter)
-        {
-        case sp::io::Keybinding::Interaction::Discrete:
-            name = tr("interaction", "Discrete"); // Push-and-release?
-            break;
-        case sp::io::Keybinding::Interaction::Continuous:
-            name = tr("interaction", "Continuous"); // Push-and-hold? But that's also repeating
-            break;
-        case sp::io::Keybinding::Interaction::Repeating:
-            name = tr("interaction", "Repeating"); // Rapid fire?
-            break;
-        case sp::io::Keybinding::Interaction::Axis0:
-            name = tr("interaction", "Axis 0 to 1"); // Throttle/trigger?
-            break;
-        case sp::io::Keybinding::Interaction::Axis1:
-            name = tr("interaction", "Axis -1 to 1"); // Stick axis?
-            break;
-        default: break;
-        }
-
-        int entry_index = interaction_selector->addEntry(name, "");
-        interaction_selector->setEntryIcon(entry_index, interactionIcon(inter));
-    }
-
-    if (interaction_selector_options.size() > 1)
-        interaction_selector->enable();
-
     (new GuiButton(row2, "ADD_BIND", "+",
         [this]()
         {
@@ -162,7 +118,6 @@ bool GuiHotkeyBinder::isAnyRebinding()
 void GuiHotkeyBinder::setDialog(GuiRebindDialog* dialog)
 {
     rebind_dialog = dialog;
-    interaction_row->setVisible(dialog == nullptr);
 }
 
 void GuiHotkeyBinder::clearFilteredKeys()
@@ -273,7 +228,9 @@ void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
     const auto& front = front_style->get(getState());
 
     // When the selector is below, restrict rendering to the binding field portion only.
-    const float text_height = rect.size.y - SELECTOR_HEIGHT;
+    const float text_height = interaction_row->isVisible()
+        ? rect.size.y - SELECTOR_HEIGHT
+        : rect.size.y;
     renderer.drawStretched(sp::Rect(rect.position.x, rect.position.y, rect.size.x, text_height), back.texture, back.color);
 
     if (is_my_rebind)
@@ -314,12 +271,16 @@ void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
             renderer.drawText({x, rect.position.y, text_w, text_height}, prepared);
             x += text_w;
 
-            // Interaction icon immediately after the key name
-            string icon = interactionIcon(b.interaction);
-            if (!icon.empty())
+            // Show interaction icon only when multiple interactions are
+            // supported.
+            if (interaction_selector_options.size() > 1)
             {
-                renderer.drawRotatedSprite(icon, glm::vec2(x + icon_size * 0.5f, icon_y), icon_size, 0.0f, front.color);
-                x += icon_size;
+                string icon = interactionIcon(b.interaction);
+                if (!icon.empty())
+                {
+                    renderer.drawRotatedSprite(icon, glm::vec2(x + icon_size * 0.5f, icon_y), icon_size, 0.0f, front.color);
+                    x += icon_size;
+                }
             }
         }
     }
@@ -340,7 +301,8 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
     panel = new GuiPanel(this, id + "_PANEL");
     panel
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
-        ->setSize(500.0f, 400.0f);
+        ->setSize(1000.0f, 700.0f)
+        ->setAttribute("padding", "10");
 
     auto* content = new GuiElement(panel, id + "_CONTENT");
     content
@@ -348,13 +310,13 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
         ->setMargins(15.0f)
         ->setAttribute("layout", "vertical");
 
-    action_label = new GuiLabel(content, id + "_ACTION", "", 22.0f);
+    action_label = new GuiLabel(content, id + "_ACTION", tr("hotkey_menu", "Rebinding: "), 30.0f);
     action_label
-        ->setAlignment(sp::Alignment::CenterLeft)
+        ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, 40.0f)
         ->setMargins(0.0f, 5.0f);
 
-    input_label = new GuiLabel(content, id + "_INPUT", tr("hotkey_menu", "[Press any key or input...]"), 24.0f);
+    input_label = new GuiLabel(content, id + "_INPUT", tr("hotkey_menu", "[Press any key or input...]"), 30.0f);
     input_label
         ->addBackground()
         ->setAlignment(sp::Alignment::Center)
@@ -362,7 +324,7 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
         ->setMargins(0.0f, 5.0f);
 
     mouse_panel_btn = new GuiButton(content, id + "_MOUSE_PANEL",
-        tr("hotkey_menu", "Press mouse button here"),
+        tr("hotkey_menu", "Click here, then move or click mouse to bind"),
         [this]()
         {
             // Button callback fires on mouse-up, so the triggering click is
@@ -381,11 +343,11 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
         ->setMargins(0.0f, 5.0f)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(interaction_row, id + "_INTER_LABEL", tr("hotkey_menu", "Interaction:"), 20.0f))
-        ->setAlignment(sp::Alignment::CenterLeft)
-        ->setSize(130.0f, GuiElement::GuiSizeMax);
+    (new GuiLabel(interaction_row, id + "_INTER_LABEL", tr("hotkey_menu", "Interaction type:"), 30.0f))
+        ->setAlignment(sp::Alignment::CenterRight)
+        ->setSize(400.0f, GuiElement::GuiSizeMax);
 
-    interaction_selector = new GuiSelector(interaction_row, id + "_INTER_SEL",
+    interaction_selector = new GuiSelector(interaction_row, id + "_INTERACTION_SELECTOR",
         [this](int index, string /*value*/)
         {
             if (index < 0 || index >= static_cast<int>(interaction_options.size()))
@@ -396,21 +358,21 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
         }
     );
     interaction_selector
-        ->setTextSize(18.0f)
+        ->setTextSize(30.0f)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     legend_text = new GuiScrollText(content, id + "_LEGEND",
         tr("hotkey_menu",
-            "Discrete: Acts only once when pressed. (Buttons, encoders, switches)\n"
-            "Continuous: Acts every frame for as long as it's held down. (Steering using buttons, smooth sliders)\n"
-            "Repeating: Acts once, waits, then acts repeatedly. (Keyboard repeating, sliders with stepped values)\n"
-            "Axis 0 to 1: Value is between a minimum value when released and maximum when fully pressed in one direction. (Triggers, throttles)\n"
-            "Axis -1 to 1: Value is 0 or centered when released and can be pushed in either direction. (Joysticks)"
+            "Discrete: Acts only once when pressed. (Buttons, encoders, switches)\n\n"
+            "Continuous: Acts every frame for as long as it's held down. (Steering using buttons, smooth sliders)\n\n"
+            "Repeating: Acts once, waits, then acts repeatedly. (Keyboard repeating, sliders with stepped values)\n\n"
+            "Axis one-way: Control rests at a minimum value and is fully engaged at its maximum. (Triggers, throttles)\n\n"
+            "Axis two-way: Control is centered at rest and can be pushed in two directions from there. (Joysticks)"
         )
     );
     legend_text
-        ->setTextSize(16.0f)
-        ->setSize(GuiElement::GuiSizeMax, 90.0f)
+        ->setTextSize(25.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setMargins(0.0f, 5.0f);
 
     auto* btn_row = new GuiElement(content, id + "_BTN_ROW");
@@ -422,53 +384,55 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
     replace_btn = new GuiButton(btn_row, id + "_REPLACE",
         tr("button", "Replace"), [this]() { commitReplace(); });
     replace_btn
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setSize(150.0f, GuiElement::GuiSizeMax)
         ->setMargins(0.0f, 0.0f, 5.0f, 0.0f)
         ->hide();
 
     add_btn = new GuiButton(btn_row, id + "_ADD",
         tr("button", "Add"), [this]() { commitAdd(); });
     add_btn
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setSize(150.0f, GuiElement::GuiSizeMax)
         ->setMargins(0.0f, 0.0f, 5.0f, 0.0f)
         ->hide();
 
-    // Spacer pushes OK to the right when Replace/Add are hidden.
     (new GuiElement(btn_row, id + "_BTN_SPACER"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    ok_btn = new GuiButton(btn_row, id + "_OK",
-        tr("button", "OK"),
+    back_btn = new GuiButton(btn_row, id + "_BACK",
+        tr("button", "Back"),
         [this]()
         {
             if (state == State::HasInput)
             {
                 // Discard the pending capture and return to WaitingForInput.
-                if (target_key)
-                    target_key->discardPendingRebind();
+                if (target_key) target_key->discardPendingRebind();
+
                 state = State::WaitingForInput;
                 input_label->setText(tr("hotkey_menu", "[Press any key or input...]"));
                 replace_btn->hide();
                 add_btn->hide();
+
                 // Restart capture for non-mouse filters.
                 if (!(capture_filter & sp::io::Keybinding::Type::Mouse))
                     startCapture();
                 else
                 {
-                    mouse_panel_btn->setText(tr("hotkey_menu", "Press mouse button here"));
-                    mouse_panel_btn->enable();
+                    mouse_panel_btn
+                        ->setText(tr("hotkey_menu", "Click here, then move or click mouse to bind"))
+                        ->enable();
+                    input_label->setText("");
                 }
             }
             else
             {
-                // WaitingForInput: cancel any active capture and close.
+                // Cancel any active capture and close.
                 sp::io::Keybinding::cancelUserRebind();
                 closeDialog();
             }
         }
     );
-    ok_btn
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    back_btn
+        ->setSize(150.0f, GuiElement::GuiSizeMax);
 
     setVisible(false);
 }
@@ -483,8 +447,16 @@ void GuiRebindDialog::startRebind(sp::io::Keybinding* key,
     display_filter = df;
     state = State::WaitingForInput;
 
-    action_label->setText(tr("hotkey_menu", "Rebinding: ") + action_name);
-    input_label->setText(tr("hotkey_menu", "[Press any key or input...]"));
+    string input_type_label;
+    if (cf & sp::io::Keybinding::Type::Keyboard)
+        input_type_label = tr("hotkey_menu", "Keyboard");
+    else if (cf & (sp::io::Keybinding::Type::Joystick | sp::io::Keybinding::Type::Controller))
+        input_type_label = tr("hotkey_menu", "Joystick");
+    else if (cf & sp::io::Keybinding::Type::Mouse)
+        input_type_label = tr("hotkey_menu", "Mouse");
+    else
+        input_type_label = tr("hotkey_menu", "Rebinding");
+    action_label->setText(input_type_label + ": " + action_name);
     replace_btn->hide();
     add_btn->hide();
 
@@ -495,8 +467,16 @@ void GuiRebindDialog::startRebind(sp::io::Keybinding* key,
     mouse_panel_btn->setVisible(has_mouse);
     if (has_mouse)
     {
-        mouse_panel_btn->setText(tr("hotkey_menu", "Press mouse button here"));
-        mouse_panel_btn->enable();
+        mouse_panel_btn
+            ->setText(tr("hotkey_menu", "Click here, then move or click mouse to bind"))
+            ->enable();
+        input_label->setText("");
+    }
+    else
+    {
+        mouse_panel_btn
+            ->disable();
+        input_label->setText(tr("hotkey_menu", "[Press any key or input...]"));
     }
 
     active_dialog = this;
@@ -543,8 +523,8 @@ void GuiRebindDialog::populateInteractionSelector()
         {sp::io::Keybinding::Interaction::Discrete, "Discrete"},
         {sp::io::Keybinding::Interaction::Continuous, "Continuous"},
         {sp::io::Keybinding::Interaction::Repeating, "Repeating"},
-        {sp::io::Keybinding::Interaction::Axis0, "Axis 0 to 1"},
-        {sp::io::Keybinding::Interaction::Axis1, "Axis -1 to 1"},
+        {sp::io::Keybinding::Interaction::Axis0, "Axis one-way"},
+        {sp::io::Keybinding::Interaction::Axis1, "Axis two-way"},
     };
 
     for (auto& o : opts)
@@ -563,7 +543,14 @@ void GuiRebindDialog::populateInteractionSelector()
     }
     else selected_interaction = sp::io::Keybinding::Interaction::None;
 
-    interaction_row->setVisible(interaction_options.size() > 1);
+    const bool has_interactions = interaction_options.size() > 1;
+    interaction_row->setVisible(has_interactions);
+    legend_text->setVisible(has_interactions);
+    if (has_interactions)
+        panel->setSize(1000.0f, 700.0f);
+    else
+        panel->setSize(700.0f, 350.0f);
+
 }
 
 bool GuiRebindDialog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
@@ -597,21 +584,16 @@ void GuiRebindDialog::commitReplace()
     if (!target_key || !target_key->hasPendingRebind()) return;
 
     target_key->setPendingRebindInteraction(selected_interaction);
-    int new_raw_key = target_key->getPendingRebindRawKey();
 
-    // Remove existing bindings that match display_filter and don't share the
-    // same raw key number as the pending binding.
+    // Remove all existing bindings that match display_filter.
     int count = 0;
     while (target_key->getKeyType(count) != sp::io::Keybinding::Type::None)
         count++;
 
     for (int i = count - 1; i >= 0; --i)
     {
-        if ((target_key->getKeyType(i) & display_filter)
-            && target_key->getRawKeyNumber(i) != new_raw_key)
-        {
+        if (target_key->getKeyType(i) & display_filter)
             target_key->removeKey(i);
-        }
     }
 
     target_key->commitPendingRebind();

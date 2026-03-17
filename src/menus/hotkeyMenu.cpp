@@ -52,22 +52,23 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     (new GuiElement(header_row, "HOTKEY_HEADER_SPACER"))
         ->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)
         ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
-    (new GuiLabel(header_row, "HOTKEY_HEADER_KB", tr("Keyboard"), 18.0f))
+    (new GuiLabel(header_row, "HOTKEY_HEADER_KB", tr("Keyboard"), 30.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
-    (new GuiLabel(header_row, "HOTKEY_HEADER_JS", tr("Joystick"), 18.0f))
+    (new GuiLabel(header_row, "HOTKEY_HEADER_JS", tr("Joystick"), 30.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
-    (new GuiLabel(header_row, "HOTKEY_HEADER_MS", tr("Mouse"), 18.0f))
+    (new GuiLabel(header_row, "HOTKEY_HEADER_MS", tr("Mouse"), 30.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
 
-    info_container = new GuiElement(container, "INFO_CONTAINER_CONTAINER");
+    info_container = new GuiElement(container, "INFO_CONTAINER");
     info_container
-        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 3.0f);
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 3.0f)
+        ->setAttribute("layout", "horizontal");
 
     bottom_row = new GuiElement(container, "BOTTOM_ROW_CONTAINER");
     bottom_row
@@ -79,7 +80,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     // Title label
     (new GuiLabel(top_row, "CONFIGURE_CONTROLS_LABEL", tr("Configure controls"), 30.0f))
         ->addBackground()
-        ->setSize(350.0f, GuiElement::GuiSizeMax);
+        ->setSize(300.0f, GuiElement::GuiSizeMax);
 
     // Category selector
     // Get a list of hotkey categories
@@ -96,7 +97,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         ->setSize(300.0f, GuiElement::GuiSizeMax)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter);
 
-    dialog_mode_toggle = new GuiToggleButton(top_row, "DIALOG_MODE_TOGGLE", tr("hotkey_menu", "Use rebind dialog"),
+    dialog_mode_toggle = new GuiToggleButton(top_row, "DIALOG_MODE_TOGGLE", tr("hotkey_menu", "Advanced binding"),
         [this](bool active)
         {
             use_dialog_mode = active;
@@ -106,7 +107,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     );
     dialog_mode_toggle
         ->setValue(true)
-        ->setSize(220.0f, GuiElement::GuiSizeMax)
+        ->setSize(300.0f, GuiElement::GuiSizeMax)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight);
 
     // Middle: Rebinding UI frame
@@ -117,8 +118,22 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 
     // Info text for non-dialog mode
     (new GuiScrollText(info_container, "INFO_LABEL",
-        tr("Left click: Assign input. Middle click: Add input. Right click: Remove last input.\nSupported inputs: Keyboard keys, joystick buttons and axes, mouse buttons and axes.\nUnidirectional axis: Throttles, triggers. Bidirectional axis: Joysticks. Continuous: Buttons that act continuously when held down. Discrete: Buttons that act once when pressed. Repeating: Buttons that act once when pressed, then repeat after a delay.")
+        tr("Left click: Assign input. Middle click: Add input. Right click: Remove last input.\nSupported inputs: Keyboard keys, joystick buttons and axes, mouse buttons and axes.")
     ))
+        ->setTextSize(20.0f)
+        ->setPosition(10.0f, 0.0f, sp::Alignment::TopCenter)
+        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 3)
+        ->setAttribute("margin", "0, 0, 20, 0");
+
+    (new GuiScrollText(info_container, "INFO_LABEL",
+        tr("hotkey_menu",
+            "Discrete: Acts only once when pressed.\n"
+            "Continuous: Acts every frame for as long as it's held down.\n"
+            "Repeating: Acts once, waits, then acts repeatedly.\n"
+            "Axis one-way: Axis that moves in one direction.\n"
+            "Axis two-way: Axis that moves in two directions.")
+    ))
+        ->setTextSize(20.0f)
         ->setPosition(10.0f, 0.0f, sp::Alignment::TopCenter)
         ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 3)
         ->setAttribute("margin", "0, 0, 20, 0");
@@ -141,9 +156,10 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     // Reset keybinds confirmation
     reset_label = new GuiLabel(bottom_row, "RESET_LABEL", tr("Bindings reset to defaults"), 30.0f);
     reset_label
-        ->setAlignment(sp::Alignment::CenterRight)
-        ->setPosition(0.0f, -50.0f, sp::Alignment::BottomRight)
-        ->setSize(100.0f, 50.0f)
+        ->addBackground()
+        ->setAlignment(sp::Alignment::Center)
+        ->setPosition(-150.0f, 0.0f, sp::Alignment::BottomRight)
+        ->setSize(300.0f, 50.0f)
         ->hide();
 
     // Reset keybinds button
@@ -151,7 +167,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         [this]()
         {
             reset_label->setVisible(true);
-            reset_label_timer = RESET_LABEL_TIMEOUT;
+            reset_label_timer.start(RESET_LABEL_TIMEOUT);
 
             // Iterate through all bindings and reset to defaults.
             for (auto category : sp::io::Keybinding::getCategories())
@@ -187,11 +203,8 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 void HotkeyMenu::update(float delta)
 {
     // Tick countdown to hiding the reset indicator.
-    if (reset_label->isVisible())
-    {
-        reset_label_timer -= delta;
-        reset_label->setVisible(reset_label_timer > 0.0f);
-    }
+    if (reset_label->isVisible() && reset_label_timer.isExpired())
+        reset_label->hide();
 
     // Return to the options menu on Esc/Home bind, but not while rebinding or
     // while the rebind dialog is open.
@@ -207,8 +220,7 @@ void HotkeyMenu::update(float delta)
 void HotkeyMenu::setCategory(int cat)
 {
     // Close the dialog if it was open for a binder that is about to be destroyed.
-    if (rebind_dialog)
-        rebind_dialog->closeIfOpen();
+    if (rebind_dialog) rebind_dialog->closeIfOpen();
 
     // Remove any previous category's hotkey entries.
     for (GuiHotkeyBinder* text : text_entries) text->destroy();
@@ -230,11 +242,7 @@ void HotkeyMenu::setCategory(int cat)
 
     const sp::io::Keybinding::Type joystick_type = sp::io::Keybinding::Type::Joystick | sp::io::Keybinding::Type::Controller;
 
-    // In dialog mode the interaction selector row is hidden, so use just ROW_HEIGHT.
-    // In direct mode include SELECTOR_HEIGHT for the interaction selector row.
-    float row_h = use_dialog_mode
-        ? ROW_HEIGHT
-        : ROW_HEIGHT + GuiHotkeyBinder::SELECTOR_HEIGHT;
+    float row_h = ROW_HEIGHT + GuiHotkeyBinder::SELECTOR_HEIGHT;
 
     // Begin rendering hotkey rebinding fields for this category.
     for (auto item : hotkey_list)
@@ -243,7 +251,7 @@ void HotkeyMenu::setCategory(int cat)
         rebinding_rows.push_back(new GuiElement(scroll_container, ""));
         rebinding_rows.back()
             ->setSize(GuiElement::GuiSizeMax, row_h)
-            ->setMargins(0.0f, 5.0f)
+            ->setMargins(0.0f, 20.0f)
             ->setAttribute("layout", "horizontal");
 
         // Add a label to the current row.

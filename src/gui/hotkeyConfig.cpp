@@ -41,71 +41,103 @@ void Keys::CinematicKeys::init()
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    previous_player_ship.setDefaultInteraction(sp::io::Keybinding::Interaction::Discrete);
     next_player_ship.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle next player ship"));
     next_player_ship.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    next_player_ship.setDefaultInteraction(sp::io::Keybinding::Interaction::Discrete);
     move_forward.setLabel(localized_category, tr("hotkey_Cinematic", "Move forward"));
     move_forward.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to backward
     );
+    move_forward.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    move_forward.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    move_forward.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     move_backward.setLabel(localized_category, tr("hotkey_Cinematic", "Move backward"));
     move_backward.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to forward
     );
+    move_backward.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    move_backward.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    move_backward.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     strafe_left.setLabel(localized_category, tr("hotkey_Cinematic", "Strafe left"));
     strafe_left.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to right
     );
+    strafe_left.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    strafe_left.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    strafe_left.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     strafe_right.setLabel(localized_category, tr("hotkey_Cinematic", "Strafe right"));
     strafe_right.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to left
     );
+    strafe_right.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    strafe_right.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    strafe_right.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     move_up.setLabel(localized_category, tr("hotkey_Cinematic", "Move up"));
     move_up.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to down
     );
+    move_up.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    move_up.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    move_up.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     move_down.setLabel(localized_category, tr("hotkey_Cinematic", "Move down"));
     move_down.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to down
     );
+    move_down.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    move_down.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    move_down.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     rotate_left.setLabel(localized_category, tr("hotkey_Cinematic", "Rotate left"));
     rotate_left.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to left
     );
+    rotate_left.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    rotate_left.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    rotate_left.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     rotate_right.setLabel(localized_category, tr("hotkey_Cinematic", "Rotate right"));
     rotate_right.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to right
     );
+    rotate_right.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    rotate_right.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    rotate_right.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     tilt_down.setLabel(localized_category, tr("hotkey_Cinematic", "Tilt down"));
     tilt_down.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to down
     );
+    tilt_down.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    tilt_down.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    tilt_down.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     tilt_up.setLabel(localized_category, tr("hotkey_Cinematic", "Tilt up"));
     tilt_up.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to up
     );
+    tilt_up.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    tilt_up.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    tilt_up.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
 }
 
 // Top-down view binds
@@ -135,35 +167,49 @@ void Keys::TopDownKeys::init()
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    previous_player_ship.setDefaultInteraction(sp::io::Keybinding::Interaction::Discrete);
     next_player_ship.setLabel(localized_category, tr("hotkey_Topdown", "Cycle next player ship"));
     next_player_ship.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    next_player_ship.setDefaultInteraction(sp::io::Keybinding::Interaction::Discrete);
     pan_up.setLabel(localized_category, tr("hotkey_Topdown", "Pan up"));
     pan_up.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to down
     );
+    pan_up.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    pan_up.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    pan_up.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     pan_down.setLabel(localized_category, tr("hotkey_Topdown", "Pan down"));
     pan_down.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to up
     );
+    pan_down.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    pan_down.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    pan_down.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     pan_left.setLabel(localized_category, tr("hotkey_Topdown", "Pan left"));
     pan_left.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to right
     );
+    pan_left.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    pan_left.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    pan_left.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     pan_right.setLabel(localized_category, tr("hotkey_Topdown", "Pan right"));
     pan_right.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to left
     );
+    pan_right.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    pan_right.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    pan_right.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
 }
 
 Keys::Keys() :
@@ -428,6 +474,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to out
     );
+    zoom_in.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
+    zoom_in.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    zoom_in.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     zoom_out.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Zoom out on zoomable screens"));
     zoom_out.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -436,6 +485,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to in
     );
+    zoom_out.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
+    zoom_out.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    zoom_out.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     voice_all.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Broadcast voice chat to server"));
     voice_all.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     voice_ship.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Broadcast voice chat to ship"));
@@ -490,11 +542,13 @@ void Keys::init()
     helms_turn_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn left"));
     helms_turn_left.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
-        sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to right
     );
+    helms_turn_left.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    helms_turn_left.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    helms_turn_left.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     helms_turn_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn right"));
     helms_turn_right.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -503,6 +557,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to left
     );
+    helms_turn_right.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    helms_turn_right.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    helms_turn_right.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
 
     helms_combat_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost left"));
     helms_combat_left.setSupportedInteractions(
@@ -531,6 +588,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to dec
     );
+    helms_increase_impulse.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    helms_increase_impulse.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    helms_increase_impulse.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     helms_decrease_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse"));
     helms_decrease_impulse.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -539,6 +599,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to inc
     );
+    helms_decrease_impulse.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    helms_decrease_impulse.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    helms_decrease_impulse.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     helms_max_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max forward impulse (ahead full)"));
     helms_max_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     helms_set_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set impulse (axis)"));
@@ -558,11 +621,13 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    helms_increase_warp.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_decrease_warp.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease warp request"));
     helms_decrease_warp.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    helms_decrease_warp.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_warp1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request warp 1"));
     helms_warp1.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     helms_warp2.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request warp 2"));
@@ -573,6 +638,8 @@ void Keys::init()
     helms_warp4.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     helms_set_warp.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set warp request (throttle)"));
     helms_set_warp.setSupportedInteractions(sp::io::Keybinding::Interaction::Axis0);
+    helms_set_warp.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis0);
+    helms_set_warp.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis0);
 
     // - Jump
     helms_increase_jump_distance.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase jump distance"));
@@ -582,6 +649,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis0 // TODO: Connect to dec
     );
+    helms_increase_jump_distance.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    helms_increase_jump_distance.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis0);
+    helms_increase_jump_distance.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis0);
     helms_decrease_jump_distance.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease jump distance"));
     helms_decrease_jump_distance.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -589,6 +659,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis0 // TODO: Connect to inc
     );
+    helms_decrease_jump_distance.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    helms_decrease_jump_distance.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis0);
+    helms_decrease_jump_distance.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis0);
     helms_max_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Maximize jump distance"));
     helms_max_jump.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     helms_min_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Minimize jump distance"));
@@ -635,11 +708,13 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    weapons_enemy_next_target.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     weapons_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next target (any)"));
     weapons_next_target.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    weapons_next_target.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     weapons_toggle_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Toggle shields"));
     weapons_toggle_shields.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     weapons_enable_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Enable shields"));
@@ -651,11 +726,13 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    weapons_shield_calibration_increase.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     weapons_shield_calibration_decrease.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Decrease shield calibration frequency"));
     weapons_shield_calibration_decrease.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    weapons_shield_calibration_decrease.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     weapons_shield_calibration_start.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Start shield calibration"));
     weapons_shield_calibration_start.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     weapons_beam_subsystem_target_next.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Next beam subsystem target type"));
@@ -663,21 +740,25 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    weapons_beam_subsystem_target_next.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     weapons_beam_subsystem_target_previous.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Previous beam subsystem target type"));
     weapons_beam_subsystem_target_previous.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    weapons_beam_subsystem_target_previous.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     weapons_beam_frequency_increase.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Increase beam frequency"));
     weapons_beam_frequency_increase.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    weapons_beam_frequency_increase.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     weapons_beam_frequency_decrease.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Decrease beam frequency"));
     weapons_beam_frequency_decrease.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    weapons_beam_frequency_decrease.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     weapons_toggle_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Toggle missile aim lock"));
     weapons_toggle_aim_lock.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     weapons_enable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Enable missile aim lock"));
@@ -692,6 +773,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to right
     );
+    weapons_aim_left.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    weapons_aim_left.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    weapons_aim_left.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     weapons_aim_right.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim right"));
     weapons_aim_right.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -700,6 +784,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to left
     );
+    weapons_aim_right.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    weapons_aim_right.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    weapons_aim_right.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
 
     // Science
     // - Radar target selection
@@ -712,6 +799,7 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating
     );
+    science_select_next_scannable.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     // - Scanning
     for (auto n = 0u; n < science_scan_param_increase.size(); n++)
     {
@@ -723,6 +811,9 @@ void Keys::init()
             sp::io::Keybinding::Interaction::Axis0 |
             sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to left
         );
+        science_scan_param_increase[n].setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+        science_scan_param_increase[n].setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+        science_scan_param_increase[n].setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
         science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Tune scan parameter {number} left").format({{"number", string(n + 1)}}));
         science_scan_param_decrease[n].setSupportedInteractions(
             sp::io::Keybinding::Interaction::Continuous |
@@ -731,6 +822,9 @@ void Keys::init()
             sp::io::Keybinding::Interaction::Axis0 |
             sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to right
         );
+        science_scan_param_decrease[n].setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+        science_scan_param_decrease[n].setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+        science_scan_param_decrease[n].setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
         science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Tune scan parameter {number} axis").format({{"number", string(n + 1)}}));
         science_scan_param_set[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Axis1);
     }
@@ -744,7 +838,11 @@ void Keys::init()
             sp::io::Keybinding::Interaction::Axis0 |
             sp::io::Keybinding::Interaction::Axis1
         );
+        engineering_set_power_for_system[n].setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+        engineering_set_power_for_system[n].setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
         engineering_set_coolant_for_system[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Axis0);
+        engineering_set_coolant_for_system[n].setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis0);
+        engineering_set_coolant_for_system[n].setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis0);
     };
     // - System selection (interactions at top of section)
     engineering_select_system[static_cast<int>(ShipSystem::Type::Reactor)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select reactor system"));
@@ -761,11 +859,13 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Discrete
     );
+    engineering_select_system_next.setDefaultInteraction(sp::io::Keybinding::Interaction::Discrete);
     engineering_select_system_prev.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select previous system"));
     engineering_select_system_prev.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Discrete
     );
+    engineering_select_system_prev.setDefaultInteraction(sp::io::Keybinding::Interaction::Discrete);
     // - Power assignment by selection
     engineering_set_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set selected system power (axis)"));
     engineering_set_power.setSupportedInteractions(
@@ -796,6 +896,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to dec
     );
+    engineering_increase_power.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    engineering_increase_power.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    engineering_increase_power.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     engineering_decrease_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease selected system power"));
     engineering_decrease_power.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -804,6 +907,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to inc
     );
+    engineering_decrease_power.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    engineering_decrease_power.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    engineering_decrease_power.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     // - Power assignment by system (interactions at top of section)
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::Reactor)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor power"));
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::BeamWeapons)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam system power"));
@@ -824,6 +930,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis0 // TODO: Connect to dec
     );
+    engineering_increase_coolant.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    engineering_increase_coolant.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis0);
+    engineering_increase_coolant.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis0);
     engineering_decrease_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease selected system coolant"));
     engineering_decrease_coolant.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -831,6 +940,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis0 // TODO: Connect to inc
     );
+    engineering_decrease_coolant.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    engineering_decrease_coolant.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis0);
+    engineering_decrease_coolant.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis0);
     engineering_set_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set selected system coolant (axis)"));
     engineering_set_coolant.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Axis0 |
@@ -852,6 +964,7 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Discrete
     );
+    engineering_next_repair_crew.setDefaultInteraction(sp::io::Keybinding::Interaction::Discrete);
     engineering_repair_crew_up.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move up"));
     engineering_repair_crew_up.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -859,6 +972,9 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to down
     );
+    engineering_repair_crew_up.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    engineering_repair_crew_up.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
+    engineering_repair_crew_up.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     engineering_repair_crew_down.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move down"));
     engineering_repair_crew_down.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -866,6 +982,7 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to up
     );
+    engineering_repair_crew_down.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
     engineering_repair_crew_left.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move left"));
     engineering_repair_crew_left.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -873,6 +990,7 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to right
     );
+    engineering_repair_crew_left.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
     engineering_repair_crew_right.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move right"));
     engineering_repair_crew_right.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -880,6 +998,7 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to left
     );
+    engineering_repair_crew_right.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
     // - Self-destruction
     engineering_self_destruct_start.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Start self-destruct"));
     engineering_self_destruct_start.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
