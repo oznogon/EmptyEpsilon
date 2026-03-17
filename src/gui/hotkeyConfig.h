@@ -1,10 +1,8 @@
 #pragma once
 
-#include <tuple>
 #include <array>
 #include <SDL.h>
 #include <io/keybinding.h>
-#include "stringImproved.h"
 #include "components/shipsystem.h"
 
 
