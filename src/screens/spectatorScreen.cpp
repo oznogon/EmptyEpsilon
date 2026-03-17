@@ -135,15 +135,18 @@ void SpectatorScreen::toggleUI()
 void SpectatorScreen::update(float delta)
 {
     auto view_position = main_radar->getViewPosition();
+    float view_distance = main_radar->getDistance();
     float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value()
         - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value();
     if (mouse_wheel_delta != 0.0f)
+        view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
+    if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+        view_distance = view_distance * 0.9f;
+    if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+        view_distance = view_distance * 1.1f;
+    view_distance = std::clamp(view_distance, 5000.0f, 1000000.0f);
+    if (view_distance != main_radar->getDistance())
     {
-        float view_distance = main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 1000000)
-            view_distance = 1000000;
-        if (view_distance < 5000)
-            view_distance = 5000;
         main_radar->setDistance(view_distance);
         if (view_distance < 10000)
             main_radar->shortRange();
@@ -153,10 +156,6 @@ void SpectatorScreen::update(float delta)
         zoom_slider->setValue(view_distance);
         zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / view_distance, 2.0f)}}));
     }
-    if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
-        main_radar->setDistance(std::max(5000.0f, main_radar->getDistance() * 0.9f));
-    if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
-        main_radar->setDistance(std::min(1000000.0f, main_radar->getDistance() * 1.1f));
 
     if (keys.help.getDown())
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
