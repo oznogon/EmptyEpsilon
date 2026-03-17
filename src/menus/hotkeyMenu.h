@@ -4,14 +4,16 @@
 #include "gui/hotkeyBinder.h"
 #include "Updatable.h"
 
+class GuiButton;
 class GuiCanvas;
 class GuiHotkeyBinder;
 class GuiLabel;
-class GuiOverlay;
 class GuiPanel;
 class GuiScrollContainer;
 class GuiScrollText;
+class GuiSelector;
 class GuiSlider;
+class GuiToggleButton;
 
 class HotkeyMenu : public GuiCanvas, public Updatable
 {
@@ -22,14 +24,13 @@ private:
     const float KEY_BINDER_MARGIN = 12.5f;
     const float RESET_LABEL_TIMEOUT = 5.0f;
 
-    GuiScrollText* help_text;
     GuiElement* container;
     GuiElement* top_row;
     GuiPanel* rebinding_ui;
+    GuiElement* info_container;
     GuiElement* bottom_row;
 
     GuiScrollContainer* scroll_container;
-    GuiElement* info_container;
     std::vector<GuiElement*> rebinding_rows;
     std::vector<GuiHotkeyBinder*> text_entries;
     std::vector<GuiLabel*> label_entries;
@@ -41,6 +42,13 @@ private:
     std::vector<string> category_list;
     std::vector<sp::io::Keybinding*> hotkey_list;
     OptionsMenu::ReturnTo return_to;
+
+    // Dialog mode toggle
+    bool use_dialog_mode = true;
+    GuiToggleButton* dialog_mode_toggle;
+
+    // Rebind dialog (child of this canvas, renders on top)
+    GuiRebindDialog* rebind_dialog = nullptr;
 
     void setCategory(int cat);
 public:
