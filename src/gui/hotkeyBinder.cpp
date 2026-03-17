@@ -120,6 +120,7 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
             {
                 active_rebinder = this;
                 active_key = this->key;
+                sp::io::Keybinding::setUserRebindCancelKey(&keys.cancel_rebind);
                 this->key->startUserRebind(this->capture_filter, selected_interaction);
             }
         }
@@ -204,6 +205,7 @@ bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
         {
             active_rebinder = this;
             active_key = key;
+            sp::io::Keybinding::setUserRebindCancelKey(&keys.cancel_rebind);
             key->startUserRebind(capture_filter, selected_interaction);
         }
     }
@@ -219,6 +221,7 @@ void GuiHotkeyBinder::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
         pending_rebind = false;
         active_rebinder = this;
         active_key = key;
+        sp::io::Keybinding::setUserRebindCancelKey(&keys.cancel_rebind);
         key->startUserRebind(capture_filter, selected_interaction);
     }
 }

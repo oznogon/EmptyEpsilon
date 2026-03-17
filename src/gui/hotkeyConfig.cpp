@@ -171,6 +171,7 @@ Keys::Keys() :
     pause("PAUSE", "P"),
     help("HELP", "F1"),
     escape("ESCAPE", {"Escape", "Home", "Keypad 7", "AC Back"}),
+    cancel_rebind("CANCEL_REBIND", {"Delete", "Backspace"}),
     zoom_in("ZOOM_IN", {"wheel:y"}),
     zoom_out("ZOOM_OUT"),
     voice_all("VOICE_ALL", "Backspace"),
@@ -417,6 +418,8 @@ void Keys::init()
     help.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     escape.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Return to ship options menu"));
     escape.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    cancel_rebind.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Cancel control binding"));
+    cancel_rebind.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     zoom_in.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Zoom in on zoomable screens"));
     zoom_in.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -443,6 +446,10 @@ void Keys::init()
     debug_show_fps.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
     debug_show_timing.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+#ifdef DEBUG
+    debug_show_colliders.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug colliders"));
+    debug_show_colliders.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+#endif
 
     // Crew screens
     next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));
@@ -725,7 +732,7 @@ void Keys::init()
             sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to right
         );
         science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Tune scan parameter {number} axis").format({{"number", string(n + 1)}}));
-        science_scan_param_decrease[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Axis1);
+        science_scan_param_set[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Axis1);
     }
 
     // Engineering
@@ -760,7 +767,7 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Discrete
     );
     // - Power assignment by selection
-    engineering_set_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set selected system power to 0%"));
+    engineering_set_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set selected system power (axis)"));
     engineering_set_power.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to dec
@@ -810,20 +817,21 @@ void Keys::init()
 
     // - Coolant assignment by selection
     // TODO: Coolant detents
-    engineering_increase_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system coolant"));
+    engineering_increase_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase selected system coolant"));
     engineering_increase_coolant.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis0 // TODO: Connect to dec
     );
-    engineering_decrease_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system coolant"));
+    engineering_decrease_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease selected system coolant"));
     engineering_decrease_coolant.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Discrete |
         sp::io::Keybinding::Interaction::Repeating |
         sp::io::Keybinding::Interaction::Axis0 // TODO: Connect to inc
     );
+    engineering_set_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set selected system coolant (axis)"));
     engineering_set_coolant.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1 // TODO: Connect to dec
