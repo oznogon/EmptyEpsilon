@@ -508,6 +508,9 @@ void GuiRebindDialog::startCapture()
 {
     if (!target_key) return;
     target_key->startUserRebindPreview(capture_filter, selected_interaction);
+    // Disable the button so releasing any mouse button on it doesn't fire
+    // onMouseUp and re-call this function.
+    mouse_panel_btn->disable();
 }
 
 void GuiRebindDialog::populateInteractionSelector()
