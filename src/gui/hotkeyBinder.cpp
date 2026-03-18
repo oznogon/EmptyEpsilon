@@ -8,6 +8,16 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_selector.h"
+#include "gui/gui2_togglebutton.h"
+
+// Returns true for axis input types that support inversion.
+static bool isAxisType(sp::io::Keybinding::Type type)
+{
+    return bool(type & (sp::io::Keybinding::Type::JoystickAxis
+                      | sp::io::Keybinding::Type::ControllerAxis
+                      | sp::io::Keybinding::Type::MouseMovement
+                      | sp::io::Keybinding::Type::MouseWheel));
+}
 
 // Track which binder and which key are actively performing a rebind.
 static GuiHotkeyBinder* active_rebinder = nullptr;
@@ -98,6 +108,27 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
         }
     ))
         ->setSize(SELECTOR_HEIGHT, GuiElement::GuiSizeMax);
+
+    invert_btn = new GuiToggleButton(row2, "INVERT_BIND", "~",
+        [this](bool active)
+        {
+            // Toggle the inverted flag on the last matching axis binding.
+            int count = 0;
+            while (this->key->getKeyType(count) != sp::io::Keybinding::Type::None) count++;
+            for (int i = count - 1; i >= 0; --i)
+            {
+                auto type = this->key->getKeyType(i);
+                if ((type & this->display_filter) && isAxisType(type))
+                {
+                    this->key->setKeyInverted(i, active);
+                    break;
+                }
+            }
+        }
+    );
+    invert_btn
+        ->setSize(SELECTOR_HEIGHT, GuiElement::GuiSizeMax)
+        ->disable();
 }
 
 GuiHotkeyBinder::~GuiHotkeyBinder()
@@ -215,6 +246,33 @@ void GuiHotkeyBinder::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
 {
+    // Sync the invert toggle state from the last matching axis binding each frame.
+    if (invert_btn)
+    {
+        int last_axis_idx = -1;
+        int count = 0;
+        while (key->getKeyType(count) != sp::io::Keybinding::Type::None) count++;
+        for (int i = count - 1; i >= 0; --i)
+        {
+            auto type = key->getKeyType(i);
+            if ((type & display_filter) && isAxisType(type))
+            {
+                last_axis_idx = i;
+                break;
+            }
+        }
+        if (last_axis_idx >= 0)
+        {
+            invert_btn->enable();
+            invert_btn->setValue(key->getKeyInverted(last_axis_idx));
+        }
+        else
+        {
+            invert_btn->setValue(false);
+            invert_btn->disable();
+        }
+    }
+
     // Clear the active rebind indicator only when the tracked key's rebind
     // completes and there is no pending preview capture for it.
     if (active_key != nullptr
@@ -399,6 +457,19 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
         ->setMargins(0.0f, 0.0f, 5.0f, 0.0f)
         ->disable();
 
+    invert_btn = new GuiToggleButton(btn_row, id + "_INVERT",
+        tr("button", "Invert"),
+        [this](bool active)
+        {
+            if (!target_key || !target_key->hasPendingRebind()) return;
+            target_key->setPendingRebindInverted(active);
+        }
+    );
+    invert_btn
+        ->setSize(150.0f, GuiElement::GuiSizeMax)
+        ->setMargins(0.0f, 0.0f, 5.0f, 0.0f)
+        ->disable();
+
     (new GuiElement(btn_row, id + "_BTN_SPACER"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -415,6 +486,8 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
                 input_label->setText(tr("hotkey_menu", "[Press any key or input...]"));
                 replace_btn->disable();
                 add_btn->disable();
+                invert_btn->setValue(false);
+                invert_btn->disable();
 
                 // Restart capture for non-mouse filters.
                 if (!(capture_filter & sp::io::Keybinding::Type::Mouse))
@@ -575,6 +648,11 @@ void GuiRebindDialog::onDraw(sp::RenderTarget& renderer)
         input_label->setText(target_key->getPendingRebindKeyName());
         replace_btn->enable();
         add_btn->enable();
+        invert_btn->setValue(target_key->getPendingRebindInverted());
+        if (isAxisType(target_key->getPendingRebindKeyType()))
+            invert_btn->enable();
+        else
+            invert_btn->disable();
     }
 }
 

@@ -6,6 +6,7 @@
 
 class GuiButton;
 class GuiLabel;
+class GuiToggleButton;
 class GuiOverlay;
 class GuiPanel;
 class GuiScrollText;
@@ -69,6 +70,7 @@ private:
     GuiScrollText* legend_text;
     GuiButton* replace_btn;
     GuiButton* add_btn;
+    GuiToggleButton* invert_btn;
     GuiButton* back_btn;
 
     void closeDialog();
@@ -89,6 +91,7 @@ private:
     GuiRebindDialog* rebind_dialog = nullptr;
 
     GuiElement* interaction_row = nullptr;
+    GuiToggleButton* invert_btn = nullptr;
     std::vector<sp::io::Keybinding::Interaction> interaction_selector_options;
 
     const GuiThemeStyle* front_style;
