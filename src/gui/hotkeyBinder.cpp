@@ -390,14 +390,14 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
     replace_btn
         ->setSize(150.0f, GuiElement::GuiSizeMax)
         ->setMargins(0.0f, 0.0f, 5.0f, 0.0f)
-        ->hide();
+        ->disable();
 
     add_btn = new GuiButton(btn_row, id + "_ADD",
         tr("button", "Add"), [this]() { commitAdd(); });
     add_btn
         ->setSize(150.0f, GuiElement::GuiSizeMax)
         ->setMargins(0.0f, 0.0f, 5.0f, 0.0f)
-        ->hide();
+        ->disable();
 
     (new GuiElement(btn_row, id + "_BTN_SPACER"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -413,8 +413,8 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
 
                 state = State::WaitingForInput;
                 input_label->setText(tr("hotkey_menu", "[Press any key or input...]"));
-                replace_btn->hide();
-                add_btn->hide();
+                replace_btn->disable();
+                add_btn->disable();
 
                 // Restart capture for non-mouse filters.
                 if (!(capture_filter & sp::io::Keybinding::Type::Mouse))
@@ -461,8 +461,8 @@ void GuiRebindDialog::startRebind(sp::io::Keybinding* key,
     else
         input_type_label = tr("hotkey_menu", "Rebinding");
     action_label->setText(input_type_label + ": " + action_name);
-    replace_btn->hide();
-    add_btn->hide();
+    replace_btn->disable();
+    add_btn->disable();
 
     populateInteractionSelector();
 
@@ -478,8 +478,7 @@ void GuiRebindDialog::startRebind(sp::io::Keybinding* key,
     }
     else
     {
-        mouse_panel_btn
-            ->disable();
+        mouse_panel_btn ->disable();
         input_label->setText(tr("hotkey_menu", "[Press any key or input...]"));
     }
 
@@ -574,8 +573,8 @@ void GuiRebindDialog::onDraw(sp::RenderTarget& renderer)
     {
         state = State::HasInput;
         input_label->setText(target_key->getPendingRebindKeyName());
-        replace_btn->show();
-        add_btn->show();
+        replace_btn->enable();
+        add_btn->enable();
     }
 }
 
