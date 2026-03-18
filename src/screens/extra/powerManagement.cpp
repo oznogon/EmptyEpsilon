@@ -202,7 +202,10 @@ void PowerManagementScreen::onUpdate()
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
 
-            auto power_adjust = (keys.engineering_increase_power.getContinuousValue() - keys.engineering_decrease_power.getContinuousValue()) * 0.1f;
+            auto power_adjust = (keys.engineering_increase_power.getContinuousValue() + keys.engineering_increase_power.getAxis0Value() + keys.engineering_increase_power.getAxis1Value()
+                - keys.engineering_decrease_power.getContinuousValue() - keys.engineering_decrease_power.getAxis0Value() - keys.engineering_decrease_power.getAxis1Value()) * 0.1f;
+            if (keys.engineering_increase_power.isDiscreteStepDown() || keys.engineering_increase_power.isRepeatReady()) power_adjust += 0.1f;
+            if (keys.engineering_decrease_power.isDiscreteStepDown() || keys.engineering_decrease_power.isRepeatReady()) power_adjust -= 0.1f;
             if (power_adjust != 0.0f)
             {
                 auto sys = ShipSystem::get(my_spaceship, selected_system);
@@ -213,7 +216,10 @@ void PowerManagementScreen::onUpdate()
             }
 
             GuiSlider* coolant_slider = systems[int(selected_system)].coolant_slider;
-            auto coolant_adjust = (keys.engineering_increase_coolant.getContinuousValue() - keys.engineering_decrease_coolant.getContinuousValue()) * 0.5f;
+            auto coolant_adjust = (keys.engineering_increase_coolant.getContinuousValue() + keys.engineering_increase_coolant.getAxis0Value()
+                - keys.engineering_decrease_coolant.getContinuousValue() - keys.engineering_decrease_coolant.getAxis0Value()) * 0.5f;
+            if (keys.engineering_increase_coolant.isDiscreteStepDown() || keys.engineering_increase_coolant.isRepeatReady()) coolant_adjust += 0.5f;
+            if (keys.engineering_decrease_coolant.isDiscreteStepDown() || keys.engineering_decrease_coolant.isRepeatReady()) coolant_adjust -= 0.5f;
             if (coolant_adjust != 0.0f)
             {
                 auto sys = ShipSystem::get(my_spaceship, selected_system);

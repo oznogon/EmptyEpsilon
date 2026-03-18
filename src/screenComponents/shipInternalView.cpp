@@ -123,8 +123,10 @@ void GuiShipInternalView::onUpdate()
         }
         if (auto ic = selected_crew_member.getComponent<InternalCrew>())
         {
-            crew_move_accum_x += (keys.engineering_repair_crew_right.getContinuousValue() - keys.engineering_repair_crew_left.getContinuousValue()) * 0.1f;
-            crew_move_accum_y += (keys.engineering_repair_crew_down.getContinuousValue() - keys.engineering_repair_crew_up.getContinuousValue()) * 0.1f;
+            crew_move_accum_x += (keys.engineering_repair_crew_right.getContinuousValue() + keys.engineering_repair_crew_right.getAxis0Value() + keys.engineering_repair_crew_right.getAxis1Value()
+                - keys.engineering_repair_crew_left.getContinuousValue() - keys.engineering_repair_crew_left.getAxis0Value() - keys.engineering_repair_crew_left.getAxis1Value()) * 0.1f;
+            crew_move_accum_y += (keys.engineering_repair_crew_down.getContinuousValue() + keys.engineering_repair_crew_down.getAxis0Value() + keys.engineering_repair_crew_down.getAxis1Value()
+                - keys.engineering_repair_crew_up.getContinuousValue() - keys.engineering_repair_crew_up.getAxis0Value() - keys.engineering_repair_crew_up.getAxis1Value()) * 0.1f;
             glm::ivec2 base = glm::ivec2(ic->position + glm::vec2(0.5, 0.5));
             if (keys.engineering_repair_crew_up.isDiscreteStepDown() || crew_move_accum_y <= -1.0f)
             {

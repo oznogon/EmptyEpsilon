@@ -136,8 +136,8 @@ void SpectatorScreen::update(float delta)
 {
     auto view_position = main_radar->getViewPosition();
     float view_distance = main_radar->getDistance();
-    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value()
-        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value();
+    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value()
+        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
     if (mouse_wheel_delta != 0.0f)
         view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
     if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
@@ -169,7 +169,7 @@ void SpectatorScreen::update(float delta)
         info_position_lock->setValue(main_radar->getAutoCentering());
     }
 
-    if (keys.topdown.previous_player_ship.getDown())
+    if (keys.topdown.previous_player_ship.isDiscreteStepDown() || keys.topdown.previous_player_ship.isRepeatReady())
     {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
@@ -177,7 +177,7 @@ void SpectatorScreen::update(float delta)
         if (auto ship = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()))) main_radar->setAutoCenterTarget(ship);
     }
 
-    if (keys.topdown.next_player_ship.getDown())
+    if (keys.topdown.next_player_ship.isDiscreteStepDown() || keys.topdown.next_player_ship.isRepeatReady())
     {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
@@ -185,28 +185,16 @@ void SpectatorScreen::update(float delta)
         if (auto ship = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()))) main_radar->setAutoCenterTarget(ship);
     }
 
-    if (keys.topdown.pan_up.get())
+    if (!main_radar->getAutoCentering())
     {
-        if (!main_radar->getAutoCentering())
-            main_radar->setViewPosition(glm::vec2(view_position.x, view_position.y - main_radar->getDistance() * 0.01f));
-    }
-
-    if (keys.topdown.pan_left.get())
-    {
-        if (!main_radar->getAutoCentering())
-            main_radar->setViewPosition(glm::vec2(view_position.x - main_radar->getDistance() * 0.01f, view_position.y));
-    }
-
-    if (keys.topdown.pan_down.get())
-    {
-        if (!main_radar->getAutoCentering())
-            main_radar->setViewPosition(glm::vec2(view_position.x, view_position.y + main_radar->getDistance() * 0.01f));
-    }
-
-    if (keys.topdown.pan_right.get())
-    {
-        if (!main_radar->getAutoCentering())
-            main_radar->setViewPosition(glm::vec2(view_position.x + main_radar->getDistance() * 0.01f, view_position.y));
+        float pan_up = std::max(keys.topdown.pan_up.getContinuousValue() + keys.topdown.pan_up.getAxis0Value() + keys.topdown.pan_up.getAxis1Value(), (float)keys.topdown.pan_up.get());
+        float pan_dn = std::max(keys.topdown.pan_down.getContinuousValue() + keys.topdown.pan_down.getAxis0Value() + keys.topdown.pan_down.getAxis1Value(), (float)keys.topdown.pan_down.get());
+        float pan_lt = std::max(keys.topdown.pan_left.getContinuousValue() + keys.topdown.pan_left.getAxis0Value() + keys.topdown.pan_left.getAxis1Value(), (float)keys.topdown.pan_left.get());
+        float pan_rt = std::max(keys.topdown.pan_right.getContinuousValue() + keys.topdown.pan_right.getAxis0Value() + keys.topdown.pan_right.getAxis1Value(), (float)keys.topdown.pan_right.get());
+        float pan_x = pan_rt - pan_lt;
+        float pan_y = pan_dn - pan_up;
+        if (pan_x != 0.0f || pan_y != 0.0f)
+            main_radar->setViewPosition(view_position + glm::vec2(pan_x, pan_y) * main_radar->getDistance() * 0.01f);
     }
 
     if (keys.escape.getDown())

@@ -54,6 +54,7 @@ private:
     bool set_power_active[ShipSystem::COUNT] = {false};
     bool set_coolant_active[ShipSystem::COUNT] = {false};
     bool set_power_axis1_active[ShipSystem::COUNT] = {false};
+    bool set_coolant_axis1_active = false;
     float select_system_accum = 0.0f;
 
     void addSystemEffect(string key, string value);

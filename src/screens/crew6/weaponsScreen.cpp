@@ -155,11 +155,21 @@ void WeaponsScreen::onUpdate()
                 my_player_info->commandSetTarget(targets.get());
             }
         }
-        auto aim_adjust = (keys.weapons_aim_left.getContinuousValue() + keys.weapons_aim_left.getAxis0Value())
-            - (keys.weapons_aim_right.getContinuousValue() + keys.weapons_aim_right.getAxis0Value());
+        auto aim_adjust = (keys.weapons_aim_left.getContinuousValue() + keys.weapons_aim_left.getAxis0Value() + keys.weapons_aim_left.getAxis1Value())
+            - (keys.weapons_aim_right.getContinuousValue() + keys.weapons_aim_right.getAxis0Value() + keys.weapons_aim_right.getAxis1Value());
         if (aim_adjust != 0.0f)
         {
             missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+        if (keys.weapons_aim_left.isDiscreteStepDown() || keys.weapons_aim_left.isRepeatReady())
+        {
+            missile_aim->setValue(missile_aim->getValue() - 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+        if (keys.weapons_aim_right.isDiscreteStepDown() || keys.weapons_aim_right.isRepeatReady())
+        {
+            missile_aim->setValue(missile_aim->getValue() + 5.0f);
             tube_controls->setMissileTargetAngle(missile_aim->getValue());
         }
     }

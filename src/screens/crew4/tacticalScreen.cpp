@@ -148,7 +148,7 @@ void TacticalScreen::onUpdate()
         angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * 5.0f;
         angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * 5.0f;
         if (keys.helms_turn_right.isDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) angle += 5.0f;
-        if (keys.helms_turn_left.isDiscreteStepDown() || keys.helms_turn_left.isRepeatReady()) angle -= 5.0f;
+        if (keys.helms_turn_left.isRepeatReady()) angle -= 5.0f;
         if (angle != 0.0f)
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
@@ -172,10 +172,21 @@ void TacticalScreen::onUpdate()
             }
         }
 
-        auto aim_adjust = keys.weapons_aim_left.getContinuousValue() - keys.weapons_aim_right.getContinuousValue();
+        auto aim_adjust = (keys.weapons_aim_left.getContinuousValue() + keys.weapons_aim_left.getAxis0Value() + keys.weapons_aim_left.getAxis1Value())
+            - (keys.weapons_aim_right.getContinuousValue() + keys.weapons_aim_right.getAxis0Value() + keys.weapons_aim_right.getAxis1Value());
         if (aim_adjust != 0.0f)
         {
             missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+        if (keys.weapons_aim_left.isDiscreteStepDown() || keys.weapons_aim_left.isRepeatReady())
+        {
+            missile_aim->setValue(missile_aim->getValue() - 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+        if (keys.weapons_aim_right.isDiscreteStepDown() || keys.weapons_aim_right.isRepeatReady())
+        {
+            missile_aim->setValue(missile_aim->getValue() + 5.0f);
             tube_controls->setMissileTargetAngle(missile_aim->getValue());
         }
     }

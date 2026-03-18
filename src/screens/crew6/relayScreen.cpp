@@ -209,8 +209,8 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
 {
     ///Handle mouse wheel
     float view_distance = radar->getDistance();
-    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value()
-        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value();
+    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value()
+        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
     if (mouse_wheel_delta != 0.0f)
         view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
     if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())

@@ -259,8 +259,8 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     auto rl = my_spaceship.getComponent<RadarLink>();
 
     float view_distance = science_radar->getDistance();
-    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value()
-        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value();
+    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value()
+        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
     if (mouse_wheel_delta!=0)
     {
         view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));

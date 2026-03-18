@@ -72,8 +72,8 @@ void TopDownScreen::update(float delta)
     }
 
     // Enable mouse wheel zoom.
-    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value()
-        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value();
+    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value()
+        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
     if (mouse_wheel_delta != 0.0f)
     {
         camera_position.z = camera_position.z * (1.0f - (mouse_wheel_delta) * 4 * delta);
@@ -116,7 +116,7 @@ void TopDownScreen::update(float delta)
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
     }
 
-    if (keys.topdown.previous_player_ship.getDown())
+    if (keys.topdown.previous_player_ship.isDiscreteStepDown() || keys.topdown.previous_player_ship.isRepeatReady())
     {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
@@ -124,7 +124,7 @@ void TopDownScreen::update(float delta)
         target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
 
-    if (keys.topdown.next_player_ship.getDown())
+    if (keys.topdown.next_player_ship.isDiscreteStepDown() || keys.topdown.next_player_ship.isRepeatReady())
     {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
@@ -134,10 +134,10 @@ void TopDownScreen::update(float delta)
 
     if (!camera_lock_toggle->getValue())
     {
-        float pan_up = std::max(keys.topdown.pan_up.getContinuousValue(), (float)keys.topdown.pan_up.get());
-        float pan_dn = std::max(keys.topdown.pan_down.getContinuousValue(), (float)keys.topdown.pan_down.get());
-        float pan_lt = std::max(keys.topdown.pan_left.getContinuousValue(), (float)keys.topdown.pan_left.get());
-        float pan_rt = std::max(keys.topdown.pan_right.getContinuousValue(), (float)keys.topdown.pan_right.get());
+        float pan_up = std::max(keys.topdown.pan_up.getContinuousValue() + keys.topdown.pan_up.getAxis0Value() + keys.topdown.pan_up.getAxis1Value(), (float)keys.topdown.pan_up.get());
+        float pan_dn = std::max(keys.topdown.pan_down.getContinuousValue() + keys.topdown.pan_down.getAxis0Value() + keys.topdown.pan_down.getAxis1Value(), (float)keys.topdown.pan_down.get());
+        float pan_lt = std::max(keys.topdown.pan_left.getContinuousValue() + keys.topdown.pan_left.getAxis0Value() + keys.topdown.pan_left.getAxis1Value(), (float)keys.topdown.pan_left.get());
+        float pan_rt = std::max(keys.topdown.pan_right.getContinuousValue() + keys.topdown.pan_right.getAxis0Value() + keys.topdown.pan_right.getAxis1Value(), (float)keys.topdown.pan_right.get());
         camera_position.y += (pan_dn - pan_up) * (3 * delta * camera_position.z) / 10;
         camera_position.x += (pan_rt - pan_lt) * (3 * delta * camera_position.z) / 10;
     }
