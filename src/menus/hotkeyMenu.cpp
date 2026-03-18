@@ -51,19 +51,19 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 
     (new GuiElement(header_row, "HOTKEY_HEADER_SPACER"))
         ->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)
-        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
+        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 5.0f);
     (new GuiLabel(header_row, "HOTKEY_HEADER_KB", tr("Keyboard"), 30.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
+        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 5.0f);
     (new GuiLabel(header_row, "HOTKEY_HEADER_JS", tr("Joystick"), 30.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
+        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 5.0f);
     (new GuiLabel(header_row, "HOTKEY_HEADER_MS", tr("Mouse"), 30.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
+        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 5.0f);
 
     info_container = new GuiElement(container, "INFO_CONTAINER");
     info_container
