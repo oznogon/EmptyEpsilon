@@ -131,6 +131,10 @@ void GuiHotkeyBinder::clearFilteredKeys()
 
 bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
+    // Allow clicks to add/remove buttons to pass through.
+    if (interaction_row->isVisible() && position.y >= rect.position.y + 50.0f)
+        return false;
+
     // If this binder is already rebinding, just take the input and skip this.
     // This should allow binding left/middle/right-click without also changing
     // the binder's state at the same time.
