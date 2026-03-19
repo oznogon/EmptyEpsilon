@@ -119,6 +119,24 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
                 sp::Alignment::BottomLeft, 16, nullptr, line_colors[index % 6]);
             index += 1;
         }
+
+        int input_index = 0;
+        for (const auto& category : sp::io::Keybinding::getCategories())
+        {
+            for (auto* kb : sp::io::Keybinding::listAllByCategory(category))
+            {
+                float val = kb->getValue();
+                if (val != 0.0f)
+                {
+                    string display_name = kb->getLabel().empty() ? kb->getName() : kb->getLabel();
+                    renderer.drawText(
+                        sp::Rect(0, 0, window_size.x, 96 + 16 * input_index),
+                        display_name + ": " + string(val, 3),
+                        sp::Alignment::BottomRight, 16, nullptr, {255, 255, 255, 255});
+                    input_index++;
+                }
+            }
+        }
     }
     renderer.drawText(sp::Rect(0, 0, 0, 0), text, sp::Alignment::TopLeft, 18);
 }
