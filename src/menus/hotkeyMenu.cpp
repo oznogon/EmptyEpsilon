@@ -228,6 +228,12 @@ void HotkeyMenu::update(float delta)
     if (keys.prev_rebind_category.getDown()
         && !GuiHotkeyBinder::isAnyRebinding())
         setCategory(category_index - 1);
+    if (keys.toggle_rebind_dialog.getDown()
+        && !GuiHotkeyBinder::isAnyRebinding())
+    {
+        dialog_mode_toggle->setValue(!dialog_mode_toggle->getValue());
+        use_dialog_mode = !use_dialog_mode;
+    }
 }
 
 // Display a list of hotkeys to bind from the given hotkey category.
