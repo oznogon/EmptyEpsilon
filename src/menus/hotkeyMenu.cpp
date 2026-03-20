@@ -39,6 +39,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     rebinding_ui = new GuiPanel(container, "REBINDING_UI_CONTAINER");
     rebinding_ui
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setMargins(0.0f, 20.0f)
         ->setAttribute("layout", "vertical");
     rebinding_ui
         ->setAttribute("padding", "20");
@@ -51,19 +52,19 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 
     (new GuiElement(header_row, "HOTKEY_HEADER_SPACER"))
         ->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)
-        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 5.0f);
+        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 10.0f);
     (new GuiLabel(header_row, "HOTKEY_HEADER_KB", tr("Keyboard"), 30.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 5.0f);
+        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 10.0f);
     (new GuiLabel(header_row, "HOTKEY_HEADER_JS", tr("Joystick"), 30.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 5.0f);
+        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 10.0f);
     (new GuiLabel(header_row, "HOTKEY_HEADER_MS", tr("Mouse"), 30.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 5.0f);
+        ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 10.0f);
 
     info_container = new GuiElement(container, "INFO_CONTAINER");
     info_container
@@ -106,7 +107,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         }
     );
     dialog_mode_toggle
-        ->setValue(true)
+        ->setValue(use_dialog_mode)
         ->setSize(300.0f, GuiElement::GuiSizeMax)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight);
 
@@ -232,7 +233,9 @@ void HotkeyMenu::update(float delta)
         && !GuiHotkeyBinder::isAnyRebinding())
     {
         dialog_mode_toggle->setValue(!dialog_mode_toggle->getValue());
-        use_dialog_mode = !use_dialog_mode;
+        use_dialog_mode = dialog_mode_toggle->getValue();
+        info_container->setVisible(!dialog_mode_toggle->getValue());
+        setCategory(category_index);
     }
 }
 
@@ -284,7 +287,7 @@ void HotkeyMenu::setCategory(int cat)
             ->setWrapped()
             ->setAlignment(sp::Alignment::TopRight)
             ->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)
-            ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
+            ->setMargins(0.0f, 2.0f, KEY_BINDER_MARGIN, 0.0f);
 
         // Keyboard-only binder.
         text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_KB_" + item->getName(), item,
