@@ -16,7 +16,6 @@ public:
     sp::io::Keybinding pause;
     sp::io::Keybinding help;
     sp::io::Keybinding escape;
-    sp::io::Keybinding cancel_rebind;
     sp::io::Keybinding zoom_in;
     sp::io::Keybinding zoom_out;
     sp::io::Keybinding voice_all;
@@ -26,6 +25,11 @@ public:
 #ifdef DEBUG
     sp::io::Keybinding debug_show_colliders;
 #endif
+
+    // Rebinding binds
+    sp::io::Keybinding cancel_rebind;
+    sp::io::Keybinding next_rebind_category;
+    sp::io::Keybinding prev_rebind_category;
 
     // Crew screen binds
     sp::io::Keybinding next_station;

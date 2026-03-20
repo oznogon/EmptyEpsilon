@@ -217,7 +217,6 @@ Keys::Keys() :
     pause("PAUSE", "P"),
     help("HELP", "F1"),
     escape("ESCAPE", {"Escape", "Home", "Keypad 7", "AC Back"}),
-    cancel_rebind("CANCEL_REBIND", {"Delete", "Backspace"}),
     zoom_in("ZOOM_IN", {"wheel:y"}),
     zoom_out("ZOOM_OUT"),
     voice_all("VOICE_ALL", "Backspace"),
@@ -227,6 +226,11 @@ Keys::Keys() :
 #ifdef DEBUG
     debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
 #endif
+
+    // Rebinding binds
+    cancel_rebind("CANCEL_REBIND", {"Delete", "Backspace"}),
+    next_rebind_category("REBIND_NEXT_CATEGORY", "Tab"),
+    prev_rebind_category("REBIND_PREV_CATEGORY", ""),
 
     // Crew screen binds
     next_station("STATION_NEXT", "Tab"),
@@ -464,8 +468,6 @@ void Keys::init()
     help.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     escape.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Return to ship options menu"));
     escape.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    cancel_rebind.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Cancel control binding"));
-    cancel_rebind.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     zoom_in.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Zoom in on zoomable screens"));
     zoom_in.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Continuous |
@@ -502,6 +504,14 @@ void Keys::init()
     debug_show_colliders.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug colliders"));
     debug_show_colliders.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 #endif
+
+    // Rebinding binds
+    cancel_rebind.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Cancel control binding"));
+    cancel_rebind.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    next_rebind_category.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Next category"));
+    next_rebind_category.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    prev_rebind_category.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Previous category"));
+    prev_rebind_category.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
     // Crew screens
     next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));

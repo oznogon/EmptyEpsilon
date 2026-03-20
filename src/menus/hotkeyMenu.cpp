@@ -85,7 +85,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     // Category selector
     // Get a list of hotkey categories
     category_list = sp::io::Keybinding::getCategories();
-    auto* category_selector = new GuiSelector(top_row, "Category",
+    category_selector = new GuiSelector(top_row, "Category",
         [this](int index, string value)
         {
             HotkeyMenu::setCategory(index);
@@ -181,6 +181,11 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
                     // binding.
                     std::vector<string> default_bindings = item->getDefaultBindings();
                     for (auto binding : default_bindings) item->addKey(binding);
+
+                    // Set each restored binding's interaction to the keybinding's
+                    // default interaction for that input type.
+                    for (int i = 0; item->getKeyType(i) != sp::io::Keybinding::Type::None; i++)
+                        item->setInteraction(i, item->getDefaultInteraction(item->getKeyType(i)));
                 }
             }
         }
@@ -214,11 +219,24 @@ void HotkeyMenu::update(float delta)
         destroy();
         returnToOptionMenu(return_to);
     }
+
+    // Change rebind category, but not while rebinding or while the rebind
+    // dialog is open.
+    if (keys.next_rebind_category.getDown()
+        && !GuiHotkeyBinder::isAnyRebinding())
+        setCategory(category_index + 1);
+    if (keys.prev_rebind_category.getDown()
+        && !GuiHotkeyBinder::isAnyRebinding())
+        setCategory(category_index - 1);
 }
 
 // Display a list of hotkeys to bind from the given hotkey category.
 void HotkeyMenu::setCategory(int cat)
 {
+    // Loop category index if out of range.
+    if (cat >= static_cast<int>(category_list.size())) cat = 0;
+    if (cat < 0) cat = static_cast<int>(category_list.size()) - 1;
+
     // Close the dialog if it was open for a binder that is about to be destroyed.
     if (rebind_dialog) rebind_dialog->closeIfOpen();
 
@@ -289,4 +307,6 @@ void HotkeyMenu::setCategory(int cat)
         if (use_dialog_mode && rebind_dialog)
             text_entries.back()->setDialog(rebind_dialog);
     }
+
+    category_selector->setSelectionIndex(cat);
 }

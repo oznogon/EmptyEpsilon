@@ -42,6 +42,7 @@ private:
     int category_index = 1;
     sp::SystemTimer reset_label_timer;
     std::vector<string> category_list;
+    GuiSelector* category_selector;
     std::vector<sp::io::Keybinding*> hotkey_list;
     OptionsMenu::ReturnTo return_to;
 
