@@ -161,6 +161,12 @@ GuiElement* GuiContainer::callExecuteScrollOnElement(GuiContainer* container, gl
     return container->executeScrollOnElement(pos, value);
 }
 
+void GuiContainer::offsetElementRect(GuiContainer* container, glm::vec2 offset)
+{
+    container->rect.position += offset;
+    for (auto* child : container->children)
+        offsetElementRect(child, offset);
+}
 
 void GuiContainer::setAttribute(const string& key, const string& value)
 {
