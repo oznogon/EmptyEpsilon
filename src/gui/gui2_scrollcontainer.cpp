@@ -117,6 +117,14 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
     // Clamp again in case content shrank this frame.
     scroll_offset = std::clamp(scroll_offset, 0.0f, std::max(0.0f, content_height - visible_height));
 
+    // Apply the scroll offset to non-scrollbar children so their rects are in
+    // screen space.
+    for (GuiElement* child : children)
+    {
+        if (child == scrollbar_v) continue;
+        offsetElementRect(child, {0.0f, -scroll_offset});
+    }
+
     // Sync scrollbar properties to new layout.
     scrollbar_v
         ->setRange(0, static_cast<int>(content_height))
