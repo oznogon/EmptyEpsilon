@@ -216,6 +216,45 @@ function init()
             )
             :addCustomUtilityBeamMode(
                 -- name, energy_per_sec, heat_per_sec, requires_target,
+                 "Hold",            5.0,         0.02,            true,
+                -- callback
+                function(beam_emitter, beam_target, distance, angle_diff)
+                    local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta = checkBeamCapability(beam_emitter)
+
+                    if not can_fire then return end
+
+                    -- Hold mode: move target to coordinates at the same relative angle and relative distance from the emitter that the target had when the beam was first activated
+                    -- On first activation or if the target has changed, record the relative offset of the target from the emitter
+                    if beam_emitter.hold_target ~= beam_target or beam_emitter.hold_rel_x == nil then
+                        local emitter_x, emitter_y = beam_emitter:getPosition()
+                        local target_x, target_y = beam_target:getPosition()
+                        beam_emitter.hold_rel_x = target_x - emitter_x
+                        beam_emitter.hold_rel_y = target_y - emitter_y
+                        beam_emitter.hold_target = beam_target
+                    end
+
+                    local drag_distance,
+                          position_x, position_y,
+                          target_position_x, target_position_y,
+                          norm = tractorBeamSetup(beam_emitter, beam_target, emitter_utility_beam_energy_use_per_delta, emitter_utility_beam.heat_add_rate_per_second, emitter_utility_beam_effectiveness, distance, angle_diff)
+
+                    if drag_distance <= 0 then
+                        emitter_utility_beam.is_firing = false
+                        return
+                    end
+                    emitter_utility_beam.is_firing = true
+
+                    local destination = {
+                        x = position_x + beam_emitter.hold_rel_x,
+                        y = position_y + beam_emitter.hold_rel_y
+                    }
+
+                    tractorBeamMove(beam_emitter, beam_target, target_position_x, target_position_y, destination, drag_distance)
+                -- end callback
+                end
+            )
+            :addCustomUtilityBeamMode(
+                -- name, energy_per_sec, heat_per_sec, requires_target,
            "Reposition",            5.0,         0.02,            true,
                 -- callback
                 function(beam_emitter, beam_target, distance, angle_diff)
@@ -430,14 +469,23 @@ function init()
                     end
                 end
             )
-            --[[ Requires scripting changes to expose missile components
             :addCustomUtilityBeamMode(
                 "Disrupt homing", 1.0, 1.0, true,
                 function(beam_emitter, beam_target, distance, angle_diff)
-                    print("This is the custom beam mode Disrupt homing: " .. beam_emitter:getCallSign() .. " disrupts the homing capabilities of a missile at " .. beam_target.getPosition())
+                    local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta = checkBeamCapability(beam_emitter)
+
+                    if not can_fire then return end
+                    if beam_target.components.missile_homing == nil then return end
+
+                    beam_target.components.missile_homing.target_angle = beam_target.components.missile_homing.target_angle + 180 * emitter_utility_beam_effectiveness
+
+                    beam_emitter:setEnergy(beam_emitter:getEnergy() - emitter_utility_beam_energy_use_per_delta)
+
+                    beam_emitter:setSystemHeat("utilitybeam", beam_emitter:getSystemHeat("utilitybeam") + emitter_utility_beam.heat_add_rate_per_second * beam_emitter:getSystemPower("utilitybeam") * global_delta)
+
+                    emitter_utility_beam.is_firing = true
                 end
             )
-            --]]
             :addCustomUtilityBeamMode(
                 "Disrupt radar", 1.0, 0.001, false,
                 function(beam_emitter, beam_target, distance, angle_diff)
@@ -507,9 +555,49 @@ function init()
                 "Harmonize freq.", 1.0, 1.0, true,
                 function(beam_emitter, beam_target, distance, angle_diff)
                     local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta = checkBeamCapability(beam_emitter)
+                    local target_shields = beam_target.components.shields
+                    local emitter_beam_weapons = beam_emitter.components.beam_weapons
+                    if can_fire and target_shields and emitter_beam_weapons then
+                        -- Initialize harmonization progress counter if necessary
+                        if beam_target.harmonize_progress == nil then beam_target.harmonize_progress = 0 end
 
-                    if can_fire then
-                        print("This is the custom beam mode Harmonize freq.: " .. beam_emitter:getCallSign() .. " forcefully harmonizes the shield frequencies of " .. beam_target:getCallSign() or "unknown entity" .. " to maximize its beam damage")
+                        -- Each tick counts toward the harmonization threshold while generating heat and consuming energy
+                        local harmonize_progress_per_tick = emitter_utility_beam.strength * 0.001 * emitter_utility_beam_effectiveness * global_delta
+                        beam_target.harmonize_progress = beam_target.harmonize_progress + harmonize_progress_per_tick
+                        beam_emitter:setEnergy(beam_emitter:getEnergy() - emitter_utility_beam_energy_use_per_delta)
+                        beam_emitter:setSystemHeat("utilitybeam", beam_emitter:getSystemHeat("utilitybeam") + emitter_utility_beam.heat_add_rate_per_second * beam_emitter:getSystemPower("utilitybeam") * global_delta)
+                        beam_emitter:setCustomUtilityBeamModeProgress("Harmonize freq.", beam_target.harmonize_progress)
+
+                        -- If the threshold is reached in this tick, step the beam frequency toward the optimal
+                        if beam_target.harmonize_progress >= 1.0 then
+                            emitter_utility_beam.is_firing = true
+                            -- Find the beam frequency that deals maximum damage to the target's shield frequency
+                            local best_freq = 0
+                            local best_factor = beamVsShieldFrequencyDamageFactor(0, target_shields.frequency)
+                            for freq = 1, 20 do
+                                local factor = beamVsShieldFrequencyDamageFactor(freq, target_shields.frequency)
+                                if factor > best_factor then
+                                    best_factor = factor
+                                    best_freq = freq
+                                end
+                            end
+                            -- Step one frequency toward the optimal, wrapping around to find the shortest path
+                            local freq_range = 21 -- 0..20 inclusive
+                            local current_freq = emitter_beam_weapons.frequency
+                            local steps_up = (best_freq - current_freq + freq_range) % freq_range
+                            local steps_down = (current_freq - best_freq + freq_range) % freq_range
+                            if steps_up <= steps_down then
+                                emitter_beam_weapons.frequency = (current_freq + 1) % freq_range
+                            else
+                                emitter_beam_weapons.frequency = (current_freq - 1 + freq_range) % freq_range
+                            end
+                            beam_target.harmonize_progress = 0
+                            beam_emitter:setCustomUtilityBeamModeProgress("Harmonize freq.", 0)
+                        else
+                            emitter_utility_beam.is_firing = false
+                        end
+                    else
+                        emitter_utility_beam.is_firing = false
                     end
                 end
             )
@@ -517,9 +605,33 @@ function init()
                 "Jump tow", 1.0, 1.0, true,
                 function(beam_emitter, beam_target, distance, angle_diff)
                     local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta = checkBeamCapability(beam_emitter)
+                    local jd = beam_emitter.components.jump_drive
 
-                    if can_fire then
-                        print("This is the custom beam mode Jump tow: " .. beam_emitter:getCallSign() .. " teleports " .. beam_target:getCallSign() or "unknown entity" .. " to a relative position at its jump destination")
+                    if can_fire and jd and jd.delay > 0 then
+                        -- Jump countdown is active: track this target with its relative position
+                        if beam_emitter.jump_tow_targets == nil then beam_emitter.jump_tow_targets = {} end
+                        local emitter_x, emitter_y = beam_emitter:getPosition()
+                        local target_x, target_y = beam_target:getPosition()
+                        local rel_x = target_x - emitter_x
+                        local rel_y = target_y - emitter_y
+                        -- Update existing entry or insert new one
+                        local found = false
+                        for _, data in ipairs(beam_emitter.jump_tow_targets) do
+                            if data.entity == beam_target then
+                                data.rel_x = rel_x
+                                data.rel_y = rel_y
+                                found = true
+                                break
+                            end
+                        end
+                        if not found then
+                            table.insert(beam_emitter.jump_tow_targets, {entity = beam_target, rel_x = rel_x, rel_y = rel_y})
+                        end
+                        beam_emitter:setEnergy(beam_emitter:getEnergy() - emitter_utility_beam_energy_use_per_delta)
+                        beam_emitter:setSystemHeat("utilitybeam", beam_emitter:getSystemHeat("utilitybeam") + emitter_utility_beam.heat_add_rate_per_second * beam_emitter:getSystemPower("utilitybeam") * global_delta)
+                        emitter_utility_beam.is_firing = true
+                    else
+                        emitter_utility_beam.is_firing = false
                     end
                 end
             )
@@ -527,9 +639,37 @@ function init()
                 "Scan", 1.0, 1.0, true,
                 function(beam_emitter, beam_target, distance, angle_diff)
                     local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta = checkBeamCapability(beam_emitter)
+                    local faction_name = beam_emitter:getFaction()
+                    if can_fire and faction_name and not beam_target:isFullyScannedBy(beam_emitter) then
+                        -- Initialize scan progress counter if necessary
+                        if beam_target.scan_progress == nil then beam_target.scan_progress = 0 end
 
-                    if can_fire then
-                        print("This is the custom beam mode Scan " .. beam_emitter:getCallSign() .. " changes the scanned status of " .. beam_target:getCallSign() or "unknown entity")
+                        -- Each tick counts toward the scan threshold while generating heat and consuming energy
+                        local scan_progress_per_tick = emitter_utility_beam.strength * 0.001 * emitter_utility_beam_effectiveness * global_delta
+                        beam_target.scan_progress = beam_target.scan_progress + scan_progress_per_tick
+                        beam_emitter:setEnergy(beam_emitter:getEnergy() - emitter_utility_beam_energy_use_per_delta)
+                        beam_emitter:setSystemHeat("utilitybeam", beam_emitter:getSystemHeat("utilitybeam") + emitter_utility_beam.heat_add_rate_per_second * beam_emitter:getSystemPower("utilitybeam") * global_delta)
+                        beam_emitter:setCustomUtilityBeamModeProgress("Scan", beam_target.scan_progress)
+
+                        -- If the threshold is reached in this tick, advance the scan state
+                        if beam_target.scan_progress >= 1.0 then
+                            emitter_utility_beam.is_firing = true
+                            if beam_target:isScannedBy(beam_emitter) then
+                                beam_target:setScanStateByFaction(faction_name, "full")
+                            else
+                                beam_target:setScanStateByFaction(faction_name, "simple")
+                            end
+                            beam_target.scan_progress = 0
+                            beam_emitter:setCustomUtilityBeamModeProgress("Scan", 0)
+                            print("This is the custom beam mode Scan " .. beam_emitter:getCallSign() .. " changes the scanned status of " .. beam_target:getCallSign() or "unknown entity")
+                            if beam_target:isFullyScannedBy(beam_emitter) == true then
+                                print("beam_target:isFullyScannedBy(beam_emitter): true")
+                            end
+                        else
+                            emitter_utility_beam.is_firing = false
+                        end
+                    else
+                        emitter_utility_beam.is_firing = false
                     end
                 end
             )
@@ -537,7 +677,7 @@ function init()
                 "Repair", 1.0, 1.0, true,
                 function(beam_emitter, beam_target, distance, angle_diff)
                     local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta = checkBeamCapability(beam_emitter)
-                    local hull = beam_emitter.components.hull
+                    local hull = beam_target.components.hull
 
                     if can_fire and hull then
                         if hull.current < hull.max then
@@ -600,75 +740,6 @@ function init()
     )
 end
 
--- TODO: Replace this with the utils.lua version once it incorporates missile types (#2733)
-function isObjectType(obj,typ,qualifier)
-    if obj ~= nil and obj:isValid() then
-        if typ ~= nil then
-            if ECS then
-                if typ == "SpaceStation" then
-                    return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
-                elseif typ == "PlayerSpaceship" then
-                    return obj.components.player_control
-                elseif typ == "ScanProbe" then
-                    return obj.components.allow_radar_link
-                elseif typ == "CpuShip" then
-                    return obj.ai_controller
-                elseif typ == "Asteroid" then
-                    return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 1, 7) == "Astroid"
-                elseif typ == "Nebula" then
-                    return obj.components.nebula_renderer
-                elseif typ == "Planet" then
-                    return obj.components.planet_render
-                elseif typ == "SupplyDrop" then
-                    return obj.components.pickup and obj.components.radar_trace.icon == "radar/blip.png" and obj.components.radar_trace.color_by_faction
-                elseif typ == "BlackHole" then
-                    return obj.components.gravity and obj.components.billboard_render.texture == "blackHole3d.png"
-                elseif typ == "WarpJammer" then
-                    return obj.components.warp_jammer
-                elseif typ == "Mine" then
-                    return obj.components.delayed_explode_on_touch and obj.components.constant_particle_emitter
-                elseif typ == "EMPMissile" then
-                    return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explode_on_touch.damage_type == "emp"
-                elseif typ == "Nuke" then
-                    return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
-                elseif typ == "Zone" then
-                    return obj.components.zone
-                else
-                    if qualifier == "MovingMissile" then
-                        if typ == "HomingMissile" or typ == "HVLI" or typ == "Nuke" or typ == "EMPMissile" then
-                            return obj.components.radar_trace.icon == "radar/missile.png"
-                        else
-                            return false
-                        end
-                    elseif qualifier == "SplashMissile" then
-                        if typ == "Nuke" or typ == "EMPMissile" then
-                            if obj.components.radar_trace.icon == "radar/missile.png" then
-                                if typ == "Nuke" then
-                                    return obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
-                                else    --EMP
-                                    return obj.components.explode_on_touch.damage_type == "emp"
-                                end
-                            else
-                                return false
-                            end
-                        else
-                            return false
-                        end
-                    else
-                        return false
-                    end
-                end
-            else
-                return obj.typeName == typ
-            end
-        else
-            return false
-        end
-    else
-        return false
-    end
-end
-
 function cleanup()
     -- Clean up the current play field. Find all objects and destroy everything that is not a player.
     -- If it is a player, position him in the center of the scenario.
@@ -684,6 +755,31 @@ end
 function update(delta)
     -- No victory condition
     global_delta = delta
+
+    -- Jump tow: detect when a tracked emitter completes a jump and transport towed entities
+    if player_ship ~= nil and player_ship:isValid() then
+        local jd = player_ship.components.jump_drive
+        if jd then
+            local prev = player_ship.jump_tow_prev_just_jumped or 0
+            local curr = jd.just_jumped
+            -- A successful jump sets just_jumped to 2.0; an aborted jump sets it to at most ~1.1.
+            -- Detect the transition to a successful jump (threshold 1.9 avoids ambiguity after
+            -- one frame of delta has been subtracted from the initial 2.0 value).
+            if curr > prev and curr >= 1.9 and player_ship.jump_tow_targets ~= nil then
+                local emitter_x, emitter_y = player_ship:getPosition()
+                for _, data in ipairs(player_ship.jump_tow_targets) do
+                    if data.entity ~= nil and data.entity:isValid() then
+                        data.entity:setPosition(emitter_x + data.rel_x, emitter_y + data.rel_y)
+                    end
+                end
+                player_ship.jump_tow_targets = nil
+            elseif jd.delay == 0 and curr <= 0 then
+                -- No jump armed or in effect; discard any stale tracking data
+                player_ship.jump_tow_targets = nil
+            end
+            player_ship.jump_tow_prev_just_jumped = curr
+        end
+    end
 end
 
 function tractorBeamSetup(beam_emitter, beam_target, energy_per_delta, heat_per_sec, emitter_utility_beam_effectiveness, distance, angle_diff)
