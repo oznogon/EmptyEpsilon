@@ -13,6 +13,7 @@ class GuiLabel;
 class GuiProgressbar;
 class GuiSelector;
 class GuiSlider;
+class GuiThemeStyle;
 class GuiToggleButton;
 class MissileTubes;
 class PickupCallback;
@@ -37,6 +38,9 @@ private:
     };
     std::vector<SystemRow> thermal_rows;
     std::vector<SystemRow> repair_rows;
+
+    const GuiThemeStyle* overlay_damaged_style;
+    const GuiThemeStyle* overlay_overheating_style;
 
     GuiElement* left_column;
     GuiElement* right_column;
