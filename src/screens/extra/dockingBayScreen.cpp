@@ -3,6 +3,7 @@
 #include "i18n.h"
 #include "gameGlobalInfo.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_arrow.h"
 #include "gui/gui2_arrowbutton.h"
 #include "gui/gui2_button.h"
@@ -36,9 +37,10 @@ static string toNearbyIntString(float value)
 }
 
 DockingBayScreen::DockingBayScreen(GuiContainer* owner)
-: GuiOverlay(owner, "DOCKING_BAY_SCREEN", colorConfig.background),
+: GuiOverlay(owner, "DOCKING_BAY_SCREEN", GuiTheme::getColor("background")),
   selected_entity(sp::ecs::Entity())
 {
+
     // Render the background decorations.
     (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
@@ -470,7 +472,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
         info.heat_icon = new GuiImage(info.heat_bar, "", "gui/icons/status_overheat");
         info.heat_icon
-            ->setColor(colorConfig.overlay_overheating)
+            ->setColor(theme->getStyle("overlay.overheating")->get(getState()).color)
             ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
             ->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
 
@@ -597,7 +599,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         info.damage_bar->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.damage_icon = new GuiImage(info.damage_bar, "", "gui/icons/system_health");
         info.damage_icon
-            ->setColor(colorConfig.overlay_damaged)
+            ->setColor(theme->getStyle("overlay.damaged")->get(getState()).color)
             ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
             ->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
         info.damage_label = new GuiLabel(info.damage_bar, id + "_DAMAGE_LABEL", "...", 20.0f);
