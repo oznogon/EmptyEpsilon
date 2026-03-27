@@ -17,6 +17,8 @@ GuiRotationDial::GuiRotationDial(GuiContainer* owner, string id, float min_value
     front_style = theme->getStyle("rotationdial.front");
     texture_style = theme->getStyle("rotationdial.front.texture");
     handle_style = theme->getStyle("rotationdial.front.handle");
+
+    handle_color = front_style->get(GuiElement::State::Normal).color;
 }
 
 void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
@@ -141,7 +143,7 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
                 uvs.push_back({u, v_uvs[band + 1]});
             }
 
-            renderer.drawTexturedTriangleStrip(texture.texture, positions, uvs, front.color);
+            renderer.drawTexturedTriangleStrip(texture.texture, positions, uvs, handle_color);
         }
     }
     // If not textured, draw the handle as a flat-colored triangle strip
@@ -218,16 +220,6 @@ GuiRotationDial* GuiRotationDial::setValue(float value)
     // 0, range.
     this->value = lower_range + std::fmod(std::fmod(value - lower_range, range) + range, range);
 
-    return this;
-}
-
-GuiRotationDial* GuiRotationDial::setRange(float min_value, float max_value)
-{
-    while (min_value < 0.0f) min_value += 360.0f;
-    while (max_value > 360.0f) max_value -= 360.0f;
-
-    this->min_value = min_value;
-    this->max_value = max_value;
     return this;
 }
 

@@ -15,6 +15,7 @@ protected:
     float rotation_offset = 0.0f;
     float ring_thickness = 0.0f;
     float handle_arc = 0.0f;
+    glm::u8vec4 handle_color = {255, 255, 255, 255};
     float radius;
     func_t func;
     const GuiThemeStyle* dial_style;
