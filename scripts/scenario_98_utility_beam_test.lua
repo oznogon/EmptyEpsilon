@@ -599,7 +599,15 @@ function init()
                     else
                         emitter_utility_beam.is_firing = false
                     end
-                end
+                end, -- Callback while active
+                -- Start deactivation callback
+                function(beam_emitter, beam_target, distance, angle_diff)
+                    -- Reset all entities' harmonize progress and clear the progress bar
+                    if beam_target.harmonize_progress ~= nil then
+                        beam_target.harmonize_progress = nil
+                    end
+                    beam_emitter:setCustomUtilityBeamModeProgress("Harmonize freq.", 0)
+                end -- Deactivation callback
             )
             :addCustomUtilityBeamMode(
                 "Jump tow", 1.0, 1.0, true,

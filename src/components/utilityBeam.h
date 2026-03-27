@@ -18,6 +18,7 @@ public:
     public:
         string name;
         sp::script::Callback callback;
+        sp::script::Callback deactivate_callback;
         int order;
         bool requires_target = true;
         float energy_per_sec = 0.0f;
@@ -42,6 +43,7 @@ public:
 
     // State
     bool active = false;
+    bool was_active = false;
     bool is_firing = false;
 
     // Position and direction
