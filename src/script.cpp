@@ -1117,7 +1117,7 @@ void luaCommandSetUtilityBeamRange(sp::ecs::Entity ship, float range) {
     utility_beam->range = range;
 }
 
-void luaSetCustomUtilityBeamMode(sp::ecs::Entity ship, string name, int order, float energy_per_sec, float heat_per_sec, bool requires_target, sp::script::Callback callback) {
+void luaSetCustomUtilityBeamMode(sp::ecs::Entity ship, string name, int order, float energy_per_sec, float heat_per_sec, bool requires_target, sp::script::Callback callback, sp::script::Callback deactivate_callback) {
     auto utility_beam = ship.getComponent<UtilityBeam>();
     if (!utility_beam) return;
     auto& cbm = utility_beam->custom_beam_modes;
@@ -1140,6 +1140,7 @@ void luaSetCustomUtilityBeamMode(sp::ecs::Entity ship, string name, int order, f
     f.energy_per_sec = energy_per_sec;
     f.heat_per_sec = heat_per_sec;
     f.callback = callback;
+    f.deactivate_callback = deactivate_callback;
     f.order = order;
     f.requires_target = requires_target;
     std::stable_sort(cbm.begin(), cbm.end());

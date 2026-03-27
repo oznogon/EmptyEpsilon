@@ -338,8 +338,8 @@ end
 ---   -- end callback
 ---   end
 --- )
-function Entity:addCustomUtilityBeamMode(name, energy_per_sec, heat_per_sec, requires_target, callback)
-    setCustomUtilityBeamMode(self, name, 0, energy_per_sec, heat_per_sec, requires_target, callback)
+function Entity:addCustomUtilityBeamMode(name, energy_per_sec, heat_per_sec, requires_target, callback, deactivate_callback)
+    setCustomUtilityBeamMode(self, name, 0, energy_per_sec, heat_per_sec, requires_target, callback, deactivate_callback)
     return self
 end
 

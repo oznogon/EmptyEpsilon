@@ -147,6 +147,35 @@ void UtilityBeamSystem::update(float delta)
         {
             // The beam is off. Tick its cooldown toward 0 and reset its
             // activity timer if necessary.
+            if (utility_beam.was_active)
+            {
+                auto position = transform.getPosition();
+
+                for (auto& beam_mode : utility_beam.custom_beam_modes)
+                {
+                    if (utility_beam.custom_beam_mode == beam_mode.name && beam_mode.deactivate_callback)
+                    {
+                        if (beam_mode.requires_target)
+                        {
+                            // Remove transform from effect_target_entity when in targeted mode
+                            utility_beam.effect_target_entity.removeComponent<sp::Transform>();
+
+                            // Get a list of all entities with transforms within range.
+                            for (auto entity_in_range : sp::CollisionSystem::queryArea(position - glm::vec2(utility_beam.range, utility_beam.range), position + glm::vec2(utility_beam.range, utility_beam.range)))
+                            {
+                                // Don't match ourselves.
+                                if (entity_in_range == this_entity) continue;
+                                LuaConsole::checkResult(beam_mode.deactivate_callback.call<void>(this_entity, entity_in_range));
+                            }
+                        }
+                        else
+                        {
+                            LuaConsole::checkResult(beam_mode.deactivate_callback.call<void>(this_entity, utility_beam.effect_target_entity));
+                        }
+                    }
+                }
+            }
+
             if (utility_beam.cooldown > 0.0f) utility_beam.cooldown -= delta;
             utility_beam.is_firing = false;
             // Remove the transform from the targetless beam's spoofed entity
@@ -154,8 +183,8 @@ void UtilityBeamSystem::update(float delta)
             // the beam is inactive.
             utility_beam.effect_target_entity.removeComponent<sp::Transform>();
         }
+        utility_beam.was_active = utility_beam.active;
     }
-
 }
 
 void UtilityBeamSystem::fire(sp::ecs::Entity firing_entity, UtilityBeam& utility_beam, UtilityBeam::CustomBeamMode& beam_mode, sp::Transform& transform, sp::ecs::Entity target_entity, float distance, float angle_diff)

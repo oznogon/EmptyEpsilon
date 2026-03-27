@@ -624,6 +624,7 @@ void initComponentScriptBindings()
     BIND_ARRAY(UtilityBeam, custom_beam_modes);
     BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, name);
     BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, callback);
+    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, deactivate_callback);
     BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, order);
     BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, energy_per_sec);
     BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, heat_per_sec);
