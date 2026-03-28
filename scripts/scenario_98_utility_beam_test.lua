@@ -850,8 +850,16 @@ function tractorBeamSetup(beam_emitter, beam_target, energy_per_delta, heat_per_
                 hit_location.y = target_position_y
 
                 if len > 0 then
-                    hit_location.x = hit_location.x - norm.x * target_physics.size -- TODO fix size calc
-                    hit_location.y = hit_location.y - norm.y * target_physics.size
+                    local physics_radius
+                    if type(target_physics.size) == "table" then
+                        -- Rectangle: project half-extents onto normal
+                        physics_radius = math.abs(norm.x) * target_physics.size.x + math.abs(norm.y) * target_physics.size.y
+                    else
+                        -- Circle: size is the radius
+                        physics_radius = target_physics.size
+                    end
+                    hit_location.x = hit_location.x - norm.x * physics_radius
+                    hit_location.y = hit_location.y - norm.y * physics_radius
                 end
             end
 
