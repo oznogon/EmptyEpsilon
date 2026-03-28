@@ -681,15 +681,13 @@ void DockingSystem::requestDock(sp::ecs::Entity entity, sp::ecs::Entity target)
     docking_port->state = DockingPort::State::Docking;
     docking_port->target = target;
 
-    if (auto warp = entity.getComponent<WarpDrive>())
-        warp->request = 0;
+    if (auto warp = entity.getComponent<WarpDrive>()) warp->request = 0;
 }
 
 void DockingSystem::requestUndock(sp::ecs::Entity entity)
 {
     auto docking_port = entity.getComponent<DockingPort>();
     if (!docking_port || docking_port->state != DockingPort::State::Docked) return;
-    // if (impulse && impulse->getSystemEffectiveness() < 0.1f) return;
 
     if (!entity.hasComponent<sp::Transform>())
     {
@@ -697,13 +695,19 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
         auto target_transform = docking_port->target.getComponent<sp::Transform>();
         t.setPosition(target_transform->getPosition() + rotateVec2(docking_port->docked_offset, target_transform->getRotation()));
         t.setRotation(target_transform->getRotation() + vec2ToAngle(docking_port->docked_offset));
+
+        // Prevent AIController ships previously ordered to dock from
+        // immediately redocking after undocking.
+        if (auto ai = entity.getComponent<AIController>())
+            if (ai->orders == AIOrder::Dock) ai->orders = AIOrder::Roaming;
     }
 
-    auto thrusters = entity.getComponent<ManeuveringThrusters>();
-    if (thrusters) thrusters->stop();
+    // Reset propulsion systems upon undock.
+    docking_port->state = DockingPort::State::NotDocking;
+    if (auto thrusters = entity.getComponent<ManeuveringThrusters>()) thrusters->stop();
+    if (auto warp = entity.getComponent<WarpDrive>()) warp->request = 0;
     if (auto impulse = entity.getComponent<ImpulseEngine>()) impulse->request = 0.5f;
 
-    docking_port->state = DockingPort::State::NotDocking;
     if (auto bay = docking_port->target.getComponent<DockingBay>())
     {
         for (size_t i = 0; i < bay->berths.size(); i++)
@@ -712,12 +716,12 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
             if (berth.docked_entity == entity)
             {
                 berth.docked_entity = sp::ecs::Entity();
-                // Cancel any pending move from this berth
+
+                // Cancel any pending move from this berth. Reset target berth's
+                // progress before cancelling.
                 if (berth.move_target_berth >= 0 && berth.move_target_berth < static_cast<int>(bay->berths.size()))
-                {
-                    // Reset target berth's progress before cancelling
                     bay->berths[berth.move_target_berth].move_progress = 0.0f;
-                }
+
                 berth.move_target_berth = -1;
                 berth.move_progress = 0.0f;
             }
@@ -730,11 +734,9 @@ void DockingSystem::abortDock(sp::ecs::Entity entity)
     auto docking_port = entity.getComponent<DockingPort>();
     if (!docking_port || docking_port->state != DockingPort::State::Docking) return;
 
+    // Reset propulsion systems upon abort.
     docking_port->state = DockingPort::State::NotDocking;
-    auto engine = entity.getComponent<ImpulseEngine>();
-    if (engine) engine->request = 0.f;
-    auto warp = entity.getComponent<WarpDrive>();
-    if (warp) warp->request = 0;
-    auto thrusters = entity.getComponent<ManeuveringThrusters>();
-    if (thrusters) thrusters->stop();
+    if (auto impulse = entity.getComponent<ImpulseEngine>()) impulse->request = 0.f;
+    if (auto warp = entity.getComponent<WarpDrive>()) warp->request = 0;
+    if (auto thrusters = entity.getComponent<ManeuveringThrusters>()) thrusters->stop();
 }
