@@ -646,9 +646,17 @@ function init()
             :addCustomUtilityBeamMode(
                 "Scan", 1.0, 1.0, true,
                 function(beam_emitter, beam_target, distance, angle_diff)
+                    -- Do nothing if the target is fully scanned.
+                    if not beam_target.components.scan_state then return end
+                    if beam_target:isFullyScannedBy(beam_emitter) then return end
+
                     local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta = checkBeamCapability(beam_emitter)
                     local faction_name = beam_emitter:getFaction()
-                    if can_fire and faction_name and not beam_target:isFullyScannedBy(beam_emitter) then
+
+                    -- If the beam can fire and the emitter has a faction, start scanning.
+                    if can_fire and faction_name then
+                        -- Fire beam effect
+                        emitter_utility_beam.is_firing = true
                         -- Initialize scan progress counter if necessary
                         if beam_target.scan_progress == nil then beam_target.scan_progress = 0 end
 
@@ -661,7 +669,6 @@ function init()
 
                         -- If the threshold is reached in this tick, advance the scan state
                         if beam_target.scan_progress >= 1.0 then
-                            emitter_utility_beam.is_firing = true
                             if beam_target:isScannedBy(beam_emitter) then
                                 beam_target:setScanStateByFaction(faction_name, "full")
                             else
@@ -669,12 +676,6 @@ function init()
                             end
                             beam_target.scan_progress = 0
                             beam_emitter:setCustomUtilityBeamModeProgress("Scan", 0)
-                            print("This is the custom beam mode Scan " .. beam_emitter:getCallSign() .. " changes the scanned status of " .. beam_target:getCallSign() or "unknown entity")
-                            if beam_target:isFullyScannedBy(beam_emitter) == true then
-                                print("beam_target:isFullyScannedBy(beam_emitter): true")
-                            end
-                        else
-                            emitter_utility_beam.is_firing = false
                         end
                     else
                         emitter_utility_beam.is_firing = false
