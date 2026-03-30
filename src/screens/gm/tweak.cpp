@@ -1882,6 +1882,20 @@ private:
             if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = text.toFloat(); } \
         }); \
     } while(0)
+// Add a text field to tweak a float value for the given component, using
+// getter and setter methods instead of direct field access.
+#define ADD_NUM_TEXT_TWEAK_GS(LABEL, COMPONENT, GETTER, SETTER) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
+        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
+        auto ui = new GuiTextTweak(row); \
+        ui->update_func = [this, ui]() -> string { if (auto v = entity.getComponent<COMPONENT>()) return string(v->GETTER(), 3); return ui->getText(); }; \
+        ui->callback([this](string text) { if (auto v = entity.getComponent<COMPONENT>()) v->SETTER(text.toFloat()); }); \
+        new_page->apply_functions.push_back([this, ui]() { \
+            string text = ui->getText(); \
+            if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->SETTER(text.toFloat()); } \
+        }); \
+    } while(0)
 // Add a slider and text field to tweak a float value within a range for the
 // given component.
 #define ADD_NUM_SLIDER_TWEAK(LABEL, COMPONENT, MIN_VALUE, MAX_VALUE, VALUE) do { \
@@ -3065,13 +3079,13 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     ADD_PAGE(tr("tweak-tab", "Avoid object"), AvoidObject);
     new_page->description = tr("tweak-avoid-object", "Marks this entity as an obstacle for AI pathfinding. AI-controlled entities will route this entity at the given avoidance range.");
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Avoidance range:"), AvoidObject, range);
+    ADD_NUM_TEXT_TWEAK_GS(tr("tweak-text", "Avoidance range:"), AvoidObject, getRange, setRange);
     addPageToGroup(ai_pathfinding_group);
 
     ADD_PAGE(tr("tweak-tab", "Delayed avoid object"), DelayedAvoidObject);
     new_page->description = tr("tweak-delayed-avoid-object", "Marks this entity as an obstacle for AI pathfinding after an activation delay period. AI-controlled entities pass through this area until the activation delay countdown expires, then avoid it using the given range.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Activation delay (seconds):"), DelayedAvoidObject, delay);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Avoidance range:"), DelayedAvoidObject, range);
+    ADD_NUM_TEXT_TWEAK_GS(tr("tweak-text", "Avoidance range:"), DelayedAvoidObject, getRange, setRange);
     addPageToGroup(ai_pathfinding_group);
 
     ADD_PAGE(tr("tweak-tab", "Target"), Target);
