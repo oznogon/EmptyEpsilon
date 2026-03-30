@@ -81,12 +81,6 @@ public:
     GuiViewport3D* showSpacedust() { show_spacedust = true; return this; }
     GuiViewport3D* hideSpacedust() { show_spacedust = false; return this; }
 
-    enum class ProjectionType
-    {
-        Perspective,
-        Ortho
-    };
-
     float getModifiedFoV() { return base_fov + fov_modifier; }
     float getFoVModifier() { return fov_modifier; }
     float getBaseFoV() { return base_fov; }

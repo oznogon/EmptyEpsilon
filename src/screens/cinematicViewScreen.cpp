@@ -1634,7 +1634,7 @@ float CinematicViewScreen::calculateOrthographicAutoZoomDistance(float horizonta
     float required_half_height = (horizontal_span * 0.5f) / aspect_ratio;
 
     // Convert half-height to required distance using vertical FoV.
-    float vertical_fov_rad = glm::radians(viewport->getFoV() * 0.5f);
+    float vertical_fov_rad = glm::radians(viewport->getModifiedFoV() * 0.5f);
     return required_half_height / tan(vertical_fov_rad);
 }
 
@@ -1803,7 +1803,7 @@ void CinematicViewScreen::updateCameraFromUI(CinematicCamera* cam, sp::Transform
     cam->z_position = camera_position.z;
     cam->pitch = camera_pitch;
     cam->roll = camera_roll;
-    cam->field_of_view = viewport->getFoV();
+    cam->field_of_view = viewport->getModifiedFoV();
 
     // Update camera entity transform from UI
     if (transform)
@@ -1837,7 +1837,7 @@ void CinematicViewScreen::updateCameraSmoothing(CinematicCamera* cam, sp::Transf
     camera_pitch = applyDamping(camera_pitch, camera_entity_target_pitch, camera_entity_smooth_speed, delta);
     camera_roll = applyAngleDamping(camera_roll, camera_entity_target_roll, camera_entity_smooth_speed, delta);
 
-    float current_fov = viewport->getFoV();
+    float current_fov = viewport->getModifiedFoV();
     float target_fov_modifier = camera_entity_target_fov - viewport->getBaseFoV();
     float smoothed_fov_modifier = applyDamping(current_fov - viewport->getBaseFoV(), target_fov_modifier, camera_entity_smooth_speed, delta);
     viewport->modifyFoV(smoothed_fov_modifier);
