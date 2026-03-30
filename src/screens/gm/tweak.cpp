@@ -272,7 +272,7 @@ public:
         setSize(GuiElement::GuiSizeMax, 60.0f);
         setAttribute("layout", "horizontal");
 
-        dial = new GuiRotationDial(this, "", 0.0f, 360.0f, 0.0f,
+        dial = new GuiRotationDial(this, "", 0.0f, 360.0f, 0.0f, 0.0f, 20.0f,
             [this](float value)
             {
                 value_entry->setText(string(value, 1));
@@ -280,8 +280,7 @@ public:
             }
         );
         dial
-            ->setThickness(10.0f)
-            ->setSize(60.0f, 60.0f);
+            ->setSize(60.0f, GuiElement::GuiSizeMax);
 
         value_entry = new GuiTextEntry(this, "", "");
         value_entry
