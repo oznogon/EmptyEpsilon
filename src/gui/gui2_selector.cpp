@@ -69,7 +69,7 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
         popup->hide();
     // rect.position is in layout space; the popup lives at the canvas level
     // (no scroll translation), so convert to screen coordinates first.
-    glm::vec2 screen_pos = rect.position + renderer.getTranslation();
+    glm::vec2 screen_pos = rect.position;
     float top = screen_pos.y;
     float height = entries.size() * 50;
     if (selection_index >= 0)

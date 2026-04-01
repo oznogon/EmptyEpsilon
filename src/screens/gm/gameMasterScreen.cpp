@@ -340,7 +340,7 @@ void GameMasterScreen::update(float delta)
         - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
     if (mouse_wheel_delta != 0.0f)
     {
-        float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (key_zoom_delta * 0.1f)), MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE);
+        float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f)), MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE);
         main_radar->setDistance(view_distance);
         if (view_distance < SHORT_RANGE_DISTANCE) main_radar->shortRange();
         else main_radar->longRange();

@@ -83,7 +83,7 @@ void TopDownScreen::update(float delta)
     pending_zoom = 0.0f;
     if (mouse_wheel_delta != 0.0f)
     {
-        camera_position.z *= (1.0f - zoom_delta * 0.1f);
+        camera_position.z *= (1.0f - mouse_wheel_delta * 0.1f);
         if (camera_position.z > 10000) camera_position.z = 10000;
         if (camera_position.z < 1000) camera_position.z = 1000;
     }
