@@ -60,6 +60,12 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
     }
 }
 
+void TopDownScreen::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    if (!executeScrollOnElement(position, value))
+        pending_zoom += value;
+}
+
 void TopDownScreen::update(float delta)
 {
     // If this is a client and it is disconnected, exit.
@@ -73,14 +79,13 @@ void TopDownScreen::update(float delta)
 
     // Enable mouse wheel zoom.
     float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value()
-        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
+        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value() + pending_zoom;
+    pending_zoom = 0.0f;
     if (mouse_wheel_delta != 0.0f)
     {
-        camera_position.z = camera_position.z * (1.0f - (mouse_wheel_delta) * 4 * delta);
-        if (camera_position.z > 10000)
-            camera_position.z = 10000;
-        if (camera_position.z < 1000)
-            camera_position.z = 1000;
+        camera_position.z *= (1.0f - zoom_delta * 0.1f);
+        if (camera_position.z > 10000) camera_position.z = 10000;
+        if (camera_position.z < 1000) camera_position.z = 1000;
     }
     if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
         camera_position.z = std::max(1000.0f, camera_position.z * 0.9f);
