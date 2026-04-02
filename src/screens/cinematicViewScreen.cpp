@@ -273,22 +273,26 @@ void CinematicViewScreen::update(float delta)
         distance_3D = glm::length(diff_3D);
 
         // Get the ship's current heading and velocity.
-        if (transform)
-            target_rotation = transform->getRotation();
-        // float target_velocity = glm::length(target->getVelocity());
+        if (transform) target_rotation = transform->getRotation();
 
         // We want the camera to always be less than 1U from the selected ship.
         auto physics = target.getComponent<sp::Physics>();
-        auto radius = 300.0f;
+        float radius = 300.0f;
+        float target_velocity = 0.0f;
+
         if (physics)
-            radius = physics->getSize().x;
-        max_camera_distance = 1000.0f + radius + glm::length(physics->getVelocity());
+        {
+            radius = std::max(physics->getSize().x, physics->getSize().y);
+            target_velocity = glm::length(physics->getVelocity());
+        }
+
+        max_camera_distance = 1000.0f + radius + target_velocity;
         min_camera_distance = radius * 2.0f;
 
         // Check if our selected ship has a weapons target.
         auto target_of_target = target.getComponent<Target>() ? target.getComponent<Target>()->entity : sp::ecs::Entity{};
         auto target_of_target_transform = target_of_target.getComponent<sp::Transform>();
-        if (target_of_target && glm::length(target_of_target_transform->getPosition() - target_position_2D) > 10000.0f)
+        if (target_of_target && target_of_target_transform && glm::length(target_of_target_transform->getPosition() - target_position_2D) > 10000.0f)
             target_of_target_transform = nullptr;
 
         // If it does, lock the camera onto that target.
