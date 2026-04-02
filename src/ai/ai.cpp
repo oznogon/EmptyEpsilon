@@ -595,19 +595,21 @@ void ShipAI::runAttack(sp::ecs::Entity target)
     auto position_diff = tt->getPosition() - ot->getPosition();
     float distance = glm::length(position_diff);
 
-    // missile attack
-    if (distance < 4500 && has_missiles)
+    // Missile attack
+    if (distance < 4500.0f && has_missiles)
     {
-        auto tubes = owner.getComponent<MissileTubes>();
-        for(auto& tube : tubes->mounts)
+        if (auto tubes = owner.getComponent<MissileTubes>())
         {
-            if (tube.state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
+            for (auto& tube : tubes->mounts)
             {
-                float target_angle = calculateFiringSolution(target, tube);
-                if (target_angle != std::numeric_limits<float>::infinity())
+                if (tube.state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
                 {
-                    MissileSystem::fire(owner, tube, target_angle, target);
-                    missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
+                    const float target_angle = calculateFiringSolution(target, tube);
+                    if (target_angle != std::numeric_limits<float>::infinity())
+                    {
+                        MissileSystem::fire(owner, tube, target_angle, target);
+                        missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
+                    }
                 }
             }
         }
@@ -615,9 +617,11 @@ void ShipAI::runAttack(sp::ecs::Entity target)
 
     if (ai->orders == AIOrder::StandGround)
     {
-        auto thrusters = owner.getComponent<ManeuveringThrusters>();
-        if (thrusters) thrusters->target = vec2ToAngle(position_diff);
-    }else{
+        if (auto thrusters = owner.getComponent<ManeuveringThrusters>())
+            thrusters->target = vec2ToAngle(position_diff);
+    }
+    else
+    {
         // Unguided HVLIs require the firing ship to maintain aim by rotating.
         if (best_missile_type == MW_HVLI &&
             (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right))
@@ -646,8 +650,7 @@ void ShipAI::runAttack(sp::ecs::Entity target)
             }
 
             // Override movement orders to maintain HVLI firing position.
-            auto thrusters = owner.getComponent<ManeuveringThrusters>();
-            if (thrusters) thrusters->target = desired_rotation;
+            if (auto thrusters = owner.getComponent<ManeuveringThrusters>()) thrusters->target = desired_rotation;
 
             auto impulse = owner.getComponent<ImpulseEngine>();
             if (impulse && impulse->max_speed_forward > 0.0f)
@@ -671,36 +674,43 @@ void ShipAI::runAttack(sp::ecs::Entity target)
         }
         else if (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right)
         {
-            //We have side beams, find out where we want to attack from.
+            // We have side beams, find out where we want to attack from.
             auto target_position = tt->getPosition();
             auto diff = target_position - ot->getPosition();
             float angle = vec2ToAngle(diff);
+
             if ((weapon_direction == EWeaponDirection::Side && angleDifference(angle, ot->getRotation()) > 0) || weapon_direction == EWeaponDirection::Left)
-                angle += 160;
-            else
-                angle -= 160;
+                angle += 160.0f;
+            else angle -= 160.0f;
+
             auto target_radius = 0.0f;
             if (auto physics = target.getComponent<sp::Physics>())
                 target_radius = physics->getSize().x;
+
             target_position += vec2FromAngle(angle) * (attack_distance + target_radius);
-            flyTowards(target_position, 0);
-        }else{
-            flyTowards(tt->getPosition(), attack_distance);
+            flyTowards(target_position, 0.0f);
         }
+        else flyTowards(tt->getPosition(), attack_distance);
     }
 }
 
 void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
 {
     auto ot = owner.getComponent<sp::Transform>();
-    if (!ot) {
+
+    // If this entity lacks a transform, check if we're internally docked.
+    // If so, undock, which should create a transform for this entity.
+    if (!ot)
+    {
         auto docking_port = owner.getComponent<DockingPort>();
         if (docking_port && docking_port->state == DockingPort::State::Docked)
             DockingSystem::requestUndock(owner);
         return;
     }
+
     auto my_radius = 300.0f;
-    if (auto physics = owner.getComponent<sp::Physics>()) my_radius = physics->getSize().x;
+    if (auto physics = owner.getComponent<sp::Physics>())
+        my_radius = std::max(physics->getSize().x, physics->getSize().y);
     pathPlanner.plan(my_radius, ot->getPosition(), target);
 
     if (pathPlanner.route.size() > 0)
@@ -831,11 +841,15 @@ void ShipAI::flyFormation(sp::ecs::Entity target, glm::vec2 offset)
 
 sp::ecs::Entity ShipAI::findBestTarget(glm::vec2 position, float radius)
 {
-    float target_score = 0.0;
+    // If this entity lacks a transform, don't seek a target.
     sp::ecs::Entity target;
     auto ot = owner.getComponent<sp::Transform>();
+    if (!ot) return target;
+
+    // Seek the target with the highest score within the given radius.
+    float target_score = 0.0f;
     auto owner_position = ot->getPosition();
-    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius)))
+    for (auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius)))
     {
         if (!entity.hasComponent<Hull>() || Faction::getRelation(owner, entity) != FactionRelation::Enemy || entity == target)
             continue;
@@ -850,16 +864,20 @@ sp::ecs::Entity ShipAI::findBestTarget(glm::vec2 position, float radius)
             target_score = score;
         }
     }
+
     return target;
 }
 
 float ShipAI::targetScore(sp::ecs::Entity target)
 {
-    auto impulse = owner.getComponent<ImpulseEngine>();
+    // If this entity or the target entity lack a transform, return the lowest
+    // possible score.
     auto ot = owner.getComponent<sp::Transform>();
     if (!ot) return std::numeric_limits<float>::min();
     auto tt = target.getComponent<sp::Transform>();
     if (!tt) return std::numeric_limits<float>::min();
+
+    auto impulse = owner.getComponent<ImpulseEngine>();
     auto position_difference = tt->getPosition() - ot->getPosition();
     float distance = glm::length(position_difference);
     //auto position_difference_normal = position_difference / distance;
