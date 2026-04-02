@@ -71,8 +71,8 @@ void GuiMissileTubeControls::onUpdate()
         return;
     }
     auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type::MissileSystem);
-    float health = sys->health;
-    float power_level = sys->power_level;
+    const float health = sys ? sys->health : 0.0f;
+    const float power_level = sys ? sys->power_level : 0.0f;
     for (int n = 0; n < MW_Count; n++)
     {
         load_type_rows[n].button->setText(getLocaleMissileWeaponName(EMissileWeapons(n)) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
