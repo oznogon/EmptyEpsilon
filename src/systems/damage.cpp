@@ -183,13 +183,13 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
         }
     }
 
+    // Award reputaiton points based on hull and shield capacities.
+    auto hull = entity.getComponent<Hull>();
     if (info.instigator)
     {
-        float points = 0;
+        float points = 0.0f;
 
-        auto hull = entity.getComponent<Hull>();
-        if (hull)
-            points += hull->max * 0.1f;
+        if (hull) points += hull->max * 0.1f;
 
         auto shields = entity.getComponent<Shields>();
         if (shields && !shields->entries.empty()) {
@@ -204,17 +204,15 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
             Faction::getInfo(info.instigator).reputation_points = std::max(Faction::getInfo(info.instigator).reputation_points - points, 0.0f);
     }
 
-    auto hull = entity.getComponent<Hull>();
-    if (hull->on_destruction)
+    // Run destruction callback.
+    if (hull && hull->on_destruction)
     {
         if (info.instigator)
-        {
             LuaConsole::checkResult(hull->on_destruction.call<void>(entity, info.instigator));
-        } else {
+        else
             LuaConsole::checkResult(hull->on_destruction.call<void>(entity));
-        }
     }
 
-    //Finally, destroy the entity.
+    // Finally, destroy the entity.
     entity.destroy();
 }
