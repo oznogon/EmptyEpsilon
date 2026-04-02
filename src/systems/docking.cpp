@@ -206,30 +206,37 @@ void DockingSystem::requestDock(sp::ecs::Entity entity, sp::ecs::Entity target)
 
     docking_port->state = DockingPort::State::Docking;
     docking_port->target = target;
-    auto warp = entity.getComponent<WarpDrive>();
-    if (warp) warp->request = 0;
+    if (auto warp = entity.getComponent<WarpDrive>()) warp->request = 0;
 }
 
 void DockingSystem::requestUndock(sp::ecs::Entity entity)
 {
     auto docking_port = entity.getComponent<DockingPort>();
     if (!docking_port || docking_port->state != DockingPort::State::Docked) return;
-    auto impulse = entity.getComponent<ImpulseEngine>();
-    if (impulse && impulse->getSystemEffectiveness() < 0.1f) return;
 
+    // If the undocking entity doesn't have a transform (internally docked),
+    // create one for it upon undocking at the docked_offset position relative
+    // to the carrier.
     if (!entity.hasComponent<sp::Transform>())
     {
-        auto& t = entity.addComponent<sp::Transform>();
-        auto target_transform = docking_port->target.getComponent<sp::Transform>();
-        t.setPosition(target_transform->getPosition() + rotateVec2(docking_port->docked_offset, target_transform->getRotation()));
-        t.setRotation(target_transform->getRotation() + vec2ToAngle(docking_port->docked_offset));
+        if (auto target_transform = docking_port->target.getComponent<sp::Transform>())
+        {
+            auto& t = entity.addComponent<sp::Transform>();
+            t.setPosition(target_transform->getPosition() + rotateVec2(docking_port->docked_offset, target_transform->getRotation()));
+            t.setRotation(target_transform->getRotation() + vec2ToAngle(docking_port->docked_offset));
+        }
+        // How should this handle an undocking entity that's internally docked
+        // in an entity that's internally docked in another entity?
+        else
+            LOG(Error, "Entity lacking a transform tried to undock from a carrier lacking a transform, which shouldn't happen");
     }
 
-    auto thrusters = entity.getComponent<ManeuveringThrusters>();
-    if (thrusters) thrusters->stop();
-
     docking_port->state = DockingPort::State::NotDocking;
-    if (impulse) impulse->request = 0.5;
+
+    // Undock at half-ahead impulse.
+    if (auto thrusters = entity.getComponent<ManeuveringThrusters>()) thrusters->stop();
+    if (auto warp = entity.getComponent<WarpDrive>()) warp->request = 0;
+    if (auto impulse = entity.getComponent<ImpulseEngine>()) impulse->request = 0.5f;
 }
 
 void DockingSystem::abortDock(sp::ecs::Entity entity)
@@ -238,10 +245,9 @@ void DockingSystem::abortDock(sp::ecs::Entity entity)
     if (!docking_port || docking_port->state != DockingPort::State::Docking) return;
 
     docking_port->state = DockingPort::State::NotDocking;
-    auto engine = entity.getComponent<ImpulseEngine>();
-    if (engine) engine->request = 0.f;
-    auto warp = entity.getComponent<WarpDrive>();
-    if (warp) warp->request = 0;
-    auto thrusters = entity.getComponent<ManeuveringThrusters>();
-    if (thrusters) thrusters->stop();
+
+    // Abort docking at full stop.
+    if (auto thrusters = entity.getComponent<ManeuveringThrusters>()) thrusters->stop();
+    if (auto warp = entity.getComponent<WarpDrive>()) warp->request = 0;
+    if (auto impulse = entity.getComponent<ImpulseEngine>()) impulse->request = 0.0f;
 }
