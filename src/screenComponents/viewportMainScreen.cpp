@@ -43,7 +43,8 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
             if ((target_ship && target_ship->entity) || linger_timer > 0.0f)
             {
                 // Update ToT coordinates and reset linger period.
-                if (auto tt = target_ship->entity.getComponent<sp::Transform>())
+                auto tt = (target_ship && target_ship->entity) ? target_ship->entity.getComponent<sp::Transform>() : nullptr;
+                if (tt)
                 {
                     linger_timer = linger_period;
                     tot_coordinates = tt->getPosition();
