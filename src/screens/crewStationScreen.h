@@ -1,5 +1,4 @@
-#ifndef CREW_STATION_SCREEN_H
-#define CREW_STATION_SCREEN_H
+#pragma once
 
 #include <memory>
 #include "engine.h"
@@ -51,6 +50,7 @@ private:
     CrewPosition current_position = CrewPosition::helmsOfficer;
     std::vector<CrewTabInfo> tabs;
     string keyboard_general = "";
+    const float BUTTON_HEIGHT = 50.0f;
     void showNextTab(int offset=1);
     void showTab(GuiElement* element);
     string populateShortcutsList(CrewPosition position);
@@ -59,5 +59,3 @@ private:
 
     void tileViewport();
 };
-
-#endif//CREW_STATION_SCREEN_H
