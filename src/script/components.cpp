@@ -69,6 +69,28 @@
             t->MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::fromLua(L, -1); \
         } \
     };
+#define BIND_MEMBER_DIRTY(T, MEMBER, DIRTY_FIELD) \
+    sp::script::ComponentHandler<T>::members[STRINGIFY(MEMBER)] = { \
+        [](lua_State* L, const void* ptr) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<decltype(t->MEMBER)>::toLua(L, t->MEMBER); \
+        }, [](lua_State* L, void* ptr) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            t->MEMBER = sp::script::Convert<decltype(t->MEMBER)>::fromLua(L, -1); \
+            t->DIRTY_FIELD = true; \
+        } \
+    };
+#define BIND_MEMBER_NAMED_DIRTY(T, MEMBER, NAME, DIRTY_FIELD) \
+    sp::script::ComponentHandler<T>::members[NAME] = { \
+        [](lua_State* L, const void* ptr) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::toLua(L, t->MEMBER); \
+        }, [](lua_State* L, void* ptr) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            t->MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::fromLua(L, -1); \
+            t->DIRTY_FIELD = true; \
+        } \
+    };
 // Bind a member using getter and setter functions for validation.
 // The getter must be const.
 #define BIND_MEMBER_GS(T, NAME, GET, SET) \
