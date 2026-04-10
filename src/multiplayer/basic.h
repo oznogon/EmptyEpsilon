@@ -152,3 +152,99 @@ enum class BasicReplicationRequest {
     case BasicReplicationRequest::Receive: if (flags & flag) packet >> target.VECTOR; break; \
     } \
     flag <<= 1;
+
+// Like BASIC_REPLICATION_IMPL_DIRTY, but gates on (DIRTY || EXTRA_DIRTY). Use when a
+// component has two independent dirty flags (e.g. scalar fields under DIRTY and a vector
+// field managed by REPLICATE_VECTOR_IF_DIRTY under EXTRA_DIRTY). Only DIRTY is cleared by
+// the gate; EXTRA_DIRTY is cleared inside field_impl by REPLICATE_VECTOR_IF_DIRTY.
+#define BASIC_REPLICATION_IMPL_DIRTY2(CLASS, COMPONENT, DIRTY, EXTRA_DIRTY) \
+    void CLASS::onEntityDestroyed(uint32_t index) { info.remove(index); } \
+    void CLASS::sendAll(sp::io::DataBuffer& packet) { \
+        for(auto [entity, data] : sp::ecs::Query<COMPONENT>()) { \
+            impl<BasicReplicationRequest::SendAll>(entity, packet, data, nullptr); \
+        } \
+    } \
+    void CLASS::update(sp::io::DataBuffer& packet) { \
+        auto now = engine->getElapsedTime(); \
+        for(auto [entity, data] : sp::ecs::Query<COMPONENT>()) { \
+            if (!info.has(entity.getIndex())) { \
+                info.set(entity.getIndex(), {entity.getVersion(), now, data}); \
+                impl<BasicReplicationRequest::SendAll>(entity, packet, data, nullptr); \
+            } else { \
+                auto& entity_info = info.get(entity.getIndex()); \
+                if (entity_info.version != entity.getVersion()) { \
+                    info.set(entity.getIndex(), {entity.getVersion(), now, data}); \
+                    impl<BasicReplicationRequest::SendAll>(entity, packet, data, nullptr); \
+                } else if (data.DIRTY || data.EXTRA_DIRTY) { \
+                    data.DIRTY = false; \
+                    impl<BasicReplicationRequest::Update>(entity, packet, data, &entity_info.data); \
+                } \
+            } \
+        } \
+        for(auto [index, entity_info] : info) { \
+            if (!sp::ecs::Entity::forced(index, entity_info.version).hasComponent<COMPONENT>()) { \
+                info.remove(index); \
+                packet << CMD_ECS_DEL_COMPONENT << component_index << index; \
+            } \
+        } \
+    } \
+    void CLASS::receive(sp::ecs::Entity entity, sp::io::DataBuffer& packet) { impl<BasicReplicationRequest::Receive>(entity, packet, entity.getOrAddComponent<COMPONENT>(), nullptr); } \
+    void CLASS::remove(sp::ecs::Entity entity) { entity.removeComponent<COMPONENT>(); } \
+    template<BasicReplicationRequest BRR> bool CLASS::impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup) { \
+        sp::io::DataBuffer tmp; \
+        uint64_t flags = 0; \
+        if (BRR == BasicReplicationRequest::Receive) packet >> flags; \
+        field_impl<BRR>(entity, packet, target, backup, tmp, flags); \
+        if (tmp.getDataSize() > 0) packet.write(CMD_ECS_SET_COMPONENT, component_index, entity.getIndex(), flags, tmp); \
+        return tmp.getDataSize() > 0; \
+    } \
+    template<BasicReplicationRequest BRR> void CLASS::field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup, sp::io::DataBuffer& tmp, uint64_t& flags) { \
+        uint64_t flag = 1;
+
+// Like BASIC_REPLICATION_IMPL, but gates the per-entity update on a dirty flag instead of
+// a time delay. Use for components whose fields are written rarely (e.g. set once at spawn
+// and never changed). Set DIRTY to true whenever a field changes; the replication clears it
+// after checking and propagates only the changed fields to clients.
+#define BASIC_REPLICATION_IMPL_DIRTY(CLASS, COMPONENT, DIRTY) \
+    void CLASS::onEntityDestroyed(uint32_t index) { info.remove(index); } \
+    void CLASS::sendAll(sp::io::DataBuffer& packet) { \
+        for(auto [entity, data] : sp::ecs::Query<COMPONENT>()) { \
+            impl<BasicReplicationRequest::SendAll>(entity, packet, data, nullptr); \
+        } \
+    } \
+    void CLASS::update(sp::io::DataBuffer& packet) { \
+        auto now = engine->getElapsedTime(); \
+        for(auto [entity, data] : sp::ecs::Query<COMPONENT>()) { \
+            if (!info.has(entity.getIndex())) { \
+                info.set(entity.getIndex(), {entity.getVersion(), now, data}); \
+                impl<BasicReplicationRequest::SendAll>(entity, packet, data, nullptr); \
+            } else { \
+                auto& entity_info = info.get(entity.getIndex()); \
+                if (entity_info.version != entity.getVersion()) { \
+                    info.set(entity.getIndex(), {entity.getVersion(), now, data}); \
+                    impl<BasicReplicationRequest::SendAll>(entity, packet, data, nullptr); \
+                } else if (data.DIRTY) { \
+                    data.DIRTY = false; \
+                    impl<BasicReplicationRequest::Update>(entity, packet, data, &entity_info.data); \
+                } \
+            } \
+        } \
+        for(auto [index, entity_info] : info) { \
+            if (!sp::ecs::Entity::forced(index, entity_info.version).hasComponent<COMPONENT>()) { \
+                info.remove(index); \
+                packet << CMD_ECS_DEL_COMPONENT << component_index << index; \
+            } \
+        } \
+    } \
+    void CLASS::receive(sp::ecs::Entity entity, sp::io::DataBuffer& packet) { impl<BasicReplicationRequest::Receive>(entity, packet, entity.getOrAddComponent<COMPONENT>(), nullptr); } \
+    void CLASS::remove(sp::ecs::Entity entity) { entity.removeComponent<COMPONENT>(); } \
+    template<BasicReplicationRequest BRR> bool CLASS::impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup) { \
+        sp::io::DataBuffer tmp; \
+        uint64_t flags = 0; \
+        if (BRR == BasicReplicationRequest::Receive) packet >> flags; \
+        field_impl<BRR>(entity, packet, target, backup, tmp, flags); \
+        if (tmp.getDataSize() > 0) packet.write(CMD_ECS_SET_COMPONENT, component_index, entity.getIndex(), flags, tmp); \
+        return tmp.getDataSize() > 0; \
+    } \
+    template<BasicReplicationRequest BRR> void CLASS::field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup, sp::io::DataBuffer& tmp, uint64_t& flags) { \
+        uint64_t flag = 1;
