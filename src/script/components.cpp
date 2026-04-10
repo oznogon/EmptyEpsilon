@@ -284,13 +284,13 @@ void initComponentScriptBindings()
     BIND_MEMBER(DynamicRadarSignatureInfo, biological);
 
     sp::script::ComponentHandler<MeshRenderComponent>::name("mesh_render");
-    BIND_MEMBER_NAMED(MeshRenderComponent, mesh.name, "mesh");
-    BIND_MEMBER_NAMED(MeshRenderComponent, texture.name, "texture");
-    BIND_MEMBER_NAMED(MeshRenderComponent, specular_texture.name, "specular_texture");
-    BIND_MEMBER_NAMED(MeshRenderComponent, illumination_texture.name, "illumination_texture");
-    BIND_MEMBER_NAMED(MeshRenderComponent, normal_texture.name, "normal_texture");
-    BIND_MEMBER(MeshRenderComponent, mesh_offset);
-    BIND_MEMBER(MeshRenderComponent, scale);
+    BIND_MEMBER_NAMED_DIRTY(MeshRenderComponent, mesh.name, "mesh", dirty);
+    BIND_MEMBER_NAMED_DIRTY(MeshRenderComponent, texture.name, "texture", dirty);
+    BIND_MEMBER_NAMED_DIRTY(MeshRenderComponent, specular_texture.name, "specular_texture", dirty);
+    BIND_MEMBER_NAMED_DIRTY(MeshRenderComponent, illumination_texture.name, "illumination_texture", dirty);
+    BIND_MEMBER_NAMED_DIRTY(MeshRenderComponent, normal_texture.name, "normal_texture", dirty);
+    BIND_MEMBER_DIRTY(MeshRenderComponent, mesh_offset, dirty);
+    BIND_MEMBER_DIRTY(MeshRenderComponent, scale, dirty);
     sp::script::ComponentHandler<BillboardRenderer>::name("billboard_render");
     BIND_MEMBER(BillboardRenderer, texture);
     BIND_MEMBER(BillboardRenderer, size);
@@ -311,7 +311,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(PlanetRender, distance_from_movement_plane);
 
     sp::script::ComponentHandler<Spin>::name("spin");
-    BIND_MEMBER(Spin, rate);
+    BIND_MEMBER_DIRTY(Spin, rate, dirty);
     sp::script::ComponentHandler<Orbit>::name("orbit");
     BIND_MEMBER(Orbit, target);
     BIND_MEMBER(Orbit, center);
@@ -784,10 +784,10 @@ void initComponentScriptBindings()
     BIND_MEMBER(InternalRepairCrew, unhack_per_second);
 
     sp::script::ComponentHandler<Database>::name("science_database");
-    BIND_MEMBER(Database, name);
-    BIND_MEMBER(Database, description);
-    BIND_MEMBER(Database, image);
-    BIND_MEMBER(Database, parent);
+    BIND_MEMBER_DIRTY(Database, name, dirty);
+    BIND_MEMBER_DIRTY(Database, description, dirty);
+    BIND_MEMBER_DIRTY(Database, image, dirty);
+    BIND_MEMBER_DIRTY(Database, parent, dirty);
     BIND_ARRAY_DIRTY_FLAG(Database, key_values, key_values_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(Database, key_values, key, key_values_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(Database, key_values, value, key_values_dirty);

@@ -27,6 +27,7 @@ public:
     TextureRef normal_texture;
     glm::vec3 mesh_offset{};
     float scale = 1.0;
+    bool dirty = true;
 
     Mesh* getMesh();
     sp::Texture* getTexture();

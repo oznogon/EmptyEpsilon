@@ -8,7 +8,7 @@ namespace sp::io {
     static inline DataBuffer& operator >> (DataBuffer& packet, NebulaRenderer::Cloud& c) { packet >> c.offset >> c.texture.name >> c.size; return packet; }
 }
 
-BASIC_REPLICATION_IMPL(MeshRenderComponentReplication, MeshRenderComponent)
+BASIC_REPLICATION_IMPL_DIRTY(MeshRenderComponentReplication, MeshRenderComponent, dirty)
     BASIC_REPLICATION_FIELD(mesh.name);
     BASIC_REPLICATION_FIELD(texture.name);
     BASIC_REPLICATION_FIELD(specular_texture.name);

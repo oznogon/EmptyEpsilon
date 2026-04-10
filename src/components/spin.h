@@ -5,4 +5,5 @@ class Spin
 {
 public:
     float rate = 0.0f;
+    bool dirty = true;
 };

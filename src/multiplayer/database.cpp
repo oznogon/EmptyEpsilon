@@ -8,9 +8,8 @@ namespace sp::io {
 }
 
 
-BASIC_REPLICATION_IMPL(DatabaseReplication, Database)
+BASIC_REPLICATION_IMPL_DIRTY2(DatabaseReplication, Database, dirty, key_values_dirty)
     BASIC_REPLICATION_FIELD(parent);
-
     BASIC_REPLICATION_FIELD(name);
     REPLICATE_VECTOR_IF_DIRTY(key_values, key_values_dirty);
     BASIC_REPLICATION_FIELD(description);
