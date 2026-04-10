@@ -49,6 +49,10 @@
 
 
 #define STRINGIFY(n) #n
+// Bind a component member to its Lua name. Lua scripts access bound members
+// via entity.components.<component_name>.<member_name>. For example,
+// entity.components.transform.position reads or writes the position member of
+// the sp::Transform component.
 #define BIND_MEMBER(T, MEMBER) \
     sp::script::ComponentHandler<T>::members[STRINGIFY(MEMBER)] = { \
         [](lua_State* L, const void* ptr) { \
@@ -59,6 +63,8 @@
             t->MEMBER = sp::script::Convert<decltype(t->MEMBER)>::fromLua(L, -1); \
         } \
     };
+// Same as BIND_MEMBER, but with a specified name that can differ from the
+// component member's name.
 #define BIND_MEMBER_NAMED(T, MEMBER, NAME) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const void* ptr) { \
@@ -69,6 +75,9 @@
             t->MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::fromLua(L, -1); \
         } \
     };
+// Like BIND_MEMBER, but sets DIRTY_FIELD to true on write. Use for members
+// whose component is replicated with BASIC_REPLICATION_IMPL_DIRTY. The dirty
+// flag signals that this entity needs replication to clients.
 #define BIND_MEMBER_DIRTY(T, MEMBER, DIRTY_FIELD) \
     sp::script::ComponentHandler<T>::members[STRINGIFY(MEMBER)] = { \
         [](lua_State* L, const void* ptr) { \
@@ -80,6 +89,7 @@
             t->DIRTY_FIELD = true; \
         } \
     };
+// Same as BIND_MEMBER_DIRTY, but with a specified member name.
 #define BIND_MEMBER_NAMED_DIRTY(T, MEMBER, NAME, DIRTY_FIELD) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const void* ptr) { \
@@ -91,8 +101,11 @@
             t->DIRTY_FIELD = true; \
         } \
     };
-// Bind a member using getter and setter functions for validation.
-// The getter must be const.
+// Bind a component member accessed via named getter and setter functions
+// instead of direct field access. NAME defines the name bound to Lua access,
+// which otherwise behaves the same as BIND_MEMBER. Use when the member is
+// private or the setter has side effects or performs validation.
+// The getter function MUST be const.
 #define BIND_MEMBER_GS(T, NAME, GET, SET) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const void* ptr) { \
@@ -103,6 +116,9 @@
             t->SET(sp::script::Convert<decltype(std::declval<T>().GET())>::fromLua(L, -1)); \
         } \
     };
+// Bind a boolean bit to an integer mask component member. The getter returns
+// true when all bits in the mask are set, and the setter sets or clears those
+// bits without changing the rest of the member.
 #define BIND_MEMBER_FLAG(T, MEMBER, NAME, MASK) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const void* ptr) { \
@@ -115,6 +131,10 @@
             t->MEMBER = result; \
         } \
     };
+// Register an array as the indexed collection for a component. Sets up
+// array_count_func (returns A.size()), array_resize_func (calls A.resize()),
+// and a length property (getter returns count, setter resizes). Must be called
+// before any BIND_ARRAY_MEMBER* macros for the same component.
 #define BIND_ARRAY(T, A) \
     sp::script::ComponentHandler<T>::array_count_func = [](const T& t) -> int { return t.A.size(); }; \
     sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); }; \
@@ -127,6 +147,8 @@
             t->A.resize(std::max(0, sp::script::Convert<int>::fromLua(L, -1))); \
         } \
     };
+// Bind field MEMBER of each element in array A. Lua reads and writes it as
+// entity.components.<component>[n].MEMBER. BIND_ARRAY must come first.
 #define BIND_ARRAY_MEMBER(T, A, MEMBER) \
     sp::script::ComponentHandler<T>::indexed_members[STRINGIFY(MEMBER)] = { \
         [](lua_State* L, const void* ptr, int n) { \
@@ -137,6 +159,7 @@
             t->A[n].MEMBER = sp::script::Convert<decltype(t->A[n].MEMBER)>::fromLua(L, -1); \
         } \
     };
+// Like BIND_ARRAY_MEMBER acting as BIND_MEMBER_FLAG.
 #define BIND_ARRAY_MEMBER_FLAG(T, A, MEMBER, NAME, MASK) \
     sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
         [](lua_State* L, const void* ptr, int n) { \
@@ -149,6 +172,7 @@
             t->A[n].MEMBER = result; \
         } \
     };
+// Like BIND_ARRAY_MEMBER acting as BIND_MEMBER_NAMED.
 #define BIND_ARRAY_MEMBER_NAMED(T, A, NAME, MEMBER) \
     sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
         [](lua_State* L, const void* ptr, int n) { \
@@ -159,9 +183,13 @@
             t->A[n].MEMBER = sp::script::Convert<decltype(t->A[n].MEMBER)>::fromLua(L, -1); \
         } \
     };
+// Like BIND_ARRAY, but sets DIRTY to true when the array is resized from Lua.
+// Use instead of BIND_ARRAY when the array is replicated with
+// REPLICATE_VECTOR_IF_DIRTY.
 #define BIND_ARRAY_DIRTY_FLAG(T, A, DIRTY) \
     sp::script::ComponentHandler<T>::array_count_func = [](const T& t) -> int { return t.A.size(); }; \
     sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); t.DIRTY = true; };
+// Like BIND_ARRAY_MEMBER, but sets DIRTY to true on write.
 #define BIND_ARRAY_DIRTY_FLAG_MEMBER(T, A, MEMBER, DIRTY) \
     sp::script::ComponentHandler<T>::indexed_members[STRINGIFY(MEMBER)] = { \
         [](lua_State* L, const void* ptr, int n) { \
@@ -172,6 +200,7 @@
             t->A[n].MEMBER = sp::script::Convert<decltype(t->A[n].MEMBER)>::fromLua(L, -1); t->DIRTY = true; \
         } \
     };
+// Like BIND_ARRAY_MEMBER_FLAG, but sets DIRTY to true on write.
 #define BIND_ARRAY_DIRTY_FLAG_MEMBER_FLAG(T, A, MEMBER, NAME, MASK, DIRTY) \
     sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
         [](lua_State* L, const void* ptr, int n) { \
@@ -184,6 +213,7 @@
             t->A[n].MEMBER = result; t->DIRTY = true; \
         } \
     };
+// Like BIND_ARRAY_MEMBER_NAMED, but sets DIRTY to true on write.
 #define BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(T, A, NAME, MEMBER, DIRTY) \
     sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
         [](lua_State* L, const void* ptr, int n) { \
@@ -194,6 +224,7 @@
             t->A[n].MEMBER = sp::script::Convert<decltype(t->A[n].MEMBER)>::fromLua(L, -1); t->DIRTY = true; \
         } \
     };
+// Bind all standard ship subsystem fields for a component.
 #define BIND_SHIP_SYSTEM(T) \
     BIND_MEMBER(T, health); \
     BIND_MEMBER(T, health_max); \
