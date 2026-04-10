@@ -13,6 +13,10 @@ namespace sp::io {
 enum class BasicReplicationRequest {
     SendAll, Update, Receive
 };
+
+// Declares a replication CLASS for COMPONENT, throttled to at most RATE updates
+// per second. Emits the class definition with all required method declarations.
+// Pair with BASIC_REPLICATION_IMPL (or a _DIRTY variant).
 #define BASIC_REPLICATION_CLASS_RATE(CLASS, COMPONENT, RATE) \
     class CLASS : public sp::ecs::ComponentReplicationBase { \
         static constexpr float update_delay = 1.0f / (RATE); \
@@ -26,9 +30,18 @@ enum class BasicReplicationRequest {
         template<BasicReplicationRequest> bool impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& c, COMPONENT* backup); \
         template<BasicReplicationRequest> void field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& c, COMPONENT* backup, sp::io::DataBuffer& tmp, uint64_t& flags); \
     };
+
+// Declares a replication class CLASS for COMPONENT at 60 Hz (every frame).
+// Equivalent to BASIC_REPLICATION_CLASS_RATE(CLASS, COMPONENT, 60.0f).
 #define BASIC_REPLICATION_CLASS(CLASS, COMPONENT) \
     BASIC_REPLICATION_CLASS_RATE(CLASS, COMPONENT, 60.0f);
 
+// Implements the methods declared by BASIC_REPLICATION_CLASS[_RATE] for CLASS
+// on COMPONENT. Each entity's fields are compared against a stored snapshot
+// every update_delay seconds, and EE sends only changed fields. New/respawned
+// entities always receive a full SendAll.
+// This macro opens the field_impl function body, which must be followed by
+// at least one BASIC_REPLICATION_FIELD or _VECTOR macros and a closing brace.
 #define BASIC_REPLICATION_IMPL(CLASS, COMPONENT) \
     void CLASS::onEntityDestroyed(uint32_t index) { info.remove(index); } \
     void CLASS::sendAll(sp::io::DataBuffer& packet) { \
@@ -72,6 +85,8 @@ enum class BasicReplicationRequest {
     template<BasicReplicationRequest BRR> void CLASS::field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup, sp::io::DataBuffer& tmp, uint64_t& flags) { \
         uint64_t flag = 1;
 
+// Replicates a single FIELD of a component. Must appear inside a
+// BASIC_REPLICATION_IMPL block. Max 64 per component (flags capacity).
 #define BASIC_REPLICATION_FIELD(FIELD) \
     switch(BRR) { \
     case BasicReplicationRequest::SendAll: flags |= flag; tmp << target.FIELD; break; \
@@ -79,6 +94,11 @@ enum class BasicReplicationRequest {
     case BasicReplicationRequest::Receive: if (flags & flag) packet >> target.FIELD; break; \
     } \
     flag <<= 1;
+
+// Replicates a vector FIELD (both size and per-element). Must appear inside a
+// BASIC_REPLICATION_IMPL block. Follow with one or more
+// VECTOR_REPLICATION_FIELD macros and close with VECTOR_REPLICATION_END. Sends
+// size changes and individual element diffs indexed by position.
 #define BASIC_REPLICATION_VECTOR(FIELD) \
     switch(BRR) { \
     case BasicReplicationRequest::SendAll: flags |= flag; tmp << target.FIELD.size(); break; \
@@ -99,6 +119,8 @@ enum class BasicReplicationRequest {
         sp::io::DataBuffer vector_tmp; \
         uint32_t vector_flag = 1;
 
+// Replicates one FIELD within a vector element. Must appear inside a
+// BASIC_REPLICATION_VECTOR block, before VECTOR_REPLICATION_END.
 #define VECTOR_REPLICATION_FIELD(FIELD) \
         switch(BRR) { \
         case BasicReplicationRequest::SendAll: vector_flags |= vector_flag; vector_tmp << vector_target->FIELD; break; \
@@ -107,13 +129,15 @@ enum class BasicReplicationRequest {
         } \
         vector_flag <<= 1;
 
+// Closes a BASIC_REPLICATION_VECTOR block. Writes the per-element diff and
+// end-of-vector update. Must follow all VECTOR_REPLICATION_FIELD macros.
 #define VECTOR_REPLICATION_END() \
         if (vector_tmp.getDataSize() > 0) tmp.write(vector_flags, idx, vector_tmp); \
     } \
     if (tmp.getDataSize() > 0) tmp.write(uint32_t(0)); // end of vector update.
 
-
-
+// Implements replication for a marker COMPONENT that carries no fields, only
+// its presence.
 #define EMPTY_REPLICATION_IMPL(CLASS, COMPONENT) \
     void CLASS::onEntityDestroyed(uint32_t index) { info.remove(index); } \
     void CLASS::sendAll(sp::io::DataBuffer& packet) { \
@@ -145,6 +169,10 @@ enum class BasicReplicationRequest {
     void CLASS::receive(sp::ecs::Entity entity, sp::io::DataBuffer& packet) { entity.getOrAddComponent<COMPONENT>(); } \
     void CLASS::remove(sp::ecs::Entity entity) { entity.removeComponent<COMPONENT>(); }
 
+// Replicates vector VECTOR in full whenever DIRTY is true, then clears DIRTY.
+// Use inside BASIC_REPLICATION_IMPL_DIRTY2 when the vector has its own dirty
+// flag separate from the component's primary dirty flag. Always replicated on
+// SendAll.
 #define REPLICATE_VECTOR_IF_DIRTY(VECTOR, DIRTY) \
     switch(BRR) { \
     case BasicReplicationRequest::SendAll: flags |= flag; tmp << target.VECTOR; break; \
@@ -153,10 +181,15 @@ enum class BasicReplicationRequest {
     } \
     flag <<= 1;
 
-// Like BASIC_REPLICATION_IMPL_DIRTY, but gates on (DIRTY || EXTRA_DIRTY). Use when a
-// component has two independent dirty flags (e.g. scalar fields under DIRTY and a vector
-// field managed by REPLICATE_VECTOR_IF_DIRTY under EXTRA_DIRTY). Only DIRTY is cleared by
-// the gate; EXTRA_DIRTY is cleared inside field_impl by REPLICATE_VECTOR_IF_DIRTY.
+// Like BASIC_REPLICATION_IMPL, but gates per-entity update on
+// DIRTY (dirty field) or EXTRA_DIRTY (dirty vector field) instead of a fixed
+// interval. Use when a component has separate dirty flags for regular and
+// vector fields. Only DIRTY is cleared by the gate, and EXTRA_DIRTY is cleared
+// inside field_impl by REPLICATE_VECTOR_IF_DIRTY.
+// This isn't a great workaround and should be avoided if possible. Exists
+// primarily for use in ScienceDatabase, where checking for changes in large
+// string values on a rate is expensive. Prefer BASIC_REPLICATION_IMPL on a rate
+// where possible, and BASIC_REPLICATION_IMPL_DIRTY for fields otherwise.
 #define BASIC_REPLICATION_IMPL_DIRTY2(CLASS, COMPONENT, DIRTY, EXTRA_DIRTY) \
     void CLASS::onEntityDestroyed(uint32_t index) { info.remove(index); } \
     void CLASS::sendAll(sp::io::DataBuffer& packet) { \
@@ -201,10 +234,15 @@ enum class BasicReplicationRequest {
     template<BasicReplicationRequest BRR> void CLASS::field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup, sp::io::DataBuffer& tmp, uint64_t& flags) { \
         uint64_t flag = 1;
 
-// Like BASIC_REPLICATION_IMPL, but gates the per-entity update on a dirty flag instead of
-// a time delay. Use for components whose fields are written rarely (e.g. set once at spawn
-// and never changed). Set DIRTY to true whenever a field changes; the replication clears it
-// after checking and propagates only the changed fields to clients.
+// Like BASIC_REPLICATION_IMPL, but gates per-entity update on DIRTY instead of
+// a time delay. Use for components whose fields change once at spawn and rarely
+// afterward (i.e. MeshRender, Spin). Set DIRTY = true when changing a field,
+// and the replication clears it and propagates only the changed fields to
+// clients.
+// Prefer BASIC_REPLICATION_IMPL on a refresh rate when possible. Limit this to
+// components where changes are infrequent, the overhead to check for changes is
+// significant, and many entities would use this component, such as path strings
+// on meshes and textures or spin rates on hundreds of (Visual)Asteroids.
 #define BASIC_REPLICATION_IMPL_DIRTY(CLASS, COMPONENT, DIRTY) \
     void CLASS::onEntityDestroyed(uint32_t index) { info.remove(index); } \
     void CLASS::sendAll(sp::io::DataBuffer& packet) { \
