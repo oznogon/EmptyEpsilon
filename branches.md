@@ -6,10 +6,11 @@ faction-db-button
 docking-request-menu
 scriptable-hacking-difficulty
 
-generic-scrolling-guicontainer
-guiscrollcontainer-customshipfunctions
-guiscrollcontainer-guilistbox
-guiscrollcontainer-guiselector-popup
-gm-tweaks-parity-guiscrollcontainer
-refactor-help-overlay
-fix-warnings
+generic-scrolling-guicontainer 20260410
+guiscrollcontainer-customshipfunctions 20260410
+guiscrollcontainer-guilistbox 20260410
+guiscrollcontainer-guiselector-popup 20260410
+gm-tweaks-parity-guiscrollcontainer 20260410
+refactor-help-overlay 20260410
+fix-strict-compilation 20260410
+fix-warnings 20260410
