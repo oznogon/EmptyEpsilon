@@ -28,3 +28,5 @@ show-missiles-on-gm 20260411
 export-more-entities 202604011
 search-fields 20260411
 2712-cap-free-overpower 20260411
+hotkeys-remapping-with-dialog 20260411
+

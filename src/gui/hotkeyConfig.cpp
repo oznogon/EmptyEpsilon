@@ -411,7 +411,6 @@ Keys::Keys() :
     engineering_select_system{
         {"ENGINEERING_SELECT_SYSTEM_REACTOR", "1"},
         {"ENGINEERING_SELECT_SYSTEM_BEAM_WEAPONS", "2"},
-        {"ENGINEERING_SELECT_SYSTEM_UTILITY_BEAM", "2"},
         {"ENGINEERING_SELECT_SYSTEM_MISSILE", "3"},
         {"ENGINEERING_SELECT_SYSTEM_MANEUVERING", "4"},
         {"ENGINEERING_SELECT_SYSTEM_IMPULSE", "5"},
@@ -419,6 +418,7 @@ Keys::Keys() :
         {"ENGINEERING_SELECT_SYSTEM_JUMP_DRIVE", "7"},
         {"ENGINEERING_SELECT_SYSTEM_FRONT_SHIELD", "8"},
         {"ENGINEERING_SELECT_SYSTEM_REAR_SHIELD", "9"},
+        {"ENGINEERING_SELECT_SYSTEM_UTILITY_BEAM"},
     },
     engineering_select_system_next("ENGINEERING_SELECT_SYSTEM_NEXT", "Keypad +"),
     engineering_select_system_prev("ENGINEERING_SELECT_SYSTEM_PREV", "Keypad -"),
@@ -1004,6 +1004,7 @@ void Keys::init()
     engineering_select_system[static_cast<int>(ShipSystem::Type::JumpDrive)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select jump drive system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select front shields system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select rear shields system"));
+    engineering_select_system[static_cast<int>(ShipSystem::Type::UtilityBeam)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select utility beam system"));
     engineering_select_system_next.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select next system"));
     engineering_select_system_next.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
