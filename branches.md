@@ -14,3 +14,6 @@ gm-tweaks-parity-guiscrollcontainer 20260410
 refactor-help-overlay 20260410
 fix-strict-compilation 20260410
 fix-warnings 20260410
+fix-position-attribute 20260410
+2761-science-binds 20260410
+2762-relay-binds 20260410
