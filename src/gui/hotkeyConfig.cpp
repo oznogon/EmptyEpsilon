@@ -209,7 +209,9 @@ Keys::Keys() :
         {"WEAPONS_FIRE_TUBE16"},
     }},
     weapons_enemy_next_target("WEAPONS_TARGET_NEXT_ENEMY", "C"),
+    weapons_enemy_prev_target("WEAPONS_TARGET_PREV_ENEMY"),
     weapons_next_target("WEAPONS_TARGET_NEXT", "Z"),
+    weapons_prev_target("WEAPONS_TARGET_PREV"),
     weapons_toggle_shields("WEAPONS_SHIELDS_TOGGLE", "S"),
     weapons_enable_shields("WEAPONS_SHIELDS_ENABLE"),
     weapons_disable_shields("WEAPONS_SHIELDS_DISABLE"),
@@ -230,6 +232,11 @@ Keys::Keys() :
     science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
     science_scan_abort("SCIENCE_SCAN_ABORT", "D"),
     science_select_next_scannable("SCIENCE_SELECT_NEXT_SCANNABLE", "C"),
+    science_select_prev_scannable("SCIENCE_SELECT_PREV_SCANNABLE"),
+    science_next_target("SCIENCE_TARGET_NEXT"),
+    science_prev_target("SCIENCE_TARGET_PREV"),
+    science_enemy_next_target("SCIENCE_TARGET_NEXT_ENEMY"),
+    science_enemy_prev_target("SCIENCE_TARGET_PREV_ENEMY"),
     science_scan_param_increase{{
         {"SCIENCE_SCAN_PARAM_INCREASE_1"},
         {"SCIENCE_SCAN_PARAM_INCREASE_2"},
@@ -330,6 +337,14 @@ Keys::Keys() :
     relay_launch_probe("RELAY_LAUNCH_PROBE", "L"),
     relay_center_on_ship("RELAY_CENTER_ON_SHIP", "F"),
     relay_toggle_ships_log("RELAY_TOGGLE_SHIPS_LOG", "V"),
+    relay_next_target("RELAY_TARGET_NEXT"),
+    relay_prev_target("RELAY_TARGET_PREV"),
+    relay_enemy_next_target("RELAY_TARGET_NEXT_ENEMY"),
+    relay_enemy_prev_target("RELAY_TARGET_PREV_ENEMY"),
+    relay_next_hackable("RELAY_TARGET_NEXT_HACKABLE"),
+    relay_prev_hackable("RELAY_TARGET_PREV_HACKABLE"),
+    relay_next_probe("RELAY_TARGET_NEXT_PROBE"),
+    relay_prev_probe("RELAY_TARGET_PREV_PROBE"),
 
     // Utility beam
     utilitybeam_toggle_active("UTILITYBEAM_TOGGLE_ACTIVE", "T"),
@@ -444,7 +459,9 @@ void Keys::init()
         weapons_fire_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Fire tube {number}").format({{"number", string(n + 1)}}));
     }
     weapons_enemy_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next hostile target"));
+    weapons_enemy_prev_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select previous hostile target"));
     weapons_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next target (any)"));
+    weapons_prev_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select previous target (any)"));
     weapons_toggle_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Toggle shields"));
     weapons_enable_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Enable shields"));
     weapons_disable_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable shields"));
@@ -465,6 +482,11 @@ void Keys::init()
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
     science_scan_abort.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Abort scan"));
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
+    science_select_prev_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select previous scannable object"));
+    science_next_target.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next target (any)"));
+    science_prev_target.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select previous target (any)"));
+    science_enemy_next_target.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next hostile target"));
+    science_enemy_prev_target.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select previous hostile target"));
     for (auto n = 0u; n < science_scan_param_increase.size(); n++)
     {
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Increase scanning parameter {number}").format({{"number", string(n + 1)}}));
@@ -546,6 +568,14 @@ void Keys::init()
     relay_launch_probe.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Toggle probe launch"));
     relay_center_on_ship.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Center view on ship"));
     relay_toggle_ships_log.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Toggle ships log"));
+    relay_next_target.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Select next target (any)"));
+    relay_prev_target.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Select previous target (any)"));
+    relay_enemy_next_target.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Select next hostile target"));
+    relay_enemy_prev_target.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Select previous hostile target"));
+    relay_next_hackable.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Select next hackable target"));
+    relay_prev_hackable.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Select previous hackable target"));
+    relay_next_probe.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Select next probe"));
+    relay_prev_probe.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Select previous probe"));
 
     // Utility beam
     utilitybeam_toggle_active.setLabel(tr("hotkey_menu", "Utility beam"), tr("hotkey_UtilityBeam", "Activate utility beam"));

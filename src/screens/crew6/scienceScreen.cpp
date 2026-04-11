@@ -698,7 +698,12 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
 void ScienceScreen::onUpdate()
 {
-    if (my_spaceship)
+    if (!my_spaceship || !isVisible()) return;
+
+    // Initiate a scan on scannable objects.
+    if (keys.science_scan_object.getDown() &&
+        my_spaceship.hasComponent<ScienceScanner>() &&
+        my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
     {
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
         auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
@@ -707,9 +712,7 @@ void ScienceScreen::onUpdate()
         bool should_have_func_tab = custom_function_sidebar->hasEntries();
         bool has_func_tab = sidebar_selector->indexByValue("func") != -1;
         if (should_have_func_tab && !has_func_tab)
-        {
             sidebar_selector->addEntry(tr("scienceTab", "Functions"), "func");
-        }
         else if (!should_have_func_tab && has_func_tab)
         {
             bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
@@ -726,9 +729,7 @@ void ScienceScreen::onUpdate()
         bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(crew_position);
         bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
         if (should_have_util_tab && !has_util_tab)
-        {
             sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");
-        }
         else if (!should_have_util_tab && has_util_tab)
         {
             bool util_was_selected = sidebar_selector->getSelectionValue() == "util";
@@ -837,5 +838,46 @@ void ScienceScreen::onUpdate()
             if (count > 0)
                 sidebar_pager->setSelectionIndex((sidebar_pager->getSelectionIndex() + count - 1) % count);
         }
+    }
+
+    // Cycle selectable entities.
+    if (auto transform = my_spaceship.getComponent<sp::Transform>())
+    {
+        auto scanner = my_spaceship.getComponent<ScienceScanner>();
+        glm::vec2 scanner_position = transform->getPosition();
+        float scanner_range = science_radar->getDistance();
+
+        if (auto rl = my_spaceship.getComponent<RadarLink>())
+        {
+            if (probe_view_button->getValue() && rl && rl->linked_entity)
+            {
+                if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
+                {
+                    scanner_position = probe_transform->getPosition();
+                    scanner_range = PROBE_ZOOM_DISTANCE;
+                }
+            }
+        }
+
+        // Select previous/next scannable entity.
+        if (scanner && scanner->delay == 0.0f)
+        {
+            if (keys.science_select_next_scannable.getDown())
+                targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
+            if (keys.science_select_prev_scannable.getDown())
+                targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
+        }
+
+        // Select previous/next hostile entity.
+        if (keys.science_enemy_next_target.getDown())
+            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+        if (keys.science_enemy_prev_target.getDown())
+            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+
+        // Select previous/next selectable entity.
+        if (keys.science_next_target.getDown())
+            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
+        if (keys.science_prev_target.getDown())
+            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
     }
 }
