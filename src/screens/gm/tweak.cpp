@@ -117,6 +117,7 @@ static string mainScreenSettingToLocaleString(MainScreenSetting setting)
     case MainScreenSetting::Target:    return tr("main_screen", "Target");
     case MainScreenSetting::Tactical:  return tr("main_screen", "Tactical");
     case MainScreenSetting::LongRange: return tr("main_screen", "Long range");
+    case MainScreenSetting::Strategic: return tr("main_screen", "Strategic map");
     }
 
     return tr("Unknown");
