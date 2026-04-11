@@ -438,6 +438,87 @@ void RelayScreen::onUpdate()
     // Don't process hotkeys while the chat text entry has keyboard focus.
     if (comms_overlay && comms_overlay->isChatEntryFocused()) return;
 
+    // Handle target selection if we have a transform.
+    // TODO: Also handle it if we don't (internally docked)
+    if (auto transform = my_spaceship.getComponent<sp::Transform>())
+    {
+        const float view_range = radar->getDistance() * 1.42f;
+
+        // Select visible targetable entities.
+        if (keys.relay_next_target.getDown())
+            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
+        if (keys.relay_prev_target.getDown())
+            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
+
+        // Select visible hostile entities.
+        if (keys.relay_enemy_next_target.getDown())
+        {
+            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Targetable,
+                [](sp::ecs::Entity entity)
+                {
+                    if (!isVisibleOnRelay(entity)) return false;
+                    auto ss = entity.getComponent<ScanState>();
+                    bool fof_known = !ss || ss->getStateFor(my_spaceship) >= ScanState::State::FriendOrFoeIdentified;
+                    return fof_known && Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy;
+                }
+            );
+        }
+        if (keys.relay_enemy_prev_target.getDown())
+        {
+            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Targetable,
+                [](sp::ecs::Entity entity)
+                {
+                    if (!isVisibleOnRelay(entity)) return false;
+                    auto ss = entity.getComponent<ScanState>();
+                    bool fof_known = !ss || ss->getStateFor(my_spaceship) >= ScanState::State::FriendOrFoeIdentified;
+                    return fof_known && Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy;
+                }
+            );
+        }
+
+        // Select visible hackable entities.
+        if (keys.relay_next_hackable.getDown())
+        {
+            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Targetable,
+                [](sp::ecs::Entity entity)
+                {
+                    return isVisibleOnRelay(entity) && canHack(entity);
+                }
+            );
+        }
+        if (keys.relay_prev_hackable.getDown())
+        {
+            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Targetable,
+                [](sp::ecs::Entity entity)
+                {
+                    return isVisibleOnRelay(entity) && canHack(entity);
+                }
+            );
+        }
+
+        // Select player-launched probes.
+        if (keys.relay_next_probe.getDown())
+        {
+            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Selectable,
+                [](sp::ecs::Entity entity)
+                {
+                    auto arl = entity.getComponent<AllowRadarLink>();
+                    return arl && arl->owner == my_spaceship;
+                }
+            );
+        }
+        if (keys.relay_prev_probe.getDown())
+        {
+            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Selectable,
+                [](sp::ecs::Entity entity)
+                {
+                    auto arl = entity.getComponent<AllowRadarLink>();
+                    return arl && arl->owner == my_spaceship;
+                }
+            );
+        }
+    }
+
     // Open comms with the selected target.
     if (allow_comms && keys.relay_open_comms.getDown())
     {
@@ -528,88 +609,4 @@ void RelayScreen::onUpdate()
     // Toggle ship's log min/maximized state.
     if (ships_log && keys.relay_toggle_ships_log.getDown())
         ships_log->toggle();
-}
-
-void RelayScreen::onUpdate()
-{
-    if (!my_spaceship || !isVisible()) return;
-
-    if (auto transform = my_spaceship.getComponent<sp::Transform>())
-    {
-        const float view_range = radar->getDistance() * 1.42f;
-
-        // Select visible targetable entities.
-        if (keys.relay_next_target.getDown())
-            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
-        if (keys.relay_prev_target.getDown())
-            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
-
-        // Select visible hostile entities.
-        if (keys.relay_enemy_next_target.getDown())
-        {
-            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Targetable,
-                [](sp::ecs::Entity entity)
-                {
-                    if (!isVisibleOnRelay(entity)) return false;
-                    auto ss = entity.getComponent<ScanState>();
-                    bool fof_known = !ss || ss->getStateFor(my_spaceship) >= ScanState::State::FriendOrFoeIdentified;
-                    return fof_known && Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy;
-                }
-            );
-        }
-        if (keys.relay_enemy_prev_target.getDown())
-        {
-            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Targetable,
-                [](sp::ecs::Entity entity)
-                {
-                    if (!isVisibleOnRelay(entity)) return false;
-                    auto ss = entity.getComponent<ScanState>();
-                    bool fof_known = !ss || ss->getStateFor(my_spaceship) >= ScanState::State::FriendOrFoeIdentified;
-                    return fof_known && Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy;
-                }
-            );
-        }
-
-        // Select visible hackable entities.
-        if (keys.relay_next_hackable.getDown())
-        {
-            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Targetable,
-                [](sp::ecs::Entity entity)
-                {
-                    return isVisibleOnRelay(entity) && canHack(entity);
-                }
-            );
-        }
-        if (keys.relay_prev_hackable.getDown())
-        {
-            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Targetable,
-                [](sp::ecs::Entity entity)
-                {
-                    return isVisibleOnRelay(entity) && canHack(entity);
-                }
-            );
-        }
-
-        // Select player-launched probes.
-        if (keys.relay_next_probe.getDown())
-        {
-            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Selectable,
-                [](sp::ecs::Entity entity)
-                {
-                    auto arl = entity.getComponent<AllowRadarLink>();
-                    return arl && arl->owner == my_spaceship;
-                }
-            );
-        }
-        if (keys.relay_prev_probe.getDown())
-        {
-            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Selectable,
-                [](sp::ecs::Entity entity)
-                {
-                    auto arl = entity.getComponent<AllowRadarLink>();
-                    return arl && arl->owner == my_spaceship;
-                }
-            );
-        }
-    }
 }
