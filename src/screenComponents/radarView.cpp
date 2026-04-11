@@ -58,6 +58,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     view_position(0.0f,0.0f),
     view_rotation(0),
     auto_center_target(my_spaceship),
+    track_my_spaceship(true),
     auto_center_on_ship(true),
     auto_rotate_on_ship(false),
     auto_distance(true),
@@ -104,6 +105,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     view_position(0.0f, 0.0f),
     view_rotation(0),
     auto_center_target(my_spaceship),
+    track_my_spaceship(true),
     auto_center_on_ship(true),
     auto_rotate_on_ship(false),
     distance(distance),
@@ -143,6 +145,10 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 
 void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 {
+    // Keep centered on my_spaceship when the player's assigned ship changes.
+    if (track_my_spaceship && my_spaceship)
+        auto_center_target = my_spaceship;
+
     // Auto-center on the target, defaulting to my_spaceship on creation.
     auto transform = auto_center_target.getComponent<sp::Transform>();
 
