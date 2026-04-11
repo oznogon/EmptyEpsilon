@@ -126,6 +126,8 @@ private:
     GuiToggleButton* gm_route_toggle;
     GuiToggleButton* gm_delete_waypoint_button;
 
+    bool show_health_bars = true;
+
     GuiButton* create_button;
     GuiButton* cancel_action_button;
 

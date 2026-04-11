@@ -362,6 +362,7 @@ Keys::Keys() :
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
     gm_show_callsigns("GM_SHOW_CALLSIGNS", "C"),
     gm_show_waypoints("GM_SHOW_WAYPOINTS", "W"),
+    gm_show_health_bars("GM_SHOW_HEALTH_BARS", "H"),
 
     // Spectator screen
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C")
@@ -601,6 +602,7 @@ void Keys::init()
     gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Copy to clipboard"));
     gm_show_callsigns.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show callsigns (GM)"));
     gm_show_waypoints.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show waypoints (GM)"));
+    gm_show_health_bars.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show health bars (GM)"));
 
     // Spectator screen
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));
