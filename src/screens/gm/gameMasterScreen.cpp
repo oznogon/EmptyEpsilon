@@ -526,7 +526,7 @@ void GameMasterScreen::update(float delta)
             engine->setGameSpeed(
                 game_speed > 0.0f
                     ? 0.0f
-                    : std::pow(2.0f, game_time_scale->getSelectionIndex())
+                    : std::powf(2.0f, static_cast<float>(game_time_scale->getSelectionIndex()))
             );
     }
 

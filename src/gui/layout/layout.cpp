@@ -33,8 +33,8 @@ void GuiLayout::update(GuiContainer& container, const sp::Rect& rect)
 
 void GuiLayout::basicLayout(const sp::Rect& rect, GuiElement& widget)
 {
-    glm::vec2 result_position;
-    glm::vec2 result_size;
+    glm::vec2 result_position{};
+    glm::vec2 result_size{};
     switch(widget.layout.alignment)
     {
     case sp::Alignment::TopLeft:
