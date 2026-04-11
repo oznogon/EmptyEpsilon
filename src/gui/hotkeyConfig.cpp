@@ -457,6 +457,12 @@ void Keys::init()
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
     science_scan_abort.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Abort scan"));
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
+    for (auto n = 0u; n < science_scan_param_increase.size(); n++)
+    {
+        science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Increase scanning parameter {number}").format({{"number", string(n + 1)}}));
+        science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Decrease scanning parameter {number}").format({{"number", string(n + 1)}}));
+        science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Set scanning parameter {number} (joystick)").format({{"number", string(n + 1)}}));
+    }
     science_open_radar.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Open radar view"));
     science_open_database.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Open database view"));
     science_open_database_target.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Open database entry for target"));
@@ -464,12 +470,6 @@ void Keys::init()
     science_sidebar_next.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Sidebar next tab"));
     science_sidebar_pager_prev.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Sidebar page previous"));
     science_sidebar_pager_next.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Sidebar page next"));
-    for (auto n = 0u; n < science_scan_param_increase.size(); n++)
-    {
-        science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n + 1)}}));
-        science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} decrease").format({{"number", string(n + 1)}}));
-        science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Set scanning parameter {number} (joystick)").format({{"number", string(n + 1)}}));
-    }
 
     // Engineering
     engineering_select_system[static_cast<int>(ShipSystem::Type::Reactor)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select reactor system"));
