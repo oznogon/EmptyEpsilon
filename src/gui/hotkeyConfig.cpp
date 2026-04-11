@@ -260,7 +260,7 @@ Keys::Keys() :
         {"ENGINEERING_SELECT_SYSTEM_WARP", "6"},
         {"ENGINEERING_SELECT_SYSTEM_JUMP_DRIVE", "7"},
         {"ENGINEERING_SELECT_SYSTEM_FRONT_SHIELD", "8"},
-        {"ENGINEERING_SELECT_SYSTEM_READ_SHIELD", "9"},
+        {"ENGINEERING_SELECT_SYSTEM_REAR_SHIELD", "9"},
     },
     engineering_select_system_next("ENGINEERING_SELECT_SYSTEM_NEXT", "Keypad +"),
     engineering_select_system_prev("ENGINEERING_SELECT_SYSTEM_PREV", "Keypad -"),
@@ -289,26 +289,26 @@ Keys::Keys() :
     engineering_set_power_for_system{
         {"ENGINEERING_SET_SYSTEM_POWER_REACTOR"},
         {"ENGINEERING_SET_SYSTEM_POWER_BEAM_WEAPONS"},
-        {"ENGINEERING_SET_SYSTEM_POWER_UTILITY_BEAM"},
         {"ENGINEERING_SET_SYSTEM_POWER_MISSILE"},
         {"ENGINEERING_SET_SYSTEM_POWER_MANEUVERING"},
         {"ENGINEERING_SET_SYSTEM_POWER_IMPULSE"},
         {"ENGINEERING_SET_SYSTEM_POWER_WARP"},
         {"ENGINEERING_SET_SYSTEM_POWER_JUMP_DRIVE"},
         {"ENGINEERING_SET_SYSTEM_POWER_FRONT_SHIELD"},
-        {"ENGINEERING_SET_SYSTEM_POWER_READ_SHIELD"},
+        {"ENGINEERING_SET_SYSTEM_POWER_REAR_SHIELD"},
+        {"ENGINEERING_SET_SYSTEM_POWER_UTILITY_BEAM"},
     },
     engineering_set_coolant_for_system{
         {"ENGINEERING_SET_SYSTEM_COOLANT_REACTOR"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_BEAM_WEAPONS"},
-        {"ENGINEERING_SET_SYSTEM_COOLANT_UTILITY_BEAM"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_MISSILE"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_MANEUVERING"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_IMPULSE"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_WARP"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_JUMP_DRIVE"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_FRONT_SHIELD"},
-        {"ENGINEERING_SET_SYSTEM_COOLANT_READ_SHIELD"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_REAR_SHIELD"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_UTILITY_BEAM"},
     },
 
     // Relay crew screen
@@ -500,6 +500,7 @@ void Keys::init()
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::JumpDrive)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set jump drive power (joystick)"));
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields power (joystick)"));
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields power (joystick)"));
+    engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::UtilityBeam)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set utility beam power (joystick)"));
 
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::Reactor)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::BeamWeapons)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam weapon coolant (joystick)"));
@@ -510,6 +511,7 @@ void Keys::init()
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::JumpDrive)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set jump drive coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields coolant (joystick)"));
+    engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::UtilityBeam)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set utility beam coolant (joystick)"));
 
     // Relay
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
