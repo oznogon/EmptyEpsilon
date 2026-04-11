@@ -21,3 +21,7 @@ fix-position-attribute 20260410
 2848-2849-2850-refactor-player-transfer 20260411
 refactor-comms-overlay 20260411
 2703-target-cycle-keybinds 20260411
+gm-orders-layout 20260411
+gm-screen-short-range 20260411
+expand-gm-info 20260411
+show-missiles-on-gm 20260411
