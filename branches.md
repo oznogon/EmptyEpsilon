@@ -1,16 +1,16 @@
-docking-bay
-utility-beam
+docking-bay -- new crew station
+utility-beam -- new ship system
 multiple-waypoint-routes
 gm-timescale
 faction-db-button
 docking-request-menu
 scriptable-hacking-difficulty
 
-generic-scrolling-guicontainer 20260410
+generic-scrolling-guicontainer 20260410 -- major changes to scrolling elements
 guiscrollcontainer-customshipfunctions 20260410
 guiscrollcontainer-guilistbox 20260410
 guiscrollcontainer-guiselector-popup 20260410
-gm-tweaks-parity-guiscrollcontainer 20260410
+gm-tweaks-parity-guiscrollcontainer 20260410 -- major changes to GM tweaks
 refactor-help-overlay 20260410
 fix-strict-compilation 20260410
 fix-warnings 20260410
@@ -28,6 +28,7 @@ show-missiles-on-gm 20260411
 export-more-entities 202604011
 search-fields 20260411
 2712-cap-free-overpower 20260411
-hotkeys-remapping-with-dialog 20260411
+hotkeys-remapping-with-dialog 20260411 -- major changes to hotkeys
 gm-create-tweak-missile 20260411
-new-sp-line-drawing 20260411
+new-sp-line-drawing 20260411 -- major changes to all drawLines
+
