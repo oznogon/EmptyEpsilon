@@ -6,6 +6,7 @@
 
 class GuiButton;
 class GuiElement;
+class GuiCommsOverlay;
 class GuiHackingDialog;
 class GuiKeyValueDisplay;
 class GuiLabel;
@@ -14,6 +15,7 @@ class GuiRadarZoomSlider;
 class GuiSelector;
 class GuiSlider;
 class GuiToggleButton;
+class ShipsLog;
 
 class RelayScreen : public GuiOverlay
 {
@@ -54,10 +56,14 @@ private:
     GuiRadarZoomSlider* zoom_slider;
 
     GuiHackingDialog* hacking_dialog;
+    GuiCommsOverlay* comms_overlay = nullptr;
+    ShipsLog* ships_log = nullptr;
+    bool allow_comms = false;
 
     glm::vec2 mouse_down_position{};
 public:
     RelayScreen(GuiContainer* owner, bool allow_comms);
 
     virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onUpdate() override;
 };

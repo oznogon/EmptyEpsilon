@@ -8,8 +8,10 @@ class GuiOverlay;
 class GuiKeyValueDisplay;
 class GuiButton;
 class GuiSelector;
+class GuiCommsOverlay;
 class GuiToggleButton;
 class ScienceScreen;
+class ShipsLog;
 
 class OperationScreen : public GuiOverlay
 {
@@ -37,8 +39,13 @@ private:
     std::array<GuiToggleButton*, 4> waypoint_set_buttons{};
     GuiToggleButton* route_toggle;
 
+    GuiCommsOverlay* comms_overlay;
+    ShipsLog* ships_log;
+
     glm::vec2 mouse_down_position{0, 0};
 public:
     OperationScreen(GuiContainer* owner);
+
     virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onUpdate() override;
 };

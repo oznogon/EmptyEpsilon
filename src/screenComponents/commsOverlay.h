@@ -1,5 +1,4 @@
-#ifndef COMMS_OVERLAY_H
-#define COMMS_OVERLAY_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -46,6 +45,5 @@ public:
 
     virtual void onUpdate() override;
     void clearElements();
+    bool isChatEntryFocused() const;
 };
-
-#endif//COMMS_OVERLAY_H
