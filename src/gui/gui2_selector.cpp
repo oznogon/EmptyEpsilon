@@ -45,8 +45,6 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
         ->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
 
     popup = new GuiPanel(getTopLevelContainer(), "");
-    popup_scroll = new GuiScrollContainer(popup, id + "_POPUP_SCROLL");
-    popup_scroll->setSize(GuiSizeMax, GuiSizeMax)->setAttribute("layout", "vertical");
     popup->hide();
 
     popup_scroll = new GuiScrollContainer(popup, id + "_POPUP_SCROLL");
@@ -81,7 +79,7 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     setPopupWidth(popup_width);
     popup
         ->setPosition(rect.position.x, top, sp::Alignment::TopLeft)
-        ->setSize(rect.size.x, popup_height);
+        ->setSize(popup_width, popup_height);
 }
 
 GuiSelector* GuiSelector::setTextSize(float size)
@@ -106,21 +104,7 @@ bool GuiSelector::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position
 {
     return true;
 }
-/*
-            if (e.icon_name != "")
-            {
-                renderer.drawSpriteClipped(
-                    e.icon_name,               // icon
-                    glm::vec2(                 // center position
-                        button_rect.position.x + button_rect.size.y * 0.8f,
-                        button_rect.position.y + button_rect.size.y * 0.5f
-                    ),
-                    button_rect.size.y * 0.6f, // size
-                    rect,                      // clipping rectangle
-                    f->color                   // color
-                );
-            }
-*/
+
 void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position))
@@ -135,11 +119,12 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
         {
             if (popup_buttons.size() <= n)
             {
-                popup_buttons.push_back(new GuiToggleButton(popup, "", entries[n].name,
+                popup_buttons.push_back(new GuiToggleButton(popup_scroll, "", entries[n].name,
                     [this, n](bool b)
                     {
                         setSelectionIndex(n);
                         callback();
+                        popup->hide();
                     }
                 ));
                 popup_buttons[n]
