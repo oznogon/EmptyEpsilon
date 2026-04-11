@@ -12,3 +12,4 @@ guiscrollcontainer-guilistbox
 guiscrollcontainer-guiselector-popup
 gm-tweaks-parity-guiscrollcontainer
 refactor-help-overlay
+fix-warnings
