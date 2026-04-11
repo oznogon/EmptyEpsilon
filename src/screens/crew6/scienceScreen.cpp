@@ -365,11 +365,14 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
     auto rl = my_spaceship.getComponent<RadarLink>();
     float view_distance = science_radar->getDistance();
-    float key_zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-
-    if (key_zoom_delta != 0) view_distance *= (1.0f - (key_zoom_delta * 0.1f));
-
-    // No std::clamp in case short_range > long_range.
+    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value()
+        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
+    if (mouse_wheel_delta != 0)
+        view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
+    if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+        view_distance = std::max(lrr->short_range, view_distance * 0.9f);
+    if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+        view_distance = std::min(lrr->long_range, view_distance * 1.1f);
     view_distance = std::min(view_distance, lrr->long_range);
     view_distance = std::max(view_distance, lrr->short_range);
 
@@ -745,7 +748,7 @@ void ScienceScreen::onUpdate()
         }
 
         // Initiate a scan on scannable objects.
-        if (keys.science_scan_object.getDown() &&
+        if (keys.science_scan_object.isDiscreteStepDown() &&
             my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
@@ -763,7 +766,7 @@ void ScienceScreen::onUpdate()
         }
 
         // Cycle selection through scannable objects.
-        if (keys.science_select_next_scannable.getDown() &&
+        if ((keys.science_select_next_scannable.isDiscreteStepDown() || keys.science_select_next_scannable.isRepeatReady()) &&
             my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {

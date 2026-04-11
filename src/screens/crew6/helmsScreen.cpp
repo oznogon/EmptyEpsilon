@@ -192,80 +192,102 @@ void HelmsScreen::onDraw(sp::RenderTarget& renderer)
 
 void HelmsScreen::onUpdate()
 {
-    if (my_spaceship && isVisible())
+    if (!my_spaceship || !isVisible()) return;
+
+    // Impulse, jump, warp hotkeys are handled in their screen components.
+
+    // Handle rotational hotkeys.
+    auto thrusters = my_spaceship.getComponent<ManeuveringThrusters>();
+    const float turn_scale = thrusters ? thrusters->speed : 10.0f;
+    auto continuous_angle = (keys.helms_turn_right.getContinuousValue() - keys.helms_turn_left.getContinuousValue()) * turn_scale;
+    continuous_angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * turn_scale;
+    continuous_angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * turn_scale;
+    float discrete_angle = 0.0f;
+    if (keys.helms_turn_right.isDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) discrete_angle += turn_scale * 0.5f;
+    if (keys.helms_turn_left.isDiscreteStepDown() || keys.helms_turn_left.isRepeatReady()) discrete_angle -= turn_scale * 0.5f;
+
+    // Combine input angles and stop turning if key is up.
+    if (continuous_angle != 0.0f)
     {
-        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
-        if (angle != 0.0f)
-        {
-            auto transform = my_spaceship.getComponent<sp::Transform>();
-            if (transform)
-                my_player_info->commandTargetRotation(transform->getRotation() + angle);
-        }
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            my_player_info->commandTargetRotation(transform->getRotation() + continuous_angle + discrete_angle);
+        continuous_turning = true;
+    }
+    else if (discrete_angle != 0.0f)
+    {
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            my_player_info->commandTargetRotation(transform->getRotation() + discrete_angle);
+        continuous_turning = false;
+    }
+    else if (continuous_turning)
+    {
+        my_player_info->commandTurnSpeed(0.0f);
+        continuous_turning = false;
+    }
 
-        auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
 
-        // Synchronize the Functions sidebar tab with current custom ship functions.
-        bool should_have_func_tab = custom_function_sidebar->hasEntries();
-        bool has_func_tab = sidebar_selector->indexByValue("func") != -1;
-        if (should_have_func_tab && !has_func_tab)
+    // Synchronize the Functions sidebar tab with current custom ship functions.
+    bool should_have_func_tab = custom_function_sidebar->hasEntries();
+    bool has_func_tab = sidebar_selector->indexByValue("func") != -1;
+    if (should_have_func_tab && !has_func_tab)
+    {
+        sidebar_selector->addEntry(tr("helmsTab", "Functions"), "func");
+        sidebar_selector->show();
+    }
+    else if (!should_have_func_tab && has_func_tab)
+    {
+        bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
+        sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
+        custom_function_sidebar->hide();
+        if (func_was_selected)
         {
-            sidebar_selector->addEntry(tr("helmsTab", "Functions"), "func");
-            sidebar_selector->show();
-        }
-        else if (!should_have_func_tab && has_func_tab)
-        {
-            bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
-            sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
-            custom_function_sidebar->hide();
-            if (func_was_selected)
+            int util_idx = sidebar_selector->indexByValue("util");
+            if (util_idx != -1)
             {
-                int util_idx = sidebar_selector->indexByValue("util");
-                if (util_idx != -1)
-                {
-                    sidebar_selector->setSelectionIndex(util_idx);
-                    utility_beam_sidebar->show();
-                    utility_beam_dial->show();
-                }
-                else
-                {
-                    sidebar_selector->setSelectionIndex(-1);
-                    sidebar_selector->hide();
-                }
+                sidebar_selector->setSelectionIndex(util_idx);
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
             }
-            if (sidebar_selector->entryCount() == 0)
-                sidebar_selector->hide();
-        }
-
-        // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
-        bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(CrewPosition::helmsOfficer);
-        bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
-        if (should_have_util_tab && !has_util_tab)
-        {
-            sidebar_selector->addEntry(tr("helmsTab", "Utility Beam"), "util");
-            sidebar_selector->show();
-        }
-        else if (!should_have_util_tab && has_util_tab)
-        {
-            bool util_was_selected = sidebar_selector->getSelectionValue() == "util";
-            sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
-            utility_beam_sidebar->hide();
-            utility_beam_dial->hide();
-            if (util_was_selected)
+            else
             {
-                int func_idx = sidebar_selector->indexByValue("func");
-                if (func_idx != -1)
-                {
-                    sidebar_selector->setSelectionIndex(func_idx);
-                    custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
-                }
-                else
-                {
-                    sidebar_selector->setSelectionIndex(-1);
-                    sidebar_selector->hide();
-                }
-            }
-            if (sidebar_selector->entryCount() == 0)
+                sidebar_selector->setSelectionIndex(-1);
                 sidebar_selector->hide();
+            }
         }
+        if (sidebar_selector->entryCount() == 0)
+            sidebar_selector->hide();
+    }
+
+    // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
+    bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(CrewPosition::helmsOfficer);
+    bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
+    if (should_have_util_tab && !has_util_tab)
+    {
+        sidebar_selector->addEntry(tr("helmsTab", "Utility Beam"), "util");
+        sidebar_selector->show();
+    }
+    else if (!should_have_util_tab && has_util_tab)
+    {
+        bool util_was_selected = sidebar_selector->getSelectionValue() == "util";
+        sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
+        utility_beam_sidebar->hide();
+        utility_beam_dial->hide();
+        if (util_was_selected)
+        {
+            int func_idx = sidebar_selector->indexByValue("func");
+            if (func_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(func_idx);
+                custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+            }
+            else
+            {
+                sidebar_selector->setSelectionIndex(-1);
+                sidebar_selector->hide();
+            }
+        }
+        if (sidebar_selector->entryCount() == 0)
+            sidebar_selector->hide();
     }
 }

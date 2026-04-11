@@ -24,6 +24,7 @@ private:
     GuiCustomShipFunctions* custom_function_sidebar;
     GuiUtilityBeamControls* utility_beam_sidebar;
     GuiUtilityBeamRotationDial* utility_beam_dial;
+    bool continuous_turning = false;
 public:
     HelmsScreen(GuiContainer* owner);
 

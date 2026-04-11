@@ -34,6 +34,7 @@ private:
     GuiUtilityBeamControls* utility_beam_sidebar;
     GuiUtilityBeamRotationDial* utility_beam_dial;
     bool drag_rotate;
+    bool continuous_turning = false;
 public:
     TacticalScreen(GuiContainer* owner);
 

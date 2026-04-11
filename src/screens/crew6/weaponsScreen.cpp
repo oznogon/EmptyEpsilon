@@ -229,72 +229,6 @@ void WeaponsScreen::onUpdate()
             );
             my_player_info->commandSetTarget(targets.get());
         }
-
-        auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
-
-        // Synchronize the Functions sidebar tab with current custom ship functions.
-        bool should_have_func_tab = custom_function_sidebar->hasEntries();
-        bool has_func_tab = sidebar_selector->indexByValue("func") != -1;
-        if (should_have_func_tab && !has_func_tab)
-        {
-            sidebar_selector->addEntry(tr("weaponsTab", "Functions"), "func");
-            sidebar_selector->show();
-        }
-        else if (!should_have_func_tab && has_func_tab)
-        {
-            bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
-            sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
-            custom_function_sidebar->hide();
-            if (func_was_selected)
-            {
-                int util_idx = sidebar_selector->indexByValue("util");
-                if (util_idx != -1)
-                {
-                    sidebar_selector->setSelectionIndex(util_idx);
-                    utility_beam_sidebar->show();
-                    utility_beam_dial->show();
-                }
-                else
-                {
-                    sidebar_selector->setSelectionIndex(-1);
-                    sidebar_selector->hide();
-                }
-            }
-            if (sidebar_selector->entryCount() == 0)
-                sidebar_selector->hide();
-        }
-
-        // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
-        bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(CrewPosition::weaponsOfficer);
-        bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
-        if (should_have_util_tab && !has_util_tab)
-        {
-            sidebar_selector->addEntry(tr("weaponsTab", "Utility Beam"), "util");
-            sidebar_selector->show();
-        }
-        else if (!should_have_util_tab && has_util_tab)
-        {
-            bool util_was_selected = sidebar_selector->getSelectionValue() == "util";
-            sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
-            utility_beam_sidebar->hide();
-            utility_beam_dial->hide();
-            if (util_was_selected)
-            {
-                int func_idx = sidebar_selector->indexByValue("func");
-                if (func_idx != -1)
-                {
-                    sidebar_selector->setSelectionIndex(func_idx);
-                    custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
-                }
-                else
-                {
-                    sidebar_selector->setSelectionIndex(-1);
-                    sidebar_selector->hide();
-                }
-            }
-            if (sidebar_selector->entryCount() == 0)
-                sidebar_selector->hide();
-        }
     }
     if (keys.weapons_enemy_prev_target.getDown())
     {
@@ -341,11 +275,88 @@ void WeaponsScreen::onUpdate()
         }
     }
 
+    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+
+    // Synchronize the Functions sidebar tab with current custom ship functions.
+    bool should_have_func_tab = custom_function_sidebar->hasEntries();
+    bool has_func_tab = sidebar_selector->indexByValue("func") != -1;
+    if (should_have_func_tab && !has_func_tab)
+    {
+        sidebar_selector->addEntry(tr("weaponsTab", "Functions"), "func");
+        sidebar_selector->show();
+    }
+    else if (!should_have_func_tab && has_func_tab)
+    {
+        bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
+        sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
+        custom_function_sidebar->hide();
+        if (func_was_selected)
+        {
+            int util_idx = sidebar_selector->indexByValue("util");
+            if (util_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(util_idx);
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
+            }
+            else
+            {
+                sidebar_selector->setSelectionIndex(-1);
+                sidebar_selector->hide();
+            }
+        }
+        if (sidebar_selector->entryCount() == 0)
+            sidebar_selector->hide();
+    }
+
+    // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
+    bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(CrewPosition::weaponsOfficer);
+    bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
+    if (should_have_util_tab && !has_util_tab)
+    {
+        sidebar_selector->addEntry(tr("weaponsTab", "Utility Beam"), "util");
+        sidebar_selector->show();
+    }
+    else if (!should_have_util_tab && has_util_tab)
+    {
+        bool util_was_selected = sidebar_selector->getSelectionValue() == "util";
+        sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
+        utility_beam_sidebar->hide();
+        utility_beam_dial->hide();
+        if (util_was_selected)
+        {
+            int func_idx = sidebar_selector->indexByValue("func");
+            if (func_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(func_idx);
+                custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+            }
+            else
+            {
+                sidebar_selector->setSelectionIndex(-1);
+                sidebar_selector->hide();
+            }
+        }
+        if (sidebar_selector->entryCount() == 0)
+            sidebar_selector->hide();
+    }
+
     // Manual missile aiming keybinds.
-    auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
+    auto aim_adjust = (keys.weapons_aim_left.getContinuousValue() + keys.weapons_aim_left.getAxis0Value() + keys.weapons_aim_left.getAxis1Value())
+        - (keys.weapons_aim_right.getContinuousValue() + keys.weapons_aim_right.getAxis0Value() + keys.weapons_aim_right.getAxis1Value());
     if (aim_adjust != 0.0f)
     {
         missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);
+        tube_controls->setMissileTargetAngle(missile_aim->getValue());
+    }
+    if (keys.weapons_aim_left.isDiscreteStepDown() || keys.weapons_aim_left.isRepeatReady())
+    {
+        missile_aim->setValue(missile_aim->getValue() - 5.0f);
+        tube_controls->setMissileTargetAngle(missile_aim->getValue());
+    }
+    if (keys.weapons_aim_right.isDiscreteStepDown() || keys.weapons_aim_right.isRepeatReady())
+    {
+        missile_aim->setValue(missile_aim->getValue() + 5.0f);
         tube_controls->setMissileTargetAngle(missile_aim->getValue());
     }
 }
