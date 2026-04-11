@@ -362,7 +362,7 @@ void GuiCommsOverlay::onUpdate()
 
 bool GuiCommsOverlay::isChatEntryFocused() const
 {
-    return chat_comms_box->isVisible() && chat_comms_message_entry->hasFocus();
+    return comms_dialog_text->isVisible() && chat_comms_message_entry->hasFocus();
 }
 
 void GuiCommsOverlay::clearElements()
