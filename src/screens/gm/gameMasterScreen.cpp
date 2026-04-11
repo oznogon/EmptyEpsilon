@@ -126,7 +126,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
                                 bar_g = 0;
                             }
                             renderer.fillRect(sp::Rect(screen_pos.x - bar_offset, screen_pos.y + bar_distance, health_bar_width, bar_height), glm::u8vec4(bar_r, bar_g, 0, 192));
-                            renderer.outlineRect(sp::Rect(screen_pos.x - bar_offset, screen_pos.y + bar_distance, bar_width, bar_height), glm::u8vec4(255, 255, 255, 128));
+                            renderer.drawRectOutline(sp::Rect(screen_pos.x - bar_offset, screen_pos.y + bar_distance, bar_width, bar_height), 1.0f, glm::u8vec4(255, 255, 255, 128));
                         }
                     }
                 }

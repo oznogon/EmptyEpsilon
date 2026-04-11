@@ -388,7 +388,7 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     auto radar_screen_center = rect.center();
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    constexpr float sector_size = 20000.0f;
+    float sector_size = 20000.0f;
     const float super_sector_size = sector_size * 8.0f;
     if (distance > super_sector_size) sector_size = super_sector_size;
     const float sub_sector_size = sector_size / 8.0f;
@@ -545,7 +545,7 @@ void GuiRadarView::drawWaypointSetForShip(sp::RenderTarget& renderer, Waypoints*
         {
             auto p0 = worldToScreen(set_points[i - 1]->position);
             auto p1 = worldToScreen(set_points[i]->position);
-            renderer.drawLine(p0, p1, route_color);
+            renderer.drawLine(p0, p1, 1.0f, route_color);
         }
     }
 
