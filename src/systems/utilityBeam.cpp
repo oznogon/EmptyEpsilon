@@ -184,6 +184,15 @@ void UtilityBeamSystem::update(float delta)
             utility_beam.effect_target_entity.removeComponent<sp::Transform>();
         }
         utility_beam.was_active = utility_beam.active;
+
+        // Prune stale entries from beam_effect_entities map.
+        for (auto it = utility_beam.beam_effect_entities.begin(); it != utility_beam.beam_effect_entities.end(); )
+        {
+            if (!it->first || !it->second)
+                it = utility_beam.beam_effect_entities.erase(it);
+            else
+                ++it;
+        }
     }
 }
 
