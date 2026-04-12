@@ -41,3 +41,8 @@ modulated-illumination -- new scripting API
 refactor-guiprogressbar 20260411
 reparent-gui-elements 20260411
 power-management-layout 20260411
+
+on-link-callback-order 20260412
+docking-bay 20260412 -- remerge
+utility-beam 20260412 -- remerge
+on-scan-callbacks 20260412 -- remerge
