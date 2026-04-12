@@ -72,6 +72,7 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
+    void doRadarZoom(float value);
 private:
     CrewPosition crew_position;
     // Used to judge when to update the UI label and zoom
