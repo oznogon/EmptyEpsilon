@@ -47,7 +47,7 @@ bool createDisplayWindows()
     windows.push_back(new Window({width, height}, fullscreen, warpPostProcessor, fsaa));
     window_render_layers.push_back(defaultRenderLayer);
 
-    auto n = PreferencesManager::get("multimonitor", "0").toInt()
+    auto n = PreferencesManager::get("multimonitor", "0").toInt();
     if (n != 0)
     {
         if (n < 2) n = SDL_GetNumVideoDisplays();
