@@ -694,8 +694,9 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
 
     if (!entity.hasComponent<sp::Transform>())
     {
-        auto& t = entity.addComponent<sp::Transform>();
         auto target_transform = docking_port->target.getComponent<sp::Transform>();
+        if (!target_transform) return;
+        auto& t = entity.addComponent<sp::Transform>();
         t.setPosition(target_transform->getPosition() + rotateVec2(docking_port->docked_offset, target_transform->getRotation()));
         t.setRotation(target_transform->getRotation() + vec2ToAngle(docking_port->docked_offset));
 
