@@ -34,4 +34,10 @@ new-sp-line-drawing 20260411 -- major changes to all drawLines
 on-scan-callbacks 20260411 -- new scripting API
 disable-multimonitor-mouse-capture 20260411
 default-wayland 20260411 -- change to SDL2 default behavior
-171-banking-on-rotation
+171-banking-on-rotation 20260411
+trixie-pxe 20260411
+modulated-illumination -- new scripting API
+2563-autocoolant-overload 20260411
+refactor-guiprogressbar 20260411
+reparent-gui-elements 20260411
+power-management-layout 20260411
