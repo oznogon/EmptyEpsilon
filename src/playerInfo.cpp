@@ -1345,11 +1345,11 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             // TODO: Check if this probe is ours
             if (auto rl = ship.getComponent<RadarLink>()) {
                 auto old = rl->linked_entity;
-                if (rl->on_link && target)
-                    LuaConsole::checkResult(rl->on_link.call<void>(ship, target));
-                rl->linked_entity = target;
                 if (rl->on_unlink && old)
                     LuaConsole::checkResult(rl->on_unlink.call<void>(ship, old));
+                rl->linked_entity = target;
+                if (rl->on_link && target)
+                    LuaConsole::checkResult(rl->on_link.call<void>(ship, target));
             }
         }
         break;
