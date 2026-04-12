@@ -2016,7 +2016,7 @@ private:
                 v->VECTOR[vector_selector->getSelectionIndex()].VALUE = value; }); \
         ui->update_func = [this, vector_selector, ui]() -> bool { auto v = entity.getComponent<COMPONENT>(); \
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return v->VECTOR[vector_selector->getSelectionIndex()]->VALUE; \
+                return v->VECTOR[vector_selector->getSelectionIndex()].VALUE; \
             return ui->getValue(); }; \
     } while(0)
 // Add toggle buttons to tweak a bitwise mask in a vector of the given
