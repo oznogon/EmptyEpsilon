@@ -3329,7 +3329,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_PAGE(tr("tweak-tab", "Player controller"), PlayerControl);
     new_page->description = tr("tweak-player-controller", "If present, this component enables player control of this entity. Entities with this component are selectable on the ship selection screen. Sets available crew positions, control code, main screen display, and alert level.");
     ADD_TEXT_TWEAK(tr("tweak-text", "Control code:"), PlayerControl, control_code);
-    ADD_ENUM_TWEAK(tr("tweak-text", "Main screen:"), PlayerControl, main_screen_setting, 0, 6, mainScreenSettingToLocaleString);
+    ADD_ENUM_TWEAK(tr("tweak-text", "Main screen:"), PlayerControl, main_screen_setting, 0, 7, mainScreenSettingToLocaleString);
     ADD_ENUM_TWEAK(tr("tweak-text", "Main screen overlay:"), PlayerControl, main_screen_overlay, 0, 1, mainScreenOverlayToLocaleString);
     ADD_ENUM_TWEAK(tr("tweak-text", "Alert level:"), PlayerControl, alert_level, 0, 2, alertLevelToLocaleString);
     ADD_LABEL(tr("tweak-text", "Allowed crew positions"));
