@@ -130,7 +130,9 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
                     my_player_info->commandSetSystemPowerRequest(ShipSystem::Type(n), value);
             }
         );
-        info.power_bar->setColor(glm::u8vec4(192, 192, 32, 128))->setSize(column_width, GuiElement::GuiSizeMax);
+        info.power_bar
+            ->setColor(glm::u8vec4(192, 192, 32, 128))
+            ->setSize(column_width, GuiElement::GuiSizeMax);
         info.coolant_bar = new GuiProgressSlider(info.row, id + "_COOLANT", 0.0f, 10.0f, 0.0f,
             [n](float value)
             {
