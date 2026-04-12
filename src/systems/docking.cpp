@@ -647,7 +647,8 @@ void DockingSystem::collision(sp::ecs::Entity carried, sp::ecs::Entity carrier, 
             port->state = DockingPort::State::Docked;
             port->docked_offset = rotateVec2(position->getPosition() - other_position->getPosition(), -other_position->getRotation());
             float length = glm::length(port->docked_offset);
-            port->docked_offset = port->docked_offset / length * (length + 2.0f);
+            if (length > 0.0f)
+                port->docked_offset = port->docked_offset / length * (length + 2.0f);
 
             if (auto bay = carrier.getComponent<DockingBay>())
             {
