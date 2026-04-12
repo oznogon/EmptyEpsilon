@@ -32,3 +32,5 @@ hotkeys-remapping-with-dialog 20260411 -- major changes to hotkeys
 gm-create-tweak-missile 20260411 -- new scripting API
 new-sp-line-drawing 20260411 -- major changes to all drawLines
 on-scan-callbacks 20260411 -- new scripting API
+disable-multimonitor-mouse-capture 20260411
+default-wayland 20260411 -- change to SDL2 default behavior
