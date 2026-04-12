@@ -145,6 +145,9 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* pare
 
         if (element->isDestroyed())
         {
+            if (pressed_element == element) pressed_element = nullptr;
+            if (focused_element == element) focused_element = nullptr;
+
             GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(element->getTopLevelContainer());
             if (canvas) canvas->unfocusElementTree(element);
 
@@ -312,8 +315,7 @@ void GuiScrollContainer::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 GuiElement* GuiScrollContainer::executeScrollOnElement(glm::vec2 position, float value)
 {
     // Pass the scroll to the scrollbar first, and don't translate its position.
-    if (scrollbar_v
-        && scrollbar_v->isVisible()
+    if (scrollbar_v->isVisible()
         && scrollbar_v->isEnabled()
         && scrollbar_v->getRect().contains(position))
     {
