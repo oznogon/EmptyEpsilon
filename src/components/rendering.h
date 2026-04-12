@@ -28,6 +28,7 @@ public:
     glm::vec3 mesh_offset{};
     float scale = 1.0f;
     float bank_angle = 0.0f;
+    glm::vec4 illumination_modulation{1.0f, 1.0f, 1.0f, 1.0f};
 
     Mesh* getMesh();
     sp::Texture* getTexture();
