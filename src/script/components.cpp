@@ -494,7 +494,7 @@ void initComponentScriptBindings()
             lua_createtable(L, bay->berths.size(), 0);
             int idx = 1;
             for(const auto& berth : bay->berths) {
-                lua_createtable(L, 0, 5);
+                lua_createtable(L, 0, 6);
 
                 lua_pushstring(L, berth.docked_entity.toString().c_str());
                 lua_setfield(L, -2, "docked_entity");
@@ -510,6 +510,9 @@ void initComponentScriptBindings()
 
                 lua_pushnumber(L, berth.transfer_rate);
                 lua_setfield(L, -2, "transfer_rate");
+
+                lua_pushinteger(L, static_cast<int>(berth.transfer_direction));
+                lua_setfield(L, -2, "transfer_direction");
 
                 lua_seti(L, -2, idx++);
             }
@@ -545,6 +548,16 @@ void initComponentScriptBindings()
                         lua_getfield(L, -1, "transfer_rate");
                         if (lua_isnumber(L, -1))
                             berth.transfer_rate = lua_tonumber(L, -1);
+                        lua_pop(L, 1);
+
+                        lua_getfield(L, -1, "transfer_direction");
+                        if (lua_isinteger(L, -1))
+                        {
+                            auto dir = static_cast<int>(lua_tointeger(L, -1));
+                            if (dir >= static_cast<int>(DockingBay::Berth::TransferDirection::ToCarrier) &&
+                                dir <= static_cast<int>(DockingBay::Berth::TransferDirection::ToDocked))
+                                berth.transfer_direction = static_cast<DockingBay::Berth::TransferDirection>(dir);
+                        }
                         lua_pop(L, 1);
 
                         p->berths.push_back(berth);
