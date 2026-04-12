@@ -47,12 +47,12 @@ bool createDisplayWindows()
     windows.push_back(new Window({width, height}, fullscreen, warpPostProcessor, fsaa));
     window_render_layers.push_back(defaultRenderLayer);
 
-    if (PreferencesManager::get("multimonitor", "0").toInt() != 0)
+    auto n = PreferencesManager::get("multimonitor", "0").toInt()
+    if (n != 0)
     {
-        auto n = PreferencesManager::get("multimonitor", "0").toInt();
-        if (n < 2)
-            n = SDL_GetNumVideoDisplays();
-        while(int(windows.size()) < n)
+        if (n < 2) n = SDL_GetNumVideoDisplays();
+        SDL_SetHint(SDL_HINT_MOUSE_AUTO_CAPTURE, "0");
+        while (static_cast<int>(windows.size()) < n)
         {
             auto wrl = new RenderLayer();
             auto ml = new RenderLayer(wrl);
