@@ -170,14 +170,14 @@ void DockingSystem::update(float delta)
                             auto carrier_reactor = carrier_entity.getComponent<Reactor>();
                             // Derive a base energy request rate from the player
                             // ship's maximum energy capacity.
-                            float energy_request = std::min(delta * 10.0f, docked_reactor->max_energy - docked_reactor->energy);
+                            float energy_request = std::max(0.0f, std::min(delta * 10.0f, docked_reactor->max_energy - docked_reactor->energy));
 
                             // If we're docked with a shipTemplateBasedObject,
                             // and that object is set to share its energy with
                             // docked ships, transfer energy from the mothership
                             // to docked ships until the mothership runs out of
                             // energy or the docked ship doesn't require any.
-                            if (!carrier_reactor || carrier_reactor->useEnergy(energy_request))
+                            if (energy_request > 0.0f && (!carrier_reactor || carrier_reactor->useEnergy(energy_request)))
                                 docked_reactor->energy += energy_request;
                         }
                     }
