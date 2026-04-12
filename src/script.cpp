@@ -1062,11 +1062,14 @@ void luaCommandSetUtilityBeam(sp::ecs::Entity ship, bool active) {
 
     if (auto utility = ship.getComponent<UtilityBeam>())
     {
-        // TODO: sfx
         if (active != utility->active)
-            gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
-        else
-            gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
+        {
+            utility->active = active;
+            if (active)
+                gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
+            else
+                gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
+        }
     }
 }
 
