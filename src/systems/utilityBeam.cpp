@@ -201,7 +201,11 @@ void UtilityBeamSystem::fire(sp::ecs::Entity firing_entity, UtilityBeam& utility
         {
             auto hit_location = target_transform->getPosition();
             if (auto target_physics = target_entity.getComponent<sp::Physics>())
-                hit_location -= glm::normalize(target_transform->getPosition() - transform.getPosition()) * target_physics->getSize().x;
+            {
+                auto direction = target_transform->getPosition() - transform.getPosition();
+                if (glm::length(direction) > 0.0f)
+                    hit_location -= glm::normalize(direction) * target_physics->getSize().x;
+            }
 
             auto& effect_entity = utility_beam.beam_effect_entities[target_entity];
             if (!effect_entity || !effect_entity.hasComponent<BeamEffect>())
