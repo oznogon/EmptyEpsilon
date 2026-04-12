@@ -3,6 +3,7 @@
 
 Keys keys;
 extern sp::io::Keybinding fullscreen_key;
+extern sp::io::Keybinding screenshot_key;
 
 // Cinematic view binds
 Keys::CinematicKeys::CinematicKeys() :
@@ -550,6 +551,8 @@ void Keys::init()
     voice_ship.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     fullscreen_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Fullscreen toggle"));
     fullscreen_key.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    screenshot_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Take screenshot"));
+    screenshot_key.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
     debug_show_fps.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
