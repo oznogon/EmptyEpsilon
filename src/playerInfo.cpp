@@ -962,13 +962,6 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 scanner->target = e;
                 if (source) scanner->source = source;
                 else scanner->source = ship;
-
-                // Fire onScanInitiated callback
-                if (auto ss = e.getComponent<ScanState>())
-                {
-                    if (ss->on_scan_initiated)
-                        LuaConsole::checkResult(ss->on_scan_initiated.call<void>(e, ship, scanner->source));
-                }
             }
         }
         break;
