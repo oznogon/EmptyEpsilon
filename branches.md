@@ -34,3 +34,4 @@ new-sp-line-drawing 20260411 -- major changes to all drawLines
 on-scan-callbacks 20260411 -- new scripting API
 disable-multimonitor-mouse-capture 20260411
 default-wayland 20260411 -- change to SDL2 default behavior
+171-banking-on-rotation
