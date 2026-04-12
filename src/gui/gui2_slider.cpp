@@ -115,12 +115,16 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
 
     renderer.drawStretched(rect, back.texture, back.color);
 
+    const float range_min = std::min(min_value, max_value);
+    const float range_max = std::max(min_value, max_value);
+
     if (rect.size.x > rect.size.y)
     {
         float x;
 
         for(TSnapPoint& point : snap_points)
         {
+            if (point.value < range_min || point.value > range_max) continue;
             x = rect.position.x + (rect.size.x - rect.size.y) * (point.value - min_value) / (max_value - min_value);
 
             renderer.drawRotatedSprite(tick.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, 90, tick.color);
@@ -132,6 +136,7 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
         float y;
         for(TSnapPoint& point : snap_points)
         {
+            if (point.value < range_min || point.value > range_max) continue;
             y = rect.position.y + (rect.size.y - rect.size.x) * (point.value - min_value) / (max_value - min_value);
 
             renderer.drawSprite(tick.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, tick.color);
