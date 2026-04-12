@@ -200,15 +200,18 @@ void DockingSystem::update(float delta)
                         if (my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToDocked)
                         {
                             if (!my_reactor) continue;
-                            if (!my_reactor->useEnergy(energy_transfer)) continue;
 
                             if (docked_reactor)
                             {
-                                if (docked_reactor->energy + energy_transfer >= docked_reactor->max_energy) continue;
+                                if (docked_reactor->energy >= docked_reactor->max_energy) continue;
+                                if (!my_reactor->useEnergy(energy_transfer)) continue;
                                 docked_reactor->energy = std::min(docked_reactor->max_energy, docked_reactor->energy + energy_transfer);
                             }
                             else if (docked_pickup)
+                            {
+                                if (!my_reactor->useEnergy(energy_transfer)) continue;
                                 docked_pickup->give_energy += energy_transfer;
+                            }
                         }
                         else if (my_reactor && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToCarrier)
                         {
