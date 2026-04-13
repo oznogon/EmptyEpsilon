@@ -280,6 +280,7 @@ public:
             }
         );
         dial
+            ->setHandleArc(30.0f)
             ->setSize(60.0f, GuiElement::GuiSizeMax);
 
         value_entry = new GuiTextEntry(this, "", "");
@@ -2564,12 +2565,18 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             showPageDescription(pi);
         }
     });
-
     component_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Button to close the tweaks window.
+    (new GuiButton(left_panel, "CLOSE_BUTTON", tr("button", "Close"), [this](){ hide(); }))
+        ->setTextSize(30.0f)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 20, 0");
 
     GuiTweakPage* new_page;
     GuiVectorTweak* vector_selector;
 
+    const string help_group = tr("tweak-group", "Help");
     const string identity_group = tr("tweak-group", "Identity");
     const string position_movement_group = {tr("tweak-group", "Position & movement")};
     const string ai_pathfinding_group = {tr("tweak-group", "AI & pathfinding")};
@@ -2586,6 +2593,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     // Define navigation groups by tweak page indices.
     component_groups = {
+        {help_group, {}},
         {identity_group, {}},
         {position_movement_group, {}},
         {ai_pathfinding_group, {}},
@@ -2603,12 +2611,27 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     auto addPageToGroup = [&](const string& group_name) {
         for (auto& g : component_groups)
+        {
             if (g.name == group_name)
             {
                 g.page_indices.push_back(static_cast<int>(pages.size()) - 1);
                 return;
             }
+        }
     };
+
+    // Help tab
+    new_page = new GuiTweakPage(content);
+    new_page->has_component = [](sp::ecs::Entity e) { return true; };
+    new_page->add_component = [page_ptr = new_page](sp::ecs::Entity e) {};
+    new_page->remove_component = [](sp::ecs::Entity e) {};
+    (new GuiScrollText(new_page->tweaks, "COMPONENT_DESC", ""))
+        ->setText(tr("tweak-help", "The Tweaks panel allows you to add, remove, and modify components for the selected entity. Components represent facts about an entity, such as its position, appearance, and systems.\n\nTo select a component, navigate the list by clicking one of its entries or filter the list by entering text in the field above it.\n\nSelecting a component opens its tweak page, which includes a button at the top of the page to add or remove the selected component, depending on whether the entity already has that component.\n\nBelow that button are typically fields or controls for properties related to that component. If the entity has that component, modifying these values takes effect immediately. If the entity lacks that component, the values you enter are applied upon adding the component.\n\nThe right column describes the component's functionality."))
+        ->setTextSize(24.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    pages.push_back(new_page);
+    page_labels.push_back("Help");
+    addPageToGroup(help_group);
 
     // Transform component, custom implementation since it uses functions
     // instead of direct access to members.
@@ -3773,22 +3796,11 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     component_description = new GuiScrollText(content, "COMPONENT_DESC", "");
     component_description
-        ->setTextSize(26.0f)
+        ->setTextSize(24.0f)
         ->setSize(300.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 0, 20, 0");
 
     showGroups();
-
-    // Button to close the tweaks window.
-    (new GuiButton(this, "CLOSE_BUTTON", tr("button", "Close"),
-        [this]()
-        {
-            hide();
-        }
-    ))
-        ->setTextSize(20.0f)
-        ->setPosition(10.0f, -20.0f, sp::Alignment::TopRight)
-        ->setSize(70.0f, 30.0f);
 }
 
 void GuiEntityTweak::open(sp::ecs::Entity e, string select_component)
@@ -3898,12 +3910,15 @@ void GuiEntityTweak::showPageDescription(int page_index)
 GuiTweakPage::GuiTweakPage(GuiContainer* owner)
 : GuiElement(owner, "")
 {
-    add_remove_button = new GuiButton(this, "ADD_REMOVE", "", [this](){
-        if (has_component(entity))
-            remove_component(entity);
-        else
-            add_component(entity);
-    });
+    add_remove_button = new GuiButton(this, "ADD_REMOVE", "",
+        [this]()
+        {
+            if (has_component(entity))
+                remove_component(entity);
+            else
+                add_component(entity);
+        }
+    );
     add_remove_button
         ->setSize(300.0f, 50.0f)
         ->setAttribute("alignment", "topcenter");
