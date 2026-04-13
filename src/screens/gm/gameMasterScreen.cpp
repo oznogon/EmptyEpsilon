@@ -158,7 +158,9 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", tr("button", "Global message"), [this]() {
         global_message_entry->show();
     });
-    global_message_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(250, 50);
+    global_message_button
+        ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
+        ->setSize(250.0f, 50.0f);
 
     player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR", [this](int index, string value) {
         auto ship = sp::ecs::Entity::fromString(value);
@@ -213,46 +215,77 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     });
     tweak_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
 
-    // Database Browser button and panel
-    auto database_browser_panel = new GuiPanel(this, "DATABASE_BROWSER");
-    database_browser_panel->setPosition(300, 100, sp::Alignment::TopLeft)->setSize(500, 600)->hide();
-    (new GuiLabel(database_browser_panel, "", tr("Database Entries"), 30))
-        ->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, 50);
+    // Database browser panel.
+    // TODO: Break out into standalone component.
+    database_browser_panel = new GuiPanel(this, "DATABASE_BROWSER");
+    database_browser_panel
+        ->setPosition(0.0f, -100.0f, sp::Alignment::BottomCenter)
+        ->setSize(500.0f, 600.0f)
+        ->hide()
+        ->setAttribute("layout", "vertical");
+    database_browser_panel
+        ->setAttribute("padding", "20");
 
-    auto db_listbox = new GuiListbox(database_browser_panel, "", [this, database_browser_panel](int index, string value) {
-        // Get all database entities
-        auto db_entities = sp::ecs::Query<Database>();
-        int current = 0;
-        for(auto [entity, db] : db_entities) {
-            if (current == index) {
-                tweak_dialog->open(entity, "Database");
-                database_browser_panel->hide();
-                return;
-            }
-            current++;
-        }
-    });
-    db_listbox->setPosition(10, 60, sp::Alignment::TopLeft)->setSize(480, 480);
+    // Header.
+    (new GuiLabel(database_browser_panel, "", tr("Database entries"), 30.0f))
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
-    (new GuiButton(database_browser_panel, "", tr("button", "Close"), [database_browser_panel]() {
-        database_browser_panel->hide();
-    }))->setPosition(10, -10, sp::Alignment::BottomLeft)->setSize(200, 50);
-
-    (new GuiButton(this, "DATABASE_BROWSER_BTN", tr("button", "Database"), [db_listbox, database_browser_panel]() {
-        // Populate listbox with all database entries
-        db_listbox->setOptions({});
-        for(auto [entity, db] : sp::ecs::Query<Database>()) {
-            string display_name = db.name.empty() ? "(unnamed)" : db.name;
-            // Show parent name if available
-            if (db.parent) {
-                if (auto parent_db = db.parent.getComponent<Database>()) {
-                    display_name = parent_db->name + " > " + display_name;
+    // Flat listbox of database entries.
+    auto db_listbox = new GuiListbox(database_browser_panel, "",
+        [this](int index, string value)
+        {
+            // Check if selection matches a database entity.
+            auto db_entities = sp::ecs::Query<Database>();
+            int current = 0;
+            for (auto [entity, db] : db_entities)
+            {
+                if (current == index)
+                {
+                    tweak_dialog->open(entity, "Database");
+                    database_browser_panel->hide();
+                    return;
                 }
+
+                current++;
             }
-            db_listbox->addEntry(display_name, entity.toString());
         }
-        database_browser_panel->show();
-    }))->setPosition(280, -120, sp::Alignment::BottomLeft)->setSize(120, 50);
+    );
+    db_listbox
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Database browser close button.
+    (new GuiButton(database_browser_panel, "", tr("button", "Close"),
+        [this]() { database_browser_panel->hide(); }
+    ))
+        ->setSize(300.0f, 50.0f)
+        ->setAttribute("margin", "0, 0, 20, 0");
+
+    // Database browser open button.
+    (new GuiButton(this, "DATABASE_BROWSER_BUTTON", tr("button", "Database"),
+        [this, db_listbox]()
+        {
+            // Populate listbox with all database entries.
+            db_listbox->setOptions({});
+            for (auto [entity, db] : sp::ecs::Query<Database>())
+            {
+                string display_name = db.name.empty() ? "(unnamed)" : db.name;
+                // Show parent name if available.
+                if (db.parent)
+                {
+                    if (auto parent_db = db.parent.getComponent<Database>())
+                        display_name = parent_db->name + " > " + display_name;
+                }
+                db_listbox->addEntry(display_name, entity.toString());
+            }
+
+            database_browser_panel
+                ->show()
+                ->moveToFront();
+        }
+    ))
+        ->setPosition(280.0f, -70.0f, sp::Alignment::BottomLeft)
+        ->setSize(120.0f, 50.0f);
 
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", tr("button", "Hail ship"), [this]() {
         for(auto obj : targets.getTargets())

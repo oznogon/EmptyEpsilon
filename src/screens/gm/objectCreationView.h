@@ -1,8 +1,7 @@
 #pragma once
 
-#include "gui/gui2_overlay.h"
+#include "gui/gui2_panel.h"
 #include "gameGlobalInfo.h"
-
 
 class GuiSelector;
 class GuiListbox;
@@ -10,7 +9,7 @@ class GuiContainer;
 class GuiScrollText;
 class GuiTextEntry;
 
-class GuiObjectCreationView : public GuiOverlay
+class GuiObjectCreationView : public GuiPanel
 {
 private:
     GuiSelector* faction_selector = nullptr;

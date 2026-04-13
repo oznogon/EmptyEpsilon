@@ -1,29 +1,31 @@
 #pragma once
 
 #include "engine.h"
+#include "Updatable.h"
+
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_overlay.h"
-#include "screenComponents/targetsContainer.h"
-#include "Updatable.h"
 
-class GuiGlobalMessageEntry;
-class GuiObjectCreationScreen;
-class GuiEntityTweak;
-class GuiRadarView;
-class GuiRadarZoomSlider;
-class GuiOverlay;
-class GuiSelector;
-class GuiKeyValueDisplay;
-class GuiListbox;
-class GuiButton;
-class GuiToggleButton;
-class GuiTextEntry;
+#include "screenComponents/targetsContainer.h"
+
 class GameMasterChatDialog;
-class GuiObjectCreationView;
+class GuiButton;
+class GuiEntityTweak;
+class GuiGlobalMessageEntry;
 class GuiGlobalMessageEntryView;
 class GuiHelpOverlay;
+class GuiKeyValueDisplay;
+class GuiListbox;
+class GuiObjectCreationScreen;
+class GuiObjectCreationView;
+class GuiOverlay;
 class GuiPanel;
+class GuiRadarView;
+class GuiRadarZoomSlider;
+class GuiSelector;
+class GuiTextEntry;
+class GuiToggleButton;
 
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
@@ -55,6 +57,7 @@ private:
     GuiToggleButton* pause_button;
     GuiToggleButton* intercept_comms_button;
     GuiButton* tweak_button;
+    GuiPanel* database_browser_panel;
     GuiRadarZoomSlider* zoom_slider;
     GuiButton* copy_scenario_button;
     GuiButton* copy_selected_button;
