@@ -16,6 +16,7 @@ class GuiElement : public GuiContainer
 {
 private:
     bool destroyed;
+    bool pressed = false;
 protected:
     GuiContainer* owner;
     bool visible;
@@ -66,6 +67,7 @@ public:
     GuiElement* hide();
     GuiElement* show();
     bool isVisible() const;
+    bool isEffectivelyVisible() const;
     GuiElement* setEnable(bool enable);
     GuiElement* enable();
     GuiElement* disable();
@@ -79,6 +81,9 @@ public:
     GuiContainer* getOwner();
     GuiContainer* getTopLevelContainer();
     const string& getID() { return id; }
+
+    bool isHovered() const { return hover; }
+    bool isPressed() const { return pressed; }
 
     //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
     void destroy();

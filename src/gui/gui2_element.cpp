@@ -154,6 +154,14 @@ bool GuiElement::isVisible() const
     return visible;
 }
 
+bool GuiElement::isEffectivelyVisible() const
+{
+    if (!visible) return false;
+    GuiElement* parent = dynamic_cast<GuiElement*>(owner);
+    if (parent) return parent->isEffectivelyVisible();
+    return true;
+}
+
 GuiElement* GuiElement::setEnable(bool enable)
 {
     this->enabled = enable;
