@@ -160,12 +160,19 @@ void GuiCanvas::unfocusElementTree(GuiElement* element)
 
 void GuiCanvas::runUpdates(GuiContainer* parent)
 {
-    for(auto it = parent->children.begin(); it != parent->children.end(); )
+    for (auto it = parent->children.begin(); it != parent->children.end(); )
     {
         GuiElement* element = *it;
+        if (!element)
+        {
+            LOG(Warning, "GuiElement in GuiCanvas::runUpdates is in the for loop but doesn't exist");
+            it++;
+            continue;
+        }
+
         if (element->destroyed)
         {
-            //Find the owning cancas, as we need to remove ourselves if we are the focus or click element.
+            // Find the owning canvas, as we need to remove ourselves if we are the focus or click element.
             unfocusElementTree(element);
 
             //Delete it from our list.
@@ -174,15 +181,20 @@ void GuiCanvas::runUpdates(GuiContainer* parent)
             // Free up the memory used by the element.
             element->owner = nullptr;
             delete element;
-        }else{
+        }
+        else
+        {
             element->hover = element->rect.contains(mouse_position);
             element->hover_coordinates = mouse_position;
 
+            // Save next iterator before onUpdate(), as onUpdate() may call
+            // moveToFront()/moveToBack(), which modifies the list and
+            // invalidates any iterator pointing to the current element.
+            auto next_it = std::next(it);
             element->onUpdate();
-            if (element->isVisible())
-                runUpdates(element);
+            if (element->isVisible()) runUpdates(element);
 
-            it++;
+            it = next_it;
         }
     }
 }
