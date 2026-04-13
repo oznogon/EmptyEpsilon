@@ -48,6 +48,8 @@ bool GuiCanvas::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position
 {
     mouse_position = position;
     click_element = getClickElement(button, position, id);
+    if (click_element)
+        click_element->pressed = true;
     focus(click_element);
     return click_element != nullptr;
 }
@@ -64,6 +66,7 @@ void GuiCanvas::onPointerUp(glm::vec2 position, sp::io::Pointer::ID id)
     mouse_position = position;
     if (click_element)
     {
+        click_element->pressed = false;
         click_element->onMouseUp(position, id);
         click_element = nullptr;
     }
