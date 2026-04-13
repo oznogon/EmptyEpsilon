@@ -5,6 +5,8 @@
 
 class GuiKeyValueDisplay;
 class GuiLabel;
+class GuiTooltip;
+class GuiRadarView;
 class GuiDockingButton;
 class GuiCombatManeuver;
 
@@ -12,8 +14,10 @@ class HelmsScreen : public GuiOverlay
 {
 private:
     GuiOverlay* background_crosses;
+    GuiRadarView* radar;
 
-    GuiLabel* heading_hint;
+    GuiTooltip* heading_hint;
+    GuiLabel* heading_label;
     GuiCombatManeuver* combat_maneuver;
     GuiDockingButton* docking_button;
 public:

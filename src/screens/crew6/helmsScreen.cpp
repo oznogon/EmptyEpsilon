@@ -23,6 +23,7 @@
 
 #include "gui/theme.h"
 #include "gui/gui2_label.h"
+#include "gui/gui2_tooltip.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_image.h"
@@ -39,7 +40,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
+    radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
 
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 215);
@@ -48,61 +49,29 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
-        [radar, this](sp::io::Pointer::Button button, glm::vec2 position) { // down
+        [this](sp::io::Pointer::Button button, glm::vec2 position) { // down
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
-            {
-                auto r = radar->getRect();
-                float angle = vec2ToAngle(position - transform->getPosition());
-
-                // Rotate the position to match radar's rotation.
-                glm::vec2 draw_position;
-                if (radar->getAutoRotating())
-                {
-                    auto rotation = -radar->getViewRotation();
-                    glm::vec2 position_from_center = position - transform->getPosition();
-                    draw_position.x = position_from_center.x * cosf(glm::radians(rotation)) - position_from_center.y * sinf(glm::radians(rotation));
-                    draw_position.y = position_from_center.x * sinf(glm::radians(rotation)) + position_from_center.y * cosf(glm::radians(rotation));
-                }
-                else{
-                    draw_position = (position - transform->getPosition());
-                }
-                draw_position = rect.center() + draw_position / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;
-                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
-                my_player_info->commandTargetRotation(angle);
-            }
+                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
         },
-        [radar, this](glm::vec2 position) { // drag
+        [this](glm::vec2 position) { // drag
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
-            {
-                auto r = radar->getRect();
-                float angle = vec2ToAngle(position - transform->getPosition());
-
-                // Rotate the position to match radar's rotation.
-                glm::vec2 draw_position;
-                if (radar->getAutoRotating())
-                {
-                    auto rotation = -radar->getViewRotation();
-                    glm::vec2 position_from_center = position - transform->getPosition();
-                    draw_position.x = position_from_center.x * cosf(glm::radians(rotation)) - position_from_center.y * sinf(glm::radians(rotation));
-                    draw_position.y = position_from_center.x * sinf(glm::radians(rotation)) + position_from_center.y * cosf(glm::radians(rotation));
-                }
-                else{
-                    draw_position = (position - transform->getPosition());
-                }
-                draw_position = rect.center() + draw_position / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
-                my_player_info->commandTargetRotation(angle);
-            }
+                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
         },
         [this](glm::vec2 position) { // up
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
                 my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
-            heading_hint->hide();
         }, nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("helms_radar_lock","0")=="1");
 
-    heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
-    heading_hint->setAlignment(sp::Alignment::Center)->setSize(0, 0);
+    heading_hint = new GuiTooltip(radar, "HEADING_HINT");
+    heading_hint
+        ->setPixelOffset({-60.0f, -70.0f})
+        ->setSize(120.0f, 40.0f);
+    heading_label = new GuiLabel(heading_hint, "HEADING_HINT_LABEL", "", 30.0f);
+    heading_label
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     auto energy_display = new EnergyInfoDisplay(this, "ENERGY_DISPLAY", 0.45);
     energy_display->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 40);
@@ -130,14 +99,26 @@ void HelmsScreen::onDraw(sp::RenderTarget& renderer)
 
 void HelmsScreen::onUpdate()
 {
-    if (my_spaceship && isVisible())
+    if (!my_spaceship || !isVisible()) return;
+
+    auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+    if (angle != 0.0f)
     {
-        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
-        if (angle != 0.0f)
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            my_player_info->commandTargetRotation(transform->getRotation() + angle);
+    }
+
+    // Keep the heading label current while the cursor is on the radar.
+    // Uses hover_coordinates (= current global mouse position, set on this element
+    // before onUpdate fires) and radar->screenToWorld for correct conversion
+    // including auto-rotation.
+    if (radar->getRect().contains(hover_coordinates) || radar->isPressed())
+    {
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
-            auto transform = my_spaceship.getComponent<sp::Transform>();
-            if (transform)
-                my_player_info->commandTargetRotation(transform->getRotation() + angle);
+            const glm::vec2 world = radar->screenToWorld(hover_coordinates);
+            const float heading = fmodf(vec2ToAngle(world - transform->getPosition()) + 90.f + 360.f, 360.f);
+            heading_label->setText(string(heading, 1));
         }
     }
 }
