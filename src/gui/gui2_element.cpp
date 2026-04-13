@@ -4,7 +4,7 @@
 
 
 GuiElement::GuiElement(GuiContainer* owner, const string& id)
-: owner(owner), visible(true), enabled(true), hover(false), focus(false), id(id)
+: owner(owner), id(id)
 {
     owner->children.push_back(this);
     destroyed = false;
@@ -152,6 +152,14 @@ GuiElement* GuiElement::show()
 bool GuiElement::isVisible() const
 {
     return visible;
+}
+
+bool GuiElement::isEffectivelyVisible() const
+{
+    if (!visible) return false;
+    GuiElement* parent = dynamic_cast<GuiElement*>(owner);
+    if (parent) return parent->isEffectivelyVisible();
+    return true;
 }
 
 GuiElement* GuiElement::setEnable(bool enable)

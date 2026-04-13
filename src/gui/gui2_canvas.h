@@ -27,6 +27,8 @@ public:
     virtual void onTextInput(const string& text) override;
     virtual void onTextInput(sp::TextInputEvent e) override;
 
+    glm::vec2 getMousePosition() const { return mouse_position; }
+
     void focus(GuiElement* element);
     //Called when an element is destroyed in this tree. Recursive tests if the given element or any of it's children currently has focus, and unsets that focus.
     void unfocusElementTree(GuiElement* element);
