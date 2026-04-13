@@ -29,6 +29,7 @@
 #include "gui/theme.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
+#include "gui/gui2_tooltip.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_selector.h"
@@ -173,6 +174,19 @@ ShipSelectionScreen::ShipSelectionScreen()
 
     (new GuiLabel(right_panel, "DIRECT_OPTIONS_LABEL", tr("Additional views and options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("margin", "0, 0, 0, 10");
 
+    // Helper: attach a single-text tooltip to a button.
+    auto addTooltip = [](GuiElement* btn, const string& id, const string& text)
+    {
+        auto tooltip = new GuiTooltip(btn, id);
+        tooltip->setSize(280.0f, 120.0f);
+        auto panel = new GuiPanel(tooltip, "");
+        panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+             ->setAttribute("padding", "10");
+        (new GuiLabel(panel, "", text, 20))
+            ->setWrapped()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    };
+
     // Game Master button
     if (game_server) {
         auto game_master_button = new GuiButton(right_panel, "GAME_MASTER_BUTTON", tr("Game master"),
@@ -211,6 +225,8 @@ ShipSelectionScreen::ShipSelectionScreen()
             }
         );
         game_master_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+        addTooltip(game_master_button, "GAME_MASTER_TOOLTIP",
+            tr("shipSelect", "Control the scenario as Game Master. Spawn and tweak objects, communicate with players, monitor activity, and trigger scenario events.  Requires GM code if set."));
     }
 
     // Spectator view button
@@ -250,6 +266,8 @@ ShipSelectionScreen::ShipSelectionScreen()
         }
     );
     spectator_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+    addTooltip(spectator_button, "SPECTATOR_TOOLTIP",
+        tr("shipSelect", "View the full tactical map as a spectator. Shows all ships and objects without crew station controls. Requires GM code if set."));
 
     // Cinematic view button
     auto cinematic_button = new GuiButton(right_panel, "", tr("Cinematic view"),
@@ -288,6 +306,8 @@ ShipSelectionScreen::ShipSelectionScreen()
         }
     );
     cinematic_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+    addTooltip(cinematic_button, "CINEMATIC_TOOLTIP",
+        tr("shipSelect", "A cinematic camera that can automatically follow the action. Best for demonstrations or display screens. Requires GM code if set."));
 
     // Top-down 3D view button
     auto topdown_button = new GuiButton(right_panel, "TOP_DOWN_3D_BUTTON", tr("Top-down 3D view"),
@@ -326,14 +346,19 @@ ShipSelectionScreen::ShipSelectionScreen()
         }
     );
     topdown_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+    addTooltip(topdown_button, "TOP_DOWN_3D_TOOLTIP",
+        tr("shipSelect", "An overhead 3D view of the battlefield with free camera movement. Requires GM code if set."));
 
-    (new GuiButton(right_panel, "OPEN_OPTIONS", tr("mainMenu", "Options"),
+    auto options_button = new GuiButton(right_panel, "OPEN_OPTIONS", tr("mainMenu", "Options"),
         [this]()
         {
             new OptionsMenu(OptionsMenu::ReturnTo::ShipSelection);
             this->destroy();
         }
-    ))->setSize(GuiElement::GuiSizeMax, 50.0f);
+    );
+    options_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+    addTooltip(options_button, "OPTIONS_TOOLTIP",
+        tr("shipSelect", "Adjust audio, display, and control settings."));
 
     if (game_server)
     {
@@ -383,11 +408,13 @@ ShipSelectionScreen::ShipSelectionScreen()
         close_button->setSize(200, 50)->setPosition(0, -25, sp::Alignment::BottomCenter);
 
         //Additional options
-        auto extra_settings_button = new GuiButton(right_panel, "", tr("Extra settings"), [this, extra_settings_panel]() {
+        auto extra_settings_button = new GuiButton(right_panel, "", tr("Server settings"), [this, extra_settings_panel]() {
             extra_settings_panel->show();
             container->hide();
         });
         extra_settings_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+        addTooltip(extra_settings_button, "EXTRA_SETTINGS_TOOLTIP",
+            tr("shipSelect", "Modify server-wide settings, such as minigame difficulty and common ship features."));
     }
 
     right_panel->setSize(GuiElement::GuiSizeMax, 30 + right_panel->children.size() * 50);
