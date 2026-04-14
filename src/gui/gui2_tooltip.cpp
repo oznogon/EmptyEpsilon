@@ -79,8 +79,8 @@ void GuiTooltip::onUpdate()
         return;
     }
 
-    // If the tooltip's parent is triggering a hidden tooltip, tick the timer or
-    // show the tooltip.
+    // If the tooltip's parent is triggering a hidden tooltip, either tick the
+    // reveal timer or reveal the tooltip if the timer has expired.
     if (!showing)
     {
         if (!timer.isRunning()) timer.start(long_interaction_duration);
@@ -92,19 +92,28 @@ void GuiTooltip::onUpdate()
         }
     }
 
-    // If the tooltip should be visible, draw it at the given offset of the
-    // hover coordinates. This means the tooltip will follow the pointer.
+    // Position the tooltip. When triggered by press, freeze the position to
+    // allow finger movement out of the way on touch. When triggered by hover,
+    // follow the cursor.
     if (showing)
     {
-        GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(owner);
-        glm::vec2 target = (canvas ? canvas->getMousePosition() : glm::vec2{0, 0}) + pixel_offset;
+        glm::vec2 target;
 
-        // If size is fixed, clamp position to keep the tooltip on screen.
-        if (!layout.match_content_size)
+        if (watched->isPressed()) target = frozen_position;
+        else
         {
-            const sp::Rect screen = getTopLevelContainer()->getRect();
-            target.x = std::max(0.0f, std::min(target.x, screen.size.x - layout.size.x));
-            target.y = std::max(0.0f, std::min(target.y, screen.size.y - layout.size.y));
+            GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(owner);
+            target = (canvas ? canvas->getMousePosition() : glm::vec2{0, 0}) + pixel_offset;
+
+            // If size is fixed, clamp position to keep the tooltip on screen.
+            if (!layout.match_content_size)
+            {
+                const sp::Rect screen = getTopLevelContainer()->getRect();
+                target.x = std::max(0.0f, std::min(target.x, screen.size.x - layout.size.x));
+                target.y = std::max(0.0f, std::min(target.y, screen.size.y - layout.size.y));
+            }
+
+            frozen_position = target;
         }
 
         // As a direct child of the canvas, use layout.position to set absolute
