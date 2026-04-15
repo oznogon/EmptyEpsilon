@@ -1,8 +1,20 @@
 #include "gui2_tooltip.h"
 #include "gui2_canvas.h"
+#include "gui2_panel.h"
+#include "gui2_label.h"
+#include "preferenceManager.h"
+#include "theme.h"
 #include <algorithm>
 
 static constexpr float long_interaction_duration = 0.5f;
+
+static bool isTreeHoveredOrPressed(GuiElement* element)
+{
+    if (element->isHovered() || element->isPressed()) return true;
+    for (auto* child : element->children)
+        if (isTreeHoveredOrPressed(child)) return true;
+    return false;
+}
 
 GuiTooltip::Anchor::Anchor(GuiElement* watched, GuiTooltip* tooltip)
 : GuiElement(watched, ""), tooltip(tooltip)
@@ -46,12 +58,13 @@ void GuiTooltip::anchorDestroyed()
 void GuiTooltip::onUpdate()
 {
     if (!watched) return;
+    if (PreferencesManager::get("tooltips", "1") != "1") return;
 
     // If the tooltip parent isn't or can't be triggered, hide/skip the tooltip.
-    // isVisible() only checks the element's own flag; a hidden ancestor (e.g.
-    // the crew screen being switched away from) does not propagate to
-    // descendants. isEffectivelyVisible() walks the full ownership chain.
-    bool active = watched->isEffectivelyVisible() && (watched->isHovered() || watched->isPressed());
+    // isVisible() checks only the element's own flag, and hidden ancestors
+    // don't propagate to descendants, so isEffectivelyVisible() walks the full
+    // ownership chain.
+    bool active = watched->isEffectivelyVisible() && isTreeHoveredOrPressed(watched);
 
     if (!active)
     {
@@ -103,5 +116,44 @@ void GuiTooltip::onUpdate()
 GuiTooltip* GuiTooltip::setPixelOffset(glm::vec2 offset)
 {
     pixel_offset = offset;
+    return this;
+}
+
+GuiTextTooltip::GuiTextTooltip(GuiElement* watched, string id, string text, float text_size)
+: GuiTooltip(watched, id)
+{
+    style = theme->getStyle("tooltip");
+
+    setAttribute("padding", string(padding));
+    label = new GuiLabel(this, "", text, text_size);
+    label
+        ->setWrapped()
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+}
+
+void GuiTextTooltip::onDraw(sp::RenderTarget& renderer)
+{
+    const auto& s = style->get(getState());
+    renderer.drawStretchedHV(rect, s.size, s.texture, s.color);
+}
+
+void GuiTextTooltip::onUpdate()
+{
+    // Always maintain correct height so it's ready before first render.
+    if (layout.size.x > 0)
+        setSize(layout.size.x, label->getRenderedHeight(layout.size.x - padding * 2.0f) + padding * 2.0f);
+
+    GuiTooltip::onUpdate();
+}
+
+GuiTextTooltip* GuiTextTooltip::setText(string text)
+{
+    label->setText(text);
+    return this;
+}
+
+GuiTextTooltip* GuiTextTooltip::setWidth(float width)
+{
+    setSize(width, 0.0f);
     return this;
 }

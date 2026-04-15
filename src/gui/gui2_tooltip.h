@@ -3,6 +3,10 @@
 #include "gui2_element.h"
 #include "timer.h"
 
+class GuiLabel;
+class GuiPanel;
+class GuiThemeStyle;
+
 // GuiTooltip is a layout container that renders on top of all other elements.
 // It appears after its watched element has been hovered or pressed for 500ms,
 // and hides when the interaction ends.
@@ -27,7 +31,6 @@ public:
     virtual void onUpdate() override;
 
     GuiTooltip* setPixelOffset(glm::vec2 offset);
-
 private:
     // Invisible element in the watched element's subtree, to null the tooltip's
     // watched pointer and trigger self-destruction when the watched element's
@@ -52,4 +55,27 @@ private:
 
     // Called by Anchor::~Anchor() when the watched element's tree is destroyed.
     void anchorDestroyed();
+};
+
+// Convenience subclass with a wrapped GuiLabel inside a GuiPanel.
+// Automatically sizes the panel to the label's rendered height.
+//
+// GuiTextTooltip* tip = new GuiTextTooltip(some_button, "TOOLTIP", tr("text"), 20.0f);
+// tip->setWidth(280.0f);
+class GuiTextTooltip : public GuiTooltip
+{
+public:
+    GuiTextTooltip(GuiElement* watched, string id, string text, float text_size);
+
+    virtual void onDraw(sp::RenderTarget& renderer) override;
+    virtual void onUpdate() override;
+
+    GuiTextTooltip* setText(string text);
+    GuiTextTooltip* setWidth(float width);
+
+private:
+    const GuiThemeStyle* style;
+    GuiElement* panel;
+    GuiLabel* label;
+    float padding = 10.0f;
 };

@@ -3,6 +3,7 @@
 #include "gui2_element.h"
 
 class GuiThemeStyle;
+
 class GuiLabel : public GuiElement
 {
 protected:
