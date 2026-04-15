@@ -71,6 +71,20 @@ GuiLabel* GuiLabel::setClipped()
     return this;
 }
 
+float GuiLabel::getRenderedHeight() const
+{
+    const auto& front = front_style->get(State::Normal);
+    auto pfs = front.font->prepare(text, 32, text_size, {255, 255, 255, 255}, rect.size, sp::Alignment::TopLeft, font_flag);
+    return pfs.getUsedAreaSize().y;
+}
+
+float GuiLabel::getRenderedHeight(float width) const
+{
+    const auto& front = front_style->get(State::Normal);
+    auto pfs = front.font->prepare(text, 32, text_size, {255, 255, 255, 255}, {width, 0.0f}, sp::Alignment::TopLeft, font_flag);
+    return pfs.getUsedAreaSize().y;
+}
+
 GuiAutoSizeLabel::GuiAutoSizeLabel(GuiContainer* owner, string id, string text, glm::vec2 min_size, glm::vec2 max_size, float min_text_size, float max_text_size)
 : GuiLabel(owner, id, text, max_text_size), min_size(min_size), max_size(max_size), min_text_size(min_text_size), max_text_size(max_text_size)
 {

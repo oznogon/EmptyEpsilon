@@ -29,6 +29,9 @@ public:
     GuiLabel* setVertical();
     GuiLabel* setWrapped();
     GuiLabel* setClipped();
+
+    float getRenderedHeight() const;
+    float getRenderedHeight(float width) const;
 };
 
 class GuiAutoSizeLabel : public GuiLabel

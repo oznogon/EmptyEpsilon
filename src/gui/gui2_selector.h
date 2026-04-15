@@ -3,7 +3,6 @@
 #include "gui2_entrylist.h"
 #include "gui2_scrollcontainer.h"
 
-
 class GuiArrowButton;
 class GuiThemeStyle;
 class GuiToggleButton;

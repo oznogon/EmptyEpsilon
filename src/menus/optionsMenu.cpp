@@ -237,6 +237,16 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
     }))
         ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
+    // Tooltip visibility toggle.
+    (new GuiToggleButton(interface_right_column, "TOOLTIP_VISIBILITY", tr("tooltips", "Show tooltips"),
+        [](bool value)
+        {
+            PreferencesManager::set("tooltips", value ? "1" : "0");
+        }
+    ))
+        ->setValue(PreferencesManager::get("tooltips", "0") == "1")
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
     // Radar rotation lock options.
     {
         GuiElement* radar_rotation_lock = new GuiElement(interface_right_column, "RADAR_ROTATION_LOCK");

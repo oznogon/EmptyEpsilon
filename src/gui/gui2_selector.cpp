@@ -11,6 +11,7 @@
 GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
 : GuiEntryList(owner, id, func)
 {
+    intercepts_pointer = true;
     back_style = theme->getStyle("selector.back");
     front_style = theme->getStyle("selector.front");
 

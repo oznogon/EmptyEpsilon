@@ -28,6 +28,7 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
     sp::io::Keybinding::Type display_filter, sp::io::Keybinding::Type capture_filter)
 : GuiElement(owner, id), key(key), display_filter(display_filter), capture_filter(capture_filter)
 {
+    intercepts_pointer = true;
     front_style = theme->getStyle("textentry.front");
     back_style = theme->getStyle("textentry.back");
     setAttribute("layout", "vertical");

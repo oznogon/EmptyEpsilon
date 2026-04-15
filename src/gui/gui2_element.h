@@ -9,24 +9,26 @@
 #include "graphics/renderTarget.h"
 #include "io/textinput.h"
 
-
 class Layout;
+
 class GuiElement : public GuiContainer
 {
 private:
     bool destroyed;
+    bool pressed = false;
 protected:
     GuiContainer* owner;
-    bool visible;
-    bool enabled;
-    bool hover;
+    bool visible = true;
+    bool enabled = true;
+    bool hover = false;
     glm::vec2 hover_coordinates;
-    bool focus;
+    bool focus = false;
+    bool intercepts_pointer = false;
     string id;
 public:
-    constexpr static float GuiSizeMatchHeight = -1.0;
-    constexpr static float GuiSizeMatchWidth = -1.0;
-    constexpr static float GuiSizeMax = -2.0;
+    constexpr static float GuiSizeMatchHeight = -1.0f;
+    constexpr static float GuiSizeMatchWidth = -1.0f;
+    constexpr static float GuiSizeMax = -2.0f;
 
     enum class State
     {
@@ -65,6 +67,7 @@ public:
     GuiElement* hide();
     GuiElement* show();
     bool isVisible() const;
+    bool isEffectivelyVisible() const;
     GuiElement* setEnable(bool enable);
     GuiElement* enable();
     GuiElement* disable();
@@ -82,6 +85,10 @@ public:
 
     // Change this element's owner/container safely (removes from old owner and adds to new owner)
     GuiElement* setParent(GuiContainer* new_owner);
+    // Return if the element has cursor hover state.
+    bool isHovered() const { return hover; }
+    // Return if the element has pressed (click/tap and hold) state.
+    bool isPressed() const { return pressed; }
 
     //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
     void destroy();

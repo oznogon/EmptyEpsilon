@@ -272,6 +272,12 @@
         image: gui/widget/PanelBackground.png
     }
 
+    # GuiTooltip
+    [tooltip] {
+        size: 25.0
+        image: gui/widget/PanelBackground.png
+    }
+
     # GuiProgressbar
     [progressbar] {
         [progressbar.back] {

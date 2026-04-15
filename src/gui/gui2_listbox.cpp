@@ -6,6 +6,7 @@
 GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
 : GuiEntryList(owner, id, func)
 {
+    intercepts_pointer = true;
     // Wrap the Listbox in a scrolling container.
     scroll_container = new GuiScrollContainer(this, id + "_SCROLL");
     scroll_container
