@@ -52,6 +52,9 @@ private:
     bool showing = false;
     // A virtual-pixel offset from the cursor position for spawning the tooltip.
     glm::vec2 pixel_offset{0.0f, 20.0f};
+    // Position locked when triggered by press, so the tooltip doesn't follow
+    // the cursor.
+    glm::vec2 frozen_position{0.0f, 0.0f};
 
     // Called by Anchor::~Anchor() when the watched element's tree is destroyed.
     void anchorDestroyed();
