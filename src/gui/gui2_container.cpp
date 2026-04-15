@@ -167,9 +167,9 @@ void GuiContainer::setElementFocus(GuiElement* element, bool has_focus)
     element->focus = has_focus;
 }
 
-void GuiContainer::callDrawElements(GuiContainer* container, glm::vec2 mouse_pos, sp::Rect rect, sp::RenderTarget& render_target)
+void GuiContainer::callDrawElements(GuiContainer* container, glm::vec2 mouse_pos, GuiElement* hovered_element, sp::Rect rect, sp::RenderTarget& render_target)
 {
-    container->drawElements(mouse_pos, rect, render_target);
+    container->drawElements(mouse_pos, hovered_element, rect, render_target);
 }
 
 GuiElement* GuiContainer::callGetClickElement(GuiContainer* container, sp::io::Pointer::Button button, glm::vec2 pos, sp::io::Pointer::ID id)

@@ -55,7 +55,7 @@ public:
 protected:
     // Draw elements if they're in view. Translate mouse positions by the scroll
     // amount.
-    virtual void drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& renderer) override;
+    virtual void drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect parent_rect, sp::RenderTarget& renderer) override;
     // Find the clicked element, checking children of this container if they're
     // visible.
     virtual GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;

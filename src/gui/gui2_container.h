@@ -66,7 +66,7 @@ protected:
     std::unique_ptr<GuiLayout> layout_manager = nullptr;
 
     // Protected interfaces
-    virtual void drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& window);
+    virtual void drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect parent_rect, sp::RenderTarget& window);
     virtual void drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& window);
     virtual GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
     virtual GuiElement* executeScrollOnElement(glm::vec2 position, float value);
@@ -76,7 +76,7 @@ protected:
     static void clearElementOwner(GuiElement* element);
     static void setElementHover(GuiElement* element, bool has_hover);
     static void setElementFocus(GuiElement* element, bool has_focus);
-    static void callDrawElements(GuiContainer* container, glm::vec2 mouse_pos, sp::Rect rect, sp::RenderTarget& render_target);
+    static void callDrawElements(GuiContainer* container, glm::vec2 mouse_pos, GuiElement* hovered_element, sp::Rect rect, sp::RenderTarget& render_target);
     static GuiElement* callGetClickElement(GuiContainer* container, sp::io::Pointer::Button button, glm::vec2 pos, sp::io::Pointer::ID id);
     static GuiElement* callExecuteScrollOnElement(GuiContainer* container, glm::vec2 pos, float value);
 
