@@ -115,6 +115,23 @@ GuiElement* GuiContainer::getHoverElement(glm::vec2 mouse_position)
     return nullptr;
 }
 
+GuiElement* GuiContainer::getHoverElement(glm::vec2 mouse_position)
+{
+    for (auto it = children.rbegin(); it != children.rend(); it++)
+    {
+        GuiElement* element = *it;
+
+        if (element->visible && element->enabled && element->rect.contains(mouse_position))
+        {
+            GuiElement* hovered = element->getHoverElement(mouse_position);
+            if (hovered) return hovered;
+            if (element->intercepts_pointer) return element;
+        }
+    }
+
+    return nullptr;
+}
+
 void GuiContainer::updateLayout(const sp::Rect& rect)
 {
     this->rect = rect;

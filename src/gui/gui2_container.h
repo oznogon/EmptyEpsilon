@@ -70,7 +70,7 @@ protected:
     virtual void drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& window);
     virtual GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
     virtual GuiElement* executeScrollOnElement(glm::vec2 position, float value);
-    GuiElement* getHoverElement(glm::vec2 mouse_position);
+    virtual GuiElement* getHoverElement(glm::vec2 mouse_position);
 
     // Access GuiElement/GuiContainer protected members in subclass.
     static void clearElementOwner(GuiElement* element);
