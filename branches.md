@@ -49,3 +49,8 @@ on-scan-callbacks 20260412 -- remerge
 refactor-guiprogressbar 20260412 -- remerge
 gm-tweaks-parity-guiscrollcontainer 20260412 -- remerge
 new-sp-line-drawing 20260412 -- remerge
+
+master 20260417 -- remerge
+script-command-todos 20260417
+tweak-script_docs 20260417
+
