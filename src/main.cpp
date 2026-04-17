@@ -20,6 +20,7 @@
 #include "main.h"
 #include "epsilonServer.h"
 #include "httpScriptAccess.h"
+#include "prometheusMetrics.h"
 #include "preferenceManager.h"
 #include "networkRecorder.h"
 #include "tutorialGame.h"
@@ -153,6 +154,14 @@ int main(int argc, char** argv)
         LOG(INFO) << "Enabling HTTP script access on port: " << port_nr;
         LOG(INFO) << "NOTE: This is potentially a risk!";
         new EEHttpServer(port_nr, PreferencesManager::get("www_directory", "www"));
+    }
+
+    if (PreferencesManager::get("metricsserver").toInt() != 0)
+    {
+        int metrics_port = PreferencesManager::get("metricsserver").toInt();
+        if (metrics_port < 10) metrics_port = 80;
+        LOG(Info, "Prometheus metrics endpoint enabled on port ", metrics_port);
+        new PrometheusMetricsServer(metrics_port);
     }
 
     string theme_name = PreferencesManager::get("guitheme", "default");

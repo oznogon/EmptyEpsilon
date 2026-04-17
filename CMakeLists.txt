@@ -225,6 +225,7 @@ set(MAIN_SOURCES
     src/epsilonServer.cpp
     src/particleEffect.cpp
     src/httpScriptAccess.cpp
+    src/prometheusMetrics.cpp
     src/packResourceProvider.cpp
     src/gameGlobalInfo.cpp
     src/GMActions.cpp
@@ -545,6 +546,7 @@ set(MAIN_SOURCES
     src/hardware/hardwareOutputDevice.h
     src/hardware/serialDriver.h
     src/httpScriptAccess.h
+    src/prometheusMetrics.h
     src/main.h
     src/math/centerOfMass.h
     src/math/triangulate.h
