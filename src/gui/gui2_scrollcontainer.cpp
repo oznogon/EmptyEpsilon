@@ -124,10 +124,9 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
         ->setValue(static_cast<int>(scroll_offset));
 }
 
-void GuiScrollContainer::drawElements(glm::vec2 mouse_position, GuiElement* /* hovered_element */, sp::Rect /* parent_rect */, sp::RenderTarget& renderer)
+void GuiScrollContainer::drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect /* parent_rect */, sp::RenderTarget& renderer)
 {
     sp::Rect content_rect = getContentRect();
-    GuiElement* hovered = getHoverElement(mouse_position);
 
     // Clip child rendering to the visible content area.
     renderer.pushClipRegion(content_rect);
@@ -161,12 +160,12 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, GuiElement* /* h
             continue;
         }
 
-        setElementHover(element, element->getRect().contains(mouse_position));
+        setElementHover(element, element == hovered_element);
 
         if (element->isVisible())
         {
             element->onDraw(renderer);
-            callDrawElements(element, mouse_position, hovered, element->getRect(), renderer);
+            callDrawElements(element, mouse_position, hovered_element, element->getRect(), renderer);
         }
 
         ++it;
@@ -179,9 +178,9 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, GuiElement* /* h
     scrollbar_v->setVisible(scrollbar_v->isVisible() && mode != ScrollMode::None);
     if (scrollbar_v->isVisible())
     {
-        setElementHover(scrollbar_v, scrollbar_v->getRect().contains(mouse_position));
+        setElementHover(scrollbar_v, scrollbar_v == hovered_element);
         scrollbar_v->onDraw(renderer);
-        callDrawElements(scrollbar_v, mouse_position, hovered, scrollbar_v->getRect(), renderer);
+        callDrawElements(scrollbar_v, mouse_position, hovered_element, scrollbar_v->getRect(), renderer);
     }
 }
 
