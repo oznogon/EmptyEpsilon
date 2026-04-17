@@ -53,4 +53,4 @@ new-sp-line-drawing 20260412 -- remerge
 master 20260417 -- remerge
 script-command-todos 20260417
 tweak-script_docs 20260417
-
+fix-hover 20260417 -- patch required to handle GuiScrollContainer hover
