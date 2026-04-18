@@ -74,7 +74,7 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     const float max_popup_height = button_height * 10.0f;
     float popup_height = std::min(static_cast<float>(entries.size()) * button_height, max_popup_height);
     float top = rect.position.y;
-    top = std::clamp(top, 0.0f, 900.0f - popup_height);
+    top = std::clamp(top, 0.0f, renderer.getVirtualSize().y - popup_height);
 
     // Size and position the popup, factoring its override width if set.
     setPopupWidth(popup_width);
