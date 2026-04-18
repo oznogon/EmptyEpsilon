@@ -20,6 +20,8 @@ elapsed = 0.0
 carrier = PlayerSpaceship()
     :setFaction("Human Navy")
     :setTemplate("Saipan")
+    :setRepairDocked(false)
+    :setRestocksMissilesDocked(false)
 fighter_classes = {
     "Striker",
     "MT52 Hornet",
