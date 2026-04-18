@@ -66,6 +66,7 @@ void PreferencesManager::save(string filename)
     {
         fprintf(f, "# Empty Epsilon Settings\n# This file will be overwritten by EE.\n\n");
         fprintf(f, "# Include the following line to enable an experimental http server:\n# httpserver=8080\n\n");
+        fprintf(f, "# Include the following line to enable a Prometheus metrics endpoint:\n# metricsserver=9100\n\n");
         fprintf(f, "# Values for ship_window_flags and main_screen_flags are: spacedust:1, headings:2, callsigns:4 \n# Add them for any combination. Example: ship_window_flags=7 for all three\n\n");
         std::vector<string> keys;
         for(std::unordered_map<string, string>::iterator i = preference.begin(); i != preference.end(); i++)

@@ -4,9 +4,12 @@
 #include "soundManager.h"
 #include "multiplayer_client.h"
 #include "preferenceManager.h"
+#include "prometheusMetrics.h"
 #include "GMActions.h"
 #include "main.h"
 #include "config.h"
+
+static PrometheusMetricsServer* metrics_server = nullptr;
 
 
 EpsilonServer::EpsilonServer(int server_port)
@@ -14,6 +17,11 @@ EpsilonServer::EpsilonServer(int server_port)
 {
     if (game_server)
     {
+        int metrics_port = PreferencesManager::get("metricsserver").toInt();
+        if (metrics_port > 0 && !metrics_server)
+            metrics_server = new PrometheusMetricsServer(metrics_port);
+        setCollectNetworkStats(metrics_port > 0);
+
         new GameGlobalInfo();
         new GameMasterActions();
         PlayerInfo* info = new PlayerInfo();
