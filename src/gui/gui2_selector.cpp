@@ -53,8 +53,7 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     float height = entries.size() * 50;
     if (selection_index >= 0)
         top -= selection_index * 50;
-    top = std::max(0.0f, top);
-    top = std::min(900.0f - height, top);
+    top = std::clamp(top, 0.0f, renderer.getVirtualSize().y - height);
     popup->setPosition(rect.position.x, top, sp::Alignment::TopLeft)->setSize(rect.size.x, height);
 }
 
