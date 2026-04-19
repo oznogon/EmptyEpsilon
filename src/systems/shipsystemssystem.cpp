@@ -10,6 +10,7 @@
 #include "components/impulse.h"
 #include "components/shields.h"
 #include "components/coolant.h"
+#include "components/dockingbaysystem.h"
 
 
 void ShipSystemsSystem::update(float delta)
@@ -36,6 +37,8 @@ void ShipSystemsSystem::update(float delta)
         if (system.entries.size() > 1)
             updateSystem(entity, system.rear_system, delta);
     }
+    for(auto [entity, system] : sp::ecs::Query<DockingBaySystem>())
+        updateSystem(system, delta, entity.hasComponent<Coolant>());
 }
 
 void ShipSystemsSystem::updateSystem(sp::ecs::Entity entity, ShipSystem& system, float delta)

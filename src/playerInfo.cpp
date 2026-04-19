@@ -108,6 +108,13 @@ static const uint16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
+static const uint16_t CMD_LAUNCH_INTERNAL = 0x002D;
+static const uint16_t CMD_MOVE_INTERNAL_TO_BERTH = 0x002E;
+static const uint16_t CMD_SET_BERTH_TRANSFER_DIRECTION = 0x002F;
+static const uint16_t CMD_TRANSFER_MISSILE = 0x0030;
+static const uint16_t CMD_TRANSFER_PROBE = 0x0031;
+static const uint16_t CMD_GENERATE_SUPPLY_DROP = 0x0032;
+static const uint16_t CMD_CANCEL_INTERNAL_MOVE = 0x0033;
 
 static const uint16_t CMD_LAUNCH_INTERNAL = 0x002D;
 static const uint16_t CMD_MOVE_INTERNAL_TO_BERTH = 0x002E;

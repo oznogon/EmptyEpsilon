@@ -420,6 +420,7 @@ Keys::Keys() :
         {"ENGINEERING_SELECT_SYSTEM_FRONT_SHIELD", "8"},
         {"ENGINEERING_SELECT_SYSTEM_REAR_SHIELD", "9"},
         {"ENGINEERING_SELECT_SYSTEM_UTILITY_BEAM"},
+        {"ENGINEERING_SELECT_SYSTEM_DOCKING_BAY"},
     },
     engineering_select_system_next("ENGINEERING_SELECT_SYSTEM_NEXT", "Keypad +"),
     engineering_select_system_prev("ENGINEERING_SELECT_SYSTEM_PREV", "Keypad -"),
@@ -456,6 +457,7 @@ Keys::Keys() :
         {"ENGINEERING_SET_SYSTEM_POWER_FRONT_SHIELD"},
         {"ENGINEERING_SET_SYSTEM_POWER_REAR_SHIELD"},
         {"ENGINEERING_SET_SYSTEM_POWER_UTILITY_BEAM"},
+        {"ENGINEERING_SET_SYSTEM_POWER_DOCKING_BAY"},
     },
     engineering_set_coolant_for_system{
         {"ENGINEERING_SET_SYSTEM_COOLANT_REACTOR"},
@@ -468,6 +470,7 @@ Keys::Keys() :
         {"ENGINEERING_SET_SYSTEM_COOLANT_FRONT_SHIELD"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_REAR_SHIELD"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_UTILITY_BEAM"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_DOCKING_BAY"},
     },
 
     // Relay crew screen
@@ -1008,6 +1011,7 @@ void Keys::init()
     engineering_select_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select front shields system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select rear shields system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::UtilityBeam)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select utility beam system"));
+    engineering_select_system[static_cast<int>(ShipSystem::Type::DockingBay)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select docking bay system"));
     engineering_select_system_next.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select next system"));
     engineering_select_system_next.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
@@ -1162,6 +1166,7 @@ void Keys::init()
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields power (joystick)"));
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields power (joystick)"));
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::UtilityBeam)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set utility beam power (joystick)"));
+    engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::DockingBay)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set docking bay power (joystick)"));
 
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::Reactor)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::BeamWeapons)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam weapon coolant (joystick)"));
@@ -1173,6 +1178,7 @@ void Keys::init()
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::UtilityBeam)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set utility beam coolant (joystick)"));
+    engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::DockingBay)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set docking bay coolant (joystick)"));
 
     // Relay
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));

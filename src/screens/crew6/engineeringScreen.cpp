@@ -234,6 +234,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     system_rows[int(ShipSystem::Type::FrontShield)].button->setIcon("gui/icons/shields-fore");
     system_rows[int(ShipSystem::Type::RearShield)].button->setIcon("gui/icons/shields-aft");
     system_rows[int(ShipSystem::Type::UtilityBeam)].button->setIcon("gui/icons/system_utilitybeam");
+    system_rows[int(ShipSystem::Type::DockingBay)].button->setIcon("gui/icons/docking");
 
     system_effects_container = new GuiElement(system_config_container, "");
     system_effects_container
@@ -517,6 +518,9 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                                 addSystemEffect(tr("Damage negate"), toNearbyIntString(damage_negate * 100.0f) + "%");
                         }
                     }
+                    break;
+                case ShipSystem::Type::DockingBay:
+                    addSystemEffect(tr("docking","Docking bay effectiveness"), toNearbyIntString(effectiveness * 100.0f) + "%");
                     break;
                 default:
                     break;

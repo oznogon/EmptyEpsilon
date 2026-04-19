@@ -20,6 +20,7 @@ public:
         FrontShield,
         RearShield,
         UtilityBeam,
+        DockingBay,
         COUNT
     };
     static constexpr int COUNT = static_cast<int>(Type::COUNT);

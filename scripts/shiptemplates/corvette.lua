@@ -48,7 +48,7 @@ variation:setTubeDirection(4, 180):setWeaponTubeExclusiveFor(4, "Mine")
 
 variation:addRoomSystem(1, 0, 2, 1, "Maneuver");
 variation:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-variation:addRoom(2, 2, 2, 1);
+variation:addRoomSystem(2, 2, 2, 1, "DockingBay");
 
 variation:addRoomSystem(0, 3, 1, 2, "RearShield");
 variation:addRoomSystem(1, 3, 2, 2, "Reactor");
@@ -140,7 +140,7 @@ template:addRoomSystem(1, 4, 2, 1, "Reactor");
 template:addRoomSystem(2, 5, 2, 1, "Warp");
 template:addRoomSystem(3, 1, 3, 2, "JumpDrive");
 template:addRoomSystem(3, 3, 3, 2, "FrontShield");
-template:addRoom(6, 2, 6, 2);
+template:addRoomSystem(6, 2, 6, 2, "DockingBay");
 template:addRoomSystem(9, 1, 2, 1, "MissileSystem");
 template:addRoomSystem(9, 4, 2, 1, "Impulse");
 
@@ -194,7 +194,7 @@ template:addRoomSystem(1, 4, 2, 1, "Reactor");
 template:addRoomSystem(2, 5, 2, 1, "Warp");
 template:addRoomSystem(3, 1, 3, 2, "JumpDrive");
 template:addRoomSystem(3, 3, 3, 2, "FrontShield");
-template:addRoom(6, 2, 6, 2);
+template:addRoomSystem(6, 2, 6, 2, "DockingBay");
 template:addRoomSystem(9, 1, 2, 1, "MissileSystem");
 template:addRoomSystem(9, 4, 2, 1, "Impulse");
 
@@ -340,8 +340,10 @@ variation:addRoomSystem(5,2,1,2, "Maneuver")
 variation:addRoomSystem(2,2,1,2, "RearShield")
 variation:addRoomSystem(0,1,2,4, "Beamweapons")
 variation:addRoomSystem(8,2,1,2, "FrontShield")
+variation:addRoomSystem(0, 0, 1, 1, "DockingBay")
 variation:addRoomSystem(9,1,2,4, "Impulse")
 
+variation:addDoor(0, 1, true)
 variation:addDoor(3, 3, true)
 variation:addDoor(6, 3, true)
 variation:addDoor(5, 2, false)
@@ -406,7 +408,7 @@ template:addRoomSystem(2, 3, 2, 2, "JumpDrive")
 template:addRoomSystem(7, 3, 3, 2, "FrontShield")
 template:addRoomSystem(1, 5, 2, 2, "Reactor")
 template:addRoomSystem(3, 5, 3, 1, "MissileSystem")
-template:addRoom(6, 5, 2, 1)
+template:addRoomSystem(6, 5, 2, 1, "DockingBay")
 template:addRoomSystem(0, 7, 4, 1, "RearShield")
 --				HC,VC, true = horizontal door, false = vertical door
 template:addDoor(1, 1, true)

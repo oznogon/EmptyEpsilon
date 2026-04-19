@@ -1,6 +1,7 @@
 #include "systems/docking.h"
 #include "components/ai.h"
 #include "components/coolant.h"
+#include "components/dockingbaysystem.h"
 #include "components/collision.h"
 #include "components/impulse.h"
 #include "components/maneuveringthrusters.h"
@@ -70,6 +71,10 @@ void DockingSystem::update(float delta)
 
                 if (auto bay = carrier_entity.getComponent<DockingBay>())
                 {
+                    float bay_effectiveness = 1.0f;
+                    if (auto dbs = carrier_entity.getComponent<DockingBaySystem>())
+                        bay_effectiveness = dbs->getSystemEffectiveness();
+
                     // Determine whether we're in a docking bay berth.
                     DockingBay::Berth my_berth;
                     bool is_berthed = false;
@@ -102,7 +107,7 @@ void DockingSystem::update(float delta)
                         auto my_reactor = carrier_entity.getComponent<Reactor>();
                         auto docked_hull = entity.getComponent<Hull>();
                         if (!docked_hull) continue;
-                        const float energy_transfer = my_berth.transfer_rate * delta;
+                        const float energy_transfer = my_berth.transfer_rate * delta * bay_effectiveness;
 
                         // Repair hull, returning any remaining energy.
                         auto repair_hull = [&](float& transfer_remaining)
@@ -189,7 +194,7 @@ void DockingSystem::update(float delta)
                         auto docked_reactor = entity.getComponent<Reactor>();
                         auto docked_pickup = entity.getComponent<PickupCallback>();
                         if (!my_reactor && !docked_reactor) continue;
-                        float energy_transfer = my_berth.transfer_rate * delta;
+                        float energy_transfer = my_berth.transfer_rate * delta * bay_effectiveness;
 
                         // Transfer energy in the configured direction if both:
                         // - the recipient has a reactor or is a pickup entity
@@ -201,17 +206,24 @@ void DockingSystem::update(float delta)
                         {
                             if (!my_reactor) continue;
 
+                            bool transferred = false;
                             if (docked_reactor)
                             {
                                 if (docked_reactor->energy >= docked_reactor->max_energy) continue;
                                 if (!my_reactor->useEnergy(energy_transfer)) continue;
                                 docked_reactor->energy = std::min(docked_reactor->max_energy, docked_reactor->energy + energy_transfer);
+                                transferred = true;
                             }
                             else if (docked_pickup)
                             {
                                 if (!my_reactor->useEnergy(energy_transfer)) continue;
                                 docked_pickup->give_energy += energy_transfer;
+                                transferred = true;
                             }
+
+                            if (transferred)
+                                if (auto dbs = carrier_entity.getComponent<DockingBaySystem>())
+                                    dbs->addHeat(energy_transfer * 0.01f);
                         }
                         else if (my_reactor && my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToCarrier)
                         {
@@ -231,7 +243,12 @@ void DockingSystem::update(float delta)
                                 can_transfer = true;
                             }
 
-                            if (can_transfer) my_reactor->energy = std::min(my_reactor->max_energy, my_reactor->energy + energy_transfer);
+                            if (can_transfer)
+                            {
+                                my_reactor->energy = std::min(my_reactor->max_energy, my_reactor->energy + energy_transfer);
+                                if (auto dbs = carrier_entity.getComponent<DockingBaySystem>())
+                                    dbs->addHeat(energy_transfer * 0.01f);
+                            }
                         }
                     }
 
@@ -240,62 +257,64 @@ void DockingSystem::update(float delta)
                         auto my_coolant = carrier_entity.getComponent<Coolant>();
                         auto docked_coolant = entity.getComponent<Coolant>();
                         if (!my_coolant && !docked_coolant) continue;
-                        const float heat_transfer = my_berth.transfer_rate * delta;
+                        const float heat_transfer = my_berth.transfer_rate * delta * bay_effectiveness;
 
-                        // Transfer heat in the configured direction if both
-                        // the recipient has coolant and the sender has heat.
-                        // Ships without coolant are treated as if they have no
-                        // heat. The berth's transfer_rate is in heat/sec.
-                        auto transfer_heat = [&](sp::ecs::Entity source_entity, sp::ecs::Entity destination_entity, Coolant* source_coolant, Coolant* destination_coolant)
+                        // Extract heat from source entity's systems, and return
+                        // the amount actually extracted.
+                        auto extract_heat = [&](sp::ecs::Entity source_entity, Coolant* source_coolant) -> float
                         {
-                            if (!source_coolant || !destination_coolant) return;
+                            if (!source_coolant) return 0.0f;
 
-                            float transfer_remaining = heat_transfer;
-
-                            // Extract heat from source systems.
+                            float remaining = heat_transfer;
                             for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
                             {
-                                if (transfer_remaining <= 0.0f) break;
-
-                                if (auto source_system = ShipSystem::get(source_entity, static_cast<ShipSystem::Type>(i)))
+                                if (remaining <= 0.0f) break;
+                                if (auto src_sys = ShipSystem::get(source_entity, static_cast<ShipSystem::Type>(i)))
                                 {
-                                    if (source_system->heat_level > 0.0f)
+                                    if (src_sys->heat_level > 0.0f)
                                     {
-                                        float amount_transferred = std::min(transfer_remaining, source_system->heat_level);
-
-                                        transfer_remaining = std::max(0.0f, transfer_remaining - amount_transferred);
-                                        source_system->heat_level = std::max(0.0f, source_system->heat_level - amount_transferred);
+                                        float taken = std::min(remaining, src_sys->heat_level);
+                                        remaining = std::max(0.0f, remaining - taken);
+                                        src_sys->heat_level = std::max(0.0f, src_sys->heat_level - taken);
                                     }
                                 }
                             }
+                            return heat_transfer - remaining;
+                        };
 
-                            // If no heat was extracted, nothing to distribute.
-                            if (transfer_remaining == heat_transfer) return;
+                        // Distribute extracted heat evenly across the
+                        // destination entity's systems.
+                        auto distribute_heat = [&](sp::ecs::Entity destination_entity, Coolant* destination_coolant, float amount)
+                        {
+                            if (!destination_coolant || amount <= 0.0f) return;
 
-                            // Count destination systems.
                             float system_count = 0.0f;
                             for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
-                            {
-                                auto destination_system = ShipSystem::get(destination_entity, static_cast<ShipSystem::Type>(i));
-                                if (destination_system) system_count++;
-                            }
-
+                                if (ShipSystem::get(destination_entity, static_cast<ShipSystem::Type>(i))) system_count++;
                             if (system_count <= 0.0f) return;
 
-                            // Distribute heat evenly across destination systems.
-                            float amount_vented = (heat_transfer - transfer_remaining) / system_count;
-
+                            float per_system = amount / system_count;
                             for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
-                            {
-                                if (auto destination_system = ShipSystem::get(destination_entity, static_cast<ShipSystem::Type>(i)))
-                                    destination_system->addHeat(amount_vented);
-                            }
+                                if (auto dst_sys = ShipSystem::get(destination_entity, static_cast<ShipSystem::Type>(i)))
+                                    dst_sys->addHeat(per_system);
                         };
 
                         if (my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToDocked)
-                            transfer_heat(carrier_entity, entity, my_coolant, docked_coolant);
+                        {
+                            float extracted = extract_heat(carrier_entity, my_coolant);
+                            distribute_heat(entity, docked_coolant, extracted);
+                        }
                         else if (my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToCarrier)
-                            transfer_heat(entity, carrier_entity, docked_coolant, my_coolant);
+                        {
+                            float extracted = extract_heat(entity, docked_coolant);
+                            // If the carrier has a DockingBaySystem, route all
+                            // vented heat into it rather than spreading it across
+                            // all carrier systems.
+                            if (auto dbs = carrier_entity.getComponent<DockingBaySystem>())
+                                dbs->addHeat(extracted);
+                            else
+                                distribute_heat(carrier_entity, my_coolant, extracted);
+                        }
                     }
 
                     // Use DockingBay flag for scan probe restocking if set.
@@ -377,6 +396,10 @@ void DockingSystem::update(float delta)
     // Process in-progress berth moves
     for (auto [carrier, bay] : sp::ecs::Query<DockingBay>())
     {
+        float bay_effectiveness = 1.0f;
+        if (auto dbs = carrier.getComponent<DockingBaySystem>())
+            bay_effectiveness = dbs->getSystemEffectiveness();
+
         for (size_t i = 0; i < bay.berths.size(); i++)
         {
             auto& berth = bay.berths[i];
@@ -398,8 +421,8 @@ void DockingSystem::update(float delta)
                 }
 
                 // Update progress
-                berth.move_progress += delta;
-                target_berth.move_progress += delta;
+                berth.move_progress += delta * bay_effectiveness;
+                target_berth.move_progress += delta * bay_effectiveness;
 
                 // Check if move completed
                 if (berth.move_progress >= berth.move_time)

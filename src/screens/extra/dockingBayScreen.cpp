@@ -48,7 +48,13 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Exit if we don't have a docking bay.
-    if (!my_spaceship.hasComponent<DockingBay>()) return;
+    if (!my_spaceship.hasComponent<DockingBay>())
+    {
+        (new GuiLabel(this, "NO_DOCKING_BAY_LABEL", tr("dockingbay", "No docking bay"), 30.0f))
+            ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+            ->setSize(300.0f, 50.0f);
+        return;
+    }
 
     // Layout elements
     GuiElement* layout = new GuiElement(this, "DOCKING_BAY_LAYOUT");
@@ -319,8 +325,8 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     energy_transfer_direction = new GuiSlider(energy_transfer_row, "DOCKING_BAY_ENERGY_SLIDER",
-        static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
         static_cast<float>(DockingBay::Berth::TransferDirection::ToDocked),
+        static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
         static_cast<float>(DockingBay::Berth::TransferDirection::None),
         [this](float value)
         {
@@ -349,7 +355,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiElement(energy_transfer_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "to carrier"), 20.0f))
+    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "to berth"), 20.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(150.0f, GuiElement::GuiSizeMax);
 
@@ -357,7 +363,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAlignment(sp::Alignment::Center)
         ->setSize(100.0f, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "to berth"), 20.0f))
+    (new GuiLabel(energy_transfer_labels_row, "", tr("dockingbay", "to carrier"), 20.0f))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(150.0f, GuiElement::GuiSizeMax);
 
@@ -385,8 +391,8 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     thermal_venting_direction = new GuiSlider(vent_controls_row, "DOCKING_BAY_VENT_SLIDER",
-        static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
         static_cast<float>(DockingBay::Berth::TransferDirection::ToDocked),
+        static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
         static_cast<float>(DockingBay::Berth::TransferDirection::None),
         [this](float value)
         {
@@ -415,7 +421,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiElement(thermal_venting_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(thermal_venting_labels_row, "", tr("dockingbay", "to carrier"), 20.0f))
+    (new GuiLabel(thermal_venting_labels_row, "", tr("dockingbay", "to berth"), 20.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(150.0f, GuiElement::GuiSizeMax);
 
@@ -423,7 +429,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAlignment(sp::Alignment::Center)
         ->setSize(100.0f, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(thermal_venting_labels_row, "", tr("dockingbay", "to berth"), 20.0f))
+    (new GuiLabel(thermal_venting_labels_row, "", tr("dockingbay", "to carrier"), 20.0f))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(150.0f, GuiElement::GuiSizeMax);
 
@@ -490,10 +496,10 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         system_rows[int(ShipSystem::Type::JumpDrive)].label->setIcon("gui/icons/system_jumpdrive");
         system_rows[int(ShipSystem::Type::FrontShield)].label->setIcon("gui/icons/shields-fore");
         system_rows[int(ShipSystem::Type::RearShield)].label->setIcon("gui/icons/shields-aft");
+        system_rows[int(ShipSystem::Type::UtilityBeam)].label->setIcon("gui/icons/system_utilitybeam");
+        system_rows[int(ShipSystem::Type::DockingBay)].label->setIcon("gui/icons/docking");
     };
     setSystemRowIcons(thermal_rows);
-
-    // TODO: More functionality if there's a docking bay system to vent into.
 
     // Repair-specific berth controls.
     repair_controls = new GuiElement(right_column, "DOCKING_BAY_REPAIR_CONTROLS");
@@ -517,8 +523,8 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     repair_prioritization_direction = new GuiSlider(repair_controls_row, "DOCKING_BAY_REPAIR_SLIDER",
-        static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
         static_cast<float>(DockingBay::Berth::TransferDirection::ToDocked),
+        static_cast<float>(DockingBay::Berth::TransferDirection::ToCarrier),
         static_cast<float>(DockingBay::Berth::TransferDirection::None),
         [this](float value)
         {
@@ -547,7 +553,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiElement(repair_prioritization_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(repair_prioritization_labels_row, "", tr("dockingbay", "prioritize systems"), 20.0f))
+    (new GuiLabel(repair_prioritization_labels_row, "", tr("dockingbay", "prioritize hull"), 20.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(150.0f, GuiElement::GuiSizeMax);
 
@@ -555,7 +561,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAlignment(sp::Alignment::Center)
         ->setSize(100.0f, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(repair_prioritization_labels_row, "", tr("dockingbay", "prioritize hull"), 20.0f))
+    (new GuiLabel(repair_prioritization_labels_row, "", tr("dockingbay", "prioritize systems"), 20.0f))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(150.0f, GuiElement::GuiSizeMax);
 

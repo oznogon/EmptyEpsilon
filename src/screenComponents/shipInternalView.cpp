@@ -227,6 +227,9 @@ void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
         case ShipSystem::Type::RearShield:
             icon = "gui/icons/shields-aft";
             break;
+        case ShipSystem::Type::DockingBay:
+            icon = "gui/icons/docking";
+            break;
         case ShipSystem::Type::UtilityBeam:
             icon = "gui/icons/system_utilitybeam";
             break;

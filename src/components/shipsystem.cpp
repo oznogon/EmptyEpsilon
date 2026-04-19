@@ -10,6 +10,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/jumpdrive.h"
 #include "components/warpdrive.h"
+#include "components/dockingbaysystem.h"
 
 
 float ShipSystem::getSystemEffectiveness()
@@ -89,6 +90,8 @@ ShipSystem* ShipSystem::get(sp::ecs::Entity entity, Type type)
         }
     case Type::UtilityBeam:
         return entity.getComponent<UtilityBeam>();
+    case Type::DockingBay:
+        return entity.getComponent<DockingBaySystem>();
     }
     return nullptr;
 }
@@ -107,6 +110,7 @@ string getSystemName(ShipSystem::Type system)
     case ShipSystem::Type::FrontShield: return "frontshield";
     case ShipSystem::Type::RearShield: return "rearshield";
     case ShipSystem::Type::UtilityBeam: return "utilitybeam";
+    case ShipSystem::Type::DockingBay: return "dockingbay";
     default:
         return "UNKNOWN";
     }
@@ -126,6 +130,7 @@ string getLocaleSystemName(ShipSystem::Type system)
     case ShipSystem::Type::FrontShield: return tr("system", "Front Shield Generator");
     case ShipSystem::Type::RearShield: return tr("system", "Rear Shield Generator");
     case ShipSystem::Type::UtilityBeam: return tr("system", "Utility Beam");
+    case ShipSystem::Type::DockingBay: return tr("system", "Docking Bay");
     default:
         return "UNKNOWN";
     }

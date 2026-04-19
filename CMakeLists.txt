@@ -345,6 +345,7 @@ set(MAIN_SOURCES
     src/components/coolant.h
     src/components/shipsystem.h
     src/components/shipsystem.cpp
+    src/components/dockingbaysystem.h
     src/components/impulse.h
     src/components/maneuveringthrusters.h
     src/components/warpdrive.h
@@ -481,6 +482,8 @@ set(MAIN_SOURCES
     src/multiplayer/jumpdrive.cpp
     src/multiplayer/docking.h
     src/multiplayer/docking.cpp
+    src/multiplayer/dockingbaysystem.h
+    src/multiplayer/dockingbaysystem.cpp
     src/multiplayer/coolant.h
     src/multiplayer/coolant.cpp
     src/multiplayer/reactor.h

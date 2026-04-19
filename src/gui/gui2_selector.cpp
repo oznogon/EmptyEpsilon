@@ -105,7 +105,21 @@ bool GuiSelector::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position
 {
     return true;
 }
-
+/*
+            if (e.icon_name != "")
+            {
+                renderer.drawSpriteClipped(
+                    e.icon_name,               // icon
+                    glm::vec2(                 // center position
+                        button_rect.position.x + button_rect.size.y * 0.8f,
+                        button_rect.position.y + button_rect.size.y * 0.5f
+                    ),
+                    button_rect.size.y * 0.6f, // size
+                    rect,                      // clipping rectangle
+                    f->color                   // color
+                );
+            }
+*/
 void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position))

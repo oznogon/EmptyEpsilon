@@ -191,6 +191,7 @@ template<> struct Convert<ShipSystem::Type> {
         case ShipSystem::Type::FrontShield: lua_pushstring(L, "frontshield"); break;
         case ShipSystem::Type::RearShield: lua_pushstring(L, "rearshield"); break;
         case ShipSystem::Type::UtilityBeam: lua_pushstring(L, "utilitybeam"); break;
+        case ShipSystem::Type::DockingBay: lua_pushstring(L, "dockingbay"); break;
         default: lua_pushstring(L, "none"); break;
         }
         return 1;
@@ -219,6 +220,8 @@ template<> struct Convert<ShipSystem::Type> {
             return ShipSystem::Type::RearShield;
         else if (str == "utilitybeam")
             return ShipSystem::Type::UtilityBeam;
+        else if (str == "dockingbay")
+            return ShipSystem::Type::DockingBay;
         luaL_error(L, "Unknown ShipSystem::Type: %s", str.c_str());
         return ShipSystem::Type::None;
     }
