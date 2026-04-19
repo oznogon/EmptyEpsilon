@@ -48,7 +48,13 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Exit if we don't have a docking bay.
-    if (!my_spaceship.hasComponent<DockingBay>()) return;
+    if (!my_spaceship.hasComponent<DockingBay>())
+    {
+        (new GuiLabel(this, "NO_DOCKING_BAY_LABEL", tr("dockingbay", "No docking bay"), 30.0f))
+            ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+            ->setSize(300.0f, 50.0f);
+        return;
+    }
 
     // Layout elements
     GuiElement* layout = new GuiElement(this, "DOCKING_BAY_LAYOUT");
