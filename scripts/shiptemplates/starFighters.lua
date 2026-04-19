@@ -52,6 +52,9 @@ variation:addRoomSystem(5, 1, 1, 2, "FrontShield");
 variation:addRoomSystem(1, 3, 2, 1, "MissileSystem");
 variation:addRoomSystem(3, 3, 1, 1, "Impulse");
 
+variation:addRoomSystem(0, 0, 1, 1, "DockingBay")
+
+variation:addDoor(1, 0, false)
 variation:addDoor(2, 1, true);
 variation:addDoor(3, 1, true);
 variation:addDoor(1, 1, false);
@@ -162,7 +165,7 @@ variation:addRoomSystem(4,3,5,1,"JumpDrive")
 variation:addRoomSystem(0,4,1,3,"Impulse")
 variation:addRoomSystem(3,4,2,1,"Maneuver")
 variation:addRoomSystem(1,5,3,1,"FrontShield")
-variation:addRoom(4,5,2,1)
+variation:addRoomSystem(4,5,2,1,"DockingBay")
 
 variation:addDoor(1,1,false)
 variation:addDoor(1,5,false)

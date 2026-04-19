@@ -52,7 +52,7 @@ variation:setWeaponStorage("EMP", 3)
 
 variation:addRoomSystem(1, 0, 2, 1, "Maneuver");
 variation:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-variation:addRoom(2, 2, 2, 1);
+variation:addRoomSystem(2, 2, 2, 1, "DockingBay");
 
 variation:addRoomSystem(0, 3, 1, 2, "RearShield");
 variation:addRoomSystem(1, 3, 2, 2, "Reactor");
@@ -161,7 +161,7 @@ template:addRoomSystem( 2, 3, 1, 1, "RearShield")
 template:addRoomSystem( 3, 0, 1, 1, "MissileSystem")
 template:addRoomSystem( 3, 3, 1, 1, "Impulse")
 template:addRoomSystem( 3, 1, 2, 1, "Maneuver")
-template:addRoom( 3, 2, 2, 1)
+template:addRoomSystem( 3, 2, 2, 1, "DockingBay")
 template:addRoomSystem( 5, 1, 2, 2, "Beamweapons")
 
 --(H)oriz, (V)ert H, V, true = horizontal
@@ -232,7 +232,7 @@ variation:setTubeDirection(7, 190):setWeaponTubeExclusiveFor(7, "Mine")
 
 variation:setRepairCrewCount(2)
 variation:addRoomSystem(0, 0, 1, 4, "RearShield")
-variation:addRoom(1, 0, 1, 1)
+variation:addRoomSystem(1, 0, 1, 1, "DockingBay")
 variation:addRoomSystem(1, 1, 3, 2, "MissileSystem")
 variation:addRoom(1, 3, 1, 1)
 
@@ -339,7 +339,7 @@ variation:setWeaponStorage("Nuke", 1)
 
 variation:setRepairCrewCount(8)
 
-variation:addRoom(1, 0, 6, 1)
+variation:addRoomSystem(1, 0, 6, 1, "DockingBay")
 variation:addRoom(1, 5, 6, 1)
 variation:addRoomSystem(0, 1, 2, 2, "RearShield")
 variation:addRoomSystem(0, 3, 2, 2, "MissileSystem")
@@ -394,7 +394,7 @@ template:setRepairCrewCount(8)
 template:addRoomSystem( 0, 1, 2, 4, "Impulse")
 template:addRoomSystem( 2, 0, 2, 2, "RearShield")
 template:addRoomSystem( 2, 2, 2, 2, "Warp")
-template:addRoom( 2, 4, 2, 2)
+template:addRoomSystem( 2, 4, 2, 2, "DockingBay")
 template:addRoomSystem( 4, 1, 1, 4, "Maneuver")
 template:addRoom( 5, 0, 2, 2)
 template:addRoomSystem( 5, 2, 2, 2, "JumpDrive")

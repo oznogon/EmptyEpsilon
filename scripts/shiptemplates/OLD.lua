@@ -27,7 +27,7 @@ template:setWeaponStorage("EMP", 6)
 
 template:addRoomSystem(1, 0, 2, 1, "Maneuver");
 template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-template:addRoom(2, 2, 2, 1);
+template:addRoomSystem(2, 2, 2, 1, "DockingBay");
 
 template:addRoomSystem(0, 3, 1, 2, "RearShield");
 template:addRoomSystem(1, 3, 2, 2, "Reactor");
@@ -87,7 +87,7 @@ template:setWeaponStorage("EMP", 10)
 
 template:addRoomSystem(1, 0, 2, 1, "Maneuver");
 template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-template:addRoom(2, 2, 2, 1);
+template:addRoomSystem(2, 2, 2, 1, "DockingBay");
 
 template:addRoomSystem(0, 3, 1, 2, "RearShield");
 template:addRoomSystem(1, 3, 2, 2, "Reactor");
@@ -144,6 +144,9 @@ template:addRoomSystem(5, 1, 1, 2, "FrontShield");
 template:addRoomSystem(1, 3, 2, 1, "MissileSystem");
 template:addRoomSystem(3, 3, 1, 1, "Impulse");
 
+template:addRoomSystem(0, 0, 1, 1, "DockingBay")
+
+template:addDoor(1, 0, false)
 template:addDoor(2, 1, true);
 template:addDoor(3, 1, true);
 template:addDoor(1, 1, false);
@@ -207,7 +210,10 @@ variation:addRoomSystem( 3, 2, 3, 1, "Reactor")
 variation:addRoomSystem( 3, 3, 2, 1, "MissileSystem")
 variation:addRoomSystem( 6, 1, 1, 2, "Maneuver")
 
+variation:addRoomSystem( 0, 0, 1, 1, "DockingBay")
+
 -- (H)oriz, (V)ert H, V, true = horizontal
+variation:addDoor( 1, 0, false)
 variation:addDoor( 1, 1, false)
 variation:addDoor( 2, 1, true)
 variation:addDoor( 1, 3, true)
@@ -339,6 +345,9 @@ variation:addRoomSystem(0,3,1,1,"Impulse")
 variation:addRoomSystem(3,3,3,1,"Maneuver")
 variation:addRoomSystem(4,4,3,1,"FrontShield")
 
+variation:addRoomSystem(0, 0, 1, 1, "DockingBay")
+
+variation:addDoor(0, 1, true)
 variation:addDoor(1,1,false)
 variation:addDoor(1,3,false)
 variation:addDoor(2,2,false)
@@ -434,7 +443,7 @@ variation:addRoomSystem(7,0,2,1,"Maneuver")
 variation:addRoomSystem(11,0,2,1,"MissileSystem")
 variation:addRoomSystem(2,1,4,2,"Reactor")
 variation:addRoomSystem(6,1,4,2,"Warp")
-variation:addRoom(10,1,4,2)
+variation:addRoomSystem(10,1,4,2,"DockingBay")
 variation:addRoomSystem(14,2,2,2,"FrontShield")
 variation:addRoomSystem(2,3,4,2,"Impulse")
 variation:addRoomSystem(6,3,4,2,"JumpDrive")
