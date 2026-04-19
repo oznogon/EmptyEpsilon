@@ -489,6 +489,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         system_rows[int(ShipSystem::Type::JumpDrive)].label->setIcon("gui/icons/system_jumpdrive");
         system_rows[int(ShipSystem::Type::FrontShield)].label->setIcon("gui/icons/shields-fore");
         system_rows[int(ShipSystem::Type::RearShield)].label->setIcon("gui/icons/shields-aft");
+        system_rows[int(ShipSystem::Type::DockingBay)].label->setIcon("gui/icons/docking");
     };
     setSystemRowIcons(thermal_rows);
 

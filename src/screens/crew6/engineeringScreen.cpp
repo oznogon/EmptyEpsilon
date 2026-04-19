@@ -160,6 +160,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     system_rows[int(ShipSystem::Type::JumpDrive)].button->setIcon("gui/icons/system_jumpdrive");
     system_rows[int(ShipSystem::Type::FrontShield)].button->setIcon("gui/icons/shields-fore");
     system_rows[int(ShipSystem::Type::RearShield)].button->setIcon("gui/icons/shields-aft");
+    system_rows[int(ShipSystem::Type::DockingBay)].button->setIcon("gui/icons/docking");
 
     system_effects_container = new GuiElement(system_config_container, "");
     system_effects_container->setPosition(0, -400, sp::Alignment::BottomRight)->setSize(270, 400)->setAttribute("layout", "verticalbottom");
@@ -364,6 +365,9 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                         }
                     }
                     }break;
+                case ShipSystem::Type::DockingBay:
+                    addSystemEffect(tr("docking","Docking bay effectiveness"), toNearbyIntString(effectiveness * 100) + "%");
+                    break;
                 default:
                     break;
                 }

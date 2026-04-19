@@ -19,6 +19,7 @@ public:
         JumpDrive,
         FrontShield,
         RearShield,
+        DockingBay,
         COUNT
     };
     static constexpr int COUNT = static_cast<int>(Type::COUNT);

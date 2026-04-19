@@ -19,6 +19,7 @@
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/docking.h"
+#include "components/dockingbaysystem.h"
 #include "components/beamweapon.h"
 #include "components/target.h"
 #include "components/reactor.h"
@@ -435,6 +436,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(DockingPort, target);
     BIND_MEMBER(DockingPort, auto_reload_missiles);
     BIND_MEMBER(DockingPort, auto_reload_missile_time);
+
+    sp::script::ComponentHandler<DockingBaySystem>::name("docking_bay_system");
+    BIND_SHIP_SYSTEM(DockingBaySystem);
 
     sp::script::ComponentHandler<DockingBay>::name("docking_bay");
     BIND_MEMBER_FLAG(DockingBay, flags, "share_energy", DockingBay::ShareEnergy);

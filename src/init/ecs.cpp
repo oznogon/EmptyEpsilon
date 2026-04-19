@@ -15,6 +15,7 @@
 #include "multiplayer/impulse.h"
 #include "multiplayer/warp.h"
 #include "multiplayer/docking.h"
+#include "multiplayer/dockingbaysystem.h"
 #include "multiplayer/hull.h"
 #include "multiplayer/coolant.h"
 #include "multiplayer/reactor.h"
@@ -80,6 +81,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<CustomShipFunctionsReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<DatabaseReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<DockingBayReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<DockingBaySystemReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<DockingPortReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<FactionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<FactionInfoReplication>();
