@@ -57,3 +57,5 @@ fix-hover 20260417 -- patch required to handle GuiScrollContainer hover
 
 prometheus-metrics 20260418 -- major networking, HTTP server changes
 multiple-waypoint-routes 20260418
+
+docking-bay 20260419
