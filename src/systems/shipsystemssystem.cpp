@@ -38,7 +38,7 @@ void ShipSystemsSystem::update(float delta)
             updateSystem(entity, system.rear_system, delta);
     }
     for(auto [entity, system] : sp::ecs::Query<DockingBaySystem>())
-        updateSystem(system, delta, entity.hasComponent<Coolant>());
+        updateSystem(entity, system, delta);
 }
 
 void ShipSystemsSystem::updateSystem(sp::ecs::Entity entity, ShipSystem& system, float delta)
