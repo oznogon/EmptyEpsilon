@@ -18,6 +18,9 @@
 #include "crewPosition.h"
 
 #include <cstdio>
+#include <unordered_map>
+
+static std::unordered_map<string, int> kill_counts;
 
 static string escapeLabelValue(const string& value)
 {
@@ -50,6 +53,13 @@ static void writeMetric(string& output, const string& name, const string& help, 
 {
     output += "# HELP " + name + " " + help + "\n";
     output += "# TYPE " + name + " gauge\n";
+    output += value_line + "\n";
+}
+
+static void writeCounter(string& output, const string& name, const string& help, const string& value_line)
+{
+    output += "# HELP " + name + " " + help + "\n";
+    output += "# TYPE " + name + " counter\n";
     output += value_line + "\n";
 }
 
@@ -100,8 +110,8 @@ static void collectServerMetrics(string& output)
     writeMetric(
         output,
         "ee_server_send_bytes_per_second",
-        "Total network send rate in bytes per second",
-        "ee_server_send_bytes_per_second " + formatFloat(game_server->getSendDataRate())
+        "Total network send rate in bytes per second (per-client rate multiplied by client count)",
+        "ee_server_send_bytes_per_second " + formatFloat(game_server->getSendDataRatePerClient() * static_cast<float>(game_server->getClientCount()))
     );
 
     writeMetric(
@@ -333,6 +343,23 @@ static void collectDebugMetrics(string& output)
     }
 }
 
+static void collectKillMetrics(string& output)
+{
+    if (kill_counts.empty())
+        return;
+
+    string kill_lines;
+    for (auto& [instigator, count] : kill_counts)
+        kill_lines += "ee_kills_total{instigator=\"" + escapeLabelValue(instigator) + "\"} " + formatInt(count) + "\n";
+
+    writeCounter(
+        output,
+        "ee_kills_total",
+        "Number of entities destroyed by damage caused by each instigator, keyed by callsign",
+        kill_lines
+    );
+}
+
 PrometheusMetricsServer::PrometheusMetricsServer(int port)
 : server(port)
 {
@@ -349,8 +376,15 @@ PrometheusMetricsServer::PrometheusMetricsServer(int port)
         output += "\n";
         collectGameMetrics(output);
         output += "\n";
+        collectKillMetrics(output);
+        output += "\n";
         collectDebugMetrics(output);
 
         return output;
     }, "text/plain; version=0.0.4; charset=utf-8");
+}
+
+void PrometheusMetricsServer::recordKill(const string& instigator_callsign)
+{
+    kill_counts[instigator_callsign]++;
 }
