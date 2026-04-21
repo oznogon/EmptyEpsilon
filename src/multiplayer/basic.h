@@ -29,6 +29,12 @@ namespace sp::multiplayer {
         constexpr float qmax = static_cast<float>(std::numeric_limits<Q>::max());
         return (static_cast<float>(q) - qmin) / (qmax - qmin) * (fmax - fmin) + fmin;
     }
+
+    static inline void warnIfOutOfRange(float v, float fmin, float fmax, const char* field_name)
+    {
+        if (v < fmin || v > fmax)
+            LOG(Warning) << "Quantization clamp on '" << field_name << "': value " << v << " outside [" << fmin << ", " << fmax << "]";
+    }
 }
 
 enum class BasicReplicationRequest {
@@ -103,13 +109,14 @@ enum class BasicReplicationRequest {
 #define BASIC_REPLICATION_FIELD_QUANTIZED(FIELD, QTYPE, FMIN, FMAX) \
     switch(BRR) { \
     case BasicReplicationRequest::SendAll: \
+        sp::multiplayer::warnIfOutOfRange(target.FIELD, (FMIN), (FMAX), #FIELD); \
         flags |= flag; \
         tmp << sp::multiplayer::quantize<QTYPE>(target.FIELD, (FMIN), (FMAX)); \
         break; \
     case BasicReplicationRequest::Update: { \
         auto _qcur = sp::multiplayer::quantize<QTYPE>(target.FIELD, (FMIN), (FMAX)); \
         auto _qbak = sp::multiplayer::quantize<QTYPE>(backup->FIELD, (FMIN), (FMAX)); \
-        if (_qcur != _qbak) { flags |= flag; tmp << _qcur; backup->FIELD = target.FIELD; } \
+        if (_qcur != _qbak) { sp::multiplayer::warnIfOutOfRange(target.FIELD, (FMIN), (FMAX), #FIELD); flags |= flag; tmp << _qcur; backup->FIELD = target.FIELD; } \
         break; \
     } \
     case BasicReplicationRequest::Receive: \
@@ -147,13 +154,14 @@ enum class BasicReplicationRequest {
 #define VECTOR_REPLICATION_FIELD_QUANTIZED(FIELD, QTYPE, FMIN, FMAX) \
         switch(BRR) { \
         case BasicReplicationRequest::SendAll: \
+            sp::multiplayer::warnIfOutOfRange(vector_target->FIELD, (FMIN), (FMAX), #FIELD); \
             vector_flags |= vector_flag; \
             vector_tmp << sp::multiplayer::quantize<QTYPE>(vector_target->FIELD, (FMIN), (FMAX)); \
             break; \
         case BasicReplicationRequest::Update: { \
             auto _qcur = sp::multiplayer::quantize<QTYPE>(vector_target->FIELD, (FMIN), (FMAX)); \
             auto _qbak = sp::multiplayer::quantize<QTYPE>(vector_backup->FIELD, (FMIN), (FMAX)); \
-            if (_qcur != _qbak) { vector_flags |= vector_flag; vector_tmp << _qcur; vector_backup->FIELD = vector_target->FIELD; } \
+            if (_qcur != _qbak) { sp::multiplayer::warnIfOutOfRange(vector_target->FIELD, (FMIN), (FMAX), #FIELD); vector_flags |= vector_flag; vector_tmp << _qcur; vector_backup->FIELD = vector_target->FIELD; } \
             break; \
         } \
         case BasicReplicationRequest::Receive: \
