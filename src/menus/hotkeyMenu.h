@@ -24,6 +24,12 @@ private:
     const float FRAME_MARGIN = 100.0f;
     const float KEY_LABEL_WIDTH = 250.0f;
     const float KEY_BINDER_MARGIN = 12.5f;
+    const int KEY_FIELD_WIDTH = 150;
+    const int KEY_LABEL_MARGIN = 25;
+    const float KEY_COLUMN_TOP = ROW_HEIGHT * 1.5f;
+    const int KEY_ROW_COUNT = 10;
+    const int KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + KEY_FIELD_WIDTH;
+    const int KEY_COLUMN_HEIGHT = ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2;
     const float RESET_LABEL_TIMEOUT = 5.0f;
 
     GuiElement* container;
