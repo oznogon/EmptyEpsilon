@@ -69,6 +69,7 @@ If the endpoint is unreachable, confirm that the server's firewall isn't blockin
 | `ee_player_ship_energy{ship}` | Reactor energy level |
 | `ee_player_ship_shield_ratio{ship,index}` | Per-face shield level as a fraction (0.0–1.0) |
 | `ee_server_network_bytes{component}` | Per-component network bytes (1-second window) |
+| `ee_kills_total{instigator}` | Entities destroyed by damage per instigator (session total) |
 | `ee_debug_pobject_count` | Active PObject count (debug builds only) |
 
 > **Note:** `ee_server_network_bytes` and the per-subsystem detail in `ee_update_duration_seconds` are only collected when `metricsserver` is set to a non-zero port. They incur a small overhead and are disabled when the metrics server is off.
@@ -313,6 +314,12 @@ The dashboard is divided into four collapsible rows.
 
 > Hull Integrity and Shield Status use instant queries — gauges disappear as soon as a ship is destroyed rather than lingering until Prometheus's staleness timeout.
 
+### Game Stats
+
+| Panel | Description |
+|-------|-------------|
+| Kills by Instigator | Horizontal bar chart of entities destroyed by damage per instigator, keyed by callsign; snapped to the current session total |
+
 ### Debug
 
 | Panel | Description |
@@ -325,6 +332,184 @@ The dashboard is divided into four collapsible rows.
 ## Updating the Dashboard
 
 After modifying `grafana-dashboard.json`, re-run `import-grafana-dashboard.sh` to push the updated definition to Grafana. The script uses `overwrite: true`, so it replaces the existing dashboard by UID without creating a duplicate.
+
+---
+
+## Adding New Metrics
+
+All metrics are served from `src/prometheusMetrics.cpp`. There are two patterns: **gauge** (reads game state at scrape time) and **counter** (accumulated by events and returned as a running total).
+
+### Gauge metrics
+
+A gauge is sampled fresh on every scrape. Add a `collectXxxMetrics(string& output)` function and call it from the handler in `PrometheusMetricsServer::PrometheusMetricsServer`.
+
+Use the `writeMetric` helper:
+
+```cpp
+static void writeMetric(string& output, const string& name, const string& help, const string& value_line);
+```
+
+`value_line` is the raw Prometheus text — one or more lines of the form `metric_name{label="value"} 42`. For a single unlabelled value:
+
+```cpp
+static void collectMyMetric(string& output)
+{
+    // Guard if the data source may be null
+    if (!gameGlobalInfo) return;
+
+    writeMetric(
+        output,
+        "ee_my_metric",
+        "Brief description of what this measures",
+        "ee_my_metric " + formatFloat(gameGlobalInfo->someValue())
+    );
+}
+```
+
+For metrics with one row per label value, build the value string in a loop:
+
+```cpp
+string lines;
+for (auto& item : items)
+    lines += "ee_my_metric{name=\"" + escapeLabelValue(item.name) + "\"} " + formatInt(item.count) + "\n";
+
+if (!lines.empty())
+    writeMetric(output, "ee_my_metric", "Help text", lines);
+```
+
+Then call your function from the handler:
+
+```cpp
+PrometheusMetricsServer::PrometheusMetricsServer(int port)
+: server(port)
+{
+    server.addURLHandler("/metrics", [](const sp::io::http::Server::Request& request) -> string
+    {
+        string output;
+        // ...existing collect calls...
+        collectMyMetric(output);
+        return output;
+    }, "text/plain; version=0.0.4; charset=utf-8");
+}
+```
+
+### Counter metrics
+
+A counter is a session-total that only ever increases. Unlike a gauge it cannot be resampled — it must be accumulated as events happen.
+
+**Step 1** — declare a static map (or other accumulator) in `prometheusMetrics.cpp`:
+
+```cpp
+static std::unordered_map<string, int> my_event_counts;
+```
+
+**Step 2** — expose a static recording function on `PrometheusMetricsServer`. Add the declaration to `prometheusMetrics.h`:
+
+```cpp
+static void recordMyEvent(const string& label_value);
+```
+
+And the implementation in `prometheusMetrics.cpp`:
+
+```cpp
+void PrometheusMetricsServer::recordMyEvent(const string& label_value)
+{
+    my_event_counts[label_value]++;
+}
+```
+
+**Step 3** — call `recordMyEvent` from the game code wherever the event occurs. The recording is safe to call whether or not the metrics server is enabled.
+
+**Step 4** — add a collect function that outputs the counter using `writeCounter`:
+
+```cpp
+static void collectMyEventMetrics(string& output)
+{
+    if (my_event_counts.empty())
+        return;
+
+    string lines;
+    for (auto& [label, count] : my_event_counts)
+        lines += "ee_my_event_total{label=\"" + escapeLabelValue(label) + "\"} " + formatInt(count) + "\n";
+
+    writeCounter(output, "ee_my_event_total", "Help text", lines);
+}
+```
+
+Then call it from the handler alongside the other collect functions.
+
+#### Example: `ee_kills_total`
+
+`ee_kills_total{instigator}` counts entities destroyed by damage, keyed by the instigator's callsign. The counter is incremented in `DamageSystem::destroyedByDamage` (`src/systems/damage.cpp`) whenever `info.instigator` is valid. It resolves the instigator's display name from the `CallSign` component, falls back to `TypeName`, and falls back to a raw entity ID string.
+
+### Adding a Grafana panel
+
+1. Open `grafana-dashboard.json` in a text editor.
+2. At the end of the `"panels"` array, add a row object (if you want a new section heading) followed by the panel object.
+3. Assign each object a unique integer `"id"` (increment from the highest existing `id`).
+4. Set `"gridPos"` so the panel fits below the last existing panel. The `y` coordinate of your row must be at least `y + h` of the last panel above it.
+
+**Row template:**
+
+```json
+{
+  "collapsed": false,
+  "gridPos": { "h": 1, "w": 24, "x": 0, "y": <Y> },
+  "id": <ID>,
+  "panels": [],
+  "title": "My Section",
+  "type": "row"
+}
+```
+
+**Panel template (bar chart, instant query):**
+
+```json
+{
+  "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+  "description": "Human-readable description.",
+  "fieldConfig": {
+    "defaults": {
+      "color": { "mode": "palette-classic" },
+      "custom": { "fillOpacity": 80, "gradientMode": "none", "lineWidth": 1,
+                  "scaleDistribution": { "type": "linear" },
+                  "thresholdsStyle": { "mode": "off" } },
+      "mappings": [],
+      "thresholds": { "mode": "absolute",
+                      "steps": [{ "color": "green", "value": 0 }] },
+      "unit": "short"
+    },
+    "overrides": []
+  },
+  "gridPos": { "h": 8, "w": 12, "x": 0, "y": <Y+1> },
+  "id": <ID+1>,
+  "options": {
+    "barRadius": 0, "barWidth": 0.97, "groupWidth": 0.7,
+    "legend": { "calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true },
+    "orientation": "auto", "showValue": "auto", "stacking": "none",
+    "tooltip": { "hideZeros": false, "mode": "single", "sort": "none" },
+    "xField": "Metric"
+  },
+  "pluginVersion": "12.4.2",
+  "targets": [
+    {
+      "expr": "ee_my_event_total",
+      "instant": true,
+      "legendFormat": "{{label}}",
+      "refId": "A",
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }
+    }
+  ],
+  "transformations": [
+    { "id": "seriesToRows", "options": {} },
+    { "id": "filterFieldsByName", "options": { "include": { "names": ["Metric", "Value"] } } }
+  ],
+  "title": "My Panel Title",
+  "type": "barchart"
+}
+```
+
+After editing `grafana-dashboard.json`, run `import-grafana-dashboard.sh` (see **Updating the Dashboard** below) to push the changes to Grafana.
 
 ---
 

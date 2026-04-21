@@ -1,17 +1,21 @@
 #include "systems/damage.h"
-#include "systems/collision.h"
+#include "gameGlobalInfo.h"
+#include <glm/geometric.hpp>
+#include "random.h"
+#include "prometheusMetrics.h"
 #include "ecs/query.h"
+
 #include "components/collision.h"
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/beamweapon.h"
 #include "components/radar.h"
 #include "components/rendering.h"
-#include "gameGlobalInfo.h"
-#include <glm/geometric.hpp>
-#include "random.h"
-#include "menus/luaConsole.h"
+#include "components/name.h"
 
+#include "systems/collision.h"
+
+#include "menus/luaConsole.h"
 
 void DamageSystem::update(float delta)
 {
@@ -202,6 +206,18 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
             Faction::getInfo(info.instigator).reputation_points += points;
         else
             Faction::getInfo(info.instigator).reputation_points = std::max(Faction::getInfo(info.instigator).reputation_points - points, 0.0f);
+
+        // Write kill to metrics.
+        string instigator_name;
+        auto cs = info.instigator.getComponent<CallSign>();
+        auto tn = info.instigator.getComponent<TypeName>();
+        if (cs && !cs->callsign.empty())
+            instigator_name = cs->callsign;
+        else if (tn && !tn->type_name.empty())
+            instigator_name = tn->type_name;
+        else
+            instigator_name = "entity_" + info.instigator.toString();
+        PrometheusMetricsServer::recordKill(instigator_name);
     }
 
     auto hull = entity.getComponent<Hull>();
