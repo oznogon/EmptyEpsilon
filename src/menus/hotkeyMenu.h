@@ -12,7 +12,6 @@ class GuiButton;
 class GuiLabel;
 class GuiCanvas;
 class GuiPanel;
-class GuiScrollText;
 class GuiSelector;
 class GuiToggleButton;
 class GuiHotkeyBinder;
@@ -36,7 +35,6 @@ private:
     const float KEY_COLUMN_HEIGHT = KEY_ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2.0f;
     const float KEY_COLUMN_TOP = ROW_HEIGHT * 1.5f + ROW_HEIGHT * 0.5f; // top_row + header_row
 
-    GuiScrollText* help_text;
     GuiElement* container;
     GuiElement* top_row;
     GuiPanel* rebinding_ui;
