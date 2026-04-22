@@ -78,7 +78,6 @@ public:
 
 private:
     const GuiThemeStyle* style;
-    GuiElement* panel;
     GuiLabel* label;
     float padding = 10.0f;
 };
