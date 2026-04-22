@@ -20,7 +20,6 @@ private:
     };
 
     const float ROW_HEIGHT = 50.0f;
-    GuiScrollContainer* container;
     CrewPosition position;
     std::vector<Entry> entries;
 
