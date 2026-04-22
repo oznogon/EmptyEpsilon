@@ -390,7 +390,6 @@ void GuiEntityInfoPanelGrid::onUpdate()
 
     // Build new grid with at least 1 column
     int col = 0;
-    int row = 0;
     int panel_idx = 0;
     GuiElement* current_row = nullptr;
 
@@ -400,8 +399,6 @@ void GuiEntityInfoPanelGrid::onUpdate()
         // Create a new layout row on the first column
         if (col == 0 || col >= max_cols)
         {
-            row++;
-
             current_row = new GuiElement(content_container, "");
             current_row
                 ->setSize(GuiElement::GuiSizeMax, GuiEntityInfoPanel::default_panel_size)
