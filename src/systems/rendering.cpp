@@ -161,10 +161,10 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
         glm::vec2 texcoords;
     };
     std::array<VertexAndTexCoords, 4> quad{
-        glm::vec3{}, {0.f, 1.f},
-        glm::vec3{}, {1.f, 1.f},
-        glm::vec3{}, {1.f, 0.f},
-        glm::vec3{}, {0.f, 0.f}
+        VertexAndTexCoords{glm::vec3{}, {0.f, 1.f}},
+        VertexAndTexCoords{glm::vec3{}, {1.f, 1.f}},
+        VertexAndTexCoords{glm::vec3{}, {1.f, 0.f}},
+        VertexAndTexCoords{glm::vec3{}, {0.f, 0.f}}
     };
 
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -208,6 +208,17 @@ void ExplosionRenderSystem::update(float delta)
         if (ee.lifetime < 0.0f)
             entity.destroy();
     }
+}
+
+void ExplosionRenderSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, ExplosionEffect& explosion)
+{
+    if (!explosion.radar) return;
+
+    // Fade alpha over lifetime
+    uint8_t alpha = static_cast<uint8_t>(64.0f * explosion.lifetime / ExplosionEffect::max_lifetime);
+
+    // Draw electrical/EMP explosions blue, rest red
+    renderer.fillCircle(screen_position, explosion.size * scale, explosion.electrical ? glm::u8vec4(0, 0, 255, alpha) : glm::u8vec4(255, 0, 0, alpha));
 }
 
 void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, ExplosionEffect& ee)
@@ -382,10 +393,10 @@ void BillboardRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         glm::vec2 texcoords;
     };
     static std::array<VertexAndTexCoords, 4> quad{
-        glm::vec3{}, {0.f, 1.f},
-        glm::vec3{}, {1.f, 1.f},
-        glm::vec3{}, {1.f, 0.f},
-        glm::vec3{}, {0.f, 0.f}
+        VertexAndTexCoords{glm::vec3{}, {0.f, 1.f}},
+        VertexAndTexCoords{glm::vec3{}, {1.f, 1.f}},
+        VertexAndTexCoords{glm::vec3{}, {1.f, 0.f}},
+        VertexAndTexCoords{glm::vec3{}, {0.f, 0.f}}
     };
 
     textureManager.getTexture(bbr.texture)->bind();
