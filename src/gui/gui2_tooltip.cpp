@@ -1,6 +1,5 @@
 #include "gui2_tooltip.h"
 #include "gui2_canvas.h"
-#include "gui2_panel.h"
 #include "gui2_label.h"
 #include "preferenceManager.h"
 #include "theme.h"
