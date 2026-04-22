@@ -5,7 +5,7 @@
 #include "gui/theme.h"
 
 GuiUtilityBeamRotationDial::GuiUtilityBeamRotationDial(GuiContainer* owner, string id, GuiRadarView* radar)
-: GuiRotationDial(owner, id, 0.0f, 360.0f, 0.0f, 0.0f, 20.0f, [this, radar](float value)
+: GuiRotationDial(owner, id, 0.0f, 360.0f, 0.0f, 0.0f, 20.0f, [radar](float value)
 {
     if (!my_spaceship || !my_spaceship.hasComponent<UtilityBeam>()) return;
     auto my_transform = my_spaceship.getComponent<sp::Transform>();
