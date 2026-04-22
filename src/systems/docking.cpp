@@ -125,7 +125,7 @@ void DockingSystem::update(float delta)
                         };
 
                         // Repair systems, returning any remaining energy.
-                        auto repair_systems = [&](float& transfer_remaining)
+                        auto repair_systems = [&, docked_entity = entity](float& transfer_remaining)
                         {
                             if (transfer_remaining <= 0.0f) return;
 
@@ -133,7 +133,7 @@ void DockingSystem::update(float delta)
                             {
                                 if (transfer_remaining <= 0.0f) break;
 
-                                if (auto docked_sys = ShipSystem::get(entity, static_cast<ShipSystem::Type>(i)))
+                                if (auto docked_sys = ShipSystem::get(docked_entity, static_cast<ShipSystem::Type>(i)))
                                 {
                                     if (docked_sys->health < docked_sys->health_max)
                                     {
