@@ -23,14 +23,14 @@ GuiUtilityBeamControls::GuiUtilityBeamControls(GuiContainer* owner, CrewPosition
     utility_progress_bar->setColor(glm::u8vec4(192, 192, 192, 64))->setSize(GuiElement::GuiSizeMax, 50);
 
     // Utility toggle button.
-    utility_toggle = new GuiToggleButton(this, "UTILITY_BEAM_TOGGLE", tr("scienceButton", "Activate"), [this](bool value)
+    utility_toggle = new GuiToggleButton(this, "UTILITY_BEAM_TOGGLE", tr("scienceButton", "Activate"), [](bool value)
     {
         if (my_spaceship.hasComponent<UtilityBeam>()) my_player_info->commandSetUtilityBeam(value);
     });
     utility_toggle->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<UtilityBeam>());
     (new GuiPowerDamageIndicator(utility_toggle, "UTILITY_BEAM_TOGGLE_PDI", ShipSystem::Type::UtilityBeam, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    custom_utility_mode = new GuiSelector(this, "CUSTOM_UTILITY_BEAM_MODE", [this](int index, string value)
+    custom_utility_mode = new GuiSelector(this, "CUSTOM_UTILITY_BEAM_MODE", [](int index, string value)
     {
         if (my_spaceship.hasComponent<UtilityBeam>())
             my_player_info->commandSetCustomUtilityBeamMode(value);
@@ -65,7 +65,7 @@ GuiUtilityBeamControls::GuiUtilityBeamControls(GuiContainer* owner, CrewPosition
     custom_utility_mode->setSize(GuiElement::GuiSizeMax, 50);
 
     // Utility bearing slider.
-    utility_bearing = new GuiSlider(this, "UTILITY_BEAM_BEARING", 0.0f, 360.0f, 0.0f, [this](float value)
+    utility_bearing = new GuiSlider(this, "UTILITY_BEAM_BEARING", 0.0f, 360.0f, 0.0f, [](float value)
     {
         if (my_spaceship.hasComponent<UtilityBeam>()) my_player_info->commandSetUtilityBeamBearing(value);
     });
@@ -75,7 +75,7 @@ GuiUtilityBeamControls::GuiUtilityBeamControls(GuiContainer* owner, CrewPosition
     utility_bearing_fixed->setSize(GuiElement::GuiSizeMax, 50)->hide();
 
     // Utility arc slider.
-    utility_arc = new GuiSlider(this, "UTILITY_BEAM_ARC", 0.0f, 180.0f, 0.0f, [this](float value)
+    utility_arc = new GuiSlider(this, "UTILITY_BEAM_ARC", 0.0f, 180.0f, 0.0f, [](float value)
     {
         if (my_spaceship.hasComponent<UtilityBeam>()) my_player_info->commandSetUtilityBeamArc(value);
     });
@@ -85,7 +85,7 @@ GuiUtilityBeamControls::GuiUtilityBeamControls(GuiContainer* owner, CrewPosition
     utility_arc_fixed->setSize(GuiElement::GuiSizeMax, 50)->hide();
 
     // Utility range slider.
-    utility_range = new GuiSlider(this, "UTILITY_BEAM_RANGE", 0.0f, 3000.0f, 1000.0f, [this](float value)
+    utility_range = new GuiSlider(this, "UTILITY_BEAM_RANGE", 0.0f, 3000.0f, 1000.0f, [](float value)
     {
         if (my_spaceship.hasComponent<UtilityBeam>()) my_player_info->commandSetUtilityBeamRange(value);
     });
