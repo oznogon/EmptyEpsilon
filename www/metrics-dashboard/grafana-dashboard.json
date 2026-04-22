@@ -5,8 +5,8 @@
     "name": "emptyepsilon",
     "namespace": "default",
     "uid": "ecec39ce-5732-41db-8bdb-7deadb9cd26b",
-    "resourceVersion": "1776741600203991",
-    "generation": 10,
+    "resourceVersion": "1776815314026010",
+    "generation": 31,
     "creationTimestamp": "2026-04-21T01:47:17Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "1570354713382912"
@@ -14,9 +14,9 @@
     "annotations": {
       "grafana.app/createdBy": "user:ffj8kgy38z9q8f",
       "grafana.app/folder": "",
-      "grafana.app/saved-from-ui": "Grafana v13.0.0 (e9de482b)",
+      "grafana.app/saved-from-ui": "Grafana v13.0.1 (a100054f)",
       "grafana.app/updatedBy": "user:ffj8kgy38z9q8f",
-      "grafana.app/updatedTimestamp": "2026-04-21T03:20:00Z"
+      "grafana.app/updatedTimestamp": "2026-04-21T23:48:34Z"
     }
   },
   "spec": {
@@ -82,7 +82,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -93,7 +93,7 @@
                   "calcs": [],
                   "displayMode": "list",
                   "placement": "bottom",
-                  "showLegend": true
+                  "showLegend": false
                 },
                 "tooltip": {
                   "hideZeros": false,
@@ -220,7 +220,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -321,8 +321,10 @@
                         "name": "dfj8opb5k9340e"
                       },
                       "spec": {
+                        "editorMode": "code",
                         "expr": "ee_server_network_bytes",
-                        "legendFormat": "{{component}}"
+                        "legendFormat": "{{component}}",
+                        "range": true
                       }
                     },
                     "refId": "A",
@@ -330,14 +332,255 @@
                   }
                 }
               ],
-              "transformations": [],
+              "transformations": [
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_0$",
+                      "renamePattern": "GameGlobalInfo::scanning_complexity"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_1$",
+                      "renamePattern": "GameGlobalInfo::hacking_difficulty"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_2$",
+                      "renamePattern": "GameGlobalInfo::hacking_games"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_3$",
+                      "renamePattern": "GameGlobalInfo::global_message"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_4$",
+                      "renamePattern": "GameGlobalInfo::global_message_timeout"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_5$",
+                      "renamePattern": "GameGlobalInfo::banner_string"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_6$",
+                      "renamePattern": "GameGlobalInfo::victory_faction"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_7$",
+                      "renamePattern": "GameGlobalInfo::use_beam_shield_frequencies"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_8$",
+                      "renamePattern": "GameGlobalInfo::use_system_damage"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_9$",
+                      "renamePattern": "GameGlobalInfo::allow_main_screen_tactical_radar"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_10$",
+                      "renamePattern": "GameGlobalInfo::allow_main_screen_long_range_radar"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_11$",
+                      "renamePattern": "GameGlobalInfo::allow_main_screen_strategic_map"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_12$",
+                      "renamePattern": "GameGlobalInfo::gm_control_code"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_13$",
+                      "renamePattern": "GameGlobalInfo::elapsed_time"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_14$",
+                      "renamePattern": "GameGlobalInfo::default_skybox"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_0$",
+                      "renamePattern": "PlayerInfo::client_id"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_1$",
+                      "renamePattern": "PlayerInfo::crew_positions"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_2$",
+                      "renamePattern": "PlayerInfo::ship"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_3$",
+                      "renamePattern": "PlayerInfo::name"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_4$",
+                      "renamePattern": "PlayerInfo::main_screen"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_5$",
+                      "renamePattern": "PlayerInfo::main_screen_control"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^(EMPMissile|HomingMissile|HVLI|Nuke)::member_0$",
+                      "renamePattern": "$1::target"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^(EMPMissile|HomingMissile|HVLI|Nuke)::member_1$",
+                      "renamePattern": "$1::target_angle"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^(EMPMissile|HomingMissile|HVLI|Nuke)::member_2$",
+                      "renamePattern": "$1::category_modifier"
+                    }
+                  }
+                }
+              ],
               "queryOptions": {}
             }
           },
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -454,7 +697,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -533,7 +776,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "colorMode": "background",
@@ -664,7 +907,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -804,7 +1047,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "table",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "cellHeight": "sm",
@@ -882,7 +1125,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "gauge",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "barShape": "flat",
@@ -985,7 +1228,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -1006,7 +1249,7 @@
               },
               "fieldConfig": {
                 "defaults": {
-                  "unit": "multiplier",
+                  "unit": "x",
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
@@ -1077,7 +1320,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "gauge",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "barShape": "flat",
@@ -1179,7 +1422,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -1295,7 +1538,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -1414,7 +1657,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -1550,7 +1793,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "table",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "cellHeight": "sm",
@@ -1627,7 +1870,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -1985,7 +2228,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "barchart",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "barRadius": 0,
@@ -2006,12 +2249,14 @@
                   "mode": "single",
                   "sort": "none"
                 },
+                "xField": "Time",
                 "xTickLabelRotation": 0,
                 "xTickLabelSpacing": 100
               },
               "fieldConfig": {
                 "defaults": {
                   "unit": "decbytes",
+                  "min": 0,
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
@@ -2022,7 +2267,7 @@
                     ]
                   },
                   "color": {
-                    "mode": "palette-classic"
+                    "mode": "palette-classic-by-name"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -2037,7 +2282,7 @@
                       "tooltip": false,
                       "viz": false
                     },
-                    "lineWidth": 1,
+                    "lineWidth": 0,
                     "scaleDistribution": {
                       "type": "linear"
                     },
@@ -2135,7 +2380,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "barchart",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "barRadius": 0,
@@ -2144,11 +2389,11 @@
                 "groupWidth": 0.7,
                 "legend": {
                   "calcs": [],
-                  "displayMode": "list",
-                  "placement": "bottom",
-                  "showLegend": true
+                  "displayMode": "table",
+                  "placement": "right",
+                  "showLegend": false
                 },
-                "orientation": "auto",
+                "orientation": "horizontal",
                 "showValue": "auto",
                 "stacking": "none",
                 "tooltip": {
@@ -2158,26 +2403,25 @@
                 },
                 "xField": "Metric",
                 "xTickLabelRotation": 0,
-                "xTickLabelSpacing": 0
+                "xTickLabelSpacing": 100
               },
               "fieldConfig": {
                 "defaults": {
                   "unit": "short",
+                  "decimals": 0,
+                  "min": 0,
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
                       {
                         "value": 0,
                         "color": "green"
-                      },
-                      {
-                        "value": 80,
-                        "color": "red"
                       }
                     ]
                   },
                   "color": {
-                    "mode": "palette-classic"
+                    "mode": "shades",
+                    "fixedColor": "red"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -2185,14 +2429,14 @@
                     "axisColorMode": "text",
                     "axisLabel": "",
                     "axisPlacement": "auto",
-                    "fillOpacity": 80,
+                    "fillOpacity": 100,
                     "gradientMode": "none",
                     "hideFrom": {
                       "legend": false,
                       "tooltip": false,
                       "viz": false
                     },
-                    "lineWidth": 1,
+                    "lineWidth": 0,
                     "scaleDistribution": {
                       "type": "linear"
                     },
@@ -2245,10 +2489,10 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
-                "colorMode": "value",
+                "colorMode": "none",
                 "graphMode": "none",
                 "justifyMode": "auto",
                 "orientation": "auto",
@@ -2266,19 +2510,19 @@
               },
               "fieldConfig": {
                 "defaults": {
-                  "unit": "s",
+                  "unit": "dthms",
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
                       {
                         "value": 0,
                         "color": "green"
-                      },
-                      {
-                        "value": 80,
-                        "color": "red"
                       }
                     ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "text"
                   }
                 },
                 "overrides": []
@@ -2327,7 +2571,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "heatmap",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -2420,14 +2664,255 @@
                   }
                 }
               ],
-              "transformations": [],
+              "transformations": [
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_0$",
+                      "renamePattern": "GameGlobalInfo::scanning_complexity"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_1$",
+                      "renamePattern": "GameGlobalInfo::hacking_difficulty"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_2$",
+                      "renamePattern": "GameGlobalInfo::hacking_games"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_3$",
+                      "renamePattern": "GameGlobalInfo::global_message"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_4$",
+                      "renamePattern": "GameGlobalInfo::global_message_timeout"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_5$",
+                      "renamePattern": "GameGlobalInfo::banner_string"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_6$",
+                      "renamePattern": "GameGlobalInfo::victory_faction"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_7$",
+                      "renamePattern": "GameGlobalInfo::use_beam_shield_frequencies"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_8$",
+                      "renamePattern": "GameGlobalInfo::use_system_damage"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_9$",
+                      "renamePattern": "GameGlobalInfo::allow_main_screen_tactical_radar"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_10$",
+                      "renamePattern": "GameGlobalInfo::allow_main_screen_long_range_radar"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_11$",
+                      "renamePattern": "GameGlobalInfo::allow_main_screen_strategic_map"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_12$",
+                      "renamePattern": "GameGlobalInfo::gm_control_code"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_13$",
+                      "renamePattern": "GameGlobalInfo::elapsed_time"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^GameGlobalInfo::member_14$",
+                      "renamePattern": "GameGlobalInfo::default_skybox"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_0$",
+                      "renamePattern": "PlayerInfo::client_id"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_1$",
+                      "renamePattern": "PlayerInfo::crew_positions"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_2$",
+                      "renamePattern": "PlayerInfo::ship"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_3$",
+                      "renamePattern": "PlayerInfo::name"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_4$",
+                      "renamePattern": "PlayerInfo::main_screen"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^PlayerInfo::member_5$",
+                      "renamePattern": "PlayerInfo::main_screen_control"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^(EMPMissile|HomingMissile|HVLI|Nuke)::member_0$",
+                      "renamePattern": "$1::target"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^(EMPMissile|HomingMissile|HVLI|Nuke)::member_1$",
+                      "renamePattern": "$1::target_angle"
+                    }
+                  }
+                },
+                {
+                  "kind": "Transformation",
+                  "group": "renameByRegex",
+                  "spec": {
+                    "options": {
+                      "regex": "^(EMPMissile|HomingMissile|HVLI|Nuke)::member_2$",
+                      "renamePattern": "$1::category_modifier"
+                    }
+                  }
+                }
+              ],
               "queryOptions": {}
             }
           },
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -2545,10 +3030,10 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
-                "colorMode": "value",
+                "colorMode": "none",
                 "graphMode": "none",
                 "justifyMode": "auto",
                 "orientation": "auto",
@@ -2566,18 +3051,18 @@
               },
               "fieldConfig": {
                 "defaults": {
+                  "unit": "dthms",
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
                       {
                         "value": 0,
                         "color": "green"
-                      },
-                      {
-                        "value": 80,
-                        "color": "red"
                       }
                     ]
+                  },
+                  "color": {
+                    "mode": "fixed"
                   }
                 },
                 "overrides": []
@@ -2624,10 +3109,10 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
-                "colorMode": "value",
+                "colorMode": "none",
                 "graphMode": "area",
                 "justifyMode": "auto",
                 "orientation": "auto",
@@ -2645,18 +3130,19 @@
               },
               "fieldConfig": {
                 "defaults": {
+                  "min": 0,
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
                       {
                         "value": 0,
                         "color": "green"
-                      },
-                      {
-                        "value": 80,
-                        "color": "red"
                       }
                     ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "text"
                   }
                 },
                 "overrides": []
@@ -2703,7 +3189,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -2724,16 +3210,18 @@
               },
               "fieldConfig": {
                 "defaults": {
+                  "unit": "ships",
+                  "min": 0,
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
                       {
                         "value": 0,
-                        "color": "green"
+                        "color": "red"
                       },
                       {
-                        "value": 80,
-                        "color": "red"
+                        "value": 1,
+                        "color": "green"
                       }
                     ]
                   }
@@ -2783,7 +3271,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "colorMode": "none",
@@ -2864,7 +3352,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.0",
+            "version": "13.0.1",
             "spec": {
               "options": {
                 "annotations": {
@@ -3157,20 +3645,7 @@
                       "spec": {
                         "x": 4,
                         "y": 0,
-                        "width": 4,
-                        "height": 4,
-                        "element": {
-                          "kind": "ElementReference",
-                          "name": "panel-15"
-                        }
-                      }
-                    },
-                    {
-                      "kind": "GridLayoutItem",
-                      "spec": {
-                        "x": 8,
-                        "y": 0,
-                        "width": 16,
+                        "width": 8,
                         "height": 8,
                         "element": {
                           "kind": "ElementReference",
@@ -3181,13 +3656,26 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
-                        "x": 0,
-                        "y": 8,
-                        "width": 24,
-                        "height": 6,
+                        "x": 12,
+                        "y": 0,
+                        "width": 12,
+                        "height": 8,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-17"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "x": 0,
+                        "y": 4,
+                        "width": 4,
+                        "height": 4,
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-15"
                         }
                       }
                     }
@@ -3291,46 +3779,6 @@
           {
             "kind": "RowsLayoutRow",
             "spec": {
-              "title": "Debug",
-              "collapse": false,
-              "layout": {
-                "kind": "GridLayout",
-                "spec": {
-                  "items": [
-                    {
-                      "kind": "GridLayoutItem",
-                      "spec": {
-                        "x": 0,
-                        "y": 0,
-                        "width": 12,
-                        "height": 8,
-                        "element": {
-                          "kind": "ElementReference",
-                          "name": "panel-26"
-                        }
-                      }
-                    },
-                    {
-                      "kind": "GridLayoutItem",
-                      "spec": {
-                        "x": 12,
-                        "y": 0,
-                        "width": 12,
-                        "height": 8,
-                        "element": {
-                          "kind": "ElementReference",
-                          "name": "panel-27"
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          {
-            "kind": "RowsLayoutRow",
-            "spec": {
               "title": "Game Stats",
               "collapse": false,
               "layout": {
@@ -3354,6 +3802,46 @@
                 }
               }
             }
+          },
+          {
+            "kind": "RowsLayoutRow",
+            "spec": {
+              "title": "Debug",
+              "collapse": false,
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 24,
+                        "height": 7,
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-27"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "x": 0,
+                        "y": 7,
+                        "width": 24,
+                        "height": 4,
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-26"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           }
         ]
       }
@@ -3365,7 +3853,7 @@
       "emptyepsilon"
     ],
     "timeSettings": {
-      "timezone": "browser",
+      "timezone": "utc",
       "from": "now-1h",
       "to": "now",
       "autoRefresh": "5s",

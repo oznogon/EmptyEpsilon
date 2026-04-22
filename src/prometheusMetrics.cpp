@@ -49,14 +49,14 @@ static string formatInt(int value)
     return string(value);
 }
 
-static void writeMetric(string& output, const string& name, const string& help, const string& value_line)
+static void writeGaugeMetric(string& output, const string& name, const string& help, const string& value_line)
 {
     output += "# HELP " + name + " " + help + "\n";
     output += "# TYPE " + name + " gauge\n";
     output += value_line + "\n";
 }
 
-static void writeCounter(string& output, const string& name, const string& help, const string& value_line)
+static void writeCounterMetric(string& output, const string& name, const string& help, const string& value_line)
 {
     output += "# HELP " + name + " " + help + "\n";
     output += "# TYPE " + name + " counter\n";
@@ -67,21 +67,21 @@ static void collectEngineMetrics(string& output)
 {
     if (!engine) return;
 
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_game_speed",
         "Current game speed multiplier (0 = paused)",
         "ee_game_speed " + formatFloat(engine->getGameSpeed())
     );
 
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_elapsed_time_seconds",
         "Total game time elapsed",
         "ee_elapsed_time_seconds " + formatFloat(engine->getElapsedTime())
     );
 
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_entity_count",
         "Number of active ECS entities",
@@ -94,7 +94,7 @@ static void collectEngineMetrics(string& output)
         string timing_lines;
         for (auto& [key, value] : timing)
             timing_lines += "ee_update_duration_seconds{phase=\"" + escapeLabelValue(key) + "\"} " + formatFloat(value) + "\n";
-        writeMetric(
+        writeGaugeMetric(
             output,
             "ee_update_duration_seconds",
             "Time spent in each update phase (seconds)",
@@ -107,21 +107,21 @@ static void collectServerMetrics(string& output)
 {
     if (!game_server) return;
 
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_server_send_bytes_per_second",
         "Total network send rate in bytes per second (per-client rate multiplied by client count)",
         "ee_server_send_bytes_per_second " + formatFloat(game_server->getSendDataRatePerClient() * static_cast<float>(game_server->getClientCount()))
     );
 
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_server_send_bytes_per_second_per_client",
         "Per-client network send rate in bytes per second",
         "ee_server_send_bytes_per_second_per_client " + formatFloat(game_server->getSendDataRatePerClient())
     );
 
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_server_update_duration_seconds",
         "Time spent in server update cycle (seconds)",
@@ -129,7 +129,7 @@ static void collectServerMetrics(string& output)
     );
 
     int client_count = game_server->getClientCount();
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_server_client_count",
         "Number of connected game clients",
@@ -142,7 +142,7 @@ static void collectServerMetrics(string& output)
 
         for (auto& [client_id, ping] : game_server->getClientPings())
             ping_lines += "ee_server_client_ping_milliseconds{client_id=\"" + formatInt(client_id) + "\"} " + formatInt(ping) + "\n";
-        writeMetric(
+        writeGaugeMetric(
             output,
             "ee_server_client_ping_milliseconds",
             "Round-trip time to each client in milliseconds",
@@ -150,7 +150,7 @@ static void collectServerMetrics(string& output)
         );
     }
 
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_server_master_server_state",
         "Master server registration state (0 = Disabled, 1 = Registering, 2 = Success, 3 = FailedToReach, 4 = FailedPortForwarding)",
@@ -165,7 +165,7 @@ static void collectGameMetrics(string& output)
     string scenario = gameGlobalInfo->scenario;
     string server_name = game_server ? game_server->getServerName() : "";
 
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_scenario_info",
         "Scenario metadata (always 1)",
@@ -175,7 +175,7 @@ static void collectGameMetrics(string& output)
     );
 
     string mission_time = gameGlobalInfo->getMissionTime();
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_mission_time_info",
         "Mission time as formatted HH:MM:SS string (always 1, use label)",
@@ -219,7 +219,7 @@ static void collectGameMetrics(string& output)
     }
 
     if (!connection_lines.empty())
-        writeMetric(output, "ee_player_connection",
+        writeGaugeMetric(output, "ee_player_connection",
             "Connected players with their name, ship, and crew positions (always 1)",
             connection_lines);
 
@@ -271,11 +271,11 @@ static void collectGameMetrics(string& output)
     }
 
     if (!ship_info_lines.empty())
-        writeMetric(output, "ee_player_ship_info",
+        writeGaugeMetric(output, "ee_player_ship_info",
             "Active player ship name and access password (always 1)",
             ship_info_lines);
 
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_player_ship_count",
         "Number of entities with a PlayerControl component",
@@ -284,7 +284,7 @@ static void collectGameMetrics(string& output)
 
     if (!hull_lines.empty())
     {
-        writeMetric(
+        writeGaugeMetric(
             output,
             "ee_player_ship_hull_ratio",
             "Player ship hull as fraction of maximum (0.0 to 1.0)",
@@ -294,7 +294,7 @@ static void collectGameMetrics(string& output)
 
     if (!energy_lines.empty())
     {
-        writeMetric(
+        writeGaugeMetric(
             output,
             "ee_player_ship_energy",
             "Player ship reactor energy level",
@@ -304,7 +304,7 @@ static void collectGameMetrics(string& output)
 
     if (!shield_lines.empty())
     {
-        writeMetric(
+        writeGaugeMetric(
            output,
             "ee_player_ship_shield_ratio",
             "Player ship shield level as fraction of maximum (0.0 to 1.0)",
@@ -318,7 +318,7 @@ static void collectDebugMetrics(string& output)
     if (!game_server) return;
 
 #ifdef DEBUG
-    writeMetric(
+    writeGaugeMetric(
         output,
         "ee_debug_pobject_count",
         "Number of active PObject instances (debug builds only)",
@@ -334,7 +334,7 @@ static void collectDebugMetrics(string& output)
         for (auto& [key, bytes] : stats)
             stats_lines += "ee_server_network_bytes{component=\"" + escapeLabelValue(key) + "\"} " + formatInt(bytes) + "\n";
 
-        writeMetric(
+        writeGaugeMetric(
             output,
             "ee_server_network_bytes",
             "Per-component-type network bandwidth in bytes (accumulated over ~1 second interval)",
@@ -352,7 +352,7 @@ static void collectKillMetrics(string& output)
     for (auto& [instigator, count] : kill_counts)
         kill_lines += "ee_kills_total{instigator=\"" + escapeLabelValue(instigator) + "\"} " + formatInt(count) + "\n";
 
-    writeCounter(
+    writeCounterMetric(
         output,
         "ee_kills_total",
         "Number of entities destroyed by damage caused by each instigator, keyed by callsign",
