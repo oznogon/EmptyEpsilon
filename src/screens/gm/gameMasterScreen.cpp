@@ -183,7 +183,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(150, 50);
     (new GuiTextTooltip(pause_button, "PAUSE_BUTTON_TIP", tr("gm_tooltip", "Toggle pausing the game simulation."), 20.0f))->setWidth(280.0f);
 
-    game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR", [this](int index, string value) {
+    game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR", [](int index, string value) {
         engine->setGameSpeed(pow(2, index));
     });
     game_time_scale
