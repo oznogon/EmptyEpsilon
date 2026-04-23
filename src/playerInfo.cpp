@@ -21,6 +21,8 @@
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
+#include "screens/extra/beamWeaponsScreen.h"
+#include "screens/extra/missileWeaponsScreen.h"
 #include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
 
@@ -1119,6 +1121,10 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new HelmsScreen(container), CrewPosition::helmsOfficer, getCrewPositionName(CrewPosition::helmsOfficer), getCrewPositionIcon(CrewPosition::helmsOfficer));
         if (cps.has(CrewPosition::weaponsOfficer))
             screen->addStationTab(new WeaponsScreen(container), CrewPosition::weaponsOfficer, getCrewPositionName(CrewPosition::weaponsOfficer), getCrewPositionIcon(CrewPosition::weaponsOfficer));
+        if (cps.has(CrewPosition::beamWeaponsOfficer))
+            screen->addStationTab(new BeamWeaponsScreen(container), CrewPosition::beamWeaponsOfficer, getCrewPositionName(CrewPosition::beamWeaponsOfficer), getCrewPositionIcon(CrewPosition::beamWeaponsOfficer));
+        if (cps.has(CrewPosition::missileWeaponsOfficer))
+            screen->addStationTab(new MissileWeaponsScreen(container), CrewPosition::missileWeaponsOfficer, getCrewPositionName(CrewPosition::missileWeaponsOfficer), getCrewPositionIcon(CrewPosition::missileWeaponsOfficer));
         if (cps.has(CrewPosition::engineering))
             screen->addStationTab(new EngineeringScreen(container), CrewPosition::engineering, getCrewPositionName(CrewPosition::engineering), getCrewPositionIcon(CrewPosition::engineering));
         if (cps.has(CrewPosition::scienceOfficer))
@@ -1196,6 +1202,8 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::databaseView: return tr("station","Database");
     case CrewPosition::altRelay: return tr("station","Strategic Map");
     case CrewPosition::commsOnly: return tr("station","Comms");
+    case CrewPosition::beamWeaponsOfficer: return tr("station","Beam Weapons");
+    case CrewPosition::missileWeaponsOfficer: return tr("station","Missile Weapons");
     case CrewPosition::shipLog: return tr("station","Ship's Log");
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
@@ -1210,6 +1218,8 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::engineering: return "gui/icons/station-engineering";
     case CrewPosition::scienceOfficer: return "gui/icons/station-science";
     case CrewPosition::relayOfficer: return "gui/icons/station-relay";
+    case CrewPosition::beamWeaponsOfficer: return "gui/icons/system_beam";
+    case CrewPosition::missileWeaponsOfficer: return "gui/icons/system_missile";
     case CrewPosition::tacticalOfficer: return "";
     case CrewPosition::engineeringAdvanced: return "";
     case CrewPosition::operationsOfficer: return "";
