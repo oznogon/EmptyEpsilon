@@ -203,5 +203,11 @@ public:
 
     // Spectator screen binds
     sp::io::Keybinding spectator_show_callsigns;
+
+    // Briefing screen binds
+    sp::io::Keybinding briefing_next_page;
+    sp::io::Keybinding briefing_prev_page;
+    sp::io::Keybinding briefing_play;
+    sp::io::Keybinding briefing_toggle_caption;
 };
 extern Keys keys;

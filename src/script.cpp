@@ -32,6 +32,8 @@
 #include "components/zone.h"
 #include "components/shiplog.h"
 #include "components/selfdestruct.h"
+#include "components/briefing.h"
+#include "audio/sound.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
 #include "systems/docking.h"
@@ -399,6 +401,98 @@ static void luaSetBanner(string banner)
 static void luaSetDefaultSkybox(string skybox)
 {
     gameGlobalInfo->default_skybox = skybox;
+}
+
+static float getAudioDuration(const string& filename)
+{
+    int n = filename.rfind(".");
+    if (n > -1)
+    {
+        string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en") + filename.substr(n);
+        if (getResourceStream(filename_with_locale))
+        {
+            sp::audio::Sound sound(filename_with_locale);
+            return sound.getDuration();
+        }
+    }
+    if (getResourceStream(filename))
+    {
+        sp::audio::Sound sound(filename);
+        return sound.getDuration();
+    }
+    return 0.0f;
+}
+
+static int luaSetBriefingPage(lua_State* L)
+{
+    auto entity = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
+    if (!entity)
+        return luaL_error(L, "setBriefingPage() requires a valid entity");
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing)
+        briefing = &entity.getOrAddComponent<Briefing>();
+
+    int index = luaL_checkinteger(L, 2);
+    if (index < 1)
+        return luaL_error(L, "setBriefingPage() index must be >= 1");
+
+    int zero_index = index - 1;
+    if (zero_index >= static_cast<int>(briefing->pages.size()))
+        briefing->pages.resize(zero_index + 1);
+
+    bool audio_set = false;
+    bool duration_set = false;
+
+    if (lua_gettop(L) >= 3 && !lua_isnil(L, 3))
+        briefing->pages[zero_index].caption = luaL_checkstring(L, 3);
+
+    if (lua_gettop(L) >= 4 && !lua_isnil(L, 4))
+        briefing->pages[zero_index].image = luaL_checkstring(L, 4);
+
+    if (lua_gettop(L) >= 5 && !lua_isnil(L, 5))
+    {
+        briefing->pages[zero_index].audio = luaL_checkstring(L, 5);
+        audio_set = true;
+    }
+
+    if (lua_gettop(L) >= 6 && !lua_isnil(L, 6))
+    {
+        briefing->pages[zero_index].duration = static_cast<float>(luaL_checknumber(L, 6));
+        duration_set = true;
+    }
+
+    if (audio_set && !duration_set)
+    {
+        float duration = getAudioDuration(briefing->pages[zero_index].audio);
+        if (duration > 0.0f)
+            briefing->pages[zero_index].duration = duration;
+        else
+            LOG(Warning, "Invalid briefing audio file: ", briefing->pages[zero_index].audio);
+    }
+
+    return 0;
+}
+
+static void luaClearBriefing(sp::ecs::Entity entity)
+{
+    if (!entity)
+        return;
+    auto* briefing = entity.getComponent<Briefing>();
+    if (briefing)
+        briefing->pages.clear();
+}
+
+static void luaRemoveBriefingPage(sp::ecs::Entity entity, int index)
+{
+    if (!entity || index < 1)
+        return;
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing)
+        return;
+    int zero_index = index - 1;
+    if (zero_index < static_cast<int>(briefing->pages.size()))
+        briefing->pages.erase(briefing->pages.begin() + zero_index);
 }
 
 static float luaGetScenarioTime()
@@ -1269,6 +1363,26 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Sets the default skybox image set to use in 3D viewports. Each image set is a directory in resources/skybox containing top.png, right.png, left.png, front.png, bottom.png, and back.png images. Defaults to "default".
     /// Example: setDefaultSkybox("simulation")
     env.setGlobal("setDefaultSkybox", &luaSetDefaultSkybox);
+    /// void setBriefingPage(entity ship, int index, string page_caption, string page_image, string page_audio, float page_duration)
+    /// Sets or overwrites the briefing page at the given 1-based index on the specified entity.
+    /// If the index is beyond the current page count, intermediate pages are created.
+    /// Optional arguments should be passed as nil to skip them. If a page already exists but an optional parameter is nil, that parameter's value is not changed.
+    /// If page_audio is provided but page_duration is not, the duration is automatically calculated from the audio file length.
+    /// If page_audio is invalid, a warning is logged.
+    /// Example:
+    /// setBriefingPage(player, 1, "Welcome", "briefing/page1.png", "audio/page1.ogg")
+    /// setBriefingPage(player, 2, nil, "briefing/page2.png", nil, 10) -- keeps caption and audio from existing page 2, updates image and duration
+    env.setGlobal("setBriefingPage", &luaSetBriefingPage);
+    /// void clearBriefing(entity ship)
+    /// Removes all pages from the briefing on the specified entity, resetting it to an empty state.
+    /// If the briefing is currently playing, playback stops and resets to page 1.
+    /// Example: clearBriefing(player)
+    env.setGlobal("clearBriefing", &luaClearBriefing);
+    /// void removeBriefingPage(entity ship, int index)
+    /// Removes the briefing page at the given 1-based index from the specified entity.
+    /// If the briefing is currently playing, playback stops and resets to page 1.
+    /// Example: removeBriefingPage(player, 2)
+    env.setGlobal("removeBriefingPage", &luaRemoveBriefingPage);
     /// float getScenarioTime()
     /// Returns the elapsed time of the scenario, in seconds.
     /// This timer stops when the game is paused.

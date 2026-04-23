@@ -320,7 +320,13 @@ Keys::Keys() :
     gm_show_callsigns("GM_SHOW_CALLSIGNS", "C"),
 
     // Spectator screen
-    spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C")
+    spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
+
+    // Briefing screen
+    briefing_next_page("BRIEFING_NEXT_PAGE", "Right"),
+    briefing_prev_page("BRIEFING_PREVIOUS_PAGE", "Left"),
+    briefing_play("BRIEFING_PLAY", "Space"),
+    briefing_toggle_caption("BRIEFING_TOGGLE_CAPTION", "T")
 {
 }
 
@@ -516,6 +522,12 @@ void Keys::init()
 
     // Spectator screen
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));
+
+    // Briefing screen
+    briefing_next_page.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Next page"));
+    briefing_prev_page.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Previous page"));
+    briefing_play.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Play"));
+    briefing_toggle_caption.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Toggle caption"));
 
     // Lua console keybind defined in luaConsole.cpp
 }

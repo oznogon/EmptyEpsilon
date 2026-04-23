@@ -153,7 +153,6 @@ set(GUI_LIB_SOURCES
     src/gui/gui2_textentry.cpp
     src/gui/gui2_label.cpp
     src/gui/gui2_image.cpp
-    src/gui/gui2_image_contain.cpp
     src/gui/gui2_arrowbutton.cpp
     src/gui/gui2_entrylist.cpp
     src/gui/gui2_progressbar.cpp
@@ -360,6 +359,7 @@ set(MAIN_SOURCES
     src/components/customshipfunction.h
     src/components/shiplog.h
     src/components/shiplog.cpp
+    src/components/briefing.h
     src/components/comms.h
     src/components/scanning.h
     src/components/scanning.cpp
@@ -505,6 +505,8 @@ set(MAIN_SOURCES
     src/multiplayer/internalrooms.cpp
     src/multiplayer/shiplog.h
     src/multiplayer/shiplog.cpp
+    src/multiplayer/briefing.h
+    src/multiplayer/briefing.cpp
     src/multiplayer/zone.h
     src/multiplayer/zone.cpp
     src/ai/fighterAI.cpp
