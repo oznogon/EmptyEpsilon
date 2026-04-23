@@ -113,35 +113,43 @@ void GuiUtilityBeamControls::onDraw(sp::RenderTarget& target)
 
     if (auto utility_beam = my_spaceship.getComponent<UtilityBeam>())
     {
-        utility_arc->setValue(utility_beam->arc)->setVisible(!utility_beam->fixed_arc);
-        utility_arc_fixed->setValue(utility_beam->arc)->setVisible(utility_beam->fixed_arc);
-        if (utility_arc->isVisible() && utility_arc->getRangeMax() != utility_beam->max_arc)
-            utility_arc->setRange(utility_beam->MIN_ARC, utility_beam->max_arc);
-
-        utility_range->setValue(utility_beam->range)->setVisible(!utility_beam->fixed_range);
-        utility_range_fixed->setValue(utility_beam->range)->setVisible(utility_beam->fixed_range);
-        if (utility_range->isVisible() && utility_range->getRangeMax() != utility_beam->max_range)
-            utility_range->setRange(utility_beam->MIN_RANGE, utility_beam->max_range);
-
-        utility_bearing->setValue(utility_beam->bearing)->setVisible(!utility_beam->fixed_bearing);
-        utility_bearing_fixed->setValue(utility_beam->bearing)->setVisible(utility_beam->fixed_bearing);
-
-        // Sync the custom beam mode selector to the server-authoritative custom_beam_mode.
-        int mode_idx = custom_utility_mode->indexByValue(utility_beam->custom_beam_mode);
-        if (mode_idx >= 0 && mode_idx != custom_utility_mode->getSelectionIndex())
-            custom_utility_mode->setSelectionIndex(mode_idx);
-
-        for (int i = 0; i < custom_utility_mode->entryCount(); i++)
+        if (utility_arc)
         {
-            if (custom_utility_mode->getEntryName(i) == utility_beam->custom_beam_mode)
+            utility_arc->setValue(utility_beam->arc)->setVisible(!utility_beam->fixed_arc);
+            if (utility_arc->isVisible() && utility_arc->getRangeMax() != utility_beam->max_arc)
+                utility_arc->setRange(utility_beam->MIN_ARC, utility_beam->max_arc);
+        }
+        if (utility_arc_fixed)
+            utility_arc_fixed->setValue(utility_beam->arc)->setVisible(utility_beam->fixed_arc);
+
+        if (utility_range)
+        {
+            utility_range->setValue(utility_beam->range)->setVisible(!utility_beam->fixed_range);
+            if (utility_range->isVisible() && utility_range->getRangeMax() != utility_beam->max_range)
+                utility_range->setRange(utility_beam->MIN_RANGE, utility_beam->max_range);
+        }
+        if (utility_range_fixed)
+            utility_range_fixed->setValue(utility_beam->range)->setVisible(utility_beam->fixed_range);
+
+        if (utility_bearing)
+            utility_bearing->setValue(utility_beam->bearing)->setVisible(!utility_beam->fixed_bearing);
+        if (utility_bearing_fixed)
+            utility_bearing_fixed->setValue(utility_beam->bearing)->setVisible(utility_beam->fixed_bearing);
+
+        if (custom_utility_mode)
+        {
+            int mode_idx = custom_utility_mode->indexByValue(utility_beam->custom_beam_mode);
+            if (mode_idx >= 0 && mode_idx != custom_utility_mode->getSelectionIndex())
+                custom_utility_mode->setSelectionIndex(mode_idx);
+
+            for (int i = 0; i < custom_utility_mode->entryCount(); i++)
             {
-                if (utility_beam->custom_beam_modes[i].progress >= 0.0f)
-                    utility_progress_bar->setValue(utility_beam->custom_beam_modes[i].progress);
-//                else
-//                    utility_progress_bar->hide();
+                if (custom_utility_mode->getEntryName(i) == utility_beam->custom_beam_mode)
+                {
+                    if (utility_beam->custom_beam_modes[i].progress >= 0.0f)
+                        utility_progress_bar->setValue(utility_beam->custom_beam_modes[i].progress);
+                }
             }
-//            else
-//                utility_progress_bar->hide();
         }
     }
 }
@@ -161,8 +169,10 @@ void GuiUtilityBeamControls::onUpdate()
             auto mode = utility_beam->custom_beam_mode;
 
             if (utility_beam->custom_beam_modes.size() < 1)
-                custom_utility_mode->hide();
-            else
+            {
+                if (custom_utility_mode) custom_utility_mode->hide();
+            }
+            else if (custom_utility_mode)
             {
                 std::vector<string> display_names;
 

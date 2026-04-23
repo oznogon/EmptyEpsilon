@@ -19,14 +19,13 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 private:
-    GuiToggleButton* utility_toggle;
-    // GuiSelector* utility_mode;
-    GuiSelector* custom_utility_mode;
-    GuiSlider* utility_bearing;
-    GuiKeyValueDisplay* utility_bearing_fixed;
-    GuiSlider* utility_range;
-    GuiKeyValueDisplay* utility_range_fixed;
-    GuiSlider* utility_arc;
-    GuiKeyValueDisplay* utility_arc_fixed;
-    GuiProgressbar* utility_progress_bar;
+    GuiToggleButton* utility_toggle = nullptr;
+    GuiSelector* custom_utility_mode = nullptr;
+    GuiSlider* utility_bearing = nullptr;
+    GuiKeyValueDisplay* utility_bearing_fixed = nullptr;
+    GuiSlider* utility_range = nullptr;
+    GuiKeyValueDisplay* utility_range_fixed = nullptr;
+    GuiSlider* utility_arc = nullptr;
+    GuiKeyValueDisplay* utility_arc_fixed = nullptr;
+    GuiProgressbar* utility_progress_bar = nullptr;
 };
