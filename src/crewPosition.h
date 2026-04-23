@@ -27,6 +27,10 @@ enum class CrewPosition
     commsOnly,
     shipLog,
     radarOfficer,
+    probeControl,
+    targetAnalysis,
+    briefingOfficer,
+    droneOperator,
 
     MAX
 };

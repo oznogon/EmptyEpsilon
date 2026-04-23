@@ -24,6 +24,9 @@
 #include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
 #include "screens/extra/radarScreen.h"
+#include "screens/extra/probeScreen.h"
+#include "screens/extra/targetAnalysisScreen.h"
+#include "screens/extra/briefingScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
@@ -1154,6 +1157,12 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new ShipLogScreen(container), CrewPosition::shipLog, getCrewPositionName(CrewPosition::shipLog), getCrewPositionIcon(CrewPosition::shipLog));
         if (cps.has(CrewPosition::radarOfficer))
             screen->addStationTab(new RadarScreen(container), CrewPosition::radarOfficer, getCrewPositionName(CrewPosition::radarOfficer), getCrewPositionIcon(CrewPosition::radarOfficer));
+        if (cps.has(CrewPosition::probeControl))
+            screen->addStationTab(new ProbeScreen(container), CrewPosition::probeControl, getCrewPositionName(CrewPosition::probeControl), getCrewPositionIcon(CrewPosition::probeControl));
+        if (cps.has(CrewPosition::targetAnalysis))
+            screen->addStationTab(new TargetAnalysisScreen(container), CrewPosition::targetAnalysis, getCrewPositionName(CrewPosition::targetAnalysis), getCrewPositionIcon(CrewPosition::targetAnalysis));
+        if (cps.has(CrewPosition::briefingOfficer))
+            screen->addStationTab(new BriefingScreen(container), CrewPosition::briefingOfficer, getCrewPositionName(CrewPosition::briefingOfficer), getCrewPositionIcon(CrewPosition::briefingOfficer));
 
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<static_cast<int>(CrewPosition::MAX); n++)
@@ -1201,6 +1210,10 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::commsOnly: return tr("station","Comms");
     case CrewPosition::shipLog: return tr("station","Ship's Log");
     case CrewPosition::radarOfficer: return tr("station","Radar");
+    case CrewPosition::probeControl: return tr("station","Probe Control");
+    case CrewPosition::targetAnalysis: return tr("station","Target Analysis");
+    case CrewPosition::briefingOfficer: return tr("station","Briefing");
+    case CrewPosition::droneOperator: return tr("station","Drone Operator");
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }
@@ -1225,6 +1238,10 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::commsOnly: return "";
     case CrewPosition::shipLog: return "";
     case CrewPosition::radarOfficer: return "gui/icons/station-relay";
+    case CrewPosition::probeControl: return "gui/icons/scan-probe";
+    case CrewPosition::targetAnalysis: return "gui/icons/station-science";
+    case CrewPosition::briefingOfficer: return "";
+    case CrewPosition::droneOperator: return "";
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }

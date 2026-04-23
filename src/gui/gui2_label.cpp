@@ -2,7 +2,7 @@
 #include "theme.h"
 
 GuiLabel::GuiLabel(GuiContainer* owner, string id, string text, float text_size)
-: GuiElement(owner, id), text(text), text_size(text_size), text_color(glm::u8vec4{255,255,255,255}), text_alignment(sp::Alignment::Center), background(false), font_flag(0)
+: GuiElement(owner, id), text(text), text_size(text_size), text_color(glm::u8vec4{255,255,255,255}), text_alignment(sp::Alignment::Center), background(false), override_bg_color(false), font_flag(0)
 {
     front_style = theme->getStyle("label.front");
     back_style = theme->getStyle("label.back");
@@ -13,9 +13,9 @@ void GuiLabel::onDraw(sp::RenderTarget& renderer)
     const auto& back = back_style->get(getState());
     const auto& front = front_style->get(getState());
     
-    if (background) renderer.drawStretched(rect, back.texture, back.color);
+    if (background) renderer.drawStretched(rect, back.texture, override_bg_color ? bg_color : back.color);
 
-    renderer.drawText(rect, text, text_alignment, text_size, front.font, front.color, font_flag);
+    renderer.drawText(rect, text, text_alignment, text_size, front.font, text_color, font_flag);
 }
 
 GuiLabel* GuiLabel::setText(string text)
@@ -38,6 +38,19 @@ GuiLabel* GuiLabel::setAlignment(sp::Alignment alignment)
 GuiLabel* GuiLabel::addBackground()
 {
     background = true;
+    return this;
+}
+
+GuiLabel* GuiLabel::setTextColor(glm::u8vec4 color)
+{
+    text_color = color;
+    return this;
+}
+
+GuiLabel* GuiLabel::setBackgroundColor(glm::u8vec4 color)
+{
+    override_bg_color = true;
+    bg_color = color;
     return this;
 }
 
