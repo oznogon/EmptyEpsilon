@@ -708,7 +708,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
 : GuiPanel(owner, id), window_index(_window_index)
 {
     // Layout
-    setSize(1120, 800);
+    setSize(1120, 1500);
     setPosition(0, 0, sp::Alignment::Center);
     setAttribute("layout", "vertical");
     setAttribute("margin", "50");
