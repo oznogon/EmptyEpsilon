@@ -19,6 +19,9 @@ enum class CrewPosition
     operationsOfficer, //science+comms
     //1 player crew
     singlePilot,
+    //split weapons
+    beamWeaponsOfficer,
+    missileWeaponsOfficer,
     //extras
     damageControl,
     powerManagement,

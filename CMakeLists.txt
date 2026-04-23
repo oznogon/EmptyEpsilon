@@ -273,6 +273,8 @@ set(MAIN_SOURCES
     src/screens/extra/powerManagement.cpp
     src/screens/extra/databaseScreen.cpp
     src/screens/extra/dockingBayScreen.cpp
+    src/screens/extra/beamWeaponsScreen.cpp
+    src/screens/extra/missileWeaponsScreen.cpp
     src/screens/extra/commsScreen.cpp
     src/screens/extra/shipLogScreen.cpp
     src/screens/gm/gameMasterScreen.cpp
@@ -659,6 +661,8 @@ set(MAIN_SOURCES
     src/screens/extra/damcon.h
     src/screens/extra/databaseScreen.h
     src/screens/extra/dockingBayScreen.h
+    src/screens/extra/beamWeaponsScreen.h
+    src/screens/extra/missileWeaponsScreen.h
     src/screens/extra/powerManagement.h
     src/screens/extra/shipLogScreen.h
     src/screens/gm/chatDialog.h
