@@ -8,14 +8,17 @@
 
 #include "gui/gui2_canvas.h"
 
+#include "ecs/entity.h"
 #include "screenComponents/helpOverlay.h"
 #include "screenComponents/viewport3d.h"
+#include "screenComponents/viewportMainScreen.h"
 
 class GuiButton;
 class GuiHelpOverlay;
 class GuiPanel;
 class GuiToggleButton;
 class GuiViewport3D;
+class GuiViewportMainScreen;
 class ImpulseSound;
 
 class CrewStationScreen : public GuiCanvas, public Updatable
@@ -29,11 +32,14 @@ public:
     void addStationTab(GuiElement* element, CrewPosition position, string name, string icon);
     void finishCreation();
 
+    void setDroneViewport(sp::ecs::Entity drone);
+    void clearDroneViewport();
+
     virtual void update(float delta) override;
 
 private:
     GuiElement* main_panel;
-    GuiViewport3D* viewport{ nullptr };
+    GuiViewportMainScreen* viewport{ nullptr };
     GuiButton* select_station_button;
     GuiPanel* button_strip;
     GuiHelpOverlay* keyboard_help;

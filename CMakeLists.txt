@@ -264,6 +264,7 @@ set(MAIN_SOURCES
     src/screens/crew6/weaponsScreen.cpp
     src/screens/crew6/helmsScreen.cpp
     src/screens/crew1/singlePilotScreen.cpp
+    src/screens/extra/droneOperatorScreen.cpp
     src/screens/extra/damcon.cpp
     src/screens/extra/powerManagement.cpp
     src/screens/extra/databaseScreen.cpp
@@ -288,6 +289,7 @@ set(MAIN_SOURCES
     src/screenComponents/viewportMainScreen.cpp
     src/screenComponents/selfDestructEntry.cpp
     src/screenComponents/dockingButton.cpp
+    src/screenComponents/droneDockingButton.cpp
     src/screenComponents/shieldsEnableButton.cpp
     src/screenComponents/selfDestructButton.cpp
     src/screenComponents/shieldFreqencySelect.cpp
@@ -331,6 +333,7 @@ set(MAIN_SOURCES
     src/components/faction.h
     src/components/faction.cpp
     src/components/radar.h
+    src/components/drone.h
     src/components/hull.h
     src/components/rendering.h
     src/components/rendering.cpp
@@ -439,6 +442,8 @@ set(MAIN_SOURCES
     src/systems/debugrender.cpp
     src/systems/destroy.h
     src/systems/destroy.cpp
+    src/systems/dronecontrolsystem.h
+    src/systems/dronecontrolsystem.cpp
     src/multiplayer/beamweapon.h
     src/multiplayer/beamweapon.cpp
     src/multiplayer/shields.h
@@ -509,6 +514,10 @@ set(MAIN_SOURCES
     src/multiplayer/briefing.cpp
     src/multiplayer/zone.h
     src/multiplayer/zone.cpp
+    src/multiplayer/drone.h
+    src/multiplayer/drone.cpp
+    src/multiplayer/sensors.h
+    src/multiplayer/sensors.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -583,6 +592,7 @@ set(MAIN_SOURCES
     src/screenComponents/customShipFunctions.h
     src/screenComponents/databaseView.h
     src/screenComponents/dockingButton.h
+    src/screenComponents/droneDockingButton.h
     src/screenComponents/frequencyCurve.h
     src/screenComponents/globalMessage.h
     src/screenComponents/hackingDialog.h

@@ -26,7 +26,22 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
     float delta = engine->getElapsedTime() - previous_draw;
     previous_draw = engine->getElapsedTime();
 
-    if (my_spaceship)
+    if (override_entity)
+    {
+        auto transform = override_entity.getComponent<sp::Transform>();
+        if (transform)
+        {
+            float radius = 300.0f;
+            if (auto physics = override_entity.getComponent<sp::Physics>())
+                radius = physics->getSize().x;
+            float target_camera_yaw = transform->getRotation();
+            auto cameraPosition2D = transform->getPosition() + vec2FromAngle(target_camera_yaw) * radius;
+            camera_position = glm::vec3(cameraPosition2D.x, cameraPosition2D.y, radius / 10.f);
+            camera_yaw = target_camera_yaw;
+            camera_pitch = 0.0f;
+        }
+    }
+    else if (my_spaceship)
     {
         auto transform = my_spaceship.getComponent<sp::Transform>();
         if (!transform) return;

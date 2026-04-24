@@ -9,6 +9,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/jumpdrive.h"
 #include "components/warpdrive.h"
+#include "components/drone.h"
 
 
 float ShipSystem::getSystemEffectiveness()
@@ -86,6 +87,8 @@ ShipSystem* ShipSystem::get(sp::ecs::Entity entity, Type type)
                 return &shields->rear_system;
             return nullptr;
         }
+    case Type::Sensors:
+        return entity.getComponent<SensorsSystem>();
     }
     return nullptr;
 }
@@ -103,6 +106,7 @@ string getSystemName(ShipSystem::Type system)
     case ShipSystem::Type::JumpDrive: return "jumpdrive";
     case ShipSystem::Type::FrontShield: return "frontshield";
     case ShipSystem::Type::RearShield: return "rearshield";
+    case ShipSystem::Type::Sensors: return "sensors";
     default:
         return "UNKNOWN";
     }
@@ -121,6 +125,7 @@ string getLocaleSystemName(ShipSystem::Type system)
     case ShipSystem::Type::JumpDrive: return tr("system", "Jump Drive");
     case ShipSystem::Type::FrontShield: return tr("system", "Front Shield Generator");
     case ShipSystem::Type::RearShield: return tr("system", "Rear Shield Generator");
+    case ShipSystem::Type::Sensors: return tr("system", "Sensors");
     default:
         return "UNKNOWN";
     }
