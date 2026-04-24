@@ -314,6 +314,9 @@ Keys::Keys() :
     relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
     relay_alert_level_red("RELAY_ALERT_RED"),
 
+    // Damage control screen
+    damcon_toggle_detail_lines("DAMCON_TOGGLE_DETAIL_LINES"),
+
     // GM screen
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
@@ -508,6 +511,9 @@ void Keys::init()
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
     relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
+
+    // Damage control
+    damcon_toggle_detail_lines.setLabel(tr("hotkey_menu", "Damage control"), tr("hotkey_Damcon", "Toggle system detail lines"));
 
     // Cinematic view
     cinematic.init();

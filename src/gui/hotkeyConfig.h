@@ -159,6 +159,9 @@ public:
     sp::io::Keybinding relay_alert_level_yellow;
     sp::io::Keybinding relay_alert_level_red;
 
+    // Damage control screen binds
+    sp::io::Keybinding damcon_toggle_detail_lines;
+
     // Cinematic view binds
     struct CinematicKeys {
         CinematicKeys();
