@@ -21,7 +21,7 @@ string crewPositionToString(CrewPosition value) {
     case CrewPosition::probeControl: return "probecontrol";
     case CrewPosition::targetAnalysis: return "targetanalysis";
     case CrewPosition::briefingOfficer: return "briefingofficer";
-    case CrewPosition::droneOperator: return "droneoperator";
+    case CrewPosition::droneOperations: return "droneoperations";
     default: return "none";
     }
 }
@@ -72,8 +72,8 @@ std::optional<CrewPosition> tryParseCrewPosition(string value) {
         return CrewPosition::targetAnalysis;
     else if (value == "briefingofficer" || value == "briefing")
         return CrewPosition::briefingOfficer;
-    else if (value == "droneoperator" || value == "drone")
-        return CrewPosition::droneOperator;
+    else if (value == "droneoperations" || value == "drone")
+        return CrewPosition::droneOperations;
     else
         return {};
 }

@@ -30,7 +30,7 @@ enum class CrewPosition
     probeControl,
     targetAnalysis,
     briefingOfficer,
-    droneOperator,
+    droneOperations,
 
     MAX
 };

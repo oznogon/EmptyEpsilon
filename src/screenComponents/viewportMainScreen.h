@@ -1,6 +1,7 @@
 #pragma once
 
 #include "viewport3d.h"
+#include "ecs/entity.h"
 
 class GuiViewportMainScreen : public GuiViewport3D
 {
@@ -10,6 +11,9 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
 
     bool first_person = false;
+
+    // When set, overrides my_spaceship as the camera anchor (first-person from this entity).
+    sp::ecs::Entity override_entity;
 
     constexpr static uint8_t flag_callsigns = 0x04;
     constexpr static uint8_t flag_headings  = 0x02;

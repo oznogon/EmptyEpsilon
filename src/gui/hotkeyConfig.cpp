@@ -261,6 +261,7 @@ Keys::Keys() :
         {"ENGINEERING_SELECT_SYSTEM_JUMP_DRIVE", "7"},
         {"ENGINEERING_SELECT_SYSTEM_FRONT_SHIELD", "8"},
         {"ENGINEERING_SELECT_SYSTEM_READ_SHIELD", "9"},
+        {"ENGINEERING_SELECT_SYSTEM_SENSORS"},
     },
     engineering_select_system_next("ENGINEERING_SELECT_SYSTEM_NEXT", "Keypad +"),
     engineering_select_system_prev("ENGINEERING_SELECT_SYSTEM_PREV", "Keypad -"),
@@ -296,6 +297,7 @@ Keys::Keys() :
         {"ENGINEERING_SET_SYSTEM_POWER_JUMP_DRIVE"},
         {"ENGINEERING_SET_SYSTEM_POWER_FRONT_SHIELD"},
         {"ENGINEERING_SET_SYSTEM_POWER_READ_SHIELD"},
+        {"ENGINEERING_SET_SYSTEM_POWER_SENSORS"},
     },
     engineering_set_coolant_for_system{
         {"ENGINEERING_SET_SYSTEM_COOLANT_REACTOR"},
@@ -307,6 +309,7 @@ Keys::Keys() :
         {"ENGINEERING_SET_SYSTEM_COOLANT_JUMP_DRIVE"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_FRONT_SHIELD"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_READ_SHIELD"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_SENSORS"},
     },
 
     // Relay crew screen

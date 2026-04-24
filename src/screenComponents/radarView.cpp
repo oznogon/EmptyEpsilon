@@ -549,10 +549,12 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
     const auto& color = theme->getStyle("radar.target_projections")->get(getState()).color;
 
-    auto transform = my_spaceship.getComponent<sp::Transform>();
-    if (transform && missile_tube_controls)
+    auto entity = target_projection_entity ? target_projection_entity : my_spaceship;
+    auto transform = entity.getComponent<sp::Transform>();
+    bool has_aim = missile_tube_controls || target_projection_manual_aim_func;
+    if (transform && has_aim)
     {
-        if (auto tubes = my_spaceship.getComponent<MissileTubes>())
+        if (auto tubes = entity.getComponent<MissileTubes>())
         {
             for (auto& mount : tubes->mounts)
             {
@@ -565,11 +567,27 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                 float missile_target_angle = fire_angle;
                 if (data.turnrate > 0.0f)
                 {
-                    if (missile_tube_controls->getManualAim())
+                    bool manual_aim = false;
+                    float target_angle = 0.0f;
+                    if (missile_tube_controls)
                     {
-                        missile_target_angle = missile_tube_controls->getMissileTargetAngle();
-                    }else if (auto target = my_spaceship.getComponent<Target>()) {
-                        float firing_solution = MissileSystem::calculateFiringSolution(my_spaceship, mount, target->entity);
+                        manual_aim = missile_tube_controls->getManualAim();
+                        target_angle = missile_tube_controls->getMissileTargetAngle();
+                    }
+                    else if (target_projection_manual_aim_func)
+                    {
+                        manual_aim = target_projection_manual_aim_func();
+                        if (target_projection_angle_func)
+                            target_angle = target_projection_angle_func();
+                    }
+
+                    if (manual_aim)
+                    {
+                        missile_target_angle = target_angle;
+                    }
+                    else if (auto target = entity.getComponent<Target>())
+                    {
+                        float firing_solution = MissileSystem::calculateFiringSolution(entity, mount, target->entity);
                         if (firing_solution != std::numeric_limits<float>::infinity())
                             missile_target_angle = firing_solution;
                     }
@@ -650,9 +668,10 @@ void GuiRadarView::drawMissileTubes(sp::RenderTarget& renderer)
 {
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    auto tubes = my_spaceship.getComponent<MissileTubes>();
+    auto entity = target_projection_entity ? target_projection_entity : my_spaceship;
+    auto tubes = entity.getComponent<MissileTubes>();
     if (!tubes) return;
-    auto transform = my_spaceship.getComponent<sp::Transform>();
+    auto transform = entity.getComponent<sp::Transform>();
     if (!transform) return;
 
     const auto& color = theme->getStyle("radar.missile_tubes")->get(getState()).color;
