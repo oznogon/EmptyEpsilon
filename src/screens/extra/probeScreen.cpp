@@ -4,6 +4,7 @@
 #include "i18n.h"
 
 #include "components/radar.h"
+#include "components/collision.h"
 
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/alertOverlay.h"

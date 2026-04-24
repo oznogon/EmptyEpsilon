@@ -1034,3 +1034,23 @@ function Entity:getSelfDestructSize()
     if self.components.self_destruct then return self.components.self_destruct.size end
     return 0
 end
+--- Returns the entity to which this player ship currently has an active drone connection.
+--- Returns nil if no drone is connected.
+--- Example: ship:getDroneLink()
+function Entity:getDroneLink()
+    if self.components.drone_link then return self.components.drone_link.linked_drone end
+    return nil
+end
+--- Commands this player ship to connect to the given entity as a drone.
+--- The entity must have the allow_drone_link component with this ship as its owner.
+--- Example: ship:commandSetDroneLink(drone)
+function Entity:commandSetDroneLink(drone)
+    commandSetDroneLink(self, drone)
+    return self
+end
+--- Commands this player ship to disconnect from any active drone connection.
+--- Example: ship:commandClearDroneLink()
+function Entity:commandClearDroneLink()
+    commandClearDroneLink(self)
+    return self
+end

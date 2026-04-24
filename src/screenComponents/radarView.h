@@ -42,6 +42,9 @@ private:
 
     TargetsContainer* targets;
     GuiMissileTubeControls* missile_tube_controls;
+    sp::ecs::Entity target_projection_entity;
+    std::function<bool()> target_projection_manual_aim_func;
+    std::function<float()> target_projection_angle_func;
 
     glm::vec2 view_position{0, 0};
     float view_rotation;
@@ -92,7 +95,9 @@ public:
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
+    GuiRadarView* enableTargetProjections(std::function<bool()> manual_aim_func, std::function<float()> angle_func) { show_target_projection = true; target_projection_manual_aim_func = manual_aim_func; target_projection_angle_func = angle_func; return this; }
     GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
+    GuiRadarView* setTargetProjectionEntity(sp::ecs::Entity entity) { target_projection_entity = entity; return this; }
     GuiRadarView* enableMissileTubeIndicators() { show_missile_tubes = true; return this; }
     GuiRadarView* disableMissileTubeIndicators() { show_missile_tubes = false; return this; }
     GuiRadarView* enableCallsigns() { show_callsigns = true; return this; }

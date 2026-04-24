@@ -8,6 +8,8 @@
 #include "crewPosition.h"
 
 
+enum class AIOrder;
+
 class PlayerInfo;
 class RenderLayer;
 extern P<PlayerInfo> my_player_info;
@@ -80,6 +82,26 @@ public:
     void commandSetAlertLevel(AlertLevel level);
     void commandHackingFinished(sp::ecs::Entity target, ShipSystem::Type target_system);
     void commandCustomFunction(string name);
+
+    void commandSetDroneLink(sp::ecs::Entity drone);
+    void commandDroneTargetRotation(float target);
+    void commandDroneImpulse(float target);
+    void commandDroneWarp(int target);
+    void commandDroneJump(float distance);
+    void commandDroneAbortJump();
+    void commandDroneSetTarget(sp::ecs::Entity target);
+    void commandDroneSetShields(bool enabled);
+    void commandDroneLoadTube(uint32_t tube_nr, EMissileWeapons type);
+    void commandDroneUnloadTube(uint32_t tube_nr);
+    void commandDroneFireTube(uint32_t tube_nr, float missile_target_angle);
+    void commandDroneCombatManeuverBoost(float amount);
+    void commandDroneCombatManeuverStrafe(float strafe);
+    void commandDroneSetBeamFrequency(int32_t frequency);
+    void commandDroneSetBeamSystemTarget(ShipSystem::Type system);
+    void commandDroneDock(sp::ecs::Entity station);
+    void commandDroneUndock();
+    void commandDroneAbortDock();
+    void commandSetAIOrder(sp::ecs::Entity entity, AIOrder order, sp::ecs::Entity order_target = sp::ecs::Entity());
 
     void commandSetCrewPosition(int monitor_index, CrewPosition position, bool active);
     void commandSetShip(sp::ecs::Entity entity);

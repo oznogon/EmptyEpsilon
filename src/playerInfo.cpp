@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "random.h"
 #include "gameGlobalInfo.h"
+#include "components/ai.h"
 #include "menus/luaConsole.h"
 #include "screens/mainScreen.h"
 #include "screens/crewStationScreen.h"
@@ -17,6 +18,7 @@
 #include "screens/crew4/operationsScreen.h"
 
 #include "screens/crew1/singlePilotScreen.h"
+#include "screens/extra/droneOperationsScreen.h"
 
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
@@ -52,6 +54,7 @@
 #include "components/hacking.h"
 #include "components/scanning.h"
 #include "components/radar.h"
+#include "components/drone.h"
 #include "components/internalrooms.h"
 #include "components/moveto.h"
 #include "components/lifetime.h"
@@ -109,6 +112,25 @@ static const uint16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
+static const uint16_t CMD_SET_DRONE_LINK = 0x002D;
+static const uint16_t CMD_DRONE_TARGET_ROTATION = 0x002E;
+static const uint16_t CMD_DRONE_IMPULSE = 0x002F;
+static const uint16_t CMD_DRONE_WARP = 0x0030;
+static const uint16_t CMD_DRONE_JUMP = 0x0031;
+static const uint16_t CMD_DRONE_ABORT_JUMP = 0x0032;
+static const uint16_t CMD_DRONE_SET_TARGET = 0x0033;
+static const uint16_t CMD_DRONE_SET_SHIELDS = 0x0034;
+static const uint16_t CMD_DRONE_LOAD_TUBE = 0x0035;
+static const uint16_t CMD_DRONE_UNLOAD_TUBE = 0x0036;
+static const uint16_t CMD_DRONE_FIRE_TUBE = 0x0037;
+static const uint16_t CMD_DRONE_COMBAT_MANEUVER_BOOST = 0x0038;
+static const uint16_t CMD_DRONE_COMBAT_MANEUVER_STRAFE = 0x0039;
+static const uint16_t CMD_DRONE_SET_BEAM_FREQUENCY = 0x003A;
+static const uint16_t CMD_DRONE_SET_BEAM_SYSTEM_TARGET = 0x003B;
+static const uint16_t CMD_SET_AI_ORDER = 0x003C;
+static const uint16_t CMD_DRONE_DOCK = 0x003D;
+static const uint16_t CMD_DRONE_UNDOCK = 0x003E;
+static const uint16_t CMD_DRONE_ABORT_DOCK = 0x003F;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -609,6 +631,140 @@ void PlayerInfo::commandCrewSetTargetPosition(sp::ecs::Entity crew, glm::ivec2 p
     sendClientCommand(packet);
 }
 
+void PlayerInfo::commandSetDroneLink(sp::ecs::Entity drone)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_DRONE_LINK << drone;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneTargetRotation(float target)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_TARGET_ROTATION << target;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneImpulse(float target)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_IMPULSE << target;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneWarp(int target)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_WARP << target;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneJump(float distance)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_JUMP << distance;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneAbortJump()
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_ABORT_JUMP;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneSetTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_SET_TARGET << target;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneSetShields(bool enabled)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_SET_SHIELDS << enabled;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneLoadTube(uint32_t tube_nr, EMissileWeapons type)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_LOAD_TUBE << tube_nr << type;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneUnloadTube(uint32_t tube_nr)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_UNLOAD_TUBE << tube_nr;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneFireTube(uint32_t tube_nr, float missile_target_angle)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_FIRE_TUBE << tube_nr << missile_target_angle;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneCombatManeuverBoost(float amount)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_COMBAT_MANEUVER_BOOST << amount;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneCombatManeuverStrafe(float strafe)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_COMBAT_MANEUVER_STRAFE << strafe;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneSetBeamFrequency(int32_t frequency)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_SET_BEAM_FREQUENCY << frequency;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneSetBeamSystemTarget(ShipSystem::Type system)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_SET_BEAM_SYSTEM_TARGET << system;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneDock(sp::ecs::Entity object)
+{
+    if (!object) return;
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_DOCK << object;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneUndock()
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_UNDOCK;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandDroneAbortDock()
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_DRONE_ABORT_DOCK;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetAIOrder(sp::ecs::Entity entity, AIOrder order, sp::ecs::Entity order_target)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_AI_ORDER << entity << order << order_target;
+    sendClientCommand(packet);
+}
+
 void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
 {
     if (client_id != this->client_id) return;
@@ -1064,6 +1220,218 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             if (auto ic = crew.getComponent<InternalCrew>())
                 ic->target_position = position;
         }break;
+    case CMD_SET_DRONE_LINK:
+        {
+            sp::ecs::Entity drone;
+            packet >> drone;
+            auto dc = ship.getComponent<DroneController>();
+            if (!dc) break;
+            if (!drone)
+            {
+                ship.removeComponent<DroneLink>();
+                break;
+            }
+            auto adl = drone.getComponent<AllowDroneLink>();
+            if (!adl || adl->owner != ship) break;
+            auto ship_transform = ship.getComponent<sp::Transform>();
+            auto drone_transform = drone.getComponent<sp::Transform>();
+            if (!ship_transform || !drone_transform) break;
+            float range = dc->control_range;
+            if (auto sensors = ship.getComponent<SensorsSystem>())
+                range *= sensors->getSystemEffectiveness();
+            if (glm::length(drone_transform->getPosition() - ship_transform->getPosition()) > range) break;
+            ship.getOrAddComponent<DroneLink>().linked_drone = drone;
+        }
+        break;
+    case CMD_DRONE_TARGET_ROTATION:
+        {
+            float f;
+            packet >> f;
+            if (auto dl = ship.getComponent<DroneLink>())
+                if (auto thrusters = dl->linked_drone.getComponent<ManeuveringThrusters>())
+                { thrusters->stop(); thrusters->target = f; }
+        }
+        break;
+    case CMD_DRONE_IMPULSE:
+        {
+            float f;
+            packet >> f;
+            if (auto dl = ship.getComponent<DroneLink>())
+                if (auto engine = dl->linked_drone.getComponent<ImpulseEngine>())
+                    engine->request = f;
+        }
+        break;
+    case CMD_DRONE_WARP:
+        {
+            int level;
+            packet >> level;
+            if (auto dl = ship.getComponent<DroneLink>())
+                if (auto warp = dl->linked_drone.getComponent<WarpDrive>())
+                    warp->request = level;
+        }
+        break;
+    case CMD_DRONE_JUMP:
+        {
+            float distance;
+            packet >> distance;
+            if (auto dl = ship.getComponent<DroneLink>())
+                JumpSystem::initializeJump(dl->linked_drone, distance);
+        }
+        break;
+    case CMD_DRONE_ABORT_JUMP:
+        {
+            if (auto dl = ship.getComponent<DroneLink>())
+                JumpSystem::abortJump(dl->linked_drone);
+        }
+        break;
+    case CMD_DRONE_SET_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            if (auto dl = ship.getComponent<DroneLink>())
+                dl->linked_drone.getOrAddComponent<Target>().entity = target;
+        }
+        break;
+    case CMD_DRONE_SET_SHIELDS:
+        {
+            bool active;
+            packet >> active;
+            if (auto dl = ship.getComponent<DroneLink>())
+            {
+                auto shields = dl->linked_drone.getComponent<Shields>();
+                if (shields && shields->calibration_delay <= 0.0f && active != shields->active)
+                {
+                    shields->active = active;
+                    if (active)
+                        gameGlobalInfo->playSoundOnMainScreen(dl->linked_drone, "sfx/shield_up.wav");
+                    else
+                        gameGlobalInfo->playSoundOnMainScreen(dl->linked_drone, "sfx/shield_down.wav");
+                }
+            }
+        }
+        break;
+    case CMD_DRONE_LOAD_TUBE:
+        {
+            uint32_t tube_nr;
+            EMissileWeapons type;
+            packet >> tube_nr >> type;
+            if (auto dl = ship.getComponent<DroneLink>())
+            {
+                auto missiletubes = dl->linked_drone.getComponent<MissileTubes>();
+                if (missiletubes && tube_nr < missiletubes->mounts.size())
+                    MissileSystem::startLoad(dl->linked_drone, missiletubes->mounts[tube_nr], type);
+            }
+        }
+        break;
+    case CMD_DRONE_UNLOAD_TUBE:
+        {
+            uint32_t tube_nr;
+            packet >> tube_nr;
+            if (auto dl = ship.getComponent<DroneLink>())
+            {
+                auto missiletubes = dl->linked_drone.getComponent<MissileTubes>();
+                if (missiletubes && tube_nr < missiletubes->mounts.size())
+                    MissileSystem::startUnload(dl->linked_drone, missiletubes->mounts[tube_nr]);
+            }
+        }
+        break;
+    case CMD_DRONE_FIRE_TUBE:
+        {
+            uint32_t tube_nr;
+            float missile_target_angle;
+            packet >> tube_nr >> missile_target_angle;
+            if (auto dl = ship.getComponent<DroneLink>())
+            {
+                auto missiletubes = dl->linked_drone.getComponent<MissileTubes>();
+                if (missiletubes && tube_nr < missiletubes->mounts.size())
+                {
+                    sp::ecs::Entity target;
+                    if (auto t = dl->linked_drone.getComponent<Target>())
+                        target = t->entity;
+                    MissileSystem::fire(dl->linked_drone, missiletubes->mounts[tube_nr], missile_target_angle, target);
+                }
+            }
+        }
+        break;
+    case CMD_DRONE_COMBAT_MANEUVER_BOOST:
+        {
+            float amount;
+            packet >> amount;
+            if (auto dl = ship.getComponent<DroneLink>())
+                if (auto combat = dl->linked_drone.getComponent<CombatManeuveringThrusters>())
+                    combat->boost.request = amount;
+        }
+        break;
+    case CMD_DRONE_COMBAT_MANEUVER_STRAFE:
+        {
+            float strafe;
+            packet >> strafe;
+            if (auto dl = ship.getComponent<DroneLink>())
+                if (auto combat = dl->linked_drone.getComponent<CombatManeuveringThrusters>())
+                    combat->strafe.request = strafe;
+        }
+        break;
+    case CMD_DRONE_SET_BEAM_FREQUENCY:
+        {
+            int32_t frequency;
+            packet >> frequency;
+            if (auto dl = ship.getComponent<DroneLink>())
+                if (auto beams = dl->linked_drone.getComponent<BeamWeaponSys>())
+                    beams->setFrequency(frequency);
+        }
+        break;
+    case CMD_DRONE_SET_BEAM_SYSTEM_TARGET:
+        {
+            ShipSystem::Type system;
+            packet >> system;
+            if (auto dl = ship.getComponent<DroneLink>())
+                if (auto beams = dl->linked_drone.getComponent<BeamWeaponSys>())
+                    beams->system_target = (ShipSystem::Type)std::clamp((int)system, -1, (int)(ShipSystem::COUNT - 1));
+        }
+        break;
+    case CMD_DRONE_DOCK:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            if (auto dl = ship.getComponent<DroneLink>())
+                if (target)
+                    DockingSystem::requestDock(dl->linked_drone, target);
+        }
+        break;
+    case CMD_DRONE_UNDOCK:
+        {
+            if (auto dl = ship.getComponent<DroneLink>())
+                DockingSystem::requestUndock(dl->linked_drone);
+        }
+        break;
+    case CMD_DRONE_ABORT_DOCK:
+        {
+            if (auto dl = ship.getComponent<DroneLink>())
+                DockingSystem::abortDock(dl->linked_drone);
+        }
+        break;
+    case CMD_SET_AI_ORDER:
+        {
+            sp::ecs::Entity entity;
+            AIOrder order;
+            sp::ecs::Entity order_target;
+            packet >> entity >> order >> order_target;
+
+            if (auto ai = entity.getComponent<AIController>())
+            {
+                ai->orders = order;
+                if (order == AIOrder::DefendLocation)
+                {
+                    if (auto transform = entity.getComponent<sp::Transform>())
+                        ai->order_target_location = transform->getPosition();
+                }
+                else if (order == AIOrder::Dock || order == AIOrder::DefendTarget)
+                    ai->order_target = order_target;
+                else if (order == AIOrder::Roaming)
+                    ai->order_target_location = {0, 0};
+            }
+        }
+        break;
     }
 }
 
@@ -1104,6 +1472,8 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
         //Crew 1
         if (cps.has(CrewPosition::singlePilot))
             screen->addStationTab(new SinglePilotScreen(container), CrewPosition::singlePilot, getCrewPositionName(CrewPosition::singlePilot), getCrewPositionIcon(CrewPosition::singlePilot));
+        if (cps.has(CrewPosition::droneOperations))
+            screen->addStationTab(new DroneOperationsScreen(container), CrewPosition::droneOperations, getCrewPositionName(CrewPosition::droneOperations), getCrewPositionIcon(CrewPosition::droneOperations));
 
         //Extra
         if (cps.has(CrewPosition::damageControl))
@@ -1176,7 +1546,7 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::probeControl: return tr("station","Probe Control");
     case CrewPosition::targetAnalysis: return tr("station","Target Analysis");
     case CrewPosition::briefingOfficer: return tr("station","Briefing");
-    case CrewPosition::droneOperator: return tr("station","Drone Operator");
+    case CrewPosition::droneOperations: return tr("station","Drone Operations");
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }
@@ -1204,7 +1574,7 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::probeControl: return "gui/icons/scan-probe";
     case CrewPosition::targetAnalysis: return "gui/icons/station-science";
     case CrewPosition::briefingOfficer: return "";
-    case CrewPosition::droneOperator: return "";
+    case CrewPosition::droneOperations: return "";
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }

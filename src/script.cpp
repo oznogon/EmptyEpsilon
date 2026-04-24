@@ -32,6 +32,9 @@
 #include "components/zone.h"
 #include "components/shiplog.h"
 #include "components/selfdestruct.h"
+#include "components/radar.h"
+#include "components/drone.h"
+#include "systems/probe.h"
 #include "components/briefing.h"
 #include "audio/sound.h"
 #include "systems/jumpsystem.h"
@@ -1217,6 +1220,24 @@ static void luaCommandClearScienceLink(sp::ecs::Entity ship) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandClearScienceLink(); return; }
     // TODO; update the script docs when fully implemented
 }
+static void luaCommandSetDroneLink(sp::ecs::Entity ship, sp::ecs::Entity drone) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetDroneLink(drone); return; }
+    if (ship.getComponent<DroneController>())
+    {
+        if (!drone)
+        {
+            ship.removeComponent<DroneLink>();
+            return;
+        }
+        auto adl = drone.getComponent<AllowDroneLink>();
+        if (!adl || adl->owner != ship) return;
+        ship.getOrAddComponent<DroneLink>().linked_drone = drone;
+    }
+}
+static void luaCommandClearDroneLink(sp::ecs::Entity ship) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetDroneLink(sp::ecs::Entity{}); return; }
+    ship.removeComponent<DroneLink>();
+}
 static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAlertLevel(level); return; }
     // TODO; update the script docs when fully implemented
@@ -1716,6 +1737,23 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Example:
     /// commandClearScienceLink(getPlayerShip(-1)) -- clear any science link on this ship
     env.setGlobal("commandClearScienceLink", &luaCommandClearScienceLink);
+    /// void commandSetDroneLink(entity ship, entity drone)
+    /// Connects the given ship to the given entity as a drone.
+    /// The drone entity must have the allow_drone_link component with this ship as its owner.
+    /// For the local player ship, this sends a multiplayer command.
+    /// For other ships, this modifies the component directly.
+    /// This is equivalent to selecting a drone on the Drone Operations screen and clicking Connect.
+    /// Example:
+    /// commandSetDroneLink(getPlayerShip(-1), drone) -- connect drone to this ship
+    env.setGlobal("commandSetDroneLink", &luaCommandSetDroneLink);
+    /// void commandClearDroneLink(entity ship)
+    /// Clears any active drone connection for the given ship.
+    /// For the local player ship, this sends a multiplayer command.
+    /// For other ships, this modifies the component directly.
+    /// This is equivalent to clicking Disconnect on the Drone Operations screen.
+    /// Example:
+    /// commandClearDroneLink(getPlayerShip(-1)) -- disconnect any drone from this ship
+    env.setGlobal("commandClearDroneLink", &luaCommandClearDroneLink);
     /// void commandSetAlertLevel(entity ship, string level)
     /// Sets the alert level for the given ship. See EAlertLevel for valid values.
     /// This command is only implemented for the local player ship and has no effect on other ships.
