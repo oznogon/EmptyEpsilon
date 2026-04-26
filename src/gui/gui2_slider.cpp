@@ -22,12 +22,16 @@ void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
     if (rect.size.x > rect.size.y)
     {
         float x;
-        x = rect.position.x + (rect.size.x - rect.size.y) * (value - min_value) / (max_value - min_value);
+        float range = max_value - min_value;
+        float f = (range != 0.0f) ? (value - min_value) / range : 0.5f;
+        x = rect.position.x + (rect.size.x - rect.size.y) * f;
 
         renderer.drawSprite(front.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, front.color);
     }else{
         float y;
-        y = rect.position.y + (rect.size.y - rect.size.x) * (value - min_value) / (max_value - min_value);
+        float range = max_value - min_value;
+        float f = (range != 0.0f) ? (value - min_value) / range : 0.5f;
+        y = rect.position.y + (rect.size.y - rect.size.x) * f;
 
         renderer.drawSprite(front.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, front.color);
     }
@@ -125,25 +129,32 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
     if (rect.size.x > rect.size.y)
     {
         float x;
+        float range = max_value - min_value;
+        float f = (range != 0.0f) ? (value - min_value) / range : 0.5f;
 
         for(TSnapPoint& point : snap_points)
         {
-            x = rect.position.x + (rect.size.x - rect.size.y) * (point.value - min_value) / (max_value - min_value);
+            float point_f = (range != 0.0f) ? (point.value - min_value) / range : 0.5f;
+            x = rect.position.x + (rect.size.x - rect.size.y) * point_f;
 
             renderer.drawRotatedSprite(tick.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, 90, tick.color);
         }
-        x = rect.position.x + (rect.size.x - rect.size.y) * (value - min_value) / (max_value - min_value);
+        x = rect.position.x + (rect.size.x - rect.size.y) * f;
 
         renderer.drawSprite(front.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, front.color);
     }else{
         float y;
+        float range = max_value - min_value;
+        float f = (range != 0.0f) ? (value - min_value) / range : 0.5f;
+
         for(TSnapPoint& point : snap_points)
         {
-            y = rect.position.y + (rect.size.y - rect.size.x) * (point.value - min_value) / (max_value - min_value);
+            float point_f = (range != 0.0f) ? (point.value - min_value) / range : 0.5f;
+            y = rect.position.y + (rect.size.y - rect.size.x) * point_f;
 
             renderer.drawSprite(tick.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, tick.color);
         }
-        y = rect.position.y + (rect.size.y - rect.size.x) * (value - min_value) / (max_value - min_value);
+        y = rect.position.y + (rect.size.y - rect.size.x) * f;
 
         renderer.drawSprite(front.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, front.color);
     }
