@@ -153,6 +153,7 @@ set(GUI_LIB_SOURCES
     src/gui/gui2_textentry.cpp
     src/gui/gui2_label.cpp
     src/gui/gui2_image.cpp
+    src/gui/gui2_image_contain.cpp
     src/gui/gui2_arrowbutton.cpp
     src/gui/gui2_entrylist.cpp
     src/gui/gui2_progressbar.cpp

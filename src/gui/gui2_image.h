@@ -5,7 +5,7 @@
 
 class GuiImage : public GuiElement
 {
-private:
+protected:
     glm::u8vec4 color{255,255,255,255};
     string texture_name;
     float angle;
