@@ -30,11 +30,17 @@ GuiScrollText* GuiScrollText::setScrollbarWidth(float width)
     return this;
 }
 
+GuiScrollText* GuiScrollText::setAlignment(sp::Alignment alignment)
+{
+    this->alignment = alignment;
+    return this;
+}
+
 void GuiScrollText::onDraw(sp::RenderTarget& renderer)
 {
     const auto& text_style = text_theme->get(getState());
     auto text_rect = sp::Rect(rect.position.x, rect.position.y, rect.size.x - scrollbar->getSize().x, rect.size.y);
-    auto prepared = sp::RenderTarget::getDefaultFont()->prepare(this->text, 32, text_size, text_style.color, text_rect.size, sp::Alignment::TopLeft, sp::Font::FlagClip | sp::Font::FlagLineWrap);
+    auto prepared = sp::RenderTarget::getDefaultFont()->prepare(this->text, 32, text_size, text_style.color, text_rect.size, alignment, sp::Font::FlagClip | sp::Font::FlagLineWrap);
     auto text_draw_size = prepared.getUsedAreaSize();
 
     int scroll_max = text_draw_size.y;
@@ -55,7 +61,7 @@ void GuiScrollText::onDraw(sp::RenderTarget& renderer)
     }
     else
     {
-        for(auto& g : prepared.data)
+        for (auto& g : prepared.data)
             g.position.y -= scrollbar->getValue();
         scrollbar->show();
         renderer.drawText(text_rect, prepared, sp::Font::FlagClip | sp::Font::FlagLineWrap);
@@ -79,43 +85,47 @@ void GuiScrollFormattedText::onDraw(sp::RenderTarget& renderer)
     auto main_color = text_style.color;
     auto current_color = main_color;
     auto text_rect = sp::Rect(rect.position.x, rect.position.y, rect.size.x - scrollbar->getSize().x, rect.size.y);
-    auto prepared = sp::RenderTarget::getDefaultFont()->start(32, text_rect.size, sp::Alignment::TopLeft, sp::Font::FlagClip | sp::Font::FlagLineWrap);
+    auto prepared = sp::RenderTarget::getDefaultFont()->start(32, text_rect.size, alignment, sp::Font::FlagClip | sp::Font::FlagLineWrap);
     int last_end = 0;
     float size_mod = 1.0f;
-    for(auto tag_start = text.find('<'); tag_start >= 0; tag_start = text.find('<', tag_start+1)) {
+
+    for (auto tag_start = text.find('<'); tag_start >= 0; tag_start = text.find('<', tag_start + 1))
+    {
         prepared.append(text.substr(last_end, tag_start), text_size * size_mod, current_color);
-        auto tag_end = text.find('>', tag_start+1);
-        if (tag_end != -1) {
+        auto tag_end = text.find('>', tag_start + 1);
+
+        if (tag_end != -1)
+        {
             last_end = tag_end + 1;
             auto tag = text.substr(tag_start + 1, tag_end);
-            if (tag == "/") {
+            if (tag == "/")
+            {
                 size_mod = 1.0f;
                 current_color = main_color;
-            } else if (tag == "h1") {
-                size_mod = 2.0f;
-            } else if (tag == "h2") {
-                size_mod = 1.5f;
-            } else if (tag == "h3") {
-                size_mod = 1.17f;
-            } else if (tag == "h4") {
-                size_mod = 1.0f;
-            } else if (tag == "h5") {
-                size_mod = 0.83f;
-            } else if (tag == "h6") {
-                size_mod = 0.67f;
-            } else if (tag == "small") {
-                size_mod = 0.89f;
-            } else if (tag == "large") {
-                size_mod = 1.2f;
-            } else if (tag.startswith("color=")) {
-                current_color = GuiTheme::toColor(tag.substr(6));
-            } else {
-                last_end = tag_start;
             }
-        } else {
-            last_end = tag_start;
+            else if (tag == "h1")
+                size_mod = 2.0f;
+            else if (tag == "h2")
+                size_mod = 1.5f;
+            else if (tag == "h3")
+                size_mod = 1.17f;
+            else if (tag == "h4")
+                size_mod = 1.0f;
+            else if (tag == "h5")
+                size_mod = 0.83f;
+            else if (tag == "h6")
+                size_mod = 0.67f;
+            else if (tag == "small")
+                size_mod = 0.89f;
+            else if (tag == "large")
+                size_mod = 1.2f;
+            else if (tag.startswith("color="))
+                current_color = GuiTheme::toColor(tag.substr(6));
+            else last_end = tag_start;
         }
+        else last_end = tag_start;
     }
+
     prepared.append(text.substr(last_end), text_size * size_mod, current_color);
     prepared.finish();
     auto text_draw_size = prepared.getUsedAreaSize();
@@ -138,7 +148,7 @@ void GuiScrollFormattedText::onDraw(sp::RenderTarget& renderer)
     }
     else
     {
-        for(auto& g : prepared.data)
+        for (auto& g : prepared.data)
             g.position.y -= scrollbar->getValue();
         scrollbar->show();
         renderer.drawText(text_rect, prepared, sp::Font::FlagClip | sp::Font::FlagLineWrap);
