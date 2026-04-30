@@ -67,3 +67,7 @@ docking-bay 20260421
 multiple-waypoint-routes 20260421
 hotkeys-remapping-with-dialog 20260421
 guitooltip 20260421
+
+split-weapons-screen 20260423
+
+docking-request-menu 20260430
