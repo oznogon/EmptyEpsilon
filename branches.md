@@ -73,3 +73,4 @@ split-weapons-screen 20260423
 docking-request-menu 20260430
 
 master 20260501 -- docking-request-menu merged
+force-cpp17 20260501 -- mitigate GCC 16 build issues
