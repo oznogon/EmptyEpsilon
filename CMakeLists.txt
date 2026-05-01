@@ -742,6 +742,16 @@ if(MSVC)
     set_source_files_properties(src/screens/gm/tweak.cpp PROPERTIES COMPILE_FLAGS "/bigobj")
 endif()
 
+target_compile_options(EE_GuiLIB PUBLIC
+    "$<$<CXX_COMPILER_ID:GNU>:-std=gnu++17>"
+)
+target_compile_features(EE_GuiLIB PUBLIC cxx_std_17)
+
+target_compile_options(${PROJECT_NAME} PUBLIC
+    "$<$<CXX_COMPILER_ID:GNU>:-std=gnu++17>"
+)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in
