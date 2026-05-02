@@ -34,7 +34,7 @@ GuiHelpOverlay::GuiHelpOverlay(GuiContainer* owner, string help_title, string he
         ->setTextSize(30.0f)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 25");
-    if (help_text.empty()) LOG(Warning, "GuiHelpOverlay called with empty contents");
+
 
     footer = new GuiLabel(frame, "HELP_FOOTER", help_footer, 25.0f);
     footer
@@ -85,6 +85,8 @@ void GuiHelpOverlay::onDraw(sp::RenderTarget& target)
 GuiHotkeyHelpOverlay::GuiHotkeyHelpOverlay(GuiContainer* owner, std::vector<string> categories, string help_text)
 : GuiHelpOverlay(owner, tr("hotkey_F1", "Controls"), help_text, tr("hotkey_F1", "Configure controls in Options > Interface Options")), categories(categories)
 {
+    if (categories.empty() && help_text.empty())
+        LOG(Warning, "GuiHotkeyHelpOverlay called without categories or explicit help text");
     updateText();
 }
 
