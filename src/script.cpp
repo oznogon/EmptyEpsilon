@@ -1981,7 +1981,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// The drone entity must have the allow_drone_link component with this ship as its owner.
     /// For the local player ship, this sends a multiplayer command.
     /// For other ships, this modifies the component directly.
-    /// This is equivalent to selecting a drone on the Drone Operator screen and clicking Connect.
+    /// This is equivalent to selecting a drone on the Drone Operations screen and clicking Connect.
     /// Example:
     /// commandSetDroneLink(getPlayerShip(-1), drone) -- connect drone to this ship
     env.setGlobal("commandSetDroneLink", &luaCommandSetDroneLink);
@@ -1989,7 +1989,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Clears any active drone connection for the given ship.
     /// For the local player ship, this sends a multiplayer command.
     /// For other ships, this modifies the component directly.
-    /// This is equivalent to clicking Disconnect on the Drone Operator screen.
+    /// This is equivalent to clicking Disconnect on the Drone Operations screen.
     /// Example:
     /// commandClearDroneLink(getPlayerShip(-1)) -- disconnect any drone from this ship
     env.setGlobal("commandClearDroneLink", &luaCommandClearDroneLink);

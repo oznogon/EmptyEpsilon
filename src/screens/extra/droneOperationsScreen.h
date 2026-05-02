@@ -20,10 +20,10 @@ class GuiSelector;
 class GuiSlider;
 class GuiToggleButton;
 
-class DroneOperatorScreen : public GuiOverlay
+class DroneOperationsScreen : public GuiOverlay
 {
 public:
-    explicit DroneOperatorScreen(GuiContainer* owner);
+    explicit DroneOperationsScreen(GuiContainer* owner);
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;

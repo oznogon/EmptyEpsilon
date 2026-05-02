@@ -18,7 +18,7 @@
 #include "screens/crew4/operationsScreen.h"
 
 #include "screens/crew1/singlePilotScreen.h"
-#include "screens/extra/droneOperatorScreen.h"
+#include "screens/extra/droneOperationsScreen.h"
 
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
@@ -1883,8 +1883,8 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
         //Crew 1
         if (cps.has(CrewPosition::singlePilot))
             screen->addStationTab(new SinglePilotScreen(container), CrewPosition::singlePilot, getCrewPositionName(CrewPosition::singlePilot), getCrewPositionIcon(CrewPosition::singlePilot));
-        if (cps.has(CrewPosition::droneOperator))
-            screen->addStationTab(new DroneOperatorScreen(container), CrewPosition::droneOperator, getCrewPositionName(CrewPosition::droneOperator), getCrewPositionIcon(CrewPosition::droneOperator));
+        if (cps.has(CrewPosition::droneOperations))
+            screen->addStationTab(new DroneOperationsScreen(container), CrewPosition::droneOperations, getCrewPositionName(CrewPosition::droneOperations), getCrewPositionIcon(CrewPosition::droneOperations));
 
         //Extra
         if (cps.has(CrewPosition::damageControl))
@@ -1962,7 +1962,7 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::probeControl: return tr("station","Probe Control");
     case CrewPosition::targetAnalysis: return tr("station","Target Analysis");
     case CrewPosition::briefingOfficer: return tr("station","Briefing");
-    case CrewPosition::droneOperator: return tr("station","Drone Operator");
+    case CrewPosition::droneOperations: return tr("station","Drone Operations");
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }
@@ -1993,7 +1993,7 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::probeControl: return "gui/icons/scan-probe";
     case CrewPosition::targetAnalysis: return "gui/icons/station-science";
     case CrewPosition::briefingOfficer: return "";
-    case CrewPosition::droneOperator: return "";
+    case CrewPosition::droneOperations: return "";
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }

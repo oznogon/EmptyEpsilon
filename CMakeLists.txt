@@ -269,7 +269,7 @@ set(MAIN_SOURCES
     src/screens/crew6/weaponsScreen.cpp
     src/screens/crew6/helmsScreen.cpp
     src/screens/crew1/singlePilotScreen.cpp
-    src/screens/extra/droneOperatorScreen.cpp
+    src/screens/extra/droneOperationsScreen.cpp
     src/screens/extra/damcon.cpp
     src/screens/extra/powerManagement.cpp
     src/screens/extra/databaseScreen.cpp

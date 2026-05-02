@@ -1,4 +1,4 @@
-#include "droneOperatorScreen.h"
+#include "droneOperationsScreen.h"
 #include "main.h"
 #include <i18n.h>
 #include <limits>
@@ -47,7 +47,7 @@
 #include "gui/gui2_togglebutton.h"
 
 
-DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
+DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DRONE_OPERATOR_SCREEN", GuiTheme::getColor("background"))
 {
     background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
@@ -603,14 +603,14 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
     player_controls->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Sidebar: custom ship functions.
-    (new GuiCustomShipFunctions(radar_pane, CrewPosition::droneOperator, "CSF"))
+    (new GuiCustomShipFunctions(radar_pane, CrewPosition::droneOperations, "CSF"))
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 250.0f);
 
     applyConnectionState();
 }
 
-sp::ecs::Entity DroneOperatorScreen::connectedDrone() const
+sp::ecs::Entity DroneOperationsScreen::connectedDrone() const
 {
     if (!my_spaceship) return {};
 
@@ -620,7 +620,7 @@ sp::ecs::Entity DroneOperatorScreen::connectedDrone() const
     return {};
 }
 
-bool DroneOperatorScreen::isDroneConnected() const
+bool DroneOperationsScreen::isDroneConnected() const
 {
     if (!my_spaceship) return false;
 
@@ -633,7 +633,7 @@ bool DroneOperatorScreen::isDroneConnected() const
     return false;
 }
 
-sp::ecs::Entity DroneOperatorScreen::getOrderTarget()
+sp::ecs::Entity DroneOperationsScreen::getOrderTarget()
 {
     // 1. If connected to a drone, send order to the connected drone.
     if (auto drone = connectedDrone())
@@ -653,7 +653,7 @@ sp::ecs::Entity DroneOperatorScreen::getOrderTarget()
     return {};
 }
 
-void DroneOperatorScreen::applyConnectionState()
+void DroneOperationsScreen::applyConnectionState()
 {
     auto drone = connectedDrone();
     bool connected = drone && isDroneConnected();
@@ -704,7 +704,7 @@ static string getTubeName(float direction)
     return "?" + string(direction);
 }
 
-void DroneOperatorScreen::updateTubeRows(sp::ecs::Entity drone_entity)
+void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
 {
     auto missiletubes = drone_entity ? drone_entity.getComponent<MissileTubes>() : nullptr;
 
@@ -883,7 +883,7 @@ void DroneOperatorScreen::updateTubeRows(sp::ecs::Entity drone_entity)
     }
 }
 
-void DroneOperatorScreen::rebuildDroneSelector()
+void DroneOperationsScreen::rebuildDroneSelector()
 {
     drone_selector->clear();
 
@@ -898,7 +898,7 @@ void DroneOperatorScreen::rebuildDroneSelector()
         drone_selector->setSelectionIndex(0);
 }
 
-void DroneOperatorScreen::onUpdate()
+void DroneOperationsScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
 
@@ -1357,7 +1357,7 @@ void DroneOperatorScreen::onUpdate()
     }
 }
 
-void DroneOperatorScreen::onDraw(sp::RenderTarget& renderer)
+void DroneOperationsScreen::onDraw(sp::RenderTarget& renderer)
 {
     GuiOverlay::onDraw(renderer);
     if (!my_spaceship || !isVisible()) return;

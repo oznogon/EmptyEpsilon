@@ -5,7 +5,7 @@
 --- Three drones spawn nearby, each with the AllowDroneLink component
 --- set to allow control by the player ship.
 ---
---- Use the Drone Operator crew station to link to and control the drones.
+--- Use the Drone Operations crew station to link to and control the drones.
 -- Type: Development
 
 function init()
