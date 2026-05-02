@@ -328,6 +328,7 @@ int main(int argc, char** argv)
         sp::io::Keybinding::saveKeybindings(configuration_path + "/keybindings.json");
     }
     ParticleEngine::cleanup();
+    gl::shutdown();
     windows.clear();
     delete engine;
 

@@ -199,6 +199,8 @@ namespace gl
     };
 
     bool isAvailable();
+
+    void shutdown();
 }
 
 #endif // EMPTYEPSILON_GLOBJECTS_H

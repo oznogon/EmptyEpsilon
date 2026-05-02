@@ -11,6 +11,8 @@ static_assert(std::is_same<uint32_t, GLuint>::value, "GLuint and uint32_t are *N
 
 namespace gl
 {
+    static bool context_alive = true;
+
     namespace details
     {
         void createBuffers(size_t count, uint32_t* buffers)
@@ -19,7 +21,8 @@ namespace gl
         }
         void deleteBuffers(size_t count, const uint32_t* buffers)
         {
-            GL_CHECK(glDeleteBuffers(count, buffers));
+            if (context_alive)
+                GL_CHECK(glDeleteBuffers(count, buffers));
         }
 
         void createTextures(size_t count, uint32_t* textures)
@@ -28,7 +31,8 @@ namespace gl
         }
         void deleteTextures(size_t count, const uint32_t* textures)
         {
-            GL_CHECK(glDeleteTextures(count, textures));
+            if (context_alive)
+                GL_CHECK(glDeleteTextures(count, textures));
         }
     }
 
@@ -142,5 +146,10 @@ namespace gl
     bool isAvailable()
     {
         return true;
+    }
+
+    void shutdown()
+    {
+        context_alive = false;
     }
 } // namespace gl
