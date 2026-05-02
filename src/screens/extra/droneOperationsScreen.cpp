@@ -69,9 +69,19 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
         ->hide();
 
     // Radar initial distance matches the zoom slider so the label is accurate.
-    float initial_control_range = 5000.0f;
+    float short_range = 5000.0f;
+    if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
+        short_range = lrr->short_range;
+
+    float initial_control_range = short_range;
     if (auto dc = my_spaceship.getComponent<DroneController>())
+    {
         initial_control_range = dc->control_range;
+        if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+            initial_control_range *= sensors->getSystemEffectiveness();
+    }
+    if (initial_control_range < short_range)
+        initial_control_range = short_range;
 
     radar_pane = new GuiElement(this, "");
     radar_pane->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -164,13 +174,19 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
             },
             [this](float value, glm::vec2 position)
             {
+                float min_range = 5000.0f;
+                if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
+                    min_range = lrr->short_range;
+
                 auto dc = my_spaceship.getComponent<DroneController>();
-                float max_range = dc ? dc->control_range : 5000.0f;
-                if (max_range <= 5000.0f) return;
+                float max_range = dc ? dc->control_range : min_range;
+                if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                    max_range *= sensors->getSystemEffectiveness();
+                if (max_range <= min_range) return;
 
                 const float view_distance = std::clamp(
                     radar->getDistance() * (1.0f - value * 0.1f),
-                    5000.0f,
+                    min_range,
                     max_range
                 );
 
@@ -191,8 +207,8 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
         ->setSize(0.0f, 0.0f)
         ->hide();
 
-    // Radar zoom slider: shown only when disconnected and control range > 5000.
-    zoom_slider = new GuiRadarZoomSlider(radar_pane, "DRONE_ZOOM_SLIDER", 5000.0f, initial_control_range, initial_control_range, radar);
+    // Radar zoom slider: shown only when disconnected and scaled control range > short range.
+    zoom_slider = new GuiRadarZoomSlider(radar_pane, "DRONE_ZOOM_SLIDER", short_range, std::max(short_range, initial_control_range), initial_control_range, radar);
     zoom_slider
         ->setPosition(20.0f, -70.0f, sp::Alignment::BottomLeft)
         ->setSize(250.0f, 50.0f)
@@ -920,6 +936,8 @@ void DroneOperationsScreen::onUpdate()
     // Rebuild drone selector if available drones changed.
     auto ship_transform = my_spaceship.getComponent<sp::Transform>();
     float range = dc ? dc->control_range : 5000.0f;
+    if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+        range *= sensors->getSystemEffectiveness();
 
     std::vector<sp::ecs::Entity> new_list;
     if (ship_transform)
@@ -967,6 +985,10 @@ void DroneOperationsScreen::onUpdate()
     // Moved from onDraw
     auto drone = connectedDrone();
     bool connected = drone && isDroneConnected();
+
+    bool has_drones_in_range = !drone_list.empty();
+    drone_selector->setEnable(!connected && has_drones_in_range);
+    orders_layout->setEnable(has_drones_in_range);
 
     // Sync radar target entity every frame.
     radar->setAutoCenterTarget(connected ? drone : my_spaceship);
@@ -1284,13 +1306,27 @@ void DroneOperationsScreen::onUpdate()
         else
             player_callsign_display->setValue("");
 
-        float control_range = dc ? dc->control_range : 5000.0f;
-        if (control_range > 5000.0f)
+        float min_range = 5000.0f;
+        if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
+            min_range = lrr->short_range;
+
+        float control_range = dc ? dc->control_range : min_range;
+        if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+            control_range *= sensors->getSystemEffectiveness();
+        if (control_range > min_range)
         {
             if (control_range != previous_control_range)
             {
-                zoom_slider->setRange(control_range, 5000.0f);
+                zoom_slider->setRange(control_range, min_range);
                 previous_control_range = control_range;
+            }
+
+            float current_distance = radar->getDistance();
+            if (current_distance > control_range || current_distance < min_range)
+            {
+                float clamped = std::clamp(current_distance, min_range, control_range);
+                radar->setDistance(clamped);
+                zoom_slider->setValue(clamped);
             }
 
             float key_zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
@@ -1298,7 +1334,7 @@ void DroneOperationsScreen::onUpdate()
             {
                 float view_distance = std::clamp(
                     radar->getDistance() * (1.0f - (key_zoom_delta * 0.1f)),
-                    5000.0f,
+                    min_range,
                     control_range
                 );
                 radar->setDistance(view_distance);
@@ -1310,7 +1346,7 @@ void DroneOperationsScreen::onUpdate()
         else
         {
             zoom_slider->hide();
-            radar->setDistance(control_range);
+            radar->setDistance(min_range);
             previous_control_range = 0.0f;
         }
 
