@@ -10,6 +10,7 @@ class AimLock;
 class GuiButton;
 class GuiDroneDockingButton;
 class GuiElement;
+class GuiImage;
 class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiProgressbar;
@@ -28,6 +29,9 @@ public:
     virtual void onUpdate() override;
 
 private:
+    GuiImage* background_gradient;
+    GuiElement* radar_pane;
+
     // Drone selector and connection controls
     GuiSelector* drone_selector;
     GuiToggleButton* connect_button;
@@ -113,6 +117,9 @@ private:
 
     // Player ship controls (shown when disconnected)
     GuiElement* player_controls;
+
+    // Label shown when ship lacks DroneController
+    GuiLabel* no_drone_controller_label;
 
     // Cached drone list for selector sync
     std::vector<sp::ecs::Entity> drone_list;

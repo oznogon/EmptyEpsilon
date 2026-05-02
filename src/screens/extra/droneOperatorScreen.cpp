@@ -50,7 +50,8 @@
 DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DRONE_OPERATOR_SCREEN", GuiTheme::getColor("background"))
 {
-    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
+    background_gradient
         ->setTextureThemed("background.gradient_single")
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
@@ -60,13 +61,23 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
 
     (new AlertLevelOverlay(this));
 
+    // Message if ship lacks DroneController.
+    no_drone_controller_label = new GuiLabel(this, "NO_DRONE_CONTROLLER_LABEL", tr("drone", "No drone controller"), 50.0f);
+    no_drone_controller_label
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
+
     // Radar initial distance matches the zoom slider so the label is accurate.
     float initial_control_range = 5000.0f;
     if (auto dc = my_spaceship.getComponent<DroneController>())
         initial_control_range = dc->control_range;
 
-    // Radar centered in left panel.
-    radar = new GuiRadarView(this, "DRONE_OPERATOR_RADAR", initial_control_range, &targets);
+    radar_pane = new GuiElement(this, "");
+    radar_pane->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Radar centered in left pane.
+    radar = new GuiRadarView(radar_pane, "DRONE_OPERATOR_RADAR", initial_control_range, &targets);
     radar
         ->setRangeIndicatorStepSize(1000.0f)
         ->shortRange()
@@ -174,21 +185,21 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMatchHeight, 650.0f);
 
     // Heading hint label positioned dynamically on radar click.
-    heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30.0f);
+    heading_hint = new GuiLabel(radar_pane, "HEADING_HINT", "", 30.0f);
     heading_hint
         ->setAlignment(sp::Alignment::Center)
         ->setSize(0.0f, 0.0f)
         ->hide();
 
     // Radar zoom slider: shown only when disconnected and control range > 5000.
-    zoom_slider = new GuiRadarZoomSlider(this, "DRONE_ZOOM_SLIDER", 5000.0f, initial_control_range, initial_control_range, radar);
+    zoom_slider = new GuiRadarZoomSlider(radar_pane, "DRONE_ZOOM_SLIDER", 5000.0f, initial_control_range, initial_control_range, radar);
     zoom_slider
         ->setPosition(20.0f, -70.0f, sp::Alignment::BottomLeft)
         ->setSize(250.0f, 50.0f)
         ->hide();
 
     // Aim lock dial.
-    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90.0f, 270.0f /* 360 - 90 */, 0.0f, 
+    missile_aim = new AimLock(radar_pane, "MISSILE_AIM", radar, -90.0f, 270.0f /* 360 - 90 */, 0.0f,
         [this](float value)
         {
             // missile_target_angle is managed in onUpdate/fire callbacks
@@ -199,7 +210,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMatchHeight, 700.0f);
 
     // Drone selector at top-left.
-    drone_selector = new GuiSelector(this, "DRONE_SELECTOR",
+    drone_selector = new GuiSelector(radar_pane, "DRONE_SELECTOR",
         [this](int index, string value)
         {
             // Deselect any current target to prevent targeting from overriding
@@ -216,7 +227,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
     );
     drone_selector->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)->setSize(300.0f, 50.0f);
 
-    connect_button = new GuiToggleButton(this, "CONNECT_BUTTON", tr("drone", "Connect"),
+    connect_button = new GuiToggleButton(radar_pane, "CONNECT_BUTTON", tr("drone", "Connect"),
         [this](bool value)
         {
             if (value)
@@ -236,7 +247,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
         ->setSize(150.0f, 50.0f);
 
     // drone_shields_button shown when connected.
-    drone_shields_button = new GuiToggleButton(this, "DRONE_SHIELDS_BUTTON", tr("drone", "Shields: ON"),
+    drone_shields_button = new GuiToggleButton(radar_pane, "DRONE_SHIELDS_BUTTON", tr("drone", "Shields: ON"),
         [this](bool value)
         {
             my_player_info->commandDroneSetShields(value);
@@ -248,14 +259,14 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
         ->hide();
 
     // Drone docking button shown when connected.
-    drone_docking_button = new GuiDroneDockingButton(this, "DRONE_DOCKING_BUTTON");
+    drone_docking_button = new GuiDroneDockingButton(radar_pane, "DRONE_DOCKING_BUTTON");
     drone_docking_button
         ->setPosition(280.0f, 80.0f, sp::Alignment::TopLeft)
         ->setSize(250.0f, 50.0f)
         ->hide();
 
     // Engine layout (shown when connected). Positioned below the button row.
-    engine_layout = new GuiElement(this, "ENGINE_LAYOUT");
+    engine_layout = new GuiElement(radar_pane, "ENGINE_LAYOUT");
     engine_layout
         ->setPosition(20.0f, 140.0f, sp::Alignment::TopLeft)
         ->setSize(GuiElement::GuiSizeMax, 200.0f)
@@ -347,7 +358,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Stats at bottom right.
-    drone_stats = new GuiElement(this, "DRONE_STATS");
+    drone_stats = new GuiElement(radar_pane, "DRONE_STATS");
     drone_stats
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
         ->setSize(250.0f, 240.0f)
@@ -388,7 +399,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
     drone_callsign_display->setSize(GuiElement::GuiSizeMax, 40.0f);
 
     // Orders menu (shown always; sends to targeted/selected/connected drone).
-    orders_layout = new GuiElement(this, "ORDERS_LAYOUT");
+    orders_layout = new GuiElement(radar_pane, "ORDERS_LAYOUT");
     orders_layout
         ->setPosition(-280.0f, -20.0f, sp::Alignment::BottomRight)
         ->setSize(200.0f, 200.0f)
@@ -443,7 +454,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 40.0f);
 
     // Combat maneuver (2D snap slider).
-    combat_maneuver_layout = new GuiElement(this, "COMBAT_MANEUVER");
+    combat_maneuver_layout = new GuiElement(radar_pane, "COMBAT_MANEUVER");
     combat_maneuver_layout
         ->setPosition(-20.0f, -300.0f, sp::Alignment::BottomRight)
         ->setSize(200.0f, 150.0f);
@@ -468,7 +479,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
         ->setPosition(0.0f, -50.0f, sp::Alignment::BottomCenter)
         ->setSize(GuiElement::GuiSizeMax, 100.0f);
 
-    player_stats = new GuiElement(this, "PLAYER_STATS");
+    player_stats = new GuiElement(radar_pane, "PLAYER_STATS");
     player_stats
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
         ->setSize(250.0f, 200.0f)
@@ -499,7 +510,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 40.0f);
 
     // Beam info box.
-    beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+    beam_info_box = new GuiElement(radar_pane, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(0.0f, -20.0f, sp::Alignment::BottomCenter)
         ->setSize(500.0f, 50.0f)
@@ -543,7 +554,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
     }
 
     // Missile tube layout.
-    tube_controls_layout = new GuiElement(this, "TUBE_CONTROLS");
+    tube_controls_layout = new GuiElement(radar_pane, "TUBE_CONTROLS");
     tube_controls_layout
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(350.0f, GuiElement::GuiSizeMax)
@@ -574,7 +585,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
     missile_type_rows[MW_HVLI].button->setIcon("gui/icons/weapon-hvli.png");
 
     // Manual aim toggle button near tube controls.
-    manual_aim_button = new GuiToggleButton(this, "MANUAL_AIM", tr("missile", "Lock"),
+    manual_aim_button = new GuiToggleButton(radar_pane, "MANUAL_AIM", tr("missile", "Lock"),
         [this](bool value)
         {
             use_manual_aim = value;
@@ -588,11 +599,11 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
         ->setSize(130.0f, 50.0f);
 
     // Player ship controls (shown when disconnected).
-    player_controls = new GuiElement(this, "PLAYER_CONTROLS");
+    player_controls = new GuiElement(radar_pane, "PLAYER_CONTROLS");
     player_controls->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Sidebar: custom ship functions.
-    (new GuiCustomShipFunctions(this, CrewPosition::droneOperator, "CSF"))
+    (new GuiCustomShipFunctions(radar_pane, CrewPosition::droneOperator, "CSF"))
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 250.0f);
 
@@ -891,13 +902,27 @@ void DroneOperatorScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
 
-    // Rebuild drone selector if available drones changed.
+    // Don't show controls if this entity lacks a DroneController.
     auto dc = my_spaceship.getComponent<DroneController>();
+    if (!dc)
+    {
+        background_gradient->hide();
+        no_drone_controller_label->show();
+        radar_pane->hide();
+        return;
+    }
+
+    // Enforce visibility if component state changes.
+    background_gradient->show();
+    no_drone_controller_label->hide();
+    radar_pane->show();
+
+    // Rebuild drone selector if available drones changed.
     auto ship_transform = my_spaceship.getComponent<sp::Transform>();
     float range = dc ? dc->control_range : 5000.0f;
 
     std::vector<sp::ecs::Entity> new_list;
-    if (dc && ship_transform)
+    if (ship_transform)
     {
         for (auto [entity, adl, transform] : sp::ecs::Query<AllowDroneLink, sp::Transform>())
         {
@@ -1016,22 +1041,19 @@ void DroneOperatorScreen::onUpdate()
         }
 
         // Drone distance / max control range.
-        if (dc)
+        auto ship_transform = my_spaceship.getComponent<sp::Transform>();
+        auto drone_transform = drone.getComponent<sp::Transform>();
+        if (ship_transform && drone_transform)
         {
-            auto ship_transform = my_spaceship.getComponent<sp::Transform>();
-            auto drone_transform = drone.getComponent<sp::Transform>();
-            if (ship_transform && drone_transform)
-            {
-                float dist = glm::length(drone_transform->getPosition() - ship_transform->getPosition());
-                float range = dc->control_range;
-                if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
-                    range *= sensors->getSystemEffectiveness();
-                drone_distance_display->setValue(tr("{current} / {max} {unit}").format({
-                    {"current", string((dist / 1000.0f), 1)},
-                    {"max", string(static_cast<int>(range / 1000.0f))},
-                    {"unit", DISTANCE_UNIT_1K}
-                }));
-            }
+            float dist = glm::length(drone_transform->getPosition() - ship_transform->getPosition());
+            float range = dc->control_range;
+            if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                range *= sensors->getSystemEffectiveness();
+            drone_distance_display->setValue(tr("{current} / {max} {unit}").format({
+                {"current", string((dist / 1000.0f), 1)},
+                {"max", string(static_cast<int>(range / 1000.0f))},
+                {"unit", DISTANCE_UNIT_1K}
+            }));
         }
 
         // Drone shields button: sync state and label.
@@ -1270,7 +1292,6 @@ void DroneOperatorScreen::onUpdate()
                 zoom_slider->setRange(control_range, 5000.0f);
                 previous_control_range = control_range;
             }
-            zoom_slider->show();
 
             float key_zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
             if (key_zoom_delta != 0.0f)
@@ -1283,6 +1304,8 @@ void DroneOperatorScreen::onUpdate()
                 radar->setDistance(view_distance);
                 zoom_slider->setValue(view_distance);
             }
+
+            zoom_slider->show();
         }
         else
         {
@@ -1290,6 +1313,7 @@ void DroneOperatorScreen::onUpdate()
             radar->setDistance(control_range);
             previous_control_range = 0.0f;
         }
+
         if (auto reactor = my_spaceship.getComponent<Reactor>())
             player_energy_display->setValue(string(static_cast<int>(reactor->energy)) + "/" + string(static_cast<int>(reactor->max_energy)));
 
