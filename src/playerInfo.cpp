@@ -136,7 +136,7 @@ static const uint16_t CMD_SET_UTILITY_BEAM_RANGE = 0x0038;
 
 // Drone commands
 static const uint16_t CMD_SET_DRONE_LINK = 0x0039;
-static const uint16_t CMD_DRONE_TARGET_ROTATION = 0x004A;
+static const uint16_t CMD_DRONE_TARGET_ROTATION = 0x003A;
 static const uint16_t CMD_DRONE_IMPULSE = 0x003B;
 static const uint16_t CMD_DRONE_WARP = 0x003C;
 static const uint16_t CMD_DRONE_JUMP = 0x003D;

@@ -239,9 +239,9 @@ static void drawThickPolyline(sp::RenderTarget& renderer, const std::vector<glm:
     renderer.drawTriangleStrip(strip, color);
 }
 
-void DamageControlScreen::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& renderer)
+void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
-    GuiContainer::drawElements(mouse_position, parent_rect, renderer);
+    GuiContainer::drawElements(mouse_position, hovered_element, parent_rect, renderer);
 
     if (!my_spaceship) return;
     auto ir = my_spaceship.getComponent<InternalRooms>();

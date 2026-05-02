@@ -36,5 +36,5 @@ public:
 
     void onDraw(sp::RenderTarget& target) override;
 protected:
-    void drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& renderer) override;
+    void drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect parent_rect, sp::RenderTarget& renderer) override;
 };
