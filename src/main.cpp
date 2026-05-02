@@ -44,6 +44,7 @@
 
 #include "shaderRegistry.h"
 #include "glObjects.h"
+#include "particleEffect.h"
 
 glm::vec3 camera_position;
 float camera_yaw;
@@ -326,6 +327,7 @@ int main(int argc, char** argv)
         PreferencesManager::save(configuration_path + "/options.ini");
         sp::io::Keybinding::saveKeybindings(configuration_path + "/keybindings.json");
     }
+    ParticleEngine::cleanup();
     windows.clear();
     delete engine;
 

@@ -38,6 +38,15 @@ void ParticleEngine::update(float delta)
     });
 }
 
+void ParticleEngine::cleanup()
+{
+    if (particleEngine)
+    {
+        particleEngine->buffers = gl::Buffers<static_cast<size_t>(Buffers::Count)>{ gl::Unitialized{} };
+        particleEngine = nullptr;
+    }
+}
+
 void ParticleEngine::spawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time)
 {
     if (glm::length2(position - camera_position) / (size + end_size) < 0.1f*0.1f)

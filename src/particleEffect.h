@@ -64,6 +64,7 @@ public:
     virtual void update(float delta) override;
 
     static void spawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time);
+    static void cleanup();
 
 private:
     ParticleEngine();
