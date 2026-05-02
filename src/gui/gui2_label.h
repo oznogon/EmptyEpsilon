@@ -12,6 +12,8 @@ protected:
     glm::u8vec4 text_color{255,255,255,255};
     sp::Alignment text_alignment;
     bool background;
+    bool override_bg_color;
+    glm::u8vec4 bg_color;
     int font_flag;
     const GuiThemeStyle* front_style;
     const GuiThemeStyle* back_style;
@@ -26,6 +28,8 @@ public:
     GuiLabel* setBackStyle(const GuiThemeStyle* style);
     GuiLabel* setAlignment(sp::Alignment alignment);
     GuiLabel* addBackground();
+    GuiLabel* setTextColor(glm::u8vec4 color);
+    GuiLabel* setBackgroundColor(glm::u8vec4 color);
     GuiLabel* setVertical();
     GuiLabel* setWrapped();
     GuiLabel* setClipped();

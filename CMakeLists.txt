@@ -269,6 +269,7 @@ set(MAIN_SOURCES
     src/screens/crew6/weaponsScreen.cpp
     src/screens/crew6/helmsScreen.cpp
     src/screens/crew1/singlePilotScreen.cpp
+    src/screens/extra/droneOperatorScreen.cpp
     src/screens/extra/damcon.cpp
     src/screens/extra/powerManagement.cpp
     src/screens/extra/databaseScreen.cpp
@@ -277,6 +278,10 @@ set(MAIN_SOURCES
     src/screens/extra/missileWeaponsScreen.cpp
     src/screens/extra/commsScreen.cpp
     src/screens/extra/shipLogScreen.cpp
+    src/screens/extra/radarScreen.cpp
+    src/screens/extra/probeScreen.cpp
+    src/screens/extra/targetAnalysisScreen.cpp
+    src/screens/extra/briefingScreen.cpp
     src/screens/gm/gameMasterScreen.cpp
     src/screens/gm/objectCreationView.cpp
     src/screens/gm/globalMessageEntryView.cpp
@@ -292,6 +297,7 @@ set(MAIN_SOURCES
     src/screenComponents/viewportMainScreen.cpp
     src/screenComponents/selfDestructEntry.cpp
     src/screenComponents/dockingButton.cpp
+    src/screenComponents/droneDockingButton.cpp
     src/screenComponents/shieldsEnableButton.cpp
     src/screenComponents/selfDestructButton.cpp
     src/screenComponents/shieldFreqencySelect.cpp
@@ -340,6 +346,7 @@ set(MAIN_SOURCES
     src/components/faction.h
     src/components/faction.cpp
     src/components/radar.h
+    src/components/drone.h
     src/components/hull.h
     src/components/rendering.h
     src/components/rendering.cpp
@@ -371,6 +378,7 @@ set(MAIN_SOURCES
     src/components/customshipfunction.h
     src/components/shiplog.h
     src/components/shiplog.cpp
+    src/components/briefing.h
     src/components/comms.h
     src/components/scanning.h
     src/components/scanning.cpp
@@ -454,6 +462,8 @@ set(MAIN_SOURCES
     src/systems/debugrender.cpp
     src/systems/destroy.h
     src/systems/destroy.cpp
+    src/systems/dronecontrolsystem.h
+    src/systems/dronecontrolsystem.cpp
     src/multiplayer/beamweapon.h
     src/multiplayer/beamweapon.cpp
     src/multiplayer/utilityBeam.h
@@ -524,8 +534,14 @@ set(MAIN_SOURCES
     src/multiplayer/internalrooms.cpp
     src/multiplayer/shiplog.h
     src/multiplayer/shiplog.cpp
+    src/multiplayer/briefing.h
+    src/multiplayer/briefing.cpp
     src/multiplayer/zone.h
     src/multiplayer/zone.cpp
+    src/multiplayer/drone.h
+    src/multiplayer/drone.cpp
+    src/multiplayer/sensors.h
+    src/multiplayer/sensors.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -601,6 +617,7 @@ set(MAIN_SOURCES
     src/screenComponents/customShipFunctions.h
     src/screenComponents/databaseView.h
     src/screenComponents/dockingButton.h
+    src/screenComponents/droneDockingButton.h
     src/screenComponents/frequencyCurve.h
     src/screenComponents/globalMessage.h
     src/screenComponents/hackingDialog.h
@@ -665,6 +682,10 @@ set(MAIN_SOURCES
     src/screens/extra/missileWeaponsScreen.h
     src/screens/extra/powerManagement.h
     src/screens/extra/shipLogScreen.h
+    src/screens/extra/radarScreen.h
+    src/screens/extra/probeScreen.h
+    src/screens/extra/targetAnalysisScreen.h
+    src/screens/extra/briefingScreen.h
     src/screens/gm/chatDialog.h
     src/screens/gm/gameMasterScreen.h
     src/screens/gm/globalMessageEntryView.h

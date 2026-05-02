@@ -30,6 +30,11 @@ enum class CrewPosition
     altRelay,
     commsOnly,
     shipLog,
+    radarOfficer,
+    probeControl,
+    targetAnalysis,
+    briefingOfficer,
+    droneOperator,
 
     MAX
 };

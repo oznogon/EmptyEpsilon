@@ -205,6 +205,9 @@ public:
     sp::io::Keybinding utilitybeam_mode_next;
     sp::io::Keybinding utilitybeam_mode_prev;
 
+    // Damage control screen binds
+    sp::io::Keybinding damcon_toggle_detail_lines;
+
     // Cinematic view binds
     struct CinematicKeys {
         CinematicKeys();
@@ -251,5 +254,11 @@ public:
 
     // Spectator screen binds
     sp::io::Keybinding spectator_show_callsigns;
+
+    // Briefing screen binds
+    sp::io::Keybinding briefing_next_page;
+    sp::io::Keybinding briefing_prev_page;
+    sp::io::Keybinding briefing_play;
+    sp::io::Keybinding briefing_toggle_caption;
 };
 extern Keys keys;

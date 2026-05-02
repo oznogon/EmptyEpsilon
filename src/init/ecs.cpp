@@ -39,7 +39,10 @@
 #include "multiplayer/moveto.h"
 #include "multiplayer/radarblock.h"
 #include "multiplayer/shiplog.h"
+#include "multiplayer/briefing.h"
 #include "multiplayer/zone.h"
+#include "multiplayer/drone.h"
+#include "multiplayer/sensors.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -71,6 +74,7 @@
 #include "systems/pickup.h"
 #include "systems/destroy.h"
 #include "systems/debugrender.h"
+#include "systems/dronecontrolsystem.h"
 
 
 void initSystemsAndComponents()
@@ -132,11 +136,16 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<SfxReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShieldsReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShipLogReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<BriefingReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<SpinReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<TargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpDriveReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpJammerReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ZoneReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<AllowDroneLinkReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<DroneControllerReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<DroneLinkReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<SensorsSystemReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::TransformReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::PhysicsReplication>();
 
@@ -175,6 +184,7 @@ void initSystemsAndComponents()
     engine->registerSystem<ZoneSystem>();
     engine->registerSystem<GMRadarRender>();
     engine->registerSystem<PickupSystem>();
+    engine->registerSystem<DroneControlSystem>();
 #ifdef DEBUG
     engine->registerSystem<DebugRenderSystem>();
 #endif

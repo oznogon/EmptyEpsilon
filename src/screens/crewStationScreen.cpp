@@ -313,16 +313,28 @@ void CrewStationScreen::tileViewport()
     if (!viewport)
         return;
 
-    if (current_position == CrewPosition::singlePilot)
+    if (current_position == CrewPosition::singlePilot || current_position == CrewPosition::droneOperator)
     {
         main_panel->setSize(1000, GuiElement::GuiSizeMax);
         main_panel->layout.fill_width = false;
         viewport->setPosition(1000, 0, sp::Alignment::TopLeft);
     }
-    else 
+    else
     {
         main_panel->setSize(1200, GuiElement::GuiSizeMax);
         main_panel->layout.fill_width = false;
         viewport->setPosition(1200, 0, sp::Alignment::TopLeft);
     }
+}
+
+void CrewStationScreen::setDroneViewport(sp::ecs::Entity drone)
+{
+    if (viewport)
+        viewport->override_entity = drone;
+}
+
+void CrewStationScreen::clearDroneViewport()
+{
+    if (viewport)
+        viewport->override_entity = sp::ecs::Entity{};
 }

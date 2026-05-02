@@ -33,6 +33,7 @@ GameGlobalInfo::GameGlobalInfo()
     use_system_damage = true;
     enable_multiple_waypoint_sets = false;
     enable_waypoint_routes = false;
+    use_drone_energy_drain = false;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
     allow_main_screen_strategic_map = true;
@@ -52,6 +53,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&use_system_damage);
     registerMemberReplication(&enable_multiple_waypoint_sets);
     registerMemberReplication(&enable_waypoint_routes);
+    registerMemberReplication(&use_drone_energy_drain);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&allow_main_screen_strategic_map);

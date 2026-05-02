@@ -421,6 +421,7 @@ Keys::Keys() :
         {"ENGINEERING_SELECT_SYSTEM_REAR_SHIELD", "9"},
         {"ENGINEERING_SELECT_SYSTEM_UTILITY_BEAM"},
         {"ENGINEERING_SELECT_SYSTEM_DOCKING_BAY"},
+        {"ENGINEERING_SELECT_SYSTEM_SENSORS"},
     },
     engineering_select_system_next("ENGINEERING_SELECT_SYSTEM_NEXT", "Keypad +"),
     engineering_select_system_prev("ENGINEERING_SELECT_SYSTEM_PREV", "Keypad -"),
@@ -458,6 +459,7 @@ Keys::Keys() :
         {"ENGINEERING_SET_SYSTEM_POWER_REAR_SHIELD"},
         {"ENGINEERING_SET_SYSTEM_POWER_UTILITY_BEAM"},
         {"ENGINEERING_SET_SYSTEM_POWER_DOCKING_BAY"},
+        {"ENGINEERING_SET_SYSTEM_POWER_SENSORS"},
     },
     engineering_set_coolant_for_system{
         {"ENGINEERING_SET_SYSTEM_COOLANT_REACTOR"},
@@ -471,6 +473,7 @@ Keys::Keys() :
         {"ENGINEERING_SET_SYSTEM_COOLANT_REAR_SHIELD"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_UTILITY_BEAM"},
         {"ENGINEERING_SET_SYSTEM_COOLANT_DOCKING_BAY"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_SENSORS"},
     },
 
     // Relay crew screen
@@ -505,6 +508,9 @@ Keys::Keys() :
     utilitybeam_mode_next("UTILITYBEAM_MODE_NEXT", "E"),
     utilitybeam_mode_prev("UTILITYBEAM_MODE_PREV", "W"),
 
+    // Damage control screen
+    damcon_toggle_detail_lines("DAMCON_TOGGLE_DETAIL_LINES"),
+
     // GM screen
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
@@ -513,7 +519,13 @@ Keys::Keys() :
     gm_show_health_bars("GM_SHOW_HEALTH_BARS", "H"),
 
     // Spectator screen
-    spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C")
+    spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
+
+    // Briefing screen
+    briefing_next_page("BRIEFING_NEXT_PAGE", "Right"),
+    briefing_prev_page("BRIEFING_PREVIOUS_PAGE", "Left"),
+    briefing_play("BRIEFING_PLAY", "Space"),
+    briefing_toggle_caption("BRIEFING_TOGGLE_CAPTION", "T")
 {
 }
 
@@ -1334,6 +1346,9 @@ void Keys::init()
     );
     utilitybeam_mode_prev.setDefaultInteraction(sp::io::Keybinding::Interaction::Discrete);
 
+    // Damage control
+    damcon_toggle_detail_lines.setLabel(tr("hotkey_menu", "Damage control"), tr("hotkey_Damcon", "Toggle system detail lines"));
+
     // Cinematic view
     cinematic.init();
 
@@ -1355,6 +1370,12 @@ void Keys::init()
     // Spectator screen
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));
     spectator_show_callsigns.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+
+    // Briefing screen
+    briefing_next_page.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Next page"));
+    briefing_prev_page.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Previous page"));
+    briefing_play.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Play"));
+    briefing_toggle_caption.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Toggle caption"));
 
     // Lua console keybind defined in luaConsole.cpp
 }

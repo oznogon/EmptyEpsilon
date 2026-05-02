@@ -54,6 +54,7 @@ public:
     bool use_system_damage;
     bool enable_multiple_waypoint_sets;
     bool enable_waypoint_routes;
+    bool use_drone_energy_drain;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
     bool allow_main_screen_strategic_map;

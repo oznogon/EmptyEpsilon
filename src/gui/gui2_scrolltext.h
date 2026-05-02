@@ -1,5 +1,4 @@
-#ifndef GUI_SCROLLTEXT_H
-#define GUI_SCROLLTEXT_H
+#pragma once
 
 #include "gui2_element.h"
 
@@ -14,6 +13,7 @@ protected:
     float text_size = 30.0f;
     bool auto_scroll_down = false;
     const GuiThemeStyle* text_theme;
+    sp::Alignment alignment = sp::Alignment::TopLeft;
 
 public:
     GuiScrollText(GuiContainer* owner, string id, string text);
@@ -24,8 +24,8 @@ public:
     GuiScrollText* setText(string text);
     string getText() const;
     GuiScrollText* setTextSize(float text_size) { this->text_size = text_size; return this; }
-
     GuiScrollText* setScrollbarWidth(float width);
+    GuiScrollText* setAlignment(sp::Alignment alignment);
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
@@ -39,5 +39,3 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
-
-#endif//GUI_SCROLLTEXT_H

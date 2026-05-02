@@ -33,6 +33,7 @@
 #include "components/selfdestruct.h"
 #include "components/scanning.h"
 #include "components/probe.h"
+#include "components/drone.h"
 #include "components/hacking.h"
 #include "components/player.h"
 #include "components/comms.h"
@@ -380,6 +381,16 @@ void initComponentScriptBindings()
     BIND_MEMBER(RadarLink, on_unlink);
     sp::script::ComponentHandler<AllowRadarLink>::name("allow_radar_link");
     BIND_MEMBER(AllowRadarLink, owner);
+
+    sp::script::ComponentHandler<AllowDroneLink>::name("allow_drone_link");
+    BIND_MEMBER(AllowDroneLink, owner);
+    sp::script::ComponentHandler<DroneController>::name("drone_controller");
+    BIND_MEMBER(DroneController, control_range);
+    BIND_MEMBER(DroneController, energy_drain_per_sec);
+    sp::script::ComponentHandler<DroneLink>::name("drone_link");
+    BIND_MEMBER(DroneLink, linked_drone);
+    sp::script::ComponentHandler<SensorsSystem>::name("sensors_system");
+    BIND_SHIP_SYSTEM(SensorsSystem);
 
     sp::script::ComponentHandler<Hull>::name("hull");
     BIND_MEMBER(Hull, current);
