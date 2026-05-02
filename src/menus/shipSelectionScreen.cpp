@@ -36,6 +36,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_togglebutton.h"
+#include "gui/gui2_scrollcontainer.h"
 
 class PasswordDialog : public GuiOverlay
 {
@@ -860,32 +861,50 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
 
     // Alternative options panel
     auto alternative_options_panel = new GuiPanel(center_container, "");
-    alternative_options_panel->setSize(GuiElement::GuiSizeMax, 130.0f);
-    alternative_options_panel->setAttribute("margin", "0, 0, 0, 20");
-    alternative_options_panel->setAttribute("padding", "20, 20, 0, 20");
-    alternative_options_panel->setAttribute("layout", "vertical");
-    (new GuiLabel(alternative_options_panel, "CREW_POSITION_SELECT_LABEL", tr("Alternative options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("margin", "0, 0, 0, 10");
+    alternative_options_panel
+        ->setSize(GuiElement::GuiSizeMax, 480.0f)
+        ->setAttribute("margin", "0, 0, 0, 20");
+    alternative_options_panel
+        ->setAttribute("padding", "20, 20, 0, 20");
+    alternative_options_panel
+        ->setAttribute("layout", "vertical");
+
+    (new GuiLabel(alternative_options_panel, "CREW_POSITION_SELECT_LABEL", tr("Alternative options"), 30.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 0, 10");
+
+    auto alternative_scroll = new GuiScrollContainer(alternative_options_panel, "", GuiScrollContainer::ScrollMode::Scroll);
+    alternative_scroll
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 
     // Main screen controls button
-    main_screen_controls_button = new GuiToggleButton(alternative_options_panel, "MAIN_SCREEN_CONTROLS_ENABLE", tr("Main screen controls"), [this](bool value) {
-        my_player_info->commandSetMainScreenControl(window_index, value);
-    });
-    main_screen_controls_button->setValue(my_player_info->main_screen_control)->setSize(GuiElement::GuiSizeMax, 50);
+    main_screen_controls_button = new GuiToggleButton(alternative_scroll, "MAIN_SCREEN_CONTROLS_ENABLE", tr("Main screen controls"),
+        [this](bool value)
+        {
+            my_player_info->commandSetMainScreenControl(window_index, value);
+        }
+    );
+    main_screen_controls_button
+        ->setValue(my_player_info->main_screen_control)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
-    for (int n = int(CrewPosition::singlePilot) + 1; n < int(CrewPosition::MAX); n++)
-    {
-        create_crew_position_button(alternative_options_panel, n);
-        alternative_options_panel->setSize(alternative_options_panel->getSize() + glm::vec2(0.0f, 50.0f));
-    }
+    for (int n = static_cast<int>(CrewPosition::singlePilot) + 1; n < static_cast<int>(CrewPosition::MAX); n++)
+        create_crew_position_button(alternative_scroll, n);
 
     // Right column
     // Info text panel
     auto station_info = new GuiScrollText(right_container, "STATION_INFO",
         tr("You can select multiple stations and switch between them during the game.\nIf mainscreen is selected alongside stations, it will be shown next to the current station (if the total screen size is wide enough).")
     );
-    station_info->setSize(GuiElement::GuiSizeMax, 325)->setAttribute("margin", "0, 0, 0, 20");
+    station_info
+        ->setSize(GuiElement::GuiSizeMax, 325.0f)
+        ->setAttribute("margin", "0, 0, 0, 20");
 
-    (new GuiLabel(right_container, "STATION_PLAYERS_LABEL", tr("Crew assignments"), 30.0f))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(right_container, "STATION_PLAYERS_LABEL", tr("Crew assignments"), 30.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
     station_players = new GuiScrollText(right_container, "STATION_PLAYERS", "");
     station_players->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
