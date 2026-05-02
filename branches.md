@@ -76,4 +76,4 @@ master 20260501 -- docking-request-menu merged
 force-cpp17 20260501 -- mitigate GCC 16 build issues
 extra-crew-screens 20260501
 
-extra-crew-screens 20260502 -- Drone Lua API
+extra-crew-screens 20260502 -- Drone Lua API, Sensors system
