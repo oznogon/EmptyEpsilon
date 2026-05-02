@@ -11,6 +11,7 @@
 #include "components/shields.h"
 #include "components/coolant.h"
 #include "components/dockingbaysystem.h"
+#include "components/drone.h"
 
 
 void ShipSystemsSystem::update(float delta)
@@ -38,6 +39,8 @@ void ShipSystemsSystem::update(float delta)
             updateSystem(entity, system.rear_system, delta);
     }
     for(auto [entity, system] : sp::ecs::Query<DockingBaySystem>())
+        updateSystem(entity, system, delta);
+    for(auto [entity, system] : sp::ecs::Query<SensorsSystem>())
         updateSystem(entity, system, delta);
 }
 
