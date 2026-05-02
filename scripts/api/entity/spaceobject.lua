@@ -583,3 +583,62 @@ function Entity:onScanCancelled(callback)
     if self.components.scan_state then self.components.scan_state.on_scan_cancelled = callback end
     return self
 end
+--- Defines this entity as a drone controllable by the given owner entity.
+--- Adds the allow_drone_link component and sets its owner.
+--- Pass nil to remove the drone link capability.
+--- Example: drone:setDroneOwner(player_ship)
+function Entity:setDroneOwner(owner)
+    if owner == nil then
+        self.components.allow_drone_link = nil
+    else
+        self.components.allow_drone_link = {owner = owner}
+    end
+    return self
+end
+--- Adds or removes the drone_controller component on this entity.
+--- When enabled, this entity can control drones linked via allow_drone_link.
+--- Example:
+--- ship:setDroneController(10000, 0.02)
+function Entity:setDroneController(range, energy_drain)
+    self.components.drone_controller = {
+        control_range = range,
+        energy_drain_per_sec = energy_drain
+    }
+    return self
+end
+--- Sets the maximum control range for this entity's drone controller.
+--- Only has an effect if the entity has a drone_controller component.
+--- Example: ship:setDroneControlRange(5000)
+function Entity:setDroneControlRange(range)
+    if self.components.drone_controller then
+        self.components.drone_controller.control_range = range
+    end
+    return self
+end
+--- Returns the maximum control range for this entity's drone controller.
+--- Returns 5000.0 if no drone_controller component is present.
+--- Example: ship:getDroneControlRange()
+function Entity:getDroneControlRange()
+    if self.components.drone_controller then
+        return self.components.drone_controller.control_range
+    end
+    return 5000.0
+end
+--- Sets the energy drain per second for this entity's drone controller while connected.
+--- Only has an effect if the entity has a drone_controller component.
+--- Example: ship:setDroneEnergyDrain(2.5)
+function Entity:setDroneEnergyDrain(rate)
+    if self.components.drone_controller then
+        self.components.drone_controller.energy_drain_per_sec = rate
+    end
+    return self
+end
+--- Returns the energy drain per second for this entity's drone controller while connected.
+--- Returns 0.0 if no drone_controller component is present.
+--- Example: ship:getDroneEnergyDrain()
+function Entity:getDroneEnergyDrain()
+    if self.components.drone_controller then
+        return self.components.drone_controller.energy_drain_per_sec
+    end
+    return 0.0
+end
