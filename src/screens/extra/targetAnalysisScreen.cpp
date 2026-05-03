@@ -15,7 +15,6 @@
 #include "components/beamweapon.h"
 #include "components/collision.h"
 
-#include "screenComponents/radarView.h"
 #include "screenComponents/rotatingModelView.h"
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/frequencyCurve.h"
@@ -30,37 +29,16 @@
 TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TARGET_ANALYSIS_SCREEN", GuiTheme::getColor("background"))
 {
-    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
-        ->setTextureThemed("background.gradient")
-        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
-        ->setSize(1200.0f, 900.0f);
-
     (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255}))
         ->setTextureTiledThemed("background.crosses");
 
     (new AlertLevelOverlay(this));
 
-    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-    radar = new GuiRadarView(this, "TARGET_ANALYSIS_RADAR", lrr ? lrr->short_range : 5000.0f, &targets);
-    radar
-        ->setRangeIndicatorStepSize(1000.0f)
-        ->shortRange()
-        ->enableCallsigns()
-        ->enableHeadingIndicators()
-        ->setStyle(GuiRadarView::Circular)
-        ->setCallbacks(
-            [this](sp::io::Pointer::Button button, glm::vec2 position)
-            {
-                if (!my_spaceship) return;
-                targets.setToClosestTo(position, 250.0f, TargetsContainer::Selectable);
-                if (targets.get())
-                    my_player_info->commandSetTarget(targets.get());
-                else
-                    my_player_info->commandSetTarget({});
-            }, nullptr, nullptr, nullptr
-        )
-        ->setPosition(-310.0f, 0.0f, sp::Alignment::CenterRight)
-        ->setSize(GuiElement::GuiSizeMatchHeight, 600.0f);
+    no_target_label = new GuiLabel(this, "NO_TARGET_LABEL", tr("No target linked"), 30.0f);
+    no_target_label
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+        ->setSize(400.0f, 50.0f)
+        ->hide();
 
     model_view = new GuiRotatingModelView(this, "TARGET_MODEL_VIEW", target_entity);
     model_view
@@ -120,9 +98,6 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-        radar->setDistance(lrr ? lrr->short_range : 5000.0f);
-
         if (auto tg = my_spaceship.getComponent<Target>())
             targets.set(tg->entity);
         else
@@ -144,6 +119,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
     if (target)
     {
         target_entity = target;
+        no_target_label->hide();
         model_view->show();
 
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
@@ -157,7 +133,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
             while (heading < 0.0f) heading += 360.0f;
 
             info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
-            info_bearing->setValue(string(int(heading)));
+            info_bearing->setValue(string(static_cast<int>(heading)));
 
             auto my_physics = my_spaceship.getComponent<sp::Physics>();
             auto target_physics = target.getComponent<sp::Physics>();
@@ -185,7 +161,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
                 info_type->setValue(tn->localized);
 
             if (auto hull = target.getComponent<Hull>())
-                info_hull->setValue(string(int(ceil(hull->current))) + "/" + string(int(ceil(hull->max))));
+                info_hull->setValue(string(static_cast<int>(ceil(hull->current))) + "/" + string(static_cast<int>(ceil(hull->max))));
 
             if (auto shields = target.getComponent<Shields>())
             {
@@ -193,7 +169,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
                 for (size_t i = 0; i < shields->entries.size(); i++)
                 {
                     if (i > 0) str += "/";
-                    str += string(int(shields->entries[i].level));
+                    str += string(static_cast<int>(shields->entries[i].level));
                 }
                 info_shields->setValue(str);
             }
@@ -228,6 +204,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
     else
     {
         target_entity = {};
+        no_target_label->show();
         model_view->hide();
     }
 
