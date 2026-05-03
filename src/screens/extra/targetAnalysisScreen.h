@@ -4,18 +4,19 @@
 #include "screenComponents/targetsContainer.h"
 #include "components/shipsystem.h"
 
-class GuiKeyValueDisplay;
-class GuiRadarView;
-class GuiRotatingModelView;
 class GuiFrequencyCurve;
+class GuiKeyValueDisplay;
+class GuiLabel;
+class GuiRotatingModelView;
 
 class TargetAnalysisScreen : public GuiOverlay
 {
 private:
+    GuiLabel* no_target_label;
+
     TargetsContainer targets;
     sp::ecs::Entity target_entity;
 
-    GuiRadarView* radar;
     GuiRotatingModelView* model_view;
 
     GuiKeyValueDisplay* info_callsign;
