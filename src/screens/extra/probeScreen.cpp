@@ -17,7 +17,8 @@
 ProbeScreen::ProbeScreen(GuiContainer* owner)
 : GuiOverlay(owner, "PROBE_SCREEN", GuiTheme::getColor("background"))
 {
-    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
+    background_gradient
         ->setTextureThemed("background.gradient")
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
@@ -46,6 +47,7 @@ void ProbeScreen::onDraw(sp::RenderTarget& renderer)
         auto rl = my_spaceship.getComponent<RadarLink>();
         if (rl && rl->linked_entity)
         {
+            background_gradient->show();
             no_probe_label->hide();
             viewport->show();
 
@@ -62,7 +64,9 @@ void ProbeScreen::onDraw(sp::RenderTarget& renderer)
         {
             viewport->hide();
             no_probe_label->show();
+            background_gradient->hide();
         }
     }
+
     GuiOverlay::onDraw(renderer);
 }
