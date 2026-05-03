@@ -1978,22 +1978,22 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::relayOfficer: return "gui/icons/station-relay";
     case CrewPosition::beamWeaponsOfficer: return "gui/icons/system_beam";
     case CrewPosition::missileWeaponsOfficer: return "gui/icons/system_missile";
-    case CrewPosition::tacticalOfficer: return "";
-    case CrewPosition::engineeringAdvanced: return "";
-    case CrewPosition::operationsOfficer: return "";
-    case CrewPosition::singlePilot: return "";
-    case CrewPosition::damageControl: return "";
-    case CrewPosition::powerManagement: return "";
-    case CrewPosition::databaseView: return "";
+    case CrewPosition::tacticalOfficer: return "gui/icons/station-tactical";
+    case CrewPosition::engineeringAdvanced: return "gui/icons/station-engineering-plus";
+    case CrewPosition::operationsOfficer: return "gui/icons/station-operations";
+    case CrewPosition::singlePilot: return "gui/icons/station-single-pilot";
+    case CrewPosition::damageControl: return "gui/icons/system_health";
+    case CrewPosition::powerManagement: return "gui/icons/energy";
+    case CrewPosition::databaseView: return "gui/icons/station-database";
     case CrewPosition::dockingBay: return "gui/icons/docking";
-    case CrewPosition::altRelay: return "";
-    case CrewPosition::commsOnly: return "";
-    case CrewPosition::shipLog: return "";
-    case CrewPosition::radarOfficer: return "gui/icons/station-relay";
+    case CrewPosition::altRelay: return "gui/icons/station-strategic-map";
+    case CrewPosition::commsOnly: return "gui/icons/station-comms";
+    case CrewPosition::shipLog: return "gui/icons/station-shiplog";
+    case CrewPosition::radarOfficer: return "gui/icons/station-radar";
     case CrewPosition::probeControl: return "gui/icons/scan-probe";
-    case CrewPosition::targetAnalysis: return "gui/icons/station-science";
-    case CrewPosition::briefingOfficer: return "";
-    case CrewPosition::droneOperations: return "";
+    case CrewPosition::targetAnalysis: return "gui/icons/lock";
+    case CrewPosition::briefingOfficer: return "gui/icons/station-briefing";
+    case CrewPosition::droneOperations: return "gui/icons/station-drone-operations";
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }
