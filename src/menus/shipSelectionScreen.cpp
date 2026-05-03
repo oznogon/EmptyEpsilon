@@ -862,7 +862,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     // Alternative options panel
     auto alternative_options_panel = new GuiPanel(center_container, "");
     alternative_options_panel
-        ->setSize(GuiElement::GuiSizeMax, 480.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 0, 0, 20");
     alternative_options_panel
         ->setAttribute("padding", "20, 20, 0, 20");
