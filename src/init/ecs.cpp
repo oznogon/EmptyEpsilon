@@ -65,6 +65,7 @@
 #include "systems/internalcrew.h"
 #include "systems/pathfinding.h"
 #include "systems/rendering.h"
+#include <systems/interpolation.h>
 #include "systems/planet.h"
 #include "systems/scanning.h"
 #include "systems/radar.h"
@@ -172,6 +173,7 @@ void initSystemsAndComponents()
     engine->registerSystem<GravitySystem>();
     engine->registerSystem<InternalCrewSystem>();
     engine->registerSystem<PathFindingSystem>();
+    engine->registerSystem<sp::InterpolationSystem>();
     engine->registerSystem<NebulaRenderSystem>();
     engine->registerSystem<ExplosionRenderSystem>();
     engine->registerSystem<BillboardRenderSystem>();

@@ -5,6 +5,7 @@
 
 #include "components/radar.h"
 #include "components/collision.h"
+#include <systems/interpolation.h>
 
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/alertOverlay.h"
@@ -54,8 +55,9 @@ void ProbeScreen::onDraw(sp::RenderTarget& renderer)
             auto probe_transform = rl->linked_entity.getComponent<sp::Transform>();
             if (probe_transform)
             {
-                camera_position.x = probe_transform->getPosition().x;
-                camera_position.y = probe_transform->getPosition().y;
+                auto pos = sp::InterpolationSystem::getPosition(rl->linked_entity);
+                camera_position.x = pos.x;
+                camera_position.y = pos.y;
                 camera_position.z = 0.0f;
                 camera_pitch = 0.0f;
             }

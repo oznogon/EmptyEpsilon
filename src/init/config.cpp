@@ -4,6 +4,7 @@
 #include <preferenceManager.h>
 #include <graphics/renderTarget.h>
 #include "gui/hotkeyConfig.h"
+#include <systems/interpolation.h>
 #include <cstring>
 
 #if STEAMSDK
@@ -28,6 +29,10 @@ string initConfiguration(int argc, char** argv)
 #endif
     LOG(Info, "Using ", configuration_path, " as configuration path");
     PreferencesManager::load(configuration_path + "/options.ini");
+
+    sp::InterpolationSystem::setEnabled(PreferencesManager::get("interpolation_enabled", "1") == "1");
+    sp::InterpolationSystem::setBlendRate(PreferencesManager::get("interpolation_blend_rate", "10.0").toFloat());
+    sp::InterpolationSystem::setTeleportThreshold(PreferencesManager::get("interpolation_teleport_threshold", "500.0").toFloat());
 
     for(int n=1; n<argc; n++)
     {

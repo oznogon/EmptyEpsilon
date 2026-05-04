@@ -3,6 +3,8 @@
 #include <ecs/entity.h>
 #include <ecs/query.h>
 #include <ecs/system.h>
+#include <multiplayer_client.h>
+#include <systems/interpolation.h>
 #include "components/collision.h"
 #include "components/rendering.h"
 #include "main.h"
@@ -33,6 +35,7 @@ private:
         bool transparent;
         void* rif;
         sp::Transform* transform;
+        sp::Transform interpolated_transform;
         void* component_ptr;
         void (*call_rif)(void* rif_ptr, sp::ecs::Entity e, sp::Transform& transform, void* component_ptr);
     };
@@ -54,7 +57,12 @@ private:
             int render_list_index = std::max(0, int((depth + radius) / 25000));
             while(render_list_index >= int(render_lists.size()))
                 render_lists.emplace_back();
-            render_lists[render_list_index].push_back({entity, depth, TRANSPARENT, rif_ptr, &transform, &t, [](void* rif_ptr, sp::ecs::Entity e, sp::Transform& transform, void* comp_ptr) {
+            sp::Transform interpolated = transform;
+            if (game_client && sp::InterpolationSystem::hasInterpolatedState(entity)) {
+                interpolated.setPositionNoReplication(sp::InterpolationSystem::getPosition(entity));
+                interpolated.setRotationNoReplication(sp::InterpolationSystem::getRotation(entity));
+            }
+            render_lists[render_list_index].push_back({entity, depth, TRANSPARENT, rif_ptr, &transform, interpolated, &t, [](void* rif_ptr, sp::ecs::Entity e, sp::Transform& transform, void* comp_ptr) {
                 auto rif = reinterpret_cast<Render3DInterface<COMPONENT, TRANSPARENT>*>(rif_ptr);
                 auto comp = reinterpret_cast<COMPONENT*>(comp_ptr);
                 rif->render3D(e, transform, *comp);

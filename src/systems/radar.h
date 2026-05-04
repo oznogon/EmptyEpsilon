@@ -5,6 +5,8 @@
 #include <container/bitset.h>
 #include <vectorUtils.h>
 #include <graphics/renderTarget.h>
+#include <multiplayer_client.h>
+#include <systems/interpolation.h>
 #include "components/collision.h"
 
 
@@ -23,9 +25,16 @@ public:
                 for(auto [entity, component, transform] : sp::ecs::Query<T, sp::Transform>()) {
                     if (!visible_objects.has(entity.getIndex())) continue;
 
-                    auto radar_position = rotateVec2((transform.getPosition() - view_position) * current_scale, current_rotation_offset);
+                    auto pos = transform.getPosition();
+                    auto rot = transform.getRotation();
+                    if (game_client && sp::InterpolationSystem::hasInterpolatedState(entity)) {
+                        pos = sp::InterpolationSystem::getPosition(entity);
+                        rot = sp::InterpolationSystem::getRotation(entity);
+                    }
+
+                    auto radar_position = rotateVec2((pos - view_position) * current_scale, current_rotation_offset);
                     radar_position += radar_screen_center;
-                    rr->renderOnRadar(renderer, entity, radar_position, current_scale, transform.getRotation() + current_rotation_offset, component);
+                    rr->renderOnRadar(renderer, entity, radar_position, current_scale, rot + current_rotation_offset, component);
                 }
             }
         });
@@ -54,6 +63,11 @@ public:
     static constexpr int FlagGM = 0x04;
     static constexpr int FlagCallsigns = 0x08;
     static int current_flags;
+
+    static float getCurrentScale() { return current_scale; }
+    static float getCurrentRotationOffset() { return current_rotation_offset; }
+    static glm::vec2 getViewPosition() { return view_position; }
+    static glm::vec2 getRadarScreenCenter() { return radar_screen_center; }
 private:
     static float current_scale;
     static float current_rotation_offset;

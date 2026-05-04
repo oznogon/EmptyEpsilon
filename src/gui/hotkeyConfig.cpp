@@ -225,6 +225,7 @@ Keys::Keys() :
     debug_show_timing("DEBUG_SHOW_TIMING", "F11"),
 #ifdef DEBUG
     debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
+    debug_show_interpolation("DEBUG_SHOW_INTERPOLATION", ""),
 #endif
 
     // Rebinding binds
@@ -575,6 +576,8 @@ void Keys::init()
 #ifdef DEBUG
     debug_show_colliders.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug colliders"));
     debug_show_colliders.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    debug_show_interpolation.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show interpolation debug"));
+    debug_show_interpolation.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 #endif
 
     // Rebinding binds

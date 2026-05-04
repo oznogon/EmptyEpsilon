@@ -36,13 +36,13 @@ void RenderSystem::render3D(float aspect, float camera_fov)
         glDisable(GL_BLEND);
         for(auto info : render_list)
             if (!info.transparent)
-                info.call_rif(info.rif, info.entity, *info.transform, info.component_ptr);
+                info.call_rif(info.rif, info.entity, info.interpolated_transform, info.component_ptr);
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
         glDepthMask(false);
         for(auto info : render_list)
             if (info.transparent)
-                info.call_rif(info.rif, info.entity, *info.transform, info.component_ptr);
+                info.call_rif(info.rif, info.entity, info.interpolated_transform, info.component_ptr);
     }
 }
 

@@ -5,6 +5,7 @@
 #include "components/collision.h"
 #include "components/target.h"
 #include "main.h"
+#include <systems/interpolation.h>
 
 GuiViewportMainScreen::GuiViewportMainScreen(GuiContainer* owner, string id)
 : GuiViewport3D(owner, id)
@@ -34,8 +35,8 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
             float radius = 300.0f;
             if (auto physics = override_entity.getComponent<sp::Physics>())
                 radius = physics->getSize().x;
-            float target_camera_yaw = transform->getRotation();
-            auto cameraPosition2D = transform->getPosition() + vec2FromAngle(target_camera_yaw) * radius;
+            float target_camera_yaw = sp::InterpolationSystem::getRotation(override_entity);
+            auto cameraPosition2D = sp::InterpolationSystem::getPosition(override_entity) + vec2FromAngle(target_camera_yaw) * radius;
             camera_position = glm::vec3(cameraPosition2D.x, cameraPosition2D.y, radius / 10.f);
             camera_yaw = target_camera_yaw;
             camera_pitch = 0.0f;
@@ -47,7 +48,7 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
         if (!transform) return;
         auto pc = my_spaceship.getComponent<PlayerControl>();
         auto target_ship = my_spaceship.getComponent<Target>();
-        float target_camera_yaw = transform->getRotation();
+        float target_camera_yaw = sp::InterpolationSystem::getRotation(my_spaceship);
 
         switch(pc ? pc->main_screen_setting : MainScreenSetting::Front)
         {
@@ -61,13 +62,13 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
                 if (auto tt = target_ship->entity.getComponent<sp::Transform>())
                 {
                     linger_timer = linger_period;
-                    tot_coordinates = tt->getPosition();
+                    tot_coordinates = sp::InterpolationSystem::getPosition(target_ship->entity);
                 }
                 else linger_timer -= delta;
 
                 // Point camera over ship's shoulder toward ToT or its last
                 // recorded coordinates.
-                target_camera_yaw = vec2ToAngle(transform->getPosition() - tot_coordinates) + 180.0f;
+                target_camera_yaw = vec2ToAngle(sp::InterpolationSystem::getPosition(my_spaceship) - tot_coordinates) + 180.0f;
             }
             else
                 tot_coordinates = {0.0f, 0.0f}; // Reset ToT coordinates
@@ -88,7 +89,7 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
             camera_ship_height = radius / 10.f;
             camera_pitch = 0;
         }
-        auto cameraPosition2D = transform->getPosition() + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
+        auto cameraPosition2D = sp::InterpolationSystem::getPosition(my_spaceship) + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
         glm::vec3 targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
         if (first_person)
         {

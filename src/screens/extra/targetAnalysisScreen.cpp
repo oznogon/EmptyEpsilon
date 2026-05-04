@@ -14,6 +14,7 @@
 #include "components/name.h"
 #include "components/beamweapon.h"
 #include "components/collision.h"
+#include <systems/interpolation.h>
 
 #include "screenComponents/rotatingModelView.h"
 #include "screenComponents/alertOverlay.h"
@@ -127,7 +128,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
 
         if (my_transform && target_transform)
         {
-            auto diff = target_transform->getPosition() - my_transform->getPosition();
+            auto diff = sp::InterpolationSystem::getPosition(target) - sp::InterpolationSystem::getPosition(my_spaceship);
             float distance = glm::length(diff);
             float heading = vec2ToAngle(diff) - 270.0f;
             while (heading < 0.0f) heading += 360.0f;

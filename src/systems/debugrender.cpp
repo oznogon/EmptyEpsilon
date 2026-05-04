@@ -2,6 +2,8 @@
 #include "gui/hotkeyConfig.h"
 #include <graphics/opengl.h>
 #include <glm/gtc/type_ptr.hpp>
+#include <systems/interpolation.h>
+#include "systems/radar.h"
 
 
 DebugRenderSystem::DebugRenderSystem()
@@ -15,83 +17,117 @@ void DebugRenderSystem::update(float delta)
 {
 #ifdef DEBUG
     if (keys.debug_show_colliders.getDown()) show_colliders = !show_colliders;
+    if (keys.debug_show_interpolation.getDown()) show_interpolation_debug = !show_interpolation_debug;
 #endif
 }
 
-void DebugRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, sp::Physics& physics)
+void DebugRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& interpolated, sp::Physics& physics)
 {
-    if (!show_colliders) return;
-
     ShaderRegistry::ScopedShader color_shader(ShaderRegistry::Shaders::BasicColor);
 
-    glDisable(GL_DEPTH_TEST);
-    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ transform.getPosition(), 0.0f });
-    model_matrix = glm::rotate(model_matrix, glm::radians(transform.getRotation()), glm::vec3{ 0.f, 0.f, 1.f });
+    if (show_colliders) {
+        glDisable(GL_DEPTH_TEST);
+        auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ interpolated.getPosition(), 0.0f });
+        model_matrix = glm::rotate(model_matrix, glm::radians(interpolated.getRotation()), glm::vec3{ 0.f, 0.f, 1.f });
 
-    glUniformMatrix4fv(color_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-    glUniform4f(color_shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.0f, 1.0f, 1.0f, .5f);
-    
-    if (physics.getShape() == sp::Physics::Shape::Circle)
-    {
-        gl::ScopedVertexAttribArray positions(color_shader.get().attribute(ShaderRegistry::Attributes::Position));
-        constexpr size_t point_count = 50;
-        std::vector<glm::vec3> vertices;
-        std::vector<uint16_t> indices;
-        auto radius = physics.getSize().x;
-        for(size_t idx=0; idx<point_count; idx++) {
-            float f = float(idx) / float(point_count) * static_cast<float>(M_PI) * 2.0f;
-            vertices.push_back({std::sin(f) * radius, std::cos(f) * radius, 0.0f});
-            indices.push_back(idx);
-        }
-        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<GLvoid*>(&vertices[0]));
+        glUniformMatrix4fv(color_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniform4f(color_shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.0f, 1.0f, 1.0f, .5f);
         
-        glDrawElements(GL_LINE_LOOP, point_count, GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid*>(&indices[0]));
-    }
-    else if (physics.getShape() == sp::Physics::Shape::Rectangle)
-    {
-        gl::ScopedVertexAttribArray positions(color_shader.get().attribute(ShaderRegistry::Attributes::Position));
-        std::vector<glm::vec3> vertices;
-        std::vector<uint16_t> indices{0, 1, 2, 3};
+        if (physics.getShape() == sp::Physics::Shape::Circle)
+        {
+            gl::ScopedVertexAttribArray positions(color_shader.get().attribute(ShaderRegistry::Attributes::Position));
+            constexpr size_t point_count = 50;
+            std::vector<glm::vec3> vertices;
+            std::vector<uint16_t> indices;
+            auto radius = physics.getSize().x;
+            for(size_t idx=0; idx<point_count; idx++) {
+                float f = float(idx) / float(point_count) * static_cast<float>(M_PI) * 2.0f;
+                vertices.push_back({std::sin(f) * radius, std::cos(f) * radius, 0.0f});
+                indices.push_back(idx);
+            }
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<GLvoid*>(&vertices[0]));
+            
+            glDrawElements(GL_LINE_LOOP, point_count, GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid*>(&indices[0]));
+        }
+        else if (physics.getShape() == sp::Physics::Shape::Rectangle)
+        {
+            gl::ScopedVertexAttribArray positions(color_shader.get().attribute(ShaderRegistry::Attributes::Position));
+            std::vector<glm::vec3> vertices;
+            std::vector<uint16_t> indices{0, 1, 2, 3};
 
-        auto s0 = physics.getSize() * .5f;
-        vertices.push_back(glm::vec3{s0.x, s0.y, 0.0f});
-        vertices.push_back(glm::vec3{s0.x, -s0.y, 0.0f});
-        vertices.push_back(glm::vec3{-s0.x, -s0.y, 0.0f});
-        vertices.push_back(glm::vec3{-s0.x, s0.y, 0.0f});
-        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<GLvoid*>(&vertices[0]));
-        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid*>(&indices[0]));
+            auto s0 = physics.getSize() * .5f;
+            vertices.push_back(glm::vec3{s0.x, s0.y, 0.0f});
+            vertices.push_back(glm::vec3{s0.x, -s0.y, 0.0f});
+            vertices.push_back(glm::vec3{-s0.x, -s0.y, 0.0f});
+            vertices.push_back(glm::vec3{-s0.x, s0.y, 0.0f});
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<GLvoid*>(&vertices[0]));
+            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid*>(&indices[0]));
+        }
+        glEnable(GL_DEPTH_TEST);
     }
-    glEnable(GL_DEPTH_TEST);
+
+    if (show_interpolation_debug && sp::InterpolationSystem::hasInterpolatedState(e)) {
+        auto raw = e.getComponent<sp::Transform>();
+        if (raw) {
+            glDisable(GL_DEPTH_TEST);
+            auto render_pos = interpolated.getPosition();
+            auto raw_pos = raw->getPosition();
+
+            std::vector<glm::vec3> vertices{
+                glm::vec3(render_pos.x, render_pos.y, 0.0f),
+                glm::vec3(raw_pos.x, raw_pos.y, 0.0f)
+            };
+            std::vector<uint16_t> indices{0, 1};
+
+            gl::ScopedVertexAttribArray positions(color_shader.get().attribute(ShaderRegistry::Attributes::Position));
+            glUniformMatrix4fv(color_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::identity<glm::mat4>()));
+            glUniform4f(color_shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.0f, 0.0f, 0.0f, 1.0f);
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<GLvoid*>(&vertices[0]));
+            glDrawElements(GL_LINES, 2, GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid*>(&indices[0]));
+            glEnable(GL_DEPTH_TEST);
+        }
+    }
 }
 
 void DebugRenderSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, sp::Physics& physics)
 {
-    if (!show_colliders) return;
+    if (show_colliders) {
+        glm::u8vec4 color{255, 255, 255, 128};
 
-    glm::u8vec4 color{255, 255, 255, 128};
-
-    switch(physics.getType())
-    {
-    case sp::Physics::Type::Sensor: color = {255,128,128,128}; break;
-    case sp::Physics::Type::Dynamic: color = {255,255,255,128}; break;
-    case sp::Physics::Type::Static: color = {128,255,128,128}; break;
-    }
-    switch(physics.getShape())
-    {
-    case sp::Physics::Shape::Circle:
-        renderer.drawCircleOutline(screen_position, physics.getSize().x * scale, 1.0, {255, 255, 255, 128});
-        break;
-    case sp::Physics::Shape::Rectangle:
+        switch(physics.getType())
         {
-            auto s0 = physics.getSize() * .5f * scale;
-            auto s1 = glm::vec2{s0.x, -s0.y};
-            auto p0 = screen_position + rotateVec2(s0, rotation);
-            auto p1 = screen_position + rotateVec2(s1, rotation);
-            auto p2 = screen_position - rotateVec2(s0, rotation);
-            auto p3 = screen_position - rotateVec2(s1, rotation);
-            std::vector<glm::vec2> points{p0, p1, p2, p3, p0};
-            renderer.drawLine(points, 1.0f, {255, 255, 255, 128});
+        case sp::Physics::Type::Sensor: color = {255,128,128,128}; break;
+        case sp::Physics::Type::Dynamic: color = {255,255,255,128}; break;
+        case sp::Physics::Type::Static: color = {128,255,128,128}; break;
         }
-        break;
+        switch(physics.getShape())
+        {
+        case sp::Physics::Shape::Circle:
+            renderer.drawCircleOutline(screen_position, physics.getSize().x * scale, 1.0, {255, 255, 255, 128});
+            break;
+        case sp::Physics::Shape::Rectangle:
+            {
+                auto s0 = physics.getSize() * .5f * scale;
+                auto s1 = glm::vec2{s0.x, -s0.y};
+                auto p0 = screen_position + rotateVec2(s0, rotation);
+                auto p1 = screen_position + rotateVec2(s1, rotation);
+                auto p2 = screen_position - rotateVec2(s0, rotation);
+                auto p3 = screen_position - rotateVec2(s1, rotation);
+                std::vector<glm::vec2> points{p0, p1, p2, p3, p0};
+                renderer.drawLine(points, 1.0f, {255, 255, 255, 128});
+            }
+            break;
+        }
+    }
+
+    if (show_interpolation_debug && sp::InterpolationSystem::hasInterpolatedState(e)) {
+        auto raw = e.getComponent<sp::Transform>();
+        if (raw) {
+            auto raw_pos = raw->getPosition();
+            auto render_pos = sp::InterpolationSystem::getPosition(e);
+            auto diff = raw_pos - render_pos;
+            auto raw_screen = screen_position + rotateVec2(diff * scale, RadarRenderSystem::getCurrentRotationOffset());
+            renderer.drawLine(screen_position, raw_screen, 1.0f, glm::u8vec4(255, 0, 0, 200));
+        }
     }
 }

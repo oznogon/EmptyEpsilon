@@ -22,6 +22,7 @@
 #include "components/zone.h"
 #include "systems/rendering.h"
 #include "math/centerOfMass.h"
+#include <systems/interpolation.h>
 
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_transform.hpp>
@@ -147,9 +148,9 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
     renderer.finish();
    
-    if (auto transform = my_spaceship.getComponent<sp::Transform>())
-        soundManager->setListenerPosition(transform->getPosition(), transform->getRotation());
-    else
+    if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+        soundManager->setListenerPosition(sp::InterpolationSystem::getPosition(my_spaceship), sp::InterpolationSystem::getRotation(my_spaceship));
+    } else
         soundManager->setListenerPosition(glm::vec2(camera_position.x, camera_position.y), camera_yaw);
     
     glActiveTexture(GL_TEXTURE0);
@@ -284,7 +285,9 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                     }
 
                     // Rotate by ship's heading and translate to world position.
-                    const glm::vec3 pos3d = glm::vec3(transform.getPosition() + rotateVec2(glm::vec2(local_offset.x, local_offset.y), transform.getRotation()), local_offset.z);
+                    auto ship_pos = sp::InterpolationSystem::getPosition(entity);
+                    auto ship_rot = sp::InterpolationSystem::getRotation(entity);
+                    const glm::vec3 pos3d = glm::vec3(ship_pos + rotateVec2(glm::vec2(local_offset.x, local_offset.y), ship_rot), local_offset.z);
 
                     const float scale = ed.scale * std::abs(impulse.actual);
                     ParticleEngine::spawn(pos3d, pos3d, ed.color, ed.color, scale, 0.0f, 5.0f);
@@ -307,9 +310,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         auto transform = my_spaceship.getComponent<sp::Transform>();
         auto physics = my_spaceship.getComponent<sp::Physics>();
         static std::vector<glm::vec3> space_dust(2 * spacedust_particle_count);
-        
+
         glm::vec2 dust_vector = physics ? (physics->getVelocity() / 100.f) : glm::vec2{0, 0};
-        glm::vec3 dust_center = transform ? glm::vec3(transform->getPosition().x, transform->getPosition().y, 0.f) : camera_position;
+        glm::vec2 ship_pos = transform ? sp::InterpolationSystem::getPosition(my_spaceship) : glm::vec2(camera_position.x, camera_position.y);
+        glm::vec3 dust_center = glm::vec3(ship_pos.x, ship_pos.y, 0.f);
 
         constexpr float maxDustDist = 500.f;
         constexpr float minDustDist = 100.f;
@@ -361,8 +365,9 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         glDisable(GL_DEPTH_TEST);
         glm::mat4 model_matrix = glm::identity<glm::mat4>();
-        if (auto transform = target_comp->entity.getComponent<sp::Transform>())
-            model_matrix = glm::translate(model_matrix, glm::vec3(transform->getPosition(), 0.f));
+        if (auto transform = target_comp->entity.getComponent<sp::Transform>()) {
+            model_matrix = glm::translate(model_matrix, glm::vec3(sp::InterpolationSystem::getPosition(target_comp->entity), 0.f));
+        }
 
         textureManager.getTexture("redicule2.png")->bind();
         glUniformMatrix4fv(billboard.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
@@ -451,7 +456,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             float radius = 300.0f;
             if (auto physics = entity.getComponent<sp::Physics>())
                 radius = std::min(physics->getSize().x, physics->getSize().y);
-            glm::vec3 screen_position = worldToScreen(renderer, glm::vec3(transform.getPosition().x, transform.getPosition().y, radius));
+            glm::vec3 screen_position = worldToScreen(renderer, glm::vec3(sp::InterpolationSystem::getPosition(entity).x, sp::InterpolationSystem::getPosition(entity).y, radius));
             if (screen_position.z < 0.0f)
                 continue;
             if (screen_position.z > 10000.0f)
@@ -467,9 +472,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         auto transform = my_spaceship.getComponent<sp::Transform>();
 
         if (transform) {
+            auto ship_pos = sp::InterpolationSystem::getPosition(my_spaceship);
             for(int angle = 0; angle < 360; angle += 30)
             {
-                glm::vec2 world_pos = transform->getPosition() + vec2FromAngle(angle - 90.f) * distance;
+                glm::vec2 world_pos = ship_pos + vec2FromAngle(angle - 90.f) * distance;
                 glm::vec3 screen_pos = worldToScreen(renderer, glm::vec3(world_pos.x, world_pos.y, 0.0f));
                 if (screen_pos.z > 0.0f)
                     renderer.drawText(sp::Rect(screen_pos.x, screen_pos.y, 0, 0), string(angle), sp::Alignment::Center, 30, bold_font, glm::u8vec4(255, 255, 255, 128));

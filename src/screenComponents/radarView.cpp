@@ -25,6 +25,7 @@
 #include "systems/missilesystem.h"
 #include "systems/radarblock.h"
 #include "systems/radar.h"
+#include <systems/interpolation.h>
 
 #include "radarView.h"
 #include "missileTubeControls.h"
@@ -167,9 +168,9 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 
     if (transform && auto_center_on_ship)
     {
-        view_position = transform->getPosition();
+        view_position = sp::InterpolationSystem::getPosition(auto_center_target);
         if (auto_rotate_on_ship)
-            view_rotation = transform->getRotation() + 90.0f;
+            view_rotation = sp::InterpolationSystem::getRotation(auto_center_target) + 90.0f;
     }
 
     if (auto_distance)
@@ -308,7 +309,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     // Draw off-screen target indicators for Relay/GM screen.
     if (style == Rectangular && transform)
     {
-        auto ship_offset = (transform->getPosition() - view_position) / distance * std::min(rect.size.x, rect.size.y) / 2.0f;
+        auto ship_offset = (sp::InterpolationSystem::getPosition(auto_center_target) - view_position) / distance * std::min(rect.size.x, rect.size.y) / 2.0f;
         if (ship_offset.x < -rect.size.x / 2.0f || ship_offset.x > rect.size.x / 2.0f || ship_offset.y < -rect.size.y / 2.0f || ship_offset.y > rect.size.y / 2.0f)
         {
             glm::vec2 position(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
@@ -371,13 +372,14 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
         {
             if (Faction::getRelation(my_spaceship, entity) != FactionRelation::Friendly)
                 continue;
+            auto pos = sp::InterpolationSystem::getPosition(entity);
             if (auto lrr = entity.getComponent<LongRangeRadar>())
             {
                 auto r = lrr->short_range * scale;
-                renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
+                renderer.fillCircle(worldToScreen(pos), r, glm::u8vec4{ 20, 20, 20, background_alpha });
             } else {
                 auto r = 5000.f * scale;
-                renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
+                renderer.fillCircle(worldToScreen(pos), r, glm::u8vec4{ 20, 20, 20, background_alpha });
             }
         }
     }
@@ -458,12 +460,13 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
     auto transform = my_spaceship.getComponent<sp::Transform>();
     if (!transform)
         return;
-    auto scan_center = transform->getPosition();
+    auto scan_center = sp::InterpolationSystem::getPosition(my_spaceship);
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     for(auto [entity, radarblock, transform] : sp::ecs::Query<RadarBlock, sp::Transform>())
     {
-        auto diff = transform.getPosition() - scan_center;
+        auto pos = sp::InterpolationSystem::getPosition(entity);
+        auto diff = pos - scan_center;
         float diff_len = glm::length(diff);
 
         if (diff_len < radarblock.range + distance)
@@ -472,19 +475,19 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
             {
                 // Inside a nebula - everything is blocked out.
                 renderer.fillRect(rect, glm::u8vec4(0, 0, 0, 255));
-                
+
                 // Leave the loop here: there's no point adding more blocked areas.
                 break;
             }else{
                 float r = radarblock.range * scale;
-                renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4(0, 0, 0, 255));
+                renderer.fillCircle(worldToScreen(pos), r, glm::u8vec4(0, 0, 0, 255));
 
                 if (radarblock.behind) {
                     float diff_angle = vec2ToAngle(diff);
                     float angle = glm::degrees(acosf(radarblock.range / diff_len));
 
-                    auto pos_a = transform.getPosition() - vec2FromAngle(diff_angle + angle) * radarblock.range;
-                    auto pos_b = transform.getPosition() - vec2FromAngle(diff_angle - angle) * radarblock.range;
+                    auto pos_a = pos - vec2FromAngle(diff_angle + angle) * radarblock.range;
+                    auto pos_b = pos - vec2FromAngle(diff_angle - angle) * radarblock.range;
                     auto pos_c = scan_center + glm::normalize(pos_a - scan_center) * distance * 3.0f;
                     auto pos_d = scan_center + glm::normalize(pos_b - scan_center) * distance * 3.0f;
                     auto pos_e = scan_center + diff / diff_len * distance * 3.0f;
@@ -501,7 +504,7 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
         float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
         auto r = lrr->short_range * scale;
-        renderer.fillCircle(worldToScreen(transform->getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
+        renderer.fillCircle(worldToScreen(scan_center), r, glm::u8vec4{ 20, 20, 20, background_alpha });
     }
 }
 
@@ -672,16 +675,18 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
     bool has_aim = missile_tube_controls || target_projection_manual_aim_func;
     if (transform && has_aim)
     {
+        auto ship_pos = sp::InterpolationSystem::getPosition(entity);
+        auto ship_rot = sp::InterpolationSystem::getRotation(entity);
         if (auto tubes = entity.getComponent<MissileTubes>())
         {
             for (auto& mount : tubes->mounts)
             {
                 if (mount.state != MissileTubes::MountPoint::State::Loaded)
                     continue;
-                auto fire_position = transform->getPosition() + rotateVec2(glm::vec2(mount.position), transform->getRotation());
+                auto fire_position = ship_pos + rotateVec2(glm::vec2(mount.position), ship_rot);
 
                 const MissileWeaponData& data = MissileWeaponData::getDataFor(mount.type_loaded);
-                float fire_angle = mount.direction + (transform->getRotation());
+                float fire_angle = mount.direction + ship_rot;
                 float missile_target_angle = fire_angle;
                 if (data.turnrate > 0.0f)
                 {
@@ -770,8 +775,9 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
             if (!transform)
                 continue;
 
-            auto start = worldToScreen(transform->getPosition());
-            renderer.drawLine(start, worldToScreen(transform->getPosition() + physics->getVelocity() * 60.0f), 2.0f, glm::u8vec4(color.r, color.g, color.b, color.a / 2), glm::u8vec4(color.r, color.g, color.b, 0));
+            auto pos = sp::InterpolationSystem::getPosition(obj);
+            auto start = worldToScreen(pos);
+            renderer.drawLine(start, worldToScreen(pos + physics->getVelocity() * 60.0f), 2.0f, glm::u8vec4(color.r, color.g, color.b, color.a / 2), glm::u8vec4(color.r, color.g, color.b, 0));
             glm::vec2 n = glm::normalize(rotateVec2(glm::vec2(-physics->getVelocity().y, physics->getVelocity().x), -view_rotation)) * 10.0f;
             for(int cnt=0; cnt<5; cnt++)
             {
@@ -792,14 +798,17 @@ void GuiRadarView::drawMissileTubes(sp::RenderTarget& renderer)
     auto transform = entity.getComponent<sp::Transform>();
     if (!transform) return;
 
+    auto ship_pos = sp::InterpolationSystem::getPosition(entity);
+    auto ship_rot = sp::InterpolationSystem::getRotation(entity);
+
     const auto& color = theme->getStyle("radar.missile_tubes")->get(getState()).color;
 
     for(auto& mount : tubes->mounts)
     {
-        auto fire_position = transform->getPosition() + rotateVec2(glm::vec2(mount.position), transform->getRotation());
+        auto fire_position = ship_pos + rotateVec2(glm::vec2(mount.position), ship_rot);
         auto fire_draw_position = worldToScreen(fire_position);
 
-        float fire_angle = transform->getRotation() + mount.direction - view_rotation;
+        float fire_angle = ship_rot + mount.direction - view_rotation;
 
         renderer.drawLine(fire_draw_position, fire_draw_position + (vec2FromAngle(fire_angle) * 1000.0f * scale), 2.0f, color, glm::u8vec4(color.r, color.g, color.b, 0));
     }
@@ -906,7 +915,7 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
     {
         auto transform = obj.getComponent<sp::Transform>();
         if (!transform) continue;
-        auto object_position_on_screen = worldToScreen(transform->getPosition());
+        auto object_position_on_screen = worldToScreen(sp::InterpolationSystem::getPosition(obj));
         auto trace = obj.getComponent<RadarTrace>();
         float r = trace ? trace->radius * scale : 0.0f;
         sp::Rect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);

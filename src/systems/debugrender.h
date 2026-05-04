@@ -17,4 +17,5 @@ public:
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, sp::Physics& component) override;
 private:
     bool show_colliders = false;
+    bool show_interpolation_debug = false;
 };
