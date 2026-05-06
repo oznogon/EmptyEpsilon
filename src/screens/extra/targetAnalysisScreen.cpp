@@ -20,6 +20,9 @@
 #include "screenComponents/frequencyCurve.h"
 #include "screenComponents/customShipFunctions.h"
 #include "screenComponents/globalMessage.h"
+#include "screenComponents/signalQualityIndicator.h"
+
+#include "random.h"
 
 #include "gui/theme.h"
 #include "gui/gui2_image.h"
@@ -70,9 +73,9 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 
     if (gameGlobalInfo->use_beam_shield_frequencies)
     {
-        info_shield_frequency = new GuiFrequencyCurve(info_sidebar, "INFO_SHIELD_FREQ", false, true);
+        info_shield_frequency = new GuiFrequencyCurve(info_sidebar, "INFO_SHIELD_FREQ", GuiFrequencyCurve::FrequencyType::Other, GuiFrequencyCurve::DamageEffect::Positive);
         info_shield_frequency->setSize(GuiElement::GuiSizeMax, 80.0f);
-        info_beam_frequency = new GuiFrequencyCurve(info_sidebar, "INFO_BEAM_FREQ", true, false);
+        info_beam_frequency = new GuiFrequencyCurve(info_sidebar, "INFO_BEAM_FREQ", GuiFrequencyCurve::FrequencyType::Beam, GuiFrequencyCurve::DamageEffect::Negative);
         info_beam_frequency->setSize(GuiElement::GuiSizeMax, 80.0f);
     }
     else
@@ -86,6 +89,30 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         info_system[n] = new GuiKeyValueDisplay(info_sidebar, "INFO_SYSTEM_" + string(n), 0.75f, getLocaleSystemName(ShipSystem::Type(n)), "-");
         info_system[n]->setSize(GuiElement::GuiSizeMax, 25.0f)->hide();
     }
+
+    info_electrical_signal_band = new GuiSignalQualityIndicator(info_sidebar, "ELECTRICAL_SIGNAL");
+    info_electrical_signal_band
+        ->showGreen(false)
+        ->showBlue(false)
+        ->setSize(GuiElement::GuiSizeMax, 80.0f);
+    info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"), 30.0f);
+    info_electrical_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    info_gravitational_signal_band = new GuiSignalQualityIndicator(info_sidebar, "GRAVITY_SIGNAL");
+    info_gravitational_signal_band
+        ->showRed(false)
+        ->showBlue(false)
+        ->setSize(GuiElement::GuiSizeMax, 80.0f);
+    info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
+    info_gravitational_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    info_biological_signal_band = new GuiSignalQualityIndicator(info_sidebar, "BIOLOGICAL_SIGNAL");
+    info_biological_signal_band
+        ->showRed(false)
+        ->showGreen(false)
+        ->setSize(GuiElement::GuiSizeMax, 80.0f);
+    info_biological_signal_label = new GuiLabel(info_biological_signal_band, "", "Biological", 30.0f);
+    info_biological_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiCustomShipFunctions(this, CrewPosition::scienceOfficer, ""))
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
@@ -124,11 +151,13 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
 
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
         auto target_transform = target.getComponent<sp::Transform>();
+        float distance = 0.0f;
 
         if (my_transform && target_transform)
         {
             auto diff = target_transform->getPosition() - my_transform->getPosition();
-            float distance = glm::length(diff);
+            distance = glm::length(diff);
+
             float heading = vec2ToAngle(diff) - 270.0f;
             while (heading < 0.0f) heading += 360.0f;
 
@@ -198,6 +227,61 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
                         ->setBackColor(glm::u8vec4(255, uint8_t(127.5f * (health + 1)), uint8_t(127.5f * (health + 1)), 255))
                         ->show();
                 }
+            }
+
+            // Use dynamic signatures for ships.
+            if (target)
+            {
+                float signal = 0.0f;
+                float electrical = 0.0f;
+                float gravity = 0.0f;
+                float biological = 0.0f;
+
+                if (auto info = target.getComponent<RawRadarSignatureInfo>())
+                {
+                    // Calculate signal noise for unscanned objects more than SRRR away.
+                    float distance_variance = 0.0f;
+                    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+
+                    if (lrr && distance > lrr->short_range && scanstate < ScanState::State::FullScan)
+                        distance_variance = (random(0.01f, (distance - lrr->short_range)) / (lrr->long_range - lrr->short_range)) * 0.1f;
+
+                    electrical = std::max(0.0f, info->electrical - distance_variance);
+                    gravity = std::max(0.0f, info->gravity - distance_variance);
+                    biological = std::max(0.0f, info->biological - distance_variance);
+
+                    if (auto dynamic_info = target.getComponent<DynamicRadarSignatureInfo>())
+                    {
+                        electrical = std::max(0.0f, electrical + dynamic_info->electrical);
+                        gravity = std::max(0.0f, gravity + dynamic_info->gravity);
+                        biological = std::max(0.0f, biological + dynamic_info->biological);
+                    }
+                }
+
+                // Update signal bands and labels.
+                signal = electrical;
+                info_electrical_signal_band
+                    ->setMaxAmp(signal)
+                    ->setNoiseError(std::max(0.0f, (signal - 1.0f) * 0.1f));
+                info_electrical_signal_label->setText(tr("Electrical: {signal} MJ").format({
+                    {"signal", string(signal)}
+                }));
+
+                signal = gravity;
+                info_gravitational_signal_band
+                    ->setMaxAmp(signal)
+                    ->setPeriodError(std::max(0.0f, (signal - 1.0f) * 0.1f));
+                info_gravitational_signal_label->setText(tr("Gravitational: {signal} dN").format({
+                    {"signal", string(signal)}
+                }));
+
+                signal = biological;
+                info_biological_signal_band
+                    ->setMaxAmp(signal)
+                    ->setPhaseError(std::max(0.0f, (signal - 1.0f) * 0.1f));
+                info_biological_signal_label->setText(tr("Biological: {signal} um").format({
+                    {"signal", string(signal)}
+                }));
             }
         }
     }
