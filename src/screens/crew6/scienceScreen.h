@@ -12,6 +12,8 @@ class GuiScrollText;
 class GuiButton;
 class GuiScanTargetButton;
 class GuiToggleButton;
+class GuiSignalQualityIndicator;
+class GuiLabel;
 class GuiSelector;
 class GuiRadarZoomSlider;
 class GuiImage;
@@ -56,6 +58,13 @@ public:
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];
+
+    GuiSignalQualityIndicator* info_electrical_signal_band;
+    GuiLabel* info_electrical_signal_label;
+    GuiSignalQualityIndicator* info_gravitational_signal_band;
+    GuiLabel* info_gravitational_signal_label;
+    GuiSignalQualityIndicator* info_biological_signal_band;
+    GuiLabel* info_biological_signal_label;
 
     GuiToggleButton* probe_view_button;
     sp::ecs::Entity observation_point;
