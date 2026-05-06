@@ -8,6 +8,7 @@ class GuiFrequencyCurve;
 class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiRotatingModelView;
+class GuiSignalQualityIndicator;
 
 class TargetAnalysisScreen : public GuiOverlay
 {
@@ -30,6 +31,12 @@ private:
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];
+    GuiSignalQualityIndicator* info_electrical_signal_band;
+    GuiLabel* info_electrical_signal_label;
+    GuiSignalQualityIndicator* info_gravitational_signal_band;
+    GuiLabel* info_gravitational_signal_label;
+    GuiSignalQualityIndicator* info_biological_signal_band;
+    GuiLabel* info_biological_signal_label;
 public:
     TargetAnalysisScreen(GuiContainer* owner);
 

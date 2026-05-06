@@ -27,6 +27,7 @@
 #include "screenComponents/customShipFunctions.h"
 
 #include "gui/theme.h"
+#include "gui/gui2_button.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
@@ -111,6 +112,16 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
     scan_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<ScienceScanner>());
 
+    // Link to analysis button.
+    link_to_analysis_button = new GuiButton(info_sidebar, "LINK_TO_ANALYSIS", tr("scienceButton", "Link to analysis"),
+        [this]()
+        {
+            if (my_player_info && targets.get())
+                my_player_info->commandSetTarget(targets.get());
+        }
+    );
+    link_to_analysis_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+
     // Simple scan data.
     info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4, tr("science", "Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
@@ -165,9 +176,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     sidebar_pager->setSelectionIndex(0);
 
     // Prep and hide the frequency graphs.
-    info_shield_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_SHIELD_FREQUENCY", false, true);
+    info_shield_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_SHIELD_FREQUENCY", GuiFrequencyCurve::FrequencyType::Other, GuiFrequencyCurve::DamageEffect::Positive);
     info_shield_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    info_beam_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_BEAM_FREQUENCY", true, false);
+    info_beam_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_BEAM_FREQUENCY", GuiFrequencyCurve::FrequencyType::Beam, GuiFrequencyCurve::DamageEffect::Negative);
     info_beam_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Show shield and beam frequencies only if enabled by the server.
@@ -335,6 +346,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     info_beam_frequency->setFrequency(-1)->hide();
     info_description->hide();
     info_type_button->hide();
+    link_to_analysis_button->hide();
     sidebar_pager->hide();
 
     for(int n = 0; n < ShipSystem::COUNT; n++)
@@ -358,6 +370,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
     if (targets.get())
     {
+        link_to_analysis_button->show();
         auto target = targets.get();
 
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
