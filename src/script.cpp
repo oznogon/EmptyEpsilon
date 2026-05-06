@@ -999,6 +999,10 @@ void luaCommandSetTarget(sp::ecs::Entity ship, sp::ecs::Entity target) {
     ship.getOrAddComponent<Target>().entity = target;
 }
 
+void luaCommandSetScienceTarget(sp::ecs::Entity ship, sp::ecs::Entity target) {
+    luaCommandSetTarget(ship, target);
+}
+
 void luaCommandLoadTube(sp::ecs::Entity ship, int tube_nr, EMissileWeapons type) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLoadTube(tube_nr, type); return; }
     auto missiletubes = ship.getComponent<MissileTubes>();
@@ -1523,6 +1527,12 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Example:
     /// commandSetTarget(getPlayerShip(-1), enemy_ship)
     env.setGlobal("commandSetTarget", &luaCommandSetTarget);
+    /// void commandSetScienceTarget(entity ship, entity target)
+    /// Links the given entity to the science target analysis screen for the given ship.
+    /// This is equivalent to selecting a target on the Science screen and clicking the Link to Analysis button.
+    /// Example:
+    /// commandSetScienceTarget(getPlayerShip(-1), enemy_ship)
+    env.setGlobal("commandSetScienceTarget", &luaCommandSetScienceTarget);
     /// void commandLoadTube(entity ship, integer tube_index, string missile_type)
     /// Loads a missile of the given type into the given tube.
     /// tube_index is 0-based. See EMissileWeapons for valid missle type values.
