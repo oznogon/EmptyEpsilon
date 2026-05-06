@@ -1,18 +1,31 @@
-#ifndef FREQUENCY_CURVE_H
-#define FREQUENCY_CURVE_H
+#pragma once
 
 #include "gui/gui2_panel.h"
 
 class GuiFrequencyCurve : public GuiPanel
 {
-    bool frequency_is_beam;
-    bool more_damage_is_positive;
-    bool enemy_has_equipment;   /*< True if target ship have beams/shields (which of those depends on frequency_is_beam) */
+public:
+    enum class FrequencyType
+    {
+        Beam,
+        Other
+    };
 
-    int frequency;
+    enum class DamageEffect
+    {
+        Positive,
+        Negative
+    };
+
+private:
+    FrequencyType frequency_type;
+    DamageEffect damage_effect;
+    bool enemy_has_equipment; // True if target ship has beams/shields (which of those depends on frequency_type)
+
+    int frequency = -1;
     glm::vec2 mouse_position;
 public:
-    GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_beam, bool more_damage_is_positive);
+    GuiFrequencyCurve(GuiContainer* owner, string id, FrequencyType frequency_type, DamageEffect damage_effect);
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& window) override;
@@ -21,5 +34,3 @@ public:
 
     void setEnemyHasEquipment(bool state) { this->enemy_has_equipment = state; }
 };
-
-#endif//FREQUENCY_CURVE_H
