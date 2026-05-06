@@ -80,3 +80,5 @@ extra-crew-screens 20260502 -- Drone Lua API, Sensors system
 
 extra-crew-screens 20260503
 power-management-layout 20260503
+
+help-exit-touchscreen 20260506
