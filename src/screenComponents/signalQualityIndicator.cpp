@@ -25,33 +25,47 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
     std::vector<glm::vec2> r;
     std::vector<glm::vec2> g;
     std::vector<glm::vec2> b;
-    float amp = rect.size.y / 2.0f - 10.0f;
+    float amp = (rect.size.y * 0.5f - 10.0f) * max_amp;
     float phase[3];
     float freq[3];
     float noise[3] = {error_noise, error_noise, error_noise};
-    for(int n=0; n<3; n++)
+    for (int n = 0; n < 3; n++)
     {
         phase[n] = clock.get() * (2.0f + error_phase * (100.0f + n * 45.0f));
         phase[n] = clock.get() + error_phase * (100.0f + n * 45.0f);
-        freq[n] = 2.0f * float(M_PI) / float(point_count) * target_period * (1.0f + (error_period * (0.0f + n * 2.2f)));
+        freq[n] = 2.0f * static_cast<float>(M_PI) / static_cast<float>(point_count) * target_period * (1.0f + (error_period * (n * 2.2f)));
     }
-    for(int n=0; n<point_count; n++)
+
+    for (int n = 0; n < point_count; n++)
     {
         float f;
+        const float nf = static_cast<float>(n);
+        const float half_rect_y = rect.position.y + rect.size.y * 0.5f;
+        const float four_rect_x = rect.position.x + 4.0f + nf * 4.0f;
 
-        f = sin(float(n) * freq[0] + phase[0]);
-        f = (1.0f - noise[0]) * f + noise[0] * random(-1.0, 1.0);
-        r.emplace_back(rect.position.x + 4.0f + n * 4, rect.position.y + rect.size.y / 2.0f + f * amp);
+        if (show_red)
+        {
+            f = sin(nf * freq[0] + phase[0]);
+            f = (1.0f - noise[0]) * f + noise[0] * random(-1.0f, 1.0f);
+            r.emplace_back(four_rect_x, half_rect_y + f * amp);
+        }
 
-        f = sin(float(n) * freq[1] + phase[1]);
-        f = (1.0f - noise[1]) * f + noise[1] * random(-1.0, 1.0);
-        g.emplace_back(rect.position.x + 4.0f + n * 4, rect.position.y + rect.size.y / 2.0f + f * amp);
+        if (show_green)
+        {
+            f = sin(nf * freq[1] + phase[1]);
+            f = (1.0f - noise[1]) * f + noise[1] * random(-1.0f, 1.0f);
+            g.emplace_back(four_rect_x, half_rect_y + f * amp);
+        }
 
-        f = sin(float(n) * freq[2] + phase[2]);
-        f = (1.0f - noise[2]) * f + noise[2] * random(-1.0, 1.0);
-        b.emplace_back(rect.position.x + 4.0f + n * 4, rect.position.y + rect.size.y / 2.0f + f * amp);
+        if (show_blue)
+        {
+            f = sin(nf * freq[2] + phase[2]);
+            f = (1.0f - noise[2]) * f + noise[2] * random(-1.0, 1.0);
+            b.emplace_back(four_rect_x, half_rect_y + f * amp);
+        }
     }
-    renderer.drawLineBlendAdd(r, 1.0f, electrical_band_style->get(getState()).color);    // red
-    renderer.drawLineBlendAdd(g, 1.0f, biological_band_style->get(getState()).color);    // green
-    renderer.drawLineBlendAdd(b, 1.0f, gravitational_band_style->get(getState()).color); // blue
+
+    if (show_red) renderer.drawLineBlendAdd(r, electrical_band_style->get(getState()).color);
+    if (show_green) renderer.drawLineBlendAdd(g, biological_band_style->get(getState()).color);
+    if (show_blue) renderer.drawLineBlendAdd(b, gravitational_band_style->get(getState()).color);
 }

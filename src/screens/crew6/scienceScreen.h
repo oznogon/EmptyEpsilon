@@ -12,6 +12,8 @@ class GuiScrollText;
 class GuiButton;
 class GuiScanTargetButton;
 class GuiToggleButton;
+class GuiSignalQualityIndicator;
+class GuiLabel;
 class GuiSelector;
 class GuiRadarZoomSlider;
 class GuiImage;
@@ -48,6 +50,7 @@ public:
     GuiSelector* sidebar_pager;
     // info_sidebar
     GuiScanTargetButton* scan_button;
+    GuiButton* link_to_analysis_button;
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_heading;
@@ -64,6 +67,13 @@ public:
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];
     // Utility beam controls
     GuiUtilityBeamRotationDial* utility_beam_dial;
+
+    GuiSignalQualityIndicator* info_electrical_signal_band;
+    GuiLabel* info_electrical_signal_label;
+    GuiSignalQualityIndicator* info_gravitational_signal_band;
+    GuiLabel* info_gravitational_signal_label;
+    GuiSignalQualityIndicator* info_biological_signal_band;
+    GuiLabel* info_biological_signal_label;
 
     GuiToggleButton* probe_view_button;
     sp::ecs::Entity observation_point;

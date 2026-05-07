@@ -463,6 +463,14 @@ function Entity:commandSetTarget(target)
     commandSetTarget(self, target)
     return self
 end
+--- Commands this player ship to link the given entity to target analysis.
+--- This is equivalent to selecting a target on the Science screen and clicking the Link to Analysis button.
+--- Example:
+--- ship:commandSetScienceTarget(enemy)
+function Entity:commandSetScienceTarget(target)
+    commandSetScienceTarget(self, target)
+    return self
+end
 --- Commands this player ship to load the WeaponTube with the given index with the given weapon type.
 --- This command respects tube allow/disallow limits.
 --- Example:
