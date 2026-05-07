@@ -106,13 +106,13 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
     info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
     info_gravitational_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    info_biological_signal_band = new GuiSignalQualityIndicator(info_sidebar, "BIOLOGICAL_SIGNAL");
-    info_biological_signal_band
+    info_thermal_signal_band = new GuiSignalQualityIndicator(info_sidebar, "THERMAL_SIGNAL");
+    info_thermal_signal_band
         ->showRed(false)
         ->showGreen(false)
         ->setSize(GuiElement::GuiSizeMax, 80.0f);
-    info_biological_signal_label = new GuiLabel(info_biological_signal_band, "", "Biological", 30.0f);
-    info_biological_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", "Thermal", 30.0f);
+    info_thermal_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiCustomShipFunctions(this, CrewPosition::scienceOfficer, ""))
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
@@ -235,7 +235,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
                 float signal = 0.0f;
                 float electrical = 0.0f;
                 float gravitational = 0.0f;
-                float biological = 0.0f;
+                float thermal = 0.0f;
 
                 if (auto info = target.getComponent<RawRadarSignatureInfo>())
                 {
@@ -248,13 +248,13 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
 
                     electrical = std::max(0.0f, info->electrical - distance_variance);
                     gravitational = std::max(0.0f, info->gravitational - distance_variance);
-                    biological = std::max(0.0f, info->biological - distance_variance);
+                    thermal = std::max(0.0f, info->thermal - distance_variance);
 
                     if (auto dynamic_info = target.getComponent<DynamicRadarSignatureInfo>())
                     {
                         electrical = std::max(0.0f, electrical + dynamic_info->electrical);
                         gravitational = std::max(0.0f, gravitational + dynamic_info->gravitational);
-                        biological = std::max(0.0f, biological + dynamic_info->biological);
+                        thermal = std::max(0.0f, thermal + dynamic_info->thermal);
                     }
                 }
 
@@ -267,11 +267,11 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
                     {"signal", string(signal)}
                 }));
 
-                signal = biological;
-                info_biological_signal_band
+                signal = thermal;
+                info_thermal_signal_band
                     ->setMaxAmp(signal)
                     ->setPhaseError(std::max(0.0f, (signal - 1.0f) * 0.1f));
-                info_biological_signal_label->setText(tr("Biological: {signal} um").format({
+                info_thermal_signal_label->setText(tr("Thermal: {signal} um").format({
                     {"signal", string(signal)}
                 }));
 

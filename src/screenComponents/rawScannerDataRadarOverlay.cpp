@@ -12,7 +12,7 @@ RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, stri
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     electrical_band_style = theme->getStyle("signal_bands.electrical");
-    biological_band_style = theme->getStyle("signal_bands.biological");
+    thermal_band_style = theme->getStyle("signal_bands.thermal");
     gravitational_band_style = theme->getStyle("signal_bands.gravitational");
 }
 
@@ -76,7 +76,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         {
             info.gravitational += dynamic_signature->gravitational;
             info.electrical += dynamic_signature->electrical;
-            info.biological += dynamic_signature->biological;
+            info.thermal += dynamic_signature->thermal;
         }
 
         // For each interval determined by the level of raw data resolution,
@@ -99,7 +99,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         // ... initialize its values in the array ...
         signatures[n].gravitational = std::max(0.0f, std::min(1.0f, signatures[n].gravitational));
         signatures[n].electrical = std::max(0.0f, std::min(1.0f, signatures[n].electrical));
-        signatures[n].biological = std::max(0.0f, std::min(1.0f, signatures[n].biological));
+        signatures[n].thermal = std::max(0.0f, std::min(1.0f, signatures[n].thermal));
 
         // ... make some noise ...
         float r = random(-1, 1);
@@ -107,8 +107,8 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         float b = random(-1, 1);
 
         // ... and then modify the bands' values based on the object's signature.
-        // Biological signatures amplify the green band.
-        g += signatures[n].biological * 30;
+        // Thermal signatures amplify the green band.
+        g += signatures[n].thermal * 30;
 
         // Electrical signatures amplify the red band.
         r += random(-20, 20) * signatures[n].electrical;
@@ -165,6 +165,6 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
 
     // Draw each band as a line.
     renderer.drawLineBlendAdd(a_r, electrical_band_style->get(getState()).color);
-    renderer.drawLineBlendAdd(a_g, biological_band_style->get(getState()).color);
+    renderer.drawLineBlendAdd(a_g, thermal_band_style->get(getState()).color);
     renderer.drawLineBlendAdd(a_b, gravitational_band_style->get(getState()).color);
 }

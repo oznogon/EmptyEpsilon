@@ -548,9 +548,12 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         {
             auto faction = Faction::getInfo(target);
             info_faction->setValue(faction.locale_name);
+
+            info_type_button->show();
+
             if (auto tn = target.getComponent<TypeName>())
                 info_type->setValue(tn->localized);
-            info_type_button->show();
+
             if (auto shields = target.getComponent<Shields>())
             {
                 string str = "";
@@ -562,6 +565,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
                 info_shields->setValue(str);
             }
+
             if (auto hull = target.getComponent<Hull>())
                 info_hull->setValue(static_cast<int>(ceil(hull->current)));
         }
@@ -626,10 +630,11 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             }
 
             // Show the status of each subsystem.
-            for(int n = 0; n < ShipSystem::COUNT; n++)
+            for (int n = 0; n < ShipSystem::COUNT; n++)
             {
                 auto sys = ShipSystem::get(target, ShipSystem::Type(n));
-                if (sys) {
+                if (sys)
+                {
                     float system_health = sys->health;
                     info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setBackColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
                 }
@@ -637,79 +642,49 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         }
 
         // Show and update radar signature bands.
-            float signal = 0.0f;
-            float electrical = 0.0f;
-            float gravitational = 0.0f;
-            float thermal = 0.0f;
+        float electrical = 0.0f;
+        float gravitational = 0.0f;
+        float thermal = 0.0f;
 
-            if (auto info = target.getComponent<RawRadarSignatureInfo>())
+        if (auto info = target.getComponent<RawRadarSignatureInfo>())
+        {
+            float distance_variance = 0.0f;
+            if (lrr && distance > lrr->short_range && scanstate < ScanState::State::FullScan)
+                distance_variance = (random(0.01f, (distance - lrr->short_range)) / (lrr->long_range - lrr->short_range)) * 0.1f;
+
+            electrical = std::max(0.0f, info->electrical - distance_variance);
+            gravitational = std::max(0.0f, info->gravitational - distance_variance);
+            thermal = std::max(0.0f, info->thermal - distance_variance);
+
+            if (auto dynamic_info = target.getComponent<DynamicRadarSignatureInfo>())
             {
-                float distance_variance = 0.0f;
-                if (lrr && distance > lrr->short_range && scanstate < ScanState::State::FullScan)
-                    distance_variance = (random(0.01f, (distance - lrr->short_range)) / (lrr->long_range - lrr->short_range)) * 0.1f;
-
-                electrical = std::max(0.0f, info->electrical - distance_variance);
-                gravitational = std::max(0.0f, info->gravitational - distance_variance);
-                thermal = std::max(0.0f, info->thermal - distance_variance);
-
-                if (auto dynamic_info = target.getComponent<DynamicRadarSignatureInfo>())
-                {
-                    electrical = std::max(0.0f, electrical + dynamic_info->electrical);
-                    gravitational = std::max(0.0f, gravitational + dynamic_info->gravitational);
-                    thermal = std::max(0.0f, thermal + dynamic_info->thermal);
-                }
+                electrical = std::max(0.0f, electrical + dynamic_info->electrical);
+                gravitational = std::max(0.0f, gravitational + dynamic_info->gravitational);
+                thermal = std::max(0.0f, thermal + dynamic_info->thermal);
             }
 
             if (sidebar_pager_selection == "Signals")
             {
-                signal = electrical;
                 info_electrical_signal_band
-                    ->setMaxAmp(signal)
-                    ->setNoiseError(std::max(0.0f, (signal - 1.0f) * 0.1f))
+                    ->setMaxAmp(electrical)
+                    ->setNoiseError(calculateSignalError(electrical))
                     ->show();
-                info_electrical_signal_label->setText(tr("Electrical: {signal} MJ").format({{"signal", string(signal)}}));
+                info_electrical_signal_label->setText(tr("Electrical: {signal} MJ").format({{"signal", string(electrical)}}));
 
-                signal = thermal;
                 info_thermal_signal_band
-                    ->setMaxAmp(signal)
-                    ->setPhaseError(std::max(0.0f, (signal - 1.0f) * 0.1f))
+                    ->setMaxAmp(thermal)
+                    ->setPhaseError(calculateSignalError(thermal))
                     ->show();
-                info_thermal_signal_label->setText(tr("Thermal: {signal} um").format({{"signal", string(signal)}}));
+                info_thermal_signal_label->setText(tr("Thermal: {signal} um").format({{"signal", string(thermal)}}));
 
-                signal = gravitational;
                 info_gravitational_signal_band
-                    ->setMaxAmp(signal)
-                    ->setPeriodError(std::max(0.0f, (signal - 1.0f) * 0.1f))
+                    ->setMaxAmp(gravitational)
+                    ->setPeriodError(calculateSignalError(gravitational))
                     ->show();
-                info_gravitational_signal_label->setText(tr("Gravitational: {signal} dN").format({{"signal", string(signal)}}));
+                info_gravitational_signal_label->setText(tr("Gravitational: {signal} dN").format({{"signal", string(gravitational)}}));
             }
         }
-
-        if (sidebar_pager_selection == "Signals")
-        {
-            signal = electrical;
-            info_electrical_signal_band
-                ->setMaxAmp(signal)
-                ->setNoiseError(calculateSignalError(signal))
-                ->show();
-            info_electrical_signal_label->setText(tr("Electrical: {signal} MJ").format({{"signal", string(signal)}}));
-
-            signal = biological;
-            info_biological_signal_band
-                ->setMaxAmp(signal)
-                ->setPhaseError(calculateSignalError(signal))
-                ->show();
-            info_biological_signal_label->setText(tr("Biological: {signal} um").format({{"signal", string(signal)}}));
-
-            signal = gravitational;
-            info_gravitational_signal_band
-                ->setMaxAmp(signal)
-                ->setPeriodError(calculateSignalError(signal))
-                ->show();
-            info_gravitational_signal_label->setText(tr("Gravitational: {signal} dN").format({{"signal", string(signal)}}));
-        }
     }
-
     // If the target is a waypoint, show its heading and distance, and our
     // velocity toward it.
     else if (targets.getWaypointIndex() >= 0)
@@ -764,8 +739,7 @@ void ScienceScreen::onUpdate()
                 auto rl = my_spaceship.getComponent<RadarLink>();
                 if (rl && rl->linked_entity && rl->linked_entity.hasComponent<AllowRadarLink>() && probe_radar->isVisible())
                     my_player_info->commandScan(obj, rl->linked_entity);
-                else
-                    my_player_info->commandScan(obj);
+                else my_player_info->commandScan(obj);
                 return;
             }
         }

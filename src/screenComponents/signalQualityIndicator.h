@@ -22,7 +22,7 @@ private:
     bool show_blue = true;
     const GuiThemeStyle* signalquality_style;
     const GuiThemeStyle* electrical_band_style;
-    const GuiThemeStyle* biological_band_style;
+    const GuiThemeStyle* thermal_band_style;
     const GuiThemeStyle* gravitational_band_style;
 public:
     GuiSignalQualityIndicator(GuiContainer* owner, string id);
