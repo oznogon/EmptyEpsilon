@@ -234,7 +234,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
             {
                 float signal = 0.0f;
                 float electrical = 0.0f;
-                float gravity = 0.0f;
+                float gravitational = 0.0f;
                 float biological = 0.0f;
 
                 if (auto info = target.getComponent<RawRadarSignatureInfo>())
@@ -247,13 +247,13 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
                         distance_variance = (random(0.01f, (distance - lrr->short_range)) / (lrr->long_range - lrr->short_range)) * 0.1f;
 
                     electrical = std::max(0.0f, info->electrical - distance_variance);
-                    gravity = std::max(0.0f, info->gravity - distance_variance);
+                    gravitational = std::max(0.0f, info->gravitational - distance_variance);
                     biological = std::max(0.0f, info->biological - distance_variance);
 
                     if (auto dynamic_info = target.getComponent<DynamicRadarSignatureInfo>())
                     {
                         electrical = std::max(0.0f, electrical + dynamic_info->electrical);
-                        gravity = std::max(0.0f, gravity + dynamic_info->gravity);
+                        gravitational = std::max(0.0f, gravitational + dynamic_info->gravitational);
                         biological = std::max(0.0f, biological + dynamic_info->biological);
                     }
                 }
@@ -267,19 +267,19 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
                     {"signal", string(signal)}
                 }));
 
-                signal = gravity;
-                info_gravitational_signal_band
-                    ->setMaxAmp(signal)
-                    ->setPeriodError(std::max(0.0f, (signal - 1.0f) * 0.1f));
-                info_gravitational_signal_label->setText(tr("Gravitational: {signal} dN").format({
-                    {"signal", string(signal)}
-                }));
-
                 signal = biological;
                 info_biological_signal_band
                     ->setMaxAmp(signal)
                     ->setPhaseError(std::max(0.0f, (signal - 1.0f) * 0.1f));
                 info_biological_signal_label->setText(tr("Biological: {signal} um").format({
+                    {"signal", string(signal)}
+                }));
+
+                signal = gravitational;
+                info_gravitational_signal_band
+                    ->setMaxAmp(signal)
+                    ->setPeriodError(std::max(0.0f, (signal - 1.0f) * 0.1f));
+                info_gravitational_signal_label->setText(tr("Gravitational: {signal} dN").format({
                     {"signal", string(signal)}
                 }));
             }

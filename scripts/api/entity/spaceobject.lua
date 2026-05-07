@@ -345,15 +345,20 @@ end
 --- Requires numeric values ranging from 0.0 to 1.0 for the gravitational, electrical, and biological radar bands, in that order.
 --- Larger and negative values are possible, but currently have no visual effect on the bands.
 --- Example: entity:setRadarSignatureInfo(0.0, 0.5, 1.0) -- a radar signature of 0 gravitational, 0.5 electrical, and 1.0 biological
-function Entity:setRadarSignatureInfo(gravity, electrical, biological)
-    self.components.radar_signature = {gravity=gravity, electrical=electrical, biological=biological}
+function Entity:setRadarSignatureInfo(gravitational, electrical, biological)
+    self.components.radar_signature = {gravitational=gravitational, electrical=electrical, biological=biological}
     return self
 end
 --- Returns this entity's gravitational radar signature value.
---- Example: entity:getRadarSignatureGravity()
-function Entity:getRadarSignatureGravity()
-    if self.components.radar_signature then return self.components.radar_signature.gravity end
+--- Example: entity:getRadarSignatureGravitational()
+function Entity:getRadarSignatureGravitational()
+    if self.components.radar_signature then return self.components.radar_signature.gravitational end
     return 0.0
+end
+--- [DEPRECATED]
+--- Same as getRadarSignatureGravitational()
+function Entity:getRadarSignatureGravity()
+    self:getRadarSignatureGravitational()
 end
 --- Returns this entity's electrical radar signature value.
 --- Example: entity:getRadarSignatureElectrical()

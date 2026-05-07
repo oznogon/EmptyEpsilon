@@ -13,7 +13,7 @@ function Asteroid()
     local e = createEntity()
     e.components = {
         transform = {rotation=random(0, 360)},
-        radar_signature = {gravity=0.05},
+        radar_signature = {gravitational=0.05},
         mesh_render = {
             mesh="Astroid_" .. model_number .. ".model",
             mesh_offset={0, 0, z},
@@ -50,7 +50,7 @@ function VisualAsteroid()
     local model_number = irandom(1, 10)
     e.components = {
         transform = {rotation=random(0, 360)},
-        radar_signature = {gravity=0.05},
+        radar_signature = {gravitational=0.05},
 
         mesh_render = {
             mesh="Astroid_" .. model_number .. ".model",

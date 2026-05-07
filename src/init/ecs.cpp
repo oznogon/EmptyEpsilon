@@ -109,6 +109,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScanProbeLauncherReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarTraceReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RawRadarSignatureInfoReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<DynamicRadarSignatureInfoReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<LongRangeRadarReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarLinkReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShareShortRangeRadarReplication>();

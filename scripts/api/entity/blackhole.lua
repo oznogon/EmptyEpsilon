@@ -12,7 +12,7 @@ function BlackHole()
         never_radar_blocked = {},
         gravity = {range=5000, damage=true},
         avoid_object = {range=7000},
-        radar_signature = {gravity=0.9},
+        radar_signature = {gravitational=0.9},
         radar_trace = {icon="radar/blackHole.png", min_size=0, max_size = 2048, radius=5000},
         billboard_render = {texture="blackHole3d.png", size=5000}
     }
@@ -33,7 +33,7 @@ function WormHole()
         never_radar_blocked = {},
         gravity = {range=radius, damage=false},
         avoid_object = {range=radius*1.2},
-        radar_signature = {gravity=0.9},
+        radar_signature = {gravitational=0.9},
         radar_trace = {icon="radar/wormHole.png", min_size=0, max_size=2048, radius=radius},
         billboard_render = {texture="wormHole3d.png", size=5000}
     }

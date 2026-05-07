@@ -821,10 +821,15 @@ function Entity:setTubeLoadTime(index, load_time)
 end
 --- Returns the dynamic gravitational radar signature value emitted by this ship.
 --- Ship functions can dynamically modify this ship's radar signature values.
---- Example: ship:getDynamicRadarSignatureGravity()
-function Entity:getDynamicRadarSignatureGravity()
-    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.gravity end
+--- Example: ship:getDynamicRadarSignatureGravitational()
+function Entity:getDynamicRadarSignatureGravitational()
+    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.gravitational end
     return 0.0
+end
+--- [DEPRECATED]
+--- Same as getDynamicRadarSignatureGravitational()
+function Entity:getDynamicRadarSignatureGravity()
+    self:getDynamicRadarSignatureGravitational()
 end
 --- Returns the dynamic electrical radar signature value emitted by this ship.
 --- Ship functions can dynamically modify this ship's radar signature values.
