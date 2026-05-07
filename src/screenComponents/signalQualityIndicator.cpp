@@ -65,7 +65,7 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
         }
     }
 
-    if (show_red) renderer.drawLineBlendAdd(r, electrical_band_style->get(getState()).color);
-    if (show_green) renderer.drawLineBlendAdd(g, biological_band_style->get(getState()).color);
-    if (show_blue) renderer.drawLineBlendAdd(b, gravitational_band_style->get(getState()).color);
+    if (show_red) renderer.drawLineBlendAdd(r, 2.0f, electrical_band_style->get(getState()).color);
+    if (show_green) renderer.drawLineBlendAdd(g, 2.0f, biological_band_style->get(getState()).color);
+    if (show_blue) renderer.drawLineBlendAdd(b, 2.0f, gravitational_band_style->get(getState()).color);
 }

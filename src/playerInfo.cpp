@@ -155,29 +155,8 @@ static const uint16_t CMD_SET_UTILITY_BEAM_BEARING = 0x0049;
 static const uint16_t CMD_SET_UTILITY_BEAM_ARC = 0x0050;
 static const uint16_t CMD_SET_UTILITY_BEAM_RANGE = 0x0051;
 
-// Drone commands
-static const uint16_t CMD_SET_DRONE_LINK = 0x0052;
-static const uint16_t CMD_DRONE_TARGET_ROTATION = 0x0053;
-static const uint16_t CMD_DRONE_IMPULSE = 0x0054;
-static const uint16_t CMD_DRONE_WARP = 0x0055;
-static const uint16_t CMD_DRONE_JUMP = 0x0056;
-static const uint16_t CMD_DRONE_ABORT_JUMP = 0x0057;
-static const uint16_t CMD_DRONE_SET_TARGET = 0x0058;
-static const uint16_t CMD_DRONE_SET_SHIELDS = 0x0059;
-static const uint16_t CMD_DRONE_LOAD_TUBE = 0x005A;
-static const uint16_t CMD_DRONE_UNLOAD_TUBE = 0x005B;
-static const uint16_t CMD_DRONE_FIRE_TUBE = 0x005C;
-static const uint16_t CMD_DRONE_COMBAT_MANEUVER_BOOST = 0x005D;
-static const uint16_t CMD_DRONE_COMBAT_MANEUVER_STRAFE = 0x005E;
-static const uint16_t CMD_DRONE_SET_BEAM_FREQUENCY = 0x005F;
-static const uint16_t CMD_DRONE_SET_BEAM_SYSTEM_TARGET = 0x0060;
-static const uint16_t CMD_SET_AI_ORDER = 0x0061;
-static const uint16_t CMD_DRONE_DOCK = 0x0062;
-static const uint16_t CMD_DRONE_UNDOCK = 0x0063;
-static const uint16_t CMD_DRONE_ABORT_DOCK = 0x0064;
-
 // Waypoint commands
-static const uint16_t CMD_SET_WAYPOINT_ROUTE = 0x0065;
+static const uint16_t CMD_SET_WAYPOINT_ROUTE = 0x0052;
 
 // Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;

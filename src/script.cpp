@@ -1119,6 +1119,15 @@ void luaCommandFireTubeAtTarget(sp::ecs::Entity ship, int tube_nr, sp::ecs::Enti
     luaCommandFireTube(ship, tube_nr, targetAngle);
 }
 
+static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
+    if (my_player_info && my_player_info->ship == ship) {
+        my_player_info->commandSetAlertLevel(level);
+        return;
+    }
+    if (auto player_control = ship.getComponent<PlayerControl>())
+        player_control->alert_level = level;
+}
+
 void luaCommandSetShields(sp::ecs::Entity ship, bool active) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetShields(active); return; }
     auto shields = ship.getComponent<Shields>();
@@ -1460,29 +1469,6 @@ static void luaCommandSetDroneLink(sp::ecs::Entity ship, sp::ecs::Entity drone) 
 static void luaCommandClearDroneLink(sp::ecs::Entity ship) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetDroneLink(sp::ecs::Entity{}); return; }
     ship.removeComponent<DroneLink>();
-}
-static void luaCommandSetDroneLink(sp::ecs::Entity ship, sp::ecs::Entity drone) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetDroneLink(drone); return; }
-    if (ship.getComponent<DroneController>())
-    {
-        if (!drone)
-        {
-            ship.removeComponent<DroneLink>();
-            return;
-        }
-        auto adl = drone.getComponent<AllowDroneLink>();
-        if (!adl || adl->owner != ship) return;
-        ship.getOrAddComponent<DroneLink>().linked_drone = drone;
-    }
-}
-static void luaCommandClearDroneLink(sp::ecs::Entity ship) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetDroneLink(sp::ecs::Entity{}); return; }
-    ship.removeComponent<DroneLink>();
-}
-static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAlertLevel(level); return; }
-    if (auto player_control = ship.getComponent<PlayerControl>())
-        player_control->alert_level = level;
 }
 
 static void luaStartThread(sp::script::Callback callback)
