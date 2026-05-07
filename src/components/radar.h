@@ -27,19 +27,19 @@ public:
 class RawRadarSignatureInfo
 {
 public:
-    float gravity;
+    float gravitational;
     float electrical;
     float biological;
 
     RawRadarSignatureInfo()
-    : gravity(0), electrical(0), biological(0) {}
+    : gravitational(0), electrical(0), biological(0) {}
 
-    RawRadarSignatureInfo(float gravity, float electrical, float biological)
-    : gravity(gravity), electrical(electrical), biological(biological) {}
+    RawRadarSignatureInfo(float gravitational, float electrical, float biological)
+    : gravitational(gravitational), electrical(electrical), biological(biological) {}
 
     RawRadarSignatureInfo& operator+=(const RawRadarSignatureInfo& o)
     {
-        gravity += o.gravity;
+        gravitational += o.gravitational;
         electrical += o.electrical;
         biological += o.biological;
         return *this;
@@ -47,7 +47,7 @@ public:
 
     RawRadarSignatureInfo operator*(const float f) const
     {
-        return RawRadarSignatureInfo(gravity * f, electrical * f, biological * f);
+        return RawRadarSignatureInfo(gravitational * f, electrical * f, biological * f);
     }
 };
 
@@ -56,7 +56,7 @@ public:
 class DynamicRadarSignatureInfo
 {
 public:
-    float gravity = 0.0f;
+    float gravitational = 0.0f;
     float electrical = 0.0f;
     float biological = 0.0f;
 };

@@ -13,7 +13,7 @@ function Planet()
     local e = createEntity()
     e.components = {
         transform = {rotation=random(0, 360)},
-        radar_signature = {gravity=0.5, biological=0.3},
+        radar_signature = {gravitational=0.5, biological=0.3},
         planet_render = {
             size=5000,
             cloud_size = 5200,

@@ -8,7 +8,7 @@
 function Nebula()
     local radius = 5000.0
     local e = createEntity()
-    e.components.radar_signature = {gravity=0, electrical=0.8, biological=-1.0}
+    e.components.radar_signature = {gravitational=0, electrical=0.8, biological=-1.0}
     e.components.transform = {rotation=random(0, 360)}
     e.components.radar_trace = {icon="Nebula" .. irandom(1, 3) .. ".png", min_size=0, max_size = 2048, radius=radius*1.5, blend_add=true}
     e.components.radar_block = {range=radius}
