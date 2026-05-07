@@ -13,7 +13,7 @@ void DynamicRadarSystem::update(float delta)
     {
         dyn_sig.gravitational = 0.0f;
         dyn_sig.electrical = 0.0f;
-        dyn_sig.biological = 0.0f;
+        dyn_sig.thermal = 0.0f;
 
         for (int n = 0; n < ShipSystem::COUNT; n++)
         {
@@ -21,7 +21,7 @@ void DynamicRadarSystem::update(float delta)
             auto sys = ShipSystem::get(entity, type);
             if (!sys) continue;
 
-            dyn_sig.biological += std::max(0.0f, std::min(1.0f, sys->heat_level - (sys->coolant_level / 10.0f)));
+            dyn_sig.thermal += std::max(0.0f, std::min(1.0f, sys->heat_level - (sys->coolant_level / 10.0f)));
 
             if (type == ShipSystem::Type::JumpDrive)
             {

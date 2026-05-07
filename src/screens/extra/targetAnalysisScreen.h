@@ -35,8 +35,8 @@ private:
     GuiLabel* info_electrical_signal_label;
     GuiSignalQualityIndicator* info_gravitational_signal_band;
     GuiLabel* info_gravitational_signal_label;
-    GuiSignalQualityIndicator* info_biological_signal_band;
-    GuiLabel* info_biological_signal_label;
+    GuiSignalQualityIndicator* info_thermal_signal_band;
+    GuiLabel* info_thermal_signal_label;
 public:
     TargetAnalysisScreen(GuiContainer* owner);
 

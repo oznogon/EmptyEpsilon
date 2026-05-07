@@ -57,9 +57,9 @@ void SpaceShip::updateDynamicRadarSignature()
     {
         auto ship_system = static_cast<ShipSystem::Type>(n);
 
-        // ... increase the biological band based on system heat, offset by
+        // ... increase the thermal band based on system heat, offset by
         // coolant.
-        signature_delta.biological += std::max(
+        signature_delta.thermal += std::max(
             0.0f,
             std::min(
                 1.0f,

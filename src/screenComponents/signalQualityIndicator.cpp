@@ -8,7 +8,7 @@ GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string
 {
     signalquality_style = theme->getStyle("signalquality");
     electrical_band_style = theme->getStyle("signal_bands.electrical");
-    biological_band_style = theme->getStyle("signal_bands.biological");
+    thermal_band_style = theme->getStyle("signal_bands.thermal");
     gravitational_band_style = theme->getStyle("signal_bands.gravitational");
     target_period = random(2.0f, 5.0f);
 }
@@ -69,6 +69,6 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
     }
 
     if (show_red) renderer.drawLineBlendAdd(r, electrical_band_style->get(getState()).color);
-    if (show_green) renderer.drawLineBlendAdd(g, biological_band_style->get(getState()).color);
+    if (show_green) renderer.drawLineBlendAdd(g, thermal_band_style->get(getState()).color);
     if (show_blue) renderer.drawLineBlendAdd(b, gravitational_band_style->get(getState()).color);
 }

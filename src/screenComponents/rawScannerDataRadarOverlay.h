@@ -16,6 +16,6 @@ private:
     GuiRadarView* radar;
 
     const GuiThemeStyle* electrical_band_style;
-    const GuiThemeStyle* biological_band_style;
+    const GuiThemeStyle* thermal_band_style;
     const GuiThemeStyle* gravitational_band_style;
 };
