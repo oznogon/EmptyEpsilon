@@ -13,6 +13,7 @@ function SpaceStation()
     e.components = {
         transform = {rotation=random(0, 360)},
         callsign = {callsign=generateRandomCallSign("DS")},
+        dynamic_radar_signature = {},
     }
     e:setFaction(__default_station_faction)
     return e

@@ -153,20 +153,9 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         const float y_half = rect.position.y + rect.size.y * 0.5f;
         const float angle = static_cast<float>(n) / static_cast<float>(point_count) * 360.0f - view_rotation;
 
-        a_r.push_back(
-            glm::vec2(x_half, y_half) +
-            vec2FromAngle(angle * (radius * (0.95f - r / 500.0f)))
-        );
-
-        a_g.push_back(
-            glm::vec2(x_half, y_half) +
-            vec2FromAngle(angle * (radius * (0.92f - g / 500.0f)))
-        );
-
-        a_b.push_back(
-            glm::vec2(x_half, y_half) +
-            vec2FromAngle(angle * (radius * (0.89f - b / 500.0f)))
-        );
+        a_r.push_back(glm::vec2(x_half, y_half) + vec2FromAngle(angle) * (radius * (0.95f - r / 500.0f)));
+        a_g.push_back(glm::vec2(x_half, y_half) + vec2FromAngle(angle) * (radius * (0.92f - g / 500.0f)));
+        a_b.push_back(glm::vec2(x_half, y_half) + vec2FromAngle(angle) * (radius * (0.89f - b / 500.0f)));
     }
 
     // Set a zero value at the "end" of the data point array.
@@ -175,7 +164,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     a_b.push_back(a_b.front());
 
     // Draw each band as a line.
-    renderer.drawLineBlendAdd(a_r, electrical_band_style->get(getState()).color);    // red
-    renderer.drawLineBlendAdd(a_g, biological_band_style->get(getState()).color);    // green
-    renderer.drawLineBlendAdd(a_b, gravitational_band_style->get(getState()).color); // blue
+    renderer.drawLineBlendAdd(a_r, electrical_band_style->get(getState()).color);
+    renderer.drawLineBlendAdd(a_g, biological_band_style->get(getState()).color);
+    renderer.drawLineBlendAdd(a_b, gravitational_band_style->get(getState()).color);
 }

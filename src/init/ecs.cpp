@@ -72,6 +72,7 @@
 #include "systems/destroy.h"
 #include "systems/debugrender.h"
 #include "systems/dronecontrolsystem.h"
+#include "systems/dynamicradarsystem.h"
 
 
 void initSystemsAndComponents()
@@ -159,6 +160,7 @@ void initSystemsAndComponents()
     engine->registerSystem<ShieldSystem>();
     engine->registerSystem<CoolantSystem>();
     engine->registerSystem<ShipSystemsSystem>();
+    engine->registerSystem<DynamicRadarSystem>();
     engine->registerSystem<SelfDestructSystem>();
     engine->registerSystem<SfxSystem>();
     engine->registerSystem<BasicMovementSystem>();
