@@ -195,7 +195,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_gravitational_signal_band = new GuiSignalQualityIndicator(info_sidebar, "SCIENCE_GRAVITY_SIGNAL");
     info_gravitational_signal_band
         ->showRed(false)
-        ->showBlue(false)
+        ->showGreen(false)
         ->setSize(GuiElement::GuiSizeMax, 80.0f)
         ->hide();
     info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
@@ -204,7 +204,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_biological_signal_band = new GuiSignalQualityIndicator(info_sidebar, "SCIENCE_BIOLOGICAL_SIGNAL");
     info_biological_signal_band
         ->showRed(false)
-        ->showGreen(false)
+        ->showBlue(false)
         ->setSize(GuiElement::GuiSizeMax, 80.0f)
         ->hide();
     info_biological_signal_label = new GuiLabel(info_biological_signal_band, "", tr("Biological"), 30.0f);

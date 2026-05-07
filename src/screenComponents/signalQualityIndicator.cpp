@@ -15,8 +15,11 @@ GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string
 
 void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
 {
-    int point_count = rect.size.x / 4 - 1;
+    // Bail if all bands are hidden.
+    if (!show_red && !show_green && !show_blue) return;
+
     // Bail if there's not enough space to draw the signal.
+    int point_count = rect.size.x / 4 - 1;
     if (point_count < 2) return;
 
     const auto& signalquality = signalquality_style->get(getState());
