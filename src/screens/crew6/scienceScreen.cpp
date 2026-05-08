@@ -728,6 +728,9 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         // On a full scan, populate tactical and systems data.
         if (scanstate >= ScanState::State::FullScan)
         {
+            auto shields_system = target.getComponent<Shields>();
+            auto beam_system = target.getComponent<BeamWeaponSys>();
+
             // If beam and shield frequencies are enabled on the server,
             // populate their graphs.
             if (gameGlobalInfo->use_beam_shield_frequencies)

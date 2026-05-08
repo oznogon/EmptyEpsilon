@@ -3593,17 +3593,17 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(identity_group);
 
     ADD_PAGE(tr("tweak-tab", "Raw radar signature"), RawRadarSignatureInfo);
-    new_page->description = tr("tweak-raw-radar-signature", "Permanent radar signature values (gravity, electrical, biological) that modify the sensor bands on Science and Operations radars. WIP; might not function.");
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Gravity:"), RawRadarSignatureInfo, gravity);
+    new_page->description = tr("tweak-raw-radar-signature", "Permanent radar signature values (gravitational, electrical, thermal) that modify the sensor bands on the Target Analysis creen and Science and Operations radars.");
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Gravitational:"), RawRadarSignatureInfo, gravitational);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Electrical:"), RawRadarSignatureInfo, electrical);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Biological:"), RawRadarSignatureInfo, biological);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Thermal:"), RawRadarSignatureInfo, thermal);
     addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Dynamic radar signature"), DynamicRadarSignatureInfo);
-    new_page->description = tr("tweak-dynamic-radar-signature", "Live radar signature values updated by the game engine during play, reflecting current ship state. For modifiable base values, see the Raw radar signature component. WIP; might not function.");
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Gravity:"), DynamicRadarSignatureInfo, gravity);
+    new_page->description = tr("tweak-dynamic-radar-signature", "Live radar signature values updated by the game engine during play, reflecting current ship state. For modifiable base values, see the Raw radar signature component.");
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Gravitational:"), DynamicRadarSignatureInfo, gravitational);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Electrical:"), DynamicRadarSignatureInfo, electrical);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Biological:"), DynamicRadarSignatureInfo, biological);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Thermal:"), DynamicRadarSignatureInfo, thermal);
     addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Radar link"), RadarLink);
