@@ -325,10 +325,52 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
             }
         }
 
-        if (!description.empty())
-            info_description->setText(description);
-        else
-            info_description->setText(tr("No description available."));
+        info_description->setText(description.empty() ? tr("No description available.") : description);
+
+        float electrical = 0.0f;
+        float gravitational = 0.0f;
+        float thermal = 0.0f;
+
+        if (auto info = target.getComponent<RawRadarSignatureInfo>())
+        {
+            float distance_variance = 0.0f;
+            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+
+            if (lrr && distance > lrr->short_range && scanstate < ScanState::State::FullScan)
+                distance_variance = (random(0.01f, (distance - lrr->short_range)) / (lrr->long_range - lrr->short_range)) * 0.1f;
+
+            electrical = std::max(0.0f, info->electrical - distance_variance);
+            gravitational = std::max(0.0f, info->gravitational - distance_variance);
+            thermal = std::max(0.0f, info->thermal - distance_variance);
+
+            if (auto dynamic_info = target.getComponent<DynamicRadarSignatureInfo>())
+            {
+                electrical = std::max(0.0f, electrical + dynamic_info->electrical);
+                gravitational = std::max(0.0f, gravitational + dynamic_info->gravitational);
+                thermal = std::max(0.0f, thermal + dynamic_info->thermal);
+            }
+        }
+
+        info_electrical_signal_band
+            ->setMaxAmp(electrical)
+            ->setNoiseError(std::max(0.0f, (electrical - 1.0f) * 0.1f));
+        info_electrical_signal_label->setText(tr("Electrical: {signal} MJ").format({
+            {"signal", string(electrical)}
+        }));
+
+        info_thermal_signal_band
+            ->setMaxAmp(thermal)
+            ->setPhaseError(std::max(0.0f, (thermal - 1.0f) * 0.1f));
+        info_thermal_signal_label->setText(tr("Thermal: {signal} um").format({
+            {"signal", string(thermal)}
+        }));
+
+        info_gravitational_signal_band
+            ->setMaxAmp(gravitational)
+            ->setPeriodError(std::max(0.0f, (gravitational - 1.0f) * 0.1f));
+        info_gravitational_signal_label->setText(tr("Gravitational: {signal} dN").format({
+            {"signal", string(gravitational)}
+        }));
 
         if (scanstate >= ScanState::State::SimpleScan)
         {
@@ -392,51 +434,6 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
                         ->show();
                 }
             }
-
-            float electrical = 0.0f;
-            float gravitational = 0.0f;
-            float thermal = 0.0f;
-
-            if (auto info = target.getComponent<RawRadarSignatureInfo>())
-            {
-                float distance_variance = 0.0f;
-                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-
-                if (lrr && distance > lrr->short_range && scanstate < ScanState::State::FullScan)
-                    distance_variance = (random(0.01f, (distance - lrr->short_range)) / (lrr->long_range - lrr->short_range)) * 0.1f;
-
-                electrical = std::max(0.0f, info->electrical - distance_variance);
-                gravitational = std::max(0.0f, info->gravitational - distance_variance);
-                thermal = std::max(0.0f, info->thermal - distance_variance);
-
-                if (auto dynamic_info = target.getComponent<DynamicRadarSignatureInfo>())
-                {
-                    electrical = std::max(0.0f, electrical + dynamic_info->electrical);
-                    gravitational = std::max(0.0f, gravitational + dynamic_info->gravitational);
-                    thermal = std::max(0.0f, thermal + dynamic_info->thermal);
-                }
-            }
-
-            info_electrical_signal_band
-                ->setMaxAmp(electrical)
-                ->setNoiseError(std::max(0.0f, (electrical - 1.0f) * 0.1f));
-            info_electrical_signal_label->setText(tr("Electrical: {signal} MJ").format({
-                {"signal", string(electrical)}
-            }));
-
-            info_thermal_signal_band
-                ->setMaxAmp(thermal)
-                ->setPhaseError(std::max(0.0f, (thermal - 1.0f) * 0.1f));
-            info_thermal_signal_label->setText(tr("Thermal: {signal} um").format({
-                {"signal", string(thermal)}
-            }));
-
-            info_gravitational_signal_band
-                ->setMaxAmp(gravitational)
-                ->setPeriodError(std::max(0.0f, (gravitational - 1.0f) * 0.1f));
-            info_gravitational_signal_label->setText(tr("Gravitational: {signal} dN").format({
-                {"signal", string(gravitational)}
-            }));
         }
     }
     else
