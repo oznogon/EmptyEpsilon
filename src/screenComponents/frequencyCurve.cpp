@@ -93,17 +93,17 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
         else
         {
             if (frequency_type == FrequencyType::Beam)
-                renderer.drawText(rect, tr("scienceFrequencyGraph", "No target beams"), sp::Alignment::Center, 35);
+                renderer.drawText(rect, tr("scienceFrequencyGraph", "No target beam data"), sp::Alignment::Center, 30);
             else
-                renderer.drawText(rect, tr("scienceFrequencyGraph", "No target shields"), sp::Alignment::Center, 35);
+                renderer.drawText(rect, tr("scienceFrequencyGraph", "No target shield data"), sp::Alignment::Center, 30);
         }
     }
     else
     {
         if (frequency_type == FrequencyType::Beam)
-            renderer.drawText(rect, tr("scienceFrequencyGraph", "No target beams"), sp::Alignment::Center, 35);
+            renderer.drawText(rect, tr("scienceFrequencyGraph", "No target beam data"), sp::Alignment::Center, 30);
         else
-            renderer.drawText(rect, tr("scienceFrequencyGraph", "No target shields"), sp::Alignment::Center, 35);
+            renderer.drawText(rect, tr("scienceFrequencyGraph", "No target shield data"), sp::Alignment::Center, 30);
     }
 }
 
