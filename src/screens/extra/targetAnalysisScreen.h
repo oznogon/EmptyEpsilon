@@ -15,26 +15,25 @@ class GuiElement;
 class TargetAnalysisScreen : public GuiOverlay
 {
 private:
+    const float KV_HEIGHT = 30.0f;
+    const float KV_DIV = 0.5f;
+
     GuiLabel* no_target_label;
 
     TargetsContainer targets;
     sp::ecs::Entity target_entity;
 
-    GuiElement* left_column;
-    GuiElement* basic_info_section;
+    GuiElement* columns_container;
+
+    GuiRotatingModelView* model_view;
     GuiElement* description_section;
     GuiScrollFormattedText* info_description;
-
-    GuiElement* center_column;
-    GuiRotatingModelView* model_view;
-    GuiElement* core_info_section;
+    GuiElement* basic_info_section;
     GuiElement* systems_section;
-
-    GuiElement* right_column;
     GuiElement* frequencies_section;
     GuiElement* signatures_section;
 
-    GuiKeyValueDisplay* info_callsign;
+    GuiLabel* info_callsign;
     GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_bearing;
     GuiKeyValueDisplay* info_relspeed;
