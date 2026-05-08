@@ -59,6 +59,7 @@ function ShipTemplate:__init__()
         color_by_faction=true,
         arrow_if_not_scanned=true,
     }
+    self.radar_signature = {gravitational=0, electrical=0.4, thermal=0.4}
     self.__repair_crew_count = 3
     self.share_short_range_radar = {}
     self.comms_receiver = {script="comms_ship.lua"}

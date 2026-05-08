@@ -822,10 +822,15 @@ function Entity:setTubeLoadTime(index, load_time)
 end
 --- Returns the dynamic gravitational radar signature value emitted by this ship.
 --- Ship functions can dynamically modify this ship's radar signature values.
---- Example: ship:getDynamicRadarSignatureGravity()
-function Entity:getDynamicRadarSignatureGravity()
-    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.gravity end
+--- Example: ship:getDynamicRadarSignatureGravitational()
+function Entity:getDynamicRadarSignatureGravitational()
+    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.gravitational end
     return 0.0
+end
+--- [DEPRECATED]
+--- Same as getDynamicRadarSignatureGravitational()
+function Entity:getDynamicRadarSignatureGravity()
+    self:getDynamicRadarSignatureGravitational()
 end
 --- Returns the dynamic electrical radar signature value emitted by this ship.
 --- Ship functions can dynamically modify this ship's radar signature values.
@@ -834,11 +839,11 @@ function Entity:getDynamicRadarSignatureElectrical()
     if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.electrical end
     return 0.0
 end
---- Returns the dynamic biological radar signature value emitted by this ship.
+--- Returns the dynamic thermal radar signature value emitted by this ship.
 --- Ship functions can dynamically modify this ship's radar signature values.
---- Example: ship:getDynamicRadarSignatureBiological()
-function Entity:getDynamicRadarSignatureBiological()
-    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.biological end
+--- Example: ship:getDynamicRadarSignatureThermal()
+function Entity:getDynamicRadarSignatureThermal()
+    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.thermal end
     return 0.0
 end
 --- Broadcasts a message from this ship to the comms of all other ships matching the threshold.

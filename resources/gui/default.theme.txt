@@ -145,10 +145,10 @@
     }
 
     # Signal bands, used in radar views and sensor locking
-    # By default, biological = green, electrical = red, gravitational = blue.
+    # By default, thermal = green, electrical = red, gravitational = blue.
     # Scenarios or help text might refer to bands by color.
     [signal_bands] {
-        [signal_bands.biological] {
+        [signal_bands.thermal] {
             color: #41FF51
         }
         [signal_bands.electrical] {

@@ -8,15 +8,18 @@ GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string
 {
     signalquality_style = theme->getStyle("signalquality");
     electrical_band_style = theme->getStyle("signal_bands.electrical");
-    biological_band_style = theme->getStyle("signal_bands.biological");
+    thermal_band_style = theme->getStyle("signal_bands.thermal");
     gravitational_band_style = theme->getStyle("signal_bands.gravitational");
     target_period = random(2.0f, 5.0f);
 }
 
 void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
 {
-    int point_count = rect.size.x / 4 - 1;
+    // Bail if all bands are hidden.
+    if (!show_red && !show_green && !show_blue) return;
+
     // Bail if there's not enough space to draw the signal.
+    int point_count = rect.size.x / 4 - 1;
     if (point_count < 2) return;
 
     const auto& signalquality = signalquality_style->get(getState());
@@ -66,6 +69,6 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
     }
 
     if (show_red) renderer.drawLineBlendAdd(r, 2.0f, electrical_band_style->get(getState()).color);
-    if (show_green) renderer.drawLineBlendAdd(g, 2.0f, biological_band_style->get(getState()).color);
+    if (show_green) renderer.drawLineBlendAdd(g, 2.0f, thermal_band_style->get(getState()).color);
     if (show_blue) renderer.drawLineBlendAdd(b, 2.0f, gravitational_band_style->get(getState()).color);
 }

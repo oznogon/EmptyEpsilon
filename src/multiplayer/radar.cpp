@@ -12,10 +12,16 @@ BASIC_REPLICATION_IMPL(RadarTraceReplication, RadarTrace)
 }
 
 BASIC_REPLICATION_IMPL(RawRadarSignatureInfoReplication, RawRadarSignatureInfo)
-    BASIC_REPLICATION_FIELD(gravity);
+    BASIC_REPLICATION_FIELD(gravitational);
     BASIC_REPLICATION_FIELD(electrical);
-    BASIC_REPLICATION_FIELD(biological);
+    BASIC_REPLICATION_FIELD(thermal);
 }
+BASIC_REPLICATION_IMPL(DynamicRadarSignatureInfoReplication, DynamicRadarSignatureInfo)
+    BASIC_REPLICATION_FIELD(gravitational);
+    BASIC_REPLICATION_FIELD(electrical);
+    BASIC_REPLICATION_FIELD(thermal);
+}
+
 BASIC_REPLICATION_IMPL(LongRangeRadarReplication, LongRangeRadar)
     BASIC_REPLICATION_FIELD(short_range);
     BASIC_REPLICATION_FIELD(long_range);

@@ -12,7 +12,7 @@ RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, stri
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     electrical_band_style = theme->getStyle("signal_bands.electrical");
-    biological_band_style = theme->getStyle("signal_bands.biological");
+    thermal_band_style = theme->getStyle("signal_bands.thermal");
     gravitational_band_style = theme->getStyle("signal_bands.gravitational");
 }
 
@@ -32,7 +32,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
 
     RawRadarSignatureInfo signatures[point_count];
 
-    // For each SpaceObject ...
+    // For each entity with radar signature info ...
     for(auto [entity, signature, dynamic_signature, transform] : sp::ecs::Query<RawRadarSignatureInfo, sp::ecs::optional<DynamicRadarSignatureInfo>, sp::Transform>())
     {
         // Don't measure our own ship.
@@ -69,22 +69,21 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
             a_1 = a_center + a_diff;
         }
 
-        // Get the object's radar signature.
-        // If the object is a SpaceShip, adjust the signature dynamically based
-        // on its current state and activity.
+        // Get the object's radar signature. If it has a dynamic signature, adjust
+        // it based on its current state and activity.
         RawRadarSignatureInfo info = signature;
         if (dynamic_signature)
         {
-            info.gravity += dynamic_signature->gravity;
+            info.gravitational += dynamic_signature->gravitational;
             info.electrical += dynamic_signature->electrical;
-            info.biological += dynamic_signature->biological;
+            info.thermal += dynamic_signature->thermal;
         }
 
         // For each interval determined by the level of raw data resolution,
         // initialize the signatures array.
-        for(float a = a_0; a <= a_1; a += 360.f / float(point_count))
+        for (float a = a_0; a <= a_1; a += 360.f / static_cast<float>(point_count))
         {
-            int idx = (int(a / 360.0f * point_count) + point_count * 2) % point_count;
+            int idx = (static_cast<int>(a / 360.0f * point_count) + point_count * 2) % point_count;
             signatures[idx] += info * scale;
         }
     }
@@ -98,9 +97,9 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     for(int n = 0; n < point_count; n++)
     {
         // ... initialize its values in the array ...
-        signatures[n].gravity = std::max(0.0f, std::min(1.0f, signatures[n].gravity));
+        signatures[n].gravitational = std::max(0.0f, std::min(1.0f, signatures[n].gravitational));
         signatures[n].electrical = std::max(0.0f, std::min(1.0f, signatures[n].electrical));
-        signatures[n].biological = std::max(0.0f, std::min(1.0f, signatures[n].biological));
+        signatures[n].thermal = std::max(0.0f, std::min(1.0f, signatures[n].thermal));
 
         // ... make some noise ...
         float r = random(-1, 1);
@@ -108,14 +107,14 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         float b = random(-1, 1);
 
         // ... and then modify the bands' values based on the object's signature.
-        // Biological signatures amplify the green band.
-        g += signatures[n].biological * 30;
+        // Thermal signatures amplify the green band.
+        g += signatures[n].thermal * 30;
 
         // Electrical signatures amplify the red band.
         r += random(-20, 20) * signatures[n].electrical;
 
         // Gravitational signatures amplify the blue band.
-        b = b * (1.0f - signatures[n].gravity) + 40 * signatures[n].gravity;
+        b = b * (1.0f - signatures[n].gravitational) + 40 * signatures[n].gravitational;
 
         // Apply the values to the radar bands.
         amp_r[n] = r;
@@ -129,15 +128,15 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     std::vector<glm::vec2> a_b;
 
     // For each data point ...
-    for(int n = 0; n < point_count; n++)
+    for (int n = 0; n < point_count; n++)
     {
         // ... set a baseline of 0 ...
-        float r = 0.0;
-        float g = 0.0;
-        float b = 0.0;
+        float r = 0.0f;
+        float g = 0.0f;
+        float b = 0.0f;
 
         // ... then sum the amplitude values ...
-        for(int m = n - 2 + point_count; m <= n + 2 + point_count; m++)
+        for (int m = n - 2 + point_count; m <= n + 2 + point_count; m++)
         {
             r += amp_r[m % point_count];
             g += amp_g[m % point_count];
@@ -145,22 +144,18 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         }
 
         // ... divide them by 5 ...
-        r /= 5;
-        g /= 5;
-        b /= 5;
+        r /= 5.0f;
+        g /= 5.0f;
+        b /= 5.0f;
 
         // ... and add vectors for each point.
-        a_r.push_back(
-            glm::vec2(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f) +
-            vec2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.95f - r / 500)));
+        const float x_half = rect.position.x + rect.size.x * 0.5f;
+        const float y_half = rect.position.y + rect.size.y * 0.5f;
+        const float angle = static_cast<float>(n) / static_cast<float>(point_count) * 360.0f - view_rotation;
 
-        a_g.push_back(
-            glm::vec2(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f) +
-            vec2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.92f - g / 500)));
-
-        a_b.push_back(
-            glm::vec2(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f) +
-            vec2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.89f - b / 500)));
+        a_r.push_back(glm::vec2(x_half, y_half) + vec2FromAngle(angle) * (radius * (0.95f - r / 500.0f)));
+        a_g.push_back(glm::vec2(x_half, y_half) + vec2FromAngle(angle) * (radius * (0.92f - g / 500.0f)));
+        a_b.push_back(glm::vec2(x_half, y_half) + vec2FromAngle(angle) * (radius * (0.89f - b / 500.0f)));
     }
 
     // Set a zero value at the "end" of the data point array.
@@ -169,7 +164,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     a_b.push_back(a_b.front());
 
     // Draw each band as a line.
-    renderer.drawLineBlendAdd(a_r, 1.0f, electrical_band_style->get(getState()).color);    // red
-    renderer.drawLineBlendAdd(a_g, 1.0f, biological_band_style->get(getState()).color);    // green
-    renderer.drawLineBlendAdd(a_b, 1.0f, gravitational_band_style->get(getState()).color); // blue
+    renderer.drawLineBlendAdd(a_r, 1.0f, electrical_band_style->get(getState()).color);
+    renderer.drawLineBlendAdd(a_g, 1.0f, thermal_band_style->get(getState()).color);
+    renderer.drawLineBlendAdd(a_b, 1.0f, gravitational_band_style->get(getState()).color);
 }

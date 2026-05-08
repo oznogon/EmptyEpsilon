@@ -256,13 +256,13 @@ void initComponentScriptBindings()
     BIND_MEMBER_FLAG(RadarTrace, flags, "long_range", RadarTrace::LongRange);
 
     sp::script::ComponentHandler<RawRadarSignatureInfo>::name("radar_signature");
-    BIND_MEMBER(RawRadarSignatureInfo, gravity);
+    BIND_MEMBER(RawRadarSignatureInfo, gravitational);
     BIND_MEMBER(RawRadarSignatureInfo, electrical);
-    BIND_MEMBER(RawRadarSignatureInfo, biological);
+    BIND_MEMBER(RawRadarSignatureInfo, thermal);
     sp::script::ComponentHandler<DynamicRadarSignatureInfo>::name("dynamic_radar_signature");
-    BIND_MEMBER(DynamicRadarSignatureInfo, gravity);
+    BIND_MEMBER(DynamicRadarSignatureInfo, gravitational);
     BIND_MEMBER(DynamicRadarSignatureInfo, electrical);
-    BIND_MEMBER(DynamicRadarSignatureInfo, biological);
+    BIND_MEMBER(DynamicRadarSignatureInfo, thermal);
 
     sp::script::ComponentHandler<MeshRenderComponent>::name("mesh_render");
     BIND_MEMBER_NAMED(MeshRenderComponent, mesh.name, "mesh");

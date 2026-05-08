@@ -462,6 +462,8 @@ set(MAIN_SOURCES
     src/systems/debugrender.cpp
     src/systems/destroy.h
     src/systems/destroy.cpp
+    src/systems/dynamicradarsystem.h
+    src/systems/dynamicradarsystem.cpp
     src/systems/dronecontrolsystem.h
     src/systems/dronecontrolsystem.cpp
     src/multiplayer/beamweapon.h

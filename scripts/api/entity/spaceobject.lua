@@ -346,20 +346,25 @@ function Entity:getDescription(state)
     return self.components.science_description.full_scan
 end
 --- Sets this entity's radar signature, which creates noise on the science screen's raw radar signal ring.
---- The raw signal ring contains red (electrical), green (biological), and blue (gravitational) bands of waveform noise.
+--- The raw signal ring contains red (electrical), green (thermal), and blue (gravitational) bands of waveform noise.
 --- Certain entity types might set their own defaults or dynamically modify their signatures using this value as a baseline.
---- Requires numeric values ranging from 0.0 to 1.0 for the gravitational, electrical, and biological radar bands, in that order.
+--- Requires numeric values ranging from 0.0 to 1.0 for the gravitational, electrical, and thermal radar bands, in that order.
 --- Larger and negative values are possible, but currently have no visual effect on the bands.
---- Example: entity:setRadarSignatureInfo(0.0, 0.5, 1.0) -- a radar signature of 0 gravitational, 0.5 electrical, and 1.0 biological
-function Entity:setRadarSignatureInfo(gravity, electrical, biological)
-    self.components.radar_signature = {gravity=gravity, electrical=electrical, biological=biological}
+--- Example: entity:setRadarSignatureInfo(0.0, 0.5, 1.0) -- a radar signature of 0 gravitational, 0.5 electrical, and 1.0 thermal
+function Entity:setRadarSignatureInfo(gravitational, electrical, thermal)
+    self.components.radar_signature = {gravitational=gravitational, electrical=electrical, thermal=thermal}
     return self
 end
 --- Returns this entity's gravitational radar signature value.
---- Example: entity:getRadarSignatureGravity()
-function Entity:getRadarSignatureGravity()
-    if self.components.radar_signature then return self.components.radar_signature.gravity end
+--- Example: entity:getRadarSignatureGravitational()
+function Entity:getRadarSignatureGravitational()
+    if self.components.radar_signature then return self.components.radar_signature.gravitational end
     return 0.0
+end
+--- [DEPRECATED]
+--- Same as getRadarSignatureGravitational()
+function Entity:getRadarSignatureGravity()
+    self:getRadarSignatureGravitational()
 end
 --- Returns this entity's electrical radar signature value.
 --- Example: entity:getRadarSignatureElectrical()
@@ -367,10 +372,10 @@ function Entity:getRadarSignatureElectrical()
     if self.components.radar_signature then return self.components.radar_signature.electrical end
     return 0.0
 end
---- Returns this entity's biological radar signature value.
---- Example: entity:getRadarSignatureBiological()
-function Entity:getRadarSignatureBiological()
-    if self.components.radar_signature then return self.components.radar_signature.biological end
+--- Returns this entity's thermal radar signature value.
+--- Example: entity:getRadarSignatureThermal()
+function Entity:getRadarSignatureThermal()
+    if self.components.radar_signature then return self.components.radar_signature.thermal end
     return 0.0
 end
 --- Sets this entity's scanning complexity (number of bars in the scanning minigame) and depth (number of scanning minigames to complete until fully scanned), respectively.
