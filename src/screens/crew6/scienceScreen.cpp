@@ -161,8 +161,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     });
 
     sidebar_selector->setOptions(
-            {tr("scienceTab", "Scanning"), tr("scienceTab", "Other")},
-            {"scan", "other"}
+        {tr("scienceTab", "Scanning"), tr("scienceTab", "Other")},
+        {"scan", "other"}
     );
 
     if (utility_beam)
@@ -172,6 +172,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     }
 
     sidebar_selector
+        ->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Other")})
         ->setSelectionIndex(0)
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 50.0f);
@@ -250,6 +251,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4f, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30.0f);
+
     info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("scienceButton", "DB"),
         [this]()
         {
@@ -359,15 +361,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->hide();
 
     // END info_sidebar
-
-    // Custom function sidebar.
-    custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
-    custom_function_sidebar->setPosition(-15, 210, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
-
-    if (custom_function_sidebar->hasEntries())
-        sidebar_selector->addEntry(tr("scienceTab", "Functions"), "func");
-
-    // END custom_function_sidebar
 
     // Utility sidebar.
     utility_beam_sidebar = new GuiUtilityBeamControls(radar_view, crew_position, "UTILITY_BEAM_CONTROLS");
@@ -577,7 +570,11 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     sidebar_pager->hide();
 
     for (int n = 0; n < ShipSystem::COUNT; n++)
-        info_system[n]->setValue("-")->hide();
+    {
+        info_system[n]
+            ->setValue("-")
+            ->hide();
+    }
 
     // Manage probe view button state.
     probe_view_button->setVisible(rl);
@@ -736,9 +733,6 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         // On a full scan, populate tactical and systems data.
         if (scanstate >= ScanState::State::FullScan)
         {
-            auto shields_system = target.getComponent<Shields>();
-            auto beam_system = target.getComponent<BeamWeaponSys>();
-
             // If beam and shield frequencies are enabled on the server,
             // populate their graphs.
             if (gameGlobalInfo->use_beam_shield_frequencies)

@@ -42,6 +42,10 @@ sp::ecs::Entity ProbeSystem::launch(sp::ecs::Entity ship, glm::vec2 target)
     // Share short-range radar with allies.
     probe.addComponent<ShareShortRangeRadar>();
 
+    // Give the probe a hull so it can be targeted and destroyed.
+    auto& hull = probe.addComponent<Hull>();
+    hull.current = hull.max = 1;
+
     // Decorate the probe on radar.
     auto& trace = probe.addComponent<RadarTrace>();
     trace.icon = "radar/probe.png";

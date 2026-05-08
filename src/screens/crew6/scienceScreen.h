@@ -75,6 +75,13 @@ public:
     GuiSignalQualityIndicator* info_thermal_signal_band;
     GuiLabel* info_thermal_signal_label;
 
+    GuiSignalQualityIndicator* info_electrical_signal_band;
+    GuiLabel* info_electrical_signal_label;
+    GuiSignalQualityIndicator* info_gravitational_signal_band;
+    GuiLabel* info_gravitational_signal_label;
+    GuiSignalQualityIndicator* info_thermal_signal_band;
+    GuiLabel* info_thermal_signal_label;
+
     GuiToggleButton* probe_view_button;
     sp::ecs::Entity observation_point;
     GuiListbox* view_mode_selection;
