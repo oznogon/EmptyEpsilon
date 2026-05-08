@@ -19,7 +19,7 @@
 #include "screenComponents/rotatingModelView.h"
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/frequencyCurve.h"
-#include "screenComponents/customShipFunctions.h"
+// #include "screenComponents/customShipFunctions.h"
 #include "screenComponents/globalMessage.h"
 #include "screenComponents/signalQualityIndicator.h"
 
@@ -45,56 +45,59 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->setSize(400.0f, 50.0f)
         ->hide();
 
-    auto columns_container = new GuiElement(this, "");
+    columns_container = new GuiElement(this, "");
     columns_container
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "horizontal");
     columns_container
         ->setAttribute("padding", "20");
 
-    left_column = new GuiElement(columns_container, "LEFT_COLUMN");
+    auto left_column = new GuiElement(columns_container, "LEFT_COLUMN");
     left_column
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
-    center_column = new GuiElement(columns_container, "CENTER_COLUMN");
+    auto center_column = new GuiElement(columns_container, "CENTER_COLUMN");
     center_column
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
     center_column
         ->setAttribute("margin", "20, 0");
 
-    right_column = new GuiElement(columns_container, "RIGHT_COLUMN");
+    auto right_column = new GuiElement(columns_container, "RIGHT_COLUMN");
     right_column
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
+    right_column
+        ->setAttribute("padding", "0, 0, 120, 0");
 
-    basic_info_section = new GuiElement(left_column, "BASIC_INFO_SECTION");
-    basic_info_section
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setAttribute("layout", "vertical");
+    // Model view
+    auto model_view_panel = new GuiPanel(left_column, "");
+    model_view_panel
+        ->setSize(GuiElement::GuiSizeMax, 360.0f)
+        ->setAttribute("padding", "0, 20");
+    model_view_panel
+        ->setAttribute("margin", "0, 0, 0, 30");
 
-    info_callsign = new GuiKeyValueDisplay(basic_info_section, "INFO_CALLSIGN", 0.4f, tr("analysis", "Callsign"), "-");
-    info_callsign->setSize(GuiElement::GuiSizeMax, 30.0f);
-    info_distance = new GuiKeyValueDisplay(basic_info_section, "INFO_DISTANCE", 0.4f, tr("analysis", "Distance"), "-");
-    info_distance->setSize(GuiElement::GuiSizeMax, 30.0f);
-    info_bearing = new GuiKeyValueDisplay(basic_info_section, "INFO_BEARING", 0.4f, tr("analysis", "Bearing"), "-");
-    info_bearing->setSize(GuiElement::GuiSizeMax, 30.0f);
-    info_relspeed = new GuiKeyValueDisplay(basic_info_section, "INFO_RELSPEED", 0.4f, tr("analysis", "Rel. Speed"), "-");
-    info_relspeed->setSize(GuiElement::GuiSizeMax, 30.0f);
-    info_faction = new GuiKeyValueDisplay(basic_info_section, "INFO_FACTION", 0.4f, tr("analysis", "Faction"), "-");
-    info_faction->setSize(GuiElement::GuiSizeMax, 30.0f);
-    info_type = new GuiKeyValueDisplay(basic_info_section, "INFO_TYPE", 0.4f, tr("analysis", "Type"), "-");
-    info_type->setSize(GuiElement::GuiSizeMax, 30.0f);
-    info_hull = new GuiKeyValueDisplay(basic_info_section, "INFO_HULL", 0.4f, tr("analysis", "Hull"), "-");
-    info_hull->setSize(GuiElement::GuiSizeMax, 30.0f);
-    info_shields = new GuiKeyValueDisplay(basic_info_section, "INFO_SHIELDS", 0.4f, tr("analysis", "Shields"), "-");
-    info_shields->setSize(GuiElement::GuiSizeMax, 30.0f);
+    model_view = new GuiRotatingModelView(model_view_panel, "TARGET_MODEL_VIEW", target_entity);
+    model_view
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    info_callsign = new GuiLabel(model_view_panel, "INFO_CALLSIGN", "", 30.0f);
+    info_callsign
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Description
     description_section = new GuiElement(left_column, "DESCRIPTION_SECTION");
     description_section
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
+
+    (new GuiLabel(description_section, "DESCRIPTION_LABEL", tr("analysis", "Description"), 30.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
     info_description = new GuiScrollFormattedText(description_section, "INFO_DESC", "");
     info_description
@@ -102,44 +105,102 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->setMargins(10.0f, 0.0f, 0.0f, 0.0f)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    model_view = new GuiRotatingModelView(center_column, "TARGET_MODEL_VIEW", target_entity);
-    model_view
-        ->setSize(GuiElement::GuiSizeMax, 300.0f);
+    /*
+    // Custom ship functions
+    (new GuiLabel(left_column, "FUNCTIONS_LABEL", tr("analysis", "Functions"), 30.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
-    core_info_section = new GuiElement(center_column, "CORE_INFO_SECTION");
-    core_info_section
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+    (new GuiCustomShipFunctions(left_column, CrewPosition::scienceOfficer, ""))
+        ->setSize(GuiElement::GuiSizeMax, 200.0f);
+    */
+
+    // Center column
+
+    // Basic information
+    basic_info_section = new GuiElement(center_column, "BASIC_INFO_SECTION");
+    basic_info_section
+        ->setSize(GuiElement::GuiSizeMax, 60.0f + 10.0f * KV_HEIGHT)
         ->setAttribute("layout", "vertical");
+    basic_info_section
+        ->setAttribute("margin", "0, 0, 0, 30");
 
-    info_class = new GuiKeyValueDisplay(core_info_section, "INFO_CLASS", 0.4f, tr("analysis", "Class"), "-");
-    info_class->setSize(GuiElement::GuiSizeMax, 30.0f);
-    info_subclass = new GuiKeyValueDisplay(core_info_section, "INFO_SUBCLASS", 0.4f, tr("analysis", "Subclass"), "-");
-    info_subclass->setSize(GuiElement::GuiSizeMax, 30.0f);
-    info_size = new GuiKeyValueDisplay(core_info_section, "INFO_SIZE", 0.4f, tr("analysis", "Size"), "-");
-    info_size->setSize(GuiElement::GuiSizeMax, 30.0f);
+    (new GuiLabel(basic_info_section, "BASIC_INFO_LABEL", tr("analysis", "Analysis"), 30.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
+    info_class = new GuiKeyValueDisplay(basic_info_section, "INFO_CLASS", KV_DIV, tr("analysis", "Class"), "-");
+    info_class->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
+
+    info_subclass = new GuiKeyValueDisplay(basic_info_section, "INFO_SUBCLASS", KV_DIV, tr("analysis", "Subclass"), "-");
+    info_subclass->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
+
+    info_type = new GuiKeyValueDisplay(basic_info_section, "INFO_TYPE", KV_DIV, tr("analysis", "Type"), "-");
+    info_type->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
+
+    info_distance = new GuiKeyValueDisplay(basic_info_section, "INFO_DISTANCE", KV_DIV, tr("analysis", "Distance"), "-");
+    info_distance->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
+
+    info_size = new GuiKeyValueDisplay(basic_info_section, "INFO_SIZE", KV_DIV, tr("analysis", "Size"), "-");
+    info_size->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
+
+    info_bearing = new GuiKeyValueDisplay(basic_info_section, "INFO_BEARING", KV_DIV, tr("analysis", "Bearing"), "-");
+    info_bearing->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
+
+    info_relspeed = new GuiKeyValueDisplay(basic_info_section, "INFO_RELSPEED", KV_DIV, tr("analysis", "Relative speed"), "-");
+    info_relspeed->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
+
+    info_faction = new GuiKeyValueDisplay(basic_info_section, "INFO_FACTION", KV_DIV, tr("analysis", "Faction"), "-");
+    info_faction->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
+
+    info_hull = new GuiKeyValueDisplay(basic_info_section, "INFO_HULL", KV_DIV, tr("analysis", "Hull"), "-");
+    info_hull->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
+
+    info_shields = new GuiKeyValueDisplay(basic_info_section, "INFO_SHIELDS", KV_DIV, tr("analysis", "Shields"), "-");
+    info_shields->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
+
+    // Systems
     systems_section = new GuiElement(center_column, "SYSTEMS_SECTION");
     systems_section
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
+    (new GuiLabel(systems_section, "SYSTEMS_LABEL", tr("analysis", "Systems status"), 30.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 0, 10");
+
     for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        info_system[n] = new GuiKeyValueDisplay(systems_section, "INFO_SYSTEM_" + string(n), 0.75f, getLocaleSystemName(ShipSystem::Type(n)), "-");
-        info_system[n]->setSize(GuiElement::GuiSizeMax, 25.0f)->hide();
+        info_system[n] = new GuiKeyValueDisplay(systems_section, "INFO_SYSTEM_" + string(n), KV_DIV, getLocaleSystemName(ShipSystem::Type(n)), "-");
+        info_system[n]
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->hide();
     }
 
+    // Right column
+
+    // Frequencies
     frequencies_section = new GuiElement(right_column, "FREQUENCIES_SECTION");
     frequencies_section
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setSize(GuiElement::GuiSizeMax, 60.0f + 2.0f * (KV_HEIGHT * 4.0f))
         ->setAttribute("layout", "vertical");
+    frequencies_section
+        ->setAttribute("margin", "0, 0, 0, 30");
+
+    (new GuiLabel(frequencies_section, "FREQUENCIES_LABEL", tr("analysis", "Frequencies"), 30.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
     if (gameGlobalInfo->use_beam_shield_frequencies)
     {
         info_shield_frequency = new GuiFrequencyCurve(frequencies_section, "INFO_SHIELD_FREQ", GuiFrequencyCurve::FrequencyType::Other, GuiFrequencyCurve::DamageEffect::Positive);
-        info_shield_frequency->setSize(GuiElement::GuiSizeMax, 80.0f);
+        info_shield_frequency->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 4.0f);
         info_beam_frequency = new GuiFrequencyCurve(frequencies_section, "INFO_BEAM_FREQ", GuiFrequencyCurve::FrequencyType::Beam, GuiFrequencyCurve::DamageEffect::Negative);
-        info_beam_frequency->setSize(GuiElement::GuiSizeMax, 80.0f);
+        info_beam_frequency->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 4.0f);
     }
     else
     {
@@ -147,16 +208,24 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         info_beam_frequency = nullptr;
     }
 
+    // Radar signatures
     signatures_section = new GuiElement(right_column, "SIGNATURES_SECTION");
     signatures_section
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setSize(GuiElement::GuiSizeMax, 60.0f + 3.0f * (KV_HEIGHT * 3.0f))
         ->setAttribute("layout", "vertical");
+    signatures_section
+        ->setAttribute("margin", "0, 0, 0, 30");
+
+    (new GuiLabel(signatures_section, "SIGNATURES_LABEL", tr("analysis", "Radar signatures"), 30.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
     info_electrical_signal_band = new GuiSignalQualityIndicator(signatures_section, "ELECTRICAL_SIGNAL");
     info_electrical_signal_band
         ->showGreen(false)
         ->showBlue(false)
-        ->setSize(GuiElement::GuiSizeMax, 80.0f);
+        ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
     info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"), 30.0f);
     info_electrical_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -164,7 +233,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
     info_gravitational_signal_band
         ->showRed(false)
         ->showBlue(false)
-        ->setSize(GuiElement::GuiSizeMax, 80.0f);
+        ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
     info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
     info_gravitational_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -172,14 +241,11 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
     info_thermal_signal_band
         ->showRed(false)
         ->showGreen(false)
-        ->setSize(GuiElement::GuiSizeMax, 80.0f);
+        ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
     info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", "Thermal", 30.0f);
     info_thermal_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiCustomShipFunctions(this, CrewPosition::scienceOfficer, ""))
-        ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
-        ->setSize(250.0f, 200.0f);
-
+    // Global message
     (new GuiGlobalMessage(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
@@ -193,7 +259,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
             targets.set(sp::ecs::Entity{});
     }
 
-    info_callsign->setValue("-");
+    info_callsign->setText("");
     info_distance->setValue("-");
     info_bearing->setValue("-");
     info_relspeed->setValue("-");
@@ -212,7 +278,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
     {
         target_entity = target;
         no_target_label->hide();
-        model_view->show();
+        columns_container->show();
 
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
         auto target_transform = target.getComponent<sp::Transform>();
@@ -241,7 +307,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
         }
 
         if (auto cs = target.getComponent<CallSign>())
-            info_callsign->setValue(cs->callsign);
+            info_callsign->setText(cs->callsign);
 
         auto scanstate_component = target.getComponent<ScanState>();
         auto scanstate = scanstate_component ? scanstate_component->getStateFor(my_spaceship) : ScanState::State::FullScan;
@@ -296,8 +362,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
 
             if (auto physics = target.getComponent<sp::Physics>())
             {
-                float size = glm::max(physics->getSize().x, physics->getSize().y);
-                info_size->setValue(string(static_cast<int>(size)));
+                info_size->setValue(string(static_cast<int>(glm::max(physics->getSize().x, physics->getSize().y))));
             }
         }
 
@@ -305,12 +370,14 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
         {
             if (gameGlobalInfo->use_beam_shield_frequencies && info_shield_frequency)
             {
-                auto shieldsystem = target.getComponent<Shields>();
-                info_shield_frequency->setFrequency(shieldsystem ? shieldsystem->frequency : -1);
-                info_shield_frequency->setEnemyHasEquipment(shieldsystem);
-                auto beamsystem = target.getComponent<BeamWeaponSys>();
-                info_beam_frequency->setFrequency(beamsystem ? beamsystem->frequency : -1);
-                info_beam_frequency->setEnemyHasEquipment(beamsystem);
+                auto shields_system = target.getComponent<Shields>();
+                info_shield_frequency
+                    ->setFrequency(shields_system ? shields_system->frequency : -1)
+                    ->setEnemyHasEquipment(shields_system);
+                auto beam_system = target.getComponent<BeamWeaponSys>();
+                info_beam_frequency
+                    ->setFrequency(beam_system ? beam_system->frequency : -1)
+                    ->setEnemyHasEquipment(beam_system);
             }
 
             for (int n = 0; n < ShipSystem::COUNT; n++)
@@ -320,13 +387,12 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
                 {
                     float health = sys->health;
                     info_system[n]
-                        ->setValue(string(int(health * 100.0f)) + "%")
-                        ->setBackColor(glm::u8vec4(255, uint8_t(127.5f * (health + 1)), uint8_t(127.5f * (health + 1)), 255))
+                        ->setValue(string(static_cast<int>(health * 100.0f)) + "%")
+                        ->setBackColor(glm::u8vec4(255, static_cast<uint8_t>(127.5f * (health + 1.0f)), static_cast<uint8_t>(127.5f * (health + 1.0f)), 255))
                         ->show();
                 }
             }
 
-            float signal = 0.0f;
             float electrical = 0.0f;
             float gravitational = 0.0f;
             float thermal = 0.0f;
@@ -351,28 +417,25 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
                 }
             }
 
-            signal = electrical;
             info_electrical_signal_band
-                ->setMaxAmp(signal)
-                ->setNoiseError(std::max(0.0f, (signal - 1.0f) * 0.1f));
+                ->setMaxAmp(electrical)
+                ->setNoiseError(std::max(0.0f, (electrical - 1.0f) * 0.1f));
             info_electrical_signal_label->setText(tr("Electrical: {signal} MJ").format({
-                {"signal", string(signal)}
+                {"signal", string(electrical)}
             }));
 
-            signal = thermal;
             info_thermal_signal_band
-                ->setMaxAmp(signal)
-                ->setPhaseError(std::max(0.0f, (signal - 1.0f) * 0.1f));
+                ->setMaxAmp(thermal)
+                ->setPhaseError(std::max(0.0f, (thermal - 1.0f) * 0.1f));
             info_thermal_signal_label->setText(tr("Thermal: {signal} um").format({
-                {"signal", string(signal)}
+                {"signal", string(thermal)}
             }));
 
-            signal = gravitational;
             info_gravitational_signal_band
-                ->setMaxAmp(signal)
-                ->setPeriodError(std::max(0.0f, (signal - 1.0f) * 0.1f));
+                ->setMaxAmp(gravitational)
+                ->setPeriodError(std::max(0.0f, (gravitational - 1.0f) * 0.1f));
             info_gravitational_signal_label->setText(tr("Gravitational: {signal} dN").format({
-                {"signal", string(signal)}
+                {"signal", string(gravitational)}
             }));
         }
     }
@@ -380,7 +443,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
     {
         target_entity = {};
         no_target_label->show();
-        model_view->hide();
+        columns_container->hide();
     }
 
     GuiOverlay::onDraw(renderer);
