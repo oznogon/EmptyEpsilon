@@ -393,6 +393,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         zoom_slider->setRange(lrr->long_range, lrr->short_range)->setValue(view_distance);
     }
 
+    // Deselect target if no longer in probe view range.
     if (probe_view_button->getValue() && rl && rl->linked_entity)
     {
         auto probe_transform = rl->linked_entity.getComponent<sp::Transform>();
@@ -400,11 +401,21 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         if (!probe_transform || !target_transform || glm::length2(probe_transform->getPosition() - target_transform->getPosition()) > 5000.0f * 5000.0f)
             targets.clear();
     }
+    // Deselect target if they're blocked on radar.
     else
     {
+        auto target_transform = targets.get().getComponent<sp::Transform>();
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
+
         if (!my_transform || RadarBlockSystem::isRadarBlockedFrom(my_transform->getPosition(), targets.get(), lrr->short_range))
             targets.clear();
+
+        // Deselect target if outside of long range radar range.
+        if (my_transform && target_transform)
+        {
+            if (glm::length(target_transform->getPosition() - my_transform->getPosition()) > lrr->long_range)
+                targets.clear();
+        }
     }
 
     // Responsive layout for custom button sidebar. 1440x900 vpixels is 16:10, so this would roughly be the threshold.
