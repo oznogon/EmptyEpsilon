@@ -9,6 +9,8 @@ class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiRotatingModelView;
 class GuiSignalQualityIndicator;
+class GuiScrollFormattedText;
+class GuiElement;
 
 class TargetAnalysisScreen : public GuiOverlay
 {
@@ -18,7 +20,19 @@ private:
     TargetsContainer targets;
     sp::ecs::Entity target_entity;
 
+    GuiElement* left_column;
+    GuiElement* basic_info_section;
+    GuiElement* description_section;
+    GuiScrollFormattedText* info_description;
+
+    GuiElement* center_column;
     GuiRotatingModelView* model_view;
+    GuiElement* core_info_section;
+    GuiElement* systems_section;
+
+    GuiElement* right_column;
+    GuiElement* frequencies_section;
+    GuiElement* signatures_section;
 
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_distance;
@@ -28,6 +42,9 @@ private:
     GuiKeyValueDisplay* info_type;
     GuiKeyValueDisplay* info_hull;
     GuiKeyValueDisplay* info_shields;
+    GuiKeyValueDisplay* info_class;
+    GuiKeyValueDisplay* info_subclass;
+    GuiKeyValueDisplay* info_size;
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];

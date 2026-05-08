@@ -636,7 +636,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 if (sys)
                 {
                     float system_health = sys->health;
-                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setBackColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
+                    info_system[n]->setValue(string(static_cast<int>(system_health * 100.0f)) + "%")->setBackColor(glm::u8vec4(255, static_cast<int>(127.5f * (system_health + 1.0f)), static_cast<int>(127.5f * (system_health + 1)), 255));
                 }
             }
         }
