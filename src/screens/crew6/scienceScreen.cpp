@@ -737,10 +737,12 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             // populate their graphs.
             if (gameGlobalInfo->use_beam_shield_frequencies)
             {
+                auto shields_system = target.getComponent<Shields>();
                 info_shield_frequency
                     ->setFrequency(shields_system ? shields_system->frequency : -1)
                     ->setEnemyHasEquipment(shields_system);
 
+                auto beam_system = target.getComponent<BeamWeaponSys>();
                 info_beam_frequency
                     ->setFrequency(beam_system ? beam_system->frequency : -1)
                     ->setEnemyHasEquipment(beam_system);

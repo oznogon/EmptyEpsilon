@@ -137,27 +137,6 @@ static const uint16_t CMD_DRONE_DOCK = 0x003D;
 static const uint16_t CMD_DRONE_UNDOCK = 0x003E;
 static const uint16_t CMD_DRONE_ABORT_DOCK = 0x003F;
 
-// Drone operations commands
-static const uint16_t CMD_SET_DRONE_LINK = 0x002D;
-static const uint16_t CMD_DRONE_TARGET_ROTATION = 0x002E;
-static const uint16_t CMD_DRONE_IMPULSE = 0x002F;
-static const uint16_t CMD_DRONE_WARP = 0x0030;
-static const uint16_t CMD_DRONE_JUMP = 0x0031;
-static const uint16_t CMD_DRONE_ABORT_JUMP = 0x0032;
-static const uint16_t CMD_DRONE_SET_TARGET = 0x0033;
-static const uint16_t CMD_DRONE_SET_SHIELDS = 0x0034;
-static const uint16_t CMD_DRONE_LOAD_TUBE = 0x0035;
-static const uint16_t CMD_DRONE_UNLOAD_TUBE = 0x0036;
-static const uint16_t CMD_DRONE_FIRE_TUBE = 0x0037;
-static const uint16_t CMD_DRONE_COMBAT_MANEUVER_BOOST = 0x0038;
-static const uint16_t CMD_DRONE_COMBAT_MANEUVER_STRAFE = 0x0039;
-static const uint16_t CMD_DRONE_SET_BEAM_FREQUENCY = 0x003A;
-static const uint16_t CMD_DRONE_SET_BEAM_SYSTEM_TARGET = 0x003B;
-static const uint16_t CMD_SET_AI_ORDER = 0x003C;
-static const uint16_t CMD_DRONE_DOCK = 0x003D;
-static const uint16_t CMD_DRONE_UNDOCK = 0x003E;
-static const uint16_t CMD_DRONE_ABORT_DOCK = 0x003F;
-
 // Docking bay commands
 static const uint16_t CMD_LAUNCH_INTERNAL = 0x0040;
 static const uint16_t CMD_MOVE_INTERNAL_TO_BERTH = 0x0041;
