@@ -24,7 +24,7 @@ private:
     float previous_long_range = 0.0f;
     bool probe_entry_added = false;
 public:
-    RadarScreen(GuiContainer* owner, string type = "tactical");
+    RadarScreen(GuiContainer* owner, string type = "Short range");
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;

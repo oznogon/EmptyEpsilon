@@ -80,7 +80,7 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
     view_mode_selection
         ->setOptions(
             {tr("scienceButton", "Long range"), tr("scienceButton", "Short range"), tr("scienceButton", "Strategic")},
-            {"long_range", "tactical", "far_range"}
+            {"Long range", "Short range", "Strategic"}
         )
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(200.0f, 200.0f);
@@ -123,21 +123,21 @@ void RadarScreen::setRadarMode(string mode)
 
     if (has_probe && !probe_entry_added)
     {
-        view_mode_selection->addEntry(tr("scienceButton", "Linked probe"), "probe");
+        view_mode_selection->addEntry(tr("scienceButton", "Linked probe"), "Linked probe");
         probe_entry_added = true;
     }
     else if (!has_probe && probe_entry_added)
     {
-        const int probe_index = view_mode_selection->indexByValue("probe");
+        const int probe_index = view_mode_selection->indexByValue("Linked probe");
         if (probe_index >= 0)
             view_mode_selection->removeEntry(probe_index);
         probe_entry_added = false;
 
-        if (radar_type == "probe")
-            radar_type = "long_range";
+        if (radar_type == "Linked probe")
+            radar_type = "Long range";
     }
 
-    if (mode == "long_range")
+    if (mode == "Long range")
     {
         radar_type = mode;
         view_mode_selection->setSelectionIndex(view_mode_selection->indexByValue(mode));
@@ -160,7 +160,7 @@ void RadarScreen::setRadarMode(string mode)
         probe_signal_bands->hide();
         signal_bands->show();
     }
-    else if (mode == "tactical")
+    else if (mode == "Short range")
     {
         radar_type = mode;
         view_mode_selection->setSelectionIndex(view_mode_selection->indexByValue(mode));
@@ -179,7 +179,7 @@ void RadarScreen::setRadarMode(string mode)
         probe_signal_bands->hide();
         signal_bands->hide();
     }
-    else if (mode == "far_range")
+    else if (mode == "Strategic")
     {
         radar_type = mode;
         view_mode_selection->setSelectionIndex(view_mode_selection->indexByValue(mode));
@@ -202,7 +202,7 @@ void RadarScreen::setRadarMode(string mode)
         probe_signal_bands->hide();
         signal_bands->hide();
     }
-    else if (mode == "probe")
+    else if (mode == "Linked probe")
     {
         auto rl = my_spaceship.getComponent<RadarLink>();
         if (rl && rl->linked_entity)
@@ -223,7 +223,7 @@ void RadarScreen::setRadarMode(string mode)
         }
         else
         {
-            radar_type = "long_range";
+            radar_type = "Long range";
             setRadarMode(radar_type);
         }
     }
@@ -239,4 +239,22 @@ void RadarScreen::onDraw(sp::RenderTarget& renderer)
 void RadarScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
+
+    auto rl = my_spaceship.getComponent<RadarLink>();
+    bool has_probe = (rl && rl->linked_entity);
+
+    if (keys.radar_long_range.getDown())
+        radar_type = "Long range";
+    else if (keys.radar_short_range.getDown())
+        radar_type = "Short range";
+    else if (keys.radar_strategic.getDown())
+        radar_type = "Strategic";
+    else if (keys.radar_linked_probe.getDown() && has_probe)
+        radar_type = "Linked probe";
+
+    if (radar_type == "Linked probe" && has_probe)
+    {
+        if (auto transform = rl->linked_entity.getComponent<sp::Transform>())
+            probe_radar->setViewPosition(transform->getPosition());
+    }
 }
