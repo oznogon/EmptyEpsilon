@@ -255,6 +255,10 @@ public:
     // Spectator screen binds
     sp::io::Keybinding spectator_show_callsigns;
 
+    // Probe control screen binds
+    sp::io::Keybinding probe_turn_left;
+    sp::io::Keybinding probe_turn_right;
+
     // Briefing screen binds
     sp::io::Keybinding briefing_next_page;
     sp::io::Keybinding briefing_prev_page;

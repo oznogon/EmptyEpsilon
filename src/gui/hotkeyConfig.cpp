@@ -521,6 +521,10 @@ Keys::Keys() :
     // Spectator screen
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
 
+    // Probe control screen
+    probe_turn_left("PROBE_TURN_LEFT", "Left"),
+    probe_turn_right("PROBE_TURN_RIGHT", "Right"),
+
     // Briefing screen
     briefing_next_page("BRIEFING_NEXT_PAGE", "Right"),
     briefing_prev_page("BRIEFING_PREVIOUS_PAGE", "Left"),
@@ -1370,6 +1374,10 @@ void Keys::init()
     // Spectator screen
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));
     spectator_show_callsigns.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+
+    // Probe control screen
+    probe_turn_left.setLabel(tr("hotkey_menu", "Probe control"), tr("hotkey_ProbeControl", "Turn left"));
+    probe_turn_right.setLabel(tr("hotkey_menu", "Probe control"), tr("hotkey_ProbeControl", "Turn right"));
 
     // Briefing screen
     briefing_next_page.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Next page"));
