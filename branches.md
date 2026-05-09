@@ -85,4 +85,4 @@ help-exit-touchscreen 20260506
 
 extra-crew-screens 20260507 -- radar signatures, TargetAnalysis
 
-extra-crew-screens 20260508 -- fix probe targeting on Relay
+extra-crew-screens 20260508 -- fix probe targeting on Relay, add ProbeControl hotkeys
