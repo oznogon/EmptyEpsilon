@@ -159,6 +159,12 @@ public:
     sp::io::Keybinding relay_alert_level_yellow;
     sp::io::Keybinding relay_alert_level_red;
 
+    // Radar screen binds
+    sp::io::Keybinding radar_long_range;
+    sp::io::Keybinding radar_short_range;
+    sp::io::Keybinding radar_strategic;
+    sp::io::Keybinding radar_linked_probe;
+
     // Damage control screen binds
     sp::io::Keybinding damcon_toggle_detail_lines;
 
