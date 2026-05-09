@@ -4,15 +4,30 @@
 #include "screenComponents/targetsContainer.h"
 
 class GuiRadarView;
+class GuiRadarZoomSlider;
+class GuiListbox;
+class RawScannerDataRadarOverlay;
 
 class RadarScreen : public GuiOverlay
 {
 private:
     TargetsContainer targets;
-    GuiRadarView* radar;
     string radar_type;
+    GuiRadarView* radar;
+    RawScannerDataRadarOverlay* signal_bands;
+    GuiRadarView* probe_radar;
+    RawScannerDataRadarOverlay* probe_signal_bands;
+    GuiRadarZoomSlider* zoom_slider;
+    GuiListbox* view_mode_selection;
+    string previous_radar_type;
+    float previous_short_range = 0.0f;
+    float previous_long_range = 0.0f;
+    bool probe_entry_added = false;
 public:
     RadarScreen(GuiContainer* owner, string type = "tactical");
 
     virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onUpdate() override;
+
+    void setRadarMode(string mode);
 };
