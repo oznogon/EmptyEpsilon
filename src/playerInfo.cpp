@@ -131,6 +131,7 @@ static const uint16_t CMD_SET_AI_ORDER = 0x003C;
 static const uint16_t CMD_DRONE_DOCK = 0x003D;
 static const uint16_t CMD_DRONE_UNDOCK = 0x003E;
 static const uint16_t CMD_DRONE_ABORT_DOCK = 0x003F;
+static const uint16_t CMD_PROBE_TARGET_ROTATION = 0x0040;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -565,6 +566,13 @@ void PlayerInfo::commandClearScienceLink()
 
     packet << CMD_SET_SCIENCE_LINK;
     packet << sp::ecs::Entity{};
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandProbeTargetRotation(float target)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_PROBE_TARGET_ROTATION << target;
     sendClientCommand(packet);
 }
 
@@ -1112,6 +1120,20 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             glm::vec2 target{};
             packet >> target;
             ProbeSystem::launch(ship, target);
+        }
+        break;
+    case CMD_PROBE_TARGET_ROTATION:
+        {
+            float f;
+            packet >> f;
+            if (auto rl = ship.getComponent<RadarLink>())
+            {
+                if (auto thrusters = rl->linked_entity.getComponent<ManeuveringThrusters>())
+                {
+                    thrusters->stop();
+                    thrusters->target = f;
+                }
+            }
         }
         break;
     case CMD_SET_ALERT_LEVEL:{

@@ -10,6 +10,7 @@
 #include "components/faction.h"
 #include "components/hull.h"
 #include "components/collision.h"
+#include "components/maneuveringthrusters.h"
 
 #include "menus/luaConsole.h"
 
@@ -66,6 +67,9 @@ sp::ecs::Entity ProbeSystem::launch(sp::ecs::Entity ship, glm::vec2 target)
     mesh_render.texture.name = "SensorBuoy/SensorBuoyAlbedoAO.png";
     mesh_render.specular_texture.name = "SensorBuoy/SensorBuoyPBRSpecular.png";
     mesh_render.scale = 300.0f;
+
+    // Assign maneuvering thrusters so the probe can be rotated.
+    probe.addComponent<ManeuveringThrusters>();
 
     // Assign a physics collider.
     auto& physics = probe.addComponent<sp::Physics>();

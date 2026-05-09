@@ -12,7 +12,8 @@ void ManeuveringSystem::update(float delta)
 {
     if (delta <= 0.0f) return;
 
-    for(auto [entity, thrusters, transform, physics] : sp::ecs::Query<ManeuveringThrusters, sp::Transform, sp::Physics>()) {
+    for (auto [entity, thrusters, transform, physics] : sp::ecs::Query<ManeuveringThrusters, sp::Transform, sp::Physics>())
+    {
         float rotationDiff = 0.0f;
         if (thrusters.rotation_request != std::numeric_limits<float>::min())
             rotationDiff = thrusters.rotation_request;

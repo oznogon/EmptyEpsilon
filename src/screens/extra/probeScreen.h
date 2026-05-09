@@ -15,5 +15,6 @@ private:
 public:
     ProbeScreen(GuiContainer* owner);
 
+    virtual void onUpdate() override;
     virtual void onDraw(sp::RenderTarget& target) override;
 };
