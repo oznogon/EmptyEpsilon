@@ -1,76 +1,73 @@
-#include <i18n.h>
 #include "playerInfo.h"
+#include <i18n.h>
 #include "random.h"
 #include "gameGlobalInfo.h"
-#include "components/ai.h"
+
 #include "menus/luaConsole.h"
+
 #include "screens/mainScreen.h"
 #include "screens/crewStationScreen.h"
-
 #include "screens/crew6/helmsScreen.h"
 #include "screens/crew6/weaponsScreen.h"
 #include "screens/crew6/engineeringScreen.h"
 #include "screens/crew6/scienceScreen.h"
 #include "screens/crew6/relayScreen.h"
-
 #include "screens/crew4/tacticalScreen.h"
 #include "screens/crew4/engineeringAdvancedScreen.h"
 #include "screens/crew4/operationsScreen.h"
-
 #include "screens/crew1/singlePilotScreen.h"
 #include "screens/extra/droneOperationsScreen.h"
-
+#include "screens/extra/beamWeaponsScreen.h"
+#include "screens/extra/briefingScreen.h"
+#include "screens/extra/commsScreen.h"
 #include "screens/extra/damcon.h"
-#include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
 #include "screens/extra/dockingBayScreen.h"
-#include "screens/extra/beamWeaponsScreen.h"
 #include "screens/extra/missileWeaponsScreen.h"
-#include "screens/extra/commsScreen.h"
-#include "screens/extra/shipLogScreen.h"
-#include "screens/extra/radarScreen.h"
+#include "screens/extra/powerManagement.h"
 #include "screens/extra/probeScreen.h"
+#include "screens/extra/radarScreen.h"
+#include "screens/extra/shipLogScreen.h"
 #include "screens/extra/targetAnalysisScreen.h"
-#include "screens/extra/briefingScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
 
-#include "components/internalrooms.h"
-
-#include "components/collision.h"
-#include "components/impulse.h"
-#include "components/hull.h"
-#include "components/customshipfunction.h"
-#include "components/shiplog.h"
-#include "components/probe.h"
-#include "components/reactor.h"
-#include "components/coolant.h"
+#include "components/ai.h"
 #include "components/beamweapon.h"
+#include "components/collision.h"
+#include "components/coolant.h"
+#include "components/customshipfunction.h"
+#include "components/drone.h"
+#include "components/hacking.h"
+#include "components/hull.h"
+#include "components/impulse.h"
+#include "components/internalrooms.h"
+#include "components/jumpdrive.h"
+#include "components/lifetime.h"
+#include "components/maneuveringthrusters.h"
+#include "components/missiletubes.h"
+#include "components/moveto.h"
+#include "components/pickup.h"
+#include "components/probe.h"
+#include "components/radar.h"
+#include "components/reactor.h"
+#include "components/rendering.h"
+#include "components/scanning.h"
+#include "components/selfdestruct.h"
+#include "components/shields.h"
+#include "components/shiplog.h"
+#include "components/target.h"
 #include "components/utilityBeam.h"
 #include "components/warpdrive.h"
-#include "components/jumpdrive.h"
-#include "components/shields.h"
-#include "components/target.h"
-#include "components/missiletubes.h"
-#include "components/maneuveringthrusters.h"
-#include "components/pickup.h"
-#include "components/selfdestruct.h"
-#include "components/hacking.h"
-#include "components/scanning.h"
-#include "components/radar.h"
-#include "components/drone.h"
-#include "components/internalrooms.h"
-#include "components/moveto.h"
-#include "components/lifetime.h"
-#include "components/rendering.h"
-#include "systems/jumpsystem.h"
-#include "systems/docking.h"
-#include "systems/missilesystem.h"
-#include "systems/selfdestruct.h"
-#include "systems/probe.h"
+
 #include "systems/comms.h"
+#include "systems/docking.h"
+#include "systems/jumpsystem.h"
+#include "systems/missilesystem.h"
+#include "systems/probe.h"
 #include "systems/scanning.h"
+#include "systems/selfdestruct.h"
 
 //Ship commands
 static const uint16_t CMD_TARGET_ROTATION = 0x0001;
@@ -117,6 +114,8 @@ static const uint16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
+
+// Drone commands
 static const uint16_t CMD_SET_DRONE_LINK = 0x002D;
 static const uint16_t CMD_DRONE_TARGET_ROTATION = 0x002E;
 static const uint16_t CMD_DRONE_IMPULSE = 0x002F;
@@ -136,7 +135,6 @@ static const uint16_t CMD_SET_AI_ORDER = 0x003C;
 static const uint16_t CMD_DRONE_DOCK = 0x003D;
 static const uint16_t CMD_DRONE_UNDOCK = 0x003E;
 static const uint16_t CMD_DRONE_ABORT_DOCK = 0x003F;
-static const uint16_t CMD_PROBE_TARGET_ROTATION = 0x0040;
 
 // Docking bay commands
 static const uint16_t CMD_LAUNCH_INTERNAL = 0x0040;
@@ -156,6 +154,9 @@ static const uint16_t CMD_SET_UTILITY_BEAM_RANGE = 0x0051;
 
 // Waypoint commands
 static const uint16_t CMD_SET_WAYPOINT_ROUTE = 0x0052;
+
+// Probe control commands
+static const uint16_t CMD_PROBE_TARGET_ROTATION = 0x0053;
 
 // Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
