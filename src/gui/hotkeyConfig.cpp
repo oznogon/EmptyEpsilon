@@ -508,6 +508,12 @@ Keys::Keys() :
     utilitybeam_mode_next("UTILITYBEAM_MODE_NEXT", "E"),
     utilitybeam_mode_prev("UTILITYBEAM_MODE_PREV", "W"),
 
+    // Radar screen
+    radar_long_range("RADAR_LONG_RANGE", "1"),
+    radar_short_range("RADAR_SHORT_RANGE", "2"),
+    radar_strategic("RADAR_STRATEGIC", "3"),
+    radar_linked_probe("RADAR_LINKED_PROBE", "4"),
+
     // Damage control screen
     damcon_toggle_detail_lines("DAMCON_TOGGLE_DETAIL_LINES"),
 
@@ -1349,6 +1355,12 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Repeating
     );
     utilitybeam_mode_prev.setDefaultInteraction(sp::io::Keybinding::Interaction::Discrete);
+
+    // Radar
+    radar_long_range.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Long range"));
+    radar_short_range.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Short range"));
+    radar_strategic.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Strategic"));
+    radar_linked_probe.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Linked probe"));
 
     // Damage control
     damcon_toggle_detail_lines.setLabel(tr("hotkey_menu", "Damage control"), tr("hotkey_Damcon", "Toggle system detail lines"));

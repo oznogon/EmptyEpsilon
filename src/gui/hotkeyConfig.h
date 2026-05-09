@@ -205,6 +205,12 @@ public:
     sp::io::Keybinding utilitybeam_mode_next;
     sp::io::Keybinding utilitybeam_mode_prev;
 
+    // Radar screen binds
+    sp::io::Keybinding radar_long_range;
+    sp::io::Keybinding radar_short_range;
+    sp::io::Keybinding radar_strategic;
+    sp::io::Keybinding radar_linked_probe;
+
     // Damage control screen binds
     sp::io::Keybinding damcon_toggle_detail_lines;
 
