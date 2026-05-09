@@ -70,6 +70,15 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
         ->setSize(250.0f, 50.0f);
 
+    radar->setCallbacks(
+        nullptr, nullptr, nullptr,
+        [this](float value, glm::vec2 position)
+        {
+            if (zoom_slider->isVisible())
+                zoom_slider->setValue(radar->getDistance() * (1.0f - value * 0.1f));
+        }
+    );
+
     // Radar/database view toggle.
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION",
         [this](int index, string value)
