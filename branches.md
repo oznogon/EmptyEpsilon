@@ -88,3 +88,4 @@ extra-crew-screens 20260507 -- radar signatures, TargetAnalysis
 extra-crew-screens 20260508 -- fix probe targeting on Relay, add ProbeControl hotkeys
 
 force-cpp17 20260509 -- Fix F44/GCC 16 builds
+extra-crew-screens 20260509 -- implement RadarScreen
