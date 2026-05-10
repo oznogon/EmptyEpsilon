@@ -318,6 +318,12 @@ public:
         return this;
     }
 
+    GuiSliderTweak* setRange(float min_value, float max_value)
+    {
+        slider->setRange(min_value, max_value);
+        return this;
+    }
+
     std::function<float()> update_func;
     GuiSlider* slider;
     GuiTextEntry* value_entry;
@@ -2511,6 +2517,30 @@ private:
 #define ADD_SHIP_SYSTEM_TWEAK(SYSTEM) \
       ADD_BOOL_TWEAK(tr("tweak-text", "Hackable"), SYSTEM, can_be_hacked); \
       ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Health current/max:"), SYSTEM, health, health_max); \
+      { \
+          auto row = new GuiElement(new_page->tweaks, ""); \
+          row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
+          (new GuiLabel(row, "", tr("tweak-text", "Power level:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
+          auto ui = new GuiSliderTweak(row, "", 0.0f, 3.0f, 1.0f, [this](float number) { \
+              if (auto v = entity.getComponent<SYSTEM>()) \
+                  v->power_level = number; \
+          }); \
+          ui->update_func = [this, ui]() -> float { \
+              float power_max = (entity.getComponent<Reactor>() || entity.getComponent<Coolant>()) ? 3.0f : 1.0f; \
+              if (ui->slider->getRangeMax() != power_max) \
+                  ui->setRange(0.0f, power_max); \
+              if (auto v = entity.getComponent<SYSTEM>()) \
+                  return v->power_level; \
+              return ui->value_entry->getText().toFloat(); \
+          }; \
+          new_page->apply_functions.push_back([this, ui]() { \
+              string text = ui->value_entry->getText(); \
+              if (!text.empty()) { \
+                  if (auto v = entity.getComponent<SYSTEM>()) \
+                      v->power_level = text.toFloat(); \
+              } \
+          }); \
+      } \
       ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Heat:"), SYSTEM, 0.0f, 1.0f, heat_level); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy rate factor:"), SYSTEM, power_factor); \
       { \
@@ -2527,6 +2557,30 @@ private:
 #define ADD_SHIP_SYSTEM_TWEAK_MEMBER(COMPONENT, SUBSYSTEM) \
       ADD_BOOL_TWEAK(tr("tweak-text", "Hackable"), COMPONENT, SUBSYSTEM.can_be_hacked); \
       ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Health current/max:"), COMPONENT, SUBSYSTEM.health, SUBSYSTEM.health_max); \
+      { \
+          auto row = new GuiElement(new_page->tweaks, ""); \
+          row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
+          (new GuiLabel(row, "", tr("tweak-text", "Power level:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
+          auto ui = new GuiSliderTweak(row, "", 0.0f, 3.0f, 1.0f, [this](float number) { \
+              if (auto v = entity.getComponent<COMPONENT>()) \
+                  v->SUBSYSTEM.power_level = number; \
+          }); \
+          ui->update_func = [this, ui]() -> float { \
+              float power_max = (entity.getComponent<Reactor>() || entity.getComponent<Coolant>()) ? 3.0f : 1.0f; \
+              if (ui->slider->getRangeMax() != power_max) \
+                  ui->setRange(0.0f, power_max); \
+              if (auto v = entity.getComponent<COMPONENT>()) \
+                  return v->SUBSYSTEM.power_level; \
+              return ui->value_entry->getText().toFloat(); \
+          }; \
+          new_page->apply_functions.push_back([this, ui]() { \
+              string text = ui->value_entry->getText(); \
+              if (!text.empty()) { \
+                  if (auto v = entity.getComponent<COMPONENT>()) \
+                      v->SUBSYSTEM.power_level = text.toFloat(); \
+              } \
+          }); \
+      } \
       ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Heat:"), COMPONENT, 0.0f, 1.0f, SUBSYSTEM.heat_level); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy rate factor:"), COMPONENT, SUBSYSTEM.power_factor); \
       { \
