@@ -1954,11 +1954,11 @@ static string getBerthTypeName(DockingBay::Berth::Type type)
 {
     switch (type)
     {
-        case DockingBay::Berth::Type::Hangar:  return tr("dockingbay", "Hangar");
-        case DockingBay::Berth::Type::Energy:  return tr("dockingbay", "Energy");
-        case DockingBay::Berth::Type::Supply:  return tr("dockingbay", "Supply");
+        case DockingBay::Berth::Type::Hangar: return tr("dockingbay", "Hangar");
+        case DockingBay::Berth::Type::Energy: return tr("dockingbay", "Energy");
+        case DockingBay::Berth::Type::Supply: return tr("dockingbay", "Supply");
         case DockingBay::Berth::Type::Thermal: return tr("dockingbay", "Thermal");
-        case DockingBay::Berth::Type::Repair:  return tr("dockingbay", "Repair");
+        case DockingBay::Berth::Type::Repair: return tr("dockingbay", "Repair");
         case DockingBay::Berth::Type::Storage: return tr("dockingbay", "Storage");
     }
     return tr("dockingbay", "Unknown type");
@@ -1971,7 +1971,7 @@ public:
     GuiBerthVectorTweak(GuiContainer* owner)
     : GuiElement(owner, "")
     {
-        setSize(GuiElement::GuiSizeMax, 240.0f);
+        setSize(GuiElement::GuiSizeMax, 300.0f);
         setAttribute("layout", "vertical");
 
         item_list = new GuiListbox(this, "",
@@ -4204,13 +4204,9 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             return v && (v->flags & DockingBay::RestockMissiles);
         };
     }
+    ADD_LABEL("Berths");
     {
-        auto row = new GuiElement(new_page->tweaks, "");
-        row->setSize(GuiElement::GuiSizeMax, 240.0f)->setAttribute("layout", "horizontal");
-        (new GuiLabel(row, "", tr("tweak-text", "Berths:"), 20.0f))
-            ->setAlignment(sp::Alignment::CenterRight)
-            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        auto ui = new GuiBerthVectorTweak(row);
+        auto ui = new GuiBerthVectorTweak(new_page->tweaks);
         ui->update_func = [this]() -> std::vector<DockingBay::Berth> {
             if (auto v = entity.getComponent<DockingBay>()) return v->berths;
             return {};
