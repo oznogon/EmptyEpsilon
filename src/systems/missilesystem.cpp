@@ -30,9 +30,10 @@ void MissileSystem::update(float delta)
         for(auto& tube : tubes.mounts)
         {
             if (tube.delay > 0.0f)
-            {
                 tube.delay -= delta * tubes.getSystemEffectiveness();
-            }else{
+            else
+            {
+                tube.delay = 0.0f;
                 switch(tube.state)
                 {
                 case MissileTubes::MountPoint::State::Loading:
@@ -52,7 +53,7 @@ void MissileSystem::update(float delta)
                         tube.fire_count -= 1;
                         if (tube.fire_count > 0)
                         {
-                            tube.delay = 1.5;
+                            tube.delay = 1.5f;
                         }
                         else
                         {
