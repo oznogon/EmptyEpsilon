@@ -51,8 +51,11 @@ void ShieldSystem::update(float delta)
             } else {
                 shield.level = shield.max;
             }
-            if (shield.hit_effect > 0)
+
+            if (shield.hit_effect > 0.0f)
                 shield.hit_effect -= delta;
+            else
+                shield.hit_effect = 0.0f;
             n++;
         }
 
