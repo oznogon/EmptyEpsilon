@@ -439,7 +439,7 @@ void DockingSystem::update(float delta)
     }
 }
 
-bool DockingSystem::moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Entity carrier)
+bool DockingSystem::moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Entity carrier, int berth_index)
 {
     auto bay = carrier.getComponent<DockingBay>();
     if (!bay) return false;
@@ -454,8 +454,10 @@ bool DockingSystem::moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Ent
     if (entity.hasComponent<sp::Transform>())
         entity.removeComponent<sp::Transform>();
 
-    assignInternalEntityToBerth(entity);
+    if (berth_index >= 0)
+        return assignInternalEntityToBerth(entity, berth_index);
 
+    assignInternalEntityToBerth(entity);
     return true;
 }
 

@@ -16,7 +16,7 @@ public:
     static void requestUndock(sp::ecs::Entity entity);
     static void abortDock(sp::ecs::Entity entity);
 
-    static bool moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Entity carrier);
+    static bool moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Entity carrier, int berth_index = -1);
     static bool assignInternalEntityToBerth(sp::ecs::Entity entity);
     static bool assignInternalEntityToBerth(sp::ecs::Entity entity, DockingBay::Berth::Type berth_type);
     static bool assignInternalEntityToBerth(sp::ecs::Entity entity, int index);
