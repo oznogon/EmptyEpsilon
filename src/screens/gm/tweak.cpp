@@ -16,6 +16,8 @@
 #include "components/comms.h"
 #include "components/coolant.h"
 #include "components/docking.h"
+#include "components/dockingbaysystem.h"
+#include "components/drone.h"
 #include "components/faction.h"
 #include "components/gravity.h"
 #include "components/hacking.h"
@@ -131,6 +133,31 @@ static string mainScreenOverlayToLocaleString(MainScreenOverlay overlay)
     {
     case MainScreenOverlay::HideComms: return tr("main_screen", "Hide comms");
     case MainScreenOverlay::ShowComms: return tr("main_screen", "Show comms");
+    }
+
+    return tr("Unknown");
+}
+
+// Convert physics type to string.
+static string physicsTypeToString(sp::Physics::Type type)
+{
+    switch (type)
+    {
+    case sp::Physics::Type::Sensor:  return tr("physics_type", "Sensor");
+    case sp::Physics::Type::Dynamic: return tr("physics_type", "Dynamic");
+    case sp::Physics::Type::Static:  return tr("physics_type", "Static");
+    }
+
+    return tr("Unknown");
+}
+
+// Convert physics shape to string.
+static string physicsShapeToString(sp::Physics::Shape shape)
+{
+    switch (shape)
+    {
+    case sp::Physics::Shape::Circle:    return tr("physics_shape", "Circle");
+    case sp::Physics::Shape::Rectangle: return tr("physics_shape", "Rectangle");
     }
 
     return tr("Unknown");
@@ -2689,8 +2716,124 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     // Physics component
     ADD_PAGE(tr("tweak-tab", "Physics"), sp::Physics);
-    new_page->description = tr("tweak-physics", "If present, this component subjects this entity to physics interactions. This tweaks panel is incomplete; set properties in Lua scripting.");
-    // TODO: Figure out how to set Physics values
+    new_page->description = tr("tweak-physics", "If present, this component subjects this entity to physics interactions. Sets the physics body type (Sensor, Dynamic, Static), shape (Circle or Rectangle), size, velocity, and angular velocity.");
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "", tr("tweak-text", "Type:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        auto ui = new GuiSelectorTweak(row, "PHYSICS_TYPE", [this](int index, string value)
+        {
+            if (auto v = entity.getComponent<sp::Physics>())
+                v->setType(static_cast<sp::Physics::Type>(index));
+        });
+        for (int i = 0; i <= 2; i++)
+            ui->addEntry(physicsTypeToString(static_cast<sp::Physics::Type>(i)), string(i));
+        ui->update_func = [this]() -> int {
+            if (auto v = entity.getComponent<sp::Physics>())
+                return static_cast<int>(v->getType());
+            return 0;
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "", tr("tweak-text", "Shape:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        auto ui = new GuiSelectorTweak(row, "PHYSICS_SHAPE", [this](int index, string value)
+        {
+            if (auto v = entity.getComponent<sp::Physics>())
+            {
+                auto type = v->getType();
+                auto size = v->getSize();
+                if (index == 0)
+                    v->setCircle(type, size.x);
+                else
+                    v->setRectangle(type, size);
+            }
+        });
+        for (int i = 0; i <= 1; i++)
+            ui->addEntry(physicsShapeToString(static_cast<sp::Physics::Shape>(i)), string(i));
+        ui->update_func = [this]() -> int {
+            if (auto v = entity.getComponent<sp::Physics>())
+                return static_cast<int>(v->getShape());
+            return 0;
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "", tr("tweak-text", "Radius:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string {
+            if (auto v = entity.getComponent<sp::Physics>())
+                return string(v->getSize().x, 3);
+            return "";
+        };
+        ui->callback([this](string text) {
+            if (auto v = entity.getComponent<sp::Physics>())
+                v->setCircle(v->getType(), text.toFloat());
+        });
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "", tr("tweak-text", "Size (W x H):"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        auto w_ui = new GuiTextTweak(row);
+        w_ui->update_func = [this]() -> string {
+            if (auto v = entity.getComponent<sp::Physics>())
+                return string(v->getSize().x, 3);
+            return "";
+        };
+        w_ui->callback([this](string text) {
+            if (auto v = entity.getComponent<sp::Physics>()) {
+                auto size = v->getSize();
+                size.x = text.toFloat();
+                v->setRectangle(v->getType(), size);
+            }
+        });
+        auto h_ui = new GuiTextTweak(row);
+        h_ui->update_func = [this]() -> string {
+            if (auto v = entity.getComponent<sp::Physics>())
+                return string(v->getSize().y, 3);
+            return "";
+        };
+        h_ui->callback([this](string text) {
+            if (auto v = entity.getComponent<sp::Physics>()) {
+                auto size = v->getSize();
+                size.y = text.toFloat();
+                v->setRectangle(v->getType(), size);
+            }
+        });
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "", tr("tweak-text", "Velocity:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        auto ui = new GuiVec2Tweak(row);
+        ui->update_func = [this]() -> glm::vec2 {
+            if (auto v = entity.getComponent<sp::Physics>())
+                return v->getVelocity();
+            return glm::vec2(0.0f, 0.0f);
+        };
+        ui->callback = [this](glm::vec2 val) {
+            if (auto v = entity.getComponent<sp::Physics>())
+                v->setVelocity(val);
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "", tr("tweak-text", "Angular velocity:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string {
+            if (auto v = entity.getComponent<sp::Physics>())
+                return string(v->getAngularVelocity(), 3);
+            return "";
+        };
+        ui->callback([this](string text) {
+            if (auto v = entity.getComponent<sp::Physics>())
+                v->setAngularVelocity(text.toFloat());
+        });
+    }
     addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Callsign"), CallSign);
@@ -3095,7 +3238,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     // Spin component overrides other rotation controls.
     ADD_PAGE(tr("tweak-tab", "Spin"), Spin);
     new_page->description = tr("tweak-spin", "Makes the entity rotate continuously at the given rate in degrees per second. Useful for terrain and decorative objects, such as asteroids and debris. Combine with Planet renderer to roughly simulate planetary rotation, particularly with other entities using Orbit.\n\nShips should instead use the Manuvering thrusters component to control their own rotation.");
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Rotation rate (degrees/second):"), Spin, rate);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Rotation rate (deg/sec):"), Spin, rate);
     addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Life time"), LifeTime);
@@ -3882,6 +4025,96 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_BOOL_TWEAK(tr("tweak-text", "Radar"), ExplosionEffect, radar);
     ADD_BOOL_TWEAK(tr("tweak-text", "Electrical"), ExplosionEffect, electrical);
     addPageToGroup(rendering_group);
+
+    ADD_PAGE(tr("tweak-tab", "Drone controller"), DroneController);
+    new_page->description = tr("tweak-drone-controller", "Configures drone control capability for this ship. Sets the range within which drones can be controlled, and the energy drained per second while controlling a drone.");
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Control range:"), DroneController, control_range);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy drain/sec:"), DroneController, energy_drain_per_sec);
+    addPageToGroup(sensors_group);
+
+    ADD_PAGE(tr("tweak-tab", "Drone link"), AllowDroneLink);
+    new_page->description = tr("tweak-drone-link", "Marks this entity as a controllable drone. Sets the owner ship that can control this drone.");
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Owner:"), AllowDroneLink, owner);
+    addPageToGroup(sensors_group);
+
+    ADD_PAGE(tr("tweak-tab", "Docking bay system"), DockingBaySystem);
+    new_page->description = tr("tweak-docking-bay-system", "Ship system for docking bay operations. Affects the speed of docking operations based on system health.");
+    ADD_SHIP_SYSTEM_TWEAK(DockingBaySystem);
+    addPageToGroup(ship_systems_group);
+
+    ADD_PAGE(tr("tweak-tab", "Sensors system"), SensorsSystem);
+    new_page->description = tr("tweak-sensors-system", "Ship system for the sensors array. Affects drone control range and energy consumption based on system health.");
+    ADD_SHIP_SYSTEM_TWEAK(SensorsSystem);
+    addPageToGroup(ship_systems_group);
+
+    ADD_PAGE(tr("tweak-tab", "Never radar blocked"), NeverRadarBlocked);
+    new_page->description = tr("tweak-never-radar-blocked", "If present, this entity is never blocked on the long-range radar by RadarBlock entities such as nebulae.");
+    addPageToGroup(sensors_group);
+
+    ADD_PAGE(tr("tweak-tab", "Destroyed by area damage"), DestroyedByAreaDamage);
+    new_page->description = tr("tweak-destroyed-by-area-damage", "If present, this entity can be destroyed by area-of-effect explosions, even if it does not have a Hull component. Configures which damage types affect this entity.");
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        auto ui = new GuiToggleTweak(row, tr("tweak-text", "Energy damage"),
+            [this](bool value)
+            {
+                if (auto v = entity.getComponent<DestroyedByAreaDamage>())
+                {
+                    if (value) v->damaged_by_flags |= (1 << int(DamageType::Energy));
+                    else v->damaged_by_flags &= ~(1 << int(DamageType::Energy));
+                }
+            }
+        );
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<DestroyedByAreaDamage>();
+            return v && (v->damaged_by_flags & (1 << int(DamageType::Energy)));
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        auto ui = new GuiToggleTweak(row, tr("tweak-text", "Kinetic damage"),
+            [this](bool value)
+            {
+                if (auto v = entity.getComponent<DestroyedByAreaDamage>())
+                {
+                    if (value) v->damaged_by_flags |= (1 << int(DamageType::Kinetic));
+                    else v->damaged_by_flags &= ~(1 << int(DamageType::Kinetic));
+                }
+            }
+        );
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<DestroyedByAreaDamage>();
+            return v && (v->damaged_by_flags & (1 << int(DamageType::Kinetic)));
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        auto ui = new GuiToggleTweak(row, tr("tweak-text", "EMP damage"),
+            [this](bool value)
+            {
+                if (auto v = entity.getComponent<DestroyedByAreaDamage>())
+                {
+                    if (value) v->damaged_by_flags |= (1 << int(DamageType::EMP));
+                    else v->damaged_by_flags &= ~(1 << int(DamageType::EMP));
+                }
+            }
+        );
+        ui->update_func = [this]() -> bool {
+            auto v = entity.getComponent<DestroyedByAreaDamage>();
+            return v && (v->damaged_by_flags & (1 << int(DamageType::EMP)));
+        };
+    }
+    addPageToGroup(combat_group);
+
+    ADD_PAGE(tr("tweak-tab", "Scan state"), ScanState);
+    new_page->description = tr("tweak-scan-state", "Configures scanning behavior for this entity. Sets whether the first scan goes directly to a full scan, and the complexity and depth of the scanning minigame.");
+    ADD_BOOL_TWEAK(tr("tweak-text", "Allow simple scan"), ScanState, allow_simple_scan);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Complexity:"), ScanState, complexity);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Depth:"), ScanState, depth);
+    addPageToGroup(sensors_group);
 
     for (GuiTweakPage* page : pages)
     {
