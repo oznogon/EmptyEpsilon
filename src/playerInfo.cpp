@@ -1069,9 +1069,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 port->docked_offset = {-(carrier_radius + supply_drop_radius + 10.0f), 0.0f};
 
                 // Move supply drop to the berth
-                if (DockingSystem::moveEntityToInternalBay(supply_drop, ship))
-                    DockingSystem::assignInternalEntityToBerth(supply_drop, berth_index);
-                else
+                if (!DockingSystem::moveEntityToInternalBay(supply_drop, ship, berth_index))
                 {
                     LOG(Warning, "Supply drop couldn't be moved to supply berth ", berth_index, " and was destroyed");
                     supply_drop.destroy();
