@@ -39,7 +39,7 @@ BASIC_REPLICATION_IMPL(MissileTubesReplication, MissileTubes)
 
         VECTOR_REPLICATION_FIELD(type_loaded);
         VECTOR_REPLICATION_FIELD(state);
-        VECTOR_REPLICATION_FIELD_QUANTIZED(delay, uint8_t, 0.0f, 20.0f);
+        VECTOR_REPLICATION_FIELD_QUANTIZED(delay, uint8_t, 0.0f, 300.0f);
         VECTOR_REPLICATION_FIELD(fire_count);
     VECTOR_REPLICATION_END();
 }
