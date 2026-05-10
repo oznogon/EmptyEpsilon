@@ -13,6 +13,7 @@
 #include "components/ai.h"
 #include "components/avoidobject.h"
 #include "components/beamweapon.h"
+#include "components/briefing.h"
 #include "components/comms.h"
 #include "components/coolant.h"
 #include "components/docking.h"
@@ -3208,6 +3209,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     const string ship_systems_group = {tr("tweak-group", "Ship systems")};
     const string player_group = {tr("tweak-group", "Player")};
     const string sensors_group = {tr("tweak-group", "Sensors")};
+    const string drones_group = {tr("tweak-group", "Drones")};
     const string comms_docking_group = {tr("tweak-group", "Comms & docking")};
     const string countermeasures_group = {tr("tweak-group", "Countermeasures")};
     const string world_group = {tr("tweak-group", "World")};
@@ -3224,6 +3226,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         {ship_systems_group, {}},
         {player_group, {}},
         {sensors_group, {}},
+        {drones_group, {}},
         {comms_docking_group, {}},
         {countermeasures_group, {}},
         {world_group, {}},
@@ -4900,12 +4903,17 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     new_page->description = tr("tweak-drone-controller", "Allows this entity to control other entities that have the Drone link component. Sets the range within which drones can be controlled, and the energy drained per second while controlling a drone.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Control range:"), DroneController, control_range);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy drain/sec:"), DroneController, energy_drain_per_sec);
-    addPageToGroup(sensors_group);
+    addPageToGroup(drones_group);
 
-    ADD_PAGE(tr("tweak-tab", "Drone link"), AllowDroneLink);
-    new_page->description = tr("tweak-drone-link", "Marks this entity as a drone that can be controlled by an entity with the Drone controller component. Sets the owner ship that can control this drone.");
+    ADD_PAGE(tr("tweak-tab", "Drone link"), DroneLink);
+    new_page->description = tr("tweak-drone-link", "Links this ship to a controllable drone entity that has the Allow drone link component.");
+    ADD_ENTITY_TWEAK(tr("tweak-text", "Linked drone:"), DroneLink, linked_drone);
+    addPageToGroup(drones_group);
+
+    ADD_PAGE(tr("tweak-tab", "Allow drone link"), AllowDroneLink);
+    new_page->description = tr("tweak-drone-link", "Marks this entity as a drone that can be controlled by an entity with the Drone controller component. Sets the owner ship that can establish a Drone link with this drone.");
     ADD_ENTITY_TWEAK(tr("tweak-text", "Owner:"), AllowDroneLink, owner);
-    addPageToGroup(sensors_group);
+    addPageToGroup(drones_group);
 
     ADD_PAGE(tr("tweak-tab", "Docking bay system"), DockingBaySystem);
     new_page->description = tr("tweak-docking-bay-system", "Ship system for docking bay operations. Affects the speed of docking operations based on system health.");
@@ -4982,6 +4990,23 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Complexity (sliders):"), ScanState, complexity);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Depth (wins required):"), ScanState, depth);
     addPageToGroup(sensors_group);
+
+    ADD_PAGE(tr("tweak-tab", "Science description"), ScienceDescription);
+    new_page->description = tr("tweak-science-description", "Science descriptions shown at different scan levels.");
+    ADD_TEXT_TWEAK(tr("tweak-text", "Not scanned:"), ScienceDescription, not_scanned);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Friend or foe identified:"), ScienceDescription, friend_or_foe_identified);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Simple scan:"), ScienceDescription, simple_scan);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Full scan:"), ScienceDescription, full_scan);
+    addPageToGroup(sensors_group);
+
+    ADD_PAGE(tr("tweak-tab", "Briefing"), Briefing);
+    new_page->description = tr("tweak-briefing", "A sequence of pages displayed on the BriefingScreen. Each page can show a caption and image, and optionally play audio and auto-advance after a duration.");
+    ADD_VECTOR(tr("tweak-text", "Page:"), Briefing, pages);
+    ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Caption:"), Briefing, pages, caption);
+    ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Image:"), Briefing, pages, image);
+    ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Audio:"), Briefing, pages, audio);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Duration (sec):"), Briefing, pages, duration);
+    addPageToGroup(player_group);
 
     for (GuiTweakPage* page : pages)
     {
