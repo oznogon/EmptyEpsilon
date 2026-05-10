@@ -40,7 +40,6 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DOCKING_BAY_SCREEN", GuiTheme::getColor("background")),
   selected_entity(sp::ecs::Entity())
 {
-
     // Render the background decorations.
     (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
@@ -76,7 +75,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAttribute("layout", "vertical");
 
     // Left column: Docking bay berths
-    (new GuiLabel(left_column, "DOCKING_BAY_BERTHS_LABEL", tr("Berths"), 30.0f))
+    (new GuiLabel(left_column, "DOCKING_BAY_BERTHS_LABEL", tr("dockingbay", "Berths"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -105,7 +104,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiElement(top_row, "SPACER"))->setSize(250.0f, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(docking_bay_info_layout, "DOCKING_BAY_INFO_LABEL", tr("Selected berth"), 30.0f))
+    (new GuiLabel(docking_bay_info_layout, "DOCKING_BAY_INFO_LABEL", tr("dockingbay", "Selected berth"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -158,7 +157,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, kv_size);
 
     // Right column, bottom row
-    (new GuiLabel(right_column, "DOCKING_BAY_BERTH_LABEL", tr("Berth operations"), 30.0f))
+    (new GuiLabel(right_column, "DOCKING_BAY_BERTH_LABEL", tr("dockingbay", "Berth operations"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -778,19 +777,20 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, kv_size)
         ->setAttribute("layout", "horizontal");
 
-    generate_supply_drop = new GuiButton(supply_controls_row, "DOCKING_BAY_SUPPLY_DROP", "Generate supply drop",
-    [this]()
-    {
-        if (!my_spaceship || !my_player_info) return;
-        auto bay = my_spaceship.getComponent<DockingBay>();
-        if (!bay) return;
-        if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
-        if (bay->berths[selected_berth_index].docked_entity != sp::ecs::Entity()) return;
+    generate_supply_drop = new GuiButton(supply_controls_row, "DOCKING_BAY_SUPPLY_DROP", tr("dockingbay", "Generate supply drop"),
+        [this]()
+        {
+            if (!my_spaceship || !my_player_info) return;
+            auto bay = my_spaceship.getComponent<DockingBay>();
+            if (!bay) return;
+            if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
+            if (bay->berths[selected_berth_index].docked_entity != sp::ecs::Entity()) return;
 
-        // Call the Lua SupplyDrop() function
-        my_player_info->commandGenerateSupplyDrop(selected_berth_index);
-    });
-    generate_supply_drop->setSize(350.0f, kv_size);
+            // Call the Lua SupplyDrop() function
+            my_player_info->commandGenerateSupplyDrop(selected_berth_index);
+        }
+    );
+    generate_supply_drop->setSize(300.0f, 50.0f);
 
     // Storage-specific berth controls.
     storage_controls = new GuiElement(right_column, "DOCKING_BAY_STORAGE_CONTROLS");
@@ -799,7 +799,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(storage_controls, "DOCKING_BAY_STORAGE_LABEL", tr("Storage operations"), 30.0f))
+    (new GuiLabel(storage_controls, "DOCKING_BAY_STORAGE_LABEL", tr("dockingbay", "Storage operations"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -929,6 +929,14 @@ void DockingBayScreen::selectBerth(int berth_index)
             supply_controls->show();
             repair_controls->hide();
             storage_controls->hide();
+            {
+                // Allow supply berth to generate supply drops only if Cargo
+                // class can dock internally.
+                bool can_generate = false;
+                if (auto bay = my_spaceship.getComponent<DockingBay>())
+                    can_generate = bay->internal_dock_classes.find(tr("class", "Cargo")) != bay->internal_dock_classes.end();
+                generate_supply_drop->setVisible(can_generate);
+            }
             break;
         case DockingBay::Berth::Type::Repair:
             hangar_controls->hide();
@@ -988,7 +996,7 @@ void DockingBayScreen::updateBerthsLabels()
         // Number the panel and set berth type info
         const int idx = static_cast<int>(i);
         docking_bay_berths
-            ->setCustomLabel(idx, 0, tr("Berth {i}").format({{"i", static_cast<string>(idx + 1)}}))
+            ->setCustomLabel(idx, 0, tr("dockingbay", "Berth {i}").format({{"i", static_cast<string>(idx + 1)}}))
             ->setCustomIcon(idx, 1, bay->getTypeIcon(berth.type))
             ->setCustomLabel(idx, 2, bay->getTypeName(berth.type));
 
@@ -1051,7 +1059,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
 
     selected_entity_info
         ->setEntity(selected_entity)
-        ->setCustomLabel(0, tr("Berth {i}").format({{"i", selected_berth_index + 1}}))
+        ->setCustomLabel(0, tr("dockingbay", "Berth {i}").format({{"i", selected_berth_index + 1}}))
         ->setCustomIcon(1, type_icon)
         ->setCustomLabel(2, type_name);
     energy_transfer_direction->setValue(static_cast<float>(selected_berth.transfer_direction));
