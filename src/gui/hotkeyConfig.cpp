@@ -334,7 +334,7 @@ Keys::Keys() :
     // Spectator screen
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
 
-    // Probe control screen
+    // Probe camera screen
     probe_turn_left("PROBE_TURN_LEFT", "Left"),
     probe_turn_right("PROBE_TURN_RIGHT", "Right"),
 
@@ -548,9 +548,9 @@ void Keys::init()
     // Spectator screen
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));
 
-    // Probe control screen
-    probe_turn_left.setLabel(tr("hotkey_menu", "Probe control"), tr("hotkey_ProbeControl", "Turn left"));
-    probe_turn_right.setLabel(tr("hotkey_menu", "Probe control"), tr("hotkey_ProbeControl", "Turn right"));
+    // Probe camera screen
+    probe_turn_left.setLabel(tr("hotkey_menu", "Probe camera"), tr("hotkey_ProbeCamera", "Turn left"));
+    probe_turn_right.setLabel(tr("hotkey_menu", "Probe camera"), tr("hotkey_ProbeCamera", "Turn right"));
 
     // Briefing screen
     briefing_next_page.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Next page"));
