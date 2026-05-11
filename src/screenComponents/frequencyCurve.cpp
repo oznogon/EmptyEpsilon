@@ -107,8 +107,8 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-void GuiFrequencyCurve::drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect parent_rect, sp::RenderTarget& window)
+void GuiFrequencyCurve::drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::RenderTarget& window)
 {
     this->mouse_position = mouse_position;
-    GuiContainer::drawElements(mouse_position, hovered_element, parent_rect, window);
+    GuiContainer::drawElements(mouse_position, hovered_element, window);
 }

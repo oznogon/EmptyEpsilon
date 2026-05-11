@@ -258,7 +258,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
     // Force a hard limit on status bar width in wide views.
     if (view_size.x > 1360.0f)
     {
-        status_bar->layout.fill_width = false;
+        status_bar->getLayout().fill_width = false;
         status_bar->setSize(panel_size.x * 4.0f, status_bar_height);
     }
     else status_bar->setSize(GuiElement::GuiSizeMax, status_bar_height);

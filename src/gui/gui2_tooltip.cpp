@@ -10,8 +10,8 @@ static constexpr float long_interaction_duration = 0.5f;
 static bool isTreeHoveredOrPressed(GuiElement* element)
 {
     if (element->isHovered() || element->isPressed()) return true;
-    for (auto* child : element->children)
-        if (isTreeHoveredOrPressed(child)) return true;
+    for (auto& child_ptr : element->getChildren())
+        if (isTreeHoveredOrPressed(child_ptr.get())) return true;
     return false;
 }
 
@@ -101,7 +101,7 @@ void GuiTooltip::onUpdate()
         if (watched->isPressed()) target = frozen_position;
         else
         {
-            GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(owner);
+            GuiCanvas* canvas = getRootCanvas();
             target = (canvas ? canvas->getMousePosition() : glm::vec2{0, 0}) + pixel_offset;
 
             // If size is fixed, clamp position to keep the tooltip on screen.

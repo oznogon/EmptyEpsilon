@@ -208,7 +208,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         }
 
         if (themes.size() > 1) {
-            (new GuiLabel(interface_left_column, "GUI_THEME_OPTIONS_LABEL", tr("Interface theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
+            (new GuiLabel(interface_left_column, "GUI_THEME_OPTIONS_LABEL", tr("Interface theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->getLayout().margin.top = 20;
             (new GuiSelector(interface_left_column, "GUI_THEME_SELECTOR", [](int index, string theme_name)
             {
                 GuiTheme::setCurrentTheme(theme_name);
@@ -430,7 +430,7 @@ void OptionsMenu::setupAudioOptions()
     sound_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music playback state.
-    (new GuiLabel(left, "MUSIC_PLAYBACK_LABEL", tr("Music Playback"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;;
+    (new GuiLabel(left, "MUSIC_PLAYBACK_LABEL", tr("Music Playback"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->getLayout().margin.top = 20;;
 
     // Determine when music is enabled.
     int music_enabled_index = PreferencesManager::get("music_enabled", "2").toInt();
@@ -455,7 +455,7 @@ void OptionsMenu::setupAudioOptions()
     music_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Engine playback state.
-    (new GuiLabel(left, "IMPULSE_SOUND_LABEL", tr("Impulse Engine sound"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;;
+    (new GuiLabel(left, "IMPULSE_SOUND_LABEL", tr("Impulse Engine sound"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->getLayout().margin.top = 20;;
 
     // Determine when engine sound effects are enabled.
     int impulse_enabled_index = PreferencesManager::get("impulse_sound_enabled", "2").toInt();

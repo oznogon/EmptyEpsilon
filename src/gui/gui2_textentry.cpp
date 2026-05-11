@@ -390,15 +390,17 @@ void GuiTextEntry::onFocusLost()
     SDL_StopTextInput();
 }
 
-void GuiTextEntry::setAttribute(const string& key, const string& value)
+bool GuiTextEntry::setAttribute(const string& key, const string& value)
 {
     if (key == "style") {
         front_style = theme->getStyle(value + ".front");
         back_style = theme->getStyle(value + ".back");
+        return true;
     } else if (key == "readonly") {
         readonly = value.toBool();
+        return true;
     } else {
-        GuiElement::setAttribute(key, value);
+        return GuiElement::setAttribute(key, value);
     }
 }
 

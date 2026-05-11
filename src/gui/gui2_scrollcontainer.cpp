@@ -51,10 +51,10 @@ void GuiScrollContainer::scrollToOffset(float pixel_offset)
     scrollbar_v->setValue(static_cast<int>(scroll_offset));
 }
 
-void GuiScrollContainer::updateLayout(const sp::Rect& rect)
+void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
 {
-    this->rect = rect;
-    visible_height = rect.size.y - layout.padding.top - layout.padding.bottom;
+    this->rect = bounds;
+    visible_height = bounds.size.y - layout.padding.top - layout.padding.bottom;
 
     // Clamp scroll_offset using last frame's content_height to validate the
     // value passed to the layout manager.
@@ -104,12 +104,13 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
     // Compute content_height. Child elements are scrolled, so add
     // scroll_offset from extents.
     float max_bottom = 0.0f;
-    for (GuiElement* child : children)
+    for (auto& child_ptr : children)
     {
+        GuiElement* child = child_ptr.get();
         if (child == scrollbar_v) continue;
         if (!child->isVisible()) continue;
 
-        const float bottom = child->getRect().position.y + child->getRect().size.y + child->layout.margin.bottom - rect.position.y + scroll_offset;
+        const float bottom = child->getRect().position.y + child->getRect().size.y + child->getLayout().margin.bottom - rect.position.y + scroll_offset;
         if (bottom > max_bottom) max_bottom = bottom;
     }
     content_height = max_bottom + layout.padding.bottom;
@@ -124,7 +125,7 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
         ->setValue(static_cast<int>(scroll_offset));
 }
 
-void GuiScrollContainer::drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect /* parent_rect */, sp::RenderTarget& renderer)
+void GuiScrollContainer::drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::RenderTarget& renderer)
 {
     sp::Rect content_rect = getContentRect();
 
@@ -133,42 +134,19 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, GuiElement* hove
 
     // Draw each child element and pass mouse events, skipping this container's
     // scrollbar.
-    for (auto it = children.begin(); it != children.end(); )
+    for (auto& element_ptr : children)
     {
-        GuiElement* element = *it;
-
+        GuiElement* element = element_ptr.get();
         if (element == scrollbar_v)
-        {
-            ++it;
             continue;
-        }
 
-        if (element->isDestroyed())
-        {
-            if (pressed_element == element)
-                pressed_element = nullptr;
-            if (focused_element == element)
-                focused_element = nullptr;
-
-            GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(element->getTopLevelContainer());
-            if (canvas) canvas->unfocusElementTree(element);
-
-            it = children.erase(it);
-            clearElementOwner(element);
-            delete element;
-
-            continue;
-        }
-
-        setElementHover(element, element == hovered_element);
+        element->setHover(element == hovered_element);
 
         if (element->isVisible())
         {
             element->onDraw(renderer);
-            callDrawElements(element, mouse_position, hovered_element, element->getRect(), renderer);
+            element->drawElements(mouse_position, hovered_element, renderer);
         }
-
-        ++it;
     }
 
     renderer.popClipRegion();
@@ -178,9 +156,9 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, GuiElement* hove
     scrollbar_v->setVisible(scrollbar_v->isVisible() && mode != ScrollMode::None);
     if (scrollbar_v->isVisible())
     {
-        setElementHover(scrollbar_v, scrollbar_v == hovered_element);
+        scrollbar_v->setHover(scrollbar_v == hovered_element);
         scrollbar_v->onDraw(renderer);
-        callDrawElements(scrollbar_v, mouse_position, hovered_element, scrollbar_v->getRect(), renderer);
+        scrollbar_v->drawElements(mouse_position, hovered_element, renderer);
     }
 }
 
@@ -192,7 +170,7 @@ GuiElement* GuiScrollContainer::getClickElement(sp::io::Pointer::Button button, 
         && scrollbar_v->getRect().contains(position)
     )
     {
-        GuiElement* clicked = callGetClickElement(scrollbar_v, button, position, id);
+        GuiElement* clicked = scrollbar_v->getClickElement(button, position, id);
         if (clicked) return clicked;
         if (scrollbar_v->onMouseDown(button, position, id)) return scrollbar_v;
     }
@@ -204,7 +182,7 @@ GuiElement* GuiScrollContainer::getClickElement(sp::io::Pointer::Button button, 
     // use it.
     for (auto it = children.rbegin(); it != children.rend(); ++it)
     {
-        GuiElement* element = *it;
+        GuiElement* element = it->get();
 
         // We already handled the scrollbar.
         if (element == scrollbar_v) continue;
@@ -212,7 +190,7 @@ GuiElement* GuiScrollContainer::getClickElement(sp::io::Pointer::Button button, 
         if (!element->isVisible() || !element->isEnabled()) continue;
 
         // Figure out if we can click the element. If so, focus it and click it.
-        GuiElement* clicked = callGetClickElement(element, button, position, id);
+        GuiElement* clicked = element->getClickElement(button, position, id);
         if (clicked)
         {
             switchFocusTo(clicked);
@@ -242,7 +220,7 @@ void GuiScrollContainer::switchFocusTo(GuiElement* new_element)
 
     if (focused_element)
     {
-        setElementFocus(focused_element, false);
+        focused_element->setFocus(false);
         focused_element->onFocusLost();
     }
 
@@ -254,7 +232,7 @@ void GuiScrollContainer::switchFocusTo(GuiElement* new_element)
     // onFocusGained after getClickElement returns, which will forward it.
     if (focus)
     {
-        setElementFocus(focused_element, true);
+        focused_element->setFocus(true);
         focused_element->onFocusGained();
     }
 }
@@ -263,7 +241,7 @@ void GuiScrollContainer::onFocusGained()
 {
     if (focused_element)
     {
-        setElementFocus(focused_element, true);
+        focused_element->setFocus(true);
         focused_element->onFocusGained();
     }
 }
@@ -272,7 +250,7 @@ void GuiScrollContainer::onFocusLost()
 {
     if (focused_element)
     {
-        setElementFocus(focused_element, false);
+        focused_element->setFocus(false);
         focused_element->onFocusLost();
         focused_element = nullptr;
     }
@@ -293,7 +271,6 @@ bool GuiScrollContainer::onMouseDown(sp::io::Pointer::Button button, glm::vec2 p
     if (pressed_element)
     {
         pressed_element->onMouseDown(button, position, id);
-        pressed_element = nullptr;
         return true;
     }
 
@@ -321,7 +298,7 @@ GuiElement* GuiScrollContainer::executeScrollOnElement(glm::vec2 position, float
         && scrollbar_v->isEnabled()
         && scrollbar_v->getRect().contains(position))
     {
-        GuiElement* scrolled = callExecuteScrollOnElement(scrollbar_v, position, value);
+        GuiElement* scrolled = scrollbar_v->executeScrollOnElement(position, value);
         if (scrolled) return scrolled;
         // Handle mousewheel scroll, if any.
         if (scrollbar_v->onMouseWheelScroll(position, value)) return scrollbar_v;
@@ -334,7 +311,7 @@ GuiElement* GuiScrollContainer::executeScrollOnElement(glm::vec2 position, float
     // scroll event, give it to them.
     for (auto it = children.rbegin(); it != children.rend(); ++it)
     {
-        GuiElement* element = *it;
+        GuiElement* element = it->get();
         if (element == scrollbar_v) continue;
 
         if (element
@@ -343,7 +320,7 @@ GuiElement* GuiScrollContainer::executeScrollOnElement(glm::vec2 position, float
             && element->getRect().contains(position)
         )
         {
-            GuiElement* scrolled = callExecuteScrollOnElement(element, position, value);
+            GuiElement* scrolled = element->executeScrollOnElement(position, value);
             if (scrolled) return scrolled;
             if (element->onMouseWheelScroll(position, value)) return element;
         }

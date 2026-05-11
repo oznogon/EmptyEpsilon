@@ -172,8 +172,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", glm::u8vec4(255, 255, 255, 32));
-    box_selection_overlay->layout.fill_height = false;
-    box_selection_overlay->layout.fill_width = false;
+    box_selection_overlay->getLayout().fill_height = false;
+    box_selection_overlay->getLayout().fill_width = false;
     box_selection_overlay->hide();
 
     pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [this](bool value) {

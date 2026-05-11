@@ -1,6 +1,6 @@
 #pragma once
 
-#include <list>
+#include <vector>
 #include <memory>
 #include "rect.h"
 #include "nonCopyable.h"
@@ -42,21 +42,29 @@ public:
         bool fill_width = false;
         bool fill_height = false;
         bool lock_aspect_ratio = false;
+        // Defaulting to true means containers auto-size to fit their children
+        // unless explicitly given a fixed size. Callers setting layout.size
+        // directly should also set this to false.
         bool match_content_size = true;
     };
 
     GuiContainer() = default;
     virtual ~GuiContainer();
 
-    // Public data
-    LayoutInfo layout;
-    std::list<GuiElement*> children;
-
     // Public interfaces
     template<typename T> void setLayout() { layout_manager = std::make_unique<T>(); }
-    virtual void updateLayout(const sp::Rect& rect);
-    virtual void setAttribute(const string& key, const string& value);
+    virtual void updateLayout(const sp::Rect& bounds);
+    virtual bool setAttribute(const string& key, const string& value);
     const sp::Rect& getRect() const { return rect; }
+    const std::vector<std::unique_ptr<GuiElement>>& getChildren() const { return children; }
+    size_t getChildCount() const { return children.size(); }
+
+    LayoutInfo& getLayout() { return layout; }
+    const LayoutInfo& getLayout() const { return layout; }
+
+protected:
+    LayoutInfo layout;
+    std::vector<std::unique_ptr<GuiElement>> children;
 
 protected:
     GuiTheme* theme;
@@ -65,20 +73,17 @@ protected:
     sp::Rect rect{0,0,0,0};
     std::unique_ptr<GuiLayout> layout_manager = nullptr;
 
-    // Protected interfaces
-    virtual void drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect parent_rect, sp::RenderTarget& window);
-    virtual void drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& window);
+    void cleanTree();
+
+    template<typename RecurseFunc, typename TestFunc>
+    GuiElement* dispatchToChildren(glm::vec2 position, RecurseFunc recurse, TestFunc test);
+
+    friend class GuiElement;
+
+public:
+    virtual void drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::RenderTarget& window);
+    virtual void drawDebugElements(sp::RenderTarget& window);
     virtual GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
     virtual GuiElement* executeScrollOnElement(glm::vec2 position, float value);
     virtual GuiElement* getHoverElement(glm::vec2 mouse_position);
-
-    // Access GuiElement/GuiContainer protected members in subclass.
-    static void clearElementOwner(GuiElement* element);
-    static void setElementHover(GuiElement* element, bool has_hover);
-    static void setElementFocus(GuiElement* element, bool has_focus);
-    static void callDrawElements(GuiContainer* container, glm::vec2 mouse_pos, GuiElement* hovered_element, sp::Rect rect, sp::RenderTarget& render_target);
-    static GuiElement* callGetClickElement(GuiContainer* container, sp::io::Pointer::Button button, glm::vec2 pos, sp::io::Pointer::ID id);
-    static GuiElement* callExecuteScrollOnElement(GuiContainer* container, glm::vec2 pos, float value);
-
-    friend class GuiElement;
 };

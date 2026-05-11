@@ -23,10 +23,10 @@ LuaConsole::LuaConsole()
     open_console_key.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
     top = new GuiOverlay(this, "", {0, 0, 0, 192});
-    top->layout.fill_height = false;
-    top->layout.size.y = 450;
-    top->layout.margin.left = 50;
-    top->layout.margin.right = 50;
+    top->getLayout().fill_height = false;
+    top->getLayout().size.y = 450;
+    top->getLayout().margin.left = 50;
+    top->getLayout().margin.right = 50;
     top->setAttribute("layout", "vertical");
 
     log = new GuiTextEntry(top, "", "");
@@ -37,8 +37,8 @@ LuaConsole::LuaConsole()
     log->setAttribute("readonly", "true");
     entry = new GuiTextEntry(top, "", "");
     entry->setAttribute("style", "luaconsole.entry");
-    entry->layout.fill_width = true;
-    entry->layout.size.y = 20;
+    entry->getLayout().fill_width = true;
+    entry->getLayout().size.y = 20;
     entry->setTextSize(12);
     entry->enterCallback([this](string s) {
         if (gameGlobalInfo) {
@@ -76,7 +76,7 @@ void LuaConsole::addLog(const string& message)
         console->message_show_timers.emplace_back();
         console->message_show_timers.back().start(5.0f);
         auto linespace = console->log->getLineSpacing();
-        console->top->layout.size.y = std::min(450.0f, (0.3f + console->message_show_timers.size()) * linespace);
+        console->top->getLayout().size.y = std::min(450.0f, (0.3f + console->message_show_timers.size()) * linespace);
         console->top->show();
         console->top->setEnable(false);
     }
@@ -91,7 +91,7 @@ void LuaConsole::update(float delta)
             entry->hide();
         } else {
             is_open = true;
-            top->layout.size.y = 450;
+            top->getLayout().size.y = 450;
             message_show_timers.clear();
             top->show();
             top->setEnable(true);
@@ -104,7 +104,7 @@ void LuaConsole::update(float delta)
             top->hide();
         } else {
             auto linespace = console->log->getLineSpacing();
-            top->layout.size.y = std::min(450.0f, (0.3f + message_show_timers.size()) * linespace);
+            top->getLayout().size.y = std::min(450.0f, (0.3f + message_show_timers.size()) * linespace);
         }
     }
 }

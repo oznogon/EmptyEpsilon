@@ -329,7 +329,7 @@ void GuiCommsOverlay::onUpdate()
         // Chat window has just opened, let's auto-focus the text input.
         if (is_open && !chat_open_last_update)
         {
-            if (auto canvas = dynamic_cast<GuiCanvas*>(getTopLevelContainer()))
+            if (auto canvas = getRootCanvas())
                 canvas->focus(chat_comms_message_entry);
         }
         chat_open_last_update = is_open;

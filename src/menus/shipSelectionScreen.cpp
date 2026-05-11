@@ -438,7 +438,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             tr("shipSelect", "Modify server-wide settings, such as minigame difficulty and common ship features."));
     }
 
-    right_panel->setSize(GuiElement::GuiSizeMax, 30 + right_panel->children.size() * 50);
+    right_panel->setSize(GuiElement::GuiSizeMax, 30 + right_panel->getChildCount() * 50);
 
     right_panel_2 = new GuiPanel(right_column, "RIGHT_PANEL_2");
     right_panel_2->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

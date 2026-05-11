@@ -1,9 +1,7 @@
-#ifndef GUI2_CANVAS_H
-#define GUI2_CANVAS_H
+#pragma once
 
 #include "Renderable.h"
 #include "gui2_container.h"
-
 
 class GuiLayout;
 class GuiCanvas : public Renderable, public GuiContainer
@@ -35,6 +33,9 @@ public:
 
 private:
     void runUpdates(GuiContainer* parent);
+#ifdef DEBUG
+public:
+    void renderDebugDumps();
+#endif
 };
 
-#endif//GUI2_CANVAS_H

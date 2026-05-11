@@ -10,6 +10,7 @@
 #include "io/textinput.h"
 
 class Layout;
+class GuiCanvas;
 
 class GuiElement : public GuiContainer
 {
@@ -18,6 +19,7 @@ private:
     bool pressed = false;
 protected:
     GuiContainer* owner;
+    GuiCanvas* root_canvas = nullptr;
     bool visible = true;
     bool enabled = true;
     bool hover = false;
@@ -53,7 +55,7 @@ public:
     virtual void onFocusGained() {}
     virtual void onFocusLost() {}
 
-    virtual void setAttribute(const string& key, const string& value) override;
+    virtual bool setAttribute(const string& key, const string& value) override;
     GuiElement* setSize(glm::vec2 size);
     GuiElement* setSize(float x, float y);
     glm::vec2 getSize() const;
@@ -81,14 +83,17 @@ public:
 
     GuiContainer* getOwner();
     GuiContainer* getTopLevelContainer();
+    GuiCanvas* getRootCanvas() const { return root_canvas; }
     const string& getID() { return id; }
 
     // Change this element's owner/container safely (removes from old owner and adds to new owner)
     GuiElement* setParent(GuiContainer* new_owner);
     // Return if the element has cursor hover state.
     bool isHovered() const { return hover; }
+    void setHover(bool has_hover) { hover = has_hover; }
     // Return if the element has pressed (click/tap and hold) state.
     bool isPressed() const { return pressed; }
+    void setFocus(bool has_focus) { focus = has_focus; }
 
     //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
     void destroy();

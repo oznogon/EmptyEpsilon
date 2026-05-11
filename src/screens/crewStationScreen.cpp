@@ -362,13 +362,13 @@ void CrewStationScreen::tileViewport()
     if (current_position == CrewPosition::singlePilot || current_position == CrewPosition::droneOperations)
     {
         main_panel->setSize(1000.0f, GuiElement::GuiSizeMax);
-        main_panel->layout.fill_width = false;
+        main_panel->getLayout().fill_width = false;
         viewport->setPosition(1000.0f, 0.0f, sp::Alignment::TopLeft);
     }
     else
     {
         main_panel->setSize(1200.0f, GuiElement::GuiSizeMax);
-        main_panel->layout.fill_width = false;
+        main_panel->getLayout().fill_width = false;
         viewport->setPosition(1200.0f, 0.0f, sp::Alignment::TopLeft);
     }
 }

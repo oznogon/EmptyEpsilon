@@ -6,9 +6,15 @@
 GuiElement::GuiElement(GuiContainer* owner, const string& id)
 : owner(owner), id(id)
 {
-    owner->children.push_back(this);
+    owner->children.emplace_back(this);
     destroyed = false;
     theme = owner->theme;
+
+    // Cache the root canvas pointer to avoid dynamic_cast per lookup.
+    GuiContainer* top = owner;
+    while (dynamic_cast<GuiElement*>(top) != nullptr)
+        top = dynamic_cast<GuiElement*>(top)->getOwner();
+    root_canvas = dynamic_cast<GuiCanvas*>(top);
 }
 
 GuiElement::~GuiElement()
@@ -45,14 +51,22 @@ void GuiElement::onTextInput(sp::TextInputEvent e)
 {
 }
 
-void GuiElement::setAttribute(const string& key, const string& value)
+bool GuiElement::setAttribute(const string& key, const string& value)
 {
     if (key == "visible")
+    {
         setVisible(value.toBool());
+        return true;
+    }
     else if (key == "enabled")
+    {
         setEnable(value.toBool());
+        return true;
+    }
     else
-        GuiContainer::setAttribute(key, value);
+    {
+        return GuiContainer::setAttribute(key, value);
+    }
 }
 
 GuiElement* GuiElement::setSize(glm::vec2 size)
@@ -119,13 +133,17 @@ GuiElement* GuiElement::setParent(GuiContainer* new_parent)
         if (new_parent && old_owner != new_parent)
         {
             // Remove from old owner's children list.
-            old_owner->children.remove(this);
-
-            // Add to new owner's children list.
-            new_parent->children.push_back(this);
-
-            // Update owner pointer.
-            this->owner = new_parent;
+            auto it = std::find_if(old_owner->children.begin(), old_owner->children.end(),
+                [this](const std::unique_ptr<GuiElement>& ptr) { return ptr.get() == this; });
+            if (it != old_owner->children.end())
+            {
+                std::unique_ptr<GuiElement> ptr = std::move(*it);
+                old_owner->children.erase(it);
+                // Add to new owner's children list.
+                new_parent->children.push_back(std::move(ptr));
+                // Update owner pointer.
+                this->owner = new_parent;
+            }
         }
         else
             LOG(Debug, "GuiElement::setParent called, but new parent is invalid.");
@@ -214,8 +232,14 @@ void GuiElement::moveToFront()
 {
     if (owner)
     {
-        owner->children.remove(this);
-        owner->children.push_back(this);
+        auto it = std::find_if(owner->children.begin(), owner->children.end(),
+            [this](const std::unique_ptr<GuiElement>& ptr) { return ptr.get() == this; });
+        if (it != owner->children.end())
+        {
+            std::unique_ptr<GuiElement> ptr = std::move(*it);
+            owner->children.erase(it);
+            owner->children.push_back(std::move(ptr));
+        }
     }
 }
 
@@ -223,8 +247,14 @@ void GuiElement::moveToBack()
 {
     if (owner)
     {
-        owner->children.remove(this);
-        owner->children.push_front(this);
+        auto it = std::find_if(owner->children.begin(), owner->children.end(),
+            [this](const std::unique_ptr<GuiElement>& ptr) { return ptr.get() == this; });
+        if (it != owner->children.end())
+        {
+            std::unique_ptr<GuiElement> ptr = std::move(*it);
+            owner->children.erase(it);
+            owner->children.insert(owner->children.begin(), std::move(ptr));
+        }
     }
 }
 

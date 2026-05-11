@@ -34,7 +34,7 @@ public:
 
     // Override layout updates to update child elements and juggle scrollbar
     // visibility.
-    virtual void updateLayout(const sp::Rect& rect) override;
+    virtual void updateLayout(const sp::Rect& bounds) override;
     // Handle mousewheel scroll, with behavior depending on the ScrollMode.
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
     // Pass mouse down to child elements, but only if they're visible.
@@ -55,7 +55,7 @@ public:
 protected:
     // Draw elements if they're in view. Translate mouse positions by the scroll
     // amount.
-    virtual void drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect parent_rect, sp::RenderTarget& renderer) override;
+    virtual void drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::RenderTarget& renderer) override;
     // Find the clicked element, checking children of this container if they're
     // visible.
     virtual GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;

@@ -7,26 +7,28 @@ void GuiLayoutVertical::update(GuiContainer& container, const sp::Rect& rect)
 {
     float total_height = 0.0f;
     float fill_height = 0.0f;
-    for(GuiElement* w : container.children)
+    for(auto& w_ptr : container.getChildren())
     {
+        GuiElement* w = w_ptr.get();
         if (w->isDestroyed() || !w->isVisible())
             continue;
-        float height = w->layout.size.y + w->layout.margin.top + w->layout.margin.bottom;
+        float height = w->getLayout().size.y + w->getLayout().margin.top + w->getLayout().margin.bottom;
         total_height += height;
-        if (w->layout.fill_height)
-            fill_height += w->layout.size.y;
+        if (w->getLayout().fill_height)
+            fill_height += w->getLayout().size.y;
     }
     float remaining_height = rect.size.y - total_height;
     float y = rect.position.y;
-    for(GuiElement* w : container.children)
+    for(auto& w_ptr : container.getChildren())
     {
+        GuiElement* w = w_ptr.get();
         if (w->isDestroyed() || !w->isVisible())
             continue;
-        float height = w->layout.size.y + w->layout.margin.top + w->layout.margin.bottom;
-        if (w->layout.fill_height && fill_height > 0.0f)
-            height += remaining_height * w->layout.size.y / fill_height;
+        float height = w->getLayout().size.y + w->getLayout().margin.top + w->getLayout().margin.bottom;
+        if (w->getLayout().fill_height && fill_height > 0.0f)
+            height += remaining_height * w->getLayout().size.y / fill_height;
         basicLayout({rect.position.x, y, rect.size.x, height}, *w);
-        y = w->getRect().position.y + w->getRect().size.y + w->layout.margin.bottom;
+        y = w->getRect().position.y + w->getRect().size.y + w->getLayout().margin.bottom;
     }
 }
 
@@ -34,25 +36,27 @@ void GuiLayoutVerticalBottom::update(GuiContainer& container, const sp::Rect& re
 {
     float total_height = 0.0f;
     float fill_height = 0.0f;
-    for(GuiElement* w : container.children)
+    for(auto& w_ptr : container.getChildren())
     {
+        GuiElement* w = w_ptr.get();
         if (w->isDestroyed() || !w->isVisible())
             continue;
-        float height = w->layout.size.y + w->layout.margin.top + w->layout.margin.bottom;
+        float height = w->getLayout().size.y + w->getLayout().margin.top + w->getLayout().margin.bottom;
         total_height += height;
-        if (w->layout.fill_height)
-            fill_height += w->layout.size.y;
+        if (w->getLayout().fill_height)
+            fill_height += w->getLayout().size.y;
     }
     float remaining_height = rect.size.y - total_height;
     float y = rect.position.y + rect.size.y;
-    for(GuiElement* w : container.children)
+    for(auto& w_ptr : container.getChildren())
     {
+        GuiElement* w = w_ptr.get();
         if (w->isDestroyed() || !w->isVisible())
             continue;
-        float height = w->layout.size.y + w->layout.margin.top + w->layout.margin.bottom;
-        if (w->layout.fill_height && fill_height > 0.0f)
-            height += remaining_height * w->layout.size.y / fill_height;
+        float height = w->getLayout().size.y + w->getLayout().margin.top + w->getLayout().margin.bottom;
+        if (w->getLayout().fill_height && fill_height > 0.0f)
+            height += remaining_height * w->getLayout().size.y / fill_height;
         basicLayout({rect.position.x, y - height, rect.size.x, height}, *w);
-        y = w->getRect().position.y - w->layout.margin.top;
+        y = w->getRect().position.y - w->getLayout().margin.top;
     }
 }

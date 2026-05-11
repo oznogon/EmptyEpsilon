@@ -28,7 +28,7 @@ public:
     GuiFrequencyCurve(GuiContainer* owner, string id, FrequencyType frequency_type, DamageEffect damage_effect);
 
     virtual void onDraw(sp::RenderTarget& target) override;
-    virtual void drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect parent_rect, sp::RenderTarget& window) override;
+    virtual void drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::RenderTarget& window) override;
 
     GuiFrequencyCurve* setFrequency(int frequency) { this->frequency = frequency; return this; }
 

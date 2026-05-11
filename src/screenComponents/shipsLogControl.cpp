@@ -86,3 +86,11 @@ bool ShipsLog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, s
     toggle();
     return true;
 }
+
+GuiElement* ShipsLog::getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
+{
+    GuiElement* child = GuiContainer::getClickElement(button, position, id);
+    if (child) return child;
+    if (rect.contains(position)) return this;
+    return nullptr;
+}
