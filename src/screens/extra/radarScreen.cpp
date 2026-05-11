@@ -14,7 +14,7 @@
 
 #include "gui/theme.h"
 #include "gui/gui2_image.h"
-#include "gui/gui2_listbox.h"
+#include "gui/gui2_selector.h"
 
 #include "components/collision.h"
 #include "components/radar.h"
@@ -80,7 +80,7 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
     );
 
     // Radar/database view toggle.
-    view_mode_selection = new GuiListbox(this, "VIEW_SELECTION",
+    view_mode_selection = new GuiSelector(this, "VIEW_SELECTION",
         [this](int index, string value)
         {
             setRadarMode(value);
@@ -92,7 +92,7 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
             {"Long range", "Short range", "Strategic"}
         )
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(200.0f, 200.0f);
+        ->setSize(200.0f, 50.0f);
 
     setRadarMode(type);
 

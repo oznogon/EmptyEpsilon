@@ -5,7 +5,7 @@
 
 class GuiRadarView;
 class GuiRadarZoomSlider;
-class GuiListbox;
+class GuiSelector;
 class RawScannerDataRadarOverlay;
 
 class RadarScreen : public GuiOverlay
@@ -18,7 +18,7 @@ private:
     GuiRadarView* probe_radar;
     RawScannerDataRadarOverlay* probe_signal_bands;
     GuiRadarZoomSlider* zoom_slider;
-    GuiListbox* view_mode_selection;
+    GuiSelector* view_mode_selection;
     string previous_radar_type;
     float previous_short_range = 0.0f;
     float previous_long_range = 0.0f;
