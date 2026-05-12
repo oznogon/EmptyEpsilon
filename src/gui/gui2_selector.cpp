@@ -3,6 +3,7 @@
 #include "theme.h"
 
 #include "gui2_arrowbutton.h"
+#include "gui2_canvas.h"
 #include "gui2_label.h"
 #include "gui2_panel.h"
 #include "gui2_scrollcontainer.h"
@@ -177,6 +178,12 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 void GuiSelector::onFocusLost()
 {
     // Hide the popup on a focus change outside of the popup rect.
-    if (!popup->getRect().contains(hover_coordinates))
+    // Use the canvas mouse position rather than this element's hover_coordinates,
+    // because the popup is attached to the top-level container and is not a
+    // child of the selector.
+    glm::vec2 mouse_pos = hover_coordinates;
+    if (GuiCanvas* canvas = getRootCanvas())
+        mouse_pos = canvas->getMousePosition();
+    if (!popup->getRect().contains(mouse_pos))
         popup->hide();
 }
