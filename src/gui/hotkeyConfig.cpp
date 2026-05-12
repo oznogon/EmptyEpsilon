@@ -580,14 +580,8 @@ void Keys::init()
     fullscreen_key.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     screenshot_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Take screenshot"));
     screenshot_key.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    /*
-    debug_modifier.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Debug modifier"));
-    debug_modifier.setSupportedInteractions(
-        sp::io::Keybinding::Interaction::Discrete |
-        sp::io::Keybinding::Interaction::Continuous
-    );
-    debug_modifier.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
-    */
+    debug_modifier.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Debug timing modifier"));
+    debug_modifier.setSupportedInteractions(sp::io::Keybinding::Interaction::Continuous);
     debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
     debug_show_fps.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));

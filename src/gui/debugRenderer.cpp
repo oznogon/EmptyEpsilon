@@ -109,8 +109,8 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
         // If we skipped any lines, draw a white line at the top for the total.
         if (skip) renderer.drawLine(points, 1.0f, {255, 255, 255, 255});
 
-        //60FPS line
-        renderer.drawLine({0, window_size.y - 16.6f*scale}, {window_size.x, window_size.y - 16.6f*scale}, glm::u8vec4{255,255,255,128});
+        // 60 FPS line
+        renderer.drawLine({0, window_size.y - 16.6f * scale}, {window_size.x, window_size.y - 16.6f * scale}, 2.0f, glm::u8vec4{255, 255, 255, 128});
 
         if (keys.debug_modifier.get())
             renderer.drawText(sp::Rect(0, 0, 0, 80), "(scale: " + string(scale, 1) + " px/ms)", sp::Alignment::BottomLeft, 16, nullptr, {255,255,255,255});
