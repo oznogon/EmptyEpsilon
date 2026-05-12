@@ -4,24 +4,25 @@
 #include "gui/gui2_overlay.h"
 #include "playerInfo.h"
 
+class DatabaseViewComponent;
+class GuiButton;
+class GuiCustomShipFunctions;
+class GuiFrequencyCurve;
+class GuiImage;
+class GuiKeyValueDisplay;
+class GuiLabel;
 class GuiListbox;
 class GuiRadarView;
-class GuiKeyValueDisplay;
-class GuiFrequencyCurve;
-class GuiScrollText;
-class GuiButton;
-class GuiScanTargetButton;
-class GuiToggleButton;
-class GuiSignalQualityIndicator;
-class GuiLabel;
-class GuiSelector;
 class GuiRadarZoomSlider;
-class GuiImage;
-class DatabaseViewComponent;
-class GuiCustomShipFunctions;
-class RawScannerDataRadarOverlay;
+class GuiScanTargetButton;
+class GuiScrollContainer;
+class GuiScrollText;
+class GuiSelector;
+class GuiSignalQualityIndicator;
+class GuiToggleButton;
 class GuiUtilityBeamControls;
 class GuiUtilityBeamRotationDial;
+class RawScannerDataRadarOverlay;
 
 class ScienceScreen : public GuiOverlay
 {
@@ -45,6 +46,9 @@ public:
 
     GuiSelector* sidebar_selector;
     GuiElement* info_sidebar;
+    GuiScrollContainer* sidebar_signals_page;
+    GuiScrollContainer* sidebar_frequencies_page;
+    GuiScrollContainer* sidebar_systems_page;
     GuiCustomShipFunctions* custom_function_sidebar;
     GuiUtilityBeamControls* utility_beam_sidebar;
     GuiSelector* sidebar_pager;

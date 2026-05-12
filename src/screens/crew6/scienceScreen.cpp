@@ -39,6 +39,7 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
+#include "gui/gui2_scrollcontainer.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_slider.h"
@@ -161,8 +162,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     });
 
     sidebar_selector->setOptions(
-        {tr("scienceTab", "Scanning"), tr("scienceTab", "Other")},
-        {"scan", "other"}
+        {tr("scienceTab", "Scanning")},
+        {"scan"}
     );
 
     if (utility_beam)
@@ -172,7 +173,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     }
 
     sidebar_selector
-        ->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Other")})
         ->setSelectionIndex(0)
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 50.0f);
@@ -302,51 +302,60 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Default the pager to the first item.
     sidebar_pager->setSelectionIndex(0);
 
+    sidebar_signals_page = new GuiScrollContainer(info_sidebar, "");
+    sidebar_signals_page
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide()
+        ->setAttribute("layout", "vertical");
+
+    sidebar_frequencies_page = new GuiScrollContainer(info_sidebar, "");
+    sidebar_frequencies_page
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide()
+        ->setAttribute("layout", "vertical");
+
+    sidebar_systems_page = new GuiScrollContainer(info_sidebar, "");
+    sidebar_systems_page
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide()
+        ->setAttribute("layout", "vertical");
+
     // Radar signature bands.
-    info_electrical_signal_band = new GuiSignalQualityIndicator(info_sidebar, "SCIENCE_ELECTRICAL_SIGNAL");
+    info_electrical_signal_band = new GuiSignalQualityIndicator(sidebar_signals_page, "SCIENCE_ELECTRICAL_SIGNAL");
     info_electrical_signal_band
         ->showGreen(false)
         ->showBlue(false)
-        ->setSize(GuiElement::GuiSizeMax, 80.0f)
-        ->hide();
+        ->setSize(GuiElement::GuiSizeMax, 80.0f);
     info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"), 30.0f);
     info_electrical_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    info_gravitational_signal_band = new GuiSignalQualityIndicator(info_sidebar, "SCIENCE_GRAVITY_SIGNAL");
+    info_gravitational_signal_band = new GuiSignalQualityIndicator(sidebar_signals_page, "SCIENCE_GRAVITY_SIGNAL");
     info_gravitational_signal_band
         ->showRed(false)
         ->showGreen(false)
-        ->setSize(GuiElement::GuiSizeMax, 80.0f)
-        ->hide();
+        ->setSize(GuiElement::GuiSizeMax, 80.0f);
     info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
     info_gravitational_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    info_thermal_signal_band = new GuiSignalQualityIndicator(info_sidebar, "SCIENCE_THERMAL_SIGNAL");
+    info_thermal_signal_band = new GuiSignalQualityIndicator(sidebar_signals_page, "SCIENCE_THERMAL_SIGNAL");
     info_thermal_signal_band
         ->showRed(false)
         ->showBlue(false)
-        ->setSize(GuiElement::GuiSizeMax, 80.0f)
-        ->hide();
+        ->setSize(GuiElement::GuiSizeMax, 80.0f);
     info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", tr("Thermal"), 30.0f);
     info_thermal_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Prep and hide the frequency graphs.
-    info_shield_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_SHIELD_FREQUENCY", GuiFrequencyCurve::FrequencyType::Other, GuiFrequencyCurve::DamageEffect::Positive);
+    info_shield_frequency = new GuiFrequencyCurve(sidebar_frequencies_page, "SCIENCE_SHIELD_FREQUENCY", GuiFrequencyCurve::FrequencyType::Other, GuiFrequencyCurve::DamageEffect::Positive);
     info_shield_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    info_beam_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_BEAM_FREQUENCY", GuiFrequencyCurve::FrequencyType::Beam, GuiFrequencyCurve::DamageEffect::Negative);
-    info_beam_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    // Show shield and beam frequencies only if enabled by the server.
-    if (!gameGlobalInfo->use_beam_shield_frequencies)
-    {
-        info_shield_frequency->hide();
-        info_beam_frequency->hide();
-    }
+    info_beam_frequency = new GuiFrequencyCurve(sidebar_frequencies_page, "SCIENCE_BEAM_FREQUENCY", GuiFrequencyCurve::FrequencyType::Beam, GuiFrequencyCurve::DamageEffect::Negative);
+    info_beam_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // List each system's status.
     for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        info_system[n] = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75f, getLocaleSystemName(ShipSystem::Type(n)), "-");
+        info_system[n] = new GuiKeyValueDisplay(sidebar_systems_page, "SCIENCE_SYSTEM_" + string(n), 0.75f, getLocaleSystemName(ShipSystem::Type(n)), "-");
         info_system[n]
             ->setSize(GuiElement::GuiSizeMax, 30.0f)
             ->hide();
@@ -356,18 +365,23 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_description = new GuiScrollFormattedText(info_sidebar, "SCIENCE_DESC", "");
     info_description
         ->setTextSize(28.0f)
-        ->setMargins(20.0f, 0.0f, 0.0f, 0.0f)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->hide();
+        ->hide()
+        ->setAttribute("padding", "20, 0, 0, 0");
 
     // END info_sidebar
 
     // Utility sidebar.
-    utility_beam_sidebar = new GuiUtilityBeamControls(radar_view, crew_position, "UTILITY_BEAM_CONTROLS");
-    utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    utility_beam_sidebar = new GuiUtilityBeamControls(info_sidebar, crew_position, "UTILITY_BEAM_CONTROLS");
+    utility_beam_sidebar
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide()
+        ->setAttribute("layout", "vertical");
 
     utility_beam_dial = new GuiUtilityBeamRotationDial(science_radar, "UTILITY_BEAM_DIAL", science_radar);
-    utility_beam_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    utility_beam_dial
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
     // END utility_beam_sidebar
 
     // Prep and hide the database view.
@@ -528,14 +542,14 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     info_sidebar->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight);
     sidebar_selector
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
-        ->setVisible(current_width < 1435 && (sidebar_selector->getSelectionIndex() > 0 || custom_function_sidebar->hasEntries()));
+        ->setVisible((current_width < 1435 && sidebar_selector->entryCount() > 1) || (current_width >= 1435 && sidebar_selector->entryCount() > 2));
 
     if (current_width < 1435 || !custom_function_sidebar->hasEntries())
     {
         custom_function_sidebar
             ->setPosition(-20.0f, 210.0f, sp::Alignment::TopRight)
-            ->setVisible(sidebar_selector->getSelectionIndex() == 1);
-        info_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 0);
+            ->setVisible(current_width < 1435 && sidebar_selector->getSelectionIndex() == 1 && sidebar_selector->indexByValue("func") >= 0);
+        info_sidebar->setVisible(current_width >= 1435 || sidebar_selector->getSelectionIndex() == 0);
     }
     else
     {
@@ -554,19 +568,15 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     info_type->setValue("-");
     info_shields->setValue("-");
     info_hull->setValue("-");
-    info_shield_frequency
-        ->setFrequency(-1)
-        ->hide();
-    info_beam_frequency
-        ->setFrequency(-1)
-        ->hide();
-    info_description->hide();
+    info_shield_frequency->setFrequency(-1);
+    info_beam_frequency->setFrequency(-1);
     info_faction_button->hide();
     info_type_button->hide();
     link_to_analysis_button->hide();
-    info_electrical_signal_band->hide();
-    info_gravitational_signal_band->hide();
-    info_thermal_signal_band->hide();
+    sidebar_frequencies_page->hide();
+    sidebar_signals_page->hide();
+    sidebar_systems_page->hide();
+    info_description->hide();
     sidebar_pager->hide();
 
     for (int n = 0; n < ShipSystem::COUNT; n++)
@@ -695,6 +705,8 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         // Check sidebar pager state.
         if (sidebar_pager_selection == "Tactical")
         {
+            sidebar_frequencies_page->show();
+
             if (scanstate >= ScanState::State::FullScan)
             {
                 info_shield_frequency->show();
@@ -702,31 +714,41 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             }
 
             for (int n = 0; n < ShipSystem::COUNT; n++) info_system[n]->hide();
+
+            sidebar_signals_page->hide();
+            sidebar_systems_page->hide();
             info_description->hide();
         }
         else if (sidebar_pager_selection == "Systems")
         {
-            info_shield_frequency->hide();
-            info_beam_frequency->hide();
+            sidebar_systems_page->show();
 
             if (scanstate >= ScanState::State::FullScan)
                 for (int n = 0; n < ShipSystem::COUNT; n++) info_system[n]->show();
 
+            sidebar_frequencies_page->hide();
+            sidebar_signals_page->hide();
             info_description->hide();
         }
         else if (sidebar_pager_selection == "Signals")
         {
-            info_shield_frequency->hide();
-            info_beam_frequency->hide();
+            sidebar_signals_page->show();
+
             for (int n = 0; n < ShipSystem::COUNT; n++) info_system[n]->hide();
+
+            sidebar_frequencies_page->hide();
+            sidebar_systems_page->hide();
             info_description->hide();
         }
         else if (sidebar_pager_selection == "Description")
         {
-            info_shield_frequency->hide();
-            info_beam_frequency->hide();
-            for (int n = 0; n < ShipSystem::COUNT; n++) info_system[n]->hide();
             info_description->show();
+
+            for (int n = 0; n < ShipSystem::COUNT; n++) info_system[n]->hide();
+
+            sidebar_frequencies_page->hide();
+            sidebar_signals_page->hide();
+            sidebar_systems_page->hide();
         }
         else LOG(Warning, "Invalid pager state: ", sidebar_pager_selection);
 
@@ -786,22 +808,21 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
             if (sidebar_pager_selection == "Signals")
             {
+                sidebar_signals_page->show();
+
                 info_electrical_signal_band
                     ->setMaxAmp(electrical)
-                    ->setNoiseError(calculateSignalError(electrical))
-                    ->show();
+                    ->setNoiseError(calculateSignalError(electrical));
                 info_electrical_signal_label->setText(tr("Electrical: {signal} MJ").format({{"signal", string(electrical)}}));
 
                 info_thermal_signal_band
                     ->setMaxAmp(thermal)
-                    ->setPhaseError(calculateSignalError(thermal))
-                    ->show();
+                    ->setPhaseError(calculateSignalError(thermal));
                 info_thermal_signal_label->setText(tr("Thermal: {signal} um").format({{"signal", string(thermal)}}));
 
                 info_gravitational_signal_band
                     ->setMaxAmp(gravitational)
-                    ->setPeriodError(calculateSignalError(gravitational))
-                    ->show();
+                    ->setPeriodError(calculateSignalError(gravitational));
                 info_gravitational_signal_label->setText(tr("Gravitational: {signal} dN").format({{"signal", string(gravitational)}}));
             }
         }
