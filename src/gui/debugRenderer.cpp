@@ -3,13 +3,34 @@
 #include "hotkeyConfig.h"
 
 static glm::u8vec4 line_colors[] = {
-    {255, 0, 0, 255},
-    {0, 255, 0, 255},
-    {0, 0, 255, 255},
-    {0, 255, 255, 255},
-    {255, 0, 255, 255},
-    {255, 255, 0, 255},
+    {126, 178, 109, 255},   // #7EB26D green
+    {234, 184, 57, 255},    // #EAB839 yellow
+    {110, 208, 224, 255},   // #6ED0E0 cyan
+    {239, 132, 60, 255},    // #EF843C orange
+    {226, 77, 66, 255},     // #E24D42 red
+    {31, 120, 193, 255},    // #1F78C1 blue
+    {186, 67, 169, 255},    // #BA43A9 purple
+    {112, 93, 160, 255},    // #705DA0 indigo
+    {80, 134, 66, 255},     // #508642 dark green
+    {204, 163, 0, 255},     // #CCA300 dark yellow
+    {68, 126, 188, 255},    // #447EBC steel blue
+    {193, 92, 23, 255},     // #C15C17 brown orange
+    {137, 15, 2, 255},      // #890F02 dark red
+    {10, 67, 124, 255},     // #0A437C navy
+    {109, 31, 98, 255},     // #6D1F62 dark magenta
+    {88, 68, 119, 255},     // #584477 dark purple
+    {183, 219, 171, 255},   // #B7DBAB light green
+    {244, 213, 152, 255},   // #F4D598 light yellow
+    {112, 219, 237, 255},   // #70DBED light cyan
+    {249, 186, 143, 255},   // #F9BA8F light orange
 };
+
+static constexpr size_t line_color_count = sizeof(line_colors) / sizeof(line_colors[0]);
+
+static glm::u8vec4 colorForSeries(const string& name)
+{
+    return line_colors[std::hash<string>{}(name) % line_color_count];
+}
 
 
 DebugRenderer::DebugRenderer(RenderLayer* renderLayer)
@@ -101,8 +122,9 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
             for (unsigned int n=0; n<max_size; n++)
                 points[n].y -= scale * 1000.0f * timing_graph_points[key][n];
 
-            if (!skip) {
-                renderer.drawLine(points, line_colors[index % 6]);
+            if (!skip)
+            {
+                renderer.drawLine(points, 1.0f, colorForSeries(key));
                 index += 1;
             }
         }
@@ -116,14 +138,12 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
             renderer.drawText(sp::Rect(0, 0, 0, 80), "(scale: " + string(scale, 1) + " px/ms)", sp::Alignment::BottomLeft, 16, nullptr, {255,255,255,255});
 
         index = 0;
-        int color_index = 0;
-        for(const auto& key : key_order) {
-            auto color = line_colors[color_index % 6];
+        for (const auto& key : key_order)
+        {
+            auto color = colorForSeries(key);
             auto entry = timing_graph_enabled.find(key);
             if (entry != timing_graph_enabled.end() && !entry->second)
                 color = {192,192,192,255};
-            else
-                color_index += 1;
 
             renderer.drawText(
                 sp::Rect(0, 0, 0, 96 + 16 * index),
