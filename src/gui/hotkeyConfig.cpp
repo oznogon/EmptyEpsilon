@@ -580,6 +580,14 @@ void Keys::init()
     fullscreen_key.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     screenshot_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Take screenshot"));
     screenshot_key.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    /*
+    debug_modifier.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Debug modifier"));
+    debug_modifier.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Discrete |
+        sp::io::Keybinding::Interaction::Continuous
+    );
+    debug_modifier.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    */
     debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
     debug_show_fps.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
@@ -1038,6 +1046,7 @@ void Keys::init()
     engineering_select_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select rear shields system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::UtilityBeam)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select utility beam system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::DockingBay)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select docking bay system"));
+    engineering_select_system[static_cast<int>(ShipSystem::Type::Sensors)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select sensors system"));
     engineering_select_system_next.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select next system"));
     engineering_select_system_next.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
@@ -1193,6 +1202,7 @@ void Keys::init()
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields power (joystick)"));
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::UtilityBeam)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set utility beam power (joystick)"));
     engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::DockingBay)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set docking bay power (joystick)"));
+    engineering_set_power_for_system[static_cast<int>(ShipSystem::Type::Sensors)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set sensors power (joystick)"));
 
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::Reactor)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::BeamWeapons)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam weapon coolant (joystick)"));
@@ -1205,6 +1215,7 @@ void Keys::init()
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::UtilityBeam)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set utility beam coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::DockingBay)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set docking bay coolant (joystick)"));
+    engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::Sensors)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set sensors coolant (joystick)"));
 
     // Relay
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
