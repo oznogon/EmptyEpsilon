@@ -26,6 +26,7 @@ public:
     sp::io::Keybinding debug_show_timing;
 #ifdef DEBUG
     sp::io::Keybinding debug_show_colliders;
+    sp::io::Keybinding debug_show_gui;
 #endif
 
     // Rebinding binds

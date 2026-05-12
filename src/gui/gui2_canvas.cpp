@@ -4,6 +4,7 @@
 #ifdef DEBUG
 #include "engine.h"
 #include "gui/mouseRenderer.h"
+#include "hotkeyConfig.h"
 #endif
 
 GuiCanvas::GuiCanvas(RenderLayer* renderLayer)
@@ -33,6 +34,13 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
     {
         drawDebugElements(renderer);
     }
+
+#ifdef DEBUG
+    if (keys.debug_show_gui.getDown())
+    {
+        enable_debug_rendering = !enable_debug_rendering;
+    }
+#endif
 }
 
 bool GuiCanvas::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
@@ -80,11 +88,7 @@ void GuiCanvas::onPointerUp(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiCanvas::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    GuiElement* scrolled = executeScrollOnElement(position, value);
-    if (scrolled)
-    {
-        focus(scrolled);
-    }
+    executeScrollOnElement(position, value);
 }
 
 void GuiCanvas::onTextInput(const string& text)
