@@ -99,3 +99,4 @@ oz-fork-gui2_container 20260511 -- hard forking of GuiContainer API
 
 power-management-layout 20260514 -- spurious debug messages
 master 20260514 -- 2712-cap-free-overpower merged
+split-weapons-screen 20260514 -- remove shield state and controls
