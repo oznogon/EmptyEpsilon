@@ -2,6 +2,8 @@
 #include "engine.h"
 #include "random.h"
 #include "gui/theme.h"
+#include "gui/gui2_button.h"
+#include "i18n.h"
 
 GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -115,11 +117,31 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
     if (show_blue) renderer.drawLineBlendAdd(b, gravitational_band_style->get(getState()).color);
 }
 
-bool GuiSignalQualityIndicator::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
+GuiSignalQualityIndicator* GuiSignalQualityIndicator::setDisplayMode(DisplayMode mode)
 {
-    if (display_mode == DisplayMode::Waveform)
-        display_mode = DisplayMode::TimeSeries;
-    else
-        display_mode = DisplayMode::Waveform;
-    return true;
+    display_mode = mode;
+    if (mode_button)
+        mode_button->setText(mode == DisplayMode::TimeSeries ? tr("waveform", "W") : tr("chart", "C"));
+    return this;
+}
+
+GuiSignalQualityIndicator* GuiSignalQualityIndicator::addModeButton()
+{
+    if (mode_button) return this;
+
+    mode_button = new GuiButton(this, id + "_MODE", tr("chart", "C"),
+        [this]()
+        {
+            if (display_mode == DisplayMode::Waveform)
+                setDisplayMode(DisplayMode::TimeSeries);
+            else
+                setDisplayMode(DisplayMode::Waveform);
+        }
+    );
+    mode_button
+        ->setTextSize(20.0f)
+        ->setPosition(-5.0f, 5.0f, sp::Alignment::TopRight)
+        ->setSize(30.0f, 30.0f);
+
+    return this;
 }
