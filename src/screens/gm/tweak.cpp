@@ -14,6 +14,7 @@
 #include "components/avoidobject.h"
 #include "components/beamweapon.h"
 #include "components/briefing.h"
+#include "components/cinematicCamera.h"
 #include "components/comms.h"
 #include "components/coolant.h"
 #include "components/docking.h"
@@ -4334,6 +4335,14 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(combat_group);
 
     ADD_PAGE(tr("tweak-tab", "Hacking target"), HackingTarget);
+
+    ADD_PAGE(tr("tweak-tab", "Camera"), CinematicCamera);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Name:"), CinematicCamera, name);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Pitch:"), CinematicCamera, -90.0f, 90.0f, pitch);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Roll:"), CinematicCamera, -180.0f, 180.0f, roll);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Z position:"), CinematicCamera, -1000.0f, 1000.0f, z_position);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Field of view:"), CinematicCamera, 30.0f, 140.0f, field_of_view);
+
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row

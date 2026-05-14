@@ -7,7 +7,7 @@ MouseRenderer::MouseRenderer(RenderLayer* render_layer)
 
 void MouseRenderer::render(sp::RenderTarget& renderer)
 {
-    if (!visible) return;
+    if (!is_visible || !should_be_visible) return;
 
     renderer.drawSprite(primary.sprite, position + primary.offset, primary.size, primary.color);
     for (const auto& overlay : overlays)
@@ -39,14 +39,16 @@ bool MouseRenderer::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
     if (id == -1)
     {
         this->position = position;
-        visible = true;
+        is_visible = should_be_visible;
     }
+
     return false;
 }
 
 void MouseRenderer::onPointerLeave(sp::io::Pointer::ID id)
 {
-    if (id == -1) visible = false;
+    // Override should_be_visible when the mouse leaves the window.
+    if (id == -1) is_visible = false;
 }
 
 void MouseRenderer::onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id)

@@ -461,6 +461,8 @@ set(MAIN_SOURCES
     src/systems/radar.cpp
     src/systems/zone.h
     src/systems/zone.cpp
+    src/systems/cinematicCamera.h
+    src/systems/cinematicCamera.cpp
     src/systems/debugrender.h
     src/systems/debugrender.cpp
     src/systems/destroy.h
@@ -547,6 +549,8 @@ set(MAIN_SOURCES
     src/multiplayer/drone.cpp
     src/multiplayer/sensors.h
     src/multiplayer/sensors.cpp
+    src/multiplayer/cinematicCamera.h
+    src/multiplayer/cinematicCamera.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -593,6 +597,7 @@ set(MAIN_SOURCES
     src/prometheusMetrics.h
     src/main.h
     src/math/centerOfMass.h
+    src/math/damp.h
     src/math/triangulate.h
     src/menus/autoConnectScreen.h
     src/menus/hotkeyMenu.h

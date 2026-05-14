@@ -9,6 +9,12 @@
 #include "systems/radar.h"
 #include <glm/geometric.hpp>
 
+enum class ProjectionType
+{
+    Perspective,
+    Orthographic
+};
+
 template<typename COMPONENT, bool TRANSPARENT> class Render3DInterface {
 public:
     Render3DInterface();
@@ -22,7 +28,7 @@ public:
         render_handlers.push_back({rif, &RenderSystem::findRenderObjects<COMPONENT, TRANSPARENT>});
     }
 
-    void render3D(float aspect, float camera_fov);
+    void render3D(float aspect, float camera_fov, ProjectionType projection_type = ProjectionType::Perspective);
 private:
     float depth_cutoff_back;
     float depth_cutoff_front;

@@ -3,6 +3,7 @@
 #include "gui/gui2_element.h"
 #include "glObjects.h"
 #include "graphics/shader.h"
+#include "systems/rendering.h"
 
 #include <glm/mat4x4.hpp>
 #include <glm/vec4.hpp>
@@ -71,14 +72,24 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
 
-    GuiViewport3D* showCallsigns() { show_callsigns = true; return this; }
-    GuiViewport3D* toggleCallsigns() { show_callsigns = !show_callsigns; return this; }
+    GuiViewport3D* setCallsignVisibility(bool is_visible) { show_callsigns = is_visible; return this; }
+    bool areCallsignsVisible() const { return show_callsigns; }
+    GuiViewport3D* showCallsigns() { return setCallsignVisibility(true); }
+    GuiViewport3D* toggleCallsigns() { return setCallsignVisibility(!areCallsignsVisible()); }
     GuiViewport3D* showHeadings() { show_headings = true; return this; }
+    GuiViewport3D* hideHeadings() { show_headings = false; return this; }
     GuiViewport3D* showSpacedust() { show_spacedust = true; return this; }
+    GuiViewport3D* hideSpacedust() { show_spacedust = false; return this; }
 
     float getModifiedFoV() { return base_fov + fov_modifier; }
     float getFoVModifier() { return fov_modifier; }
+    float getBaseFoV() { return base_fov; }
+
+    // base_fov set by main_screen_camera_fov preference on Viewport init
     float modifyFoV(float modifier) { fov_modifier = std::clamp(base_fov + modifier, 30.0f, 140.0f) - base_fov; return fov_modifier; }
+    void setProjectionType(ProjectionType type) { projection_type = type; }
 private:
     glm::vec3 worldToScreen(sp::RenderTarget& window, glm::vec3 world);
+
+    ProjectionType projection_type = ProjectionType::Perspective;
 };

@@ -43,6 +43,7 @@
 #include "multiplayer/zone.h"
 #include "multiplayer/drone.h"
 #include "multiplayer/sensors.h"
+#include "multiplayer/cinematicCamera.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -76,6 +77,7 @@
 #include "systems/debugrender.h"
 #include "systems/dronecontrolsystem.h"
 #include "systems/dynamicradarsystem.h"
+#include "systems/cinematicCamera.h"
 
 
 void initSystemsAndComponents()
@@ -150,6 +152,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<SensorsSystemReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::TransformReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::PhysicsReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<CinematicCameraReplication>();
 
     sp::ecs::Entity::setPreDestroyCallback(OnDestroySystem::destroyCallback);
 
@@ -186,6 +189,7 @@ void initSystemsAndComponents()
     engine->registerSystem<RadarBlockSystem>();
     engine->registerSystem<ZoneSystem>();
     engine->registerSystem<GMRadarRender>();
+    engine->registerSystem<CinematicCameraSystem>();
     engine->registerSystem<PickupSystem>();
     engine->registerSystem<DroneControlSystem>();
 #ifdef DEBUG
