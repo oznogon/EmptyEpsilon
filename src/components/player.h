@@ -14,6 +14,7 @@ enum class MainScreenSetting
     Target,
     Tactical,
     LongRange,
+    Strategic,
     Camera
 };
 
