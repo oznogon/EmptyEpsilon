@@ -21,6 +21,7 @@ private:
     FrequencyType frequency_type;
     DamageEffect damage_effect;
     bool enemy_has_equipment; // True if target ship has beams/shields (which of those depends on frequency_type)
+    bool scanned = true;
 
     int frequency = -1;
     glm::vec2 mouse_position;
@@ -33,4 +34,5 @@ public:
     GuiFrequencyCurve* setFrequency(int frequency) { this->frequency = frequency; return this; }
 
     void setEnemyHasEquipment(bool state) { this->enemy_has_equipment = state; }
+    GuiFrequencyCurve* setScanned(bool scanned) { this->scanned = scanned; return this; }
 };
