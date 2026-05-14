@@ -93,31 +93,6 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
         ->setTextSize(20.0f)
         ->setSize(GuiElement::GuiSizeMax, 40.0f);
 
-    front_shield_display = new GuiKeyValueDisplay(stats, "FRONT_SHIELD_DISPLAY", 0.45f, tr("shields", "Front"), "");
-    front_shield_display
-        ->setIcon("gui/icons/shields-fore")
-        ->setTextSize(20.0f)
-        ->setSize(GuiElement::GuiSizeMax, 40.0f);
-
-    rear_shield_display = new GuiKeyValueDisplay(stats, "REAR_SHIELD_DISPLAY", 0.45f, tr("shields", "Rear"), "");
-    rear_shield_display
-        ->setIcon("gui/icons/shields-aft")
-        ->setTextSize(20.0f)
-        ->setSize(GuiElement::GuiSizeMax, 40.0f);
-
-    if (gameGlobalInfo->use_beam_shield_frequencies)
-    {
-        (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))
-            ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-            ->setSize(280.0f, 100.0f);
-    }
-    else
-    {
-        (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))
-            ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-            ->setSize(280.0f, 50.0f);
-    }
-
     auto ub = my_spaceship.getComponent<UtilityBeam>();
 
     sidebar_selector = new GuiSelector(this, "MISSILE_WEAPONS_SIDEBAR_SELECTOR", [this](int index, string value)
