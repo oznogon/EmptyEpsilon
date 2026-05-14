@@ -145,8 +145,10 @@ GuiElement* GuiElement::setParent(GuiContainer* new_parent)
                 this->owner = new_parent;
             }
         }
-        else
+        else if (!new_parent)
+        {
             LOG(Debug, "GuiElement::setParent called, but new parent is invalid.");
+        }
     }
     else
         LOG(Debug, "GuiElement::setParent called, but old owner is invalid.");
