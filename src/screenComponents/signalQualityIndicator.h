@@ -45,6 +45,7 @@ public:
 
     virtual void onUpdate() override;
     virtual void onDraw(sp::RenderTarget& target) override;
+    virtual GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
 
     GuiSignalQualityIndicator* setMaxAmp(float f) { max_amp = std::min(fabsf(f), 1.0f); return this; }
     GuiSignalQualityIndicator* setNoiseError(float f) { error_noise = std::min(fabsf(f), 1.0f); return this; }

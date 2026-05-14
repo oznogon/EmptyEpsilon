@@ -115,6 +115,18 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
     if (show_blue) renderer.drawLineBlendAdd(b, 2.0f, gravitational_band_style->get(getState()).color);
 }
 
+GuiElement* GuiSignalQualityIndicator::getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
+{
+    if (!visible || !enabled || !rect.contains(position))
+        return nullptr;
+
+    GuiElement* result = GuiContainer::getClickElement(button, position, id);
+    if (result)
+        return result;
+
+    return this;
+}
+
 bool GuiSignalQualityIndicator::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (display_mode == DisplayMode::Waveform)
