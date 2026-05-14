@@ -69,7 +69,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam info"), 30.0f))
+    (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam targeting"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f);
     (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))
