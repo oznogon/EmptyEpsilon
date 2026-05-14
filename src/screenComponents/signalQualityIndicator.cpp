@@ -54,11 +54,11 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
         }
 
         if (show_red)
-            renderer.drawLine(points, electrical_band_style->get(getState()).color);
+            renderer.drawLine(points, 2.0f, electrical_band_style->get(getState()).color);
         if (show_green)
-            renderer.drawLine(points, thermal_band_style->get(getState()).color);
+            renderer.drawLine(points, 2.0f, thermal_band_style->get(getState()).color);
         if (show_blue)
-            renderer.drawLine(points, gravitational_band_style->get(getState()).color);
+            renderer.drawLine(points, 2.0f, gravitational_band_style->get(getState()).color);
 
         return;
     }
