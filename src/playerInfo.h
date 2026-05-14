@@ -46,6 +46,7 @@ public:
     void commandSetTarget(sp::ecs::Entity target);
     void commandSetScienceLink(sp::ecs::Entity probe);
     void commandClearScienceLink();
+    void commandProbeTargetRotation(float target);
     void commandLoadTube(uint32_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(uint32_t tubeNumber);
     void commandFireTube(uint32_t tubeNumber, float missile_target_angle);

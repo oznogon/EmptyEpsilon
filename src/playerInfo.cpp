@@ -131,6 +131,7 @@ static const uint16_t CMD_SET_AI_ORDER = 0x003C;
 static const uint16_t CMD_DRONE_DOCK = 0x003D;
 static const uint16_t CMD_DRONE_UNDOCK = 0x003E;
 static const uint16_t CMD_DRONE_ABORT_DOCK = 0x003F;
+static const uint16_t CMD_PROBE_TARGET_ROTATION = 0x0040;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -565,6 +566,13 @@ void PlayerInfo::commandClearScienceLink()
 
     packet << CMD_SET_SCIENCE_LINK;
     packet << sp::ecs::Entity{};
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandProbeTargetRotation(float target)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_PROBE_TARGET_ROTATION << target;
     sendClientCommand(packet);
 }
 
@@ -1114,6 +1122,20 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             ProbeSystem::launch(ship, target);
         }
         break;
+    case CMD_PROBE_TARGET_ROTATION:
+        {
+            float f;
+            packet >> f;
+            if (auto rl = ship.getComponent<RadarLink>())
+            {
+                if (auto thrusters = rl->linked_entity.getComponent<ManeuveringThrusters>())
+                {
+                    thrusters->stop();
+                    thrusters->target = f;
+                }
+            }
+        }
+        break;
     case CMD_SET_ALERT_LEVEL:{
         AlertLevel al;
         packet >> al;
@@ -1490,8 +1512,8 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new ShipLogScreen(container), CrewPosition::shipLog, getCrewPositionName(CrewPosition::shipLog), getCrewPositionIcon(CrewPosition::shipLog));
         if (cps.has(CrewPosition::radarOfficer))
             screen->addStationTab(new RadarScreen(container), CrewPosition::radarOfficer, getCrewPositionName(CrewPosition::radarOfficer), getCrewPositionIcon(CrewPosition::radarOfficer));
-        if (cps.has(CrewPosition::probeControl))
-            screen->addStationTab(new ProbeScreen(container), CrewPosition::probeControl, getCrewPositionName(CrewPosition::probeControl), getCrewPositionIcon(CrewPosition::probeControl));
+        if (cps.has(CrewPosition::probeCamera))
+            screen->addStationTab(new ProbeScreen(container), CrewPosition::probeCamera, getCrewPositionName(CrewPosition::probeCamera), getCrewPositionIcon(CrewPosition::probeCamera));
         if (cps.has(CrewPosition::targetAnalysis))
             screen->addStationTab(new TargetAnalysisScreen(container), CrewPosition::targetAnalysis, getCrewPositionName(CrewPosition::targetAnalysis), getCrewPositionIcon(CrewPosition::targetAnalysis));
         if (cps.has(CrewPosition::briefingOfficer))
@@ -1543,7 +1565,7 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::commsOnly: return tr("station","Comms");
     case CrewPosition::shipLog: return tr("station","Ship's Log");
     case CrewPosition::radarOfficer: return tr("station","Radar");
-    case CrewPosition::probeControl: return tr("station","Probe Control");
+    case CrewPosition::probeCamera: return tr("station","Probe Camera");
     case CrewPosition::targetAnalysis: return tr("station","Target Analysis");
     case CrewPosition::briefingOfficer: return tr("station","Briefing");
     case CrewPosition::droneOperations: return tr("station","Drone Operations");
@@ -1571,7 +1593,7 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::commsOnly: return "";
     case CrewPosition::shipLog: return "";
     case CrewPosition::radarOfficer: return "gui/icons/station-relay";
-    case CrewPosition::probeControl: return "gui/icons/scan-probe";
+    case CrewPosition::probeCamera: return "gui/icons/scan-probe";
     case CrewPosition::targetAnalysis: return "gui/icons/station-science";
     case CrewPosition::briefingOfficer: return "";
     case CrewPosition::droneOperations: return "";

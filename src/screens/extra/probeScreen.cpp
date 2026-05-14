@@ -5,6 +5,7 @@
 
 #include "components/radar.h"
 #include "components/collision.h"
+#include "components/maneuveringthrusters.h"
 
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/alertOverlay.h"
@@ -13,6 +14,7 @@
 #include "gui/theme.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_label.h"
+#include "gui/hotkeyConfig.h"
 
 ProbeScreen::ProbeScreen(GuiContainer* owner)
 : GuiOverlay(owner, "PROBE_SCREEN", GuiTheme::getColor("background"))
@@ -40,6 +42,28 @@ ProbeScreen::ProbeScreen(GuiContainer* owner)
     (new GuiGlobalMessage(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
+void ProbeScreen::onUpdate()
+{
+    if (!my_spaceship || !isVisible()) return;
+
+    auto rl = my_spaceship.getComponent<RadarLink>();
+    if (rl && rl->linked_entity)
+    {
+        auto angle = (keys.probe_turn_right.getValue() - keys.probe_turn_left.getValue()) * 5.0f;
+        if (angle != 0.0f)
+        {
+            if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
+                my_player_info->commandProbeTargetRotation(probe_transform->getRotation() + angle);
+        }
+
+        if (mouse_turn_direction != 0.0f)
+        {
+            if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
+                my_player_info->commandProbeTargetRotation(probe_transform->getRotation() + mouse_turn_direction * 5.0f);
+        }
+    }
+}
+
 void ProbeScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
@@ -57,6 +81,7 @@ void ProbeScreen::onDraw(sp::RenderTarget& renderer)
                 camera_position.x = probe_transform->getPosition().x;
                 camera_position.y = probe_transform->getPosition().y;
                 camera_position.z = 0.0f;
+                camera_yaw = probe_transform->getRotation();
                 camera_pitch = 0.0f;
             }
         }
@@ -69,4 +94,20 @@ void ProbeScreen::onDraw(sp::RenderTarget& renderer)
     }
 
     GuiOverlay::onDraw(renderer);
+}
+
+bool ProbeScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
+{
+    if (!my_spaceship || !isVisible()) return false;
+
+    auto rl = my_spaceship.getComponent<RadarLink>();
+    if (!rl || !rl->linked_entity) return false;
+
+    mouse_turn_direction = position.x < viewport->getCenterPoint().x ? -1.0f : 1.0f;
+    return true;
+}
+
+void ProbeScreen::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
+{
+    mouse_turn_direction = 0.0f;
 }

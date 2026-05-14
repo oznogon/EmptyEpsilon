@@ -317,6 +317,12 @@ Keys::Keys() :
     relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
     relay_alert_level_red("RELAY_ALERT_RED"),
 
+    // Radar screen
+    radar_long_range("RADAR_LONG_RANGE", "1"),
+    radar_short_range("RADAR_SHORT_RANGE", "2"),
+    radar_strategic("RADAR_STRATEGIC", "3"),
+    radar_linked_probe("RADAR_LINKED_PROBE", "4"),
+
     // Damage control screen
     damcon_toggle_detail_lines("DAMCON_TOGGLE_DETAIL_LINES"),
 
@@ -327,6 +333,10 @@ Keys::Keys() :
 
     // Spectator screen
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
+
+    // Probe camera screen
+    probe_turn_left("PROBE_TURN_LEFT", "Left"),
+    probe_turn_right("PROBE_TURN_RIGHT", "Right"),
 
     // Briefing screen
     briefing_next_page("BRIEFING_NEXT_PAGE", "Right"),
@@ -515,6 +525,12 @@ void Keys::init()
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
     relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
 
+    // Radar
+    radar_long_range.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Long range"));
+    radar_short_range.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Short range"));
+    radar_strategic.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Strategic"));
+    radar_linked_probe.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Linked probe"));
+
     // Damage control
     damcon_toggle_detail_lines.setLabel(tr("hotkey_menu", "Damage control"), tr("hotkey_Damcon", "Toggle system detail lines"));
 
@@ -531,6 +547,10 @@ void Keys::init()
 
     // Spectator screen
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));
+
+    // Probe camera screen
+    probe_turn_left.setLabel(tr("hotkey_menu", "Probe camera"), tr("hotkey_ProbeCamera", "Turn left"));
+    probe_turn_right.setLabel(tr("hotkey_menu", "Probe camera"), tr("hotkey_ProbeCamera", "Turn right"));
 
     // Briefing screen
     briefing_next_page.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Next page"));

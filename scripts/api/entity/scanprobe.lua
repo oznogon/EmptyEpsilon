@@ -20,7 +20,8 @@ function ScanProbe()
         hull = {max=1, current=1},
         share_short_range_radar = {},
         allow_radar_link = {},
-        radar_signature = {gravitational=0.0, electrical=0.2, thermal=0.0}
+        radar_signature = {gravitational=0.0, electrical=0.2, thermal=0.0},
+        maneuvering_thrusters = {}
     }
     local model = "SensorBuoyMKI"
     local idx = irandom(1, 3)
