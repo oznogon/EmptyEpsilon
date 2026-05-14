@@ -229,6 +229,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
     info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"), 30.0f);
     info_electrical_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info_electrical_signal_band->addModeButton();
 
     info_gravitational_signal_band = new GuiSignalQualityIndicator(signatures_section, "GRAVITY_SIGNAL");
     info_gravitational_signal_band
@@ -237,6 +238,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
     info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
     info_gravitational_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info_gravitational_signal_band->addModeButton();
 
     info_thermal_signal_band = new GuiSignalQualityIndicator(signatures_section, "THERMAL_SIGNAL");
     info_thermal_signal_band
@@ -245,6 +247,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
     info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", tr("Thermal"), 30.0f);
     info_thermal_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info_thermal_signal_band->addModeButton();
 
     // Global message
     (new GuiGlobalMessage(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

@@ -6,6 +6,7 @@
 #include "gui/gui2_element.h"
 #include "timer.h"
 
+class GuiButton;
 class GuiThemeStyle;
 
 // Class for drawing bands in the Science Station's "Scanning" mini-game
@@ -36,6 +37,7 @@ private:
     };
     std::deque<HistoryEntry> history;
 
+    GuiButton* mode_button = nullptr;
     const GuiThemeStyle* signalquality_style;
     const GuiThemeStyle* electrical_band_style;
     const GuiThemeStyle* thermal_band_style;
@@ -56,8 +58,8 @@ public:
     GuiSignalQualityIndicator* showGreen(bool show) { show_green = show; return this; }
     GuiSignalQualityIndicator* showBlue(bool show) { show_blue = show; return this; }
 
-    GuiSignalQualityIndicator* setDisplayMode(DisplayMode mode) { display_mode = mode; return this; }
+    GuiSignalQualityIndicator* setDisplayMode(DisplayMode mode);
     void clearHistory() { history.clear(); }
 
-    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    GuiSignalQualityIndicator* addModeButton();
 };
