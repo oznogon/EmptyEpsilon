@@ -485,10 +485,18 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         probe_radar->hide();
     }
 
-    if (targets.get())
+    auto target = targets.get();
+    if (target != target_entity)
     {
+        info_electrical_signal_band->clearHistory();
+        info_gravitational_signal_band->clearHistory();
+        info_thermal_signal_band->clearHistory();
+    }
+
+    if (target)
+    {
+        target_entity = target;
         link_to_analysis_button->show();
-        auto target = targets.get();
 
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
         auto target_transform = target.getComponent<sp::Transform>();
@@ -727,6 +735,10 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 }
             }
         }
+    }
+    else
+    {
+        target_entity = {};
     }
 }
 
