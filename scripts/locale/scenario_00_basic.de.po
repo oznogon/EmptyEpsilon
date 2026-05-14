@@ -30,8 +30,8 @@ msgstr ""
 "Einige zufällig verstreute Stationen in zufällig generierter Umgebung werden "
 "angegriffen. Zerstört alle feindlichen Einheiten, um zu gewinnen!\n"
 "\n"
-"Der Schiffstyp \"Atlantis\" ist ausreichend, um selbst die Variante \"Extrem"
-"\" mit einem einzelnen Schiff zu gewinnen.\n"
+"Der Schiffstyp \"Atlantis\" ist ausreichend, um selbst die Variante "
+"\"Extrem\" mit einem einzelnen Schiff zu gewinnen.\n"
 "\n"
 "Andere Schiffe können gespawnt werden, aber die Stärke der feindlichen "
 "Schiffe ist unabhängig von Anzahl und Typ der spielbaren Schiffe."
@@ -266,7 +266,7 @@ msgctxt "buttonGM"
 msgid "-From Named Waves"
 msgstr "-Welle: aus Schiffstyp"
 
-#: scripts/scenario_00_basic.lua:475
+#: scripts/scenario_00_basic.lua:513
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -288,7 +288,7 @@ msgstr ""
 "\n"
 "Viel Glück."
 
-#: scripts/scenario_00_basic.lua:485
+#: scripts/scenario_00_basic.lua:523
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -300,19 +300,19 @@ msgstr ""
 "\n"
 "Viel Glück."
 
-#: scripts/scenario_00_basic.lua:520
+#: scripts/scenario_00_basic.lua:558
 #, lua-format
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: SUCCESS (%d seconds left)"
 msgstr "Mission ERFOLGREICH!  (%d Sekunden verbleibend)"
 
-#: scripts/scenario_00_basic.lua:531
+#: scripts/scenario_00_basic.lua:569
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (time has run out)"
 msgstr "Mission FEHLGESCHLAGEN (Zeit abgelaufen)"
 
-#: scripts/scenario_00_basic.lua:544 scripts/scenario_00_basic.lua:549
-#: scripts/scenario_00_basic.lua:554
+#: scripts/scenario_00_basic.lua:578 scripts/scenario_00_basic.lua:583
+#: scripts/scenario_00_basic.lua:588
 #, fuzzy, lua-format
 msgctxt "time-incCall"
 msgid "%s, you have one minute remaining."
@@ -320,17 +320,17 @@ msgid_plural "%s, you have %d minutes remaining."
 msgstr[0] "%s, Sie haben noch %d Minute Zeit."
 msgstr[1] "%s, Sie haben noch %d Minuten Zeit."
 
-#: scripts/scenario_00_basic.lua:559
+#: scripts/scenario_00_basic.lua:598
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (no friendlies left)"
 msgstr "Mission FEHLGESCHLAGEN (keine Verbündeten mehr übrig)"
 
-#: scripts/scenario_00_basic.lua:576
+#: scripts/scenario_00_basic.lua:615
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (all your ships destroyed)"
 msgstr "Mission FEHLGESCHLAGEN (alle eigenen Schiffe zerstört)"
 
-#: scripts/scenario_00_basic.lua:584
+#: scripts/scenario_00_basic.lua:623
 #, lua-format
 msgctxt "msgSpectbanner"
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"

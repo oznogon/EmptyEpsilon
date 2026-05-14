@@ -13,7 +13,7 @@ msgstr ""
 "X-Generator: Poedit 2.4.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: scripts/tutorialUtils.lua:6
+#: scripts/tutorialUtils.lua:7
 msgid ""
 "Welcome to the EmptyEpsilon tutorial.\n"
 "Note that this tutorial is designed to give you a quick overview of the "

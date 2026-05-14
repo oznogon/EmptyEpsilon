@@ -20,8 +20,8 @@ msgstr "Balise lumineuse"
 
 # Scenario description
 msgid ""
-"The Beacon of Light scenario, based on the tutorial from https://daid.github."
-"io/EmptyEpsilon/#tabs=4.\n"
+"The Beacon of Light scenario, based on the tutorial from https://"
+"daid.github.io/EmptyEpsilon/#tabs=4.\n"
 "\n"
 "Near the far outpost of Orion-5, Exuari attacks are increasing. A diplomat "
 "went missing, and your first mission is to recover him.\n"
@@ -186,10 +186,11 @@ msgstr ""
 "\n"
 
 #: scripts/scenario_05_beacon.lua:185
+#, fuzzy
 msgctxt "incCall"
 msgid ""
 "J.J. Johnson transmitted his mission details to Orion-5 before he passed "
-"away. Head to Orion-5 for details."
+"away. Head to Orion-5 in sector G3 for details."
 msgstr ""
 "Juste avant de mourir, J.J. Johnson a pu transmettre des informations "
 "concernant sa mission à Orion-5.\n"

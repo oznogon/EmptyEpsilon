@@ -318,25 +318,25 @@ msgstr ""
 msgid "A piece of space junk. Scan to find out the capturing frequency"
 msgstr ""
 
-#: scripts/scenario_79_kessler.lua:455
+#: scripts/scenario_79_kessler.lua:457
 msgid ""
 "Very good so far! Don't worry, you don't have to clean up all of the marked "
 "space junk in your first test run, but we still need quite a few of them "
 "before we call it a day."
 msgstr ""
 
-#: scripts/scenario_79_kessler.lua:476
+#: scripts/scenario_79_kessler.lua:478
 msgid "An old military satellite"
 msgstr ""
 
-#: scripts/scenario_79_kessler.lua:476
+#: scripts/scenario_79_kessler.lua:478
 msgid "An old military satellite. Capturing frequency is blocked."
 msgstr ""
 
-#: scripts/scenario_79_kessler.lua:488
+#: scripts/scenario_79_kessler.lua:490
 msgid "An operational satellite"
 msgstr ""
 
-#: scripts/scenario_79_kessler.lua:488
+#: scripts/scenario_79_kessler.lua:490
 msgid "This satellite is fully operational. Do not capture!"
 msgstr ""

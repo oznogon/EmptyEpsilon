@@ -536,7 +536,7 @@ msgstr ""
 "Un morceau de débris spatial.\n"
 "Il faut le scanner pour connaître sa fréquence de ramassage."
 
-#: scripts/scenario_79_kessler.lua:455
+#: scripts/scenario_79_kessler.lua:457
 msgid ""
 "Very good so far! Don't worry, you don't have to clean up all of the marked "
 "space junk in your first test run, but we still need quite a few of them "
@@ -549,20 +549,20 @@ msgstr ""
 "Nous avons cependant encore besoin de quelques débris avant de pouvoir "
 "valider cet essai."
 
-#: scripts/scenario_79_kessler.lua:476
+#: scripts/scenario_79_kessler.lua:478
 msgid "An old military satellite"
 msgstr "Un ancien satellite militaire"
 
-#: scripts/scenario_79_kessler.lua:476
+#: scripts/scenario_79_kessler.lua:478
 msgid "An old military satellite. Capturing frequency is blocked."
 msgstr ""
 "Un ancien satellite militaire.\n"
 "Sa fréquence de récupération est bloquée."
 
-#: scripts/scenario_79_kessler.lua:488
+#: scripts/scenario_79_kessler.lua:490
 msgid "An operational satellite"
 msgstr "Un satellite opérationnel"
 
-#: scripts/scenario_79_kessler.lua:488
+#: scripts/scenario_79_kessler.lua:490
 msgid "This satellite is fully operational. Do not capture!"
 msgstr "Ce satellite est pleinement opérationnel. Ne le ramassez pas !"

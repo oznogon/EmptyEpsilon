@@ -12,104 +12,104 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
 
-#: scripts/comms_ship.lua:38
+#: scripts/comms_ship.lua:39
 #, fuzzy
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr "Co chcete?"
 
-#: scripts/comms_ship.lua:40
+#: scripts/comms_ship.lua:41
 #, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr "Jak vám můžeme pomoci?"
 
-#: scripts/comms_ship.lua:43
+#: scripts/comms_ship.lua:44
 #, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr "Bránit bod"
 
-#: scripts/comms_ship.lua:46
+#: scripts/comms_ship.lua:47
 #, fuzzy
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr "Nemáte umístěn žádný bod. Nejprve jej umístěte."
 
-#: scripts/comms_ship.lua:47 scripts/comms_ship.lua:57
-#: scripts/comms_ship.lua:70 scripts/comms_ship.lua:78
-#: scripts/comms_ship.lua:88
+#: scripts/comms_ship.lua:48 scripts/comms_ship.lua:58
+#: scripts/comms_ship.lua:71 scripts/comms_ship.lua:79
+#: scripts/comms_ship.lua:89
 #, fuzzy
 msgid "Back"
 msgstr "Zpět"
 
-#: scripts/comms_ship.lua:49
+#: scripts/comms_ship.lua:50
 #, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr "Jaký bod máme bránit?"
 
-#: scripts/comms_ship.lua:52
+#: scripts/comms_ship.lua:53
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend %s"
 msgstr "Branit %s"
 
-#: scripts/comms_ship.lua:56
+#: scripts/comms_ship.lua:57
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at %s."
 msgstr "Jdeme pomoci na %s."
 
-#: scripts/comms_ship.lua:66
+#: scripts/comms_ship.lua:67
 #, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr "Pomozte mi"
 
-#: scripts/comms_ship.lua:68
+#: scripts/comms_ship.lua:69
 #, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr "Letíme k vám na pomoc"
 
-#: scripts/comms_ship.lua:75
+#: scripts/comms_ship.lua:76
 #, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr "Ohlašte stav"
 
-#: scripts/comms_ship.lua:84
+#: scripts/comms_ship.lua:85
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr "Kotvím u %s"
 
-#: scripts/comms_ship.lua:86
+#: scripts/comms_ship.lua:87
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr "Kotví k %s"
 
-#: scripts/comms_ship.lua:105
+#: scripts/comms_ship.lua:106
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr "Postaráme se o vaše zničení!"
 
-#: scripts/comms_ship.lua:106
+#: scripts/comms_ship.lua:107
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr "Vaše pokrevní linie končí zde!"
 
-#: scripts/comms_ship.lua:107
+#: scripts/comms_ship.lua:108
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr "Vaše patetické hrozby jsou bezvýznamné."
 
-#: scripts/comms_ship.lua:109
+#: scripts/comms_ship.lua:110
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
@@ -121,7 +121,7 @@ msgstr ""
 "\n"
 "ZZZEEEMŘETE ssslabošššii!"
 
-#: scripts/comms_ship.lua:113
+#: scripts/comms_ship.lua:114
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
@@ -133,13 +133,13 @@ msgstr ""
 "\n"
 "Konec přenosu."
 
-#: scripts/comms_ship.lua:117
+#: scripts/comms_ship.lua:118
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr "Držte se nám z cesty, nebo nás vaše smrt velice pobaví!"
 
-#: scripts/comms_ship.lua:119
+#: scripts/comms_ship.lua:120
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
@@ -163,25 +163,25 @@ msgstr ""
 "\n"
 "Komunikace přerušena."
 
-#: scripts/comms_ship.lua:128
+#: scripts/comms_ship.lua:129
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr "PROVÉST PŘÍKAZ: SEBEDESTRUKCE"
 
-#: scripts/comms_ship.lua:129
+#: scripts/comms_ship.lua:130
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr "Zachycen zbloudilý příkaz. Zaměřuji zdroj."
 
-#: scripts/comms_ship.lua:130
+#: scripts/comms_ship.lua:131
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr "Externí příkaz ignorován."
 
-#: scripts/comms_ship.lua:132
+#: scripts/comms_ship.lua:133
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
@@ -195,31 +195,31 @@ msgstr ""
 "\n"
 "Stáhněte se nebo se připravte darovat své mrtvoly na naši výživu."
 
-#: scripts/comms_ship.lua:135
+#: scripts/comms_ship.lua:136
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr "<Vysílá 'The Itsy-Bitsy Spider' na všech frekvencích>"
 
-#: scripts/comms_ship.lua:136
+#: scripts/comms_ship.lua:137
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr "Nepotřebujeme povolení k rozebrání takové nevýznamné hrozby."
 
-#: scripts/comms_ship.lua:137
+#: scripts/comms_ship.lua:138
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr "Úl má důležitější věci na práci, než hubit škůdce."
 
-#: scripts/comms_ship.lua:139
+#: scripts/comms_ship.lua:140
 #, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr "Věnujte se svým věcem!"
 
-#: scripts/comms_ship.lua:167
+#: scripts/comms_ship.lua:168
 #, fuzzy
 msgctxt "ship-comms"
 msgid ""
@@ -231,7 +231,7 @@ msgstr ""
 "\n"
 "Jsme na důležité misi."
 
-#: scripts/comms_ship.lua:171
+#: scripts/comms_ship.lua:172
 #, fuzzy
 msgctxt "ship-comms"
 msgid ""
@@ -243,43 +243,43 @@ msgstr ""
 "\n"
 "Přejeme pěkný den."
 
-#: scripts/comms_ship.lua:186
+#: scripts/comms_ship.lua:187
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr "Trup: %d%%\n"
 
-#: scripts/comms_ship.lua:190
+#: scripts/comms_ship.lua:191
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr "Štíty: %d%%\n"
 
-#: scripts/comms_ship.lua:192
+#: scripts/comms_ship.lua:193
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr "Prední štít: %d%%\n"
 
-#: scripts/comms_ship.lua:193
+#: scripts/comms_ship.lua:194
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr "Zadní štít: %d%%\n"
 
-#: scripts/comms_ship.lua:196
+#: scripts/comms_ship.lua:197
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %d: %d%%\n"
 msgstr "Štít %d: %d%%\n"
 
-#: scripts/comms_ship.lua:202
+#: scripts/comms_ship.lua:203
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr "%s Střely: %d/%d\n"
 
-#: scripts/comms_ship.lua:214
+#: scripts/comms_ship.lua:215
 #, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "WP %d"

@@ -145,8 +145,8 @@ msgid ""
 msgstr ""
 "Guten Tag. bitte docken Sie bei uns an, wenn sie Energie aufladen wollen "
 "oder das Schiff repariert werden muss. Mehr Hintergrundinformationen zu "
-"Ihrer Mission finden Sie in der Wissenschaftsdatenbank unter \"Missionsdaten"
-"\"."
+"Ihrer Mission finden Sie in der Wissenschaftsdatenbank unter "
+"\"Missionsdaten\"."
 
 #: scripts/scenario_79_kessler.lua:84
 msgid ""
@@ -358,8 +358,8 @@ msgstr ""
 "Waffenstation den Schild mit dem Sender koppeln, ein Knopf zum Koppeln wird "
 "erscheinen sobald es möglich ist. Danach müssen Sie selbst an der Ops-"
 "Station das Signal absenden. (Sie müssen die Leiste auf der rechten Seite "
-"von 'Scanning' auf 'Other' ändern, indem Sie auf die Überschrift \"Scanning"
-"\" oder die Pfeile daneben klicken.) Viel Glück!"
+"von 'Scanning' auf 'Other' ändern, indem Sie auf die Überschrift "
+"\"Scanning\" oder die Pfeile daneben klicken.) Viel Glück!"
 
 #: scripts/scenario_79_kessler.lua:247
 msgid "Charging of Transmitter initiated"
@@ -459,7 +459,7 @@ msgstr ""
 "Ein Stück Weltraumschrott. Bitte scannen, um die Frequenz zum Einfangen "
 "herauszufinden"
 
-#: scripts/scenario_79_kessler.lua:455
+#: scripts/scenario_79_kessler.lua:457
 msgid ""
 "Very good so far! Don't worry, you don't have to clean up all of the marked "
 "space junk in your first test run, but we still need quite a few of them "
@@ -469,18 +469,18 @@ msgstr ""
 "aufsammeln, das ist nur ein erster Testlauf. Trotzdem brauchen wir noch ein "
 "paar davon, bevor Sie Feierabend machen können."
 
-#: scripts/scenario_79_kessler.lua:476
+#: scripts/scenario_79_kessler.lua:478
 msgid "An old military satellite"
 msgstr "Ein alter Militärsatellit"
 
-#: scripts/scenario_79_kessler.lua:476
+#: scripts/scenario_79_kessler.lua:478
 msgid "An old military satellite. Capturing frequency is blocked."
 msgstr "Ein alter Militärsatellit. Frequenz zum einfangen wird blockiert."
 
-#: scripts/scenario_79_kessler.lua:488
+#: scripts/scenario_79_kessler.lua:490
 msgid "An operational satellite"
 msgstr "Ein funktionsfähiger Satellit"
 
-#: scripts/scenario_79_kessler.lua:488
+#: scripts/scenario_79_kessler.lua:490
 msgid "This satellite is fully operational. Do not capture!"
 msgstr "Dieser Satellit ist voll funktionsfähig. Nicht einfangen!"

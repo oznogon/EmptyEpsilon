@@ -103,6 +103,21 @@ msgctxt "scienceDescription-station"
 msgid "Major military installation"
 msgstr ""
 
+#: scripts/scenario_51_deliverAmbassador.lua:134
+msgctxt "buttonGM"
+msgid "+Spawn Ship(s)"
+msgstr ""
+
+#: scripts/scenario_51_deliverAmbassador.lua:135
+msgctxt "buttonGM"
+msgid "+Control Codes"
+msgstr ""
+
+#: scripts/scenario_51_deliverAmbassador.lua:136
+msgctxt "buttonGM"
+msgid "Terrorist End"
+msgstr ""
+
 #: scripts/scenario_51_deliverAmbassador.lua:329
 msgctxt "audio-incCall"
 msgid ""
@@ -414,152 +429,164 @@ msgctxt "artifact-msgScience"
 msgid "The readings on the Pangora artifact have changed"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:911
+#: scripts/scenario_51_deliverAmbassador.lua:869
+msgctxt "msgGM"
+msgid "Terrorist ending initiated"
+msgstr ""
+
+#: scripts/scenario_51_deliverAmbassador.lua:889
+msgctxt "KraylorEndline-incCall"
+msgid ""
+"We apologize for the imminent destruction of your ship, but you are "
+"harboring Ambassador Gremus aboard, a known menace to polite society."
+msgstr ""
+
+#: scripts/scenario_51_deliverAmbassador.lua:953
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:923
+#: scripts/scenario_51_deliverAmbassador.lua:965
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:925
+#: scripts/scenario_51_deliverAmbassador.lua:967
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:929
+#: scripts/scenario_51_deliverAmbassador.lua:971
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:930
+#: scripts/scenario_51_deliverAmbassador.lua:972
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:931
+#: scripts/scenario_51_deliverAmbassador.lua:973
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We could use some homing missiles. (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:934
+#: scripts/scenario_51_deliverAmbassador.lua:976
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Can you restock us with HVLI? (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:935
+#: scripts/scenario_51_deliverAmbassador.lua:977
 #, lua-format
 msgctxt "ammo-comms"
 msgid "What about HVLI? (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:936
+#: scripts/scenario_51_deliverAmbassador.lua:978
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We need some High Velocity Lead Impactors. (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:939
+#: scripts/scenario_51_deliverAmbassador.lua:981
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please restock our mines. (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:940
+#: scripts/scenario_51_deliverAmbassador.lua:982
 #, lua-format
 msgctxt "ammo-comms"
 msgid "How about mines? (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:941
+#: scripts/scenario_51_deliverAmbassador.lua:983
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We are running low on mines. (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:944
+#: scripts/scenario_51_deliverAmbassador.lua:986
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please restock our EMP missiles. (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:945
+#: scripts/scenario_51_deliverAmbassador.lua:987
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Got any EMPs? (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:946
+#: scripts/scenario_51_deliverAmbassador.lua:988
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We need Electro-Magnetic Pulse missiles. (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:949
+#: scripts/scenario_51_deliverAmbassador.lua:991
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:950
+#: scripts/scenario_51_deliverAmbassador.lua:992
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We really need some nukes. (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:951
+#: scripts/scenario_51_deliverAmbassador.lua:993
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We could use some nuclear missiles. (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:965
+#: scripts/scenario_51_deliverAmbassador.lua:1007
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:966
+#: scripts/scenario_51_deliverAmbassador.lua:1008
 msgctxt "orders-comms"
 msgid "Whatever ambassador Gremus says. "
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:968
+#: scripts/scenario_51_deliverAmbassador.lua:1010
 msgctxt "orders-comms"
 msgid ""
 "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if "
 "possible. "
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:970
+#: scripts/scenario_51_deliverAmbassador.lua:1012
 msgctxt "orders-comms"
 msgid "Current Orders: Transport ambassador Gremus to Ningling. "
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:972
+#: scripts/scenario_51_deliverAmbassador.lua:1014
 msgctxt "orders-comms"
 msgid ""
 "Current Orders: Wait for ambassador Gremus to complete business at Ningling. "
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:974
+#: scripts/scenario_51_deliverAmbassador.lua:1016
 msgctxt "orders-comms"
 msgid "Current Orders: Dock with Ningling to get ambassador Gremus. "
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:976
+#: scripts/scenario_51_deliverAmbassador.lua:1018
 msgctxt "orders-comms"
 msgid "Current Orders: Transport ambassador Gremus to Goltin 7. "
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:979
+#: scripts/scenario_51_deliverAmbassador.lua:1021
 #, lua-format
 msgctxt "artifactOrders-comms"
 msgid ""
@@ -567,202 +594,202 @@ msgid ""
 "Pangora, Nakor and Science-37. "
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:981
+#: scripts/scenario_51_deliverAmbassador.lua:1023
 #, lua-format
 msgctxt "artifactOrders-comms"
 msgid "%sProvide artifact research to ambassador Gremus on Goltin 7. "
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:985
-#: scripts/scenario_51_deliverAmbassador.lua:1024
-#: scripts/scenario_51_deliverAmbassador.lua:1052
-#: scripts/scenario_51_deliverAmbassador.lua:1056
-#: scripts/scenario_51_deliverAmbassador.lua:1073
-#: scripts/scenario_51_deliverAmbassador.lua:1077
-#: scripts/scenario_51_deliverAmbassador.lua:1108
-#: scripts/scenario_51_deliverAmbassador.lua:1123
+#: scripts/scenario_51_deliverAmbassador.lua:1027
+#: scripts/scenario_51_deliverAmbassador.lua:1066
+#: scripts/scenario_51_deliverAmbassador.lua:1094
+#: scripts/scenario_51_deliverAmbassador.lua:1098
+#: scripts/scenario_51_deliverAmbassador.lua:1115
+#: scripts/scenario_51_deliverAmbassador.lua:1119
+#: scripts/scenario_51_deliverAmbassador.lua:1150
+#: scripts/scenario_51_deliverAmbassador.lua:1165
 msgid "Back"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:991
+#: scripts/scenario_51_deliverAmbassador.lua:1033
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:996
+#: scripts/scenario_51_deliverAmbassador.lua:1038
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:998
+#: scripts/scenario_51_deliverAmbassador.lua:1040
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1000
+#: scripts/scenario_51_deliverAmbassador.lua:1042
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1008
+#: scripts/scenario_51_deliverAmbassador.lua:1050
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1010
+#: scripts/scenario_51_deliverAmbassador.lua:1052
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1014
+#: scripts/scenario_51_deliverAmbassador.lua:1056
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1019
+#: scripts/scenario_51_deliverAmbassador.lua:1061
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1021
+#: scripts/scenario_51_deliverAmbassador.lua:1063
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1029
+#: scripts/scenario_51_deliverAmbassador.lua:1071
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1031
+#: scripts/scenario_51_deliverAmbassador.lua:1073
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1034
+#: scripts/scenario_51_deliverAmbassador.lua:1076
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%s rep)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1036
+#: scripts/scenario_51_deliverAmbassador.lua:1078
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1038
+#: scripts/scenario_51_deliverAmbassador.lua:1080
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1040
-#: scripts/scenario_51_deliverAmbassador.lua:1066
+#: scripts/scenario_51_deliverAmbassador.lua:1082
+#: scripts/scenario_51_deliverAmbassador.lua:1108
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Waypoint %s"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1048
+#: scripts/scenario_51_deliverAmbassador.lua:1090
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward waypoint %s"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1050
-#: scripts/scenario_51_deliverAmbassador.lua:1071
+#: scripts/scenario_51_deliverAmbassador.lua:1092
+#: scripts/scenario_51_deliverAmbassador.lua:1113
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1060
+#: scripts/scenario_51_deliverAmbassador.lua:1102
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (rep %s)"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1062
+#: scripts/scenario_51_deliverAmbassador.lua:1104
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1064
+#: scripts/scenario_51_deliverAmbassador.lua:1106
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1069
+#: scripts/scenario_51_deliverAmbassador.lua:1111
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at waypoint %s"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1085
+#: scripts/scenario_51_deliverAmbassador.lua:1127
 msgctxt "path-comms"
 msgid "Where is Balindor Prime?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1085
+#: scripts/scenario_51_deliverAmbassador.lua:1127
 msgctxt "path-comms"
 msgid "planet Balindor Prime"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1086
+#: scripts/scenario_51_deliverAmbassador.lua:1128
 msgctxt "path-comms"
 msgid "Where is Ningling?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1086
+#: scripts/scenario_51_deliverAmbassador.lua:1128
 msgctxt "path-comms"
 msgid "Ningling station"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1087
+#: scripts/scenario_51_deliverAmbassador.lua:1129
 msgctxt "path-comms"
 msgid "Where is Goltin 7?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1087
+#: scripts/scenario_51_deliverAmbassador.lua:1129
 msgctxt "path-comms"
 msgid "planet Goltin 7"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1088
+#: scripts/scenario_51_deliverAmbassador.lua:1130
 msgctxt "path-comms"
 msgid "Where is Pangora?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1088
+#: scripts/scenario_51_deliverAmbassador.lua:1130
 msgctxt "path-comms"
 msgid "Pangora station"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1089
+#: scripts/scenario_51_deliverAmbassador.lua:1131
 msgctxt "path-comms"
 msgid "Where is Nakor?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1089
+#: scripts/scenario_51_deliverAmbassador.lua:1131
 msgctxt "path-comms"
 msgid "Nakor station"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1090
+#: scripts/scenario_51_deliverAmbassador.lua:1132
 msgctxt "path-comms"
 msgid "Where is Science-37?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1090
+#: scripts/scenario_51_deliverAmbassador.lua:1132
 msgctxt "path-comms"
 msgid "station Science-37"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1103
+#: scripts/scenario_51_deliverAmbassador.lua:1145
 #, lua-format
 msgctxt "path-comms"
 msgid ""
@@ -770,49 +797,49 @@ msgid ""
 "You reached the 9 waypoint maximum."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1105
+#: scripts/scenario_51_deliverAmbassador.lua:1147
 #, lua-format
 msgctxt "path-comms"
 msgid "Added a waypoint to your navigation system for %s"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1114
+#: scripts/scenario_51_deliverAmbassador.lua:1156
 msgctxt "artifact-comms"
 msgid "Any reports of artifacts near Pangora?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1114
+#: scripts/scenario_51_deliverAmbassador.lua:1156
 msgctxt "artifact-comms"
 msgid ""
 "Some freighters report seeing an artifact on approximate heading 135 from "
 "Pangora."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1115
+#: scripts/scenario_51_deliverAmbassador.lua:1157
 msgctxt "artifact-comms"
 msgid "Heard of any artifacts near Nakor?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1115
+#: scripts/scenario_51_deliverAmbassador.lua:1157
 msgctxt "artifact-comms"
 msgid ""
 "Some have reported seeing object on approximate heading of 315 from Nakor "
 "station."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1116
+#: scripts/scenario_51_deliverAmbassador.lua:1158
 msgctxt "artifact-comms"
 msgid "Has anyone reported seeing artifacts near Science-37?"
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1116
+#: scripts/scenario_51_deliverAmbassador.lua:1158
 msgctxt "artifact-comms"
 msgid ""
 "Freighters doing business here occasionally report an objecton approximate "
 "heading zero from Science-37 station."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1159
+#: scripts/scenario_51_deliverAmbassador.lua:1227
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -820,7 +847,7 @@ msgid ""
 "War begins on Goltin 7. Disgrace abounds."
 msgstr ""
 
-#: scripts/scenario_51_deliverAmbassador.lua:1164
+#: scripts/scenario_51_deliverAmbassador.lua:1232
 msgctxt "msgMainscreen"
 msgid ""
 "Congratulations! You delivered ambassador Gremus\n"

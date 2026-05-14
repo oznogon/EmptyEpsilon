@@ -19,8 +19,8 @@ msgid "MT52 Hornet"
 msgstr ""
 
 #: scripts/shiptemplates/starFighters.lua:13
-#: scripts/shiptemplates/starFighters.lua:65
-#: scripts/shiptemplates/starFighters.lua:121
+#: scripts/shiptemplates/starFighters.lua:68
+#: scripts/shiptemplates/starFighters.lua:124
 msgctxt "class"
 msgid "Starfighter"
 msgstr "Chasseurs stellaires"
@@ -72,17 +72,17 @@ msgstr ""
 "Une coque 2x plus résistante, un blindage presque 3x supérieur, une "
 "meilleure accélération, des boosters d'impulsion et un 2ème faisceau laser."
 
-#: scripts/shiptemplates/starFighters.lua:65
+#: scripts/shiptemplates/starFighters.lua:68
 msgctxt "ship"
 msgid "Adder MK5"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:65
+#: scripts/shiptemplates/starFighters.lua:68
 msgctxt "subclass"
 msgid "Gunship"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:67
+#: scripts/shiptemplates/starFighters.lua:70
 msgid ""
 "The Adder line's fifth iteration proved to be a great success among pirates "
 "and law officers alike. It is cheap, fast, and easy to maintain, and it "
@@ -92,12 +92,12 @@ msgstr ""
 "parmi les pirates et les officiers de justice. C'est un modèle bon marché, "
 "rapide et facile à entretenir, et il a un certain punch."
 
-#: scripts/shiptemplates/starFighters.lua:78
+#: scripts/shiptemplates/starFighters.lua:81
 msgctxt "ship"
 msgid "Adder MK4"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:80
+#: scripts/shiptemplates/starFighters.lua:83
 msgid ""
 "The mark 4 Adder is a rare sight these days due to the success its "
 "successor, the mark 5 Adder, which often replaces this model. Its similar "
@@ -109,12 +109,12 @@ msgstr ""
 "similaire, certains acheteurs imprudents achètent parfois des modèles MK4 "
 "maquillés en MK5."
 
-#: scripts/shiptemplates/starFighters.lua:88
+#: scripts/shiptemplates/starFighters.lua:91
 msgctxt "ship"
 msgid "Adder MK3"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:89
+#: scripts/shiptemplates/starFighters.lua:92
 msgid ""
 "The Adder MK3 is one of the first of the Adder line to meet with some "
 "success. A large number of them were made before the manufacturer went "
@@ -132,12 +132,12 @@ msgstr ""
 "suivants. Comparé au MK4, le MK3 a des boucliers et une coque plus faibles, "
 "mais une vitesse de rotation plus rapide."
 
-#: scripts/shiptemplates/starFighters.lua:94
+#: scripts/shiptemplates/starFighters.lua:97
 msgctxt "ship"
 msgid "Adder MK6"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:96
+#: scripts/shiptemplates/starFighters.lua:99
 msgid ""
 "The mark 6 Adder is a small upgrade compared to the highly successful mark 5 "
 "model. Since people still prefer the more familiar and reliable mark 5, the "
@@ -147,12 +147,12 @@ msgstr ""
 "donné que les gens préfèrent toujours le MK5, plus familier et plus fiable "
 "surtout, le MK6 ne connais pas le même succès."
 
-#: scripts/shiptemplates/starFighters.lua:100
+#: scripts/shiptemplates/starFighters.lua:103
 msgctxt "ship"
 msgid "Adder MK7"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:102
+#: scripts/shiptemplates/starFighters.lua:105
 msgid ""
 "The release of the Adder Mark 7 sent the manufacturer into a second "
 "bankruptcy. They made improvements to the Mark 7 over the Mark 6 like "
@@ -169,12 +169,12 @@ msgstr ""
 "MK5, les a empêchés d'augmenter suffisamment le prix d'achat pour amortir "
 "les coûts de développement et de fabrication du MK7."
 
-#: scripts/shiptemplates/starFighters.lua:106
+#: scripts/shiptemplates/starFighters.lua:109
 msgctxt "ship"
 msgid "Adder MK8"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:108
+#: scripts/shiptemplates/starFighters.lua:111
 msgid ""
 "New management after bankruptcy revisited their most popular Adder Mark 5 "
 "model with improvements: stronger shields, longer and stronger beams and a "
@@ -190,12 +190,12 @@ msgstr ""
 "Ainsi est né le modèle MK8. Il se destine a l'acheteur pragmatique mais "
 "nostalgique qui doit acheter des pièces de rechange pour sa flotte de MK5."
 
-#: scripts/shiptemplates/starFighters.lua:113
+#: scripts/shiptemplates/starFighters.lua:116
 msgctxt "ship"
 msgid "Adder MK9"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:115
+#: scripts/shiptemplates/starFighters.lua:118
 msgid ""
 "Hot on the heels of the Adder Mark 8 comes the Adder Mark 9. Still using the "
 "Adder Mark 5 as a base, the designers provided stronger shields, stronger, "
@@ -214,17 +214,17 @@ msgstr ""
 "Comme le dit si bien leur \"slogan : \"Vous vous sentirez mieux dans un "
 "Vipère MK9.\""
 
-#: scripts/shiptemplates/starFighters.lua:121
+#: scripts/shiptemplates/starFighters.lua:124
 msgctxt "ship"
 msgid "WX-Lindworm"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:121
+#: scripts/shiptemplates/starFighters.lua:124
 msgctxt "subclass"
 msgid "Bomber"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:123
+#: scripts/shiptemplates/starFighters.lua:126
 msgid ""
 "The WX-Lindworm, or \"Worm\" as it's often called, is a bomber-class "
 "starfighter. While one of the least-shielded starfighters in active duty, "
@@ -239,12 +239,12 @@ msgstr ""
 "Son objectif est simple : rechercher sa cible, la détruire et retourner d'où "
 "il vient avant d'être détruit."
 
-#: scripts/shiptemplates/starFighters.lua:136
+#: scripts/shiptemplates/starFighters.lua:139
 msgctxt "playerShip"
 msgid "ZX-Lindworm"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:137
+#: scripts/shiptemplates/starFighters.lua:140
 msgid ""
 "The ZX-Lindworm is a vastly improved version of the WX-Lindworm. Additional "
 "beam weapon, more missiles, tougher, faster and more agile."

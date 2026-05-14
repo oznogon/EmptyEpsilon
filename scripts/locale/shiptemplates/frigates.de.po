@@ -24,8 +24,8 @@ msgstr "Phobos T3"
 #: scripts/shiptemplates/frigates.lua:272
 #: scripts/shiptemplates/frigates.lua:299
 #: scripts/shiptemplates/frigates.lua:312
-#: scripts/shiptemplates/frigates.lua:369
-#: scripts/shiptemplates/frigates.lua:414
+#: scripts/shiptemplates/frigates.lua:370
+#: scripts/shiptemplates/frigates.lua:417
 msgctxt "class"
 msgid "Frigate"
 msgstr "Fregatte"
@@ -348,12 +348,18 @@ msgstr ""
 "Strecken ist es günstiger als ein ein Frachter und wird oft genutzt um "
 "hochwertige Ware diskret zu transportieren."
 
-#: scripts/shiptemplates/frigates.lua:319
+#: scripts/shiptemplates/frigates.lua:318
+#: scripts/shiptemplates/frigates.lua:376
+msgctxt "class"
+msgid "Cargo"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:320
 msgctxt "ship"
 msgid "Flavia Falcon"
 msgstr "Flavia Falcon"
 
-#: scripts/shiptemplates/frigates.lua:320
+#: scripts/shiptemplates/frigates.lua:321
 msgid ""
 "The Flavia Falcon is a Flavia transport modified for faster flight, and adds "
 "rear-mounted lasers to keep enemies off its back."
@@ -362,12 +368,12 @@ msgstr ""
 "Geschwindigkeit optimiert wurde und besitzt zusätzlich zwei rückwärtige "
 "Laser um den Rücken von Feinden frei zu halten."
 
-#: scripts/shiptemplates/frigates.lua:325
+#: scripts/shiptemplates/frigates.lua:326
 msgctxt "playerShip"
 msgid "Flavia P.Falcon"
 msgstr "Flavia P.Falcon"
 
-#: scripts/shiptemplates/frigates.lua:326
+#: scripts/shiptemplates/frigates.lua:327
 msgid ""
 "The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp "
 "drive."
@@ -375,31 +381,31 @@ msgstr ""
 "Die Flavia P.Falcon besitzt einen rückwärtigen Raketenschacht welcher Nukes "
 "einsetzen kann, sowie einen Warpantrieb."
 
-#: scripts/shiptemplates/frigates.lua:369
+#: scripts/shiptemplates/frigates.lua:370
 msgctxt "playerShip"
 msgid "Repulse"
 msgstr "Repulse"
 
-#: scripts/shiptemplates/frigates.lua:369
+#: scripts/shiptemplates/frigates.lua:370
 msgctxt "subclass"
 msgid "Armored Transport"
 msgstr "Gepanzerter Transporter"
 
-#: scripts/shiptemplates/frigates.lua:371
+#: scripts/shiptemplates/frigates.lua:372
 msgid "Jump/Turret version of Flavia Falcon"
 msgstr "Sprung/Geschützturm-Version der Flavia Falcon"
 
-#: scripts/shiptemplates/frigates.lua:414
+#: scripts/shiptemplates/frigates.lua:417
 msgctxt "ship"
 msgid "Fiend G3"
 msgstr "Fiend G3"
 
-#: scripts/shiptemplates/frigates.lua:414
+#: scripts/shiptemplates/frigates.lua:417
 msgctxt "subclass"
 msgid "Gunship"
 msgstr "Kanonenboot"
 
-#: scripts/shiptemplates/frigates.lua:416
+#: scripts/shiptemplates/frigates.lua:419
 msgid ""
 "The Fiend G3 was the first model produced by Conversions R Us. They got a "
 "good deal on a number of used Gunships. They added a cheap jump drive to the "
@@ -415,12 +421,12 @@ msgstr ""
 "Verbindung mit dem Sprungantrieb ist es im Vergleich zum normalen "
 "Kanonenboot das wesentlich gefährlichere Schiff."
 
-#: scripts/shiptemplates/frigates.lua:428
+#: scripts/shiptemplates/frigates.lua:431
 msgctxt "ship"
 msgid "Fiend G4"
 msgstr "Fiend G4"
 
-#: scripts/shiptemplates/frigates.lua:429
+#: scripts/shiptemplates/frigates.lua:432
 msgid ""
 "The Fiend G4 was among the first models produced by Conversions R Us. They "
 "got a good deal on a number of used Gunships. They added a cheap warp drive "
@@ -436,12 +442,12 @@ msgstr ""
 "auszuschalten. In Verbindung mit dem Warpantrieb ist es im Vergleich zum "
 "normalen Kanonenboot das wesentlich gefährlichere Schiff."
 
-#: scripts/shiptemplates/frigates.lua:433
+#: scripts/shiptemplates/frigates.lua:436
 msgctxt "ship"
 msgid "Fiend G6"
 msgstr "Fiend G6"
 
-#: scripts/shiptemplates/frigates.lua:434
+#: scripts/shiptemplates/frigates.lua:437
 msgid ""
 "With the success of the Fiend G3 and G4 models, Conversions R Us continued "
 "their streak with the Fiend G6. They acquired some used Advanced Gunships "
@@ -456,12 +462,12 @@ msgstr ""
 "Raketenschächte und Laser um schwächere Schiffe auszuschalten. Ihr "
 "Sprungantrieb macht sie jedoch nochmals um einiges gefährlicher."
 
-#: scripts/shiptemplates/frigates.lua:437
+#: scripts/shiptemplates/frigates.lua:440
 msgctxt "ship"
 msgid "Fiend G5"
 msgstr "Fiend G5"
 
-#: scripts/shiptemplates/frigates.lua:438
+#: scripts/shiptemplates/frigates.lua:441
 msgid ""
 "With the success of the Fiend G3 and G4 models, Conversions R Us continued "
 "their streak with the Fiend G5. They acquired some used Advanced Gunships "

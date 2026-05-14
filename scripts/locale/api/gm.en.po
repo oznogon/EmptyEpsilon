@@ -4,69 +4,100 @@ msgid "Artifact"
 msgstr ""
 
 #: scripts/api/gm.lua:3 scripts/api/gm.lua:4 scripts/api/gm.lua:5
-#: scripts/api/gm.lua:6 scripts/api/gm.lua:7 scripts/api/gm.lua:8
-#: scripts/api/gm.lua:9 scripts/api/gm.lua:10 scripts/api/gm.lua:11
-#: scripts/api/gm.lua:12 scripts/api/gm.lua:13
+#: scripts/api/gm.lua:10 scripts/api/gm.lua:11 scripts/api/gm.lua:12
+#: scripts/api/gm.lua:13 scripts/api/gm.lua:14 scripts/api/gm.lua:15
+#: scripts/api/gm.lua:16 scripts/api/gm.lua:17
 msgctxt "create"
 msgid "Various"
 msgstr ""
 
 #: scripts/api/gm.lua:4
 msgctxt "create"
-msgid "Warp Jammer"
+msgid "Warp jammer"
 msgstr ""
 
-#: scripts/api/gm.lua:5 scripts/api/gm.lua:7
+#: scripts/api/gm.lua:5
 msgctxt "create"
 msgid "Mine"
 msgstr ""
 
 #: scripts/api/gm.lua:6
 msgctxt "create"
-msgid "Supply Drop"
+msgid "Homing missile"
+msgstr ""
+
+#: scripts/api/gm.lua:6 scripts/api/gm.lua:7 scripts/api/gm.lua:8
+#: scripts/api/gm.lua:9
+msgctxt "create"
+msgid "Missiles"
+msgstr ""
+
+#: scripts/api/gm.lua:7
+msgctxt "create"
+msgid "Nuke"
 msgstr ""
 
 #: scripts/api/gm.lua:8
 msgctxt "create"
-msgid "Asteroid"
+msgid "EMP missile"
 msgstr ""
 
 #: scripts/api/gm.lua:9
 msgctxt "create"
-msgid "Visual Asteroid"
+msgid "HVLI"
 msgstr ""
 
 #: scripts/api/gm.lua:10
 msgctxt "create"
-msgid "Planet"
+msgid "Supply drop"
 msgstr ""
 
 #: scripts/api/gm.lua:11
 msgctxt "create"
-msgid "BlackHole"
+msgid "Scan probe"
 msgstr ""
 
 #: scripts/api/gm.lua:12
 msgctxt "create"
-msgid "Nebula"
+msgid "Asteroid"
 msgstr ""
 
 #: scripts/api/gm.lua:13
 msgctxt "create"
-msgid "Worm Hole"
+msgid "Visual asteroid"
 msgstr ""
 
-#: scripts/api/gm.lua:18
+#: scripts/api/gm.lua:14
 msgctxt "create"
-msgid "player ship"
+msgid "Planet"
 msgstr ""
 
-#: scripts/api/gm.lua:20
+#: scripts/api/gm.lua:15
 msgctxt "create"
-msgid "station"
+msgid "Black hole"
+msgstr ""
+
+#: scripts/api/gm.lua:16
+msgctxt "create"
+msgid "Nebula"
+msgstr ""
+
+#: scripts/api/gm.lua:17
+msgctxt "create"
+msgid "Worm hole"
 msgstr ""
 
 #: scripts/api/gm.lua:22
 msgctxt "create"
-msgid "cpu ship"
+msgid "Player ship"
+msgstr ""
+
+#: scripts/api/gm.lua:24
+msgctxt "create"
+msgid "Station"
+msgstr ""
+
+#: scripts/api/gm.lua:26
+msgctxt "create"
+msgid "CPU ship"
 msgstr ""

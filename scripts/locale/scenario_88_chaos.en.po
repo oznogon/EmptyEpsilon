@@ -14,7 +14,7 @@ msgid ""
 "Get the player ship access codes from the GM screen after you generate the "
 "terrain\n"
 "\n"
-"Version 2.1"
+"Version 2.2"
 msgstr ""
 
 # Scenario setting
@@ -341,31 +341,7 @@ msgid "Time"
 msgstr ""
 
 msgctxt "setting"
-msgid "Determines how long the game will last. Default: 45 minutes"
-msgstr ""
-
-msgctxt "Time"
-msgid "5"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 5 minutes"
-msgstr ""
-
-msgctxt "Time"
-msgid "10"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 10 minutes"
-msgstr ""
-
-msgctxt "Time"
-msgid "15"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 15 minutes"
+msgid "Determines how long the game will last. Default: 50 minutes"
 msgstr ""
 
 msgctxt "Time"
@@ -377,27 +353,11 @@ msgid "Game ends in 20 minutes"
 msgstr ""
 
 msgctxt "Time"
-msgid "25"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 25 minutes"
-msgstr ""
-
-msgctxt "Time"
 msgid "30"
 msgstr ""
 
 msgctxt "Time"
 msgid "Game ends in 30 minutes"
-msgstr ""
-
-msgctxt "Time"
-msgid "35"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 35 minutes"
 msgstr ""
 
 msgctxt "Time"
@@ -409,27 +369,11 @@ msgid "Game ends in 40 minutes"
 msgstr ""
 
 msgctxt "Time"
-msgid "45"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 45 minutes"
-msgstr ""
-
-msgctxt "Time"
 msgid "50"
 msgstr ""
 
 msgctxt "Time"
 msgid "Game ends in 50 minutes"
-msgstr ""
-
-msgctxt "Time"
-msgid "55"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 55 minutes"
 msgstr ""
 
 msgctxt "Time"
@@ -441,27 +385,11 @@ msgid "Game ends in 60 minutes (one hour)"
 msgstr ""
 
 msgctxt "Time"
-msgid "65"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 65 minutes (one hour and 5 minutes)"
-msgstr ""
-
-msgctxt "Time"
 msgid "70"
 msgstr ""
 
 msgctxt "Time"
 msgid "Game ends in 70 minutes (one hour and 10 minutes)"
-msgstr ""
-
-msgctxt "Time"
-msgid "75"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 75 minutes (one hour and 15 minutes)"
 msgstr ""
 
 msgctxt "Time"
@@ -473,27 +401,11 @@ msgid "Game ends in 80 minutes (one hour and 20 minutes)"
 msgstr ""
 
 msgctxt "Time"
-msgid "85"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 85 minutes (one hour and 25 minutes)"
-msgstr ""
-
-msgctxt "Time"
 msgid "90"
 msgstr ""
 
 msgctxt "Time"
 msgid "Game ends in 90 minutes (one hour and 30 minutes)"
-msgstr ""
-
-msgctxt "Time"
-msgid "95"
-msgstr ""
-
-msgctxt "Time"
-msgid "Game ends in 95 minutes (one hour and 35 minutes)"
 msgstr ""
 
 msgctxt "Time"
@@ -504,13 +416,198 @@ msgctxt "Time"
 msgid "Game ends in 100 minutes (one hour and 40 minutes)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1557 scripts/scenario_88_chaos.lua:1625
+#: scripts/scenario_88_chaos.lua:673
+msgctxt "station-comms"
+msgid "hull strength upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:674
+msgctxt "station-comms"
+msgid "shield strength upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:675
+msgctxt "station-comms"
+msgid "missile load speed upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:676
+msgctxt "station-comms"
+msgid "beam damage upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:677
+msgctxt "station-comms"
+msgid "beam range upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:678
+msgctxt "station-comms"
+msgid "battery efficiency upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:679
+msgctxt "station-comms"
+msgid "faster impulse upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:680
+msgctxt "station-comms"
+msgid "longer sensor range upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:681
+msgctxt "station-comms"
+msgid "faster maneuvering speed upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:849
+msgctxt "trade-comms"
+msgid "food"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:850
+msgctxt "trade-comms"
+msgid "medicine"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:851
+msgctxt "trade-comms"
+msgid "luxury"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:852
+msgctxt "trade-comms"
+msgid "cobalt"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:853
+msgctxt "trade-comms"
+msgid "dilithium"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:854
+msgctxt "trade-comms"
+msgid "gold"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:855
+msgctxt "trade-comms"
+msgid "nickel"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:856
+msgctxt "trade-comms"
+msgid "platinum"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:857
+msgctxt "trade-comms"
+msgid "tritanium"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:858
+msgctxt "trade-comms"
+msgid "autodoc"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:859
+msgctxt "trade-comms"
+msgid "android"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:860
+msgctxt "trade-comms"
+msgid "battery"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:861
+msgctxt "trade-comms"
+msgid "beam"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:862
+msgctxt "trade-comms"
+msgid "circuit"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:863
+msgctxt "trade-comms"
+msgid "communication"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:864
+msgctxt "trade-comms"
+msgid "filament"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:865
+msgctxt "trade-comms"
+msgid "impulse"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:866
+msgctxt "trade-comms"
+msgid "lifter"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:867
+msgctxt "trade-comms"
+msgid "nanites"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:868
+msgctxt "trade-comms"
+msgid "optic"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:869
+msgctxt "trade-comms"
+msgid "repulsor"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:870
+msgctxt "trade-comms"
+msgid "robotic"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:871
+msgctxt "trade-comms"
+msgid "sensor"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:872
+msgctxt "trade-comms"
+msgid "shield"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:873
+msgctxt "trade-comms"
+msgid "software"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:874
+msgctxt "trade-comms"
+msgid "tractor"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:875
+msgctxt "trade-comms"
+msgid "transporter"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:876
+msgctxt "trade-comms"
+msgid "warp"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1503 scripts/scenario_88_chaos.lua:1572
 #, lua-format
 msgctxt "buttonGM"
 msgid "Version %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1558 scripts/scenario_88_chaos.lua:1626
+#: scripts/scenario_88_chaos.lua:1504 scripts/scenario_88_chaos.lua:1573
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -518,98 +615,98 @@ msgid ""
 " LUA version %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1563
+#: scripts/scenario_88_chaos.lua:1509
 msgctxt "buttonGM"
 msgid "+Player Config"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1564
+#: scripts/scenario_88_chaos.lua:1510
 msgctxt "buttonGM"
 msgid "+NPC Ships: 0"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1566
+#: scripts/scenario_88_chaos.lua:1512
 #, lua-format
 msgctxt "buttonGM"
 msgid "+NPC Ships: %i-%i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1569
+#: scripts/scenario_88_chaos.lua:1515
 msgctxt "buttonGM"
 msgid "+Terrain"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1570
+#: scripts/scenario_88_chaos.lua:1516
 #, lua-format
 msgctxt "buttonGM"
 msgid "Respawn: %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1579 scripts/scenario_88_chaos.lua:1630
+#: scripts/scenario_88_chaos.lua:1525 scripts/scenario_88_chaos.lua:1577
 msgctxt "buttonGM"
 msgid "Show control codes"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1580 scripts/scenario_88_chaos.lua:1631
+#: scripts/scenario_88_chaos.lua:1526 scripts/scenario_88_chaos.lua:1578
 msgctxt "buttonGM"
 msgid "Show Human codes"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1581 scripts/scenario_88_chaos.lua:1632
+#: scripts/scenario_88_chaos.lua:1527 scripts/scenario_88_chaos.lua:1579
 msgctxt "buttonGM"
 msgid "Show Kraylor codes"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1583 scripts/scenario_88_chaos.lua:1634
+#: scripts/scenario_88_chaos.lua:1529 scripts/scenario_88_chaos.lua:1581
 msgctxt "buttonGM"
 msgid "Show Exuari codes"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1586 scripts/scenario_88_chaos.lua:1637
+#: scripts/scenario_88_chaos.lua:1532 scripts/scenario_88_chaos.lua:1584
 msgctxt "buttonGM"
 msgid "Show Ktlitan codes"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1589
+#: scripts/scenario_88_chaos.lua:1536
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Stn Sensors %iU"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1590
+#: scripts/scenario_88_chaos.lua:1537
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Game Time %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1591
+#: scripts/scenario_88_chaos.lua:1538
 msgctxt "buttonGM"
 msgid "No"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1593
+#: scripts/scenario_88_chaos.lua:1540
 msgctxt "buttonGM"
 msgid "Yes"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1595
+#: scripts/scenario_88_chaos.lua:1542
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Advance Intel %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1596 scripts/scenario_88_chaos.lua:1617
-#: scripts/scenario_88_chaos.lua:1877 scripts/scenario_88_chaos.lua:1944
-#: scripts/scenario_88_chaos.lua:2013 scripts/scenario_88_chaos.lua:2068
-#: scripts/scenario_88_chaos.lua:2082 scripts/scenario_88_chaos.lua:2128
-#: scripts/scenario_88_chaos.lua:2165 scripts/scenario_88_chaos.lua:2200
-#: scripts/scenario_88_chaos.lua:2280 scripts/scenario_88_chaos.lua:2312
-#: scripts/scenario_88_chaos.lua:2357
+#: scripts/scenario_88_chaos.lua:1543 scripts/scenario_88_chaos.lua:1564
+#: scripts/scenario_88_chaos.lua:1856 scripts/scenario_88_chaos.lua:1923
+#: scripts/scenario_88_chaos.lua:1992 scripts/scenario_88_chaos.lua:2047
+#: scripts/scenario_88_chaos.lua:2061 scripts/scenario_88_chaos.lua:2107
+#: scripts/scenario_88_chaos.lua:2144 scripts/scenario_88_chaos.lua:2179
+#: scripts/scenario_88_chaos.lua:2268 scripts/scenario_88_chaos.lua:2300
+#: scripts/scenario_88_chaos.lua:2345
 msgctxt "buttonGM"
 msgid "Explain"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1598
+#: scripts/scenario_88_chaos.lua:1545
 msgctxt "msgGM"
 msgid ""
 "The version button just provides scenario version information on the text of "
@@ -621,7 +718,7 @@ msgid ""
 "player ships: all or by team faction."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1600
+#: scripts/scenario_88_chaos.lua:1547
 msgctxt "msgGM"
 msgid ""
 "The version button just provides scenario version information on the text of "
@@ -635,40 +732,40 @@ msgid ""
 "started in."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1606
+#: scripts/scenario_88_chaos.lua:1553
 msgctxt "buttonGM"
 msgid "-Main from P. Config"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1608
+#: scripts/scenario_88_chaos.lua:1555
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Player Teams: %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1609
+#: scripts/scenario_88_chaos.lua:1556
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Player Ships: %i (%i)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1610
+#: scripts/scenario_88_chaos.lua:1557
 #, lua-format
 msgctxt "buttonGM"
 msgid "+P.Ship Types: %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1612
+#: scripts/scenario_88_chaos.lua:1559
 msgctxt "buttonGM"
 msgid "Random PShip Names"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1613
+#: scripts/scenario_88_chaos.lua:1560
 msgctxt "msgGM"
 msgid "Player ship names will be selected at random"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1618
+#: scripts/scenario_88_chaos.lua:1565
 msgctxt "msgGM"
 msgid ""
 "Player teams is the number of player teams. Player ships and player ship "
@@ -680,41 +777,41 @@ msgid ""
 "this button unless you restart the server."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1639
+#: scripts/scenario_88_chaos.lua:1586
 msgctxt "buttonGM"
 msgid "Statistics Summary"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1641
+#: scripts/scenario_88_chaos.lua:1588
 msgctxt "buttonGM"
 msgid "Current Scores:"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1642
+#: scripts/scenario_88_chaos.lua:1589
 #, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
+"%s\n"
 "   Human Navy: %.2f (%.1f%%)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1643
+#: scripts/scenario_88_chaos.lua:1590
 #, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
+"%s\n"
 "   Kraylor: %.2f (%.1f%%)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1645
+#: scripts/scenario_88_chaos.lua:1592
 #, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
+"%s\n"
 "   Exuari: %.2f (%.1f%%)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1648
+#: scripts/scenario_88_chaos.lua:1595
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -722,63 +819,157 @@ msgid ""
 "   Ktlitans: %.2f (%.1f%%)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1650
+#: scripts/scenario_88_chaos.lua:1597
+#, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
+"%s\n"
 "Original scores:"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1651
+#: scripts/scenario_88_chaos.lua:1598
 #, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
+"%s\n"
 "   Human Navy: %.2f"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1652
+#: scripts/scenario_88_chaos.lua:1599
 #, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
+"%s\n"
 "   Kraylor: %.2f"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1654
+#: scripts/scenario_88_chaos.lua:1601
 #, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
+"%s\n"
 "   Exuari: %.2f"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1657
+#: scripts/scenario_88_chaos.lua:1604
 #, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
+"%s\n"
 "   Ktlitans: %.2f"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1661
+#: scripts/scenario_88_chaos.lua:1608
 msgctxt "buttonGM"
 msgid "Statistics Details"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1663
+#: scripts/scenario_88_chaos.lua:1614
 msgctxt "msgGM"
 msgid ""
 "Human Navy:\n"
 "    Stations: (score value, type, name)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1667 scripts/scenario_88_chaos.lua:1676
-#: scripts/scenario_88_chaos.lua:1686 scripts/scenario_88_chaos.lua:1702
-#: scripts/scenario_88_chaos.lua:1711 scripts/scenario_88_chaos.lua:1721
-#: scripts/scenario_88_chaos.lua:1738 scripts/scenario_88_chaos.lua:1747
-#: scripts/scenario_88_chaos.lua:1757 scripts/scenario_88_chaos.lua:1775
-#: scripts/scenario_88_chaos.lua:1784 scripts/scenario_88_chaos.lua:1794
+#: scripts/scenario_88_chaos.lua:1618 scripts/scenario_88_chaos.lua:1627
+#: scripts/scenario_88_chaos.lua:1637 scripts/scenario_88_chaos.lua:1660
+#: scripts/scenario_88_chaos.lua:1679 scripts/scenario_88_chaos.lua:1703
+#: scripts/scenario_88_chaos.lua:1712 scripts/scenario_88_chaos.lua:1722
+#: scripts/scenario_88_chaos.lua:1747 scripts/scenario_88_chaos.lua:1756
+#: scripts/scenario_88_chaos.lua:1766
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"        %i %s %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1622 scripts/scenario_88_chaos.lua:1664
+#: scripts/scenario_88_chaos.lua:1707 scripts/scenario_88_chaos.lua:1751
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"            Station Total:%i Weight:%.1f Weighted total:%.2f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1624 scripts/scenario_88_chaos.lua:1666
+#: scripts/scenario_88_chaos.lua:1753
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    Player Ships: (score value, type, name)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1631 scripts/scenario_88_chaos.lua:1673
+#: scripts/scenario_88_chaos.lua:1716 scripts/scenario_88_chaos.lua:1760
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"            Player Ship Total:%i Weight:%.1f Weighted total:%.2f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1633 scripts/scenario_88_chaos.lua:1675
+#: scripts/scenario_88_chaos.lua:1718 scripts/scenario_88_chaos.lua:1762
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    NPC Assets: score value, type, name (location)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1640 scripts/scenario_88_chaos.lua:1682
+#: scripts/scenario_88_chaos.lua:1725 scripts/scenario_88_chaos.lua:1769
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"        %i %s %s (%s)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1645 scripts/scenario_88_chaos.lua:1687
+#: scripts/scenario_88_chaos.lua:1730 scripts/scenario_88_chaos.lua:1774
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1649 scripts/scenario_88_chaos.lua:1691
+#: scripts/scenario_88_chaos.lua:1734 scripts/scenario_88_chaos.lua:1778
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"            Player ship death penalty:%i Weight:%.1f Weighted Total:%,2f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1652
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"----Human weighted total:%.1f Original:%.1f Change:%.2f%%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1654
+#, lua-format
+msgctxt "msgGM"
+msgid "%sHuman tie breaker points:%f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1656
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Kraylor:\n"
+"    Stations: (score value, type, name)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1669
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -786,99 +977,51 @@ msgid ""
 "        %i %s %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1671 scripts/scenario_88_chaos.lua:1706
-#: scripts/scenario_88_chaos.lua:1742 scripts/scenario_88_chaos.lua:1779
+#: scripts/scenario_88_chaos.lua:1694
 #, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
-"            Station Total:%i Weight:%.1f Weighted total:%.2f"
+"%s\n"
+"----Kraylor weighted total:%.1f Original:%.1f Change:%.2f%%"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1673 scripts/scenario_88_chaos.lua:1708
-#: scripts/scenario_88_chaos.lua:1744 scripts/scenario_88_chaos.lua:1781
+#: scripts/scenario_88_chaos.lua:1696
+#, lua-format
+msgctxt "msgGM"
+msgid "%sKraylor tie breaker points:%f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1699
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Exuari:\n"
+"    Stations: (score value, type, name)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1709
 msgctxt "msgGM"
 msgid ""
 "\n"
 "    Player Ships: (score value, type, name)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1680 scripts/scenario_88_chaos.lua:1715
-#: scripts/scenario_88_chaos.lua:1751 scripts/scenario_88_chaos.lua:1788
+#: scripts/scenario_88_chaos.lua:1737
 #, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
-"            Player Ship Total:%i Weight:%.1f Weighted total:%.2f"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:1682 scripts/scenario_88_chaos.lua:1717
-#: scripts/scenario_88_chaos.lua:1753 scripts/scenario_88_chaos.lua:1790
-msgctxt "msgGM"
-msgid ""
-"\n"
-"    NPC Assets: score value, type, name (location)"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:1689 scripts/scenario_88_chaos.lua:1724
-#: scripts/scenario_88_chaos.lua:1760 scripts/scenario_88_chaos.lua:1797
-#, lua-format
-msgctxt "msgGM"
-msgid ""
-"\n"
-"        %i %s %s (%s)"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:1694 scripts/scenario_88_chaos.lua:1729
-#: scripts/scenario_88_chaos.lua:1765 scripts/scenario_88_chaos.lua:1802
-#, lua-format
-msgctxt "msgGM"
-msgid ""
-"\n"
-"            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:1696
-#, lua-format
-msgctxt "msgGM"
-msgid ""
-"\n"
-"----Human weighted total:%.1f Original:%.1f Change:%.2f%%"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:1698
-msgctxt "msgGM"
-msgid ""
-"\n"
-"Kraylor:\n"
-"    Stations: (score value, type, name)"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:1731
-#, lua-format
-msgctxt "msgGM"
-msgid ""
-"\n"
-"----Kraylor weighted total:%.1f Original:%.1f Change:%.2f%%"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:1734
-msgctxt "msgGM"
-msgid ""
-"\n"
-"Exuari:\n"
-"    Stations: (score value, type, name)"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:1767
-#, lua-format
-msgctxt "msgGM"
-msgid ""
-"\n"
+"%s\n"
 "----Exuari weighted total:%.1f Original:%.1f Change:%.2f%%"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1771
+#: scripts/scenario_88_chaos.lua:1739
+#, lua-format
+msgctxt "msgGM"
+msgid "%sExuari tie breaker points:%f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1743
 msgctxt "msgGM"
 msgid ""
 "\n"
@@ -886,100 +1029,106 @@ msgid ""
 "    Stations: (score value, type, name)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1804
+#: scripts/scenario_88_chaos.lua:1781
 #, lua-format
 msgctxt "msgGM"
 msgid ""
-"\n"
+"%s\n"
 "----Ktlitan weighted total:%.1f Original:%.1f Change:%.2f%%"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1813
+#: scripts/scenario_88_chaos.lua:1783
+#, lua-format
+msgctxt "msgGM"
+msgid "%sKtlitan tie breaker points:%f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:1792
 msgctxt "buttonGM"
 msgid "-Main from Teams"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1814
+#: scripts/scenario_88_chaos.lua:1793
 msgctxt "buttonGM"
 msgid "2"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1816 scripts/scenario_88_chaos.lua:1824
-#: scripts/scenario_88_chaos.lua:1839 scripts/scenario_88_chaos.lua:1887
-#: scripts/scenario_88_chaos.lua:1906 scripts/scenario_88_chaos.lua:1941
-#: scripts/scenario_88_chaos.lua:1956 scripts/scenario_88_chaos.lua:2023
-#: scripts/scenario_88_chaos.lua:2041 scripts/scenario_88_chaos.lua:2054
-#: scripts/scenario_88_chaos.lua:2062 scripts/scenario_88_chaos.lua:2090
-#: scripts/scenario_88_chaos.lua:2098 scripts/scenario_88_chaos.lua:2106
-#: scripts/scenario_88_chaos.lua:2114 scripts/scenario_88_chaos.lua:2122
-#: scripts/scenario_88_chaos.lua:2290 scripts/scenario_88_chaos.lua:2298
-#: scripts/scenario_88_chaos.lua:2306
+#: scripts/scenario_88_chaos.lua:1795 scripts/scenario_88_chaos.lua:1803
+#: scripts/scenario_88_chaos.lua:1818 scripts/scenario_88_chaos.lua:1866
+#: scripts/scenario_88_chaos.lua:1885 scripts/scenario_88_chaos.lua:1920
+#: scripts/scenario_88_chaos.lua:1935 scripts/scenario_88_chaos.lua:2002
+#: scripts/scenario_88_chaos.lua:2020 scripts/scenario_88_chaos.lua:2033
+#: scripts/scenario_88_chaos.lua:2041 scripts/scenario_88_chaos.lua:2069
+#: scripts/scenario_88_chaos.lua:2077 scripts/scenario_88_chaos.lua:2085
+#: scripts/scenario_88_chaos.lua:2093 scripts/scenario_88_chaos.lua:2101
+#: scripts/scenario_88_chaos.lua:2278 scripts/scenario_88_chaos.lua:2286
+#: scripts/scenario_88_chaos.lua:2294
 msgctxt "buttonGM"
 msgid "*"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1822
+#: scripts/scenario_88_chaos.lua:1801
 msgctxt "buttonGM"
 msgid "3"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1831 scripts/scenario_88_chaos.lua:1846
-#: scripts/scenario_88_chaos.lua:1861 scripts/scenario_88_chaos.lua:1871
+#: scripts/scenario_88_chaos.lua:1810 scripts/scenario_88_chaos.lua:1825
+#: scripts/scenario_88_chaos.lua:1840 scripts/scenario_88_chaos.lua:1850
 msgctxt "msgGM"
 msgid "Switching player ship type to default"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1837
+#: scripts/scenario_88_chaos.lua:1816
 msgctxt "buttonGM"
 msgid "4"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1855
+#: scripts/scenario_88_chaos.lua:1834
 msgctxt "buttonGM"
 msgid "-Main from Ships"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1856 scripts/scenario_88_chaos.lua:1884
+#: scripts/scenario_88_chaos.lua:1835 scripts/scenario_88_chaos.lua:1863
 msgctxt "buttonGM"
 msgid "-Player Config"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1858
+#: scripts/scenario_88_chaos.lua:1837
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i ships add -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1868
+#: scripts/scenario_88_chaos.lua:1847
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i ships del -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1878
+#: scripts/scenario_88_chaos.lua:1857
 msgctxt "msgGM"
 msgid ""
 "This is where you set the number of player ships per team. The number of non-"
 "player ships is set under NPC Ships."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1883
+#: scripts/scenario_88_chaos.lua:1862
 msgctxt "buttonGM"
 msgid "-Main from Ship Types"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1897
+#: scripts/scenario_88_chaos.lua:1876
 #, lua-format
 msgctxt "msgGM"
 msgid "Default ship %s for a team of %i %s:"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1910
+#: scripts/scenario_88_chaos.lua:1889
 msgctxt "msgGM"
 msgid "Spawned ship type(s):"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1921
+#: scripts/scenario_88_chaos.lua:1900
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -990,7 +1139,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1923
+#: scripts/scenario_88_chaos.lua:1902
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -1001,7 +1150,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1925
+#: scripts/scenario_88_chaos.lua:1904
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -1012,7 +1161,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1930
+#: scripts/scenario_88_chaos.lua:1909
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -1023,7 +1172,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1932
+#: scripts/scenario_88_chaos.lua:1911
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -1034,10 +1183,10 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1945
+#: scripts/scenario_88_chaos.lua:1924
 msgctxt "msgGM"
 msgid ""
-"This is where you determine the kinds of whips the players will use.\n"
+"This is where you determine the kinds of ships the players will use.\n"
 "\n"
 "Default: There is a default set of ships depending on the number of players "
 "and the number of teams.\n"
@@ -1054,51 +1203,51 @@ msgid ""
 "+Customize Custom button."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1950 scripts/scenario_88_chaos.lua:1978
+#: scripts/scenario_88_chaos.lua:1929 scripts/scenario_88_chaos.lua:1957
 msgctxt "buttonGM"
 msgid "-Main from Custom"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1951 scripts/scenario_88_chaos.lua:1979
+#: scripts/scenario_88_chaos.lua:1930 scripts/scenario_88_chaos.lua:1958
 msgctxt "buttonGM"
 msgid "-Ship Types"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1952
+#: scripts/scenario_88_chaos.lua:1931
 msgctxt "buttonGM"
 msgid "+Customize Custom"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1963
+#: scripts/scenario_88_chaos.lua:1942
 #, lua-format
 msgctxt "msgGM"
 msgid "Ship type set %s for %i player:"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1965
+#: scripts/scenario_88_chaos.lua:1944
 #, lua-format
 msgctxt "msgGM"
 msgid "Ship type set %s for %i players:"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:1980
+#: scripts/scenario_88_chaos.lua:1959
 msgctxt "buttonGM"
 msgid "-Custom Set"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2000
+#: scripts/scenario_88_chaos.lua:1979
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Out %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2001
+#: scripts/scenario_88_chaos.lua:1980
 #, lua-format
 msgctxt "buttonGM"
 msgid "+In %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2014
+#: scripts/scenario_88_chaos.lua:1993
 msgctxt "msgGM"
 msgid ""
 "The +Out button shows the current list of player ships. The ship named on "
@@ -1106,7 +1255,7 @@ msgid ""
 "ship in the list that you can swap with another.\n"
 "\n"
 "The +In button shows the list of ships that you might want to put in the "
-"custom list of ships. The ship on the button ot the one with the asterisk if "
+"custom list of ships. The ship on the button or the one with the asterisk if "
 "you click the +In button is the ship you can place in the custom list.\n"
 "\n"
 "The Swap button swaps the ships on the +In and +Out buttons removing the "
@@ -1118,22 +1267,22 @@ msgid ""
 "Epsilon ships."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2051
+#: scripts/scenario_88_chaos.lua:2030
 msgctxt "buttonGM"
 msgid "-Main"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2052
+#: scripts/scenario_88_chaos.lua:2031
 msgctxt "buttonGM"
 msgid "Advance Intel Yes"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2060
+#: scripts/scenario_88_chaos.lua:2039
 msgctxt "buttonGM"
 msgid "Advance Intel No"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2069
+#: scripts/scenario_88_chaos.lua:2048
 msgctxt "msgGM"
 msgid ""
 "This setting determines whether or not the players will receive a message at "
@@ -1142,28 +1291,28 @@ msgid ""
 "for their opponents."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2075
+#: scripts/scenario_88_chaos.lua:2054
 msgctxt "buttonGM"
 msgid "-Main from Terrain"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2076
+#: scripts/scenario_88_chaos.lua:2055
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Missiles: %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2077
+#: scripts/scenario_88_chaos.lua:2056
 msgctxt "buttonGM"
 msgid "+Primary Station"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2078
+#: scripts/scenario_88_chaos.lua:2057
 msgctxt "buttonGM"
 msgid "Generate"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2083
+#: scripts/scenario_88_chaos.lua:2062
 msgctxt "msgGM"
 msgid ""
 "Explanations for missiles and primary station available by clicking those "
@@ -1178,78 +1327,78 @@ msgid ""
 "ship access control codes after you generate the terrain."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2088
+#: scripts/scenario_88_chaos.lua:2067
 msgctxt "buttonGM"
 msgid "Zero"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2096
+#: scripts/scenario_88_chaos.lua:2075
 msgctxt "buttonGM"
 msgid "5U"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2104
+#: scripts/scenario_88_chaos.lua:2083
 msgctxt "buttonGM"
 msgid "10U"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2112
+#: scripts/scenario_88_chaos.lua:2091
 msgctxt "buttonGM"
 msgid "20U"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2120
+#: scripts/scenario_88_chaos.lua:2099
 msgctxt "buttonGM"
 msgid "30U"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2129
+#: scripts/scenario_88_chaos.lua:2108
 msgctxt "msgGM"
 msgid ""
 "This is where you set the station enemy detection range. Stations that "
 "detect enemies will send a warning message to friendly player ships."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2134
+#: scripts/scenario_88_chaos.lua:2113
 msgctxt "buttonGM"
 msgid "-Main from Prm Stn"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2135 scripts/scenario_88_chaos.lua:2172
-#: scripts/scenario_88_chaos.lua:2287
+#: scripts/scenario_88_chaos.lua:2114 scripts/scenario_88_chaos.lua:2151
+#: scripts/scenario_88_chaos.lua:2275
 msgctxt "buttonGM"
 msgid "-Terrain"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2137
+#: scripts/scenario_88_chaos.lua:2116
 msgctxt "buttonGM"
 msgid "+Platforms: Random"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2139
+#: scripts/scenario_88_chaos.lua:2118
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Platforms: %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2142
+#: scripts/scenario_88_chaos.lua:2121
 msgctxt "buttonGM"
 msgid "Random Size ->"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2147
+#: scripts/scenario_88_chaos.lua:2126
 #, lua-format
 msgctxt "buttonGM"
 msgid "%s ->"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2155
+#: scripts/scenario_88_chaos.lua:2134
 #, lua-format
 msgctxt "buttonGM"
 msgid "Jammer: %s ->"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2166
+#: scripts/scenario_88_chaos.lua:2145
 msgctxt "msgGM"
 msgid ""
 "An explanation for platforms can be obtained by clicking the platforms "
@@ -1262,41 +1411,41 @@ msgid ""
 "indicates the current selection."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2171
+#: scripts/scenario_88_chaos.lua:2150
 msgctxt "buttonGM"
 msgid "-Main from Platforms"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2173
+#: scripts/scenario_88_chaos.lua:2152
 msgctxt "buttonGM"
 msgid "-Primary Station"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2176
+#: scripts/scenario_88_chaos.lua:2155
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Platforms + -> Rnd"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2181
+#: scripts/scenario_88_chaos.lua:2160
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Platforms + -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2189
+#: scripts/scenario_88_chaos.lua:2168
 #, lua-format
 msgctxt "buttonGM"
 msgid "Rnd Platforms - -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2194
+#: scripts/scenario_88_chaos.lua:2173
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Platforms - -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2201
+#: scripts/scenario_88_chaos.lua:2180
 msgctxt "msgGM"
 msgid ""
 "This is where you determine the number of defense platforms surrounding the "
@@ -1305,42 +1454,42 @@ msgid ""
 "button(s) indicates the value after clicking the button."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2258
+#: scripts/scenario_88_chaos.lua:2237
 #, lua-format
 msgctxt "msgGM"
 msgid "%s: %s %s\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2265
+#: scripts/scenario_88_chaos.lua:2253
 msgctxt "buttonGM"
 msgid "-Main from Time"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2267
+#: scripts/scenario_88_chaos.lua:2255
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Add 5 -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2274
+#: scripts/scenario_88_chaos.lua:2262
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Del 5 -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2281
+#: scripts/scenario_88_chaos.lua:2269
 msgctxt "msgGM"
 msgid ""
 "This is where you set the time limit for the game. The game ends at the end "
 "of the time limit and the faction with the highest score wins."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2286
+#: scripts/scenario_88_chaos.lua:2274
 msgctxt "buttonGM"
 msgid "-Main from Missiles"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2313
+#: scripts/scenario_88_chaos.lua:2301
 msgctxt "msgGM"
 msgid ""
 "This is where you set the missile restock availability for the stations.\n"
@@ -1354,47 +1503,47 @@ msgid ""
 "of missiles is determined randomly for each game."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2318
+#: scripts/scenario_88_chaos.lua:2306
 msgctxt "buttonGM"
 msgid "-From NPC Strength"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2319
+#: scripts/scenario_88_chaos.lua:2307
 msgctxt "buttonGM"
 msgid "NPC Ships: No"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2321
+#: scripts/scenario_88_chaos.lua:2309
 #, lua-format
 msgctxt "buttonGM"
 msgid "NPC Ships: %i-%i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2333
+#: scripts/scenario_88_chaos.lua:2321
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i From Add -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2339
+#: scripts/scenario_88_chaos.lua:2327
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i From Del -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2345
+#: scripts/scenario_88_chaos.lua:2333
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i To Add -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2351
+#: scripts/scenario_88_chaos.lua:2339
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i To Del -> %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2358
+#: scripts/scenario_88_chaos.lua:2346
 msgctxt "msgGM"
 msgid ""
 "This is where you configure Non Player Character or NPC ships. Each team "
@@ -1410,19 +1559,19 @@ msgid ""
 "or Operations."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2609 scripts/scenario_88_chaos.lua:2668
-#: scripts/scenario_88_chaos.lua:2711
+#: scripts/scenario_88_chaos.lua:2597 scripts/scenario_88_chaos.lua:2656
+#: scripts/scenario_88_chaos.lua:2699
 #, lua-format
 msgctxt "scienceDescription-ship"
 msgid "%s defense platform %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2689
+#: scripts/scenario_88_chaos.lua:2677
 #, lua-format
 msgid "scienceDescription-ship"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2782
+#: scripts/scenario_88_chaos.lua:2770
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -1431,7 +1580,7 @@ msgid ""
 "Using default ship set."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2784
+#: scripts/scenario_88_chaos.lua:2772
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -1440,7 +1589,7 @@ msgid ""
 "Using default ship set."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2786
+#: scripts/scenario_88_chaos.lua:2774
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -1449,7 +1598,7 @@ msgid ""
 "Using default ship set."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2793
+#: scripts/scenario_88_chaos.lua:2781
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -1458,7 +1607,7 @@ msgid ""
 "Using default ship set."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2795
+#: scripts/scenario_88_chaos.lua:2783
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -1467,69 +1616,83 @@ msgid ""
 "Using default ship set."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:2814
+#: scripts/scenario_88_chaos.lua:2802
 msgctxt "msgGM"
 msgid ""
 "One of the player ships spawned is not valid, switching to default ship set"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:3591
+#: scripts/scenario_88_chaos.lua:3578
 msgctxt "msgGM"
 msgid "Empty Template pool: fix excludes or other criteria"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:4745
-msgctxt "scienceDB"
-msgid "Jump range"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:4749
-msgctxt "scienceDB"
-msgid "Warp Speed"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:4749
-#, lua-format
-msgctxt "scienceDB"
-msgid "%.1f u/min"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:4759
-#, lua-format
-msgctxt "scienceDB"
-msgid "Beam weapon %i:%i"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:4763
-#, lua-format
-msgctxt "scienceDB"
-msgid "%.1f Dmg / %.1f sec"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:4778
-#, lua-format
-msgctxt "scienceDB"
-msgid "Storage %s"
-msgstr ""
-
-#: scripts/scenario_88_chaos.lua:5888
+#: scripts/scenario_88_chaos.lua:4183
 msgctxt "msgGM"
 msgid "Player creation failed"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6298
+#: scripts/scenario_88_chaos.lua:4542
+#, lua-format
+msgctxt "defensePlatform-comms"
+msgid "Hi %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4550
+#, lua-format
+msgctxt "defensePlatform-comms"
+msgid "Transfer to %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4564
+#, lua-format
+msgctxt "defensePlatform-comms"
+msgid "Don't let %s forget their friends on duty at %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4570
+msgctxt "defensePlatform-comms"
+msgid "Dock if you want anything"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4571
+msgctxt "defensePlatform-comms"
+msgid "You must dock before we can do anything"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4572
+msgctxt "defensePlatform-comms"
+msgid "Gotta dock first"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4573
+msgctxt "defensePlatform-comms"
+msgid "Can't do anything for you unless you dock"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4574
+msgctxt "defensePlatform-comms"
+msgid "Docking crew is standing by"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4575
+msgctxt "defensePlatform-comms"
+msgid "Dock first, then talk"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4587
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6300
+#: scripts/scenario_88_chaos.lua:4589
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6303
+#: scripts/scenario_88_chaos.lua:4592
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -1537,103 +1700,275 @@ msgid ""
 "enemies nearby."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6321 scripts/scenario_88_chaos.lua:6483
-#: scripts/scenario_88_chaos.lua:6491 scripts/scenario_88_chaos.lua:6524
-#: scripts/scenario_88_chaos.lua:6540 scripts/scenario_88_chaos.lua:6672
-#: scripts/scenario_88_chaos.lua:6704 scripts/scenario_88_chaos.lua:6792
-#: scripts/scenario_88_chaos.lua:6802 scripts/scenario_88_chaos.lua:6808
-#: scripts/scenario_88_chaos.lua:6826 scripts/scenario_88_chaos.lua:6850
-#: scripts/scenario_88_chaos.lua:6859 scripts/scenario_88_chaos.lua:6872
-#: scripts/scenario_88_chaos.lua:6874 scripts/scenario_88_chaos.lua:6901
-#: scripts/scenario_88_chaos.lua:6905 scripts/scenario_88_chaos.lua:6930
-#: scripts/scenario_88_chaos.lua:6934 scripts/scenario_88_chaos.lua:6961
-#: scripts/scenario_88_chaos.lua:6965 scripts/scenario_88_chaos.lua:6984
-#: scripts/scenario_88_chaos.lua:6988 scripts/scenario_88_chaos.lua:7008
-#: scripts/scenario_88_chaos.lua:7012 scripts/scenario_88_chaos.lua:7016
-#: scripts/scenario_88_chaos.lua:7067 scripts/scenario_88_chaos.lua:7086
-#: scripts/scenario_88_chaos.lua:7141 scripts/scenario_88_chaos.lua:7154
-#: scripts/scenario_88_chaos.lua:7165 scripts/scenario_88_chaos.lua:7176
-#: scripts/scenario_88_chaos.lua:7179 scripts/scenario_88_chaos.lua:7206
-#: scripts/scenario_88_chaos.lua:7230 scripts/scenario_88_chaos.lua:7254
-#: scripts/scenario_88_chaos.lua:7278 scripts/scenario_88_chaos.lua:7302
-#: scripts/scenario_88_chaos.lua:7321 scripts/scenario_88_chaos.lua:7342
-#: scripts/scenario_88_chaos.lua:7378 scripts/scenario_88_chaos.lua:7515
-#: scripts/scenario_88_chaos.lua:7528 scripts/scenario_88_chaos.lua:7541
-#: scripts/scenario_88_chaos.lua:7554 scripts/scenario_88_chaos.lua:7567
-#: scripts/scenario_88_chaos.lua:7599 scripts/scenario_88_chaos.lua:7603
-#: scripts/scenario_88_chaos.lua:7626 scripts/scenario_88_chaos.lua:7670
-#: scripts/scenario_88_chaos.lua:7733 scripts/scenario_88_chaos.lua:7747
-#: scripts/scenario_88_chaos.lua:7772 scripts/scenario_88_chaos.lua:7795
-#: scripts/scenario_88_chaos.lua:7818 scripts/scenario_88_chaos.lua:7822
-#: scripts/scenario_88_chaos.lua:7839 scripts/scenario_88_chaos.lua:7859
-#: scripts/scenario_88_chaos.lua:8260 scripts/scenario_88_chaos.lua:8281
-#: scripts/scenario_88_chaos.lua:8288 scripts/scenario_88_chaos.lua:8295
-#: scripts/scenario_88_chaos.lua:8302 scripts/scenario_88_chaos.lua:8309
-#: scripts/scenario_88_chaos.lua:8319 scripts/scenario_88_chaos.lua:8326
-#: scripts/scenario_88_chaos.lua:8337 scripts/scenario_88_chaos.lua:8362
-#: scripts/scenario_88_chaos.lua:8403 scripts/scenario_88_chaos.lua:8425
-#: scripts/scenario_88_chaos.lua:8436 scripts/scenario_88_chaos.lua:8441
-#: scripts/scenario_88_chaos.lua:8454 scripts/scenario_88_chaos.lua:8462
-#: scripts/scenario_88_chaos.lua:8475 scripts/scenario_88_chaos.lua:8483
-#: scripts/scenario_88_chaos.lua:8496 scripts/scenario_88_chaos.lua:8510
-#: scripts/scenario_88_chaos.lua:8519 scripts/scenario_88_chaos.lua:8528
-#: scripts/scenario_88_chaos.lua:8582 scripts/scenario_88_chaos.lua:8600
-#: scripts/scenario_88_chaos.lua:8624
+#: scripts/scenario_88_chaos.lua:4608 scripts/scenario_88_chaos.lua:4886
+#, lua-format
+msgctxt "station-comms"
+msgid "Speak with scientist %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4609 scripts/scenario_88_chaos.lua:4887
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings, %s\n"
+"I've got great ideas for the war effort.\n"
+"What can I do for you?"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4610
+msgctxt "station-comms"
+msgid "Please come aboard our ship"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4611
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Certainly, %s\n"
+"\n"
+"%s boards your ship"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4614 scripts/scenario_88_chaos.lua:4776
+#: scripts/scenario_88_chaos.lua:4784 scripts/scenario_88_chaos.lua:4818
+#: scripts/scenario_88_chaos.lua:4834 scripts/scenario_88_chaos.lua:4971
+#: scripts/scenario_88_chaos.lua:5060 scripts/scenario_88_chaos.lua:5070
+#: scripts/scenario_88_chaos.lua:5076 scripts/scenario_88_chaos.lua:5095
+#: scripts/scenario_88_chaos.lua:5141 scripts/scenario_88_chaos.lua:5150
+#: scripts/scenario_88_chaos.lua:5163 scripts/scenario_88_chaos.lua:5165
+#: scripts/scenario_88_chaos.lua:5189 scripts/scenario_88_chaos.lua:5216
+#: scripts/scenario_88_chaos.lua:5220 scripts/scenario_88_chaos.lua:5245
+#: scripts/scenario_88_chaos.lua:5249 scripts/scenario_88_chaos.lua:5276
+#: scripts/scenario_88_chaos.lua:5280 scripts/scenario_88_chaos.lua:5299
+#: scripts/scenario_88_chaos.lua:5303 scripts/scenario_88_chaos.lua:5323
+#: scripts/scenario_88_chaos.lua:5327 scripts/scenario_88_chaos.lua:5331
+#: scripts/scenario_88_chaos.lua:5382 scripts/scenario_88_chaos.lua:5401
+#: scripts/scenario_88_chaos.lua:5695 scripts/scenario_88_chaos.lua:5832
+#: scripts/scenario_88_chaos.lua:5845 scripts/scenario_88_chaos.lua:5858
+#: scripts/scenario_88_chaos.lua:5871 scripts/scenario_88_chaos.lua:5884
+#: scripts/scenario_88_chaos.lua:5916 scripts/scenario_88_chaos.lua:5920
+#: scripts/scenario_88_chaos.lua:5943 scripts/scenario_88_chaos.lua:5987
+#: scripts/scenario_88_chaos.lua:6052 scripts/scenario_88_chaos.lua:6066
+#: scripts/scenario_88_chaos.lua:6091 scripts/scenario_88_chaos.lua:6114
+#: scripts/scenario_88_chaos.lua:6137 scripts/scenario_88_chaos.lua:6141
+#: scripts/scenario_88_chaos.lua:6158 scripts/scenario_88_chaos.lua:6178
+#: scripts/scenario_88_chaos.lua:6578 scripts/scenario_88_chaos.lua:6599
+#: scripts/scenario_88_chaos.lua:6606 scripts/scenario_88_chaos.lua:6613
+#: scripts/scenario_88_chaos.lua:6620 scripts/scenario_88_chaos.lua:6627
+#: scripts/scenario_88_chaos.lua:6637 scripts/scenario_88_chaos.lua:6644
+#: scripts/scenario_88_chaos.lua:6655 scripts/scenario_88_chaos.lua:6680
+#: scripts/scenario_88_chaos.lua:6721 scripts/scenario_88_chaos.lua:6743
+#: scripts/scenario_88_chaos.lua:6754 scripts/scenario_88_chaos.lua:6759
+#: scripts/scenario_88_chaos.lua:6772 scripts/scenario_88_chaos.lua:6780
+#: scripts/scenario_88_chaos.lua:6793 scripts/scenario_88_chaos.lua:6801
+#: scripts/scenario_88_chaos.lua:6814 scripts/scenario_88_chaos.lua:6828
+#: scripts/scenario_88_chaos.lua:6837 scripts/scenario_88_chaos.lua:6846
+#: scripts/scenario_88_chaos.lua:6900 scripts/scenario_88_chaos.lua:6918
+#: scripts/scenario_88_chaos.lua:6942
 msgid "Back"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6516 scripts/scenario_88_chaos.lua:7313
+#: scripts/scenario_88_chaos.lua:4616 scripts/scenario_88_chaos.lua:4888
+msgctxt "station-comms"
+msgid "Can you tell me some more about your ideas?"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4621
+#, lua-format
+msgctxt "station-comms"
+msgid "I'd need to visit %s to proceed further"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4629 scripts/scenario_88_chaos.lua:4900
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"I just sent details on a %s to %s. With their facilities, you should be able "
+"to apply the upgrade the next time you dock there."
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4631 scripts/scenario_88_chaos.lua:4902
+msgctxt "station-comms"
+msgid ""
+"Without your primary station to apply my research, I'm afraid my information "
+"is useless"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4636 scripts/scenario_88_chaos.lua:4907
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"After an extended conversation with %s and the exchange of technical "
+"information with various crew members, you apply the insight into %s gained "
+"by %s.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4645 scripts/scenario_88_chaos.lua:4667
+#: scripts/scenario_88_chaos.lua:4735 scripts/scenario_88_chaos.lua:4757
+#: scripts/scenario_88_chaos.lua:4916
+#, lua-format
+msgctxt "shipLog"
+msgid "%s provided details from %s for an upgrade. %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4649 scripts/scenario_88_chaos.lua:4739
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"The upgrade details were also provided to the other players in your faction."
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4659 scripts/scenario_88_chaos.lua:4696
+#: scripts/scenario_88_chaos.lua:4749 scripts/scenario_88_chaos.lua:4930
+msgctxt "station-comms"
+msgid "and npc ships "
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4671 scripts/scenario_88_chaos.lua:4761
+#: scripts/scenario_88_chaos.lua:4942
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"The upgrade details were also provided to the other players %sin your "
+"faction."
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4674 scripts/scenario_88_chaos.lua:4702
+#: scripts/scenario_88_chaos.lua:4945
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Your conversation with %s about %s was interesting, but not directly "
+"applicable.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4681
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"After an extended conversation with %s, various crew members and %s "
+"facilities managers, you apply the insight into %s gained by %s.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4699
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"NPC ships received the upgrade as well"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4722
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"After an extended conversation with %s, %s, various crew members and %s "
+"facilities managers, you apply the insight into %s and %s gained by %s.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4764
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Your conversation with %s and %s about %s and %s was interesting, but not "
+"directly applicable.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4771
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"I've got this idea for a %s, but I just can't quite get it to crystalize. If "
+"I had another scientist here to collaborate with, I might get further along"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4780
+#, lua-format
+msgctxt "station-comms"
+msgid "Escort %s on to %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4781
+#, lua-format
+msgctxt "station-comms"
+msgid "%s thanks you for your hospitality and disembarks to %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4795
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Congratulations!\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4797
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Sorry.\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4810
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6518 scripts/scenario_88_chaos.lua:6535
-#: scripts/scenario_88_chaos.lua:6702 scripts/scenario_88_chaos.lua:7152
-#: scripts/scenario_88_chaos.lua:7163 scripts/scenario_88_chaos.lua:7174
-#: scripts/scenario_88_chaos.lua:7203 scripts/scenario_88_chaos.lua:7227
-#: scripts/scenario_88_chaos.lua:7251 scripts/scenario_88_chaos.lua:7275
-#: scripts/scenario_88_chaos.lua:7299 scripts/scenario_88_chaos.lua:7315
-#: scripts/scenario_88_chaos.lua:7339 scripts/scenario_88_chaos.lua:7376
-#: scripts/scenario_88_chaos.lua:7513 scripts/scenario_88_chaos.lua:7526
-#: scripts/scenario_88_chaos.lua:7539 scripts/scenario_88_chaos.lua:7552
-#: scripts/scenario_88_chaos.lua:7565 scripts/scenario_88_chaos.lua:7597
-#: scripts/scenario_88_chaos.lua:7837 scripts/scenario_88_chaos.lua:7857
+#: scripts/scenario_88_chaos.lua:4812 scripts/scenario_88_chaos.lua:4829
+#: scripts/scenario_88_chaos.lua:5693 scripts/scenario_88_chaos.lua:5830
+#: scripts/scenario_88_chaos.lua:5843 scripts/scenario_88_chaos.lua:5856
+#: scripts/scenario_88_chaos.lua:5869 scripts/scenario_88_chaos.lua:5882
+#: scripts/scenario_88_chaos.lua:5914 scripts/scenario_88_chaos.lua:6156
+#: scripts/scenario_88_chaos.lua:6176
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6522
+#: scripts/scenario_88_chaos.lua:4816
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6533
+#: scripts/scenario_88_chaos.lua:4827
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchase coolant for %i reputation"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6538
+#: scripts/scenario_88_chaos.lua:4832
 msgctxt "trade-comms"
 msgid "Additional coolant purchased"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6564
+#: scripts/scenario_88_chaos.lua:4858
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6566
+#: scripts/scenario_88_chaos.lua:4860
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6569
+#: scripts/scenario_88_chaos.lua:4863
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -1641,28 +1976,62 @@ msgid ""
 "conduct business with you."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6573
+#: scripts/scenario_88_chaos.lua:4867
 msgctxt "station-comms"
 msgid "I need information"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6574
+#: scripts/scenario_88_chaos.lua:4868
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6729
+#: scripts/scenario_88_chaos.lua:4920
+msgctxt "station-comms"
+msgid ""
+"\n"
+"The upgrade details were also provided to the other players in your faction."
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4938
+#, lua-format
+msgctxt "station-comms"
+msgid "%s provided details from %s for an upgrade. %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4959
+#, lua-format
+msgctxt "station-comms"
+msgid "Communication between %s and %s intercepted by enemy faction"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4961
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s conversation intercepted regarding %s. Probable military application. "
+"Suggest you contact our own scientist in the same field"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4968
+msgctxt "station-comms"
+msgid ""
+"I should not discuss it over an open communication line. Perhaps you should "
+"visit and we can talk"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4997
 msgctxt "stationServices-comms"
 msgid "Docking services status"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6730
+#: scripts/scenario_88_chaos.lua:4998
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6732
+#: scripts/scenario_88_chaos.lua:5000
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1670,24 +2039,24 @@ msgid ""
 "Replenish scan probes."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6736
+#: scripts/scenario_88_chaos.lua:5004
 msgctxt "stationServices-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6737
+#: scripts/scenario_88_chaos.lua:5005
 msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6738
+#: scripts/scenario_88_chaos.lua:5006
 msgctxt "stationServices-comms"
 msgid ""
 "Management has curtailed scan probe replenishment for cost cutting reasons."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6742 scripts/scenario_88_chaos.lua:6755
-#: scripts/scenario_88_chaos.lua:6768
+#: scripts/scenario_88_chaos.lua:5010 scripts/scenario_88_chaos.lua:5023
+#: scripts/scenario_88_chaos.lua:5036
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1695,7 +2064,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6745
+#: scripts/scenario_88_chaos.lua:5013
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1703,22 +2072,22 @@ msgid ""
 "Ship hull repair."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6749
+#: scripts/scenario_88_chaos.lua:5017
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6750
+#: scripts/scenario_88_chaos.lua:5018
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6751
+#: scripts/scenario_88_chaos.lua:5019
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6758
+#: scripts/scenario_88_chaos.lua:5026
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1726,26 +2095,26 @@ msgid ""
 "Recharge ship energy stores."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6762
+#: scripts/scenario_88_chaos.lua:5030
 msgctxt "stationServices-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6763
+#: scripts/scenario_88_chaos.lua:5031
 msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6764
+#: scripts/scenario_88_chaos.lua:5032
 msgctxt "stationServices-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6771
+#: scripts/scenario_88_chaos.lua:5039
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1753,7 +2122,7 @@ msgid ""
 "May overcharge jump drive"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6774
+#: scripts/scenario_88_chaos.lua:5042
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1761,7 +2130,7 @@ msgid ""
 "May repair probe launch system"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6777
+#: scripts/scenario_88_chaos.lua:5045
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1769,7 +2138,7 @@ msgid ""
 "May repair hacking system"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6780
+#: scripts/scenario_88_chaos.lua:5048
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1777,7 +2146,7 @@ msgid ""
 "May repair scanners"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6783
+#: scripts/scenario_88_chaos.lua:5051
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1785,7 +2154,7 @@ msgid ""
 "May repair combat maneuver"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6786
+#: scripts/scenario_88_chaos.lua:5054
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1793,7 +2162,7 @@ msgid ""
 "May repair self destruct system"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6789
+#: scripts/scenario_88_chaos.lua:5057
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1801,230 +2170,438 @@ msgid ""
 "May repair slow loading tubes"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6797
+#: scripts/scenario_88_chaos.lua:5065
 msgctxt "station-comms"
 msgid "Tell me more about your station"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6798
+#: scripts/scenario_88_chaos.lua:5066
 msgctxt "station-comms"
 msgid "What would you like to know?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6800
+#: scripts/scenario_88_chaos.lua:5068
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6806
+#: scripts/scenario_88_chaos.lua:5074
 msgctxt "stationStory-comms"
 msgid "Station history"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6815
+#: scripts/scenario_88_chaos.lua:5083
 msgctxt "stationAssist-comms"
 msgid "Report status"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6816
+#: scripts/scenario_88_chaos.lua:5084
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6819
+#: scripts/scenario_88_chaos.lua:5087 scripts/scenario_88_chaos.lua:5088
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "Shield: %d%%\n"
+msgid "%sShield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6822
+#: scripts/scenario_88_chaos.lua:5091
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "Shield %s: %d%%\n"
+msgid "%sShield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6883
+#: scripts/scenario_88_chaos.lua:5099
+msgctxt "stationStats-comms"
+msgid "What ends the war?"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5100
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"The war ends in one of three ways:\n"
+"1) Time runs out\n"
+"2) A faction drops below half of original score\n"
+"3) A faction either leads or trails the other factions by %i%%\n"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5102
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Human Navy Current:%.1f Original:%.1f (%.2f%%)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5104
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Human Navy loss of player ship penalty: %.1f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5106
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Kraylor Current:%.1f Original:%.1f (%.2f%%)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5108
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Kraylor loss of player ship penalty: %.1f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5111
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Exuari Current:%.1f Original:%.1f (%.2f%%)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5113
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Exuari loss of player ship penalty: %.1f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5117
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Ktlitan Current:%.1f Original:%.1f (%.2f%%)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5119
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Ktlitan loss of player ship penalty: %.1f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5122
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"\n"
+"Station weight:%i%%   Player ship weight:%i%%   NPC weight:%i%%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5127
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Tie breaker points:"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5130
+#, lua-format
+msgctxt "stationStats-comms"
+msgid "%s %s:%f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5132
+#, lua-format
+msgctxt "stationStats-comms"
+msgid "%s %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5134
+#, lua-format
+msgctxt "stationStats-comms"
+msgid "Station values (Total:%i)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5135
+msgctxt "stationStats-comms"
+msgid "Stations: (value, type, name)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5137 scripts/scenario_88_chaos.lua:5146
+#: scripts/scenario_88_chaos.lua:5156
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"   %i, %s, %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5139 scripts/scenario_88_chaos.lua:5148
+#: scripts/scenario_88_chaos.lua:5161
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Total:%i multiplied by weight (%i%%) = weighted total:%.1f"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5143
+#, lua-format
+msgctxt "stationStats-comms"
+msgid "Player ship values (Total:%i)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5144
+msgctxt "stationStats-comms"
+msgid "Player ships: (value, type, name)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5152
+#, lua-format
+msgctxt "stationStats-comms"
+msgid "NPC ship values (Total:%i)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5153
+msgctxt "stationStats-comms"
+msgid "NPC assets: value, type, name (location)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5158
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"   %i, %s, %s (%s)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5169
+msgctxt "stationIntel-comms"
+msgid "Where are the enemy headquarters?"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5175
+#, lua-format
+msgctxt "stationIntel-comms"
+msgid "%s primary station %s is located in sector %s."
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5177
+#, lua-format
+msgctxt "stationIntel-comms"
+msgid ""
+"%s\n"
+"%s primary station %s is located in sector %s."
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5181
+#, lua-format
+msgctxt "stationIntel-comms"
+msgid "%s primary station is off the grid."
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5183
+#, lua-format
+msgctxt "stationIntel-comms"
+msgid ""
+"%s\n"
+"%s primary station is off the grid."
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5188
+#, lua-format
+msgctxt "stationIntel-comms"
+msgid ""
+"The intelligence department has provided this information:\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5198
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6885 scripts/scenario_88_chaos.lua:6913
+#: scripts/scenario_88_chaos.lua:5200 scripts/scenario_88_chaos.lua:5228
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6887 scripts/scenario_88_chaos.lua:6915
+#: scripts/scenario_88_chaos.lua:5202 scripts/scenario_88_chaos.lua:5230
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6889 scripts/scenario_88_chaos.lua:6917
+#: scripts/scenario_88_chaos.lua:5204 scripts/scenario_88_chaos.lua:5232
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6897
+#: scripts/scenario_88_chaos.lua:5212
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6899 scripts/scenario_88_chaos.lua:6928
-#: scripts/scenario_88_chaos.lua:6959 scripts/scenario_88_chaos.lua:6982
-#: scripts/scenario_88_chaos.lua:7006
+#: scripts/scenario_88_chaos.lua:5214 scripts/scenario_88_chaos.lua:5243
+#: scripts/scenario_88_chaos.lua:5274 scripts/scenario_88_chaos.lua:5297
+#: scripts/scenario_88_chaos.lua:5321
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6911
+#: scripts/scenario_88_chaos.lua:5226
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop via jump ship? (%d rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6926
+#: scripts/scenario_88_chaos.lua:5241
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship with a jump drive toward WP %d"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6940
+#: scripts/scenario_88_chaos.lua:5255
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6942 scripts/scenario_88_chaos.lua:6947
-#: scripts/scenario_88_chaos.lua:6970 scripts/scenario_88_chaos.lua:6994
+#: scripts/scenario_88_chaos.lua:5257 scripts/scenario_88_chaos.lua:5262
+#: scripts/scenario_88_chaos.lua:5285 scripts/scenario_88_chaos.lua:5309
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6944
+#: scripts/scenario_88_chaos.lua:5259
 msgctxt "stationAssist-comms"
 msgid "What kind of reinforcements would you like?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6945
+#: scripts/scenario_88_chaos.lua:5260
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Standard Adder MK5 (%d Rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6949
+#: scripts/scenario_88_chaos.lua:5264
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the Adder MK5?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6951 scripts/scenario_88_chaos.lua:6974
-#: scripts/scenario_88_chaos.lua:6998
+#: scripts/scenario_88_chaos.lua:5266 scripts/scenario_88_chaos.lua:5289
+#: scripts/scenario_88_chaos.lua:5313
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Waypoint %d"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6957 scripts/scenario_88_chaos.lua:6980
-#: scripts/scenario_88_chaos.lua:7004
+#: scripts/scenario_88_chaos.lua:5272 scripts/scenario_88_chaos.lua:5295
+#: scripts/scenario_88_chaos.lua:5319
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at waypoint %d"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6968
+#: scripts/scenario_88_chaos.lua:5283
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "MU52 Hornet (%d Rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6972
+#: scripts/scenario_88_chaos.lua:5287
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the MU52 Hornet?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6992
+#: scripts/scenario_88_chaos.lua:5307
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Phobos T3 (%d Rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:6996
+#: scripts/scenario_88_chaos.lua:5311
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the Phobos T3?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7021
+#: scripts/scenario_88_chaos.lua:5336
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7026
+#: scripts/scenario_88_chaos.lua:5341
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Homing"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7028 scripts/scenario_88_chaos.lua:7035
-#: scripts/scenario_88_chaos.lua:7042 scripts/scenario_88_chaos.lua:7049
-#: scripts/scenario_88_chaos.lua:7056
+#: scripts/scenario_88_chaos.lua:5343 scripts/scenario_88_chaos.lua:5350
+#: scripts/scenario_88_chaos.lua:5357 scripts/scenario_88_chaos.lua:5364
+#: scripts/scenario_88_chaos.lua:5371
 #, lua-format
 msgctxt "ammo-comms"
 msgid "(%i)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7033
+#: scripts/scenario_88_chaos.lua:5348
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Nuke"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7040
+#: scripts/scenario_88_chaos.lua:5355
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Mine"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7047
+#: scripts/scenario_88_chaos.lua:5362
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   EMP"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7054
+#: scripts/scenario_88_chaos.lua:5369
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   HVLI"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7060
+#: scripts/scenario_88_chaos.lua:5375
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7062
+#: scripts/scenario_88_chaos.lua:5377
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7064
+#: scripts/scenario_88_chaos.lua:5379
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7080
+#: scripts/scenario_88_chaos.lua:5395
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7081
+#: scripts/scenario_88_chaos.lua:5396
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2032,7 +2609,7 @@ msgid ""
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7083
+#: scripts/scenario_88_chaos.lua:5398
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2040,183 +2617,203 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7396
+#: scripts/scenario_88_chaos.lua:5674
+#, lua-format
+msgctxt "station-comms"
+msgid "Activate station defense fleet (%s rep)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5676
+#, lua-format
+msgctxt "station-comms"
+msgid "%s defense fleet\n"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5690
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"activated"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:5713
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7397
+#: scripts/scenario_88_chaos.lua:5714
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7400
+#: scripts/scenario_88_chaos.lua:5717
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7400
+#: scripts/scenario_88_chaos.lua:5717
 msgctxt "ammo-comms"
 msgid "We really need some nukes."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7403 scripts/scenario_88_chaos.lua:7416
-#: scripts/scenario_88_chaos.lua:7429 scripts/scenario_88_chaos.lua:7442
-#: scripts/scenario_88_chaos.lua:7455
+#: scripts/scenario_88_chaos.lua:5720 scripts/scenario_88_chaos.lua:5733
+#: scripts/scenario_88_chaos.lua:5746 scripts/scenario_88_chaos.lua:5759
+#: scripts/scenario_88_chaos.lua:5772
 #, lua-format
 msgctxt "ammo-comms"
 msgid ", %i avail"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7405 scripts/scenario_88_chaos.lua:7418
-#: scripts/scenario_88_chaos.lua:7431 scripts/scenario_88_chaos.lua:7444
-#: scripts/scenario_88_chaos.lua:7457
+#: scripts/scenario_88_chaos.lua:5722 scripts/scenario_88_chaos.lua:5735
+#: scripts/scenario_88_chaos.lua:5748 scripts/scenario_88_chaos.lua:5761
+#: scripts/scenario_88_chaos.lua:5774
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%i rep each%s)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7413
+#: scripts/scenario_88_chaos.lua:5730
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7413
+#: scripts/scenario_88_chaos.lua:5730
 msgctxt "ammo-comms"
 msgid "Got any EMPs?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7426
+#: scripts/scenario_88_chaos.lua:5743
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7426
+#: scripts/scenario_88_chaos.lua:5743
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7439
+#: scripts/scenario_88_chaos.lua:5756
 msgctxt "ammo-comms"
 msgid "We could use some mines."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7439
+#: scripts/scenario_88_chaos.lua:5756
 msgctxt "ammo-comms"
 msgid "How about mines?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7452
+#: scripts/scenario_88_chaos.lua:5769
 msgctxt "ammo-comms"
 msgid "What about HVLI?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7452
+#: scripts/scenario_88_chaos.lua:5769
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7504
+#: scripts/scenario_88_chaos.lua:5821
 msgctxt "stationServices-comms"
 msgid "Repair ship system"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7505
+#: scripts/scenario_88_chaos.lua:5822
 msgctxt "stationServices-comms"
 msgid "What system would you like repaired?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7508
+#: scripts/scenario_88_chaos.lua:5825
 msgctxt "stationServices-comms"
 msgid "Repair probe launch system (5 Rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7511
+#: scripts/scenario_88_chaos.lua:5828
 msgctxt "stationServices-comms"
 msgid "Your probe launch system has been repaired"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7521
+#: scripts/scenario_88_chaos.lua:5838
 msgctxt "stationServices-comms"
 msgid "Repair hacking system (5 Rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7524
+#: scripts/scenario_88_chaos.lua:5841
 msgctxt "stationServices-comms"
 msgid "Your hack system has been repaired"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7534
+#: scripts/scenario_88_chaos.lua:5851
 msgctxt "stationServices-comms"
 msgid "Repair scanners (5 Rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7537
+#: scripts/scenario_88_chaos.lua:5854
 msgctxt "stationServices-comms"
 msgid "Your scanners have been repaired"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7547
+#: scripts/scenario_88_chaos.lua:5864
 msgctxt "stationServices-comms"
 msgid "Repair combat maneuver (5 Rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7550
+#: scripts/scenario_88_chaos.lua:5867
 msgctxt "stationServices-comms"
 msgid "Your combat maneuver has been repaired"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7560
+#: scripts/scenario_88_chaos.lua:5877
 msgctxt "stationServices-comms"
 msgid "Repair self destruct system (5 Rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7563
+#: scripts/scenario_88_chaos.lua:5880
 msgctxt "stationServices-comms"
 msgid "Your self destruct system has been repaired"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7587
+#: scripts/scenario_88_chaos.lua:5904
 msgctxt "stationServices-comms"
 msgid "Repair slow tube loading (5 Rep)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7595
+#: scripts/scenario_88_chaos.lua:5912
 msgctxt "stationServices-comms"
 msgid "Your tube load times have been returned to normal"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7609
+#: scripts/scenario_88_chaos.lua:5926
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7613
+#: scripts/scenario_88_chaos.lua:5930
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7614
+#: scripts/scenario_88_chaos.lua:5931
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7615
+#: scripts/scenario_88_chaos.lua:5932
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7622
+#: scripts/scenario_88_chaos.lua:5939
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7624
+#: scripts/scenario_88_chaos.lua:5941
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7634 scripts/scenario_88_chaos.lua:7653
+#: scripts/scenario_88_chaos.lua:5951 scripts/scenario_88_chaos.lua:5970
 #, lua-format
 msgctxt "ammo-comms"
 msgid ""
@@ -2224,49 +2821,49 @@ msgid ""
 "Station inventory of %s type weapons reduced to %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7637 scripts/scenario_88_chaos.lua:7656
+#: scripts/scenario_88_chaos.lua:5954 scripts/scenario_88_chaos.lua:5973
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7639
+#: scripts/scenario_88_chaos.lua:5956
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7642 scripts/scenario_88_chaos.lua:7661
-#: scripts/scenario_88_chaos.lua:7666
+#: scripts/scenario_88_chaos.lua:5959 scripts/scenario_88_chaos.lua:5978
+#: scripts/scenario_88_chaos.lua:5983
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7647
+#: scripts/scenario_88_chaos.lua:5964
 msgctxt "ammo-comms"
 msgid ""
 "Either you can't afford as much as I'd like to give you, or I don't have "
 "enough to fully restock you."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7648
+#: scripts/scenario_88_chaos.lua:5965
 msgctxt "ammo-comms"
 msgid "Get just one"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7658
+#: scripts/scenario_88_chaos.lua:5975
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with one weapon charge.\n"
 "Put it to good use."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7682
+#: scripts/scenario_88_chaos.lua:6001
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7683
+#: scripts/scenario_88_chaos.lua:6002
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2274,218 +2871,352 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7685
+#: scripts/scenario_88_chaos.lua:6004
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7688
+#: scripts/scenario_88_chaos.lua:6007
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7690 scripts/scenario_88_chaos.lua:7699
+#: scripts/scenario_88_chaos.lua:6009 scripts/scenario_88_chaos.lua:6018
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7693
+#: scripts/scenario_88_chaos.lua:6012
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7703
+#: scripts/scenario_88_chaos.lua:6022
 msgctxt "trade-comms"
 msgid "     Empty\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7705
+#: scripts/scenario_88_chaos.lua:6024
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7708 scripts/scenario_88_chaos.lua:8609
+#: scripts/scenario_88_chaos.lua:6027 scripts/scenario_88_chaos.lua:6927
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7709
+#: scripts/scenario_88_chaos.lua:6028
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7711
+#: scripts/scenario_88_chaos.lua:6030
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient cargo space for purchase"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7713 scripts/scenario_88_chaos.lua:7729
+#: scripts/scenario_88_chaos.lua:6032 scripts/scenario_88_chaos.lua:6048
 msgctxt "needRep-comms"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7715 scripts/scenario_88_chaos.lua:7758
-#: scripts/scenario_88_chaos.lua:7781 scripts/scenario_88_chaos.lua:7804
+#: scripts/scenario_88_chaos.lua:6034 scripts/scenario_88_chaos.lua:6077
+#: scripts/scenario_88_chaos.lua:6100 scripts/scenario_88_chaos.lua:6123
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient station inventory"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7727
+#: scripts/scenario_88_chaos.lua:6046
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "purchased"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7740
+#: scripts/scenario_88_chaos.lua:6059
 #, lua-format
 msgctxt "trade-comms"
 msgid "Sell one %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7741
+#: scripts/scenario_88_chaos.lua:6060
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7744
+#: scripts/scenario_88_chaos.lua:6063
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "One sold"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7755
+#: scripts/scenario_88_chaos.lua:6074
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7756 scripts/scenario_88_chaos.lua:7779
-#: scripts/scenario_88_chaos.lua:7802
+#: scripts/scenario_88_chaos.lua:6075 scripts/scenario_88_chaos.lua:6098
+#: scripts/scenario_88_chaos.lua:6121
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7769 scripts/scenario_88_chaos.lua:7792
-#: scripts/scenario_88_chaos.lua:7815
+#: scripts/scenario_88_chaos.lua:6088 scripts/scenario_88_chaos.lua:6111
+#: scripts/scenario_88_chaos.lua:6134
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Traded"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7778
+#: scripts/scenario_88_chaos.lua:6097
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:7801 scripts/scenario_88_chaos.lua:8589
+#: scripts/scenario_88_chaos.lua:6120 scripts/scenario_88_chaos.lua:6907
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8044 scripts/scenario_88_chaos.lua:8647
+#: scripts/scenario_88_chaos.lua:6148
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Augment scan range with station sensors while docked (%i rep)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6154
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "sensors increased by %i units"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6171
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Overcharge Jump Drive (%s rep)"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6174
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Your jump drive has been overcharged to %ik"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6191
+msgctxt "upgrade-comms"
+msgid "Your hull strength has been increased by 20%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6193
+msgctxt "upgrade-comms"
+msgid "You already have the hull strength upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6214
+msgctxt "upgrade-comms"
+msgid "Your missile tube load time has been reduced by 20%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6216
+msgctxt "upgrade-comms"
+msgid "Your ship has no missile systems and thus cannot be upgraded"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6219
+msgctxt "upgrade-comms"
+msgid "You already have the missile load speed upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6231
+msgctxt "upgrade-comms"
+msgid ""
+"Your ship shields are now 20% stronger. They'll need to charge to their new "
+"higher capacity"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6233
+msgctxt "upgrade-comms"
+msgid "Your ship has no shields and thus cannot be upgraded"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6236
+msgctxt "upgrade-comms"
+msgid "You already have the shield upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6255
+msgctxt "upgrade-comms"
+msgid "Your ship beam weapons damage has been increased by 20%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6257 scripts/scenario_88_chaos.lua:6281
+msgctxt "upgrade-comms"
+msgid "Your ship has no beam weapons and thus cannot be upgraded"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6260
+msgctxt "upgrade-comms"
+msgid "You already have the beam damage upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6279
+msgctxt "upgrade-comms"
+msgid "Your ship beam weapons range has been increased by 20%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6284
+msgctxt "upgrade-comms"
+msgid "You already have the beam range upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6292
+msgctxt "upgrade-comms"
+msgid ""
+"Your ship batteries can now store 20% more energy. You'll need to charge "
+"them longer to use their full capacity"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6294
+msgctxt "upgrade-comms"
+msgid "You already have the battery efficiency upgrade"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6302
+msgctxt "upgrade-comms"
+msgid "Your maximum impulse top speed has been increased by 20%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6304
+msgctxt "upgrade-comms"
+msgid "You already have an upgraded impulse engine"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6315
+msgctxt "upgrade-comms"
+msgid ""
+"Your ship's long range sensors have had their reach increased by 10 units"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6317
+msgctxt "upgrade-comms"
+msgid "You already have upgraded long range sensors"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6324
+msgctxt "upgrade-comms"
+msgid "Your maneuvering speed has been increased by 20%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6326
+msgctxt "upgrade-comms"
+msgid "You already have upgraded maneuvering speed"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6362 scripts/scenario_88_chaos.lua:6965
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8046 scripts/scenario_88_chaos.lua:8649
+#: scripts/scenario_88_chaos.lua:6364 scripts/scenario_88_chaos.lua:6967
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8066 scripts/scenario_88_chaos.lua:8657
+#: scripts/scenario_88_chaos.lua:6384 scripts/scenario_88_chaos.lua:6975
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8067 scripts/scenario_88_chaos.lua:8658
+#: scripts/scenario_88_chaos.lua:6385 scripts/scenario_88_chaos.lua:6976
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8068 scripts/scenario_88_chaos.lua:8659
+#: scripts/scenario_88_chaos.lua:6386 scripts/scenario_88_chaos.lua:6977
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8072 scripts/scenario_88_chaos.lua:8661
+#: scripts/scenario_88_chaos.lua:6390 scripts/scenario_88_chaos.lua:6979
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8075
+#: scripts/scenario_88_chaos.lua:6393
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8076
+#: scripts/scenario_88_chaos.lua:6394
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8078
+#: scripts/scenario_88_chaos.lua:6396
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8079
+#: scripts/scenario_88_chaos.lua:6397
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8080
+#: scripts/scenario_88_chaos.lua:6398
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8082
+#: scripts/scenario_88_chaos.lua:6400
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8083
+#: scripts/scenario_88_chaos.lua:6401
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8084
+#: scripts/scenario_88_chaos.lua:6402
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8088 scripts/scenario_88_chaos.lua:8663
+#: scripts/scenario_88_chaos.lua:6406 scripts/scenario_88_chaos.lua:6981
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8091 scripts/scenario_88_chaos.lua:8665
+#: scripts/scenario_88_chaos.lua:6409 scripts/scenario_88_chaos.lua:6983
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8094 scripts/scenario_88_chaos.lua:8667
+#: scripts/scenario_88_chaos.lua:6412 scripts/scenario_88_chaos.lua:6985
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -2496,22 +3227,22 @@ msgid ""
 "Communication halted."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8095 scripts/scenario_88_chaos.lua:8668
+#: scripts/scenario_88_chaos.lua:6413 scripts/scenario_88_chaos.lua:6986
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8096 scripts/scenario_88_chaos.lua:8669
+#: scripts/scenario_88_chaos.lua:6414 scripts/scenario_88_chaos.lua:6987
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8097 scripts/scenario_88_chaos.lua:8670
+#: scripts/scenario_88_chaos.lua:6415 scripts/scenario_88_chaos.lua:6988
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8099 scripts/scenario_88_chaos.lua:8672
+#: scripts/scenario_88_chaos.lua:6417 scripts/scenario_88_chaos.lua:6990
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -2519,213 +3250,279 @@ msgid ""
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8100 scripts/scenario_88_chaos.lua:8673
+#: scripts/scenario_88_chaos.lua:6418 scripts/scenario_88_chaos.lua:6991
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8101 scripts/scenario_88_chaos.lua:8674
+#: scripts/scenario_88_chaos.lua:6419 scripts/scenario_88_chaos.lua:6992
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8102 scripts/scenario_88_chaos.lua:8675
+#: scripts/scenario_88_chaos.lua:6420 scripts/scenario_88_chaos.lua:6993
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8105
+#: scripts/scenario_88_chaos.lua:6423
 msgctxt "shipEnemy-comms"
 msgid "State your business"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8108
+#: scripts/scenario_88_chaos.lua:6426
 msgctxt "shipEnemy-comms"
 msgid "What do you want? (not that we care)"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8111
+#: scripts/scenario_88_chaos.lua:6429
 msgctxt "shipEnemy-comms"
 msgid "Don't waste our time"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8113 scripts/scenario_88_chaos.lua:8677
+#: scripts/scenario_88_chaos.lua:6431 scripts/scenario_88_chaos.lua:6995
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8204
+#: scripts/scenario_88_chaos.lua:6522
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8229 scripts/scenario_88_chaos.lua:8694
+#: scripts/scenario_88_chaos.lua:6547 scripts/scenario_88_chaos.lua:7012
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8231 scripts/scenario_88_chaos.lua:8696
+#: scripts/scenario_88_chaos.lua:6549 scripts/scenario_88_chaos.lua:7014
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8237
+#: scripts/scenario_88_chaos.lua:6555
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8238
+#: scripts/scenario_88_chaos.lua:6556
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8241
+#: scripts/scenario_88_chaos.lua:6559
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid "Shield: %d%%\n"
+msgid "%sShield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8243
+#: scripts/scenario_88_chaos.lua:6561
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid "Front Shield: %d%%\n"
+msgid "%sFront Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8244
+#: scripts/scenario_88_chaos.lua:6562
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid "Rear Shield: %d%%\n"
+msgid "%sRear Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8247
+#: scripts/scenario_88_chaos.lua:6565
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid "Shield %s: %d%%\n"
+msgid "%sShield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8253
+#: scripts/scenario_88_chaos.lua:6571
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid "%s Missiles: %d/%d\n"
+msgid "%s%s Missiles: %d/%d\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8264
+#: scripts/scenario_88_chaos.lua:6575
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sJump drive charge: %s"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6582
 msgctxt "shipAssist-comms"
 msgid "Stop. Do nothing."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8280
-#, lua-format
+#: scripts/scenario_88_chaos.lua:6585
 msgctxt "shipAssist-comms"
-msgid "Stopping. Doing nothing except %s"
+msgid "routine system maintenance"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8285
+#: scripts/scenario_88_chaos.lua:6586
+msgctxt "shipAssist-comms"
+msgid "for idle ship gossip"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6587
+msgctxt "shipAssist-comms"
+msgid "exterior paint touch-up"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6588
+msgctxt "shipAssist-comms"
+msgid "exercise for continued fitness"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6589
+msgctxt "shipAssist-comms"
+msgid "meditation therapy"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6590
+msgctxt "shipAssist-comms"
+msgid "internal simulated flight routines"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6591
+msgctxt "shipAssist-comms"
+msgid "digital dreamscape construction"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6592
+msgctxt "shipAssist-comms"
+msgid "catching up on reading the latest war drama novel"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6593
+msgctxt "shipAssist-comms"
+msgid "writing up results of bifurcated personality research"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6594
+msgctxt "shipAssist-comms"
+msgid "categorizing nearby miniscule space particles"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6595
+msgctxt "shipAssist-comms"
+msgid "continuing the count of visible stars from this region"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6596
+msgctxt "shipAssist-comms"
+msgid "internal systems diagnostics"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6598
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except %s."
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:6603
 msgctxt "shipAssist-comms"
 msgid "Attack all enemies. Start with the nearest."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8287
+#: scripts/scenario_88_chaos.lua:6605
 msgctxt "shipAssist-comms"
 msgid "Searching and destroying"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8292
+#: scripts/scenario_88_chaos.lua:6610
 msgctxt "shipAssist-comms"
 msgid "Stop and defend your current location"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8294
+#: scripts/scenario_88_chaos.lua:6612
 msgctxt "shipAssist-comms"
 msgid "Stopping. Shooting any enemy that approaches"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8299 scripts/scenario_88_chaos.lua:8438
+#: scripts/scenario_88_chaos.lua:6617 scripts/scenario_88_chaos.lua:6756
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8301 scripts/scenario_88_chaos.lua:8318
-#: scripts/scenario_88_chaos.lua:8440 scripts/scenario_88_chaos.lua:8461
-#: scripts/scenario_88_chaos.lua:8482
+#: scripts/scenario_88_chaos.lua:6619 scripts/scenario_88_chaos.lua:6636
+#: scripts/scenario_88_chaos.lua:6758 scripts/scenario_88_chaos.lua:6779
+#: scripts/scenario_88_chaos.lua:6800
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8304 scripts/scenario_88_chaos.lua:8443
+#: scripts/scenario_88_chaos.lua:6622 scripts/scenario_88_chaos.lua:6761
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8306 scripts/scenario_88_chaos.lua:8323
-#: scripts/scenario_88_chaos.lua:8445
+#: scripts/scenario_88_chaos.lua:6624 scripts/scenario_88_chaos.lua:6641
+#: scripts/scenario_88_chaos.lua:6763
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8308 scripts/scenario_88_chaos.lua:8453
+#: scripts/scenario_88_chaos.lua:6626 scripts/scenario_88_chaos.lua:6771
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8316
+#: scripts/scenario_88_chaos.lua:6634
 msgctxt "shipAssist-comms"
 msgid "Go to waypoint, ignore enemies"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8321
+#: scripts/scenario_88_chaos.lua:6639
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we approach?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8325
+#: scripts/scenario_88_chaos.lua:6643
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to WP%d ignoring enemies."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8334 scripts/scenario_88_chaos.lua:8427
+#: scripts/scenario_88_chaos.lua:6652 scripts/scenario_88_chaos.lua:6745
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8335
+#: scripts/scenario_88_chaos.lua:6653
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8359
+#: scripts/scenario_88_chaos.lua:6677
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8360
+#: scripts/scenario_88_chaos.lua:6678
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8369
+#: scripts/scenario_88_chaos.lua:6687
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Direct fleet %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8370
+#: scripts/scenario_88_chaos.lua:6688
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Fleet %i consists of:\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8378
+#: scripts/scenario_88_chaos.lua:6696
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -2734,400 +3531,401 @@ msgid ""
 "What command should be given to fleet %i?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8379
+#: scripts/scenario_88_chaos.lua:6697
 msgctxt "shipAssist-comms"
 msgid "Report hull and shield status"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8380
+#: scripts/scenario_88_chaos.lua:6698
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Fleet %i status:"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8384 scripts/scenario_88_chaos.lua:8410
+#: scripts/scenario_88_chaos.lua:6702 scripts/scenario_88_chaos.lua:6728
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
-"\n"
+"%s\n"
 " %s:"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8385
+#: scripts/scenario_88_chaos.lua:6703
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
-"\n"
+"%s\n"
 "    Hull: %d%%"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8388
+#: scripts/scenario_88_chaos.lua:6706
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
-"\n"
+"%s\n"
 "    Shield: %d%%"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8390
+#: scripts/scenario_88_chaos.lua:6708
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
-"\n"
+"%s\n"
 "    Shields: "
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8392
+#: scripts/scenario_88_chaos.lua:6710
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid "Front: %d%% Rear: %d%%"
+msgid "%sFront: %d%% Rear: %d%%"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8395
+#: scripts/scenario_88_chaos.lua:6713
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid " %d:%d%%"
+msgid "%s %d:%d%%"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8405
+#: scripts/scenario_88_chaos.lua:6723
 msgctxt "shipAssist-comms"
 msgid "Report missile status"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8406
+#: scripts/scenario_88_chaos.lua:6724
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Fleet %i missile status:"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8415
+#: scripts/scenario_88_chaos.lua:6733
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
-"\n"
+"%s\n"
 "      %s: %d/%d"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8419
+#: scripts/scenario_88_chaos.lua:6737
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
-"\n"
+"%s\n"
 "    Missiles: %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8435
+#: scripts/scenario_88_chaos.lua:6753
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Fleet %s heading toward you to assist"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8459
+#: scripts/scenario_88_chaos.lua:6777
 msgctxt "shipAssist-comms"
 msgid "Go to waypoint. Attack enemies en route"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8464 scripts/scenario_88_chaos.lua:8485
+#: scripts/scenario_88_chaos.lua:6782 scripts/scenario_88_chaos.lua:6803
 msgctxt "shipAssist-comms"
 msgid "Which waypoint?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8466 scripts/scenario_88_chaos.lua:8487
+#: scripts/scenario_88_chaos.lua:6784 scripts/scenario_88_chaos.lua:6805
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Go to WP%d"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8474
+#: scripts/scenario_88_chaos.lua:6792
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Going to WP%d, watching for enemies en route"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8480
+#: scripts/scenario_88_chaos.lua:6798
 msgctxt "shipAssist-comms"
 msgid "Go to waypoint. Ignore enemies"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8495
+#: scripts/scenario_88_chaos.lua:6813
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Going to WP%d, ignoring enemies"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8501
+#: scripts/scenario_88_chaos.lua:6819
 msgctxt "shipAssist-comms"
 msgid "Go offensive, attack all enemy targets"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8509
+#: scripts/scenario_88_chaos.lua:6827
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Fleet %s is on an offensive rampage"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8512
+#: scripts/scenario_88_chaos.lua:6830
 msgctxt "shipAssist-comms"
 msgid "Stop and defend your current position"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8518
+#: scripts/scenario_88_chaos.lua:6836
 msgctxt "shipAssist-comms"
 msgid "Stopping and defending"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8521
+#: scripts/scenario_88_chaos.lua:6839
 msgctxt "shipAssist-comms"
 msgid "Stop and do nothing"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8527
+#: scripts/scenario_88_chaos.lua:6845
 msgctxt "shipAssist-comms"
 msgid "Stopping and doing nothing"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8565
+#: scripts/scenario_88_chaos.lua:6883
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8567
+#: scripts/scenario_88_chaos.lua:6885
 msgctxt "trade-comms"
 msgid "We've got "
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8571
+#: scripts/scenario_88_chaos.lua:6889
 msgctxt "trade-comms"
 msgid ", "
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8579
+#: scripts/scenario_88_chaos.lua:6897
 msgctxt "trade-comms"
 msgid "nothing"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8599
+#: scripts/scenario_88_chaos.lua:6917
 #, lua-format
 msgctxt "trade-comms"
 msgid "Traded your luxury for %s from %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8620
+#: scripts/scenario_88_chaos.lua:6938
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8622
+#: scripts/scenario_88_chaos.lua:6940
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8702
+#: scripts/scenario_88_chaos.lua:7020
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8707
+#: scripts/scenario_88_chaos.lua:7025
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8711
+#: scripts/scenario_88_chaos.lua:7029
 msgctxt "inventory-shipLog"
 msgid "     Empty"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8713
+#: scripts/scenario_88_chaos.lua:7031
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8925
+#: scripts/scenario_88_chaos.lua:7289
 #, lua-format
 msgctxt "msgMainscreen"
-msgid "%s wins with a score of %.1f!\n"
+msgid "%s wins with a score of %f!\n"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:8927
+#: scripts/scenario_88_chaos.lua:7291
 #, lua-format
 msgctxt "msgMainscreen"
-msgid "%s:%.1f "
+msgid "%s:%f "
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9009
+#: scripts/scenario_88_chaos.lua:7373
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "H:%i K:%i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9011
+#: scripts/scenario_88_chaos.lua:7375
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s E:%i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9014
+#: scripts/scenario_88_chaos.lua:7378
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s B:%i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9017
+#: scripts/scenario_88_chaos.lua:7381
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9019
+#: scripts/scenario_88_chaos.lua:7383
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9062
+#: scripts/scenario_88_chaos.lua:7425
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid ""
 "[%s in %s] We detect one or more enemies nearby. At least one is of type %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9184
+#: scripts/scenario_88_chaos.lua:7547
 #, lua-format
 msgctxt "-tabRelay&Ops&Helms&Tactical"
 msgid "%s in %s"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9222
+#: scripts/scenario_88_chaos.lua:7585
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9229
+#: scripts/scenario_88_chaos.lua:7592
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9300 scripts/scenario_88_chaos.lua:9339
+#: scripts/scenario_88_chaos.lua:7663 scripts/scenario_88_chaos.lua:7702
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9304 scripts/scenario_88_chaos.lua:9343
+#: scripts/scenario_88_chaos.lua:7667 scripts/scenario_88_chaos.lua:7706
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9360
+#: scripts/scenario_88_chaos.lua:7723
 msgctxt "coolant-msgEngineer"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9364
+#: scripts/scenario_88_chaos.lua:7727
 msgctxt "coolant-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9371
+#: scripts/scenario_88_chaos.lua:7734
 msgctxt "damage-msgEngineer"
 msgid "The probe launch system has been damaged"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9374
+#: scripts/scenario_88_chaos.lua:7737
 msgctxt "damage-msgEngineer+"
 msgid "The probe launch system has been damaged"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9379
+#: scripts/scenario_88_chaos.lua:7742
 msgctxt "damage-msgEngineer"
 msgid "The hacking system has been damaged"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9382
+#: scripts/scenario_88_chaos.lua:7745
 msgctxt "damage-msgEngineer+"
 msgid "The hacking system has been damaged"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9387
+#: scripts/scenario_88_chaos.lua:7750
 msgctxt "damage-msgEngineer"
 msgid "The scanners have been damaged"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9390
+#: scripts/scenario_88_chaos.lua:7753
 msgctxt "damage-msgEngineer+"
 msgid "The scanners have been damaged"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9395
+#: scripts/scenario_88_chaos.lua:7758
 msgctxt "damage-msgEngineer"
 msgid "Combat maneuver has been damaged"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9398
+#: scripts/scenario_88_chaos.lua:7761
 msgctxt "damage-msgEngineer+"
 msgid "Combat maneuver has been damaged"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9403
+#: scripts/scenario_88_chaos.lua:7766
 msgctxt "damage-msgEngineer"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9406
+#: scripts/scenario_88_chaos.lua:7769
 msgctxt "damage-msgEngineer+"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9424
+#: scripts/scenario_88_chaos.lua:7787
 msgctxt "damage-msgEngineer"
 msgid "Tube damage has caused tube load time to increase"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9427
+#: scripts/scenario_88_chaos.lua:7790
 msgctxt "damage-msgEngineer+"
 msgid "Tube damage has caused tube load time to increase"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9439
+#: scripts/scenario_88_chaos.lua:7802
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9443
+#: scripts/scenario_88_chaos.lua:7806
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9462
+#: scripts/scenario_88_chaos.lua:7825
 msgctxt "coolant-msgEngineer"
 msgid "Automated systems have recovered some coolant"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9466
+#: scripts/scenario_88_chaos.lua:7829
 msgctxt "coolant-msgEngineer+"
 msgid "Automated systems have recovered some coolant"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9515
+#: scripts/scenario_88_chaos.lua:7878
 msgctxt "-buttonEngineer"
 msgid "Damage Report"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9538
+#: scripts/scenario_88_chaos.lua:7901
 msgctxt "damage-msgEngineer"
 msgid ""
 "\n"
 "Weapon tube load time degraded"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9551
+#: scripts/scenario_88_chaos.lua:7914
 msgctxt "damage-buttonEngineer"
 msgid "Damage Report"
 msgstr ""
 
-#: scripts/scenario_88_chaos.lua:9574
+#: scripts/scenario_88_chaos.lua:7937
 msgctxt "damage-msgEngineer+"
 msgid ""
 "\n"

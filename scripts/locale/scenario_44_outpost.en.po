@@ -332,17 +332,17 @@ msgid ""
 "ranges"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:164
+#: scripts/scenario_44_outpost.lua:167
 msgctxt "orders-comms"
 msgid "Survive"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:828
+#: scripts/scenario_44_outpost.lua:831
 msgctxt "scienceDB"
 msgid "Weapons"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:833
+#: scripts/scenario_44_outpost.lua:836
 msgctxt "scienceDB"
 msgid ""
 "This database only covers the basic versions of the missiles used throughout "
@@ -368,13 +368,13 @@ msgid ""
 "These letters describe the tube sizes in order from top to bottom."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:838 scripts/scenario_44_outpost.lua:851
+#: scripts/scenario_44_outpost.lua:841 scripts/scenario_44_outpost.lua:854
 #, lua-format
 msgctxt "buttonGM"
 msgid "Version %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:839 scripts/scenario_44_outpost.lua:852
+#: scripts/scenario_44_outpost.lua:842 scripts/scenario_44_outpost.lua:855
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -382,37 +382,37 @@ msgid ""
 " LUA version %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:843 scripts/scenario_44_outpost.lua:856
+#: scripts/scenario_44_outpost.lua:846 scripts/scenario_44_outpost.lua:859
 msgctxt "buttonGM"
 msgid "+Station Reports"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:844
+#: scripts/scenario_44_outpost.lua:847
 msgctxt "buttonGM"
 msgid "+Difficulty"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:845
+#: scripts/scenario_44_outpost.lua:848
 msgctxt "buttonGM"
 msgid "+Enemy Power"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:846
+#: scripts/scenario_44_outpost.lua:849
 msgctxt "buttonGM"
 msgid "+Reputation"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:847 scripts/scenario_44_outpost.lua:868
+#: scripts/scenario_44_outpost.lua:850 scripts/scenario_44_outpost.lua:871
 msgctxt "buttonGM"
 msgid "+Control Codes"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:857
+#: scripts/scenario_44_outpost.lua:860
 msgctxt "buttonGM"
 msgid "Mission Stations"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:858
+#: scripts/scenario_44_outpost.lua:861
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -428,123 +428,123 @@ msgid ""
 "Plague station %s in %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:860
+#: scripts/scenario_44_outpost.lua:863
 msgctxt "buttonGM"
 msgid "+Test Non-DB Ships"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:862
+#: scripts/scenario_44_outpost.lua:865
 #, lua-format
 msgctxt "buttonGM"
 msgid "Whammy %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:867
+#: scripts/scenario_44_outpost.lua:870
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:872
+#: scripts/scenario_44_outpost.lua:875
 msgctxt "buttonGM"
 msgid "-From Enemy Power"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:874 scripts/scenario_44_outpost.lua:895
+#: scripts/scenario_44_outpost.lua:877 scripts/scenario_44_outpost.lua:898
 msgctxt "buttonGM"
 msgid "Easy"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:875 scripts/scenario_44_outpost.lua:896
+#: scripts/scenario_44_outpost.lua:878 scripts/scenario_44_outpost.lua:899
 msgctxt "buttonGM"
 msgid "Normal"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:876 scripts/scenario_44_outpost.lua:897
+#: scripts/scenario_44_outpost.lua:879 scripts/scenario_44_outpost.lua:900
 msgctxt "buttonGM"
 msgid "Hard"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:877
+#: scripts/scenario_44_outpost.lua:880
 msgctxt "buttonGM"
 msgid "Extreme"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:878
+#: scripts/scenario_44_outpost.lua:881
 msgctxt "buttonGM"
 msgid "Quixotic"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:881 scripts/scenario_44_outpost.lua:900
+#: scripts/scenario_44_outpost.lua:884 scripts/scenario_44_outpost.lua:903
 #, lua-format
 msgctxt "buttonGM"
 msgid "%s %.1f"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:883 scripts/scenario_44_outpost.lua:902
-#: scripts/scenario_44_outpost.lua:923
+#: scripts/scenario_44_outpost.lua:886 scripts/scenario_44_outpost.lua:905
+#: scripts/scenario_44_outpost.lua:926
 msgctxt "buttonGM"
 msgid "*"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:893
+#: scripts/scenario_44_outpost.lua:896
 msgctxt "buttonGM"
 msgid "-From Difficulty"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:912
+#: scripts/scenario_44_outpost.lua:915
 msgctxt "buttonGM"
 msgid "-From Reputation"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:914
+#: scripts/scenario_44_outpost.lua:917
 msgctxt "buttonGM"
 msgid "Unknown"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:915
+#: scripts/scenario_44_outpost.lua:918
 msgctxt "buttonGM"
 msgid "Nice"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:916
+#: scripts/scenario_44_outpost.lua:919
 msgctxt "buttonGM"
 msgid "Hero"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:917
+#: scripts/scenario_44_outpost.lua:920
 msgctxt "buttonGM"
 msgid "Major Hero"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:918
+#: scripts/scenario_44_outpost.lua:921
 msgctxt "buttonGM"
 msgid "Super Hero"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:921
+#: scripts/scenario_44_outpost.lua:924
 #, lua-format
 msgctxt "buttonGM"
 msgid "%s %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:933 scripts/scenario_44_outpost.lua:1028
+#: scripts/scenario_44_outpost.lua:936 scripts/scenario_44_outpost.lua:1031
 msgctxt "buttonGM"
 msgid "-Main"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:941
+#: scripts/scenario_44_outpost.lua:944
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid "%s %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:942
+#: scripts/scenario_44_outpost.lua:945
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid "%s %s  %s  %s  Friendliness:%s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:943
+#: scripts/scenario_44_outpost.lua:946
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -552,7 +552,7 @@ msgid ""
 "Shares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:944
+#: scripts/scenario_44_outpost.lua:947
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -561,7 +561,7 @@ msgid ""
 "Destruct: %s, Fix Slow Tube: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:970
+#: scripts/scenario_44_outpost.lua:973
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -569,7 +569,7 @@ msgid ""
 "Homing: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:972
+#: scripts/scenario_44_outpost.lua:975
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -577,7 +577,7 @@ msgid ""
 "Services and their costs and availability:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:975
+#: scripts/scenario_44_outpost.lua:978
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -585,7 +585,7 @@ msgid ""
 "      %s: %s %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:978
+#: scripts/scenario_44_outpost.lua:981
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -593,7 +593,7 @@ msgid ""
 "      jump overcharge: 10"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:981
+#: scripts/scenario_44_outpost.lua:984
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -601,7 +601,7 @@ msgid ""
 "Upgrade paths for player ship types and their max level:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:983
+#: scripts/scenario_44_outpost.lua:986
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -609,7 +609,7 @@ msgid ""
 "      Ship template type: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:985
+#: scripts/scenario_44_outpost.lua:988
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -617,7 +617,7 @@ msgid ""
 "            %s: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:990
+#: scripts/scenario_44_outpost.lua:993
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -625,7 +625,7 @@ msgid ""
 "Goods:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:992
+#: scripts/scenario_44_outpost.lua:995
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -633,7 +633,7 @@ msgid ""
 "    Sell:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:994
+#: scripts/scenario_44_outpost.lua:997
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -641,7 +641,7 @@ msgid ""
 "        %s: Cost:%s   Quantity:%s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:998
+#: scripts/scenario_44_outpost.lua:1001
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -649,7 +649,7 @@ msgid ""
 "    Trade:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1000 scripts/scenario_44_outpost.lua:1006
+#: scripts/scenario_44_outpost.lua:1003 scripts/scenario_44_outpost.lua:1009
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -657,7 +657,7 @@ msgid ""
 "        %s: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1004
+#: scripts/scenario_44_outpost.lua:1007
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -665,12 +665,12 @@ msgid ""
 "    Buy:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1018 scripts/scenario_44_outpost.lua:1022
+#: scripts/scenario_44_outpost.lua:1021 scripts/scenario_44_outpost.lua:1025
 msgctxt "stationReport-msgGM"
 msgid "No applicable stations. Reports useless. No action taken"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1269
+#: scripts/scenario_44_outpost.lua:1272
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -678,7 +678,7 @@ msgid ""
 "PlayerShipStats"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1352
+#: scripts/scenario_44_outpost.lua:1355
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -687,7 +687,7 @@ msgid ""
 "Posthumous rank: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1354
+#: scripts/scenario_44_outpost.lua:1357
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -696,254 +696,254 @@ msgid ""
 "Posthumous rank: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1374 scripts/scenario_44_outpost.lua:7838
+#: scripts/scenario_44_outpost.lua:1377 scripts/scenario_44_outpost.lua:7841
 msgctxt "msgMainscreen"
 msgid "Cadet"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1376 scripts/scenario_44_outpost.lua:1380
-#: scripts/scenario_44_outpost.lua:1388 scripts/scenario_44_outpost.lua:1396
-#: scripts/scenario_44_outpost.lua:1404 scripts/scenario_44_outpost.lua:7855
-#: scripts/scenario_44_outpost.lua:7861 scripts/scenario_44_outpost.lua:7867
-#: scripts/scenario_44_outpost.lua:7873 scripts/scenario_44_outpost.lua:7879
+#: scripts/scenario_44_outpost.lua:1379 scripts/scenario_44_outpost.lua:1383
+#: scripts/scenario_44_outpost.lua:1391 scripts/scenario_44_outpost.lua:1399
+#: scripts/scenario_44_outpost.lua:1407 scripts/scenario_44_outpost.lua:7858
+#: scripts/scenario_44_outpost.lua:7864 scripts/scenario_44_outpost.lua:7870
+#: scripts/scenario_44_outpost.lua:7876 scripts/scenario_44_outpost.lua:7882
 msgctxt "msgMainscreen"
 msgid "Admiral"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1377 scripts/scenario_44_outpost.lua:1381
-#: scripts/scenario_44_outpost.lua:1382 scripts/scenario_44_outpost.lua:1389
-#: scripts/scenario_44_outpost.lua:1397 scripts/scenario_44_outpost.lua:1405
-#: scripts/scenario_44_outpost.lua:1412 scripts/scenario_44_outpost.lua:7850
-#: scripts/scenario_44_outpost.lua:7856 scripts/scenario_44_outpost.lua:7862
-#: scripts/scenario_44_outpost.lua:7868 scripts/scenario_44_outpost.lua:7874
-#: scripts/scenario_44_outpost.lua:7880
-msgctxt "msgMainscreen"
-msgid "Captain"
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:1378 scripts/scenario_44_outpost.lua:1383
-#: scripts/scenario_44_outpost.lua:1384 scripts/scenario_44_outpost.lua:1390
-#: scripts/scenario_44_outpost.lua:1391 scripts/scenario_44_outpost.lua:1398
-#: scripts/scenario_44_outpost.lua:1406 scripts/scenario_44_outpost.lua:1413
-#: scripts/scenario_44_outpost.lua:1417 scripts/scenario_44_outpost.lua:7846
-#: scripts/scenario_44_outpost.lua:7851 scripts/scenario_44_outpost.lua:7857
-#: scripts/scenario_44_outpost.lua:7863 scripts/scenario_44_outpost.lua:7869
-#: scripts/scenario_44_outpost.lua:7875 scripts/scenario_44_outpost.lua:7881
-msgctxt "msgMainscreen"
-msgid "Commander"
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:1379 scripts/scenario_44_outpost.lua:1385
-#: scripts/scenario_44_outpost.lua:1386 scripts/scenario_44_outpost.lua:1392
-#: scripts/scenario_44_outpost.lua:1399 scripts/scenario_44_outpost.lua:1400
-#: scripts/scenario_44_outpost.lua:1407 scripts/scenario_44_outpost.lua:1414
-#: scripts/scenario_44_outpost.lua:1418 scripts/scenario_44_outpost.lua:1421
-#: scripts/scenario_44_outpost.lua:7843 scripts/scenario_44_outpost.lua:7847
-#: scripts/scenario_44_outpost.lua:7852 scripts/scenario_44_outpost.lua:7858
-#: scripts/scenario_44_outpost.lua:7864 scripts/scenario_44_outpost.lua:7870
-#: scripts/scenario_44_outpost.lua:7876 scripts/scenario_44_outpost.lua:7882
-msgctxt "msgMainscreen"
-msgid "Lieutenant"
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:1387 scripts/scenario_44_outpost.lua:1393
-#: scripts/scenario_44_outpost.lua:1394 scripts/scenario_44_outpost.lua:1401
-#: scripts/scenario_44_outpost.lua:1402 scripts/scenario_44_outpost.lua:1408
-#: scripts/scenario_44_outpost.lua:1415 scripts/scenario_44_outpost.lua:1419
-#: scripts/scenario_44_outpost.lua:1422 scripts/scenario_44_outpost.lua:1424
-#: scripts/scenario_44_outpost.lua:7841 scripts/scenario_44_outpost.lua:7844
-#: scripts/scenario_44_outpost.lua:7848 scripts/scenario_44_outpost.lua:7853
+#: scripts/scenario_44_outpost.lua:1380 scripts/scenario_44_outpost.lua:1384
+#: scripts/scenario_44_outpost.lua:1385 scripts/scenario_44_outpost.lua:1392
+#: scripts/scenario_44_outpost.lua:1400 scripts/scenario_44_outpost.lua:1408
+#: scripts/scenario_44_outpost.lua:1415 scripts/scenario_44_outpost.lua:7853
 #: scripts/scenario_44_outpost.lua:7859 scripts/scenario_44_outpost.lua:7865
 #: scripts/scenario_44_outpost.lua:7871 scripts/scenario_44_outpost.lua:7877
 #: scripts/scenario_44_outpost.lua:7883
 msgctxt "msgMainscreen"
-msgid "Ensign"
+msgid "Captain"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1395 scripts/scenario_44_outpost.lua:1403
-#: scripts/scenario_44_outpost.lua:1409 scripts/scenario_44_outpost.lua:1410
-#: scripts/scenario_44_outpost.lua:1411 scripts/scenario_44_outpost.lua:1416
-#: scripts/scenario_44_outpost.lua:1420 scripts/scenario_44_outpost.lua:1423
-#: scripts/scenario_44_outpost.lua:1425 scripts/scenario_44_outpost.lua:1426
-#: scripts/scenario_44_outpost.lua:7840 scripts/scenario_44_outpost.lua:7842
-#: scripts/scenario_44_outpost.lua:7845 scripts/scenario_44_outpost.lua:7849
+#: scripts/scenario_44_outpost.lua:1381 scripts/scenario_44_outpost.lua:1386
+#: scripts/scenario_44_outpost.lua:1387 scripts/scenario_44_outpost.lua:1393
+#: scripts/scenario_44_outpost.lua:1394 scripts/scenario_44_outpost.lua:1401
+#: scripts/scenario_44_outpost.lua:1409 scripts/scenario_44_outpost.lua:1416
+#: scripts/scenario_44_outpost.lua:1420 scripts/scenario_44_outpost.lua:7849
 #: scripts/scenario_44_outpost.lua:7854 scripts/scenario_44_outpost.lua:7860
 #: scripts/scenario_44_outpost.lua:7866 scripts/scenario_44_outpost.lua:7872
 #: scripts/scenario_44_outpost.lua:7878 scripts/scenario_44_outpost.lua:7884
 msgctxt "msgMainscreen"
+msgid "Commander"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:1382 scripts/scenario_44_outpost.lua:1388
+#: scripts/scenario_44_outpost.lua:1389 scripts/scenario_44_outpost.lua:1395
+#: scripts/scenario_44_outpost.lua:1402 scripts/scenario_44_outpost.lua:1403
+#: scripts/scenario_44_outpost.lua:1410 scripts/scenario_44_outpost.lua:1417
+#: scripts/scenario_44_outpost.lua:1421 scripts/scenario_44_outpost.lua:1424
+#: scripts/scenario_44_outpost.lua:7846 scripts/scenario_44_outpost.lua:7850
+#: scripts/scenario_44_outpost.lua:7855 scripts/scenario_44_outpost.lua:7861
+#: scripts/scenario_44_outpost.lua:7867 scripts/scenario_44_outpost.lua:7873
+#: scripts/scenario_44_outpost.lua:7879 scripts/scenario_44_outpost.lua:7885
+msgctxt "msgMainscreen"
+msgid "Lieutenant"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:1390 scripts/scenario_44_outpost.lua:1396
+#: scripts/scenario_44_outpost.lua:1397 scripts/scenario_44_outpost.lua:1404
+#: scripts/scenario_44_outpost.lua:1405 scripts/scenario_44_outpost.lua:1411
+#: scripts/scenario_44_outpost.lua:1418 scripts/scenario_44_outpost.lua:1422
+#: scripts/scenario_44_outpost.lua:1425 scripts/scenario_44_outpost.lua:1427
+#: scripts/scenario_44_outpost.lua:7844 scripts/scenario_44_outpost.lua:7847
+#: scripts/scenario_44_outpost.lua:7851 scripts/scenario_44_outpost.lua:7856
+#: scripts/scenario_44_outpost.lua:7862 scripts/scenario_44_outpost.lua:7868
+#: scripts/scenario_44_outpost.lua:7874 scripts/scenario_44_outpost.lua:7880
+#: scripts/scenario_44_outpost.lua:7886
+msgctxt "msgMainscreen"
+msgid "Ensign"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:1398 scripts/scenario_44_outpost.lua:1406
+#: scripts/scenario_44_outpost.lua:1412 scripts/scenario_44_outpost.lua:1413
+#: scripts/scenario_44_outpost.lua:1414 scripts/scenario_44_outpost.lua:1419
+#: scripts/scenario_44_outpost.lua:1423 scripts/scenario_44_outpost.lua:1426
+#: scripts/scenario_44_outpost.lua:1428 scripts/scenario_44_outpost.lua:1429
+#: scripts/scenario_44_outpost.lua:7843 scripts/scenario_44_outpost.lua:7845
+#: scripts/scenario_44_outpost.lua:7848 scripts/scenario_44_outpost.lua:7852
+#: scripts/scenario_44_outpost.lua:7857 scripts/scenario_44_outpost.lua:7863
+#: scripts/scenario_44_outpost.lua:7869 scripts/scenario_44_outpost.lua:7875
+#: scripts/scenario_44_outpost.lua:7881 scripts/scenario_44_outpost.lua:7887
+msgctxt "msgMainscreen"
 msgid "Acting Ensign"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1455
+#: scripts/scenario_44_outpost.lua:1458
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minutes and %s seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1457
+#: scripts/scenario_44_outpost.lua:1460
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minutes and %s second"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1461
+#: scripts/scenario_44_outpost.lua:1464
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minute and %s seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1463
+#: scripts/scenario_44_outpost.lua:1466
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minute and %s second"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1469
+#: scripts/scenario_44_outpost.lua:1472
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minutes and %s seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1471
+#: scripts/scenario_44_outpost.lua:1474
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minutes and %s second"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1475
+#: scripts/scenario_44_outpost.lua:1478
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minute and %s seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1477
+#: scripts/scenario_44_outpost.lua:1480
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minute and %s second"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1483
+#: scripts/scenario_44_outpost.lua:1486
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s minutes and %s seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:1485
+#: scripts/scenario_44_outpost.lua:1488
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s minutes and %s second"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2539
+#: scripts/scenario_44_outpost.lua:2542
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s station %s in %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2541
+#: scripts/scenario_44_outpost.lua:2544
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2571
+#: scripts/scenario_44_outpost.lua:2574
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s %s %s in %s carrying %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2573
+#: scripts/scenario_44_outpost.lua:2576
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s; %s %s %s in %s carrying %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2581
+#: scripts/scenario_44_outpost.lua:2584
 msgctxt "scienceDescription-buoy"
 msgid "No data recorded"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2583 scripts/scenario_44_outpost.lua:2606
+#: scripts/scenario_44_outpost.lua:2586 scripts/scenario_44_outpost.lua:2609
 msgctxt "scienceDescription-buoy"
 msgid "Automated data gathering device"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2592
+#: scripts/scenario_44_outpost.lua:2595
 msgctxt "scienceDescription-buoy"
 msgid "Come to Billy Bob's for the best food in the sector"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2593
+#: scripts/scenario_44_outpost.lua:2596
 msgctxt "scienceDescription-buoy"
 msgid "It's never too late to buy life insurance"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2594
+#: scripts/scenario_44_outpost.lua:2597
 msgctxt "scienceDescription-buoy"
 msgid "You'll feel better in an Adder Mark 9"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2595
+#: scripts/scenario_44_outpost.lua:2598
 msgctxt "scienceDescription-buoy"
 msgid "Visit Repulse shipyards for the best deals"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2596
+#: scripts/scenario_44_outpost.lua:2599
 msgctxt "scienceDescription-buoy"
 msgid "Fresh fish! We catch, you buy!"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2597
+#: scripts/scenario_44_outpost.lua:2600
 msgctxt "scienceDescription-buoy"
 msgid "Get your fuel cells at Melinda's Market"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2598
+#: scripts/scenario_44_outpost.lua:2601
 msgctxt "scienceDescription-buoy"
 msgid "Find a special companion. All species available"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2599
+#: scripts/scenario_44_outpost.lua:2602
 msgctxt "scienceDescription-buoy"
 msgid "Feeling down? Robotherapist is there for you"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2600
+#: scripts/scenario_44_outpost.lua:2603
 msgctxt "scienceDescription-buoy"
 msgid "30 days, 30 kilograms, guaranteed"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2601
+#: scripts/scenario_44_outpost.lua:2604
 msgctxt "scienceDescription-buoy"
 msgid "Try our asteroid dust diet weight loss program"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2602
+#: scripts/scenario_44_outpost.lua:2605
 msgctxt "scienceDescription-buoy"
 msgid "Best tasting water in the quadrant at Willy's Waterway"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2603
+#: scripts/scenario_44_outpost.lua:2606
 msgctxt "scienceDescription-buoy"
 msgid "Amazing shows every night at Lenny's Lounge"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:2604
+#: scripts/scenario_44_outpost.lua:2607
 msgctxt "scienceDescription-buoy"
 msgid "Tip: make lemons an integral part of your diet"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3039
+#: scripts/scenario_44_outpost.lua:3042
 msgctxt "damage-msgScience"
 msgid "The unscanned artifact we just picked up has fried our scanners"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3041
+#: scripts/scenario_44_outpost.lua:3044
 msgctxt "damage-msgOperations"
 msgid "The unscanned artifact we just picked up has fried our scanners"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3050
+#: scripts/scenario_44_outpost.lua:3053
 #, lua-format
 msgctxt "scienceDescription-artifact"
 msgid ""
@@ -951,17 +951,17 @@ msgid ""
 "%.1fu"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3051
+#: scripts/scenario_44_outpost.lua:3054
 msgctxt "scienceDescription-artifact"
 msgid "Source of unusual emanations"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3178
+#: scripts/scenario_44_outpost.lua:3181
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3191
+#: scripts/scenario_44_outpost.lua:3194
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -969,24 +969,24 @@ msgid ""
 "How may we help you today?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3193
+#: scripts/scenario_44_outpost.lua:3196
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3195
+#: scripts/scenario_44_outpost.lua:3198
 msgctxt "station-comms"
 msgid "Hello, may I help you?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3198
+#: scripts/scenario_44_outpost.lua:3201
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3201
+#: scripts/scenario_44_outpost.lua:3204
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -994,7 +994,7 @@ msgid ""
 "enemies nearby."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3203
+#: scripts/scenario_44_outpost.lua:3206
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -1003,112 +1003,112 @@ msgid ""
 "Reputation: %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3210
+#: scripts/scenario_44_outpost.lua:3213
 #, lua-format
 msgctxt "station-comms"
 msgid "Deliver %s to %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3212 scripts/scenario_44_outpost.lua:3394
-#: scripts/scenario_44_outpost.lua:3422 scripts/scenario_44_outpost.lua:3441
-#: scripts/scenario_44_outpost.lua:3628 scripts/scenario_44_outpost.lua:3663
-#: scripts/scenario_44_outpost.lua:3838 scripts/scenario_44_outpost.lua:3875
-#: scripts/scenario_44_outpost.lua:3892 scripts/scenario_44_outpost.lua:3909
-#: scripts/scenario_44_outpost.lua:3927 scripts/scenario_44_outpost.lua:3945
-#: scripts/scenario_44_outpost.lua:4098 scripts/scenario_44_outpost.lua:4133
-#: scripts/scenario_44_outpost.lua:4154 scripts/scenario_44_outpost.lua:4187
-#: scripts/scenario_44_outpost.lua:4220 scripts/scenario_44_outpost.lua:4301
-#: scripts/scenario_44_outpost.lua:4396 scripts/scenario_44_outpost.lua:4597
+#: scripts/scenario_44_outpost.lua:3215 scripts/scenario_44_outpost.lua:3397
+#: scripts/scenario_44_outpost.lua:3425 scripts/scenario_44_outpost.lua:3444
+#: scripts/scenario_44_outpost.lua:3631 scripts/scenario_44_outpost.lua:3666
+#: scripts/scenario_44_outpost.lua:3841 scripts/scenario_44_outpost.lua:3878
+#: scripts/scenario_44_outpost.lua:3895 scripts/scenario_44_outpost.lua:3912
+#: scripts/scenario_44_outpost.lua:3930 scripts/scenario_44_outpost.lua:3948
+#: scripts/scenario_44_outpost.lua:4101 scripts/scenario_44_outpost.lua:4136
+#: scripts/scenario_44_outpost.lua:4157 scripts/scenario_44_outpost.lua:4190
+#: scripts/scenario_44_outpost.lua:4223 scripts/scenario_44_outpost.lua:4304
+#: scripts/scenario_44_outpost.lua:4399 scripts/scenario_44_outpost.lua:4600
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3215
+#: scripts/scenario_44_outpost.lua:3218
 #, lua-format
 msgctxt "station-comms"
 msgid "%s disembarks at %s and thanks you"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3222 scripts/scenario_44_outpost.lua:3400
-#: scripts/scenario_44_outpost.lua:3409 scripts/scenario_44_outpost.lua:3411
-#: scripts/scenario_44_outpost.lua:3428 scripts/scenario_44_outpost.lua:3446
-#: scripts/scenario_44_outpost.lua:3635 scripts/scenario_44_outpost.lua:3644
-#: scripts/scenario_44_outpost.lua:3646 scripts/scenario_44_outpost.lua:3672
-#: scripts/scenario_44_outpost.lua:3681 scripts/scenario_44_outpost.lua:3827
-#: scripts/scenario_44_outpost.lua:3847 scripts/scenario_44_outpost.lua:3884
-#: scripts/scenario_44_outpost.lua:3901 scripts/scenario_44_outpost.lua:3918
-#: scripts/scenario_44_outpost.lua:3936 scripts/scenario_44_outpost.lua:3954
-#: scripts/scenario_44_outpost.lua:3958 scripts/scenario_44_outpost.lua:3966
-#: scripts/scenario_44_outpost.lua:3977 scripts/scenario_44_outpost.lua:3983
-#: scripts/scenario_44_outpost.lua:3991 scripts/scenario_44_outpost.lua:3996
-#: scripts/scenario_44_outpost.lua:4005 scripts/scenario_44_outpost.lua:4009
-#: scripts/scenario_44_outpost.lua:4013 scripts/scenario_44_outpost.lua:4015
-#: scripts/scenario_44_outpost.lua:4052 scripts/scenario_44_outpost.lua:4125
-#: scripts/scenario_44_outpost.lua:4142 scripts/scenario_44_outpost.lua:4173
-#: scripts/scenario_44_outpost.lua:4206 scripts/scenario_44_outpost.lua:4239
-#: scripts/scenario_44_outpost.lua:4246 scripts/scenario_44_outpost.lua:4263
-#: scripts/scenario_44_outpost.lua:4267 scripts/scenario_44_outpost.lua:4272
-#: scripts/scenario_44_outpost.lua:4314 scripts/scenario_44_outpost.lua:4368
-#: scripts/scenario_44_outpost.lua:4409 scripts/scenario_44_outpost.lua:4451
-#: scripts/scenario_44_outpost.lua:4614 scripts/scenario_44_outpost.lua:4649
-#: scripts/scenario_44_outpost.lua:4765 scripts/scenario_44_outpost.lua:4771
-#: scripts/scenario_44_outpost.lua:4777 scripts/scenario_44_outpost.lua:4782
-#: scripts/scenario_44_outpost.lua:4800 scripts/scenario_44_outpost.lua:4802
-#: scripts/scenario_44_outpost.lua:4805 scripts/scenario_44_outpost.lua:4827
-#: scripts/scenario_44_outpost.lua:4836 scripts/scenario_44_outpost.lua:4872
-#: scripts/scenario_44_outpost.lua:4918 scripts/scenario_44_outpost.lua:4941
-#: scripts/scenario_44_outpost.lua:4969 scripts/scenario_44_outpost.lua:4971
-#: scripts/scenario_44_outpost.lua:4985 scripts/scenario_44_outpost.lua:5005
-#: scripts/scenario_44_outpost.lua:5052 scripts/scenario_44_outpost.lua:5061
-#: scripts/scenario_44_outpost.lua:5073 scripts/scenario_44_outpost.lua:5079
-#: scripts/scenario_44_outpost.lua:5087 scripts/scenario_44_outpost.lua:5116
-#: scripts/scenario_44_outpost.lua:5131 scripts/scenario_44_outpost.lua:5153
-#: scripts/scenario_44_outpost.lua:5157 scripts/scenario_44_outpost.lua:5176
-#: scripts/scenario_44_outpost.lua:5180 scripts/scenario_44_outpost.lua:5275
-#: scripts/scenario_44_outpost.lua:5280 scripts/scenario_44_outpost.lua:5408
-#: scripts/scenario_44_outpost.lua:5413 scripts/scenario_44_outpost.lua:5418
-#: scripts/scenario_44_outpost.lua:5423 scripts/scenario_44_outpost.lua:5428
-#: scripts/scenario_44_outpost.lua:5433 scripts/scenario_44_outpost.lua:5438
-#: scripts/scenario_44_outpost.lua:5440 scripts/scenario_44_outpost.lua:5462
-#: scripts/scenario_44_outpost.lua:5464 scripts/scenario_44_outpost.lua:5480
-#: scripts/scenario_44_outpost.lua:5482 scripts/scenario_44_outpost.lua:5484
-#: scripts/scenario_44_outpost.lua:5516 scripts/scenario_44_outpost.lua:5540
-#: scripts/scenario_44_outpost.lua:5542 scripts/scenario_44_outpost.lua:5544
-#: scripts/scenario_44_outpost.lua:5546 scripts/scenario_44_outpost.lua:5548
-#: scripts/scenario_44_outpost.lua:5550 scripts/scenario_44_outpost.lua:5552
-#: scripts/scenario_44_outpost.lua:5554 scripts/scenario_44_outpost.lua:5556
-#: scripts/scenario_44_outpost.lua:5560 scripts/scenario_44_outpost.lua:5566
-#: scripts/scenario_44_outpost.lua:5648 scripts/scenario_44_outpost.lua:5683
-#: scripts/scenario_44_outpost.lua:5694 scripts/scenario_44_outpost.lua:5727
-#: scripts/scenario_44_outpost.lua:5763 scripts/scenario_44_outpost.lua:5774
-#: scripts/scenario_44_outpost.lua:5807 scripts/scenario_44_outpost.lua:5842
-#: scripts/scenario_44_outpost.lua:5853 scripts/scenario_44_outpost.lua:5855
-#: scripts/scenario_44_outpost.lua:5878 scripts/scenario_44_outpost.lua:5882
-#: scripts/scenario_44_outpost.lua:5888 scripts/scenario_44_outpost.lua:5911
-#: scripts/scenario_44_outpost.lua:5918 scripts/scenario_44_outpost.lua:5941
-#: scripts/scenario_44_outpost.lua:5945 scripts/scenario_44_outpost.lua:5964
-#: scripts/scenario_44_outpost.lua:5988 scripts/scenario_44_outpost.lua:6013
-#: scripts/scenario_44_outpost.lua:6035 scripts/scenario_44_outpost.lua:6061
-#: scripts/scenario_44_outpost.lua:6086 scripts/scenario_44_outpost.lua:6626
-#: scripts/scenario_44_outpost.lua:6630 scripts/scenario_44_outpost.lua:6653
-#: scripts/scenario_44_outpost.lua:6675 scripts/scenario_44_outpost.lua:6699
-#: scripts/scenario_44_outpost.lua:6721 scripts/scenario_44_outpost.lua:6745
-#: scripts/scenario_44_outpost.lua:6790 scripts/scenario_44_outpost.lua:6794
-#: scripts/scenario_44_outpost.lua:6800 scripts/scenario_44_outpost.lua:6817
-#: scripts/scenario_44_outpost.lua:6824 scripts/scenario_44_outpost.lua:6852
-#: scripts/scenario_44_outpost.lua:6885 scripts/scenario_44_outpost.lua:6896
-#: scripts/scenario_44_outpost.lua:6907 scripts/scenario_44_outpost.lua:6918
-#: scripts/scenario_44_outpost.lua:6929 scripts/scenario_44_outpost.lua:6932
-#: scripts/scenario_44_outpost.lua:6958 scripts/scenario_44_outpost.lua:6971
-#: scripts/scenario_44_outpost.lua:6984 scripts/scenario_44_outpost.lua:7042
-#: scripts/scenario_44_outpost.lua:7063 scripts/scenario_44_outpost.lua:7095
-#: scripts/scenario_44_outpost.lua:7116 scripts/scenario_44_outpost.lua:7133
-#: scripts/scenario_44_outpost.lua:7139 scripts/scenario_44_outpost.lua:7143
-#: scripts/scenario_44_outpost.lua:7162 scripts/scenario_44_outpost.lua:7185
+#: scripts/scenario_44_outpost.lua:3225 scripts/scenario_44_outpost.lua:3403
+#: scripts/scenario_44_outpost.lua:3412 scripts/scenario_44_outpost.lua:3414
+#: scripts/scenario_44_outpost.lua:3431 scripts/scenario_44_outpost.lua:3449
+#: scripts/scenario_44_outpost.lua:3638 scripts/scenario_44_outpost.lua:3647
+#: scripts/scenario_44_outpost.lua:3649 scripts/scenario_44_outpost.lua:3675
+#: scripts/scenario_44_outpost.lua:3684 scripts/scenario_44_outpost.lua:3830
+#: scripts/scenario_44_outpost.lua:3850 scripts/scenario_44_outpost.lua:3887
+#: scripts/scenario_44_outpost.lua:3904 scripts/scenario_44_outpost.lua:3921
+#: scripts/scenario_44_outpost.lua:3939 scripts/scenario_44_outpost.lua:3957
+#: scripts/scenario_44_outpost.lua:3961 scripts/scenario_44_outpost.lua:3969
+#: scripts/scenario_44_outpost.lua:3980 scripts/scenario_44_outpost.lua:3986
+#: scripts/scenario_44_outpost.lua:3994 scripts/scenario_44_outpost.lua:3999
+#: scripts/scenario_44_outpost.lua:4008 scripts/scenario_44_outpost.lua:4012
+#: scripts/scenario_44_outpost.lua:4016 scripts/scenario_44_outpost.lua:4018
+#: scripts/scenario_44_outpost.lua:4055 scripts/scenario_44_outpost.lua:4128
+#: scripts/scenario_44_outpost.lua:4145 scripts/scenario_44_outpost.lua:4176
+#: scripts/scenario_44_outpost.lua:4209 scripts/scenario_44_outpost.lua:4242
+#: scripts/scenario_44_outpost.lua:4249 scripts/scenario_44_outpost.lua:4266
+#: scripts/scenario_44_outpost.lua:4270 scripts/scenario_44_outpost.lua:4275
+#: scripts/scenario_44_outpost.lua:4317 scripts/scenario_44_outpost.lua:4371
+#: scripts/scenario_44_outpost.lua:4412 scripts/scenario_44_outpost.lua:4454
+#: scripts/scenario_44_outpost.lua:4617 scripts/scenario_44_outpost.lua:4652
+#: scripts/scenario_44_outpost.lua:4768 scripts/scenario_44_outpost.lua:4774
+#: scripts/scenario_44_outpost.lua:4780 scripts/scenario_44_outpost.lua:4785
+#: scripts/scenario_44_outpost.lua:4803 scripts/scenario_44_outpost.lua:4805
+#: scripts/scenario_44_outpost.lua:4808 scripts/scenario_44_outpost.lua:4830
+#: scripts/scenario_44_outpost.lua:4839 scripts/scenario_44_outpost.lua:4875
+#: scripts/scenario_44_outpost.lua:4921 scripts/scenario_44_outpost.lua:4944
+#: scripts/scenario_44_outpost.lua:4972 scripts/scenario_44_outpost.lua:4974
+#: scripts/scenario_44_outpost.lua:4988 scripts/scenario_44_outpost.lua:5008
+#: scripts/scenario_44_outpost.lua:5055 scripts/scenario_44_outpost.lua:5064
+#: scripts/scenario_44_outpost.lua:5076 scripts/scenario_44_outpost.lua:5082
+#: scripts/scenario_44_outpost.lua:5090 scripts/scenario_44_outpost.lua:5119
+#: scripts/scenario_44_outpost.lua:5134 scripts/scenario_44_outpost.lua:5156
+#: scripts/scenario_44_outpost.lua:5160 scripts/scenario_44_outpost.lua:5179
+#: scripts/scenario_44_outpost.lua:5183 scripts/scenario_44_outpost.lua:5278
+#: scripts/scenario_44_outpost.lua:5283 scripts/scenario_44_outpost.lua:5411
+#: scripts/scenario_44_outpost.lua:5416 scripts/scenario_44_outpost.lua:5421
+#: scripts/scenario_44_outpost.lua:5426 scripts/scenario_44_outpost.lua:5431
+#: scripts/scenario_44_outpost.lua:5436 scripts/scenario_44_outpost.lua:5441
+#: scripts/scenario_44_outpost.lua:5443 scripts/scenario_44_outpost.lua:5465
+#: scripts/scenario_44_outpost.lua:5467 scripts/scenario_44_outpost.lua:5483
+#: scripts/scenario_44_outpost.lua:5485 scripts/scenario_44_outpost.lua:5487
+#: scripts/scenario_44_outpost.lua:5519 scripts/scenario_44_outpost.lua:5543
+#: scripts/scenario_44_outpost.lua:5545 scripts/scenario_44_outpost.lua:5547
+#: scripts/scenario_44_outpost.lua:5549 scripts/scenario_44_outpost.lua:5551
+#: scripts/scenario_44_outpost.lua:5553 scripts/scenario_44_outpost.lua:5555
+#: scripts/scenario_44_outpost.lua:5557 scripts/scenario_44_outpost.lua:5559
+#: scripts/scenario_44_outpost.lua:5563 scripts/scenario_44_outpost.lua:5569
+#: scripts/scenario_44_outpost.lua:5651 scripts/scenario_44_outpost.lua:5686
+#: scripts/scenario_44_outpost.lua:5697 scripts/scenario_44_outpost.lua:5730
+#: scripts/scenario_44_outpost.lua:5766 scripts/scenario_44_outpost.lua:5777
+#: scripts/scenario_44_outpost.lua:5810 scripts/scenario_44_outpost.lua:5845
+#: scripts/scenario_44_outpost.lua:5856 scripts/scenario_44_outpost.lua:5858
+#: scripts/scenario_44_outpost.lua:5881 scripts/scenario_44_outpost.lua:5885
+#: scripts/scenario_44_outpost.lua:5891 scripts/scenario_44_outpost.lua:5914
+#: scripts/scenario_44_outpost.lua:5921 scripts/scenario_44_outpost.lua:5944
+#: scripts/scenario_44_outpost.lua:5948 scripts/scenario_44_outpost.lua:5967
+#: scripts/scenario_44_outpost.lua:5991 scripts/scenario_44_outpost.lua:6016
+#: scripts/scenario_44_outpost.lua:6038 scripts/scenario_44_outpost.lua:6064
+#: scripts/scenario_44_outpost.lua:6089 scripts/scenario_44_outpost.lua:6629
+#: scripts/scenario_44_outpost.lua:6633 scripts/scenario_44_outpost.lua:6656
+#: scripts/scenario_44_outpost.lua:6678 scripts/scenario_44_outpost.lua:6702
+#: scripts/scenario_44_outpost.lua:6724 scripts/scenario_44_outpost.lua:6748
+#: scripts/scenario_44_outpost.lua:6793 scripts/scenario_44_outpost.lua:6797
+#: scripts/scenario_44_outpost.lua:6803 scripts/scenario_44_outpost.lua:6820
+#: scripts/scenario_44_outpost.lua:6827 scripts/scenario_44_outpost.lua:6855
+#: scripts/scenario_44_outpost.lua:6888 scripts/scenario_44_outpost.lua:6899
+#: scripts/scenario_44_outpost.lua:6910 scripts/scenario_44_outpost.lua:6921
+#: scripts/scenario_44_outpost.lua:6932 scripts/scenario_44_outpost.lua:6935
+#: scripts/scenario_44_outpost.lua:6961 scripts/scenario_44_outpost.lua:6974
+#: scripts/scenario_44_outpost.lua:6987 scripts/scenario_44_outpost.lua:7045
+#: scripts/scenario_44_outpost.lua:7066 scripts/scenario_44_outpost.lua:7098
+#: scripts/scenario_44_outpost.lua:7119 scripts/scenario_44_outpost.lua:7136
+#: scripts/scenario_44_outpost.lua:7142 scripts/scenario_44_outpost.lua:7146
+#: scripts/scenario_44_outpost.lua:7165 scripts/scenario_44_outpost.lua:7188
 msgid "Back"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3226
+#: scripts/scenario_44_outpost.lua:3229
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -1116,41 +1116,41 @@ msgid ""
 "for your efforts"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3380
+#: scripts/scenario_44_outpost.lua:3383
 msgctxt "station-comms"
 msgid "Transport Passenger"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3388
+#: scripts/scenario_44_outpost.lua:3391
 #, lua-format
 msgctxt "station-comms"
 msgid "%s wishes to be transported to %s station %s in sector %s."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3389
+#: scripts/scenario_44_outpost.lua:3392
 #, lua-format
 msgctxt "station-comms"
 msgid "%s Transporting %s would increase your reputation by %s."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3392
+#: scripts/scenario_44_outpost.lua:3395
 #, lua-format
 msgctxt "station-comms"
 msgid "Agree to transport %s to %s station %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3399
+#: scripts/scenario_44_outpost.lua:3402
 #, lua-format
 msgctxt "station-comms"
 msgid "You direct %s to guest quarters and say, 'Welcome aboard the %s'"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3402
+#: scripts/scenario_44_outpost.lua:3405
 msgctxt "station-comms"
 msgid "Decline transportation request"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3404
+#: scripts/scenario_44_outpost.lua:3407
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -1158,26 +1158,26 @@ msgid ""
 "time. The offer disappears from the message board."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3407
+#: scripts/scenario_44_outpost.lua:3410
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "You tell %s that you cannot take on any transportation missions at this time."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3420
+#: scripts/scenario_44_outpost.lua:3423
 #, lua-format
 msgctxt "station-comms"
 msgid "Deliver cargo to %s on %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3425
+#: scripts/scenario_44_outpost.lua:3428
 #, lua-format
 msgctxt "station-comms"
 msgid "%s thanks you for retrieving the cargo"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3432
+#: scripts/scenario_44_outpost.lua:3435
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -1188,19 +1188,19 @@ msgid ""
 "removed from your mission log."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3439
+#: scripts/scenario_44_outpost.lua:3442
 #, lua-format
 msgctxt "station-comms"
 msgid "Pick up cargo for %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3444
+#: scripts/scenario_44_outpost.lua:3447
 #, lua-format
 msgctxt "station-comms"
 msgid "The cargo for %s has been loaded on %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3450
+#: scripts/scenario_44_outpost.lua:3453
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -1209,12 +1209,12 @@ msgid ""
 "been removed from your mission log."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3615
+#: scripts/scenario_44_outpost.lua:3618
 msgctxt "station-comms"
 msgid "Retrieve Cargo"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3623
+#: scripts/scenario_44_outpost.lua:3626
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -1222,7 +1222,7 @@ msgid ""
 "it here."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3624
+#: scripts/scenario_44_outpost.lua:3627
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -1230,13 +1230,13 @@ msgid ""
 "reputation by %s."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3626
+#: scripts/scenario_44_outpost.lua:3629
 #, lua-format
 msgctxt "station-comms"
 msgid "Agree to retrieve cargo for %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3634
+#: scripts/scenario_44_outpost.lua:3637
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -1244,17 +1244,9 @@ msgid ""
 "picking up the cargo."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3637
+#: scripts/scenario_44_outpost.lua:3640
 msgctxt "station-comms"
 msgid "Decline cargo retrieval request"
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:3639
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"You tell %s that you cannot take on any cargo retrieval missions at this "
-"time. The offer disappears from the message board."
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3642
@@ -1262,52 +1254,60 @@ msgstr ""
 msgctxt "station-comms"
 msgid ""
 "You tell %s that you cannot take on any cargo retrieval missions at this "
+"time. The offer disappears from the message board."
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:3645
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"You tell %s that you cannot take on any cargo retrieval missions at this "
 "time."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3650
+#: scripts/scenario_44_outpost.lua:3653
 msgctxt "station-comms"
 msgid "Station services (restock ordnance, upgrades, repairs)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3651
+#: scripts/scenario_44_outpost.lua:3654
 msgctxt "station-comms"
 msgid "What station service are you interested in?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3655
+#: scripts/scenario_44_outpost.lua:3658
 msgctxt "upgrade-comms"
 msgid "Upgrade ship"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3661
+#: scripts/scenario_44_outpost.lua:3664
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s: %s (%s)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3668
+#: scripts/scenario_44_outpost.lua:3671
 msgctxt "upgrade-comms"
 msgid "Upgrade complete"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3670 scripts/scenario_44_outpost.lua:3845
-#: scripts/scenario_44_outpost.lua:3882 scripts/scenario_44_outpost.lua:3899
-#: scripts/scenario_44_outpost.lua:3916 scripts/scenario_44_outpost.lua:3934
-#: scripts/scenario_44_outpost.lua:3952 scripts/scenario_44_outpost.lua:4305
-#: scripts/scenario_44_outpost.lua:4400 scripts/scenario_44_outpost.lua:4780
-#: scripts/scenario_44_outpost.lua:5637 scripts/scenario_44_outpost.lua:5716
-#: scripts/scenario_44_outpost.lua:5796 scripts/scenario_44_outpost.lua:6953
-#: scripts/scenario_44_outpost.lua:6966 scripts/scenario_44_outpost.lua:6979
-#: scripts/scenario_44_outpost.lua:7037 scripts/scenario_44_outpost.lua:7058
-#: scripts/scenario_44_outpost.lua:7067 scripts/scenario_44_outpost.lua:7090
-#: scripts/scenario_44_outpost.lua:7111 scripts/scenario_44_outpost.lua:7128
-#: scripts/scenario_44_outpost.lua:7157 scripts/scenario_44_outpost.lua:7180
+#: scripts/scenario_44_outpost.lua:3673 scripts/scenario_44_outpost.lua:3848
+#: scripts/scenario_44_outpost.lua:3885 scripts/scenario_44_outpost.lua:3902
+#: scripts/scenario_44_outpost.lua:3919 scripts/scenario_44_outpost.lua:3937
+#: scripts/scenario_44_outpost.lua:3955 scripts/scenario_44_outpost.lua:4308
+#: scripts/scenario_44_outpost.lua:4403 scripts/scenario_44_outpost.lua:4783
+#: scripts/scenario_44_outpost.lua:5640 scripts/scenario_44_outpost.lua:5719
+#: scripts/scenario_44_outpost.lua:5799 scripts/scenario_44_outpost.lua:6956
+#: scripts/scenario_44_outpost.lua:6969 scripts/scenario_44_outpost.lua:6982
+#: scripts/scenario_44_outpost.lua:7040 scripts/scenario_44_outpost.lua:7061
+#: scripts/scenario_44_outpost.lua:7070 scripts/scenario_44_outpost.lua:7093
+#: scripts/scenario_44_outpost.lua:7114 scripts/scenario_44_outpost.lua:7131
+#: scripts/scenario_44_outpost.lua:7160 scripts/scenario_44_outpost.lua:7183
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3676
+#: scripts/scenario_44_outpost.lua:3679
 msgctxt "upgrade-comms"
 msgid ""
 "What kind of upgrade are you interested in? We can provide the following "
@@ -1315,17 +1315,17 @@ msgid ""
 "system: description (reputation cost)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3678
+#: scripts/scenario_44_outpost.lua:3681
 msgctxt "upgrade-comms"
 msgid "Alas, we cannot upgrade any of your systems"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3696
+#: scripts/scenario_44_outpost.lua:3699
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3698
+#: scripts/scenario_44_outpost.lua:3701
 #, lua-format
 msgctxt "ammo-comms"
 msgid ""
@@ -1334,76 +1334,76 @@ msgid ""
 "Reputation: %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3705
+#: scripts/scenario_44_outpost.lua:3708
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3707
+#: scripts/scenario_44_outpost.lua:3710
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3710 scripts/scenario_44_outpost.lua:3723
-#: scripts/scenario_44_outpost.lua:3735 scripts/scenario_44_outpost.lua:3747
-#: scripts/scenario_44_outpost.lua:3759
+#: scripts/scenario_44_outpost.lua:3713 scripts/scenario_44_outpost.lua:3726
+#: scripts/scenario_44_outpost.lua:3738 scripts/scenario_44_outpost.lua:3750
+#: scripts/scenario_44_outpost.lua:3762
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3719
+#: scripts/scenario_44_outpost.lua:3722
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3721
+#: scripts/scenario_44_outpost.lua:3724
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3731
+#: scripts/scenario_44_outpost.lua:3734
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3733
+#: scripts/scenario_44_outpost.lua:3736
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3743
+#: scripts/scenario_44_outpost.lua:3746
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3745
+#: scripts/scenario_44_outpost.lua:3748
 msgctxt "ammo-comms"
 msgid "How about mines? ("
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3755
+#: scripts/scenario_44_outpost.lua:3758
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3757
+#: scripts/scenario_44_outpost.lua:3760
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3767 scripts/scenario_44_outpost.lua:4874
+#: scripts/scenario_44_outpost.lua:3770 scripts/scenario_44_outpost.lua:4877
 msgctxt "stationServices-comms"
 msgid "Docking services status"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3768
+#: scripts/scenario_44_outpost.lua:3771
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3770 scripts/scenario_44_outpost.lua:4879
+#: scripts/scenario_44_outpost.lua:3773 scripts/scenario_44_outpost.lua:4882
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1411,26 +1411,26 @@ msgid ""
 "Replenish scan probes."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3774 scripts/scenario_44_outpost.lua:4883
+#: scripts/scenario_44_outpost.lua:3777 scripts/scenario_44_outpost.lua:4886
 msgctxt "stationServices-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3775 scripts/scenario_44_outpost.lua:4884
+#: scripts/scenario_44_outpost.lua:3778 scripts/scenario_44_outpost.lua:4887
 msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3776 scripts/scenario_44_outpost.lua:4885
+#: scripts/scenario_44_outpost.lua:3779 scripts/scenario_44_outpost.lua:4888
 msgctxt "stationServices-comms"
 msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3780 scripts/scenario_44_outpost.lua:3793
-#: scripts/scenario_44_outpost.lua:3806 scripts/scenario_44_outpost.lua:4889
-#: scripts/scenario_44_outpost.lua:4902 scripts/scenario_44_outpost.lua:4915
+#: scripts/scenario_44_outpost.lua:3783 scripts/scenario_44_outpost.lua:3796
+#: scripts/scenario_44_outpost.lua:3809 scripts/scenario_44_outpost.lua:4892
+#: scripts/scenario_44_outpost.lua:4905 scripts/scenario_44_outpost.lua:4918
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1438,7 +1438,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3783 scripts/scenario_44_outpost.lua:4892
+#: scripts/scenario_44_outpost.lua:3786 scripts/scenario_44_outpost.lua:4895
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1446,22 +1446,22 @@ msgid ""
 "Ship hull repair."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3787 scripts/scenario_44_outpost.lua:4896
+#: scripts/scenario_44_outpost.lua:3790 scripts/scenario_44_outpost.lua:4899
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3788
+#: scripts/scenario_44_outpost.lua:3791
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3789 scripts/scenario_44_outpost.lua:4898
+#: scripts/scenario_44_outpost.lua:3792 scripts/scenario_44_outpost.lua:4901
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3796 scripts/scenario_44_outpost.lua:4905
+#: scripts/scenario_44_outpost.lua:3799 scripts/scenario_44_outpost.lua:4908
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1469,31 +1469,23 @@ msgid ""
 "Recharge ship energy stores."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3800 scripts/scenario_44_outpost.lua:4909
+#: scripts/scenario_44_outpost.lua:3803 scripts/scenario_44_outpost.lua:4912
 msgctxt "stationServices-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3801 scripts/scenario_44_outpost.lua:4910
+#: scripts/scenario_44_outpost.lua:3804 scripts/scenario_44_outpost.lua:4913
 msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3802 scripts/scenario_44_outpost.lua:4911
+#: scripts/scenario_44_outpost.lua:3805 scripts/scenario_44_outpost.lua:4914
 msgctxt "stationServices-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:3809 scripts/scenario_44_outpost.lua:4923
-#, lua-format
-msgctxt "stationServices-comms"
-msgid ""
-"%s\n"
-"May overcharge jump drive"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3812 scripts/scenario_44_outpost.lua:4926
@@ -1501,7 +1493,7 @@ msgstr ""
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
-"May repair probe launch system"
+"May overcharge jump drive"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3815 scripts/scenario_44_outpost.lua:4929
@@ -1509,7 +1501,7 @@ msgstr ""
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
-"May repair hacking system"
+"May repair probe launch system"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3818 scripts/scenario_44_outpost.lua:4932
@@ -1517,7 +1509,7 @@ msgstr ""
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
-"May repair scanners"
+"May repair hacking system"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3821 scripts/scenario_44_outpost.lua:4935
@@ -1525,7 +1517,7 @@ msgstr ""
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
-"May repair combat maneuver"
+"May repair scanners"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3824 scripts/scenario_44_outpost.lua:4938
@@ -1533,26 +1525,34 @@ msgstr ""
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
+"May repair combat maneuver"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:3827 scripts/scenario_44_outpost.lua:4941
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
 "May repair self destruct system"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3836
+#: scripts/scenario_44_outpost.lua:3839
 msgctxt "stationServices-comms"
 msgid "Overcharge Jump Drive (10 Rep)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3843
+#: scripts/scenario_44_outpost.lua:3846
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3869
+#: scripts/scenario_44_outpost.lua:3872
 msgctxt "stationServices-comms"
 msgid "Repair ship system"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3870
+#: scripts/scenario_44_outpost.lua:3873
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1561,77 +1561,77 @@ msgid ""
 "Reputation: %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3873
+#: scripts/scenario_44_outpost.lua:3876
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair probe launch system (%s Rep)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3880
+#: scripts/scenario_44_outpost.lua:3883
 msgctxt "stationServices-comms"
 msgid "Your probe launch system has been repaired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3890
+#: scripts/scenario_44_outpost.lua:3893
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair hacking system (%s Rep)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3897
+#: scripts/scenario_44_outpost.lua:3900
 msgctxt "stationServices-comms"
 msgid "Your hack system has been repaired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3907
+#: scripts/scenario_44_outpost.lua:3910
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair scanning system (%s Rep)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3914
+#: scripts/scenario_44_outpost.lua:3917
 msgctxt "stationServices-comms"
 msgid "Your scanners have been repaired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3925
+#: scripts/scenario_44_outpost.lua:3928
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair combat maneuver (%s Rep)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3932
+#: scripts/scenario_44_outpost.lua:3935
 msgctxt "stationServices-comms"
 msgid "Your combat maneuver has been repaired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3943
+#: scripts/scenario_44_outpost.lua:3946
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair self destruct system (%s Rep)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3950
+#: scripts/scenario_44_outpost.lua:3953
 msgctxt "stationServices-comms"
 msgid "Your self destruct system has been repaired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3962 scripts/scenario_44_outpost.lua:4808
+#: scripts/scenario_44_outpost.lua:3965 scripts/scenario_44_outpost.lua:4811
 msgctxt "station-comms"
 msgid "I need information"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3963
+#: scripts/scenario_44_outpost.lua:3966
 msgctxt "station-comms"
 msgid "What do you need to know?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3964
+#: scripts/scenario_44_outpost.lua:3967
 msgctxt "station-comms"
 msgid "What's with all the warp jammers?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3965
+#: scripts/scenario_44_outpost.lua:3968
 msgctxt "station-comms"
 msgid ""
 "When factions in various stations in the area started attacking each other, "
@@ -1647,47 +1647,47 @@ msgid ""
 "indirect consequences, but there's no official rule against it."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3972 scripts/scenario_44_outpost.lua:5068
+#: scripts/scenario_44_outpost.lua:3975 scripts/scenario_44_outpost.lua:5071
 msgctxt "station-comms"
 msgid "Tell me more about your station"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3973 scripts/scenario_44_outpost.lua:5069
+#: scripts/scenario_44_outpost.lua:3976 scripts/scenario_44_outpost.lua:5072
 msgctxt "station-comms"
 msgid "What would you like to know?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3975 scripts/scenario_44_outpost.lua:5071
+#: scripts/scenario_44_outpost.lua:3978 scripts/scenario_44_outpost.lua:5074
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3981 scripts/scenario_44_outpost.lua:5077
+#: scripts/scenario_44_outpost.lua:3984 scripts/scenario_44_outpost.lua:5080
 msgctxt "stationStory-comms"
 msgid "Station history"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:3989 scripts/scenario_44_outpost.lua:5085
+#: scripts/scenario_44_outpost.lua:3992 scripts/scenario_44_outpost.lua:5088
 msgctxt "gossip-comms"
 msgid "Gossip"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4001
+#: scripts/scenario_44_outpost.lua:4004
 msgctxt "station-comms"
 msgid "Explain sensor jammers"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4002
+#: scripts/scenario_44_outpost.lua:4005
 msgctxt "station-comms"
 msgid "You mean those things that have a call sign that starts with SJ?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4003
+#: scripts/scenario_44_outpost.lua:4006
 msgctxt "station-comms"
 msgid "Yes. Why so many?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4004
+#: scripts/scenario_44_outpost.lua:4007
 msgctxt "station-comms"
 msgid ""
 "They were made during a big technological arms race. All the factions tried "
@@ -1697,12 +1697,12 @@ msgid ""
 "signs to make ships aware of the potential navigation hazard."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4007
+#: scripts/scenario_44_outpost.lua:4010
 msgctxt "station-comms"
 msgid "Yes. What do they do?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4008
+#: scripts/scenario_44_outpost.lua:4011
 msgctxt "station-comms"
 msgid ""
 "The sensor jammers reduce your long range sensor range. The degree and range "
@@ -1711,34 +1711,34 @@ msgid ""
 "them up to neutralize them."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4011
+#: scripts/scenario_44_outpost.lua:4014
 msgctxt "station-comms"
 msgid "Yes. How do I get rid of them?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4012
+#: scripts/scenario_44_outpost.lua:4015
 msgctxt "station-comms"
 msgid ""
 "Just pick them up. You'll want to scan them first if you don't want your "
 "scanners fried."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4018 scripts/scenario_44_outpost.lua:4810
+#: scripts/scenario_44_outpost.lua:4021 scripts/scenario_44_outpost.lua:4813
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4028 scripts/scenario_44_outpost.lua:4813
+#: scripts/scenario_44_outpost.lua:4031 scripts/scenario_44_outpost.lua:4816
 msgctxt "orders-comms"
 msgid "Survive. Protect the outpost which includes the following stations:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4030
+#: scripts/scenario_44_outpost.lua:4033
 msgctxt "orders-comms"
 msgid "Survive. Protect the outpost which consists of the following station:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4046 scripts/scenario_44_outpost.lua:4821
+#: scripts/scenario_44_outpost.lua:4049 scripts/scenario_44_outpost.lua:4824
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -1746,22 +1746,22 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4056
+#: scripts/scenario_44_outpost.lua:4059
 msgctxt "station-comms"
 msgid "Resources (repair crew, coolant, goods)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4057
+#: scripts/scenario_44_outpost.lua:4060
 msgctxt "station-comms"
 msgid "Which of the following are you interested in?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4070
+#: scripts/scenario_44_outpost.lua:4073
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4071
+#: scripts/scenario_44_outpost.lua:4074
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -1769,145 +1769,145 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4073
+#: scripts/scenario_44_outpost.lua:4076
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4076
+#: scripts/scenario_44_outpost.lua:4079
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4078 scripts/scenario_44_outpost.lua:4087
+#: scripts/scenario_44_outpost.lua:4081 scripts/scenario_44_outpost.lua:4090
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4081
+#: scripts/scenario_44_outpost.lua:4084
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4091
+#: scripts/scenario_44_outpost.lua:4094
 msgctxt "trade-comms"
 msgid "     Empty\n"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4093
+#: scripts/scenario_44_outpost.lua:4096
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4096 scripts/scenario_44_outpost.lua:5973
-#: scripts/scenario_44_outpost.lua:5998 scripts/scenario_44_outpost.lua:6020
-#: scripts/scenario_44_outpost.lua:6046 scripts/scenario_44_outpost.lua:6638
-#: scripts/scenario_44_outpost.lua:6660 scripts/scenario_44_outpost.lua:6684
-#: scripts/scenario_44_outpost.lua:6706 scripts/scenario_44_outpost.lua:6730
+#: scripts/scenario_44_outpost.lua:4099 scripts/scenario_44_outpost.lua:5976
+#: scripts/scenario_44_outpost.lua:6001 scripts/scenario_44_outpost.lua:6023
+#: scripts/scenario_44_outpost.lua:6049 scripts/scenario_44_outpost.lua:6641
+#: scripts/scenario_44_outpost.lua:6663 scripts/scenario_44_outpost.lua:6687
+#: scripts/scenario_44_outpost.lua:6709 scripts/scenario_44_outpost.lua:6733
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4101
+#: scripts/scenario_44_outpost.lua:4104
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4103
+#: scripts/scenario_44_outpost.lua:4106
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient cargo space for purchase"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4105 scripts/scenario_44_outpost.lua:4121
+#: scripts/scenario_44_outpost.lua:4108 scripts/scenario_44_outpost.lua:4124
 msgctxt "needRep-comms"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4107 scripts/scenario_44_outpost.lua:4159
-#: scripts/scenario_44_outpost.lua:4192 scripts/scenario_44_outpost.lua:4225
+#: scripts/scenario_44_outpost.lua:4110 scripts/scenario_44_outpost.lua:4162
+#: scripts/scenario_44_outpost.lua:4195 scripts/scenario_44_outpost.lua:4228
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient station inventory"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4119
+#: scripts/scenario_44_outpost.lua:4122
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "purchased"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4131
+#: scripts/scenario_44_outpost.lua:4134
 #, lua-format
 msgctxt "trade-comms"
 msgid "Sell one %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4136
+#: scripts/scenario_44_outpost.lua:4139
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4139
+#: scripts/scenario_44_outpost.lua:4142
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "One sold"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4152
+#: scripts/scenario_44_outpost.lua:4155
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4157 scripts/scenario_44_outpost.lua:4190
-#: scripts/scenario_44_outpost.lua:4223
+#: scripts/scenario_44_outpost.lua:4160 scripts/scenario_44_outpost.lua:4193
+#: scripts/scenario_44_outpost.lua:4226
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4170 scripts/scenario_44_outpost.lua:4203
-#: scripts/scenario_44_outpost.lua:4236
+#: scripts/scenario_44_outpost.lua:4173 scripts/scenario_44_outpost.lua:4206
+#: scripts/scenario_44_outpost.lua:4239
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Traded"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4185
+#: scripts/scenario_44_outpost.lua:4188
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4218 scripts/scenario_44_outpost.lua:5953
+#: scripts/scenario_44_outpost.lua:4221 scripts/scenario_44_outpost.lua:5956
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4255 scripts/scenario_44_outpost.lua:5933
-#: scripts/scenario_44_outpost.lua:6618
+#: scripts/scenario_44_outpost.lua:4258 scripts/scenario_44_outpost.lua:5936
+#: scripts/scenario_44_outpost.lua:6621
 msgctxt "trade-comms"
 msgid "Jettison cargo"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4256 scripts/scenario_44_outpost.lua:5934
-#: scripts/scenario_44_outpost.lua:6619
+#: scripts/scenario_44_outpost.lua:4259 scripts/scenario_44_outpost.lua:5937
+#: scripts/scenario_44_outpost.lua:6622
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -1915,19 +1915,19 @@ msgid ""
 "What would you like to jettison?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4262 scripts/scenario_44_outpost.lua:5940
-#: scripts/scenario_44_outpost.lua:6625
+#: scripts/scenario_44_outpost.lua:4265 scripts/scenario_44_outpost.lua:5943
+#: scripts/scenario_44_outpost.lua:6628
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4270
+#: scripts/scenario_44_outpost.lua:4273
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4271
+#: scripts/scenario_44_outpost.lua:4274
 msgctxt "explainGoods-comms"
 msgid ""
 "Different types of cargo or goods may be obtained from stations, freighters "
@@ -1938,89 +1938,89 @@ msgid ""
 "(typically food, medicine or luxury)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4278
+#: scripts/scenario_44_outpost.lua:4281
 msgctxt "trade-comms"
 msgid "Recruit repair crew member"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4298
+#: scripts/scenario_44_outpost.lua:4301
 msgctxt "trade-comms"
 msgid "We have a repair crew candidate for you to consider"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4299
+#: scripts/scenario_44_outpost.lua:4302
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4312
+#: scripts/scenario_44_outpost.lua:4315
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4318 scripts/scenario_44_outpost.lua:4342
+#: scripts/scenario_44_outpost.lua:4321 scripts/scenario_44_outpost.lua:4345
 msgctxt "trade-comms"
 msgid ""
 "A possible repair recruit is awaiting final certification. They should be "
 "available in "
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4319 scripts/scenario_44_outpost.lua:4343
+#: scripts/scenario_44_outpost.lua:4322 scripts/scenario_44_outpost.lua:4346
 msgctxt "trade-comms"
 msgid ""
 "There's one repair crew candidate completing their license application. They "
 "should be available in "
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4320 scripts/scenario_44_outpost.lua:4344
+#: scripts/scenario_44_outpost.lua:4323 scripts/scenario_44_outpost.lua:4347
 msgctxt "trade-comms"
 msgid "One repair crew should be getting here from their medical checkout in "
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4325 scripts/scenario_44_outpost.lua:4330
+#: scripts/scenario_44_outpost.lua:4328 scripts/scenario_44_outpost.lua:4333
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s %i seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4332
+#: scripts/scenario_44_outpost.lua:4335
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s a second"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4349
+#: scripts/scenario_44_outpost.lua:4352
 #, lua-format
 msgctxt "trade-comms"
 msgid "Several arrived on station earlier. %s %i seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4354 scripts/scenario_44_outpost.lua:4437
+#: scripts/scenario_44_outpost.lua:4357 scripts/scenario_44_outpost.lua:4440
 #, lua-format
 msgctxt "trade-comms"
 msgid "%i seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4356 scripts/scenario_44_outpost.lua:4439
+#: scripts/scenario_44_outpost.lua:4359 scripts/scenario_44_outpost.lua:4442
 #, lua-format
 msgctxt "trade-comms"
 msgid "%i second"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4360 scripts/scenario_44_outpost.lua:4443
+#: scripts/scenario_44_outpost.lua:4363 scripts/scenario_44_outpost.lua:4446
 #, lua-format
 msgctxt "trade-comms"
 msgid "%i minutes and %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4362 scripts/scenario_44_outpost.lua:4445
+#: scripts/scenario_44_outpost.lua:4365 scripts/scenario_44_outpost.lua:4448
 #, lua-format
 msgctxt "trade-comms"
 msgid "%i minute and %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4365
+#: scripts/scenario_44_outpost.lua:4368
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2028,28 +2028,28 @@ msgid ""
 "is %s."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4373
+#: scripts/scenario_44_outpost.lua:4376
 msgctxt "trade-comms"
 msgid "Purchase Coolant"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4393
+#: scripts/scenario_44_outpost.lua:4396
 msgctxt "trade-comms"
 msgid "We've got some coolant available for you"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4394
+#: scripts/scenario_44_outpost.lua:4397
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchase coolant for %i reputation"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4407
+#: scripts/scenario_44_outpost.lua:4410
 msgctxt "trade-comms"
 msgid "Additional coolant purchased"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4414 scripts/scenario_44_outpost.lua:4419
+#: scripts/scenario_44_outpost.lua:4417 scripts/scenario_44_outpost.lua:4422
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2057,14 +2057,14 @@ msgid ""
 "for transport. They say they should have it working in about %i seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4421
+#: scripts/scenario_44_outpost.lua:4424
 msgctxt "trade-comms"
 msgid ""
 "The coolant preparation facility is having difficulty packaging the coolant "
 "for transportation. They say they should have it working in a second"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4432
+#: scripts/scenario_44_outpost.lua:4435
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2072,7 +2072,7 @@ msgid ""
 "be transported. The preparation facility says it should take about %i seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4448
+#: scripts/scenario_44_outpost.lua:4451
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2080,25 +2080,25 @@ msgid ""
 "manufacturing time remaining is %s."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4460
+#: scripts/scenario_44_outpost.lua:4463
 #, lua-format
 msgctxt "orders-comms"
 msgid "Destroy aggressive enemy bases including %s station %s in %s."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4462
+#: scripts/scenario_44_outpost.lua:4465
 msgctxt "orders-comms"
 msgid "Destroy aggressive enemy bases."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4470
+#: scripts/scenario_44_outpost.lua:4473
 msgctxt "orders-comms"
 msgid ""
 "\n"
 "Optional:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4474
+#: scripts/scenario_44_outpost.lua:4477
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2106,7 +2106,7 @@ msgid ""
 "Transport %s to %s station %s in %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4476
+#: scripts/scenario_44_outpost.lua:4479
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2114,7 +2114,7 @@ msgid ""
 "Transport %s to station %s (defunct)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4482
+#: scripts/scenario_44_outpost.lua:4485
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2122,7 +2122,7 @@ msgid ""
 "Deliver cargo for %s to station %s in %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4484
+#: scripts/scenario_44_outpost.lua:4487
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2130,7 +2130,7 @@ msgid ""
 "Deliver cargo for %s to station %s (defunct)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4488
+#: scripts/scenario_44_outpost.lua:4491
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2138,7 +2138,7 @@ msgid ""
 "Pick up cargo for %s at station %s in %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4490
+#: scripts/scenario_44_outpost.lua:4493
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2146,7 +2146,7 @@ msgid ""
 "Pick up cargo for %s at station %s (defunct)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4527
+#: scripts/scenario_44_outpost.lua:4530
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2155,7 +2155,7 @@ msgid ""
 "seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4529
+#: scripts/scenario_44_outpost.lua:4532
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2165,7 +2165,7 @@ msgid ""
 "detonation in %s seconds"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4532
+#: scripts/scenario_44_outpost.lua:4535
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2173,13 +2173,13 @@ msgid ""
 "Sabotage target station has been destroyed"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4550
+#: scripts/scenario_44_outpost.lua:4553
 #, lua-format
 msgctxt "orders-comms"
 msgid "%s's destination station, %s in %s, is not an aggressive enemy station."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4552
+#: scripts/scenario_44_outpost.lua:4555
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2187,7 +2187,7 @@ msgid ""
 "enemy station."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4555
+#: scripts/scenario_44_outpost.lua:4558
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2195,7 +2195,7 @@ msgid ""
 "Saboteur's ship, %s, is in transit in sector %s. %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4566
+#: scripts/scenario_44_outpost.lua:4569
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2204,7 +2204,7 @@ msgid ""
 "identified as an aggressive station"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4568
+#: scripts/scenario_44_outpost.lua:4571
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2213,7 +2213,7 @@ msgid ""
 "aggressive station"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4571
+#: scripts/scenario_44_outpost.lua:4574
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2221,7 +2221,7 @@ msgid ""
 "Saboteur's ship, %s, docked with %s station %s in sector %s."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4576
+#: scripts/scenario_44_outpost.lua:4579
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2229,7 +2229,7 @@ msgid ""
 "Saboteur successfully destroyed aggressive enemy station %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4579
+#: scripts/scenario_44_outpost.lua:4582
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2237,7 +2237,7 @@ msgid ""
 "Saboteur's ship, %s, has been destroyed"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4582
+#: scripts/scenario_44_outpost.lua:4585
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2245,74 +2245,74 @@ msgid ""
 "Plant saboteur on freighter"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4601
+#: scripts/scenario_44_outpost.lua:4604
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4602
+#: scripts/scenario_44_outpost.lua:4605
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4603
+#: scripts/scenario_44_outpost.lua:4606
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4610
+#: scripts/scenario_44_outpost.lua:4613
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4612
+#: scripts/scenario_44_outpost.lua:4615
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4620 scripts/scenario_44_outpost.lua:4635
+#: scripts/scenario_44_outpost.lua:4623 scripts/scenario_44_outpost.lua:4638
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4622 scripts/scenario_44_outpost.lua:4637
+#: scripts/scenario_44_outpost.lua:4625 scripts/scenario_44_outpost.lua:4640
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4625 scripts/scenario_44_outpost.lua:4640
-#: scripts/scenario_44_outpost.lua:4645
+#: scripts/scenario_44_outpost.lua:4628 scripts/scenario_44_outpost.lua:4643
+#: scripts/scenario_44_outpost.lua:4648
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4630
+#: scripts/scenario_44_outpost.lua:4633
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4631
+#: scripts/scenario_44_outpost.lua:4634
 msgctxt "ammo-comms"
 msgid "Get just one"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4658
+#: scripts/scenario_44_outpost.lua:4661
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4660
+#: scripts/scenario_44_outpost.lua:4663
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4663
+#: scripts/scenario_44_outpost.lua:4666
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -2320,56 +2320,56 @@ msgid ""
 "conduct business with you."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4717
+#: scripts/scenario_44_outpost.lua:4720
 msgctxt "station-comms"
 msgid "Connect to warp jammer"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4718
+#: scripts/scenario_44_outpost.lua:4721
 msgctxt "station-comms"
 msgid "Which one would you like to connect to?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4755
+#: scripts/scenario_44_outpost.lua:4758
 #, lua-format
 msgctxt "station-comms"
 msgid "(%i reputation)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4760
+#: scripts/scenario_44_outpost.lua:4763
 #, lua-format
 msgctxt "station-comms"
 msgid "%s Automated warp jammer access menu"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4761
+#: scripts/scenario_44_outpost.lua:4764
 msgctxt "station-comms"
 msgid "Reduce range to 1 unit for 1 minute"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4764 scripts/scenario_44_outpost.lua:4770
-#: scripts/scenario_44_outpost.lua:4776
+#: scripts/scenario_44_outpost.lua:4767 scripts/scenario_44_outpost.lua:4773
+#: scripts/scenario_44_outpost.lua:4779
 msgctxt "station-comms"
 msgid "Acknowledged. Range adjusted. Reset timer engaged."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4767
+#: scripts/scenario_44_outpost.lua:4770
 msgctxt "station-comms"
 msgid "Reduce range by 50% for 2 minutes"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4773
+#: scripts/scenario_44_outpost.lua:4776
 msgctxt "station-comms"
 msgid "Reduce range by 25% for 3 minutes"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4786
+#: scripts/scenario_44_outpost.lua:4789
 msgctxt "station_comms"
 msgid ""
 "Why do I have to pay reputation to log in to some of these warp jammers?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4787
+#: scripts/scenario_44_outpost.lua:4790
 #, lua-format
 msgctxt "station_comms"
 msgid ""
@@ -2378,38 +2378,14 @@ msgid ""
 "more reputation it costs to gain access. Do you want more details?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4788
+#: scripts/scenario_44_outpost.lua:4791
 msgctxt "station-comms"
 msgid "Yes, please provide more details"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4789
+#: scripts/scenario_44_outpost.lua:4792
 msgctxt "station-comms"
 msgid "These are the cases and their reputation costs:"
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:4790
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ friendly to %s and WJ is friendly to %s = no reputation."
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:4791
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:4792
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4793
@@ -2417,7 +2393,7 @@ msgstr ""
 msgctxt "station-comms"
 msgid ""
 "%s\n"
-"    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
+"    WJ friendly to %s and WJ is friendly to %s = no reputation."
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4794
@@ -2425,7 +2401,7 @@ msgstr ""
 msgctxt "station-comms"
 msgid ""
 "%s\n"
-"    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
+"    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4795
@@ -2433,7 +2409,7 @@ msgstr ""
 msgctxt "station-comms"
 msgid ""
 "%s\n"
-"    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
+"    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4796
@@ -2441,7 +2417,7 @@ msgstr ""
 msgctxt "station-comms"
 msgid ""
 "%s\n"
-"    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
+"    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4797
@@ -2449,7 +2425,7 @@ msgstr ""
 msgctxt "station-comms"
 msgid ""
 "%s\n"
-"    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
+"    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4798
@@ -2457,20 +2433,44 @@ msgstr ""
 msgctxt "station-comms"
 msgid ""
 "%s\n"
+"    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:4799
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:4800
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:4801
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
 "    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4809
+#: scripts/scenario_44_outpost.lua:4812
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4831
+#: scripts/scenario_44_outpost.lua:4834
 msgctxt "station-comms"
 msgid "Where am I?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4835
+#: scripts/scenario_44_outpost.lua:4838
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -2478,74 +2478,74 @@ msgid ""
 "you're on a bearing of %.1f from us at a distance of %.1f units"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4839
+#: scripts/scenario_44_outpost.lua:4842
 msgctxt "station-comms"
 msgid "Station services (ordnance restock, repair, upgrade)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4840
+#: scripts/scenario_44_outpost.lua:4843
 msgctxt "station-comms"
 msgid "We offer a variety of services when you dock with us."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4841
+#: scripts/scenario_44_outpost.lua:4844
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4846
+#: scripts/scenario_44_outpost.lua:4849
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Nuke"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4850
+#: scripts/scenario_44_outpost.lua:4853
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   EMP"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4854
+#: scripts/scenario_44_outpost.lua:4857
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Homing"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4858
+#: scripts/scenario_44_outpost.lua:4861
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Mine"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4862
+#: scripts/scenario_44_outpost.lua:4865
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   HVLI"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4865
+#: scripts/scenario_44_outpost.lua:4868
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4867
+#: scripts/scenario_44_outpost.lua:4870
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4869
+#: scripts/scenario_44_outpost.lua:4872
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4875
+#: scripts/scenario_44_outpost.lua:4878
 msgctxt "stationServices-comms"
 msgid ""
 "Which docking service category do you want a status for?\n"
@@ -2557,52 +2557,52 @@ msgid ""
 "        Beam, missile, shield, hull, impulse, ftl, sensors"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4876
+#: scripts/scenario_44_outpost.lua:4879
 msgctxt "stationServices-comms"
 msgid "Primary services"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4877
+#: scripts/scenario_44_outpost.lua:4880
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s primary docking services status:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4897
+#: scripts/scenario_44_outpost.lua:4900
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable whie it is undergoing maintenance."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4920
+#: scripts/scenario_44_outpost.lua:4923
 msgctxt "stationServices-comms"
 msgid "Secondary systems repair"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4921
+#: scripts/scenario_44_outpost.lua:4924
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking repair services status:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4943
+#: scripts/scenario_44_outpost.lua:4946
 msgctxt "upgrade-comms"
 msgid "Upgrade ship systems"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4944
+#: scripts/scenario_44_outpost.lua:4947
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Station %s docking upgrade services:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4949
+#: scripts/scenario_44_outpost.lua:4952
 msgctxt "upgrade-comms"
 msgid ""
 "We can provide the following upgrades:\n"
 "    system: description (reputation cost)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4954
+#: scripts/scenario_44_outpost.lua:4957
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
@@ -2610,54 +2610,54 @@ msgid ""
 "        %s: %s (%s)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4960
+#: scripts/scenario_44_outpost.lua:4963
 msgctxt "upgrade-comms"
 msgid "No more ship upgrades available for your ship"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4963
+#: scripts/scenario_44_outpost.lua:4966
 msgctxt "upgrade-comms"
 msgid "No ship upgrades available for your ship"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4966
+#: scripts/scenario_44_outpost.lua:4969
 msgctxt "upgrade-comms"
 msgid "No ship upgrades available"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4968
+#: scripts/scenario_44_outpost.lua:4971
 msgctxt "upgrade-comms"
 msgid "Explain ship upgrade categories"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4982
+#: scripts/scenario_44_outpost.lua:4985
 msgctxt "station-comms"
 msgid "Could you help defend our stations with some ships?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4983
+#: scripts/scenario_44_outpost.lua:4986
 msgctxt "station-comms"
 msgid ""
 "We are also experiencing attacks. However, we will do what we can to help."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4988
+#: scripts/scenario_44_outpost.lua:4991
 #, lua-format
 msgctxt "station-comms"
 msgid "Goods information at %s or near %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4989
+#: scripts/scenario_44_outpost.lua:4992
 msgctxt "station-comms"
 msgid "Always good to get some goods"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:4999
+#: scripts/scenario_44_outpost.lua:5002
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5000
+#: scripts/scenario_44_outpost.lua:5003
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2665,7 +2665,7 @@ msgid ""
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5002
+#: scripts/scenario_44_outpost.lua:5005
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2673,25 +2673,25 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5008
+#: scripts/scenario_44_outpost.lua:5011
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5009
+#: scripts/scenario_44_outpost.lua:5012
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5051
+#: scripts/scenario_44_outpost.lua:5054
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5056
+#: scripts/scenario_44_outpost.lua:5059
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2700,132 +2700,132 @@ msgid ""
 "I've heard about these:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5058
+#: scripts/scenario_44_outpost.lua:5061
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5096
+#: scripts/scenario_44_outpost.lua:5099
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5103
+#: scripts/scenario_44_outpost.lua:5106
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Never heard of %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5105
+#: scripts/scenario_44_outpost.lua:5108
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s died last week. The funeral was yesterday"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5107
+#: scripts/scenario_44_outpost.lua:5110
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s? Who's %s? There's nobody here named %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5109
+#: scripts/scenario_44_outpost.lua:5112
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "We don't talk about %s. They are gone and good riddance"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5111
+#: scripts/scenario_44_outpost.lua:5114
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "I think %s moved away"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5120
+#: scripts/scenario_44_outpost.lua:5123
 msgctxt "stationAssist-comms"
 msgid "Report status"
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:5121
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "Hull: %d%%\n"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5124
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "Shield: %d%%\n"
+msgid "Hull: %d%%\n"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5127
 #, lua-format
 msgctxt "stationAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:5130
+#, lua-format
+msgctxt "stationAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5135
+#: scripts/scenario_44_outpost.lua:5138
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5137
+#: scripts/scenario_44_outpost.lua:5140
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5139
+#: scripts/scenario_44_outpost.lua:5142
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5141 scripts/scenario_44_outpost.lua:5167
+#: scripts/scenario_44_outpost.lua:5144 scripts/scenario_44_outpost.lua:5170
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5149
+#: scripts/scenario_44_outpost.lua:5152
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5151 scripts/scenario_44_outpost.lua:5174
-#: scripts/scenario_44_outpost.lua:5226 scripts/scenario_44_outpost.lua:5273
+#: scripts/scenario_44_outpost.lua:5154 scripts/scenario_44_outpost.lua:5177
+#: scripts/scenario_44_outpost.lua:5229 scripts/scenario_44_outpost.lua:5276
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5161
+#: scripts/scenario_44_outpost.lua:5164
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5163
+#: scripts/scenario_44_outpost.lua:5166
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5165
+#: scripts/scenario_44_outpost.lua:5168
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5172
+#: scripts/scenario_44_outpost.lua:5175
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5184
+#: scripts/scenario_44_outpost.lua:5187
 msgctxt "stationAssist-comms"
 msgid "Please send a service jonque for repairs"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5185
+#: scripts/scenario_44_outpost.lua:5188
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid ""
@@ -2834,13 +2834,13 @@ msgid ""
 "reputation."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5224
+#: scripts/scenario_44_outpost.lua:5227
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to come to you to help with repairs"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5230
+#: scripts/scenario_44_outpost.lua:5233
 msgctxt "stationAssist-comms"
 msgid ""
 "\n"
@@ -2849,29 +2849,29 @@ msgid ""
 "and come back."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5233
+#: scripts/scenario_44_outpost.lua:5236
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Rendezvous at waypoint %d"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5271
+#: scripts/scenario_44_outpost.lua:5274
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to rendezvous at waypoint %d"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5403
+#: scripts/scenario_44_outpost.lua:5406
 msgctxt "upgrade-comms"
 msgid "Which ship system upgrade category are you wondering about?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5405
+#: scripts/scenario_44_outpost.lua:5408
 msgctxt "upgrade-comms"
 msgid "beam"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5406
+#: scripts/scenario_44_outpost.lua:5409
 msgctxt "upgrade-comms"
 msgid ""
 "Beam upgrades refer to the beam weapons systems. They might include "
@@ -2880,20 +2880,20 @@ msgid ""
 "speed."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5407 scripts/scenario_44_outpost.lua:5412
-#: scripts/scenario_44_outpost.lua:5417 scripts/scenario_44_outpost.lua:5422
-#: scripts/scenario_44_outpost.lua:5427 scripts/scenario_44_outpost.lua:5432
-#: scripts/scenario_44_outpost.lua:5437
+#: scripts/scenario_44_outpost.lua:5410 scripts/scenario_44_outpost.lua:5415
+#: scripts/scenario_44_outpost.lua:5420 scripts/scenario_44_outpost.lua:5425
+#: scripts/scenario_44_outpost.lua:5430 scripts/scenario_44_outpost.lua:5435
+#: scripts/scenario_44_outpost.lua:5440
 msgctxt "upgrade-comms"
 msgid "Back to ship upgrade category explanation list"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5410
+#: scripts/scenario_44_outpost.lua:5413
 msgctxt "upgrade-comms"
 msgid "missiles"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5411
+#: scripts/scenario_44_outpost.lua:5414
 msgctxt "upgrade-comms"
 msgid ""
 "Missile upgrades refer to aspects of the missile weapons systems. They might "
@@ -2901,12 +2901,12 @@ msgid ""
 "additional missile types or additional missile storage capacity."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5415
+#: scripts/scenario_44_outpost.lua:5418
 msgctxt "upgrade-comms"
 msgid "shield"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5416
+#: scripts/scenario_44_outpost.lua:5419
 msgctxt "upgrade-comms"
 msgid ""
 "Shield upgrades refer to the protective energy shields around your ship. "
@@ -2914,24 +2914,24 @@ msgid ""
 "front, rear or both shield arcs or the addition of a shield arc."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5420
+#: scripts/scenario_44_outpost.lua:5423
 msgctxt "upgrade-comms"
 msgid "hull"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5421
+#: scripts/scenario_44_outpost.lua:5424
 msgctxt "upgrade-comms"
 msgid ""
 "Hull upgrades refer to strengthening the ship hull to withstand more damage "
 "in the form of armor plating or structural bolstering."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5425
+#: scripts/scenario_44_outpost.lua:5428
 msgctxt "upgrade-comms"
 msgid "impulse"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5426
+#: scripts/scenario_44_outpost.lua:5429
 msgctxt "upgrade-comms"
 msgid ""
 "Impulse upgrades refer to changes related to the impulse engines. They might "
@@ -2940,12 +2940,12 @@ msgid ""
 "strafe, which is sideways motion or both)."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5430
+#: scripts/scenario_44_outpost.lua:5433
 msgctxt "upgrade-comms"
 msgid "ftl"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5431
+#: scripts/scenario_44_outpost.lua:5434
 msgctxt "upgrade-comms"
 msgid ""
 "FTL (short for faster than light) upgrades refer to warp drive or jump drive "
@@ -2953,12 +2953,12 @@ msgid ""
 "the range of the jump drive or an increase in the top speed of the warp drive"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5435
+#: scripts/scenario_44_outpost.lua:5438
 msgctxt "upgrade-comms"
 msgid "sensors"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5436
+#: scripts/scenario_44_outpost.lua:5439
 msgctxt "upgrade-comms"
 msgid ""
 "Sensor upgrades refer to the ship's ability to detect other objects. They "
@@ -2967,12 +2967,12 @@ msgid ""
 "proximity scanners."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5444
+#: scripts/scenario_44_outpost.lua:5447
 msgctxt "orders-comms"
 msgid "Is there any chance at victory for this outpost?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5445
+#: scripts/scenario_44_outpost.lua:5448
 msgctxt "orders-comms"
 msgid ""
 "The outpost leadership have been bemoaning their fate and discussing various "
@@ -2980,36 +2980,36 @@ msgid ""
 "outpost."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5446
+#: scripts/scenario_44_outpost.lua:5449
 msgctxt "orders-comms"
 msgid "Don't keep me in suspense"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5447
+#: scripts/scenario_44_outpost.lua:5450
 msgctxt "orders-comms"
 msgid ""
 "It's a low probability scenario, but if we destroyed the most aggressive "
 "enemy stations in the area, we might get the rest to agree to a truce."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5448
+#: scripts/scenario_44_outpost.lua:5451
 msgctxt "orders-comms"
 msgid "Which ones are the aggressive ones?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5450
+#: scripts/scenario_44_outpost.lua:5453
 msgctxt "orders-comms"
 msgid ""
 "The ones that keep sending attacking ships. You can just track back along "
 "the attacking ships' approach vector to find their home base."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5451
+#: scripts/scenario_44_outpost.lua:5454
 msgctxt "orders-comms"
 msgid "Have you tracked any based on approach vector?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5459
+#: scripts/scenario_44_outpost.lua:5462
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -3018,12 +3018,12 @@ msgid ""
 "One more thing about this plan..."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5460
+#: scripts/scenario_44_outpost.lua:5463
 msgctxt "orders-comms"
 msgid "Just one? What is it?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5461
+#: scripts/scenario_44_outpost.lua:5464
 msgctxt "orders-comms"
 msgid ""
 "If there are any friendly or neutral stations you haven't contacted yet to "
@@ -3032,24 +3032,24 @@ msgid ""
 "protecting the outpost can free you up to destroy the aggressive stations."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5468
+#: scripts/scenario_44_outpost.lua:5471
 #, lua-format
 msgctxt "orders-comms"
 msgid "%s station %s in %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5477
+#: scripts/scenario_44_outpost.lua:5480
 #, lua-format
 msgctxt "orders-comms"
 msgid "%s station %s in %s is probably another aggressive station"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5487
+#: scripts/scenario_44_outpost.lua:5490
 msgctxt "orders-comms"
 msgid "Any better chance at victory for this outpost?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5490
+#: scripts/scenario_44_outpost.lua:5493
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -3057,18 +3057,18 @@ msgid ""
 "attacking ships back to."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5499
+#: scripts/scenario_44_outpost.lua:5502
 #, lua-format
 msgctxt "orders-comms"
 msgid "%s station %s in %s is probably another aggressive station."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5503
+#: scripts/scenario_44_outpost.lua:5506
 msgctxt "orders-comms"
 msgid "Remind me about the saboteur plan"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5504
+#: scripts/scenario_44_outpost.lua:5507
 msgctxt "orders-comms"
 msgid ""
 "Summary: Be sure you have at least one mine aboard. Find a neutral "
@@ -3076,7 +3076,7 @@ msgid ""
 "the saboteur."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5506
+#: scripts/scenario_44_outpost.lua:5509
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -3084,7 +3084,7 @@ msgid ""
 "You have already planted the saboteur on %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5509
+#: scripts/scenario_44_outpost.lua:5512
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -3093,7 +3093,7 @@ msgid ""
 "one you get also has saboteur training."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5512
+#: scripts/scenario_44_outpost.lua:5515
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -3101,7 +3101,7 @@ msgid ""
 "You need a mine to give to the saboteur."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5520
+#: scripts/scenario_44_outpost.lua:5523
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -3110,34 +3110,34 @@ msgid ""
 "attacking an aggressive enemy station directly. Interested?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5521
+#: scripts/scenario_44_outpost.lua:5524
 msgctxt "orders-comms"
 msgid "Yes, tell me about this idea"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5522
+#: scripts/scenario_44_outpost.lua:5525
 msgctxt "orders-comms"
 msgid "The idea is to sneak a saboteur aboard an aggressive enemy station."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5523
+#: scripts/scenario_44_outpost.lua:5526
 msgctxt "orders-comms"
 msgid "We can't dock with an enemy station"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5524
+#: scripts/scenario_44_outpost.lua:5527
 msgctxt "orders-comms"
 msgid ""
 "That's true. However, commercial freighters dock with those stations all the "
 "time. Commerce must go on despite the hostilities."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5525
+#: scripts/scenario_44_outpost.lua:5528
 msgctxt "orders-comms"
 msgid "Put a saboteur on a freighter?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5526
+#: scripts/scenario_44_outpost.lua:5529
 msgctxt "orders-comms"
 msgid ""
 "Right. The saboteur stays on the freighter until the freighter docks with an "
@@ -3145,12 +3145,12 @@ msgid ""
 "at a vulnerable point."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5527
+#: scripts/scenario_44_outpost.lua:5530
 msgctxt "orders-comms"
 msgid "I see problems with this idea"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5528
+#: scripts/scenario_44_outpost.lua:5531
 msgctxt "orders-comms"
 msgid ""
 "Oh yes, there are several critical points where the plan could fail. The "
@@ -3160,12 +3160,12 @@ msgid ""
 "explosives."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5529
+#: scripts/scenario_44_outpost.lua:5532
 msgctxt "orders-comms"
 msgid "Another point: we don't have a saboteur"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5530
+#: scripts/scenario_44_outpost.lua:5533
 msgctxt "orders-comms"
 msgid ""
 "Actually, that's not true. One of your repair crew recently completed a "
@@ -3173,12 +3173,12 @@ msgid ""
 "as the saboteur for this plan."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5531
+#: scripts/scenario_44_outpost.lua:5534
 msgctxt "orders-comms"
 msgid "Does graduation come with complimentary explosives?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5532
+#: scripts/scenario_44_outpost.lua:5535
 msgctxt "orders-comms"
 msgid ""
 "No. We did away with an actual graduation ceremony because too many of our "
@@ -3187,12 +3187,12 @@ msgid ""
 "to adapt one of your mines into the appropriate explosives for the plan."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5533
+#: scripts/scenario_44_outpost.lua:5536
 msgctxt "orders-comms"
 msgid "Isn't it illegal?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5534
+#: scripts/scenario_44_outpost.lua:5537
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -3205,12 +3205,12 @@ msgid ""
 "in your secure databanks."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5535
+#: scripts/scenario_44_outpost.lua:5538
 msgctxt "orders-comms"
 msgid "How do we know if this plan succeeds or fails?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5536
+#: scripts/scenario_44_outpost.lua:5539
 msgctxt "orders-comms"
 msgid ""
 "Every saboteur is trained to send simple status reports through the "
@@ -3219,12 +3219,12 @@ msgid ""
 "progress in that report."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5537
+#: scripts/scenario_44_outpost.lua:5540
 msgctxt "orders-comms"
 msgid "That's a convoluted plan. Can you summarize what we need to do?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5538
+#: scripts/scenario_44_outpost.lua:5541
 msgctxt "orders-comms"
 msgid ""
 "Be sure you have at least one mine aboard. Find a neutral freighter. "
@@ -3232,64 +3232,64 @@ msgid ""
 "saboteur."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5558
+#: scripts/scenario_44_outpost.lua:5561
 msgctxt "orders-comms"
 msgid "No, we're having enough trouble as it is"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5559
+#: scripts/scenario_44_outpost.lua:5562
 msgctxt "orders-comms"
 msgid "Suit yourself"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5616
+#: scripts/scenario_44_outpost.lua:5619
 msgctxt "ship-comms"
 msgid "Would you like another crewmember?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5617
+#: scripts/scenario_44_outpost.lua:5620
 msgctxt "ship-comms"
 msgid "We don't really need one"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5618
+#: scripts/scenario_44_outpost.lua:5621
 msgctxt "ship-comms"
 msgid "This one's got repair crew experience"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5622
+#: scripts/scenario_44_outpost.lua:5625
 msgctxt "ship-comms"
 msgid "Take on crewmember as a favor (50 reputation)?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5635 scripts/scenario_44_outpost.lua:5794
+#: scripts/scenario_44_outpost.lua:5638 scripts/scenario_44_outpost.lua:5797
 msgctxt "ship-comms"
 msgid ""
 "We have taken on your repair crewmember as a new crewmember on our ship."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5641 scripts/scenario_44_outpost.lua:5676
-#: scripts/scenario_44_outpost.lua:5720 scripts/scenario_44_outpost.lua:5756
-#: scripts/scenario_44_outpost.lua:5800 scripts/scenario_44_outpost.lua:5835
+#: scripts/scenario_44_outpost.lua:5644 scripts/scenario_44_outpost.lua:5679
+#: scripts/scenario_44_outpost.lua:5723 scripts/scenario_44_outpost.lua:5759
+#: scripts/scenario_44_outpost.lua:5803 scripts/scenario_44_outpost.lua:5838
 msgctxt "ship-comms"
 msgid "No mine to send with saboteur"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5645 scripts/scenario_44_outpost.lua:5680
-#: scripts/scenario_44_outpost.lua:5724 scripts/scenario_44_outpost.lua:5760
-#: scripts/scenario_44_outpost.lua:5804 scripts/scenario_44_outpost.lua:5839
+#: scripts/scenario_44_outpost.lua:5648 scripts/scenario_44_outpost.lua:5683
+#: scripts/scenario_44_outpost.lua:5727 scripts/scenario_44_outpost.lua:5763
+#: scripts/scenario_44_outpost.lua:5807 scripts/scenario_44_outpost.lua:5842
 msgctxt "ship-comms"
 msgid "No repair crew to send"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5661 scripts/scenario_44_outpost.lua:5740
-#: scripts/scenario_44_outpost.lua:5820
+#: scripts/scenario_44_outpost.lua:5664 scripts/scenario_44_outpost.lua:5743
+#: scripts/scenario_44_outpost.lua:5823
 #, lua-format
 msgctxt "ship-comms"
 msgid "Offer %s to take on crewmember"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5674 scripts/scenario_44_outpost.lua:5833
+#: scripts/scenario_44_outpost.lua:5677 scripts/scenario_44_outpost.lua:5836
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -3297,13 +3297,13 @@ msgid ""
 "crewmember on our ship."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5689 scripts/scenario_44_outpost.lua:5769
-#: scripts/scenario_44_outpost.lua:5848
+#: scripts/scenario_44_outpost.lua:5692 scripts/scenario_44_outpost.lua:5772
+#: scripts/scenario_44_outpost.lua:5851
 msgctxt "ship-comms"
 msgid "I talked to the captain, but he still needs convincing."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5691
+#: scripts/scenario_44_outpost.lua:5694
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -3314,24 +3314,24 @@ msgid ""
 "aboard your ship."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5696
+#: scripts/scenario_44_outpost.lua:5699
 msgctxt "ship-comms"
 msgid "This one can upgrade your impulse engines"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5700
+#: scripts/scenario_44_outpost.lua:5703
 msgctxt "ship-comms"
 msgid "Take on crewmember as a favor (25 reputation)?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5714
+#: scripts/scenario_44_outpost.lua:5717
 msgctxt "ship-comms"
 msgid ""
 "We have taken on your repair crewmember as a new crewmember on our ship. The "
 "increased impulse speed is greatly appreciated."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5754
+#: scripts/scenario_44_outpost.lua:5757
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -3339,7 +3339,7 @@ msgid ""
 "crewmember on our ship. The increased impulse speed is greatly appreciated."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5771
+#: scripts/scenario_44_outpost.lua:5774
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -3350,18 +3350,18 @@ msgid ""
 "aboard your ship."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5776
+#: scripts/scenario_44_outpost.lua:5779
 msgctxt "ship-comms"
 msgid "This one wants civilian experience"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5781
+#: scripts/scenario_44_outpost.lua:5784
 #, lua-format
 msgctxt "ship-comms"
 msgid "Take on crewmember as a favor (%i reputation)?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5850
+#: scripts/scenario_44_outpost.lua:5853
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -3372,233 +3372,233 @@ msgid ""
 "aboard your ship."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5865 scripts/scenario_44_outpost.lua:6777
-#: scripts/scenario_44_outpost.lua:6834
+#: scripts/scenario_44_outpost.lua:5868 scripts/scenario_44_outpost.lua:6780
+#: scripts/scenario_44_outpost.lua:6837
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5867 scripts/scenario_44_outpost.lua:6779
-#: scripts/scenario_44_outpost.lua:6836
+#: scripts/scenario_44_outpost.lua:5870 scripts/scenario_44_outpost.lua:6782
+#: scripts/scenario_44_outpost.lua:6839
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5869 scripts/scenario_44_outpost.lua:6781
+#: scripts/scenario_44_outpost.lua:5872 scripts/scenario_44_outpost.lua:6784
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5871 scripts/scenario_44_outpost.lua:6783
+#: scripts/scenario_44_outpost.lua:5874 scripts/scenario_44_outpost.lua:6786
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5873 scripts/scenario_44_outpost.lua:6785
+#: scripts/scenario_44_outpost.lua:5876 scripts/scenario_44_outpost.lua:6788
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5875
+#: scripts/scenario_44_outpost.lua:5878
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5877
+#: scripts/scenario_44_outpost.lua:5880
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5885 scripts/scenario_44_outpost.lua:6797
+#: scripts/scenario_44_outpost.lua:5888 scripts/scenario_44_outpost.lua:6800
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5886 scripts/scenario_44_outpost.lua:6798
+#: scripts/scenario_44_outpost.lua:5889 scripts/scenario_44_outpost.lua:6801
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5891 scripts/scenario_44_outpost.lua:6803
+#: scripts/scenario_44_outpost.lua:5894 scripts/scenario_44_outpost.lua:6806
 msgctxt "shipAssist-comms"
 msgid "Report status"
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:5892 scripts/scenario_44_outpost.lua:6804
-#: scripts/scenario_44_outpost.lua:6839
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "Hull: %d%%\n"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5895 scripts/scenario_44_outpost.lua:6807
 #: scripts/scenario_44_outpost.lua:6842
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid "Shield: %d%%\n"
-msgstr ""
-
-#: scripts/scenario_44_outpost.lua:5897 scripts/scenario_44_outpost.lua:6809
-#: scripts/scenario_44_outpost.lua:6844
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "Front Shield: %d%%\n"
+msgid "Hull: %d%%\n"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5898 scripts/scenario_44_outpost.lua:6810
 #: scripts/scenario_44_outpost.lua:6845
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid "Rear Shield: %d%%\n"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:5900 scripts/scenario_44_outpost.lua:6812
+#: scripts/scenario_44_outpost.lua:6847
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5901 scripts/scenario_44_outpost.lua:6813
 #: scripts/scenario_44_outpost.lua:6848
 #, lua-format
 msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:5904 scripts/scenario_44_outpost.lua:6816
+#: scripts/scenario_44_outpost.lua:6851
+#, lua-format
+msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5907
+#: scripts/scenario_44_outpost.lua:5910
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5915 scripts/scenario_44_outpost.lua:6821
+#: scripts/scenario_44_outpost.lua:5918 scripts/scenario_44_outpost.lua:6824
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5916 scripts/scenario_44_outpost.lua:6822
+#: scripts/scenario_44_outpost.lua:5919 scripts/scenario_44_outpost.lua:6825
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5963
+#: scripts/scenario_44_outpost.lua:5966
 #, lua-format
 msgctxt "trade-comms"
 msgid "Traded luxury for %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5984 scripts/scenario_44_outpost.lua:6009
-#: scripts/scenario_44_outpost.lua:6031 scripts/scenario_44_outpost.lua:6057
-#: scripts/scenario_44_outpost.lua:6649 scripts/scenario_44_outpost.lua:6671
-#: scripts/scenario_44_outpost.lua:6695 scripts/scenario_44_outpost.lua:6717
-#: scripts/scenario_44_outpost.lua:6741
+#: scripts/scenario_44_outpost.lua:5987 scripts/scenario_44_outpost.lua:6012
+#: scripts/scenario_44_outpost.lua:6034 scripts/scenario_44_outpost.lua:6060
+#: scripts/scenario_44_outpost.lua:6652 scripts/scenario_44_outpost.lua:6674
+#: scripts/scenario_44_outpost.lua:6698 scripts/scenario_44_outpost.lua:6720
+#: scripts/scenario_44_outpost.lua:6744
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:5986 scripts/scenario_44_outpost.lua:6011
-#: scripts/scenario_44_outpost.lua:6033 scripts/scenario_44_outpost.lua:6059
-#: scripts/scenario_44_outpost.lua:6651 scripts/scenario_44_outpost.lua:6673
-#: scripts/scenario_44_outpost.lua:6697 scripts/scenario_44_outpost.lua:6719
-#: scripts/scenario_44_outpost.lua:6743
+#: scripts/scenario_44_outpost.lua:5989 scripts/scenario_44_outpost.lua:6014
+#: scripts/scenario_44_outpost.lua:6036 scripts/scenario_44_outpost.lua:6062
+#: scripts/scenario_44_outpost.lua:6654 scripts/scenario_44_outpost.lua:6676
+#: scripts/scenario_44_outpost.lua:6700 scripts/scenario_44_outpost.lua:6722
+#: scripts/scenario_44_outpost.lua:6746
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6069 scripts/scenario_44_outpost.lua:6590
+#: scripts/scenario_44_outpost.lua:6072 scripts/scenario_44_outpost.lua:6593
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6071 scripts/scenario_44_outpost.lua:6592
+#: scripts/scenario_44_outpost.lua:6074 scripts/scenario_44_outpost.lua:6595
 msgctxt "trade-comms"
 msgid "We've got "
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6075 scripts/scenario_44_outpost.lua:6596
+#: scripts/scenario_44_outpost.lua:6078 scripts/scenario_44_outpost.lua:6599
 msgctxt "trade-comms"
 msgid ", "
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6083 scripts/scenario_44_outpost.lua:6604
+#: scripts/scenario_44_outpost.lua:6086 scripts/scenario_44_outpost.lua:6607
 msgctxt "trade-comms"
 msgid "nothing"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6098
+#: scripts/scenario_44_outpost.lua:6101
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6099
+#: scripts/scenario_44_outpost.lua:6102
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6100
+#: scripts/scenario_44_outpost.lua:6103
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6106
+#: scripts/scenario_44_outpost.lua:6109
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6109
+#: scripts/scenario_44_outpost.lua:6112
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6110
+#: scripts/scenario_44_outpost.lua:6113
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6112
+#: scripts/scenario_44_outpost.lua:6115
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6113
+#: scripts/scenario_44_outpost.lua:6116
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6114
+#: scripts/scenario_44_outpost.lua:6117
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6116
+#: scripts/scenario_44_outpost.lua:6119
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6117
+#: scripts/scenario_44_outpost.lua:6120
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6118
+#: scripts/scenario_44_outpost.lua:6121
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6123
+#: scripts/scenario_44_outpost.lua:6126
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6127
+#: scripts/scenario_44_outpost.lua:6130
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6131
+#: scripts/scenario_44_outpost.lua:6134
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -3609,22 +3609,22 @@ msgid ""
 "Communication halted."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6132
+#: scripts/scenario_44_outpost.lua:6135
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6133
+#: scripts/scenario_44_outpost.lua:6136
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6134
+#: scripts/scenario_44_outpost.lua:6137
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6136
+#: scripts/scenario_44_outpost.lua:6139
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -3632,221 +3632,221 @@ msgid ""
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6137
+#: scripts/scenario_44_outpost.lua:6140
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6138
+#: scripts/scenario_44_outpost.lua:6141
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6139
+#: scripts/scenario_44_outpost.lua:6142
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6143
+#: scripts/scenario_44_outpost.lua:6146
 msgctxt "shipEnemy-comms"
 msgid "State your business"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6147
+#: scripts/scenario_44_outpost.lua:6150
 msgctxt "shipEnemy-comms"
 msgid "What do you want? (not that we care)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6151
+#: scripts/scenario_44_outpost.lua:6154
 msgctxt "shipEnemy-comms"
 msgid "Don't waste our time"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6153
+#: scripts/scenario_44_outpost.lua:6156
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6193
+#: scripts/scenario_44_outpost.lua:6196
 msgctxt "shipEnemy-comms"
 msgid "Subspace and time continuum disruption authorized"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6211
+#: scripts/scenario_44_outpost.lua:6214
 msgctxt "shipEnemy-comms"
 msgid "Stop your actions"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6235
+#: scripts/scenario_44_outpost.lua:6238
 msgctxt "shipEnemy-comms"
 msgid "Just this once, we'll take your advice"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6237
+#: scripts/scenario_44_outpost.lua:6240
 msgctxt "shipEnemy-comms"
 msgid "No"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6557
+#: scripts/scenario_44_outpost.lua:6560
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "Disruption %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6589
+#: scripts/scenario_44_outpost.lua:6592
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6755
+#: scripts/scenario_44_outpost.lua:6758
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6757
+#: scripts/scenario_44_outpost.lua:6760
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6787
+#: scripts/scenario_44_outpost.lua:6790
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6789
+#: scripts/scenario_44_outpost.lua:6792
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %i."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6838
+#: scripts/scenario_44_outpost.lua:6841
 msgctxt "shipAssist-comms"
 msgid "How are you doing?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6857
+#: scripts/scenario_44_outpost.lua:6860
 msgctxt "shipServices-comms"
 msgid "Service options"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6875
+#: scripts/scenario_44_outpost.lua:6878
 msgctxt "shipServices-comms"
 msgid "Repair ship system"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6876
+#: scripts/scenario_44_outpost.lua:6879
 msgctxt "shipServices-comms"
 msgid "What system would you like repaired?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6878
+#: scripts/scenario_44_outpost.lua:6881
 msgctxt "shipServices-comms"
 msgid "Repair probe launch system"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6881
+#: scripts/scenario_44_outpost.lua:6884
 msgctxt "shipServices-comms"
 msgid "Your probe launch system has been repaired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6883 scripts/scenario_44_outpost.lua:6894
-#: scripts/scenario_44_outpost.lua:6905 scripts/scenario_44_outpost.lua:6916
-#: scripts/scenario_44_outpost.lua:6927 scripts/scenario_44_outpost.lua:6956
-#: scripts/scenario_44_outpost.lua:6969 scripts/scenario_44_outpost.lua:6982
+#: scripts/scenario_44_outpost.lua:6886 scripts/scenario_44_outpost.lua:6897
+#: scripts/scenario_44_outpost.lua:6908 scripts/scenario_44_outpost.lua:6919
+#: scripts/scenario_44_outpost.lua:6930 scripts/scenario_44_outpost.lua:6959
+#: scripts/scenario_44_outpost.lua:6972 scripts/scenario_44_outpost.lua:6985
 msgctxt "shipServices-comms"
 msgid "You need to stay close if you want me to fix your ship"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6889
+#: scripts/scenario_44_outpost.lua:6892
 msgctxt "shipServices-comms"
 msgid "Repair hacking system"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6892
+#: scripts/scenario_44_outpost.lua:6895
 msgctxt "shipServices-comms"
 msgid "Your hack system has been repaired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6900
+#: scripts/scenario_44_outpost.lua:6903
 msgctxt "shipServices-comms"
 msgid "Repair scanning system"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6903
+#: scripts/scenario_44_outpost.lua:6906
 msgctxt "shipServices-comms"
 msgid "Your scanners have been repaired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6911
+#: scripts/scenario_44_outpost.lua:6914
 msgctxt "shipServices-comms"
 msgid "Repair combat maneuver"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6914
+#: scripts/scenario_44_outpost.lua:6917
 msgctxt "shipServices-comms"
 msgid "Your combat maneuver has been repaired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6922
+#: scripts/scenario_44_outpost.lua:6925
 msgctxt "shipServices-comms"
 msgid "Repair self destruct system"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6925
+#: scripts/scenario_44_outpost.lua:6928
 msgctxt "shipServices-comms"
 msgid "Your self destruct system has been repaired"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6947
+#: scripts/scenario_44_outpost.lua:6950
 #, lua-format
 msgctxt "shipServices-comms"
 msgid "Full hull repair (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6951
+#: scripts/scenario_44_outpost.lua:6954
 msgctxt "shipServices-comms"
 msgid "All fixed up and ready to go"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6960 scripts/scenario_44_outpost.lua:6973
+#: scripts/scenario_44_outpost.lua:6963 scripts/scenario_44_outpost.lua:6976
 #, lua-format
 msgctxt "shipServices-comms"
 msgid "Add %i%% to hull (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:6964 scripts/scenario_44_outpost.lua:6977
+#: scripts/scenario_44_outpost.lua:6967 scripts/scenario_44_outpost.lua:6980
 msgctxt "shipServices-comms"
 msgid "Repairs completed as requested"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7015
+#: scripts/scenario_44_outpost.lua:7018
 msgctxt "ammo-comms"
 msgid "Restock ordnance"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7019
+#: scripts/scenario_44_outpost.lua:7022
 msgctxt "ammo-comms"
 msgid "What kind of ordnance?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7020
+#: scripts/scenario_44_outpost.lua:7023
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%i reputation each)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7026
+#: scripts/scenario_44_outpost.lua:7029
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Restocked your %s type ordnance"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7029
+#: scripts/scenario_44_outpost.lua:7032
 #, lua-format
 msgctxt "needRep-comms"
 msgid ""
@@ -3854,41 +3854,41 @@ msgid ""
 "You need %i and you only have %i. How would you like to proceed?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7030 scripts/scenario_44_outpost.lua:7083
-#: scripts/scenario_44_outpost.lua:7121
+#: scripts/scenario_44_outpost.lua:7033 scripts/scenario_44_outpost.lua:7086
+#: scripts/scenario_44_outpost.lua:7124
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Get one (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7035 scripts/scenario_44_outpost.lua:7078
-#: scripts/scenario_44_outpost.lua:7088 scripts/scenario_44_outpost.lua:7126
+#: scripts/scenario_44_outpost.lua:7038 scripts/scenario_44_outpost.lua:7081
+#: scripts/scenario_44_outpost.lua:7091 scripts/scenario_44_outpost.lua:7129
 #, lua-format
 msgctxt "ammo-comms"
 msgid "One %s provided"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7040 scripts/scenario_44_outpost.lua:7061
-#: scripts/scenario_44_outpost.lua:7093 scripts/scenario_44_outpost.lua:7114
-#: scripts/scenario_44_outpost.lua:7131 scripts/scenario_44_outpost.lua:7137
+#: scripts/scenario_44_outpost.lua:7043 scripts/scenario_44_outpost.lua:7064
+#: scripts/scenario_44_outpost.lua:7096 scripts/scenario_44_outpost.lua:7117
+#: scripts/scenario_44_outpost.lua:7134 scripts/scenario_44_outpost.lua:7140
 msgctxt "ammo-comms"
 msgid "You need to stay close if you want me to restock your ordnance"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7051 scripts/scenario_44_outpost.lua:7104
+#: scripts/scenario_44_outpost.lua:7054 scripts/scenario_44_outpost.lua:7107
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Get %i (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7056 scripts/scenario_44_outpost.lua:7076
-#: scripts/scenario_44_outpost.lua:7109
+#: scripts/scenario_44_outpost.lua:7059 scripts/scenario_44_outpost.lua:7079
+#: scripts/scenario_44_outpost.lua:7112
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%i %ss provided"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7071
+#: scripts/scenario_44_outpost.lua:7074
 #, lua-format
 msgctxt "ammo-comms"
 msgid ""
@@ -3896,12 +3896,12 @@ msgid ""
 "like to proceed?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7072
+#: scripts/scenario_44_outpost.lua:7075
 msgctxt "ammo-comms"
 msgid "We'll take all you've got"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7082
+#: scripts/scenario_44_outpost.lua:7085
 #, lua-format
 msgctxt "needRep-comms"
 msgid ""
@@ -3909,53 +3909,53 @@ msgid ""
 "need %i and you only have %i. How would you like to proceed?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7151
+#: scripts/scenario_44_outpost.lua:7154
 msgctxt "shipServices-comms"
 msgid "Restock scan probes (5 reputation)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7155
+#: scripts/scenario_44_outpost.lua:7158
 msgctxt "shipServices-comms"
 msgid "I replenished your probes for you."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7160
+#: scripts/scenario_44_outpost.lua:7163
 msgctxt "shipServices-comms"
 msgid "You need to stay close if you want me to restock your probes"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7171
+#: scripts/scenario_44_outpost.lua:7174
 #, lua-format
 msgctxt "shipServices-comms"
 msgid "Quick charge the main batteries (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7178
+#: scripts/scenario_44_outpost.lua:7181
 msgctxt "shipServices-comms"
 msgid "Your batteries have been charged"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7183
+#: scripts/scenario_44_outpost.lua:7186
 msgctxt "shipServices-comms"
 msgid "You need to stay close if you want your batteries charged quickly"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7189
+#: scripts/scenario_44_outpost.lua:7192
 msgctxt "shipServices-comms"
 msgid "How can I help you get your ship in good running order?"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7191
+#: scripts/scenario_44_outpost.lua:7194
 msgctxt "shipServices-comms"
 msgid "There's nothing on your ship that I can help you fix. Sorry."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7372
+#: scripts/scenario_44_outpost.lua:7375
 msgctxt "msgGM"
 msgid "Empty Template pool: fix excludes or other criteria"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:7894
+#: scripts/scenario_44_outpost.lua:7897
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -3963,197 +3963,197 @@ msgid ""
 "Outpost survived for %s. Posthumous rank: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8019
+#: scripts/scenario_44_outpost.lua:8022
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tubes: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8021
+#: scripts/scenario_44_outpost.lua:8024
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tube: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8076
+#: scripts/scenario_44_outpost.lua:8079
 msgctxt "shipLog"
 msgid "Encrypted Exuari communications traffic observed"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8164
+#: scripts/scenario_44_outpost.lua:8167
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8168
+#: scripts/scenario_44_outpost.lua:8171
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8172
+#: scripts/scenario_44_outpost.lua:8175
 msgctxt "repairCrew-msgDamageControl"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8190
-msgctxt "coolant-msgEngineer"
-msgid "Automated systems have recovered some coolant"
-msgstr ""
-
 #: scripts/scenario_44_outpost.lua:8193
-msgctxt "coolant-msgEngineer+"
+msgctxt "coolant-msgEngineer"
 msgid "Automated systems have recovered some coolant"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8196
+msgctxt "coolant-msgEngineer+"
+msgid "Automated systems have recovered some coolant"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:8199
 msgctxt "coolant-msgDamageControl"
 msgid "Automated systems have recovered some coolant"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8236 scripts/scenario_44_outpost.lua:8275
+#: scripts/scenario_44_outpost.lua:8239 scripts/scenario_44_outpost.lua:8278
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8240 scripts/scenario_44_outpost.lua:8279
+#: scripts/scenario_44_outpost.lua:8243 scripts/scenario_44_outpost.lua:8282
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8244 scripts/scenario_44_outpost.lua:8283
+#: scripts/scenario_44_outpost.lua:8247 scripts/scenario_44_outpost.lua:8286
 msgctxt "repairCrew-msgDamageControl"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8300
+#: scripts/scenario_44_outpost.lua:8303
 msgctxt "coolant-msgEngineer"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8304
+#: scripts/scenario_44_outpost.lua:8307
 msgctxt "coolant-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8308
+#: scripts/scenario_44_outpost.lua:8311
 msgctxt "coolant-msgDamageControl"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8315
-msgctxt "damage-msgEngineer"
-msgid "The probe launch system has been damaged"
-msgstr ""
-
 #: scripts/scenario_44_outpost.lua:8318
-msgctxt "damage-msgEngineer+"
+msgctxt "damage-msgEngineer"
 msgid "The probe launch system has been damaged"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8321
+msgctxt "damage-msgEngineer+"
+msgid "The probe launch system has been damaged"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:8324
 msgctxt "damage-msgDamageControl"
 msgid "The probe launch system has been damaged"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8326
-msgctxt "damage-msgEngineer"
-msgid "The hacking system has been damaged"
-msgstr ""
-
 #: scripts/scenario_44_outpost.lua:8329
-msgctxt "damage-msgEngineer+"
+msgctxt "damage-msgEngineer"
 msgid "The hacking system has been damaged"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8332
+msgctxt "damage-msgEngineer+"
+msgid "The hacking system has been damaged"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:8335
 msgctxt "damage-msgDamageControl"
 msgid "The hacking system has been damaged"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8337
-msgctxt "damage-msgEngineer"
-msgid "The scanners have been damaged"
-msgstr ""
-
 #: scripts/scenario_44_outpost.lua:8340
-msgctxt "damage-msgEngineer+"
+msgctxt "damage-msgEngineer"
 msgid "The scanners have been damaged"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8343
+msgctxt "damage-msgEngineer+"
+msgid "The scanners have been damaged"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:8346
 msgctxt "damage-msgDamageControl"
 msgid "The scanners have been damaged"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8348
-msgctxt "damage-msgEngineer"
-msgid "Combat maneuver has been damaged"
-msgstr ""
-
 #: scripts/scenario_44_outpost.lua:8351
-msgctxt "damage-msgEngineer+"
+msgctxt "damage-msgEngineer"
 msgid "Combat maneuver has been damaged"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8354
+msgctxt "damage-msgEngineer+"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:8357
 msgctxt "damage-msgDamageControl"
 msgid "Combat maneuver has been damaged"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8359
+#: scripts/scenario_44_outpost.lua:8362
 msgctxt "damage-msgEngineer"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8362
+#: scripts/scenario_44_outpost.lua:8365
 msgctxt "damage-msgEngineer+"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8365
+#: scripts/scenario_44_outpost.lua:8368
 msgctxt "damage-msgDamageControl"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8390
+#: scripts/scenario_44_outpost.lua:8393
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8397
+#: scripts/scenario_44_outpost.lua:8400
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8406
+#: scripts/scenario_44_outpost.lua:8409
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8411
+#: scripts/scenario_44_outpost.lua:8414
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8415
+#: scripts/scenario_44_outpost.lua:8418
 msgctxt "inventory-shipLog"
 msgid "     Empty"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8417
+#: scripts/scenario_44_outpost.lua:8420
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8432
+#: scripts/scenario_44_outpost.lua:8435
 msgctxt "msgMainscreen"
 msgid "Scenario needs the 'Per-system damage' option under 'Extra settings'"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8468
+#: scripts/scenario_44_outpost.lua:8471
 msgctxt "shipLog"
 msgid ""
 "You've been assigned to this outpost for what seems like an eternity. "
@@ -4167,13 +4167,13 @@ msgid ""
 "following stations:"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8471
+#: scripts/scenario_44_outpost.lua:8474
 #, lua-format
 msgctxt "shipLog"
 msgid "%s (%s) in sector %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8481
+#: scripts/scenario_44_outpost.lua:8484
 msgctxt "shipLog"
 msgid ""
 "Intelligence operatives tell us they monitored Exuari communication traffic "
@@ -4184,7 +4184,7 @@ msgid ""
 "eye out."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8503
+#: scripts/scenario_44_outpost.lua:8506
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -4192,7 +4192,7 @@ msgid ""
 "Conflict lasted %s. Rank: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:8539
+#: scripts/scenario_44_outpost.lua:8542
 msgctxt "stationReport-msgGM"
 msgid "script error - \n"
 msgstr ""

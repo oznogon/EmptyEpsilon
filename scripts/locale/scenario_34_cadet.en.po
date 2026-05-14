@@ -358,12 +358,12 @@ msgctxt "scienceDescription-artifact"
 msgid "Source of unusual emanations"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1782
+#: scripts/scenario_34_cadet.lua:1783
 msgctxt "crypto-comms"
 msgid "Select alphabetic prefix"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1786
+#: scripts/scenario_34_cadet.lua:1787
 #, lua-format
 msgctxt "crypto-comms"
 msgid ""
@@ -371,13 +371,13 @@ msgid ""
 "Enter first digit"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1788
+#: scripts/scenario_34_cadet.lua:1789
 #, lua-format
 msgctxt "crypto-comms"
 msgid "First digit is %i"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1789
+#: scripts/scenario_34_cadet.lua:1790
 #, lua-format
 msgctxt "crypto-comms"
 msgid ""
@@ -385,13 +385,13 @@ msgid ""
 "Enter second digit"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1791
+#: scripts/scenario_34_cadet.lua:1792
 #, lua-format
 msgctxt "crypto-comms"
 msgid "Second digit is %i"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1792
+#: scripts/scenario_34_cadet.lua:1793
 #, lua-format
 msgctxt "crypto-comms"
 msgid ""
@@ -399,52 +399,52 @@ msgid ""
 "Enter third digit"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1794
+#: scripts/scenario_34_cadet.lua:1795
 #, lua-format
 msgctxt "crypto-comms"
 msgid "Third digit is %i"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1797
+#: scripts/scenario_34_cadet.lua:1798
 #, lua-format
 msgctxt "crypto-comms"
 msgid "Key provided: %s"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1827
+#: scripts/scenario_34_cadet.lua:1828
 #, lua-format
 msgctxt "crypto-comms"
 msgid "Current ship state encrypted and stored using new key %s"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1833
+#: scripts/scenario_34_cadet.lua:1834
 #, lua-format
 msgctxt "crypto-comms"
 msgid "Current ship state encrypted and stored using key provided %s"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1835 scripts/scenario_34_cadet.lua:1916
+#: scripts/scenario_34_cadet.lua:1836 scripts/scenario_34_cadet.lua:1917
 #, lua-format
 msgctxt "crypto-comms"
 msgid "No ship stored with encryption key %s"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1914
+#: scripts/scenario_34_cadet.lua:1915
 msgctxt "crypto-comms"
 msgid "Ship has been decrypted and restored"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1922
+#: scripts/scenario_34_cadet.lua:1923
 msgctxt "station-comms"
 msgid "Request permission to dock"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1923
+#: scripts/scenario_34_cadet.lua:1924
 msgctxt "station-comms"
 msgid "Permission granted"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1929
+#: scripts/scenario_34_cadet.lua:1930
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -452,12 +452,12 @@ msgid ""
 "You have the option to restore a previously encrypted ship when docked."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1956
+#: scripts/scenario_34_cadet.lua:1957
 msgctxt "station-comms"
 msgid "Ready for our first patrol mission"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1960
+#: scripts/scenario_34_cadet.lua:1961
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -465,48 +465,48 @@ msgid ""
 "shortly."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1980
+#: scripts/scenario_34_cadet.lua:1981
 msgctxt "crypto-comms"
 msgid "Encrypt ship state for future retrieval"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1981
+#: scripts/scenario_34_cadet.lua:1982
 msgctxt "crypto-comms"
 msgid "How would you like to encrypt the ship state for future retrieval?"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1983
+#: scripts/scenario_34_cadet.lua:1984
 msgctxt "crypto-comms"
 msgid "Reuse existing encryption key"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1988
+#: scripts/scenario_34_cadet.lua:1989
 msgctxt "crypto-comms"
 msgid "Discard all encryption keys and create a new key"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:1994
+#: scripts/scenario_34_cadet.lua:1995
 msgctxt "crypto-comms"
 msgid "Create a new encryption key"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2002
+#: scripts/scenario_34_cadet.lua:2003
 msgctxt "crypto-comms"
 msgid "Retrieve and decrypt ship state from storage"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2012
+#: scripts/scenario_34_cadet.lua:2013
 msgctxt "upgrade-comms"
 msgid "Install EMPs"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2013
+#: scripts/scenario_34_cadet.lua:2014
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "The shipyard weapons specialists on %s have installed EMPs on %s."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2014
+#: scripts/scenario_34_cadet.lua:2015
 msgctxt "msgHelms"
 msgid ""
 "EMP stands for Electro-Magnetic Pulse. These missiles have a blast radius of "
@@ -515,12 +515,12 @@ msgid ""
 "only damage shields."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2038
+#: scripts/scenario_34_cadet.lua:2039
 msgctxt "upgrade-comms"
 msgid "Increase long range sensor range"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2039
+#: scripts/scenario_34_cadet.lua:2040
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
@@ -528,7 +528,7 @@ msgid ""
 "%s."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2040
+#: scripts/scenario_34_cadet.lua:2041
 msgctxt "msgScience"
 msgid ""
 "The reach of your sensors is now 30 units instead of 20 units. Use the zoom "
@@ -536,18 +536,18 @@ msgid ""
 "the surrounding area."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2055
+#: scripts/scenario_34_cadet.lua:2056
 msgctxt "upgrade-comms"
 msgid "Install combat maneuver"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2056
+#: scripts/scenario_34_cadet.lua:2057
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "The %s shipyard workers have installed combat maneuver on %s."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2057
+#: scripts/scenario_34_cadet.lua:2058
 msgctxt "msgHelms"
 msgid ""
 "Use combat maneuver by dragging the solid white circle on the right hand "
@@ -557,25 +557,25 @@ msgid ""
 "don't over use it. Combat maneuver can help you dodge dangerous missiles."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2067
+#: scripts/scenario_34_cadet.lua:2068
 msgctxt "msgEngineer"
 msgid ""
 "With combat maneuver installed, heat will be added to maneuver and impulse "
 "when helm or tactical uses it. Be prepared."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2081
+#: scripts/scenario_34_cadet.lua:2082
 msgctxt "upgrade-comms"
 msgid "Install jump drive"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2082
+#: scripts/scenario_34_cadet.lua:2083
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "The %s shipyard workers have installed a jump drive on %s."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2083
+#: scripts/scenario_34_cadet.lua:2084
 msgctxt "msgHelms"
 msgid ""
 "The jump drive can get you to far distances much faster than your impulse "
@@ -585,7 +585,7 @@ msgid ""
 "to activate the jump drive. There will be a countdown to jump."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2086
+#: scripts/scenario_34_cadet.lua:2087
 msgctxt "msgHelms"
 msgid ""
 "The jump drive can get you to far distances much faster than your impulse "
@@ -595,7 +595,7 @@ msgid ""
 "to activate the jump drive. There will be a countdown to jump."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2098
+#: scripts/scenario_34_cadet.lua:2099
 msgctxt "msgEngineer"
 msgid ""
 "The jump drive uses lots of energy. Each time the jump drive is activated, "
@@ -607,18 +607,18 @@ msgid ""
 "between jumps."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2116
+#: scripts/scenario_34_cadet.lua:2117
 msgctxt "upgrade-comms"
 msgid "Install nuclear weapons"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2117
+#: scripts/scenario_34_cadet.lua:2118
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "The %s shipyard weapons specialists have installed nukes on %s."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2118
+#: scripts/scenario_34_cadet.lua:2119
 msgctxt "msgHelms"
 msgid ""
 "Nukes have a blast radius of one unit. It is very easy to accidentally blow "
@@ -628,23 +628,23 @@ msgid ""
 "blast when it detonates."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2139
+#: scripts/scenario_34_cadet.lua:2140
 #, lua-format
 msgctxt "goal-comms"
 msgid "Provide %s to %s"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2140
+#: scripts/scenario_34_cadet.lua:2141
 msgctxt "goal-comms"
 msgid "Thanks! We can now enable our defensive rotational thrusters."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2149
+#: scripts/scenario_34_cadet.lua:2150
 msgctxt "upgrade-comms"
 msgid "Install scan proble launch system"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2150
+#: scripts/scenario_34_cadet.lua:2151
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
@@ -652,7 +652,7 @@ msgid ""
 "installed a probe launch system and probes on %s."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2151
+#: scripts/scenario_34_cadet.lua:2152
 msgctxt "msgRelay"
 msgid ""
 "Probes give you a 5 unit radius circle of scanner information around the "
@@ -665,18 +665,18 @@ msgid ""
 "about ten minutes. They can also be shot down by enemies."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2162
+#: scripts/scenario_34_cadet.lua:2163
 msgctxt "upgrade-comms"
 msgid "Install hacking system"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2163
+#: scripts/scenario_34_cadet.lua:2164
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "The cyber security technicians on %s installed a hacking system on %s."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2164
+#: scripts/scenario_34_cadet.lua:2165
 msgctxt "msgRelay"
 msgid ""
 "Your newly installed hacking system allows you to degrade the performance of "
@@ -688,18 +688,18 @@ msgid ""
 "running at 25%. An enemy ship with hacked systems is much easier to destroy."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2348
+#: scripts/scenario_34_cadet.lua:2349
 #, lua-format
 msgctxt "goal-comms"
 msgid "We need you to get %s for us. You can get it from %s in sector %s."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2401
+#: scripts/scenario_34_cadet.lua:2402
 msgctxt "msgMainscreen"
 msgid "Arlenian resupply freighter destroyed"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2413
+#: scripts/scenario_34_cadet.lua:2414
 #, lua-format
 msgctxt "centralcommandGoal-incCall"
 msgid ""
@@ -707,7 +707,7 @@ msgid ""
 "investigate."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2415
+#: scripts/scenario_34_cadet.lua:2416
 #, lua-format
 msgctxt "centralcommandGoal-incCall"
 msgid ""
@@ -715,7 +715,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2417
+#: scripts/scenario_34_cadet.lua:2418
 #, lua-format
 msgctxt "centralcommandGoal-incCall"
 msgid ""
@@ -724,7 +724,7 @@ msgid ""
 "for us."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2735
+#: scripts/scenario_34_cadet.lua:2736
 #, lua-format
 msgctxt "centralcommandGoal-incCall"
 msgid ""
@@ -733,7 +733,7 @@ msgid ""
 "%s periodically to get your next assignment from the dispatch office."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2744
+#: scripts/scenario_34_cadet.lua:2745
 #, lua-format
 msgctxt "centralcommandGoal-incCall"
 msgid ""
@@ -743,12 +743,12 @@ msgid ""
 "same time protect %s in sector %s. Good luck."
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2768
+#: scripts/scenario_34_cadet.lua:2769
 msgctxt "msgMainscreen"
 msgid "Your home station has been destroyed"
 msgstr ""
 
-#: scripts/scenario_34_cadet.lua:2772
+#: scripts/scenario_34_cadet.lua:2773
 msgctxt "msgMainscreen"
 msgid "You have destroyed the Kraylor primary military station"
 msgstr ""

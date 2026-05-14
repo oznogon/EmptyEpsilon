@@ -67,18 +67,6 @@ msgstr ""
 "facile."
 
 msgctxt "First"
-msgid "Seconds"
-msgstr "10 s"
-
-msgctxt "First"
-msgid ""
-"Ten seconds until the first major event occurs. This is used mainly for "
-"testing."
-msgstr ""
-"Vous avez 10 secondes avant que le 1er événement majeur ne se produise. Ceci "
-"est principalement utilisé pour les tests."
-
-msgctxt "First"
 msgid "Five"
 msgstr "5 mn"
 
@@ -173,26 +161,6 @@ msgstr ""
 "minutes. Plus court sera plus difficile. Plus long sera plus facile."
 
 msgctxt "Second"
-msgid "Seconds"
-msgstr "10 s"
-
-msgctxt "Second"
-msgid ""
-"Ten seconds between the first event and the second event. This is used "
-"mainly for testing."
-msgstr ""
-"Vous avez 10 secondes entre le 1er et le 2ème évènement. Ceci est "
-"principalement utilisé pour les tests."
-
-msgctxt "Second"
-msgid "One"
-msgstr "1 mn"
-
-msgctxt "Second"
-msgid "One minute between the first event and the second event (test)"
-msgstr "Vous avez 1 minute entre le 1er et le 2ème événement."
-
-msgctxt "Second"
 msgid "Five"
 msgstr "5 mn"
 
@@ -239,16 +207,6 @@ msgstr ""
 "vous donne la durée globale du scénario (60 mn max)."
 
 msgctxt "Third"
-msgid "Seconds"
-msgstr "10 s"
-
-msgctxt "Third"
-msgid "Ten seconds between 2nd and 3rd events. Mainly used for testing."
-msgstr ""
-"Vous avez 10 secondes entre le 2ème et le 3ème événement. Ceci est "
-"principalement utilisé pour les tests."
-
-msgctxt "Third"
 msgid "Five"
 msgstr "5 mn"
 
@@ -290,14 +248,6 @@ msgid "Degree of device cloaking mechanism"
 msgstr "Degré de dissimulation du dispositif."
 
 msgctxt "Cloak"
-msgid "None"
-msgstr "Aucun"
-
-msgctxt "Cloak"
-msgid "Device is not cloaked"
-msgstr "Le dispositif n'est pas dissimulé."
-
-msgctxt "Cloak"
 msgid "Partial"
 msgstr "Partiel"
 
@@ -321,152 +271,160 @@ msgctxt "Cloak"
 msgid "Device is cloaked (but it's not perfect)"
 msgstr "Le dispositif est complètement dissimulé (mais ce n'est pas parfait)."
 
-#: scripts/scenario_27_liberation.lua:583
+#: scripts/scenario_27_liberation.lua:131
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Player ship %s's template type (%s) could not be found in table "
+"player_ship_stats"
+msgstr ""
+
+#: scripts/scenario_27_liberation.lua:577
 msgctxt "trade-comms"
 msgid "food"
 msgstr "nourriture"
 
-#: scripts/scenario_27_liberation.lua:584
+#: scripts/scenario_27_liberation.lua:578
 msgctxt "trade-comms"
 msgid "medicine"
 msgstr "medicaments"
 
-#: scripts/scenario_27_liberation.lua:585
+#: scripts/scenario_27_liberation.lua:579
 msgctxt "trade-comms"
 msgid "luxury"
 msgstr "produits de luxe"
 
-#: scripts/scenario_27_liberation.lua:586
+#: scripts/scenario_27_liberation.lua:580
 msgctxt "trade-comms"
 msgid "cobalt"
 msgstr "cobalt"
 
-#: scripts/scenario_27_liberation.lua:587
+#: scripts/scenario_27_liberation.lua:581
 msgctxt "trade-comms"
 msgid "dilithium"
 msgstr "dilithium"
 
-#: scripts/scenario_27_liberation.lua:588
+#: scripts/scenario_27_liberation.lua:582
 msgctxt "trade-comms"
 msgid "gold"
 msgstr "or"
 
-#: scripts/scenario_27_liberation.lua:589
+#: scripts/scenario_27_liberation.lua:583
 msgctxt "trade-comms"
 msgid "nickel"
 msgstr "nickel"
 
-#: scripts/scenario_27_liberation.lua:590
+#: scripts/scenario_27_liberation.lua:584
 msgctxt "trade-comms"
 msgid "platinum"
 msgstr "platine"
 
-#: scripts/scenario_27_liberation.lua:591
+#: scripts/scenario_27_liberation.lua:585
 msgctxt "trade-comms"
 msgid "tritanium"
 msgstr "tritanium"
 
-#: scripts/scenario_27_liberation.lua:592
+#: scripts/scenario_27_liberation.lua:586
 msgctxt "trade-comms"
 msgid "autodoc"
 msgstr "autodocs"
 
-#: scripts/scenario_27_liberation.lua:593
+#: scripts/scenario_27_liberation.lua:587
 msgctxt "trade-comms"
 msgid "android"
 msgstr "androïdes"
 
-#: scripts/scenario_27_liberation.lua:594
+#: scripts/scenario_27_liberation.lua:588
 msgctxt "trade-comms"
 msgid "battery"
 msgstr "batteries"
 
-#: scripts/scenario_27_liberation.lua:595
+#: scripts/scenario_27_liberation.lua:589
 msgctxt "trade-comms"
 msgid "beam"
 msgstr "faisceaux"
 
-#: scripts/scenario_27_liberation.lua:596
+#: scripts/scenario_27_liberation.lua:590
 msgctxt "trade-comms"
 msgid "circuit"
 msgstr "circuits"
 
-#: scripts/scenario_27_liberation.lua:597
+#: scripts/scenario_27_liberation.lua:591
 msgctxt "trade-comms"
 msgid "communication"
 msgstr "communication"
 
-#: scripts/scenario_27_liberation.lua:598
+#: scripts/scenario_27_liberation.lua:592
 msgctxt "trade-comms"
 msgid "filament"
 msgstr "filaments"
 
-#: scripts/scenario_27_liberation.lua:599
+#: scripts/scenario_27_liberation.lua:593
 msgctxt "trade-comms"
 msgid "impulse"
 msgstr "impulsion"
 
-#: scripts/scenario_27_liberation.lua:600
+#: scripts/scenario_27_liberation.lua:594
 msgctxt "trade-comms"
 msgid "lifter"
 msgstr "élévateurs"
 
-#: scripts/scenario_27_liberation.lua:601
+#: scripts/scenario_27_liberation.lua:595
 msgctxt "trade-comms"
 msgid "nanites"
 msgstr "nanites"
 
-#: scripts/scenario_27_liberation.lua:602
+#: scripts/scenario_27_liberation.lua:596
 msgctxt "trade-comms"
 msgid "optic"
 msgstr "optique"
 
-#: scripts/scenario_27_liberation.lua:603
+#: scripts/scenario_27_liberation.lua:597
 msgctxt "trade-comms"
 msgid "repulsor"
 msgstr "répulseurs"
 
-#: scripts/scenario_27_liberation.lua:604
+#: scripts/scenario_27_liberation.lua:598
 msgctxt "trade-comms"
 msgid "robotic"
 msgstr "robotique"
 
-#: scripts/scenario_27_liberation.lua:605
+#: scripts/scenario_27_liberation.lua:599
 msgctxt "trade-comms"
 msgid "sensor"
 msgstr "capteurs"
 
-#: scripts/scenario_27_liberation.lua:606
+#: scripts/scenario_27_liberation.lua:600
 msgctxt "trade-comms"
 msgid "shield"
 msgstr "boucliers"
 
-#: scripts/scenario_27_liberation.lua:607
+#: scripts/scenario_27_liberation.lua:601
 msgctxt "trade-comms"
 msgid "software"
 msgstr "logiciels"
 
-#: scripts/scenario_27_liberation.lua:608
+#: scripts/scenario_27_liberation.lua:602
 msgctxt "trade-comms"
 msgid "tractor"
 msgstr "tracteurs"
 
-#: scripts/scenario_27_liberation.lua:609
+#: scripts/scenario_27_liberation.lua:603
 msgctxt "trade-comms"
 msgid "transporter"
 msgstr "transporteurs"
 
-#: scripts/scenario_27_liberation.lua:610
+#: scripts/scenario_27_liberation.lua:604
 msgctxt "trade-comms"
 msgid "warp"
 msgstr "distorsion"
 
-#: scripts/scenario_27_liberation.lua:637
+#: scripts/scenario_27_liberation.lua:631
 msgctxt "station-comms"
 msgid "She studies the Exuari. She's *the* expert around here"
 msgstr "Elle étudie les Éxuaris. Elle est *The* experte par ici."
 
-#: scripts/scenario_27_liberation.lua:638
+#: scripts/scenario_27_liberation.lua:632
 msgctxt "station-comms"
 msgid ""
 "She studies the Exuari so hard that sometimes I wonder if she's got some "
@@ -475,7 +433,7 @@ msgstr ""
 "Elle étudie les Éxuaris de manière tellement minutieuse que je me demande "
 "parfois si elle ne fait pas une sorte de fixation."
 
-#: scripts/scenario_27_liberation.lua:639
+#: scripts/scenario_27_liberation.lua:633
 msgctxt "station-comms"
 msgid ""
 "I heard that her family was killed by the Exuari. That's why she studies "
@@ -484,7 +442,7 @@ msgstr ""
 "J'ai entendu dire que sa famille avait été tuée par les Éxuaris. C'est "
 "pourquoi elle les étudie autant."
 
-#: scripts/scenario_27_liberation.lua:640
+#: scripts/scenario_27_liberation.lua:634
 msgctxt "station-comms"
 msgid ""
 "After studying the Exuari using our extensive resources, she took a job on a "
@@ -494,12 +452,12 @@ msgstr ""
 "accepté un emploi sur un cargo pour recueillir plus de données sur le "
 "terrain."
 
-#: scripts/scenario_27_liberation.lua:814
+#: scripts/scenario_27_liberation.lua:808
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
 msgstr "+ Ajout de vaisseaux"
 
-#: scripts/scenario_27_liberation.lua:1514
+#: scripts/scenario_27_liberation.lua:1508
 msgctxt "station-comms"
 msgid ""
 "Just the usual predatory actions: attack anything and laugh as it's "
@@ -508,14 +466,14 @@ msgstr ""
 "Oh, juste les actions prédatrices habituelles : attaquer n'importe quoi et "
 "rire lorsque c'est détruit ou pillé."
 
-#: scripts/scenario_27_liberation.lua:1515
+#: scripts/scenario_27_liberation.lua:1509
 msgctxt "station-comms"
 msgid "They seemed interested in Liberation Day for some reason."
 msgstr ""
 "Ils étaient intéressés par le Jour de la Libération pour une raison que "
 "j'ignore."
 
-#: scripts/scenario_27_liberation.lua:1516
+#: scripts/scenario_27_liberation.lua:1510
 msgctxt "station-comms"
 msgid ""
 "I could not make sense of what they were saying. They seemed to be talking "
@@ -524,7 +482,7 @@ msgstr ""
 "Quand ils nous ont contacté, je n'arrivais pas à comprendre ce qu'ils "
 "disaient. Ils semblaient parler par énigmes."
 
-#: scripts/scenario_27_liberation.lua:1517
+#: scripts/scenario_27_liberation.lua:1511
 msgctxt "station-comms"
 msgid "You want to talk to Jasmine Purdue. She's been studying the Exuari."
 msgstr ""
@@ -532,7 +490,7 @@ msgstr ""
 "S'il y a quoi que ce soit d'inhabituel actuellement, elle sera sûrement au "
 "courant."
 
-#: scripts/scenario_27_liberation.lua:1520
+#: scripts/scenario_27_liberation.lua:1514
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -541,12 +499,12 @@ msgstr ""
 "Ils ont installé une station isolée pour la recherche quelque part près de "
 "%s."
 
-#: scripts/scenario_27_liberation.lua:1521
+#: scripts/scenario_27_liberation.lua:1515
 msgctxt "station-comms"
 msgid "They seem to be interested in stellar mechanics."
 msgstr "Ils semblent s'intéresser à la mécanique stellaire."
 
-#: scripts/scenario_27_liberation.lua:1522
+#: scripts/scenario_27_liberation.lua:1516
 msgctxt "station-comms"
 msgid ""
 "When you can get them to talk, the topic of the inner workings of stars "
@@ -555,61 +513,66 @@ msgstr ""
 "Quand on arrive à les faire parler, le sujet des étoiles et de leur "
 "fonctionnement interne semble être une priorité."
 
-#: scripts/scenario_27_liberation.lua:1523
+#: scripts/scenario_27_liberation.lua:1517
 msgctxt "station-comms"
 msgid "They were asking us about nova causality before trying to destroy us."
 msgstr ""
 "Ils nous ont contacté et interrogé sur la causalité des supernova avant "
 "d'essayer de nous détruire."
 
-#: scripts/scenario_27_liberation.lua:1524
+#: scripts/scenario_27_liberation.lua:1518
 msgctxt "station-comms"
 msgid "They're just attacking everything per usual."
 msgstr ""
 "Ils attaquent tout et tout le monde comme d'habitude. Pfff, c'est tout ce "
 "qu'ils savent faire."
 
-#: scripts/scenario_27_liberation.lua:1571
-#: scripts/scenario_27_liberation.lua:3196
+#: scripts/scenario_27_liberation.lua:1565
+#: scripts/scenario_27_liberation.lua:3190
 msgctxt "scienceDescription-artifact"
 msgid "Anomalous high tech object"
 msgstr "Objet étrange possédant une technologie de pointe"
 
-#: scripts/scenario_27_liberation.lua:1571
-#: scripts/scenario_27_liberation.lua:3196
+#: scripts/scenario_27_liberation.lua:1565
+#: scripts/scenario_27_liberation.lua:3190
 msgctxt "scienceDescription-artifact"
 msgid "Nova Fireworks - product of the Exuari Exclamatory Enterprise"
 msgstr "Feu d'artifice Supernova - Produit de l'Entreprise Exclamative Éxuarie"
 
-#: scripts/scenario_27_liberation.lua:1774
+#: scripts/scenario_27_liberation.lua:1638
+msgctxt "msgGM"
+msgid "Empty Template pool: fix excludes or other criteria"
+msgstr ""
+
+#: scripts/scenario_27_liberation.lua:1768
 #, lua-format
 msgctxt "station-comms"
 msgid "%i seconds"
 msgstr "%i secondes"
 
-#: scripts/scenario_27_liberation.lua:1777
+#: scripts/scenario_27_liberation.lua:1771
 #, lua-format
 msgctxt "station-comms"
 msgid "%i minutes and %i seconds"
 msgstr "%i minutes et %i secondes"
 
-#: scripts/scenario_27_liberation.lua:1779
+#: scripts/scenario_27_liberation.lua:1773
 #, lua-format
 msgctxt "station-comms"
 msgid "%i minutes and %i second"
 msgstr "%i minutes et %i seconde"
 
-#: scripts/scenario_27_liberation.lua:1792
+#: scripts/scenario_27_liberation.lua:1786
 msgctxt "buttonRelay"
 msgid "Command Log"
 msgstr "Journal des directives"
 
-#: scripts/scenario_27_liberation.lua:1797
+#: scripts/scenario_27_liberation.lua:1791
 msgctxt "buttonOperations"
 msgid "Command Log"
 msgstr "Journal des directives"
 
-#: scripts/scenario_27_liberation.lua:1810
+#: scripts/scenario_27_liberation.lua:1804
 #, lua-format
 msgctxt "centralcommand-incCall"
 msgid ""
@@ -647,7 +610,7 @@ msgstr ""
 "laquelle ils ont promis des « feux d'artifice » pour Le Jour de la "
 "Libération. Pas plus de détails. Gardez un œil sur eux."
 
-#: scripts/scenario_27_liberation.lua:1811
+#: scripts/scenario_27_liberation.lua:1805
 #, lua-format
 msgctxt "msgRelay"
 msgid ""
@@ -660,7 +623,7 @@ msgstr ""
 "depuis %s. Étrange communiqué de presse des Éxuaris concernant le Jour de la "
 "Libération."
 
-#: scripts/scenario_27_liberation.lua:1818
+#: scripts/scenario_27_liberation.lua:1812
 #, lua-format
 msgctxt "msgRelay"
 msgid ""
@@ -672,7 +635,7 @@ msgstr ""
 "marqueur à vos systèmes pour la station %s %s. C'est la source la plus "
 "probable de l'approche des vaisseaux %s."
 
-#: scripts/scenario_27_liberation.lua:1819
+#: scripts/scenario_27_liberation.lua:1813
 #, lua-format
 msgctxt "msgRelay"
 msgid ""
@@ -682,7 +645,7 @@ msgstr ""
 "Marqueur ajouté pour la station %s %s : source probable des vaisseaux %s en "
 "approche."
 
-#: scripts/scenario_27_liberation.lua:1827
+#: scripts/scenario_27_liberation.lua:1821
 #, lua-format
 msgctxt "centralcommand-incCall"
 msgid ""
@@ -700,13 +663,13 @@ msgstr ""
 "Ils ne pensent pas que cet \"objet\" survivra à l'impact avec %s, vous "
 "feriez donc mieux d'enquêter rapidement, sinon il disparaîtra."
 
-#: scripts/scenario_27_liberation.lua:1828
+#: scripts/scenario_27_liberation.lua:1822
 #, lua-format
 msgctxt "msgRelay"
 msgid "Anomalous object headed for %s on a reciprical bearing on %s."
 msgstr "Objet étrange se dirigeant vers %s depuis son cap %s."
 
-#: scripts/scenario_27_liberation.lua:1836
+#: scripts/scenario_27_liberation.lua:1830
 #, lua-format
 msgctxt "centralcommand-incCall"
 msgid ""
@@ -736,7 +699,7 @@ msgstr ""
 "Les stations amies sont faciles à trouver et à contacter, mais sachez que "
 "les stations neutres peuvent également posséder des informations utiles."
 
-#: scripts/scenario_27_liberation.lua:1837
+#: scripts/scenario_27_liberation.lua:1831
 #, lua-format
 msgctxt "msgRelay"
 msgid ""
@@ -747,37 +710,37 @@ msgstr ""
 "explosant à détruit également %s et sa lune %s. Enquêter sur l'activité des "
 "Éxuaris, en particulier autour de %s."
 
-#: scripts/scenario_27_liberation.lua:1876
+#: scripts/scenario_27_liberation.lua:1870
 #, lua-format
 msgctxt "msgRelay"
 msgid "%s (waypoint %s)"
 msgstr "%s (Marqueur %s)"
 
-#: scripts/scenario_27_liberation.lua:1899
+#: scripts/scenario_27_liberation.lua:1893
 #, lua-format
 msgctxt "centralcommand-incCall"
 msgid "%s (%s until intersection)"
 msgstr "%s (%s restantes jusqu'à l'impact)"
 
-#: scripts/scenario_27_liberation.lua:1926
+#: scripts/scenario_27_liberation.lua:1920
 #, lua-format
 msgctxt "msgRelay"
 msgid "Command log for %s (clock - message):"
 msgstr "Journal des directives - Vaisseau %s (heure - message) :"
 
-#: scripts/scenario_27_liberation.lua:2544
+#: scripts/scenario_27_liberation.lua:2538
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s station %s in %s"
 msgstr "Enregistrement du capteur : station %s %s en secteur %s "
 
-#: scripts/scenario_27_liberation.lua:2546
+#: scripts/scenario_27_liberation.lua:2540
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
 msgstr "%s ; station %s %s en secteur %s"
 
-#: scripts/scenario_27_liberation.lua:2576
+#: scripts/scenario_27_liberation.lua:2570
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s %s %s in %s carrying %s"
@@ -785,39 +748,39 @@ msgstr ""
 "Enregistrement du capteur : vaisseau %s %s %s en secteur %s transportant la "
 "marchandise %s "
 
-#: scripts/scenario_27_liberation.lua:2578
+#: scripts/scenario_27_liberation.lua:2572
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s; %s %s %s in %s carrying %s"
 msgstr "%s; vaisseau %s %s %s en secteur %s transportant la marchandise %s "
 
-#: scripts/scenario_27_liberation.lua:2586
+#: scripts/scenario_27_liberation.lua:2580
 msgctxt "scienceDescription-buoy"
 msgid "No data recorded"
 msgstr "Aucune donnée enregistrée"
 
-#: scripts/scenario_27_liberation.lua:2588
-#: scripts/scenario_27_liberation.lua:2625
+#: scripts/scenario_27_liberation.lua:2582
+#: scripts/scenario_27_liberation.lua:2619
 msgctxt "scienceDescription-buoy"
 msgid "Automated data gathering device"
 msgstr "Dispositif automatisé de collecte de données"
 
-#: scripts/scenario_27_liberation.lua:2609
+#: scripts/scenario_27_liberation.lua:2603
 msgctxt "scienceDescription-buoy"
 msgid "Come to Billy Bob's for the best food in the sector"
 msgstr "Venez chez Billy Bob's goûter la meilleure cuisine du secteur"
 
-#: scripts/scenario_27_liberation.lua:2610
+#: scripts/scenario_27_liberation.lua:2604
 msgctxt "scienceDescription-buoy"
 msgid "It's never too late to buy life insurance"
 msgstr "Il n'est jamais trop tard pour souscrire une assurance vie"
 
-#: scripts/scenario_27_liberation.lua:2611
+#: scripts/scenario_27_liberation.lua:2605
 msgctxt "scienceDescription-buoy"
 msgid "You'll feel better in an Adder Mark 9"
 msgstr "Vous vous sentirez mieux dans un Vipère Mark 9 (Adder Mark 9)"
 
-#: scripts/scenario_27_liberation.lua:2612
+#: scripts/scenario_27_liberation.lua:2606
 msgctxt "scienceDescription-buoy"
 msgid ""
 "Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
@@ -825,79 +788,79 @@ msgstr ""
 "Service de management Mynock de Melinda : tarifs excellents, satisfaction "
 "garantie"
 
-#: scripts/scenario_27_liberation.lua:2613
+#: scripts/scenario_27_liberation.lua:2607
 msgctxt "scienceDescription-buoy"
 msgid "Visit Repulse shipyards for the best deals"
 msgstr ""
 "Visitez les chantiers navals Repulse pour faire les meilleures affaires"
 
-#: scripts/scenario_27_liberation.lua:2614
+#: scripts/scenario_27_liberation.lua:2608
 msgctxt "scienceDescription-buoy"
 msgid "Fresh fish! We catch, you buy!"
 msgstr "Poisson frais ! Nous l'attrapons, vous l'achetez !"
 
-#: scripts/scenario_27_liberation.lua:2615
+#: scripts/scenario_27_liberation.lua:2609
 msgctxt "scienceDescription-buoy"
 msgid "Get your fuel cells at Melinda's Market"
 msgstr "Obtenez vos piles à combustible au marché de Melinda"
 
-#: scripts/scenario_27_liberation.lua:2616
+#: scripts/scenario_27_liberation.lua:2610
 msgctxt "scienceDescription-buoy"
 msgid "Find a special companion. All species available"
 msgstr "Trouvez un compagnon spécial. Toutes les espèces disponibles"
 
-#: scripts/scenario_27_liberation.lua:2617
+#: scripts/scenario_27_liberation.lua:2611
 msgctxt "scienceDescription-buoy"
 msgid "Feeling down? Robotherapist is there for you"
 msgstr "Vous vous sentez mal ? Robothérapeute est là pour vous"
 
-#: scripts/scenario_27_liberation.lua:2618
+#: scripts/scenario_27_liberation.lua:2612
 msgctxt "scienceDescription-buoy"
 msgid "30 days, 30 kilograms, guaranteed"
 msgstr "30 jours, 30 kg en moins, garanti"
 
-#: scripts/scenario_27_liberation.lua:2619
+#: scripts/scenario_27_liberation.lua:2613
 msgctxt "scienceDescription-buoy"
 msgid "Try our asteroid dust diet weight loss program"
 msgstr ""
 "Essayez notre programme de perte de poids avec un régime de poussière "
 "d'astéroïdes"
 
-#: scripts/scenario_27_liberation.lua:2620
+#: scripts/scenario_27_liberation.lua:2614
 msgctxt "scienceDescription-buoy"
 msgid "Best tasting water in the quadrant at Willy's Waterway"
 msgstr "L'eau la plus savoureuse du quadrant chez Willy's Waterway"
 
-#: scripts/scenario_27_liberation.lua:2621
+#: scripts/scenario_27_liberation.lua:2615
 msgctxt "scienceDescription-buoy"
 msgid "Amazing shows every night at Lenny's Lounge"
 msgstr "Spectacles incroyables tous les soirs au Lenny's Lounge"
 
-#: scripts/scenario_27_liberation.lua:2622
+#: scripts/scenario_27_liberation.lua:2616
 msgctxt "scienceDescription-buoy"
 msgid "Get all your vaccinations at Fred's Pharmacy. Pick up some snacks, too"
 msgstr ""
 "Faites tous vos vaccins à la pharmacie Fred. Procurez-vous aussi des "
 "collations"
 
-#: scripts/scenario_27_liberation.lua:2623
+#: scripts/scenario_27_liberation.lua:2617
 msgctxt "scienceDescription-buoy"
 msgid "Tip: make lemons an integral part of your diet"
 msgstr "Astuce : faites du citron une partie intégrante de votre alimentation"
 
-#: scripts/scenario_27_liberation.lua:2991
+#: scripts/scenario_27_liberation.lua:2985
 msgctxt "msgScience"
 msgid "The unscanned artifact we just picked up has fried our scanners"
 msgstr ""
 "L'artefact non scanné que nous venons de récupérer a grillé nos scanners."
 
-#: scripts/scenario_27_liberation.lua:2993
+#: scripts/scenario_27_liberation.lua:2987
 msgctxt "msgOperations"
 msgid "The unscanned artifact we just picked up has fried our scanners"
 msgstr ""
 "L'artefact non scanné que nous venons de récupérer a grillé nos scanners."
 
-#: scripts/scenario_27_liberation.lua:3001
+#: scripts/scenario_27_liberation.lua:2995
 #, lua-format
 msgctxt "scienceDescription-artifact"
 msgid ""
@@ -907,28 +870,28 @@ msgstr ""
 "Source d'émanations interférant avec les capteurs longue portée. Portée : "
 "%.1fu ; Impact : %.1fu"
 
-#: scripts/scenario_27_liberation.lua:3002
+#: scripts/scenario_27_liberation.lua:2996
 msgctxt "scienceDescription-artifact"
 msgid "Source of unusual emanations"
 msgstr "Source d'émanations inhabituelles"
 
-#: scripts/scenario_27_liberation.lua:3115
+#: scripts/scenario_27_liberation.lua:3109
 msgctxt "msgMainscreen"
 msgid "The Exuari really enjoyed the fireworks at your expense"
 msgstr "Les Éxuaris ont vraiment apprécié le feu d'artifice à vos frais."
 
-#: scripts/scenario_27_liberation.lua:3480
-#: scripts/scenario_27_liberation.lua:3493
-#: scripts/scenario_27_liberation.lua:3510
-#: scripts/scenario_27_liberation.lua:3522
+#: scripts/scenario_27_liberation.lua:3474
+#: scripts/scenario_27_liberation.lua:3487
+#: scripts/scenario_27_liberation.lua:3504
+#: scripts/scenario_27_liberation.lua:3516
 msgctxt "station-comms"
 msgid "Investigate anomalous object"
 msgstr "Nous enquêtons sur un objet étrange"
 
-#: scripts/scenario_27_liberation.lua:3481
-#: scripts/scenario_27_liberation.lua:3494
-#: scripts/scenario_27_liberation.lua:3511
-#: scripts/scenario_27_liberation.lua:3523
+#: scripts/scenario_27_liberation.lua:3475
+#: scripts/scenario_27_liberation.lua:3488
+#: scripts/scenario_27_liberation.lua:3505
+#: scripts/scenario_27_liberation.lua:3517
 msgctxt "station-comms"
 msgid ""
 "We discovered a communication interface attached to the anomalous object. We "
@@ -939,18 +902,18 @@ msgstr ""
 "Malheureusement, nous n'avons pas réussi à en comprendre le sens. Voudriez-"
 "vous essayer ?"
 
-#: scripts/scenario_27_liberation.lua:3482
-#: scripts/scenario_27_liberation.lua:3495
-#: scripts/scenario_27_liberation.lua:3512
-#: scripts/scenario_27_liberation.lua:3524
+#: scripts/scenario_27_liberation.lua:3476
+#: scripts/scenario_27_liberation.lua:3489
+#: scripts/scenario_27_liberation.lua:3506
+#: scripts/scenario_27_liberation.lua:3518
 msgctxt "station-comms"
 msgid "Connect us to object"
 msgstr "Oui, connectez-nous à l'objet s'il vous plaît"
 
-#: scripts/scenario_27_liberation.lua:3484
-#: scripts/scenario_27_liberation.lua:3497
-#: scripts/scenario_27_liberation.lua:3514
-#: scripts/scenario_27_liberation.lua:3526
+#: scripts/scenario_27_liberation.lua:3478
+#: scripts/scenario_27_liberation.lua:3491
+#: scripts/scenario_27_liberation.lua:3508
+#: scripts/scenario_27_liberation.lua:3520
 msgctxt "station-comms"
 msgid ""
 "Ok. We've rigged it to contact you when you close communications with us."
@@ -959,154 +922,154 @@ msgstr ""
 "Nous l'avons trafiqué afin qu'il vous contacte immédiatement dès que notre "
 "communication prendra fin."
 
-#: scripts/scenario_27_liberation.lua:3537
+#: scripts/scenario_27_liberation.lua:3531
 msgctxt "station-comms"
 msgid "Know anything about Exuari activity?"
 msgstr "Avez-vous remarqué quoi que ce soit sur l'activité Éxuarie ?"
 
-#: scripts/scenario_27_liberation.lua:3549
+#: scripts/scenario_27_liberation.lua:3543
 msgctxt "station-comms"
 msgid "Nothing unusual."
 msgstr "Rien d'inhabituel."
 
-#: scripts/scenario_27_liberation.lua:3551
-#: scripts/scenario_27_liberation.lua:3578
+#: scripts/scenario_27_liberation.lua:3545
+#: scripts/scenario_27_liberation.lua:3572
 msgctxt "station-comms"
 msgid "Nothing recently, but things could change."
 msgstr "Rien de particulier dernièrement, mais les choses pourraient changer."
 
-#: scripts/scenario_27_liberation.lua:3559
+#: scripts/scenario_27_liberation.lua:3553
 msgctxt "station-comms"
 msgid "discovered that Jasmine Purdue is the Exuari expert to talk to"
 msgstr "a découvert que Jasmine Purdue est l'experte en Éxuaris à qui parler"
 
-#: scripts/scenario_27_liberation.lua:3567
+#: scripts/scenario_27_liberation.lua:3561
 #, lua-format
 msgctxt "station-comms"
 msgid "%s discovered that Jasmine Purdue is the Exuari expert to talk to."
 msgstr "%s a découvert que Jasmine Purdue est l'experte Éxuarie à qui parler."
 
-#: scripts/scenario_27_liberation.lua:3581
-#: scripts/scenario_27_liberation.lua:3616
+#: scripts/scenario_27_liberation.lua:3575
+#: scripts/scenario_27_liberation.lua:3610
 msgid "Back"
 msgstr "Précédent"
 
-#: scripts/scenario_27_liberation.lua:3587
+#: scripts/scenario_27_liberation.lua:3581
 msgctxt "station-comms"
 msgid "Know anything about Jasmine Purdue?"
 msgstr "Auriez-vous des informations sur une certaine Jasmine Purdue ?"
 
-#: scripts/scenario_27_liberation.lua:3591
+#: scripts/scenario_27_liberation.lua:3585
 msgctxt "station-comms"
 msgid "Never heard of her."
 msgstr "Jamais entendu parler d'elle."
 
-#: scripts/scenario_27_liberation.lua:3593
+#: scripts/scenario_27_liberation.lua:3587
 msgctxt "station-comms"
 msgid "freighter"
 msgstr "cargo"
 
-#: scripts/scenario_27_liberation.lua:3597
+#: scripts/scenario_27_liberation.lua:3591
 msgctxt "station-comms"
 msgid "discovered that Jasmine Purdue is working on a freighter"
 msgstr "a découvert que Jasmine Purdue travaille sur un cargo"
 
-#: scripts/scenario_27_liberation.lua:3605
+#: scripts/scenario_27_liberation.lua:3599
 #, lua-format
 msgctxt "station-comms"
 msgid "%s discovered that Jasmine Purdue is working on a freighter."
 msgstr "%s a découvert que Jasmine Purdue travaille sur un cargo."
 
-#: scripts/scenario_27_liberation.lua:3627
+#: scripts/scenario_27_liberation.lua:3621
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr "Que voulez-vous ?"
 
-#: scripts/scenario_27_liberation.lua:3628
+#: scripts/scenario_27_liberation.lua:3622
 msgctxt "shipAssist-comms"
 msgid "Why did you contact us?"
 msgstr "Pourquoi nous avez-vous contacté ?"
 
-#: scripts/scenario_27_liberation.lua:3629
+#: scripts/scenario_27_liberation.lua:3623
 msgctxt "shipAssist-comms"
 msgid "What is it?"
 msgstr "Qu'est-ce que c'est ?"
 
-#: scripts/scenario_27_liberation.lua:3630
+#: scripts/scenario_27_liberation.lua:3624
 msgctxt "shipAssist-comms"
 msgid "Yeah?"
 msgstr "Ouais ?"
 
-#: scripts/scenario_27_liberation.lua:3635
+#: scripts/scenario_27_liberation.lua:3629
 msgctxt "shipAssist-comms"
 msgid "What can I do for you?"
 msgstr "Que puis-je faire pour vous ?"
 
-#: scripts/scenario_27_liberation.lua:3636
+#: scripts/scenario_27_liberation.lua:3630
 msgctxt "shipAssist-comms"
 msgid "What's on your mind?"
 msgstr "Qu'est-ce qui vous préoccupe ?"
 
-#: scripts/scenario_27_liberation.lua:3637
+#: scripts/scenario_27_liberation.lua:3631
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "What can we do for you, %s?"
 msgstr "Que pouvons-nous faire pour vous, %s ?"
 
-#: scripts/scenario_27_liberation.lua:3638
+#: scripts/scenario_27_liberation.lua:3632
 msgctxt "shipAssist-comms"
 msgid "What brings you to us?"
 msgstr "Qu'est-ce qui vous amène à nous ?"
 
-#: scripts/scenario_27_liberation.lua:3643
+#: scripts/scenario_27_liberation.lua:3637
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
-#: scripts/scenario_27_liberation.lua:3644
+#: scripts/scenario_27_liberation.lua:3638
 msgctxt "shipAssist-comms"
 msgid "Sir, what can we do to help you?"
 msgstr "Monsieur, que pouvons-nous faire pour vous aider ?"
 
-#: scripts/scenario_27_liberation.lua:3645
+#: scripts/scenario_27_liberation.lua:3639
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Greetings %s, how can we assist?"
 msgstr "Salutations %s, comment pouvons-nous vous assister ?"
 
-#: scripts/scenario_27_liberation.lua:3646
+#: scripts/scenario_27_liberation.lua:3640
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "How can we help you, %s?"
 msgstr "Comment pouvons-nous vous aider, %s ?"
 
-#: scripts/scenario_27_liberation.lua:3652
+#: scripts/scenario_27_liberation.lua:3646
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr "Oui ?"
 
-#: scripts/scenario_27_liberation.lua:3653
+#: scripts/scenario_27_liberation.lua:3647
 msgctxt "trade-comms"
 msgid "What?"
 msgstr "Quoi ?"
 
-#: scripts/scenario_27_liberation.lua:3654
+#: scripts/scenario_27_liberation.lua:3648
 msgctxt "trade-comms"
 msgid "Hmm?"
 msgstr "Hmm ?"
 
-#: scripts/scenario_27_liberation.lua:3655
+#: scripts/scenario_27_liberation.lua:3649
 msgctxt "trade-comms"
 msgid "State your business."
 msgstr "Qu'est ce que vous voulez ?"
 
-#: scripts/scenario_27_liberation.lua:3661
+#: scripts/scenario_27_liberation.lua:3655
 #, lua-format
 msgctxt "ship-comms"
 msgid "Where can I find %s?"
 msgstr "Où puis-je trouver le cargo %s ?"
 
-#: scripts/scenario_27_liberation.lua:3667
+#: scripts/scenario_27_liberation.lua:3661
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -1116,15 +1079,15 @@ msgstr ""
 "Leur dernier plan de vol indique qu'ils étaient dans le secteur %s et se "
 "dirigeaient vers %s en secteur %s. Leur cap approximatif était %s."
 
-#: scripts/scenario_27_liberation.lua:3669
+#: scripts/scenario_27_liberation.lua:3663
 #, lua-format
 msgctxt "ship-comms"
 msgid "Last we heard, they were in %s"
 msgstr "Aux dernières nouvelles, il se trouvait dans le secteur %s."
 
-#: scripts/scenario_27_liberation.lua:3673
-#: scripts/scenario_27_liberation.lua:3682
-#: scripts/scenario_27_liberation.lua:3757
+#: scripts/scenario_27_liberation.lua:3667
+#: scripts/scenario_27_liberation.lua:3676
+#: scripts/scenario_27_liberation.lua:3751
 msgctxt "shipLog"
 msgid ""
 "Freighter where Jasmine Purdue was working was destroyed. She and the crew "
@@ -1133,21 +1096,21 @@ msgstr ""
 "Le cargo sur lequel travaillait Jasmine Purdue a été détruit. Elle et "
 "l'équipage ont déménagé sur un autre cargo."
 
-#: scripts/scenario_27_liberation.lua:3677
+#: scripts/scenario_27_liberation.lua:3671
 msgctxt "ship-comms"
 msgid "What do you know about Jasmine Purdue?"
 msgstr "Que savez-vous de Jasmine Purdue ?"
 
-#: scripts/scenario_27_liberation.lua:3686
-#: scripts/scenario_27_liberation.lua:3695
+#: scripts/scenario_27_liberation.lua:3680
+#: scripts/scenario_27_liberation.lua:3689
 msgctxt "ship-comms"
 msgid "She works on another freighter"
 msgstr ""
 "Ah je la connais. Elle fait des recherches sur les Éxuaris à bord d'un autre "
 "cargo."
 
-#: scripts/scenario_27_liberation.lua:3687
-#: scripts/scenario_27_liberation.lua:3696
+#: scripts/scenario_27_liberation.lua:3681
+#: scripts/scenario_27_liberation.lua:3690
 #, lua-format
 msgctxt "ship-comms"
 msgid "She works on freighter %s"
@@ -1155,31 +1118,31 @@ msgstr ""
 "Ah oui, Jasmine,\n"
 "Il me semble qu'elle travaillait sur le cargo %s."
 
-#: scripts/scenario_27_liberation.lua:3700
+#: scripts/scenario_27_liberation.lua:3694
 msgctxt "ship-comms"
 msgid "She works here"
 msgstr "Ah Jasmine, elle travaille ici avec nous."
 
-#: scripts/scenario_27_liberation.lua:3704
-#: scripts/scenario_27_liberation.lua:3737
+#: scripts/scenario_27_liberation.lua:3698
+#: scripts/scenario_27_liberation.lua:3731
 msgctxt "ship-comms"
 msgid "discovered that Jasmine Purdue is on freighter"
 msgstr "a découvert que Jasmine Purdue se trouve sur le cargo"
 
-#: scripts/scenario_27_liberation.lua:3712
-#: scripts/scenario_27_liberation.lua:3745
+#: scripts/scenario_27_liberation.lua:3706
+#: scripts/scenario_27_liberation.lua:3739
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s discovered that Jasmine Purdue is on freighter %s."
 msgstr "%s a découvert que Jasmine Purdue se trouve sur le cargo %s."
 
-#: scripts/scenario_27_liberation.lua:3721
+#: scripts/scenario_27_liberation.lua:3715
 msgctxt "ship-comms"
 msgid "May I speak with her?"
 msgstr "Puis-je lui parler ?"
 
-#: scripts/scenario_27_liberation.lua:3722
-#: scripts/scenario_27_liberation.lua:3769
+#: scripts/scenario_27_liberation.lua:3716
+#: scripts/scenario_27_liberation.lua:3763
 msgctxt "ship-comms"
 msgid ""
 "One moment, I'll get her.\n"
@@ -1190,38 +1153,38 @@ msgstr ""
 "\n"
 "[Jasmine Purdue] Oui ? Que puis-je faire pour vous ?"
 
-#: scripts/scenario_27_liberation.lua:3729
+#: scripts/scenario_27_liberation.lua:3723
 msgctxt "ship-comms"
 msgid "I know nothing about Jasmine Purdue"
 msgstr "Ce nom ne me dit rien du tout, désolé."
 
-#: scripts/scenario_27_liberation.lua:3733
+#: scripts/scenario_27_liberation.lua:3727
 msgctxt "ship-comms"
 msgid "works on freighter"
 msgstr "travaillait sur le cargo"
 
-#: scripts/scenario_27_liberation.lua:3760
+#: scripts/scenario_27_liberation.lua:3754
 #, fuzzy
 msgctxt "ship-comms"
 msgid "Try someone else"
 msgstr "Essayez avec quelqu'un d'autre."
 
-#: scripts/scenario_27_liberation.lua:3770
+#: scripts/scenario_27_liberation.lua:3764
 msgctxt "ship-comms"
 msgid "We need to know about the Exuari around here"
 msgstr "Nous devons en savoir plus sur les Éxuaris du coin"
 
-#: scripts/scenario_27_liberation.lua:3771
+#: scripts/scenario_27_liberation.lua:3765
 msgctxt "ship-comms"
 msgid "What do you need to know about the Exuari?"
 msgstr "Que voulez-vous savoir sur les Éxuaris ?"
 
-#: scripts/scenario_27_liberation.lua:3779
+#: scripts/scenario_27_liberation.lua:3773
 msgctxt "ship-comms"
 msgid "What are they up to?"
 msgstr "Quelles sont leurs activités actuellement ?"
 
-#: scripts/scenario_27_liberation.lua:3781
+#: scripts/scenario_27_liberation.lua:3775
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -1242,42 +1205,42 @@ msgstr ""
 "cette dernière en supernova. Ils l'ont testé sur l'étoile %s. Ils pensaient "
 "que cela pourrait provoquer une réponse marrante de la part de %s."
 
-#: scripts/scenario_27_liberation.lua:3782
-#: scripts/scenario_27_liberation.lua:3795
-#: scripts/scenario_27_liberation.lua:3805
-#: scripts/scenario_27_liberation.lua:3998
+#: scripts/scenario_27_liberation.lua:3776
+#: scripts/scenario_27_liberation.lua:3789
+#: scripts/scenario_27_liberation.lua:3799
+#: scripts/scenario_27_liberation.lua:3992
 msgctxt "ship-comms"
 msgid "Back to Jasmine topics of conversation"
 msgstr "Revenir aux sujets de conversation avec Jasmine"
 
-#: scripts/scenario_27_liberation.lua:3783
-#: scripts/scenario_27_liberation.lua:3796
-#: scripts/scenario_27_liberation.lua:3806
-#: scripts/scenario_27_liberation.lua:3999
+#: scripts/scenario_27_liberation.lua:3777
+#: scripts/scenario_27_liberation.lua:3790
+#: scripts/scenario_27_liberation.lua:3800
+#: scripts/scenario_27_liberation.lua:3993
 msgctxt "ship-comms"
 msgid "Do you need to know anything else about the Exuari?"
 msgstr "Avez-vous besoin de savoir autre chose sur eux ?"
 
-#: scripts/scenario_27_liberation.lua:3785
-#: scripts/scenario_27_liberation.lua:3798
-#: scripts/scenario_27_liberation.lua:3808
-#: scripts/scenario_27_liberation.lua:4001
+#: scripts/scenario_27_liberation.lua:3779
+#: scripts/scenario_27_liberation.lua:3792
+#: scripts/scenario_27_liberation.lua:3802
+#: scripts/scenario_27_liberation.lua:3995
 msgctxt "ship-comms"
 msgid "Back to ship communication"
 msgstr "Revenir à la communication du vaisseau"
 
-#: scripts/scenario_27_liberation.lua:3788
+#: scripts/scenario_27_liberation.lua:3782
 msgctxt "ship-comms"
 msgid "Where is their research base located?"
 msgstr "Où se trouve leur laboratoire de recherche ?"
 
-#: scripts/scenario_27_liberation.lua:3791
+#: scripts/scenario_27_liberation.lua:3785
 #, lua-format
 msgctxt "ship-comms"
 msgid "It's located in sector %s"
 msgstr "Il est situé dans le secteur %s."
 
-#: scripts/scenario_27_liberation.lua:3793
+#: scripts/scenario_27_liberation.lua:3787
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -1289,12 +1252,12 @@ msgstr ""
 "Cependant, ils ont peut-être lancé le dispositif Supernova avant la "
 "destruction de la station."
 
-#: scripts/scenario_27_liberation.lua:3802
+#: scripts/scenario_27_liberation.lua:3796
 msgctxt "ship-comms"
 msgid "How do we stop their fireworks display?"
 msgstr "Comment arrêter leur dispositif de feu d'artifice ?"
 
-#: scripts/scenario_27_liberation.lua:3804
+#: scripts/scenario_27_liberation.lua:3798
 msgctxt "ship-comms"
 msgid ""
 "1) connect to the device's communication array.\n"
@@ -1312,152 +1275,152 @@ msgstr ""
 "J'ai entendu dire que les stations de la région auraient trouvé comment se "
 "connecter au réseau de communication du dispositif."
 
-#: scripts/scenario_27_liberation.lua:3812
+#: scripts/scenario_27_liberation.lua:3806
 msgctxt "ship-comms"
 msgid "What is the key?"
 msgstr "Quel est le code de contrôle ?"
 
-#: scripts/scenario_27_liberation.lua:3816
+#: scripts/scenario_27_liberation.lua:3810
 msgctxt "ship-comms"
 msgid "Skull"
 msgstr "Skull"
 
-#: scripts/scenario_27_liberation.lua:3817
+#: scripts/scenario_27_liberation.lua:3811
 msgctxt "ship-comms"
 msgid "Plague"
 msgstr "Plague"
 
-#: scripts/scenario_27_liberation.lua:3818
+#: scripts/scenario_27_liberation.lua:3812
 msgctxt "ship-comms"
 msgid "Death"
 msgstr "Death"
 
-#: scripts/scenario_27_liberation.lua:3819
+#: scripts/scenario_27_liberation.lua:3813
 msgctxt "ship-comms"
 msgid "Sword"
 msgstr "Sword"
 
-#: scripts/scenario_27_liberation.lua:3820
+#: scripts/scenario_27_liberation.lua:3814
 msgctxt "ship-comms"
 msgid "Dagger"
 msgstr "Dagger"
 
-#: scripts/scenario_27_liberation.lua:3821
+#: scripts/scenario_27_liberation.lua:3815
 msgctxt "ship-comms"
 msgid "Blade"
 msgstr "Blade"
 
-#: scripts/scenario_27_liberation.lua:3824
+#: scripts/scenario_27_liberation.lua:3818
 msgctxt "ship-comms"
 msgid "Joke"
 msgstr "Joke"
 
-#: scripts/scenario_27_liberation.lua:3825
+#: scripts/scenario_27_liberation.lua:3819
 msgctxt "ship-comms"
 msgid "Punchline"
 msgstr "Punchline"
 
-#: scripts/scenario_27_liberation.lua:3826
+#: scripts/scenario_27_liberation.lua:3820
 msgctxt "ship-comms"
 msgid "Laugh"
 msgstr "Laugh"
 
-#: scripts/scenario_27_liberation.lua:3827
+#: scripts/scenario_27_liberation.lua:3821
 msgctxt "ship-comms"
 msgid "Smile"
 msgstr "Smile"
 
-#: scripts/scenario_27_liberation.lua:3849
+#: scripts/scenario_27_liberation.lua:3843
 #, lua-format
 msgctxt "ship-comms"
 msgid "Key: %s"
 msgstr "Clé : %s"
 
-#: scripts/scenario_27_liberation.lua:3859
+#: scripts/scenario_27_liberation.lua:3853
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s make %s."
 msgstr "%s et %s font %s."
 
-#: scripts/scenario_27_liberation.lua:3861
+#: scripts/scenario_27_liberation.lua:3855
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s is %s and %s."
 msgstr "%s est %s et %s."
 
-#: scripts/scenario_27_liberation.lua:3864
-#: scripts/scenario_27_liberation.lua:3885
-#: scripts/scenario_27_liberation.lua:3921
-#: scripts/scenario_27_liberation.lua:3932
+#: scripts/scenario_27_liberation.lua:3858
+#: scripts/scenario_27_liberation.lua:3879
+#: scripts/scenario_27_liberation.lua:3915
+#: scripts/scenario_27_liberation.lua:3926
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s is the same as %s and %s."
 msgstr "%s et %s sont la même chose que %s et %s."
 
-#: scripts/scenario_27_liberation.lua:3866
-#: scripts/scenario_27_liberation.lua:3887
-#: scripts/scenario_27_liberation.lua:3923
-#: scripts/scenario_27_liberation.lua:3934
+#: scripts/scenario_27_liberation.lua:3860
+#: scripts/scenario_27_liberation.lua:3881
+#: scripts/scenario_27_liberation.lua:3917
+#: scripts/scenario_27_liberation.lua:3928
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s is the same as %s minus %s."
 msgstr "%s et %s sont identiques à %s moins %s."
 
-#: scripts/scenario_27_liberation.lua:3868
-#: scripts/scenario_27_liberation.lua:3889
-#: scripts/scenario_27_liberation.lua:3925
-#: scripts/scenario_27_liberation.lua:3936
+#: scripts/scenario_27_liberation.lua:3862
+#: scripts/scenario_27_liberation.lua:3883
+#: scripts/scenario_27_liberation.lua:3919
+#: scripts/scenario_27_liberation.lua:3930
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s is the same as %s."
 msgstr "%s et %s sont identiques à %s."
 
-#: scripts/scenario_27_liberation.lua:3871
-#: scripts/scenario_27_liberation.lua:3892
-#: scripts/scenario_27_liberation.lua:3939
+#: scripts/scenario_27_liberation.lua:3865
+#: scripts/scenario_27_liberation.lua:3886
+#: scripts/scenario_27_liberation.lua:3933
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s is more than %s."
 msgstr "%s est plus grand que %s."
 
-#: scripts/scenario_27_liberation.lua:3874
-#: scripts/scenario_27_liberation.lua:3877
-#: scripts/scenario_27_liberation.lua:3896
-#: scripts/scenario_27_liberation.lua:3901
-#: scripts/scenario_27_liberation.lua:3909
-#: scripts/scenario_27_liberation.lua:3911
-#: scripts/scenario_27_liberation.lua:3946
-#: scripts/scenario_27_liberation.lua:3948
-#: scripts/scenario_27_liberation.lua:3956
-#: scripts/scenario_27_liberation.lua:3958
+#: scripts/scenario_27_liberation.lua:3868
+#: scripts/scenario_27_liberation.lua:3871
+#: scripts/scenario_27_liberation.lua:3890
+#: scripts/scenario_27_liberation.lua:3895
+#: scripts/scenario_27_liberation.lua:3903
+#: scripts/scenario_27_liberation.lua:3905
+#: scripts/scenario_27_liberation.lua:3940
+#: scripts/scenario_27_liberation.lua:3942
+#: scripts/scenario_27_liberation.lua:3950
+#: scripts/scenario_27_liberation.lua:3952
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s is more than %s and less than %s."
 msgstr "%s est plus grand que %s et plus petit que %s."
 
-#: scripts/scenario_27_liberation.lua:3879
-#: scripts/scenario_27_liberation.lua:3899
-#: scripts/scenario_27_liberation.lua:3906
-#: scripts/scenario_27_liberation.lua:3943
-#: scripts/scenario_27_liberation.lua:3953
+#: scripts/scenario_27_liberation.lua:3873
+#: scripts/scenario_27_liberation.lua:3893
+#: scripts/scenario_27_liberation.lua:3900
+#: scripts/scenario_27_liberation.lua:3937
+#: scripts/scenario_27_liberation.lua:3947
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s is less than %s."
 msgstr "%s est plus petit que %s."
 
-#: scripts/scenario_27_liberation.lua:3918
+#: scripts/scenario_27_liberation.lua:3912
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s is %s and %s"
 msgstr "%s est %s et %s."
 
-#: scripts/scenario_27_liberation.lua:3928
+#: scripts/scenario_27_liberation.lua:3922
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s is more than %s"
 msgstr "%s est plus grand que %s."
 
-#: scripts/scenario_27_liberation.lua:3973
+#: scripts/scenario_27_liberation.lua:3967
 #, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -1465,24 +1428,24 @@ msgid ""
 "%s"
 msgstr ""
 "%s.\n"
+"%s"
+
+#: scripts/scenario_27_liberation.lua:3969
+#, fuzzy, lua-format
+msgctxt "ship-comms"
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+"%s\n"
 "%s"
 
 #: scripts/scenario_27_liberation.lua:3975
-#, fuzzy, lua-format
-msgctxt "ship-comms"
-msgid ""
-"%s\n"
-"%s"
-msgstr ""
-"%s\n"
-"%s"
-
-#: scripts/scenario_27_liberation.lua:3981
 msgctxt "ship-comms"
 msgid "got riddle from Jasmine Purdue"
 msgstr "a reçu une énigme de la part de Jasmine Purdue"
 
-#: scripts/scenario_27_liberation.lua:3989
+#: scripts/scenario_27_liberation.lua:3983
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -1492,7 +1455,7 @@ msgstr ""
 "%s a reçu une énigme de la part de Jasmine Purdue :\n"
 "%s"
 
-#: scripts/scenario_27_liberation.lua:3997
+#: scripts/scenario_27_liberation.lua:3991
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -1508,7 +1471,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: scripts/scenario_27_liberation.lua:4021
+#: scripts/scenario_27_liberation.lua:4015
 msgctxt "artifact-comms"
 msgid ""
 "Welcome to the Nova Fireworks Display\n"
@@ -1517,7 +1480,7 @@ msgstr ""
 "Bienvenue sur le dispositif de feu d'artifice Supernova.\n"
 "Un superbe produit de l'Entreprise Exclamative Éxuarie."
 
-#: scripts/scenario_27_liberation.lua:4023
+#: scripts/scenario_27_liberation.lua:4017
 #, lua-format
 msgctxt "artifact-comms"
 msgid ""
@@ -1527,7 +1490,7 @@ msgstr ""
 "%s\n"
 "Version alpha."
 
-#: scripts/scenario_27_liberation.lua:4025
+#: scripts/scenario_27_liberation.lua:4019
 #, lua-format
 msgctxt "artifact-comms"
 msgid ""
@@ -1537,12 +1500,12 @@ msgstr ""
 "%s\n"
 "Version bêta."
 
-#: scripts/scenario_27_liberation.lua:4028
+#: scripts/scenario_27_liberation.lua:4022
 msgctxt "artifact-comms"
 msgid "Description"
 msgstr "Description"
 
-#: scripts/scenario_27_liberation.lua:4029
+#: scripts/scenario_27_liberation.lua:4023
 msgctxt "artifact-comms"
 msgid ""
 "The Nova Fireworks Display is the latest offering from the Exuari "
@@ -1563,26 +1526,26 @@ msgstr ""
 "destructions, mutilations et paniques - toutes les caractéristiques du "
 "meilleur divertissement Éxuari possible."
 
-#: scripts/scenario_27_liberation.lua:4031
-#: scripts/scenario_27_liberation.lua:4036
+#: scripts/scenario_27_liberation.lua:4025
+#: scripts/scenario_27_liberation.lua:4030
+#: scripts/scenario_27_liberation.lua:4037
 #: scripts/scenario_27_liberation.lua:4043
-#: scripts/scenario_27_liberation.lua:4049
+#: scripts/scenario_27_liberation.lua:4073
+#: scripts/scenario_27_liberation.lua:4076
 #: scripts/scenario_27_liberation.lua:4079
 #: scripts/scenario_27_liberation.lua:4082
 #: scripts/scenario_27_liberation.lua:4085
-#: scripts/scenario_27_liberation.lua:4088
-#: scripts/scenario_27_liberation.lua:4091
-#: scripts/scenario_27_liberation.lua:4093
+#: scripts/scenario_27_liberation.lua:4087
 msgctxt "artifact-comms"
 msgid "Back"
 msgstr "Précédent"
 
-#: scripts/scenario_27_liberation.lua:4033
+#: scripts/scenario_27_liberation.lua:4027
 msgctxt "artifact-comms"
 msgid "Safety Considerations"
 msgstr "Consignes de sécurité"
 
-#: scripts/scenario_27_liberation.lua:4034
+#: scripts/scenario_27_liberation.lua:4028
 msgctxt "artifact-comms"
 msgid ""
 "The degree of hilarity induced in typical Exuari may cause excessive "
@@ -1597,12 +1560,12 @@ msgstr ""
 "des joues et des côtes douloureuses dues à un sourire et un rire prolongés.\n"
 " Soyez vigilants en cas d'apparition de ces symptômes."
 
-#: scripts/scenario_27_liberation.lua:4039
+#: scripts/scenario_27_liberation.lua:4033
 msgctxt "artifact-comms"
 msgid "Control Panel"
 msgstr "Panneau de contrôle"
 
-#: scripts/scenario_27_liberation.lua:4040
+#: scripts/scenario_27_liberation.lua:4034
 msgctxt "artifact-comms"
 msgid ""
 "This is where you set up your Nova Fireworks experience. If you have "
@@ -1614,12 +1577,12 @@ msgstr ""
 "Pour toute question, contactez votre directeur d'entreprise Exclamative "
 "Éxuarie le plus proche afin d'obtenir de l'aide."
 
-#: scripts/scenario_27_liberation.lua:4041
+#: scripts/scenario_27_liberation.lua:4035
 msgctxt "artifact-comms"
 msgid "Set Destination"
 msgstr "Régler la destination"
 
-#: scripts/scenario_27_liberation.lua:4042
+#: scripts/scenario_27_liberation.lua:4036
 #, lua-format
 msgctxt "artifact-comms"
 msgid "The Nova Fireworks destination has already been set to %s"
@@ -1627,12 +1590,12 @@ msgstr ""
 "La destination du feu d'artifice Supernova (lieu de l'impact avec l'étoile) "
 "a déjà été réglée sur %s."
 
-#: scripts/scenario_27_liberation.lua:4045
+#: scripts/scenario_27_liberation.lua:4039
 msgctxt "artifact-comms"
 msgid "Set Time"
 msgstr "Régler l'heure de l'impact"
 
-#: scripts/scenario_27_liberation.lua:4047
+#: scripts/scenario_27_liberation.lua:4041
 #, lua-format
 msgctxt "artifact-comms"
 msgid ""
@@ -1642,12 +1605,12 @@ msgstr ""
 "à l'impact) a déjà été réglée.\n"
 "Temps restant : %s secondes."
 
-#: scripts/scenario_27_liberation.lua:4051
+#: scripts/scenario_27_liberation.lua:4045
 msgctxt "artifact-comms"
 msgid "Pause Nova Fireworks"
 msgstr "Mettre en pause le feu d'artifice Supernova"
 
-#: scripts/scenario_27_liberation.lua:4056
+#: scripts/scenario_27_liberation.lua:4050
 #, lua-format
 msgctxt "artifact-comms"
 msgid ""
@@ -1661,13 +1624,13 @@ msgstr ""
 "Entrez le 1er chiffre.\n"
 "%s"
 
-#: scripts/scenario_27_liberation.lua:4058
+#: scripts/scenario_27_liberation.lua:4052
 #, lua-format
 msgctxt "artifact-comms"
 msgid "First digit is %i"
 msgstr "%i"
 
-#: scripts/scenario_27_liberation.lua:4059
+#: scripts/scenario_27_liberation.lua:4053
 #, lua-format
 msgctxt "artifact-comms"
 msgid ""
@@ -1679,13 +1642,13 @@ msgstr ""
 "Entrez le 2ème chiffre.\n"
 "%s"
 
-#: scripts/scenario_27_liberation.lua:4061
+#: scripts/scenario_27_liberation.lua:4055
 #, lua-format
 msgctxt "artifact-comms"
 msgid "Second digit is %i"
 msgstr "%i"
 
-#: scripts/scenario_27_liberation.lua:4062
+#: scripts/scenario_27_liberation.lua:4056
 #, lua-format
 msgctxt "artifact-comms"
 msgid ""
@@ -1697,13 +1660,13 @@ msgstr ""
 "Entrez le 3ème chiffre.\n"
 "%s"
 
-#: scripts/scenario_27_liberation.lua:4064
+#: scripts/scenario_27_liberation.lua:4058
 #, lua-format
 msgctxt "artifact-comms"
 msgid "Third digit is %i"
 msgstr "%i"
 
-#: scripts/scenario_27_liberation.lua:4065
+#: scripts/scenario_27_liberation.lua:4059
 #, lua-format
 msgctxt "artifact-comms"
 msgid ""
@@ -1715,25 +1678,25 @@ msgstr ""
 "Entrez le 4ème chiffre.\n"
 "%s"
 
-#: scripts/scenario_27_liberation.lua:4067
+#: scripts/scenario_27_liberation.lua:4061
 #, lua-format
 msgctxt "artifact-comms"
 msgid "Fourth digit is %i"
 msgstr "%i"
 
-#: scripts/scenario_27_liberation.lua:4070
+#: scripts/scenario_27_liberation.lua:4064
 msgctxt "artifact-comms"
 msgid "Nova Fireworks paused"
 msgstr "Le feu d'artifice Supernova est en pause."
 
-#: scripts/scenario_27_liberation.lua:4071
+#: scripts/scenario_27_liberation.lua:4065
 msgctxt "msgMainscreen"
 msgid "You stopped the Exuari fireworks display (nova)"
 msgstr ""
 "Félicitation ! \n"
 "Vous avez neutralisé le dispositif de feu d'artifice Supernova des Éxuaris."
 
-#: scripts/scenario_27_liberation.lua:4077
+#: scripts/scenario_27_liberation.lua:4071
 #, lua-format
 msgctxt "artifact-comms"
 msgid ""
@@ -1745,46 +1708,46 @@ msgstr ""
 "L'Entreprise Exclamative Éxuarie vous souhaite une journée amusante.\n"
 "%s"
 
-#: scripts/scenario_27_liberation.lua:4101
-#: scripts/scenario_27_liberation.lua:4105
+#: scripts/scenario_27_liberation.lua:4095
+#: scripts/scenario_27_liberation.lua:4099
 msgctxt "artifact-comms"
 msgid "Anomalous object"
 msgstr "Objet étrange"
 
-#: scripts/scenario_27_liberation.lua:4160
+#: scripts/scenario_27_liberation.lua:4154
 msgctxt "buttonEngineer"
 msgid "Boost Sensors"
 msgstr ""
 
-#: scripts/scenario_27_liberation.lua:4165
+#: scripts/scenario_27_liberation.lua:4159
 msgctxt "buttonEngineer+"
 msgid "Boost Sensors"
 msgstr ""
 
-#: scripts/scenario_27_liberation.lua:4173
+#: scripts/scenario_27_liberation.lua:4167
 #, lua-format
 msgctxt "buttonEngineer"
 msgid "Sensor Boost %i"
 msgstr ""
 
-#: scripts/scenario_27_liberation.lua:4181
+#: scripts/scenario_27_liberation.lua:4175
 #, lua-format
 msgctxt "buttonEngineer+"
 msgid "Sensor Boost %i"
 msgstr ""
 
-#: scripts/scenario_27_liberation.lua:4190
+#: scripts/scenario_27_liberation.lua:4184
 msgctxt "buttonEngineer"
 msgid "Stop Sensor Boost"
 msgstr ""
 
-#: scripts/scenario_27_liberation.lua:4195
+#: scripts/scenario_27_liberation.lua:4189
 msgctxt "buttonEngineer+"
 msgid "Stop Sensor Boost"
 msgstr ""
 
-#: scripts/scenario_27_liberation.lua:4435
-#: scripts/scenario_27_liberation.lua:4439
+#: scripts/scenario_27_liberation.lua:4429
+#: scripts/scenario_27_liberation.lua:4433
 msgctxt "msgMainscreen"
 msgid ""
 "You destroyed the Exuari research station before they deployed their nova "
@@ -1793,3 +1756,53 @@ msgstr ""
 "Bravo équipage !\n"
 "Vous avez détruit la station de recherche des Éxuaris avant qu'ils ne "
 "puissent déployer leur dispositif de feu d'artifice Supernova."
+
+#~ msgctxt "First"
+#~ msgid "Seconds"
+#~ msgstr "10 s"
+
+#~ msgctxt "First"
+#~ msgid ""
+#~ "Ten seconds until the first major event occurs. This is used mainly for "
+#~ "testing."
+#~ msgstr ""
+#~ "Vous avez 10 secondes avant que le 1er événement majeur ne se produise. "
+#~ "Ceci est principalement utilisé pour les tests."
+
+#~ msgctxt "Second"
+#~ msgid "Seconds"
+#~ msgstr "10 s"
+
+#~ msgctxt "Second"
+#~ msgid ""
+#~ "Ten seconds between the first event and the second event. This is used "
+#~ "mainly for testing."
+#~ msgstr ""
+#~ "Vous avez 10 secondes entre le 1er et le 2ème évènement. Ceci est "
+#~ "principalement utilisé pour les tests."
+
+#~ msgctxt "Second"
+#~ msgid "One"
+#~ msgstr "1 mn"
+
+#~ msgctxt "Second"
+#~ msgid "One minute between the first event and the second event (test)"
+#~ msgstr "Vous avez 1 minute entre le 1er et le 2ème événement."
+
+#~ msgctxt "Third"
+#~ msgid "Seconds"
+#~ msgstr "10 s"
+
+#~ msgctxt "Third"
+#~ msgid "Ten seconds between 2nd and 3rd events. Mainly used for testing."
+#~ msgstr ""
+#~ "Vous avez 10 secondes entre le 2ème et le 3ème événement. Ceci est "
+#~ "principalement utilisé pour les tests."
+
+#~ msgctxt "Cloak"
+#~ msgid "None"
+#~ msgstr "Aucun"
+
+#~ msgctxt "Cloak"
+#~ msgid "Device is not cloaked"
+#~ msgstr "Le dispositif n'est pas dissimulé."

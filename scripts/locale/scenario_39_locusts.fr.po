@@ -131,69 +131,69 @@ msgctxt "Basis"
 msgid "The Ktlitan Drone is the basis for the locusts"
 msgstr "Le drone Ktlitan sera utilisé pour les sauterelles."
 
-#: scripts/scenario_39_locusts.lua:38
+#: scripts/scenario_39_locusts.lua:40
 msgctxt "orders-comms"
 msgid "thirty"
 msgstr "trente"
 
-#: scripts/scenario_39_locusts.lua:39
+#: scripts/scenario_39_locusts.lua:41
 msgctxt "orders-comms"
 msgid "fifty"
 msgstr "cinquante"
 
-#: scripts/scenario_39_locusts.lua:40
+#: scripts/scenario_39_locusts.lua:42
 msgctxt "orders-comms"
 msgid "eighty"
 msgstr "quatre-vingts"
 
-#: scripts/scenario_39_locusts.lua:41
+#: scripts/scenario_39_locusts.lua:43
 msgctxt "orders-comms"
 msgid "one hundred"
 msgstr "cent"
 
-#: scripts/scenario_39_locusts.lua:42
+#: scripts/scenario_39_locusts.lua:44
 msgctxt "orders-comms"
 msgid "one hundred and fifty"
 msgstr "cent cinquante"
 
-#: scripts/scenario_39_locusts.lua:48
+#: scripts/scenario_39_locusts.lua:50
 msgctxt "orders-comms"
 msgid "fighter"
 msgstr "Chasseur"
 
-#: scripts/scenario_39_locusts.lua:49
+#: scripts/scenario_39_locusts.lua:51
 msgctxt "orders-comms"
 msgid "hornet"
 msgstr "Frelon"
 
-#: scripts/scenario_39_locusts.lua:50
+#: scripts/scenario_39_locusts.lua:52
 msgctxt "orders-comms"
 msgid "drone"
 msgstr "Drone"
 
-#: scripts/scenario_39_locusts.lua:906
+#: scripts/scenario_39_locusts.lua:908
 msgctxt "buttonRelay"
 msgid "Locust Status"
 msgstr "État : Sauterelles"
 
-#: scripts/scenario_39_locusts.lua:911
+#: scripts/scenario_39_locusts.lua:913
 msgctxt "buttonOperations"
 msgid "Locust Status"
 msgstr "État : Sauterelles"
 
-#: scripts/scenario_39_locusts.lua:931
+#: scripts/scenario_39_locusts.lua:933
 #, lua-format
 msgctxt "msgRelay"
 msgid "%i Locusts remain."
 msgstr "%i sauterelles restantes."
 
-#: scripts/scenario_39_locusts.lua:933
+#: scripts/scenario_39_locusts.lua:935
 #, lua-format
 msgctxt "msgRelay"
 msgid "One Locust remains in sector %s"
 msgstr "Il reste une sauterelle dans le secteur %s."
 
-#: scripts/scenario_39_locusts.lua:935
+#: scripts/scenario_39_locusts.lua:937
 #, lua-format
 msgctxt "msgRelay"
 msgid ""
@@ -203,7 +203,7 @@ msgstr ""
 "%s\n"
 "La plus proche se trouve dans le secteur %s."
 
-#: scripts/scenario_39_locusts.lua:1175
+#: scripts/scenario_39_locusts.lua:1177
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -213,23 +213,23 @@ msgstr ""
 "Bonjour équipage du %s,\n"
 "Nos capteurs viennent de détecter de nombreux vaisseaux Éxuaris."
 
-#: scripts/scenario_39_locusts.lua:1176
+#: scripts/scenario_39_locusts.lua:1178
 msgctxt "orders-comms"
 msgid "How many is numerous?"
 msgstr "Qu'entendez-vous par \"nombreux\" ?"
 
-#: scripts/scenario_39_locusts.lua:1177
+#: scripts/scenario_39_locusts.lua:1179
 #, lua-format
 msgctxt "orders-comms"
 msgid "Approximately %s"
 msgstr "Environ %s."
 
-#: scripts/scenario_39_locusts.lua:1178
+#: scripts/scenario_39_locusts.lua:1180
 msgctxt "orders-comms"
 msgid "That's quite a few. What kind of ships?"
 msgstr "Cela fait un certain nombre. Quel genre de vaisseaux ?"
 
-#: scripts/scenario_39_locusts.lua:1179
+#: scripts/scenario_39_locusts.lua:1181
 #, lua-format
 msgctxt "orders-comms"
 msgid "They look like %ss. The computer calls them locusts. They're very fast."
@@ -237,12 +237,12 @@ msgstr ""
 "Ils ressemblent à des %ss. L'ordinateur les appelle des sauterelles. Ils "
 "sont très rapides."
 
-#: scripts/scenario_39_locusts.lua:1180
+#: scripts/scenario_39_locusts.lua:1182
 msgctxt "orders-comms"
 msgid "Should we be worried?"
 msgstr "Faut-il s'inquiéter ?"
 
-#: scripts/scenario_39_locusts.lua:1181
+#: scripts/scenario_39_locusts.lua:1183
 msgctxt "orders-comms"
 msgid ""
 "Individually, they should be easy to handle. As a group, they could be a "
@@ -251,17 +251,17 @@ msgstr ""
 "Individuellement, ils devraient être faciles à gérer. Mais en groupe, ils "
 "pourraient poser problème."
 
-#: scripts/scenario_39_locusts.lua:1182
+#: scripts/scenario_39_locusts.lua:1184
 msgctxt "orders-comms"
 msgid "What do you want us to do about them?"
 msgstr "Que voulez-vous que l'on fasse les concernant ?"
 
-#: scripts/scenario_39_locusts.lua:1183
+#: scripts/scenario_39_locusts.lua:1185
 msgctxt "orders-comms"
 msgid "Get rid of them. Every last one of them."
 msgstr "Vous débarrasser d'eux. De chacun d’entre eux."
 
-#: scripts/scenario_39_locusts.lua:1194
+#: scripts/scenario_39_locusts.lua:1196
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -272,22 +272,22 @@ msgstr ""
 "Nous avons une information de dernière minute pour vous concernant ces "
 "sauterelles Éxuaries."
 
-#: scripts/scenario_39_locusts.lua:1195
+#: scripts/scenario_39_locusts.lua:1197
 msgctxt "orders-comms"
 msgid "Tell us about it."
 msgstr "Nous vous écoutons"
 
-#: scripts/scenario_39_locusts.lua:1196
+#: scripts/scenario_39_locusts.lua:1198
 msgctxt "orders-comms"
 msgid "All the Exuari on our sensors have started moving."
 msgstr "Tous les vaisseaux Éxuaris sur nos capteurs ont commencé à bouger."
 
-#: scripts/scenario_39_locusts.lua:1197
+#: scripts/scenario_39_locusts.lua:1199
 msgctxt "orders-comms"
 msgid "Where are they going?"
 msgstr "Où vont-ils ?"
 
-#: scripts/scenario_39_locusts.lua:1198
+#: scripts/scenario_39_locusts.lua:1200
 msgctxt "orders-comms"
 msgid ""
 "We are not quite sure, but they seem to be converging on a central location."
@@ -295,12 +295,12 @@ msgstr ""
 "Nous n’en sommes pas sûrs, mais ils semblent converger vers une position "
 "centrale."
 
-#: scripts/scenario_39_locusts.lua:1199
+#: scripts/scenario_39_locusts.lua:1201
 msgctxt "orders-comms"
 msgid "That could make it harder for us to get rid of them."
 msgstr "Ça peut nous rendre la tâche plus difficile"
 
-#: scripts/scenario_39_locusts.lua:1200
+#: scripts/scenario_39_locusts.lua:1202
 msgctxt "orders-comms"
 msgid ""
 "How perceptive of you! We are so glad you are out there working to rid us of "
@@ -310,14 +310,14 @@ msgstr ""
 "Nous sommes ravi que vous œuvriez pour nous débarrasser de ces sauterelles. "
 "Continuez votre bon travail !"
 
-#: scripts/scenario_39_locusts.lua:1383
+#: scripts/scenario_39_locusts.lua:1385
 msgctxt "msgMainscreen"
 msgid "Scenario needs the 'Per-system damage' option under 'Extra settings'"
 msgstr ""
 "Le scénario nécessite l'option \"Dégâts par systèmes\" située dans le menu "
 "\"Réglages : scan, fréquences, piratage…\""
 
-#: scripts/scenario_39_locusts.lua:1442
+#: scripts/scenario_39_locusts.lua:1444
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -331,7 +331,7 @@ msgstr ""
 "Neutres : %i sur %i\n"
 "Ennemies : %i sur %i"
 
-#: scripts/scenario_39_locusts.lua:1465
+#: scripts/scenario_39_locusts.lua:1467
 msgctxt "msgMainscreen"
 msgid "All friendly stations have been destroyed."
 msgstr "Toutes les stations alliées ont été détruites."

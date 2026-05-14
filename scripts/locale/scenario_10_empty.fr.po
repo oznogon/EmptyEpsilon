@@ -19,10 +19,12 @@ msgid "Empty space"
 msgstr "Espace vide"
 
 # Scenario description
+#, fuzzy
 msgid ""
-"Empty scenario, no enemies, no friendlies. Can be used by a GM player to "
-"setup a scenario in the GM screen. The F5 key can be used to copy the "
-"current layout to the clipboard for use in scenario scripts."
+"Empty scenario with no ships or terrain. Game masters can use this to set up "
+"a scenario in the GM screen. Use the F5 key or \"Copy scenario\" and \"Copy "
+"selection\" buttons on the GM screen to copy Lua code of the layout to the "
+"clipboard for use in scenario scripts."
 msgstr ""
 "Scénario vide.\n"
 "\n"
@@ -34,17 +36,25 @@ msgstr ""
 "presse-papiers pour une utilisation dans des scripts de scénario au format "
 "lua."
 
-#: scripts/scenario_10_empty.lua:30
+#: scripts/scenario_10_empty.lua:102
 msgctxt "buttonGM"
-msgid "Random asteroid field"
-msgstr "Champ astér. aléatoire"
+msgid "Reset to asteroids"
+msgstr ""
 
-#: scripts/scenario_10_empty.lua:40
+#: scripts/scenario_10_empty.lua:113
 msgctxt "buttonGM"
-msgid "Random nebula field"
-msgstr "Champ nébul. aléatoire"
+msgid "Reset to nebulae"
+msgstr ""
 
-#: scripts/scenario_10_empty.lua:49
+#: scripts/scenario_10_empty.lua:123
 msgctxt "buttonGM"
 msgid "Delete unselected"
 msgstr "Supprime non sélect."
+
+#~ msgctxt "buttonGM"
+#~ msgid "Random asteroid field"
+#~ msgstr "Champ astér. aléatoire"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Random nebula field"
+#~ msgstr "Champ nébul. aléatoire"

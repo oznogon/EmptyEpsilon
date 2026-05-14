@@ -12,6 +12,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#: scripts/shiptemplates/exuari.lua:77
+msgctxt "ship"
+msgid "Dagger"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:77 scripts/shiptemplates/exuari.lua:90
 #: scripts/shiptemplates/exuari.lua:97 scripts/shiptemplates/exuari.lua:112
 #: scripts/shiptemplates/exuari.lua:118 scripts/shiptemplates/exuari.lua:124
@@ -45,6 +50,11 @@ msgstr ""
 "Waffenreichweite kümmern, lassen sich die Jäger relativ leicht ausschalten, "
 "aber sollten nicht unterschätzt werden."
 
+#: scripts/shiptemplates/exuari.lua:89
+msgctxt "ship"
+msgid "Blade"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:90
 msgctxt "subclass"
 msgid "Starfighter - Interceptor"
@@ -64,6 +74,11 @@ msgstr ""
 "Daggers. Exuari am Steuer einer Blade werden oft als furchtlos angesehen, "
 "doch die meisten von ihnen werden einfach nur von ihrem Jagdinstinkt "
 "übermannt."
+
+#: scripts/shiptemplates/exuari.lua:97
+msgctxt "ship"
+msgid "Gunner"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:97
 msgctxt "subclass"
@@ -91,6 +106,11 @@ msgstr ""
 "angesehen, man kann also nicht davon ausgehen, dass die Exuari an Bord über "
 "eine große Erfahrung verfügen."
 
+#: scripts/shiptemplates/exuari.lua:111
+msgctxt "ship"
+msgid "Shooter"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:112
 msgctxt "subclass"
 msgid "Starfighter - Bomber"
@@ -111,6 +131,11 @@ msgstr ""
 "Wiederaufladezyklus ist es leicht möglich, eine \"Shooter\" zwischen zwei "
 "Attacken zu zerstören."
 
+#: scripts/shiptemplates/exuari.lua:117
+msgctxt "ship"
+msgid "Jagger"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:118
 msgctxt "subclass"
 msgid "Starfighter - Heavy Bomber"
@@ -125,6 +150,11 @@ msgstr ""
 "Der schwere Exuari-Bomber 'Jagger' verfügt nur über eine einzele Ladung "
 "verbesserter HGBIs. Diese Hüllenbrechende Variante verursacht den vielfachen "
 "Schaden von 'Gunner'-HGBIs"
+
+#: scripts/shiptemplates/exuari.lua:124
+msgctxt "ship"
+msgid "Racer"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:124
 msgctxt "subclass"
@@ -147,6 +177,11 @@ msgstr ""
 "Angriffs-Schiffe sind seine Heckschilde wesentlich schwächer als die "
 "Frontschilde."
 
+#: scripts/shiptemplates/exuari.lua:136
+msgctxt "ship"
+msgid "Hunter"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:137
 msgid ""
 "The Exuari beta striker 'Hunter' is a warp-drive equipped reinforement "
@@ -162,6 +197,12 @@ msgstr ""
 "Frontschilde. Es ist schnell, wendig, und kann sich um den Rest kümmern, der "
 "nach dem initialen Angriff von der feindlichen Flotte übrig ist."
 
+#: scripts/shiptemplates/exuari.lua:145
+#, fuzzy
+msgctxt "ship"
+msgid "Strike"
+msgstr "Angriffs-Schiff"
+
 #: scripts/shiptemplates/exuari.lua:146
 msgid ""
 "The Exuari gamma striker 'Strike' is a warp-drive equipped tactical bomber "
@@ -175,6 +216,11 @@ msgstr ""
 "schnell, wendig und kann in kurzer Zeit eine große Menge an Schaden "
 "ausrichten."
 
+#: scripts/shiptemplates/exuari.lua:153
+msgctxt "ship"
+msgid "Dash"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:154
 msgid ""
 "The Exuari delta striker 'Dash' is a warp-drive equipped endurance bomber "
@@ -187,6 +233,11 @@ msgstr ""
 "Besatzung betrieben und kombiniert verstärkte Frontschilde mit einer guten "
 "Anzahl an HGBIs. Es ist schnell, wendig und kann einiges an Schaden "
 "einstecken."
+
+#: scripts/shiptemplates/exuari.lua:166
+msgctxt "ship"
+msgid "Guard"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
 #: scripts/shiptemplates/exuari.lua:201
@@ -209,6 +260,11 @@ msgstr ""
 "Geschütztürmen und einem großen Vorrat an verschiedenen Raketen "
 "ausgestattet, darunter auch Zielsuchraketen und Minen."
 
+#: scripts/shiptemplates/exuari.lua:185
+msgctxt "ship"
+msgid "Sentinel"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:187
 msgid ""
 "The Exuari Sentinel is an anti-fighter frigate. It has several rapid-firing, "
@@ -217,6 +273,11 @@ msgstr ""
 "Die 'Sentinel' der Exuari ist eine Anti-Jäger-Fregatte. Sie verfügt über "
 "mehrere leichte, Turmgestützte schnell feuernde Abwehrlaser, um Jäger "
 "schnell auszuschalten."
+
+#: scripts/shiptemplates/exuari.lua:201
+msgctxt "ship"
+msgid "Warden"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:203
 msgid ""
@@ -227,6 +288,11 @@ msgstr ""
 "Lage, Salven aus mehreren vorwärts gerichteten Raketenschächten  "
 "abzufeueren, verfügt allerdings nur über einen einzelnen, turmgestützten "
 "Abwehrlaser."
+
+#: scripts/shiptemplates/exuari.lua:221
+msgctxt "ship"
+msgid "Flash"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:221
 msgctxt "subclass"
@@ -246,6 +312,11 @@ msgstr ""
 "Nuklearwaffen. Manche sagen, dass es das ist, was aus den meisten Frachtern "
 "wird, wenn sie in die Hände der Exuari fallen."
 
+#: scripts/shiptemplates/exuari.lua:233
+msgctxt "ship"
+msgid "Ranger"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:234
 msgid ""
 "The Exuari Ranger is a special sniper, built to deal large amounts of damage "
@@ -258,6 +329,11 @@ msgstr ""
 "Basis-Fregatte welche über Nuklearwaffen verfügt, obwohl es sich generell um "
 "eine der kleinsten Fregatte handelt."
 
+#: scripts/shiptemplates/exuari.lua:241
+msgctxt "ship"
+msgid "Buster"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:242
 msgid ""
 "The Exuari Buster is a special sniper, built to deal a large amount of "
@@ -269,6 +345,11 @@ msgstr ""
 "Entfernung viel Schaden zu verursachen und sich dann zurückzuziehen. Es ist "
 "eine Basis-Fregatte welche über Nuklearwaffen verfügt, obwohl es sich "
 "generell um eine der kleinsten Fregatte handelt."
+
+#: scripts/shiptemplates/exuari.lua:250
+msgctxt "ship"
+msgid "Ryder"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:250
 msgctxt "subclass"
@@ -294,6 +375,11 @@ msgstr ""
 "Angriffsstrategie der Exuari besteht darin, eine Ryder außerhalb der "
 "Sensorreichweite des gewünschten Ziels zu halten, und dann Jäger und "
 "Artillerieschiffe vom Träger zu starten."
+
+#: scripts/shiptemplates/exuari.lua:276
+msgctxt "ship"
+msgid "Fortress"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:277
 msgid ""

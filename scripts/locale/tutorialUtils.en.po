@@ -1,4 +1,4 @@
-#: scripts/tutorialUtils.lua:6
+#: scripts/tutorialUtils.lua:7
 msgid ""
 "Welcome to the EmptyEpsilon tutorial.\n"
 "Note that this tutorial is designed to give you a quick overview of the "

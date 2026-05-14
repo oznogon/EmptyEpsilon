@@ -13,6 +13,11 @@ msgstr ""
 "X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 
+#: scripts/shiptemplates/exuari.lua:77
+msgctxt "ship"
+msgid "Dagger"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:77 scripts/shiptemplates/exuari.lua:90
 #: scripts/shiptemplates/exuari.lua:97 scripts/shiptemplates/exuari.lua:112
 #: scripts/shiptemplates/exuari.lua:118 scripts/shiptemplates/exuari.lua:124
@@ -48,6 +53,11 @@ msgstr ""
 "\n"
 "Les chasseurs sont faciles à éliminer, mais ne doivent pas être sous-estimés."
 
+#: scripts/shiptemplates/exuari.lua:89
+msgctxt "ship"
+msgid "Blade"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:90
 msgctxt "subclass"
 msgid "Starfighter - Interceptor"
@@ -68,6 +78,11 @@ msgstr ""
 "d'attaque d'un assaut plus large, suivie de près par les Daggers. Les "
 "pilotes de Blades sont souvent considérés comme intrépides, mais la plupart "
 "d'entre eux sont simplement consumés par leur instinct de chasse."
+
+#: scripts/shiptemplates/exuari.lua:97
+msgctxt "ship"
+msgid "Gunner"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:97
 msgctxt "subclass"
@@ -98,6 +113,11 @@ msgstr ""
 "mortelle) au sein de la société Exuari, alors ne vous attendez pas à des "
 "pilotes expérimentés."
 
+#: scripts/shiptemplates/exuari.lua:111
+msgctxt "ship"
+msgid "Shooter"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:112
 msgctxt "subclass"
 msgid "Starfighter - Bomber"
@@ -122,6 +142,11 @@ msgstr ""
 "cycle de rechargement long, un Shooter peut facilement être détruit entre "
 "ses attaques."
 
+#: scripts/shiptemplates/exuari.lua:117
+msgctxt "ship"
+msgid "Jagger"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:118
 msgctxt "subclass"
 msgid "Starfighter - Heavy Bomber"
@@ -136,6 +161,11 @@ msgstr ""
 "Le bombardier lourd Éxuari 'Jagger' ne transporte qu'une seule série de HVLI "
 "améliorés. Ceux-ci sont considérés comme pénétrant la coque et causent bien "
 "plus de dégâts que les Gunner HVLI."
+
+#: scripts/shiptemplates/exuari.lua:124
+msgctxt "ship"
+msgid "Racer"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:124
 msgctxt "subclass"
@@ -159,6 +189,11 @@ msgstr ""
 "quantité extrême de dégâts. Comme tous les frappeurs, il manque de boucliers "
 "arrière."
 
+#: scripts/shiptemplates/exuari.lua:136
+msgctxt "ship"
+msgid "Hunter"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:137
 msgid ""
 "The Exuari beta striker 'Hunter' is a warp-drive equipped reinforement "
@@ -178,6 +213,11 @@ msgstr ""
 "Il est rapide, agile et peut nettoyer ce qui reste de la flotte ennemie "
 "après une première frappe."
 
+#: scripts/shiptemplates/exuari.lua:145
+msgctxt "ship"
+msgid "Strike"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:146
 msgid ""
 "The Exuari gamma striker 'Strike' is a warp-drive equipped tactical bomber "
@@ -192,6 +232,11 @@ msgstr ""
 "Ce vaisseau fonctionne avec un petit équipage et est équipé de HVLI et d'un "
 "EMP. C'est rapide, agile et peut faire beaucoup de dégâts en peu de temps."
 
+#: scripts/shiptemplates/exuari.lua:153
+msgctxt "ship"
+msgid "Dash"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:154
 msgid ""
 "The Exuari delta striker 'Dash' is a warp-drive equipped endurance bomber "
@@ -205,6 +250,11 @@ msgstr ""
 "Ce vaisseau fonctionne avec un petit équipage et combine des boucliers avant "
 "renforcés avec une bonne quantité de HVLI. Il est rapide, agile et peut "
 "encaisser des dégâts."
+
+#: scripts/shiptemplates/exuari.lua:166
+msgctxt "ship"
+msgid "Guard"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
 #: scripts/shiptemplates/exuari.lua:201
@@ -228,6 +278,11 @@ msgstr ""
 "est équipé de tourelles à faisceaux et d'un grand stock de missiles "
 "différents, y compris des missiles à tête chercheuse et des mines."
 
+#: scripts/shiptemplates/exuari.lua:185
+msgctxt "ship"
+msgid "Sentinel"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:187
 msgid ""
 "The Exuari Sentinel is an anti-fighter frigate. It has several rapid-firing, "
@@ -238,6 +293,11 @@ msgstr ""
 "Il dispose de plusieurs tourelles à faisceaux de défense à tir rapide et à "
 "faibles dégâts pour éliminer rapidement les chasseurs stellaires."
 
+#: scripts/shiptemplates/exuari.lua:201
+msgctxt "ship"
+msgid "Warden"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:203
 msgid ""
 "The Exuari Warden is a heavy artillery frigate, it fires bunches of missiles "
@@ -246,6 +306,11 @@ msgstr ""
 "Le 'Warden' Éxuari est une frégate d'artillerie lourde, elle tire des tas de "
 "missiles à partir de tubes orientés vers l'avant. Seule une tourelle de "
 "défense est présente."
+
+#: scripts/shiptemplates/exuari.lua:221
+msgctxt "ship"
+msgid "Flash"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:221
 msgctxt "subclass"
@@ -266,6 +331,11 @@ msgstr ""
 "que c'est ce qui arrive aux cargos lorsqu'ils tombent entre les mains des "
 "Exuari."
 
+#: scripts/shiptemplates/exuari.lua:233
+msgctxt "ship"
+msgid "Ranger"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:234
 msgid ""
 "The Exuari Ranger is a special sniper, built to deal large amounts of damage "
@@ -279,6 +349,11 @@ msgstr ""
 "C'est une frégate de base qui transporte des armes nucléaires, même si c'est "
 "aussi l'un des plus petits de tous les vaisseaux de classe frégate."
 
+#: scripts/shiptemplates/exuari.lua:241
+msgctxt "ship"
+msgid "Buster"
+msgstr ""
+
 #: scripts/shiptemplates/exuari.lua:242
 msgid ""
 "The Exuari Buster is a special sniper, built to deal a large amount of "
@@ -291,6 +366,11 @@ msgstr ""
 "\n"
 "C'est une frégate de base qui transporte des armes nucléaires. C'est aussi "
 "l'un des plus petits de tous les vaisseaux de classe frégate."
+
+#: scripts/shiptemplates/exuari.lua:250
+msgctxt "ship"
+msgid "Ryder"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:250
 msgctxt "subclass"
@@ -318,6 +398,11 @@ msgstr ""
 "Une stratégie d'assaut commune Éxuari consiste à maintenir un Ryder hors de "
 "portée des capteurs de la cible souhaitée, tandis que les chasseurs et "
 "l'artillerie partent du transporteur."
+
+#: scripts/shiptemplates/exuari.lua:276
+msgctxt "ship"
+msgid "Fortress"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:277
 msgid ""

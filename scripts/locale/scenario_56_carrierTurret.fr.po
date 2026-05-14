@@ -1975,8 +1975,8 @@ msgstr ""
 "000110011010...Grzzzz...\n"
 "Communication binaire non détectée...Grzzz Passons en communication "
 "universelle..Grrzzz\n"
-"Générons réponse appropriée pour cible en langage humain à partir archives..."
-"Grrzzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir "
+"archives...Grrzzzz\n"
 "\n"
 "     [Ne nous approchez pas !] Grrzzz\n"
 "\n"
@@ -2904,23 +2904,23 @@ msgstr ""
 "été piratés par une source inconnue.\n"
 "Pendant un instant, j'ai cru entendre un rire diabolique."
 
-#: scripts/scenario_56_carrierTurret.lua:5548
+#: scripts/scenario_56_carrierTurret.lua:5576
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
-#: scripts/scenario_56_carrierTurret.lua:5552
+#: scripts/scenario_56_carrierTurret.lua:5580
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
-#: scripts/scenario_56_carrierTurret.lua:5576
+#: scripts/scenario_56_carrierTurret.lua:5604
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%i out of %i friendly stations survived."
 msgstr "%i des %i stations amies ont survécu."
 
-#: scripts/scenario_56_carrierTurret.lua:5577
+#: scripts/scenario_56_carrierTurret.lua:5605
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2930,7 +2930,7 @@ msgstr ""
 "%s\n"
 "%i des %i stations neutres ont survécu."
 
-#: scripts/scenario_56_carrierTurret.lua:5578
+#: scripts/scenario_56_carrierTurret.lua:5606
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2940,7 +2940,7 @@ msgstr ""
 "%s\n"
 "%i des %i stations ennemies ont survécu."
 
-#: scripts/scenario_56_carrierTurret.lua:5579
+#: scripts/scenario_56_carrierTurret.lua:5607
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2950,37 +2950,37 @@ msgstr ""
 "%s\n"
 "Étapes de la mission terminées : %i"
 
-#: scripts/scenario_56_carrierTurret.lua:5583
+#: scripts/scenario_56_carrierTurret.lua:5611
 msgctxt "msgMainscreen"
 msgid "Cadet"
 msgstr "Cadet"
 
-#: scripts/scenario_56_carrierTurret.lua:5585
+#: scripts/scenario_56_carrierTurret.lua:5613
 msgctxt "msgMainscreen"
 msgid "Ensign"
 msgstr "Officier"
 
-#: scripts/scenario_56_carrierTurret.lua:5587
+#: scripts/scenario_56_carrierTurret.lua:5615
 msgctxt "msgMainscreen"
 msgid "Lieutenant"
 msgstr "Lieutenant"
 
-#: scripts/scenario_56_carrierTurret.lua:5589
+#: scripts/scenario_56_carrierTurret.lua:5617
 msgctxt "msgMainscreen"
 msgid "Commander"
 msgstr "Commandant"
 
-#: scripts/scenario_56_carrierTurret.lua:5591
+#: scripts/scenario_56_carrierTurret.lua:5619
 msgctxt "msgMainscreen"
 msgid "Captain"
 msgstr "Capitaine"
 
-#: scripts/scenario_56_carrierTurret.lua:5593
+#: scripts/scenario_56_carrierTurret.lua:5621
 msgctxt "msgMainscreen"
 msgid "Admiral"
 msgstr "Amiral"
 
-#: scripts/scenario_56_carrierTurret.lua:5595
+#: scripts/scenario_56_carrierTurret.lua:5623
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2990,7 +2990,7 @@ msgstr ""
 "%s\n"
 "Grade obtenu : %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5610
+#: scripts/scenario_56_carrierTurret.lua:5638
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -3000,7 +3000,7 @@ msgstr ""
 "%s\n"
 "Rang après la disparition de plusieurs chefs militaires : %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5617
+#: scripts/scenario_56_carrierTurret.lua:5645
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -3010,7 +3010,7 @@ msgstr ""
 "%s\n"
 "Durée de la partie : %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5618
+#: scripts/scenario_56_carrierTurret.lua:5646
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -3020,7 +3020,7 @@ msgstr ""
 "%s\n"
 "Options de difficulté sélectionnées : Puissance ennemie : %s, Murphy : %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5619
+#: scripts/scenario_56_carrierTurret.lua:5647
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -3030,15 +3030,15 @@ msgstr ""
 "%s\n"
 "Type de Porte-avions : %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5621
-#: scripts/scenario_56_carrierTurret.lua:5625
-#: scripts/scenario_56_carrierTurret.lua:5629
+#: scripts/scenario_56_carrierTurret.lua:5649
+#: scripts/scenario_56_carrierTurret.lua:5653
+#: scripts/scenario_56_carrierTurret.lua:5657
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: scripts/scenario_56_carrierTurret.lua:5623
+#: scripts/scenario_56_carrierTurret.lua:5651
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -3048,7 +3048,7 @@ msgstr ""
 "%s\n"
 "Type du 1er Chasseur : %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5627
+#: scripts/scenario_56_carrierTurret.lua:5655
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -3058,31 +3058,31 @@ msgstr ""
 "%s\n"
 "Type du 2ème Chasseur : %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5651
+#: scripts/scenario_56_carrierTurret.lua:5679
 #, lua-format
 msgctxt "tabWeaponsTacticalSingle"
 msgid "%s tubes: %s"
 msgstr "%s Taille tubes : %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5653
+#: scripts/scenario_56_carrierTurret.lua:5681
 #, lua-format
 msgctxt "tabWeaponsTacticalSingle"
 msgid "%s tube: %s"
 msgstr "%s Taille du tube : %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5659
+#: scripts/scenario_56_carrierTurret.lua:5687
 #, lua-format
 msgctxt "tabHelm"
 msgid "%s in %s"
 msgstr "%s est en secteur %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5660
+#: scripts/scenario_56_carrierTurret.lua:5688
 #, lua-format
 msgctxt "tabTactical"
 msgid "%s in %s"
 msgstr "%s est en secteur %s"
 
-#: scripts/scenario_56_carrierTurret.lua:5661
+#: scripts/scenario_56_carrierTurret.lua:5689
 #, lua-format
 msgctxt "tabSingle"
 msgid "%s in %s"
