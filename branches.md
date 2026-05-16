@@ -104,3 +104,5 @@ extra-crew-screens 20260514 -- refactor FrequencyCurve, SignalQualityIndicator
 new-cinematic-camera 20260514 -- major revision to cinematic camera, addition of Camera entity
 
 extra-crew-screens 20260515 -- refactor crew screen backgrounds
+
+extra-crew-screens 20260516 -- rotatable drawStretchedHV
