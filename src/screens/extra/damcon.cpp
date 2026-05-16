@@ -18,10 +18,12 @@
 #include "components/hull.h"
 #include "components/internalrooms.h"
 #include "components/reactor.h"
+#include "components/shields.h"
 
 #include <glm/geometric.hpp>
 #include <algorithm>
 #include <cmath>
+#include "vectorUtils.h"
 
 DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DAMCON_SCREEN", GuiTheme::getColor("background"))
@@ -246,6 +248,20 @@ static void drawThickPolyline(sp::RenderTarget& renderer, const std::vector<glm:
     renderer.drawTriangleStrip(strip, color);
 }
 
+static void drawThickArc(sp::RenderTarget& renderer, glm::vec2 center, float radius, float start_angle, float end_angle, float width, glm::u8vec4 color)
+{
+    const size_t segments = 24;
+    std::vector<glm::vec2> points;
+    points.reserve(segments + 1);
+    for (size_t i = 0; i <= segments; ++i)
+    {
+        float t = float(i) / float(segments);
+        float angle = start_angle + (end_angle - start_angle) * t;
+        points.push_back(center + vec2FromAngle(angle) * radius);
+    }
+    drawThickPolyline(renderer, points, width, color);
+}
+
 void DamageControlScreen::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
     GuiContainer::drawElements(mouse_position, parent_rect, renderer);
@@ -417,6 +433,43 @@ void DamageControlScreen::drawElements(glm::vec2 mouse_position, sp::Rect parent
             float norm = std::clamp(sys->heat_level, 0.0f, 1.0f);
             uint8_t alpha = 26 + static_cast<uint8_t>(norm * 204.0f);
             drawThickPolyline(renderer, polyline, 4.0f, glm::u8vec4(255, 128, 0, alpha), 9.0f);
+        }
+    }
+
+    // Draw shield arcs around the internal view.
+    if (auto shields = my_spaceship.getComponent<Shields>())
+    {
+        if (!shields->entries.empty())
+        {
+            glm::vec2 container_center = room_container_origin + room_container_size * 0.5f;
+            float arc = 360.0f / float(shields->entries.size());
+            float radius = glm::length(room_container_size) * 0.5f + 16.0f;
+
+            for (size_t i = 0; i < shields->entries.size(); ++i)
+            {
+                const auto& shield = shields->entries[i];
+                float level = shield.max > 0.0f ? shield.level / shield.max : 0.0f;
+
+                glm::u8vec4 color;
+                if (shields->active)
+                {
+                    uint8_t g = static_cast<uint8_t>(128 + 127 * level);
+                    uint8_t r = static_cast<uint8_t>(255 - 127 * level);
+                    color = glm::u8vec4(r, g, 255, 200);
+                }
+                else
+                {
+                    color = glm::u8vec4(128, 128, 128, 100);
+                }
+
+                if (shield.hit_effect > 0.0f)
+                    color = glm::u8vec4(255, 0, 0, 200);
+
+                float start_angle = float(i) * arc - arc * 0.5f;
+                float end_angle = float(i) * arc + arc * 0.5f;
+                float gap = arc * 0.05f;
+                drawThickArc(renderer, container_center, radius, start_angle + gap, end_angle - gap, 4.0f, color);
+            }
         }
     }
 }
