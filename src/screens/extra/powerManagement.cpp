@@ -49,7 +49,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         systems[n].box = box;
         box->setSize(290, 400);
 
-        (new GuiLabel(box, "", getLocaleSystemName(ShipSystem::Type(n)), 30))->addBackground()->setAlignment(sp::Alignment::Center)->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(290, 50);
+        (new GuiLabel(box, "", getLocaleSystemName(ShipSystem::Type(n)), 30))->setAlignment(sp::Alignment::Center)->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(290, 50);
         (new GuiLabel(box, "", tr("button", "Power"), 30))->setVertical()->setAlignment(sp::Alignment::CenterLeft)->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(30, 340);
         systems[n].coolant_label = new GuiLabel(box, "", tr("button", "Coolant"), 30.0f);
         systems[n].coolant_label
@@ -133,9 +133,16 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
             if (sys)
             {
                 // Power
-                systems[n].power_slider
-                    ->setRange(power_max, 0.0f) // Backward order for rotated slider
-                    ->setValue(sys->power_request);
+                if (!systems[n].power_slider->isDragging())
+                {
+                    systems[n].power_slider
+                        ->setRange(power_max, 0.0f) // Backward order for rotated slider
+                        ->setValue(sys->power_request);
+                }
+                else
+                {
+                    systems[n].power_slider->setRange(power_max, 0.0f);
+                }
                 systems[n].power_bar
                     ->setRange(0.0f, power_max)
                     ->setValue(sys->power_level)
@@ -149,7 +156,8 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
                 systems[n].heat_label->setVisible(coolant);
                 if (coolant)
                 {
-                    systems[n].coolant_slider->setValue(std::min(sys->coolant_request, coolant->max));
+                    if (!systems[n].coolant_slider->isDragging())
+                        systems[n].coolant_slider->setValue(std::min(sys->coolant_request, coolant->max));
                     systems[n].coolant_slider->setEnable(!coolant->auto_levels);
 
                     float heat = sys->heat_level;
