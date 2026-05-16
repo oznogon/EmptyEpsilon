@@ -44,8 +44,24 @@ GuiProgressbar* GuiProgressbar::setValue(float value)
 
 GuiProgressbar* GuiProgressbar::setRange(float min_value, float max_value)
 {
-    this->min_value = min_value;
-    this->max_value = max_value;
+    if (min_value == max_value)
+    {
+        LOG(Error, "GuiProgressbar passed a minimum value equal to its maximum value; ignoring.");
+        return this;
+    }
+
+    if (min_value > max_value)
+    {
+        LOG(Warning, "GuiProgressbar passed a minimum value larger than its maximum value; swapping them.");
+        this->min_value = max_value;
+        this->max_value = min_value;
+    }
+    else
+    {
+        this->min_value = min_value;
+        this->max_value = max_value;
+    }
+
     return this;
 }
 
