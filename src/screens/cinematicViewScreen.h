@@ -35,12 +35,6 @@ private:
     GuiButton* ui_toggle;
     GuiLabel* keybind_hint_label;
     GuiHotkeyHelpOverlay* keyboard_help;
-    float min_camera_distance;
-    float max_camera_distance;
-    glm::vec2 camera_rotation_vector{0, 0};
-    glm::vec2 camera_destination{0, 0};
-    float angle_yaw;
-    float angle_pitch;
 
 #ifdef DEBUG
     // Debug-only damping function selector

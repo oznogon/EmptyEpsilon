@@ -159,6 +159,7 @@ static string mainScreenSettingToLocaleString(MainScreenSetting setting)
     case MainScreenSetting::Tactical:  return tr("main_screen", "Tactical");
     case MainScreenSetting::LongRange: return tr("main_screen", "Long range");
     case MainScreenSetting::Strategic: return tr("main_screen", "Strategic map");
+    case MainScreenSetting::Camera:    return tr("main_screen", "Camera");
     }
 
     return tr("Unknown");
@@ -4335,14 +4336,6 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(combat_group);
 
     ADD_PAGE(tr("tweak-tab", "Hacking target"), HackingTarget);
-
-    ADD_PAGE(tr("tweak-tab", "Camera"), CinematicCamera);
-    ADD_TEXT_TWEAK(tr("tweak-text", "Name:"), CinematicCamera, name);
-    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Pitch:"), CinematicCamera, -90.0f, 90.0f, pitch);
-    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Roll:"), CinematicCamera, -180.0f, 180.0f, roll);
-    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Z position:"), CinematicCamera, -1000.0f, 1000.0f, z_position);
-    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Field of view:"), CinematicCamera, 30.0f, 140.0f, field_of_view);
-
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row
@@ -4398,6 +4391,13 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             return 0;
         };
     }
+
+    ADD_PAGE(tr("tweak-tab", "Camera"), CinematicCamera);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Name:"), CinematicCamera, name);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Pitch:"), CinematicCamera, -90.0f, 90.0f, pitch);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Roll:"), CinematicCamera, -180.0f, 180.0f, roll);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Z position:"), CinematicCamera, -1000.0f, 1000.0f, z_position);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Field of view:"), CinematicCamera, 30.0f, 140.0f, field_of_view);
 
     ADD_PAGE(tr("tweak-tab", "Self-destruct"), SelfDestruct);
     new_page->description = tr("tweak-self-destruct", "If present, this component enables the self-destruct function on player screens. When present, activated, and confirmed by players, this starts a countdown in seconds and then triggers an explosion with the defined blast damage and radius.");

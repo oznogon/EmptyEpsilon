@@ -62,7 +62,8 @@ void CinematicCameraSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::E
     float frustum_depth = base_depth * std::max(0.3f, pitch_factor); // Min 30% of base depth
 
     // Calculate frustum edges based on FoV
-    // To keep perpendicular depth constant, edge length must increase as FoV increases
+    // To keep perpendicular depth constant, edge length must increase as FoV
+    // increases.
     float half_fov = component.field_of_view / 2.0f;
     float half_fov_rad = glm::radians(half_fov);
     float edge_length = frustum_depth / std::cos(half_fov_rad); // Perpendicular depth / cos(half_angle)
@@ -82,16 +83,21 @@ void CinematicCameraSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::E
 
     // Draw frustum lines
     glm::u8vec4 frustum_color(100, 200, 255, 128); // Light blue, semi-transparent
-    renderer.drawLine(screen_position, left_point, frustum_color);
-    renderer.drawLine(screen_position, right_point, frustum_color);
-    renderer.drawLine(left_point, right_point, frustum_color);
+    renderer.drawLine(screen_position, left_point, 1.0f, frustum_color);
+    renderer.drawLine(screen_position, right_point, 1.0f, frustum_color);
+    renderer.drawLine(left_point, right_point, 1.0f, frustum_color);
 
     // Draw camera icon
     renderer.drawRotatedSprite(component.radar_icon, screen_position, 32.0f, rotation);
 
     // Draw camera name below icon
-    auto label_pos = screen_position + glm::vec2(0, 20);
-    renderer.drawText(sp::Rect(label_pos.x, label_pos.y, 0, 0), component.name,
-                     sp::Alignment::Center, 16, main_font,
-                     glm::u8vec4(255, 255, 255, 255));
+    auto label_pos = screen_position + glm::vec2(0.0f, 20.0f);
+    renderer.drawText(
+        sp::Rect(label_pos.x, label_pos.y, 0, 0),
+        component.name,
+        sp::Alignment::Center,
+        16,
+        main_font,
+        glm::u8vec4(255, 255, 255, 255)
+    );
 }

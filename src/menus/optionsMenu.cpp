@@ -354,7 +354,6 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             camera_sensitivity_overlay_label->setText(
                 tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f)))} })
             );
-            LOG(Info, "sensitivity: ", sensitivity, " static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f))): ", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f))) );
         }
     );
     camera_sensitivity_slider->setSize(GuiElement::GuiSizeMax, 50.0f);
