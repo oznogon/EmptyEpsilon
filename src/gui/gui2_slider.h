@@ -30,6 +30,10 @@ public:
     float getValue() const;
     float getRangeMin() const { return min_value; }
     float getRangeMax() const { return max_value; }
+    bool isDragging() const { return dragging; }
+
+protected:
+    bool dragging = false;
 };
 
 class GuiSlider : public GuiBasicSlider

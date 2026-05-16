@@ -58,9 +58,15 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         ->setAttribute("margin", "0, 13");
 
     energy_display = new GuiKeyValueDisplay(energy_capacity_gauge, "PWR_ENERGY_DISPLAY", 0.6f, tr("power management", "Available energy") + "\n" + tr("power management", "Drain/charge rate"), "");
-    energy_display->setIcon("gui/icons/energy")->setTextSize(25.0f)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("margin", "0, -13");
+    energy_display
+        ->setIcon("gui/icons/energy")
+        ->setTextSize(25.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, -13");
     energy_delta_arrow = new GuiArrow(energy_display, "PWR_ENERGY_DELTA_ARROW", 0.0f);
-    energy_delta_arrow->setPosition(0.0f, 0.0f, sp::Alignment::CenterRight)->setSize(40.0f, 40.0f);
+    energy_delta_arrow
+        ->setPosition(0.0f, 0.0f, sp::Alignment::CenterRight)
+        ->setSize(40.0f, 40.0f);
 
     GuiElement* status_bar_kv_spacer = new GuiElement(status_bar, "PWR_STATUS_BAR_KV_SPACER");
     status_bar_kv_spacer->setSize(20.0f, GuiElement::GuiSizeMax);
@@ -308,9 +314,10 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
         // add rows.
         while (int(systems_rows.size()) < new_rows)
         {
-            GuiElement* systems_row = new GuiElement(this->systems_grid, "PWR_SYSTEMS_ROW_" + string(int(systems_rows.size()) + 1));
-            systems_row->setSize(GuiElement::GuiSizeMax, panel_size.y);
-            systems_row->setAttribute("layout", "horizontal");
+            GuiElement* systems_row = new GuiElement(this->systems_grid, "PWR_SYSTEMS_ROW_" + string(static_cast<int>(systems_rows.size()) + 1));
+            systems_row
+                ->setSize(GuiElement::GuiSizeMax, panel_size.y)
+                ->setAttribute("layout", "horizontal");
             systems_rows.emplace_back(systems_row);
         }
 
@@ -393,7 +400,9 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 
             // Update the system's power request label, slider, and bar.
             systems[n].power_label->setText(tr("Power: {value}%").format({{"value", static_cast<int>(nearbyint(sys->power_level * 100.0f))}}));
-            systems[n].power_slider->setRange(power_max, 0.0f)->setValue(sys->power_request);
+            systems[n].power_slider->setRange(power_max, 0.0f);
+            if (!systems[n].power_slider->isDragging())
+                systems[n].power_slider->setValue(sys->power_request);
             systems[n].power_bar->setRange(0.0f, power_max)->setValue(sys->power_level);
 
             // Update the system's coolant request slider and actual allocation.
@@ -409,9 +418,9 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
                 unused_coolant -= coolant_level;
 
                 systems[n].coolant_label->setText(tr("Coolant: {value}%").format({{"value", static_cast<int>(nearbyint(coolant_level * 10.0f))}}));
-                systems[n].coolant_slider
-                    ->setValue(std::min(sys->coolant_request, coolant->max))
-                    ->setVisible(!coolant->auto_levels);
+                systems[n].coolant_slider->setVisible(!coolant->auto_levels);
+                if (!systems[n].coolant_slider->isDragging())
+                    systems[n].coolant_slider->setValue(std::min(sys->coolant_request, coolant->max));
                 systems[n].coolant_bar
                     ->setDrawBackground(coolant->auto_levels)
                     ->setValue(coolant_level)
