@@ -105,4 +105,4 @@ new-cinematic-camera 20260514 -- major revision to cinematic camera, addition of
 
 extra-crew-screens 20260515 -- refactor crew screen backgrounds
 
-extra-crew-screens 20260516 -- rotatable drawStretchedHV
+extra-crew-screens 20260516 -- rotatable drawStretchedHV, drag checks on GuiSlider
