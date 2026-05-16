@@ -21,17 +21,19 @@ public:
     GuiKeyValueDisplay* setValueColor(glm::u8vec4 color);
     GuiKeyValueDisplay* useThemeColors();
     GuiKeyValueDisplay* setIcon(const string& icon_texture);
+    GuiKeyValueDisplay* setBackgroundVisible(bool is_visible);
 
 private:
     const GuiThemeStyle* back_style;
     const GuiThemeStyle* key_style;
     const GuiThemeStyle* value_style;
 
+    bool is_background_visible;
     float div_distance;
     string key;
     string value;
     string icon_texture;
-    float text_size = 20.0f;
+    float text_size;
     glm::u8vec4 back_color{255,255,255,255};
     glm::u8vec4 key_color{255,255,255,255};
     glm::u8vec4 value_color{255,255,255,255};

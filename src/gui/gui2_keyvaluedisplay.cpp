@@ -6,6 +6,9 @@
 GuiKeyValueDisplay::GuiKeyValueDisplay(GuiContainer* owner, const string& id, float div_distance, const string& key, const string& value)
 : GuiElement(owner, id), div_distance(div_distance), key(key), value(value)
 {
+    is_background_visible = true;
+    text_size = 20.0f;
+
     back_style = theme->getStyle("keyvalue.back");
     key_style = theme->getStyle("keyvalue.key");
     value_style = theme->getStyle("keyvalue.value");
@@ -22,17 +25,17 @@ void GuiKeyValueDisplay::onDraw(sp::RenderTarget& renderer)
 
     if (rect.size.x >= rect.size.y)
     {
-        renderer.drawStretchedHV(rect, 8.0f, back.texture, back_color, sp::RenderTarget::StretchedRotation::Rotate0);
+        if (is_background_visible)
+            renderer.drawStretchedHV(rect, 8.0f, back.texture, back_color, sp::RenderTarget::StretchedRotation::Rotate0);
         renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x * div_distance - div_size, rect.size.y), this->key, sp::Alignment::CenterRight, text_size, key.font, key_color);
         renderer.drawText(sp::Rect(rect.position.x + rect.size.x * div_distance + div_size, rect.position.y, rect.size.x * (1.f - div_distance), rect.size.y), this->value, sp::Alignment::CenterLeft, text_size, value.font, value_color);
         if (icon_texture != "")
-        {
             renderer.drawSprite(icon_texture, glm::vec2(rect.position.x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y * 0.8f, key_color);
-        }
     }
     else
     {
-        renderer.drawStretchedHV(rect, 8.0f, back.texture, back_color, sp::RenderTarget::StretchedRotation::Rotate270);
+        if (is_background_visible)
+            renderer.drawStretchedHV(rect, 8.0f, back.texture, back_color, sp::RenderTarget::StretchedRotation::Rotate270);
         renderer.drawText(sp::Rect(rect.position.x, rect.position.y + rect.size.y * (1.f - div_distance) + div_size, rect.size.x, rect.size.y * div_distance - div_size), this->key, sp::Alignment::TopCenter, text_size, key.font, key_color, sp::Font::FlagVertical);
         renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x, rect.size.y * (1.f - div_distance) - div_size), this->value, sp::Alignment::BottomCenter, text_size, value.font, value_color, sp::Font::FlagVertical);
     }
@@ -99,5 +102,11 @@ GuiKeyValueDisplay* GuiKeyValueDisplay::useThemeColors()
 GuiKeyValueDisplay* GuiKeyValueDisplay::setIcon(const string& icon_texture)
 {
     this->icon_texture = icon_texture;
+    return this;
+}
+
+GuiKeyValueDisplay* GuiKeyValueDisplay::setBackgroundVisible(bool is_visible)
+{
+    this->is_background_visible = is_visible;
     return this;
 }
