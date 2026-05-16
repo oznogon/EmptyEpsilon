@@ -98,8 +98,9 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
 
     // Initialize at least one row for systems panels.
     GuiElement* systems_row = new GuiElement(systems_grid, "PWR_SYSTEMS_ROW_1");
-    systems_row->setSize(GuiElement::GuiSizeMax, panel_size.y);
-    systems_row->setAttribute("layout", "horizontal");
+    systems_row
+        ->setSize(GuiElement::GuiSizeMax, panel_size.y)
+        ->setAttribute("layout", "horizontal");
     systems_rows.emplace_back(systems_row);
 
     // TODO: Hotkey help overlay
@@ -162,8 +163,12 @@ bool PowerManagementScreen::populateSystemPanel(int system_index, GuiElement* sy
         // Panel labels use GuiKeyValueDisplay for their icon support.
         systems[system_index].icon_file = icon_file;
         systems[system_index].system_label = new GuiKeyValueDisplay(systems[system_index].container, "PWR_SYSTEM_" + string(system_index) + "_NAME_LABEL", 0.15f, "", getLocaleSystemName(ShipSystem::Type(system_index)));
-        systems[system_index].system_label->setIcon(icon_file)->setTextSize(20.0f)->setSize(GuiElement::GuiSizeMax, 50.0f);
-        systems[system_index].system_label->setAttribute("margin", "0, 0, -12, 0");
+        systems[system_index].system_label
+            ->setBackgroundVisible(false)
+            ->setIcon(icon_file)
+            ->setTextSize(20.0f)
+            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setAttribute("margin", "0, 0, -12, 0");
 
         // Build the panel's sliders.
         systems[system_index].system_container_sliders = new GuiElement(systems[system_index].container, "PWR_SYSTEM_" + string(system_index) + "_SLIDERS");
