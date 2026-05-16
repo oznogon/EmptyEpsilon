@@ -327,7 +327,7 @@ void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hov
             glm::vec2 container_center = room_container_origin + room_container_size * 0.5f;
             const auto count = shields->entries.size();
             const float arc = 360.0f / static_cast<float>(count);
-            const float gap = count > 1 ? arc * 0.05f : 0.0f;
+            const float gap = count > 1 ? arc * 0.02f : 0.0f;
             // Scale the arcs to the internal rooms container size.
             const float radius = glm::length(room_container_size) * 0.5f;
 
@@ -338,18 +338,32 @@ void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hov
 
                 // Color active segments by strength.
                 glm::u8vec4 color;
-                // TODO: Theme colors
                 if (shields->active)
                 {
-                    uint8_t r = static_cast<uint8_t>(255 - 127 * level);
-                    uint8_t g = static_cast<uint8_t>(128 + 127 * level);
-                    color = glm::u8vec4(r, g, 255, 200);
+                    // Match radar shield color logic: blue at full strength, red at zero.
+                    float t = 1.0f - level;
+                    color = glm::u8vec4(
+                        static_cast<uint8_t>(128 + 127 * t),
+                        static_cast<uint8_t>(128 * level),
+                        static_cast<uint8_t>(255 * level),
+                        static_cast<uint8_t>(64 + 64 * level)
+                    );
                 }
-                else color = glm::u8vec4(128, 128, 128, 100);
+                else
+                {
+                    color = glm::u8vec4(255, 255, 255, 64);
+                }
 
                 // Flash segment if it's been hit.
                 if (shield.hit_effect > 0.0f)
-                    color = glm::u8vec4(255, 0, 0, 200);
+                {
+                    color = glm::u8vec4(
+                        static_cast<uint8_t>(color.r + (255 - color.r) * shield.hit_effect),
+                        static_cast<uint8_t>(color.g + (0 - color.g) * shield.hit_effect),
+                        static_cast<uint8_t>(color.b + (0 - color.b) * shield.hit_effect),
+                        static_cast<uint8_t>(color.a + (128 - color.a) * shield.hit_effect)
+                    );
+                }
 
                 // Draw the segment, including a gap for multiple segments.
                 drawThickArc(
