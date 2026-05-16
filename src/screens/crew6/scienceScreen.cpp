@@ -53,11 +53,11 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setPosition(glm::vec2(105.0f, 0.0f), sp::Alignment::CenterLeft)
         ->setSize(1200.0f, 900.0f);
 
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255});
-    background_crosses->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
     // Render the alert level color overlay.
-    (new AlertLevelOverlay(this));
+    new AlertLevelOverlay(this);
 
     // Draw the radar.
     radar_view = new GuiElement(this, "RADAR_VIEW");

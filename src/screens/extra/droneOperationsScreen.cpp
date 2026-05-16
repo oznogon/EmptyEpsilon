@@ -46,22 +46,23 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_togglebutton.h"
 
-
 DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DRONE_OPERATOR_SCREEN", GuiTheme::getColor("background"))
 {
+    // Render the radar shadow and background decorations.
     background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
     background_gradient
         ->setTextureThemed("background.gradient_single")
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
 
-    auto background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
-    (new AlertLevelOverlay(this));
+    // Render the alert level color overlay.
+    new AlertLevelOverlay(this);
 
-    // Message if ship lacks DroneController.
+    // Message if entity lacks the DroneController component.
     no_drone_controller_label = new GuiLabel(this, "NO_DRONE_CONTROLLER_LABEL", tr("drone", "No drone controller"), 50.0f);
     no_drone_controller_label
         ->setAlignment(sp::Alignment::Center)

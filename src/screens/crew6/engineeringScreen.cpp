@@ -36,12 +36,13 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     slider_tick_style = theme->getStyle("slider.tick");
     overlay_damaged_style = theme->getStyle("overlay.damaged");
     overlay_overheating_style = theme->getStyle("overlay.overheating");
+
     // Render the background decorations.
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
     // Render the alert level color overlay.
-    (new AlertLevelOverlay(this));
+    new AlertLevelOverlay(this);
 
     auto stats = new GuiElement(this, "ENGINEER_STATS");
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 200)->setAttribute("layout", "vertical");

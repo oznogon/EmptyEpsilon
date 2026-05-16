@@ -1,5 +1,4 @@
-#ifndef POWER_MANAGEMENT_H
-#define POWER_MANAGEMENT_H
+#pragma once
 
 #include "gui/gui2_overlay.h"
 #include "components/shipsystem.h"
@@ -39,5 +38,3 @@ public:
     void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 };
-
-#endif//POWER_MANAGEMENT_H

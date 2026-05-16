@@ -13,8 +13,6 @@ class GuiRadarView;
 class WeaponsScreen : public GuiOverlay
 {
 private:
-    GuiOverlay* background_crosses;
-
     TargetsContainer targets;
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* front_shield_display;

@@ -9,9 +9,10 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_progressbar.h"
 
+#include "screenComponents/alertOverlay.h"
+#include "screenComponents/customShipFunctions.h"
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
-#include "screenComponents/customShipFunctions.h"
 
 #include "components/coolant.h"
 #include "components/hull.h"
@@ -25,6 +26,13 @@
 DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DAMCON_SCREEN", GuiTheme::getColor("background"))
 {
+    // Render the background decorations.
+    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
+
+    // Render the alert level color overlay.
+    new AlertLevelOverlay(this);
+
     internal_view = new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", room_size);
     internal_view
         ->setShip(my_spaceship)

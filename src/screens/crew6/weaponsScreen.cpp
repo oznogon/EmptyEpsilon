@@ -32,13 +32,16 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "WEAPONS_SCREEN", GuiTheme::getColor("background"))
 {
     // Render the radar shadow and background decorations.
-    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))->setTextureThemed("background.gradient")->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);
+    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
+        ->setTextureThemed("background.gradient")
+        ->setPosition(glm::vec2(0.0f, 0.0f), sp::Alignment::Center)
+        ->setSize(1200.0f, 900.0f);
 
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
     // Render the alert level color overlay.
-    (new AlertLevelOverlay(this));
+    new AlertLevelOverlay(this);
 
     radar = new GuiRadarView(this, "HELMS_RADAR", &targets);
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);

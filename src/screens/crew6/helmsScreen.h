@@ -11,8 +11,6 @@ class GuiCombatManeuver;
 class HelmsScreen : public GuiOverlay
 {
 private:
-    GuiOverlay* background_crosses;
-
     GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
     GuiDockingButton* docking_button;

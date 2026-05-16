@@ -20,7 +20,6 @@ private:
     const GuiThemeStyle* slider_tick_style;
     const GuiThemeStyle* overlay_damaged_style;
     const GuiThemeStyle* overlay_overheating_style;
-    GuiOverlay* background_crosses;
 
     GuiSelfDestructButton* self_destruct_button;
     GuiLabel* power_label;

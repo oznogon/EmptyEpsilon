@@ -28,7 +28,6 @@ public:
     const float DEFAULT_MAX_ZOOM_DISTANCE = 30000.0f;
 
     GuiImage* background_gradient;
-    GuiOverlay* background_crosses;
 
     GuiElement* radar_view;
     DatabaseViewComponent* database_view;

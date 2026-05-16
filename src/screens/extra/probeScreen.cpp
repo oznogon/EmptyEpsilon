@@ -19,13 +19,25 @@
 ProbeScreen::ProbeScreen(GuiContainer* owner)
 : GuiOverlay(owner, "PROBE_SCREEN", GuiTheme::getColor("background"))
 {
+    // Render the radar shadow and background decorations.
     background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
     background_gradient
         ->setTextureThemed("background.gradient")
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
 
-    (new AlertLevelOverlay(this));
+    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
+
+    // Render the alert level color overlay.
+    new AlertLevelOverlay(this);
+
+    // Message if entity lacks a linked probe.
+    no_probe_label = new GuiLabel(this, "NO_PROBE_LABEL", tr("probe_screen", "No probe linked"), 50.0f);
+    no_probe_label
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
 
     viewport = new GuiViewport3D(this, "PROBE_VIEWPORT");
     viewport
@@ -33,13 +45,8 @@ ProbeScreen::ProbeScreen(GuiContainer* owner)
         ->showSpacedust()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    no_probe_label = new GuiLabel(this, "NO_PROBE_LABEL", tr("probe_screen", "No probe linked"), 30.0f);
-    no_probe_label
-        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
-        ->setSize(400.0f, 50.0f)
-        ->hide();
-
-    (new GuiGlobalMessage(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiGlobalMessage(this))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void ProbeScreen::onUpdate()

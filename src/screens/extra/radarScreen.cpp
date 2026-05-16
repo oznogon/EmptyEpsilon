@@ -22,6 +22,7 @@
 RadarScreen::RadarScreen(GuiContainer* owner, string type)
 : GuiOverlay(owner, "RADAR_SCREEN", GuiTheme::getColor("background")), radar_type(type)
 {
+    // Render the radar shadow and background decorations.
     (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
         ->setTextureThemed("background.gradient")
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
@@ -30,7 +31,8 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
     (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
 
-    (new AlertLevelOverlay(this));
+    // Render the alert level color overlay.
+    new AlertLevelOverlay(this);
 
     radar = new GuiRadarView(this, "RADAR_VIEW", 5000.0f, &targets);
     radar

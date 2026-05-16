@@ -12,8 +12,6 @@ class GuiRadarView;
 class TacticalScreen : public GuiOverlay
 {
 private:
-    GuiOverlay* background_crosses;
-
     GuiElement* warp_controls;
     GuiElement* jump_controls;
 
