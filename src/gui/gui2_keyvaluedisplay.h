@@ -2,8 +2,8 @@
 
 #include "gui2_element.h"
 
-
 class GuiThemeStyle;
+
 class GuiKeyValueDisplay : public GuiElement
 {
 public:
@@ -14,6 +14,7 @@ public:
     GuiKeyValueDisplay* setKey(const string& key);
     GuiKeyValueDisplay* setValue(const string& value);
     GuiKeyValueDisplay* setTextSize(float text_size);
+    GuiKeyValueDisplay* setDivDistance(float div_distance);
     GuiKeyValueDisplay* setColor(glm::u8vec4 color);
     GuiKeyValueDisplay* setBackColor(glm::u8vec4 color);
     GuiKeyValueDisplay* setKeyColor(glm::u8vec4 color);
