@@ -14,5 +14,10 @@ class GuiLayoutHorizontalRight : public GuiLayout
 public:
     virtual void update(GuiContainer& container, const sp::Rect& rect) override;
 };
+class GuiLayoutHorizontalCenter : public GuiLayout
+{
+public:
+    virtual void update(GuiContainer& container, const sp::Rect& rect) override;
+};
 
 #endif//GUI_LAYOUT_HORIZONTAL_H

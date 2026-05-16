@@ -64,8 +64,10 @@ std::vector<RenderLayer*> window_render_layers;
 GUI_REGISTER_LAYOUT("default", GuiLayout);
 GUI_REGISTER_LAYOUT("vertical", GuiLayoutVertical);
 GUI_REGISTER_LAYOUT("verticalbottom", GuiLayoutVerticalBottom);
+GUI_REGISTER_LAYOUT("verticalcenter", GuiLayoutVerticalCenter);
 GUI_REGISTER_LAYOUT("horizontal", GuiLayoutHorizontal);
 GUI_REGISTER_LAYOUT("horizontalright", GuiLayoutHorizontalRight);
+GUI_REGISTER_LAYOUT("horizontalcenter", GuiLayoutHorizontalCenter);
 
 
 int runProxyServer()
