@@ -102,3 +102,5 @@ master 20260514 -- 2712-cap-free-overpower merged
 split-weapons-screen 20260514 -- remove shield state and controls
 extra-crew-screens 20260514 -- refactor FrequencyCurve, SignalQualityIndicator
 new-cinematic-camera 20260514 -- major revision to cinematic camera, addition of Camera entity
+
+extra-crew-screens 20260515 -- refactor crew screen backgrounds
