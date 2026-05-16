@@ -34,6 +34,7 @@ public:
     static void addLog(const string& message);
 
     void update(float delta) override;
+    bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
 private:
     std::vector<string> log_messages;
     ConsoleHistory history;

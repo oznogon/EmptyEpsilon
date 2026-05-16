@@ -63,6 +63,14 @@ LuaConsole::LuaConsole()
     entry->hide();
 }
 
+bool LuaConsole::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
+{
+    bool result = GuiCanvas::onPointerDown(button, position, id);
+    if (!entry->getRect().contains(position))
+        focus(nullptr);
+    return result;
+}
+
 void LuaConsole::addLog(const string& message)
 {
     if (!console) return;
