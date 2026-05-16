@@ -110,8 +110,8 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
     auto system_health_layout = new GuiElement(this, "DAMCON_LAYOUT");
     system_health_layout
         ->setPosition(0.0f, 0.0f, sp::Alignment::CenterLeft)
-        ->setSize(300.0f, 600.0f)
-        ->setAttribute("layout", "vertical");
+        ->setSize(300.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "verticalcenter");
 
     hull_display = new GuiKeyValueDisplay(system_health_layout, "HULL", 0.8f, tr("damagecontrol", "Hull"), "0%");
     hull_display->setSize(GuiElement::GuiSizeMax, 40.0f);
