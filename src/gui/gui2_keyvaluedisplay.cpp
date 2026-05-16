@@ -20,9 +20,9 @@ void GuiKeyValueDisplay::onDraw(sp::RenderTarget& renderer)
 
     const float div_size = 5.0f;
 
-    renderer.drawStretched(rect, back.texture, back_color);
     if (rect.size.x >= rect.size.y)
     {
+        renderer.drawStretchedHV(rect, 8.0f, back.texture, back_color, sp::RenderTarget::StretchedRotation::Rotate0);
         renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x * div_distance - div_size, rect.size.y), this->key, sp::Alignment::CenterRight, text_size, key.font, key_color);
         renderer.drawText(sp::Rect(rect.position.x + rect.size.x * div_distance + div_size, rect.position.y, rect.size.x * (1.f - div_distance), rect.size.y), this->value, sp::Alignment::CenterLeft, text_size, value.font, value_color);
         if (icon_texture != "")
@@ -32,6 +32,7 @@ void GuiKeyValueDisplay::onDraw(sp::RenderTarget& renderer)
     }
     else
     {
+        renderer.drawStretchedHV(rect, 8.0f, back.texture, back_color, sp::RenderTarget::StretchedRotation::Rotate270);
         renderer.drawText(sp::Rect(rect.position.x, rect.position.y + rect.size.y * (1.f - div_distance) + div_size, rect.size.x, rect.size.y * div_distance - div_size), this->key, sp::Alignment::TopCenter, text_size, key.font, key_color, sp::Font::FlagVertical);
         renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x, rect.size.y * (1.f - div_distance) - div_size), this->value, sp::Alignment::BottomCenter, text_size, value.font, value_color, sp::Font::FlagVertical);
     }
@@ -52,6 +53,12 @@ GuiKeyValueDisplay* GuiKeyValueDisplay::setValue(const string& value)
 GuiKeyValueDisplay* GuiKeyValueDisplay::setTextSize(float text_size)
 {
     this->text_size = text_size;
+    return this;
+}
+
+GuiKeyValueDisplay* GuiKeyValueDisplay::setDivDistance(float div_distance)
+{
+    this->div_distance = div_distance;
     return this;
 }
 

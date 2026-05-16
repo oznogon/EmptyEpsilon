@@ -18,10 +18,78 @@
 #include "components/hull.h"
 #include "components/internalrooms.h"
 #include "components/reactor.h"
+#include "components/shields.h"
 
 #include <glm/geometric.hpp>
 #include <algorithm>
 #include <cmath>
+#include "vectorUtils.h"
+
+// TODO: These drawThick... functions don't belong here.
+static void drawThickPolyline(sp::RenderTarget& renderer, const std::vector<glm::vec2>& polyline, float width, glm::u8vec4 color, float lateral_offset = 0.0f)
+{
+    if (polyline.size() < 2) return;
+
+    std::vector<glm::vec2> strip;
+    strip.reserve(polyline.size() * 2);
+
+    float half = width * 0.5f;
+
+    for (size_t i = 0; i < polyline.size(); i++)
+    {
+        glm::vec2 normal;
+        if (i == 0)
+        {
+            glm::vec2 d = glm::normalize(polyline[1] - polyline[0]);
+            normal = glm::vec2(-d.y, d.x);
+        }
+        else if (i == polyline.size() - 1)
+        {
+            glm::vec2 d = glm::normalize(polyline[i] - polyline[i - 1]);
+            normal = glm::vec2(-d.y, d.x);
+        }
+        else
+        {
+            glm::vec2 din = glm::normalize(polyline[i] - polyline[i - 1]);
+            glm::vec2 dout = glm::normalize(polyline[i + 1] - polyline[i]);
+            glm::vec2 tangent = din + dout;
+            float tlen = glm::length(tangent);
+            if (tlen < 0.001f)
+                normal = glm::vec2(-din.y, din.x);
+            else
+            {
+                tangent /= tlen;
+                glm::vec2 n(-tangent.y, tangent.x);
+                float dot = glm::dot(n, glm::vec2(-din.y, din.x));
+                if (std::abs(dot) < 0.001f)
+                    normal = glm::vec2(-din.y, din.x);
+                else
+                    normal = n / dot;
+            }
+        }
+
+        glm::vec2 center = polyline[i] + normal * lateral_offset;
+        strip.push_back(center + normal * half);
+        strip.push_back(center - normal * half);
+    }
+
+    renderer.drawTriangleStrip(strip, color);
+}
+
+static void drawThickArc(sp::RenderTarget& renderer, glm::vec2 center, float radius, float start_angle, float end_angle, float width, glm::u8vec4 color)
+{
+    const size_t segments = 48;
+    std::vector<glm::vec2> points;
+    points.reserve(segments + 1);
+
+    for (size_t i = 0; i <= segments; ++i)
+    {
+        float angle = start_angle + (end_angle - start_angle) * (static_cast<float>(i) / static_cast<float>(segments));
+        points.push_back(center + vec2FromAngle(angle) * radius);
+    }
+
+    drawThickPolyline(renderer, points, width, color);
+}
 
 DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DAMCON_SCREEN", GuiTheme::getColor("background"))
@@ -48,10 +116,13 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
     hull_display = new GuiKeyValueDisplay(system_health_layout, "HULL", 0.8f, tr("damagecontrol", "Hull"), "0%");
     hull_display->setSize(GuiElement::GuiSizeMax, 40.0f);
 
+    shield_display = new GuiKeyValueDisplay(system_health_layout, "SHIELDS", 0.8f, tr("damagecontrol", "Shields"), "0");
+    shield_display->setSize(GuiElement::GuiSizeMax, 40.0f)->hide();
+
     energy_display = new GuiKeyValueDisplay(system_health_layout, "ENERGY", 0.8f, tr("damagecontrol", "Energy"), "0");
     energy_display->setSize(GuiElement::GuiSizeMax, 40.0f);
 
-    // Ship system group containers
+    // Ship system group containers.
     for (int n = 0; n < ShipSystem::COUNT; n++)
     {
         system_group[n] = new GuiElement(system_health_layout, "DAMCON_GROUP_" + string(n));
@@ -117,6 +188,7 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 
 void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
 {
+    // Hotkey to toggle indicator line modes.
     if (keys.damcon_toggle_detail_lines.getDown())
         line_mode = (line_mode + 1) % 3;
 
@@ -133,6 +205,37 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
             else
                 hull_display->setBackColor(glm::u8vec4{255, 255, 255, 255});
         }
+
+        if (auto shields = my_spaceship.getComponent<Shields>())
+        {
+            if (!shields->entries.empty())
+            {
+                shield_display->show();
+                string shield_value = "";
+                const auto count = shields->entries.size();
+                // Shift div distance by number of shield segments.
+                // TODO: Font-dependent; this should ideally right-align the
+                // value and shift the key instead.
+                if (count > 1)
+                    shield_display->setDivDistance(std::max(0.2f, 1.0f - count * 0.185f));
+
+                for (size_t i = 0; i < count; ++i)
+                {
+                    const auto& shield = shields->entries[i];
+                    if (shield.max > 0.0f)
+                    {
+                        shield_value += string(100.0f * (shield.level / shield.max), 0) + "%";
+                        if (i < count - 1) shield_value += " / ";
+                    }
+                }
+
+                if (shield_value != "")
+                    shield_display->setValue(shield_value);
+                else shield_display->hide();
+            }
+            else shield_display->hide();
+        }
+        else shield_display->hide();
 
         if (auto reactor = my_spaceship.getComponent<Reactor>())
         {
@@ -152,7 +255,7 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
             if (sys)
             {
                 const float health = sys->health;
-                system_health[n]->setValue(string(int(sys->getSystemEffectiveness() * 100)) + "%");
+                system_health[n]->setValue(string(static_cast<int>(sys->getSystemEffectiveness() * 100.0f)) + "%");
                 if (health < 0.0f)
                     system_health[n]->setBackColor(glm::u8vec4(255, 0, 0, 255));
                 else if (sys->health_max < 1.0f)
@@ -197,56 +300,6 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-static void drawThickPolyline(sp::RenderTarget& renderer, const std::vector<glm::vec2>& polyline, float width, glm::u8vec4 color, float lateral_offset = 0.0f)
-{
-    if (polyline.size() < 2) return;
-
-    std::vector<glm::vec2> strip;
-    strip.reserve(polyline.size() * 2);
-
-    float half = width * 0.5f;
-
-    for (size_t i = 0; i < polyline.size(); i++)
-    {
-        glm::vec2 normal;
-        if (i == 0)
-        {
-            glm::vec2 d = glm::normalize(polyline[1] - polyline[0]);
-            normal = glm::vec2(-d.y, d.x);
-        }
-        else if (i == polyline.size() - 1)
-        {
-            glm::vec2 d = glm::normalize(polyline[i] - polyline[i - 1]);
-            normal = glm::vec2(-d.y, d.x);
-        }
-        else
-        {
-            glm::vec2 din = glm::normalize(polyline[i] - polyline[i - 1]);
-            glm::vec2 dout = glm::normalize(polyline[i + 1] - polyline[i]);
-            glm::vec2 tangent = din + dout;
-            float tlen = glm::length(tangent);
-            if (tlen < 0.001f)
-                normal = glm::vec2(-din.y, din.x);
-            else
-            {
-                tangent /= tlen;
-                glm::vec2 n(-tangent.y, tangent.x);
-                float dot = glm::dot(n, glm::vec2(-din.y, din.x));
-                if (std::abs(dot) < 0.001f)
-                    normal = glm::vec2(-din.y, din.x);
-                else
-                    normal = n / dot;
-            }
-        }
-
-        glm::vec2 center = polyline[i] + normal * lateral_offset;
-        strip.push_back(center + normal * half);
-        strip.push_back(center - normal * half);
-    }
-
-    renderer.drawTriangleStrip(strip, color);
-}
-
 void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::RenderTarget& renderer)
 {
     GuiContainer::drawElements(mouse_position, hovered_element, renderer);
@@ -255,6 +308,7 @@ void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hov
     auto ir = my_spaceship.getComponent<InternalRooms>();
     if (!ir) return;
 
+    // Calculate room container sizes.
     auto room_min = ir->roomMin();
     auto room_max = ir->roomMax();
     auto total_size = room_max - room_min;
@@ -262,8 +316,56 @@ void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hov
     glm::vec2 room_container_size = glm::vec2(total_size) * room_size;
     glm::vec2 room_container_origin = iv_rect.position + (iv_rect.size - room_container_size) * 0.5f;
 
+    // Init indicator lines.
     std::vector<LineInfo> lines;
 
+    // Draw shield arcs around the internal view.
+    if (auto shields = my_spaceship.getComponent<Shields>())
+    {
+        if (!shields->entries.empty())
+        {
+            glm::vec2 container_center = room_container_origin + room_container_size * 0.5f;
+            const auto count = shields->entries.size();
+            const float arc = 360.0f / static_cast<float>(count);
+            const float gap = count > 1 ? arc * 0.05f : 0.0f;
+            // Scale the arcs to the internal rooms container size.
+            const float radius = glm::length(room_container_size) * 0.5f;
+
+            for (size_t i = 0; i < count; ++i)
+            {
+                const auto& shield = shields->entries[i];
+                const float level = shield.max > 0.0f ? shield.level / shield.max : 0.0f;
+
+                // Color active segments by strength.
+                glm::u8vec4 color;
+                // TODO: Theme colors
+                if (shields->active)
+                {
+                    uint8_t r = static_cast<uint8_t>(255 - 127 * level);
+                    uint8_t g = static_cast<uint8_t>(128 + 127 * level);
+                    color = glm::u8vec4(r, g, 255, 200);
+                }
+                else color = glm::u8vec4(128, 128, 128, 100);
+
+                // Flash segment if it's been hit.
+                if (shield.hit_effect > 0.0f)
+                    color = glm::u8vec4(255, 0, 0, 200);
+
+                // Draw the segment, including a gap for multiple segments.
+                drawThickArc(
+                    renderer,
+                    container_center,
+                    radius,
+                    static_cast<float>(i) * arc - arc * 0.5f + gap,
+                    static_cast<float>(i) * arc + arc * 0.5f - gap,
+                    std::floorf(8.0f * level),
+                    color
+                );
+            }
+        }
+    }
+
+    // Draw interior rooms.
     for (int n = 0; n < ShipSystem::COUNT; n++)
     {
         if (!system_group[n]->isVisible()) continue;
@@ -335,6 +437,7 @@ void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hov
         float sign_dy = (dy >= 0.0f) ? 1.0f : -1.0f;
 
         std::vector<glm::vec2> polyline;
+        const float min_horizontal = 50.0f;
         if (dx >= abs_dy + 1.0f)
         {
             float half_h = (dx - abs_dy) * 0.95f;
@@ -342,6 +445,15 @@ void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hov
                 start,
                 {start.x + half_h, start.y},
                 {start.x + half_h + abs_dy, end.y},
+                end
+            };
+        }
+        else if (dx > min_horizontal)
+        {
+            polyline = {
+                start,
+                {start.x + min_horizontal, start.y},
+                {end.x, start.y + sign_dy * (dx - min_horizontal)},
                 end
             };
         }
