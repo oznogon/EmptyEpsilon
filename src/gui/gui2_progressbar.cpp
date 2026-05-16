@@ -17,9 +17,6 @@ void GuiProgressbar::onDraw(sp::RenderTarget& renderer)
     const float size = text_size > 0.0f ? text_size : front.size;
     sp::Rect fill_rect = rect;
 
-    if (drawBackground)
-        renderer.drawStretched(rect, back.texture, back.color);
-
     if (rect.size.x >= rect.size.y)
     {
         if (drawBackground)
