@@ -39,21 +39,23 @@ static int playBriefingAudio(const string& filename)
 BriefingScreen::BriefingScreen(GuiContainer* owner)
 : GuiOverlay(owner, "BRIEFING_SCREEN", GuiTheme::getColor("background"))
 {
-    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255}))
+    // Render the background decorations.
+    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
 
-    (new AlertLevelOverlay(this));
+    // Render the alert level color overlay.
+    new AlertLevelOverlay(this);
+
+    // Message if briefing doesn't exist or lacks slides.
+    no_pages_label = new GuiLabel(this, "NO_PAGES_LABEL", tr("briefing", "No briefing available"), 50.0f);
+    no_pages_label
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     page_container = new GuiElement(this, "");
     page_container
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
-
-    // Message if briefing doesn't exist or lacks slides.
-    no_pages_label = new GuiLabel(page_container, "NO_PAGES_LABEL", tr("briefing", "No briefing available"), 50.0f);
-    no_pages_label
-        ->setAlignment(sp::Alignment::Center)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Fixtures for page slides.
     page_image = new GuiImageContain(page_container, "BRIEFING_PAGE_IMAGE", "");

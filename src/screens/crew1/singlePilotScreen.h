@@ -17,8 +17,6 @@ class GuiUtilityBeamRotationDial;
 class SinglePilotScreen : public GuiOverlay
 {
 private:
-    GuiOverlay* background_crosses;
-
     GuiElement* warp_controls;
     GuiElement* jump_controls;
     GuiCombatManeuver* combat_maneuver;

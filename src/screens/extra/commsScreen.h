@@ -1,12 +1,15 @@
-#ifndef COMMS_SCREEN_H
-#define COMMS_SCREEN_H
+#pragma once
 
 #include "gui/gui2_overlay.h"
+
+class GuiLabel;
 
 class CommsScreen : public GuiOverlay
 {
 public:
     CommsScreen(GuiContainer* owner);
-};
 
-#endif//COMMS_SCREEN_H
+    void onUpdate() override;
+private:
+    GuiLabel* no_comms_label;
+};

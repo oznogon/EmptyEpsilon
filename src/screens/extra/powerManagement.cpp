@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "engine.h"
 #include "missileWeaponData.h"
+
 #include "components/reactor.h"
 #include "components/coolant.h"
 
@@ -14,16 +15,30 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_progressbar.h"
 #include "gui/gui2_keyvaluedisplay.h"
+
+#include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
+#include "screenComponents/alertOverlay.h"
 
 PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
 : GuiOverlay(owner, "POWER_MANAGEMENT_SCREEN", GuiTheme::getColor("background"))
 {
+    // Render the background decorations.
+    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
+
+    // Render the alert level color overlay.
+    new AlertLevelOverlay(this);
+
     // Initialize layout containers
     GuiElement* layout = new GuiElement(this, "PWR_LAYOUT");
-    layout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    layout->setAttribute("layout", "vertical");
-    layout->setAttribute("padding", string(layout_margin));
+    layout
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    layout
+        ->setAttribute("padding", string(layout_margin));
+
+    selected_system = ShipSystem::Type::None;
 
     // Status bar across top for power and coolant gauges.
     status_bar = new GuiElement(layout, "PWR_STATUS_BAR");

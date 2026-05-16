@@ -5,22 +5,22 @@
 #include "featureDefs.h"
 #include "vectorUtils.h"
 
-#include "components/radar.h"
-#include "components/target.h"
-#include "components/hull.h"
-#include "components/shields.h"
-#include "components/faction.h"
-#include "components/scanning.h"
-#include "components/name.h"
 #include "components/beamweapon.h"
 #include "components/collision.h"
 #include "components/docking.h"
+#include "components/faction.h"
+#include "components/hull.h"
+#include "components/name.h"
+#include "components/radar.h"
+#include "components/scanning.h"
+#include "components/shields.h"
+#include "components/target.h"
 
-#include "screenComponents/rotatingModelView.h"
 #include "screenComponents/alertOverlay.h"
-#include "screenComponents/frequencyCurve.h"
 // #include "screenComponents/customShipFunctions.h"
+#include "screenComponents/frequencyCurve.h"
 #include "screenComponents/globalMessage.h"
+#include "screenComponents/rotatingModelView.h"
 #include "screenComponents/signalQualityIndicator.h"
 
 #include "random.h"
@@ -35,15 +35,18 @@
 TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TARGET_ANALYSIS_SCREEN", GuiTheme::getColor("background"))
 {
-    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255}))
+    // Render the background decorations.
+    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
 
-    (new AlertLevelOverlay(this));
+    // Render the alert level color overlay.
+    new AlertLevelOverlay(this);
 
-    no_target_label = new GuiLabel(this, "NO_TARGET_LABEL", tr("No target linked"), 30.0f);
+    // Message if entity lacks a linked target.
+    no_target_label = new GuiLabel(this, "NO_TARGET_LABEL", tr("target_analysis_screen", "No target linked"), 50.0f);
     no_target_label
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
-        ->setSize(400.0f, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide();
 
     columns_container = new GuiElement(this, "");
