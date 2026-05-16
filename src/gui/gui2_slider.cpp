@@ -39,6 +39,7 @@ void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
 
 bool GuiBasicSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
+    dragging = true;
     onMouseDrag(position, id);
     return true;
 }
@@ -76,6 +77,7 @@ void GuiBasicSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiBasicSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    dragging = false;
 }
 
 GuiBasicSlider* GuiBasicSlider::setValue(float value)
@@ -167,6 +169,7 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
 
 bool GuiSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
+    dragging = true;
     onMouseDrag(position, id);
     return true;
 }
@@ -209,6 +212,7 @@ void GuiSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    dragging = false;
 }
 
 GuiSlider* GuiSlider::clearSnapValues()
