@@ -5,7 +5,6 @@
 #include "preferenceManager.h"
 
 #include "components/reactor.h"
-#include "components/shields.h"
 #include "components/target.h"
 #include "components/radar.h"
 #include "components/beamweapon.h"
@@ -19,8 +18,6 @@
 #include "screenComponents/missileTubeControls.h"
 #include "screenComponents/powerDamageIndicator.h"
 #include "screenComponents/radarView.h"
-#include "screenComponents/shieldFreqencySelect.h"
-#include "screenComponents/shieldsEnableButton.h"
 #include "screenComponents/utilityBeamControls.h"
 #include "screenComponents/utilityBeamRotationDial.h"
 
@@ -96,31 +93,6 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
         ->setTextSize(20.0f)
         ->setSize(GuiElement::GuiSizeMax, 40.0f);
 
-    front_shield_display = new GuiKeyValueDisplay(stats, "FRONT_SHIELD_DISPLAY", 0.45f, tr("shields", "Front"), "");
-    front_shield_display
-        ->setIcon("gui/icons/shields-fore")
-        ->setTextSize(20.0f)
-        ->setSize(GuiElement::GuiSizeMax, 40.0f);
-
-    rear_shield_display = new GuiKeyValueDisplay(stats, "REAR_SHIELD_DISPLAY", 0.45f, tr("shields", "Rear"), "");
-    rear_shield_display
-        ->setIcon("gui/icons/shields-aft")
-        ->setTextSize(20.0f)
-        ->setSize(GuiElement::GuiSizeMax, 40.0f);
-
-    if (gameGlobalInfo->use_beam_shield_frequencies)
-    {
-        (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))
-            ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-            ->setSize(280.0f, 100.0f);
-    }
-    else
-    {
-        (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))
-            ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-            ->setSize(280.0f, 50.0f);
-    }
-
     auto ub = my_spaceship.getComponent<UtilityBeam>();
 
     sidebar_selector = new GuiSelector(this, "MISSILE_WEAPONS_SIDEBAR_SELECTOR", [this](int index, string value)
@@ -188,25 +160,6 @@ void MissileWeaponsScreen::onDraw(sp::RenderTarget& renderer)
         energy_display->setVisible(reactor);
         if (reactor)
             energy_display->setValue(string(static_cast<int>(reactor->energy)));
-
-        auto shields = my_spaceship.getComponent<Shields>();
-        if (shields && shields->entries.size() > 0)
-        {
-            front_shield_display->setValue(string(shields->entries[0].percentage()) + "%");
-            front_shield_display->show();
-
-            if (shields->entries.size() > 1)
-            {
-                rear_shield_display->setValue(string(shields->entries[1].percentage()) + "%");
-                rear_shield_display->show();
-            }
-            else rear_shield_display->hide();
-        }
-        else
-        {
-            front_shield_display->hide();
-            rear_shield_display->hide();
-        }
 
         if (auto tg = my_spaceship.getComponent<Target>())
             targets.set(tg->entity);

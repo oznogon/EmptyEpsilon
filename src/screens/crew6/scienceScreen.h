@@ -81,6 +81,7 @@ public:
 
     GuiToggleButton* probe_view_button;
     sp::ecs::Entity observation_point;
+    sp::ecs::Entity target_entity;
     GuiListbox* view_mode_selection;
 
     ScienceScreen(GuiContainer* owner, CrewPosition crew_position=CrewPosition::scienceOfficer);

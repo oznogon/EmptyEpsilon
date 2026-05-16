@@ -26,6 +26,7 @@
 #include "random.h"
 
 #include "gui/theme.h"
+#include "gui/gui2_button.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
@@ -228,22 +229,25 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
     info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"), 30.0f);
     info_electrical_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info_electrical_signal_band->addModeButton();
 
     info_gravitational_signal_band = new GuiSignalQualityIndicator(signatures_section, "GRAVITY_SIGNAL");
     info_gravitational_signal_band
         ->showRed(false)
-        ->showBlue(false)
+        ->showGreen(false)
         ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
     info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
     info_gravitational_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info_gravitational_signal_band->addModeButton();
 
     info_thermal_signal_band = new GuiSignalQualityIndicator(signatures_section, "THERMAL_SIGNAL");
     info_thermal_signal_band
         ->showRed(false)
-        ->showGreen(false)
+        ->showBlue(false)
         ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
-    info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", "Thermal", 30.0f);
+    info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", tr("Thermal"), 30.0f);
     info_thermal_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info_thermal_signal_band->addModeButton();
 
     // Global message
     (new GuiGlobalMessage(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -274,6 +278,13 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
         info_system[n]->hide();
 
     auto target = targets.get();
+    if (target != target_entity)
+    {
+        info_electrical_signal_band->clearHistory();
+        info_gravitational_signal_band->clearHistory();
+        info_thermal_signal_band->clearHistory();
+    }
+
     if (target)
     {
         target_entity = target;
@@ -408,20 +419,35 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
             }
         }
 
-        if (scanstate >= ScanState::State::FullScan)
+        if (gameGlobalInfo->use_beam_shield_frequencies && info_shield_frequency)
         {
-            if (gameGlobalInfo->use_beam_shield_frequencies && info_shield_frequency)
+            bool fully_scanned = scanstate >= ScanState::State::FullScan;
+            info_shield_frequency->setScanned(fully_scanned);
+            info_beam_frequency->setScanned(fully_scanned);
+            if (fully_scanned)
             {
                 auto shields_system = target.getComponent<Shields>();
                 info_shield_frequency
                     ->setFrequency(shields_system ? shields_system->frequency : -1)
-                    ->setEnemyHasEquipment(shields_system);
+                    ->setEnemyHasEquipment(!!shields_system);
                 auto beam_system = target.getComponent<BeamWeaponSys>();
                 info_beam_frequency
                     ->setFrequency(beam_system ? beam_system->frequency : -1)
-                    ->setEnemyHasEquipment(beam_system);
+                    ->setEnemyHasEquipment(!!beam_system);
             }
+            else
+            {
+                info_shield_frequency
+                    ->setFrequency(-1)
+                    ->setEnemyHasEquipment(false);
+                info_beam_frequency
+                    ->setFrequency(-1)
+                    ->setEnemyHasEquipment(false);
+            }
+        }
 
+        if (scanstate >= ScanState::State::FullScan)
+        {
             for (int n = 0; n < ShipSystem::COUNT; n++)
             {
                 auto sys = ShipSystem::get(target, ShipSystem::Type(n));

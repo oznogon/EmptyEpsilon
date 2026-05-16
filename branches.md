@@ -96,3 +96,8 @@ docking-bay 20260510 -- supply drop handling
 GinjaNinja32/debug-graph 20260511
 extra-crew-screens 202060511 -- ProbeScreen mouse rotation, RadarScreen mode selector
 oz-fork-gui2_container 20260511 -- hard forking of GuiContainer API
+
+power-management-layout 20260514 -- spurious debug messages
+master 20260514 -- 2712-cap-free-overpower merged
+split-weapons-screen 20260514 -- remove shield state and controls
+extra-crew-screens 202060514 -- refactor FrequencyCurve, SignalQualityIndicator

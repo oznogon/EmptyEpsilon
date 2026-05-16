@@ -17,8 +17,6 @@ private:
 
     TargetsContainer targets;
     GuiKeyValueDisplay* energy_display;
-    GuiKeyValueDisplay* front_shield_display;
-    GuiKeyValueDisplay* rear_shield_display;
     GuiRadarView* radar;
     GuiElement* beam_info_box;
     GuiSelector* sidebar_selector;
