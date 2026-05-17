@@ -3,6 +3,7 @@
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
 #include "ecs/query.h"
+
 #include "components/collision.h"
 #include "components/docking.h"
 #include "components/probe.h"
@@ -157,7 +158,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     zoom_slider = new GuiRadarZoomSlider(this, "", MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, radar);
     zoom_slider
-        ->setPosition(20.0f, -70.0f, sp::Alignment::BottomLeft)
+        ->setPosition(20.0f, allow_comms ? -70.0f : -20.0f, sp::Alignment::BottomLeft)
         ->setSize(250.0f, 50.0f);
 
     // Option buttons for comms, waypoints, and probes.
@@ -281,7 +282,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.4f, tr("Clock") + ":", "");
     info_clock->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiAlertLevelSelect(this, ""))->setPosition(-20, -70, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
+    (new GuiAlertLevelSelect(this, ""))->setPosition(-20, allow_comms ? -70 : -20, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
 
     auto position = allow_comms ? CrewPosition::relayOfficer : CrewPosition::altRelay;
     (new GuiCustomShipFunctions(this, position, ""))

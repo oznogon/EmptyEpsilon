@@ -12,6 +12,7 @@
 #include "components/hull.h"
 #include "components/name.h"
 #include "components/radar.h"
+#include "components/analysisTarget.h"
 #include "components/scanning.h"
 #include "components/shields.h"
 #include "components/target.h"
@@ -85,6 +86,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 
     model_view = new GuiRotatingModelView(model_view_panel, "TARGET_MODEL_VIEW", target_entity);
     model_view
+        ->setFillPercentage(0.75f)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     info_callsign = new GuiLabel(model_view_panel, "INFO_CALLSIGN", "", 30.0f);
@@ -260,11 +262,12 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        if (auto tg = my_spaceship.getComponent<Target>())
-            targets.set(tg->entity);
+        if (auto at = my_spaceship.getComponent<AnalysisTarget>())
+            targets.set(at->entity);
         else
             targets.set(sp::ecs::Entity{});
     }
+    else return;
 
     info_callsign->setText("");
     info_distance->setValue("-");
@@ -279,6 +282,8 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
     info_size->setValue("-");
     for (int n = 0; n < ShipSystem::COUNT; n++)
         info_system[n]->hide();
+
+    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
 
     auto target = targets.get();
     if (target != target_entity)
@@ -327,9 +332,11 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
         auto scanstate = scanstate_component ? scanstate_component->getStateFor(my_spaceship) : ScanState::State::FullScan;
 
         string description = "";
+        bool has_description_component = false;
 
         if (auto sd = target.getComponent<ScienceDescription>())
         {
+            has_description_component = true;
             switch (scanstate)
             {
             case ScanState::State::NotScanned: description = sd->not_scanned; break;
@@ -339,7 +346,17 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
             }
         }
 
-        info_description->setText(description.empty() ? tr("No description available.") : description);
+        if (description.empty())
+        {
+            if (scanstate < ScanState::State::FullScan && has_description_component)
+                description = tr("analysis", "Description requires full scan.");
+            else
+                description = tr("No description available.");
+        }
+        info_description->setText(description);
+
+        // Hide 3D model if type isn't identified and entity is > 5U away.
+        model_view->setVisible((lrr && distance < lrr->short_range) || scanstate > ScanState::State::SimpleScan);
 
         float electrical = 0.0f;
         float gravitational = 0.0f;
@@ -348,7 +365,6 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
         if (auto info = target.getComponent<RawRadarSignatureInfo>())
         {
             float distance_variance = 0.0f;
-            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
 
             if (lrr && distance > lrr->short_range && scanstate < ScanState::State::FullScan)
                 distance_variance = (random(0.01f, (distance - lrr->short_range)) / (lrr->long_range - lrr->short_range)) * 0.1f;
@@ -449,19 +465,33 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
             }
         }
 
-        if (scanstate >= ScanState::State::FullScan)
+        for (int n = 0; n < ShipSystem::COUNT; n++)
         {
-            for (int n = 0; n < ShipSystem::COUNT; n++)
+            auto sys = ShipSystem::get(target, ShipSystem::Type(n));
+            if (scanstate < ScanState::State::FullScan)
             {
-                auto sys = ShipSystem::get(target, ShipSystem::Type(n));
-                if (sys)
-                {
-                    float health = sys->health;
-                    info_system[n]
-                        ->setValue(string(static_cast<int>(health * 100.0f)) + "%")
-                        ->setBackColor(glm::u8vec4(255, static_cast<uint8_t>(127.5f * (health + 1.0f)), static_cast<uint8_t>(127.5f * (health + 1.0f)), 255))
-                        ->show();
-                }
+                info_system[n]
+                    ->setValue(tr("analysis", "?"))
+                    ->setBackColor(glm::u8vec4{128, 128, 128, 255})
+                    ->disable()
+                    ->show();
+            }
+            else if (sys)
+            {
+                float health = sys->health;
+                info_system[n]
+                    ->setValue(string(static_cast<int>(health * 100.0f)) + "%")
+                    ->setBackColor(glm::u8vec4(255, static_cast<uint8_t>(127.5f * (health + 1.0f)), static_cast<uint8_t>(127.5f * (health + 1.0f)), 255))
+                    ->enable()
+                    ->show();
+            }
+            else
+            {
+                info_system[n]
+                    ->setValue(tr("analysis", "-"))
+                    ->setBackColor(glm::u8vec4{64, 64, 64, 255})
+                    ->disable()
+                    ->show();
             }
         }
     }

@@ -135,28 +135,32 @@ static const uint16_t CMD_SET_AI_ORDER = 0x003C;
 static const uint16_t CMD_DRONE_DOCK = 0x003D;
 static const uint16_t CMD_DRONE_UNDOCK = 0x003E;
 static const uint16_t CMD_DRONE_ABORT_DOCK = 0x003F;
+static const uint16_t CMD_PROBE_TARGET_ROTATION = 0x0040;
+
+// Science/Target analysis commands
+static const uint16_t CMD_SET_ANALYSIS_TARGET = 0x0041;
 
 // Docking bay commands
-static const uint16_t CMD_LAUNCH_INTERNAL = 0x0040;
-static const uint16_t CMD_MOVE_INTERNAL_TO_BERTH = 0x0041;
-static const uint16_t CMD_SET_BERTH_TRANSFER_DIRECTION = 0x0042;
-static const uint16_t CMD_TRANSFER_MISSILE = 0x0043;
-static const uint16_t CMD_TRANSFER_PROBE = 0x0044;
-static const uint16_t CMD_GENERATE_SUPPLY_DROP = 0x0045;
-static const uint16_t CMD_CANCEL_INTERNAL_MOVE = 0x0046;
+static const uint16_t CMD_LAUNCH_INTERNAL = 0x0042;
+static const uint16_t CMD_MOVE_INTERNAL_TO_BERTH = 0x0043;
+static const uint16_t CMD_SET_BERTH_TRANSFER_DIRECTION = 0x0044;
+static const uint16_t CMD_TRANSFER_MISSILE = 0x0045;
+static const uint16_t CMD_TRANSFER_PROBE = 0x0046;
+static const uint16_t CMD_GENERATE_SUPPLY_DROP = 0x0047;
+static const uint16_t CMD_CANCEL_INTERNAL_MOVE = 0x0048;
 
 // Utility beam commands
-static const uint16_t CMD_SET_UTILITY_BEAM = 0x0047;
-static const uint16_t CMD_SET_CUSTOM_UTILITY_BEAM_MODE = 0x0048;
-static const uint16_t CMD_SET_UTILITY_BEAM_BEARING = 0x0049;
-static const uint16_t CMD_SET_UTILITY_BEAM_ARC = 0x0050;
-static const uint16_t CMD_SET_UTILITY_BEAM_RANGE = 0x0051;
+static const uint16_t CMD_SET_UTILITY_BEAM = 0x0049;
+static const uint16_t CMD_SET_CUSTOM_UTILITY_BEAM_MODE = 0x004A;
+static const uint16_t CMD_SET_UTILITY_BEAM_BEARING = 0x004B;
+static const uint16_t CMD_SET_UTILITY_BEAM_ARC = 0x004C;
+static const uint16_t CMD_SET_UTILITY_BEAM_RANGE = 0x004D;
 
 // Waypoint commands
-static const uint16_t CMD_SET_WAYPOINT_ROUTE = 0x0052;
+static const uint16_t CMD_SET_WAYPOINT_ROUTE = 0x004E;
 
 // Probe control commands
-static const uint16_t CMD_PROBE_TARGET_ROTATION = 0x0053;
+static const uint16_t CMD_PROBE_TARGET_ROTATION = 0x004F;
 
 // Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -287,6 +291,16 @@ void PlayerInfo::commandSetTarget(sp::ecs::Entity target)
         packet << CMD_SET_TARGET << target;
     else
         packet << CMD_SET_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetAnalysisTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_ANALYSIS_TARGET << target;
+    else
+        packet << CMD_SET_ANALYSIS_TARGET << sp::ecs::Entity();
     sendClientCommand(packet);
 }
 
@@ -946,6 +960,13 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity target;
             packet >> target;
             ship.getOrAddComponent<Target>().entity = target;
+        }
+        break;
+    case CMD_SET_ANALYSIS_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            ship.getOrAddComponent<AnalysisTarget>().entity = target;
         }
         break;
     case CMD_LOAD_TUBE:
