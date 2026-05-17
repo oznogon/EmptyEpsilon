@@ -29,17 +29,29 @@
 BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "BEAM_WEAPONS_SCREEN", GuiTheme::getColor("background"))
 {
-    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
+    background_gradient
         ->setTextureThemed("background.gradient")
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
 
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
+    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255});
     background_crosses->setTextureTiledThemed("background.crosses");
 
     (new AlertLevelOverlay(this));
 
-    radar = new GuiRadarView(this, "BEAM_WEAPONS_RADAR", &targets);
+    // Message if entity lacks the DroneController component.
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("drone", "No beam weapons"), 50.0f);
+    no_weapons_label
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
+
+    beam_controls = new GuiElement(this, "");
+    beam_controls
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    radar = new GuiRadarView(beam_controls, "BEAM_WEAPONS_RADAR", &targets);
     radar
         ->setAutoRotating(PreferencesManager::get("weapons_radar_lock","0") == "1")
         ->setRangeIndicatorStepSize(1000.0f)
@@ -62,7 +74,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMatchHeight, 800.0f);
 
-    beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+    beam_info_box = new GuiElement(beam_controls, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(280.0f, 150.0f)
@@ -80,7 +92,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setPosition(0.0f, 50.0f, sp::Alignment::TopLeft);
 
-    auto stats = new GuiElement(this, "WEAPONS_STATS");
+    auto stats = new GuiElement(beam_controls, "WEAPONS_STATS");
     stats
         ->setPosition(20.0f, 100.0f, sp::Alignment::TopLeft)
         ->setSize(240.0f, 120.0f)
@@ -92,32 +104,35 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setTextSize(20.0f)
         ->setSize(240.0f, 40.0f);
 
-    auto ub = my_spaceship.getComponent<UtilityBeam>();
-
-    sidebar_selector = new GuiSelector(this, "BEAM_WEAPONS_SIDEBAR_SELECTOR", [this](int index, string value)
-    {
-        if (value == "func")
+    sidebar_selector = new GuiSelector(beam_controls, "BEAM_WEAPONS_SIDEBAR_SELECTOR",
+        [this](int index, string value)
         {
-            custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
-            utility_beam_sidebar->hide();
-            utility_beam_dial->hide();
+            if (value == "func")
+            {
+                custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+                utility_beam_sidebar->hide();
+                utility_beam_dial->hide();
+            }
+            else if (value == "util")
+            {
+                custom_function_sidebar->hide();
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
+            }
         }
-        else if (value == "util")
-        {
-            custom_function_sidebar->hide();
-            utility_beam_sidebar->show();
-            utility_beam_dial->show();
-        }
-    });
-    sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
+    );
+    sidebar_selector
+        ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
+        ->setSize(250.0f, 50.0f)
+        ->hide();
 
-    custom_function_sidebar = new GuiCustomShipFunctions(this, CrewPosition::beamWeaponsOfficer, "BEAM_WEAPONS_CUSTOM_FUNCS");
+    custom_function_sidebar = new GuiCustomShipFunctions(beam_controls, CrewPosition::beamWeaponsOfficer, "BEAM_WEAPONS_CUSTOM_FUNCS");
     custom_function_sidebar
         ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 450.0f)
         ->hide();
 
-    utility_beam_sidebar = new GuiUtilityBeamControls(this, CrewPosition::weaponsOfficer, "UTILITY_BEAM_CONTROLS");
+    utility_beam_sidebar = new GuiUtilityBeamControls(beam_controls, CrewPosition::weaponsOfficer, "UTILITY_BEAM_CONTROLS");
     utility_beam_sidebar
         ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 500.0f)
@@ -125,13 +140,17 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setAttribute("layout", "vertical");
 
     utility_beam_dial = new GuiUtilityBeamRotationDial(radar, "UTILITY_BEAM_DIAL", radar);
-    utility_beam_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    utility_beam_dial
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
 
     if (custom_function_sidebar->hasEntries())
     {
         sidebar_selector->addEntry(tr("weaponsTab", "Functions"), "func");
         sidebar_selector->show();
     }
+
+    auto ub = my_spaceship.getComponent<UtilityBeam>();
     if (ub && ub->crew_positions.has(CrewPosition::weaponsOfficer))
     {
         sidebar_selector->addEntry(tr("weaponsTab", "Utility Beam"), "util");
@@ -155,6 +174,17 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
+        auto beam_weapon_sys = my_spaceship.getComponent<BeamWeaponSys>();
+        const bool bw = beam_weapon_sys && beam_weapon_sys->mounts.size() > 0;
+        background_gradient->setVisible(bw);
+        beam_controls->setVisible(bw);
+        no_weapons_label->setVisible(!bw);
+        if (!bw)
+        {
+            GuiOverlay::onDraw(renderer);
+            return;
+        }
+
         auto reactor = my_spaceship.getComponent<Reactor>();
         energy_display->setVisible(reactor);
         if (reactor)
@@ -164,8 +194,6 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
             targets.set(tg->entity);
         else
             targets.set(sp::ecs::Entity{});
-
-        beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>());
     }
 
     GuiOverlay::onDraw(renderer);
@@ -236,8 +264,6 @@ void BeamWeaponsScreen::onUpdate()
         }
     }
 
-    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
-
     // Synchronize the Functions sidebar tab with current custom ship functions.
     bool should_have_func_tab = custom_function_sidebar->hasEntries();
     bool has_func_tab = sidebar_selector->indexByValue("func") != -1;
@@ -262,15 +288,17 @@ void BeamWeaponsScreen::onUpdate()
             }
             else
             {
-                sidebar_selector->setSelectionIndex(-1);
-                sidebar_selector->hide();
+                sidebar_selector
+                    ->setSelectionIndex(-1)
+                    ->hide();
             }
         }
-        if (sidebar_selector->entryCount() == 0)
-            sidebar_selector->hide();
+
+        if (sidebar_selector->entryCount() == 0) sidebar_selector->hide();
     }
 
     // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
+    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
     bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(CrewPosition::weaponsOfficer);
     bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
     if (should_have_util_tab && !has_util_tab)
@@ -298,7 +326,7 @@ void BeamWeaponsScreen::onUpdate()
                 sidebar_selector->hide();
             }
         }
-        if (sidebar_selector->entryCount() == 0)
-            sidebar_selector->hide();
+
+        if (sidebar_selector->entryCount() == 0) sidebar_selector->hide();
     }
 }
