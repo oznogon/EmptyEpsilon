@@ -15,6 +15,7 @@
 #include "gui/theme.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_selector.h"
+#include "gui/gui2_togglebutton.h"
 
 #include "components/collision.h"
 #include "components/radar.h"
@@ -90,10 +91,25 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
     );
     view_mode_selection
         ->setOptions(
-            {tr("scienceButton", "Long range"), tr("scienceButton", "Short range"), tr("scienceButton", "Strategic")},
-            {"Long range", "Short range", "Strategic"}
+            {tr("scienceButton", "Short range"), tr("scienceButton", "Long range"), tr("scienceButton", "Strategic")},
+            {"Short range", "Long range", "Strategic"}
         )
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
+        ->setSize(200.0f, 50.0f);
+
+    auto_rotate_button = new GuiToggleButton(this, "AUTO_ROTATE", tr("scienceButton", "Auto rotate"),
+        [this](bool value)
+        {
+            radar->setAutoRotating(value);
+            if (!value)
+            {
+                radar->setViewRotation(0.0f);
+                probe_radar->setViewRotation(0.0f);
+            }
+        }
+    );
+    auto_rotate_button
+        ->setPosition(20.0f, -80.0f, sp::Alignment::BottomLeft)
         ->setSize(200.0f, 50.0f);
 
     setRadarMode(type);
@@ -159,6 +175,7 @@ void RadarScreen::setRadarMode(string mode)
             ->disableMissileTubeIndicators()
             ->longRange()
             ->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar)
+            ->setAutoRotating(auto_rotate_button->getValue())
             ->show();
         zoom_slider
             ->setRange(mode_long, mode_short)
@@ -170,6 +187,7 @@ void RadarScreen::setRadarMode(string mode)
         probe_radar->hide();
         probe_signal_bands->hide();
         signal_bands->show();
+        auto_rotate_button->show();
     }
     else if (mode == "Short range")
     {
@@ -182,6 +200,7 @@ void RadarScreen::setRadarMode(string mode)
             ->enableMissileTubeIndicators()
             ->shortRange()
             ->setFogOfWarStyle(GuiRadarView::NoFogOfWar)
+            ->setAutoRotating(auto_rotate_button->getValue())
             ->show();
         if (mode_changed || ranges_changed)
             radar->setDistance(mode_short);
@@ -189,6 +208,7 @@ void RadarScreen::setRadarMode(string mode)
         probe_radar->hide();
         probe_signal_bands->hide();
         signal_bands->hide();
+        auto_rotate_button->show();
     }
     else if (mode == "Strategic")
     {
@@ -201,6 +221,8 @@ void RadarScreen::setRadarMode(string mode)
             ->disableMissileTubeIndicators()
             ->longRange()
             ->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar)
+            ->setAutoRotating(false)
+            ->setViewRotation(0.0f)
             ->show();
         zoom_slider
             ->setRange(mode_far, mode_short)
@@ -212,6 +234,7 @@ void RadarScreen::setRadarMode(string mode)
         probe_radar->hide();
         probe_signal_bands->hide();
         signal_bands->hide();
+        auto_rotate_button->hide();
     }
     else if (mode == "Linked probe")
     {
@@ -230,6 +253,7 @@ void RadarScreen::setRadarMode(string mode)
                     ->setViewPosition(transform->getPosition())
                     ->show();
                 probe_signal_bands->show();
+                auto_rotate_button->show();
             }
         }
         else
