@@ -25,17 +25,29 @@
 BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "BEAM_WEAPONS_SCREEN", GuiTheme::getColor("background"))
 {
-    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
+    background_gradient
         ->setTextureThemed("background.gradient")
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
 
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
+    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255});
     background_crosses->setTextureTiledThemed("background.crosses");
 
     (new AlertLevelOverlay(this));
 
-    radar = new GuiRadarView(this, "BEAM_WEAPONS_RADAR", &targets);
+    // Message if entity lacks the DroneController component.
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("drone", "No beam weapons"), 50.0f);
+    no_weapons_label
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
+
+    beam_controls = new GuiElement(this, "");
+    beam_controls
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    radar = new GuiRadarView(beam_controls, "BEAM_WEAPONS_RADAR", &targets);
     radar
         ->setAutoRotating(PreferencesManager::get("weapons_radar_lock","0") == "1")
         ->setRangeIndicatorStepSize(1000.0f)
@@ -58,7 +70,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMatchHeight, 800.0f);
 
-    beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+    beam_info_box = new GuiElement(beam_controls, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(280.0f, 150.0f)
@@ -76,7 +88,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setPosition(0.0f, 50.0f, sp::Alignment::TopLeft);
 
-    auto stats = new GuiElement(this, "WEAPONS_STATS");
+    auto stats = new GuiElement(beam_controls, "WEAPONS_STATS");
     stats
         ->setPosition(20.0f, 100.0f, sp::Alignment::TopLeft)
         ->setSize(240.0f, 120.0f)
@@ -97,6 +109,17 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
+        auto beam_weapon_sys = my_spaceship.getComponent<BeamWeaponSys>();
+        const bool bw = beam_weapon_sys && beam_weapon_sys->mounts.size() > 0;
+        background_gradient->setVisible(bw);
+        beam_controls->setVisible(bw);
+        no_weapons_label->setVisible(!bw);
+        if (!bw)
+        {
+            GuiOverlay::onDraw(renderer);
+            return;
+        }
+
         auto reactor = my_spaceship.getComponent<Reactor>();
         energy_display->setVisible(reactor);
         if (reactor)
@@ -106,8 +129,6 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
             targets.set(tg->entity);
         else
             targets.set(sp::ecs::Entity{});
-
-        beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>());
     }
 
     GuiOverlay::onDraw(renderer);
