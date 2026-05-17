@@ -91,13 +91,13 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
     );
     view_mode_selection
         ->setOptions(
-            {tr("scienceButton", "Short range"), tr("scienceButton", "Long range"), tr("scienceButton", "Strategic")},
+            {tr("radar", "Short range"), tr("radar", "Long range"), tr("radar", "Strategic")},
             {"Short range", "Long range", "Strategic"}
         )
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(200.0f, 50.0f);
 
-    auto_rotate_button = new GuiToggleButton(this, "AUTO_ROTATE", tr("scienceButton", "Auto rotate"),
+    auto_rotate_button = new GuiToggleButton(this, "AUTO_ROTATE", tr("radar", "Auto rotate"),
         [this](bool value)
         {
             radar->setAutoRotating(value);
@@ -150,7 +150,7 @@ void RadarScreen::setRadarMode(string mode)
 
     if (has_probe && !probe_entry_added)
     {
-        view_mode_selection->addEntry(tr("scienceButton", "Linked probe"), "Linked probe");
+        view_mode_selection->addEntry(tr("radar", "Linked probe"), "Linked probe");
         probe_entry_added = true;
     }
     else if (!has_probe && probe_entry_added)
