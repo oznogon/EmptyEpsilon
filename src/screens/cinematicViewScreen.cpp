@@ -248,7 +248,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
 
     (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
 
-    keyboard_help = new GuiHotkeyHelpOverlay(this, {"Cinematic View"});
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "Cinematic view")});
     keyboard_help->moveToFront();
 
     // Keybind hint label - shown when UI is hidden

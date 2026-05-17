@@ -103,7 +103,7 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
 
     new GuiIndicatorOverlays(this);
 
-    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "Top-down View")});
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "Top-down view")});
     keyboard_help->moveToFront();
 
     new GuiIndicatorOverlays(this);
