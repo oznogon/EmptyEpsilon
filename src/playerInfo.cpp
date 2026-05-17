@@ -47,6 +47,7 @@
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/shields.h"
+#include "components/analysisTarget.h"
 #include "components/target.h"
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
@@ -132,6 +133,7 @@ static const uint16_t CMD_DRONE_DOCK = 0x003D;
 static const uint16_t CMD_DRONE_UNDOCK = 0x003E;
 static const uint16_t CMD_DRONE_ABORT_DOCK = 0x003F;
 static const uint16_t CMD_PROBE_TARGET_ROTATION = 0x0040;
+static const uint16_t CMD_SET_ANALYSIS_TARGET = 0x0041;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -261,6 +263,16 @@ void PlayerInfo::commandSetTarget(sp::ecs::Entity target)
         packet << CMD_SET_TARGET << target;
     else
         packet << CMD_SET_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetAnalysisTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_ANALYSIS_TARGET << target;
+    else
+        packet << CMD_SET_ANALYSIS_TARGET << sp::ecs::Entity();
     sendClientCommand(packet);
 }
 
@@ -827,6 +839,13 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity target;
             packet >> target;
             ship.getOrAddComponent<Target>().entity = target;
+        }
+        break;
+    case CMD_SET_ANALYSIS_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            ship.getOrAddComponent<AnalysisTarget>().entity = target;
         }
         break;
     case CMD_LOAD_TUBE:

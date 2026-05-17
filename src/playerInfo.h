@@ -44,6 +44,7 @@ public:
     void commandJump(float distance);
     void commandAbortJump();
     void commandSetTarget(sp::ecs::Entity target);
+    void commandSetAnalysisTarget(sp::ecs::Entity target);
     void commandSetScienceLink(sp::ecs::Entity probe);
     void commandClearScienceLink();
     void commandProbeTargetRotation(float target);

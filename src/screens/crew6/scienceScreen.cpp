@@ -151,7 +151,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         [this]()
         {
             if (my_player_info && targets.get())
-                my_player_info->commandSetTarget(targets.get());
+                my_player_info->commandSetAnalysisTarget(targets.get());
         }
     );
     link_to_analysis_button->setSize(GuiElement::GuiSizeMax, 50.0f);
