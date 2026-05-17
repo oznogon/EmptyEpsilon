@@ -225,17 +225,18 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     (new GuiImage(coolant_remaining_bar, "COOLANT_ICON", "gui/icons/coolant"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    system_rows[int(ShipSystem::Type::Reactor)].button->setIcon("gui/icons/system_reactor");
-    system_rows[int(ShipSystem::Type::BeamWeapons)].button->setIcon("gui/icons/system_beam");
-    system_rows[int(ShipSystem::Type::MissileSystem)].button->setIcon("gui/icons/system_missile");
-    system_rows[int(ShipSystem::Type::Maneuver)].button->setIcon("gui/icons/system_maneuver");
-    system_rows[int(ShipSystem::Type::Impulse)].button->setIcon("gui/icons/system_impulse");
-    system_rows[int(ShipSystem::Type::Warp)].button->setIcon("gui/icons/system_warpdrive");
-    system_rows[int(ShipSystem::Type::JumpDrive)].button->setIcon("gui/icons/system_jumpdrive");
-    system_rows[int(ShipSystem::Type::FrontShield)].button->setIcon("gui/icons/shields-fore");
-    system_rows[int(ShipSystem::Type::RearShield)].button->setIcon("gui/icons/shields-aft");
-    system_rows[int(ShipSystem::Type::UtilityBeam)].button->setIcon("gui/icons/system_utilitybeam");
-    system_rows[int(ShipSystem::Type::DockingBay)].button->setIcon("gui/icons/docking");
+    system_rows[static_cast<int>(ShipSystem::Type::Reactor)].button->setIcon("gui/icons/system_reactor");
+    system_rows[static_cast<int>(ShipSystem::Type::BeamWeapons)].button->setIcon("gui/icons/system_beam");
+    system_rows[static_cast<int>(ShipSystem::Type::MissileSystem)].button->setIcon("gui/icons/system_missile");
+    system_rows[static_cast<int>(ShipSystem::Type::Maneuver)].button->setIcon("gui/icons/system_maneuver");
+    system_rows[static_cast<int>(ShipSystem::Type::Impulse)].button->setIcon("gui/icons/system_impulse");
+    system_rows[static_cast<int>(ShipSystem::Type::Warp)].button->setIcon("gui/icons/system_warpdrive");
+    system_rows[static_cast<int>(ShipSystem::Type::JumpDrive)].button->setIcon("gui/icons/system_jumpdrive");
+    system_rows[static_cast<int>(ShipSystem::Type::FrontShield)].button->setIcon("gui/icons/shields-fore");
+    system_rows[static_cast<int>(ShipSystem::Type::RearShield)].button->setIcon("gui/icons/shields-aft");
+    system_rows[static_cast<int>(ShipSystem::Type::UtilityBeam)].button->setIcon("gui/icons/system_utilitybeam");
+    system_rows[static_cast<int>(ShipSystem::Type::DockingBay)].button->setIcon("gui/icons/docking");
+    system_rows[static_cast<int>(ShipSystem::Type::Sensors)].button->setIcon("gui/icons/station-radar");
 
     system_effects_container = new GuiElement(system_config_container, "");
     system_effects_container
@@ -521,7 +522,10 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     }
                     break;
                 case ShipSystem::Type::DockingBay:
-                    addSystemEffect(tr("docking","Docking bay effectiveness"), toNearbyIntString(effectiveness * 100.0f) + "%");
+                    addSystemEffect(tr("docking", "Docking bay effectiveness"), toNearbyIntString(effectiveness * 100.0f) + "%");
+                    break;
+                case ShipSystem::Type::Sensors:
+                    addSystemEffect(tr("docking", "Drone control range"), toNearbyIntString(effectiveness * 100.0f) + "%");
                     break;
                 default:
                     break;
