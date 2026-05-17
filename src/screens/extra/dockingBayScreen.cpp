@@ -811,8 +811,13 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 void DockingBayScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship) return;
+
     auto bay = my_spaceship.getComponent<DockingBay>();
-    if (!bay) return;
+    if (!bay)
+    {
+        GuiOverlay::onDraw(renderer);
+        return;
+    }
 
     // Check for changes in the berths.
     bool list_changed = cached_berth_entities.size() != bay->berths.size();
@@ -865,6 +870,7 @@ void DockingBayScreen::onDraw(sp::RenderTarget& renderer)
             ->setColor(glm::u8vec4(128, 128, 128, 255))
             ->setValue(tr("dockingbay", "No reactor"));
     }
+
     GuiOverlay::onDraw(renderer);
 }
 
