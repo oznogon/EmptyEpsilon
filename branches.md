@@ -108,4 +108,5 @@ extra-crew-screens 20260515 -- refactor crew screen backgrounds
 extra-crew-screens 20260516 -- rotatable drawStretchedHV, drag checks on GuiSlider
 docking-bay 20260516 -- fix DockingBayScreen background if component is missing
 
-extra-crew-screens 20260517 -- RadarScreen autorotation, AnalysisTarget component 
+extra-crew-screens 20260517 -- RadarScreen autorotation, AnalysisTarget component
+split-weapons-screens 20260517 -- label when relevant weapon is missing
