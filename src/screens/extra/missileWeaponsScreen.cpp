@@ -25,21 +25,34 @@
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_selector.h"
+#include "gui/gui2_label.h"
 
 MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "MISSILE_WEAPONS_SCREEN", GuiTheme::getColor("background"))
 {
-    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
+    background_gradient
         ->setTextureThemed("background.gradient")
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
 
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
+    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255});
     background_crosses->setTextureTiledThemed("background.crosses");
 
     (new AlertLevelOverlay(this));
 
-    radar = new GuiRadarView(this, "MISSILE_WEAPONS_RADAR", &targets);
+    // Message if entity lacks the MissileTubes component or mounts.
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("missile_weapons", "No missile weapons"), 50.0f);
+    no_weapons_label
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
+
+    missile_controls = new GuiElement(this, "");
+    missile_controls
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    radar = new GuiRadarView(missile_controls, "MISSILE_WEAPONS_RADAR", &targets);
     radar
         ->setAutoRotating(PreferencesManager::get("weapons_radar_lock", "0") == "1")
         ->setRangeIndicatorStepSize(1000.0f)
@@ -62,7 +75,7 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMatchHeight, 800.0f);
 
-    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90.0f, 360.0f - 90.0f, 0.0f,
+    missile_aim = new AimLock(missile_controls, "MISSILE_AIM", radar, -90.0f, 360.0f - 90.0f, 0.0f,
         [this](float value)
         {
             tube_controls->setMissileTargetAngle(value);
@@ -72,16 +85,16 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMatchHeight, 850.0f);
 
-    tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
+    tube_controls = new GuiMissileTubeControls(missile_controls, "MISSILE_TUBES");
     tube_controls->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft);
     radar->enableTargetProjections(tube_controls);
 
-    lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
+    lock_aim = new AimLockButton(missile_controls, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim
         ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
         ->setSize(130.0f, 50.0f);
 
-    auto stats = new GuiElement(this, "WEAPONS_STATS");
+    auto stats = new GuiElement(missile_controls, "WEAPONS_STATS");
     stats
         ->setPosition(20.0f, 100.0f, sp::Alignment::TopLeft)
         ->setSize(240.0f, 120.0f)
@@ -156,6 +169,17 @@ void MissileWeaponsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
+        auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
+        const bool has_tubes = missile_tubes && missile_tubes->mounts.size() > 0;
+        background_gradient->setVisible(has_tubes);
+        missile_controls->setVisible(has_tubes);
+        no_weapons_label->setVisible(!has_tubes);
+        if (!has_tubes)
+        {
+            GuiOverlay::onDraw(renderer);
+            return;
+        }
+
         auto reactor = my_spaceship.getComponent<Reactor>();
         energy_display->setVisible(reactor);
         if (reactor)
@@ -166,9 +190,8 @@ void MissileWeaponsScreen::onDraw(sp::RenderTarget& renderer)
         else
             targets.set(sp::ecs::Entity{});
 
-        const bool has_tubes = my_spaceship.hasComponent<MissileTubes>();
-        lock_aim->setVisible(has_tubes);
-        missile_aim->setVisible(has_tubes && tube_controls->getManualAim());
+        lock_aim->setVisible(true);
+        missile_aim->setVisible(tube_controls->getManualAim());
     }
 
     GuiOverlay::onDraw(renderer);
