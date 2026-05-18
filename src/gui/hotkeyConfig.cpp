@@ -1448,8 +1448,8 @@ void Keys::init()
     radar_strategic.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Strategic"));
     radar_linked_probe.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Linked probe"));
 
-    // Damage control
-    damcon_toggle_detail_lines.setLabel(tr("hotkey_menu", "Damage control"), tr("hotkey_Damcon", "Toggle system detail lines"));
+    // Damage Control
+    damcon_toggle_detail_lines.setLabel(tr("hotkey_menu", "Damage Control"), tr("hotkey_Damcon", "Toggle system detail lines"));
 
     // Cinematic view
     cinematic.init();
@@ -1473,9 +1473,9 @@ void Keys::init()
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));
     spectator_show_callsigns.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
-    // Probe camera screen
-    probe_turn_left.setLabel(tr("hotkey_menu", "Probe camera"), tr("hotkey_ProbeCamera", "Turn left"));
-    probe_turn_right.setLabel(tr("hotkey_menu", "Probe camera"), tr("hotkey_ProbeCamera", "Turn right"));
+    // Probe Camera screen
+    probe_turn_left.setLabel(tr("hotkey_menu", "Probe Camera"), tr("hotkey_ProbeCamera", "Turn left"));
+    probe_turn_right.setLabel(tr("hotkey_menu", "Probe Camera"), tr("hotkey_ProbeCamera", "Turn right"));
 
     // Briefing screen
     briefing_next_page.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Next page"));
