@@ -36,6 +36,12 @@ void TargetsContainer::set(sp::ecs::Entity obj)
     waypoint_selection_set_id = 1;
 }
 
+void TargetsContainer::setEntity(sp::ecs::Entity obj)
+{
+    if (obj) entries = {obj};
+    else entries.clear();
+}
+
 void TargetsContainer::set(const std::vector<sp::ecs::Entity>& objs)
 {
     waypoint_selection_index = -1;
