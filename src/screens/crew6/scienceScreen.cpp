@@ -87,6 +87,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
                     if (scanner->delay > 0.0f) return;
 
                 targets.setToClosestTo(position, 1000.0f, TargetsContainer::Selectable);
+                if (my_spaceship && targets.get())
+                    my_player_info->commandSetScanTarget(targets.get());
+                else if (my_spaceship)
+                    my_player_info->commandSetScanTarget({});
             }, nullptr, nullptr,
             [this](float value, glm::vec2 position)
             { // wheel
@@ -116,6 +120,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
                     if (scanner->delay > 0.0f) return;
 
                 targets.setToClosestTo(position, 1000.0f, TargetsContainer::Selectable);
+                if (my_spaceship && targets.get())
+                    my_player_info->commandSetScanTarget(targets.get());
+                else if (my_spaceship)
+                    my_player_info->commandSetScanTarget({});
             }, nullptr, nullptr, nullptr
         )
         ->setPosition(120.0f, 0.0f, sp::Alignment::CenterLeft)
@@ -486,6 +494,14 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     science_radar->setVisible(lrr);
     if (!lrr) return;
+
+    // Sync local target selection with replicated scanner target so all
+    // Science and Operations clients show the same selected target.
+    if (auto scanner = my_spaceship.getComponent<ScienceScanner>())
+    {
+        if (scanner->target != targets.get())
+            targets.setEntity(scanner->target);
+    }
 
     auto rl = my_spaceship.getComponent<RadarLink>();
     float view_distance = science_radar->getDistance();
@@ -884,12 +900,12 @@ void ScienceScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
 
+    auto science_scanner = my_spaceship.getComponent<ScienceScanner>();
+    auto my_transform = my_spaceship.getComponent<sp::Transform>();
+
     // Initiate a scan on scannable objects.
-    if (keys.science_scan_object.getDown() &&
-        my_spaceship.hasComponent<ScienceScanner>() &&
-        my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
+    if (science_scanner && science_scanner->delay == 0.0f)
     {
-        auto my_transform = my_spaceship.getComponent<sp::Transform>();
         auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
 
         // Synchronize the Functions sidebar tab with current custom ship functions.
@@ -929,9 +945,7 @@ void ScienceScreen::onUpdate()
         }
 
         // Initiate a scan on scannable objects.
-        if (keys.science_scan_object.isDiscreteStepDown() &&
-            my_spaceship.hasComponent<ScienceScanner>() &&
-            my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
+        if (keys.science_scan_object.isDiscreteStepDown() && science_scanner && science_scanner->delay == 0.0f)
         {
             auto obj = targets.get();
 
@@ -950,20 +964,8 @@ void ScienceScreen::onUpdate()
             }
         }
 
-        // Cycle selection through scannable objects.
-        if ((keys.science_select_next_scannable.isDiscreteStepDown() || keys.science_select_next_scannable.isRepeatReady()) &&
-            my_spaceship.hasComponent<ScienceScanner>() &&
-            my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
-        {
-            if (my_transform)
-            {
-                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-                targets.setNext(my_transform->getPosition(), lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE, TargetsContainer::ESelectionType::Scannable);
-            }
-        }
-
         // Open radar view.
-        if (keys.science_open_radar.getDown())
+        if (keys.science_open_radar.isDiscreteStepDown())
         {
             view_mode_selection->setSelectionIndex(0);
             radar_view->show();
@@ -972,7 +974,7 @@ void ScienceScreen::onUpdate()
         }
 
         // Open database view.
-        if (keys.science_open_database.getDown())
+        if (keys.science_open_database.isDiscreteStepDown())
         {
             view_mode_selection->setSelectionIndex(1);
             radar_view->hide();
@@ -981,7 +983,7 @@ void ScienceScreen::onUpdate()
         }
 
         // Open database entry for the selected target.
-        if (keys.science_open_database_target.getDown())
+        if (keys.science_open_database_target.isDiscreteStepDown())
         {
             auto target = targets.get();
             auto scanstate_component = target.getComponent<ScanState>();
@@ -1000,39 +1002,38 @@ void ScienceScreen::onUpdate()
         }
 
         // Navigate the sidebar tab selector. (scanning, custom functions)
-        if (keys.science_sidebar_next.getDown() && sidebar_selector->isVisible())
+        if (sidebar_selector->isVisible())
         {
             const int count = sidebar_selector->entryCount();
             if (count > 0)
-                sidebar_selector->setSelectionIndex((sidebar_selector->getSelectionIndex() + 1) % count);
-        }
-        if (keys.science_sidebar_prev.getDown() && sidebar_selector->isVisible())
-        {
-            const int count = sidebar_selector->entryCount();
-            if (count > 0)
-                sidebar_selector->setSelectionIndex((sidebar_selector->getSelectionIndex() + count - 1) % count);
+            {
+                if (keys.science_sidebar_next.isDiscreteStepDown() || keys.science_sidebar_next.isRepeatReady())
+                    sidebar_selector->setSelectionIndex((sidebar_selector->getSelectionIndex() + 1) % count);
+
+                if (keys.science_sidebar_prev.isDiscreteStepDown() || keys.science_sidebar_prev.isRepeatReady())
+                    sidebar_selector->setSelectionIndex((sidebar_selector->getSelectionIndex() + count - 1) % count);
+            }
         }
 
         // Navigate the sidebar pager. (tactical, systems, description)
-        if (keys.science_sidebar_pager_next.getDown() && sidebar_pager->isVisible())
+        if (sidebar_pager->isVisible())
         {
             const int count = sidebar_pager->entryCount();
             if (count > 0)
-                sidebar_pager->setSelectionIndex((sidebar_pager->getSelectionIndex() + 1) % count);
-        }
-        if (keys.science_sidebar_pager_prev.getDown() && sidebar_pager->isVisible())
-        {
-            const int count = sidebar_pager->entryCount();
-            if (count > 0)
-                sidebar_pager->setSelectionIndex((sidebar_pager->getSelectionIndex() + count - 1) % count);
+            {
+                if (keys.science_sidebar_pager_next.isDiscreteStepDown() || keys.science_sidebar_pager_next.isRepeatReady())
+                    sidebar_pager->setSelectionIndex((sidebar_pager->getSelectionIndex() + 1) % count);
+
+                if (keys.science_sidebar_pager_prev.isDiscreteStepDown() || keys.science_sidebar_pager_prev.isRepeatReady())
+                    sidebar_pager->setSelectionIndex((sidebar_pager->getSelectionIndex() + count - 1) % count);
+            }
         }
     }
 
     // Cycle selectable entities.
-    if (auto transform = my_spaceship.getComponent<sp::Transform>())
+    if (my_transform)
     {
-        auto scanner = my_spaceship.getComponent<ScienceScanner>();
-        glm::vec2 scanner_position = transform->getPosition();
+        glm::vec2 scanner_position = my_transform->getPosition();
         float scanner_range = science_radar->getDistance();
 
         if (auto rl = my_spaceship.getComponent<RadarLink>())
@@ -1047,25 +1048,46 @@ void ScienceScreen::onUpdate()
             }
         }
 
-        // Select previous/next scannable entity.
-        if (scanner && scanner->delay == 0.0f)
+        if (science_scanner && science_scanner->delay == 0.0f)
         {
-            if (keys.science_select_next_scannable.getDown())
+            // Select previous/next scannable entity.
+            if (keys.science_select_next_scannable.isDiscreteStepDown() || keys.science_select_next_scannable.isRepeatReady())
+            {
                 targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
-            if (keys.science_select_prev_scannable.getDown())
+                if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
+            }
+
+            if (keys.science_select_prev_scannable.isDiscreteStepDown() || keys.science_select_prev_scannable.isRepeatReady())
+            {
                 targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
+                if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
+            }
+
+            // Select previous/next hostile entity.
+            if (keys.science_enemy_next_target.isDiscreteStepDown() || keys.science_enemy_next_target.isRepeatReady())
+            {
+                targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+                if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
+            }
+
+            if (keys.science_enemy_prev_target.isDiscreteStepDown() || keys.science_enemy_prev_target.isRepeatReady())
+            {
+                targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+                if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
+            }
+
+            // Select previous/next selectable entity.
+            if (keys.science_next_target.isDiscreteStepDown() || keys.science_next_target.isRepeatReady())
+            {
+                targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
+                if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
+            }
+
+            if (keys.science_prev_target.isDiscreteStepDown() || keys.science_prev_target.isRepeatReady())
+            {
+                targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
+                if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
+            }
         }
-
-        // Select previous/next hostile entity.
-        if (keys.science_enemy_next_target.getDown())
-            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
-        if (keys.science_enemy_prev_target.getDown())
-            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
-
-        // Select previous/next selectable entity.
-        if (keys.science_next_target.getDown())
-            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
-        if (keys.science_prev_target.getDown())
-            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
     }
 }

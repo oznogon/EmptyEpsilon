@@ -11,6 +11,7 @@
 #include "components/scanning.h"
 #include "components/radar.h"
 #include "components/name.h"
+#include "components/faction.h"
 
 #include "screenComponents/commsOverlay.h"
 #include "screenComponents/radarView.h"
@@ -101,6 +102,17 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                 {
                 case TargetSelection:
                     targets.setToClosestTo(position, 1000, TargetsContainer::Targetable);
+                    if (my_spaceship && targets.get())
+                    {
+                        my_player_info->commandSetCommsTarget(targets.get());
+                        if (canHack(targets.get()))
+                            my_player_info->commandSetHackingTarget(targets.get());
+                    }
+                    else if (my_spaceship)
+                    {
+                        my_player_info->commandSetCommsTarget({});
+                        my_player_info->commandSetHackingTarget({});
+                    }
                     break;
                 case WaypointPlacement:
                     if (my_spaceship) my_player_info->commandAddWaypoint(position, active_waypoint_set);
@@ -462,9 +474,25 @@ void RelayScreen::onUpdate()
 
         // Select visible targetable entities.
         if (keys.relay_next_target.getDown())
+        {
             targets.setNext(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
+            if (targets.get())
+            {
+                my_player_info->commandSetCommsTarget(targets.get());
+                if (canHack(targets.get()))
+                    my_player_info->commandSetHackingTarget(targets.get());
+            }
+        }
         if (keys.relay_prev_target.getDown())
+        {
             targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
+            if (targets.get())
+            {
+                my_player_info->commandSetCommsTarget(targets.get());
+                if (canHack(targets.get()))
+                    my_player_info->commandSetHackingTarget(targets.get());
+            }
+        }
 
         // Select visible hostile entities.
         if (keys.relay_enemy_next_target.getDown())
@@ -478,6 +506,11 @@ void RelayScreen::onUpdate()
                     return fof_known && Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy;
                 }
             );
+            if (targets.get())
+            {
+                my_player_info->commandSetCommsTarget(targets.get());
+                my_player_info->commandSetHackingTarget(targets.get());
+            }
         }
         if (keys.relay_enemy_prev_target.getDown())
         {
@@ -490,6 +523,11 @@ void RelayScreen::onUpdate()
                     return fof_known && Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy;
                 }
             );
+            if (targets.get())
+            {
+                my_player_info->commandSetCommsTarget(targets.get());
+                my_player_info->commandSetHackingTarget(targets.get());
+            }
         }
 
         // Select visible hackable entities.
@@ -501,6 +539,11 @@ void RelayScreen::onUpdate()
                     return isVisibleOnRelay(entity) && canHack(entity);
                 }
             );
+            if (targets.get())
+            {
+                my_player_info->commandSetCommsTarget(targets.get());
+                my_player_info->commandSetHackingTarget(targets.get());
+            }
         }
         if (keys.relay_prev_hackable.getDown())
         {
@@ -510,6 +553,11 @@ void RelayScreen::onUpdate()
                     return isVisibleOnRelay(entity) && canHack(entity);
                 }
             );
+            if (targets.get())
+            {
+                my_player_info->commandSetCommsTarget(targets.get());
+                my_player_info->commandSetHackingTarget(targets.get());
+            }
         }
 
         // Select player-launched probes.

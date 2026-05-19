@@ -13,6 +13,8 @@
 #include "components/maneuveringthrusters.h"
 #include "components/shields.h"
 #include "components/target.h"
+#include "components/beamWeaponTarget.h"
+#include "components/missileWeaponTarget.h"
 #include "components/radar.h"
 #include "components/beamweapon.h"
 #include "components/missiletubes.h"
@@ -68,7 +70,8 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
             auto last_target = targets.get();
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get() && (targets.get() != last_target)) {
-                my_player_info->commandSetTarget(targets.get());
+                my_player_info->commandSetBeamTarget(targets.get());
+                my_player_info->commandSetMissileTarget(targets.get());
                 drag_rotate = false;
             } else if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
@@ -207,8 +210,11 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
         lock_aim->setVisible(has_tubes);
         missile_aim->setVisible(has_tubes && tube_controls->getManualAim());
 
-        auto target = my_spaceship.getComponent<Target>();
-        targets.set(target ? target->entity : sp::ecs::Entity{});
+        sp::ecs::Entity target_entity;
+        if (auto t = my_spaceship.getComponent<BeamWeaponTarget>()) target_entity = t->entity;
+        else if (auto t = my_spaceship.getComponent<MissileWeaponTarget>()) target_entity = t->entity;
+        else if (auto t = my_spaceship.getComponent<Target>()) target_entity = t->entity;
+        targets.set(target_entity);
 
         if (utility_beam_dial->isVisible())
             missile_aim->hide();
@@ -263,7 +269,8 @@ void TacticalScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::KnownHostile
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
+            my_player_info->commandSetMissileTarget(targets.get());
         }
     }
     if (keys.weapons_enemy_prev_target.getDown())
@@ -277,7 +284,8 @@ void TacticalScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::KnownHostile
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
+            my_player_info->commandSetMissileTarget(targets.get());
         }
     }
 
@@ -293,7 +301,8 @@ void TacticalScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::NotKnownFriendly
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
+            my_player_info->commandSetMissileTarget(targets.get());
         }
     }
     if (keys.weapons_prev_target.getDown())
@@ -307,7 +316,8 @@ void TacticalScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::NotKnownFriendly
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
+            my_player_info->commandSetMissileTarget(targets.get());
         }
     }
 

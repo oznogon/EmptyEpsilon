@@ -6,6 +6,7 @@
 
 #include "components/reactor.h"
 #include "components/target.h"
+#include "components/beamWeaponTarget.h"
 #include "components/radar.h"
 #include "components/beamweapon.h"
 #include "components/collision.h"
@@ -66,9 +67,9 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
                 targets.setToClosestTo(position, 250.0f, TargetsContainer::Targetable);
 
                 if (targets.get())
-                    my_player_info->commandSetTarget(targets.get());
+                    my_player_info->commandSetBeamTarget(targets.get());
                 else
-                    my_player_info->commandSetTarget({});
+                    my_player_info->commandSetBeamTarget({});
             }, nullptr, nullptr, nullptr
         )
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
@@ -190,7 +191,9 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
         if (reactor)
             energy_display->setValue(string(static_cast<int>(reactor->energy)));
 
-        if (auto tg = my_spaceship.getComponent<Target>())
+        if (auto tg = my_spaceship.getComponent<BeamWeaponTarget>())
+            targets.set(tg->entity);
+        else if (auto tg = my_spaceship.getComponent<Target>())
             targets.set(tg->entity);
         else
             targets.set(sp::ecs::Entity{});
@@ -216,7 +219,7 @@ void BeamWeaponsScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::KnownHostile
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
         }
     }
     if (keys.weapons_enemy_prev_target.getDown())
@@ -230,7 +233,7 @@ void BeamWeaponsScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::KnownHostile
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
         }
     }
 
@@ -246,7 +249,7 @@ void BeamWeaponsScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::NotKnownFriendly
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
         }
     }
     if (keys.weapons_prev_target.getDown())
@@ -260,7 +263,7 @@ void BeamWeaponsScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::NotKnownFriendly
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
         }
     }
 

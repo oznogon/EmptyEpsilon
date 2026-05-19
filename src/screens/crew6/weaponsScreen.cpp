@@ -56,9 +56,15 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         [this](sp::io::Pointer::Button button, glm::vec2 position) { // down
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
-                my_player_info->commandSetTarget(targets.get());
+            {
+                my_player_info->commandSetBeamTarget(targets.get());
+                my_player_info->commandSetMissileTarget(targets.get());
+            }
             else if (my_spaceship)
-                my_player_info->commandSetTarget({});
+            {
+                my_player_info->commandSetBeamTarget({});
+                my_player_info->commandSetMissileTarget({});
+            }
         }, nullptr, nullptr, nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("weapons_radar_lock","0")=="1");
@@ -232,7 +238,8 @@ void WeaponsScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::KnownHostile
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
+            my_player_info->commandSetMissileTarget(targets.get());
         }
     }
     if (keys.weapons_enemy_prev_target.getDown())
@@ -246,7 +253,8 @@ void WeaponsScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::KnownHostile
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
+            my_player_info->commandSetMissileTarget(targets.get());
         }
     }
 
@@ -262,7 +270,8 @@ void WeaponsScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::NotKnownFriendly
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
+            my_player_info->commandSetMissileTarget(targets.get());
         }
     }
     if (keys.weapons_prev_target.getDown())
@@ -276,7 +285,8 @@ void WeaponsScreen::onUpdate()
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::NotKnownFriendly
             );
-            my_player_info->commandSetTarget(targets.get());
+            my_player_info->commandSetBeamTarget(targets.get());
+            my_player_info->commandSetMissileTarget(targets.get());
         }
     }
 

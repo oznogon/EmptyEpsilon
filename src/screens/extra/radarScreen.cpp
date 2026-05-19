@@ -19,6 +19,7 @@
 
 #include "components/collision.h"
 #include "components/radar.h"
+#include "components/utilityBeam.h"
 
 RadarScreen::RadarScreen(GuiContainer* owner, string type)
 : GuiOverlay(owner, "RADAR_SCREEN", GuiTheme::getColor("background")), radar_type(type)
@@ -74,7 +75,15 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
         ->setSize(250.0f, 50.0f);
 
     radar->setCallbacks(
-        nullptr, nullptr, nullptr,
+        [this](sp::io::Pointer::Button button, glm::vec2 position)
+        {
+            if (!my_spaceship) return;
+            targets.setToClosestTo(position, 1000.0f, TargetsContainer::Selectable);
+            if (targets.get() && targets.get().hasComponent<UtilityBeam>())
+                my_player_info->commandSetUtilityBeamTarget(targets.get());
+            else
+                my_player_info->commandSetUtilityBeamTarget({});
+        }, nullptr, nullptr,
         [this](float value, glm::vec2 position)
         {
             if (zoom_slider->isVisible())
