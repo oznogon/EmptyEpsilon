@@ -51,8 +51,12 @@ void GuiScanningDialog::onDraw(sp::RenderTarget& target)
 {
     updateSignal();
 
+    // Show scanning dialog only if a scan is in progress (delay > 0).
+    auto ss = my_spaceship.getComponent<ScienceScanner>();
+    bool scan_active = ss && ss->delay > 0.0f;
+
     auto [complexity, depth] = getScanComplexityDepth();
-    if (complexity > 0 && depth > 0)
+    if (complexity > 0 && depth > 0 && scan_active)
     {
         if (!box->isVisible())
         {
