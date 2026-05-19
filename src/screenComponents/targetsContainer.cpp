@@ -362,18 +362,38 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
     {
     case Selectable:
         if (entity.hasComponent<Hull>()) return true;
-        if (entity.getComponent<ScanState>()) return true;
-        if (entity.getComponent<ScienceDescription>()) return true;
-        if (entity.getComponent<ShareShortRangeRadar>()) return true;
+        if (entity.hasComponent<ScanState>()) return true;
+        if (entity.hasComponent<ScienceDescription>()) return true;
+        if (entity.hasComponent<ShareShortRangeRadar>()) return true;
         break;
     case Targetable:
         if (entity.hasComponent<Hull>()) return true;
         break;
     case Scannable:
-        if (entity.hasComponent<Hull>()) return true;
-        if (entity.getComponent<ScanState>()) return true;
-        if (entity.getComponent<ScienceDescription>()) return true;
-        if (entity.getComponent<ShareShortRangeRadar>()) return true;
+        if (auto scanstate = entity.getComponent<ScanState>())
+        {
+            switch (scanstate->getStateFor(my_spaceship))
+            {
+                case ScanState::State::FullScan:
+                    LOG(Info, "ScanState::State::FullScan");
+                    return false;
+                    break;
+                case ScanState::State::FriendOrFoeIdentified:
+                    LOG(Info, "ScanState::State::FriendOrFoeIdentified");
+                    return true;
+                    break;
+                case ScanState::State::SimpleScan:
+                    LOG(Info, "ScanState::State::SimpleScan");
+                    return true;
+                    break;
+                case ScanState::State::NotScanned:
+                    LOG(Info, "ScanState::State::NotScanned");
+                    return true;
+                    break;
+            }
+            return scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan;
+        }
+        else return false;
         break;
     }
 
