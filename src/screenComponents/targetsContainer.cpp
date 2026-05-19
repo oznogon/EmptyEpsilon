@@ -36,12 +36,6 @@ void TargetsContainer::set(sp::ecs::Entity obj)
     waypoint_selection_set_id = 1;
 }
 
-void TargetsContainer::setEntity(sp::ecs::Entity obj)
-{
-    if (obj) entries = {obj};
-    else entries.clear();
-}
-
 void TargetsContainer::set(const std::vector<sp::ecs::Entity>& objs)
 {
     waypoint_selection_index = -1;
@@ -302,8 +296,7 @@ void TargetsContainer::setNext(glm::vec2 position, const std::vector<sp::ecs::En
             return;
         }
 
-        if (get() == entity)
-            found_current = true;
+        if (get() == entity) found_current = true;
     }
 
     // Current target not in list or at end: select the first/closest entity.
@@ -377,28 +370,7 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
         break;
     case Scannable:
         if (auto scanstate = entity.getComponent<ScanState>())
-        {
-            switch (scanstate->getStateFor(my_spaceship))
-            {
-                case ScanState::State::FullScan:
-                    LOG(Info, "ScanState::State::FullScan");
-                    return false;
-                    break;
-                case ScanState::State::FriendOrFoeIdentified:
-                    LOG(Info, "ScanState::State::FriendOrFoeIdentified");
-                    return true;
-                    break;
-                case ScanState::State::SimpleScan:
-                    LOG(Info, "ScanState::State::SimpleScan");
-                    return true;
-                    break;
-                case ScanState::State::NotScanned:
-                    LOG(Info, "ScanState::State::NotScanned");
-                    return true;
-                    break;
-            }
             return scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan;
-        }
         else return false;
         break;
     }

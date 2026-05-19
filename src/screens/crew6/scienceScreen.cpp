@@ -500,7 +500,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     if (auto scanner = my_spaceship.getComponent<ScienceScanner>())
     {
         if (scanner->target != targets.get())
-            targets.setEntity(scanner->target);
+            targets.set(scanner->target);
     }
 
     auto rl = my_spaceship.getComponent<RadarLink>();

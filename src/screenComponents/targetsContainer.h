@@ -37,7 +37,6 @@ public:
     void clear();
     void add(sp::ecs::Entity obj);
     void set(sp::ecs::Entity obj);
-    void setEntity(sp::ecs::Entity obj);
     void set(const std::vector<sp::ecs::Entity>& objs);
     std::vector<sp::ecs::Entity> getTargets();
     sp::ecs::Entity get();
