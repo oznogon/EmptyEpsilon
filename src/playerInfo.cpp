@@ -37,6 +37,7 @@
 #include "components/analysisTarget.h"
 #include "components/beamweapon.h"
 #include "components/collision.h"
+#include "components/comms.h"
 #include "components/coolant.h"
 #include "components/customshipfunction.h"
 #include "components/drone.h"
@@ -59,6 +60,9 @@
 #include "components/shields.h"
 #include "components/shiplog.h"
 #include "components/target.h"
+#include "components/beamWeaponTarget.h"
+#include "components/missileWeaponTarget.h"
+#include "components/hackTarget.h"
 #include "components/utilityBeam.h"
 #include "components/warpdrive.h"
 
@@ -136,6 +140,14 @@ static const uint16_t CMD_SET_AI_ORDER = 0x003C;
 static const uint16_t CMD_DRONE_DOCK = 0x003D;
 static const uint16_t CMD_DRONE_UNDOCK = 0x003E;
 static const uint16_t CMD_DRONE_ABORT_DOCK = 0x003F;
+
+// Target commands
+static const uint16_t CMD_SET_BEAM_TARGET = 0x0050;
+static const uint16_t CMD_SET_MISSILE_TARGET = 0x0051;
+static const uint16_t CMD_SET_COMMS_TARGET = 0x0052;
+static const uint16_t CMD_SET_HACKING_TARGET = 0x0053;
+static const uint16_t CMD_SET_SCAN_TARGET = 0x0054;
+static const uint16_t CMD_SET_UTILITY_BEAM_TARGET = 0x0055;
 
 // Science/Target analysis commands
 static const uint16_t CMD_SET_ANALYSIS_TARGET = 0x0040;
@@ -301,6 +313,66 @@ void PlayerInfo::commandSetAnalysisTarget(sp::ecs::Entity target)
         packet << CMD_SET_ANALYSIS_TARGET << target;
     else
         packet << CMD_SET_ANALYSIS_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetBeamTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_BEAM_TARGET << target;
+    else
+        packet << CMD_SET_BEAM_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetMissileTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_MISSILE_TARGET << target;
+    else
+        packet << CMD_SET_MISSILE_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetCommsTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_COMMS_TARGET << target;
+    else
+        packet << CMD_SET_COMMS_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetHackingTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_HACKING_TARGET << target;
+    else
+        packet << CMD_SET_HACKING_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetScanTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_SCAN_TARGET << target;
+    else
+        packet << CMD_SET_SCAN_TARGET << sp::ecs::Entity();
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetUtilityBeamTarget(sp::ecs::Entity target)
+{
+    sp::io::DataBuffer packet;
+    if (target)
+        packet << CMD_SET_UTILITY_BEAM_TARGET << target;
+    else
+        packet << CMD_SET_UTILITY_BEAM_TARGET << sp::ecs::Entity();
     sendClientCommand(packet);
 }
 
@@ -960,6 +1032,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity target;
             packet >> target;
             ship.getOrAddComponent<Target>().entity = target;
+            ship.getOrAddComponent<BeamWeaponTarget>().entity = target;
+            ship.getOrAddComponent<MissileWeaponTarget>().entity = target;
         }
         break;
     case CMD_SET_ANALYSIS_TARGET:
@@ -967,6 +1041,50 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity target;
             packet >> target;
             ship.getOrAddComponent<AnalysisTarget>().entity = target;
+        }
+        break;
+    case CMD_SET_BEAM_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            ship.getOrAddComponent<BeamWeaponTarget>().entity = target;
+        }
+        break;
+    case CMD_SET_MISSILE_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            ship.getOrAddComponent<MissileWeaponTarget>().entity = target;
+        }
+        break;
+    case CMD_SET_COMMS_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            ship.getOrAddComponent<CommsTransmitter>().target = target;
+        }
+        break;
+    case CMD_SET_HACKING_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            ship.getOrAddComponent<HackTarget>().entity = target;
+        }
+        break;
+    case CMD_SET_SCAN_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            if (auto scanner = ship.getComponent<ScienceScanner>())
+                scanner->target = target;
+        }
+        break;
+    case CMD_SET_UTILITY_BEAM_TARGET:
+        {
+            sp::ecs::Entity target;
+            packet >> target;
+            if (auto ub = ship.getComponent<UtilityBeam>())
+                ub->effect_target_entity = target;
         }
         break;
     case CMD_LOAD_TUBE:
@@ -999,7 +1117,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             auto missiletubes = ship.getComponent<MissileTubes>();
             if (missiletubes && tube_nr < missiletubes->mounts.size()) {
                 sp::ecs::Entity target;
-                if (auto t = ship.getComponent<Target>())
+                if (auto mt = ship.getComponent<MissileWeaponTarget>())
+                    target = mt->entity;
+                else if (auto t = ship.getComponent<Target>())
                     target = t->entity;
                 MissileSystem::fire(ship, missiletubes->mounts[tube_nr], missile_target_angle, target);
             }

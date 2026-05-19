@@ -45,6 +45,12 @@ public:
     void commandAbortJump();
     void commandSetTarget(sp::ecs::Entity target);
     void commandSetAnalysisTarget(sp::ecs::Entity target);
+    void commandSetBeamTarget(sp::ecs::Entity target);
+    void commandSetMissileTarget(sp::ecs::Entity target);
+    void commandSetCommsTarget(sp::ecs::Entity target);
+    void commandSetHackingTarget(sp::ecs::Entity target);
+    void commandSetScanTarget(sp::ecs::Entity target);
+    void commandSetUtilityBeamTarget(sp::ecs::Entity target);
     void commandSetScienceLink(sp::ecs::Entity probe);
     void commandClearScienceLink();
     void commandProbeTargetRotation(float target);
