@@ -515,6 +515,14 @@ set(MAIN_SOURCES
     src/multiplayer/hull.cpp
     src/multiplayer/target.h
     src/multiplayer/target.cpp
+    src/multiplayer/beamWeaponTarget.h
+    src/multiplayer/beamWeaponTarget.cpp
+    src/multiplayer/missileWeaponTarget.h
+    src/multiplayer/missileWeaponTarget.cpp
+    src/multiplayer/hackTarget.h
+    src/multiplayer/hackTarget.cpp
+    src/multiplayer/analysisTarget.h
+    src/multiplayer/analysisTarget.cpp
     src/multiplayer/database.h
     src/multiplayer/database.cpp
     src/multiplayer/maneuveringthrusters.h

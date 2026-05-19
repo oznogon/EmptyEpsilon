@@ -25,6 +25,10 @@
 #include "multiplayer/database.h"
 #include "multiplayer/maneuveringthrusters.h"
 #include "multiplayer/target.h"
+#include "multiplayer/beamWeaponTarget.h"
+#include "multiplayer/missileWeaponTarget.h"
+#include "multiplayer/hackTarget.h"
+#include "multiplayer/analysisTarget.h"
 #include "multiplayer/jumpdrive.h"
 #include "multiplayer/hacking.h"
 #include "multiplayer/customshipfunction.h"
@@ -143,6 +147,10 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<BriefingReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<SpinReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<TargetReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<BeamWeaponTargetReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<MissileWeaponTargetReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<HackTargetReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<AnalysisTargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpDriveReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpJammerReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ZoneReplication>();
