@@ -211,7 +211,7 @@ void MissileWeaponsScreen::onUpdate()
         if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            targets.setNext(
+            targets.setNextTarget(
                 transform->getPosition(),
                 lrr ? lrr->short_range : 5000.0f,
                 TargetsContainer::ESelectionType::Targetable,
@@ -225,7 +225,7 @@ void MissileWeaponsScreen::onUpdate()
         if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            targets.setPrev(
+            targets.setPrevTarget(
                 transform->getPosition(),
                 lrr ? lrr->short_range : 5000.0f,
                 TargetsContainer::ESelectionType::Targetable,
@@ -241,7 +241,7 @@ void MissileWeaponsScreen::onUpdate()
         if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            targets.setNext(
+            targets.setNextTarget(
                 transform->getPosition(),
                 lrr ? lrr->short_range : 5000.0f,
                 TargetsContainer::ESelectionType::Targetable,
@@ -255,7 +255,7 @@ void MissileWeaponsScreen::onUpdate()
         if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            targets.setPrev(
+            targets.setPrevTarget(
                 transform->getPosition(),
                 lrr ? lrr->short_range : 5000.0f,
                 TargetsContainer::ESelectionType::Targetable,

@@ -1,11 +1,13 @@
 #include "targetsContainer.h"
 #include "playerInfo.h"
+#include "ecs/query.h"
+
 #include "systems/collision.h"
+
 #include "components/hull.h"
 #include "components/collision.h"
 #include "components/scanning.h"
 #include "components/radar.h"
-#include "ecs/query.h"
 
 TargetsContainer::TargetsContainer()
 {
@@ -248,27 +250,53 @@ bool TargetsContainer::isFoFKnown(sp::ecs::Entity entity)
     return ss->getStateFor(my_spaceship) >= ScanState::State::FriendOrFoeIdentified;
 }
 
-void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof)
+void TargetsContainer::setNextTarget(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof)
 {
-    setNext(position, populateEntities(position, max_range, selection_type, known_fof));
+    setNextTarget(position, populateEntities(position, max_range, selection_type, known_fof), selection_type);
 }
 
-void TargetsContainer::setPrev(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof)
+void TargetsContainer::setPrevTarget(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof)
 {
-    setPrev(position, populateEntities(position, max_range, selection_type, known_fof));
+    setPrevTarget(position, populateEntities(position, max_range, selection_type, known_fof), selection_type);
 }
 
-void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter)
+void TargetsContainer::setNextTarget(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter)
 {
-    setNext(position, populateEntities(position, max_range, selection_type, filter));
+    setNextTarget(position, populateEntities(position, max_range, selection_type, filter), selection_type);
 }
 
-void TargetsContainer::setPrev(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter)
+void TargetsContainer::setPrevTarget(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter)
 {
-    setPrev(position, populateEntities(position, max_range, selection_type, filter));
+    setPrevTarget(position, populateEntities(position, max_range, selection_type, filter), selection_type);
 }
 
-void TargetsContainer::setNext(glm::vec2 position, const std::vector<sp::ecs::Entity>& entities)
+void TargetsContainer::setTarget(ESelectionType selection_type)
+{
+    switch (selection_type)
+    {
+        case ESelectionType::Selectable:
+        case ESelectionType::Targetable:
+            my_player_info->commandSetTarget(get());
+            break;
+        case ESelectionType::Scannable:
+            my_player_info->commandSetScanTarget(get());
+            break;
+        case ESelectionType::Hackable:
+            my_player_info->commandSetHackingTarget(get());
+            break;
+        case ESelectionType::Analyzable:
+            my_player_info->commandSetAnalysisTarget(get());
+            break;
+        case ESelectionType::Communicable:
+            my_player_info->commandSetCommsTarget(get());
+            break;
+        case ESelectionType::UtilityBeam:
+            my_player_info->commandSetUtilityBeamTarget(get());
+            break;
+    }
+}
+
+void TargetsContainer::setNextTarget(glm::vec2 position, const std::vector<sp::ecs::Entity>& entities, ESelectionType selection_type)
 {
     // Find the first valid entity (closest in the distance-sorted list) for
     // wrap-around.
@@ -292,7 +320,7 @@ void TargetsContainer::setNext(glm::vec2 position, const std::vector<sp::ecs::En
         if (found_current)
         {
             set(entity);
-            my_player_info->commandSetTarget(get());
+            setTarget(selection_type);
             return;
         }
 
@@ -301,10 +329,10 @@ void TargetsContainer::setNext(glm::vec2 position, const std::vector<sp::ecs::En
 
     // Current target not in list or at end: select the first/closest entity.
     set(first_valid);
-    my_player_info->commandSetTarget(get());
+    setTarget(selection_type);
 }
 
-void TargetsContainer::setPrev(glm::vec2 position, const std::vector<sp::ecs::Entity>& entities)
+void TargetsContainer::setPrevTarget(glm::vec2 position, const std::vector<sp::ecs::Entity>& entities, ESelectionType selection_type)
 {
     // Find the last valid entity (furthest in the distance-sorted list) for
     // wrap-around.
@@ -327,7 +355,7 @@ void TargetsContainer::setPrev(glm::vec2 position, const std::vector<sp::ecs::En
         if (get() == entity)
         {
             set(prev_entity ? prev_entity : last_valid);
-            my_player_info->commandSetTarget(get());
+            setTarget(selection_type);
             return;
         }
         prev_entity = entity;
@@ -335,7 +363,7 @@ void TargetsContainer::setPrev(glm::vec2 position, const std::vector<sp::ecs::En
 
     // Current target not in list: select the furthest entity.
     set(last_valid);
-    my_player_info->commandSetTarget(get());
+    setTarget(selection_type);
 }
 
 void TargetsContainer::sortByDistance(glm::vec2 position, std::vector<sp::ecs::Entity>& entities)
@@ -359,6 +387,9 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
 
     switch (selection_type)
     {
+    // TODO: Hackable, Communicable
+    case Hackable:
+    case Communicable:
     case Selectable:
         if (entity.hasComponent<Hull>()) return true;
         if (entity.hasComponent<ScanState>()) return true;
@@ -366,12 +397,16 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
         if (entity.hasComponent<ShareShortRangeRadar>()) return true;
         break;
     case Targetable:
+    case Analyzable:
         if (entity.hasComponent<Hull>()) return true;
         break;
     case Scannable:
         if (auto scanstate = entity.getComponent<ScanState>())
             return scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan;
         else return false;
+        break;
+    case UtilityBeam:
+        return true;
         break;
     }
 

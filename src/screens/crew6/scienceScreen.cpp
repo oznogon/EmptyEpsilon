@@ -1053,39 +1053,39 @@ void ScienceScreen::onUpdate()
             // Select previous/next scannable entity.
             if (keys.science_select_next_scannable.isDiscreteStepDown() || keys.science_select_next_scannable.isRepeatReady())
             {
-                targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
+                targets.setNextTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
 
             if (keys.science_select_prev_scannable.isDiscreteStepDown() || keys.science_select_prev_scannable.isRepeatReady())
             {
-                targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
+                targets.setPrevTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
 
             // Select previous/next hostile entity.
             if (keys.science_enemy_next_target.isDiscreteStepDown() || keys.science_enemy_next_target.isRepeatReady())
             {
-                targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+                targets.setNextTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
 
             if (keys.science_enemy_prev_target.isDiscreteStepDown() || keys.science_enemy_prev_target.isRepeatReady())
             {
-                targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+                targets.setPrevTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
 
             // Select previous/next selectable entity.
             if (keys.science_next_target.isDiscreteStepDown() || keys.science_next_target.isRepeatReady())
             {
-                targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
+                targets.setNextTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
 
             if (keys.science_prev_target.isDiscreteStepDown() || keys.science_prev_target.isRepeatReady())
             {
-                targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
+                targets.setPrevTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
         }

@@ -475,7 +475,7 @@ void RelayScreen::onUpdate()
         // Select visible targetable entities.
         if (keys.relay_next_target.getDown())
         {
-            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
+            targets.setNextTarget(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
             if (targets.get())
             {
                 my_player_info->commandSetCommsTarget(targets.get());
@@ -485,7 +485,7 @@ void RelayScreen::onUpdate()
         }
         if (keys.relay_prev_target.getDown())
         {
-            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
+            targets.setPrevTarget(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
             if (targets.get())
             {
                 my_player_info->commandSetCommsTarget(targets.get());
@@ -497,7 +497,7 @@ void RelayScreen::onUpdate()
         // Select visible hostile entities.
         if (keys.relay_enemy_next_target.getDown())
         {
-            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Targetable,
+            targets.setNextTarget(transform->getPosition(), view_range, TargetsContainer::Targetable,
                 [](sp::ecs::Entity entity)
                 {
                     if (!isVisibleOnRelay(entity)) return false;
@@ -514,7 +514,7 @@ void RelayScreen::onUpdate()
         }
         if (keys.relay_enemy_prev_target.getDown())
         {
-            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Targetable,
+            targets.setPrevTarget(transform->getPosition(), view_range, TargetsContainer::Targetable,
                 [](sp::ecs::Entity entity)
                 {
                     if (!isVisibleOnRelay(entity)) return false;
@@ -533,7 +533,7 @@ void RelayScreen::onUpdate()
         // Select visible hackable entities.
         if (keys.relay_next_hackable.getDown())
         {
-            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Targetable,
+            targets.setNextTarget(transform->getPosition(), view_range, TargetsContainer::Targetable,
                 [](sp::ecs::Entity entity)
                 {
                     return isVisibleOnRelay(entity) && canHack(entity);
@@ -547,7 +547,7 @@ void RelayScreen::onUpdate()
         }
         if (keys.relay_prev_hackable.getDown())
         {
-            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Targetable,
+            targets.setPrevTarget(transform->getPosition(), view_range, TargetsContainer::Targetable,
                 [](sp::ecs::Entity entity)
                 {
                     return isVisibleOnRelay(entity) && canHack(entity);
@@ -563,7 +563,7 @@ void RelayScreen::onUpdate()
         // Select player-launched probes.
         if (keys.relay_next_probe.getDown())
         {
-            targets.setNext(transform->getPosition(), view_range, TargetsContainer::Selectable,
+            targets.setNextTarget(transform->getPosition(), view_range, TargetsContainer::Selectable,
                 [](sp::ecs::Entity entity)
                 {
                     auto arl = entity.getComponent<AllowRadarLink>();
@@ -573,7 +573,7 @@ void RelayScreen::onUpdate()
         }
         if (keys.relay_prev_probe.getDown())
         {
-            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::Selectable,
+            targets.setPrevTarget(transform->getPosition(), view_range, TargetsContainer::Selectable,
                 [](sp::ecs::Entity entity)
                 {
                     auto arl = entity.getComponent<AllowRadarLink>();
