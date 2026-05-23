@@ -406,7 +406,21 @@ function __fillDefaultDatabaseData()
                         string.format(_("database", "%.1f sec."), data.load_time)
                     )
                 end
-                print(ship_template.missile_tubes)
+
+                -- TODO: Localize and centralize MISSILE_TYPES
+                local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
+                for i, missile_type in ipairs(MISSILE_TYPES) do
+                    local missile_type_lower = string.lower(missile_type)
+                    if ship_template.missile_tubes["max_" .. missile_type_lower] then
+                        local capacity = ship_template.missile_tubes["max_" .. missile_type_lower]
+                        if capacity > 0 then
+                            entry:addKeyValue(
+                                string.format(_("database", "%s capacity"), missile_type),
+                                capacity
+                            )
+                        end
+                    end
+                end
             end
 
             if ship_template.__description then
