@@ -3,8 +3,9 @@
 #include "gui/gui2_element.h"
 #include "ecs/entity.h"
 
-class GuiListbox;
 class GuiButton;
+class GuiListbox;
+class GuiScrollContainer;
 
 class DatabaseViewComponent : public GuiElement
 {
@@ -26,7 +27,7 @@ private:
     GuiElement* navigation_element = nullptr;
     GuiButton* back_button = nullptr;
     GuiListbox* item_list = nullptr;
-    GuiElement* keyvalue_container = nullptr;
+    GuiScrollContainer* keyvalue_container = nullptr;
     GuiElement* details_container = nullptr;
 
     static constexpr int navigation_width = 400;

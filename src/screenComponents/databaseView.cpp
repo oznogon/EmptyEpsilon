@@ -1,17 +1,19 @@
-#include <i18n.h>
 #include "databaseView.h"
-#include "components/database.h"
-#include "components/rendering.h"
+#include <i18n.h>
 #include "ecs/query.h"
 #include "playerInfo.h"
 
-#include "gui/gui2_listbox.h"
+#include "gui/gui2_button.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_scrollcontainer.h"
 #include "gui/gui2_scrolltext.h"
-#include "gui/gui2_button.h"
 
 #include "screenComponents/rotatingModelView.h"
+
+#include "components/database.h"
+#include "components/rendering.h"
 
 DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
 : GuiElement(owner, "DATABASE_VIEW")
@@ -170,7 +172,7 @@ void DatabaseViewComponent::display()
     if (keyvalue_container) keyvalue_container->destroy();
     if (details_container) details_container->destroy();
 
-    keyvalue_container = new GuiElement(this, "DB_KV_CONTAINER");
+    keyvalue_container = new GuiScrollContainer(this, "DB_KV_CONTAINER");
     keyvalue_container
         ->setSize(400.0f, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
