@@ -19,7 +19,7 @@
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_panel.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/joystickConfig.h"
 
 #include <i18n.h>

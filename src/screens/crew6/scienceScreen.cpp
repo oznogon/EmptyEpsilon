@@ -40,7 +40,7 @@
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_scrollcontainer.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_image.h"

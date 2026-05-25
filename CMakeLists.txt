@@ -160,9 +160,9 @@ set(GUI_LIB_SOURCES
     src/gui/gui2_entrylist.cpp
     src/gui/gui2_progressbar.cpp
     src/gui/gui2_progressslider.cpp
-    src/gui/gui2_scrolltext.cpp
     src/gui/gui2_scrollcontainer.cpp
     src/gui/gui2_advancedscrolltext.cpp
+    src/gui/gui2_scrolltextcontainer.cpp
     src/gui/gui2_button.cpp
     src/gui/gui2_resizabledialog.cpp
     src/gui/debugRenderer.cpp
@@ -200,7 +200,7 @@ set(GUI_LIB_SOURCES
     src/gui/gui2_rotationdial.h
     src/gui/gui2_scrollbar.h
     src/gui/gui2_scrollcontainer.h
-    src/gui/gui2_scrolltext.h
+    src/gui/gui2_scrolltextcontainer.h
     src/gui/gui2_selector.h
     src/gui/gui2_slider.h
     src/gui/gui2_textentry.h

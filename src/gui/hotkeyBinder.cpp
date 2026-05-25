@@ -6,7 +6,7 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_panel.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
@@ -395,7 +395,7 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
         ->setTextSize(30.0f)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    legend_text = new GuiScrollText(content, id + "_LEGEND",
+    legend_text = new GuiScrollFormattedText(content, id + "_LEGEND",
         tr("hotkey_menu",
             "Discrete: Acts only once when pressed. (Buttons, encoders, switches)\n\n"
             "Continuous: Acts every frame for as long as it's held down. (Steering using buttons, smooth sliders)\n\n"

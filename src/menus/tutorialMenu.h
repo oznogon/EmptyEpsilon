@@ -7,7 +7,7 @@
 class GuiElement;
 class GuiSlider;
 class GuiLabel;
-class GuiScrollText;
+class GuiScrollFormattedText;
 class GuiButton;
 
 class TutorialMenu : public GuiCanvas, public Updatable
@@ -16,7 +16,7 @@ class TutorialMenu : public GuiCanvas, public Updatable
 
     GuiElement* container;
     GuiElement* bottom_row;
-    GuiScrollText* tutorial_description;
+    GuiScrollFormattedText* tutorial_description;
     GuiButton* start_tutorial_button;
 
 private:

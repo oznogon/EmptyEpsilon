@@ -11,7 +11,7 @@
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_panel.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/theme.h"
 #include "scenarioInfo.h"
 #include "main.h"

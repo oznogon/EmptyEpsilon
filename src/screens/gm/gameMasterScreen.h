@@ -1,7 +1,7 @@
 #pragma once
 
 #include "engine.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
@@ -62,7 +62,7 @@ private:
     GuiSelector* player_ship_selector;
 
     GuiPanel* message_frame;
-    GuiScrollText* message_text;
+    GuiScrollFormattedText* message_text;
     GuiButton* message_close_button;
 
     GuiHotkeyHelpOverlay* keyboard_help;

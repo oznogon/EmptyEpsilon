@@ -14,7 +14,7 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_panel.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_togglebutton.h"
@@ -95,7 +95,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     rebinding_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setAttribute("layout", "horizontal");
 
     // Info text for non-dialog mode
-    (new GuiScrollText(info_container, "INFO_LABEL",
+    (new GuiScrollFormattedText(info_container, "INFO_LABEL",
         tr("Left click: Assign input. Middle click: Add input. Right click: Remove last input.\nPossible inputs: Keyboard keys, joystick buttons and axes, mouse buttons and axes.")
     ))
         ->setTextSize(20.0f)
@@ -105,7 +105,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     // Bottom: Menu navigation
 
     // Back button to return to the Options menu
-    (new GuiScrollText(info_container, "INFO_LABEL", tr("Left click: Assign input. Middle click: Add input. Right click: Delete inputs.\nPossible inputs: Keyboard keys, joystick buttons, joystick axes, mouse axes.")))
+    (new GuiScrollFormattedText(info_container, "INFO_LABEL", tr("Left click: Assign input. Middle click: Add input. Right click: Delete inputs.\nPossible inputs: Keyboard keys, joystick buttons, joystick axes, mouse axes.")))
         ->setPosition(10.0f, 0.0f, sp::Alignment::TopCenter)
         ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 3.0f);
     (new GuiButton(bottom_row, "BACK", tr("button", "Back"),

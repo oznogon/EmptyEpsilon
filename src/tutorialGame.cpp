@@ -21,7 +21,7 @@
 
 #include "gui/theme.h"
 #include "gui/gui2_panel.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_button.h"
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
@@ -87,7 +87,7 @@ void TutorialGame::createScreens()
     frame = new GuiPanel(this, "");
     frame->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(900, 230)->hide();
 
-    text = new GuiScrollText(frame, "", "");
+    text = new GuiScrollFormattedText(frame, "", "");
     text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
     next_button = new GuiButton(frame, "", tr("Next"), [this]() {
         LuaConsole::checkResult(_onNext.call<void>());

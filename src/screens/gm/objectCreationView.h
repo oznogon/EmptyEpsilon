@@ -7,7 +7,7 @@
 class GuiSelector;
 class GuiListbox;
 class GuiContainer;
-class GuiScrollText;
+class GuiScrollFormattedText;
 
 class GuiObjectCreationView : public GuiOverlay
 {
@@ -15,7 +15,7 @@ private:
     GuiSelector* faction_selector = nullptr;
     GuiListbox* category_selector = nullptr;
     GuiListbox* object_list = nullptr;
-    GuiScrollText* description = nullptr;
+    GuiScrollFormattedText* description = nullptr;
     std::vector<GameGlobalInfo::ObjectSpawnInfo> spawn_list;
     int last_selection_index = -1;
 public:

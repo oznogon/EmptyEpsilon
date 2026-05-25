@@ -10,7 +10,7 @@ class GuiListbox;
 class GuiButton;
 class GuiToggleButton;
 class GuiProgressbar;
-class GuiScrollText;
+class GuiScrollFormattedText;
 class MiniGame;
 
 class GuiHackingDialog : public GuiOverlay
@@ -39,7 +39,7 @@ private:
     std::shared_ptr<MiniGame> game;
     GuiPanel* target_selection_box;
     GuiListbox* target_list;
-    GuiScrollText* target_help;
+    GuiScrollFormattedText* target_help;
 
     void getNewGame();
 };

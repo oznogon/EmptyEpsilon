@@ -16,7 +16,7 @@ class GuiRadarView;
 class GuiRadarZoomSlider;
 class GuiScanTargetButton;
 class GuiScrollContainer;
-class GuiScrollText;
+class GuiScrollFormattedText;
 class GuiSelector;
 class GuiSignalQualityIndicator;
 class GuiToggleButton;
@@ -64,7 +64,7 @@ public:
     GuiButton* info_type_button;
     GuiKeyValueDisplay* info_shields;
     GuiKeyValueDisplay* info_hull;
-    GuiScrollText* info_description;
+    GuiScrollFormattedText* info_description;
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];

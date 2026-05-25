@@ -9,7 +9,7 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_listbox.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_textentry.h"
 #include "menus/luaConsole.h"
 #include <unordered_set>
@@ -161,7 +161,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     }
 
     // Display description.
-    description = new GuiScrollText(col3, "DESCRIPTION", "");
+    description = new GuiScrollFormattedText(col3, "DESCRIPTION", "");
     description->setAttribute("stretch", "true");
 
     (new GuiButton(col1, "CLOSE_BUTTON", tr("button", "Cancel"), [this]() {

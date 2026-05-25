@@ -7,7 +7,7 @@
 class GuiButton;
 class GuiListbox;
 class GuiScrollContainer;
-class GuiScrollText;
+class GuiScrollFormattedText;
 class GuiTextEntry;
 
 // A GuiElement containing controls to modify an entity's component's
@@ -84,7 +84,7 @@ private:
     // List of components, populated by the group or search results.
     GuiListbox* component_list;
     // A text area to display the component's description.
-    GuiScrollText* component_description;
+    GuiScrollFormattedText* component_description;
     // Tweak page indices that match the search result.
     std::vector<int> search_result_indices;
     // Flags for view modes.

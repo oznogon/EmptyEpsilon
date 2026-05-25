@@ -10,14 +10,14 @@
 
 #include "gui/gui2_button.h"
 #include "gui/gui2_textentry.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 
 GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* radar, sp::ecs::Entity player)
 : GuiResizableDialog(owner, "GM_CHAT_DIALOG", ""), player(player)
 {
     this->radar = radar;
 
-    chat_text = new GuiScrollText(contents, "GM_CHAT_TEXT", "");
+    chat_text = new GuiScrollFormattedText(contents, "GM_CHAT_TEXT", "");
     chat_text->enableAutoScrollDown()->setScrollbarWidth(25)->setTextSize(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     text_entry = new GuiTextEntry(contents, "GM_CHAT_ENTRY", "");

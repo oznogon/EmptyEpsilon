@@ -18,7 +18,7 @@
 #include "gui/gui2_image.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_progressbar.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_slider.h"
 
 static int playBriefingAudio(const string& filename)

@@ -7,7 +7,7 @@ class GuiProgressbar;
 class GuiButton;
 class GuiToggleButton;
 class GuiLabel;
-class GuiScrollText;
+class GuiScrollFormattedText;
 class GuiListbox;
 class GuiTextEntry;
 
@@ -31,7 +31,7 @@ private:
 
     GuiPanel* comms_dialog_box;
     GuiLabel* comms_dialog_title_label;
-    GuiScrollText* comms_dialog_text;
+    GuiScrollFormattedText* comms_dialog_text;
     GuiTextEntry* chat_comms_message_entry;
     GuiButton* chat_comms_send_button;
     GuiListbox* script_comms_options;

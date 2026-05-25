@@ -6,7 +6,7 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_panel.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 
 
 GuiHelpOverlay::GuiHelpOverlay(GuiContainer* owner, string help_title, string help_text, string help_footer)

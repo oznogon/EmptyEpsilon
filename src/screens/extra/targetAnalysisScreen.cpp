@@ -31,7 +31,7 @@
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 
 TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TARGET_ANALYSIS_SCREEN", GuiTheme::getColor("background"))

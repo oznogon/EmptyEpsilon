@@ -5,7 +5,7 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_panel.h"
 
-class GuiScrollText;
+class GuiScrollFormattedText;
 class GuiLabel;
 class GuiListbox;
 class GuiOverlay;
@@ -29,13 +29,13 @@ private:
     GuiPanel* left_panel;
     GuiPanel* left_panel_2;
     GuiLabel* left_panel_2_label;
-    GuiScrollText* left_panel_2_text;
+    GuiScrollFormattedText* left_panel_2_text;
     GuiElement* right_container;
     GuiElement* right_column;
     GuiPanel* right_panel;
     GuiPanel* right_panel_2;
     GuiLabel* right_panel_2_label;
-    GuiScrollText* right_panel_2_text;
+    GuiScrollFormattedText* right_panel_2_text;
 
     GuiElement* ship_action_row;
     GuiSelector* ship_template_selector;
@@ -75,7 +75,7 @@ private:
     GuiToggleButton* window_button;
     GuiTextEntry* window_angle;
     GuiLabel* window_angle_label;
-    GuiScrollText* station_players;
+    GuiScrollFormattedText* station_players;
 };
 
 class SecondMonitorScreen : public GuiCanvas, public Updatable

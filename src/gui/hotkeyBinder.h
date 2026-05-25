@@ -9,7 +9,7 @@ class GuiLabel;
 class GuiToggleButton;
 class GuiOverlay;
 class GuiPanel;
-class GuiScrollText;
+class GuiScrollFormattedText;
 class GuiSelector;
 class GuiThemeStyle;
 
@@ -67,7 +67,7 @@ private:
     GuiButton* mouse_panel_btn;
     GuiElement* interaction_row;
     GuiSelector* interaction_selector;
-    GuiScrollText* legend_text;
+    GuiScrollFormattedText* legend_text;
     GuiButton* replace_btn;
     GuiButton* add_btn;
     GuiToggleButton* invert_btn;

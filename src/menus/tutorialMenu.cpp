@@ -14,7 +14,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_panel.h"
 
 TutorialMenu::TutorialMenu()

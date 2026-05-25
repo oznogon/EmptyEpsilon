@@ -4,7 +4,7 @@
 #include "gui/gui2_canvas.h"
 #include "Updatable.h"
 
-class GuiScrollText;
+class GuiScrollFormattedText;
 class GuiSelector;
 class GuiTextEntry;
 class GuiListbox;
@@ -46,7 +46,7 @@ private:
     void loadScenarioList(const string& category);
     GuiListbox* category_list;
     GuiListbox* scenario_list;
-    GuiScrollText* description_text;
+    GuiScrollFormattedText* description_text;
     GuiButton* start_button;
 };
 
@@ -58,7 +58,7 @@ public:
 private:
     GuiButton* start_button;
     std::unordered_map<string,string> scenario_settings;
-    std::unordered_map<string, GuiScrollText*> description_per_setting;
+    std::unordered_map<string, GuiScrollFormattedText*> description_per_setting;
 };
 
 #endif//SERVER_CREATION_SCREEN_H

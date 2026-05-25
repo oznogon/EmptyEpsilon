@@ -7,7 +7,7 @@
 #include "gui/gui2_button.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_label.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_textentry.h"
 #include "components/comms.h"

@@ -17,7 +17,7 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_progressbar.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 
 GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 : GuiOverlay(owner, id, glm::u8vec4(0,0,0,64))
@@ -80,7 +80,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
         });
     target_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    target_help = new GuiScrollText(target_selection_box, "MINIGAME_HELP", tr("Select a system in the targeted ship to begin a remote intrusion attempt, or hack. If successful, you reduce that system's effectiveness for a short period of time. Continue hacking systems on hostile targets to give your crew and allies a tactical advantage against it."));
+    target_help = new GuiScrollFormattedText(target_selection_box, "MINIGAME_HELP", tr("Select a system in the targeted ship to begin a remote intrusion attempt, or hack. If successful, you reduce that system's effectiveness for a short period of time. Continue hacking systems on hostile targets to give your crew and allies a tactical advantage against it."));
     target_help
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide();

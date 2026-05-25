@@ -6,7 +6,7 @@
 
 class GuiButton;
 class GuiTextEntry;
-class GuiScrollText;
+class GuiScrollFormattedText;
 class GuiRadarView;
 
 class GameMasterChatDialog : public GuiResizableDialog
@@ -23,7 +23,7 @@ private:
     bool notification;
 
     GuiTextEntry* text_entry;
-    GuiScrollText* chat_text;
+    GuiScrollFormattedText* chat_text;
     GuiButton* use_comms_script;
 
     void disableComms(string title);

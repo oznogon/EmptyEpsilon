@@ -15,7 +15,7 @@
 class GuiButton;
 class GuiHotkeyHelpOverlay;
 class GuiPanel;
-class GuiScrollText;
+class GuiScrollFormattedText;
 class GuiToggleButton;
 class GuiViewport3D;
 class GuiViewportMainScreen;
@@ -45,7 +45,7 @@ private:
     GuiPanel* button_strip;
     GuiHotkeyHelpOverlay* keyboard_help;
     GuiPanel* message_frame;
-    GuiScrollText* message_text;
+    GuiScrollFormattedText* message_text;
     GuiButton* message_close_button;
     std::unique_ptr<ImpulseSound> impulse_sound;
     std::unique_ptr<UtilityBeamSound> utility_beam_sound;

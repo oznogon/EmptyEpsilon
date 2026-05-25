@@ -8,6 +8,7 @@
 #include "ecs/query.h"
 #include "i18n.h"
 
+#include "gui/gui2_scrolltextcontainer.h"
 #include "serverCreationScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
@@ -446,7 +447,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     right_panel_2->setAttribute("padding", "20, 20, 0, 20");
     right_panel_2_label = new GuiLabel(right_panel_2, "RIGHT_PANEL_2_LABEL", tr("Connected players"), 30);
     right_panel_2_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("margin", "0, 0, 0, 10");
-    right_panel_2_text = new GuiScrollText(right_panel_2, "RIGHT_PANEL_2_TEXT", tr("No players connected"));
+    right_panel_2_text = new GuiScrollFormattedText(right_panel_2, "RIGHT_PANEL_2_TEXT", tr("No players connected"));
     right_panel_2_text->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Left column
@@ -467,7 +468,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     ship_action_row->setSize(GuiElement::GuiSizeMax, 50)->hide();
     ship_action_row->setAttribute("layout", "horizontal");
     ship_action_row->setAttribute("margin", "0, 0, 0, 10");
-    left_panel_2_text = new GuiScrollText(left_panel_2, "LEFT_PANEL_2_TEXT", tr("No information for the selected ship type"));
+    left_panel_2_text = new GuiScrollFormattedText(left_panel_2, "LEFT_PANEL_2_TEXT", tr("No information for the selected ship type"));
     left_panel_2_text->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // If this is the server, add buttons and a selector to create player ships.
@@ -895,7 +896,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
 
     // Right column
     // Info text panel
-    auto station_info = new GuiScrollText(right_container, "STATION_INFO",
+    auto station_info = new GuiScrollFormattedText(right_container, "STATION_INFO",
         tr("You can select multiple stations and switch between them during the game.\nIf mainscreen is selected alongside stations, it will be shown next to the current station (if the total screen size is wide enough).")
     );
     station_info
@@ -905,7 +906,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     (new GuiLabel(right_container, "STATION_PLAYERS_LABEL", tr("Crew assignments"), 30.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 50.0f);
-    station_players = new GuiScrollText(right_container, "STATION_PLAYERS", "");
+    station_players = new GuiScrollFormattedText(right_container, "STATION_PLAYERS", "");
     station_players->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Bottom row

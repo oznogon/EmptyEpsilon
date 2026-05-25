@@ -55,7 +55,7 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_scrollcontainer.h"
-#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_rotationdial.h"
 #include "gui/gui2_progressbar.h"
@@ -986,22 +986,22 @@ public:
     GuiSliderTweak* a_slider = nullptr;
 };
 
-// GuiScrollText to display multiline text properties.
+// GuiScrollFormattedText to display multiline text properties.
 // TODO: Make an editable multiline GuiTextEntry to use here.
-class GuiMultilineTextTweak : public GuiScrollText
+class GuiMultilineTextTweak : public GuiScrollFormattedText
 {
 public:
     GuiMultilineTextTweak(GuiContainer* owner, int lines = 5)
-    : GuiScrollText(owner, "", "")
+    : GuiScrollFormattedText(owner, "", "")
     {
         setSize(GuiElement::GuiSizeMax, lines * 30.0f);
         setTextSize(18.0f);
     }
 
-    virtual void onDraw(sp::RenderTarget& target) override
+    virtual void onUpdate() override
     {
-        if (update_func) setText(update_func());
-        GuiScrollText::onDraw(target);
+        if (update_func)
+            setText(update_func());
     }
 
     std::function<string()> update_func;
@@ -5020,7 +5020,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             ->hide();
     }
 
-    component_description = new GuiScrollText(content, "COMPONENT_DESC", "");
+    component_description = new GuiScrollFormattedText(content, "COMPONENT_DESC", "");
     component_description
         ->setTextSize(26.0f)
         ->setSize(300.0f, GuiElement::GuiSizeMax)

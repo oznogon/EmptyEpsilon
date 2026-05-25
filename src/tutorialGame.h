@@ -10,7 +10,7 @@ class PlayerSpaceship;
 class GuiRadarView;
 class GuiPanel;
 class GuiButton;
-class GuiScrollText;
+class GuiScrollFormattedText;
 
 class TutorialGame : public Updatable, public GuiCanvas
 {
@@ -21,7 +21,7 @@ class TutorialGame : public Updatable, public GuiCanvas
     GuiElement* station_screen[8];
 
     GuiPanel* frame;
-    GuiScrollText* text;
+    GuiScrollFormattedText* text;
     GuiButton* next_button;
 
     bool repeated_tutorial;
