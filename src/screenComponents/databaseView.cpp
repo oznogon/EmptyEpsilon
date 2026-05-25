@@ -50,6 +50,30 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
     );
     item_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     item_list->addSearch([this](string) { fillListBox(); });
+
+    keyvalue_container = new GuiScrollContainer(this, "DB_KV_CONTAINER");
+    keyvalue_container
+        ->setSize(400.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    keyvalue_container->hide();
+
+    details_container = new GuiElement(this, "DB_DETAILS_CONTAINER");
+    details_container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    details_container
+        ->setAttribute("margin", "20, 0, 0, 0");
+
+    visual_element = new GuiElement(details_container, "DB_VISUAL_ELEMENT");
+    visual_element
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
+
+    description_text = new GuiScrollFormattedText(details_container, "DB_LONG_DESCRIPTION", "");
+    description_text
+        ->setTextSize(24.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
     display();
 }
 
@@ -81,8 +105,9 @@ DatabaseViewComponent* DatabaseViewComponent::setItemsPadding(int padding)
 
 void DatabaseViewComponent::fillListBox()
 {
-    item_list->setOptions({});
-    item_list->setSelectionIndex(-1);
+    item_list
+        ->setOptions({})
+        ->setSelectionIndex(-1);
 
     string search_text = item_list->getSearchText();
     if (!search_text.empty())
@@ -91,12 +116,17 @@ void DatabaseViewComponent::fillListBox()
 
         std::vector<std::pair<sp::ecs::Entity, Database*>> matches;
         for (auto [entity, database] : sp::ecs::Query<Database>())
+        {
             if (database.name.lower().find(search_text) >= 0)
                 matches.push_back({entity, &database});
+        }
 
-        sort(matches.begin(), matches.end(), [](const auto& A, const auto& B) {
-            return A.second->name.lower() < B.second->name.lower();
-        });
+        sort(matches.begin(), matches.end(),
+            [](const auto& A, const auto& B)
+            {
+                return A.second->name.lower() < B.second->name.lower();
+            }
+        );
 
         for (auto [entity, database] : matches)
         {
@@ -104,6 +134,7 @@ void DatabaseViewComponent::fillListBox()
             if (selected_entry && selected_entry.getComponent<Database>() == database)
                 item_list->setSelectionIndex(idx);
         }
+
         return;
     }
 
@@ -115,18 +146,18 @@ void DatabaseViewComponent::fillListBox()
 
     for(auto [entity, database] : sp::ecs::Query<Database>())
     {
-        if(selected_database)
+        if (selected_database)
         {
-            if(entity == selected_database->parent)
+            if (entity == selected_database->parent)
                 parent_entry = &database;
-            if(database.parent == selected_database->parent)
+            if (database.parent == selected_database->parent)
                 siblings.push_back({entity, &database});
-            if(database.parent == selected_entry)
+            if (database.parent == selected_entry)
                 children.push_back({entity, &database});
         }
         else
         {
-            if(!database.parent)
+            if (!database.parent)
                 siblings.push_back({entity, &database});
         }
     }
@@ -138,7 +169,7 @@ void DatabaseViewComponent::fillListBox()
             back_button->show();
             back_entry = selected_database->parent.toString();
         }
-        else if(parent_entry)
+        else if (parent_entry)
         {
             back_button->show();
             back_entry = parent_entry->parent.toString();
@@ -153,37 +184,31 @@ void DatabaseViewComponent::fillListBox()
     // the indices we actually want to display
     auto& display = children.size() > 0 ? children : siblings;
 
-    sort(display.begin(), display.end(), [](const auto& A, const auto& B) -> bool {
-        return A.second->name.lower() < B.second->name.lower();
-    });
+    sort(display.begin(), display.end(),
+        [](const auto& A, const auto& B) -> bool
+        {
+            return A.second->name.lower() < B.second->name.lower();
+        }
+    );
 
     for (auto [entity, database] : display)
     {
         int item_list_idx = item_list->addEntry(database->name, entity.toString());
         if (selected_entry && selected_entry.getComponent<Database>() == database)
-        {
             item_list->setSelectionIndex(item_list_idx);
-        }
     }
 }
 
 void DatabaseViewComponent::display()
 {
-    if (keyvalue_container) keyvalue_container->destroy();
-    if (details_container) details_container->destroy();
+    // Reset the keyvalue container children.
+    for (auto& child_ptr : keyvalue_container->getChildren())
+    {
+        if (child_ptr->getID() != "DB_KV_CONTAINER_SCROLLBAR_V")
+            child_ptr->destroy();
+    }
+    cleanTree();
 
-    keyvalue_container = new GuiScrollContainer(this, "DB_KV_CONTAINER");
-    keyvalue_container
-        ->setSize(400.0f, GuiElement::GuiSizeMax)
-        ->setAttribute("layout", "vertical");
-
-    details_container = new GuiElement(this, "DB_DETAILS_CONTAINER");
-    details_container
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setAttribute("layout", "vertical");
-    details_container
-        ->setAttribute("margin", "20, 0, 0, 0");
-    // Set conditional padding on details and item lists.
     details_container
         ->setAttribute("padding", "0, 0, " + static_cast<string>(details_padding) + ", 0");
 
@@ -193,7 +218,13 @@ void DatabaseViewComponent::display()
     fillListBox();
 
     auto database = selected_entry.getComponent<Database>();
-    if (!database) return;
+    if (!database)
+    {
+        keyvalue_container->hide();
+        visual_element->hide();
+        description_text->hide();
+        return;
+    }
 
     auto mrc = selected_entry.getComponent<MeshRenderComponent>();
     bool has_key_values = database->key_values.size() > 0;
@@ -202,32 +233,42 @@ void DatabaseViewComponent::display()
 
     if (has_image_or_model)
     {
-        GuiElement* visual = (new GuiElement(details_container, "DB_VISUAL_ELEMENT"))
-            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        visual_element->show();
+
+        // Destroy any previous image or model elements.
+        for (auto& child_ptr : visual_element->getChildren())
+            child_ptr->destroy();
+        cleanTree();
 
         if (mrc)
         {
-            (new GuiRotatingModelView(visual, "DB_MODEL_VIEW", selected_entry))
-                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+            model_view = new GuiRotatingModelView(visual_element, "DB_MODEL_VIEW", selected_entry);
+            model_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
             if (database->image != "")
             {
-                (new GuiImage(visual, "DB_IMAGE", database->image))
-                    ->setSize(32.0f, 32.0f);
+                image_element = new GuiImageContain(visual_element, "DB_IMAGE", database->image);
+                image_element->setSize(32.0f, 32.0f);
             }
         }
-        else if(database->image != "")
+        else if (database->image != "")
         {
-            (new GuiImage(visual, "DB_IMAGE", database->image))
-                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+            image_element = new GuiImageContain(visual_element, "DB_IMAGE", database->image);
+            image_element->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
+    }
+    else
+    {
+        visual_element->hide();
     }
 
     if (has_text)
     {
-        (new GuiScrollFormattedText(details_container, "DB_LONG_DESCRIPTION", database->description))
-            ->setTextSize(24.0f)
-            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        description_text->setText(database->description);
+    }
+    else
+    {
+        description_text->setText("");
     }
 
     if (has_key_values)
@@ -237,10 +278,12 @@ void DatabaseViewComponent::display()
             (new GuiKeyValueDisplay(keyvalue_container, "", 0.37f, kv.key, kv.value))
                 ->setSize(GuiElement::GuiSizeMax, 40.0f);
         }
+        keyvalue_container->show();
     }
     else
     {
-        keyvalue_container->destroy();
-        keyvalue_container = nullptr;
+        keyvalue_container->hide();
     }
+
+    keyvalue_container->updateLayout(keyvalue_container->getRect());
 }

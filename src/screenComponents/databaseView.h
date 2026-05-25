@@ -4,8 +4,11 @@
 #include "ecs/entity.h"
 
 class GuiButton;
+class GuiImageContain;
 class GuiListbox;
 class GuiScrollContainer;
+class GuiScrollFormattedText;
+class GuiRotatingModelView;
 
 class DatabaseViewComponent : public GuiElement
 {
@@ -29,6 +32,10 @@ private:
     GuiListbox* item_list = nullptr;
     GuiScrollContainer* keyvalue_container = nullptr;
     GuiElement* details_container = nullptr;
+    GuiElement* visual_element = nullptr;
+    GuiRotatingModelView* model_view = nullptr;
+    GuiImageContain* image_element = nullptr;
+    GuiScrollFormattedText* description_text = nullptr;
 
     static constexpr int navigation_width = 400;
     int details_padding = 0;
