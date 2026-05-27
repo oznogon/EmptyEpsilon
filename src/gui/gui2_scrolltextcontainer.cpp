@@ -68,7 +68,7 @@ void GuiScrollFormattedText::updateLayout(const sp::Rect& bounds)
     const auto& text_style = text_theme->get(getState());
     auto main_color = text_style.color;
     auto current_color = main_color;
-    float text_width = bounds.size.x - scrollbar_width;
+    float text_width = std::max(0.0f, bounds.size.x - scrollbar_width);
 
     auto prepared = sp::RenderTarget::getDefaultFont()->start(32, {text_width, bounds.size.y}, alignment, sp::Font::FlagClip | sp::Font::FlagLineWrap);
     int last_end = 0;
