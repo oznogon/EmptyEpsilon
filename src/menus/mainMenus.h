@@ -1,5 +1,4 @@
-#ifndef MAIN_MENUS_H
-#define MAIN_MENUS_H
+#pragma once
 
 #include "gui/gui2_canvas.h"
 
@@ -9,4 +8,8 @@ public:
     MainMenu();
 };
 
-#endif//MAIN_MENUS_H
+class CreditsScreen : public GuiCanvas
+{
+public:
+    CreditsScreen();
+};

@@ -1,125 +1,270 @@
+#include "mainMenus.h"
 #include <i18n.h>
 #include "engine.h"
-#include "mainMenus.h"
 #include "main.h"
 #include "preferenceManager.h"
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "config.h"
+
 #include "menus/serverCreationScreen.h"
 #include "menus/optionsMenu.h"
 #include "menus/tutorialMenu.h"
 #include "menus/serverBrowseMenu.h"
+
 #include "screens/gm/gameMasterScreen.h"
+
 #include "screenComponents/rotatingModelView.h"
-#include "config.h"
 
 #include "gui/theme.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_textentry.h"
+#include "gui/gui2_scrolltextcontainer.h"
 
 MainMenu::MainMenu()
 {
-    constexpr float logo_size = 256;
-    constexpr float logo_size_y = 256;
-    constexpr float logo_size_x = 1024;
-    constexpr float title_y = 160;
+    constexpr float logo_size = 256.0f;
+    constexpr float logo_size_y = 256.0f;
+    constexpr float logo_size_x = 1024.0f;
+    constexpr float title_y = 160.0f;
+    constexpr float button_height = 50.0f;
 
+    // Background elements
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
-    (new GuiImage(this, "LOGO", "logo_full.png"))->setPosition(0, title_y, sp::Alignment::TopCenter)->setSize(logo_size_x, logo_size_y);
-    (new GuiLabel(this, "VERSION", tr("Credits", "Version: {version}").format({{"version", string(VERSION_NUMBER)}}), 20))->setPosition(0, title_y + logo_size, sp::Alignment::TopCenter)->setSize(0, 20);
+    (new GuiImage(this, "LOGO", "logo_full.png"))
+        ->setPosition(0.0f, title_y, sp::Alignment::TopCenter)
+        ->setSize(logo_size_x, logo_size_y);
 
-    (new GuiLabel(this, "", tr("mainMenu", "Your name:"), 30))->setAlignment(sp::Alignment::CenterLeft)->setPosition({50, -400}, sp::Alignment::BottomLeft)->setSize(300, 50);
-    (new GuiTextEntry(this, "USERNAME", PreferencesManager::get("username")))->callback([](string text) {
-        PreferencesManager::set("username", text);
-    })->setPosition({50, -350}, sp::Alignment::BottomLeft)->setSize(300, 50);
+    // Version number
+    (new GuiLabel(this, "VERSION", tr("Credits", "Version {version}").format({{"version", string(VERSION_NUMBER)}}), 20))
+        ->setPosition(0.0f, title_y + logo_size, sp::Alignment::TopCenter)
+        ->setSize(0.0f, 20.0f);
 
-    (new GuiButton(this, "START_SERVER", tr("mainMenu", "Start server"), [this]() {
-        new ServerSetupScreen();
-        destroy();
-    }))->setPosition({50, -230}, sp::Alignment::BottomLeft)->setSize(300, 50);
+    // Menu selections
+    auto* container = new GuiElement(this, "");
+    container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("padding", "50");
 
-    (new GuiButton(this, "START_CLIENT", tr("mainMenu", "Start client"), [this]() {
-        new ServerBrowserMenu();
-        destroy();
-    }))->setPosition({50, -170}, sp::Alignment::BottomLeft)->setSize(300, 50);
+    auto* menu_selections = new GuiElement(container, "");
+    menu_selections
+        ->setSize(250.0f, 600.0f)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
+        ->setAttribute("layout", "verticalbottom");
 
-    (new GuiButton(this, "OPEN_OPTIONS", tr("mainMenu", "Options"), [this]() {
-        new OptionsMenu(OptionsMenu::ReturnTo::Main);
-        destroy();
-    }))->setPosition({50, -110}, sp::Alignment::BottomLeft)->setSize(300, 50);
+    (new GuiButton(menu_selections, "QUIT", tr("mainMenu", "Quit"),
+        []()
+        {
+            engine->shutdown();
+        }
+    ))
+        ->setSize(GuiElement::GuiSizeMax, button_height);
 
-    (new GuiButton(this, "QUIT", tr("mainMenu", "Quit"), []() {
-        engine->shutdown();
-    }))->setPosition({50, -50}, sp::Alignment::BottomLeft)->setSize(300, 50);
+    (new GuiButton(menu_selections, "OPEN_OPTIONS", tr("mainMenu", "Options"),
+        [this]()
+        {
+            new OptionsMenu(OptionsMenu::ReturnTo::Main);
+            destroy();
+        }
+    ))
+        ->setSize(GuiElement::GuiSizeMax, button_height);
 
-    (new GuiButton(this, "START_TUTORIAL", tr("mainMenu", "Tutorials"), [this]() {
-        new TutorialMenu();
-        destroy();
-    }))->setPosition({370, -50}, sp::Alignment::BottomLeft)->setSize(300, 50);
+#ifdef DEBUG
+    (new GuiButton(menu_selections, "", tr("mainMenu", "GM screen"),
+        [this]()
+        {
+            new EpsilonServer(defaultServerPort);
+            if (game_server)
+            {
+                gameGlobalInfo->startScenario("scenario_10_empty.lua");
 
-    float y = 100;
-    (new GuiLabel(this, "CREDITS", tr("Credits", "Credits"), 25))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 25); y += 25;
-    (new GuiLabel(this, "CREDITS1", tr("Credits", "Programming:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS2", "Daid", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS2", "gcask", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS2", "Nallath", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS2", "Xansta", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS2", "StarryWisdom", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    y += 10;
-    (new GuiLabel(this, "CREDITS1", tr("Credits", "Graphics:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS3", "Interesting John", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    y += 10;
-    (new GuiLabel(this, "CREDITS1", tr("Credits", "Localization:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS3", "Muerte (FR)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS3", "aBlueShadow (DE)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    y += 10;
-    (new GuiLabel(this, "CREDITS4", tr("Credits", "Music:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS5", "Matthew Pablo", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS6", "Alexandr Zhelanov", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS7", "Joe Baxter-Webb", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS8", "neocrey", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS9", "FoxSynergy", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    y += 10;
-    (new GuiLabel(this, "CREDITS10", tr("Credits", "Models:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS11", "Angryfly (turbosquid.com)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS12", "SolCommand (http://solcommand.blogspot.com/)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    y += 10;
-    (new GuiLabel(this, "CREDITS13", tr("Credits", "Crew sprites:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS14", "Tokka (http://bekeen.de/)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    y += 10;
-    (new GuiLabel(this, "CREDITS15", tr("Credits", "Special thanks:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS16", "Marty Lewis (MadKat)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS17", "Serge Wroclawski", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS18", "Dennis Shelton", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS19", "VolgClawtooth", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS20", "Daniel Loftis", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS21", "David Concepcion", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS22", "Philippe Bruylant", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS23", "Ralf Leichter", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS24", "Lee McDonough (Flea)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS25", "Mickael Houet", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+                my_player_info->commandSetShip({});
+                destroy();
+                new GameMasterScreen(nullptr);
+            }
+        }
+    ))
+        ->setSize(GuiElement::GuiSizeMax, button_height);
+#endif
+
+    (new GuiButton(menu_selections, "START_TUTORIAL", tr("mainMenu", "Tutorials"),
+        [this]()
+        {
+            new TutorialMenu();
+            destroy();
+        }
+    ))
+        ->setSize(GuiElement::GuiSizeMax, button_height);
+
+    (new GuiButton(menu_selections, "START_CLIENT", tr("mainMenu", "Join game"),
+        [this]()
+        {
+            new ServerBrowserMenu();
+            destroy();
+        }
+    ))
+        ->setSize(GuiElement::GuiSizeMax, button_height);
+
+    (new GuiButton(menu_selections, "START_SERVER", tr("mainMenu", "Host game"),
+        [this]()
+        {
+            new ServerSetupScreen();
+            destroy();
+        }
+    ))
+        ->setSize(GuiElement::GuiSizeMax, button_height)
+        ->setAttribute("margin", "0, 0, 50, 0");
+
+    (new GuiTextEntry(menu_selections, "USERNAME", PreferencesManager::get("username")))
+        ->callback(
+            [](string text)
+            {
+                PreferencesManager::set("username", text);
+            }
+        )
+        ->setSize(GuiElement::GuiSizeMax, button_height);
+
+    (new GuiLabel(menu_selections, "", tr("mainMenu", "Your name:"), 30.0f))
+        ->setAlignment(sp::Alignment::CenterLeft)
+        ->setSize(GuiElement::GuiSizeMax, button_height);
+
+    // Credits screen button
+    (new GuiButton(container, "CREDITS_SCREEN", tr("mainMenu", "Credits"),
+        [this]()
+        {
+            new CreditsScreen();
+            destroy();
+        }
+    ))
+        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
+        ->setSize(250.0f, button_height);
 
     if (PreferencesManager::get("instance_name") != "")
     {
-        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(sp::Alignment::CenterLeft)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(0, 18);
+        (new GuiLabel(container, "", PreferencesManager::get("instance_name"), 25.0f))
+            ->setAlignment(sp::Alignment::CenterLeft)
+            ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+            ->setSize(0.0f, 18.0f);
     }
+}
 
-#ifdef DEBUG
-    (new GuiButton(this, "", "TO DA GM!", [this]() {
-        new EpsilonServer(defaultServerPort);
-        if (game_server)
+CreditsScreen::CreditsScreen()
+{
+    // Background elements
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
+    (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
+
+    auto* container = new GuiElement(this, "");
+    container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    container
+        ->setAttribute("padding", "50");
+
+    // Header
+    (new GuiLabel(container, "HEADER", tr("EmptyEpsilon Credits"), 50.0f))
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Prep credits text
+    string credits_text =
+        "<h2>" + tr("Credits", "Programming") + "</>\n\n" +
+        "Daid\n" +
+        "gcask\n" +
+        "Nallath\n" +
+        "Xansta\n" +
+        "StarryWisdom\n\n" +
+        "<h2>" + tr("Credits", "Scenarios") + "</>\n\n" +
+        "Daid\n" +
+        "Elliot Drees\n" +
+        "Fouindor\n" +
+        "Kilted-Klingon\n" +
+        "David Priddy\n" +
+        "Chris 'csibbitt' Sibbitt\n" +
+        "Xansta\n" +
+        "Visjammer\n\n" +
+        "<h3>" + tr("Credits", "Scenario voice acting") + "</>\n\n" +
+        "Andrew 'Snow' Kenny\n" +
+        "Bart K7AAY\n" +
+        "SANTAtheGREY\n" +
+        "Xansta\n\n" +
+        "<h2>" + tr("Credits", "Localizations") + "</>\n\n" +
+        "<h3>" + tr("Credits", "French") + "</>\n\n" +
+        "Muerte\n" +
+        "Thomas L\n" +
+        "ciseur68\n\n" +
+        "<h3>" + tr("Credits", "German") + "</>\n\n" +
+        "aBlueShadow\n" +
+        "PET2001\n" +
+        "Hagen Rothe\n\n" +
+        "<h3>" + tr("Credits", "Czech") + "</>\n\n" +
+        "Tomáš 'hemmond' Látal\n\n" +
+        "<h3>" + tr("Credits", "Italian") + "</>\n\n" +
+        "NinoSecret\n\n"
+        "<h3>" + tr("Credits", "Additional support") + "</>\n\n" +
+        "Tsht\n" +
+        "GinjaNinja32\n" +
+        "Chris 'csibbitt' Sibbitt\n" +
+        "Pithlit\n\n"
+        "<h2>" + tr("Credits", "Music") + "</>\n\n" +
+        "Matthew Pablo\n" +
+        "Alexandr Zhelanov\n" +
+        "Joe Baxter-Webb\n" +
+        "neocrey\n" +
+        "FoxSynergy\n\n" +
+        "<h2>" + tr("Credits", "Models") + "</>\n\n" +
+        "Angryfly (turbosquid.com)\n" +
+        "MSGDI (https://www.cgtrader.com/3d-models/msgdi)\n" +
+        "SolCommand (https://www.solcommand.com/)\n\n" +
+        "<h2>" + tr("Credits", "Icons and graphics") + "</>\n\n" +
+        "Interesting John\n\n"
+        "<h2>" + tr("Credits", "Crew sprites") + "</>\n\n" +
+        "Tokka (http://bekeen.de/)\n\n" +
+        "<h2>" + tr("Credits", "Special thanks") + "</>\n\n" +
+        "Marty Lewis (MadKat)\n" +
+        "Serge Wroclawski\n" +
+        "Dennis Shelton\n" +
+        "VolgClawtooth\n" +
+        "Daniel Loftis\n" +
+        "David Concepcion\n" +
+        "Philippe Bruylant\n" +
+        "Ralf Leichter\n" +
+        "Lee McDonough (Flea)\n" +
+        "Mickael Houet\n\n" +
+        "<h1>" + tr("Credits", "Oznogon Fork Credits") + "</>\n\n" +
+        "<h2>" + tr("Credits", "Additional feature design or implementation") + "</>\n\n" +
+        "Amir Arad\n" +
+        "Bridge Command (Natalia Bogdanova)\n" +
+        "Clockwork Dog (Tom Bull, Sam Lee)\n" +
+        "GinjaNinja32\n" +
+        "Oznogon\n" +
+        "tdelc\n\n" +
+        "<h2>" + tr("Credits", "Additional icons and graphics") + "</>\n\n" +
+        "Oznogon\n\n";
+
+    // Draw credits
+    (new GuiScrollFormattedText(container, "CREDITS", credits_text))
+        ->setTextSize(30.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "20");
+
+    auto* back_row = new GuiElement(container, "");
+    back_row
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    (new GuiButton(back_row, "BACK", tr("button", "Back"),
+        [this]()
         {
-            gameGlobalInfo->startScenario("scenario_10_empty.lua");
-
-            my_player_info->commandSetShip({});
+            new MainMenu();
             destroy();
-            new GameMasterScreen(nullptr);
         }
-    }))->setPosition({370, -150}, sp::Alignment::BottomLeft)->setSize(300, 50);
-#endif
+    ))
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(250.0f, GuiElement::GuiSizeMax);
 }
