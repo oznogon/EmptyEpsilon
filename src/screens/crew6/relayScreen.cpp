@@ -10,6 +10,7 @@
 #include "components/hacking.h"
 #include "components/scanning.h"
 #include "components/radar.h"
+#include "components/drone.h"
 #include "components/name.h"
 #include "components/faction.h"
 #include "components/shiplog.h"
@@ -50,7 +51,12 @@ static bool isVisibleOnRelay(sp::ecs::Entity entity)
         if (Faction::getRelation(my_spaceship, e) != FactionRelation::Friendly)
             continue;
         float r = 5000.0f;
-        if (auto lrr = e.getComponent<LongRangeRadar>()) r = lrr->short_range;
+        if (auto lrr = e.getComponent<LongRangeRadar>())
+        {
+            r = lrr->short_range;
+            if (auto sensors = e.getComponent<SensorsSystem>())
+                r = sensorsScaleShortRange(r, sensors->getSystemEffectiveness());
+        }
         if (glm::length2(transform.getPosition() - target_transform->getPosition()) < r * r)
             return true;
     }

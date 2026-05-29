@@ -13,6 +13,7 @@
 #include "components/hull.h"
 #include "components/collision.h"
 #include "components/radar.h"
+#include "components/drone.h"
 #include "components/scanning.h"
 #include "components/name.h"
 
@@ -51,6 +52,19 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 {
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+
+    float effective_short_range = lrr ? lrr->short_range : DEFAULT_MIN_ZOOM_DISTANCE;
+    float effective_long_range = lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE;
+    if (lrr)
+    {
+        if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+        {
+            const float eff = sensors->getSystemEffectiveness();
+            effective_short_range = sensorsScaleShortRange(effective_short_range, eff);
+            effective_long_range = sensorsScaleLongRange(effective_long_range, eff);
+        }
+    }
+
     targets.setAllowWaypointSelection();
 
     // Render the radar shadow and background decorations.
@@ -78,7 +92,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->hide();
 
     // Draw the science radar.
-    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE, &targets);
+    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", effective_long_range, &targets);
     science_radar
         ->setRangeIndicatorStepSize(DEFAULT_MIN_ZOOM_DISTANCE)
         ->longRange()
@@ -451,9 +465,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->disable();
 
     // Draw the zoom slider.
-    float lrr_long = lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE;
-    float lrr_short = lrr ? lrr->short_range : DEFAULT_MIN_ZOOM_DISTANCE;
-    zoom_slider = new GuiRadarZoomSlider(radar_view, "RADAR_ZOOM", lrr_short, lrr_long, lrr_long, science_radar);
+    zoom_slider = new GuiRadarZoomSlider(radar_view, "RADAR_ZOOM", effective_short_range, effective_long_range, effective_long_range, science_radar);
     zoom_slider
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
         ->setSize(250.0f, 50.0f);
@@ -500,6 +512,20 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     auto rl = my_spaceship.getComponent<RadarLink>();
+
+    float effective_short_range = 5000.0f;
+    float effective_long_range = 30000.0f;
+    if (lrr)
+    {
+        effective_short_range = lrr->short_range;
+        effective_long_range = lrr->long_range;
+        if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+        {
+            float eff = sensors->getSystemEffectiveness();
+            effective_short_range = sensorsScaleShortRange(effective_short_range, eff);
+            effective_long_range = sensorsScaleLongRange(effective_long_range, eff);
+        }
+    }
 
     // Manage probe view button state. Probe view is independent of LRR.
     probe_view_button->setVisible(rl);
@@ -575,21 +601,21 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         if (mouse_wheel_delta != 0)
             view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
         if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
-            view_distance = std::max(lrr->short_range, view_distance * 0.9f);
+            view_distance = std::max(effective_short_range, view_distance * 0.9f);
         if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
-            view_distance = std::min(lrr->long_range, view_distance * 1.1f);
-        view_distance = std::min(view_distance, lrr->long_range);
-        view_distance = std::max(view_distance, lrr->short_range);
+            view_distance = std::min(effective_long_range, view_distance * 1.1f);
+        view_distance = std::min(view_distance, effective_long_range);
+        view_distance = std::max(view_distance, effective_short_range);
 
         // Update radar view distances and zoom range if changed.
         if (view_distance != science_radar->getDistance()
-            || previous_long_range_radar != lrr->long_range
-            || previous_short_range_radar != lrr->short_range)
+            || previous_long_range_radar != effective_long_range
+            || previous_short_range_radar != effective_short_range)
         {
-            previous_short_range_radar = lrr->short_range;
-            previous_long_range_radar = lrr->long_range;
+            previous_short_range_radar = effective_short_range;
+            previous_long_range_radar = effective_long_range;
             zoom_slider
-                ->setRange(lrr->long_range, lrr->short_range)
+                ->setRange(effective_long_range, effective_short_range)
                 ->setValue(view_distance);
         }
     }
@@ -611,13 +637,13 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         auto target_transform = targets.get().getComponent<sp::Transform>();
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
 
-        if (!my_transform || RadarBlockSystem::isRadarBlockedFrom(my_transform->getPosition(), targets.get(), lrr->short_range))
+        if (!my_transform || RadarBlockSystem::isRadarBlockedFrom(my_transform->getPosition(), targets.get(), effective_short_range))
             targets.clear();
 
         // Deselect target if outside of long range radar range.
         if (my_transform && target_transform)
         {
-            if (glm::length(target_transform->getPosition() - my_transform->getPosition()) > lrr->long_range)
+            if (glm::length(target_transform->getPosition() - my_transform->getPosition()) > effective_long_range)
                 targets.clear();
         }
     }
@@ -868,8 +894,8 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         if (auto info = target.getComponent<RawRadarSignatureInfo>())
         {
             float distance_variance = 0.0f;
-            if (lrr && distance > lrr->short_range && scanstate < ScanState::State::FullScan)
-                distance_variance = (random(0.01f, (distance - lrr->short_range)) / (lrr->long_range - lrr->short_range)) * 0.1f;
+            if (lrr && distance > effective_short_range && scanstate < ScanState::State::FullScan)
+                distance_variance = (random(0.01f, (distance - effective_short_range)) / (effective_long_range - effective_short_range)) * 0.1f;
 
             electrical = std::max(0.0f, info->electrical - distance_variance);
             gravitational = std::max(0.0f, info->gravitational - distance_variance);

@@ -19,6 +19,7 @@
 #include "components/missiletubes.h"
 #include "components/target.h"
 #include "components/radar.h"
+#include "components/drone.h"
 #include "components/radarblock.h"
 #include "components/impulse.h"
 #include "components/scanning.h"
@@ -176,7 +177,16 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     {
         distance = long_range ? 30000.0f : 5000.0f;
         if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
+        {
             distance = long_range ? lrr->long_range : lrr->short_range;
+            if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+            {
+                float eff = sensors->getSystemEffectiveness();
+                distance = long_range
+                    ? sensorsScaleLongRange(lrr->long_range, eff)
+                    : sensorsScaleShortRange(lrr->short_range, eff);
+            }
+        }
     }
 
     // Make sure all the drawing until now is no longer queued and passed to
@@ -373,7 +383,10 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
                 continue;
             if (auto lrr = entity.getComponent<LongRangeRadar>())
             {
-                auto r = lrr->short_range * scale;
+                auto short_range = lrr->short_range;
+                if (auto sensors = entity.getComponent<SensorsSystem>())
+                    short_range = sensorsScaleShortRange(short_range, sensors->getSystemEffectiveness());
+                auto r = short_range * scale;
                 renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
             } else {
                 auto r = 5000.f * scale;
@@ -500,7 +513,10 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
     {
         float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-        auto r = lrr->short_range * scale;
+        auto short_range = lrr->short_range;
+        if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+            short_range = sensorsScaleShortRange(short_range, sensors->getSystemEffectiveness());
+        auto r = short_range * scale;
         renderer.fillCircle(worldToScreen(transform->getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
     }
 }
@@ -869,7 +885,12 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
             auto short_range = lrr ? lrr->short_range : 5000.0f;
-            for(auto [entity, t] : sp::ecs::Query<sp::Transform>())
+            if (lrr)
+            {
+                if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                    short_range = sensorsScaleShortRange(short_range, sensors->getSystemEffectiveness());
+            }
+            for (auto [entity, t] : sp::ecs::Query<sp::Transform>())
             {
                 if (RadarBlockSystem::isRadarBlockedFrom(transform->getPosition(), entity, short_range))
                     continue;

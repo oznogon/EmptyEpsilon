@@ -14,6 +14,7 @@
 #include "components/faction.h"
 #include "components/collision.h"
 #include "components/radar.h"
+#include "components/drone.h"
 #include "components/moveto.h"
 #include "systems/collision.h"
 #include "systems/jumpsystem.h"
@@ -73,9 +74,15 @@ void ShipAI::run(float delta)
 
     // Update ranges before calculating
     if (auto lrr = owner.getComponent<LongRangeRadar>()) {
-        long_range = lrr->long_range;
-        relay_range = long_range * 2.0f;
         short_range = lrr->short_range;
+        long_range = lrr->long_range;
+        if (auto sensors = owner.getComponent<SensorsSystem>())
+        {
+            float eff = sensors->getSystemEffectiveness();
+            short_range = sensorsScaleShortRange(short_range, eff);
+            long_range = sensorsScaleLongRange(long_range, eff);
+        }
+        relay_range = long_range * 2.0f;
     }
 
     updateWeaponState(delta);

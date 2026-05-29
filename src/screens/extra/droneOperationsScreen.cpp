@@ -72,7 +72,11 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
     // Radar initial distance matches the zoom slider so the label is accurate.
     float short_range = 5000.0f;
     if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
+    {
         short_range = lrr->short_range;
+        if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+            short_range = sensorsScaleShortRange(short_range, sensors->getSystemEffectiveness());
+    }
 
     float initial_control_range = short_range;
     if (auto dc = my_spaceship.getComponent<DroneController>())
@@ -176,7 +180,11 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
             {
                 float min_range = 5000.0f;
                 if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
+                {
                     min_range = lrr->short_range;
+                    if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                        min_range = sensorsScaleShortRange(min_range, sensors->getSystemEffectiveness());
+                }
 
                 auto dc = my_spaceship.getComponent<DroneController>();
                 float max_range = dc ? dc->control_range : min_range;
@@ -1003,7 +1011,13 @@ void DroneOperationsScreen::onUpdate()
             drone_callsign_display->setValue("");
 
         auto lrr = drone.getComponent<LongRangeRadar>();
-        radar->setDistance(lrr ? lrr->short_range : 5000.0f);
+        float drone_range = lrr ? lrr->short_range : 5000.0f;
+        if (lrr)
+        {
+            if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                drone_range = sensorsScaleShortRange(drone_range, sensors->getSystemEffectiveness());
+        }
+        radar->setDistance(drone_range);
         zoom_slider->hide();
 
         auto reactor = drone.getComponent<Reactor>();
@@ -1308,7 +1322,11 @@ void DroneOperationsScreen::onUpdate()
 
         float min_range = 5000.0f;
         if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
+        {
             min_range = lrr->short_range;
+            if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                min_range = sensorsScaleShortRange(min_range, sensors->getSystemEffectiveness());
+        }
 
         float control_range = dc ? dc->control_range : min_range;
         if (auto sensors = my_spaceship.getComponent<SensorsSystem>())

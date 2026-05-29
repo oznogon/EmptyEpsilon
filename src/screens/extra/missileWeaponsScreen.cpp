@@ -8,6 +8,7 @@
 #include "components/target.h"
 #include "components/missileWeaponTarget.h"
 #include "components/radar.h"
+#include "components/drone.h"
 #include "components/beamweapon.h"
 #include "components/collision.h"
 #include "components/missiletubes.h"
@@ -211,9 +212,12 @@ void MissileWeaponsScreen::onUpdate()
         if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            float radar_range = lrr ? lrr->short_range : 5000.0f;
+            if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                radar_range = sensorsScaleShortRange(radar_range, sensors->getSystemEffectiveness());
             targets.setNextTarget(
                 transform->getPosition(),
-                lrr ? lrr->short_range : 5000.0f,
+                radar_range,
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::KnownHostile
             );
@@ -225,9 +229,12 @@ void MissileWeaponsScreen::onUpdate()
         if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            float radar_range = lrr ? lrr->short_range : 5000.0f;
+            if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                radar_range = sensorsScaleShortRange(radar_range, sensors->getSystemEffectiveness());
             targets.setPrevTarget(
                 transform->getPosition(),
-                lrr ? lrr->short_range : 5000.0f,
+                radar_range,
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::KnownHostile
             );
@@ -241,9 +248,12 @@ void MissileWeaponsScreen::onUpdate()
         if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            float radar_range = lrr ? lrr->short_range : 5000.0f;
+            if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                radar_range = sensorsScaleShortRange(radar_range, sensors->getSystemEffectiveness());
             targets.setNextTarget(
                 transform->getPosition(),
-                lrr ? lrr->short_range : 5000.0f,
+                radar_range,
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::NotKnownFriendly
             );
@@ -255,9 +265,12 @@ void MissileWeaponsScreen::onUpdate()
         if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            float radar_range = lrr ? lrr->short_range : 5000.0f;
+            if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                radar_range = sensorsScaleShortRange(radar_range, sensors->getSystemEffectiveness());
             targets.setPrevTarget(
                 transform->getPosition(),
-                lrr ? lrr->short_range : 5000.0f,
+                radar_range,
                 TargetsContainer::ESelectionType::Targetable,
                 TargetsContainer::KnownFriendOrFoe::NotKnownFriendly
             );

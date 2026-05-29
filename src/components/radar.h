@@ -2,6 +2,22 @@
 
 #include "io/dataBuffer.h"
 #include "script/callback.h"
+#include "tween.h"
+
+
+inline float sensorsScaleShortRange(float base_range, float effectiveness)
+{
+    if (effectiveness <= 1.0f)
+        return std::max(1.0f, Tween<float>::easeInOutCubic(effectiveness, 0.0f, 1.0f, 0.0f, base_range));
+    return std::max(1.0f, base_range * effectiveness);
+}
+
+inline float sensorsScaleLongRange(float base_range, float effectiveness)
+{
+    if (effectiveness <= 1.0f)
+        return std::max(1.0f, Tween<float>::easeInCircular(effectiveness, 0.0f, 1.0f, 0.0f, base_range));
+    return std::max(1.0f, base_range * effectiveness);
+}
 
 
 class RadarTrace

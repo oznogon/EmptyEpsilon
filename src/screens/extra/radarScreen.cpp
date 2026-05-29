@@ -19,6 +19,7 @@
 
 #include "components/collision.h"
 #include "components/radar.h"
+#include "components/drone.h"
 #include "components/utilityBeam.h"
 
 RadarScreen::RadarScreen(GuiContainer* owner, string type)
@@ -145,6 +146,12 @@ void RadarScreen::setRadarMode(string mode)
     {
         mode_short = lrr->short_range;
         mode_long = lrr->long_range;
+        if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+        {
+            float eff = sensors->getSystemEffectiveness();
+            mode_short = sensorsScaleShortRange(mode_short, eff);
+            mode_long = sensorsScaleLongRange(mode_long, eff);
+        }
     }
 
     bool mode_changed = (previous_radar_type != mode);

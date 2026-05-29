@@ -12,6 +12,7 @@
 #include "components/hull.h"
 #include "components/name.h"
 #include "components/radar.h"
+#include "components/drone.h"
 #include "components/analysisTarget.h"
 #include "components/scanning.h"
 #include "components/shields.h"
@@ -285,6 +286,20 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
 
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
 
+    float effective_short_range = 5000.0f;
+    float effective_long_range = 30000.0f;
+    if (lrr)
+    {
+        effective_short_range = lrr->short_range;
+        effective_long_range = lrr->long_range;
+        if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+        {
+            float eff = sensors->getSystemEffectiveness();
+            effective_short_range = sensorsScaleShortRange(effective_short_range, eff);
+            effective_long_range = sensorsScaleLongRange(effective_long_range, eff);
+        }
+    }
+
     auto target = targets.get();
     if (target != target_entity)
     {
@@ -356,7 +371,7 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
         info_description->setText(description);
 
         // Hide 3D model if type isn't identified and entity is > 5U away.
-        model_view->setVisible((lrr && distance < lrr->short_range) || scanstate > ScanState::State::SimpleScan);
+        model_view->setVisible((lrr && distance < effective_short_range) || scanstate > ScanState::State::SimpleScan);
 
         float electrical = 0.0f;
         float gravitational = 0.0f;
@@ -366,8 +381,8 @@ void TargetAnalysisScreen::onDraw(sp::RenderTarget& renderer)
         {
             float distance_variance = 0.0f;
 
-            if (lrr && distance > lrr->short_range && scanstate < ScanState::State::FullScan)
-                distance_variance = (random(0.01f, (distance - lrr->short_range)) / (lrr->long_range - lrr->short_range)) * 0.1f;
+            if (lrr && distance > effective_short_range && scanstate < ScanState::State::FullScan)
+                distance_variance = (random(0.01f, (distance - effective_short_range)) / (effective_long_range - effective_short_range)) * 0.1f;
 
             electrical = std::max(0.0f, info->electrical - distance_variance);
             gravitational = std::max(0.0f, info->gravitational - distance_variance);
