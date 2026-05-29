@@ -12,6 +12,7 @@
 #include "components/radar.h"
 #include "components/name.h"
 #include "components/faction.h"
+#include "components/shiplog.h"
 
 #include "screenComponents/commsOverlay.h"
 #include "screenComponents/radarView.h"
@@ -217,7 +218,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     );
     link_to_science_button
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
-        ->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>() && my_spaceship.hasComponent<RadarLink>());
+        ->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>() && my_spaceship.hasComponent<RadarLink>());
 
     // Manage waypoints.
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"),
@@ -294,7 +295,8 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.4f, tr("Clock") + ":", "");
     info_clock->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiAlertLevelSelect(this, ""))->setPosition(-20, allow_comms ? -70 : -20, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
+    alert_level_select = new GuiAlertLevelSelect(this, "");
+    alert_level_select->setPosition(-20, allow_comms ? -70 : -20, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
 
     auto position = allow_comms ? CrewPosition::relayOfficer : CrewPosition::altRelay;
     (new GuiCustomShipFunctions(this, position, ""))
@@ -398,14 +400,16 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
             }
             else
             {
-                link_to_science_button->setValue(false);
-                link_to_science_button->disable();
+                link_to_science_button
+                    ->setValue(false)
+                    ->disable();
             }
         }
         else
         {
-            link_to_science_button->setValue(false);
-            link_to_science_button->disable();
+            link_to_science_button
+                ->setValue(false)
+                ->disable();
         }
 
         if (canHack(target)) hack_target_button->enable();
@@ -414,8 +418,9 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     else
     {
         hack_target_button->disable();
-        link_to_science_button->disable();
-        link_to_science_button->setValue(false);
+        link_to_science_button
+            ->setValue(false)
+            ->disable();
         info_callsign->setValue("-");
     }
 
@@ -423,9 +428,10 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     {
         // Toggle ship capabilities.
         auto spl = my_spaceship.getComponent<ScanProbeLauncher>();
-        launch_probe_button->setVisible(spl);
-        launch_probe_button->setEnable(spl ? spl->stock > 0 : false);
-        link_to_science_button->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && spl && my_spaceship.hasComponent<RadarLink>());
+        launch_probe_button
+            ->setVisible(spl)
+            ->setEnable(spl ? spl->stock > 0 : false);
+        link_to_science_button->setVisible(spl && my_spaceship.hasComponent<RadarLink>());
         hack_target_button->setVisible(my_spaceship.hasComponent<HackingDevice>());
         center_button->setValue(radar->getAutoCentering());
 
@@ -457,6 +463,16 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         if (auto wp = my_spaceship.getComponent<Waypoints>())
             route_toggle->setValue(wp->is_route[active_waypoint_set - 1]);
     }
+
+    // Hide ships log if the entity lacks the ShipLog component.
+    if (ships_log)
+        ships_log->setVisible(my_spaceship.hasComponent<ShipLog>());
+
+    // Move bottom-positioned controls down when ships log is hidden.
+    const bool has_ship_log = my_spaceship.hasComponent<ShipLog>();
+    const float bottom_offset = has_ship_log ? -70.0f : -20.0f;
+    zoom_slider->setPosition(20.0f, bottom_offset, sp::Alignment::BottomLeft);
+    alert_level_select->setPosition(-20.0f, bottom_offset, sp::Alignment::BottomRight);
 }
 
 void RelayScreen::onUpdate()
@@ -598,7 +614,7 @@ void RelayScreen::onUpdate()
     }
 
     // Toggle science link on the selected probe.
-    if (keys.relay_link_to_science.getDown())
+    if (my_spaceship.hasComponent<LongRangeRadar>() && keys.relay_link_to_science.getDown())
     {
         auto target = targets.get();
         if (target)
@@ -671,6 +687,6 @@ void RelayScreen::onUpdate()
         radar->setAutoCentering(!radar->getAutoCentering());
 
     // Toggle ship's log min/maximized state.
-    if (ships_log && keys.relay_toggle_ships_log.getDown())
+    if (ships_log && my_spaceship.hasComponent<ShipLog>() && keys.relay_toggle_ships_log.getDown())
         ships_log->toggle();
 }

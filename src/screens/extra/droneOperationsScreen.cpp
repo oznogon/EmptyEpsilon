@@ -81,8 +81,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
         if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
             initial_control_range *= sensors->getSystemEffectiveness();
     }
-    if (initial_control_range < short_range)
-        initial_control_range = short_range;
+    initial_control_range = std::max(short_range, initial_control_range);
 
     radar_pane = new GuiElement(this, "");
     radar_pane->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

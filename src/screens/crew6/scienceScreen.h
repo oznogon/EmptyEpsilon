@@ -79,6 +79,7 @@ public:
     GuiLabel* info_thermal_signal_label;
 
     GuiToggleButton* probe_view_button;
+    GuiLabel* no_radar_label;
     sp::ecs::Entity observation_point;
     sp::ecs::Entity target_entity;
     GuiListbox* view_mode_selection;

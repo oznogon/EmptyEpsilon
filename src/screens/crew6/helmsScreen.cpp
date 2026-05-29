@@ -9,6 +9,7 @@
 #include "components/jumpdrive.h"
 #include "components/collision.h"
 #include "components/maneuveringthrusters.h"
+#include "components/impulse.h"
 #include "components/docking.h"
 
 #include "screenComponents/combatManeuver.h"
@@ -38,7 +39,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "HELMS_SCREEN", GuiTheme::getColor("background"))
 {
     // Render the radar shadow and background decorations.
-    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
+    background_gradient
         ->setTextureThemed("background.gradient")
         ->setPosition(glm::vec2(0.0f, 0.0f), sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
@@ -49,9 +51,20 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     new AlertLevelOverlay(this);
 
-    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
+    // Message if entity lacks all propulsion, maneuver, and docking
+    // components.
+    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", tr("helms", "No helms controls"), 50.0f);
+    no_controls_label
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
 
-    combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
+    helms_controls = new GuiElement(this, "");
+    helms_controls->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    GuiRadarView* radar = new GuiRadarView(helms_controls, "HELMS_RADAR", nullptr);
+
+    combat_maneuver = new GuiCombatManeuver(helms_controls, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 215);
 
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
@@ -112,28 +125,28 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     );
     radar->setAutoRotating(PreferencesManager::get("helms_radar_lock","0")=="1");
 
-    heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
+    heading_hint = new GuiLabel(helms_controls, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(sp::Alignment::Center)->setSize(0, 0);
 
-    auto energy_display = new EnergyInfoDisplay(this, "ENERGY_DISPLAY", 0.45);
+    auto energy_display = new EnergyInfoDisplay(helms_controls, "ENERGY_DISPLAY", 0.45);
     energy_display->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 40);
-    auto heading_display = new HeadingInfoDisplay(this, "HEADING_DISPLAY", 0.45);
+    auto heading_display = new HeadingInfoDisplay(helms_controls, "HEADING_DISPLAY", 0.45);
     heading_display->setPosition(20, 140, sp::Alignment::TopLeft)->setSize(240, 40);
-    auto velocity_display = new VelocityInfoDisplay(this, "VELOCITY_DISPLAY", 0.45);
+    auto velocity_display = new VelocityInfoDisplay(helms_controls, "VELOCITY_DISPLAY", 0.45);
     velocity_display->setPosition(20, 180, sp::Alignment::TopLeft)->setSize(240, 40);
 
-    GuiElement* engine_layout = new GuiElement(this, "ENGINE_LAYOUT");
+    GuiElement* engine_layout = new GuiElement(helms_controls, "ENGINE_LAYOUT");
     engine_layout->setPosition(20, -100, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 300)->setAttribute("layout", "horizontal");
     (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
     (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
 
-    docking_button = new GuiDockingButton(this, "DOCKING");
+    docking_button = new GuiDockingButton(helms_controls, "DOCKING");
     docking_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(280, 50)->setVisible(my_spaceship.hasComponent<DockingPort>());
 
     auto ub = my_spaceship.getComponent<UtilityBeam>();
 
-    sidebar_selector = new GuiSelector(this, "HELMS_SIDEBAR_SELECTOR", [this](int index, string value)
+    sidebar_selector = new GuiSelector(helms_controls, "HELMS_SIDEBAR_SELECTOR", [this](int index, string value)
     {
         if (value == "func")
         {
@@ -150,13 +163,13 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     });
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
 
-    custom_function_sidebar = new GuiCustomShipFunctions(this, CrewPosition::helmsOfficer, "HELMS_CUSTOM_FUNCS");
+    custom_function_sidebar = new GuiCustomShipFunctions(helms_controls, CrewPosition::helmsOfficer, "HELMS_CUSTOM_FUNCS");
     custom_function_sidebar
         ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 450.0f)
         ->hide();
 
-    utility_beam_sidebar = new GuiUtilityBeamControls(this, CrewPosition::helmsOfficer, "UTILITY_BEAM_CONTROLS");
+    utility_beam_sidebar = new GuiUtilityBeamControls(helms_controls, CrewPosition::helmsOfficer, "UTILITY_BEAM_CONTROLS");
     utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     utility_beam_sidebar->hide();
 
@@ -190,12 +203,39 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
 void HelmsScreen::onDraw(sp::RenderTarget& renderer)
 {
+    if (my_spaceship)
+    {
+        const bool has_any_propulsion = my_spaceship.hasComponent<ImpulseEngine>()
+            || my_spaceship.hasComponent<JumpDrive>()
+            || my_spaceship.hasComponent<WarpDrive>()
+            || my_spaceship.hasComponent<CombatManeuveringThrusters>()
+            || my_spaceship.hasComponent<ManeuveringThrusters>()
+            || my_spaceship.hasComponent<DockingPort>();
+        if (!has_any_propulsion)
+        {
+            GuiOverlay::onDraw(renderer);
+            return;
+        }
+    }
     GuiOverlay::onDraw(renderer);
 }
 
 void HelmsScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
+
+    const bool has_any_propulsion = my_spaceship.hasComponent<ImpulseEngine>()
+        || my_spaceship.hasComponent<JumpDrive>()
+        || my_spaceship.hasComponent<WarpDrive>()
+        || my_spaceship.hasComponent<CombatManeuveringThrusters>()
+        || my_spaceship.hasComponent<ManeuveringThrusters>()
+        || my_spaceship.hasComponent<DockingPort>();
+
+    background_gradient->setVisible(has_any_propulsion);
+    helms_controls->setVisible(has_any_propulsion);
+    no_controls_label->setVisible(!has_any_propulsion);
+
+    if (!has_any_propulsion) return;
 
     // Impulse, jump, warp hotkeys are handled in their screen components.
 

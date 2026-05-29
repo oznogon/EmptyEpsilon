@@ -5,6 +5,7 @@
 
 class GuiKeyValueDisplay;
 class GuiLabel;
+class GuiImage;
 class GuiDockingButton;
 class GuiCombatManeuver;
 class GuiSelector;
@@ -15,6 +16,9 @@ class GuiUtilityBeamRotationDial;
 class HelmsScreen : public GuiOverlay
 {
 private:
+    GuiImage* background_gradient;
+    GuiElement* helms_controls;
+    GuiLabel* no_controls_label;
     GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
     GuiDockingButton* docking_button;

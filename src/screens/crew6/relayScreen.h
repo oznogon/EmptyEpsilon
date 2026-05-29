@@ -4,6 +4,7 @@
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
 
+class GuiAlertLevelSelect;
 class GuiButton;
 class GuiElement;
 class GuiCommsOverlay;
@@ -54,6 +55,7 @@ private:
     GuiToggleButton* route_toggle;
 
     GuiRadarZoomSlider* zoom_slider;
+    GuiAlertLevelSelect* alert_level_select;
 
     GuiHackingDialog* hacking_dialog;
     GuiCommsOverlay* comms_overlay = nullptr;

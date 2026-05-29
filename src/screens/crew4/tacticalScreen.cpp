@@ -11,6 +11,8 @@
 #include "components/jumpdrive.h"
 #include "components/collision.h"
 #include "components/maneuveringthrusters.h"
+#include "components/impulse.h"
+#include "components/docking.h"
 #include "components/shields.h"
 #include "components/target.h"
 #include "components/beamWeaponTarget.h"
@@ -48,7 +50,8 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TACTICAL_SCREEN", GuiTheme::getColor("background"))
 {
     // Render the radar shadow and background decorations.
-    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
+    background_gradient
         ->setTextureThemed("background.gradient_single")
         ->setPosition(glm::vec2(0.0f, 0.0f), sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
@@ -59,8 +62,19 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     new AlertLevelOverlay(this);
 
+    // Message if entity lacks all propulsion, maneuver, docking, and weapon
+    // components.
+    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", tr("tactical", "No tactical controls"), 50.0f);
+    no_controls_label
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
+
+    tactical_controls = new GuiElement(this, "");
+    tactical_controls->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
     // Short-range tactical radar with a 5U range.
-    radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets);
+    radar = new GuiRadarView(tactical_controls, "TACTICAL_RADAR", &targets);
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 750);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
 
@@ -90,7 +104,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     );
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
 
-    auto stats = new GuiElement(this, "STATS");
+    auto stats = new GuiElement(tactical_controls, "STATS");
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 160)->setAttribute("layout", "vertical");
 
     // Ship statistics in the top left corner.
@@ -104,11 +118,11 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     shields_display->setSize(240, 40);
 
     // Weapon tube loading controls in the bottom left corner.
-    tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
+    tube_controls = new GuiMissileTubeControls(tactical_controls, "MISSILE_TUBES");
     tube_controls->setPosition(20, -20, sp::Alignment::BottomLeft);
     radar->enableTargetProjections(tube_controls);
 
-    beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+    beam_info_box = new GuiElement(tactical_controls, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(0.0f, -20.0f, sp::Alignment::BottomCenter)
         ->setSize(500.0f, 50.0f)
@@ -125,25 +139,25 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     }
 
     // Weapon tube locking, and manual aiming controls.
-    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
+    missile_aim = new AimLock(tactical_controls, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
     missile_aim->hide()->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
-    lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
+    lock_aim = new AimLockButton(tactical_controls, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(110, 50);
 
     // Combat maneuver and propulsion controls in the bottom right corner.
-    (new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-20, -390, sp::Alignment::BottomRight)->setSize(200, 150);
-    GuiElement* engine_layout = new GuiElement(this, "ENGINE_LAYOUT");
+    (new GuiCombatManeuver(tactical_controls, "COMBAT_MANEUVER"))->setPosition(-20, -390, sp::Alignment::BottomRight)->setSize(200, 150);
+    GuiElement* engine_layout = new GuiElement(tactical_controls, "ENGINE_LAYOUT");
     engine_layout->setPosition(-20, -80, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 300)->setAttribute("layout", "horizontalright");
     (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
-    (new GuiDockingButton(this, "DOCKING"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 50);
+    (new GuiDockingButton(tactical_controls, "DOCKING"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 50);
 
     auto ub = my_spaceship.getComponent<UtilityBeam>();
 
-    sidebar_selector = new GuiSelector(this, "TACTICAL_SIDEBAR_SELECTOR", [this](int index, string value)
+    sidebar_selector = new GuiSelector(tactical_controls, "TACTICAL_SIDEBAR_SELECTOR", [this](int index, string value)
     {
         if (value == "func")
         {
@@ -160,13 +174,13 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     });
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
 
-    custom_function_sidebar = new GuiCustomShipFunctions(this, CrewPosition::tacticalOfficer, "TACTICAL_CUSTOM_FUNCS");
+    custom_function_sidebar = new GuiCustomShipFunctions(tactical_controls, CrewPosition::tacticalOfficer, "TACTICAL_CUSTOM_FUNCS");
     custom_function_sidebar
         ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 100.0f)
         ->hide();
 
-    utility_beam_sidebar = new GuiUtilityBeamControls(this, CrewPosition::tacticalOfficer, "UTILITY_BEAM_CONTROLS");
+    utility_beam_sidebar = new GuiUtilityBeamControls(tactical_controls, CrewPosition::tacticalOfficer, "UTILITY_BEAM_CONTROLS");
     utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     utility_beam_sidebar->hide();
 
@@ -202,6 +216,22 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
+        auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
+        auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
+        const bool has_any_ability = my_spaceship.hasComponent<ImpulseEngine>()
+            || my_spaceship.hasComponent<JumpDrive>()
+            || my_spaceship.hasComponent<WarpDrive>()
+            || my_spaceship.hasComponent<CombatManeuveringThrusters>()
+            || my_spaceship.hasComponent<ManeuveringThrusters>()
+            || my_spaceship.hasComponent<DockingPort>()
+            || (beam_sys && beam_sys->mounts.size() > 0)
+            || (missile_tubes && missile_tubes->mounts.size() > 0);
+        if (!has_any_ability)
+        {
+            GuiOverlay::onDraw(renderer);
+            return;
+        }
+
         warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
         jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
         beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>() && (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage));
@@ -227,6 +257,23 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
 void TacticalScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
+
+    auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
+    auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
+    const bool has_any_ability = my_spaceship.hasComponent<ImpulseEngine>()
+        || my_spaceship.hasComponent<JumpDrive>()
+        || my_spaceship.hasComponent<WarpDrive>()
+        || my_spaceship.hasComponent<CombatManeuveringThrusters>()
+        || my_spaceship.hasComponent<ManeuveringThrusters>()
+        || my_spaceship.hasComponent<DockingPort>()
+        || (beam_sys && beam_sys->mounts.size() > 0)
+        || (missile_tubes && missile_tubes->mounts.size() > 0);
+
+    background_gradient->setVisible(has_any_ability);
+    tactical_controls->setVisible(has_any_ability);
+    no_controls_label->setVisible(!has_any_ability);
+
+    if (!has_any_ability) return;
 
     // Copied and pasted from Helms screen.
     auto thrusters = my_spaceship.getComponent<ManeuveringThrusters>();

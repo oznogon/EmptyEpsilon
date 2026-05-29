@@ -6,7 +6,9 @@
 
 class AimLock;
 class AimLockButton;
+class GuiImage;
 class GuiKeyValueDisplay;
+class GuiLabel;
 class GuiMissileTubeControls;
 class GuiRadarView;
 class GuiToggleButton;
@@ -19,6 +21,9 @@ class GuiUtilityBeamRotationDial;
 class WeaponsScreen : public GuiOverlay
 {
 private:
+    GuiImage* background_gradient;
+    GuiElement* weapons_controls;
+    GuiLabel* no_weapons_label;
     TargetsContainer targets;
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* front_shield_display;

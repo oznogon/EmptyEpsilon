@@ -11,6 +11,7 @@
 #include "components/scanning.h"
 #include "components/radar.h"
 #include "components/faction.h"
+#include "components/shiplog.h"
 #include "components/beamWeaponTarget.h"
 #include "components/missileWeaponTarget.h"
 
@@ -212,6 +213,20 @@ void OperationScreen::onDraw(sp::RenderTarget& target)
         if (auto wp = my_spaceship.getComponent<Waypoints>())
             route_toggle->setValue(wp->is_route[active_waypoint_set - 1]);
     }
+
+    // Disable waypoint buttons if no LongRangeRadar and not in probe view mode
+    // with a linked probe.
+    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+    auto rl = my_spaceship.getComponent<RadarLink>();
+    const bool has_radar_view = lrr || (rl && rl->linked_entity && science->probe_view_button->getValue());
+    place_waypoint_button->setEnable(has_radar_view);
+    delete_waypoint_button->setEnable(has_radar_view);
+
+    // Hide ships log if the entity lacks the ShipLog component, and adjust
+    // the science screen bottom margin to fill the vacated space.
+    if (ships_log)
+        ships_log->setVisible(my_spaceship.hasComponent<ShipLog>());
+    science->setMargins(0, 0, 0, my_spaceship.hasComponent<ShipLog>() ? 50 : 0);
 }
 
 void OperationScreen::onUpdate()
@@ -242,6 +257,6 @@ void OperationScreen::onUpdate()
     }
 
     // Toggle ship's log min/maximized state.
-    if (ships_log && keys.relay_toggle_ships_log.getDown())
+    if (ships_log && my_spaceship.hasComponent<ShipLog>() && keys.relay_toggle_ships_log.getDown())
         ships_log->toggle();
 }

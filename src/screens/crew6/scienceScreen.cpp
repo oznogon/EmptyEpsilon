@@ -70,6 +70,13 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     radar_view = new GuiElement(this, "RADAR_VIEW");
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    // Message if entity lacks the LongRangeRadar component.
+    no_radar_label = new GuiLabel(radar_view, "NO_RADAR_LABEL", tr("science", "No long-range radar"), 50.0f);
+    no_radar_label
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
+
     // Draw the science radar.
     science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE, &targets);
     science_radar
@@ -492,8 +499,65 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     if (!isVisible()) return;
 
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-    science_radar->setVisible(lrr);
-    if (!lrr) return;
+    auto rl = my_spaceship.getComponent<RadarLink>();
+
+    // Manage probe view button state. Probe view is independent of LRR.
+    probe_view_button->setVisible(rl);
+    if (rl && rl->linked_entity)
+    {
+        probe_view_button->enable();
+        if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
+            probe_radar->setViewPosition(probe_transform->getPosition());
+    }
+    else
+    {
+        probe_view_button->disable();
+        probe_view_button->setValue(false);
+        science_radar->show();
+        probe_radar->hide();
+    }
+
+    if (!lrr)
+    {
+        const bool probe_view_active = rl && rl->linked_entity && probe_view_button->getValue();
+        background_gradient->setVisible(probe_view_active);
+        science_radar->hide();
+        zoom_slider->hide();
+        if (!probe_view_active)
+        {
+            scan_button->disable();
+            no_radar_label->show();
+            info_callsign->setValue("-");
+            info_distance->setValue("-");
+            info_heading->setValue("-");
+            info_relspeed->setValue("-");
+            info_faction->setValue("-");
+            info_type->setValue("-");
+            info_shields->setValue("-");
+            info_hull->setValue("-");
+            info_shield_frequency->setFrequency(-1);
+            info_beam_frequency->setFrequency(-1);
+            info_faction_button->hide();
+            info_type_button->hide();
+            link_to_analysis_button->hide();
+            sidebar_frequencies_page->hide();
+            sidebar_signals_page->hide();
+            sidebar_systems_page->hide();
+            info_description->hide();
+            sidebar_pager->hide();
+            for (int n = 0; n < ShipSystem::COUNT; n++)
+                info_system[n]->hide();
+            targets.clear();
+            return;
+        }
+    }
+    else
+    {
+        no_radar_label->hide();
+        science_radar->show();
+        zoom_slider->show();
+        scan_button->enable();
+    }
 
     // Sync local target selection with replicated scanner target so all
     // Science and Operations clients show the same selected target.
@@ -503,29 +567,31 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             targets.set(scanner->target);
     }
 
-    auto rl = my_spaceship.getComponent<RadarLink>();
-    float view_distance = science_radar->getDistance();
-    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value()
-        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
-    if (mouse_wheel_delta != 0)
-        view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
-    if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
-        view_distance = std::max(lrr->short_range, view_distance * 0.9f);
-    if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
-        view_distance = std::min(lrr->long_range, view_distance * 1.1f);
-    view_distance = std::min(view_distance, lrr->long_range);
-    view_distance = std::max(view_distance, lrr->short_range);
-
-    // Update radar view distances and zoom range if changed.
-    if (view_distance != science_radar->getDistance()
-        || previous_long_range_radar != lrr->long_range
-        || previous_short_range_radar != lrr->short_range)
+    if (lrr)
     {
-        previous_short_range_radar = lrr->short_range;
-        previous_long_range_radar = lrr->long_range;
-        zoom_slider
-            ->setRange(lrr->long_range, lrr->short_range)
-            ->setValue(view_distance);
+        float view_distance = science_radar->getDistance();
+        float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value()
+            - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
+        if (mouse_wheel_delta != 0)
+            view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
+        if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+            view_distance = std::max(lrr->short_range, view_distance * 0.9f);
+        if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+            view_distance = std::min(lrr->long_range, view_distance * 1.1f);
+        view_distance = std::min(view_distance, lrr->long_range);
+        view_distance = std::max(view_distance, lrr->short_range);
+
+        // Update radar view distances and zoom range if changed.
+        if (view_distance != science_radar->getDistance()
+            || previous_long_range_radar != lrr->long_range
+            || previous_short_range_radar != lrr->short_range)
+        {
+            previous_short_range_radar = lrr->short_range;
+            previous_long_range_radar = lrr->long_range;
+            zoom_slider
+                ->setRange(lrr->long_range, lrr->short_range)
+                ->setValue(view_distance);
+        }
     }
 
     // If in probe view to a radar-linked entity, clear target selection if
@@ -540,7 +606,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     }
     // Otherwise, clear target if target is radar blocked/out of range or if we
     // don't have a transform (exploded or internally docked).
-    else
+    else if (lrr)
     {
         auto target_transform = targets.get().getComponent<sp::Transform>();
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
@@ -603,22 +669,6 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         info_system[n]
             ->setValue("-")
             ->hide();
-    }
-
-    // Manage probe view button state.
-    probe_view_button->setVisible(rl);
-    if (rl && rl->linked_entity)
-    {
-        probe_view_button->enable();
-        if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
-            probe_radar->setViewPosition(probe_transform->getPosition());
-    }
-    else
-    {
-        probe_view_button->disable();
-        probe_view_button->setValue(false);
-        science_radar->show();
-        probe_radar->hide();
     }
 
     auto target = targets.get();
@@ -900,6 +950,7 @@ void ScienceScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
 
+    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     auto science_scanner = my_spaceship.getComponent<ScienceScanner>();
     auto my_transform = my_spaceship.getComponent<sp::Transform>();
 
@@ -965,7 +1016,7 @@ void ScienceScreen::onUpdate()
         }
 
         // Open radar view.
-        if (keys.science_open_radar.isDiscreteStepDown())
+        if (lrr && keys.science_open_radar.isDiscreteStepDown())
         {
             view_mode_selection->setSelectionIndex(0);
             radar_view->show();
@@ -1033,8 +1084,9 @@ void ScienceScreen::onUpdate()
     // Cycle selectable entities.
     if (my_transform)
     {
+        bool use_probe_view = false;
         glm::vec2 scanner_position = my_transform->getPosition();
-        float scanner_range = science_radar->getDistance();
+        float scanner_range = lrr ? science_radar->getDistance() : PROBE_ZOOM_DISTANCE;
 
         if (auto rl = my_spaceship.getComponent<RadarLink>())
         {
@@ -1044,11 +1096,12 @@ void ScienceScreen::onUpdate()
                 {
                     scanner_position = probe_transform->getPosition();
                     scanner_range = PROBE_ZOOM_DISTANCE;
+                    use_probe_view = true;
                 }
             }
         }
 
-        if (science_scanner && science_scanner->delay == 0.0f)
+        if (science_scanner && science_scanner->delay == 0.0f && (lrr || use_probe_view))
         {
             // Select previous/next scannable entity.
             if (keys.science_select_next_scannable.isDiscreteStepDown() || keys.science_select_next_scannable.isRepeatReady())

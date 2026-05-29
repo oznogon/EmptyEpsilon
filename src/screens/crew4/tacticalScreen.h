@@ -6,6 +6,8 @@
 
 class AimLock;
 class AimLockButton;
+class GuiImage;
+class GuiLabel;
 class GuiMissileTubeControls;
 class GuiRadarView;
 class GuiKeyValueDisplay;
@@ -18,6 +20,9 @@ class GuiUtilityBeamRotationDial;
 class TacticalScreen : public GuiOverlay
 {
 private:
+    GuiImage* background_gradient;
+    GuiElement* tactical_controls;
+    GuiLabel* no_controls_label;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
 

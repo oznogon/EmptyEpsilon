@@ -38,7 +38,8 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "WEAPONS_SCREEN", GuiTheme::getColor("background"))
 {
     // Render the radar shadow and background decorations.
-    (new GuiImage(this, "BACKGROUND_GRADIENT", ""))
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
+    background_gradient
         ->setTextureThemed("background.gradient")
         ->setPosition(glm::vec2(0.0f, 0.0f), sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
@@ -49,7 +50,17 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     new AlertLevelOverlay(this);
 
-    radar = new GuiRadarView(this, "WEAPONS_RADAR", &targets);
+    // Message if entity lacks both weapons and shields.
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("weapons", "No weapons or shields"), 50.0f);
+    no_weapons_label
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
+
+    weapons_controls = new GuiElement(this, "");
+    weapons_controls->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    radar = new GuiRadarView(weapons_controls, "WEAPONS_RADAR", &targets);
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
@@ -69,19 +80,19 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     );
     radar->setAutoRotating(PreferencesManager::get("weapons_radar_lock","0")=="1");
 
-    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
+    missile_aim = new AimLock(weapons_controls, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
     missile_aim->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 850);
 
-    tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
+    tube_controls = new GuiMissileTubeControls(weapons_controls, "MISSILE_TUBES");
     tube_controls->setPosition(20, -20, sp::Alignment::BottomLeft);
     radar->enableTargetProjections(tube_controls);
 
-    lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
+    lock_aim = new AimLockButton(weapons_controls, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(130, 50);
 
-    beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+    beam_info_box = new GuiElement(weapons_controls, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(-20.0f, -120.0f, sp::Alignment::BottomRight)
         ->setSize(280.0f, 150.0f)
@@ -104,7 +115,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
             beam_info_box->setPosition(-20.0f, -50.0f, sp::Alignment::BottomRight);
     }
 
-    auto stats = new GuiElement(this, "WEAPONS_STATS");
+    auto stats = new GuiElement(weapons_controls, "WEAPONS_STATS");
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 120)->setAttribute("layout", "vertical");
 
     energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
@@ -116,13 +127,13 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
 
     // Shield frequency selection includes a shield enable button.
     if (gameGlobalInfo->use_beam_shield_frequencies)
-        (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 100);
+        (new GuiShieldFrequencySelect(weapons_controls, "SHIELD_FREQ"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 100);
     else
-        (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 50);
+        (new GuiShieldsEnableButton(weapons_controls, "SHIELDS_ENABLE"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 50);
 
     auto ub = my_spaceship.getComponent<UtilityBeam>();
 
-    sidebar_selector = new GuiSelector(this, "WEAPONS_SIDEBAR_SELECTOR", [this](int index, string value)
+    sidebar_selector = new GuiSelector(weapons_controls, "WEAPONS_SIDEBAR_SELECTOR", [this](int index, string value)
     {
         if (value == "func")
         {
@@ -139,13 +150,13 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     });
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
 
-    custom_function_sidebar = new GuiCustomShipFunctions(this, CrewPosition::weaponsOfficer, "WEAPONS_CUSTOM_FUNCS");
+    custom_function_sidebar = new GuiCustomShipFunctions(weapons_controls, CrewPosition::weaponsOfficer, "WEAPONS_CUSTOM_FUNCS");
     custom_function_sidebar
         ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 450.0f)
         ->hide();
 
-    utility_beam_sidebar = new GuiUtilityBeamControls(this, CrewPosition::weaponsOfficer, "UTILITY_BEAM_CONTROLS");
+    utility_beam_sidebar = new GuiUtilityBeamControls(weapons_controls, CrewPosition::weaponsOfficer, "UTILITY_BEAM_CONTROLS");
     utility_beam_sidebar
         ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 500.0f)
@@ -184,11 +195,21 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
+        auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
+        auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
+        auto shields = my_spaceship.getComponent<Shields>();
+        const bool has_any_weapons = (beam_sys && beam_sys->mounts.size() > 0) || (missile_tubes && missile_tubes->mounts.size() > 0);
+        const bool has_any_ability = has_any_weapons || (shields && shields->entries.size() > 0);
+        if (!has_any_ability)
+        {
+            GuiOverlay::onDraw(renderer);
+            return;
+        }
+
         auto reactor = my_spaceship.getComponent<Reactor>();
         energy_display->setVisible(reactor);
         if (reactor)
             energy_display->setValue(string(int(reactor->energy)));
-        auto shields = my_spaceship.getComponent<Shields>();
         if (shields && shields->entries.size() > 0) {
             front_shield_display->setValue(string(shields->entries[0].percentage()) + "%");
             front_shield_display->show();
@@ -224,6 +245,21 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
 void WeaponsScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
+
+    auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
+    auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
+    const bool has_beam_weapons = beam_sys && beam_sys->mounts.size() > 0;
+    const bool has_missile_weapons = missile_tubes && missile_tubes->mounts.size() > 0;
+    const bool has_any_weapons = has_beam_weapons || has_missile_weapons;
+    auto shields = my_spaceship.getComponent<Shields>();
+    const bool has_shields = shields && shields->entries.size() > 0;
+    const bool has_any_ability = has_any_weapons || has_shields;
+
+    background_gradient->setVisible(has_any_ability);
+    weapons_controls->setVisible(has_any_ability);
+    no_weapons_label->setVisible(!has_any_ability);
+
+    if (!has_any_ability) return;
 
     // Target selection cycle keybinds.
     // Select hostile targets.
