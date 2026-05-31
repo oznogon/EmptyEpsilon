@@ -113,4 +113,6 @@ split-weapons-screens 20260517 -- label when relevant weapon is missing
 
 generic-scrolling-guicontainer 20260526 -- fix mousewheel passthrough when not scrolling
 
+master 20260531 -- script-command-todos, fix-player-mine-avoidance, fix-strict-compilation
 refactor-comms-overlay 20260531 -- fix autoscroll behavior on long non-chat comms messages
+move-sector-naming-to-lua 20260531 -- move sector-naming code from C++ to Lua API
