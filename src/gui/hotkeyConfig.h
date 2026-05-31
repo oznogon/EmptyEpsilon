@@ -29,6 +29,7 @@ public:
     sp::io::Keybinding debug_show_colliders;
     sp::io::Keybinding debug_show_gui;
 #endif
+    std::array<sp::io::Keybinding, 15> trigger_custom_button;
 
     // Rebinding binds
     sp::io::Keybinding cancel_rebind;

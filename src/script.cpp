@@ -38,6 +38,7 @@
 #include "systems/probe.h"
 #include "components/briefing.h"
 #include "audio/sound.h"
+#include "systems/probe.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
 #include "systems/docking.h"
@@ -1412,6 +1413,12 @@ static void luaCommandClearDroneLink(sp::ecs::Entity ship) {
     ship.removeComponent<DroneLink>();
 }
 
+static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAlertLevel(level); return; }
+    if (auto player_control = ship.getComponent<PlayerControl>())
+        player_control->alert_level = level;
+}
+
 static void luaStartThread(sp::script::Callback callback)
 {
     auto res = callback.callCoroutine();
@@ -1882,7 +1889,6 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// void commandCombatManeuverBoost(entity ship, number amount)
     /// Triggers a combat maneuver boost for the given ship.
     /// amount is a value from 0.0 to 1.0.
-    /// This command is implemented only for the local player ship and has no effect on other ships.
     /// This is equivalent to pushing the Helms screen's combat maneuver control forward.
     /// Example:
     /// commandCombatManeuverBoost(getPlayerShip(-1), 1.0) -- full combat boost forward
@@ -1896,21 +1902,18 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandCombatManeuverStrafe", &luaCommandCombatManeuverStrafe);
     /// void commandLaunchProbe(entity ship, number x, number y)
     /// Launches a scan probe from the given ship toward the given coordinates.
-    /// This command is only implemented for the local player ship and has no effect on other ships.
     /// This is equivalent to clicking the Relay screen's launch probe button and then clicking a location.
     /// Example:
     /// commandLaunchProbe(getPlayerShip(-1), 30000, 10000)
     env.setGlobal("commandLaunchProbe", &luaCommandLaunchProbe);
     /// void commandSetScienceLink(entity ship, entity probe)
     /// Links the science station of the given ship to the given scan probe for extended radar range.
-    /// This command is only implemented for the local player ship and has no effect on other ships.
     /// This is equivalent to selecting a probe on the Relay screen and then clicking the link to science button.
     /// Example:
     /// commandSetScienceLink(getPlayerShip(-1), launched_probe) -- link the probe assigned to launched_probe
     env.setGlobal("commandSetScienceLink", &luaCommandSetScienceLink);
     /// void commandClearScienceLink(entity ship)
     /// Clears the science station's link to a scan probe for the given ship.
-    /// This command is only implemented for the local player ship and has no effect on other ships.
     /// This is equivalent to selecting the linked probe on the Relay screen and then clicking the link to science button.
     /// Example:
     /// commandClearScienceLink(getPlayerShip(-1)) -- clear any science link on this ship
@@ -1934,7 +1937,6 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandClearDroneLink", &luaCommandClearDroneLink);
     /// void commandSetAlertLevel(entity ship, string level)
     /// Sets the alert level for the given ship. See EAlertLevel for valid values.
-    /// This command is only implemented for the local player ship and has no effect on other ships.
     /// This is equivalent to clicking the Relay screen's alert level button and then selecting a level.
     /// Example:
     /// commandSetAlertLevel(getPlayerShip(-1), "RED ALERT") -- set red alert

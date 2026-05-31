@@ -311,6 +311,24 @@ Keys::Keys() :
     next_rebind_category("REBIND_NEXT_CATEGORY", "Tab"),
     prev_rebind_category("REBIND_PREV_CATEGORY", ""),
 
+    trigger_custom_button{{
+        {"TRIGGER_CUSTOM_BUTTON1"},
+        {"TRIGGER_CUSTOM_BUTTON2"},
+        {"TRIGGER_CUSTOM_BUTTON3"},
+        {"TRIGGER_CUSTOM_BUTTON4"},
+        {"TRIGGER_CUSTOM_BUTTON5"},
+        {"TRIGGER_CUSTOM_BUTTON6"},
+        {"TRIGGER_CUSTOM_BUTTON7"},
+        {"TRIGGER_CUSTOM_BUTTON8"},
+        {"TRIGGER_CUSTOM_BUTTON9"},
+        {"TRIGGER_CUSTOM_BUTTON10"},
+        {"TRIGGER_CUSTOM_BUTTON11"},
+        {"TRIGGER_CUSTOM_BUTTON12"},
+        {"TRIGGER_CUSTOM_BUTTON13"},
+        {"TRIGGER_CUSTOM_BUTTON14"},
+        {"TRIGGER_CUSTOM_BUTTON15"}
+    }},
+
     // Crew screen binds
     next_station("STATION_NEXT", "Tab"),
     prev_station("STATION_PREVIOUS"),
@@ -677,6 +695,12 @@ void Keys::init()
     next_rebind_category.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     prev_rebind_category.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Previous category"));
     prev_rebind_category.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+
+    for (auto n = 0u; n < trigger_custom_button.size(); n++)
+    {
+        trigger_custom_button[n].setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Custom button slot {number}").format({{"number", string(n + 1)}}));
+        trigger_custom_button[n].setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    }
 
     // Crew screens
     next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));
