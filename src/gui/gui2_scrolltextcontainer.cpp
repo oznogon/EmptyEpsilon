@@ -127,7 +127,9 @@ void GuiScrollFormattedText::updateLayout(const sp::Rect& bounds)
     glm::vec2 padding_size(layout.padding.left + layout.padding.right, layout.padding.top + layout.padding.bottom);
     layout_manager->updateLoop(*this, sp::Rect(rect.position + glm::vec2{layout.padding.left, layout.padding.top}, rect.size - padding_size));
 
-    if (auto_scroll_down) scroll_container->scrollToFraction(1.0f);
+    // Auto-scroll down only if already scrolled to the bottom.
+    if (auto_scroll_down && text_draw_size.y >= last_text_height)
+        scroll_container->scrollToFraction(1.0f);
 
     last_text_height = text_draw_size.y;
 }
