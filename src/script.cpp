@@ -1413,12 +1413,6 @@ static void luaCommandClearDroneLink(sp::ecs::Entity ship) {
     ship.removeComponent<DroneLink>();
 }
 
-static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAlertLevel(level); return; }
-    if (auto player_control = ship.getComponent<PlayerControl>())
-        player_control->alert_level = level;
-}
-
 static void luaStartThread(sp::script::Callback callback)
 {
     auto res = callback.callCoroutine();
