@@ -111,4 +111,6 @@ docking-bay 20260516 -- fix DockingBayScreen background if component is missing
 extra-crew-screens 20260517 -- RadarScreen autorotation, AnalysisTarget component
 split-weapons-screens 20260517 -- label when relevant weapon is missing
 
-generic-scrolling-guicontainer 2026526 -- fix mousewheel passthrough when not scrolling
+generic-scrolling-guicontainer 20260526 -- fix mousewheel passthrough when not scrolling
+
+refactor-comms-overlay 20260531 -- fix autoscroll behavior on long non-chat comms messages
