@@ -114,6 +114,55 @@ end
 function Entity:transferPlayersToShip(other_ship)
     transferPlayersFromShipToShip(self, other_ship)
 end
+--- Adds crew positions to this entity's allowed_positions mask.
+--- The positions argument can be a single string or a table of position strings.
+--- This function has no effect if the entity lacks a PlayerControl component.
+--- Example:
+--- ship:addAllowedCrewPositions("helms") -- adds Helms to the allowed positions
+--- ship:addAllowedCrewPositions({"helms", "weapons"}) -- adds Helms and Weapons
+function Entity:addAllowedCrewPositions(positions)
+    if not self.components.player_control then return self end
+    if type(positions) ~= "table" then positions = {positions} end
+    local current = self.components.player_control.allowed_positions
+    local seen = {}
+    for _, p in ipairs(current) do seen[p] = true end
+    for _, p in ipairs(positions) do
+        if not seen[p] then table.insert(current, p) end
+    end
+    self.components.player_control.allowed_positions = current
+    return self
+end
+--- Removes crew positions from this entity's allowed_positions mask.
+--- The positions argument can be a single string or a table of position strings.
+--- This function has no effect if the entity lacks a PlayerControl component.
+--- Example:
+--- ship:removeAllowedCrewPositions("helms") -- removes Helms from the allowed positions
+--- ship:removeAllowedCrewPositions({"helms", "weapons"}) -- removes Helms and Weapons
+function Entity:removeAllowedCrewPositions(positions)
+    if not self.components.player_control then return self end
+    if type(positions) ~= "table" then positions = {positions} end
+    local current = self.components.player_control.allowed_positions
+    local to_remove = {}
+    for _, p in ipairs(positions) do to_remove[p] = true end
+    local new_positions = {}
+    for _, p in ipairs(current) do
+        if not to_remove[p] then table.insert(new_positions, p) end
+    end
+    self.components.player_control.allowed_positions = new_positions
+    return self
+end
+--- Sets this entity's allowed_positions mask to exactly the given positions.
+--- The positions argument can be a single string, a table of position strings, or the string "all" to select all positions.
+--- This function has no effect if the entity lacks a PlayerControl component.
+--- Example:
+--- ship:setAllowedCrewPositions({"helms", "weapons"}) -- only Helms and Weapons are allowed
+--- ship:setAllowedCrewPositions("all") -- all positions allowed
+function Entity:setAllowedCrewPositions(positions)
+    if self.components.player_control then
+        self.components.player_control.allowed_positions = positions
+    end
+    return self
+end
 --- Transfers only the crew members on a specific crew position to another player ship.
 --- If a player is in multiple positions, this matches any of their positions and moves that player to all of the same positions on the destination ship.
 --- Example:
