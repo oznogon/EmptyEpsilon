@@ -43,6 +43,8 @@ template<> struct Convert<CrewPositions> {
                 result.add(Convert<CrewPosition>::fromLua(L, -1));
                 lua_pop(L, 1);
             }
+        } else if (lua_isstring(L, idx) && string(lua_tostring(L, idx)).lower() == "all") {
+            return CrewPositions::all();
         } else {
             result.add(Convert<CrewPosition>::fromLua(L, idx));
         }
