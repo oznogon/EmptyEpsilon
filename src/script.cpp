@@ -347,50 +347,82 @@ static int luaSectorToXY(lua_State* L)
 {
     string sector = luaL_checkstring(L, 1);
     constexpr float sector_size = 20000;
-    int x, y, intpart;
 
-    if(sector.length() < 2){
+    if (sector.length() < 5) {
         lua_pushnumber(L, 0);
         lua_pushnumber(L, 0);
         lua_pushboolean(L, false);
         return 3;
     }
 
-    // Y axis is complicated
-    if(sector[0] >= char('A') && sector[1] >= char('A')) {
-        // Case with two letters
-        char a1 = sector[0];
-        char a2 = sector[1];
-        try{
-            intpart = stoi(sector.substr(2));
-        } catch(const std::exception& e) {
-            lua_pushnumber(L, 0);
-            lua_pushnumber(L, 0);
-            lua_pushboolean(L, false);
-            return 3;
+    int pos = 0;
+    int block_y = 0;
+    if (pos < (int)sector.length() && sector[pos] >= 'A' && sector[pos] <= 'M') {
+        while (pos < (int)sector.length() && sector[pos] >= 'A' && sector[pos] <= 'M') {
+            block_y = block_y * 13 + (sector[pos] - 'A' + 1);
+            pos++;
         }
-        if(a1 > char('a')){
-            // Case with two lowercase letters (zz10) counting down towards the North
-            y = (((char('z') - a1) * 26) + (char('z') - a2 + 6)) * -sector_size; // 6 is the offset from F5 to zz5
-        }else{
-            // Case with two uppercase letters (AB20) counting up towards the South
-            y = (((a1 - char('A')) * 26) + (a2 - char('A') + 21)) * sector_size; // 21 is the offset from F5 to AA5
+        block_y = -block_y;
+    } else if (pos < (int)sector.length() && sector[pos] >= 'N' && sector[pos] <= 'Z') {
+        while (pos < (int)sector.length() && sector[pos] >= 'N' && sector[pos] <= 'Z') {
+            block_y = block_y * 13 + (sector[pos] - 'N' + 1);
+            pos++;
         }
-    }else{
-        //Case with just one letter (A9/a9 - these are the same sector, as case only matters in the two-letter sectors)
-        char alphaPart = toupper(sector[0]);
-        try{
-            intpart = stoi(sector.substr(1));
-        }catch(const std::exception& e){
-            lua_pushnumber(L, 0);
-            lua_pushnumber(L, 0);
-            lua_pushboolean(L, false);
-            return 3;
-        }
-        y = (alphaPart - char('F')) * sector_size;
     }
-    // X axis is simple
-    x = (intpart - 5) * sector_size; // 5 is the numeric component of the F5 origin
+
+    if (pos + 2 > (int)sector.length()) {
+        lua_pushnumber(L, 0);
+        lua_pushnumber(L, 0);
+        lua_pushboolean(L, false);
+        return 3;
+    }
+    string row_str = sector.substr(pos, pos + 2);
+    int local_row = row_str.toInt();
+    pos += 2;
+
+    if (pos >= (int)sector.length()) {
+        lua_pushnumber(L, 0);
+        lua_pushnumber(L, 0);
+        lua_pushboolean(L, false);
+        return 3;
+    }
+
+    int block_x = 0;
+    if (sector[pos] == '-') {
+        pos++;
+    } else if (sector[pos] >= 'A' && sector[pos] <= 'M') {
+        while (pos < (int)sector.length() && sector[pos] >= 'A' && sector[pos] <= 'M') {
+            block_x = block_x * 13 + (sector[pos] - 'A' + 1);
+            pos++;
+        }
+        block_x = -block_x;
+    } else if (sector[pos] >= 'N' && sector[pos] <= 'Z') {
+        while (pos < (int)sector.length() && sector[pos] >= 'N' && sector[pos] <= 'Z') {
+            block_x = block_x * 13 + (sector[pos] - 'N' + 1);
+            pos++;
+        }
+    } else {
+        lua_pushnumber(L, 0);
+        lua_pushnumber(L, 0);
+        lua_pushboolean(L, false);
+        return 3;
+    }
+
+    if (pos + 2 > (int)sector.length()) {
+        lua_pushnumber(L, 0);
+        lua_pushnumber(L, 0);
+        lua_pushboolean(L, false);
+        return 3;
+    }
+    string col_str = sector.substr(pos, pos + 2);
+    int local_col = col_str.toInt();
+
+    int sector_x = block_x * 100 + local_col;
+    int sector_y = block_y * 100 + local_row;
+
+    float x = (sector_x - 50) * sector_size;
+    float y = (sector_y - 50) * sector_size;
+
     lua_pushnumber(L, x);
     lua_pushnumber(L, y);
     lua_pushboolean(L, true);
@@ -1590,18 +1622,23 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("victory", &luaVictory);
     /// string getSectorName(float x, float y)
     /// Returns the name of the sector containing the given x/y coordinates.
-    /// Coordinates 0,0 are the top-left ("northwest") point of sector F5.
+    /// Sectors are 20U square zones defined in a 100x100 grid centered on the origin point 0,0.
+    /// Sector names are in the format `RR-CC`, where RR is the row (00-99) and CC is the column (00-99).
+    /// Sector 00-00 is at the top-left (northwest) corner, 50 sectors west and north of origin.
+    /// For columns east of 99, the dash is replaced with letters from N to Z. For columns west of 00, the dash is replaced with letters from M to A.
+    /// For rows north of 00, sector names are prefixed with letters from M to A. For rows south of 99, sector names are prefixed with letters from N to Z.
     /// See also SpaceObject:getSectorName().
-    /// Example: getSectorName(20000,-40000) -- returns "D6"
+    /// Example: getSectorName(20000,-40000) -- returns "48-51"
     env.setGlobal("getSectorName", &luaGetSectorName);
     /// glm::vec2 sectorToXY(string sector_name)
-    /// Returns the top-left ("northwest") x/y coordinates for the given sector mame.
+    /// Returns the top-left ("northwest") x/y coordinates for the given sector name.
     /// If the sector name is invalid, this returns coordinates 0, 0. This function also returns a third optional Boolean value that indicates whether the sector name was valid.
     /// Examples:
-    /// x, y = sectorToXY("F5") -- x = 0, y = 0
-    /// x, y = sectorToXY("A0") -- x = -100000, y = -100000
-    /// x, y = sectorToXY("zz-23") -- x = -560000, y = -120000
-    /// x, y, valid = sectorToXY("BA12") -- x = 140000, y = 940000, valid = true
+    /// x, y = sectorToXY("50-50") -- x = 0, y = 0
+    /// x, y = sectorToXY("00-00") -- x = -1000000, y = -1000000
+    /// x, y = sectorToXY("50-63") -- x = 260000, y = 0
+    /// x, y, valid = sectorToXY("50N00") -- x = 2800000, y = 0, valid = true
+    /// x, y, valid = sectorToXY("A00-00") -- x = -1000000, y = -3000000, valid = true
     /// x, y, valid = sectorToXY("FOOBAR9000") -- x = 0, y = 0, valid = false
     env.setGlobal("sectorToXY", &luaSectorToXY);
     /// bool isInsideZone(x, y, zone_entity)

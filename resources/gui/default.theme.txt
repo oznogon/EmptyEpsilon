@@ -110,7 +110,7 @@
         [radar.sector_grid] {
             # Font and font size.
             font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
-            size: 30.0
+            size: 24.0
             # Main grid line alpha; subsector line alpha is half of this.
             color: #404080FF
         }

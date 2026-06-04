@@ -421,20 +421,122 @@ string GameGlobalInfo::getMissionTime() {
     return string(buf);
 }
 
+static string blockToLettersAM(int block_count)
+{
+    string result;
+    while (block_count > 0) {
+        block_count--;
+        int idx = block_count % 13;
+        result = char('A' + idx) + result;
+        block_count /= 13;
+    }
+    return result;
+}
+
+static string blockToLettersNZ(int block_count)
+{
+    string result;
+    while (block_count > 0) {
+        block_count--;
+        int idx = block_count % 13;
+        result = char('N' + idx) + result;
+        block_count /= 13;
+    }
+    return result;
+}
+
+static int lettersToBlockAM(const string& s, int& pos)
+{
+    int block = 0;
+    while (pos < (int)s.length() && s[pos] >= 'A' && s[pos] <= 'M') {
+        block = block * 13 + (s[pos] - 'A' + 1);
+        pos++;
+    }
+    return block;
+}
+
+static int lettersToBlockNZ(const string& s, int& pos)
+{
+    int block = 0;
+    while (pos < (int)s.length() && s[pos] >= 'N' && s[pos] <= 'Z') {
+        block = block * 13 + (s[pos] - 'N' + 1);
+        pos++;
+    }
+    return block;
+}
+
 string getSectorName(glm::vec2 position)
 {
     constexpr float sector_size = 20000;
-    int sector_x = floorf(position.x / sector_size) + 5;
-    int sector_y = floorf(position.y / sector_size) + 5;
-    string y;
-    string x;
-    if (sector_y >= 0)
-        if (sector_y < 26)
-            y = string(char('A' + (sector_y)));
-        else
-            y = string(char('A' - 1 + (sector_y / 26))) + string(char('A' + (sector_y % 26)));
+    int sector_x = floorf(position.x / sector_size) + 50;
+    int sector_y = floorf(position.y / sector_size) + 50;
+
+    int block_x = sector_x >= 0 ? sector_x / 100 : (sector_x - 99) / 100;
+    int local_col = ((sector_x % 100) + 100) % 100;
+    int block_y = sector_y >= 0 ? sector_y / 100 : (sector_y - 99) / 100;
+    int local_row = ((sector_y % 100) + 100) % 100;
+
+    char row_buf[3];
+    snprintf(row_buf, sizeof(row_buf), "%02d", local_row);
+    char col_buf[3];
+    snprintf(col_buf, sizeof(col_buf), "%02d", local_col);
+
+    string row_prefix;
+    if (block_y < 0)
+        row_prefix = blockToLettersAM(-block_y);
+    else if (block_y > 0)
+        row_prefix = blockToLettersNZ(block_y);
+
+    string col_sep;
+    if (block_x == 0)
+        col_sep = "-";
+    else if (block_x < 0)
+        col_sep = blockToLettersAM(-block_x);
     else
-        y = string(char('z' + ((sector_y + 1) / 26))) + ((sector_y  % 26) == 0 ? "a" : string(char('z' + 1 + (sector_y  % 26))));
-    x = string(sector_x);
-    return y + x;
+        col_sep = blockToLettersNZ(block_x);
+
+    return row_prefix + string(row_buf) + col_sep + string(col_buf);
+}
+
+glm::vec2 sectorToXY(string sector_name)
+{
+    constexpr float sector_size = 20000;
+    if (sector_name.length() < 5) return {};
+
+    int pos = 0;
+    int block_y = 0;
+    if (pos < (int)sector_name.length() && sector_name[pos] >= 'A' && sector_name[pos] <= 'M')
+        block_y = -lettersToBlockAM(sector_name, pos);
+    else if (pos < (int)sector_name.length() && sector_name[pos] >= 'N' && sector_name[pos] <= 'Z')
+        block_y = lettersToBlockNZ(sector_name, pos);
+
+    if (pos + 2 > (int)sector_name.length()) return {};
+    string row_str = sector_name.substr(pos, pos + 2);
+    int local_row = row_str.toInt();
+    pos += 2;
+
+    if (pos >= (int)sector_name.length()) return {};
+
+    int block_x = 0;
+    if (sector_name[pos] == '-') {
+        pos++;
+    } else if (sector_name[pos] >= 'A' && sector_name[pos] <= 'M') {
+        block_x = -lettersToBlockAM(sector_name, pos);
+    } else if (sector_name[pos] >= 'N' && sector_name[pos] <= 'Z') {
+        block_x = lettersToBlockNZ(sector_name, pos);
+    } else {
+        return {};
+    }
+
+    if (pos + 2 > (int)sector_name.length()) return {};
+    string col_str = sector_name.substr(pos, pos + 2);
+    int local_col = col_str.toInt();
+
+    int sector_x = block_x * 100 + local_col;
+    int sector_y = block_y * 100 + local_row;
+
+    float x = (sector_x - 50) * sector_size;
+    float y = (sector_y - 50) * sector_size;
+
+    return {x, y};
 }
