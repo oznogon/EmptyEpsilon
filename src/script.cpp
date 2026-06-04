@@ -1577,6 +1577,11 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     ///   getEntitiesWithComponent("beam_weapons") -- returns a table of all entities with the BeamWeapons component.
     ///   getEntitiesWithComponent("beam_weapons")[1]:getCallSign() -- returns the callsign of the first identified entity with beam weapons
     env.setGlobal("getEntitiesWithComponent", &luaQueryEntities);
+    /// bool moveEntityToInternalBay(entity target, entity carrier)
+    /// Moves an entity into another entity's internal docking bay.
+    /// Returns true if successful, false if the carrier does not support internal docking with the target.
+    /// Example:
+    /// success = moveEntityToInternalBay(drone, carrier) -- moves the drone entity into the carrier's internal bay
     env.setGlobal("moveEntityToInternalBay", &luaMoveEntityToInternalBay);
     /// table getLuaEntityFunctionTable()
     /// Returns a table containing Lua entity functions.
@@ -1976,6 +1981,11 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Example:
     /// commandMoveWaypoint(getPlayerShip(-1), 0, 15000, -5000) -- move the first waypoint to 15000, -5000
     env.setGlobal("commandMoveWaypoint", &luaCommandMoveWaypoint);
+    /// void commandSetWaypointRoute(entity ship, bool is_route [, int set_id])
+    /// Sets whether the given waypoint set is a route (waypoints connected as a path) or individual points.
+    /// set_id defaults to 1 if not provided.
+    /// Example:
+    /// commandSetWaypointRoute(getPlayerShip(-1), true) -- connect waypoints as a route
     env.setGlobal("commandSetWaypointRoute", &luaCommandSetWaypointRoute);
     /// void commandActivateSelfDestruct(entity ship)
     /// Activates the self-destruct sequence for the given ship.
@@ -2053,8 +2063,30 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// commandSetAlertLevel(getPlayerShip(-1), "RED ALERT") -- set red alert
     env.setGlobal("commandSetAlertLevel", &luaCommandSetAlertLevel);
 
+    /// void setCustomUtilityBeamMode(entity ship, string name, int order, float energy_per_sec, float heat_per_sec, bool requires_target, function callback, function deactivate_callback)
+    /// Defines or updates a custom utility beam mode for the given ship.
+    /// If a mode with the same name already exists, its settings are updated; otherwise a new mode is added.
+    /// Modes are sorted by the order value.
+    ///
+    /// callback signature: function callback(entity firing_entity, entity target_entity, float distance, float angle_diff)
+    ///   Called every frame while the beam is actively firing. The callback should set is_firing to true on the firing entity if the beam hit something, so the beam effect is rendered.
+    ///
+    /// deactivate_callback signature: function deactivate_callback(entity firing_entity, entity target_entity)
+    ///   Called once when the beam is deactivated. When requires_target is true, this is called once per entity in range of the firing entity.
+    /// Example:
+    /// setCustomUtilityBeamMode(ship, "Mining", 1, 10.0, 0.5, true, miningCallback, deactivateMiningCallback)
     env.setGlobal("setCustomUtilityBeamMode", &luaSetCustomUtilityBeamMode);
+    /// void setCustomUtilityBeamModeProgress(entity ship, string name, float progress)
+    /// Updates the progress value (0.0 to 1.0) for a named custom utility beam mode.
+    /// Has no effect if no mode with the given name exists on the ship.
+    /// Example:
+    /// setCustomUtilityBeamModeProgress(ship, "Mining", 0.75) -- set progress to 75%
     env.setGlobal("setCustomUtilityBeamModeProgress", &luaSetCustomUtilityBeamModeProgress);
+    /// void removeCustomUtilityBeamMode(entity ship, string name)
+    /// Removes a named custom utility beam mode from the given ship.
+    /// Has no effect if no mode with the given name exists on the ship.
+    /// Example:
+    /// removeCustomUtilityBeamMode(ship, "Mining") -- remove the mining beam mode
     env.setGlobal("removeCustomUtilityBeamMode", &luaRemoveCustomUtilityBeamMode);
 
     /// void transferPlayersFromShipToShip(entity source, entity target [, string station])
