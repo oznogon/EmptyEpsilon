@@ -71,11 +71,6 @@ OperationScreen::OperationScreen(GuiContainer* owner)
                     auto target = science->targets.get();
                     my_player_info->commandSetCommsTarget(target);
                     my_player_info->commandSetScanTarget(target);
-                    if (Faction::getRelation(my_spaceship, target) != FactionRelation::Friendly)
-                    {
-                        my_player_info->commandSetBeamTarget(target);
-                        my_player_info->commandSetMissileTarget(target);
-                    }
                 }
                 else if (my_spaceship)
                 {

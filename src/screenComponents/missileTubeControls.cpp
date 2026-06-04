@@ -4,8 +4,8 @@
 #include "powerDamageIndicator.h"
 #include "components/warpdrive.h"
 #include "components/missiletubes.h"
+#include "components/missileWeaponTarget.h"
 #include "components/collision.h"
-#include "components/target.h"
 #include "components/target.h"
 #include "systems/missilesystem.h"
 
@@ -168,8 +168,12 @@ void GuiMissileTubeControls::onUpdate()
             float target_angle = missile_target_angle;
             if (!manual_aim)
             {
-                auto target = my_spaceship.getComponent<Target>();
-                target_angle = MissileSystem::calculateFiringSolution(my_spaceship, tubes->mounts[n], target ? target->entity : sp::ecs::Entity{});
+                sp::ecs::Entity target_entity;
+                if (auto tgt = my_spaceship.getComponent<MissileWeaponTarget>())
+                    target_entity = tgt->entity;
+                else if (auto tgt = my_spaceship.getComponent<Target>())
+                    target_entity = tgt->entity;
+                target_angle = MissileSystem::calculateFiringSolution(my_spaceship, tubes->mounts[n], target_entity);
                 if (target_angle == std::numeric_limits<float>::infinity()) {
                     auto transform = my_spaceship.getComponent<sp::Transform>();
                     target_angle = (transform ? transform->getRotation() : 0.0f) + tubes->mounts[n].direction;
@@ -232,8 +236,12 @@ void GuiMissileTubeControls::createTubeRow()
         {
             float target_angle = missile_target_angle;
             if (!manual_aim) {
-                auto target = my_spaceship.getComponent<Target>();
-                target_angle = MissileSystem::calculateFiringSolution(my_spaceship, tubes->mounts[n], target ? target->entity : sp::ecs::Entity{});
+                sp::ecs::Entity target_entity;
+                if (auto tgt = my_spaceship.getComponent<MissileWeaponTarget>())
+                    target_entity = tgt->entity;
+                else if (auto tgt = my_spaceship.getComponent<Target>())
+                    target_entity = tgt->entity;
+                target_angle = MissileSystem::calculateFiringSolution(my_spaceship, tubes->mounts[n], target_entity);
                 if (target_angle == std::numeric_limits<float>::infinity()) {
                     auto transform = my_spaceship.getComponent<sp::Transform>();
                     target_angle = (transform ? transform->getRotation() : 0.0f) + tubes->mounts[n].direction;

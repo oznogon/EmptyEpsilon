@@ -17,6 +17,7 @@
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/missiletubes.h"
+#include "components/missileWeaponTarget.h"
 #include "components/target.h"
 #include "components/radar.h"
 #include "components/drone.h"
@@ -719,11 +720,19 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                     {
                         missile_target_angle = target_angle;
                     }
-                    else if (auto target = entity.getComponent<Target>())
+                    else
                     {
-                        float firing_solution = MissileSystem::calculateFiringSolution(entity, mount, target->entity);
-                        if (firing_solution != std::numeric_limits<float>::infinity())
-                            missile_target_angle = firing_solution;
+                        sp::ecs::Entity target_entity;
+                        if (auto tgt = entity.getComponent<MissileWeaponTarget>())
+                            target_entity = tgt->entity;
+                        else if (auto tgt = entity.getComponent<Target>())
+                            target_entity = tgt->entity;
+                        if (target_entity)
+                        {
+                            float firing_solution = MissileSystem::calculateFiringSolution(entity, mount, target_entity);
+                            if (firing_solution != std::numeric_limits<float>::infinity())
+                                missile_target_angle = firing_solution;
+                        }
                     }
                 }
 

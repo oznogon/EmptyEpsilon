@@ -12,8 +12,10 @@
 #include "components/radar.h"
 #include "components/drone.h"
 #include "components/beamweapon.h"
+#include "components/beamWeaponTarget.h"
 #include "components/collision.h"
 #include "components/missiletubes.h"
+#include "components/missileWeaponTarget.h"
 
 #include "screenComponents/aimLock.h"
 #include "screenComponents/alertOverlay.h"
@@ -223,10 +225,11 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
         } else {
             rear_shield_display->hide();
         }
-        if (auto tg = my_spaceship.getComponent<Target>())
-            targets.set(tg->entity);
-        else
-            targets.set(sp::ecs::Entity{});
+        sp::ecs::Entity target_entity;
+        if (auto t = my_spaceship.getComponent<BeamWeaponTarget>()) target_entity = t->entity;
+        else if (auto t = my_spaceship.getComponent<MissileWeaponTarget>()) target_entity = t->entity;
+        else if (auto t = my_spaceship.getComponent<Target>()) target_entity = t->entity;
+        targets.set(target_entity);
 
         beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>() && (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage));
         const bool has_tubes = my_spaceship.hasComponent<MissileTubes>();
