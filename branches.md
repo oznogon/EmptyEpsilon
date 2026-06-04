@@ -115,4 +115,5 @@ generic-scrolling-guicontainer 20260526 -- fix mousewheel passthrough when not s
 
 master 20260531 -- script-command-todos, fix-player-mine-avoidance, fix-strict-compilation
 refactor-comms-overlay 20260531 -- fix autoscroll behavior on long non-chat comms messages
-move-sector-naming-to-lua 20260531 -- move sector-naming code from C++ to Lua API
+
+master 20260604 -- gm-orders-layout, expand-gm-info, dkapell:autoconectOffset
