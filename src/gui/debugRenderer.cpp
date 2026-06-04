@@ -75,6 +75,8 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
     {
         text = text + string(game_server->getSendDataRate() / 1000, 1) + " kb per second\n";
         text = text + string(game_server->getSendDataRatePerClient() / 1000, 1) + " kb per client\n";
+        text = text + (game_server->simulate_high_latency ? "[ON] " : "[OFF] ") + "High Latency (+250ms)\n";
+        text = text + (game_server->simulate_random_latency ? "[ON] " : "[OFF] ") + "Random Latency (0-250ms)\n";
     }
 
     if (show_timing_graph)
@@ -156,6 +158,22 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
 }
 
 bool DebugRenderer::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) {
+    if (show_datarate && game_server && button == sp::io::Pointer::Button::Left)
+    {
+        int line = int(position.y / 22.0f);
+        int offset = show_fps ? 3 : 2;
+        if (line == offset)
+        {
+            game_server->simulate_high_latency = !game_server->simulate_high_latency;
+            return true;
+        }
+        if (line == offset + 1)
+        {
+            game_server->simulate_random_latency = !game_server->simulate_random_latency;
+            return true;
+        }
+    }
+
     if (!show_timing_graph || !keys.debug_modifier.get())
         return false;
 
