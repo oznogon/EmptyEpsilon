@@ -652,7 +652,7 @@ void GameMasterScreen::update(float delta)
         main_radar->showCallsigns(!main_radar->getCallsigns());
 
     // Toggle waypoint visibility.
-    if (keys.gm_show_waypoints.getDown())
+    if (keys.gm_show_waypoints.isDiscreteStepDown())
     {
         if (main_radar->getWaypoints())
             main_radar->disableWaypoints();
@@ -661,7 +661,7 @@ void GameMasterScreen::update(float delta)
     }
 
     // Toggle health bars.
-    if (keys.gm_show_health_bars.getDown())
+    if (keys.gm_show_health_bars.isDiscreteStepDown())
         show_health_bars = !show_health_bars;
 
     bool has_object = false;
