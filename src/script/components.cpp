@@ -935,6 +935,7 @@ void initComponentScriptBindings()
 
     sp::script::ComponentHandler<Zone>::name("zone");
     BIND_MEMBER(Zone, color);
+    BIND_MEMBER(Zone, fill_color);
     BIND_MEMBER(Zone, label);
     BIND_MEMBER(Zone, skybox);
     BIND_MEMBER(Zone, skybox_fade_distance);

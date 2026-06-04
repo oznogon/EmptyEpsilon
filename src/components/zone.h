@@ -9,6 +9,7 @@ class Zone
 {
 public:
     glm::u8vec4 color{255,255,255, 0};
+    glm::u8vec4 fill_color{255,255,255, 64};
     std::vector<glm::vec2> outline;
     std::vector<uint16_t> triangles;
     string label;

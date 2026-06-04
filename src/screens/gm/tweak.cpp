@@ -3945,7 +3945,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row->setSize(GuiElement::GuiSizeMax, 150.0f)->setAttribute("layout", "horizontal");
-        (new GuiLabel(row, "", tr("tweak-text", "Zone color:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiLabel(row, "", tr("tweak-text", "Zone outline color:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto ui = new GuiColorPicker(row);
         ui->update_func = [this, ui]() -> glm::u8vec4 {
             if (auto v = entity.getComponent<Zone>()) return v->color;
@@ -3956,6 +3956,22 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         };
         new_page->apply_functions.push_back([this, ui]() {
             if (auto v = entity.getComponent<Zone>()) { v->color = glm::u8vec4(static_cast<uint8_t>(ui->r_slider->getValue()), static_cast<uint8_t>(ui->g_slider->getValue()), static_cast<uint8_t>(ui->b_slider->getValue()), static_cast<uint8_t>(ui->a_slider->getValue())); v->zone_dirty = true; }
+        });
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 150.0f)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "", tr("tweak-text", "Zone fill color:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        auto ui = new GuiColorPicker(row);
+        ui->update_func = [this, ui]() -> glm::u8vec4 {
+            if (auto v = entity.getComponent<Zone>()) return v->fill_color;
+            return glm::u8vec4(static_cast<uint8_t>(ui->r_slider->getValue()), static_cast<uint8_t>(ui->g_slider->getValue()), static_cast<uint8_t>(ui->b_slider->getValue()), static_cast<uint8_t>(ui->a_slider->getValue()));
+        };
+        ui->callback = [this](glm::u8vec4 val) {
+            if (auto v = entity.getComponent<Zone>()) { v->fill_color = val; v->zone_dirty = true; }
+        };
+        new_page->apply_functions.push_back([this, ui]() {
+            if (auto v = entity.getComponent<Zone>()) { v->fill_color = glm::u8vec4(static_cast<uint8_t>(ui->r_slider->getValue()), static_cast<uint8_t>(ui->g_slider->getValue()), static_cast<uint8_t>(ui->b_slider->getValue()), static_cast<uint8_t>(ui->a_slider->getValue())); v->zone_dirty = true; }
         });
     }
     {
