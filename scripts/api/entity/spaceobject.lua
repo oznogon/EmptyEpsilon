@@ -294,7 +294,7 @@ end
 --- Example: entity:getSectorName()
 function Entity:getSectorName()
     local x, y = self:getPosition()
-    return Sector.getSectorName(x, y)
+    return getSectorName(x, y)
 end
 --- Deals a specific amount of a specific type of damage to this entity.
 --- Requires a numeric value for the damage amount, and accepts an optional DamageInfo type.
