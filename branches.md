@@ -117,3 +117,5 @@ master 20260531 -- script-command-todos, fix-player-mine-avoidance, fix-strict-c
 refactor-comms-overlay 20260531 -- fix autoscroll behavior on long non-chat comms messages
 
 master 20260604 -- gm-orders-layout, expand-gm-info, dkapell:autoconectOffset
+
+master 20260605 -- gm-screen-short-range, 2848-2849-2850-refactor-player-transfer, export-more-entities
