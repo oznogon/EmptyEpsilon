@@ -350,8 +350,12 @@ HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<strin
     else if (effect_name == "noise")
         effect = new HardwareMappingEffectNoise();
 
-    if (effect->configure(settings))
-        return effect;
+    if (!effect)
+    {
+        LOG(Error, "Unknown effect: ", settings["effect"]);
+        return nullptr;
+    }
+    if (effect->configure(settings)) return effect;
     delete effect;
     return nullptr;
 }
