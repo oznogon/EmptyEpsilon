@@ -70,7 +70,7 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::removeEntry(int index)
         prefix_widths.erase(entry_prefix_width);
     }
     if (entry_prefix_width == max_prefix_width && last_with_width){
-        max_prefix_width = prefix_widths.end()->first;
+        max_prefix_width = prefix_widths.empty() ? 0.0f : prefix_widths.rbegin()->first;
     }
 
     entries.erase(entries.begin() + index);
