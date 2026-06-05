@@ -73,21 +73,6 @@ const GuiThemeStyle* GuiTheme::getStyle(const string& element)
     auto it = styles.find(element);
     if (it != styles.end())
     {
-        // Capture the font that will be applied for the Normal state.
-        const auto& normal_state = it->second.states[int(GuiElement::State::Normal)];
-        if (normal_state.font)
-        {
-            // Find the font name from the fonts cache.
-            string font_name = "unknown";
-            for (auto font_it = fonts.begin(); font_it != fonts.end(); ++font_it)
-            {
-                if (font_it->second == normal_state.font)
-                {
-                    font_name = font_it->first;
-                    break;
-                }
-            }
-        }
         return &it->second;
     }
 
