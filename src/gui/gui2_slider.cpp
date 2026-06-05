@@ -121,9 +121,6 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
 
     renderer.drawStretched(rect, back.texture, back.color);
 
-    const float range_min = std::min(min_value, max_value);
-    const float range_max = std::max(min_value, max_value);
-
     if (rect.size.x > rect.size.y)
     {
         float x;

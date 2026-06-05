@@ -29,12 +29,12 @@ public:
     sp::io::Keybinding debug_show_colliders;
     sp::io::Keybinding debug_show_gui;
 #endif
-    std::array<sp::io::Keybinding, 15> trigger_custom_button;
-
     // Rebinding binds
     sp::io::Keybinding cancel_rebind;
     sp::io::Keybinding next_rebind_category;
     sp::io::Keybinding prev_rebind_category;
+
+    std::array<sp::io::Keybinding, 15> trigger_custom_button;
 
     // Crew screen binds
     sp::io::Keybinding next_station;
