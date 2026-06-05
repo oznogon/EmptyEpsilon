@@ -28,8 +28,9 @@ static inline int readInt(SDL_RWops* f)
 
 static inline string readString(SDL_RWops *f)
 {
-    int8_t len = 0;
-    SDL_RWread(f, &len, sizeof(int8_t), 1);
+    uint8_t len = 0;
+    SDL_RWread(f, &len, sizeof(uint8_t), 1);
+    if (len == 0) return "";
     // MFC - MSVC doesn't support non-const [] initializers
     char *buffer = (char*)alloca(len + 1);
     SDL_RWread(f, buffer, len, 1);
