@@ -55,8 +55,8 @@ void InternalCrewSystem::update(float delta)
         if (ic.position.x < -0.5f)
         {
             int n=irandom(0, ir->rooms.size() - 1);
-            ic.position.x = ir->rooms[n].position.x + irandom(0, ir->rooms[n].size.x - 1);
-            ic.position.y = ir->rooms[n].position.y + irandom(0, ir->rooms[n].size.y - 1);
+            ic.position.x = ir->rooms[n].position.x + (ir->rooms[n].size.x > 0 ? irandom(0, ir->rooms[n].size.x - 1) : 0);
+            ic.position.y = ir->rooms[n].position.y + (ir->rooms[n].size.y > 0 ? irandom(0, ir->rooms[n].size.y - 1) : 0);
             ic.target_position = glm::ivec2(ic.position);
         }
 
@@ -103,7 +103,7 @@ void InternalCrewSystem::update(float delta)
                             {
                                 if (ir->rooms[idx].system == ShipSystem::Type(n))
                                 {
-                                    ic.target_position = ir->rooms[idx].position + glm::ivec2(irandom(0, ir->rooms[idx].size.x - 1), irandom(0, ir->rooms[idx].size.y - 1));
+                                    ic.target_position = ir->rooms[idx].position + glm::ivec2(ir->rooms[idx].size.x > 0 ? irandom(0, ir->rooms[idx].size.x - 1) : 0, ir->rooms[idx].size.y > 0 ? irandom(0, ir->rooms[idx].size.y - 1) : 0);
                                 }
                             }
                         }
