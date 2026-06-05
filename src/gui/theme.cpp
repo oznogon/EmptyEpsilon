@@ -380,34 +380,44 @@ GuiTheme::~GuiTheme()
 glm::u8vec4 GuiTheme::getColor(const string& element, GuiElement::State state)
 {
     GuiTheme* theme = getCurrentTheme();
+    if (!theme) return {255, 255, 255, 255};
     const GuiThemeStyle* style = theme->getStyle(element);
+    if (!style) return {255, 255, 255, 255};
     return style->get(state).color;
 }
 
 string GuiTheme::getSound(const string& element, GuiElement::State state)
 {
     GuiTheme* theme = getCurrentTheme();
+    if (!theme) return "";
     const GuiThemeStyle* style = theme->getStyle(element);
+    if (!style) return "";
     return style->get(state).sound;
 }
 
 string GuiTheme::getImage(const string& element, GuiElement::State state)
 {
     GuiTheme* theme = getCurrentTheme();
+    if (!theme) return "";
     const GuiThemeStyle* style = theme->getStyle(element);
+    if (!style) return "";
     return style->get(state).texture;
 }
 
 float GuiTheme::getSize(const string& element, GuiElement::State state)
 {
     GuiTheme* theme = getCurrentTheme();
+    if (!theme) return 0.0f;
     const GuiThemeStyle* style = theme->getStyle(element);
+    if (!style) return 0.0f;
     return style->get(state).size;
 }
 
 sp::Font* GuiTheme::getFont(const string& element, GuiElement::State state)
 {
     GuiTheme* theme = getCurrentTheme();
+    if (!theme) return nullptr;
     const GuiThemeStyle* style = theme->getStyle(element);
+    if (!style) return nullptr;
     return style->get(state).font;
 }
