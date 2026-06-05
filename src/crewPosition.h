@@ -42,7 +42,8 @@ enum class CrewPosition
 string crewPositionToString(CrewPosition value);
 std::optional<CrewPosition> tryParseCrewPosition(string value);
 
-static_assert(static_cast<int>(CrewPosition::MAX) <= 64);
+// Limit MAX crew positions to 32-bit limit (30).
+static_assert(static_cast<int>(CrewPosition::MAX) < 31);
 class CrewPositions
 {
 public:
