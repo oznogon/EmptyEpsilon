@@ -268,6 +268,7 @@ int main(int argc, char** argv)
         if (PreferencesManager::get("server_name") != "") game_server->setServerName(PreferencesManager::get("server_name"));
         if (PreferencesManager::get("server_password") != "") game_server->setPassword(PreferencesManager::get("server_password").upper());
         if (PreferencesManager::get("server_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
+        if (PreferencesManager::get("proxy_registry_url") != "") game_server->registerOnProxyRegistry(PreferencesManager::get("proxy_registry_url"), PreferencesManager::get("proxy_registry_password", ""));
 
         // Load the scenario and open the ship selection screen.
         gameGlobalInfo->startScenario(server_scenario, loadScenarioSettingsFromPrefs());
@@ -334,6 +335,7 @@ void returnToMainMenu(RenderLayer* render_layer)
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
+        if (PreferencesManager::get("proxy_registry_url") != "") game_server->registerOnProxyRegistry(PreferencesManager::get("proxy_registry_url"), PreferencesManager::get("proxy_registry_password", ""));
         gameGlobalInfo->startScenario(headless, loadScenarioSettingsFromPrefs());
 
         if (PreferencesManager::get("startpaused") != "1")
