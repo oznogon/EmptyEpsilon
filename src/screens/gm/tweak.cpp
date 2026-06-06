@@ -4025,8 +4025,47 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         (new GuiLabel(row, "", tr("tweak-text", "Outline points:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto ui = new GuiVec2VectorTweak(row);
         ui->update_func = [this]() -> std::vector<glm::vec2> { if (auto v = entity.getComponent<Zone>()) return v->outline; return {}; };
-        ui->on_add = [this](const glm::vec2& point) { if (auto v = entity.getComponent<Zone>()) { v->outline.push_back(point); v->updateTriangles(); v->zone_dirty = true; } };
-        ui->on_remove = [this](int index) { auto v = entity.getComponent<Zone>(); if (v && index >= 0 && index < static_cast<int>(v->outline.size())) { v->outline.erase(v->outline.begin() + index); v->updateTriangles(); v->zone_dirty = true; } };
+        // When adding or removing points, reset Transform position to the
+        // outline's centroid and make all points to relative to the new
+        // Transform position. This aligns with Lua setPoints() behavior.
+        ui->on_add = [this](const glm::vec2& point)
+        {
+            if (auto v = entity.getComponent<Zone>())
+            {
+                if (auto t = entity.getComponent<sp::Transform>())
+                {
+                    v->outline.push_back(point);
+                    glm::vec2 new_center{0.0f, 0.0f};
+                    for (auto& p : v->outline) new_center += p;
+                    new_center /= static_cast<float>(v->outline.size());
+                    t->setPosition(t->getPosition() + new_center);
+                    for (auto& p : v->outline) p -= new_center;
+                    v->updateTriangles();
+                    v->zone_dirty = true;
+                }
+            }
+        };
+        ui->on_remove = [this](int index)
+        {
+            auto v = entity.getComponent<Zone>();
+            if (v && index >= 0 && index < static_cast<int>(v->outline.size()))
+            {
+                if (auto t = entity.getComponent<sp::Transform>())
+                {
+                    v->outline.erase(v->outline.begin() + index);
+                    if (!v->outline.empty())
+                    {
+                        glm::vec2 new_center{0.0f, 0.0f};
+                        for (auto& p : v->outline) new_center += p;
+                        new_center /= static_cast<float>(v->outline.size());
+                        t->setPosition(t->getPosition() + new_center);
+                        for (auto& p : v->outline) p -= new_center;
+                    }
+                    v->updateTriangles();
+                    v->zone_dirty = true;
+                }
+            }
+        };
     }
     addPageToGroup(world_group);
 
