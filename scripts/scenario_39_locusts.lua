@@ -957,6 +957,9 @@ function playerDestruction()
 	string.format("")
 end
 function organicSystems(self,instigator)
+	-- Guard: this callback fires on every damage tick (potentially 60+ times/sec)
+	if self.organic_systems_modified then return end
+	self.organic_systems_modified = true
 	if locust_template == "Fighter" then
 		--						Arc Dir	Range	Cycle time			Damage
 		self:setBeamWeapon(0,	60,	0,	1000,	4 + random(-1,1),	4 + random(-1,1))
