@@ -2062,7 +2062,8 @@ function transportCommerceMaintenance(delta)
 						end
 					end
 				else
-					if string.find("Dock",transport:getOrder()) then
+					-- string.find arguments were reversed — searched for the order string inside the literal "Dock" instead of the other way around
+				if string.find(transport:getOrder(), "Dock") then
 						transport_target = transport:getOrderTarget()
 						if transport_target == nil or not transport_target:isValid() then
 							transport_target = pickTransportTarget(transport)
@@ -2935,7 +2936,8 @@ function handleDockedState()
 											return
 										end
 										local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good_desc[good],goodData["quantity"])
-										if goodData[quantity] < 1 then
+										-- quantity is a bare variable (nil here) instead of the string key "quantity"
+										if goodData["quantity"] < 1 then
 											goodTransactionMessage = string.format(_("trade-comms", "%s\nInsufficient station inventory"),goodTransactionMessage)
 										else
 											goodData["quantity"] = goodData["quantity"] - 1
