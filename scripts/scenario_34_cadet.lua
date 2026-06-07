@@ -48,7 +48,7 @@ function init()
 	player:setWeaponTubeCount(4)
 	player:setWeaponTubeDirection(0,  5):setWeaponTubeExclusiveFor(0,MISSILE_HVLI):weaponTubeAllowMissle(0,MISSILE_HOMING)
 	player:setWeaponTubeDirection(1, -5):setWeaponTubeExclusiveFor(1,MISSILE_HVLI):weaponTubeAllowMissle(1,MISSILE_HOMING)
-	player:setWeaponTubeDirection(2,  0):setWeaponTubeExclusiveFor(2,MISSILE_HVLI):setTubeSize(2,"small")
+	player:setWeaponTubeDirection(2,  0):setWeaponTubeExclusiveFor(2,MISSILE_HVLI):setTubeSize(2, MS_SMALL)
 	player:setWeaponTubeDirection(3,180):setWeaponTubeExclusiveFor(3,MISSILE_MINE)
 	player:setWeaponStorageMax(MISSILE_NUKE,0):setWeaponStorage(MISSILE_NUKE,0)
 	player:setWeaponStorageMax(MISSILE_EMP, 0):setWeaponStorage(MISSILE_EMP, 0)
@@ -695,7 +695,7 @@ function isObjectType(obj,typ)
 		if typ ~= nil then
 			if ECS then
 				if typ == "SpaceStation" then
-					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
+					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == PHYSICS_STATIC
 				elseif typ == "PlayerSpaceship" then
 					return obj.components.player_control
 				elseif typ == "ScanProbe" then

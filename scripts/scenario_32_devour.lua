@@ -1226,9 +1226,9 @@ function constructEnvironment()
 	devourer:setWeaponTubeCount(15)	--fewer (vs 16)
 	devourer:onDestruction(prepareDevourerExplosion)
 	for i=0,4 do
-		devourer:setWeaponTubeDirection(i*3 + 0,(i*3 + 0)*24):setTubeSize(i*3 + 0,"small")
-		devourer:setWeaponTubeDirection(i*3 + 1,(i*3 + 1)*24):setTubeSize(i*3 + 1,"medium")
-		devourer:setWeaponTubeDirection(i*3 + 2,(i*3 + 2)*24):setTubeSize(i*3 + 2,"large")
+		devourer:setWeaponTubeDirection(i*3 + 0,(i*3 + 0)*24):setTubeSize(i*3 + 0, MS_SMALL)
+		devourer:setWeaponTubeDirection(i*3 + 1,(i*3 + 1)*24):setTubeSize(i*3 + 1, MS_MEDIUM)
+		devourer:setWeaponTubeDirection(i*3 + 2,(i*3 + 2)*24):setTubeSize(i*3 + 2, MS_LARGE)
 	end
 	devourer:setWeaponStorageMax(MISSILE_HOMING, 15000)		--more (vs 1000)
 	devourer:setWeaponStorage(MISSILE_HOMING,    15000)

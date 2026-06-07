@@ -138,7 +138,7 @@ function init()
 		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100, 
 		playerBlade:setBeamWeaponTurret(1,60, 15,2)			-- 2: slower than default 6
 		playerBlade:setWeaponTubeCount(2)
-		playerBlade:setWeaponTubeDirection(0,  0):setTubeLoadTime(0,10):setWeaponTubeExclusiveFor(0,MISSILE_HVLI):setTubeSize(0,"small")
+		playerBlade:setWeaponTubeDirection(0,  0):setTubeLoadTime(0,10):setWeaponTubeExclusiveFor(0,MISSILE_HVLI):setTubeSize(0, MS_SMALL)
 		playerBlade:setWeaponTubeDirection(1,180):setTubeLoadTime(1,15):setWeaponTubeExclusiveFor(1,MISSILE_MINE)
 		playerBlade:setWeaponStorageMax(MISSILE_HVLI,9):setWeaponStorage(MISSILE_HVLI,9)
 		playerBlade:setWeaponStorageMax(MISSILE_MINE,3):setWeaponStorage(MISSILE_MINE,3)
@@ -1944,7 +1944,7 @@ function respawnFighter1()
 		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100, 
 		playerBlade:setBeamWeaponTurret(1,60, 15,2)			-- 2: slower than default 6
 		playerBlade:setWeaponTubeCount(2)
-		playerBlade:setWeaponTubeDirection(0,  0):setTubeLoadTime(0,10):setWeaponTubeExclusiveFor(0,MISSILE_HVLI):setTubeSize(0,"small")
+		playerBlade:setWeaponTubeDirection(0,  0):setTubeLoadTime(0,10):setWeaponTubeExclusiveFor(0,MISSILE_HVLI):setTubeSize(0, MS_SMALL)
 		playerBlade:setWeaponTubeDirection(1,180):setTubeLoadTime(1,15):setWeaponTubeExclusiveFor(1,MISSILE_MINE)
 		playerBlade:setWeaponStorageMax(MISSILE_HVLI,9):setWeaponStorage(MISSILE_HVLI,9)
 		playerBlade:setWeaponStorageMax(MISSILE_MINE,3):setWeaponStorage(MISSILE_MINE,3)
@@ -3216,7 +3216,7 @@ function friendlyComms()
 		for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 			local space_station = false
 			if ECS then
-				if obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static" then
+				if obj.components.docking_bay and obj.components.physics and obj.components.physics.type == PHYSICS_STATIC then
 					space_station = true
 				end
 			else

@@ -1997,7 +1997,7 @@ function planetCollisionDetection()
 					end
 					if planet_collision_diagnostic then print("CpuShip typename:",obj_type_name,"ship distance:",ship_distance,"object distance:",obj_dist,"planet radius:",planet:getPlanetRadius()) end
 					if obj_dist <= (planet:getPlanetRadius() + ship_distance + 100) then
-						obj:takeDamage(planet_bump_damage,"kinetic",planet_x,planet_y)
+						obj:takeDamage(planet_bump_damage, DT_KINETIC,planet_x,planet_y)
 					end
 				end
 				if isObjectType(obj,"PlayerSpaceship") then
@@ -2013,7 +2013,7 @@ function planetCollisionDetection()
 						ship_distance = 400
 					end
 					if obj_dist <= (planet:getPlanetRadius() + ship_distance + 100) then
-						obj:takeDamage(planet_bump_damage,"kinetic",planet_x,planet_y)
+						obj:takeDamage(planet_bump_damage, DT_KINETIC,planet_x,planet_y)
 					end
 					if planet_collision_diagnostic then print("Player ship typename:",obj_type_name,"ship distance:",ship_distance,"object distance:",obj_dist,"planet radius:",planet:getPlanetRadius()) end
 					if obj.task == "research" then
@@ -2047,7 +2047,7 @@ function planetCollisionDetection()
 				end
 				if isObjectType(obj,"ScanProbe") then
 					if obj_dist <= (planet:getPlanetRadius() + 50) then
-						obj:takeDamage(planet_bump_damage,"kinetic",planet_x,planet_y)
+						obj:takeDamage(planet_bump_damage, DT_KINETIC,planet_x,planet_y)
 					end
 					local p = obj:getOwner()
 					if p ~= nil and p.task == "research" then

@@ -70,19 +70,15 @@ function init()
     player:setPosition(25276, 133850):setCallSign("Atlantis-1"):setRotation(-90):commandTargetRotation(-90)
 
     -- Set all systems to 0 power.
-    for idx, system in ipairs(
-        SYSTEMS
-    ) do
+    for idx, system in ipairs(SYSTEMS) do
         player:setSystemPower(system, 0.0)
         player:commandSetSystemPowerRequest(system, 0.0)
     end
 
     -- Empty all weapons storage.
-    player:setWeaponStorage(MISSILE_HOMING, 0)
-    player:setWeaponStorage(MISSILE_NUKE, 0)
-    player:setWeaponStorage(MISSILE_EMP, 0)
-    player:setWeaponStorage(MISSILE_MINE, 0)
-    player:setWeaponStorage(MISSILE_HVLI, 0)
+    for idx, missile_type in ipairs(MISSILE_TYPES) do
+        player:setWeaponStorage(missile_type, 0)
+    end
 
     -- Set up the starting area.
     shipyard_gamma = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("Shipyard-Gamma"):setPosition(25276, 134550)

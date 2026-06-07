@@ -1091,9 +1091,9 @@ function updatePlayerSoftTemplate(p)
 			if upgrade_path[tempTypeName].tube[1][1].idx >= 0 then
 				p:setWeaponTubeCount(#upgrade_path[tempTypeName].tube[1])
 				local size_trans = {
-					["S"] = "small",
-					["M"] = "medium",
-					["L"] = "large",
+					["S"] = MS_SMALL,
+					["M"] = MS_MEDIUM,
+					["L"] = MS_LARGE,
 				}
 				for i,m in ipairs(upgrade_path[tempTypeName].tube[1]) do
 					p:setWeaponTubeDirection(m.idx,m.dir)
@@ -5309,9 +5309,9 @@ function upgradePlayerShip(p,u_type)
 		local ordnance_level = upgrade_path[tempTypeName].missiles[current_level+1].ord
 		p:setWeaponTubeCount(#upgrade_path[tempTypeName].tube[tube_level])
 		local size_trans = {
-			["S"] = "small",
-			["M"] = "medium",
-			["L"] = "large",
+			["S"] = MS_SMALL,
+			["M"] = MS_MEDIUM,
+			["L"] = MS_LARGE,
 		}
 		local missile_trans = {
 			{typ = MISSILE_HOMING, short_type = "hom"},
@@ -7528,8 +7528,8 @@ function createPlayerShipMixer()
 	playerAmalgam:setWeaponTubeExclusiveFor(3,MISSILE_MINE)	--mine only (vs any)
 	playerAmalgam:setTubeLoadTime(2,16)					--rear tube slower (vs 8)
 	playerAmalgam:setTubeLoadTime(3,16)					--rear tube slower (vs 8)
-	playerAmalgam:setTubeSize(0,"large")				--left tube large (vs normal)
-	playerAmalgam:setTubeSize(1,"large")				--right tube large (vs normal)
+	playerAmalgam:setTubeSize(0, MS_LARGE)				--left tube large (vs normal)
+	playerAmalgam:setTubeSize(1, MS_LARGE)				--right tube large (vs normal)
 	playerAmalgam:setWeaponStorageMax(MISSILE_HOMING, 16)		--more (vs 12)
 	playerAmalgam:setWeaponStorage(MISSILE_HOMING, 16)				
 	playerAmalgam:setWeaponStorageMax(MISSILE_NUKE, 0)		--less (vs 4)
@@ -7558,8 +7558,8 @@ function createPlayerShipFlipper()
 	playerFlipper:setWeaponTubeDirection(1, 2)			--angled (vs front)
 	playerFlipper:setWeaponTubeDirection(2,-90)			--left (vs right)
 	playerFlipper:setWeaponTubeDirection(4,180)			--rear (vs left)
-	playerFlipper:setTubeSize(0,"small")				--small vs medium
-	playerFlipper:setTubeSize(1,"small")				--small vs medium
+	playerFlipper:setTubeSize(0, MS_SMALL)				--small vs medium
+	playerFlipper:setTubeSize(1, MS_SMALL)				--small vs medium
 	playerFlipper:setWeaponTubeExclusiveFor(0,MISSILE_HOMING)	--homing only
 	playerFlipper:setWeaponTubeExclusiveFor(1,MISSILE_HOMING)	--homing only
 	playerFlipper:setWeaponTubeExclusiveFor(2,MISSILE_HVLI)
@@ -7648,18 +7648,18 @@ function createPlayerShipClaw()
 	playerRaven:setWeaponTubeCount(6)					--more (vs 3)
 	playerRaven:setWeaponTubeDirection(0, -30)			--more angled (vs -5)
 	playerRaven:setWeaponTubeDirection(1,  30)			--more angled (vs 5)
-	playerRaven:setTubeSize(0,"small")					--small (vs medium)
-	playerRaven:setTubeSize(1,"small")					--small (vs medium)
+	playerRaven:setTubeSize(0, MS_SMALL)					--small (vs medium)
+	playerRaven:setTubeSize(1, MS_SMALL)					--small (vs medium)
 	playerRaven:setWeaponTubeExclusiveFor(0,MISSILE_NUKE)		--Nuke only (vs all but mine)
 	playerRaven:setWeaponTubeExclusiveFor(1,MISSILE_NUKE)		--Nuke only (vs all but mine)
 	playerRaven:setWeaponTubeDirection(2, -60)			
 	playerRaven:setWeaponTubeDirection(3,  60)
-	playerRaven:setTubeSize(2,"small")
-	playerRaven:setTubeSize(3,"small")
+	playerRaven:setTubeSize(2, MS_SMALL)
+	playerRaven:setTubeSize(3, MS_SMALL)
 	playerRaven:setWeaponTubeExclusiveFor(2,MISSILE_EMP)
 	playerRaven:setWeaponTubeExclusiveFor(3,MISSILE_EMP)
 	playerRaven:setTubeLoadTime(4, 12)					--slower (vs 8)
-	playerRaven:setTubeSize(4,"large")
+	playerRaven:setTubeSize(4, MS_LARGE)
 	playerRaven:setWeaponTubeExclusiveFor(4,MISSILE_HOMING)
 	playerRaven:setWeaponTubeDirection(5, 180)
 	playerRaven:setTubeLoadTime(5, 10)					--slower (vs 8)
@@ -7916,7 +7916,7 @@ function moonCollisionCheck()
 				end
 --				print("CPU ship object distance:",obj_dist,"ship distance:",ship_distance,"moon radius:",moon_barrier.moon_radius)
 				if obj_dist <= moon_barrier.moon_radius + ship_distance + 200 then
-					obj:takeDamage(100,"kinetic",moon_x,moon_y)
+					obj:takeDamage(100, DT_KINETIC,moon_x,moon_y)
 				end
 			elseif isObjectType(obj,"PlayerSpaceship") then
 				obj_type_name = obj:getTypeName()
@@ -7931,7 +7931,7 @@ function moonCollisionCheck()
 				end
 --				print("Player ship object distance:",obj_dist,"ship distance:",ship_distance,"moon radius:",moon_barrier.moon_radius)
 				if obj_dist <= moon_barrier.moon_radius + ship_distance + 200 then
-					obj:takeDamage(100,"kinetic",moon_x,moon_y)
+					obj:takeDamage(100, DT_KINETIC,moon_x,moon_y)
 				end
 			end
 		end

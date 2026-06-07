@@ -239,7 +239,7 @@ function isObjectType(obj,typ)
 		if typ ~= nil then
 			if ECS then
 				if typ == "SpaceStation" then
-					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
+					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == PHYSICS_STATIC
 				elseif typ == "PlayerSpaceship" then
 					return obj.components.player_control
 				elseif typ == "ScanProbe" then
@@ -6943,9 +6943,9 @@ function upgradePlayerShip(p,u_type)
 		local ordnance_level = upgrade_path[tempTypeName].missiles[current_level+1].ord
 		p:setWeaponTubeCount(#upgrade_path[tempTypeName].tube[tube_level])
 		local size_trans = {
-			["S"] = "small",
-			["M"] = "medium",
-			["L"] = "large",
+			["S"] = MS_SMALL,
+			["M"] = MS_MEDIUM,
+			["L"] = MS_LARGE,
 		}
 		local missile_trans = {
 			{typ = "Homing", short_type = "hom"},
@@ -7053,9 +7053,9 @@ function downgradePlayerShip(p,u_type)
 		local ordnance_level = upgrade_path[tempTypeName].missiles[current_level-1].ord
 		p:setWeaponTubeCount(#upgrade_path[tempTypeName].tube[tube_level])
 		local size_trans = {
-			["S"] = "small",
-			["M"] = "medium",
-			["L"] = "large",
+			["S"] = MS_SMALL,
+			["M"] = MS_MEDIUM,
+			["L"] = MS_LARGE,
 		}
 		local missile_trans = {
 			{typ = "Homing", short_type = "hom"},
@@ -7867,7 +7867,7 @@ function minorUpgrades()
 										if beam.tarc ~= nil then
 											comms_source:setBeamWeaponTurret(beam.index,beam.tarc,beam.dir,beam.tspd)
 										end
-										comms_source:setBeamWeaponDamageType(beam.index,"emp")
+										comms_source:setBeamWeaponDamageType(beam.index, DT_EMP)
 										comms_source:setBeamWeaponArcColor(beam.index,0,0,0.5,0,0,1.0)
 									end
 									comms_source.beams_for_shields = true

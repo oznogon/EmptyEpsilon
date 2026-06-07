@@ -1060,7 +1060,7 @@ function subWave()
 							ExplosionEffect():setPosition(ex,ey):setSize(5000):setOnRadar(true)
 							for j,p in ipairs(getActivePlayerShips()) do
 								if distance(p,enemy) < 5000 then
-									p:takeDamage(50,"kinetic")
+									p:takeDamage(50, DT_KINETIC)
 								end
 							end
 						end

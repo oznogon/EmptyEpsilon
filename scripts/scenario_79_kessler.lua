@@ -159,11 +159,11 @@ function spyprobe_disabled(delta)
         local x, y = player:getPosition(); 
         if shieldfreq == art.freq and player:getShieldsActive() == true then
             ElectricExplosionEffect():setPosition(x,y):setSize(200)
-            player:takeDamage(1, "kinetic",ax, ay)
+            player:takeDamage(1, DT_KINETIC,ax, ay)
             player:setReputationPoints((player:getReputationPoints()+25))
         else
             ExplosionEffect():setPosition(x,y):setSize(200)
-            player:takeDamage(50, "kinetic",ax, ay)
+            player:takeDamage(50, DT_KINETIC,ax, ay)
             globalMessage(_("Additional debris created!"))
         end
     end)    
@@ -452,7 +452,7 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
             local x, y = player:getPosition(); 
             if shieldfreq == art.freq and player:getShieldsActive() == true then
                 ElectricExplosionEffect():setPosition(x,y):setSize(200)
-                player:takeDamage(1, "kinetic",ax,ay );
+                player:takeDamage(1, DT_KINETIC,ax,ay );
                 player:setReputationPoints((player:getReputationPoints()+10))
                 if player:getReputationPoints() == 20 then
                     geo_1:sendCommsMessage(player1, _([[Very good so far! Don't worry, you don't have to clean up all of the marked space junk in your first test run, but we still need quite a few of them before we call it a day.]]))
@@ -460,7 +460,7 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
                 end
             else
                 ExplosionEffect():setPosition(ax,ay):setSize(200)
-                player:takeDamage(50, "kinetic",ax,ay );
+                player:takeDamage(50, DT_KINETIC,ax,ay );
             end
             debris_interactions=debris_interactions+1        
         end);
@@ -496,7 +496,7 @@ function placeArtifactsAroundPoint( amount, dist_min, dist_max, x0, y0)
             local ax, ay = art:getPosition();
             local x, y = player:getPosition();
             ExplosionEffect():setPosition(ax,ay):setSize(200)
-            player:takeDamage(50, "kinetic",ax,ay );
+            player:takeDamage(50, DT_KINETIC,ax,ay );
             player1:setReputationPoints((player1:getReputationPoints()-10))        
         end);                
     end
