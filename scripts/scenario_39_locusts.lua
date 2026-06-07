@@ -898,7 +898,7 @@ function updatePlayerSoftTemplate(p)
 		p.prevJump = 1.0
 	end
 	p.initialCoolant = p:getMaxCoolant()
-	local system_types = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
+	local system_types = SYSTEMS
 	p.normal_coolant_rate = {}
 	p.normal_power_rate = {}
 	for idx, system in ipairs(system_types) do

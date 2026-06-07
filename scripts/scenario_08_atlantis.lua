@@ -71,17 +71,7 @@ function init()
 
     -- Set all systems to 0 power.
     for idx, system in ipairs(
-        {
-            "reactor",
-            "beamweapons",
-            "missilesystem",
-            "maneuver",
-            "impulse",
-            "warp",
-            "jumpdrive",
-            "frontshield",
-            "rearshield"
-        }
+        SYSTEMS
     ) do
         player:setSystemPower(system, 0.0)
         player:commandSetSystemPowerRequest(system, 0.0)
@@ -303,7 +293,7 @@ Doppler instability: %i]]),
     --[[TEMP
     mission_state = phase2SeekArtifact
     player:setPosition(310000, -71000)
-    for idx, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
+    for idx, system in ipairs(SYSTEMS) do
         player:setSystemPower(system, 1.0)
         player:commandSetSystemPowerRequest(system, 1.0)
     end

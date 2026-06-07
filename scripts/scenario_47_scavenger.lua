@@ -211,7 +211,7 @@ end
 function setConstants()
 	repeatExitBoundary = 100
 	scarceResources = false
-	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+	missile_types = MISSILE_TYPES
 	pool_selectivity = "full"
 	ship_template = {	--ordered by relative strength
 		["Gnat"] =				{strength = 2,	short_range_radar = 4500,	create = gnat},
@@ -1941,7 +1941,7 @@ function handleDockedState()
 		goodCount = goodCount + 1
 	end
 	local missilePresence = 0
-	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+	local missile_types = MISSILE_TYPES
 	for i, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
@@ -3577,7 +3577,7 @@ function friendlyComms()
 			end
 		end
 
-		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		local missile_types = MISSILE_TYPES
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 					msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
@@ -3627,7 +3627,7 @@ function friendlyComms()
 				for i, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
 						msg = msg .. string.format(_("shipAssist-comms", "\n %s:"), fleetShip:getCallSign())
-						local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+						local missile_types = MISSILE_TYPES
 						missileMsg = ""
 						for j, missile_type in ipairs(missile_types) do
 							if fleetShip:getWeaponStorageMax(missile_type) > 0 then

@@ -339,8 +339,8 @@ function setConstants()
 	repeatExitBoundary = 100
 	printDetailedStats = true
 
-	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
-	system_list = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
+	missile_types = MISSILE_TYPES
+	system_list = SYSTEMS
 	ship_template = {	--ordered by relative strength
 		["Gnat"] =				{strength = 2,		create = gnat},
 		["Lite Drone"] =		{strength = 3,		create = droneLite},
@@ -3836,7 +3836,7 @@ function wmBatteryButton(p,console)
 	end
 end
 function resetCoolantPumpButtons(p)
-	local system_types = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
+	local system_types = SYSTEMS
 	for i, system in ipairs(system_types) do
 		if p.coolant_pump_fix_buttons ~= nil then
 			if p.coolant_pump_fix_buttons[system] ~= nil then
@@ -4869,7 +4869,7 @@ function wreckModCoolantPump(x,y)
 				p.artifact_provided_coolant_pump_parts_message_dmg = "artifact_provided_coolant_pump_parts_message_dmg"
 				p:addCustomMessage("DamageControl",p.artifact_provided_coolant_pump_parts_message_dmg,string.format(_("artifactEffect-msgDamageControl", "The %s retrieved provided spare coolant pump parts that may be used to repair a damaged coolant pump"),full_desc))
 			end
-			local system_types = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
+			local system_types = SYSTEMS
 			if p.coolant_pump_fix_buttons == nil then
 				p.coolant_pump_fix_buttons = {}
 			end
@@ -7063,7 +7063,7 @@ function moreMissiles()
 							comms_source.goods[ctd.characterGood] = comms_source.goods[ctd.characterGood] - 1
 							comms_source.cargo = comms_source.cargo + 1
 						end
-						local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+						local missile_types = MISSILE_TYPES
 						for i, missile_type in ipairs(missile_types) do
 							comms_source:setWeaponStorageMax(missile_type, math.ceil(comms_source:getWeaponStorageMax(missile_type)*upgrade_value))
 						end
@@ -7073,7 +7073,7 @@ function moreMissiles()
 					end
 				else
 					comms_source.moreMissilesUpgrade = "done"
-					missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+					missile_types = MISSILE_TYPES
 					for i, missile_type in ipairs(missile_types) do
 						comms_source:setWeaponStorageMax(missile_type, math.ceil(comms_source:getWeaponStorageMax(missile_type)*1.25))
 					end
@@ -7315,7 +7315,7 @@ function handleDockedState()
 	oMsg = string.format(_("station-comms", "%s\n\nReputation: %i"),oMsg,math.floor(comms_source:getReputationPoints()))
 	setCommsMessage(oMsg)
 	local missilePresence = 0
-	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+	local missile_types = MISSILE_TYPES
 	for i, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
@@ -7544,7 +7544,7 @@ function handleDockedState()
 	if not offer_repair and comms_target.comms_data.self_destruct_repair and not comms_source:getCanSelfDestruct() then
 		offer_repair = true
 	end
-	local system_list = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
+	local system_list = SYSTEMS
 	for i, system in ipairs(system_list) do
 		if not offer_repair 
 			and	((comms_source:getSystemHealthMax(system) < 1 and comms_target.comms_data.system_repair[system])
@@ -7556,7 +7556,7 @@ function handleDockedState()
 	if offer_repair then
 		addCommsReply(_("stationServices-comms", "Repair ship system"),function()
 			setCommsMessage(string.format(_("stationServices-comms", "What system would you like repaired?\n\nReputation: %i"),math.floor(comms_source:getReputationPoints())))
-			local system_list = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
+			local system_list = SYSTEMS
 			for i, system in ipairs(system_list) do
 				if repair_system_diagnostic then
 					print("offer repair system:",system)
@@ -9806,7 +9806,7 @@ function friendlyDefendComms(comms_data)
 				msg = msg .. string.format(_("shipAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
 		end
-		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		local missile_types = MISSILE_TYPES
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 				msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
@@ -9957,7 +9957,7 @@ function friendlyComms(comms_data)
 				msg = msg .. string.format(_("shipAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
 		end
-		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		local missile_types = MISSILE_TYPES
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 					msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
@@ -10008,7 +10008,7 @@ function friendlyComms(comms_data)
 				for i, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
 						msg = msg .. string.format(_("shipAssist-comms", "\n %s:"), fleetShip:getCallSign())
-						local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+						local missile_types = MISSILE_TYPES
 						missileMsg = ""
 						for j, missile_type in ipairs(missile_types) do
 							if fleetShip:getWeaponStorageMax(missile_type) > 0 then
@@ -11367,7 +11367,7 @@ function setPlayer(pobj)
 				pobj.healthyJump = 1.0
 				pobj.prevJump = 1.0
 			end
-			local system_types = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
+			local system_types = SYSTEMS
 			pobj.normal_coolant_rate = {}
 			pobj.normal_power_rate = {}
 			for i, system in ipairs(system_types) do

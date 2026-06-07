@@ -2959,7 +2959,7 @@ function handleDockedState()
 	end
 	addCommsReply(_("station-comms","Restock Ordnance"),function()
 		local missilePresence = 0
-		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		local missile_types = MISSILE_TYPES
 		for i, missile_type in ipairs(missile_types) do
 			missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 		end
@@ -4619,7 +4619,7 @@ function friendlyComms(comms_data)
 				msg = msg .. _("shipAssist-comms","Shield ") .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
 			end
 		end
-		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		local missile_types = MISSILE_TYPES
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 					msg = msg .. missile_type .. _("shipAssist-comms"," Missiles: ") .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"

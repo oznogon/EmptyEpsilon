@@ -572,7 +572,7 @@ function setConstants()
 		["Large Station"] =		{touch = 1400,	defend = 4600,	platform = 2800,	outer_platform = 9700},
 		["Huge Station"] =		{touch = 2000,	defend = 4960,	platform = 3500,	outer_platform = 10100},
 	}
-	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+	missile_types = MISSILE_TYPES
 end
 function setGlobals()
 	server_voices = true

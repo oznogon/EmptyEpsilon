@@ -1797,7 +1797,7 @@ function handleDockedState()
 	end
 	setCommsMessage(oMsg)
 	missilePresence = 0
-	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+	local missile_types = MISSILE_TYPES
 	for _, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
@@ -3312,7 +3312,7 @@ function friendlyComms()
 				msg = msg .. string.format(_("shipAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
 		end
-		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		local missile_types = MISSILE_TYPES
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 					msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))

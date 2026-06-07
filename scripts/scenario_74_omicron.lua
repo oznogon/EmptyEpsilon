@@ -208,7 +208,7 @@ function setConstants()
 	player_ship_names_for["Surkov"] = {"Sting", "Sneak", "Bingo", "Thrill", "Vivisect"}
 	player_ship_names_for["ZX-Lindworm"] = {"Seagull","Catapult","Blowhard","Flapper","Nixie","Pixie","Tinkerbell"}
 	player_ship_names_for["Leftovers"] = {"Foregone","Righteous","Masher"}
-	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+	missile_types = MISSILE_TYPES
 	pool_selectivity = "full"
 	template_pool_size = 5
 	ship_template = {	--ordered by relative strength
@@ -1245,7 +1245,7 @@ function updatePlayerSoftTemplate(p)
 		p.prevJump = 1.0
 	end
 	p.initialCoolant = p:getMaxCoolant()
-	local system_types = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
+	local system_types = SYSTEMS
 	p.normal_coolant_rate = {}
 	p.normal_power_rate = {}
 	for idx, system in ipairs(system_types) do
@@ -3545,7 +3545,7 @@ function handleDockedState()
 		end)
 	end
 	local missilePresence = 0
-	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+	local missile_types = MISSILE_TYPES
 	for _, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
@@ -5127,7 +5127,7 @@ function friendlyComms(comms_data)
 				msg = msg .. string.format(_("shipAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
 		end
-		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		local missile_types = MISSILE_TYPES
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 					msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
@@ -9236,7 +9236,7 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 				modified_db:setKeyValue(tube_directions[i].key,tube_directions[i].value)
 			end
 		end
-		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		local missile_types = MISSILE_TYPES
 		for index, missile_type in ipairs(missile_types) do
 			local max_storage = ship:getWeaponStorageMax(missile_type)
 			if max_storage > 0 then

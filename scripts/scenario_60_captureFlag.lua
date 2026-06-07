@@ -617,7 +617,7 @@ function setConstants()
 		},
 	}		
 	max_pyramid_tier = 15	
-	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}  -- am not sure why this has to be set but it was included so keeping it for now
+	missile_types = MISSILE_TYPES  -- am not sure why this has to be set but it was included so keeping it for now
 end
 function setGlobals()
 	timeDivision = "paused"
@@ -5195,7 +5195,7 @@ function resupplyStation()
     end
     if comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "Greetings"))
-		missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		missile_types = MISSILE_TYPES
 		missilePresence = 0
 		for _, missile_type in ipairs(missile_types) do
 			missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
@@ -6552,7 +6552,7 @@ function friendlyComms(comms_data)
 			end
 		end
 
-		missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		missile_types = MISSILE_TYPES
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 					msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))

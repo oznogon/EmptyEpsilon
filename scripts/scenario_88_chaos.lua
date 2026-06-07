@@ -5702,7 +5702,7 @@ end
 --	Docked actions
 function restockOrdnance(return_function)
 	local missilePresence = 0
-	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+	local missile_types = MISSILE_TYPES
 	for idx, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
@@ -6568,7 +6568,7 @@ function shipStatusReport(return_function)
 				msg = string.format(_("shipAssist-comms", "%sShield %s: %d%%\n"),msg, n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
 		end
-		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		local missile_types = MISSILE_TYPES
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 				msg = string.format(_("shipAssist-comms", "%s%s Missiles: %d/%d\n"),msg, missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
@@ -6729,7 +6729,7 @@ function fleetCommunication(return_function)
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						if fleetShip ~= nil and fleetShip:isValid() then
 							msg = string.format(_("shipAssist-comms", "%s\n %s:"),msg, fleetShip:getCallSign())
-							local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+							local missile_types = MISSILE_TYPES
 							missileMsg = ""
 							for idx2, missile_type in ipairs(missile_types) do
 								if fleetShip:getWeaponStorageMax(missile_type) > 0 then
