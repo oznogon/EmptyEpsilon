@@ -69,7 +69,7 @@ end
 function Entity:onCollision(callback)
     self.components.collision_callback = {player=false, callback=callback}
     return self
-end    
+end
 --- Defines a function to call every tick when a player ship is colliding with the entity.
 --- Passes the entity and colliding player ship to the called function.
 --- Example: entity:onPlayerCollision(function(entity, player) print("Collision occurred") end)
@@ -104,7 +104,7 @@ end
 --- Valid values are filenames to PNG files relative to resources/radar/.
 --- Example: entity:setRadarTraceIcon("arrow.png") -- displays an arrow instead of a blip for this entity
 function Entity:setRadarTraceIcon(icon)
-    if self.components.radar_trace then self.components.radar_trace.icon = "radar/" .. icon end    
+    if self.components.radar_trace then self.components.radar_trace.icon = "radar/" .. icon end
     return self
 end
 --- Scales the radar trace for this entity.

@@ -11,9 +11,9 @@ __model_data = {}
 --- If the model is for an entity with weapon components or maneuvering thrusters, ModelData also defines the origin positions of its weapon effects, and particle emitters for thruster and engine effects.
 --- For physics, ModelData defines the model's radius for a circle collider, or optional box collider dimensions.
 --- (ModelData defines 3D models, but EmptyEpsilon uses a 2D physics engine for collisions.)
---- 
+---
 --- EmptyEpsilon loads ModelData from scripts/model_data.lua when launched, and loads meshes and textures when an entity using this ModelData is first viewed.
---- 
+---
 --- For complete examples, see scripts/model_data.lua.
 ModelData = createClass()
 

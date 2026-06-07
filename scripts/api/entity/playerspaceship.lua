@@ -35,7 +35,7 @@ end
 
 --- Returns the coordinates of a waypoint with the given index that's been set by this player ship.
 --- Waypoints are 1-indexed.
---- Example: 
+--- Example:
 --- x, y = ship:getWaypoint(1)
 function Entity:getWaypoint(index)
     if self.components.waypoints and index > 0 and index <= #self.components.waypoints then

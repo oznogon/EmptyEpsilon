@@ -1,6 +1,6 @@
 -- Name: Capture the Flag
 -- Description: Capture opposing team's "flag" before they capture yours
---- 
+---
 --- The region consists of two halves divided by a line of nebulae and/or markers. The first 5 minutes (configurable) each side decides where to place their flag. The ships closest to the referee station determine the team's flag location during the initial phase. Crossing to the other side during this phase will result in ship destruction. The weapons officer will mark the flag coordinates when the ship reaches the flag location. After the flag hide timer expires, an artifact will be placed at the location representing the team's flag. If no place has been marked, the ship's current location will be used. If the location is outside the game boundaries, the flag will be placed at the nearest in bounds location
 ---
 --- Once the flags are placed, the hunt is on. Ships may cross the border in search of the other team's flag, but while they are in the other team's territory they may be tagged by an opponent ship within 0.75U. Being tagged sends you back to your own region with damage to your warp/jump drive. Each flag must be scanned before it can be retrived. Retrieval occurs by getting within 1U of the flag. Being tagged while in posession of the flag drops the flag at the location of the tag event. Cross back to your side with the flag to claim victory
@@ -54,7 +54,7 @@ function init()
 	setConstants()			--things that don't change
 	setGlobals()			--things that don't change often
 	setVariations()			--configuration items based on game set up screen. Many can also be set via GM button while paused
-	diagnostic = false 		-- See GM button. A boolean for printing debug data to the console during development; turn to "false" during game play 
+	diagnostic = false 		-- See GM button. A boolean for printing debug data to the console during development; turn to "false" during game play
 	-- Initialization checklist by function
 	initializeDroneButtonFunctionTables()
 	setGMButtons()
@@ -81,7 +81,7 @@ function presetOptionVariables()
 	--If you insert a custom ship_name here, be sure to remove it from the pool of random names
 	preset_players = {}
 	--1st ship spawned: Maverick
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Starry",				--1st choice
 			ship_name = "Phoenix",
@@ -91,7 +91,7 @@ function presetOptionVariables()
 			ship_pref_3 = "Player Cruiser",
 		}
 	)
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Aldric",				--3rd choice
 			faction = "Kraylor",
@@ -105,14 +105,14 @@ function presetOptionVariables()
 		}
 	)
 	--2nd ship spawned: Atlantis
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Larry",
 			ship_name = "Mondo",
 			faction = "Human Navy",
 		}
 	)
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Epeac",				--2nd choice
 			faction = "Kraylor",
@@ -123,7 +123,7 @@ function presetOptionVariables()
 		}
 	)
 	--3rd ship spawned: Phobos M3P
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Lupus",				--5th choice
 			faction = "Human Navy",
@@ -134,7 +134,7 @@ function presetOptionVariables()
 			ship_pref_3 = "Maverick",
 		}
 	)
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Daid",
 			faction = "Kraylor",
@@ -142,14 +142,14 @@ function presetOptionVariables()
 		}
 	)
 	--4th ship spawned: Crucible
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Mo",
 			ship_name = "Shotgun",
 			faction = "Human Navy",
 		}
 	)
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Theta",				--4th choice
 			faction = "Kraylor",
@@ -161,14 +161,14 @@ function presetOptionVariables()
 		}
 	)
 	--5th ship spawned: Flavia P.Falcon
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Curly",
 			ship_name = "Jayhawk",
 			faction = "Human Navy",
 		}
 	)
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "AJ",
 			ship_name = "Roc",
@@ -176,14 +176,14 @@ function presetOptionVariables()
 		}
 	)
 	--6th ship spawned: Repulse
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Shemp",
 			ship_name = "Lizard",
 			faction = "Human Navy",
 		}
 	)
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Hemmond",
 			faction = "Kraylor",
@@ -191,14 +191,14 @@ function presetOptionVariables()
 		}
 	)
 	--7th ship spawned: Player Missile Cr.
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Ted",
 			ship_name = "Cremator",
 			faction = "Human Navy",
 		}
 	)
-	table.insert(preset_players, 
+	table.insert(preset_players,
 		{
 			xo = "Hermann",
 			ship_name = "Charger",
@@ -738,10 +738,10 @@ function setGlobals()
 	stationZebra = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation):setPosition(0,0):setCallSign("Zebra"):setDescription(_("scienceDescription-station", "Referee"))
 	table.insert(stationList,stationZebra)
 	-- the following are part of Xansta's larger overall bartering/crafting setup
-		goods = {}			--overall tracking of goods; 
-		tradeFood = {}		--stations that will trade food for other goods; 
-		tradeLuxury = {}	--stations that will trade luxury for other goods; 
-		tradeMedicine = {}	--stations that will trade medicine for other goods; 
+		goods = {}			--overall tracking of goods;
+		tradeFood = {}		--stations that will trade food for other goods;
+		tradeLuxury = {}	--stations that will trade luxury for other goods;
+		tradeMedicine = {}	--stations that will trade medicine for other goods;
 	droneFleets = {}
 	boundary_marker = _("setting-marker", "buoys")
 	station_pool = nil
@@ -1313,7 +1313,7 @@ function configureDrones()
 			elseif drone_name_type == _("setting-callsign", "short") then
 				drone_name_type = _("setting-callsign", "squad-num of size")
 			end
-			configureDrones() 
+			configureDrones()
 		end)
 		addGMFunction(string.format(_("buttonGM", "+Flag I%i M%i"),drone_flag_check_interval,drone_message_reset_count),setDroneFlagValues)
 		addGMFunction(string.format(_("buttonGM", "+Distance F%.1fU S%.1fU"),drone_formation_spacing/1000,drone_scan_range_for_flags/1000),setDroneDistances)
@@ -1327,7 +1327,7 @@ function configureDrones()
 			else
 				drone_modified_from_template = true
 			end
-			configureDrones() 
+			configureDrones()
 		end)
 		if drone_modified_from_template then
 			addGMFunction(string.format(_("buttonGM", "+Hull %i"),drone_hull_strength),setDroneHull)
@@ -1593,7 +1593,7 @@ function mainGMButtonsAfterPause()
 		mainGMButtons()
 	end)
 	addGMFunction(_("buttonGM", "Current Stats"), currentStats)
-	if dronesAreAllowed then 
+	if dronesAreAllowed then
 		addGMFunction(_("buttonGM", "Detailed Drone Report"), detailedDroneReport)
 	end
 	if gameTimeLimit < (maxGameTime - hideFlagTime) then
@@ -2779,7 +2779,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, shape, sp)
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	enemyStrength = math.max(danger * enemy_power * playerPower(),5)
@@ -3453,7 +3453,7 @@ function justPassingBy()
 			  -- there is no need to keep track of the speed in this case as it is uniform for all nebula in this band
 			left_bh_inner_band_radius = 40000
 			left_bh_inner_band_orbit_speed = 360/(60 * 120) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 120 seconds; uniform for all nebula
-			-- because in this design we want the nebula more "clumpy" with gaps inbetween the clumps, there will be 4 clumps of nebula, one starting in each quadrant, centered on the 45 
+			-- because in this design we want the nebula more "clumpy" with gaps inbetween the clumps, there will be 4 clumps of nebula, one starting in each quadrant, centered on the 45
 			-- degree angle of that quadrant, spanning a variable degree of arc; make the number of nebula in each clump a variable so we can easily modify how thick each clump will be
 			left_bh_inner_band_clump_density = 8  -- the number of nebula in a clump
 			left_bh_inner_band_clump_spread = 40  -- the number of degrees of arc for the clump spread of the quandrant bisecting angle
@@ -3465,7 +3465,7 @@ function justPassingBy()
 					left_blackhole_inner_band[array_index] = {}
 					left_blackhole_inner_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,left_blackhole_inner_band[array_index][1])
-					left_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					left_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3480,7 +3480,7 @@ function justPassingBy()
 					left_blackhole_inner_band[array_index] = {}
 					left_blackhole_inner_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,left_blackhole_inner_band[array_index][1])
-					left_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					left_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3495,7 +3495,7 @@ function justPassingBy()
 					left_blackhole_inner_band[array_index] = {}
 					left_blackhole_inner_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,left_blackhole_inner_band[array_index][1])
-					left_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					left_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3510,7 +3510,7 @@ function justPassingBy()
 					left_blackhole_inner_band[array_index] = {}
 					left_blackhole_inner_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,left_blackhole_inner_band[array_index][1])
-					left_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					left_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3524,7 +3524,7 @@ function justPassingBy()
 			left_bh_middle_band_min_radius = 55000
 			left_bh_middle_band_max_radius = 65000
 			
-			-- the middle band will not have clumps like the first and will just have a random placement of asteroids within the allowable band range, all with randomly set speeds 
+			-- the middle band will not have clumps like the first and will just have a random placement of asteroids within the allowable band range, all with randomly set speeds
 			left_bh_mimdle_band_number_of_asteroids = 100
 			left_bh_middle_band_min_orbit_speed = 360/(60 * 240) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 240 seconds
 			left_bh_middle_band_max_orbit_speed = 360/(60 * 150) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 150 seconds
@@ -3536,7 +3536,7 @@ function justPassingBy()
 				  -- 3rd position on the inner array will be the current angle of the asteroid in relation to the blackhole center
 				  -- 4th position on the inner array will be the orbital speed of the asteroid, expressed as a delta of angle change per update cycle, randomly generated
 				left_blackhole_middle_band[i]= {}
-				left_blackhole_middle_band[i][1] = Asteroid() 
+				left_blackhole_middle_band[i][1] = Asteroid()
 				table.insert(terrain_objects,left_blackhole_middle_band[i][1])
 				left_blackhole_middle_band[i][2] = math.random(left_bh_middle_band_min_radius, left_bh_middle_band_max_radius)
 				left_blackhole_middle_band[i][3] = math.random(1, 360)
@@ -3556,7 +3556,7 @@ function justPassingBy()
 			  -- there is no need to keep track of the speed in this case as it is uniform for all nebula in this band
 			left_bh_outer_band_radius = 80000
 			left_bh_outer_band_orbit_speed = 360/(60 * 360) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 480 seconds; uniform for all nebula
-			-- because in this design we want the nebula more "clumpy" with gaps inbetween the clumps, there will be 4 clumps of nebula, one starting in each quadrant, centered on the 45 
+			-- because in this design we want the nebula more "clumpy" with gaps inbetween the clumps, there will be 4 clumps of nebula, one starting in each quadrant, centered on the 45
 			-- degree angle of that quadrant, spanning a variable degree of arc; make the number of nebula in each clump a variable so we can easily modify how thick each clump will be
 			left_bh_outer_band_clump_density = 10  -- the number of nebula in a clump
 			left_bh_outer_band_clump_spread = 60  -- the number of degrees of arc for the clump spread of the quandrant bisecting angle
@@ -3568,7 +3568,7 @@ function justPassingBy()
 					left_blackhole_outer_band[array_index] = {}
 					left_blackhole_outer_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,left_blackhole_outer_band[array_index][1])
-					left_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					left_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3583,7 +3583,7 @@ function justPassingBy()
 					left_blackhole_outer_band[array_index] = {}
 					left_blackhole_outer_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,left_blackhole_outer_band[array_index][1])
-					left_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					left_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3598,7 +3598,7 @@ function justPassingBy()
 					left_blackhole_outer_band[array_index] = {}
 					left_blackhole_outer_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,left_blackhole_outer_band[array_index][1])
-					left_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					left_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3613,7 +3613,7 @@ function justPassingBy()
 					left_blackhole_outer_band[array_index] = {}
 					left_blackhole_outer_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,left_blackhole_outer_band[array_index][1])
-					left_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					left_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3638,7 +3638,7 @@ function justPassingBy()
 			  -- there is no need to keep track of the speed in this case as it is uniform for all nebula in this band
 			right_bh_inner_band_radius = 40000
 			right_bh_inner_band_orbit_speed = 360/(60 * 120) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 120 seconds; uniform for all nebula
-			-- because in this design we want the nebula more "clumpy" with gaps inbetween the clumps, there will be 4 clumps of nebula, one starting in each quadrant, centered on the 45 
+			-- because in this design we want the nebula more "clumpy" with gaps inbetween the clumps, there will be 4 clumps of nebula, one starting in each quadrant, centered on the 45
 			-- degree angle of that quadrant, spanning a variable degree of arc; make the number of nebula in each clump a variable so we can easily modify how thick each clump will be
 			right_bh_inner_band_clump_density = 8  -- the number of nebula in a clump
 			right_bh_inner_band_clump_spread = 40  -- the number of degrees of arc for the clump spread of the quandrant bisecting angle
@@ -3650,7 +3650,7 @@ function justPassingBy()
 					right_blackhole_inner_band[array_index] = {}
 					right_blackhole_inner_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,right_blackhole_inner_band[array_index][1])
-					right_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					right_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3665,7 +3665,7 @@ function justPassingBy()
 					right_blackhole_inner_band[array_index] = {}
 					right_blackhole_inner_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,right_blackhole_inner_band[array_index][1])
-					right_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					right_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3680,7 +3680,7 @@ function justPassingBy()
 					right_blackhole_inner_band[array_index] = {}
 					right_blackhole_inner_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,right_blackhole_inner_band[array_index][1])
-					right_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					right_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3695,7 +3695,7 @@ function justPassingBy()
 					right_blackhole_inner_band[array_index] = {}
 					right_blackhole_inner_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,right_blackhole_inner_band[array_index][1])
-					right_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					right_blackhole_inner_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3709,7 +3709,7 @@ function justPassingBy()
 			right_bh_middle_band_min_radius = 55000
 			right_bh_middle_band_max_radius = 65000
 			
-			-- the middle band will not have clumps like the first and will just have a random placement of asteroids within the allowable band range, all with randomly set speeds 
+			-- the middle band will not have clumps like the first and will just have a random placement of asteroids within the allowable band range, all with randomly set speeds
 			right_bh_mimdle_band_number_of_asteroids = 100
 			right_bh_middle_band_min_orbit_speed = 360/(60 * 240) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 240 seconds
 			right_bh_middle_band_max_orbit_speed = 360/(60 * 150) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 150 seconds
@@ -3721,7 +3721,7 @@ function justPassingBy()
 				  -- 3rd position on the inner array will be the current angle of the asteroid in relation to the blackhole center
 				  -- 4th position on the inner array will be the orbital speed of the asteroid, expressed as a delta of angle change per update cycle, randomly generated
 				right_blackhole_middle_band[i]= {}
-				right_blackhole_middle_band[i][1] = Asteroid() 
+				right_blackhole_middle_band[i][1] = Asteroid()
 				table.insert(terrain_objects,right_blackhole_middle_band[i][1])
 				right_blackhole_middle_band[i][2] = math.random(right_bh_middle_band_min_radius, right_bh_middle_band_max_radius)
 				right_blackhole_middle_band[i][3] = math.random(1, 360)
@@ -3741,7 +3741,7 @@ function justPassingBy()
 			  -- there is no need to keep track of the speed in this case as it is uniform for all nebula in this band
 			right_bh_outer_band_radius = 80000
 			right_bh_outer_band_orbit_speed = 360/(60 * 360) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 360 seconds; uniform for all nebula
-			-- because in this design we want the nebula more "clumpy" with gaps inbetween the clumps, there will be 4 clumps of nebula, one starting in each quadrant, centered on the 45 
+			-- because in this design we want the nebula more "clumpy" with gaps inbetween the clumps, there will be 4 clumps of nebula, one starting in each quadrant, centered on the 45
 			-- degree angle of that quadrant, spanning a variable degree of arc; make the number of nebula in each clump a variable so we can easily modify how thick each clump will be
 			right_bh_outer_band_clump_density = 10  -- the number of nebula in a clump
 			right_bh_outer_band_clump_spread = 60  -- the number of degrees of arc for the clump spread of the quandrant bisecting angle
@@ -3753,7 +3753,7 @@ function justPassingBy()
 					right_blackhole_outer_band[array_index] = {}
 					right_blackhole_outer_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,right_blackhole_outer_band[array_index][1])
-					right_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					right_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3768,7 +3768,7 @@ function justPassingBy()
 					right_blackhole_outer_band[array_index] = {}
 					right_blackhole_outer_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,right_blackhole_outer_band[array_index][1])
-					right_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					right_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3783,7 +3783,7 @@ function justPassingBy()
 					right_blackhole_outer_band[array_index] = {}
 					right_blackhole_outer_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,right_blackhole_outer_band[array_index][1])
-					right_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					right_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3798,7 +3798,7 @@ function justPassingBy()
 					right_blackhole_outer_band[array_index] = {}
 					right_blackhole_outer_band[array_index][1] = Nebula()
 					table.insert(terrain_objects,right_blackhole_outer_band[array_index][1])
-					right_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)  
+					right_blackhole_outer_band[array_index][2] = math.random(begin_spread_angle, spread_angle_end)
 					-- setCirclePos(obj, x, y, angle, distance)
 					--   obj: An object.
 					--   x, y: Origin coordinates.
@@ -3808,7 +3808,7 @@ function justPassingBy()
 				end	
 				
 	-- if desired, the blackholes can orbit the entire playing area by using the center as the origin
-	-- note that in order to do this, the blackholes need to be equidistant from the origin along the x axis; 
+	-- note that in order to do this, the blackholes need to be equidistant from the origin along the x axis;
 	-- this routine will auto set the right blackhole x value to be opposite of the left blackhole x value
 	-- take care that the black holes are not going to sweep through the initial boundary area, thereby sucking up stations or flags!
 	
@@ -3817,7 +3817,7 @@ function justPassingBy()
 		-- set the initial angles of the blackholes relative to the origin
 		left_bh_angle_to_origin = 180
 		right_bh_angle_to_origin = 0
-		-- set the blackhole orbital velocity to complete 1 full orbit in ... 
+		-- set the blackhole orbital velocity to complete 1 full orbit in ...
 		-- orbital_velocity = 0.003  -- the complete game time of 30 mins ?
 		-- orbital_velocity = 0.006  -- 15 mins ?
 		-- orbital_velocity = 0.009  -- 10 mins ?
@@ -3827,7 +3827,7 @@ function justPassingBy()
 	orbital_movement = false
 	blackhole_movement = false
 
-	addGMFunction(_("buttonGM", "Orbit Toggle"), 
+	addGMFunction(_("buttonGM", "Orbit Toggle"),
 		function()
 			if orbital_movement then
 				orbital_movement = false
@@ -3837,7 +3837,7 @@ function justPassingBy()
 		end
 	)
 
-	addGMFunction(_("buttonGM", "Move Toggle"), 
+	addGMFunction(_("buttonGM", "Move Toggle"),
 		function()
 			if blackhole_movement then
 				blackhole_movement = false
@@ -3875,7 +3875,7 @@ function moveJustPassingBy(delta)
 
 	-- first do the left side
 		left_bh_center_x, left_bh_center_y = left_blackhole:getPosition()
-		-- if desired, move the left blackhole linearly to the right little by little.... 
+		-- if desired, move the left blackhole linearly to the right little by little....
 		-- a rate of x = +/- 5 seems to move the bh 20U in 1.5 min, a rate of +/- 2.5 will move the entire 200U distance in about 30 min (i.e., full game time)
 		if blackhole_movement then
 			left_blackhole:setPosition(left_bh_center_x + 2.5, left_bh_center_y)
@@ -3912,7 +3912,7 @@ function moveJustPassingBy(delta)
 
 	-- second do the right side
 		right_bh_center_x, right_bh_center_y = right_blackhole:getPosition()
-		-- if desired, move the right blackhole to the right little by little.... 
+		-- if desired, move the right blackhole to the right little by little....
 		-- a rate of x = +/- 5 seems to move the bh 20U in 1.5 min, a rate of +/- 2.5 will move the entire 200U distance in about 30 min (i.e., full game time)
 		if blackhole_movement then
 			right_blackhole:setPosition(right_bh_center_x - 2.5, right_bh_center_y)
@@ -3950,15 +3950,15 @@ function moveJustPassingBy(delta)
 end	--moveJustPassingBy
 --	Down The Rabbit Hole Terrain  --
 function downTheRabbitHole()
-	-- This terrain is a collection of interconnected worm holes that connect the interiors of the opposing sides; in effect, it creates a "multi-front" because now the opposing team can come from the 
+	-- This terrain is a collection of interconnected worm holes that connect the interiors of the opposing sides; in effect, it creates a "multi-front" because now the opposing team can come from the
 	-- rear as well as the front; this will no doubt cause a great deal of consternation... ha
 
 	-- player tagged relocation override is located at the end of this function; it's at the end because the values depend on "terrain" variables calculated in the middle of the function
 
-	dynamicTerrain = moveDownTheRabbitHole   
+	dynamicTerrain = moveDownTheRabbitHole
 	show_nebula = true
 	
-	-- WORM HOLES 
+	-- WORM HOLES
 		worm_hole_list = {}
 		local worm_hole_coordinates = {
 		--	human side
@@ -4010,14 +4010,14 @@ function downTheRabbitHole()
 			table.insert(terrain_objects,worm)
 		end
 
-	-- PLANETS/RING OF ASTEROIDS WITH MINES 
+	-- PLANETS/RING OF ASTEROIDS WITH MINES
 		-- applies to both sides
 			main_planet_center_x_distance = 100000
 			main_planet_center_y_distance = 0
 			main_planet_radius = 10000
 			
 			number_of_asteroids_in_ring = 100
-			asteroid_min_orbit_speed = 360/(60 * 240) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 240 seconds 
+			asteroid_min_orbit_speed = 360/(60 * 240) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 240 seconds
 			asteroid_max_orbit_speed = 360/(60 * 150) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 150 seconds
 			
 			number_of_mines_in_ring = 20
@@ -4078,10 +4078,10 @@ function downTheRabbitHole()
 				human_asteroid_ring[i].angle = math.random(1, 360)  -- the current angle of the asteroid in relation to the planet center
 				human_asteroid_ring[i].radius = math.random(human_asteroid_ring_min_radius, human_asteroid_ring_max_radius) -- the radius distance of the asteroid from the planet center, randomly generated in a band range
 				human_asteroid_ring[i].speed = random(asteroid_min_orbit_speed, asteroid_max_orbit_speed) -- the orbital speed of the asteroid, expressed as a delta of angle change per update cycle, randomly generated
-				setCirclePos(human_asteroid_ring[i], 
-					human_planet_center_x, 
-					human_planet_center_y, 
-					human_asteroid_ring[i].angle, 
+				setCirclePos(human_asteroid_ring[i],
+					human_planet_center_x,
+					human_planet_center_y,
+					human_asteroid_ring[i].angle,
 					human_asteroid_ring[i].radius)
 				table.insert(terrain_objects,human_asteroid_ring[i])
 			end
@@ -4093,10 +4093,10 @@ function downTheRabbitHole()
 				human_mine_ring[i].angle = math.random(1, 360)  -- the current angle of the mine in relation to the planet center
 				human_mine_ring[i].radius = math.random(human_asteroid_ring_min_radius, human_asteroid_ring_max_radius) -- the radius distance of the mine from the planet center, randomly generated in a band range
 				human_mine_ring[i].speed = random(mine_min_orbit_speed, mine_max_orbit_speed) -- the orbital speed of the asteroid, expressed as a delta of angle change per update cycle, randomly generated
-				setCirclePos(human_mine_ring[i], 
-					human_planet_center_x, 
-					human_planet_center_y, 
-					human_mine_ring[i].angle, 
+				setCirclePos(human_mine_ring[i],
+					human_planet_center_x,
+					human_planet_center_y,
+					human_mine_ring[i].angle,
 					human_mine_ring[i].radius)
 				table.insert(terrain_objects,human_mine_ring[i])
 			end
@@ -4155,10 +4155,10 @@ function downTheRabbitHole()
 				kraylor_asteroid_ring[i].angle = math.random(1, 360)  -- the current angle of the asteroid in relation to the planet center
 				kraylor_asteroid_ring[i].radius = math.random(kraylor_asteroid_ring_min_radius, kraylor_asteroid_ring_max_radius) -- the radius distance of the asteroid from the planet center, randomly generated in a band range
 				kraylor_asteroid_ring[i].speed = random(asteroid_min_orbit_speed, asteroid_max_orbit_speed) -- the orbital speed of the asteroid, expressed as a delta of angle change per update cycle, randomly generated
-				setCirclePos(kraylor_asteroid_ring[i], 
-					kraylor_planet_center_x, 
-					kraylor_planet_center_y, 
-					kraylor_asteroid_ring[i].angle, 
+				setCirclePos(kraylor_asteroid_ring[i],
+					kraylor_planet_center_x,
+					kraylor_planet_center_y,
+					kraylor_asteroid_ring[i].angle,
 					kraylor_asteroid_ring[i].radius)
 				table.insert(terrain_objects,kraylor_asteroid_ring[i])
 			end
@@ -4170,10 +4170,10 @@ function downTheRabbitHole()
 				kraylor_mine_ring[i].angle = math.random(1, 360)  -- the current angle of the mine in relation to the planet center
 				kraylor_mine_ring[i].radius = math.random(kraylor_asteroid_ring_min_radius, kraylor_asteroid_ring_max_radius) -- the radius distance of the mine from the planet center, randomly generated in a band range
 				kraylor_mine_ring[i].speed = random(mine_min_orbit_speed, mine_max_orbit_speed) -- the orbital speed of the asteroid, expressed as a delta of angle change per update cycle, randomly generated
-				setCirclePos(kraylor_mine_ring[i], 
-					kraylor_planet_center_x, 
-					kraylor_planet_center_y, 
-					kraylor_mine_ring[i].angle, 
+				setCirclePos(kraylor_mine_ring[i],
+					kraylor_planet_center_x,
+					kraylor_planet_center_y,
+					kraylor_mine_ring[i].angle,
 					kraylor_mine_ring[i].radius)
 				table.insert(terrain_objects,kraylor_mine_ring[i])
 			end
@@ -4185,13 +4185,13 @@ function downTheRabbitHole()
 				:setFaction("Human Navy")
 				:setCallSign("DS845")
 			table.insert(terrain_objects,human_orbital_station_1)
-			human_orbital_station_1.angle = 270 
-			human_orbital_station_1.speed = 360/(60 * (human_moon_1_orbit_time + (human_moon_1_orbit_time * 0.05))) -- this is supposed to equate to the same time it takes for human moon 1 to orbit the planet... maybe... 
+			human_orbital_station_1.angle = 270
+			human_orbital_station_1.speed = 360/(60 * (human_moon_1_orbit_time + (human_moon_1_orbit_time * 0.05))) -- this is supposed to equate to the same time it takes for human moon 1 to orbit the planet... maybe...
 			human_orbital_station_1.distance = human_moon_1_center_y
-			setCirclePos(human_orbital_station_1, 
-				human_planet_center_x, 
-				human_planet_center_y, 
-				human_orbital_station_1.angle, 
+			setCirclePos(human_orbital_station_1,
+				human_planet_center_x,
+				human_planet_center_y,
+				human_orbital_station_1.angle,
 				human_orbital_station_1.distance)
 
 			human_orbital_station_2 = SpaceStation()
@@ -4199,13 +4199,13 @@ function downTheRabbitHole()
 				:setFaction("Human Navy")
 				:setCallSign("DS10246")
 			table.insert(terrain_objects,human_orbital_station_2)
-			human_orbital_station_2.angle = 0 
+			human_orbital_station_2.angle = 0
 			human_orbital_station_2.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
 			human_orbital_station_2.distance = human_moon_2_center_y + human_moon_2_radius + 10000
-			setCirclePos(human_orbital_station_2, 
-				human_planet_center_x, 
-				human_planet_center_y, 
-				human_orbital_station_2.angle, 
+			setCirclePos(human_orbital_station_2,
+				human_planet_center_x,
+				human_planet_center_y,
+				human_orbital_station_2.angle,
 				human_orbital_station_2.distance)
 
 			human_orbital_station_3 = SpaceStation()
@@ -4213,13 +4213,13 @@ function downTheRabbitHole()
 				:setFaction("Human Navy")
 				:setCallSign("DS1038")
 			table.insert(terrain_objects,human_orbital_station_3)
-			human_orbital_station_3.angle = 180 
+			human_orbital_station_3.angle = 180
 			human_orbital_station_3.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
 			human_orbital_station_3.distance = human_moon_2_center_y + human_moon_2_radius + 10000
-			setCirclePos(human_orbital_station_3, 
-				human_planet_center_x, 
-				human_planet_center_y, 
-				human_orbital_station_3.angle, 
+			setCirclePos(human_orbital_station_3,
+				human_planet_center_x,
+				human_planet_center_y,
+				human_orbital_station_3.angle,
 				human_orbital_station_3.distance)
 				
 			human_orbital_station_4 = SpaceStation()
@@ -4227,13 +4227,13 @@ function downTheRabbitHole()
 				:setFaction("Independent")
 				:setCallSign("DS2639")
 			table.insert(terrain_objects,human_orbital_station_4)
-			human_orbital_station_4.angle = 90 
+			human_orbital_station_4.angle = 90
 			human_orbital_station_4.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
 			human_orbital_station_4.distance = human_moon_2_center_y + human_moon_2_radius + 10000
-			setCirclePos(human_orbital_station_4, 
-				human_planet_center_x, 
-				human_planet_center_y, 
-				human_orbital_station_4.angle, 
+			setCirclePos(human_orbital_station_4,
+				human_planet_center_x,
+				human_planet_center_y,
+				human_orbital_station_4.angle,
 				human_orbital_station_4.distance)
 				
 			human_orbital_station_5 = SpaceStation()
@@ -4241,13 +4241,13 @@ function downTheRabbitHole()
 				:setFaction("Independent")
 				:setCallSign("DS317")
 			table.insert(terrain_objects,human_orbital_station_5)
-			human_orbital_station_5.angle = 270 
+			human_orbital_station_5.angle = 270
 			human_orbital_station_5.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
 			human_orbital_station_5.distance = human_moon_2_center_y + human_moon_2_radius + 10000
-			setCirclePos(human_orbital_station_5, 
-				human_planet_center_x, 
-				human_planet_center_y, 
-				human_orbital_station_5.angle, 
+			setCirclePos(human_orbital_station_5,
+				human_planet_center_x,
+				human_planet_center_y,
+				human_orbital_station_5.angle,
 				human_orbital_station_5.distance)
 			
 			-- non-moving stations by the forward and middle wormholes
@@ -4275,13 +4275,13 @@ function downTheRabbitHole()
 				:setFaction("Kraylor")
 				:setCallSign("DS734")
 			table.insert(terrain_objects,kraylor_orbital_station_1)
-			kraylor_orbital_station_1.angle = 270 
-			kraylor_orbital_station_1.speed = 360/(60 * (kraylor_moon_1_orbit_time + (kraylor_moon_1_orbit_time * 0.05))) -- this is supposed to equate to the same time it takes for kraylor moon 1 to orbit the planet... maybe... 
+			kraylor_orbital_station_1.angle = 270
+			kraylor_orbital_station_1.speed = 360/(60 * (kraylor_moon_1_orbit_time + (kraylor_moon_1_orbit_time * 0.05))) -- this is supposed to equate to the same time it takes for kraylor moon 1 to orbit the planet... maybe...
 			kraylor_orbital_station_1.distance = kraylor_moon_1_center_y
-			setCirclePos(kraylor_orbital_station_1, 
-				kraylor_planet_center_x, 
-				kraylor_planet_center_y, 
-				kraylor_orbital_station_1.angle, 
+			setCirclePos(kraylor_orbital_station_1,
+				kraylor_planet_center_x,
+				kraylor_planet_center_y,
+				kraylor_orbital_station_1.angle,
 				kraylor_orbital_station_1.distance)
 
 			kraylor_orbital_station_2 = SpaceStation()
@@ -4289,13 +4289,13 @@ function downTheRabbitHole()
 				:setFaction("Kraylor")
 				:setCallSign("DS9135")
 			table.insert(terrain_objects,kraylor_orbital_station_2)
-			kraylor_orbital_station_2.angle = 180 
+			kraylor_orbital_station_2.angle = 180
 			kraylor_orbital_station_2.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
 			kraylor_orbital_station_2.distance = kraylor_moon_2_center_y + kraylor_moon_2_radius + 10000
-			setCirclePos(kraylor_orbital_station_2, 
-				kraylor_planet_center_x, 
-				kraylor_planet_center_y, 
-				kraylor_orbital_station_2.angle, 
+			setCirclePos(kraylor_orbital_station_2,
+				kraylor_planet_center_x,
+				kraylor_planet_center_y,
+				kraylor_orbital_station_2.angle,
 				kraylor_orbital_station_2.distance)
 
 			kraylor_orbital_station_3 = SpaceStation()
@@ -4303,13 +4303,13 @@ function downTheRabbitHole()
 				:setFaction("Kraylor")
 				:setCallSign("DS927")
 			table.insert(terrain_objects,kraylor_orbital_station_3)
-			kraylor_orbital_station_3.angle = 0 
+			kraylor_orbital_station_3.angle = 0
 			kraylor_orbital_station_3.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
 			kraylor_orbital_station_3.distance = kraylor_moon_2_center_y + kraylor_moon_2_radius + 10000
-			setCirclePos(kraylor_orbital_station_3, 
-				kraylor_planet_center_x, 
-				kraylor_planet_center_y, 
-				kraylor_orbital_station_3.angle, 
+			setCirclePos(kraylor_orbital_station_3,
+				kraylor_planet_center_x,
+				kraylor_planet_center_y,
+				kraylor_orbital_station_3.angle,
 				kraylor_orbital_station_3.distance)
 				
 			kraylor_orbital_station_4 = SpaceStation()
@@ -4317,13 +4317,13 @@ function downTheRabbitHole()
 				:setFaction("Independent")
 				:setCallSign("DS1528")
 			table.insert(terrain_objects,kraylor_orbital_station_4)
-			kraylor_orbital_station_4.angle = 90 
+			kraylor_orbital_station_4.angle = 90
 			kraylor_orbital_station_4.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
 			kraylor_orbital_station_4.distance = kraylor_moon_2_center_y + kraylor_moon_2_radius + 10000
-			setCirclePos(kraylor_orbital_station_4, 
-				kraylor_planet_center_x, 
-				kraylor_planet_center_y, 
-				kraylor_orbital_station_4.angle, 
+			setCirclePos(kraylor_orbital_station_4,
+				kraylor_planet_center_x,
+				kraylor_planet_center_y,
+				kraylor_orbital_station_4.angle,
 				kraylor_orbital_station_4.distance)
 				
 			kraylor_orbital_station_5 = SpaceStation()
@@ -4331,13 +4331,13 @@ function downTheRabbitHole()
 				:setFaction("Independent")
 				:setCallSign("DS206")
 			table.insert(terrain_objects,kraylor_orbital_station_5)
-			kraylor_orbital_station_5.angle = 270 
+			kraylor_orbital_station_5.angle = 270
 			kraylor_orbital_station_5.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
 			kraylor_orbital_station_5.distance = kraylor_moon_2_center_y + kraylor_moon_2_radius + 10000
-			setCirclePos(kraylor_orbital_station_5, 
-				kraylor_planet_center_x, 
-				kraylor_planet_center_y, 
-				kraylor_orbital_station_5.angle, 
+			setCirclePos(kraylor_orbital_station_5,
+				kraylor_planet_center_x,
+				kraylor_planet_center_y,
+				kraylor_orbital_station_5.angle,
 				kraylor_orbital_station_5.distance)
 			
 			-- non-moving stations by the forward and middle wormholes
@@ -4361,7 +4361,7 @@ function downTheRabbitHole()
 
 	-- NEBULA AND MINES IN THE NEBULA
 		if show_nebula then
-			-- human side 
+			-- human side
 				table.insert(terrain_objects,Nebula():setPosition(-25950, 15065))
 				table.insert(terrain_objects,Nebula():setPosition(-17927, 3032))
 				table.insert(terrain_objects,Nebula():setPosition(-18114, -4244))
@@ -4741,10 +4741,10 @@ function moveDownTheRabbitHole()
 				if human_asteroid_ring[i].angle > 360 then
 					human_asteroid_ring[i].angle = human_asteroid_ring[i].angle - 360
 				end
-				setCirclePos(human_asteroid_ring[i], 
-					human_planet_center_x, 
-					human_planet_center_y, 
-					human_asteroid_ring[i].angle, 
+				setCirclePos(human_asteroid_ring[i],
+					human_planet_center_x,
+					human_planet_center_y,
+					human_asteroid_ring[i].angle,
 					human_asteroid_ring[i].radius)
 			end
 		-- kraylor side
@@ -4753,10 +4753,10 @@ function moveDownTheRabbitHole()
 				if kraylor_asteroid_ring[i].angle > 360 then
 					kraylor_asteroid_ring[i].angle = kraylor_asteroid_ring[i].angle - 360
 				end
-				setCirclePos(kraylor_asteroid_ring[i], 
-					kraylor_planet_center_x, 
-					kraylor_planet_center_y, 
-					kraylor_asteroid_ring[i].angle, 
+				setCirclePos(kraylor_asteroid_ring[i],
+					kraylor_planet_center_x,
+					kraylor_planet_center_y,
+					kraylor_asteroid_ring[i].angle,
 					kraylor_asteroid_ring[i].radius)
 			end
 		
@@ -4770,10 +4770,10 @@ function moveDownTheRabbitHole()
 				if human_mine_ring[i].angle > 360 then
 					human_mine_ring[i].angle = human_mine_ring[i].angle - 360
 				end
-				setCirclePos(human_mine_ring[i], 
-					human_planet_center_x, 
-					human_planet_center_y, 
-					human_mine_ring[i].angle, 
+				setCirclePos(human_mine_ring[i],
+					human_planet_center_x,
+					human_planet_center_y,
+					human_mine_ring[i].angle,
 					human_mine_ring[i].radius)
 			end
 		-- kraylor side
@@ -4782,10 +4782,10 @@ function moveDownTheRabbitHole()
 				if kraylor_mine_ring[i].angle > 360 then
 					kraylor_mine_ring[i].angle = kraylor_mine_ring[i].angle - 360
 				end
-				setCirclePos(kraylor_mine_ring[i], 
-					kraylor_planet_center_x, 
-					kraylor_planet_center_y, 
-					kraylor_mine_ring[i].angle, 
+				setCirclePos(kraylor_mine_ring[i],
+					kraylor_planet_center_x,
+					kraylor_planet_center_y,
+					kraylor_mine_ring[i].angle,
 					kraylor_mine_ring[i].radius)
 			end
 		
@@ -4794,104 +4794,104 @@ function moveDownTheRabbitHole()
 	-- move orbiting space stations
 		-- human
 			human_orbital_station_1.angle = human_orbital_station_1.angle + human_orbital_station_1.speed
-			if human_orbital_station_1.angle > 360 then 
+			if human_orbital_station_1.angle > 360 then
 				human_orbital_station_1.angle = human_orbital_station_1.angle - 360
 			end
-			setCirclePos(human_orbital_station_1, 
-				human_planet_center_x, 
-				human_planet_center_y, 
-				human_orbital_station_1.angle, 
+			setCirclePos(human_orbital_station_1,
+				human_planet_center_x,
+				human_planet_center_y,
+				human_orbital_station_1.angle,
 				human_orbital_station_1.distance)
 
 			human_orbital_station_2.angle = human_orbital_station_2.angle + human_orbital_station_2.speed
-			if human_orbital_station_2.angle > 360 then 
+			if human_orbital_station_2.angle > 360 then
 				human_orbital_station_2.angle = human_orbital_station_2.angle - 360
 			end
-			setCirclePos(human_orbital_station_2, 
-				human_planet_center_x, 
-				human_planet_center_y, 
-				human_orbital_station_2.angle, 
+			setCirclePos(human_orbital_station_2,
+				human_planet_center_x,
+				human_planet_center_y,
+				human_orbital_station_2.angle,
 				human_orbital_station_2.distance)
 
 			human_orbital_station_3.angle = human_orbital_station_3.angle + human_orbital_station_3.speed
-			if human_orbital_station_3.angle > 360 then 
+			if human_orbital_station_3.angle > 360 then
 				human_orbital_station_3.angle = human_orbital_station_3.angle - 360
 			end
-			setCirclePos(human_orbital_station_3, 
-				human_planet_center_x, 
-				human_planet_center_y, 
-				human_orbital_station_3.angle, 
+			setCirclePos(human_orbital_station_3,
+				human_planet_center_x,
+				human_planet_center_y,
+				human_orbital_station_3.angle,
 				human_orbital_station_3.distance)
 
 			human_orbital_station_4.angle = human_orbital_station_4.angle + human_orbital_station_4.speed
-			if human_orbital_station_4.angle > 360 then 
+			if human_orbital_station_4.angle > 360 then
 				human_orbital_station_4.angle = human_orbital_station_4.angle - 360
 			end
-			setCirclePos(human_orbital_station_4, 
-				human_planet_center_x, 
-				human_planet_center_y, 
-				human_orbital_station_4.angle, 
+			setCirclePos(human_orbital_station_4,
+				human_planet_center_x,
+				human_planet_center_y,
+				human_orbital_station_4.angle,
 				human_orbital_station_4.distance)
 
 			human_orbital_station_5.angle = human_orbital_station_5.angle + human_orbital_station_5.speed
-			if human_orbital_station_5.angle > 360 then 
+			if human_orbital_station_5.angle > 360 then
 				human_orbital_station_5.angle = human_orbital_station_5.angle - 360
 			end
-			setCirclePos(human_orbital_station_5, 
-				human_planet_center_x, 
-				human_planet_center_y, 
-				human_orbital_station_5.angle, 
+			setCirclePos(human_orbital_station_5,
+				human_planet_center_x,
+				human_planet_center_y,
+				human_orbital_station_5.angle,
 				human_orbital_station_5.distance)
 
 		-- kraylor
 			kraylor_orbital_station_1.angle = kraylor_orbital_station_1.angle + kraylor_orbital_station_1.speed
-			if kraylor_orbital_station_1.angle > 360 then 
+			if kraylor_orbital_station_1.angle > 360 then
 				kraylor_orbital_station_1.angle = kraylor_orbital_station_1.angle - 360
 			end
-			setCirclePos(kraylor_orbital_station_1, 
-				kraylor_planet_center_x, 
-				kraylor_planet_center_y, 
-				kraylor_orbital_station_1.angle, 
+			setCirclePos(kraylor_orbital_station_1,
+				kraylor_planet_center_x,
+				kraylor_planet_center_y,
+				kraylor_orbital_station_1.angle,
 				kraylor_orbital_station_1.distance)
 
 			kraylor_orbital_station_2.angle = kraylor_orbital_station_2.angle + kraylor_orbital_station_2.speed
-			if kraylor_orbital_station_2.angle > 360 then 
+			if kraylor_orbital_station_2.angle > 360 then
 				kraylor_orbital_station_2.angle = kraylor_orbital_station_2.angle - 360
 			end
-			setCirclePos(kraylor_orbital_station_2, 
-				kraylor_planet_center_x, 
-				kraylor_planet_center_y, 
-				kraylor_orbital_station_2.angle, 
+			setCirclePos(kraylor_orbital_station_2,
+				kraylor_planet_center_x,
+				kraylor_planet_center_y,
+				kraylor_orbital_station_2.angle,
 				kraylor_orbital_station_2.distance)
 
 			kraylor_orbital_station_3.angle = kraylor_orbital_station_3.angle + kraylor_orbital_station_3.speed
-			if kraylor_orbital_station_3.angle > 360 then 
+			if kraylor_orbital_station_3.angle > 360 then
 				kraylor_orbital_station_3.angle = kraylor_orbital_station_3.angle - 360
 			end
-			setCirclePos(kraylor_orbital_station_3, 
-				kraylor_planet_center_x, 
-				kraylor_planet_center_y, 
-				kraylor_orbital_station_3.angle, 
+			setCirclePos(kraylor_orbital_station_3,
+				kraylor_planet_center_x,
+				kraylor_planet_center_y,
+				kraylor_orbital_station_3.angle,
 				kraylor_orbital_station_3.distance)
 
 			kraylor_orbital_station_4.angle = kraylor_orbital_station_4.angle + kraylor_orbital_station_4.speed
-			if kraylor_orbital_station_4.angle > 360 then 
+			if kraylor_orbital_station_4.angle > 360 then
 				kraylor_orbital_station_4.angle = kraylor_orbital_station_4.angle - 360
 			end
-			setCirclePos(kraylor_orbital_station_4, 
-				kraylor_planet_center_x, 
-				kraylor_planet_center_y, 
-				kraylor_orbital_station_4.angle, 
+			setCirclePos(kraylor_orbital_station_4,
+				kraylor_planet_center_x,
+				kraylor_planet_center_y,
+				kraylor_orbital_station_4.angle,
 				kraylor_orbital_station_4.distance)
 
 			kraylor_orbital_station_5.angle = kraylor_orbital_station_5.angle + kraylor_orbital_station_5.speed
-			if kraylor_orbital_station_5.angle > 360 then 
+			if kraylor_orbital_station_5.angle > 360 then
 				kraylor_orbital_station_5.angle = kraylor_orbital_station_5.angle - 360
 			end
-			setCirclePos(kraylor_orbital_station_5, 
-				kraylor_planet_center_x, 
-				kraylor_planet_center_y, 
-				kraylor_orbital_station_5.angle, 
+			setCirclePos(kraylor_orbital_station_5,
+				kraylor_planet_center_x,
+				kraylor_planet_center_y,
+				kraylor_orbital_station_5.angle,
 				kraylor_orbital_station_5.distance)
 
 	
@@ -5233,7 +5233,7 @@ function resupplyStation()
     return true
 end
 function handleResupplyStationWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -5684,7 +5684,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end

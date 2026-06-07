@@ -1,13 +1,13 @@
 -- Name: Defender Hunter
 -- Description: Defend home station and hunt down enemies
---- 
+---
 --- Initially, you're tasked with defending your home base.  Over time, you'll discover more about the enemies harassing you and you'll be ordered to find and destroy the enemies responsible.  There may be various missions given along the way, but the enemy harassment will continue.  You must balance your two missions.
 ---
 --- Designed for any number of cooperating player ships. Randomization makes many details different for each game, but the primary goals remain the same. Untimed variations can take an hour or longer for full mission completion. Different sub-missions may be chosen by the players or will be chosen at random. Achieving victory in a timed hunter variation is quite a challenge. Like the Waves scenario, the enemies get harder over time.
 ---
 --- Version 11
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one almost every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one almost every weekend. All experience levels are welcome.
 -- Type: Replayable Mission
 -- Setting[Enemies]: Configures the number and type of enemies
 -- Enemies[Easy]: Fewer and/or weaker enemy ships
@@ -1224,7 +1224,7 @@ function placeDHStation(x,y,name,faction,size)
 	return station
 end
 function placeRandomListAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
--- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0) 
+-- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
 -- save in a list that is returned to caller
 	local object_list = {}
     for n=1,amount do
@@ -2311,9 +2311,9 @@ function handleDockedState()
 			end
 			if comms_target.comms_data.trade ~= nil and
 				comms_target.comms_data.trade.food ~= nil and
-				comms_target.comms_data.trade.food and 
-				comms_source.goods ~= nil and 
-				comms_source.goods.food ~= nil and 
+				comms_target.comms_data.trade.food and
+				comms_source.goods ~= nil and
+				comms_source.goods.food ~= nil and
 				comms_source.goods.food > 0 then
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good), function()
@@ -2337,11 +2337,11 @@ function handleDockedState()
 					end)
 				end
 			end
-			if comms_target.comms_data.trade ~= nil and 
-				comms_target.comms_data.trade.medicine ~= nil and 
-				comms_target.comms_data.trade.medicine and 
-				comms_source.goods ~= nil and 
-				comms_source.goods.medicine ~= nil and 
+			if comms_target.comms_data.trade ~= nil and
+				comms_target.comms_data.trade.medicine ~= nil and
+				comms_target.comms_data.trade.medicine and
+				comms_source.goods ~= nil and
+				comms_source.goods.medicine ~= nil and
 				comms_source.goods.medicine > 0 then
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade medicine for %s"),good), function()
@@ -2367,9 +2367,9 @@ function handleDockedState()
 			end
 			if comms_target.comms_data.trade ~= nil and
 				comms_target.comms_data.trade.luxury ~= nil and
-				comms_target.comms_data.trade.luxury and 
-				comms_source.goods ~= nil and 
-				comms_source.goods.luxury ~= nil and 
+				comms_target.comms_data.trade.luxury and
+				comms_source.goods ~= nil and
+				comms_source.goods.luxury ~= nil and
 				comms_source.goods.luxury > 0 then
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
@@ -2796,7 +2796,7 @@ function setOptionalOrders()
 			elseif rotateReveal == 1 then
 				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign())
 			elseif rotateReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName()) 
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName())
 			elseif rotateReveal == 3 then
 				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s may have %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGood)
 			else
@@ -2841,7 +2841,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -3733,7 +3733,7 @@ function pressureWaves(delta)
 		local lo = 5 + difficulty * 4
 		local hi = 500 - difficulty * 100
 		local chance = math.max(lo,getPlayerShip(-1):getReputationPoints()/hi*100)
-		if jump_start then 
+		if jump_start then
 			chance = math.max(chance,50)
 		end
 		waveSpawned = false
@@ -4486,7 +4486,7 @@ function randomDelivery(delta)
 								end
 							end
 						end
-					end 
+					end
 				until(randomDeliverGood ~= nil or attempt_count > 50)
 			end
 			if randomDeliverGood == nil then
@@ -5477,7 +5477,7 @@ function vectorOn(obj,danger,radius,angle,list)
 	for index, ship in ipairs(enemy_list) do
 		if index <= tier_max then
 			local pyramid_angle = angle + formation_delta.pyramid[pyramid_tier][index].angle
-			if pyramid_angle < 0 then 
+			if pyramid_angle < 0 then
 				pyramid_angle = pyramid_angle + 360
 			end
 			pyramid_angle = pyramid_angle % 360
@@ -5805,7 +5805,7 @@ function spawnEnemies(origin_x, origin_y, danger, faction, strength, pool_size, 
 	local ship_template_by_strength = getStrengthSort(ship_template, function(a,b)
 		return a.strength > b.strength
 	end)
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	if faction == nil then

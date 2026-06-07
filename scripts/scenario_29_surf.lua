@@ -1,11 +1,11 @@
 -- Name: Surf's Up!
--- Description: Wave after wave of enemy ships attack, each wave harder than the previous wave. Single or multiple player ships may participate. Scenario is over when the friendly bases are destroyed. Loosely based on the Waves scenario. The differences between Waves and Surf's Up: Initial configuration options (faster moving enemy ships, set the start wave), random wave type (normal, hunt enemy base, formation flying, asteroid storm), services split between friendly stations, side missions to enhance stations, enemies may drop deadly warp jammers. 
+-- Description: Wave after wave of enemy ships attack, each wave harder than the previous wave. Single or multiple player ships may participate. Scenario is over when the friendly bases are destroyed. Loosely based on the Waves scenario. The differences between Waves and Surf's Up: Initial configuration options (faster moving enemy ships, set the start wave), random wave type (normal, hunt enemy base, formation flying, asteroid storm), services split between friendly stations, side missions to enhance stations, enemies may drop deadly warp jammers.
 ---
 --- No victory condition. How many waves can you complete?
 ---
 --- Version 1
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one almost every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one almost every weekend. All experience levels are welcome.
 -- Type: Basic
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
 -- Enemies[Easy]: Fewer or weaker enemies
@@ -103,7 +103,7 @@ function setVariations()
 --                          Arc, Dir,Range,Cycle, Dmg
       ship:setBeamWeapon(0, 65,   0,  700,  4, 4)
       ship:setBeamWeapon(1, 40, -10, 1000,  6, 6)
-      ship:setBeamWeapon(2, 40,  10, 1000,  6, 6)  
+      ship:setBeamWeapon(2, 40,  10, 1000,  6, 6)
       end
     end
 end
@@ -194,7 +194,7 @@ function setGlobals()
     {name = "Tyr",        warp_jammer = "none",    strength = 150,  create = tyr},
   }
     -- Player ship(s)
-  player_ship_stats = {  
+  player_ship_stats = {
     ["Atlantis"]      = { strength = 52,  cargo = 6,  long_range_radar = 30000, short_range_radar = 5000,   },
     ["Benedict"]      = { strength = 10,  cargo = 9,  long_range_radar = 30000, short_range_radar = 5000,   },
     ["Crucible"]      = { strength = 45,  cargo = 5,  long_range_radar = 20000, short_range_radar = 6000,   },
@@ -213,7 +213,7 @@ function setGlobals()
     ["Repulse"]        = { strength = 14,  cargo = 12,  long_range_radar = 38000, short_range_radar = 5000,   },
     ["Striker"]        = { strength = 8,  cargo = 4,  long_range_radar = 35000, short_range_radar = 5000,   },
     ["ZX-Lindworm"]      = { strength = 8,  cargo = 3,  long_range_radar = 18000, short_range_radar = 5500,   },
-  }  
+  }
     player_ship_names = {
       ["Atlantis"] =      {"Excaliber","Thrasher","Punisher","Vorpal","Protang","Drummond","Parchim","Coronado"},
       ["Benedict"] =      {"Elizabeth","Ford","Vikramaditya","Liaoning","Avenger","Naruebet","Washington","Lincoln","Garibaldi","Eisenhower"},
@@ -493,7 +493,7 @@ function spreadServiceToStationPairs(stations)
     station.comms_data.weapon_available.Mine = false
     station.comms_data.weapon_available.HVLI = false
         station.comms_data.service_available = {
-          supplydrop =      false, 
+          supplydrop =      false,
           reinforcements =    false,
          hornet_reinforcements =  false,
       phobos_reinforcements =  false,
@@ -501,7 +501,7 @@ function spreadServiceToStationPairs(stations)
       amk8_reinforcements =  false,
     }
         station.comms_data.service_cost = {
-          supplydrop = math.random(90,110), 
+          supplydrop = math.random(90,110),
           reinforcements = math.random(140,160),
          hornet_reinforcements =  math.random(75,125),
       phobos_reinforcements =  math.random(175,225),
@@ -585,7 +585,7 @@ function spreadServiceToStations(stations)
     station.comms_data.weapon_available.Mine = false
     station.comms_data.weapon_available.HVLI = false
         station.comms_data.service_available = {
-          supplydrop =      false, 
+          supplydrop =      false,
           reinforcements =    false,
          hornet_reinforcements =  false,
       phobos_reinforcements =  false,
@@ -593,7 +593,7 @@ function spreadServiceToStations(stations)
       amk8_reinforcements =  false,
     }
         station.comms_data.service_cost = {
-          supplydrop = math.random(90,110), 
+          supplydrop = math.random(90,110),
           reinforcements = math.random(140,160),
          hornet_reinforcements =  math.random(75,125),
       phobos_reinforcements =  math.random(175,225),
@@ -667,7 +667,7 @@ function tableSelectRandom(array)
     if array_item_count == 0 then
         return nil
     end
-  return array[math.random(1,#array)]  
+  return array[math.random(1,#array)]
 end
 function angleFromVectorNorth(p1x,p1y,p2x,p2y)
   local TWOPI = 6.2831853071795865
@@ -722,7 +722,7 @@ function getDuration()
             if seconds > 1 then
               duration_string = string.format(_("msgMainscreen","%s hour, %s minute and %s seconds"),hours,minutes,seconds)
             else
-              duration_string = string.format(_("msgMainscreen","%s hour, %s minute and %s second"),hours,minutes,seconds)                  
+              duration_string = string.format(_("msgMainscreen","%s hour, %s minute and %s second"),hours,minutes,seconds)
             end
           end
         end

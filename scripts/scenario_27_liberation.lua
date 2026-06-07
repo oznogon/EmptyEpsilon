@@ -3,7 +3,7 @@
 ---
 --- Designed for one or more player ships. The terrain differs slightly every time the scenario is run. Default length: 30 minutes. May be shortened to 15 minutes or lengthened to an hour.
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
 -- Type: Replayable Mission
 -- Author: Xansta
 -- Setting[First]: Configures how long until the first major event occurs. The default is ten minutes. Shorter is harder. Longer is easier.
@@ -682,7 +682,7 @@ function setGlobals()	--variables that might change
 		["Leftovers"] =			{"Foregone","Righteous","Scandalous"},
 	}
 	star_list = {
-		{radius = random(600,1400), distance = random(-2500,-1400), 
+		{radius = random(600,1400), distance = random(-2500,-1400),
 			name = {
 				"Gamma Piscium",
 				"Beta Lyporis",
@@ -766,39 +766,39 @@ function setGlobals()	--variables that might change
 		{
 			name = {"Alderaan","Dagobah","Dantooine","Rigel"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-1.png", 
-				cloud = "planets/clouds-1.png", 
+				surface = "planets/planet-1.png",
+				cloud = "planets/clouds-1.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 		},
 		{
 			name = {"Pahvo","Penthara","Scalos"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-4.png", 
-				cloud = "planets/clouds-3.png", 
+				surface = "planets/planet-4.png",
+				cloud = "planets/clouds-3.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 		},
 		{
 			name = {"Tanuga","Vacca","Terlina","Timor"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-5.png", 
-				cloud = "planets/clouds-2.png", 
+				surface = "planets/planet-5.png",
+				cloud = "planets/clouds-2.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 		},
@@ -841,17 +841,17 @@ function constructEnvironment()
 			stations = outer_stations,
 			space = outer_space,
 			shape = "torus",
-			center_x = doomed_system_x, 
-			center_y = doomed_system_y, 
-			inner_radius = 35000, 
+			center_x = doomed_system_x,
+			center_y = doomed_system_y,
+			inner_radius = 35000,
 			outer_radius = 60000
 		},
 		["Doomed Circle"] = {
-			stations = inner_stations, 
+			stations = inner_stations,
 			space = inner_space,
-			shape = "circle", 
-			center_x = doomed_system_x, 
-			center_y = doomed_system_y, 
+			shape = "circle",
+			center_x = doomed_system_x,
+			center_y = doomed_system_y,
 			radius = 15000
 		},
 	}
@@ -939,7 +939,7 @@ function constructEnvironment()
 					break
 				end
 			end
-		end 
+		end
 	until(objects_placed_count >= 100 and #transport_list >= 10)
 --	set terrain in connecting area
 	terrain = {
@@ -1607,7 +1607,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	if enemyStrength == nil then
@@ -2461,7 +2461,7 @@ function placeSensorJammer(placement_area)
 	local impact_increment = (hi_impact - lo_impact)/4
 --	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--	2-6, 2-8, 2-10
 	local mix = math.random(2,10 - (4 - (2)))	--	2-8
-	sensor_jammer_scan_complexity = 1 
+	sensor_jammer_scan_complexity = 1
 	sensor_jammer_scan_depth = 1
 	if mix > 5 then
 		sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)

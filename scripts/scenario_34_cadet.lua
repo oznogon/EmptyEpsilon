@@ -3,7 +3,7 @@
 --- Beginner's mission. Player can save and restore if they can remember their key. The terrain differs each time the scenario runs.
 --- Duration: 1 - 2 hours
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
 ---
 --- Voice actors:
 --- Andrew "Snow" Kenny
@@ -62,7 +62,7 @@ function init()
 			lo =		20000,
 			hi =		21000,
 			faction =	"Exuari",		
-			comp =		"Beamers", 
+			comp =		"Beamers",
 			result =	player.enemy_group_1_destroyed,
 		},
 		{
@@ -79,7 +79,7 @@ function init()
 			lo =		20000,
 			hi =		21000,
 			faction =	"Kraylor",	
-			comp = 		"Beamers", 
+			comp = 		"Beamers",
 			result = 	player.enemy_group_2_destroyed,
 		},
 		{
@@ -96,7 +96,7 @@ function init()
 			lo =		30000,
 			hi =		31000,
 			faction = 	"Ktlitans",		
-			comp = 		"Beamers", 
+			comp = 		"Beamers",
 			result = 	player.enemy_group_3_destroyed,
 		},
 		{
@@ -113,7 +113,7 @@ function init()
 			lo =		30000,
 			hi =		31000,
 			faction = 	"Ghosts",		
-			comp = 		"Random", 
+			comp = 		"Random",
 			result = 	player.enemy_group_4_destroyed,
 		},
 		{
@@ -130,13 +130,13 @@ function init()
 			lo =		30000,
 			hi =		31000,
 			faction = 	"Kraylor",		
-			comp = 		"Random", 
-			result = 	player.enemy_group_5_destroyed, 
+			comp = 		"Random",
+			result = 	player.enemy_group_5_destroyed,
 		},
 		{
 			level = 	9,	
 			enemy = 	false,	
-			desc = 		"rescue freighter", 
+			desc = 		"rescue freighter",
 			result = 	player.rescued_freighter,
 		},
 		{
@@ -647,7 +647,7 @@ function setGlobals()
 		["Mehklar"] =		{id = "M", count = 0},
 	}
 	star_list = {
-		{radius = random(600,1400), distance = random(-2500,-1400), 
+		{radius = random(600,1400), distance = random(-2500,-1400),
 			name = {
 				"Gamma Piscium",
 				"Beta Lyporis",
@@ -792,7 +792,7 @@ function constructEnvironment()
 	local impact_increment = (hi_impact - lo_impact)/4
 --	local mix = math.random(2,10 - (4 - (2)))	--	2-8
 	local mix = math.random(6,8)	--	6-8
-	sensor_jammer_scan_complexity = 1 
+	sensor_jammer_scan_complexity = 1
 	sensor_jammer_scan_depth = 1
 	if mix > 5 then
 		sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)
@@ -883,11 +883,11 @@ function constructEnvironment()
 	placement_areas = {
 		["Circle Region"] = {
 			stations = inner_stations,
-			transports = transport_list, 
+			transports = transport_list,
 			space = inner_space,
-			shape = "bell torus", 
-			center_x = center_x, 
-			center_y = center_y, 
+			shape = "bell torus",
+			center_x = center_x,
+			center_y = center_y,
 			radius = 120000,
 		},
 	}
@@ -1198,7 +1198,7 @@ function placeTerrain(placement_area,terrain)
 		radius = radius + (field_size * 1500)
 	elseif terrain.desc == "Field" then
 		field_size = radius
-		radius = radius + 500 
+		radius = radius + 500
 	end
 	if placement_area == "Circle Region" then
 		eo_x, eo_y = findClearSpot(area.space,area.shape,area.center_x,area.center_y,area.radius,distort_bell,nil,radius)
@@ -1242,7 +1242,7 @@ function placeTerrain(placement_area,terrain)
 			local impact_increment = (hi_impact - lo_impact)/4
 		--	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--	2-6, 2-8, 2-10
 			local mix = math.random(2,10 - (4 - (2)))	--	2-8
-			sensor_jammer_scan_complexity = 1 
+			sensor_jammer_scan_complexity = 1
 			sensor_jammer_scan_depth = 1
 			if mix > 5 then
 				sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)

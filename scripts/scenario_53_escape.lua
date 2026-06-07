@@ -1,10 +1,10 @@
 -- Name: Escape
--- Description: Escape imprisonment and return home. 
+-- Description: Escape imprisonment and return home.
 --- Mission consists of one ship with a full crew. Engineer and Science will be busy.
 ---
 --- Version 5
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome.
 -- Type: Replayable Mission
 -- Author: Xansta
 -- Setting[Enemies]: Configures the amount/strength of enemies spawned in the scenario.
@@ -525,7 +525,7 @@ function createRandomAsteroidAlongArc(amount, x, y, distance, startArc, endArcCl
 end
 function buildNearbyStations()
 -- Organically (simulated asymetrically) grow stations from a central grid location
--- Order of creation: 	enemy stations, planet, enemy stations, planet, 
+-- Order of creation: 	enemy stations, planet, enemy stations, planet,
 -- 						independent stations, black hole, independent stations, black hole
 -- Human Navy stations (friendly stations) come later in the game after the communications get repaired.
 	brigx, brigy = brigStation:getPosition()
@@ -1343,10 +1343,10 @@ function handleDockedState()
 		missilePresence = missilePresence + player:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or 
-			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or 
-			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or 
-			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or 
+		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or
+			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or
+			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or
+			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0)   then
 			addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
 				setCommsMessage(_("ammo-comms","What type of ordnance do you need?"))
@@ -2052,7 +2052,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then 
+    if not player:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -3147,7 +3147,7 @@ function damageSummaryReport(delta)
 	end
 end
 function fixFlood(delta)
---trigger: beam repaired 
+--trigger: beam repaired
 	fixFloodTimer = fixFloodTimer - delta
 	if fixFloodTimer < 0 then
 		if missileFixStation == nil then
@@ -3451,7 +3451,7 @@ function jumpPartRecognition(delta)
 	end
 end
 function jumpPartFabrication(delta)
---Jump drive repairable 
+--Jump drive repairable
 	jumpPartFabricationTimer = jumpPartFabricationTimer - delta
 	if jumpPartFabricationTimer < 0 then
 		playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew finished jump drive part fabrication. They believe the jump drive should be functional soon."),"Magenta")
@@ -3545,7 +3545,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	enemyStrength = math.max(danger * enemy_power * 14, 5)	--assume player ship repulse at strength 14

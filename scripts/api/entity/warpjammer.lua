@@ -36,7 +36,7 @@ end
 --- Sets this WarpJammer's jamming radius.
 --- No warp/jump travel is possible within this radius.
 --- Defaults to 7000.0.
---- Example: jammer:setRange(10000) -- sets a 10U jamming radius 
+--- Example: jammer:setRange(10000) -- sets a 10U jamming radius
 function Entity:setRange(range)
     if self.components.warp_jammer then self.components.warp_jammer.range = range end
     return self

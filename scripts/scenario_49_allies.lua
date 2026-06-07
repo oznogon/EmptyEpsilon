@@ -3,7 +3,7 @@
 ---
 --- Version 2 - Nov2024
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one nearly every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one nearly every weekend. All experience levels are welcome.
 -- Type: Replayable Mission
 -- Setting[Murphy]: Configures how the odds are stacked against you - Murphy's law.
 -- Murphy[Easy]: Murphy generally smiles on you
@@ -97,10 +97,10 @@ function triggerMining()
 		plot1 = plotList[1]
 		table.remove(plotList,1)
 		plotManager = plotRun
-	else 
+	else
 		nextPlot = miningConflict
 	end
-end 
+end
 function triggerAdmiral()
 	if plot1 == nil then
 		if #plotList == 3 then
@@ -799,9 +799,9 @@ function buildStationsPlus()
 			oobCount = oobCount + 1
 			arlenianOob = arlenianOob + 1
 		end
-		if psf == "Independent" and (humanZone:isInside(extractStation) 
-								or kraylorZone:isInside(extractStation) 
-								or exuariZone:isInside(extractStation) 
+		if psf == "Independent" and (humanZone:isInside(extractStation)
+								or kraylorZone:isInside(extractStation)
+								or exuariZone:isInside(extractStation)
 								or arlenianZone:isInside(extractStation)) then
 			oobCount = oobCount + 1
 			neutralOob = neutralOob + 1
@@ -1414,7 +1414,7 @@ function placeAlcaleica()
 	return stationAlcaleica
 end
 function placeAnderson()
-	--Anderson 
+	--Anderson
 	stationAnderson = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationAnderson:setPosition(psx,psy):setCallSign("Anderson"):setDescription(_("scienceDescription-station", "Battery and software engineering"))
 	if stationFaction == "Human Navy" then
@@ -1433,7 +1433,7 @@ function placeAnderson()
 	return stationAnderson
 end
 function placeArcher()
-	--Archer 
+	--Archer
 	stationArcher = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationArcher:setPosition(psx,psy):setCallSign("Archer"):setDescription(_("scienceDescription-station", "Shield and Armor Research"))
 	if stationFaction == "Human Navy" then
@@ -1532,7 +1532,7 @@ function placeBarclay()
 	return stationBarclay
 end
 function placeBethesda()
-	--Bethesda 
+	--Bethesda
 	stationBethesda = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationBethesda:setPosition(psx,psy):setCallSign("Bethesda"):setDescription(_("scienceDescription-station", "Medical research"))
 	goods[stationBethesda] = {{"food",math.random(5,10),1},{"medicine",5,5},{"autodoc",5,36}}
@@ -1581,7 +1581,7 @@ function placeCalifornia()
 	return stationCalifornia
 end
 function placeCalvin()
-	--Calvin 
+	--Calvin
 	stationCalvin = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationCalvin:setPosition(psx,psy):setCallSign("Calvin"):setDescription(_("scienceDescription-station", "Robotic research"))
 	if stationFaction == "Human Navy" then
@@ -1601,7 +1601,7 @@ function placeCalvin()
 	return stationCalvin
 end
 function placeCavor()
-	--Cavor 
+	--Cavor
 	stationCavor = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationCavor:setPosition(psx,psy):setCallSign("Cavor"):setDescription(_("scienceDescription-station", "Advanced Material components"))
 	if stationFaction == "Human Navy" then
@@ -1745,14 +1745,14 @@ function placeErickson()
 			goods[stationErickson] = {{"food",math.random(5,10),1},{"medicine",5,5},{"transporter",5,63}}
 		else
 			goods[stationErickson] = {{"food",math.random(5,10),1},{"transporter",5,63}}		
-			tradeMedicine[stationErickson] = true 
+			tradeMedicine[stationErickson] = true
 		end
 	else
 		goods[stationErickson] = {{"transporter",5,63}}		
 		tradeFood[stationErickson] = true
-		tradeMedicine[stationErickson] = true 
+		tradeMedicine[stationErickson] = true
 	end
-	tradeLuxury[stationErickson] = true 
+	tradeLuxury[stationErickson] = true
 	stationErickson.publicRelations = true
 	stationErickson.generalInformation = _("stationGeneralInfo-comms", "We provide transporters used aboard ships as well as the components for repair and maintenance")
 	stationErickson.stationHistory = _("stationStory-comms", "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy")
@@ -1767,11 +1767,11 @@ function placeEvondos()
 			goods[stationEvondos] = {{"food",math.random(5,10),1},{"medicine",5,5},{"autodoc",5,56}}
 		else
 			goods[stationEvondos] = {{"food",math.random(5,10),1},{"autodoc",5,56}}		
-			tradeMedicine[stationEvondos] = true 
+			tradeMedicine[stationEvondos] = true
 		end
 	else
 		goods[stationEvondos] = {{"autodoc",5,56}}		
-		tradeMedicine[stationEvondos] = true 
+		tradeMedicine[stationEvondos] = true
 	end
 	if random(1,100) < 41 then tradeLuxury[stationEvondos] = true end
 	stationEvondos.publicRelations = true
@@ -1780,7 +1780,7 @@ function placeEvondos()
 	return stationEvondos
 end
 function placeFeynman()
-	--Feynman 
+	--Feynman
 	stationFeynman = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationFeynman:setPosition(psx,psy):setCallSign("Feynman"):setDescription(_("scienceDescription-station", "Nanotechnology research"))
 	if stationFaction == "Human Navy" then
@@ -1875,7 +1875,7 @@ function placeHeyes()
 	else
 		goods[stationHeyes] = {{"sensor",5,72}}		
 	end
-	tradeLuxury[stationHeyes] = true 
+	tradeLuxury[stationHeyes] = true
 	stationHeyes.publicRelations = true
 	stationHeyes.generalInformation = _("stationGeneralInfo-comms", "We research and manufacture sensor components and systems")
 	stationHeyes.stationHistory = _("stationStory-comms", "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility")
@@ -2062,9 +2062,9 @@ function placeLipkin()
 		end
 	else
 		goods[stationLipkin] = {{"autodoc",5,76}}		
-		tradeFood[stationLipkin] = true 
+		tradeFood[stationLipkin] = true
 	end
-	tradeLuxury[stationLipkin] = true 
+	tradeLuxury[stationLipkin] = true
 	stationLipkin.publicRelations = true
 	stationLipkin.generalInformation = _("stationGeneralInfo-comms", "We build and repair and provide components and upgrades for automated facilities designed for ships where a doctor cannot be a crew member (commonly called autodocs)")
 	stationLipkin.stationHistory = _("stationStory-comms", "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth")
@@ -2079,11 +2079,11 @@ function placeMadison()
 			goods[stationMadison] = {{"food",math.random(5,10),1},{"medicine",5,5},{"luxury",5,70}}
 		else
 			goods[stationMadison] = {{"food",math.random(5,10),1},{"luxury",5,70}}		
-			tradeMedicine[stationMadison] = true 
+			tradeMedicine[stationMadison] = true
 		end
 	else
 		goods[stationMadison] = {{"luxury",5,70}}		
-		tradeMedicine[stationMadison] = true 
+		tradeMedicine[stationMadison] = true
 	end
 	stationMadison.publicRelations = true
 	stationMadison.generalInformation = _("stationGeneralInfo-comms", "Come take in a game or two or perhaps see a show")
@@ -2099,11 +2099,11 @@ function placeMaiman()
 			goods[stationMaiman] = {{"food",math.random(5,10),1},{"medicine",5,5},{"beam",5,70}}
 		else
 			goods[stationMaiman] = {{"food",math.random(5,10),1},{"beam",5,70}}		
-			tradeMedicine[stationMaiman] = true 
+			tradeMedicine[stationMaiman] = true
 		end
 	else
 		goods[stationMaiman] = {{"beam",5,70}}		
-		tradeMedicine[stationMaiman] = true 
+		tradeMedicine[stationMaiman] = true
 	end
 	stationMaiman.publicRelations = true
 	stationMaiman.generalInformation = _("stationGeneralInfo-comms", "We research and manufacture energy beam components and systems")
@@ -2111,7 +2111,7 @@ function placeMaiman()
 	return stationMaiman
 end
 function placeMarconi()
-	--Marconi 
+	--Marconi
 	stationMarconi = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationMarconi:setPosition(psx,psy):setCallSign("Marconi"):setDescription(_("scienceDescription-station", "Energy Beam Components"))
 	if stationFaction == "Human Navy" then
@@ -2119,11 +2119,11 @@ function placeMarconi()
 			goods[stationMarconi] = {{"food",math.random(5,10),1},{"medicine",5,5},{"beam",5,80}}
 		else
 			goods[stationMarconi] = {{"food",math.random(5,10),1},{"beam",5,80}}		
-			tradeMedicine[stationMarconi] = true 
+			tradeMedicine[stationMarconi] = true
 		end
 	else
 		goods[stationMarconi] = {{"beam",5,80}}		
-		tradeMedicine[stationMarconi] = true 
+		tradeMedicine[stationMarconi] = true
 		tradeFood[stationMarconi] = true
 	end
 	tradeLuxury[stationMarconi] = true
@@ -2161,7 +2161,7 @@ function placeMiller()
 	return stationMiller
 end
 function placeMuddville()
-	--Muddville 
+	--Muddville
 	stationMudd = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationMudd:setPosition(psx,psy):setCallSign("Muddville"):setDescription(_("scienceDescription-station", "Trading station"))
 	if stationFaction == "Human Navy" then
@@ -2187,11 +2187,11 @@ function placeNexus6()
 			goods[stationNexus6] = {{"food",math.random(5,10),1},{"medicine",5,5},{"android",5,93}}
 		else
 			goods[stationNexus6] = {{"food",math.random(5,10),1},{"android",5,93}}		
-			tradeMedicine[stationNexus6] = true 
+			tradeMedicine[stationNexus6] = true
 		end
 	else
 		goods[stationNexus6] = {{"android",5,93}}		
-		tradeMedicine[stationNexus6] = true 
+		tradeMedicine[stationNexus6] = true
 	end
 	stationNexus6.publicRelations = true
 	stationNexus6.generalInformation = _("stationGeneralInfo-comms", "We research and manufacture android components and systems. Our design our androids to maximize their likeness to humans")
@@ -2211,7 +2211,7 @@ function placeOBrien()
 		end
 	else
 		goods[stationOBrien] = {{"transporter",5,76}}		
-		tradeMedicine[stationOBrien] = true 
+		tradeMedicine[stationOBrien] = true
 		if random(1,100) < 13 then tradeFood[stationOBrien] = true end
 		if random(1,100) < 34 then tradeMedicine[stationOBrien] = true end
 	end
@@ -2352,9 +2352,9 @@ function placeOwen()
 		end
 	else
 		goods[stationOwen] = {{"lifter",5,61}}		
-		tradeFood[stationOwen] = true 
+		tradeFood[stationOwen] = true
 	end
-	tradeLuxury[stationOwen] = true 
+	tradeLuxury[stationOwen] = true
 	stationOwen.publicRelations = true
 	stationOwen.generalInformation = _("stationGeneralInfo-comms", "We provide load lifters and components for various ship systems")
 	stationOwen.stationHistory = _("stationStory-comms", "The station is named after Lars Owen. After his extensive eperience with tempermental machinery on Tatooine, he used his subject matter expertise to expand into building and manufacturing the equipment adding innovations based on his years of experience using load lifters and their relative cousins, moisture vaporators")
@@ -2391,12 +2391,12 @@ function placeRipley()
 			goods[stationRipley] = {{"food",math.random(5,10),1},{"medicine",5,5},{"lifter",5,82}}
 		else
 			goods[stationRipley] = {{"food",math.random(5,10),1},{"lifter",5,82}}		
-			tradeMedicine[stationRipley] = true 
+			tradeMedicine[stationRipley] = true
 		end
 	else
 		goods[stationRipley] = {{"lifter",5,82}}		
 		if random(1,100) < 17 then tradeFood[stationRipley] = true end
-		tradeMedicine[stationRipley] = true 
+		tradeMedicine[stationRipley] = true
 	end
 	if random(1,100) < 47 then tradeLuxury[stationRipley] = true end
 	stationRipley.publicRelations = true
@@ -2413,11 +2413,11 @@ function placeRutherford()
 			goods[stationRutherford] = {{"food",math.random(5,10),1},{"medicine",5,5},{"shield",5,90}}
 		else
 			goods[stationRutherford] = {{"food",math.random(5,10),1},{"shield",5,90}}		
-			tradeMedicine[stationRutherford] = true 
+			tradeMedicine[stationRutherford] = true
 		end
 	else
 		goods[stationRutherford] = {{"shield",5,90}}		
-		tradeMedicine[stationRutherford] = true 
+		tradeMedicine[stationRutherford] = true
 	end
 	tradeMedicine[stationRutherford] = true
 	if random(1,100) < 43 then tradeLuxury[stationRutherford] = true end
@@ -2442,13 +2442,13 @@ function placeShawyer()
 			goods[stationShawyer] = {{"food",math.random(5,10),1},{"medicine",5,5},{"impulse",5,100}}
 		else
 			goods[stationShawyer] = {{"food",math.random(5,10),1},{"impulse",5,100}}		
-			tradeMedicine[stationShawyer] = true 
+			tradeMedicine[stationShawyer] = true
 		end
 	else
 		goods[stationShawyer] = {{"impulse",5,100}}		
-		tradeMedicine[stationShawyer] = true 
+		tradeMedicine[stationShawyer] = true
 	end
-	tradeLuxury[stationShawyer] = true 
+	tradeLuxury[stationShawyer] = true
 	stationShawyer.publicRelations = true
 	stationShawyer.generalInformation = _("stationGeneralInfo-comms", "We research and manufacture impulse engine components and systems")
 	stationShawyer.stationHistory = _("stationStory-comms", "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century")
@@ -2463,21 +2463,21 @@ function placeShree()
 			goods[stationShree] = {{"food",math.random(5,10),1},{"medicine",5,5},{"tractor",5,90},{"repulsor",5,95}}
 		else
 			goods[stationShree] = {{"food",math.random(5,10),1},{"tractor",5,90},{"repulsor",5,95}}		
-			tradeMedicine[stationShree] = true 
+			tradeMedicine[stationShree] = true
 		end
 	else
 		goods[stationShree] = {{"tractor",5,90},{"repulsor",5,95}}		
-		tradeMedicine[stationShree] = true 
-		tradeFood[stationShree] = true 
+		tradeMedicine[stationShree] = true
+		tradeFood[stationShree] = true
 	end
-	tradeLuxury[stationShree] = true 
+	tradeLuxury[stationShree] = true
 	stationShree.publicRelations = true
 	stationShree.generalInformation = _("stationGeneralInfo-comms", "We make ship systems designed to push or pull other objects around in space")
 	stationShree.stationHistory = _("stationStory-comms", "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today")
 	return stationShree
 end
 function placeSoong()
-	--Soong 
+	--Soong
 	stationSoong = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationSoong:setPosition(psx,psy):setCallSign("Soong"):setDescription(_("scienceDescription-station", "Android components"))
 	if stationFaction == "Human Navy" then
@@ -2488,9 +2488,9 @@ function placeSoong()
 		end
 	else
 		goods[stationSoong] = {{"android",5,73}}		
-		tradeFood[stationSoong] = true 
+		tradeFood[stationSoong] = true
 	end
-	tradeLuxury[stationSoong] = true 
+	tradeLuxury[stationSoong] = true
 	stationSoong.publicRelations = true
 	stationSoong.generalInformation = _("stationGeneralInfo-comms", "We create androids and android components")
 	stationSoong.stationHistory = _("stationStory-comms", "The station is named after Dr. Noonian Soong, the famous android researcher and builder")
@@ -2603,12 +2603,12 @@ function placeVeloquan()
 			goods[stationVeloquan] = {{"food",math.random(5,10),1},{"medicine",5,5},{"sensor",5,68}}
 		else
 			goods[stationVeloquan] = {{"food",math.random(5,10),1},{"sensor",5,68}}		
-			tradeMedicine[stationVeloquan] = true 
+			tradeMedicine[stationVeloquan] = true
 		end
 	else
 		goods[stationVeloquan] = {{"sensor",5,68}}		
-		tradeMedicine[stationVeloquan] = true 
-		tradeFood[stationVeloquan] = true 
+		tradeMedicine[stationVeloquan] = true
+		tradeFood[stationVeloquan] = true
 	end
 	stationVeloquan.publicRelations = true
 	stationVeloquan.generalInformation = _("stationGeneralInfo-comms", "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use")
@@ -2879,7 +2879,7 @@ function placeSpot()
 	return stationSpot
 end
 function placeStarnet()
-	--Starnet 
+	--Starnet
 	stationStarnet = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationStarnet:setPosition(psx,psy):setCallSign("Starnet"):setDescription(_("scienceDescription-station", "Automated weapons systems"))
 	stationGoodChoice = math.random(1,3)
@@ -3332,7 +3332,7 @@ function spawnEnemyFleet(xOrigin, yOrigin, power, danger, enemyFaction)
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	enemyStrength = math.max(power * danger * difficulty, 5)
@@ -4196,7 +4196,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then 
+    if not player:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -5188,7 +5188,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 	end
 end
 function placeRandomListAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
--- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0) 
+-- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
 -- save in a list that is returned to caller
 	local object_list = {}
     for n=1,amount do
@@ -5249,7 +5249,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	local enemyStrength = math.max(danger * difficulty * playerPower(),5)
@@ -6247,7 +6247,7 @@ function checkMiningConflictEvents(delta)
 		local menaceMiningFleetCount = 0
 		for _, enemy in ipairs(menaceMiningFleet) do
 			if enemy ~= nil and enemy:isValid() then
-				menaceMiningFleetCount = menaceMiningFleetCount + 1 
+				menaceMiningFleetCount = menaceMiningFleetCount + 1
 			end
 		end
 		if menaceMiningFleetCount < 1 then
@@ -6267,7 +6267,7 @@ function checkMiningConflictEvents(delta)
 		endStatistics()
 		victory("Kraylor")
 	end
-end 
+end
 
 function movingObjects(delta)
 	if ccOrbitDelayTimer ~= nil then

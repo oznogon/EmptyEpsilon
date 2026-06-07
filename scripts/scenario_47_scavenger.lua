@@ -69,7 +69,7 @@ function init()
 	-- The bare identifier "HV" created an indexed entry [1] = nil in the table, causing nil-access errors
 	first_station.comms_data.weapon_cost = {Homing = 2, HVLI = math.random(1,3), Mine = math.random(2,5), Nuke = 12, EMP = 9}
 --	print("init: place first enemy station")
-	--place first enemy station for first mission 
+	--place first enemy station for first mission
 	exuari_station = {}
 	local exuari_station_angle = first_station_angle + random(-20,20)
 	local enemy_station_distance = random(11000,15000)
@@ -131,7 +131,7 @@ function init()
 --	print("init: place second and third stations")
 	--place second and third stations
 	local second_station_angle = first_station_angle + random(90,140)
-	if second_station_angle > 360 then 
+	if second_station_angle > 360 then
 		second_station_angle = second_station_angle - 360
 	end
 	player_to_station_distance = player_to_station_distance + random(1000,8000)
@@ -141,7 +141,7 @@ function init()
 	table.insert(station_list,pStation)
 	setOptionalAddBeamMission(pStation)
 	second_station_angle = first_station_angle - random(90,140)
-	if second_station_angle < 0 then 
+	if second_station_angle < 0 then
 		second_station_angle = second_station_angle + 360
 	end
 	player_to_station_distance = player_to_station_distance + random(1000,8000)
@@ -623,7 +623,7 @@ function setInitialContractDetails()
 	first_station.comms_data.contract = {}
 	first_station.comms_data.contract["one_to_two"] = {
 		type = "start",
-		prompt = string.format(_("contract-comms", "Deliver three %s to %s. Upon delivery, they will increase your hull strength"),good_desc[independent_station[2].comms_data.characterGood],independent_station[2]:getCallSign()), 
+		prompt = string.format(_("contract-comms", "Deliver three %s to %s. Upon delivery, they will increase your hull strength"),good_desc[independent_station[2].comms_data.characterGood],independent_station[2]:getCallSign()),
 		short_prompt = string.format(_("contract-comms", "Three %s to %s"),good_desc[independent_station[2].comms_data.characterGood],independent_station[2]:getCallSign()),
 		accepted = false,
 		func = start1to2delivery,
@@ -1114,7 +1114,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 	local temp_list = nil
 --	print("curvaceous asteroids: above asteroids")
 	if random(1,100) <= 47 then	--center closer to station
-		local aax, aay = vectorFromAngle(first_station_angle,arc_leg) 
+		local aax, aay = vectorFromAngle(first_station_angle,arc_leg)
 		if random(1,100) <= 47 then	--right curve
 			arx, ary, temp_list = createRandomAlongArc(Asteroid, math.floor(asteroid_density*arc_segment), (fsx/2)+aax, (fsy/2)+aay, arc_leg, first_station_angle_inverted, first_station_angle_inverted + arc_segment, player_to_station_distance/width_divisor)
 			asteroid_list = add_to_list(temp_list,asteroid_list)
@@ -1161,7 +1161,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 			end
 		end			
 	else	--center closer to player
-		aax, aay = vectorFromAngle(first_station_angle_inverted,arc_leg) 
+		aax, aay = vectorFromAngle(first_station_angle_inverted,arc_leg)
 		if random(1,100) <= 47 then	--right curve
 			arx, ary, temp_list = createRandomAlongArc(Asteroid, math.floor(asteroid_density*arc_segment), (fsx/2)+aax, (fsy/2)+aay, arc_leg, first_station_angle, first_station_angle + arc_segment, player_to_station_distance/width_divisor)
 			asteroid_list = add_to_list(temp_list,asteroid_list)
@@ -1443,7 +1443,7 @@ function beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned
 	if damage ~= nil then
 		local damage_increment = beam_levels[getScenarioSetting("Murphy")].dmg
 		if artifact_scanned ~= nil and artifact_scanned then
-			damage_increment = damage_increment + 1 
+			damage_increment = damage_increment + 1
 		end
 		local beam_index = 0
 		repeat
@@ -1542,7 +1542,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, perimeter_min, per
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	local enemyStrength = math.max(danger * enemy_power * playerPower(),5)
@@ -1946,10 +1946,10 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or 
-			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or 
-			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or 
-			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or 
+		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or
+			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or
+			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or
+			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or
 			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0)   then
 			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				if stationCommsDiagnostic then print("in restock function") end
@@ -2547,7 +2547,7 @@ function handleDockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-	else	--neutral 
+	else	--neutral
 		if math.random(1,5) <= (3 - difficulty) then
 			if comms_source:getRepairCrewCount() < comms_source.maxRepairCrew then
 				hireCost = math.random(45,90)
@@ -2564,7 +2564,7 @@ function handleDockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-	end	--end friendly/neutral 
+	end	--end friendly/neutral
 	if goodCount > 0 then
 		addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
 			local goodsReport = string.format(_("forSaleTrade-comms", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
@@ -3070,7 +3070,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -5044,7 +5044,7 @@ function kraylorDiversionarySabotage(delta)
 			primaryOrders = _("KraylorOrders-comms", "Repel Kraylor")
 		end
 		if diversionary_sabotage_fleet == nil then
-			if planet_secondus_moon ~= nil and planet_secondus_moon:isValid() then 
+			if planet_secondus_moon ~= nil and planet_secondus_moon:isValid() then
 				local base_range = 10000
 				local player_scanner_range = player:getLongRangeRadarRange()
 				local rvx,rvy = vectorFromAngle(random(0,360),random(base_range,player_scanner_range + base_range))

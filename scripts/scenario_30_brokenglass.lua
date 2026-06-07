@@ -1060,7 +1060,7 @@ function SpawnConvoyEnemies()
 --  dx = dx + 10000
 --  dy = dy + 10000
   local dx = -90000
-  local dy = 30000 
+  local dy = 30000
   for i, enemy in ipairs(Defence_station.convoy_enemies) do
     enemy.dx = dx
     enemy.dy = dy

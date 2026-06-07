@@ -492,7 +492,7 @@ function goltinAndResearch(delta)  --Complete mission when returning with resear
       goltincomms:sendCommsMessage(player, string.format(_("audio-incCall", "(Ambassador Gremus) Thanks for researching the artifacts, %s. Tensions are high, but I think negotiations will succeed. In the meantime, be careful of hostile ships."), playerCallSign))
       playSoundFile("audio/scenario/51/sa_51_Gremus7.ogg")
       last_message_time = getScenarioTime() + 20
-      plot1 = finalMessage      
+      plot1 = finalMessage
     end
   end
 end
@@ -820,7 +820,7 @@ function artifactByStation(delta)  --When player docks, create nearby artifact. 
       Beta radiation: %i
       Gravity disruption: %i
       Ionic phase shift: %i
-      Doppler instability: %i]]),nPangora.beta_radiation, nPangora.gravity_disruption, nPangora.ionic_phase_shift, nPangora.doppler_instability))      
+      Doppler instability: %i]]),nPangora.beta_radiation, nPangora.gravity_disruption, nPangora.ionic_phase_shift, nPangora.doppler_instability))
       plot4 = pangoraArtifactChange
     end
   end
@@ -1030,16 +1030,16 @@ function handleDockedState()
   end
 end
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then 
+    if not player:isDocked(comms_target) then
       setCommsMessage(_("station-comms","You need to stay docked for that action."))
-      return 
+      return
     end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == MISSILE_NUKE then 
+        if weapon == MISSILE_NUKE then
           setCommsMessage(_("ammo-comms","We do not deal in weapons of mass destruction."))
-        elseif weapon == MISSILE_EMP then 
+        elseif weapon == MISSILE_EMP then
           setCommsMessage(_("ammo-comms","We do not deal in weapons of mass disruption."))
-        else 
+        else
           setCommsMessage(_("ammo-comms","We do not deal in those weapons."))
         end
         return
@@ -1228,7 +1228,7 @@ function update(delta)
       globalMessage(string.format(_("msgMainscreen","%s destroyed. Ambassador Gremus killed.\nWar begins on Goltin 7. Disgrace abounds."),playerCallSign))
         victory("Kraylor")
         return
-    end   
+    end
   if plot1 == nil then
     globalMessage(_("msgMainscreen","Congratulations! You delivered ambassador Gremus\n...and did other things, too."))
     victory("Human Navy")

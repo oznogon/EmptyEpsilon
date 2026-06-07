@@ -82,10 +82,10 @@ function init()
 	setGMButtons()
 end
 function setVariations()
-	-- One aspect of this scenario is the multiple planets that are orbiting the center black hole and each other. 
-	-- Early versions of this game had the planets orbiting at rather fast speeds... 
+	-- One aspect of this scenario is the multiple planets that are orbiting the center black hole and each other.
+	-- Early versions of this game had the planets orbiting at rather fast speeds...
 	-- like warp 5 (or something that seems like that). Some crews found it hilarious, others were
-	-- rather annoyed that they would get mowed down by a planet that they couldn't avoid, so the 
+	-- rather annoyed that they would get mowed down by a planet that they couldn't avoid, so the
 	-- orbital speed schema may be configured. Use GM buttons while paused to configure the scheme
 	-- The speed value represents the number of seconds it takes to complete an orbit.
 	orbital_schemes = {
@@ -956,7 +956,7 @@ function setConstants()
 	total_exuari_killed_by_kraylor = 0
 	total_exuari_killed_by_human = 0
 -- variables for randomly spawning transports
-	spawn_delay = 0   
+	spawn_delay = 0
 -- note that all planetary bodies are globals as well, but they are established as the planets are created in the createEnvironment() function
 	commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
@@ -1190,7 +1190,7 @@ function jumpToTask()
 	addGMFunction(_("buttonGM","+Destroy freighter"),jumpToDestroyFreighter)
 	addGMFunction(_("buttonGM","+Assist Freighter"),jumpToAssistFreighter)
 	addGMFunction(_("buttonGM","+Research"),jumpToResearch)	
-end 
+end
 function jumpToScan()
 	clearGMFunctions()
 	addGMFunction(_("buttonGM","-Main from scan"),mainGMButtons)
@@ -1546,7 +1546,7 @@ function createOrbitalBodies()
 		["mp2s2s1"] =		_("callsign-planet","Wolf 503b"),
 		["mp2s3"] =			_("callsign-planet","YZ Ceti b"),
 	}
-	-- BLACK HOLE ORBITAL SYSTEM 
+	-- BLACK HOLE ORBITAL SYSTEM
 	-- initial alignment of objects is along the X axis (X value is the same; Y changes for distance from center)
 	-- the center object
 	center_blackhole = BlackHole():setPosition(terrain_center_x, terrain_center_y):setCallSign(orbital_body_names["black hole"])
@@ -1563,7 +1563,7 @@ function createOrbitalBodies()
 		:setPlanetAtmosphereColor(0.2,0.2,0.2)
 		:setCallSign(orbital_body_names["cbheh1"])
 	table.insert(planetList, cbh_event_horizon1)
-	table.insert(planetKillRadius, 500 + no_atmosphere_padding)   
+	table.insert(planetKillRadius, 500 + no_atmosphere_padding)
 	cbh_event_horizon1:setOrbit(center_blackhole, orb_speed_closest_to_black_hole)
 
 -- "near the edge" planet orbiting near the event horizon, fast
@@ -1575,7 +1575,7 @@ function createOrbitalBodies()
 		:setPlanetAtmosphereColor(0.4,0,0)
 		:setCallSign(orbital_body_names["cbheh2"])
 	table.insert(planetList, cbh_event_horizon2)
-	table.insert(planetKillRadius, 1000 + atmosphere_padding)  -- not sure why, but this planet needs the additional atmosphere padding for collision calculations 
+	table.insert(planetKillRadius, 1000 + atmosphere_padding)  -- not sure why, but this planet needs the additional atmosphere padding for collision calculations
 	cbh_event_horizon2:setOrbit(center_blackhole, orb_speed_second_closest_to_black_hole)
 	
 -- planetary orbital sub-system 1, to the 'north' of the center black hole
@@ -1589,7 +1589,7 @@ function createOrbitalBodies()
 		:setPlanetAtmosphereColor(0.2,0.2,1.0)
 		:setCallSign(orbital_body_names["cbhmp1"])
 	table.insert(planetList, cbh_main_planet1)
-	table.insert(planetKillRadius, 3000 + atmosphere_padding)   
+	table.insert(planetKillRadius, 3000 + atmosphere_padding)
 	cbh_main_planet1:setOrbit(center_blackhole, orb_speed_planet_group_1_main)
 		
 	-- orbiting bodies for cbh_main_planet1, inner to outer
@@ -1600,7 +1600,7 @@ function createOrbitalBodies()
 			:setPlanetAtmosphereColor(0.2,0.2,0.2)
 			:setCallSign(orbital_body_names["mp1s1"])
 			table.insert(planetList, mp1_satelite1)
-			table.insert(planetKillRadius, 500 + no_atmosphere_padding)   
+			table.insert(planetKillRadius, 500 + no_atmosphere_padding)
 		mp1_satelite1:setOrbit(cbh_main_planet1, orb_speed_planet_group_1_orbiter_1)
 		
 		mp1_satelite2 = Planet():setPosition(terrain_center_x, terrain_center_y-20000)
@@ -1613,18 +1613,18 @@ function createOrbitalBodies()
 			:setPlanetAtmosphereColor(0,0.8,0.2)
 			:setCallSign(orbital_body_names["mp1s2"])
 			table.insert(planetList, mp1_satelite2)
-			table.insert(planetKillRadius, 1000 + atmosphere_padding)   
+			table.insert(planetKillRadius, 1000 + atmosphere_padding)
 		mp1_satelite2:setOrbit(cbh_main_planet1, orb_speed_planet_group_1_orbiter_2)
 
 		mp1s2_satelite1 = Planet():setPosition(terrain_center_x, terrain_center_y-18000)
 			:setPlanetRadius(200)
 			:setDistanceFromMovementPlane(0)
 			:setAxialRotationTime(10)
-			:setPlanetSurfaceTexture("planets/moon-1.png") 
+			:setPlanetSurfaceTexture("planets/moon-1.png")
 			:setPlanetAtmosphereColor(0.2,0.2,0.2)
 			:setCallSign(orbital_body_names["mp1s2s1"])
 			table.insert(planetList, mp1s2_satelite1)
-			table.insert(planetKillRadius, 200 + no_atmosphere_padding)   
+			table.insert(planetKillRadius, 200 + no_atmosphere_padding)
 		mp1s2_satelite1:setOrbit(mp1_satelite2, orb_speed_planet_group_1_orbiter_2_1)
 
 		mp1_satelite3 = Planet():setPosition(terrain_center_x, terrain_center_y-16000)
@@ -1635,7 +1635,7 @@ function createOrbitalBodies()
 			:setPlanetAtmosphereColor(0.4,0,0)
 			:setCallSign(orbital_body_names["mp1s3"])
 			table.insert(planetList, mp1_satelite3)
-			table.insert(planetKillRadius, 500 + atmosphere_padding)   
+			table.insert(planetKillRadius, 500 + atmosphere_padding)
 		mp1_satelite3:setOrbit(cbh_main_planet1, orb_speed_planet_group_1_orbiter_2_2)
 
 -- planetary orbital sub-system 2, to the 'south' of the center black hole
@@ -1647,7 +1647,7 @@ function createOrbitalBodies()
 		:setPlanetAtmosphereColor(0.4,0,0)
 		:setCallSign(orbital_body_names["cbhmp2"])
 	table.insert(planetList, cbh_main_planet2)
-	table.insert(planetKillRadius, 3000 + atmosphere_padding)   
+	table.insert(planetKillRadius, 3000 + atmosphere_padding)
 	cbh_main_planet2:setOrbit(center_blackhole, orb_speed_planet_group_2_main)
 	
 	-- orbiting bodies for cbh_main_planet2, inner to outer
@@ -1658,7 +1658,7 @@ function createOrbitalBodies()
 			:setPlanetAtmosphereColor(0.2,0.2,0.2)
 			:setCallSign(orbital_body_names["mp2s1"])
 			table.insert(planetList, mp2_satelite1)
-			table.insert(planetKillRadius, 500 + no_atmosphere_padding)   
+			table.insert(planetKillRadius, 500 + no_atmosphere_padding)
 		mp2_satelite1:setOrbit(cbh_main_planet2, orb_speed_planet_group_2_orbiter_1)
 		
 		mp2_satelite2 = Planet():setPosition(terrain_center_x, terrain_center_y+20000)
@@ -1671,7 +1671,7 @@ function createOrbitalBodies()
 			:setPlanetAtmosphereColor(0.2,0.2,1.0)
 			:setCallSign(orbital_body_names["mp2s2"])
 			table.insert(planetList, mp2_satelite2)
-			table.insert(planetKillRadius, 1000 + atmosphere_padding)   
+			table.insert(planetKillRadius, 1000 + atmosphere_padding)
 		mp2_satelite2:setOrbit(cbh_main_planet2, orb_speed_planet_group_2_orbiter_2)
 
 		mp2s2_satelite1 = Planet():setPosition(terrain_center_x, terrain_center_y+18000)
@@ -1679,10 +1679,10 @@ function createOrbitalBodies()
 			:setDistanceFromMovementPlane(0)
 			:setAxialRotationTime(10)
 			:setPlanetSurfaceTexture("planets/moon-1.png")
-			:setPlanetAtmosphereColor(0.2,0.2,0.2) 
+			:setPlanetAtmosphereColor(0.2,0.2,0.2)
 			:setCallSign(orbital_body_names["mp2s2s1"])
 			table.insert(planetList, mp2s2_satelite1)
-			table.insert(planetKillRadius, 200 + no_atmosphere_padding)   
+			table.insert(planetKillRadius, 200 + no_atmosphere_padding)
 		mp2s2_satelite1:setOrbit(mp2_satelite2, orb_speed_planet_group_2_orbiter_2_1)
 
 		mp2_satelite3 = Planet():setPosition(terrain_center_x, terrain_center_y+16000)
@@ -1693,7 +1693,7 @@ function createOrbitalBodies()
 			:setPlanetAtmosphereColor(0.4,0,0)
 			:setCallSign(orbital_body_names["mp2s3"])
 			table.insert(planetList, mp2_satelite3)
-			table.insert(planetKillRadius, 500 + atmosphere_padding)   
+			table.insert(planetKillRadius, 500 + atmosphere_padding)
 		mp2_satelite3:setOrbit(cbh_main_planet2, orb_speed_planet_group_2_orbiter_2_2)
 end
 function placeNebulae()
@@ -1933,7 +1933,7 @@ function generateCallSign(prefix)
 		suffix_index = 0
 	end
 	suffix_index = suffix_index + math.random(1,3)
-	if suffix_index > 999 then 
+	if suffix_index > 999 then
 		suffix_index = 1
 	end
 	return string.format("%s%i",prefix,suffix_index)
@@ -2157,7 +2157,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	if enemyStrength == nil then
@@ -2183,7 +2183,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 	end
 	while enemyStrength > 0 do
 		local selected_template = template_pool[math.random(1,#template_pool)]
-		if spawn_enemy_diagnostic then 
+		if spawn_enemy_diagnostic then
 			local selected_template_info = string.format("Spawn enemies selected template: %s",selected_template)
 			local enemy_strength_info = string.format("enemy strength: %s",enemyStrength)
 			local template_info = "No ship template"
@@ -2191,7 +2191,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 				template_info = string.format("template strength: %s",ship_template[selected_template].strength)
 			end
 			print(selected_template_info,enemy_strength_info,template_info,enemyFaction)
---			print("Spawn Enemies selected template:",selected_template,"enemy strength:",enemyStrength,"template strength:",ship_template[selected_template].strength,"Enemy faction:",enemyFaction) 
+--			print("Spawn Enemies selected template:",selected_template,"enemy strength:",enemyStrength,"template strength:",ship_template[selected_template].strength,"Enemy faction:",enemyFaction)
 		end
 		local ship = ship_template[selected_template].create(enemyFaction,selected_template)
 		ship:setCallSign(generateCallSign(nil,enemyFaction)):orderRoaming()
@@ -2222,7 +2222,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 		for index, ship in ipairs(enemyList) do
 			if index <= max_pyramid_tier then
 				local pyramid_angle = spawn_angle + formation_delta.pyramid[pyramid_tier][index].angle
-				if pyramid_angle < 0 then 
+				if pyramid_angle < 0 then
 					pyramid_angle = pyramid_angle + 360
 				end
 				pyramid_angle = pyramid_angle % 360
@@ -2317,30 +2317,30 @@ function addWave(enemyList,type,a,d)
 		total_enemy_ships_spawned = total_enemy_ships_spawned + 1
 		-- 'Stalker Q7' ships already have a warp drive, so no real modification is necessary
 	elseif type < 2.0 then
-		leader = setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming():setWarpDrive(true):onDestruction(enemyCpuShipDestroyed), 
+		leader = setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming():setWarpDrive(true):onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-1, 1), d + random(-100, 100):setCommsScript(""):setCommsFunction(commsShip))
 		table.insert(enemyList, leader)
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader,-400, 0):onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader,-400, 0):onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-1, 1), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader, 400, 0):onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader, 400, 0):onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-1, 1), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader,-400, 400):onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader,-400, 400):onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-1, 1), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader, 400, 400):onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader, 400, 400):onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-1, 1), d + random(-100, 100)))
 		total_enemy_ships_spawned = total_enemy_ships_spawned + 5
 	elseif type < 3.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Adder MK5'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Adder MK5'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Adder MK5'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Adder MK5'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
 		total_enemy_ships_spawned = total_enemy_ships_spawned + 2
 	elseif type < 4.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
 		total_enemy_ships_spawned = total_enemy_ships_spawned + 3
 	elseif type < 5.0 then
@@ -2352,36 +2352,36 @@ function addWave(enemyList,type,a,d)
 			:setWeaponStorage(MISSILE_NUKE, 15)
 			:setWeaponStorageMax(MISSILE_EMP, 10)
 			:setWeaponStorage(MISSILE_EMP, 10)
-			:onDestruction(enemyCpuShipDestroyed), 
+			:onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
 		total_enemy_ships_spawned = total_enemy_ships_spawned + 1
 	elseif type < 6.0 then
-		leader = setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Piranha F12'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		leader = setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Piranha F12'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100))
 		table.insert(enemyList, leader)
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader,-1500, 400):onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader,-1500, 400):onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-1, 1), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader, 1500, 400):onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MT52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderFlyFormation(leader, 1500, 400):onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-1, 1), d + random(-100, 100)))
 		total_enemy_ships_spawned = total_enemy_ships_spawned + 3
 	elseif type < 7.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Phobos T3'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
 		total_enemy_ships_spawned = total_enemy_ships_spawned + 2
 	elseif type < 8.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Nirvana R5'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Nirvana R5'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
 		total_enemy_ships_spawned = total_enemy_ships_spawned + 1
 	elseif type < 9.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MU52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('MU52 Hornet'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
 		total_enemy_ships_spawned = total_enemy_ships_spawned + 1
 	else
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Stalker R7'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Stalker R7'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Stalker R7'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed), 
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Exuari"):setTemplate('Stalker R7'):setRotation(a + 180):setWarpDrive(true):orderRoaming():onDestruction(enemyCpuShipDestroyed),
 			terrain_center_x, terrain_center_y, a + random(-5, 5), d + random(-100, 100)))
 		total_enemy_ships_spawned = total_enemy_ships_spawned + 2
 	end
@@ -2619,7 +2619,7 @@ function placeTraineePlayerShipsAndStations()
 			end
 			p:commandTargetRotation(tra)
 			local ha = angle + 270
-			if ha > 360 then 
+			if ha > 360 then
 				ha = ha - 360
 			end
 			p:setHeading(ha)
@@ -3067,7 +3067,7 @@ function handleDockedState()
 			if comms_target.comms_data.probe_launch_repair then
 				if not comms_source:getCanLaunchProbe() then
 					addCommsReply(string.format(_("dockingServicesStatus-comms","Repair probe launch system (%s Rep)"),comms_target.comms_data.service_cost.probe_launch_repair),function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
 							return
 						end
@@ -3084,7 +3084,7 @@ function handleDockedState()
 			if comms_target.comms_data.hack_repair then
 				if not comms_source:getCanHack() then
 					addCommsReply(string.format(_("dockingServicesStatus-comms","Repair hacking system (%s Rep)"),comms_target.comms_data.service_cost.hack_repair),function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
 							return
 						end
@@ -3101,7 +3101,7 @@ function handleDockedState()
 			if comms_target.comms_data.scan_repair then
 				if not comms_source:getCanScan() then
 					addCommsReply(string.format(_("dockingServicesStatus-comms","Repair scanning system (%s Rep)"),comms_target.comms_data.service_cost.scan_repair),function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
 							return
 						end
@@ -3119,7 +3119,7 @@ function handleDockedState()
 				if not comms_source:getCanCombatManeuver() then
 					if comms_source.combat_maneuver_capable then
 						addCommsReply(string.format(_("dockingServicesStatus-comms","Repair combat maneuver (%s Rep)"),comms_target.comms_data.service_cost.combat_maneuver_repair),function()
-							if not comms_source:isDocked(comms_target) then 
+							if not comms_source:isDocked(comms_target) then
 								setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
 								return
 							end
@@ -3137,7 +3137,7 @@ function handleDockedState()
 			if comms_target.comms_data.self_destruct_repair then
 				if not comms_source:getCanSelfDestruct() then
 					addCommsReply(string.format(_("dockingServicesStatus-comms","Repair self destruct system (%s Rep)"),comms_target.comms_data.service_cost.self_destruct_repair),function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
 							return
 						end
@@ -3265,7 +3265,7 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
 	if func_diagnostic then print("handle weapon restock") end
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -5039,7 +5039,7 @@ function getEnemyHealth(enemy)
 	end
 	if change_enemy_order_diagnostic then print(string.format("   faction:         %s",faction)) end
 	if faction == "Kraylor" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .3	+
 			enemy_hull		* .4	+
 			enemy_reactor	* .1 	+
@@ -5050,7 +5050,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .03	+
 			enemy_jump		* .03
 	elseif faction == "Arlenians" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .45	+
 			enemy_reactor	* .05 	+
@@ -5061,7 +5061,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .02	+
 			enemy_jump		* .02	
 	elseif faction == "Exuari" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .2	+
 			enemy_hull		* .3	+
 			enemy_reactor	* .2 	+
@@ -5072,7 +5072,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .05	+
 			enemy_jump		* .05	
 	elseif faction == "Ghosts" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .25	+
 			enemy_hull		* .25	+
 			enemy_reactor	* .25 	+
@@ -5083,7 +5083,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .04	+
 			enemy_jump		* .04	
 	elseif faction == "Ktlitans" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .2	+
 			enemy_hull		* .3	+
 			enemy_reactor	* .1 	+
@@ -5094,7 +5094,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .1	+
 			enemy_jump		* .1	
 	elseif faction == "TSN" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .35	+
 			enemy_reactor	* .08 	+
@@ -5105,7 +5105,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .08	+
 			enemy_jump		* .08	
 	elseif faction == "USN" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .38	+
 			enemy_hull		* .38	+
 			enemy_reactor	* .05 	+
@@ -5116,7 +5116,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .05	+
 			enemy_jump		* .05	
 	elseif faction == "CUF" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .38	+
 			enemy_reactor	* .05 	+
@@ -5127,7 +5127,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .06	+
 			enemy_jump		* .04	
 	else
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .3	+
 			enemy_hull		* .4	+
 			enemy_reactor	* .06 	+
@@ -6386,7 +6386,7 @@ end
 
 function orbitResearch(p)
 	if func_diagnostic then print("orbit research") end
-	table.sort(p.orbital_body_research, function(a,b) 
+	table.sort(p.orbital_body_research, function(a,b)
 		return a.research < b.research or
 			(a.research == b.research and a.body:getCallSign() < b.body:getCallSign())
 	end)
@@ -6676,7 +6676,7 @@ function update(delta)
 						end
 						p:commandTargetRotation(tra)
 						local ha = angle + 270
-						if ha > 360 then 
+						if ha > 360 then
 							ha = ha - 360
 						end
 						p:setHeading(ha)
@@ -6697,7 +6697,7 @@ function update(delta)
 							end
 							p:commandTargetRotation(tra)
 							ha = angle + 270
-							if ha > 360 then 
+							if ha > 360 then
 								ha = ha - 360
 							end
 							p:setHeading(ha)

@@ -22,7 +22,7 @@
 -- Timed[45]: Scenario ends in 45 minutes
 
 --improvements:
---	Add stations of other factions. 
+--	Add stations of other factions.
 --	Have transports of various factions
 --	Have other enemies cruising the area
 --	Add defensive fleets around some stations
@@ -968,7 +968,7 @@ function placeZefram()
 	return stationZefram
 end
 function placeMarconi()
-	--Marconi 
+	--Marconi
 	stationMarconi = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationMarconi:setPosition(psx,psy):setCallSign("Marconi"):setDescription(_("scienceDescription-station", "Energy Beam Components"))
     stationMarconi.comms_data = {
@@ -998,7 +998,7 @@ function placeMarconi()
 	return stationMarconi
 end
 function placeMuddville()
-	--Muddville 
+	--Muddville
 	stationMudd = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationMudd:setPosition(psx,psy):setCallSign("Muddville"):setDescription(_("scienceDescription-station", "Trading station"))
     stationMudd.comms_data = {
@@ -1197,7 +1197,7 @@ function placeVactel()
 end
 
 function placeArcher()
-	--Archer 
+	--Archer
 	stationArcher = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationArcher:setPosition(psx,psy):setCallSign("Archer"):setDescription(_("scienceDescription-station", "Shield and Armor Research"))
     stationArcher.comms_data = {
@@ -1260,7 +1260,7 @@ function placeDeer()
 	return stationDeer
 end
 function placeCavor()
-	--Cavor 
+	--Cavor
 	stationCavor = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationCavor:setPosition(psx,psy):setCallSign("Cavor"):setDescription(_("scienceDescription-station", "Advanced Material components"))
     stationCavor.comms_data = {
@@ -1475,7 +1475,7 @@ function placeDeckard()
 	return stationDeckard
 end
 function placeConnor()
-	--Connor 
+	--Connor
 	stationConnor = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationConnor:setPosition(psx,psy):setCallSign("Connor"):setDescription(_("scienceDescription-station", "Automated weapons systems"))
     stationConnor.comms_data = {
@@ -1503,7 +1503,7 @@ function placeConnor()
 end
 
 function placeAnderson()
-	--Anderson 
+	--Anderson
 	stationAnderson = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationAnderson:setPosition(psx,psy):setCallSign("Anderson"):setDescription(_("scienceDescription-station", "Battery and software engineering"))
     stationAnderson.comms_data = {
@@ -1529,7 +1529,7 @@ function placeAnderson()
 	return stationAnderson
 end
 function placeFeynman()
-	--Feynman 
+	--Feynman
 	stationFeynman = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationFeynman:setPosition(psx,psy):setCallSign("Feynman"):setDescription(_("scienceDescription-station", "Nanotechnology research"))
     stationFeynman.comms_data = {
@@ -2163,7 +2163,7 @@ function placeCyrus()
 	return stationCyrus
 end
 function placeCalvin()
-	--Calvin 
+	--Calvin
 	stationCalvin = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationCalvin:setPosition(psx,psy):setCallSign("Calvin"):setDescription(_("scienceDescription-station", "Robotic research"))
     stationCalvin.comms_data = {
@@ -2226,12 +2226,12 @@ function populateStationPool()
 					jumpsupplydrop = "friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 			1.0, 
+		        	friend = 			1.0,
 		        	neutral = 			3.0,
 		        },
         		goods = {	
@@ -2245,12 +2245,12 @@ function populateStationPool()
         			},
         		},
 		        trade = {	
-		        	food =			false, 
-		        	medicine =		false, 
+		        	food =			false,
+		        	medicine =		false,
 		        	luxury =		false,
 		        },
-				description = _("scienceDescription-station", "Training and Coordination"), 
-				general = _("stationGeneralInfo-comms", "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector"), 
+				description = _("scienceDescription-station", "Training and Coordination"),
+				general = _("stationGeneralInfo-comms", "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector"),
 				history = _("stationStory-comms", "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region"),
 			},
 			["Armstrong"] =	{
@@ -2267,7 +2267,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -2282,15 +2282,15 @@ function populateStationPool()
 					},
 				},
 				trade = {	
-					food = random(1,100) <= 45, 
-					medicine = false, 
+					food = random(1,100) <= 45,
+					medicine = false,
 					luxury = false,
 				},
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Warp and Impulse engine manufacturing"), 
-				general = _("stationGeneralInfo-comms", "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis"), 
+				description = _("scienceDescription-station", "Warp and Impulse engine manufacturing"),
+				general = _("stationGeneralInfo-comms", "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis"),
 				history = _("stationStory-comms", "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems."),
 			},
 			["Broeck"] = {
@@ -2307,7 +2307,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -2318,15 +2318,15 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) <= 14, 
-					medicine = false, 
+					food = random(1,100) <= 14,
+					medicine = false,
 					luxury = random(1,100) < 62,
 				},
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Warp drive components"), 
-				general = _("stationGeneralInfo-comms", "We provide warp drive engines and components"), 
+				description = _("scienceDescription-station", "Warp drive components"),
+				general = _("stationGeneralInfo-comms", "We provide warp drive engines and components"),
 				history = _("stationStory-comms", "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth"),
 			},
 			["Coulomb"] = {
@@ -2343,12 +2343,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
         		goods = {	
@@ -2358,15 +2358,15 @@ function populateStationPool()
         			},
         		},
         		trade = {	
-        			food = random(1,100) <= 35, 
-        			medicine = false, 
+        			food = random(1,100) <= 35,
+        			medicine = false,
         			luxury = random(1,100) < 82,
         		},
 				buy =	{
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Shielded circuitry fabrication"), 
-				general = _("stationGeneralInfo-comms", "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference"), 
+				description = _("scienceDescription-station", "Shielded circuitry fabrication"),
+				general = _("stationGeneralInfo-comms", "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference"),
 				history = _("stationStory-comms", "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits"),
 			},
 			["Heyes"] = {
@@ -2383,12 +2383,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -2398,15 +2398,15 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) <= 32, 
-					medicine = false, 
+					food = random(1,100) <= 32,
+					medicine = false,
 					luxury = true,
 				},
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Sensor components"), 
-				general = _("stationGeneralInfo-comms", "We research and manufacture sensor components and systems"), 
+				description = _("scienceDescription-station", "Sensor components"),
+				general = _("stationGeneralInfo-comms", "We research and manufacture sensor components and systems"),
 				history = _("stationStory-comms", "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility"),
 			},
 			["Hossam"] = {
@@ -2423,12 +2423,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -2438,12 +2438,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) < 24, 
-					medicine = random(1,100) < 44, 
+					food = random(1,100) < 24,
+					medicine = random(1,100) < 44,
 					luxury = random(1,100) < 63,
 				},
-				description = _("scienceDescription-station", "Nanite supplier"), 
-				general = _("stationGeneralInfo-comms", "We provide nanites for various organic and non-organic systems"), 
+				description = _("scienceDescription-station", "Nanite supplier"),
+				general = _("stationGeneralInfo-comms", "We provide nanites for various organic and non-organic systems"),
 				history = _("stationStory-comms", "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel"),
 			},
 			["Maiman"] = {
@@ -2460,12 +2460,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -2475,15 +2475,15 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) <= 75, 
-					medicine = true, 
+					food = random(1,100) <= 75,
+					medicine = true,
 					luxury = false,
 				},
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Energy beam components"), 
-				general = _("stationGeneralInfo-comms", "We research and manufacture energy beam components and systems"), 
+				description = _("scienceDescription-station", "Energy beam components"),
+				general = _("stationGeneralInfo-comms", "We research and manufacture energy beam components and systems"),
 				history = _("stationStory-comms", "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth"),
 			},
 			["Malthus"] = {
@@ -2500,18 +2500,18 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 		        goods = {},
     			trade = {
-    				food = random(1,100) <= 65, 
-    				medicine = false, 
+    				food = random(1,100) <= 65,
+    				medicine = false,
     				luxury = false,
     			},
     			description = _("scienceDescription-station", "Gambling and resupply"),
@@ -2532,12 +2532,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -2547,12 +2547,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) <= 53, 
-					medicine = false, 
+					food = random(1,100) <= 53,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Energy Beam Components"), 
-				general = _("stationGeneralInfo-comms", "We manufacture energy beam components"), 
+				description = _("scienceDescription-station", "Energy Beam Components"),
+				general = _("stationGeneralInfo-comms", "We manufacture energy beam components"),
 				history = _("stationStory-comms", "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon"),
 			},
 			["Miller"] = {
@@ -2569,12 +2569,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -2584,12 +2584,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) <= 68, 
-					medicine = false, 
+					food = random(1,100) <= 68,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Exobiology research"), 
-				general = _("stationGeneralInfo-comms", "We study recently discovered life forms not native to Earth"), 
+				description = _("scienceDescription-station", "Exobiology research"),
+				general = _("stationGeneralInfo-comms", "We study recently discovered life forms not native to Earth"),
 				history = _("stationStory-comms", "This station was named after one of the early exobiologists from mid 20th century Earth, Dr. Stanley Miller"),
 			},
 			["Shawyer"] = {
@@ -2606,12 +2606,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -2621,12 +2621,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) <= 42, 
-					medicine = false, 
+					food = random(1,100) <= 42,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Impulse engine components"), 
-				general = _("stationGeneralInfo-comms", "We research and manufacture impulse engine components and systems"), 
+				description = _("scienceDescription-station", "Impulse engine components"),
+				general = _("stationGeneralInfo-comms", "We research and manufacture impulse engine components and systems"),
 				history = _("stationStory-comms", "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century"),
 			},
 		},
@@ -2645,12 +2645,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -2660,12 +2660,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = true, 
-					medicine = false, 
+					food = true,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Energy and particle beam components"), 
-				general = _("stationGeneralInfo-comms", "We fabricate general and specialized components for ship beam systems"), 
+				description = _("scienceDescription-station", "Energy and particle beam components"),
+				general = _("stationGeneralInfo-comms", "We fabricate general and specialized components for ship beam systems"),
 				history = _("stationStory-comms", "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it"),
 			},
 			["Chatuchak"] =	{
@@ -2682,12 +2682,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -2697,12 +2697,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Trading station"), 
-				general = _("stationGeneralInfo-comms", "Only the largest market and trading location in twenty sectors. You can find your heart's desire here"), 
+				description = _("scienceDescription-station", "Trading station"),
+				general = _("stationGeneralInfo-comms", "Only the largest market and trading location in twenty sectors. You can find your heart's desire here"),
 				history = _("stationStory-comms", "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind"),
 			},
 			["Grasberg"] = {
@@ -2719,12 +2719,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -2734,15 +2734,15 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = true, 
-					medicine = false, 
+					food = true,
+					medicine = false,
 					luxury = false,
 				},
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Mining"), 
-				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals and process them for sale"), 
+				description = _("scienceDescription-station", "Mining"),
+				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals and process them for sale"),
 				history = _("stationStory-comms", "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids"),
 			},
 			["Hayden"] = {
@@ -2759,12 +2759,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -2774,12 +2774,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) <= 85, 
-					medicine = false, 
+					food = random(1,100) <= 85,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Observatory and stellar mapping"), 
-				general = _("stationGeneralInfo-comms", "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding"), 
+				description = _("scienceDescription-station", "Observatory and stellar mapping"),
+				general = _("stationGeneralInfo-comms", "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding"),
 				history = _("stationStory-comms", "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century"),
 			},
 			["Lipkin"] = {
@@ -2796,12 +2796,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -2811,12 +2811,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Autodoc components"), 
-				general = "", 
+				description = _("scienceDescription-station", "Autodoc components"),
+				general = "",
 				history = _("stationStory-comms", "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth"),
 			},
 			["Madison"] = {
@@ -2833,12 +2833,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -2848,12 +2848,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = true, 
+					food = false,
+					medicine = true,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Zero gravity sports and entertainment"), 
-				general = _("stationGeneralInfo-comms", "Come take in a game or two or perhaps see a show"), 
+				description = _("scienceDescription-station", "Zero gravity sports and entertainment"),
+				general = _("stationGeneralInfo-comms", "Come take in a game or two or perhaps see a show"),
 				history = _("stationStory-comms", "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment"),
 			},
 			["Rutherford"] = {
@@ -2870,12 +2870,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -2885,12 +2885,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = random(1,100) < 43,
 				},
-				description = _("scienceDescription-station", "Shield components and research"), 
-				general = _("stationGeneralInfo-comms", "We research and fabricate components for ship shield systems"), 
+				description = _("scienceDescription-station", "Shield components and research"),
+				general = _("stationGeneralInfo-comms", "We research and fabricate components for ship shield systems"),
 				history = _("stationStory-comms", "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century"),
 			},
 			["Toohie"] = {
@@ -2907,12 +2907,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -2922,12 +2922,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) <= 21, 
-					medicine = false, 
+					food = random(1,100) <= 21,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Shield and armor components and research"), 
-				general = _("stationGeneralInfo-comms", "We research and make general and specialized components for ship shield and ship armor systems"), 
+				description = _("scienceDescription-station", "Shield and armor components and research"),
+				general = _("stationGeneralInfo-comms", "We research and make general and specialized components for ship shield and ship armor systems"),
 				history = _("stationStory-comms", "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved.")},
 		},
 		["Pop Sci Fi"] = {
@@ -2945,12 +2945,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -2964,12 +2964,12 @@ function populateStationPool()
         			},
         		},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Battery and software engineering"), 
-				general = _("stationGeneralInfo-comms", "We provide high quality high capacity batteries and specialized software for all shipboard systems"), 
+				description = _("scienceDescription-station", "Battery and software engineering"),
+				general = _("stationGeneralInfo-comms", "We provide high quality high capacity batteries and specialized software for all shipboard systems"),
 				history = _("stationStory-comms", "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"),
 			},
 			["Archer"] = {
@@ -2986,7 +2986,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -2997,15 +2997,15 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = true,
 				},
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Shield and Armor Research"), 
-				general = _("stationGeneralInfo-comms", "The finest shield and armor manufacturer in the quadrant"), 
+				description = _("scienceDescription-station", "Shield and Armor Research"),
+				general = _("stationGeneralInfo-comms", "The finest shield and armor manufacturer in the quadrant"),
 				history = _("stationStory-comms", "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"),
 			},
 			["Barclay"] = {
@@ -3022,7 +3022,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -3033,15 +3033,15 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Communication components"), 
-				general = _("stationGeneralInfo-comms", "We provide a range of communication equipment and software for use aboard ships"), 
+				description = _("scienceDescription-station", "Communication components"),
+				general = _("stationGeneralInfo-comms", "We provide a range of communication equipment and software for use aboard ships"),
 				history = _("stationStory-comms", "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"),
 			},
 			["Calvin"] = {
@@ -3058,7 +3058,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -3069,15 +3069,15 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) <= 35, 
-					medicine = false, 
+					food = random(1,100) <= 35,
+					medicine = false,
 					luxury = true,
 				},
 				buy =	{
 					[randomComponent("robotic")] = math.random(40,200)
 				},
-				description = _("scienceDescription-station", "Robotic research"), 
-				general = _("stationGeneralInfo-comms", "We research and provide robotic systems and components"), 
+				description = _("scienceDescription-station", "Robotic research"),
+				general = _("stationGeneralInfo-comms", "We research and provide robotic systems and components"),
 				history = _("stationStory-comms", "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming"),
 			},
 			["Cavor"] = {
@@ -3094,12 +3094,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -3109,12 +3109,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Advanced Material components"), 
-				general = _("stationGeneralInfo-comms", "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction"), 
+				description = _("scienceDescription-station", "Advanced Material components"),
+				general = _("stationGeneralInfo-comms", "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction"),
 				history = _("stationStory-comms", "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"),
 			},
 			["Cyrus"] = {
@@ -3131,12 +3131,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -3146,12 +3146,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = random(1,100) < 78,
 				},
-				description = _("scienceDescription-station", "Impulse engine components"), 
-				general = _("stationGeneralInfo-comms", "We supply high quality impulse engines and parts for use aboard ships"), 
+				description = _("scienceDescription-station", "Impulse engine components"),
+				general = _("stationGeneralInfo-comms", "We supply high quality impulse engines and parts for use aboard ships"),
 				history = _("stationStory-comms", "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"),
 			},
 			["Deckard"] = {
@@ -3168,12 +3168,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -3183,12 +3183,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Android components"), 
-				general = _("stationGeneralInfo-comms", "Supplier of android components, programming and service"), 
+				description = _("scienceDescription-station", "Android components"),
+				general = _("stationGeneralInfo-comms", "Supplier of android components, programming and service"),
 				history = _("stationStory-comms", "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"),
 			},
 			["Erickson"] = {
@@ -3205,7 +3205,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -3216,12 +3216,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Transporter components"), 
-				general = _("stationGeneralInfo-comms", "We provide transporters used aboard ships as well as the components for repair and maintenance"), 
+				description = _("scienceDescription-station", "Transporter components"),
+				general = _("stationGeneralInfo-comms", "We provide transporters used aboard ships as well as the components for repair and maintenance"),
 				history = _("stationStory-comms", "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"),
 			},
 			["Jabba"] = {
@@ -3238,12 +3238,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -3253,12 +3253,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Commerce and gambling"), 
-				general = _("stationGeneralInfo-comms", "Come play some games and shop. House take does not exceed 4 percent"), 
+				description = _("scienceDescription-station", "Commerce and gambling"),
+				general = _("stationGeneralInfo-comms", "Come play some games and shop. House take does not exceed 4 percent"),
 				history = "",
 			},			
 			["Komov"] = {
@@ -3275,12 +3275,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -3290,12 +3290,12 @@ function populateStationPool()
 					},
 				},
  				trade = {
- 					food = false, 
- 					medicine = false, 
+ 					food = false,
+ 					medicine = false,
  					luxury = false,
  				},
-				description = _("scienceDescription-station", "Xenopsychology training"), 
-				general = _("stationGeneralInfo-comms", "We provide classes and simulation to help train diverse species in how to relate to each other"), 
+				description = _("scienceDescription-station", "Xenopsychology training"),
+				general = _("stationGeneralInfo-comms", "We provide classes and simulation to help train diverse species in how to relate to each other"),
 				history = _("stationStory-comms", "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"),
 			},
 			["Lando"] = {
@@ -3317,7 +3317,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -3328,12 +3328,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Casino and Gambling"), 
-				general = "", 
+				description = _("scienceDescription-station", "Casino and Gambling"),
+				general = "",
 				history = "",
 			},			
 			["Muddville"] = {
@@ -3350,7 +3350,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -3361,12 +3361,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = true, 
-					medicine = true, 
+					food = true,
+					medicine = true,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Trading station"), 
-				general = _("stationGeneralInfo-comms", "Come to Muddvile for all your trade and commerce needs and desires"), 
+				description = _("scienceDescription-station", "Trading station"),
+				general = _("stationGeneralInfo-comms", "Come to Muddvile for all your trade and commerce needs and desires"),
 				history = _("stationStory-comms", "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman"),
 			},
 			["Nexus-6"] = {
@@ -3383,12 +3383,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -3398,16 +3398,16 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = true, 
+					food = false,
+					medicine = true,
 					luxury = false,
 				},
 				buy = {
 					[randomMineral()] = math.random(40,200),
 					[randomComponent("android")] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Android components"), 
-				general = _("stationGeneralInfo-comms", "Androids, their parts, maintenance and recylcling"), 
+				description = _("scienceDescription-station", "Android components"),
+				general = _("stationGeneralInfo-comms", "Androids, their parts, maintenance and recylcling"),
 				history = _("stationStory-comms", "We named the station after the ground breaking android model produced by the Tyrell corporation"),
 			},
 			["O'Brien"] = {
@@ -3424,12 +3424,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -3439,12 +3439,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) < 13, 
-					medicine = true, 
+					food = random(1,100) < 13,
+					medicine = true,
 					luxury = random(1,100) < 43,
 				},
-				description = _("scienceDescription-station", "Transporter components"), 
-				general = _("stationGeneralInfo-comms", "We research and fabricate high quality transporters and transporter components for use aboard ships"), 
+				description = _("scienceDescription-station", "Transporter components"),
+				general = _("stationGeneralInfo-comms", "We research and fabricate high quality transporters and transporter components for use aboard ships"),
 				history = _("stationStory-comms", "Miles O'Brien started this business after his experience as a transporter chief"),
 			},
 			["Organa"] = {
@@ -3461,12 +3461,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -3476,12 +3476,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Diplomatic training"), 
-				general = _("stationGeneralInfo-comms", "The premeire academy for leadership and diplomacy training in the region"), 
+				description = _("scienceDescription-station", "Diplomatic training"),
+				general = _("stationGeneralInfo-comms", "The premeire academy for leadership and diplomacy training in the region"),
 				history = _("stationStory-comms", "Established by the royal family so critical during the political upheaval era"),
 			},
 			["Owen"] = {
@@ -3498,12 +3498,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -3513,12 +3513,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Load lifters and components"), 
-				general = _("stationGeneralInfo-comms", "We provide load lifters and components for various ship systems"), 
+				description = _("scienceDescription-station", "Load lifters and components"),
+				general = _("stationGeneralInfo-comms", "We provide load lifters and components for various ship systems"),
 				history = _("stationStory-comms", "Owens started off in the moisture vaporator business on Tattooine then branched out into load lifters based on acquisition of proprietary software and protocols. The station name recognizes the tragic loss of our founder to Imperial violence"),
 			},
 			["Ripley"] = {
@@ -3535,12 +3535,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -3550,12 +3550,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = random(1,100) < 47,
 				},
-				description = _("scienceDescription-station", "Load lifters and components"), 
-				general = _("stationGeneralInfo-comms", "We provide load lifters and components"), 
+				description = _("scienceDescription-station", "Load lifters and components"),
+				general = _("stationGeneralInfo-comms", "We provide load lifters and components"),
 				history = _("stationStory-comms", "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"),
 			},
 			["Skandar"] = {
@@ -3572,12 +3572,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -3587,12 +3587,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Routine maintenance and entertainment"), 
-				general = _("stationGeneralInfo-comms", "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars"), 
+				description = _("scienceDescription-station", "Routine maintenance and entertainment"),
+				general = _("stationGeneralInfo-comms", "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars"),
 				history = _("stationStory-comms", "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"),
 			},			
 			["Soong"] = {
@@ -3609,12 +3609,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -3624,12 +3624,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Android components"), 
-				general = _("stationGeneralInfo-comms", "We create androids and android components"), 
+				description = _("scienceDescription-station", "Android components"),
+				general = _("stationGeneralInfo-comms", "We create androids and android components"),
 				history = _("stationStory-comms", "The station is named after Dr. Noonian Soong, the famous android researcher and builder"),
 			},
 			["Starnet"] = {
@@ -3646,12 +3646,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 		        goods = {	
@@ -3661,12 +3661,12 @@ function populateStationPool()
 		        	},
 		        },
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Automated weapons systems"), 
-				general = _("stationGeneralInfo-comms", "We research and create automated weapons systems to improve ship combat capability"), 
+				description = _("scienceDescription-station", "Automated weapons systems"),
+				general = _("stationGeneralInfo-comms", "We research and create automated weapons systems to improve ship combat capability"),
 				history = _("stationStory-comms", "Lost the history memory bank. Recovery efforts only brought back the phrase, 'I'll be back'"),
 			},			
 			["Tiberius"] = {
@@ -3683,7 +3683,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -3694,12 +3694,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Logistics coordination"), 
-				general = _("stationGeneralInfo-comms", "We support the stations and ships in the area with planning and communication services"), 
+				description = _("scienceDescription-station", "Logistics coordination"),
+				general = _("stationGeneralInfo-comms", "We support the stations and ships in the area with planning and communication services"),
 				history = _("stationStory-comms", "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"),
 			},
 			["Tokra"] = {
@@ -3716,12 +3716,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -3731,12 +3731,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Advanced material components"), 
-				general = _("stationGeneralInfo-comms", "We create multiple types of advanced material components. Our most popular products are our filaments"), 
+				description = _("scienceDescription-station", "Advanced material components"),
+				general = _("stationGeneralInfo-comms", "We create multiple types of advanced material components. Our most popular products are our filaments"),
 				history = _("stationStory-comms", "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them"),
 			},
 			["Utopia Planitia"] = {
@@ -3753,7 +3753,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -3764,12 +3764,12 @@ function populateStationPool()
 		        	},
 		        },
 		        trade = {	
-		        	food = false, 
-		        	medicine = false, 
-		        	luxury = false 
+		        	food = false,
+		        	medicine = false,
+		        	luxury = false
 		        },
-				description = _("scienceDescription-station", "Ship building and maintenance facility"), 
-				general = _("stationGeneralInfo-comms", "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel"), 
+				description = _("scienceDescription-station", "Ship building and maintenance facility"),
+				general = _("stationGeneralInfo-comms", "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel"),
 				history = ""
 			},
 			["Vaiken"] = {
@@ -3786,7 +3786,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -3805,12 +3805,12 @@ function populateStationPool()
         			},
         		},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Ship building and maintenance facility"), 
-				general = "", 
+				description = _("scienceDescription-station", "Ship building and maintenance facility"),
+				general = "",
 				history = "",
 			},			
 			["Zefram"] = {
@@ -3827,12 +3827,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 		        goods = {	
@@ -3842,12 +3842,12 @@ function populateStationPool()
 		        	},
 		        },
 		        trade = {	
-		        	food = false, 
-		        	medicine = false, 
+		        	food = false,
+		        	medicine = false,
 		        	luxury = true,
 		        },
-				description = _("scienceDescription-station", "Warp engine components"), 
-				general = _("stationGeneralInfo-comms", "We specialize in the esoteric components necessary to make warp drives function properly"), 
+				description = _("scienceDescription-station", "Warp engine components"),
+				general = _("stationGeneralInfo-comms", "We specialize in the esoteric components necessary to make warp drives function properly"),
 				history = _("stationStory-comms", "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do"),
 			},
 		},
@@ -3866,7 +3866,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -3877,15 +3877,15 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Optical Components"), 
-				general = _("stationGeneralInfo-comms", "We make and supply optic components for various station and ship systems"), 
+				description = _("scienceDescription-station", "Optical Components"),
+				general = _("stationGeneralInfo-comms", "We make and supply optic components for various station and ship systems"),
 				history = _("stationStory-comms", "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company"),
 			},
 			["Bethesda"] = {
@@ -3902,12 +3902,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 				reputation_cost_multipliers = {
-					friend = 1.0, 
+					friend = 1.0,
 					neutral = 3.0,
 				},
 				goods = {	
@@ -3925,12 +3925,12 @@ function populateStationPool()
 					},
 				},
 				trade = {	
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Medical research"), 
-				general = _("stationGeneralInfo-comms", "We research and treat exotic medical conditions"), 
+				description = _("scienceDescription-station", "Medical research"),
+				general = _("stationGeneralInfo-comms", "We research and treat exotic medical conditions"),
 				history = _("stationStory-comms", "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century"),
 			},
 			["Deer"] = {
@@ -3947,7 +3947,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -3962,12 +3962,12 @@ function populateStationPool()
         			},
         		},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Repulsor and Tractor Beam Components"), 
-				general = _("stationGeneralInfo-comms", "We can meet all your pushing and pulling needs with specialized equipment custom made"), 
+				description = _("scienceDescription-station", "Repulsor and Tractor Beam Components"),
+				general = _("stationGeneralInfo-comms", "We can meet all your pushing and pulling needs with specialized equipment custom made"),
 				history = _("stationStory-comms", "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products"),
 			},
 			["Evondos"] = {
@@ -3984,12 +3984,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 				reputation_cost_multipliers = {
-					friend = 1.0, 
+					friend = 1.0,
 					neutral = 3.0,
 				},
 				goods = {
@@ -3999,12 +3999,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = random(1,100) < 41,
 				},
-				description = _("scienceDescription-station", "Autodoc components"), 
-				general = _("stationGeneralInfo-comms", "We provide components for automated medical machinery"), 
+				description = _("scienceDescription-station", "Autodoc components"),
+				general = _("stationGeneralInfo-comms", "We provide components for automated medical machinery"),
 				history = _("stationStory-comms", "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland"),
 			},
 			["Feynman"] = {
@@ -4021,12 +4021,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
         		goods = {	
@@ -4040,12 +4040,12 @@ function populateStationPool()
         			},
         		},
 		        trade = {	
-		        	food = false, 
-		        	medicine = false, 
+		        	food = false,
+		        	medicine = false,
 		        	luxury = true,
 		        },
-				description = _("scienceDescription-station", "Nanotechnology research"), 
-				general = _("stationGeneralInfo-comms", "We provide nanites and software for a variety of ship-board systems"), 
+				description = _("scienceDescription-station", "Nanotechnology research"),
+				general = _("stationGeneralInfo-comms", "We provide nanites and software for a variety of ship-board systems"),
 				history = _("stationStory-comms", "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman"),
 			},
 			["Mayo"] = {
@@ -4062,7 +4062,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -4081,12 +4081,12 @@ function populateStationPool()
         			},
         		},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Medical Research"), 
-				general = _("stationGeneralInfo-comms", "We research exotic diseases and other human medical conditions"), 
+				description = _("scienceDescription-station", "Medical Research"),
+				general = _("stationGeneralInfo-comms", "We research exotic diseases and other human medical conditions"),
 				history = _("stationStory-comms", "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth"),
 			},
 			["Olympus"] = {
@@ -4103,12 +4103,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -4118,12 +4118,12 @@ function populateStationPool()
 					},
 				},
 				trade = {	
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Optical components"), 
-				general = _("stationGeneralInfo-comms", "We fabricate optical lenses and related equipment as well as fiber optic cabling and components"), 
+				description = _("scienceDescription-station", "Optical components"),
+				general = _("stationGeneralInfo-comms", "We fabricate optical lenses and related equipment as well as fiber optic cabling and components"),
 				history = _("stationStory-comms", "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry"),
 			},
 			["Panduit"] = {
@@ -4140,12 +4140,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -4155,12 +4155,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Optic components"), 
-				general = _("stationGeneralInfo-comms", "We provide optic components for various ship systems"), 
+				description = _("scienceDescription-station", "Optic components"),
+				general = _("stationGeneralInfo-comms", "We provide optic components for various ship systems"),
 				history = _("stationStory-comms", "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States"),
 			},
 			["Shree"] = {
@@ -4177,12 +4177,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {	
@@ -4196,12 +4196,12 @@ function populateStationPool()
         			},
         		},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = true,
 				},
-				description = _("scienceDescription-station", "Repulsor and tractor beam components"), 
-				general = _("stationGeneralInfo-comms", "We make ship systems designed to push or pull other objects around in space"), 
+				description = _("scienceDescription-station", "Repulsor and tractor beam components"),
+				general = _("stationGeneralInfo-comms", "We make ship systems designed to push or pull other objects around in space"),
 				history = _("stationStory-comms", "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today"),
 			},
 			["Vactel"] = {
@@ -4218,7 +4218,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -4229,12 +4229,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Shielded Circuitry Fabrication"), 
-				general = _("stationGeneralInfo-comms", "We specialize in circuitry shielded from external hacking suitable for ship systems"), 
+				description = _("scienceDescription-station", "Shielded Circuitry Fabrication"),
+				general = _("stationGeneralInfo-comms", "We specialize in circuitry shielded from external hacking suitable for ship systems"),
 				history = _("stationStory-comms", "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips"),
 			},
 			["Veloquan"] = {
@@ -4251,12 +4251,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -4266,12 +4266,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Sensor components"), 
-				general = _("stationGeneralInfo-comms", "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use"), 
+				description = _("scienceDescription-station", "Sensor components"),
+				general = _("stationGeneralInfo-comms", "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use"),
 				history = _("stationStory-comms", "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy"),
 			},
 			["Tandon"] = {
@@ -4288,22 +4288,22 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
 				description = _("scienceDescription-station", "Biotechnology research"),
-				general = _("stationGeneralInfo-comms", "Merging the organic and inorganic through research"), 
+				general = _("stationGeneralInfo-comms", "Merging the organic and inorganic through research"),
 				history = _("stationStory-comms", "Continued from the Tandon school of engineering started on Earth in the early 21st century"),
 			},
 		},
@@ -4322,7 +4322,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -4337,12 +4337,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Mining station"), 
-				general = "", 
+				description = _("scienceDescription-station", "Mining station"),
+				general = "",
 				history = "",
 			},
 			["Impala"] = {
@@ -4359,12 +4359,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -4374,15 +4374,15 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = true, 
-					medicine = false, 
+					food = true,
+					medicine = false,
 					luxury = true,
 				},
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Mining"), 
-				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals"), 
+				description = _("scienceDescription-station", "Mining"),
+				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals"),
 				history = "",
 			},
 			["Krak"] = {
@@ -4399,12 +4399,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -4414,15 +4414,15 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) < 50, 
-					medicine = true, 
+					food = random(1,100) < 50,
+					medicine = true,
 					luxury = random(1,100) < 50,
 				},
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Mining station"), 
-				general = "", 
+				description = _("scienceDescription-station", "Mining station"),
+				general = "",
 				history = "",
 			},
 			["Krik"] = {
@@ -4439,12 +4439,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -4454,12 +4454,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = true, 
-					medicine = true, 
+					food = true,
+					medicine = true,
 					luxury = random(1,100) < 50,
 				},
-				description = _("scienceDescription-station", "Mining station"), 
-				general = "", 
+				description = _("scienceDescription-station", "Mining station"),
+				general = "",
 				history = "",
 			},
 			["Kruk"] = {
@@ -4476,12 +4476,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -4491,14 +4491,14 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = random(1,100) < 50, 
-					medicine = random(1,100) < 50, 
+					food = random(1,100) < 50,
+					medicine = random(1,100) < 50,
 					luxury = true },
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = _("scienceDescription-station", "Mining station"), 
-				general = "", 
+				description = _("scienceDescription-station", "Mining station"),
+				general = "",
 				history = "",
 			},
 			["Maverick"] = {
@@ -4515,7 +4515,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -4526,12 +4526,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Gambling and resupply"), 
-				general = _("stationGeneralInfo-comms", "Relax and meet some interesting players"), 
+				description = _("scienceDescription-station", "Gambling and resupply"),
+				general = _("stationGeneralInfo-comms", "Relax and meet some interesting players"),
 				history = "",
 			},
 			["Nefatha"] = {
@@ -4548,12 +4548,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -4563,12 +4563,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Commerce and recreation"), 
-				general = "", 
+				description = _("scienceDescription-station", "Commerce and recreation"),
+				general = "",
 				history = "",
 			},
 			["Okun"] = {
@@ -4585,22 +4585,22 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Xenopsychology research"), 
-				general = "", 
+				description = _("scienceDescription-station", "Xenopsychology research"),
+				general = "",
 				history = "",
 			},
 			["Outpost-15"] = {
@@ -4617,12 +4617,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -4632,12 +4632,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Mining and trade"), 
-				general = "", 
+				description = _("scienceDescription-station", "Mining and trade"),
+				general = "",
 				history = "",
 			},
 			["Outpost-21"] = {
@@ -4654,12 +4654,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -4669,12 +4669,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Mining and gambling"), 
-				general = "", 
+				description = _("scienceDescription-station", "Mining and gambling"),
+				general = "",
 				history = "",
 			},
 			["Outpost-7"] = {
@@ -4691,12 +4691,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -4706,12 +4706,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Resupply"), 
-				general = "", 
+				description = _("scienceDescription-station", "Resupply"),
+				general = "",
 				history = "",
 			},
 			["Outpost-8"] = {
@@ -4728,12 +4728,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -4743,12 +4743,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = "", 
-				general = "", 
+				description = "",
+				general = "",
 				history = "",
 			},
 			["Outpost-33"] = {
@@ -4765,12 +4765,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -4780,12 +4780,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Resupply"), 
-				general = "", 
+				description = _("scienceDescription-station", "Resupply"),
+				general = "",
 				history = "",
 			},
 			["Prada"] = {
@@ -4802,22 +4802,22 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Textiles and fashion"), 
-				general = "", 
+				description = _("scienceDescription-station", "Textiles and fashion"),
+				general = "",
 				history = "",
 			},
 			["Research-11"] = {
@@ -4834,12 +4834,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -4849,12 +4849,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Stress Psychology Research"), 
-				general = "", 
+				description = _("scienceDescription-station", "Stress Psychology Research"),
+				general = "",
 				history = "",
 			},
 			["Research-19"] = {
@@ -4871,22 +4871,22 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 		        goods = {},
 		        trade = {
-		        	food = false, 
-		        	medicine = false, 
+		        	food = false,
+		        	medicine = false,
 		        	luxury = false,
 		        },
-				description = _("scienceDescription-station", "Low gravity research"), 
-				general = "", 
+				description = _("scienceDescription-station", "Low gravity research"),
+				general = "",
 				history = "",
 			},
 			["Rubis"] = {
@@ -4903,12 +4903,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 				goods = {
@@ -4918,12 +4918,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Resupply"), 
-				general = _("stationGeneralInfo-comms", "Get your energy here! Grab a drink before you go!"), 
+				description = _("scienceDescription-station", "Resupply"),
+				general = _("stationGeneralInfo-comms", "Get your energy here! Grab a drink before you go!"),
 				history = "",
 			},
 			["Science-2"] = {
@@ -4940,7 +4940,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -4951,12 +4951,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Research Lab and Observatory"), 
-				general = "", 
+				description = _("scienceDescription-station", "Research Lab and Observatory"),
+				general = "",
 				history = "",
 			},
 			["Science-4"] = {
@@ -4973,12 +4973,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -4992,12 +4992,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Biotech research"), 
-				general = "", 
+				description = _("scienceDescription-station", "Biotech research"),
+				general = "",
 				history = "",
 			},
 			["Science-7"] = {
@@ -5014,7 +5014,7 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
@@ -5025,12 +5025,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Observatory"), 
-				general = "", 
+				description = _("scienceDescription-station", "Observatory"),
+				general = "",
 				history = "",
 			},
 			["Spot"] = {
@@ -5047,22 +5047,22 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 3.0,
 		        },
 		        goods = {},
 		        trade = {
-		        	food = false, 
-		        	medicine = false, 
+		        	food = false,
+		        	medicine = false,
 		        	luxury = false,
 		        },
-				description = _("scienceDescription-station", "Observatory"), 
-				general = "", 
+				description = _("scienceDescription-station", "Observatory"),
+				general = "",
 				history = "",
 			},
 			["Valero"] = {
@@ -5079,12 +5079,12 @@ function populateStationPool()
 					jumpsupplydrop =	"friend",
 				},
 		        service_cost = {
-		        	supplydrop =		math.random(80,120), 
+		        	supplydrop =		math.random(80,120),
 		        	reinforcements =	math.random(125,175),
 		        	jumpsupplydrop =	math.random(110,140),
 		        },
 		        reputation_cost_multipliers = {
-		        	friend = 1.0, 
+		        	friend = 1.0,
 		        	neutral = 2.0,
 		        },
 				goods = {
@@ -5094,12 +5094,12 @@ function populateStationPool()
 					},
 				},
 				trade = {
-					food = false, 
-					medicine = false, 
+					food = false,
+					medicine = false,
 					luxury = false,
 				},
-				description = _("scienceDescription-station", "Resupply"), 
-				general = "", 
+				description = _("scienceDescription-station", "Resupply"),
+				general = "",
 				history = "",
 			},
 		},
@@ -6296,7 +6296,7 @@ function farEnough(o_x,o_y,obj_dist)
 				end
 			end
 		elseif item.shape == "rectangle" then
-			if	o_x > item.lo_x and 
+			if	o_x > item.lo_x and
 				o_x < item.hi_x and
 				o_y > item.lo_y and
 				o_y < item.hi_y then
@@ -6808,7 +6808,7 @@ function setStations()
 	table.insert(place_space,{lo_x=61000,hi_x=96000,lo_y=-27000,hi_y=46000,shape="rectangle"})
 	setStationsFromList()
 end
---      Inventory button and functions for relay/operations 
+--      Inventory button and functions for relay/operations
 function cargoInventory(delta)
 	for pidx=1,8 do
 		local p = getPlayerShip(pidx)
@@ -7080,7 +7080,7 @@ function nearbyStation(object,pool_size)
 		temp_station = stationList[i]
 		if temp_station ~= nil and temp_station:isValid() and object ~= temp_station then
 			table.insert(temp_list,temp_station)
-		end 
+		end
 	end
 	local nearest_distance = 999999
 	for i=1,#temp_list do
@@ -7316,10 +7316,10 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or 
-			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or 
-			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or 
-			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or 
+		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or
+			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or
+			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or
+			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0)   then
 			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				setCommsMessage(_("ammo-comms", "What type of ordnance?"))
@@ -7446,9 +7446,9 @@ function handleDockedState()
 					end
 				end
 			end
-			if ctd.trade.food 
-				and comms_source.goods ~= nil 
-				and comms_source.goods.food ~= nil 
+			if ctd.trade.food
+				and comms_source.goods ~= nil
+				and comms_source.goods.food ~= nil
 				and comms_source.goods.food > 0 then
 				for good, goodData in pairs(ctd.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good), function()
@@ -7656,7 +7656,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -9448,7 +9448,7 @@ function generateCallSign(prefix)
 		prefix = generateCallSignPrefix()
 	end
 	suffix_index = suffix_index + math.random(1,3)
-	if suffix_index > 999 then 
+	if suffix_index > 999 then
 		suffix_index = 1
 	end
 	return string.format("%s%i",prefix,suffix_index)
@@ -9489,7 +9489,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, perimeter_min, per
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	local enemyStrength = math.max(danger * enemy_power * playerPower(),5)
@@ -10177,7 +10177,7 @@ function stettorOrderMessage(delta)
 	snsMsg = snsMsg .. s2part .. "\n"
 	snsMsg = snsMsg .. s3part .. "\n"
 	if difficulty > 1 then
-		snsMsg = snsMsg .. string.format(_("StettorOrders-shipLog", "and take these items to station %s"), sensorBaseName) 
+		snsMsg = snsMsg .. string.format(_("StettorOrders-shipLog", "and take these items to station %s"), sensorBaseName)
 		secondaryOrders = string.format(_("StettorOrders-comms", "\nGather the following:\n%s\n%s\n%s\nand take to station %s"),s1part,s2part,s3part,sensorBaseName)
 	else
 		snsMsg = snsMsg .. string.format(_("StettorOrders-shipLog", "and take these items to station %s in sector %s"), sensorBaseName, sensorBaseSector)
@@ -10254,7 +10254,7 @@ function traitorOrderMessage(delta)
 	if difficulty <= 1 then
 		tMsg = string.format(_("Sporisky-shipLog", "%s in sector %s"), tMsg, traitorBaseSector)
 	end
-	tMsg = string.format(_("SporiskyOrders-shipLog", "%s. Go find out what you can about this spy."), tMsg) 
+	tMsg = string.format(_("SporiskyOrders-shipLog", "%s. Go find out what you can about this spy."), tMsg)
 	if difficulty <= 1 then
 		secondaryOrders = string.format(_("SporiskyOrders-comms", "\nInvestigate spy reported at station %s in sector %s"),traitorBaseName,traitorBaseSector)
 	else
@@ -10356,7 +10356,7 @@ function sporiskyQuestioned(delta)
 								sporiskyTarget = stationTic
 							end
 							if sporiskyTarget:isValid() then
-								p17:addToShipLog(string.format(_("Sporisky-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta") 
+								p17:addToShipLog(string.format(_("Sporisky-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta")
 								secondaryOrders = string.format(_("SporiskyOrders-comms", "\nDestroy enemy base in sector %s"),sporiskyTarget:getSectorName())
 							else
 								p17:addToShipLog(string.format(_("Sporisky-shipLog", "The enemy base identified has already been destroyed")),"Magenta")
@@ -11283,7 +11283,7 @@ function update(delta)
 				if hideStationName ~= nil then
 					first_reference_station_name = hideStationName
 				end
-				if hideStationSector ~= nil then 
+				if hideStationSector ~= nil then
 					first_reference_station_sector = hideStationSector
 				end
 				--print("Required plot Undercut order message " .. hideStationName .. " " .. hideStationSector .. ". Required missions completed: " .. requiredMissionCount)

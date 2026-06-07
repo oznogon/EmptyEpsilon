@@ -773,7 +773,7 @@ function setConstants()
 		{func=wreckModChangePower,		desc="Secondary ship system component",	scan_desc="Power source"},							--18
 		{func=wreckModCombatBoost,		desc="Secondary ship system component",	scan_desc="Maneuver boost thruster"},				--19 timed
 		{func=wreckModCombatStrafe,		desc="Secondary ship system component",	scan_desc="Maneuver strafe thruster"},				--20 timed
-		{func=wreckModProbeStock,		desc="Secondary ship system component",	scan_desc="Probe container"},						--21 
+		{func=wreckModProbeStock,		desc="Secondary ship system component",	scan_desc="Probe container"},						--21
 		{func=wreckModBeamDamage,		desc="Primary ship system component",	scan_desc="Beam system optics"},					--22 timed
 		{func=wreckModBeamCycle,		desc="Primary ship system component",	scan_desc="Beam system power capacitors"},			--23 timed
 		{func=wreckModMissileStock,		desc="Primary ship system component",	scan_desc="Missile container"},						--24
@@ -5467,7 +5467,7 @@ function createPlayerShipHeadhunter()
 	playerHeadhunter:setShieldsMax(100, 100)					--stronger shields (vs 70, 70)
 	playerHeadhunter:setShields(100, 100)
 	playerHeadhunter:setBeamWeapon(0, 10, 0, 1200.0, 4.0, 4)	--one beam (vs 0)
-	playerHeadhunter:setBeamWeaponTurret(0, 80, 0, 1)			--slow turret 
+	playerHeadhunter:setBeamWeaponTurret(0, 80, 0, 1)			--slow turret
 	playerHeadhunter:setWeaponTubeCount(7)						--one fewer mine tube, but EMPs added
 	playerHeadhunter:setWeaponTubeDirection(6, 180)				--mine tube points straight back
 	playerHeadhunter:setWeaponTubeExclusiveFor(0,MISSILE_HVLI)
@@ -6085,7 +6085,7 @@ function spawnEnemyFleet(xOrigin, yOrigin, power, danger, enemyFaction, fleetNam
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	local enemyStrength = math.max(power * danger * enemy_power, 5)
@@ -6225,9 +6225,9 @@ function chooseUpgradeGoodBase(upgradeBase)
 							end
 						end
 					end
-					if not matchAway then 
+					if not matchAway then
 						if optionalMissionDiagnostic then print("base and good qualifies: is not food or medicine and does not match upgrade base") end
-						break 
+						break
 					end
 				end
 			end
@@ -6724,7 +6724,7 @@ function setOptionalMissions()
 	end
 end
 function payForUpgrade()
-	if	(difficulty == 1 and treaty) or 
+	if	(difficulty == 1 and treaty) or
 		(difficulty < 1 and treaty and treatyTimer > 0) or
 		(difficulty > 1 and treaty) or
 		(difficulty > 1 and not treaty and not targetKraylorStations) then
@@ -7320,10 +7320,10 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or 
-			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or 
-			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or 
-			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or 
+		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or
+			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or
+			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or
+			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0)   then
 			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				local ctd = comms_target.comms_data
@@ -7546,7 +7546,7 @@ function handleDockedState()
 	end
 	local system_list = SYSTEMS
 	for i, system in ipairs(system_list) do
-		if not offer_repair 
+		if not offer_repair
 			and	((comms_source:getSystemHealthMax(system) < 1 and comms_target.comms_data.system_repair[system])
 			or	(comms_source:getSystemCoolantRate(system) < comms_source.normal_coolant_rate[system] and comms_target.comms_data.coolant_pump_repair[system])) then
 			offer_repair = true
@@ -7699,7 +7699,7 @@ function handleDockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
-    if isAllowedTo(comms_target.comms_data.services.activatedefensefleet) and 
+    if isAllowedTo(comms_target.comms_data.services.activatedefensefleet) and
     	comms_target.comms_data.idle_defense_fleet ~= nil then
     	local defense_fleet_count = 0
     	for name, template in pairs(comms_target.comms_data.idle_defense_fleet) do
@@ -8567,7 +8567,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -9121,7 +9121,7 @@ function handleUndockedState()
             addCommsReply(_("Back"), commsStation)
         end)
     end
-    if isAllowedTo(comms_target.comms_data.services.activatedefensefleet) and 
+    if isAllowedTo(comms_target.comms_data.services.activatedefensefleet) and
     	comms_target.comms_data.idle_defense_fleet ~= nil then
     	local defense_fleet_count = 0
     	for name, template in pairs(comms_target.comms_data.idle_defense_fleet) do
@@ -10501,7 +10501,7 @@ function getEnemyHealth(enemy)
 	end
 	if change_enemy_order_diagnostic then print(string.format("   faction:         %s",faction)) end
 	if faction == "Kraylor" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .3	+
 			enemy_hull		* .4	+
 			enemy_reactor	* .1 	+
@@ -10512,7 +10512,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .03	+
 			enemy_jump		* .03
 	elseif faction == "Arlenians" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .45	+
 			enemy_reactor	* .05 	+
@@ -10523,7 +10523,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .02	+
 			enemy_jump		* .02	
 	elseif faction == "Exuari" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .2	+
 			enemy_hull		* .3	+
 			enemy_reactor	* .2 	+
@@ -10534,7 +10534,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .05	+
 			enemy_jump		* .05	
 	elseif faction == "Ghosts" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .25	+
 			enemy_hull		* .25	+
 			enemy_reactor	* .25 	+
@@ -10545,7 +10545,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .04	+
 			enemy_jump		* .04	
 	elseif faction == "Ktlitans" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .2	+
 			enemy_hull		* .3	+
 			enemy_reactor	* .1 	+
@@ -10556,7 +10556,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .1	+
 			enemy_jump		* .1	
 	elseif faction == "TSN" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .35	+
 			enemy_reactor	* .08 	+
@@ -10567,7 +10567,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .08	+
 			enemy_jump		* .08	
 	elseif faction == "USN" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .38	+
 			enemy_hull		* .38	+
 			enemy_reactor	* .05 	+
@@ -10578,7 +10578,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .05	+
 			enemy_jump		* .05	
 	elseif faction == "CUF" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .38	+
 			enemy_reactor	* .05 	+
@@ -10589,7 +10589,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .06	+
 			enemy_jump		* .04	
 	else
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .3	+
 			enemy_hull		* .4	+
 			enemy_reactor	* .06 	+
@@ -11042,7 +11042,7 @@ function createRandomAsteroidAlongArc(amount, x, y, distance, startArc, endArcCl
 	end
 end
 function placeRandomListAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
--- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0) 
+-- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
 -- save in a list that is returned to caller
 	local object_list = {}
     for n=1,amount do
@@ -11105,7 +11105,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, sha
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	if enemyStrength == nil then
@@ -11166,7 +11166,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, sha
 		for index, ship in ipairs(enemyList) do
 			if index <= max_pyramid_tier then
 				local pyramid_angle = spawn_angle + formation_delta.pyramid[pyramid_tier][index].angle
-				if pyramid_angle < 0 then 
+				if pyramid_angle < 0 then
 					pyramid_angle = pyramid_angle + 360
 				end
 				pyramid_angle = pyramid_angle % 360
@@ -11892,7 +11892,7 @@ function crewFate(p, fatalityChance)
 		end
 	end
 end
---      Inventory button and functions for relay/operations 
+--      Inventory button and functions for relay/operations
 function cargoInventory(p)
 	local cargoHoldEmpty = true
 	if p.goods ~= nil then
@@ -11940,7 +11940,7 @@ function autoCoolant(p)
 		if p:hasPlayerAtPosition("Engineering") then
 			if p.autoCoolButton == nil then
 				local tbi = "enableAutoCool" .. p:getCallSign()
-				p:addCustomButton("Engineering",tbi,_("coolant-buttonEngineer", "Auto cool"),function() 
+				p:addCustomButton("Engineering",tbi,_("coolant-buttonEngineer", "Auto cool"),function()
 					string.format("")	--global context for serious proton
 					p:commandSetAutoRepair(true)
 					p:setAutoCoolant(true)
@@ -12148,7 +12148,7 @@ end
 --------------------
 -- Plot functions --
 --------------------
--- Transport plot 
+-- Transport plot
 function randomStation(randomStations)
 	local randomlySelectedStation = nil
 	local stationAttemptCount = 0
@@ -13074,7 +13074,7 @@ function weaponPlatformOrbit(delta)
 		twp = enemyDefensePlatformList[i]
 		if twp ~= nil and twp:isValid() then
 			twp.travelAngle = twp.travelAngle + .05*difficulty
-			if twp.travelAngle >= 360 then 
+			if twp.travelAngle >= 360 then
 				twp.travelAngle = 0
 			end
 			local newx, newy = vectorFromAngle(twp.travelAngle,twp.distance)
@@ -13602,7 +13602,7 @@ function muckAndFlies(delta)
 				local attemptCount = 0
 				local validCandidate = false
 				local candidate = nil
-				repeat 
+				repeat
 					candidate = humanStationList[math.random(1,#humanStationList)]
 					attemptCount = attemptCount + 1
 					if candidate ~= nil then
@@ -13628,7 +13628,7 @@ function muckAndFlies(delta)
 			if difficulty > 1 then
 				attemptCount = 0
 				validCandidate = false
-				repeat 
+				repeat
 					candidate = humanStationList[math.random(1,#humanStationList)]
 					attemptCount = attemptCount + 1
 					if candidate ~= nil then
@@ -14620,7 +14620,7 @@ function endStatistics()
 	gMsg = gMsg .. string.format(_("msgMainscreen", "   Weights: friendly station: %.2f, neutral station: %.2f, friendly ship: %.2f\n"), stat_list.human.weight.station, stat_list.human.weight.neutral, stat_list.human.weight.ship)
 	gMsg = gMsg .. string.format(_("msgMainscreen", "Enemy evaluation strength: %.1f%%\n"),stat_list.kraylor.evaluation)
 	gMsg = gMsg .. string.format(_("msgMainscreen", "   Weights: enemy station: %.2f, enemy ship: %.2f\n"), stat_list.kraylor.weight.station, stat_list.kraylor.weight.ship)
-	local rankVal = friendlyStationComponent*.4 + friendlyShipComponent*.2 + enemyStationComponent*.2 + enemyShipComponent*.1 + neutralStationComponent*.1 
+	local rankVal = friendlyStationComponent*.4 + friendlyShipComponent*.2 + enemyStationComponent*.2 + enemyShipComponent*.1 + neutralStationComponent*.1
 	if endStatDiagnostic then print("calculated ranking stats") end
 	if endStatDiagnostic then print("rank value: " .. rankVal) end
 	if missionCompleteReason ~= nil then

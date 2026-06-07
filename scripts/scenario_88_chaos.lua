@@ -1,5 +1,5 @@
 -- Name: Chaos of War
--- Description: Two, three or four species battle for ultimate dominion. Designed as a replayable player versus player (PVP) scenario for individuals or teams. Terrain is randomly symmetrically generated for every game. 
+-- Description: Two, three or four species battle for ultimate dominion. Designed as a replayable player versus player (PVP) scenario for individuals or teams. Terrain is randomly symmetrically generated for every game.
 ---
 --- Use Gamemaster (GM) screen to adjust parameters. The GM screen covers all of the parameters on the next page plus a variety of others.
 ---
@@ -211,7 +211,7 @@ function setConstants()
 			jumpsupplydrop = "friend",
 		},
 		service_cost = {
-			supplydrop =		math.random(80,120), 
+			supplydrop =		math.random(80,120),
 			reinforcements =	math.random(125,175),
 			jumpsupplydrop =	math.random(110,140),
 		},
@@ -223,7 +223,7 @@ function setConstants()
         self_destruct_repair =	random(1,13)<=(3-difficulty),
         tube_slow_down_repair =	random(1,13)<=(3-difficulty),
 		reputation_cost_multipliers = {
-			friend = 			1.0, 
+			friend = 			1.0,
 			neutral = 			3.0,
 		},
 		goods = {},
@@ -2478,7 +2478,7 @@ function generateTerrain()
         	Homing =	math.random(1,6), 		
         	Nuke =		math.random(10,30),					
         	Mine =		math.random(2,25),
-        	EMP =		math.random(8,20), 
+        	EMP =		math.random(8,20),
         	HVLI =		math.random(1,4),				
         },
 		weapon_available = 	{
@@ -2507,7 +2507,7 @@ function generateTerrain()
 			jumpsupplydrop = "friend",
 		},
 		service_cost = {
-			supplydrop =		math.random(80,120), 
+			supplydrop =		math.random(80,120),
 			reinforcements =	math.random(125,175),
 			hornetreinforcements =	math.random(75,125),
 			phobosreinforcements =	math.random(175,225),
@@ -2525,7 +2525,7 @@ function generateTerrain()
 		tube_slow_down_repair =	true,
         sensor_boost = {value = primary_station_distance-35000, cost = 0},
 		reputation_cost_multipliers = {
-			friend = 			1.0, 
+			friend = 			1.0,
 			neutral = 			3.0,
 		},
         max_weapon_refill_amount = {friend = 1.0, neutral = 0.5 },
@@ -2627,7 +2627,7 @@ function generateTerrain()
 					jumpsupplydrop = "friend",
 				},
 				service_cost = {
-					supplydrop =		math.random(80,120), 
+					supplydrop =		math.random(80,120),
 					reinforcements =	math.random(125,175),
 					jumpsupplydrop =	math.random(110,140),
 				},
@@ -2639,7 +2639,7 @@ function generateTerrain()
 				self_destruct_repair =	random(1,100) <= (25 - difficulty*2.5),
 				tube_slow_down_repair =	random(1,100) <= (18 - difficulty*2.5),
 				reputation_cost_multipliers = {
-					friend = 			1.0, 
+					friend = 			1.0,
 					neutral = 			3.0,
 				},
 			}
@@ -2963,7 +2963,7 @@ function generateTerrain()
 				Homing =	math.random(2,8), 		
 				Nuke =		math.random(12,30),					
 				Mine =		math.random(3,28),
-				EMP =		math.random(9,25), 
+				EMP =		math.random(9,25),
 				HVLI =		math.random(2,5),				
 			},
 			weapon_available = 	{
@@ -2991,7 +2991,7 @@ function generateTerrain()
 				jumpovercharge = "neutral",
 			},
 			service_cost = {
-				supplydrop =		math.random(80,120), 
+				supplydrop =		math.random(80,120),
 				reinforcements =	math.random(125,175),
 				hornetreinforcements =	math.random(75,125),
 				phobosreinforcements =	math.random(175,225),
@@ -3007,7 +3007,7 @@ function generateTerrain()
 			self_destruct_repair =	random(1,100) <= (25 - difficulty*2.5),
 			tube_slow_down_repair =	random(1,100) <= (35 - difficulty*2.5),
 			reputation_cost_multipliers = {
-				friend = 			1.0, 
+				friend = 			1.0,
 				neutral = 			3.0,
 			},
 			max_weapon_refill_amount = {friend = 1.0, neutral = 0.5 },
@@ -3024,12 +3024,12 @@ function generateTerrain()
 				table.insert(
 					scientist_list["Human Navy"],
 					{
-						name = tableRemoveRandom(scientist_names), 
-						topic = tableRemoveRandom(scientist_topics), 
-						location = pStation, 
-						location_name = pStation:getCallSign(), 
-						score_value = scientist_score_value, 
-						upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)], 
+						name = tableRemoveRandom(scientist_names),
+						topic = tableRemoveRandom(scientist_topics),
+						location = pStation,
+						location_name = pStation:getCallSign(),
+						score_value = scientist_score_value,
+						upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)],
 						upgrade = tableRemoveRandom(upgrade_list),
 						upgrade_automated_application = upgrade_automated_applications[math.random(1,#upgrade_automated_applications)],
 					}
@@ -3058,12 +3058,12 @@ function generateTerrain()
 				table.insert(
 					scientist_list["Kraylor"],
 					{
-						name = tableRemoveRandom(scientist_names), 
-						topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic, 
-						location = pStation, 
-						location_name = pStation:getCallSign(), 
-						score_value = scientist_score_value, 
-						upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)], 
+						name = tableRemoveRandom(scientist_names),
+						topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic,
+						location = pStation,
+						location_name = pStation:getCallSign(),
+						score_value = scientist_score_value,
+						upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)],
 						upgrade = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade,
 						upgrade_automated_application = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade_automated_application,
 					}
@@ -3089,12 +3089,12 @@ function generateTerrain()
 					table.insert(
 						scientist_list["Exuari"],
 						{
-							name = tableRemoveRandom(scientist_names), 
-							topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic, 
-							location = pStation, 
-							location_name = pStation:getCallSign(), 
-							score_value = scientist_score_value, 
-							upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)], 
+							name = tableRemoveRandom(scientist_names),
+							topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic,
+							location = pStation,
+							location_name = pStation:getCallSign(),
+							score_value = scientist_score_value,
+							upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)],
 							upgrade = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade,
 							upgrade_automated_application = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade_automated_application,
 						}
@@ -3121,12 +3121,12 @@ function generateTerrain()
 					table.insert(
 						scientist_list["Ktlitans"],
 						{
-							name = tableRemoveRandom(scientist_names), 
-							topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic, 
-							location = pStation, 
-							location_name = pStation:getCallSign(), 
-							score_value = scientist_score_value, 
-							upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)], 
+							name = tableRemoveRandom(scientist_names),
+							topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic,
+							location = pStation,
+							location_name = pStation:getCallSign(),
+							score_value = scientist_score_value,
+							upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)],
 							upgrade = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade,
 							upgrade_automated_application = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade_automated_application,
 						}
@@ -3784,7 +3784,7 @@ function createObjectsListOnLine(x1, y1, x2, y2, spacing, object_type, rows, cha
     return list
 end
 function placeRandomListAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
--- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0) 
+-- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
 -- save in a list that is returned to caller
 	local object_list = {}
     for n=1,amount do
@@ -3810,7 +3810,7 @@ end
 function choosePlanet(index,x,y)
 	local planet_list = {
 		{
-			radius = random(500,1500), distance = -2000, 
+			radius = random(500,1500), distance = -2000,
 			name = {"Gamma Piscium","Beta Lyporis","Sigma Draconis","Iota Carinae","Theta Arietis","Epsilon Indi","Beta Hydri"},
 			color = {
 				red = random(0.9,1), green = random(0.85,1), blue = random(0.9,1)
@@ -5666,7 +5666,7 @@ function preOrderOrdnance(return_function)
 end
 --]]
 function activateDefenseFleet(return_function)
-    if isAllowedTo(comms_target.comms_data.services.activatedefensefleet) and 
+    if isAllowedTo(comms_target.comms_data.services.activatedefensefleet) and
     	comms_target.comms_data.idle_defense_fleet ~= nil then
     	local defense_fleet_count = 0
     	for name, template in pairs(comms_target.comms_data.idle_defense_fleet) do
@@ -5707,10 +5707,10 @@ function restockOrdnance(return_function)
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE)	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Nuke	> 0) or 
-			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP)	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.EMP		> 0) or 
-			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING)	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Homing	> 0) or 
-			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE)	> 0)   	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Mine	> 0) or 
+		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE)	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Nuke	> 0) or
+			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP)	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.EMP		> 0) or
+			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING)	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Homing	> 0) or
+			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE)	> 0)   	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Mine	> 0) or
 			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax(MISSILE_HVLI)	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.HVLI	> 0) then
 			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				setCommsMessage(_("ammo-comms", "What type of ordnance?"))
@@ -5924,7 +5924,7 @@ function repairSubsystems(return_function)
 	end
 end
 function handleWeaponRestock(weapon, return_function)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -7216,39 +7216,39 @@ function gatherStats()
 			end
 		end
 	end
-	stat_list.human.weighted_score = 
-		stat_list.human.station_score_total*station_weight + 
-		stat_list.human.ship_score_total*player_ship_weight + 
-		stat_list.human.npc_score_total*npc_ship_weight - 
+	stat_list.human.weighted_score =
+		stat_list.human.station_score_total*station_weight +
+		stat_list.human.ship_score_total*player_ship_weight +
+		stat_list.human.npc_score_total*npc_ship_weight -
 		human_death_penalty*player_ship_weight
-	stat_list.human.comprehensive_weighted_score = 
-		stat_list.human.weighted_score + 
+	stat_list.human.comprehensive_weighted_score =
+		stat_list.human.weighted_score +
 		stat_list.human.tie_breaker
-	stat_list.kraylor.weighted_score = 
-		stat_list.kraylor.station_score_total*station_weight + 
-		stat_list.kraylor.ship_score_total*player_ship_weight + 
-		stat_list.kraylor.npc_score_total*npc_ship_weight - 
+	stat_list.kraylor.weighted_score =
+		stat_list.kraylor.station_score_total*station_weight +
+		stat_list.kraylor.ship_score_total*player_ship_weight +
+		stat_list.kraylor.npc_score_total*npc_ship_weight -
 		kraylor_death_penalty*player_ship_weight
-	stat_list.kraylor.comprehensive_weighted_score = 
-		stat_list.kraylor.weighted_score + 
+	stat_list.kraylor.comprehensive_weighted_score =
+		stat_list.kraylor.weighted_score +
 		stat_list.kraylor.tie_breaker
 	if exuari_angle ~= nil then
-		stat_list.exuari.weighted_score = 
-			stat_list.exuari.station_score_total*station_weight + 
-			stat_list.exuari.ship_score_total*player_ship_weight + 
-			stat_list.exuari.npc_score_total*npc_ship_weight - 
+		stat_list.exuari.weighted_score =
+			stat_list.exuari.station_score_total*station_weight +
+			stat_list.exuari.ship_score_total*player_ship_weight +
+			stat_list.exuari.npc_score_total*npc_ship_weight -
 			exuari_death_penalty*player_ship_weight
-		stat_list.exuari.comprehensive_weighted_score = 
+		stat_list.exuari.comprehensive_weighted_score =
 			stat_list.exuari.weighted_score +
 			stat_list.exuari.tie_breaker
 	end
 	if ktlitan_angle ~= nil then
-		stat_list.ktlitan.weighted_score = 
-			stat_list.ktlitan.station_score_total*station_weight + 
-			stat_list.ktlitan.ship_score_total*player_ship_weight + 
-			stat_list.ktlitan.npc_score_total*npc_ship_weight - 
+		stat_list.ktlitan.weighted_score =
+			stat_list.ktlitan.station_score_total*station_weight +
+			stat_list.ktlitan.ship_score_total*player_ship_weight +
+			stat_list.ktlitan.npc_score_total*npc_ship_weight -
 			ktlitan_death_penalty*player_ship_weight
-		stat_list.ktlitan.comprehensive_weighted_score = 
+		stat_list.ktlitan.comprehensive_weighted_score =
 			stat_list.ktlitan.weighted_score +
 			stat_list.ktlitan.tie_breaker
 	end

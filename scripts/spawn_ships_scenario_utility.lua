@@ -1,7 +1,7 @@
 --------  Spawn ships scenario utility
---  This utility adds a set of buttons to the GM screen allowing for the spawning of 
+--  This utility adds a set of buttons to the GM screen allowing for the spawning of
 --  various ships. Originally designed to provide a mechanism to spawn ships of roughly
---  the same capability as the player ship or ships, it has been added to over time in 
+--  the same capability as the player ship or ships, it has been added to over time in
 --  the sandbox to include features such as a changing ratio of capability vs player
 --  ships, filtering the ships by certain criteria, ship formations, etc.
 --
@@ -13,8 +13,8 @@
 --      addGMFunction("+Spawn Ship(s)",spawnGMShips)
 --    end
 --
---  The plus sign at the start of the button label indicates that another set of 
---  buttons comes up when clicking the button. Similarly, the minus sign at the start of 
+--  The plus sign at the start of the button label indicates that another set of
+--  buttons comes up when clicking the button. Similarly, the minus sign at the start of
 --  the button label indicates that the GM will return to a previous set of buttons when
 --  clicking the button.
 --
@@ -254,7 +254,7 @@ function setSpawnShipGlobals()
       ["Fortress"] =      {strength = 130,adder = false,  missiler = false,  beamer = true,  frigate = false,  chaser = true,  fighter = false,  drone = false,  unusual = false,  base = false,  short_range_radar = 9000,  hop_angle = 90,  hop_range = 2380,  dist = 2000,create = stockTemplate},
       ["Tyr"] =        {strength = 150,adder = false,  missiler = false,  beamer = true,  frigate = false,  chaser = true,  fighter = false,  drone = false,  unusual = false,  base = false,  short_range_radar = 9500,  hop_angle = 90,  hop_range = 2480,  dist = 2000,create = tyr},
       ["Odin"] =        {strength = 250,adder = false,  missiler = false,  beamer = false,  frigate = false,  chaser = true,  fighter = false,  drone = false,  unusual = false,  base = false,  short_range_radar = 20000,  hop_angle = 0,  hop_range = 3180,  dist = 1500,create = stockTemplate},
-    }    
+    }
     if ship_template == nil then
       ship_template = {}
       for ship,details in pairs(spawn_utility_ship_template) do
@@ -335,7 +335,7 @@ function setSpawnShipGlobals()
     if prebuilt_leader == nil then
       prebuilt_leader = "Nirvana R5"  --default
     end
-    local spawn_utility_prebuilt_leaders = {    
+    local spawn_utility_prebuilt_leaders = {
                   --130      140    120      125        120    140          140      140      150        100        70      70        45
       ["Cucaracha"] =      {"Lite Drone","Gnat","MT52 Hornet","MU52 Hornet","Fighter","Ktlitan Fighter","K2 Fighter","K3 Fighter","Ktlitan Scout"},
       ["Dreadnought"] =    {"Lite Drone","Gnat","MT52 Hornet","MU52 Hornet","Fighter","Ktlitan Fighter","K2 Fighter","K3 Fighter","Ktlitan Scout","Cucaracha","Nirvana R5","Nirvana R5A","Equipment Freighter 3"},
@@ -1453,24 +1453,24 @@ function playerPower()
   for i,p in ipairs(getActivePlayerShips()) do
     if p.shipScore == nil then
       local spawn_player_score = {
-        ["Atlantis"]      = 52,  
-        ["Benedict"]      = 10,  
-        ["Crucible"]      = 45,  
-        ["Ender"]        = 100,  
-        ["Flavia P.Falcon"]    = 13,  
-        ["Hathcock"]      = 30,  
-        ["Kiriya"]        = 10,  
-        ["MP52 Hornet"]     = 7,   
-        ["Maverick"]      = 45,  
-        ["Nautilus"]      = 12,  
-        ["Phobos M3P"]      = 19,  
-        ["Piranha"]        = 16,  
-        ["Repulse"]        = 14,  
-        ["Striker"]        = 8,  
-        ["ZX-Lindworm"]      = 8,  
-        ["Player Cruiser"]    = 40,  
-        ["Player Missile Cr."]  = 45,  
-        ["Player Fighter"]    = 7,  
+        ["Atlantis"]      = 52,
+        ["Benedict"]      = 10,
+        ["Crucible"]      = 45,
+        ["Ender"]        = 100,
+        ["Flavia P.Falcon"]    = 13,
+        ["Hathcock"]      = 30,
+        ["Kiriya"]        = 10,
+        ["MP52 Hornet"]     = 7,
+        ["Maverick"]      = 45,
+        ["Nautilus"]      = 12,
+        ["Phobos M3P"]      = 19,
+        ["Piranha"]        = 16,
+        ["Repulse"]        = 14,
+        ["Striker"]        = 8,
+        ["ZX-Lindworm"]      = 8,
+        ["Player Cruiser"]    = 40,
+        ["Player Missile Cr."]  = 45,
+        ["Player Fighter"]    = 7,
       }
       if spawn_player_score[p:getTypeName()] ~= nil then
         player_ship_score = player_ship_score + spawn_player_score[p:getTypeName()]
@@ -1617,7 +1617,7 @@ function fixFleetStrength(caller)
       fleetStrengthFixedValue = fleetStrengthFixedValue + 50
       caller()
     end)
-  end  
+  end
 end
 function setFleetChange()
   clearGMFunctions()
@@ -1657,7 +1657,7 @@ function setFleetChange()
   end)
   if fleetChange ~= "unmodified" then
     local chances = {
-      10, 20, 30, 40, 50, 60, 70, 80, 90, 100      
+      10, 20, 30, 40, 50, 60, 70, 80, 90, 100
     }
     local index = 0
     for i,chance in ipairs(chances) do
@@ -1779,7 +1779,7 @@ function setFleetAmbushDistance()
       fleetAmbushDistance = dist
       setFleetAmbushDistance()
     end)
-  end  
+  end
 end
 function parmSpawnFleet()
   local fsx = 0
@@ -1917,7 +1917,7 @@ function getTemplatePool(max_strength)
           else
             local ship_cat = fleet_group[fleetComposition]
             if ship_template[current_ship_template][ship_cat] then
-              table.insert(template_pool,current_ship_template)              
+              table.insert(template_pool,current_ship_template)
             end
           end
         end
@@ -1940,7 +1940,7 @@ function getTemplatePool(max_strength)
           else
             local ship_cat = fleet_group[fleetComposition]
             if ship_template[current_ship_template][ship_cat] then
-              table.insert(template_pool,current_ship_template)              
+              table.insert(template_pool,current_ship_template)
             end
           end
         end
@@ -1962,7 +1962,7 @@ function getTemplatePool(max_strength)
           else
             local ship_cat = fleet_group[fleetComposition]
             if ship_template[current_ship_template][ship_cat] then
-              table.insert(template_pool,current_ship_template)              
+              table.insert(template_pool,current_ship_template)
             end
           end
         end
@@ -1972,7 +1972,7 @@ function getTemplatePool(max_strength)
   return template_pool
 end
 function excludeShip(current_ship_template)
-  assert(type(current_ship_template)=="string") -- the template name we are spawning from ship_template  
+  assert(type(current_ship_template)=="string") -- the template name we are spawning from ship_template
   local ship = nil
   if ship_template[current_ship_template] == nil then
     print("ship template does not have an entry for",current_ship_template)
@@ -2184,7 +2184,7 @@ function setPrebuiltFleet()
       return
     end
     local follower_strength = ship_template[prebuilt_follower].strength
-    local formation_strength = leader_strength + (follower_strength * #fly_formation[formation_shape])  
+    local formation_strength = leader_strength + (follower_strength * #fly_formation[formation_shape])
     button_label = string.format("%s %s %s",button_label,formation_shape,formation_strength)
   end
   addGMFunction(button_label,setPrebuiltFormationShape)
@@ -2316,7 +2316,7 @@ function setPrebuiltFormationShape()
   addGMFunction("+X",setPrebuiltFormationCategoryX)
   addGMFunction("+H",setPrebuiltFormationCategoryH)
   addGMFunction("+*",setPrebuiltFormationCategorySplat)
-  addGMFunction("+O",setPrebuiltFormationCategoryOh)  
+  addGMFunction("+O",setPrebuiltFormationCategoryOh)
 end
 function setPrebuiltFormationCategoryOh()
   clearGMFunctions()
@@ -2707,7 +2707,7 @@ function parmSpawnShip()
     if #object_list < 1 then
       addGMMessage(_("msgGM","Fleet spawn failed: nothing selected for spawn location determination"))
       return
-    end 
+    end
     local ship = ship_template[individual_ship].create(fleetSpawnFaction,individual_ship)
     if fleetOrders == "Roaming" then
       ship:orderRoaming()

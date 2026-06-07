@@ -3,7 +3,7 @@
 ---
 --- Version 2 (formerly entitled Carriers and Turrets)
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
 -- Type: Mission
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
 -- Enemies[Very Easy]: The least number of or the weakest enemies
@@ -27,7 +27,7 @@
 -- Carrier[Random|Default]: A carrier type will be selected at random
 -- Carrier[Benedict]: The carrier deployed will be of type Benedict with a jump drive
 -- Carrier[Kiriya]: The carrier deployed will be of type Kiriya with a warp drive
--- Carrier[Saipan]: The carrier deployed will be of type Saipan with a jump drive 
+-- Carrier[Saipan]: The carrier deployed will be of type Saipan with a jump drive
 -- Setting[Fighter1]: Configures the first fighter type deployed as a player ship
 -- Fighter1[Random|Default]: Fighter 1 type will be selected at random
 -- Fighter1[Striker]: Fighter 1 will be of type Striker
@@ -135,7 +135,7 @@ function init()
 		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Striker"):setJumpDrive(false):setWarpDrive(false)
 		playerBlade:setTypeName("Formax")
 		playerBlade:setImpulseMaxSpeed(90)
-		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100, 
+		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100,
 		playerBlade:setBeamWeaponTurret(1,60, 15,2)			-- 2: slower than default 6
 		playerBlade:setWeaponTubeCount(2)
 		playerBlade:setWeaponTubeDirection(0,  0):setTubeLoadTime(0,10):setWeaponTubeExclusiveFor(0,MISSILE_HVLI):setTubeSize(0, MS_SMALL)
@@ -146,7 +146,7 @@ function init()
 		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Striker"):setJumpDrive(false):setWarpDrive(false)
 		playerBlade:setTypeName("Foil")
 		playerBlade:setImpulseMaxSpeed(95)
-		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100, 
+		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100,
 		playerBlade:setBeamWeaponTurret(1,60, 15,2)			-- 2: slower than default 6
 		playerBlade:setBeamWeapon(2,20,0,1200,6,5)	
 		playerBlade:setRepairCrewCount(4)
@@ -431,7 +431,7 @@ function mainGMButtonsDuringPause()
 -- The slow delay is used for typical mission testing when the tester does not wish to
 -- spend all their time fighting off enemies.
 -- The second button switches from slow to fast. This facilitates testing the enemy
--- spawning routines. The third button goes from fast to normal. 
+-- spawning routines. The third button goes from fast to normal.
 --translate variations into a numeric difficulty value
 	local delay_config = {
 		["slow"] = 600,
@@ -1941,7 +1941,7 @@ function respawnFighter1()
 		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Striker"):setJumpDrive(false):setWarpDrive(false)
 		playerBlade:setTypeName("Formax")
 		playerBlade:setImpulseMaxSpeed(90)
-		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100, 
+		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100,
 		playerBlade:setBeamWeaponTurret(1,60, 15,2)			-- 2: slower than default 6
 		playerBlade:setWeaponTubeCount(2)
 		playerBlade:setWeaponTubeDirection(0,  0):setTubeLoadTime(0,10):setWeaponTubeExclusiveFor(0,MISSILE_HVLI):setTubeSize(0, MS_SMALL)
@@ -1952,7 +1952,7 @@ function respawnFighter1()
 		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Striker"):setJumpDrive(false):setWarpDrive(false)
 		playerBlade:setTypeName("Foil")
 		playerBlade:setImpulseMaxSpeed(95)
-		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100, 
+		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100,
 		playerBlade:setBeamWeaponTurret(1,60, 15,2)			-- 2: slower than default 6
 		playerBlade:setBeamWeapon(2,20,0,1200,6,5)	
 		playerBlade:setRepairCrewCount(4)
@@ -2360,7 +2360,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -2423,7 +2423,7 @@ function handleUndockedState()
 				local oMsg = string.format(_("forSaleTrade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 				for good,good_data in pairs(comms_target.comms_data.goods) do
 					if good_data.quantity > 0 then
-						oMsg = string.format(_("forSaleTrade-comms","%s\n  %s: %i, %i"),oMsg,good_desc[good],good_data.quantity,good_data.cost) 
+						oMsg = string.format(_("forSaleTrade-comms","%s\n  %s: %i, %i"),oMsg,good_desc[good],good_data.quantity,good_data.cost)
 					end
 				end
 				setCommsMessage(oMsg)
@@ -3124,7 +3124,7 @@ function missionMessages()
 		end
 	end
 end
---	Ship communication 
+--	Ship communication
 function commsShip()
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
@@ -3654,7 +3654,7 @@ function neutralDefendComms()
     end
     return true
 end
---	Cargo management 
+--	Cargo management
 function cargoTransfer()
 	if playerCarrier:isValid() and playerCarrier.cargo > 0 and playerBlade:isValid() and playerBlade:isDocked(playerCarrier) and playerBlade.cargo < playerBlade.maxCargo then
 		if bladeTransferButton == nil then
@@ -3973,19 +3973,19 @@ function updatePlayerInventoryButton(p)
 		end
 	end
 	if goodCount > 0 then		--add inventory button when cargo acquired
-		p:addCustomButton("Relay","inventory_button_rel",_("inventory-buttonRelay","Inventory"),function() 
+		p:addCustomButton("Relay","inventory_button_rel",_("inventory-buttonRelay","Inventory"),function()
 			string.format("")
-			local out = playerShipCargoInventory(p) 
+			local out = playerShipCargoInventory(p)
 			p:addCustomMessage("Relay","inventory_message",out)
 		end,23)
 		p:addCustomButton("Operations","inventory_button_ops",_("inventory-buttonOperations","Inventory"), function()
 			string.format("")
-			local out = playerShipCargoInventory(p) 
+			local out = playerShipCargoInventory(p)
 			p:addCustomMessage("Operations","inventory_message",out)
 		end,23)
 		p:addCustomButton("Single","inventory_button_pil",_("inventory-buttonPilot","Inventory"), function()
 			string.format("")
-			local out = playerShipCargoInventory(p) 
+			local out = playerShipCargoInventory(p)
 			p:addCustomMessage("Operations","inventory_message",out)
 		end,23)
 	end
@@ -4150,7 +4150,7 @@ function pressureWaves(delta)
 		end
 	end
 end
---	Plot 2 
+--	Plot 2
 function destroyef2(delta)
 	plot2name = "destroyef2"
 	for i,ship in ipairs(ef2) do
@@ -4694,7 +4694,7 @@ function scientistDies()
 	end
 	betweenPlot2fleet()
 end
---	Plot 3 
+--	Plot 3
 function destroyef3(delta)
 	plot3name = "destroyef3"
 	for i,ship in ipairs(ef3) do
@@ -5001,7 +5001,7 @@ end
 function confirmRescue(delta)
 	if getScenarioTime() > confirmRescueTimer then
 		if playerCarrier:isValid() then
-			playerCarrier:addToShipLog(string.format(_("goal-shipLog","Station %s in %s has tractor equipment you can use to tractor %s in for repairs"),tractorStation:getCallSign(),tractorStation:getSectorName(),tractorShip:getCallSign()),"Magenta") 
+			playerCarrier:addToShipLog(string.format(_("goal-shipLog","Station %s in %s has tractor equipment you can use to tractor %s in for repairs"),tractorStation:getCallSign(),tractorStation:getSectorName(),tractorShip:getCallSign()),"Magenta")
 			plot3reminder = string.format(_("orders-comms","Install tractor equipment in %s from station %s in %s"),playerCarrier:getCallSign(),tractorStation:getCallSign(),tractorStation:getSectorName())
 			plot3name = "awaitingTractor"
 			plot3 = awaitingTractor
@@ -5285,7 +5285,7 @@ function tableSelectRandom(array)
 	return array[math.random(1,#array)]	
 end
 function setPlayers()
---	Give player ships defaults for this script. Called at the start 
+--	Give player ships defaults for this script. Called at the start
 --	while paused & each time a ship's relay officer interacts with a station
 	for i,pobj in ipairs(getActivePlayerShips()) do
 		if pobj.initialRep == nil then
@@ -5440,7 +5440,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	enemyStrength = math.max(danger * enemy_power * playerPower(),5)

@@ -3,7 +3,7 @@
 ---
 --- Version 2
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one nearly every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one nearly every weekend. All experience levels are welcome.
 -- Type: Mission
 -- Author: Xansta
 -- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.

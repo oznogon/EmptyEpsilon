@@ -21,7 +21,7 @@
 --  The ship creation function also adds the ship to the science database.
 --
 --  No global variables per se, just the function names themselves. These functions were
---  cloned from scenario to scenario until I put them in this document in an effort to 
+--  cloned from scenario to scenario until I put them in this document in an effort to
 --  reduce the workload on the pull request reviewer.
 --
 --  Version 2.1
@@ -49,7 +49,7 @@ function atlantisY42(enemyFaction)
   end)
   ship:setTypeName("Atlantis Y42")
   ship:setShieldsMax(300,200,300,200)              --stronger shields (vs 200,200,200,200)
-  ship:setShields(300,200,300,200)          
+  ship:setShields(300,200,300,200)
   ship:setImpulseMaxSpeed(65)                  --faster impulse (vs 30)
   ship:setRotationMaxSpeed(15)                --faster maneuver (vs 3.5)
 --           Index,  Arc,    Dir, Range,  Cycle,  Damage
@@ -88,7 +88,7 @@ function atlantisY42(enemyFaction)
       )
     end
   end
-  return ship    
+  return ship
 end
 function barracuda(enemyFaction)
   local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
@@ -237,7 +237,7 @@ function cucaracha(enemyFaction)
   end)
   ship:setTypeName("Cucaracha")
   ship:setShieldsMax(200, 50, 50, 50, 50, 50)    --stronger shields (vs 20)
-  ship:setShields(200, 50, 50, 50, 50, 50)          
+  ship:setShields(200, 50, 50, 50, 50, 50)
   ship:setHullMax(100)              --stronger hull (vs 50)
   ship:setHull(100)
   ship:setRotationMaxSpeed(20)          --faster maneuver (vs 10)
@@ -435,7 +435,7 @@ function enforcer(enemyFaction)
   ship:setImpulseMaxSpeed(100)                --faster impulse (vs 60)
   ship:setRotationMaxSpeed(20)                --faster maneuver (vs 15)
   ship:setShieldsMax(200,100,100)                --stronger shields (vs 100,150)
-  ship:setShields(200,100,100)          
+  ship:setShields(200,100,100)
   ship:setHullMax(100)                    --stronger hull (vs 70)
   ship:setHull(100)
 --           Index,  Arc,    Dir, Range,  Cycle,  Damage
@@ -445,11 +445,11 @@ function enforcer(enemyFaction)
   ship:setBeamWeapon(3,   0,      0,     0,    0,     0)
   ship:setWeaponTubeCount(3)                  --more (vs 0)
   ship:setTubeSize(0,"large")                  --large (vs normal)
-  ship:setWeaponTubeDirection(1,-15)        
-  ship:setWeaponTubeDirection(2, 15)        
+  ship:setWeaponTubeDirection(1,-15)
+  ship:setWeaponTubeDirection(2, 15)
   ship:setTubeLoadTime(0,18)
   ship:setTubeLoadTime(1,12)
-  ship:setTubeLoadTime(2,12)      
+  ship:setTubeLoadTime(2,12)
   ship:setWeaponStorageMax("Homing",18)            --more (vs 0)
   ship:setWeaponStorage("Homing", 18)
   local ships_key = _("scienceDB","Ships")
@@ -483,7 +483,7 @@ function enforcer(enemyFaction)
       enforcer_db:setImage("radar/ktlitan_destroyer.png")    --override default radar image
     end
   end
-  return ship    
+  return ship
 end
 function farco3(enemyFaction)
   --Relative strength reference number: 16
@@ -496,7 +496,7 @@ function farco3(enemyFaction)
   end)
   ship:setTypeName("Farco 3")
   ship:setShieldsMax(60, 40)                  --stronger shields (vs 50, 40)
-  ship:setShields(60, 40)          
+  ship:setShields(60, 40)
 --           Index,  Arc,  Dir,  Range, Cycle,  Damage
   ship:setBeamWeapon(0,  90,  -15,   1500,  5.0,  6.0)  --longer (vs 1200), faster (vs 8)
   ship:setBeamWeapon(1,  90,   15,   1500,  5.0,  6.0)
@@ -540,9 +540,9 @@ function farco5(enemyFaction)
   end)
   ship:setTypeName("Farco 5")
   ship:setShieldsMax(60, 40)        --stronger shields (vs 50, 40)
-  ship:setShields(60, 40)  
+  ship:setShields(60, 40)
   ship:setTubeLoadTime(0,30)        --faster (vs 60)
-  ship:setTubeLoadTime(0,30)        
+  ship:setTubeLoadTime(0,30)
   local ships_key = _("scienceDB","Ships")
   local frigate_key = _("scienceDB","Frigate")
   local farco_key = _("scienceDB","Farco 5")
@@ -583,12 +583,12 @@ function farco8(enemyFaction)
   end)
   ship:setTypeName("Farco 8")
   ship:setShieldsMax(80, 50)        --stronger shields (vs 50, 40)
-  ship:setShields(80, 50)  
+  ship:setShields(80, 50)
 --           Index,  Arc,  Dir,  Range, Cycle,  Damage
   ship:setBeamWeapon(0,  90,  -15,   1500,  5.0,  6.0)  --longer (vs 1200), faster (vs 8)
   ship:setBeamWeapon(1,  90,   15,   1500,  5.0,  6.0)
   ship:setTubeLoadTime(0,30)        --faster (vs 60)
-  ship:setTubeLoadTime(0,30)        
+  ship:setTubeLoadTime(0,30)
   local ships_key = _("scienceDB","Ships")
   local frigate_key = _("scienceDB","Frigate")
   local farco_key = _("scienceDB","Farco 8")
@@ -629,7 +629,7 @@ function farco11(enemyFaction)
   end)
   ship:setTypeName("Farco 11")
   ship:setShieldsMax(80, 50)        --stronger shields (vs 50, 40)
-  ship:setShields(80, 50)  
+  ship:setShields(80, 50)
   ship:setRotationMaxSpeed(15)                --faster maneuver (vs 10)
 --           Index,  Arc,  Dir,  Range, Cycle,  Damage
   ship:setBeamWeapon(0,  90,  -15,   1500,  5.0,  6.0)  --longer (vs 1200), faster (vs 8)
@@ -675,16 +675,16 @@ function farco13(enemyFaction)
   end)
   ship:setTypeName("Farco 13")
   ship:setShieldsMax(90, 70)        --stronger shields (vs 50, 40)
-  ship:setShields(90, 70)  
+  ship:setShields(90, 70)
   ship:setRotationMaxSpeed(15)                --faster maneuver (vs 10)
 --           Index,  Arc,  Dir,  Range, Cycle,  Damage
   ship:setBeamWeapon(0,  90,  -15,   1500,  5.0,  6.0)  --longer (vs 1200), faster (vs 8)
   ship:setBeamWeapon(1,  90,   15,   1500,  5.0,  6.0)
   ship:setBeamWeapon(2,  20,    0,   1800,  5.0,  4.0)  --additional sniping beam
   ship:setTubeLoadTime(0,30)        --faster (vs 60)
-  ship:setTubeLoadTime(0,30)        
+  ship:setTubeLoadTime(0,30)
   ship:setWeaponStorageMax("Homing",16)            --more (vs 6)
-  ship:setWeaponStorage("Homing", 16)    
+  ship:setWeaponStorage("Homing", 16)
   ship:setWeaponStorageMax("HVLI",30)              --more (vs 20)
   ship:setWeaponStorage("HVLI", 30)
   local ships_key = _("scienceDB","Ships")
@@ -972,11 +972,11 @@ function hurricane(enemyFaction)
   end)
   ship:setTypeName("Hurricane")
   ship:setJumpDrive(true)
-  ship:setJumpDriveRange(5000,40000)      
+  ship:setJumpDriveRange(5000,40000)
   ship:setWeaponTubeCount(8)            --more (vs 3)
   ship:setWeaponTubeExclusiveFor(1,"HVLI")    --only HVLI (vs any)
   ship:setWeaponTubeDirection(1,  0)        --forward (vs -90)
-  ship:setTubeSize(3,"large")            
+  ship:setTubeSize(3,"large")
   ship:setWeaponTubeDirection(3,-90)
   ship:setTubeSize(4,"small")
   ship:setWeaponTubeExclusiveFor(4,"Homing")
@@ -1086,7 +1086,7 @@ function k2breaker(enemyFaction)
   ship:setHull(200)
   ship:setWeaponTubeCount(3)            --more (vs 1)
   ship:setTubeSize(0,"large")            --large (vs normal)
-  ship:setWeaponTubeDirection(1,-30)        
+  ship:setWeaponTubeDirection(1,-30)
   ship:setWeaponTubeDirection(2, 30)
   ship:setWeaponTubeExclusiveFor(0,"HVLI")    --only HVLI (vs any)
   ship:setWeaponStorageMax("Homing",16)      --more (vs 0)
@@ -1153,7 +1153,7 @@ function k2fighter(enemyFaction)
     end
   end
   return ship
-end  
+end
 function k3fighter(enemyFaction)
   --Relative strength reference number: 8
   local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Fighter")
@@ -1183,7 +1183,7 @@ function k3fighter(enemyFaction)
     end
   end
   return ship
-end  
+end
 function maniapak(enemyFaction)
   --Relative strength reference number: 34
   local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
@@ -1197,15 +1197,15 @@ function maniapak(enemyFaction)
   ship:setRadarTrace("exuari_fighter.png")      --different radar trace
   ship:setImpulseMaxSpeed(70)          --slower impulse (vs 80)
   ship:setWeaponTubeCount(9)          --more (vs 1)
-  ship:setWeaponTubeDirection(0,  0)        
-  ship:setWeaponTubeDirection(1,-10)        
-  ship:setWeaponTubeDirection(2, 10)        
-  ship:setWeaponTubeDirection(3,  0)        
-  ship:setWeaponTubeDirection(4,-12)        
-  ship:setWeaponTubeDirection(5, 12)        
-  ship:setWeaponTubeDirection(6,  0)        
-  ship:setWeaponTubeDirection(7,-15)        
-  ship:setWeaponTubeDirection(8, 15)        
+  ship:setWeaponTubeDirection(0,  0)
+  ship:setWeaponTubeDirection(1,-10)
+  ship:setWeaponTubeDirection(2, 10)
+  ship:setWeaponTubeDirection(3,  0)
+  ship:setWeaponTubeDirection(4,-12)
+  ship:setWeaponTubeDirection(5, 12)
+  ship:setWeaponTubeDirection(6,  0)
+  ship:setWeaponTubeDirection(7,-15)
+  ship:setWeaponTubeDirection(8, 15)
   ship:setTubeSize(0,"small")
   ship:setTubeSize(1,"small")
   ship:setTubeSize(2,"small")
@@ -1282,7 +1282,7 @@ function maniapak(enemyFaction)
       maniapak_db:setImage("radar/exuari_fighter.png")    --override default radar image
     end
   end
-  return ship    
+  return ship
 end
 function phobosR2(enemyFaction)
   --Relative strength reference number: 13
@@ -1295,7 +1295,7 @@ function phobosR2(enemyFaction)
   end)
   ship:setTypeName("Phobos R2")
   ship:setWeaponTubeCount(1)      --one tube (vs 2)
-  ship:setWeaponTubeDirection(0,0)  
+  ship:setWeaponTubeDirection(0,0)
   ship:setImpulseMaxSpeed(55)      --slower impulse (vs 60)
   ship:setRotationMaxSpeed(15)    --faster maneuver (vs 10)
   local ships_key = _("scienceDB","Ships")
@@ -1337,10 +1337,10 @@ function phobosT4(enemyFaction)
   ship:setTypeName("Phobos T4")
   ship:setRotationMaxSpeed(20)                --faster maneuver (vs 10)
   ship:setShieldsMax(80,30)                  --stronger shields (vs 50,40)
-  ship:setShields(80,30)          
+  ship:setShields(80,30)
 --           Index,  Arc,    Dir, Range,  Cycle,  Damage
   ship:setBeamWeapon(0,  90,    -15,  1500,    6,    6)  --longer (vs 1200), faster (vs 8)
-  ship:setBeamWeapon(1,  90,     15,  1500,    6,    6)  
+  ship:setBeamWeapon(1,  90,     15,  1500,    6,    6)
   local ships_key = _("scienceDB","Ships")
   local frigate_key = _("scienceDB","Frigate")
   local t4_key = _("scienceDB","Phobos T4")
@@ -1381,25 +1381,25 @@ function predator(enemyFaction)
   end)
   ship:setTypeName("Predator")
   ship:setShieldsMax(100,100)                  --stronger shields (vs 30,30)
-  ship:setShields(100,100)          
+  ship:setShields(100,100)
   ship:setHullMax(80)                      --stronger hull (vs 70)
   ship:setHull(80)
   ship:setImpulseMaxSpeed(65)                  --faster impulse (vs 40)
   ship:setRotationMaxSpeed(15)                --faster maneuver (vs 6)
   ship:setJumpDrive(true)
-  ship:setJumpDriveRange(5000,35000)      
+  ship:setJumpDriveRange(5000,35000)
 --           Index,  Arc,    Dir, Range,  Cycle,  Damage
   ship:setBeamWeapon(0,  90,      0,  1000,    6,     4)  --more (vs 0)
-  ship:setBeamWeapon(1,  90,    180,  1000,    6,     4)  
+  ship:setBeamWeapon(1,  90,    180,  1000,    6,     4)
   ship:setWeaponTubeCount(8)                  --more (vs 3)
-  ship:setWeaponTubeDirection(0,-60)        
-  ship:setWeaponTubeDirection(1,-90)        
-  ship:setWeaponTubeDirection(2,-90)        
-  ship:setWeaponTubeDirection(3, 60)        
-  ship:setWeaponTubeDirection(4, 90)        
-  ship:setWeaponTubeDirection(5, 90)        
-  ship:setWeaponTubeDirection(6,-120)        
-  ship:setWeaponTubeDirection(7, 120)        
+  ship:setWeaponTubeDirection(0,-60)
+  ship:setWeaponTubeDirection(1,-90)
+  ship:setWeaponTubeDirection(2,-90)
+  ship:setWeaponTubeDirection(3, 60)
+  ship:setWeaponTubeDirection(4, 90)
+  ship:setWeaponTubeDirection(5, 90)
+  ship:setWeaponTubeDirection(6,-120)
+  ship:setWeaponTubeDirection(7, 120)
   ship:setWeaponTubeExclusiveFor(0,"Homing")
   ship:setWeaponTubeExclusiveFor(1,"Homing")
   ship:setWeaponTubeExclusiveFor(2,"Homing")
@@ -1409,7 +1409,7 @@ function predator(enemyFaction)
   ship:setWeaponTubeExclusiveFor(6,"Homing")
   ship:setWeaponTubeExclusiveFor(7,"Homing")
   ship:setWeaponStorageMax("Homing",32)            --more (vs 5)
-  ship:setWeaponStorage("Homing", 32)    
+  ship:setWeaponStorage("Homing", 32)
   ship:setWeaponStorageMax("HVLI",0)              --less (vs 10)
   ship:setWeaponStorage("HVLI", 0)
   ship:setRadarTrace("missile_cruiser.png")        --different radar trace
@@ -1453,7 +1453,7 @@ function predator(enemyFaction)
       predator_db:setModelDataName("HeavyCorvetteRed")
     end
   end
-  return ship    
+  return ship
 end
 function shepherd(enemyFaction)
   --Relative strength reference number: 6
@@ -1506,7 +1506,7 @@ function starhammerIII(enemyFaction)
   ship:setBeamWeapon(4,  60,    180,  1500,    8,    11)  --extra rear facing beam
   ship:setTubeSize(0,"large")
   ship:setWeaponStorageMax("Homing",16)            --more (vs 4)
-  ship:setWeaponStorage("Homing", 16)    
+  ship:setWeaponStorage("Homing", 16)
   ship:setWeaponStorageMax("HVLI",36)              --more (vs 20)
   ship:setWeaponStorage("HVLI", 36)
   local ships_key = _("scienceDB","Ships")
@@ -1551,11 +1551,11 @@ function starhammerV(enemyFaction)
   ship:setImpulseMaxSpeed(65)                  --faster impulse (vs 35)
   ship:setRotationMaxSpeed(15)                --faster maneuver (vs 6)
   ship:setShieldsMax(450, 350, 250, 250, 350)          --stronger shields (vs 450, 350, 150, 150, 350)
-  ship:setShields(450, 350, 250, 250, 350)          
+  ship:setShields(450, 350, 250, 250, 350)
 --           Index,  Arc,    Dir, Range,  Cycle,  Damage
   ship:setBeamWeapon(4,  60,    180,  1500,    8,    11)  --extra rear facing beam
   ship:setWeaponStorageMax("Homing",16)            --more (vs 4)
-  ship:setWeaponStorage("Homing", 16)    
+  ship:setWeaponStorage("Homing", 16)
   ship:setWeaponStorageMax("HVLI",36)              --more (vs 20)
   ship:setWeaponStorage("HVLI", 36)
   local ships_key = _("scienceDB","Ships")
@@ -1585,7 +1585,7 @@ function starhammerV(enemyFaction)
       )
     end
   end
-  return ship    
+  return ship
 end
 function tempest(enemyFaction)
   --Relative strength reference number: 30
@@ -1602,16 +1602,16 @@ function tempest(enemyFaction)
   ship:setWeaponTubeDirection(1, -89)        --slight angle spread
   ship:setWeaponTubeDirection(3,  88)        --3 for HVLI each side
   ship:setWeaponTubeDirection(4,  89)        --2 for homing and nuke each side
-  ship:setWeaponTubeDirection(6, -91)        
-  ship:setWeaponTubeDirection(7, -92)        
-  ship:setWeaponTubeDirection(8,  91)        
-  ship:setWeaponTubeDirection(9,  92)        
+  ship:setWeaponTubeDirection(6, -91)
+  ship:setWeaponTubeDirection(7, -92)
+  ship:setWeaponTubeDirection(8,  91)
+  ship:setWeaponTubeDirection(9,  92)
   ship:setWeaponTubeExclusiveFor(7,"HVLI")
   ship:setWeaponTubeExclusiveFor(9,"HVLI")
   ship:setWeaponStorageMax("Homing",16)      --more (vs 6)
-  ship:setWeaponStorage("Homing", 16)        
+  ship:setWeaponStorage("Homing", 16)
   ship:setWeaponStorageMax("Nuke",8)        --more (vs 0)
-  ship:setWeaponStorage("Nuke", 8)        
+  ship:setWeaponStorage("Nuke", 8)
   ship:setWeaponStorageMax("HVLI",34)        --more (vs 20)
   ship:setWeaponStorage("HVLI", 34)
   local ships_key = _("scienceDB","Ships")
@@ -1708,7 +1708,7 @@ function tyr(enemyFaction)
   ship:setImpulseMaxSpeed(50)                  --faster impulse (vs 30)
   ship:setRotationMaxSpeed(10)                --faster maneuver (vs 1.5)
   ship:setShieldsMax(400, 300, 300, 400, 300, 300)      --stronger shields (vs 300, 300, 300, 300, 300)
-  ship:setShields(400, 300, 300, 400, 300, 300)          
+  ship:setShields(400, 300, 300, 400, 300, 300)
   ship:setHullMax(100)                    --stronger hull (vs 70)
   ship:setHull(100)
 --           Index,  Arc,    Dir, Range,  Cycle,  Damage
@@ -1846,17 +1846,17 @@ function whirlwind(enemyFaction)
   end)
   ship:setTypeName("Whirlwind")
   ship:setWeaponTubeCount(9)          --more (vs 5)
-  ship:setWeaponTubeDirection(0,-90)      --3 left, 3 right, 3 front (vs 5 front)  
-  ship:setWeaponTubeDirection(1,-92)        
-  ship:setWeaponTubeDirection(2,-88)        
-  ship:setWeaponTubeDirection(3, 90)        
-  ship:setWeaponTubeDirection(4, 92)        
-  ship:setWeaponTubeDirection(5, 88)        
-  ship:setWeaponTubeDirection(6,  0)        
-  ship:setWeaponTubeDirection(7,  2)        
-  ship:setWeaponTubeDirection(8, -2)        
+  ship:setWeaponTubeDirection(0,-90)      --3 left, 3 right, 3 front (vs 5 front)
+  ship:setWeaponTubeDirection(1,-92)
+  ship:setWeaponTubeDirection(2,-88)
+  ship:setWeaponTubeDirection(3, 90)
+  ship:setWeaponTubeDirection(4, 92)
+  ship:setWeaponTubeDirection(5, 88)
+  ship:setWeaponTubeDirection(6,  0)
+  ship:setWeaponTubeDirection(7,  2)
+  ship:setWeaponTubeDirection(8, -2)
   ship:setWeaponStorageMax("Homing",36)            --more (vs 15)
-  ship:setWeaponStorage("Homing", 36)    
+  ship:setWeaponStorage("Homing", 36)
   ship:setWeaponStorageMax("HVLI",36)              --more (vs 15)
   ship:setWeaponStorage("HVLI", 36)
   local ships_key = _("scienceDB","Ships")
@@ -2020,7 +2020,7 @@ function physicsResearch(enemyFaction)
   ship:setImpulseMaxSpeed(65)        --faster impulse (vs 45)
   ship:setRotationMaxSpeed(10)      --faster maneuver (vs 6)
   ship:setShieldsMax(80, 80)        --stronger shields (vs 50, 50)
-  ship:setShields(80, 80)          
+  ship:setShields(80, 80)
   addFreighter(physics_key,ship)  --update science database if applicable
   return ship
 end
@@ -2252,7 +2252,7 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
       if ship:getBeamWeaponRange(bi) == nil then
         no_more_beams = true
       elseif ship:getBeamWeaponRange(bi) < 1 then
-        no_more_beams = true        
+        no_more_beams = true
       end
     until(no_more_beams or count_repeat_loop > max_repeat_loop)
     if count_repeat_loop > max_repeat_loop then

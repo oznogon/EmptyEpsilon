@@ -422,7 +422,7 @@ function buildAsteroids()
 	ax, ay = vectorFromAngle(random(290,340),20000)
 	placeRandomAroundPoint(Asteroid,40,1,5000,ax,ay)
 end
---	Transport ship generation and handling 
+--	Transport ship generation and handling
 function nearStations(station, compareStationList)
 	remainingStations = {}
 	if compareStationList[1]:isValid() then
@@ -541,7 +541,7 @@ function transportPlot(delta)
 		end
 	end
 end
---	Station communication 
+--	Station communication
 function tableSelectRandom(array)
 	local array_item_count = #array
     if array_item_count == 0 then
@@ -821,7 +821,7 @@ function handleDockedState()
 			setCommsMessage(goodsReport)
 			for good, goodData in pairs(comms_target.comms_data.goods) do
 				addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good_desc[good],goodData["cost"]), function()
-					if not comms_source:isDocked(comms_target) then 
+					if not comms_source:isDocked(comms_target) then
 						setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 						return
 					end
@@ -856,7 +856,7 @@ function handleDockedState()
 				for good, price in pairs(comms_target.comms_data.buy) do
 					if comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
 						addCommsReply(string.format(_("trade-comms", "Sell one %s for %i reputation"),good_desc[good],price), function()
-							if not comms_source:isDocked(comms_target) then 
+							if not comms_source:isDocked(comms_target) then
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
@@ -877,7 +877,7 @@ function handleDockedState()
 						if comms_source.goods.food.quantity > 0 then
 							for good, goodData in pairs(comms_target.comms_data.goods) do
 								addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good_desc[good]), function()
-									if not comms_source:isDocked(comms_target) then 
+									if not comms_source:isDocked(comms_target) then
 										setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 										return
 									end
@@ -910,7 +910,7 @@ function handleDockedState()
 						if comms_source.goods.medicine.quantity > 0 then
 							for good, goodData in pairs(comms_target.comms_data.goods) do
 								addCommsReply(string.format(_("trade-comms", "Trade medicine for %s"),good_desc[good]), function()
-									if not comms_source:isDocked(comms_target) then 
+									if not comms_source:isDocked(comms_target) then
 										setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 										return
 									end
@@ -943,7 +943,7 @@ function handleDockedState()
 						if comms_source.goods.luxury.quantity > 0 then
 							for good, goodData in pairs(comms_target.comms_data.goods) do
 								addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good_desc[good]), function()
-									if not comms_source:isDocked(comms_target) then 
+									if not comms_source:isDocked(comms_target) then
 										setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 										return
 									end
@@ -1035,7 +1035,7 @@ function commsSouthGap()
 	elseif difficulty > 1 then
 		--division 2, section 1   -750     750
 		--division 2, section 2     |       |
-		--division 3, section 3 | 3 | 2 | 1 | 4    
+		--division 3, section 3 | 3 | 2 | 1 | 4
 		--division 4, section 4         0
 		cMsg = string.format(_("minefield-comms", "%s\nCount near middle on the right: %i"),cMsg,sdiv2s1)
 		cMsg = string.format(_("minefield-comms", "%s\nCount near middle on the left: %i"),cMsg,sdiv2s2)
@@ -1128,7 +1128,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -1443,7 +1443,7 @@ function getFriendStatus()
         return "neutral"
     end
 end
---	Ship communication 
+--	Ship communication
 function commsShip()
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
@@ -2370,7 +2370,7 @@ function checkSouthernGap()
 	elseif difficulty > 1 then
 		sdiv2s1 = 0	--division 2, section 1   -750     750
 		sdiv2s2 = 0	--division 2, section 2     |       |
-		sdiv2s3 = 0	--division 3, section 3 | 3 | 2 | 1 | 4    
+		sdiv2s3 = 0	--division 3, section 3 | 3 | 2 | 1 | 4
 		sdiv2s4 = 0	--division 4, section 4         0
 		for i,m in ipairs(south_mines) do
 			local mx, my = m:getPosition()
@@ -3172,10 +3172,10 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
-	if enemy_power == nil then 
+	if enemy_power == nil then
 		enemy_power = 1
 	end
 	enemyStrength = math.max(danger * enemy_power * playerPower(),5)

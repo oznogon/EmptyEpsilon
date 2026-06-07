@@ -1,5 +1,5 @@
 --------  Control code scenario utility
---  This utility adds a set of buttons to the GM screen allowing for the viewing and 
+--  This utility adds a set of buttons to the GM screen allowing for the viewing and
 --  setting of player ship control codes
 --
 --  In addition to requiring this file, you will need to add a line to call these buttons:
@@ -10,8 +10,8 @@
 --      addGMFunction("+Control Codes",manageControlCodes)
 --    end
 --
---  The plus sign at the start of the button label indicates that another set of 
---  buttons comes up when clicking the button. Similarly, the minus sign at the start of 
+--  The plus sign at the start of the button label indicates that another set of
+--  buttons comes up when clicking the button. Similarly, the minus sign at the start of
 --  the button label indicates that the GM will return to a previous set of buttons when
 --  clicking the button.
 function manageControlCodes()
@@ -30,7 +30,7 @@ function manageControlCodes()
 end
 function setControlCodeGlobals()
   --  code_object is set and used in this utility
-  
+
 --  This is where you set default codes based on the ship names you are using. Example:
 --  default_player_ship_control_code = {
 --    ["Phoenix"] =  "BURN265",
@@ -116,7 +116,7 @@ function changeCodeObject()
   else
     addGMMessage(_("msgGM","Select an object to use to set control code via its unscanned description field. No action taken"))
     setControlCodes()
-  end 
+  end
 end
 function playerShipSelected()
   local selected_player = getPlayerShip(-1)

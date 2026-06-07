@@ -7,8 +7,8 @@
 --		Define any functions that work in conjunction with this utility.
 --		Add any applicable lines in your update function to use enabled utility aspects.
 --		The available booleans and functions are described in this utility just above
---      the function where they are used. If you are here trying to use this utility, then 
---		you will probably want to read the code that applies to the aspect you are 
+--      the function where they are used. If you are here trying to use this utility, then
+--		you will probably want to read the code that applies to the aspect you are
 --		interested in using.
 --	Motivation
 --		I'm mainly writing this for myself. I find I spend a significant amount of time
@@ -45,7 +45,7 @@
 --					return friendliness
 --				end
 --		handleEnemiesInRange - returns true if a message is sent about enemies being
---			too close to allow communication with the station. 
+--			too close to allow communication with the station.
 --			See handle_enemies_in_short_range boolean below.
 --			Example:
 --			function handleEnemiesInRange()
@@ -59,7 +59,7 @@
 --				end
 --			end
 --	Booleans to set outside of this utility to control this utility. Default is false
---		fixed_ordnance_cost - sets the price for ordnance to fixed values. Default (false) 
+--		fixed_ordnance_cost - sets the price for ordnance to fixed values. Default (false)
 --			is to set ordnance to range appropriate random values.
 --		fixed_service_cost - sets the price for services to fixed values. Default (false)
 --			is to set service costs to range appropriate random values.
@@ -905,7 +905,7 @@ function addStationToDatabase(station)
 	temp_artifact:destroy()
 end
 --	Booleans to set outside of this utility to control this utility. Default is false
---		include_major_systems_repair_in_status - set true if you want the status report 
+--		include_major_systems_repair_in_status - set true if you want the status report
 --			to include a list of major systems that can be repaired at the station, eg
 --			reactor, impulse, missiles, beams, shields, warp, jump, maneuver
 --		include_minor_systems_repair_in_status - set true if you want the status report
@@ -1166,7 +1166,7 @@ function catalogImprovements(msg)
 		msg = string.format("%s\n%s",msg,comms_target.energy_fail_reason)
 		table.insert(improvements,"energy")
 	end
-	if include_ordnance_in_status then 
+	if include_ordnance_in_status then
 		local provides_some_missiles = false
 		local missile_provision_msg = _("situationReport-comms","Ordnance available:")
 		local missile_types_desc = {
@@ -1477,7 +1477,7 @@ end
 --	Booleans to set outside of this utility to control this utility. Default is false
 --		snub_if_less_friendly - if station friendliness is greater than 33, interact
 --			normally with station relay officer, otherwise use automated station
---			communication. Default is normal relay officer interaction. 
+--			communication. Default is normal relay officer interaction.
 function handleUndockedState()
 	local short_range_radar = comms_target:getShortRangeRadarRange()
 	local station_greeting_prompt = {
@@ -1641,7 +1641,7 @@ end
 --		defense_fleet_button - set true if players can launch station defense fleet
 --		service_jonque_button - set true if players can request a service jonque. This
 --			functionality requires additions to the update function
---		expedite_dock_button - set true if players can request an expedited dock. This 
+--		expedite_dock_button - set true if players can request an expedited dock. This
 --			functionality requires additions to the update function
 --		stellar_cartography_button - set true if stations support stellar cartography
 --		stations_sell_goods - set true if stations sell goods to players for reputation
@@ -1652,7 +1652,7 @@ end
 --		stations_support_cargo_missions - set true if stations handle cargo missions
 --			Note: cargo missions usually require transport missions
 --	Functions you may want to set up outside of this utility
---		scenarioMissionsUndocked - This allows the scenario writer to add situational 
+--		scenarioMissionsUndocked - This allows the scenario writer to add situational
 --			comms options to interactive undocked station comms for the scenario
 function interactiveUndockedStationComms()
 	stationStatusReport()
@@ -3389,7 +3389,7 @@ end
 --		stations_support_cargo_missions - set true if stations handle cargo missions
 --			Note: cargo missions usually require transport missions
 --	Functions you may want to set up outside of this utility
---		scenarioUndockedCommercialOptions - This allows the scenario writer to add comms 
+--		scenarioUndockedCommercialOptions - This allows the scenario writer to add comms
 --			options to the undocked commercial options for the scenario
 function commercialOptions()
 	local commercial_options_prompt = {
@@ -4634,7 +4634,7 @@ end
 --			Note: cargo missions usually require transport missions
 --	Functions you may want to set up outside of this utility
 --		scenarioMissions - returns a number representing how many addCommsReply options
---			were given to the user. This allows the scenario writer to add situational 
+--			were given to the user. This allows the scenario writer to add situational
 --			comms options to the dispatch office for the scenario
 function dispatchOffice()
 	local mission_select_prompts = {
@@ -4700,7 +4700,7 @@ function transportAndCargoMissions()
 					string.format(_("station-comms","Inform %s of arrival at %s"),comms_source.transport_mission.character.name,comms_target:getCallSign()),
 				}
 				addCommsReply(tableSelectRandom(who_destination_prompts),function()
-					if not comms_source:isDocked(comms_target) then 
+					if not comms_source:isDocked(comms_target) then
 						local stay_docked_to_disembark = {
 							_("station-comms","You need to stay docked for that action."),
 							string.format(_("station-comms","You need to stay docked for %s to disembark."),comms_source.transport_mission.character.name),
@@ -5008,7 +5008,7 @@ function transportAndCargoMissions()
 						string.format(_("station-comms","Unload cargo to %s and inform %s"),comms_target:getCallSign(),comms_source.cargo_mission.character.name),
 					}
 					addCommsReply(tableSelectRandom(cargo_delivery_prompts),function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							local stay_docked_to_deliver = {
 								_("station-comms","You need to stay docked for that action."),
 								string.format(_("station-comms","You need to stay docked to deliver %s's cargo."),comms_source.cargo_mission.character.name),
@@ -5052,7 +5052,7 @@ function transportAndCargoMissions()
 						string.format(_("station-comms","Load cargo on %s for %s"),comms_source:getCallSign(),comms_source.cargo_mission.character.name),
 					}
 					addCommsReply(tableSelectRandom(mid_cargo_mission_pickup_prompts),function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							local stay_docked_to_get_cargo = {
 								_("station-comms","You need to stay docked for that action."),
 								string.format(_("station-comms","You need to stay docked to get %s's cargo."),comms_source.cargo_mission.character.name),
@@ -5256,7 +5256,7 @@ function transportAndCargoMissions()
 					string.format(_("station-comms","Inform %s that %s will get %s cargo"),comms_target.cargo_mission.character.name,comms_source:getCallSign(),comms_target.cargo_mission.character.possessive_adjective)
 				}
 				addCommsReply(tableSelectRandom(agree_to_cargo_mission),function()
-					if not comms_source:isDocked(comms_target) then 
+					if not comms_source:isDocked(comms_target) then
 						local stay_docked_to_start_cargo_mission = {
 							_("station-comms","You need to stay docked for that action."),
 							string.format(_("station-comms","You need to stay docked to agree to get %s's cargo."),comms_source.transport_mission.character.name),
@@ -5672,10 +5672,10 @@ function restockShip()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
+		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or
+			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or
+			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or
+			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or
 			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
 				restockOrdnance()
 		end
@@ -5736,7 +5736,7 @@ function restockOrdnance()
 	end)
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		local stay_docked_for_weapons_restock = {
 			_("ammo-comms","You need to stay docked for that action."),
 			string.format(_("ammo-comms","You need to stay docked to get weapon restock from %s."),comms_target:getCallSign()),
@@ -5964,7 +5964,7 @@ function getRepairCrewFromStation()
 					string.format(_("trade-comms","Spend %i reuptation to hire repair crew member"),hire_cost),
 				}
 				addCommsReply(tableSelectRandom(recruit_repair_crew_prompt), function()
-					if not comms_source:isDocked(comms_target) then 
+					if not comms_source:isDocked(comms_target) then
 						local stay_docked_to_get_repair_crew = {
 							_("trade-comms","You need to stay docked for that action."),
 							_("trade-comms","You need to stay docked to hire repair crew."),
@@ -6067,7 +6067,7 @@ function getCoolantFromStation()
 					string.format(_("trade-comms","Get coolant from %s for %i reputation"),comms_target:getCallSign(),coolant_cost),
 				}
 				addCommsReply(tableSelectRandom(purchase_coolant_prompts),function()
-					if not comms_source:isDocked(comms_target) then 
+					if not comms_source:isDocked(comms_target) then
 						local stay_docked_to_get_coolant = {
 							_("trade-comms","You need to stay docked for that action."),
 							_("trade-comms","You need to stay docked to get coolant."),
@@ -6578,7 +6578,7 @@ end
 --		add_repair_crew - set true if players can get more repair crew from stations
 --		add_coolant - set true if players can get more coolant from stations
 --	Functions you may want to set up outside of this utility
---		scenarioShipEnhancements - define any functions specific to the scenario that 
+--		scenarioShipEnhancements - define any functions specific to the scenario that
 --		enhance the player ship capabilities
 function enhanceShip()
 	local enhance_type_prompt = {
@@ -6762,7 +6762,7 @@ function upgradeShip()
 										if provide.trade then
 											for j, trade_good in ipairs(trade_good_list) do
 												addCommsReply(string.format(_("upgrade-comms","Trade (%s)"),trade_good),function()
-													if not comms_source:isDocked(comms_target) then 
+													if not comms_source:isDocked(comms_target) then
 														local stay_docked_to_trade = {
 															_("trade-comms","You need to stay docked for that action."),
 															_("trade-comms","You need to stay docked to trade for upgrade."),
@@ -6797,7 +6797,7 @@ function upgradeShip()
 											end
 										else	--upgrade types other than trade
 											addCommsReply(string.format(provide.prompt,provide.cost),function()
-												if not comms_source:isDocked(comms_target) then 
+												if not comms_source:isDocked(comms_target) then
 													local stay_docked_to_upgrade = {
 														_("upgrade-comms","You need to stay docked for that action."),
 														_("upgrade-comms","You need to stay docked to upgrade."),
@@ -7899,7 +7899,7 @@ function minorUpgrades()
 	end
 end
 --	Functions you may want to set up outside of this utility
---		scenarioGoodsCommerce - Allows the scenario writer to add situational 
+--		scenarioGoodsCommerce - Allows the scenario writer to add situational
 --			comms options to goods commerce for the scenario
 function goodsCommerce()
 	if good_desc == nil then
@@ -8019,7 +8019,7 @@ function goodsCommerce()
 							break
 						end
 					end
-				end 
+				end
 			end
 			if trade_match then
 				local trade_goods_prompts = {
@@ -8094,7 +8094,7 @@ function buyGoodsFromStation()
 				string.format(_("trade-comms","Purchase %s for %i reputation"),good_desc[good],good_data["cost"]),
 			}
 			addCommsReply(tableRemoveRandom(buy_goods_at_price_prompts), function()
-				if not comms_source:isDocked(comms_target) then 
+				if not comms_source:isDocked(comms_target) then
 					local stay_docked_to_buy = {
 						_("trade-comms","You need to stay docked for that action."),
 						_("trade-comms","You need to stay docked to buy."),
@@ -8216,7 +8216,7 @@ function sellGoodsToStation()
 					string.format(_("trade-comms","For %s reputation, sell a %s"),price,good_desc[good]),
 				}
 				addCommsReply(tableRemoveRandom(sell_a_good_prompt), function()
-					if not comms_source:isDocked(comms_target) then 
+					if not comms_source:isDocked(comms_target) then
 						local stay_docked_to_sell = {
 							_("trade-comms","You need to stay docked for that action."),
 							_("trade-comms","You need to stay docked to sell."),
@@ -9243,7 +9243,7 @@ function enemyComms()
 		local taunt_threshold = 30		--base chance of being taunted
 		local immolation_threshold = 5	--base chance that taunting will enrage to the point of revenge immolation
 		local faction_taunt_options = {
-			["Kraylor"] = {threshold = 35, immolation = 6, 
+			["Kraylor"] = {threshold = 35, immolation = 6,
 				hail_response = {
 					_("shipEnemy-comms", "Ktzzzsss.\nYou will DIEEee weaklingsss!"),
 					_("shipEnemy-comms", "Prepare to suffer at our handssss!"),
@@ -9521,7 +9521,7 @@ function getEnemyHealth(enemy)
 		enemy_jump = 1
 	end
 	if faction == "Kraylor" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .3	+
 			enemy_hull		* .4	+
 			enemy_reactor	* .1 	+
@@ -9532,7 +9532,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .03	+
 			enemy_jump		* .03
 	elseif faction == "Arlenians" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .45	+
 			enemy_reactor	* .05 	+
@@ -9543,7 +9543,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .02	+
 			enemy_jump		* .02	
 	elseif faction == "Exuari" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .2	+
 			enemy_hull		* .3	+
 			enemy_reactor	* .2 	+
@@ -9554,7 +9554,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .05	+
 			enemy_jump		* .05	
 	elseif faction == "Ghosts" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .25	+
 			enemy_hull		* .25	+
 			enemy_reactor	* .25 	+
@@ -9565,7 +9565,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .04	+
 			enemy_jump		* .04	
 	elseif faction == "Ktlitans" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .2	+
 			enemy_hull		* .3	+
 			enemy_reactor	* .1 	+
@@ -9576,7 +9576,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .1	+
 			enemy_jump		* .1	
 	elseif faction == "TSN" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .35	+
 			enemy_reactor	* .08 	+
@@ -9587,7 +9587,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .08	+
 			enemy_jump		* .08	
 	elseif faction == "USN" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .38	+
 			enemy_hull		* .38	+
 			enemy_reactor	* .05 	+
@@ -9598,7 +9598,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .05	+
 			enemy_jump		* .05	
 	elseif faction == "CUF" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .38	+
 			enemy_reactor	* .05 	+
@@ -9609,7 +9609,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .06	+
 			enemy_jump		* .04	
 	else
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .3	+
 			enemy_hull		* .4	+
 			enemy_reactor	* .06 	+
@@ -11291,14 +11291,14 @@ function updatePlayerInventoryButtonUtility(p)
 	end
 	if good_count > 0 then
 		p.inventory_button_rel = "inventory_button_rel"
-		p:addCustomButton("Relay",p.inventory_button_rel,_("inventory-buttonRelay","Inventory"),function() 
+		p:addCustomButton("Relay",p.inventory_button_rel,_("inventory-buttonRelay","Inventory"),function()
 			string.format("")
 			local out = playerShipCargoInventory(p)
 			p.inventory_message_rel = "inventory_message_rel"
 			p:addCustomMessage("Relay",p.inventory_message_rel,out)
 		end,23)
 		p.inventory_button_ops = "inventory_button_ops"
-		p:addCustomButton("Operations",p.inventory_button_ops,_("inventory-buttonOperations","Inventory"),function() 
+		p:addCustomButton("Operations",p.inventory_button_ops,_("inventory-buttonOperations","Inventory"),function()
 			string.format("")
 			local out = playerShipCargoInventory(p)
 			p.inventory_message_ops = "inventory_message_ops"

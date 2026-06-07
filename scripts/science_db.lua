@@ -15,8 +15,8 @@ item:setLongDescription(_([[An asteroid is a minor planet, usually smaller than 
 item:setModelDataName("astroid_1")
 
 local item = space_objects:addEntry(_('Black hole'))
-item:setLongDescription(_([[A black hole is a point of supercondensed mass with a gravitational pull so powerful that not even light can escape it. It has no locally detectable features, and can only be seen indirectly by blocking the view and distorting its surroundings, creating a strange circular mirror image of the galaxy. The black disc in the middle marks the event horizon, the boundary where even light can't escape it anymore. 
-  
+item:setLongDescription(_([[A black hole is a point of supercondensed mass with a gravitational pull so powerful that not even light can escape it. It has no locally detectable features, and can only be seen indirectly by blocking the view and distorting its surroundings, creating a strange circular mirror image of the galaxy. The black disc in the middle marks the event horizon, the boundary where even light can't escape it anymore.
+
 On the sensors, a black hole appears as a disc indicating the zone where the gravitational pull is getting dangerous, and soon will be stronger then the ship's impulse engines. An object that crosses a black hole is drawn toward its center and quickly ripped apart by the gravitational forces.]]))
 --item:setModelDataName("black_hole")
 item:setImage('images/black_hole_wireframe.jpg')
@@ -33,7 +33,7 @@ Planets often have gaseous atmospheres, and some are orbited by one or more larg
 item:setModelDataName("planet_showcase")
 
 local item = space_objects:addEntry(_('Wormhole'))
-item:setLongDescription(_([[A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that connects two points of spacetime. Jump drives operate in a similar fashion, but instead of being created at will, a wormhole occupies a specific location in space. Objects that enter a wormhole instantaneously emerge from the other end, which might be anywhere from a few feet to thousands of light years away. 
+item:setLongDescription(_([[A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that connects two points of spacetime. Jump drives operate in a similar fashion, but instead of being created at will, a wormhole occupies a specific location in space. Objects that enter a wormhole instantaneously emerge from the other end, which might be anywhere from a few feet to thousands of light years away.
 
 Wormholes are rare, and most can move objects in only one direction. Traversable wormholes, which are stable and allow for movement in both directions, are even rarer. All wormholes generate tremendous sensor activity, which an astute science officer can detect even through disruptions such as nebulae.]]))
 item:setImage('images/wormhole.jpg')
@@ -408,7 +408,7 @@ function __fillDefaultDatabaseData()
         end
       end
 
-      --[[ TODO 
+      --[[ TODO
       for(int n=0; n < MW_Count; n++)
       {
         if (ship_template->weapon_storage[n] > 0)

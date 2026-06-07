@@ -32,14 +32,14 @@ require("utils.lua")
 --   distance(a, b, c, d)
 --      Returns the distance between two objects/coordinates
 --   angleRotation(a, b, c, d)
---      Returns the bearing between first object/coordinate and second object/coordinate. 
+--      Returns the bearing between first object/coordinate and second object/coordinate.
 
 -- Global variables for this scenario
 local enemyList
 local friendlyList
 local stationList
 local playerList
-local addWavesToGMPosition      -- If set to true, add wave will require GM to click on the map to position, where the wave should be spawned. 
+local addWavesToGMPosition      -- If set to true, add wave will require GM to click on the map to position, where the wave should be spawned.
 
 local gametimeleft = nil -- Maximum game time in seconds.
 local timewarning = nil -- Used for checking when to give a warning, and to update it so the warning happens once.
@@ -125,7 +125,7 @@ local ship_names = {
 -- @tparam number d The spawned wave's distance from the players' spawn point (ignored when on GM positioning).
 function addWave(list, kind, a, d)
     if addWavesToGMPosition then
-        onGMClick(function(x,y) 
+        onGMClick(function(x,y)
             onGMClick(nil)
             addWaveInner(list, kind, angleRotation(0, 0, x, y), distance(0, 0, x, y))
         end)
@@ -211,15 +211,15 @@ function gmButtons()
             randomWaveDistance(math.random(20))
         )
     end)
-    
+
     -- Let the GM spawn random reinforcements. Their distance from the
     -- players' spawn point is about half that of enemy waves.
     addGMFunction(_("buttonGM", "Random friendly"), function()
         local friendlyShip = {"Phobos T3", "MU52 Hornet", "Piranha F12"}
         local friendlyShipIndex = math.random(#friendlyShip)
-        
+
         if addWavesToGMPosition then
-            onGMClick(function(x,y) 
+            onGMClick(function(x,y)
                 onGMClick(nil)
                 local a = angleRotation(0, 0, x, y)
                 local d = distance(0, 0, x, y)
@@ -231,18 +231,18 @@ function gmButtons()
             table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
         end
     end)
-        
+
     addGMPositionToggle()
-    
+
     -- End scenario with Human Navy (players) victorious.
     addGMFunction(_("buttonGM", "Win"),gmVictoryYesNo)
 end
 
---- Shows Yes/No question dialogue GM submenu with question if Human Navy should win. 
+--- Shows Yes/No question dialogue GM submenu with question if Human Navy should win.
 function gmVictoryYesNo()
     clearGMFunctions()
     addGMFunction(_("buttonGM", "Victory?"), function() string.format("") end)
-    addGMFunction(_("buttonGM", "Yes"), function() 
+    addGMFunction(_("buttonGM", "Yes"), function()
         victory("Human Navy")
         clearGMFunctions()
         addGMMessage(_("msgGM", [[Players have won.
@@ -251,7 +251,7 @@ Scenario ended.]]))
     addGMFunction(_("buttonGM", "No"), gmButtons)
 end
 
---- Generate GM Toggle button for changing wave positioning variant. 
+--- Generate GM Toggle button for changing wave positioning variant.
 function addGMPositionToggle()
     local name = _("buttonGM", "Position: ")
 
@@ -306,7 +306,7 @@ function init()
     onNewPlayerShip(function(ship)
         table.insert(playerList, ship)
     end)
-    
+
     addWavesToGMPosition = false
 
     -- Randomly distribute 3 allied stations throughout the region.
@@ -617,7 +617,7 @@ function update(delta)
         setBanner(text)
         return
     end
-    
+
     -- Set banner for cinematic and top down views.
     if gametimeleft ~= nil then
         setBanner(string.format(_("msgSpectbanner", "Mission in progress - Time left: %d:%02d - Enemies: %d"), math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count))
