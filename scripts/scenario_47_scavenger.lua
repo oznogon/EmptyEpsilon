@@ -65,7 +65,8 @@ function init()
 	first_station.comms_data.weapon_available.Homing = true
 	first_station.comms_data.weapon_available.EMP = true
 	first_station.comms_data.weapon_available.Nuke = true
-	first_station.comms_data.weapon_cost = {Homing = 2, HV, HVLI = math.random(1,3), Mine = math.random(2,5), Nuke = 12, EMP = 9}
+	-- The bare identifier "HV" created an indexed entry [1] = nil in the table, causing nil-access errors
+	first_station.comms_data.weapon_cost = {Homing = 2, HVLI = math.random(1,3), Mine = math.random(2,5), Nuke = 12, EMP = 9}
 --	print("init: place first enemy station")
 	--place first enemy station for first mission 
 	exuari_station = {}
@@ -2668,7 +2669,8 @@ function handleDockedState()
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good_desc[good]), function()
 						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good_desc[good],goodData["quantity"])
-						if goodData[quantity] < 1 then
+						-- quantity is a bare variable (nil here) instead of the string key "quantity"
+						if goodData["quantity"] < 1 then
 							goodTransactionMessage = string.format(_("trade-comms", "%s\nInsufficient station inventory"),goodTransactionMessage)
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
