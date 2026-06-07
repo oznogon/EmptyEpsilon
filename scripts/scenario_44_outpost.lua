@@ -1607,7 +1607,8 @@ function constructEnvironment()
 	table.insert(place_space,{obj=station_regional_hq,dist=1000,shape="circle"})
 	local defense_platform_angle = random(0,360)
 	local dp_x, dp_y = vectorFromAngle(defense_platform_angle,3000)
-	local dp = CpuShip():setTemplate("Defense platform"):setFaction(player_faction):setPosition(center_x + dp_x, center_y + dp_y):setScanState("fullscan"):orderStandGround()
+	-- "fullscan" is not a valid scan state; valid states are "none", "simple", "full", and "friendorfoeidentified"
+	local dp = CpuShip():setTemplate("Defense platform"):setFaction(player_faction):setPosition(center_x + dp_x, center_y + dp_y):setScanState("full"):orderStandGround()
 	player_spawn_x, player_spawn_y = vectorFromAngleNorth(random(-20,20)+defense_platform_angle,random(-300,300)+1500)
 	player_spawn_x = player_spawn_x + center_x
 	player_spawn_y = player_spawn_y + center_y
@@ -4224,7 +4225,8 @@ function handleDockedState()
 											return
 										end
 										local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
-										if goodData[quantity] < 1 then
+										-- quantity is a bare variable (nil here) instead of the string key "quantity"
+										if goodData["quantity"] < 1 then
 											goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 										else
 											goodData["quantity"] = goodData["quantity"] - 1
@@ -8012,7 +8014,8 @@ function updatePlayerProximityScan(p)
 	if obj_list ~= nil and #obj_list > 0 then
 		for _, obj in ipairs(obj_list) do
 			if obj:isValid() and isObjectType(obj,"CpuShip") and not obj:isFullyScannedBy(p) then
-				obj:setScanState("simplescan")
+				-- "simplescan" is not a valid scan state; valid states include "simple"
+				obj:setScanState("simple")
 			end
 		end
 	end
