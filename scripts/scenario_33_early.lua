@@ -2729,8 +2729,9 @@ function playerDestroyed(self, instigator)
 	end
 	print(string.format("!WHACK!  %s has been destroyed%s! Will respawn automatically",self:getCallSign(),culprit))
 	globalMessage(string.format(_("msgMainscreen","%s has been destroyed%s! Respawning"),self:getCallSign(),culprit))
+	-- pidx was nil in this scope; should use the loop variable i instead
 	for i=1,32 do
-		local p = getPlayerShip(pidx)
+		local p = getPlayerShip(i)
 		if p ~= nil and p:isValid() and p ~= self then
 			if p:getFaction() == faction then
 				p:addToShipLog(string.format(_("shipLog","%s has been destroyed%s! All crew lost. Rest in peace"),self:getCallSign(),culprit),"Red")
