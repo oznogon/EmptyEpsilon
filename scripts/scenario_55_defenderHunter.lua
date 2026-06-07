@@ -609,7 +609,8 @@ function moveNebulae()
 			local deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10)
 			if angleChange then
 				deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10+20)
-				movingNebulae.travel = random(1,100)
+			-- missing [nidx] index — set property on table instead of indexed nebula, so nebula movement was never updated
+				movingNebulae[nidx].travel = random(1,100)
 			end
 			movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
 		end
@@ -2372,7 +2373,8 @@ function handleDockedState()
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
-						if goodData[quantity] < 1 then
+						-- quantity is a bare variable (nil here) instead of the string key "quantity"
+						if goodData["quantity"] < 1 then
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
