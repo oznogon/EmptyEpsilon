@@ -113,7 +113,7 @@ variation:setHull(60)
 variation:setShields(40, 30)
 variation:setSpeed(65, 12, 10)
 
-template = ShipTemplate():setName("Storm"):setLocaleName(_("ship", "Storm")):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Heavy Artillery")):setModel("HeavyCorvetteYellow")	--Yellow, Green, Blue, White, Red
+template = ShipTemplate():setName("Storm"):setLocaleName(_("ship", "Storm")):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Heavy Artillery")):setModel("HeavyCorvetteYellow")  --Yellow, Green, Blue, White, Red
 template:setRadarTrace("piranha.png")
 template:setDescription(_([[A heavy artillery cruiser, the Storm fires bunches of missiles from forward facing tubes.]]))
 template:setBeamWeapon(0, 60, 0, 1200, 3, 2)
@@ -133,7 +133,7 @@ template:setDefaultAI('missilevolley')
 template = ShipTemplate():setName("Hathcock"):setLocaleName(_("playerShip", "Hathcock")):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Sniper")):setModel("HeavyCorvetteGreen"):setType("playership")
 template:setRadarTrace("piranha.png")
 template:setDescription(_("Long range narrow beam and some point defense beams, broadside missiles. Agile for a frigate"))
---						Arc, Dir, Range, CycleTime, Dmg
+--            Arc, Dir, Range, CycleTime, Dmg
 template:setBeamWeapon(0, 4,   0, 1400.0, 6.0, 4)
 template:setBeamWeapon(1,20,   0, 1200.0, 6.0, 4)
 template:setBeamWeapon(2,60,   0, 1000.0, 6.0, 4)
@@ -152,7 +152,7 @@ template:setTubeDirection(0, -90)
 template:setTubeDirection(1,  90)
 
 template:setRepairCrewCount(2)
---	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
+--  (H)oriz, (V)ert     HC,VC,HS,VS, system    (C)oordinate (S)ize
 template:addRoomSystem( 0, 0, 1, 4, "Reactor")
 template:addRoomSystem( 1, 0, 1, 1, "JumpDrive")
 template:addRoomSystem( 1, 3, 1, 1, "Warp")
@@ -375,7 +375,7 @@ template:setSpeed(55, 9, 10)
 --                 Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 10, 90, 1200.0, 6.0, 5)
 template:setBeam(1, 10,-90, 1200.0, 6.0, 5)
---								Arc, Dir, Rotate speed
+--                Arc, Dir, Rotate speed
 template:setBeamWeaponTurret(0, 200,  90, 5)
 template:setBeamWeaponTurret(1, 200, -90, 5)
 template:setJumpDrive(true)
@@ -387,7 +387,7 @@ template:setWeaponStorage("HVLI", 6)
 template:setWeaponStorage("Homing", 4)
 
 template:setRepairCrewCount(8)
---	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
+--  (H)oriz, (V)ert     HC,VC,HS,VS, system    (C)oordinate (S)ize
 template:addRoomSystem( 0, 1, 2, 4, "Impulse")
 template:addRoomSystem( 2, 0, 2, 2, "RearShield")
 template:addRoomSystem( 2, 2, 2, 2, "Warp")
@@ -415,8 +415,8 @@ template = ShipTemplate():setName("Fiend G3"):setLocaleName(_("ship", "Fiend G3"
 template:setRadarTrace("adv_gunship.png")
 template:setDescription(_([[The Fiend G3 was the first model produced by Conversions R Us. They got a good deal on a number of used Gunships. They added a cheap jump drive to the Gunship and viola! they made the Fiend G3. Like the Gunship, it has a homing missile tube and beams to readily take down weaker ships. With the jump drive, it becomes quite a bit more dangerous than the stock Gunship.]]))
 --                 Arc, Dir,  Range,  CycleTime, Dmg
-template:setBeam(0, 50, -15, 1000.0,		6.0, 8)
-template:setBeam(1, 50,  15, 1000.0,		6.0, 8)
+template:setBeam(0, 50, -15, 1000.0,    6.0, 8)
+template:setBeam(1, 50,  15, 1000.0,    6.0, 8)
 template:setTubes(1, 8.0)
 template:setHull(100)
 template:setShields(100, 80, 80)

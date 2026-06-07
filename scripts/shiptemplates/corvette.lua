@@ -170,7 +170,7 @@ template:setBeam(2, 90,  20, 1500.0, 6.0, 8)
 template:setBeam(3, 40, -70, 1000.0, 4.0, 6)
 template:setBeam(4, 40,  70, 1000.0, 4.0, 6)
 template:setBeam(5, 10, 180,  800.0, 6.0, 4)
---								Arc, Dir, Rotate speed
+--                Arc, Dir, Rotate speed
 template:setBeamWeaponTurret(5, 180, 180, .5)
 template:setTubes(3, 8.0)
 template:setWeaponStorage("HVLI", 10)
@@ -365,17 +365,17 @@ template:setShields(90, 90)
 template:setSpeed(80, 10, 20)
 template:setJumpDrive(true)
 template:setCombatManeuver(400, 250)
-template:setExternalDockClasses(_("class", "Frigate"))		--frigates dock outside
-template:setInternalDockClasses(_("class", "Starfighter"))	--there's room inside for starfighters
+template:setExternalDockClasses(_("class", "Frigate"))    --frigates dock outside
+template:setInternalDockClasses(_("class", "Starfighter"))  --there's room inside for starfighters
 template:setSharesEnergyWithDocked(false)
 template:setRepairDocked(true)
 template:setRestocksScanProbes(false)
-template:setRestocksMissilesDocked(true)	--applies to docking CPUShips only, not player ships
+template:setRestocksMissilesDocked(true)  --applies to docking CPUShips only, not player ships
 --                  Arc, Dir,  Range, CycleTime, Dmg
-template:setBeam(0, 120, -40, 1000.0,		6.0, 6)
-template:setBeam(1, 120,  40, 1000.0,		6.0, 6)
-template:setBeam(2,  10, 180,  800.0,		6.0, 4)
---								Arc, Dir, Rotate speed
+template:setBeam(0, 120, -40, 1000.0,    6.0, 6)
+template:setBeam(1, 120,  40, 1000.0,    6.0, 6)
+template:setBeam(2,  10, 180,  800.0,    6.0, 4)
+--                Arc, Dir, Rotate speed
 template:setBeamWeaponTurret(2,  60, 180, 0.5)
 template:setTubes(5, 8.0) -- Amount of torpedo tubes, and default loading time of the tubes.
 template:setTubeDirection(0,  0):setTubeSize(0, "small"):setTubeLoadTime(0, 6):setWeaponTubeExclusiveFor(0,"HVLI")
@@ -390,9 +390,9 @@ template:setWeaponStorage("EMP",    6)
 template:setWeaponStorage("HVLI",   16)
 
 template:setRepairCrewCount(5)
---	HC:Horizontal Coordinate (x), VC:Vertical Coordinate (y)
---	HS:Horizontal Size, VS:Vertical Size
---					  HC,VC,HS,VS, system 
+--  HC:Horizontal Coordinate (x), VC:Vertical Coordinate (y)
+--  HS:Horizontal Size, VS:Vertical Size
+--            HC,VC,HS,VS, system 
 template:addRoomSystem(0, 0, 4, 1, "Maneuver")
 template:addRoomSystem(1, 1, 2, 2, "Impulse")
 template:addRoomSystem(3, 2, 3, 1, "Warp")
@@ -403,7 +403,7 @@ template:addRoomSystem(1, 5, 2, 2, "Reactor")
 template:addRoomSystem(3, 5, 3, 1, "MissileSystem")
 template:addRoom(6, 5, 2, 1)
 template:addRoomSystem(0, 7, 4, 1, "RearShield")
---				HC,VC, true = horizontal door, false = vertical door
+--        HC,VC, true = horizontal door, false = vertical door
 template:addDoor(1, 1, true)
 template:addDoor(2, 3, true)
 template:addDoor(3, 3, true)

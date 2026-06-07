@@ -21,7 +21,7 @@ require("tutorial/00_all.lua")
 function tutorial_init()
     tutorial_list = {
         mainscreenTutorial,
-		radarTutorial,
+    radarTutorial,
         endOfTutorial
     }
     startTutorial()

@@ -18,31 +18,31 @@ require("ee.lua")
 
 --- Ship creation functions
 function createExuariWeakInterceptor()
-	return CpuShip():setFaction("Exuari"):setTemplate("Dagger"):setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
+  return CpuShip():setFaction("Exuari"):setTemplate("Dagger"):setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
 end
 
 function createExuariWeakBomber()
-	return CpuShip():setFaction("Exuari"):setTemplate("Gunner"):setWeaponTubeCount(0):setWeaponStorageMax(MISSILE_HVLI, 0):setWeaponStorage(MISSILE_HVLI, 0):setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
+  return CpuShip():setFaction("Exuari"):setTemplate("Gunner"):setWeaponTubeCount(0):setWeaponStorageMax(MISSILE_HVLI, 0):setWeaponStorage(MISSILE_HVLI, 0):setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
 end
 
 function createExuariInterceptor()
-	return CpuShip():setFaction("Exuari"):setTemplate("Dagger")
+  return CpuShip():setFaction("Exuari"):setTemplate("Dagger")
 end
 
 function createExuariBomber()
-	return CpuShip():setFaction("Exuari"):setTemplate("Gunner"):setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
+  return CpuShip():setFaction("Exuari"):setTemplate("Gunner"):setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
 end
 
 function createExuariTransport()
-	return CpuShip():setFaction("Exuari"):setTemplate("Personnel Freighter 1"):setDescriptionForScanState("simple",_("scienceDescription-shipname","Exuari transport"))
+  return CpuShip():setFaction("Exuari"):setTemplate("Personnel Freighter 1"):setDescriptionForScanState("simple",_("scienceDescription-shipname","Exuari transport"))
 end
 
 function createExuariFreighter()
-	return CpuShip():setFaction("Exuari"):setTemplate("Goods Freighter 5"):setDescriptionForScanState("simple",_("scienceDescription-shipname","Exuari freighter"))
+  return CpuShip():setFaction("Exuari"):setTemplate("Goods Freighter 5"):setDescriptionForScanState("simple",_("scienceDescription-shipname","Exuari freighter"))
 end
 
 function createExuariShuttle()
-	return CpuShip():setFaction("Exuari"):setTemplate("Racer"):setDescriptionForScanState("simple",_("scienceDescription-shipname","Exuari shuttle")):setWarpDrive(false):setBeamWeapon(0, 0, 355, 0, 0.1, 0.1):setBeamWeapon(1, 0, 355, 0, 0.1, 0.1)
+  return CpuShip():setFaction("Exuari"):setTemplate("Racer"):setDescriptionForScanState("simple",_("scienceDescription-shipname","Exuari shuttle")):setWarpDrive(false):setBeamWeapon(0, 0, 355, 0, 0.1, 0.1):setBeamWeapon(1, 0, 355, 0, 0.1, 0.1)
 end
 
 

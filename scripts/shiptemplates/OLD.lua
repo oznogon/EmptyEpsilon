@@ -180,7 +180,7 @@ variation:setHull(100)
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 10,  35, 1000.0, 6.0, 6)
 variation:setBeam(1, 10, -35, 1000.0, 6.0, 6)
---								Arc, Dir, Rotate speed
+--                Arc, Dir, Rotate speed
 variation:setBeamWeaponTurret(0, 90,  35, 6)
 variation:setBeamWeaponTurret(1, 90, -35, 6)
 variation:setJumpDrive(true)
@@ -196,7 +196,7 @@ variation:setWeaponStorage("Nuke", 0)
 variation:setWeaponStorage("EMP", 0)
 
 variation:setRepairCrewCount(4)
---	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
+--  (H)oriz, (V)ert     HC,VC,HS,VS, system    (C)oordinate (S)ize
 variation:addRoomSystem( 0, 1, 1, 2, "Impulse")
 variation:addRoomSystem( 1, 0, 2, 1, "RearShield")
 variation:addRoomSystem( 1, 1, 2, 2, "JumpDrive")
@@ -229,7 +229,7 @@ template:setBeam(0, 60, 0, 1000.0, 4.0, 4)
 template:setHull(30)
 template:setShields(30)
 template:setSpeed(120, 30, 25)
-template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
+template:setDefaultAI('fighter')  -- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
 
 -- The cruiser is an average ship you can encounter, it has average shields, and average beams. It's pretty much average with nothing special.
 -- Karnack cruiser mark I
@@ -318,7 +318,7 @@ variation = template:copy("Striker"):setLocaleName(_("playerShip", "Striker")):s
 variation:setDescription(_("The Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields"))
 variation:setBeam(0, 10,-15, 1000.0, 6.0, 6)
 variation:setBeam(1, 10, 15, 1000.0, 6.0, 6)
---								  Arc, Dir, Rotate speed
+--                  Arc, Dir, Rotate speed
 variation:setBeamWeaponTurret( 0, 100, -15, 6)
 variation:setBeamWeaponTurret( 1, 100,  15, 6)
 variation:setHull(120)
@@ -403,7 +403,7 @@ variation:setBeam(8, 10, -90, 2500.0, 6.6, 4)
 variation:setBeam(9, 10, -90, 2500.0, 5.5, 4)
 variation:setBeam(10, 10,  90, 2500.0, 6.5, 4)
 variation:setBeam(11, 10,  90, 2500.0, 6.2, 4)
---								  Arc, Dir, Rotate speed
+--                  Arc, Dir, Rotate speed
 variation:setBeamWeaponTurret( 0, 120, -90, 6)
 variation:setBeamWeaponTurret( 1, 120, -90, 6)
 variation:setBeamWeaponTurret( 2, 120,  90, 6)

@@ -351,17 +351,17 @@ function missionTransportWaitForRecovery(delta)
         mission_timer = random(90, 120)
 
         if wait_enemy_count == nil then
-        	wait_enemy_count = 1
+          wait_enemy_count = 1
         end
         for i=1,wait_enemy_count do
-			local x, y = transport_target:getPosition()
-			local distance = random(8000, 12000)
-			local r = random(0, 360)
-			x = x + math.cos(r / 180 * math.pi) * distance
-			y = y + math.sin(r / 180 * math.pi) * distance
-			CpuShip():setTemplate("MT52 Hornet"):setFaction("Exuari"):setPosition(x, y):orderAttack(player)
-		end
-		wait_enemy_count = wait_enemy_count + 1
+      local x, y = transport_target:getPosition()
+      local distance = random(8000, 12000)
+      local r = random(0, 360)
+      x = x + math.cos(r / 180 * math.pi) * distance
+      y = y + math.sin(r / 180 * math.pi) * distance
+      CpuShip():setTemplate("MT52 Hornet"):setFaction("Exuari"):setPosition(x, y):orderAttack(player)
+    end
+    wait_enemy_count = wait_enemy_count + 1
     end
 
     if distance(transport_recovery_team, transport_target) < 1000 then

@@ -826,39 +826,39 @@ function InitPlayer()
 end
 
 function InitGM ()
-	clearGMFunctions()
-	addGMFunction(_("buttonGM","+Start Mission"),gmStartMission)
-	addGMFunction(_("buttonGM","+Finish Mission"),gmFinishMission)
-	addGMFunction(_("buttonGM","+Spawn Stuff"),gmSpawnStuff)
+  clearGMFunctions()
+  addGMFunction(_("buttonGM","+Start Mission"),gmStartMission)
+  addGMFunction(_("buttonGM","+Finish Mission"),gmFinishMission)
+  addGMFunction(_("buttonGM","+Spawn Stuff"),gmSpawnStuff)
 end
 function gmSpawnStuff()
-	clearGMFunctions()
-	addGMFunction(_("buttonGM","-From Spawn Stuff"),InitGM)
-	addGMFunction(_("buttonGM","Convoy Enemies"), SpawnConvoyEnemies)
-	addGMFunction(_("buttonGM","Harrasment"), SpawnHarrasment)
+  clearGMFunctions()
+  addGMFunction(_("buttonGM","-From Spawn Stuff"),InitGM)
+  addGMFunction(_("buttonGM","Convoy Enemies"), SpawnConvoyEnemies)
+  addGMFunction(_("buttonGM","Harrasment"), SpawnHarrasment)
 end
 function gmFinishMission()
-	clearGMFunctions()
-	addGMFunction(_("buttonGM","-From Finish Mission"),InitGM)
-	addGMFunction(_("buttonGM","Lost"),FinishMissionLost)
-	addGMFunction(_("buttonGM","Spare Parts"),FinishMissionSpareParts)
-	addGMFunction(_("buttonGM","Drone Nest"),FinishMissionDroneNest)
-	addGMFunction(_("buttonGM","Repair"),FinishMissionRepair)
+  clearGMFunctions()
+  addGMFunction(_("buttonGM","-From Finish Mission"),InitGM)
+  addGMFunction(_("buttonGM","Lost"),FinishMissionLost)
+  addGMFunction(_("buttonGM","Spare Parts"),FinishMissionSpareParts)
+  addGMFunction(_("buttonGM","Drone Nest"),FinishMissionDroneNest)
+  addGMFunction(_("buttonGM","Repair"),FinishMissionRepair)
 end
 function gmStartMission()
-	clearGMFunctions()
-	addGMFunction(_("buttonGM","-From Start Mission"),InitGM)
-	addGMFunction(_("buttonGM","Lost"), StartMissionLost)
-	addGMFunction(_("buttonGM","Patrol"),function ()
-		Defence_station.mission_state = "patrol attack"
-		SpawnPatrolEnemies()
-	end)
-	addGMFunction(_("buttonGM","Spare Parts"),StartMissionSpareParts)
-	addGMFunction(_("buttonGM","Drone Nest"), StartMissionDroneNest)
-	addGMFunction(_("buttonGM","Repair"), function ()
-		Wormhole_station.tier2_attack_countdown = 0
-		Wormhole_station.tier2_mission_state = "wait for attack"
-	end)
+  clearGMFunctions()
+  addGMFunction(_("buttonGM","-From Start Mission"),InitGM)
+  addGMFunction(_("buttonGM","Lost"), StartMissionLost)
+  addGMFunction(_("buttonGM","Patrol"),function ()
+    Defence_station.mission_state = "patrol attack"
+    SpawnPatrolEnemies()
+  end)
+  addGMFunction(_("buttonGM","Spare Parts"),StartMissionSpareParts)
+  addGMFunction(_("buttonGM","Drone Nest"), StartMissionDroneNest)
+  addGMFunction(_("buttonGM","Repair"), function ()
+    Wormhole_station.tier2_attack_countdown = 0
+    Wormhole_station.tier2_mission_state = "wait for attack"
+  end)
 end
 function InitDroneStations()
   Defence_station.drones_think_were_friendly = false
@@ -912,17 +912,17 @@ function InitTraffic()
   Traffic.new_ships = {}
   Traffic.factions = {'Independent', 'Independent', 'Independent', 'Independent', 'Arlenians', 'Arlenians', 'TSN'}
   Traffic.types = {'Atlantis', 'Transport1x2', 'Maverick', 'Kiriya', 'Hathcock', 'Flavia P.Falcon'}
-  Traffic.srcdest = {	--'J2','D0','B10','J8','zz1','zz6','zz8','D10','H11','K5'
-  	{x = -60000,	y = 80000},		--J2
-  	{x = -100000,	y = -40000},	--D0
-  	{x = 100000,	y = -80000},	--B10
-  	{x = 60000,		y = 80000},		--J8
-  	{x = -80000,	y = -120000},	--zz1
-  	{x = 20000,		y = -120000},	--zz6
-  	{x = 60000,		y = -120000},	--zz8
-  	{x = 100000,	y = -40000},	--D10
-  	{x = 120000,	y = 40000},		--H11
-  	{x = 0,			y = 100000},	--K5
+  Traffic.srcdest = {  --'J2','D0','B10','J8','zz1','zz6','zz8','D10','H11','K5'
+    {x = -60000,  y = 80000},    --J2
+    {x = -100000,  y = -40000},  --D0
+    {x = 100000,  y = -80000},  --B10
+    {x = 60000,    y = 80000},    --J8
+    {x = -80000,  y = -120000},  --zz1
+    {x = 20000,    y = -120000},  --zz6
+    {x = 60000,    y = -120000},  --zz8
+    {x = 100000,  y = -40000},  --D10
+    {x = 120000,  y = 40000},    --H11
+    {x = 0,      y = 100000},  --K5
   }
   Traffic.stations = {Admin_station, Defence_station, Wormhole_station, Colony_area_station}
   for idx, stn in ipairs(Patrol_stations) do
@@ -1013,10 +1013,10 @@ function SpawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
   if danger == nil then
     danger = 1
   end
-  local enemyStrength = math.max(danger * Difficulty * 10, 5)	--assume Player ship at strength 10 (balance variable)
+  local enemyStrength = math.max(danger * Difficulty * 10, 5)  --assume Player ship at strength 10 (balance variable)
   local enemyPosition = 0
-  local sp = irandom(500,800)			--random spacing of spawned group
-  local deployConfig = irandom(1,100)	--randomly choose between squarish formation and hexagonish formation
+  local sp = irandom(500,800)      --random spacing of spawned group
+  local deployConfig = irandom(1,100)  --randomly choose between squarish formation and hexagonish formation
   local enemyList = {}
   -- Reminder: stsl and stnl are ship template score and name list
   while enemyStrength > 0 do
@@ -1084,10 +1084,10 @@ function ConvoyGoAggro(__, instigator)
   if instigator ~= Player then return end
 
   if #Defence_station.convoy_enemies > 0 then
-  	if Player.aggro_message == nil then
-	    Defence_station:sendCommsMessage(Player, _("defenceStn-incCall", "It looks like you've aggro'd the convoy.\nGood luck to you! Try to keep them from destroying our stations!"))
-	    Player.aggro_message = "sent"
-	end
+    if Player.aggro_message == nil then
+      Defence_station:sendCommsMessage(Player, _("defenceStn-incCall", "It looks like you've aggro'd the convoy.\nGood luck to you! Try to keep them from destroying our stations!"))
+      Player.aggro_message = "sent"
+  end
   end
 
   Player:setFaction("Human Navy")
@@ -1127,7 +1127,7 @@ end
 function SpawnKWEnemies(start_aggro)
   if Difficulty >= 1 then
 --    local x, y = sectorToXY("AI23")
-	local reference_visual_asteroid = VisualAsteroid():setPosition(369999, 589207):setSize(118)
+  local reference_visual_asteroid = VisualAsteroid():setPosition(369999, 589207):setSize(118)
     local x, y = sectorToXY(reference_visual_asteroid:getSectorName())
     local enemies = SpawnEnemies(x, y, random(.8,1.2), "Kraylor")
     for idx, e in ipairs(enemies) do
@@ -1136,7 +1136,7 @@ function SpawnKWEnemies(start_aggro)
   end
   if Difficulty >= 3 then
 --    local x, y = sectorToXY("AG26")
-	local reference_visual_asteroid = VisualAsteroid():setPosition(429747, 550234):setSize(112)
+  local reference_visual_asteroid = VisualAsteroid():setPosition(429747, 550234):setSize(112)
     local x, y = sectorToXY(reference_visual_asteroid:getSectorName())
     local enemies = SpawnEnemies(x, y, random(.8,1.2), "Kraylor")
     for idx, e in ipairs(enemies) do
@@ -1145,7 +1145,7 @@ function SpawnKWEnemies(start_aggro)
   end
   if Difficulty == 5 then
 --    local x, y = sectorToXY("AI25")
-	local reference_visual_asteroid = VisualAsteroid():setPosition(410346, 589894):setSize(113)
+  local reference_visual_asteroid = VisualAsteroid():setPosition(410346, 589894):setSize(113)
     local x, y = sectorToXY(reference_visual_asteroid:getSectorName())
     local enemies = SpawnEnemies(x, y, random(.8,1.2), "Kraylor")
     for idx, e in ipairs(enemies) do

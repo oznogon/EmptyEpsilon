@@ -4,7 +4,7 @@ template:setRadarTrace("ktlitan_fighter.png")
 template:setBeam(0, 60, 0, 1200.0, 4.0, 6)
 template:setHull(70)
 template:setSpeed(140, 30, 25)
-template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
+template:setDefaultAI('fighter')  -- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
 
 template = ShipTemplate():setName("Ktlitan Breaker"):setLocaleName(_("ship", "Ktlitan Breaker")):setModel("sci_fi_alien_ship_2")
 template:setRadarTrace("ktlitan_breaker.png")

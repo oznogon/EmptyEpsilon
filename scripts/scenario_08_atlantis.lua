@@ -945,19 +945,19 @@ function update(delta)
 
     -- If the player enters the Kraylor defense line, or engages a forward station, attack with all forces.
     for idx, warp_jammer in ipairs(kraylor_defense_line) do
-		if warp_jammer ~= nil and warp_jammer:isValid() then
-			if distance(player, warp_jammer) < 6000 then
-				putKraylorDefenseLineOnFullOffense()
-			end
-		end
+    if warp_jammer ~= nil and warp_jammer:isValid() then
+      if distance(player, warp_jammer) < 6000 then
+        putKraylorDefenseLineOnFullOffense()
+      end
+    end
     end
 
     for idx, station in ipairs(kraylor_forward_line) do
-		if station ~= nil and station:isValid() then
-			if distance(player, station) < 3000 then
-				putKraylorDefenseLineOnFullOffense()
-			end
-		end
+    if station ~= nil and station:isValid() then
+      if distance(player, station) < 3000 then
+        putKraylorDefenseLineOnFullOffense()
+      end
+    end
     end
 
     if mission_state ~= nil then

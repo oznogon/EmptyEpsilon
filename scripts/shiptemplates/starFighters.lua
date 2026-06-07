@@ -101,20 +101,20 @@ var2 = variation:copy("Adder MK7"):setLocaleName(_("ship", "Adder MK7"))
 var2:setModel("AdlerLongRangeScoutGreen")
 var2:setDescription(_([[The release of the Adder Mark 7 sent the manufacturer into a second bankruptcy. They made improvements to the Mark 7 over the Mark 6 like stronger shields and longer beams, but the popularity of their previous models, especially the Mark 5, prevented them from raising the purchase price enough to recoup the development and manufacturing costs of the Mark 7]]))
 var2:setShields(40)
-var2:setBeam(0,	30,		0,	 900,	5.0,	2.0)
+var2:setBeam(0,  30,    0,   900,  5.0,  2.0)
 
 variation = template:copy("Adder MK8"):setLocaleName(_("ship", "Adder MK8"))
 variation:setModel("AdlerLongRangeScoutGreen")
 variation:setDescription(_([[New management after bankruptcy revisited their most popular Adder Mark 5 model with improvements: stronger shields, longer and stronger beams and a faster turn speed. Thus was born the Adder Mark 8 model. Targeted to the practical but nostalgic buyer who must purchase replacements for their Adder Mark 5 fleet]]))
 variation:setShields(50)
 variation:setSpeed(80, 30, 25)
-variation:setBeam(0,	30,		0,	 900,	5.0,	2.3)
+variation:setBeam(0,  30,    0,   900,  5.0,  2.3)
 
 variation = template:copy("Adder MK9"):setLocaleName(_("ship", "Adder MK9"))
 variation:setModel("AdlerLongRangeScoutRed")
 variation:setDescription(_([[Hot on the heels of the Adder Mark 8 comes the Adder Mark 9. Still using the Adder Mark 5 as a base, the designers provided stronger shields, stronger, longer and faster beams, faster turn speed and for that extra special touch, two nuclear missiles. As their ad says, 'You'll feel better in an Adder Mark 9.']]))
 variation:setShields(50)
-variation:setBeam(0,	30,		0,	 900,	4.5,	2.5)
+variation:setBeam(0,  30,    0,   900,  4.5,  2.5)
 variation:setSpeed(80, 30, 25)
 variation:setWeaponStorage("Nuke", 2)
 
@@ -147,7 +147,7 @@ variation:setWeaponStorage("HVLI", 12)
 variation:setWeaponStorage("Homing", 3)
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 10, 180, 700, 6.0, 2)
---								  Arc, Dir, Rotate speed
+--                  Arc, Dir, Rotate speed
 variation:setBeamWeaponTurret( 0, 270, 180, 4)
 variation:setCombatManeuver(250, 150)
 variation:setEnergyStorage(400)

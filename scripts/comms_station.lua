@@ -239,27 +239,27 @@ end
 -- @tparam PlayerSpaceship comms_source
 -- @tparam SpaceStation comms_target
 function commsStationReinforcements(comms_source, comms_target)
-	setCommsMessage(_("stationAssist-comms", "What kind of reinforcement ship would you like?"))
-	addCommsReply(string.format(_("stationAssist-comms", "Adder MK3 (%d rep)"), getServiceCost(comms_source, comms_target, "amk3_reinforcement")), function()
-		string.format("")
-		commsStationSpecificReinforcement(comms_source, comms_target, "amk3_reinforcement")
-	end)
-	addCommsReply(string.format(_("stationAssist-comms", "MU52 Hornet (%d rep)"), getServiceCost(comms_source, comms_target, "hornet_reinforcement")), function()
-		string.format("")
-		commsStationSpecificReinforcement(comms_source, comms_target, "hornet_reinforcement")
-	end)
-	addCommsReply(string.format(_("stationAssist-comms", "Standard Adder MK5 (%d rep)"), getServiceCost(comms_source, comms_target, "reinforcements")), function()
-		string.format("")
-		commsStationSpecificReinforcement(comms_source, comms_target, "reinforcements")
-	end)
-	addCommsReply(string.format(_("stationAssist-comms", "Adder MK8 (%d rep)"), getServiceCost(comms_source, comms_target, "amk8_reinforcement")), function()
-		string.format("")
-		commsStationSpecificReinforcement(comms_source, comms_target, "amk8_reinforcement")
-	end)
-	addCommsReply(string.format(_("stationAssist-comms", "Phobos T3 (%d rep)"), getServiceCost(comms_source, comms_target, "phobos_reinforcement")), function()
-		string.format("")
-		commsStationSpecificReinforcement(comms_source, comms_target, "phobos_reinforcement")
-	end)
+  setCommsMessage(_("stationAssist-comms", "What kind of reinforcement ship would you like?"))
+  addCommsReply(string.format(_("stationAssist-comms", "Adder MK3 (%d rep)"), getServiceCost(comms_source, comms_target, "amk3_reinforcement")), function()
+    string.format("")
+    commsStationSpecificReinforcement(comms_source, comms_target, "amk3_reinforcement")
+  end)
+  addCommsReply(string.format(_("stationAssist-comms", "MU52 Hornet (%d rep)"), getServiceCost(comms_source, comms_target, "hornet_reinforcement")), function()
+    string.format("")
+    commsStationSpecificReinforcement(comms_source, comms_target, "hornet_reinforcement")
+  end)
+  addCommsReply(string.format(_("stationAssist-comms", "Standard Adder MK5 (%d rep)"), getServiceCost(comms_source, comms_target, "reinforcements")), function()
+    string.format("")
+    commsStationSpecificReinforcement(comms_source, comms_target, "reinforcements")
+  end)
+  addCommsReply(string.format(_("stationAssist-comms", "Adder MK8 (%d rep)"), getServiceCost(comms_source, comms_target, "amk8_reinforcement")), function()
+    string.format("")
+    commsStationSpecificReinforcement(comms_source, comms_target, "amk8_reinforcement")
+  end)
+  addCommsReply(string.format(_("stationAssist-comms", "Phobos T3 (%d rep)"), getServiceCost(comms_source, comms_target, "phobos_reinforcement")), function()
+    string.format("")
+    commsStationSpecificReinforcement(comms_source, comms_target, "phobos_reinforcement")
+  end)
     addCommsReply(_("Back"), commsStationMainMenu)
 end
 function commsStationSpecificReinforcement(comms_source, comms_target, reinforcement_type)
@@ -273,13 +273,13 @@ function commsStationSpecificReinforcement(comms_source, comms_target, reinforce
                 function(comms_source, comms_target)
                     local message
                     if comms_source:takeReputationPoints(getServiceCost(comms_source, comms_target, reinforcement_type)) then
-                    	local reinforcement_template = {
-                    		["amk3_reinforcement"] = 	"Adder MK3",
-                    		["hornet_reinforcement"] =	"MU52 Hornet",
-                    		["reinforcements"] =		"Adder MK5",
-                    		["amk8_reinforcement"] =	"Adder MK8",
-                    		["phobos_reinforcement"] =	"Phobos T3",
-                    	}
+                      local reinforcement_template = {
+                        ["amk3_reinforcement"] =   "Adder MK3",
+                        ["hornet_reinforcement"] =  "MU52 Hornet",
+                        ["reinforcements"] =    "Adder MK5",
+                        ["amk8_reinforcement"] =  "Adder MK8",
+                        ["phobos_reinforcement"] =  "Phobos T3",
+                      }
                         local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate(reinforcement_template[reinforcement_type]):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
                         message = string.format(_("stationAssist-comms", "We have dispatched %s to assist at %s."), ship:getCallSign(), formatWaypoint(comms_source:getWaypointID(n)))
                     else

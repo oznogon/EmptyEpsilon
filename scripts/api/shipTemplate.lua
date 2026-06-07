@@ -29,13 +29,13 @@ function allowNewPlayerShips(enabled)
 end
 
 function onNewPlayerShip(callback)
-	if type(callback) == "function" then
-		__on_new_player_ship = callback
-	elseif callback == nil then
-		__on_new_player_ship = function() end
-	else
-		error("bad callback value: expected function or nil, got " .. type(callback), 2)
-	end
+  if type(callback) == "function" then
+    __on_new_player_ship = callback
+  elseif callback == nil then
+    __on_new_player_ship = function() end
+  else
+    error("bad callback value: expected function or nil, got " .. type(callback), 2)
+  end
 end
 
 --- A ShipTemplate defines the base functionality, stats, models, and other details for entities created from it.
