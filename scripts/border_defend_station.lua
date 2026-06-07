@@ -113,7 +113,7 @@ function update(delta)
 			check_timer = check_interval
 		end
 	else
-		my_ship:setCommsScript(""):setCommsFunction(commsShip)
+		my_ship:setCommsScript(""):setCommsFunction(commsShip or function() end)
 		destroyScript()
 	end
 end

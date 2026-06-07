@@ -133,6 +133,7 @@ end
 -- @param name: String identifier of the element to be removed.
 function customElements:removeCustom(player_ship, name)
     local crew_positions = {"Helms", "Weapons", "Engineering", "Science", "Relay", "Tactical", 
+                            -- "Weapons" was misspelled with an extra 'n' — prevented removeCustom from cleaning up on Weapons station
                             "Engineering+", "Operations", "Single", "DamageControl", "PowerManagement", 
                             "Database", "AltRelay", "CommsOnly", "ShipLog"}
     for idx, station in ipairs(crew_positions) do
