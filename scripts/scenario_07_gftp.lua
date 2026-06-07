@@ -248,6 +248,9 @@ function commsHackedShipCompare(freq_min, freq_max)
 end
 
 function update(delta)
+    -- hacked was read in the update loop before its first assignment at mission step 5, creating a window where destroying the Black Site did not trigger defeat
+    hacked = 0
+
     -- mission_timer progress
     mission_timer = mission_timer + delta
 
