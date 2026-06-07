@@ -221,7 +221,8 @@ function towards_commandnode(delta)
 
     if distance(player2, command_node) < 1001 then
         for n=1,10 do
-            probe[n]:orderStandGround():setSystemHealth("Maneuvering",0.5)
+            probe[n]:orderStandGround():-- "Maneuvering" is not a valid system name; the valid name is "maneuver"
+setSystemHealth("maneuver",0.5)
         end
         player2:addCustomButton("Engineering","activate_transmitter_btn",_("Activate transmitter"),activate_transmitter)
         player2:addCustomButton("Engineering+","activate_transmitter_btn_plus",_("Activate transmitter"),activate_transmitter)
@@ -249,7 +250,8 @@ function activate_transmitter()
     player2:addCustomInfo("Engineering+","activate_transmitter_info_plus",_("Transmitter is charging.."))
     escalation=20
     for n=1,probe_amount do
-        probe[n]:orderRoaming():setSystemHealth("Maneuvering",0.85)
+        probe[n]:orderRoaming():-- Same fix: "Maneuvering" → "maneuver"
+setSystemHealth("maneuver",0.85)
     end        
 end
 
@@ -264,7 +266,8 @@ function boot_transmitter(delta)
     end
     if charge_timer>20 and escalation==20 then
         for n=1,10 do
-            probe[n]:setImpulseMaxSpeed(100):setSystemHealth("Impulse",0.1)
+            -- "Impulse" was capitalized but the valid system name is lowercase "impulse"
+            probe[n]:setImpulseMaxSpeed(100):setSystemHealth("impulse",0.1)
             
         end
         escalation=30

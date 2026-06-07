@@ -1390,7 +1390,8 @@ function constructEnvironment()
 	local defense_platform_angle = random(0,360)
 	for i=1,6 do
 		local dp_x, dp_y = vectorFromAngle(defense_platform_angle,4000)
-		local dp = CpuShip():setTemplate("Defense platform"):setFaction(player_faction):setPosition(center_x + dp_x, center_y + dp_y):setScanState("fullscan"):orderStandGround()
+		-- "fullscan" is not a valid scan state; valid states are "none", "simple", "full", and "friendorfoeidentified"
+local dp = CpuShip():setTemplate("Defense platform"):setFaction(player_faction):setPosition(center_x + dp_x, center_y + dp_y):setScanState("full"):orderStandGround()
 		dp:setCallSign(string.format("%sDP%i%s",faction_letter[player_faction],i,string.char(96+math.random(1,26))))
 		table.insert(place_space,{obj=dp,dist=1000,shape="circle"})
 		defense_platform_angle = (defense_platform_angle + 60) % 360
