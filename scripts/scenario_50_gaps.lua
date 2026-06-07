@@ -947,7 +947,8 @@ function handleDockedState()
 										return
 									end
 									local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good_desc[good],goodData["quantity"])
-									if goodData[quantity] < 1 then
+									-- quantity is a bare variable (nil here) instead of the string key "quantity"
+									if goodData["quantity"] < 1 then
 										goodTransactionMessage = string.format(_("trade-comms", "%s\nInsufficient station inventory"),goodTransactionMessage)
 									else
 										goodData["quantity"] = goodData["quantity"] - 1
