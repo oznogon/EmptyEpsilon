@@ -943,10 +943,10 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 	assert(type(area_point_x)=="number",string.format("function findClearSpot expects an area point X coordinate number as the third parameter, but got a %s instead",type(area_point_x)))
 	assert(type(area_point_y)=="number",string.format("function findClearSpot expects an area point Y coordinate number as the fourth parameter, but got a %s instead",type(area_point_y)))
 	assert(type(area_distance)=="number",string.format("function findClearSpot expects an area distance number as the fifth parameter, but got a %s instead",type(area_distance)))
-	local valid_shapes = {"circle","torus","rectangle"}
-	assert(valid_shapes[area_shape] == nil,string.format("function findClearSpot expects a valid shape in the second parameter, but got %s instead",area_shape))
+	local valid_shapes = {circle=true, torus=true, rectangle=true, ["bell torus"]=true}
+	assert(valid_shapes[area_shape] ~= nil,string.format("function findClearSpot expects a valid shape in the second parameter, but got %s instead",area_shape))
 	assert(type(new_buffer)=="number",string.format("function findClearSpot expects a new item buffer distance number as the eighth parameter, but got a %s instead",type(new_buffer)))
-	local valid_table_item_shapes = {"circle","zone"}
+	local valid_table_item_shapes = {circle=true, zone=true}
 	local far_enough = true
 	local current_loop_count = 0
 	local cx, cy = 0	--candidate x and y coordinates
@@ -959,7 +959,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 			far_enough = true
 			for i,item in ipairs(objects) do
 				assert(item.shape ~= nil,string.format("function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",i))
-				assert(valid_table_item_shapes[item.shape] == nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
+				assert(valid_table_item_shapes[item.shape] ~= nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
 				if item.shape == "circle" then
 					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ix, iy = item.obj:getPosition()
@@ -1006,7 +1006,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 			far_enough = true
 			for i,item in ipairs(objects) do
 				assert(item.shape ~= nil,string.format("function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",i))
-				assert(valid_table_item_shapes[item.shape] == nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
+				assert(valid_table_item_shapes[item.shape] ~= nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
 				if item.shape == "circle" then
 					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ix, iy = item.obj:getPosition()
@@ -1037,7 +1037,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 			far_enough = true
 			for i,item in ipairs(objects) do
 				assert(item.shape ~= nil,string.format("function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",i))
-				assert(valid_table_item_shapes[item.shape] == nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
+				assert(valid_table_item_shapes[item.shape] ~= nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
 				if item.shape == "circle" then
 					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ix, iy = item.obj:getPosition()
@@ -1072,7 +1072,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 			far_enough = true
 			for i,item in ipairs(objects) do
 				assert(item.shape ~= nil,string.format("function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",i))
-				assert(valid_table_item_shapes[item.shape] == nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
+				assert(valid_table_item_shapes[item.shape] ~= nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
 				if item.shape == "circle" then
 					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ix, iy = item.obj:getPosition()
@@ -1107,7 +1107,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 			far_enough = true
 			for i,item in ipairs(objects) do
 				assert(item.shape ~= nil,string.format("function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",i))
-				assert(valid_table_item_shapes[item.shape] == nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
+				assert(valid_table_item_shapes[item.shape] ~= nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
 				if item.shape == "circle" then
 					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ix, iy = item.obj:getPosition()
