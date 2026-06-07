@@ -217,8 +217,8 @@ Doppler instability: %i]]),
     kraylor_defense_line_engaged = false
 
     for idx, warp_jammer in ipairs(kraylor_defense_line) do
-        x, y = warp_jammer:getPosition()
-        ship = CpuShip():setFaction("Kraylor"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
+        local x, y = warp_jammer:getPosition()
+        local ship = CpuShip():setFaction("Kraylor"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
         if random(0, 100) < 20 then
             ship:setTemplate("Defense platform")
         elseif random(0, 100) < 50 then
@@ -228,7 +228,7 @@ Doppler instability: %i]]),
         end
         table.insert(kraylor_defense_line_ships, ship)
         for n = 1, 3 do
-            ship2 = CpuShip():setFaction("Kraylor"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendTarget(ship)
+            local ship2 = CpuShip():setFaction("Kraylor"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendTarget(ship)
             if random(0, 100) < 50 then
                 ship2:setTemplate("Phobos T3")
             elseif random(0, 100) < 20 then
@@ -257,8 +257,8 @@ Doppler instability: %i]]),
     kraylor_transport = nil
 
     for idx, station in ipairs(kraylor_forward_line) do
-        x, y = station:getPosition()
-        ship = CpuShip():setFaction("Kraylor"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
+        local x, y = station:getPosition()
+        local ship = CpuShip():setFaction("Kraylor"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
 
         if random(0, 100) < 20 then
             ship:setTemplate("Defense platform")

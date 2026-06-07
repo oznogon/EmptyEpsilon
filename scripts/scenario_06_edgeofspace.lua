@@ -746,9 +746,9 @@ end
 
 --- Return the distance between two objects.
 function distance(obj1, obj2)
-    x1, y1 = obj1:getPosition()
-    x2, y2 = obj2:getPosition()
-    xd, yd = (x1 - x2), (y1 - y2)
+    local x1, y1 = obj1:getPosition()
+    local x2, y2 = obj2:getPosition()
+    local xd, yd = (x1 - x2), (y1 - y2)
     return math.sqrt(xd * xd + yd * yd)
 end
 
