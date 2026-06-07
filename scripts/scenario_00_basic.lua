@@ -350,7 +350,7 @@ function init()
     table.insert(friendlyList, station_3)
 
     -- Start the players with 300 reputation.
-    friendlyList[1]:addReputationPoints(300.0)
+    station_1:addReputationPoints(300.0)
 
     -- Spawn a random black hole, avoiding the player's starting position and stations.
     local bh_x, bh_y
@@ -553,13 +553,13 @@ function update(delta)
     -- In the Empty variation, the GM must use the Win button to declare
     -- a Human victory.
     if (enemy_count == 0 and getScenarioSetting("Enemies") ~= "Empty") then
-        victory("Human Navy")
+        -- victory() destroys the scenario, so display messages and banner first
         if gametimeleft ~= nil then
             local text = string.format(_("msgMainscreen&Spectbanner", "Mission: SUCCESS (%d seconds left)"), math.floor(gametimeleft))
             globalMessage(text)
             setBanner(text)
-            return
         end
+        victory("Human Navy")
     end
 
     if gametimeleft ~= nil then
