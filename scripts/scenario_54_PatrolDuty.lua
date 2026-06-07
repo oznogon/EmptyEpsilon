@@ -202,7 +202,8 @@ function setVariations()
 		playWithTimeLimit = true			--set time limit boolean
 		plot7 = beforeAmbush				--use time limit plot
 	end
-	if mission_length == 1 or gameTimeLimit > 0 then
+	-- mission_length was an undefined variable (the correct name is missionLength), so "Short" mode never reduced the patrol goal
+	if missionLength == 1 or gameTimeLimit > 0 then
 		patrolGoal = 6
 	end
 end
@@ -258,13 +259,14 @@ function setConstants()
 	--Player ship name lists to supplant standard randomized call sign generation
 	playerShipNamesFor = {}
 	-- TODO switch to spelling with space or dash matching the type name
-	playerShipNamesFor["MP52Hornet"] = {"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny","Buzz"}
+	-- These keys must match the exact strings returned by getTypeName() — the originals omitted spaces
+	playerShipNamesFor["MP52 Hornet"] = {"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny","Buzz"}
 	playerShipNamesFor["Piranha"] = {"Razor","Biter","Ripper","Voracious","Carnivorous","Characid","Vulture","Predator"}
-	playerShipNamesFor["FlaviaPFalcon"] = {"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"}
-	playerShipNamesFor["PhobosM3P"] = {"Blinder","Shadow","Distortion","Diemos","Ganymede","Castillo","Thebe","Retrograde"}
+	playerShipNamesFor["Flavia P.Falcon"] = {"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"}
+	playerShipNamesFor["Phobos M3P"] = {"Blinder","Shadow","Distortion","Diemos","Ganymede","Castillo","Thebe","Retrograde"}
 	playerShipNamesFor["Atlantis"] = {"Excaliber","Thrasher","Punisher","Vorpal","Protang","Drummond","Parchim","Coronado"}
-	playerShipNamesFor["Cruiser"] = {"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"}
-	playerShipNamesFor["MissileCruiser"] = {"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"}
+	playerShipNamesFor["Player Cruiser"] = {"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"}
+	playerShipNamesFor["Missile Cruiser"] = {"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"}
 	playerShipNamesFor["Fighter"] = {"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"}
 	playerShipNamesFor["Benedict"] = {"Elizabeth","Ford","Vikramaditya","Liaoning","Avenger","Naruebet","Washington","Lincoln","Garibaldi","Eisenhower"}
 	playerShipNamesFor["Kiriya"] = {"Cavour","Reagan","Gaulle","Paulo","Truman","Stennis","Kuznetsov","Roosevelt","Vinson","Old Salt"}
@@ -4880,7 +4882,8 @@ function handleDockedState()
 				for good, goodData in pairs(ctd.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
-						if goodData[quantity] < 1 then
+										-- quantity is a bare variable (nil here) instead of the string key "quantity"
+										if goodData["quantity"] < 1 then
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
