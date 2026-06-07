@@ -453,12 +453,12 @@ end
 function IssueOrders(shipList, oppShipList, closestEnemy)
   for _, ship in ipairs(shipList) do
     -- Do nothing if we have captain's orders
-    if ship:getOrder() ~= "Attack" and ship:getOrder() ~= "Fly in formation" and ship:getOrder() ~= "Idle" then
+    if ship:getOrder() ~= AI_ATTACK and ship:getOrder() ~= AI_FLY_FORMATION and ship:getOrder() ~= AI_IDLE then
       return
     end
 
     -- Clean out stale attack orders
-    if ship:getOrder() == "Attack" and (ship:getOrderTarget() == nil or not ship:getOrderTarget():isValid()) then
+    if ship:getOrder() == AI_ATTACK and (ship:getOrderTarget() == nil or not ship:getOrderTarget():isValid()) then
       ship:orderIdle() --Temporary until overriden below
     end
 
@@ -473,7 +473,7 @@ function IssueOrders(shipList, oppShipList, closestEnemy)
       OrdersContestedPayload(ship, closestEnemy, oppShipList)
     -- In control of payload
     elseif PayloadShip.controlledBy == ship:getFaction() then
-      SafeOrder(ship, PayloadShip, "Fly in formation")
+      SafeOrder(ship, PayloadShip, AI_FLY_FORMATION)
     -- Not in control of payload
     elseif PayloadShip.controlledBy ~= ship:getFaction() then
       OrdersNotInControl(ship, closestEnemy, oppShipList)
@@ -503,7 +503,7 @@ function OrdersAggro(ship, closestEnemy, oppShipList)
   if not SafeOrder(ship, ship.aggroTarget, "Attack") then
     ship.aggroTarget = nil
     if not SafeAttackRandom(ship, oppShipList) then
-      SafeOrder(ship, PayloadShip, "Fly in formation")
+      SafeOrder(ship, PayloadShip, AI_FLY_FORMATION)
     end
   end
 end
@@ -517,7 +517,7 @@ function OrdersCloseToPayload(ship, closestEnemy, oppShipList)
     SafeOrder(ship, closestEnemy, "Attack")
   -- otherwise fly with the paylod
   else
-    SafeOrder(ship, PayloadShip, "Fly in formation")
+    SafeOrder(ship, PayloadShip, AI_FLY_FORMATION)
   end
 end
 
@@ -527,17 +527,17 @@ function OrdersContestedPayload(ship, closestEnemy, oppShipList)
     SafeOrder(ship, Player, "Attack")
   -- if ship is closer than closest enemy, fly with payload
   elseif closestEnemy ~= nil and closestEnemy:isValid() and distance(ship, PayloadShip) < distance(closestEnemy, PayloadShip) then
-    SafeOrder(ship, PayloadShip, "Fly in formation")
+    SafeOrder(ship, PayloadShip, AI_FLY_FORMATION)
   -- Otherwise attack a random enemy, or fly with payload if there are none
   elseif not SafeAttackRandom(ship, oppShipList) then
-    SafeOrder(ship, PayloadShip, "Fly in formation")
+    SafeOrder(ship, PayloadShip, AI_FLY_FORMATION)
   end
 end
 
 function OrdersNotInControl(ship, closestEnemy, oppShipList)
   if not SafeOrder(ship, closestEnemy, "Attack") then
     if not SafeAttackRandom(ship, oppShipList) then
-      SafeOrder(ship, PayloadShip, "Fly in formation")
+      SafeOrder(ship, PayloadShip, AI_FLY_FORMATION)
     end
   end
 end
@@ -590,12 +590,12 @@ function SafeOrder(ship, target, order, changeTarget)
     return true
   end
 
-  if order == "Attack" then
+  if order == AI_ATTACK then
     -- Do not override an existing attack order
-    if not (ship:getOrder() == "Attack" and ship:getOrderTarget() ~= target) or changeTarget then
+    if not (ship:getOrder() == AI_ATTACK and ship:getOrderTarget() ~= target) or changeTarget then
       ship:orderAttack(target)
     end
-  elseif order == "Fly in formation" then
+  elseif order == AI_FLY_FORMATION then
     ship:orderFlyFormation(target, irandom(-1200, 1200), irandom(-1200, 1200))
   end
 

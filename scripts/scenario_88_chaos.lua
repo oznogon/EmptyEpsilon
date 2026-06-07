@@ -6452,11 +6452,11 @@ function enemyComms()
 				if comms_target.original_order == nil then
 					comms_target.original_faction = faction
 					comms_target.original_order = current_order
-					if current_order == "Fly towards" or current_order == "Defend Location" or current_order == "Fly towards (ignore all)" then
+					if current_order == AI_FLY_TOWARDS or current_order == AI_DEFEND_LOCATION or current_order == AI_FLY_TOWARDS_BLIND then
 						comms_target.original_target_x, comms_target.original_target_y = comms_target:getOrderTargetLocation()
 						--print(string.format("Target_x: %f, Target_y: %f",comms_target.original_target_x,comms_target.original_target_y))
 					end
-					if current_order == "Attack" or current_order == "Dock" or current_order == "Defend Target" then
+					if current_order == AI_ATTACK or current_order == AI_DOCK or current_order == AI_DEFEND_TARGET then
 						local original_target = comms_target:getOrderTarget()
 						--print("target:")
 						--print(original_target)
@@ -6489,11 +6489,11 @@ function enemyComms()
 				if comms_target.original_order == nil then
 					comms_target.original_order = current_order
 					comms_target.original_faction = faction
-					if current_order == "Fly towards" or current_order == "Defend Location" or current_order == "Fly towards (ignore all)" then
+					if current_order == AI_FLY_TOWARDS or current_order == AI_DEFEND_LOCATION or current_order == AI_FLY_TOWARDS_BLIND then
 						comms_target.original_target_x, comms_target.original_target_y = comms_target:getOrderTargetLocation()
 						--print(string.format("Target_x: %f, Target_y: %f",comms_target.original_target_x,comms_target.original_target_y))
 					end
-					if current_order == "Attack" or current_order == "Dock" or current_order == "Defend Target" then
+					if current_order == AI_ATTACK or current_order == AI_DOCK or current_order == AI_DEFEND_TARGET then
 						local original_target = comms_target:getOrderTarget()
 						--print("target:")
 						--print(original_target)

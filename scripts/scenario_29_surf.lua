@@ -1719,9 +1719,9 @@ function update(delta)
             if isObjectType(enemy,"SpaceStation") or enemy:getTypeName() == "Defense platform" then
             	enemy_base_count = enemy_base_count + 1
             else
-            	if enemy:getOrder() == "Idle" or enemy:getOrder() == "Defend Location" then
-            		enemy:orderRoaming()
-            	end
+              if enemy:getOrder() == AI_IDLE or enemy:getOrder() == AI_DEFEND_LOCATION then
+                enemy:orderRoaming()
+              end
             end
             dropWarpJammer(enemy)
         end

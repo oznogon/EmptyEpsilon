@@ -4539,7 +4539,7 @@ function exuariHarassment(delta)
 		if clean_list then
 			for i, enemy in ipairs(plot1_defensive_fleet) do
 				local current_order = enemy:getOrder()
-				if current_order == "Defend Target" then
+				if current_order == AI_DEFEND_TARGET then
 					if enemy:getWeaponTubeCount() > 0 then
 						local low_on_missiles = false
 						local zero_missiles = true
@@ -4583,7 +4583,7 @@ function exuariHarassment(delta)
 						end
 					end
 				end
-				if current_order == "Dock" then
+				if current_order == AI_DOCK then
 					evaluate_objects = enemy:getObjectsInRange(7500)
 					enemy_in_range = false
 					for j, obj in pairs(evaluate_objects) do
@@ -4650,7 +4650,7 @@ function exuariHarassment(delta)
 			for i, enemy in pairs(plot1_last_defense_fleet) do
 				if enemy ~= nil and enemy:isValid() then
 					currrent_order = enemy:getOrder()
-					if current_order == "Defend Target" then
+					if current_order == AI_DEFEND_TARGET then
 						if enemy:getWeaponTubeCount() > 0 then
 							low_on_missiles = false
 							zero_missiles = true
@@ -4694,7 +4694,7 @@ function exuariHarassment(delta)
 							end
 						end
 					end
-					if current_order == "Dock" then
+					if current_order == AI_DOCK then
 						evaluate_objects = enemy:getObjectsInRange(7500)
 						enemy_in_range = false
 						for j, obj in pairs(evaluate_objects) do

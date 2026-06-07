@@ -2883,11 +2883,11 @@ function maintainTransports()
 					if transport.dock_time == nil then
 						transport.dock_time = getScenarioTime() + random(5,30)
 					end
-				elseif transport:getOrder() ~= "Dock" then	--no docking order
+				elseif transport:getOrder() ~= AI_DOCK then	--no docking order
 					if transport.dock_time == nil then
 						transport.dock_time = getScenarioTime() + random(5,30)
 					end
-				elseif transport:getOrder() == "Dock" then	--docking order to invalid station
+				elseif transport:getOrder() == AI_DOCK then	--docking order to invalid station
 					if transport:getOrderTarget() == nil or not transport:getOrderTarget():isValid() then
 						if transport.dock_time == nil then
 							transport.dock_time = getScenarioTime() + random(5,30)

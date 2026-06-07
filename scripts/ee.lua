@@ -8,14 +8,13 @@
 --
 -- **Changelog**
 --
--- *Version 0.8* (2020.10)
+-- *Version 0.8* (2026.06)
 --
--- - Add constants for all enum string values from `src/script/enum.h`.
---   Covers DamageType, Physics::Type, FactionRelation, AIOrder,
---   EMissileWeapons (tube API), EMissileSizes, MountPoint::State,
+-- - Add constants for DamageType, Physics::Type, FactionRelation,
+--   AIOrder, EMissileWeapons, EMissileSizes, MountPoint::State,
 --   DockingPort::State, CommsTransmitter::State, Function::Type,
 --   MainScreenSetting, MainScreenOverlay.
--- - Add canonical toLua forms for scanned states (SS_NONE, SS_FOF,
+-- - Add canonical forms for scanned states (SS_NONE, SS_FOF,
 --   SS_SIMPLE, SS_FULL).
 --
 -- *Version 0.7* (2020.08)
@@ -117,27 +116,17 @@ FACTION_RELATIONS = {
 --- Scan states.
 --
 -- String constants for `ScanState::State` from `src/script/enum.h`.
--- Constants prefixed `SS_` use the canonical toLua output values.
--- Constants prefixed `SS_` with longer names use the fromLua aliases.
 --
 -- @section scan_states
 
---- `"none"` (canonical)
+--- `"none"` (not scanned)
 SS_NONE = "none"
---- `"notscanned"` (alias)
-SS_NOT_SCANNED = "notscanned"
---- `"fof"` (canonical)
+--- `"fof"` (friend-or-foe known)
 SS_FOF = "fof"
---- `"friendorfoeidentified"` (alias)
-SS_FRIEND_OR_FOE_IDENTIFIED = "friendorfoeidentified"
---- `"simple"` (canonical)
+--- `"simple"` (simple scan)
 SS_SIMPLE = "simple"
---- `"simplescan"` (alias)
-SS_SIMPLE_SCAN = "simplescan"
---- `"full"` (canonical)
+--- `"full"` (full scan)
 SS_FULL = "full"
---- `"fullscan"` (alias)
-SS_FULL_SCAN = "fullscan"
 
 --- Array of the canonical scanned states.
 SCANNED_STATES = {

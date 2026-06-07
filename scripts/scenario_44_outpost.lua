@@ -1596,7 +1596,7 @@ function constructEnvironment()
 	table.insert(place_space,{obj=station_regional_hq,dist=1000,shape="circle"})
 	local defense_platform_angle = random(0,360)
 	local dp_x, dp_y = vectorFromAngle(defense_platform_angle,3000)
-	local dp = CpuShip():setTemplate("Defense platform"):setFaction(player_faction):setPosition(center_x + dp_x, center_y + dp_y):setScanState(SS_FULL_SCAN):orderStandGround()
+	local dp = CpuShip():setTemplate("Defense platform"):setFaction(player_faction):setPosition(center_x + dp_x, center_y + dp_y):setScanState(SS_FULL):orderStandGround()
 	player_spawn_x, player_spawn_y = vectorFromAngleNorth(random(-20,20)+defense_platform_angle,random(-300,300)+1500)
 	player_spawn_x = player_spawn_x + center_x
 	player_spawn_y = player_spawn_y + center_y
@@ -2974,7 +2974,7 @@ function transportCommerceMaintenance(delta)
 						end
 					end
 				else
-					if string.find("Dock",transport:getOrder()) then
+					if string.find(AI_DOCK, transport:getOrder()) then
 						transport_target = transport:getOrderTarget()
 						if transport_target == nil or not transport_target:isValid() then
 							transport_target = pickTransportTarget(transport)
@@ -6164,11 +6164,11 @@ function enemyComms(comms_data)
 				if comms_target.original_order == nil then
 					comms_target.original_faction = faction
 					comms_target.original_order = current_order
-					if current_order == "Fly towards" or current_order == "Defend Location" or current_order == "Fly towards (ignore all)" then
+					if current_order == AI_FLY_TOWARDS or current_order == AI_DEFEND_LOCATION or current_order == AI_FLY_TOWARDS_BLIND then
 						comms_target.original_target_x, comms_target.original_target_y = comms_target:getOrderTargetLocation()
 						--print(string.format("Target_x: %f, Target_y: %f",comms_target.original_target_x,comms_target.original_target_y))
 					end
-					if current_order == "Attack" or current_order == "Dock" or current_order == "Defend Target" then
+					if current_order == AI_ATTACK or current_order == AI_DOCK or current_order == AI_DEFEND_TARGET then
 						local original_target = comms_target:getOrderTarget()
 						--print("target:")
 						--print(original_target)
@@ -6209,11 +6209,11 @@ function enemyComms(comms_data)
 				if comms_target.original_order == nil then
 					comms_target.original_order = current_order
 					comms_target.original_faction = faction
-					if current_order == "Fly towards" or current_order == "Defend Location" or current_order == "Fly towards (ignore all)" then
+					if current_order == AI_FLY_TOWARDS or current_order == AI_DEFEND_LOCATION or current_order == AI_FLY_TOWARDS_BLIND then
 						comms_target.original_target_x, comms_target.original_target_y = comms_target:getOrderTargetLocation()
 						--print(string.format("Target_x: %f, Target_y: %f",comms_target.original_target_x,comms_target.original_target_y))
 					end
-					if current_order == "Attack" or current_order == "Dock" or current_order == "Defend Target" then
+					if current_order == AI_ATTACK or current_order == AI_DOCK or current_order == AI_DEFEND_TARGET then
 						local original_target = comms_target:getOrderTarget()
 						--print("target:")
 						--print(original_target)
@@ -6464,37 +6464,37 @@ function revertCheck(delta)
 					local oty = enemy.original_target_y
 					local ot = enemy.original_target
 					if oo ~= nil then
-						if oo == "Attack" then
+						if oo == AI_ATTACK then
 							if ot ~= nil and ot:isValid() then
 								enemy:orderAttack(ot)
 							else
 								enemy:orderRoaming()
 							end
-						elseif oo == "Dock" then
+						elseif oo == AI_DOCK then
 							if ot ~= nil and ot:isValid() then
 								enemy:orderDock(ot)
 							else
 								enemy:orderRoaming()
 							end
-						elseif oo == "Defend Target" then
+						elseif oo == AI_DEFEND_TARGET then
 							if ot ~= nil and ot:isValid() then
 								enemy:orderDefendTarget(ot)
 							else
 								enemy:orderRoaming()
 							end
-						elseif oo == "Fly towards" then
+						elseif oo == AI_FLY_TOWARDS then
 							if otx ~= nil and oty ~= nil then
 								enemy:orderFlyTowards(otx,oty)
 							else
 								enemy:orderRoaming()
 							end
-						elseif oo == "Defend Location" then
+						elseif oo == AI_DEFEND_LOCATION then
 							if otx ~= nil and oty ~= nil then
 								enemy:orderDefendLocation(otx,oty)
 							else
 								enemy:orderRoaming()
 							end
-						elseif oo == "Fly towards (ignore all)" then
+						elseif oo == AI_FLY_TOWARDS_BLIND then
 							if otx ~= nil and oty ~= nil then
 								enemy:orderFlyTowardsBlind(otx,oty)
 							else
@@ -8002,7 +8002,7 @@ function updatePlayerProximityScan(p)
 	if obj_list ~= nil and #obj_list > 0 then
 		for _, obj in ipairs(obj_list) do
 			if obj:isValid() and isObjectType(obj,"CpuShip") and not obj:isFullyScannedBy(p) then
-				obj:setScanState(SS_SIMPLE_SCAN)
+				obj:setScanState(SS_SIMPLE)
 			end
 		end
 	end

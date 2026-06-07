@@ -1674,11 +1674,11 @@ function maintainTransports()
 						if transport.dock_time == nil then
 							transport.dock_time = getScenarioTime() + random(5,30)
 						end
-					elseif transport:getOrder() ~= "Dock" then
+					elseif transport:getOrder() ~= AI_DOCK then
 						if transport.dock_time == nil then
 							transport.dock_time = getScenarioTime() + random(5,30)
 						end						
-					elseif transport:getOrder() == "Dock" then
+					elseif transport:getOrder() == AI_DOCK then
 						if transport:getOrderTarget() == nil or not transport:getOrderTarget():isValid() then
 							if transport.dock_time == nil then
 								transport.dock_time = getScenarioTime() + random(5,30)

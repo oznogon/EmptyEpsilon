@@ -1811,18 +1811,18 @@ function friendlyDefense()
 											end
 										else
 											if ship.my_station:areEnemiesInRange(10000) then
-												if ship:getOrder() ~= "Defend Target" then
+												if ship:getOrder() ~= AI_DEFEND_TARGET then
 													ship:orderDefendTarget(ship.my_station)
 												end
 											else
 												if not ship_healthy then
-													if ship:getOrder() ~= "Dock" then
+													if ship:getOrder() ~= AI_DOCK then
 														ship:orderDock(ship.my_station)
 													end
 												else
 													if not ship_full then
 														if not ship.my_station:areEnemiesInRange(15000) then
-															if ship:getOrder() ~= "Dock" then
+															if ship:getOrder() ~= AI_DOCK then
 																ship:orderDock(ship.my_station)
 															end
 														end

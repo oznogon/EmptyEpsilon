@@ -7382,7 +7382,7 @@ function checkTargetIntelEvents(delta)
 			if enemy ~= nil and enemy:isValid() then
 				intel_fleet_count = intel_fleet_count + 1
 				local current_order = enemy:getOrder()
-				if current_order ~= nil and (current_order == "Idle" or current_order == "Defend Location") then
+				if current_order ~= nil and (current_order == AI_IDLE or current_order == AI_DEFEND_LOCATION) then
 					enemy:orderRoaming()
 				end
 			end
@@ -7391,7 +7391,7 @@ function checkTargetIntelEvents(delta)
 			if enemy ~= nil and enemy:isValid() then
 				intel_fleet_count = intel_fleet_count + 1
 				local current_order = enemy:getOrder()
-				if current_order ~= nil and (current_order == "Idle" or current_order == "Defend Location") then
+				if current_order ~= nil and (current_order == AI_IDLE or current_order == AI_DEFEND_LOCATION) then
 					enemy:orderRoaming()
 				end
 			end
