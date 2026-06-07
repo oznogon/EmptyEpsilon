@@ -67,67 +67,57 @@ function init()
 	onNewPlayerShip(setPlayers)
 end
 function setVariations()
-	if getScenarioSetting == nil then
-		difficulty = 1
-		adverseEffect = .995
-		coolant_loss = .99995
-		coolant_gain = .001
-		starting_rep = 20
-		enemy_power = 1
-		rescue_time_limit = 20
-		destroy_time_limit = 20
-	else
-		local enemy_config = {
-			["Easy"] =		{number = .5},
-			["Normal"] =	{number = 1},
-			["Hard"] =		{number = 2},
-			["Extreme"] =	{number = 3},
-			["Quixotic"] =	{number = 5},
-		}
-		enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
-		local murphy_config = {
-			["Easy"] =		{number = .5,	rep = 70,	adverse = .999,	lose_coolant = .99999,	gain_coolant = .005},
-			["Normal"] =	{number = 1,	rep = 50,	adverse = .995,	lose_coolant = .99995,	gain_coolant = .001},
-			["Hard"] =		{number = 2,	rep = 30,	adverse = .99,	lose_coolant = .9999,	gain_coolant = .0001},
-		}
-		difficulty =	murphy_config[getScenarioSetting("Murphy")].number
-		adverseEffect =	murphy_config[getScenarioSetting("Murphy")].adverse
-		coolant_loss =	murphy_config[getScenarioSetting("Murphy")].lose_coolant
-		coolant_gain =	murphy_config[getScenarioSetting("Murphy")].gain_coolant
-		starting_rep =	murphy_config[getScenarioSetting("Murphy")].rep
-		local rescue_config = {
-			["10"] = 10,
-			["15"] = 15,
-			["20"] = 20,
-			["25"] = 25,
-			["30"] = 30,
-		}
-		rescue_time_limit = rescue_config[getScenarioSetting("Rescue")]
-		local destroy_config = {
-			["10"] = 10,
-			["15"] = 15,
-			["20"] = 20,
-			["25"] = 25,
-			["30"] = 30,
-		}
-		destroy_time_limit = destroy_config[getScenarioSetting("Destroy")]
-		local reputation_config = {
-			["Unknown"] = 		0,
-			["Nice"] = 			20,
-			["Hero"] = 			50,
-			["Major Hero"] =	100,
-			["Super Hero"] =	200,
-		}
-		reputation_start_amount = reputation_config[getScenarioSetting("Reputation")]
-		local player_ship_config = {
-			["Amalgam"] =	createPlayerShipMixer,
-			["Midian"] =	createPlayerShipFlipper,
-			["Raven"] =		createPlayerShipClaw,
-			["Squid"] =		createPlayerShipInk,
-		}
-		if getScenarioSetting("Unique Ship") ~= "None" then
-			player_ship_config[getScenarioSetting("Unique Ship")]()
-		end
+	-- getScenarioSetting is always provided by the engine; the nil check was dead code
+	local enemy_config = {
+		["Easy"] =		{number = .5},
+		["Normal"] =	{number = 1},
+		["Hard"] =		{number = 2},
+		["Extreme"] =	{number = 3},
+		["Quixotic"] =	{number = 5},
+	}
+	enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
+	local murphy_config = {
+		["Easy"] =		{number = .5,	rep = 70,	adverse = .999,	lose_coolant = .99999,	gain_coolant = .005},
+		["Normal"] =	{number = 1,	rep = 50,	adverse = .995,	lose_coolant = .99995,	gain_coolant = .001},
+		["Hard"] =		{number = 2,	rep = 30,	adverse = .99,	lose_coolant = .9999,	gain_coolant = .0001},
+	}
+	difficulty =	murphy_config[getScenarioSetting("Murphy")].number
+	adverseEffect =	murphy_config[getScenarioSetting("Murphy")].adverse
+	coolant_loss =	murphy_config[getScenarioSetting("Murphy")].lose_coolant
+	coolant_gain =	murphy_config[getScenarioSetting("Murphy")].gain_coolant
+	starting_rep =	murphy_config[getScenarioSetting("Murphy")].rep
+	local rescue_config = {
+		["10"] = 10,
+		["15"] = 15,
+		["20"] = 20,
+		["25"] = 25,
+		["30"] = 30,
+	}
+	rescue_time_limit = rescue_config[getScenarioSetting("Rescue")]
+	local destroy_config = {
+		["10"] = 10,
+		["15"] = 15,
+		["20"] = 20,
+		["25"] = 25,
+		["30"] = 30,
+	}
+	destroy_time_limit = destroy_config[getScenarioSetting("Destroy")]
+	local reputation_config = {
+		["Unknown"] = 		0,
+		["Nice"] = 			20,
+		["Hero"] = 			50,
+		["Major Hero"] =	100,
+		["Super Hero"] =	200,
+	}
+	reputation_start_amount = reputation_config[getScenarioSetting("Reputation")]
+	local player_ship_config = {
+		["Amalgam"] =	createPlayerShipMixer,
+		["Midian"] =	createPlayerShipFlipper,
+		["Raven"] =		createPlayerShipClaw,
+		["Squid"] =		createPlayerShipInk,
+	}
+	if getScenarioSetting("Unique Ship") ~= "None" then
+		player_ship_config[getScenarioSetting("Unique Ship")]()
 	end
 end
 function setConstants()

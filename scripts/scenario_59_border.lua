@@ -184,7 +184,7 @@ function setVariations()
 	enemyDestructionVictoryCondition = 70		--final: 70
 	friendlyDestructionDefeatCondition = 50		--final: 50
 	destructionDifferenceEndCondition = 20		--final: 20
-	if getScenarioSetting == nil or getScenarioSetting("Enemies") == "" then
+	if getScenarioSetting("Enemies") == "" then
 		enemy_power = 1
 		difficulty = 1
 		adverseEffect = .995

@@ -77,78 +77,66 @@ function init()
 	onNewPlayerShip(setPlayers)
 end
 function setVariations()
-	if getScenarioSetting == nil then
-		enemy_power = 1
-		difficulty = 1
-		adverseEffect = .995
-		coolant_loss = .99995
-		coolant_gain = .001
-		danger_pace = 300
-		reputation_start_amount = 0
-		upgrade_price = 1
-	else
-		local enemy_config = {
-			["Easy"] =		{number = .5},
-			["Normal"] =	{number = 1},
-			["Hard"] =		{number = 2},
-			["Extreme"] =	{number = 3},
-			["Quixotic"] =	{number = 5},
-		}
-		enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
-		local murphy_config = {
-			["Easy"] =		{number = .5,	adverse = .999,	lose_coolant = .99999,	gain_coolant = .005},
-			["Normal"] =	{number = 1,	adverse = .995,	lose_coolant = .99995,	gain_coolant = .001},
-			["Hard"] =		{number = 2,	adverse = .99,	lose_coolant = .9999,	gain_coolant = .0001},
-		}
-		difficulty =	murphy_config[getScenarioSetting("Murphy")].number
-		--	affects:
-		--		sensor buoy scan complexity and depth (ads, transport info, station info)
-		--		sensor jammer scan complexity and depth
-		--		nebula concealment of mine fields
-		--		availability of gossip
-		--		repair crew availability
-		--		coolant availability
-		--		named character availability
-		--		taunted enemy retaliation choice possibilities
-		--		revival of repair crew chance when zero repair crew present
-		adverseEffect =	murphy_config[getScenarioSetting("Murphy")].adverse
-		coolant_loss =	murphy_config[getScenarioSetting("Murphy")].lose_coolant
-		coolant_gain =	murphy_config[getScenarioSetting("Murphy")].gain_coolant
-		local pacing_config = {
-			["Glacial"] =	600,
-			["Snail"] =		450,
-			["Slow"] =		300,
-			["Normal"] =	250,
-			["Fast"] =		200, 
-			["Impatient"] = 150,
-			["Blitz"] = 	100,
-		}
-		danger_pace = pacing_config[getScenarioSetting("Pace")]
-		local reputation_config = {
-			["Unknown"] = 		0,
-			["Nice"] = 			20,
+	local enemy_config = {
+		["Easy"] =		{number = .5},
+		["Normal"] =	{number = 1},
+		["Hard"] =		{number = 2},
+		["Extreme"] =	{number = 3},
+		["Quixotic"] =	{number = 5},
+	}
+	enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
+	local murphy_config = {
+		["Easy"] =		{number = .5,	adverse = .999,	lose_coolant = .99999,	gain_coolant = .005},
+		["Normal"] =	{number = 1,	adverse = .995,	lose_coolant = .99995,	gain_coolant = .001},
+		["Hard"] =		{number = 2,	adverse = .99,	lose_coolant = .9999,	gain_coolant = .0001},
+	}
+	difficulty =	murphy_config[getScenarioSetting("Murphy")].number
+	--	affects:
+	--		sensor buoy scan complexity and depth (ads, transport info, station info)
+	--		sensor jammer scan complexity and depth
+	--		nebula concealment of mine fields
+	--		availability of gossip
+	--		repair crew availability
+	--		coolant availability
+	--		named character availability
+	--		taunted enemy retaliation choice possibilities
+	--		revival of repair crew chance when zero repair crew present
+	adverseEffect =	murphy_config[getScenarioSetting("Murphy")].adverse
+	coolant_loss =	murphy_config[getScenarioSetting("Murphy")].lose_coolant
+	coolant_gain =	murphy_config[getScenarioSetting("Murphy")].gain_coolant
+	local pacing_config = {
+		["Glacial"] =	600,
+		["Snail"] =		450,
+		["Slow"] =		300,
+		["Normal"] =	250,
+		["Fast"] =		200, 
+		["Impatient"] = 150,
+		["Blitz"] = 	100,
+	}
+	danger_pace = pacing_config[getScenarioSetting("Pace")]
+	local reputation_config = {
+		["Unknown"] = 		0,
+		["Nice"] = 			20,
 			["Hero"] = 			50,
 			["Major Hero"] =	100,
 			["Super Hero"] =	200,
 		}
-		reputation_start_amount = reputation_config[getScenarioSetting("Reputation")]
-		local upgrade_config = {
-			["Cheap"] = .5,
-			["Normal"] = 1,
-			["Expensive"] = 1.5,
-			["Luxurious"] = 2,
-			["Monopolistic"] = 3,
-		}
-		upgrade_price = upgrade_config[getScenarioSetting("Upgrade")]
-		local player_ship_config = {
-			["Amalgam"] =	createPlayerShipMixer,
-			["Midian"] =	createPlayerShipFlipper,
-			["Raven"] =		createPlayerShipClaw,
-			["Squid"] =		createPlayerShipInk,
-		}
-		if getScenarioSetting("Unique Ship") ~= "None" then
-			player_ship_config[getScenarioSetting("Unique Ship")]()
-		end
+	local upgrade_config = {
+		["Cheap"] = .5,
+		["Normal"] = 1,
+		["Expensive"] = 1.5,
+		["Luxurious"] = 2,
+		["Monopolistic"] = 3,
+	}
+	upgrade_price = upgrade_config[getScenarioSetting("Upgrade")]
+	local player_ship_config = {
+		["Amalgam"] =	createPlayerShipMixer,
+		["Midian"] =	createPlayerShipFlipper,
+		["Raven"] =		createPlayerShipClaw,
+		["Squid"] =		createPlayerShipInk,
+	}
+	if getScenarioSetting("Unique Ship") ~= "None" then
+		player_ship_config[getScenarioSetting("Unique Ship")]()
 	end
 end
 function setConstants()
