@@ -11,7 +11,7 @@ function init()
     probe_amount=20
 
     player1 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setWeaponTubeCount(0):setCallSign("Tidy-1"):setPosition(-5500,0)
-    player1:setWeaponStorageMax("Nuke",0):setWeaponStorageMax("Homing",0):setWeaponStorageMax("HVLI",0):setWeaponStorageMax("Mine",0):setWeaponStorageMax("Emp",0)
+    player1:setWeaponStorageMax(MISSILE_NUKE,0):setWeaponStorageMax(MISSILE_HOMING,0):setWeaponStorageMax(MISSILE_HVLI,0):setWeaponStorageMax(MISSILE_MINE,0):setWeaponStorageMax("Emp",0)
     player1:onDestroyed(function()
         if player2==nil then
             victory("Ghosts")
@@ -274,7 +274,7 @@ function boot_transmitter(delta)
         escalation=40
     end
     if charge_timer>40 and escalation==40 then
-        probe[probe_amount]:setWeaponStorage("HVLI",1):setWeaponStorageMax("HVLI",1):setWeaponTubeCount(1):setImpulseMaxSpeed(100)
+        probe[probe_amount]:setWeaponStorage(MISSILE_HVLI,1):setWeaponStorageMax(MISSILE_HVLI,1):setWeaponTubeCount(1):setImpulseMaxSpeed(100)
         escalation=60      
     end
     if charge_timer>60 and escalation==60 then 
@@ -395,7 +395,7 @@ end
 function init_player2()
         player2 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Flavia P.Falcon"):setWeaponTubeCount(0)
         player2:setCallSign(_("Empty ship")) -- as players might not realise that this is a player ship and could be confused when noone is answering their call
-        player2:setWeaponStorageMax("Nuke",0):setWeaponStorageMax("Homing",0):setWeaponStorageMax("HVLI",0):setWeaponStorageMax("Mine",0):setWeaponStorageMax("Emp",0)
+        player2:setWeaponStorageMax(MISSILE_NUKE,0):setWeaponStorageMax(MISSILE_HOMING,0):setWeaponStorageMax(MISSILE_HVLI,0):setWeaponStorageMax(MISSILE_MINE,0):setWeaponStorageMax("Emp",0)
         player2:setPosition(32500,-49000)
         player2:addCustomInfo("Engineering","out_of_reach_info",_("Out of reach"))
         player2:addCustomInfo("Engineering+","out_of_reach_info_plus",_("Out of reach"))

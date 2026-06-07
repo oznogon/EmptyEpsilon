@@ -17,6 +17,7 @@
 -- Murphy[Hard]: Random factors are more against you
 
 require("utils.lua")
+require("ee.lua")
 require("place_station_scenario_utility.lua")
 
 -------------------------------
@@ -182,10 +183,10 @@ function init()
 		{x = 907149, y = 149132},	--15
 	}
 	local ship_spot = tableRemoveRandom(ship_spots)
-    junkRepulse = CpuShip():setFaction("Independent"):setTemplate("Repulse"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(14):setShields(0.00,2.00):setWeaponStorage("HVLI",0):setWeaponStorage("Homing",1)
+    junkRepulse = CpuShip():setFaction("Independent"):setTemplate("Repulse"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(14):setShields(0.00,2.00):setWeaponStorage(MISSILE_HVLI,0):setWeaponStorage(MISSILE_HOMING,1)
 	table.insert(junkShips,junkRepulse)	
 	ship_spot = tableRemoveRandom(ship_spots)
-    junkAdder = CpuShip():setFaction("Kraylor"):setTemplate("Adder MK4"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(9):setShields(0.00):setWeaponStorage("HVLI", 1)
+    junkAdder = CpuShip():setFaction("Kraylor"):setTemplate("Adder MK4"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(9):setShields(0.00):setWeaponStorage(MISSILE_HVLI, 1)
 	table.insert(junkShips,junkAdder)
 	ship_spot = tableRemoveRandom(ship_spots)
     junkFreighter1 = CpuShip():setFaction("Kraylor"):setTemplate("Fuel Freighter 1"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(6):setShields(1.00, 0.00)
@@ -218,7 +219,7 @@ function init()
     junkHornet4 = CpuShip():setFaction("Kraylor"):setTemplate("MU52 Hornet"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(2):setShields(0.00)
 	table.insert(junkShips,junkHornet4)
 	ship_spot = tableRemoveRandom(ship_spots)
-    junkPhobos = CpuShip():setFaction("Kraylor"):setTemplate("Phobos M3"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(4):setShields(2.00, 1.00):setWeaponStorage("Homing", 1)
+    junkPhobos = CpuShip():setFaction("Kraylor"):setTemplate("Phobos M3"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(4):setShields(2.00, 1.00):setWeaponStorage(MISSILE_HOMING, 1)
 	table.insert(junkShips,junkPhobos)
 	ship_spot = tableRemoveRandom(ship_spots)
     junkStrikeship = CpuShip():setFaction("Kraylor"):setTemplate("Strikeship"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(0):setShields(4.00, 0.00, 30.00, 30.00)
@@ -246,7 +247,7 @@ function init()
 	}
 	junkRepulse:setSystemHealth("jumpdrive",-1):setBeamWeapon(1,0,0,0,0,0)
 	junkRepulse:setSystemHealthMax("jumpdrive",.5)
-    junkSupply = SupplyDrop():setFaction("Independent"):setPosition(909362, 151445):setEnergy(500):setWeaponStorage("Homing", 1):setWeaponStorage("Nuke", 0):setWeaponStorage("Mine", 0):setWeaponStorage("EMP", 0)
+    junkSupply = SupplyDrop():setFaction("Independent"):setPosition(909362, 151445):setEnergy(500):setWeaponStorage(MISSILE_HOMING, 1):setWeaponStorage(MISSILE_NUKE, 0):setWeaponStorage(MISSILE_MINE, 0):setWeaponStorage(MISSILE_EMP, 0)
 	playerShipHealth = scragHealth	--set function to constrain player ship health
 	playerFighter:addToShipLog(string.format(_("goal-shipLog", "You escaped the brig of station %s and transported yourselves onto one of the spaceship hulks in a nearby holding area for junked spacecraft. You carry critical information for the Human Navy regarding Kraylor activity in this area. You need to make good your escape and dock with a Human Navy space station"), brigStation:getCallSign()),"Magenta")
 	plot1 = scanRepulse				--enable first plot mission goal
@@ -1342,35 +1343,35 @@ function handleDockedState()
 		missilePresence = missilePresence + player:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
-			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
+		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or 
+			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or 
+			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or 
+			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or 
+			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0)   then
 			addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
 				setCommsMessage(_("ammo-comms","What type of ordnance do you need?"))
 				local prompts = {
-					["Nuke"] = {
+					[MISSILE_NUKE] = {
 						_("ammo-comms","Can you supply us with some nukes?"),
 						_("ammo-comms","We really need some nukes."),
 						_("ammo-comms","Can you restock our nuclear missiles?"),
 					},
-					["EMP"] = {
+					[MISSILE_EMP] = {
 						_("ammo-comms","Please restock our EMP missiles."),
 						_("ammo-comms","Got any EMPs?"),
 						_("ammo-comms","We need Electro-Magnetic Pulse missiles."),
 					},
-					["Homing"] = {
+					[MISSILE_HOMING] = {
 						_("ammo-comms","Do you have spare homing missiles for us?"),
 						_("ammo-comms","Do you have extra homing missiles?"),
 						_("ammo-comms","Please replenish our homing missiles."),
 					},
-					["Mine"] = {
+					[MISSILE_MINE] = {
 						_("ammo-comms","We could use some mines."),
 						_("ammo-comms","How about mines?"),
 						_("ammo-comms","Got mines for us?"),
 					},
-					["HVLI"] = {
+					[MISSILE_HVLI] = {
 						_("ammo-comms","What about HVLI?"),
 						_("ammo-comms","Could you provide HVLI?"),
 						_("ammo-comms","We need High Velocity Lead Impactors."),
@@ -2015,11 +2016,11 @@ function stationStatusReport()
 		local provides_some_missiles = false
 		local missile_provision_msg = _("ammo-comms","Ordnance available:")
 		local missile_types = {
-			{name = "Nuke",		desc = _("ammo-comms","nukes")},
-			{name = "EMP",		desc = _("ammo-comms","EMPs")},
-			{name = "Homing",	desc = _("ammo-comms","homings")},
-			{name = "Mine",		desc = _("ammo-comms","mines")},
-			{name = "HVLI",		desc = _("ammo-comms","HVLIs")},
+			{name = MISSILE_NUKE,		desc = _("ammo-comms","nukes")},
+			{name = MISSILE_EMP,		desc = _("ammo-comms","EMPs")},
+			{name = MISSILE_HOMING,	desc = _("ammo-comms","homings")},
+			{name = MISSILE_MINE,		desc = _("ammo-comms","mines")},
+			{name = MISSILE_HVLI,		desc = _("ammo-comms","HVLIs")},
 		}
 		for i,m_type in ipairs(missile_types) do
 			if comms_target.comms_data.weapon_available[m_type.name] then
@@ -2056,15 +2057,15 @@ function handleWeaponRestock(weapon)
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        if weapon == MISSILE_NUKE then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == MISSILE_EMP then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
         else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
-        if weapon == "Nuke" then
+        if weapon == MISSILE_NUKE then
             setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
             setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
@@ -3028,8 +3029,8 @@ function repulseTransfer()
 	playerRepulse.cargo = playerRepulse.maxCargo	--available capacity
 	playerRepulse.shipScore = 14		--ship relative strength
 	playerRepulse:setBeamWeapon(1,0,0,0,0,0)		--severely damaged beam emplacement on one side
-	playerRepulse:setWeaponStorage("Homing",1)		--one leftover homing torpedo
-	playerRepulse:setWeaponStorage("HVLI",0)		--no HVLI
+	playerRepulse:setWeaponStorage(MISSILE_HOMING,1)		--one leftover homing torpedo
+	playerRepulse:setWeaponStorage(MISSILE_HVLI,0)		--no HVLI
 	swapx, swapy = playerFighter:getPosition()		--save current position
 	swapRotate = playerFighter:getRotation()		--save current orientation
 	playerFighter:transferPlayersToShip(playerRepulse)	--switch players from fighter to repulse

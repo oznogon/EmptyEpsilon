@@ -41,6 +41,7 @@
 
 
 require("utils.lua")
+require("ee.lua")
 require("place_station_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
@@ -863,7 +864,7 @@ function constructEnvironment()
 		{chance = 7,	count = 0,	max = -1,					func = placeSensorBuoy,		desc = "Sensor buoy",		},	--7
 		{chance = 9,	count = 0,	max = -1,					func = placeAdBuoy,			desc = "Ad buoy",			},	--8
 		{chance = 8,	count = 0,	max = -1,					func = placeNebula,			desc = "Nebula",			},	--9
-		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = "Mine",				},	--10
+		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = MISSILE_MINE,				},	--10
 		{chance = 5,	count = 0,	max = math.random(3,9),		func = placeMineField,		desc = "Mine field",		},	--11
 		{chance = 5,	count = 0,	max = math.random(2,5),		func = placeAsteroidField,	desc = "Asteroid field",	},	--12
 		{chance = 6,	count = 0,	max = math.random(2,5),		func = placeAsteroidBlob,	desc = "Asteroid blob",		},	--14
@@ -902,7 +903,7 @@ function constructEnvironment()
 		{chance = 7,	count = 0,	max = -1,					func = placeSensorBuoy,		desc = "Sensor buoy",		},	--7
 		{chance = 9,	count = 0,	max = -1,					func = placeAdBuoy,			desc = "Ad buoy",			},	--8
 		{chance = 8,	count = 0,	max = -1,					func = placeNebula,			desc = "Nebula",			},	--9
-		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = "Mine",				},	--10
+		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = MISSILE_MINE,				},	--10
 		{chance = 5,	count = 0,	max = math.random(3,9),		func = placeMineField,		desc = "Mine field",		},	--11
 		{chance = 4,	count = 0,	max = 10,					func = placeTransport,		desc = "Transport",			},	--13
 		{chance = 5,	count = 0,	max = math.random(2,15),	func = placeAsteroidField,	desc = "Asteroid field",	},	--12
@@ -950,7 +951,7 @@ function constructEnvironment()
 		{chance = 7,	count = 0,	max = -1,					func = placeSensorBuoy,		desc = "Sensor buoy",		},	--7
 		{chance = 9,	count = 0,	max = -1,					func = placeAdBuoy,			desc = "Ad buoy",			},	--8
 		{chance = 8,	count = 0,	max = -1,					func = placeNebula,			desc = "Nebula",			},	--9
-		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = "Mine",				},	--10
+		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = MISSILE_MINE,				},	--10
 		{chance = 5,	count = 0,	max = math.random(3,9),		func = placeMineField,		desc = "Mine field",		},	--11
 		{chance = 4,	count = 0,	max = 10,					func = placeTransport,		desc = "Transport",			},	--13
 		{chance = 5,	count = 0,	max = math.random(2,15),	func = placeAsteroidField,	desc = "Asteroid field",	},	--12
@@ -998,7 +999,7 @@ function constructEnvironment()
 		{chance = 7,	count = 0,	max = -1,					func = placeSensorBuoy,		desc = "Sensor buoy",		},	--7
 		{chance = 9,	count = 0,	max = -1,					func = placeAdBuoy,			desc = "Ad buoy",			},	--8
 		{chance = 8,	count = 0,	max = -1,					func = placeNebula,			desc = "Nebula",			},	--9
-		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = "Mine",				},	--10
+		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = MISSILE_MINE,				},	--10
 		{chance = 5,	count = 0,	max = math.random(3,9),		func = placeMineField,		desc = "Mine field",		},	--11
 		{chance = 5,	count = 0,	max = math.random(2,5),		func = placeAsteroidField,	desc = "Asteroid field",	},	--12
 		{chance = 6,	count = 0,	max = math.random(2,5),		func = placeAsteroidBlob,	desc = "Asteroid blob",		},	--14
@@ -1044,7 +1045,7 @@ function constructEnvironment()
 		{chance = 7,	count = 0,	max = -1,					func = placeSensorBuoy,		desc = "Sensor buoy",		},	--7
 		{chance = 9,	count = 0,	max = -1,					func = placeAdBuoy,			desc = "Ad buoy",			},	--8
 		{chance = 8,	count = 0,	max = -1,					func = placeNebula,			desc = "Nebula",			},	--9
-		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = "Mine",				},	--10
+		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = MISSILE_MINE,				},	--10
 		{chance = 5,	count = 0,	max = math.random(3,9),		func = placeMineField,		desc = "Mine field",		},	--11
 		{chance = 4,	count = 0,	max = 10,					func = placeTransport,		desc = "Transport",			},	--13
 		{chance = 5,	count = 0,	max = math.random(2,15),	func = placeAsteroidField,	desc = "Asteroid field",	},	--12
@@ -1094,7 +1095,7 @@ function constructEnvironment()
 		{chance = 7,	count = 0,	max = -1,					func = placeSensorBuoy,		desc = "Sensor buoy",		},	--7
 		{chance = 9,	count = 0,	max = -1,					func = placeAdBuoy,			desc = "Ad buoy",			},	--8
 		{chance = 8,	count = 0,	max = -1,					func = placeNebula,			desc = "Nebula",			},	--9
-		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = "Mine",				},	--10
+		{chance = 5,	count = 0,	max = -1,					func = placeMine,			desc = MISSILE_MINE,				},	--10
 		{chance = 5,	count = 0,	max = math.random(3,9),		func = placeMineField,		desc = "Mine field",		},	--11
 		{chance = 4,	count = 0,	max = 10,					func = placeTransport,		desc = "Transport",			},	--13
 		{chance = 5,	count = 0,	max = math.random(2,15),	func = placeAsteroidField,	desc = "Asteroid field",	},	--12

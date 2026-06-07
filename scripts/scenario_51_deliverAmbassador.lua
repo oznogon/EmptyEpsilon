@@ -13,6 +13,7 @@
 -- Difficulty[Hard]: Harder than normal difficulty - more enemies
 
 require("utils.lua")
+require("ee.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("spawn_ships_scenario_utility.lua")
 require("control_code_scenario_utility.lua")
@@ -967,30 +968,30 @@ function handleDockedState()
         setCommsMessage(_("station-comms", "Welcome to our lovely station."))
     end
 	local weapon_prompts = {
-		["Homing"] = {
-			string.format(_("ammo-comms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")),
-			string.format(_("ammo-comms", "Do you have extra homing missiles? (%d rep each)"), getWeaponCost("Homing")),
-			string.format(_("ammo-comms", "We could use some homing missiles. (%d rep each)"), getWeaponCost("Homing")),
+		[MISSILE_HOMING] = {
+			string.format(_("ammo-comms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost(MISSILE_HOMING)),
+			string.format(_("ammo-comms", "Do you have extra homing missiles? (%d rep each)"), getWeaponCost(MISSILE_HOMING)),
+			string.format(_("ammo-comms", "We could use some homing missiles. (%d rep each)"), getWeaponCost(MISSILE_HOMING)),
 		},
-		["HVLI"] = {
-			string.format(_("ammo-comms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")),
-			string.format(_("ammo-comms", "What about HVLI? (%d rep each)"), getWeaponCost("HVLI")),
-			string.format(_("ammo-comms", "We need some High Velocity Lead Impactors. (%d rep each)"), getWeaponCost("HVLI")),
+		[MISSILE_HVLI] = {
+			string.format(_("ammo-comms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost(MISSILE_HVLI)),
+			string.format(_("ammo-comms", "What about HVLI? (%d rep each)"), getWeaponCost(MISSILE_HVLI)),
+			string.format(_("ammo-comms", "We need some High Velocity Lead Impactors. (%d rep each)"), getWeaponCost(MISSILE_HVLI)),
 		},
-		["Mine"] = {
-			string.format(_("ammo-comms", "Please restock our mines. (%d rep each)"), getWeaponCost("Mine")),
-			string.format(_("ammo-comms", "How about mines? (%d rep each)"), getWeaponCost("Mine")),
-			string.format(_("ammo-comms", "We are running low on mines. (%d rep each)"), getWeaponCost("Mine")),
+		[MISSILE_MINE] = {
+			string.format(_("ammo-comms", "Please restock our mines. (%d rep each)"), getWeaponCost(MISSILE_MINE)),
+			string.format(_("ammo-comms", "How about mines? (%d rep each)"), getWeaponCost(MISSILE_MINE)),
+			string.format(_("ammo-comms", "We are running low on mines. (%d rep each)"), getWeaponCost(MISSILE_MINE)),
 		},
-		["EMP"] = {
-			string.format(_("ammo-comms", "Please restock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")),
-			string.format(_("ammo-comms", "Got any EMPs? (%d rep each)"), getWeaponCost("EMP")),
-			string.format(_("ammo-comms", "We need Electro-Magnetic Pulse missiles. (%d rep each)"), getWeaponCost("EMP")),
+		[MISSILE_EMP] = {
+			string.format(_("ammo-comms", "Please restock our EMP missiles. (%d rep each)"), getWeaponCost(MISSILE_EMP)),
+			string.format(_("ammo-comms", "Got any EMPs? (%d rep each)"), getWeaponCost(MISSILE_EMP)),
+			string.format(_("ammo-comms", "We need Electro-Magnetic Pulse missiles. (%d rep each)"), getWeaponCost(MISSILE_EMP)),
 		},
-		["Nuke"] = {
-			string.format(_("ammo-comms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")),
-			string.format(_("ammo-comms", "We really need some nukes. (%d rep each)"), getWeaponCost("Nuke")),
-			string.format(_("ammo-comms", "We could use some nuclear missiles. (%d rep each)"), getWeaponCost("Nuke")),
+		[MISSILE_NUKE] = {
+			string.format(_("ammo-comms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost(MISSILE_NUKE)),
+			string.format(_("ammo-comms", "We really need some nukes. (%d rep each)"), getWeaponCost(MISSILE_NUKE)),
+			string.format(_("ammo-comms", "We could use some nuclear missiles. (%d rep each)"), getWeaponCost(MISSILE_NUKE)),
 		}
 	}
 	for weapon,prompt in pairs(weapon_prompts) do
@@ -1034,9 +1035,9 @@ function handleWeaponRestock(weapon)
     	return 
     end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then 
+        if weapon == MISSILE_NUKE then 
         	setCommsMessage(_("ammo-comms","We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then 
+        elseif weapon == MISSILE_EMP then 
         	setCommsMessage(_("ammo-comms","We do not deal in weapons of mass disruption."))
         else 
         	setCommsMessage(_("ammo-comms","We do not deal in those weapons."))
@@ -1046,7 +1047,7 @@ function handleWeaponRestock(weapon)
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
-        if weapon == "Nuke" then
+        if weapon == MISSILE_NUKE then
             setCommsMessage(_("ammo-comms","All nukes are charged and primed for destruction."))
         else
             setCommsMessage(_("ammo-comms","Sorry, sir, but you are as fully stocked as I can allow."))

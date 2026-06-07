@@ -40,6 +40,8 @@ local wave_timer
 local troop_timer
 
 --- Initialize scenario.
+require("ee.lua")
+
 function init()
     troops_human = {}
     troops_kraylor = {}
@@ -242,7 +244,7 @@ function supplyDialogue()
     setCommsMessage(_("ammo-comms", "What supplies do you need?"))
 
     addCommsReplySupply {
-        missile_type = "Homing",
+        missile_type = MISSILE_HOMING,
         price = 2,
         request = _("ammo-comms", "Do you have spare homing missiles for us?"),
         reply_full = _("ammo-comms", "Sorry, Captain, but you are fully stocked with homing missiles."),
@@ -250,7 +252,7 @@ function supplyDialogue()
     }
 
     addCommsReplySupply {
-        missile_type = "Mine",
+        missile_type = MISSILE_MINE,
         price = 2,
         request = _("ammo-comms", "Please re-stock our mines."),
         reply_full = _("ammo-comms", "Captain, you already have all the mines you can fit in that ship."),
@@ -258,7 +260,7 @@ function supplyDialogue()
     }
 
     addCommsReplySupply {
-        missile_type = "Nuke",
+        missile_type = MISSILE_NUKE,
         price = 15,
         request = _("ammo-comms", "Can you supply us with some nukes?"),
         reply_full = _("ammo-comms", "Your nukes are already charged and primed for destruction."),
@@ -266,7 +268,7 @@ function supplyDialogue()
     }
 
     addCommsReplySupply {
-        missile_type = "EMP",
+        missile_type = MISSILE_EMP,
         price = 10,
         request = _("ammo-comms", "Please re-stock our EMP missiles."),
         reply_full = _("ammo-comms", "All storage for EMP missiles is already full, Captain."),
@@ -274,7 +276,7 @@ function supplyDialogue()
     }
 
     addCommsReplySupply {
-        missile_type = "HVLI",
+        missile_type = MISSILE_HVLI,
         price = 2,
         request = _("ammo-comms", "Can you restock us with HVLI?"),
         reply_full = _("ammo-comms", "Sorry, Captain, but you are fully stocked with HVLIs."),

@@ -19,6 +19,7 @@
 -- Basis[Hornet]: The Hornet is the basis for the locusts
 -- Basis[Drone]: The Ktlitan Drone is the basis for the locusts
 require("utils.lua")
+require("ee.lua")
 require("place_station_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
@@ -377,14 +378,14 @@ function constructEnvironment()
 		{typ = "WarpJammer",	siz = 5000},
 		{typ = "mineblob",		siz = 4000},
 		{typ = "asteroidblob",	siz = 3500},
-		{typ = "Mine",			siz = 2000},
+		{typ = MISSILE_MINE,			siz = 2000},
 		{typ = "Asteroid",		siz = 1000},
 	}
 	local common_obj_type_sizes = {
 		{typ = "WarpJammer",	siz = 5000},
 		{typ = "mineblob",		siz = 4000},
 		{typ = "asteroidblob",	siz = 3500},
-		{typ = "Mine",			siz = 2000},
+		{typ = MISSILE_MINE,			siz = 2000},
 		{typ = "Asteroid",		siz = 1000},
 	}
 	local planet_list = {
@@ -503,7 +504,7 @@ function constructEnvironment()
 			elseif insert_type == "asteroidblob" then
 				closest_distance = math.min(closest_distance,15000)
 				placeAsteroidBlob(ox,oy,closest_distance*.37)
-			elseif insert_type == "Mine" then
+			elseif insert_type == MISSILE_MINE then
 				Mine():setPosition(ox,oy)
 			elseif insert_type == "Asteroid" then
 				Asteroid():setPosition(ox,oy):setSize(random(20,950))

@@ -49,6 +49,7 @@
 --		Polly scan time	11
 
 require("utils.lua")
+require("ee.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("place_station_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
@@ -142,17 +143,17 @@ function createPlayerShipNarsil()
 	playerNarsil:setShields(150,150)
 	playerNarsil:setWeaponTubeCount(6)					--one more forward tube, less flexible ordnance
 	playerNarsil:setWeaponTubeDirection(0,0)			--front facing
-	playerNarsil:setWeaponTubeExclusiveFor(0,"HVLI")	--HVLI only
+	playerNarsil:setWeaponTubeExclusiveFor(0,MISSILE_HVLI)	--HVLI only
 	playerNarsil:setWeaponTubeDirection(1,-90)			--left facing
-	playerNarsil:weaponTubeDisallowMissle(1,"Mine")		--all but mine
+	playerNarsil:weaponTubeDisallowMissle(1,MISSILE_MINE)		--all but mine
 	playerNarsil:setWeaponTubeDirection(2,-90)			--left facing
-	playerNarsil:setWeaponTubeExclusiveFor(2,"HVLI")	--HVLI only
+	playerNarsil:setWeaponTubeExclusiveFor(2,MISSILE_HVLI)	--HVLI only
 	playerNarsil:setWeaponTubeDirection(3,90)			--right facing
-	playerNarsil:weaponTubeDisallowMissle(3,"Mine")		--all but mine
+	playerNarsil:weaponTubeDisallowMissle(3,MISSILE_MINE)		--all but mine
 	playerNarsil:setWeaponTubeDirection(4,90)			--right facing
-	playerNarsil:setWeaponTubeExclusiveFor(4,"HVLI")	--HVLI only
+	playerNarsil:setWeaponTubeExclusiveFor(4,MISSILE_HVLI)	--HVLI only
 	playerNarsil:setWeaponTubeDirection(5,180)			--rear facing
-	playerNarsil:setWeaponTubeExclusiveFor(5,"Mine")	--Mine only
+	playerNarsil:setWeaponTubeExclusiveFor(5,MISSILE_MINE)	--Mine only
 	playerNarsil:addReputationPoints(50)
 	removeGMFunction("Narsil")
 	playerShipGMButtons()
@@ -170,25 +171,25 @@ function createPlayerShipHeadhunter()
 	playerHeadhunter:setBeamWeaponTurret(0, 80, 0, 1)			--slow turret 
 	playerHeadhunter:setWeaponTubeCount(7)						--one fewer mine tube, but EMPs added
 	playerHeadhunter:setWeaponTubeDirection(6, 180)				--mine tube points straight back
-	playerHeadhunter:setWeaponTubeExclusiveFor(0,"HVLI")
-	playerHeadhunter:setWeaponTubeExclusiveFor(1,"HVLI")
-	playerHeadhunter:setWeaponTubeExclusiveFor(2,"HVLI")
-	playerHeadhunter:setWeaponTubeExclusiveFor(3,"HVLI")
-	playerHeadhunter:setWeaponTubeExclusiveFor(4,"HVLI")
-	playerHeadhunter:setWeaponTubeExclusiveFor(5,"HVLI")
-	playerHeadhunter:setWeaponTubeExclusiveFor(6,"Mine")
-	playerHeadhunter:weaponTubeAllowMissle(1,"Homing")
-	playerHeadhunter:weaponTubeAllowMissle(1,"EMP")
-	playerHeadhunter:weaponTubeAllowMissle(1,"Nuke")
-	playerHeadhunter:weaponTubeAllowMissle(4,"Homing")
-	playerHeadhunter:weaponTubeAllowMissle(4,"EMP")
-	playerHeadhunter:weaponTubeAllowMissle(4,"Nuke")
-	playerHeadhunter:setWeaponStorageMax("Mine",4)				--fewer mines (vs 8)
-	playerHeadhunter:setWeaponStorage("Mine", 4)				
-	playerHeadhunter:setWeaponStorageMax("EMP",4)				--more EMPs (vs 0)
-	playerHeadhunter:setWeaponStorage("EMP", 4)					
-	playerHeadhunter:setWeaponStorageMax("Nuke",4)				--fewer Nukes (vs 6)
-	playerHeadhunter:setWeaponStorage("Nuke", 4)				
+	playerHeadhunter:setWeaponTubeExclusiveFor(0,MISSILE_HVLI)
+	playerHeadhunter:setWeaponTubeExclusiveFor(1,MISSILE_HVLI)
+	playerHeadhunter:setWeaponTubeExclusiveFor(2,MISSILE_HVLI)
+	playerHeadhunter:setWeaponTubeExclusiveFor(3,MISSILE_HVLI)
+	playerHeadhunter:setWeaponTubeExclusiveFor(4,MISSILE_HVLI)
+	playerHeadhunter:setWeaponTubeExclusiveFor(5,MISSILE_HVLI)
+	playerHeadhunter:setWeaponTubeExclusiveFor(6,MISSILE_MINE)
+	playerHeadhunter:weaponTubeAllowMissle(1,MISSILE_HOMING)
+	playerHeadhunter:weaponTubeAllowMissle(1,MISSILE_EMP)
+	playerHeadhunter:weaponTubeAllowMissle(1,MISSILE_NUKE)
+	playerHeadhunter:weaponTubeAllowMissle(4,MISSILE_HOMING)
+	playerHeadhunter:weaponTubeAllowMissle(4,MISSILE_EMP)
+	playerHeadhunter:weaponTubeAllowMissle(4,MISSILE_NUKE)
+	playerHeadhunter:setWeaponStorageMax(MISSILE_MINE,4)				--fewer mines (vs 8)
+	playerHeadhunter:setWeaponStorage(MISSILE_MINE, 4)				
+	playerHeadhunter:setWeaponStorageMax(MISSILE_EMP,4)				--more EMPs (vs 0)
+	playerHeadhunter:setWeaponStorage(MISSILE_EMP, 4)					
+	playerHeadhunter:setWeaponStorageMax(MISSILE_NUKE,4)				--fewer Nukes (vs 6)
+	playerHeadhunter:setWeaponStorage(MISSILE_NUKE, 4)				
 	playerHeadhunter:addReputationPoints(50)
 	removeGMFunction("Headhunter")
 	playerShipGMButtons()
@@ -208,17 +209,17 @@ function createPlayerShipBlazon()
 	playerBlazon:setWeaponTubeDirection(0,-60)
 	playerBlazon:setWeaponTubeDirection(1,60)
 	playerBlazon:setWeaponTubeDirection(2,180)
-	playerBlazon:weaponTubeDisallowMissle(0,"Mine")
-	playerBlazon:weaponTubeDisallowMissle(1,"Mine")
-	playerBlazon:setWeaponTubeExclusiveFor(2,"Mine")
-	playerBlazon:setWeaponStorageMax("Homing",6)
-	playerBlazon:setWeaponStorage("Homing",6)
-	playerBlazon:setWeaponStorageMax("EMP",2)
-	playerBlazon:setWeaponStorage("EMP",2)
-	playerBlazon:setWeaponStorageMax("Nuke",2)
-	playerBlazon:setWeaponStorage("Nuke",2)
-	playerBlazon:setWeaponStorageMax("Mine",4)
-	playerBlazon:setWeaponStorage("Mine",4)
+	playerBlazon:weaponTubeDisallowMissle(0,MISSILE_MINE)
+	playerBlazon:weaponTubeDisallowMissle(1,MISSILE_MINE)
+	playerBlazon:setWeaponTubeExclusiveFor(2,MISSILE_MINE)
+	playerBlazon:setWeaponStorageMax(MISSILE_HOMING,6)
+	playerBlazon:setWeaponStorage(MISSILE_HOMING,6)
+	playerBlazon:setWeaponStorageMax(MISSILE_EMP,2)
+	playerBlazon:setWeaponStorage(MISSILE_EMP,2)
+	playerBlazon:setWeaponStorageMax(MISSILE_NUKE,2)
+	playerBlazon:setWeaponStorage(MISSILE_NUKE,2)
+	playerBlazon:setWeaponStorageMax(MISSILE_MINE,4)
+	playerBlazon:setWeaponStorage(MISSILE_MINE,4)
 	playerBlazon:addReputationPoints(50)
 	removeGMFunction("Blazon")
 	playerShipGMButtons()
@@ -232,21 +233,21 @@ function createPlayerShipSting()
 	playerSting:setWarpDrive(true)		--add warp
 	playerSting:setWeaponTubeCount(3)	--one more tube for mines, no heavy ordnance
 	playerSting:setWeaponTubeDirection(0, -90)
-	playerSting:weaponTubeDisallowMissle(0,"Mine")
-	playerSting:weaponTubeDisallowMissle(0,"Nuke")
-	playerSting:weaponTubeDisallowMissle(0,"EMP")
-	playerSting:setWeaponStorageMax("Mine",3)
-	playerSting:setWeaponStorage("Mine",3)
-	playerSting:setWeaponStorageMax("Nuke",0)
-	playerSting:setWeaponStorage("Nuke",0)
-	playerSting:setWeaponStorageMax("EMP",0)
-	playerSting:setWeaponStorage("EMP",0)
+	playerSting:weaponTubeDisallowMissle(0,MISSILE_MINE)
+	playerSting:weaponTubeDisallowMissle(0,MISSILE_NUKE)
+	playerSting:weaponTubeDisallowMissle(0,MISSILE_EMP)
+	playerSting:setWeaponStorageMax(MISSILE_MINE,3)
+	playerSting:setWeaponStorage(MISSILE_MINE,3)
+	playerSting:setWeaponStorageMax(MISSILE_NUKE,0)
+	playerSting:setWeaponStorage(MISSILE_NUKE,0)
+	playerSting:setWeaponStorageMax(MISSILE_EMP,0)
+	playerSting:setWeaponStorage(MISSILE_EMP,0)
 	playerSting:setWeaponTubeDirection(1, 90)
-	playerSting:weaponTubeDisallowMissle(1,"Mine")
-	playerSting:weaponTubeDisallowMissle(1,"Nuke")
-	playerSting:weaponTubeDisallowMissle(1,"EMP")
+	playerSting:weaponTubeDisallowMissle(1,MISSILE_MINE)
+	playerSting:weaponTubeDisallowMissle(1,MISSILE_NUKE)
+	playerSting:weaponTubeDisallowMissle(1,MISSILE_EMP)
 	playerSting:setWeaponTubeDirection(2,180)
-	playerSting:setWeaponTubeExclusiveFor(2,"Mine")
+	playerSting:setWeaponTubeExclusiveFor(2,MISSILE_MINE)
 	playerSting:addReputationPoints(50)
 	removeGMFunction("Sting")
 	playerShipGMButtons()
@@ -2651,9 +2652,9 @@ function addAuxTube()
 					local originalTubes = comms_source:getWeaponTubeCount()
 					local newTubes = originalTubes + 1
 					comms_source:setWeaponTubeCount(newTubes)
-					comms_source:setWeaponTubeExclusiveFor(originalTubes, "Homing")
-					comms_source:setWeaponStorageMax("Homing", comms_source:getWeaponStorageMax("Homing") + 2)
-					comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorage("Homing") + 2)
+					comms_source:setWeaponTubeExclusiveFor(originalTubes, MISSILE_HOMING)
+					comms_source:setWeaponStorageMax(MISSILE_HOMING, comms_source:getWeaponStorageMax(MISSILE_HOMING) + 2)
+					comms_source:setWeaponStorage(MISSILE_HOMING, comms_source:getWeaponStorage(MISSILE_HOMING) + 2)
 					setCommsMessage(string.format(_("upgrade-comms","%s thanks you for the %s and the luxury and installs a homing missile tube for you"),ctd.character,ctd.characterGood))
 				else
 					setCommsMessage(string.format(_("upgrade-comms","%s requires %s and luxury for the missile tube"),ctd.character,ctd.characterGood))
@@ -2664,9 +2665,9 @@ function addAuxTube()
 				originalTubes = comms_source:getWeaponTubeCount()
 				newTubes = originalTubes + 1
 				comms_source:setWeaponTubeCount(newTubes)
-				comms_source:setWeaponTubeExclusiveFor(originalTubes, "Homing")
-				comms_source:setWeaponStorageMax("Homing", comms_source:getWeaponStorageMax("Homing") + 2)
-				comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorage("Homing") + 2)
+				comms_source:setWeaponTubeExclusiveFor(originalTubes, MISSILE_HOMING)
+				comms_source:setWeaponStorageMax(MISSILE_HOMING, comms_source:getWeaponStorageMax(MISSILE_HOMING) + 2)
+				comms_source:setWeaponStorage(MISSILE_HOMING, comms_source:getWeaponStorage(MISSILE_HOMING) + 2)
 				setCommsMessage(string.format(_("upgrade-comms","%s installs a homing missile tube for you. The %s required was requisitioned from emergency contingency supplies"),ctd.character,ctd.characterGood))
 			end
 		end)
@@ -3124,35 +3125,35 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
-			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
+		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or 
+			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or 
+			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or 
+			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or 
+			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0)   then
 			addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
 				setCommsMessage(_("ammo-comms","What type of ordnance do you need?"))
 				local prompts = {
-					["Nuke"] = {
+					[MISSILE_NUKE] = {
 						_("ammo-comms","Can you supply us with some nukes?"),
 						_("ammo-comms","We really need some nukes."),
 						_("ammo-comms","Can you restock our nuclear missiles?"),
 					},
-					["EMP"] = {
+					[MISSILE_EMP] = {
 						_("ammo-comms","Please restock our EMP missiles."),
 						_("ammo-comms","Got any EMPs?"),
 						_("ammo-comms","We need Electro-Magnetic Pulse missiles."),
 					},
-					["Homing"] = {
+					[MISSILE_HOMING] = {
 						_("ammo-comms","Do you have spare homing missiles for us?"),
 						_("ammo-comms","Do you have extra homing missiles?"),
 						_("ammo-comms","Please replenish our homing missiles."),
 					},
-					["Mine"] = {
+					[MISSILE_MINE] = {
 						_("ammo-comms","We could use some mines."),
 						_("ammo-comms","How about mines?"),
 						_("ammo-comms","Got mines for us?"),
 					},
-					["HVLI"] = {
+					[MISSILE_HVLI] = {
 						_("ammo-comms","What about HVLI?"),
 						_("ammo-comms","Could you provide HVLI?"),
 						_("ammo-comms","We need High Velocity Lead Impactors."),
@@ -4637,15 +4638,15 @@ function handleWeaponRestock(weapon)
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("ammo-comms","We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms","We do not deal in weapons of mass disruption."))
+        if weapon == MISSILE_NUKE then setCommsMessage(_("ammo-comms","We do not deal in weapons of mass destruction."))
+        elseif weapon == MISSILE_EMP then setCommsMessage(_("ammo-comms","We do not deal in weapons of mass disruption."))
         else setCommsMessage(_("ammo-comms","We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
-        if weapon == "Nuke" then
+        if weapon == MISSILE_NUKE then
             setCommsMessage(_("ammo-comms","All nukes are charged and primed for destruction."))
         else
             setCommsMessage(_("ammo-comms","Sorry, sir, but you are as fully stocked as I can allow."))
@@ -5254,11 +5255,11 @@ function addStationToDatabase(station)
 				}
 			end
 			local station_missiles = {
-				{name = "Homing",	key = _("scienceDB","Restock Homing")},
-				{name = "HVLI",		key = _("scienceDB","Restock HVLI")},
-				{name = "Mine",		key = _("scienceDB","Restock Mine")},
-				{name = "Nuke",		key = _("scienceDB","Restock Nuke")},
-				{name = "EMP",		key = _("scienceDB","Restock EMP")},
+				{name = MISSILE_HOMING,	key = _("scienceDB","Restock Homing")},
+				{name = MISSILE_HVLI,		key = _("scienceDB","Restock HVLI")},
+				{name = MISSILE_MINE,		key = _("scienceDB","Restock Mine")},
+				{name = MISSILE_NUKE,		key = _("scienceDB","Restock Nuke")},
+				{name = MISSILE_EMP,		key = _("scienceDB","Restock EMP")},
 			}
 			for i,sm in ipairs(station_missiles) do
 				if station.comms_data.weapon_available[sm.name] then

@@ -12,6 +12,7 @@
 -- Enemies[Hard]: Hard goals and/or enemies. Good for experienced crews looking for a challenge.
 
 require("utils.lua")
+require("ee.lua")
 --	Initialization functions
 function init()
 	scenario_version = "2.0.1"
@@ -417,29 +418,29 @@ function handleDockedState()
     else
         setCommsMessage(_("station-comms", "Welcome to our lovely station."))
     end
-    if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply(string.format(_("ammo-comms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
-            handleWeaponRestock("Homing")
+    if player:getWeaponStorageMax(MISSILE_HOMING) > 0 then
+        addCommsReply(string.format(_("ammo-comms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost(MISSILE_HOMING)), function()
+            handleWeaponRestock(MISSILE_HOMING)
         end)
     end
-    if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply(string.format(_("ammo-comms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
-            handleWeaponRestock("HVLI")
+    if player:getWeaponStorageMax(MISSILE_HVLI) > 0 then
+        addCommsReply(string.format(_("ammo-comms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost(MISSILE_HVLI)), function()
+            handleWeaponRestock(MISSILE_HVLI)
         end)
     end
-    if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply(string.format(_("ammo-comms", "Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
-            handleWeaponRestock("Mine")
+    if player:getWeaponStorageMax(MISSILE_MINE) > 0 then
+        addCommsReply(string.format(_("ammo-comms", "Please re-stock our mines. (%d rep each)"), getWeaponCost(MISSILE_MINE)), function()
+            handleWeaponRestock(MISSILE_MINE)
         end)
     end
-    if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply(string.format(_("ammo-comms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
-            handleWeaponRestock("Nuke")
+    if player:getWeaponStorageMax(MISSILE_NUKE) > 0 then
+        addCommsReply(string.format(_("ammo-comms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost(MISSILE_NUKE)), function()
+            handleWeaponRestock(MISSILE_NUKE)
         end)
     end
-    if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply(string.format(_("ammo-comms", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
-            handleWeaponRestock("EMP")
+    if player:getWeaponStorageMax(MISSILE_EMP) > 0 then
+        addCommsReply(string.format(_("ammo-comms", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost(MISSILE_EMP)), function()
+            handleWeaponRestock(MISSILE_EMP)
         end)
     end
 	if player:isFriendly(comms_target) then
@@ -493,15 +494,15 @@ end
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then setCommsMessage(_("station-comms", "You need to stay docked for that action.")); return end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        if weapon == MISSILE_NUKE then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == MISSILE_EMP then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
         else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
-        if weapon == "Nuke" then
+        if weapon == MISSILE_NUKE then
             setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
             setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));

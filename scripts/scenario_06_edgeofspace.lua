@@ -13,6 +13,8 @@
 -- @script scenario_06_edgeofspace
 
 --- Init is run when the scenario is started. Create your initial world.
+require("ee.lua")
+
 function init()
     -- Create the main ship for the players.
     Player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(12400, 18200):setCallSign("Apollo"):addReputationPoints(250.0)
@@ -25,8 +27,8 @@ function init()
     Player:setBeamWeapon(1, 90, 25, 1000.0, 6.0, 10)
     Player:setWeaponTubeCount(1)
     Player:setWeaponTubeDirection(0, 0)
-    Player:setWeaponStorageMax("Nuke", 0)
-    Player:setWeaponStorageMax("Mine", 0)
+    Player:setWeaponStorageMax(MISSILE_NUKE, 0)
+    Player:setWeaponStorageMax(MISSILE_MINE, 0)
 
     -- Create a "Technical Officer" entity hidden in sector Z81 to talk to Relay and prompt the Captain to give the order to return to Central Command. The position of this ship in relation to the station Nirvana was intended to serve as a sort of timer for the inspection job.
     Technical_Officer = CpuShip():setFaction("Human Navy"):setTemplate("Flavia"):setCallSign(_("callsign-ship", "Technical Officer")):setPosition(1530000, 411000):orderIdle()
@@ -663,18 +665,18 @@ Dock with the E.O.S. scope. We are re-fitting your ship in preparation for warti
             Player:setBeamWeapon(1, 100, 20, 1000.0, 6.0, 10)
             Player:setBeamWeapon(2, 90, 180, 1000.0, 6.0, 10)
             Player:setWeaponTubeCount(3)
-            Player:setWeaponTubeDirection(0, 0):weaponTubeDisallowMissle(0, "Mine")
-            Player:setWeaponTubeDirection(1, 0):weaponTubeDisallowMissle(1, "Mine")
+            Player:setWeaponTubeDirection(0, 0):weaponTubeDisallowMissle(0, MISSILE_MINE)
+            Player:setWeaponTubeDirection(1, 0):weaponTubeDisallowMissle(1, MISSILE_MINE)
             Player:setWeaponTubeDirection(2, 180)
-            Player:setWeaponTubeExclusiveFor(2, "Mine")
-            Player:setWeaponStorageMax("Homing", 12)
-            Player:setWeaponStorageMax("Nuke", 4)
-            Player:setWeaponStorageMax("Mine", 8)
-            Player:setWeaponStorageMax("EMP", 6)
-            Player:setWeaponStorage("Homing", 12)
-            Player:setWeaponStorage("Nuke", 4)
-            Player:setWeaponStorage("Mine", 8)
-            Player:setWeaponStorage("EMP", 6)
+            Player:setWeaponTubeExclusiveFor(2, MISSILE_MINE)
+            Player:setWeaponStorageMax(MISSILE_HOMING, 12)
+            Player:setWeaponStorageMax(MISSILE_NUKE, 4)
+            Player:setWeaponStorageMax(MISSILE_MINE, 8)
+            Player:setWeaponStorageMax(MISSILE_EMP, 6)
+            Player:setWeaponStorage(MISSILE_HOMING, 12)
+            Player:setWeaponStorage(MISSILE_NUKE, 4)
+            Player:setWeaponStorage(MISSILE_MINE, 8)
+            Player:setWeaponStorage(MISSILE_EMP, 6)
 
             Central_Command:sendCommsMessage(
                 Player,
@@ -893,15 +895,15 @@ What can we do for you today?]]))
                     setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
-                if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Homing") - comms_source:getWeaponStorage("Homing"))) then
+                if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax(MISSILE_HOMING) - comms_source:getWeaponStorage(MISSILE_HOMING))) then
                     setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
-                if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") then
+                if comms_source:getWeaponStorage(MISSILE_HOMING) >= comms_source:getWeaponStorageMax(MISSILE_HOMING) then
                     setCommsMessage(_("ammo-comms", "Sorry, sir, but you are fully stocked with homing missiles."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 else
-                    comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing"))
+                    comms_source:setWeaponStorage(MISSILE_HOMING, comms_source:getWeaponStorageMax(MISSILE_HOMING))
                     setCommsMessage(_("ammo-comms", "We have refilled your missile supply."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 end
@@ -914,15 +916,15 @@ What can we do for you today?]]))
                     setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
-                if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then
+                if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax(MISSILE_MINE) - comms_source:getWeaponStorage(MISSILE_MINE))) then
                     setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
-                if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
+                if comms_source:getWeaponStorage(MISSILE_MINE) >= comms_source:getWeaponStorageMax(MISSILE_MINE) then
                     setCommsMessage(_("ammo-comms", "Captain, your ship is already fully stocked with mines."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 else
-                    comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
+                    comms_source:setWeaponStorage(MISSILE_MINE, comms_source:getWeaponStorageMax(MISSILE_MINE))
                     setCommsMessage(_("ammo-comms", "These mines are yours."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 end
@@ -935,15 +937,15 @@ What can we do for you today?]]))
                     setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
-                if not comms_source:takeReputationPoints(15 * (comms_source:getWeaponStorageMax("Nuke") - comms_source:getWeaponStorage("Nuke"))) then
+                if not comms_source:takeReputationPoints(15 * (comms_source:getWeaponStorageMax(MISSILE_NUKE) - comms_source:getWeaponStorage(MISSILE_NUKE))) then
                     setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
-                if comms_source:getWeaponStorage("Nuke") >= comms_source:getWeaponStorageMax("Nuke") then
+                if comms_source:getWeaponStorage(MISSILE_NUKE) >= comms_source:getWeaponStorageMax(MISSILE_NUKE) then
                     setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 else
-                    comms_source:setWeaponStorage("Nuke", comms_source:getWeaponStorageMax("Nuke"))
+                    comms_source:setWeaponStorage(MISSILE_NUKE, comms_source:getWeaponStorageMax(MISSILE_NUKE))
                     setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 end
@@ -956,15 +958,15 @@ What can we do for you today?]]))
                     setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
-                if not comms_source:takeReputationPoints(10 * (comms_source:getWeaponStorageMax("EMP") - comms_source:getWeaponStorage("EMP"))) then
+                if not comms_source:takeReputationPoints(10 * (comms_source:getWeaponStorageMax(MISSILE_EMP) - comms_source:getWeaponStorage(MISSILE_EMP))) then
                     setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
-                if comms_source:getWeaponStorage("EMP") >= comms_source:getWeaponStorageMax("EMP") then
+                if comms_source:getWeaponStorage(MISSILE_EMP) >= comms_source:getWeaponStorageMax(MISSILE_EMP) then
                     setCommsMessage(_("ammo-comms", "All storage for EMP missiles is filled, sir."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 else
-                    comms_source:setWeaponStorage("EMP", comms_source:getWeaponStorageMax("EMP"))
+                    comms_source:setWeaponStorage(MISSILE_EMP, comms_source:getWeaponStorageMax(MISSILE_EMP))
                     setCommsMessage(_("ammo-comms", "Recalibrated the electronics and fitted you with all the EMP missiles you can carry."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 end
@@ -989,15 +991,15 @@ If you want to do business, please dock with us first.]]))
                     setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
-                if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") / 2 then
+                if comms_source:getWeaponStorage(MISSILE_HOMING) >= comms_source:getWeaponStorageMax(MISSILE_HOMING) / 2 then
                     setCommsMessage(_("ammo-comms", "You seem to have more than enough missiles."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 else
-                    if not comms_source:takeReputationPoints(5 * ((comms_source:getWeaponStorageMax("Homing") / 2) - comms_source:getWeaponStorage("Homing"))) then
+                    if not comms_source:takeReputationPoints(5 * ((comms_source:getWeaponStorageMax(MISSILE_HOMING) / 2) - comms_source:getWeaponStorage(MISSILE_HOMING))) then
                         setCommsMessage(_("needRep-comms", "Not enough reputation."))
                         return
                     end
-                    comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing") / 2)
+                    comms_source:setWeaponStorage(MISSILE_HOMING, comms_source:getWeaponStorageMax(MISSILE_HOMING) / 2)
                     setCommsMessage(_("ammo-comms", [[We generously resupplied you with some free homing missiles.
 
 Put them to good use.]]))
@@ -1012,15 +1014,15 @@ Put them to good use.]]))
                     setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
-                if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
+                if comms_source:getWeaponStorage(MISSILE_MINE) >= comms_source:getWeaponStorageMax(MISSILE_MINE) then
                     setCommsMessage(_("ammo-comms", "You are fully stocked with mines."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 else
-                    if not comms_source:takeReputationPoints(5 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then
+                    if not comms_source:takeReputationPoints(5 * (comms_source:getWeaponStorageMax(MISSILE_MINE) - comms_source:getWeaponStorage(MISSILE_MINE))) then
                         setCommsMessage(_("needRep-comms", "Not enough reputation."))
                         return
                     end
-                    comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
+                    comms_source:setWeaponStorage(MISSILE_MINE, comms_source:getWeaponStorageMax(MISSILE_MINE))
                     setCommsMessage(_("ammo-comms", "Here, have some mines. Mines are good defensive weapons."))
                     addCommsReply(_("Back"), commsStationMainMenu)
                 end

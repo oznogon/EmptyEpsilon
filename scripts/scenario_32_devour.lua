@@ -26,6 +26,7 @@
 -- Reputation[Super Hero]: 200 reputation - everyone knows you and relies on you for help
 
 require("utils.lua")
+require("ee.lua")
 require("place_station_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
@@ -1229,8 +1230,8 @@ function constructEnvironment()
 		devourer:setWeaponTubeDirection(i*3 + 1,(i*3 + 1)*24):setTubeSize(i*3 + 1,"medium")
 		devourer:setWeaponTubeDirection(i*3 + 2,(i*3 + 2)*24):setTubeSize(i*3 + 2,"large")
 	end
-	devourer:setWeaponStorageMax("Homing", 15000)		--more (vs 1000)
-	devourer:setWeaponStorage("Homing",    15000)
+	devourer:setWeaponStorageMax(MISSILE_HOMING, 15000)		--more (vs 1000)
+	devourer:setWeaponStorage(MISSILE_HOMING,    15000)
 	local ships_key = _("scienceDB","Ships")
 	local dreadnought_key = _("scienceDB","Dreadnought")
 	local devourer_key = _("scienceDB","Planet Devourer")
@@ -2332,16 +2333,16 @@ function handleDockedState()
 			missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 		end
 		if missilePresence > 0 then
-			if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-				(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-				(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-				(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
-				(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
+			if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or 
+				(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or 
+				(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or 
+				(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or 
+				(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0)   then
 				addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
 					if stationCommsDiagnostic then print("in restock function") end
 					setCommsMessage(string.format(_("ammo-comms","What type of ordnance?\n\nReputation: %i"),math.floor(comms_source:getReputationPoints())))
-					if stationCommsDiagnostic then print(string.format("player nuke weapon storage max: %.1f",comms_source:getWeaponStorageMax("Nuke"))) end
-					if comms_source:getWeaponStorageMax("Nuke") > 0 then
+					if stationCommsDiagnostic then print(string.format("player nuke weapon storage max: %.1f",comms_source:getWeaponStorageMax(MISSILE_NUKE))) end
+					if comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0 then
 						if stationCommsDiagnostic then print("player can fire nukes") end
 						if comms_target.comms_data.weapon_available.Nuke then
 							if stationCommsDiagnostic then print("station has nukes available") end
@@ -2351,57 +2352,57 @@ function handleDockedState()
 								nukePrompt = _("ammo-comms","We really need some nukes (")
 							end
 							if stationCommsDiagnostic then print("nuke prompt: " .. nukePrompt) end
-							addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
+							addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), nukePrompt, getWeaponCost(MISSILE_NUKE)), function()
 								if stationCommsDiagnostic then print("going to handle weapon restock function") end
-								handleWeaponRestock("Nuke")
+								handleWeaponRestock(MISSILE_NUKE)
 							end)
 						end	--end station has nuke available if branch
 					end	--end player can accept nuke if branch
-					if comms_source:getWeaponStorageMax("EMP") > 0 then
+					if comms_source:getWeaponStorageMax(MISSILE_EMP) > 0 then
 						if comms_target.comms_data.weapon_available.EMP then
 							if math.random(1,10) <= 5 then
 								empPrompt = _("ammo-comms", "Please re-stock our EMP missiles. (")
 							else
 								empPrompt = _("ammo-comms", "Got any EMPs? (")
 							end
-							addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
-								handleWeaponRestock("EMP")
+							addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), empPrompt, getWeaponCost(MISSILE_EMP)), function()
+								handleWeaponRestock(MISSILE_EMP)
 							end)
 						end	--end station has EMP available if branch
 					end	--end player can accept EMP if branch
-					if comms_source:getWeaponStorageMax("Homing") > 0 then
+					if comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0 then
 						if comms_target.comms_data.weapon_available.Homing then
 							if math.random(1,10) <= 5 then
 								homePrompt = _("ammo-comms", "Do you have spare homing missiles for us? (")
 							else
 								homePrompt = _("ammo-comms", "Do you have extra homing missiles? (")
 							end
-							addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
-								handleWeaponRestock("Homing")
+							addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), homePrompt, getWeaponCost(MISSILE_HOMING)), function()
+								handleWeaponRestock(MISSILE_HOMING)
 							end)
 						end	--end station has homing for player if branch
 					end	--end player can accept homing if branch
-					if comms_source:getWeaponStorageMax("Mine") > 0 then
+					if comms_source:getWeaponStorageMax(MISSILE_MINE) > 0 then
 						if comms_target.comms_data.weapon_available.Mine then
 							if math.random(1,10) <= 5 then
 								minePrompt = _("ammo-comms", "We could use some mines. (")
 							else
 								minePrompt = _("ammo-comms", "How about mines? (")
 							end
-							addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
-								handleWeaponRestock("Mine")
+							addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), minePrompt, getWeaponCost(MISSILE_MINE)), function()
+								handleWeaponRestock(MISSILE_MINE)
 							end)
 						end	--end station has mine for player if branch
 					end	--end player can accept mine if branch
-					if comms_source:getWeaponStorageMax("HVLI") > 0 then
+					if comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0 then
 						if comms_target.comms_data.weapon_available.HVLI then
 							if math.random(1,10) <= 5 then
 								hvliPrompt = _("ammo-comms", "What about HVLI? (")
 							else
 								hvliPrompt = _("ammo-comms", "Could you provide HVLI? (")
 							end
-							addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
-								handleWeaponRestock("HVLI")
+							addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), hvliPrompt, getWeaponCost(MISSILE_HVLI)), function()
+								handleWeaponRestock(MISSILE_HVLI)
 							end)
 						end	--end station has HVLI for player if branch
 					end	--end player can accept HVLI if branch
@@ -3188,15 +3189,15 @@ function handleWeaponRestock(weapon)
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        if weapon == MISSILE_NUKE then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == MISSILE_EMP then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
         else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
-        if weapon == "Nuke" then
+        if weapon == MISSILE_NUKE then
             setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
             setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
@@ -5008,11 +5009,11 @@ function commonServiceOptions()
 			ordnance_inventory = ordnance_inventory + count
 		end
 		local player_missile_types = {
-			["Homing"] = {shoots = false, max = 0, current = 0, need=0},
-			["Nuke"] = {shoots = false, max = 0, current = 0, need=0},
-			["Mine"] = {shoots = false, max = 0, current = 0, need=0},
-			["EMP"] = {shoots = false, max = 0, current = 0, need=0},
-			["HVLI"] = {shoots = false, max = 0, current = 0, need=0},
+			[MISSILE_HOMING] = {shoots = false, max = 0, current = 0, need=0},
+			[MISSILE_NUKE] = {shoots = false, max = 0, current = 0, need=0},
+			[MISSILE_MINE] = {shoots = false, max = 0, current = 0, need=0},
+			[MISSILE_EMP] = {shoots = false, max = 0, current = 0, need=0},
+			[MISSILE_HVLI] = {shoots = false, max = 0, current = 0, need=0},
 		}
 		if ordnance_inventory > 0 then
 			for missile_type, ord in pairs(player_missile_types) do

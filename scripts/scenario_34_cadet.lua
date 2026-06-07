@@ -15,6 +15,7 @@
 -- Type: Basic
 -- Author: Xansta
 require("utils.lua")
+require("ee.lua")
 require("place_station_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
@@ -45,12 +46,12 @@ function init()
 	player.normal_long_range_radar = 20000
 	player:setTypeName("Phobos M5P")
 	player:setWeaponTubeCount(4)
-	player:setWeaponTubeDirection(0,  5):setWeaponTubeExclusiveFor(0,"HVLI"):weaponTubeAllowMissle(0,"Homing")
-	player:setWeaponTubeDirection(1, -5):setWeaponTubeExclusiveFor(1,"HVLI"):weaponTubeAllowMissle(1,"Homing")
-	player:setWeaponTubeDirection(2,  0):setWeaponTubeExclusiveFor(2,"HVLI"):setTubeSize(2,"small")
-	player:setWeaponTubeDirection(3,180):setWeaponTubeExclusiveFor(3,"Mine")
-	player:setWeaponStorageMax("Nuke",0):setWeaponStorage("Nuke",0)
-	player:setWeaponStorageMax("EMP", 0):setWeaponStorage("EMP", 0)
+	player:setWeaponTubeDirection(0,  5):setWeaponTubeExclusiveFor(0,MISSILE_HVLI):weaponTubeAllowMissle(0,MISSILE_HOMING)
+	player:setWeaponTubeDirection(1, -5):setWeaponTubeExclusiveFor(1,MISSILE_HVLI):weaponTubeAllowMissle(1,MISSILE_HOMING)
+	player:setWeaponTubeDirection(2,  0):setWeaponTubeExclusiveFor(2,MISSILE_HVLI):setTubeSize(2,"small")
+	player:setWeaponTubeDirection(3,180):setWeaponTubeExclusiveFor(3,MISSILE_MINE)
+	player:setWeaponStorageMax(MISSILE_NUKE,0):setWeaponStorage(MISSILE_NUKE,0)
+	player:setWeaponStorageMax(MISSILE_EMP, 0):setWeaponStorage(MISSILE_EMP, 0)
 	missions = {
 		{
 			level =		0,		
@@ -900,7 +901,7 @@ function constructEnvironment()
 		{chance = 6,	count = 0,	max = math.random(1,2),		radius = "Tiny",	obj = Artifact,		desc = "Sensor",	},
 		{chance = 8,	count = 0,	max = -1,					radius = "Tiny",	obj = Artifact,		desc = "Ad",		},
 		{chance = 8,	count = 0,	max = -1,					radius = "Neb",		obj = Nebula,							},
-		{chance = 5,	count = 0,	max = -1,					radius = "Mine",	obj = Mine,								},
+		{chance = 5,	count = 0,	max = -1,					radius = MISSILE_MINE,	obj = Mine,								},
 		{chance = 5,	count = 0,	max = math.random(3,9),		radius = "Circ",	obj = Mine,			desc = "Circle",	},
 		{chance = 5,	count = 0,	max = math.random(3,9),		radius = "Rect",	obj = Mine,			desc = "Rectangle",	},
 		{chance = 5,	count = 0,	max = math.random(2,5),		radius = "Field",	obj = Asteroid,		desc = "Field",		},
@@ -1178,7 +1179,7 @@ function placeTerrain(placement_area,terrain)
 		["Hole"] =	6000,
 		["Tiny"] = 	200,
 		["Neb"] =	3000,
-		["Mine"] =	1000,
+		[MISSILE_MINE] =	1000,
 		["Rect"] =	random(4000,10000),
 		["Circ"] =	4000,
 		["Field"] =	random(2000,8000),
@@ -1846,8 +1847,8 @@ function decryptShip(success,ship_key)
 			player:addReputationPoints(math.random(5,9))
 		end
 		if player.level >= 2 then
-			player:setWeaponStorageMax("EMP", 3):setWeaponStorage("EMP", 3)
-			player:weaponTubeAllowMissle(0,"EMP"):weaponTubeAllowMissle(1,"EMP")
+			player:setWeaponStorageMax(MISSILE_EMP, 3):setWeaponStorage(MISSILE_EMP, 3)
+			player:weaponTubeAllowMissle(0,MISSILE_EMP):weaponTubeAllowMissle(1,MISSILE_EMP)
 			player:addReputationPoints(math.random(3,5))
 		end
 		if player.level >= 3 then
@@ -1888,8 +1889,8 @@ function decryptShip(success,ship_key)
 			player:addReputationPoints(3)
 		end
 		if player.level >= 11 then
-			player:setWeaponStorageMax("Nuke", 2):setWeaponStorage("Nuke", 2)
-			player:weaponTubeAllowMissle(0,"Nuke"):weaponTubeAllowMissle(1,"Nuke")
+			player:setWeaponStorageMax(MISSILE_NUKE, 2):setWeaponStorage(MISSILE_NUKE, 2)
+			player:weaponTubeAllowMissle(0,MISSILE_NUKE):weaponTubeAllowMissle(1,MISSILE_NUKE)
 			player:addReputationPoints(3)
 		end
 		if player.level >= 12 then
@@ -2029,8 +2030,8 @@ function commsMissionUpgrades()
 			player.emp_install_msg_pil = "emp_install_msg_pil"
 			player:addCustomMessage("Single",player.emp_install_msg_pil,out)
 			table.insert(clean_up_messages,{msg=player.emp_install_msg_pil,expire=getScenarioTime() + 90})
-			player:setWeaponStorageMax("EMP", 3):setWeaponStorage("EMP", 3)
-			player:weaponTubeAllowMissle(0,"EMP"):weaponTubeAllowMissle(1,"EMP")
+			player:setWeaponStorageMax(MISSILE_EMP, 3):setWeaponStorage(MISSILE_EMP, 3)
+			player:weaponTubeAllowMissle(0,MISSILE_EMP):weaponTubeAllowMissle(1,MISSILE_EMP)
 			player:addReputationPoints(10)
 			player.level = 2
 		end)
@@ -2130,8 +2131,8 @@ function commsMissionUpgrades()
 			player.add_nukes_msg_pil = "add_nukes_msg_pil"
 			player:addCustomMessage("Single",player.add_nukes_msg_pil,out)
 			table.insert(clean_up_messages,{msg=player.add_nukes_msg_pil,expire=getScenarioTime() + 90})
-			player:setWeaponStorageMax("Nuke", 2):setWeaponStorage("Nuke", 2)
-			player:weaponTubeAllowMissle(0,"Nuke"):weaponTubeAllowMissle(1,"Nuke")
+			player:setWeaponStorageMax(MISSILE_NUKE, 2):setWeaponStorage(MISSILE_NUKE, 2)
+			player:weaponTubeAllowMissle(0,MISSILE_NUKE):weaponTubeAllowMissle(1,MISSILE_NUKE)
 			player:addReputationPoints(10)
 			player.level = 11
 		end)

@@ -13,6 +13,7 @@
 
 
 require("utils.lua")
+require("ee.lua")
 
 
 --- Ship creation functions
@@ -21,7 +22,7 @@ function createExuariWeakInterceptor()
 end
 
 function createExuariWeakBomber()
-	return CpuShip():setFaction("Exuari"):setTemplate("Gunner"):setWeaponTubeCount(0):setWeaponStorageMax("HVLI", 0):setWeaponStorage("HVLI", 0):setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
+	return CpuShip():setFaction("Exuari"):setTemplate("Gunner"):setWeaponTubeCount(0):setWeaponStorageMax(MISSILE_HVLI, 0):setWeaponStorage(MISSILE_HVLI, 0):setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
 end
 
 function createExuariInterceptor()

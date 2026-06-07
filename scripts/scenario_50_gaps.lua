@@ -28,6 +28,7 @@
 -- Timed[90]: Scenario ends in 90 minutes
 
 require("utils.lua")
+require("ee.lua")
 require("place_station_scenario_utility.lua")
 
 function init()
@@ -629,43 +630,43 @@ function handleDockedState()
 		if comms_target.nukeAvail or comms_target.empAvail or comms_target.homeAvail or comms_target.mineAvail or comms_target.hvliAvail then
 			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				setCommsMessage(_("ammo-comms", "What type of ordnance?"))
-				if comms_source:getWeaponStorageMax("Nuke") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0 then
 					if comms_target.nukeAvail then
 						if math.random(1,10) <= 5 then
 							nukePrompt = _("ammo-comms", "Can you supply us with some nukes? (")
 						else
 							nukePrompt = _("ammo-comms", "We really need some nukes (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
-							handleWeaponRestock("Nuke")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), nukePrompt, getWeaponCost(MISSILE_NUKE)), function()
+							handleWeaponRestock(MISSILE_NUKE)
 						end)
 					end
 				end
-				if comms_source:getWeaponStorageMax("EMP") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_EMP) > 0 then
 					if comms_target.empAvail then
 						if math.random(1,10) <= 5 then
 							empPrompt = _("ammo-comms", "Please re-stock our EMP missiles. (")
 						else
 							empPrompt = _("ammo-comms", "Got any EMPs? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
-							handleWeaponRestock("EMP")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), empPrompt, getWeaponCost(MISSILE_EMP)), function()
+							handleWeaponRestock(MISSILE_EMP)
 						end)
 					end
 				end
-				if comms_source:getWeaponStorageMax("Homing") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0 then
 					if comms_target.homeAvail then
 						if math.random(1,10) <= 5 then
 							homePrompt = _("ammo-comms", "Do you have spare homing missiles for us? (")
 						else
 							homePrompt = _("ammo-comms", "Do you have extra homing missiles? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
-							handleWeaponRestock("Homing")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), homePrompt, getWeaponCost(MISSILE_HOMING)), function()
+							handleWeaponRestock(MISSILE_HOMING)
 						end)
 					end
 				end
-				if comms_source:getWeaponStorageMax("Mine") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_MINE) > 0 then
 					if comms_target.mineAvail then
 						local mine_prompts = {
 							_("ammo-comms", "We could use some mines. ("),
@@ -674,20 +675,20 @@ function handleDockedState()
 							_("ammo-comms", "All the mines we can take. ("),
 							_("ammo-comms", "Mines! What else? ("),
 						}
-						addCommsReply(string.format(_("ammo-comms","%s%d rep each)"),tableSelectRandom(mine_prompts),getWeaponCost("Mine")), function()
-							handleWeaponRestock("Mine")
+						addCommsReply(string.format(_("ammo-comms","%s%d rep each)"),tableSelectRandom(mine_prompts),getWeaponCost(MISSILE_MINE)), function()
+							handleWeaponRestock(MISSILE_MINE)
 						end)
 					end
 				end
-				if comms_source:getWeaponStorageMax("HVLI") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0 then
 					if comms_target.hvliAvail then
 						if math.random(1,10) <= 5 then
 							hvliPrompt = _("ammo-comms", "What about HVLI? (")
 						else
 							hvliPrompt = _("ammo-comms", "Could you provide HVLI? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
-							handleWeaponRestock("HVLI")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), hvliPrompt, getWeaponCost(MISSILE_HVLI)), function()
+							handleWeaponRestock(MISSILE_HVLI)
 						end)
 					end
 				end
@@ -1132,15 +1133,15 @@ function handleWeaponRestock(weapon)
 		return
 	end
     if not isAllowedTo(comms_target.comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        if weapon == MISSILE_NUKE then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == MISSILE_EMP then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
         else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
-        if weapon == "Nuke" then
+        if weapon == MISSILE_NUKE then
             setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
             setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
@@ -2161,7 +2162,7 @@ function checkGaps(delta)
 			for pidx=1,32 do
 				local p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					mine_count = mine_count + p:getWeaponStorage("Mine")
+					mine_count = mine_count + p:getWeaponStorage(MISSILE_MINE)
 				end
 			end
 			if mine_count == 0 then
@@ -2177,7 +2178,7 @@ function checkEasternernGap()
 	local eastObjs = getObjectsInRadius(20000, 0, 1500)
 	local east_mines = {}
 	for _, obj in ipairs(eastObjs) do
-		if isObjectType(obj,"Mine") then
+		if isObjectType(obj,MISSILE_MINE) then
 			eastObjCount = eastObjCount + 1
 			table.insert(east_mines,obj)
 		end
@@ -2237,7 +2238,7 @@ function checkWesternernGap()
 	local westObjs = getObjectsInRadius(-20000, 0, 1500)
 	local west_mines = {}
 	for _, obj in ipairs(westObjs) do
-		if isObjectType(obj,"Mine") then
+		if isObjectType(obj,MISSILE_MINE) then
 			westObjCount = westObjCount + 1
 			table.insert(west_mines,obj)
 		end
@@ -2297,7 +2298,7 @@ function checkNorthernGap()
 	local northObjs = getObjectsInRadius(0, -20000, 1500)
 	local north_mines = {}
 	for _, obj in ipairs(northObjs) do
-		if isObjectType(obj,"Mine") then
+		if isObjectType(obj,MISSILE_MINE) then
 			northObjCount = northObjCount + 1
 			table.insert(north_mines,obj)
 		end
@@ -2357,7 +2358,7 @@ function checkSouthernGap()
 	local southObjs = getObjectsInRadius(0, 20000, 1500)
 	local south_mines = {}
 	for _, obj in ipairs(southObjs) do
-		if isObjectType(obj,"Mine") then
+		if isObjectType(obj,MISSILE_MINE) then
 			southObjCount = southObjCount + 1
 			table.insert(south_mines,obj)
 		end

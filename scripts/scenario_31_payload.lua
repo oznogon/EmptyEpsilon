@@ -37,6 +37,7 @@
 -- FieldSize[200000]: Extra Large
 
 require("utils.lua")
+require("ee.lua")
 
 Debug = false
 
@@ -110,11 +111,11 @@ function init()
   placeRandomObjects(Nebula, nebulaNum, 0.3, MidX, MidY, FieldSize / 10000, FieldSize / 10000)
 
   -- Spawn Rearm Stations
-  HVLIStation = StationFactory("HVLI", 8)
-  HomingStation = StationFactory("Homing", 16)
-  EMPStation = StationFactory("EMP", 24)
-  MineStation = StationFactory("Mine", 32)
-  NukeStation = StationFactory("Nuke", 40)
+  HVLIStation = StationFactory(MISSILE_HVLI, 8)
+  HomingStation = StationFactory(MISSILE_HOMING, 16)
+  EMPStation = StationFactory(MISSILE_EMP, 24)
+  MineStation = StationFactory(MISSILE_MINE, 32)
+  NukeStation = StationFactory(MISSILE_NUKE, 40)
 
   SpawnObjects(HVLIStation, 1, MidX, MidY, math.floor(FieldSize / 2.25), 15000)
   SpawnObjects(HomingStation, 1, MidX, MidY, math.floor(FieldSize / 2.25), 15000)
@@ -153,16 +154,16 @@ function init()
   Player:setJumpDrive(false)
   Player:setWarpDrive(true)
   Player:setRotation(45):commandTargetRotation(45)
-  Player:setWeaponStorageMax("Homing", 4)
-  Player:setWeaponStorageMax("Nuke", 4)
-  Player:setWeaponStorageMax("Mine", 4)
-  Player:setWeaponStorageMax("EMP", 4)
-  Player:setWeaponStorageMax("HVLI", 4)
-  Player:setWeaponStorage("Homing", 4)
-  Player:setWeaponStorage("Nuke", 0)
-  Player:setWeaponStorage("Mine", 0)
-  Player:setWeaponStorage("EMP", 0)
-  Player:setWeaponStorage("HVLI", 4)
+  Player:setWeaponStorageMax(MISSILE_HOMING, 4)
+  Player:setWeaponStorageMax(MISSILE_NUKE, 4)
+  Player:setWeaponStorageMax(MISSILE_MINE, 4)
+  Player:setWeaponStorageMax(MISSILE_EMP, 4)
+  Player:setWeaponStorageMax(MISSILE_HVLI, 4)
+  Player:setWeaponStorage(MISSILE_HOMING, 4)
+  Player:setWeaponStorage(MISSILE_NUKE, 0)
+  Player:setWeaponStorage(MISSILE_MINE, 0)
+  Player:setWeaponStorage(MISSILE_EMP, 0)
+  Player:setWeaponStorage(MISSILE_HVLI, 4)
   Player:setLongRangeRadarRange(20000)
 
   -- Send initial comms message
@@ -252,7 +253,7 @@ function ClearHazardsNear(centerX, centerY, radius, maxRoids, maxMines)
         potentialHazard:destroy()
       end
     end
-    if potentialHazard.typeName == "Mine" then
+    if potentialHazard.typeName == MISSILE_MINE then
       mineCount = mineCount + 1
       if mineCount > maxMines then
         potentialHazard:destroy()
@@ -294,7 +295,7 @@ end
 
 -- Spawn weapon pickup artifacts
 function SpawnWeaponPickups()
-  local weaponTypes = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
+  local weaponTypes = {MISSILE_HOMING, MISSILE_NUKE, MISSILE_MINE, MISSILE_EMP, MISSILE_HVLI}
   local edgeDistance = FieldSize / 2
 
   for __ = 1, Resistance.pickupArtifacts do
@@ -661,11 +662,11 @@ function SpawnWave(faction)
       end
       local enemy = CpuShip():setTemplate(enemyTemplate):setFaction("Kraylor"):setPosition(enemyX, enemyY)
       enemy:setWarpDrive(true)
-      enemy:setWeaponStorage("Homing", 4)
-      enemy:setWeaponStorage("Nuke", 0)
-      enemy:setWeaponStorage("Mine", 0)
-      enemy:setWeaponStorage("EMP", 0)
-      enemy:setWeaponStorage("HVLI", 4)
+      enemy:setWeaponStorage(MISSILE_HOMING, 4)
+      enemy:setWeaponStorage(MISSILE_NUKE, 0)
+      enemy:setWeaponStorage(MISSILE_MINE, 0)
+      enemy:setWeaponStorage(MISSILE_EMP, 0)
+      enemy:setWeaponStorage(MISSILE_HVLI, 4)
       enemy:onTakingDamage(OnDamaged)
       table.insert(KraylorShips, enemy)
     end

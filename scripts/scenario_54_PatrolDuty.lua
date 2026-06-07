@@ -22,6 +22,7 @@
 -- Timed[30]: Thirty minute time limit
 
 require("utils.lua")
+require("ee.lua")
 
 function tableRemoveRandom(array)
 --	Remove random element from array and return it.
@@ -4339,15 +4340,15 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
-			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
+		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or 
+			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or 
+			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or 
+			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or 
+			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0)   then
 			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				local ctd = comms_target.comms_data
 				setCommsMessage(_("ammo-comms", "What type of ordnance?"))
-				if comms_source:getWeaponStorageMax("Nuke") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0 then
 					if ctd.weapon_available.Nuke then
 						if stationCommsDiagnostic then print("station has nukes available") end
 						if math.random(1,10) <= 5 then
@@ -4355,57 +4356,57 @@ function handleDockedState()
 						else
 							nukePrompt = _("ammo-comms", "We really need some nukes (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), nukePrompt, getWeaponCost(MISSILE_NUKE)), function()
 							if stationCommsDiagnostic then print("going to handle weapon restock function") end
-							handleWeaponRestock("Nuke")
+							handleWeaponRestock(MISSILE_NUKE)
 						end)
 					end	--end station has nuke available if branch
 				end	--end player can accept nuke if branch
-				if comms_source:getWeaponStorageMax("EMP") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_EMP) > 0 then
 					if ctd.weapon_available.EMP then
 						if math.random(1,10) <= 5 then
 							empPrompt = _("ammo-comms", "Please re-stock our EMP missiles. (")
 						else
 							empPrompt = _("ammo-comms", "Got any EMPs? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
-							handleWeaponRestock("EMP")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), empPrompt, getWeaponCost(MISSILE_EMP)), function()
+							handleWeaponRestock(MISSILE_EMP)
 						end)
 					end	--end station has EMP available if branch
 				end	--end player can accept EMP if branch
-				if comms_source:getWeaponStorageMax("Homing") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0 then
 					if ctd.weapon_available.Homing then
 						if math.random(1,10) <= 5 then
 							homePrompt = _("ammo-comms", "Do you have spare homing missiles for us? (")
 						else
 							homePrompt = _("ammo-comms", "Do you have extra homing missiles? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
-							handleWeaponRestock("Homing")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), homePrompt, getWeaponCost(MISSILE_HOMING)), function()
+							handleWeaponRestock(MISSILE_HOMING)
 						end)
 					end	--end station has homing for player if branch
 				end	--end player can accept homing if branch
-				if comms_source:getWeaponStorageMax("Mine") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_MINE) > 0 then
 					if ctd.weapon_available.Mine then
 						if math.random(1,10) <= 5 then
 							minePrompt = _("ammo-comms", "We could use some mines. (")
 						else
 							minePrompt = _("ammo-comms", "How about mines? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
-							handleWeaponRestock("Mine")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), minePrompt, getWeaponCost(MISSILE_MINE)), function()
+							handleWeaponRestock(MISSILE_MINE)
 						end)
 					end	--end station has mine for player if branch
 				end	--end player can accept mine if branch
-				if comms_source:getWeaponStorageMax("HVLI") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0 then
 					if ctd.weapon_available.HVLI then
 						if math.random(1,10) <= 5 then
 							hvliPrompt = _("ammo-comms", "What about HVLI? (")
 						else
 							hvliPrompt = _("ammo-comms", "Could you provide HVLI? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
-							handleWeaponRestock("HVLI")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), hvliPrompt, getWeaponCost(MISSILE_HVLI)), function()
+							handleWeaponRestock(MISSILE_HVLI)
 						end)
 					end	--end station has HVLI for player if branch
 				end	--end player can accept HVLI if branch
@@ -5161,9 +5162,9 @@ function handleDockedState()
 							originalTubes = comms_source:getWeaponTubeCount()
 							newTubes = originalTubes + 1
 							comms_source:setWeaponTubeCount(newTubes)
-							comms_source:setWeaponTubeExclusiveFor(originalTubes, "Homing")
-							comms_source:setWeaponStorageMax("Homing", comms_source:getWeaponStorageMax("Homing") + 2)
-							comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorage("Homing") + 2)
+							comms_source:setWeaponTubeExclusiveFor(originalTubes, MISSILE_HOMING)
+							comms_source:setWeaponStorageMax(MISSILE_HOMING, comms_source:getWeaponStorageMax(MISSILE_HOMING) + 2)
+							comms_source:setWeaponStorage(MISSILE_HOMING, comms_source:getWeaponStorage(MISSILE_HOMING) + 2)
 							setCommsMessage(string.format(_("upgrade-comms", "Thanks for the %s and %s. You now have an additional homing torpedo tube"),comms_source.addTubeUpgradePart1,comms_source.addTubeUpgradePart2))
 							comms_source.flakyTubeCount = 0
 							comms_source.tubeFixed = true
@@ -5334,15 +5335,15 @@ function handleWeaponRestock(weapon)
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        if weapon == MISSILE_NUKE then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == MISSILE_EMP then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
         else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
-        if weapon == "Nuke" then
+        if weapon == MISSILE_NUKE then
             setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
             setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
@@ -7946,7 +7947,7 @@ function redeployTube()
 	originalTubes = flakyTubeVictim:getWeaponTubeCount()
 	newTubes = originalTubes + 1
 	flakyTubeVictim:setWeaponTubeCount(newTubes)
-	flakyTubeVictim:setWeaponTubeExclusiveFor(originalTubes, "Homing")
+	flakyTubeVictim:setWeaponTubeExclusiveFor(originalTubes, MISSILE_HOMING)
 	flakyTubeVictim:removeCustom(fixedTubeButton)
 	flakyTubeVictim:removeCustom(fixedTubeButtonTactical)
 	resetFlakyTubeTimer = true

@@ -24,6 +24,7 @@
 -- Sound[Fermi]: Start sound will be Pole Position beep
 
 require("utils.lua")
+require("ee.lua")
 require("place_station_scenario_utility.lua")
 
 ----------------------
@@ -2258,9 +2259,9 @@ function handleDockedState()
 						local original_tubes = comms_source:getWeaponTubeCount()
 						local new_tubes = original_tubes + 1
 						comms_source:setWeaponTubeCount(new_tubes)
-						comms_source:setWeaponTubeExclusiveFor(original_tubes, "Homing")
-						comms_source:setWeaponStorageMax("Homing", comms_source:getWeaponStorageMax("Homing") + 2)
-						comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorage("Homing") + 2)
+						comms_source:setWeaponTubeExclusiveFor(original_tubes, MISSILE_HOMING)
+						comms_source:setWeaponStorageMax(MISSILE_HOMING, comms_source:getWeaponStorageMax(MISSILE_HOMING) + 2)
+						comms_source:setWeaponStorage(MISSILE_HOMING, comms_source:getWeaponStorage(MISSILE_HOMING) + 2)
 						setCommsMessage(_("upgrade-comms", "You now have an additional homing missile tube"))
 						comms_source.tube_upgrade = true
 					end
@@ -2345,15 +2346,15 @@ function handleWeaponRestock(weapon)
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        if weapon == MISSILE_NUKE then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == MISSILE_EMP then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
         else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
-        if weapon == "Nuke" then
+        if weapon == MISSILE_NUKE then
             setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
             setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));

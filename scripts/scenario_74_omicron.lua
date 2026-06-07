@@ -3465,11 +3465,11 @@ function handleDockedState()
 							if medical_message_diagnostic then print("beam upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "missile" then
-							comms_source:setWeaponStorage("Homing",comms_source:getWeaponStorageMax("Homing"))
-							comms_source:setWeaponStorage("Nuke",comms_source:getWeaponStorageMax("Nuke"))
-							comms_source:setWeaponStorage("EMP",comms_source:getWeaponStorageMax("EMP"))
-							comms_source:setWeaponStorage("Mine",comms_source:getWeaponStorageMax("Mine"))
-							comms_source:setWeaponStorage("HVLI",comms_source:getWeaponStorageMax("HVLI"))
+							comms_source:setWeaponStorage(MISSILE_HOMING,comms_source:getWeaponStorageMax(MISSILE_HOMING))
+							comms_source:setWeaponStorage(MISSILE_NUKE,comms_source:getWeaponStorageMax(MISSILE_NUKE))
+							comms_source:setWeaponStorage(MISSILE_EMP,comms_source:getWeaponStorageMax(MISSILE_EMP))
+							comms_source:setWeaponStorage(MISSILE_MINE,comms_source:getWeaponStorageMax(MISSILE_MINE))
+							comms_source:setWeaponStorage(MISSILE_HVLI,comms_source:getWeaponStorageMax(MISSILE_HVLI))
 							comms_source.medical_station_upgrade = "done"
 							upgrade_msg = _("mission3th-comms","We also replenished your ordnance.")
 							if medical_message_diagnostic then print("ordnance upgrade message:",upgrade_msg) end
@@ -3550,16 +3550,16 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
-			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
+		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0)   or 
+			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax(MISSILE_EMP) > 0)    or 
+			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0) or 
+			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax(MISSILE_MINE) > 0)   or 
+			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0)   then
 			addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
 				if stationCommsDiagnostic then print("in restock function") end
 				setCommsMessage(string.format(_("ammo-comms","What type of ordnance?\n\nReputation: %i"),math.floor(comms_source:getReputationPoints())))
-				if stationCommsDiagnostic then print(string.format("player nuke weapon storage max: %.1f",comms_source:getWeaponStorageMax("Nuke"))) end
-				if comms_source:getWeaponStorageMax("Nuke") > 0 then
+				if stationCommsDiagnostic then print(string.format("player nuke weapon storage max: %.1f",comms_source:getWeaponStorageMax(MISSILE_NUKE))) end
+				if comms_source:getWeaponStorageMax(MISSILE_NUKE) > 0 then
 					if stationCommsDiagnostic then print("player can fire nukes") end
 					if comms_target.comms_data.weapon_available.Nuke then
 						if stationCommsDiagnostic then print("station has nukes available") end
@@ -3569,57 +3569,57 @@ function handleDockedState()
 							nukePrompt = _("ammo-comms","We really need some nukes (")
 						end
 						if stationCommsDiagnostic then print("nuke prompt: " .. nukePrompt) end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), nukePrompt, getWeaponCost(MISSILE_NUKE)), function()
 							if stationCommsDiagnostic then print("going to handle weapon restock function") end
-							handleWeaponRestock("Nuke")
+							handleWeaponRestock(MISSILE_NUKE)
 						end)
 					end	--end station has nuke available if branch
 				end	--end player can accept nuke if branch
-				if comms_source:getWeaponStorageMax("EMP") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_EMP) > 0 then
 					if comms_target.comms_data.weapon_available.EMP then
 						if math.random(1,10) <= 5 then
 							empPrompt = _("ammo-comms", "Please re-stock our EMP missiles. (")
 						else
 							empPrompt = _("ammo-comms", "Got any EMPs? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
-							handleWeaponRestock("EMP")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), empPrompt, getWeaponCost(MISSILE_EMP)), function()
+							handleWeaponRestock(MISSILE_EMP)
 						end)
 					end	--end station has EMP available if branch
 				end	--end player can accept EMP if branch
-				if comms_source:getWeaponStorageMax("Homing") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_HOMING) > 0 then
 					if comms_target.comms_data.weapon_available.Homing then
 						if math.random(1,10) <= 5 then
 							homePrompt = _("ammo-comms", "Do you have spare homing missiles for us? (")
 						else
 							homePrompt = _("ammo-comms", "Do you have extra homing missiles? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
-							handleWeaponRestock("Homing")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), homePrompt, getWeaponCost(MISSILE_HOMING)), function()
+							handleWeaponRestock(MISSILE_HOMING)
 						end)
 					end	--end station has homing for player if branch
 				end	--end player can accept homing if branch
-				if comms_source:getWeaponStorageMax("Mine") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_MINE) > 0 then
 					if comms_target.comms_data.weapon_available.Mine then
 						if math.random(1,10) <= 5 then
 							minePrompt = _("ammo-comms", "We could use some mines. (")
 						else
 							minePrompt = _("ammo-comms", "How about mines? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
-							handleWeaponRestock("Mine")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), minePrompt, getWeaponCost(MISSILE_MINE)), function()
+							handleWeaponRestock(MISSILE_MINE)
 						end)
 					end	--end station has mine for player if branch
 				end	--end player can accept mine if branch
-				if comms_source:getWeaponStorageMax("HVLI") > 0 then
+				if comms_source:getWeaponStorageMax(MISSILE_HVLI) > 0 then
 					if comms_target.comms_data.weapon_available.HVLI then
 						if math.random(1,10) <= 5 then
 							hvliPrompt = _("ammo-comms", "What about HVLI? (")
 						else
 							hvliPrompt = _("ammo-comms", "Could you provide HVLI? (")
 						end
-						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
-							handleWeaponRestock("HVLI")
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), hvliPrompt, getWeaponCost(MISSILE_HVLI)), function()
+							handleWeaponRestock(MISSILE_HVLI)
 						end)
 					end	--end station has HVLI for player if branch
 				end	--end player can accept HVLI if branch
@@ -4224,15 +4224,15 @@ function handleWeaponRestock(weapon)
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        if weapon == MISSILE_NUKE then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == MISSILE_EMP then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
         else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
-        if weapon == "Nuke" then
+        if weapon == MISSILE_NUKE then
             setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
             setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
@@ -6214,11 +6214,11 @@ function commonServiceOptions()
 			ordnance_inventory = ordnance_inventory + count
 		end
 		local player_missile_types = {
-			["Homing"] = {shoots = false, max = 0, current = 0, need=0},
-			["Nuke"] = {shoots = false, max = 0, current = 0, need=0},
-			["Mine"] = {shoots = false, max = 0, current = 0, need=0},
-			["EMP"] = {shoots = false, max = 0, current = 0, need=0},
-			["HVLI"] = {shoots = false, max = 0, current = 0, need=0},
+			[MISSILE_HOMING] = {shoots = false, max = 0, current = 0, need=0},
+			[MISSILE_NUKE] = {shoots = false, max = 0, current = 0, need=0},
+			[MISSILE_MINE] = {shoots = false, max = 0, current = 0, need=0},
+			[MISSILE_EMP] = {shoots = false, max = 0, current = 0, need=0},
+			[MISSILE_HVLI] = {shoots = false, max = 0, current = 0, need=0},
 		}
 		if ordnance_inventory > 0 then
 			for missile_type, ord in pairs(player_missile_types) do
@@ -8143,10 +8143,10 @@ function farco13(enemyFaction)
 	ship:setBeamWeapon(2,	20,	  0,	 1800,	5.0,	4.0)	--additional sniping beam
 	ship:setTubeLoadTime(0,30)				--faster (vs 60)
 	ship:setTubeLoadTime(0,30)				
-	ship:setWeaponStorageMax("Homing",16)						--more (vs 6)
-	ship:setWeaponStorage("Homing", 16)		
-	ship:setWeaponStorageMax("HVLI",30)							--more (vs 20)
-	ship:setWeaponStorage("HVLI", 30)
+	ship:setWeaponStorageMax(MISSILE_HOMING,16)						--more (vs 6)
+	ship:setWeaponStorage(MISSILE_HOMING, 16)		
+	ship:setWeaponStorageMax(MISSILE_HVLI,30)							--more (vs 20)
+	ship:setWeaponStorage(MISSILE_HVLI, 30)
 	local farco_13_db = queryScienceDatabase("Ships","Frigate","Farco 13")
 	if farco_13_db == nil then
 		local frigate_db = queryScienceDatabase("Ships","Frigate")
@@ -8187,10 +8187,10 @@ function whirlwind(enemyFaction)
 	ship:setWeaponTubeDirection(6,  0)				
 	ship:setWeaponTubeDirection(7,  2)				
 	ship:setWeaponTubeDirection(8, -2)				
-	ship:setWeaponStorageMax("Homing",36)						--more (vs 15)
-	ship:setWeaponStorage("Homing", 36)		
-	ship:setWeaponStorageMax("HVLI",36)							--more (vs 15)
-	ship:setWeaponStorage("HVLI", 36)
+	ship:setWeaponStorageMax(MISSILE_HOMING,36)						--more (vs 15)
+	ship:setWeaponStorage(MISSILE_HOMING, 36)		
+	ship:setWeaponStorageMax(MISSILE_HVLI,36)							--more (vs 15)
+	ship:setWeaponStorage(MISSILE_HVLI, 36)
 	local whirlwind_db = queryScienceDatabase("Ships","Frigate","Whirlwind")
 	if whirlwind_db == nil then
 		local frigate_db = queryScienceDatabase("Ships","Frigate")
@@ -8480,12 +8480,12 @@ end
 function wzLindworm(enemyFaction)
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("WX-Lindworm")
 	ship:setTypeName("WZ-Lindworm")
-	ship:setWeaponStorageMax("Nuke",2)		--more nukes (vs 0)
-	ship:setWeaponStorage("Nuke",2)
-	ship:setWeaponStorageMax("Homing",4)	--more homing (vs 1)
-	ship:setWeaponStorage("Homing",4)
-	ship:setWeaponStorageMax("HVLI",12)		--more HVLI (vs 6)
-	ship:setWeaponStorage("HVLI",12)
+	ship:setWeaponStorageMax(MISSILE_NUKE,2)		--more nukes (vs 0)
+	ship:setWeaponStorage(MISSILE_NUKE,2)
+	ship:setWeaponStorageMax(MISSILE_HOMING,4)	--more homing (vs 1)
+	ship:setWeaponStorage(MISSILE_HOMING,4)
+	ship:setWeaponStorageMax(MISSILE_HVLI,12)		--more HVLI (vs 6)
+	ship:setWeaponStorage(MISSILE_HVLI,12)
 	ship:setRotationMaxSpeed(12)			--slower maneuver (vs 15)
 	ship:setHullMax(45)						--weaker hull (vs 50)
 	ship:setHull(45)
@@ -8529,14 +8529,14 @@ function tempest(enemyFaction)
 	ship:setWeaponTubeDirection(7, -92)				
 	ship:setWeaponTubeDirection(8,  91)				
 	ship:setWeaponTubeDirection(9,  92)				
-	ship:setWeaponTubeExclusiveFor(7,"HVLI")
-	ship:setWeaponTubeExclusiveFor(9,"HVLI")
-	ship:setWeaponStorageMax("Homing",16)			--more (vs 6)
-	ship:setWeaponStorage("Homing", 16)				
-	ship:setWeaponStorageMax("Nuke",8)				--more (vs 0)
-	ship:setWeaponStorage("Nuke", 8)				
-	ship:setWeaponStorageMax("HVLI",34)				--more (vs 20)
-	ship:setWeaponStorage("HVLI", 34)
+	ship:setWeaponTubeExclusiveFor(7,MISSILE_HVLI)
+	ship:setWeaponTubeExclusiveFor(9,MISSILE_HVLI)
+	ship:setWeaponStorageMax(MISSILE_HOMING,16)			--more (vs 6)
+	ship:setWeaponStorage(MISSILE_HOMING, 16)				
+	ship:setWeaponStorageMax(MISSILE_NUKE,8)				--more (vs 0)
+	ship:setWeaponStorage(MISSILE_NUKE, 8)				
+	ship:setWeaponStorageMax(MISSILE_HVLI,34)				--more (vs 20)
+	ship:setWeaponStorage(MISSILE_HVLI, 34)
 	local tempest_db = queryScienceDatabase("Ships","Frigate","Tempest")
 	if tempest_db == nil then
 		local frigate_db = queryScienceDatabase("Ships","Frigate")
@@ -8596,8 +8596,8 @@ function enforcer(enemyFaction)
 	ship:setTubeLoadTime(0,18)
 	ship:setTubeLoadTime(1,12)
 	ship:setTubeLoadTime(2,12)			
-	ship:setWeaponStorageMax("Homing",18)						--more (vs 0)
-	ship:setWeaponStorage("Homing", 18)
+	ship:setWeaponStorageMax(MISSILE_HOMING,18)						--more (vs 0)
+	ship:setWeaponStorage(MISSILE_HOMING, 18)
 	local enforcer_db = queryScienceDatabase("Ships","Frigate","Enforcer")
 	if enforcer_db == nil then
 		local frigate_db = queryScienceDatabase("Ships","Frigate")
@@ -8650,18 +8650,18 @@ function predator(enemyFaction)
 	ship:setWeaponTubeDirection(5, 90)				
 	ship:setWeaponTubeDirection(6,-120)				
 	ship:setWeaponTubeDirection(7, 120)				
-	ship:setWeaponTubeExclusiveFor(0,"Homing")
-	ship:setWeaponTubeExclusiveFor(1,"Homing")
-	ship:setWeaponTubeExclusiveFor(2,"Homing")
-	ship:setWeaponTubeExclusiveFor(3,"Homing")
-	ship:setWeaponTubeExclusiveFor(4,"Homing")
-	ship:setWeaponTubeExclusiveFor(5,"Homing")
-	ship:setWeaponTubeExclusiveFor(6,"Homing")
-	ship:setWeaponTubeExclusiveFor(7,"Homing")
-	ship:setWeaponStorageMax("Homing",32)						--more (vs 5)
-	ship:setWeaponStorage("Homing", 32)		
-	ship:setWeaponStorageMax("HVLI",0)							--less (vs 10)
-	ship:setWeaponStorage("HVLI", 0)
+	ship:setWeaponTubeExclusiveFor(0,MISSILE_HOMING)
+	ship:setWeaponTubeExclusiveFor(1,MISSILE_HOMING)
+	ship:setWeaponTubeExclusiveFor(2,MISSILE_HOMING)
+	ship:setWeaponTubeExclusiveFor(3,MISSILE_HOMING)
+	ship:setWeaponTubeExclusiveFor(4,MISSILE_HOMING)
+	ship:setWeaponTubeExclusiveFor(5,MISSILE_HOMING)
+	ship:setWeaponTubeExclusiveFor(6,MISSILE_HOMING)
+	ship:setWeaponTubeExclusiveFor(7,MISSILE_HOMING)
+	ship:setWeaponStorageMax(MISSILE_HOMING,32)						--more (vs 5)
+	ship:setWeaponStorage(MISSILE_HOMING, 32)		
+	ship:setWeaponStorageMax(MISSILE_HVLI,0)							--less (vs 10)
+	ship:setWeaponStorage(MISSILE_HVLI, 0)
 	ship:setRadarTrace("missile_cruiser.png")				--different radar trace
 	local predator_db = queryScienceDatabase("Ships","Frigate","Predator")
 	if predator_db == nil then
@@ -8708,8 +8708,8 @@ function atlantisY42(enemyFaction)
 --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
 	ship:setBeamWeapon(2,	80,	  190,	1500,		6,		 8)	--narrower (vs 100)
 	ship:setBeamWeapon(3,	80,	  170,	1500,		6,		 8)	--extra (vs 3 beams)
-	ship:setWeaponStorageMax("Homing",16)						--more (vs 4)
-	ship:setWeaponStorage("Homing", 16)
+	ship:setWeaponStorageMax(MISSILE_HOMING,16)						--more (vs 4)
+	ship:setWeaponStorage(MISSILE_HOMING, 16)
 	local atlantis_y42_db = queryScienceDatabase("Ships","Corvette","Atlantis Y42")
 	if atlantis_y42_db == nil then
 		local corvette_db = queryScienceDatabase("Ships","Corvette")
@@ -8748,10 +8748,10 @@ function starhammerV(enemyFaction)
 	ship:setShields(450, 350, 250, 250, 350)					
 --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
 	ship:setBeamWeapon(4,	60,	  180,	1500,		8,		11)	--extra rear facing beam
-	ship:setWeaponStorageMax("Homing",16)						--more (vs 4)
-	ship:setWeaponStorage("Homing", 16)		
-	ship:setWeaponStorageMax("HVLI",36)							--more (vs 20)
-	ship:setWeaponStorage("HVLI", 36)
+	ship:setWeaponStorageMax(MISSILE_HOMING,16)						--more (vs 4)
+	ship:setWeaponStorage(MISSILE_HOMING, 16)		
+	ship:setWeaponStorageMax(MISSILE_HVLI,36)							--more (vs 20)
+	ship:setWeaponStorage(MISSILE_HVLI, 36)
 	local starhammer_v_db = queryScienceDatabase("Ships","Corvette","Starhammer V")
 	if starhammer_v_db == nil then
 		local corvette_db = queryScienceDatabase("Ships","Corvette")
@@ -8893,10 +8893,10 @@ function starhammerIII(enemyFaction)
 --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
 	ship:setBeamWeapon(4,	60,	  180,	1500,		8,		11)	--extra rear facing beam
 	ship:setTubeSize(0,"large")
-	ship:setWeaponStorageMax("Homing",16)						--more (vs 4)
-	ship:setWeaponStorage("Homing", 16)		
-	ship:setWeaponStorageMax("HVLI",36)							--more (vs 20)
-	ship:setWeaponStorage("HVLI", 36)
+	ship:setWeaponStorageMax(MISSILE_HOMING,16)						--more (vs 4)
+	ship:setWeaponStorage(MISSILE_HOMING, 16)		
+	ship:setWeaponStorageMax(MISSILE_HVLI,36)							--more (vs 20)
+	ship:setWeaponStorage(MISSILE_HVLI, 36)
 	local starhammer_iii_db = queryScienceDatabase("Ships","Corvette","Starhammer III")
 	if starhammer_iii_db == nil then
 		local corvette_db = queryScienceDatabase("Ships","Corvette")
@@ -8933,11 +8933,11 @@ function k2breaker(enemyFaction)
 	ship:setTubeSize(0,"large")						--large (vs normal)
 	ship:setWeaponTubeDirection(1,-30)				
 	ship:setWeaponTubeDirection(2, 30)
-	ship:setWeaponTubeExclusiveFor(0,"HVLI")		--only HVLI (vs any)
-	ship:setWeaponStorageMax("Homing",16)			--more (vs 0)
-	ship:setWeaponStorage("Homing", 16)
-	ship:setWeaponStorageMax("HVLI",8)				--more (vs 5)
-	ship:setWeaponStorage("HVLI", 8)
+	ship:setWeaponTubeExclusiveFor(0,MISSILE_HVLI)		--only HVLI (vs any)
+	ship:setWeaponStorageMax(MISSILE_HOMING,16)			--more (vs 0)
+	ship:setWeaponStorage(MISSILE_HOMING, 16)
+	ship:setWeaponStorageMax(MISSILE_HVLI,8)				--more (vs 5)
+	ship:setWeaponStorage(MISSILE_HVLI, 8)
 	local k2_breaker_db = queryScienceDatabase("Ships","No Class","K2 Breaker")
 	if k2_breaker_db == nil then
 		local no_class_db = queryScienceDatabase("Ships","No Class")
@@ -8972,22 +8972,22 @@ function hurricane(enemyFaction)
 	ship:setJumpDrive(true)
 	ship:setJumpDriveRange(5000,40000)			
 	ship:setWeaponTubeCount(8)						--more (vs 3)
-	ship:setWeaponTubeExclusiveFor(1,"HVLI")		--only HVLI (vs any)
+	ship:setWeaponTubeExclusiveFor(1,MISSILE_HVLI)		--only HVLI (vs any)
 	ship:setWeaponTubeDirection(1,  0)				--forward (vs -90)
 	ship:setTubeSize(3,"large")						
 	ship:setWeaponTubeDirection(3,-90)
 	ship:setTubeSize(4,"small")
-	ship:setWeaponTubeExclusiveFor(4,"Homing")
+	ship:setWeaponTubeExclusiveFor(4,MISSILE_HOMING)
 	ship:setWeaponTubeDirection(4,-15)
 	ship:setTubeSize(5,"small")
-	ship:setWeaponTubeExclusiveFor(5,"Homing")
+	ship:setWeaponTubeExclusiveFor(5,MISSILE_HOMING)
 	ship:setWeaponTubeDirection(5, 15)
-	ship:setWeaponTubeExclusiveFor(6,"Homing")
+	ship:setWeaponTubeExclusiveFor(6,MISSILE_HOMING)
 	ship:setWeaponTubeDirection(6,-30)
-	ship:setWeaponTubeExclusiveFor(7,"Homing")
+	ship:setWeaponTubeExclusiveFor(7,MISSILE_HOMING)
 	ship:setWeaponTubeDirection(7, 30)
-	ship:setWeaponStorageMax("Homing",24)			--more (vs 5)
-	ship:setWeaponStorage("Homing", 24)
+	ship:setWeaponStorageMax(MISSILE_HOMING,24)			--more (vs 5)
+	ship:setWeaponStorage(MISSILE_HOMING, 24)
 	local hurricane_db = queryScienceDatabase("Ships","Frigate","Hurricane")
 	if hurricane_db == nil then
 		local frigate_db = queryScienceDatabase("Ships","Frigate")
@@ -9272,24 +9272,24 @@ function createPlayerShipMixer()
 	playerAmalgam:setWeaponTubeDirection(1, 90)			--mine tube points right (vs left)
 	playerAmalgam:setWeaponTubeDirection(2, 180)		--mine tube points back (vs right)
 	playerAmalgam:setWeaponTubeDirection(3, 180)		--mine tube points back (vs right)
-	playerAmalgam:setWeaponTubeExclusiveFor(0,"Homing")	--homing only (vs any)
-	playerAmalgam:setWeaponTubeExclusiveFor(1,"Homing")	--homing only (vs any)
-	playerAmalgam:setWeaponTubeExclusiveFor(2,"Mine")	--mine only (vs any)
-	playerAmalgam:setWeaponTubeExclusiveFor(3,"Mine")	--mine only (vs any)
+	playerAmalgam:setWeaponTubeExclusiveFor(0,MISSILE_HOMING)	--homing only (vs any)
+	playerAmalgam:setWeaponTubeExclusiveFor(1,MISSILE_HOMING)	--homing only (vs any)
+	playerAmalgam:setWeaponTubeExclusiveFor(2,MISSILE_MINE)	--mine only (vs any)
+	playerAmalgam:setWeaponTubeExclusiveFor(3,MISSILE_MINE)	--mine only (vs any)
 	playerAmalgam:setTubeLoadTime(2,16)					--rear tube slower (vs 8)
 	playerAmalgam:setTubeLoadTime(3,16)					--rear tube slower (vs 8)
 	playerAmalgam:setTubeSize(0,"large")				--left tube large (vs normal)
 	playerAmalgam:setTubeSize(1,"large")				--right tube large (vs normal)
-	playerAmalgam:setWeaponStorageMax("Homing", 16)		--more (vs 12)
-	playerAmalgam:setWeaponStorage("Homing", 16)				
-	playerAmalgam:setWeaponStorageMax("Nuke", 0)		--less (vs 4)
-	playerAmalgam:setWeaponStorage("Nuke", 0)				
-	playerAmalgam:setWeaponStorageMax("Mine", 10)		--more (vs 8)
-	playerAmalgam:setWeaponStorage("Mine", 10)				
-	playerAmalgam:setWeaponStorageMax("EMP", 0)			--less (vs 6)
-	playerAmalgam:setWeaponStorage("EMP", 0)				
-	playerAmalgam:setWeaponStorageMax("HVLI", 0)		--less (vs 20)
-	playerAmalgam:setWeaponStorage("HVLI", 0)
+	playerAmalgam:setWeaponStorageMax(MISSILE_HOMING, 16)		--more (vs 12)
+	playerAmalgam:setWeaponStorage(MISSILE_HOMING, 16)				
+	playerAmalgam:setWeaponStorageMax(MISSILE_NUKE, 0)		--less (vs 4)
+	playerAmalgam:setWeaponStorage(MISSILE_NUKE, 0)				
+	playerAmalgam:setWeaponStorageMax(MISSILE_MINE, 10)		--more (vs 8)
+	playerAmalgam:setWeaponStorage(MISSILE_MINE, 10)				
+	playerAmalgam:setWeaponStorageMax(MISSILE_EMP, 0)			--less (vs 6)
+	playerAmalgam:setWeaponStorage(MISSILE_EMP, 0)				
+	playerAmalgam:setWeaponStorageMax(MISSILE_HVLI, 0)		--less (vs 20)
+	playerAmalgam:setWeaponStorage(MISSILE_HVLI, 0)
 	return playerAmalgam
 end
 function createPlayerShipFlipper()
@@ -9310,28 +9310,28 @@ function createPlayerShipFlipper()
 	playerFlipper:setWeaponTubeDirection(4,180)			--rear (vs left)
 	playerFlipper:setTubeSize(0,"small")				--small vs medium
 	playerFlipper:setTubeSize(1,"small")				--small vs medium
-	playerFlipper:setWeaponTubeExclusiveFor(0,"Homing")	--homing only
-	playerFlipper:setWeaponTubeExclusiveFor(1,"Homing")	--homing only
-	playerFlipper:setWeaponTubeExclusiveFor(2,"HVLI")
-	playerFlipper:setWeaponTubeExclusiveFor(3,"HVLI")
-	playerFlipper:setWeaponTubeExclusiveFor(4,"Mine")
-	playerFlipper:weaponTubeAllowMissle(2,"EMP")
-	playerFlipper:weaponTubeAllowMissle(3,"EMP")
-	playerFlipper:weaponTubeAllowMissle(2,"Nuke")
-	playerFlipper:weaponTubeAllowMissle(3,"Nuke")
+	playerFlipper:setWeaponTubeExclusiveFor(0,MISSILE_HOMING)	--homing only
+	playerFlipper:setWeaponTubeExclusiveFor(1,MISSILE_HOMING)	--homing only
+	playerFlipper:setWeaponTubeExclusiveFor(2,MISSILE_HVLI)
+	playerFlipper:setWeaponTubeExclusiveFor(3,MISSILE_HVLI)
+	playerFlipper:setWeaponTubeExclusiveFor(4,MISSILE_MINE)
+	playerFlipper:weaponTubeAllowMissle(2,MISSILE_EMP)
+	playerFlipper:weaponTubeAllowMissle(3,MISSILE_EMP)
+	playerFlipper:weaponTubeAllowMissle(2,MISSILE_NUKE)
+	playerFlipper:weaponTubeAllowMissle(3,MISSILE_NUKE)
 	playerFlipper:setTubeLoadTime(2,12)
 	playerFlipper:setTubeLoadTime(3,12)
 	playerFlipper:setTubeLoadTime(4,15)
-	playerFlipper:setWeaponStorageMax("Homing",16)		--less (vs 30)
-	playerFlipper:setWeaponStorage("Homing",   16)				
-	playerFlipper:setWeaponStorageMax("Nuke",   2)		--less (vs 8)
-	playerFlipper:setWeaponStorage("Nuke",      2)				
-	playerFlipper:setWeaponStorageMax("EMP",    5)		--less (vs 10)
-	playerFlipper:setWeaponStorage("EMP",       5)				
-	playerFlipper:setWeaponStorageMax("Mine",   5)		--less (vs 12)
-	playerFlipper:setWeaponStorage("Mine",      5)				
-	playerFlipper:setWeaponStorageMax("HVLI",  16)		--more (vs 0)
-	playerFlipper:setWeaponStorage("HVLI",     16)
+	playerFlipper:setWeaponStorageMax(MISSILE_HOMING,16)		--less (vs 30)
+	playerFlipper:setWeaponStorage(MISSILE_HOMING,   16)				
+	playerFlipper:setWeaponStorageMax(MISSILE_NUKE,   2)		--less (vs 8)
+	playerFlipper:setWeaponStorage(MISSILE_NUKE,      2)				
+	playerFlipper:setWeaponStorageMax(MISSILE_EMP,    5)		--less (vs 10)
+	playerFlipper:setWeaponStorage(MISSILE_EMP,       5)				
+	playerFlipper:setWeaponStorageMax(MISSILE_MINE,   5)		--less (vs 12)
+	playerFlipper:setWeaponStorage(MISSILE_MINE,      5)				
+	playerFlipper:setWeaponStorageMax(MISSILE_HVLI,  16)		--more (vs 0)
+	playerFlipper:setWeaponStorage(MISSILE_HVLI,     16)
 	playerFlipper.smallHomingOnly = true
 	return playerFlipper
 end
@@ -9355,26 +9355,26 @@ function createPlayerShipInk()
 	playerInk:setWeaponTubeDirection(3,0)					--forward facing (vs right)
 	playerInk:setTubeLoadTime(0,12)							--slower (vs 8)
 	playerInk:setTubeLoadTime(3,12)							--slower (vs 8)
-	playerInk:setWeaponTubeExclusiveFor(2,"Homing")			--homing only (vs HVLI)
-	playerInk:setWeaponTubeExclusiveFor(5,"Homing")			--homing only (vs HVLI)
+	playerInk:setWeaponTubeExclusiveFor(2,MISSILE_HOMING)			--homing only (vs HVLI)
+	playerInk:setWeaponTubeExclusiveFor(5,MISSILE_HOMING)			--homing only (vs HVLI)
 	playerInk:setTubeLoadTime(2,10)							--slower (vs 8)
 	playerInk:setTubeLoadTime(5,10)							--slower (vs 8)
 	playerInk:setTubeLoadTime(6,15)							--slower (vs 8)
 	playerInk:setTubeLoadTime(7,15)							--slower (vs 8)
-	playerInk:setWeaponTubeExclusiveFor(0,"HVLI")			--HVLI only (vs Homing + HVLI)
-	playerInk:setWeaponTubeExclusiveFor(3,"HVLI")			--HVLI only (vs Homing + HVLI)
-	playerInk:weaponTubeDisallowMissle(1,"Mine")			--no sideways mines
-	playerInk:weaponTubeDisallowMissle(4,"Mine")			--no sideways mines
-	playerInk:setWeaponStorageMax("HVLI",10)				--fewer HVLI (vs 20)
-	playerInk:setWeaponStorage("HVLI", 10)				
-	playerInk:setWeaponStorageMax("Homing",10)				--fewer Homing (vs 12)
-	playerInk:setWeaponStorage("Homing", 10)				
-	playerInk:setWeaponStorageMax("Mine",6)					--fewer mines (vs 8)
-	playerInk:setWeaponStorage("Mine", 6)				
-	playerInk:setWeaponStorageMax("EMP",4)					--more EMPs (vs 0)
-	playerInk:setWeaponStorage("EMP", 4)					
-	playerInk:setWeaponStorageMax("Nuke",4)					--fewer Nukes (vs 6)
-	playerInk:setWeaponStorage("Nuke", 4)				
+	playerInk:setWeaponTubeExclusiveFor(0,MISSILE_HVLI)			--HVLI only (vs Homing + HVLI)
+	playerInk:setWeaponTubeExclusiveFor(3,MISSILE_HVLI)			--HVLI only (vs Homing + HVLI)
+	playerInk:weaponTubeDisallowMissle(1,MISSILE_MINE)			--no sideways mines
+	playerInk:weaponTubeDisallowMissle(4,MISSILE_MINE)			--no sideways mines
+	playerInk:setWeaponStorageMax(MISSILE_HVLI,10)				--fewer HVLI (vs 20)
+	playerInk:setWeaponStorage(MISSILE_HVLI, 10)				
+	playerInk:setWeaponStorageMax(MISSILE_HOMING,10)				--fewer Homing (vs 12)
+	playerInk:setWeaponStorage(MISSILE_HOMING, 10)				
+	playerInk:setWeaponStorageMax(MISSILE_MINE,6)					--fewer mines (vs 8)
+	playerInk:setWeaponStorage(MISSILE_MINE, 6)				
+	playerInk:setWeaponStorageMax(MISSILE_EMP,4)					--more EMPs (vs 0)
+	playerInk:setWeaponStorage(MISSILE_EMP, 4)					
+	playerInk:setWeaponStorageMax(MISSILE_NUKE,4)					--fewer Nukes (vs 6)
+	playerInk:setWeaponStorage(MISSILE_NUKE, 4)				
 	playerInk:setLongRangeRadarRange(25000)					--shorter long range sensors (vs 30000)
 	playerInk.normal_long_range_radar = 25000
 	return playerInk
@@ -9400,26 +9400,26 @@ function createPlayerShipClaw()
 	playerRaven:setWeaponTubeDirection(1,  30)			--more angled (vs 5)
 	playerRaven:setTubeSize(0,"small")					--small (vs medium)
 	playerRaven:setTubeSize(1,"small")					--small (vs medium)
-	playerRaven:setWeaponTubeExclusiveFor(0,"Nuke")		--Nuke only (vs all but mine)
-	playerRaven:setWeaponTubeExclusiveFor(1,"Nuke")		--Nuke only (vs all but mine)
+	playerRaven:setWeaponTubeExclusiveFor(0,MISSILE_NUKE)		--Nuke only (vs all but mine)
+	playerRaven:setWeaponTubeExclusiveFor(1,MISSILE_NUKE)		--Nuke only (vs all but mine)
 	playerRaven:setWeaponTubeDirection(2, -60)			
 	playerRaven:setWeaponTubeDirection(3,  60)
 	playerRaven:setTubeSize(2,"small")
 	playerRaven:setTubeSize(3,"small")
-	playerRaven:setWeaponTubeExclusiveFor(2,"EMP")
-	playerRaven:setWeaponTubeExclusiveFor(3,"EMP")
+	playerRaven:setWeaponTubeExclusiveFor(2,MISSILE_EMP)
+	playerRaven:setWeaponTubeExclusiveFor(3,MISSILE_EMP)
 	playerRaven:setTubeLoadTime(4, 12)					--slower (vs 8)
 	playerRaven:setTubeSize(4,"large")
-	playerRaven:setWeaponTubeExclusiveFor(4,"Homing")
+	playerRaven:setWeaponTubeExclusiveFor(4,MISSILE_HOMING)
 	playerRaven:setWeaponTubeDirection(5, 180)
 	playerRaven:setTubeLoadTime(5, 10)					--slower (vs 8)
-	playerRaven:setWeaponTubeExclusiveFor(5,"Mine")
-	playerRaven:setWeaponStorageMax("Homing",4)			--less (vs 12)
-	playerRaven:setWeaponStorage("Homing",4)
-	playerRaven:setWeaponStorageMax("EMP",4)			--less (vs 6)
-	playerRaven:setWeaponStorage("EMP",4)
-	playerRaven:setWeaponStorageMax("Mine",4)			--less (vs 8)
-	playerRaven:setWeaponStorage("Mine",4)
+	playerRaven:setWeaponTubeExclusiveFor(5,MISSILE_MINE)
+	playerRaven:setWeaponStorageMax(MISSILE_HOMING,4)			--less (vs 12)
+	playerRaven:setWeaponStorage(MISSILE_HOMING,4)
+	playerRaven:setWeaponStorageMax(MISSILE_EMP,4)			--less (vs 6)
+	playerRaven:setWeaponStorage(MISSILE_EMP,4)
+	playerRaven:setWeaponStorageMax(MISSILE_MINE,4)			--less (vs 8)
+	playerRaven:setWeaponStorage(MISSILE_MINE,4)
 	return playerRaven
 end
 

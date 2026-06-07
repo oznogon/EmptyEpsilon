@@ -13,6 +13,7 @@
 -- @script scenario_07_gftp
 
 require("utils.lua")
+require("ee.lua")
 
 function init()
     -- Spawn Marco Polo, its defenders, and a Ktlitan strike team
@@ -819,9 +820,9 @@ function spawnNuker()
     ship:setImpulseMaxSpeed(80):setRotationMaxSpeed(5)
     ship:setBeamWeapon(0, 0, 0, 0, 0, 0)
     ship:setBeamWeapon(1, 0, 0, 0, 0, 0)
-    ship:setWeaponStorageMax("Homing", 0)
-    ship:setWeaponStorageMax("Nuke", 10)
-    ship:setWeaponStorage("Nuke", 10)
+    ship:setWeaponStorageMax(MISSILE_HOMING, 0)
+    ship:setWeaponStorageMax(MISSILE_NUKE, 10)
+    ship:setWeaponStorage(MISSILE_NUKE, 10)
     return ship
 end
 

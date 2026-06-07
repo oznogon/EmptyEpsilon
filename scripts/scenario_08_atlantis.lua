@@ -17,6 +17,7 @@ nebula in kraylor defense line makes it unclear
 --]]
 
 require("utils.lua")
+require("ee.lua")
 
 --[[
 Rundown of the mission:
@@ -87,11 +88,11 @@ function init()
     end
 
     -- Empty all weapons storage.
-    player:setWeaponStorage("Homing", 0)
-    player:setWeaponStorage("Nuke", 0)
-    player:setWeaponStorage("EMP", 0)
-    player:setWeaponStorage("Mine", 0)
-    player:setWeaponStorage("HVLI", 0)
+    player:setWeaponStorage(MISSILE_HOMING, 0)
+    player:setWeaponStorage(MISSILE_NUKE, 0)
+    player:setWeaponStorage(MISSILE_EMP, 0)
+    player:setWeaponStorage(MISSILE_MINE, 0)
+    player:setWeaponStorage(MISSILE_HVLI, 0)
 
     -- Set up the starting area.
     shipyard_gamma = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("Shipyard-Gamma"):setPosition(25276, 134550)
@@ -132,9 +133,9 @@ function init()
     jc88:setCommsFunction(jc88Comms)
 
     -- Set up sector B20
-    CpuShip():setFaction("Kraylor"):setTemplate("WX-Lindworm"):setCallSign("S11"):setPosition(304666, -75558):orderDefendLocation(304666, -75558):setWeaponStorage("Homing", 0):setWeaponStorage("HVLI", 4)
+    CpuShip():setFaction("Kraylor"):setTemplate("WX-Lindworm"):setCallSign("S11"):setPosition(304666, -75558):orderDefendLocation(304666, -75558):setWeaponStorage(MISSILE_HOMING, 0):setWeaponStorage(MISSILE_HVLI, 4)
     CpuShip():setFaction("Kraylor"):setTemplate("MU52 Hornet"):setCallSign("S10"):setPosition(306010, -74718):orderDefendLocation(306010, -74718)
-    CpuShip():setFaction("Kraylor"):setTemplate("Adder MK5"):setCallSign("CCN8"):setPosition(304364, -74222):orderDefendLocation(304364, -74222):setWeaponStorage("HVLI", 3)
+    CpuShip():setFaction("Kraylor"):setTemplate("Adder MK5"):setCallSign("CCN8"):setPosition(304364, -74222):orderDefendLocation(304364, -74222):setWeaponStorage(MISSILE_HVLI, 3)
     b20_nebula_list = {}
     table.insert(b20_nebula_list, Nebula():setPosition(319259, -78069))
     table.insert(b20_nebula_list, Nebula():setPosition(321469, -70621))
@@ -344,7 +345,7 @@ function phase1WaitForPowerup(delta)
         player, 
         string.format(_("station-incCall", "Good, Atlantis-1, we read all systems are go. You can safely undock now.\n\nHead to sector %s, where F-1 has dropped missile supplies. Pick them up to stock up on weapons."),transport_f1:getSectorName())
     )
-    supply_drop = SupplyDrop():setFaction("Human Navy"):setPosition(29021, 114945):setEnergy(500):setWeaponStorage("Homing", 12):setWeaponStorage("Nuke", 4):setWeaponStorage("Mine", 8):setWeaponStorage("EMP", 6):setWeaponStorage("HVLI", 20)
+    supply_drop = SupplyDrop():setFaction("Human Navy"):setPosition(29021, 114945):setEnergy(500):setWeaponStorage(MISSILE_HOMING, 12):setWeaponStorage(MISSILE_NUKE, 4):setWeaponStorage(MISSILE_MINE, 8):setWeaponStorage(MISSILE_EMP, 6):setWeaponStorage(MISSILE_HVLI, 20)
     transport_f1:orderDock(supply_station_6)
     player:addReputationPoints(5)
     mission_state = phase1WaitForSupplyPickup

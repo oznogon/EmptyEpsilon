@@ -10,6 +10,8 @@
 -- @script scenario_05_beacon
 
 --- Init is run when the scenario is started. Create your initial world.
+require("ee.lua")
+
 function init()
     -- Create the main ship for the players.
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
@@ -167,12 +169,12 @@ The officers at Orion-5 will gladly make this trade, and they ask that you retri
 To ensure Refugee-X is aware of your peaceful intentions, we have stripped you of nukes and EMPs. You will get them back once you deliver the criminals.]])
             )
         end
-        player.old_nuke_max = player:getWeaponStorageMax("Nuke")
-        player.old_emp_max = player:getWeaponStorageMax("EMP")
-        player:setWeaponStorage("Nuke", 0)
-        player:setWeaponStorage("EMP", 0)
-        player:setWeaponStorageMax("Nuke", 0)
-        player:setWeaponStorageMax("EMP", 0)
+        player.old_nuke_max = player:getWeaponStorageMax(MISSILE_NUKE)
+        player.old_emp_max = player:getWeaponStorageMax(MISSILE_EMP)
+        player:setWeaponStorage(MISSILE_NUKE, 0)
+        player:setWeaponStorage(MISSILE_EMP, 0)
+        player:setWeaponStorageMax(MISSILE_NUKE, 0)
+        player:setWeaponStorageMax(MISSILE_EMP, 0)
 
         mission_state = missionRetrieveCriminals
     end
@@ -227,10 +229,10 @@ function missionAmbushed(delta)
         local refilled = false
 
         if player.old_nuke_max ~= nil then
-            player:setWeaponStorage("Nuke", player.old_nuke_max)
-            player:setWeaponStorage("EMP", player.old_emp_max)
-            player:setWeaponStorageMax("Nuke", player.old_nuke_max)
-            player:setWeaponStorageMax("EMP", player.old_emp_max)
+            player:setWeaponStorage(MISSILE_NUKE, player.old_nuke_max)
+            player:setWeaponStorage(MISSILE_EMP, player.old_emp_max)
+            player:setWeaponStorageMax(MISSILE_NUKE, player.old_nuke_max)
+            player:setWeaponStorageMax(MISSILE_EMP, player.old_emp_max)
             player.old_nuke_max = nil
             refilled = true
         end

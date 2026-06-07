@@ -37,6 +37,7 @@
 -- Advance[9]: Advance wave start to 9
 
 require("utils.lua")
+require("ee.lua")
 -- For this scenario, utils.lua provides:
 --   vectorFromAngle(angle, length)
 --      Returns a relative vector (x, y coordinates)
@@ -330,7 +331,7 @@ end
 function setImprovementMissions()
     --	set up ad hoc improvement missions
     local ordnance_missions = {
-		"Homing","Nuke","EMP","Mine","HVLI",
+		MISSILE_HOMING,MISSILE_NUKE,MISSILE_EMP,MISSILE_MINE,MISSILE_HVLI,
     }
     for i,mission in ipairs(ordnance_missions) do
     	mission_goods[mission] = {"nickel","platinum","gold","dilithium","tritanium","cobalt","circuit","filament"}

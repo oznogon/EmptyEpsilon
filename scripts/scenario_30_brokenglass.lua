@@ -14,6 +14,7 @@
 -- Difficulty[Hard]: Significant enemy resistance.
 
 require("utils.lua")
+require("ee.lua")
 
 function init()
 
@@ -343,8 +344,8 @@ function init()
   Admin_station.nebula_bonuses.nuke.onFullScan = function (self)
     self:setModel("ammo_box"):allowPickup(true):onPickUp(function ()
       self.wasFound = true
-      Player:setWeaponStorageMax("Nuke", Player:getWeaponStorageMax("Nuke") + 1)
-      Player:setWeaponStorage("Nuke", Player:getWeaponStorage("Nuke") + 1)
+      Player:setWeaponStorageMax(MISSILE_NUKE, Player:getWeaponStorageMax(MISSILE_NUKE) + 1)
+      Player:setWeaponStorage(MISSILE_NUKE, Player:getWeaponStorage(MISSILE_NUKE) + 1)
       Player:addToShipLog(_("nebulaBonuses-shipLog", "A Nuke and additional nuke storage have been added to our arsenal"),"Green")
     end)
   end
@@ -814,12 +815,12 @@ function InitPlayer()
   Player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P"):setCallSign("Propitious 1"):setPosition(8785, 800)
   Player:setJumpDrive(true)
   Player:setRotation(0):commandTargetRotation(0)
-  Player:setWeaponStorageMax("Nuke", 0)
-  Player:setWeaponStorage("Homing", 4)
-  Player:setWeaponStorage("Nuke", 0)
-  Player:setWeaponStorage("Mine", 0)
-  Player:setWeaponStorage("EMP", 0)
-  Player:setWeaponStorage("HVLI", 6)
+  Player:setWeaponStorageMax(MISSILE_NUKE, 0)
+  Player:setWeaponStorage(MISSILE_HOMING, 4)
+  Player:setWeaponStorage(MISSILE_NUKE, 0)
+  Player:setWeaponStorage(MISSILE_MINE, 0)
+  Player:setWeaponStorage(MISSILE_EMP, 0)
+  Player:setWeaponStorage(MISSILE_HVLI, 6)
   Player:setLongRangeRadarRange(20000)
   PP1 = Player
 end
@@ -1928,7 +1929,7 @@ end
 function StartMissionSpareParts()
 
   local lastpart
-  local missiles = Player:getWeaponStorage("Homing")
+  local missiles = Player:getWeaponStorage(MISSILE_HOMING)
   for i = 0, Player:getWeaponTubeCount() do
     local t = Player:getWeaponTubeLoadType(i)
     if t == "homing" then
@@ -1941,7 +1942,7 @@ function StartMissionSpareParts()
     lastpart = _("wormhole-comms", "and when in doubt - apply missiles.")
   elseif Difficulty == 1 then
     lastpart = _("wormhole-comms", "and we've given you some extra missiles to help get the job done.")
-    Player:setWeaponStorage("Homing", 6 - missiles + Player:getWeaponStorage("Homing"))
+    Player:setWeaponStorage(MISSILE_HOMING, 6 - missiles + Player:getWeaponStorage(MISSILE_HOMING))
   elseif Difficulty == 3 then
     lastpart = _("wormhole-comms", "and go find some extra missiles to help get the job done.")
   end
@@ -2255,12 +2256,12 @@ function TransferToDrone()
   DroneShip:commandTargetRotation(swapRotate)
   MockDroneShip:destroy()
 
-  DroneShip:setWeaponStorage("Homing", 3)
-  DroneShip:setWeaponStorageMax("Homing", 6)
-  DroneShip:setWeaponStorage("HVLI", 6)
-  DroneShip:setWeaponStorage("Nuke", 2)
-  DroneShip:setWeaponStorageMax("Nuke", 2)
-  DroneShip:setWeaponStorage("EMP", 2)
+  DroneShip:setWeaponStorage(MISSILE_HOMING, 3)
+  DroneShip:setWeaponStorageMax(MISSILE_HOMING, 6)
+  DroneShip:setWeaponStorage(MISSILE_HVLI, 6)
+  DroneShip:setWeaponStorage(MISSILE_NUKE, 2)
+  DroneShip:setWeaponStorageMax(MISSILE_NUKE, 2)
+  DroneShip:setWeaponStorage(MISSILE_EMP, 2)
   DroneShip:setWarpDrive(true)
   DroneShip:setWarpSpeed(400)
   DroneShip:setJumpDrive(false)
