@@ -48,6 +48,7 @@
 -- Unique Ship[Raven]: Based on Cruiser, stronger shields, weaker hull, broadside beams, tweaked tubes and missiles, low powered warp drive, tweaked sensor ranges
 -- Unique Ship[Squid]: Based on Piranha, stronger defenses, added a beam weapon, reduced missile load, large homing missiles, reconfigured tubes, shorter jump and sensor ranges
 
+require("ee.lua")
 require("utils.lua")
 require("place_station_scenario_utility.lua")
 require("player_ship_upgrade_downgrade_path_scenario_utility.lua")
@@ -1595,8 +1596,7 @@ function constructEnvironment()
 	table.insert(place_space,{obj=station_regional_hq,dist=1000,shape="circle"})
 	local defense_platform_angle = random(0,360)
 	local dp_x, dp_y = vectorFromAngle(defense_platform_angle,3000)
-	-- "fullscan" is not a valid scan state; valid states are "none", "simple", "full", and "friendorfoeidentified"
-	local dp = CpuShip():setTemplate("Defense platform"):setFaction(player_faction):setPosition(center_x + dp_x, center_y + dp_y):setScanState("full"):orderStandGround()
+	local dp = CpuShip():setTemplate("Defense platform"):setFaction(player_faction):setPosition(center_x + dp_x, center_y + dp_y):setScanState(SS_FULL_SCAN):orderStandGround()
 	player_spawn_x, player_spawn_y = vectorFromAngleNorth(random(-20,20)+defense_platform_angle,random(-300,300)+1500)
 	player_spawn_x = player_spawn_x + center_x
 	player_spawn_y = player_spawn_y + center_y
@@ -8002,8 +8002,7 @@ function updatePlayerProximityScan(p)
 	if obj_list ~= nil and #obj_list > 0 then
 		for _, obj in ipairs(obj_list) do
 			if obj:isValid() and isObjectType(obj,"CpuShip") and not obj:isFullyScannedBy(p) then
-				-- "simplescan" is not a valid scan state; valid states include "simple"
-				obj:setScanState("simple")
+				obj:setScanState(SS_SIMPLE_SCAN)
 			end
 		end
 	end

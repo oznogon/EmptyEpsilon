@@ -1,6 +1,7 @@
 -- Name: Kessler
 -- Description: Save the global satellite network by catching space debris and prevent the Kessler Syndrome! This is a beginner scenario initially created to be played by a crew of school kids. It still assumes general knowledge about operating the stations, so a previous tutorial session or on-site introduction is recommended. The officer(s) on relay&science or on operations should be able to read fluently.
 -- Type: Mission
+require("ee.lua")
 require("utils.lua")
 
 function init()
@@ -221,8 +222,7 @@ function towards_commandnode(delta)
 
     if distance(player2, command_node) < 1001 then
         for n=1,10 do
-            probe[n]:orderStandGround():-- "Maneuvering" is not a valid system name; the valid name is "maneuver"
-setSystemHealth("maneuver",0.5)
+            probe[n]:orderStandGround():setSystemHealth(SYS_MANEUVER,0.5)
         end
         player2:addCustomButton("Engineering","activate_transmitter_btn",_("Activate transmitter"),activate_transmitter)
         player2:addCustomButton("Engineering+","activate_transmitter_btn_plus",_("Activate transmitter"),activate_transmitter)
@@ -250,8 +250,7 @@ function activate_transmitter()
     player2:addCustomInfo("Engineering+","activate_transmitter_info_plus",_("Transmitter is charging.."))
     escalation=20
     for n=1,probe_amount do
-        probe[n]:orderRoaming():-- Same fix: "Maneuvering" → "maneuver"
-setSystemHealth("maneuver",0.85)
+        probe[n]:orderRoaming():setSystemHealth(SYS_MANEUVER,0.85)
     end        
 end
 
@@ -266,8 +265,7 @@ function boot_transmitter(delta)
     end
     if charge_timer>20 and escalation==20 then
         for n=1,10 do
-            -- "Impulse" was capitalized but the valid system name is lowercase "impulse"
-            probe[n]:setImpulseMaxSpeed(100):setSystemHealth("impulse",0.1)
+            probe[n]:setImpulseMaxSpeed(100):setSystemHealth(SYS_IMPULSE,0.1)
             
         end
         escalation=30

@@ -72,6 +72,7 @@
 --			does not talk to players. This boolean is ignored if the handleEnemiesInRange
 --			function exists.
 --	Note: more booleans are listed before each function to which they apply
+require("ee.lua")
 require("utils.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
@@ -11435,7 +11436,7 @@ function updatePlayerProximityScanUtility(p)
 			for i, obj in ipairs(obj_list) do
 				if obj ~= p then
 					if obj:isValid() and (isObjectType(obj,"CpuShip") or isObjectType(obj,"PlayerSpaceship")) and not obj:isFullyScannedBy(p) then
-						obj:setScanState("simple")
+						obj:setScanState(SS_SIMPLE_SCAN)
 					end
 				end
 			end
