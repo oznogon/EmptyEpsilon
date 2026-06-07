@@ -1013,14 +1013,15 @@ function timIll(delta)
 		if getScenarioTime() > tim_half_life_time then
 			if halfMsg == nil then
 				halfMsg = "sent"
-				player:addToShipLog(string.format(_("shipLog", "[Bob Cratchit] Please hurry, the doctors say Tim has less than %i seconds to live"),math.floor(getScenarioTime() - tim_half_life_time)),"Yellow")
+				-- getScenarioTime() - tim_half_life_time computes elapsed time, not remaining time
+				player:addToShipLog(string.format(_("shipLog", "[Bob Cratchit] Please hurry, the doctors say Tim has less than %i seconds to live"),math.floor(tim_life_time - getScenarioTime())),"Yellow")
 			end
 		end
 	else
 		if getScenarioTime() > tim_half_life_time then
 			if halfMsg == nil then
 				halfMsg = "sent"
-				player:addToShipLog(string.format(_("shipLog", "[Sick Bay] Tim has less than %i seconds to live"),math.floor(getScenarioTime() - tim_half_life_time)),"Magenta")
+				player:addToShipLog(string.format(_("shipLog", "[Sick Bay] Tim has less than %i seconds to live"),math.floor(tim_life_time - getScenarioTime())),"Magenta")
 			end
 		end
 		if friendTurkeySurprise:isValid() then
