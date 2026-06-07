@@ -246,7 +246,7 @@ function isObjectType(obj,typ)
 				elseif typ == "CpuShip" then
 					return obj.components.ai_controller
 				elseif typ == "Asteroid" then
-					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
+					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Asteroid"
 				else
 					return false
 				end
@@ -286,11 +286,11 @@ function tableSelectRandom(array)
 	return array[math.random(1,#array)]	
 end
 function angleFromVectorNorth(p1x,p1y,p2x,p2y)
-	TWOPI = 6.2831853071795865
-	RAD2DEG = 57.2957795130823209
-	atan2parm1 = p2x - p1x
-	atan2parm2 = p2y - p1y
-	theta = math.atan2(atan2parm1, atan2parm2)
+	local TWOPI = 6.2831853071795865
+	local RAD2DEG = 57.2957795130823209
+	local atan2parm1 = p2x - p1x
+	local atan2parm2 = p2y - p1y
+	local theta = math.atan2(atan2parm1, atan2parm2)
 	if theta < 0 then
 		theta = theta + TWOPI
 	end
@@ -335,15 +335,9 @@ function initializeGoodDescription()
 	}
 end
 function initializeCommonGoods()
-	if commonGoods == nil then
-		commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
-	end
-	if componentGoods == nil then
-		componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
-	end
-	if mineralGoods == nil then
-		mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
-	end
+	local commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
+	local componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
+	local mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
 	max_repeat_loop = 100
 end
 function initializeImprovementMissions()
@@ -745,10 +739,10 @@ function addStationToDatabase(station)
 		end
 		local station_type = station:getTypeName()
 		local size_value = ""
-		local small_station_key = _("scienceDB","Small Station")
-		local medium_station_key = _("scienceDB","Medium Station")
-		local large_station_key = _("scienceDB","Large Station")
-		local huge_station_key = _("scienceDB","Huge Station")
+		local small_station_key = "Small Station"
+		local medium_station_key = "Medium Station"
+		local large_station_key = "Large Station"
+		local huge_station_key = "Huge Station"
 		if station_type == small_station_key then
 			size_value = _("scienceDB","Small")
 			local small_db = queryScienceDatabase(stations_key,small_station_key)
@@ -1050,7 +1044,7 @@ function stationStatusReport()
 					local p_ship_type = comms_source:getTypeName()
 					if comms_target.comms_data.upgrade_path[p_ship_type] ~= nil then
 						local upgrade_count = 0
-						local out = _(_("dockingServicesStatus-comms","We can provide the following upgrades:\n    system: description"))
+						local out = _("dockingServicesStatus-comms","We can provide the following upgrades:\n    system: description")
 						for u_type, u_blob in pairs(comms_target.comms_data.upgrade_path[p_ship_type]) do
 							local p_upgrade_level = comms_source.upgrade_path[u_type]
 							if u_blob > p_upgrade_level then
@@ -11441,7 +11435,7 @@ function updatePlayerProximityScanUtility(p)
 			for i, obj in ipairs(obj_list) do
 				if obj ~= p then
 					if obj:isValid() and (isObjectType(obj,"CpuShip") or isObjectType(obj,"PlayerSpaceship")) and not obj:isFullyScannedBy(p) then
-						obj:setScanState("simplescan")
+						obj:setScanState("simple")
 					end
 				end
 			end
