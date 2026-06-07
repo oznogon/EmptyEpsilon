@@ -37,6 +37,7 @@
 #include "components/drone.h"
 #include "systems/probe.h"
 #include "components/briefing.h"
+#include "components/faction.h"
 #include "audio/sound.h"
 #include "systems/probe.h"
 #include "systems/jumpsystem.h"
@@ -1522,6 +1523,16 @@ static int luaYield(lua_State* lua)
     return lua_yield(lua, 0);
 }
 
+static sp::ecs::Entity luaEntityFromString(string s)
+{
+    return sp::ecs::Entity::fromString(s);
+}
+
+static sp::ecs::Entity luaFindFaction(string name)
+{
+    return Faction::find(name);
+}
+
 void setupSubEnvironment(sp::script::Environment& env)
 {
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
@@ -2265,6 +2276,16 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     registerScriptDataStorageFunctions(env);
     registerScriptGMFunctions(env);
     registerScriptRandomFunctions(env);
+
+    /// entity entityFromString(string id)
+    /// Converts a string entity ID (from entity:toString()) back to an entity reference.
+    /// Useful when passing entity references through CMD_RUN_SCRIPT.
+    env.setGlobal("entityFromString", &luaEntityFromString);
+
+    /// entity findFaction(string name)
+    /// Returns the FactionInfo entity for the given faction name (e.g. "Human Navy", "Exuari").
+    /// Useful when changing an entity's faction via CMD_RUN_SCRIPT.
+    env.setGlobal("findFaction", &luaFindFaction);
 
     auto res = env.runFile<void>("luax.lua");
     LuaConsole::checkResult(res);

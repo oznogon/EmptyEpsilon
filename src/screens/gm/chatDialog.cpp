@@ -5,6 +5,8 @@
 #include "components/collision.h"
 #include "components/name.h"
 #include "systems/comms.h"
+#include "GMActions.h"
+#include "multiplayer_client.h"
 
 #include "screenComponents/radarView.h"
 
@@ -29,9 +31,19 @@ GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* ra
             {
                 auto transmitter = this->player.getComponent<CommsTransmitter>();
                 if (transmitter && transmitter->state == CommsTransmitter::State::ChannelOpenGM)
-                    CommsSystem::addCommsIncommingMessage(this->player, text_entry->getText());
+                {
+                    if (game_client && gameMasterActions)
+                        gameMasterActions->commandAddCommsIncomingMessage(this->player, text_entry->getText());
+                    else
+                        CommsSystem::addCommsIncommingMessage(this->player, text_entry->getText());
+                }
                 else
-                    CommsSystem::hailByGM(this->player, text_entry->getText());
+                {
+                    if (game_client && gameMasterActions)
+                        gameMasterActions->commandHailByGM(this->player, text_entry->getText());
+                    else
+                        CommsSystem::hailByGM(this->player, text_entry->getText());
+                }
             }
             text_entry->setText("");
         }
@@ -151,7 +163,12 @@ void GameMasterChatDialog::onClose()
 {
     auto transmitter = player.getComponent<CommsTransmitter>();
     if (transmitter && (transmitter->state == CommsTransmitter::State::ChannelOpenGM || transmitter->state == CommsTransmitter::State::BeingHailedByGM))
-        CommsSystem::close(player);
+    {
+        if (game_client && gameMasterActions)
+            gameMasterActions->commandCloseComms(player);
+        else
+            CommsSystem::close(player);
+    }
 
     hide();
     minimize(false);

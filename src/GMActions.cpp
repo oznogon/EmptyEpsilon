@@ -2,10 +2,14 @@
 
 #include "engine.h"
 #include "gameGlobalInfo.h"
+#include "systems/comms.h"
 #include <SDL_assert.h>
 
 const static int16_t CMD_RUN_SCRIPT = 0x0000;
 const static int16_t CMD_SEND_GLOBAL_MESSAGE = 0x0001;
+const static int16_t CMD_HAIL_BY_GM = 0x0002;
+const static int16_t CMD_ADD_COMMS_INCOMING_MESSAGE = 0x0003;
+const static int16_t CMD_CLOSE_COMMS = 0x0004;
 
 P<GameMasterActions> gameMasterActions;
 
@@ -44,6 +48,30 @@ void GameMasterActions::onReceiveClientCommand(int32_t client_id, sp::io::DataBu
             }
         }
         break;
+    case CMD_HAIL_BY_GM:
+        {
+            sp::ecs::Entity player;
+            string target_name;
+            packet >> player >> target_name;
+            CommsSystem::hailByGM(player, target_name);
+        }
+        break;
+    case CMD_ADD_COMMS_INCOMING_MESSAGE:
+        {
+            sp::ecs::Entity player;
+            string message;
+            packet >> player >> message;
+            if (message.length() > 0)
+                CommsSystem::addCommsIncommingMessage(player, message);
+        }
+        break;
+    case CMD_CLOSE_COMMS:
+        {
+            sp::ecs::Entity player;
+            packet >> player;
+            CommsSystem::close(player);
+        }
+        break;
     }
 }
 
@@ -58,5 +86,26 @@ void GameMasterActions::commandSendGlobalMessage(string message)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SEND_GLOBAL_MESSAGE << message;
+    sendClientCommand(packet);
+}
+
+void GameMasterActions::commandHailByGM(sp::ecs::Entity player, string target_name)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_HAIL_BY_GM << player << target_name;
+    sendClientCommand(packet);
+}
+
+void GameMasterActions::commandAddCommsIncomingMessage(sp::ecs::Entity player, string message)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_ADD_COMMS_INCOMING_MESSAGE << player << message;
+    sendClientCommand(packet);
+}
+
+void GameMasterActions::commandCloseComms(sp::ecs::Entity player)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_CLOSE_COMMS << player;
     sendClientCommand(packet);
 }

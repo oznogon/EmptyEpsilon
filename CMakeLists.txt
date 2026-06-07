@@ -286,6 +286,7 @@ set(MAIN_SOURCES
     src/screens/extra/targetAnalysisScreen.cpp
     src/screens/extra/briefingScreen.cpp
     src/screens/gm/gameMasterScreen.cpp
+    src/screens/gm/limitedGameMasterScreen.cpp
     src/screens/gm/objectCreationView.cpp
     src/screens/gm/globalMessageEntryView.cpp
     src/screens/gm/chatDialog.cpp
@@ -706,6 +707,7 @@ set(MAIN_SOURCES
     src/screens/extra/briefingScreen.h
     src/screens/gm/chatDialog.h
     src/screens/gm/gameMasterScreen.h
+    src/screens/gm/limitedGameMasterScreen.h
     src/screens/gm/globalMessageEntryView.h
     src/screens/gm/objectCreationView.h
     src/screens/gm/tweak.h

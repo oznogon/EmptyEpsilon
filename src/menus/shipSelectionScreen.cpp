@@ -24,6 +24,7 @@
 #include "screens/cinematicViewScreen.h"
 #include "screens/spectatorScreen.h"
 #include "screens/gm/gameMasterScreen.h"
+#include "screens/gm/limitedGameMasterScreen.h"
 #include "menus/luaConsole.h"
 #include "menus/optionsMenu.h"
 
@@ -182,8 +183,9 @@ ShipSelectionScreen::ShipSelectionScreen()
         (new GuiTextTooltip(btn, id, text, 20.0f))->setWidth(280.0f);
     };
 
-    // Game Master button
-    if (game_server) {
+    // Game Master button (server only)
+    if (game_server)
+    {
         auto game_master_button = new GuiButton(right_panel, "GAME_MASTER_BUTTON", tr("Game master"),
             [this]()
             {
@@ -222,6 +224,49 @@ ShipSelectionScreen::ShipSelectionScreen()
         game_master_button->setSize(GuiElement::GuiSizeMax, 50.0f);
         addTooltip(game_master_button, "GAME_MASTER_TOOLTIP",
             tr("shipSelect", "Control the scenario as Game Master. Spawn and tweak objects, communicate with players, monitor activity, and trigger scenario events.  Requires GM code if set."));
+    }
+
+    // Limited Game Master button (client-side only)
+    if (game_client)
+    {
+        auto limited_gm_button = new GuiButton(right_panel, "LIMITED_GM_BUTTON", tr("Limited game master"),
+            [this]()
+            {
+                if (gameGlobalInfo->gm_control_code.length() > 0)
+                {
+                    LOG(Info, "Player selected limited game master mode, which has a control code.");
+                    focus(password_dialog->entry);
+                    password_dialog->open(tr("Enter the GM control code:"), "",
+                        [](string code)
+                        {
+                            return code == gameGlobalInfo->gm_control_code;
+                        },
+                        [this]()
+                        {
+                            my_player_info->commandSetShip({});
+                            destroy();
+                            new LimitedGameMasterScreen(getRenderLayer());
+                        },
+                        [this]()
+                        {
+                            left_container->show();
+                            right_container->show();
+                        }
+                    );
+                    left_container->hide();
+                    right_container->hide();
+                }
+                else
+                {
+                    my_player_info->commandSetShip({});
+                    destroy();
+                    new LimitedGameMasterScreen(getRenderLayer());
+                }
+            }
+        );
+        limited_gm_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+        addTooltip(limited_gm_button, "LIMITED_GM_TOOLTIP",
+            tr("shipSelect", "Control the scenario with limited GM powers from a client. Move/delete entities, change factions, issue AI orders, manage waypoints, and send messages. Requires GM code if set."));
     }
 
     // Spectator view button
