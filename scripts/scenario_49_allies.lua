@@ -1008,64 +1008,78 @@ function placeNeutral()
 end
 function getFactionAdjacentGridLocations(lx,ly)
 --adjacent empty grid locations around the grid locations of the currently building faction
-	tempGrid = {}
-	for i=gbLow,gbHigh do
-		tempGrid[i] = {}
-	end
-	tempGrid[lx][ly] = 1
+-- Use local visited set to prevent infinite recursion if grid has cycles
 	ol = {}
+	ol = getFactionAdjacentGridLocationsRecurse({},lx,ly)
+	return ol
+end
+function getFactionAdjacentGridLocationsRecurse(tempGrid,lx,ly)
+	if tempGrid == nil then tempGrid = {} end
+	if tempGrid[lx] == nil then tempGrid[lx] = {} end
+	tempGrid[lx][ly] = 1
+	local ol = {}
 	-- check left
 	if lx-1 >= gbLow then
-		if tempGrid[lx-1][ly] == nil then
+		if tempGrid[lx-1] == nil or tempGrid[lx-1][ly] == nil then
+			if tempGrid[lx-1] == nil then tempGrid[lx-1] = {} end
 			tempGrid[lx-1][ly] = 1
 			if grid[lx-1][ly] == nil then
 				table.insert(ol,{lx-1,ly})
 			elseif grid[lx-1][ly] >= fb then
 				--case 1: traveling left, skip right check
-				getFactionAdjacentGridLocationsSkip(1,lx-1,ly)
+				local sub = getFactionAdjacentGridLocationsSkip(1,lx-1,ly,tempGrid)
+				for _,v in ipairs(sub) do table.insert(ol,v) end
 			end
 		end
 	end
 	--check up
 	if ly-1 >= gbLow then
-		if tempGrid[lx][ly-1] == nil then
+		if tempGrid[lx] == nil or tempGrid[lx][ly-1] == nil then
+			if tempGrid[lx] == nil then tempGrid[lx] = {} end
 			tempGrid[lx][ly-1] = 1
 			if grid[lx][ly-1] == nil then
 				table.insert(ol,{lx,ly-1})
 			elseif grid[lx][ly-1] >= fb then		
 				--case 2: traveling up, skip down check
-				getFactionAdjacentGridLocationsSkip(2,lx,ly-1)
+				local sub = getFactionAdjacentGridLocationsSkip(2,lx,ly-1,tempGrid)
+				for _,v in ipairs(sub) do table.insert(ol,v) end
 			end
 		end
 	end
 	--check right
 	if lx+1 <= gbHigh then
-		if tempGrid[lx+1][ly] == nil then
+		if tempGrid[lx+1] == nil or tempGrid[lx+1][ly] == nil then
+			if tempGrid[lx+1] == nil then tempGrid[lx+1] = {} end
 			tempGrid[lx+1][ly] = 1
 			if grid[lx+1][ly] == nil then
 				table.insert(ol,{lx+1,ly})
 			elseif grid[lx+1][ly] >= fb then
 				--case 3: traveling right, skip left check
-				getFactionAdjacentGridLocationsSkip(3,lx+1,ly)
+				local sub = getFactionAdjacentGridLocationsSkip(3,lx+1,ly,tempGrid)
+				for _,v in ipairs(sub) do table.insert(ol,v) end
 			end
 		end
 	end
 	--check down
 	if ly+1 <= gbHigh then
-		if tempGrid[lx][ly+1] == nil then
+		if tempGrid[lx] == nil or tempGrid[lx][ly+1] == nil then
+			if tempGrid[lx] == nil then tempGrid[lx] = {} end
 			tempGrid[lx][ly+1] = 1
 			if grid[lx][ly+1] == nil then
 				table.insert(ol,{lx,ly+1})
 			elseif grid[lx][ly+1] >= fb then
 				--case 4: traveling down, skip up check
-				getFactionAdjacentGridLocationsSkip(4,lx,ly+1)
+				local sub = getFactionAdjacentGridLocationsSkip(4,lx,ly+1,tempGrid)
+				for _,v in ipairs(sub) do table.insert(ol,v) end
 			end
 		end
 	end
 	return ol
 end
-function getFactionAdjacentGridLocationsSkip(dSkip,lx,ly)
+function getFactionAdjacentGridLocationsSkip(dSkip,lx,ly,tempGrid)
 --adjacent empty grid locations around the grid locations of the currently building faction, skip check as requested
+	if tempGrid == nil then tempGrid = {} end
+	if tempGrid[lx] == nil then tempGrid[lx] = {} end
 	tempGrid[lx][ly] = 1
 	if dSkip ~= 3 then
 		--check left
