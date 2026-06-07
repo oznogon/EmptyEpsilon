@@ -488,8 +488,9 @@ function OnDamaged(self, instigator)
   -- "Note that the callback function must reference something global, otherwise you get an error like "??[convert<ScriptSimpleCallback>::param] Upvalue 1 of function is not a table..."
   local __ = math.abs(0)
   if instigator ~= nil
-    and ((instigator:getFaction() == "Humany Navy" and self:getFaction() == "Kraylor")
-      or (instigator:getFaction() == "Kraylor" and self:getFaction() == "Humany Navy"))
+    -- "Humany Navy" was a misspelling — no faction exists with this name, so the aggro check always returned false
+    and ((instigator:getFaction() == "Human Navy" and self:getFaction() == "Kraylor")
+      or (instigator:getFaction() == "Kraylor" and self:getFaction() == "Human Navy"))
     and (not self.lastAggroSwitch or getScenarioTime() - self.lastAggroSwitch > 20) then
       self.aggroTarget = instigator
       self.lastAggroSwitch = getScenarioTime()
