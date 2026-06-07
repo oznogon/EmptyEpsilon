@@ -114,12 +114,10 @@ function update(delta)
     timer = timer + delta
 
     -- Count all surviving enemies.
-    for i, enemy in ipairs(enemyList) do
-        if not enemy:isValid() then
+    -- Iterate backwards to avoid skipping elements after table.remove
+    for i = #enemyList, 1, -1 do
+        if not enemyList[i]:isValid() then
             table.remove(enemyList, i)
-        -- Note: table.remove() inside iteration causes the next element to be skipped.
-        -- This means in each update-cycle max half of the elements are removed.
-        -- It does not matter here, since update is called regularly.
         end
     end
     if #enemyList == 0 then
