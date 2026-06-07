@@ -441,7 +441,8 @@ function mainGMButtonsDuringPause()
 	if interWave == delay_config["slow"] then
 		button_label = _("buttonGM", "Delay slow to fast")
 	elseif interWave == delay_config["fast"] then
-		_("buttonGM", "Delay fast to normal")
+		-- The translated label was computed but never assigned to button_label, so the button never appeared
+		button_label = _("buttonGM", "Delay fast to normal")
 	end
 	addGMFunction(button_label,function()
 		if interWave == delay_config["normal"] then
@@ -478,7 +479,8 @@ function mainGMButtonsAfterPause()
 	if interWave == delay_config["slow"] then
 		button_label = _("buttonGM", "Delay slow to fast")
 	elseif interWave == delay_config["fast"] then
-		_("buttonGM", "Delay fast to normal")
+		-- Same fix: the translated label must be assigned to button_label
+		button_label = _("buttonGM", "Delay fast to normal")
 	end
 	addGMFunction(button_label,function()
 		if interWave == delay_config["normal"] then
