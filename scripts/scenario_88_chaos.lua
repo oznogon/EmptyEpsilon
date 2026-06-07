@@ -137,7 +137,8 @@ function setVariations()
 			["30U"] = 30000,
 		}
 		station_sensor_range = station_sensor_options[getScenarioSetting("Station Sensors")]
-		game_time_limit = getScenarioSetting("Time")*60
+		-- When no Time setting is selected, getScenarioSetting returns "" and ""*60 = 0, creating an instant game-over
+		game_time_limit = getScenarioSetting("Time") ~= "" and getScenarioSetting("Time")*60 or nil
 	end
 end
 function setConstants()
@@ -6119,7 +6120,8 @@ function buySellTrade(return_function)
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good_desc[good]), function()
 						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good_desc[good],goodData["quantity"])
-						if goodData[quantity] < 1 then
+						-- quantity is a bare variable (nil here) instead of the string key "quantity"
+						if goodData["quantity"] < 1 then
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
