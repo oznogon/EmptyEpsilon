@@ -1164,7 +1164,8 @@ function placeTerrain(placement_area,terrain)
 			v_angle = (v_angle + random(120,240)) % 360
 			local vx, vy = vectorFromAngle(v_angle,tether,true)
 			vx = vx + eo_x
-			vy = vy + eo_x
+			-- eo_x (X-axis) was being added to the Y-coordinate instead of eo_y
+			vy = vy + eo_y
 			vast = VisualAsteroid():setPosition(vx,vy):setSize(random(10,tether))
 			return true
 		else
@@ -2482,7 +2483,8 @@ function formalWar()
 							for j,missile in ipairs(missile_types) do
 								if ship:getWeaponStorageMax(missile) > 0 then
 									if ship:getWeaponStorage(missile) < 1 then
-										ship:setWeaponStorage(missile,getWeaponStorageMax(missile))
+										-- getWeaponStorageMax lacked the ship: prefix, causing a Lua error
+										ship:setWeaponStorage(missile, ship:getWeaponStorageMax(missile))
 									end
 								end
 							end
