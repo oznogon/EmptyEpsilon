@@ -25,7 +25,9 @@ end
 
 function update(delta)
     cnt = 0
-    for idx, obj in ipairs(transportList) do
+    -- Iterate backwards to avoid skipping elements after table.remove
+    for idx = #transportList, 1, -1 do
+        local obj = transportList[idx]
         if not obj:isValid() then
             -- Transport destroyed, remove it from the list
             table.remove(transportList, idx)
