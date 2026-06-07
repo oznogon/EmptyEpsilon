@@ -291,11 +291,17 @@ function update(delta)
     wave_timer = wave_timer + delta
     troop_timer = troop_timer + delta
 
+    -- Track whether death has been processed for each flagship, to prevent the
+    -- reputation/points/message blocks from firing every frame while the ship is dead.
+    local human_death_processed = false
+    local kraylor_death_processed = false
+
     -- If the Gallipoli is destroyed ...
     if (not gallipoli:isValid()) then
         if respawn_human > 20 then
             -- ... and 20 seconds have passed, spawn the Heinlein.
             gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(-8500, 15000):setCallSign("HNS Heinlein"):setScannedByFaction("Kraylor", false)
+            human_death_processed = false
         else
             -- Otherwise, increment the respawn timer.
             respawn_human = respawn_human + delta
@@ -306,6 +312,7 @@ function update(delta)
     if (not crusader:isValid()) then
         if respawn_kraylor > 20 then
             crusader = PlayerSpaceship():setFaction("Kraylor"):setTemplate("Atlantis"):setPosition(19000, -14500):setCallSign("Crusader Elak'raan"):setScannedByFaction("Human Navy", false)
+            kraylor_death_processed = false
         else
             respawn_kraylor = respawn_kraylor + delta
         end
@@ -326,8 +333,10 @@ function update(delta)
     end
 
     -- If either flagship is destroyed, its opponent gains a reputation bonus, and
-    -- its opponent's faction gains victory points.
-    if (not gallipoli:isValid()) then
+    -- its opponent's faction gains victory points. Guard with one-shot flags so these
+    -- only fire once per death rather than every frame.
+    if (not gallipoli:isValid()) and not human_death_processed then
+        human_death_processed = true
         shipyard_kraylor:sendCommsMessage(
             crusader,
             _("incCall", [[Well done, Crusader!
@@ -336,10 +345,10 @@ The pathetic Human flagship has been disabled. Go for the victory!]])
         )
         crusader:addReputationPoints(50)
         points_kraylor = points_kraylor + 5
-        respawn_human = 0
     end
 
-    if (not crusader:isValid()) then
+    if (not crusader:isValid()) and not kraylor_death_processed then
+        kraylor_death_processed = true
         shipyard_human:sendCommsMessage(
             gallipoli,
             _("incCall", [[Good job, Captain!
@@ -348,7 +357,6 @@ With the Kraylor flagship out of the way, we can land the final blow!]])
         )
         gallipoli:addReputationPoints(50)
         points_human = points_human + 5
-        respawn_kraylor = 0
     end
 
     -- Every 150 seconds, spawn a troop transport and 2 fighters as escorts for
