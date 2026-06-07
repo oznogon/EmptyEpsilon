@@ -29,12 +29,12 @@
 
 require("utils.lua")
 
-function createRandomAlongArc(object_type, amount, x, y, distance, startArc, endArcClockwise, randomize)
+function createRandomAlongArc(object_type, amount, x, y, radius, startArc, endArcClockwise, randomize)
 -- Create amount of objects of type object_type along arc
 -- Center defined by x and y
--- Radius defined by distance
+-- Radius defined by radius
 -- Start of arc between 0 and 360 (startArc), end arc: endArcClockwise
--- Use randomize to vary the distance from the center point. Omit to keep distance constant
+-- Use randomize to vary the radius from the center point. Omit to keep radius constant
 -- Example:
 --   createRandomAlongArc(Asteroid, 100, 500, 3000, 65, 120, 450)
 	local object_list = {}
@@ -50,29 +50,29 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 	if amount > arcLen then
 		for ndex=1,arcLen do
 			radialPoint = startArc+ndex
-			pointDist = distance + random(-randomize,randomize)
+			pointDist = radius + random(-randomize,randomize)
 			table.insert(object_list,object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist))
 		end
 		for ndex=1,amount-arcLen do
 			radialPoint = random(startArc,endArcClockwise)
-			pointDist = distance + random(-randomize,randomize)
+			pointDist = radius + random(-randomize,randomize)
 			table.insert(object_list,object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist))
 		end
 	else
 		for ndex=1,amount do
 			radialPoint = random(startArc,endArcClockwise)
-			pointDist = distance + random(-randomize,randomize)
+			pointDist = radius + random(-randomize,randomize)
 			table.insert(object_list,object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist))
 		end
 	end
 	return object_list
 end
-function createRandomAsteroidAlongArc(amount, x, y, distance, startArc, endArcClockwise, randomize)
+function createRandomAsteroidAlongArc(amount, x, y, radius, startArc, endArcClockwise, randomize)
 -- Create amount of asteroids along arc
 -- Center defined by x and y
--- Radius defined by distance
+-- Radius defined by radius
 -- Start of arc between 0 and 360 (startArc), end arc: endArcClockwise
--- Use randomize to vary the distance from the center point. Omit to keep distance constant
+-- Use randomize to vary the radius from the center point. Omit to keep radius constant
 -- Example:
 --   createRandomAsteroidAlongArc(100, 500, 3000, 65, 120, 450)
 	if randomize == nil then randomize = 0 end
@@ -82,12 +82,26 @@ function createRandomAsteroidAlongArc(amount, x, y, distance, startArc, endArcCl
 		endArcClockwise = endArcClockwise + 360
 		arcLen = arcLen + 360
 	end
-    local asteroid_size = random(1,100) + random(1,75) + random(1,75) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20)
+	local place_space = {}
+	local function farEnough(ax, ay, asteroid_size)
+		local far_enough = true
+		for _, item in ipairs(place_space) do
+			if item.shape == "circle" then
+				if item.obj ~= nil and item.obj:isValid() then
+					if distance(item.obj, ax, ay) < (asteroid_size + item.dist) then
+						far_enough = false
+						break
+					end
+				end
+			end
+		end
+		return far_enough
+	end
 	if amount > arcLen then
 		for ndex=1,arcLen do
 			local radialPoint = startArc+ndex
-			local pointDist = distance + random(-randomize,randomize)
-		    asteroid_size = random(1,100) + random(1,75) + random(1,75) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20)
+			local pointDist = radius + random(-randomize,randomize)
+		    local asteroid_size = random(1,100) + random(1,75) + random(1,75) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20)
 			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
 			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
 			if farEnough(ax, ay, asteroid_size) then
@@ -96,9 +110,9 @@ function createRandomAsteroidAlongArc(amount, x, y, distance, startArc, endArcCl
 			end
 		end
 		for ndex=1,amount-arcLen do
-			radialPoint = random(startArc,endArcClockwise)
-			pointDist = distance + random(-randomize,randomize)
-		    asteroid_size = random(1,100) + random(1,75) + random(1,75) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20)
+			local radialPoint = random(startArc,endArcClockwise)
+			local pointDist = radius + random(-randomize,randomize)
+		    local asteroid_size = random(1,100) + random(1,75) + random(1,75) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20)
 			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
 			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
 			if farEnough(ax, ay, asteroid_size) then
@@ -108,9 +122,9 @@ function createRandomAsteroidAlongArc(amount, x, y, distance, startArc, endArcCl
 		end
 	else
 		for ndex=1,amount do
-			radialPoint = random(startArc,endArcClockwise)
-			pointDist = distance + random(-randomize,randomize)
-		    asteroid_size = random(1,100) + random(1,75) + random(1,75) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20)
+			local radialPoint = random(startArc,endArcClockwise)
+			local pointDist = radius + random(-randomize,randomize)
+		    local asteroid_size = random(1,100) + random(1,75) + random(1,75) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20)
 			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
 			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
 			if farEnough(ax, ay, asteroid_size) then
@@ -119,6 +133,7 @@ function createRandomAsteroidAlongArc(amount, x, y, distance, startArc, endArcCl
 			end
 		end
 	end
+	return place_space
 end
 -----------------------------
 --	Dynamic map functions  --
@@ -5469,9 +5484,9 @@ function placeRandomAsteroidsAroundPoint(amount, dist_min, dist_max, x0, y0)
 -- create amount of asteroid, at a distance between dist_min and dist_max around the point (x0, y0)
     for n=1,amount do
         local r = random(0, 360)
-        local distance = random(dist_min, dist_max)
-        local x = x0 + math.cos(r / 180 * math.pi) * distance
-        local y = y0 + math.sin(r / 180 * math.pi) * distance
+        local dist = random(dist_min, dist_max)
+        local x = x0 + math.cos(r / 180 * math.pi) * dist
+        local y = y0 + math.sin(r / 180 * math.pi) * dist
         local asteroid_size = random(1,100) + random(1,75) + random(1,75) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20)
         if farEnough(x, y, asteroid_size) then
 	        local ta = Asteroid():setPosition(x, y):setSize(asteroid_size)
