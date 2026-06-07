@@ -79,11 +79,8 @@ function placeStation(x,y,name,faction,size,diagnostic)
 			["CUF"] = 0,
 		}
 	end
-	if diagnostic == nil then
-		diagnostic = false
-	else
-		diagnostic = true
-	end
+	-- Passing explicit false previously set it to true (since false ~= nil); use 'or false' to preserve false
+	diagnostic = diagnostic or false
 	--Randomize the availability of some station services. Unless you write your station 
 	--communication routines to take advantage of these, they'll be ignored,
 	--except for the last three. See below.
