@@ -1070,11 +1070,11 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 	return last_x, last_y, object_list
 end
 function angleFromVectorNorth(p1x,p1y,p2x,p2y)
-	TWOPI = 6.2831853071795865
-	RAD2DEG = 57.2957795130823209
-	atan2parm1 = p2x - p1x
-	atan2parm2 = p2y - p1y
-	theta = math.atan2(atan2parm1, atan2parm2)
+	local TWOPI = 6.2831853071795865
+	local RAD2DEG = 57.2957795130823209
+	local atan2parm1 = p2x - p1x
+	local atan2parm2 = p2y - p1y
+	local theta = math.atan2(atan2parm1, atan2parm2)
 	if theta < 0 then
 		theta = theta + TWOPI
 	end
