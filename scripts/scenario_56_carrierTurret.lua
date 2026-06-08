@@ -4040,6 +4040,7 @@ end
 function threadedPursuit(delta)
 	plot1name = "threadedPursuit"
 	local p = closestPlayerTo(targetEnemyStation)
+	if p == nil then return end
 	local scx, scy = p:getPosition()
 	local cpx, cpy = vectorFromAngle(random(0,360),random(20000,30000))
 	if ef2 == nil then
@@ -5363,12 +5364,16 @@ function closestPlayerTo(obj)
 -- Return nil if no valid result
 	if obj ~= nil and obj:isValid() then
 		local closest_player = nil
+		-- getActivePlayerShips() returns entities with PlayerControl; they may lack a Transform in edge cases
 		for i,p in ipairs(getActivePlayerShips()) do
-			if closest_player == nil then
-				closest_player = p
-			else
-				if distance(p,obj) < distance(obj,closest_player) then
+			local px, py = p:getPosition()
+			if px ~= nil and py ~= nil then
+				if closest_player == nil then
 					closest_player = p
+				else
+					if distance(p,obj) < distance(obj,closest_player) then
+						closest_player = p
+					end
 				end
 			end
 		end
@@ -5381,12 +5386,16 @@ function farthestPlayerFrom(obj)
 -- Return the player ship farthest from the passed object parameter
 	if obj ~= nil and obj:isValid() then
 		local farthest_player = nil
+		-- getActivePlayerShips() returns entities with PlayerControl; they may lack a Transform in edge cases
 		for i,p in ipairs(getActivePlayerShips()) do
-			if farthest_player == nil then
-				farthest_player = p
-			else
-				if distance(p,obj) > distance(obj,farthest_player) then
+			local px, py = p:getPosition()
+			if px ~= nil and py ~= nil then
+				if farthest_player == nil then
 					farthest_player = p
+				else
+					if distance(p,obj) > distance(obj,farthest_player) then
+						farthest_player = p
+					end
 				end
 			end
 		end
