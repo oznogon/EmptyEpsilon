@@ -120,5 +120,7 @@ master 20260604 -- gm-orders-layout, expand-gm-info, dkapell:autoconectOffset
 
 master 20260605 -- gm-screen-short-range, 2848-2849-2850-refactor-player-transfer, export-more-entities
 
-reverse-proxy-registry 20260606 -- proxy_registry_url, proxy_registry_password
+reverse-proxy-registry 20260606 -- proxy_registry_url, proxy_registry_password settings
 update-zone-centroid 20260606
+
+master 20260608 -- update-zone-centroid
