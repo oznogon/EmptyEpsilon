@@ -79,9 +79,11 @@ Our last contact with RT-4 was before it entered the nebula at sector G5. The ne
 end
 
 function missionStartState(delta)
-    if distance(player, transport_RT4) < 5000 then
-        exuari_RT4_guard1:orderRoaming()
-        exuari_RT4_guard2:orderRoaming()
+    local transport_distance = distance(player, transport_RT4)
+    assert(transport_distance ~= -1, "In the StartState phase, distance(player, transport_RT4) is -1, suggesting that either the player or transport unexpectedly don't exist.")
+    if transport_distance < 5000 then
+        if exuari_RT4_guard1 ~= nil and exuari_RT4_guard1:isValid() then exuari_RT4_guard1:orderRoaming() end
+        if exuari_RT4_guard2 ~= nil and exuari_RT4_guard2:isValid() then exuari_RT4_guard2:orderRoaming() end
         mission_state = missionRT4UnderAttack
     end
 end
@@ -93,9 +95,7 @@ function missionRT4UnderAttack(delta)
         transport_RT4_drop_time = 0.0
         research_station:sendCommsMessage(
             player,
-            _("incCall", [[RT-4 has been destroyed, but not before it launched an escape pod.
-
-Life signs are detected in the pod. Please retrieve the pod to see if J.J. Johnson survived. His death would be a great blow to the region's peace negotiations.]]) .. _("incCall", [[And destroy those Exuari scum while you are at it!]])
+            _("incCall", [[RT-4 has been destroyed, but not before it launched an escape pod.]]) .. " " .. _("incCall", [[Life signs are detected in the pod. Please retrieve the pod to see if J.J. Johnson survived. His death would be a great blow to the region's peace negotiations.]]) .. " " .. _("incCall", [[And destroy those Exuari scum while you are at it!]])
         )
     end
     if not exuari_RT4_guard1:isValid() and not exuari_RT4_guard2:isValid() then
@@ -106,9 +106,7 @@ Life signs are detected in the pod. Please retrieve the pod to see if J.J. Johns
         transport_RT4_drop_time = 0.0
         research_station:sendCommsMessage(
             player,
-            _("incCall", [[RT-4 has been destroyed, but not before it launched an escape pod.
-
-Life signs are detected in the pod. Please retrieve the pod to see if J.J. Johnson survived. His death would be a great blow to the region's peace negotiations.]])
+            _("incCall", [[The crew of RT-4 appears to have abandoned ship and launched an escape pod.]]) .. " " .. _("incCall", [[Life signs are detected in the pod. Please retrieve the pod to see if J.J. Johnson survived. His death would be a great blow to the region's peace negotiations.]])
         )
     end
 end
@@ -206,7 +204,9 @@ Head back to Orion-5 to deliver the criminals.]])
     end
 end
 function missionWaitForAmbush(delta)
-    if distance(player, main_station) < 50000 then
+    local station_distance = distance(player, main_station)
+    assert(station_distance ~= -1, "In the WaitForAmbush phase, distance(player, main_station) is -1, suggesting that either the player or station unexpectedly don't exist.")
+    if station_distance < 50000 then
         -- We can jump to the Orion-5 station in 1 jump. So ambush the player!
         x, y = player:getPosition()
         WarpJammer():setFaction("Exuari"):setPosition(x - 2008, y + 2711):setDescriptions(_("scienceDescription-artifact", "High powered field generator"),_("scienceDescription-artifact", "Warp/Jump Jammer. Radius visible if jammer visible")):setScanningParameters(1,1)
@@ -242,7 +242,7 @@ function missionAmbushed(delta)
 
 We extracted some vital info from the Exuari. In the next transport convoy toward Research-1, an Exuari death squad is hiding in one of the ships. The transport detail is heading in from sector D7. Seek them out and scan the ships to find the Exuari transport.]])
             if refilled then
-                message = message .. _("incCall", [[We have refitted your nukes and EMPs.]]) .. _("incCall", [[Awesome job taking out the Exuari without those.]])
+                message = message .. _("incCall", [[We have refitted your nukes and EMPs.]]) .. " " .. _("incCall", [[Awesome job taking out the Exuari without those.]])
                 refilled = false
             end
 
@@ -269,14 +269,16 @@ We extracted some vital info from the Exuari. In the next transport convoy towar
         if refilled then
             main_station:sendCommsMessage(
                 player,
-                _("incCall", [[We have refitted your nukes and EMPs.]]) .. _("incCall", [[Now to get those Exuari!]])
+                _("incCall", [[We have refitted your nukes and EMPs.]]) .. " " .. _("incCall", [[Now to get those Exuari!]])
             )
         end
     end
 end
 
 function missionGotoTransport(delta)
-    if distance(player, transport_target) < 30000 then
+    local transport_distance = distance(player, transport_target)
+    assert(transport_distance ~= -1, "In the GotoTransport phase, distance(player, transport_target) is -1, suggesting that either the player or target transport unexpectedly don't exist.")
+    if transport_distance < 30000 then
         main_station:sendCommsMessage(
             player,
             _("incCall", [[Scan the transports to identify the Exuari one. When you have identified it, do NOT destroy it.
@@ -364,7 +366,9 @@ function missionTransportWaitForRecovery(delta)
     wait_enemy_count = wait_enemy_count + 1
     end
 
-    if distance(transport_recovery_team, transport_target) < 1000 then
+    local recovery_distance = distance(transport_recovery_team, transport_target)
+    assert(recovery_distance ~= -1, "In the TransportWaitForRecovery phase, distance(transport_recovery_team, transport_target) is -1, suggesting that either the recovery team or target transport unexpectedly don't exist.")
+    if recovery_distance < 1000 then
         transport_target:orderDock(main_station)
         transport_recovery_team:orderDock(main_station)
 
@@ -415,10 +419,16 @@ end
 
 --- Return the distance between two objects.
 function distance(obj1, obj2)
+    assert(obj1:isValid() and obj2:isValid(), "distance() called with at least one invalid entity as an argument.")
     local x1, y1 = obj1:getPosition()
     local x2, y2 = obj2:getPosition()
-    local xd, yd = (x1 - x2), (y1 - y2)
-    return math.sqrt(xd * xd + yd * yd)
+    if x1 ~= nil and x2 ~= nil and y1 ~= nil and y2 ~= nil then
+        local xd, yd = (x1 - x2), (y1 - y2)
+        return math.sqrt(xd * xd + yd * yd)
+    else
+        log("Attempted to calculate the distance between entities, but at least one of them lacked a Transform. Returning a distance of -1.")
+        return -1
+    end
 end
 
 --[[ Distribute a `number` of random `object_type` objects in a line from point
@@ -430,9 +440,9 @@ function placeRandom(object_type, number, x1, y1, x2, y2, random_amount)
         local y = y1 + (y2 - y1) * f
 
         local r = random(0, 360)
-        local distance = random(0, random_amount)
-        x = x + math.cos(r / 180 * math.pi) * distance
-        y = y + math.sin(r / 180 * math.pi) * distance
+        local random_distance = random(0, random_amount)
+        x = x + math.cos(r / 180 * math.pi) * random_distance
+        y = y + math.sin(r / 180 * math.pi) * random_distance
 
         object_type():setPosition(x, y)
     end
