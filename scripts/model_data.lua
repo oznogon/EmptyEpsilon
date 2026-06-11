@@ -7,6 +7,7 @@ model:setMesh("space_station_4/space_station_4.model")
 model:setTexture("space_station_4/space_station_4_color.jpg")
 model:setSpecular("space_station_4/space_station_4_specular.jpg")
 model:setIllumination("space_station_4/space_station_4_illumination.jpg")
+model:setNormalMap("space_station_4/space_station_4_normal.png")
 model:setRenderOffset(0, 0, 5)
 model:setScale(10)
 model:setRadius(300)
@@ -18,6 +19,7 @@ model:setMesh("space_station_3/space_station_3.model")
 model:setTexture("space_station_3/space_station_3_color.jpg")
 model:setSpecular("space_station_3/space_station_3_specular.jpg")
 model:setIllumination("space_station_3/space_station_3_illumination.jpg")
+model:setNormalMap("space_station_3/space_station_3_normal.png")
 model:setRenderOffset(10, 0, 5)
 model:setScale(20)
 model:setRadius(1000)
@@ -29,6 +31,7 @@ model:setMesh("space_station_2/space_station_2.model")
 model:setTexture("space_station_2/space_station_2_color.jpg")
 model:setSpecular("space_station_2/space_station_2_specular.jpg")
 model:setIllumination("space_station_2/space_station_2_illumination.jpg")
+model:setNormalMap("space_station_2/space_station_2_normal.png")
 model:setRenderOffset(10, 0, 5)
 model:setScale(20)
 model:setRadius(1300)
@@ -40,6 +43,7 @@ model:setMesh("space_station_1/space_station_1.model")
 model:setTexture("space_station_1/space_station_1_color.jpg")
 model:setSpecular("space_station_1/space_station_1_specular.jpg")
 model:setIllumination("space_station_1/space_station_1_illumination.jpg")
+model:setNormalMap("space_station_1/space_station_1_normal.png")
 model:setRenderOffset(0, 0, 5)
 model:setScale(20)
 model:setRadius(1500)
@@ -51,6 +55,7 @@ model:setMesh("small_fighter_1.model")
 model:setTexture("small_fighter_1_color.jpg")
 model:setSpecular("small_fighter_1_specular.jpg")
 model:setIllumination("small_fighter_1_illumination.jpg")
+model:setNormalMap("small_fighter_1_normal.png")
 model:setScale(3)
 model:setRadius(40)
 
@@ -76,6 +81,7 @@ model:setMesh("space_frigate_6.model")
 model:setTexture("space_frigate_6_color.png")
 model:setSpecular("space_frigate_6_specular.png")
 model:setIllumination("space_frigate_6_illumination.png")
+model:setNormalMap("space_frigate_6_normal.png")
 model:setScale(6)
 model:setRadius(100)
 -- Visual positions of the mounts (blender: -X, Y, Z). Type: 0=BeamWeapon, 1=MissileWeapon
@@ -105,6 +111,7 @@ model:setMesh("dark_fighter_6.model")
 model:setTexture("dark_fighter_6_color.png")
 model:setSpecular("dark_fighter_6_specular.png")
 model:setIllumination("dark_fighter_6_illumination.png")
+model:setNormalMap("dark_fighter_6_normal.png")
 model:setScale(3)
 model:setRadius(140)
 -- Visual positions of the mounts (blender: -X, Y, Z). Type: 0=BeamWeapon, 1=MissileWeapon
@@ -126,6 +133,9 @@ model:setSpecular(
 )
 model:setIllumination(
     "battleship_destroyer_1_upgraded/battleship_destroyer_1_upgraded_illumination.jpg"
+)
+model:setNormalMap(
+    "battleship_destroyer_1_upgraded/battleship_destroyer_1_upgraded_normal.png"
 )
 model:setScale(4)
 model:setRadius(200)
@@ -156,6 +166,7 @@ model:setSpecular(
 model:setIllumination(
     "battleship_destroyer_2_upgraded/battleship_destroyer_2_upgraded_illumination.jpg"
 )
+model:setNormalMap("battleship_destroyer_2_upgraded/battleship_destroyer_2_upgraded_normal.png")
 model:setScale(4)
 model:setRadius(200)
 -- Visual positions of the mounts (blender: -X, Y, Z). Type: 0=BeamWeapon, 1=MissileWeapon
@@ -183,6 +194,7 @@ model:setSpecular(
 model:setIllumination(
     "battleship_destroyer_3_upgraded/battleship_destroyer_3_upgraded_illumination.jpg"
 )
+model:setNormalMap("battleship_destroyer_3_upgraded/battleship_destroyer_3_upgraded_normal.png")
 model:setScale(4)
 model:setRadius(200)
 -- Visual positions of the mounts (blender: -X, Y, Z). Type: 0=BeamWeapon, 1=MissileWeapon
@@ -197,18 +209,11 @@ model:addEngineEmitter(-36, -13, 0, 1.0, 0.2, 0.1, 17.0)
 
 model = ModelData()
 model:setName("battleship_destroyer_4_upgraded")
-model:setMesh(
-    "battleship_destroyer_4_upgraded/battleship_destroyer_4_upgraded.model"
-)
-model:setTexture(
-    "battleship_destroyer_4_upgraded/battleship_destroyer_4_upgraded_color.jpg"
-)
-model:setSpecular(
-    "battleship_destroyer_4_upgraded/battleship_destroyer_4_upgraded_specular.jpg"
-)
-model:setIllumination(
-    "battleship_destroyer_4_upgraded/battleship_destroyer_4_upgraded_illumination.jpg"
-)
+model:setMesh("battleship_destroyer_4_upgraded/battleship_destroyer_4_upgraded.model")
+model:setTexture("battleship_destroyer_4_upgraded/battleship_destroyer_4_upgraded_color.jpg")
+model:setSpecular("battleship_destroyer_4_upgraded/battleship_destroyer_4_upgraded_specular.jpg")
+model:setIllumination("battleship_destroyer_4_upgraded/battleship_destroyer_4_upgraded_illumination.jpg")
+model:setNormalMap("battleship_destroyer_4_upgraded/battleship_destroyer_4_upgraded_normal.png")
 model:setScale(4)
 model:setRadius(200)
 -- Visual positions of the mounts (blender: -X, Y, Z). Type: 0=BeamWeapon, 1=MissileWeapon
@@ -224,18 +229,11 @@ model:addEngineEmitter(-32, -20, -1.5, 1.0, 0.2, 0.1, 10.0)
 
 model = ModelData()
 model:setName("battleship_destroyer_5_upgraded")
-model:setMesh(
-    "battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded.model"
-)
-model:setTexture(
-    "battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded_color.jpg"
-)
-model:setSpecular(
-    "battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded_specular.jpg"
-)
-model:setIllumination(
-    "battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded_illumination.jpg"
-)
+model:setMesh("battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded.model")
+model:setTexture("battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded_color.jpg")
+model:setSpecular("battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded_specular.jpg")
+model:setIllumination("battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded_illumination.jpg")
+model:setNormalMap("battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded_normal.png")
 model:setScale(4)
 model:setRadius(200)
 
@@ -280,9 +278,8 @@ model:setName("sci_fi_alien_ship_1")
 model:setMesh("sci_fi_alien_ship_1/sci_fi_alien_ship_1.model")
 model:setTexture("sci_fi_alien_ship_1/sci_fi_alien_ship_1_color.jpg")
 model:setSpecular("sci_fi_alien_ship_1/sci_fi_alien_ship_1_specular.jpg")
-model:setIllumination(
-    "sci_fi_alien_ship_1/sci_fi_alien_ship_1_illumination.jpg"
-)
+model:setIllumination("sci_fi_alien_ship_1/sci_fi_alien_ship_1_illumination.jpg")
+model:setNormalMap("sci_fi_alien_ship_1/sci_fi_alien_ship_1_normal.png")
 model:setScale(3)
 model:setRadius(180)
 
@@ -291,9 +288,8 @@ model:setName("sci_fi_alien_ship_2")
 model:setMesh("sci_fi_alien_ship_2/sci_fi_alien_ship_2.model")
 model:setTexture("sci_fi_alien_ship_2/sci_fi_alien_ship_2_color.jpg")
 model:setSpecular("sci_fi_alien_ship_2/sci_fi_alien_ship_2_specular.jpg")
-model:setIllumination(
-    "sci_fi_alien_ship_2/sci_fi_alien_ship_2_illumination.jpg"
-)
+model:setIllumination("sci_fi_alien_ship_2/sci_fi_alien_ship_2_illumination.jpg")
+model:setNormalMap("sci_fi_alien_ship_2/sci_fi_alien_ship_2_normal.png")
 model:setScale(3)
 model:setRadius(180)
 
@@ -302,9 +298,8 @@ model:setName("sci_fi_alien_ship_3")
 model:setMesh("sci_fi_alien_ship_3/sci_fi_alien_ship_3.model")
 model:setTexture("sci_fi_alien_ship_3/sci_fi_alien_ship_3_color.jpg")
 model:setSpecular("sci_fi_alien_ship_3/sci_fi_alien_ship_3_specular.jpg")
-model:setIllumination(
-    "sci_fi_alien_ship_3/sci_fi_alien_ship_3_illumination.jpg"
-)
+model:setIllumination("sci_fi_alien_ship_3/sci_fi_alien_ship_3_illumination.jpg")
+model:setNormalMap("sci_fi_alien_ship_3/sci_fi_alien_ship_3_normal.png")
 model:setScale(3)
 model:setRadius(150)
 
@@ -313,9 +308,8 @@ model:setName("sci_fi_alien_ship_4")
 model:setMesh("sci_fi_alien_ship_4/sci_fi_alien_ship_4.model")
 model:setTexture("sci_fi_alien_ship_4/sci_fi_alien_ship_4_color.jpg")
 model:setSpecular("sci_fi_alien_ship_4/sci_fi_alien_ship_4_specular.jpg")
-model:setIllumination(
-    "sci_fi_alien_ship_4/sci_fi_alien_ship_4_illumination.jpg"
-)
+model:setIllumination("sci_fi_alien_ship_4/sci_fi_alien_ship_4_illumination.jpg")
+model:setNormalMap("sci_fi_alien_ship_4/sci_fi_alien_ship_4_normal.png")
 model:setScale(3)
 model:setRadius(150)
 
@@ -324,9 +318,8 @@ model:setName("sci_fi_alien_ship_5")
 model:setMesh("sci_fi_alien_ship_5/sci_fi_alien_ship_5.model")
 model:setTexture("sci_fi_alien_ship_5/sci_fi_alien_ship_5_color.jpg")
 model:setSpecular("sci_fi_alien_ship_5/sci_fi_alien_ship_5_specular.jpg")
-model:setIllumination(
-    "sci_fi_alien_ship_5/sci_fi_alien_ship_5_illumination.jpg"
-)
+model:setIllumination("sci_fi_alien_ship_5/sci_fi_alien_ship_5_illumination.jpg")
+model:setNormalMap("sci_fi_alien_ship_5/sci_fi_alien_ship_5_normal.png")
 model:setScale(3)
 model:setRadius(150)
 
@@ -335,9 +328,8 @@ model:setName("sci_fi_alien_ship_6")
 model:setMesh("sci_fi_alien_ship_6/sci_fi_alien_ship_6.model")
 model:setTexture("sci_fi_alien_ship_6/sci_fi_alien_ship_6_color.jpg")
 model:setSpecular("sci_fi_alien_ship_6/sci_fi_alien_ship_6_specular.jpg")
-model:setIllumination(
-    "sci_fi_alien_ship_6/sci_fi_alien_ship_6_illumination.jpg"
-)
+model:setIllumination("sci_fi_alien_ship_6/sci_fi_alien_ship_6_illumination.jpg")
+model:setNormalMap("sci_fi_alien_ship_6/sci_fi_alien_ship_6_normal.png")
 model:setScale(3)
 model:setRadius(150)
 
@@ -346,9 +338,8 @@ model:setName("sci_fi_alien_ship_7")
 model:setMesh("sci_fi_alien_ship_7/sci_fi_alien_ship_7.model")
 model:setTexture("sci_fi_alien_ship_7/sci_fi_alien_ship_7_color.jpg")
 model:setSpecular("sci_fi_alien_ship_7/sci_fi_alien_ship_7_specular.jpg")
-model:setIllumination(
-    "sci_fi_alien_ship_7/sci_fi_alien_ship_7_illumination.jpg"
-)
+model:setIllumination("sci_fi_alien_ship_7/sci_fi_alien_ship_7_illumination.jpg")
+model:setNormalMap("sci_fi_alien_ship_7/sci_fi_alien_ship_7_normal.png")
 model:setScale(6)
 model:setRadius(330)
 
@@ -357,9 +348,8 @@ model:setName("sci_fi_alien_ship_8")
 model:setMesh("sci_fi_alien_ship_8/sci_fi_alien_ship_8.model")
 model:setTexture("sci_fi_alien_ship_8/sci_fi_alien_ship_8_color.jpg")
 model:setSpecular("sci_fi_alien_ship_8/sci_fi_alien_ship_8_specular.jpg")
-model:setIllumination(
-    "sci_fi_alien_ship_8/sci_fi_alien_ship_8_illumination.jpg"
-)
+model:setIllumination("sci_fi_alien_ship_8/sci_fi_alien_ship_8_illumination.jpg")
+model:setNormalMap("sci_fi_alien_ship_8/sci_fi_alien_ship_8_normal.png")
 model:setScale(6)
 model:setRadius(350)
 
@@ -385,6 +375,7 @@ model:setMesh("small_frigate_1/small_frigate_1.model")
 model:setTexture("small_frigate_1/small_frigate_1_color.png")
 model:setSpecular("small_frigate_1/small_frigate_1_specular.png")
 model:setIllumination("small_frigate_1/small_frigate_1_illumination.png")
+model:setNormalMap("small_frigate_1/small_frigate_1_normal.png")
 model:setScale(1)
 model:setRadius(100)
 
@@ -399,6 +390,7 @@ model:setMesh("small_frigate_2/small_frigate_2.model")
 model:setTexture("small_frigate_2/small_frigate_2_color.png")
 model:setSpecular("small_frigate_2/small_frigate_2_specular.png")
 model:setIllumination("small_frigate_2/small_frigate_2_illumination.png")
+model:setNormalMap("small_frigate_2/small_frigate_2_normal.png")
 model:setScale(1)
 model:setRadius(80)
 
@@ -411,6 +403,7 @@ model:setMesh("small_frigate_3/small_frigate_3.model")
 model:setTexture("small_frigate_3/small_frigate_3_color.png")
 model:setSpecular("small_frigate_3/small_frigate_3_specular.png")
 model:setIllumination("small_frigate_3/small_frigate_3_illumination.png")
+model:setNormalMap("small_frigate_3/small_frigate_3_normal.png")
 model:setScale(0.8)
 model:setRadius(80)
 
@@ -425,6 +418,7 @@ model:setMesh("small_frigate_4/small_frigate_4.model")
 model:setTexture("small_frigate_4/small_frigate_4_color.png")
 model:setSpecular("small_frigate_4/small_frigate_4_specular.png")
 model:setIllumination("small_frigate_4/small_frigate_4_illumination.png")
+model:setNormalMap("small_frigate_4/small_frigate_4_normal.png")
 model:setScale(1)
 model:setRadius(100)
 
@@ -438,6 +432,7 @@ model:setMesh("small_frigate_5/small_frigate_5.model")
 model:setTexture("small_frigate_5/small_frigate_5_color.png")
 model:setSpecular("small_frigate_5/small_frigate_5_specular.png")
 model:setIllumination("small_frigate_5/small_frigate_5_illumination.png")
+model:setNormalMap("small_frigate_5/small_frigate_5_normal.png")
 model:setScale(1)
 model:setRadius(80)
 
@@ -458,9 +453,8 @@ for idx, color in ipairs({ "Blue", "Green", "Grey", "Red", "White", "Yellow" }) 
             .. "AlbedoAO.png"
     )
     model:setSpecular("AdlerLongRangeScout/AdlerLongRangeScoutPBRSpecular.png")
-    model:setIllumination(
-        "AdlerLongRangeScout/AdlerLongRangeScoutIllumination.png"
-    )
+    model:setIllumination("AdlerLongRangeScout/AdlerLongRangeScoutIllumination.png")
+    model:setNormalMap("AdlerLongRangeScout/AdlerLongRangeScoutNormal.png")
     model:setScale(20)
     model:setRadius(30)
     -- Visual positions of the mounts (blender: -X, Y, Z). Type: 0=BeamWeapon, 1=MissileWeapon
@@ -483,6 +477,7 @@ for idx, color in ipairs({ "Blue", "Green", "Grey", "Red", "White", "Yellow" }) 
     )
     model:setSpecular("AtlasHeavyFighter/AtlasHeavyFighterPBRSpecular.png")
     model:setIllumination("AtlasHeavyFighter/AtlasHeavyFighterIllumination.png")
+    model:setNormalMap("AtlasHeavyFighter/AtlasHeavyFighterNormal.png")
     model:setScale(50)
     model:setRadius(80)
 
@@ -505,6 +500,7 @@ for idx, color in ipairs({ "Blue", "Green", "Grey", "Red", "White", "Yellow" }) 
     )
     model:setSpecular("LindwurmFighter/LindwurmFighterPBRSpecular.png")
     model:setIllumination("LindwurmFighter/LindwurmFighterIllumination.png")
+    model:setNormalMap("LindwurmFighter/LindwurmFighterNormal.png")
     model:setScale(20)
     model:setRadius(30)
     model:addMountPosition(1, 1.4, 0, 0.06)
@@ -521,6 +517,7 @@ for idx, color in ipairs({ "Blue", "Green", "Grey", "Red", "White", "Yellow" }) 
     )
     model:setSpecular("WespeScout/WespeScoutPBRSpecular.png")
     model:setIllumination("WespeScout/WespeScoutIllumination.png")
+    model:setNormalMap("WespeScout/WespeScoutNormal.png")
     model:setScale(20)
     model:setRadius(30)
     model:addMountPosition(0, 1.15, 0.13, -0.03)
@@ -536,6 +533,7 @@ for idx, color in ipairs({ "Blue", "Green", "Grey", "Red", "White", "Yellow" }) 
     )
     model:setSpecular("HeavyCorvette/HeavyCorvettePBRSpecular.png")
     model:setIllumination("HeavyCorvette/HeavyCorvetteIllumination.png")
+    model:setNormalMap("HeavyCorvette/HeavyCorvetteNormal.png")
     model:setScale(50)
     model:setRadius(80)
 
@@ -551,6 +549,7 @@ for idx, color in ipairs({ "Blue", "Green", "Grey", "Red", "White", "Yellow" }) 
     )
     model:setSpecular("LaserCorvette/LaserCorvettePBRSpecular.png")
     model:setIllumination("LaserCorvette/LaserCorvetteIllumination.png")
+    model:setNormalMap("LaserCorvette/LaserCorvetteNormal.png")
     model:setScale(50)
     model:setRadius(80)
 
@@ -565,6 +564,7 @@ for idx, color in ipairs({ "Blue", "Green", "Grey", "Red", "White", "Yellow" }) 
     )
     model:setSpecular("LightCorvette/LightCorvettePBRSpecular.png")
     model:setIllumination("LightCorvette/LightCorvetteIllumination.png")
+    model:setNormalMap("LightCorvette/LightCorvetteNormal.png")
     model:setScale(50)
     model:setRadius(80)
 
@@ -582,6 +582,7 @@ for idx, color in ipairs({ "Blue", "Green", "Grey", "Red", "White", "Yellow" }) 
     )
     model:setSpecular("MineLayerCorvette/MineLayerCorvettePBRSpecular.png")
     model:setIllumination("MineLayerCorvette/MineLayerCorvetteIllumination.png")
+    model:setNormalMap("MineLayerCorvette/MineLayerCorvetteNormal.png")
     model:setScale(50)
     model:setRadius(80)
 
@@ -596,6 +597,7 @@ for idx, color in ipairs({ "Blue", "Green", "Grey", "Red", "White", "Yellow" }) 
     )
     model:setSpecular("MissileCorvette/MissileCorvettePBRSpecular.png")
     model:setIllumination("MissileCorvette/MissileCorvetteIllumination.png")
+    model:setNormalMap("MissileCorvette/MissileCorvetteNormal.png")
     model:setScale(50)
     model:setRadius(80)
 
@@ -611,6 +613,7 @@ for idx, color in ipairs({ "Blue", "Green", "Grey", "Red", "White", "Yellow" }) 
     )
     model:setSpecular("MultiGunCorvette/MultiGunCorvettePBRSpecular.png")
     model:setIllumination("MultiGunCorvette/MultiGunCorvetteIllumination.png")
+    model:setNormalMap("MultiGunCorvette/MultiGunCorvetteNormal.png")
     model:setScale(50)
     model:setRadius(80)
 
@@ -624,6 +627,7 @@ model:setName("SensorBuoyMKI")
 model:setMesh("SensorBuoy/SensorBuoyMKI.model")
 model:setTexture("SensorBuoy/SensorBuoyAlbedoAO.png")
 model:setSpecular("SensorBuoy/SensorBuoyPBRSpecular.png")
+model:setNormalMap("SensorBuoy/SensorBuoyNormal.png")
 model:setScale(300)
 model:setRadius(15)
 
@@ -632,6 +636,7 @@ model:setName("SensorBuoyMKII")
 model:setMesh("SensorBuoy/SensorBuoyMKII.model")
 model:setTexture("SensorBuoy/SensorBuoyAlbedoAO.png")
 model:setSpecular("SensorBuoy/SensorBuoyPBRSpecular.png")
+model:setNormalMap("SensorBuoy/SensorBuoyNormal.png")
 model:setScale(300)
 model:setRadius(15)
 
@@ -640,6 +645,7 @@ model:setName("SensorBuoyMKIII")
 model:setMesh("SensorBuoy/SensorBuoyMKIII.model")
 model:setTexture("SensorBuoy/SensorBuoyAlbedoAO.png")
 model:setSpecular("SensorBuoy/SensorBuoyPBRSpecular.png")
+model:setNormalMap("SensorBuoy/SensorBuoyNormal.png")
 model:setScale(300)
 model:setRadius(15)
 
@@ -698,36 +704,11 @@ for type = 1, 5 do
         model:setScale(0.5)
         model:setRadius(100 + cnt * 50)
         model:setCollisionBox(200 + cnt * 100, 200)
-        model:setMesh(
-            "transport_space_ship_"
-                .. type
-                .. "/transport_space_ship_"
-                .. type
-                .. "_cargo_"
-                .. cnt
-                .. ".model"
-        )
-        model:setTexture(
-            "transport_space_ship_"
-                .. type
-                .. "/transport_space_ship_"
-                .. type
-                .. "_color.png"
-        )
-        model:setSpecular(
-            "transport_space_ship_"
-                .. type
-                .. "/transport_space_ship_"
-                .. type
-                .. "_specular.png"
-        )
-        model:setIllumination(
-            "transport_space_ship_"
-                .. type
-                .. "/transport_space_ship_"
-                .. type
-                .. "_illumination.png"
-        )
+        model:setMesh("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_cargo_" .. cnt .. ".model")
+        model:setTexture("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_color.png")
+        model:setSpecular("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_specular.png")
+        model:setIllumination("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_illumination.png")
+        model:setNormalMap("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_normal.png")
     end
 end
 
