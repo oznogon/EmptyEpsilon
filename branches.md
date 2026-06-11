@@ -124,3 +124,5 @@ reverse-proxy-registry 20260606 -- proxy_registry_url, proxy_registry_password s
 update-zone-centroid 20260606
 
 master 20260608 -- update-zone-centroid
+
+fix-station-database 20260611
