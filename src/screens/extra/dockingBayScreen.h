@@ -6,7 +6,7 @@
 class GuiArrow;
 class GuiButton;
 class GuiEntityInfoPanel;
-class GuiEntityInfoPanelGrid;
+class GuiScrollContainer;
 class GuiImage;
 class GuiKeyValueDisplay;
 class GuiLabel;
@@ -40,7 +40,8 @@ private:
 
     GuiElement* left_column;
     GuiElement* right_column;
-    GuiEntityInfoPanelGrid* docking_bay_berths;
+    GuiScrollContainer* docking_bay_berths;
+    std::vector<GuiEntityInfoPanel*> berth_panels;
     GuiElement* docking_bay_info;
 
     GuiEntityInfoPanel* selected_entity_info;

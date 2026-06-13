@@ -14,6 +14,7 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_togglebutton.h"
+#include "gui/gui2_scrollcontainer.h"
 
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
@@ -80,14 +81,10 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("margin", "0, 0, 0, 10");
 
-    docking_bay_berths = new GuiEntityInfoPanelGrid(left_column, "DOCKING_BAY_SHIPS", {},
-        [this](int index)
-        {
-            selectBerth(index);
-        }
-    );
+    docking_bay_berths = new GuiScrollContainer(left_column, "DOCKING_BAY_BERTHS");
     docking_bay_berths
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 
     // Right column: Docked ship, cargo info
     GuiElement* top_row = new GuiElement(right_column, "");
@@ -989,18 +986,32 @@ void DockingBayScreen::updateBerthsList()
     auto bay = my_spaceship.getComponent<DockingBay>();
     if (!bay) return;
 
-    // Build vector of entities docked at berths
-    std::vector<sp::ecs::Entity> berths_entities(bay->berths.size());
+    // Destroy existing panels and immediately remove them from the scroll
+    // container. If we deferred removal to the next frame's cleanTree(),
+    // the swap-and-pop logic would reorder the remaining children.
+    for (auto panel : berth_panels)
+        panel->destroy();
+    docking_bay_berths->cleanTree();
+    berth_panels.clear();
+
+    // Build string options for the target berth selector.
     std::vector<string> berths_strings;
 
     for (size_t i = 0; i < bay->berths.size(); i++)
     {
-        berths_entities[i] = bay->berths[i].docked_entity;
-        berths_strings.push_back(static_cast<string>(static_cast<int>(i)));
+        const int idx = static_cast<int>(i);
+        berths_strings.push_back(static_cast<string>(idx));
+
+        auto panel = new GuiEntityInfoPanel(docking_bay_berths, "", bay->berths[i].docked_entity,
+            [this, idx](sp::ecs::Entity)
+            {
+                selectBerth(idx);
+            }
+        );
+        panel->setSize(GuiElement::GuiSizeMax, GuiEntityInfoPanel::default_panel_size);
+        berth_panels.push_back(panel);
     }
 
-    // Set entities (this triggers rebuild of panels)
-    docking_bay_berths->setEntities(berths_entities);
     target_berth->setOptions(berths_strings);
 }
 
@@ -1012,16 +1023,17 @@ void DockingBayScreen::updateBerthsLabels()
     if (!bay) return;
 
     // Set custom labels on each panel
-    for (size_t i = 0; i < bay->berths.size(); i++)
+    size_t panel_count = std::min(bay->berths.size(), berth_panels.size());
+    for (size_t i = 0; i < panel_count; i++)
     {
         const auto& berth = bay->berths[i];
+        auto* panel = berth_panels[i];
 
-        // Number the panel and set berth type info
         const int idx = static_cast<int>(i);
-        docking_bay_berths
-            ->setCustomLabel(idx, 0, tr("dockingbay", "Berth {i}").format({{"i", static_cast<string>(idx + 1)}}))
-            ->setCustomIcon(idx, 1, bay->getTypeIcon(berth.type))
-            ->setCustomLabel(idx, 2, bay->getTypeName(berth.type));
+        panel
+            ->setCustomLabel(0, tr("dockingbay", "Berth {i}").format({{"i", static_cast<string>(idx + 1)}}))
+            ->setCustomIcon(1, bay->getTypeIcon(berth.type))
+            ->setCustomLabel(2, bay->getTypeName(berth.type));
 
         target_berth->setEntryIcon(i, bay->getTypeIcon(berth.type));
 
@@ -1072,7 +1084,8 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     }
     
     // Select the panel by index.
-    docking_bay_berths->selectPanelByIndex(selected_berth_index);
+    for (size_t i = 0; i < berth_panels.size(); i++)
+        berth_panels[i]->selected = (static_cast<int>(i) == selected_berth_index);
     const DockingBay::Berth selected_berth = bay->berths[selected_berth_index];
     const string type_icon = bay->getTypeIcon(selected_berth.type);
     const string type_name = bay->getTypeName(selected_berth.type);
