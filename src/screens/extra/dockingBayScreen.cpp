@@ -264,6 +264,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         }
     );
     scramble
+        ->setOnStyle("button.dockingbay_scramble.on")
         ->setStyle("button.dockingbay_scramble")
         ->setSize(220.0f, 50.0f);
 
