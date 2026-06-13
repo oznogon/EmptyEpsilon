@@ -903,6 +903,7 @@ void DockingBayScreen::selectBerth(int berth_index)
     {
         selected_berth_index = -1;
         selected_entity = sp::ecs::Entity();
+        return;
     }
 
     // Update berth type operations
