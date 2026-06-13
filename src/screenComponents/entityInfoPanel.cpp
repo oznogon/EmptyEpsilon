@@ -68,13 +68,19 @@ void GuiEntityInfoPanel::onDraw(sp::RenderTarget& renderer)
     // Draw the panel background clipped to the grid's rect
     renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
 
-    callsign_label->setFrontStyle(front_style);
-    type_label->setFrontStyle(front_style);
+    callsign_label
+        ->setFrontStyle(front_style)
+        ->setTextColor(front_style->get(panel_state).color);
+    type_label
+        ->setFrontStyle(front_style)
+        ->setTextColor(front_style->get(panel_state).color);
 
     for (auto i = 0; i < 4; i++)
     {
-        custom_labels[i]->setFrontStyle(front_style);
-        custom_icons[i]->setColor(front_style->get(getState()).color);
+        custom_labels[i]
+            ->setFrontStyle(front_style)
+            ->setTextColor(front_style->get(panel_state).color);
+        custom_icons[i]->setColor(front_style->get(panel_state).color);
     }
 }
 
