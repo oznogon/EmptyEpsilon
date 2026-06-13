@@ -233,19 +233,19 @@ item:setLongDescription(_([[A high-velocity lead impactor (HVLI) fires a simple 
 Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective. It reaches its full damage potential at a range of 2u.]]))
 
 local function angleDifference(angle_a, angle_b)
-    local ret = (angle_b or 0) - (angle_a or 0)
-    while ret > 180 do ret = ret - 360 end
-    while ret < -180 do ret = ret + 360 end
-    return ret
+  local ret = (angle_b or 0) - (angle_a or 0)
+  while ret > 180 do ret = ret - 360 end
+  while ret < -180 do ret = ret + 360 end
+  return ret
 end
 
 local function directionLabel(direction)
   name = "?"
-    if math.abs(angleDifference(0.0, direction)) <= 45 then name = _("database direction", "Front") end
-    if math.abs(angleDifference(90.0, direction)) < 45 then name = _("database direction", "Right") end
-    if math.abs(angleDifference(-90.0, direction)) < 45 then name = _("database direction", "Left") end
-    if math.abs(angleDifference(180.0, direction)) <= 45 then name = _("database direction", "Rear") end
-    return name
+  if math.abs(angleDifference(0.0, direction)) <= 45 then name = _("database direction", "Front") end
+  if math.abs(angleDifference(90.0, direction)) < 45 then name = _("database direction", "Right") end
+  if math.abs(angleDifference(-90.0, direction)) < 45 then name = _("database direction", "Left") end
+  if math.abs(angleDifference(180.0, direction)) <= 45 then name = _("database direction", "Rear") end
+  return name
 end
 
 -- Populate default ScienceDatabase entries.
@@ -253,14 +253,16 @@ function __fillDefaultDatabaseData()
   -- Populate the Factions top-level entry.
   local faction_database = ScienceDatabase():setName(_("database", "Factions"))
   for name, info in pairs(__faction_info) do
-    local entry = faction_database:addEntry(info.components.faction_info.locale_name);
+    local entry = faction_database:addEntry(info.components.faction_info.locale_name)
 
-    --[[ DB entries use locale-independent internal names.
-         Sort the list of internal names by localized name to match the DatabaseView list.
-         Lua in EE sorts by character index (for instance uppercase A > lowercase z), so lowercase the locale name for sorting purposes.
-         Accents also break sorting, which for example affects the French translation of "Exuari" as "Éxuaris", which are listed last after MSU (USN).
-         Since this isn't handled in DatabaseView on the C++ side either, this sorting is also "broken" here in the same manner for consistency.
-         If sorting accented characters in DatabaseView is fixed, it should also be fixed here by replacing accented characters in locale names. ]]--
+    --[[
+      DB entries use locale-independent internal names.
+      Sort the list of internal names by localized name to match the DatabaseView list.
+      Lua in EE sorts by character index (for instance uppercase A > lowercase z), so lowercase the locale name for sorting purposes.
+      Accents also break sorting, which for example affects the French translation of "Exuari" as "Éxuaris", which are listed last after MSU (USN).
+      Since this isn't handled in DatabaseView on the C++ side either, this sorting is also "broken" here in the same manner for consistency.
+      If sorting accented characters in DatabaseView is fixed, it should also be fixed here by replacing accented characters in locale names.
+    ]]--
     local faction_names2 = {}
     for name2, info2 in pairs(__faction_info) do
       table.insert(faction_names2, {string.lower(info2.components.faction_info.locale_name), name2})
@@ -287,63 +289,75 @@ function __fillDefaultDatabaseData()
     entry:setLongDescription(info.components.faction_info.description);
   end
 
-    -- Populate the Ships top-level entry.
-    local ship_database = ScienceDatabase():setName(_("database", "Ships"))
-    ship_database:setLongDescription(_("Spaceships are vessels capable of withstanding the dangers of travel through deep space. They can fill many functions and vary broadly in size, from small tugs to massive dreadnoughts."));
-    -- Populate the Stations top-level entry.
-    local stations_database = ScienceDatabase():setName(_("database", "Stations"))
-    stations_database:setLongDescription(_("Space stations are permanent, immobile structures ranging in scale from small outposts to city-sized communities. Many provide restocking and repair services to neutral and friendly ships."))
+  -- Populate the Ships top-level entry.
+  local ship_database = ScienceDatabase():setName(_("database", "Ships"))
+  ship_database:setLongDescription(_("Spaceships are vessels capable of withstanding the dangers of travel through deep space. They can fill many functions and vary broadly in size, from small tugs to massive dreadnoughts."));
+  -- Populate the Stations top-level entry.
+  local stations_database = ScienceDatabase():setName(_("database", "Stations"))
+  stations_database:setLongDescription(_("Space stations are permanent, immobile structures ranging in scale from small outposts to city-sized communities. Many provide restocking and repair services to neutral and friendly ships."))
 
-    local class_list = {}
-    local class_set = {}
+  local class_list = {}
+  local class_set = {}
   local template_names = {}
 
-    -- Populate list of ship hull classes
+  -- Populate list of ship hull classes and collect all visible templates
   for name, ship_template in pairs(__ship_templates) do
-        if not ship_template.__hidden and ship_template.__type ~= "station" then
-      local class_name = _("No class")
-      if ship_template.docking_port ~= nil then class_name = ship_template.docking_port.dock_class end
+    if not ship_template.__hidden then
+      if ship_template.__type ~= "station" then
+        local class_name = _("No class")
+        if ship_template.docking_port ~= nil then
+          class_name = ship_template.docking_port.dock_class
+        end
 
-      if class_set[class_name] == nil then
-        class_list[#class_list + 1] = class_name
-        class_set[class_name] = true
+        if class_set[class_name] == nil then
+          class_list[#class_list + 1] = class_name
+          class_set[class_name] = true
+        end
       end
       table.insert(template_names, name)
     end
-    end
+  end
 
-    table.sort(class_list)
+  table.sort(class_list)
   table.sort(template_names)
-    class_database_entries = {}
+  class_database_entries = {}
 
-    -- Populate each ship hull class with members
+  -- Populate each ship hull class with members
   for idx, class_name in pairs(class_list) do
-        class_database_entries[class_name] = ship_database:addEntry(class_name)
-    end
+    class_database_entries[class_name] = ship_database:addEntry(class_name)
+  end
 
-    -- Populate each ship's entry
+  -- Populate each ship's entry
   for idx, name in ipairs(template_names) do
     ship_template = __ship_templates[name]
-        if not ship_template.__hidden then
+    if not ship_template.__hidden then
       local class_name = _("No class")
       local subclass_name = _("No sub-class")
-      if ship_template.docking_port ~= nil then class_name = ship_template.docking_port.dock_class subclass_name = ship_template.docking_port.dock_subclass end
-          local entry = nil
+
+      if ship_template.docking_port ~= nil then
+        class_name = ship_template.docking_port.dock_class subclass_name = ship_template.docking_port.dock_subclass
+      end
+
+      local entry = nil
+
+      -- Add space stations to the Stations entry.
+      -- Otherwise, add them to ships by ship class.
       if ship_template.__type == "station" then
         entry = stations_database:addEntry(ship_template.typename.localized);
       else
         entry = class_database_entries[class_name]:addEntry(ship_template.typename.localized);
+        entry:addKeyValue(_("database", "Class"), class_name)
+        entry:addKeyValue(_("database", "Sub-class"), subclass_name)
       end
 
       if ship_template.__model_data_name then
         entry:setModelDataName(ship_template.__model_data_name)
       end
+
       if ship_template.radar_trace then
         entry:setImage(ship_template.radar_trace.icon)
       end
 
-      entry:addKeyValue(_("database", "Class"), class_name)
-      entry:addKeyValue(_("database", "Sub-class"), subclass_name)
       if ship_template.physics then
         if type(ship_template.physics.size) == "table" then
           entry:addKeyValue(_("database", "Size"), math.floor(ship_template.physics.size[1]))
@@ -371,12 +385,15 @@ function __fillDefaultDatabaseData()
         entry:addKeyValue(_("database", "Move speed"), string.format("%.1f u/min", ship_template.impulse_engine.max_speed_forward * 60 / 1000))
         entry:addKeyValue(_("database", "Reverse move speed"), string.format("%.1f u/min", ship_template.impulse_engine.max_speed_reverse * 60 / 1000))
       end
+
       if ship_template.maneuvering_thrusters then
         entry:addKeyValue(_("database", "Turn speed"), string.format("%.1f deg/sec", ship_template.maneuvering_thrusters.speed))
       end
+
       if ship_template.warp_drive then
         entry:addKeyValue(_("database", "Warp speed"), string.format("%.1f u/min", ship_template.warp_drive.speed_per_level * 60 / 1000))
       end
+
       if ship_template.jump_drive then
         entry:addKeyValue(_("database", "Jump range"), string.format("%.0f - %.0f u", (ship_template.jump_drive.min_distance or 5000) / 1000, (ship_template.jump_drive.max_distance or 20000) / 1000));
       end
@@ -422,18 +439,18 @@ function __fillDefaultDatabaseData()
         entry:setLongDescription(ship_template.__description)
       end
     end
-    end
---[[
-#ifdef DEBUG
-    // If debug mode is enabled, populate the ModelData entry.
-    P<ScienceDatabase> models_database = new ScienceDatabase();
-    models_database->setName("Models (debug)");
-    for(string name : ModelData::getModelDataNames())
-    {
-        P<ScienceDatabase> entry = models_database->addEntry(name);
-        entry->setModelDataName(name);
-    }
-#endif
---]]
+  end
+  --[[ TODO
+    #ifdef DEBUG
+        // If debug mode is enabled, populate the ModelData entry.
+        P<ScienceDatabase> models_database = new ScienceDatabase();
+        models_database->setName("Models (debug)");
+        for(string name : ModelData::getModelDataNames())
+        {
+            P<ScienceDatabase> entry = models_database->addEntry(name);
+            entry->setModelDataName(name);
+        }
+    #endif
+  --]]
 end
 __fillDefaultDatabaseData()
