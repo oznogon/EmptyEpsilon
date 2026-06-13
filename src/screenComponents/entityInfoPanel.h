@@ -32,7 +32,7 @@ public:
     GuiEntityInfoPanel(GuiContainer* owner, string id, sp::ecs::Entity entity, func_t func);
 
     static constexpr float default_panel_size = 240.0f;
-    bool selected;
+    bool selected = false;
     int panel_index = -1; // Index of this panel in the grid
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
@@ -42,6 +42,8 @@ public:
 
     GuiEntityInfoPanel* setEntity(sp::ecs::Entity new_entity);
     sp::ecs::Entity getEntity() const { return entity; }
+    // Set the prefix of the panel's theme style.
+    GuiEntityInfoPanel* setStyle(const string& style);
     GuiEntityInfoPanel* setCustomLabel(int index, string new_label);
     GuiEntityInfoPanel* setCustomIcon(int index, string new_image);
     GuiEntityInfoPanel* clearCustomLabels();
