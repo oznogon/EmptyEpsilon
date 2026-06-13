@@ -2148,7 +2148,7 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::dockingBay: return "gui/icons/docking";
     case CrewPosition::altRelay: return "gui/icons/station-strategic-map";
     case CrewPosition::commsOnly: return "gui/icons/station-comms";
-    case CrewPosition::shipLog: return "gui/icons/station-shiplog";
+    case CrewPosition::shipLog: return "gui/icons/station-ship-log";
     case CrewPosition::radarOfficer: return "gui/icons/station-radar";
     case CrewPosition::probeCamera: return "gui/icons/scan-probe";
     case CrewPosition::targetAnalysis: return "gui/icons/lock";
