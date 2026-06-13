@@ -1131,7 +1131,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     }
     else entity_hull->setValue(tr("dockingbay", "N/A"));
 
-    // Update missile displays.
+    // Update berth's missile displays.
     if (auto tubes = selected_entity.getComponent<MissileTubes>())
     {
         for (int i = MW_Homing; i < MW_Count; i++)
@@ -1154,13 +1154,14 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         for (auto kv : berth_missiles) kv->setValue("-");
     }
 
+    // Update carrier's missile displays.
     if (auto tubes = my_spaceship.getComponent<MissileTubes>())
     {
         for (int i = MW_Homing; i < MW_Count; i++)
             updateMissileDisplay(carrier_missiles[i], tubes, static_cast<EMissileWeapons>(i));
     }
 
-    // Update scan probe displays.
+    // Update berth's scan probe displays.
     if (auto scan_probes = selected_entity.getComponent<ScanProbeLauncher>())
     {
         entity_probes
@@ -1189,6 +1190,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
             ->setColor(glm::u8vec4(128, 128, 128, 255));
     }
 
+    // Update carrier's scan probe displays.
     if (auto scan_probes = my_spaceship.getComponent<ScanProbeLauncher>())
         carrier_scan_probes->setValue(static_cast<string>(scan_probes->stock) + "/" + static_cast<string>(scan_probes->max));
     else
@@ -1287,7 +1289,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     if (bay && selected_berth_index >= 0 && selected_berth_index < static_cast<int>(bay->berths.size())) {
         const auto& selected_berth = bay->berths[selected_berth_index];
 
-        // Check if selected berth is moving an entity OUT
+        // Check if selected berth is moving an entity out.
         if (selected_berth.move_target_berth >= 0 && selected_entity)
         {
             is_moving_out = true;
@@ -1297,7 +1299,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
                 {"target", selected_berth.move_target_berth + 1}
             });
         }
-        // Check if selected berth is receiving an entity (moving IN)
+        // Check if selected berth is moving an entity in.
         else
         {
             for (size_t i = 0; i < bay->berths.size(); i++)
@@ -1316,18 +1318,18 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         }
     }
 
-    // Show/hide appropriate controls
+    // Show/hide appropriate controls.
     if (is_moving_out || is_moving_in)
     {
-        // Hide move controls, show progress bar with cancel button enabled
         move_controls_row->hide();
         move_progress_row->show();
-        move_progress_bar->setValue(progress)->setText(move_text);
+        move_progress_bar
+            ->setValue(progress)
+            ->setText(move_text);
         cancel_move_button->setEnable(true);
     }
     else
     {
-        // Show move controls, hide progress bar
         move_controls_row->show();
         move_progress_row->hide();
     }
