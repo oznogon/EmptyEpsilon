@@ -647,6 +647,12 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiElement(supply_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    // Header labels for supply columns
+    (new GuiLabel(supply_controls_left, "", tr("dockingbay", "Berth"), 20.0f))
+        ->setSize(GuiElement::GuiSizeMax, kv_size);
+    (new GuiLabel(supply_controls_right, "", tr("dockingbay", "Carrier"), 20.0f))
+        ->setSize(GuiElement::GuiSizeMax, kv_size);
+
     auto populateMissiles = [](GuiKeyValueDisplay* supply_missiles[MW_Count], GuiElement* column) {
         for (int i = MW_Homing; i < MW_Count; i++)
         {
@@ -670,7 +676,11 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     // Populate missile transfer buttons
     GuiButton* to_berth[MW_Count];
     GuiButton* to_carrier[MW_Count];
-    GuiElement* supply_controls_center_row;
+    GuiElement* supply_controls_center_row = new GuiElement(supply_controls_center, "");
+    // Blank spacer for first row.
+    supply_controls_center_row
+        ->setSize(GuiElement::GuiSizeMax, kv_size)
+        ->setAttribute("layout", "horizontal");
 
     for (int i = MW_Homing; i < MW_Count; i++)
     {
