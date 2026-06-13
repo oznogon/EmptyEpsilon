@@ -462,6 +462,7 @@
     [scrollingbanner] {
         image: gui/widget/LabelBackground.png
         size: 25.0
+    }
 
     # GuiEntityInfoPanel
     [entityinfopanel] {
@@ -482,7 +483,7 @@
             color.disabled: #FFFFFF4D
 
             [entityinfopanel.selected.front] {
-                color: #120A00
+                color: #000000
             }
         }
     }
