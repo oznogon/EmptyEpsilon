@@ -18,7 +18,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 GuiRenderedModelSprite::GuiRenderedModelSprite(GuiContainer* owner, string id, sp::ecs::Entity& entity)
-: GuiElement(owner, id), entity(entity), zoom_factor(1.0f), height(-1.f), angle(90.f), needs_rerender(true), last_render_size(0, 0)
+: GuiElement(owner, id), entity(entity)
 {
 }
 
@@ -41,23 +41,35 @@ bool GuiRenderedModelSprite::renderToTexture(glm::ivec2 size)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     }
 
-    // Activate the render texture
+    // Save scissor test state before switching to the offscreen framebuffer.
+    // We must disable it so glClear covers the full offscreen buffer. The
+    // saved state is restored at the end so the 2D renderer's clip region
+    // remains active on the main buffer.
+    GLboolean scissor_saved = glIsEnabled(GL_SCISSOR_TEST);
+    GLint scissor_box[4];
+    if (scissor_saved) glGetIntegerv(GL_SCISSOR_BOX, scissor_box);
+    glDisable(GL_SCISSOR_TEST);
+
+    // Activate the render texture.
     if (!render_texture->activateRenderTarget())
     {
+        if (scissor_saved)
+        {
+            glEnable(GL_SCISSOR_TEST);
+            glScissor(scissor_box[0], scissor_box[1], scissor_box[2], scissor_box[3]);
+        }
         LOG(Error, "Failed to activate render texture");
         return false;
     }
 
-    // Set up viewport for the render texture size
+    // Set up viewport for the render texture size.
     glViewport(0, 0, size.x, size.y);
 
-    // Configure OpenGL state for 3D rendering with transparent background
-    if (GLAD_GL_ES_VERSION_2_0)
-        glClearDepthf(1.f);
-    else
-        glClearDepth(1.0);
+    // Configure OpenGL state for 3D rendering with transparent background.
+    if (GLAD_GL_ES_VERSION_2_0) glClearDepthf(1.0f);
+    else glClearDepth(1.0);
 
-    // Clear with transparent background - important to clear the entire buffer
+    // Clear with transparent background, necessary to clear the entire buffer.
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
@@ -66,23 +78,23 @@ bool GuiRenderedModelSprite::renderToTexture(glm::ivec2 size)
     glFrontFace(GL_CCW);
 
     auto mesh_radius = mrc->getMesh()->greatest_distance_from_center * mrc->scale;
-    float mesh_diameter = mesh_radius * 2.f;
-    float near_clip_boundary = 1.f;
+    float mesh_diameter = mesh_radius * 2.0f;
+    float near_clip_boundary = 1.0f;
 
     float camera_fov = 60.0f;
-    auto projection_matrix = glm::perspective(glm::radians(camera_fov), float(size.x) / float(size.y), near_clip_boundary, 25000.f);
-    float view_distance = zoom_factor * (mesh_diameter / glm::tan(glm::radians(camera_fov / 2.f)));
+    auto projection_matrix = glm::perspective(glm::radians(camera_fov), static_cast<float>(size.x) /static_cast<float>(size.y), near_clip_boundary, 25000.0f);
+    float view_distance = zoom_factor * (mesh_diameter / glm::tan(glm::radians(camera_fov * 0.5f)));
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
-    auto view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.f), glm::vec3(1.f, 0.f, 0.f));
-    view_matrix = glm::scale(view_matrix, glm::vec3(1.f, 1.f, -1.f));
+    auto view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    view_matrix = glm::scale(view_matrix, glm::vec3(1.0f, 1.0f, -1.0f));
     // TODO: This could be better
     if (height)
-        view_matrix = glm::translate(view_matrix, glm::vec3(0.f, height, height));
-    view_matrix = glm::translate(view_matrix, glm::vec3(0.f, -1.f * view_distance - near_clip_boundary, 0.f));
-    view_matrix = glm::rotate(view_matrix, glm::radians(-30.f), glm::vec3(1.f, 0.f, 0.f));
+        view_matrix = glm::translate(view_matrix, glm::vec3(0.0f, height, height));
+    view_matrix = glm::translate(view_matrix, glm::vec3(0.0f, -1.0f * view_distance - near_clip_boundary, 0.0f));
+    view_matrix = glm::rotate(view_matrix, glm::radians(-30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
     if (angle)
-        view_matrix = glm::rotate(view_matrix, glm::radians(angle), glm::vec3(0.f, 0.f, 1.f));
+        view_matrix = glm::rotate(view_matrix, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 
     glDisable(GL_BLEND);
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -90,12 +102,12 @@ bool GuiRenderedModelSprite::renderToTexture(glm::ivec2 size)
 
     ShaderRegistry::updateProjectionView(projection_matrix, view_matrix);
 
-    auto model_matrix = calculateModelMatrix(glm::vec2{}, 0.f, mrc->mesh_offset, mrc->scale);
+    auto model_matrix = calculateModelMatrix(glm::vec2{}, 0.0f, mrc->mesh_offset, mrc->scale);
 
     auto shader = lookUpShader(*mrc);
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
-    auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
+    auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.0f), {0.0f, 0.0f, 1.0f});
     modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{mrc->scale});
 
     // Lights setup.
@@ -111,7 +123,6 @@ bool GuiRenderedModelSprite::renderToTexture(glm::ivec2 size)
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_STENCIL_TEST);
-    glDisable(GL_SCISSOR_TEST);
     glDepthMask(GL_TRUE);
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
     glEnable(GL_BLEND);
@@ -122,6 +133,15 @@ bool GuiRenderedModelSprite::renderToTexture(glm::ivec2 size)
 
     // Deactivate render target (return to default framebuffer)
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    // Restore scissor test state so the 2D renderer's clip region remains active.
+    if (scissor_saved)
+    {
+        glEnable(GL_SCISSOR_TEST);
+        glScissor(scissor_box[0], scissor_box[1], scissor_box[2], scissor_box[3]);
+    }
+    else
+        glDisable(GL_SCISSOR_TEST);
 
     // Unbind any textures we might have bound, and reset all texture units
     for (int i = 0; i < 8; i++) {
