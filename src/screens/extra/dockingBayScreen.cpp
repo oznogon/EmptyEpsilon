@@ -946,11 +946,16 @@ void DockingBayScreen::selectBerth(int berth_index)
             repair_controls->hide();
             storage_controls->hide();
             {
-                // Allow supply berth to generate supply drops only if Cargo
-                // class can dock internally.
+                // Show supply drop generation button only if Cargo
+                // class can dock internally and the berth is empty.
                 bool can_generate = false;
+
                 if (auto bay = my_spaceship.getComponent<DockingBay>())
-                    can_generate = bay->internal_dock_classes.find(tr("class", "Cargo")) != bay->internal_dock_classes.end();
+                {
+                    can_generate = (bay->internal_dock_classes.find(tr("class", "Cargo")) != bay->internal_dock_classes.end())
+                        && bay->berths[berth_index].docked_entity == sp::ecs::Entity();
+                }
+
                 generate_supply_drop->setVisible(can_generate);
             }
             break;
@@ -971,6 +976,7 @@ void DockingBayScreen::selectBerth(int berth_index)
             storage_controls->show();
             break;
     }
+
     // Force immediate update of displays
     updateSelectedEntityDisplay();
 }
