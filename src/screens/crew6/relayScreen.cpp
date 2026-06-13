@@ -294,11 +294,11 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     center_button->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Reputation display.
-    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.4f, tr("Reputation") + ":", "");
+    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.4f, tr("Reputation"), "");
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
 
     // Scenario clock display.
-    info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.4f, tr("Clock") + ":", "");
+    info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.4f, tr("Clock"), "");
     info_clock->setSize(GuiElement::GuiSizeMax, 40);
 
     alert_level_select = new GuiAlertLevelSelect(this, "");

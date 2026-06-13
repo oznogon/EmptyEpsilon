@@ -154,11 +154,11 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     stats->setPosition(20, 60, sp::Alignment::TopLeft)->setSize(240, 80)->setAttribute("layout", "vertical");
 
     // Reputation display.
-    info_reputation = new GuiKeyValueDisplay(stats, "INFO_REPUTATION", 0.55f, tr("Reputation") + ":", "");
+    info_reputation = new GuiKeyValueDisplay(stats, "INFO_REPUTATION", 0.55f, tr("Reputation"), "");
     info_reputation->setTextSize(20)->setSize(200, 40);
 
     // Scenario clock display.
-    info_clock = new GuiKeyValueDisplay(stats, "INFO_CLOCK", 0.55f, tr("Clock") + ":", "");
+    info_clock = new GuiKeyValueDisplay(stats, "INFO_CLOCK", 0.55f, tr("Clock"), "");
     info_clock->setTextSize(20)->setSize(200, 40);
 
     mode = TargetSelection;
