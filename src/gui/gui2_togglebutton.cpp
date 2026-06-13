@@ -6,7 +6,8 @@ GuiToggleButton::GuiToggleButton(GuiContainer* owner, string id, string text, fu
 : GuiButton(owner, id, text, [this]() { this->onClick(); }), toggle_func(func)
 {
     value = false;
-    setStyle("button.toggle.off");
+    back_style = theme->getStyle("button.toggle.off.back");
+    front_style = theme->getStyle("button.toggle.off.front");
     back_on_style = theme->getStyle("button.toggle.on.back");
     front_on_style = theme->getStyle("button.toggle.on.front");
 }
@@ -57,6 +58,13 @@ GuiToggleButton* GuiToggleButton::setValue(bool value)
     if (this->value == value)
         return this;
     this->value = value;
+    return this;
+}
+
+GuiToggleButton* GuiToggleButton::setOnStyle(const string& style)
+{
+    back_on_style = theme->getStyle(style + ".back");
+    front_on_style = theme->getStyle(style + ".front");
     return this;
 }
 

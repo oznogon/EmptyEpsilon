@@ -1,5 +1,4 @@
-#ifndef GUI2_TOGGLEBUTTON_H
-#define GUI2_TOGGLEBUTTON_H
+#pragma once
 
 #include "gui2_button.h"
 
@@ -18,10 +17,10 @@ public:
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
 
+    GuiToggleButton* setOnStyle(const string& style);
+
     bool getValue() const;
     GuiToggleButton* setValue(bool value);
 private:
     void onClick();
 };
-
-#endif//GUI2_TOGGLEBUTTON_H
