@@ -10,12 +10,9 @@
 #include "components/name.h"
 
 GuiEntityInfoPanel::GuiEntityInfoPanel(GuiContainer* owner, string id, sp::ecs::Entity entity, func_t func)
-: GuiPanel(owner, id), entity(entity), func(func), selected(false)
+: GuiPanel(owner, id), entity(entity), func(func)
 {
-    back_style = theme->getStyle("entityinfopanel.back");
-    front_style = theme->getStyle("entityinfopanel.front");
-    back_selected_style = theme->getStyle("entityinfopanel.selected.back");
-    front_selected_style = theme->getStyle("entityinfopanel.selected.front");
+    setStyle("entityinfopanel");
 
     setAttribute("layout", "vertical");
     setAttribute("padding", "10");
@@ -64,20 +61,20 @@ void GuiEntityInfoPanel::onDraw(sp::RenderTarget& renderer)
     hover = false;
 
     const GuiThemeStyle* back_style = getBackStyle();
-    const auto& back = back_style->get(getPanelState());
+    const GuiThemeStyle* front_style = getFrontStyle();
+    const auto panel_state = getPanelState();
+    const auto& back = back_style->get(panel_state);
 
     // Draw the panel background clipped to the grid's rect
     renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
 
-    const GuiThemeStyle* front = getFrontStyle();
-
-    callsign_label->setFrontStyle(front);
-    type_label->setFrontStyle(front);
+    callsign_label->setFrontStyle(front_style);
+    type_label->setFrontStyle(front_style);
 
     for (auto i = 0; i < 4; i++)
     {
-        custom_labels[i]->setFrontStyle(front);
-        custom_icons[i]->setColor(front->get(getState()).color);
+        custom_labels[i]->setFrontStyle(front_style);
+        custom_icons[i]->setColor(front_style->get(getState()).color);
     }
 }
 
@@ -85,6 +82,15 @@ float GuiEntityInfoPanel::getBackSize() const
 {
     const auto& back = getBackStyle()->get(getState());
     return back.size;
+}
+
+GuiEntityInfoPanel* GuiEntityInfoPanel::setStyle(const string& style)
+{
+    back_style = theme->getStyle(style + ".back");
+    front_style = theme->getStyle(style + ".front");
+    back_selected_style = theme->getStyle(style + ".selected.back");
+    front_selected_style = theme->getStyle(style + ".selected.front");
+    return this;
 }
 
 void GuiEntityInfoPanel::onUpdate()
