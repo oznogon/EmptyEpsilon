@@ -64,6 +64,8 @@ void GuiScrollText::onDraw(sp::RenderTarget& renderer)
 
 bool GuiScrollText::onMouseWheelScroll(glm::vec2 position, float value)
 {
+    if (scrollbar->getCorrectedMax() <= scrollbar->getMin())
+        return false;
     scrollbar->setValue(scrollbar->getValue() - value * text_size * 3.0f);
     return true;
 }
