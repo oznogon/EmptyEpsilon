@@ -18,17 +18,17 @@ bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target)
     for (auto [entity, radar_block, transform] : sp::ecs::Query<RadarBlock, sp::Transform>())
     {
         glm::vec2 nebula_pos = transform.getPosition();
-        float range = radar_block.range;
+        float range = radar_block.range * 0.8f;
 
-        // Camera inside nebula: no occlusion for this nebula
+        // Camera inside occlusion radius: no occlusion for this nebula
         if (glm::length2(source - nebula_pos) < range * range)
             continue;
 
-        // Target inside nebula: occluded
+        // Target inside occlusion radius: occluded
         if (glm::length2(target - nebula_pos) < range * range)
             return true;
 
-        // Target behind nebula: occluded if line from camera to target passes through nebula
+        // Target behind occlusion radius: occluded if line from camera to target passes through it
         glm::vec2 diff = target - source;
         float dist = glm::length(diff);
         if (dist < 0.01f) continue;
@@ -272,7 +272,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
             int tex_idx = v % nr.clouds.size();
             auto& cloud = nr.clouds[tex_idx];
             float volume_size = nr.radius * (0.3f + v * 0.15f);
-            float volume_alpha = shell_alpha * 0.3f * (1.0f - v * 0.16f);
+            float volume_alpha = shell_alpha * 0.8f * (1.0f - v * 0.16f);
 
             if (!cloud.texture.ptr)
                 cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
@@ -326,7 +326,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
         auto& cloud = nr.clouds[idx];
         glm::vec3 cloud_pos = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
 
-        float per_cloud_alpha = 0.35f * shell_alpha;
+        float per_cloud_alpha = 0.6f * shell_alpha;
 
         if (per_cloud_alpha <= 0.0f)
             continue;
