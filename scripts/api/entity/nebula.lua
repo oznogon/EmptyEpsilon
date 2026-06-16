@@ -11,7 +11,7 @@ function Nebula()
     e.components.radar_signature = {gravitational=0, electrical=0.8, thermal=-1.0}
     e.components.transform = {rotation=random(0, 360)}
     e.components.radar_trace = {icon="Nebula" .. irandom(1, 3) .. ".png", min_size=0, max_size = 2048, radius=radius*1.5}
-    e.components.radar_block = {range=radius}
+    e.components.radar_block = {range=radius, behind=true}
     e.components.never_radar_blocked = {}
     local skybox_name = "purple"
     local fog_color_r = 0.08

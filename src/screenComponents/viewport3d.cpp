@@ -342,6 +342,15 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         {
             if (engine->getElapsedTime() - ee.last_engine_particle_time > 0.1f)
             {
+                // Skip if ship is occluded by a nebula
+                if (!entity.hasComponent<NeverRadarBlocked>()
+                    && !entity.hasComponent<RadarBlock>()
+                    && RenderSystem::isOccludedByNebula(glm::vec2(camera_position.x, camera_position.y), transform.getPosition()))
+                {
+                    ee.last_engine_particle_time = engine->getElapsedTime();
+                    continue;
+                }
+
                 for (auto ed : ee.emitters)
                 {
                     // Apply banking rotation in local space. Flip the banking

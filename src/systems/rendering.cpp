@@ -1,5 +1,6 @@
 #include "systems/rendering.h"
 #include "components/rendering.h"
+#include "components/radarblock.h"
 #include "textureManager.h"
 #include "vectorUtils.h"
 #include "shaderRegistry.h"
@@ -12,6 +13,37 @@
 
 std::vector<RenderSystem::RenderHandler> RenderSystem::render_handlers;
 
+bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target)
+{
+    for (auto [entity, radar_block, transform] : sp::ecs::Query<RadarBlock, sp::Transform>())
+    {
+        glm::vec2 nebula_pos = transform.getPosition();
+        float range = radar_block.range;
+
+        // Camera inside nebula: no occlusion for this nebula
+        if (glm::length2(source - nebula_pos) < range * range)
+            continue;
+
+        // Target inside nebula: occluded
+        if (glm::length2(target - nebula_pos) < range * range)
+            return true;
+
+        // Target behind nebula: occluded if line from camera to target passes through nebula
+        glm::vec2 diff = target - source;
+        float dist = glm::length(diff);
+        if (dist < 0.01f) continue;
+
+        float f = glm::dot(diff, nebula_pos - source) / dist;
+        if (f < 0.0f) f = 0.0f;
+        if (f > dist) f = dist;
+        glm::vec2 q = source + diff * (f / dist);
+
+        if (glm::length2(q - nebula_pos) < range * range)
+            return true;
+    }
+    return false;
+}
+
 void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType projection_type, float far_plane)
 {
     view_vector = vec2FromAngle(camera_yaw);
@@ -23,6 +55,19 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
         depth_cutoff_back = -std::numeric_limits<float>::infinity();
     for(auto& handler : render_handlers)
         (this->*(handler.func))(handler.rif);
+
+    for(auto& render_list : render_lists)
+    {
+        for(auto it = render_list.begin(); it != render_list.end(); )
+        {
+            if (!it->entity.hasComponent<NeverRadarBlocked>()
+                && !it->entity.hasComponent<RadarBlock>()
+                && isOccludedByNebula(glm::vec2(camera_position.x, camera_position.y), it->transform->getPosition()))
+                it = render_list.erase(it);
+            else
+                ++it;
+        }
+    }
 
     for(int n=render_lists.size() - 1; n >= 0; n--)
     {

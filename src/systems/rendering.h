@@ -5,6 +5,7 @@
 #include <ecs/system.h>
 #include "components/collision.h"
 #include "components/rendering.h"
+#include "components/radarblock.h"
 #include "main.h"
 #include "systems/radar.h"
 #include <glm/geometric.hpp>
@@ -29,6 +30,7 @@ public:
     }
 
     void render3D(float aspect, float camera_fov, ProjectionType projection_type = ProjectionType::Perspective, float far_plane = 25000.0f);
+    static bool isOccludedByNebula(glm::vec2 source, glm::vec2 target);
 private:
     float depth_cutoff_back;
     float depth_cutoff_front;
