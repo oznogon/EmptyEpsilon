@@ -46,6 +46,7 @@ function Entity:setSize(radius)
     if comp.avoid_object then comp.avoid_object.range=radius*2 end
     if comp.explosion_effect then comp.explosion_effect.size=radius end
     if comp.explode_on_touch then comp.explode_on_touch.blast_range=radius end
+    if comp.radar_trace then comp.radar_trace.radius=radius end
     return self
 end
 
