@@ -44,7 +44,9 @@ varying float v_distance;
 
 void main()
 {
-    gl_FragColor = texture2D(u_textureMap, v_texcoords.st) * vec4(v_color, 1.);
+    vec4 tex = texture2D(u_textureMap, v_texcoords.st);
+    float alpha = tex.a * max(v_color.r, max(v_color.g, v_color.b));
+    gl_FragColor = vec4(tex.rgb * v_color, alpha);
 
     if (u_fogDistance > 0.0)
     {

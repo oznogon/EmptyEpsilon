@@ -3,6 +3,8 @@
 #include "main.h"
 #include "components/faction.h"
 #include "components/scanning.h"
+#include "components/collision.h"
+#include "components/radarblock.h"
 
 int RadarRenderSystem::current_flags;
 float RadarRenderSystem::current_scale;
@@ -15,6 +17,10 @@ std::vector<RadarRenderSystem::Handler> RadarRenderSystem::handlers;
 
 void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, RadarTrace& trace)
 {
+    // Nebulae are rendered by NebulaRadarRendering at a lower priority.
+    if (entity.hasComponent<RadarBlock>())
+        return;
+
     // Exit early if the trace is flagged for LongRange and this is non-GM
     // LongRange radar.
     if ((RadarRenderSystem::current_flags & RadarRenderSystem::FlagLongRange)
@@ -76,4 +82,22 @@ void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Ent
     if (auto trace = entity.getComponent<RadarTrace>()) text_distance = std::clamp(trace->radius * 1.5f * scale, trace->min_size, trace->max_size) + 15.0f * 1.5f * scale;
 
     renderer.drawText(sp::Rect(screen_position.x, screen_position.y - text_distance, 0, 0), callsign.callsign, sp::Alignment::Center, 15, bold_font);
+}
+
+void NebulaRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, RadarTrace& trace)
+{
+    // Only render nebulae (entities with RadarBlock component).
+    if (!entity.hasComponent<RadarBlock>())
+        return;
+
+    auto size = trace.radius * scale * 2.0f;
+    size = std::clamp(size, trace.min_size, std::max(trace.min_size, trace.max_size));
+
+    auto color = trace.color;
+    auto icon = trace.icon;
+
+    if (trace.flags & RadarTrace::Rotate)
+        renderer.drawRotatedSprite(icon, screen_position, size, rotation, color);
+    else
+        renderer.drawSprite(icon, screen_position, size, color);
 }

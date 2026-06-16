@@ -98,7 +98,9 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), reinterpret_cast<const GLvoid*>(max_vertex_count * sizeof(ParticleData)));
         glVertexAttribPointer(colors.get(), 3, GL_FLOAT, GL_FALSE, sizeof(ParticleData), reinterpret_cast<const GLvoid*>(offsetof(ParticleData, color)));
         glVertexAttribPointer(sizes.get(), 1, GL_FLOAT, GL_FALSE, sizeof(ParticleData), reinterpret_cast<const GLvoid*>(offsetof(ParticleData, size)));
- 
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  
         // Process only non-expired
         size_t live_particle_count = first_expired - std::begin(particles);
 
@@ -131,6 +133,8 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
             
             n += instance_count;
         }
+
+        glBlendFunc(GL_ONE, GL_ONE);
     }
 }
 

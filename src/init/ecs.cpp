@@ -193,6 +193,7 @@ void initSystemsAndComponents()
     engine->registerSystem<PlanetTransparentRenderSystem>();
     engine->registerSystem<MeshRenderSystem>();
     engine->registerSystem<ScanningSystem>();
+    engine->registerSystem<NebulaRadarRendering>();
     engine->registerSystem<BasicRadarRendering>();
     engine->registerSystem<RadarBlockSystem>();
     engine->registerSystem<ZoneSystem>();

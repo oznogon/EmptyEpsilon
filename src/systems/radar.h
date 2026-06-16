@@ -83,3 +83,12 @@ public:
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, RadarTrace& component) override;
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, CallSign& component) override;
 };
+
+class NebulaRadarRendering :
+    public sp::ecs::System,
+    public RenderRadarInterface<RadarTrace, 25, RadarRenderSystem::FlagNone> {
+public:
+    void update(float delta) override {}
+
+    void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, RadarTrace& component) override;
+};
