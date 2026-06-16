@@ -13,13 +13,20 @@ function Nebula()
     e.components.radar_trace = {icon="Nebula" .. irandom(1, 3) .. ".png", min_size=0, max_size = 2048, radius=radius*1.5, blend_add=true}
     e.components.radar_block = {range=radius}
     e.components.never_radar_blocked = {}
-    local render_info = {}
-    local cloud_count = 32
+    local skybox_name = "purple"
+    local fog_color_r = 0.08
+    local fog_color_g = 0.03
+    local fog_color_b = 0.10
+    local render_info = {radius=radius, skybox=skybox_name, skybox_fade_distance=2000, fog_color_r=fog_color_r, fog_color_g=fog_color_g, fog_color_b=fog_color_b}
+    local cloud_count = 900
     for n=1,cloud_count do
-        local size = random(512, 1024 * 2)
-        local dist = random(size / 2.0, radius - size)
-        local angle = n * 360 / cloud_count
-        local ox, oy = math.cos(angle / 180 * math.pi) * dist, math.sin(angle / 180 * math.pi) * dist
+        local size = random(256, 2048)
+        -- Density-weighted distribution: more clouds near the center, fewer at the edges
+        local r = random(0, 1)
+        local dist = math.sqrt(r) * (radius - size * 0.75)
+        local angle = random(0, 360)
+        local ox = math.cos(angle / 180 * math.pi) * dist
+        local oy = math.sin(angle / 180 * math.pi) * dist
         render_info[n] = {size=size, texture="Nebula" .. irandom(1, 3) .. ".png", offset={ox, oy}}
     end
     e.components.nebula_renderer = render_info

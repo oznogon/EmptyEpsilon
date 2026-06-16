@@ -69,6 +69,12 @@ public:
     };
 
     float render_range = 10000.0f;
+    float radius = 5000.0f;
+    string skybox;
+    float skybox_fade_distance = 1000.0f;
+    float fog_color_r = 0.02f;
+    float fog_color_g = 0.01f;
+    float fog_color_b = 0.03f;
     std::vector<Cloud> clouds;
     bool clouds_dirty = true;
 };

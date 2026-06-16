@@ -16,15 +16,17 @@ attribute vec3 a_tangent;
 varying vec3 v_normal;
 varying vec2 v_texcoords;
 varying vec3 v_tangent;
+varying float v_distance;
 
 void main()
 {
-	v_normal = normalize((u_model * vec4(a_normal, 0.)).xyz);
-	v_tangent = normalize((u_model * vec4(a_tangent, 0.)).xyz);
-	vec4 modelview_position = u_view * u_model * vec4(a_position, 1.);
-	
-	v_texcoords = a_texcoords;
-	gl_Position = u_projection * modelview_position;
+    v_normal = normalize((u_model * vec4(a_normal, 0.)).xyz);
+    v_tangent = normalize((u_model * vec4(a_tangent, 0.)).xyz);
+    vec4 modelview_position = u_view * u_model * vec4(a_position, 1.);
+    v_distance = length(modelview_position.xyz);
+    
+    v_texcoords = a_texcoords;
+    gl_Position = u_projection * modelview_position;
 }
 
 [fragment]
@@ -46,33 +48,52 @@ uniform vec4 u_illuminationModulation;
 uniform sampler2D u_normalMap;
 #endif
 
+uniform vec3 u_fogColor;
+uniform float u_fogDistance;
+uniform float u_time;
+
 // Per-fragment inputs
 varying vec3 v_normal;
 varying vec2 v_texcoords;
 varying vec3 v_tangent;
+varying float v_distance;
 
 void main()
 {
-	vec3 n = v_normal;
+    vec3 n = v_normal;
 #ifdef NORMAL
-	vec3 bitangent = cross(v_tangent, n);
-	mat3 TBN = mat3(normalize(v_tangent), normalize(bitangent), normalize(n));
-	n = normalize(TBN * (texture2D(u_normalMap, v_texcoords.st).rgb * 2.0 - 1.0)); 
+    vec3 bitangent = cross(v_tangent, n);
+    mat3 TBN = mat3(normalize(v_tangent), normalize(bitangent), normalize(n));
+    n = normalize(TBN * (texture2D(u_normalMap, v_texcoords.st).rgb * 2.0 - 1.0)); 
 #endif
-	float intensity = max(0.1, dot(u_ambientLightDirection, n));
-	
-	vec4 base = texture2D(u_baseMap, v_texcoords.st);
+    float intensity = max(0.1, dot(u_ambientLightDirection, n));
+    
+    vec4 base = texture2D(u_baseMap, v_texcoords.st);
 #ifdef ILLUMINATION
-	vec4 illumination = texture2D(u_illuminationMap, v_texcoords.st) * u_illuminationModulation;
+    vec4 illumination = texture2D(u_illuminationMap, v_texcoords.st) * u_illuminationModulation;
 #else
     vec4 illumination = vec4(0.0, 0.0, 0.0, 0.0);
 #endif
 #ifdef SPECULAR
-	float specularIntensity = min(1.0, pow(max(0.0, dot(u_specularLightDirection, n)) * 1.2, 20.0));
-	vec4 specular = specularIntensity * texture2D(u_specularMap, v_texcoords.st);
+    float specularIntensity = min(1.0, pow(max(0.0, dot(u_specularLightDirection, n)) * 1.2, 20.0));
+    vec4 specular = specularIntensity * texture2D(u_specularMap, v_texcoords.st);
 #else
-	vec4 specular = vec4(0.0, 0.0, 0.0, 0.0);
+    vec4 specular = vec4(0.0, 0.0, 0.0, 0.0);
 #endif
 
-	gl_FragColor = ((base - illumination) * intensity) + specular + illumination;
+    gl_FragColor = ((base - illumination) * intensity) + specular + illumination;
+
+    if (u_fogDistance > 0.0)
+    {
+        float color_fog = clamp(1.0 - v_distance / u_fogDistance, 0.0, 1.0);
+        gl_FragColor.rgb = mix(u_fogColor, gl_FragColor.rgb, color_fog);
+        if (v_distance > 1000.0)
+        {
+            float dither_range = max(u_fogDistance - 1000.0, 200.0);
+            float dither_factor = clamp(1.0 - (v_distance - 1000.0) / dither_range, 0.0, 1.0);
+            float dither = fract(sin(dot(gl_FragCoord.xy + u_time * 100.0, vec2(12.9898, 78.233))) * 43758.5453);
+            if (dither > dither_factor)
+                discard;
+        }
+    }
 }

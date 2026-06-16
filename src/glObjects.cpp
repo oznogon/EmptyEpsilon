@@ -133,6 +133,11 @@ namespace gl
 
         if (GLAD_GL_ES_VERSION_2_0)
             glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+
+#ifdef GL_TEXTURE_CUBE_MAP_SEAMLESS
+        glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+#endif
+
         glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
 
         LOG(Info, "Loaded cubemap: ", file_path);

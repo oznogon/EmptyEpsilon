@@ -16,7 +16,7 @@ public:
     glm::vec2 label_offset;
     string skybox;
     float skybox_fade_distance = 0.0f; // distance from edge of zone for skybox to fully fade in
-    float radius;
+    float radius = 0.0f;
     bool zone_dirty = true;
 
     void updateTriangles();

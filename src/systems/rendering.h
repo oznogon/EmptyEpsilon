@@ -28,7 +28,7 @@ public:
         render_handlers.push_back({rif, &RenderSystem::findRenderObjects<COMPONENT, TRANSPARENT>});
     }
 
-    void render3D(float aspect, float camera_fov, ProjectionType projection_type = ProjectionType::Perspective);
+    void render3D(float aspect, float camera_fov, ProjectionType projection_type = ProjectionType::Perspective, float far_plane = 25000.0f);
 private:
     float depth_cutoff_back;
     float depth_cutoff_front;

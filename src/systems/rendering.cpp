@@ -8,10 +8,11 @@
 #include "tween.h"
 #include "random.h"
 #include "components/maneuveringthrusters.h"
+#include <algorithm>
 
 std::vector<RenderSystem::RenderHandler> RenderSystem::render_handlers;
 
-void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType projection_type)
+void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType projection_type, float far_plane)
 {
     view_vector = vec2FromAngle(camera_yaw);
     depth_cutoff_back = camera_position.z * -tanf(glm::radians(90+camera_pitch + camera_fov/2.f));
@@ -36,10 +37,10 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
             float reference_distance = std::max(100.0f, camera_position.z);
             float height = reference_distance * glm::tan(glm::radians(camera_fov / 2.0f));
             float width = height * aspect;
-            projection = glm::ortho(-width, width, -height, height, 1.f, 25000.f * (n + 1));
+            projection = glm::ortho(-width, width, -height, height, 1.f, far_plane * (n + 1));
         }
         else
-            projection = glm::perspective(glm::radians(camera_fov), aspect, 1.f, 25000.f * (n + 1));
+            projection = glm::perspective(glm::radians(camera_fov), aspect, 1.f, far_plane * (n + 1));
         // Update projection matrix in shaders.
         ShaderRegistry::updateProjectionView(projection, {});
 
@@ -185,6 +186,19 @@ void NebulaRenderSystem::update(float delta)
 
 void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, NebulaRenderer& nr)
 {
+    if (nr.clouds.empty())
+        return;
+
+    glm::vec2 nebula_pos = transform.getPosition();
+    glm::vec2 camera_2d{ camera_position.x, camera_position.y };
+    float dist_to_center = glm::length(nebula_pos - camera_2d);
+
+    float shell_alpha;
+    if (dist_to_center <= nr.radius)
+        shell_alpha = 1.0f;
+    else
+        shell_alpha = nr.radius / dist_to_center;
+
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
 
     struct VertexAndTexCoords
@@ -202,35 +216,110 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
-    for(auto& cloud : nr.clouds)
-    {
-        glm::vec3 position = glm::vec3(transform.getPosition().x, transform.getPosition().y, 0) + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
-        float size = cloud.size;
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        float distance = glm::length(camera_position - position);
-        float alpha = 1.0f - (distance / nr.render_range);
-        if (alpha < 0.0f)
+    // Render fog volume billboards when camera is near or inside the nebula
+    if (shell_alpha > 0.001f)
+    {
+        float volume_color_val = 0.25f;
+        for (int v = 0; v < 6; v++)
+        {
+            int tex_idx = v % nr.clouds.size();
+            auto& cloud = nr.clouds[tex_idx];
+            float volume_size = nr.radius * (0.3f + v * 0.15f);
+            float volume_alpha = shell_alpha * 0.3f * (1.0f - v * 0.16f);
+
+            if (!cloud.texture.ptr)
+                cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
+            if (cloud.texture.ptr)
+                cloud.texture.ptr->bind();
+
+            float rotation = glm::mod(cloud.offset.x * 2.17f + v * 47.0f, 360.0f);
+            float cos_r = glm::cos(glm::radians(rotation));
+            float sin_r = glm::sin(glm::radians(rotation));
+
+            VertexAndTexCoords rquad[4];
+            for (int vt = 0; vt < 4; vt++)
+            {
+                float u = quad[vt].texcoords.x - 0.5f;
+                float tv = quad[vt].texcoords.y - 0.5f;
+                rquad[vt].vertex = glm::vec3(nebula_pos.x, nebula_pos.y, 0);
+                rquad[vt].texcoords = {
+                    u * cos_r - tv * sin_r + 0.5f,
+                    u * sin_r + tv * cos_r + 0.5f
+                };
+            }
+
+            glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), volume_color_val, volume_alpha, 0.0f, volume_size);
+
+            auto volume_model = glm::translate(glm::identity<glm::mat4>(), glm::vec3{nebula_pos.x, nebula_pos.y, 0});
+            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(volume_model));
+
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)rquad);
+            glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)rquad + sizeof(glm::vec3)));
+            std::initializer_list<uint16_t> indices = { 0, 3, 2, 0, 2, 1 };
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+        }
+    }
+
+    // Build sorted list of cloud indices (back to front)
+    std::vector<int> sorted_indices;
+    sorted_indices.reserve(nr.clouds.size());
+    for (int i = 0; i < (int)nr.clouds.size(); i++)
+        sorted_indices.push_back(i);
+
+    std::sort(sorted_indices.begin(), sorted_indices.end(), [&](int a, int b) {
+        glm::vec3 pos_a = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(nr.clouds[a].offset.x, nr.clouds[a].offset.y, 0);
+        glm::vec3 pos_b = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(nr.clouds[b].offset.x, nr.clouds[b].offset.y, 0);
+        return glm::length2(camera_position - pos_a) > glm::length2(camera_position - pos_b);
+    });
+
+    for (int idx : sorted_indices)
+    {
+        auto& cloud = nr.clouds[idx];
+        glm::vec3 cloud_pos = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
+
+        float per_cloud_alpha = 0.35f * shell_alpha;
+
+        if (per_cloud_alpha <= 0.0f)
             continue;
 
-        // setup our quad.
-        for (auto& point : quad)
+        // Per-cloud billboard rotation for visual variety
+        float rotation = glm::mod(cloud.offset.x * 1.73f + cloud.offset.y * 3.14f, 360.0f);
+        float cos_r = glm::cos(glm::radians(rotation));
+        float sin_r = glm::sin(glm::radians(rotation));
+
+        VertexAndTexCoords rquad[4];
+        for (int v = 0; v < 4; v++)
         {
-            point.vertex = position;
+            float u = quad[v].texcoords.x - 0.5f;
+            float vt = quad[v].texcoords.y - 0.5f;
+            rquad[v].vertex = cloud_pos;
+            rquad[v].texcoords = {
+                u * cos_r - vt * sin_r + 0.5f,
+                u * sin_r + vt * cos_r + 0.5f
+            };
         }
 
         if (!cloud.texture.ptr)
             cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
         if (cloud.texture.ptr)
             cloud.texture.ptr->bind();
-        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha * 0.8f, alpha * 0.8f, alpha * 0.8f, size);
-        auto cloud_model_matrix = glm::translate(glm::identity<glm::mat4>(), {cloud.offset.x, cloud.offset.y, 0});
+
+        float color_val = 0.8f;
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), color_val, per_cloud_alpha, 0.0f, cloud.size);
+
+        auto cloud_model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{cloud.offset.x, cloud.offset.y, 0});
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(cloud_model_matrix));
 
-        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
-        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)rquad);
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)rquad + sizeof(glm::vec3)));
         std::initializer_list<uint16_t> indices = { 0, 3, 2, 0, 2, 1 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
     }
+
+    // Restore additive blending
+    glBlendFunc(GL_ONE, GL_ONE);
 }
 
 void ExplosionRenderSystem::update(float delta)

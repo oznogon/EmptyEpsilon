@@ -15,10 +15,12 @@ attribute float a_size;
 // Per-vertex outputs
 varying vec3 v_color;
 varying vec2 v_texcoords;
+varying float v_distance;
 
 void main()
 {
     vec4 viewspace_center = u_view * vec4(a_center, 1.0);
+    v_distance = length(viewspace_center.xyz);
     vec4 viewspace_halfextents = vec4(a_texcoords.x - .5, a_texcoords.y - .5, 0., 0.) * a_size;
 
     // Outputs to fragment shader
@@ -31,12 +33,30 @@ void main()
 
 // Program inputs
 uniform sampler2D u_textureMap;
+uniform vec3 u_fogColor;
+uniform float u_fogDistance;
+uniform float u_time;
 
 // Per-fragment inputs
 varying vec3 v_color;
 varying vec2 v_texcoords;
+varying float v_distance;
 
 void main()
 {
     gl_FragColor = texture2D(u_textureMap, v_texcoords.st) * vec4(v_color, 1.);
+
+    if (u_fogDistance > 0.0)
+    {
+        float color_fog = clamp(1.0 - v_distance / u_fogDistance, 0.0, 1.0);
+        gl_FragColor.rgb = mix(u_fogColor, gl_FragColor.rgb, color_fog);
+        if (v_distance > 1000.0)
+        {
+            float dither_range = max(u_fogDistance - 1000.0, 200.0);
+            float dither_factor = clamp(1.0 - (v_distance - 1000.0) / dither_range, 0.0, 1.0);
+            float dither = fract(sin(dot(gl_FragCoord.xy + u_time * 100.0, vec2(12.9898, 78.233))) * 43758.5453);
+            if (dither > dither_factor)
+                discard;
+        }
+    }
 }

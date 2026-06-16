@@ -5,6 +5,7 @@
 #include "shaderManager.h"
 #include "textureManager.h"
 #include "tween.h"
+#include "shaderRegistry.h"
 
 #include <SDL_assert.h>
 
@@ -78,6 +79,12 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
     // - Matrices
     glUniformMatrix4fv(uniforms[as_index(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(uniforms[as_index(Uniforms::View)], 1, GL_FALSE, glm::value_ptr(view));
+    {
+        auto fc = ShaderRegistry::getFogColor();
+        auto fd = ShaderRegistry::getFogDistance();
+        glUniform3fv(uniforms[as_index(Uniforms::FogColor)], 1, glm::value_ptr(fc));
+        glUniform1f(uniforms[as_index(Uniforms::FogDistance)], fd);
+    }
     
     {
         gl::ScopedVertexAttribArray centers(attributes[as_index(Attributes::Center)]);
@@ -160,6 +167,8 @@ void ParticleEngine::initialize()
 
     uniforms[as_index(Uniforms::Projection)] = shader->getUniformLocation("u_projection");
     uniforms[as_index(Uniforms::View)] = shader->getUniformLocation("u_view");
+    uniforms[as_index(Uniforms::FogColor)] = shader->getUniformLocation("u_fogColor");
+    uniforms[as_index(Uniforms::FogDistance)] = shader->getUniformLocation("u_fogDistance");
 
     attributes[as_index(Attributes::Center)] = shader->getAttributeLocation("a_center");
     attributes[as_index(Attributes::TexCoords)] = shader->getAttributeLocation("a_texcoords");

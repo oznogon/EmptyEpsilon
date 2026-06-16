@@ -27,6 +27,7 @@
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <algorithm>
 
 
 static std::unordered_map<string, std::unique_ptr<gl::CubemapTexture>> skybox_textures;
@@ -167,6 +168,34 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
+    // Compute nebula fog factor for smooth draw distance and fog transitions
+    float nebula_fog_factor = 0.0f;
+    glm::vec3 nebula_fog_color = glm::vec3{0.0f};
+    float effective_fog_distance = 0.0f;
+    {
+        for(auto [entity, nr, t] : sp::ecs::Query<NebulaRenderer, sp::Transform>())
+        {
+            glm::vec2 nebula_pos = t.getPosition();
+            glm::vec2 camera_pos2{ camera_position.x, camera_position.y };
+            float dist = glm::length(nebula_pos - camera_pos2);
+            float fade_zone = nr.skybox_fade_distance > 0.0f ? nr.skybox_fade_distance : 1000.0f;
+            float transition_start = nr.radius + 1.5f * fade_zone;
+            float transition_end = nr.radius - 0.5f * fade_zone;
+            float transition_range = transition_start - transition_end;
+            if (dist <= transition_start)
+            {
+                float influence = std::clamp((transition_start - dist) / transition_range, 0.0f, 1.0f);
+                if (influence > nebula_fog_factor)
+                {
+                    nebula_fog_factor = influence;
+                    nebula_fog_color = glm::vec3{nr.fog_color_r, nr.fog_color_g, nr.fog_color_b};
+                }
+            }
+        }
+        effective_fog_distance = glm::mix(25000.0f, 1000.0f, nebula_fog_factor);
+    }
+    float far_plane = glm::mix(25000.0f, 1500.0f, nebula_fog_factor);
+
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
@@ -178,10 +207,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         float reference_distance = std::max(100.0f, camera_position.z);
         float height = reference_distance * glm::tan(glm::radians(camera_fov / 2.0f));
         float width = height * (rect.size.x / rect.size.y);
-        projection_matrix = glm::ortho(-width, width, -height, height, 1.f, 25000.f);
+        projection_matrix = glm::ortho(-width, width, -height, height, 1.f, far_plane);
     }
     else
-        projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
+        projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, far_plane);
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
     view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.0f), {1.f, 0.f, 0.f}); // -> X across (l-t-r), Y "towards", Z down
@@ -209,17 +238,48 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         string local_skybox_name = skybox_name;
         float local_skybox_factor = 0.0f;
+        float best_skybox_depth = 0.0f;
+
+        // Check Zone-based skybox transitions (polygon zones)
         for(auto [entity, zone, t] : sp::ecs::Query<Zone, sp::Transform>()) {
             if (zone.skybox.empty()) continue;
 
             auto pos = t.getPosition() - glm::vec2(camera_position.x, camera_position.y);
-            if (insidePolygon(zone.outline, pos)) {
-                local_skybox_name = "skybox/" + zone.skybox;
-                if (zone.skybox_fade_distance <= 0)
-                    local_skybox_factor = 1.0;
+            float factor = 0.0f;
+            if (insidePolygon(zone.outline, pos))
+            {
+                if (zone.skybox_fade_distance <= 0.0f)
+                    factor = 1.0f;
                 else
-                    local_skybox_factor = std::clamp(distanceToEdge(zone.outline, pos) / zone.skybox_fade_distance, 0.0f, 1.0f);
-                break;
+                    factor = std::clamp(distanceToEdge(zone.outline, pos) / zone.skybox_fade_distance, 0.0f, 1.0f);
+            }
+            if (factor > best_skybox_depth)
+            {
+                best_skybox_depth = factor;
+                local_skybox_name = "skybox/" + zone.skybox;
+                local_skybox_factor = factor;
+            }
+        }
+
+        // Check NebulaRenderer-based skybox transitions (circular nebulae)
+        for(auto [entity, nr, t] : sp::ecs::Query<NebulaRenderer, sp::Transform>()) {
+            if (nr.skybox.empty() || nr.radius <= 0.0f) continue;
+
+            auto pos = t.getPosition() - glm::vec2(camera_position.x, camera_position.y);
+            float dist = glm::length(pos);
+            if (dist < nr.radius)
+            {
+                float factor;
+                if (nr.skybox_fade_distance <= 0.0f)
+                    factor = 1.0f;
+                else
+                    factor = std::clamp((nr.radius - dist) / nr.skybox_fade_distance, 0.0f, 1.0f);
+                if (factor > best_skybox_depth)
+                {
+                    best_skybox_depth = factor;
+                    local_skybox_name = "skybox/" + nr.skybox;
+                    local_skybox_factor = factor;
+                }
             }
         }
 
@@ -310,11 +370,14 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         }
     }
 
+    // Apply pre-computed nebula fog
+    ShaderRegistry::setFog(nebula_fog_color, effective_fog_distance);
+
     // Update view matrix in shaders.
-    ShaderRegistry::updateProjectionView({}, view_matrix);
+    ShaderRegistry::updateProjectionView({}, view_matrix, engine->getElapsedTime());
 
     RenderSystem render_system;
-    render_system.render3D(rect.size.x / rect.size.y, camera_fov, projection_type);
+    render_system.render3D(rect.size.x / rect.size.y, camera_fov, projection_type, far_plane);
 
     ParticleEngine::render(projection_matrix, view_matrix);
 

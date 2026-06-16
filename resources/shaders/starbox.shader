@@ -31,10 +31,33 @@ uniform float u_starbox_lerp;
 // Per-fragment inputs.
 varying vec3 v_texcoords;
 
+vec3 fixSeam(vec3 dir)
+{
+    vec3 ad = abs(dir);
+    float ma = max(max(ad.x, ad.y), ad.z);
+    float sc = 0.0;
+    if (ad.x != ma) sc = max(sc, ad.x);
+    if (ad.y != ma) sc = max(sc, ad.y);
+    if (ad.z != ma) sc = max(sc, ad.z);
+    if (sc > ma * 0.992)
+    {
+        float bias = ma * 0.006;
+        if (ad.x == ma)
+            dir.x += sign(dir.x) * bias;
+        else if (ad.y == ma)
+            dir.y += sign(dir.y) * bias;
+        else
+            dir.z += sign(dir.z) * bias;
+    }
+    return dir;
+}
+
 void main()
 {
-    vec4 global_color = textureCube(u_global_starbox, v_texcoords);
-    vec4 local_color = textureCube(u_local_starbox, v_texcoords);
+    vec3 tc_global = fixSeam(v_texcoords);
+    vec3 tc_local = fixSeam(v_texcoords);
+    vec4 global_color = textureCube(u_global_starbox, tc_global);
+    vec4 local_color = textureCube(u_local_starbox, tc_local);
 
     gl_FragColor = mix(global_color, local_color, u_starbox_lerp);
 }

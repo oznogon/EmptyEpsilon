@@ -60,10 +60,14 @@ namespace ShaderRegistry
 		IlluminationMap,
 		NormalMap,
 
-		AmbientLightDirection,
-		SpecularLightDirection,
+        AmbientLightDirection,
+        SpecularLightDirection,
 
-		Count
+        FogColor,
+        FogDistance,
+        Time,
+
+        Count
 	};
 
 	using Uniforms_t = std::underlying_type<Uniforms>::type;
@@ -107,10 +111,13 @@ namespace ShaderRegistry
 
 	const Shader& get(Shaders id);
 
-	void updateProjectionView(std::optional<std::reference_wrapper<const glm::mat4>> projection, std::optional<std::reference_wrapper<const glm::mat4>> view);
-	glm::mat4 getActiveView();
-	glm::mat4 getActiveProjection();
-	glm::vec3 getActiveCamera();
+    void updateProjectionView(std::optional<std::reference_wrapper<const glm::mat4>> projection, std::optional<std::reference_wrapper<const glm::mat4>> view, float time = 0.0f);
+    glm::mat4 getActiveView();
+    glm::mat4 getActiveProjection();
+    glm::vec3 getActiveCamera();
+    void setFog(glm::vec3 color, float distance);
+    glm::vec3 getFogColor();
+    float getFogDistance();
 
 	void setupLights(const Shader& shader, const glm::vec3& target_worldspace);
 	inline void setupLights(const Shader& shader, const glm::mat4& model)

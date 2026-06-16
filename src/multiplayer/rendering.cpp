@@ -22,6 +22,12 @@ BASIC_REPLICATION_IMPL(EngineEmitterReplication, EngineEmitter)
 }
 BASIC_REPLICATION_IMPL(NebulaRendererReplication, NebulaRenderer)
     BASIC_REPLICATION_FIELD(render_range);
+    BASIC_REPLICATION_FIELD(radius);
+    BASIC_REPLICATION_FIELD(skybox);
+    BASIC_REPLICATION_FIELD(skybox_fade_distance);
+    BASIC_REPLICATION_FIELD(fog_color_r);
+    BASIC_REPLICATION_FIELD(fog_color_g);
+    BASIC_REPLICATION_FIELD(fog_color_b);
     REPLICATE_VECTOR_IF_DIRTY(clouds, clouds_dirty);
 }
 BASIC_REPLICATION_IMPL(ExplosionEffectReplication, ExplosionEffect)

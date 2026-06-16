@@ -37,6 +37,8 @@ class ParticleEngine : public Updatable
     {
         Projection = 0,
         View,
+        FogColor,
+        FogDistance,
 
         Count
     };

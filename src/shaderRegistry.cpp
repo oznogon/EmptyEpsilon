@@ -18,6 +18,8 @@ namespace ShaderRegistry
         glm::mat4 projection;
         glm::mat4 view;
         glm::vec3 camera; // World space camera position.
+        glm::vec3 fog_color{0.0f};
+        float fog_distance = 0.0f;
     }
 
     bool Shader::initialize()
@@ -53,7 +55,10 @@ namespace ShaderRegistry
             "u_normalMap",
 
             "u_ambientLightDirection",
-            "u_specularLightDirection"
+            "u_specularLightDirection",
+            "u_fogColor",
+            "u_fogDistance",
+            "u_time"
         };
 
         std::array<const char*, Attributes_t(Attributes::Count)> attribute_names{
@@ -115,7 +120,7 @@ namespace ShaderRegistry
         return shaders[Shaders_t(shader)];
     }
 
-    void updateProjectionView(std::optional<std::reference_wrapper<const glm::mat4>> projection_in, std::optional<std::reference_wrapper<const glm::mat4>> view_in)
+    void updateProjectionView(std::optional<std::reference_wrapper<const glm::mat4>> projection_in, std::optional<std::reference_wrapper<const glm::mat4>> view_in, float time)
     {
         const auto has_projection = projection_in.has_value();
         const auto has_view = view_in.has_value();
@@ -132,7 +137,10 @@ namespace ShaderRegistry
             auto& shader = get(Shaders(i));
             auto projection_location = shader.uniform(Uniforms::Projection);
             auto view_location = shader.uniform(Uniforms::View);
-            if (projection_location != -1 || view_location != -1)
+            auto fog_color_location = shader.uniform(Uniforms::FogColor);
+            auto fog_distance_location = shader.uniform(Uniforms::FogDistance);
+            auto time_location = shader.uniform(Uniforms::Time);
+            if (projection_location != -1 || view_location != -1 || fog_color_location != -1 || fog_distance_location != -1 || time_location != -1)
             {
                 shader.get()->bind();
 
@@ -140,6 +148,12 @@ namespace ShaderRegistry
                     glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
                 if (has_view && view_location != -1)
                     glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
+                if (fog_color_location != -1)
+                    glUniform3fv(fog_color_location, 1, glm::value_ptr(fog_color));
+                if (fog_distance_location != -1)
+                    glUniform1f(fog_distance_location, fog_distance);
+                if (time_location != -1)
+                    glUniform1f(time_location, time);
             }
         }
         glUseProgram(GL_NONE);
@@ -158,6 +172,22 @@ namespace ShaderRegistry
     glm::vec3 getActiveCamera()
     {
         return camera;
+    }
+
+    void setFog(glm::vec3 color, float distance)
+    {
+        fog_color = color;
+        fog_distance = distance;
+    }
+
+    glm::vec3 getFogColor()
+    {
+        return fog_color;
+    }
+
+    float getFogDistance()
+    {
+        return fog_distance;
     }
 
     void setupLights(const Shader& shader, const glm::vec3& target_worldspace)
