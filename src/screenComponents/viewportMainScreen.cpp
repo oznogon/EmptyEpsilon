@@ -4,6 +4,8 @@
 #include "preferenceManager.h"
 #include "components/collision.h"
 #include "components/target.h"
+#include "components/beamWeaponTarget.h"
+#include "components/missileWeaponTarget.h"
 #include "main.h"
 
 GuiViewportMainScreen::GuiViewportMainScreen(GuiContainer* owner, string id)
@@ -46,7 +48,17 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
         auto transform = my_spaceship.getComponent<sp::Transform>();
         if (!transform) return;
         auto pc = my_spaceship.getComponent<PlayerControl>();
-        auto target_ship = my_spaceship.getComponent<Target>();
+        // Check if our selected ship has a weapons target.
+        sp::ecs::Entity target_entity;
+        if (auto mt = my_spaceship.getComponent<MissileWeaponTarget>())
+            target_entity = mt->entity;
+        if (!target_entity)
+            if (auto bt = my_spaceship.getComponent<BeamWeaponTarget>())
+                target_entity = bt->entity;
+        if (!target_entity)
+            if (auto t = my_spaceship.getComponent<Target>())
+                target_entity = t->entity;
+
         float target_camera_yaw = transform->getRotation();
 
         switch(pc ? pc->main_screen_setting : MainScreenSetting::Front)
@@ -55,22 +67,19 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
         case MainScreenSetting::Left:  target_camera_yaw -= 90.0f; break;
         case MainScreenSetting::Right: target_camera_yaw += 90.0f; break;
         case MainScreenSetting::Target:
-            if ((target_ship && target_ship->entity) || linger_timer > 0.0f)
+            if (target_entity || linger_timer > 0.0f)
             {
-                // Update ToT coordinates and reset linger period.
-                if (auto tt = target_ship->entity.getComponent<sp::Transform>())
+                if (auto tt = target_entity.getComponent<sp::Transform>())
                 {
                     linger_timer = linger_period;
                     tot_coordinates = tt->getPosition();
                 }
                 else linger_timer -= delta;
 
-                // Point camera over ship's shoulder toward ToT or its last
-                // recorded coordinates.
                 target_camera_yaw = vec2ToAngle(transform->getPosition() - tot_coordinates) + 180.0f;
             }
             else
-                tot_coordinates = {0.0f, 0.0f}; // Reset ToT coordinates
+                tot_coordinates = {0.0f, 0.0f};
             break;
         default: break;
         }

@@ -10,6 +10,8 @@
 #include "random.h"
 #include "components/collision.h"
 #include "components/target.h"
+#include "components/beamWeaponTarget.h"
+#include "components/missileWeaponTarget.h"
 #include "components/player.h"
 #include "components/name.h"
 #include "components/cinematicCamera.h"
@@ -935,7 +937,15 @@ void CinematicViewScreen::update(float delta)
         setTargetTransform(target_transform, delta);
 
         // Check if our selected ship has a weapons target.
-        target_of_target = target.getComponent<Target>() ? target.getComponent<Target>()->entity : sp::ecs::Entity();
+        target_of_target = sp::ecs::Entity();
+        if (auto mt = target.getComponent<MissileWeaponTarget>())
+            target_of_target = mt->entity;
+        if (!target_of_target)
+            if (auto bt = target.getComponent<BeamWeaponTarget>())
+                target_of_target = bt->entity;
+        if (!target_of_target)
+            if (auto t = target.getComponent<Target>())
+                target_of_target = t->entity;
         auto target_of_target_transform = target_of_target.getComponent<sp::Transform>();
 
         // Don't track ToTs > 10U away.
