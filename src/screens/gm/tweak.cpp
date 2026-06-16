@@ -455,6 +455,24 @@ public:
     std::function<bool()> update_func;
 };
 
+// A GuiButton that updates its enabled state each frame from a function.
+class GuiButtonTweak : public GuiButton
+{
+public:
+    GuiButtonTweak(GuiContainer* owner, const string& text, GuiButton::func_t callback)
+    : GuiButton(owner, "", text, callback)
+    {
+    }
+
+    virtual void onDraw(sp::RenderTarget& target) override
+    {
+        if (enable_update_func) setEnable(enable_update_func());
+        GuiButton::onDraw(target);
+    }
+
+    std::function<bool()> enable_update_func;
+};
+
 // A GuiSelector that selects a vector member to tweak, for properties that are
 // themselves vectors.
 class GuiVectorTweak : public GuiSelector
