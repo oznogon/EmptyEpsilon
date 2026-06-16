@@ -233,6 +233,8 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
                 cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
             if (cloud.texture.ptr)
                 cloud.texture.ptr->bind();
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
             float rotation = glm::mod(cloud.offset.x * 2.17f + v * 47.0f, 360.0f);
             float cos_r = glm::cos(glm::radians(rotation));
@@ -305,6 +307,8 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
             cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
         if (cloud.texture.ptr)
             cloud.texture.ptr->bind();
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
         float color_val = 0.8f;
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), color_val, per_cloud_alpha, 0.0f, cloud.size);
@@ -434,6 +438,9 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     // Fire ring
     if (!ee.electrical)
     {
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        { float fire_val = Tween<float>::easeInQuartic(f, 0.0f, 1.0f, 1.0f, 0.0f); glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), fire_val, fire_val, fire_val, fire_val); }
+
         textureManager.getTexture("texture/fire_ring.png")->bind();
 
         explosion_matrix = glm::scale(explosion_matrix, glm::vec3(1.5f));
@@ -455,6 +462,8 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, nullptr);
         }
+
+        glBlendFunc(GL_ONE, GL_ONE);
     }
 
     shader = ShaderRegistry::ScopedShader(ShaderRegistry::Shaders::Billboard);

@@ -232,6 +232,9 @@ void BeamWeaponSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Bea
     // Fire ring
     if (be.fire_ring)
     {
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        { float fire_val = Tween<float>::easeInCubic(be.lifetime, 1.0f, 0.0f, 1.0f, 0.0f); glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), fire_val, fire_val, fire_val, fire_val); }
+
         glm::vec3 side = glm::cross(be.hit_normal, glm::vec3(0, 0, 1));
         glm::vec3 up = glm::cross(side, be.hit_normal);
 
@@ -259,6 +262,8 @@ void BeamWeaponSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Bea
         // Draw two quads with opposite winding order for double-sided rendering
         std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0, 0, 3, 2, 2, 1, 0 };
         glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_SHORT, std::begin(indices));
+
+        glBlendFunc(GL_ONE, GL_ONE);
     }
 }
 
