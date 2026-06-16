@@ -3401,6 +3401,26 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        auto btn = new GuiButtonTweak(row, tr("tweak-button", "Sync radar trace radius to physics radius"),
+            [this]()
+            {
+                if (auto phys = entity.getComponent<sp::Physics>())
+                {
+                    if (auto trace = entity.getComponent<RadarTrace>())
+                        trace->radius = phys->getSize().x;
+                }
+            }
+        );
+        btn
+            ->setTextSize(20.0f)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        btn->enable_update_func = [this]() -> bool {
+            return entity.hasComponent<RadarTrace>();
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
         (new GuiLabel(row, "", tr("tweak-text", "Size (W x H):"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto w_ui = new GuiTextTweak(row);
         w_ui->update_func = [this]() -> string {
@@ -3459,6 +3479,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
                 v->setAngularVelocity(text.toFloat());
         });
     }
+
     addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Callsign"), CallSign);
