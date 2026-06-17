@@ -142,8 +142,9 @@ void ShieldSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Shields
                 gl::ScopedVertexAttribArray positions(shieldShader.get().attribute(ShaderRegistry::Attributes::Position));
                 gl::ScopedVertexAttribArray texcoords(shieldShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
                 gl::ScopedVertexAttribArray normals(shieldShader.get().attribute(ShaderRegistry::Attributes::Normal));
+                gl::ScopedVertexAttribArray tangents(shieldShader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
-                ship_mesh->render(positions.get(), texcoords.get(), normals.get());
+                ship_mesh->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
 
                 // Restore OpenGL state
                 glEnable(GL_CULL_FACE);
@@ -170,8 +171,9 @@ void ShieldSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Shields
                 gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
                 gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
                 gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
+                gl::ScopedVertexAttribArray tangents(basicShader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
-                mesh->render(positions.get(), texcoords.get(), normals.get());
+                mesh->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
             }
         }
         angle += arc;

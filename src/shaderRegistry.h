@@ -33,6 +33,10 @@ namespace ShaderRegistry
 		ObjectIllumination,
 		ObjectSpecular,
 		ObjectSpecularIllumination,
+		ObjectNormal,
+		ObjectIlluminationNormal,
+		ObjectSpecularNormal,
+		ObjectSpecularIlluminationNormal,
 		Planet,
 		Shield,
 
@@ -44,7 +48,6 @@ namespace ShaderRegistry
 	enum class Uniforms : uint8_t
 	{
 		Color = 0,
-		ModelViewProjection,
 		Projection,
 		Model,
 		View,
@@ -55,6 +58,7 @@ namespace ShaderRegistry
 		BaseMap,
 		SpecularMap,
 		IlluminationMap,
+		NormalMap,
 
 		AmbientLightDirection,
 		SpecularLightDirection,
@@ -69,6 +73,7 @@ namespace ShaderRegistry
 		Position = 0,
 		Texcoords,
 		Normal,
+		Tangent,
 
 		Count
 	};
@@ -79,6 +84,7 @@ namespace ShaderRegistry
 		TextureMap = 0,
 		SpecularMap = 1,
 		IlluminationMap = 2,
+		NormalMap = 3
 	};
 
 	constexpr uint32_t textureIndex(Textures unit) { return uint32_t(unit); }
