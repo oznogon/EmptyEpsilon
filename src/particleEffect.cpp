@@ -6,6 +6,7 @@
 #include "textureManager.h"
 #include "tween.h"
 #include "shaderRegistry.h"
+#include "systems/rendering.h"
 
 #include <SDL_assert.h>
 
@@ -115,6 +116,10 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
                 auto position = Tween<glm::vec3>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.position, p.end.position);
                 auto color = Tween<glm::vec3>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.color, p.end.color);
                 auto size = Tween<float>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.size, p.end.size);
+
+                // Hide particles occluded by nebulae (rendered after the 3D scene, so not covered by cloud billboards)
+                if (size > 0.0f && RenderSystem::isOccludedByNebula(glm::vec2(camera_position.x, camera_position.y), glm::vec2(position.x, position.y)))
+                    size = 0.0f;
 
                 auto base_vertex = vertices_per_instance * instance;
                 for (auto v = 0U; v < vertices_per_instance; ++v)

@@ -281,7 +281,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-            float rotation = glm::mod(cloud.offset.x * 2.17f + v * 47.0f, 360.0f);
+            float rotation = glm::mod(nebula_pos.x * 1.37f + nebula_pos.y * 2.71f + v * 59.0f, 360.0f);
             float cos_r = glm::cos(glm::radians(rotation));
             float sin_r = glm::sin(glm::radians(rotation));
 
@@ -299,7 +299,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
 
             glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), volume_color_val, volume_alpha, 0.0f, volume_size);
 
-            auto volume_model = glm::translate(glm::identity<glm::mat4>(), glm::vec3{nebula_pos.x, nebula_pos.y, 0});
+            auto volume_model = glm::identity<glm::mat4>();
             glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(volume_model));
 
             glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)rquad);
@@ -358,7 +358,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
         float color_val = 0.8f;
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), color_val, per_cloud_alpha, 0.0f, cloud.size);
 
-        auto cloud_model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{cloud.offset.x, cloud.offset.y, 0});
+        auto cloud_model_matrix = glm::identity<glm::mat4>();
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(cloud_model_matrix));
 
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)rquad);
