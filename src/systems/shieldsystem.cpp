@@ -54,7 +54,7 @@ void ShieldSystem::update(float delta)
             }
 
             if (shield.hit_effect > 0.0f)
-                shield.hit_effect = std::max(0.0f, shield.hit_effect - delta);
+                shield.hit_effect = std::max(0.0f, shield.hit_effect * expf(-4.0f * delta));
             else
                 shield.hit_effect = 0.0f;
             n++;
@@ -92,10 +92,7 @@ void ShieldSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Shields
     {
         if (shield.hit_effect > 0.0f)
         {
-            // Fade out only in the last 30% of the effect duration
-            // Stays at full brightness until hit_effect < 0.3, then fades linearly
-            auto fade = shield.hit_effect < 0.3f ? shield.hit_effect / 0.3f : 1.0f;
-            auto alpha = (shield.level / shield.max) * fade;
+            auto alpha = (shield.level / shield.max) * shield.hit_effect;
 
             // Use ship geometry with shader-based shell rendering if available
             if (ship_mesh) {
@@ -117,22 +114,12 @@ void ShieldSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Shields
                 auto shellOffsetLoc = shieldShader.get().get()->getUniformLocation("shellOffset");
                 if (shellOffsetLoc != -1) {
                     // Calculate offset based on ship size
-                    float shellOffset = radius * 0.01f / ship_scale;
+                    float shellOffset = radius * 0.02f / ship_scale;
                     glUniform1f(shellOffsetLoc, shellOffset);
                 }
 
                 // Bind shield texture
                 textureManager.getTexture("texture/shield_hit_effect.png")->bind();
-
-                // Save current blend state
-                GLboolean blendWasEnabled = glIsEnabled(GL_BLEND);
-                GLint srcBlend, dstBlend;
-                glGetIntegerv(GL_BLEND_SRC_ALPHA, &srcBlend);
-                glGetIntegerv(GL_BLEND_DST_ALPHA, &dstBlend);
-
-                // Set up alpha blending for transparency
-                glEnable(GL_BLEND);
-                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
                 // Enable polygon offset to prevent z-fighting with ship mesh
                 glEnable(GL_POLYGON_OFFSET_FILL);
@@ -152,13 +139,6 @@ void ShieldSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Shields
                 // Restore OpenGL state
                 glEnable(GL_CULL_FACE);
                 glDisable(GL_POLYGON_OFFSET_FILL);
-
-                // Restore blend state
-                if (blendWasEnabled) {
-                    glBlendFunc(srcBlend, dstBlend);
-                } else {
-                    glDisable(GL_BLEND);
-                }
             } else {
                 // Fallback to sphere rendering with basic shader
                 auto shield_matrix = glm::rotate(model_matrix, glm::radians(angle), glm::vec3(0.f, 0.f, 1.f));
