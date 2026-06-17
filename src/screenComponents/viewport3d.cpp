@@ -385,10 +385,12 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     // Update view matrix in shaders.
     ShaderRegistry::updateProjectionView({}, view_matrix, engine->getElapsedTime());
 
+    RenderSystem::post_opaque_render = [this]() {
+        ParticleEngine::render(this->projection_matrix, this->view_matrix);
+    };
     RenderSystem render_system;
     render_system.render3D(rect.size.x / rect.size.y, camera_fov, projection_type, far_plane);
-
-    ParticleEngine::render(projection_matrix, view_matrix);
+    RenderSystem::post_opaque_render = nullptr;
 
     if (show_spacedust && my_spaceship)
     {

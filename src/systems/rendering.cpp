@@ -12,6 +12,7 @@
 #include <algorithm>
 
 std::vector<RenderSystem::RenderHandler> RenderSystem::render_handlers;
+std::function<void()> RenderSystem::post_opaque_render;
 
 bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target)
 {
@@ -69,11 +70,17 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
         }
     }
 
+    // Sort all render lists back-to-front once
     for(int n=render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
         std::sort(render_list.begin(), render_list.end(), [](const RenderEntry& a, const RenderEntry& b) { return a.depth > b.depth; });
+    }
 
+    // Opaque passes (back to front)
+    for(int n=render_lists.size() - 1; n >= 0; n--)
+    {
+        auto& render_list = render_lists[n];
         glm::mat4 projection;
         if (projection_type == ProjectionType::Orthographic)
         {
@@ -94,6 +101,31 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
         for(auto info : render_list)
             if (!info.transparent)
                 info.call_rif(info.rif, info.entity, *info.transform, info.component_ptr);
+    }
+
+    // Post-opaque render (particles): rendered here so transparent nebula clouds cover them
+    glEnable(GL_BLEND);
+    glDepthMask(false);
+    if (post_opaque_render)
+        post_opaque_render();
+    glDepthMask(true);
+
+    // Transparent passes (back to front)
+    for(int n=render_lists.size() - 1; n >= 0; n--)
+    {
+        auto& render_list = render_lists[n];
+        glm::mat4 projection;
+        if (projection_type == ProjectionType::Orthographic)
+        {
+            float reference_distance = std::max(100.0f, camera_position.z);
+            float height = reference_distance * glm::tan(glm::radians(camera_fov / 2.0f));
+            float width = height * aspect;
+            projection = glm::ortho(-width, width, -height, height, 1.f, far_plane * (n + 1));
+        }
+        else
+            projection = glm::perspective(glm::radians(camera_fov), aspect, 1.f, far_plane * (n + 1));
+        ShaderRegistry::updateProjectionView(projection, {});
+
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
         glDepthMask(false);
