@@ -4,6 +4,7 @@
 #include "components/docking.h"
 #include "components/reactor.h"
 #include "components/scanning.h"
+#include "components/rendering.h"
 #include "ecs/query.h"
 #include "playerInfo.h"
 #include "tween.h"
@@ -74,30 +75,109 @@ void ShieldSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Shields
     auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
     model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
 
-    float angle = 0.0;
+    // Try to get the ship's mesh for shield rendering
+    Mesh* ship_mesh = nullptr;
+    float ship_scale = 1.0f;
+    glm::vec3 ship_offset{};
+    auto mrc = e.getComponent<MeshRenderComponent>();
+    if (mrc) {
+        ship_mesh = mrc->getMesh();
+        ship_scale = mrc->scale;
+        ship_offset = mrc->mesh_offset;
+    }
+
+    float angle = 0.0f;
     float arc = 360.0f / shields.entries.size();
     for(auto& shield : shields.entries)
     {
-        if (shield.hit_effect > 0)
+        if (shield.hit_effect > 0.0f)
         {
-            auto shield_matrix = glm::rotate(model_matrix, glm::radians(angle), glm::vec3(0.f, 0.f, 1.f));
-            shield_matrix = glm::rotate(shield_matrix, glm::radians(engine->getElapsedTime() * 5), glm::vec3(1.f, 0.f, 0.f));
-            shield_matrix = glm::scale(shield_matrix, 1.2f * glm::vec3(radius));
-            auto mesh = shields.entries.size() > 1 ? Mesh::getMesh("mesh/half_sphere.obj") : Mesh::getMesh("mesh/sphere.obj");
-            auto alpha = (shield.level / shield.max) * shield.hit_effect;
+            // Fade out only in the last 30% of the effect duration
+            // Stays at full brightness until hit_effect < 0.3, then fades linearly
+            auto fade = shield.hit_effect < 0.3f ? shield.hit_effect / 0.3f : 1.0f;
+            auto alpha = (shield.level / shield.max) * fade;
 
-            ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+            // Use ship geometry with shader-based shell rendering if available
+            if (ship_mesh) {
+                // Build transformation matrix for ship mesh
+                // Add 180-degree rotation to match ship mesh coordinate system
+                auto shield_matrix = glm::rotate(model_matrix, glm::radians(180.0f), glm::vec3(0.f, 0.f, 1.f));
+                shield_matrix = glm::translate(shield_matrix, ship_offset);
+                shield_matrix = glm::scale(shield_matrix, glm::vec3(ship_scale));
 
-            glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-            glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(shield_matrix));
-            textureManager.getTexture("texture/shield_hit_effect.png")->bind();
+                // Use custom shield shader with vertex displacement
+                ShaderRegistry::ScopedShader shieldShader(ShaderRegistry::Shaders::Shield);
 
-            gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
-            gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-            gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
-            gl::ScopedVertexAttribArray tangents(basicShader.get().attribute(ShaderRegistry::Attributes::Tangent));
+                // Set standard uniforms
+                glUniformMatrix4fv(shieldShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(shield_matrix));
+                glUniform4f(shieldShader.get().uniform(ShaderRegistry::Uniforms::Color), 0.5f, 0.7f, 1.0f, alpha);
+                glUniform3fv(shieldShader.get().uniform(ShaderRegistry::Uniforms::CameraPosition), 1, glm::value_ptr(ShaderRegistry::getActiveCamera()));
 
-            mesh->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
+                // Set shell offset for vertex displacement along normals
+                auto shellOffsetLoc = shieldShader.get().get()->getUniformLocation("shellOffset");
+                if (shellOffsetLoc != -1) {
+                    // Calculate offset based on ship size
+                    float shellOffset = radius * 0.01f / ship_scale;
+                    glUniform1f(shellOffsetLoc, shellOffset);
+                }
+
+                // Bind shield texture
+                textureManager.getTexture("texture/shield_hit_effect.png")->bind();
+
+                // Save current blend state
+                GLboolean blendWasEnabled = glIsEnabled(GL_BLEND);
+                GLint srcBlend, dstBlend;
+                glGetIntegerv(GL_BLEND_SRC_ALPHA, &srcBlend);
+                glGetIntegerv(GL_BLEND_DST_ALPHA, &dstBlend);
+
+                // Set up alpha blending for transparency
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+                // Enable polygon offset to prevent z-fighting with ship mesh
+                glEnable(GL_POLYGON_OFFSET_FILL);
+                glPolygonOffset(-1.0f, -1.0f);
+
+                // Disable backface culling to render a proper shell
+                glDisable(GL_CULL_FACE);
+
+                // Setup vertex attributes and render
+                gl::ScopedVertexAttribArray positions(shieldShader.get().attribute(ShaderRegistry::Attributes::Position));
+                gl::ScopedVertexAttribArray texcoords(shieldShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+                gl::ScopedVertexAttribArray normals(shieldShader.get().attribute(ShaderRegistry::Attributes::Normal));
+                gl::ScopedVertexAttribArray tangents(shieldShader.get().attribute(ShaderRegistry::Attributes::Tangent));
+
+                ship_mesh->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
+
+                // Restore OpenGL state
+                glEnable(GL_CULL_FACE);
+                glDisable(GL_POLYGON_OFFSET_FILL);
+
+                // Restore blend state
+                if (blendWasEnabled) {
+                    glBlendFunc(srcBlend, dstBlend);
+                } else {
+                    glDisable(GL_BLEND);
+                }
+            } else {
+                // Fallback to sphere rendering with basic shader
+                auto shield_matrix = glm::rotate(model_matrix, glm::radians(angle), glm::vec3(0.f, 0.f, 1.f));
+                shield_matrix = glm::scale(shield_matrix, 1.2f * glm::vec3(radius));
+                auto mesh = shields.entries.size() > 1 ? Mesh::getMesh("mesh/half_sphere.obj") : Mesh::getMesh("mesh/sphere.obj");
+
+                ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+
+                glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+                glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(shield_matrix));
+                textureManager.getTexture("texture/shield_hit_effect.png")->bind();
+
+                gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+                gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+                gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
+                gl::ScopedVertexAttribArray tangents(basicShader.get().attribute(ShaderRegistry::Attributes::Tangent));
+
+                mesh->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
+            }
         }
         angle += arc;
     }

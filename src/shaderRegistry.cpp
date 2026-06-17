@@ -36,7 +36,8 @@ namespace ShaderRegistry
             "shaders/objectShader:ILLUMINATION:NORMAL",
             "shaders/objectShader:SPECULAR:NORMAL",
             "shaders/objectShader:ILLUMINATION:SPECULAR:NORMAL",
-            "shaders/planet"
+            "shaders/planet",
+            "shaders/shield"
         };
 
         std::array<const char*, Uniforms_t(Uniforms::Count)> uniform_names{
