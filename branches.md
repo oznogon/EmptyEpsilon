@@ -131,3 +131,5 @@ master 20260612 -- fix-station-database, i18n update
 
 generic-scrolling-container 20260613 -- fix scissor conflict affecting DockingBayScreen
 docking-bay 20260613 -- fix some issues related to berths; berth reordering after window resize is broken, mitigated on the fork with GuiScrollContainer
+
+nebula-rendering 20260616
