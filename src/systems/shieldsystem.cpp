@@ -54,7 +54,7 @@ void ShieldSystem::update(float delta)
             }
 
             if (shield.hit_effect > 0.0f)
-                shield.hit_effect = std::max(0.0f, shield.hit_effect - delta);
+                shield.hit_effect = std::max(0.0f, shield.hit_effect * expf(-4.0f * delta));
             else
                 shield.hit_effect = 0.0f;
             n++;

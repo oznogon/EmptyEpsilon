@@ -41,7 +41,7 @@ void main()
     vec4 baseTexture = texture2D(u_textureMap, v_fragtexcoords.st);
 
     // Consistent bright appearance regardless of viewing angle
-    vec3 finalColor = baseTexture.rgb * u_color.rgb * 1.5;
+    vec3 finalColor = baseTexture.rgb * u_color.rgb * u_color.a * 1.5;
     float finalAlpha = u_color.a * baseTexture.a;
 
     gl_FragColor = vec4(finalColor, finalAlpha);
