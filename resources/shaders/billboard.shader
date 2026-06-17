@@ -41,7 +41,6 @@ void main()
     if (u_fogDistance > 0.0)
     {
         float color_fog = clamp(1.0 - v_distance / u_fogDistance, 0.0, 1.0);
-        gl_FragColor.rgb = mix(u_fogColor, gl_FragColor.rgb, color_fog);
         if (v_distance > 1000.0)
         {
             float alpha_range = max(u_fogDistance - 1000.0, 200.0);
