@@ -19,7 +19,7 @@ AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeContr
     this->missile_aim = missile_aim;
 
     setValue(true);
-    setIcon("gui/icons/lock");
+    setIcon("gui/icons/lock-missile");
 }
 
 void AimLockButton::onUpdate()

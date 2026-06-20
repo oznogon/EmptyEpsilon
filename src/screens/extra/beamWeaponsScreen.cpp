@@ -80,12 +80,11 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
     beam_safety = new GuiToggleButton(beam_controls, "BEAM_SAFETY", tr("Autofire"),
         [this](bool active)
         {
-            if (auto beam_weapon_sys = my_spaceship.getComponent<BeamWeaponSys>())
-                beam_weapon_sys->is_firing_enabled = active;
+            my_player_info->commandSetBeamFiringEnabled(active);
         }
     );
     beam_safety
-        ->setIcon("gui/icons/system_beam")
+        ->setIcon("gui/icons/lock-beams")
         ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
         ->setSize(150.0f, 50.0f);
 

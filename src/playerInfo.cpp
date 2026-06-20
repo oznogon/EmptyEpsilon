@@ -148,6 +148,7 @@ static const uint16_t CMD_SET_COMMS_TARGET = 0x0052;
 static const uint16_t CMD_SET_HACKING_TARGET = 0x0053;
 static const uint16_t CMD_SET_SCAN_TARGET = 0x0054;
 static const uint16_t CMD_SET_UTILITY_BEAM_TARGET = 0x0055;
+static const uint16_t CMD_SET_BEAM_FIRING_ENABLED = 0x0056;
 
 // Science/Target analysis commands
 static const uint16_t CMD_SET_ANALYSIS_TARGET = 0x0040;
@@ -581,6 +582,13 @@ void PlayerInfo::commandSetBeamSystemTarget(ShipSystem::Type system)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_BEAM_SYSTEM_TARGET << system;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetBeamFiringEnabled(bool enabled)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_BEAM_FIRING_ENABLED << enabled;
     sendClientCommand(packet);
 }
 
@@ -1505,6 +1513,14 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             auto beamweapons = ship.getComponent<BeamWeaponSys>();
             if (beamweapons)
                 beamweapons->system_target = (ShipSystem::Type)std::clamp((int)system, -1, (int)(ShipSystem::COUNT - 1));
+        }
+        break;
+    case CMD_SET_BEAM_FIRING_ENABLED:
+        {
+            bool enabled;
+            packet >> enabled;
+            if (auto beamweapons = ship.getComponent<BeamWeaponSys>())
+                beamweapons->is_firing_enabled = enabled;
         }
         break;
     case CMD_SET_SHIELD_FREQUENCY:
