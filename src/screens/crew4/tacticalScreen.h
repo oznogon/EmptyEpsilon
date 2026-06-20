@@ -31,6 +31,7 @@ private:
     AimLock* missile_aim;
     AimLockButton* lock_aim;
     GuiMissileTubeControls* tube_controls;
+    GuiToggleButton* beam_safety;
     GuiElement* beam_info_box;
     GuiSelector* sidebar_selector;
     GuiCustomShipFunctions* custom_function_sidebar;

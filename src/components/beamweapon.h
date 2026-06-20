@@ -40,6 +40,7 @@ public:
     int getFrequency() const { return frequency; }
     void setFrequency(int freq) { frequency = std::clamp(freq, 0, max_frequency); }
     ShipSystem::Type system_target = ShipSystem::Type::None;
+    bool is_firing_enabled = true;
 
     std::vector<MountPoint> mounts;
 };

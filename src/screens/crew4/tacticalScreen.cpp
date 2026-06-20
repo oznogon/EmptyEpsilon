@@ -143,9 +143,27 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     missile_aim = new AimLock(tactical_controls, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
-    missile_aim->hide()->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
+    missile_aim
+        ->hide()
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMatchHeight, 800.0f);
     lock_aim = new AimLockButton(tactical_controls, "LOCK_AIM", tube_controls, missile_aim);
-    lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(110, 50);
+    lock_aim
+        ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
+        ->setSize(150.0f, 50.0f);
+
+    // Beam weapons autofire safety toggle.
+    beam_safety = new GuiToggleButton(tactical_controls, "BEAM_SAFETY", tr("Autofire"),
+        [this](bool active)
+        {
+            if (auto beam_weapon_sys = my_spaceship.getComponent<BeamWeaponSys>())
+                beam_weapon_sys->is_firing_enabled = active;
+        }
+    );
+    beam_safety
+        ->setIcon("gui/icons/system_beam")
+        ->setPosition(250.0f, 70.0f, sp::Alignment::TopCenter)
+        ->setSize(150.0f, 50.0f);
 
     // Combat maneuver and propulsion controls in the bottom right corner.
     (new GuiCombatManeuver(tactical_controls, "COMBAT_MANEUVER"))->setPosition(-20, -390, sp::Alignment::BottomRight)->setSize(200, 150);
@@ -218,6 +236,7 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
+        if (beam_sys) beam_safety->setValue(beam_sys->is_firing_enabled);
         auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
         const bool has_any_ability = my_spaceship.hasComponent<ImpulseEngine>()
             || my_spaceship.hasComponent<JumpDrive>()
@@ -235,11 +254,10 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
 
         warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
         jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
-        beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>() && (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage));
+        beam_info_box->setVisible(beam_sys && (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage));
 
-        const bool has_tubes = my_spaceship.hasComponent<MissileTubes>();
-        lock_aim->setVisible(has_tubes);
-        missile_aim->setVisible(has_tubes && tube_controls->getManualAim());
+        lock_aim->setVisible(missile_tubes);
+        missile_aim->setVisible(missile_tubes && tube_controls->getManualAim());
 
         sp::ecs::Entity target_entity;
         if (auto t = my_spaceship.getComponent<BeamWeaponTarget>()) target_entity = t->entity;

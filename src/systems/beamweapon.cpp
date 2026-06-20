@@ -45,6 +45,7 @@ void BeamWeaponSystem::update(float delta)
             if (mount.cooldown > 0.0f)
                 mount.cooldown -= delta * beamsys.getSystemEffectiveness();
             if (!target_entity) continue;
+            if (!beamsys.is_firing_enabled) continue;
 
             // Check on beam weapons only if we are on the server, have a target, and
             // not paused, and if the beams are cooled down or have a turret arc.

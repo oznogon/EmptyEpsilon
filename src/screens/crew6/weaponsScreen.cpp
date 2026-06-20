@@ -86,14 +86,18 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     missile_aim = new AimLock(weapons_controls, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
-    missile_aim->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 850);
+    missile_aim
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMatchHeight, 850.0f);
 
     tube_controls = new GuiMissileTubeControls(weapons_controls, "MISSILE_TUBES");
     tube_controls->setPosition(20, -20, sp::Alignment::BottomLeft);
     radar->enableTargetProjections(tube_controls);
 
     lock_aim = new AimLockButton(weapons_controls, "LOCK_AIM", tube_controls, missile_aim);
-    lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(130, 50);
+    lock_aim
+        ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
+        ->setSize(150.0f, 50.0f);
 
     beam_info_box = new GuiElement(weapons_controls, "BEAM_INFO_BOX");
     beam_info_box
@@ -117,6 +121,19 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         if (!gameGlobalInfo->use_beam_shield_frequencies)
             beam_info_box->setPosition(-20.0f, -50.0f, sp::Alignment::BottomRight);
     }
+
+    // Beam weapons autofire safety toggle.
+    beam_safety = new GuiToggleButton(weapons_controls, "BEAM_SAFETY", tr("Autofire"),
+        [this](bool active)
+        {
+            if (auto beam_weapon_sys = my_spaceship.getComponent<BeamWeaponSys>())
+                beam_weapon_sys->is_firing_enabled = active;
+        }
+    );
+    beam_safety
+        ->setIcon("gui/icons/system_beam")
+        ->setPosition(250.0f, 70.0f, sp::Alignment::TopCenter)
+        ->setSize(150.0f, 50.0f);
 
     auto stats = new GuiElement(weapons_controls, "WEAPONS_STATS");
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 120)->setAttribute("layout", "vertical");
@@ -199,6 +216,7 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
+        if (beam_sys) beam_safety->setValue(beam_sys->is_firing_enabled);
         auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
         auto shields = my_spaceship.getComponent<Shields>();
         const bool has_any_weapons = (beam_sys && beam_sys->mounts.size() > 0) || (missile_tubes && missile_tubes->mounts.size() > 0);
@@ -212,19 +230,21 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
         auto reactor = my_spaceship.getComponent<Reactor>();
         energy_display->setVisible(reactor);
         if (reactor)
-            energy_display->setValue(string(int(reactor->energy)));
-        if (shields && shields->entries.size() > 0) {
+            energy_display->setValue(string(static_cast<int>(reactor->energy)));
+        if (shields && shields->entries.size() > 0)
+        {
             front_shield_display->setValue(string(shields->entries[0].percentage()) + "%");
             front_shield_display->show();
-        } else {
-            front_shield_display->hide();
         }
-        if (shields && shields->entries.size() > 1) {
+        else front_shield_display->hide();
+
+        if (shields && shields->entries.size() > 1)
+        {
             rear_shield_display->setValue(string(shields->entries[1].percentage()) + "%");
             rear_shield_display->show();
-        } else {
-            rear_shield_display->hide();
         }
+        else rear_shield_display->hide();
+
         sp::ecs::Entity target_entity;
         if (auto t = my_spaceship.getComponent<BeamWeaponTarget>()) target_entity = t->entity;
         else if (auto t = my_spaceship.getComponent<MissileWeaponTarget>()) target_entity = t->entity;
@@ -240,9 +260,8 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
             missile_aim->hide();
         else
             missile_aim->setVisible(has_tubes && tube_controls->getManualAim());
-        if (beam_info_box)
-            beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>());
     }
+
     GuiOverlay::onDraw(renderer);
 }
 

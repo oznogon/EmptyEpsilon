@@ -94,7 +94,7 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
     lock_aim = new AimLockButton(missile_controls, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim
         ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
-        ->setSize(130.0f, 50.0f);
+        ->setSize(150.0f, 50.0f);
 
     auto stats = new GuiElement(missile_controls, "WEAPONS_STATS");
     stats

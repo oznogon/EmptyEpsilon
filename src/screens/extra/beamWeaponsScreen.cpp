@@ -23,6 +23,7 @@
 #include "screenComponents/utilityBeamRotationDial.h"
 
 #include "gui/theme.h"
+#include "gui/gui2_togglebutton.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
@@ -76,23 +77,42 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMatchHeight, 800.0f);
 
+    beam_safety = new GuiToggleButton(beam_controls, "BEAM_SAFETY", tr("Autofire"),
+        [this](bool active)
+        {
+            if (auto beam_weapon_sys = my_spaceship.getComponent<BeamWeaponSys>())
+                beam_weapon_sys->is_firing_enabled = active;
+        }
+    );
+    beam_safety
+        ->setIcon("gui/icons/system_beam")
+        ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
+        ->setSize(150.0f, 50.0f);
+
     beam_info_box = new GuiElement(beam_controls, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(280.0f, 150.0f)
+        ->setSize(280.0f, 230.0f)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam targeting"), 30.0f))
-        ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
-    (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
-    (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
-    (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
-        ->setPosition(0.0f, 50.0f, sp::Alignment::TopLeft);
+    if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
+    {
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam targeting"), 30.0f))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Frequency"), 25.0f))
+            ->setSize(GuiElement::GuiSizeMax, 40.0f);
+        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Target system"), 25.0f))
+            ->setSize(GuiElement::GuiSizeMax, 40.0f);
+        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))
+            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setPosition(0.0f, 50.0f, sp::Alignment::TopLeft);
+    }
 
     auto stats = new GuiElement(beam_controls, "WEAPONS_STATS");
     stats
@@ -100,7 +120,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setSize(240.0f, 120.0f)
         ->setAttribute("layout", "vertical");
 
-    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45f, tr("Energy"), "");
     energy_display
         ->setIcon("gui/icons/energy")
         ->setTextSize(20.0f)
@@ -176,8 +196,9 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto beam_weapon_sys = my_spaceship.getComponent<BeamWeaponSys>();
-        const bool bw = beam_weapon_sys && beam_weapon_sys->mounts.size() > 0;
+        auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
+        if (beam_sys) beam_safety->setValue(beam_sys->is_firing_enabled);
+        const bool bw = beam_sys && beam_sys->mounts.size() > 0;
         background_gradient->setVisible(bw);
         beam_controls->setVisible(bw);
         no_weapons_label->setVisible(!bw);
@@ -187,17 +208,22 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
             return;
         }
 
-        auto reactor = my_spaceship.getComponent<Reactor>();
-        energy_display->setVisible(reactor);
-        if (reactor)
-            energy_display->setValue(string(static_cast<int>(reactor->energy)));
+        if (auto reactor = my_spaceship.getComponent<Reactor>())
+        {
+            energy_display
+                ->setValue(string(static_cast<int>(reactor->energy)))
+                ->setVisible(reactor);
+        }
 
+        // Get the beam weapons target. If none, check for a legacy target.
         if (auto tg = my_spaceship.getComponent<BeamWeaponTarget>())
             targets.set(tg->entity);
         else if (auto tg = my_spaceship.getComponent<Target>())
             targets.set(tg->entity);
         else
             targets.set(sp::ecs::Entity{});
+
+        beam_info_box->setVisible(beam_sys && (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage));
     }
 
     GuiOverlay::onDraw(renderer);
