@@ -1214,7 +1214,7 @@ void ScienceScreen::onUpdate()
     if (science_scanner && science_scanner->delay == 0.0f)
     {
         // Initiate a scan on scannable objects.
-        if (keys.science_scan_object.isDiscreteStepDown() && science_scanner && science_scanner->delay == 0.0f)
+        if (keys.science_scan_object.isDiscreteStepDown() || keys.science_scan_toggle.isDiscreteStepDown())
         {
             auto obj = targets.get();
 
