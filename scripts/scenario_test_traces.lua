@@ -1,3 +1,7 @@
+-- Name: Radar Traces Test
+-- Description: Test scenario for radar trace behaviors
+-- Type: Development
+
 CpuShip():setTemplate('Goods Jump Freighter 5'):setPosition(652, -1630):setRotation(169):setFaction('CUF'):setCallSign('Z20')
 ScanProbe():setPosition(925, 413):setLifetime(600)
 SpaceStation():setTemplate('Huge Station'):setPosition(-1874, 2666):setRotation(301):setFaction('CUF'):setCallSign('DS14')

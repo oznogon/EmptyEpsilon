@@ -1,3 +1,7 @@
+-- Name: Dockign Bay Test
+-- Description: Test scenario for docking bay behaviors
+-- Type: Development
+
 --[[
 entity = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 entity.components.docking_bay = {
