@@ -1,6 +1,7 @@
 #include "systems/pathfinding.h"
 #include "components/avoidobject.h"
 #include "components/collision.h"
+#include "components/hull.h"
 #include "ecs/query.h"
 #include "glm/gtx/norm.hpp"
 #include <math.h>
@@ -28,6 +29,17 @@ void PathFindingSystem::update(float delta)
     big_entities.erase(std::remove_if(big_entities.begin(), big_entities.end(), [](sp::ecs::Entity e) { return !bool(e); } ), big_entities.end());
     for(auto it : small_entities)
         it.second.erase(std::remove_if(it.second.begin(), it.second.end(), [](sp::ecs::Entity e) { return !bool(e); } ), it.second.end());
+
+    // Ensure all entities with a hull and physics body (ships, stations, etc.)
+    // are registered as avoidance obstacles so the AI pathfinder routes around them.
+    for (auto [entity, hull, physics, transform] : sp::ecs::Query<Hull, sp::Physics, sp::Transform>())
+    {
+        if (entity.hasComponent<AvoidObject>())
+            continue;
+        if (physics.getType() == sp::Physics::Type::Sensor)
+            continue;
+        entity.addComponent<AvoidObject>().setRange(physics.getSize().x);
+    }
 
     for(auto [entity, dao] : sp::ecs::Query<DelayedAvoidObject>()) {
         dao.delay -= delta;
@@ -267,7 +279,7 @@ bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_po
         const float range = ao->getRange();
         if (firstAvoidQ.x == position.x && firstAvoidQ.y == position.y)
             firstAvoidQ.x += 0.1f;
-        new_point = position + glm::normalize(firstAvoidQ - position) * (range * 1.1f + my_size);
+        new_point = position + glm::normalize(firstAvoidQ - position) * ((range + my_size) * 1.2f);
         if (alt_point)
             *alt_point = position - glm::normalize(firstAvoidQ - position) * (range * 1.1f + my_size);
         return true;

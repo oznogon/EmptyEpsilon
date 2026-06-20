@@ -404,7 +404,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         auto extra_settings_panel = new GuiPanel(this, "");
         extra_settings_panel
-            ->setSize(600.0f, 375.0f)
+            ->setSize(600.0f, 425.0f)
             ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
             ->hide();
         auto extra_settings = new GuiElement(extra_settings_panel, "");
@@ -432,6 +432,19 @@ ShipSelectionScreen::ShipSelectionScreen()
         (new GuiSelector(row, "GAME_HACKING_GAME", [](int index, string value) {
             gameGlobalInfo->hacking_games = EHackingGames(index);
         }))->setOptions({tr("hacking", "Mine"), tr("hacking", "Lights"), tr("hacking", "All")})->setSelectionIndex((int)gameGlobalInfo->hacking_games)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // Collision damage slider row.
+        row = new GuiElement(extra_settings, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "GAME_COLLISION_DAMAGE_LABEL", tr("Collision damage: "), 30.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(250.0f, GuiElement::GuiSizeMax);
+        (new GuiSlider(row, "GAME_COLLISION_DAMAGE", 0.0f, 0.01f, gameGlobalInfo->collision_damage_factor, [](float value)
+        {
+            gameGlobalInfo->collision_damage_factor = value;
+        }))
+            ->addOverlay(4, 30.0f)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         // Frequency and system damage row.
         row = new GuiElement(extra_settings, "");

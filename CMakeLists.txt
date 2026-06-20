@@ -438,6 +438,8 @@ set(MAIN_SOURCES
     src/systems/probe.cpp
     src/systems/pickup.h
     src/systems/pickup.cpp
+    src/systems/collisionDamage.h
+    src/systems/collisionDamage.cpp
     src/systems/basicmovement.h
     src/systems/basicmovement.cpp
     src/systems/gravity.h
