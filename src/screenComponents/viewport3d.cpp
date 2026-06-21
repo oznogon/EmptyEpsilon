@@ -538,6 +538,13 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         {
             if (entity == my_spaceship)
                 continue;
+            // Skip callsigns of entities radar-obscured by nebula.
+            if (!entity.hasComponent<NeverRadarBlocked>()
+                && !entity.hasComponent<RadarBlock>()
+                && RenderSystem::isOccludedByNebula(glm::vec2(camera_position.x, camera_position.y), transform.getPosition()))
+            {
+                continue;
+            }
             float radius = 300.0f;
             if (auto physics = entity.getComponent<sp::Physics>())
                 radius = std::min(physics->getSize().x, physics->getSize().y);
