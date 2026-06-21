@@ -57,7 +57,6 @@ void ScanningSystem::scanningFinished(sp::ecs::Entity command_source)
             LuaConsole::checkResult(ss->on_scan_completed.call<void>(scanner->target, command_source, scanner->source));
     }
 
-    scanner->target = {};
     scanner->source = {};
     scanner->delay = 0.0f;
 }

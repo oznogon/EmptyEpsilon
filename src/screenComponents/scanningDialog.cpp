@@ -206,12 +206,12 @@ void GuiScanningDialog::updateSignal()
         }
     }
 
-    // Lock scan when all three waveform properties are < 5% from target.
+    // Lock scan when all 3 waveform properties are default < 5% from target.
     // Check for a lock only if there are visible sliders (a scan is active).
     if (visible_slider_count > 0
-        && noise < 0.05f
-        && period < 0.05f
-        && phase < 0.05f)
+        && noise < lock_range
+        && period < lock_range
+        && phase < lock_range)
     {
         const float elapsed_time = engine->getElapsedTime();
 
@@ -240,6 +240,26 @@ void GuiScanningDialog::updateSignal()
     signal_quality->setNoiseError(noise);
     signal_quality->setPeriodError(period);
     signal_quality->setPhaseError(phase);
+}
+
+void GuiScanningDialog::setLockDelay(float delay)
+{
+    lock_delay = std::max(0.0f, delay);
+}
+
+float GuiScanningDialog::getLockDelay()
+{
+    return lock_delay;
+}
+
+void GuiScanningDialog::setLockRange(float range)
+{
+    lock_range = std::max(0.0f, range);
+}
+
+float GuiScanningDialog::getLockRange()
+{
+    return lock_range;
 }
 
 std::pair<int, int> GuiScanningDialog::getScanComplexityDepth()

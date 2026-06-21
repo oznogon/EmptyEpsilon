@@ -5020,7 +5020,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(ship_systems_group);
 
     ADD_PAGE(tr("tweak-tab", "Sensors system"), SensorsSystem);
-    new_page->description = tr("tweak-sensors-system", "Ship system for the sensors array. Affects drone control range, energy consumption, and the short-range radar coverage of scan probes owned by this ship, all based on system health.");
+    new_page->description = tr("tweak-sensors-system", "Ship system for the sensors array. Affects drone control range and energy consumption, the short- and long-range radar range of this ship, the short-range radar coverage of scan probes owned by this ship, and the lock range and lock delay of the science scanning dialog, all based on system health.");
     ADD_SHIP_SYSTEM_TWEAK(SensorsSystem);
     addPageToGroup(ship_systems_group);
 

@@ -15,6 +15,7 @@ class GuiListbox;
 class GuiRadarView;
 class GuiRadarZoomSlider;
 class GuiScanTargetButton;
+class GuiScanningDialog;
 class GuiScrollContainer;
 class GuiScrollFormattedText;
 class GuiSelector;
@@ -80,6 +81,7 @@ public:
 
     GuiToggleButton* probe_view_button;
     GuiLabel* no_radar_label;
+    GuiScanningDialog* scanning_dialog;
     sp::ecs::Entity observation_point;
     sp::ecs::Entity target_entity;
     GuiListbox* view_mode_selection;

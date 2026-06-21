@@ -13,7 +13,6 @@ class GuiScanningDialog : public GuiElement
 {
 private:
     static constexpr int MAX_SLIDERS = 4;
-    float lock_delay = 2.0f;
 
     GuiPanel* box;
     GuiLabel* signal_label;
@@ -25,6 +24,8 @@ private:
     float target[MAX_SLIDERS];
     bool locked = false;
     float lock_start_time = 0.0f;
+    float lock_delay = 2.0f;
+    float lock_range = 0.05f;
     int scan_depth = 0;
     std::array<bool, MAX_SLIDERS> set_active = {false, false, false, false};
     std::pair<int, int> getScanComplexityDepth();
@@ -38,4 +39,6 @@ public:
     void updateSignal();
     void setLockDelay(float delay);
     float getLockDelay();
+    void setLockRange(float range);
+    float getLockRange();
 };

@@ -10,9 +10,11 @@
 #include "components/utilityBeam.h"
 #include "components/hull.h"
 #include "components/jumpdrive.h"
+#include "components/radar.h"
 #include "components/shields.h"
 #include "components/impulse.h"
 #include "components/maneuveringthrusters.h"
+#include "components/probe.h"
 #include "components/selfdestruct.h"
 
 #include "screenComponents/shipInternalView.h"
@@ -515,9 +517,9 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                             // Add damage negation/vulnerability rate effect.
                             const float damage_negate = 1.0f - shields->getDamageFactor(shield_index);
                             if (damage_negate < 0.0f)
-                                addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100.0f) + "%");
+                                addSystemEffect(tr("Extra damage taken"), toNearbyIntString(-damage_negate * 100.0f) + "%");
                             else
-                                addSystemEffect(tr("Damage negate"), toNearbyIntString(damage_negate * 100.0f) + "%");
+                                addSystemEffect(tr("Damage negated"), toNearbyIntString(damage_negate * 100.0f) + "%");
                         }
                     }
                     break;
@@ -525,7 +527,30 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     addSystemEffect(tr("docking", "Docking bay effectiveness"), toNearbyIntString(effectiveness * 100.0f) + "%");
                     break;
                 case ShipSystem::Type::Sensors:
-                    addSystemEffect(tr("docking", "Drone control range"), toNearbyIntString(effectiveness * 100.0f) + "%");
+                    {
+                        // Show drone control range only if DroneController
+                        // component is present.
+                        if (auto dc = my_spaceship.getComponent<DroneController>())
+                        {
+                            const float drone_control_range = dc->control_range;
+                            addSystemEffect(tr("sensors", "Drone control range"), string(drone_control_range * effectiveness / 1000.0f, 1) + "U");
+                        }
+
+                        if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
+                        {
+                            addSystemEffect(tr("sensors", "Short-range radar range"), string(sensorsScaleShortRange(lrr->short_range, effectiveness) / 1000.0f, 1) + "U");
+                            addSystemEffect(tr("sensors", "Long-range radar range"), string(sensorsScaleLongRange(lrr->long_range, effectiveness) / 1000.0f, 1) + "U");
+                        }
+
+                        if (my_spaceship.hasComponent<ScanProbeLauncher>())
+                            addSystemEffect(tr("sensors", "Probe radar range"), string(sensorsScaleShortRange(5000.0f, effectiveness) / 1000.0f, 1) + "U");
+
+                        addSystemEffect(tr("sensors", "Scan lock sensitivity"), toNearbyIntString(effectiveness * 100.0f) + "%");
+                        {
+                            string delay_str = effectiveness > 0.01f ? string(2.0f / effectiveness, 1) : string("∞");
+                            addSystemEffect(tr("sensors", "Scan lock delay"), tr("sensors", "{delay} sec.").format({{"delay", delay_str}}));
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -542,167 +567,165 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
 
 void EngineeringScreen::onUpdate()
 {
-    if (my_spaceship && isVisible())
+    if (!my_spaceship || !isVisible()) return;
+    auto reactor = my_spaceship.getComponent<Reactor>();
+    auto coolant = my_spaceship.getComponent<Coolant>();
+    for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        auto reactor = my_spaceship.getComponent<Reactor>();
-        auto coolant = my_spaceship.getComponent<Coolant>();
-        for (int n = 0; n < ShipSystem::COUNT; n++)
+        if (keys.engineering_select_system[n].isDiscreteStepDown()) selectSystem(static_cast<ShipSystem::Type>(n));
+
+        float set_value = keys.engineering_set_power_for_system[n].getAxis0Value() * 3.0f;
+        auto sys = ShipSystem::get(my_spaceship, static_cast<ShipSystem::Type>(n));
+
+        // Set system power request.
+        if (sys && set_value != sys->power_request && (set_value != 0.0f || set_power_active[n]))
         {
-            if (keys.engineering_select_system[n].isDiscreteStepDown()) selectSystem(static_cast<ShipSystem::Type>(n));
+            // Cap set_value to 100% if the ship lacks both Reactor and
+            // Coolant components. Otherwise, overpowering the system is
+            // free. In this situation there's also no benefit to
+            // underpowering the system, but some scenarios still use power
+            // assignment as a feature.
+            if (!reactor && !coolant) set_value = std::clamp(set_value, 0.0f, 1.0f);
 
-            float set_value = keys.engineering_set_power_for_system[n].getAxis0Value() * 3.0f;
-            auto sys = ShipSystem::get(my_spaceship, static_cast<ShipSystem::Type>(n));
-
-            // Set system power request.
-            if (sys && set_value != sys->power_request && (set_value != 0.0f || set_power_active[n]))
+            // Set the system power request.
+            my_player_info->commandSetSystemPowerRequest(static_cast<ShipSystem::Type>(n), set_value);
+            // Make sure the next update is sent, even if it is back to zero.
+            set_power_active[n] = set_value != 0.0f;
+        }
+        float axis1_value = keys.engineering_set_power_for_system[n].getAxis1Value();
+        if (sys && (axis1_value != 0.0f || set_power_axis1_active[n]))
+        {
+            float axis1_set = (axis1_value + 1.0f) / 2.0f * 3.0f;
+            if (axis1_set != sys->power_request)
+                my_player_info->commandSetSystemPowerRequest(static_cast<ShipSystem::Type>(n), axis1_set);
+            set_power_axis1_active[n] = axis1_value != 0.0f;
+        }
+        if (coolant) {
+            set_value = keys.engineering_set_coolant_for_system[n].getAxis0Value() * coolant->max_coolant_per_system;
+            if (sys && set_value != sys->coolant_request && (set_value != 0.0f || set_coolant_active[n]))
             {
-                // Cap set_value to 100% if the ship lacks both Reactor and
-                // Coolant components. Otherwise, overpowering the system is
-                // free. In this situation there's also no benefit to
-                // underpowering the system, but some scenarios still use power
-                // assignment as a feature.
-                if (!reactor && !coolant) set_value = std::clamp(set_value, 0.0f, 1.0f);
-
-                // Set the system power request.
-                my_player_info->commandSetSystemPowerRequest(static_cast<ShipSystem::Type>(n), set_value);
+                my_player_info->commandSetSystemCoolantRequest(static_cast<ShipSystem::Type>(n), set_value);
                 // Make sure the next update is sent, even if it is back to zero.
-                set_power_active[n] = set_value != 0.0f;
-            }
-            float axis1_value = keys.engineering_set_power_for_system[n].getAxis1Value();
-            if (sys && (axis1_value != 0.0f || set_power_axis1_active[n]))
-            {
-                float axis1_set = (axis1_value + 1.0f) / 2.0f * 3.0f;
-                if (axis1_set != sys->power_request)
-                    my_player_info->commandSetSystemPowerRequest(static_cast<ShipSystem::Type>(n), axis1_set);
-                set_power_axis1_active[n] = axis1_value != 0.0f;
-            }
-            if (coolant) {
-                set_value = keys.engineering_set_coolant_for_system[n].getAxis0Value() * coolant->max_coolant_per_system;
-                if (sys && set_value != sys->coolant_request && (set_value != 0.0f || set_coolant_active[n]))
-                {
-                    my_player_info->commandSetSystemCoolantRequest(static_cast<ShipSystem::Type>(n), set_value);
-                    // Make sure the next update is sent, even if it is back to zero.
-                    set_coolant_active[n] = set_value != 0.0f;
-                }
+                set_coolant_active[n] = set_value != 0.0f;
             }
         }
+    }
 
-        int navigate_system = keys.engineering_select_system_next.isDiscreteStepDown() - keys.engineering_select_system_prev.isDiscreteStepDown(); // +1 or -1
-        select_system_accum += (keys.engineering_select_system_next.getContinuousValue() - keys.engineering_select_system_prev.getContinuousValue()) * 0.1f;
-        if (select_system_accum >= 1.0f) { navigate_system++; select_system_accum -= 1.0f; }
-        else if (select_system_accum <= -1.0f) { navigate_system--; select_system_accum += 1.0f; }
-        if (navigate_system)
+    int navigate_system = keys.engineering_select_system_next.isDiscreteStepDown() - keys.engineering_select_system_prev.isDiscreteStepDown(); // +1 or -1
+    select_system_accum += (keys.engineering_select_system_next.getContinuousValue() - keys.engineering_select_system_prev.getContinuousValue()) * 0.1f;
+    if (select_system_accum >= 1.0f) { navigate_system++; select_system_accum -= 1.0f; }
+    else if (select_system_accum <= -1.0f) { navigate_system--; select_system_accum += 1.0f; }
+    if (navigate_system)
+    {
+        int n = static_cast<int>(selected_system);
+        ShipSystem::Type sys = ShipSystem::Type::None;
+        do
         {
-            int n = static_cast<int>(selected_system);
-            ShipSystem::Type sys = ShipSystem::Type::None;
-            do
-            {
-                n = (n + navigate_system) % ShipSystem::COUNT;
-                if (n < 0) n = ShipSystem::COUNT -1;
-                sys = static_cast<ShipSystem::Type>(n);
-            } while (ShipSystem::get(my_spaceship, sys) == nullptr); // endless loop if ship does not have any system!
-            selectSystem(sys);
+            n = (n + navigate_system) % ShipSystem::COUNT;
+            if (n < 0) n = ShipSystem::COUNT -1;
+            sys = static_cast<ShipSystem::Type>(n);
+        } while (ShipSystem::get(my_spaceship, sys) == nullptr); // endless loop if ship does not have any system!
+        selectSystem(sys);
+    }
+
+    if (selected_system != ShipSystem::Type::None)
+    {
+        // Note the code duplication with extra/powerManagement
+        if (keys.engineering_set_power_000.isDiscreteStepDown())
+        {
+            power_slider->setValue(0.0f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_030.isDiscreteStepDown())
+        {
+            power_slider->setValue(0.3f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_050.isDiscreteStepDown())
+        {
+            power_slider->setValue(0.5f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_100.isDiscreteStepDown())
+        {
+            power_slider->setValue(1.0f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_150.isDiscreteStepDown())
+        {
+            power_slider->setValue(1.5f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_200.isDiscreteStepDown())
+        {
+            power_slider->setValue(2.0f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_250.isDiscreteStepDown())
+        {
+            power_slider->setValue(2.5f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_300.isDiscreteStepDown())
+        {
+            power_slider->setValue(3.0f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
         }
 
-        if (selected_system != ShipSystem::Type::None)
+        auto power_adjust = (keys.engineering_increase_power.getContinuousValue() + keys.engineering_increase_power.getAxis0Value() + keys.engineering_increase_power.getAxis1Value()
+            - keys.engineering_decrease_power.getContinuousValue() - keys.engineering_decrease_power.getAxis0Value() - keys.engineering_decrease_power.getAxis1Value()) * 0.1f;
+        if (keys.engineering_increase_power.isDiscreteStepDown() || keys.engineering_increase_power.isRepeatReady()) power_adjust += 0.1f;
+        if (keys.engineering_decrease_power.isDiscreteStepDown() || keys.engineering_decrease_power.isRepeatReady()) power_adjust -= 0.1f;
+        if (power_adjust != 0.0f)
         {
-            // Note the code duplication with extra/powerManagement
-            if (keys.engineering_set_power_000.isDiscreteStepDown())
-            {
-                power_slider->setValue(0.0f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_030.isDiscreteStepDown())
-            {
-                power_slider->setValue(0.3f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_050.isDiscreteStepDown())
-            {
-                power_slider->setValue(0.5f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_100.isDiscreteStepDown())
-            {
-                power_slider->setValue(1.0f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_150.isDiscreteStepDown())
-            {
-                power_slider->setValue(1.5f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_200.isDiscreteStepDown())
-            {
-                power_slider->setValue(2.0f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_250.isDiscreteStepDown())
-            {
-                power_slider->setValue(2.5f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_300.isDiscreteStepDown())
-            {
-                power_slider->setValue(3.0f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-
-            auto power_adjust = (keys.engineering_increase_power.getContinuousValue() + keys.engineering_increase_power.getAxis0Value() + keys.engineering_increase_power.getAxis1Value()
-                - keys.engineering_decrease_power.getContinuousValue() - keys.engineering_decrease_power.getAxis0Value() - keys.engineering_decrease_power.getAxis1Value()) * 0.1f;
-            if (keys.engineering_increase_power.isDiscreteStepDown() || keys.engineering_increase_power.isRepeatReady()) power_adjust += 0.1f;
-            if (keys.engineering_decrease_power.isDiscreteStepDown() || keys.engineering_decrease_power.isRepeatReady()) power_adjust -= 0.1f;
-            if (power_adjust != 0.0f)
-            {
-                auto sys = ShipSystem::get(my_spaceship, selected_system);
-                if (sys) {
-                    power_slider->setValue(sys->power_request + power_adjust);
-                    my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-                }
-            }
-            auto coolant_adjust = (keys.engineering_increase_coolant.getContinuousValue() + keys.engineering_increase_coolant.getAxis0Value()
-                - keys.engineering_decrease_coolant.getContinuousValue() - keys.engineering_decrease_coolant.getAxis0Value()) * 0.5f;
-            if (keys.engineering_increase_coolant.isDiscreteStepDown() || keys.engineering_increase_coolant.isRepeatReady()) coolant_adjust += 0.5f;
-            if (keys.engineering_decrease_coolant.isDiscreteStepDown() || keys.engineering_decrease_coolant.isRepeatReady()) coolant_adjust -= 0.5f;
-            if (coolant_adjust != 0.0f)
-            {
-                auto sys = ShipSystem::get(my_spaceship, selected_system);
-                if (sys) {
-                    coolant_slider->setValue(sys->coolant_request + coolant_adjust);
-                    my_player_info->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
-                }
-            }
-
-            float set_value = keys.engineering_set_power.getAxis0Value() * 3.0f;
             auto sys = ShipSystem::get(my_spaceship, selected_system);
-            if (sys && set_value != sys->power_request && (set_value != 0.0f || set_power_active[static_cast<int>(selected_system)]))
-            {
-                my_player_info->commandSetSystemPowerRequest(selected_system, set_value);
-                set_power_active[static_cast<int>(selected_system)] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+            if (sys) {
+                power_slider->setValue(sys->power_request + power_adjust);
+                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            float axis1_value = keys.engineering_set_power.getAxis1Value();
-            if (sys && (axis1_value != 0.0f || set_power_axis1_active[static_cast<int>(selected_system)]))
-            {
-                float axis1_set = (axis1_value + 1.0f) / 2.0f * 3.0f;
-                if (axis1_set != sys->power_request)
-                    my_player_info->commandSetSystemPowerRequest(selected_system, axis1_set);
-                set_power_axis1_active[static_cast<int>(selected_system)] = axis1_value != 0.0f;
+        }
+        auto coolant_adjust = (keys.engineering_increase_coolant.getContinuousValue() + keys.engineering_increase_coolant.getAxis0Value()
+            - keys.engineering_decrease_coolant.getContinuousValue() - keys.engineering_decrease_coolant.getAxis0Value()) * 0.5f;
+        if (keys.engineering_increase_coolant.isDiscreteStepDown() || keys.engineering_increase_coolant.isRepeatReady()) coolant_adjust += 0.5f;
+        if (keys.engineering_decrease_coolant.isDiscreteStepDown() || keys.engineering_decrease_coolant.isRepeatReady()) coolant_adjust -= 0.5f;
+        if (coolant_adjust != 0.0f)
+        {
+            auto sys = ShipSystem::get(my_spaceship, selected_system);
+            if (sys) {
+                coolant_slider->setValue(sys->coolant_request + coolant_adjust);
+                my_player_info->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
             }
-            if (coolant && sys) {
-                set_value = keys.engineering_set_coolant.getAxis0Value() * coolant->max_coolant_per_system;
-                if (set_value != sys->coolant_request && (set_value != 0.0f || set_coolant_active[static_cast<int>(selected_system)]))
-                {
-                    my_player_info->commandSetSystemCoolantRequest(selected_system, set_value);
-                    set_coolant_active[static_cast<int>(selected_system)] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
-                }
-                float axis1_coolant_value = keys.engineering_set_coolant.getAxis1Value();
-                if (axis1_coolant_value != 0.0f || set_coolant_axis1_active)
-                {
-                    float axis1_coolant_set = (axis1_coolant_value + 1.0f) / 2.0f * coolant->max_coolant_per_system;
-                    if (axis1_coolant_set != sys->coolant_request)
-                        my_player_info->commandSetSystemCoolantRequest(selected_system, axis1_coolant_set);
-                    set_coolant_axis1_active = axis1_coolant_value != 0.0f;
-                }
+        }
+
+        float set_value = keys.engineering_set_power.getAxis0Value() * 3.0f;
+        auto sys = ShipSystem::get(my_spaceship, selected_system);
+        if (sys && set_value != sys->power_request && (set_value != 0.0f || set_power_active[static_cast<int>(selected_system)]))
+        {
+            my_player_info->commandSetSystemPowerRequest(selected_system, set_value);
+            set_power_active[static_cast<int>(selected_system)] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+        }
+        float axis1_value = keys.engineering_set_power.getAxis1Value();
+        if (sys && (axis1_value != 0.0f || set_power_axis1_active[static_cast<int>(selected_system)]))
+        {
+            float axis1_set = (axis1_value + 1.0f) / 2.0f * 3.0f;
+            if (axis1_set != sys->power_request)
+                my_player_info->commandSetSystemPowerRequest(selected_system, axis1_set);
+            set_power_axis1_active[static_cast<int>(selected_system)] = axis1_value != 0.0f;
+        }
+        if (coolant && sys) {
+            set_value = keys.engineering_set_coolant.getAxis0Value() * coolant->max_coolant_per_system;
+            if (set_value != sys->coolant_request && (set_value != 0.0f || set_coolant_active[static_cast<int>(selected_system)]))
+            {
+                my_player_info->commandSetSystemCoolantRequest(selected_system, set_value);
+                set_coolant_active[static_cast<int>(selected_system)] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+            }
+            float axis1_coolant_value = keys.engineering_set_coolant.getAxis1Value();
+            if (axis1_coolant_value != 0.0f || set_coolant_axis1_active)
+            {
+                float axis1_coolant_set = (axis1_coolant_value + 1.0f) / 2.0f * coolant->max_coolant_per_system;
+                if (axis1_coolant_set != sys->coolant_request)
+                    my_player_info->commandSetSystemCoolantRequest(selected_system, axis1_coolant_set);
+                set_coolant_axis1_active = axis1_coolant_value != 0.0f;
             }
         }
     }

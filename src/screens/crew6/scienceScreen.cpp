@@ -486,7 +486,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setSize(200.0f, 100.0f);
 
     // Scanning dialog.
-    new GuiScanningDialog(this, "SCANNING_DIALOG");
+    scanning_dialog = new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
 
 static float calculateSignalError(float signal)
@@ -524,6 +524,21 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             float eff = sensors->getSystemEffectiveness();
             effective_short_range = sensorsScaleShortRange(effective_short_range, eff);
             effective_long_range = sensorsScaleLongRange(effective_long_range, eff);
+        }
+    }
+
+    // Scale the scan dialog's lock tolerance and lock delay by the ship's
+    // Sensors system effectiveness: higher effectiveness widens the tolerance
+    // and shortens the wait, lower effectiveness tightens it and lengthens it.
+    if (scanning_dialog)
+    {
+        if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+        {
+            constexpr float base_lock_range = 0.05f;
+            constexpr float base_lock_delay = 2.0f;
+            float eff = sensors->getSystemEffectiveness();
+            scanning_dialog->setLockRange(base_lock_range * eff);
+            scanning_dialog->setLockDelay(base_lock_delay / std::max(0.01f, eff));
         }
     }
 
