@@ -50,13 +50,7 @@ static bool isVisibleOnRelay(sp::ecs::Entity entity)
     {
         if (Faction::getRelation(my_spaceship, e) != FactionRelation::Friendly)
             continue;
-        float r = 5000.0f;
-        if (auto lrr = e.getComponent<LongRangeRadar>())
-        {
-            r = lrr->short_range;
-            if (auto sensors = e.getComponent<SensorsSystem>())
-                r = sensorsScaleShortRange(r, sensors->getSystemEffectiveness());
-        }
+        float r = getEffectiveShortRangeRadarRange(e);
         if (glm::length2(transform.getPosition() - target_transform->getPosition()) < r * r)
             return true;
     }
@@ -361,9 +355,10 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
                 if (Faction::getRelation(my_spaceship, entity) != FactionRelation::Friendly)
                     continue;
 
-                // Set the targetable radius to getShortRangeRadarRange() if the
-                // object's a ShipTemplateBasedObject. Otherwise, default to 5U.
-                float r = entity.getComponent<LongRangeRadar>() ? entity.getComponent<LongRangeRadar>()->short_range : 5000.0f;
+                // Set the targetable radius to the entity's effective
+                // short-range radar range, which scales by Sensors power and
+                // falls back to the owner's Sensors for scan probes.
+                float r = getEffectiveShortRangeRadarRange(entity);
 
                 // If the target is within the short-range radar range/5U of the
                 // object, consider it near a friendly object.

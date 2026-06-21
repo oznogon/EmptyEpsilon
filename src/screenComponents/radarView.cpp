@@ -303,17 +303,8 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
         {
             if (Faction::getRelation(my_spaceship, entity) != FactionRelation::Friendly)
                 continue;
-            if (auto lrr = entity.getComponent<LongRangeRadar>())
-            {
-                auto short_range = lrr->short_range;
-                if (auto sensors = entity.getComponent<SensorsSystem>())
-                    short_range = sensorsScaleShortRange(short_range, sensors->getSystemEffectiveness());
-                auto r = short_range * scale;
-                renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
-            } else {
-                auto r = 5000.f * scale;
-                renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
-            }
+            auto r = getEffectiveShortRangeRadarRange(entity) * scale;
+            renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
         }
     }
 }
@@ -788,9 +779,10 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
             if (Faction::getRelation(my_spaceship, entity) != FactionRelation::Friendly)
                 continue;
 
-            // Set the radius to reveal as getShortRangeRadarRange() if the
-            // object's a ShipTemplateBasedObject. Otherwise, default to 5U.
-            float r = entity.getComponent<LongRangeRadar>() ? entity.getComponent<LongRangeRadar>()->short_range : 5000.0f;
+            // Set the radius to reveal as the entity's effective short-range
+            // radar range (scaled by its Sensors system, or its owner's Sensors
+            // system for entities without a LongRangeRadar such as scan probes).
+            float r = getEffectiveShortRangeRadarRange(entity);
 
             // Query for objects within short-range radar/5U of this object.
             auto position = transform.getPosition();
