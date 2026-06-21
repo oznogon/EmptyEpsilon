@@ -1,5 +1,4 @@
-#ifndef SCANNING_DIALOG_H
-#define SCANNING_DIALOG_H
+#pragma once
 
 #include "gui/gui2_element.h"
 #include "signalQualityIndicator.h"
@@ -13,21 +12,21 @@ class GuiButton;
 class GuiScanningDialog : public GuiElement
 {
 private:
-    static constexpr int max_sliders = 4;
-    static constexpr float lock_delay = 2.0f;
+    static constexpr int MAX_SLIDERS = 4;
+    float lock_delay = 2.0f;
 
     GuiPanel* box;
     GuiLabel* signal_label;
     GuiLabel* locked_label;
     GuiSignalQualityIndicator* signal_quality;
-    GuiSlider* sliders[max_sliders];
+    GuiSlider* sliders[MAX_SLIDERS];
     GuiButton* cancel_button;
 
-    float target[max_sliders];
+    float target[MAX_SLIDERS];
     bool locked = false;
     float lock_start_time = 0.0f;
     int scan_depth = 0;
-    std::array<bool, max_sliders> set_active = {false, false, false, false};
+    std::array<bool, MAX_SLIDERS> set_active = {false, false, false, false};
     std::pair<int, int> getScanComplexityDepth();
 public:
     GuiScanningDialog(GuiContainer* owner, string id);
@@ -37,6 +36,6 @@ public:
 
     void setupParameters();
     void updateSignal();
+    void setLockDelay(float delay);
+    float getLockDelay();
 };
-
-#endif//SCANNING_DIALOG_H
