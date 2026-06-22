@@ -49,5 +49,6 @@ _build*/
 cmake/_win32/
 cmake/android/
 script_docs/__pycache__/
+packs/__pycache__/
 # clangd cache
 .cache/
