@@ -24,6 +24,7 @@ uniform sampler2D u_textureMap;
 uniform vec3 u_fogColor;
 uniform float u_fogDistance;
 uniform float u_time;
+uniform float u_lightIntensity;
 
 varying vec4 v_color;
 varying vec2 v_texcoords;
@@ -36,7 +37,9 @@ void main()
         discard;
     float near_fade = clamp(v_distance / 400.0, 0.0, 1.0);
     float alpha = tex.a * u_color.g * near_fade;
-    gl_FragColor = vec4(tex.rgb * u_color.r * (tex.a * near_fade), alpha);
+    vec3 light_color = u_lightIntensity * vec3(1.0, 1.0, 1.0);
+    vec3 final_rgb = tex.rgb * (u_color.r + u_lightIntensity * 0.5) * (tex.a * near_fade);
+    gl_FragColor = vec4(final_rgb, alpha);
 
     if (u_fogDistance > 0.0)
     {
@@ -45,6 +48,7 @@ void main()
         {
             float alpha_range = max(u_fogDistance - 1000.0, 200.0);
             float alpha_factor = clamp(1.0 - (v_distance - 1000.0) / alpha_range, 0.0, 1.0);
+            alpha_factor = mix(alpha_factor, 1.0, u_lightIntensity);
             gl_FragColor.a *= alpha_factor;
         }
     }

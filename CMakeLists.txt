@@ -231,6 +231,7 @@ set(MAIN_SOURCES
     src/preferenceManager.cpp
     src/epsilonServer.cpp
     src/particleEffect.cpp
+    src/dynamicLight.cpp
     src/httpScriptAccess.cpp
     src/prometheusMetrics.cpp
     src/packResourceProvider.cpp

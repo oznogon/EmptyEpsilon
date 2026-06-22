@@ -9,6 +9,7 @@
 #include "tween.h"
 #include "random.h"
 #include "components/maneuveringthrusters.h"
+#include "dynamicLight.h"
 #include <algorithm>
 
 std::vector<RenderSystem::RenderHandler> RenderSystem::render_handlers;
@@ -301,6 +302,22 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
 
+    // Dynamic lights for nebula cloud illumination.
+    const auto& lights = DynamicLightManager::getLights();
+    auto computeLight = [&](const glm::vec3& point) -> float {
+        float total = 0.0f;
+        for (const auto& light : lights)
+        {
+            float dist = glm::length(point - light.position);
+            if (dist < light.radius)
+            {
+                float atten = 1.0f - dist / light.radius;
+                total += light.intensity * atten * atten;
+            }
+        }
+        return std::min(total, 1.0f);
+    };
+
     struct VertexAndTexCoords
     {
         glm::vec3 vertex;
@@ -321,7 +338,8 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     // Render fog volume billboards when camera is near or inside the nebula
     if (shell_alpha > 0.001f)
     {
-        float volume_color_val = 0.25f;
+        float center_light = computeLight(glm::vec3(nebula_pos, 0.0f));
+        float volume_color_val = 0.25f + center_light * 0.5f;
         for (int v = 0; v < 6; v++)
         {
             int tex_idx = v % nr.clouds.size();
@@ -353,6 +371,10 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
             }
 
             glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), volume_color_val, volume_alpha, 0.0f, volume_size);
+            {
+                auto loc = shader.get().get()->getUniformLocation("u_lightIntensity");
+                if (loc != -1) glUniform1f(loc, center_light);
+            }
 
             auto volume_model = glm::identity<glm::mat4>();
             glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(volume_model));
@@ -410,8 +432,13 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-        float color_val = 0.8f;
+        float cloud_light = computeLight(cloud_pos);
+        float color_val = std::min(0.8f + cloud_light * 0.3f, 1.0f);
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), color_val, per_cloud_alpha, 0.0f, cloud.size);
+        {
+            auto loc = shader.get().get()->getUniformLocation("u_lightIntensity");
+            if (loc != -1) glUniform1f(loc, cloud_light);
+        }
 
         auto cloud_model_matrix = glm::identity<glm::mat4>();
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(cloud_model_matrix));
