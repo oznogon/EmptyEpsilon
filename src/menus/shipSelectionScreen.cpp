@@ -439,11 +439,19 @@ ShipSelectionScreen::ShipSelectionScreen()
         (new GuiLabel(row, "GAME_COLLISION_DAMAGE_LABEL", tr("Collision damage: "), 30.0f))
             ->setAlignment(sp::Alignment::CenterRight)
             ->setSize(250.0f, GuiElement::GuiSizeMax);
-        (new GuiSlider(row, "GAME_COLLISION_DAMAGE", 0.0f, 0.01f, gameGlobalInfo->collision_damage_factor, [](float value)
-        {
-            gameGlobalInfo->collision_damage_factor = value;
-        }))
-            ->addOverlay(4, 30.0f)
+        (new GuiSelector(row, "GAME_COLLISION_DAMAGE",
+            [](int index, string value)
+            {
+                gameGlobalInfo->collision_damage_factor = index * index * 0.001f;
+            }
+        ))
+            ->setOptions({
+                tr("Off"),
+                tr("Minor"),
+                tr("Dangerous"),
+                tr("Lethal")
+            })
+            ->setSelectionIndex(0)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         // Frequency and system damage row.
