@@ -303,11 +303,15 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
 
     // Dynamic lights for nebula cloud illumination.
+    // Only lights whose source is inside the nebula radius affect the clouds.
     const auto& lights = DynamicLightManager::getLights();
     auto computeLight = [&](const glm::vec3& point) -> float {
         float total = 0.0f;
         for (const auto& light : lights)
         {
+            glm::vec2 light_pos_2d{light.position.x, light.position.y};
+            if (glm::length(light_pos_2d - nebula_pos) > nr.radius)
+                continue;
             float dist = glm::length(point - light.position);
             if (dist < light.radius)
             {
