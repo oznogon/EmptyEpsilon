@@ -4941,6 +4941,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_PAGE(tr("tweak-tab", "Nebula renderer"), NebulaRenderer);
     new_page->description = tr("tweak-nebula-renderer", "Nebula cloud rendering. Defines how far from the nebula it should be visible in 3D views.\n\nclouds_dirty is an internal flag and can't be tweaked.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Render range:"), NebulaRenderer, render_range);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Cloud density:"), NebulaRenderer, cloud_density);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "In-nebula visibility distance:"), NebulaRenderer, visibility_distance);
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row->setSize(GuiElement::GuiSizeMax, 210.0f)->setAttribute("layout", "horizontal");

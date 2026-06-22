@@ -171,6 +171,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     // Compute nebula fog factor for smooth draw distance and fog transitions
     float nebula_fog_factor = 0.0f;
     glm::vec3 nebula_fog_color = glm::vec3{0.0f};
+    float in_nebula_visibility_distance = 1000.0f;
     float effective_fog_distance = 0.0f;
     {
         for(auto [entity, nr, t] : sp::ecs::Query<NebulaRenderer, sp::Transform>())
@@ -188,13 +189,14 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                 if (influence > nebula_fog_factor)
                 {
                     nebula_fog_factor = influence;
-                    nebula_fog_color = glm::vec3{nr.fog_color_r, nr.fog_color_g, nr.fog_color_b};
+                    nebula_fog_color = nr.fog_color;
+                    in_nebula_visibility_distance = std::max(0.0f, nr.visibility_distance);
                 }
             }
         }
-        effective_fog_distance = glm::mix(25000.0f, 1000.0f, nebula_fog_factor);
+        effective_fog_distance = glm::mix(25000.0f, in_nebula_visibility_distance, nebula_fog_factor);
     }
-    float far_plane = glm::mix(25000.0f, 1500.0f, nebula_fog_factor);
+    float far_plane = glm::mix(25000.0f, in_nebula_visibility_distance, nebula_fog_factor);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);

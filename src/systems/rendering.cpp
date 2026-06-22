@@ -19,14 +19,35 @@ bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target)
     for (auto [entity, radar_block, transform] : sp::ecs::Query<RadarBlock, sp::Transform>())
     {
         glm::vec2 nebula_pos = transform.getPosition();
-        float range = radar_block.range * 0.8f;
 
-        // Camera inside occlusion radius: no occlusion for this nebula
-        if (glm::length2(source - nebula_pos) < range * range)
-            continue;
+        // Match the soft transition used by the fog/visibility in GuiViewport3D.
+        // When the camera is inside the transition range (between the inner and outer
+        // transition edges), no occlusion is applied so the player can still see their
+        // ship and surroundings; the reduced visibility distance and fog handle the
+        // visual obscuring instead. Outside the transition range, occlusion is checked
+        // against the inner edge of the transition.
+        float occlusion_radius = radar_block.range * 0.8f;
+        if (auto nr = entity.getComponent<NebulaRenderer>())
+        {
+            float fade_zone = nr->skybox_fade_distance > 0.0f ? nr->skybox_fade_distance : 1000.0f;
+            float transition_start = nr->radius + 1.5f * fade_zone;
+            float transition_end = std::max(0.0f, nr->radius - 0.5f * fade_zone);
+
+            if (glm::length2(source - nebula_pos) < transition_start * transition_start)
+                continue;
+
+            occlusion_radius = transition_end;
+        }
+        else
+        {
+            // No NebulaRenderer: fall back to the original hard cutoff so the camera
+            // inside the cutoff still renders normally.
+            if (glm::length2(source - nebula_pos) < occlusion_radius * occlusion_radius)
+                continue;
+        }
 
         // Target inside occlusion radius: occluded
-        if (glm::length2(target - nebula_pos) < range * range)
+        if (glm::length2(target - nebula_pos) < occlusion_radius * occlusion_radius)
             return true;
 
         // Target behind occlusion radius: occluded if line from camera to target passes through it
@@ -39,7 +60,7 @@ bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target)
         if (f > dist) f = dist;
         glm::vec2 q = source + diff * (f / dist);
 
-        if (glm::length2(q - nebula_pos) < range * range)
+        if (glm::length2(q - nebula_pos) < occlusion_radius * occlusion_radius)
             return true;
     }
     return false;
@@ -276,6 +297,8 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     else
         shell_alpha = nr.radius / dist_to_center;
 
+    const float cloud_density = std::max(0.0f, nr.cloud_density);
+
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
 
     struct VertexAndTexCoords
@@ -304,7 +327,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
             int tex_idx = v % nr.clouds.size();
             auto& cloud = nr.clouds[tex_idx];
             float volume_size = nr.radius * (0.3f + v * 0.15f);
-            float volume_alpha = shell_alpha * 0.8f * (1.0f - v * 0.16f);
+            float volume_alpha = shell_alpha * 0.8f * (1.0f - v * 0.16f) * cloud_density;
 
             if (!cloud.texture.ptr)
                 cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
@@ -358,7 +381,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
         auto& cloud = nr.clouds[idx];
         glm::vec3 cloud_pos = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
 
-        float per_cloud_alpha = 0.6f * shell_alpha;
+        float per_cloud_alpha = 0.6f * shell_alpha * cloud_density;
 
         if (per_cloud_alpha <= 0.0f)
             continue;

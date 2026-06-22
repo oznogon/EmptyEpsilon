@@ -845,9 +845,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(NebulaRenderer, radius);
     BIND_MEMBER(NebulaRenderer, skybox);
     BIND_MEMBER(NebulaRenderer, skybox_fade_distance);
-    BIND_MEMBER(NebulaRenderer, fog_color_r);
-    BIND_MEMBER(NebulaRenderer, fog_color_g);
-    BIND_MEMBER(NebulaRenderer, fog_color_b);
+    BIND_MEMBER(NebulaRenderer, fog_color);
+    BIND_MEMBER(NebulaRenderer, cloud_density);
+    BIND_MEMBER(NebulaRenderer, visibility_distance);
     BIND_ARRAY_DIRTY_FLAG(NebulaRenderer, clouds, clouds_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(NebulaRenderer, clouds, offset, clouds_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(NebulaRenderer, clouds, "texture", texture.name, clouds_dirty);

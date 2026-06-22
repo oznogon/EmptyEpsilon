@@ -72,9 +72,12 @@ public:
     float radius = 5000.0f;
     string skybox;
     float skybox_fade_distance = 1000.0f;
-    float fog_color_r = 0.02f;
-    float fog_color_g = 0.01f;
-    float fog_color_b = 0.03f;
+    glm::vec3 fog_color{0.02f, 0.01f, 0.03f};
+    // Multiplier on cloud/fog volume alpha. 0.0 = invisible clouds, 1.0 = baseline, >1.0 = thicker.
+    float cloud_density = 1.0f;
+    // In-nebula visibility distance: the fog draw distance used when the camera is fully inside
+    // the nebula. Lower values make objects fade out sooner while inside the cloud.
+    float visibility_distance = 1000.0f;
     std::vector<Cloud> clouds;
     bool clouds_dirty = true;
 };

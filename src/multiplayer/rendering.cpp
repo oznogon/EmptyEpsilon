@@ -25,9 +25,9 @@ BASIC_REPLICATION_IMPL(NebulaRendererReplication, NebulaRenderer)
     BASIC_REPLICATION_FIELD(radius);
     BASIC_REPLICATION_FIELD(skybox);
     BASIC_REPLICATION_FIELD(skybox_fade_distance);
-    BASIC_REPLICATION_FIELD(fog_color_r);
-    BASIC_REPLICATION_FIELD(fog_color_g);
-    BASIC_REPLICATION_FIELD(fog_color_b);
+    BASIC_REPLICATION_FIELD(fog_color);
+    BASIC_REPLICATION_FIELD(cloud_density);
+    BASIC_REPLICATION_FIELD(visibility_distance);
     REPLICATE_VECTOR_IF_DIRTY(clouds, clouds_dirty);
 }
 BASIC_REPLICATION_IMPL(ExplosionEffectReplication, ExplosionEffect)
