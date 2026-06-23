@@ -259,7 +259,6 @@ set(MAIN_SOURCES
     src/menus/luaConsole.cpp
     src/screens/cinematicViewScreen.cpp
     src/screens/crewStationScreen.cpp
-    src/screens/topDownScreen.cpp
     src/screens/windowScreen.cpp
     src/screens/mainScreen.cpp
     src/screens/spectatorScreen.cpp
@@ -715,7 +714,6 @@ set(MAIN_SOURCES
     src/screens/gm/tweak.h
     src/screens/mainScreen.h
     src/screens/spectatorScreen.h
-    src/screens/topDownScreen.h
     src/screens/windowScreen.h
     src/script.h
     src/shaderRegistry.h
