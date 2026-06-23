@@ -140,3 +140,5 @@ collision-damage 20260620
 beam-weapon-safety 20260620
 
 collision-damage 20260621 -- change server setting to selector
+
+nebula-rendering 20260622 -- dynamic lighting
