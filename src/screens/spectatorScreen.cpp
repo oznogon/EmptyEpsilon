@@ -27,29 +27,45 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
 : GuiCanvas(render_layer)
 {
     main_radar = new GuiRadarView(this, "MAIN_RADAR", LONG_RANGE_DISTANCE, nullptr);
-    main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false)->enableCallsigns();
-    main_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    main_radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(position); },
-        [this](glm::vec2 position) { this->onMouseDrag(position); },
-        [this](glm::vec2 position) { this->onMouseUp(position); },
-        [this](float value, glm::vec2 position) { this->onMouseWheel(value, position); }
-    );
+    main_radar
+        ->setStyle(GuiRadarView::Rectangular)
+        ->longRange()
+        ->gameMaster()
+        ->enableTargetProjections(nullptr)
+        ->setAutoCentering(false)
+        ->enableCallsigns()
+        ->setCallbacks(
+            [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(position); },
+            [this](glm::vec2 position) { this->onMouseDrag(position); },
+            [this](glm::vec2 position) { this->onMouseUp(position); },
+            [this](float value, glm::vec2 position) { this->onMouseWheel(value, position); }
+        )
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     ui_toggle = new GuiToggleButton(this, "UI_TOGGLE", "", [this](bool value) {
         toggleUI();
     });
-    ui_toggle->setIcon("redicule.png")->setSize(30, 30)->setPosition(0, 0, sp::Alignment::TopLeft);
-    ui_toggle->setAttribute("margin", "20");
+    ui_toggle
+        ->setIcon("redicule.png")
+        ->setSize(30.0f, 30.0f)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setAttribute("margin", "20");
 
     camera_lock_controls = new GuiElement(this, "CAMERA_LOCK_CONTROLS");
-    camera_lock_controls->setPosition(0, 0, sp::Alignment::BottomLeft)->hide();
-    camera_lock_controls->setAttribute("layout", "vertical");
-    camera_lock_controls->setAttribute("padding", "20");
+    camera_lock_controls
+        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
+        ->hide()
+        ->setAttribute("layout", "vertical");
+    camera_lock_controls
+        ->setAttribute("padding", "20");
 
     // Let the screen operator select a player ship to lock the camera onto.
     (new GuiLabel(camera_lock_controls, "CAMERA_LOCK_SELECTOR_LABEL", tr("spectator", "Select player ship as target"), 12.0f)
-    )->addBackground()->setSize(GuiElement::GuiSizeMax, 20);
+    )
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 20.0f);
+
     camera_lock_selector = new GuiSelector(camera_lock_controls, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
         if (auto ship = sp::ecs::Entity::fromString(value))
         {
@@ -62,26 +78,44 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
             }
         }
     });
-    camera_lock_selector->setSelectionIndex(0)->setSize(300, 50);
+    camera_lock_selector
+        ->setSelectionIndex(0)
+        ->setSize(300.0f, 50.0f);
 
     info_layout = new GuiElement(this, "INFO_LAYOUT");
-    info_layout->setPosition(0, 0, sp::Alignment::TopRight)->setSize(350, GuiElement::GuiSizeMax)->hide();
-    info_layout->setAttribute("layout", "vertical");
-    info_layout->setAttribute("padding", "20");
+    info_layout
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setSize(350.0f, GuiElement::GuiSizeMax)
+        ->hide()
+        ->setAttribute("layout", "vertical");
+    info_layout
+        ->setAttribute("padding", "20");
 
+    const float info_text_size = 12.0f;
     info_coordinates = new GuiElement(info_layout, "INFO_COORDINATES");
-    info_coordinates->setSize(GuiElement::GuiSizeMax, 20)->setAttribute("layout", "horizontal");
+    info_coordinates
+        ->setSize(GuiElement::GuiSizeMax, 20.0f)
+        ->setAttribute("layout", "horizontal");
     info_coordinates_x = new GuiKeyValueDisplay(info_coordinates, "INFO_COORDINATES_X", 0.2f, "X", "");
-    info_coordinates_x->setTextSize(12.0f)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info_coordinates_x
+        ->setTextSize(info_text_size)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     info_coordinates_y = new GuiKeyValueDisplay(info_coordinates, "INFO_COORDINATES_Y", 0.2f, "Y", "");
-    info_coordinates_y->setTextSize(12.0f)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info_coordinates_y
+        ->setTextSize(info_text_size)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     info_coordinates_sector = new GuiKeyValueDisplay(info_coordinates, "INFO_COORDINATES_SECTOR", 0.5f, tr("spectate", "Sector"), "");
-    info_coordinates_sector->setTextSize(12.0f)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info_coordinates_sector
+        ->setTextSize(info_text_size)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     info_clock = new GuiKeyValueDisplay(info_coordinates, "INFO_CLOCK", 0.375f, tr("Clock"), "");
-    info_clock->setTextSize(12.0f)->setSize(GuiElement::GuiSizeMax, 20);
+    info_clock
+        ->setTextSize(info_text_size)
+        ->setSize(GuiElement::GuiSizeMax, 20.0f);
 
     info_position = new GuiKeyValueDisplay(info_layout, "INFO_POSITION", 0.25f, tr("gmTweak", "Position"), "");
-    info_position->setSize(GuiElement::GuiSizeMax, 30);
+    info_position
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     info_position_lock = new GuiToggleButton(info_position, "INFO_POSITION_LOCK", tr("spectate", "Follow"), [this](bool value) {
         if (target.getComponent<sp::Transform>())
@@ -90,7 +124,10 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
             main_radar->setAutoCentering(value);
         }
     });
-    info_position_lock->setTextSize(16)->setSize(50, 27)->setPosition(0, 0, sp::Alignment::CenterRight);
+    info_position_lock
+        ->setTextSize(16.0f)
+        ->setSize(50.0f, 27.0f)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::CenterRight);
 
     zoom_slider = new GuiRadarZoomSlider(this, "ZOOM_SLIDER", MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, LONG_RANGE_DISTANCE, main_radar);
     zoom_slider
@@ -100,8 +137,6 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
         ->setSize(350.0f, 50.0f)
         ->hide()
         ->setAttribute("margin", "20");
-
-    new GuiIndicatorOverlays(this);
 
     keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "Top-down view")});
     keyboard_help->moveToFront();
@@ -141,8 +176,7 @@ void SpectatorScreen::update(float delta)
     if (keys.help.getDown())
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
 
-    if (keys.topdown.toggle_ui.getDown())
-        toggleUI();
+    if (keys.topdown.toggle_ui.getDown()) toggleUI();
 
     if (keys.topdown.lock_camera.getDown())
     {
@@ -168,12 +202,13 @@ void SpectatorScreen::update(float delta)
 
     if (!main_radar->getAutoCentering())
     {
-        float pan_up = std::max(keys.topdown.pan_up.getContinuousValue() + keys.topdown.pan_up.getAxis0Value() + keys.topdown.pan_up.getAxis1Value(), (float)keys.topdown.pan_up.get());
-        float pan_dn = std::max(keys.topdown.pan_down.getContinuousValue() + keys.topdown.pan_down.getAxis0Value() + keys.topdown.pan_down.getAxis1Value(), (float)keys.topdown.pan_down.get());
-        float pan_lt = std::max(keys.topdown.pan_left.getContinuousValue() + keys.topdown.pan_left.getAxis0Value() + keys.topdown.pan_left.getAxis1Value(), (float)keys.topdown.pan_left.get());
-        float pan_rt = std::max(keys.topdown.pan_right.getContinuousValue() + keys.topdown.pan_right.getAxis0Value() + keys.topdown.pan_right.getAxis1Value(), (float)keys.topdown.pan_right.get());
-        float pan_x = pan_rt - pan_lt;
-        float pan_y = pan_dn - pan_up;
+        const float pan_up = std::max(keys.topdown.pan_up.getContinuousValue() + keys.topdown.pan_up.getAxis0Value() + keys.topdown.pan_up.getAxis1Value(), (float)keys.topdown.pan_up.get());
+        const float pan_dn = std::max(keys.topdown.pan_down.getContinuousValue() + keys.topdown.pan_down.getAxis0Value() + keys.topdown.pan_down.getAxis1Value(), (float)keys.topdown.pan_down.get());
+        const float pan_lt = std::max(keys.topdown.pan_left.getContinuousValue() + keys.topdown.pan_left.getAxis0Value() + keys.topdown.pan_left.getAxis1Value(), (float)keys.topdown.pan_left.get());
+        const float pan_rt = std::max(keys.topdown.pan_right.getContinuousValue() + keys.topdown.pan_right.getAxis0Value() + keys.topdown.pan_right.getAxis1Value(), (float)keys.topdown.pan_right.get());
+        const float pan_x = pan_rt - pan_lt;
+        const float pan_y = pan_dn - pan_up;
+
         if (pan_x != 0.0f || pan_y != 0.0f)
             main_radar->setViewPosition(view_position + glm::vec2(pan_x, pan_y) * main_radar->getDistance() * 0.01f);
     }
@@ -184,16 +219,17 @@ void SpectatorScreen::update(float delta)
         returnToShipSelection(getRenderLayer());
     }
 
-    if (keys.pause.getDown())
-        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
+    if (keys.pause.getDown() && game_server && !gameGlobalInfo->getVictoryFaction())
+        engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     if (keys.spectator_show_callsigns.getDown())
         main_radar->showCallsigns(!main_radar->getCallsigns());
 
     // Add and remove entries from the player ship list.
-    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+    for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
-        if (camera_lock_selector->indexByValue(entity.toString()) == -1) {
+        if (camera_lock_selector->indexByValue(entity.toString()) == -1)
+        {
             string label;
             if (auto tn = entity.getComponent<TypeName>())
                 label = tn->type_name;
@@ -202,7 +238,8 @@ void SpectatorScreen::update(float delta)
             camera_lock_selector->addEntry(label, entity.toString());
         }
     }
-    for(int n=0; n<camera_lock_selector->entryCount(); n++) {
+    for (int n = 0; n < camera_lock_selector->entryCount(); n++)
+    {
         if (!sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(n)))
             camera_lock_selector->removeEntry(n);
     }

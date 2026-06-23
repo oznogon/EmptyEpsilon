@@ -20,7 +20,6 @@
 #include "components/database.h"
 #include "components/name.h"
 #include "screens/windowScreen.h"
-#include "screens/topDownScreen.h"
 #include "screens/cinematicViewScreen.h"
 #include "screens/spectatorScreen.h"
 #include "screens/gm/gameMasterScreen.h"
@@ -348,46 +347,6 @@ ShipSelectionScreen::ShipSelectionScreen()
     cinematic_button->setSize(GuiElement::GuiSizeMax, 50.0f);
     addTooltip(cinematic_button, "CINEMATIC_TOOLTIP",
         tr("shipSelect", "A cinematic camera that can automatically follow the action. Best for demonstrations or display screens. Requires GM code if set."));
-
-    // Top-down 3D view button
-    auto topdown_button = new GuiButton(right_panel, "TOP_DOWN_3D_BUTTON", tr("Top-down 3D view"),
-        [this]()
-        {
-            if (gameGlobalInfo->gm_control_code.length() > 0)
-            {
-                LOG(Info, "Player selected top-down 3D view mode, which has a control code.");
-                focus(password_dialog->entry);
-                password_dialog->open(tr("Enter the GM control code:"), "",
-                    [](string code)
-                    {
-                        return code == gameGlobalInfo->gm_control_code;
-                    },
-                    [this]()
-                    {
-                        my_player_info->commandSetShip({});
-                        destroy();
-                        new TopDownScreen(getRenderLayer());
-                    },
-                    [this]()
-                    {
-                        left_container->show();
-                        right_container->show();
-                    }
-                );
-                left_container->hide();
-                right_container->hide();
-            }
-            else
-            {
-                my_player_info->commandSetShip({});
-                destroy();
-                new TopDownScreen(getRenderLayer());
-            }
-        }
-    );
-    topdown_button->setSize(GuiElement::GuiSizeMax, 50.0f);
-    addTooltip(topdown_button, "TOP_DOWN_3D_TOOLTIP",
-        tr("shipSelect", "An overhead 3D view of the battlefield with free camera movement. Requires GM code if set."));
 
     auto options_button = new GuiButton(right_panel, "OPEN_OPTIONS", tr("mainMenu", "Options"),
         [this]()

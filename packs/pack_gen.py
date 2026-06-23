@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import glob
 import struct
@@ -15,18 +16,18 @@ def convertObj(filename):
 		if len(line) < 1:
 			continue
 		if line[0] == 'v':
-			vertices.append(map(lambda n: float(n), line[1:]))
+			vertices.append(list(map(lambda n: float(n), line[1:])))
 		elif line[0] == 'vn':
-			normals.append(map(lambda n: float(n), line[1:]))
+			normals.append(list(map(lambda n: float(n), line[1:])))
 		elif line[0] == 'vt':
-			uvs.append(map(lambda n: float(n), line[1:]))
+			uvs.append(list(map(lambda n: float(n), line[1:])))
 		elif line[0] == 'f':
-			faces.append(map(lambda n: map(lambda m: int(m), n.split('/')), line[1:]))
+			faces.append(list(map(lambda n: list(map(lambda m: int(m), n.split('/'))), line[1:])))
 	f.close()
-	data = ''
+	data = b''
 	cnt = 0
 	for face in faces:
-		for i in xrange(2, len(face)):
+		for i in range(2, len(face)):
 			for n in [0, i-1, i]:
 				v = vertices[face[n][0] - 1]
 				vt = uvs[face[n][1] - 1]
@@ -34,7 +35,7 @@ def convertObj(filename):
 				cnt += 1
 				data += struct.pack('@ffffffff', v[0], v[2], v[1], vn[0], vn[2], vn[1], vt[0], 1.0 - vt[1])
 	data = struct.pack('>i', cnt) + data
-	return data, os.path.splitext(filename)[0] + '.model'
+	return data, os.path.splitext(filename)[0] + b'.model'
 
 def buildPack(name):
 	os.chdir(name)
@@ -42,12 +43,12 @@ def buildPack(name):
 	files = {}
 	for filename in filenames:
 		filename = filename.encode('ascii')
-		filename = filename.replace('\\', '/')
+		filename = filename.replace(b'\\', b'/')
 		if os.path.isfile(filename):
 			ext = os.path.splitext(filename)[1]
-			if ext == '.obj':
+			if ext == b'.obj':
 				data, filename = convertObj(filename)
-			elif ext == '.rar' or ext == '.zip':
+			elif ext == b'.rar' or ext == b'.zip':
 				continue
 			else:
 				f = open(filename, "rb")
@@ -65,9 +66,9 @@ def buildPack(name):
 	for filename, data in files.items():
 		f.write(struct.pack('>B', len(filename)))
 		f.write(filename)
-		flog.write(filename + '\n')
+		flog.write(filename + b'\n')
 		f.write(struct.pack('>ii', offset, len(data)))
-		print offset, filename
+		print(offset, filename)
 		offset += len(data)
 	for filename, data in files.items():
 		f.write(data)
