@@ -14,6 +14,7 @@ struct DynamicLight
 class DynamicLightManager
 {
 public:
+    static bool isEnabled();
     static void add(const DynamicLight& light);
     static void clear();
     static const std::vector<DynamicLight>& getLights();

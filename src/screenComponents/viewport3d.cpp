@@ -174,10 +174,12 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
     // Compute nebula fog factor for smooth draw distance and fog transitions
+    float default_draw_distance = PreferencesManager::get("default_draw_distance", "25000").toFloat();
     float nebula_fog_factor = 0.0f;
     glm::vec3 nebula_fog_color = glm::vec3{0.0f};
-    float in_nebula_visibility_distance = 1000.0f;
+    float in_nebula_visibility_distance = default_draw_distance;
     float effective_fog_distance = 0.0f;
+    if (PreferencesManager::get("nebula_fog", "1") == "1")
     {
         for(auto [entity, nr, t] : sp::ecs::Query<NebulaRenderer, sp::Transform>())
         {
@@ -199,9 +201,9 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                 }
             }
         }
-        effective_fog_distance = glm::mix(25000.0f, in_nebula_visibility_distance, nebula_fog_factor);
+        effective_fog_distance = glm::mix(default_draw_distance, in_nebula_visibility_distance, nebula_fog_factor);
     }
-    float far_plane = glm::mix(25000.0f, in_nebula_visibility_distance, nebula_fog_factor);
+    float far_plane = glm::mix(default_draw_distance, in_nebula_visibility_distance, nebula_fog_factor);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -389,142 +391,148 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     // Collect dynamic lights for nebula cloud illumination.
     DynamicLightManager::clear();
 
-    // From weapon beam effects (multiple lights along the beam path).
-    for (auto [entity, be, transform] : sp::ecs::Query<BeamEffect, sp::Transform>())
+    if (DynamicLightManager::isEnabled())
     {
-        if (be.lifetime <= 0.0f) continue;
-        glm::vec3 start_point(transform.getPosition().x, transform.getPosition().y, be.source_offset.z);
-        glm::vec3 end_point(be.target_location.x, be.target_location.y, be.target_offset.z);
-        float beam_length = glm::length(end_point - start_point);
-        glm::vec3 color = glm::vec3(be.beam_color.r, be.beam_color.g, be.beam_color.b) / 255.0f;
-        float intensity = std::min(be.lifetime * 2.0f, 1.0f);
-        int num_lights = std::max(1, int(beam_length / 800.0f));
-        for (int i = 0; i <= num_lights; i++)
+        // From weapon beam effects (multiple lights along the beam path).
+        for (auto [entity, be, transform] : sp::ecs::Query<BeamEffect, sp::Transform>())
         {
-            float t = float(i) / float(num_lights);
-            DynamicLightManager::add({
-                glm::mix(start_point, end_point, t),
-                color,
-                250.0f,
-                intensity
-            });
-        }
-    }
-
-    // From utility beam effects.
-    for (auto [entity, ube, transform] : sp::ecs::Query<UtilityBeamEffect, sp::Transform>())
-    {
-        if (ube.lifetime <= 0.0f) continue;
-        glm::vec3 start_point(transform.getPosition().x, transform.getPosition().y, ube.source_offset.z);
-        glm::vec3 end_point(ube.target_location.x, ube.target_location.y, ube.target_offset.z);
-        float beam_length = glm::length(end_point - start_point);
-        float intensity = std::min(ube.lifetime * 2.0f, 1.0f);
-        int num_lights = std::max(1, int(beam_length / 800.0f));
-        for (int i = 0; i <= num_lights; i++)
-        {
-            float t = float(i) / float(num_lights);
-            DynamicLightManager::add({
-                glm::mix(start_point, end_point, t),
-                glm::vec3(0.6f, 0.4f, 0.8f),
-                250.0f,
-                intensity
-            });
-        }
-    }
-
-    // From explosions (center of the sphere, radius scales with visual size).
-    for (auto [entity, ee, transform] : sp::ecs::Query<ExplosionEffect, sp::Transform>())
-    {
-        float progress = ee.lifetime / ee.max_lifetime;
-        if (progress <= 0.0f) continue;
-
-        float f = 1.0f - progress;
-        float explosion_scale;
-        if (f < 0.2f)
-            explosion_scale = f / 0.2f;
-        else if (ee.electrical)
-            explosion_scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 0.8f, 1.0f);
-        else
-            explosion_scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 1.0f, 1.3f);
-
-        float radius = explosion_scale * ee.size * 2.0f;
-
-        glm::vec3 color;
-        if (ee.electrical)
-            color = random(0, 1) > 0.5f
-                ? glm::vec3(0.3f, 0.5f, 1.0f)
-                : glm::vec3(1.0f, 1.0f, 1.0f);
-        else
-            color = glm::vec3(1.0f, 0.5f, 0.15f);
-
-        float intensity = std::min((1.0f - progress) * 2.0f, 1.0f);
-        DynamicLightManager::add({
-            glm::vec3(transform.getPosition(), 0.0f),
-            color,
-            radius,
-            intensity
-        });
-    }
-
-    // From engine emitters (one light per emitter, radius = emitter span * 2).
-    for (auto [entity, mrc, ee, transform, impulse] : sp::ecs::Query<MeshRenderComponent, EngineEmitter, sp::Transform, ImpulseEngine>())
-    {
-        if (impulse.actual == 0.0f) continue;
-
-        // Find the span of emitter positions in local space.
-        float min_x = std::numeric_limits<float>::max();
-        float max_x = std::numeric_limits<float>::lowest();
-        for (auto& ed : ee.emitters)
-        {
-            float ex = ed.position.x;
-            if (ex < min_x) min_x = ex;
-            if (ex > max_x) max_x = ex;
-        }
-        float emitter_span = max_x - min_x;
-        float light_radius = std::max(emitter_span * 2.0f, 500.0f);
-
-        for (auto ed : ee.emitters)
-        {
-            glm::vec3 local_offset = ed.position;
-            if (mrc.bank_angle != 0.0f)
+            if (be.lifetime <= 0.0f) continue;
+            glm::vec3 start_point(transform.getPosition().x, transform.getPosition().y, be.source_offset.z);
+            glm::vec3 end_point(be.target_location.x, be.target_location.y, be.target_offset.z);
+            float beam_length = glm::length(end_point - start_point);
+            glm::vec3 color = glm::vec3(be.beam_color.r, be.beam_color.g, be.beam_color.b) / 255.0f;
+            float intensity = std::min(be.lifetime * 2.0f, 1.0f);
+            int num_lights = std::max(1, int(beam_length / 800.0f));
+            for (int i = 0; i <= num_lights; i++)
             {
-                glm::mat4 bank_matrix = glm::rotate(
-                    glm::mat4(1.0f), glm::radians(-mrc.bank_angle), glm::vec3(1.0f, 0.0f, 0.0f));
-                local_offset = glm::vec3(bank_matrix * glm::vec4(local_offset, 1.0f));
+                float t = float(i) / float(num_lights);
+                DynamicLightManager::add({
+                    glm::mix(start_point, end_point, t),
+                    color,
+                    250.0f,
+                    intensity
+                });
             }
-            glm::vec3 pos3d = glm::vec3(
-                transform.getPosition()
-                + rotateVec2(glm::vec2(local_offset.x, local_offset.y), transform.getRotation()),
-                local_offset.z);
+        }
+
+        // From utility beam effects.
+        for (auto [entity, ube, transform] : sp::ecs::Query<UtilityBeamEffect, sp::Transform>())
+        {
+            if (ube.lifetime <= 0.0f) continue;
+            glm::vec3 start_point(transform.getPosition().x, transform.getPosition().y, ube.source_offset.z);
+            glm::vec3 end_point(ube.target_location.x, ube.target_location.y, ube.target_offset.z);
+            float beam_length = glm::length(end_point - start_point);
+            float intensity = std::min(ube.lifetime * 2.0f, 1.0f);
+            int num_lights = std::max(1, int(beam_length / 800.0f));
+            for (int i = 0; i <= num_lights; i++)
+            {
+                float t = float(i) / float(num_lights);
+                DynamicLightManager::add({
+                    glm::mix(start_point, end_point, t),
+                    glm::vec3(0.6f, 0.4f, 0.8f),
+                    250.0f,
+                    intensity
+                });
+            }
+        }
+
+        // From explosions (center of the sphere, radius scales with visual size).
+        for (auto [entity, ee, transform] : sp::ecs::Query<ExplosionEffect, sp::Transform>())
+        {
+            float progress = ee.lifetime / ee.max_lifetime;
+            if (progress <= 0.0f) continue;
+
+            float f = 1.0f - progress;
+            float explosion_scale;
+            if (f < 0.2f)
+                explosion_scale = f / 0.2f;
+            else if (ee.electrical)
+                explosion_scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 0.8f, 1.0f);
+            else
+                explosion_scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 1.0f, 1.3f);
+
+            float radius = explosion_scale * ee.size * 2.0f;
+
+            glm::vec3 color;
+            if (ee.electrical)
+                color = random(0, 1) > 0.5f
+                    ? glm::vec3(0.3f, 0.5f, 1.0f)
+                    : glm::vec3(1.0f, 1.0f, 1.0f);
+            else
+                color = glm::vec3(1.0f, 0.5f, 0.15f);
+
+            float intensity = std::min((1.0f - progress) * 2.0f, 1.0f);
             DynamicLightManager::add({
-                pos3d,
-                ed.color,
-                light_radius,
-                std::abs(impulse.actual)
+                glm::vec3(transform.getPosition(), 0.0f),
+                color,
+                radius,
+                intensity
             });
         }
-    }
 
-    // From shield hits (at ship position when hit_effect > 0).
-    for (auto [entity, shields, transform] : sp::ecs::Query<Shields, sp::Transform>())
-    {
-        float max_hit = 0.0f;
-        for (auto& shield : shields.entries)
-            max_hit = std::max(max_hit, shield.hit_effect);
-        if (max_hit <= 0.0f) continue;
-        float ship_radius = 1000.0f;
-        if (auto physics = entity.getComponent<sp::Physics>())
-            ship_radius = physics->getSize().x;
-        DynamicLightManager::add({
-            glm::vec3(transform.getPosition(), 0.0f),
-            glm::vec3(0.5f, 0.7f, 1.0f),
-            ship_radius * 3.0f,
-            std::min(max_hit * 2.0f, 1.0f)
-        });
+        // From engine emitters (one light per emitter, radius = emitter span * 2).
+        for (auto [entity, mrc, ee, transform, impulse] : sp::ecs::Query<MeshRenderComponent, EngineEmitter, sp::Transform, ImpulseEngine>())
+        {
+            if (impulse.actual == 0.0f) continue;
+
+            // Find the span of emitter positions in local space.
+            float min_x = std::numeric_limits<float>::max();
+            float max_x = std::numeric_limits<float>::lowest();
+            for (auto& ed : ee.emitters)
+            {
+                float ex = ed.position.x;
+                if (ex < min_x) min_x = ex;
+                if (ex > max_x) max_x = ex;
+            }
+            float emitter_span = max_x - min_x;
+            float light_radius = std::max(emitter_span * 2.0f, 500.0f);
+
+            for (auto ed : ee.emitters)
+            {
+                glm::vec3 local_offset = ed.position;
+                if (mrc.bank_angle != 0.0f)
+                {
+                    glm::mat4 bank_matrix = glm::rotate(
+                        glm::mat4(1.0f), glm::radians(-mrc.bank_angle), glm::vec3(1.0f, 0.0f, 0.0f));
+                    local_offset = glm::vec3(bank_matrix * glm::vec4(local_offset, 1.0f));
+                }
+                glm::vec3 pos3d = glm::vec3(
+                    transform.getPosition()
+                    + rotateVec2(glm::vec2(local_offset.x, local_offset.y), transform.getRotation()),
+                    local_offset.z);
+                DynamicLightManager::add({
+                    pos3d,
+                    ed.color,
+                    light_radius,
+                    std::abs(impulse.actual)
+                });
+            }
+        }
+
+        // From shield hits (at ship position when hit_effect > 0).
+        for (auto [entity, shields, transform] : sp::ecs::Query<Shields, sp::Transform>())
+        {
+            float max_hit = 0.0f;
+            for (auto& shield : shields.entries)
+                max_hit = std::max(max_hit, shield.hit_effect);
+            if (max_hit <= 0.0f) continue;
+            float ship_radius = 1000.0f;
+            if (auto physics = entity.getComponent<sp::Physics>())
+                ship_radius = physics->getSize().x;
+            DynamicLightManager::add({
+                glm::vec3(transform.getPosition(), 0.0f),
+                glm::vec3(0.5f, 0.7f, 1.0f),
+                ship_radius * 3.0f,
+                std::min(max_hit * 2.0f, 1.0f)
+            });
+        }
     }
 
     // Apply pre-computed nebula fog
-    ShaderRegistry::setFog(nebula_fog_color, effective_fog_distance);
+    if (PreferencesManager::get("nebula_fog", "1") == "1")
+        ShaderRegistry::setFog(nebula_fog_color, effective_fog_distance);
+    else
+        ShaderRegistry::setFog(glm::vec3{0.0f}, 0.0f);
 
     // Update view matrix in shaders.
     ShaderRegistry::updateProjectionView({}, view_matrix, engine->getElapsedTime());

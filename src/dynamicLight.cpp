@@ -1,6 +1,12 @@
 #include "dynamicLight.h"
+#include "preferenceManager.h"
 
 std::vector<DynamicLight> DynamicLightManager::lights;
+
+bool DynamicLightManager::isEnabled()
+{
+    return PreferencesManager::get("dynamic_nebula_lighting", "1") == "1";
+}
 
 void DynamicLightManager::add(const DynamicLight& light)
 {

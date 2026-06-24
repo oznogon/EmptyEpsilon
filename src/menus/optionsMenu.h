@@ -40,6 +40,8 @@ private:
 
     GuiBasicSlider* graphics_fov_slider{};
     GuiLabel* graphics_fov_overlay_label{};
+    GuiBasicSlider* graphics_draw_distance_slider{};
+    GuiLabel* graphics_draw_distance_overlay_label{};
 
     std::vector<string> hotkey_categories;
     GuiLabel* impulse_volume_overlay_label;

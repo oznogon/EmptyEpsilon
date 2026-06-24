@@ -7,6 +7,7 @@
 #include "soundManager.h"
 #include "windowManager.h"
 #include "graphics/renderTarget.h"
+#include "dynamicLight.h"
 
 #include "gui/theme.h"
 #include "gui/gui2_overlay.h"
@@ -444,6 +445,44 @@ void OptionsMenu::setupGraphicsOptions()
     // Override overlay label.
     graphics_fov_overlay_label = new GuiLabel(graphics_fov_slider, "GRAPHICS_FOV_SLIDER_LABEL", tr("FoV: {fov}").format({ {"fov", string(initial_fov, 0)} }), 30);
     graphics_fov_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Dynamic nebula lighting toggle.
+    (new GuiToggleButton(graphics_page, "DYNAMIC_NEBULA_LIGHTING", tr("Dynamic nebula lighting"),
+        [](bool value)
+        {
+            PreferencesManager::set("dynamic_nebula_lighting", value ? "1" : "0");
+        }
+    ))
+        ->setValue(DynamicLightManager::isEnabled())
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Nebula fog toggle.
+    (new GuiToggleButton(graphics_page, "NEBULA_FOG", tr("Nebula fog"),
+        [](bool value)
+        {
+            PreferencesManager::set("nebula_fog", value ? "1" : "0");
+        }
+    ))
+        ->setValue(PreferencesManager::get("nebula_fog", "1") == "1")
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Default draw distance slider.
+    auto initial_draw_distance = PreferencesManager::get("default_draw_distance", "25000").toFloat();
+    if (initial_draw_distance <= 1000.0f)
+    {
+        LOG(Warning, "default_draw_distance value invalid: ", PreferencesManager::get("default_draw_distance"));
+        initial_draw_distance = 25000.0f;
+    }
+    graphics_draw_distance_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_DRAW_DISTANCE_SLIDER", 1000.0f, 100000.0f, initial_draw_distance, [this](float dist) {
+        dist = std::round(dist / 100.0f) * 100.0f;
+        graphics_draw_distance_slider->setValue(dist);
+        PreferencesManager::set("default_draw_distance", string(static_cast<int>(dist)));
+        graphics_draw_distance_overlay_label->setText(tr("Draw distance: {dist}").format({ {"dist", string(static_cast<int>(dist))} }));
+    });
+    graphics_draw_distance_slider->setSize(GuiElement::GuiSizeMax, 50);
+
+    graphics_draw_distance_overlay_label = new GuiLabel(graphics_draw_distance_slider, "GRAPHICS_DRAW_DISTANCE_SLIDER_LABEL", tr("Draw distance: {dist}").format({ {"dist", string(static_cast<int>(initial_draw_distance))} }), 30);
+    graphics_draw_distance_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void OptionsMenu::setupAudioOptions()
