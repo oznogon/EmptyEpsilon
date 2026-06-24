@@ -132,7 +132,7 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
         post_opaque_render();
     glDepthMask(true);
 
-    // Transparent passes (back to front)
+    // Transparent passes: non-nebula first (back to front)
     for(int n=render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
@@ -152,7 +152,31 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
         glBlendFunc(GL_ONE, GL_ONE);
         glDepthMask(false);
         for(auto info : render_list)
-            if (info.transparent)
+            if (info.transparent && !info.entity.hasComponent<NebulaRenderer>())
+                info.call_rif(info.rif, info.entity, *info.transform, info.component_ptr);
+    }
+
+    // Nebula clouds rendered last so alpha blending occludes effects behind them.
+    for(int n=render_lists.size() - 1; n >= 0; n--)
+    {
+        auto& render_list = render_lists[n];
+        glm::mat4 projection;
+        if (projection_type == ProjectionType::Orthographic)
+        {
+            float reference_distance = std::max(100.0f, camera_position.z);
+            float height = reference_distance * glm::tan(glm::radians(camera_fov / 2.0f));
+            float width = height * aspect;
+            projection = glm::ortho(-width, width, -height, height, 1.f, far_plane * (n + 1));
+        }
+        else
+            projection = glm::perspective(glm::radians(camera_fov), aspect, 1.f, far_plane * (n + 1));
+        ShaderRegistry::updateProjectionView(projection, {});
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDepthMask(false);
+        for(auto info : render_list)
+            if (info.transparent && info.entity.hasComponent<NebulaRenderer>())
                 info.call_rif(info.rif, info.entity, *info.transform, info.component_ptr);
     }
 }
@@ -342,14 +366,31 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     // Render fog volume billboards when camera is near or inside the nebula
     if (shell_alpha > 0.001f)
     {
-        float center_light = computeLight(glm::vec3(nebula_pos, 0.0f));
-        float volume_color_val = 0.25f + center_light * 0.5f;
+        glm::vec3 ring_center = glm::vec3(nebula_pos.x, nebula_pos.y, 0);
         for (int v = 0; v < 6; v++)
         {
             int tex_idx = v % nr.clouds.size();
             auto& cloud = nr.clouds[tex_idx];
             float volume_size = nr.radius * (0.3f + v * 0.15f);
             float volume_alpha = shell_alpha * 0.8f * (1.0f - v * 0.16f) * cloud_density;
+
+            // Compute per-ring light: sample each light at the closest point on the ring surface
+            float ring_light = 0.0f;
+            for (const auto& light : lights)
+            {
+                glm::vec2 light_pos_2d{light.position.x, light.position.y};
+                if (glm::length(light_pos_2d - nebula_pos) > nr.radius)
+                    continue;
+                float dist_to_ring_center = glm::length(light.position - ring_center);
+                float dist_to_ring = std::abs(dist_to_ring_center - volume_size);
+                if (dist_to_ring < light.radius)
+                {
+                    float atten = 1.0f - dist_to_ring / light.radius;
+                    ring_light += light.intensity * atten * atten;
+                }
+            }
+            ring_light = std::min(ring_light, 1.0f);
+            float volume_color_val = 0.25f + ring_light * 0.5f;
 
             if (!cloud.texture.ptr)
                 cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
@@ -377,7 +418,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
             glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), volume_color_val, volume_alpha, 0.0f, volume_size);
             {
                 auto loc = shader.get().get()->getUniformLocation("u_lightIntensity");
-                if (loc != -1) glUniform1f(loc, center_light);
+                if (loc != -1) glUniform1f(loc, ring_light);
             }
 
             auto volume_model = glm::identity<glm::mat4>();

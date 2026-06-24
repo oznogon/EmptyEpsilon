@@ -389,21 +389,26 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     // Collect dynamic lights for nebula cloud illumination.
     DynamicLightManager::clear();
 
-    // From weapon beam effects (midpoint of the beam, radius covers full length).
+    // From weapon beam effects (multiple lights along the beam path).
     for (auto [entity, be, transform] : sp::ecs::Query<BeamEffect, sp::Transform>())
     {
         if (be.lifetime <= 0.0f) continue;
         glm::vec3 start_point(transform.getPosition().x, transform.getPosition().y, be.source_offset.z);
         glm::vec3 end_point(be.target_location.x, be.target_location.y, be.target_offset.z);
-        glm::vec3 midpoint = (start_point + end_point) * 0.5f;
         float beam_length = glm::length(end_point - start_point);
         glm::vec3 color = glm::vec3(be.beam_color.r, be.beam_color.g, be.beam_color.b) / 255.0f;
-        DynamicLightManager::add({
-            midpoint,
-            color,
-            beam_length * 0.5f + 500.0f,
-            std::min(be.lifetime * 2.0f, 1.0f)
-        });
+        float intensity = std::min(be.lifetime * 2.0f, 1.0f);
+        int num_lights = std::max(1, int(beam_length / 800.0f));
+        for (int i = 0; i <= num_lights; i++)
+        {
+            float t = float(i) / float(num_lights);
+            DynamicLightManager::add({
+                glm::mix(start_point, end_point, t),
+                color,
+                250.0f,
+                intensity
+            });
+        }
     }
 
     // From utility beam effects.
@@ -412,14 +417,19 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         if (ube.lifetime <= 0.0f) continue;
         glm::vec3 start_point(transform.getPosition().x, transform.getPosition().y, ube.source_offset.z);
         glm::vec3 end_point(ube.target_location.x, ube.target_location.y, ube.target_offset.z);
-        glm::vec3 midpoint = (start_point + end_point) * 0.5f;
         float beam_length = glm::length(end_point - start_point);
-        DynamicLightManager::add({
-            midpoint,
-            glm::vec3(0.6f, 0.4f, 0.8f),
-            beam_length * 0.5f + 500.0f,
-            std::min(ube.lifetime * 2.0f, 1.0f)
-        });
+        float intensity = std::min(ube.lifetime * 2.0f, 1.0f);
+        int num_lights = std::max(1, int(beam_length / 800.0f));
+        for (int i = 0; i <= num_lights; i++)
+        {
+            float t = float(i) / float(num_lights);
+            DynamicLightManager::add({
+                glm::mix(start_point, end_point, t),
+                glm::vec3(0.6f, 0.4f, 0.8f),
+                250.0f,
+                intensity
+            });
+        }
     }
 
     // From explosions (center of the sphere, radius scales with visual size).
@@ -437,7 +447,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         else
             explosion_scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 1.0f, 1.3f);
 
-        float radius = explosion_scale * ee.size * 1000.0f;
+        float radius = explosion_scale * ee.size * 2.0f;
 
         glm::vec3 color;
         if (ee.electrical)
