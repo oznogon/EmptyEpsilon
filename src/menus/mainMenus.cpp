@@ -42,9 +42,9 @@ MainMenu::MainMenu()
         ->setSize(logo_size_x, logo_size_y);
 
     // Version number
-    (new GuiLabel(this, "VERSION", tr("Credits", "Version {version}").format({{"version", string(VERSION_NUMBER)}}), 20))
+    (new GuiLabel(this, "VERSION", tr("Credits", "Oznogon fork\nVersion {version}").format({{"version", string(VERSION_NUMBER)}}), 25.0f))
         ->setPosition(0.0f, title_y + logo_size, sp::Alignment::TopCenter)
-        ->setSize(0.0f, 20.0f);
+        ->setSize(0.0f, 50.0f);
 
     // Menu selections
     auto* container = new GuiElement(this, "");
