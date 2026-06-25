@@ -31,6 +31,9 @@ public:
     constexpr static float GuiSizeMatchHeight = -1.0f;
     constexpr static float GuiSizeMatchWidth = -1.0f;
     constexpr static float GuiSizeMax = -2.0f;
+    constexpr static float GuiSizeRow = 50.0f;
+    constexpr static float GuiSizeLabel = 30.0f;
+    constexpr static float GuiSizePad = 20.0f;
 
     enum class State
     {
