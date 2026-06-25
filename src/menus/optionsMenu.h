@@ -19,10 +19,12 @@ public:
         None
     };
 private:
+    const float ROW_HEIGHT = 50.0f;
+
     GuiElement* container;
-    GuiToggleButton* graphics_button;
-    GuiToggleButton* audio_button;
-    GuiToggleButton* interface_button;
+    GuiToggleButton* graphics_tab;
+    GuiToggleButton* audio_tab;
+    GuiToggleButton* interface_tab;
     GuiElement* graphics_page;
     GuiElement* audio_page;
     GuiElement* interface_page;
