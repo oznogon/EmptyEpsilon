@@ -15,6 +15,7 @@ public:
         float size; // General size parameter, depends on the widget type what it means.
         sp::Font* font;
         float font_offset = 0.0f;
+        float line_height = 1.0f;
         string sound;   //Sound effect played by the widget on certain actions.
     };
     StateStyle states[int(GuiElement::State::COUNT)];
@@ -34,6 +35,7 @@ public:
     - color
     - font
     - font_offset
+    - line_height (multiplier, 1.0 = default font spacing)
     - size
     - sound
 

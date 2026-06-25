@@ -5,6 +5,8 @@
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
     # Positive offset moves the font down, negative moves it up.
     font_offset: 0.0
+    # Multiline text line-height multiplier. 1.0 uses the font's default spacing.
+    line_height: 1.0
 
     # Stronger font used at a few locations without UI widgets.
     # UI widgets with their own font theme properties might set this on their own.
