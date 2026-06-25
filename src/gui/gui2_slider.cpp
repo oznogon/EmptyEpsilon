@@ -34,7 +34,7 @@ void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
         float f = (range != 0.0f) ? (value - min_value) / range : 0.5f;
         y = rect.position.y + (rect.size.y - rect.size.x) * f;
 
-        renderer.drawSprite(front.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, front.color);
+        renderer.drawRotatedSprite(front.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, 90, front.color);
     }
 }
 
@@ -151,7 +151,7 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
         }
         y = rect.position.y + (rect.size.y - rect.size.x) * f;
 
-        renderer.drawSprite(front.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, front.color);
+        renderer.drawRotatedSprite(front.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, 90, front.color);
     }
 
     if (overlay_label)
