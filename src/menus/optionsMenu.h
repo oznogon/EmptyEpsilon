@@ -19,8 +19,6 @@ public:
         None
     };
 private:
-    const float ROW_HEIGHT = 50.0f;
-
     GuiElement* container;
     GuiToggleButton* graphics_tab;
     GuiToggleButton* audio_tab;

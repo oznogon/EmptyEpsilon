@@ -110,14 +110,14 @@ void GuiCustomShipFunctions::createEntries()
                             my_player_info->commandCustomFunction(name);
                     }
                 );
-                e.element->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
+                e.element->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
             }
 
             if (f.type == CustomShipFunctions::Function::Type::Info)
             {
                 string name = e.name;
-                e.element = (new GuiLabel(this, "", f.caption, ROW_HEIGHT * 0.5f))->addBackground();
-                e.element->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
+                e.element = (new GuiLabel(this, "", f.caption, GuiElement::GuiSizeRow * 0.5f))->addBackground();
+                e.element->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
             }
         }
     }

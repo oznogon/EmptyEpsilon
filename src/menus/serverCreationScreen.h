@@ -1,5 +1,4 @@
-#ifndef SERVER_CREATION_SCREEN_H
-#define SERVER_CREATION_SCREEN_H
+#pragma once
 
 #include "gui/gui2_canvas.h"
 #include "Updatable.h"
@@ -18,7 +17,6 @@ public:
     ServerSetupScreen();
 
 private:
-    const float ROW_HEIGHT = 50.0f;
     const string DEFAULT_REGISTRY = "http://daid.eu/ee/register.php";
 
     GuiTextEntry* server_name;
@@ -63,5 +61,3 @@ private:
     std::unordered_map<string,string> scenario_settings;
     std::unordered_map<string, GuiScrollFormattedText*> description_per_setting;
 };
-
-#endif//SERVER_CREATION_SCREEN_H
