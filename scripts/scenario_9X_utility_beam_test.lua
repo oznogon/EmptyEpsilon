@@ -1,4 +1,4 @@
--- Name: Utility beam test
+-- Name: Utility Beam Test
 -- Description: Test utility beam system functions
 -- Type: Development
 

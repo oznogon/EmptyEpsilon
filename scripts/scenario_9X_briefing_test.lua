@@ -1,4 +1,4 @@
--- Name: Test Briefing
+-- Name: Briefing Screen Test
 -- Description: Test scenario that populates a briefing with images and audio.
 -- Type: Development
 

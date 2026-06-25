@@ -1,4 +1,4 @@
--- Name: Dockign Bay Test
+-- Name: Docking Bay Test
 -- Description: Test scenario for docking bay behaviors
 -- Type: Development
 

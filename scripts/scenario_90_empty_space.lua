@@ -1,4 +1,4 @@
--- Name: Empty space
+-- Name: Empty Space
 -- Description: Empty scenario with no ships or terrain. Game masters can use this to set up a scenario in the GM screen. Use the F5 key or "Copy scenario" and "Copy selection" buttons on the GM screen to copy Lua code of the layout to the clipboard for use in scenario scripts.
 -- Type: Development
 
