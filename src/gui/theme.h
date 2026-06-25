@@ -33,7 +33,7 @@ public:
     - texture
     - color
     - font
-    - offset
+    - font_offset
     - size
     - sound
 

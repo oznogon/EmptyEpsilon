@@ -269,7 +269,11 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             }
         }
         if (input.find("font_offset") != input.end())
+        {
             global_style.font_offset = input["font_offset"].toFloat();
+            if (global_style.font)
+                global_style.font->setBaselineOffset(global_style.font_offset);
+        }
         if (input.find("size") != input.end())
             global_style.size = input["size"].toFloat();
         if (input.find("sound") != input.end())
@@ -324,11 +328,24 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                     LOG(Debug, "State-specific font '", state_font_path, "' failed to load for element ", element_name, " state ", postfix, " in theme ", name);
             }
             if (input.find("font_offset." + postfix) != input.end())
+            {
                 style.states[n].font_offset = input["font_offset." + postfix].toFloat();
+                if (style.states[n].font)
+                    style.states[n].font->setBaselineOffset(style.states[n].font_offset);
+            }
             if (input.find("size." + postfix) != input.end())
                 style.states[n].size = input["size." + postfix].toFloat();
             if (input.find("sound." + postfix) != input.end())
                 style.states[n].sound = input["sound." + postfix];
+        }
+
+        // Apply baseline offset to each state's font object so it takes effect
+        // regardless of whether the font or offset came from the global style,
+        // the element style, or a state-specific override.
+        for (int n = 0; n < int(GuiElement::State::COUNT); n++)
+        {
+            if (style.states[n].font)
+                style.states[n].font->setBaselineOffset(style.states[n].font_offset);
         }
 
         theme->styles[element_name] = style;

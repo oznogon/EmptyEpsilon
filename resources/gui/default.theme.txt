@@ -564,7 +564,7 @@
     # Stronger font used at a few locations without UI widgets.
     [bold] {
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
-        offset: 0.0
+        font_offset: 0.0
         color: #FFFFFF
     }
 

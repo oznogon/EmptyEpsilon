@@ -219,11 +219,6 @@ int main(int argc, char** argv)
 
     sp::RenderTarget::setDefaultFont(main_font);
 
-    // Apply baseline offset adjustments to fonts
-    // Positive values move text down, negative values move text up
-    main_font->setBaselineOffset(active_theme->getStyle("base")->get(GuiElement::State::Normal).font_offset);
-    bold_font->setBaselineOffset(active_theme->getStyle("bold")->get(GuiElement::State::Normal).font_offset);
-
     // On Android, this requires the 'record audio' permissions,
     // which is always a scary thing for users.
     // Since there is no way to access it (yet) via a touchscreen, compile out.
