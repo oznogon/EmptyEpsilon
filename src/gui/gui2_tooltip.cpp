@@ -105,7 +105,7 @@ void GuiTooltip::onUpdate()
             target = (canvas ? canvas->getMousePosition() : glm::vec2{0, 0}) + pixel_offset;
 
             // If size is fixed, clamp position to keep the tooltip on screen.
-            if (!layout.match_content_size)
+            if (!layout.match_content_x && !layout.match_content_y)
             {
                 const sp::Rect screen = getTopLevelContainer()->getRect();
                 target.x = std::max(0.0f, std::min(target.x, screen.size.x - layout.size.x));

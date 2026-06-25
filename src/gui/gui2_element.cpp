@@ -72,7 +72,8 @@ bool GuiElement::setAttribute(const string& key, const string& value)
 GuiElement* GuiElement::setSize(glm::vec2 size)
 {
     layout.size = size;
-    layout.match_content_size = false;
+    layout.match_content_x = false;
+    layout.match_content_y = false;
 
     if (size.x == GuiSizeMax) {
         layout.size.x = 1.0;

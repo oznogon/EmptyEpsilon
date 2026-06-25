@@ -9,7 +9,8 @@ GuiScrollContainer::GuiScrollContainer(GuiContainer* owner, const string& id, Sc
 {
     // Don't lock content size to element.
     // We need to manipulate content size when toggling scrollbar visibility.
-    layout.match_content_size = false;
+    layout.match_content_x = false;
+    layout.match_content_y = false;
 
     // Define the scrollbar and hide it.
     scrollbar_v = new GuiScrollbar(this, id + "_SCROLLBAR_V", 0, 100, 0,

@@ -45,7 +45,8 @@ public:
         // Defaulting to true means containers auto-size to fit their children
         // unless explicitly given a fixed size. Callers setting layout.size
         // directly should also set this to false.
-        bool match_content_size = true;
+        bool match_content_x = true;
+        bool match_content_y = true;
     };
 
     GuiContainer() = default;
