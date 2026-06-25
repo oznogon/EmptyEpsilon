@@ -4,13 +4,13 @@
 #include "gui/gui2_canvas.h"
 #include "Updatable.h"
 
+class GuiButton;
+class GuiLabel;
+class GuiListbox;
 class GuiScrollFormattedText;
 class GuiSelector;
 class GuiTextEntry;
-class GuiListbox;
-class GuiButton;
-class GuiLabel;
-
+class GuiToggleButton;
 
 class ServerSetupScreen : public GuiCanvas
 {
@@ -18,10 +18,13 @@ public:
     ServerSetupScreen();
 
 private:
+    const float ROW_HEIGHT = 50.0f;
+    const string DEFAULT_REGISTRY = "http://daid.eu/ee/register.php";
+
     GuiTextEntry* server_name;
     GuiTextEntry* server_password;
     GuiTextEntry* gm_password;
-    GuiSelector* server_visibility;
+    GuiToggleButton* server_visibility;
     GuiTextEntry* server_port;
 };
 
