@@ -172,7 +172,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     zoom_slider = new GuiRadarZoomSlider(this, "", MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, radar);
     zoom_slider
         ->setPosition(20.0f, allow_comms ? -70.0f : -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     // Option buttons for comms, waypoints, and probes.
     option_buttons = new GuiElement(this, "BUTTONS");
@@ -189,12 +189,12 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     );
     cancel_button
         ->setPosition(20.0f, 50.0f)
-        ->setSize(250.0f, 50.0f)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     // Open comms button.
     (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", allow_comms == true ? tr("Open comms") : tr("Link to comms"), &targets))
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Hack target
     hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"),
@@ -204,7 +204,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             if (target && canHack(target)) hacking_dialog->open(target);
         }
     );
-    hack_target_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+    hack_target_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Link probe to science button.
     link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to science"),
@@ -217,7 +217,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         }
     );
     link_to_science_button
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>() && my_spaceship.hasComponent<RadarLink>());
 
     // Manage waypoints.
@@ -230,7 +230,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                 ->setText(tr("Cancel waypoint"))
                 ->show();
         }
-    ))->setSize(GuiElement::GuiSizeMax, 50.0f);
+    ))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete waypoint"),
         [this]()
@@ -239,7 +239,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                 my_player_info->commandRemoveWaypoint(targets.getWaypointIndex(), targets.getWaypointSetId());
         }
     );
-    delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+    delete_waypoint_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Waypoint set selector, shown only when multiple sets are enabled.
     waypoint_set_selector = new GuiSelector(option_buttons, "WAYPOINT_SET_SELECTOR",
@@ -251,7 +251,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     waypoint_set_selector
         ->setOptions({tr("Waypoint set 1"), tr("Waypoint set 2"), tr("Waypoint set 3"), tr("Waypoint set 4")})
         ->setSelectionIndex(0)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Route toggle, shown only when server allows routes.
     route_toggle = new GuiToggleButton(option_buttons, "WAYPOINT_ROUTE_TOGGLE", tr("Show as route"),
@@ -260,7 +260,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             if (my_spaceship) my_player_info->commandSetWaypointRoute(value, active_waypoint_set);
         }
     );
-    route_toggle->setSize(GuiElement::GuiSizeMax, 50.0f);
+    route_toggle->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Launch probe button.
     launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", tr("Launch probe"),
@@ -274,7 +274,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         }
     );
     launch_probe_button
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>());
 
     // Center on ship
@@ -285,7 +285,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             radar->setAutoCentering(value);
         }
     );
-    center_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+    center_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Reputation display.
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.4f, tr("Reputation"), "");

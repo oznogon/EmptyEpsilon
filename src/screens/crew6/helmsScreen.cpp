@@ -53,7 +53,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
     // Message if entity lacks all propulsion, maneuver, and docking
     // components.
-    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", tr("helms", "No helms controls"), 50.0f);
+    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", tr("helms", "No helms controls"), GuiElement::GuiSizeRow);
     no_controls_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)

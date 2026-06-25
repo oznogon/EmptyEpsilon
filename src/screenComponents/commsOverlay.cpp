@@ -1,6 +1,13 @@
-#include "playerInfo.h"
-#include "i18n.h"
 #include "commsOverlay.h"
+#include "i18n.h"
+#include "engine.h"
+#include "playerInfo.h"
+#include "onScreenKeyboard.h"
+
+#include "components/comms.h"
+
+#include "systems/comms.h"
+
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_progressbar.h"
@@ -10,11 +17,6 @@
 #include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_textentry.h"
-#include "components/comms.h"
-#include "systems/comms.h"
-#include "engine.h"
-
-#include "onScreenKeyboard.h"
 
 GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 : GuiElement(owner, "COMMS_OVERLAY")
@@ -27,7 +29,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         ->hide();
 
     (new GuiLabel(opening_box, "COMMS_OPENING_LABEL", tr("Opening communications..."), 40.0f))
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter);
 
     opening_progress = new GuiProgressbar(opening_box, "COMMS_OPENING_PROGRESS", CommsSystem::channel_open_time, 0.0f, 0.0f);
@@ -51,9 +53,10 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         {
             comms_minimized = true;
         }
-    ))->setIcon("gui/widget/IndicatorArrow.png", sp::Alignment::Center, -90.0f)
+    ))
+        ->setIcon("gui/widget/IndicatorArrow.png", sp::Alignment::Center, -90.0f)
         ->setPosition(-5.0f, 5.0f, sp::Alignment::TopRight)
-        ->setSize(50.0f, 50.0f);
+        ->setSize(GuiElement::GuiSizeRow, GuiElement::GuiSizeRow);
 
     // Panel for reporting incoming hails.
     hailed_box = new GuiPanel(this, "COMMS_BEING_HAILED_BOX");
@@ -61,9 +64,9 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         ->setSize(800.0f, 140.0f)
         ->setPosition(0.0f, -250.0f, sp::Alignment::BottomCenter)
         ->hide();
-    hailed_label = new GuiLabel(hailed_box, "COMMS_BEING_HAILED_LABEL", "..", 40);
+    hailed_label = new GuiLabel(hailed_box, "COMMS_BEING_HAILED_LABEL", "...", 40.0f);
     hailed_label
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setPosition(0.0f, 20.0f, sp::Alignment::TopCenter);
 
     // Buttons to answer or ignore hails.
@@ -74,7 +77,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         }
     );
     hailed_answer
-        ->setSize(300.0f, 50.0f)
+        ->setSize(300.0f, GuiElement::GuiSizeRow)
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft);
 
     hailed_ignore = new GuiButton(hailed_box, "COMMS_BEING_HAILED_IGNORE", tr("Ignore"),
@@ -84,7 +87,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         }
     );
     hailed_ignore
-        ->setSize(300.0f, 50.0f)
+        ->setSize(300.0f, GuiElement::GuiSizeRow)
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight);
 
     (new GuiButton(hailed_box, "COMMS_HAILED_MINIMIZE", "",
@@ -92,9 +95,10 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         {
             comms_minimized = true;
         }
-    ))->setIcon("gui/widget/IndicatorArrow.png", sp::Alignment::Center, -90.0f)
+    ))
+        ->setIcon("gui/widget/IndicatorArrow.png", sp::Alignment::Center, -90.0f)
         ->setPosition(-5.0f, 5.0f, sp::Alignment::TopRight)
-        ->setSize(50.0f, 50.0f);
+        ->setSize(GuiElement::GuiSizeRow, GuiElement::GuiSizeRow);
 
     // Panel for unresponsive hails.
     no_response_box = new GuiPanel(this, "COMMS_OPENING_BOX");
@@ -112,7 +116,8 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         {
             if (my_spaceship) my_player_info->commandCloseTextComm();
         }
-    ))->setSize(100.0f, 50.0f)
+    ))
+        ->setSize(100.0f, GuiElement::GuiSizeRow)
         ->setPosition(-20.0f, -10.0f, sp::Alignment::BottomRight);
 
     // Panel for broken communications.
@@ -132,7 +137,8 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         {
             if (my_spaceship) my_player_info->commandCloseTextComm();
         }
-    ))->setSize(100.0f, 50.0f)
+    ))
+        ->setSize(100.0f, GuiElement::GuiSizeRow)
         ->setPosition(-20.0f, -10.0f, sp::Alignment::BottomRight);
 
     // Panel for communications closed by the other object.
@@ -152,7 +158,8 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         {
             if (my_spaceship) my_player_info->commandCloseTextComm();
         }
-    ))->setSize(100.0f, 50.0f)
+    ))
+        ->setSize(100.0f, GuiElement::GuiSizeRow)
         ->setPosition(-20.0f, -10.0f, sp::Alignment::BottomRight);
 
     // Panel for chat with GMs/other players and scripted comms with objects.
@@ -167,14 +174,14 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     GuiElement* comms_dialog_title_bar = new GuiElement(comms_dialog_box, "");
     comms_dialog_title_bar
         ->setMargins(20.0f, 0.0f, 0.0f, 0.0f)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
     // Title label showing the comms target's name.
     comms_dialog_title_label = new GuiLabel(comms_dialog_title_bar, "COMMS_DIALOG_TITLE", "", 30.0f);
     comms_dialog_title_label
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Minimize button collapses the panel to a restore button without closing comms.
     (new GuiButton(comms_dialog_title_bar, "COMMS_DIALOG_MINIMIZE", "",
@@ -182,9 +189,10 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         {
             comms_minimized = true;
         }
-    ))->setIcon("gui/widget/IndicatorArrow.png", sp::Alignment::Center, -90.0f)
+    ))
+        ->setIcon("gui/widget/IndicatorArrow.png", sp::Alignment::Center, -90.0f)
         ->setMargins(20.0f, 0.0f, 0.0f, 0.0f)
-        ->setSize(50.0f, GuiElement::GuiSizeMax);
+        ->setSize(GuiElement::GuiSizeRow, GuiElement::GuiSizeMax);
 
     // Button to close comms.
     (new GuiButton(comms_dialog_title_bar, "COMMS_DIALOG_CLOSE", "X",
@@ -193,8 +201,9 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
             script_comms_options->setOptions({});
             if (my_spaceship) my_player_info->commandCloseTextComm();
         }
-    ))->setTextSize(30.0f)
-        ->setSize(50.0f, 50.0f);
+    ))
+        ->setTextSize(30.0f)
+        ->setSize(GuiElement::GuiSizeRow, GuiElement::GuiSizeRow);
 
     // Floating restore button shown when any comms panel is minimized.
     comms_restore_button = new GuiToggleButton(this, "COMMS_RESTORE", "",
@@ -207,7 +216,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     comms_restore_button
         ->setIcon("gui/widget/IndicatorArrow.png", sp::Alignment::CenterLeft, 90.0f)
         ->setPosition(0.0f, -70.0f, sp::Alignment::BottomCenter)
-        ->setSize(400.0f, 50.0f)
+        ->setSize(400.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     // Text area shared by both chat and scripted comms.
@@ -220,7 +229,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     GuiElement* chat_comms_message_row = new GuiElement(comms_dialog_box, "COMMS_CHAT_MESSAGE_ROW");
     chat_comms_message_row
         ->setMargins(20.0f)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
     chat_comms_message_entry = new GuiTextEntry(chat_comms_message_row, "COMMS_CHAT_MESSAGE_ENTRY", "");
@@ -312,11 +321,23 @@ void GuiCommsOverlay::onUpdate()
 
         string restore_text;
         if (is_opening)
-            restore_text = tr("Opening comms with {name}").format({{"name", transmitter->target_name}});
+        {
+            restore_text = tr("Opening comms with {name}").format({
+                {"name", transmitter->target_name}
+            });
+        }
         else if (is_hailed)
-            restore_text = tr("Hailed by {name}").format({{"name", transmitter->target_name}});
+        {
+            restore_text = tr("Hailed by {name}").format({
+                {"name", transmitter->target_name}
+            });
+        }
         else
-            restore_text = tr("Comms open with {name}").format({{"name", transmitter->target_name}});
+        {
+            restore_text = tr("Comms open with {name}").format({
+                {"name", transmitter->target_name}
+            });
+        }
 
         if (comms_minimized && transmitter->incomming_message != last_incoming_message)
             comms_has_unread = true;
@@ -359,7 +380,7 @@ void GuiCommsOverlay::onUpdate()
 
             // Resize displayed options list to show at most 5 entries.
             const int display_options_count = std::min(5, script_comms_options->entryCount());
-            script_comms_options->setSize(GuiElement::GuiSizeMax, display_options_count * 50.0f);
+            script_comms_options->setSize(GuiElement::GuiSizeMax, display_options_count * GuiElement::GuiSizeRow);
         }
     }
 }

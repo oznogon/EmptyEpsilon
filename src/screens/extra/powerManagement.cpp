@@ -80,17 +80,23 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         ->setAttribute("margin", "0, 13");
 
     coolant_display = new GuiKeyValueDisplay(coolant_distribution_gauge, "PWR_COOLANT_DISPLAY", 0.7f, tr("power management", "Available coolant"), "");
-    coolant_display->setIcon("gui/icons/coolant")->setTextSize(25.0f)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("margin", "0, -13");
+    coolant_display
+        ->setIcon("gui/icons/coolant")
+        ->setTextSize(25.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, -13");
 
     // Build the content container for the columns below status bar.
     GuiElement* content = new GuiElement(layout, "PWR_CONTENT");
-    content->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    content->setAttribute("layout", "horizontal");
+    content
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "horizontal");
 
     // Left column contains the grid of systems power management panels.
     systems_grid = new GuiElement(content, "PWR_SYSTEMS_GRID");
-    systems_grid->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    systems_grid->setAttribute("layout", "vertical");
+    systems_grid
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 
     // Right column contains the custom functions element.
     custom_functions = new GuiCustomShipFunctions(content, CrewPosition::powerManagement, "PWR_CUSTOM_FUNCTIONS");
@@ -167,7 +173,7 @@ bool PowerManagementScreen::populateSystemPanel(int system_index, GuiElement* sy
             ->setBackgroundVisible(false)
             ->setIcon(icon_file)
             ->setTextSize(20.0f)
-            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("margin", "0, 0, -12, 0");
 
         // Build the panel's sliders.
@@ -518,7 +524,7 @@ void PowerManagementScreen::onUpdate()
 
             // Handle hotkeys for setting power for the selected system to a given level.
             // Note code duplication with crew6/engineeringScreen.
-            // Power Management should probably instead use Engineering's hotkeys for these.
+            // Power management should probably instead use Engineering's hotkeys for these.
             if (keys.engineering_set_power_000.getDown())
             {
                 power_slider->setValue(0.0f);

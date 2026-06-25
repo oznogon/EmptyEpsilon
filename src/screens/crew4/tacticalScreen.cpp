@@ -65,7 +65,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     // Message if entity lacks all propulsion, maneuver, docking, and weapon
     // components.
-    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", tr("tactical", "No tactical controls"), 50.0f);
+    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", tr("tactical", "No tactical controls"), GuiElement::GuiSizeRow);
     no_controls_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -126,7 +126,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     beam_info_box = new GuiElement(tactical_controls, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(0.0f, -20.0f, sp::Alignment::BottomCenter)
-        ->setSize(500.0f, 50.0f)
+        ->setSize(500.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     // Beam controls beneath the radar.
@@ -150,7 +150,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     lock_aim = new AimLockButton(tactical_controls, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim
         ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     // Beam weapons autofire safety toggle.
     beam_safety = new GuiToggleButton(tactical_controls, "BEAM_SAFETY", tr("Autofire"),
@@ -162,7 +162,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     beam_safety
         ->setIcon("gui/icons/lock-beams")
         ->setPosition(250.0f, 70.0f, sp::Alignment::TopCenter)
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     // Combat maneuver and propulsion controls in the bottom right corner.
     (new GuiCombatManeuver(tactical_controls, "COMBAT_MANEUVER"))->setPosition(-20, -390, sp::Alignment::BottomRight)->setSize(200, 150);

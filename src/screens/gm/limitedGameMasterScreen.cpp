@@ -1029,7 +1029,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     faction_selector
         ->setSelectionIndex(0)
         ->setPosition(20.0f, 70.0f, sp::Alignment::TopLeft)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     (new GuiTextTooltip(faction_selector, "FACTION_SELECTOR_TIP", tr("gm_tooltip", "Change the faction of selected objects."), 20.0f))->setWidth(280.0f);
 
@@ -1045,7 +1045,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     pause_button
         ->setValue(false)
         ->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     (new GuiTextTooltip(pause_button, "PAUSE_BUTTON_TIP", tr("gm_tooltip", "Toggle pausing the game simulation."), 20.0f))
         ->setWidth(280.0f);
@@ -1060,7 +1060,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
         ->setOptions({"1x", "2x", "4x", "8x"})
         ->setSelectionIndex(0)
         ->setPosition(170.0f, 20.0f, sp::Alignment::TopLeft)
-        ->setSize(100.0f, 50.0f);
+        ->setSize(100.0f, GuiElement::GuiSizeRow);
 
     tweak_dialog = new LimitedGuiEntityTweak(this,
         [this](sp::ecs::Entity entity, const string& expression)
@@ -1082,7 +1082,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     );
     tweak_button
         ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
-        ->setSize(250.0f, 50.0f)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     (new GuiTextTooltip(tweak_button, "TWEAK_OBJECT_TIP", tr("gm_tooltip", "Edit properties of the selected entity."), 20.0f))
@@ -1093,7 +1093,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     );
     global_message_button
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     (new GuiTextTooltip(global_message_button, "GLOBAL_MESSAGE_TIP", tr("gm_tooltip", "Broadcast a message to all players."), 20.0f))
         ->setWidth(280.0f);
@@ -1112,7 +1112,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     );
     player_ship_selector
         ->setPosition(270.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(350.0f, 50.0f);
+        ->setSize(350.0f, GuiElement::GuiSizeRow);
 
     (new GuiTextTooltip(player_ship_selector, "PLAYER_SHIP_SELECTOR_TIP", tr("gm_tooltip", "Select a player ship to track on the map."), 20.0f))
         ->setWidth(280.0f);
@@ -1122,7 +1122,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
         ->setZoomReference(LONG_RANGE_DISTANCE)
         ->setLabelPrecision(3)
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", tr("button", "Hail ship"),
         [this]()
@@ -1145,7 +1145,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     );
     player_comms_hail
         ->setPosition(20.0f, -170.0f, sp::Alignment::BottomLeft)
-        ->setSize(250.0f, 50.0f)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     (new GuiTextTooltip(player_comms_hail, "HAIL_PLAYER_TIP", tr("gm_tooltip", "Open a communication channel with the selected player ship."), 20.0f))

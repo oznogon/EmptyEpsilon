@@ -44,7 +44,7 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Message if entity lacks the MissileTubes component or mounts.
-    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("missile_weapons", "No missile weapons"), 50.0f);
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("missile_weapons", "No missile weapons"), GuiElement::GuiSizeRow);
     no_weapons_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -94,7 +94,7 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
     lock_aim = new AimLockButton(missile_controls, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim
         ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     auto stats = new GuiElement(missile_controls, "WEAPONS_STATS");
     stats

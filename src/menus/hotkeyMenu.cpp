@@ -110,12 +110,12 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         ->setSize(250.0f, GuiElement::GuiSizeMax);
 
     // Reset keybinds confirmation
-    reset_label = new GuiLabel(bottom_row, "RESET_LABEL", tr("Bindings reset to defaults"), 30.0f);
+    reset_label = new GuiLabel(bottom_row, "RESET_LABEL", tr("Bindings reset to defaults"), GuiElement::GuiSizeLabel);
     reset_label
         ->addBackground()
         ->setAlignment(sp::Alignment::Center)
         ->setPosition(-250.0f, 0.0f, sp::Alignment::BottomRight)
-        ->setSize(300.0f, 50.0f)
+        ->setSize(300.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     // Reset keybinds button

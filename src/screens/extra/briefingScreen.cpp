@@ -72,7 +72,7 @@ BriefingScreen::BriefingScreen(GuiContainer* owner)
 
     auto page_nav = new GuiElement(page_container, "PAGE_NAV");
     page_nav
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "50");
 
     // Playback timing progress indicator.

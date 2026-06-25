@@ -228,13 +228,13 @@ ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationSc
     (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
 
-    info_label = new GuiLabel(this, "INFO", "", 30.0f);
+    info_label = new GuiLabel(this, "INFO", "", GuiElement::GuiSizeLabel);
     info_label->setPosition(0.0f, 0.0f, sp::Alignment::Center);
 
     auto* row = new GuiElement(this, "");
     row
         ->setPosition(0.0f, -50.0f, sp::Alignment::BottomCenter)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("padding", "50, 0");
     row
         ->setAttribute("layout", "horizontal");
@@ -246,7 +246,8 @@ ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationSc
             new ServerSetupScreen();
             destroy();
         }
-    ))->setSize(250.0f, GuiElement::GuiSizeMax);
+    ))
+        ->setSize(250.0f, GuiElement::GuiSizeMax);
 
     (new GuiElement(row, "SPACER"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

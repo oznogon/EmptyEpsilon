@@ -102,13 +102,10 @@ public:
     GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key, sp::io::Keybinding::Type display_filter = sp::io::Keybinding::Type::Default, sp::io::Keybinding::Type capture_filter = sp::io::Keybinding::Type::Default);
     virtual ~GuiHotkeyBinder();
 
-    // Returns true if any binder is actively rebinding. Used to prevent
-    // game-wide binds like escape from being handled while binding a key.
-    // The escape control can't be rebound otherwise.
     // Height of the interaction selector row appended below the binding field.
     // The parent container must add this to the row height when the keybinding
     // has more than one supported interaction.
-    static constexpr float SELECTOR_HEIGHT = 50.0f;
+    static constexpr float SELECTOR_HEIGHT = GuiElement::GuiSizeRow;
 
     static bool isAnyRebinding();
 

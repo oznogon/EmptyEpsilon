@@ -16,40 +16,60 @@
 JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
 : target(target)
 {
-    status_label = new GuiLabel(this, "STATUS", tr("connectserver", "Connecting..."), 30);
-    status_label->setPosition(0, 300, sp::Alignment::TopCenter)->setSize(0, 50);
-    (new GuiButton(this, "BTN_CANCEL", tr("button", "Cancel"), [this]() {
-        destroy();
-        disconnectFromServer();
-        new ServerBrowserMenu();
-    }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(300, 50);
+    status_label = new GuiLabel(this, "STATUS", tr("connectserver", "Connecting..."), GuiElement::GuiSizeLabel);
+    status_label
+        ->setPosition(0.0f, 300.0f, sp::Alignment::TopCenter)
+        ->setSize(0.0f, GuiElement::GuiSizeRow);
+
+    (new GuiButton(this, "BTN_CANCEL", tr("button", "Cancel"),
+        [this]()
+        {
+            destroy();
+            disconnectFromServer();
+            new ServerBrowserMenu();
+        }
+    ))
+        ->setPosition(50.0f, -50.0f, sp::Alignment::BottomLeft)
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     password_entry_box = new GuiPanel(this, "PASSWORD_ENTRY_BOX");
-    password_entry_box->setPosition(0, 350, sp::Alignment::TopCenter)->setSize(600, 100);
-    password_entry_box->hide();
-    password_entry = new GuiTextEntry(password_entry_box, "PASSWORD_ENTRY", "");
-    password_entry->setPosition(20, 0, sp::Alignment::CenterLeft)->setSize(400, 50);
-    password_entry->setHidePassword();
-    password_entry->enterCallback([this](string entry)
-    {
-        password_entry_box->hide();
-        password_focused = false;
-        game_client->sendPassword(entry.upper());
-    });
-    (new GuiButton(password_entry_box, "PASSWORD_ENTRY_OK", "Ok", [this]()
-    {
-        password_entry_box->hide();
-        password_focused = false;
-        game_client->sendPassword(password_entry->getText().upper());
-    }))->setPosition(420, 0, sp::Alignment::CenterLeft)->setSize(160, 50);
+    password_entry_box
+        ->setPosition(0.0f, 350.0f, sp::Alignment::TopCenter)
+        ->setSize(600.0f, 100.0f)
+        ->hide();
 
-    if (target.type == ServerScanner::ServerType::SteamFriend) {
+    password_entry = new GuiTextEntry(password_entry_box, "PASSWORD_ENTRY", "");
+    password_entry
+        ->setHidePassword()
+        ->enterCallback(
+            [this](string entry)
+            {
+                password_entry_box->hide();
+                password_focused = false;
+                game_client->sendPassword(entry.upper());
+            }
+        )
+        ->setPosition(20.0f, 0.0f, sp::Alignment::CenterLeft)
+        ->setSize(400.0f, GuiElement::GuiSizeRow);
+
+    (new GuiButton(password_entry_box, "PASSWORD_ENTRY_OK", tr("Ok"),
+        [this]()
+        {
+            password_entry_box->hide();
+            password_focused = false;
+            game_client->sendPassword(password_entry->getText().upper());
+        }
+    ))
+        ->setPosition(420.0f, 0.0f, sp::Alignment::CenterLeft)
+        ->setSize(160.0f, GuiElement::GuiSizeRow);
+
+    if (target.type == ServerScanner::ServerType::SteamFriend)
+    {
 #ifdef STEAMSDK
         new GameClient(VERSION_NUMBER, target.port);
 #endif
-    } else {
-        new GameClient(VERSION_NUMBER, target.address, target.port);
     }
+    else new GameClient(VERSION_NUMBER, target.address, target.port);
 }
 
 void JoinServerScreen::update(float delta)

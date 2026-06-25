@@ -80,7 +80,7 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
     });
     camera_lock_selector
         ->setSelectionIndex(0)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     info_layout = new GuiElement(this, "INFO_LAYOUT");
     info_layout
@@ -134,7 +134,7 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
         ->setZoomReference(LONG_RANGE_DISTANCE)
         ->setLabelPrecision(3)
         ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
-        ->setSize(350.0f, 50.0f)
+        ->setSize(350.0f, GuiElement::GuiSizeRow)
         ->hide()
         ->setAttribute("margin", "20");
 

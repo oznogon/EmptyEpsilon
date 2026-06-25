@@ -28,27 +28,27 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     signal_label = new GuiLabel(box, id + "_LABEL", tr("scanning", "Electric signature"), 30.0f);
     signal_label
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     signal_quality = new GuiSignalQualityIndicator(box, id + "_SIGNAL");
     signal_quality
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 10");
 
-    locked_label = new GuiLabel(signal_quality, id + "_LOCK_LABEL", tr("scanning", "LOCKED"), 50.0f);
+    locked_label = new GuiLabel(signal_quality, id + "_LOCK_LABEL", tr("scanning", "LOCKED"), GuiElement::GuiSizeRow);
     locked_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     for (int n = 0; n < MAX_SLIDERS; n++)
     {
         sliders[n] = new GuiSlider(box, id + "_SLIDER_" + string(n), 0.0f, 1.0f, 0.0f, nullptr);
         sliders[n]
-            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("margin", "0, 10");
     }
 
     auto* cancel_row = new GuiElement(box, "CANCEL");
     cancel_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
     (new GuiElement(cancel_row, ""))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

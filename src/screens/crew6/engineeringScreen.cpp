@@ -93,7 +93,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         SystemRow info;
         info.row = new GuiElement(system_row_layouts, id);
         info.row
-            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("layout", "horizontal");
 
         info.button = new GuiToggleButton(info.row, id + "_SELECT", getLocaleSystemName(ShipSystem::Type(n)),

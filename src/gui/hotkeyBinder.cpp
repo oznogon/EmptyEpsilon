@@ -35,7 +35,7 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
 
     auto* row1 = new GuiElement(this, "");
     row1
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     auto* row2 = new GuiElement(this, "");
     row2
@@ -139,7 +139,7 @@ void GuiHotkeyBinder::clearFilteredKeys()
 bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     // Allow clicks to add/remove buttons to pass through.
-    if (interaction_row->isVisible() && position.y >= rect.position.y + 50.0f)
+    if (interaction_row->isVisible() && position.y >= rect.position.y + GuiElement::GuiSizeRow)
         return false;
 
     // If this binder is already rebinding, just take the input and skip this.
@@ -344,17 +344,17 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
         ->setMargins(15.0f)
         ->setAttribute("layout", "vertical");
 
-    action_label = new GuiLabel(content, id + "_ACTION", tr("hotkey_menu", "Rebinding: "), 30.0f);
+    action_label = new GuiLabel(content, id + "_ACTION", tr("hotkey_menu", "Rebinding: "), GuiElement::GuiSizeLabel);
     action_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, 40.0f)
         ->setMargins(0.0f, 5.0f);
 
-    input_label = new GuiLabel(content, id + "_INPUT", tr("hotkey_menu", "[Press any key or input...]"), 30.0f);
+    input_label = new GuiLabel(content, id + "_INPUT", tr("hotkey_menu", "[Press any key or input...]"), GuiElement::GuiSizeLabel);
     input_label
         ->addBackground()
         ->setAlignment(sp::Alignment::Center)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setMargins(0.0f, 5.0f);
 
     mouse_panel_btn = new GuiButton(content, id + "_MOUSE_PANEL",
@@ -373,11 +373,11 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
 
     interaction_row = new GuiElement(content, id + "_INTER_ROW");
     interaction_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setMargins(0.0f, 5.0f)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(interaction_row, id + "_INTER_LABEL", tr("hotkey_menu", "Interaction type:"), 30.0f))
+    (new GuiLabel(interaction_row, id + "_INTER_LABEL", tr("hotkey_menu", "Interaction type:"), GuiElement::GuiSizeLabel))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(400.0f, GuiElement::GuiSizeMax);
 
@@ -411,7 +411,7 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
 
     auto* btn_row = new GuiElement(content, id + "_BTN_ROW");
     btn_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setMargins(0.0f, 5.0f)
         ->setAttribute("layout", "horizontal");
 

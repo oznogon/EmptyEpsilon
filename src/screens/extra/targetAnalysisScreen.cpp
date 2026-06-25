@@ -93,7 +93,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
     info_callsign = new GuiLabel(model_view_panel, "INFO_CALLSIGN", "", 30.0f);
     info_callsign
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Description
     description_section = new GuiElement(left_column, "DESCRIPTION_SECTION");
@@ -103,7 +103,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 
     (new GuiLabel(description_section, "DESCRIPTION_LABEL", tr("analysis", "Description"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     info_description = new GuiScrollFormattedText(description_section, "INFO_DESC", "");
@@ -116,7 +116,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
     // Custom ship functions
     (new GuiLabel(left_column, "FUNCTIONS_LABEL", tr("analysis", "Functions"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     (new GuiCustomShipFunctions(left_column, CrewPosition::scienceOfficer, ""))
@@ -135,7 +135,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 
     (new GuiLabel(basic_info_section, "BASIC_INFO_LABEL", tr("analysis", "Analysis"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     info_class = new GuiKeyValueDisplay(basic_info_section, "INFO_CLASS", KV_DIV, tr("analysis", "Class"), "-");
@@ -176,7 +176,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 
     (new GuiLabel(systems_section, "SYSTEMS_LABEL", tr("analysis", "Systems status"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     for (int n = 0; n < ShipSystem::COUNT; n++)
@@ -199,7 +199,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 
     (new GuiLabel(frequencies_section, "FREQUENCIES_LABEL", tr("analysis", "Frequencies"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     if (gameGlobalInfo->use_beam_shield_frequencies)
@@ -225,7 +225,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 
     (new GuiLabel(signatures_section, "SIGNATURES_LABEL", tr("analysis", "Radar signatures"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     info_electrical_signal_band = new GuiSignalQualityIndicator(signatures_section, "ELECTRICAL_SIGNAL");

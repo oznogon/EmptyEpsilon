@@ -92,14 +92,14 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             float strip_size = 0.0f;
 
             for (GuiButton* button : buttons)
-                if (button->isVisible()) strip_size += 50.0f;
+                if (button->isVisible()) strip_size += GuiElement::GuiSizeRow;
 
             button_strip->setSize(GuiElement::GuiSizeMax, strip_size);
         }
 
         button_strip->setVisible(value)->moveToFront();
     });
-    open_button->setValue(false)->setSize(GuiElement::GuiSizeMax, 50.0f);
+    open_button->setValue(false)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Front, back, left, and right view buttons.
     buttons.push_back(new GuiToggleButton(button_strip, "MAIN_SCREEN_FRONT_BUTTON", tr("mainscreen", "Front"),

@@ -73,7 +73,7 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
     zoom_slider = new GuiRadarZoomSlider(this, "RADAR_ZOOM", 5000.0f, 30000.0f, 30000.0f, radar);
     zoom_slider
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position)
@@ -105,7 +105,7 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
             {"Short range", "Long range", "Strategic"}
         )
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(200.0f, 50.0f);
+        ->setSize(200.0f, GuiElement::GuiSizeRow);
 
     auto_rotate_button = new GuiToggleButton(this, "AUTO_ROTATE", tr("radar", "Auto rotate"),
         [this](bool value)
@@ -120,7 +120,7 @@ RadarScreen::RadarScreen(GuiContainer* owner, string type)
     );
     auto_rotate_button
         ->setPosition(20.0f, -80.0f, sp::Alignment::BottomLeft)
-        ->setSize(200.0f, 50.0f);
+        ->setSize(200.0f, GuiElement::GuiSizeRow);
 
     setRadarMode(type);
 

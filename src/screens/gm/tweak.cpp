@@ -5254,7 +5254,7 @@ GuiTweakPage::GuiTweakPage(GuiContainer* owner)
             add_component(entity);
     });
     add_remove_button
-        ->setSize(300.0f, 50.0f)
+        ->setSize(300.0f, GuiElement::GuiSizeRow)
         ->setAttribute("alignment", "topcenter");
 
     tweaks = new GuiScrollContainer(this, "TWEAKS");

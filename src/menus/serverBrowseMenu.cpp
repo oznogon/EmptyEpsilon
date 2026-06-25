@@ -1,6 +1,6 @@
+#include "serverBrowseMenu.h"
 #include <i18n.h>
 #include "main.h"
-#include "serverBrowseMenu.h"
 #include "joinServerMenu.h"
 #include "multiplayer_server_scanner.h"
 #include "preferenceManager.h"
@@ -46,104 +46,168 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
     scanner->scanLocalNetwork();
     scanner->scanMasterServer(PreferencesManager::get("registry_list_url", "http://daid.eu/ee/list.php"));
 
+    // Draw background elements.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
-    (new GuiButton(this, "BACK", tr("button", "Back"), [this]() {
-        destroy();
-        returnToMainMenu(getRenderLayer());
-    }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(300, 50);
+    (new GuiButton(this, "BACK", tr("button", "Back"),
+        [this]()
+        {
+            destroy();
+            returnToMainMenu(getRenderLayer());
+        }
+    ))
+        ->setPosition(50.0f, -50.0f, sp::Alignment::BottomLeft)
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     if (last_attempt)
     {
-        auto error_message = tr("Connection error: {message}").format({ {"message", disconnectErrorMessage(*last_attempt)} });
-        auto error_info = new GuiLabel(this, "LAST_ATTEMPT_ERROR_MESSAGE", error_message, 30);
-        error_info->setPosition(0, 25, sp::Alignment::TopCenter);
+        auto error_message = tr("Connection error: {message}").format({
+            {"message", disconnectErrorMessage(*last_attempt)}
+        });
+
+        auto error_info = new GuiLabel(this, "LAST_ATTEMPT_ERROR_MESSAGE", error_message, GuiElement::GuiSizeLabel);
+        error_info->setPosition(0.0f, 25.0f, sp::Alignment::TopCenter);
     }
 
-    connect_button = new GuiButton(this, "CONNECT", tr("screenLan", "Connect"), [this]() {
-        if (selected_server) {
-            connect(selected_server.value());
-        } else {
-            connect(manual_ip->getText());
+    connect_button = new GuiButton(this, "CONNECT", tr("screenLan", "Connect"),
+        [this]()
+        {
+            if (selected_server)
+                connect(selected_server.value());
+            else
+                connect(manual_ip->getText());
         }
-    });
-    connect_button->setPosition(-50, -50, sp::Alignment::BottomRight)->setSize(300, 50);
+    );
+    connect_button
+        ->setPosition(-50.0f, -50.0f, sp::Alignment::BottomRight)
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     manual_ip = new GuiTextEntry(this, "IP", "");
-    manual_ip->setPosition(-50, -120, sp::Alignment::BottomRight)->setSize(300, 50);
-    manual_ip->callback([this](string text) {
-        selected_server.reset();
-    });
-    manual_ip->enterCallback([this](string text) {
-        connect(text);
-    });
-    server_list_box = new GuiListbox(this, "SERVERS", [this](int index, string value) {
-        if (value == "last_server") {
-            manual_ip->setText(PreferencesManager::get("last_server", ""));
-            selected_server.reset();
-        } else {
-            selected_server = server_list[value.toInt()];
-            manual_ip->setText(selected_server.value().address.getHumanReadable()[0]);
+    manual_ip
+        ->enterCallback(
+            [this](string text)
+            {
+                connect(text);
+            }
+        )
+        ->callback(
+            [this](string text)
+            {
+                selected_server.reset();
+            }
+        )
+        ->setPosition(-50.0f, -120.0f, sp::Alignment::BottomRight)
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
+
+    server_list_box = new GuiListbox(this, "SERVERS",
+        [this](int index, string value)
+        {
+            if (value == "last_server")
+            {
+                manual_ip->setText(PreferencesManager::get("last_server", ""));
+                selected_server.reset();
+            }
+            else
+            {
+                selected_server = server_list[value.toInt()];
+                manual_ip->setText(selected_server.value().address.getHumanReadable()[0]);
+            }
         }
-    });
-    scanner->addCallbacks([this](const ServerScanner::ServerInfo& info) {
-        //New server found
-        if (info.address.getHumanReadable().empty()) return;
-        server_list.push_back(info);
-        updateServerList();
-        if (manual_ip->getText() == "")
-            manual_ip->setText(info.address.getHumanReadable()[0]);
-    }, [this](const ServerScanner::ServerInfo& info) {
-        //Server removed from list
-        if (info.address.getHumanReadable().empty()) return;
-        server_list.erase(std::remove_if(server_list.begin(), server_list.end(), [&info](const ServerScanner::ServerInfo& entry){
-            return info.type == entry.type && info.address == entry.address && info.port == entry.port;
-        }), server_list.end());
-    });
-    server_list_box->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(700, 600);
+    );
+    server_list_box
+        ->setPosition(0.0f, 50.0f, sp::Alignment::TopCenter)
+        ->setSize(700.0f, 600.0f);
+
+    scanner
+        ->addCallbacks(
+            // New server found
+            [this](const ServerScanner::ServerInfo& info)
+            {
+                if (info.address.getHumanReadable().empty()) return;
+
+                server_list.push_back(info);
+                updateServerList();
+
+                if (manual_ip->getText() == "")
+                    manual_ip->setText(info.address.getHumanReadable()[0]);
+            },
+            // Server removed from list
+            [this](const ServerScanner::ServerInfo& info)
+            {
+                if (info.address.getHumanReadable().empty()) return;
+
+                server_list.erase(std::remove_if(
+                    server_list.begin(),
+                    server_list.end(),
+                    [&info](const ServerScanner::ServerInfo& entry)
+                    {
+                        return info.type == entry.type && info.address == entry.address && info.port == entry.port;
+                    }
+                ), server_list.end());
+            }
+        );
+
     updateServerList();
 }
 
 void ServerBrowserMenu::updateServerList()
 {
     server_list_box->setOptions({});
-    if (PreferencesManager::get("last_server", "") != "") {
-        server_list_box->addEntry(tr("Last Session ({last})").format({{"last", PreferencesManager::get("last_server", "")}}), "last_server");
+
+    // Show previous server, if known.
+    if (PreferencesManager::get("last_server", "") != "")
+    {
+        server_list_box->addEntry(tr("Previous session: ({last})").format({
+            {"last", PreferencesManager::get("last_server", "")}
+        }), "last_server");
     }
-    std::stable_sort(server_list.begin(), server_list.end(), [](const auto& a, const auto& b) {
-        //Sort by type, then by server name, and finally by IP address (prefering short addresses first)
-        if (a.type == b.type && a.name == b.name) {
-            auto aa = a.address.getHumanReadable()[0];
-            auto ba = b.address.getHumanReadable()[0];
-            if (aa.size() == ba.size())
-                return aa < ba;
-            return aa.size() < ba.size();
+
+    // Sort server list by type, then by server name, and finally by IP address
+    // (prefering short addresses first)
+    std::stable_sort(
+        server_list.begin(),
+        server_list.end(),
+        [](const auto& a, const auto& b)
+        {
+            if (a.type == b.type && a.name == b.name)
+            {
+                auto aa = a.address.getHumanReadable()[0];
+                auto ba = b.address.getHumanReadable()[0];
+
+                if (aa.size() == ba.size()) return aa < ba;
+                return aa.size() < ba.size();
+            }
+
+            if (a.type == b.type) return a.name < b.name;
+            return a.type < b.type;
         }
-        if (a.type == b.type)
-            return a.name < b.name;
-        return a.type < b.type;
-    });
-    for(int idx = 0; idx < int(server_list.size()); idx++) {
+    );
+
+    for (int idx = 0; idx < static_cast<int>(server_list.size()); idx++)
+    {
         const auto& entry = server_list[idx];
         auto label = entry.name + " (" + entry.address.getHumanReadable()[0] + ")";
-        switch(entry.type) {
+
+        switch(entry.type)
+        {
         case ServerScanner::ServerType::Manual:
             break;
         case ServerScanner::ServerType::LAN:
-            label = "LAN: " + label;
+            label = tr("server_type", "LAN: ") + label;
             break;
         case ServerScanner::ServerType::MasterServer:
-            label = "Internet: " + label;
+            label = tr("server_type", "Internet: ") + label;
             break;
         case ServerScanner::ServerType::SteamFriend:
-            label = "Steam: " + entry.name;
+            label = tr("server_type", "Steam: ") + entry.name;
             break;
         }
+
         server_list_box->addEntry(label, string(idx));
     }
 }
-
 
 ServerBrowserMenu::~ServerBrowserMenu()
 {
@@ -154,11 +218,13 @@ void ServerBrowserMenu::connect(string host)
 {
     host = host.strip();
     uint64_t port = defaultServerPort;
+
     if (host.find(":") != -1)
     {
         port = host.substr(host.find(":") + 1).toInt64();
         host = host.substr(0, host.find(":"));
     }
+
     ServerScanner::ServerInfo info;
     info.type = ServerScanner::ServerType::Manual;
     info.name = host;

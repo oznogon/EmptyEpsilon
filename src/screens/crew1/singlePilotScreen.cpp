@@ -123,7 +123,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(0.0f, -20.0f, sp::Alignment::BottomCenter)
-        ->setSize(500.0f, 50.0f)
+        ->setSize(500.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     // Beam controls beneath the radar.

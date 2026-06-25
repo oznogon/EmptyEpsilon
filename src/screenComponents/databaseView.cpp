@@ -36,7 +36,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         }
     );
     back_button
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->hide()
         ->setAttribute("margin", "0, 0, 0, 20");
 

@@ -44,7 +44,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Message if entity lacks the DroneController component.
-    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("drone", "No beam weapons"), 50.0f);
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("drone", "No beam weapons"), GuiElement::GuiSizeRow);
     no_weapons_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -86,7 +86,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
     beam_safety
         ->setIcon("gui/icons/lock-beams")
         ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     beam_info_box = new GuiElement(beam_controls, "BEAM_INFO_BOX");
     beam_info_box
@@ -99,18 +99,18 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
     {
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam targeting"), 30.0f))
             ->addBackground()
-            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Frequency"), 25.0f))
             ->setSize(GuiElement::GuiSizeMax, 40.0f);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))
-            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Target system"), 25.0f))
             ->setSize(GuiElement::GuiSizeMax, 40.0f);
         (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))
-            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
         (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))
-            ->setSize(GuiElement::GuiSizeMax, 50.0f)
-            ->setPosition(0.0f, 50.0f, sp::Alignment::TopLeft);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setPosition(0.0f, GuiElement::GuiSizeRow, sp::Alignment::TopLeft);
     }
 
     auto stats = new GuiElement(beam_controls, "WEAPONS_STATS");
@@ -144,7 +144,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
     );
     sidebar_selector
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
-        ->setSize(250.0f, 50.0f)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     custom_function_sidebar = new GuiCustomShipFunctions(beam_controls, CrewPosition::beamWeaponsOfficer, "BEAM_WEAPONS_CUSTOM_FUNCS");

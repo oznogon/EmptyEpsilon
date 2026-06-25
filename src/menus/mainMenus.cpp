@@ -30,7 +30,7 @@ MainMenu::MainMenu()
     constexpr float logo_size_y = 256.0f;
     constexpr float logo_size_x = 1024.0f;
     constexpr float title_y = 160.0f;
-    constexpr float button_height = 50.0f;
+    constexpr float button_height = GuiElement::GuiSizeRow;
 
     // Background elements
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
@@ -44,7 +44,7 @@ MainMenu::MainMenu()
     // Version number
     (new GuiLabel(this, "VERSION", tr("Credits", "Oznogon fork\nVersion {version}").format({{"version", string(VERSION_NUMBER)}}), 25.0f))
         ->setPosition(0.0f, title_y + logo_size, sp::Alignment::TopCenter)
-        ->setSize(0.0f, 50.0f);
+        ->setSize(0.0f, GuiElement::GuiSizeRow);
 
     // Menu selections
     auto* container = new GuiElement(this, "");
@@ -170,7 +170,7 @@ CreditsScreen::CreditsScreen()
 
     // Header
     (new GuiLabel(container, "HEADER", tr("EmptyEpsilon Credits"), 50.0f))
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Prep credits text
     string credits_text =
@@ -256,7 +256,7 @@ CreditsScreen::CreditsScreen()
 
     auto* back_row = new GuiElement(container, "");
     back_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     (new GuiButton(back_row, "BACK", tr("button", "Back"),
         [this]()

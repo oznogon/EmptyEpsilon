@@ -54,7 +54,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     new AlertLevelOverlay(this);
 
     // Message if entity lacks both weapons and shields.
-    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("weapons", "No weapons or shields"), 50.0f);
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("weapons", "No weapons or shields"), GuiElement::GuiSizeRow);
     no_weapons_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -97,7 +97,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     lock_aim = new AimLockButton(weapons_controls, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim
         ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     beam_info_box = new GuiElement(weapons_controls, "BEAM_INFO_BOX");
     beam_info_box
@@ -110,7 +110,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         beam_info_box->show();
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam targeting"), 30.0f))
             ->addBackground()
-            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
         (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, -50, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 50);
@@ -119,7 +119,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         // shield button partially overlaps this control. So move the beam
         // configuration a bit down.
         if (!gameGlobalInfo->use_beam_shield_frequencies)
-            beam_info_box->setPosition(-20.0f, -50.0f, sp::Alignment::BottomRight);
+            beam_info_box->setPosition(-20.0f, -GuiElement::GuiSizeRow, sp::Alignment::BottomRight);
     }
 
     // Beam weapons autofire safety toggle.
@@ -132,7 +132,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     beam_safety
         ->setIcon("gui/icons/lock-beams")
         ->setPosition(250.0f, 70.0f, sp::Alignment::TopCenter)
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     auto stats = new GuiElement(weapons_controls, "WEAPONS_STATS");
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 120)->setAttribute("layout", "vertical");

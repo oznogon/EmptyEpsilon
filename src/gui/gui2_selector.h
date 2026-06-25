@@ -10,9 +10,9 @@ class GuiToggleButton;
 class GuiSelector : public GuiEntryList
 {
 protected:
-    float text_size = 30.0f;
+    float text_size = GuiElement::GuiSizeLabel;
     float popup_width = 0.0f;
-    float button_height = 50.0f;
+    float button_height = GuiElement::GuiSizeRow;
     sp::Alignment text_alignment;
     GuiArrowButton* left;
     GuiArrowButton* right;

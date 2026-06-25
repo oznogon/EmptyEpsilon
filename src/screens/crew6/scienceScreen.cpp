@@ -85,7 +85,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Message if entity lacks the LongRangeRadar component.
-    no_radar_label = new GuiLabel(radar_view, "NO_RADAR_LABEL", tr("science", "No long-range radar"), 50.0f);
+    no_radar_label = new GuiLabel(radar_view, "NO_RADAR_LABEL", tr("science", "No long-range radar"), GuiElement::GuiSizeRow);
     no_radar_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -204,7 +204,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     sidebar_selector
         ->setSelectionIndex(0)
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     // Target scan data sidebar.
     info_sidebar = new GuiElement(radar_view, "SIDEBAR");
@@ -227,7 +227,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Scan button.
     scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
     scan_button
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setVisible(my_spaceship.hasComponent<ScienceScanner>());
 
     // Link to analysis button.
@@ -238,7 +238,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
                 my_player_info->commandSetAnalysisTarget(targets.get());
         }
     );
-    link_to_analysis_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+    link_to_analysis_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Simple scan data.
     info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4f, tr("science", "Callsign"), "");
@@ -276,7 +276,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_faction_button
         ->setTextSize(20.0f)
         ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
-        ->setSize(50.0f, 28.0f);
+        ->setSize(GuiElement::GuiSizeRow, 28.0f);
 
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4f, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30.0f);
@@ -300,7 +300,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_type_button
         ->setTextSize(20.0f)
         ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
-        ->setSize(50.0f, 28.0f);
+        ->setSize(GuiElement::GuiSizeRow, 28.0f);
 
     info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4f, tr("science", "Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30.0f);
@@ -312,7 +312,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Draw and hide the sidebar pager. Tabs are populated dynamically in onDraw.
     sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [](int index, string value) {});
     sidebar_pager
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->hide();
 
     // If the server uses frequencies, add the Tactical sidebar page.
@@ -461,14 +461,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     );
     probe_view_button
         ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
-        ->setSize(200.0f, 50.0f)
+        ->setSize(200.0f, GuiElement::GuiSizeRow)
         ->disable();
 
     // Draw the zoom slider.
     zoom_slider = new GuiRadarZoomSlider(radar_view, "RADAR_ZOOM", effective_short_range, effective_long_range, effective_long_range, science_radar);
     zoom_slider
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     // Radar/database view toggle.
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION",

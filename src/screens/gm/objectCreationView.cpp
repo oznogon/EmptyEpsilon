@@ -60,7 +60,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
 
     faction_selector
         ->setSelectionIndex(0)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     category_selector = new GuiListbox(col1, "CATEGORY_SELECTOR", [this](int index, string)
     {

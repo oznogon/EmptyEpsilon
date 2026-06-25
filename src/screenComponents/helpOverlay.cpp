@@ -46,7 +46,7 @@ GuiHelpOverlay::GuiHelpOverlay(GuiContainer* owner, string help_title, string he
         frame->hide();
     }))
         ->setPosition(0.0f, 0.0f, sp::Alignment::BottomCenter)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 }
 
 GuiHelpOverlay* GuiHelpOverlay::setTitle(string new_title)

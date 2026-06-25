@@ -58,7 +58,7 @@ private:
 
     CrewPosition current_position = CrewPosition::helmsOfficer;
     std::vector<CrewTabInfo> tabs;
-    const float BUTTON_HEIGHT = 50.0f;
+    const float BUTTON_HEIGHT = GuiElement::GuiSizeRow;
     void showNextTab(int offset=1);
     void showTab(GuiElement* element);
     std::vector<string> hotkey_categories = {tr("hotkey_menu", "General"), tr("hotkey_menu", "Crew screens")};

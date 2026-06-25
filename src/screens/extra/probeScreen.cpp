@@ -33,7 +33,7 @@ ProbeScreen::ProbeScreen(GuiContainer* owner)
     new AlertLevelOverlay(this);
 
     // Message if entity lacks a linked probe.
-    no_probe_label = new GuiLabel(this, "NO_PROBE_LABEL", tr("probe_screen", "No probe linked"), 50.0f);
+    no_probe_label = new GuiLabel(this, "NO_PROBE_LABEL", tr("probe_screen", "No probe linked"), GuiElement::GuiSizeRow);
     no_probe_label
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)

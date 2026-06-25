@@ -219,7 +219,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
     zoom_slider = new GuiRadarZoomSlider(radar_pane, "DRONE_ZOOM_SLIDER", short_range, std::max(short_range, initial_control_range), initial_control_range, radar);
     zoom_slider
         ->setPosition(20.0f, -70.0f, sp::Alignment::BottomLeft)
-        ->setSize(250.0f, 50.0f)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     // Aim lock dial.
@@ -249,7 +249,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
             }
         }
     );
-    drone_selector->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)->setSize(300.0f, 50.0f);
+    drone_selector->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)->setSize(300.0f, GuiElement::GuiSizeRow);
 
     connect_button = new GuiToggleButton(radar_pane, "CONNECT_BUTTON", tr("drone", "Connect"),
         [this](bool value)
@@ -268,7 +268,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
     );
     connect_button
         ->setPosition(320.0f, 20.0f, sp::Alignment::TopLeft)
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     // drone_shields_button shown when connected.
     drone_shields_button = new GuiToggleButton(radar_pane, "DRONE_SHIELDS_BUTTON", tr("drone", "Shields: ON"),
@@ -279,14 +279,14 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
     );
     drone_shields_button
         ->setPosition(20.0f, 80.0f, sp::Alignment::TopLeft)
-        ->setSize(250.0f, 50.0f)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     // Drone docking button shown when connected.
     drone_docking_button = new GuiDroneDockingButton(radar_pane, "DRONE_DOCKING_BUTTON");
     drone_docking_button
         ->setPosition(280.0f, 80.0f, sp::Alignment::TopLeft)
-        ->setSize(250.0f, 50.0f)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     // Engine layout (shown when connected). Positioned below the button row.
@@ -379,7 +379,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
     );
     jump_button
         ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Stats at bottom right.
     drone_stats = new GuiElement(radar_pane, "DRONE_STATS");
@@ -487,7 +487,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
     combat_charge
         ->setColor(glm::u8vec4(192, 192, 192, 64))
         ->setPosition(0.0f, 0.0f, sp::Alignment::BottomCenter)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
     (new GuiLabel(combat_charge, "COMBAT_LABEL", tr("Combat maneuver"), 20.0f))
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -537,14 +537,14 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
     beam_info_box = new GuiElement(radar_pane, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(0.0f, -20.0f, sp::Alignment::BottomCenter)
-        ->setSize(500.0f, 50.0f)
+        ->setSize(500.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     {
         (new GuiLabel(beam_info_box, "BEAM_LABEL", tr("Beams"), 30.0f))
             ->addBackground()
             ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
-            ->setSize(80.0f, 50.0f);
+            ->setSize(80.0f, GuiElement::GuiSizeRow);
 
         beam_freq_selector = new GuiSelector(beam_info_box, "BEAM_FREQ",
             [this](int index, string value)
@@ -557,7 +557,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
             beam_freq_selector->addEntry(frequencyToString(n), frequencyToString(n));
         beam_freq_selector
             ->setPosition(80.0f, 0.0f, sp::Alignment::BottomLeft)
-            ->setSize(132.0f, 50.0f);
+            ->setSize(132.0f, GuiElement::GuiSizeRow);
 
         if (gameGlobalInfo->use_system_damage)
         {
@@ -573,7 +573,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
             beam_sys_selector
                 ->setSelectionIndex(0)
                 ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
-                ->setSize(288.0f, 50.0f);
+                ->setSize(288.0f, GuiElement::GuiSizeRow);
         }
     }
 
@@ -620,7 +620,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
         ->setValue(false)
         ->setIcon("gui/icons/lock")
         ->setPosition(250.0f, 70.0f, sp::Alignment::TopCenter)
-        ->setSize(130.0f, 50.0f);
+        ->setSize(130.0f, GuiElement::GuiSizeRow);
 
     // Player ship controls (shown when disconnected).
     player_controls = new GuiElement(radar_pane, "PLAYER_CONTROLS");
@@ -764,7 +764,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
                 }
             }
         );
-        row.load_button->setSize(130.0f, 50.0f);
+        row.load_button->setSize(130.0f, GuiElement::GuiSizeRow);
 
         row.fire_button = new GuiButton(row.layout, "TUBE_FIRE_" + string(row_idx), tr("missile", "Fire"),
             [this, row_idx]()
@@ -794,12 +794,12 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
                 }
             }
         );
-        row.fire_button->setSize(200.0f, 50.0f);
+        row.fire_button->setSize(200.0f, GuiElement::GuiSizeRow);
 
         row.loading_bar = new GuiProgressbar(row.layout, "TUBE_BAR_" + string(row_idx), 0.0f, 1.0f, 0.0f);
         row.loading_bar
             ->setColor(glm::u8vec4(128, 128, 128, 255))
-            ->setSize(200.0f, 50.0f)
+            ->setSize(200.0f, GuiElement::GuiSizeRow)
             ->hide();
         row.loading_label = new GuiLabel(row.loading_bar, "TUBE_BAR_LABEL_" + string(row_idx), tr("missile", "Loading"), 35.0f);
         row.loading_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

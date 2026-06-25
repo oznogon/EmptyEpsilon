@@ -80,8 +80,8 @@ void GuiResizableDialog::onDraw(sp::RenderTarget& renderer)
 
     if (rect.position.x < -50.0f)
         setPosition(-50.0f, getPositionOffset().y);
-    if (rect.position.y < -(title_bar_height / 2.0f))
-        setPosition(getPositionOffset().x, -(title_bar_height / 2.0f));
+    if (rect.position.y < -(title_bar_height * 0.5f))
+        setPosition(getPositionOffset().x, -(title_bar_height * 0.5f));
     if (rect.position.x > window_size.x - 50.0f)
         setPosition(window_size.x - 50.0f, getPositionOffset().y);
     if (rect.position.y > window_size.y - title_bar_height)
