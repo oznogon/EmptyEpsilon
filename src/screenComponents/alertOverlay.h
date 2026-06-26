@@ -1,19 +1,17 @@
-#ifndef ALERT_LEVEL_OVERLAY_H
-#define ALERT_LEVEL_OVERLAY_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
 class GuiOverlay;
-class GuiLabel;
 
 class AlertLevelOverlay : public GuiElement
 {
 private:
+    const float PULSE_PERIOD = 2.0f;
+
     string alert_sprite;
 public:
     AlertLevelOverlay(GuiContainer* owner);
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };
-
-#endif//ALERT_LEVEL_OVERLAY_H
