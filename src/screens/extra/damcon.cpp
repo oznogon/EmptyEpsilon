@@ -372,7 +372,7 @@ void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hov
                     radius,
                     static_cast<float>(i) * arc - arc * 0.5f + gap,
                     static_cast<float>(i) * arc + arc * 0.5f - gap,
-                    std::floorf(8.0f * level),
+                    std::floor(8.0f * level),
                     color
                 );
             }
