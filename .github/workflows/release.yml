@@ -1,0 +1,174 @@
+name: Release oz-fork
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: "GitHub Release ID to upload assets to (numeric)"
+        required: true
+        type: string
+      upload_url:
+        description: "Upload URL from the Release API (includes {?name,label})"
+        required: true
+        type: string
+      dry_run:
+        description: "Build but skip deploy-nightly upload"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: debian-amd64
+            runner: ubuntu-latest
+            script: build-debian.sh
+            ext: deb
+            content_type: application/vnd.debian.binary-package
+          - id: debian-arm64
+            runner: ubuntu-latest
+            script: build-dockcross.sh
+            dockcross_image: linux-arm64
+            cpack_gen: DEB
+            cpack_arch: -DCPACK_DEBIAN_PACKAGE_ARCHITECTURE=arm64
+            ext: deb
+            content_type: application/vnd.debian.binary-package
+          - id: fedora-amd64
+            runner: ubuntu-latest
+            script: build-dockcross.sh
+            dockcross_image: linux-x64
+            cpack_gen: RPM
+            cpack_arch: -DCPACK_RPM_PACKAGE_ARCHITECTURE=x86_64
+            ext: rpm
+            content_type: application/x-rpm
+          - id: fedora-arm64
+            runner: ubuntu-latest
+            script: build-dockcross.sh
+            dockcross_image: linux-arm64
+            cpack_gen: RPM
+            cpack_arch: -DCPACK_RPM_PACKAGE_ARCHITECTURE=aarch64
+            ext: rpm
+            content_type: application/x-rpm
+          - id: windows-amd64
+            runner: ubuntu-latest
+            script: build-dockcross.sh
+            dockcross_image: windows-static-x64
+            cpack_gen: ZIP
+            ext: zip
+            content_type: application/zip
+          - id: windows-arm64
+            runner: ubuntu-latest
+            script: build-dockcross.sh
+            dockcross_image: windows-arm64
+            cpack_gen: ZIP
+            lto_disable: true
+            ext: zip
+            content_type: application/zip
+          - id: macos-amd64
+            runner: macos-13
+            script: build-macos.sh
+            ext: dmg
+            content_type: application/x-apple-diskimage
+          - id: macos-arm64
+            runner: macos-latest
+            script: build-macos.sh
+            ext: dmg
+            content_type: application/x-apple-diskimage
+
+    runs-on: ${{ matrix.runner }}
+
+    env:
+      EE_DOCKCROSS_IMAGE: ${{ matrix.dockcross_image || '' }}
+      EE_CPACK_GEN: ${{ matrix.cpack_gen || '' }}
+      EE_CPACK_ARCH: ${{ matrix.cpack_arch || '' }}
+      EE_LTO_DISABLE: ${{ matrix.lto_disable || '' }}
+
+    steps:
+      - name: Checkout EmptyEpsilon (oz-fork)
+        uses: actions/checkout@v4
+        with:
+          repository: oznogon/EmptyEpsilon
+          ref: oz-fork
+          path: EmptyEpsilon
+
+      - name: Checkout SeriousProton (oz-fork)
+        uses: actions/checkout@v4
+        with:
+          repository: oznogon/SeriousProton
+          ref: oz-fork
+          path: SeriousProton
+
+      - name: Cache SDL2
+        if: ${{ matrix.dockcross_image }}
+        uses: actions/cache@v4
+        with:
+          path: SDL2-2.32.10
+          key: sdl2-${{ matrix.id }}-v1
+
+      - name: Generate version.cmake
+        run: |
+          DATE=$(date -u +%Y%m%d)
+          cat > EmptyEpsilon/version.cmake <<EOF
+          set(PROJECT_VERSION ${DATE})
+          set(PROJECT_VERSION_MAJOR ${DATE:0:4})
+          set(PROJECT_VERSION_MINOR ${DATE:4:2})
+          set(PROJECT_VERSION_PATCH ${DATE:6:2})
+          set(CPACK_PACKAGE_VERSION ${DATE})
+          set(CPACK_DEBIAN_PACKAGE_VERSION ${DATE})
+          set(CPACK_RPM_PACKAGE_VERSION ${DATE})
+          EOF
+
+      - name: Run ${{ matrix.script }}
+        run: |
+          chmod +x ".github/scripts/${{ matrix.script }}"
+          ".github/scripts/${{ matrix.script }}"
+        working-directory: EmptyEpsilon
+
+      - name: Locate package
+        id: locate
+        run: |
+          pkg=$(find "${{ github.workspace }}/EmptyEpsilon" -maxdepth 3 -type f \( \
+            -name "EmptyEpsilon.deb" -o \
+            -name "EmptyEpsilon.rpm" -o \
+            -name "EmptyEpsilon.zip"  -o \
+            -name "EmptyEpsilon.dmg" \
+          \) 2>/dev/null | head -1)
+          if [ -z "$pkg" ]; then
+            echo "No package found in EmptyEpsilon build directory"
+            ls -la "${{ github.workspace }}/EmptyEpsilon/_build" 2>/dev/null || true
+            echo "path=" >> "$GITHUB_OUTPUT"
+          else
+            echo "path=$pkg" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload build artifact
+        if: ${{ steps.locate.outputs.path != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: emptyepsilon-${{ matrix.id }}
+          path: ${{ steps.locate.outputs.path }}
+          retention-days: 7
+
+      - name: Deploy nightly release asset
+        if: ${{ !inputs.dry_run && steps.locate.outputs.path != '' }}
+        uses: WebFreak001/deploy-nightly@v3.2.0
+        with:
+          upload_url: ${{ inputs.upload_url }}
+          release_id: ${{ inputs.release_id }}
+          asset_path: ${{ steps.locate.outputs.path }}
+          asset_name: emptyepsilon-${{ matrix.id }}-$$.${{ matrix.ext }}
+          asset_content_type: ${{ matrix.content_type }}
+          max_releases: 5
