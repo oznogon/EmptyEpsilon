@@ -1,0 +1,286 @@
+name: Release oz-fork
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: "GitHub Release ID to upload assets to (numeric)"
+        required: true
+        type: string
+      upload_url:
+        description: "Upload URL from the Release API (includes {?name,label})"
+        required: true
+        type: string
+      dry_run:
+        description: "Build but skip deploy-nightly upload"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  debian:
+    name: Debian ${{ matrix.arch }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-latest
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: oznogon/EmptyEpsilon
+          ref: oz-fork
+          path: EmptyEpsilon
+      - uses: actions/checkout@v4
+        with:
+          repository: oznogon/SeriousProton
+          ref: oz-fork
+          path: SeriousProton
+      - name: Generate version.cmake
+        run: |
+          DATE=$(date -u +%Y%m%d)
+          cat > EmptyEpsilon/version.cmake <<EOF
+          set(PROJECT_VERSION ${DATE})
+          set(PROJECT_VERSION_MAJOR ${DATE:0:4})
+          set(PROJECT_VERSION_MINOR ${DATE:4:2})
+          set(PROJECT_VERSION_PATCH ${DATE:6:2})
+          set(CPACK_PACKAGE_VERSION ${DATE})
+          set(CPACK_DEBIAN_PACKAGE_VERSION ${DATE})
+          set(CPACK_RPM_PACKAGE_VERSION ${DATE})
+          EOF
+      - name: Build Debian package
+        run: |
+          chmod +x .github/scripts/build-debian.sh
+          .github/scripts/build-debian.sh "${{ matrix.arch }}"
+        working-directory: EmptyEpsilon
+      - name: Locate package
+        id: locate
+        run: |
+          pkg=""
+          for f in "$GITHUB_WORKSPACE/EmptyEpsilon/_build/"*.deb; do
+            [ -f "$f" ] && { pkg="$f"; break; }
+          done
+          echo "path=$pkg" >> "$GITHUB_OUTPUT"
+      - name: Upload artifact
+        if: ${{ steps.locate.outputs.path != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: emptyepsilon-debian-${{ matrix.arch }}
+          path: ${{ steps.locate.outputs.path }}
+          retention-days: 7
+      - name: Deploy nightly
+        if: ${{ !inputs.dry_run && steps.locate.outputs.path != '' }}
+        uses: WebFreak001/deploy-nightly@v3.2.0
+        with:
+          upload_url: ${{ inputs.upload_url }}
+          release_id: ${{ inputs.release_id }}
+          asset_path: ${{ steps.locate.outputs.path }}
+          asset_name: emptyepsilon-debian-${{ matrix.arch }}-$$.deb
+          asset_content_type: application/vnd.debian.binary-package
+          max_releases: 5
+
+  fedora:
+    name: Fedora ${{ matrix.arch }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-latest
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    container: fedora:latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: oznogon/EmptyEpsilon
+          ref: oz-fork
+          path: EmptyEpsilon
+      - uses: actions/checkout@v4
+        with:
+          repository: oznogon/SeriousProton
+          ref: oz-fork
+          path: SeriousProton
+      - name: Generate version.cmake
+        run: |
+          DATE=$(date -u +%Y%m%d)
+          cat > EmptyEpsilon/version.cmake <<EOF
+          set(PROJECT_VERSION ${DATE})
+          set(PROJECT_VERSION_MAJOR ${DATE:0:4})
+          set(PROJECT_VERSION_MINOR ${DATE:4:2})
+          set(PROJECT_VERSION_PATCH ${DATE:6:2})
+          set(CPACK_PACKAGE_VERSION ${DATE})
+          set(CPACK_DEBIAN_PACKAGE_VERSION ${DATE})
+          set(CPACK_RPM_PACKAGE_VERSION ${DATE})
+          EOF
+      - name: Build Fedora RPM
+        run: |
+          chmod +x .github/scripts/build-fedora.sh
+          .github/scripts/build-fedora.sh "${{ matrix.arch }}"
+        working-directory: EmptyEpsilon
+      - name: Locate package
+        id: locate
+        run: |
+          pkg=""
+          for f in "$GITHUB_WORKSPACE/EmptyEpsilon/_build/"*.rpm; do
+            [ -f "$f" ] && { pkg="$f"; break; }
+          done
+          echo "path=$pkg" >> "$GITHUB_OUTPUT"
+      - name: Upload artifact
+        if: ${{ steps.locate.outputs.path != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: emptyepsilon-fedora-${{ matrix.arch }}
+          path: ${{ steps.locate.outputs.path }}
+          retention-days: 7
+      - name: Deploy nightly
+        if: ${{ !inputs.dry_run && steps.locate.outputs.path != '' }}
+        uses: WebFreak001/deploy-nightly@v3.2.0
+        with:
+          upload_url: ${{ inputs.upload_url }}
+          release_id: ${{ inputs.release_id }}
+          asset_path: ${{ steps.locate.outputs.path }}
+          asset_name: emptyepsilon-fedora-${{ matrix.arch }}-$$.rpm
+          asset_content_type: application/x-rpm
+          max_releases: 5
+
+  windows:
+    name: Windows ${{ matrix.arch }} (cross)
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+          - arch: arm64
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: oznogon/EmptyEpsilon
+          ref: oz-fork
+          path: EmptyEpsilon
+      - uses: actions/checkout@v4
+        with:
+          repository: oznogon/SeriousProton
+          ref: oz-fork
+          path: SeriousProton
+      - name: Generate version.cmake
+        run: |
+          DATE=$(date -u +%Y%m%d)
+          cat > EmptyEpsilon/version.cmake <<EOF
+          set(PROJECT_VERSION ${DATE})
+          set(PROJECT_VERSION_MAJOR ${DATE:0:4})
+          set(PROJECT_VERSION_MINOR ${DATE:4:2})
+          set(PROJECT_VERSION_PATCH ${DATE:6:2})
+          set(CPACK_PACKAGE_VERSION ${DATE})
+          set(CPACK_DEBIAN_PACKAGE_VERSION ${DATE})
+          set(CPACK_RPM_PACKAGE_VERSION ${DATE})
+          EOF
+      - name: Build Windows ZIP
+        run: |
+          chmod +x .github/scripts/build-windows.sh
+          .github/scripts/build-windows.sh "${{ matrix.arch }}"
+        working-directory: EmptyEpsilon
+      - name: Locate package
+        id: locate
+        run: |
+          pkg=""
+          for f in "$GITHUB_WORKSPACE/EmptyEpsilon/_build/"*.zip; do
+            [ -f "$f" ] && { pkg="$f"; break; }
+          done
+          echo "path=$pkg" >> "$GITHUB_OUTPUT"
+      - name: Upload artifact
+        if: ${{ steps.locate.outputs.path != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: emptyepsilon-windows-${{ matrix.arch }}
+          path: ${{ steps.locate.outputs.path }}
+          retention-days: 7
+      - name: Deploy nightly
+        if: ${{ !inputs.dry_run && steps.locate.outputs.path != '' }}
+        uses: WebFreak001/deploy-nightly@v3.2.0
+        with:
+          upload_url: ${{ inputs.upload_url }}
+          release_id: ${{ inputs.release_id }}
+          asset_path: ${{ steps.locate.outputs.path }}
+          asset_name: emptyepsilon-windows-${{ matrix.arch }}-$$.zip
+          asset_content_type: application/zip
+          max_releases: 5
+
+  macos:
+    name: macOS ${{ matrix.arch }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64
+            runner: macos-latest
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: oznogon/EmptyEpsilon
+          ref: oz-fork
+          path: EmptyEpsilon
+      - uses: actions/checkout@v4
+        with:
+          repository: oznogon/SeriousProton
+          ref: oz-fork
+          path: SeriousProton
+      - name: Generate version.cmake
+        run: |
+          DATE=$(date -u +%Y%m%d)
+          cat > EmptyEpsilon/version.cmake <<EOF
+          set(PROJECT_VERSION ${DATE})
+          set(PROJECT_VERSION_MAJOR ${DATE:0:4})
+          set(PROJECT_VERSION_MINOR ${DATE:4:2})
+          set(PROJECT_VERSION_PATCH ${DATE:6:2})
+          set(CPACK_PACKAGE_VERSION ${DATE})
+          set(CPACK_DEBIAN_PACKAGE_VERSION ${DATE})
+          set(CPACK_RPM_PACKAGE_VERSION ${DATE})
+          EOF
+      - name: Build macOS DMG
+        run: |
+          chmod +x .github/scripts/build-macos.sh
+          .github/scripts/build-macos.sh "${{ matrix.arch }}"
+        working-directory: EmptyEpsilon
+      - name: Locate package
+        id: locate
+        run: |
+          pkg=""
+          for f in "$GITHUB_WORKSPACE/EmptyEpsilon/_build/"*.dmg; do
+            [ -f "$f" ] && { pkg="$f"; break; }
+          done
+          echo "path=$pkg" >> "$GITHUB_OUTPUT"
+      - name: Upload artifact
+        if: ${{ steps.locate.outputs.path != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: emptyepsilon-macos-${{ matrix.arch }}
+          path: ${{ steps.locate.outputs.path }}
+          retention-days: 7
+      - name: Deploy nightly
+        if: ${{ !inputs.dry_run && steps.locate.outputs.path != '' }}
+        uses: WebFreak001/deploy-nightly@v3.2.0
+        with:
+          upload_url: ${{ inputs.upload_url }}
+          release_id: ${{ inputs.release_id }}
+          asset_path: ${{ steps.locate.outputs.path }}
+          asset_name: emptyepsilon-macos-${{ matrix.arch }}-$$.dmg
+          asset_content_type: application/x-apple-diskimage
+          max_releases: 5
