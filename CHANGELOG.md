@@ -774,7 +774,7 @@
 
 - `ShipTemplate:setHull()` and `ShipTemplateBasedObject:setHull()` respect limits #1811
 - `ShipTemplate:getSystemName()` uses import values for enum conversion #1834
-- `ShipTemplate:copy()` respects tube count limit instead of beam count limit #1810
+- `ShipTemplate:copy()` respects tube count limit for tubes, instead of beam count limit #1810
 - Inability to repair systems fixed
 - `CpuShip:orderAttack()` no longer targets non-hostile ships #1812
 - `SpaceShip` no longer attempts to dock with itself #1906
