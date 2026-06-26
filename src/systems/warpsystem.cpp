@@ -54,7 +54,7 @@ void WarpSystem::update(float delta)
             if (reactor) {
                 // If warping, consume energy at a rate of 130% the warp request.
                 // If shields are up, that rate is increased by an additional 70%.
-                auto energy_use = warp.energy_warp_per_second * delta * warp.getSystemEffectiveness() * powf(warp.current, 1.3f);
+                auto energy_use = warp.energy_warp_per_second * delta * warp.getSystemEffectiveness() * pow(warp.current, 1.3f);
                 auto shields = entity.getComponent<Shields>();
                 if (shields && shields->active)
                     energy_use *= 1.7f;
