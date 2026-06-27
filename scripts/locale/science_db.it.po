@@ -648,47 +648,47 @@ msgstr ""
 #: scripts/science_db.lua:244
 msgctxt "database direction"
 msgid "Front"
-msgstr ""
+msgstr "Anteriore"
 
 #: scripts/science_db.lua:245
 msgctxt "database direction"
 msgid "Right"
-msgstr ""
+msgstr "Destra"
 
 #: scripts/science_db.lua:246
 msgctxt "database direction"
 msgid "Left"
-msgstr ""
+msgstr "Sinistra"
 
 #: scripts/science_db.lua:247
 msgctxt "database direction"
 msgid "Rear"
-msgstr ""
+msgstr "Posteriore"
 
 #: scripts/science_db.lua:254
 msgctxt "database"
 msgid "Factions"
-msgstr ""
+msgstr "Fazioni"
 
 #: scripts/science_db.lua:276 scripts/science_db.lua:279
 msgctxt "stance"
 msgid "Neutral"
-msgstr ""
+msgstr "Neutrale"
 
 #: scripts/science_db.lua:280
 msgctxt "stance"
 msgid "Enemy"
-msgstr ""
+msgstr "Nemico"
 
 #: scripts/science_db.lua:281
 msgctxt "stance"
 msgid "Friendly"
-msgstr ""
+msgstr "Amico"
 
 #: scripts/science_db.lua:291
 msgctxt "database"
 msgid "Ships"
-msgstr ""
+msgstr "Navi"
 
 #: scripts/science_db.lua:292
 msgid ""
@@ -700,7 +700,7 @@ msgstr ""
 #: scripts/science_db.lua:294
 msgctxt "database"
 msgid "Stations"
-msgstr ""
+msgstr "Fazioni"
 
 #: scripts/science_db.lua:295
 msgid ""
@@ -711,60 +711,60 @@ msgstr ""
 
 #: scripts/science_db.lua:305 scripts/science_db.lua:330
 msgid "No class"
-msgstr ""
+msgstr "Nessuna classe"
 
 #: scripts/science_db.lua:331
 msgid "No sub-class"
-msgstr ""
+msgstr "Nessuna sottoclasse"
 
 #: scripts/science_db.lua:340
 msgctxt "database"
 msgid "Class"
-msgstr ""
+msgstr "Classe"
 
 #: scripts/science_db.lua:341
 msgctxt "database"
 msgid "Sub-class"
-msgstr ""
+msgstr "Sottoclasse"
 
 #: scripts/science_db.lua:353 scripts/science_db.lua:355
 msgctxt "database"
 msgid "Size"
-msgstr ""
+msgstr "Dimensioni"
 
 #: scripts/science_db.lua:367
 msgctxt "database"
 msgid "Shield"
-msgstr ""
+msgstr "Scudo"
 
 #: scripts/science_db.lua:371
 msgid "Hull"
-msgstr ""
+msgstr "Scafo"
 
 #: scripts/science_db.lua:375
 msgctxt "database"
 msgid "Move speed"
-msgstr ""
+msgstr "Velocità di movimento"
 
 #: scripts/science_db.lua:376
 msgctxt "database"
 msgid "Reverse move speed"
-msgstr ""
+msgstr "Velocità di movimento"
 
 #: scripts/science_db.lua:379
 msgctxt "database"
 msgid "Turn speed"
-msgstr ""
+msgstr "Velocità di virata"
 
 #: scripts/science_db.lua:382
 msgctxt "database"
 msgid "Warp speed"
-msgstr ""
+msgstr "Velocità di curvatura"
 
 #: scripts/science_db.lua:385
 msgctxt "database"
 msgid "Jump range"
-msgstr ""
+msgstr "Portata di salto"
 
 #: scripts/science_db.lua:392
 #, lua-format
@@ -815,3 +815,4 @@ msgstr ""
 #, fuzzy
 #~ msgid "Burst"
 #~ msgstr "Esplosione"
+
