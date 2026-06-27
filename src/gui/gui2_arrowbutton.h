@@ -1,5 +1,4 @@
-#ifndef GUI2_ARROWBUTTON_H
-#define GUI2_ARROWBUTTON_H
+#pragma once
 
 #include "gui2_button.h"
 
@@ -12,5 +11,3 @@ public:
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
 };
-
-#endif//GUI2_ARROWBUTTON_H

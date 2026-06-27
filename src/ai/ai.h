@@ -1,12 +1,10 @@
-#ifndef AI_H
-#define AI_H
+#pragma once
 
 #include "nonCopyable.h"
 #include "graphics/renderTarget.h"
 #include "systems/pathfinding.h"
 #include "components/missiletubes.h"
 
-///Forward declaration
 class CpuShip;
 
 /**!
@@ -100,5 +98,3 @@ protected:
         }
     }
 };
-
-#endif//AI_H

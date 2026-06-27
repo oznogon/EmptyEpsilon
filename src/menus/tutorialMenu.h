@@ -1,5 +1,4 @@
-#ifndef TUTORIAL_MENU_H
-#define TUTORIAL_MENU_H
+#pragma once
 
 #include "gui/gui2_canvas.h"
 #include "Updatable.h"
@@ -27,4 +26,3 @@ public:
 
     virtual void update(float delta) override;
 };
-#endif//TUTORIAL_MENU_H

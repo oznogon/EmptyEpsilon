@@ -1,5 +1,4 @@
-#ifndef HARDWARE_MAPPING_EFFECTS_H
-#define HARDWARE_MAPPING_EFFECTS_H
+#pragma once
 
 #include <unordered_map>
 #include "stringImproved.h"
@@ -84,5 +83,3 @@ public:
     virtual float onActive() override;
     virtual void onInactive() override;
 };
-
-#endif//HARDWARE_MAPPING_EFFECTS_H

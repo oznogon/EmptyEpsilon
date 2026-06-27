@@ -1,5 +1,4 @@
-#ifndef SELF_DESTRUCT_INDICATOR_H
-#define SELF_DESTRUCT_INDICATOR_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -16,5 +15,3 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };
-
-#endif//SELF_DESTRUCT_INDICATOR_H

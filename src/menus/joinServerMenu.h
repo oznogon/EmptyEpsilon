@@ -1,9 +1,7 @@
-#ifndef JOIN_SERVER_MENU_H
-#define JOIN_SERVER_MENU_H
+#pragma once
 
 #include "gui/gui2_canvas.h"
 #include "multiplayer_server_scanner.h"
-
 
 class GuiLabel;
 class GuiPanel;
@@ -23,5 +21,3 @@ private:
     GuiTextEntry* password_entry = nullptr;
     bool password_focused = false;
 };
-
-#endif//JOIN_SERVER_MENU_H

@@ -1,12 +1,12 @@
-#ifndef VIRTUAL_OUTPUT_DEVICE_H
-#define VIRTUAL_OUTPUT_DEVICE_H
+#pragma once
 
 #include <stdint.h>
 #include "graphics/renderTarget.h"
 #include "hardware/hardwareOutputDevice.h"
 
-//The virtual output device is a debugging output device.
+// The virtual output device is a debugging output device.
 class VirtualOutputRenderer;
+
 class VirtualOutputDevice : public HardwareOutputDevice
 {
 private:
@@ -32,16 +32,14 @@ public:
     VirtualOutputDevice();
     virtual ~VirtualOutputDevice();
 
-    //Configure the device.
+    // Configure the device.
     virtual bool configure(std::unordered_map<string, string> settings) override;
 
-    //Set a hardware channel output. Value is 0.0 to 1.0 for no to max output.
+    // Set a hardware channel output. Value is 0.0 to 1.0 for no to max output.
     virtual void setChannelData(int channel, float value) override;
 
-    //Return the number of output channels supported by this device.
+    // Return the number of output channels supported by this device.
     virtual int getChannelCount() override;
 
     void render(sp::RenderTarget& renderer);
 };
-
-#endif//VIRTUAL_OUTPUT_DEVICE_H

@@ -1,5 +1,4 @@
-#ifndef ON_SCREEN_KEYBOARD_H
-#define ON_SCREEN_KEYBOARD_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -14,5 +13,3 @@ private:
 
     void addButtonsToRow(GuiContainer* row, const char* button_keys);
 };
-
-#endif//ON_SCREEN_KEYBOARD_H

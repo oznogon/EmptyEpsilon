@@ -1,5 +1,4 @@
-#ifndef DISCORD_H
-#define DISCORD_H
+#pragma once
 
 #include "Updatable.h"
 #include "dynamicLibrary.h"
@@ -16,5 +15,3 @@ private:
     float updateDelay = 0.0f;
     std::unique_ptr<DynamicLibrary> discord;
 };
-
-#endif//DISCORD_H

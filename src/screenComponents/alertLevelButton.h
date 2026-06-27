@@ -1,5 +1,4 @@
-#ifndef ALERT_LEVEL_BUTTON_H
-#define ALERT_LEVEL_BUTTON_H
+#pragma once
 
 #include "gui/gui2_button.h"
 
@@ -13,5 +12,3 @@ public:
 private:
     std::vector<GuiButton*> alert_level_buttons;
 };
-
-#endif//ALERT_LEVEL_BUTTON_H

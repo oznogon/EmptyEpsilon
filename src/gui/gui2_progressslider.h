@@ -1,5 +1,4 @@
-#ifndef GUI2_PROGRESSSLIDER_H
-#define GUI2_PROGRESSSLIDER_H
+#pragma once
 
 #include "gui2_element.h"
 #include "gui2_progressbar.h"
@@ -18,5 +17,3 @@ public:
 private:
     func_t callback;
 };
-
-#endif//GUI2_PROGRESSSLIDER_H

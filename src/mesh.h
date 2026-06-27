@@ -1,5 +1,4 @@
-#ifndef MESH_H
-#define MESH_H
+#pragma once
 
 #include "nonCopyable.h"
 #include "stringImproved.h"
@@ -34,5 +33,3 @@ public:
 
     static Mesh* getMesh(const string& filename);
 };
-
-#endif//MESH_H

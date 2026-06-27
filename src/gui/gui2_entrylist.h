@@ -1,9 +1,7 @@
-#ifndef GUI2_ENTRYLIST_H
-#define GUI2_ENTRYLIST_H
+#pragma once
 
 #include "gui2_element.h"
 #include "gui2_scrollbar.h"
-
 
 class GuiEntryList : public GuiElement
 {
@@ -52,5 +50,3 @@ protected:
 private:
     virtual void entriesChanged();
 };
-
-#endif//GUI2_ENTRYLIST_H

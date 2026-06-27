@@ -1,5 +1,4 @@
-#ifndef SCENARIO_INFO_H
-#define SCENARIO_INFO_H
+#pragma once
 
 #include <i18n.h>
 #include "stringImproved.h"
@@ -43,5 +42,3 @@ private:
 
     static std::vector<ScenarioInfo> cached_full_list;
 };
-
-#endif//SCENARIO_INFO_H

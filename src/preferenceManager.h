@@ -1,5 +1,4 @@
-#ifndef PREFERENCES_MANAGER_H
-#define PREFERENCES_MANAGER_H
+#pragma once
 
 #include "engine.h"
 
@@ -16,5 +15,3 @@ public:
     static void load(string filename);
     static void save(string filename);
 };
-
-#endif//PREFERENCES_MANAGER_H

@@ -1,5 +1,4 @@
-#ifndef AUTO_CONNECT_SCREEN_H
-#define AUTO_CONNECT_SCREEN_H
+#pragma once
 
 #include "gui/gui2_canvas.h"
 #include "playerInfo.h"
@@ -43,5 +42,3 @@ private:
     bool isValidShip(sp::ecs::Entity ship);
     void connectToShip(sp::ecs::Entity ship);
 };
-
-#endif//AUTO_CONNECT_SCREEN_H

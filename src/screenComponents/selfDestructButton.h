@@ -1,5 +1,4 @@
-#ifndef SELF_DESTRUCT_BUTTON_H
-#define SELF_DESTRUCT_BUTTON_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -17,5 +16,3 @@ public:
     virtual void onUpdate() override;
     virtual void onDraw(sp::RenderTarget& target) override;
 };
-
-#endif//SELF_DESTRUCT_BUTTON_H

@@ -1,5 +1,4 @@
-#ifndef FIGHTER_AI_H
-#define FIGHTER_AI_H
+#pragma once
 
 #include "ai.h"
 
@@ -28,6 +27,3 @@ public:
     virtual void runOrders() override;
     virtual void runAttack(sp::ecs::Entity target) override;
 };
-
-
-#endif//FIGHTER_AI_H

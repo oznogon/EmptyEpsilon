@@ -169,6 +169,7 @@ msgstr ""
 
 #: src/menus/joinServerMenu.cpp:55 src/menus/shipSelectionScreen.cpp:91
 #: src/menus/shipSelectionScreen.cpp:102
+#: src/screenComponents/selfDestructEntry.cpp:39
 msgid "OK"
 msgstr ""
 

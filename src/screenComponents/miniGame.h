@@ -1,11 +1,4 @@
-/** An abstract class to present an interface on which to implement (hacking)
- *  minigames. Concrete implementations will need to implement at least their
- *  own constructor and reset() functions, and probably the disable() function.
- *  Calling gameComplete() registers a successful minigame with the owner
- */
-
-#ifndef MINIGAME_H
-#define MINIGAME_H
+#pragma once
 
 #include <vector>
 #include "hackingDialog.h"
@@ -16,9 +9,14 @@ class GuiProgressbar;
 class GuiLabel;
 class GuiPanel;
 
+/** An abstract class to present an interface on which to implement (hacking)
+ *  minigames. Concrete implementations will need to implement at least their
+ *  own constructor and reset() functions, and probably the disable() function.
+ *  Calling gameComplete() registers a successful minigame with the owner.
+ */
 class MiniGame : sp::NonCopyable
 {
-  public:
+public:
     MiniGame(GuiPanel* owner, GuiHackingDialog* parent, int difficulty);
     virtual ~MiniGame();
 
@@ -28,13 +26,10 @@ class MiniGame : sp::NonCopyable
 
     virtual void reset();
     virtual void disable();
-
-  protected:
+protected:
     int difficulty;
     GuiHackingDialog* parent;
     bool game_complete;
     std::vector<GuiElement*> board;
     virtual void gameComplete();
 };
-
-#endif//MINIGAME_H

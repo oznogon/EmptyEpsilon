@@ -1,5 +1,4 @@
-#ifndef HTTP_SCRIPT_ACCESS_H
-#define HTTP_SCRIPT_ACCESS_H
+#pragma once
 
 #include "io/http/server.h"
 
@@ -11,5 +10,3 @@ public:
 private:
     sp::io::http::Server server;
 };
-
-#endif//HTTP_SCRIPT_ACCESS_H

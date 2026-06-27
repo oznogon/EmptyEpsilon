@@ -1,5 +1,4 @@
-#ifndef THREAT_LEVEL_ESTIMATE_H
-#define THREAT_LEVEL_ESTIMATE_H
+#pragma once
 
 #include "Updatable.h"
 #include <ecs/entity.h>
@@ -31,5 +30,3 @@ public:
 private:
     float getThreatFor(sp::ecs::Entity ship);
 };
-
-#endif//THREAT_LEVEL_ESTIMATE_H

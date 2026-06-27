@@ -1,5 +1,4 @@
-#ifndef EVASION_AI_H
-#define EVASION_AI_H
+#pragma once
 
 #include "ai.h"
 
@@ -19,6 +18,3 @@ public:
     virtual bool evadeIfNecessary();
     float evasionDangerScore(sp::ecs::Entity ship, float scan_radius);
 };
-
-
-#endif//EVASION_AI_H

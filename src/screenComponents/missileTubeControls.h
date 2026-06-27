@@ -1,5 +1,4 @@
-#ifndef MISSILE_TUBE_CONTROLS_H
-#define MISSILE_TUBE_CONTROLS_H
+#pragma once
 
 #include "gui/gui2_element.h"
 #include "missileWeaponData.h"
@@ -21,9 +20,9 @@ public:
 
     void setManualAim(bool manual);
     bool getManualAim();
-
 private:
-    struct TubeRow {
+    struct TubeRow
+    {
         GuiElement* layout;
         GuiButton* load_button;
         GuiButton* fire_button;
@@ -32,13 +31,16 @@ private:
     };
     GuiElement* tube_rows_layout;
     std::vector<TubeRow> rows;
-    class TypeRow {
+
+    class TypeRow
+    {
     public:
         GuiElement* layout;
         GuiToggleButton* button;
     };
     TypeRow load_type_rows[MW_Count];
     EMissileWeapons load_type;
+
     bool manual_aim;
     float missile_target_angle;
 
@@ -46,5 +48,3 @@ private:
     void removeTubeRow();
     void selectMissileWeapon(EMissileWeapons type);
 };
-
-#endif//MISSILE_TUBE_CONTROLS_H

@@ -1,5 +1,4 @@
-#ifndef SHIELD_FREQUENCY_SELECT_H
-#define SHIELD_FREQUENCY_SELECT_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -19,5 +18,3 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 };
-
-#endif//SHIELD_FREQUENCY_SELECT_H

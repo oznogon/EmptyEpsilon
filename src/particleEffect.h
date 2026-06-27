@@ -1,5 +1,4 @@
-#ifndef PARTICLE_EFFECT_H
-#define PARTICLE_EFFECT_H
+#pragma once
 
 #include "Updatable.h"
 #include "graphics/shader.h"
@@ -84,5 +83,3 @@ private:
     std::vector<ParticleData> particles_renderdata;
     sp::Shader* shader = nullptr;
 };
-
-#endif//PARTICLE_EFFECT_H

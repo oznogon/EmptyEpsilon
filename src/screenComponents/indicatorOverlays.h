@@ -1,19 +1,19 @@
-#ifndef INDICATOR_OVERLAYS_H
-#define INDICATOR_OVERLAYS_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
 class GuiOverlay;
 class GuiPanel;
 class GuiLabel;
-/**
-    * Full screen overlay for shield hit effect
-    * Full screen overlay for hull hit effect
-    * Full screen overlay for shields low warning
-    * Full screen overlay for jump indication
-    * Activating the warp/jump post process shaders
-    * Pause full screen overlay and text indicator
-    * Victory/defeat result
+
+/*
+- Full screen overlay for shield hit effect
+- Full screen overlay for hull hit effect
+- Full screen overlay for shields low warning
+- Full screen overlay for jump indication
+- Activating the warp/jump post process shaders
+- Pause full screen overlay and text indicator
+- Victory/defeat result
 */
 class GuiIndicatorOverlays : public GuiElement
 {
@@ -36,5 +36,3 @@ public:
 
     void hasGlobalMessage() { has_global_message = true; }
 };
-
-#endif//INDICATOR_OVERLAYS_H

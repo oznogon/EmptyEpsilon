@@ -1,5 +1,4 @@
-#ifndef NOISE_OVERLAY_H
-#define NOISE_OVERLAY_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -10,5 +9,3 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };
-
-#endif//NOISE_OVERLAY_H

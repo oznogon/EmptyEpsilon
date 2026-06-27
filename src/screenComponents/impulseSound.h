@@ -1,5 +1,4 @@
-#ifndef IMPULSE_SOUND_H
-#define IMPULSE_SOUND_H
+#pragma once
 
 #include "stringImproved.h"
 
@@ -20,5 +19,3 @@ public:
     void stop();
     void update(float delta);
 };
-
-#endif//IMPULSE_SOUND_H

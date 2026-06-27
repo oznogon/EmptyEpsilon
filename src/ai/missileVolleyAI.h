@@ -1,5 +1,4 @@
-#ifndef MISSILE_VOLLEY_AI_H
-#define MISSILE_VOLLEY_AI_H
+#pragma once
 
 #include "ai.h"
 
@@ -27,6 +26,3 @@ public:
     virtual void runOrders() override;
     virtual void runAttack(sp::ecs::Entity target) override;
 };
-
-
-#endif//MISSILE_VOLLEY_AI_H

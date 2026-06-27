@@ -1,5 +1,4 @@
-#ifndef SHIP_INTERNAL_VIEW_H
-#define SHIP_INTERNAL_VIEW_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -67,7 +66,6 @@ class GuiShipDoor : public GuiElement
 {
 public:
     typedef std::function<void()> func_t;
-
 private:
     bool horizontal;
     func_t func;
@@ -102,5 +100,3 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 };
-
-#endif//SHIP_INTERNAL_VIEW_H

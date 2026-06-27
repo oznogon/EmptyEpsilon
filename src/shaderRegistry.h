@@ -1,12 +1,10 @@
-#ifndef EMPTYEPSILON_SHADER_REGISTRY_H
-#define EMPTYEPSILON_SHADER_REGISTRY_H
-#include "featureDefs.h"
+#pragma once
 
+#include "featureDefs.h"
 #include <array>
 #include <cstdint>
 #include <functional>
 #include <optional>
-
 #include <type_traits>
 
 #include <glm/vec3.hpp>
@@ -145,5 +143,3 @@ namespace ShaderRegistry
 		const Shader* shader = nullptr;
 	};
 }
-
-#endif // EMPTYEPSILON_SHADER_REGISTRY_H

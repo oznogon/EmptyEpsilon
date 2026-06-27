@@ -1,5 +1,4 @@
-#ifndef EMPTYEPSILON_GLOBJECTS_H
-#define EMPTYEPSILON_GLOBJECTS_H
+#pragma once
 
 #include <array>
 #include <cstddef>
@@ -202,5 +201,3 @@ namespace gl
 
     void shutdown();
 }
-
-#endif // EMPTYEPSILON_GLOBJECTS_H

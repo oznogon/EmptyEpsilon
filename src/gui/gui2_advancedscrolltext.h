@@ -1,5 +1,4 @@
-#ifndef GUI2_ADVANCEDSCROLLTEXT_H
-#define GUI2_ADVANCEDSCROLLTEXT_H
+#pragma once
 
 #include "gui2_element.h"
 #include "gui2_scrollbar.h"
@@ -45,5 +44,3 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
-
-#endif//GUI2_ADVANCEDSCROLLTEXT_H

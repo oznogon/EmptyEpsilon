@@ -1,5 +1,4 @@
-#ifndef SERVER_BROWSE_MENU_H
-#define SERVER_BROWSE_MENU_H
+#pragma once
 
 #include "gui/gui2_canvas.h"
 #include "multiplayer_client.h"
@@ -31,5 +30,3 @@ private:
     void connect(string host);
     void connect(const ServerScanner::ServerInfo& info);
 };
-
-#endif//SERVER_BROWSE_MENU_H
