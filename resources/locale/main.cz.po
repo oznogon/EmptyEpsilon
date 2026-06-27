@@ -2502,13 +2502,13 @@ msgstr "Zadokovat"
 
 #: src/spaceObjects/playerSpaceship.cpp:514
 msgctxt "alert"
-msgid "RED ALERT"
-msgstr "ČERVENÝ POPLACH"
+msgid "Red alert"
+msgstr "Červený poplach"
 
 #: src/spaceObjects/playerSpaceship.cpp:515
 msgctxt "alert"
-msgid "YELLOW ALERT"
-msgstr "ŽLUTÝ POPLACH"
+msgid "Yellow alert"
+msgstr "Žlutý poplach"
 
 #: src/spaceObjects/playerSpaceship.cpp:516
 msgctxt "alert"

@@ -2071,7 +2071,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Sets the alert level for the given ship. See EAlertLevel for valid values.
     /// This is equivalent to clicking the Relay screen's alert level button and then selecting a level.
     /// Example:
-    /// commandSetAlertLevel(getPlayerShip(-1), "RED ALERT") -- set red alert
+    /// commandSetAlertLevel(getPlayerShip(-1), "Red alert") -- set red alert
     env.setGlobal("commandSetAlertLevel", &luaCommandSetAlertLevel);
 
     /// void setCustomUtilityBeamMode(entity ship, string name, int order, float energy_per_sec, float heat_per_sec, bool requires_target, function callback, function deactivate_callback)

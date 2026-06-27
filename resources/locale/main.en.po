@@ -2418,12 +2418,12 @@ msgstr ""
 
 #: src/spaceObjects/playerSpaceship.cpp:514
 msgctxt "alert"
-msgid "RED ALERT"
+msgid "Red alert"
 msgstr ""
 
 #: src/spaceObjects/playerSpaceship.cpp:515
 msgctxt "alert"
-msgid "YELLOW ALERT"
+msgid "Yellow alert"
 msgstr ""
 
 #: src/spaceObjects/playerSpaceship.cpp:516

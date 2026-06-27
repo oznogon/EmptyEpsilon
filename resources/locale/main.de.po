@@ -2492,13 +2492,13 @@ msgstr "Docke an"
 
 #: src/spaceObjects/playerSpaceship.cpp:514
 msgctxt "alert"
-msgid "RED ALERT"
-msgstr "ROTER ALARM"
+msgid "Red alert"
+msgstr "Roter alarm"
 
 #: src/spaceObjects/playerSpaceship.cpp:515
 msgctxt "alert"
-msgid "YELLOW ALERT"
-msgstr "GELBER ALARM"
+msgid "Yellow alert"
+msgstr "Gelber alarm"
 
 #: src/spaceObjects/playerSpaceship.cpp:516
 msgctxt "alert"

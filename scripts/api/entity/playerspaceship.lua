@@ -85,7 +85,7 @@ function Entity:getWaypointCount(set_id)
     return count
 end
 --- Returns this player ship's EAlertLevel.
---- Returns "Normal", "YELLOW ALERT", "RED ALERT", which differ from the valid values for commandSetAlertLevel().
+--- Returns "Normal", "Yellow alert", "Red alert", which differ from the valid values for commandSetAlertLevel().
 --- Example:
 --- ship:getAlertLevel()
 function Entity:getAlertLevel()

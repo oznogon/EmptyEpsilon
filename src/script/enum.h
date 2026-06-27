@@ -375,9 +375,9 @@ template<> struct Convert<CommsTransmitter::State> {
 template<> struct Convert<AlertLevel> {
     static int toLua(lua_State* L, AlertLevel value) {
         switch(value) {
-        case AlertLevel::Normal: lua_pushstring(L, "Normal"); break;
-        case AlertLevel::YellowAlert: lua_pushstring(L, "YELLOW ALERT"); break;
-        case AlertLevel::RedAlert: lua_pushstring(L, "RED ALERT"); break;
+        case AlertLevel::Normal:      lua_pushstring(L, "Normal"); break;
+        case AlertLevel::YellowAlert: lua_pushstring(L, "Yellow alert"); break;
+        case AlertLevel::RedAlert:    lua_pushstring(L, "Red alert"); break;
         default: lua_pushstring(L, "none"); break;
         }
         return 1;

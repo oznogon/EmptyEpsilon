@@ -2572,13 +2572,13 @@ msgstr "Approda"
 
 #: src/spaceObjects/playerSpaceship.cpp:514
 msgctxt "alert"
-msgid "RED ALERT"
-msgstr "ALLERTA ROSSA"
+msgid "Red alert"
+msgstr "Allerta rossa"
 
 #: src/spaceObjects/playerSpaceship.cpp:515
 msgctxt "alert"
-msgid "YELLOW ALERT"
-msgstr "ALLERTA GIALLA"
+msgid "Yellow alert"
+msgstr "Allerta gialla"
 
 #: src/spaceObjects/playerSpaceship.cpp:516
 msgctxt "alert"

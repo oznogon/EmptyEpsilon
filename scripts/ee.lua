@@ -158,12 +158,9 @@ SCANNED_STATES = {
 --
 -- @section alert_levels
 
---- `"Normal"` alert
 ALERT_NORMAL = "Normal"
---- `"YELLOW ALERT"`
-ALERT_YELLOW = "YELLOW ALERT"
---- `"RED ALERT"`
-ALERT_RED = "RED ALERT"
+ALERT_YELLOW = "Yellow alert"
+ALERT_RED    = "Red alert"
 
 --- Array of the alert levels.
 ALERT_LEVELS = {
