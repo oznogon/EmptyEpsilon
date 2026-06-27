@@ -3895,7 +3895,7 @@ function handleDockedState()
 					planetPrimusMoonOrbitTime = planetPrimusMoonOrbitTime * 1.1
 					planetPrimusMoon:setOrbit(planetPrimus,planetPrimusMoonOrbitTime)
 					speed_adjust_count = speed_adjust_count + 1
-					setCommsMessage(_("station-comms","He moves a slider and says, 'Ok.'"))
+					setCommsMessage(_("station-comms","He moves a slider and says, 'OK.'"))
 					playVoice("Ozzie02")
 				end)
 				addCommsReply(string.format(_("station-comms","Slow orbital speed of %s"),planetSecondus:getCallSign()),function()

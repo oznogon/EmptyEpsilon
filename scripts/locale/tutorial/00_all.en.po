@@ -111,7 +111,7 @@ msgstr ""
 
 #: scripts/tutorial/00_all.lua:100
 msgid ""
-"Ok, there are just a few more things that you need to know.\n"
+"OK, there are just a few more things that you need to know.\n"
 "See the red arcs coming from your ship? Those are your beam weapons. As "
 "helms officer, it is your task to keep those beams on your target.\n"
 "I've set up an stationary enemy ship as a target. Destroy it with your beam "

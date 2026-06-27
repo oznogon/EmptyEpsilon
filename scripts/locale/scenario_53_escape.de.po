@@ -1031,7 +1031,7 @@ msgstr "Ich sprech' das noch mit Cap und der Crew ab und melde mich bei Dir!"
 
 #: scripts/scenario_53_escape.lua:1650
 msgctxt "crewFriends-comms"
-msgid "Ok."
+msgid "OK."
 msgstr "Okay."
 
 #: scripts/scenario_53_escape.lua:1661 scripts/scenario_53_escape.lua:1730
@@ -1141,7 +1141,7 @@ msgstr "Oops, kein \"%s\" an Bord"
 
 #: scripts/scenario_53_escape.lua:1754
 msgctxt "crewFriends-comms"
-msgid "Ok, good luck."
+msgid "OK, good luck."
 msgstr "Okay, viel Glück."
 
 #: scripts/scenario_53_escape.lua:1763 scripts/scenario_53_escape.lua:2262

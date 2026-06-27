@@ -88,7 +88,7 @@ public:
             ->setPosition(0.0f, -20.0f, sp::Alignment::BottomCenter)
             ->setSize(250.0f, GuiElement::GuiSizeRow);
 
-        entry_ok = new GuiButton(entry_box, "PASSWORD_ENTRY_OK", tr("Ok"),
+        entry_ok = new GuiButton(entry_box, "PASSWORD_ENTRY_OK", tr("OK"),
             [this]()
             {
                 checkPassword();
@@ -99,7 +99,7 @@ public:
             ->setSize(160.0f, GuiElement::GuiSizeRow);
 
         // Control code confirmation button
-        confirmation = new GuiButton(entry_box, "PASSWORD_CONFIRMATION_BUTTON", tr("Ok"),
+        confirmation = new GuiButton(entry_box, "PASSWORD_CONFIRMATION_BUTTON", tr("OK"),
             [this]()
             {
                 // Hide the dialog.

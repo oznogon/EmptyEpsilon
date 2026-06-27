@@ -3475,7 +3475,7 @@ function scenarioMissions()
 				setCommsMessage(_("station-comms","We discovered a communication interface attached to the anomalous object. We could not make sense of it. Would you like to try?"))
 				addCommsReply(_("station-comms","Connect us to object"),function()
 					comms_source.connect_to_nova = true
-					setCommsMessage(_("station-comms","Ok. We've rigged it to contact you when you close communications with us."))
+					setCommsMessage(_("station-comms","OK. We've rigged it to contact you when you close communications with us."))
 				end)
 			end)
 		end
@@ -3488,7 +3488,7 @@ function scenarioMissions()
 				setCommsMessage(_("station-comms","We discovered a communication interface attached to the anomalous object. We could not make sense of it. Would you like to try?"))
 				addCommsReply(_("station-comms","Connect us to object"),function()
 					comms_source.connect_to_nova = true
-					setCommsMessage(_("station-comms","Ok. We've rigged it to contact you when you close communications with us."))
+					setCommsMessage(_("station-comms","OK. We've rigged it to contact you when you close communications with us."))
 				end)
 			end)
 		end
@@ -3505,7 +3505,7 @@ function scenarioMissionsUndocked()
 				setCommsMessage(_("station-comms","We discovered a communication interface attached to the anomalous object. We could not make sense of it. Would you like to try?"))
 				addCommsReply(_("station-comms","Connect us to object"),function()
 					comms_source.connect_to_nova = true
-					setCommsMessage(_("station-comms","Ok. We've rigged it to contact you when you close communications with us."))
+					setCommsMessage(_("station-comms","OK. We've rigged it to contact you when you close communications with us."))
 				end)
 			end)			
 		end
@@ -3517,7 +3517,7 @@ function scenarioMissionsUndocked()
 				setCommsMessage(_("station-comms","We discovered a communication interface attached to the anomalous object. We could not make sense of it. Would you like to try?"))
 				addCommsReply(_("station-comms","Connect us to object"),function()
 					comms_source.connect_to_nova = true
-					setCommsMessage(_("station-comms","Ok. We've rigged it to contact you when you close communications with us."))
+					setCommsMessage(_("station-comms","OK. We've rigged it to contact you when you close communications with us."))
 				end)
 			end)
 		end

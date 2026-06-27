@@ -803,7 +803,7 @@ msgstr ""
 #: scripts/scenario_07_gftp.lua:742
 msgctxt "incCall"
 msgid "Okay, this is it. Launch the assault!"
-msgstr "Ok c'est parti ! Lancez l'assaut !"
+msgstr "OK c'est parti ! Lancez l'assaut !"
 
 #: scripts/scenario_07_gftp.lua:767
 msgctxt "incCall"

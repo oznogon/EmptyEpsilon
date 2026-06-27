@@ -97,7 +97,7 @@ addToSequence(helmsTutorial, _([[Now that you are docked, your movement is locke
 addToSequence(helmsTutorial, function() prev_object:destroy() end)
 addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1500, 1500):orderIdle():setScanned(true):setHull(15):setShieldsMax(15) end)
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
-addToSequence(helmsTutorial, _([[Ok, there are just a few more things that you need to know.
+addToSequence(helmsTutorial, _([[OK, there are just a few more things that you need to know.
 See the red arcs coming from your ship? Those are your beam weapons. As helms officer, it is your task to keep those beams on your target.
 I've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change color.]]), function() return not prev_object:isValid() end)
 addToSequence(helmsTutorial, _([[Aggression is not always the solution, but boy, it is fun!

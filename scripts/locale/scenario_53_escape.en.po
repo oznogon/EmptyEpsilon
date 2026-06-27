@@ -893,7 +893,7 @@ msgstr ""
 
 #: scripts/scenario_53_escape.lua:1650
 msgctxt "crewFriends-comms"
-msgid "Ok."
+msgid "OK."
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:1661 scripts/scenario_53_escape.lua:1730
@@ -990,7 +990,7 @@ msgstr ""
 
 #: scripts/scenario_53_escape.lua:1754
 msgctxt "crewFriends-comms"
-msgid "Ok, good luck."
+msgid "OK, good luck."
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:1763 scripts/scenario_53_escape.lua:2262

@@ -2806,7 +2806,7 @@ function setExpediteDock()
 							local fast_dock_contract_cancelled = {
 								string.format(_("station-comms","Expedited docking contract with %s has been cancelled."),comms_source.expedite_dock.station:getCallSign()),
 								string.format(_("station-comms","Fast dock cancelled with %s"),comms_source.expedite_dock.station:getCallSign()),
-								string.format(_("station-comms","Ok, we just cancelled your expedited docking contract with %s"),comms_source.expedite_dock.station:getCallSign()),
+								string.format(_("station-comms","OK, we just cancelled your expedited docking contract with %s"),comms_source.expedite_dock.station:getCallSign()),
 								string.format(_("station-comms","%s fast dock contract cancelled"),comms_source.expedite_dock.station:getCallSign()),
 							}
 							setCommsMessage(tableSelectRandom(fast_dock_contract_cancelled))
@@ -2822,7 +2822,7 @@ function setExpediteDock()
 						}
 						addCommsReply(tableSelectRandom(keep_fast_dock_contract),function()
 							local fast_dock_contract_kept = {
-								string.format(_("station-comms","Ok, we left the fast dock contract in place with %s"),comms_source.expedite_dock.station:getCallSign()),
+								string.format(_("station-comms","OK, we left the fast dock contract in place with %s"),comms_source.expedite_dock.station:getCallSign()),
 								string.format(_("station-comms","Kept the quick dock contract with %s"),comms_source.expedite_dock.station:getCallSign()),
 								string.format(_("station-comms","The expedited dock contract with %s remains in effect"),comms_source.expedite_dock.station:getCallSign()),
 								string.format(_("station-comms","Maintaining the fast dock contract with %s"),comms_source.expedite_dock.station:getCallSign()),
@@ -7647,7 +7647,7 @@ function minorUpgrades()
 						local confirm_waypoint_dist_donation_prompt = {
 							_("upgrade-comms","Yes, we like to help the fleet (add 5 rep)"),
 							_("upgrade-comms","Yes, we'll donate ours (add 5 rep)"),
-							_("upgrade-comms","Ok, we will give you ours (add 5 rep)"),
+							_("upgrade-comms","OK, we will give you ours (add 5 rep)"),
 							_("upgrade-comms","We'll help the fleet and give you ours (add 5 rep)"),
 						}
 						addCommsReply(tableSelectRandom(confirm_waypoint_dist_donation_prompt),function()

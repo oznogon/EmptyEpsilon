@@ -52,7 +52,7 @@ JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
         ->setPosition(20.0f, 0.0f, sp::Alignment::CenterLeft)
         ->setSize(400.0f, GuiElement::GuiSizeRow);
 
-    (new GuiButton(password_entry_box, "PASSWORD_ENTRY_OK", tr("Ok"),
+    (new GuiButton(password_entry_box, "PASSWORD_ENTRY_OK", tr("OK"),
         [this]()
         {
             password_entry_box->hide();

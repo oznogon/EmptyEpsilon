@@ -172,7 +172,7 @@ msgstr ""
 
 #: scripts/tutorial/00_all.lua:99
 msgid ""
-"Ok, there are just a few more things that you need to know.\n"
+"OK, there are just a few more things that you need to know.\n"
 "Remember those beam weapons? As helms officer, it is your task to keep those "
 "beams on your target.\n"
 "I've set up an stationary enemy ship as a target. Destroy it with your beam "
@@ -905,7 +905,7 @@ msgstr ""
 #~ "wirst."
 
 #~ msgid ""
-#~ "Ok, there are just a few more things that you need to know.\n"
+#~ "OK, there are just a few more things that you need to know.\n"
 #~ "Remember the beam weapons from the basics tutorial? As helms officer, it "
 #~ "is your task to keep those beams on your target.\n"
 #~ "I've set up an stationary enemy ship as a target. Destroy it with your "

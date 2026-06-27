@@ -111,7 +111,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft);
 
     // Button to acknowledge unresponsive hails.
-    (new GuiButton(no_response_box, "COMMS_NO_REPLY_OK", "Ok",
+    (new GuiButton(no_response_box, "COMMS_NO_REPLY_OK", "OK",
         []()
         {
             if (my_spaceship) my_player_info->commandCloseTextComm();
@@ -132,7 +132,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft);
 
     // Button to acknowledge broken communications.
-    (new GuiButton(broken_box, "COMMS_BROKEN_OK", "Ok",
+    (new GuiButton(broken_box, "COMMS_BROKEN_OK", "OK",
         []()
         {
             if (my_spaceship) my_player_info->commandCloseTextComm();
@@ -153,7 +153,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft);
 
     // Button to acknowledge closed communications.
-    (new GuiButton(closed_box, "COMMS_CLOSED_OK", "Ok",
+    (new GuiButton(closed_box, "COMMS_CLOSED_OK", "OK",
         []()
         {
             if (my_spaceship) my_player_info->commandCloseTextComm();
