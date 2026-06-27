@@ -172,10 +172,10 @@ local function populateMissileStats(__item, __keys, __stats)
     for idx, key in ipairs(__keys) do
         local size_value = ''
 
-        if key == _('Damage at center')
+        if type(__stats[idx]) == "number" and (key == _('Damage at center')
         or key == _('Damage at edge')
         or key == _('Blast radius (u)')
-        or key == _('Lifetime (sec.)')
+        or key == _('Lifetime (sec.)'))
         then
             for size_idx, size in ipairs(missile_modifier_sizes) do
                 size_value = size_value .. __stats[idx] * missile_modifier_values[size_idx] .. ' (' .. size .. ') '
@@ -184,9 +184,9 @@ local function populateMissileStats(__item, __keys, __stats)
                 end
             end
             __item:addKeyValue(key, size_value)
-        elseif key == _('Speed (u/sec.)')
+        elseif type(__stats[idx]) == "number" and (key == _('Speed (u/sec.)')
         or key == _('Launch speed (u/sec.)')
-        or key == _('Turn rate (deg./sec.)')
+        or key == _('Turn rate (deg./sec.)'))
         then
             for size_idx, size in ipairs(missile_modifier_sizes) do
                 size_value = size_value .. __stats[idx] / missile_modifier_values[size_idx] .. ' (' .. size .. ') '
