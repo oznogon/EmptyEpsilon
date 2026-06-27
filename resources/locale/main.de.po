@@ -905,7 +905,7 @@ msgctxt "button"
 msgid "Cycle through ships"
 msgstr "Nächstes Schiff"
 
-#: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:223
+#: src/screens/crewScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:223
 #: src/screens/gm/tweak.cpp:99 src/screenComponents/commsOverlay.cpp:110
 #: src/screenComponents/commsOverlay.cpp:140
 #: src/screenComponents/hackingDialog.cpp:42
@@ -913,12 +913,12 @@ msgctxt "button"
 msgid "Close"
 msgstr "Schließen"
 
-#: src/screens/crewStationScreen.cpp:69 src/screens/mainScreen.cpp:53
+#: src/screens/crewScreen.cpp:69 src/screens/mainScreen.cpp:53
 msgctxt "hotkey_F1"
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkürzel"
 
-#: src/screens/crewStationScreen.cpp:73
+#: src/screens/crewScreen.cpp:73
 msgctxt "hotkey_F1"
 msgid "{label}: {button}\n"
 msgstr "{label}: {button}\n"
@@ -2807,12 +2807,12 @@ msgstr "Vollbild umschalten"
 
 #: src/gui/hotkeyConfig.cpp:317
 msgctxt "hotkey_General"
-msgid "Switch to next crew station"
+msgid "Switch to next crew screen"
 msgstr "Wechsle zur nächsten Station"
 
 #: src/gui/hotkeyConfig.cpp:318
 msgctxt "hotkey_General"
-msgid "Switch to previous crew station"
+msgid "Switch to previous crew screen"
 msgstr "Zur vorherigen Station wechseln"
 
 #: src/gui/hotkeyConfig.cpp:319

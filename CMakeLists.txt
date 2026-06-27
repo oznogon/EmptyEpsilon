@@ -259,7 +259,7 @@ set(MAIN_SOURCES
     src/menus/hotkeyMenu.cpp
     src/menus/luaConsole.cpp
     src/screens/cinematicViewScreen.cpp
-    src/screens/crewStationScreen.cpp
+    src/screens/crewScreen.cpp
     src/screens/windowScreen.cpp
     src/screens/mainScreen.cpp
     src/screens/spectatorScreen.cpp
@@ -694,7 +694,7 @@ set(MAIN_SOURCES
     src/screens/crew6/relayScreen.h
     src/screens/crew6/scienceScreen.h
     src/screens/crew6/weaponsScreen.h
-    src/screens/crewStationScreen.h
+    src/screens/crewScreen.h
     src/screens/extra/commsScreen.h
     src/screens/extra/damcon.h
     src/screens/extra/databaseScreen.h

@@ -6,7 +6,7 @@
 #include "menus/luaConsole.h"
 
 #include "screens/mainScreen.h"
-#include "screens/crewStationScreen.h"
+#include "screens/crewScreen.h"
 #include "screens/crew6/helmsScreen.h"
 #include "screens/crew6/weaponsScreen.h"
 #include "screens/crew6/engineeringScreen.h"
@@ -2026,7 +2026,7 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
     }
     else
     {
-        CrewStationScreen* screen = new CrewStationScreen(render_layer, bool(main_screen & (1 << monitor_index)));
+        CrewScreen* screen = new CrewScreen(render_layer, bool(main_screen & (1 << monitor_index)));
         auto container = screen->getTabContainer();
         CrewPositions cps;
         if (crew_positions.size() > size_t(monitor_index))

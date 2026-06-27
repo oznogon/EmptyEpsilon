@@ -1,4 +1,4 @@
-#include "crewStationScreen.h"
+#include "crewScreen.h"
 #include <i18n.h>
 #include "epsilonServer.h"
 #include "main.h"
@@ -24,7 +24,7 @@
 #include "gui/gui2_togglebutton.h"
 #include "gui/joystickConfig.h"
 
-CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_screen)
+CrewScreen::CrewScreen(RenderLayer* render_layer, bool with_main_screen)
 : GuiCanvas(render_layer)
 {
     if (with_main_screen)
@@ -126,19 +126,19 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     utility_beam_sound = std::unique_ptr<UtilityBeamSound>(new UtilityBeamSound());
 }
 
-void CrewStationScreen::destroy()
+void CrewScreen::destroy()
 {
     // Clear any threat estimate before destroying the screen.
     if (threat_estimate) threat_estimate->destroy();
     PObject::destroy();
 }
 
-GuiContainer* CrewStationScreen::getTabContainer()
+GuiContainer* CrewScreen::getTabContainer()
 {
     return main_panel;
 }
 
-void CrewStationScreen::addStationTab(GuiElement* element, CrewPosition position, string name, string icon)
+void CrewScreen::addStationTab(GuiElement* element, CrewPosition position, string name, string icon)
 {
     CrewTabInfo info;
     tileViewport();
@@ -178,7 +178,7 @@ void CrewStationScreen::addStationTab(GuiElement* element, CrewPosition position
     tabs.push_back(info);
 }
 
-void CrewStationScreen::finishCreation()
+void CrewScreen::finishCreation()
 {
     select_crew_screen_button->moveToFront();
     select_crew_screen_list->moveToFront();
@@ -236,7 +236,7 @@ void CrewStationScreen::finishCreation()
     keyboard_help->moveToFront();
 }
 
-void CrewStationScreen::update(float delta)
+void CrewScreen::update(float delta)
 {
     // Destroy the screen on disconnect.
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
@@ -326,7 +326,7 @@ void CrewStationScreen::update(float delta)
         showTab(findTab(getCrewPositionName(CrewPosition::relayOfficer)));
 }
 
-void CrewStationScreen::showNextTab(int offset)
+void CrewScreen::showNextTab(int offset)
 {
     if (tabs.size() < 1) return;
     int current = 0;
@@ -339,7 +339,7 @@ void CrewStationScreen::showNextTab(int offset)
     showTab(tabs[next].element);
 }
 
-void CrewStationScreen::showTab(GuiElement* element)
+void CrewScreen::showTab(GuiElement* element)
 {
     if (!element) return;
 
@@ -370,7 +370,7 @@ void CrewStationScreen::showTab(GuiElement* element)
     }
 }
 
-GuiElement* CrewStationScreen::findTab(string name)
+GuiElement* CrewScreen::findTab(string name)
 {
     // Return the tab element that matches the string.
     for (CrewTabInfo& info : tabs)
@@ -379,7 +379,7 @@ GuiElement* CrewStationScreen::findTab(string name)
     return nullptr;
 }
 
-void CrewStationScreen::tileViewport()
+void CrewScreen::tileViewport()
 {
     if (!viewport) return;
 
@@ -400,12 +400,12 @@ void CrewStationScreen::tileViewport()
     }
 }
 
-void CrewStationScreen::setDroneViewport(sp::ecs::Entity drone)
+void CrewScreen::setDroneViewport(sp::ecs::Entity drone)
 {
     if (viewport) viewport->override_entity = drone;
 }
 
-void CrewStationScreen::clearDroneViewport()
+void CrewScreen::clearDroneViewport()
 {
     if (viewport) viewport->override_entity = sp::ecs::Entity{};
 }

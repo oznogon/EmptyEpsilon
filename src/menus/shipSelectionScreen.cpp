@@ -350,7 +350,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     );
     spectator_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
     addTooltip(spectator_button, "SPECTATOR_TOOLTIP",
-        tr("shipSelect", "View the full tactical map as a spectator. Shows all ships and objects without crew station controls. Requires GM code if set."));
+        tr("shipSelect", "View the full tactical map as a spectator. Shows all ships and objects without crew screen controls. Requires GM code if set."));
 
     // Cinematic view button
     auto cinematic_button = new GuiButton(right_panel, "", tr("Cinematic view"),
