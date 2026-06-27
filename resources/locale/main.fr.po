@@ -209,7 +209,7 @@ msgstr "Science"
 #: src/playerInfo.cpp:257
 msgctxt "station"
 msgid "Relay"
-msgstr "Communications"
+msgstr "Relais"
 
 #: src/playerInfo.cpp:258
 msgctxt "station"
@@ -3458,7 +3458,7 @@ msgstr "Régler liq. ref. bouc. arrière (joystick)"
 #: src/gui/hotkeyConfig.cpp:461
 msgctxt "hotkey_menu"
 msgid "Relay"
-msgstr "Communications"
+msgstr "Relais"
 
 #: src/gui/hotkeyConfig.cpp:459
 msgctxt "hotkey_Relay"
@@ -3528,3 +3528,38 @@ msgstr "Afficher le graphique de débogage"
 #~ msgctxt "button"
 #~ msgid "Database"
 #~ msgstr "Base de données"
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Basic"
+msgstr "Basique"
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Development"
+msgstr "Développement"
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Mission"
+msgstr "Mission"
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Replayable Mission"
+msgstr "Mission rejouable"
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "PvP"
+msgstr "JcJ"
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Race"
+msgstr "Course"
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Unknown"
+msgstr "Inconnu"

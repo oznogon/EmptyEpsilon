@@ -4278,3 +4278,38 @@ msgstr ""
 #~ msgctxt "hacking"
 #~ msgid "Close"
 #~ msgstr "Zavřít"
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Basic"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Development"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Mission"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Replayable Mission"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "PvP"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Race"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Unknown"
+msgstr ""
