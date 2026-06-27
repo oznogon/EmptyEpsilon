@@ -4,14 +4,15 @@
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 
-#include "components/reactor.h"
-#include "components/target.h"
-#include "components/missileWeaponTarget.h"
-#include "components/radar.h"
-#include "components/drone.h"
 #include "components/beamweapon.h"
 #include "components/collision.h"
+#include "components/drone.h"
 #include "components/missiletubes.h"
+#include "components/missileWeaponTarget.h"
+#include "components/radar.h"
+#include "components/reactor.h"
+#include "components/shields.h"
+#include "components/target.h"
 #include "components/utilityBeam.h"
 
 #include "screenComponents/aimLock.h"
@@ -26,12 +27,13 @@
 #include "gui/theme.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
-#include "gui/gui2_selector.h"
 #include "gui/gui2_label.h"
+#include "gui/gui2_selector.h"
 
 MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "MISSILE_WEAPONS_SCREEN", GuiTheme::getColor("background"))
 {
+    // Draw background decorations.
     background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
     background_gradient
         ->setTextureThemed("background.gradient")
@@ -107,25 +109,40 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
         ->setIcon("gui/icons/energy")
         ->setTextSize(20.0f)
         ->setSize(GuiElement::GuiSizeMax, 40.0f);
+    front_shield_display = new GuiKeyValueDisplay(stats, "FRONT_SHIELD_DISPLAY", 0.45f, tr("shields","Front"), "");
+    front_shield_display
+        ->setIcon("gui/icons/shields-fore")
+        ->setTextSize(20.0f)
+        ->setSize(240.0f, 40.0f);
+    rear_shield_display = new GuiKeyValueDisplay(stats, "REAR_SHIELD_DISPLAY", 0.45f, tr("shields", "Rear"), "");
+    rear_shield_display
+        ->setIcon("gui/icons/shields-aft")
+        ->setTextSize(20.0f)
+        ->setSize(240.0f, 40.0f);
 
     auto ub = my_spaceship.getComponent<UtilityBeam>();
 
-    sidebar_selector = new GuiSelector(this, "MISSILE_WEAPONS_SIDEBAR_SELECTOR", [this](int index, string value)
-    {
-        if (value == "func")
+    sidebar_selector = new GuiSelector(this, "MISSILE_WEAPONS_SIDEBAR_SELECTOR",
+        [this](int index, string value)
         {
-            custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
-            utility_beam_sidebar->hide();
-            utility_beam_dial->hide();
+            if (value == "func")
+            {
+                custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+                utility_beam_sidebar->hide();
+                utility_beam_dial->hide();
+            }
+            else if (value == "util")
+            {
+                custom_function_sidebar->hide();
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
+            }
         }
-        else if (value == "util")
-        {
-            custom_function_sidebar->hide();
-            utility_beam_sidebar->show();
-            utility_beam_dial->show();
-        }
-    });
-    sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
+    );
+    sidebar_selector
+        ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
+        ->hide();
 
     custom_function_sidebar = new GuiCustomShipFunctions(this, CrewPosition::missileWeaponsOfficer, "MISSILE_WEAPONS_CUSTOM_FUNCS");
     custom_function_sidebar
@@ -141,16 +158,19 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
         ->setAttribute("layout", "vertical");
 
     utility_beam_dial = new GuiUtilityBeamRotationDial(radar, "UTILITY_BEAM_DIAL", radar);
-    utility_beam_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    utility_beam_dial
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
 
     if (custom_function_sidebar->hasEntries())
     {
         sidebar_selector->addEntry(tr("weaponsTab", "Functions"), "func");
         sidebar_selector->show();
     }
+
     if (ub && ub->crew_positions.has(CrewPosition::weaponsOfficer))
     {
-        sidebar_selector->addEntry(tr("weaponsTab", "Utility Beam"), "util");
+        sidebar_selector->addEntry(tr("weaponsTab", "Utility beam"), "util");
         sidebar_selector->show();
     }
 
@@ -186,6 +206,23 @@ void MissileWeaponsScreen::onDraw(sp::RenderTarget& renderer)
         energy_display->setVisible(reactor);
         if (reactor)
             energy_display->setValue(string(static_cast<int>(reactor->energy)));
+
+        auto shields = my_spaceship.getComponent<Shields>();
+        if (shields && shields->entries.size() > 0)
+        {
+            front_shield_display
+                ->setValue(string(shields->entries[0].percentage()) + "%")
+                ->show();
+        }
+        else front_shield_display->hide();
+
+        if (shields && shields->entries.size() > 1)
+        {
+            rear_shield_display
+                ->setValue(string(shields->entries[1].percentage()) + "%")
+                ->show();
+        }
+        else rear_shield_display->hide();
 
         if (auto tg = my_spaceship.getComponent<MissileWeaponTarget>())
             targets.set(tg->entity);
@@ -293,6 +330,7 @@ void MissileWeaponsScreen::onUpdate()
         bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
         sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
         custom_function_sidebar->hide();
+
         if (func_was_selected)
         {
             int util_idx = sidebar_selector->indexByValue("util");
@@ -308,6 +346,7 @@ void MissileWeaponsScreen::onUpdate()
                 sidebar_selector->hide();
             }
         }
+
         if (sidebar_selector->entryCount() == 0)
             sidebar_selector->hide();
     }
@@ -317,7 +356,7 @@ void MissileWeaponsScreen::onUpdate()
     bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
     if (should_have_util_tab && !has_util_tab)
     {
-        sidebar_selector->addEntry(tr("weaponsTab", "Utility Beam"), "util");
+        sidebar_selector->addEntry(tr("weaponsTab", "Utility beam"), "util");
         sidebar_selector->show();
     }
     else if (!should_have_util_tab && has_util_tab)
@@ -326,6 +365,7 @@ void MissileWeaponsScreen::onUpdate()
         sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
         utility_beam_sidebar->hide();
         utility_beam_dial->hide();
+
         if (util_was_selected)
         {
             int func_idx = sidebar_selector->indexByValue("func");
@@ -340,6 +380,7 @@ void MissileWeaponsScreen::onUpdate()
                 sidebar_selector->hide();
             }
         }
+
         if (sidebar_selector->entryCount() == 0)
             sidebar_selector->hide();
     }
@@ -347,6 +388,7 @@ void MissileWeaponsScreen::onUpdate()
     // Manual missile aiming keybinds.
     auto aim_adjust = (keys.weapons_aim_left.getContinuousValue() + keys.weapons_aim_left.getAxis0Value() + keys.weapons_aim_left.getAxis1Value())
         - (keys.weapons_aim_right.getContinuousValue() + keys.weapons_aim_right.getAxis0Value() + keys.weapons_aim_right.getAxis1Value());
+
     if (aim_adjust != 0.0f)
     {
         missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);

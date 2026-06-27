@@ -4,13 +4,14 @@
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 
-#include "components/reactor.h"
-#include "components/target.h"
-#include "components/beamWeaponTarget.h"
-#include "components/radar.h"
-#include "components/drone.h"
 #include "components/beamweapon.h"
+#include "components/beamWeaponTarget.h"
 #include "components/collision.h"
+#include "components/drone.h"
+#include "components/radar.h"
+#include "components/reactor.h"
+#include "components/shields.h"
+#include "components/target.h"
 #include "components/utilityBeam.h"
 
 #include "screenComponents/alertOverlay.h"
@@ -23,15 +24,16 @@
 #include "screenComponents/utilityBeamRotationDial.h"
 
 #include "gui/theme.h"
-#include "gui/gui2_togglebutton.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_selector.h"
+#include "gui/gui2_togglebutton.h"
 
 BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "BEAM_WEAPONS_SCREEN", GuiTheme::getColor("background"))
 {
+    // Draw background decorations.
     background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
     background_gradient
         ->setTextureThemed("background.gradient")
@@ -124,6 +126,16 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setIcon("gui/icons/energy")
         ->setTextSize(20.0f)
         ->setSize(240.0f, 40.0f);
+    front_shield_display = new GuiKeyValueDisplay(stats, "FRONT_SHIELD_DISPLAY", 0.45f, tr("shields","Front"), "");
+    front_shield_display
+        ->setIcon("gui/icons/shields-fore")
+        ->setTextSize(20.0f)
+        ->setSize(240.0f, 40.0f);
+    rear_shield_display = new GuiKeyValueDisplay(stats, "REAR_SHIELD_DISPLAY", 0.45f, tr("shields", "Rear"), "");
+    rear_shield_display
+        ->setIcon("gui/icons/shields-aft")
+        ->setTextSize(20.0f)
+        ->setSize(240.0f, 40.0f);
 
     sidebar_selector = new GuiSelector(beam_controls, "BEAM_WEAPONS_SIDEBAR_SELECTOR",
         [this](int index, string value)
@@ -207,12 +219,27 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
             return;
         }
 
-        if (auto reactor = my_spaceship.getComponent<Reactor>())
+        auto reactor = my_spaceship.getComponent<Reactor>();
+        energy_display->setVisible(reactor);
+        if (reactor)
+            energy_display->setValue(string(static_cast<int>(reactor->energy)));
+
+        auto shields = my_spaceship.getComponent<Shields>();
+        if (shields && shields->entries.size() > 0)
         {
-            energy_display
-                ->setValue(string(static_cast<int>(reactor->energy)))
-                ->setVisible(reactor);
+            front_shield_display
+                ->setValue(string(shields->entries[0].percentage()) + "%")
+                ->show();
         }
+        else front_shield_display->hide();
+
+        if (shields && shields->entries.size() > 1)
+        {
+            rear_shield_display
+                ->setValue(string(shields->entries[1].percentage()) + "%")
+                ->show();
+        }
+        else rear_shield_display->hide();
 
         // Get the beam weapons target. If none, check for a legacy target.
         if (auto tg = my_spaceship.getComponent<BeamWeaponTarget>())
@@ -318,6 +345,7 @@ void BeamWeaponsScreen::onUpdate()
         bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
         sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
         custom_function_sidebar->hide();
+
         if (func_was_selected)
         {
             int util_idx = sidebar_selector->indexByValue("util");
@@ -353,6 +381,7 @@ void BeamWeaponsScreen::onUpdate()
         sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
         utility_beam_sidebar->hide();
         utility_beam_dial->hide();
+
         if (util_was_selected)
         {
             int func_idx = sidebar_selector->indexByValue("func");
