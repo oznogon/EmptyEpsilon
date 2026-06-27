@@ -9,6 +9,7 @@ class GuiButton;
 
 class TutorialMenu : public GuiCanvas, public Updatable
 {
+private:
     string selected_tutorial_filename;
 
     GuiElement* container;
@@ -16,9 +17,7 @@ class TutorialMenu : public GuiCanvas, public Updatable
     GuiScrollFormattedText* tutorial_description;
     GuiButton* start_tutorial_button;
 
-private:
     void selectTutorial(string filename);
-
 public:
     TutorialMenu();
 
