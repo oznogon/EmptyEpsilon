@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # python3 script to update localization files.
 
 import glob
