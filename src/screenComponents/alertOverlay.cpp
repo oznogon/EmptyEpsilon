@@ -44,5 +44,5 @@ void AlertLevelOverlay::onDraw(sp::RenderTarget& renderer)
 
     color.a = static_cast<uint8_t>((0.25f + progress * 0.5f) * 255.0f);
 
-    renderer.drawStretched(rect, alert_sprite, color);
+    renderer.drawStretchedHV(rect, 450.0f, alert_sprite, color);
 }
