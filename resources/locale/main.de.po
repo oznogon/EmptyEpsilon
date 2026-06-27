@@ -702,8 +702,8 @@ msgstr "SL-Kontrollcode eingeben :"
 
 #: src/menus/shipSelectionScreen.cpp:186
 #, fuzzy
-msgid "Spectate (view all)"
-msgstr "Zuschauer (alles sichtbar)"
+msgid "Spectator map"
+msgstr "Zuschauer"
 
 #: src/menus/shipSelectionScreen.cpp:212
 msgid "Cinematic"

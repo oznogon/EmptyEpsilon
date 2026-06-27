@@ -713,8 +713,8 @@ msgid "Enter the GM control code:"
 msgstr "Zadejte kód pána hry:"
 
 #: src/menus/shipSelectionScreen.cpp:186
-msgid "Spectate (view all)"
-msgstr "Pozorovat (zobrazit vše)"
+msgid "Spectator map"
+msgstr "Pozorovat"
 
 #: src/menus/shipSelectionScreen.cpp:212
 #, fuzzy

@@ -701,8 +701,8 @@ msgid "Enter the GM control code:"
 msgstr "Entrer le code de contrôle MJ :"
 
 #: src/menus/shipSelectionScreen.cpp:186
-msgid "Spectate (view all)"
-msgstr "Vue spectateur (carte)"
+msgid "Spectator map"
+msgstr "Vue spectateur"
 
 #: src/menus/shipSelectionScreen.cpp:212
 msgid "Cinematic"

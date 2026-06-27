@@ -730,8 +730,8 @@ msgid "Enter the GM control code:"
 msgstr "Inserisci il codice di controllo del GM"
 
 #: src/menus/shipSelectionScreen.cpp:186
-msgid "Spectate (view all)"
-msgstr "Spettatore (vedi tutto)"
+msgid "Spectator map"
+msgstr "Spettatore"
 
 #: src/menus/shipSelectionScreen.cpp:212
 #, fuzzy

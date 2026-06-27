@@ -313,7 +313,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     }
 
     // Spectator view button
-    auto spectator_button = new GuiButton(right_panel, "SPECTATOR_BUTTON", tr("Spectator map (view all)"),
+    auto spectator_button = new GuiButton(right_panel, "SPECTATOR_BUTTON", tr("Spectator map"),
         [this]()
         {
             if (gameGlobalInfo->gm_control_code.length() > 0)

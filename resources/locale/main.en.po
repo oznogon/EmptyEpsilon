@@ -673,7 +673,7 @@ msgid "Enter the GM control code:"
 msgstr ""
 
 #: src/menus/shipSelectionScreen.cpp:186
-msgid "Spectate (view all)"
+msgid "Spectator map"
 msgstr ""
 
 #: src/menus/shipSelectionScreen.cpp:212
