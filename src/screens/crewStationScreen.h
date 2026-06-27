@@ -15,6 +15,7 @@
 class GuiButton;
 class GuiHotkeyHelpOverlay;
 class GuiPanel;
+class GuiScrollContainer;
 class GuiScrollFormattedText;
 class GuiToggleButton;
 class GuiViewport3D;
@@ -40,8 +41,9 @@ public:
 
 private:
     GuiElement* main_panel;
-    GuiViewportMainScreen* viewport{ nullptr };
-    GuiButton* select_station_button;
+    GuiViewportMainScreen* viewport{nullptr};
+    GuiButton* select_crew_screen_button;
+    GuiScrollContainer* select_crew_screen_list;
     GuiPanel* button_strip;
     GuiHotkeyHelpOverlay* keyboard_help;
     GuiPanel* message_frame;
@@ -58,8 +60,7 @@ private:
 
     CrewPosition current_position = CrewPosition::helmsOfficer;
     std::vector<CrewTabInfo> tabs;
-    const float BUTTON_HEIGHT = GuiElement::GuiSizeRow;
-    void showNextTab(int offset=1);
+    void showNextTab(int offset = 1);
     void showTab(GuiElement* element);
     std::vector<string> hotkey_categories = {tr("hotkey_menu", "General"), tr("hotkey_menu", "Crew screens")};
 
