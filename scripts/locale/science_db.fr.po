@@ -303,15 +303,15 @@ msgstr "Électrique"
 #: scripts/science_db.lua:67
 #, fuzzy
 msgid "Red (outer band)"
-msgstr "Bandes de couleurs associées"
+msgstr "Rouge (bande extérieure)"
 
 #: scripts/science_db.lua:68
 msgid "Thermal"
-msgstr ""
+msgstr "Thermique"
 
 #: scripts/science_db.lua:68
 msgid "Green (middle band)"
-msgstr ""
+msgstr "Verte (bande centrale)"
 
 #: scripts/science_db.lua:69
 msgid "Gravitational"
@@ -319,7 +319,7 @@ msgstr "Gravitationnelle"
 
 #: scripts/science_db.lua:69
 msgid "Blue (inner band)"
-msgstr ""
+msgstr "Bleu (bande intérieure)"
 
 #: scripts/science_db.lua:70
 #, fuzzy
@@ -440,7 +440,7 @@ msgstr "Contenu"
 
 #: scripts/science_db.lua:92
 msgid "Weapons, energy"
-msgstr "munitions, énergie"
+msgstr "Munitions, énergie"
 
 #: scripts/science_db.lua:93
 msgid "Close-range retrieval"
@@ -525,7 +525,7 @@ msgstr ""
 #: scripts/science_db.lua:114
 #, fuzzy
 msgid "Beam weapons"
-msgstr "Armement"
+msgstr "Faisceaux laser"
 
 #: scripts/science_db.lua:115 scripts/science_db.lua:126
 msgid "Range"
@@ -624,7 +624,7 @@ msgstr "Dégâts au bord"
 #: scripts/science_db.lua:177
 #, fuzzy
 msgid "Blast radius (u)"
-msgstr "Rayon d'action"
+msgstr "Rayon d'explosion (u)"
 
 #: scripts/science_db.lua:140 scripts/science_db.lua:187
 msgid "Speed (u/sec.)"
@@ -654,7 +654,7 @@ msgstr ""
 #: scripts/science_db.lua:153
 #, fuzzy
 msgid "Trigger distance (u)"
-msgstr "Déclenchement"
+msgstr "Dist. de déclenchement (u)"
 
 #: scripts/science_db.lua:157 scripts/science_db.lua:158
 #: scripts/science_db.lua:160 scripts/science_db.lua:161
@@ -668,18 +668,18 @@ msgstr "EMP"
 #: scripts/science_db.lua:166
 msgctxt "size_abbreviation"
 msgid "S"
-msgstr ""
+msgstr "P"
 
 #: scripts/science_db.lua:167
 msgctxt "size_abbreviation"
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #: scripts/science_db.lua:168 scripts/science_db.lua:182
 #: scripts/science_db.lua:193
 msgctxt "size_abbreviation"
 msgid "L"
-msgstr ""
+msgstr "G"
 
 #: scripts/science_db.lua:204
 msgid "Homing missile"
@@ -814,29 +814,29 @@ msgstr ""
 "\n"
 "Chaque tir d'un HVLI déclenche une rafale de 5 projectiles, ce qui augmente "
 "les chances de toucher mais nécessite d'être suffisamment près et d'être "
-"precis pour être efficace, surtout si les tubes de lancement se trouvent sur "
+"précis pour être efficace, surtout si les tubes de lancement se trouvent sur "
 "les cotés du vaisseau. Le tir atteint son plein potentiel de dégâts dans un "
 "rayon de 2u."
 
 #: scripts/science_db.lua:244
 msgctxt "database direction"
 msgid "Front"
-msgstr ""
+msgstr "Avant"
 
 #: scripts/science_db.lua:245
 msgctxt "database direction"
 msgid "Right"
-msgstr ""
+msgstr "Droite"
 
 #: scripts/science_db.lua:246
 msgctxt "database direction"
 msgid "Left"
-msgstr ""
+msgstr "Gauche"
 
 #: scripts/science_db.lua:247
 msgctxt "database direction"
 msgid "Rear"
-msgstr ""
+msgstr "Arrière"
 
 #: scripts/science_db.lua:254
 #, fuzzy
@@ -847,22 +847,22 @@ msgstr "Factions"
 #: scripts/science_db.lua:276 scripts/science_db.lua:279
 msgctxt "stance"
 msgid "Neutral"
-msgstr ""
+msgstr "Neutre"
 
 #: scripts/science_db.lua:280
 msgctxt "stance"
 msgid "Enemy"
-msgstr ""
+msgstr "Ennemi"
 
 #: scripts/science_db.lua:281
 msgctxt "stance"
 msgid "Friendly"
-msgstr ""
+msgstr "Amical"
 
 #: scripts/science_db.lua:291
 msgctxt "database"
 msgid "Ships"
-msgstr ""
+msgstr "Vaisseaux"
 
 #: scripts/science_db.lua:292
 msgid ""
@@ -976,30 +976,3 @@ msgstr ""
 msgctxt "database"
 msgid "%.1f sec"
 msgstr ""
-
-#~ msgid "Biological"
-#~ msgstr "Biologique"
-
-#~ msgid "Green"
-#~ msgstr "Verte"
-
-#~ msgid "Red"
-#~ msgstr "Rouge"
-
-#~ msgid "Blue"
-#~ msgstr "Bleue"
-
-#~ msgid "Drop distance"
-#~ msgstr "Distance de largage"
-
-#~ msgid "10 each, 50 total"
-#~ msgstr "10 chacune, 50 total"
-
-#~ msgid "Burst"
-#~ msgstr "Rafale"
-
-#~ msgid "Red, green"
-#~ msgstr "rouge, verte"
-
-#~ msgid "Red, blue"
-#~ msgstr "rouge, bleue"

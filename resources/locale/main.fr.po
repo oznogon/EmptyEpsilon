@@ -21,7 +21,7 @@ msgstr "avant"
 #: src/scienceDatabase.cpp:399
 msgctxt "database direction"
 msgid "Right"
-msgstr "droit"
+msgstr "droite"
 
 #: src/scienceDatabase.cpp:401
 msgctxt "database direction"
@@ -2578,7 +2578,7 @@ msgstr "Avant"
 #: src/spaceObjects/spaceshipParts/weaponTube.cpp:301
 msgctxt "tube"
 msgid "Right"
-msgstr "Droit"
+msgstr "Droite"
 
 #: src/spaceObjects/spaceshipParts/weaponTube.cpp:303
 msgctxt "tube"
