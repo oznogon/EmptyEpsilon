@@ -7,8 +7,6 @@
 #include "screenComponents/targetsContainer.h"
 #include "Updatable.h"
 
-class GuiGlobalMessageEntry;
-class GuiObjectCreationScreen;
 class GuiEntityTweak;
 class GuiRadarView;
 class GuiRadarZoomSlider;
@@ -18,7 +16,6 @@ class GuiKeyValueDisplay;
 class GuiListbox;
 class GuiButton;
 class GuiToggleButton;
-class GuiTextEntry;
 class GameMasterChatDialog;
 class GuiObjectCreationView;
 class GuiGlobalMessageEntryView;

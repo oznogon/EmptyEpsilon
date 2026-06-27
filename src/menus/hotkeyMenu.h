@@ -7,12 +7,8 @@
 #include "Updatable.h"
 #include <timer.h>
 
-class GuiButton;
 class GuiLabel;
-class GuiCanvas;
 class GuiSelector;
-class GuiToggleButton;
-class GuiHotkeyBinder;
 
 class HotkeyMenu : public GuiCanvas, public Updatable
 {

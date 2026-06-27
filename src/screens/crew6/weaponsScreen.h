@@ -12,7 +12,6 @@ class GuiLabel;
 class GuiMissileTubeControls;
 class GuiRadarView;
 class GuiToggleButton;
-class GuiRotationDial;
 class GuiSelector;
 class GuiCustomShipFunctions;
 class GuiUtilityBeamControls;

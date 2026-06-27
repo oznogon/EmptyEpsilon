@@ -3,7 +3,6 @@
 #include "gui/gui2_canvas.h"
 #include "Updatable.h"
 
-class GuiSelector;
 class GuiBasicSlider;
 class GuiSlider;
 class GuiToggleButton;

@@ -3,10 +3,6 @@
 #include <vector>
 #include "hackingDialog.h"
 
-class GuiButton;
-class GuiToggleButton;
-class GuiProgressbar;
-class GuiLabel;
 class GuiPanel;
 
 /** An abstract class to present an interface on which to implement (hacking)

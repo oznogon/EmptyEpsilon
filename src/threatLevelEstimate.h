@@ -4,7 +4,6 @@
 #include <ecs/entity.h>
 #include <functional>
 
-class SpaceShip;
 class ThreatLevelEstimate : public Updatable
 {
 private:

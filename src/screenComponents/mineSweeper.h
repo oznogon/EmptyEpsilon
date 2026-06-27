@@ -4,7 +4,6 @@
 #include "gui/gui2_togglebutton.h"
 
 class GuiLabel;
-class GuiToggleButton;
 
 /** An implementation of mineSweeper for use as a hacking minigame.
  *  Original implementation by https://github.com/daid

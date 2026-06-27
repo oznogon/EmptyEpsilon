@@ -3,7 +3,6 @@
 #include "gui/gui2_overlay.h"
 #include "gui/joystickConfig.h"
 
-class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiImage;
 class GuiDockingButton;

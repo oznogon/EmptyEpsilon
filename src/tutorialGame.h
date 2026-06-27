@@ -5,7 +5,6 @@
 #include "script/callback.h"
 #include "gui/gui2_canvas.h"
 
-class PlayerSpaceship;
 class GuiRadarView;
 class GuiPanel;
 class GuiButton;

@@ -18,7 +18,6 @@ class GuiPanel;
 class GuiScrollContainer;
 class GuiScrollFormattedText;
 class GuiToggleButton;
-class GuiViewport3D;
 class GuiViewportMainScreen;
 class ImpulseSound;
 class UtilityBeamSound;

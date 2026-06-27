@@ -9,7 +9,6 @@
 #include "graphics/renderTarget.h"
 #include "io/textinput.h"
 
-class Layout;
 class GuiCanvas;
 
 class GuiElement : public GuiContainer

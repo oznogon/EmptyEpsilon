@@ -4,8 +4,6 @@
 #include "Updatable.h"
 
 class GuiElement;
-class GuiSlider;
-class GuiLabel;
 class GuiScrollFormattedText;
 class GuiButton;
 

@@ -2,10 +2,8 @@
 
 #include "gui/gui2_element.h"
 
-class GuiKeyValueDisplay;
 class GuiSelector;
 class GuiButton;
-class GuiProgressbar;
 
 class GuiShieldFrequencySelect : public GuiElement
 {

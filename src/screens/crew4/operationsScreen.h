@@ -2,8 +2,6 @@
 
 #include "gui/gui2_overlay.h"
 
-class GuiElement;
-class GuiOverlay;
 class GuiKeyValueDisplay;
 class GuiButton;
 class GuiSelector;

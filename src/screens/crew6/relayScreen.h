@@ -10,11 +10,9 @@ class GuiElement;
 class GuiCommsOverlay;
 class GuiHackingDialog;
 class GuiKeyValueDisplay;
-class GuiLabel;
 class GuiRadarView;
 class GuiRadarZoomSlider;
 class GuiSelector;
-class GuiSlider;
 class GuiToggleButton;
 class ShipsLog;
 

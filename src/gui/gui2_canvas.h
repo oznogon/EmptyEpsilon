@@ -3,7 +3,6 @@
 #include "Renderable.h"
 #include "gui2_container.h"
 
-class GuiLayout;
 class GuiCanvas : public Renderable, public GuiContainer
 {
 private:

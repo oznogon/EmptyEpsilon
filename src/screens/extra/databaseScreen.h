@@ -2,7 +2,6 @@
 
 #include "gui/gui2_overlay.h"
 
-class DatabaseViewComponent;
 
 class DatabaseScreen : public GuiOverlay
 {

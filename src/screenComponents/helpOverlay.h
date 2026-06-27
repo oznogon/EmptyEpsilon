@@ -4,7 +4,6 @@
 #include <i18n.h>
 #include <unordered_set>
 
-class GuiCanvas;
 class GuiLabel;
 class GuiPanel;
 class GuiScrollFormattedText;

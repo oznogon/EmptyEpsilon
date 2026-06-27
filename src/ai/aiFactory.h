@@ -4,7 +4,6 @@
 #include "ecs/entity.h"
 
 class ShipAI;
-class ShipAIFactory;
 
 typedef std::unique_ptr<ShipAI> (*shipAIFactoryFunc_t)(sp::ecs::Entity owner);
 

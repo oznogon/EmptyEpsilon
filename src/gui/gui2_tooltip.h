@@ -4,7 +4,6 @@
 #include "timer.h"
 
 class GuiLabel;
-class GuiPanel;
 class GuiThemeStyle;
 
 // GuiTooltip is a layout container that renders on top of all other elements.

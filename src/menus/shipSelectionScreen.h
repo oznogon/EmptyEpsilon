@@ -10,8 +10,6 @@ class GuiLabel;
 class GuiListbox;
 class GuiOverlay;
 class GuiSelector;
-class GuiSlider;
-class GuiPanel;
 class GuiButton;
 class GuiToggleButton;
 class GuiTextEntry;

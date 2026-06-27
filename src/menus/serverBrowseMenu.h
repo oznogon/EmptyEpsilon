@@ -8,8 +8,6 @@
 class GuiTextEntry;
 class GuiButton;
 class GuiListbox;
-class GuiSelector;
-class ServerScanner;
 
 class ServerBrowserMenu : public GuiCanvas
 {

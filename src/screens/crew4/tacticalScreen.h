@@ -10,7 +10,6 @@ class GuiImage;
 class GuiLabel;
 class GuiMissileTubeControls;
 class GuiRadarView;
-class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiSelector;
 class GuiCustomShipFunctions;

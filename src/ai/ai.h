@@ -5,7 +5,6 @@
 #include "systems/pathfinding.h"
 #include "components/missiletubes.h"
 
-class CpuShip;
 
 /**!
  * Base for all ship AIs. This base class handles basic AI which just follows orders straight on and attacks head on.

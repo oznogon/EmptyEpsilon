@@ -8,7 +8,6 @@ class GuiPanel;
 class GuiLabel;
 class GuiListbox;
 class GuiButton;
-class GuiToggleButton;
 class GuiProgressbar;
 class GuiScrollFormattedText;
 class MiniGame;

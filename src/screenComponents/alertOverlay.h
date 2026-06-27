@@ -2,7 +2,6 @@
 
 #include "gui/gui2_element.h"
 
-class GuiOverlay;
 
 class AlertLevelOverlay : public GuiElement
 {

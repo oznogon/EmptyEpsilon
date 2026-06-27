@@ -2,7 +2,6 @@
 
 #include "gui/gui2_element.h"
 
-class RepairCrew;
 class GuiShipRoomContainer;
 class GuiShipCrew;
 class GuiThemeStyle;

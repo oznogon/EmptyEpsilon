@@ -7,7 +7,6 @@ class GuiButton;
 class GuiLabel;
 class GuiListbox;
 class GuiScrollFormattedText;
-class GuiSelector;
 class GuiTextEntry;
 class GuiToggleButton;
 

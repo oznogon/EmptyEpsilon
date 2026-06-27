@@ -14,7 +14,6 @@ namespace sp {
 }
 
 class GuiElement;
-class GuiLayout;
 class GuiTheme;
 
 class GuiContainer : sp::NonCopyable
