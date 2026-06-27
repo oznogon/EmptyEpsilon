@@ -818,7 +818,7 @@ msgid ""
 "Space stations are permanent, immobile structures ranging in scale from "
 "small outposts to city-sized communities. Many provide restocking and repair "
 "services to neutral and friendly ships."
-msgstr ""
+msgstr "Raumstationen sind permanente, unbewegliche Strukturen, die von kleinen Außenposten bis zu städtegroßen Gemeinschaften reichen können. Viele bieten neutralen und befreundeten Schiffen Dienste wie Reparaturen und Versorgung an."
 
 #: scripts/science_db.lua:305 scripts/science_db.lua:330
 msgid "No class"
@@ -921,3 +921,4 @@ msgstr ""
 
 #~ msgid "Biological"
 #~ msgstr "Biologisch"
+

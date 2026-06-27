@@ -870,7 +870,7 @@ msgid ""
 "Spaceships are vessels capable of withstanding the dangers of travel through "
 "deep space. They can fill many functions and vary broadly in size, from "
 "small tugs to massive dreadnoughts."
-msgstr ""
+msgstr "Les vaisseaux spatiaux sont des vaisseaux capables de résister aux dangers des voyages dans l'espace. Ils peuvent remplir de nombreuses fonctions et varient considérablement en taille, du petit remorqueur à l'énorme cuirassé, mais aussi en équipement, équipage et armement."
 
 #: scripts/science_db.lua:294
 #, fuzzy
@@ -883,7 +883,7 @@ msgid ""
 "Space stations are permanent, immobile structures ranging in scale from "
 "small outposts to city-sized communities. Many provide restocking and repair "
 "services to neutral and friendly ships."
-msgstr ""
+msgstr "Les stations spatiales sont des structures fixes et permanentes, de tailles et de fonctions diverses : petits avant-postes, stations-service, villages, villes, oasis etc.\n\nBeaucoup d'entre elles fournissent divers services de réapprovisionnement, de réparation, de soutien militaire et d'information aux vaisseaux neutres et amis qui les contactent ou s'y amarrent."
 
 #: scripts/science_db.lua:305 scripts/science_db.lua:330
 msgid "No class"
@@ -983,3 +983,4 @@ msgstr "Vit. de charge %.1fs"
 msgctxt "database"
 msgid "%s capacity"
 msgstr ""
+
