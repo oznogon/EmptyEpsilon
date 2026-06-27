@@ -607,9 +607,8 @@ msgstr ""
 "    L = Large (2x plus puissant et lent)"
 
 #: scripts/science_db.lua:136 scripts/science_db.lua:146
-#, fuzzy
 msgid "Damage type"
-msgstr "Dégâts au bord"
+msgstr "Type de dégâts"
 
 #: scripts/science_db.lua:137 scripts/science_db.lua:147
 #: scripts/science_db.lua:175
