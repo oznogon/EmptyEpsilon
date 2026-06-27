@@ -1,0 +1,26 @@
+# Scenario name
+msgid "Empty Space"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Empty scenario with no ships or terrain. Game masters can use this to set up "
+"a scenario in the GM screen. Use the F5 key or \"Copy scenario\" and \"Copy "
+"selection\" buttons on the GM screen to copy Lua code of the layout to the "
+"clipboard for use in scenario scripts."
+msgstr ""
+
+#: scripts/scenario_90_empty_space.lua:102
+msgctxt "buttonGM"
+msgid "Reset to asteroids"
+msgstr ""
+
+#: scripts/scenario_90_empty_space.lua:113
+msgctxt "buttonGM"
+msgid "Reset to nebulae"
+msgstr ""
+
+#: scripts/scenario_90_empty_space.lua:123
+msgctxt "buttonGM"
+msgid "Delete unselected"
+msgstr ""

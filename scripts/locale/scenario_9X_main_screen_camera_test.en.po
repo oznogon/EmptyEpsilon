@@ -1,0 +1,7 @@
+# Scenario name
+msgid "Main Screen Camera Test"
+msgstr ""
+
+# Scenario description
+msgid "Test scenario for main screen camera feature"
+msgstr ""

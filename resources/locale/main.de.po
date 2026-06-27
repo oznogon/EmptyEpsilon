@@ -3549,6 +3549,41 @@ msgctxt "hotkey_debug"
 msgid "Show debug timing"
 msgstr "Timing-infos anzeigen"
 
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Basic"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Development"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Mission"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Replayable Mission"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "PvP"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Race"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:372
+msgctxt "category"
+msgid "Unknown"
+msgstr ""
+
 #~ msgid "Interface language"
 #~ msgstr "Oberflächen-Sprache"
 
@@ -4303,38 +4338,3 @@ msgstr "Timing-infos anzeigen"
 #~ msgctxt "button"
 #~ msgid "Database"
 #~ msgstr "Datenbank"
-
-#: src/menus/serverCreationScreen.cpp:372
-msgctxt "category"
-msgid "Basic"
-msgstr ""
-
-#: src/menus/serverCreationScreen.cpp:372
-msgctxt "category"
-msgid "Development"
-msgstr ""
-
-#: src/menus/serverCreationScreen.cpp:372
-msgctxt "category"
-msgid "Mission"
-msgstr ""
-
-#: src/menus/serverCreationScreen.cpp:372
-msgctxt "category"
-msgid "Replayable Mission"
-msgstr ""
-
-#: src/menus/serverCreationScreen.cpp:372
-msgctxt "category"
-msgid "PvP"
-msgstr ""
-
-#: src/menus/serverCreationScreen.cpp:372
-msgctxt "category"
-msgid "Race"
-msgstr ""
-
-#: src/menus/serverCreationScreen.cpp:372
-msgctxt "category"
-msgid "Unknown"
-msgstr ""

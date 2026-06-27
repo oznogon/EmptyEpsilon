@@ -1,0 +1,7 @@
+# Scenario name
+msgid "Nebula Test"
+msgstr ""
+
+# Scenario description
+msgid "Test scenario for nebula behaviors"
+msgstr ""

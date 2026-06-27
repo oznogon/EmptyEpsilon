@@ -3511,24 +3511,6 @@ msgctxt "hotkey_debug"
 msgid "Show debug timing"
 msgstr "Afficher le graphique de débogage"
 
-#~ msgid "LAN"
-#~ msgstr "LAN"
-
-#~ msgid "Internet"
-#~ msgstr "Internet"
-
-#~ msgctxt "hotkey_Weapons"
-#~ msgid "Disable"
-#~ msgstr "Désactiver verrouillage des missiles"
-
-#~ msgctxt "hotkey_Science"
-#~ msgid "Scanning parameter set {number}"
-#~ msgstr "Scan niveau {number} (joystick)"
-
-#~ msgctxt "button"
-#~ msgid "Database"
-#~ msgstr "Base de données"
-
 #: src/menus/serverCreationScreen.cpp:372
 msgctxt "category"
 msgid "Basic"
@@ -3563,3 +3545,21 @@ msgstr "Course"
 msgctxt "category"
 msgid "Unknown"
 msgstr "Inconnu"
+
+#~ msgid "LAN"
+#~ msgstr "LAN"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Disable"
+#~ msgstr "Désactiver verrouillage des missiles"
+
+#~ msgctxt "hotkey_Science"
+#~ msgid "Scanning parameter set {number}"
+#~ msgstr "Scan niveau {number} (joystick)"
+
+#~ msgctxt "button"
+#~ msgid "Database"
+#~ msgstr "Base de données"

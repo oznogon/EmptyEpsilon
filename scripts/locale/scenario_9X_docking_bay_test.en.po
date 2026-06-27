@@ -1,0 +1,7 @@
+# Scenario name
+msgid "Docking Bay Test"
+msgstr ""
+
+# Scenario description
+msgid "Test scenario for docking bay behaviors"
+msgstr ""
