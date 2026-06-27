@@ -842,7 +842,7 @@ msgstr ""
 #, fuzzy
 msgctxt "database"
 msgid "Factions"
-msgstr "Champ d'action"
+msgstr "Factions"
 
 #: scripts/science_db.lua:276 scripts/science_db.lua:279
 msgctxt "stance"
@@ -875,7 +875,7 @@ msgstr ""
 #, fuzzy
 msgctxt "database"
 msgid "Stations"
-msgstr "Champ d'action"
+msgstr "Station spatiale"
 
 #: scripts/science_db.lua:295
 msgid ""
