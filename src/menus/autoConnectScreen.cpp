@@ -139,6 +139,7 @@ void AutoConnectScreen::update(float delta)
             }
             // If we don't have a password or we already tried it and it didn't
             // work, fall through.
+            [[fallthrough]];
         case GameClient::Disconnected:
             disconnectFromServer();
             scanner = new ServerScanner(VERSION_NUMBER);
