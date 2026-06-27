@@ -669,22 +669,22 @@ msgstr "EMP"
 #: scripts/science_db.lua:166
 msgctxt "size_abbreviation"
 msgid "S"
-msgstr "P"
+msgstr ""
 
 #: scripts/science_db.lua:167
 msgctxt "size_abbreviation"
 msgid "M"
-msgstr "M"
+msgstr ""
 
 #: scripts/science_db.lua:168 scripts/science_db.lua:182
 #: scripts/science_db.lua:193
 msgctxt "size_abbreviation"
 msgid "L"
-msgstr "G"
+msgstr ""
 
 #: scripts/science_db.lua:204
 msgid "Homing missile"
-msgstr "Homing missile"
+msgstr "Missile à tête chercheuse"
 
 #: scripts/science_db.lua:205 scripts/science_db.lua:210
 #: scripts/science_db.lua:217 scripts/science_db.lua:224
@@ -876,7 +876,7 @@ msgstr ""
 #, fuzzy
 msgctxt "database"
 msgid "Stations"
-msgstr "Station spatiale"
+msgstr "Stations spatiale"
 
 #: scripts/science_db.lua:295
 msgid ""
@@ -887,96 +887,96 @@ msgstr ""
 
 #: scripts/science_db.lua:305 scripts/science_db.lua:330
 msgid "No class"
-msgstr ""
+msgstr "Sans classe"
 
 #: scripts/science_db.lua:331
 msgid "No sub-class"
-msgstr ""
+msgstr "Sans sous-classe"
 
 #: scripts/science_db.lua:340
 msgctxt "database"
 msgid "Class"
-msgstr ""
+msgstr "Classe"
 
 #: scripts/science_db.lua:341
 msgctxt "database"
 msgid "Sub-class"
-msgstr ""
+msgstr "Sous-classe"
 
 #: scripts/science_db.lua:353 scripts/science_db.lua:355
 msgctxt "database"
 msgid "Size"
-msgstr ""
+msgstr "Taille"
 
 #: scripts/science_db.lua:367
 msgctxt "database"
 msgid "Shield"
-msgstr ""
+msgstr "Boucliers"
 
 #: scripts/science_db.lua:371
 msgid "Hull"
-msgstr ""
+msgstr "Coque"
 
 #: scripts/science_db.lua:375
 msgctxt "database"
 msgid "Move speed"
-msgstr ""
+msgstr "Vit. de dépl. avant"
 
 #: scripts/science_db.lua:376
 msgctxt "database"
 msgid "Reverse move speed"
-msgstr ""
+msgstr "Vit. de dépl. arrière"
 
 #: scripts/science_db.lua:379
 msgctxt "database"
 msgid "Turn speed"
-msgstr ""
+msgstr "Vit. de rotation"
 
 #: scripts/science_db.lua:382
 msgctxt "database"
 msgid "Warp speed"
-msgstr ""
+msgstr "Vitesse lumière"
 
 #: scripts/science_db.lua:385
 msgctxt "database"
 msgid "Jump range"
-msgstr ""
+msgstr "Portée de téléportation"
 
 #: scripts/science_db.lua:392
 #, lua-format
 msgctxt "database"
 msgid "%s beam weapon"
-msgstr ""
+msgstr "Faisceau %s"
 
 #: scripts/science_db.lua:393
 #, lua-format
 msgctxt "database"
 msgid "%.1f dmg. / %.1f sec."
-msgstr ""
+msgstr "Dégâts %.1f   Cycle %.1fs"
 
 #: scripts/science_db.lua:401
 #, lua-format
 msgctxt "database"
 msgid "%s tube"
-msgstr ""
+msgstr "Tube %s"
 
 #: scripts/science_db.lua:403
 #, lua-format
 msgctxt "database"
 msgid "%s small tube"
-msgstr ""
+msgstr "Tube léger %s"
 
 #: scripts/science_db.lua:406
 #, lua-format
 msgctxt "database"
 msgid "%s large tube"
-msgstr ""
+msgstr "Tube large %s"
 
 #: scripts/science_db.lua:410
 #, lua-format
 msgctxt "database"
 msgid "%.1f sec."
-msgstr ""
+msgstr "Vit. de charge %.1fs"
 
 #: scripts/science_db.lua:422
 #, lua-format

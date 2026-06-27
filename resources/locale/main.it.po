@@ -2384,7 +2384,7 @@ msgstr "Sistema bersaglio"
 
 #: src/screenComponents/hackingDialog.cpp:116
 msgctxt "hacking"
-msgid "Hacking in Progress: {percent}%"
+msgid "Hacking in progress: {percent}%"
 msgstr "Hacking in corso: {percent}%"
 
 #: src/screenComponents/hackingDialog.cpp:125

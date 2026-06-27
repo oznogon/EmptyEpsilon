@@ -137,7 +137,7 @@ void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
         }
     } else {
         progress_bar->setValue(game->getProgress());
-        status_label->setText(tr("hacking", "Hacking in Progress: {percent}%").format({{"percent", string(int(100 * game->getProgress()))}}));
+        status_label->setText(tr("hacking", "Hacking in progress: {percent}%").format({{"percent", string(static_cast<int>(100 * game->getProgress()))}}));
     }
     if (target_system != ShipSystem::Type::None)
     {

@@ -127,7 +127,7 @@ msgstr "Vitesse lumière"
 #: src/scienceDatabase.cpp:533
 msgctxt "database"
 msgid "Jump range"
-msgstr "Téléportation"
+msgstr "Portée de téléportation"
 
 #: src/scienceDatabase.cpp:534
 msgctxt "database"
@@ -140,7 +140,7 @@ msgstr "Faisceau {direction}"
 
 #: src/scienceDatabase.cpp:545
 msgctxt "database"
-msgid "{damage} Dmg / {interval} sec"
+msgid "{damage} dmg. / {interval} sec."
 msgstr "Dégâts {damage}   Cycle {interval}s"
 
 #: src/scienceDatabase.cpp:555
@@ -170,7 +170,7 @@ msgstr "Stock {weapon}"
 #: src/scienceDatabase.cpp:584
 msgctxt "database"
 msgid "Stations"
-msgstr "Stations"
+msgstr "Stations spatiale"
 
 #: src/scienceDatabase.cpp:585
 msgid ""
@@ -1630,16 +1630,16 @@ msgstr "Amarré"
 #: src/screens/gm/tweak.cpp:368
 msgctxt "missiles"
 msgid "Storage space:"
-msgstr "Capacité de stockage"
+msgstr "Capacité de stockage :"
 
 #: src/screens/gm/tweak.cpp:381
 msgctxt "missiles"
 msgid "Stored amount:"
-msgstr "Stock actuel"
+msgstr "Stock actuel :"
 
 #: src/screens/gm/tweak.cpp:402
 msgid "Jammer Range:"
-msgstr "Portée du brouilleur"
+msgstr "Portée du brouilleur :"
 
 #: src/screens/gm/tweak.cpp:436
 msgid "Asteroid Size:"
@@ -2274,7 +2274,7 @@ msgstr "Système ciblé :"
 
 #: src/screenComponents/hackingDialog.cpp:116
 msgctxt "hacking"
-msgid "Hacking in Progress: {percent}%"
+msgid "Hacking in progress: {percent}%"
 msgstr "Piratage en cours : {percent}%"
 
 #: src/screenComponents/hackingDialog.cpp:125
