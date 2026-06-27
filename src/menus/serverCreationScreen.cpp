@@ -43,7 +43,8 @@ ServerSetupScreen::ServerSetupScreen()
     // Server configuration section.
     (new GuiLabel(column, "CONFIG_LABEL", tr("Server configuration"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
     // Server name row.
     GuiElement* row = new GuiElement(column, "");
@@ -128,7 +129,8 @@ ServerSetupScreen::ServerSetupScreen()
     // Server info section.
     (new GuiLabel(column, "INFO_LABEL", tr("Server information"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
     // Reverse proxy server IP row.
     string reverse_proxy_value = PreferencesManager::get("serverproxy");
@@ -330,7 +332,8 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     // Scenario categories.
     (new GuiLabel(left, "CATEGORY_LABEL", tr("Category"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
     category_list = new GuiListbox(left, "SCENARIO_CATEGORY",
         [this](int index, string value)
@@ -343,7 +346,8 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     // Scenario list.
     (new GuiLabel(middle, "LIST_LABEL", tr("Scenario"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
     scenario_list = new GuiListbox(middle, "SCENARIO_LIST",
         [this](int index, string value)
@@ -358,7 +362,8 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     // Scenario description.
     (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
     description_text = new GuiScrollFormattedText(right, "SCENARIO_DESCRIPTION", tr("Select a scenario..."));
     description_text->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -519,7 +524,8 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
         // Option name.
         (new GuiLabel(option_container, "", setting.key_localized, 30.0f))
             ->addBackground()
-            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 10");
 
         // Option value selector.
         GuiSelector* selector = new GuiSelector(option_container, "",

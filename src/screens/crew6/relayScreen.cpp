@@ -15,14 +15,15 @@
 #include "components/faction.h"
 #include "components/shiplog.h"
 
+#include "screenComponents/alertLevelButton.h"
+#include "screenComponents/alertOverlay.h"
 #include "screenComponents/commsOverlay.h"
+#include "screenComponents/customShipFunctions.h"
+#include "screenComponents/hackingDialog.h"
+#include "screenComponents/openCommsButton.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/radarZoomSlider.h"
-#include "screenComponents/openCommsButton.h"
 #include "screenComponents/shipsLogControl.h"
-#include "screenComponents/hackingDialog.h"
-#include "screenComponents/customShipFunctions.h"
-#include "screenComponents/alertLevelButton.h"
 
 #include "gui/mouseRenderer.h"
 #include "gui/theme.h"
@@ -159,6 +160,9 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     if (auto transform = my_spaceship.getComponent<sp::Transform>())
         radar->setViewPosition(transform->getPosition());
+
+    // Render the alert level overlay.
+    new AlertLevelOverlay(this);
 
     auto sidebar = new GuiElement(this, "SIDE_BAR");
     sidebar->setPosition(-20, 150, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");

@@ -3,8 +3,9 @@
 
 #include "gui/theme.h"
 
-#include "screenComponents/databaseView.h"
+#include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
+#include "screenComponents/databaseView.h"
 
 DatabaseScreen::DatabaseScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DATABASE_SCREEN", GuiTheme::getColor("background"))
@@ -13,7 +14,8 @@ DatabaseScreen::DatabaseScreen(GuiContainer* owner)
     (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiled("gui/background/crosses.png");
 
-    // No alert level color overlay.
+    // Render the alert level color overlay.
+    new AlertLevelOverlay(this);
 
     // Pad top of details column if crew screen selection controls are visible.
     int details_padding = 0;
