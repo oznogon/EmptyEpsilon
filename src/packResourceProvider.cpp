@@ -1,6 +1,5 @@
 #include "packResourceProvider.h"
 
-#include <cstdio>
 #include <SDL_endian.h>
 #include <SDL_rwops.h>
 

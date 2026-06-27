@@ -1,6 +1,5 @@
 #pragma once
 
-#include <stdint.h>
 #include "hardware/hardwareOutputDevice.h"
 
 class UDMXDevice : public HardwareOutputDevice

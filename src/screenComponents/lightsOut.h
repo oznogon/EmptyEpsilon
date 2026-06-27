@@ -2,8 +2,6 @@
 
 #include "miniGame.h"
 #include "gui/gui2_togglebutton.h"
-#include <vector>
-#include <memory>
 
 /**
  * An implementation of the Lights Out game, where the goal is to turn all the

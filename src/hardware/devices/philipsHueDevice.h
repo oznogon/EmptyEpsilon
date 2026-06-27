@@ -2,7 +2,6 @@
 
 #include "hardware/hardwareOutputDevice.h"
 
-#include <stdint.h>
 #include <thread>
 #include <mutex>
 

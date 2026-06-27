@@ -1,6 +1,5 @@
 #include "dataStorage.h"
 #include "io/json.h"
-#include <unordered_map>
 
 
 static string scriptstorage_path = "scriptstorage.json";
