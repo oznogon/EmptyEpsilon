@@ -369,7 +369,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     description_text->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     for (const auto& category : ScenarioInfo::getCategories())
-        category_list->addEntry(category, category);
+        category_list->addEntry(tr("category", category), category);
 
     // Bottom buttons.
     GuiElement* row = new GuiElement(container, "");
