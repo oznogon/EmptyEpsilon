@@ -1,18 +1,84 @@
--- Name: Engineering
--- Description: [Station Tutorial]
---- -------------------
---- -Goes over controlling the power of each station and repairs.
+-- Name: Weapons
+-- Description: <h3><color=#C0C0FF>Tutorial: Engineering</>
+--- 
+--- This tutorial covers how the <color=#C0C0FF>Engineering</> officer manages a ship's power, heat, coolant, and damage. This includes directing repair crews and identifying system effectiveness.
 ---
---- [Station Info]
---- -------------------
----Power Management: 
---- -The Engineering officer can route power to systems by selecting a system and moving its power slider. Giving a system more power increases its output. For instance, an overpowered reactor produces more energy, overpowered shields reduce more damage and regenerate faster, and overpowered impulse engines increase its maximum speed. Overpowering a system (above 100%) also increases its heat generation and, except for the reactor, its energy draw. Underpowering a system (below 100%) likewise reduces heat output and energy draw.
+--- To begin this tutorial, click the <color=#C0C0FF>Start tutorial</> button at the bottom right of this screen.
 ---
----Coolant Management: 
---- -By adding coolant to a system, the Engineering officer can reduce its temperature and prevent the system from damaging the ship. The ship has an unlimited reseve of coolant, but a finite amount of coolant can be applied at any given time, so the Engineering officer must budget how much coolant each system can receive. A system's change in temperature is indicated by white arrows in the temperature column. The brighter an arrow is, the larger the trend.
+--- Engineering techniques are also relevant to the <color=#C0C0FF>Engineering+</>, <color=#C0C0FF>Damage Control (DamCon)</>, and <color=#C0C0FF>Power Management</> crew screens.
 ---
----Repairs: 
---- -When systems are damaged by being shot, colliding with space hazards, or overheating, the Engineering officer can dispatch repair crews to the system for repairs. Each systems has a damage state between -100% to 100%. Systems below 100% function suboptimally, in much the same way as if they are underpowered. Once a system is at or below 0%, it completely stops functioning until it is repaired. Systems can be repaired by sending a repair crew to the room containing the system. Hull damage affects the entire ship, and docking at a station can repair it, but hull repairs progress very slowly.
+--- An Engineer's tasks include:
+---
+--- <h4><color=#C0C0FF>Viewing the ship's interior</>
+---
+--- The Engineering screen has a simplified internal view of a ship's rooms, some of which house the ship's systems. As a ship's systems take damage, these rooms change color to become progressively red.
+---
+--- Most ships have repair crews who can repair damage to ship systems. To repair these systems, you must typically direct a repair crew into the rooms where systems are damaged. Larger rooms can accommodate more repair crews at once, which accelerates repairs.
+---
+--- (System damage can be disabled in certain server or ship configurations, and in some cases repair crew assignment might be automated. If you don't see or can't control these options in Engineering during a scenario, they might not be relevant to that game.)
+---
+--- <h4><color=#C0C0FF>Managing ship systems</>
+---
+--- Below the interior view are rows consisting of colored bars. Each row represents a ship's system.
+---
+--- To select a row to manage its power and coolant, click or tap the name of the system on the left side of the row.
+---
+--- <color=#00DD00>System health</s>
+---
+--- The first column of a row (under the wrench) indicates a system's health with both a bar and a percentile counter.
+---
+--- At 100% system health, a system is nominal and fully functional, and its bar is green. Any damage to a system reduces its health, and the bar's color transitions from green to red as it approaches 0% health.
+---
+--- When a system reaches 0% health, it is fully disabled and no longer functions. For example, if the beam weapons system is reduced to 0% health, your ship can no longer fire its beam weapons, even if the system is fully powered.
+---
+--- A system can continue taking damage after reaching 0% health, up to -100% health. This additional damage must also be repaired to above 0% before the system can be returned to service. If your Reactor is damaged to -100%, your ship will likely explode.
+---
+--- <color=#C0C0FF>Heat management</>
+---
+--- Systems can generate heat for a variety of reasons. Overpowered systems, firing beam weapons, and using combat maneuvers, warp drives, and jump drives can all generate system heat.
+---
+--- System heat is indicated by a bar filling up in the heat column (under the thermometer). The bar starts at orange as it begins to fill up, and turns red and begins flashing with a thermometer icon as it approaches critical heat.
+---
+--- The rate of temperature change in a system is indicated by white arrows that point up or down in the temperature column. The brighter an arrow is, the larger the trend.
+---
+--- If a system's heat reaches 100%, any additional heat generated by that system incurs damage on that system. Managing system heat is therefore critical to sustaining operations. You can reduce system heat by either adding coolant to the system, or by reducing that system's power to under 100%.
+---
+--- <color=#C0C0FF>Power management</>
+---
+--- Systems on a ship operate on energy, which is typically generated by a ship's Reactor if it has one. A ship has a limited capacity to store energy, and it's the Engineer's responsibility to manage its usage by controlling how power is routed to the ship's systems.
+---
+--- System power is indicated by a yellow bar in the power column (under the lightning bolt). A system's nominal power level, the point at which its system output is normal and no passive heat is generated, is 100%. A system can typically take between 0% and 300% power, so a system at 100% power fills only about a third of its bar.
+---
+--- The Engineering officer can route power to systems by clicking or tapping a system's name to select it, and then moving its Power slider to the right of the row. You can also route power by tapping directly in the system's power column, but with less precision and feedback. Rerouting power isn't instantaneous and can take several seconds to complete.
+---
+--- Routing more than 100% power to a system increases its effectiveness but can generate additional heat and consume more energy. For instance, an overpowered reactor produces more energy, overpowered shields reduce more damage and regenerate faster, and overpowered impulse engines increase its maximum speed.
+---
+--- Reducing power to a system below 100% reduces its effectiveness but can reduce that system's heat buildup and energy draw.
+---
+--- <color=#C0C0FF>Coolant management</>
+---
+--- By adding coolant to a system, the Engineering officer can reduce that system's rate of heat accumulation. To route coolant to a system, the Engineering officer can click or tap that system's name to select it, and then move its Coolant slider to the right of the row.
+---
+--- You can also route coolant by tapping the coolant column (under the snowflake) for that system, but with less precision. You can also evenly distribute or withdraw coolant by tapping the coolant bar at the top of the coolant column. Routing coolant isn't instantaneous and can take several seconds to complete.
+---
+--- While you can request up to 100% of a system's coolant capacity, that system might receive only a fraction of that amount if other systems also have coolant requests. Each ship has a limited reseve of coolant, and a typical ship has only enough coolant to fully cool one systems at a time, so the Engineering officer must budget how much coolant each system can receive. A white bar in the coolant column of a system's row indicates that system's coolant request.
+---
+--- <h4><color=#C0C0FF>Tracking ship status</>
+---
+--- Indicators at the top right of the Engineering screen track the ship's energy, hull, shields, and coolant.
+---
+--- Energy is tracked as a number, with each ship type having a different energy capacity. The energy indicator also shows the rate at which your energy is being depleted or recharged, as a numeric rate per minute.
+---
+--- Hull, shields, and coolant are tracked as percentages. Hull damage can typically be repaired only by docking with a ship or space station that provides repair services. Shields regenerate as long as the shield generator systems on a ship are powered. Coolant capacity is typically acquired or depleted only through extraordinary means.
+---
+--- <h4><color=#C0C0FF>Initiating ship self-destruction</>
+---
+--- If scuttling the ship becomes necessary, the Engineering officer is responsible for initiating the self-destruction sequence. Click or tap the Self destruct button at the top left, then click or tap Confirm! to confirm.
+---
+--- Once activated, bridge crew offices must identify and enter the self-destruction codes into the panels that appear on their screens. The Engineering officer can still cancel the sequence by clicking or tapping the Cancel button at the top left of the Engineering screen.
+---
+--- Once all codes are entered, the ship begins a 10-second self-destruction sequence. Calmly evacuate to the nearest escape pod or shuttle before self-destruction complete, as the ship will then explode and damage all nearby objects.
+---
 -- Type: Tutorial
 
 require("tutorial/00_all.lua")

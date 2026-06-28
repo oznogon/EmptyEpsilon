@@ -1,9 +1,12 @@
--- Name: Run All
--- Description: All Station Tutorials. This cycles through all the stations. 
+-- Name: All crew screens
+-- Description: <h3><color=#C0C0FF>Tutorial: All crew screens</>
+---
+--- This option runs all major crew screen tutorials (Captain, Helms, Weapons, Engineering, Science, and Relay) in seqeuence. For information on each tutorial, or to run them individually, select them from this list.
+---
+--- To begin these tutorials, click the <color=#C0C0FF>Start tutorial</> button at the bottom right of this screen.
 -- Type: Tutorial
 require("utils.lua")
 require("tutorialUtils.lua")
-
 
 function tutorial_init()
     --Create the player ship
@@ -15,7 +18,6 @@ function tutorial_init()
         engineeringTutorial,
         scienceTutorial,
         relayTutorial,
-        --operationsTutorial, --Operations tutorial is a limited combination of sience and relay. Enable this and disable the science/relay tutorials if you want to give players this tutorial.
         endOfTutorial
     }
 
@@ -27,7 +29,6 @@ mainscreenTutorial = createSequence()
 addToSequence(mainscreenTutorial, function() tutorial_switchViewToMainScreen() end)
 addToSequence(mainscreenTutorial, _([[This is the main screen, which displays your ship and the surrounding space.
 While you cannot move the ship from this screen, you can use it to visually identify objects.]]))
-
 
 radarTutorial = createSequence()
 addToSequence(radarTutorial, function() tutorial_switchViewToLongRange() end)

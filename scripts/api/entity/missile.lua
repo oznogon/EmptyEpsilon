@@ -115,7 +115,7 @@ function EMPMissile()
     return e
 end
 
---- An Nuke is a homing missile with a large blast range that deals significant kinetic area damage on impact or timeout.
+--- A Nuke is a homing missile with a large blast range that deals significant kinetic area damage on impact or timeout.
 --- AI behaviors attempt to avoid Nukes.
 --- Nukes can be fired via weapon tubes or created directly by scripts.
 --- Example: nuke = Nuke():setPosition(1000, 1000):setRotation(90)
