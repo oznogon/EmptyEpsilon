@@ -24,29 +24,53 @@ TutorialMenu::TutorialMenu()
     (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
 
-    // Draw a one-column autolayout container with margins.
-    container = new GuiElement(this, "TUTORIAL_CONTAINER");
+    // Layout elements.
+    GuiElement* container = new GuiElement(this, "");
     container
-        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setAttribute("layout", "vertical");
-    container
         ->setAttribute("padding", "50");
+    container
+        ->setAttribute("layout", "vertical");
 
     // Tutorial section.
-    (new GuiLabel(container, "TUTORIAL_LABEL", tr("title", "Tutorials"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(container, "TITLE_LABEL", tr("title", "Tutorials"), GuiElement::GuiSizeRow))
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 20");
+
+    GuiElement* columns = new GuiElement(container, "");
+    columns
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "horizontal");
+    columns
+        ->setAttribute("margin", "0, 0, 0, 20");
+
+    GuiElement* left = new GuiElement(columns, "LEFT_COLUMN");
+    left
+        ->setSize(350.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    left
+        ->setAttribute("margin", "0, 20, 0, 0x");
+
+    GuiElement* right = new GuiElement(columns, "RIGHT_COLUMN");
+    right
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    // Scenario categories.
+    (new GuiLabel(left, "SCENARIO_LABEL", tr("Tutorial scenarios"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     // List each scenario derived from scenario_*.lua files in Resources.
-    GuiListbox* tutorial_list = new GuiListbox(container, "TUTORIAL_LIST",
+    GuiListbox* tutorial_list = new GuiListbox(left, "TUTORIAL_LIST",
         [this](int index, string value)
         {
             selectTutorial(value);
         }
     );
-    tutorial_list->setSize(GuiElement::GuiSizeMax, 350.0f);
+    tutorial_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Fetch and sort all Lua files starting with "tutorial_".
     std::vector<string> tutorial_filenames = findResources("tutorial/*.lua");
@@ -59,17 +83,17 @@ TutorialMenu::TutorialMenu()
         tutorial_list->addEntry(info.name, filename);
     }
 
-    // Show the scenario description text.
-    GuiPanel* panel = new GuiPanel(container, "TUTORIAL_DESCRIPTION_BOX");
-    panel
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setAttribute("margin", "0, 20");
+    // Scenario categories.
+    (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
-    tutorial_description = new GuiScrollFormattedText(panel, "TUTORIAL_DESCRIPTION", "");
+    // Show the scenario description text.
+    tutorial_description = new GuiScrollFormattedText(right, "TUTORIAL_DESCRIPTION", "");
     tutorial_description
         ->setTextSize(30.0f)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setAttribute("margin", "20");
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Bottom GUI.
     bottom_row = new GuiElement(container, "TUTORIAL_BOTTOM_ROW");

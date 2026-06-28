@@ -51,6 +51,11 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
     (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
 
+    (new GuiLabel(this, "HEADER", tr("title", "Join game"), GuiElement::GuiSizeRow))
+        ->setAlignment(sp::Alignment::Center)
+        ->setPosition(0.0f, 50.0f, sp::Alignment::TopCenter)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
     (new GuiButton(this, "BACK", tr("button", "Back"),
         [this]()
         {
@@ -68,10 +73,10 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
         });
 
         auto error_info = new GuiLabel(this, "LAST_ATTEMPT_ERROR_MESSAGE", error_message, GuiElement::GuiSizeLabel);
-        error_info->setPosition(0.0f, 25.0f, sp::Alignment::TopCenter);
+        error_info->setPosition(0.0f, -50.0f, sp::Alignment::BottomCenter);
     }
 
-    connect_button = new GuiButton(this, "CONNECT", tr("screenLan", "Connect"),
+    connect_button = new GuiButton(this, "CONNECT", tr("button", "Connect to server"),
         [this]()
         {
             if (selected_server)
@@ -117,8 +122,8 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
         }
     );
     server_list_box
-        ->setPosition(0.0f, 50.0f, sp::Alignment::TopCenter)
-        ->setSize(700.0f, 600.0f);
+        ->setPosition(0.0f, 120.0f, sp::Alignment::TopCenter)
+        ->setSize(700.0f, 500.0f);
 
     scanner
         ->addCallbacks(

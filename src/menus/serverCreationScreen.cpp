@@ -40,6 +40,11 @@ ServerSetupScreen::ServerSetupScreen()
     column
         ->setAttribute("alignment", "topcenter");
 
+    (new GuiLabel(column, "HEADER", tr("title", "Host game"), GuiElement::GuiSizeRow))
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 20");
+
     // Server configuration section.
     (new GuiLabel(column, "CONFIG_LABEL", tr("Server configuration"), 30.0f))
         ->addBackground()
@@ -173,7 +178,7 @@ ServerSetupScreen::ServerSetupScreen()
     );
     server_ips
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setAttribute("margin", "0, 0, 0, 50");
+        ->setAttribute("margin", "0, 0, 0, 40");
 
     for (auto addr_str : sp::io::network::Address::getLocalAddress().getHumanReadable())
     {
@@ -307,6 +312,11 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     container
         ->setAttribute("layout", "vertical");
 
+    (new GuiLabel(container, "TITLE_LABEL", tr("title", "Select scenario"), GuiElement::GuiSizeRow))
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 20");
+
     GuiElement* columns = new GuiElement(container, "");
     columns
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -330,7 +340,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
         ->setAttribute("layout", "vertical");
 
     // Scenario categories.
-    (new GuiLabel(left, "CATEGORY_LABEL", tr("Category"), 30.0f))
+    (new GuiLabel(left, "CATEGORY_LABEL", tr("Category"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -344,7 +354,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     category_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Scenario list.
-    (new GuiLabel(middle, "LIST_LABEL", tr("Scenario"), 30.0f))
+    (new GuiLabel(middle, "LIST_LABEL", tr("Scenario"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -360,7 +370,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     scenario_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Scenario description.
-    (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description"), 30.0f))
+    (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -486,6 +496,11 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
         ->setAttribute("padding", "50");
     container
         ->setAttribute("layout", "vertical");
+
+    (new GuiLabel(container, "TITLE_LABEL", tr("title", "Configure scenario"), GuiElement::GuiSizeRow))
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 20");
 
     GuiElement* columns = new GuiElement(container, "");
     columns

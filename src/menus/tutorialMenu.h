@@ -3,9 +3,9 @@
 #include "gui/gui2_canvas.h"
 #include "Updatable.h"
 
+class GuiButton;
 class GuiElement;
 class GuiScrollFormattedText;
-class GuiButton;
 
 class TutorialMenu : public GuiCanvas, public Updatable
 {

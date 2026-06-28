@@ -38,7 +38,7 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
     (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
 
-    // Initialize autolayout columns.
+    // Initialize autolayout.
     auto container = new GuiElement(this, "");
     container
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -46,14 +46,14 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
     container
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(container, "HEADER", tr("Options"), 50.0f))
+    (new GuiLabel(container, "HEADER", tr("title", "Options"), GuiElement::GuiSizeRow))
         ->setAlignment(sp::Alignment::Center)
-        ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 20");
 
     auto main_panel = new GuiPanel(container, "");
     main_panel
-        ->setPosition(0.0f, GuiElement::GuiSizeRow, sp::Alignment::TopCenter)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter)
         ->setSize(800.0f, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
     main_panel

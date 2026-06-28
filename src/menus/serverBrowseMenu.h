@@ -14,7 +14,6 @@ class ServerBrowserMenu : public GuiCanvas
 public:
     ServerBrowserMenu(std::optional<GameClient::DisconnectReason> last_attempt = {});
     virtual ~ServerBrowserMenu();
-
 private:
     GuiTextEntry* manual_ip;
     GuiButton* connect_button;

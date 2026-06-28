@@ -14,7 +14,6 @@ class ServerSetupScreen : public GuiCanvas
 {
 public:
     ServerSetupScreen();
-
 private:
     const string DEFAULT_REGISTRY = "http://daid.eu/ee/register.php";
 
@@ -31,7 +30,6 @@ public:
     ServerSetupMasterServerRegistrationScreen();
 
     virtual void update(float delta) override;
-
 private:
     GuiLabel* info_label;
     GuiButton* continue_button;
@@ -41,7 +39,6 @@ class ServerScenarioSelectionScreen : public GuiCanvas
 {
 public:
     ServerScenarioSelectionScreen();
-
 private:
     void loadScenarioList(const string& category);
     GuiListbox* category_list;
@@ -54,7 +51,6 @@ class ServerScenarioOptionsScreen : public GuiCanvas
 {
 public:
     ServerScenarioOptionsScreen(string filename);
-
 private:
     GuiButton* start_button;
     std::unordered_map<string,string> scenario_settings;
