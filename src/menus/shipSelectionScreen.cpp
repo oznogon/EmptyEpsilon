@@ -1,14 +1,11 @@
 #include "shipSelectionScreen.h"
-
+#include "i18n.h"
 #include "featureDefs.h"
 #include "glObjects.h"
 #include "soundManager.h"
 #include "random.h"
 #include "multiplayer_client.h"
 #include "ecs/query.h"
-#include "i18n.h"
-
-#include "gui/gui2_scrolltextcontainer.h"
 #include "serverCreationScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
@@ -19,31 +16,33 @@
 
 #include "components/database.h"
 #include "components/name.h"
-#include "screens/windowScreen.h"
 #include "screens/cinematicViewScreen.h"
-#include "screens/spectatorScreen.h"
 #include "screens/gm/gameMasterScreen.h"
 #include "screens/gm/limitedGameMasterScreen.h"
+#include "screens/spectatorScreen.h"
+#include "screens/windowScreen.h"
+
 #include "menus/luaConsole.h"
 #include "menus/optionsMenu.h"
 
 #include "gui/theme.h"
-#include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
-#include "gui/gui2_tooltip.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_overlay.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_scrollcontainer.h"
+#include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_togglebutton.h"
-#include "gui/gui2_scrollcontainer.h"
+#include "gui/gui2_tooltip.h"
 
 class PasswordDialog : public GuiOverlay
 {
 public:
     PasswordDialog(GuiContainer* parent, string id)
-    : GuiOverlay(parent, id, glm::u8vec4(0,0,0,64))
+    : GuiOverlay(parent, id, glm::u8vec4(0, 0, 0, 64))
     {
         hide();
 
@@ -223,8 +222,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     // Attach a single-text tooltip to a button.
     auto addTooltip = [](GuiElement* btn, const string& id, const string& text)
     {
-        (new GuiTextTooltip(btn, id, text, 20.0f))
-            ->setWidth(280.0f);
+        (new GuiTextTooltip(btn, id, text, 20.0f))->setWidth(280.0f);
     };
 
     // Game Master button (server only)
@@ -254,6 +252,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                             right_container->show();
                         }
                     );
+
                     left_container->hide();
                     right_container->hide();
                 }
@@ -265,6 +264,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 }
             }
         );
+
         game_master_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
         addTooltip(game_master_button, "GAME_MASTER_TOOLTIP",
             tr("shipSelect", "Control the scenario as Game Master. Spawn and tweak objects, communicate with players, monitor activity, and trigger scenario events. Requires GM code if set.")
@@ -309,9 +309,11 @@ ShipSelectionScreen::ShipSelectionScreen()
                 }
             }
         );
+
         limited_gm_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
         addTooltip(limited_gm_button, "LIMITED_GM_TOOLTIP",
-            tr("shipSelect", "Control the scenario with limited GM powers from a client. Move/delete entities, change factions, issue AI orders, manage waypoints, and send messages. Requires GM code if set."));
+            tr("shipSelect", "Control the scenario with limited GM powers from a client. Move/delete entities, change factions, issue AI orders, manage waypoints, and send messages. Requires GM code if set.")
+        );
     }
 
     // Spectator view button
@@ -350,9 +352,11 @@ ShipSelectionScreen::ShipSelectionScreen()
             }
         }
     );
+
     spectator_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
     addTooltip(spectator_button, "SPECTATOR_TOOLTIP",
-        tr("shipSelect", "View the full tactical map as a spectator. Shows all ships and objects without crew screen controls. Requires GM code if set."));
+        tr("shipSelect", "View the full tactical map as a spectator. Shows all ships and objects without crew screen controls. Requires GM code if set.")
+    );
 
     // Cinematic view button
     auto cinematic_button = new GuiButton(right_panel, "", tr("Cinematic view"),
@@ -390,9 +394,11 @@ ShipSelectionScreen::ShipSelectionScreen()
             }
         }
     );
+
     cinematic_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
     addTooltip(cinematic_button, "CINEMATIC_TOOLTIP",
-        tr("shipSelect", "A cinematic camera that can automatically follow the action. Best for demonstrations or display screens. Requires GM code if set."));
+        tr("shipSelect", "A cinematic camera that can automatically follow the action. Best for demonstrations or display screens. Requires GM code if set.")
+    );
 
     auto options_button = new GuiButton(right_panel, "OPEN_OPTIONS", tr("mainMenu", "Options"),
         [this]()
@@ -401,9 +407,11 @@ ShipSelectionScreen::ShipSelectionScreen()
             this->destroy();
         }
     );
+
     options_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
     addTooltip(options_button, "OPTIONS_TOOLTIP",
-        tr("shipSelect", "Adjust audio, display, and control settings."));
+        tr("shipSelect", "Adjust audio, display, and control settings.")
+    );
 
     if (game_server.isAlive())
     {
@@ -412,6 +420,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             ->setSize(600.0f, 425.0f)
             ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
             ->hide();
+
         auto extra_settings = new GuiElement(extra_settings_panel, "");
         extra_settings
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -662,16 +671,20 @@ ShipSelectionScreen::ShipSelectionScreen()
         {
             ship_action_row->show();
             left_panel_2_label->setText(tr("Create player ship"));
-            ship_template_selector = new GuiSelector(ship_action_row, "CREATE_SHIP_SELECTOR", [this](int index, string value)
-            {
-                if (index < int(ship_spawn_info.size()))
-                    left_panel_2_text->setText(ship_spawn_info[index].description);
-            });
+            ship_template_selector = new GuiSelector(ship_action_row, "CREATE_SHIP_SELECTOR",
+                [this](int index, string value)
+                {
+                    if (index < int(ship_spawn_info.size()))
+                        left_panel_2_text->setText(ship_spawn_info[index].description);
+                }
+            );
+
             for (const auto& info : ship_spawn_info)
                 ship_template_selector->addEntry(info.label, info.label);
 
-            ship_template_selector->setSelectionIndex(0);
-            ship_template_selector->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+            ship_template_selector
+                ->setSelectionIndex(0)
+                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
             // Spawn a ship of the selected template near 0,0 and give it a random
             // heading.
@@ -679,17 +692,18 @@ ShipSelectionScreen::ShipSelectionScreen()
                 [this]()
                 {
                     auto index = ship_template_selector->getSelectionIndex();
-                    if (index < int(ship_spawn_info.size()))
+                    if (index < static_cast<int>(ship_spawn_info.size()))
                     {
                         auto res = ship_spawn_info[index].create_callback.call<sp::ecs::Entity>();
                         LuaConsole::checkResult(res);
                         if (res.isOk())
                         {
-                            //TODO: Apply some player properties like faction/position.
+                            // TODO: Apply some player properties like faction/position.
                         }
                     }
                 }
             );
+
             ship_template_button->setSize(150.0f, GuiElement::GuiSizeMax);
             left_panel_2_text->setText(ship_spawn_info[0].description);
         }
@@ -849,7 +863,7 @@ void ShipSelectionScreen::update(float delta)
     }
 
     // Update the player ship list with all player ships.
-    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+    for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
         string ship_name = Faction::getInfo(entity).locale_name;
         if (auto tn = entity.getComponent<TypeName>())
@@ -883,7 +897,10 @@ void ShipSelectionScreen::update(float delta)
         bool keeper = false;
 
         for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
-            if (entity.toString() == player_ship_list->getEntryValue(i)) keeper = true;
+        {
+            if (entity.toString() == player_ship_list->getEntryValue(i))
+                keeper = true;
+        }
 
         if (!keeper) player_ship_list->removeEntry(i);
     }
@@ -1120,11 +1137,14 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
             // Check validity: allow only numbers, and no more than 3 digits.
             [this](string text)
             {
-                if (text !="" && text !="-") window_angle->setText(text.toInt());
-                if (text.length() >3 && text.toInt()>=0 ) window_angle->setText(text.substr(0,3));
-                if (text.length() >4 && text.toInt()<0 ) window_angle->setText(text.substr(0,4));
-            window_angle
-                ->setSize(75.0f, GuiElement::GuiSizeRow);
+                if (text != "" && text != "-")
+                    window_angle->setText(text.toInt());
+                if (text.length() > 3 && text.toInt() >= 0)
+                    window_angle->setText(text.substr(0, 3));
+                if (text.length() > 4 && text.toInt() < 0)
+                    window_angle->setText(text.substr(0, 4));
+
+                window_angle->setSize(75.0f, GuiElement::GuiSizeRow);
             }
         )
         ->setSize(75.0f, GuiElement::GuiSizeRow);
@@ -1248,7 +1268,7 @@ void CrewPositionSelection::onUpdate()
 
 void CrewPositionSelection::disableAllExcept(GuiToggleButton* button)
 {
-    for(int n = 0; n < static_cast<int>(CrewPosition::MAX); n++)
+    for (int n = 0; n < static_cast<int>(CrewPosition::MAX); n++)
     {
         if (crew_position_button[n] != button)
         {
