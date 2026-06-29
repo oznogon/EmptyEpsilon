@@ -28,7 +28,7 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     pause_overlay = new GuiOverlay(this, "PAUSE", glm::u8vec4(0, 0, 0, 128));
     (new GuiPanel(pause_overlay, "PAUSE_BOX"))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
     (new GuiLabel(pause_overlay, "PAUSE_LABEL", tr("Game Paused"), 70))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
-    if (game_server)
+    if (game_server.isAlive())
     {
         (new GuiButton(pause_overlay, "PAUSE_RESUME", tr("Unpause"), []() {
             engine->setGameSpeed(1.0);

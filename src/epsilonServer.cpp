@@ -15,7 +15,7 @@ static PrometheusMetricsServer* metrics_server = nullptr;
 EpsilonServer::EpsilonServer(int server_port)
 : GameServer("Server", VERSION_NUMBER, server_port)
 {
-    if (game_server)
+    if (game_server.isAlive())
     {
         int metrics_port = PreferencesManager::get("metricsserver").toInt();
         if (metrics_port > 0 && !metrics_server)
@@ -59,7 +59,7 @@ void disconnectFromServer()
 
     if (game_client)
         game_client->destroy();
-    if (game_server)
+    if (game_server.isAlive())
         game_server->destroy();
     if (gameGlobalInfo)
         gameGlobalInfo->destroy();

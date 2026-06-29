@@ -32,7 +32,7 @@ void CollisionDamageSystem::update(float delta)
 void CollisionDamageSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
 {
     // Deal damage only on the server.
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
 
     // Ignore damage and don't trigger a collision event if collision force
     // fails to exceed a threshold.

@@ -907,7 +907,7 @@ void CinematicViewScreen::update(float delta)
             camera_lock_cycle_toggle->enable();
             camera_mode_cycle_toggle->disable();
 
-            if (game_server)
+            if (game_server.isAlive())
             {
                 // Server: Read directly from camera, no smoothing
                 applyCameraView(camera_component, target_transform);
@@ -1801,7 +1801,7 @@ void CinematicViewScreen::applyCameraView(CinematicCamera* cam, sp::Transform* t
 void CinematicViewScreen::updateCameraFromUI(CinematicCamera* cam, sp::Transform* transform)
 {
     // Server only: Write current UI state to camera component and transform for replication
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
 
     // Update camera component fields
     cam->z_position = camera_position.z;
@@ -1820,7 +1820,7 @@ void CinematicViewScreen::updateCameraFromUI(CinematicCamera* cam, sp::Transform
 void CinematicViewScreen::updateCameraSmoothing(CinematicCamera* cam, sp::Transform* transform, float delta)
 {
     // Client-side only: smooth camera updates to hide network jitter
-    if (game_server)
+    if (game_server.isAlive())
         return;
 
     // Update target values from camera component (replicated from server)

@@ -37,7 +37,7 @@
 
 void UtilityBeamSystem::update(float delta)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
     if (delta <= 0.0f) return;
 
     for (auto [this_entity, utility_beam, transform] : sp::ecs::Query<UtilityBeam, sp::Transform>())

@@ -105,7 +105,7 @@ static void collectEngineMetrics(string& output)
 
 static void collectServerMetrics(string& output)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
 
     writeGaugeMetric(
         output,
@@ -315,7 +315,7 @@ static void collectGameMetrics(string& output)
 
 static void collectDebugMetrics(string& output)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
 
 #ifdef DEBUG
     writeGaugeMetric(

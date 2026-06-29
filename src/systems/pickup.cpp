@@ -16,7 +16,7 @@ void PickupSystem::update(float delta)
 
 void PickupSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
 
     if (auto pc = a.getComponent<PickupCallback>()) {
         if (!pc->player || b.hasComponent<PlayerControl>()) {

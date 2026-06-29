@@ -212,6 +212,11 @@ ServerSetupScreen::ServerSetupScreen()
             int port = server_port->getText().toInt();
             if (port < 80) port = defaultServerPort;
             new EpsilonServer(port);
+            if (!game_server.isAlive())
+            {
+                LOG(Error, "Failed to start server on port " + string(port) + " (port may be in use)");
+                return;
+            }
             game_server->setServerName(server_name->getText());
             game_server->setPassword(server_password->getText().upper());
             gameGlobalInfo->gm_control_code = gm_password->getText().upper();

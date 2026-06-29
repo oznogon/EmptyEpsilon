@@ -16,7 +16,7 @@
 
 void ShipSystemsSystem::update(float delta)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
     for(auto [entity, system] : sp::ecs::Query<Reactor>())
         updateSystem(entity, system, delta);
     for(auto [entity, system] : sp::ecs::Query<BeamWeaponSys>())

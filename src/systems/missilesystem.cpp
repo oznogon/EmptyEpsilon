@@ -46,7 +46,7 @@ void MissileSystem::update(float delta)
                     tube.type_loaded = MW_None;
                     break;
                 case MissileTubes::MountPoint::State::Firing:
-                    if (game_server)
+                    if (game_server.isAlive())
                     {
                         spawnProjectile(entity, tube, 0, {});
 
@@ -106,7 +106,7 @@ void MissileSystem::update(float delta)
         }
     }
 
-    if (game_server) {
+    if (game_server.isAlive()) {
         for(auto [entity, deot, transform] : sp::ecs::Query<DelayedExplodeOnTouch, sp::Transform>()) {
             if (deot.trigger_holdoff_delay > 0.0f) deot.trigger_holdoff_delay -= delta;
             if (!deot.triggered) continue;
@@ -117,7 +117,7 @@ void MissileSystem::update(float delta)
         }
     }
 
-    if (game_server) {
+    if (game_server.isAlive()) {
         // TODO: Not really part of missile
         for(auto [entity, lifetime] : sp::ecs::Query<LifeTime>()) {
             lifetime.lifetime -= delta;
@@ -135,7 +135,7 @@ void MissileSystem::update(float delta)
 
 void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
     auto deot = a.getComponent<DelayedExplodeOnTouch>();
     if (deot && deot->trigger_holdoff_delay <= 0.0f) {
         auto hull = b.getComponent<Hull>();

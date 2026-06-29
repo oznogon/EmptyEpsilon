@@ -40,7 +40,7 @@ void GravitySystem::update(float delta)
 
                 if (force >= max_force)
                 {
-                    if (game_server) {
+                    if (game_server.isAlive()) {
                         tt->setPosition( (grav.wormhole_target + glm::vec2(random(-wormhole_target_spread, wormhole_target_spread), random(-wormhole_target_spread, wormhole_target_spread))));
                         if (grav.on_teleportation)
                         {

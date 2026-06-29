@@ -91,7 +91,7 @@ void MissileWeapon::update(float delta)
 
 void MissileWeapon::collide(SpaceObject* target, float force)
 {
-    if (!game_server)
+    if (!game_server.isAlive())
         return;
     if (target->entity == owner)
         return;
@@ -137,7 +137,7 @@ void MissileWeapon::updateMovement()
 sp::ecs::Entity MissileWeapon::getOwner()
 {
     // Owner is assigned by the weapon tube upon firing.
-    if (game_server)
+    if (game_server.isAlive())
     {
         return owner;
     }

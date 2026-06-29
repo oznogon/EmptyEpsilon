@@ -17,7 +17,7 @@ void CommsSystem::update(float delta)
     for(auto [entity, comms] : sp::ecs::Query<CommsTransmitter>()) {
         if (comms.open_delay > 0.0f) comms.open_delay -= delta;
 
-        if (game_server)
+        if (game_server.isAlive())
         {
             // If the channel opening delay is expired, determine whether to
             // initialize comms with the target.

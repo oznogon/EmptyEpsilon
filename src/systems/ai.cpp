@@ -10,7 +10,7 @@
 void AISystem::update(float delta)
 {
     if (delta <= 0.0f) return;
-    if (!game_server)
+    if (!game_server.isAlive())
         return;
 
     for(auto [entity, ai] : sp::ecs::Query<AIController>()) {

@@ -226,7 +226,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     };
 
     // Game Master button (server only)
-    if (game_server)
+    if (game_server.isAlive())
     {
         auto game_master_button = new GuiButton(right_panel, "GAME_MASTER_BUTTON", tr("Game master"),
             [this]()
@@ -403,7 +403,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     addTooltip(options_button, "OPTIONS_TOOLTIP",
         tr("shipSelect", "Adjust audio, display, and control settings."));
 
-    if (game_server)
+    if (game_server.isAlive())
     {
         auto extra_settings_panel = new GuiPanel(this, "");
         extra_settings_panel
@@ -649,7 +649,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     left_panel_2_text->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // If this is the server, add buttons and a selector to create player ships.
-    if (game_server)
+    if (game_server.isAlive())
     {
         left_panel_2_label->setText(tr("Create player ship"));
 
@@ -746,7 +746,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     auto disconnect_row = new GuiElement(left_column, "DISCONNECT_ROW");
     disconnect_row->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-    if (game_server)
+    if (game_server.isAlive())
     {
         // If this is the server, the "back" button goes to the scenario
         // selection/server creation screen.

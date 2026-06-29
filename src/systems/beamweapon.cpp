@@ -28,7 +28,7 @@
 
 void BeamWeaponSystem::update(float delta)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
     if (delta <= 0.0f) return;
 
     for (auto [entity, beamsys, transform, reactor, docking_port, warp] : sp::ecs::Query<BeamWeaponSys, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, sp::ecs::optional<WarpDrive>>())
