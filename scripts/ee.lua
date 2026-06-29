@@ -99,6 +99,8 @@ SYS_FRONTSHIELD = "frontshield"
 SYS_REARSHIELD = "rearshield"
 --- `"utilitybeam"`
 SYS_UTILITYBEAM = "utilitybeam"
+--- `"sensors"`
+SYS_SENSORS = "sensors"
 
 --- Array of the system names.
 --
@@ -122,7 +124,8 @@ SYSTEMS = {
   SYS_JUMPDRIVE,
   SYS_FRONTSHIELD,
   SYS_REARSHIELD,
-  SYS_UTILITYBEAM
+  SYS_UTILITYBEAM,
+  SYS_SENSORS
 }
 
 --- Scanned states.

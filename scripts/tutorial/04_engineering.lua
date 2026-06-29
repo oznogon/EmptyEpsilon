@@ -81,7 +81,7 @@
 ---
 -- Type: Tutorial
 
-require("tutorial/00_all.lua")
+require("tutorial/99_all.lua")
 
 function tutorial_init()
     tutorial_list = {

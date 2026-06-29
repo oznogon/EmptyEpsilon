@@ -46,7 +46,7 @@
 --- The Helms officer is also responsible for piloting the ship into supply drops and other collectible items to retrieve them.
 -- Type: Tutorial
 
-require("tutorial/00_all.lua")
+require("tutorial/99_all.lua")
 
 function tutorial_init()
     tutorial_list = {

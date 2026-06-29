@@ -12,7 +12,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
 
-#: scripts/tutorial/00_all.lua:28
+#: scripts/tutorial/99_all.lua:28
 msgid ""
 "This is the main screen, which displays your ship and the surrounding "
 "space.\n"
@@ -23,7 +23,7 @@ msgstr ""
 "I když nemůžete s lodí z této obrazovky pohnout, můžete ji použít k vizuální "
 "identifikaci objektů."
 
-#: scripts/tutorial/00_all.lua:33
+#: scripts/tutorial/99_all.lua:33
 msgid ""
 "Welcome to the long-range radar. This radar can detect objects up to 30u "
 "from your ship, depicted at the radar's center. This radar allows you to "
@@ -33,7 +33,7 @@ msgstr ""
 "30U daleko od vaší lodi, která je zobrazená uprostřed radaru. Tento radar "
 "umožňuje rychle identifikovat vzdálené objekty."
 
-#: scripts/tutorial/00_all.lua:35
+#: scripts/tutorial/99_all.lua:35
 msgid ""
 "To the right of your ship is a brown dot. This is an asteroid.\n"
 "Asteroid impacts will damage your ship, so avoid hitting them."
@@ -41,7 +41,7 @@ msgstr ""
 "Napravo od vaší lodi je hnědá tečka. To je asteroid.\n"
 "Nárazy do asteroidů poškodí vaši loď, takže se jim vyhýbejte."
 
-#: scripts/tutorial/00_all.lua:39
+#: scripts/tutorial/99_all.lua:39
 msgid ""
 "The white dot is a mine. When you move near a mine, it explodes with a "
 "powerful 1u-radius blast. Striking a mine while your shields are down will "
@@ -51,7 +51,7 @@ msgstr ""
 "1U. Setkání s minou, když jsou vaše štíty sklopené, celkem jistě zničí vaši "
 "loď."
 
-#: scripts/tutorial/00_all.lua:44
+#: scripts/tutorial/99_all.lua:44
 msgid ""
 "This large dot is a station. Stations can be several different sizes and "
 "belong to different factions. The dot's color indicates whether the station "
@@ -61,7 +61,7 @@ msgstr ""
 "patřit různým frakcím. Barva tečky označuje zda je stanice přátelská "
 "(zelená), neutrální (světle modrá), nebo nepřátelská (červená)."
 
-#: scripts/tutorial/00_all.lua:49
+#: scripts/tutorial/99_all.lua:49
 msgid ""
 "The rainbow-colored cloud is a nebula. Nebulae block long-range sensors, "
 "preventing ships from detecting what's inside of them at distances of more "
@@ -71,7 +71,7 @@ msgstr ""
 "brání lodi detekovat, co je uvnitř ve vzdálenosti vetší, než 5U. Také brání "
 "detekci objektů za mlhovinami."
 
-#: scripts/tutorial/00_all.lua:55
+#: scripts/tutorial/99_all.lua:55
 msgid ""
 "Finally, these are ships. They look like you on radar, and their attitude "
 "toward you is reflected by the same colors as stations. In addition to "
@@ -81,11 +81,11 @@ msgstr ""
 "znázorněn stejnými barvami jako stanice. Navíc k zelené, modré a červené, se "
 "lodě s neznámou příslušností zobrazují jako šedé objekty."
 
-#: scripts/tutorial/00_all.lua:60
+#: scripts/tutorial/99_all.lua:60
 msgid "Next, we will look at the short-range radar."
 msgstr "Dále se podíváme na radar krátkého dosahu."
 
-#: scripts/tutorial/00_all.lua:62
+#: scripts/tutorial/99_all.lua:62
 msgid ""
 "The short-range radar can detect objects up to 5u from your ship. It also "
 "depicts the range of your own beam weapons.\n"
@@ -97,7 +97,7 @@ msgstr ""
 "Vaše loď má dvě paprskové zbraně namířené dopředu. Každý typ lodi má různé "
 "rozložení paprskových zbraní, s různým dostřelem a umístěním."
 
-#: scripts/tutorial/00_all.lua:75
+#: scripts/tutorial/99_all.lua:75
 msgid ""
 "This is the helms screen.\n"
 "As the helms officer, you command your ship's movement in space."
@@ -105,7 +105,7 @@ msgstr ""
 "Toto je navigační obrazovka.\n"
 "Jako kormidelník ovládáte pohyb vaší lodi ve vesmíru."
 
-#: scripts/tutorial/00_all.lua:78
+#: scripts/tutorial/99_all.lua:78
 msgid ""
 "Your primary controls are your impulse engines and maneuvering thrusters.\n"
 "Your impulse controls are on the left side of the screen.\n"
@@ -117,7 +117,7 @@ msgstr ""
 "\n"
 "Pro let kupředu teď nastavte váš impulz na 100%."
 
-#: scripts/tutorial/00_all.lua:83
+#: scripts/tutorial/99_all.lua:83
 msgid ""
 "Good. You now know how to move forward.\n"
 "\n"
@@ -133,7 +133,7 @@ msgstr ""
 "tím natočíte vaši loď vybraným směrem.\n"
 "Zkuste se teď otočit na kurs 200."
 
-#: scripts/tutorial/00_all.lua:90
+#: scripts/tutorial/99_all.lua:90
 msgid ""
 "Excellent!\n"
 "\n"
@@ -153,7 +153,7 @@ msgstr ""
 "\"Požádat o zakotvení\", zbytek procedury je již zcela automatícký.\n"
 "Přibližte se k nedaleké stanici a zažádejte o zakotvení."
 
-#: scripts/tutorial/00_all.lua:95
+#: scripts/tutorial/99_all.lua:95
 msgid ""
 "Now that you are docked, your movement is locked. As helms officer, there is "
 "nothing else you can do but undock, so do that now."
@@ -161,7 +161,7 @@ msgstr ""
 "Když jste zakotvení, váš pohyb je omezen. Jako kormidelník nemůžete dělat "
 "nic jiného, než se odkotvit. Tak to teď udělejte."
 
-#: scripts/tutorial/00_all.lua:99
+#: scripts/tutorial/99_all.lua:99
 msgid ""
 "OK, there are just a few more things that you need to know.\n"
 "Remember those beam weapons? As helms officer, it is your task to keep those "
@@ -177,7 +177,7 @@ msgstr ""
 "paprskovými zbraněmi. Všimněte si, že při každém výstřelu patřičný palebný "
 "oblouk změní barvu."
 
-#: scripts/tutorial/00_all.lua:102
+#: scripts/tutorial/99_all.lua:102
 msgid ""
 "Aggression is not always the solution, but boy, it is fun!\n"
 "\n"
@@ -195,7 +195,7 @@ msgstr ""
 "Warpový pohon pohybuje vaší lodí vysokou rychlostí, zatímco skokový pohon "
 "okamžitě teleportuje vaši loď na velkou vzdálenost."
 
-#: scripts/tutorial/00_all.lua:108
+#: scripts/tutorial/99_all.lua:108
 msgid ""
 "First, let us try the warp drive.\n"
 "\n"
@@ -209,7 +209,7 @@ msgstr ""
 "spotřebovává energii mnohem rychleji.\n"
 "Přesuňte se s použitím warpového pohonu více než 30U od tohoto místa."
 
-#: scripts/tutorial/00_all.lua:113
+#: scripts/tutorial/99_all.lua:113
 msgid ""
 "Next, let us demonstrate the jump drive.\n"
 "\n"
@@ -225,7 +225,7 @@ msgstr ""
 "sekund po zahájení. Použijte skokový pohon ke skoku více, než 30U od této "
 "pozice ve kterémkoliv směru."
 
-#: scripts/tutorial/00_all.lua:116
+#: scripts/tutorial/99_all.lua:116
 msgid ""
 "Notice how your jump drive needs to recharge after use.\n"
 "\n"
@@ -235,7 +235,7 @@ msgstr ""
 "\n"
 "Toto pokrývá základy navigačního důstojníka."
 
-#: scripts/tutorial/00_all.lua:131
+#: scripts/tutorial/99_all.lua:131
 msgid ""
 "This is the weapons screen.\n"
 "As the weapons officer, you are responsible for targeting beam weapons, "
@@ -245,7 +245,7 @@ msgstr ""
 "Jako zbraňový důstojník jste zodpovědný za míření paprskových zbraní, "
 "nabíjení, vybíjení a střelbu z torpédometů a za ovládání štítů."
 
-#: scripts/tutorial/00_all.lua:134
+#: scripts/tutorial/99_all.lua:134
 msgid ""
 "Your most fundamental task is to target your ship's weapons.\n"
 "Your beam weapons only fire at your selected target, and homing missiles "
@@ -259,7 +259,7 @@ msgstr ""
 "\n"
 "Zaměřte loď přímo před vámi kliknutím na ni."
 
-#: scripts/tutorial/00_all.lua:138
+#: scripts/tutorial/99_all.lua:138
 msgid ""
 "Good! Notice that your beam weapons did not fire on this ship until you "
 "targeted it.\n"
@@ -271,7 +271,7 @@ msgstr ""
 "\n"
 "Dále: ovládání štítů."
 
-#: scripts/tutorial/00_all.lua:143
+#: scripts/tutorial/99_all.lua:143
 msgid ""
 "As you might notice, you are being shot at. Do not worry, you cannot die "
 "right now.\n"
@@ -283,7 +283,7 @@ msgstr ""
 "\n"
 "Nicméně, stále dostáváte poškození, takže se braňte zvednutím štítů."
 
-#: scripts/tutorial/00_all.lua:158
+#: scripts/tutorial/99_all.lua:158
 msgid ""
 "Shields protect your ship from direct damage, but they cost extra energy to "
 "maintain, can take only a limited amount of damage, and are slow to "
@@ -297,7 +297,7 @@ msgstr ""
 "\n"
 "Sklopte štíty pro pokračování."
 
-#: scripts/tutorial/00_all.lua:162
+#: scripts/tutorial/99_all.lua:162
 msgid ""
 "While only a single button, your shields are vital for survival. They "
 "protect against all kinds of damage, including beam weapons, missiles, "
@@ -311,7 +311,7 @@ msgstr ""
 "\n"
 "Dále: Ta správná zábava - torpédomety."
 
-#: scripts/tutorial/00_all.lua:173
+#: scripts/tutorial/99_all.lua:173
 msgid ""
 "You have 1 homing missile in your missile storage now, and 1 weapon tube.\n"
 "You can load this missile into your weapon tube. Depending on your ship "
@@ -329,15 +329,15 @@ msgstr ""
 "tlačítka \"Nabít\" u patřičného torpédometu. Mějte na paměti, že nabít "
 "střelu do torpédometu nějakou dobu trvá."
 
-#: scripts/tutorial/00_all.lua:178
+#: scripts/tutorial/99_all.lua:178
 msgid "Great! Now fire this missile by clicking on the tube."
 msgstr "Skvěle! Teď vystřelte raketu kliknutím na torpédomet."
 
-#: scripts/tutorial/00_all.lua:179
+#: scripts/tutorial/99_all.lua:179
 msgid "Missile away!"
 msgstr "Raketa vypuštěna!"
 
-#: scripts/tutorial/00_all.lua:182
+#: scripts/tutorial/99_all.lua:182
 msgid ""
 "BOOM! That was just firing straight ahead, but you can also aim missiles.\n"
 "\n"
@@ -353,7 +353,7 @@ msgstr ""
 "Zamiřte prstencem na další loď, nabijte raketu a vystřelte."
 
 # Musí být trajektorie blízko a zároveň být cíl zakliklý.
-#: scripts/tutorial/00_all.lua:193
+#: scripts/tutorial/99_all.lua:193
 msgid ""
 "Perfect aim!\n"
 "\n"
@@ -369,7 +369,7 @@ msgstr ""
 "I když to není nutné proti stacionárním cílům, navádění může velmi pomoct "
 "proti pohyblivým cílům."
 
-#: scripts/tutorial/00_all.lua:204
+#: scripts/tutorial/99_all.lua:204
 msgid ""
 "In addition to homing missiles, your ship might have nukes, EMPs, and mines. "
 "Nukes and EMPs have the same features as homing missiles, but have a 1u-"
@@ -381,7 +381,7 @@ msgstr ""
 "výbuchu 1U a dávají mnohem větší poškození. EMP poškozují pouze štíty a "
 "tudíž jsou skvělé proti nepřátelům se silnými štíty."
 
-#: scripts/tutorial/00_all.lua:212
+#: scripts/tutorial/99_all.lua:212
 msgid ""
 "Welcome to engineering.\n"
 "Engineering is split into two parts. The top part shows your ship's "
@@ -393,7 +393,7 @@ msgstr ""
 "interiéry vaší lodi a rozmístění opravářských týmů.\n"
 "Spodní část obrazovky ovládá energii a chlazení lodních systémů."
 
-#: scripts/tutorial/00_all.lua:217
+#: scripts/tutorial/99_all.lua:217
 msgid ""
 "First, we will explain your control over your ship's systems.\n"
 "Each row on the bottom area of the screen represents one of your ship's "
@@ -412,7 +412,7 @@ msgstr ""
 "Můžete tomu zabránit přidáním chladiva do warpového pohonu. Vybrete warpový "
 "pohon a zvyšte pomocí posuvníku chlazení množství chladiva."
 
-#: scripts/tutorial/00_all.lua:222
+#: scripts/tutorial/99_all.lua:222
 msgid ""
 "I've also overheated the impulse system. As before, increase the system's "
 "coolant level to mitigate the effect. Note that the warp system's coolant "
@@ -429,7 +429,7 @@ msgstr ""
 "To je způsobeno tím, že máte jen omezené množství chladiva na chlazení "
 "lodních systémů."
 
-#: scripts/tutorial/00_all.lua:225
+#: scripts/tutorial/99_all.lua:225
 msgid ""
 "Good! Next up: power levels.\n"
 "You can manage each system's power level independently. Adding power to a "
@@ -446,7 +446,7 @@ msgstr ""
 "\n"
 "Zvyšte výkon předních štítů na maximum."
 
-#: scripts/tutorial/00_all.lua:229
+#: scripts/tutorial/99_all.lua:229
 msgid ""
 "The added power increases the amount of heat in the system.\n"
 "\n"
@@ -456,7 +456,7 @@ msgstr ""
 "\n"
 "Přetěžujte systém než se přehřeje."
 
-#: scripts/tutorial/00_all.lua:234
+#: scripts/tutorial/99_all.lua:234
 msgid ""
 "Note that as the system overheats, it takes damage. Because the system is "
 "damaged, it functions less effectively.\n"
@@ -470,11 +470,11 @@ msgstr ""
 "Systémy také můžou být poškozeny když má vaše loď sklopené štíty a je "
 "zasažena."
 
-#: scripts/tutorial/00_all.lua:238
+#: scripts/tutorial/99_all.lua:238
 msgid "In this top area, you see your damage control teams in your ship."
 msgstr "V horní části obrazovky vidíte opravářské týmy na vaší lodi."
 
-#: scripts/tutorial/00_all.lua:239
+#: scripts/tutorial/99_all.lua:239
 msgid ""
 "The front shield system is damaged, as indicated by the color of this room's "
 "outline.\n"
@@ -489,7 +489,7 @@ msgstr ""
 "na něj kliknete, pak klikněte na místnost kam má jít zahájit opravy.\n"
 "(Opravy nějaký čas zaberou.)"
 
-#: scripts/tutorial/00_all.lua:244
+#: scripts/tutorial/99_all.lua:244
 msgid ""
 "Good. Now you know your most important tasks. Next, we'll go over each "
 "system's function in detail.\n"
@@ -503,7 +503,7 @@ msgstr ""
 "hůře, když je poškozen. Vaše práce je udržet klíčové systémy běžet co "
 "nejlépe dokážete."
 
-#: scripts/tutorial/00_all.lua:246
+#: scripts/tutorial/99_all.lua:246
 msgid ""
 "Reactor:\n"
 "\n"
@@ -515,7 +515,7 @@ msgstr ""
 "Reaktor produkuje energii. Vyšší výkon reaktoru zvýší rychlost generování "
 "energie."
 
-#: scripts/tutorial/00_all.lua:249
+#: scripts/tutorial/99_all.lua:249
 msgid ""
 "Beam Weapons:\n"
 "\n"
@@ -529,7 +529,7 @@ msgstr ""
 "docílíte většího poškození.\n"
 "Pamatujte, že každý vystřelený paprsek přidává systému další teplo."
 
-#: scripts/tutorial/00_all.lua:253
+#: scripts/tutorial/99_all.lua:253
 msgid ""
 "Missile System:\n"
 "\n"
@@ -539,7 +539,7 @@ msgstr ""
 "\n"
 "Zvýšení výkonu torpédometů zrychluje přebíjení torpédometů."
 
-#: scripts/tutorial/00_all.lua:256
+#: scripts/tutorial/99_all.lua:256
 msgid ""
 "Maneuvering:\n"
 "\n"
@@ -551,7 +551,7 @@ msgstr ""
 "Zvýšení výkonu manévrování umožňí lodi se rychleji otáčet. Také urychluje "
 "dobíjení úhybných manévrů."
 
-#: scripts/tutorial/00_all.lua:259
+#: scripts/tutorial/99_all.lua:259
 msgid ""
 "Impulse Engines:\n"
 "\n"
@@ -561,7 +561,7 @@ msgstr ""
 "\n"
 "Vyšší výkon impulzního pohonu zvyšuje vaši impulzní rychlost."
 
-#: scripts/tutorial/00_all.lua:262
+#: scripts/tutorial/99_all.lua:262
 msgid ""
 "Warp Drive:\n"
 "\n"
@@ -572,7 +572,7 @@ msgstr ""
 "Zvýšením výkonu ve warpovém pohonu docílíte rychlejší let warpovými "
 "rychlostmi."
 
-#: scripts/tutorial/00_all.lua:265
+#: scripts/tutorial/99_all.lua:265
 msgid ""
 "Jump Drive:\n"
 "\n"
@@ -584,7 +584,7 @@ msgstr ""
 "Vyšší výkon skokového pohonu snamená, že se pohon rychleji dobíjí mezi skoky "
 "a zkracuje dobu do skoku."
 
-#: scripts/tutorial/00_all.lua:268
+#: scripts/tutorial/99_all.lua:268
 msgid ""
 "Shields:\n"
 "\n"
@@ -596,7 +596,7 @@ msgstr ""
 "Vyšší výkon ve štítech urychluje jejich dobíjení a snižuje degradaci, kterou "
 "vaše štíty utrpí při vykrývání poškození."
 
-#: scripts/tutorial/00_all.lua:271
+#: scripts/tutorial/99_all.lua:271
 msgid ""
 "This concludes the overview of the engineering station. Be sure to keep your "
 "ship running in top condition!"
@@ -605,7 +605,7 @@ msgstr ""
 "funguje v co nejlepším stavu!"
 
 # TODO fix it to long range radar - also in original.
-#: scripts/tutorial/00_all.lua:279
+#: scripts/tutorial/99_all.lua:279
 msgid ""
 "Welcome, science officer.\n"
 "\n"
@@ -618,7 +618,7 @@ msgstr ""
 "Vy jste očima lodi. Vaše práce je zásobovat kapitána informacemi. Z vaší "
 "stanice můžete detekovat a skenovat objekty až do vzdálenosti 30U."
 
-#: scripts/tutorial/00_all.lua:284 scripts/tutorial/00_all.lua:370
+#: scripts/tutorial/99_all.lua:284 scripts/tutorial/99_all.lua:370
 msgid ""
 "On this radar, you can select objects to get information about them.\n"
 "I've added a friendly ship and a station for you to examine. Select them and "
@@ -632,7 +632,7 @@ msgstr ""
 "Kurs a vzdálenost jsou obzvláště důležité. Bez nich by váš pilot skákal s "
 "lodí naslepo."
 
-#: scripts/tutorial/00_all.lua:289 scripts/tutorial/00_all.lua:375
+#: scripts/tutorial/99_all.lua:289 scripts/tutorial/99_all.lua:375
 msgid ""
 "I've replaced the friendly station with an unknown ship. Once you select it, "
 "notice that you know nothing about this ship.\n"
@@ -646,7 +646,7 @@ msgstr ""
 "srovnali frekvenční pásma vašich skenerů s pásmy vašeho cíle.\n"
 "Oskenujte tuto loď."
 
-#: scripts/tutorial/00_all.lua:292 scripts/tutorial/00_all.lua:378
+#: scripts/tutorial/99_all.lua:292 scripts/tutorial/99_all.lua:378
 msgid ""
 "Good. Notice that you now know this ship is unfriendly. It might have been a "
 "friendly or neutral ship as well, but until you scanned it, you do not know."
@@ -654,7 +654,7 @@ msgstr ""
 "Dobrá. Všimněte si že teď víte, že tato loď je nepřátelská. Mohla být i "
 "přátelská, nebo neutrální, ale dokud ji neoskenujete, tak to nezjistíte."
 
-#: scripts/tutorial/00_all.lua:293 scripts/tutorial/00_all.lua:379
+#: scripts/tutorial/99_all.lua:293 scripts/tutorial/99_all.lua:379
 msgid ""
 "Note that you have less information about this ship than the friendly ship. "
 "You must perform a deep scan of this ship to acquire more information.\n"
@@ -668,7 +668,7 @@ msgstr ""
 "pásma současně.\n"
 "Proveďte hloubkový sken nepřítele."
 
-#: scripts/tutorial/00_all.lua:296 scripts/tutorial/00_all.lua:382
+#: scripts/tutorial/99_all.lua:296 scripts/tutorial/99_all.lua:382
 msgid ""
 "Excellent. Notice that this took more time and concentration than the simple "
 "scan, so be careful to perform deep scans only when necessary or you could "
@@ -678,7 +678,7 @@ msgstr ""
 "jednoduchý sken, tak buďte střídmí s hloubkovým skenem a používejte jej jen, "
 "když bude třeba, nebo vám může dojít čas."
 
-#: scripts/tutorial/00_all.lua:300 scripts/tutorial/00_all.lua:386
+#: scripts/tutorial/99_all.lua:300 scripts/tutorial/99_all.lua:386
 msgid ""
 "Next to the long-range radar, the science station can also access the "
 "science database.\n"
@@ -692,7 +692,7 @@ msgstr ""
 "V této databázi můžete vyhledat detaily k typům lodí, zbraním nebo jiným "
 "objektům."
 
-#: scripts/tutorial/00_all.lua:303 scripts/tutorial/00_all.lua:389
+#: scripts/tutorial/99_all.lua:303 scripts/tutorial/99_all.lua:389
 msgid ""
 "Remember, your job is to supply information. Knowing the location and status "
 "of other ships is vital to your captain.\n"
@@ -704,7 +704,7 @@ msgstr ""
 "\n"
 "Bez vašich informací je posádka převážně slepá."
 
-#: scripts/tutorial/00_all.lua:313
+#: scripts/tutorial/99_all.lua:313
 msgid ""
 "Welcome to relay!\n"
 "\n"
@@ -718,7 +718,7 @@ msgstr ""
 "k radarům krátkého dosahu od spřátelených lodí a stanic, můžete umisťovat "
 "navigační body a vysílat senzorové sondy."
 
-#: scripts/tutorial/00_all.lua:316
+#: scripts/tutorial/99_all.lua:316
 msgid ""
 "Your first responsibility is to coordinate the ship's communications.\n"
 "\n"
@@ -730,36 +730,36 @@ msgstr ""
 "Můžete vybrat jakoukoliv stanici nebo loď a zkusit s ní komunikovat. Ostatní "
 "lodě se můžou pokusit zkontaktovat vás."
 
-#: scripts/tutorial/00_all.lua:322 scripts/tutorial/00_all.lua:398
+#: scripts/tutorial/99_all.lua:322 scripts/tutorial/99_all.lua:398
 msgid "You successfully opened communications. Congratulations."
 msgstr "Gratuluji. Úspěšně jste zahájil komunikaci."
 
-#: scripts/tutorial/00_all.lua:323 scripts/tutorial/00_all.lua:399
+#: scripts/tutorial/99_all.lua:323 scripts/tutorial/99_all.lua:399
 msgid "Tell me more!"
 msgstr "Rád bych věděl víc!"
 
-#: scripts/tutorial/00_all.lua:324 scripts/tutorial/00_all.lua:400
+#: scripts/tutorial/99_all.lua:324 scripts/tutorial/99_all.lua:400
 msgid "Sorry, there's nothing more to tell you."
 msgstr "Omlouvám se, ale nemám co bych k tomu dodal."
 
-#: scripts/tutorial/00_all.lua:326 scripts/tutorial/00_all.lua:402
+#: scripts/tutorial/99_all.lua:326 scripts/tutorial/99_all.lua:402
 msgid "Continue with the tutorial."
 msgstr "Pokračovat ve výuce."
 
-#: scripts/tutorial/00_all.lua:327 scripts/tutorial/00_all.lua:403
+#: scripts/tutorial/99_all.lua:327 scripts/tutorial/99_all.lua:403
 msgid ""
 "The tutorial will continue when you close communications with this station."
 msgstr "Výuka bude pokračovat jakmile zavřete komunkaci s touto stanicí."
 
-#: scripts/tutorial/00_all.lua:331 scripts/tutorial/00_all.lua:407
+#: scripts/tutorial/99_all.lua:331 scripts/tutorial/99_all.lua:407
 msgid "Open communications with the station near you to continue the tutorial."
 msgstr "Pro pokračování výuky zahajte komunikaci se stanicí nedaleko vás."
 
-#: scripts/tutorial/00_all.lua:333 scripts/tutorial/00_all.lua:409
+#: scripts/tutorial/99_all.lua:333 scripts/tutorial/99_all.lua:409
 msgid "Now finish your talk with the station."
 msgstr "A teď dokončete komunikaci s touto stanicí."
 
-#: scripts/tutorial/00_all.lua:336 scripts/tutorial/00_all.lua:412
+#: scripts/tutorial/99_all.lua:336 scripts/tutorial/99_all.lua:412
 msgid ""
 "Depending on the scenario, you might have different options when "
 "communicating with stations.\n"
@@ -773,7 +773,7 @@ msgstr ""
 "nebo vám doplnit zásoby raket. To vše části vaší zodpovědnosti komunikačního "
 "důstojníka."
 
-#: scripts/tutorial/00_all.lua:342
+#: scripts/tutorial/99_all.lua:342
 msgid ""
 "Your station also includes this radar map.\n"
 "\n"
@@ -789,7 +789,7 @@ msgstr ""
 "dává oproti vědeckému důstojníkovi jiný pohled, protože vy můžete prozkoumat "
 "mlhoviny."
 
-#: scripts/tutorial/00_all.lua:345
+#: scripts/tutorial/99_all.lua:345
 msgid ""
 "Finally, you control your ship's probes. Probes can expand your radar view. "
 "Launch a probe to the top right, toward the ship designated DMY-01."
@@ -797,7 +797,7 @@ msgstr ""
 "Nakonec, máte k dispozici sondy.Sondy mohou rozšířit váš radarový dosah. "
 "Vyšlete sondu doprava nahoru k lodi označené DMY-01"
 
-#: scripts/tutorial/00_all.lua:356
+#: scripts/tutorial/99_all.lua:356
 msgid ""
 "Probes can expand your sensory capabilities beyond your normal range and "
 "explore nebulae. However, you have a limited supply of them and can't "
@@ -807,7 +807,7 @@ msgstr ""
 "dosahu, Nicméně, máte jich jen omezený počet a nemůžete je doplnit, dokud "
 "nejste zadokovaní u stanice."
 
-#: scripts/tutorial/00_all.lua:365
+#: scripts/tutorial/99_all.lua:365
 msgid ""
 "Welcome, operations officer.\n"
 "\n"
@@ -820,7 +820,7 @@ msgstr ""
 "Vy jste očima lodi. Vaše práce je zásobovat kapitána informacemi. Z vaší "
 "stanice můžete detekovat a skenovat objekty až do vzdálenosti 30U."
 
-#: scripts/tutorial/00_all.lua:392
+#: scripts/tutorial/99_all.lua:392
 msgid ""
 "Your second responsibility is to coordinate the ship's communications.\n"
 "\n"
@@ -832,7 +832,7 @@ msgstr ""
 "Můžete vybrat jakoukoliv stanici nebo loď a zkusit s ní komunikovat. Ostatní "
 "lodě se můžou pokusit zkontaktovat vás."
 
-#: scripts/tutorial/00_all.lua:418
+#: scripts/tutorial/99_all.lua:418
 msgid ""
 "This concludes the tutorial. While we have covered the basics, there are "
 "more advanced features in the game that you might discover."

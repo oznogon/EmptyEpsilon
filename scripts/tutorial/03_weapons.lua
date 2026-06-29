@@ -76,7 +76,7 @@
 --- Some shield frequencies are especially resistant to certain beam frequencies, and the Science officer can also detect which beam frequency a target ship employs. However, unlike beam weapons, remodulating the shields' frequency takes them offline for several seconds and leaves the ship temporarily defenseless. Coordinate shield modulation with other officers to ensure that you can do so safely.
 -- Type: Tutorial
 
-require("tutorial/00_all.lua")
+require("tutorial/99_all.lua")
 
 function tutorial_init()
     tutorial_list = {

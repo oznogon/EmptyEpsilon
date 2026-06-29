@@ -5,6 +5,10 @@
 ---
 --- To begin these tutorials, click the <color=#C0C0FF>Start tutorial</> button at the bottom right of this screen.
 -- Type: Tutorial
+
+--[[
+Despite the names and descriptions of the other tutorial scripts, this is actually the only tutorial script. All other tutorial scripts run one or more of the tutorial functions defined in this script.
+]]--
 require("utils.lua")
 require("tutorialUtils.lua")
 
@@ -20,11 +24,11 @@ function tutorial_init()
         relayTutorial,
         endOfTutorial
     }
-
+    
     startTutorial()
 end
 
---[[ Radar explanation tutorial ]]
+-- Tutorial 1: Main screen and radar explanation tutorial
 mainscreenTutorial = createSequence()
 addToSequence(mainscreenTutorial, function() tutorial_switchViewToMainScreen() end)
 addToSequence(mainscreenTutorial, _([[This is the main screen, which displays your ship and the surrounding space.
@@ -145,17 +149,17 @@ addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kr
 addToSequence(weaponsTutorial, _([[As you might notice, you are being shot at. Do not worry, you cannot die right now.
 
 You are taking damage, however, so enable your shields to protect yourself.]]), function()
-    player:setHull(player:getHullMax())
-    player:setSystemHealth("reactor", 1.0)
-    player:setSystemHealth("beamweapons", 1.0)
-    player:setSystemHealth("missilesystem", 1.0)
-    player:setSystemHealth("maneuver", 1.0)
-    player:setSystemHealth("impulse", 1.0)
-    player:setSystemHealth("warp", 1.0)
-    player:setSystemHealth("jumpdrive", 1.0)
-    player:setSystemHealth("frontshield", 1.0)
-    player:setSystemHealth("rearshield", 1.0)
-    return player:getShieldLevel(1) < player:getShieldMax(1)
+player:setHull(player:getHullMax())
+player:setSystemHealth("reactor", 1.0)
+player:setSystemHealth("beamweapons", 1.0)
+player:setSystemHealth("missilesystem", 1.0)
+player:setSystemHealth("maneuver", 1.0)
+player:setSystemHealth("impulse", 1.0)
+player:setSystemHealth("warp", 1.0)
+player:setSystemHealth("jumpdrive", 1.0)
+player:setSystemHealth("frontshield", 1.0)
+player:setSystemHealth("rearshield", 1.0)
+return player:getShieldLevel(1) < player:getShieldMax(1)
 end)
 addToSequence(weaponsTutorial, _([[Shields protect your ship from direct damage, but they cost extra energy to maintain, can take only a limited amount of damage, and are slow to recharge. Eventually, this enemy's attacks will get through your shields.
 
@@ -176,7 +180,7 @@ addToSequence(weaponsTutorial, _([[You have 1 homing missile in your missile sto
 You can load this missile into your weapon tube. Depending on your ship type, you might have more types of missiles and more weapon tubes.
 
 Load this homing missile into the weapon tube by selecting the homing missile, and then pressing the load button for this tube. Note that it takes some time to load missiles into tubes.]]),
-    function() return player:getWeaponTubeLoadType(0) == "homing" end)
+function() return player:getWeaponTubeLoadType(0) == "homing" end)
 addToSequence(weaponsTutorial, _([[Great! Now fire this missile by clicking on the tube.]]), function() return player:getWeaponTubeLoadType(0) == nil end)
 addToSequence(weaponsTutorial, _([[Missile away!]]), function() return not prev_object:isValid() end)
 
@@ -188,10 +192,10 @@ addToSequence(weaponsTutorial, _([[BOOM! That was just firing straight ahead, bu
 First, load a homing missile in the tube.
 Next, target the enemy ship by pressing it to guide your homing missiles toward your selected target.
 Then fire your missile!]]), function()
-    if player:getWeaponStorage("homing") < 1 then
-        player:setWeaponStorage("homing", 1)
-    end
-    return not prev_object:isValid()
+if player:getWeaponStorage("homing") < 1 then
+    player:setWeaponStorage("homing", 1)
+end
+return not prev_object:isValid()
 end)
 addToSequence(weaponsTutorial, _([[While not necessary against a stationary target, this homing ability can make all the difference against a moving target.]]))
 
@@ -203,10 +207,10 @@ First, unlock your aim by pressing the [Lock] button above the radar view.
 Load a missile to view your missile's trajectory.
 Next, aim your missiles with the aiming dial surrounding the radar.
 Point the aiming dial at the next ship and fire.]]), function()
-    if player:getWeaponStorage("homing") < 1 then
-        player:setWeaponStorage("homing", 1)
-    end
-    return not prev_object:isValid()
+if player:getWeaponStorage("homing") < 1 then
+    player:setWeaponStorage("homing", 1)
+end
+return not prev_object:isValid()
 end)
 
 
@@ -217,10 +221,10 @@ First, make sure your aim is unlocked and aim your missile as close to the enemy
 Next, target the enemy ship by pressing it.
 Then fire! The missile will first follow your manually-aimed trajectory, and then start homing in on the enemy.
 ]]), function()
-    if player:getWeaponStorage("homing") < 1 then
-        player:setWeaponStorage("homing", 1)
-    end
-    return not prev_object:isValid()
+if player:getWeaponStorage("homing") < 1 then
+    player:setWeaponStorage("homing", 1)
+end
+return not prev_object:isValid()
 end)
 
 
@@ -271,176 +275,177 @@ Select a damage control team from elsewhere on the ship by pressing it, then pre
 addToSequence(engineeringTutorial, function() tutorial_setMessageToTopPosition() end)
 addToSequence(engineeringTutorial, _([[Good. Now you know your most important tasks. Next, we'll go over each system's function in detail.
 Remember, each system performs better with more power, but performs less well when damaged. Your job is to keep vital systems running as well as you can.]]))
-addToSequence(engineeringTutorial, _([[Reactor:
-
+    addToSequence(engineeringTutorial, _([[Reactor:
+    
 The reactor generates energy. Adding power to the reactor increases your energy generation rate.]]))
-addToSequence(engineeringTutorial, _([[Beam Weapons:
-
+    addToSequence(engineeringTutorial, _([[Beam Weapons:
+    
 Adding power to the beam weapons system increases their rate of fire, which causes them to do more damage.
 Note that every beam you fire adds additional heat to the system.]]))
-addToSequence(engineeringTutorial, _([[Missile System:
-
+    addToSequence(engineeringTutorial, _([[Missile System:
+    
 Increased missile system power lowers the reload time of weapon tubes.]]))
-addToSequence(engineeringTutorial, _([[Maneuvering:
-
+    addToSequence(engineeringTutorial, _([[Maneuvering:
+    
 Increasing power to the maneuvering system allows the ship to turn faster. It also increases the recharge rate for the combat maneuvering system.]]))
-addToSequence(engineeringTutorial, _([[Impulse Engines:
-
+    addToSequence(engineeringTutorial, _([[Impulse Engines:
+    
 Adding power to the impulse engines increases your impulse flight speed.]]))
-addToSequence(engineeringTutorial, _([[Warp Drive:
-
+    addToSequence(engineeringTutorial, _([[Warp Drive:
+    
 Adding power to the warp drive increases your warp drive flight speed.]]))
-addToSequence(engineeringTutorial, _([[Jump Drive:
-
+    addToSequence(engineeringTutorial, _([[Jump Drive:
+    
 A higher-powered jump drive recharges faster and has a shorter delay before jumping.]]))
-addToSequence(engineeringTutorial, _([[Shields:
-
+    addToSequence(engineeringTutorial, _([[Shields:
+    
 Additional power in the shield system increases their rate of recharge, and decreases the amount of degradation your shields sustain when damaged.]]))
-addToSequence(engineeringTutorial, _([[This concludes the overview of the engineering station. Be sure to keep your ship running in top condition!]]))
-
-scienceTutorial = createSequence()
-addToSequence(scienceTutorial, function()
-    tutorial_switchViewToScreen(3)
-    tutorial_setMessageToBottomPosition()
-    resetPlayerShip()
-end)
-addToSequence(scienceTutorial, _([[Welcome, science officer.
-
+    addToSequence(engineeringTutorial, _([[This concludes the overview of the engineering station. Be sure to keep your ship running in top condition!]]))
+    
+    scienceTutorial = createSequence()
+    addToSequence(scienceTutorial, function()
+        tutorial_switchViewToScreen(3)
+        tutorial_setMessageToBottomPosition()
+        resetPlayerShip()
+    end)
+    addToSequence(scienceTutorial, _([[Welcome, science officer.
+    
 You are the eyes of the ship. Your job is to supply the captain with information. From your station, you can detect and scan objects at a range of up to 30u.]]))
-addToSequence(scienceTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000) end)
-addToSequence(scienceTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
-addToSequence(scienceTutorial, _([[On this radar, you can select objects to get information about them.
+    addToSequence(scienceTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000) end)
+    addToSequence(scienceTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
+    addToSequence(scienceTutorial, _([[On this radar, you can select objects to get information about them.
 I've added a friendly ship and a station for you to examine. Select them and notice how much information you can observe.
 Heading and distance are of particular importance, as without these, the helms officer will be jumping in the dark.]]))
-addToSequence(scienceTutorial, function() prev_object:destroy() end)
-addToSequence(scienceTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(3000, -15000):orderIdle() end)
-addToSequence(scienceTutorial, _([[I've replaced the friendly station with an unknown ship. Once you select it, notice that you know nothing about this ship.
+    addToSequence(scienceTutorial, function() prev_object:destroy() end)
+    addToSequence(scienceTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(3000, -15000):orderIdle() end)
+    addToSequence(scienceTutorial, _([[I've replaced the friendly station with an unknown ship. Once you select it, notice that you know nothing about this ship.
 To learn about it, you must scan it. Scanning requires you to match your scanner's frequency bands to your target's.
 Scan this ship now.]]), function() return prev_object:isScannedBy(player) end)
-addToSequence(scienceTutorial, _([[Good. Notice that you now know this ship is unfriendly. It might have been a friendly or neutral ship as well, but until you scanned it, you do not know.]]))
-addToSequence(scienceTutorial, _([[Note that you have less information about this ship than the friendly ship. You must perform a deep scan of this ship to acquire more information.
+    addToSequence(scienceTutorial, _([[Good. Notice that you now know this ship is unfriendly. It might have been a friendly or neutral ship as well, but until you scanned it, you do not know.]]))
+        addToSequence(scienceTutorial, _([[Note that you have less information about this ship than the friendly ship. You must perform a deep scan of this ship to acquire more information.
 A deep scan takes more effort and requires you to align 2 different frequency bands simultaneously.
 Deep scan the enemy now.]]), function() return prev_object:isFullyScannedBy(player) end)
-addToSequence(scienceTutorial, _([[Excellent. Notice that this took more time and concentration than the simple scan, so be careful to perform deep scans only when necessary or you could run out of time.]]))
-addToSequence(scienceTutorial, function() prev_object:destroy() end)
-addToSequence(scienceTutorial, function() prev_object2:destroy() end)
-addToSequence(scienceTutorial, function() tutorial_setMessageToTopPosition() end)
-addToSequence(scienceTutorial, _([[Next to the long-range radar, the science station can also access the science database.
-
+        addToSequence(scienceTutorial, _([[Excellent. Notice that this took more time and concentration than the simple scan, so be careful to perform deep scans only when necessary or you could run out of time.]]))
+        addToSequence(scienceTutorial, function() prev_object:destroy() end)
+        addToSequence(scienceTutorial, function() prev_object2:destroy() end)
+        addToSequence(scienceTutorial, function() tutorial_setMessageToTopPosition() end)
+        addToSequence(scienceTutorial, _([[Next to the long-range radar, the science station can also access the science database.
+        
 In this database, you can look up details on things like ship types, weapons, and other objects.]]))
-addToSequence(scienceTutorial, _([[Remember, your job is to supply information. Knowing the location and status of other ships is vital to your captain.
-
+        addToSequence(scienceTutorial, _([[Remember, your job is to supply information. Knowing the location and status of other ships is vital to your captain.
+        
 Without your information, the crew is mostly blind.]]))
-
-relayTutorial = createSequence()
-addToSequence(relayTutorial, function()
-    tutorial_switchViewToScreen(4)
-    tutorial_setMessageToBottomPosition()
-    resetPlayerShip()
-end)
-addToSequence(relayTutorial, _([[Welcome to relay!
-
+        
+        relayTutorial = createSequence()
+        addToSequence(relayTutorial, function()
+            tutorial_switchViewToScreen(4)
+            tutorial_setMessageToBottomPosition()
+            resetPlayerShip()
+        end)
+        addToSequence(relayTutorial, _([[Welcome to relay!
+        
 It is your job to communicate with stations and ships. You also have access to short-range radar data from friendly ships and stations, and can place navigational waypoints and launch scanning probes.]]))
-addToSequence(relayTutorial, _([[Your first responsibility is to coordinate the ship's communications.
-
+        addToSequence(relayTutorial, _([[Your first responsibility is to coordinate the ship's communications.
+        
 You can target any station or ship and attempt to communicate with it. Other ships can also attempt to contact you.]]))
-addToSequence(relayTutorial, function()
-    prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000)
-    prev_object:setCommsFunction(function()
-        setCommsMessage(_("You successfully opened communications. Congratulations."));
-        addCommsReply(_("Tell me more!"), function()
-            setCommsMessage(_("Sorry, there's nothing more to tell you."))
+        addToSequence(relayTutorial, function()
+            prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000)
+            prev_object:setCommsFunction(function()
+                setCommsMessage(_("You successfully opened communications. Congratulations."));
+                addCommsReply(_("Tell me more!"), function()
+                    setCommsMessage(_("Sorry, there's nothing more to tell you."))
+                end)
+                addCommsReply(_("Continue with the tutorial."), function()
+                    setCommsMessage(_("The tutorial will continue when you close communications with this station."))
+                end)
+            end)
         end)
-        addCommsReply(_("Continue with the tutorial."), function()
-            setCommsMessage(_("The tutorial will continue when you close communications with this station."))
-        end)
-    end)
-end)
-addToSequence(relayTutorial, _([[Open communications with the station near you to continue the tutorial.]]), function() return player:isCommsScriptOpen() end)
-addToSequence(relayTutorial, function() tutorial_setMessageToTopPosition() end)
-addToSequence(relayTutorial, _([[Now finish your talk with the station.]]), function() return not player:isCommsScriptOpen() end)
-addToSequence(relayTutorial, function() tutorial_setMessageToBottomPosition() end)
-addToSequence(relayTutorial, function() prev_object:destroy() end)
-addToSequence(relayTutorial, _([[Depending on the scenario, you might have different options when communicating with stations.
+        addToSequence(relayTutorial, _([[Open communications with the station near you to continue the tutorial.]]), function() return player:isCommsScriptOpen() end)
+        addToSequence(relayTutorial, function() tutorial_setMessageToTopPosition() end)
+        addToSequence(relayTutorial, _([[Now finish your talk with the station.]]), function() return not player:isCommsScriptOpen() end)
+        addToSequence(relayTutorial, function() tutorial_setMessageToBottomPosition() end)
+        addToSequence(relayTutorial, function() prev_object:destroy() end)
+        addToSequence(relayTutorial, _([[Depending on the scenario, you might have different options when communicating with stations.
 They might inform you about new objectives and your mission progress, ask for backup, or resupply your weapons. This is all part of your responsibilities as relay officer.]]))
-addToSequence(relayTutorial, function() prev_object = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(20000, -20000):orderIdle():setCallSign("DMY-01"):setScanned(true):setCommsScript("") end)
-addToSequence(relayTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(-24000, 2500):orderIdle():setScanned(true):setCommsScript(""):setShortRangeRadarRange(10000) end)
-addToSequence(relayTutorial, function() prev_object3 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(-17000, -7500):orderIdle():setScanned(true):setCommsScript("") end)
-addToSequence(relayTutorial, function() prev_object4 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5400, 7500):orderIdle():setScanned(false):setCommsScript("") end)
-addToSequence(relayTutorial, _([[Your station also includes this radar map.
-
+        addToSequence(relayTutorial, function() prev_object = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(20000, -20000):orderIdle():setCallSign("DMY-01"):setScanned(true):setCommsScript("") end)
+        addToSequence(relayTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(-24000, 2500):orderIdle():setScanned(true):setCommsScript(""):setShortRangeRadarRange(10000) end)
+        addToSequence(relayTutorial, function() prev_object3 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(-17000, -7500):orderIdle():setScanned(true):setCommsScript("") end)
+        addToSequence(relayTutorial, function() prev_object4 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5400, 7500):orderIdle():setScanned(false):setCommsScript("") end)
+        addToSequence(relayTutorial, _([[Your station also includes this radar map.
+        
 On this map, you can detect objects within short-range radar range of all allied ships and stations. Everything else is invisible to you. This gives you a different view from the science officer, because you can scan the contents of nebulae.]]))
-addToSequence(relayTutorial, _([[Finally, you control your ship's probes. Probes can expand your radar view. Launch a probe to the top right, toward the ship designated DMY-01.]]), function()
-    for idx, obj in ipairs(getObjectsInRadius(20000, -20000, 5000)) do
-        if obj.components.share_short_range_radar then
-            return true
-        end
-    end
-end)
-addToSequence(relayTutorial, function() prev_object:destroy() end)
-addToSequence(relayTutorial, function() prev_object2:destroy() end)
-addToSequence(relayTutorial, function() prev_object3:destroy() end)
-addToSequence(relayTutorial, function() prev_object4:destroy() end)
-addToSequence(relayTutorial, _([[Probes can expand your sensory capabilities beyond your normal range and explore nebulae. However, you have a limited supply of them and can't replenish them until you to dock with a station.]]))
-
-
-operationsTutorial = createSequence()
-addToSequence(operationsTutorial, function()
-    tutorial_switchViewToScreen(7)
-    tutorial_setMessageToBottomPosition()
-    resetPlayerShip()
-end)
-addToSequence(operationsTutorial, _([[Welcome, operations officer.
-
+        addToSequence(relayTutorial, _([[Finally, you control your ship's probes. Probes can expand your radar view. Launch a probe to the top right, toward the ship designated DMY-01.]]), function()
+            for idx, obj in ipairs(getObjectsInRadius(20000, -20000, 5000)) do
+                if obj.components.share_short_range_radar then
+                    return true
+                end
+            end
+        end)
+        addToSequence(relayTutorial, function() prev_object:destroy() end)
+        addToSequence(relayTutorial, function() prev_object2:destroy() end)
+        addToSequence(relayTutorial, function() prev_object3:destroy() end)
+        addToSequence(relayTutorial, function() prev_object4:destroy() end)
+        addToSequence(relayTutorial, _([[Probes can expand your sensory capabilities beyond your normal range and explore nebulae. However, you have a limited supply of them and can't replenish them until you to dock with a station.]]))
+        
+        
+        operationsTutorial = createSequence()
+        addToSequence(operationsTutorial, function()
+            tutorial_switchViewToScreen(7)
+            tutorial_setMessageToBottomPosition()
+            resetPlayerShip()
+        end)
+        addToSequence(operationsTutorial, _([[Welcome, operations officer.
+        
 You are the eyes of the ship. Your job is to supply the captain with information. From your station, you can detect and scan objects at a range of up to 30u.]]))
-addToSequence(operationsTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000) end)
-addToSequence(operationsTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
-addToSequence(operationsTutorial, _([[On this radar, you can select objects to get information about them.
+        addToSequence(operationsTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000) end)
+        addToSequence(operationsTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
+        addToSequence(operationsTutorial, _([[On this radar, you can select objects to get information about them.
 I've added a friendly ship and a station for you to examine. Select them and notice how much information you can observe.
 Heading and distance are of particular importance, as without these, the helms officer will be jumping in the dark.]]))
-addToSequence(operationsTutorial, function() prev_object:destroy() end)
-addToSequence(operationsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(3000, -15000):orderIdle() end)
-addToSequence(operationsTutorial, _([[I've replaced the friendly station with an unknown ship. Once you select it, notice that you know nothing about this ship.
+        addToSequence(operationsTutorial, function() prev_object:destroy() end)
+        addToSequence(operationsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(3000, -15000):orderIdle() end)
+        addToSequence(operationsTutorial, _([[I've replaced the friendly station with an unknown ship. Once you select it, notice that you know nothing about this ship.
 To learn about it, you must scan it. Scanning requires you to match your scanner's frequency bands to your target's.
 Scan this ship now.]]), function() return prev_object:isScannedBy(player) end)
-addToSequence(operationsTutorial, _([[Good. Notice that you now know this ship is unfriendly. It might have been a friendly or neutral ship as well, but until you scanned it, you do not know.]]))
-addToSequence(operationsTutorial, _([[Note that you have less information about this ship than the friendly ship. You must perform a deep scan of this ship to acquire more information.
+        addToSequence(operationsTutorial, _([[Good. Notice that you now know this ship is unfriendly. It might have been a friendly or neutral ship as well, but until you scanned it, you do not know.]]))
+            addToSequence(operationsTutorial, _([[Note that you have less information about this ship than the friendly ship. You must perform a deep scan of this ship to acquire more information.
 A deep scan takes more effort and requires you to align 2 different frequency bands simultaneously.
 Deep scan the enemy now.]]), function() return prev_object:isFullyScannedBy(player) end)
-addToSequence(operationsTutorial, _([[Excellent. Notice that this took more time and concentration than the simple scan, so be careful to perform deep scans only when necessary or you could run out of time.]]))
-addToSequence(operationsTutorial, function() prev_object:destroy() end)
-addToSequence(operationsTutorial, function() prev_object2:destroy() end)
-addToSequence(operationsTutorial, function() tutorial_setMessageToTopPosition() end)
-addToSequence(operationsTutorial, _([[Next to the long-range radar, the science station can also access the science database.
-
+            addToSequence(operationsTutorial, _([[Excellent. Notice that this took more time and concentration than the simple scan, so be careful to perform deep scans only when necessary or you could run out of time.]]))
+            addToSequence(operationsTutorial, function() prev_object:destroy() end)
+            addToSequence(operationsTutorial, function() prev_object2:destroy() end)
+            addToSequence(operationsTutorial, function() tutorial_setMessageToTopPosition() end)
+            addToSequence(operationsTutorial, _([[Next to the long-range radar, the science station can also access the science database.
+            
 In this database, you can look up details on things like ship types, weapons, and other objects.]]))
-addToSequence(operationsTutorial, _([[Remember, your job is to supply information. Knowing the location and status of other ships is vital to your captain.
-
+            addToSequence(operationsTutorial, _([[Remember, your job is to supply information. Knowing the location and status of other ships is vital to your captain.
+            
 Without your information, the crew is mostly blind.]]))
-addToSequence(operationsTutorial, _([[Your second responsibility is to coordinate the ship's communications.
-
+            addToSequence(operationsTutorial, _([[Your second responsibility is to coordinate the ship's communications.
+            
 You can target any station or ship and attempt to communicate with it. Other ships can also attempt to contact you.]]))
-addToSequence(operationsTutorial, function()
-    prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000)
-    prev_object:setCommsFunction(function()
-        setCommsMessage(_("You successfully opened communications. Congratulations."));
-        addCommsReply(_("Tell me more!"), function()
-            setCommsMessage(_("Sorry, there's nothing more to tell you."))
-        end)
-        addCommsReply(_("Continue with the tutorial."), function()
-            setCommsMessage(_("The tutorial will continue when you close communications with this station."))
-        end)
-    end)
-end)
-addToSequence(operationsTutorial, _([[Open communications with the station near you to continue the tutorial.]]), function() return player:isCommsScriptOpen() end)
-addToSequence(operationsTutorial, function() tutorial_setMessageToTopPosition() end)
-addToSequence(operationsTutorial, _([[Now finish your talk with the station.]]), function() return not player:isCommsScriptOpen() end)
-addToSequence(operationsTutorial, function() tutorial_setMessageToBottomPosition() end)
-addToSequence(operationsTutorial, function() prev_object:destroy() end)
-addToSequence(operationsTutorial, _([[Depending on the scenario, you might have different options when communicating with stations.
+            addToSequence(operationsTutorial, function()
+                prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000)
+                prev_object:setCommsFunction(function()
+                    setCommsMessage(_("You successfully opened communications. Congratulations."));
+                    addCommsReply(_("Tell me more!"), function()
+                        setCommsMessage(_("Sorry, there's nothing more to tell you."))
+                    end)
+                    addCommsReply(_("Continue with the tutorial."), function()
+                        setCommsMessage(_("The tutorial will continue when you close communications with this station."))
+                    end)
+                end)
+            end)
+            addToSequence(operationsTutorial, _([[Open communications with the station near you to continue the tutorial.]]), function() return player:isCommsScriptOpen() end)
+            addToSequence(operationsTutorial, function() tutorial_setMessageToTopPosition() end)
+            addToSequence(operationsTutorial, _([[Now finish your talk with the station.]]), function() return not player:isCommsScriptOpen() end)
+            addToSequence(operationsTutorial, function() tutorial_setMessageToBottomPosition() end)
+            addToSequence(operationsTutorial, function() prev_object:destroy() end)
+            addToSequence(operationsTutorial, _([[Depending on the scenario, you might have different options when communicating with stations.
 They might inform you about new objectives and your mission progress, ask for backup, or resupply your weapons. This is all part of your responsibilities as relay officer.]]))
-
-endOfTutorial = createSequence()
-addToSequence(endOfTutorial, function() tutorial_switchViewToMainScreen() end)
-addToSequence(endOfTutorial, function() tutorial_setMessageToTopPosition() end)
-addToSequence(endOfTutorial, _([[This concludes the tutorial. While we have covered the basics, there are more advanced features in the game that you might discover.]]))
+            
+            endOfTutorial = createSequence()
+            addToSequence(endOfTutorial, function() tutorial_switchViewToMainScreen() end)
+            addToSequence(endOfTutorial, function() tutorial_setMessageToTopPosition() end)
+            addToSequence(endOfTutorial, _([[This concludes the tutorial. While we have covered the basics, there are more advanced features in the game that you might discover.]]))
+            

@@ -54,7 +54,7 @@
 --- The Science officer can access a database of known entities and phenomena, as well as data about weapons and space hazards. This can be useful when assessing a target's capabilities without a deep scan, or for help navigating a black hole, wormhole, or other anomaly.
 -- Type: Tutorial
 
-require("tutorial/00_all.lua")
+require("tutorial/99_all.lua")
 
 function tutorial_init()
     tutorial_list = {

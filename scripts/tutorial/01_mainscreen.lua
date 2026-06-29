@@ -1,6 +1,6 @@
--- Name: Captain, radar, main screen
+-- Name: Basics
 -- Type: Tutorial
--- Description: <h3><color=#C0C0FF>Tutorial: Captain, radar, and main screen</>
+-- Description: <h3><color=#C0C0FF>Tutorial: Basics</>
 ---
 --- This introductory tutorial covers the basics of leading a crew, maintaining map awareness, and reading radar displays.
 ---
@@ -20,7 +20,7 @@
 --- Display the ship's main screen on a large monitor or projector so that all players can track their ship's status.
 
 require("utils.lua")
-require("tutorial/00_all.lua")
+require("tutorial/99_all.lua")
 
 function tutorial_init()
     tutorial_list = {
@@ -28,5 +28,6 @@ function tutorial_init()
         radarTutorial,
         endOfTutorial
     }
+
     startTutorial()
 end

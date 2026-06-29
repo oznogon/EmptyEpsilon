@@ -70,7 +70,7 @@
 --- The Relay officer can view the time that has elpased since the start of the mission. Use this to keep track of timed events.
 ---
 -- Type: Tutorial
-require("tutorial/00_all.lua")
+require("tutorial/99_all.lua")
 
 function tutorial_init()
     tutorial_list = {
