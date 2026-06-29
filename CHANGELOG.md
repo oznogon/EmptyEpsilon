@@ -16,6 +16,15 @@
 - GuiButtonTweak for onDraw status updates
 - Client latency simulation controls for servers
 - Science screen incoming-threat indicators: "Missile" and "Beam" panels visible on the science radar when an entity's homing missile or in-range beam weapon is targeting the player
+- Server setting to show missiles on long-range radar (off by default, preserving original gameplay)
+- Scenario selection button shows "Configure" instead of "Start" for scenarios with config steps
+- Crew position requirement checks consolidated into `CrewPositionRequirements` class
+- ShipSelectionScreen describes most recently clicked crew screen
+- Server/UDP port change available from server creation screen
+- Script descriptions expanded and formatted on TutorialMenu
+- Alert overlay background pulse/stretch animation
+- Menu screen titles added and refactored (Server Browse, Options, Tutorial)
+- Scenario categories available for translation
 
 ### Changed
 
@@ -24,6 +33,22 @@
 - Sector naming refactor (numeric 100x100 grids in Lua)
 - GuiToggleButton on-state style
 - GuiEntityInfoPanel theme styles
+- Renamed "crew station" to "crew screen" throughout
+- Renamed `altRelay` to `BriefingOfficer`, `briefingOfficer` crew roles
+- Weapons screens (Tactical, Weapons, BeamWeapons, MissileWeapons) refactored layout, added shields display
+- Spectator map renamed, "(view all)" suffix removed
+- `CrewStationScreen` refactored into `crewScreen`, crew screen selector placed in `GuiScrollContainer`
+- `TutorialMenu` refactored into two-column layout using layout properties
+- ShipSelectionScreen and playerInfo code reformatted
+- Alert overlay converted to `DrawStretchedHV`, full-screen color multiply removed
+- cpp translation keys migrated to Lua equivalents
+- Translation PO files swept of deleted cpp strings
+- RED/YELLOW ALERT no longer uppercased
+- Header guard `#ifdef` blocks replaced with `#pragma once`
+- Forward declarations audited and cleaned up
+- Station space setup in Surf's Up replaced with util script
+- Various Xansta util and scenario scripts cleaned up
+- French science_db and PO file corrections
 
 ### Fixed
 
@@ -40,6 +65,10 @@
 - HardwareController invalid effect setting handling
 - GuiTheme getter null return for undefined themes/styles
 - AdvancedScrollText bounds handling
+- Comms message row taking up space when hidden
+- Broken French science_db translation (key collision)
+- Missing numeric type check in science_db values
+- Executable permission restored on scripts and resources
 
 ## [2026-05]
 
