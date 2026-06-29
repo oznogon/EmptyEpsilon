@@ -1,7 +1,7 @@
 -- Name: Weapons
 -- Description: <h3><color=#C0C0FF>Tutorial: Engineering</>
 --- 
---- This tutorial covers how the <color=#C0C0FF>Engineering</> officer manages a ship's power, heat, coolant, and damage. This includes directing repair crews and identifying system effectiveness.
+--- This tutorial covers how the <color=#C0C0FF>Engineering</> officer manages a ship's power, heat, coolant, and damage. This includes directing repair crews and tracking system effectiveness.
 ---
 --- To begin this tutorial, click the <color=#C0C0FF>Start tutorial</> button at the bottom right of this screen.
 ---
