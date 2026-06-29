@@ -1,5 +1,6 @@
 #include "systems/missilesystem.h"
 
+#include "gameGlobalInfo.h"
 #include "components/collision.h"
 #include "components/missiletubes.h"
 #include "components/missile.h"
@@ -363,9 +364,11 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         trace.icon = mwd.radar_trace;
         trace.radius = 32.0f;
         trace.max_size = trace.min_size = 32 * (0.25f + 0.25f * category_modifier);
-        // LongRange intentionally omitted for gameplay
         trace.flags = RadarTrace::Rotate;
-        // Exempt mines from LongRange restriction.
+        // Show missiles on long-range radar if the server setting is enabled.
+        // Mines are always visible on long-range radar.
+        if (gameGlobalInfo && gameGlobalInfo->missiles_on_long_range_radar)
+            trace.flags |= RadarTrace::LongRange;
         if (tube.type_loaded == MW_Mine) trace.flags |= RadarTrace::LongRange;
         trace.color = mwd.color;
 

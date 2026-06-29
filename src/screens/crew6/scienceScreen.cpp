@@ -1007,13 +1007,9 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             }
         }
     }
-    else
-    {
-        target_entity = {};
-    }
+    else target_entity = {};
 
-    // Show threat indicators only when the science radar is the active view
-    // (i.e. radar view mode and probe view is off).
+    // Show threat indicators only when the science radar is the active view.
     const bool science_radar_active = view_mode_selection->getSelectionIndex() == 0
         && !probe_view_button->getValue();
 
@@ -1041,37 +1037,32 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 else if (auto t = entity.getComponent<Target>())
                     beam_target = t->entity;
 
-                if (beam_target != my_spaceship)
-                    continue;
+                if (beam_target != my_spaceship) continue;
 
                 for (const auto& mount : beamsys.mounts)
                 {
-                    if (mount.range <= 0.0f)
-                        continue;
+                    if (mount.range <= 0.0f) continue;
+
                     auto mount_world = transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation());
                     float distance = glm::length(my_transform->getPosition() - mount_world);
+
                     if (auto physics = entity.getComponent<sp::Physics>())
-                        distance -= physics->getSize().x;
+                        distance -= std::max(physics->getSize().x, physics->getSize().y);
+
                     if (distance < mount.range)
                     {
                         beam_threat = true;
                         break;
                     }
                 }
+
                 if (beam_threat) break;
             }
         }
     }
 
-    if (missile_threat)
-        missile_threat_label->show();
-    else
-        missile_threat_label->hide();
-
-    if (beam_threat)
-        beam_threat_label->show();
-    else
-        beam_threat_label->hide();
+    missile_threat_label->setVisible(missile_threat);
+    beam_threat_label->setVisible(beam_threat);
 }
 
 void ScienceScreen::onUpdate()

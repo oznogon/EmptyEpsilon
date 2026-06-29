@@ -34,6 +34,7 @@ GameGlobalInfo::GameGlobalInfo()
     enable_multiple_waypoint_sets = false;
     enable_waypoint_routes = false;
     use_drone_energy_drain = false;
+    missiles_on_long_range_radar = false;
     collision_damage_factor = 0.0f;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
@@ -56,6 +57,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&enable_multiple_waypoint_sets);
     registerMemberReplication(&enable_waypoint_routes);
     registerMemberReplication(&use_drone_energy_drain);
+    registerMemberReplication(&missiles_on_long_range_radar);
     registerMemberReplication(&collision_damage_factor);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);

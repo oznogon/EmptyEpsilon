@@ -1,6 +1,7 @@
 #include "systems/radar.h"
 #include "playerInfo.h"
 #include "main.h"
+
 #include "components/faction.h"
 #include "components/scanning.h"
 #include "components/collision.h"
@@ -14,12 +15,10 @@ glm::vec2 RadarRenderSystem::view_position;
 sp::Bitset RadarRenderSystem::visible_objects;
 std::vector<RadarRenderSystem::Handler> RadarRenderSystem::handlers;
 
-
 void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, RadarTrace& trace)
 {
     // Nebulae are rendered by NebulaRadarRendering at a lower priority.
-    if (entity.hasComponent<RadarBlock>())
-        return;
+    if (entity.hasComponent<RadarBlock>()) return;
 
     // Exit early if the trace is flagged for LongRange and this is non-GM
     // LongRange radar.
@@ -33,8 +32,10 @@ void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Ent
     size = std::clamp(size, trace.min_size, std::max(trace.min_size, trace.max_size));
 
     auto color = trace.color;
-    if (trace.flags & RadarTrace::ColorByFaction) {
+    if (trace.flags & RadarTrace::ColorByFaction)
+    {
         color = Faction::getInfo(entity).gm_color;
+
         if (my_spaceship)
         {
             if (entity == my_spaceship)
@@ -86,18 +87,32 @@ void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Ent
 
 void NebulaRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, RadarTrace& trace)
 {
-    // Only render nebulae (entities with RadarBlock component).
-    if (!entity.hasComponent<RadarBlock>())
-        return;
+    // Render only entities with the RadarBlock component, such as nebulae.
+    if (!entity.hasComponent<RadarBlock>()) return;
 
     auto size = trace.radius * scale * 2.0f;
     size = std::clamp(size, trace.min_size, std::max(trace.min_size, trace.max_size));
 
-    auto color = trace.color;
-    auto icon = trace.icon;
+    const auto color = trace.color;
+    const auto icon = trace.icon;
 
     if (trace.flags & RadarTrace::Rotate)
-        renderer.drawRotatedSprite(icon, screen_position, size, rotation, color);
+    {
+        renderer.drawRotatedSprite(
+            icon,
+            screen_position,
+            size,
+            rotation,
+            color
+        );
+    }
     else
-        renderer.drawSprite(icon, screen_position, size, color);
+    {
+        renderer.drawSprite(
+            icon,
+            screen_position,
+            size,
+            color
+        );
+    }
 }

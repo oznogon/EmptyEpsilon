@@ -1078,6 +1078,11 @@ static bool luaIsStrategicMapAllowed()
     return gameGlobalInfo->allow_main_screen_strategic_map;
 }
 
+static bool luaAreMissilesOnLongRangeRadar()
+{
+    return gameGlobalInfo->missiles_on_long_range_radar;
+}
+
 void luaCommandTargetRotation(sp::ecs::Entity ship, float rotation) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandTargetRotation(rotation); return; }
     auto thrusters = ship.getComponent<ManeuveringThrusters>();
@@ -2192,6 +2197,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns whether the "Strategic Map" setting for main screens is enabled in the running scenario.
     /// Example: isStrategicMapAllowed() -- returns true by default
     env.setGlobal("isStrategicMapAllowed", &luaIsStrategicMapAllowed);
+    /// bool areMissilesOnLongRangeRadar()
+    /// Returns whether the "Missiles on long-range radar" setting is enabled in the running scenario.
+    /// Example: areMissilesOnLongRangeRadar() -- returns false by default
+    env.setGlobal("areMissilesOnLongRangeRadar", &luaAreMissilesOnLongRangeRadar);
 
 
     /// void addGMFunction(string label, function callback)

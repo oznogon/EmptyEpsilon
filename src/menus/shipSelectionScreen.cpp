@@ -419,7 +419,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         auto extra_settings_panel = new GuiPanel(this, "");
         extra_settings_panel
-            ->setSize(600.0f, 425.0f)
+            ->setSize(600.0f, 475.0f)
             ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
             ->hide();
 
@@ -580,6 +580,26 @@ ShipSelectionScreen::ShipSelectionScreen()
             ->setSize(275.0f, GuiElement::GuiSizeMax)
             ->setPosition(0.0f, 0.0f, sp::Alignment::CenterRight);
 
+        // Missiles on long-range radar row.
+        row = new GuiElement(extra_settings, "");
+        row
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("layout", "horizontal");
+
+        (new GuiToggleButton(row, "GAME_MISSILES_LR_RADAR", tr("Missiles on long-range"),
+            [](bool value)
+            {
+                gameGlobalInfo->missiles_on_long_range_radar = value == 1;
+            })
+        )
+            ->setValue(gameGlobalInfo->missiles_on_long_range_radar)
+            ->setSize(275.0f, GuiElement::GuiSizeMax)
+            ->setPosition(0.0f, 0.0f, sp::Alignment::CenterLeft);
+
+        (new GuiLabel(row, "", "", GuiElement::GuiSizeLabel))
+            ->setSize(275.0f, GuiElement::GuiSizeMax);
+
+        // Close button
         auto close_button = new GuiButton(extra_settings_panel, "", tr("Close"),
             [this, extra_settings_panel]()
             {
