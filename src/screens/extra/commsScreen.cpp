@@ -1,6 +1,7 @@
 #include "commsScreen.h"
 #include <i18n.h>
 #include "playerInfo.h"
+#include "crewPositionRequirements.h"
 
 #include "components/comms.h"
 
@@ -23,7 +24,7 @@ CommsScreen::CommsScreen(GuiContainer* owner)
     new AlertLevelOverlay(this);
 
     // Message if entity lacks CommsTransmitter or CommsReceiver components.
-    no_comms_label = new GuiLabel(this, "NO_COMMS_LABEL", tr("comms", "No comms available"), 50.0f);
+    no_comms_label = new GuiLabel(this, "NO_COMMS_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::commsOnly), 50.0f);
     no_comms_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -45,5 +46,5 @@ void CommsScreen::onUpdate()
     if (!my_spaceship || !isVisible()) return;
 
     // Message if entity lacks CommsTransmitter or CommsReceiver components.
-    no_comms_label->setVisible(!my_spaceship.hasComponent<CommsTransmitter>() && !my_spaceship.hasComponent<CommsReceiver>());
+    no_comms_label->setVisible(!crewPositionRequirements::hasRequirements(CrewPosition::commsOnly, my_spaceship));
 }

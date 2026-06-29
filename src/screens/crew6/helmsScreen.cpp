@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "preferenceManager.h"
 #include "featureDefs.h"
+#include "crewPositionRequirements.h"
 
 #include "components/reactor.h"
 #include "components/warpdrive.h"
@@ -53,7 +54,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
     // Message if entity lacks all propulsion, maneuver, and docking
     // components.
-    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", tr("helms", "No helms controls"), GuiElement::GuiSizeRow);
+    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::helmsOfficer), GuiElement::GuiSizeRow);
     no_controls_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -205,12 +206,7 @@ void HelmsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        const bool has_any_propulsion = my_spaceship.hasComponent<ImpulseEngine>()
-            || my_spaceship.hasComponent<JumpDrive>()
-            || my_spaceship.hasComponent<WarpDrive>()
-            || my_spaceship.hasComponent<CombatManeuveringThrusters>()
-            || my_spaceship.hasComponent<ManeuveringThrusters>()
-            || my_spaceship.hasComponent<DockingPort>();
+        const bool has_any_propulsion = crewPositionRequirements::hasRequirements(CrewPosition::helmsOfficer, my_spaceship);
         if (!has_any_propulsion)
         {
             GuiOverlay::onDraw(renderer);
@@ -224,12 +220,7 @@ void HelmsScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
 
-    const bool has_any_propulsion = my_spaceship.hasComponent<ImpulseEngine>()
-        || my_spaceship.hasComponent<JumpDrive>()
-        || my_spaceship.hasComponent<WarpDrive>()
-        || my_spaceship.hasComponent<CombatManeuveringThrusters>()
-        || my_spaceship.hasComponent<ManeuveringThrusters>()
-        || my_spaceship.hasComponent<DockingPort>();
+    const bool has_any_propulsion = crewPositionRequirements::hasRequirements(CrewPosition::helmsOfficer, my_spaceship);
 
     background_gradient->setVisible(has_any_propulsion);
     helms_controls->setVisible(has_any_propulsion);

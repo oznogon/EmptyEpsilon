@@ -13,9 +13,11 @@
 #include "preferenceManager.h"
 #include "gameGlobalInfo.h"
 #include "scenarioInfo.h"
+#include "crewPositionRequirements.h"
 
 #include "components/database.h"
 #include "components/name.h"
+
 #include "screens/cinematicViewScreen.h"
 #include "screens/gm/gameMasterScreen.h"
 #include "screens/gm/limitedGameMasterScreen.h"
@@ -1254,7 +1256,9 @@ void CrewPositionSelection::onUpdate()
             else
                 crew_position_button[n]->setText(button_text);
 
-            crew_position_button[n]->setEnable(!pc || pc->allowed_positions.has(cp));
+            bool has_components = crewPositionRequirements::hasRequirements(cp, my_spaceship);
+
+            crew_position_button[n]->setEnable((!pc || pc->allowed_positions.has(cp)) && has_components);
             crew_position_selected = crew_position_selected || crew_position_button[n]->getValue();
         }
     }

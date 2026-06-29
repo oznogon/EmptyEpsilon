@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "main.h"
 #include "i18n.h"
+#include "crewPositionRequirements.h"
 
 #include "components/radar.h"
 #include "components/collision.h"
@@ -33,7 +34,7 @@ ProbeScreen::ProbeScreen(GuiContainer* owner)
     new AlertLevelOverlay(this);
 
     // Message if entity lacks a linked probe.
-    no_probe_label = new GuiLabel(this, "NO_PROBE_LABEL", tr("probe_screen", "No probe linked"), GuiElement::GuiSizeRow);
+    no_probe_label = new GuiLabel(this, "NO_PROBE_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::probeCamera), GuiElement::GuiSizeRow);
     no_probe_label
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)

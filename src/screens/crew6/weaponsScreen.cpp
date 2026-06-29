@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "crewPositionRequirements.h"
 
 #include "components/customshipfunction.h"
 #include "components/utilityBeam.h"
@@ -54,7 +55,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     new AlertLevelOverlay(this);
 
     // Message if entity lacks both weapons and shields.
-    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("weapons", "No weapons or shields"), GuiElement::GuiSizeRow);
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::weaponsOfficer), GuiElement::GuiSizeRow);
     no_weapons_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -257,11 +258,9 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
     {
         auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
         if (beam_sys) beam_safety->setValue(beam_sys->is_firing_enabled);
-        auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
         auto shields = my_spaceship.getComponent<Shields>();
-        const bool has_any_weapons = (beam_sys && beam_sys->mounts.size() > 0) || (missile_tubes && missile_tubes->mounts.size() > 0);
 
-        const bool has_any_ability = has_any_weapons || (shields && shields->entries.size() > 0);
+        const bool has_any_ability = crewPositionRequirements::hasRequirements(CrewPosition::weaponsOfficer, my_spaceship);
         if (!has_any_ability)
         {
             GuiOverlay::onDraw(renderer);
@@ -317,14 +316,7 @@ void WeaponsScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
 
-    auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
-    auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
-    const bool has_beam_weapons = beam_sys && beam_sys->mounts.size() > 0;
-    const bool has_missile_weapons = missile_tubes && missile_tubes->mounts.size() > 0;
-    const bool has_any_weapons = has_beam_weapons || has_missile_weapons;
-    auto shields = my_spaceship.getComponent<Shields>();
-    const bool has_shields = shields && shields->entries.size() > 0;
-    const bool has_any_ability = has_any_weapons || has_shields;
+    const bool has_any_ability = crewPositionRequirements::hasRequirements(CrewPosition::weaponsOfficer, my_spaceship);
 
     background_gradient->setVisible(has_any_ability);
     weapons_controls->setVisible(has_any_ability);

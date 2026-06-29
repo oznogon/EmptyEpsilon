@@ -239,6 +239,7 @@ set(MAIN_SOURCES
     src/GMActions.cpp
     src/script.cpp
     src/crewPosition.cpp
+    src/crewPositionRequirements.cpp
     src/playerInfo.cpp
     src/missileWeaponData.cpp
     src/mesh.cpp

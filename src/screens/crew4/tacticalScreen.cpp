@@ -4,6 +4,7 @@
 #include "featureDefs.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "crewPositionRequirements.h"
 
 #include "components/customshipfunction.h"
 #include "components/reactor.h"
@@ -65,7 +66,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     // Message if entity lacks all propulsion, maneuver, docking, and weapon
     // components.
-    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", tr("tactical", "No tactical controls"), GuiElement::GuiSizeRow);
+    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::tacticalOfficer), GuiElement::GuiSizeRow);
     no_controls_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -297,14 +298,7 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
         auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
         if (beam_sys) beam_safety->setValue(beam_sys->is_firing_enabled);
         auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
-        const bool has_any_ability = my_spaceship.hasComponent<ImpulseEngine>()
-            || my_spaceship.hasComponent<JumpDrive>()
-            || my_spaceship.hasComponent<WarpDrive>()
-            || my_spaceship.hasComponent<CombatManeuveringThrusters>()
-            || my_spaceship.hasComponent<ManeuveringThrusters>()
-            || my_spaceship.hasComponent<DockingPort>()
-            || (beam_sys && beam_sys->mounts.size() > 0)
-            || (missile_tubes && missile_tubes->mounts.size() > 0);
+        const bool has_any_ability = crewPositionRequirements::hasRequirements(CrewPosition::tacticalOfficer, my_spaceship);
 
         if (!has_any_ability)
         {
@@ -338,16 +332,7 @@ void TacticalScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
 
-    auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
-    auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
-    const bool has_any_ability = my_spaceship.hasComponent<ImpulseEngine>()
-        || my_spaceship.hasComponent<JumpDrive>()
-        || my_spaceship.hasComponent<WarpDrive>()
-        || my_spaceship.hasComponent<CombatManeuveringThrusters>()
-        || my_spaceship.hasComponent<ManeuveringThrusters>()
-        || my_spaceship.hasComponent<DockingPort>()
-        || (beam_sys && beam_sys->mounts.size() > 0)
-        || (missile_tubes && missile_tubes->mounts.size() > 0);
+    const bool has_any_ability = crewPositionRequirements::hasRequirements(CrewPosition::tacticalOfficer, my_spaceship);
 
     background_gradient->setVisible(has_any_ability);
     tactical_controls->setVisible(has_any_ability);

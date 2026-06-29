@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "crewPositionRequirements.h"
 
 #include "components/beamweapon.h"
 #include "components/collision.h"
@@ -46,7 +47,7 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Message if entity lacks the MissileTubes component or mounts.
-    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("missile_weapons", "No missile weapons"), GuiElement::GuiSizeRow);
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::missileWeaponsOfficer), GuiElement::GuiSizeRow);
     no_weapons_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -192,7 +193,7 @@ void MissileWeaponsScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
-        const bool has_tubes = missile_tubes && missile_tubes->mounts.size() > 0;
+        const bool has_tubes = crewPositionRequirements::hasRequirements(CrewPosition::missileWeaponsOfficer, my_spaceship);
         background_gradient->setVisible(has_tubes);
         missile_controls->setVisible(has_tubes);
         no_weapons_label->setVisible(!has_tubes);

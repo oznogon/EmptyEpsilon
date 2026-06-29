@@ -2,6 +2,7 @@
 #include "random.h"
 #include "i18n.h"
 #include "gameGlobalInfo.h"
+#include "crewPositionRequirements.h"
 
 #include "gui/theme.h"
 #include "gui/gui2_arrow.h"
@@ -48,9 +49,9 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Exit if we don't have a docking bay.
-    if (!my_spaceship.hasComponent<DockingBay>())
+    if (!crewPositionRequirements::hasRequirements(CrewPosition::dockingBay, my_spaceship))
     {
-        (new GuiLabel(this, "NO_DOCKING_BAY_LABEL", tr("dockingbay", "No docking bay"), 50.0f))
+        (new GuiLabel(this, "NO_DOCKING_BAY_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::dockingBay), 50.0f))
             ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
             ->setSize(300.0f, GuiElement::GuiSizeRow);
         return;
@@ -826,12 +827,13 @@ void DockingBayScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship) return;
 
-    auto bay = my_spaceship.getComponent<DockingBay>();
-    if (!bay)
+    if (!crewPositionRequirements::hasRequirements(CrewPosition::dockingBay, my_spaceship))
     {
         GuiOverlay::onDraw(renderer);
         return;
     }
+
+    auto bay = my_spaceship.getComponent<DockingBay>();
 
     // Check for changes in the berths.
     bool list_changed = cached_berth_entities.size() != bay->berths.size();

@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "crewPositionRequirements.h"
 
 #include "components/beamweapon.h"
 #include "components/beamWeaponTarget.h"
@@ -46,7 +47,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Message if entity lacks the DroneController component.
-    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("drone", "No beam weapons"), GuiElement::GuiSizeRow);
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::beamWeaponsOfficer), GuiElement::GuiSizeRow);
     no_weapons_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -209,7 +210,7 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
     {
         auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
         if (beam_sys) beam_safety->setValue(beam_sys->is_firing_enabled);
-        const bool bw = beam_sys && beam_sys->mounts.size() > 0;
+        const bool bw = crewPositionRequirements::hasRequirements(CrewPosition::beamWeaponsOfficer, my_spaceship);
         background_gradient->setVisible(bw);
         beam_controls->setVisible(bw);
         no_weapons_label->setVisible(!bw);

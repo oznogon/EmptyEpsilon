@@ -5,6 +5,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "featureDefs.h"
+#include "crewPositionRequirements.h"
 
 #include "components/drone.h"
 #include "components/beamweapon.h"
@@ -63,7 +64,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
     new AlertLevelOverlay(this);
 
     // Message if entity lacks the DroneController component.
-    no_drone_controller_label = new GuiLabel(this, "NO_DRONE_CONTROLLER_LABEL", tr("drone", "No drone controller"), 50.0f);
+    no_drone_controller_label = new GuiLabel(this, "NO_DRONE_CONTROLLER_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::droneOperations), 50.0f);
     no_drone_controller_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -927,8 +928,7 @@ void DroneOperationsScreen::onUpdate()
     if (!my_spaceship || !isVisible()) return;
 
     // Don't show controls if this entity lacks a DroneController.
-    auto dc = my_spaceship.getComponent<DroneController>();
-    if (!dc)
+    if (!crewPositionRequirements::hasRequirements(CrewPosition::droneOperations, my_spaceship))
     {
         background_gradient->hide();
         no_drone_controller_label->show();
@@ -942,6 +942,7 @@ void DroneOperationsScreen::onUpdate()
     radar_pane->show();
 
     // Rebuild drone selector if available drones changed.
+    auto dc = my_spaceship.getComponent<DroneController>();
     auto ship_transform = my_spaceship.getComponent<sp::Transform>();
     float range = dc ? dc->control_range : 5000.0f;
     if (auto sensors = my_spaceship.getComponent<SensorsSystem>())

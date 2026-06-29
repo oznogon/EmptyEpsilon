@@ -5,6 +5,7 @@
 #include "multiplayer_client.h"
 #include "i18n.h"
 #include "featureDefs.h"
+#include "crewPositionRequirements.h"
 
 #include "components/beamweapon.h"
 #include "components/customshipfunction.h"
@@ -85,7 +86,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Message if entity lacks the LongRangeRadar component.
-    no_radar_label = new GuiLabel(radar_view, "NO_RADAR_LABEL", tr("science", "No long-range radar"), GuiElement::GuiSizeRow);
+    no_radar_label = new GuiLabel(radar_view, "NO_RADAR_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::scienceOfficer), GuiElement::GuiSizeRow);
     no_radar_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -558,7 +559,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         probe_radar->hide();
     }
 
-    if (!lrr)
+    if (!crewPositionRequirements::hasRequirements(CrewPosition::scienceOfficer, my_spaceship))
     {
         const bool probe_view_active = rl && rl->linked_entity && probe_view_button->getValue();
         background_gradient->setVisible(probe_view_active);
