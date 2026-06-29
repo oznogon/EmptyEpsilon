@@ -746,7 +746,7 @@ function nameBanner(p)
     p.name_tag_rel = "name_tag_rel"
     p:addCustomInfo("Relay",p.name_tag_rel,banner,1)
     p.name_tag_alt = "name_tag_alt"
-    p:addCustomInfo("AltRelay",p.name_tag_alt,banner,1)
+    p:addCustomInfo("StrategicMap",p.name_tag_alt,banner,1)
     p.name_tag_com = "name_tag_com"
     p:addCustomInfo("CommsOnly",p.name_tag_com,banner,1)
     p.name_tag_log = "name_tag_log"
@@ -824,7 +824,7 @@ function earlyEnd()
                 p.odin_time_log = "odin_time_log"
                 p:addCustomInfo("ShipLog",p.odin_time_log,banner,2)
                 p.odin_time_alt = "odin_time_alt"
-                p:addCustomInfo("AltRelay",p.odin_time_alt,banner,2)
+                p:addCustomInfo("StrategicMap",p.odin_time_alt,banner,2)
             end
         end
     end

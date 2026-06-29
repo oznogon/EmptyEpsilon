@@ -302,7 +302,10 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     alert_level_select = new GuiAlertLevelSelect(this, "");
     alert_level_select->setPosition(-20, allow_comms ? -70 : -20, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
 
-    auto position = allow_comms ? CrewPosition::relayOfficer : CrewPosition::altRelay;
+    auto position = allow_comms
+        ? CrewPosition::relayOfficer
+        : CrewPosition::strategicMap;
+
     (new GuiCustomShipFunctions(this, position, ""))
         ->setPosition(-20.0f, 240.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 500.0f);

@@ -7,33 +7,33 @@
 
 enum class CrewPosition
 {
-    //6/5 player crew
+    // 6/5-player crew
     helmsOfficer,
     weaponsOfficer,
     engineering,
     scienceOfficer,
     relayOfficer,
-    //4/3 player crew
-    tacticalOfficer,    //helms+weapons-shields
-    engineeringAdvanced,//engineering+shields
-    operationsOfficer, //science+comms
-    //1 player crew
+    // 4/3-player crew
+    tacticalOfficer,     // helms + weapons - shields
+    engineeringAdvanced, // engineering + shields
+    operationsOfficer,   // science + comms
+    // 1-player crew
     singlePilot,
-    //split weapons
+    // Split weapon screens
     beamWeaponsOfficer,
     missileWeaponsOfficer,
-    //extras
+    // Extra screens
     damageControl,
     powerManagement,
     databaseView,
     dockingBay,
-    altRelay,
+    strategicMap,
     commsOnly,
     shipLog,
     radarOfficer,
     probeCamera,
     targetAnalysis,
-    briefingOfficer,
+    briefing,
     droneOperations,
 
     MAX
