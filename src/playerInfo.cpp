@@ -16,19 +16,19 @@
 #include "screens/crew4/engineeringAdvancedScreen.h"
 #include "screens/crew4/operationsScreen.h"
 #include "screens/crew1/singlePilotScreen.h"
-#include "screens/extra/droneOperationsScreen.h"
 #include "screens/extra/beamWeaponsScreen.h"
-#include "screens/extra/briefingScreen.h"
-#include "screens/extra/commsScreen.h"
+#include "screens/extra/missileWeaponsScreen.h"
 #include "screens/extra/damcon.h"
+#include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
 #include "screens/extra/dockingBayScreen.h"
-#include "screens/extra/missileWeaponsScreen.h"
-#include "screens/extra/powerManagement.h"
-#include "screens/extra/probeScreen.h"
-#include "screens/extra/radarScreen.h"
+#include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
+#include "screens/extra/radarScreen.h"
+#include "screens/extra/probeScreen.h"
 #include "screens/extra/targetAnalysisScreen.h"
+#include "screens/extra/briefingScreen.h"
+#include "screens/extra/droneOperationsScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
@@ -36,12 +36,14 @@
 #include "components/ai.h"
 #include "components/analysisTarget.h"
 #include "components/beamweapon.h"
+#include "components/beamWeaponTarget.h"
 #include "components/collision.h"
 #include "components/comms.h"
 #include "components/coolant.h"
 #include "components/customshipfunction.h"
 #include "components/drone.h"
 #include "components/hacking.h"
+#include "components/hackTarget.h"
 #include "components/hull.h"
 #include "components/impulse.h"
 #include "components/internalrooms.h"
@@ -49,6 +51,7 @@
 #include "components/lifetime.h"
 #include "components/maneuveringthrusters.h"
 #include "components/missiletubes.h"
+#include "components/missileWeaponTarget.h"
 #include "components/moveto.h"
 #include "components/pickup.h"
 #include "components/probe.h"
@@ -60,9 +63,6 @@
 #include "components/shields.h"
 #include "components/shiplog.h"
 #include "components/target.h"
-#include "components/beamWeaponTarget.h"
-#include "components/missileWeaponTarget.h"
-#include "components/hackTarget.h"
 #include "components/utilityBeam.h"
 #include "components/warpdrive.h"
 
@@ -193,8 +193,8 @@ PlayerInfo::PlayerInfo()
     client_id = -1;
     main_screen_control = 0;
     last_ship_password = "";
-    registerMemberReplication(&client_id);
 
+    registerMemberReplication(&client_id);
     registerMemberReplication(&crew_positions);
     registerMemberReplication(&ship);
     registerMemberReplication(&name);
@@ -230,17 +230,16 @@ int PlayerInfo::countPlayerPositionsOnMonitor(int monitor)
     if (crew_positions.empty()) return 0;
 
     int count = 0;
-    for ([[maybe_unused]] auto position : crew_positions[monitor]) count++;
+    for ([[maybe_unused]] auto position : crew_positions[monitor])
+        count++;
 
     return count;
 }
 
 bool PlayerInfo::hasPosition(CrewPosition cp)
 {
-    for(auto cps : crew_positions) {
-        if (cps.has(cp))
-            return true;
-    }
+    for (auto cps : crew_positions) if (cps.has(cp)) return true;
+
     return false;
 }
 
@@ -248,8 +247,10 @@ bool PlayerInfo::isOnlyMainScreen(int monitor_index)
 {
     if (!(main_screen & (1 << monitor_index)))
         return false;
+
     if (crew_positions.size() <= static_cast<size_t>(monitor_index))
         return true;
+
     return crew_positions[monitor_index].mask == 0;
 }
 
@@ -300,80 +301,96 @@ void PlayerInfo::commandAbortJump()
 void PlayerInfo::commandSetTarget(sp::ecs::Entity target)
 {
     sp::io::DataBuffer packet;
+
     if (target)
         packet << CMD_SET_TARGET << target;
     else
         packet << CMD_SET_TARGET << sp::ecs::Entity();
+
     sendClientCommand(packet);
 }
 
 void PlayerInfo::commandSetAnalysisTarget(sp::ecs::Entity target)
 {
     sp::io::DataBuffer packet;
+
     if (target)
         packet << CMD_SET_ANALYSIS_TARGET << target;
     else
         packet << CMD_SET_ANALYSIS_TARGET << sp::ecs::Entity();
+
     sendClientCommand(packet);
 }
 
 void PlayerInfo::commandSetBeamTarget(sp::ecs::Entity target)
 {
     sp::io::DataBuffer packet;
+
     if (target)
         packet << CMD_SET_BEAM_TARGET << target;
     else
         packet << CMD_SET_BEAM_TARGET << sp::ecs::Entity();
+
     sendClientCommand(packet);
 }
 
 void PlayerInfo::commandSetMissileTarget(sp::ecs::Entity target)
 {
     sp::io::DataBuffer packet;
+
     if (target)
         packet << CMD_SET_MISSILE_TARGET << target;
     else
         packet << CMD_SET_MISSILE_TARGET << sp::ecs::Entity();
+
     sendClientCommand(packet);
 }
 
 void PlayerInfo::commandSetCommsTarget(sp::ecs::Entity target)
 {
     sp::io::DataBuffer packet;
+
     if (target)
         packet << CMD_SET_COMMS_TARGET << target;
     else
         packet << CMD_SET_COMMS_TARGET << sp::ecs::Entity();
+
     sendClientCommand(packet);
 }
 
 void PlayerInfo::commandSetHackingTarget(sp::ecs::Entity target)
 {
     sp::io::DataBuffer packet;
+
     if (target)
         packet << CMD_SET_HACKING_TARGET << target;
     else
         packet << CMD_SET_HACKING_TARGET << sp::ecs::Entity();
+
     sendClientCommand(packet);
 }
 
 void PlayerInfo::commandSetScanTarget(sp::ecs::Entity target)
 {
     sp::io::DataBuffer packet;
+
     if (target)
         packet << CMD_SET_SCAN_TARGET << target;
     else
         packet << CMD_SET_SCAN_TARGET << sp::ecs::Entity();
+
     sendClientCommand(packet);
 }
 
 void PlayerInfo::commandSetUtilityBeamTarget(sp::ecs::Entity target)
 {
     sp::io::DataBuffer packet;
+
     if (target)
         packet << CMD_SET_UTILITY_BEAM_TARGET << target;
     else
         packet << CMD_SET_UTILITY_BEAM_TARGET << sp::ecs::Entity();
+
     sendClientCommand(packet);
 }
 
@@ -400,19 +417,20 @@ void PlayerInfo::commandFireTube(uint32_t tubeNumber, float missile_target_angle
 
 void PlayerInfo::commandFireTubeAtTarget(uint32_t tubeNumber, sp::ecs::Entity target)
 {
-    float targetAngle = 0.0;
     auto missiletubes = ship.getComponent<MissileTubes>();
 
     if (!target || !missiletubes || tubeNumber >= missiletubes->mounts.size())
         return;
 
-    targetAngle = MissileSystem::calculateFiringSolution(ship, missiletubes->mounts[tubeNumber], target);
-    if (targetAngle == std::numeric_limits<float>::infinity()) {
+    float target_angle = MissileSystem::calculateFiringSolution(ship, missiletubes->mounts[tubeNumber], target);
+
+    if (target_angle == std::numeric_limits<float>::infinity())
+    {
         if (auto transform = ship.getComponent<sp::Transform>())
-            targetAngle = transform->getRotation() + missiletubes->mounts[tubeNumber].direction;
+            target_angle = transform->getRotation() + missiletubes->mounts[tubeNumber].direction;
     }
 
-    commandFireTube(tubeNumber, targetAngle);
+    commandFireTube(tubeNumber, target_angle);
 }
 
 void PlayerInfo::commandTransferMissile(sp::ecs::Entity target, EMissileWeapons missile_type, int quantity)
@@ -734,9 +752,7 @@ void PlayerInfo::commandSetScienceLink(sp::ecs::Entity probe)
     }
     // Otherwise, it's invalid. Warn and do nothing.
     else
-    {
-        LOG(WARNING) << "commandSetScienceLink received a null or invalid ScanProbe, so no command was sent.";
-    }
+        LOG(Warning, "commandSetScienceLink received a null or invalid ScanProbe, so no command was sent.");
 }
 
 void PlayerInfo::commandClearScienceLink()
@@ -763,10 +779,12 @@ void PlayerInfo::commandSetCrewPosition(int monitor_index, CrewPosition position
 
     if (crew_positions.size() <= size_t(monitor_index))
         crew_positions.resize(monitor_index + 1);
+
     if (active)
         crew_positions[monitor_index].add(position);
     else
         crew_positions[monitor_index].remove(position);
+
     if (auto pc = ship.getComponent<PlayerControl>())
         crew_positions[monitor_index].mask &= pc->allowed_positions.mask;
 }
@@ -993,38 +1011,52 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     uint32_t monitor_index;
     bool active;
     packet >> command;
-    switch(command)
+    switch (command)
     {
-    case CMD_TARGET_ROTATION:{
-        float f;
-        packet >> f;
-        auto thrusters = ship.getComponent<ManeuveringThrusters>();
-        if (thrusters) { thrusters->stop(); thrusters->target = f; }
-        }break;
-    case CMD_TURN_SPEED:{
-        float f;
-        packet >> f;
-        auto thrusters = ship.getComponent<ManeuveringThrusters>();
-        if (thrusters) { thrusters->stop(); thrusters->rotation_request = f; }
-        }break;
-    case CMD_IMPULSE:{
-        auto engine = ship.getComponent<ImpulseEngine>();
-        if (engine)
-            packet >> engine->request;
-        else {
+    case CMD_TARGET_ROTATION:
+        {
             float f;
             packet >> f;
+            if (auto thrusters = ship.getComponent<ManeuveringThrusters>())
+            {
+                thrusters->stop();
+                thrusters->target = f;
+            }
         }
-        } break;
-    case CMD_WARP:{
-        auto warp = ship.getComponent<WarpDrive>();
-        if (warp)
-            packet >> warp->request;
-        else {
-            int i;
-            packet >> i;
+        break;
+    case CMD_TURN_SPEED:
+        {
+            float f;
+            packet >> f;
+            if (auto thrusters = ship.getComponent<ManeuveringThrusters>())
+            {
+                thrusters->stop();
+                thrusters->rotation_request = f;
+            }
         }
-        } break;
+        break;
+    case CMD_IMPULSE:
+        {
+            if (auto engine = ship.getComponent<ImpulseEngine>())
+                packet >> engine->request;
+            else
+            {
+                float f;
+                packet >> f;
+            }
+        }
+        break;
+    case CMD_WARP:
+        {
+            if (auto warp = ship.getComponent<WarpDrive>())
+                packet >> warp->request;
+            else
+            {
+                int i;
+                packet >> i;
+            }
+        }
+        break;
     case CMD_JUMP:
         {
             float distance;
@@ -1123,12 +1155,15 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> tube_nr >> missile_target_angle;
 
             auto missiletubes = ship.getComponent<MissileTubes>();
-            if (missiletubes && tube_nr < missiletubes->mounts.size()) {
+            if (missiletubes && tube_nr < missiletubes->mounts.size())
+            {
                 sp::ecs::Entity target;
+
                 if (auto mt = ship.getComponent<MissileWeaponTarget>())
                     target = mt->entity;
                 else if (auto t = ship.getComponent<Target>())
                     target = t->entity;
+
                 MissileSystem::fire(ship, missiletubes->mounts[tube_nr], missile_target_angle, target);
             }
         }
@@ -1247,15 +1282,15 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             bool active;
             packet >> active;
 
-            auto shields = ship.getComponent<Shields>();
-            if (shields) {
+            if (auto shields = ship.getComponent<Shields>())
+            {
                 if (shields->calibration_delay <= 0.0f && active != shields->active)
                 {
                     shields->active = active;
-                    if (active)
-                        gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
-                    else
-                        gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
+                    gameGlobalInfo->playSoundOnMainScreen(ship, active
+                        ? "sfx/shield_up.wav"
+                        : "sfx/shield_down.wav"
+                    );
                 }
             }
         }
@@ -1265,7 +1300,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         packet >> mss;
         if (auto pc = ship.getComponent<PlayerControl>())
             pc->main_screen_setting = mss;
-        }break;
+        }
+        break;
     case CMD_SET_MAIN_SCREEN_OVERLAY:{
         MainScreenOverlay mso;
         packet >> mso;
@@ -1299,7 +1335,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         ScanningSystem::scanningFinished(ship);
         break;
     case CMD_SCAN_CANCEL:
-        if (auto scanner = ship.getComponent<ScienceScanner>()) {
+        if (auto scanner = ship.getComponent<ScienceScanner>())
+        {
             // Fire onScanCancelled callback
             if (scanner->target)
             {
@@ -1309,6 +1346,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                         LuaConsole::checkResult(ss->on_scan_cancelled.call<void>(scanner->target, ship, scanner->source));
                 }
             }
+
             scanner->target = {};
             scanner->source = {};
         }
@@ -1340,8 +1378,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             sp::ecs::Entity target;
             packet >> target;
-            if (target)
-                DockingSystem::requestDock(ship, target);
+            if (target) DockingSystem::requestDock(ship, target);
         }
         break;
     case CMD_UNDOCK:
@@ -1353,7 +1390,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> internal_entity;
             if (internal_entity)
             {
-                // Verify the entity is actually docked in this ship's bay
+                // Verify the entity is actually docked in this ship's bay.
                 if (auto port = internal_entity.getComponent<DockingPort>())
                 {
                     if (port->target == ship && port->state == DockingPort::State::Docked)
@@ -1370,12 +1407,12 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
 
             if (internal_entity)
             {
-                // Verify the entity is actually docked in this ship's bay
+                // Verify the entity is actually docked in this ship's bay.
                 if (auto port = internal_entity.getComponent<DockingPort>())
                 {
                     if (port->target == ship && port->state == DockingPort::State::Docked)
                     {
-                        // Verify berth index is valid
+                        // Verify berth index is valid.
                         if (auto bay = ship.getComponent<DockingBay>())
                         {
                             if (berth_index >= 0 && berth_index < static_cast<int32_t>(bay->berths.size()))
@@ -1392,7 +1429,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> internal_entity;
             if (internal_entity)
             {
-                // Verify the entity is actually docked in this ship's bay
+                // Verify the entity is actually docked in this ship's bay.
                 if (auto port = internal_entity.getComponent<DockingPort>())
                 {
                     if (port->target == ship && port->state == DockingPort::State::Docked)
@@ -1407,14 +1444,14 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             int32_t direction_int;
             packet >> berth_index >> direction_int;
 
-            // Verify berth index is valid
+            // Verify berth index is valid.
             if (auto bay = ship.getComponent<DockingBay>())
             {
                 if (berth_index >= 0 && berth_index < static_cast<int32_t>(bay->berths.size()))
                 {
                     // Verify direction is valid
-                    if (direction_int >= static_cast<int32_t>(DockingBay::Berth::TransferDirection::ToCarrier) &&
-                        direction_int <= static_cast<int32_t>(DockingBay::Berth::TransferDirection::ToDocked))
+                    if (direction_int >= static_cast<int32_t>(DockingBay::Berth::TransferDirection::ToCarrier)
+                        && direction_int <= static_cast<int32_t>(DockingBay::Berth::TransferDirection::ToDocked))
                     {
                         bay->berths[berth_index].transfer_direction = static_cast<DockingBay::Berth::TransferDirection>(direction_int);
                     }
@@ -1433,18 +1470,17 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             if (result.isOk())
             {
                 auto supply_drop = result.value();
-                auto port = supply_drop.getComponent<DockingPort>();
-
                 float carrier_radius = 200.0f;
                 float supply_drop_radius = 50.0f;
                 auto carrier_physics = ship.getComponent<sp::Physics>();
                 auto supply_drop_physics = supply_drop.getComponent<sp::Physics>();
                 if (carrier_physics) carrier_radius = carrier_physics->getSize().y;
                 if (supply_drop_physics) supply_drop_radius = supply_drop_physics->getSize().y;
-                // When launched, drop it behind us
-                port->docked_offset = {-(carrier_radius + supply_drop_radius + 10.0f), 0.0f};
+                // When launched, drop it behind us.
+                if (auto port = supply_drop.getComponent<DockingPort>())
+                    port->docked_offset = {-(carrier_radius + supply_drop_radius + 10.0f), 0.0f};
 
-                // Move supply drop to the berth
+                // Move supply drop to the berth.
                 if (!DockingSystem::moveEntityToInternalBay(supply_drop, ship, berth_index))
                 {
                     LOG(Warning, "Supply drop couldn't be moved to supply berth ", berth_index, " and was destroyed");
@@ -1486,7 +1522,6 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             string message;
             packet >> message;
-
             CommsSystem::textReply(ship, message);
         }
         break;
@@ -1510,9 +1545,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             ShipSystem::Type system;
             packet >> system;
-            auto beamweapons = ship.getComponent<BeamWeaponSys>();
-            if (beamweapons)
-                beamweapons->system_target = (ShipSystem::Type)std::clamp((int)system, -1, (int)(ShipSystem::COUNT - 1));
+            if (auto beamweapons = ship.getComponent<BeamWeaponSys>())
+                beamweapons->system_target = (ShipSystem::Type)std::clamp(static_cast<int>(system), -1, static_cast<int>(ShipSystem::COUNT - 1));
         }
         break;
     case CMD_SET_BEAM_FIRING_ENABLED:
@@ -1533,10 +1567,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 shields->frequency = new_frequency;
                 shields->calibration_delay = shields->calibration_time;
                 shields->active = false;
-                if (shields->frequency < 0)
-                    shields->frequency = 0;
-                if (shields->frequency > BeamWeaponSys::max_frequency)
-                    shields->frequency = BeamWeaponSys::max_frequency;
+                shields->frequency = std::clamp(shields->frequency, 0, BeamWeaponSys::max_frequency);
             }
         }
         break;
@@ -1545,10 +1576,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             glm::vec2 position{};
             int32_t set_id = 1;
             packet >> position >> set_id;
-            auto wp = ship.getComponent<Waypoints>();
-            if (wp) {
+            if (auto wp = ship.getComponent<Waypoints>())
                 wp->addNew(position, set_id);
-            }
         }
         break;
     case CMD_REMOVE_WAYPOINT:
@@ -1556,9 +1585,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             int32_t id;
             int32_t set_id = 1;
             packet >> id >> set_id;
-            if (auto wp = ship.getComponent<Waypoints>()) {
+            if (auto wp = ship.getComponent<Waypoints>())
                 wp->remove(id, set_id);
-            }
         }
         break;
     case CMD_MOVE_WAYPOINT:
@@ -1567,9 +1595,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             glm::vec2 position{};
             int32_t set_id = 1;
             packet >> id >> position >> set_id;
-            if (auto wp = ship.getComponent<Waypoints>()) {
+            if (auto wp = ship.getComponent<Waypoints>())
                 wp->move(id, position, set_id);
-            }
         }
         break;
     case CMD_SET_WAYPOINT_ROUTE:
@@ -1577,19 +1604,18 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             bool is_route;
             int32_t set_id = 1;
             packet >> is_route >> set_id;
-            if (auto wp = ship.getComponent<Waypoints>()) {
+            if (auto wp = ship.getComponent<Waypoints>())
                 wp->setRoute(is_route, set_id);
-            }
         }
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:
         SelfDestructSystem::activate(ship);
         break;
     case CMD_CANCEL_SELF_DESTRUCT:
-        if (auto self_destruct = ship.getComponent<SelfDestruct>()) {
-            if (self_destruct->countdown <= 0.0f) {
+        if (auto self_destruct = ship.getComponent<SelfDestruct>())
+        {
+            if (self_destruct->countdown <= 0.0f)
                 self_destruct->active = false;
-            }
         }
         break;
     case CMD_CONFIRM_SELF_DESTRUCT:
@@ -1597,7 +1623,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             int8_t index;
             uint32_t code;
             packet >> index >> code;
-            if (auto self_destruct = ship.getComponent<SelfDestruct>()) {
+            if (auto self_destruct = ship.getComponent<SelfDestruct>())
+            {
                 if (index >= 0 && index < SelfDestruct::max_codes && self_destruct->code[index] == code && self_destruct->active)
                     self_destruct->confirmed[index] = true;
             }
@@ -1608,8 +1635,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float request_amount;
             packet >> request_amount;
             auto combat = ship.getComponent<CombatManeuveringThrusters>();
-            if (combat)
-                combat->boost.request = request_amount;
+            if (combat) combat->boost.request = request_amount;
         }
         break;
     case CMD_COMBAT_MANEUVER_STRAFE:
@@ -1617,8 +1643,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float request_amount;
             packet >> request_amount;
             auto combat = ship.getComponent<CombatManeuveringThrusters>();
-            if (combat)
-                combat->strafe.request = request_amount;
+            if (combat) combat->strafe.request = request_amount;
         }
         break;
     case CMD_LAUNCH_PROBE:
@@ -1642,12 +1667,14 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             }
         }
         break;
-    case CMD_SET_ALERT_LEVEL:{
-        AlertLevel al;
-        packet >> al;
-        if (auto ps = ship.getComponent<PlayerControl>())
-            ps->alert_level = al;
-        }break;
+    case CMD_SET_ALERT_LEVEL:
+        {
+            AlertLevel al;
+            packet >> al;
+            if (auto ps = ship.getComponent<PlayerControl>())
+                ps->alert_level = al;
+        }
+        break;
     case CMD_SET_SCIENCE_LINK:
         {
             // Capture previously linked probe, if there is one.
@@ -1655,7 +1682,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> target;
 
             // TODO: Check if this probe is ours
-            if (auto rl = ship.getComponent<RadarLink>()) {
+            if (auto rl = ship.getComponent<RadarLink>())
+            {
                 auto old = rl->linked_entity;
                 if (rl->on_unlink && old)
                     LuaConsole::checkResult(rl->on_unlink.call<void>(ship, old));
@@ -1670,7 +1698,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity target;
             ShipSystem::Type target_system;
             packet >> target >> target_system;
-            if (auto hd = ship.getComponent<HackingDevice>()) {
+            if (auto hd = ship.getComponent<HackingDevice>())
+            {
                 auto sys = ShipSystem::get(target, target_system);
                 if (sys)
                     sys->hacked_level = std::min(1.0f, sys->hacked_level + hd->effectiveness);
@@ -1681,8 +1710,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             string name;
             packet >> name;
-            if (auto csf = ship.getComponent<CustomShipFunctions>()) {
-                for(auto& f : csf->functions)
+            if (auto csf = ship.getComponent<CustomShipFunctions>())
+            {
+                for (auto& f : csf->functions)
                 {
                     if (f.name == name)
                     {
@@ -1722,8 +1752,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_UPDATE_SHIP_ID:
         packet >> ship;
         if (auto pc = ship.getComponent<PlayerControl>())
-            for(auto& cps : crew_positions)
+        {
+            for (auto& cps : crew_positions)
                 cps.mask &= pc->allowed_positions.mask;
+        }
         break;
     case CMD_UPDATE_MAIN_SCREEN:
         packet >> monitor_index >> active;
@@ -1754,9 +1786,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> active;
 
             if (auto utility = ship.getComponent<UtilityBeam>())
-            {
                 utility->active = active;
-            }
         }
         break;
     case CMD_SET_CUSTOM_UTILITY_BEAM_MODE:
@@ -1774,10 +1804,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> f;
 
             if (auto utility = ship.getComponent<UtilityBeam>())
-            {
-                if (!utility->fixed_bearing)
-                    utility->bearing = f;
-            }
+                if (!utility->fixed_bearing) utility->bearing = f;
         }
         break;
     case CMD_SET_UTILITY_BEAM_ARC:
@@ -1786,9 +1813,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> f;
 
             if (auto utility = ship.getComponent<UtilityBeam>())
-            {
                 utility->setArcAndAdjustRange(f);
-            }
         }
         break;
     case CMD_SET_UTILITY_BEAM_RANGE:
@@ -1797,9 +1822,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> f;
 
             if (auto utility = ship.getComponent<UtilityBeam>())
-            {
                 utility->setRangeAndAdjustArc(f);
-            }
         }
         break;
 
@@ -1831,8 +1854,13 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float f;
             packet >> f;
             if (auto dl = ship.getComponent<DroneLink>())
+            {
                 if (auto thrusters = dl->linked_drone.getComponent<ManeuveringThrusters>())
-                { thrusters->stop(); thrusters->target = f; }
+                {
+                    thrusters->stop();
+                    thrusters->target = f;
+                }
+            }
         }
         break;
     case CMD_DRONE_IMPULSE:
@@ -1840,8 +1868,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float f;
             packet >> f;
             if (auto dl = ship.getComponent<DroneLink>())
+            {
                 if (auto engine = dl->linked_drone.getComponent<ImpulseEngine>())
                     engine->request = f;
+            }
         }
         break;
     case CMD_DRONE_WARP:
@@ -1849,8 +1879,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             int level;
             packet >> level;
             if (auto dl = ship.getComponent<DroneLink>())
+            {
                 if (auto warp = dl->linked_drone.getComponent<WarpDrive>())
                     warp->request = level;
+            }
         }
         break;
     case CMD_DRONE_JUMP:
@@ -1941,8 +1973,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float amount;
             packet >> amount;
             if (auto dl = ship.getComponent<DroneLink>())
+            {
                 if (auto combat = dl->linked_drone.getComponent<CombatManeuveringThrusters>())
                     combat->boost.request = amount;
+            }
         }
         break;
     case CMD_DRONE_COMBAT_MANEUVER_STRAFE:
@@ -1959,8 +1993,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             int32_t frequency;
             packet >> frequency;
             if (auto dl = ship.getComponent<DroneLink>())
+            {
                 if (auto beams = dl->linked_drone.getComponent<BeamWeaponSys>())
                     beams->setFrequency(frequency);
+            }
         }
         break;
     case CMD_DRONE_SET_BEAM_SYSTEM_TARGET:
@@ -1968,8 +2004,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             ShipSystem::Type system;
             packet >> system;
             if (auto dl = ship.getComponent<DroneLink>())
+            {
                 if (auto beams = dl->linked_drone.getComponent<BeamWeaponSys>())
                     beams->system_target = (ShipSystem::Type)std::clamp((int)system, -1, (int)(ShipSystem::COUNT - 1));
+            }
         }
         break;
     case CMD_DRONE_DOCK:
@@ -1977,8 +2015,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity target;
             packet >> target;
             if (auto dl = ship.getComponent<DroneLink>())
+            {
                 if (target)
                     DockingSystem::requestDock(dl->linked_drone, target);
+            }
         }
         break;
     case CMD_DRONE_UNDOCK:
@@ -2021,9 +2061,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
 void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
 {
     if (my_player_info->isOnlyMainScreen(monitor_index))
-    {
         new ScreenMainScreen(render_layer);
-    }
     else
     {
         CrewScreen* screen = new CrewScreen(render_layer, bool(main_screen & (1 << monitor_index)));
@@ -2032,15 +2070,11 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
         if (crew_positions.size() > size_t(monitor_index))
             cps = crew_positions[monitor_index];
 
-        //Crew 6/5
+        // 6/5-player crew
         if (cps.has(CrewPosition::helmsOfficer))
             screen->addStationTab(new HelmsScreen(container), CrewPosition::helmsOfficer, getCrewPositionName(CrewPosition::helmsOfficer), getCrewPositionIcon(CrewPosition::helmsOfficer));
         if (cps.has(CrewPosition::weaponsOfficer))
             screen->addStationTab(new WeaponsScreen(container), CrewPosition::weaponsOfficer, getCrewPositionName(CrewPosition::weaponsOfficer), getCrewPositionIcon(CrewPosition::weaponsOfficer));
-        if (cps.has(CrewPosition::beamWeaponsOfficer))
-            screen->addStationTab(new BeamWeaponsScreen(container), CrewPosition::beamWeaponsOfficer, getCrewPositionName(CrewPosition::beamWeaponsOfficer), getCrewPositionIcon(CrewPosition::beamWeaponsOfficer));
-        if (cps.has(CrewPosition::missileWeaponsOfficer))
-            screen->addStationTab(new MissileWeaponsScreen(container), CrewPosition::missileWeaponsOfficer, getCrewPositionName(CrewPosition::missileWeaponsOfficer), getCrewPositionIcon(CrewPosition::missileWeaponsOfficer));
         if (cps.has(CrewPosition::engineering))
             screen->addStationTab(new EngineeringScreen(container), CrewPosition::engineering, getCrewPositionName(CrewPosition::engineering), getCrewPositionIcon(CrewPosition::engineering));
         if (cps.has(CrewPosition::scienceOfficer))
@@ -2048,7 +2082,7 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
         if (cps.has(CrewPosition::relayOfficer))
             screen->addStationTab(new RelayScreen(container, true), CrewPosition::relayOfficer, getCrewPositionName(CrewPosition::relayOfficer), getCrewPositionIcon(CrewPosition::relayOfficer));
 
-        //Crew 4/3
+        // 4/3-player crew
         if (cps.has(CrewPosition::tacticalOfficer))
             screen->addStationTab(new TacticalScreen(container), CrewPosition::tacticalOfficer, getCrewPositionName(CrewPosition::tacticalOfficer), getCrewPositionIcon(CrewPosition::tacticalOfficer));
         if (cps.has(CrewPosition::engineeringAdvanced))
@@ -2056,13 +2090,17 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
         if (cps.has(CrewPosition::operationsOfficer))
             screen->addStationTab(new OperationScreen(container), CrewPosition::operationsOfficer, getCrewPositionName(CrewPosition::operationsOfficer), getCrewPositionIcon(CrewPosition::operationsOfficer));
 
-        //Crew 1
+        // 1-player crew
         if (cps.has(CrewPosition::singlePilot))
             screen->addStationTab(new SinglePilotScreen(container), CrewPosition::singlePilot, getCrewPositionName(CrewPosition::singlePilot), getCrewPositionIcon(CrewPosition::singlePilot));
-        if (cps.has(CrewPosition::droneOperations))
-            screen->addStationTab(new DroneOperationsScreen(container), CrewPosition::droneOperations, getCrewPositionName(CrewPosition::droneOperations), getCrewPositionIcon(CrewPosition::droneOperations));
 
-        //Extra
+        // Split weapons screens
+        if (cps.has(CrewPosition::beamWeaponsOfficer))
+            screen->addStationTab(new BeamWeaponsScreen(container), CrewPosition::beamWeaponsOfficer, getCrewPositionName(CrewPosition::beamWeaponsOfficer), getCrewPositionIcon(CrewPosition::beamWeaponsOfficer));
+        if (cps.has(CrewPosition::missileWeaponsOfficer))
+            screen->addStationTab(new MissileWeaponsScreen(container), CrewPosition::missileWeaponsOfficer, getCrewPositionName(CrewPosition::missileWeaponsOfficer), getCrewPositionIcon(CrewPosition::missileWeaponsOfficer));
+
+        // Extra screens
         if (cps.has(CrewPosition::damageControl))
             screen->addStationTab(new DamageControlScreen(container), CrewPosition::damageControl, getCrewPositionName(CrewPosition::damageControl), getCrewPositionIcon(CrewPosition::damageControl));
         if (cps.has(CrewPosition::powerManagement))
@@ -2071,8 +2109,8 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new DatabaseScreen(container), CrewPosition::databaseView, getCrewPositionName(CrewPosition::databaseView), getCrewPositionIcon(CrewPosition::databaseView));
         if (cps.has(CrewPosition::dockingBay))
             screen->addStationTab(new DockingBayScreen(container), CrewPosition::dockingBay, getCrewPositionName(CrewPosition::dockingBay), getCrewPositionIcon(CrewPosition::dockingBay));
-        if (cps.has(CrewPosition::altRelay))
-            screen->addStationTab(new RelayScreen(container, false), CrewPosition::altRelay, getCrewPositionName(CrewPosition::altRelay), getCrewPositionIcon(CrewPosition::altRelay));
+        if (cps.has(CrewPosition::strategicMap))
+            screen->addStationTab(new RelayScreen(container, false), CrewPosition::strategicMap, getCrewPositionName(CrewPosition::strategicMap), getCrewPositionIcon(CrewPosition::strategicMap));
         if (cps.has(CrewPosition::commsOnly))
             screen->addStationTab(new CommsScreen(container), CrewPosition::commsOnly, getCrewPositionName(CrewPosition::commsOnly), getCrewPositionIcon(CrewPosition::commsOnly));
         if (cps.has(CrewPosition::shipLog))
@@ -2083,22 +2121,28 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new ProbeScreen(container), CrewPosition::probeCamera, getCrewPositionName(CrewPosition::probeCamera), getCrewPositionIcon(CrewPosition::probeCamera));
         if (cps.has(CrewPosition::targetAnalysis))
             screen->addStationTab(new TargetAnalysisScreen(container), CrewPosition::targetAnalysis, getCrewPositionName(CrewPosition::targetAnalysis), getCrewPositionIcon(CrewPosition::targetAnalysis));
-        if (cps.has(CrewPosition::briefingOfficer))
-            screen->addStationTab(new BriefingScreen(container), CrewPosition::briefingOfficer, getCrewPositionName(CrewPosition::briefingOfficer), getCrewPositionIcon(CrewPosition::briefingOfficer));
+        if (cps.has(CrewPosition::briefing))
+            screen->addStationTab(new BriefingScreen(container), CrewPosition::briefing, getCrewPositionName(CrewPosition::briefing), getCrewPositionIcon(CrewPosition::briefing));
+        if (cps.has(CrewPosition::droneOperations))
+            screen->addStationTab(new DroneOperationsScreen(container), CrewPosition::droneOperations, getCrewPositionName(CrewPosition::droneOperations), getCrewPositionIcon(CrewPosition::droneOperations));
 
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
-        for(int n=0; n<static_cast<int>(CrewPosition::MAX); n++)
+        for (int n = 0; n < static_cast<int>(CrewPosition::MAX); n++)
+        {
             if (cps.has(static_cast<CrewPosition>(n)))
                 sde->enablePosition(CrewPosition(n));
+        }
+
+        // Combo screens
         if (cps.has(CrewPosition::tacticalOfficer))
         {
             sde->enablePosition(CrewPosition::weaponsOfficer);
             sde->enablePosition(CrewPosition::helmsOfficer);
         }
+
         if (cps.has(CrewPosition::engineeringAdvanced))
-        {
             sde->enablePosition(CrewPosition::engineering);
-        }
+
         if (cps.has(CrewPosition::operationsOfficer))
         {
             sde->enablePosition(CrewPosition::scienceOfficer);
@@ -2116,36 +2160,36 @@ string getCrewPositionName(CrewPosition position)
 {
     switch(position)
     {
-    case CrewPosition::helmsOfficer: return tr("station","Helms");
-    case CrewPosition::weaponsOfficer: return tr("station","Weapons");
-    case CrewPosition::engineering: return tr("station","Engineering");
-    case CrewPosition::scienceOfficer: return tr("station","Science");
-    case CrewPosition::relayOfficer: return tr("station","Relay");
-    case CrewPosition::tacticalOfficer: return tr("station","Tactical");
-    case CrewPosition::engineeringAdvanced: return tr("station","Engineering+");
-    case CrewPosition::operationsOfficer: return tr("station","Operations");
-    case CrewPosition::singlePilot: return tr("station","Single Pilot");
-    case CrewPosition::damageControl: return tr("station","Damage Control");
-    case CrewPosition::powerManagement: return tr("station","Power Management");
-    case CrewPosition::databaseView: return tr("station","Database");
-    case CrewPosition::dockingBay: return tr("station","Docking Bay");
-    case CrewPosition::altRelay: return tr("station","Strategic Map");
-    case CrewPosition::commsOnly: return tr("station","Comms");
-    case CrewPosition::beamWeaponsOfficer: return tr("station","Beam Weapons");
-    case CrewPosition::missileWeaponsOfficer: return tr("station","Missile Weapons");
-    case CrewPosition::shipLog: return tr("station","Ship's Log");
-    case CrewPosition::radarOfficer: return tr("station","Radar");
-    case CrewPosition::probeCamera: return tr("station","Probe Camera");
-    case CrewPosition::targetAnalysis: return tr("station","Target Analysis");
-    case CrewPosition::briefingOfficer: return tr("station","Briefing");
-    case CrewPosition::droneOperations: return tr("station","Drone Operations");
+    case CrewPosition::helmsOfficer: return tr("crew_screen", "Helms");
+    case CrewPosition::weaponsOfficer: return tr("crew_screen", "Weapons");
+    case CrewPosition::engineering: return tr("crew_screen", "Engineering");
+    case CrewPosition::scienceOfficer: return tr("crew_screen", "Science");
+    case CrewPosition::relayOfficer: return tr("crew_screen", "Relay");
+    case CrewPosition::tacticalOfficer: return tr("crew_screen", "Tactical");
+    case CrewPosition::engineeringAdvanced: return tr("crew_screen", "Engineering+");
+    case CrewPosition::operationsOfficer: return tr("crew_screen", "Operations");
+    case CrewPosition::singlePilot: return tr("crew_screen", "Single pilot");
+    case CrewPosition::damageControl: return tr("crew_screen", "Damage control");
+    case CrewPosition::powerManagement: return tr("crew_screen", "Power management");
+    case CrewPosition::databaseView: return tr("crew_screen", "Database");
+    case CrewPosition::dockingBay: return tr("crew_screen", "Docking bay");
+    case CrewPosition::strategicMap: return tr("crew_screen", "Strategic map");
+    case CrewPosition::commsOnly: return tr("crew_screen", "Comms");
+    case CrewPosition::beamWeaponsOfficer: return tr("crew_screen", "Beam weapons");
+    case CrewPosition::missileWeaponsOfficer: return tr("crew_screen", "Missile weapons");
+    case CrewPosition::shipLog: return tr("crew_screen", "Ship's log");
+    case CrewPosition::radarOfficer: return tr("crew_screen", "Radar");
+    case CrewPosition::probeCamera: return tr("crew_screen", "Probe camera");
+    case CrewPosition::targetAnalysis: return tr("crew_screen", "Target analysis");
+    case CrewPosition::briefing: return tr("crew_screen", "Briefing");
+    case CrewPosition::droneOperations: return tr("crew_screen", "Drone operations");
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }
 
 string getCrewPositionIcon(CrewPosition position)
 {
-    switch(position)
+    switch (position)
     {
     case CrewPosition::helmsOfficer: return "gui/icons/station-helm";
     case CrewPosition::weaponsOfficer: return "gui/icons/station-weapons";
@@ -2162,13 +2206,13 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::powerManagement: return "gui/icons/energy";
     case CrewPosition::databaseView: return "gui/icons/station-database";
     case CrewPosition::dockingBay: return "gui/icons/docking";
-    case CrewPosition::altRelay: return "gui/icons/station-strategic-map";
+    case CrewPosition::strategicMap: return "gui/icons/station-strategic-map";
     case CrewPosition::commsOnly: return "gui/icons/station-comms";
     case CrewPosition::shipLog: return "gui/icons/station-ship-log";
     case CrewPosition::radarOfficer: return "gui/icons/station-radar";
     case CrewPosition::probeCamera: return "gui/icons/scan-probe";
     case CrewPosition::targetAnalysis: return "gui/icons/lock";
-    case CrewPosition::briefingOfficer: return "gui/icons/station-briefing";
+    case CrewPosition::briefing: return "gui/icons/station-briefing";
     case CrewPosition::droneOperations: return "gui/icons/station-drone-operations";
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
@@ -2176,12 +2220,8 @@ string getCrewPositionIcon(CrewPosition position)
 
 bool PlayerInfo::hasPlayerAtPosition(sp::ecs::Entity entity, CrewPosition position)
 {
-    foreach(PlayerInfo, i, player_info_list)
-    {
-        if (i->ship == entity && i->hasPosition(position))
-        {
-            return true;
-        }
-    }
+    foreach (PlayerInfo, i, player_info_list)
+        if (i->ship == entity && i->hasPosition(position)) return true;
+
     return false;
 }
