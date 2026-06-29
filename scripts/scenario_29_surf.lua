@@ -131,7 +131,7 @@ function setGlobals()
     name_categories = {
     	"Science",
     	"History",
-    	"Pop Sci Fi",
+    	"Alt Sci Fi",
     	"Spec Sci Fi",
     	"Generic",
     }

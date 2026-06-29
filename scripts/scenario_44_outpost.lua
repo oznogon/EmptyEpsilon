@@ -1601,7 +1601,7 @@ function constructEnvironment()
 	if player_faction == "Human Navy" then
 		ir_faction = {"Human Navy","CUF","USN","TSN"}
 	end
-	station_regional_hq = placeStation(center_x, center_y,"Pop Sci Fi",player_faction,"Medium Station")
+	station_regional_hq = placeStation(center_x, center_y,"Alt Sci Fi",player_faction,"Medium Station")
 	table.insert(station_list,station_regional_hq)
 	table.insert(inner_circle,station_regional_hq)
 	table.insert(place_space,{obj=station_regional_hq,dist=1000,shape="circle"})

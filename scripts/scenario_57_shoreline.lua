@@ -2914,7 +2914,7 @@ function populateStationPool()
 				general = _("stationGeneralInfo-comms", "We research and make general and specialized components for ship shield and ship armor systems"), 
 				history = _("stationStory-comms", "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved.")},
 		},
-		["Pop Sci Fi"] = {
+		["Alt Sci Fi"] = {
 			["Anderson"] = {
 		        weapon_available = {
 		        	Homing = false,		
@@ -5104,7 +5104,7 @@ function populateStationPool()
 	}
 	station_priority = {}
 	table.insert(station_priority,"Science")
-	table.insert(station_priority,"Pop Sci Fi")
+	table.insert(station_priority,"Alt Sci Fi")
 	table.insert(station_priority,"Spec Sci Fi")
 	table.insert(station_priority,"History")
 	table.insert(station_priority,"Generic")

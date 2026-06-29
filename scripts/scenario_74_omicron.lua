@@ -1382,7 +1382,7 @@ function constructEnvironment()
 	local inner_circle = {}
 	player_factions = {"Human Navy","CUF","USN","TSN"}
 	player_faction = player_factions[math.random(1,#player_factions)]
-	station_regional_hq = placeStation(center_x, center_y,"Pop Sci Fi",player_faction,"Large Station")
+	station_regional_hq = placeStation(center_x, center_y,"Alt Sci Fi",player_faction,"Large Station")
 	table.insert(station_list,station_regional_hq)
 	table.insert(place_space,{obj=station_regional_hq,dist=1000,shape="circle"})
 	hq_medical_message = Artifact():setCallSign(station_regional_hq:getCallSign()):setCommsScript(""):setCommsFunction(medicalAttentionComms)
