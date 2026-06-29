@@ -1301,8 +1301,76 @@ void CrewPositionSelection::setCrewScreenInfo(CrewPosition cp)
     switch (cp)
     {
     case CrewPosition::helmsOfficer:
-        crew_screen_info->setText("helms");
+        text = "<color=#C0C0FF>Helms</>\nManeuvers the ship with thrusters and impulse engines, employs faster-than-light propulsion methods, docks with other ships and space stations, and retrieves objects";
         break;
+    case CrewPosition::weaponsOfficer:
+        text = "<color=#C0C0FF>Weapons</>\nManages a ship's offensive and defensive systems; loads, unloads, aims, and fires weapon tubes; targets beam weapons; and sets beam and shield frequencies";
+        break;
+    case CrewPosition::engineering:
+        text = "<color=#C0C0FF>Engineering</>\nManages a ship's power, heat, coolant, and damage; directs repair crews; tracks system effectiveness; and controls the ship's self-destruct system";
+        break;
+    case CrewPosition::scienceOfficer:
+        text = "<color=#C0C0FF>Science</>\nExamines and reports on the ship's surroundings, and researches entities using the ship's sensors and database";
+        break;
+    case CrewPosition::relayOfficer:
+        text = "<color=#C0C0FF>Relay</>\nManages the flow of information between the ship and other ships and space stations across the region, hails and communicates with other entities, launches scan probes, sets navigational waypoints, and hacks hostile entities";
+        break;
+    case CrewPosition::tacticalOfficer:
+        text = "<color=#C0C0FF>Tactical</>\nCombines the responsibilities of Helms (maneuvering, propulsion, docking) with Weapons (loading, targeting, and firing weapons). However, also lacks Weapons' control over shields.";
+        break;
+    case CrewPosition::engineeringAdvanced:
+        text = "<color=#C0C0FF>Engineering+</>\nManages a ship's power, heat, coolant, and damage; manages shield activation and calibration; directs repair crews; tracks system effectiveness; and controls the ship's self-destruct system";
+        break;
+    case CrewPosition::operationsOfficer:
+        text = "<color=#C0C0FF>Operations</>\nCombines the responsibilities of Science (scanning, research) with Relay (communication, navigation). However, also lacks Relay's access to the sector map or hacking features.";
+        break;
+    case CrewPosition::singlePilot:
+        text = "<color=#C0C0FF>Single pilot</>\nCombines essential functions from Helms, Weapons, and Relay, at the expense of several other features";
+        break;
+    case CrewPosition::beamWeaponsOfficer:
+        text = "<color=#C0C0FF>Beam weapons</>\nManages and targets the ship's beam weapons, as a specialized subset of Weapons functions";
+        break;
+    case CrewPosition::missileWeaponsOfficer:
+        text = "<color=#C0C0FF>Beam weapons</>\nManages and targets the ship's weapons tubes, including missiles and mines, as a specialized subset of Weapons functions";
+        break;
+    case CrewPosition::damageControl:
+        text = "<color=#C0C0FF>Damage control</>\nManages the ship's repair crews from a systems overview display, as a specialized subset of Engineering functions";
+        break;
+    case CrewPosition::powerManagement:
+        text = "<color=#C0C0FF>Power management</>\nRoutes power and coolant to the ship's systems, as a specialized subset of Engineering functions";
+        break;
+    case CrewPosition::databaseView:
+        text = "<color=#C0C0FF>Database</>\nResearches information in the ship's database, as a specialized subset of Science functions";
+        break;
+    case CrewPosition::dockingBay:
+        text = "<color=#C0C0FF>Docking bay</>\nControls the ship's internal docking bay, if any, including launching, reparing, and restocking berthed ships";
+        break;
+    case CrewPosition::strategicMap:
+        text = "<color=#C0C0FF>Strategic map</>\nViews a sector map, launches scan probes, sets navigational waypoints, and hacks hostile entities. A specialized subset of Relay functions, with communications delegated to the Comms screen.";
+        break;
+    case CrewPosition::commsOnly:
+        text = "<color=#C0C0FF>Comms</>\nDisplays active communications with other entities, as a specialized subset of Relay functions";
+        break;
+    case CrewPosition::shipLog:
+        text = "<color=#C0C0FF>Ship's log</>\nDisplays the ship's log, as a specialized subset of Relay functions";
+        break;
+    case CrewPosition::radarOfficer:
+        text = "<color=#C0C0FF>Radar</>\nDisplays a non-interactive ship's radar at short, long, and sector ranges, as well as of any linked probe, as a specialized subset of Science and Relay functions";
+        break;
+    case CrewPosition::probeCamera:
+        text = "<color=#C0C0FF>Probe camera</>\nDisplays the view from the linked probe's camera, with rotation controls";
+        break;
+    case CrewPosition::targetAnalysis:
+        text = "<color=#C0C0FF>Target analysis</>\nDisplays known information about a target linked to this screen by the Science officer, as a specialized subset of Science functions";
+        break;
+    case CrewPosition::briefing:
+        text = "<color=#C0C0FF>Briefing</>\nDisplays the scenario's missing briefing presentation, if implemented by the scenario";
+        break;
+    case CrewPosition::droneOperations:
+        text = "<color=#C0C0FF>Drone operations</>\nProvides control over linked probes, if the ship has a drone controller and linked drones are within control range";
+        break;
+    default:
+        text = "Select at least one crew screen to play.\nYou can select multiple crew screens and switch between them during the game. You can also select the main screen alongside any other screen, which splits the screen to show the viewscreen if your display's width is sufficient.";
     }
 
     crew_screen_info->setText(text);
