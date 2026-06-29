@@ -64,12 +64,14 @@ public:
 private:
     void disableAllExcept(GuiToggleButton* button);
     void unselectSingleOptions();
+    void setCrewScreenInfo(CrewPosition cp);
 
     int window_index;
     GuiButton* ready_button;
     GuiToggleButton* main_screen_button;
     GuiToggleButton* crew_position_button[static_cast<int>(CrewPosition::MAX)];
     GuiToggleButton* main_screen_controls_button;
+    GuiScrollFormattedText* crew_screen_info;
     GuiToggleButton* window_button;
     GuiTextEntry* window_angle;
     GuiLabel* window_angle_label;

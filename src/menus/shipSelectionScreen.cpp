@@ -167,8 +167,10 @@ public:
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
+    // Draw background decorations.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
     // Easiest place to ensure that positional sound is disabled on crew screen
     // views. As soon as a 3D view is rendered, positional sound is re-enabled.
@@ -218,7 +220,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
-    // Helper: attach a single-text tooltip to a button.
+    // Attach a single-text tooltip to a button.
     auto addTooltip = [](GuiElement* btn, const string& id, const string& text)
     {
         (new GuiTextTooltip(btn, id, text, 20.0f))
@@ -737,7 +739,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         {
             if (game_server || last_selection_index == index || player_ship_list->entryCount() == 1)
                 joinPlayerShip(value);
-                
+
             last_selection_index = index;
         }
     );
@@ -1037,7 +1039,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
-    auto create_crew_position_button = [this](GuiElement* standard_crew_panel, int n)
+    auto createCrewPositionButton = [this](GuiElement* standard_crew_panel, int n)
     {
         auto cp = CrewPosition(n);
         auto button = new GuiToggleButton(standard_crew_panel, "", getCrewPositionName(cp),
@@ -1045,19 +1047,22 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
             {
                 my_player_info->commandSetCrewPosition(window_index, cp, value);
                 unselectSingleOptions();
+                setCrewScreenInfo(cp);
             }
         );
         button
             ->setValue(static_cast<size_t>(window_index) < my_player_info->crew_positions.size() && my_player_info->crew_positions[window_index].has(cp))
             ->setIcon(getCrewPositionIcon(cp))
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
         crew_position_button[n] = button;
 
         return button;
     };
+
     for (int n = 0; n <= int(CrewPosition::relayOfficer); n++)
     {
-        create_crew_position_button(standard_crew_panel, n);
+        createCrewPositionButton(standard_crew_panel, n);
         standard_crew_panel
             ->setSize(standard_crew_panel->getSize() + glm::vec2(0.0f, GuiElement::GuiSizeRow));
     }
@@ -1065,7 +1070,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     // 4/3/1 player crew panel
     for (int n = int(CrewPosition::tacticalOfficer); n <= int(CrewPosition::singlePilot); n++)
     {
-        create_crew_position_button(limited_crew_panel, n);
+        createCrewPositionButton(limited_crew_panel, n);
         limited_crew_panel->setSize(limited_crew_panel->getSize() + glm::vec2(0.0f, GuiElement::GuiSizeRow));
     }
 
@@ -1159,14 +1164,14 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     for (int n = static_cast<int>(CrewPosition::singlePilot) + 1; n < static_cast<int>(CrewPosition::MAX); n++)
-        create_crew_position_button(alternative_scroll, n);
+        createCrewPositionButton(alternative_scroll, n);
 
     // Right column
     // Info text panel
-    auto station_info = new GuiScrollFormattedText(right_container, "STATION_INFO",
-        tr("You can select multiple stations and switch between them during the game.\nIf mainscreen is selected alongside stations, it will be shown next to the current station (if the total screen size is wide enough).")
+    crew_screen_info = new GuiScrollFormattedText(right_container, "CREW_SCREEN_INFO",
+        tr("Select at least one crew screen to play.\nYou can select multiple crew screens and switch between them during the game.")
     );
-    station_info
+    crew_screen_info
         ->setSize(GuiElement::GuiSizeMax, 325.0f)
         ->setAttribute("margin", "0, 0, 0, 20");
 
@@ -1211,7 +1216,7 @@ void CrewPositionSelection::onUpdate()
         {
             std::vector<string> players;
 
-            foreach(PlayerInfo, i, player_info_list)
+            foreach (PlayerInfo, i, player_info_list)
             {
                 if (i->ship == my_spaceship && i->hasPosition(cp))
                     players.push_back(i->name);
@@ -1251,13 +1256,16 @@ void CrewPositionSelection::disableAllExcept(GuiToggleButton* button)
             my_player_info->commandSetCrewPosition(window_index, CrewPosition(n), false);
         }
     }
+
     if (main_screen_button != button)
     {
         main_screen_button->setValue(false);
         my_player_info->commandSetMainScreen(window_index, false);
     }
+
     if (main_screen_controls_button != button)
         main_screen_controls_button->setValue(false);
+
     if (window_button != button)
         window_button->setValue(false);
 }
@@ -1265,6 +1273,19 @@ void CrewPositionSelection::disableAllExcept(GuiToggleButton* button)
 void CrewPositionSelection::unselectSingleOptions()
 {
     window_button->setValue(false);
+}
+
+void CrewPositionSelection::setCrewScreenInfo(CrewPosition cp)
+{
+    string text = "";
+    switch (cp)
+    {
+    case CrewPosition::helmsOfficer:
+        crew_screen_info->setText("helms");
+        break;
+    }
+
+    crew_screen_info->setText(text);
 }
 
 void CrewPositionSelection::spawnUI(RenderLayer* render_layer)
@@ -1288,19 +1309,27 @@ void CrewPositionSelection::spawnUI(RenderLayer* render_layer)
 SecondMonitorScreen::SecondMonitorScreen(int monitor_index)
 : GuiCanvas(window_render_layers[monitor_index]), monitor_index(monitor_index)
 {
+    // Draw background decorations only.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 }
 
 void SecondMonitorScreen::update(float delta)
 {
-    if (!crew_position_selection && my_player_info && my_spaceship) {
-        crew_position_selection = new CrewPositionSelection(this, "", monitor_index, nullptr, [this](){
-            crew_position_selection->spawnUI(getRenderLayer());
-            destroy();
-        });
+    if (!crew_position_selection && my_player_info && my_spaceship)
+    {
+        crew_position_selection = new CrewPositionSelection(this, "", monitor_index, nullptr,
+            [this]()
+            {
+                crew_position_selection->spawnUI(getRenderLayer());
+                destroy();
+            }
+        );
     }
-    if (crew_position_selection && (!my_player_info || !my_spaceship)) {
+
+    if (crew_position_selection && (!my_player_info || !my_spaceship))
+    {
         crew_position_selection->destroy();
         crew_position_selection = nullptr;
     }
