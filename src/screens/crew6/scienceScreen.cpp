@@ -8,15 +8,20 @@
 #include "crewPositionRequirements.h"
 
 #include "components/beamweapon.h"
+#include "components/beamWeaponTarget.h"
 #include "components/customshipfunction.h"
 #include "components/utilityBeam.h"
 #include "components/shields.h"
 #include "components/hull.h"
 #include "components/collision.h"
+#include "components/missile.h"
 #include "components/radar.h"
 #include "components/drone.h"
 #include "components/scanning.h"
 #include "components/name.h"
+#include "components/target.h"
+
+#include "ecs/query.h"
 
 #include "systems/radarblock.h"
 
@@ -488,6 +493,26 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     // Scanning dialog.
     scanning_dialog = new GuiScanningDialog(this, "SCANNING_DIALOG");
+
+    missile_threat_label = new GuiLabel(this, "MISSILE_THREAT_LABEL", tr("scienceThreat", "Missile"), 30.0f);
+    missile_threat_label
+        ->setAlignment(sp::Alignment::Center)
+        ->addBackground()
+        ->setTextColor(glm::u8vec4(255, 0, 0, 255))
+        ->setBackgroundColor(glm::u8vec4(255, 0, 0, 255))
+        ->setPosition(20.0f, -25.0f, sp::Alignment::CenterLeft)
+        ->setSize(150.0f, GuiElement::GuiSizeRow)
+        ->hide();
+
+    beam_threat_label = new GuiLabel(this, "BEAM_THREAT_LABEL", tr("scienceThreat", "Beam"), 30.0f);
+    beam_threat_label
+        ->setAlignment(sp::Alignment::Center)
+        ->addBackground()
+        ->setTextColor(glm::u8vec4(255, 0, 0, 255))
+        ->setBackgroundColor(glm::u8vec4(255, 0, 0, 255))
+        ->setPosition(20.0f, 25.0f, sp::Alignment::CenterLeft)
+        ->setSize(150.0f, GuiElement::GuiSizeRow)
+        ->hide();
 }
 
 static float calculateSignalError(float signal)
@@ -986,6 +1011,67 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     {
         target_entity = {};
     }
+
+    // Show threat indicators only when the science radar is the active view
+    // (i.e. radar view mode and probe view is off).
+    const bool science_radar_active = view_mode_selection->getSelectionIndex() == 0
+        && !probe_view_button->getValue();
+
+    bool missile_threat = false;
+    bool beam_threat = false;
+
+    if (science_radar_active && my_spaceship)
+    {
+        for (auto [entity, homing] : sp::ecs::Query<MissileHoming>())
+        {
+            if (homing.target == my_spaceship)
+            {
+                missile_threat = true;
+                break;
+            }
+        }
+
+        if (auto my_transform = my_spaceship.getComponent<sp::Transform>())
+        {
+            for (auto [entity, beamsys, transform] : sp::ecs::Query<BeamWeaponSys, sp::Transform>())
+            {
+                sp::ecs::Entity beam_target;
+                if (auto bt = entity.getComponent<BeamWeaponTarget>())
+                    beam_target = bt->entity;
+                else if (auto t = entity.getComponent<Target>())
+                    beam_target = t->entity;
+
+                if (beam_target != my_spaceship)
+                    continue;
+
+                for (const auto& mount : beamsys.mounts)
+                {
+                    if (mount.range <= 0.0f)
+                        continue;
+                    auto mount_world = transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation());
+                    float distance = glm::length(my_transform->getPosition() - mount_world);
+                    if (auto physics = entity.getComponent<sp::Physics>())
+                        distance -= physics->getSize().x;
+                    if (distance < mount.range)
+                    {
+                        beam_threat = true;
+                        break;
+                    }
+                }
+                if (beam_threat) break;
+            }
+        }
+    }
+
+    if (missile_threat)
+        missile_threat_label->show();
+    else
+        missile_threat_label->hide();
+
+    if (beam_threat)
+        beam_threat_label->show();
+    else
+        beam_threat_label->hide();
 }
 
 void ScienceScreen::onUpdate()

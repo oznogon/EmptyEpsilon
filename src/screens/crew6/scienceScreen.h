@@ -86,6 +86,9 @@ public:
     sp::ecs::Entity target_entity;
     GuiListbox* view_mode_selection;
 
+    GuiLabel* missile_threat_label;
+    GuiLabel* beam_threat_label;
+
     ScienceScreen(GuiContainer* owner, CrewPosition crew_position=CrewPosition::scienceOfficer);
 
     virtual void onDraw(sp::RenderTarget& target) override;

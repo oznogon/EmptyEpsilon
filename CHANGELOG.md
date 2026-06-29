@@ -15,6 +15,7 @@
 - GuiElement constants for consistent row, label, and padding/margin sizes
 - GuiButtonTweak for onDraw status updates
 - Client latency simulation controls for servers
+- Science screen incoming-threat indicators: "Missile" and "Beam" panels visible on the science radar when an entity's homing missile or in-range beam weapon is targeting the player
 
 ### Changed
 
