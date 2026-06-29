@@ -226,7 +226,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         ->setMargins(20.0f);
 
     // Chat comms free-text message entry.
-    GuiElement* chat_comms_message_row = new GuiElement(comms_dialog_box, "COMMS_CHAT_MESSAGE_ROW");
+    chat_comms_message_row = new GuiElement(comms_dialog_box, "COMMS_CHAT_MESSAGE_ROW");
     chat_comms_message_row
         ->setMargins(20.0f)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
@@ -311,8 +311,7 @@ void GuiCommsOverlay::onUpdate()
         opening_box->setVisible(is_opening && !comms_minimized);
         hailed_box->setVisible(is_hailed && !comms_minimized);
         comms_dialog_box->setVisible((is_open || is_script) && !comms_minimized);
-        chat_comms_message_entry->setVisible(is_open);
-        chat_comms_send_button->setVisible(is_open);
+        chat_comms_message_row->setVisible(is_open);
 
         if (is_open)
             comms_dialog_text->enableAutoScrollDown();

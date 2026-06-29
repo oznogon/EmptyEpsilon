@@ -2,14 +2,14 @@
 
 #include "gui/gui2_element.h"
 
+class GuiButton;
+class GuiLabel;
+class GuiListbox;
 class GuiPanel;
 class GuiProgressbar;
-class GuiButton;
-class GuiToggleButton;
-class GuiLabel;
 class GuiScrollFormattedText;
-class GuiListbox;
 class GuiTextEntry;
+class GuiToggleButton;
 
 class GuiCommsOverlay : public GuiElement
 {
@@ -32,6 +32,7 @@ private:
     GuiPanel* comms_dialog_box;
     GuiLabel* comms_dialog_title_label;
     GuiScrollFormattedText* comms_dialog_text;
+    GuiElement* chat_comms_message_row;
     GuiTextEntry* chat_comms_message_entry;
     GuiButton* chat_comms_send_button;
     GuiListbox* script_comms_options;
