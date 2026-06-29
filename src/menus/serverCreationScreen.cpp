@@ -369,7 +369,12 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
         {
             ScenarioInfo info(value);
             description_text->setText(info.description);
-            start_button->enable();
+            start_button
+                ->setText(info.settings.empty()
+                    ? tr("Start scenario")
+                    : tr("Configure scenario")
+                )
+                ->enable();
         }
     );
     scenario_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -460,7 +465,12 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
                     scenario_list->setSelectionIndex(n);
                     scenario_list->scrollTo(n);
                     description_text->setText(info.description);
-                    start_button->enable();
+                    start_button
+                        ->setText(info.settings.empty()
+                            ? tr("Start scenario")
+                            : tr("Configure scenario")
+                        )
+                        ->enable();
                     break;
                 }
             }
@@ -480,7 +490,9 @@ void ServerScenarioSelectionScreen::loadScenarioList(const string& category)
     for (const auto& info : ScenarioInfo::getScenarios(category))
         scenario_list->addEntry(info.name, info.filename);
 
-    start_button->disable();
+    start_button
+        ->setText(tr("Start scenario"))
+        ->disable();
     description_text->setText(tr("Select a scenario..."));
 }
 
