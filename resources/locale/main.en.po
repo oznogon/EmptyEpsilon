@@ -1,116 +1,116 @@
 #: src/playerInfo.cpp:2119
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Helms"
 msgstr ""
 
 #: src/playerInfo.cpp:2120
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Weapons"
 msgstr ""
 
 #: src/playerInfo.cpp:2121
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Engineering"
 msgstr ""
 
 #: src/playerInfo.cpp:2122
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Science"
 msgstr ""
 
 #: src/playerInfo.cpp:2123
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Relay"
 msgstr ""
 
 #: src/playerInfo.cpp:2124
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Tactical"
 msgstr ""
 
 #: src/playerInfo.cpp:2125
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Engineering+"
 msgstr ""
 
 #: src/playerInfo.cpp:2126
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Operations"
 msgstr ""
 
 #: src/playerInfo.cpp:2127
-msgctxt "station"
-msgid "Single Pilot"
+msgctxt "crew_screen"
+msgid "Single pilot"
 msgstr ""
 
 #: src/playerInfo.cpp:2128
-msgctxt "station"
-msgid "Damage Control"
+msgctxt "crew_screen"
+msgid "Damage control"
 msgstr ""
 
 #: src/playerInfo.cpp:2129
-msgctxt "station"
-msgid "Power Management"
+msgctxt "crew_screen"
+msgid "Power management"
 msgstr ""
 
 #: src/playerInfo.cpp:2130
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Database"
 msgstr ""
 
 #: src/playerInfo.cpp:2131
-msgctxt "station"
-msgid "Docking Bay"
+msgctxt "crew_screen"
+msgid "Docking bay"
 msgstr ""
 
 #: src/playerInfo.cpp:2132
-msgctxt "station"
-msgid "Strategic Map"
+msgctxt "crew_screen"
+msgid "Strategic map"
 msgstr ""
 
 #: src/playerInfo.cpp:2133
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Comms"
 msgstr ""
 
 #: src/playerInfo.cpp:2134
-msgctxt "station"
-msgid "Beam Weapons"
+msgctxt "crew_screen"
+msgid "Beam weapons"
 msgstr ""
 
 #: src/playerInfo.cpp:2135
-msgctxt "station"
-msgid "Missile Weapons"
+msgctxt "crew_screen"
+msgid "Missile weapons"
 msgstr ""
 
 #: src/playerInfo.cpp:2136
-msgctxt "station"
-msgid "Ship's Log"
+msgctxt "crew_screen"
+msgid "Ship's log"
 msgstr ""
 
 #: src/playerInfo.cpp:2137
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Radar"
 msgstr ""
 
 #: src/playerInfo.cpp:2138
-msgctxt "station"
-msgid "Probe Camera"
+msgctxt "crew_screen"
+msgid "Probe camera"
 msgstr ""
 
 #: src/playerInfo.cpp:2139
-msgctxt "station"
-msgid "Target Analysis"
+msgctxt "crew_screen"
+msgid "Target analysis"
 msgstr ""
 
 #: src/playerInfo.cpp:2140
-msgctxt "station"
+msgctxt "crew_screen"
 msgid "Briefing"
 msgstr ""
 
 #: src/playerInfo.cpp:2141
-msgctxt "station"
-msgid "Drone Operations"
+msgctxt "crew_screen"
+msgid "Drone operations"
 msgstr ""
 
 #: src/missileWeaponData.cpp:110
@@ -6620,7 +6620,7 @@ msgstr ""
 
 #: src/components/shipsystem.cpp:128
 msgctxt "system"
-msgid "Beam Weapons"
+msgid "Beam weapons"
 msgstr ""
 
 #: src/components/shipsystem.cpp:129
@@ -6665,7 +6665,7 @@ msgstr ""
 
 #: src/components/shipsystem.cpp:137
 msgctxt "system"
-msgid "Docking Bay"
+msgid "Docking bay"
 msgstr ""
 
 #: src/components/shipsystem.cpp:138
