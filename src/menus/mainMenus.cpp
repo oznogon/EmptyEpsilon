@@ -80,9 +80,9 @@ MainMenu::MainMenu()
         [this]()
         {
             new EpsilonServer(defaultServerPort);
-            if (game_server)
+            if (game_server.isAlive())
             {
-                gameGlobalInfo->startScenario("scenario_10_empty.lua");
+                gameGlobalInfo->startScenario("scenario_90_empty_space.lua");
 
                 my_player_info->commandSetShip({});
                 destroy();

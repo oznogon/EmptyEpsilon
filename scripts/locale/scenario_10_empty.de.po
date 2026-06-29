@@ -29,17 +29,17 @@ msgstr ""
 "einzurichten. Mit der Taste F5 kann das aktuelle Layout in die "
 "Zwischenablage kopiert werden, um es in Szenarioskripts zu verwenden."
 
-#: scripts/scenario_10_empty.lua:102
+#: scripts/scenario_90_empty_space.lua:102
 msgctxt "buttonGM"
 msgid "Reset to asteroids"
 msgstr ""
 
-#: scripts/scenario_10_empty.lua:113
+#: scripts/scenario_90_empty_space.lua:113
 msgctxt "buttonGM"
 msgid "Reset to nebulae"
 msgstr ""
 
-#: scripts/scenario_10_empty.lua:123
+#: scripts/scenario_90_empty_space.lua:123
 msgctxt "buttonGM"
 msgid "Delete unselected"
 msgstr ""

@@ -3,7 +3,7 @@
 -- Type: Development
 
 --- Scenario
--- @script scenario_10_empty
+-- @script scenario_90_empty_space
 
 -- Add functions from utils.lua, particularly isObjectType()
 require("utils.lua")
