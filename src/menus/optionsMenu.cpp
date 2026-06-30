@@ -582,8 +582,8 @@ void OptionsMenu::setupGraphicsOptions()
         }
     ))
         ->setOptions({
-            tr("options", "Line rendering: Quads (High quality)"),
-            tr("options", "Line rendering: GL (Low quality)"
+            tr("options", "Line rendering: GL (Low quality)"),
+            tr("options", "Line rendering: Quads (High quality)"
         )})
         ->setSelectionIndex(line_mode_index)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
