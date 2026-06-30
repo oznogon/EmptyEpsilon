@@ -1,3 +1,4 @@
+# display_name: Bebas Neue
 # Bebas Neue font theme.
 # This theme overrides only the font properties of the default theme.
 # The `inherit: default` property is implied.

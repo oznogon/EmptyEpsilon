@@ -174,6 +174,28 @@ void OptionsMenu::setTabOptions()
         ->setSelectionIndex(old_index);
 }
 
+static string getThemeDisplayName(const string& theme_name)
+{
+    auto stream = getResourceStream("gui/" + theme_name + ".theme.txt");
+    if (stream)
+    {
+        string line = stream->readLine();
+        while (!line.empty())
+        {
+            line = line.strip();
+            if (line.startswith("# display_name:"))
+            {
+                string display_name = line.substr(strlen("# display_name:")).strip();
+                if (!display_name.empty())
+                    return display_name;
+                break;
+            }
+            line = stream->readLine();
+        }
+    }
+    return theme_name;
+}
+
 static string getLanguageDisplayName(const string& code)
 {
     static std::unordered_map<string, string> msgids = {
@@ -276,6 +298,11 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             exit(1);
         }
 
+        std::vector<string> theme_display_names;
+        theme_display_names.reserve(themes.size());
+        for (const auto& t : themes)
+            theme_display_names.push_back(getThemeDisplayName(t));
+
         int default_index = 0;
         auto default_elem = std::find(themes.begin(), themes.end(), PreferencesManager::get("guitheme", "default"));
 
@@ -299,7 +326,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                     PreferencesManager::set("guitheme", theme_name);
                 }
             ))
-                ->setOptions(themes)
+                ->setOptions(theme_display_names, themes)
                 ->setSelectionIndex(default_index)
                 ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
