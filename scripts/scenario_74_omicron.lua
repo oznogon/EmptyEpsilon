@@ -8,7 +8,7 @@
 --- Version 1
 ---
 --- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience levels are welcome. 
--- Type: Replayable Mission
+-- Type: Replayable
 -- Author: Xansta
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
 -- Enemies[Easy]: Fewer or weaker enemies

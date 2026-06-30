@@ -2,7 +2,7 @@
 -- Description: War temperature rises along the border between Human Navy space and Kraylor space. The treaty holds for now, but the diplomats and intelligence operatives fear the Kraylors are about to break the treaty. We must maintain the treaty despite provocation until war is formally declared.
 ---
 --- Version 5
--- Type: Replayable Mission
+-- Type: Replayable
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
 -- Enemies[Easy]: Fewer or weaker enemies
 -- Enemies[Normal|Default]: Normal number or strength of enemies

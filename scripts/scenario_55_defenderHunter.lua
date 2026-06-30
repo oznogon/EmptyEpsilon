@@ -8,7 +8,7 @@
 --- Version 11
 ---
 --- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one almost every weekend. All experience levels are welcome. 
--- Type: Replayable Mission
+-- Type: Replayable
 -- Setting[Enemies]: Configures the number and type of enemies
 -- Enemies[Easy]: Fewer and/or weaker enemy ships
 -- Enemies[Normal|Default]: Normal difficulty

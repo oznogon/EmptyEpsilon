@@ -5,7 +5,7 @@
 --- Version 5
 ---
 --- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome. 
--- Type: Replayable Mission
+-- Type: Replayable
 -- Author: Xansta
 -- Setting[Enemies]: Configures the amount/strength of enemies spawned in the scenario.
 -- Enemies[Easy]: Weaker/fewer enemies.

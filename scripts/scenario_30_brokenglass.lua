@@ -7,7 +7,7 @@
 ---Author: Chris Sibbitt. Revisions: Xansta, Muerte Jan2023
 ---Created: Dec2022
 ---Feedback: USN Discord: https://discord.gg/7Kr32ezJFF
--- Type: Replayable Mission
+-- Type: Replayable
 -- Setting[Difficulty]: Configures the difficulty in the scenario. Default is Easy
 -- Difficulty[Easy|Default]: Minor enemy resistance and easier missions.
 -- Difficulty[Medium]: More robust resistance with more risk (takes longer).

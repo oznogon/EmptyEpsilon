@@ -6,7 +6,7 @@
 --- Version 1
 ---
 --- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome. 
--- Type: Replayable Mission
+-- Type: Replayable
 -- Author: Xansta
 -- Setting[Swarm]: Configures the size of the swarm
 -- Swarm[Tiny]: Tiny sized swarm

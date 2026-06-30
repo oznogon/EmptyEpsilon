@@ -4,7 +4,7 @@
 --- Version 2 - Nov2024
 ---
 --- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one nearly every weekend. All experience levels are welcome. 
--- Type: Replayable Mission
+-- Type: Replayable
 -- Setting[Murphy]: Configures how the odds are stacked against you - Murphy's law.
 -- Murphy[Easy]: Murphy generally smiles on you
 -- Murphy[Normal|Default]: The normal distribution of the odds against you

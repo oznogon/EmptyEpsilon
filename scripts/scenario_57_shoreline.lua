@@ -4,7 +4,7 @@
 --- Maximum of 8 player ships supported by scenario. More player ships may experience strange results
 ---
 --- Version 2
--- Type: Replayable Mission
+-- Type: Replayable
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
 -- Enemies[Easy]: Fewer or weaker enemies
 -- Enemies[Normal|Default]: Normal number or strength of enemies

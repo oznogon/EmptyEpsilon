@@ -3,7 +3,7 @@
 ---
 --- Version 1
 -- Type: Mission
--- Type: Replayable Mission
+-- Type: Replayable
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
 -- Enemies[Easy]: Fewer or weaker enemies
 -- Enemies[Normal|Default]: Normal number or strength of enemies

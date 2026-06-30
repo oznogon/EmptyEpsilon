@@ -9410,7 +9410,7 @@ msgstr ""
 #~ msgstr "Mission"
 
 #~ msgctxt "category"
-#~ msgid "Replayable Mission"
+#~ msgid "Replayable"
 #~ msgstr "Mission rejouable"
 
 #~ msgctxt "category"

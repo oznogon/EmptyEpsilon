@@ -4,7 +4,7 @@
 --- Designed for one or more player ships. The terrain differs slightly every time the scenario is run. Default length: 30 minutes. May be shortened to 15 minutes or lengthened to an hour.
 ---
 --- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
--- Type: Replayable Mission
+-- Type: Replayable
 -- Author: Xansta
 -- Setting[First]: Configures how long until the first major event occurs. The default is ten minutes. Shorter is harder. Longer is easier.
 -- First[Five]: Five minutes until the first major event occurs.

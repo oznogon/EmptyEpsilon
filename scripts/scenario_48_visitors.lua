@@ -21,7 +21,7 @@
 --- Stephen Priddy
 --- 
 --- Version 2
--- Type: Replayable Mission
+-- Type: Replayable
 -- Setting[Enemies]: Configures the strength of the enemies
 -- Enemies[Easy]: Enemies are weaker or fewer than normal
 -- Enemies[Normal|Default]: Enemies are normal strength

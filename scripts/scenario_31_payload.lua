@@ -7,7 +7,7 @@
 --- Author: Chris Sibbitt and Crew
 --- Created: Jan2025
 --- Feedback: USN Discord: https://discord.gg/7Kr32ezJFF
--- Type: Replayable Mission
+-- Type: Replayable
 -- Setting[WaveRandomNess]: Random variation in wave timing. Default is 0.25
 -- WaveRandomNess[0]: Random variation in wave timing.
 -- WaveRandomNess[0.1]: Random variation in wave timing.
