@@ -289,7 +289,7 @@ msgid "Join game"
 msgstr "Rejoindre la partie"
 
 #: src/menus/serverBrowseMenu.cpp:59 src/menus/mainMenus.cpp:263
-#: src/menus/tutorialMenu.cpp:100 src/menus/optionsMenu.cpp:126
+#: src/menus/tutorialMenu.cpp:100 src/menus/optionsMenu.cpp:123
 #: src/menus/hotkeyMenu.cpp:101 src/gui/hotkeyBinder.cpp:449
 msgctxt "button"
 msgid "Back"
@@ -396,23 +396,23 @@ msgctxt "Credits"
 msgid "Localizations"
 msgstr "Localisations"
 
-#: src/menus/mainMenus.cpp:199
-msgctxt "Credits"
+#: src/menus/mainMenus.cpp:199 src/menus/optionsMenu.cpp:204
+msgctxt "language_name"
 msgid "French"
 msgstr "Français"
 
-#: src/menus/mainMenus.cpp:203
-msgctxt "Credits"
+#: src/menus/mainMenus.cpp:203 src/menus/optionsMenu.cpp:202
+msgctxt "language_name"
 msgid "German"
 msgstr "Allemand"
 
-#: src/menus/mainMenus.cpp:207
-msgctxt "Credits"
+#: src/menus/mainMenus.cpp:207 src/menus/optionsMenu.cpp:201
+msgctxt "language_name"
 msgid "Czech"
 msgstr "Tchèque"
 
-#: src/menus/mainMenus.cpp:209
-msgctxt "Credits"
+#: src/menus/mainMenus.cpp:209 src/menus/optionsMenu.cpp:205
+msgctxt "language_name"
 msgid "Italian"
 msgstr "Italien"
 
@@ -519,8 +519,7 @@ msgstr "Annuler le serveur"
 msgid "Start server"
 msgstr "Démarrer le serveur"
 
-#: src/menus/serverCreationScreen.cpp:254
-#: src/menus/shipSelectionScreen.cpp:603
+#: src/menus/serverCreationScreen.cpp:254 src/menus/shipSelectionScreen.cpp:603
 msgid "Close"
 msgstr "Retour"
 
@@ -588,185 +587,191 @@ msgstr "Tutoriels"
 msgid "Start tutorial"
 msgstr "Démarrer le tutoriel"
 
-#: src/menus/optionsMenu.cpp:54
+#: src/menus/optionsMenu.cpp:55
 msgctxt "title"
 msgid "Options"
 msgstr "Options"
 
-#: src/menus/optionsMenu.cpp:70
-msgid "Graphics"
-msgstr "Graphismes"
-
-#: src/menus/optionsMenu.cpp:71
-msgid "Audio"
-msgstr "Audio"
-
-#: src/menus/optionsMenu.cpp:72
-msgid "Interface"
-msgstr "Interface"
-
-#: src/menus/optionsMenu.cpp:145
+#: src/menus/optionsMenu.cpp:142
 msgctxt "options"
 msgid "Save options"
 msgstr "Enregistrer les options"
 
-#: src/menus/optionsMenu.cpp:173
+#: src/menus/optionsMenu.cpp:168
+msgid "Graphics"
+msgstr "Graphismes"
+
+#: src/menus/optionsMenu.cpp:169
+msgid "Audio"
+msgstr "Audio"
+
+#: src/menus/optionsMenu.cpp:170
+msgid "Interface"
+msgstr "Interface"
+
+#: src/menus/optionsMenu.cpp:203
+msgctxt "language_name"
+msgid "English"
+msgstr "Anglais"
+
+#: src/menus/optionsMenu.cpp:249
 msgid "Language"
 msgstr "Langue"
 
-#: src/menus/optionsMenu.cpp:206 src/menus/optionsMenu.cpp:269
+#: src/menus/optionsMenu.cpp:295 src/menus/optionsMenu.cpp:363
 msgid "Click Back to apply change"
 msgstr "Cliquez sur Retour pour appliquer le changement"
 
-#: src/menus/optionsMenu.cpp:251
+#: src/menus/optionsMenu.cpp:345
 msgid "Interface theme"
 msgstr "Thème de l'interface"
 
-#: src/menus/optionsMenu.cpp:276
+#: src/menus/optionsMenu.cpp:370
 msgid "Control options"
 msgstr "Options de contrôle"
 
-#: src/menus/optionsMenu.cpp:281 src/menus/hotkeyMenu.cpp:77
+#: src/menus/optionsMenu.cpp:375 src/menus/hotkeyMenu.cpp:77
 msgid "Configure controls"
 msgstr "Configurer les contrôles"
 
-#: src/menus/optionsMenu.cpp:291
+#: src/menus/optionsMenu.cpp:385
 msgctxt "tooltips"
 msgid "Show tooltips"
 msgstr "Afficher les info-bulles"
 
-#: src/menus/optionsMenu.cpp:308
+#: src/menus/optionsMenu.cpp:402
 msgid "Radar rotation lock"
 msgstr "Verrouillage de la rotation du radar"
 
-#: src/menus/optionsMenu.cpp:318
+#: src/menus/optionsMenu.cpp:412
 msgctxt "radar_locks"
 msgid "Helms, tactical, single pilot"
-msgstr "Navigation, radar tactique,\npilotage-armement"
+msgstr ""
+"Navigation, radar tactique,\n"
+"pilotage-armement"
 
-#: src/menus/optionsMenu.cpp:322 src/menus/optionsMenu.cpp:331
-#: src/menus/optionsMenu.cpp:339 src/menus/optionsMenu.cpp:358
-#: src/menus/optionsMenu.cpp:365 src/menus/optionsMenu.cpp:385
-#: src/menus/optionsMenu.cpp:392
+#: src/menus/optionsMenu.cpp:416 src/menus/optionsMenu.cpp:425
+#: src/menus/optionsMenu.cpp:433 src/menus/optionsMenu.cpp:452
+#: src/menus/optionsMenu.cpp:459 src/menus/optionsMenu.cpp:479
+#: src/menus/optionsMenu.cpp:486
 msgctxt "radar_locks"
 msgid "Ship rotates"
 msgstr "Rotation du vaisseau"
 
-#: src/menus/optionsMenu.cpp:330 src/menus/optionsMenu.cpp:338
-#: src/menus/optionsMenu.cpp:358 src/menus/optionsMenu.cpp:364
-#: src/menus/optionsMenu.cpp:385 src/menus/optionsMenu.cpp:391
+#: src/menus/optionsMenu.cpp:424 src/menus/optionsMenu.cpp:432
+#: src/menus/optionsMenu.cpp:452 src/menus/optionsMenu.cpp:458
+#: src/menus/optionsMenu.cpp:479 src/menus/optionsMenu.cpp:485
 msgctxt "radar_locks"
 msgid "Radar rotates"
 msgstr "Rotation du radar"
 
-#: src/menus/optionsMenu.cpp:348
+#: src/menus/optionsMenu.cpp:442
 msgctxt "radar_locks"
 msgid "Weapons"
 msgstr "Armement"
 
-#: src/menus/optionsMenu.cpp:353 src/menus/optionsMenu.cpp:379
+#: src/menus/optionsMenu.cpp:447 src/menus/optionsMenu.cpp:473
 msgctxt "radar_locks"
 msgid "Lock"
 msgstr "Verrouillage"
 
-#: src/menus/optionsMenu.cpp:374
+#: src/menus/optionsMenu.cpp:468
 msgctxt "radar_locks"
 msgid "Science, operations"
 msgstr "Science, opérations"
 
-#: src/menus/optionsMenu.cpp:396
+#: src/menus/optionsMenu.cpp:490
 msgid "Cinematic view options"
 msgstr "Options de la vue cinématique"
 
-#: src/menus/optionsMenu.cpp:412 src/menus/optionsMenu.cpp:422
+#: src/menus/optionsMenu.cpp:506 src/menus/optionsMenu.cpp:516
 msgid "Mouselook sensitivity: {s}"
 msgstr "Sensibilité souris : {s}"
 
-#: src/menus/optionsMenu.cpp:428
+#: src/menus/optionsMenu.cpp:522
 msgid "Randomize cinematic fly-by angles"
 msgstr "Angles de passage aléatoires en mode cinématique"
 
-#: src/menus/optionsMenu.cpp:441
+#: src/menus/optionsMenu.cpp:535
 msgid "Toggle fullscreen/windowed mode"
 msgstr "Basculer en mode plein écran/fenêtré"
 
-#: src/menus/optionsMenu.cpp:480
+#: src/menus/optionsMenu.cpp:574
 msgid "Full-screen antialiasing: Off"
 msgstr "Anticrénelage plein écran : Désactivé"
 
-#: src/menus/optionsMenu.cpp:481
+#: src/menus/optionsMenu.cpp:575
 msgid "Full-screen antialiasing: 2x"
 msgstr "Anticrénelage plein écran : 2x"
 
-#: src/menus/optionsMenu.cpp:482
+#: src/menus/optionsMenu.cpp:576
 msgid "Full-screen antialiasing: 4x"
 msgstr "Anticrénelage plein écran : 4x"
 
-#: src/menus/optionsMenu.cpp:483
+#: src/menus/optionsMenu.cpp:577
 msgid "Full-screen antialiasing: 8x"
 msgstr "Anticrénelage plein écran : 8x"
 
-#: src/menus/optionsMenu.cpp:487
+#: src/menus/optionsMenu.cpp:581
 msgid "Restart EmptyEpsilon to apply full-screen antialiasing changes"
-msgstr ""
-"Redémarrer EmptyEpsilon pour appliquer les changements d'anticrénelage"
+msgstr "Redémarrer EmptyEpsilon pour appliquer les changements d'anticrénelage"
 
-#: src/menus/optionsMenu.cpp:509
+#: src/menus/optionsMenu.cpp:603
 msgctxt "options"
 msgid "Line rendering: Quads (High quality)"
 msgstr "Rendu des lignes : Quads (Haute qualité)"
 
-#: src/menus/optionsMenu.cpp:510
+#: src/menus/optionsMenu.cpp:604
 msgctxt "options"
 msgid "Line rendering: GL (Low quality)"
 msgstr "Rendu des lignes : GL (Basse qualité)"
 
-#: src/menus/optionsMenu.cpp:530 src/menus/optionsMenu.cpp:540
+#: src/menus/optionsMenu.cpp:624 src/menus/optionsMenu.cpp:634
 msgid "Field of view: {fov} degrees"
 msgstr "Champ de vision : {fov} degrés"
 
-#: src/menus/optionsMenu.cpp:558 src/menus/optionsMenu.cpp:567
+#: src/menus/optionsMenu.cpp:652 src/menus/optionsMenu.cpp:661
 msgid "Draw distance: {dist}U"
 msgstr "Distance d'affichage : {dist}U"
 
-#: src/menus/optionsMenu.cpp:574
+#: src/menus/optionsMenu.cpp:668
 msgid "Dynamic nebula lighting"
 msgstr "Éclairage dynamique des nébuleuses"
 
-#: src/menus/optionsMenu.cpp:584
+#: src/menus/optionsMenu.cpp:678
 msgid "Nebula fog"
 msgstr "Brouillard de nébuleuse"
 
-#: src/menus/optionsMenu.cpp:602 src/menus/optionsMenu.cpp:612
+#: src/menus/optionsMenu.cpp:696 src/menus/optionsMenu.cpp:706
 msgid "Sound effect volume: {volume}%"
 msgstr "Volume des effets sonores : {volume}%"
 
-#: src/menus/optionsMenu.cpp:619
+#: src/menus/optionsMenu.cpp:713
 msgid "Impulse engine sound"
 msgstr "Son du moteur à impulsion"
 
-#: src/menus/optionsMenu.cpp:633 src/menus/optionsMenu.cpp:678
+#: src/menus/optionsMenu.cpp:727 src/menus/optionsMenu.cpp:772
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: src/menus/optionsMenu.cpp:634 src/menus/optionsMenu.cpp:679
+#: src/menus/optionsMenu.cpp:728 src/menus/optionsMenu.cpp:773
 msgid "Enabled"
 msgstr "Activé"
 
-#: src/menus/optionsMenu.cpp:635 src/menus/optionsMenu.cpp:680
+#: src/menus/optionsMenu.cpp:729 src/menus/optionsMenu.cpp:774
 msgid "Main screen only"
 msgstr "Écran principal uniquement"
 
-#: src/menus/optionsMenu.cpp:645 src/menus/optionsMenu.cpp:655
-#: src/menus/optionsMenu.cpp:690 src/menus/optionsMenu.cpp:700
+#: src/menus/optionsMenu.cpp:739 src/menus/optionsMenu.cpp:749
+#: src/menus/optionsMenu.cpp:784 src/menus/optionsMenu.cpp:794
 msgid "Volume: {volume}%"
 msgstr "Volume : {volume}%"
 
-#: src/menus/optionsMenu.cpp:662
+#: src/menus/optionsMenu.cpp:756
 msgid "Music"
 msgstr "Musique"
 
-#: src/menus/optionsMenu.cpp:715
+#: src/menus/optionsMenu.cpp:809
 msgid "Preview music"
 msgstr "Aperçu musical"
 
@@ -837,8 +842,8 @@ msgid ""
 "without crew screen controls. Requires GM code if set."
 msgstr ""
 "Voir la carte tactique complète en tant que spectateur. Affiche tous les "
-"vaisseaux et objets sans contrôles d'équipage. Nécessite le code MJ s'il est"
-" défini."
+"vaisseaux et objets sans contrôles d'équipage. Nécessite le code MJ s'il est "
+"défini."
 
 #: src/menus/shipSelectionScreen.cpp:364
 msgid "Cinematic view"
@@ -1074,7 +1079,8 @@ msgid ""
 "You can select multiple crew screens and switch between them during the game."
 msgstr ""
 "Sélectionnez au moins un poste d'équipage pour jouer.\n"
-"Vous pouvez sélectionner plusieurs postes et basculer entre eux pendant la partie."
+"Vous pouvez sélectionner plusieurs postes et basculer entre eux pendant la "
+"partie."
 
 #: src/menus/shipSelectionScreen.cpp:1220
 msgid "Crew assignments"
@@ -1135,11 +1141,14 @@ msgstr "Souris"
 
 #: src/menus/hotkeyMenu.cpp:97
 msgid ""
-"Left click: Assign input. Middle click: Add input. Right click: Delete inputs.\n"
+"Left click: Assign input. Middle click: Add input. Right click: Delete "
+"inputs.\n"
 "Possible inputs: Keyboard keys, joystick buttons, joystick axes, mouse axes."
 msgstr ""
-"Clic gauche : attribuer une entrée. Clic milieu : ajouter une entrée. Clic droit : supprimer les entrées.\n"
-"Entrées possibles : touches du clavier, boutons du joystick, axes du joystick, axes de la souris."
+"Clic gauche : attribuer une entrée. Clic milieu : ajouter une entrée. Clic "
+"droit : supprimer les entrées.\n"
+"Entrées possibles : touches du clavier, boutons du joystick, axes du "
+"joystick, axes de la souris."
 
 #: src/menus/hotkeyMenu.cpp:113
 msgid "Bindings reset to defaults"
@@ -2625,8 +2634,7 @@ msgstr "Créer..."
 #: src/screens/gm/gameMasterScreen.cpp:234
 msgctxt "gm_tooltip"
 msgid "Open the object creation menu to spawn new entities."
-msgstr ""
-"Ouvrir le menu de création d'objets pour générer de nouvelles entités."
+msgstr "Ouvrir le menu de création d'objets pour générer de nouvelles entités."
 
 #: src/screens/gm/gameMasterScreen.cpp:243
 msgctxt "button"
@@ -2648,8 +2656,8 @@ msgstr "Copier sélection"
 msgctxt "gm_tooltip"
 msgid "Copy only selected entities as a Lua script to the clipboard."
 msgstr ""
-"Copier uniquement les entités sélectionnées sous forme de script Lua dans le"
-" presse-papiers."
+"Copier uniquement les entités sélectionnées sous forme de script Lua dans le "
+"presse-papiers."
 
 #: src/screens/gm/gameMasterScreen.cpp:266
 msgctxt "gm_tooltip"
@@ -2778,44 +2786,39 @@ msgstr "Position"
 msgid "*mixed*"
 msgstr "*varié*"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:383
-#: src/screens/gm/tweak.cpp:3268
+#: src/screens/gm/limitedGameMasterScreen.cpp:383 src/screens/gm/tweak.cpp:3268
 msgctxt "tweak-tab"
 msgid "Transform"
 msgstr "Transformation"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:386
-#: src/screens/gm/tweak.cpp:3269
+#: src/screens/gm/limitedGameMasterScreen.cpp:386 src/screens/gm/tweak.cpp:3269
 msgctxt "tweak-transform"
 msgid ""
 "Sets the entity's position (X, Y) and rotation angle. Position is in game "
 "units (1000 = 1U), rotation in degrees (0 = right/east-facing/heading 90)."
 msgstr ""
 "Définit la position (X, Y) et l'angle de rotation de l'entité. La position "
-"est en unités de jeu (1000 = 1U), la rotation en degrés (0 = face à "
-"droite/est/cap 90)."
+"est en unités de jeu (1000 = 1U), la rotation en degrés (0 = face à droite/"
+"est/cap 90)."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:387
-#: src/screens/gm/tweak.cpp:3276 src/screens/gm/tweak.cpp:3664
-#: src/screens/gm/tweak.cpp:3689 src/screens/gm/tweak.cpp:3751
+#: src/screens/gm/limitedGameMasterScreen.cpp:387 src/screens/gm/tweak.cpp:3276
+#: src/screens/gm/tweak.cpp:3664 src/screens/gm/tweak.cpp:3689
+#: src/screens/gm/tweak.cpp:3751
 msgctxt "tweak-text"
 msgid "Position:"
 msgstr "Position :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:394
-#: src/screens/gm/tweak.cpp:3318
+#: src/screens/gm/limitedGameMasterScreen.cpp:394 src/screens/gm/tweak.cpp:3318
 msgctxt "tweak-text"
 msgid "Rotation:"
 msgstr "Rotation :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:405
-#: src/screens/gm/tweak.cpp:3343
+#: src/screens/gm/limitedGameMasterScreen.cpp:405 src/screens/gm/tweak.cpp:3343
 msgctxt "tweak-tab"
 msgid "Physics"
 msgstr "Physique"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:407
-#: src/screens/gm/tweak.cpp:3344
+#: src/screens/gm/limitedGameMasterScreen.cpp:407 src/screens/gm/tweak.cpp:3344
 msgctxt "tweak-physics"
 msgid ""
 "If present, this component subjects this entity to physics interactions. "
@@ -2826,8 +2829,8 @@ msgstr ""
 "Définit le type de corps physique (Capteur, Dynamique, Statique), la forme "
 "(Cercle ou Rectangle), la taille, la vitesse et la vitesse angulaire."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:408
-#: src/screens/gm/tweak.cpp:2021 src/screens/gm/tweak.cpp:3348
+#: src/screens/gm/limitedGameMasterScreen.cpp:408 src/screens/gm/tweak.cpp:2021
+#: src/screens/gm/tweak.cpp:3348
 msgctxt "tweak-text"
 msgid "Type:"
 msgstr "Type :"
@@ -2847,14 +2850,12 @@ msgctxt "physics_type"
 msgid "Static"
 msgstr "Statique"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:421
-#: src/screens/gm/tweak.cpp:3455
+#: src/screens/gm/limitedGameMasterScreen.cpp:421 src/screens/gm/tweak.cpp:3455
 msgctxt "tweak-text"
 msgid "Velocity:"
 msgstr "Vitesse :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:429
-#: src/screens/gm/tweak.cpp:3470
+#: src/screens/gm/limitedGameMasterScreen.cpp:429 src/screens/gm/tweak.cpp:3470
 msgctxt "tweak-text"
 msgid "Angular velocity:"
 msgstr "Vitesse angulaire :"
@@ -2864,20 +2865,17 @@ msgctxt "tweak-tab"
 msgid "CallSign"
 msgstr "Indicatif"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:443
-#: src/screens/gm/tweak.cpp:3486
+#: src/screens/gm/limitedGameMasterScreen.cpp:443 src/screens/gm/tweak.cpp:3486
 msgctxt "tweak-callsign"
 msgid "The callsign displayed on radar views and in communications."
 msgstr "L'indicatif affiché sur les vues radar et dans les communications."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:444
-#: src/screens/gm/tweak.cpp:3487
+#: src/screens/gm/limitedGameMasterScreen.cpp:444 src/screens/gm/tweak.cpp:3487
 msgctxt "tweak-text"
 msgid "Callsign:"
 msgstr "Indicatif :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:456
-#: src/screens/gm/tweak.cpp:3960
+#: src/screens/gm/limitedGameMasterScreen.cpp:456 src/screens/gm/tweak.cpp:3960
 msgctxt "tweak-tab"
 msgid "Faction"
 msgstr "Faction"
@@ -2891,14 +2889,12 @@ msgstr ""
 "La faction à laquelle appartient cette entité. La faction d'une entité "
 "détermine quelles entités sont amies, neutres ou hostiles."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:464
-#: src/screens/gm/tweak.cpp:3962
+#: src/screens/gm/limitedGameMasterScreen.cpp:464 src/screens/gm/tweak.cpp:3962
 msgctxt "tweak-text"
 msgid "Faction:"
 msgstr "Faction :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:500
-#: src/screens/gm/tweak.cpp:3503
+#: src/screens/gm/limitedGameMasterScreen.cpp:500 src/screens/gm/tweak.cpp:3503
 msgctxt "tweak-tab"
 msgid "Hull"
 msgstr "Coque"
@@ -2930,8 +2926,7 @@ msgctxt "tweak-text"
 msgid "Allow destruction"
 msgstr "Permettre la destruction"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:532
-#: src/screens/gm/tweak.cpp:3758
+#: src/screens/gm/limitedGameMasterScreen.cpp:532 src/screens/gm/tweak.cpp:3758
 msgctxt "tweak-tab"
 msgid "Shields"
 msgstr "Boucliers"
@@ -2947,8 +2942,8 @@ msgstr ""
 "bouclier avec des arcs égaux."
 
 #: src/screens/gm/limitedGameMasterScreen.cpp:536
-#: src/screens/gm/limitedGameMasterScreen.cpp:902
-#: src/screens/gm/tweak.cpp:3764 src/screens/gm/tweak.cpp:4498
+#: src/screens/gm/limitedGameMasterScreen.cpp:902 src/screens/gm/tweak.cpp:3764
+#: src/screens/gm/tweak.cpp:4498
 msgctxt "tweak-text"
 msgid "Active"
 msgstr "Actif"
@@ -2972,8 +2967,7 @@ msgstr ""
 "Comportement autonome du vaisseau. Définit les ordres (attaquer, défendre, "
 "accoster, etc.), l'entité cible et l'emplacement cible pour le contrôle IA."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:569
-#: src/screens/gm/tweak.cpp:3942
+#: src/screens/gm/limitedGameMasterScreen.cpp:569 src/screens/gm/tweak.cpp:3942
 msgctxt "tweak-text"
 msgid "Orders:"
 msgstr "Ordres :"
@@ -3033,8 +3027,7 @@ msgctxt "ai_order"
 msgid "Attack"
 msgstr "Attaquer"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:590
-#: src/screens/gm/tweak.cpp:3944
+#: src/screens/gm/limitedGameMasterScreen.cpp:590 src/screens/gm/tweak.cpp:3944
 msgctxt "tweak-text"
 msgid "Order target location:"
 msgstr "Emplacement cible de l'ordre :"
@@ -3047,8 +3040,8 @@ msgstr "Armes à faisceau"
 #: src/screens/gm/limitedGameMasterScreen.cpp:604
 msgctxt "tweak-beam-system"
 msgid ""
-"Ship system providing beam weapon configuration. Defines arc, range, damage,"
-" cycle time, and optional turret tracking."
+"Ship system providing beam weapon configuration. Defines arc, range, damage, "
+"cycle time, and optional turret tracking."
 msgstr ""
 "Système de vaisseau fournissant la configuration des armes à faisceau. "
 "Définit l'arc, la portée, les dégâts, le temps de cycle et le suivi "
@@ -3064,8 +3057,8 @@ msgctxt "tweak-text"
 msgid "Health max:"
 msgstr "Santé max :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:621
-#: src/screens/gm/tweak.cpp:2544 src/screens/gm/tweak.cpp:2584
+#: src/screens/gm/limitedGameMasterScreen.cpp:621 src/screens/gm/tweak.cpp:2544
+#: src/screens/gm/tweak.cpp:2584
 msgctxt "tweak-text"
 msgid "Power level:"
 msgstr "Niveau de puissance :"
@@ -3089,14 +3082,12 @@ msgstr ""
 "Système de vaisseau et stockage pour missiles et mines. Définit le stock "
 "actuel et la capacité maximale pour chaque type."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:644
-#: src/screens/gm/tweak.cpp:3733
+#: src/screens/gm/limitedGameMasterScreen.cpp:644 src/screens/gm/tweak.cpp:3733
 msgctxt "tweak-text"
 msgid "Homing:"
 msgstr "Guidage :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:652
-#: src/screens/gm/tweak.cpp:3734
+#: src/screens/gm/limitedGameMasterScreen.cpp:652 src/screens/gm/tweak.cpp:3734
 msgctxt "tweak-text"
 msgid "Nuke:"
 msgstr "Nuke :"
@@ -3106,20 +3097,17 @@ msgctxt "tweak-text"
 msgid "Mine:"
 msgstr "Mine :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:668
-#: src/screens/gm/tweak.cpp:3735
+#: src/screens/gm/limitedGameMasterScreen.cpp:668 src/screens/gm/tweak.cpp:3735
 msgctxt "tweak-text"
 msgid "EMP:"
 msgstr "EMP :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:676
-#: src/screens/gm/tweak.cpp:3736
+#: src/screens/gm/limitedGameMasterScreen.cpp:676 src/screens/gm/tweak.cpp:3736
 msgctxt "tweak-text"
 msgid "HVLI:"
 msgstr "HVLI :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:688
-#: src/screens/gm/tweak.cpp:4370
+#: src/screens/gm/limitedGameMasterScreen.cpp:688 src/screens/gm/tweak.cpp:4370
 msgctxt "tweak-tab"
 msgid "Reactor"
 msgstr "Réacteur"
@@ -3133,8 +3121,7 @@ msgstr ""
 "Système de vaisseau qui génère et stocke l'énergie. Définit la capacité "
 "énergétique et le niveau d'énergie actuel."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:692
-#: src/screens/gm/tweak.cpp:4372
+#: src/screens/gm/limitedGameMasterScreen.cpp:692 src/screens/gm/tweak.cpp:4372
 msgctxt "tweak-text"
 msgid "Energy:"
 msgstr "Énergie :"
@@ -3149,8 +3136,7 @@ msgctxt "tweak-tab"
 msgid "Impulse"
 msgstr "Propulsion"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:714
-#: src/screens/gm/tweak.cpp:3567
+#: src/screens/gm/limitedGameMasterScreen.cpp:714 src/screens/gm/tweak.cpp:3567
 msgctxt "tweak-impulse"
 msgid ""
 "Ship system for impulse propulsion. Controls forward/reverse max speeds and "
@@ -3164,8 +3150,7 @@ msgctxt "tweak-text"
 msgid "Max speed forward:"
 msgstr "Vitesse max avant :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:723
-#: src/screens/gm/tweak.cpp:3571
+#: src/screens/gm/limitedGameMasterScreen.cpp:723 src/screens/gm/tweak.cpp:3571
 msgctxt "tweak-text"
 msgid "Acceleration forward:"
 msgstr "Accélération avant :"
@@ -3175,22 +3160,19 @@ msgctxt "tweak-tab"
 msgid "Maneuvering"
 msgstr "Manoeuvre"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:738
-#: src/screens/gm/tweak.cpp:3609
+#: src/screens/gm/limitedGameMasterScreen.cpp:738 src/screens/gm/tweak.cpp:3609
 msgctxt "tweak-maneuvering"
 msgid "Ship system providing rotational thrusters for the ship."
 msgstr ""
-"Système de vaisseau fournissant des propulseurs de rotation pour le "
-"vaisseau."
+"Système de vaisseau fournissant des propulseurs de rotation pour le vaisseau."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:739
-#: src/screens/gm/tweak.cpp:4126 src/screens/gm/tweak.cpp:4693
+#: src/screens/gm/limitedGameMasterScreen.cpp:739 src/screens/gm/tweak.cpp:4126
+#: src/screens/gm/tweak.cpp:4693
 msgctxt "tweak-text"
 msgid "Speed:"
 msgstr "Vitesse :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:751
-#: src/screens/gm/tweak.cpp:3773
+#: src/screens/gm/limitedGameMasterScreen.cpp:751 src/screens/gm/tweak.cpp:3773
 msgctxt "tweak-tab"
 msgid "Warp drive"
 msgstr "Propulsion lumière"
@@ -3198,8 +3180,8 @@ msgstr "Propulsion lumière"
 #: src/screens/gm/limitedGameMasterScreen.cpp:753
 msgctxt "tweak-warp"
 msgid ""
-"Ship system for the warp propulsion drive. Active warp usage consumes energy"
-" and generates heat."
+"Ship system for the warp propulsion drive. Active warp usage consumes energy "
+"and generates heat."
 msgstr ""
 "Système de vaisseau pour la propulsion lumière. L'utilisation active de la "
 "lumière consomme de l'énergie et génère de la chaleur."
@@ -3214,8 +3196,7 @@ msgctxt "tweak-text"
 msgid "Max level:"
 msgstr "Niveau max :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:782
-#: src/screens/gm/tweak.cpp:3816
+#: src/screens/gm/limitedGameMasterScreen.cpp:782 src/screens/gm/tweak.cpp:3816
 msgctxt "tweak-tab"
 msgid "Jump drive"
 msgstr "Propulsion saut"
@@ -3229,8 +3210,7 @@ msgstr ""
 "Système de vaisseau pour la propulsion à saut. Les valeurs de distance "
 "minimale et maximale définissent la portée de saut disponible."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:785
-#: src/screens/gm/tweak.cpp:3828
+#: src/screens/gm/limitedGameMasterScreen.cpp:785 src/screens/gm/tweak.cpp:3828
 msgctxt "tweak-text"
 msgid "Charge:"
 msgstr "Charge :"
@@ -3240,8 +3220,7 @@ msgctxt "tweak-text"
 msgid "Distance:"
 msgstr "Distance :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:801
-#: src/screens/gm/tweak.cpp:3754
+#: src/screens/gm/limitedGameMasterScreen.cpp:801 src/screens/gm/tweak.cpp:3754
 msgctxt "tweak-text"
 msgid "Delay:"
 msgstr "Délai :"
@@ -3261,8 +3240,8 @@ msgstr ""
 "vaisseaux et stations."
 
 #: src/screens/gm/limitedGameMasterScreen.cpp:816
-#: src/screens/gm/limitedGameMasterScreen.cpp:843
-#: src/screens/gm/tweak.cpp:3753 src/screens/gm/tweak.cpp:4400
+#: src/screens/gm/limitedGameMasterScreen.cpp:843 src/screens/gm/tweak.cpp:3753
+#: src/screens/gm/tweak.cpp:4400
 msgctxt "tweak-text"
 msgid "State:"
 msgstr "État :"
@@ -3366,14 +3345,13 @@ msgstr ""
 "Définit une existence limitée dans le temps pour cette entité. L'entité est "
 "automatiquement détruite lorsque la durée de vie restante expire."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:872
-#: src/screens/gm/tweak.cpp:4738 src/screens/gm/tweak.cpp:5001
+#: src/screens/gm/limitedGameMasterScreen.cpp:872 src/screens/gm/tweak.cpp:4738
+#: src/screens/gm/tweak.cpp:5001
 msgctxt "tweak-text"
 msgid "Lifetime:"
 msgstr "Durée de vie :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:884
-#: src/screens/gm/tweak.cpp:3966
+#: src/screens/gm/limitedGameMasterScreen.cpp:884 src/screens/gm/tweak.cpp:3966
 msgctxt "tweak-tab"
 msgid "Spin"
 msgstr "Rotation"
@@ -3400,20 +3378,18 @@ msgstr "Autodestruction"
 #: src/screens/gm/limitedGameMasterScreen.cpp:901
 msgctxt "tweak-self-destruct"
 msgid ""
-"If present and active, starts a countdown and triggers an explosion with the"
-" defined blast damage and radius."
+"If present and active, starts a countdown and triggers an explosion with the "
+"defined blast damage and radius."
 msgstr ""
 "Si présent et actif, démarre un compte à rebours et déclenche une explosion "
 "avec les dégâts et le rayon définis."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:910
-#: src/screens/gm/tweak.cpp:4499
+#: src/screens/gm/limitedGameMasterScreen.cpp:910 src/screens/gm/tweak.cpp:4499
 msgctxt "tweak-text"
 msgid "Countdown:"
 msgstr "Compte à rebours :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:922
-#: src/screens/gm/tweak.cpp:4743
+#: src/screens/gm/limitedGameMasterScreen.cpp:922 src/screens/gm/tweak.cpp:4743
 msgctxt "tweak-tab"
 msgid "Mesh render"
 msgstr "Rendu du maillage"
@@ -3424,22 +3400,21 @@ msgid "3D mesh rendering. Defines the model file, texture, and scale."
 msgstr ""
 "Rendu de maillage 3D. Définit le fichier modèle, la texture et l'échelle."
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:925
-#: src/screens/gm/tweak.cpp:4750
+#: src/screens/gm/limitedGameMasterScreen.cpp:925 src/screens/gm/tweak.cpp:4750
 msgctxt "tweak-text"
 msgid "Mesh:"
 msgstr "Maillage :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:933
-#: src/screens/gm/tweak.cpp:2168 src/screens/gm/tweak.cpp:3676
-#: src/screens/gm/tweak.cpp:3705 src/screens/gm/tweak.cpp:4773
-#: src/screens/gm/tweak.cpp:4937 src/screens/gm/tweak.cpp:4993
+#: src/screens/gm/limitedGameMasterScreen.cpp:933 src/screens/gm/tweak.cpp:2168
+#: src/screens/gm/tweak.cpp:3676 src/screens/gm/tweak.cpp:3705
+#: src/screens/gm/tweak.cpp:4773 src/screens/gm/tweak.cpp:4937
+#: src/screens/gm/tweak.cpp:4993
 msgctxt "tweak-text"
 msgid "Texture:"
 msgstr "Texture :"
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:941
-#: src/screens/gm/tweak.cpp:1856 src/screens/gm/tweak.cpp:4860
+#: src/screens/gm/limitedGameMasterScreen.cpp:941 src/screens/gm/tweak.cpp:1856
+#: src/screens/gm/tweak.cpp:4860
 msgctxt "tweak-text"
 msgid "Scale:"
 msgstr "Échelle :"
@@ -3979,13 +3954,20 @@ msgstr "Distribution automatique du refroidissement"
 #: src/screens/gm/tweak.cpp:3504
 msgctxt "tweak-hull"
 msgid ""
-"Structural hit points. If an entity with a hull has zero hull points, its Allow destruction property is enabled, and it takes damage, the entity can be destroyed. Docking to certain entities can restore hull points.\n"
+"Structural hit points. If an entity with a hull has zero hull points, its "
+"Allow destruction property is enabled, and it takes damage, the entity can "
+"be destroyed. Docking to certain entities can restore hull points.\n"
 "\n"
-"Callback members on_destruction and on_taking_damage can't be tweaked via this dialog."
+"Callback members on_destruction and on_taking_damage can't be tweaked via "
+"this dialog."
 msgstr ""
-"Points de structure de la coque. Si une entité avec une coque a zéro point de coque, que sa propriété Permettre la destruction est activée et qu'elle subit des dégâts, l'entité peut être détruite. L'amarrage à certaines entités peut restaurer les points de coque.\n"
+"Points de structure de la coque. Si une entité avec une coque a zéro point "
+"de coque, que sa propriété Permettre la destruction est activée et qu'elle "
+"subit des dégâts, l'entité peut être détruite. L'amarrage à certaines "
+"entités peut restaurer les points de coque.\n"
 "\n"
-"Les membres callback on_destruction et on_taking_damage ne peuvent pas être modifiés via cette boîte de dialogue."
+"Les membres callback on_destruction et on_taking_damage ne peuvent pas être "
+"modifiés via cette boîte de dialogue."
 
 #: src/screens/gm/tweak.cpp:3505
 msgctxt "tweak-text"
@@ -4100,13 +4082,18 @@ msgstr "Propulseurs de combat"
 #: src/screens/gm/tweak.cpp:3638
 msgctxt "tweak-combatmaneuvering"
 msgid ""
-"Boost and strafe capability. Charge is consumed on use and recharges over charge_time seconds to full).\n"
+"Boost and strafe capability. Charge is consumed on use and recharges over "
+"charge_time seconds to full).\n"
 "\n"
-"If this entity has the Coolant component, strafing generates heat in the Maneuvering thrusters system and boosting generates heat in the Impulse engine system."
+"If this entity has the Coolant component, strafing generates heat in the "
+"Maneuvering thrusters system and boosting generates heat in the Impulse "
+"engine system."
 msgstr ""
-msgstr "Capacité de boost et de déplacement latéral. La charge est consommée à l'utilisation et se recharge en charge_time secondes."
-"\n"
-"Si cette entité a le composant de Liq. Refroidissement, le déplacement latéral génère de la chaleur dans le système des propulseurs de Manœuvre et la propulsion génère de la chaleur dans le système du Moteurs à impulsion."
+"Capacité de boost et de déplacement latéral. La charge est consommée à "
+"l'utilisation et se recharge en charge_time secondes.\n"
+"Si cette entité a le composant de Liq. Refroidissement, le déplacement "
+"latéral génère de la chaleur dans le système des propulseurs de Manœuvre et "
+"la propulsion génère de la chaleur dans le système du Moteurs à impulsion."
 
 #: src/screens/gm/tweak.cpp:3639
 msgctxt "tweak-text"
@@ -4186,13 +4173,27 @@ msgstr "Système de faisceau"
 #: src/screens/gm/tweak.cpp:3656
 msgctxt "tweak-beam-system"
 msgid ""
-"Ship system providing beam weapon configuration. Beam frequency affects damage against shields.\n"
+"Ship system providing beam weapon configuration. Beam frequency affects "
+"damage against shields.\n"
 "\n"
-"Each beam weapon has a mount that defines its firing arc, the direction the arc points in, and its range, damage, and cycle time. It also optionally supports functioning as a rotating turret with a defined speed in tracking targets. If a turret arc is defined, the beam direction rotates the beam arc within the larger turret arc and direction. Beam and turret performance are affected by the Beam weapon system, and firing generates additional heat into the system."
+"Each beam weapon has a mount that defines its firing arc, the direction the "
+"arc points in, and its range, damage, and cycle time. It also optionally "
+"supports functioning as a rotating turret with a defined speed in tracking "
+"targets. If a turret arc is defined, the beam direction rotates the beam arc "
+"within the larger turret arc and direction. Beam and turret performance are "
+"affected by the Beam weapon system, and firing generates additional heat "
+"into the system."
 msgstr ""
-"Système de vaisseau fournissant la configuration des armes à faisceau. La fréquence du faisceau affecte les dégâts contre les boucliers.\n"
+"Système de vaisseau fournissant la configuration des armes à faisceau. La "
+"fréquence du faisceau affecte les dégâts contre les boucliers.\n"
 "\n"
-"Chaque arme à faisceau a un support qui définit son arc de tir, la direction de l'arc, sa portée, ses dégâts et son temps de cycle. Elle peut aussi fonctionner comme une tourelle rotative avec une vitesse définie pour le suivi des cibles. Si un arc de tourelle est défini, la direction du faisceau pivote dans l'arc et la direction. Les performances du faisceau et de la tourelle sont affectées par le système d'armes à faisceau, et le tir génère de la chaleur supplémentaire dans le Système de faisceau."
+"Chaque arme à faisceau a un support qui définit son arc de tir, la direction "
+"de l'arc, sa portée, ses dégâts et son temps de cycle. Elle peut aussi "
+"fonctionner comme une tourelle rotative avec une vitesse définie pour le "
+"suivi des cibles. Si un arc de tourelle est défini, la direction du faisceau "
+"pivote dans l'arc et la direction. Les performances du faisceau et de la "
+"tourelle sont affectées par le système d'armes à faisceau, et le tir génère "
+"de la chaleur supplémentaire dans le Système de faisceau."
 
 #: src/screens/gm/tweak.cpp:3657 src/screens/gm/tweak.cpp:3766
 msgctxt "tweak-text"
@@ -4305,7 +4306,8 @@ msgid ""
 msgstr ""
 "Système de vaisseau fournissant un faisceau utilitaire configurable.\n"
 "\n"
-"Les membres callback dans custom_beam_modes ne peuvent pas être modifiés via cette boîte de dialogue."
+"Les membres callback dans custom_beam_modes ne peuvent pas être modifiés via "
+"cette boîte de dialogue."
 
 #: src/screens/gm/tweak.cpp:3684
 msgctxt "tweak-text"
@@ -4405,13 +4407,20 @@ msgstr "Système de missiles"
 #: src/screens/gm/tweak.cpp:3731
 msgctxt "tweak-missile-system"
 msgid ""
-"Ship system and storage for missiles and mines. Defines current stock and maximum capacity for each type.\n"
+"Ship system and storage for missiles and mines. Defines current stock and "
+"maximum capacity for each type.\n"
 "\n"
-"Each missile launch tube has a mount that defines its fire direction, load time, size class, and allowed ammunition types. Performance is affected by, and firing generates heat into, the Missile weapon system."
+"Each missile launch tube has a mount that defines its fire direction, load "
+"time, size class, and allowed ammunition types. Performance is affected by, "
+"and firing generates heat into, the Missile weapon system."
 msgstr ""
-"Système de vaisseau et stockage pour missiles et mines. Définit le stock actuel et la capacité maximale pour chaque type.\n"
+"Système de vaisseau et stockage pour missiles et mines. Définit le stock "
+"actuel et la capacité maximale pour chaque type.\n"
 "\n"
-"Chaque tube de lancement de missile a un point d'emport qui définit sa direction de tir, son temps de chargement, sa classe de taille et les types de munitions autorisés. Les performances sont affectées par le système d'armes à missiles, et le tir génère de la chaleur dans ce système."
+"Chaque tube de lancement de missile a un point d'emport qui définit sa "
+"direction de tir, son temps de chargement, sa classe de taille et les types "
+"de munitions autorisés. Les performances sont affectées par le système "
+"d'armes à missiles, et le tir génère de la chaleur dans ce système."
 
 #: src/screens/gm/tweak.cpp:3732
 msgctxt "tweak-text"
@@ -4483,8 +4492,8 @@ msgctxt "tweak-shields"
 msgid ""
 "Shield generators, including active state, frequency, calibration time, and "
 "additional energy cost beyond ship system usage while activated. Ships can "
-"have a variable number of segments with equal arcs, and ships with 2 or more"
-" segments have separate front and rear shield ship systems."
+"have a variable number of segments with equal arcs, and ships with 2 or more "
+"segments have separate front and rear shield ship systems."
 msgstr ""
 "Générateurs de boucliers, incluant l'état actif, la fréquence, le temps de "
 "calibrage et le coût énergétique supplémentaire au-delà de l'utilisation du "
@@ -4527,16 +4536,16 @@ msgctxt "tweak-warp"
 msgid ""
 "Ship system for the warp propulsion drive. Maximum level sets the highest "
 "available warp factor; all other factors are integers between 0 (inactive) "
-"and this maximum. Active warp usage consumes energy and generates heat while"
-" warp is active, in addition to normal ship system energy consumption and "
+"and this maximum. Active warp usage consumes energy and generates heat while "
+"warp is active, in addition to normal ship system energy consumption and "
 "heat generation."
 msgstr ""
-"Système de vaisseau pour la propulsion lumière. Le niveau maximum définit le"
-" facteur lumière le plus élevé disponible ; tous les autres facteurs sont "
-"des entiers entre 0 (inactif) et ce maximum. L'utilisation active de la "
-"lumière consomme de l'énergie et génère de la chaleur tant qu'elle est "
-"active, en plus de la consommation d'énergie et de la génération de chaleur "
-"normales du système du vaisseau."
+"Système de vaisseau pour la propulsion lumière. Le niveau maximum définit le "
+"facteur lumière le plus élevé disponible ; tous les autres facteurs sont des "
+"entiers entre 0 (inactif) et ce maximum. L'utilisation active de la lumière "
+"consomme de l'énergie et génère de la chaleur tant qu'elle est active, en "
+"plus de la consommation d'énergie et de la génération de chaleur normales du "
+"système du vaisseau."
 
 #: src/screens/gm/tweak.cpp:3775 src/screens/gm/tweak.cpp:3818
 msgctxt "tweak-text"
@@ -4664,17 +4673,26 @@ msgstr "Contrôleur IA"
 #: src/screens/gm/tweak.cpp:3940
 msgctxt "tweak-ai"
 msgid ""
-"Autonomous ship behavior. Set orders (attack, defend, dock, etc.), target entity, and target location for AI control.\n"
+"Autonomous ship behavior. Set orders (attack, defend, dock, etc.), target "
+"entity, and target location for AI control.\n"
 "\n"
-"To issue movement, attack entity, dock with entity, or defend entity orders, right-click on the target coordinates or entity while this entity is selected. To issue other orders, select it from the Orders menu at the bottom-right of the GM screen.\n"
+"To issue movement, attack entity, dock with entity, or defend entity orders, "
+"right-click on the target coordinates or entity while this entity is "
+"selected. To issue other orders, select it from the Orders menu at the "
+"bottom-right of the GM screen.\n"
 "\n"
 "This component can't be removed from an entity using the tweaks menu."
 msgstr ""
-"Comportement autonome du vaisseau. Définit les ordres (attaquer, défendre, accoster, etc.), l'entité cible et l'emplacement cible pour le contrôle IA.\n"
+"Comportement autonome du vaisseau. Définit les ordres (attaquer, défendre, "
+"accoster, etc.), l'entité cible et l'emplacement cible pour le contrôle IA.\n"
 "\n"
-"Pour donner des ordres de déplacement, d'attaque, d'accostage ou de défense, faites un clic droit sur les coordonnées ou l'entité cible pendant que cette entité est sélectionnée. Pour d'autres ordres, sélectionnez-les depuis le menu Ordres en bas à droite de l'écran MJ.\n"
+"Pour donner des ordres de déplacement, d'attaque, d'accostage ou de défense, "
+"faites un clic droit sur les coordonnées ou l'entité cible pendant que cette "
+"entité est sélectionnée. Pour d'autres ordres, sélectionnez-les depuis le "
+"menu Ordres en bas à droite de l'écran MJ.\n"
 "\n"
-"Ce composant ne peut pas être retiré d'une entité via le menu de modification."
+"Ce composant ne peut pas être retiré d'une entité via le menu de "
+"modification."
 
 #: src/screens/gm/tweak.cpp:3945
 msgctxt "tweak-text"
@@ -4689,13 +4707,18 @@ msgstr "Orbite"
 #: src/screens/gm/tweak.cpp:3951
 msgctxt "tweak-orbit"
 msgid ""
-"Defines simple orbital movement by this entity around another entity (orbit target) or specified coordinates (orbit coordinates) at a defined distance and period.\n"
+"Defines simple orbital movement by this entity around another entity (orbit "
+"target) or specified coordinates (orbit coordinates) at a defined distance "
+"and period.\n"
 "\n"
 "Combine with Spin and Planet renderer to roughly simulate planetary rotation."
 msgstr ""
-"Définit un mouvement orbital simple de cette entité autour d'une autre entité (cible d'orbite) ou de coordonnées spécifiées (coordonnées d'orbite) à une distance et une période définies.\n"
+"Définit un mouvement orbital simple de cette entité autour d'une autre "
+"entité (cible d'orbite) ou de coordonnées spécifiées (coordonnées d'orbite) "
+"à une distance et une période définies.\n"
 "\n"
-"Combinez avec Rotation et Rendu de planète pour simuler approximativement la rotation planétaire."
+"Combinez avec Rotation et Rendu de planète pour simuler approximativement la "
+"rotation planétaire."
 
 #: src/screens/gm/tweak.cpp:3952
 msgctxt "tweak-text"
@@ -4722,8 +4745,8 @@ msgctxt "tweak-faction"
 msgid ""
 "The faction to which this entity belongs. An entity's faction determines "
 "which entities are friendly, neutral, or hostile to this entity in combat "
-"and interactions. This can also be set using the faction selector at the top"
-" left of the GM screen."
+"and interactions. This can also be set using the faction selector at the top "
+"left of the GM screen."
 msgstr ""
 "La faction à laquelle appartient cette entité. La faction d'une entité "
 "détermine quelles entités sont amies, neutres ou hostiles en combat et "
@@ -4733,13 +4756,22 @@ msgstr ""
 #: src/screens/gm/tweak.cpp:3967
 msgctxt "tweak-spin"
 msgid ""
-"Makes the entity rotate continuously at the given rate in degrees per second. Useful for terrain and decorative objects, such as asteroids and debris. Combine with Planet renderer to roughly simulate planetary rotation, particularly with other entities using Orbit.\n"
+"Makes the entity rotate continuously at the given rate in degrees per "
+"second. Useful for terrain and decorative objects, such as asteroids and "
+"debris. Combine with Planet renderer to roughly simulate planetary rotation, "
+"particularly with other entities using Orbit.\n"
 "\n"
-"Ships should instead use the Manuvering thrusters component to control their own rotation."
+"Ships should instead use the Manuvering thrusters component to control their "
+"own rotation."
 msgstr ""
-"Fait tourner l'entité en continu au taux donné en degrés par seconde. Utile pour le terrain et les objets décoratifs, comme les astéroïdes et les débris. Combinez avec Rendu de planète pour simuler approximativement la rotation planétaire, particulièrement avec d'autres entités utilisant Orbite.\n"
+"Fait tourner l'entité en continu au taux donné en degrés par seconde. Utile "
+"pour le terrain et les objets décoratifs, comme les astéroïdes et les "
+"débris. Combinez avec Rendu de planète pour simuler approximativement la "
+"rotation planétaire, particulièrement avec d'autres entités utilisant "
+"Orbite.\n"
 "\n"
-"Les vaisseaux devraient plutôt utiliser le composant Propulseurs de manœuvre pour contrôler leur propre rotation."
+"Les vaisseaux devraient plutôt utiliser le composant Propulseurs de manœuvre "
+"pour contrôler leur propre rotation."
 
 #: src/screens/gm/tweak.cpp:3968
 msgctxt "tweak-text"
@@ -4754,17 +4786,26 @@ msgstr "Durée de vie"
 #: src/screens/gm/tweak.cpp:3972
 msgctxt "tweak-lifetime"
 msgid ""
-"Defines a time-limited existence for this entity, and automatically destroys this entity when the remaining lifetime in seconds expires. Typically used to expire probes.\n"
+"Defines a time-limited existence for this entity, and automatically destroys "
+"this entity when the remaining lifetime in seconds expires. Typically used "
+"to expire probes.\n"
 "\n"
-"BE CAREFUL WHEN ADDING THIS COMPONENT TO AN ENTITY. If added to an entity while the game is running, the countdown begins immediately. Once destroyed, the entity can't be restored.\n"
+"BE CAREFUL WHEN ADDING THIS COMPONENT TO AN ENTITY. If added to an entity "
+"while the game is running, the countdown begins immediately. Once destroyed, "
+"the entity can't be restored.\n"
 "\n"
 "Callback member on_expire can't be tweaked via this dialog."
 msgstr ""
-"Définit une existence limitée dans le temps pour cette entité, et détruit automatiquement cette entité lorsque la durée de vie restante en secondes expire. Généralement utilisé pour faire expirer les sondes.\n"
+"Définit une existence limitée dans le temps pour cette entité, et détruit "
+"automatiquement cette entité lorsque la durée de vie restante en secondes "
+"expire. Généralement utilisé pour faire expirer les sondes.\n"
 "\n"
-"SOYEZ PRUDENT EN AJOUTANT CE COMPOSANT À UNE ENTITÉ. S'il est ajouté à une entité pendant que le jeu tourne, le compte à rebours commence immédiatement. Une fois détruite, l'entité ne peut pas être restaurée.\n"
+"SOYEZ PRUDENT EN AJOUTANT CE COMPOSANT À UNE ENTITÉ. S'il est ajouté à une "
+"entité pendant que le jeu tourne, le compte à rebours commence "
+"immédiatement. Une fois détruite, l'entité ne peut pas être restaurée.\n"
 "\n"
-"Le membre callback on_expire ne peut pas être modifié via cette boîte de dialogue."
+"Le membre callback on_expire ne peut pas être modifié via cette boîte de "
+"dialogue."
 
 #: src/screens/gm/tweak.cpp:3973
 msgctxt "tweak-text"
@@ -4798,15 +4839,25 @@ msgstr "Zone"
 #: src/screens/gm/tweak.cpp:3983
 msgctxt "tweak-zone"
 msgid ""
-"A named region, typically visible on radar as a colored region with a label, defined by a list of coordinates connected in order. Scripts can determine whether an entity is within a Zone's bounds. Used for mission areas, hazard zones, map regions, and special effects.\n"
+"A named region, typically visible on radar as a colored region with a label, "
+"defined by a list of coordinates connected in order. Scripts can determine "
+"whether an entity is within a Zone's bounds. Used for mission areas, hazard "
+"zones, map regions, and special effects.\n"
 "\n"
-"A Zone can optionally change the skybox texture while within the zone, with an optional transitional border to crossfade the skybox textures.\n"
+"A Zone can optionally change the skybox texture while within the zone, with "
+"an optional transitional border to crossfade the skybox textures.\n"
 "\n"
 "triangles and zone_dirty are internal and can't be tweaked."
 msgstr ""
-"Une région nommée, généralement visible sur le radar comme une région colorée avec une étiquette, définie par une liste de coordonnées connectées dans l'ordre. Les scripts peuvent déterminer si une entité se trouve dans les limites d'une zone. Utilisé pour les zones de mission, les zones de danger, les régions de la carte et les effets spéciaux.\n"
+"Une région nommée, généralement visible sur le radar comme une région "
+"colorée avec une étiquette, définie par une liste de coordonnées connectées "
+"dans l'ordre. Les scripts peuvent déterminer si une entité se trouve dans "
+"les limites d'une zone. Utilisé pour les zones de mission, les zones de "
+"danger, les régions de la carte et les effets spéciaux.\n"
 "\n"
-"Une zone peut éventuellement changer la texture du skybox à l'intérieur de la zone, avec une bordure de transition optionnelle pour fondre les textures du skybox.\n"
+"Une zone peut éventuellement changer la texture du skybox à l'intérieur de "
+"la zone, avec une bordure de transition optionnelle pour fondre les textures "
+"du skybox.\n"
 "\n"
 "triangles et zone_dirty sont internes et ne peuvent pas être modifiés."
 
@@ -4853,13 +4904,20 @@ msgstr "Base de données"
 #: src/screens/gm/tweak.cpp:4115
 msgctxt "tweak-database"
 msgid ""
-"Adds a Science database entry for this entity. Defines the name, description, key-value data pairs, and image shown on the Science, Operations, and Database screens.\n"
+"Adds a Science database entry for this entity. Defines the name, "
+"description, key-value data pairs, and image shown on the Science, "
+"Operations, and Database screens.\n"
 "\n"
-"To modify the main entries of the Science database, which aren't selectable on the map, use the Databse button on the GM screen."
+"To modify the main entries of the Science database, which aren't selectable "
+"on the map, use the Databse button on the GM screen."
 msgstr ""
-"Ajoute une entrée de base de données scientifique pour cette entité. Définit le nom, la description, les paires de données clé-valeur et l'image affichée sur les écrans Science, Opérations et Base de données.\n"
+"Ajoute une entrée de base de données scientifique pour cette entité. Définit "
+"le nom, la description, les paires de données clé-valeur et l'image affichée "
+"sur les écrans Science, Opérations et Base de données.\n"
 "\n"
-"Pour modifier les entrées principales de la base de données scientifique, qui ne sont pas sélectionnables sur la carte, utilisez le bouton Base de données sur l'écran MJ."
+"Pour modifier les entrées principales de la base de données scientifique, "
+"qui ne sont pas sélectionnables sur la carte, utilisez le bouton Base de "
+"données sur l'écran MJ."
 
 #: src/screens/gm/tweak.cpp:4116
 msgctxt "tweak-text"
@@ -4894,21 +4952,33 @@ msgstr "Déplacer vers"
 #: src/screens/gm/tweak.cpp:4125
 msgctxt "tweak-moveto"
 msgid ""
-"Moves the entity to the target location in a straight line at a fixed rate of speed. Used by default for probes instead of propulsion, and doesn't apply AI avoidance behaviors.\n"
+"Moves the entity to the target location in a straight line at a fixed rate "
+"of speed. Used by default for probes instead of propulsion, and doesn't "
+"apply AI avoidance behaviors.\n"
 "\n"
-"For AI-controlled entities, generally use propulsion components such as Impulse engine and Maneuvering thrusters instead of Move to, then apply movement orders by selecting this entity and right-clicking on the map.\n"
+"For AI-controlled entities, generally use propulsion components such as "
+"Impulse engine and Maneuvering thrusters instead of Move to, then apply "
+"movement orders by selecting this entity and right-clicking on the map.\n"
 "\n"
-"To effect orbital movement around a point or another entity, use the Orbit component.\n"
+"To effect orbital movement around a point or another entity, use the Orbit "
+"component.\n"
 "\n"
 "Callback member on_arrival can't be tweaked via this dialog."
 msgstr ""
-"Déplace l'entité vers l'emplacement cible en ligne droite à une vitesse fixe. Utilisé par défaut pour les sondes au lieu de la propulsion, et n'applique pas les comportements d'évitement IA.\n"
+"Déplace l'entité vers l'emplacement cible en ligne droite à une vitesse "
+"fixe. Utilisé par défaut pour les sondes au lieu de la propulsion, et "
+"n'applique pas les comportements d'évitement IA.\n"
 "\n"
-"Pour les entités contrôlées par IA, utilisez généralement des composants de propulsion comme le moteur à impulsion et les propulseurs de manœuvre au lieu de Déplacer vers, puis appliquez des ordres de mouvement en sélectionnant cette entité et en cliquant droit sur la carte.\n"
+"Pour les entités contrôlées par IA, utilisez généralement des composants de "
+"propulsion comme le moteur à impulsion et les propulseurs de manœuvre au "
+"lieu de Déplacer vers, puis appliquez des ordres de mouvement en "
+"sélectionnant cette entité et en cliquant droit sur la carte.\n"
 "\n"
-"Pour effectuer un mouvement orbital autour d'un point ou d'une autre entité, utilisez le composant Orbite.\n"
+"Pour effectuer un mouvement orbital autour d'un point ou d'une autre entité, "
+"utilisez le composant Orbite.\n"
 "\n"
-"Le membre callback on_arrival ne peut pas être modifié via cette boîte de dialogue."
+"Le membre callback on_arrival ne peut pas être modifié via cette boîte de "
+"dialogue."
 
 #: src/screens/gm/tweak.cpp:4127
 msgctxt "tweak-text"
@@ -5043,11 +5113,17 @@ msgstr "Récupération"
 #: src/screens/gm/tweak.cpp:4181
 msgctxt "tweak-pickup"
 msgid ""
-"If present, this component makes this entity collectible by other entities. Upon collision, this component grants energy, missiles, or other resources to the colliding entity, then immediately destroys itself. Can be set to be picked up only by player ships.\n"
+"If present, this component makes this entity collectible by other entities. "
+"Upon collision, this component grants energy, missiles, or other resources "
+"to the colliding entity, then immediately destroys itself. Can be set to be "
+"picked up only by player ships.\n"
 "\n"
 "Callback member callback can't be tweaked via this dialog."
 msgstr ""
-"Si présent, ce composant rend cette entité collectible par d'autres entités. Lors d'une collision, ce composant donne de l'énergie, des missiles ou d'autres ressources à l'entité qui percute, puis se détruit immédiatement. Peut être paramétré pour n'être ramassé que par les vaisseaux joueurs.\n"
+"Si présent, ce composant rend cette entité collectible par d'autres entités. "
+"Lors d'une collision, ce composant donne de l'énergie, des missiles ou "
+"d'autres ressources à l'entité qui percute, puis se détruit immédiatement. "
+"Peut être paramétré pour n'être ramassé que par les vaisseaux joueurs.\n"
 "\n"
 "Le membre callback ne peut pas être modifié via cette boîte de dialogue."
 
@@ -5099,11 +5175,15 @@ msgstr "Rappel de collision"
 #: src/screens/gm/tweak.cpp:4193
 msgctxt "tweak-collision-callback"
 msgid ""
-"Triggers a Lua script callback when another entity touches this one. Callback must be set through Lua scripting. Optionally restricted to player-ship collisions only.\n"
+"Triggers a Lua script callback when another entity touches this one. "
+"Callback must be set through Lua scripting. Optionally restricted to player-"
+"ship collisions only.\n"
 "\n"
 "Callback member callback can't be tweaked via this dialog."
 msgstr ""
-"Déclenche un callback de script Lua quand une autre entité touche celle-ci. Le callback doit être défini via un script Lua. Optionnellement restreint aux collisions avec des vaisseaux joueurs uniquement.\n"
+"Déclenche un callback de script Lua quand une autre entité touche celle-ci. "
+"Le callback doit être défini via un script Lua. Optionnellement restreint "
+"aux collisions avec des vaisseaux joueurs uniquement.\n"
 "\n"
 "Le membre callback ne peut pas être modifié via cette boîte de dialogue."
 
@@ -5120,17 +5200,38 @@ msgstr "Baie d'amarrage"
 #: src/screens/gm/tweak.cpp:4198
 msgctxt "tweak-docking-bay"
 msgid ""
-"Allows Docking port entities of a dock class that matches one of its lists to dock with this entity. Configures dock classes and services (energy transfer, repair, shields, probe restocking, AI ship missile restocking). Docking occurs upon collision while the Docking port entity is in a docking state.\n"
+"Allows Docking port entities of a dock class that matches one of its lists "
+"to dock with this entity. Configures dock classes and services (energy "
+"transfer, repair, shields, probe restocking, AI ship missile restocking). "
+"Docking occurs upon collision while the Docking port entity is in a docking "
+"state.\n"
 "\n"
-"If the Docking port entity's dock class is in the External dock classes list, the Docking port entity becomes attached to this entity at the offset and moves with this entity. If this entity is destroyed, externally docked entities persist.\n"
+"If the Docking port entity's dock class is in the External dock classes "
+"list, the Docking port entity becomes attached to this entity at the offset "
+"and moves with this entity. If this entity is destroyed, externally docked "
+"entities persist.\n"
 "\n"
-"If the dock class is in the Internal list, the Docking port entity loses its Transform and player views change to track this entity. Once undocked, this entity respaws at this entity's position relative to the docking offset. If this entity is destroyed, any internally docked entities are also destroyed."
+"If the dock class is in the Internal list, the Docking port entity loses its "
+"Transform and player views change to track this entity. Once undocked, this "
+"entity respaws at this entity's position relative to the docking offset. If "
+"this entity is destroyed, any internally docked entities are also destroyed."
 msgstr ""
-"Permet aux entités de port d'amarrage d'une classe d'accostage correspondant à l'une de ses listes d'accoster avec cette entité. Configure les classes et services d'accostage (transfert d'énergie, réparation, boucliers, réapprovisionnement de sondes, réapprovisionnement de missiles IA). L'amarrage se produit lors d'une collision quand l'entité de port d'amarrage est en état d'amarrage.\n"
+"Permet aux entités de port d'amarrage d'une classe d'accostage correspondant "
+"à l'une de ses listes d'accoster avec cette entité. Configure les classes et "
+"services d'accostage (transfert d'énergie, réparation, boucliers, "
+"réapprovisionnement de sondes, réapprovisionnement de missiles IA). "
+"L'amarrage se produit lors d'une collision quand l'entité de port d'amarrage "
+"est en état d'amarrage.\n"
 "\n"
-"Si la classe d'accostage de l'entité de port est dans la liste externe, l'entité de port se fixe à cette entité au décalage et se déplace avec elle. Si cette entité est détruite, les entités accostées en externe persistent.\n"
+"Si la classe d'accostage de l'entité de port est dans la liste externe, "
+"l'entité de port se fixe à cette entité au décalage et se déplace avec elle. "
+"Si cette entité est détruite, les entités accostées en externe persistent.\n"
 "\n"
-"Si la classe est dans la liste interne, l'entité de port perd sa transformation et les vues joueur suivent cette entité. Une fois désamarrée, l'entité réapparaît à la position de cette entité relative au décalage d'accostage. Si cette entité est détruite, les entités accostées en interne sont aussi détruites."
+"Si la classe est dans la liste interne, l'entité de port perd sa "
+"transformation et les vues joueur suivent cette entité. Une fois désamarrée, "
+"l'entité réapparaît à la position de cette entité relative au décalage "
+"d'accostage. Si cette entité est détruite, les entités accostées en interne "
+"sont aussi détruites."
 
 #: src/screens/gm/tweak.cpp:4199
 msgctxt "tweak-text"
@@ -5180,13 +5281,21 @@ msgstr "Porte d'amarrage"
 #: src/screens/gm/tweak.cpp:4328
 msgctxt "tweak-docking-port"
 msgid ""
-"Allows this entity to dock with an entity that possesses a Docking bay component. This entity's Docking class and subclass strings must match the Docking bay entity's to enable docking.\n"
+"Allows this entity to dock with an entity that possesses a Docking bay "
+"component. This entity's Docking class and subclass strings must match the "
+"Docking bay entity's to enable docking.\n"
 "\n"
-"Tracks docking state, target, and positional offset of its docking position, and allows toggling and configuration of optional missile auto-reloading while docked."
+"Tracks docking state, target, and positional offset of its docking position, "
+"and allows toggling and configuration of optional missile auto-reloading "
+"while docked."
 msgstr ""
-"Permet à cette entité d'accoster avec une entité possédant un composant Baie d'amarrage. Les chaînes de classe et sous-classe d'accostage de cette entité doivent correspondre à celles de la baie pour permettre l'amarrage.\n"
+"Permet à cette entité d'accoster avec une entité possédant un composant Baie "
+"d'amarrage. Les chaînes de classe et sous-classe d'accostage de cette entité "
+"doivent correspondre à celles de la baie pour permettre l'amarrage.\n"
 "\n"
-"Suit l'état d'amarrage, la cible et le décalage de position d'amarrage, et permet d'activer et configurer le rechargement automatique des missiles pendant l'amarrage."
+"Suit l'état d'amarrage, la cible et le décalage de position d'amarrage, et "
+"permet d'activer et configurer le rechargement automatique des missiles "
+"pendant l'amarrage."
 
 #: src/screens/gm/tweak.cpp:4329
 msgctxt "tweak-text"
@@ -5233,8 +5342,7 @@ msgctxt "tweak-player-controller"
 msgid ""
 "If present, this component enables player control of this entity. Entities "
 "with this component are selectable on the ship selection screen. Sets "
-"available crew positions, control code, main screen display, and alert "
-"level."
+"available crew positions, control code, main screen display, and alert level."
 msgstr ""
 "Si présent, ce composant permet le contrôle joueur de cette entité. Les "
 "entités avec ce composant sont sélectionnables sur l'écran de sélection de "
@@ -5294,21 +5402,35 @@ msgstr "Portée radar"
 #: src/screens/gm/tweak.cpp:4379
 msgctxt "tweak-radar"
 msgid ""
-"Enables radar on player screens. Short-range radar is used on Helms, Weapons and Tactical screens to see or target nearby contacts, long-range radar on Science and Operations screens for identifying or scanning distant contacts.\n"
+"Enables radar on player screens. Short-range radar is used on Helms, Weapons "
+"and Tactical screens to see or target nearby contacts, long-range radar on "
+"Science and Operations screens for identifying or scanning distant "
+"contacts.\n"
 "\n"
-"If this entity has the Allow radar link or Share short-range radar components, the short-range radar range determines what it shares in Probe view and Relay/Stragetic Map, respectively.\n"
+"If this entity has the Allow radar link or Share short-range radar "
+"components, the short-range radar range determines what it shares in Probe "
+"view and Relay/Stragetic Map, respectively.\n"
 "\n"
-"If this entity has the AI controller component, the long-range radar range determines the range at which it detects other entities.\n"
+"If this entity has the AI controller component, the long-range radar range "
+"determines the range at which it detects other entities.\n"
 "\n"
-"For the scanning minigame component that relies on radar, see Scanner. For the weapons targeting component, see Target."
+"For the scanning minigame component that relies on radar, see Scanner. For "
+"the weapons targeting component, see Target."
 msgstr ""
-"Active le radar sur les écrans joueurs. Le radar courte portée est utilisé sur les écrans Navigation, Armement et Tactique pour voir ou cibler les contacts proches, le radar longue portée sur les écrans Science et Opérations pour identifier ou scanner les contacts distants.\n"
+"Active le radar sur les écrans joueurs. Le radar courte portée est utilisé "
+"sur les écrans Navigation, Armement et Tactique pour voir ou cibler les "
+"contacts proches, le radar longue portée sur les écrans Science et "
+"Opérations pour identifier ou scanner les contacts distants.\n"
 "\n"
-"Si cette entité a les composants Autoriser le lien radar ou Partager le radar courte portée, la portée courte détermine ce qui est partagé dans la vue sonde et la carte Relais/Stratégique, respectivement.\n"
+"Si cette entité a les composants Autoriser le lien radar ou Partager le "
+"radar courte portée, la portée courte détermine ce qui est partagé dans la "
+"vue sonde et la carte Relais/Stratégique, respectivement.\n"
 "\n"
-"Si cette entité a le composant Contrôleur IA, la portée longue détermine la distance à laquelle elle détecte les autres entités.\n"
+"Si cette entité a le composant Contrôleur IA, la portée longue détermine la "
+"distance à laquelle elle détecte les autres entités.\n"
 "\n"
-"Pour le mini-jeu de scan qui dépend du radar, voir Scanner. Pour le composant de ciblage d'armes, voir Cible."
+"Pour le mini-jeu de scan qui dépend du radar, voir Scanner. Pour le "
+"composant de ciblage d'armes, voir Cible."
 
 #: src/screens/gm/tweak.cpp:4380
 msgctxt "tweak-text"
@@ -5332,8 +5454,8 @@ msgid ""
 "required for a player to complete a scan when not using the scanning "
 "minigame."
 msgstr ""
-"Scanner scientifique pour l'analyse détaillée d'entités. Définit le délai et"
-" le délai maximum requis pour qu'un joueur termine un scan sans utiliser le "
+"Scanner scientifique pour l'analyse détaillée d'entités. Définit le délai et "
+"le délai maximum requis pour qu'un joueur termine un scan sans utiliser le "
 "mini-jeu de scan."
 
 #: src/screens/gm/tweak.cpp:4386
@@ -5387,7 +5509,8 @@ msgid ""
 msgstr ""
 "Permet à cette entité de communiquer avec d'autres vaisseaux et stations.\n"
 "\n"
-"Les membres callback dans script_replies ne peuvent pas être modifiés via cette boîte de dialogue."
+"Les membres callback dans script_replies ne peuvent pas être modifiés via "
+"cette boîte de dialogue."
 
 #: src/screens/gm/tweak.cpp:4401
 msgctxt "tweak-text"
@@ -5412,13 +5535,18 @@ msgstr "Lanceur de sonde"
 #: src/screens/gm/tweak.cpp:4408
 msgctxt "tweak-scan-probe-launcher"
 msgid ""
-"If present, this component allows this ship to launch sensor probes. Defines current and max probe stocks, and the recharge and charge time controlling restocking speed when docked.\n"
+"If present, this component allows this ship to launch sensor probes. Defines "
+"current and max probe stocks, and the recharge and charge time controlling "
+"restocking speed when docked.\n"
 "\n"
 "Callback member on_launch can't be tweaked via this dialog."
 msgstr ""
-"Si présent, ce composant permet à ce vaisseau de lancer des sondes. Définit le stock actuel et maximum de sondes, et le temps de recharge contrôlant la vitesse de réapprovisionnement à quai.\n"
+"Si présent, ce composant permet à ce vaisseau de lancer des sondes. Définit "
+"le stock actuel et maximum de sondes, et le temps de recharge contrôlant la "
+"vitesse de réapprovisionnement à quai.\n"
 "\n"
-"Le membre callback on_launch ne peut pas être modifié via cette boîte de dialogue."
+"Le membre callback on_launch ne peut pas être modifié via cette boîte de "
+"dialogue."
 
 #: src/screens/gm/tweak.cpp:4409
 msgctxt "tweak-text"
@@ -5438,13 +5566,16 @@ msgstr "Lien radar"
 #: src/screens/gm/tweak.cpp:4414
 msgctxt "tweak-radar-link"
 msgid ""
-"Determines whether this entity is capable of receiving a radar link from another entity, such as a probe, that has the Allow radar link component.\n"
+"Determines whether this entity is capable of receiving a radar link from "
+"another entity, such as a probe, that has the Allow radar link component.\n"
 "\n"
 "Callback members on_link and on_unlink can't be tweaked via this dialog."
 msgstr ""
-"Détermine si cette entité peut recevoir un lien radar d'une autre entité, comme une sonde, qui a le composant Autoriser le lien radar.\n"
+"Détermine si cette entité peut recevoir un lien radar d'une autre entité, "
+"comme une sonde, qui a le composant Autoriser le lien radar.\n"
 "\n"
-"Les membres callback on_link et on_unlink ne peuvent pas être modifiés via cette boîte de dialogue."
+"Les membres callback on_link et on_unlink ne peuvent pas être modifiés via "
+"cette boîte de dialogue."
 
 #: src/screens/gm/tweak.cpp:4415
 msgctxt "tweak-text"
@@ -5503,9 +5634,9 @@ msgid ""
 "system."
 msgstr ""
 "Si présent, ce composant active les mini-jeux de piratage contre les cibles "
-"neutres et hostiles sélectionnées sur l'écran Relais du joueur. L'efficacité"
-" définit à quel point une tentative de piratage réussie dégrade le système "
-"du vaisseau cible."
+"neutres et hostiles sélectionnées sur l'écran Relais du joueur. L'efficacité "
+"définit à quel point une tentative de piratage réussie dégrade le système du "
+"vaisseau cible."
 
 #: src/screens/gm/tweak.cpp:4429
 msgctxt "tweak-text"
@@ -5605,8 +5736,8 @@ msgid ""
 "countdown in seconds and then triggers an explosion with the defined blast "
 "damage and radius."
 msgstr ""
-"Si présent, ce composant active la fonction d'autodestruction sur les écrans"
-" des joueurs. Lorsqu'il est présent, activé et confirmé par les joueurs, il "
+"Si présent, ce composant active la fonction d'autodestruction sur les écrans "
+"des joueurs. Lorsqu'il est présent, activé et confirmé par les joueurs, il "
 "démarre un compte à rebours en secondes puis déclenche une explosion avec "
 "les dégâts et le rayon définis."
 
@@ -5652,8 +5783,8 @@ msgid ""
 "around, and optionally also behind, it over the given radius."
 msgstr ""
 "Si présent, ce composant fait que cette entité bloque les signaux des "
-"capteurs radar autour d'elle, et optionnellement aussi derrière elle, sur le"
-" rayon donné."
+"capteurs radar autour d'elle, et optionnellement aussi derrière elle, sur le "
+"rayon donné."
 
 #: src/screens/gm/tweak.cpp:4552
 msgctxt "tweak-text"
@@ -5687,13 +5818,17 @@ msgstr "Gravité"
 #: src/screens/gm/tweak.cpp:4561
 msgctxt "tweak-gravity"
 msgid ""
-"Defines this entity's gravitational attraction, which pulls nearby entities toward this one. Can optionally deal damage like a black hole.\n"
+"Defines this entity's gravitational attraction, which pulls nearby entities "
+"toward this one. Can optionally deal damage like a black hole.\n"
 "\n"
 "Callback member on_teleportation can't be tweaked via this dialog."
 msgstr ""
-"Définit l'attraction gravitationnelle de cette entité, qui attire les entités proches vers elle. Peut optionnellement infliger des dégâts comme un trou noir.\n"
+"Définit l'attraction gravitationnelle de cette entité, qui attire les "
+"entités proches vers elle. Peut optionnellement infliger des dégâts comme un "
+"trou noir.\n"
 "\n"
-"Le membre callback on_teleportation ne peut pas être modifié via cette boîte de dialogue."
+"Le membre callback on_teleportation ne peut pas être modifié via cette boîte "
+"de dialogue."
 
 #: src/screens/gm/tweak.cpp:4563
 msgctxt "tweak-text"
@@ -5810,8 +5945,8 @@ msgstr "Signature radar dynamique"
 msgctxt "tweak-dynamic-radar-signature"
 msgid ""
 "Live radar signature values updated by the game engine during play, "
-"reflecting current ship state. For modifiable base values, see the Raw radar"
-" signature component."
+"reflecting current ship state. For modifiable base values, see the Raw radar "
+"signature component."
 msgstr ""
 "Valeurs de signature radar en direct mises à jour par le moteur du jeu "
 "pendant la partie, reflétant l'état actuel du vaisseau. Pour les valeurs de "
@@ -5869,8 +6004,8 @@ msgid ""
 "falloff, blast radius, owner, damage type, and explosion sound."
 msgstr ""
 "Explose lors d'une collision avec une autre entité. Définit l'atténuation "
-"des dégâts centre/bordure, le rayon d'explosion, le propriétaire, le type de"
-" dégâts et le son d'explosion."
+"des dégâts centre/bordure, le rayon d'explosion, le propriétaire, le type de "
+"dégâts et le son d'explosion."
 
 #: src/screens/gm/tweak.cpp:4706 src/screens/gm/tweak.cpp:4721
 msgctxt "tweak-text"
@@ -6024,11 +6159,14 @@ msgstr "Émetteur de moteur"
 #: src/screens/gm/tweak.cpp:4894
 msgctxt "tweak-energy-emitter"
 msgid ""
-"Engine exhaust particle effects for ships. Each emitter has a position on the hull, a velocity direction, and a color.\n"
+"Engine exhaust particle effects for ships. Each emitter has a position on "
+"the hull, a velocity direction, and a color.\n"
 "\n"
 "emitters_dirty is an internal flag and can't be tweaked."
 msgstr ""
-"Effets de particules d'échappement de moteur pour les vaisseaux. Chaque émetteur a une position sur la coque, une direction de vélocité et une couleur.\n"
+"Effets de particules d'échappement de moteur pour les vaisseaux. Chaque "
+"émetteur a une position sur la coque, une direction de vélocité et une "
+"couleur.\n"
 "\n"
 "emitters_dirty est un drapeau interne et ne peut pas être modifié."
 
@@ -6064,11 +6202,13 @@ msgstr "Rendu de nébuleuse"
 #: src/screens/gm/tweak.cpp:4942
 msgctxt "tweak-nebula-renderer"
 msgid ""
-"Nebula cloud rendering. Defines how far from the nebula it should be visible in 3D views.\n"
+"Nebula cloud rendering. Defines how far from the nebula it should be visible "
+"in 3D views.\n"
 "\n"
 "clouds_dirty is an internal flag and can't be tweaked."
 msgstr ""
-"Rendu de nuages de nébuleuse. Définit à quelle distance de la nébuleuse elle doit être visible dans les vues 3D.\n"
+"Rendu de nuages de nébuleuse. Définit à quelle distance de la nébuleuse elle "
+"doit être visible dans les vues 3D.\n"
 "\n"
 "clouds_dirty est un drapeau interne et ne peut pas être modifié."
 
@@ -6178,8 +6318,8 @@ msgid ""
 "energy drained per second while controlling a drone."
 msgstr ""
 "Permet à cette entité de contrôler d'autres entités ayant le composant Lien "
-"drone. Définit la portée dans laquelle les drones peuvent être contrôlés, et"
-" l'énergie drainée par seconde pendant le contrôle d'un drone."
+"drone. Définit la portée dans laquelle les drones peuvent être contrôlés, et "
+"l'énergie drainée par seconde pendant le contrôle d'un drone."
 
 #: src/screens/gm/tweak.cpp:5009
 msgctxt "tweak-text"
@@ -6199,8 +6339,8 @@ msgstr "Lien drone"
 #: src/screens/gm/tweak.cpp:5014
 msgctxt "tweak-drone-link"
 msgid ""
-"Links this ship to a controllable drone entity that has the Allow drone link"
-" component."
+"Links this ship to a controllable drone entity that has the Allow drone link "
+"component."
 msgstr ""
 "Lie ce vaisseau à une entité drone contrôlable qui a le composant Autoriser "
 "le lien drone."
@@ -6222,9 +6362,9 @@ msgid ""
 "Drone controller component. Sets the owner ship that can establish a Drone "
 "link with this drone."
 msgstr ""
-"Marque cette entité comme un drone pouvant être contrôlé par une entité avec"
-" le composant Contrôleur de drones. Définit le vaisseau propriétaire qui "
-"peut établir un Lien drone avec ce drone."
+"Marque cette entité comme un drone pouvant être contrôlé par une entité avec "
+"le composant Contrôleur de drones. Définit le vaisseau propriétaire qui peut "
+"établir un Lien drone avec ce drone."
 
 #: src/screens/gm/tweak.cpp:5023
 msgctxt "tweak-tab"
@@ -6272,8 +6412,8 @@ msgid ""
 "if it does not have a Hull component. Configures which damage types affect "
 "this entity."
 msgstr ""
-"Si présent, cette entité peut être détruite par des explosions de zone, même"
-" si elle n'a pas de composant Coque. Configure quels types de dégâts "
+"Si présent, cette entité peut être détruite par des explosions de zone, même "
+"si elle n'a pas de composant Coque. Configure quels types de dégâts "
 "affectent cette entité."
 
 #: src/screens/gm/tweak.cpp:5092
@@ -6284,13 +6424,19 @@ msgstr "État du scan"
 #: src/screens/gm/tweak.cpp:5093
 msgctxt "tweak-scan-state"
 msgid ""
-"Configures scanning behavior for this entity. Sets whether the first scan goes directly to a full scan, and the complexity and depth of the scanning minigame.\n"
+"Configures scanning behavior for this entity. Sets whether the first scan "
+"goes directly to a full scan, and the complexity and depth of the scanning "
+"minigame.\n"
 "\n"
-"Callback members on_scan_initiated, on_scan_completed, and on_scan_cancelled can't be tweaked via this dialog."
+"Callback members on_scan_initiated, on_scan_completed, and on_scan_cancelled "
+"can't be tweaked via this dialog."
 msgstr ""
-"Configure le comportement de scan pour cette entité. Définit si le premier scan va directement à un scan complet, ainsi que la complexité et la profondeur du mini-jeu de scan.\n"
+"Configure le comportement de scan pour cette entité. Définit si le premier "
+"scan va directement à un scan complet, ainsi que la complexité et la "
+"profondeur du mini-jeu de scan.\n"
 "\n"
-"Les membres callback on_scan_initiated, on_scan_completed et on_scan_cancelled ne peuvent pas être modifiés via cette boîte de dialogue."
+"Les membres callback on_scan_initiated, on_scan_completed et "
+"on_scan_cancelled ne peuvent pas être modifiés via cette boîte de dialogue."
 
 #: src/screens/gm/tweak.cpp:5094
 msgctxt "tweak-text"
@@ -6816,8 +6962,8 @@ msgstr "Système cible"
 
 #: src/screenComponents/hackingDialog.cpp:83
 msgid ""
-"Select a system in the targeted ship to begin a remote intrusion attempt, or"
-" hack. If successful, you reduce that system's effectiveness for a short "
+"Select a system in the targeted ship to begin a remote intrusion attempt, or "
+"hack. If successful, you reduce that system's effectiveness for a short "
 "period of time. Continue hacking systems on hostile targets to give your "
 "crew and allies a tactical advantage against it."
 msgstr ""
@@ -6852,43 +6998,83 @@ msgstr "Piratage ÉCHOUÉ !"
 
 #: src/screenComponents/hackingDialog.cpp:184
 msgid ""
-"To successfully hack this system, you must fully illuminate all binary countermeasure nodes.\n"
+"To successfully hack this system, you must fully illuminate all binary "
+"countermeasure nodes.\n"
 "\n"
-"Select a node in the grid to toggle its state between off and on. Doing so also toggles the state of adjacent nodes immediately above, below, and to the selected node's sides. Continue toggling nodes until every node is illuminated.\n"
+"Select a node in the grid to toggle its state between off and on. Doing so "
+"also toggles the state of adjacent nodes immediately above, below, and to "
+"the selected node's sides. Continue toggling nodes until every node is "
+"illuminated.\n"
 "\n"
-"You can make an unlimited number of moves, but seek efficient solutions to best aid your crewmates. Inexperienced hackers might chase dark nodes from top row to the bottom row by selecting the node immediately below each dark node. More experienced intrusion specialists might identify more efficient solutions.\n"
+"You can make an unlimited number of moves, but seek efficient solutions to "
+"best aid your crewmates. Inexperienced hackers might chase dark nodes from "
+"top row to the bottom row by selecting the node immediately below each dark "
+"node. More experienced intrusion specialists might identify more efficient "
+"solutions.\n"
 "\n"
-"Click the Reset button to reset the field, or select a system to attempt a different intrusion method."
+"Click the Reset button to reset the field, or select a system to attempt a "
+"different intrusion method."
 msgstr ""
-"Pour pirater ce système avec succès, vous devez allumer tous les nœuds de contre-mesures binaires.\n"
+"Pour pirater ce système avec succès, vous devez allumer tous les nœuds de "
+"contre-mesures binaires.\n"
 "\n"
-"Sélectionnez un nœud dans la grille pour basculer son état entre éteint et allumé. Cela bascule aussi l'état des nœuds adjacents immédiatement au-dessus, en dessous et sur les côtés du nœud sélectionné. Continuez à basculer les nœuds jusqu'à ce que tous soient allumés.\n"
+"Sélectionnez un nœud dans la grille pour basculer son état entre éteint et "
+"allumé. Cela bascule aussi l'état des nœuds adjacents immédiatement au-"
+"dessus, en dessous et sur les côtés du nœud sélectionné. Continuez à "
+"basculer les nœuds jusqu'à ce que tous soient allumés.\n"
 "\n"
-"Vous pouvez faire un nombre illimité de mouvements, mais cherchez des solutions efficaces pour mieux aider votre équipage. Les pirates inexpérimentés peuvent poursuivre les nœuds sombres de la rangée du haut vers le bas en sélectionnant le nœud immédiatement en dessous de chaque nœud sombre. Les spécialistes en intrusion plus expérimentés identifieront des solutions plus efficaces.\n"
+"Vous pouvez faire un nombre illimité de mouvements, mais cherchez des "
+"solutions efficaces pour mieux aider votre équipage. Les pirates "
+"inexpérimentés peuvent poursuivre les nœuds sombres de la rangée du haut "
+"vers le bas en sélectionnant le nœud immédiatement en dessous de chaque nœud "
+"sombre. Les spécialistes en intrusion plus expérimentés identifieront des "
+"solutions plus efficaces.\n"
 "\n"
-"Cliquez sur le bouton Réinitialiser pour réinitialiser le champ, ou sélectionnez un système pour essayer une méthode d'intrusion différente."
+"Cliquez sur le bouton Réinitialiser pour réinitialiser le champ, ou "
+"sélectionnez un système pour essayer une méthode d'intrusion différente."
 
 #: src/screenComponents/hackingDialog.cpp:185
 msgid ""
-"To successfully hack this system, you must apply a systematic process of elimination to identify sensitive data nodes within a grid without disturbing them.\n"
+"To successfully hack this system, you must apply a systematic process of "
+"elimination to identify sensitive data nodes within a grid without "
+"disturbing them.\n"
 "\n"
-"Select a node in the grid to reveal it. If you reveal a sensitive node, the hacking interface marks it with an X. You can safely reveal one sensitive node, but revealing a second sensitive node alerts the system being hacked and disconnects your intrusion attempt.\n"
+"Select a node in the grid to reveal it. If you reveal a sensitive node, the "
+"hacking interface marks it with an X. You can safely reveal one sensitive "
+"node, but revealing a second sensitive node alerts the system being hacked "
+"and disconnects your intrusion attempt.\n"
 "\n"
-"An empty node lights up, and if no sensitive nodes surround it, any other adjacent nodes that also lack a nearby sensitive node automatically reveal themselves.\n"
+"An empty node lights up, and if no sensitive nodes surround it, any other "
+"adjacent nodes that also lack a nearby sensitive node automatically reveal "
+"themselves.\n"
 "\n"
-"If a sensitive node is immediately adjacent to or diagonal from the revealed node, a number indicates how many of the surrounding nodes are sensitive. Seek patterns in the numbers that surround unrevealed nodes to determine which unrevealed nodes are sensitive.\n"
+"If a sensitive node is immediately adjacent to or diagonal from the revealed "
+"node, a number indicates how many of the surrounding nodes are sensitive. "
+"Seek patterns in the numbers that surround unrevealed nodes to determine "
+"which unrevealed nodes are sensitive.\n"
 "\n"
-"Click the Reset button to reset the field, or select a system to attempt a different intrusion method."
+"Click the Reset button to reset the field, or select a system to attempt a "
+"different intrusion method."
 msgstr ""
-"Pour pirater ce système avec succès, vous devez appliquer un processus systématique d'élimination pour identifier les nœuds de données sensibles dans une grille sans les déranger.\n"
+"Pour pirater ce système avec succès, vous devez appliquer un processus "
+"systématique d'élimination pour identifier les nœuds de données sensibles "
+"dans une grille sans les déranger.\n"
 "\n"
-"Sélectionnez un nœud dans la grille pour le révéler. Si vous révélez un nœud sensible, l'interface de piratage le marque d'un X. Vous pouvez révéler un nœud sensible sans danger, mais en révéler un second alerte le système piraté et met fin à votre tentative d'intrusion.\n"
+"Sélectionnez un nœud dans la grille pour le révéler. Si vous révélez un nœud "
+"sensible, l'interface de piratage le marque d'un X. Vous pouvez révéler un "
+"nœud sensible sans danger, mais en révéler un second alerte le système "
+"piraté et met fin à votre tentative d'intrusion.\n"
 "\n"
-"Un nœud vide s'allume, et si aucun nœud sensible ne l'entoure, les autres nœuds adjacents sans nœud sensible proche se révèlent automatiquement.\n"
+"Un nœud vide s'allume, et si aucun nœud sensible ne l'entoure, les autres "
+"nœuds adjacents sans nœud sensible proche se révèlent automatiquement.\n"
 "\n"
-"Si un nœud sensible est immédiatement adjacent ou diagonal au nœud révélé, un nombre indique combien de nœuds environnants sont sensibles. Cherchez des motifs dans les nombres qui entourent les nœuds non révélés pour déterminer lesquels sont sensibles.\n"
+"Si un nœud sensible est immédiatement adjacent ou diagonal au nœud révélé, "
+"un nombre indique combien de nœuds environnants sont sensibles. Cherchez des "
+"motifs dans les nombres qui entourent les nœuds non révélés pour déterminer "
+"lesquels sont sensibles.\n"
 "\n"
-"Cliquez sur le bouton Réinitialiser pour réinitialiser le champ, ou sélectionnez un système pour essayer une méthode d'intrusion différente."
+"Cliquez sur le bouton Réinitialiser pour réinitialiser le champ, ou "
+"sélectionnez un système pour essayer une méthode d'intrusion différente."
 
 #: src/screenComponents/mineSweeper.cpp:223
 msgctxt "minesweeper"
@@ -7154,23 +7340,32 @@ msgctxt "hotkey_menu"
 msgid ""
 "Discrete: Acts only once when pressed. (Buttons, encoders, switches)\n"
 "\n"
-"Continuous: Acts every frame for as long as it's held down. (Steering using buttons, smooth sliders)\n"
+"Continuous: Acts every frame for as long as it's held down. (Steering using "
+"buttons, smooth sliders)\n"
 "\n"
-"Repeating: Acts once, waits, then acts repeatedly. (Keyboard repeating, sliders with stepped values)\n"
+"Repeating: Acts once, waits, then acts repeatedly. (Keyboard repeating, "
+"sliders with stepped values)\n"
 "\n"
-"Axis one-way: Control rests at a minimum value and is fully engaged at its maximum. (Triggers, throttles)\n"
+"Axis one-way: Control rests at a minimum value and is fully engaged at its "
+"maximum. (Triggers, throttles)\n"
 "\n"
-"Axis two-way: Control is centered at rest and can be pushed in two directions from there. (Joysticks)"
+"Axis two-way: Control is centered at rest and can be pushed in two "
+"directions from there. (Joysticks)"
 msgstr ""
-"Discret : Agit une seule fois lorsqu'on appuie. (Boutons, encodeurs, interrupteurs)\n"
+"Discret : Agit une seule fois lorsqu'on appuie. (Boutons, encodeurs, "
+"interrupteurs)\n"
 "\n"
-"Continu : Agit à chaque image tant qu'on maintient enfoncé. (Direction avec boutons, curseurs lisses)\n"
+"Continu : Agit à chaque image tant qu'on maintient enfoncé. (Direction avec "
+"boutons, curseurs lisses)\n"
 "\n"
-"Répétitif : Agit une fois, attend, puis agit à plusieurs reprises. (Répétition clavier, curseurs à valeurs progressives)\n"
+"Répétitif : Agit une fois, attend, puis agit à plusieurs reprises. "
+"(Répétition clavier, curseurs à valeurs progressives)\n"
 "\n"
-"Axe unidirectionnel : La commande est au repos à une valeur minimale et est complètement engagée à son maximum. (Gâchettes, manettes)\n"
+"Axe unidirectionnel : La commande est au repos à une valeur minimale et est "
+"complètement engagée à son maximum. (Gâchettes, manettes)\n"
 "\n"
-"Axe bidirectionnel : La commande est centrée au repos et peut être poussée dans deux directions. (Joysticks)"
+"Axe bidirectionnel : La commande est centrée au repos et peut être poussée "
+"dans deux directions. (Joysticks)"
 
 #: src/gui/hotkeyBinder.cpp:419
 msgctxt "button"

@@ -196,17 +196,17 @@ CreditsScreen::CreditsScreen()
         "SANTAtheGREY\n" +
         "Xansta\n\n" +
         "<h2>" + tr("Credits", "Localizations") + "</>\n\n" +
-        "<h3>" + tr("Credits", "French") + "</>\n\n" +
+        "<h3>" + tr("language_name", "French") + "</>\n\n" +
         "Muerte\n" +
         "Thomas L\n" +
         "ciseur68\n\n" +
-        "<h3>" + tr("Credits", "German") + "</>\n\n" +
+        "<h3>" + tr("language_name", "German") + "</>\n\n" +
         "aBlueShadow\n" +
         "PET2001\n" +
         "Hagen Rothe\n\n" +
-        "<h3>" + tr("Credits", "Czech") + "</>\n\n" +
+        "<h3>" + tr("language_name", "Czech") + "</>\n\n" +
         "Tomáš 'hemmond' Látal\n\n" +
-        "<h3>" + tr("Credits", "Italian") + "</>\n\n" +
+        "<h3>" + tr("language_name", "Italian") + "</>\n\n" +
         "NinoSecret\n\n"
         "<h3>" + tr("Credits", "Additional support") + "</>\n\n" +
         "Tsht\n" +

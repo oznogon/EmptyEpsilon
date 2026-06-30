@@ -13,8 +13,8 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 # Scenario name
-msgid "Weapons"
-msgstr ""
+msgid "Engineering"
+msgstr "Maschinenraum"
 
 # Scenario description
 msgid ""
@@ -178,10 +178,6 @@ msgid ""
 "destruction complete, as the ship will then explode and damage all nearby "
 "objects.\n"
 msgstr ""
-
-# Scenario name
-#~ msgid "Engineering"
-#~ msgstr "Maschinenraum"
 
 # Scenario description
 #~ msgid ""

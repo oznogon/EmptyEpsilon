@@ -165,12 +165,29 @@ void OptionsMenu::update(float delta)
 
 void OptionsMenu::setTabOptions()
 {
+    auto old_index = std::max(0, options_selector->getSelectionIndex());
     auto graphics_label = tr("Graphics");
     auto audio_label = tr("Audio");
     auto interface_label = tr("Interface");
     options_selector
         ->setOptions({graphics_label, audio_label, interface_label})
-        ->setSelectionIndex(0);
+        ->setSelectionIndex(old_index);
+}
+
+static string getLanguageDisplayName(const string& code)
+{
+    static std::unordered_map<string, string> msgids = {
+        {"cs", "Czech"},
+        {"de", "German"},
+        {"en", "English"},
+        {"fr", "French"},
+        {"it", "Italian"},
+    };
+
+    auto it = msgids.find(code);
+    if (it != msgids.end())
+        return tr("language_name", it->second);
+    return code.upper();
 }
 
 void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
@@ -187,6 +204,11 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             language = language.substr(language.find(".") + 1, language.rfind("."));
         std::sort(languages.begin(), languages.end());
 
+        std::vector<string> language_display_names;
+        language_display_names.reserve(languages.size());
+        for (const auto& code : languages)
+            language_display_names.push_back(getLanguageDisplayName(code));
+
         int default_index = 0;
         auto default_elem = std::find(
             languages.begin(),
@@ -199,13 +221,13 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         (new GuiSelector(interface_page, "LANGUAGE_SELECTOR",
             [this](int index, string value)
             {
+                PreferencesManager::set("language", value);
                 i18n::reset();
                 i18n::load("locale/main." + value + ".po");
                 i18n::load("locale/comms_ship." + value + ".po");
                 i18n::load("locale/comms_station." + value + ".po");
                 i18n::load("locale/factionInfo." + value + ".po");
                 i18n::load("locale/science_db." + value + ".po");
-                PreferencesManager::set("language", value);
                 // Reinit keyboard shortcut labels to new language.
                 keys.init();
                 // Clear cached scenario metadata.
@@ -214,7 +236,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 setTabOptions();
             }
         ))
-            ->setOptions(languages)
+            ->setOptions(language_display_names, languages)
             ->setSelectionIndex(default_index)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 

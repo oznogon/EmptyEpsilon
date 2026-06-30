@@ -14,8 +14,8 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
-msgid "Weapons"
-msgstr ""
+msgid "Engineering"
+msgstr "Ingénierie"
 
 # Scenario description
 msgid ""
@@ -179,10 +179,6 @@ msgid ""
 "destruction complete, as the ship will then explode and damage all nearby "
 "objects.\n"
 msgstr ""
-
-# Scenario name
-#~ msgid "Engineering"
-#~ msgstr "Ingénierie"
 
 # Scenario description
 #~ msgid ""

@@ -1,5 +1,5 @@
 # Scenario name
-msgid "Weapons"
+msgid "Engineering"
 msgstr ""
 
 # Scenario description

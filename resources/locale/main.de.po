@@ -287,7 +287,7 @@ msgid "Join game"
 msgstr ""
 
 #: src/menus/serverBrowseMenu.cpp:59 src/menus/mainMenus.cpp:263
-#: src/menus/tutorialMenu.cpp:100 src/menus/optionsMenu.cpp:126
+#: src/menus/tutorialMenu.cpp:100 src/menus/optionsMenu.cpp:123
 #: src/menus/hotkeyMenu.cpp:101 src/gui/hotkeyBinder.cpp:449
 msgctxt "button"
 msgid "Back"
@@ -392,25 +392,25 @@ msgctxt "Credits"
 msgid "Localizations"
 msgstr ""
 
-#: src/menus/mainMenus.cpp:199
-msgctxt "Credits"
+#: src/menus/mainMenus.cpp:199 src/menus/optionsMenu.cpp:204
+msgctxt "language_name"
 msgid "French"
-msgstr ""
+msgstr "Französisch"
 
-#: src/menus/mainMenus.cpp:203
-msgctxt "Credits"
+#: src/menus/mainMenus.cpp:203 src/menus/optionsMenu.cpp:202
+msgctxt "language_name"
 msgid "German"
-msgstr ""
+msgstr "Deutsch"
 
-#: src/menus/mainMenus.cpp:207
-msgctxt "Credits"
+#: src/menus/mainMenus.cpp:207 src/menus/optionsMenu.cpp:201
+msgctxt "language_name"
 msgid "Czech"
-msgstr ""
+msgstr "Tschechisch"
 
-#: src/menus/mainMenus.cpp:209
-msgctxt "Credits"
+#: src/menus/mainMenus.cpp:209 src/menus/optionsMenu.cpp:205
+msgctxt "language_name"
 msgid "Italian"
-msgstr ""
+msgstr "Italienisch"
 
 #: src/menus/mainMenus.cpp:211
 msgctxt "Credits"
@@ -581,184 +581,189 @@ msgstr ""
 msgid "Start tutorial"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:54
+#: src/menus/optionsMenu.cpp:55
 msgctxt "title"
 msgid "Options"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:70
-msgid "Graphics"
-msgstr ""
-
-#: src/menus/optionsMenu.cpp:71
-msgid "Audio"
-msgstr ""
-
-#: src/menus/optionsMenu.cpp:72
-msgid "Interface"
-msgstr ""
-
-#: src/menus/optionsMenu.cpp:145
+#: src/menus/optionsMenu.cpp:142
 msgctxt "options"
 msgid "Save options"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:173
+#: src/menus/optionsMenu.cpp:168
+msgid "Graphics"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:169
+msgid "Audio"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:170
+msgid "Interface"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:203
+msgctxt "language_name"
+msgid "English"
+msgstr "Englisch"
+
+#: src/menus/optionsMenu.cpp:249
 msgid "Language"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:206 src/menus/optionsMenu.cpp:269
+#: src/menus/optionsMenu.cpp:295 src/menus/optionsMenu.cpp:363
 msgid "Click Back to apply change"
 msgstr "Wird bei \"Zurück\" angewendet, tlw. auch erst bei Neustart"
 
-#: src/menus/optionsMenu.cpp:251
+#: src/menus/optionsMenu.cpp:345
 msgid "Interface theme"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:276
+#: src/menus/optionsMenu.cpp:370
 msgid "Control options"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:281 src/menus/hotkeyMenu.cpp:77
+#: src/menus/optionsMenu.cpp:375 src/menus/hotkeyMenu.cpp:77
 msgid "Configure controls"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:291
+#: src/menus/optionsMenu.cpp:385
 msgctxt "tooltips"
 msgid "Show tooltips"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:308
+#: src/menus/optionsMenu.cpp:402
 msgid "Radar rotation lock"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:318
+#: src/menus/optionsMenu.cpp:412
 msgctxt "radar_locks"
 msgid "Helms, tactical, single pilot"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:322 src/menus/optionsMenu.cpp:331
-#: src/menus/optionsMenu.cpp:339 src/menus/optionsMenu.cpp:358
-#: src/menus/optionsMenu.cpp:365 src/menus/optionsMenu.cpp:385
-#: src/menus/optionsMenu.cpp:392
+#: src/menus/optionsMenu.cpp:416 src/menus/optionsMenu.cpp:425
+#: src/menus/optionsMenu.cpp:433 src/menus/optionsMenu.cpp:452
+#: src/menus/optionsMenu.cpp:459 src/menus/optionsMenu.cpp:479
+#: src/menus/optionsMenu.cpp:486
 msgctxt "radar_locks"
 msgid "Ship rotates"
 msgstr "Schiff rotiert"
 
-#: src/menus/optionsMenu.cpp:330 src/menus/optionsMenu.cpp:338
-#: src/menus/optionsMenu.cpp:358 src/menus/optionsMenu.cpp:364
-#: src/menus/optionsMenu.cpp:385 src/menus/optionsMenu.cpp:391
+#: src/menus/optionsMenu.cpp:424 src/menus/optionsMenu.cpp:432
+#: src/menus/optionsMenu.cpp:452 src/menus/optionsMenu.cpp:458
+#: src/menus/optionsMenu.cpp:479 src/menus/optionsMenu.cpp:485
 msgctxt "radar_locks"
 msgid "Radar rotates"
 msgstr "Radar rotiert"
 
-#: src/menus/optionsMenu.cpp:348
+#: src/menus/optionsMenu.cpp:442
 msgctxt "radar_locks"
 msgid "Weapons"
 msgstr "Waffen"
 
-#: src/menus/optionsMenu.cpp:353 src/menus/optionsMenu.cpp:379
+#: src/menus/optionsMenu.cpp:447 src/menus/optionsMenu.cpp:473
 msgctxt "radar_locks"
 msgid "Lock"
 msgstr "?"
 
-#: src/menus/optionsMenu.cpp:374
+#: src/menus/optionsMenu.cpp:468
 msgctxt "radar_locks"
 msgid "Science, operations"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:396
+#: src/menus/optionsMenu.cpp:490
 msgid "Cinematic view options"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:412 src/menus/optionsMenu.cpp:422
+#: src/menus/optionsMenu.cpp:506 src/menus/optionsMenu.cpp:516
 msgid "Mouselook sensitivity: {s}"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:428
+#: src/menus/optionsMenu.cpp:522
 msgid "Randomize cinematic fly-by angles"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:441
+#: src/menus/optionsMenu.cpp:535
 msgid "Toggle fullscreen/windowed mode"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:480
+#: src/menus/optionsMenu.cpp:574
 msgid "Full-screen antialiasing: Off"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:481
+#: src/menus/optionsMenu.cpp:575
 msgid "Full-screen antialiasing: 2x"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:482
+#: src/menus/optionsMenu.cpp:576
 msgid "Full-screen antialiasing: 4x"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:483
+#: src/menus/optionsMenu.cpp:577
 msgid "Full-screen antialiasing: 8x"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:487
+#: src/menus/optionsMenu.cpp:581
 msgid "Restart EmptyEpsilon to apply full-screen antialiasing changes"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:509
+#: src/menus/optionsMenu.cpp:603
 msgctxt "options"
 msgid "Line rendering: Quads (High quality)"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:510
+#: src/menus/optionsMenu.cpp:604
 msgctxt "options"
 msgid "Line rendering: GL (Low quality)"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:530 src/menus/optionsMenu.cpp:540
+#: src/menus/optionsMenu.cpp:624 src/menus/optionsMenu.cpp:634
 msgid "Field of view: {fov} degrees"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:558 src/menus/optionsMenu.cpp:567
+#: src/menus/optionsMenu.cpp:652 src/menus/optionsMenu.cpp:661
 msgid "Draw distance: {dist}U"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:574
+#: src/menus/optionsMenu.cpp:668
 msgid "Dynamic nebula lighting"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:584
+#: src/menus/optionsMenu.cpp:678
 msgid "Nebula fog"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:602 src/menus/optionsMenu.cpp:612
+#: src/menus/optionsMenu.cpp:696 src/menus/optionsMenu.cpp:706
 msgid "Sound effect volume: {volume}%"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:619
+#: src/menus/optionsMenu.cpp:713
 msgid "Impulse engine sound"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:633 src/menus/optionsMenu.cpp:678
+#: src/menus/optionsMenu.cpp:727 src/menus/optionsMenu.cpp:772
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: src/menus/optionsMenu.cpp:634 src/menus/optionsMenu.cpp:679
+#: src/menus/optionsMenu.cpp:728 src/menus/optionsMenu.cpp:773
 msgid "Enabled"
 msgstr "Aktiviert"
 
-#: src/menus/optionsMenu.cpp:635 src/menus/optionsMenu.cpp:680
+#: src/menus/optionsMenu.cpp:729 src/menus/optionsMenu.cpp:774
 msgid "Main screen only"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:645 src/menus/optionsMenu.cpp:655
-#: src/menus/optionsMenu.cpp:690 src/menus/optionsMenu.cpp:700
+#: src/menus/optionsMenu.cpp:739 src/menus/optionsMenu.cpp:749
+#: src/menus/optionsMenu.cpp:784 src/menus/optionsMenu.cpp:794
 msgid "Volume: {volume}%"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:662
+#: src/menus/optionsMenu.cpp:756
 msgid "Music"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:715
+#: src/menus/optionsMenu.cpp:809
 msgid "Preview music"
 msgstr ""
 
