@@ -9,6 +9,8 @@
 #include "windowManager.h"
 #include "graphics/renderTarget.h"
 #include "dynamicLight.h"
+#include "multiplayer_server.h"
+#include "gameGlobalInfo.h"
 
 #include "gui/theme.h"
 #include "gui/gui2_overlay.h"
@@ -240,7 +242,9 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         if (default_elem != languages.end())
             default_index = static_cast<int>(default_elem - languages.begin());
 
-        (new GuiSelector(interface_page, "LANGUAGE_SELECTOR",
+        bool language_enabled = !game_server || !gameGlobalInfo || !gameGlobalInfo->main_scenario_script;
+
+        auto language_selector = new GuiSelector(interface_page, "LANGUAGE_SELECTOR",
             [this](int index, string value)
             {
                 PreferencesManager::set("language", value);
@@ -257,12 +261,20 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 // Reset options tabs to the new language.
                 setTabOptions();
             }
-        ))
+        );
+        language_selector
             ->setOptions(language_display_names, languages)
             ->setSelectionIndex(default_index)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-        (new GuiLabel(interface_page, "LANGUAGE_APPLICATION_LABEL", tr("Click Back to apply change"), 20.0f))
+        if (!language_enabled)
+            language_selector->disable();
+
+        (new GuiLabel(interface_page, "LANGUAGE_APPLICATION_LABEL",
+            language_enabled
+                ? tr("Click Back to apply change")
+                : tr("Return to the main menu to change language"),
+            20.0f))
             ->setSize(GuiElement::GuiSizeMax, 30.0f)
             ->setAttribute("margin", "0, 0, 0, 20");
     }
