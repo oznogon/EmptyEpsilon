@@ -157,7 +157,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:38
 msgctxt "scienceDB"
-msgid "Beam weapons"
+msgid "Beam Weapons"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:41
