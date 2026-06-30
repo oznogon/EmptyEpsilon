@@ -51,10 +51,10 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
     (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
 
-    (new GuiLabel(this, "HEADER", tr("title", "Join game"), GuiElement::GuiSizeRow))
-        ->setAlignment(sp::Alignment::Center)
-        ->setPosition(0.0f, 50.0f, sp::Alignment::TopCenter)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiLabel(this, "HEADER", tr("title", "Join game"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setPosition(50.0f, 50.0f, sp::Alignment::TopLeft)
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     (new GuiButton(this, "BACK", tr("button", "Back"),
         [this]()

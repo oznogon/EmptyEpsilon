@@ -169,8 +169,9 @@ CreditsScreen::CreditsScreen()
         ->setAttribute("padding", "50");
 
     // Header
-    (new GuiLabel(container, "HEADER", tr("EmptyEpsilon Credits"), 50.0f))
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiLabel(container, "HEADER", tr("EmptyEpsilon Credits"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     // Prep credits text
     string credits_text =
@@ -251,7 +252,8 @@ CreditsScreen::CreditsScreen()
     // Draw credits
     (new GuiScrollFormattedText(container, "CREDITS", credits_text))
         ->setTextSize(30.0f)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+        ->setSize(800.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "20");
 
     auto* back_row = new GuiElement(container, "");

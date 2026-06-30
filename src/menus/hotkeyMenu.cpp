@@ -74,7 +74,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Title label
-    (new GuiLabel(top_row, "CONFIGURE_CONTROLS_LABEL", tr("Configure controls"), 30.0f))
+    (new GuiLabel(top_row, "HEADER", tr("Configure controls"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
         ->setSize(300.0f, GuiElement::GuiSizeMax);

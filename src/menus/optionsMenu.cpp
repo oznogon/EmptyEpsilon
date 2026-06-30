@@ -46,10 +46,34 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
     container
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(container, "HEADER", tr("title", "Options"), GuiElement::GuiSizeRow))
-        ->setAlignment(sp::Alignment::Center)
+    auto top_row = new GuiElement(container, "TOP_ROW_CONTAINER");
+    top_row
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 20");
+
+    (new GuiLabel(top_row, "HEADER", tr("title", "Options"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 20");
+
+    // Options pager selector
+    options_selector = new GuiSelector(top_row, "OPTIONS_PAGER",
+        [this](int index, string value)
+        {
+            graphics_page->setVisible(index == 0);
+            audio_page->setVisible(index == 1);
+            interface_page->setVisible(index == 2);
+        }
+    );
+    options_selector
+        ->setOptions({
+            tr("Graphics"),
+            tr("Audio"),
+            tr("Interface")}
+        )
+        ->setSelectionIndex(0)
+        ->setSize(300.0f, GuiElement::GuiSizeMax)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter);
 
     auto main_panel = new GuiPanel(container, "");
     main_panel
@@ -58,55 +82,6 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
         ->setAttribute("layout", "vertical");
     main_panel
         ->setAttribute("margin", "0, 0, 0, 20");
-
-    // Options pager tab row
-    auto tab_row = new GuiElement(main_panel, "");
-    tab_row
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
-        ->setAttribute("layout", "horizontal");
-
-    graphics_tab = new GuiToggleButton(tab_row, "", tr("Graphics"),
-        [this](bool value)
-        {
-            graphics_tab->setValue(true);
-            audio_tab->setValue(false);
-            interface_tab->setValue(false);
-            graphics_page->show();
-            audio_page->hide();
-            interface_page->hide();
-        }
-    );
-    graphics_tab
-        ->setValue(true)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    audio_tab = new GuiToggleButton(tab_row, "", tr("Audio"),
-        [this](bool value)
-        {
-            graphics_tab->setValue(false);
-            audio_tab->setValue(true);
-            interface_tab->setValue(false);
-            graphics_page->hide();
-            audio_page->show();
-            interface_page->hide();
-        }
-    );
-    audio_tab
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    interface_tab = new GuiToggleButton(tab_row, "", tr("Interface"),
-        [this](bool value)
-        {
-            graphics_tab->setValue(false);
-            audio_tab->setValue(false);
-            interface_tab->setValue(true);
-            graphics_page->hide();
-            audio_page->hide();
-            interface_page->show();
-        }
-    );
-    interface_tab
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Options pages
     auto page_row = new GuiScrollContainer(main_panel, "");

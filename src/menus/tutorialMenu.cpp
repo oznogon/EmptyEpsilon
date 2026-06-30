@@ -32,12 +32,6 @@ TutorialMenu::TutorialMenu()
     container
         ->setAttribute("layout", "vertical");
 
-    // Tutorial section.
-    (new GuiLabel(container, "TITLE_LABEL", tr("title", "Tutorials"), GuiElement::GuiSizeRow))
-        ->setAlignment(sp::Alignment::Center)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
-        ->setAttribute("margin", "0, 0, 0, 20");
-
     GuiElement* columns = new GuiElement(container, "");
     columns
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -47,7 +41,7 @@ TutorialMenu::TutorialMenu()
 
     GuiElement* left = new GuiElement(columns, "LEFT_COLUMN");
     left
-        ->setSize(350.0f, GuiElement::GuiSizeMax)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
     left
         ->setAttribute("margin", "0, 20, 0, 0x");
@@ -58,7 +52,7 @@ TutorialMenu::TutorialMenu()
         ->setAttribute("layout", "vertical");
 
     // Scenario categories.
-    (new GuiLabel(left, "SCENARIO_LABEL", tr("Tutorial scenarios"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(left, "SCENARIO_LABEL", tr("Tutorials"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");

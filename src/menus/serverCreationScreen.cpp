@@ -33,17 +33,17 @@ ServerSetupScreen::ServerSetupScreen()
     container
         ->setAttribute("layout", "vertical");
 
+    (new GuiLabel(container, "HEADER", tr("title", "Host game"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 20");
+
     GuiElement* column = new GuiElement(container, "COLUMN");
     column
         ->setSize(800.0f, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
     column
         ->setAttribute("alignment", "topcenter");
-
-    (new GuiLabel(column, "HEADER", tr("title", "Host game"), GuiElement::GuiSizeRow))
-        ->setAlignment(sp::Alignment::Center)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
-        ->setAttribute("margin", "0, 0, 0, 20");
 
     // Server configuration section.
     (new GuiLabel(column, "CONFIG_LABEL", tr("Server configuration"), 30.0f))
@@ -317,9 +317,9 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     container
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(container, "TITLE_LABEL", tr("title", "Select scenario"), GuiElement::GuiSizeRow))
-        ->setAlignment(sp::Alignment::Center)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+    (new GuiLabel(container, "HEADER", tr("title", "Select scenario"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 20");
 
     GuiElement* columns = new GuiElement(container, "");
@@ -329,7 +329,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
 
     GuiElement* left = new GuiElement(columns, "LEFT_COLUMN");
     left
-        ->setSize(350.0f, GuiElement::GuiSizeMax)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
     GuiElement* middle = new GuiElement(columns, "MIDDLE_COLUMN");
@@ -514,9 +514,9 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
     container
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(container, "TITLE_LABEL", tr("title", "Configure scenario"), GuiElement::GuiSizeRow))
-        ->setAlignment(sp::Alignment::Center)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+    (new GuiLabel(container, "HEADER", tr("title", "Configure scenario"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 20");
 
     GuiElement* columns = new GuiElement(container, "");
