@@ -107,7 +107,7 @@ msgstr "Opérations"
 #: src/playerInfo.cpp:2171
 msgctxt "crew_screen"
 msgid "Single pilot"
-msgstr "Pilotage - armement"
+msgstr "Pilotage-armement"
 
 #: src/playerInfo.cpp:2172
 msgctxt "crew_screen"
@@ -642,7 +642,7 @@ msgstr "Verrouillage de la rotation du radar"
 #: src/menus/optionsMenu.cpp:318
 msgctxt "radar_locks"
 msgid "Helms, tactical, single pilot"
-msgstr "Navigation, radar tactique, pilotage-armement"
+msgstr "Navigation, radar tactique,\npilotage-armement"
 
 #: src/menus/optionsMenu.cpp:322 src/menus/optionsMenu.cpp:331
 #: src/menus/optionsMenu.cpp:339 src/menus/optionsMenu.cpp:358
