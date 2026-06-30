@@ -48,6 +48,7 @@ private:
     void setupInterfaceOptions(OptionsMenu::ReturnTo return_to);
     void setupGraphicsOptions();
     void setupAudioOptions();
+    void setTabOptions();
 public:
     OptionsMenu(ReturnTo return_to=ReturnTo::Main);
 

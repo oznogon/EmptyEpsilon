@@ -4,6 +4,7 @@
 #include "hotkeyMenu.h"
 #include "main.h"
 #include "preferenceManager.h"
+#include "scenarioInfo.h"
 #include "soundManager.h"
 #include "windowManager.h"
 #include "graphics/renderTarget.h"
@@ -66,14 +67,10 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
         }
     );
     options_selector
-        ->setOptions({
-            tr("Graphics"),
-            tr("Audio"),
-            tr("Interface")}
-        )
-        ->setSelectionIndex(0)
         ->setSize(300.0f, GuiElement::GuiSizeMax)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter);
+
+    setTabOptions();
 
     auto main_panel = new GuiPanel(container, "");
     main_panel
@@ -166,6 +163,16 @@ void OptionsMenu::update(float delta)
     }
 }
 
+void OptionsMenu::setTabOptions()
+{
+    auto graphics_label = tr("Graphics");
+    auto audio_label = tr("Audio");
+    auto interface_label = tr("Interface");
+    options_selector
+        ->setOptions({graphics_label, audio_label, interface_label})
+        ->setSelectionIndex(0);
+}
+
 void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 {
     // Select language
@@ -190,13 +197,21 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             default_index = static_cast<int>(default_elem - languages.begin());
 
         (new GuiSelector(interface_page, "LANGUAGE_SELECTOR",
-            [](int index, string value)
+            [this](int index, string value)
             {
                 i18n::reset();
                 i18n::load("locale/main." + value + ".po");
+                i18n::load("locale/comms_ship." + value + ".po");
+                i18n::load("locale/comms_station." + value + ".po");
+                i18n::load("locale/factionInfo." + value + ".po");
+                i18n::load("locale/science_db." + value + ".po");
                 PreferencesManager::set("language", value);
                 // Reinit keyboard shortcut labels to new language.
                 keys.init();
+                // Clear cached scenario metadata.
+                ScenarioInfo::clearCache();
+                // Reset options tabs to the new language.
+                setTabOptions();
             }
         ))
             ->setOptions(languages)

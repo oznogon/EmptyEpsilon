@@ -167,6 +167,11 @@ const std::vector<ScenarioInfo>& ScenarioInfo::getScenarios()
     return cached_full_list;
 }
 
+void ScenarioInfo::clearCache()
+{
+    cached_full_list.clear();
+}
+
 std::vector<ScenarioInfo> ScenarioInfo::getScenarios(const string& category)
 {
     std::vector<ScenarioInfo> result;

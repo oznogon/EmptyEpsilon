@@ -69,6 +69,7 @@
 - Broken French science_db translation (key collision)
 - Missing numeric type check in science_db values
 - Executable permission restored on scripts and resources
+- Scenario names, descriptions, and settings not updating when changing the interface language: cache is now invalidated and all locale files are reloaded on language change
 
 ## [2026-05]
 
