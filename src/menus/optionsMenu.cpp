@@ -209,8 +209,10 @@ static string getLanguageDisplayName(const string& code)
     };
 
     auto it = msgids.find(code);
-    if (it != msgids.end())
-        return tr("language_name", it->second);
+    if (it != msgids.end()) return tr("language_name", it->second);
+    // Unused dummy to add English to languages for localization
+    { string english = tr("language_name", "English"); };
+
     return code.upper();
 }
 

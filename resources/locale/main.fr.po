@@ -289,7 +289,7 @@ msgid "Join game"
 msgstr "Rejoindre la partie"
 
 #: src/menus/serverBrowseMenu.cpp:59 src/menus/mainMenus.cpp:263
-#: src/menus/tutorialMenu.cpp:100 src/menus/optionsMenu.cpp:123
+#: src/menus/tutorialMenu.cpp:100 src/menus/optionsMenu.cpp:125
 #: src/menus/hotkeyMenu.cpp:101 src/gui/hotkeyBinder.cpp:449
 msgctxt "button"
 msgid "Back"
@@ -396,22 +396,22 @@ msgctxt "Credits"
 msgid "Localizations"
 msgstr "Localisations"
 
-#: src/menus/mainMenus.cpp:199 src/menus/optionsMenu.cpp:204
+#: src/menus/mainMenus.cpp:199
 msgctxt "language_name"
 msgid "French"
 msgstr "Français"
 
-#: src/menus/mainMenus.cpp:203 src/menus/optionsMenu.cpp:202
+#: src/menus/mainMenus.cpp:203
 msgctxt "language_name"
 msgid "German"
 msgstr "Allemand"
 
-#: src/menus/mainMenus.cpp:207 src/menus/optionsMenu.cpp:201
+#: src/menus/mainMenus.cpp:207
 msgctxt "language_name"
 msgid "Czech"
 msgstr "Tchèque"
 
-#: src/menus/mainMenus.cpp:209 src/menus/optionsMenu.cpp:205
+#: src/menus/mainMenus.cpp:209
 msgctxt "language_name"
 msgid "Italian"
 msgstr "Italien"
@@ -587,191 +587,199 @@ msgstr "Tutoriels"
 msgid "Start tutorial"
 msgstr "Démarrer le tutoriel"
 
-#: src/menus/optionsMenu.cpp:55
+#: src/menus/optionsMenu.cpp:57
 msgctxt "title"
 msgid "Options"
 msgstr "Options"
 
-#: src/menus/optionsMenu.cpp:142
+#: src/menus/optionsMenu.cpp:144
 msgctxt "options"
 msgid "Save options"
 msgstr "Enregistrer les options"
 
-#: src/menus/optionsMenu.cpp:168
+#: src/menus/optionsMenu.cpp:171
 msgid "Graphics"
 msgstr "Graphismes"
 
-#: src/menus/optionsMenu.cpp:169
+#: src/menus/optionsMenu.cpp:172
 msgid "Audio"
 msgstr "Audio"
 
-#: src/menus/optionsMenu.cpp:170
+#: src/menus/optionsMenu.cpp:173
 msgid "Interface"
 msgstr "Interface"
 
-#: src/menus/optionsMenu.cpp:203
+#: src/menus/optionsMenu.cpp:212
+msgid "language_name"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:214
 msgctxt "language_name"
 msgid "English"
 msgstr "Anglais"
 
-#: src/menus/optionsMenu.cpp:249
+#: src/menus/optionsMenu.cpp:223
 msgid "Language"
 msgstr "Langue"
 
-#: src/menus/optionsMenu.cpp:295 src/menus/optionsMenu.cpp:363
+#: src/menus/optionsMenu.cpp:277 src/menus/optionsMenu.cpp:347
 msgid "Click Back to apply change"
 msgstr "Cliquez sur Retour pour appliquer le changement"
 
-#: src/menus/optionsMenu.cpp:345
+#: src/menus/optionsMenu.cpp:278
+msgid "Return to the main menu to change language"
+msgstr "Retournez au menu principal pour changer de lange"
+
+#: src/menus/optionsMenu.cpp:329
 msgid "Interface theme"
 msgstr "Thème de l'interface"
 
-#: src/menus/optionsMenu.cpp:370
+#: src/menus/optionsMenu.cpp:354
 msgid "Control options"
 msgstr "Options de contrôle"
 
-#: src/menus/optionsMenu.cpp:375 src/menus/hotkeyMenu.cpp:77
+#: src/menus/optionsMenu.cpp:359 src/menus/hotkeyMenu.cpp:77
 msgid "Configure controls"
 msgstr "Configurer les contrôles"
 
-#: src/menus/optionsMenu.cpp:385
+#: src/menus/optionsMenu.cpp:369
 msgctxt "tooltips"
 msgid "Show tooltips"
 msgstr "Afficher les info-bulles"
 
-#: src/menus/optionsMenu.cpp:402
+#: src/menus/optionsMenu.cpp:386
 msgid "Radar rotation lock"
 msgstr "Verrouillage de la rotation du radar"
 
-#: src/menus/optionsMenu.cpp:412
+#: src/menus/optionsMenu.cpp:396
 msgctxt "radar_locks"
 msgid "Helms, tactical, single pilot"
 msgstr ""
 "Navigation, radar tactique,\n"
 "pilotage-armement"
 
-#: src/menus/optionsMenu.cpp:416 src/menus/optionsMenu.cpp:425
-#: src/menus/optionsMenu.cpp:433 src/menus/optionsMenu.cpp:452
-#: src/menus/optionsMenu.cpp:459 src/menus/optionsMenu.cpp:479
-#: src/menus/optionsMenu.cpp:486
+#: src/menus/optionsMenu.cpp:400 src/menus/optionsMenu.cpp:409
+#: src/menus/optionsMenu.cpp:417 src/menus/optionsMenu.cpp:436
+#: src/menus/optionsMenu.cpp:443 src/menus/optionsMenu.cpp:463
+#: src/menus/optionsMenu.cpp:470
 msgctxt "radar_locks"
 msgid "Ship rotates"
 msgstr "Rotation du vaisseau"
 
-#: src/menus/optionsMenu.cpp:424 src/menus/optionsMenu.cpp:432
-#: src/menus/optionsMenu.cpp:452 src/menus/optionsMenu.cpp:458
-#: src/menus/optionsMenu.cpp:479 src/menus/optionsMenu.cpp:485
+#: src/menus/optionsMenu.cpp:408 src/menus/optionsMenu.cpp:416
+#: src/menus/optionsMenu.cpp:436 src/menus/optionsMenu.cpp:442
+#: src/menus/optionsMenu.cpp:463 src/menus/optionsMenu.cpp:469
 msgctxt "radar_locks"
 msgid "Radar rotates"
 msgstr "Rotation du radar"
 
-#: src/menus/optionsMenu.cpp:442
+#: src/menus/optionsMenu.cpp:426
 msgctxt "radar_locks"
 msgid "Weapons"
 msgstr "Armement"
 
-#: src/menus/optionsMenu.cpp:447 src/menus/optionsMenu.cpp:473
+#: src/menus/optionsMenu.cpp:431 src/menus/optionsMenu.cpp:457
 msgctxt "radar_locks"
 msgid "Lock"
 msgstr "Verrouillage"
 
-#: src/menus/optionsMenu.cpp:468
+#: src/menus/optionsMenu.cpp:452
 msgctxt "radar_locks"
 msgid "Science, operations"
 msgstr "Science, opérations"
 
-#: src/menus/optionsMenu.cpp:490
+#: src/menus/optionsMenu.cpp:474
 msgid "Cinematic view options"
 msgstr "Options de la vue cinématique"
 
-#: src/menus/optionsMenu.cpp:506 src/menus/optionsMenu.cpp:516
+#: src/menus/optionsMenu.cpp:490 src/menus/optionsMenu.cpp:500
 msgid "Mouselook sensitivity: {s}"
 msgstr "Sensibilité souris : {s}"
 
-#: src/menus/optionsMenu.cpp:522
+#: src/menus/optionsMenu.cpp:506
 msgid "Randomize cinematic fly-by angles"
 msgstr "Angles de passage aléatoires en mode cinématique"
 
-#: src/menus/optionsMenu.cpp:535
+#: src/menus/optionsMenu.cpp:519
 msgid "Toggle fullscreen/windowed mode"
 msgstr "Basculer en mode plein écran/fenêtré"
 
-#: src/menus/optionsMenu.cpp:574
+#: src/menus/optionsMenu.cpp:558
 msgid "Full-screen antialiasing: Off"
 msgstr "Anticrénelage plein écran : Désactivé"
 
-#: src/menus/optionsMenu.cpp:575
+#: src/menus/optionsMenu.cpp:559
 msgid "Full-screen antialiasing: 2x"
 msgstr "Anticrénelage plein écran : 2x"
 
-#: src/menus/optionsMenu.cpp:576
+#: src/menus/optionsMenu.cpp:560
 msgid "Full-screen antialiasing: 4x"
 msgstr "Anticrénelage plein écran : 4x"
 
-#: src/menus/optionsMenu.cpp:577
+#: src/menus/optionsMenu.cpp:561
 msgid "Full-screen antialiasing: 8x"
 msgstr "Anticrénelage plein écran : 8x"
 
-#: src/menus/optionsMenu.cpp:581
+#: src/menus/optionsMenu.cpp:565
 msgid "Restart EmptyEpsilon to apply full-screen antialiasing changes"
 msgstr "Redémarrer EmptyEpsilon pour appliquer les changements d'anticrénelage"
 
-#: src/menus/optionsMenu.cpp:603
-msgctxt "options"
-msgid "Line rendering: Quads (High quality)"
-msgstr "Rendu des lignes : Quads (Haute qualité)"
-
-#: src/menus/optionsMenu.cpp:604
+#: src/menus/optionsMenu.cpp:587
 msgctxt "options"
 msgid "Line rendering: GL (Low quality)"
 msgstr "Rendu des lignes : GL (Basse qualité)"
 
-#: src/menus/optionsMenu.cpp:624 src/menus/optionsMenu.cpp:634
+#: src/menus/optionsMenu.cpp:588
+msgctxt "options"
+msgid "Line rendering: Quads (High quality)"
+msgstr "Rendu des lignes : Quads (Haute qualité)"
+
+#: src/menus/optionsMenu.cpp:608 src/menus/optionsMenu.cpp:618
 msgid "Field of view: {fov} degrees"
 msgstr "Champ de vision : {fov} degrés"
 
-#: src/menus/optionsMenu.cpp:652 src/menus/optionsMenu.cpp:661
+#: src/menus/optionsMenu.cpp:636 src/menus/optionsMenu.cpp:645
 msgid "Draw distance: {dist}U"
 msgstr "Distance d'affichage : {dist}U"
 
-#: src/menus/optionsMenu.cpp:668
+#: src/menus/optionsMenu.cpp:652
 msgid "Dynamic nebula lighting"
 msgstr "Éclairage dynamique des nébuleuses"
 
-#: src/menus/optionsMenu.cpp:678
+#: src/menus/optionsMenu.cpp:662
 msgid "Nebula fog"
 msgstr "Brouillard de nébuleuse"
 
-#: src/menus/optionsMenu.cpp:696 src/menus/optionsMenu.cpp:706
+#: src/menus/optionsMenu.cpp:680 src/menus/optionsMenu.cpp:690
 msgid "Sound effect volume: {volume}%"
 msgstr "Volume des effets sonores : {volume}%"
 
-#: src/menus/optionsMenu.cpp:713
+#: src/menus/optionsMenu.cpp:697
 msgid "Impulse engine sound"
 msgstr "Son du moteur à impulsion"
 
-#: src/menus/optionsMenu.cpp:727 src/menus/optionsMenu.cpp:772
+#: src/menus/optionsMenu.cpp:711 src/menus/optionsMenu.cpp:756
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: src/menus/optionsMenu.cpp:728 src/menus/optionsMenu.cpp:773
+#: src/menus/optionsMenu.cpp:712 src/menus/optionsMenu.cpp:757
 msgid "Enabled"
 msgstr "Activé"
 
-#: src/menus/optionsMenu.cpp:729 src/menus/optionsMenu.cpp:774
+#: src/menus/optionsMenu.cpp:713 src/menus/optionsMenu.cpp:758
 msgid "Main screen only"
 msgstr "Écran principal uniquement"
 
-#: src/menus/optionsMenu.cpp:739 src/menus/optionsMenu.cpp:749
-#: src/menus/optionsMenu.cpp:784 src/menus/optionsMenu.cpp:794
+#: src/menus/optionsMenu.cpp:723 src/menus/optionsMenu.cpp:733
+#: src/menus/optionsMenu.cpp:768 src/menus/optionsMenu.cpp:778
 msgid "Volume: {volume}%"
 msgstr "Volume : {volume}%"
 
-#: src/menus/optionsMenu.cpp:756
+#: src/menus/optionsMenu.cpp:740
 msgid "Music"
 msgstr "Musique"
 
-#: src/menus/optionsMenu.cpp:809
+#: src/menus/optionsMenu.cpp:793
 msgid "Preview music"
 msgstr "Aperçu musical"
 
