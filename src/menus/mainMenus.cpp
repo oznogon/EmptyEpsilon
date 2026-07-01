@@ -218,7 +218,8 @@ CreditsScreen::CreditsScreen()
         "Alexandr Zhelanov\n" +
         "Joe Baxter-Webb\n" +
         "neocrey\n" +
-        "FoxSynergy\n\n" +
+        "FoxSynergy\n" +
+        "Rafael Krux, Orchestralis.net (CC-BY)\n\n" +
         "<h2>" + tr("Credits", "Models") + "</>\n\n" +
         "Angryfly (turbosquid.com)\n" +
         "MSGDI (https://www.cgtrader.com/3d-models/msgdi)\n" +
