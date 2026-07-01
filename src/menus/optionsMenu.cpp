@@ -1,16 +1,18 @@
+#include "optionsMenu.h"
 #include <i18n.h>
 #include "engine.h"
-#include "optionsMenu.h"
 #include "hotkeyMenu.h"
 #include "main.h"
 #include "preferenceManager.h"
 #include "scenarioInfo.h"
 #include "soundManager.h"
 #include "windowManager.h"
-#include "graphics/renderTarget.h"
 #include "dynamicLight.h"
 #include "multiplayer_server.h"
 #include "gameGlobalInfo.h"
+#include "featureDefs.h"
+#include "audio/music.h"
+#include "graphics/renderTarget.h"
 
 #include "gui/theme.h"
 #include "gui/gui2_overlay.h"
@@ -220,10 +222,10 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 {
     // Select language
     {
-        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language"), 30.0f))
+        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language"), GuiElement::GuiSizeLabel))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-        
+
         // Name language by language code in main locale filename.
         std::vector<string> languages = findResources("locale/main.*.po");
         for (string &language : languages)
@@ -277,10 +279,10 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 ? tr("Click Back to apply change")
                 : tr("Return to the main menu to change language"),
             20.0f))
-            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeLabel)
             ->setAttribute("margin", "0, 0, 0, 20");
     }
-    
+
     // GUI theme selection
     {
         std::vector<string> themes = findResources("gui/*.theme.txt");
@@ -295,7 +297,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 LOG(Error, "Failed to load theme ", *iter);
                 iter = themes.erase(iter);
             }
-            else if (!GuiTheme::getTheme(*iter)->getStyle("base")->states[0].font 
+            else if (!GuiTheme::getTheme(*iter)->getStyle("base")->states[0].font
                      || !GuiTheme::getTheme(*iter)->getStyle("bold")->states[0].font)
             {
                 LOG(Error, "Missing base font or bold font for theme ", *iter);
@@ -303,7 +305,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             }
             else ++iter;
         }
-        
+
         std::sort(themes.begin(), themes.end());
         if (themes.size() == 0)
         {
@@ -323,13 +325,13 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         if (default_elem != themes.end())
             default_index = static_cast<int>(default_elem - themes.begin());
 
-        // Only show themes selector if more than one theme is loaded.
+        (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("Interface theme"), GuiElement::GuiSizeLabel))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+        // Show themes selector only if more than one theme is loaded.
         if (themes.size() > 1)
         {
-            (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("Interface theme"), 30.0f))
-                ->addBackground()
-                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-
             (new GuiSelector(interface_page, "GUI_THEME_SELECTOR",
                 [](int index, string theme_name)
                 {
@@ -345,36 +347,39 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
             (new GuiLabel(interface_page, "THEME_APPLICATION_LABEL", tr("Click Back to apply change"), 20.0f))
-                ->setSize(GuiElement::GuiSizeMax, 30.0f)
+                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeLabel)
                 ->setAttribute("margin", "0, 0, 0, 20");
         }
+
+        // Tooltip visibility toggle.
+        (new GuiToggleButton(interface_page, "TOOLTIP_VISIBILITY", tr("tooltips", "Show tooltips"),
+            [](bool value)
+            {
+                PreferencesManager::set("tooltips", value ? "1" : "0");
+            }
+        ))
+            ->setValue(PreferencesManager::get("tooltips", "0") == "1")
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 20");
     }
 
     // Control configuration
-    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control options"), 30))
-        ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    {
+        (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control options"), GuiElement::GuiSizeLabel))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-    // Keyboard config (hotkeys/keybindings)
-    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure controls"),
-        [this, return_to]()
-        {
-            new HotkeyMenu(return_to);
-            destroy();
-        }
-    ))
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-
-    // Tooltip visibility toggle.
-    (new GuiToggleButton(interface_page, "TOOLTIP_VISIBILITY", tr("tooltips", "Show tooltips"),
-        [](bool value)
-        {
-            PreferencesManager::set("tooltips", value ? "1" : "0");
-        }
-    ))
-        ->setValue(PreferencesManager::get("tooltips", "0") == "1")
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
-        ->setAttribute("margin", "0, 0, 0, 20");
+        // Hotkey/bindings config
+        (new GuiButton(interface_page, "CONFIGURE_BINDINGS", tr("Configure controls"),
+            [this, return_to]()
+            {
+                new HotkeyMenu(return_to);
+                destroy();
+            }
+        ))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 20");
+    }
 
     // Radar rotation lock options.
     {
@@ -383,7 +388,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(GuiElement::GuiSizeMax, 220.0f)
             ->setAttribute("layout", "vertical");
 
-        (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("Radar rotation lock"), 30.0f))
+        (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("Radar rotation lock"), GuiElement::GuiSizeLabel))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -471,203 +476,219 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
     }
 
-    (new GuiLabel(interface_page, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("Cinematic view options"), 30.0f))
-        ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-
-    auto initial_camera_sensitivity = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
-    if (initial_camera_sensitivity <= 0.0f)
+    // Cinematic view options
     {
-        LOG(Warning, "camera_mouse_sensitivity value invalid: ", PreferencesManager::get("camera_mouse_sensitivity", "0.15"));
-        initial_camera_sensitivity = 0.15f;
-    }
+        (new GuiLabel(interface_page, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("Cinematic view options"), GuiElement::GuiSizeLabel))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-    camera_sensitivity_slider = new GuiBasicSlider(interface_page, "CAMERA_SENSITIVITY_SLIDER", 0.01f, 1.0f, initial_camera_sensitivity,
-        [this](float sensitivity)
+        auto initial_camera_sensitivity = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
+        if (initial_camera_sensitivity <= 0.0f)
         {
-            PreferencesManager::set("camera_mouse_sensitivity", sensitivity);
-            camera_sensitivity_overlay_label->setText(
-                tr("Mouselook sensitivity: {s}").format({
-                    {"s", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f)))}
-                })
-            );
+            LOG(Warning, "camera_mouse_sensitivity value invalid: ", PreferencesManager::get("camera_mouse_sensitivity", "0.15"));
+            initial_camera_sensitivity = 0.15f;
         }
-    );
-    camera_sensitivity_slider->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-    // Override overlay label.
-    camera_sensitivity_overlay_label = new GuiLabel(camera_sensitivity_slider, "CAMERA_SENSITIVITY_SLIDER_LABEL",
-        tr("Mouselook sensitivity: {s}").format({
-            {"s", static_cast<string>(static_cast<int>(nearbyint(initial_camera_sensitivity * 100.0f)))}
-        }), 30.0f);
-    camera_sensitivity_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        camera_sensitivity_slider = new GuiBasicSlider(interface_page, "CAMERA_SENSITIVITY_SLIDER", 0.01f, 1.0f, initial_camera_sensitivity,
+            [this](float sensitivity)
+            {
+                PreferencesManager::set("camera_mouse_sensitivity", sensitivity);
+                camera_sensitivity_overlay_label->setText(
+                    tr("Mouselook sensitivity: {s}").format({
+                        {"s", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f)))}
+                    })
+                );
+            }
+        );
+        camera_sensitivity_slider->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-    // Cinematic fly-by randomization
-    (new GuiToggleButton(interface_page, "RANDOMIZE_CINEMATIC_FLYBY", tr("Randomize cinematic fly-by angles"),
-        [this](bool value)
-        {
-            PreferencesManager::set("camera_flyby_randomized", value ? "1" : "0");
-        })
-    )
-        ->setValue(PreferencesManager::get("camera_flyby_randomized", "0") == "1")
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        // Override overlay label.
+        camera_sensitivity_overlay_label = new GuiLabel(camera_sensitivity_slider, "CAMERA_SENSITIVITY_SLIDER_LABEL",
+            tr("Mouselook sensitivity: {s}").format({
+                {"s", static_cast<string>(static_cast<int>(nearbyint(initial_camera_sensitivity * 100.0f)))}
+            }), GuiElement::GuiSizeLabel);
+        camera_sensitivity_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // Cinematic fly-by randomization
+        (new GuiToggleButton(interface_page, "RANDOMIZE_CINEMATIC_FLYBY", tr("Randomize cinematic fly-by angles"),
+            [this](bool value)
+            {
+                PreferencesManager::set("camera_flyby_randomized", value ? "1" : "0");
+            })
+        )
+            ->setValue(PreferencesManager::get("camera_flyby_randomized", "0") == "1")
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    }
 }
 
 void OptionsMenu::setupGraphicsOptions()
 {
-    // Fullscreen toggle.
-    (new GuiButton(graphics_page, "FULLSCREEN_TOGGLE", tr("Toggle fullscreen/windowed mode"),
-        []()
-        {
-            foreach (Window, window, windows)
-            {
-                window->setMode(
-                    window->getMode() == Window::Mode::Window
-                        ? Window::Mode::Fullscreen
-                        : Window::Mode::Window
-                );
-            }
-        }
-    ))
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
-        ->setAttribute("margin", "0, 0, 0, 20");
-
-    // FSAA configuration.
-    int fsaa = std::max(1, windows[0]->getFSAA());
-    int fsaa_index = 0;
-
-    // Convert selector index to an FSAA amount.
-    switch (fsaa)
+    // Quality/performance settings.
     {
-    case  8: fsaa_index = 3; break;
-    case  4: fsaa_index = 2; break;
-    case  2: fsaa_index = 1; break;
-    default: fsaa_index = 0; break;
+        // FSAA configuration.
+        int fsaa = std::max(1, windows[0]->getFSAA());
+        int fsaa_index = 0;
+
+        // Convert selector index to an FSAA amount.
+        switch (fsaa)
+        {
+        case  8: fsaa_index = 3; break;
+        case  4: fsaa_index = 2; break;
+        case  2: fsaa_index = 1; break;
+        default: fsaa_index = 0; break;
+        }
+
+        (new GuiLabel(graphics_page, "QUALITY_LABEL", tr("options", "Quality settings"), GuiElement::GuiSizeLabel))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 10");
+
+        // FSAA selector.
+        (new GuiSelector(graphics_page, "FSAA",
+            [](int index, string value)
+            {
+                static const int fsaa[] = {0, 2, 4, 8};
+                foreach (Window, window, windows)
+                    window->setFSAA(fsaa[index]);
+            }
+        ))
+            ->setOptions({
+                tr("options", "Full-screen antialiasing: Off"),
+                tr("options", "Full-screen antialiasing: 2x"),
+                tr("options", "Full-screen antialiasing: 4x"),
+                tr("options", "Full-screen antialiasing: 8x")}
+            )
+            ->setSelectionIndex(fsaa_index)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+        (new GuiLabel(graphics_page, "THEME_APPLICATION_LABEL", tr("options", "Restart EmptyEpsilon to apply full-screen antialiasing changes"), 20.0f))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeLabel)
+            ->setAttribute("margin", "0, 0, 0, 20");
+
+        // Line drawing mode selector.
+        int line_mode_index = (sp::RenderTarget::getLineDrawingMode() == sp::RenderTarget::LineDrawingMode::GL) ? 0 : 1;
+        (new GuiSelector(graphics_page, "GRAPHICS_LINE_DRAWING_MODE",
+            [](int index, string value)
+            {
+                if (index == 1)
+                {
+                    PreferencesManager::set("line_drawing_mode", "quad");
+                    sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::Quad);
+                }
+                else
+                {
+                    PreferencesManager::set("line_drawing_mode", "gl");
+                    sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::GL);
+                }
+            }
+        ))
+            ->setOptions({
+                tr("options", "Line rendering: GL (Low quality)"),
+                tr("options", "Line rendering: Quads (High quality)"
+            )})
+            ->setSelectionIndex(line_mode_index)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+        // Dynamic nebula lighting toggle.
+        (new GuiToggleButton(graphics_page, "DYNAMIC_NEBULA_LIGHTING", tr("options", "Dynamic nebula lighting"),
+            [](bool value)
+            {
+                PreferencesManager::set("dynamic_nebula_lighting", value ? "1" : "0");
+            }
+        ))
+            ->setValue(DynamicLightManager::isEnabled())
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+        // Nebula fog toggle.
+        (new GuiToggleButton(graphics_page, "NEBULA_FOG", tr("options", "Nebula fog"),
+            [](bool value)
+            {
+                PreferencesManager::set("nebula_fog", value ? "1" : "0");
+            }
+        ))
+            ->setValue(PreferencesManager::get("nebula_fog", "1") == "1")
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 20");
     }
 
-    // FSAA selector.
-    (new GuiSelector(graphics_page, "FSAA",
-        [](int index, string value)
-        {
-            static const int fsaa[] = {0, 2, 4, 8};
-            foreach (Window, window, windows)
-                window->setFSAA(fsaa[index]);
-        }
-    ))
-        ->setOptions({
-            tr("Full-screen antialiasing: Off"),
-            tr("Full-screen antialiasing: 2x"),
-            tr("Full-screen antialiasing: 4x"),
-            tr("Full-screen antialiasing: 8x")})
-        ->setSelectionIndex(fsaa_index)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-
-    (new GuiLabel(graphics_page, "THEME_APPLICATION_LABEL", tr("Restart EmptyEpsilon to apply full-screen antialiasing changes"), 20.0f))
-        ->setSize(GuiElement::GuiSizeMax, 30.0f)
-        ->setAttribute("margin", "0, 0, 0, 20");
-
-    // Line drawing mode selector.
-    int line_mode_index = (sp::RenderTarget::getLineDrawingMode() == sp::RenderTarget::LineDrawingMode::GL) ? 0 : 1;
-    (new GuiSelector(graphics_page, "GRAPHICS_LINE_DRAWING_MODE",
-        [](int index, string value)
-        {
-            if (index == 1)
-            {
-                PreferencesManager::set("line_drawing_mode", "quad");
-                sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::Quad);
-            }
-            else
-            {
-                PreferencesManager::set("line_drawing_mode", "gl");
-                sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::GL);
-            }
-        }
-    ))
-        ->setOptions({
-            tr("options", "Line rendering: GL (Low quality)"),
-            tr("options", "Line rendering: Quads (High quality)"
-        )})
-        ->setSelectionIndex(line_mode_index)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
-        ->setAttribute("margin", "0, 0, 0, 20");
-
-    // FoV slider.
-    auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
-    if (initial_fov <= 30.0f || initial_fov >= 140.0f)
+    // View/window settings.
     {
-        LOG(Warning, "main_screen_camera_fov value invalid: ", PreferencesManager::get("main_screen_camera_fov"));
-        initial_fov = std::clamp(initial_fov, 30.0f, 140.0f);
+        (new GuiLabel(graphics_page, "VIEW_LABEL", tr("options", "View settings"), GuiElement::GuiSizeLabel))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 10");
+
+        // Fullscreen toggle.
+        (new GuiButton(graphics_page, "FULLSCREEN_TOGGLE", tr("options", "Toggle fullscreen/windowed mode"),
+            []()
+            {
+                foreach (Window, window, windows)
+                {
+                    window->setMode(
+                        window->getMode() == Window::Mode::Window
+                            ? Window::Mode::Fullscreen
+                            : Window::Mode::Window
+                    );
+                }
+            }
+        ))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+        // Field of view slider.
+        auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
+        if (initial_fov <= 30.0f || initial_fov >= 140.0f)
+        {
+            LOG(Warning, "main_screen_camera_fov value invalid: ", PreferencesManager::get("main_screen_camera_fov"));
+            initial_fov = std::clamp(initial_fov, 30.0f, 140.0f);
+        }
+
+        graphics_fov_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_FOV_SLIDER", 30.f, 140.0f, initial_fov,
+            [this](float fov)
+            {
+                fov = std::round(fov);
+                graphics_fov_slider->setValue(fov);
+                PreferencesManager::set("main_screen_camera_fov", fov);
+                graphics_fov_overlay_label->setText(tr("options", "Field of view: {fov} degrees").format({
+                    {"fov", string(fov, 0)}
+                }));
+            }
+        );
+        graphics_fov_slider
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+        // Override overlay label.
+        graphics_fov_overlay_label = new GuiLabel(graphics_fov_slider, "GRAPHICS_FOV_SLIDER_LABEL", tr("options", "Field of view: {fov} degrees").format({
+            {"fov", string(initial_fov, 0)}
+        }), 30.0f);
+        graphics_fov_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // Default draw distance slider.
+        auto initial_draw_distance = PreferencesManager::get("default_draw_distance", "25000").toFloat();
+        if (initial_draw_distance <= 1000.0f)
+        {
+            LOG(Warning, "default_draw_distance value invalid: ", initial_draw_distance);
+            initial_draw_distance = 25000.0f;
+        }
+        graphics_draw_distance_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_DRAW_DISTANCE_SLIDER", 1000.0f, 100000.0f, initial_draw_distance,
+            [this](float dist)
+            {
+                dist = std::round(dist / 100.0f) * 100.0f;
+                graphics_draw_distance_slider->setValue(dist);
+                PreferencesManager::set("default_draw_distance", string(static_cast<int>(dist)));
+                graphics_draw_distance_overlay_label->setText(tr("options", "Draw distance: {dist}").format({
+                    {"dist", string(static_cast<int>(dist / 1000.0f), 1)}
+                }) + DISTANCE_UNIT_1K);
+            }
+        );
+        graphics_draw_distance_slider
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+        graphics_draw_distance_overlay_label = new GuiLabel(graphics_draw_distance_slider, "GRAPHICS_DRAW_DISTANCE_SLIDER_LABEL", tr("Draw distance: {dist}").format({
+            {"dist", string(static_cast<int>(initial_draw_distance / 1000.0f), 1)}
+        }) + DISTANCE_UNIT_1K, GuiElement::GuiSizeLabel);
+        graphics_draw_distance_overlay_label
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
-
-    graphics_fov_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_FOV_SLIDER", 30.f, 140.0f, initial_fov,
-        [this](float fov)
-        {
-            fov = std::round(fov);
-            graphics_fov_slider->setValue(fov);
-            PreferencesManager::set("main_screen_camera_fov", fov);
-            graphics_fov_overlay_label->setText(tr("Field of view: {fov} degrees").format({
-                {"fov", string(fov, 0)}
-            }));
-        }
-    );
-    graphics_fov_slider
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
-        ->setAttribute("margin", "0, 0, 0, 20");
-
-    // Override overlay label.
-    graphics_fov_overlay_label = new GuiLabel(graphics_fov_slider, "GRAPHICS_FOV_SLIDER_LABEL", tr("Field of view: {fov} degrees").format({
-        {"fov", string(initial_fov, 0)}
-    }), 30.0f);
-    graphics_fov_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    // Default draw distance slider.
-    auto initial_draw_distance = PreferencesManager::get("default_draw_distance", "25000").toFloat();
-    if (initial_draw_distance <= 1000.0f)
-    {
-        LOG(Warning, "default_draw_distance value invalid: ", initial_draw_distance);
-        initial_draw_distance = 25000.0f;
-    }
-    graphics_draw_distance_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_DRAW_DISTANCE_SLIDER", 1000.0f, 100000.0f, initial_draw_distance,
-        [this](float dist)
-        {
-            dist = std::round(dist / 100.0f) * 100.0f;
-            graphics_draw_distance_slider->setValue(dist);
-            PreferencesManager::set("default_draw_distance", string(static_cast<int>(dist)));
-            graphics_draw_distance_overlay_label->setText(tr("Draw distance: {dist}U").format({
-                {"dist", string(static_cast<int>(dist / 1000.0f), 1)}
-            }));
-        }
-    );
-    graphics_draw_distance_slider
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
-        ->setAttribute("margin", "0, 0, 0, 20");
-
-    graphics_draw_distance_overlay_label = new GuiLabel(graphics_draw_distance_slider, "GRAPHICS_DRAW_DISTANCE_SLIDER_LABEL", tr("Draw distance: {dist}U").format({
-        {"dist", string(static_cast<int>(initial_draw_distance / 1000.0f), 1)}
-    }), 30.0f);
-    graphics_draw_distance_overlay_label
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    // Dynamic nebula lighting toggle.
-    (new GuiToggleButton(graphics_page, "DYNAMIC_NEBULA_LIGHTING", tr("Dynamic nebula lighting"),
-        [](bool value)
-        {
-            PreferencesManager::set("dynamic_nebula_lighting", value ? "1" : "0");
-        }
-    ))
-        ->setValue(DynamicLightManager::isEnabled())
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-
-    // Nebula fog toggle.
-    (new GuiToggleButton(graphics_page, "NEBULA_FOG", tr("Nebula fog"),
-        [](bool value)
-        {
-            PreferencesManager::set("nebula_fog", value ? "1" : "0");
-        }
-    ))
-        ->setValue(PreferencesManager::get("nebula_fog", "1") == "1")
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
-        ->setAttribute("margin", "0, 0, 0, 20");
 }
 
 void OptionsMenu::setupAudioOptions()
@@ -694,13 +715,21 @@ void OptionsMenu::setupAudioOptions()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Engine playback state.
-    (new GuiLabel(audio_page, "IMPULSE_SOUND_LABEL", tr("Impulse engine sound"), 30.0f))
+    (new GuiLabel(audio_page, "IMPULSE_SOUND_LABEL", tr("Impulse engine sound"), GuiElement::GuiSizeLabel))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
+
+    auto row = new GuiElement(audio_page, "");
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("layout", "horizontal");
+    row
+        ->setAttribute("margin", "0, 0, 0, 20");
 
     // Determine when engine sound effects are enabled.
     int impulse_enabled_index = PreferencesManager::get("impulse_sound_enabled", "2").toInt();
-    (new GuiSelector(audio_page, "ENGINE_ENABLED", [](int index, string value)
+    (new GuiSelector(row, "ENGINE_ENABLED", [](int index, string value)
     {
         // 0: Always off
         // 1: Always on
@@ -708,15 +737,15 @@ void OptionsMenu::setupAudioOptions()
         PreferencesManager::set("impulse_sound_enabled", string(index));
     }))
         ->setOptions({
-            tr("Disabled"),
-            tr("Enabled"),
-            tr("Main screen only")
+            tr("options", "Playback disabled"),
+            tr("options", "Play on all screens"),
+            tr("options", "Play on main screen only")
         })
         ->setSelectionIndex(impulse_enabled_index)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Impulse engine volume slider.
-    impulse_volume_slider = new GuiSlider(audio_page, "IMPULSE_VOLUME_SLIDER", 0.0f, 100.0f, static_cast<float>(PreferencesManager::get("impulse_sound_volume", "50").toInt()),
+    impulse_volume_slider = new GuiSlider(row, "IMPULSE_VOLUME_SLIDER", 0.0f, 100.0f, static_cast<float>(PreferencesManager::get("impulse_sound_volume", "50").toInt()),
         [this](float volume)
         {
             PreferencesManager::set("impulse_sound_volume", volume);
@@ -726,24 +755,31 @@ void OptionsMenu::setupAudioOptions()
         }
     );
     impulse_volume_slider
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
-        ->setAttribute("margin", "0, 0, 0, 20");
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Override overlay label.
     impulse_volume_overlay_label = new GuiLabel(impulse_volume_slider, "IMPULSE_VOLUME_SLIDER_LABEL", tr("Volume: {volume}%").format({
         {"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}
-    }), 30.0f);
+    }), GuiElement::GuiSizeLabel);
     impulse_volume_overlay_label
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music playback state.
-    (new GuiLabel(audio_page, "MUSIC_PLAYBACK_LABEL", tr("Music"), 30.0f))
+    (new GuiLabel(audio_page, "MUSIC_PLAYBACK_LABEL", tr("Music"), GuiElement::GuiSizeLabel))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
+
+    row = new GuiElement(audio_page, "");
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("layout", "horizontal");
+    row
+        ->setAttribute("margin", "0, 0, 0, 20");
 
     // Determine when music is enabled.
     int music_enabled_index = PreferencesManager::get("music_enabled", "2").toInt();
-    (new GuiSelector(audio_page, "MUSIC_ENABLED",
+    (new GuiSelector(row, "MUSIC_ENABLED",
         [](int index, string value)
         {
             // 0: Always off
@@ -753,15 +789,15 @@ void OptionsMenu::setupAudioOptions()
         }
     ))
         ->setOptions({
-            tr("Disabled"),
-            tr("Enabled"),
-            tr("Main screen only")
+            tr("options", "Playback disabled"),
+            tr("options", "Play on all screens"),
+            tr("options", "Play on main screen only")
         })
         ->setSelectionIndex(music_enabled_index)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Music volume slider.
-    music_volume_slider = new GuiSlider(audio_page, "MUSIC_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMusicVolume(),
+    music_volume_slider = new GuiSlider(row, "MUSIC_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMusicVolume(),
         [this](float volume)
         {
             soundManager->setMusicVolume(volume);
@@ -790,7 +826,7 @@ void OptionsMenu::setupAudioOptions()
     std::vector<string> combat_music_filenames = findResources("music/combat/*.ogg");
     std::sort(combat_music_filenames.begin(), combat_music_filenames.end());
 
-    (new GuiLabel(audio_page, "PREVIEW_LABEL", tr("Preview music"), 30.0f))
+    (new GuiLabel(audio_page, "PREVIEW_LABEL", tr("Preview music"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -802,9 +838,9 @@ void OptionsMenu::setupAudioOptions()
     );
 
     for (string filename : ambient_music_filenames)
-        music_list->addEntry(filename.substr(filename.rfind("/") + 1, filename.rfind(".")), filename);
+        music_list->addEntry(sp::audio::Music::getTagsDisplayName(filename), filename);
     for (string filename : combat_music_filenames)
-        music_list->addEntry(filename.substr(filename.rfind("/") + 1, filename.rfind(".")), filename);
+        music_list->addEntry(sp::audio::Music::getTagsDisplayName(filename), filename);
 
     music_list->setSize(GuiElement::GuiSizeMax, 500.0f);
 }
