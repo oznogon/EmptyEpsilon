@@ -1,6 +1,7 @@
 #include "debugRenderer.h"
 #include "multiplayer_server.h"
 #include "hotkeyConfig.h"
+#include "threatLevelEstimate.h"
 
 static glm::u8vec4 line_colors[] = {
     {126, 178, 109, 255},   // #7EB26D green
@@ -69,7 +70,13 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
     }
     string text = "";
     if (show_fps)
+    {
         text = text + "FPS: " + string(fps) + "\n";
+        text = text + "Threat: raw=" + string(ThreatLevelEstimate::debug_max_threat, 1) + " smoothed=" + string(ThreatLevelEstimate::debug_smoothed_threat, 1);
+        if (ThreatLevelEstimate::debug_threat_high)
+            text = text + " [COMBAT]";
+        text = text + "\n";
+    }
 
     if (show_datarate && game_server)
     {

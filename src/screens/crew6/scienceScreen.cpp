@@ -282,7 +282,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_faction_button
         ->setTextSize(20.0f)
         ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
-        ->setSize(GuiElement::GuiSizeRow, 28.0f);
+        ->setSize(GuiElement::GuiSizeRow, 25.0f);
 
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4f, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30.0f);
@@ -306,7 +306,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_type_button
         ->setTextSize(20.0f)
         ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
-        ->setSize(GuiElement::GuiSizeRow, 28.0f);
+        ->setSize(GuiElement::GuiSizeRow, 25.0f);
 
     info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4f, tr("science", "Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30.0f);

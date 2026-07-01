@@ -11,6 +11,10 @@
 #include "systems/collision.h"
 
 
+float ThreatLevelEstimate::debug_max_threat = 0.0f;
+float ThreatLevelEstimate::debug_smoothed_threat = 0.0f;
+bool ThreatLevelEstimate::debug_threat_high = false;
+
 ThreatLevelEstimate::ThreatLevelEstimate()
 {
     smoothed_threat_level = 0.0;
@@ -29,6 +33,10 @@ void ThreatLevelEstimate::update(float delta)
         max_threat = std::max(max_threat, getThreatFor(entity));
     float f = delta / threat_drop_off_time;
     smoothed_threat_level = ((1.0f - f) * smoothed_threat_level) + (max_threat * f);
+
+    debug_max_threat = max_threat;
+    debug_smoothed_threat = smoothed_threat_level;
+    debug_threat_high = threat_high;
 
     if (!threat_high && smoothed_threat_level > threat_high_level)
     {
@@ -70,8 +78,12 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
         auto ship_position = transform->getPosition();
         for(auto entity : sp::CollisionSystem::queryArea(ship_position - glm::vec2(radius, radius), ship_position + glm::vec2(radius, radius)))
         {
+            auto et = entity.getComponent<sp::Transform>();
+            if (et && glm::distance2(glm::vec2(et->getPosition()), ship_position) > radius * radius)
+                continue;
+
             bool is_shiplike = entity.hasComponent<BeamWeaponSys>() || entity.hasComponent<MissileTubes>();
-            if (!is_shiplike || Faction::getRelation(ship, entity) == FactionRelation::Enemy)
+            if (!is_shiplike)
             {
                 if (entity.hasComponent<MissileFlight>() && entity.hasComponent<ExplodeOnTouch>())
                     threat += 5000.0f;
@@ -79,6 +91,9 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
                     threat += 5000.0f;
                 continue;
             }
+
+            if (Faction::getRelation(ship, entity) != FactionRelation::Enemy)
+                continue;
 
             bool is_being_attacked = false;
             hull = entity.getComponent<Hull>();

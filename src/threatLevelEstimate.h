@@ -26,6 +26,10 @@ public:
     void setCallbacks(func_t low, func_t high);
 
     virtual void update(float delta) override;
+
+    static float debug_max_threat;
+    static float debug_smoothed_threat;
+    static bool debug_threat_high;
 private:
     float getThreatFor(sp::ecs::Entity ship);
 };
