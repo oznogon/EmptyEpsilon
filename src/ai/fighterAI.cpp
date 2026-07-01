@@ -4,6 +4,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/collision.h"
 #include "components/target.h"
+#include "components/beamweapon.h"
 #include "systems/missilesystem.h"
 #include "ai/fighterAI.h"
 #include "ai/aiFactory.h"
@@ -70,8 +71,25 @@ void FighterAI::runAttack(sp::ecs::Entity target)
                     {
                         MissileSystem::fire(owner, tube, target_angle, target);
                         missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
+                        strafing_fired = true;
                     }
                 }
+            }
+        }
+
+        if (!strafing_fired)
+        {
+            float target_angle = vec2ToAngle(position_diff);
+
+            if (has_beams && distance < beam_weapon_range * 0.9f)
+            {
+                float rotation_diff = fabs(angleDifference(target_angle, transform->getRotation()));
+                if (rotation_diff < 45.0f)
+                    strafing_fired = true;
+            }
+            else if (!has_beams && distance < 500 + (target_physics ? target_physics->getSize().x : 0.0f))
+            {
+                strafing_fired = true;
             }
         }
 
@@ -102,6 +120,7 @@ void FighterAI::runAttack(sp::ecs::Entity target)
         if (distance > 2500 || timeout <= 0.0f)
         {
             attack_state = State::Dive;
+            strafing_fired = false;
         }
         else
         {
@@ -116,6 +135,7 @@ void FighterAI::runAttack(sp::ecs::Entity target)
         if ((shields && !shields->entries.empty() && shields->entries[0].level < shields->entries[0].max * 0.9f) || timeout <= 0.0f)
         {
             attack_state = State::Dive;
+            strafing_fired = false;
         }else{
             auto target_position = tt->getPosition();
             float circle_distance = 3000.0f;

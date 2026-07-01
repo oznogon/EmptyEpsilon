@@ -14,6 +14,7 @@ class FighterAI : public ShipAI
     float timeout;
     float evade_direction;
     float aggression;
+    bool strafing_fired = false;
 public:
     FighterAI(sp::ecs::Entity owner);
 

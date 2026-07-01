@@ -3,8 +3,14 @@
 #include "ecs/system.h"
 #include "ecs/entity.h"
 #include <vector>
-#include <unordered_map>
+#include <glm/vec2.hpp>
 
+
+struct Obstacle
+{
+    glm::vec2 position;
+    float radius;
+};
 
 class PathFindingSystem : public sp::ecs::System
 {
@@ -12,21 +18,17 @@ public:
     PathFindingSystem();
     void update(float delta) override;
 
-private:
-    std::vector<sp::ecs::Entity> big_entities;
-    std::unordered_map<uint32_t, std::vector<sp::ecs::Entity> > small_entities;
+    const std::vector<Obstacle>& getObstacles() const { return obstacles; }
+    float getMaxObstacleRadius() const { return max_obstacle_radius; }
 
-    friend class PathPlanner;
+private:
+    std::vector<Obstacle> obstacles;
+    float max_obstacle_radius = 100.0f;
 };
 
 
-//The path planner is used to plan a route trough the world map without hitting any objects.
 class PathPlanner
 {
-private:
-    unsigned int insert_idx, remove_idx, remove_idx2;
-    float my_size = 0.0f;
-
 public:
     PathPlanner();
 
@@ -34,7 +36,12 @@ public:
 
     void plan(float my_radius, glm::vec2 start, glm::vec2 end);
     void clear();
+
 private:
-    void recursivePlan(glm::vec2 start, glm::vec2 end, int& recursion_counter);
-    bool checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_point, glm::vec2* alt_point=NULL);
+    float my_size = 0.0f;
+
+    bool lineOfSight(glm::vec2 a, glm::vec2 b, const std::vector<Obstacle>& obstacles, float my_radius) const;
+    bool cellPassable(int cx, int cy, float cell_size, glm::vec2 grid_offset,
+                      const std::vector<Obstacle>& obstacles, float my_radius) const;
+    float segmentPointDistance2(glm::vec2 p, glm::vec2 a, glm::vec2 b) const;
 };

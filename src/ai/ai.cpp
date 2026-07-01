@@ -571,8 +571,7 @@ void ShipAI::runOrders()
                     {
                         DockingSystem::requestDock(owner, ai->order_target);
                     }else{
-                        target_position += (diff / dist) * 500.0f;
-                        flyTowards(target_position);
+                        flyTowards(target_position, 500.0f);
                     }
                 } else if (ott && docking_port->state == DockingPort::State::Docked) {
                     DockingSystem::requestUndock(owner);

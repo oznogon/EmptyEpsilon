@@ -49,8 +49,11 @@
 - Station space setup in Surf's Up replaced with util script
 - Various Xansta util and scenario scripts cleaned up
 - French science_db and PO file corrections
+- Pathfinding system rewritten: A* grid search with line-of-sight smoothing replaces recursive binary-detour planner, improving route quality around clustered obstacles; obstacle registration uses flat spatial list instead of big/small entity classification; AvoidObject internal state enum and position_hash removed
 
 ### Fixed
+
+- Fighter AI strafing runs now fly directly at the target on initial approach (bypassing pathfinding avoidance) until the ship has fired or closed within beam range, ensuring beam weapons get on target before evasion kicks in
 
 - Theme offset application
 - Radar trace radius synced to physics radius on asteroid update
