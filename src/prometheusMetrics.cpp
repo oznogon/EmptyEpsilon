@@ -89,18 +89,17 @@ static void collectEngineMetrics(string& output)
     );
 
     auto timing = engine->getEngineTiming();
-    if (!timing.empty())
-    {
-        string timing_lines;
-        for (auto& [key, value] : timing)
-            timing_lines += "ee_update_duration_seconds{phase=\"" + escapeLabelValue(key) + "\"} " + formatFloat(value) + "\n";
-        writeGaugeMetric(
-            output,
-            "ee_update_duration_seconds",
-            "Time spent in each update phase (seconds)",
-            timing_lines
-        );
-    }
+    if (timing.empty()) return;
+
+    string timing_lines;
+    for (auto& [key, value] : timing)
+        timing_lines += "ee_update_duration_seconds{phase=\"" + escapeLabelValue(key) + "\"} " + formatFloat(value) + "\n";
+    writeGaugeMetric(
+        output,
+        "ee_update_duration_seconds",
+        "Time spent in each update phase (seconds)",
+        timing_lines
+    );
 }
 
 static void collectServerMetrics(string& output)
@@ -163,7 +162,9 @@ static void collectGameMetrics(string& output)
     if (!gameGlobalInfo) return;
 
     string scenario = gameGlobalInfo->scenario;
-    string server_name = game_server ? game_server->getServerName() : "";
+    string server_name = game_server
+        ? game_server->getServerName()
+        : "";
 
     writeGaugeMetric(
         output,
@@ -200,8 +201,7 @@ static void collectGameMetrics(string& output)
         }
 
         CrewPositions all_positions;
-        for (auto& cps : pi->crew_positions)
-            all_positions.mask |= cps.mask;
+        for (auto& cps : pi->crew_positions) all_positions.mask |= cps.mask;
 
         string positions_str;
         for (auto cp : all_positions)
@@ -219,9 +219,11 @@ static void collectGameMetrics(string& output)
     }
 
     if (!connection_lines.empty())
+    {
         writeGaugeMetric(output, "ee_player_connection",
             "Connected players with their name, ship, and crew positions (always 1)",
             connection_lines);
+    }
 
     // Player ships: one row per PlayerControl entity
     int player_ship_count = 0;
@@ -327,26 +329,24 @@ static void collectDebugMetrics(string& output)
 #endif
 
     auto& stats = game_server->getNetworkStatsSnapshot();
-    if (!stats.empty())
-    {
-        string stats_lines;
+    if (stats.empty()) return;
 
-        for (auto& [key, bytes] : stats)
-            stats_lines += "ee_server_network_bytes{component=\"" + escapeLabelValue(key) + "\"} " + formatInt(bytes) + "\n";
+    string stats_lines;
 
-        writeGaugeMetric(
-            output,
-            "ee_server_network_bytes",
-            "Per-component-type network bandwidth in bytes (accumulated over ~1 second interval)",
-            stats_lines
-        );
-    }
+    for (auto& [key, bytes] : stats)
+        stats_lines += "ee_server_network_bytes{component=\"" + escapeLabelValue(key) + "\"} " + formatInt(bytes) + "\n";
+
+    writeGaugeMetric(
+        output,
+        "ee_server_network_bytes",
+        "Per-component-type network bandwidth in bytes (accumulated over ~1 second interval)",
+        stats_lines
+    );
 }
 
 static void collectKillMetrics(string& output)
 {
-    if (kill_counts.empty())
-        return;
+    if (kill_counts.empty()) return;
 
     string kill_lines;
     for (auto& [instigator, count] : kill_counts)
@@ -363,6 +363,9 @@ static void collectKillMetrics(string& output)
 PrometheusMetricsServer::PrometheusMetricsServer(int port)
 : server(port)
 {
+    // Enable engine timing collection.
+    engine->collectEngineTiming();
+    // Add a /metrics endpoint and produce Prometheus-compatible metrics.
     server.addURLHandler("/metrics", [](const sp::io::http::Server::Request& request) -> string
     {
         string output;
