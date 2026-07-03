@@ -177,12 +177,16 @@ int main(int argc, char** argv)
         new EEHttpServer(port_nr, PreferencesManager::get("www_directory", "www"));
     }
 
-    if (PreferencesManager::get("metricsserver").toInt() != 0)
+    if (PreferencesManager::get("metrics_server").toInt() != 0)
     {
-        int metrics_port = PreferencesManager::get("metricsserver").toInt();
-        if (metrics_port < 10) metrics_port = 80;
-        LOG(Info, "Prometheus metrics endpoint enabled on port ", metrics_port);
-        new PrometheusMetricsServer(metrics_port);
+        int metrics_port = PreferencesManager::get("metrics_server").toInt();
+        if (metrics_port < 1024 || metrics_port > 65535)
+            LOG(Warning, "metrics_server set to invalid port ", string(metrics_port), ". Prometheus metrics endpoint not enabled.");
+        else
+        {
+            LOG(Info, "Prometheus metrics endpoint enabled on port ", metrics_port);
+            new PrometheusMetricsServer(metrics_port);
+        }
     }
 
     string theme_name = PreferencesManager::get("guitheme", "default");

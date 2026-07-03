@@ -4,7 +4,7 @@ EmptyEpsilon exposes a [Prometheus](https://prometheus.io/) metrics endpoint whe
 
 ## Overview
 
-When the metrics server is enabled with `metricsserver=<port>`, EmptyEpsilon serves a Prometheus-format text endpoint at `http://<host>:<port>/metrics`. Prometheus scrapes this endpoint on a configured interval and stores the data in its time-series database. Grafana queries Prometheus and renders the data as gauges, graphs, and tables.
+When the metrics server is enabled with `metrics_server=<port>`, EmptyEpsilon serves a Prometheus-format text endpoint at `http://<host>:<port>/metrics`. Prometheus scrapes this endpoint on a configured interval and stores the data in its time-series database. Grafana queries Prometheus and renders the data as gauges, graphs, and tables.
 
 All three services can run on the same system. If they don't, you must expose the relevant port on the EmptyEpsilon server for Prometheus to scrape metrics.
 
@@ -17,20 +17,20 @@ When you run EmptyEpsilon, it creates a [Preferences File](https://github.com/da
 Add the following line to `options.ini`, choosing any unused TCP port of 1024 or greater (80 or greater if not running as root):
 
 ```ini
-metricsserver=9100
+metrics_server=9100
 ```
 
 Alternatively, define the setting as a command-line option:
 
 ```
-./EmptyEpsilon metricsserver=9100
+./EmptyEpsilon metrics_server=9100
 ```
 
-> **Note:** All other examples in this documentation assume this is set to `metricsserver=9100`.
+> **Note:** All other examples in this documentation assume this is set to `metrics_server=9100`.
 
-When you run EmptyEpsilon as a server, it starts serving the metrics endpoint on that port. Set `metricsserver=0` or omit the line to disable the endpoint entirely. Any provided port number under 80 is automatically rounded up to 80.
+When you run EmptyEpsilon as a server, it starts serving the metrics endpoint on that port. Set `metrics_server=0` or omit the line to disable the endpoint entirely. Any provided port number under 80 is automatically rounded up to 80.
 
-The metrics endpoint is not available when running EmptyEpsilon as a client, even when `metricsserver` is set. You can enable or disable the metrics endpoint independently of EmptyEpsilon's HTTP API server.
+The metrics endpoint is not available when running EmptyEpsilon as a client, even when `metrics_server` is set. You can enable or disable the metrics endpoint independently of EmptyEpsilon's HTTP API server.
 
 ### Verify the endpoint
 
@@ -80,7 +80,7 @@ If the endpoint is unreachable, confirm that the server's firewall isn't blockin
 | `ee_kills_total{instigator}` | Entities destroyed by damage per instigator (session total) |
 | `ee_debug_pobject_count` | Active PObject count (debug builds only) |
 
-> **Note:** `ee_server_network_bytes` and the per-subsystem detail in `ee_update_duration_seconds` are collected only when `metricsserver` is set to a non-zero port. They incur a small performance overhead and are disabled when the metrics server is off.
+> **Note:** `ee_server_network_bytes` and the per-subsystem detail in `ee_update_duration_seconds` are collected only when `metrics_server` is set to a non-zero port. They incur a small performance overhead and are disabled when the metrics server is off.
 
 ## Install and configure Prometheus
 
@@ -135,8 +135,8 @@ sudo systemctl enable prometheus
 
 Open `http://localhost:9090` in a browser. Go to **Status > Targets**. The `emptyepsilon` job should appear with state **UP**. If the state is **DOWN**, check:
 
-- EmptyEpsilon is running as a server with `metricsserver` set
-- The host and port in `prometheus.yml` match the server's IP or hostname and `metricsserver` port value
+- EmptyEpsilon is running as a server with `metrics_server` set
+- The host and port in `prometheus.yml` match the server's IP or hostname and `metrics_server` port value
 - No firewall is blocking the connection
 
 You can also query the data. In the Prometheus UI, enter `ee_game_speed` in the expression bar and click **Execute**. A result of `0` or `1` means Prometheus has successfully scraped the metric.
@@ -414,7 +414,7 @@ The `ee_kills_total{instigator}` counter metric counts entities destroyed by dam
 
 ### Metrics endpoint returns nothing, or connection refused
 
-- Confirm `metricsserver=<port>` was passed as a command-line option or is in `options.ini`, and that EmptyEpsilon is running as a server, not a client.
+- Confirm `metrics_server=<port>` was passed as a command-line option or is in `options.ini`, and that EmptyEpsilon is running as a server, not a client.
 - Confirm the port is not already in use: `ss -tlnp | grep <port>`.
 
 ### Prometheus target is DOWN
