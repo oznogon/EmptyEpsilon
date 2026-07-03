@@ -364,7 +364,7 @@ PrometheusMetricsServer::PrometheusMetricsServer(int port)
 : server(port)
 {
     // Enable engine timing collection.
-    engine->collectEngineTiming();
+    engine->setCollectEngineTiming();
     // Add a /metrics endpoint and produce Prometheus-compatible metrics.
     server.addURLHandler("/metrics", [](const sp::io::http::Server::Request& request) -> string
     {

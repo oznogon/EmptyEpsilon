@@ -60,6 +60,7 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
     {
         show_timing_graph = !show_timing_graph;
         timing_graph_points.clear();
+        engine->setCollectEngineTiming(!engine->isCollectingEngineTiming());
     }
 
     fps_counter++;
