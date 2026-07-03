@@ -83,7 +83,7 @@ void AutoConnectScreen::update(float delta)
                 autoconnect_port = autoconnect_address.substr(autoconnect_address.find(":") + 1).toInt();
                 autoconnect_address = autoconnect_address.substr(0, autoconnect_address.find(":"));
 
-                if (autoconnect_port < 80 || autoconnect_port > 65535)
+                if (autoconnect_port < 1024 || autoconnect_port > 65535)
                 {
                     LOG(Warning, "Invalid autoconnect port " + string(autoconnect_port));
                     autoconnect_port = defaultServerPort;

@@ -275,7 +275,7 @@ int main(int argc, char** argv)
         // value (toInt returns 0 if empty or not an int).
         int server_port = PreferencesManager::get("server_port").toInt();
 
-        if (server_port < 80 || server_port > 65535)
+        if (server_port < 1024 || server_port > 65535)
         {
             LOG(Warning, "Invalid server_port " + string(server_port));
             server_port = defaultServerPort;
@@ -353,7 +353,7 @@ void returnToMainMenu(RenderLayer* render_layer)
         // value (toInt returns 0).
         int headless_port = PreferencesManager::get("server_port").toInt();
         // This is the same process as server_port and could be made DRY.
-        if (headless_port < 10 || headless_port > 65535)
+        if (headless_port < 1024 || headless_port > 65535)
         {
             LOG(Warning, "Invalid server_port: " + string(headless_port));
             headless_port = defaultServerPort;
