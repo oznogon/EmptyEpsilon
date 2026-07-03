@@ -192,8 +192,9 @@ void MissileWeaponsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
         const bool has_tubes = crewPositionRequirements::hasRequirements(CrewPosition::missileWeaponsOfficer, my_spaceship);
+
+        // If this ship has no tubes, notify the player.
         background_gradient->setVisible(has_tubes);
         missile_controls->setVisible(has_tubes);
         no_weapons_label->setVisible(!has_tubes);
