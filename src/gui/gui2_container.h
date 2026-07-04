@@ -73,7 +73,7 @@ protected:
     sp::Rect rect{0,0,0,0};
     std::unique_ptr<GuiLayout> layout_manager = nullptr;
 
-    void cleanTree();
+    virtual void cleanTree();
 
     template<typename RecurseFunc, typename TestFunc>
     GuiElement* dispatchToChildren(glm::vec2 position, RecurseFunc recurse, TestFunc test);

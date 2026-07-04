@@ -34,9 +34,8 @@ public:
 
     // Clean up the scroll container's tree: clear internal focus/click
     // pointers before the base class removes destroyed children via
-    // swap-and-pop. Call this explicitly instead of relying on the
-    // canvas's cleanTree() since the base method is not virtual.
-    void cleanTree();
+    // swap-and-pop.
+    void cleanTree() override;
     // Override layout updates to update child elements and juggle scrollbar
     // visibility.
     virtual void updateLayout(const sp::Rect& bounds) override;
