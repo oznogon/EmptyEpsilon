@@ -14,41 +14,56 @@
 
 std::vector<RenderSystem::RenderHandler> RenderSystem::render_handlers;
 std::function<void()> RenderSystem::post_opaque_render;
+std::vector<RenderSystem::NebulaOccluder> RenderSystem::nebula_occluder_cache;
 
-bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target)
+void RenderSystem::refreshNebulaCache()
 {
+    nebula_occluder_cache.clear();
+    glm::vec2 source{ camera_position.x, camera_position.y };
+
     for (auto [entity, radar_block, transform] : sp::ecs::Query<RadarBlock, sp::Transform>())
     {
-        glm::vec2 nebula_pos = transform.getPosition();
-
-        // Match the soft transition used by the fog/visibility in GuiViewport3D.
-        // When the camera is inside the transition range (between the inner and outer
-        // transition edges), no occlusion is applied so the player can still see their
-        // ship and surroundings; the reduced visibility distance and fog handle the
-        // visual obscuring instead. Outside the transition range, occlusion is checked
-        // against the inner edge of the transition.
+        NebulaOccluder occ;
+        occ.position = transform.getPosition();
         float occlusion_radius = radar_block.range * 0.8f;
+
         if (auto nr = entity.getComponent<NebulaRenderer>())
         {
             float fade_zone = nr->skybox_fade_distance > 0.0f ? nr->skybox_fade_distance : 1000.0f;
             float transition_start = nr->radius + 1.5f * fade_zone;
             float transition_end = std::max(0.0f, nr->radius - 0.5f * fade_zone);
 
-            if (glm::length2(source - nebula_pos) < transition_start * transition_start)
-                continue;
-
-            occlusion_radius = transition_end;
+            if (glm::length2(source - occ.position) < transition_start * transition_start)
+                occ.active = false;
+            else
+                occ.active = true;
+            occ.occlusion_radius = transition_end;
         }
         else
         {
-            // No NebulaRenderer: fall back to the original hard cutoff so the camera
-            // inside the cutoff still renders normally.
-            if (glm::length2(source - nebula_pos) < occlusion_radius * occlusion_radius)
-                continue;
+            occ.active = glm::length2(source - occ.position) >= occlusion_radius * occlusion_radius;
+            occ.occlusion_radius = occlusion_radius;
         }
+        nebula_occluder_cache.push_back(occ);
+    }
+}
+
+bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target)
+{
+    refreshNebulaCache();
+    return isOccludedByNebula(source, target, nebula_occluder_cache);
+}
+
+bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target,
+                                      const std::vector<NebulaOccluder>& occluders)
+{
+    for (const auto& occ : occluders)
+    {
+        if (!occ.active)
+            continue;
 
         // Target inside occlusion radius: occluded
-        if (glm::length2(target - nebula_pos) < occlusion_radius * occlusion_radius)
+        if (glm::length2(target - occ.position) < occ.occlusion_radius * occ.occlusion_radius)
             return true;
 
         // Target behind occlusion radius: occluded if line from camera to target passes through it
@@ -56,12 +71,12 @@ bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target)
         float dist = glm::length(diff);
         if (dist < 0.01f) continue;
 
-        float f = glm::dot(diff, nebula_pos - source) / dist;
+        float f = glm::dot(diff, occ.position - source) / dist;
         if (f < 0.0f) f = 0.0f;
         if (f > dist) f = dist;
         glm::vec2 q = source + diff * (f / dist);
 
-        if (glm::length2(q - nebula_pos) < occlusion_radius * occlusion_radius)
+        if (glm::length2(q - occ.position) < occ.occlusion_radius * occ.occlusion_radius)
             return true;
     }
     return false;
@@ -69,6 +84,7 @@ bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target)
 
 void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType projection_type, float far_plane)
 {
+    refreshNebulaCache();
     view_vector = vec2FromAngle(camera_yaw);
     depth_cutoff_back = camera_position.z * -tanf(glm::radians(90+camera_pitch + camera_fov/2.f));
     depth_cutoff_front = camera_position.z * -tanf(glm::radians(90+camera_pitch - camera_fov/2.f));
@@ -85,7 +101,9 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
         {
             if (!it->entity.hasComponent<NeverRadarBlocked>()
                 && !it->entity.hasComponent<RadarBlock>()
-                && isOccludedByNebula(glm::vec2(camera_position.x, camera_position.y), it->transform->getPosition()))
+                && isOccludedByNebula(glm::vec2(camera_position.x, camera_position.y),
+                                      it->transform->getPosition(),
+                                      nebula_occluder_cache))
                 it = render_list.erase(it);
             else
                 ++it;
@@ -329,22 +347,6 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     // Dynamic lights for nebula cloud illumination.
     // Only lights whose source is inside the nebula radius affect the clouds.
     const auto& lights = DynamicLightManager::getLights();
-    auto computeLight = [&](const glm::vec3& point) -> float {
-        float total = 0.0f;
-        for (const auto& light : lights)
-        {
-            glm::vec2 light_pos_2d{light.position.x, light.position.y};
-            if (glm::length(light_pos_2d - nebula_pos) > nr.radius)
-                continue;
-            float dist = glm::length(point - light.position);
-            if (dist < light.radius)
-            {
-                float atten = 1.0f - dist / light.radius;
-                total += light.intensity * atten * atten;
-            }
-        }
-        return std::min(total, 1.0f);
-    };
 
     struct VertexAndTexCoords
     {
@@ -363,34 +365,60 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    // Pre-compute light contributions for all clouds (batched, not per-draw-call)
+    std::vector<float> cloud_lights(nr.clouds.size(), 0.0f);
+    glm::vec3 ring_center = glm::vec3(nebula_pos.x, nebula_pos.y, 0);
+    for (int i = 0; i < (int)nr.clouds.size(); i++)
+    {
+        glm::vec3 cloud_pos = ring_center + glm::vec3(nr.clouds[i].offset.x, nr.clouds[i].offset.y, 0);
+        float total = 0.0f;
+        for (const auto& light : lights)
+        {
+            glm::vec2 light_pos_2d{light.position.x, light.position.y};
+            if (glm::length(light_pos_2d - nebula_pos) > nr.radius)
+                continue;
+            float dist = glm::length(cloud_pos - light.position);
+            if (dist < light.radius)
+            {
+                float atten = 1.0f - dist / light.radius;
+                total += light.intensity * atten * atten;
+            }
+        }
+        cloud_lights[i] = std::min(total, 1.0f);
+    }
+
+    // Pre-compute fog ring light contributions
+    std::array<float, 6> ring_lights{};
+    for (int v = 0; v < 6; v++)
+    {
+        float volume_size = nr.radius * (0.3f + v * 0.15f);
+        float total = 0.0f;
+        for (const auto& light : lights)
+        {
+            glm::vec2 light_pos_2d{light.position.x, light.position.y};
+            if (glm::length(light_pos_2d - nebula_pos) > nr.radius)
+                continue;
+            float dist_to_ring_center = glm::length(light.position - ring_center);
+            float dist_to_ring = std::abs(dist_to_ring_center - volume_size);
+            if (dist_to_ring < light.radius)
+            {
+                float atten = 1.0f - dist_to_ring / light.radius;
+                total += light.intensity * atten * atten;
+            }
+        }
+        ring_lights[v] = std::min(total, 1.0f);
+    }
+
     // Render fog volume billboards when camera is near or inside the nebula
     if (shell_alpha > 0.001f)
     {
-        glm::vec3 ring_center = glm::vec3(nebula_pos.x, nebula_pos.y, 0);
         for (int v = 0; v < 6; v++)
         {
             int tex_idx = v % nr.clouds.size();
             auto& cloud = nr.clouds[tex_idx];
             float volume_size = nr.radius * (0.3f + v * 0.15f);
             float volume_alpha = shell_alpha * 0.8f * (1.0f - v * 0.16f) * cloud_density;
-
-            // Compute per-ring light: sample each light at the closest point on the ring surface
-            float ring_light = 0.0f;
-            for (const auto& light : lights)
-            {
-                glm::vec2 light_pos_2d{light.position.x, light.position.y};
-                if (glm::length(light_pos_2d - nebula_pos) > nr.radius)
-                    continue;
-                float dist_to_ring_center = glm::length(light.position - ring_center);
-                float dist_to_ring = std::abs(dist_to_ring_center - volume_size);
-                if (dist_to_ring < light.radius)
-                {
-                    float atten = 1.0f - dist_to_ring / light.radius;
-                    ring_light += light.intensity * atten * atten;
-                }
-            }
-            ring_light = std::min(ring_light, 1.0f);
-            float volume_color_val = 0.25f + ring_light * 0.5f;
+            float volume_color_val = 0.25f + ring_lights[v] * 0.5f;
 
             if (!cloud.texture.ptr)
                 cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
@@ -418,7 +446,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
             glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), volume_color_val, volume_alpha, 0.0f, volume_size);
             {
                 auto loc = shader.get().get()->getUniformLocation("u_lightIntensity");
-                if (loc != -1) glUniform1f(loc, ring_light);
+                if (loc != -1) glUniform1f(loc, ring_lights[v]);
             }
 
             auto volume_model = glm::identity<glm::mat4>();
@@ -446,7 +474,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     for (int idx : sorted_indices)
     {
         auto& cloud = nr.clouds[idx];
-        glm::vec3 cloud_pos = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
+        glm::vec3 cloud_pos = ring_center + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
 
         float per_cloud_alpha = 0.6f * shell_alpha * cloud_density;
 
@@ -477,7 +505,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-        float cloud_light = computeLight(cloud_pos);
+        float cloud_light = cloud_lights[idx];
         float color_val = std::min(0.8f + cloud_light * 0.3f, 1.0f);
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), color_val, per_cloud_alpha, 0.0f, cloud.size);
         {

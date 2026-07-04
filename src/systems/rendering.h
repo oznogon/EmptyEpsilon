@@ -31,7 +31,15 @@ public:
     }
 
     void render3D(float aspect, float camera_fov, ProjectionType projection_type = ProjectionType::Perspective, float far_plane = 25000.0f);
+    struct NebulaOccluder {
+        glm::vec2 position;
+        float occlusion_radius;
+        bool active;
+    };
+    static void refreshNebulaCache();
     static bool isOccludedByNebula(glm::vec2 source, glm::vec2 target);
+    static bool isOccludedByNebula(glm::vec2 source, glm::vec2 target,
+                                   const std::vector<NebulaOccluder>& occluders);
     static std::function<void()> post_opaque_render;
 private:
     float depth_cutoff_back;
@@ -77,6 +85,7 @@ private:
         void (RenderSystem::* func)(void* rif);
     };
     static std::vector<RenderHandler> render_handlers;
+    static std::vector<NebulaOccluder> nebula_occluder_cache;
 };
 
 template<typename COMPONENT, bool TRANSPARENT> Render3DInterface<COMPONENT, TRANSPARENT>::Render3DInterface() { RenderSystem::add3DHandler(this); }

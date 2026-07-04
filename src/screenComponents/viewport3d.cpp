@@ -173,6 +173,29 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
+    // Collect all nebula data in a single pass for fog + skybox computation
+    struct NebulaInfo {
+        glm::vec2 position;
+        float radius;
+        float skybox_fade_distance;
+        string skybox;
+        glm::vec3 fog_color;
+        float visibility_distance;
+    };
+    std::vector<NebulaInfo> nebula_infos;
+    glm::vec2 camera_pos2{ camera_position.x, camera_position.y };
+    for (auto [entity, nr, t] : sp::ecs::Query<NebulaRenderer, sp::Transform>())
+    {
+        nebula_infos.push_back({
+            t.getPosition(),
+            nr.radius,
+            nr.skybox_fade_distance,
+            nr.skybox,
+            nr.fog_color,
+            nr.visibility_distance
+        });
+    }
+
     // Compute nebula fog factor for smooth draw distance and fog transitions
     float default_draw_distance = PreferencesManager::get("default_draw_distance", "25000").toFloat();
     float nebula_fog_factor = 0.0f;
@@ -181,14 +204,12 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     float effective_fog_distance = 0.0f;
     if (PreferencesManager::get("nebula_fog", "1") == "1")
     {
-        for(auto [entity, nr, t] : sp::ecs::Query<NebulaRenderer, sp::Transform>())
+        for (const auto& info : nebula_infos)
         {
-            glm::vec2 nebula_pos = t.getPosition();
-            glm::vec2 camera_pos2{ camera_position.x, camera_position.y };
-            float dist = glm::length(nebula_pos - camera_pos2);
-            float fade_zone = nr.skybox_fade_distance > 0.0f ? nr.skybox_fade_distance : 1000.0f;
-            float transition_start = nr.radius + 1.5f * fade_zone;
-            float transition_end = nr.radius - 0.5f * fade_zone;
+            float dist = glm::length(info.position - camera_pos2);
+            float fade_zone = info.skybox_fade_distance > 0.0f ? info.skybox_fade_distance : 1000.0f;
+            float transition_start = info.radius + 1.5f * fade_zone;
+            float transition_end = info.radius - 0.5f * fade_zone;
             float transition_range = transition_start - transition_end;
             if (dist <= transition_start)
             {
@@ -196,8 +217,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                 if (influence > nebula_fog_factor)
                 {
                     nebula_fog_factor = influence;
-                    nebula_fog_color = nr.fog_color;
-                    in_nebula_visibility_distance = std::max(0.0f, nr.visibility_distance);
+                    nebula_fog_color = info.fog_color;
+                    in_nebula_visibility_distance = std::max(0.0f, info.visibility_distance);
                 }
             }
         }
@@ -271,22 +292,22 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         }
 
         // Check NebulaRenderer-based skybox transitions (circular nebulae)
-        for(auto [entity, nr, t] : sp::ecs::Query<NebulaRenderer, sp::Transform>()) {
-            if (nr.skybox.empty() || nr.radius <= 0.0f) continue;
+        for (const auto& info : nebula_infos) {
+            if (info.skybox.empty() || info.radius <= 0.0f) continue;
 
-            auto pos = t.getPosition() - glm::vec2(camera_position.x, camera_position.y);
+            auto pos = info.position - camera_pos2;
             float dist = glm::length(pos);
-            if (dist < nr.radius)
+            if (dist < info.radius)
             {
                 float factor;
-                if (nr.skybox_fade_distance <= 0.0f)
+                if (info.skybox_fade_distance <= 0.0f)
                     factor = 1.0f;
                 else
-                    factor = std::clamp((nr.radius - dist) / nr.skybox_fade_distance, 0.0f, 1.0f);
+                    factor = std::clamp((info.radius - dist) / info.skybox_fade_distance, 0.0f, 1.0f);
                 if (factor > best_skybox_depth)
                 {
                     best_skybox_depth = factor;
-                    local_skybox_name = "skybox/" + nr.skybox;
+                    local_skybox_name = "skybox/" + info.skybox;
                     local_skybox_factor = factor;
                 }
             }
