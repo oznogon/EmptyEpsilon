@@ -151,7 +151,7 @@ void GuiUtilityBeamControls::onUpdate()
     if (!my_spaceship) return;
 
     // Hotkey input only when visible.
-    if (isVisible())
+    if (isEffectivelyVisible())
     {
         if (auto utility_beam = my_spaceship.getComponent<UtilityBeam>())
         {

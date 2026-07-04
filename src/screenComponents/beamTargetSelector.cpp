@@ -22,7 +22,7 @@ GuiBeamTargetSelector::GuiBeamTargetSelector(GuiContainer* owner, string id)
 
 void GuiBeamTargetSelector::onUpdate()
 {
-    if (my_spaceship && gameGlobalInfo->use_system_damage && isVisible())
+    if (my_spaceship && gameGlobalInfo->use_system_damage && isEffectivelyVisible())
     {
         if (keys.weapons_beam_subsystem_target_next.getDown())
         {

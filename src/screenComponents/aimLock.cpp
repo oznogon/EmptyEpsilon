@@ -24,7 +24,7 @@ AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeContr
 
 void AimLockButton::onUpdate()
 {
-    if (!isVisible()) return;
+    if (!isEffectivelyVisible()) return;
 
     // Handle AimLock visibility keybinds.
     if (keys.weapons_toggle_aim_lock.getDown())

@@ -16,7 +16,7 @@ void GuiBeamFrequencySelector::onUpdate()
     if (!my_spaceship) return;
     auto beam_weapons = my_spaceship.getComponent<BeamWeaponSys>();
     setVisible(beam_weapons && gameGlobalInfo->use_beam_shield_frequencies);
-    if (!isVisible()) return;
+    if (!isEffectivelyVisible()) return;
 
     // Handle inc/dec keybinds.
     if (keys.weapons_beam_frequency_increase.getDown())
