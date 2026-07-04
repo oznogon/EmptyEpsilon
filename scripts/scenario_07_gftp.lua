@@ -295,7 +295,7 @@ KTLITAN ATTACK IS A DISTRACTION -STOP-
 
 STAKHANOV IS NOT THE TRUE TARGET -STOP-
 
-CEASE CURRENT OPERATIONS AND PROCEED IMMEDIATELY TO SECTOR E2 -STOP-
+CEASE CURRENT OPERATIONS AND PROCEED IMMEDIATELY TO SECTOR ]] .. bs114:getSectorName() .. [[ -STOP-
 
 URGENCY AND DISCRETION ARE KEY -STOP-]]))
     )
@@ -536,7 +536,7 @@ Even if we cannot pinpoint its physical location at the moment, the mass-energy 
 
 This structure did not participate in any of the assaults, so we presume that it is a command platform hiding in a nebula.
 
-We want to deliver the first blow. Use the Nosy Sensing Array in sector F5 to locate it, then destroy it."]])
+We want to deliver the first blow. Use the Nosy Sensing Array in sector ]] .. nsa:getSectorName() .. [[ to locate it, then destroy it."]])
             )
         )
         then
@@ -627,7 +627,7 @@ We are both ready to continue our purpose, it seems."]])
                 player,
                 _("incCall", [[A black ops military officer hails the ship:
 
-"We have confirmed the command platform's location in the nebula around sector H6. All Navy ships, converge on the location. We advise you to deploy probes near the nebula for better visibility."]])
+"We have confirmed the command platform's location in the nebula around sector ]] .. swarm_command:getSectorName() .. [[. All Navy ships, converge on the location. We advise you to deploy probes near the nebula for better visibility."]])
             )
         )
         then
@@ -702,7 +702,7 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
         if (hacked == 1) and (not bs114:isValid()) then
             stakhanov:sendCommsMessage(
                 player,
-                _("incCall", [[The fallen station is down. Epsilon, gather as soon as possible with the other ships in sector H6.]])
+                _("incCall", [[The fallen station is down. Epsilon, gather as soon as possible with the other ships in sector ]] .. swarm_command:getSectorName() .. [[.]])
             )
             main_mission = 12
         end

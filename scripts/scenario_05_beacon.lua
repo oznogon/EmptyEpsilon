@@ -70,7 +70,7 @@ function init()
 
 We lost contact with one of our transports, callsign RT-4, transporting the diplomat named J.J. Johnson. They were heading from our research station to Orion-5.
 
-Our last contact with RT-4 was before it entered the nebula at sector G5. The nebula is blocking our long-range scans, so we're asking you to investigate and recover RT-4 if possible.]])
+Our last contact with RT-4 was before it entered the nebula at sector ]] .. transport_RT4:getSectorName() .. [[. The nebula is blocking our long-range scans, so we're asking you to investigate and recover RT-4 if possible.]])
     )
     -- Set the initial mission state
     mission_state = missionStartState
@@ -132,7 +132,7 @@ Please deliver his body back to Research-1. We will arrange for you to take over
                 player,
                 _("incCall", [[Just received message that Sir Johnson is safely aboard your ship! Great job!
 
-Please deliver the diplomat to Orion-5 in sector G3. Do this by docking with the station.]])
+Please deliver the diplomat to Orion-5 in sector ]] .. main_station:getSectorName() .. [[. Do this by docking with the station.]])
             )
         end
     end
@@ -149,7 +149,7 @@ function missionRT4PickedUp(delta)
 
 Refugee-X has recently been attacked by Exuari ships, and some criminals living there have offered to give themselves up in exchange for better protection of the station.
 
-The officers at Orion-5 will gladly make this trade, and they ask that you retrieve the criminals for them at Refugee-X in sector D5.
+The officers at Orion-5 will gladly make this trade, and they ask that you retrieve the criminals for them at Refugee-X in sector ]] .. neutral_station:getSectorName() .. [[.
 
 To ensure Refugee-X is aware of your peaceful intentions, we have stripped you of nukes and EMPs. You will get them back once you deliver the criminals.]])
             )
@@ -162,7 +162,7 @@ To ensure Refugee-X is aware of your peaceful intentions, we have stripped you o
 
 Refugee-X has recently been attacked by Exuari ships, and some criminals living there have offered to give themselves up in exchange for better protection of the station.
 
-The officers at Orion-5 will gladly make this trade, and they ask that you retrieve the criminals for them at Refugee-X in sector D5.
+The officers at Orion-5 will gladly make this trade, and they ask that you retrieve the criminals for them at Refugee-X in sector ]] .. neutral_station:getSectorName() .. [[.
 
 To ensure Refugee-X is aware of your peaceful intentions, we have stripped you of nukes and EMPs. You will get them back once you deliver the criminals.]])
             )
@@ -182,7 +182,7 @@ function missionRT4Died(delta)
         -- Docked and delivered the diplomat's body.
         research_station:sendCommsMessage(
             player,
-            _("incCall", [[J.J. Johnson transmitted his mission details to Orion-5 before he passed away. Head to Orion-5 in sector G3 for details.]])
+            _("incCall", [[J.J. Johnson transmitted his mission details to Orion-5 before he passed away. Head to Orion-5 in sector ]] .. main_station:getSectorName() .. [[ for details.]])
         )
         mission_state = missionRT4PickedUp
     end
@@ -238,7 +238,7 @@ function missionAmbushed(delta)
         if not ambush_main:isValid() and not ambush_side1:isValid() and not ambush_side2:isValid() then
             message = _("incCall", [[Good job dealing with those Exuari scum. The criminals are safely in our custody, and we'll send a protection detail to Refugee-X.
 
-We extracted some vital info from the Exuari. In the next transport convoy toward Research-1, an Exuari death squad is hiding in one of the ships. The transport detail is heading in from sector D7. Seek them out and scan the ships to find the Exuari transport.]])
+We extracted some vital info from the Exuari. In the next transport convoy toward Research-1, an Exuari death squad is hiding in one of the ships. The transport detail is heading in from sector ]] .. getSectorName(40000, -40000) .. [[. Seek them out and scan the ships to find the Exuari transport.]])
             if refilled then
                 message = message .. _("incCall", [[We have refitted your nukes and EMPs.]]) .. _("incCall", [[Awesome job taking out the Exuari without those.]])
                 refilled = false
@@ -382,7 +382,7 @@ function missionTransportDone(delta)
             player,
             _("incCall", [[Thanks to the captured Exuari death squad, we now know the location of the Exuari base in the area.
 
-Lead the assault on the Exuari base in sector E2. Expect heavy resistance.]])
+Lead the assault on the Exuari base in sector ]] .. enemy_station:getSectorName() .. [[. Expect heavy resistance.]])
         )
         CpuShip():setTemplate("Phobos T3"):setFaction("Exuari"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
         CpuShip():setTemplate("Nirvana R5"):setFaction("Exuari"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
