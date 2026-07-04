@@ -166,10 +166,13 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
 }
 
 bool DebugRenderer::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) {
-    if (show_datarate && game_server && button == sp::io::Pointer::Button::Left)
+    static constexpr float TEXT_AREA_WIDTH = 500.0f;
+
+    if (show_datarate && game_server && button == sp::io::Pointer::Button::Left
+        && position.x >= 0.0f && position.x < TEXT_AREA_WIDTH)
     {
         int line = int(position.y / 22.0f);
-        int offset = show_fps ? 3 : 2;
+        int offset = show_fps ? 4 : 2;
         if (line == offset)
         {
             game_server->simulate_high_latency = !game_server->simulate_high_latency;
@@ -183,6 +186,9 @@ bool DebugRenderer::onPointerDown(sp::io::Pointer::Button button, glm::vec2 posi
     }
 
     if (!show_timing_graph || !keys.debug_modifier.get())
+        return false;
+
+    if (position.x < 0.0f || position.x >= TEXT_AREA_WIDTH)
         return false;
 
     auto idx = std::floor((position.y - 96.0f) / 16.0f);
