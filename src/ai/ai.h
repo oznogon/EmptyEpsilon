@@ -5,24 +5,22 @@
 #include "systems/pathfinding.h"
 #include "components/missiletubes.h"
 
-
-/**!
- * Base for all ship AIs. This base class handles basic AI which just follows orders straight on and attacks head on.
- * ShipAI objects are only created on the server.
- */
+// Base for all ship AIs. This base class handles basic AI which just follows
+// orders straight on and attacks head on. ShipAI objects are created only on
+// the server.
 class ShipAI : sp::NonCopyable
 {
 protected:
-    /**!
-     * Artificial delay between missile fires. The AI missile fire is 'faked' with this value.
-     */
-    float missile_fire_delay = 0;
+    // Artificial delay between missile fires. The AI missile fire is 'faked'
+    // with this value.
+    float missile_fire_delay = 0.0f;
     bool has_missiles = false;
     bool has_beams = false;
     float beam_weapon_range = 0.0f;
-    float short_range = 5000;
-    float long_range = 30000;
-    float relay_range = 60000;
+    // Fake radar ranges, if the target lacks the necessary systems.
+    float short_range = 5000.0f;
+    float long_range = 30000.0f;
+    float relay_range = 60000.0f;
 
     enum class EWeaponDirection
     {
@@ -46,25 +44,22 @@ public:
     ShipAI(sp::ecs::Entity owner);
     virtual ~ShipAI() = default;
 
-    /**!
-     * Run is called every frame to update the AI state and let the AI take actions.
-     */
+    // Run is called every frame to update the AI state and let the AI take actions.
     virtual void run(float delta);
 
-    /**!
-     * Are we allowed to switch to a different AI right now?
-     * When true is returned, and the CpuShip wants to change their AI this AI object will be destroyed and a new one will be created.
-     */
+    // Are we allowed to switch to a different AI right now?
+    // When true is returned and the CpuShip wants to change their AI, this AI
+    // object will be destroyed and a new one will be created.
     virtual bool canSwitchAI();
 
-
+    // Visualize AI behaviors on the GM screen.
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, float scale);
 protected:
     virtual void updateWeaponState(float delta);
     virtual void updateTarget();
     virtual void runOrders();
     virtual void runAttack(sp::ecs::Entity target);
-    virtual void flyTowards(glm::vec2 target, float keep_distance = 0.0);
+    virtual void flyTowards(glm::vec2 target, float keep_distance = 0.0f);
     virtual void flyFormation(sp::ecs::Entity target, glm::vec2 offset);
 
     sp::ecs::Entity findBestTarget(glm::vec2 position, float radius);
@@ -78,24 +73,19 @@ protected:
      */
     bool betterTarget(sp::ecs::Entity new_target, sp::ecs::Entity current_target);
 
-    /**!
-     * Used for missiles, as they require some intelligence to fire.
-     */
+    // Used for missiles, which require some planning to fire.
     float calculateFiringSolution(sp::ecs::Entity target, const MissileTubes::MountPoint& tube);
     sp::ecs::Entity findBestMissileRestockTarget(glm::vec2 position, float radius);
 
+    // Return scoring estimates for missile types.
     static float getMissileWeaponStrength(EMissileWeapons type)
     {
-        switch(type)
+        switch (type)
         {
-        case MW_Nuke:
-            return 250;
-        case MW_EMP:
-            return 150;
-        case MW_HVLI:
-            return 20;
-        default:
-            return 35;
+        case MW_Nuke: return 250.0f;
+        case MW_EMP:  return 150.0f;
+        case MW_HVLI: return 20.0f;
+        default:      return 35.0f;
         }
     }
 };
