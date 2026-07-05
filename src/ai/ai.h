@@ -36,6 +36,8 @@ protected:
     EMissileWeapons best_missile_type = EMissileWeapons::MW_Homing;
 
     float update_target_delay = 0.0f;
+    float pathfind_cooldown = 0.0f;
+    bool had_target_last_frame = false;
 
     PathPlanner pathPlanner;
 public:
