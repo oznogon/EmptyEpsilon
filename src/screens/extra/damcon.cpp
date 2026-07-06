@@ -2,6 +2,7 @@
 
 #include "i18n.h"
 #include "playerInfo.h"
+#include "vectorUtils.h"
 
 #include "gui/hotkeyConfig.h"
 #include "gui/theme.h"
@@ -23,7 +24,6 @@
 #include <glm/geometric.hpp>
 #include <algorithm>
 #include <cmath>
-#include "vectorUtils.h"
 
 // TODO: These drawThick... functions don't belong here.
 static void drawThickPolyline(sp::RenderTarget& renderer, const std::vector<glm::vec2>& polyline, float width, glm::u8vec4 color, float lateral_offset = 0.0f)
@@ -101,7 +101,7 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     new AlertLevelOverlay(this);
 
-    internal_view = new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", room_size);
+    internal_view = new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", 72.0f);
     internal_view
         ->setShip(my_spaceship)
         ->setPosition(300.0f, 0, sp::Alignment::TopLeft)
@@ -117,7 +117,9 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
     hull_display->setSize(GuiElement::GuiSizeMax, 40.0f);
 
     shield_display = new GuiKeyValueDisplay(system_health_layout, "SHIELDS", 0.8f, tr("damagecontrol", "Shields"), "0");
-    shield_display->setSize(GuiElement::GuiSizeMax, 40.0f)->hide();
+    shield_display
+        ->setSize(GuiElement::GuiSizeMax, 40.0f)
+        ->hide();
 
     energy_display = new GuiKeyValueDisplay(system_health_layout, "ENERGY", 0.8f, tr("damagecontrol", "Energy"), "0");
     energy_display->setSize(GuiElement::GuiSizeMax, 40.0f);
@@ -312,8 +314,9 @@ void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hov
     auto room_min = ir->roomMin();
     auto room_max = ir->roomMax();
     auto total_size = room_max - room_min;
+    const float rs = internal_view->getRoomSize();
     const sp::Rect& iv_rect = internal_view->getRect();
-    glm::vec2 room_container_size = glm::vec2(total_size) * room_size;
+    glm::vec2 room_container_size = glm::vec2(total_size) * rs;
     glm::vec2 room_container_origin = iv_rect.position + (iv_rect.size - room_container_size) * 0.5f;
 
     // Init indicator lines.
@@ -389,7 +392,7 @@ void DamageControlScreen::drawElements(glm::vec2 mouse_position, GuiElement* hov
         {
             if (room.system == ShipSystem::Type(n))
             {
-                room_center = room_container_origin + (glm::vec2(room.position - room_min) + glm::vec2(room.size) * 0.5f) * room_size;
+                room_center = room_container_origin + (glm::vec2(room.position - room_min) + glm::vec2(room.size) * 0.5f) * rs;
                 break;
             }
         }

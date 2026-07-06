@@ -13,7 +13,6 @@
 #include "screens/crew6/scienceScreen.h"
 #include "screens/crew6/relayScreen.h"
 #include "screens/crew4/tacticalScreen.h"
-#include "screens/crew4/engineeringAdvancedScreen.h"
 #include "screens/crew4/operationsScreen.h"
 #include "screens/crew1/singlePilotScreen.h"
 #include "screens/extra/beamWeaponsScreen.h"
@@ -2085,8 +2084,8 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
         // 4/3-player crew
         if (cps.has(CrewPosition::tacticalOfficer))
             screen->addStationTab(new TacticalScreen(container), CrewPosition::tacticalOfficer, getCrewPositionName(CrewPosition::tacticalOfficer), getCrewPositionIcon(CrewPosition::tacticalOfficer));
-        if (cps.has(CrewPosition::engineeringAdvanced))
-            screen->addStationTab(new EngineeringAdvancedScreen(container), CrewPosition::engineeringAdvanced, getCrewPositionName(CrewPosition::engineeringAdvanced), getCrewPositionIcon(CrewPosition::engineeringAdvanced));
+        if (cps.has(CrewPosition::engineeringPlus))
+            screen->addStationTab(new EngineeringScreen(container, CrewPosition::engineeringPlus), CrewPosition::engineeringPlus, getCrewPositionName(CrewPosition::engineeringPlus), getCrewPositionIcon(CrewPosition::engineeringPlus));
         if (cps.has(CrewPosition::operationsOfficer))
             screen->addStationTab(new OperationScreen(container), CrewPosition::operationsOfficer, getCrewPositionName(CrewPosition::operationsOfficer), getCrewPositionIcon(CrewPosition::operationsOfficer));
 
@@ -2140,7 +2139,7 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             sde->enablePosition(CrewPosition::helmsOfficer);
         }
 
-        if (cps.has(CrewPosition::engineeringAdvanced))
+        if (cps.has(CrewPosition::engineeringPlus))
             sde->enablePosition(CrewPosition::engineering);
 
         if (cps.has(CrewPosition::operationsOfficer))
@@ -2166,7 +2165,7 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::scienceOfficer: return tr("crew_screen", "Science");
     case CrewPosition::relayOfficer: return tr("crew_screen", "Relay");
     case CrewPosition::tacticalOfficer: return tr("crew_screen", "Tactical");
-    case CrewPosition::engineeringAdvanced: return tr("crew_screen", "Engineering+");
+    case CrewPosition::engineeringPlus: return tr("crew_screen", "Engineering+");
     case CrewPosition::operationsOfficer: return tr("crew_screen", "Operations");
     case CrewPosition::singlePilot: return tr("crew_screen", "Single pilot");
     case CrewPosition::damageControl: return tr("crew_screen", "Damage control");
@@ -2199,7 +2198,7 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::beamWeaponsOfficer: return "gui/icons/system_beam";
     case CrewPosition::missileWeaponsOfficer: return "gui/icons/system_missile";
     case CrewPosition::tacticalOfficer: return "gui/icons/station-tactical";
-    case CrewPosition::engineeringAdvanced: return "gui/icons/station-engineering-plus";
+    case CrewPosition::engineeringPlus: return "gui/icons/station-engineering-plus";
     case CrewPosition::operationsOfficer: return "gui/icons/station-operations";
     case CrewPosition::singlePilot: return "gui/icons/station-single-pilot";
     case CrewPosition::damageControl: return "gui/icons/system_health";

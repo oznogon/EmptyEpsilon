@@ -11,6 +11,7 @@ class GuiShipInternalView : public GuiElement
 private:
     sp::ecs::Entity viewing_ship;
     float room_size;
+    float current_room_size = 0.0f;
     GuiShipRoomContainer* room_container;
     sp::ecs::Entity selected_crew_member;
     std::vector<GuiShipCrew*> crew_list;
@@ -21,6 +22,8 @@ public:
     GuiShipInternalView(GuiContainer* owner, string id, float room_size);
 
     GuiShipInternalView* setShip(sp::ecs::Entity ship);
+
+    float getRoomSize() const { return current_room_size; }
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;

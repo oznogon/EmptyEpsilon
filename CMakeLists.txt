@@ -265,7 +265,6 @@ set(MAIN_SOURCES
     src/screens/mainScreen.cpp
     src/screens/spectatorScreen.cpp
     src/screens/crew4/operationsScreen.cpp
-    src/screens/crew4/engineeringAdvancedScreen.cpp
     src/screens/crew4/tacticalScreen.cpp
     src/screens/crew6/engineeringScreen.cpp
     src/screens/crew6/scienceScreen.cpp
@@ -687,7 +686,6 @@ set(MAIN_SOURCES
     src/screenComponents/utilityBeamRotationDial.h
     src/screens/cinematicViewScreen.h
     src/screens/crew1/singlePilotScreen.h
-    src/screens/crew4/engineeringAdvancedScreen.h
     src/screens/crew4/operationsScreen.h
     src/screens/crew4/tacticalScreen.h
     src/screens/crew6/engineeringScreen.h
