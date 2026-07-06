@@ -309,6 +309,7 @@ void NebulaRenderSystem::update(float delta)
 
 void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, NebulaRenderer& nr)
 {
+    nr.generateCloudsFromSeed();
     if (nr.clouds.empty())
         return;
 
