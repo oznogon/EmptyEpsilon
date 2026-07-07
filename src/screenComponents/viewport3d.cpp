@@ -208,7 +208,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         {
             float dist = glm::length(info.position - camera_pos2);
             float fade_zone = info.skybox_fade_distance > 0.0f ? info.skybox_fade_distance : 1000.0f;
-            float transition_start = info.radius + 1.5f * fade_zone;
+            float transition_start = info.radius + 1.0f * fade_zone;
             float transition_end = info.radius - 0.5f * fade_zone;
             float transition_range = transition_start - transition_end;
             if (dist <= transition_start)
@@ -233,21 +233,21 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
     if (projection_type == ProjectionType::Orthographic)
     {
-        // Calculate orthographic bounds based on camera height and FOV
-        float reference_distance = std::max(100.0f, camera_position.z);
-        float height = reference_distance * glm::tan(glm::radians(camera_fov / 2.0f));
-        float width = height * (rect.size.x / rect.size.y);
-        projection_matrix = glm::ortho(-width, width, -height, height, 1.f, far_plane);
+        // Calculate orthographic bounds based on camera height and FoV.
+        const float reference_distance = std::max(100.0f, camera_position.z);
+        const float height = reference_distance * glm::tan(glm::radians(camera_fov * 0.5f));
+        const float width = height * (rect.size.x / rect.size.y);
+        projection_matrix = glm::ortho(-width, width, -height, height, 1.0f, far_plane);
     }
     else
-        projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, far_plane);
+        projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.0f, far_plane);
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
-    view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.0f), {1.f, 0.f, 0.f}); // -> X across (l-t-r), Y "towards", Z down
+    view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.0f), {1.0f, 0.0f, 0.0f}); // -> X across (l-t-r), Y "towards", Z down
     view_matrix = glm::scale(view_matrix, {1.f,1.f,-1.f});  // -> X across (l-t-r), Y "towards", Z up
-    view_matrix = glm::rotate(view_matrix, glm::radians(-camera_roll), {0.f, 1.f, 0.f}); // Roll first, around Y (forward)
-    view_matrix = glm::rotate(view_matrix, glm::radians(-camera_pitch), {1.f, 0.f, 0.f}); // Then pitch around X
-    view_matrix = glm::rotate(view_matrix, glm::radians(-(camera_yaw + 90.f)), {0.f, 0.f, 1.f}); // Finally yaw around Z
+    view_matrix = glm::rotate(view_matrix, glm::radians(-camera_roll), {0.0f, 1.0f, 0.0f}); // Roll first, around Y (forward)
+    view_matrix = glm::rotate(view_matrix, glm::radians(-camera_pitch), {1.0f, 0.0f, 0.0f}); // Then pitch around X
+    view_matrix = glm::rotate(view_matrix, glm::radians(-(camera_yaw + 90.f)), {0.0f, 0.0f, 1.0f}); // Finally yaw around Z
 
     // Translate camera
     view_matrix = glm::translate(view_matrix, -camera_position);
@@ -258,8 +258,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         starbox_shader->bind();
         // Scale skybox appropriately for orthographic vs perspective projection
         float skybox_scale = (projection_type == ProjectionType::Orthographic)
-            ? std::max(100.0f, camera_position.z * 2.0f)  // Scale with camera distance for ortho
-            : 100.0f;                                      // Fixed scale for perspective
+            ? std::max(100.0f, camera_position.z * 2.0f) // Scale with camera distance for ortho
+            : 100.0f; // Fixed scale for perspective
         glUniform1f(starbox_shader->getUniformLocation("u_scale"), skybox_scale);
 
         string skybox_name = "skybox/default";

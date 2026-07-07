@@ -34,7 +34,6 @@ public:
     struct NebulaOccluder {
         glm::vec2 position;
         float occlusion_radius;
-        bool active;
     };
     static void refreshNebulaCache();
     static bool isOccludedByNebula(glm::vec2 source, glm::vec2 target);
@@ -42,8 +41,8 @@ public:
                                    const std::vector<NebulaOccluder>& occluders);
     static std::function<void()> post_opaque_render;
 private:
-    float depth_cutoff_back;
-    float depth_cutoff_front;
+    float depth_cutoff_near;
+    float depth_cutoff_far;
     glm::vec2 view_vector;
     struct RenderEntry {
         sp::ecs::Entity entity;
@@ -63,9 +62,9 @@ private:
             float radius = 5000.0f;
             if (auto physics = entity.template getComponent<sp::Physics>())
                 radius = physics->getSize().x;
-            if (depth + radius < depth_cutoff_back)
+            if (depth + radius < depth_cutoff_near)
                 continue;
-            if (depth - radius > depth_cutoff_front)
+            if (depth - radius > depth_cutoff_far)
                 continue;
             if (depth > 0 && radius / depth < 1.0f / 500)
                 continue;
