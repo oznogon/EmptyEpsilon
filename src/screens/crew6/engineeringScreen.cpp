@@ -119,15 +119,9 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     if (crew_position == CrewPosition::engineeringPlus)
     {
         if (gameGlobalInfo->use_beam_shield_frequencies)
-        {
-            (new GuiShieldFrequencySelect(top_left, "SHIELD_FREQ"))
-                ->setSize(GuiElement::GuiSizeMax, 100.0f);
-        }
+            (new GuiShieldFrequencySelect(top_left, "SHIELD_FREQ"))->setSize(GuiElement::GuiSizeMax, 100.0f);
         else
-        {
-            (new GuiShieldsEnableButton(top_left, "SHIELDS_ENABLE"))
-                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-        }
+            (new GuiShieldsEnableButton(top_left, "SHIELDS_ENABLE"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
     }
 
     // Top-right controls.
@@ -136,29 +130,41 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiShipInternalView(top_right, "SHIP_INTERNAL_VIEW", 48.0f))
+    GuiShipInternalView* internal_view = new GuiShipInternalView(top_right, "SHIP_INTERNAL_VIEW", 48.0f);
+    internal_view
         ->setShip(my_spaceship)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiCustomShipFunctions(top_right, crew_position, "CSF"))
-        ->setSize(250.0f, GuiElement::GuiSizeMax);
+    GuiElement* top_right_column = new GuiElement(top_row, "");
+    top_right_column
+        ->setSize(270.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    (new GuiCustomShipFunctions(top_right_column, crew_position, "CSF"))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    system_effects_container = new GuiElement(top_right_column, "");
+    system_effects_container
+        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
+        ->setSize(GuiElement::GuiSizeMax, 400.0f)
+        ->setAttribute("layout", "verticalbottom");
 
     // Bottom row (ship systems, power/coolant sliders).
-    GuiElement* bottom_row = new GuiElement(container, "");
+    GuiElement* bottom_row = new GuiScrollContainer(container, "");
     bottom_row
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setSize(GuiElement::GuiSizeMax, 450.0f)
         ->setAttribute("layout", "horizontal");
 
     // Ship systems container.
     GuiElement* system_config_container = new GuiElement(bottom_row, "");
     system_config_container
-        ->setSize(1050.0f /* 750 + 300 */, GuiElement::GuiSizeMax);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "horizontal");
 
     GuiElement* system_row_layouts = new GuiElement(system_config_container, "SYSTEM_ROWS");
     system_row_layouts
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "verticalbottom");
-    float column_width = gameGlobalInfo->use_system_damage ? 100.0f : 150.0f;
 
     for (int n = 0; n < ShipSystem::COUNT; n++)
     {
@@ -179,7 +185,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
 
         info.damage_bar = new GuiProgressbar(info.row, id + "_DAMAGE", 0.0f, 1.0f, 0.0f);
         info.damage_bar
-            ->setSize(150.0f, GuiElement::GuiSizeMax)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
             ->setVisible(gameGlobalInfo->use_system_damage);
         info.damage_icon = new GuiImage(info.damage_bar, "", "gui/icons/system_health");
         info.damage_icon
@@ -191,7 +197,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
 
         info.heat_bar = new GuiProgressbar(info.row, id + "_HEAT", 0.0f, 1.0f, 0.0f);
         info.heat_bar
-            ->setSize(column_width, GuiElement::GuiSizeMax)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
             ->setVisible(has_coolant);
         info.heat_arrow = new GuiArrow(info.heat_bar, id + "_HEAT_ARROW", 0.0f);
         info.heat_arrow
@@ -211,7 +217,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         );
         info.power_bar
             ->setColor(glm::u8vec4(192, 192, 32, 128))
-            ->setSize(column_width, GuiElement::GuiSizeMax);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         info.coolant_bar = new GuiProgressSlider(info.row, id + "_COOLANT", 0.0f, 10.0f, 0.0f,
             [n](float value)
@@ -222,7 +228,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         );
         info.coolant_bar
             ->setColor(glm::u8vec4(32, 128, 128, 128))
-            ->setSize(column_width, GuiElement::GuiSizeMax)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
             ->setVisible(has_coolant);
 
         if (!gameGlobalInfo->use_system_damage) info.damage_bar->hide();
@@ -251,17 +257,18 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
 
     heat_icon = new GuiImage(icon_layout, "HEAT_ICON", "gui/icons/status_overheat");
     heat_icon
-        ->setSize(column_width, GuiElement::GuiSizeMax)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setVisible(has_coolant);
 
     (new GuiImage(icon_layout, "POWER_ICON", "gui/icons/energy"))
-        ->setSize(column_width, GuiElement::GuiSizeMax);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     coolant_remaining_bar = new GuiProgressSlider(icon_layout, "", 0, 10.0, 10.0,
         [](float requested_unused_coolant)
         {
             auto coolant = my_spaceship.getComponent<Coolant>();
             if (!coolant) return;
+
             float total_requested = 0.0f;
             float new_max_total = coolant->max - requested_unused_coolant;
 
@@ -303,7 +310,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     coolant_remaining_bar
         ->setColor(glm::u8vec4(32, 128, 128, 128))
         ->setDrawBackground(false)
-        ->setSize(column_width, GuiElement::GuiSizeMax)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setVisible(has_coolant);
     (new GuiImage(coolant_remaining_bar, "COOLANT_ICON", "gui/icons/coolant"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -321,31 +328,32 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     system_rows[static_cast<int>(ShipSystem::Type::DockingBay)].button->setIcon("gui/icons/docking");
     system_rows[static_cast<int>(ShipSystem::Type::Sensors)].button->setIcon("gui/icons/station-radar");
 
-    system_effects_container = new GuiElement(system_config_container, "");
-    system_effects_container
-        ->setPosition(0.0f, -400.0f, sp::Alignment::BottomRight)
-        ->setSize(270.0f, 400.0f)
-        ->setAttribute("layout", "verticalbottom");
+    GuiPanel* power_coolant_box = new GuiPanel(system_config_container, "POWER_COOLANT_BOX");
+    power_coolant_box
+        ->setSize(270.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("padding", "20");
+    power_coolant_box
+        ->setAttribute("layout", "horizontal");
+    power_coolant_box
+        ->getLayout().match_content_x = true;
 
-    GuiPanel* box = new GuiPanel(system_config_container, "POWER_COOLANT_BOX");
-    box
-        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
-        ->setSize(270.0f, 400.0f);
-    power_label = new GuiLabel(box, "POWER_LABEL", tr("slider", "Power"), GuiElement::GuiSizeLabel);
+    power_label = new GuiLabel(power_coolant_box, "POWER_LABEL", tr("slider", "Power"), GuiElement::GuiSizeLabel);
     power_label
         ->setVertical()
         ->setAlignment(sp::Alignment::Center)
-        ->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)
-        ->setSize(30.0f, 360.0f);
-    coolant_label = new GuiLabel(box, "COOLANT_LABEL", tr("slider", "Coolant"), GuiElement::GuiSizeLabel);
-    coolant_label
-        ->setVertical()
-        ->setAlignment(sp::Alignment::Center)
-        ->setPosition(110.0f, 20.0f, sp::Alignment::TopLeft)
-        ->setSize(30.0f, 360.0f)
-        ->setVisible(has_coolant);
+        ->setSize(GuiElement::GuiSizeLabel, GuiElement::GuiSizeMax);
 
-    power_slider = new GuiSlider(box, "POWER_SLIDER", power_max, 0.0f, 1.0f,
+    GuiElement* control = new GuiElement(power_coolant_box, "");
+    control
+        ->setSize(60.0f, GuiElement::GuiSizeMax);
+
+    power_bar = new GuiProgressbar(control, "POWER_BAR", 0.0f, power_max, 0.0f);
+    power_bar
+        ->setDrawBackground(false)
+        ->setColor(glm::u8vec4(192, 192, 32, 255))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "5, 30");
+    power_slider = new GuiSlider(control, "POWER_SLIDER", power_max, 0.0f, 1.0f,
         [this](float value)
         {
             if (my_spaceship && selected_system != ShipSystem::Type::None)
@@ -353,13 +361,31 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         }
     );
     power_slider
-        ->setPosition(50.0f, 20.0f, sp::Alignment::TopLeft)
-        ->setSize(60.0f, 360.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->disable();
     for (float snap_point = 0.0f; snap_point <= power_max; snap_point += 0.5f)
         power_slider->addSnapValue(snap_point, snap_point == 1.0f ? 0.1f : 0.01f);
 
-    coolant_slider = new GuiSlider(box, "COOLANT_SLIDER", 10.0, 0.0, 0.0,
+    coolant_label = new GuiLabel(power_coolant_box, "COOLANT_LABEL", tr("slider", "Coolant"), GuiElement::GuiSizeLabel);
+    coolant_label
+        ->setVertical()
+        ->setAlignment(sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeLabel, GuiElement::GuiSizeMax)
+        ->setVisible(has_coolant);
+
+    control = new GuiElement(power_coolant_box, "");
+    control
+        ->setSize(60.0f, GuiElement::GuiSizeMax);
+
+    coolant_bar = new GuiProgressbar(control, "COOLANT_BAR", 0.0f, 10.0f, 0.0f);
+    coolant_bar
+        ->setDrawBackground(false)
+        ->setColor(glm::u8vec4(32, 128, 128, 255))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setVisible(has_coolant)
+        ->setAttribute("margin", "5, 30");
+
+    coolant_slider = new GuiSlider(control, "COOLANT_SLIDER", 10.0f, 0.0f, 0.0f,
         [this](float value)
         {
             if (my_spaceship && selected_system != ShipSystem::Type::None)
@@ -367,8 +393,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         }
     );
     coolant_slider
-        ->setPosition(140.0f, 20.0f, sp::Alignment::TopLeft)
-        ->setSize(60.0f, 360.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->disable()
         ->setVisible(has_coolant);
     for (float snap_point = 0.0f; snap_point <= 10.0f; snap_point += 2.5f)
@@ -448,7 +473,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 {
                     info.coolant_max_indicator
                         ->setColor({slider_tick_color.r, slider_tick_color.g, slider_tick_color.b, 255})
-                        ->setPosition(-20.0f + info.coolant_bar->getSize().x * (system->coolant_request * 0.1f), 5.0f);
+                        ->setPosition(-20.0f + info.coolant_bar->getRect().size.x * (system->coolant_request * 0.1f), 5.0f);
                 }
                 else
                     info.coolant_max_indicator->setColor({slider_tick_color.r, slider_tick_color.g, slider_tick_color.b, 0});
@@ -479,13 +504,19 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
 
                 // Limit max power to 100% if lacking both Coolant and Reactor.
                 // Rotated bar takes the max value first.
+                const float effective_power_max = (coolant || reactor) ? 3.0f : 1.0f;
                 power_slider
-                    ->setRange((coolant || reactor) ? 3.0f : 1.0f, 0.0f)
+                    ->setRange(effective_power_max, 0.0f)
                     ->setValue(system->power_request);
+
+                power_bar
+                    ->setRange(0.0f, effective_power_max)
+                    ->setValue(system->power_level);
 
                 // Render coolant slider
                 coolant_label->setVisible(coolant);
                 coolant_slider->setVisible(coolant);
+                coolant_bar->setVisible(coolant);
                 if (coolant)
                 {
                     coolant_label->setText(tr("slider", "Coolant: {current_level}% / {requested}%").format({
@@ -495,6 +526,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     coolant_slider
                         ->setValue(std::min(system->coolant_request, coolant->max))
                         ->setEnable(!coolant->auto_levels);
+                    coolant_bar->setValue(std::min(system->coolant_level, coolant->max));
                 }
 
                 system_effects_index = 0;

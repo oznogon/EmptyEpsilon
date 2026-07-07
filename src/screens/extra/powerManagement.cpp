@@ -194,7 +194,10 @@ bool PowerManagementScreen::populateSystemPanel(int system_index, GuiElement* sy
         systems[system_index].power_control->setSize(40.0f, GuiElement::GuiSizeMax);
 
         systems[system_index].power_bar = new GuiProgressbar(systems[system_index].power_control, "PWR_SYSTEM_" + string(system_index) + "_POWER_BAR", 0.0f, 3.0f, 1.0f);
-        systems[system_index].power_bar->setDrawBackground(false)->setColor(energy_color_background)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        systems[system_index].power_bar
+            ->setDrawBackground(false)
+            ->setColor(energy_color_background)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         // Vertical margins fit the bar to the 0-100 marks on the slider, which differ from the top and bottom extents.
         // Horizontal margins needed to fit the bar inside of the default slider background image's borders.
         systems[system_index].power_bar->setAttribute("margin", "3, 20");
@@ -223,7 +226,10 @@ bool PowerManagementScreen::populateSystemPanel(int system_index, GuiElement* sy
         systems[system_index].coolant_control->setSize(40.0f, GuiElement::GuiSizeMax);
 
         systems[system_index].coolant_bar = new GuiProgressbar(systems[system_index].coolant_control, "PWR_SYSTEM_" + string(system_index) + "_COOLANT_BAR", 0.0f, 10.0f, 1.0f);
-        systems[system_index].coolant_bar->setDrawBackground(false)->setColor(coolant_color_background)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        systems[system_index].coolant_bar
+            ->setDrawBackground(false)
+            ->setColor(coolant_color_background)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         // Vertical margins fit the bar to the 0-100 marks on the slider, which differ from the top and bottom extents.
         // Horizontal margins needed to fit the bar inside of the default slider background image's borders.
         systems[system_index].coolant_bar->setAttribute("margin", "3, 20");
@@ -234,8 +240,10 @@ bool PowerManagementScreen::populateSystemPanel(int system_index, GuiElement* sy
                 my_player_info->commandSetSystemCoolantRequest(ShipSystem::Type(system_index), value);
             }
         );
-        systems[system_index].coolant_slider->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        // Snap points copied from Engineering.
+        systems[system_index].coolant_slider
+            ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        // Snap points.
         for (float snap_point = 0.0f; snap_point <= 10.0f; snap_point += 2.5f)
             systems[system_index].coolant_slider->addSnapValue(snap_point, 0.1f);
 
@@ -276,7 +284,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
     const glm::vec2 old_size = view_size;
     view_size = getRect().size;
     // "Main content" refers to the area containing the systems grid.
-    const float main_content_height = view_size.y - float(layout_margin * 2) - status_bar_height;
+    const float main_content_height = view_size.y - static_cast<float>(layout_margin * 2) - status_bar_height;
 
     // Show or hide custom functions depending on whether any exist.
     // Reduce the horizontal view size if showoing the custom functions column.
@@ -312,7 +320,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 
         // Determine number of panels per row by available width / panel width.
         // Ensure at least one panel per row.
-        const int panels_per_row = std::max(1, int((view_size.x - 40.0f) / panel_size.x));
+        const int panels_per_row = std::max(1, static_cast<int>((view_size.x - 40.0f) / panel_size.x));
 
         // Compute how many rows are required.
         const int new_rows = std::max(1, (active_system_count + (panels_per_row - 1)) / panels_per_row);
@@ -323,7 +331,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 
         // If the systems or window size have changed to require more rows,
         // add rows.
-        while (int(systems_rows.size()) < new_rows)
+        while (static_cast<int>(systems_rows.size()) < new_rows)
         {
             GuiElement* systems_row = new GuiElement(this->systems_grid, "PWR_SYSTEMS_ROW_" + string(static_cast<int>(systems_rows.size()) + 1));
             systems_row
@@ -334,7 +342,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 
         // If the systems or window size have changed to require fewer rows,
         // destroy unnecessary rows.
-        while (!systems_rows.empty() && int(systems_rows.size()) > new_rows)
+        while (!systems_rows.empty() && static_cast<int>(systems_rows.size()) > new_rows)
         {
             systems_rows.back()->destroy();
             systems_rows.pop_back();
@@ -346,7 +354,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
         int row_index = 0;
         for (int n = 0; n < ShipSystem::COUNT; n++)
         {
-            if (populateSystemPanel(n, systems_rows[std::clamp(row_index / panels_per_row, 0, int(systems_rows.size()) - 1)]))
+            if (populateSystemPanel(n, systems_rows[std::clamp(row_index / panels_per_row, 0, static_cast<int>(systems_rows.size()) - 1)]))
                 row_index++;
         }
 
@@ -377,17 +385,19 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
         const float energy_delta_per_minute = average_energy_delta * 60.0f;
 
         energy_display->setValue(
-            string(int(reactor->energy)) + "/" + string(int(reactor->max_energy)) + "\n" + tr("{energy_delta}/min.").format(
+            string(static_cast<int>(reactor->energy)) + "/" + string(static_cast<int>(reactor->max_energy)) + "\n" + tr("{energy_delta}/min.").format(
             {
-                {"energy_delta", string(int(energy_delta_per_minute))}
+                {"energy_delta", string(static_cast<int>(energy_delta_per_minute))}
             }
         ));
 
-        energy_capacity_gauge->setRange(0.0f, reactor->max_energy)->setValue(reactor->energy);
+        energy_capacity_gauge
+            ->setRange(0.0f, reactor->max_energy)
+            ->setValue(reactor->energy);
 
         energy_delta_arrow
             ->setAngle(energy_delta_per_minute > 0.0f ? 180.0f : 0.0f)
-            ->setColor(glm::u8vec4(255, 255, 255, std::min(255, int(255.0f * fabs(energy_delta_per_minute / 250.0f)))))
+            ->setColor(glm::u8vec4(255, 255, 255, std::min(255, static_cast<int>(255.0f * fabs(energy_delta_per_minute / 250.0f)))))
             ->setVisible(energy_delta_per_minute != 0.0f);
     }
     else energy_capacity_gauge->hide();
@@ -462,7 +472,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
             // Point the heat arrow to indicate system heat delta.
             systems[n].heat_arrow->setAngle(heat_delta > 0.0f ? 90.0f : -90.0f);
             systems[n].heat_arrow->setVisible(heat_level > 0.0f);
-            systems[n].heat_arrow->setColor(glm::u8vec4(255, 255, 255, std::min(255, int(255.0f * fabs(heat_delta)))));
+            systems[n].heat_arrow->setColor(glm::u8vec4(255, 255, 255, std::min(255, static_cast<int>(255.0f * fabs(heat_delta)))));
         }
         else systems[n].container->hide();
     }
@@ -472,8 +482,8 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
     {
         coolant_display->setValue(tr("{unused}/{capacity}").format(
             {
-                {"unused", string(int(nearbyint(unused_coolant * 100.0f / coolant->max_coolant_per_system)))},
-                {"capacity", string(int(nearbyint(coolant->max * 100.0f / coolant->max_coolant_per_system)))}
+                {"unused", string(static_cast<int>(nearbyint(unused_coolant * 100.0f / coolant->max_coolant_per_system)))},
+                {"capacity", string(static_cast<int>(nearbyint(coolant->max * 100.0f / coolant->max_coolant_per_system)))}
             }
         ));
         coolant_distribution_gauge->setValue(unused_coolant / coolant->max);
@@ -482,114 +492,113 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 
 void PowerManagementScreen::onUpdate()
 {
-    if (my_spaceship && isVisible())
+    if (!my_spaceship || !isVisible()) return;
+
+    // Handle hotkeys for selecting a system to manage.
+    for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        // Handle hotkeys for selecting a system to manage.
-        for (int n = 0; n < ShipSystem::COUNT; n++)
+        if (keys.engineering_select_system[n].getDown()) selected_system = static_cast<ShipSystem::Type>(n);
+
+        // Handle hotkeys for setting power values.
+        float set_value = keys.engineering_set_power_for_system[n].getValue() * 3.0f;
+        auto sys = ShipSystem::get(my_spaceship, static_cast<ShipSystem::Type>(n));
+
+        if (sys && set_value != sys->power_request && (set_value != 0.0f || set_power_active[n]))
         {
-            if (keys.engineering_select_system[n].getDown()) selected_system = static_cast<ShipSystem::Type>(n);
+            my_player_info->commandSetSystemPowerRequest(static_cast<ShipSystem::Type>(n), set_value);
+            // Ensure the next update is sent, even if it is back to zero.
+            set_power_active[n] = set_value != 0.0f;
+        }
 
-            // Handle hotkeys for setting power values.
-            float set_value = keys.engineering_set_power_for_system[n].getValue() * 3.0f;
-            auto sys = ShipSystem::get(my_spaceship, static_cast<ShipSystem::Type>(n));
+        // Handle hotkeys for setting coolant values.
+        if (auto coolant = my_spaceship.getComponent<Coolant>())
+        {
+            set_value = keys.engineering_set_coolant_for_system[n].getValue() * coolant->max_coolant_per_system;
 
-            if (sys && set_value != sys->power_request && (set_value != 0.0f || set_power_active[n]))
+            if (sys && set_value != sys->coolant_request && (set_value != 0.0f || set_coolant_active[n]))
             {
-                my_player_info->commandSetSystemPowerRequest(static_cast<ShipSystem::Type>(n), set_value);
+                my_player_info->commandSetSystemCoolantRequest(static_cast<ShipSystem::Type>(n), set_value);
                 // Ensure the next update is sent, even if it is back to zero.
-                set_power_active[n] = set_value != 0.0f;
+                set_coolant_active[n] = set_value != 0.0f;
             }
+        }
+    }
 
-            // Handle hotkeys for setting coolant values.
-            if (auto coolant = my_spaceship.getComponent<Coolant>())
+    // Don't act if the selected system doesn't exist.
+    if (!ShipSystem::get(my_spaceship, selected_system)) return;
+
+    // If we selected a system, check for the power/coolant modifier.
+    if (selected_system != ShipSystem::Type::None)
+    {
+        GuiSlider* power_slider = systems[int(selected_system)].power_slider;
+
+        // Handle hotkeys for setting power for the selected system to a given level.
+        // Note code duplication with crew6/engineeringScreen.
+        // Power management should probably instead use Engineering's hotkeys for these.
+        if (keys.engineering_set_power_000.getDown())
+        {
+            power_slider->setValue(0.0f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_030.isDiscreteStepDown())
+        {
+            power_slider->setValue(0.3f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_050.isDiscreteStepDown())
+        {
+            power_slider->setValue(0.5f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_100.isDiscreteStepDown())
+        {
+            power_slider->setValue(1.0f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_150.isDiscreteStepDown())
+        {
+            power_slider->setValue(1.5f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_200.isDiscreteStepDown())
+        {
+            power_slider->setValue(2.0f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_250.isDiscreteStepDown())
+        {
+            power_slider->setValue(2.5f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+        if (keys.engineering_set_power_300.isDiscreteStepDown())
+        {
+            power_slider->setValue(3.0f);
+            my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+        }
+
+        // Handle hotkeys for incremental power changes to the selected system.
+        auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.1f;
+        if (power_adjust != 0.0f)
+        {
+            if (auto sys = ShipSystem::get(my_spaceship, selected_system))
             {
-                set_value = keys.engineering_set_coolant_for_system[n].getValue() * coolant->max_coolant_per_system;
-
-                if (sys && set_value != sys->coolant_request && (set_value != 0.0f || set_coolant_active[n]))
-                {
-                    my_player_info->commandSetSystemCoolantRequest(static_cast<ShipSystem::Type>(n), set_value);
-                    // Ensure the next update is sent, even if it is back to zero.
-                    set_coolant_active[n] = set_value != 0.0f;
-                }
+                power_slider->setValue(sys->power_request + power_adjust);
+                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
         }
 
-        // Don't act if the selected system doesn't exist.
-        if (!ShipSystem::get(my_spaceship, selected_system)) return;
-
-        // If we selected a system, check for the power/coolant modifier.
-        if (selected_system != ShipSystem::Type::None)
+        // Handle hotkeys for incremental coolant changes to the selected system.
+        GuiSlider* coolant_slider = systems[int(selected_system)].coolant_slider;
+        auto coolant_adjust = (keys.engineering_increase_coolant.getContinuousValue() + keys.engineering_increase_coolant.getAxis0Value()
+            - keys.engineering_decrease_coolant.getContinuousValue() - keys.engineering_decrease_coolant.getAxis0Value()) * 0.5f;
+        if (keys.engineering_increase_coolant.isDiscreteStepDown() || keys.engineering_increase_coolant.isRepeatReady()) coolant_adjust += 0.5f;
+        if (keys.engineering_decrease_coolant.isDiscreteStepDown() || keys.engineering_decrease_coolant.isRepeatReady()) coolant_adjust -= 0.5f;
+        if (coolant_adjust != 0.0f)
         {
-            GuiSlider* power_slider = systems[int(selected_system)].power_slider;
-
-            // Handle hotkeys for setting power for the selected system to a given level.
-            // Note code duplication with crew6/engineeringScreen.
-            // Power management should probably instead use Engineering's hotkeys for these.
-            if (keys.engineering_set_power_000.getDown())
+            if (auto sys = ShipSystem::get(my_spaceship, selected_system))
             {
-                power_slider->setValue(0.0f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_030.isDiscreteStepDown())
-            {
-                power_slider->setValue(0.3f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_050.isDiscreteStepDown())
-            {
-                power_slider->setValue(0.5f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_100.isDiscreteStepDown())
-            {
-                power_slider->setValue(1.0f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_150.isDiscreteStepDown())
-            {
-                power_slider->setValue(1.5f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_200.isDiscreteStepDown())
-            {
-                power_slider->setValue(2.0f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_250.isDiscreteStepDown())
-            {
-                power_slider->setValue(2.5f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (keys.engineering_set_power_300.isDiscreteStepDown())
-            {
-                power_slider->setValue(3.0f);
-                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-
-            // Handle hotkeys for incremental power changes to the selected system.
-            auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.1f;
-            if (power_adjust != 0.0f)
-            {
-                if (auto sys = ShipSystem::get(my_spaceship, selected_system))
-                {
-                    power_slider->setValue(sys->power_request + power_adjust);
-                    my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-                }
-            }
-
-            // Handle hotkeys for incremental coolant changes to the selected system.
-            GuiSlider* coolant_slider = systems[int(selected_system)].coolant_slider;
-            auto coolant_adjust = (keys.engineering_increase_coolant.getContinuousValue() + keys.engineering_increase_coolant.getAxis0Value()
-                - keys.engineering_decrease_coolant.getContinuousValue() - keys.engineering_decrease_coolant.getAxis0Value()) * 0.5f;
-            if (keys.engineering_increase_coolant.isDiscreteStepDown() || keys.engineering_increase_coolant.isRepeatReady()) coolant_adjust += 0.5f;
-            if (keys.engineering_decrease_coolant.isDiscreteStepDown() || keys.engineering_decrease_coolant.isRepeatReady()) coolant_adjust -= 0.5f;
-            if (coolant_adjust != 0.0f)
-            {
-                if (auto sys = ShipSystem::get(my_spaceship, selected_system))
-                {
-                    coolant_slider->setValue(sys->coolant_request + coolant_adjust);
-                    my_player_info->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
-                }
+                coolant_slider->setValue(sys->coolant_request + coolant_adjust);
+                my_player_info->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
             }
         }
     }

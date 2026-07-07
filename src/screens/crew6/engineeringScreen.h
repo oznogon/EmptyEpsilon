@@ -24,8 +24,10 @@ private:
     GuiSelfDestructButton* self_destruct_button;
     GuiLabel* power_label;
     GuiSlider* power_slider;
+    GuiProgressbar* power_bar;
     GuiLabel* coolant_label;
     GuiSlider* coolant_slider;
+    GuiProgressbar* coolant_bar;
     GuiImage* system_health_icon;
     GuiImage* heat_icon;
     GuiProgressbar* coolant_remaining_bar;
