@@ -125,16 +125,26 @@ void GuiContainer::updateLayout(const sp::Rect& bounds)
                     glm::vec2 p1 = p0 + w->rect.size;
                     if (!has_visible_child)
                     {
-                        content_size_min = {p0.x - w->layout.margin.left, p0.y - w->layout.margin.top};
-                        content_size_max = {p1.x + w->layout.margin.right, p1.y + w->layout.margin.bottom};
+                        content_size_min = {
+                            p0.x - w->layout.margin.left,
+                            p0.y - w->layout.margin.top
+                        };
+                        content_size_max = {
+                            p1.x + w->layout.margin.right,
+                            p1.y + w->layout.margin.bottom
+                        };
                         has_visible_child = true;
                     }
                     else
                     {
-                        content_size_min.x = std::min(content_size_min.x, p0.x - w->layout.margin.left);
-                        content_size_min.y = std::min(content_size_min.y, p0.y - w->layout.margin.top);
-                        content_size_max.x = std::max(content_size_max.x, p1.x + w->layout.margin.right);
-                        content_size_max.y = std::max(content_size_max.y, p1.y + w->layout.margin.bottom);
+                        content_size_min = {
+                            std::min(content_size_min.x, p0.x - w->layout.margin.left),
+                            std::min(content_size_min.y, p0.y - w->layout.margin.top)
+                        };
+                        content_size_max = {
+                            std::max(content_size_max.x, p1.x + w->layout.margin.right),
+                            std::max(content_size_max.y, p1.y + w->layout.margin.bottom)
+                        };
                     }
                 }
             }

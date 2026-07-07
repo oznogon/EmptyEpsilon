@@ -4947,6 +4947,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Render range:"), NebulaRenderer, render_range);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Cloud density:"), NebulaRenderer, cloud_density);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "In-nebula visibility distance:"), NebulaRenderer, visibility_distance);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Seed (0=default):"), NebulaRenderer, seed);
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row->setSize(GuiElement::GuiSizeMax, 210.0f)->setAttribute("layout", "horizontal");

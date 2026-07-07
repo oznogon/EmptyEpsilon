@@ -7,7 +7,6 @@ GuiElement::GuiElement(GuiContainer* owner, const string& id)
 : owner(owner), id(id)
 {
     owner->children.emplace_back(this);
-    destroyed = false;
     theme = owner->theme;
 
     // Cache the root canvas pointer to avoid dynamic_cast per lookup.
@@ -20,9 +19,7 @@ GuiElement::GuiElement(GuiContainer* owner, const string& id)
 GuiElement::~GuiElement()
 {
     if (owner)
-    {
-        LOG(ERROR) << "GuiElement was destroyed while it still had an owner...";
-    }
+        LOG(Error, "GuiElement was destroyed while it still had an owner");
 }
 
 bool GuiElement::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
@@ -63,10 +60,7 @@ bool GuiElement::setAttribute(const string& key, const string& value)
         setEnable(value.toBool());
         return true;
     }
-    else
-    {
-        return GuiContainer::setAttribute(key, value);
-    }
+    else return GuiContainer::setAttribute(key, value);
 }
 
 GuiElement* GuiElement::setSize(glm::vec2 size)
@@ -75,22 +69,30 @@ GuiElement* GuiElement::setSize(glm::vec2 size)
     layout.match_content_x = false;
     layout.match_content_y = false;
 
-    if (size.x == GuiSizeMax) {
+    if (size.x == GuiSizeMax)
+    {
         layout.size.x = 1.0;
         layout.fill_width = true;
     }
-    if (layout.size.y == GuiSizeMax) {
+
+    if (layout.size.y == GuiSizeMax)
+    {
         layout.size.y = 1.0;
         layout.fill_height = true;
     }
-    if (size.x == GuiSizeMatchHeight) {
+
+    if (size.x == GuiSizeMatchHeight)
+    {
         layout.size.x = layout.size.y;
         layout.lock_aspect_ratio = true;
     }
-    if (size.y == GuiSizeMatchWidth) {
+
+    if (size.y == GuiSizeMatchWidth)
+    {
         layout.size.y = layout.size.x;
         layout.lock_aspect_ratio = true;
     }
+
     return this;
 }
 
@@ -281,7 +283,7 @@ GuiContainer* GuiElement::getOwner()
 GuiContainer* GuiElement::getTopLevelContainer()
 {
     GuiContainer* top_level = owner;
-    while(dynamic_cast<GuiElement*>(top_level) != nullptr)
+    while (dynamic_cast<GuiElement*>(top_level) != nullptr)
         top_level = dynamic_cast<GuiElement*>(top_level)->getOwner();
     return top_level;
 }
@@ -298,11 +300,8 @@ bool GuiElement::isDestroyed()
 
 GuiElement::State GuiElement::getState() const
 {
-    if (!enabled)
-        return State::Disabled;
-    if (hover)
-        return State::Hover;
-    if (focus)
-        return State::Focus;
+    if (!enabled) return State::Disabled;
+    if (hover) return State::Hover;
+    if (focus) return State::Focus;
     return State::Normal;
 }

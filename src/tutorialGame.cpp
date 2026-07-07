@@ -14,7 +14,6 @@
 #include "screens/crew6/scienceScreen.h"
 #include "screens/crew6/relayScreen.h"
 #include "screens/crew4/tacticalScreen.h"
-#include "screens/crew4/engineeringAdvancedScreen.h"
 #include "screens/crew4/operationsScreen.h"
 
 #include "menus/luaConsole.h"
@@ -93,7 +92,7 @@ void TutorialGame::createScreens()
     station_screen[3] = new ScienceScreen(this);
     station_screen[4] = new RelayScreen(this, true);
     station_screen[5] = new TacticalScreen(this);
-    station_screen[6] = new EngineeringAdvancedScreen(this);
+    station_screen[6] = new EngineeringScreen(this, CrewPosition::engineeringPlus);
     station_screen[7] = new OperationScreen(this);
 
     for (int n = 0; n < 8; n++)

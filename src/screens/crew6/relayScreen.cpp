@@ -47,11 +47,12 @@ static bool isVisibleOnRelay(sp::ecs::Entity entity)
 {
     auto target_transform = entity.getComponent<sp::Transform>();
     if (!target_transform) return false;
+
     for (auto [e, ssrr, transform] : sp::ecs::Query<ShareShortRangeRadar, sp::Transform>())
     {
         if (Faction::getRelation(my_spaceship, e) != FactionRelation::Friendly)
             continue;
-        float r = getEffectiveShortRangeRadarRange(e);
+        const float r = getEffectiveShortRangeRadarRange(e);
         if (glm::length2(transform.getPosition() - target_transform->getPosition()) < r * r)
             return true;
     }
@@ -59,8 +60,7 @@ static bool isVisibleOnRelay(sp::ecs::Entity entity)
 }
 
 RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
-: GuiOverlay(owner, "RELAY_SCREEN", GuiTheme::getColor("background")), mode(TargetSelection),
-  allow_comms(allow_comms)
+: GuiOverlay(owner, "RELAY_SCREEN", GuiTheme::getColor("background")), mode(TargetSelection), allow_comms(allow_comms)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", MAX_ZOOM_DISTANCE, &targets);
@@ -300,7 +300,10 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     info_clock->setSize(GuiElement::GuiSizeMax, 40);
 
     alert_level_select = new GuiAlertLevelSelect(this, "");
-    alert_level_select->setPosition(-20, allow_comms ? -70 : -20, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
+    alert_level_select
+        ->setPosition(-20.0f, allow_comms ? -70.0f : -20.0f, sp::Alignment::BottomRight)
+        ->setSize(300.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "verticalbottom");
 
     auto position = allow_comms
         ? CrewPosition::relayOfficer

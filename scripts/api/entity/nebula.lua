@@ -3,6 +3,9 @@
 --- This hides any entities inside of a Nebula, as well as entities on the other side of its radar "shadow", from any ship outside of it.
 --- Likewise, a ship fully inside of a nebula has effectively no long-range radar functionality.
 --- In 3D space, a Nebula resembles a dense cloud of colorful gases.
+--- Cloud positions and textures are generated deterministically from a randomization seed,
+--- replicated across the network as just the seed, and generated locally on each client.
+--- Explicit cloud overrides (via script or GM Tweaks) replicate the full cloud data instead.
 --- Example: nebula = Nebula():setPosition(1000,2000)
 --- @type creation
 function Nebula()
@@ -26,26 +29,14 @@ function Nebula()
         behind = true
     }
     e.components.never_radar_blocked = {}
-    local render_info = {
+    e.components.nebula_renderer = {
         radius = radius,
         skybox = "purple",
         skybox_fade_distance = 2000,
         fog_color = {0.08, 0.03, 0.10},
         cloud_density = 1.0,
-        visibility_distance = 1000.0
+        visibility_distance = 1000.0,
+        seed = irandom(1, 2147483647)
     }
-    for n = 1, 900 do
-        local size = random(256, 2048)
-        -- Density-weighted distribution: more clouds near the center, fewer at the edges
-        render_info[n] = {
-            size = size,
-            texture = "Nebula" .. irandom(1, 3) .. ".png",
-            offset = {
-                math.cos(random(0, 360) / 180 * math.pi) * math.sqrt(random(0, 1)) * (radius - size * 0.75),
-                math.sin(random(0, 360) / 180 * math.pi) * math.sqrt(random(0, 1)) * (radius - size * 0.75)
-            }
-        }
-    end
-    e.components.nebula_renderer = render_info
     return e
 end

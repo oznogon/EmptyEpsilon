@@ -347,7 +347,9 @@ void NebulaRenderSystem::update(float delta)
 
 void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, NebulaRenderer& nr)
 {
-    if (nr.clouds.empty()) return;
+    nr.generateCloudsFromSeed();
+    if (nr.clouds.empty())
+        return;
 
     glm::vec2 nebula_pos = transform.getPosition();
     glm::vec2 camera_2d{ camera_position.x, camera_position.y };

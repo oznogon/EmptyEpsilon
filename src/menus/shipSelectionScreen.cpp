@@ -1342,7 +1342,7 @@ void CrewPositionSelection::setCrewScreenInfo(CrewPosition cp)
     case CrewPosition::tacticalOfficer:
         text = "<color=#C0C0FF>Tactical</>\nCombines the responsibilities of Helms (maneuvering, propulsion, docking) with Weapons (loading, targeting, and firing weapons). However, also lacks Weapons' control over shields.";
         break;
-    case CrewPosition::engineeringAdvanced:
+    case CrewPosition::engineeringPlus:
         text = "<color=#C0C0FF>Engineering+</>\nManages a ship's power, heat, coolant, and damage; manages shield activation and calibration; directs repair crews; tracks system effectiveness; and controls the ship's self-destruct system";
         break;
     case CrewPosition::operationsOfficer:

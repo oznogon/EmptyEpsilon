@@ -15,7 +15,7 @@ enum class CrewPosition
     relayOfficer,
     // 4/3-player crew
     tacticalOfficer,     // helms + weapons - shields
-    engineeringAdvanced, // engineering + shields
+    engineeringPlus, // engineering + shields
     operationsOfficer,   // science + comms
     // 1-player crew
     singlePilot,
