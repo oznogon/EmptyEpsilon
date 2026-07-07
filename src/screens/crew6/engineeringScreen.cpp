@@ -125,17 +125,17 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     }
 
     // Top-right controls.
-    GuiElement* top_right = new GuiElement(top_row, "");
+    auto top_right = new GuiElement(top_row, "");
     top_right
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "horizontal");
 
-    GuiShipInternalView* internal_view = new GuiShipInternalView(top_right, "SHIP_INTERNAL_VIEW", 48.0f);
+    auto internal_view = new GuiShipInternalView(top_right, "SHIP_INTERNAL_VIEW", 48.0f);
     internal_view
         ->setShip(my_spaceship)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    GuiElement* top_right_column = new GuiElement(top_row, "");
+    auto top_right_column = new GuiElement(top_row, "");
     top_right_column
         ->setSize(270.0f, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
@@ -150,18 +150,96 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         ->setAttribute("layout", "verticalbottom");
 
     // Bottom row (ship systems, power/coolant sliders).
-    GuiElement* bottom_row = new GuiScrollContainer(container, "");
+    auto bottom_row = new GuiElement(container, "");
     bottom_row
         ->setSize(GuiElement::GuiSizeMax, 450.0f)
         ->setAttribute("layout", "horizontal");
 
     // Ship systems container.
-    GuiElement* system_config_container = new GuiElement(bottom_row, "");
+    auto system_config_container = new GuiElement(bottom_row, "");
     system_config_container
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "horizontal");
 
-    GuiElement* system_row_layouts = new GuiElement(system_config_container, "SYSTEM_ROWS");
+    auto bottom_left = new GuiElement(system_config_container, "");
+    bottom_left
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    auto icon_layout = new GuiElement(bottom_left, "");
+    icon_layout
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("layout", "horizontal");
+
+    (new GuiElement(icon_layout, "FILLER"))
+        ->setSize(300.0f, GuiElement::GuiSizeMax);
+
+    system_health_icon = new GuiImage(icon_layout, "SYSTEM_HEALTH_ICON", "gui/icons/system_health");
+    system_health_icon
+        ->setSize(150.0f, GuiElement::GuiSizeMax)
+        ->setVisible(gameGlobalInfo->use_system_damage);
+
+    heat_icon = new GuiImage(icon_layout, "HEAT_ICON", "gui/icons/status_overheat");
+    heat_icon
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setVisible(has_coolant);
+
+    (new GuiImage(icon_layout, "POWER_ICON", "gui/icons/energy"))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    coolant_remaining_bar = new GuiProgressSlider(icon_layout, "", 0, 10.0, 10.0,
+        [](float requested_unused_coolant)
+        {
+            auto coolant = my_spaceship.getComponent<Coolant>();
+            if (!coolant) return;
+
+            float total_requested = 0.0f;
+            float new_max_total = coolant->max - requested_unused_coolant;
+
+            for (int n = 0; n < ShipSystem::COUNT; n++)
+            {
+                if (auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n)))
+                    total_requested += sys->coolant_request;
+            }
+
+            // Drain systems
+            if (new_max_total < total_requested)
+            {
+                for (int n = 0; n < ShipSystem::COUNT; n++)
+                {
+                    if (auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n)))
+                        my_player_info->commandSetSystemCoolantRequest(ShipSystem::Type(n), sys->coolant_request * new_max_total / total_requested);
+                }
+            }
+            // Put coolant into systems
+            else
+            {
+                int system_count = 0;
+                for (int n = 0; n < ShipSystem::COUNT; n++)
+                {
+                    if (ShipSystem::get(my_spaceship, ShipSystem::Type(n)))
+                        system_count++;
+                }
+
+                float add = (new_max_total - total_requested) / static_cast<float>(system_count);
+
+                for (int n = 0; n < ShipSystem::COUNT; n++)
+                {
+                    if (auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n)))
+                        my_player_info->commandSetSystemCoolantRequest(ShipSystem::Type(n), std::min(sys->coolant_request + add, 10.0f));
+                }
+            }
+        }
+    );
+    coolant_remaining_bar
+        ->setColor(glm::u8vec4(32, 128, 128, 128))
+        ->setDrawBackground(false)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setVisible(has_coolant);
+    (new GuiImage(coolant_remaining_bar, "COOLANT_ICON", "gui/icons/coolant"))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    auto system_row_layouts = new GuiScrollContainer(bottom_left, "SYSTEM_ROWS");
     system_row_layouts
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "verticalbottom");
@@ -241,79 +319,6 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         info.row->moveToBack();
         system_rows.push_back(info);
     }
-
-    GuiElement* icon_layout = new GuiElement(system_row_layouts, "");
-    icon_layout
-        ->setSize(GuiElement::GuiSizeMax, 48.0f)
-        ->setAttribute("layout", "horizontal");
-
-    (new GuiElement(icon_layout, "FILLER"))
-        ->setSize(300.0f, GuiElement::GuiSizeMax);
-
-    system_health_icon = new GuiImage(icon_layout, "SYSTEM_HEALTH_ICON", "gui/icons/system_health");
-    system_health_icon
-        ->setSize(150.0f, GuiElement::GuiSizeMax)
-        ->setVisible(gameGlobalInfo->use_system_damage);
-
-    heat_icon = new GuiImage(icon_layout, "HEAT_ICON", "gui/icons/status_overheat");
-    heat_icon
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setVisible(has_coolant);
-
-    (new GuiImage(icon_layout, "POWER_ICON", "gui/icons/energy"))
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    coolant_remaining_bar = new GuiProgressSlider(icon_layout, "", 0, 10.0, 10.0,
-        [](float requested_unused_coolant)
-        {
-            auto coolant = my_spaceship.getComponent<Coolant>();
-            if (!coolant) return;
-
-            float total_requested = 0.0f;
-            float new_max_total = coolant->max - requested_unused_coolant;
-
-            for (int n = 0; n < ShipSystem::COUNT; n++)
-            {
-                if (auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n)))
-                    total_requested += sys->coolant_request;
-            }
-
-            // Drain systems
-            if (new_max_total < total_requested)
-            {
-                for (int n = 0; n < ShipSystem::COUNT; n++)
-                {
-                    if (auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n)))
-                        my_player_info->commandSetSystemCoolantRequest(ShipSystem::Type(n), sys->coolant_request * new_max_total / total_requested);
-                }
-            }
-            // Put coolant into systems
-            else
-            {
-                int system_count = 0;
-                for (int n = 0; n < ShipSystem::COUNT; n++)
-                {
-                    if (ShipSystem::get(my_spaceship, ShipSystem::Type(n)))
-                        system_count++;
-                }
-
-                float add = (new_max_total - total_requested) / static_cast<float>(system_count);
-
-                for (int n = 0; n < ShipSystem::COUNT; n++)
-                {
-                    if (auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n)))
-                        my_player_info->commandSetSystemCoolantRequest(ShipSystem::Type(n), std::min(sys->coolant_request + add, 10.0f));
-                }
-            }
-        }
-    );
-    coolant_remaining_bar
-        ->setColor(glm::u8vec4(32, 128, 128, 128))
-        ->setDrawBackground(false)
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setVisible(has_coolant);
-    (new GuiImage(coolant_remaining_bar, "COOLANT_ICON", "gui/icons/coolant"))
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     system_rows[static_cast<int>(ShipSystem::Type::Reactor)].button->setIcon("gui/icons/system_reactor");
     system_rows[static_cast<int>(ShipSystem::Type::BeamWeapons)].button->setIcon("gui/icons/system_beam");
