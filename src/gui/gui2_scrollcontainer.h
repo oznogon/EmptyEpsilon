@@ -77,6 +77,9 @@ private:
 
     // Defines the scroll offset in virtual pixels, with 0 as the top.
     float scroll_offset = 0.0f;
+    // Bias applied to map scroll_offset to the scrollbar's non-negative value
+    // range. (Negative for upward overflow) 
+    float scroll_offset_bias = 0.0f;
     // Defines the total height of content, in virtual pixels.
     float content_height = 0.0f;
     // Defines the visible height of the element, in virtual pixels.

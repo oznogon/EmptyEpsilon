@@ -16,7 +16,7 @@ GuiScrollContainer::GuiScrollContainer(GuiContainer* owner, const string& id, Sc
     scrollbar_v = new GuiScrollbar(this, id + "_SCROLLBAR_V", 0, 100, 0,
         [this](int value)
         {
-            scroll_offset = static_cast<float>(value);
+            scroll_offset = static_cast<float>(value) - scroll_offset_bias;
         }
     );
     scrollbar_v
@@ -42,23 +42,28 @@ void GuiScrollContainer::cleanTree()
 {
     if (focused_element && focused_element->isDestroyed())
         focused_element = nullptr;
+
     if (pressed_element && pressed_element->isDestroyed())
         pressed_element = nullptr;
+
     GuiContainer::cleanTree();
 }
 
 void GuiScrollContainer::scrollToFraction(float fraction)
 {
-    const float max_scroll = std::max(0.0f, content_height - visible_height);
-    scroll_offset = std::clamp(fraction * max_scroll, 0.0f, max_scroll);
-    scrollbar_v->setValue(static_cast<int>(scroll_offset));
+    const float min_scroll = -scroll_offset_bias;
+    const float max_scroll = std::max(0.0f, content_height - visible_height - scroll_offset_bias);
+    const float scroll_range = max_scroll - min_scroll;
+    scroll_offset = std::clamp(min_scroll + fraction * scroll_range, min_scroll, max_scroll);
+    scrollbar_v->setValue(static_cast<int>(scroll_offset + scroll_offset_bias));
 }
 
 void GuiScrollContainer::scrollToOffset(float pixel_offset)
 {
-    const float max_scroll = std::max(0.0f, content_height - visible_height);
-    scroll_offset = std::clamp(pixel_offset, 0.0f, max_scroll);
-    scrollbar_v->setValue(static_cast<int>(scroll_offset));
+    const float min_scroll = -scroll_offset_bias;
+    const float max_scroll = std::max(0.0f, content_height - visible_height - scroll_offset_bias);
+    scroll_offset = std::clamp(pixel_offset, min_scroll, max_scroll);
+    scrollbar_v->setValue(static_cast<int>(scroll_offset + scroll_offset_bias));
 }
 
 void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
@@ -67,8 +72,9 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
     visible_height = bounds.size.y - layout.padding.top - layout.padding.bottom;
 
     // Clamp scroll_offset using last frame's content_height to validate the
-    // value passed to the layout manager.
-    scroll_offset = std::clamp(scroll_offset, 0.0f, std::max(0.0f, content_height - visible_height));
+    // value passed to the layout manager. Allow negative offsets for layouts
+    // where content extends above the content area (e.g. verticalbottom).
+    scroll_offset = std::clamp(scroll_offset, -scroll_offset_bias, std::max(0.0f, content_height - visible_height));
 
     // Show the scrollbar only if we're clipping anything.
     bool has_overflow = (mode != ScrollMode::None) && (content_height > visible_height + 0.5f);
@@ -113,6 +119,7 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
 
     // Compute content_height. Child elements are scrolled, so add
     // scroll_offset from extents.
+    float min_top = std::numeric_limits<float>::max();
     float max_bottom = 0.0f;
     for (auto& child_ptr : children)
     {
@@ -120,19 +127,34 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
         if (child == scrollbar_v) continue;
         if (!child->isVisible()) continue;
 
+        const float top = child->getRect().position.y - rect.position.y + scroll_offset;
+        if (top < min_top) min_top = top;
         const float bottom = child->getRect().position.y + child->getRect().size.y + child->getLayout().margin.bottom - rect.position.y + scroll_offset;
         if (bottom > max_bottom) max_bottom = bottom;
     }
-    content_height = max_bottom + layout.padding.bottom;
+    content_height = max_bottom - min_top;
+
+    // Determine scroll range. At scroll_offset 0, content is at its default
+    // layout position. Content can extend above the content area (negative
+    // scroll_offset) or below (positive).
+    const float content_area_top = layout.padding.top;
+    const float content_area_bottom = visible_height + layout.padding.top;
+    const float overflow_above = std::max(0.0f, content_area_top - min_top);
+    const float overflow_below = std::max(0.0f, max_bottom - content_area_bottom);
+    const float min_scroll = -overflow_above;
+    const float max_scroll = overflow_below;
+
+    scroll_offset_bias = overflow_above;
 
     // Clamp again in case content shrank this frame.
-    scroll_offset = std::clamp(scroll_offset, 0.0f, std::max(0.0f, content_height - visible_height));
+    scroll_offset = std::clamp(scroll_offset, min_scroll, max_scroll);
 
-    // Sync scrollbar properties to new layout.
+    // Sync scrollbar properties to new layout. Shift the value so the
+    // scrollbar always sees a non-negative range.
     scrollbar_v
         ->setRange(0, static_cast<int>(content_height))
         ->setValueSize(static_cast<int>(visible_height))
-        ->setValue(static_cast<int>(scroll_offset));
+        ->setValue(static_cast<int>(scroll_offset + scroll_offset_bias));
 }
 
 void GuiScrollContainer::drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::RenderTarget& renderer)
@@ -352,22 +374,24 @@ bool GuiScrollContainer::onMouseWheelScroll(glm::vec2 /* position */, float valu
     // Scroll by a default interval of 50, or by the container height if set to
     // paged mode.
     const float step = (mode == ScrollMode::Page) ? visible_height : 50.0f;
-    const float max_scroll = std::max(0.0f, content_height - visible_height);
+    const float min_scroll = -scroll_offset_bias;
+    const float max_scroll = std::max(0.0f, content_height - visible_height - scroll_offset_bias);
 
     // If there's no overflow, let mousewheel pass through.
-    if (max_scroll < 0.5f) return false;
+    if (max_scroll - min_scroll < 0.5f) return false;
 
-    scroll_offset = std::clamp(scroll_offset - value * step, 0.0f, max_scroll);
+    scroll_offset = std::clamp(scroll_offset - value * step, min_scroll, max_scroll);
 
     // Update the scrollbar.
-    scrollbar_v->setValue(static_cast<int>(scroll_offset));
+    scrollbar_v->setValue(static_cast<int>(scroll_offset + scroll_offset_bias));
 
     return true;
 }
 
 sp::Rect GuiScrollContainer::getContentRect() const
 {
-    // Return the rect, inset by padding and minus room for the scrollbar if it's visible.
+    // Return the rect, inset by padding and minus room for the scrollbar if
+    // it's visible.
     return sp::Rect{
         rect.position + glm::vec2{layout.padding.left, layout.padding.top},
         {
