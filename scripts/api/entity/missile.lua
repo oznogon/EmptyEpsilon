@@ -36,6 +36,10 @@ function HomingMissile()
         radar_signature = {
             electrical = 0.1,
             biological = 0.2
+        },
+        hull = {
+            current = 1,
+            max = 1
         }
     }
     return e
@@ -69,7 +73,11 @@ function HVLI()
             rotate = true,
             color = {200, 200, 200, 255}
         },
-        radar_signature = {gravity = 0.1}
+        radar_signature = {gravity = 0.1},
+        hull = {
+            current = 1,
+            max = 1
+        }
     }
     return e
 end
@@ -110,7 +118,11 @@ function EMPMissile()
             rotate = true,
             color = {100, 32, 255, 255}
         },
-        radar_signature = {electrical = 1.0}
+        radar_signature = {electrical = 1.0},
+        hull = {
+            current = 1,
+            max = 1
+        }
     }
     return e
 end
@@ -157,6 +169,10 @@ function Nuke()
         radar_signature = {
             electrical = 0.7,
             biological = 0.1
+        },
+        hull = {
+            current = 1,
+            max = 1
         }
     }
     return e
