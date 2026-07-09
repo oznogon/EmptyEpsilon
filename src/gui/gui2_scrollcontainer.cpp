@@ -38,6 +38,13 @@ GuiScrollContainer* GuiScrollContainer::setScrollbarWidth(float width)
     return this;
 }
 
+GuiScrollContainer* GuiScrollContainer::setScrollStart(ScrollStart start)
+{
+    scroll_start = start;
+    scroll_start_applied = false;
+    return this;
+}
+
 void GuiScrollContainer::cleanTree()
 {
     if (focused_element && focused_element->isDestroyed())
@@ -106,9 +113,7 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
     // Temporarily hide the scrollbar so the layout manager ignores it for
     // sizing, then restore it if enabled.
     scrollbar_v->setVisible(false);
-
     layout_manager->updateLoop(*this, content_layout_rect);
-
     scrollbar_v->setVisible(has_overflow);
 
     // Override the scrollbar rect.
@@ -139,10 +144,50 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
     // scroll_offset) or below (positive).
     const float content_area_top = layout.padding.top;
     const float content_area_bottom = visible_height + layout.padding.top;
-    const float overflow_above = std::max(0.0f, content_area_top - min_top);
-    const float overflow_below = std::max(0.0f, max_bottom - content_area_bottom);
-    const float min_scroll = -overflow_above;
-    const float max_scroll = overflow_below;
+    float overflow_above = std::max(0.0f, content_area_top - min_top);
+    float overflow_below = std::max(0.0f, max_bottom - content_area_bottom);
+    float min_scroll = -overflow_above;
+    float max_scroll = overflow_below;
+
+    // Apply the configured scroll start position on the first layout.
+    if (!scroll_start_applied)
+    {
+        scroll_offset = (scroll_start == ScrollStart::Bottom) ? max_scroll : min_scroll;
+        scroll_start_applied = true;
+
+        scroll_offset_bias = overflow_above;
+
+        // Re-run layout with the corrected scroll_offset.
+        sp::Rect adjusted_rect{
+            rect.position + padding_offset + glm::vec2{0.0f, -scroll_offset},
+            rect.size - padding_size - glm::vec2{sb_width, 0.0f}
+        };
+        scrollbar_v->setVisible(false);
+        layout_manager->updateLoop(*this, adjusted_rect);
+        scrollbar_v->setVisible(has_overflow);
+
+        // Recompute content extents with adjusted child positions.
+        min_top = std::numeric_limits<float>::max();
+        max_bottom = 0.0f;
+        for (auto& child_ptr : children)
+        {
+            GuiElement* child = child_ptr.get();
+            if (child == scrollbar_v) continue;
+            if (!child->isVisible()) continue;
+
+            const float top = child->getRect().position.y - rect.position.y + scroll_offset;
+            if (top < min_top) min_top = top;
+            const float bottom = child->getRect().position.y + child->getRect().size.y + child->getLayout().margin.bottom - rect.position.y + scroll_offset;
+            if (bottom > max_bottom) max_bottom = bottom;
+        }
+        content_height = max_bottom - min_top;
+
+        // Recompute overflow and scroll range.
+        overflow_above = std::max(0.0f, content_area_top - min_top);
+        overflow_below = std::max(0.0f, max_bottom - content_area_bottom);
+        min_scroll = -overflow_above;
+        max_scroll = overflow_below;
+    }
 
     scroll_offset_bias = overflow_above;
 

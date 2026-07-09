@@ -21,10 +21,18 @@ public:
     // TODO: Right now this clips both horizontally and vertically, but supports
     // only vertical scrolling/paging.
 
+    // Define where the scroll starts on first layout.
+    enum class ScrollStart {
+        Top,
+        Bottom
+    };
+
     // Set scrolling mode. All modes clip at the element boundaries.
     GuiScrollContainer* setMode(ScrollMode mode);
     // Set width of scrollbar if visible.
     GuiScrollContainer* setScrollbarWidth(float width);
+    // Set where the scroll starts on first layout.
+    GuiScrollContainer* setScrollStart(ScrollStart start);
     // Scroll element to this fraction of the total scrollbar limit.
     // Value passed here represents where the top of the scrollbar pill goes
     // on the scrollbar.
@@ -80,6 +88,10 @@ private:
     // Bias applied to map scroll_offset to the scrollbar's non-negative value
     // range. (Negative for upward overflow) 
     float scroll_offset_bias = 0.0f;
+    // Defines the starting scroll position applied on first layout.
+    ScrollStart scroll_start = ScrollStart::Top;
+    // Tracks whether scroll_start has been applied yet.
+    bool scroll_start_applied = false;
     // Defines the total height of content, in virtual pixels.
     float content_height = 0.0f;
     // Defines the visible height of the element, in virtual pixels.
