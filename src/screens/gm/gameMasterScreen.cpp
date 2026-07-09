@@ -99,6 +99,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
                 {
                     for (auto [entity, hull, transform, trace] : sp::ecs::Query<Hull, sp::Transform, sp::ecs::optional<RadarTrace>>())
                     {
+                        if (hull.max <= 1) continue;
                         const float hull_norm = hull.current / hull.max;
                         float bar_distance = bar_height * 4.0f;
                         if (trace) bar_distance = std::clamp(trace->radius * main_radar->getScale() * 2.0f, trace->min_size, trace->max_size) * 0.75f;
