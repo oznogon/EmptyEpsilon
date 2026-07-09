@@ -376,6 +376,10 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         sfx.sound = mwd.fire_sound;
         sfx.volume = 55.0f + 15.0f * category_modifier;
         sfx.pitch += random(-0.1f, 0.1f);
+
+        auto& hull = missile.addComponent<Hull>();
+        hull.current = 1.0f;
+        hull.max = 1.0f;
     }
 }
 
