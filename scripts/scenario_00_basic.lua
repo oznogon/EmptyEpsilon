@@ -447,37 +447,53 @@ function init()
         local a2 = random(0, 360)
         local d = random(3000, 40000)
         local x, y = vectorFromAngle(a, d)
+        local asteroid_positions = {}
 
-        for j_ = 1, 50 do
+        local asteroids_this_belt = 0
+        for attempt = 1, 500 do
+            if asteroids_this_belt >= 50 then break end
             local dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
             local posx = x + dx1 + dx2
             local posy = y + dy1 + dy2
-            -- Avoid spawning asteroids within 1U of the player start position or
-            -- 2U of any station.
             if math.abs(posx) > 1000 and math.abs(posy) > 1000 then
                 local allow_spawn = true
-                for k_, station in ipairs(stationList) do
+                for _, station in ipairs(stationList) do
                     if distance(station, posx, posy) < 2000 then
                         allow_spawn = false
+                        break
                     end
                 end
-                if black_hole and black_hole:isValid() and distance(bh_x, bh_y, posx, posy) < 5000 then
+                if allow_spawn and black_hole and black_hole:isValid() and distance(bh_x, bh_y, posx, posy) < 5000 then
                     allow_spawn = false
                 end
                 if allow_spawn then
-                    Asteroid():setPosition(posx, posy):setSize(random(100, 500))
+                    local size = random(100, 500)
+                    for _, ap in ipairs(asteroid_positions) do
+                        if distance(ap[1], ap[2], posx, posy) < ap[3] + size then
+                            allow_spawn = false
+                            break
+                        end
+                    end
+                    if allow_spawn then
+                        table.insert(asteroid_positions, {posx, posy, size})
+                        Asteroid():setPosition(posx, posy):setSize(size)
+                        asteroids_this_belt = asteroids_this_belt + 1
+                    end
                 end
             end
         end
 
-        for j_ = 1, 50 do
+        local vis_asteroids_this_belt = 0
+        for attempt = 1, 500 do
+            if vis_asteroids_this_belt >= 50 then break end
             local dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
             local vax = x + dx1 + dx2
             local vay = y + dy1 + dy2
             if not (black_hole and black_hole:isValid() and distance(bh_x, bh_y, vax, vay) < 5000) then
                 VisualAsteroid():setPosition(vax, vay)
+                vis_asteroids_this_belt = vis_asteroids_this_belt + 1
             end
         end
     end
