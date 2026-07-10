@@ -5,7 +5,7 @@
 #include "theme.h"
 #include <algorithm>
 
-static constexpr float long_interaction_duration = 0.5f;
+static constexpr float LONG_INTERACTION_DURATION = 0.5f;
 
 static bool isTreeHoveredOrPressed(GuiElement* element)
 {
@@ -28,8 +28,8 @@ GuiTooltip::Anchor::~Anchor()
     if (tooltip) tooltip->anchorDestroyed();
 }
 
-// Attach to the canvas (top-level container) so this element renders above
-// all screen content. The watched element is stored separately.
+// Attach to the top-level canvas so this element renders above all screen
+// content. The watched element is stored separately.
 GuiTooltip::GuiTooltip(GuiElement* watched, string id)
 : GuiElement(watched->getTopLevelContainer(), id), watched(watched)
 {
@@ -65,9 +65,25 @@ void GuiTooltip::onUpdate()
     // ownership chain.
     bool active = watched->isEffectivelyVisible() && isTreeHoveredOrPressed(watched);
 
+    // Hide immediately when the press ends, even if the cursor is still
+    // hovering over the watched element.
+    bool is_pressed = watched->isPressed();
+    if (showing && was_pressed && !is_pressed)
+    {
+        showing = false;
+        setVisible(false);
+        timer.stop();
+        position_captured_on_press = false;
+        was_pressed = false;
+        return;
+    }
+    was_pressed = is_pressed;
+
     if (!active)
     {
         timer.stop();
+        position_captured_on_press = false;
+        was_pressed = false;
 
         if (showing)
         {
@@ -82,7 +98,7 @@ void GuiTooltip::onUpdate()
     // reveal timer or reveal the tooltip if the timer has expired.
     if (!showing)
     {
-        if (!timer.isRunning()) timer.start(long_interaction_duration);
+        if (!timer.isRunning()) timer.start(LONG_INTERACTION_DURATION);
         else if (timer.isExpired())
         {
             showing = true;
@@ -91,16 +107,26 @@ void GuiTooltip::onUpdate()
         }
     }
 
-    // Position the tooltip. When triggered by press, freeze the position to
-    // allow finger movement out of the way on touch. When triggered by hover,
-    // follow the cursor.
+    // Position the tooltip. When triggered by press, freeze the position at the
+    // click location to allow finger movement out of the way on touch. When
+    // triggered by hover, follow the cursor.
     if (showing)
     {
         glm::vec2 target;
 
-        if (watched->isPressed()) target = frozen_position;
+        if (watched->isPressed())
+        {
+            if (!position_captured_on_press)
+            {
+                GuiCanvas* canvas = getRootCanvas();
+                frozen_position = (canvas ? canvas->getMousePosition() : glm::vec2{0, 0}) + pixel_offset;
+                position_captured_on_press = true;
+            }
+            target = frozen_position;
+        }
         else
         {
+            position_captured_on_press = false;
             GuiCanvas* canvas = getRootCanvas();
             target = (canvas ? canvas->getMousePosition() : glm::vec2{0, 0}) + pixel_offset;
 
