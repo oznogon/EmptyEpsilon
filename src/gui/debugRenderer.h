@@ -15,6 +15,7 @@ private:
     bool show_fps;
     bool show_datarate;
     bool show_timing_graph;
+    bool show_atlas;
 
     float scale = 10.0f;
     std::map<string, bool> timing_graph_enabled;

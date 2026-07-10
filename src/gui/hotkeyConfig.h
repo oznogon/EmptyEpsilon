@@ -28,6 +28,7 @@ public:
 #ifdef DEBUG
     sp::io::Keybinding debug_show_colliders;
     sp::io::Keybinding debug_show_gui;
+    sp::io::Keybinding debug_show_atlas;
 #endif
     // Rebinding binds
     sp::io::Keybinding cancel_rebind;

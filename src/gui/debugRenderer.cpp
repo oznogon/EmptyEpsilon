@@ -2,6 +2,7 @@
 #include "multiplayer_server.h"
 #include "hotkeyConfig.h"
 #include "threatLevelEstimate.h"
+#include "graphics/renderTarget.h"
 
 static glm::u8vec4 line_colors[] = {
     {126, 178, 109, 255},   // #7EB26D green
@@ -43,6 +44,7 @@ DebugRenderer::DebugRenderer(RenderLayer* renderLayer)
     show_fps = false;
     show_datarate = false;
     show_timing_graph = false;
+    show_atlas = false;
 
 #ifdef DEBUG
     show_fps = show_datarate = true;
@@ -162,6 +164,37 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
             index += 1;
         }
     }
+#ifdef DEBUG
+    if (keys.debug_show_atlas.getDown())
+        show_atlas = !show_atlas;
+#endif
+
+    if (show_atlas)
+    {
+        auto atlas = sp::RenderTarget::getAtlasTexture();
+        if (atlas)
+        {
+            auto viewport = renderer.getVirtualSize();
+            auto atlas_size = sp::RenderTarget::getAtlasTextureSize();
+            float usage = sp::RenderTarget::getAtlasUsageRate();
+
+            // Semi-transparent dark background behind the atlas display.
+            renderer.fillRect(sp::Rect(0, 0, viewport.x, viewport.y), glm::u8vec4{0, 0, 0, 200});
+
+            // Scale the atlas proportionally to fit ~70% of the shorter axis.
+            float draw_size = std::min(viewport.x, viewport.y) * 0.7f;
+            float x = (viewport.x - draw_size) / 2.0f;
+            float y = (viewport.y - draw_size) / 2.0f;
+            renderer.drawAtlasTexture(sp::Rect(x, y, draw_size, draw_size));
+
+            // Info text overlay.
+            string info = "Texture Atlas\n";
+            info += "Size: " + string(atlas_size.x) + "x" + string(atlas_size.y) + "\n";
+            info += "Usage: " + string(usage * 100.0f, 1) + "%";
+            renderer.drawText(sp::Rect(x, y, draw_size, draw_size), info, sp::Alignment::BottomRight, 22);
+        }
+    }
+
     renderer.drawText(sp::Rect(0, 0, 0, 0), text, sp::Alignment::TopLeft, 18);
 }
 

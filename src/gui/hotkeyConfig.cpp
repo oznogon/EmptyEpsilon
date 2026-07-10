@@ -304,6 +304,7 @@ Keys::Keys() :
 #ifdef DEBUG
     debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
     debug_show_gui("DEBUG_SHOW_GUI", "Insert"),
+    debug_show_atlas("DEBUG_SHOW_ATLAS", ""),
 #endif
 
     // Rebinding binds
@@ -686,6 +687,8 @@ void Keys::init()
     debug_show_colliders.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     debug_show_gui.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug GUI"));
     debug_show_gui.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    debug_show_atlas.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show texture atlas"));
+    debug_show_atlas.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 #endif
 
     // Rebinding binds

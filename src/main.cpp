@@ -32,6 +32,7 @@
 #include "stdinLuaConsole.h"
 
 #include "graphics/opengl.h"
+#include "graphics/renderTarget.h"
 
 #include "hardware/hardwareController.h"
 #if WITH_DISCORD
@@ -205,6 +206,17 @@ int main(int argc, char** argv)
     }
     else GuiTheme::setCurrentTheme(theme_name);
 
+    // Apply atlas size mode from preferences before window creation.
+    {
+        auto atlas_pref = PreferencesManager::get("atlas_size", "auto");
+        if (atlas_pref == "4k")
+            sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Force4K);
+        else if (atlas_pref == "2k")
+            sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Force2K);
+        else
+            sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Automatic);
+    }
+
     if (PreferencesManager::get("headless") == "")
     {
         if (!createDisplayWindows()) return 1;
@@ -314,6 +326,23 @@ int main(int argc, char** argv)
             sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::Quad);
         else
             sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::GL);
+    }
+
+    // Sync atlas size mode back to preferences.
+    {
+        auto mode = sp::RenderTarget::getAtlasSizeMode();
+        switch (mode)
+        {
+        case sp::RenderTarget::AtlasSizeMode::Force4K:
+            PreferencesManager::set("atlas_size", "4k");
+            break;
+        case sp::RenderTarget::AtlasSizeMode::Force2K:
+            PreferencesManager::set("atlas_size", "2k");
+            break;
+        default:
+            PreferencesManager::set("atlas_size", "auto");
+            break;
+        }
     }
 
     // Set the default music_, sound_, and engine_volume to the current volume.

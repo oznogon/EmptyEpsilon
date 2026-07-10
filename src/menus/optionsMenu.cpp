@@ -609,6 +609,47 @@ void OptionsMenu::setupGraphicsOptions()
             ->setValue(PreferencesManager::get("nebula_fog", "1") == "1")
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("margin", "0, 0, 0, 20");
+
+        // Atlas size configuration (only shown when 4K is supported).
+        if (sp::RenderTarget::is4KAtlasSupported())
+        {
+            int atlas_index = 0;
+            auto atlas_pref = PreferencesManager::get("atlas_size", "auto");
+            if (atlas_pref == "4k")
+                atlas_index = 2;
+            else if (atlas_pref == "2k")
+                atlas_index = 1;
+
+            (new GuiSelector(graphics_page, "ATLAS_SIZE",
+                [](int index, string value)
+                {
+                    sp::RenderTarget::AtlasSizeMode mode = sp::RenderTarget::AtlasSizeMode::Automatic;
+                    string pref_value = "auto";
+                    if (index == 2) {
+                        mode = sp::RenderTarget::AtlasSizeMode::Force4K;
+                        pref_value = "4k";
+                    } else if (index == 1) {
+                        mode = sp::RenderTarget::AtlasSizeMode::Force2K;
+                        pref_value = "2k";
+                    }
+                    sp::RenderTarget::setAtlasSizeMode(mode);
+                    PreferencesManager::set("atlas_size", pref_value);
+                }
+            ))
+                ->setOptions({
+                    tr("options", "Texture atlas: Automatic"),
+                    tr("options", "Texture atlas: 2K (2048x2048)"),
+                    tr("options", "Texture atlas: 4K (4096x4096)")}
+                )
+                ->setSelectionIndex(atlas_index)
+                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+            (new GuiLabel(graphics_page, "ATLAS_APPLICATION_NOTE",
+                tr("options", "Restart EmptyEpsilon to apply texture atlas changes"),
+                20.0f))
+                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeLabel)
+                ->setAttribute("margin", "0, 0, 0, 20");
+        }
     }
 
     // View/window settings.
