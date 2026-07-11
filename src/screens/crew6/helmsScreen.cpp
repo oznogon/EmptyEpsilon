@@ -35,6 +35,7 @@
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_image.h"
+#include "gui/gui2_tooltip.h"
 
 HelmsScreen::HelmsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "HELMS_SCREEN", GuiTheme::getColor("background"))
@@ -67,6 +68,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
     combat_maneuver = new GuiCombatManeuver(helms_controls, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 215);
+    (new GuiTextTooltip(combat_maneuver, "COMBAT_MANEUVER_TIP", tr("tooltips", "Execute combat maneuvers: strafe laterally or boost forward to evade enemies."), 20.0f))->setWidth(280.0f);
 
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
@@ -131,19 +133,29 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
     auto energy_display = new EnergyInfoDisplay(helms_controls, "ENERGY_DISPLAY", 0.45);
     energy_display->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 40);
+    (new GuiTextTooltip(energy_display, "HELMS_ENERGY_TIP", tr("tooltips", "Current reactor energy level."), 20.0f))->setWidth(280.0f);
     auto heading_display = new HeadingInfoDisplay(helms_controls, "HEADING_DISPLAY", 0.45);
     heading_display->setPosition(20, 140, sp::Alignment::TopLeft)->setSize(240, 40);
+    (new GuiTextTooltip(heading_display, "HEADING_TIP", tr("tooltips", "Current ship heading in degrees."), 20.0f))->setWidth(280.0f);
     auto velocity_display = new VelocityInfoDisplay(helms_controls, "VELOCITY_DISPLAY", 0.45);
     velocity_display->setPosition(20, 180, sp::Alignment::TopLeft)->setSize(240, 40);
+    (new GuiTextTooltip(velocity_display, "VELOCITY_TIP", tr("tooltips", "Current ship velocity."), 20.0f))->setWidth(280.0f);
 
     GuiElement* engine_layout = new GuiElement(helms_controls, "ENGINE_LAYOUT");
     engine_layout->setPosition(20, -100, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 300)->setAttribute("layout", "horizontal");
-    (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
-    (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
-    (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
+    auto* impulse = new GuiImpulseControls(engine_layout, "IMPULSE");
+    impulse->setSize(100, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(impulse, "IMPULSE_TIP", tr("tooltips", "Adjust impulse engine throttle forward and reverse for sub-light travel."), 20.0f))->setWidth(280.0f);
+    auto* warp = new GuiWarpControls(engine_layout, "WARP");
+    warp->setSize(100, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(warp, "WARP_TIP", tr("tooltips", "Engage or disengage the warp drive for faster-than-light travel."), 20.0f))->setWidth(280.0f);
+    auto* jump = new GuiJumpControls(engine_layout, "JUMP");
+    jump->setSize(100, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(jump, "JUMP_TIP", tr("tooltips", "Charge and activate the jump drive to instantly travel long distances."), 20.0f))->setWidth(280.0f);
 
     docking_button = new GuiDockingButton(helms_controls, "DOCKING");
     docking_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(280, 50)->setVisible(my_spaceship.hasComponent<DockingPort>());
+    (new GuiTextTooltip(docking_button, "DOCKING_TIP", tr("tooltips", "Request docking with or undocking from the nearest station or ship."), 20.0f))->setWidth(280.0f);
 
     auto ub = my_spaceship.getComponent<UtilityBeam>();
 
@@ -163,6 +175,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
         }
     });
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
+    (new GuiTextTooltip(sidebar_selector, "HELMS_SIDEBAR_TIP", tr("tooltips", "Switch between custom ship functions and utility beam controls."), 20.0f))->setWidth(280.0f);
 
     custom_function_sidebar = new GuiCustomShipFunctions(helms_controls, CrewPosition::helmsOfficer, "HELMS_CUSTOM_FUNCS");
     custom_function_sidebar

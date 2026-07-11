@@ -788,29 +788,33 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         // If this is the server, the "back" button goes to the scenario
         // selection/server creation screen.
-        (new GuiButton(disconnect_row, "DISCONNECT", tr("Scenario selection"),
+        auto* server_disconnect_button = new GuiButton(disconnect_row, "DISCONNECT_AS_SERVER", tr("ship_selection", "Return to scenario selection"),
             [this]()
             {
                 destroy();
                 new ServerScenarioSelectionScreen();
             }
-        ))
-            ->setSize(300.0f, GuiElement::GuiSizeMax)
+        );
+        server_disconnect_button
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
             ->setAttribute("alignment", "bottomcenter");
+
+        (new GuiTextTooltip(server_disconnect_button, "SERVER_DISCONNECT_TIP", tr("tooltips", "End the running scenario and return to the scenario selection screen."), 20.0f))->setWidth(280.0f);
     }
     else
     {
         // If this is a client, the "back" button disconnects from the server
         // and returns to the main menu.
-        (new GuiButton(disconnect_row, "DISCONNECT", tr("Disconnect"),
+        auto* client_disconnect_button = new GuiButton(disconnect_row, "DISCONNECT_AS_CLIENT", tr("ship_selection", "Disconnect from server"),
             [this]()
             {
                 destroy();
                 disconnectFromServer();
                 returnToMainMenu(getRenderLayer());
             }
-        ))
-            ->setSize(300.0f, GuiElement::GuiSizeMax)
+        );
+        client_disconnect_button
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
             ->setAttribute("alignment", "bottomcenter");
     }
 
@@ -1238,7 +1242,9 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     }
 
     ready_button = new GuiButton(bottom_right, "READY", tr("button", "Ready"), on_ready);
-    ready_button->setSize(300.0f, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::Center);
+    ready_button
+        ->setSize(300.0f, GuiElement::GuiSizeMax)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center);
 }
 
 void CrewPositionSelection::onUpdate()
@@ -1325,76 +1331,76 @@ void CrewPositionSelection::setCrewScreenInfo(CrewPosition cp)
     switch (cp)
     {
     case CrewPosition::helmsOfficer:
-        text = "<color=#C0C0FF>Helms</>\nManeuvers the ship with thrusters and impulse engines, employs faster-than-light propulsion methods, docks with other ships and space stations, and retrieves objects";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Helms") + "</>\n" + tr("helms", "Maneuvers the ship with thrusters and impulse engines, employs faster-than-light propulsion methods, docks with other ships and space stations, and retrieves objects");
         break;
     case CrewPosition::weaponsOfficer:
-        text = "<color=#C0C0FF>Weapons</>\nManages a ship's offensive and defensive systems; loads, unloads, aims, and fires weapon tubes; targets beam weapons; and sets beam and shield frequencies";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Weapons") + "</>\n" + tr("weapons", "Manages a ship's offensive and defensive systems; loads, unloads, aims, and fires weapon tubes; targets beam weapons; and sets beam and shield frequencies");
         break;
     case CrewPosition::engineering:
-        text = "<color=#C0C0FF>Engineering</>\nManages a ship's power, heat, coolant, and damage; directs repair crews; tracks system effectiveness; and controls the ship's self-destruct system";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Engineering") + "</>\n" + tr("engineering", "Manages a ship's power, heat, coolant, and damage; directs repair crews; tracks system effectiveness; and controls the ship's self-destruct system");
         break;
     case CrewPosition::scienceOfficer:
-        text = "<color=#C0C0FF>Science</>\nExamines and reports on the ship's surroundings, and researches entities using the ship's sensors and database";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Science") + "</>\n" + tr("science", "Examines and reports on the ship's surroundings, and researches entities using the ship's sensors and database");
         break;
     case CrewPosition::relayOfficer:
-        text = "<color=#C0C0FF>Relay</>\nManages the flow of information between the ship and other ships and space stations across the region, hails and communicates with other entities, launches scan probes, sets navigational waypoints, and hacks hostile entities";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Relay") + "</>\n" + tr("relay", "Manages the flow of information between the ship and other ships and space stations across the region, hails and communicates with other entities, launches scan probes, sets navigational waypoints, and hacks hostile entities");
         break;
     case CrewPosition::tacticalOfficer:
-        text = "<color=#C0C0FF>Tactical</>\nCombines the responsibilities of Helms (maneuvering, propulsion, docking) with Weapons (loading, targeting, and firing weapons). However, also lacks Weapons' control over shields.";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Tactical") + "</>\n" + tr("tactical", "Combines the responsibilities of Helms (maneuvering, propulsion, docking) with Weapons (loading, targeting, and firing weapons). However, also lacks Weapons' control over shields.");
         break;
     case CrewPosition::engineeringPlus:
-        text = "<color=#C0C0FF>Engineering+</>\nManages a ship's power, heat, coolant, and damage; manages shield activation and calibration; directs repair crews; tracks system effectiveness; and controls the ship's self-destruct system";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Engineering+") + "</>\n" + tr("engineering+", "Manages a ship's power, heat, coolant, and damage; manages shield activation and calibration; directs repair crews; tracks system effectiveness; and controls the ship's self-destruct system");
         break;
     case CrewPosition::operationsOfficer:
-        text = "<color=#C0C0FF>Operations</>\nCombines the responsibilities of Science (scanning, research) with Relay (communication, navigation). However, also lacks Relay's access to the sector map or hacking features.";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Operations") + "</>\n" + tr("operations", "Combines the responsibilities of Science (scanning, research) with Relay (communication, navigation). However, also lacks Relay's access to the sector map or hacking features.");
         break;
     case CrewPosition::singlePilot:
-        text = "<color=#C0C0FF>Single pilot</>\nCombines essential functions from Helms, Weapons, and Relay, at the expense of several other features";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Single pilot") + "</>\n" + tr("single_pilot", "Combines essential functions from Helms, Weapons, and Relay, at the expense of several other features");
         break;
     case CrewPosition::beamWeaponsOfficer:
-        text = "<color=#C0C0FF>Beam weapons</>\nManages and targets the ship's beam weapons, as a specialized subset of Weapons functions";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Beam weapons") + "</>\n" + tr("beam_weapons", "Manages and targets the ship's beam weapons, as a specialized subset of Weapons functions");
         break;
     case CrewPosition::missileWeaponsOfficer:
-        text = "<color=#C0C0FF>Beam weapons</>\nManages and targets the ship's weapons tubes, including missiles and mines, as a specialized subset of Weapons functions";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Missile weapons") + "</>\n" + tr("missile_weapons", "Manages and targets the ship's weapons tubes, including missiles and mines, as a specialized subset of Weapons functions");
         break;
     case CrewPosition::damageControl:
-        text = "<color=#C0C0FF>Damage control</>\nManages the ship's repair crews from a systems overview display, as a specialized subset of Engineering functions";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Damage control") + "</>\n" + tr("damage_control", "Manages the ship's repair crews from a systems overview display, as a specialized subset of Engineering functions");
         break;
     case CrewPosition::powerManagement:
-        text = "<color=#C0C0FF>Power management</>\nRoutes power and coolant to the ship's systems, as a specialized subset of Engineering functions";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Power management") + "</>\n" + tr("power_management", "Routes power and coolant to the ship's systems, as a specialized subset of Engineering functions");
         break;
     case CrewPosition::databaseView:
-        text = "<color=#C0C0FF>Database</>\nResearches information in the ship's database, as a specialized subset of Science functions";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Database") + "</>\n" + tr("database", "Researches information in the ship's database, as a specialized subset of Science functions");
         break;
     case CrewPosition::dockingBay:
-        text = "<color=#C0C0FF>Docking bay</>\nControls the ship's internal docking bay, if any, including launching, reparing, and restocking berthed ships";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Docking bay") + "</>\n" + tr("docking_bay", "Controls the ship's internal docking bay, if any, including launching, reparing, and restocking berthed ships");
         break;
     case CrewPosition::strategicMap:
-        text = "<color=#C0C0FF>Strategic map</>\nViews a sector map, launches scan probes, sets navigational waypoints, and hacks hostile entities. A specialized subset of Relay functions, with communications delegated to the Comms screen.";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Strategic map") + "</>\n" + tr("strategic_map", "Views a sector map, launches scan probes, sets navigational waypoints, and hacks hostile entities. A specialized subset of Relay functions, with communications delegated to the Comms screen.");
         break;
     case CrewPosition::commsOnly:
-        text = "<color=#C0C0FF>Comms</>\nDisplays active communications with other entities, as a specialized subset of Relay functions";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Comms") + "</>\n" + tr("comms", "Displays active communications with other entities, as a specialized subset of Relay functions");
         break;
     case CrewPosition::shipLog:
-        text = "<color=#C0C0FF>Ship's log</>\nDisplays the ship's log, as a specialized subset of Relay functions";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Ship's log") + "</>\n" + tr("ships_log", "Displays the ship's log, as a specialized subset of Relay functions");
         break;
     case CrewPosition::radarOfficer:
-        text = "<color=#C0C0FF>Radar</>\nDisplays a non-interactive ship's radar at short, long, and sector ranges, as well as of any linked probe, as a specialized subset of Science and Relay functions";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Radar") + "</>\n" + tr("radar", "Displays a non-interactive ship's radar at short, long, and sector ranges, as well as of any linked probe, as a specialized subset of Science and Relay functions");
         break;
     case CrewPosition::probeCamera:
-        text = "<color=#C0C0FF>Probe camera</>\nDisplays the view from the linked probe's camera, with rotation controls";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Probe camera") + "</>\n" + tr("probe_camera", "Displays the view from the linked probe's camera, with rotation controls");
         break;
     case CrewPosition::targetAnalysis:
-        text = "<color=#C0C0FF>Target analysis</>\nDisplays known information about a target linked to this screen by the Science officer, as a specialized subset of Science functions";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Target analysis") + "</>\n" + tr("target_analysis", "Displays known information about a target linked to this screen by the Science officer, as a specialized subset of Science functions");
         break;
     case CrewPosition::briefing:
-        text = "<color=#C0C0FF>Briefing</>\nDisplays the scenario's missing briefing presentation, if implemented by the scenario";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Briefing") + "</>\n" + tr("briefing", "Displays the scenario's briefing presentation, if implemented by the scenario");
         break;
     case CrewPosition::droneOperations:
-        text = "<color=#C0C0FF>Drone operations</>\nProvides control over linked probes, if the ship has a drone controller and linked drones are within control range";
+        text = "<color=#C0C0FF>" + tr("crew_screen", "Drone operations") + "</>\n" + tr("drone_operations", "Provides control over linked probes, if the ship has a drone controller and linked drones are within control range");
         break;
     default:
-        text = "Select at least one crew screen to play.\nYou can select multiple crew screens and switch between them during the game. You can also select the main screen alongside any other screen, which splits the screen to show the viewscreen if your display's width is sufficient.";
+        text = tr("Select at least one crew screen to play.\nYou can select multiple crew screens and switch between them during the game. You can also select the main screen alongside any other screen, which splits the screen to show the viewscreen if your display's width is sufficient.");
     }
 
     crew_screen_info->setText(text);

@@ -32,6 +32,7 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_togglebutton.h"
+#include "gui/gui2_tooltip.h"
 
 //TODO: This function does not belong here.
 static bool canHack(sp::ecs::Entity entity)
@@ -177,6 +178,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     zoom_slider
         ->setPosition(20.0f, allow_comms ? -70.0f : -20.0f, sp::Alignment::BottomLeft)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(zoom_slider, "RELAY_ZOOM_TIP", tr("tooltips", "Adjust the radar zoom level to view more or less of the map."), 20.0f))->setWidth(280.0f);
 
     // Option buttons for comms, waypoints, and probes.
     option_buttons = new GuiElement(this, "BUTTONS");
@@ -195,10 +197,12 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         ->setPosition(20.0f, 50.0f)
         ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
+    (new GuiTextTooltip(cancel_button, "CANCEL_MODE_TIP", tr("tooltips", "Cancel the current action (waypoint placement or probe launch)."), 20.0f))->setWidth(280.0f);
 
     // Open comms button.
-    (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", allow_comms == true ? tr("Open comms") : tr("Link to comms"), &targets))
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    auto* open_comms = new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", allow_comms == true ? tr("Open comms") : tr("Link to comms"), &targets);
+    open_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(open_comms, "OPEN_COMMS_TIP", tr("tooltips", "Open a communications channel with the selected target."), 20.0f))->setWidth(280.0f);
 
     // Hack target
     hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"),
@@ -209,6 +213,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         }
     );
     hack_target_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(hack_target_button, "HACK_TARGET_TIP", tr("tooltips", "Start hacking the selected target's systems to disrupt or disable them."), 20.0f))->setWidth(280.0f);
 
     // Link probe to science button.
     link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to science"),
@@ -223,9 +228,10 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     link_to_science_button
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>() && my_spaceship.hasComponent<RadarLink>());
+    (new GuiTextTooltip(link_to_science_button, "LINK_TO_SCIENCE_TIP", tr("tooltips", "Link the selected probe to the science station to share its sensor data."), 20.0f))->setWidth(280.0f);
 
     // Manage waypoints.
-    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"),
+    auto* place_waypoint = new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"),
         [this]()
         {
             mode = WaypointPlacement;
@@ -234,7 +240,9 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                 ->setText(tr("Cancel waypoint"))
                 ->show();
         }
-    ))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    );
+    place_waypoint->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(place_waypoint, "PLACE_WAYPOINT_TIP", tr("tooltips", "Place a new waypoint on the map. Click the map to set its position."), 20.0f))->setWidth(280.0f);
 
     delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete waypoint"),
         [this]()
@@ -244,6 +252,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         }
     );
     delete_waypoint_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(delete_waypoint_button, "DELETE_WAYPOINT_TIP", tr("tooltips", "Remove the currently selected waypoint from the map."), 20.0f))->setWidth(280.0f);
 
     // Waypoint set selector, shown only when multiple sets are enabled.
     waypoint_set_selector = new GuiSelector(option_buttons, "WAYPOINT_SET_SELECTOR",
@@ -256,6 +265,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         ->setOptions({tr("Waypoint set 1"), tr("Waypoint set 2"), tr("Waypoint set 3"), tr("Waypoint set 4")})
         ->setSelectionIndex(0)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(waypoint_set_selector, "WAYPOINT_SET_TIP", tr("tooltips", "Switch between different waypoint sets for organizing multiple routes."), 20.0f))->setWidth(280.0f);
 
     // Route toggle, shown only when server allows routes.
     route_toggle = new GuiToggleButton(option_buttons, "WAYPOINT_ROUTE_TOGGLE", tr("Show as route"),
@@ -265,6 +275,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         }
     );
     route_toggle->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(route_toggle, "ROUTE_TOGGLE_TIP", tr("tooltips", "Show waypoints as a connected flight route or as individual points."), 20.0f))->setWidth(280.0f);
 
     // Launch probe button.
     launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", tr("Launch probe"),
@@ -280,6 +291,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     launch_probe_button
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>());
+    (new GuiTextTooltip(launch_probe_button, "LAUNCH_PROBE_TIP", tr("tooltips", "Launch a scanning probe. Click the map to set the launch destination."), 20.0f))->setWidth(280.0f);
 
     // Center on ship
     center_button = new GuiToggleButton(option_buttons, "CENTER_ON_SHIP", tr("Center on ship"),
@@ -290,20 +302,22 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         }
     );
     center_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(center_button, "CENTER_ON_SHIP_TIP", tr("tooltips", "Toggle radar view centered on your ship or allow free panning."), 20.0f))->setWidth(280.0f);
 
     // Reputation display.
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.4f, tr("Reputation"), "");
-    info_reputation->setSize(GuiElement::GuiSizeMax, 40);
+    info_reputation->setSize(GuiElement::GuiSizeMax, 40.0f);
 
     // Scenario clock display.
     info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.4f, tr("Clock"), "");
-    info_clock->setSize(GuiElement::GuiSizeMax, 40);
+    info_clock->setSize(GuiElement::GuiSizeMax, 40.0f);
 
     alert_level_select = new GuiAlertLevelSelect(this, "");
     alert_level_select
         ->setPosition(-20.0f, allow_comms ? -70.0f : -20.0f, sp::Alignment::BottomRight)
         ->setSize(300.0f, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "verticalbottom");
+    (new GuiTextTooltip(alert_level_select, "ALERT_LEVEL_TIP", tr("tooltips", "Set the ship's alert level, which is displayed on all player crew screens."), 20.0f))->setWidth(280.0f);
 
     auto position = allow_comms
         ? CrewPosition::relayOfficer

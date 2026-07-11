@@ -192,6 +192,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSelectionIndex(0)
         ->setPosition(170, 20, sp::Alignment::TopLeft)
         ->setSize(100, 50);
+    (new GuiTextTooltip(game_time_scale, "GAME_TIME_SCALE_TIP", tr("gm_tooltip", "Set the game simulation speed multiplier."), 20.0f))->setWidth(280.0f);
 
     intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"), [](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;

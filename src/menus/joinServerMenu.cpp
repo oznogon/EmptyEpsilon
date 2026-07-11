@@ -1,17 +1,19 @@
+#include "menus/joinServerMenu.h"
 #include "main.h"
 #include "epsilonServer.h"
-#include "menus/joinServerMenu.h"
-#include "menus/serverBrowseMenu.h"
 #include "playerInfo.h"
 #include "preferenceManager.h"
 #include "gameGlobalInfo.h"
 #include "i18n.h"
 #include "config.h"
+
+#include "menus/serverBrowseMenu.h"
+
+#include "gui/gui2_button.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_panel.h"
-
 #include "gui/gui2_textentry.h"
-#include "gui/gui2_button.h"
+#include "gui/gui2_tooltip.h"
 
 JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
 : target(target)
@@ -78,7 +80,7 @@ void JoinServerScreen::update(float delta)
     {
     case GameClient::Connecting:
     case GameClient::Authenticating:
-        //If we are still trying to connect, do nothing.
+        // If we are still trying to connect, do nothing.
         break;
     case GameClient::WaitingForPassword:
         status_label->setText(tr("Please enter the server password:"));
@@ -89,26 +91,32 @@ void JoinServerScreen::update(float delta)
             focus(password_entry);
         }
         break;
-    case GameClient::Disconnected: {
+    case GameClient::Disconnected:
+    {
         auto reason = game_client->getDisconnectReason();
         destroy();
         disconnectFromServer();
         
         new ServerBrowserMenu(reason);
-        } break;
+    }
+    break;
     case GameClient::Connected:
         if (!target.address.getHumanReadable().empty())
         {
             string last_server = target.address.getHumanReadable()[0];
             if (target.port != defaultServerPort)
-                last_server += ":" + string(int(target.port));
+                last_server += ":" + string(static_cast<int>(target.port));
             PreferencesManager::set("last_server", last_server);
         }
+
         if (game_client->getClientId() > 0)
         {
-            foreach(PlayerInfo, i, player_info_list)
+            foreach (PlayerInfo, i, player_info_list)
+            {
                 if (i->client_id == game_client->getClientId())
                     my_player_info = i;
+            }
+
             if (my_player_info && gameGlobalInfo)
             {
                 returnToShipSelection(getRenderLayer());
