@@ -156,20 +156,11 @@ msgstr ""
 "Für dieses Szenario sind Schildfrequenzen erforderlich. Bitte aktiviere "
 "\"Frequenzen\" unter \"Zusätzliche Einstellungen\"."
 
-#: scripts/scenario_79_kessler.lua:96
-msgid ""
-"We are getting strange readings from sector C7. It looks like the source is "
-"an abandoned satellite. Please investigate, but be careful."
-msgstr ""
-"Wir empfangen seltsame Werte aus Sektor C7. Es sieht so aus, als wenn sie "
-"von einem nicht mehr genutzten Satelliten stammen. Bitte gehen Sie dem nach, "
-"seien Sie aber vorsichtig."
-
-#: scripts/scenario_79_kessler.lua:98
+#: scripts/scenario_79_kessler.lua:97
 msgid "An abandoned satellite"
 msgstr "Ein nicht mehr genutzter Satellit"
 
-#: scripts/scenario_79_kessler.lua:98
+#: scripts/scenario_79_kessler.lua:97
 msgid ""
 "An old military satellite. Capturing frequency is blocked. Behaviour "
 "unknown. Recommendation: Jump not closer than 10U, then advance using the "
@@ -178,6 +169,16 @@ msgstr ""
 "Eine alter Militär-Satellit. Frequenz zum einfangen wird blockiert. "
 "Verhalten unbekannt. Empfehlung: nicht direkt heran springen, sondern etwa "
 "10U Abstand halten, und nach dem Sprung mit Impulsantrieb näher fliegen."
+
+#: scripts/scenario_79_kessler.lua:98
+msgid "We are getting strange readings from sector "
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:98
+msgid ""
+". It looks like the source is an abandoned satellite. Please investigate, "
+"but be careful."
+msgstr ""
 
 #: scripts/scenario_79_kessler.lua:101 scripts/scenario_79_kessler.lua:166
 msgid "Additional debris created!"
@@ -484,3 +485,11 @@ msgstr "Ein funktionsfähiger Satellit"
 #: scripts/scenario_79_kessler.lua:490
 msgid "This satellite is fully operational. Do not capture!"
 msgstr "Dieser Satellit ist voll funktionsfähig. Nicht einfangen!"
+
+#~ msgid ""
+#~ "We are getting strange readings from sector C7. It looks like the source "
+#~ "is an abandoned satellite. Please investigate, but be careful."
+#~ msgstr ""
+#~ "Wir empfangen seltsame Werte aus Sektor C7. Es sieht so aus, als wenn sie "
+#~ "von einem nicht mehr genutzten Satelliten stammen. Bitte gehen Sie dem "
+#~ "nach, seien Sie aber vorsichtig."

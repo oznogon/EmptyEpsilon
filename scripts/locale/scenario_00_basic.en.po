@@ -232,7 +232,7 @@ msgctxt "buttonGM"
 msgid "-From Named Waves"
 msgstr ""
 
-#: scripts/scenario_00_basic.lua:513
+#: scripts/scenario_00_basic.lua:529
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -246,7 +246,7 @@ msgid ""
 "Good luck."
 msgstr ""
 
-#: scripts/scenario_00_basic.lua:523
+#: scripts/scenario_00_basic.lua:539
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -255,19 +255,19 @@ msgid ""
 "Good luck."
 msgstr ""
 
-#: scripts/scenario_00_basic.lua:558
+#: scripts/scenario_00_basic.lua:574
 #, lua-format
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: SUCCESS (%d seconds left)"
 msgstr ""
 
-#: scripts/scenario_00_basic.lua:569
+#: scripts/scenario_00_basic.lua:585
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (time has run out)"
 msgstr ""
 
-#: scripts/scenario_00_basic.lua:578 scripts/scenario_00_basic.lua:583
-#: scripts/scenario_00_basic.lua:588
+#: scripts/scenario_00_basic.lua:594 scripts/scenario_00_basic.lua:599
+#: scripts/scenario_00_basic.lua:604
 #, lua-format
 msgctxt "time-incCall"
 msgid "%s, you have one minute remaining."
@@ -275,17 +275,17 @@ msgid_plural "%s, you have %d minutes remaining."
 msgstr[0] ""
 msgstr[1] ""
 
-#: scripts/scenario_00_basic.lua:598
+#: scripts/scenario_00_basic.lua:614
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (no friendlies left)"
 msgstr ""
 
-#: scripts/scenario_00_basic.lua:615
+#: scripts/scenario_00_basic.lua:631
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (all your ships destroyed)"
 msgstr ""
 
-#: scripts/scenario_00_basic.lua:623
+#: scripts/scenario_00_basic.lua:639
 #, lua-format
 msgctxt "msgSpectbanner"
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
