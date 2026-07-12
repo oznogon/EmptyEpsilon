@@ -178,7 +178,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
 
     system_health_icon = new GuiImage(icon_layout, "SYSTEM_HEALTH_ICON", "gui/icons/system_health");
     system_health_icon
-        ->setSize(150.0f, GuiElement::GuiSizeMax)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setVisible(gameGlobalInfo->use_system_damage);
 
     heat_icon = new GuiImage(icon_layout, "HEAT_ICON", "gui/icons/status_overheat");
