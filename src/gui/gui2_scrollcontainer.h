@@ -64,6 +64,10 @@ public:
     // Pass text input events to child elements.
     virtual void onTextInput(sp::TextInputEvent e) override;
 
+    // Returns the effective scrollbar width, factoring in whether it appears
+    // at all.
+    float getEffectiveScrollbarWidth() const;
+
 protected:
     // Draw elements if they're in view. Translate mouse positions by the scroll
     // amount.
@@ -104,9 +108,6 @@ private:
 
     // Returns a rect for the area where content is visible.
     sp::Rect getContentRect() const;
-    // Returns the effective scrollbar width, factoring in whether it appears
-    // at all.
-    float getEffectiveScrollbarWidth() const;
     // Passes focus to another element.
     void switchFocusTo(GuiElement* new_element);
 };
