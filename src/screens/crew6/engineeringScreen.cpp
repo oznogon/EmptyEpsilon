@@ -168,7 +168,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
-    auto icon_layout = new GuiElement(bottom_left, "");
+    icon_layout = new GuiElement(bottom_left, "");
     icon_layout
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("layout", "horizontal");
@@ -242,8 +242,8 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     (new GuiImage(coolant_remaining_bar, "COOLANT_ICON", "gui/icons/coolant"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    auto system_row_layouts = new GuiScrollContainer(bottom_left, "SYSTEM_ROWS");
-    system_row_layouts
+    system_rows_container = new GuiScrollContainer(bottom_left, "SYSTEM_ROWS");
+    system_rows_container
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "verticalbottom");
 
@@ -251,7 +251,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     {
         string id = "SYSTEM_ROW_" + getSystemName(ShipSystem::Type(n));
         SystemRow info;
-        info.row = new GuiElement(system_row_layouts, id);
+        info.row = new GuiElement(system_rows_container, id);
         info.row
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("layout", "horizontal");
@@ -698,6 +698,10 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
 void EngineeringScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
+
+    // Keep the icon_layout header bar's width in sync with the system rows
+    // below: account for the scrollbar width when visible so column edges align.
+    icon_layout->setMargins(0.0f, 0.0f, system_rows_container->getEffectiveScrollbarWidth(), 0.0f);
 
     auto reactor = my_spaceship.getComponent<Reactor>();
     auto coolant = my_spaceship.getComponent<Coolant>();
