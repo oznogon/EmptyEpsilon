@@ -2198,7 +2198,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Example: isStrategicMapAllowed() -- returns true by default
     env.setGlobal("isStrategicMapAllowed", &luaIsStrategicMapAllowed);
     /// bool areMissilesOnLongRangeRadar()
-    /// Returns whether the "Missiles on long-range radar" setting is enabled in the running scenario.
+    /// Returns whether the "Long-range missile visibility" setting is enabled in the running scenario.
     /// Example: areMissilesOnLongRangeRadar() -- returns false by default
     env.setGlobal("areMissilesOnLongRangeRadar", &luaAreMissilesOnLongRangeRadar);
 
