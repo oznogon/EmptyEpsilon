@@ -103,10 +103,24 @@ void GuiResizableDialog::onDraw(sp::RenderTarget& renderer)
     if (rect.position.y > window_size.y - title_bar_height)
         setPosition(getPositionOffset().x, window_size.y - title_bar_height);
 
+    if (getSize().x < min_size.x)
+        setSize(min_size.x, getSize().y);
+    if (getSize().y < min_size.y)
+        setSize(getSize().x, min_size.y);
+    if (getSize().x > max_size.x)
+        setSize(max_size.x, getSize().y);
+    if (getSize().y > max_size.y)
+        setSize(getSize().x, max_size.y);
+
     if (minimized) return;
 
     const auto& corner = resize_corner_style->get(getState());
-    renderer.drawSprite(corner.texture, rect.position + rect.size - glm::vec2(resize_icon_size * 0.5f, resize_icon_size * 0.5f), resize_icon_size, corner.color);
+    renderer.drawSprite(
+        corner.texture,
+        rect.position + rect.size - glm::vec2(resize_icon_size * 0.5f, resize_icon_size * 0.5f),
+        resize_icon_size,
+        corner.color
+    );
 }
 
 bool GuiResizableDialog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
@@ -145,6 +159,7 @@ void GuiResizableDialog::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
             offset -= click_offset;
             setSize(getSize() + offset);
             click_offset += offset;
+            // Redundant resize clamping, otherwise resizing is janky.
             if (getSize().x < min_size.x)
                 setSize(min_size.x, getSize().y);
             if (getSize().y < min_size.y)
