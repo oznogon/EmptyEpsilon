@@ -9,33 +9,49 @@ GuiResizableDialog::GuiResizableDialog(GuiContainer* owner, string id, string ti
 {
     resize_corner_style = theme->getStyle("resizabledialog.corner");
     auto layout = new GuiElement(this, "RESIZABLE_LAYOUT");
-    layout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    layout->setAttribute("layout", "vertical");
-    const float button_size = title_bar_height - 4.0f;
+    layout
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 
     auto title_bar_layout = new GuiElement(layout, "RESIZABLE_TITLE_BAR_LAYOUT");
     title_bar_layout->setMargins(25.0f, 0.0f, 10.0f, 0.0f)->setSize(GuiElement::GuiSizeMax, title_bar_height);
     title_bar_layout->setAttribute("layout", "horizontal");
     title_bar = new GuiAutoSizeLabel(title_bar_layout, "RESIZABLE_TITLE_BAR", title, glm::vec2(100.0f, title_bar_height), glm::vec2(500.0f, title_bar_height), 20.0f, 20.0f);
-    title_bar->setClipped()->addBackground()->setAlignment(sp::Alignment::CenterLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    title_bar
+        ->setClipped()
+        ->addBackground()
+        ->setAlignment(sp::Alignment::CenterLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    minimize_button = new GuiToggleButton(title_bar_layout, "RESIZABLE_MINIMIZE", "", [this](bool value)
-    {
-        minimize(value);
-    });
-    minimize_button->setTextSize(20.0f)->setIcon("gui/widget/IndicatorArrow.png", sp::Alignment::Center, 90.0f)->setSize(button_size, button_size)->setMargins(0.0f, 2.0f);
+    minimize_button = new GuiToggleButton(title_bar_layout, "RESIZABLE_MINIMIZE", "",
+        [this](bool value)
+        {
+            minimize(value);
+        }
+    );
+    minimize_button
+        ->setTextSize(20.0f)
+        ->setIcon("gui/widget/IndicatorArrow.png", sp::Alignment::Center, 90.0f)
+        ->setSize(button_size, button_size)
+        ->setMargins(0.0f, 2.0f);
 
-    close_button = new GuiButton(title_bar_layout, "RESIZABLE_CLOSE", "X", [this]()
-    {
-        onClose();
-    });
-    close_button->setTextSize(20.0f)->setSize(button_size, button_size)->setMargins(0.0f, 2.0f);
+    close_button = new GuiButton(title_bar_layout, "RESIZABLE_CLOSE", "X",
+        [this]()
+        {
+            onClose();
+        }
+    );
+    close_button
+        ->setTextSize(20.0f)
+        ->setSize(button_size, button_size)
+        ->setMargins(0.0f, 2.0f);
 
     contents = new GuiElement(layout, "RESIZABLE_CONTENTS");
-    contents->setMargins(25.0f, 0.0f, 25.0f, 10.0f)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    contents->setAttribute("layout", "vertical");
+    contents
+        ->setMargins(25.0f, 0.0f, 25.0f, 10.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 
-    min_size = glm::vec2(200.0f, title_bar_height + resize_icon_size);
     minimized = false;
 }
 
@@ -133,6 +149,10 @@ void GuiResizableDialog::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
                 setSize(min_size.x, getSize().y);
             if (getSize().y < min_size.y)
                 setSize(getSize().x, min_size.y);
+            if (getSize().x > max_size.x)
+                setSize(max_size.x, getSize().y);
+            if (getSize().y > max_size.y)
+                setSize(getSize().x, max_size.y);
             break;
         }
     }
