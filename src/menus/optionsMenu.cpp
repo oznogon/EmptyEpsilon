@@ -580,10 +580,10 @@ void OptionsMenu::setupGraphicsOptions()
         );
         fsaa_selector
             ->setOptions({
-                tr("options", "Full-screen antialiasing:") + tr("options_fsaa", "Off"),
-                tr("options", "Full-screen antialiasing:") + tr("options_fsaa",  "2x"),
-                tr("options", "Full-screen antialiasing:") + tr("options_fsaa",  "4x"),
-                tr("options", "Full-screen antialiasing:") + tr("options_fsaa",  "8x")
+                tr("options", "Full-screen antialiasing:") + " " + tr("options_fsaa", "Off"),
+                tr("options", "Full-screen antialiasing:") + " " + tr("options_fsaa",  "2x"),
+                tr("options", "Full-screen antialiasing:") + " " + tr("options_fsaa",  "4x"),
+                tr("options", "Full-screen antialiasing:") + " " + tr("options_fsaa",  "8x")
             })
             ->setSelectionIndex(fsaa_index)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
@@ -612,8 +612,8 @@ void OptionsMenu::setupGraphicsOptions()
         );
         line_mode_selector
             ->setOptions({
-                tr("options", "Line rendering:") + tr("options_lines", "GL (low quality)"),
-                tr("options", "Line rendering:") + tr("options_lines", "Quads (high quality)")
+                tr("options", "Line rendering:") + " " + tr("options_lines", "GL (low quality)"),
+                tr("options", "Line rendering:") + " " + tr("options_lines", "Quads (high quality)")
             })
             ->setSelectionIndex(line_mode_index)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
@@ -673,9 +673,9 @@ void OptionsMenu::setupGraphicsOptions()
             );
             atlas_size_selector
                 ->setOptions({
-                    tr("options", "Texture atlas:") + tr("options_atlas", "Automatic"),
-                    tr("options", "Texture atlas:") + tr("options_atlas", "2K (2048x2048)"),
-                    tr("options", "Texture atlas:") + tr("options_atlas", "4K (4096x4096)")
+                    tr("options", "Texture atlas:") + " " + tr("options_atlas", "Automatic"),
+                    tr("options", "Texture atlas:") + " " + tr("options_atlas", "2K (2048x2048)"),
+                    tr("options", "Texture atlas:") + " " + tr("options_atlas", "4K (4096x4096)")
                 })
                 ->setSelectionIndex(atlas_index)
                 ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
