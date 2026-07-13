@@ -174,9 +174,9 @@ void OptionsMenu::update(float delta)
 void OptionsMenu::setTabOptions()
 {
     auto old_index = std::max(0, options_selector->getSelectionIndex());
-    auto graphics_label = tr("Graphics");
-    auto audio_label = tr("Audio");
-    auto interface_label = tr("Interface");
+    auto graphics_label = tr("options_tab", "Graphics");
+    auto audio_label = tr("options_tab", "Audio");
+    auto interface_label = tr("options_tab", "Interface");
     options_selector
         ->setOptions({graphics_label, audio_label, interface_label})
         ->setSelectionIndex(old_index);
@@ -226,7 +226,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 {
     // Select language
     {
-        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("options_section", "Language"), GuiElement::GuiSizeLabel))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -281,8 +281,8 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 
         (new GuiLabel(interface_page, "LANGUAGE_APPLICATION_LABEL",
             language_enabled
-                ? tr("Click Back to apply change")
-                : tr("Return to the main menu to change language"),
+                ? tr("options", "Click Back to apply change")
+                : tr("options", "Return to the main menu to change language"),
             20.0f))
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeLabel)
             ->setAttribute("margin", "0, 0, 0, 20");
@@ -330,7 +330,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         if (default_elem != themes.end())
             default_index = static_cast<int>(default_elem - themes.begin());
 
-        (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("Interface theme"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("options_section", "Interface theme"), GuiElement::GuiSizeLabel))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -353,7 +353,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
             (new GuiTextTooltip(gui_theme_selector, "GUI_THEME_SELECTOR_TIP", tr("tooltips", "Change the visual theme of the interface."), 20.0f))->setWidth(280.0f);
 
-            (new GuiLabel(interface_page, "THEME_APPLICATION_LABEL", tr("Click Back to apply change"), 20.0f))
+            (new GuiLabel(interface_page, "THEME_APPLICATION_LABEL", tr("options", "Click Back to apply change"), 20.0f))
                 ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeLabel)
                 ->setAttribute("margin", "0, 0, 0, 20");
         }
@@ -374,12 +374,12 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 
     // Control configuration
     {
-        (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control options"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("options_section", "Control options"), GuiElement::GuiSizeLabel))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
         // Hotkey/bindings config
-        auto* configure_bindings_button = new GuiButton(interface_page, "CONFIGURE_BINDINGS", tr("Configure controls"),
+        auto* configure_bindings_button = new GuiButton(interface_page, "CONFIGURE_BINDINGS", tr("options", "Configure controls"),
             [this, return_to]()
             {
                 new HotkeyMenu(return_to);
@@ -399,7 +399,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(GuiElement::GuiSizeMax, 220.0f)
             ->setAttribute("layout", "vertical");
 
-        (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("Radar rotation lock"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("options_section", "Radar rotation lock"), GuiElement::GuiSizeLabel))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -413,7 +413,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setAlignment(sp::Alignment::CenterRight)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("margin", "0, 10, 0, 0");
-        helms_radar_lock_toggle = new GuiToggleButton(lock_row, "HELMS_RADAR_LOCK", tr("radar_locks", "Ship rotates"),
+        helms_radar_lock_toggle = new GuiToggleButton(lock_row, "HELMS_RADAR_LOCK", tr("radar_locks", "Ship rotates inside radar"),
             [this](bool value)
             {
                 PreferencesManager::set(       "helms_radar_lock", value ? "1" : "");
@@ -421,18 +421,19 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 PreferencesManager::set("single_pilot_radar_lock", value ? "1" : "");
 
                 helms_radar_lock_toggle->setText(value
-                    ? tr("radar_locks", "Radar rotates")
-                    : tr("radar_locks", "Ship rotates")
+                    ? tr("radar_locks", "Radar rotates around ship")
+                    : tr("radar_locks", "Ship rotates inside radar")
                 );
             }
         );
         helms_radar_lock_toggle
             ->setValue(PreferencesManager::get("helms_radar_lock", "0") == "1")
             ->setText(helms_radar_lock_toggle->getValue()
-                ? tr("radar_locks", "Radar rotates")
-                : tr("radar_locks", "Ship rotates"))
+                ? tr("radar_locks", "Radar rotates around ship")
+                : tr("radar_locks", "Ship rotates inside radar")
+            )
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-        (new GuiTextTooltip(helms_radar_lock_toggle, "HELMS_RADAR_LOCK_TIP", tr("tooltips", "Lock radar rotation so the view follows the ship or stays world-oriented."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(helms_radar_lock_toggle, "HELMS_RADAR_LOCK_TIP", tr("tooltips", "Toggles whether rotating the ship rotates the radar frame around the ship, or rotates the ship within a stationary frame."), 20.0f))->setWidth(280.0f);
 
         // Weapons rotation lock.
         lock_row = new GuiElement(radar_rotation_lock, "WEAPONS_RADAR_LOCK_ROW");
@@ -450,16 +451,20 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             {
                 PreferencesManager::set("weapons_radar_lock", value ? "1" : "");
 
-                weapons_radar_lock_toggle->setText(value ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"));
+                weapons_radar_lock_toggle->setText(value
+                    ? tr("radar_locks", "Radar rotates around ship")
+                    : tr("radar_locks", "Ship rotates inside radar")
+                );
             }
         );
         weapons_radar_lock_toggle
             ->setValue(PreferencesManager::get("weapons_radar_lock", "0") == "1")
             ->setText(weapons_radar_lock_toggle->getValue()
-                ? tr("radar_locks", "Radar rotates")
-                : tr("radar_locks", "Ship rotates"))
+                ? tr("radar_locks", "Radar rotates around ship")
+                : tr("radar_locks", "Ship rotates inside radar")
+            )
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-        (new GuiTextTooltip(weapons_radar_lock_toggle, "WEAPONS_RADAR_LOCK_TIP", tr("tooltips", "Lock radar rotation so the view follows the ship or stays world-oriented."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(weapons_radar_lock_toggle, "WEAPONS_RADAR_LOCK_TIP", tr("tooltips", "Toggles whether rotating the ship rotates the radar frame around the ship, or rotates the ship within a stationary frame."), 20.0f))->setWidth(280.0f);
 
         // Science/Ops rotation lock.
         lock_row = new GuiElement(radar_rotation_lock, "SCIENCE_RADAR_LOCK_ROW");
@@ -478,21 +483,25 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 PreferencesManager::set("science_radar_lock", value ? "1" : "");
                 PreferencesManager::set("operations_radar_lock", value ? "1" : "");
 
-                science_radar_lock_toggle->setText(value ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"));
+                science_radar_lock_toggle->setText(value
+                    ? tr("radar_locks", "Radar rotates around ship")
+                    : tr("radar_locks", "Ship rotates inside radar")
+                );
             }
         );
         science_radar_lock_toggle
             ->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")
             ->setText(science_radar_lock_toggle->getValue()
-                ? tr("radar_locks", "Radar rotates")
-                : tr("radar_locks", "Ship rotates"))
+                ? tr("radar_locks", "Radar rotates around ship")
+                : tr("radar_locks", "Ship rotates inside radar")
+            )
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-        (new GuiTextTooltip(science_radar_lock_toggle, "SCIENCE_RADAR_LOCK_TIP", tr("tooltips", "Lock radar rotation so the view follows the ship or stays world-oriented."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(science_radar_lock_toggle, "SCIENCE_RADAR_LOCK_TIP", tr("tooltips", "Toggles whether rotating the ship rotates the radar frame around the ship, or rotates the ship within a stationary frame."), 20.0f))->setWidth(280.0f);
     }
 
     // Cinematic view options
     {
-        (new GuiLabel(interface_page, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("Cinematic view options"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(interface_page, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("options_section", "Cinematic view options"), GuiElement::GuiSizeLabel))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -508,7 +517,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             {
                 PreferencesManager::set("camera_mouse_sensitivity", sensitivity);
                 camera_sensitivity_overlay_label->setText(
-                    tr("Mouselook sensitivity: {s}").format({
+                    tr("options", "Mouselook sensitivity: {s}").format({
                         {"s", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f)))}
                     })
                 );
@@ -519,13 +528,13 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 
         // Override overlay label.
         camera_sensitivity_overlay_label = new GuiLabel(camera_sensitivity_slider, "CAMERA_SENSITIVITY_SLIDER_LABEL",
-            tr("Mouselook sensitivity: {s}").format({
+            tr("options", "Mouselook sensitivity: {s}").format({
                 {"s", static_cast<string>(static_cast<int>(nearbyint(initial_camera_sensitivity * 100.0f)))}
             }), GuiElement::GuiSizeLabel);
         camera_sensitivity_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         // Cinematic fly-by randomization
-        auto* randomize_flyby_toggle = new GuiToggleButton(interface_page, "RANDOMIZE_CINEMATIC_FLYBY", tr("Randomize cinematic fly-by angles"),
+        auto* randomize_flyby_toggle = new GuiToggleButton(interface_page, "RANDOMIZE_CINEMATIC_FLYBY", tr("options", "Randomize cinematic fly-by angles"),
             [this](bool value)
             {
                 PreferencesManager::set("camera_flyby_randomized", value ? "1" : "0");
@@ -555,7 +564,7 @@ void OptionsMenu::setupGraphicsOptions()
         default: fsaa_index = 0; break;
         }
 
-        (new GuiLabel(graphics_page, "QUALITY_LABEL", tr("options", "Quality settings"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(graphics_page, "QUALITY_LABEL", tr("options_section", "Quality settings"), GuiElement::GuiSizeLabel))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("margin", "0, 0, 0, 10");
@@ -571,11 +580,11 @@ void OptionsMenu::setupGraphicsOptions()
         );
         fsaa_selector
             ->setOptions({
-                tr("options", "Full-screen antialiasing: Off"),
-                tr("options", "Full-screen antialiasing: 2x"),
-                tr("options", "Full-screen antialiasing: 4x"),
-                tr("options", "Full-screen antialiasing: 8x")}
-            )
+                tr("options", "Full-screen antialiasing:") + tr("options_fsaa", "Off"),
+                tr("options", "Full-screen antialiasing:") + tr("options_fsaa",  "2x"),
+                tr("options", "Full-screen antialiasing:") + tr("options_fsaa",  "4x"),
+                tr("options", "Full-screen antialiasing:") + tr("options_fsaa",  "8x")
+            })
             ->setSelectionIndex(fsaa_index)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
         (new GuiTextTooltip(fsaa_selector, "FSAA_TIP", tr("tooltips", "Set the level of full-screen antialiasing for smoother edges. Requires restart."), 20.0f))->setWidth(280.0f);
@@ -603,15 +612,15 @@ void OptionsMenu::setupGraphicsOptions()
         );
         line_mode_selector
             ->setOptions({
-                tr("options", "Line rendering: GL (Low quality)"),
-                tr("options", "Line rendering: Quads (High quality)"
-            )})
+                tr("options", "Line rendering:") + tr("options_lines", "GL (low quality)"),
+                tr("options", "Line rendering:") + tr("options_lines", "Quads (high quality)")
+            })
             ->setSelectionIndex(line_mode_index)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
         (new GuiTextTooltip(line_mode_selector, "LINE_MODE_TIP", tr("tooltips", "Choose between fast GL line rendering and higher-quality quad rendering."), 20.0f))->setWidth(280.0f);
 
         // Dynamic nebula lighting toggle.
-        auto* nebula_lighting_toggle = new GuiToggleButton(graphics_page, "DYNAMIC_NEBULA_LIGHTING", tr("options", "Dynamic nebula lighting"),
+        auto* nebula_lighting_toggle = new GuiToggleButton(graphics_page, "DYNAMIC_NEBULA_LIGHTING", tr("options", "Render dynamic lights in nebula"),
             [](bool value)
             {
                 PreferencesManager::set("dynamic_nebula_lighting", value ? "1" : "0");
@@ -623,7 +632,7 @@ void OptionsMenu::setupGraphicsOptions()
         (new GuiTextTooltip(nebula_lighting_toggle, "NEBULA_LIGHTING_TIP", tr("tooltips", "Toggle dynamic lighting effects inside nebula regions for visual atmosphere."), 20.0f))->setWidth(280.0f);
 
         // Nebula fog toggle.
-        auto* nebula_fog_toggle = new GuiToggleButton(graphics_page, "NEBULA_FOG", tr("options", "Nebula fog"),
+        auto* nebula_fog_toggle = new GuiToggleButton(graphics_page, "NEBULA_FOG", tr("options", "Render fog in nebula"),
             [](bool value)
             {
                 PreferencesManager::set("nebula_fog", value ? "1" : "0");
@@ -640,20 +649,21 @@ void OptionsMenu::setupGraphicsOptions()
         {
             int atlas_index = 0;
             auto atlas_pref = PreferencesManager::get("atlas_size", "auto");
-            if (atlas_pref == "4k")
-                atlas_index = 2;
-            else if (atlas_pref == "2k")
-                atlas_index = 1;
+            if (atlas_pref == "4k") atlas_index = 2;
+            else if (atlas_pref == "2k") atlas_index = 1;
 
             auto* atlas_size_selector = new GuiSelector(graphics_page, "ATLAS_SIZE",
                 [](int index, string value)
                 {
                     sp::RenderTarget::AtlasSizeMode mode = sp::RenderTarget::AtlasSizeMode::Automatic;
                     string pref_value = "auto";
-                    if (index == 2) {
+                    if (index == 2)
+                    {
                         mode = sp::RenderTarget::AtlasSizeMode::Force4K;
                         pref_value = "4k";
-                    } else if (index == 1) {
+                    }
+                    else if (index == 1)
+                    {
                         mode = sp::RenderTarget::AtlasSizeMode::Force2K;
                         pref_value = "2k";
                     }
@@ -663,10 +673,10 @@ void OptionsMenu::setupGraphicsOptions()
             );
             atlas_size_selector
                 ->setOptions({
-                    tr("options", "Texture atlas: Automatic"),
-                    tr("options", "Texture atlas: 2K (2048x2048)"),
-                    tr("options", "Texture atlas: 4K (4096x4096)")}
-                )
+                    tr("options", "Texture atlas:") + tr("options_atlas", "Automatic"),
+                    tr("options", "Texture atlas:") + tr("options_atlas", "2K (2048x2048)"),
+                    tr("options", "Texture atlas:") + tr("options_atlas", "4K (4096x4096)")
+                })
                 ->setSelectionIndex(atlas_index)
                 ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
             (new GuiTextTooltip(atlas_size_selector, "ATLAS_SIZE_TIP", tr("tooltips", "Set the texture atlas resolution. Higher quality requires more memory. Requires restart."), 20.0f))->setWidth(280.0f);
@@ -681,7 +691,7 @@ void OptionsMenu::setupGraphicsOptions()
 
     // View/window settings.
     {
-        (new GuiLabel(graphics_page, "VIEW_LABEL", tr("options", "View settings"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(graphics_page, "VIEW_LABEL", tr("options_section", "View settings"), GuiElement::GuiSizeLabel))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("margin", "0, 0, 0, 10");
@@ -754,7 +764,7 @@ void OptionsMenu::setupGraphicsOptions()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
         (new GuiTextTooltip(graphics_draw_distance_slider, "DRAW_DISTANCE_TIP", tr("tooltips", "Set how far the main screen camera renders objects."), 20.0f))->setWidth(280.0f);
 
-        graphics_draw_distance_overlay_label = new GuiLabel(graphics_draw_distance_slider, "GRAPHICS_DRAW_DISTANCE_SLIDER_LABEL", tr("Draw distance: {dist}").format({
+        graphics_draw_distance_overlay_label = new GuiLabel(graphics_draw_distance_slider, "GRAPHICS_DRAW_DISTANCE_SLIDER_LABEL", tr("options", "Draw distance: {dist}").format({
             {"dist", string(static_cast<int>(initial_draw_distance / 1000.0f), 1)}
         }) + DISTANCE_UNIT_1K, GuiElement::GuiSizeLabel);
         graphics_draw_distance_overlay_label
@@ -769,7 +779,7 @@ void OptionsMenu::setupAudioOptions()
         [this](float volume)
         {
             soundManager->setMasterSoundVolume(volume);
-            sound_volume_overlay_label->setText(tr("Sound effect volume: {volume}%").format({
+            sound_volume_overlay_label->setText(tr("options", "Sound effect volume: {volume}%").format({
                 {"volume", string(static_cast<int>(soundManager->getMasterSoundVolume()))}
             }));
         }
@@ -780,14 +790,14 @@ void OptionsMenu::setupAudioOptions()
     (new GuiTextTooltip(sound_volume_slider, "SOUND_VOLUME_TIP", tr("tooltips", "Adjust the volume of sound effects."), 20.0f))->setWidth(280.0f);
 
     // Override overlay label.
-    sound_volume_overlay_label = new GuiLabel(sound_volume_slider, "SOUND_VOLUME_SLIDER_LABEL", tr("Sound effect volume: {volume}%").format({
+    sound_volume_overlay_label = new GuiLabel(sound_volume_slider, "SOUND_VOLUME_SLIDER_LABEL", tr("options", "Sound effect volume: {volume}%").format({
         {"volume", string(static_cast<int>(soundManager->getMasterSoundVolume()))}
     }), 30.0f);
     sound_volume_overlay_label
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Engine playback state.
-    (new GuiLabel(audio_page, "IMPULSE_SOUND_LABEL", tr("Impulse engine sound"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(audio_page, "IMPULSE_SOUND_LABEL", tr("options_section", "Impulse engine sound"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -823,7 +833,7 @@ void OptionsMenu::setupAudioOptions()
         [this](float volume)
         {
             PreferencesManager::set("impulse_sound_volume", volume);
-            impulse_volume_overlay_label->setText(tr("Volume: {volume}%").format({
+            impulse_volume_overlay_label->setText(tr("options", "Volume: {volume}%").format({
                 {"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}
             }));
         }
@@ -833,14 +843,14 @@ void OptionsMenu::setupAudioOptions()
     (new GuiTextTooltip(impulse_volume_slider, "IMPULSE_VOLUME_TIP", tr("tooltips", "Adjust the volume of impulse engine sounds."), 20.0f))->setWidth(280.0f);
 
     // Override overlay label.
-    impulse_volume_overlay_label = new GuiLabel(impulse_volume_slider, "IMPULSE_VOLUME_SLIDER_LABEL", tr("Volume: {volume}%").format({
+    impulse_volume_overlay_label = new GuiLabel(impulse_volume_slider, "IMPULSE_VOLUME_SLIDER_LABEL", tr("options", "Volume: {volume}%").format({
         {"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}
     }), GuiElement::GuiSizeLabel);
     impulse_volume_overlay_label
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music playback state.
-    (new GuiLabel(audio_page, "MUSIC_PLAYBACK_LABEL", tr("Music"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(audio_page, "MUSIC_PLAYBACK_LABEL", tr("options_section", "Music"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -871,14 +881,14 @@ void OptionsMenu::setupAudioOptions()
         })
         ->setSelectionIndex(music_enabled_index)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(music_enabled_selector, "MUSIC_ENABLED_TIP", tr("tooltips", "Choose when background music plays."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(music_enabled_selector, "MUSIC_ENABLED_TIP", tr("tooltips", "Choose where background music plays."), 20.0f))->setWidth(280.0f);
 
     // Music volume slider.
     music_volume_slider = new GuiSlider(row, "MUSIC_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMusicVolume(),
         [this](float volume)
         {
             soundManager->setMusicVolume(volume);
-            music_volume_overlay_label->setText(tr("Volume: {volume}%").format({
+            music_volume_overlay_label->setText(tr("options", "Volume: {volume}%").format({
                 {"volume", string(static_cast<int>(soundManager->getMusicVolume()))}
             }));
         }
@@ -889,7 +899,7 @@ void OptionsMenu::setupAudioOptions()
     (new GuiTextTooltip(music_volume_slider, "MUSIC_VOLUME_TIP", tr("tooltips", "Adjust the volume of background music."), 20.0f))->setWidth(280.0f);
 
     // Override overlay label.
-    music_volume_overlay_label = new GuiLabel(music_volume_slider, "MUSIC_VOLUME_SLIDER_LABEL", tr("Volume: {volume}%").format({
+    music_volume_overlay_label = new GuiLabel(music_volume_slider, "MUSIC_VOLUME_SLIDER_LABEL", tr("options", "Volume: {volume}%").format({
         {"volume", string(static_cast<int>(soundManager->getMusicVolume()))}
     }), 30.0f);
     music_volume_overlay_label
@@ -904,7 +914,7 @@ void OptionsMenu::setupAudioOptions()
     std::vector<string> combat_music_filenames = findResources("music/combat/*.ogg");
     std::sort(combat_music_filenames.begin(), combat_music_filenames.end());
 
-    (new GuiLabel(audio_page, "PREVIEW_LABEL", tr("Preview music"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(audio_page, "PREVIEW_LABEL", tr("options_section", "Preview music"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -921,5 +931,5 @@ void OptionsMenu::setupAudioOptions()
         music_list->addEntry(sp::audio::Music::getTagsDisplayName(filename), filename);
 
     music_list->setSize(GuiElement::GuiSizeMax, 500.0f);
-    (new GuiTextTooltip(music_list, "MUSIC_PREVIEW_TIP", tr("tooltips", "Select a music track to preview. Click to play."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(music_list, "MUSIC_PREVIEW_TIP", tr("tooltips", "Click a music track to play it."), 20.0f))->setWidth(280.0f);
 }
