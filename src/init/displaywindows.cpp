@@ -46,6 +46,9 @@ bool createDisplayWindows()
     debug_renderer
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
         ->setSize(400.0f, 175.0f);
+#ifndef DEBUG
+    debug_renderer->hide();
+#endif
     new DebugVisibilityToggle(mouseLayer, debug_renderer);
 
     int width = 1200;
