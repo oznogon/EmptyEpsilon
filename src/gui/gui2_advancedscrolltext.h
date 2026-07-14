@@ -19,9 +19,9 @@ protected:
 
     std::vector<Entry> entries;
     GuiScrollbar* scrollbar;
-    float text_size;
+    float text_size = 30.0f;
     float rect_width;
-    float max_prefix_width;
+    float max_prefix_width = 0.0f;
     std::map<float, int> prefix_widths;
     bool auto_scroll_down;
     Entry prepEntry(Entry& e);
