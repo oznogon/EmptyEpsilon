@@ -304,7 +304,7 @@ function SpawnWeaponPickups()
       artifact:onCollision(function(self, collider)
         -- "Note that the callback function must reference something global, otherwise you get an error like "??[convert<ScriptSimpleCallback>::param] Upvalue 1 of function is not a table..."
         local __ = math.abs(0)
-        if collider.typeName == "PlayerSpaceship" then
+        if collider.components and collider.components.player_control then
           collider:setWeaponStorage(weaponType, collider:getWeaponStorage(weaponType) + 1)
           self:destroy()
           collider:addToShipLog(_("artifacts", "Picked up a ") .. weaponType, "green")
