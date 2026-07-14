@@ -391,9 +391,9 @@ void DebugRenderer::onDraw(sp::RenderTarget& renderer)
             {"s", string(scale, 1)}
         }));
 
-        float sec = time_window / 60.0f;
+        float total_sec = visible_points / std::max(fps, 5.0f);
         tw_label->setText(tr("debug", "X: Last {sec}s").format({
-            {"sec", string(sec, 1)}
+            {"sec", string(total_sec, 1)}
         }));
     }
 
@@ -544,20 +544,22 @@ void DebugRenderer::onDraw(sp::RenderTarget& renderer)
         {
             float clip_height = graph_base_y - clip_top;
             if (clip_height < 0.0f) clip_height = 0.0f;
-            renderer.pushClipRegion(sp::Rect(graph_left, clip_top, graph_width, clip_height));
+            // Use GL line mode for thin 1px lines (7x less geometry than Quad,
+            // no bevel joins, no quad_line_shader switch).
+            auto saved_line_mode = sp::RenderTarget::getLineDrawingMode();
+            sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::GL);
 
-            // Draw graph lines (independent or stacked)
+            // In stacked mode, clip fillRects to prevent bleeding into the toolbar.
+            if (timing_graph_stacked)
+                renderer.pushClipRegion(sp::Rect(graph_left, clip_top, graph_width, clip_height));
+
+            // Draw graph lines (and fillRects in stacked mode) in a single pass.
             {
-                std::vector<string> draw_order = key_order;
-                std::sort(draw_order.begin(), draw_order.end(),
-                    [&total](const auto& a, const auto& b)
-                    { return total[a] < total[b]; });
-
-                // For stacked mode, track accumulated offset at each sample point
                 std::vector<float> stack_base(draw_count, 0.0f);
 
-                for (const auto& key : draw_order)
+                for (auto it = key_order.rbegin(); it != key_order.rend(); ++it)
                 {
+                    const auto& key = *it;
                     auto entry = timing_graph_enabled.find(key);
                     if (entry != timing_graph_enabled.end() && !entry->second) continue;
 
@@ -577,7 +579,6 @@ void DebugRenderer::onDraw(sp::RenderTarget& renderer)
                         float val = data[data_idx];
                         float y = graph_base_y - scale * 1000.0f * (val + offset);
 
-                        // In stacked mode, shade below this series' line
                         if (timing_graph_stacked && val > 0.0f)
                         {
                             float base_y = graph_base_y - scale * 1000.0f * offset;
@@ -599,8 +600,9 @@ void DebugRenderer::onDraw(sp::RenderTarget& renderer)
                 }
             }
 
-            // End graph clip
-            renderer.popClipRegion();
+            if (timing_graph_stacked) renderer.popClipRegion();
+
+            sp::RenderTarget::setLineDrawingMode(saved_line_mode);
         }
 
         // X-axis labels
@@ -675,7 +677,10 @@ void DebugRenderer::onDraw(sp::RenderTarget& renderer)
                             auto entry = timing_graph_enabled.find(key);
                             if (entry != timing_graph_enabled.end() && !entry->second) continue;
 
-                            const float val = timing_graph_points[key][data_idx] * 1000.0f;
+                            auto& tooltip_data = timing_graph_points[key];
+                            if (data_idx >= static_cast<int>(tooltip_data.size())) continue;
+
+                            const float val = tooltip_data[data_idx] * 1000.0f;
                             tooltip_lines.emplace_back(key, val);
                             tooltip_count++;
                         }
