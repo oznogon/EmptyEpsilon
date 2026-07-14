@@ -5161,6 +5161,7 @@ void GuiEntityTweak::open(sp::ecs::Entity e, string select_component)
                     component_list->setSelectionIndex(component_index + 1);
                     for (auto page : pages) page->hide();
                     pages[page_index]->show();
+                    showPageDescription(page_index);
                     show();
                     return;
                 }
