@@ -734,6 +734,10 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     info_type->setValue("-");
     info_shields->setValue("-");
     info_hull->setValue("-");
+    info_callsign->hide();
+    info_faction->hide();
+    info_type->hide();
+    info_hull->hide();
     info_shield_frequency->setFrequency(-1);
     info_beam_frequency->setFrequency(-1);
     info_faction_button->hide();
@@ -794,7 +798,10 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         }
 
         if (auto cs = target.getComponent<CallSign>())
+        {
             info_callsign->setValue(cs->callsign);
+            info_callsign->show();
+        }
 
         auto scanstate_component = target.getComponent<ScanState>();
         auto scanstate = scanstate_component ? scanstate_component->getStateFor(my_spaceship) : ScanState::State::FullScan;
@@ -833,13 +840,20 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         // hull integrity, and database reference button.
         if (scanstate >= ScanState::State::SimpleScan)
         {
-            auto faction = Faction::getInfo(target);
-            info_faction_button->show();
-            info_faction->setValue(faction.locale_name);
+            if (auto faction_component = target.getComponent<Faction>())
+            {
+                auto faction = Faction::getInfo(target);
+                info_faction_button->show();
+                info_faction->setValue(faction.locale_name);
+                info_faction->show();
+            }
 
-            info_type_button->show();
             if (auto tn = target.getComponent<TypeName>())
+            {
+                info_type_button->show();
                 info_type->setValue(tn->localized);
+                info_type->show();
+            }
 
             if (auto shields = target.getComponent<Shields>())
             {
@@ -854,7 +868,13 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             }
 
             if (auto hull = target.getComponent<Hull>())
-                info_hull->setValue(static_cast<int>(ceil(hull->current)));
+            {
+                if (hull->max > 1.0f)
+                {
+                    info_hull->setValue(static_cast<int>(ceil(hull->current)));
+                    info_hull->show();
+                }
+            }
         }
 
         sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
