@@ -333,19 +333,28 @@ end
 function CheckPayloadControl(target, faction1, faction2)
   local count1 = 0
   local count2 = 0
-  local payloadX, payloadY = target:getPosition()
-  local allShips = getObjectsInRadius(payloadX, payloadY, PayloadDistanceThreshold)
+  local px, py = target:getPosition()
 
-  for _, ship in ipairs(allShips) do
-    if ship.typeName ~= "CpuShip" and ship.typeName ~= "PlayerSpaceship" then
-      goto continue
-    end
-    if ship:isValid() and ship:getFaction() == faction1 then
+  -- Check player ship separately
+  if Player:isValid() and distance(Player, px, py) <= PayloadDistanceThreshold then
+    if Player:getFaction() == faction1 then
       count1 = count1 + 1
-    elseif ship:isValid() and ship:getFaction() == faction2 then
+    elseif Player:getFaction() == faction2 then
       count2 = count2 + 1
     end
-    ::continue::
+  end
+
+  -- Check tracked ship lists
+  for _, list in ipairs({KraylorShips, HumanShips}) do
+    for _, ship in ipairs(list) do
+      if ship:isValid() and distance(ship, px, py) <= PayloadDistanceThreshold then
+        if ship:getFaction() == faction1 then
+          count1 = count1 + 1
+        elseif ship:getFaction() == faction2 then
+          count2 = count2 + 1
+        end
+      end
+    end
   end
 
   if count1 > 0 and count2 == 0 then
@@ -713,6 +722,9 @@ end
 
 -- Update the Payload's target based on proximities and scan status
 function DeterminePayloadTarget()
+  if not Player:isValid() then
+    return
+  end
   local oldTarget = PayloadShip.target
   local inControl, ourCount, oppositionCount = CheckPayloadControl(PayloadShip, "Human Navy", "Kraylor")
 
