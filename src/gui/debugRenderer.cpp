@@ -333,11 +333,26 @@ void DebugRenderer::onDraw(sp::RenderTarget& renderer)
         // Data collection (skipped when paused)
         if (!timing_paused)
         {
+            std::unordered_set<string> updated_keys;
             for (auto [key, value] : engine->getEngineTiming())
             {
                 auto& data = timing_graph_points[key];
                 data.push_back(value);
+                updated_keys.insert(key);
                 while (data.size() > (size_t)time_window) data.pop_front();
+            }
+
+            // Zero-pad deques not updated this frame so they scroll left with
+            // the active data instead of freezing in place.  This keeps all
+            // series the same length, which is required for correct stacking.
+            for (auto& [key, data] : timing_graph_points)
+            {
+                if (updated_keys.find(key) == updated_keys.end())
+                {
+                    data.push_back(0.0f);
+                    while (data.size() > (size_t)time_window)
+                        data.pop_front();
+                }
             }
         }
 
