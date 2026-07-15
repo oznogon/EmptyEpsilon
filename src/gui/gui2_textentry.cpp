@@ -2,9 +2,8 @@
 #include "theme.h"
 #include "clipboard.h"
 
-
 GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
-: GuiElement(owner, id), text(text), text_size(30), func(nullptr)
+: GuiElement(owner, id), text(text)
 {
     intercepts_pointer = true;
     blink_timer.repeat(blink_rate);
@@ -14,13 +13,12 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 
 GuiTextEntry::~GuiTextEntry()
 {
-    if (focus)
-        SDL_StopTextInput();
+    if (focus) SDL_StopTextInput();
 }
 
 float GuiTextEntry::getLineSpacing() const {
     const auto& front = front_style->get(getState());
-    return front.font->getLineSpacing(32) * text_size / float(32);
+    return front.font->getLineSpacing(32) * text_size / 32.0f;
 }
 
 void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
@@ -29,111 +27,135 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
     const auto& front = front_style->get(getState());
 
     if (!back.texture.empty())
-        renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
-    if (blink_timer.isExpired())
-        typing_indicator = !typing_indicator;
+    {
+        renderer.drawStretchedHV(
+            rect,
+            back.size,
+            back.texture,
+            back.color
+        );
+    }
+    if (blink_timer.isExpired()) typing_indicator = !typing_indicator;
 
     std::string shown_text = text;
-    if (hide_password) {
-        shown_text = std::string(text.size(), '*');
-    }
+    if (hide_password) shown_text = std::string(text.size(), '*');
     if (shown_text.empty()) shown_text = " ";
-    sp::Rect text_rect(rect.position.x + 16, rect.position.y, rect.size.x - 32, rect.size.y);
-    auto flags = sp::Font::FlagClip;
-    if (wrap)
-        flags |= sp::Font::FlagLineWrap;
-    auto prepared = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, flags);
-    auto linespacing = front.font->getLineSpacing(32) * text_size / float(32);
 
-    if (multiline) {
-        // ensure the text fills the available space as much as possible
+    sp::Rect text_rect(rect.position.x + 16, rect.position.y, rect.size.x - 32, rect.size.y);
+
+    auto flags = sp::Font::FlagClip;
+    if (wrap) flags |= sp::Font::FlagLineWrap;
+
+    auto prepared = front.font->prepare(
+        shown_text,
+        32,
+        text_size,
+        {255, 255, 255, 255},
+        text_rect.size,
+        multiline
+            ? sp::Alignment::TopLeft
+            : sp::Alignment::CenterLeft,
+            flags
+    );
+    auto linespacing = front.font->getLineSpacing(32) * text_size / 32.0f;
+
+    // Ensure the text fills the available space as much as possible.
+    if (multiline)
+    {
         auto min_y = std::numeric_limits<float>::infinity();
         auto max_y = -min_y;
-        for(auto& d : prepared.data) {
-            if (d.position.y < min_y)
-                min_y = d.position.y;
-            if (d.position.y > max_y)
-                max_y = d.position.y;
+
+        for (auto& d : prepared.data)
+        {
+            if (d.position.y < min_y) min_y = d.position.y;
+            if (d.position.y > max_y) max_y = d.position.y;
         }
+
         content_height = max_y + linespacing * 0.3f;
-        if (wrap && !layout.fill_height) {
+
+        if (wrap && !layout.fill_height)
+        {
             auto required_height = std::max(linespacing, content_height);
             rect.size.y = required_height;
             layout.size.y = required_height;
             text_rect.size.y = rect.size.y;
         }
+
         auto clipped_from_top = -min_y - render_offset.y;
         auto space_at_bottom = rect.size.y - max_y - render_offset.y - linespacing * 0.3f;
 
-        if (space_at_bottom > 0 && clipped_from_top > 0) {
-            // the text goes off the top of the box but doesn't reach the bottom;
-            // scroll until it either stops going off the top, or reaches the bottom
+        // The text goes off the top of the box but doesn't reach the bottom.
+        // Scroll until it either stops going off the top or reaches the bottom.
+        if (space_at_bottom > 0 && clipped_from_top > 0)
             render_offset.y += std::min(space_at_bottom, clipped_from_top);
-        }
     }
 
-    for(auto& d : prepared.data)
-        d.position += render_offset;
+    for (auto& d : prepared.data) d.position += render_offset;
 
     float start_x = -1;
     int selection_min = std::min(selection_start, selection_end);
     int selection_max = std::max(selection_start, selection_end);
-    for(auto d : prepared.data)
+
+    for (auto d : prepared.data)
     {
         if (d.string_offset == selection_end)
         {
             if (d.position.x > text_rect.size.x)
                 render_offset.x -= d.position.x - text_rect.size.x;
-            if (d.position.x < 0.0f)
-                render_offset.x -= d.position.x;
+
+            if (d.position.x < 0.0f) render_offset.x -= d.position.x;
+
             if (multiline && d.position.y > text_rect.size.y - linespacing * 0.3f)
                 render_offset.y -= d.position.y - text_rect.size.y + linespacing * 0.3f;
+
             if (multiline && d.position.y < linespacing)
                 render_offset.y -= d.position.y - linespacing;
         }
-        if (d.string_offset == selection_min)
-        {
-            start_x = d.position.x;
-        }
+
+        if (d.string_offset == selection_min) start_x = d.position.x;
+
         if ((d.string_offset == selection_max) || (d.char_code == 0 && start_x > -1.0f))
         {
             float end_x = d.position.x;
             float start_y = d.position.y - text_size;
             float end_y = start_y + text_size * 1.1f;
-            if (end_y < 0.0f)
-                continue;
-            if (start_y > text_rect.size.y)
-                continue;
+
+            if (end_y < 0.0f) continue;
+            if (start_y > text_rect.size.y) continue;
+
             start_y = std::max(0.0f, start_y);
             end_x = std::min(text_rect.size.x, end_x);
             end_y = std::min(text_rect.size.y, end_y);
+
             if (end_x != start_x)
             {
                 renderer.fillRect(
                     sp::Rect(rect.position + glm::vec2{start_x + 16, start_y},
                     glm::vec2{end_x - start_x, end_y - start_y}),
-                    {255, 255, 255, 128});
+                    {255, 255, 255, 128}
+                );
             }
-            if (d.string_offset == selection_max)
-                start_x = -1.0f;
-            else
-                start_x = 0.0f;
+
+            start_x = d.string_offset == selection_max
+                ? -1.0f
+                : 0.0f;
         }
         if (focus && d.string_offset == selection_end && typing_indicator)
         {
             float start_y = d.position.y - text_size;
             float end_y = start_y + text_size * 1.1f;
-            if (end_y < 0.0f)
-                continue;
-            if (start_y > text_rect.size.y)
-                continue;
+
+            if (end_y < 0.0f) continue;
+            if (start_y > text_rect.size.y) continue;
+
             start_y = std::max(0.0f, start_y);
             end_y = std::min(text_rect.size.y, end_y);
 
             renderer.fillRect(
                 sp::Rect(rect.position + glm::vec2{d.position.x + 16 - text_size * 0.05f, start_y},
                 glm::vec2{text_size * 0.1f, end_y - start_y}),
-                {255, 255, 255, 255});
+                {255, 255, 255, 255}
+            );
         }
     }
     renderer.drawText(text_rect, prepared, sp::Font::FlagClip);
@@ -153,12 +175,14 @@ void GuiTextEntry::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiTextEntry::onTextInput(const string& text)
 {
-    if (readonly)
-        return;
-    if (blink_timer.isRunning()) {
+    if (readonly) return;
+
+    if (blink_timer.isRunning())
+    {
         typing_indicator = true;
         blink_timer.repeat(blink_rate);
     }
+
     this->text = this->text.substr(0, std::min(selection_start, selection_end)) + text + this->text.substr(std::max(selection_start, selection_end));
     selection_end = selection_start = std::min(selection_start, selection_end) + text.length();
     runChangeCallback();
@@ -166,30 +190,30 @@ void GuiTextEntry::onTextInput(const string& text)
 
 void GuiTextEntry::onTextInput(sp::TextInputEvent e)
 {
-    if (blink_timer.isRunning()) {
+    if (blink_timer.isRunning())
+    {
         typing_indicator = true;
         blink_timer.repeat(blink_rate);
     }
-    switch(e)
+
+    switch (e)
     {
     case sp::TextInputEvent::Left:
     case sp::TextInputEvent::LeftWithSelection:
-        if (selection_end > 0)
-            selection_end -= 1;
+        if (selection_end > 0) selection_end -= 1;
         if (e != sp::TextInputEvent::LeftWithSelection)
             selection_start = selection_end;
         break;
     case sp::TextInputEvent::Right:
     case sp::TextInputEvent::RightWithSelection:
-        if (selection_end < int(text.length()))
+        if (selection_end < static_cast<int>(text.length()))
             selection_end += 1;
         if (e != sp::TextInputEvent::RightWithSelection)
             selection_start = selection_end;
         break;
     case sp::TextInputEvent::WordLeft:
     case sp::TextInputEvent::WordLeftWithSelection:
-        if (selection_end > 0)
-            selection_end -= 1;
+        if (selection_end > 0) selection_end -= 1;
         while (selection_end > 0 && !isspace(text[selection_end - 1]))
             selection_end -= 1;
         if (e != sp::TextInputEvent::WordLeftWithSelection)
@@ -197,49 +221,57 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
         break;
     case sp::TextInputEvent::WordRight:
     case sp::TextInputEvent::WordRightWithSelection:
-        while (selection_end < int(text.length()) && !isspace(text[selection_end]))
+        while (selection_end < static_cast<int>(text.length()) && !isspace(text[selection_end]))
             selection_end += 1;
-        if (selection_end < int(text.length()))
+        if (selection_end < static_cast<int>(text.length()))
             selection_end += 1;
         if (e != sp::TextInputEvent::WordRightWithSelection)
             selection_start = selection_end;
         break;
     case sp::TextInputEvent::Up:
-    case sp::TextInputEvent::UpWithSelection:{
-        if (up_func)
+    case sp::TextInputEvent::UpWithSelection:
         {
-            up_func(text);
-            return;
+            if (up_func)
+            {
+                up_func(text);
+                return;
+            }
+
+            const int end_of_line = text.substr(0, selection_end).rfind("\n");
+            if (end_of_line < 0) return;
+
+            const int start_of_line = text.substr(0, end_of_line).rfind("\n") + 1;
+            const int offset = selection_end - end_of_line - 1;
+            const int line_length = end_of_line - start_of_line;
+
+            selection_end = start_of_line + std::min(line_length, offset);
+            if (e != sp::TextInputEvent::UpWithSelection)
+                selection_start = selection_end;
         }
-        int end_of_line = text.substr(0, selection_end).rfind("\n");
-        if (end_of_line < 0)
-            return;
-        int start_of_line = text.substr(0, end_of_line).rfind("\n") + 1;
-        int offset = selection_end - end_of_line - 1;
-        int line_length = end_of_line - start_of_line;
-        selection_end = start_of_line + std::min(line_length, offset);
-        if (e != sp::TextInputEvent::UpWithSelection)
-            selection_start = selection_end;
-        }break;
+        break;
     case sp::TextInputEvent::Down:
-    case sp::TextInputEvent::DownWithSelection:{
-        if (down_func)
+    case sp::TextInputEvent::DownWithSelection:
         {
-            down_func(text);
-            return;
+            if (down_func)
+            {
+                down_func(text);
+                return;
+            }
+
+            const int start_of_current_line = text.substr(0, selection_end).rfind("\n") + 1;
+            const int end_of_current_line = text.find("\n", selection_end);
+            if (end_of_current_line < 0) return;
+
+            int end_of_end_line = text.find("\n", end_of_current_line + 1);
+            if (end_of_end_line == -1) end_of_end_line = text.length();
+
+            const int offset = selection_end - start_of_current_line;
+            selection_end = end_of_current_line + 1 + std::min(offset, end_of_end_line - (end_of_current_line + 1));
+
+            if (e != sp::TextInputEvent::DownWithSelection)
+                selection_start = selection_end;
         }
-        int start_of_current_line = text.substr(0, selection_end).rfind("\n") + 1;
-        int end_of_current_line = text.find("\n", selection_end);
-        if (end_of_current_line < 0)
-            return;
-        int end_of_end_line = text.find("\n", end_of_current_line + 1);
-        if (end_of_end_line == -1)
-            end_of_end_line = text.length();
-        int offset = selection_end - start_of_current_line;
-        selection_end = end_of_current_line + 1 + std::min(offset, end_of_end_line - (end_of_current_line + 1));
-        if (e != sp::TextInputEvent::DownWithSelection)
-            selection_start = selection_end;
-        }break;
+        break;
     case sp::TextInputEvent::LineStart:
     case sp::TextInputEvent::LineStartWithSelection:
         selection_end = text.substr(0, selection_end).rfind("\n") + 1;
@@ -249,8 +281,7 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
     case sp::TextInputEvent::LineEnd:
     case sp::TextInputEvent::LineEndWithSelection:
         selection_end = text.find("\n", selection_start);
-        if (selection_end == -1)
-            selection_end = text.length();
+        if (selection_end == -1) selection_end = text.length();
         if (e != sp::TextInputEvent::LineEndWithSelection)
             selection_start = selection_end;
         break;
@@ -271,18 +302,19 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
         selection_start = text.length();
         break;
     case sp::TextInputEvent::Delete:
-        if (readonly)
-            return;
+        if (readonly) return;
+
         if (selection_start != selection_end)
             text = text.substr(0, std::min(selection_start, selection_end)) + text.substr(std::max(selection_start, selection_end));
         else
             text = text.substr(0, selection_start) + text.substr(selection_start + 1);
+
         selection_start = selection_end = std::min(selection_start, selection_end);
         runChangeCallback();
         break;
     case sp::TextInputEvent::Backspace:
-        if (readonly)
-            return;
+        if (readonly) return;
+
         if (selection_start != selection_end)
         {
             onTextInput(sp::TextInputEvent::Delete);
@@ -297,8 +329,8 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
         }
         break;
     case sp::TextInputEvent::Indent:
-        if (readonly)
-            return;
+        if (readonly) return;
+
         if (selection_start == selection_end)
         {
             int start_of_line = text.substr(0, selection_end).rfind("\n") + 1;
@@ -326,62 +358,53 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
         }
         break;
     case sp::TextInputEvent::Unindent:
-        if (readonly)
-            return;
-        if (selection_start == selection_end)
+        if (readonly) return;
+
+        if (selection_start != selection_end)
         {
-        }
-        else
-        {
-            int start_of_line = text.substr(0, std::min(selection_start, selection_end)).rfind("\n") + 1;
+            const int start_of_line = text.substr(0, std::min(selection_start, selection_end)).rfind("\n") + 1;
             auto data = text.substr(start_of_line, std::max(selection_start, selection_end));
-            for(int n=0; n<4; n++)
+
+            for (int n = 0; n < 4; n++)
             {
-                if (data.startswith(" "))
-                    data = data.substr(1);
+                if (data.startswith(" ")) data = data.substr(1);
                 data = data.replace("\n ", "\n");
             }
-            int removed_length = (std::max(selection_start, selection_end) - start_of_line) - data.length();
+
+            const int removed_length = (std::max(selection_start, selection_end) - start_of_line) - data.length();
             text = text.substr(0, start_of_line) + data + text.substr(std::max(selection_start, selection_end));
 
             if (selection_start > selection_end)
                 selection_start -= removed_length;
-            else
-                selection_end -= removed_length;
+            else selection_end -= removed_length;
+
             runChangeCallback();
         }
         break;
     case sp::TextInputEvent::Return:
-        if (readonly)
-            return;
+        if (readonly) return;
+
         if (enter_func)
         {
             auto f = enter_func;
             f(text);
         }
-        else if (multiline)
-        {
-            onTextInput("\n");
-        }
+        else if (multiline) onTextInput("\n");
         break;
     case sp::TextInputEvent::ReturnWithNewline:
-        if (readonly)
-            return;
-        if (multiline)
-            onTextInput("\n");
+        if (readonly) return;
+        if (multiline) onTextInput("\n");
         break;
     case sp::TextInputEvent::Copy:
         Clipboard::setClipboard(text.substr(std::min(selection_start, selection_end), std::max(selection_start, selection_end)));
         break;
     case sp::TextInputEvent::Paste:
-        if (readonly)
-            return;
+        if (readonly) return;
         onTextInput(Clipboard::readClipboard());
         break;
     case sp::TextInputEvent::Cut:
         Clipboard::setClipboard(text.substr(std::min(selection_start, selection_end), std::max(selection_start, selection_end)));
-        if (readonly)
-            return;
+        if (readonly) return;
         if (selection_start != selection_end)
             onTextInput(sp::TextInputEvent::Delete);
         break;
@@ -390,10 +413,12 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
 
 void GuiTextEntry::onFocusGained()
 {
-    if (select_on_focus) {
-		selection_end = 0;
-		selection_start = text.length();
+    if (select_on_focus)
+    {
+        selection_end = 0;
+        selection_start = text.length();
     }
+
     typing_indicator = true;
     blink_timer.repeat(blink_rate);
     SDL_StartTextInput();
@@ -406,16 +431,18 @@ void GuiTextEntry::onFocusLost()
 
 bool GuiTextEntry::setAttribute(const string& key, const string& value)
 {
-    if (key == "style") {
+    if (key == "style")
+    {
         front_style = theme->getStyle(value + ".front");
         back_style = theme->getStyle(value + ".back");
         return true;
-    } else if (key == "readonly") {
+    }
+    else if (key == "readonly")
+    {
         readonly = value.toBool();
         return true;
-    } else {
-        return GuiElement::setAttribute(key, value);
     }
+    else  return GuiElement::setAttribute(key, value);
 }
 
 string GuiTextEntry::getText() const
@@ -426,8 +453,8 @@ string GuiTextEntry::getText() const
 GuiTextEntry* GuiTextEntry::setText(string text)
 {
     this->text = text;
-    selection_start = std::min(selection_start, int(text.length()));
-    selection_end = std::min(selection_end, int(text.length()));
+    selection_start = std::min(selection_start, static_cast<int>(text.length()));
+    selection_end = std::min(selection_end, static_cast<int>(text.length()));
     return this;
 }
 
@@ -487,7 +514,7 @@ GuiTextEntry* GuiTextEntry::downCallback(func_t func)
 
 void GuiTextEntry::setCursorPosition(int offset)
 {
-    selection_start = selection_end = std::clamp(offset, 0, int(text.size()));
+    selection_start = selection_end = std::clamp(offset, 0, static_cast<int>(text.size()));
 }
 
 void GuiTextEntry::setScrollOffset(float y)
@@ -500,33 +527,43 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
     position = position - rect.position - render_offset;
     position.x -= 16.0f;
     int result = text.size();
+
     const auto& front = front_style->get(getState());
-    //if (vertical_scroll)
-    //    position.y -= vertical_scroll->getValue();
+    // if (vertical_scroll) position.y -= vertical_scroll->getValue();
     std::string shown_text = text;
-    if (hide_password) {
+
+    if (hide_password)
         shown_text = std::string(text.size(), '*');
-    }
-    auto pfs = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, wrap ? sp::Font::FlagLineWrap : 0);
+
+    auto pfs = front.font->prepare(
+        shown_text,
+        32,
+        text_size,
+        {255, 255, 255, 255},
+        rect.size - glm::vec2(32.0f, 0.0f),
+        multiline
+            ? sp::Alignment::TopLeft
+            : sp::Alignment::CenterLeft,
+        wrap ?
+            sp::Font::FlagLineWrap
+            : 0
+    );
     unsigned int n;
-    for(n=0; n<pfs.data.size(); n++)
+    for (n = 0; n < pfs.data.size(); n++)
     {
         auto& d = pfs.data[n];
-        if (d.position.y > position.y)
-            break;
+        if (d.position.y > position.y) break;
     }
+
     if (n == pfs.data.size())
-    {
         return text.size();
-    }
+
     float line_y = pfs.data[n].position.y;
-    for(; n<pfs.data.size(); n++)
+    for (; n < pfs.data.size(); n++)
     {
         auto& d = pfs.data[n];
-        if (d.position.x > position.x)
-            break;
-        if (d.position.y > line_y)
-            break;
+        if (d.position.x > position.x) break;
+        if (d.position.y > line_y) break;
         result = d.string_offset;
     }
 
