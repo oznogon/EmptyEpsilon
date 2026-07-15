@@ -234,6 +234,8 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 
     chat_comms_message_entry = new GuiTextEntry(chat_comms_message_row, "COMMS_CHAT_MESSAGE_ENTRY", "");
     chat_comms_message_entry
+        ->setMultiline(true)
+        ->setWrap(true)
         ->enterCallback([this](string text)
             {
                 if (my_spaceship)

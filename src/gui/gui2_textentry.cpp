@@ -55,7 +55,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
             if (d.position.y > max_y)
                 max_y = d.position.y;
         }
-        if (wrap) {
+        if (wrap && !layout.fill_height) {
             auto required_height = std::max(linespacing, max_y + linespacing * 0.3f);
             rect.size.y = required_height;
             layout.size.y = required_height;

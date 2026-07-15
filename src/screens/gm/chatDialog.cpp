@@ -23,7 +23,7 @@ GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* ra
     chat_text->enableAutoScrollDown()->setScrollbarWidth(25)->setTextSize(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     text_entry = new GuiTextEntry(contents, "GM_CHAT_ENTRY", "");
-    text_entry->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 25.0f)->setMargins(0.0f, 10.0f, 0.0f, 0.0f);
+    text_entry->setTextSize(20)->setMultiline(true)->setWrap(true)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0.0f, 10.0f, 0.0f, 0.0f);
     text_entry->enterCallback(
         [this](string text)
         {
