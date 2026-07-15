@@ -67,7 +67,7 @@ function init()
 	first_station.comms_data.weapon_available.Nuke = true
 	first_station.comms_data.weapon_cost = {Homing = 2, HV, HVLI = math.random(1,3), Mine = math.random(2,5), Nuke = 12, EMP = 9}
 --	print("init: place first enemy station")
-	--place first enemy station for first mission 
+	--place first enemy station for first mission
 	exuari_station = {}
 	local exuari_station_angle = first_station_angle + random(-20,20)
 	local enemy_station_distance = random(11000,15000)
@@ -129,7 +129,7 @@ function init()
 --	print("init: place second and third stations")
 	--place second and third stations
 	local second_station_angle = first_station_angle + random(90,140)
-	if second_station_angle > 360 then 
+	if second_station_angle > 360 then
 		second_station_angle = second_station_angle - 360
 	end
 	player_to_station_distance = player_to_station_distance + random(1000,8000)
@@ -139,7 +139,7 @@ function init()
 	table.insert(station_list,pStation)
 	setOptionalAddBeamMission(pStation)
 	second_station_angle = first_station_angle - random(90,140)
-	if second_station_angle < 0 then 
+	if second_station_angle < 0 then
 		second_station_angle = second_station_angle + 360
 	end
 	player_to_station_distance = player_to_station_distance + random(1000,8000)
@@ -322,13 +322,13 @@ function setConstants()
 			[3] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
-				{angle =  1, distance = 1},				
+				{angle =  1, distance = 1},
 			},
 			[4] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
 				{angle =  1, distance = 1},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[5] = {
 				{angle =  0, distance = 0},
@@ -343,7 +343,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[7] = {
 				{angle =  0, distance = 0},
@@ -360,7 +360,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 			},
@@ -381,7 +381,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -406,7 +406,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -435,7 +435,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 4},
@@ -451,7 +451,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 3},
@@ -621,7 +621,7 @@ function setInitialContractDetails()
 	first_station.comms_data.contract = {}
 	first_station.comms_data.contract["one_to_two"] = {
 		type = "start",
-		prompt = string.format(_("contract-comms", "Deliver three %s to %s. Upon delivery, they will increase your hull strength"),good_desc[independent_station[2].comms_data.characterGood],independent_station[2]:getCallSign()), 
+		prompt = string.format(_("contract-comms", "Deliver three %s to %s. Upon delivery, they will increase your hull strength"),good_desc[independent_station[2].comms_data.characterGood],independent_station[2]:getCallSign()),
 		short_prompt = string.format(_("contract-comms", "Three %s to %s"),good_desc[independent_station[2].comms_data.characterGood],independent_station[2]:getCallSign()),
 		accepted = false,
 		func = start1to2delivery,
@@ -1039,7 +1039,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 		for ndex=1,arcLen do
 			local radialPoint = startArc+ndex
 			local pointDist = distance + random(-randomize,randomize)
-			last_object = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			last_object = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 			if isObjectType(last_object,"Asteroid") then
 				last_object:setSize(asteroidSize())
 			end
@@ -1048,7 +1048,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 		for ndex=1,amount-arcLen do
 			radialPoint = random(startArc,endArcClockwise)
 			pointDist = distance + random(-randomize,randomize)
-			last_object = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			last_object = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 			if isObjectType(last_object,"Asteroid") then
 				last_object:setSize(asteroidSize())
 			end
@@ -1112,7 +1112,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 	local temp_list = nil
 --	print("curvaceous asteroids: above asteroids")
 	if random(1,100) <= 47 then	--center closer to station
-		local aax, aay = vectorFromAngle(first_station_angle,arc_leg) 
+		local aax, aay = vectorFromAngle(first_station_angle,arc_leg)
 		if random(1,100) <= 47 then	--right curve
 			arx, ary, temp_list = createRandomAlongArc(Asteroid, math.floor(asteroid_density*arc_segment), (fsx/2)+aax, (fsy/2)+aay, arc_leg, first_station_angle_inverted, first_station_angle_inverted + arc_segment, player_to_station_distance/width_divisor)
 			asteroid_list = add_to_list(temp_list,asteroid_list)
@@ -1157,9 +1157,9 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 				brx, bry, temp_list = createRandomAlongArc(Asteroid, math.floor(asteroid_density*arc_segment), (fsx/2)+aax, (fsy/2)+aay, arc_leg, start_arc, arc_end, player_to_station_distance/width_divisor)
 				asteroid_list = add_to_list(temp_list,asteroid_list)
 			end
-		end			
+		end
 	else	--center closer to player
-		aax, aay = vectorFromAngle(first_station_angle_inverted,arc_leg) 
+		aax, aay = vectorFromAngle(first_station_angle_inverted,arc_leg)
 		if random(1,100) <= 47 then	--right curve
 			arx, ary, temp_list = createRandomAlongArc(Asteroid, math.floor(asteroid_density*arc_segment), (fsx/2)+aax, (fsy/2)+aay, arc_leg, first_station_angle, first_station_angle + arc_segment, player_to_station_distance/width_divisor)
 			asteroid_list = add_to_list(temp_list,asteroid_list)
@@ -1329,7 +1329,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 				selected_asteroid.pyroxene = math.random(1,140)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.pyroxene
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format(_("scienceDescription-asteroid", "%spyroxene:remainder"),scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%spyroxene:remainder"),scanned_description)
 				else
 					scanned_description = string.format(_("scienceDescription-asteroid", "%spyroxene:%.1f%% "),scanned_description,selected_asteroid.pyroxene)
 				end
@@ -1338,7 +1338,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 				selected_asteroid.olivine = math.random(1,150)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.olivine
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format(_("scienceDescription-asteroid", "%solivine:remainder"),scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%solivine:remainder"),scanned_description)
 				else
 					scanned_description = string.format(_("scienceDescription-asteroid", "%solivine:%.1f%% "),scanned_description,selected_asteroid.olivine)
 				end
@@ -1347,7 +1347,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 				selected_asteroid.cobalt = math.random(1,160)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.cobalt
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format(_("scienceDescription-asteroid", "%scobalt:remainder"),scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%scobalt:remainder"),scanned_description)
 				else
 					scanned_description = string.format(_("scienceDescription-asteroid", "%scobalt:%.1f%% "),scanned_description,selected_asteroid.cobalt)
 				end
@@ -1356,7 +1356,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 				selected_asteroid.dilithium = math.random(1,170)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.dilithium
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format(_("scienceDescription-asteroid", "%sdilithium:remainder"),scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%sdilithium:remainder"),scanned_description)
 				else
 					scanned_description = string.format(_("scienceDescription-asteroid", "%sdilithium:%.1f%% "),scanned_description,selected_asteroid.dilithium)
 				end
@@ -1365,7 +1365,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 				selected_asteroid.calcium = math.random(1,180)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.calcium
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format(_("scienceDescription-asteroid", "%scalcium:remainder"),scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%scalcium:remainder"),scanned_description)
 				else
 					scanned_description = string.format(_("scienceDescription-asteroid", "%scalcium:%.1f%% "),scanned_description,selected_asteroid.calcium)
 				end
@@ -1374,7 +1374,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 				selected_asteroid.nickel = math.random(1,190)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.nickel
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format(_("scienceDescription-asteroid", "%snickel:remainder"),scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%snickel:remainder"),scanned_description)
 				else
 					scanned_description = string.format(_("scienceDescription-asteroid", "%snickel:%.1f%% "),scanned_description,selected_asteroid.nickel)
 				end
@@ -1383,7 +1383,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 				selected_asteroid.iron = math.random(1,200)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.iron
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format(_("scienceDescription-asteroid", "%siron:remainder"),scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%siron:remainder"),scanned_description)
 				else
 					scanned_description = string.format(_("scienceDescription-asteroid", "%siron:%.1f%% "),scanned_description,selected_asteroid.iron)
 				end
@@ -1393,7 +1393,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 					scanned_description = string.format(_("scienceDescription-asteroid", "%s, %srock:remainder"),unscanned_description, scanned_description)
 				end
 			else
-				scanned_description = string.format(_("scienceDescription-asteroid", "%s, just rock"),unscanned_description, scanned_description)			
+				scanned_description = string.format(_("scienceDescription-asteroid", "%s, just rock"),unscanned_description, scanned_description)
 			end
 		end
 		selected_asteroid:setDescriptions(unscanned_description,scanned_description)
@@ -1441,7 +1441,7 @@ function beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned
 	if damage ~= nil then
 		local damage_increment = beam_levels[getScenarioSetting("Murphy")].dmg
 		if artifact_scanned ~= nil and artifact_scanned then
-			damage_increment = damage_increment + 1 
+			damage_increment = damage_increment + 1
 		end
 		local beam_index = 0
 		repeat
@@ -1540,7 +1540,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, perimeter_min, per
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	local enemyStrength = math.max(danger * enemy_power * playerPower(),5)
@@ -1707,7 +1707,7 @@ function setOptionalAddBeamMission(beam_station)
 	local mineral_good = stationMineralGood(first_station)
 	if efficient_battery_diagnostic then print("determined mineral good: " .. mineral_good) end
 	beam_station.comms_data.characterGood = mineral_good
-	--add clue station here	
+	--add clue station here
 end
 function stationMineralGood(mineral_station)
 	if mineral_station == nil or not mineral_station:isValid() then
@@ -1764,18 +1764,18 @@ function burnOutArtifactPickup(self, picker)
 	if self:isScannedBy(picker) then
 		picker:setSystemHealth("beamweapons",picker:getSystemHealth("beamweapons") - random(.5,1))
 		if difficulty >= 1 then
-			picker:setSystemHealth("frontshield",picker:getSystemHealth("frontshield") - random(.5,1))			
+			picker:setSystemHealth("frontshield",picker:getSystemHealth("frontshield") - random(.5,1))
 		end
 		if difficulty >= 2 then
-			picker:setSystemHealth("maneuver",picker:getSystemHealth("maneuver") - random(.5,1))			
+			picker:setSystemHealth("maneuver",picker:getSystemHealth("maneuver") - random(.5,1))
 		end
 	else
 		picker:setSystemHealth("beamweapons",-1)
 		if difficulty >= 1 then
-			picker:setSystemHealth("frontshield",-1)			
+			picker:setSystemHealth("frontshield",-1)
 		end
 		if difficulty >= 2 then
-			picker:setSystemHealth("maneuver",-1)			
+			picker:setSystemHealth("maneuver",-1)
 		end
 	end
 	picker:addToShipLog(_("artifact-shipLog", "The artifact we picked up has damaged our ship"),"Magenta")
@@ -1944,10 +1944,10 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
+		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or
+			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or
+			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or
+			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or
 			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
 			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				if stationCommsDiagnostic then print("in restock function") end
@@ -2545,7 +2545,7 @@ function handleDockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-	else	--neutral 
+	else	--neutral
 		if math.random(1,5) <= (3 - difficulty) then
 			if comms_source:getRepairCrewCount() < comms_source.maxRepairCrew then
 				hireCost = math.random(45,90)
@@ -2562,7 +2562,7 @@ function handleDockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-	end	--end friendly/neutral 
+	end	--end friendly/neutral
 	if goodCount > 0 then
 		addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
 			local goodsReport = string.format(_("forSaleTrade-comms", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
@@ -3067,7 +3067,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -3117,7 +3117,7 @@ function handleWeaponRestock(weapon)
 				end)
 			else
 				setCommsMessage(_("needRep-comms", "Not enough reputation."))
-				return				
+				return
 			end
 		end
         addCommsReply(_("Back"), commsStation)
@@ -3339,7 +3339,7 @@ function handleUndockedState()
 				for n=0,shields-1 do
 					msg = msg .. string.format(_("stationAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 				end
-			end			
+			end
 			setCommsMessage(msg);
 			addCommsReply(_("Back"), commsStation)
 		end)
@@ -4121,7 +4121,7 @@ function shrinkBeamCycle()
 					setCommsMessage(string.format(_("upgrade-comms", "%s reduced your Beam cycle time at no cost in trade with the message, 'Go get those Kraylors.'"),comms_target.comms_data.character))
 				end
 			else
-				setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))				
+				setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))
 			end
 		end)
 	end
@@ -4558,7 +4558,7 @@ function exuariHarassment(delta)
 							if isObjectType(obj,"PlayerSpaceship") then
 								if obj:getFactionId() ~= enemy:getFactionId() then
 									enemy_in_range = true
-									break									
+									break
 								end
 							end
 						end
@@ -4571,7 +4571,7 @@ function exuariHarassment(delta)
 							if isObjectType(obj,"PlayerSpaceship") then
 								if obj:getFactionId() ~= enemy:getFactionId() then
 									enemy_in_range = true
-									break									
+									break
 								end
 							end
 						end
@@ -4587,7 +4587,7 @@ function exuariHarassment(delta)
 						if isObjectType(obj,"PlayerSpaceship") then
 							if obj:getFactionId() ~= enemy:getFactionId() then
 								enemy_in_range = true
-								break									
+								break
 							end
 						end
 					end
@@ -4669,7 +4669,7 @@ function exuariHarassment(delta)
 								if isObjectType(obj,"PlayerSpaceship") then
 									if obj:getFactionId() ~= enemy:getFactionId() then
 										enemy_in_range = true
-										break									
+										break
 									end
 								end
 							end
@@ -4682,7 +4682,7 @@ function exuariHarassment(delta)
 								if isObjectType(obj,"PlayerSpaceship") then
 									if obj:getFactionId() ~= enemy:getFactionId() then
 										enemy_in_range = true
-										break									
+										break
 									end
 								end
 							end
@@ -4698,7 +4698,7 @@ function exuariHarassment(delta)
 							if isObjectType(obj,"PlayerSpaceship") then
 								if obj:getFactionId() ~= enemy:getFactionId() then
 									enemy_in_range = true
-									break									
+									break
 								end
 							end
 						end
@@ -4818,16 +4818,16 @@ function longDistanceCargo(delta)
 			if p.goods ~= nil then
 				if p.goods["food"] == nil or p.goods["food"] < 1 then
 					missing_good = true
-				end		
+				end
 				if p.goods["medicine"] == nil or p.goods["medicine"] < 1 then
 					missing_good = true
-				end		
+				end
 				if p.goods["dilithium"] == nil or p.goods["dilithium"] < 1 then
 					missing_good = true
-				end		
+				end
 				if p.goods["tritanium"] == nil or p.goods["tritanium"] < 1 then
 					missing_good = true
-				end	
+				end
 			else
 				missing_good = true
 			end
@@ -5041,7 +5041,7 @@ function kraylorDiversionarySabotage(delta)
 			primaryOrders = _("KraylorOrders-comms", "Repel Kraylor")
 		end
 		if diversionary_sabotage_fleet == nil then
-			if planet_secondus_moon ~= nil and planet_secondus_moon:isValid() then 
+			if planet_secondus_moon ~= nil and planet_secondus_moon:isValid() then
 				local base_range = 10000
 				local player_scanner_range = player:getLongRangeRadarRange()
 				local rvx,rvy = vectorFromAngle(random(0,360),random(base_range,player_scanner_range + base_range))
@@ -5379,7 +5379,7 @@ function contractTarget(delta)
 								if details.type == "fulfill" then
 									if not details.fulfilled then
 										contract_remains = true
-										break							
+										break
 									end
 								end
 							end

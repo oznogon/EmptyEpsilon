@@ -136,7 +136,7 @@ function start_havoc(delta)
         spy_x, spy_y = spyprobe:getPosition()
         mission_state=spyprobe_disabled
         player1:setReputationPoints((player1:getReputationPoints()+25))
-    end     
+    end
 end
 
 function spyprobe_disabled(delta)
@@ -155,7 +155,7 @@ function spyprobe_disabled(delta)
         mission_state=order_dock
         shieldfreq= 400+(player1:getShieldsFrequency())*20
         local ax, ay = art:getPosition();
-        local x, y = player:getPosition(); 
+        local x, y = player:getPosition();
         if shieldfreq == art.freq and player:getShieldsActive() == true then
             ElectricExplosionEffect():setPosition(x,y):setSize(200)
             player:takeDamage(1, "kinetic",ax, ay)
@@ -165,21 +165,21 @@ function spyprobe_disabled(delta)
             player:takeDamage(50, "kinetic",ax, ay)
             globalMessage(_("Additional debris created!"))
         end
-    end)    
+    end)
 end
 
 function order_dock(delta)
-    if dock_message_sent==0 then        
+    if dock_message_sent==0 then
         init_player2()
-        player2:commandDock(geo_1)   
-        geo_1:sendCommsMessage(player1, _([[It looks like the old satellite was hit by a piece of space debris and thus reactivated. This also caused it to malfunction. 
+        player2:commandDock(geo_1)
+        geo_1:sendCommsMessage(player1, _([[It looks like the old satellite was hit by a piece of space debris and thus reactivated. This also caused it to malfunction.
 Just before its deactivation, it was able to send a signal. We have to investigate this.
-But first, please dock with us. If necessary, we can repair the hull, and you can recharge your energy. 
+But first, please dock with us. If necessary, we can repair the hull, and you can recharge your energy.
 After that, you will receive further orders.]]))
-        
+
         dock_message_sent=dock_message_sent+1
     end
-    
+
     if player1:isDocked(geo_1) and dock_message_sent==1 and player1:isCommsInactive() then
         player2:commandDock(geo_1)
         initSatNetwork()
@@ -197,14 +197,14 @@ We are currently making a plan to stop this. Please stay docked until you get ne
         end
         player1:addCustomButton("Weapons","change_ship_btn",_("change ship"),change_ship)
         player1:addCustomButton("Tactical","change_ship_btn_tac",_("change ship"),change_ship)
-            dock_message_sent=dock_message_sent+1        
-    end    
+            dock_message_sent=dock_message_sent+1
+    end
 end
 
 function change_ship()
     player1:transferPlayersToShip(player2)
     player2:setCallSign("Tidy-2")
-    geo_1:sendCommsMessage(player2, _([[Welcome to the new ship. It is smaller and more unsuspicious. On the downside, it is also less robust. Instead of a jump drive, it is equipped with a so-called warp drive. 
+    geo_1:sendCommsMessage(player2, _([[Welcome to the new ship. It is smaller and more unsuspicious. On the downside, it is also less robust. Instead of a jump drive, it is equipped with a so-called warp drive.
 You can fly much faster with it, but the drive tends to overheat easily. Keep in mind to turn off all non-essential systems and devices as soon you are getting closer to the dangerous satellites.
 This ship has a transmitter installed that is strong enough to overwhelm the jammer of the control node and to send a shutdown signal. But you have to be very close for it to work.
 We detected the control node at a heading of about 125 degrees from our position, but a newly formed dust cloud prevents us to get more details. We don't know if this cloud was created intentionally to serve as a hiding place. It might as well be a side effect of their destructive activities or just fuel leaking out of their old tanks. Good luck!
@@ -228,7 +228,7 @@ function towards_commandnode(delta)
         player2:removeCustom("out_of_reach_info")
         player2:removeCustom("out_of_reach_info_plus")
         mission_state=misson_idle
-   end   
+   end
 end
 
 function activate_transmitter()
@@ -250,14 +250,14 @@ function activate_transmitter()
     escalation=20
     for n=1,probe_amount do
         probe[n]:orderRoaming():setSystemHealth("Maneuvering",0.85)
-    end        
+    end
 end
 
 function boot_transmitter(delta)
     charge_timer=charge_timer+delta
     transmitter_charge=charge_timer+10
-    
-    if charge_timer>20 and transmitter_charge > (transmitter_txt + transmitter_step) then 
+
+    if charge_timer>20 and transmitter_charge > (transmitter_txt + transmitter_step) then
         transmitter_txt = math.floor(transmitter_txt + transmitter_step)
         player2:addCustomInfo("Engineering","activate_transmitter_info",_("Transmitter charging")..": "..transmitter_txt.."%")
         player2:addCustomInfo("Engineering+","activate_transmitter_info_plus",_("Transmitter charging")..": "..transmitter_txt.."%")
@@ -265,22 +265,22 @@ function boot_transmitter(delta)
     if charge_timer>20 and escalation==20 then
         for n=1,10 do
             probe[n]:setImpulseMaxSpeed(100):setSystemHealth("Impulse",0.1)
-            
+
         end
         escalation=30
     end
-    if charge_timer>30 and escalation==30 then 
+    if charge_timer>30 and escalation==30 then
         escalation=40
     end
     if charge_timer>40 and escalation==40 then
         probe[probe_amount]:setWeaponStorage("HVLI",1):setWeaponStorageMax("HVLI",1):setWeaponTubeCount(1):setImpulseMaxSpeed(100)
-        escalation=60      
+        escalation=60
     end
-    if charge_timer>60 and escalation==60 then 
+    if charge_timer>60 and escalation==60 then
         escalation=80
         transmitter_step=5
     end
-    if charge_timer>80 and escalation==80 then 
+    if charge_timer>80 and escalation==80 then
                 player2:addCustomMessage("Operations", "send_button_message", _("If not done yet, you should now change the headline of your sidebar from 'scan' to 'other', so you can send the signal as soon as it is available."))
         transmitter_step=1.5
         escalation=85
@@ -322,12 +322,12 @@ function connecting_shields(delta)
 end
 
 function send_signal()
-    local x, y = command_node:getPosition(); 
+    local x, y = command_node:getPosition();
     ElectricExplosionEffect():setPosition(x,y):setSize(500)
     player2:removeCustom("send_signal_btn")
     player2:removeCustom("send_signal_btn_ops")
     sending_timer=0
-    
+
     BeamEffect():setSource(player2, 0, 0, 0):setTarget(command_node, 0, 0):setDuration(3):setRing(false):setTexture("texture/electric_sphere_texture.png")
     mission_state=sending_signal
     for n=1,probe_amount do
@@ -341,7 +341,7 @@ function sending_signal(delta)
         globalMessage(_("Rogue satellites shut down"))
         geo_1:sendCommsMessage(player2, _([[Congratulations! You saved the global satellite network from destruction. I call this a successful test run and we're gonna initiate the production of our fleet of tidying ships immediately. So eventually, we will get rid of this space junk problem once and for all. You and the rest of your crew did a great job!]]))
         mission_state=mission_victory
-    end       
+    end
 end
 
 function mission_victory(delta)
@@ -408,7 +408,7 @@ function initSatNetwork()
         Nebula():setPosition(86578, -12988)
         Nebula():setPosition(92935, -15086)
         Nebula():setPosition(91476, -8925)
-          
+
         placeProbesAroundPoint(probe_amount,2000,5000,90000,-12000)
         placeRandomAroundPoint(VisualAsteroid,50,1,5000,90000,-12000)
         command_node= WarpJammer():setPosition(90000,-12000):setRange(2500):setCallSign("Control"):setDescription(_("This is the command node that controls the rogue satellites. We have to shut it down!"))
@@ -423,19 +423,19 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
         local f = random(0, 1)
         local x = x1 + (x2 - x1) * f
         local y = y1 + (y2 - y1) * f
-        
+
         local r = random(0, 360)
         local distance = random(0, random_amount)
         x = x + math.cos(r / 180 * math.pi) * distance
         y = y + math.sin(r / 180 * math.pi) * distance
-                
+
         local freq = math.floor(random(20, 40)) * 20
-        
+
         callsign_counter = callsign_counter + math.floor(random(1,200))
         local callsign = callsign_counter
         debris = Artifact():setPosition(x, y):setDescriptions(_("A piece of space junk. Scan to find out the capturing frequency"), _("Capturing frequency:").." "..freq):setScanningParameters(1, 2)
         debris.freq=freq
-        if freq < 595 then 
+        if freq < 595 then
             debris:setModel("debris-cubesat")
         else
             debris:setModel("debris-blob")
@@ -444,11 +444,11 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
         debris:setCallSign(callsign):setFaction("Human Navy"):setRadarTraceColor(255,235,170)
         debris.components.radar_trace.radius=120 -- same scaling as asteroids
         debris.components.radar_trace.min_size=4 -- to look similar on the radar
-        
+
         debris:onPickUp(function(art, player)  ;
             shieldfreq= 400+(player1:getShieldsFrequency())*20
             local ax, ay = art:getPosition();
-            local x, y = player:getPosition(); 
+            local x, y = player:getPosition();
             if shieldfreq == art.freq and player:getShieldsActive() == true then
                 ElectricExplosionEffect():setPosition(x,y):setSize(200)
                 player:takeDamage(1, "kinetic",ax,ay );
@@ -461,9 +461,9 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
                 ExplosionEffect():setPosition(ax,ay):setSize(200)
                 player:takeDamage(50, "kinetic",ax,ay );
             end
-            debris_interactions=debris_interactions+1        
+            debris_interactions=debris_interactions+1
         end);
-        
+
     end
 end
 
@@ -490,13 +490,13 @@ function placeArtifactsAroundPoint( amount, dist_min, dist_max, x0, y0)
         sat = Artifact():setPosition(x, y):setDescriptions(_("An operational satellite"),_("This satellite is fully operational. Do not capture!")):setScanningParameters(1, 2)
         sat:setModel("cubesat"):setCallSign(callsign):setRadarTraceIcon("satellite.png"):setRadarTraceScale(1)
         sat:allowPickup(true)
-        
+
         sat:onPickUp(function(art, player)  ;
             local ax, ay = art:getPosition();
             local x, y = player:getPosition();
             ExplosionEffect():setPosition(ax,ay):setSize(200)
             player:takeDamage(50, "kinetic",ax,ay );
-            player1:setReputationPoints((player1:getReputationPoints()-10))        
-        end);                
+            player1:setReputationPoints((player1:getReputationPoints()-10))
+        end);
     end
 end

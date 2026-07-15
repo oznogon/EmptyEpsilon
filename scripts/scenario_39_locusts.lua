@@ -1,11 +1,11 @@
 -- Name: Locust Swarm
 -- Description: What happens when you're attacked by a swarm of locusts?
---- 
---- Designed to run with one or more player ships with different terrain each time. 
+---
+--- Designed to run with one or more player ships with different terrain each time.
 ---
 --- Version 1
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome.
 -- Type: Replayable
 -- Author: Xansta
 -- Setting[Swarm]: Configures the size of the swarm
@@ -30,8 +30,8 @@ function init()
 	if _VERSION ~= nil then
 		print("Lua version:",_VERSION)
 	end
-	setVariations()	
-	setConstants()	
+	setVariations()
+	setConstants()
 	constructEnvironment()
 	onNewPlayerShip(setPlayers)
 end
@@ -275,7 +275,7 @@ function setConstants()
 		["Repulse"]				= { strength = 14,	cargo = 12,	distance = 200,	long_range_radar = 38000, short_range_radar = 5000, tractor = true,		mining = false,	probes = 8,		pods = 5,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Striker"]				= { strength = 8,	cargo = 4,	distance = 200,	long_range_radar = 35000, short_range_radar = 5000, tractor = false,	mining = false,	probes = 6,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["ZX-Lindworm"]			= { strength = 8,	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 5500, tractor = false,	mining = false,	probes = 4,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 1,	epjam = 0,	},
-	--	Custom player ships	
+	--	Custom player ships
 		["Amalgam"]				= { strength = 42,	cargo = 7,	distance = 400,	long_range_radar = 36000, short_range_radar = 5000, tractor = false,	mining = false,	probes = 11,	pods = 3,	turbo_torp = true,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Atlantis II"]			= { strength = 60,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 11,	pods = 3,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Barrow"]				= { strength = 9,	cargo = 9,	distance = 400,	long_range_radar = 35000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 12,	pods = 3,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 2,	},
@@ -341,7 +341,7 @@ function setConstants()
 		["Small Station"] =	{count = math.random(3,4), dist = 2500, chance = 15},
 		["Medium Station"] ={count = math.random(3,5), dist = 3300, chance = 25},
 		["Large Station"] =	{count = math.random(4,6), dist = 4000, chance = 40},
-		["Huge Station"] =	{count = math.random(4,7), dist = 4500, chance = 65}, 
+		["Huge Station"] =	{count = math.random(4,7), dist = 4500, chance = 65},
 	}
 	station_defend_dist = {
 		["Small Station"] = 2800,	--2620
@@ -409,39 +409,39 @@ function constructEnvironment()
 		{
 			name = {"Alderaan","Dagobah","Dantooine","Rigel"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-1.png", 
-				cloud = "planets/clouds-1.png", 
+				surface = "planets/planet-1.png",
+				cloud = "planets/clouds-1.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 		},
 		{
 			name = {"Pahvo","Penthara","Scalos"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-4.png", 
-				cloud = "planets/clouds-3.png", 
+				surface = "planets/planet-4.png",
+				cloud = "planets/clouds-3.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 		},
 		{
 			name = {"Tanuga","Vacca","Terlina","Timor"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-5.png", 
-				cloud = "planets/clouds-2.png", 
+				surface = "planets/planet-5.png",
+				cloud = "planets/clouds-2.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 		},
@@ -572,7 +572,7 @@ function constructEnvironment()
 					table.insert(type_list,type_size.typ)
 				elseif type_size.typ == "Station" then
 					table.insert(type_list,type_size.typ)
-				end 
+				end
 			end
 		end
 		if #type_list > 0 then
@@ -971,7 +971,7 @@ function organicSystems(self,instigator)
 		self:setRotationMaxSpeed(15 + random(-2,2))
 	end
 end
---	Utility 
+--	Utility
 function angleFromVectorNorth(p1x,p1y,p2x,p2y)
 	TWOPI = 6.2831853071795865
 	RAD2DEG = 57.2957795130823209
@@ -1074,7 +1074,7 @@ function testFormation()
 		angle = angleFromVectorNorth(r7x,r7y,swarm_x,swarm_y)
 		dist = distance(r7x,r7y,swarm_x,swarm_y)
 		table.insert(fourth_ring,{ship = ship, x = r7x, y = r7y, dist = dist, angle = angle})
-		
+
 		local r8x, r8y = vectorFromAngleNorth(60*i,ship_spacing*5)
 		r8x = r8x + swarm_x
 		r8y = r8y + swarm_y
@@ -1116,7 +1116,7 @@ function testFormation()
 			angle = angleFromVectorNorth(r9x,r9y,swarm_x,swarm_y)
 			dist = distance(r9x,r9y,swarm_x,swarm_y)
 			table.insert(seventh_ring,{ship = ship, x = r9x, y = r9y, dist = dist, angle = angle})
-		end		
+		end
 		if i > 0 then
 			local r3x = (r2x + second_ring[i].x) / 2
 			local r3y = (r2y + second_ring[i].y) / 2
@@ -1157,7 +1157,7 @@ function testFormation()
 	for i,seventh in ipairs(seventh_ring) do
 		print("x:",seventh.x,"y:",seventh.y,"dist:",seventh.dist,"angle:",seventh.angle)
 	end
-	--	
+	--
 	swarm_x = 40000
 	swarm_y = 40000
 	local flight_angle = 135
@@ -1171,7 +1171,7 @@ function testFormation()
 	end
 	leader_ship:orderFlyTowards(100000,100000)
 end
---	Communications 
+--	Communications
 function commsBriefing()
 	string.format("")
 	setCommsMessage(string.format(_("orders-comms","Hello %s,\nOur sensors have picked up numerous Exuari ships."),comms_source:getCallSign()))
@@ -1258,7 +1258,7 @@ function getBriefingStation(p)
 	end
 	return station_briefing
 end
---	Update 
+--	Update
 function gatherSwarm()
 	if swarm_gather == nil then
 		local total_x = 0

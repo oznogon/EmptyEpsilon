@@ -283,7 +283,7 @@ function tableSelectRandom(array)
     if array_item_count == 0 then
         return nil
     end
-    return array[math.random(1,#array)]    
+    return array[math.random(1,#array)]
 end
 function angleFromVectorNorth(p1x,p1y,p2x,p2y)
     TWOPI = 6.2831853071795865
@@ -1207,7 +1207,7 @@ function catalogImprovements(msg)
             msg = string.format("%s\n%s.",msg,missile_provision_msg)
         end
     end
-    return msg,improvements    
+    return msg,improvements
 end
 --  Booleans to set outside of this utility to control this utility. Default is false
 --      generate_defense_fleet - set true if you want the station to have a defense fleet
@@ -1614,7 +1614,7 @@ function handleUndockedState()
                 interactiveUndockedStationComms()
             end
         end
-    end    
+    end
 end
 --  Booleans to set outside of this utility to control this utility. Default is false
 --      current_orders_button - set true if players can check with stations to get their
@@ -3383,7 +3383,7 @@ function setExpediteDock()
                         _("station-comms","No more services are available for fast dock."),
                     }
                     if service_list == _("station-comms","Expedited service list:") then
-                        out = string.format(_("station-comms","%s\n%s"),out,tableSelectRandom(no_more_services_addendum))                    
+                        out = string.format(_("station-comms","%s\n%s"),out,tableSelectRandom(no_more_services_addendum))
                     else
                         out = string.format(_("station-comms","%s\n%s.\n%s"),out,service_list,tableSelectRandom(no_more_services_addendum))
                     end
@@ -4384,7 +4384,7 @@ function stellarCartography()
             end)
         end
         addCommsReply(_("Back"), commsStation)
-    end)    
+    end)
 end
 function masterCartographer()
     if comms_source:takeReputationPoints(getCartographerCost("master")) then
@@ -4817,7 +4817,7 @@ function transportAndCargoMissions()
                             break
                         end
                     end
-                until(clean_list)                
+                until(clean_list)
                 if mission_type < 20 then
                     for _, station in ipairs(inner_stations) do
                         if station ~= nil and station:isValid() and station ~= comms_target then
@@ -5693,7 +5693,7 @@ function restockShip()
             (comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
                 restockOrdnance()
         end
-    end    
+    end
     if add_repair_crew then
         getRepairCrewFromStation()
     end
@@ -5923,7 +5923,7 @@ function handleWeaponRestock(weapon)
                     string.format(_("needRep-comms","%i reputation is insufficient"),math.floor(comms_source:getReputationPoints())),
                 }
                 setCommsMessage(tableSelectRandom(insufficient_rep_responses))
-                addCommsReply(_("Back"), commsStation)                
+                addCommsReply(_("Back"), commsStation)
             end
         end
         addCommsReply(_("Back"), commsStation)
@@ -7030,7 +7030,7 @@ function upgradePlayerShip(p,u_type)
             p:setWarpDrive(true)
             p:setWarpSpeed(upgrade_path[tempTypeName].ftl[current_level+1].warp)
         end
-    elseif u_type == "sensors" then        
+    elseif u_type == "sensors" then
         p:setLongRangeRadarRange(upgrade_path[tempTypeName].sensors[current_level+1].long)
         p.normal_long_range_radar = upgrade_path[tempTypeName].sensors[current_level+1].long
         p:setShortRangeRadarRange(upgrade_path[tempTypeName].sensors[current_level+1].short)
@@ -7147,7 +7147,7 @@ function downgradePlayerShip(p,u_type)
         else
             p:setWarpDrive(false)
         end
-    elseif u_type == "sensors" then        
+    elseif u_type == "sensors" then
         p:setLongRangeRadarRange(upgrade_path[tempTypeName].sensors[current_level-1].long)
         p.normal_long_range_radar = upgrade_path[tempTypeName].sensors[current_level-1].long
         p:setShortRangeRadarRange(upgrade_path[tempTypeName].sensors[current_level-1].short)
@@ -8963,7 +8963,7 @@ function friendlyShipComms()
                                             comms_target:setDescriptionForScanState("notscanned","")
                                             comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
                                             comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-                                            comms_target:setDescriptionForScanState("fullscan",manifest)    
+                                            comms_target:setDescriptionForScanState("fullscan",manifest)
                                         end
                                         addCommsReply(_("Back"), commsShip)
                                     end)
@@ -9004,7 +9004,7 @@ function friendlyShipComms()
                                             comms_target:setDescriptionForScanState("notscanned","")
                                             comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
                                             comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-                                            comms_target:setDescriptionForScanState("fullscan",manifest)    
+                                            comms_target:setDescriptionForScanState("fullscan",manifest)
                                         end
                                         local purchase_results = {
                                             string.format(_("trade-comms","One %s bought"),good_desc[good]),
@@ -9064,7 +9064,7 @@ function friendlyShipComms()
                                                 comms_target:setDescriptionForScanState("notscanned","")
                                                 comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
                                                 comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-                                                comms_target:setDescriptionForScanState("fullscan",manifest)    
+                                                comms_target:setDescriptionForScanState("fullscan",manifest)
                                             end
                                             local purchase_results = {
                                                 string.format(_("trade-comms","One %s bought"),good_desc[good]),
@@ -9121,7 +9121,7 @@ function friendlyShipComms()
                                                 comms_target:setDescriptionForScanState("notscanned","")
                                                 comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
                                                 comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-                                                comms_target:setDescriptionForScanState("fullscan",manifest)    
+                                                comms_target:setDescriptionForScanState("fullscan",manifest)
                                             end
                                             local purchase_results = {
                                                 string.format(_("trade-comms","One %s bought"),good_desc[good]),
@@ -9182,7 +9182,7 @@ function friendlyShipComms()
                                                 comms_target:setDescriptionForScanState("notscanned","")
                                                 comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
                                                 comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-                                                comms_target:setDescriptionForScanState("fullscan",manifest)    
+                                                comms_target:setDescriptionForScanState("fullscan",manifest)
                                             end
                                             local purchase_results = {
                                                 string.format(_("trade-comms","One %s bought"),good_desc[good]),
@@ -9344,8 +9344,8 @@ function enemyComms()
             },
             ["TSN"] = {threshold = 15, immolation = 2,
                 hail_response = {
-                    _("shipEnemy-comms","State your business"),                    
-                    _("shipEnemy-comms","What is your intent"),                    
+                    _("shipEnemy-comms","State your business"),
+                    _("shipEnemy-comms","What is your intent"),
                 },
                 taunt_groups = {
                     {
@@ -9555,7 +9555,7 @@ function getEnemyHealth(enemy)
             enemy_beam        * .02    +
             enemy_missile    * .02    +
             enemy_warp        * .02    +
-            enemy_jump        * .02    
+            enemy_jump        * .02
     elseif faction == "Exuari" then
         enemy_health =
             enemy_shield     * .2    +
@@ -9566,7 +9566,7 @@ function getEnemyHealth(enemy)
             enemy_beam        * .05    +
             enemy_missile    * .05    +
             enemy_warp        * .05    +
-            enemy_jump        * .05    
+            enemy_jump        * .05
     elseif faction == "Ghosts" then
         enemy_health =
             enemy_shield     * .25    +
@@ -9577,7 +9577,7 @@ function getEnemyHealth(enemy)
             enemy_beam        * .04    +
             enemy_missile    * .04    +
             enemy_warp        * .04    +
-            enemy_jump        * .04    
+            enemy_jump        * .04
     elseif faction == "Ktlitans" then
         enemy_health =
             enemy_shield     * .2    +
@@ -9588,7 +9588,7 @@ function getEnemyHealth(enemy)
             enemy_beam        * .05    +
             enemy_missile    * .05    +
             enemy_warp        * .1    +
-            enemy_jump        * .1    
+            enemy_jump        * .1
     elseif faction == "TSN" then
         enemy_health =
             enemy_shield     * .35    +
@@ -9599,7 +9599,7 @@ function getEnemyHealth(enemy)
             enemy_beam        * .02    +
             enemy_missile    * .01    +
             enemy_warp        * .08    +
-            enemy_jump        * .08    
+            enemy_jump        * .08
     elseif faction == "USN" then
         enemy_health =
             enemy_shield     * .38    +
@@ -9610,7 +9610,7 @@ function getEnemyHealth(enemy)
             enemy_beam        * .02    +
             enemy_missile    * .02    +
             enemy_warp        * .05    +
-            enemy_jump        * .05    
+            enemy_jump        * .05
     elseif faction == "CUF" then
         enemy_health =
             enemy_shield     * .35    +
@@ -9621,7 +9621,7 @@ function getEnemyHealth(enemy)
             enemy_beam        * .03    +
             enemy_missile    * .03    +
             enemy_warp        * .06    +
-            enemy_jump        * .04    
+            enemy_jump        * .04
     else
         enemy_health =
             enemy_shield     * .3    +
@@ -9632,7 +9632,7 @@ function getEnemyHealth(enemy)
             enemy_beam        * .03    +
             enemy_missile    * .03    +
             enemy_warp        * .05    +
-            enemy_jump        * .05    
+            enemy_jump        * .05
     end
     return enemy_health
 end
@@ -9754,7 +9754,7 @@ function neutralComms()
                                                 comms_target:setDescriptionForScanState("notscanned","")
                                                 comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
                                                 comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-                                                comms_target:setDescriptionForScanState("fullscan",manifest)    
+                                                comms_target:setDescriptionForScanState("fullscan",manifest)
                                             end
                                             local purchase_results = {
                                                 string.format(_("trade-comms","One %s bought"),good_desc[good]),
@@ -9813,7 +9813,7 @@ function neutralComms()
                                                 comms_target:setDescriptionForScanState("notscanned","")
                                                 comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
                                                 comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-                                                comms_target:setDescriptionForScanState("fullscan",manifest)    
+                                                comms_target:setDescriptionForScanState("fullscan",manifest)
                                             end
                                             local purchase_results = {
                                                 string.format(_("trade-comms","One %s bought"),good_desc[good]),
@@ -9874,7 +9874,7 @@ function neutralComms()
                                                 comms_target:setDescriptionForScanState("notscanned","")
                                                 comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
                                                 comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-                                                comms_target:setDescriptionForScanState("fullscan",manifest)    
+                                                comms_target:setDescriptionForScanState("fullscan",manifest)
                                             end
                                             local purchase_results = {
                                                 string.format(_("trade-comms","One %s bought"),good_desc[good]),
@@ -9933,7 +9933,7 @@ function neutralComms()
                                                 comms_target:setDescriptionForScanState("notscanned","")
                                                 comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
                                                 comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-                                                comms_target:setDescriptionForScanState("fullscan",manifest)    
+                                                comms_target:setDescriptionForScanState("fullscan",manifest)
                                             end
                                             local purchase_results = {
                                                 string.format(_("trade-comms","One %s bought"),good_desc[good]),
@@ -9994,7 +9994,7 @@ function neutralComms()
                                                 comms_target:setDescriptionForScanState("notscanned","")
                                                 comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
                                                 comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-                                                comms_target:setDescriptionForScanState("fullscan",manifest)    
+                                                comms_target:setDescriptionForScanState("fullscan",manifest)
                                             end
                                             local purchase_results = {
                                                 string.format(_("trade-comms","One %s bought"),good_desc[good]),
@@ -10259,7 +10259,7 @@ function neutralServiceJonqueComms(comms_data)
                             _("ship-comms","After careful consideration, we are declining your request."),
                             _("ship-comms","We thought about it, and we are not changing course."),
                             _("ship-comms","We would rather not change course at this time."),
-                            _("ship-comms","We prefer not to go there right now."),                            
+                            _("ship-comms","We prefer not to go there right now."),
                         }
                         setCommsMessage(tableSelectRandom(defend_wp_denial))
                     end
@@ -10335,7 +10335,7 @@ function neutralServiceJonqueComms(comms_data)
                         _("ship-comms","After careful consideration, we are declining your request."),
                         _("ship-comms","We thought about it, and we are not changing course."),
                         string.format(_("ship-comms","We don't wish to dock at %s right now."),obj:getCallSign()),
-                        string.format(_("ship-comms","We'd rather not dock at %s right now."),obj:getCallSign()),                    
+                        string.format(_("ship-comms","We'd rather not dock at %s right now."),obj:getCallSign()),
                     }
                     setCommsMessage(tableSelectRandom(dock_denial))
                 end
@@ -10377,7 +10377,7 @@ function commonServiceOptions()
                 _("ship-comms","Repair ship system"),
                 _("ship-comms","Fix ship system"),
                 string.format(_("ship-comms","Fix system on %s"),comms_source:getCallSign()),
-                string.format(_("ship-comms","Repair system on %s"),comms_source:getCallSign()),                
+                string.format(_("ship-comms","Repair system on %s"),comms_source:getCallSign()),
             }
             addCommsReply(tableSelectRandom(jonque_secondary_repair_prompts),function()
                 local identify_ship_system = {
@@ -10401,7 +10401,7 @@ function commonServiceOptions()
                                 _("ship-comms","Your probe launch system has been repaired."),
                                 _("ship-comms","We fixed your probe launch system."),
                                 string.format(_("ship-comms","%s fixed your probe launch system."),comms_target:getCallSign()),
-                                string.format(_("ship-comms","%s fixed the probe launch system on %s."),comms_target:getCallSign(),comms_source:getCallSign()),                                
+                                string.format(_("ship-comms","%s fixed the probe launch system on %s."),comms_target:getCallSign(),comms_source:getCallSign()),
                             }
                             setCommsMessage(tableSelectRandom(probes_fixed))
                         else
@@ -10430,7 +10430,7 @@ function commonServiceOptions()
                                 _("ship-comms","Your hacking system has been repaired."),
                                 _("ship-comms","We fixed your hacking system."),
                                 string.format(_("ship-comms","%s fixed your hacking system."),comms_target:getCallSign()),
-                                string.format(_("ship-comms","%s fixed the hacking system on %s."),comms_target:getCallSign(),comms_source:getCallSign()),                                
+                                string.format(_("ship-comms","%s fixed the hacking system on %s."),comms_target:getCallSign(),comms_source:getCallSign()),
                             }
                             setCommsMessage(tableSelectRandom(hacking_fixed))
                         else
@@ -10459,7 +10459,7 @@ function commonServiceOptions()
                                 _("ship-comms","Your scanning system has been repaired."),
                                 _("ship-comms","We fixed your scanning system."),
                                 string.format(_("ship-comms","%s fixed your scanning system."),comms_target:getCallSign()),
-                                string.format(_("ship-comms","%s fixed the scanning system on %s."),comms_target:getCallSign(),comms_source:getCallSign()),                                
+                                string.format(_("ship-comms","%s fixed the scanning system on %s."),comms_target:getCallSign(),comms_source:getCallSign()),
                             }
                             setCommsMessage(tableSelectRandom(scanning_fixed))
                         else
@@ -10488,7 +10488,7 @@ function commonServiceOptions()
                                 _("ship-comms","Your combat maneuver system has been repaired."),
                                 _("ship-comms","We fixed your combat maneuver system."),
                                 string.format(_("ship-comms","%s fixed your combat maneuver system."),comms_target:getCallSign()),
-                                string.format(_("ship-comms","%s fixed the combat maneuver system on %s."),comms_target:getCallSign(),comms_source:getCallSign()),                                
+                                string.format(_("ship-comms","%s fixed the combat maneuver system on %s."),comms_target:getCallSign(),comms_source:getCallSign()),
                             }
                             setCommsMessage(tableSelectRandom(combat_maneuver_fixed))
                         else
@@ -10517,7 +10517,7 @@ function commonServiceOptions()
                                 _("ship-comms","Your self destruct system has been repaired."),
                                 _("ship-comms","We fixed your self destruct system."),
                                 string.format(_("ship-comms","%s fixed your self destruct system."),comms_target:getCallSign()),
-                                string.format(_("ship-comms","%s fixed the self destruct system on %s."),comms_target:getCallSign(),comms_source:getCallSign()),                                
+                                string.format(_("ship-comms","%s fixed the self destruct system on %s."),comms_target:getCallSign(),comms_source:getCallSign()),
                             }
                             setCommsMessage(tableSelectRandom(self_destruct_fixed))
                         else
@@ -11035,7 +11035,7 @@ function commonServiceOptions()
                 _("ship-comms","Restock scan probes (5 reputation)"),
                 _("ship-comms","Resupply scan probes (5 reputation)"),
                 _("ship-comms","Replenish scan probes (5 reputation)"),
-                string.format(_("ship-comms","Restock scan probes for %s (5 reputation)"),comms_source:getCallSign())            
+                string.format(_("ship-comms","Restock scan probes for %s (5 reputation)"),comms_source:getCallSign())
             }
             addCommsReply(tableSelectRandom(jonque_restock_probes_prompts),function()
                 if distance(comms_source,comms_target) < 5000 then
@@ -11393,7 +11393,7 @@ function updatePlayerShieldBannerUtility(p)
         if p.shield_banner_epl ~= nil then
             p:removeCustom(p.shield_banner_epl)
             p.shield_banner_epl = nil
-        end        
+        end
     end
 end
 function updatePlayerWaypointDistanceButtonUtility(p)

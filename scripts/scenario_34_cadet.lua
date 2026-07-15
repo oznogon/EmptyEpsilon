@@ -3,7 +3,7 @@
 --- Beginner's mission. Player can save and restore if they can remember their key. The terrain differs each time the scenario runs.
 --- Duration: 1 - 2 hours
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
 ---
 --- Voice actors:
 --- Andrew "Snow" Kenny
@@ -53,105 +53,105 @@ function init()
 	player:setWeaponStorageMax("EMP", 0):setWeaponStorage("EMP", 0)
 	missions = {
 		{
-			level =		0,		
-			enemy =		true,	
-			desc =		"enemy group 1",		
-			fleet =		nil,	
+			level =		0,
+			enemy =		true,
+			desc =		"enemy group 1",
+			fleet =		nil,
 			strength =	10,
 			lo =		20000,
 			hi =		21000,
-			faction =	"Exuari",		
-			comp =		"Beamers", 
+			faction =	"Exuari",
+			comp =		"Beamers",
 			result =	player.enemy_group_1_destroyed,
 		},
 		{
-			level = 	1,		
-			enemy = 	false,	
+			level = 	1,
+			enemy = 	false,
 			desc = 		"get EMPs",
 		},
 		{
-			level = 	2,		
-			enemy = 	true,	
-			desc = 		"enemy group 2",		
+			level = 	2,
+			enemy = 	true,
+			desc = 		"enemy group 2",
 			fleet = 	nil,
 			strength =	15,
 			lo =		20000,
 			hi =		21000,
-			faction =	"Kraylor",	
-			comp = 		"Beamers", 
+			faction =	"Kraylor",
+			comp = 		"Beamers",
 			result = 	player.enemy_group_2_destroyed,
 		},
 		{
-			level = 	3,		
-			enemy = 	false,	
+			level = 	3,
+			enemy = 	false,
 			desc = 		"greater sensor reach",
 		},
 		{
-			level = 	4,		
-			enemy = 	true,	
-			desc = 		"enemy group 3",		
-			fleet = 	nil,	
+			level = 	4,
+			enemy = 	true,
+			desc = 		"enemy group 3",
+			fleet = 	nil,
 			strength =	20,
 			lo =		30000,
 			hi =		31000,
-			faction = 	"Ktlitans",		
-			comp = 		"Beamers", 
+			faction = 	"Ktlitans",
+			comp = 		"Beamers",
 			result = 	player.enemy_group_3_destroyed,
 		},
 		{
-			level = 	5,		
-			enemy = 	false,	
+			level = 	5,
+			enemy = 	false,
 			desc = 		"enable combat maneuver",
 		},
 		{
-			level = 	6,		
-			enemy = 	true,	
-			desc = 		"enemy group 4",		
+			level = 	6,
+			enemy = 	true,
+			desc = 		"enemy group 4",
 			fleet = 	nil,
 			strength =	25,
 			lo =		30000,
 			hi =		31000,
-			faction = 	"Ghosts",		
-			comp = 		"Random", 
+			faction = 	"Ghosts",
+			comp = 		"Random",
 			result = 	player.enemy_group_4_destroyed,
 		},
 		{
-			level = 	7,		
-			enemy = 	false,	
+			level = 	7,
+			enemy = 	false,
 			desc = 		"add jump drive",
 		},
 		{
-			level = 	8,		
-			enemy = 	true,	
-			desc = 		"enemy group 5",	
+			level = 	8,
+			enemy = 	true,
+			desc = 		"enemy group 5",
 			fleet = 	nil,
-			strength =	30,	
+			strength =	30,
 			lo =		30000,
 			hi =		31000,
-			faction = 	"Kraylor",		
-			comp = 		"Random", 
-			result = 	player.enemy_group_5_destroyed, 
+			faction = 	"Kraylor",
+			comp = 		"Random",
+			result = 	player.enemy_group_5_destroyed,
 		},
 		{
-			level = 	9,	
-			enemy = 	false,	
-			desc = 		"rescue freighter", 
+			level = 	9,
+			enemy = 	false,
+			desc = 		"rescue freighter",
 			result = 	player.rescued_freighter,
 		},
 		{
-			level = 	10,		
-			enemy = 	false,	
+			level = 	10,
+			enemy = 	false,
 			desc = 		"get nukes"
 		},
 		{
-			level = 	11,	
-			enemy = 	false,	
-			desc = 		"get cargo",		
+			level = 	11,
+			enemy = 	false,
+			desc = 		"get cargo",
 			result = 	player.provided_cargo_to_home_station,
 		},
 		{
-			level = 	12,	
-			enemy = 	false,	
+			level = 	12,
+			enemy = 	false,
 			desc = 		"enable probes",
 		},
 		{
@@ -191,11 +191,11 @@ function setConstants()
 		["EnemyVesselsDetected"] =			1.36,
 		["HostileShips"] =					1.5,
 		["IncomingEnemyVessels"] =			1.331,
-		["MakeSureThatFreighterGetsHere"] =	3.159,	
-		["SupplyRun"] =						2.049,	
+		["MakeSureThatFreighterGetsHere"] =	3.159,
+		["SupplyRun"] =						2.049,
 		["WarshipsIdentified"] =			3.326,
-		["WarWithTheKraylor"] =				12.728,	
-		["WelcomeToTiberius"] =				23.011,	
+		["WarWithTheKraylor"] =				12.728,
+		["WelcomeToTiberius"] =				23.011,
 	}
 	center_x = 130000 + random(-15000,15000)
 	center_y = 130000 + random(-15000,15000)
@@ -423,13 +423,13 @@ function setConstants()
 			[3] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
-				{angle =  1, distance = 1},				
+				{angle =  1, distance = 1},
 			},
 			[4] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
 				{angle =  1, distance = 1},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[5] = {
 				{angle =  0, distance = 0},
@@ -444,7 +444,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[7] = {
 				{angle =  0, distance = 0},
@@ -461,7 +461,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 			},
@@ -482,7 +482,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -507,7 +507,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -536,7 +536,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 4},
@@ -552,7 +552,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 3},
@@ -646,7 +646,7 @@ function setGlobals()
 		["Mehklar"] =		{id = "M", count = 0},
 	}
 	star_list = {
-		{radius = random(600,1400), distance = random(-2500,-1400), 
+		{radius = random(600,1400), distance = random(-2500,-1400),
 			name = {
 				"Gamma Piscium",
 				"Beta Lyporis",
@@ -791,7 +791,7 @@ function constructEnvironment()
 	local impact_increment = (hi_impact - lo_impact)/4
 --	local mix = math.random(2,10 - (4 - (2)))	--	2-8
 	local mix = math.random(6,8)	--	6-8
-	sensor_jammer_scan_complexity = 1 
+	sensor_jammer_scan_complexity = 1
 	sensor_jammer_scan_depth = 1
 	if mix > 5 then
 		sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)
@@ -820,10 +820,10 @@ function constructEnvironment()
 		{lo = 1000,	hi = 8000},
 		{lo = 1000,	hi = 8000},
 		{lo = 1000,	hi = 8000},
-		{lo = 1000,	hi = 8000},	
 		{lo = 1000,	hi = 8000},
 		{lo = 1000,	hi = 8000},
-		{lo = 1000,	hi = 8000},	
+		{lo = 1000,	hi = 8000},
+		{lo = 1000,	hi = 8000},
 		{lo = 1000,	hi = 8000},
 	}
 	for i,faction in ipairs(factions) do
@@ -846,10 +846,10 @@ function constructEnvironment()
 		{lo = 1000,	hi = 12000},
 		{lo = 1000,	hi = 12000},
 		{lo = 1000,	hi = 12000},
-		{lo = 1000,	hi = 12000},	
 		{lo = 1000,	hi = 12000},
 		{lo = 1000,	hi = 12000},
-		{lo = 1000,	hi = 12000},	
+		{lo = 1000,	hi = 12000},
+		{lo = 1000,	hi = 12000},
 		{lo = 1000,	hi = 12000},
 	}
 	table.insert(factions,"Kraylor")
@@ -882,11 +882,11 @@ function constructEnvironment()
 	placement_areas = {
 		["Circle Region"] = {
 			stations = inner_stations,
-			transports = transport_list, 
+			transports = transport_list,
 			space = inner_space,
-			shape = "bell torus", 
-			center_x = center_x, 
-			center_y = center_y, 
+			shape = "bell torus",
+			center_x = center_x,
+			center_y = center_y,
 			radius = 120000,
 		},
 	}
@@ -1196,7 +1196,7 @@ function placeTerrain(placement_area,terrain)
 		radius = radius + (field_size * 1500)
 	elseif terrain.desc == "Field" then
 		field_size = radius
-		radius = radius + 500 
+		radius = radius + 500
 	end
 	if placement_area == "Circle Region" then
 		eo_x, eo_y = findClearSpot(area.space,area.shape,area.center_x,area.center_y,area.radius,distort_bell,nil,radius)
@@ -1240,7 +1240,7 @@ function placeTerrain(placement_area,terrain)
 			local impact_increment = (hi_impact - lo_impact)/4
 		--	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--	2-6, 2-8, 2-10
 			local mix = math.random(2,10 - (4 - (2)))	--	2-8
-			sensor_jammer_scan_complexity = 1 
+			sensor_jammer_scan_complexity = 1
 			sensor_jammer_scan_depth = 1
 			if mix > 5 then
 				sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)
@@ -1675,12 +1675,12 @@ function maintainTransports()
 					elseif transport:getOrder() ~= "Dock" then
 						if transport.dock_time == nil then
 							transport.dock_time = getScenarioTime() + random(5,30)
-						end						
+						end
 					elseif transport:getOrder() == "Dock" then
 						if transport:getOrderTarget() == nil or not transport:getOrderTarget():isValid() then
 							if transport.dock_time == nil then
 								transport.dock_time = getScenarioTime() + random(5,30)
-							end						
+							end
 						end
 					end
 				end
@@ -2094,14 +2094,14 @@ function commsMissionUpgrades()
 			player:addCustomMessage("Tactical",player.add_jump_drive_msg_tac,out)
 			table.insert(clean_up_messages,{msg=player.add_jump_drive_msg_tac,expire=getScenarioTime() + 90})
 			player.add_jump_drive_msg_pil = "add_jump_drive_msg_pil"
-			player:addCustomMessage("Single",player.add_jump_drive_msg_pil,out)			
+			player:addCustomMessage("Single",player.add_jump_drive_msg_pil,out)
 			table.insert(clean_up_messages,{msg=player.add_jump_drive_msg_pil,expire=getScenarioTime() + 90})
 			out = _("msgEngineer","The jump drive uses lots of energy. Each time the jump drive is activated, there will be heat added to the jump drive system. Adding coolant to the jump drive system can address the heat. If the jump drive is damaged or the power provided falls below about 25%, the jump drive will gradually lose its charge. If the ship needs to travel further than the jump drive range, you may be asked to boost power to the jump drive to make it charge faster between jumps.")
 			player.add_jump_drive_msg_eng = "add_jump_drive_msg_eng"
-			player:addCustomMessage("Engineering",player.add_jump_drive_msg_eng,out)			
+			player:addCustomMessage("Engineering",player.add_jump_drive_msg_eng,out)
 			table.insert(clean_up_messages,{msg=player.add_jump_drive_msg_eng,expire=getScenarioTime() + 90})
 			player.add_jump_drive_msg_epl = "add_jump_drive_msg_epl"
-			player:addCustomMessage("Engineering+",player.add_jump_drive_msg_epl,out)			
+			player:addCustomMessage("Engineering+",player.add_jump_drive_msg_epl,out)
 			table.insert(clean_up_messages,{msg=player.add_jump_drive_msg_epl,expire=getScenarioTime() + 90})
 			player:setJumpDrive(true)
 			player.max_jump_range = 30000						--shorter than typical (vs 50)
@@ -2227,7 +2227,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template].fleet_group[fleetComposition] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -2247,7 +2247,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template].fleet_group[fleetComposition] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -2266,7 +2266,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template][fleet_group[fleetComposition]] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -2664,7 +2664,7 @@ function updatePlayerLongRangeSensors(delta,p)
 				end
 				if distance_diagnostic then
 					print("distance_diagnostic 24 boost_probe:",boost_probe,"p:",p)
-				end		
+				end
 				local boost_probe_distance = distance(boost_probe,p)
 				if boost_probe_distance < boost_probe.range*1000 then
 					if boost_probe_distance < boost_probe.range*1000/2 then

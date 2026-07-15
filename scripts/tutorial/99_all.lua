@@ -24,7 +24,7 @@ function tutorial_init()
         relayTutorial,
         endOfTutorial
     }
-    
+
     startTutorial()
 end
 
@@ -276,32 +276,32 @@ addToSequence(engineeringTutorial, function() tutorial_setMessageToTopPosition()
 addToSequence(engineeringTutorial, _([[Good. Now you know your most important tasks. Next, we'll go over each system's function in detail.
 Remember, each system performs better with more power, but performs less well when damaged. Your job is to keep vital systems running as well as you can.]]))
     addToSequence(engineeringTutorial, _([[Reactor:
-    
+
 The reactor generates energy. Adding power to the reactor increases your energy generation rate.]]))
     addToSequence(engineeringTutorial, _([[Beam Weapons:
-    
+
 Adding power to the beam weapons system increases their rate of fire, which causes them to do more damage.
 Note that every beam you fire adds additional heat to the system.]]))
     addToSequence(engineeringTutorial, _([[Missile System:
-    
+
 Increased missile system power lowers the reload time of weapon tubes.]]))
     addToSequence(engineeringTutorial, _([[Maneuvering:
-    
+
 Increasing power to the maneuvering system allows the ship to turn faster. It also increases the recharge rate for the combat maneuvering system.]]))
     addToSequence(engineeringTutorial, _([[Impulse Engines:
-    
+
 Adding power to the impulse engines increases your impulse flight speed.]]))
     addToSequence(engineeringTutorial, _([[Warp Drive:
-    
+
 Adding power to the warp drive increases your warp drive flight speed.]]))
     addToSequence(engineeringTutorial, _([[Jump Drive:
-    
+
 A higher-powered jump drive recharges faster and has a shorter delay before jumping.]]))
     addToSequence(engineeringTutorial, _([[Shields:
-    
+
 Additional power in the shield system increases their rate of recharge, and decreases the amount of degradation your shields sustain when damaged.]]))
     addToSequence(engineeringTutorial, _([[This concludes the overview of the engineering station. Be sure to keep your ship running in top condition!]]))
-    
+
     scienceTutorial = createSequence()
     addToSequence(scienceTutorial, function()
         tutorial_switchViewToScreen(3)
@@ -309,7 +309,7 @@ Additional power in the shield system increases their rate of recharge, and decr
         resetPlayerShip()
     end)
     addToSequence(scienceTutorial, _([[Welcome, science officer.
-    
+
 You are the eyes of the ship. Your job is to supply the captain with information. From your station, you can detect and scan objects at a range of up to 30u.]]))
     addToSequence(scienceTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000) end)
     addToSequence(scienceTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
@@ -330,12 +330,12 @@ Deep scan the enemy now.]]), function() return prev_object:isFullyScannedBy(play
         addToSequence(scienceTutorial, function() prev_object2:destroy() end)
         addToSequence(scienceTutorial, function() tutorial_setMessageToTopPosition() end)
         addToSequence(scienceTutorial, _([[Next to the long-range radar, the science station can also access the science database.
-        
+
 In this database, you can look up details on things like ship types, weapons, and other objects.]]))
         addToSequence(scienceTutorial, _([[Remember, your job is to supply information. Knowing the location and status of other ships is vital to your captain.
-        
+
 Without your information, the crew is mostly blind.]]))
-        
+
         relayTutorial = createSequence()
         addToSequence(relayTutorial, function()
             tutorial_switchViewToScreen(4)
@@ -343,10 +343,10 @@ Without your information, the crew is mostly blind.]]))
             resetPlayerShip()
         end)
         addToSequence(relayTutorial, _([[Welcome to relay!
-        
+
 It is your job to communicate with stations and ships. You also have access to short-range radar data from friendly ships and stations, and can place navigational waypoints and launch scanning probes.]]))
         addToSequence(relayTutorial, _([[Your first responsibility is to coordinate the ship's communications.
-        
+
 You can target any station or ship and attempt to communicate with it. Other ships can also attempt to contact you.]]))
         addToSequence(relayTutorial, function()
             prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000)
@@ -372,7 +372,7 @@ They might inform you about new objectives and your mission progress, ask for ba
         addToSequence(relayTutorial, function() prev_object3 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(-17000, -7500):orderIdle():setScanned(true):setCommsScript("") end)
         addToSequence(relayTutorial, function() prev_object4 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5400, 7500):orderIdle():setScanned(false):setCommsScript("") end)
         addToSequence(relayTutorial, _([[Your station also includes this radar map.
-        
+
 On this map, you can detect objects within short-range radar range of all allied ships and stations. Everything else is invisible to you. This gives you a different view from the science officer, because you can scan the contents of nebulae.]]))
         addToSequence(relayTutorial, _([[Finally, you control your ship's probes. Probes can expand your radar view. Launch a probe to the top right, toward the ship designated DMY-01.]]), function()
             for idx, obj in ipairs(getObjectsInRadius(20000, -20000, 5000)) do
@@ -386,8 +386,8 @@ On this map, you can detect objects within short-range radar range of all allied
         addToSequence(relayTutorial, function() prev_object3:destroy() end)
         addToSequence(relayTutorial, function() prev_object4:destroy() end)
         addToSequence(relayTutorial, _([[Probes can expand your sensory capabilities beyond your normal range and explore nebulae. However, you have a limited supply of them and can't replenish them until you to dock with a station.]]))
-        
-        
+
+
         operationsTutorial = createSequence()
         addToSequence(operationsTutorial, function()
             tutorial_switchViewToScreen(7)
@@ -395,7 +395,7 @@ On this map, you can detect objects within short-range radar range of all allied
             resetPlayerShip()
         end)
         addToSequence(operationsTutorial, _([[Welcome, operations officer.
-        
+
 You are the eyes of the ship. Your job is to supply the captain with information. From your station, you can detect and scan objects at a range of up to 30u.]]))
         addToSequence(operationsTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000) end)
         addToSequence(operationsTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
@@ -416,13 +416,13 @@ Deep scan the enemy now.]]), function() return prev_object:isFullyScannedBy(play
             addToSequence(operationsTutorial, function() prev_object2:destroy() end)
             addToSequence(operationsTutorial, function() tutorial_setMessageToTopPosition() end)
             addToSequence(operationsTutorial, _([[Next to the long-range radar, the science station can also access the science database.
-            
+
 In this database, you can look up details on things like ship types, weapons, and other objects.]]))
             addToSequence(operationsTutorial, _([[Remember, your job is to supply information. Knowing the location and status of other ships is vital to your captain.
-            
+
 Without your information, the crew is mostly blind.]]))
             addToSequence(operationsTutorial, _([[Your second responsibility is to coordinate the ship's communications.
-            
+
 You can target any station or ship and attempt to communicate with it. Other ships can also attempt to contact you.]]))
             addToSequence(operationsTutorial, function()
                 prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000)
@@ -443,9 +443,8 @@ You can target any station or ship and attempt to communicate with it. Other shi
             addToSequence(operationsTutorial, function() prev_object:destroy() end)
             addToSequence(operationsTutorial, _([[Depending on the scenario, you might have different options when communicating with stations.
 They might inform you about new objectives and your mission progress, ask for backup, or resupply your weapons. This is all part of your responsibilities as relay officer.]]))
-            
+
             endOfTutorial = createSequence()
             addToSequence(endOfTutorial, function() tutorial_switchViewToMainScreen() end)
             addToSequence(endOfTutorial, function() tutorial_setMessageToTopPosition() end)
             addToSequence(endOfTutorial, _([[This concludes the tutorial. While we have covered the basics, there are more advanced features in the game that you might discover.]]))
-            

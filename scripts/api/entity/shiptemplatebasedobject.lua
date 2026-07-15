@@ -140,7 +140,7 @@ end
 --- Example: stbo:setCanBeDestroyed(false) -- prevents the entity from being destroyed by damage
 function Entity:setCanBeDestroyed(allow_destroy)
     if self.components.hull then self.components.hull.allow_destruction = allow_destroy end
-    return self    
+    return self
 end
 --- Returns whether the entity can be destroyed by damage.
 --- Example: stbo:getCanBeDestroyed()

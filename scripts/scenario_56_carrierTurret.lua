@@ -3,7 +3,7 @@
 ---
 --- Version 2 (formerly entitled Carriers and Turrets)
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
 -- Type: Mission
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
 -- Enemies[Very Easy]: The least number of or the weakest enemies
@@ -27,7 +27,7 @@
 -- Carrier[Random|Default]: A carrier type will be selected at random
 -- Carrier[Benedict]: The carrier deployed will be of type Benedict with a jump drive
 -- Carrier[Kiriya]: The carrier deployed will be of type Kiriya with a warp drive
--- Carrier[Saipan]: The carrier deployed will be of type Saipan with a jump drive 
+-- Carrier[Saipan]: The carrier deployed will be of type Saipan with a jump drive
 -- Setting[Fighter1]: Configures the first fighter type deployed as a player ship
 -- Fighter1[Random|Default]: Fighter 1 type will be selected at random
 -- Fighter1[Striker]: Fighter 1 will be of type Striker
@@ -45,19 +45,19 @@
 -- typical colors used in ship log
 -- 	"Red"			Red									Enemies spotted
 --	"Blue"			Blue
---	"Yellow"		Yellow								
+--	"Yellow"		Yellow
 --	"Magenta"		Magenta								Headquarters
 --	"Green"			Green
 --	"Cyan"			Cyan
 --	"Black"			Black
 --	"#555555"		Dark gray			"55,55,55"
---	"#ff4500"		Orange red			"255,69,0"		
---	"#ff7f50"		Coral				"255,127,80"	
+--	"#ff4500"		Orange red			"255,69,0"
+--	"#ff7f50"		Coral				"255,127,80"
 --	"#5f9ea0"		Cadet blue			"95,158,160"	scientist station
---	"#4169e1"		Royal blue			"65,105,225"	
+--	"#4169e1"		Royal blue			"65,105,225"
 --	"#8a2be2"		Blue violet			"138,43,226"	doctor station
---	"#ba55d3"		Medium orchid		"186,85,211"	
---	"#a0522d"		Sienna				"160,82,45"		
+--	"#ba55d3"		Medium orchid		"186,85,211"
+--	"#a0522d"		Sienna				"160,82,45"
 --	"#b29650"		Arbitrary			"178,150,80"	repair station
 --	"#556b2f"		Dark olive green	"85,107,47"		tractor ship
 --	"#228b22"		Forest green		"34,139,34"
@@ -134,7 +134,7 @@ function init()
 		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Striker"):setJumpDrive(false):setWarpDrive(false)
 		playerBlade:setTypeName("Formax")
 		playerBlade:setImpulseMaxSpeed(90)
-		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100, 
+		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100,
 		playerBlade:setBeamWeaponTurret(1,60, 15,2)			-- 2: slower than default 6
 		playerBlade:setWeaponTubeCount(2)
 		playerBlade:setWeaponTubeDirection(0,  0):setTubeLoadTime(0,10):setWeaponTubeExclusiveFor(0,"HVLI"):setTubeSize(0,"small")
@@ -145,9 +145,9 @@ function init()
 		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Striker"):setJumpDrive(false):setWarpDrive(false)
 		playerBlade:setTypeName("Foil")
 		playerBlade:setImpulseMaxSpeed(95)
-		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100, 
+		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100,
 		playerBlade:setBeamWeaponTurret(1,60, 15,2)			-- 2: slower than default 6
-		playerBlade:setBeamWeapon(2,20,0,1200,6,5)	
+		playerBlade:setBeamWeapon(2,20,0,1200,6,5)
 		playerBlade:setRepairCrewCount(4)
 		playerBlade:setWeaponTubeCount(1)
 		playerBlade:setWeaponTubeDirection(0,180):setTubeLoadTime(0,20):setWeaponTubeExclusiveFor(0,"Mine")
@@ -239,7 +239,7 @@ function setConstants()
 		["Saipan"]				= { strength = 35,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 10,	pods = 2,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Striker"]				= { strength = 8,	cargo = 4,	distance = 200,	long_range_radar = 35000, short_range_radar = 5000, tractor = false,	mining = false,	probes = 6,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["ZX-Lindworm"]			= { strength = 8,	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 5500, tractor = false,	mining = false,	probes = 4,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 1,	epjam = 0,	},
-	--	Custom player ships	
+	--	Custom player ships
 		["Amalgam"]				= { strength = 42,	cargo = 7,	distance = 400,	long_range_radar = 36000, short_range_radar = 5000, tractor = false,	mining = false,	probes = 11,	pods = 3,	turbo_torp = true,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Atlantis II"]			= { strength = 60,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 11,	pods = 3,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Barrow"]				= { strength = 9,	cargo = 9,	distance = 400,	long_range_radar = 35000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 12,	pods = 3,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 2,	},
@@ -304,7 +304,7 @@ function setConstants()
 end
 function setGlobals()
 	mission_milestones = 0
-	interWave = 280	
+	interWave = 280
 	commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
@@ -337,7 +337,7 @@ function setGlobals()
 		["tractor"] =		_("trade-comms","tractor"),
 		["transporter"] =	_("trade-comms","transporter"),
 		["warp"] =			_("trade-comms","warp"),
-	}		
+	}
 	goods = {}
 	stationList = {}
 	friendlyStationList = {}
@@ -430,7 +430,7 @@ function mainGMButtonsDuringPause()
 -- The slow delay is used for typical mission testing when the tester does not wish to
 -- spend all their time fighting off enemies.
 -- The second button switches from slow to fast. This facilitates testing the enemy
--- spawning routines. The third button goes from fast to normal. 
+-- spawning routines. The third button goes from fast to normal.
 --translate variations into a numeric difficulty value
 	local delay_config = {
 		["slow"] = 600,
@@ -724,12 +724,12 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 		for ndex=1,arcLen do
 			radialPoint = startArc+ndex
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 		end
 		for ndex=1,amount-arcLen do
 			radialPoint = random(startArc,endArcClockwise)
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 		end
 	else
 		for ndex=1,amount do
@@ -774,7 +774,7 @@ function buildStations()
 		--get adjacent list after done growing region
 		adjList = getAdjacentGridLocations(gx,gy)
 		if #adjList < 1 then
-			adjList = getAllAdjacentGridLocations(gx,gy)	
+			adjList = getAllAdjacentGridLocations(gx,gy)
 		else
 			if random(1,5) >= 2 then
 				adjList = getAllAdjacentGridLocations(gx,gy)
@@ -816,7 +816,7 @@ function buildStations()
 		--get list after done growing region
 		adjList = getAdjacentGridLocations(gx,gy)
 		if #adjList < 1 then
-			adjList = getFactionAdjacentGridLocations(gx,gy)	
+			adjList = getFactionAdjacentGridLocations(gx,gy)
 			if #adjList < 1 then
 				adjList = getAllAdjacentGridLocations(gx,gy)
 			end
@@ -863,7 +863,7 @@ function buildStations()
 		--get list after done growing region
 		adjList = getAdjacentGridLocations(gx,gy)
 		if #adjList < 1 then
-			adjList = getFactionAdjacentGridLocations(gx,gy)	
+			adjList = getFactionAdjacentGridLocations(gx,gy)
 			if #adjList < 1 then
 				adjList = getAllAdjacentGridLocations(gx,gy)
 			end
@@ -906,7 +906,7 @@ function buildStations()
 		--get list after done growing region
 		adjList = getAdjacentGridLocations(gx,gy)
 		if #adjList < 1 then
-			adjList = getFactionAdjacentGridLocations(gx,gy)	
+			adjList = getFactionAdjacentGridLocations(gx,gy)
 			if #adjList < 1 then
 				adjList = getAllAdjacentGridLocations(gx,gy)
 			end
@@ -988,7 +988,7 @@ function getFactionAdjacentGridLocations(lx,ly)
 			tempGrid[lx][ly-1] = 1
 			if grid[lx][ly-1] == nil then
 				table.insert(ol,{lx,ly-1})
-			elseif grid[lx][ly-1] >= fb then		
+			elseif grid[lx][ly-1] >= fb then
 				--case 2: traveling up, skip down check
 				getFactionAdjacentGridLocationsSkip(2,lx,ly-1)
 			end
@@ -1106,7 +1106,7 @@ function getAllAdjacentGridLocations(lx,ly)
 			tempGrid[lx][ly-1] = 1
 			if grid[lx][ly-1] == nil then
 				table.insert(ol,{lx,ly-1})
-			else		
+			else
 				--case 2: traveling up, skip down check
 				getAllAdjacentGridLocationsSkip(2,lx,ly-1)
 			end
@@ -1224,7 +1224,7 @@ function getAdjacentGridLocations(lx,ly)
 			tempGrid[lx][ly-1] = 1
 			if grid[lx][ly-1] == nil then
 				table.insert(ol,{lx,ly-1})
-			elseif grid[lx][ly-1] == gp then		
+			elseif grid[lx][ly-1] == gp then
 				--case 2: traveling up, skip down check
 				getAdjacentGridLocationsSkip(2,lx,ly-1)
 			end
@@ -1368,7 +1368,7 @@ function placeCTStation(x,y,name,faction,size)
 				station.comms_data.goods.dilithium = {quantity = 5, cost = math.random(40,50)}
 			else	--Impala
 				station.comms_data.goods.tritanium = {quantity = 5, cost = math.random(40,50)}
-			end			
+			end
 		end
 	elseif station_name == "Jabba" or station_name == "Lando" or station_name == "Maverick" or station_name == "Okun" or station_name == "Outpost-8" or station_name == "Prada" or station_name == "Research-11" or station_name == "Research-19" or station_name == "Science-2" or station_name == "Science-4" or station_name == "Spot" or station_name == "Starnet" or station_name == "Tandon" then
 		if chosen_goods < 33 then
@@ -1602,7 +1602,7 @@ function randomStation()
 	return tableSelectRandom(stationList)
 end
 function nearStations(obj, compareStationList)
-	local remaining_stations = {}	
+	local remaining_stations = {}
 	local clean_list = true
 	local clean_count = 0
 	repeat
@@ -1938,7 +1938,7 @@ function respawnFighter1()
 		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Striker"):setJumpDrive(false):setWarpDrive(false)
 		playerBlade:setTypeName("Formax")
 		playerBlade:setImpulseMaxSpeed(90)
-		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100, 
+		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100,
 		playerBlade:setBeamWeaponTurret(1,60, 15,2)			-- 2: slower than default 6
 		playerBlade:setWeaponTubeCount(2)
 		playerBlade:setWeaponTubeDirection(0,  0):setTubeLoadTime(0,10):setWeaponTubeExclusiveFor(0,"HVLI"):setTubeSize(0,"small")
@@ -1949,9 +1949,9 @@ function respawnFighter1()
 		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Striker"):setJumpDrive(false):setWarpDrive(false)
 		playerBlade:setTypeName("Foil")
 		playerBlade:setImpulseMaxSpeed(95)
-		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100, 
+		playerBlade:setBeamWeaponTurret(0,60,-15,2)			-- 60: narrower than default 100,
 		playerBlade:setBeamWeaponTurret(1,60, 15,2)			-- 2: slower than default 6
-		playerBlade:setBeamWeapon(2,20,0,1200,6,5)	
+		playerBlade:setBeamWeapon(2,20,0,1200,6,5)
 		playerBlade:setRepairCrewCount(4)
 		playerBlade:setWeaponTubeCount(1)
 		playerBlade:setWeaponTubeDirection(0,180):setTubeLoadTime(1,20):setWeaponTubeExclusiveFor(0,"Mine")
@@ -2357,7 +2357,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -2420,7 +2420,7 @@ function handleUndockedState()
 				local oMsg = string.format(_("forSaleTrade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 				for good,good_data in pairs(comms_target.comms_data.goods) do
 					if good_data.quantity > 0 then
-						oMsg = string.format(_("forSaleTrade-comms","%s\n  %s: %i, %i"),oMsg,good_desc[good],good_data.quantity,good_data.cost) 
+						oMsg = string.format(_("forSaleTrade-comms","%s\n  %s: %i, %i"),oMsg,good_desc[good],good_data.quantity,good_data.cost)
 					end
 				end
 				setCommsMessage(oMsg)
@@ -2439,9 +2439,9 @@ function handleUndockedState()
 					if enemiesInRange > 1 then
 						setCommsMessage(string.format(_("helpfullWarning-comms", "Yes, we see %i enemies within 30U"),enemiesInRange))
 					else
-						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))						
+						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))
 					end
-					comms_source:addReputationPoints(2)					
+					comms_source:addReputationPoints(2)
 				else
 					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
 					comms_source:addReputationPoints(1)
@@ -2505,7 +2505,7 @@ function handleUndockedState()
 			end
 			setCommsMessage(gkMsg)
 			addCommsReply(_("Back"), commsStation)
-		end)		
+		end)
 		if comms_target.publicRelations then
 			addCommsReply(_("stationGeneralInfo-comms", "General station information"), function()
 				setCommsMessage(comms_target.generalInformation)
@@ -2668,7 +2668,7 @@ function handleUndockedState()
 				end)
 				break
 			end
-		end		
+		end
 	end
 end
 function commsMissionChanges()
@@ -3121,7 +3121,7 @@ function missionMessages()
 		end
 	end
 end
---	Ship communication 
+--	Ship communication
 function commsShip()
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
@@ -3651,7 +3651,7 @@ function neutralDefendComms()
     end
     return true
 end
---	Cargo management 
+--	Cargo management
 function cargoTransfer()
 	if playerCarrier:isValid() and playerCarrier.cargo > 0 and playerBlade:isValid() and playerBlade:isDocked(playerCarrier) and playerBlade.cargo < playerBlade.maxCargo then
 		if bladeTransferButton == nil then
@@ -3706,7 +3706,7 @@ function cargoTransfer()
 		if carrier2bladeTransferButtonList ~= nil then
 			for i,good in ipairs(carrier2bladeTransferButtonList) do
 				playerCarrier:removeCustom(string.format("blade_good%s",good))
-				playerCarrier:removeCustom(string.format("blade_good%sops",good))			
+				playerCarrier:removeCustom(string.format("blade_good%sops",good))
 			end
 		end
 		playerCarrier:removeCustom("exitBladeCargoTransfer")
@@ -3731,7 +3731,7 @@ function cargoTransfer()
 		if carrier2pointTransferButtonList ~= nil then
 			for i,good in ipairs(carrier2pointTransferButtonList) do
 				playerCarrier:removeCustom(string.format("point_good%s",good))
-				playerCarrier:removeCustom(string.format("point_good%sops",good))			
+				playerCarrier:removeCustom(string.format("point_good%sops",good))
 			end
 		end
 		playerCarrier:removeCustom("exitPointCargoTransfer")
@@ -3748,7 +3748,7 @@ function carrier2bladeTransfer()
 	if carrier2bladeTransferButtonList ~= nil then
 		for i,good in ipairs(carrier2bladeTransferButtonList) do
 			playerCarrier:removeCustom(string.format("blade_good%s",good))
-			playerCarrier:removeCustom(string.format("blade_good%sops",good))			
+			playerCarrier:removeCustom(string.format("blade_good%sops",good))
 		end
 	end
 	carrier2bladeTransferButtonList = {}
@@ -3771,7 +3771,7 @@ function carrier2bladeTransfer()
 		if carrier2bladeTransferButtonList ~= nil then
 			for i,good in ipairs(carrier2bladeTransferButtonList) do
 				playerCarrier:removeCustom(string.format("blade_good%s",good))
-				playerCarrier:removeCustom(string.format("blade_good%sops",good))			
+				playerCarrier:removeCustom(string.format("blade_good%sops",good))
 			end
 		end
 		carrier2bladeTransferButtonList = nil
@@ -3782,7 +3782,7 @@ function carrier2bladeTransfer()
 		if carrier2bladeTransferButtonList ~= nil then
 			for i,good in ipairs(carrier2bladeTransferButtonList) do
 				playerCarrier:removeCustom(string.format("blade_good%s",good))
-				playerCarrier:removeCustom(string.format("blade_good%sops",good))			
+				playerCarrier:removeCustom(string.format("blade_good%sops",good))
 			end
 		end
 		carrier2bladeTransferButtonList = nil
@@ -3818,7 +3818,7 @@ function carrier2pointTransfer()
 	if carrier2pointTransferButtonList ~= nil then
 		for i,good in ipairs(carrier2pointTransferButtonList) do
 			playerCarrier:removeCustom(string.format("point_good%s",good))
-			playerCarrier:removeCustom(string.format("point_good%sops",good))			
+			playerCarrier:removeCustom(string.format("point_good%sops",good))
 		end
 	end
 	carrier2pointTransferButtonList = {}
@@ -3841,7 +3841,7 @@ function carrier2pointTransfer()
 		if carrier2pointTransferButtonList ~= nil then
 			for i,good in ipairs(carrier2pointTransferButtonList) do
 				playerCarrier:removeCustom(string.format("point_good%s",good))
-				playerCarrier:removeCustom(string.format("point_good%sops",good))			
+				playerCarrier:removeCustom(string.format("point_good%sops",good))
 			end
 		end
 		carrier2pointTransferButtonList = nil
@@ -3852,7 +3852,7 @@ function carrier2pointTransfer()
 		if carrier2pointTransferButtonList ~= nil then
 			for i,good in ipairs(carrier2pointTransferButtonList) do
 				playerCarrier:removeCustom(string.format("point_good%s",good))
-				playerCarrier:removeCustom(string.format("point_good%sops",good))			
+				playerCarrier:removeCustom(string.format("point_good%sops",good))
 			end
 		end
 		carrier2pointTransferButtonList = nil
@@ -3970,19 +3970,19 @@ function updatePlayerInventoryButton(p)
 		end
 	end
 	if goodCount > 0 then		--add inventory button when cargo acquired
-		p:addCustomButton("Relay","inventory_button_rel",_("inventory-buttonRelay","Inventory"),function() 
+		p:addCustomButton("Relay","inventory_button_rel",_("inventory-buttonRelay","Inventory"),function()
 			string.format("")
-			local out = playerShipCargoInventory(p) 
+			local out = playerShipCargoInventory(p)
 			p:addCustomMessage("Relay","inventory_message",out)
 		end,23)
 		p:addCustomButton("Operations","inventory_button_ops",_("inventory-buttonOperations","Inventory"), function()
 			string.format("")
-			local out = playerShipCargoInventory(p) 
+			local out = playerShipCargoInventory(p)
 			p:addCustomMessage("Operations","inventory_message",out)
 		end,23)
 		p:addCustomButton("Single","inventory_button_pil",_("inventory-buttonPilot","Inventory"), function()
 			string.format("")
-			local out = playerShipCargoInventory(p) 
+			local out = playerShipCargoInventory(p)
 			p:addCustomMessage("Operations","inventory_message",out)
 		end,23)
 	end
@@ -4147,7 +4147,7 @@ function pressureWaves(delta)
 		end
 	end
 end
---	Plot 2 
+--	Plot 2
 function destroyef2(delta)
 	plot2name = "destroyef2"
 	for i,ship in ipairs(ef2) do
@@ -4691,7 +4691,7 @@ function scientistDies()
 	end
 	betweenPlot2fleet()
 end
---	Plot 3 
+--	Plot 3
 function destroyef3(delta)
 	plot3name = "destroyef3"
 	for i,ship in ipairs(ef3) do
@@ -4774,7 +4774,7 @@ function addTubeToShip(delta)
 								available_tube_cargo[good] = true
 							end
 						end
-					end				
+					end
 				end
 			end
 		end
@@ -4864,7 +4864,7 @@ function upgradeBeamDamage(delta)
 								available_beam_cargo[good] = true
 							end
 						end
-					end				
+					end
 				end
 			end
 		end
@@ -4884,7 +4884,7 @@ function upgradeBeamDamage(delta)
 								available_beam_cargo[good] = true
 							end
 						end
-					end				
+					end
 				end
 			end
 		end
@@ -4998,7 +4998,7 @@ end
 function confirmRescue(delta)
 	if getScenarioTime() > confirmRescueTimer then
 		if playerCarrier:isValid() then
-			playerCarrier:addToShipLog(string.format(_("goal-shipLog","Station %s in %s has tractor equipment you can use to tractor %s in for repairs"),tractorStation:getCallSign(),tractorStation:getSectorName(),tractorShip:getCallSign()),"Magenta") 
+			playerCarrier:addToShipLog(string.format(_("goal-shipLog","Station %s in %s has tractor equipment you can use to tractor %s in for repairs"),tractorStation:getCallSign(),tractorStation:getSectorName(),tractorShip:getCallSign()),"Magenta")
 			plot3reminder = string.format(_("orders-comms","Install tractor equipment in %s from station %s in %s"),playerCarrier:getCallSign(),tractorStation:getCallSign(),tractorStation:getSectorName())
 			plot3name = "awaitingTractor"
 			plot3 = awaitingTractor
@@ -5279,10 +5279,10 @@ function tableSelectRandom(array)
     if array_item_count == 0 then
         return nil
     end
-	return array[math.random(1,#array)]	
+	return array[math.random(1,#array)]
 end
 function setPlayers()
---	Give player ships defaults for this script. Called at the start 
+--	Give player ships defaults for this script. Called at the start
 --	while paused & each time a ship's relay officer interacts with a station
 	for i,pobj in ipairs(getActivePlayerShips()) do
 		if pobj.initialRep == nil then
@@ -5465,7 +5465,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	enemyStrength = math.max(danger * enemy_power * playerPower(),5)
@@ -5478,7 +5478,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 		shipTemplateType = irandom(1,#stsl)
 		while stsl[shipTemplateType] > enemyStrength * 1.1 + 5 do
 			shipTemplateType = irandom(1,#stsl)
-		end		
+		end
 		ship = CpuShip():setFaction(enemyFaction):setTemplate(stnl[shipTemplateType]):setCallSign(generateCallSign(nil,enemyFaction)):orderRoaming()
 		enemyPosition = enemyPosition + 1
 		if deployConfig < 50 then
@@ -5690,16 +5690,16 @@ function update(delta)
 	end
 	if plot1 ~= nil then	--initial sets of enemies wave generation
 		plot1(delta)
-	end	
+	end
 	if plot2 ~= nil then	--3 random missions
 		plot2(delta)
-	end	
+	end
 	if plot3 ~= nil then	--3 random missions
 		plot3(delta)
-	end	
+	end
 	if plot4 ~= nil then	-- simple - awaiting more development
 		plot4(delta)
-	end	
+	end
 	cargoTransfer()			-- cargo transfer
 	if playWithTimeLimit then
 		if getScenarioTime() > gameTimeLimit then

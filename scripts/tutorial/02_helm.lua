@@ -15,7 +15,7 @@
 ---
 --- <h4><color=#C0C0FF>Impulse engine</>
 ---
---- The impulse engine's slider controls the throttle, from -100% (full reverse) to 0% (full stop) to 100% (full ahead). 
+--- The impulse engine's slider controls the throttle, from -100% (full reverse) to 0% (full stop) to 100% (full ahead).
 ---
 --- <h4><color=#C0C0FF>Radar and rotation</>
 ---
@@ -37,7 +37,7 @@
 ---
 --- <h4><color=#C0C0FF>Docking</>
 ---
---- On ships with a docking port, you can initiate an automated docking sequence with a friendly or neutral ship or space station that has a docking bay when it is no more than 1U away. 
+--- On ships with a docking port, you can initiate an automated docking sequence with a friendly or neutral ship or space station that has a docking bay when it is no more than 1U away.
 ---
 --- While docked, the ship can't engage its propulsion or fire weapons, but its energy recharges faster, repairs take less time, the ship's supply of probes is replenished, and the Relay officer can often request a resupply of missile weapon ammunition. The Helms officer is also responsible for undocking the ship.
 ---

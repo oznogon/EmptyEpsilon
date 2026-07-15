@@ -45,7 +45,7 @@ function distance(a, b, c, d)
 end
 
 -- Given enough information, calculate rotation angle from first position/object to second position/object.
--- Rotation angle 0 degrees is to the right of the GM screen. 
+-- Rotation angle 0 degrees is to the right of the GM screen.
 -- This function can be called in four ways:
 --
 -- angleRotation(obj1, obj2)
@@ -85,12 +85,12 @@ function angleRotation(a, b, c, d)
 
     local dx = x2-x1
     local dy = y2-y1
-    local d = math.atan2(dy,dx)*180/math.pi     -- Get degrees in range -180, 180 where 0 is to the left from point 1. 
+    local d = math.atan2(dy,dx)*180/math.pi     -- Get degrees in range -180, 180 where 0 is to the left from point 1.
     return d%360                                -- Transform degrees to range [0, 360]
 end
 
 -- Given enough information, calculate heading from first position/object to second position/object.
--- Heading 0 degrees is to the top of the GM screen (same as 0 degrees on the radar). 
+-- Heading 0 degrees is to the top of the GM screen (same as 0 degrees on the radar).
 -- This function can be called in four ways:
 --
 -- angleHeading(obj1, obj2)
@@ -136,9 +136,9 @@ end
 --   angle: Relative angle (as rotation vector), in degrees
 --   length: Relative distance, in thousandths of an in-game unit (1000 = 1U)
 --   angle_is_heading: Optional argument, if set to TRUE, then angle will be treated
---                     as heading instead of rotation vector. 
+--                     as heading instead of rotation vector.
 --
--- Example: 
+-- Example:
 --   For relative x and y coordinates 1000 units away at a rotation angle of 45 degrees, run:
 --     x, y = vectorFromAngle(45, 1000).
 --   For relative x and y coordinates 1000 units away at a heading of 45 degrees, run:
@@ -158,12 +158,12 @@ end
 --   x, y: Origin coordinates.
 --   angle, distance: Relative heading and distance from the origin.
 --   angle_is_heading: Optional argument, if set to TRUE, then angle will be treated
---                     as heading instead of rotation vector. 
+--                     as heading instead of rotation vector.
 --
 -- Returns the object with its position set to the resulting coordinates, by
 -- calling setPosition().
 --
--- Example: 
+-- Example:
 --   To create a space station 10000 units from coordinates 100, -100 at a rotation vector of 45 degrees, run:
 --     setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000)
 --   To create a space station 10000 units from coordinates 100, -100 at a heading of 45 degrees, run:
@@ -293,7 +293,7 @@ function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_gri
 end
 
 -- Extract coordinates between two objects, two points, object and point or point and object
--- This is only helper function for distance(a,b,c,d) and angle(a,b,c,d). 
+-- This is only helper function for distance(a,b,c,d) and angle(a,b,c,d).
 -- Returns two sets of coordinates: x1, y1, x2, y2.
 function _fourArgumentsIntoCoordinates(a, b, c, d)
 	local table_or_userdata = "table"

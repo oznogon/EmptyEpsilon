@@ -341,7 +341,7 @@ function phase1WaitForPowerup(delta)
     end
     -- All system powered, give the next objective.
     shipyard_gamma:sendCommsMessage(
-        player, 
+        player,
         string.format(_("station-incCall", "Good, Atlantis-1, we read all systems are go. You can safely undock now.\n\nHead to sector %s, where F-1 has dropped missile supplies. Pick them up to stock up on weapons."),transport_f1:getSectorName())
     )
     supply_drop = SupplyDrop():setFaction("Human Navy"):setPosition(29021, 114945):setEnergy(500):setWeaponStorage("Homing", 12):setWeaponStorage("Nuke", 4):setWeaponStorage("Mine", 8):setWeaponStorage("EMP", 6):setWeaponStorage("HVLI", 20)

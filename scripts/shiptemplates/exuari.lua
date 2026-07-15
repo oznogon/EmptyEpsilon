@@ -18,7 +18,7 @@ Strategic use in scenarios
 Considering the faction description and existing scenarios the following strategies have been developed for the Exuari fleet.
   * Assassins ("death teams"): One or few ships attack a chosen target. Warp Jammers or other technology may be used. When used in a scenario, the players goal can be to defend the target or themself. Ambushes are a common element.
   * Siege: A carrier ship with defending frigates is hidden somewhere near the sector. The carrier launches waves of all kinds of fighters and artillery. Upon first resistance, Warp-enabled strikers are started as reinforcements. The players goals can be to simply defend and survive or to find and destroy the hidden carrier ship.
- 
+
 Ship Properties
 ---------------
 The following features were chosen for Exuari ships, to make them distinguishable from other factions:
@@ -217,7 +217,7 @@ template:setTubeDirection(3, -2)
 template:setTubeDirection(4,  2)
 
 --[[ Artillery--]]
---Artillery are non-warp capable ships, mostly used to delivers Nukes to their enemies. They may be disguised as Transport ships (or are refurbished freighters). 
+--Artillery are non-warp capable ships, mostly used to delivers Nukes to their enemies. They may be disguised as Transport ships (or are refurbished freighters).
 template = ShipTemplate():setName("Flash"):setLocaleName(_("ship", "Flash")):setClass(_("class", "Exuari"), _("subclass", "Artillery"))
 template:setModel("small_frigate_2"):setRadarTrace("exuari_2.png")
 template:setDescription(_([[The Exuari Flash is a special artillery sniper, built to deal a large amounts of damage quickly and from a distance before escaping. It's a basic freighter that carries nuclear weapons. Some say, this is what happens to freighters, when they fall into the hands of the Exuari.]]))
@@ -296,7 +296,7 @@ Component details used for designing the ships above:
  Beams
   Exuari Fighter beam: rng 1000, cycle 4, dmg 4, dps 1
   Exuari Striker beam: rng 1000, cycle 6, dmg 6, dps 1
-  Exuari Turret  beam: rng 1200, cycle 3/6/9, dmg 2/4/6, dps 0.66 
+  Exuari Turret  beam: rng 1200, cycle 3/6/9, dmg 2/4/6, dps 0.66
  Hull/shields
   Fighter 30, 30
   Bomber  40, 30
@@ -306,7 +306,7 @@ Component details used for designing the ships above:
   Fighter 120-130, 30-35, 25-30
   Bomber  70, 20, 15
   Striker 70, 12, 12 +warp
-  Frigate 40-70, 6-15, 8-20 
+  Frigate 40-70, 6-15, 8-20
   Station 20, 1.5, 3
 --]]
 

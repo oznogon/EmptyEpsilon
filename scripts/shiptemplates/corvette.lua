@@ -399,7 +399,7 @@ template:setWeaponStorage("HVLI",   16)
 template:setRepairCrewCount(5)
 --    HC:Horizontal Coordinate (x), VC:Vertical Coordinate (y)
 --    HS:Horizontal Size, VS:Vertical Size
---                      HC,VC,HS,VS, system 
+--                      HC,VC,HS,VS, system
 template:addRoomSystem(0, 0, 4, 1, "Maneuver")
 template:addRoomSystem(1, 1, 2, 2, "Impulse")
 template:addRoomSystem(3, 2, 3, 1, "Warp")

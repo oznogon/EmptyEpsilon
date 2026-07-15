@@ -3,7 +3,7 @@
 ---
 --- Designed for one or more player ships. The terrain differs slightly every time the scenario is run. Default length: 30 minutes. May be shortened to 15 minutes or lengthened to an hour.
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
 -- Type: Replayable
 -- Author: Xansta
 -- Setting[First]: Configures how long until the first major event occurs. The default is ten minutes. Shorter is harder. Longer is easier.
@@ -281,13 +281,13 @@ function setConstants()	--variables that don't change
 			[3] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
-				{angle =  1, distance = 1},				
+				{angle =  1, distance = 1},
 			},
 			[4] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
 				{angle =  1, distance = 1},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[5] = {
 				{angle =  0, distance = 0},
@@ -302,7 +302,7 @@ function setConstants()	--variables that don't change
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[7] = {
 				{angle =  0, distance = 0},
@@ -319,7 +319,7 @@ function setConstants()	--variables that don't change
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 			},
@@ -340,7 +340,7 @@ function setConstants()	--variables that don't change
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -365,7 +365,7 @@ function setConstants()	--variables that don't change
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -394,7 +394,7 @@ function setConstants()	--variables that don't change
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 4},
@@ -410,7 +410,7 @@ function setConstants()	--variables that don't change
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 3},
@@ -422,8 +422,8 @@ function setConstants()	--variables that don't change
 				{angle =  0, distance = 6},
 			},
 		},
-	}		
-	max_pyramid_tier = 15	
+	}
+	max_pyramid_tier = 15
 	ship_template = {	--ordered by relative strength
 		-- normal ships that are part of the fleet spawn process
 		["Gnat"] =				{strength = 2,	adder = false,	missiler = false,	beamer = true,	frigate = false,	chaser = false,	warper = false,	jumper = false,	fighter = true,		drone = true,	unusual = false,	base = false,	short_range_radar = 4500,	hop_angle = 0,	hop_range = 580,	create = gnat},
@@ -531,7 +531,7 @@ function setConstants()	--variables that don't change
 			print(template,"has no create function")
 		end
 	end
-	player_ship_stats = {	
+	player_ship_stats = {
 		["MP52 Hornet"] 		= { strength = 7, 	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 4000, probes = 8,	tractor = false,	mining = false	},
 		["Piranha"]				= { strength = 16,	cargo = 8,	distance = 200,	long_range_radar = 25000, short_range_radar = 6000, probes = 8,	tractor = false,	mining = false	},
 		["Flavia P.Falcon"]		= { strength = 13,	cargo = 15,	distance = 200,	long_range_radar = 40000, short_range_radar = 5000, probes = 8,	tractor = true,		mining = true	},
@@ -681,7 +681,7 @@ function setGlobals()	--variables that might change
 		["Leftovers"] =			{"Foregone","Righteous","Scandalous"},
 	}
 	star_list = {
-		{radius = random(600,1400), distance = random(-2500,-1400), 
+		{radius = random(600,1400), distance = random(-2500,-1400),
 			name = {
 				"Gamma Piscium",
 				"Beta Lyporis",
@@ -765,39 +765,39 @@ function setGlobals()	--variables that might change
 		{
 			name = {"Alderaan","Dagobah","Dantooine","Rigel"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-1.png", 
-				cloud = "planets/clouds-1.png", 
+				surface = "planets/planet-1.png",
+				cloud = "planets/clouds-1.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 		},
 		{
 			name = {"Pahvo","Penthara","Scalos"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-4.png", 
-				cloud = "planets/clouds-3.png", 
+				surface = "planets/planet-4.png",
+				cloud = "planets/clouds-3.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 		},
 		{
 			name = {"Tanuga","Vacca","Terlina","Timor"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-5.png", 
-				cloud = "planets/clouds-2.png", 
+				surface = "planets/planet-5.png",
+				cloud = "planets/clouds-2.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 		},
@@ -840,17 +840,17 @@ function constructEnvironment()
 			stations = outer_stations,
 			space = outer_space,
 			shape = "torus",
-			center_x = doomed_system_x, 
-			center_y = doomed_system_y, 
-			inner_radius = 35000, 
+			center_x = doomed_system_x,
+			center_y = doomed_system_y,
+			inner_radius = 35000,
 			outer_radius = 60000
 		},
 		["Doomed Circle"] = {
-			stations = inner_stations, 
+			stations = inner_stations,
 			space = inner_space,
-			shape = "circle", 
-			center_x = doomed_system_x, 
-			center_y = doomed_system_y, 
+			shape = "circle",
+			center_x = doomed_system_x,
+			center_y = doomed_system_y,
 			radius = 15000
 		},
 	}
@@ -938,7 +938,7 @@ function constructEnvironment()
 					break
 				end
 			end
-		end 
+		end
 	until(objects_placed_count >= 100 and #transport_list >= 10)
 --	set terrain in connecting area
 	terrain = {
@@ -1275,7 +1275,7 @@ function constructMinorEnemyTrap()
 			if faction ~= "Exuari" then
 				table.insert(enemy_factions,faction)
 			end
-		end	
+		end
 	end
 	minor_enemy = tableSelectRandom(enemy_factions)
 	minor_enemy_angle = random(0,360)
@@ -1606,7 +1606,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	if enemyStrength == nil then
@@ -1681,7 +1681,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template].fleet_group[fleetComposition] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -1701,7 +1701,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template].fleet_group[fleetComposition] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -1720,7 +1720,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template][fleet_group[fleetComposition]] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -2460,7 +2460,7 @@ function placeSensorJammer(placement_area)
 	local impact_increment = (hi_impact - lo_impact)/4
 --	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--	2-6, 2-8, 2-10
 	local mix = math.random(2,10 - (4 - (2)))	--	2-8
-	sensor_jammer_scan_complexity = 1 
+	sensor_jammer_scan_complexity = 1
 	sensor_jammer_scan_depth = 1
 	if mix > 5 then
 		sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)
@@ -2935,7 +2935,7 @@ function maintainTransports()
 							break
 						end
 					end
-				end				
+				end
 				if clean_list and #transport_station_pool > 0 then
 					local dock_station = tableSelectRandom(transport_station_pool)
 					transport:orderDock(dock_station)
@@ -3507,7 +3507,7 @@ function scenarioMissionsUndocked()
 					comms_source.connect_to_nova = true
 					setCommsMessage(_("station-comms","OK. We've rigged it to contact you when you close communications with us."))
 				end)
-			end)			
+			end)
 		end
 	elseif final_nova_artifact ~= nil and final_nova_artifact:isValid() then
 		askStationAboutExuari()
@@ -4277,7 +4277,7 @@ function updatePlayerLongRangeSensors(delta,p)
 				end
 				if distance_diagnostic then
 					print("distance_diagnostic 24 boost_probe:",boost_probe,"p:",p)
-				end		
+				end
 				local boost_probe_distance = distance(boost_probe,p)
 				if boost_probe_distance < boost_probe.range*1000 then
 					if boost_probe_distance < boost_probe.range*1000/2 then

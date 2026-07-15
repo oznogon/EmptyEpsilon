@@ -1,5 +1,5 @@
 -- Name: Unwanted Visitors
--- Description: Get rid of the unwanted visitors. Other missions follow. Check friendly stations for mission orders. Dispatch office provides new missions. Continue or stand down after each mission. 
+-- Description: Get rid of the unwanted visitors. Other missions follow. Check friendly stations for mission orders. Dispatch office provides new missions. Continue or stand down after each mission.
 ---
 --- Each mission takes 15 - 50 minutes. That can add up. Four missions in the first area, three in the second area and in the third area, one open ended mission, chosen from three possibilities.
 ---
@@ -19,7 +19,7 @@
 --- Peter Priddy
 --- Slate https://www.amazon.com/T.-L.-Ford/e/B0034Q6Q2S
 --- Stephen Priddy
---- 
+---
 --- Version 2
 -- Type: Replayable
 -- Setting[Enemies]: Configures the strength of the enemies
@@ -137,7 +137,7 @@ function createPlayerShipNarsil()
 	playerNarsil:setJumpDrive(false)					--no Jump
 	playerNarsil:setWarpDrive(true)						--add warp
 	playerNarsil:setHullMax(200)						--weaker hull (vs 250)
-	playerNarsil:setHull(200)							
+	playerNarsil:setHull(200)
 	playerNarsil:setShieldsMax(150,150)					--weaker shields (vs 200)
 	playerNarsil:setShields(150,150)
 	playerNarsil:setWeaponTubeCount(6)					--one more forward tube, less flexible ordnance
@@ -167,7 +167,7 @@ function createPlayerShipHeadhunter()
 	playerHeadhunter:setShieldsMax(100, 100)					--stronger shields (vs 70, 70)
 	playerHeadhunter:setShields(100, 100)
 	playerHeadhunter:setBeamWeapon(0, 10, 0, 1200.0, 4.0, 4)	--one beam (vs 0)
-	playerHeadhunter:setBeamWeaponTurret(0, 80, 0, 1)			--slow turret 
+	playerHeadhunter:setBeamWeaponTurret(0, 80, 0, 1)			--slow turret
 	playerHeadhunter:setWeaponTubeCount(7)						--one fewer mine tube, but EMPs added
 	playerHeadhunter:setWeaponTubeDirection(6, 180)				--mine tube points straight back
 	playerHeadhunter:setWeaponTubeExclusiveFor(0,"HVLI")
@@ -184,11 +184,11 @@ function createPlayerShipHeadhunter()
 	playerHeadhunter:weaponTubeAllowMissle(4,"EMP")
 	playerHeadhunter:weaponTubeAllowMissle(4,"Nuke")
 	playerHeadhunter:setWeaponStorageMax("Mine",4)				--fewer mines (vs 8)
-	playerHeadhunter:setWeaponStorage("Mine", 4)				
+	playerHeadhunter:setWeaponStorage("Mine", 4)
 	playerHeadhunter:setWeaponStorageMax("EMP",4)				--more EMPs (vs 0)
-	playerHeadhunter:setWeaponStorage("EMP", 4)					
+	playerHeadhunter:setWeaponStorage("EMP", 4)
 	playerHeadhunter:setWeaponStorageMax("Nuke",4)				--fewer Nukes (vs 6)
-	playerHeadhunter:setWeaponStorage("Nuke", 4)				
+	playerHeadhunter:setWeaponStorage("Nuke", 4)
 	playerHeadhunter:addReputationPoints(50)
 	removeGMFunction("Headhunter")
 	playerShipGMButtons()
@@ -197,8 +197,8 @@ function createPlayerShipBlazon()
 	playerBlazon = PlayerSpaceship():setTemplate("Striker"):setFaction("Human Navy"):setCallSign("Blazon")
 	playerBlazon:setTypeName("Stricken")
 	playerBlazon:setRepairCrewCount(2)
-	playerBlazon:setImpulseMaxSpeed(105)					
-	playerBlazon:setRotationMaxSpeed(35)				
+	playerBlazon:setImpulseMaxSpeed(105)
+	playerBlazon:setRotationMaxSpeed(35)
 	playerBlazon:setShieldsMax(80,50)
 	playerBlazon:setShields(80,50)
 	playerBlazon:setBeamWeaponTurret(0,60,-15,2)
@@ -669,13 +669,13 @@ function setConstants()
 			[3] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
-				{angle =  1, distance = 1},				
+				{angle =  1, distance = 1},
 			},
 			[4] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
 				{angle =  1, distance = 1},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[5] = {
 				{angle =  0, distance = 0},
@@ -690,7 +690,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[7] = {
 				{angle =  0, distance = 0},
@@ -707,7 +707,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 			},
@@ -728,7 +728,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -753,7 +753,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -782,7 +782,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 4},
@@ -798,7 +798,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 3},
@@ -810,7 +810,7 @@ function setConstants()
 				{angle =  0, distance = 6},
 			},
 		},
-	}		
+	}
 	max_pyramid_tier = 15
 	--Player ship name lists to supplant standard randomized call sign generation
 	playerShipNamesFor = {
@@ -839,7 +839,7 @@ function setConstants()
 		["ZX-Lindworm"] =		{"Seagull","Catapult","Blowhard","Flapper","Nixie","Pixie","Tinkerbell"},
 		["Leftovers"] =			{"Foregone","Righteous",""},
 	}
-	player_ship_stats = {	
+	player_ship_stats = {
 		["MP52 Hornet"] 		= { strength = 7, 	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 4000, tractor = false,	mining = false,	cm_boost = 600, cm_strafe = 0,		},
 		["Piranha"]				= { strength = 16,	cargo = 8,	distance = 200,	long_range_radar = 25000, short_range_radar = 6000, tractor = false,	mining = false,	cm_boost = 200, cm_strafe = 150,	},
 		["Flavia P.Falcon"]		= { strength = 13,	cargo = 15,	distance = 200,	long_range_radar = 40000, short_range_radar = 5000, tractor = true,		mining = true,	cm_boost = 250, cm_strafe = 150,	},
@@ -876,7 +876,7 @@ function setConstants()
 		["Era"]					= { strength = 14,	cargo = 14,	distance = 200,	long_range_radar = 50000, short_range_radar = 5000, tractor = true,		mining = true,	cm_boost = 250, cm_strafe = 150,	},
 		["Squid"]				= { strength = 14,	cargo = 8,	distance = 200,	long_range_radar = 25000, short_range_radar = 5000, tractor = false,	mining = false,	cm_boost = 200, cm_strafe = 150,	},
 		["Atlantis II"]			= { strength = 60,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, tractor = true,		mining = true,	cm_boost = 400, cm_strafe = 250,	},
-	}	
+	}
 	if server_voices then
 		primusNames = {"Minos","Talos","Primus"}
 		secondusNames = {"Secondus","Aurora","Covenant"}
@@ -938,7 +938,7 @@ function setConstants()
 					  "Miguel Lopez",
 					  "Renata Rodriguez"}
 	--				short clip name		length in seconds
-	voice_clips = {	
+	voice_clips = {
 					["Avery01"] = 					0.971,
 					["Avery02"] = 					7.187,
 					["Ellis01"] =					14.433,
@@ -1410,7 +1410,7 @@ function buildLocalSolarSystem()
 	--asteroids between station 1 and station 3 (counter-clockwise)
 	local asteroidPopulation = math.random(8,20)
 	beltStationAngle = belt1Stations[1].angle - random(15,30)
-	if beltStationAngle < 0 then 
+	if beltStationAngle < 0 then
 		beltStationAngle = beltStationAngle + 360
 	end
 	createOrbitalAsteroids(asteroidPopulation,beltOrbit1,beltStationAngle,belt1Stations[1].angle-1,"belt1",math.floor(beltOrbit1Width/2))
@@ -1448,7 +1448,7 @@ function buildLocalSolarSystem()
 	--asteroids between station 3 and 5 (counter clockwise)
 	local asteroidPopulation = math.random(8,20)
 	beltStationAngle = belt1Stations[3].angle - random(20,60)
-	if beltStationAngle < 0 then 
+	if beltStationAngle < 0 then
 		beltStationAngle = beltStationAngle + 360
 	end
 	createOrbitalAsteroids(asteroidPopulation,beltOrbit1,beltStationAngle,belt1Stations[3].angle-1,"belt1",math.floor(beltOrbit1Width/2))
@@ -1474,7 +1474,7 @@ function buildLocalSolarSystem()
 	--asteroids trailing station 5 (counter clockwise)
 	local asteroidPopulation = math.random(8,20)
 	beltStationAngle = belt1Stations[5].angle - random(30,90)
-	if beltStationAngle < 0 then 
+	if beltStationAngle < 0 then
 		beltStationAngle = beltStationAngle + 360
 	end
 	createOrbitalAsteroids(asteroidPopulation,beltOrbit1,beltStationAngle,belt1Stations[5].angle-1,"belt1",math.floor(beltOrbit1Width/2))
@@ -1528,7 +1528,7 @@ function buildLocalSolarSystem()
 	--asteroids between station 1 and station 3 (counter-clockwise)
 	local asteroidPopulation = math.random(8,20)
 	beltStationAngle = belt2Stations[1].angle - random(20,60)
-	if beltStationAngle < 0 then 
+	if beltStationAngle < 0 then
 		beltStationAngle = beltStationAngle + 360
 	end
 	createOrbitalAsteroids(asteroidPopulation,beltOrbit2,beltStationAngle,belt2Stations[1].angle-1,"belt2",math.floor(beltOrbit2Width/2))
@@ -1566,7 +1566,7 @@ function buildLocalSolarSystem()
 	--asteroids between station 3 and 5 (counter clockwise)
 	local asteroidPopulation = math.random(8,20)
 	beltStationAngle = belt2Stations[3].angle - random(25,60)
-	if beltStationAngle < 0 then 
+	if beltStationAngle < 0 then
 		beltStationAngle = beltStationAngle + 360
 	end
 	createOrbitalAsteroids(asteroidPopulation,beltOrbit2,beltStationAngle,belt2Stations[3].angle-1,"belt2",math.floor(beltOrbit2Width/2))
@@ -1592,7 +1592,7 @@ function buildLocalSolarSystem()
 	--asteroids trailing station 5 (counter clockwise)
 	local asteroidPopulation = math.random(8,20)
 	beltStationAngle = belt2Stations[5].angle - random(30,90)
-	if beltStationAngle < 0 then 
+	if beltStationAngle < 0 then
 		beltStationAngle = beltStationAngle + 360
 	end
 	createOrbitalAsteroids(asteroidPopulation,beltOrbit2,beltStationAngle,belt2Stations[5].angle-1,"belt2",math.floor(beltOrbit2Width/2))
@@ -1814,7 +1814,7 @@ function buildLocalSolarSystem()
 	table.insert(clueStations,pStation)			--21
 	pStation.angle = beltStationAngle
 	pStation.speed = tertiusAsteroidBeltIncrement
-	
+
 	--outer belt 2 stations (beyond asteroid belt, before Tertius)
 	outerBelt2Stations = {}
 	sa1 = random(0,360)
@@ -2007,7 +2007,7 @@ function createTertiusOrbitalAsteroids(amount,distance,startArc,clockwiseEndArc,
 			ta.distance = pointDist
 			ta.speed = speedIncrement
 			ta.belt_id = belt_id
-			table.insert(tertiusAsteroids,ta)		
+			table.insert(tertiusAsteroids,ta)
 			pointDist = distance + random(-randomize,randomize)
 			tva = VisualAsteroid():setPosition(tertiusX + math.cos(radialPoint / 180 * math.pi) * pointDist, tertiusY + math.sin(radialPoint / 180 * math.pi) * pointDist)
 			tva:setSize(random(3,100) + random(3,100) + random(3,100) + random(3,500))
@@ -2028,7 +2028,7 @@ function createTertiusOrbitalAsteroids(amount,distance,startArc,clockwiseEndArc,
 		for ndex=1,math.floor(amount-arcLen) do
 			radialPoint = random(startArc,clockwiseEndArc)
 			pointDist = distance + random(-randomize,randomize)
-			ta = Asteroid():setPosition(tertiusX + math.cos(radialPoint / 180 * math.pi) * pointDist, tertiusY + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			ta = Asteroid():setPosition(tertiusX + math.cos(radialPoint / 180 * math.pi) * pointDist, tertiusY + math.sin(radialPoint / 180 * math.pi) * pointDist)
 			ta:setSize(random(3,100) + random(3,100) + random(3,100) + random(3,500))
 			if radialPoint > 360 then
 				radialPoint = radialPoint - 360
@@ -2134,7 +2134,7 @@ function createOrbitalAsteroids(amount,distance,startArc,clockwiseEndArc,belt_id
 		for ndex=1,math.floor(amount-arcLen) do
 			radialPoint = random(startArc,clockwiseEndArc)
 			pointDist = distance + random(-randomize,randomize)
-			ta = Asteroid():setPosition(solX + math.cos(radialPoint / 180 * math.pi) * pointDist, solY + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			ta = Asteroid():setPosition(solX + math.cos(radialPoint / 180 * math.pi) * pointDist, solY + math.sin(radialPoint / 180 * math.pi) * pointDist)
 			ta:setSize(random(3,100) + random(3,100) + random(3,100) + random(3,500))
 			if radialPoint > 360 then
 				radialPoint = radialPoint - 360
@@ -2252,7 +2252,7 @@ function movingObjects(delta)
 	pmx, pmy = vectorFromAngle(planetTertiusMoon3.angle,tertiusMoonOrbit)
 	planetTertiusMoon3:setPosition(prx+pmx,pry+pmy)
 	if moveDiagnostic then print("end of tertius moon moving objects") end
-	--tertius orbital body station 
+	--tertius orbital body station
 	if tertiusStation ~= nil and tertiusStation:isValid() then
 		tertiusStation.angle = tertiusStation.angle + tertiusOrbitalBodyIncrement
 		if tertiusStation.angle >= 360 then
@@ -2278,7 +2278,7 @@ function movingObjects(delta)
 		local ta = tertiusAsteroids[i]
 		if ta ~= nil and ta:isValid() then
 			ta.angle = ta.angle + ta.speed
-			if ta.angle >= 360 then 
+			if ta.angle >= 360 then
 				ta.angle = 0
 			end
 			pmx, pmy = vectorFromAngle(ta.angle, ta.distance)
@@ -2330,7 +2330,7 @@ function movingObjects(delta)
 		local ta = beltAsteroidList[i]
 		if ta ~= nil and ta:isValid() then
 			ta.angle = ta.angle + ta.speed
-			if ta.angle >= 360 then 
+			if ta.angle >= 360 then
 				ta.angle = 0
 			end
 			pmx, pmy = vectorFromAngle(ta.angle, ta.distance)
@@ -2541,7 +2541,7 @@ function chooseUpgradeGood(ideal_good,upgrade_station)
 	return required_good
 end
 function payForUpgrade()
-	if	(difficulty == 1 and mission_region < 2) or 
+	if	(difficulty == 1 and mission_region < 2) or
 		(difficulty == 1 and mission_complete_count < 5) or
 		(difficulty < 1 and mission_complete_count < 3) or
 		(difficulty > 1 and mission_region < 3) or
@@ -3124,10 +3124,10 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
+		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or
+			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or
+			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or
+			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or
 			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
 			addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
 				setCommsMessage(_("ammo-comms","What type of ordnance do you need?"))
@@ -3268,7 +3268,7 @@ function handleDockedState()
 							end
 							primaryOrders = second_plot.order
 						end)
-					end			
+					end
 				else
 					if #second_plots >= 1 then
 						for i,second_plot in ipairs(second_plots) do
@@ -3733,13 +3733,13 @@ function handleDockedState()
 			local playerCallSign = comms_source:getCallSign()
 			local ctd = comms_target.comms_data
 			if fixSatelliteDiagnostic then print("satellite fix good 1: " .. comms_target.satelliteFixGood) end
-			if fixSatelliteDiagnostic then 
+			if fixSatelliteDiagnostic then
 				if comms_source.goods ~= nil and comms_source.goods[ctd.satelliteFixGood] == nil then
 					print("related player good: nil")
 				else
 					print("related player good: " .. comms_source.goods[ctd.satelliteFixGood])
 				end
-			end 
+			end
 			if comms_source.goods ~= nil and comms_source.goods[comms_target.satelliteFixGood] ~= nil and comms_source.goods[comms_target.satelliteFixGood] > 0 then
 				addCommsReply(string.format(_("satellites-comms","Provide %s"),comms_target.satelliteFixGood), function()
 					comms_source.goods[comms_target.satelliteFixGood] = comms_source.goods[comms_target.satelliteFixGood] - 1
@@ -3761,13 +3761,13 @@ function handleDockedState()
 			local playerCallSign = comms_source:getCallSign()
 			local ctd = comms_target.comms_data
 			if fixSatelliteDiagnostic then print("satellite fix good 2: " .. comms_target.satelliteFixGood) end
-			if fixSatelliteDiagnostic then 
+			if fixSatelliteDiagnostic then
 				if comms_source.goods[comms_target.satelliteFixGood] == nil then
 					print("related player good: nil")
 				else
 					print("related player good: " .. comms_source.goods[comms_target.satelliteFixGood])
 				end
-			end 
+			end
 			if comms_source.goods ~= nil and comms_source.goods[comms_target.satelliteFixGood] ~= nil and comms_source.goods[comms_target.satelliteFixGood] > 0 then
 				addCommsReply(string.format(_("satellites-comms","Give %s to %s"),comms_target.satelliteFixGood, comms_target:getCallSign()), function()
 					comms_source.goods[comms_target.satelliteFixGood] = comms_source.goods[comms_target.satelliteFixGood] - 1
@@ -3789,13 +3789,13 @@ function handleDockedState()
 			local playerCallSign = comms_source:getCallSign()
 			local ctd = comms_target.comms_data
 			if fixSatelliteDiagnostic then print("satellite fix good 3: " .. comms_target.satelliteFixGood) end
-			if fixSatelliteDiagnostic then 
+			if fixSatelliteDiagnostic then
 				if comms_source.goods[comms_target.satelliteFixGood] == nil then
 					print("related player good: nil")
 				else
 					print("related player good: " .. comms_source.goods[comms_target.satelliteFixGood])
 				end
-			end 
+			end
 			if comms_source.goods[comms_target.satelliteFixGood] ~= nil and comms_source.goods[comms_target.satelliteFixGood] > 0 then
 				addCommsReply(string.format(_("satellites-comms","Provide %s"),comms_target.satelliteFixGood), function()
 					comms_source.goods[comms_target.satelliteFixGood] = comms_source.goods[comms_target.satelliteFixGood] - 1
@@ -4034,7 +4034,7 @@ function handleDockedState()
 			end
 		end
 		showCurrentStats()
-	else	--neutral 
+	else	--neutral
 		if math.random(1,5) <= (3 - difficulty) then
 			if comms_source:getRepairCrewCount() < comms_source.maxRepairCrew then
 				hireCost = math.random(45,90)
@@ -4068,7 +4068,7 @@ function handleDockedState()
 				end)
 			end
 		end
-	end	--end friendly/neutral 
+	end	--end friendly/neutral
 	addCommsReply(_("cartographyOffice-comms","Visit cartography office"), function()
 		if comms_target.cartographer_description == nil then
 			local clerk = {
@@ -4249,7 +4249,7 @@ function handleDockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 		addCommsReply(_("Back"), commsStation)
-	end)	
+	end)
 	local goodCount = 0
 	for good, goodData in pairs(ctd.goods) do
 		goodCount = goodCount + 1
@@ -4631,7 +4631,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms","You need to stay docked for that action."))
 		return
 	end
@@ -4681,7 +4681,7 @@ function handleWeaponRestock(weapon)
 				end)
 			else
 				setCommsMessage(_("needRep-comms","Not enough reputation."))
-				addCommsReply(_("Back"), commsStation)				
+				addCommsReply(_("Back"), commsStation)
 			end
 		end
         addCommsReply(_("Back"), commsStation)
@@ -4891,7 +4891,7 @@ function handleUndockedState()
 				for n=0,shields-1 do
 					msg = msg .. string.format(_("stationAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 				end
-			end			
+			end
 			setCommsMessage(msg);
 			addCommsReply(_("Back"), commsStation)
 		end)
@@ -5882,18 +5882,18 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, clo
 		for ndex=1,arcLen do
 			local radialPoint = startArc+ndex
 			local pointDist = distance + random(-randomize,randomize)
-			obj = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)		
+			obj = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 			if isObjectType(obj,"Asteroid") or isObjectType(obj,"VisualAsteroid") then
 				obj:setSize(random(3,100) + random(3,100) + random(3,100) + random(3,500))
-			end	
+			end
 		end
 		for ndex=1,amount-arcLen do
 			radialPoint = random(startArc,clockwiseEndArc)
 			pointDist = distance + random(-randomize,randomize)
-			obj = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			obj = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 			if isObjectType(obj,"Asteroid") or isObjectType(obj,"VisualAsteroid") then
 				obj:setSize(random(3,100) + random(3,100) + random(3,100) + random(3,500))
-			end	
+			end
 		end
 	else
 		for ndex=1,amount do
@@ -5902,7 +5902,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, clo
 			obj = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 			if isObjectType(obj,"Asteroid") or isObjectType(obj,"VisualAsteroid") then
 				obj:setSize(random(3,100) + random(3,100) + random(3,100) + random(3,500))
-			end	
+			end
 		end
 	end
 end
@@ -5955,7 +5955,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, perimeter_min, per
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	local enemyStrength = math.max(danger * enemy_power * playerPower(),5)
@@ -6484,7 +6484,7 @@ function checkOrbitingArtifactEvents(delta)
 					end
 				end
 				break
-			end			
+			end
 		end
 		if artifactSensorDataGathered then
 			if getScenarioTime() > artifactDataAnalysisTimer then
@@ -6893,7 +6893,7 @@ function checkFixSatelliteEvents(delta)
 					"Fiend G4",
 					"Fiend G6",
 				}
-				enemyFleet = {} 
+				enemyFleet = {}
 				for i,p in ipairs(getActivePlayerShips()) do
 					local px, py = p:getPosition()
 					for j=1,math.random(2,5) do

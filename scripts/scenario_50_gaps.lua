@@ -103,7 +103,7 @@ function setConstants()
 end
 function setGlobals()
 	--list of goods available to buy, sell or trade (sell still under development)
-	goodsList = {	
+	goodsList = {
 		{"food",0},
 		{"medicine",0},
 		{"nickel",0},
@@ -131,7 +131,7 @@ function setGlobals()
 		{"nanites",0},
 		{"software",0},
 		{"circuit",0},
-		{"battery",0}	
+		{"battery",0}
 	}
 	diagnostic = false
 	interwave_delay_name = _("buttonGM","Normal")
@@ -205,10 +205,10 @@ function setGlobals()
 	ediv1s1 = 0	--division 1, section 1
 	ediv1s2 = 0	--division 1, section 2
 	--West
-	wdiv2s1 = 0	--division 2, section 1	
-	wdiv2s2 = 0	--division 2, section 2	
-	wdiv2s3 = 0	--division 2, section 3	
-	wdiv2s4 = 0	--division 2, section 4	
+	wdiv2s1 = 0	--division 2, section 1
+	wdiv2s2 = 0	--division 2, section 2
+	wdiv2s3 = 0	--division 2, section 3
+	wdiv2s4 = 0	--division 2, section 4
 	wdiv1s1 = 0	--division 1, section 1
 	wdiv1s2 = 0	--division 1, section 2
 	north_gap_graphic = false
@@ -320,12 +320,12 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 		for ndex=1,arcLen do
 			radialPoint = startArc+ndex
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 		end
 		for ndex=1,amount-arcLen do
 			radialPoint = random(startArc,endArcClockwise)
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 		end
 	else
 		for ndex=1,amount do
@@ -421,7 +421,7 @@ function buildAsteroids()
 	ax, ay = vectorFromAngle(random(290,340),20000)
 	placeRandomAroundPoint(Asteroid,40,1,5000,ax,ay)
 end
---	Transport ship generation and handling 
+--	Transport ship generation and handling
 function nearStations(station, compareStationList)
 	remainingStations = {}
 	if compareStationList[1]:isValid() then
@@ -540,13 +540,13 @@ function transportPlot(delta)
 		end
 	end
 end
---	Station communication 
+--	Station communication
 function tableSelectRandom(array)
 	local array_item_count = #array
     if array_item_count == 0 then
         return nil
     end
-	return array[math.random(1,#array)]	
+	return array[math.random(1,#array)]
 end
 function commsStation()
     if comms_target.comms_data == nil then
@@ -820,7 +820,7 @@ function handleDockedState()
 			setCommsMessage(goodsReport)
 			for good, goodData in pairs(comms_target.comms_data.goods) do
 				addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good_desc[good],goodData["cost"]), function()
-					if not comms_source:isDocked(comms_target) then 
+					if not comms_source:isDocked(comms_target) then
 						setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 						return
 					end
@@ -855,7 +855,7 @@ function handleDockedState()
 				for good, price in pairs(comms_target.comms_data.buy) do
 					if comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
 						addCommsReply(string.format(_("trade-comms", "Sell one %s for %i reputation"),good_desc[good],price), function()
-							if not comms_source:isDocked(comms_target) then 
+							if not comms_source:isDocked(comms_target) then
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
@@ -876,7 +876,7 @@ function handleDockedState()
 						if comms_source.goods.food.quantity > 0 then
 							for good, goodData in pairs(comms_target.comms_data.goods) do
 								addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good_desc[good]), function()
-									if not comms_source:isDocked(comms_target) then 
+									if not comms_source:isDocked(comms_target) then
 										setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 										return
 									end
@@ -909,7 +909,7 @@ function handleDockedState()
 						if comms_source.goods.medicine.quantity > 0 then
 							for good, goodData in pairs(comms_target.comms_data.goods) do
 								addCommsReply(string.format(_("trade-comms", "Trade medicine for %s"),good_desc[good]), function()
-									if not comms_source:isDocked(comms_target) then 
+									if not comms_source:isDocked(comms_target) then
 										setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 										return
 									end
@@ -942,7 +942,7 @@ function handleDockedState()
 						if comms_source.goods.luxury.quantity > 0 then
 							for good, goodData in pairs(comms_target.comms_data.goods) do
 								addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good_desc[good]), function()
-									if not comms_source:isDocked(comms_target) then 
+									if not comms_source:isDocked(comms_target) then
 										setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 										return
 									end
@@ -1033,7 +1033,7 @@ function commsSouthGap()
 	elseif difficulty > 1 then
 		--division 2, section 1   -750     750
 		--division 2, section 2     |       |
-		--division 3, section 3 | 3 | 2 | 1 | 4    
+		--division 3, section 3 | 3 | 2 | 1 | 4
 		--division 4, section 4         0
 		cMsg = string.format(_("minefield-comms", "%s\nCount near middle on the right: %i"),cMsg,sdiv2s1)
 		cMsg = string.format(_("minefield-comms", "%s\nCount near middle on the left: %i"),cMsg,sdiv2s2)
@@ -1126,7 +1126,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -1249,9 +1249,9 @@ function handleUndockedState()
 					if enemiesInRange > 1 then
 						setCommsMessage(string.format(_("helpfullWarning-comms", "Yes, we see %i enemies within 30U"),enemiesInRange))
 					else
-						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))						
+						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))
 					end
-					comms_source:addReputationPoints(2.0)					
+					comms_source:addReputationPoints(2.0)
 				else
 					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
 					comms_source:addReputationPoints(1.0)
@@ -1441,7 +1441,7 @@ function getFriendStatus()
         return "neutral"
     end
 end
---	Ship communication 
+--	Ship communication
 function commsShip()
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
@@ -2255,7 +2255,7 @@ function checkWesternernGap()
 			if mx < 20375 and mx > 19625 then	--		-  750
 				if my > 0 then					--		4
 					if my > 750 then			--		-
-						wdiv2s4 = wdiv2s4 + 1	
+						wdiv2s4 = wdiv2s4 + 1
 					else
 						wdiv2s1 = wdiv2s1 + 1
 					end
@@ -2368,7 +2368,7 @@ function checkSouthernGap()
 	elseif difficulty > 1 then
 		sdiv2s1 = 0	--division 2, section 1   -750     750
 		sdiv2s2 = 0	--division 2, section 2     |       |
-		sdiv2s3 = 0	--division 3, section 3 | 3 | 2 | 1 | 4    
+		sdiv2s3 = 0	--division 3, section 3 | 3 | 2 | 1 | 4
 		sdiv2s4 = 0	--division 4, section 4         0
 		for i,m in ipairs(south_mines) do
 			local mx, my = m:getPosition()
@@ -2505,7 +2505,7 @@ function gapGraphic()
 				if north_gap_phase == 1 then
 					if difficulty == 1 then
 						north_gap_zones[2]:setColor(128,0,128)
-						north_gap_zones[3]:setColor(128,0,0)						
+						north_gap_zones[3]:setColor(128,0,0)
 					elseif difficulty > 1 then					--R G P Y
 						north_gap_zones[2]:setColor(255,0,255)	--Y R G P--
 						north_gap_zones[3]:setColor(128,0,0)	--P Y R G
@@ -2517,7 +2517,7 @@ function gapGraphic()
 				elseif north_gap_phase == 2 then
 					if difficulty == 1 then
 						north_gap_zones[2]:setColor(255,0,255)
-						north_gap_zones[3]:setColor(128,0,128)						
+						north_gap_zones[3]:setColor(128,0,128)
 					elseif difficulty > 1 then					--R G P Y
 						north_gap_zones[2]:setColor(128,0,128)	--Y R G P
 						north_gap_zones[3]:setColor(255,0,255)	--P Y R G--
@@ -2529,7 +2529,7 @@ function gapGraphic()
 				elseif north_gap_phase == 3 then
 					if difficulty == 1 then
 						north_gap_zones[2]:setColor(128,0,0)
-						north_gap_zones[3]:setColor(255,0,255)						
+						north_gap_zones[3]:setColor(255,0,255)
 					elseif difficulty > 1 then					--R G P Y
 						north_gap_zones[2]:setColor(0,128,0)	--Y R G P
 						north_gap_zones[3]:setColor(128,0,128)	--P Y R G
@@ -2541,7 +2541,7 @@ function gapGraphic()
 				elseif north_gap_phase == 4 then
 					if difficulty == 1 then
 						north_gap_zones[2]:setColor(128,0,128)
-						north_gap_zones[3]:setColor(128,0,0)						
+						north_gap_zones[3]:setColor(128,0,0)
 					elseif difficulty > 1 then					--R G P Y
 						north_gap_zones[2]:setColor(128,0,0)	--Y R G P
 						north_gap_zones[3]:setColor(255,0,255)	--P Y R G
@@ -2553,7 +2553,7 @@ function gapGraphic()
 				elseif north_gap_phase == 5 then
 					if difficulty == 1 then
 						north_gap_zones[2]:setColor(0,128,0)
-						north_gap_zones[3]:setColor(128,0,128)						
+						north_gap_zones[3]:setColor(128,0,128)
 					elseif difficulty > 1 then					--R G P Y
 						north_gap_zones[2]:setColor(255,0,255)	--Y R G P
 						north_gap_zones[3]:setColor(128,0,128)	--P Y R G
@@ -2572,7 +2572,7 @@ function gapGraphic()
 						north_gap_zones[3]:destroy()
 						north_gap_zones[4]:destroy()
 						north_gap_zones[5]:destroy()
-					end	
+					end
 					north_gap_phase = nil
 					north_gap_time = nil
 					north_gap_graphic = false
@@ -2673,7 +2673,7 @@ function gapGraphic()
 				if south_gap_phase == 1 then
 					if difficulty == 1 then
 						south_gap_zones[2]:setColor(128,0,128)
-						south_gap_zones[3]:setColor(128,0,0)						
+						south_gap_zones[3]:setColor(128,0,0)
 					elseif difficulty > 1 then					--R G P Y
 						south_gap_zones[2]:setColor(255,0,255)	--Y R G P--
 						south_gap_zones[3]:setColor(128,0,0)	--P Y R G
@@ -2685,7 +2685,7 @@ function gapGraphic()
 				elseif south_gap_phase == 2 then
 					if difficulty == 1 then
 						south_gap_zones[2]:setColor(255,0,255)
-						south_gap_zones[3]:setColor(128,0,128)						
+						south_gap_zones[3]:setColor(128,0,128)
 					elseif difficulty > 1 then					--R G P Y
 						south_gap_zones[2]:setColor(128,0,128)	--Y R G P
 						south_gap_zones[3]:setColor(255,0,255)	--P Y R G--
@@ -2697,7 +2697,7 @@ function gapGraphic()
 				elseif south_gap_phase == 3 then
 					if difficulty == 1 then
 						south_gap_zones[2]:setColor(128,0,0)
-						south_gap_zones[3]:setColor(255,0,255)						
+						south_gap_zones[3]:setColor(255,0,255)
 					elseif difficulty > 1 then					--R G P Y
 						south_gap_zones[2]:setColor(0,128,0)	--Y R G P
 						south_gap_zones[3]:setColor(128,0,128)	--P Y R G
@@ -2709,7 +2709,7 @@ function gapGraphic()
 				elseif south_gap_phase == 4 then
 					if difficulty == 1 then
 						south_gap_zones[2]:setColor(128,0,128)
-						south_gap_zones[3]:setColor(128,0,0)						
+						south_gap_zones[3]:setColor(128,0,0)
 					elseif difficulty > 1 then					--R G P Y
 						south_gap_zones[2]:setColor(128,0,0)	--Y R G P
 						south_gap_zones[3]:setColor(255,0,255)	--P Y R G
@@ -2721,7 +2721,7 @@ function gapGraphic()
 				elseif south_gap_phase == 5 then
 					if difficulty == 1 then
 						south_gap_zones[2]:setColor(0,128,0)
-						south_gap_zones[3]:setColor(128,0,128)						
+						south_gap_zones[3]:setColor(128,0,128)
 					elseif difficulty > 1 then					--R G P Y
 						south_gap_zones[2]:setColor(255,0,255)	--Y R G P
 						south_gap_zones[3]:setColor(128,0,128)	--P Y R G
@@ -2740,7 +2740,7 @@ function gapGraphic()
 						south_gap_zones[3]:destroy()
 						south_gap_zones[4]:destroy()
 						south_gap_zones[5]:destroy()
-					end	
+					end
 					south_gap_phase = nil
 					south_gap_time = nil
 					south_gap_graphic = false
@@ -2841,7 +2841,7 @@ function gapGraphic()
 				if east_gap_phase == 1 then
 					if difficulty == 1 then
 						east_gap_zones[2]:setColor(128,0,128)
-						east_gap_zones[3]:setColor(128,0,0)						
+						east_gap_zones[3]:setColor(128,0,0)
 					elseif difficulty > 1 then					--R G P Y
 						east_gap_zones[2]:setColor(255,0,255)	--Y R G P--
 						east_gap_zones[3]:setColor(128,0,0)		--P Y R G
@@ -2853,7 +2853,7 @@ function gapGraphic()
 				elseif east_gap_phase == 2 then
 					if difficulty == 1 then
 						east_gap_zones[2]:setColor(255,0,255)
-						east_gap_zones[3]:setColor(128,0,128)						
+						east_gap_zones[3]:setColor(128,0,128)
 					elseif difficulty > 1 then					--R G P Y
 						east_gap_zones[2]:setColor(128,0,128)	--Y R G P
 						east_gap_zones[3]:setColor(255,0,255)	--P Y R G--
@@ -2865,7 +2865,7 @@ function gapGraphic()
 				elseif east_gap_phase == 3 then
 					if difficulty == 1 then
 						east_gap_zones[2]:setColor(128,0,0)
-						east_gap_zones[3]:setColor(255,0,255)						
+						east_gap_zones[3]:setColor(255,0,255)
 					elseif difficulty > 1 then					--R G P Y
 						east_gap_zones[2]:setColor(0,128,0)	--Y R G P
 						east_gap_zones[3]:setColor(128,0,128)	--P Y R G
@@ -2877,7 +2877,7 @@ function gapGraphic()
 				elseif east_gap_phase == 4 then
 					if difficulty == 1 then
 						east_gap_zones[2]:setColor(128,0,128)
-						east_gap_zones[3]:setColor(128,0,0)						
+						east_gap_zones[3]:setColor(128,0,0)
 					elseif difficulty > 1 then					--R G P Y
 						east_gap_zones[2]:setColor(128,0,0)	--Y R G P
 						east_gap_zones[3]:setColor(255,0,255)	--P Y R G
@@ -2889,7 +2889,7 @@ function gapGraphic()
 				elseif east_gap_phase == 5 then
 					if difficulty == 1 then
 						east_gap_zones[2]:setColor(0,128,0)
-						east_gap_zones[3]:setColor(128,0,128)						
+						east_gap_zones[3]:setColor(128,0,128)
 					elseif difficulty > 1 then					--R G P Y
 						east_gap_zones[2]:setColor(255,0,255)	--Y R G P
 						east_gap_zones[3]:setColor(128,0,128)	--P Y R G
@@ -2908,7 +2908,7 @@ function gapGraphic()
 						east_gap_zones[3]:destroy()
 						east_gap_zones[4]:destroy()
 						east_gap_zones[5]:destroy()
-					end	
+					end
 					east_gap_phase = nil
 					east_gap_time = nil
 					east_gap_graphic = false
@@ -3009,7 +3009,7 @@ function gapGraphic()
 				if west_gap_phase == 1 then
 					if difficulty == 1 then
 						west_gap_zones[2]:setColor(128,0,128)
-						west_gap_zones[3]:setColor(128,0,0)						
+						west_gap_zones[3]:setColor(128,0,0)
 					elseif difficulty > 1 then					--R G P Y
 						west_gap_zones[2]:setColor(255,0,255)	--Y R G P--
 						west_gap_zones[3]:setColor(128,0,0)		--P Y R G
@@ -3021,7 +3021,7 @@ function gapGraphic()
 				elseif west_gap_phase == 2 then
 					if difficulty == 1 then
 						west_gap_zones[2]:setColor(255,0,255)
-						west_gap_zones[3]:setColor(128,0,128)						
+						west_gap_zones[3]:setColor(128,0,128)
 					elseif difficulty > 1 then					--R G P Y
 						west_gap_zones[2]:setColor(128,0,128)	--Y R G P
 						west_gap_zones[3]:setColor(255,0,255)	--P Y R G--
@@ -3033,7 +3033,7 @@ function gapGraphic()
 				elseif west_gap_phase == 3 then
 					if difficulty == 1 then
 						west_gap_zones[2]:setColor(128,0,0)
-						west_gap_zones[3]:setColor(255,0,255)						
+						west_gap_zones[3]:setColor(255,0,255)
 					elseif difficulty > 1 then					--R G P Y
 						west_gap_zones[2]:setColor(0,128,0)	--Y R G P
 						west_gap_zones[3]:setColor(128,0,128)	--P Y R G
@@ -3045,7 +3045,7 @@ function gapGraphic()
 				elseif west_gap_phase == 4 then
 					if difficulty == 1 then
 						west_gap_zones[2]:setColor(128,0,128)
-						west_gap_zones[3]:setColor(128,0,0)						
+						west_gap_zones[3]:setColor(128,0,0)
 					elseif difficulty > 1 then					--R G P Y
 						west_gap_zones[2]:setColor(128,0,0)	--Y R G P
 						west_gap_zones[3]:setColor(255,0,255)	--P Y R G
@@ -3057,7 +3057,7 @@ function gapGraphic()
 				elseif west_gap_phase == 5 then
 					if difficulty == 1 then
 						west_gap_zones[2]:setColor(0,128,0)
-						west_gap_zones[3]:setColor(128,0,128)						
+						west_gap_zones[3]:setColor(128,0,128)
 					elseif difficulty > 1 then					--R G P Y
 						west_gap_zones[2]:setColor(255,0,255)	--Y R G P
 						west_gap_zones[3]:setColor(128,0,128)	--P Y R G
@@ -3076,7 +3076,7 @@ function gapGraphic()
 						west_gap_zones[3]:destroy()
 						west_gap_zones[4]:destroy()
 						west_gap_zones[5]:destroy()
-					end	
+					end
 					west_gap_phase = nil
 					west_gap_time = nil
 					west_gap_graphic = false
@@ -3170,10 +3170,10 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
-	if enemy_power == nil then 
+	if enemy_power == nil then
 		enemy_power = 1
 	end
 	enemyStrength = math.max(danger * enemy_power * playerPower(),5)
@@ -3186,7 +3186,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 		shipTemplateType = irandom(1,#stsl)
 		while stsl[shipTemplateType] > enemyStrength * 1.1 + 5 do
 			shipTemplateType = irandom(1,#stsl)
-		end		
+		end
 		ship = CpuShip():setFaction(enemyFaction):setTemplate(stnl[shipTemplateType]):orderRoaming()
 		enemyPosition = enemyPosition + 1
 		if deployConfig < 50 then

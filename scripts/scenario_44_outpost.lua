@@ -1,6 +1,6 @@
 -- Name: Doomed Outpost
 -- Description: Far from home, an isolated outpost tries to survive a hostile environment. This scenario starts off simply enough, but the challenges are significant. It's not recommended for those players that want to reach victory nearly every game or feel claustrophobic starting in a starship with limited capabilities.
---- 
+---
 --- Designed to run with one or more player ships with different terrain each time. Player ships start off with more limited capabilities than usual, but can easily be upgraded beyond the normal player ship capabilities.
 --- Rank awarded at the end of the mission from lowest to highest: Cadet, Acting Ensign, Ensign, Lieutenant, Commander, Captain, Admiral
 ---
@@ -8,7 +8,7 @@
 ---
 --- Version 2
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience levels are welcome.
 -- Type: Replayable
 -- Author: Xansta
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
@@ -43,7 +43,7 @@
 -- Upgrade[Monopolistic]: Extremely high prices for player ship upgrades
 -- Setting[Unique Ship]: Choose player ship outside of standard player ship list
 -- Unique Ship[None|Default]: None: just use standard player ship list on spawn screen
--- Unique Ship[Amalgam]: Based on Atlantis, 4 beams (vs 2), single broadside tube on each side for large homing missiles only, 2 mining tubes, weaker defenses and engines 
+-- Unique Ship[Amalgam]: Based on Atlantis, 4 beams (vs 2), single broadside tube on each side for large homing missiles only, 2 mining tubes, weaker defenses and engines
 -- Unique Ship[Midian]: Based on missile cruiser, reduced tubes, missiles and base warp speed to get beam weapons and HVLI
 -- Unique Ship[Raven]: Based on Cruiser, stronger shields, weaker hull, broadside beams, tweaked tubes and missiles, low powered warp drive, tweaked sensor ranges
 -- Unique Ship[Squid]: Based on Piranha, stronger defenses, added a beam weapon, reduced missile load, large homing missiles, reconfigured tubes, shorter jump and sensor ranges
@@ -119,7 +119,7 @@ function setVariations()
 			["Snail"] =		450,
 			["Slow"] =		300,
 			["Normal"] =	250,
-			["Fast"] =		200, 
+			["Fast"] =		200,
 			["Impatient"] = 150,
 			["Blitz"] = 	100,
 		}
@@ -173,7 +173,7 @@ function setConstants()
 	suffix_index = 0
 	cpu_ships = {}
 	star_list = {
-		{radius = random(600,1400), distance = random(-2500,-1400), 
+		{radius = random(600,1400), distance = random(-2500,-1400),
 			name = {"Gamma Piscium","Beta Lyporis","Sigma Draconis","Iota Carinae","Theta Arietis","Epsilon Indi","Beta Hydri"},
 			color = {
 				red = random(0.8,1), green = random(0.8,1), blue = random(0.8,1)
@@ -182,7 +182,7 @@ function setConstants()
 				atmosphere = "planets/star-1.png"
 			},
 		},
-	}	
+	}
 	station_defend_dist = {
 		["Small Station"] = 2800,
 		["Medium Station"] = 4200,
@@ -443,7 +443,7 @@ function setConstants()
 		["Jacket Drone"] =					300,
 		["Jade 5"] =						100,
 		["Jagger"] =						100,
-		["Jump Carrier"] =					800,		
+		["Jump Carrier"] =					800,
 		["Karnack"] =						200,
 		["K2 Fighter"] =					300,
 		["K3 Fighter"] =					300,
@@ -565,13 +565,13 @@ function setConstants()
 			[3] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
-				{angle =  1, distance = 1},				
+				{angle =  1, distance = 1},
 			},
 			[4] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
 				{angle =  1, distance = 1},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[5] = {
 				{angle =  0, distance = 0},
@@ -586,7 +586,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[7] = {
 				{angle =  0, distance = 0},
@@ -603,7 +603,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 			},
@@ -624,7 +624,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -649,7 +649,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -678,7 +678,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 4},
@@ -694,7 +694,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 3},
@@ -706,8 +706,8 @@ function setConstants()
 				{angle =  0, distance = 6},
 			},
 		},
-	}		
-	max_pyramid_tier = 15	
+	}
+	max_pyramid_tier = 15
 	playerShipStats = {	--taken from sandbox. Not all are used. Not all characteristics are used.
 		["Atlantis"]			= { strength = 52,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 10,	pods = 2,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Benedict"]			= { strength = 10,	cargo = 9,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 10,	pods = 3,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
@@ -727,7 +727,7 @@ function setConstants()
 		["Repulse"]				= { strength = 14,	cargo = 12,	distance = 200,	long_range_radar = 38000, short_range_radar = 5000, tractor = true,		mining = false,	probes = 8,		pods = 5,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Striker"]				= { strength = 8,	cargo = 4,	distance = 200,	long_range_radar = 35000, short_range_radar = 5000, tractor = false,	mining = false,	probes = 6,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["ZX-Lindworm"]			= { strength = 8,	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 5500, tractor = false,	mining = false,	probes = 4,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 1,	epjam = 0,	},
-	--	Custom player ships	
+	--	Custom player ships
 		["Amalgam"]				= { strength = 42,	cargo = 7,	distance = 400,	long_range_radar = 36000, short_range_radar = 5000, tractor = false,	mining = false,	probes = 11,	pods = 3,	turbo_torp = true,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Atlantis II"]			= { strength = 60,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 11,	pods = 3,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Barrow"]				= { strength = 9,	cargo = 9,	distance = 400,	long_range_radar = 35000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 12,	pods = 3,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 2,	},
@@ -788,7 +788,7 @@ function setConstants()
 		["Wombat"]				= { strength = 18,	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 6000, tractor = false,	mining = false,	probes = 5,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 1,	epjam = 2,	},
 		["Wrocket"]				= { strength = 19,	cargo = 8,	distance = 200,	long_range_radar = 32000, short_range_radar = 5500, tractor = false,	mining = false,	probes = 10,	pods = 2,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 1,	epjam = 0,	},
 		["XR-Lindworm"]			= { strength = 12,	cargo = 3,	distance = 100,	long_range_radar = 20000, short_range_radar = 6000, tractor = false,	mining = false,	probes = 5,		pods = 1,	turbo_torp = false,	patrol_probe = 3.9,	prox_scan = 9,	epjam = 0,	},
-	}	
+	}
 	base_upgrade_cost = 5
 	playerShipUpgradeDowngradeData()
 	commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
@@ -810,7 +810,7 @@ function setConstants()
 	continuous_spawn_diagnostic = false
 	--pace: number of seconds between launching from each station in the pool
 	--respite: number of seconds before the next round of launches begins
-	spawn_intervals = {	
+	spawn_intervals = {
 		{pace = 5,	respite = 150},
 		{pace = 12,	respite = 120},
 		{pace = 25,	respite = 100},
@@ -1012,7 +1012,7 @@ function stationReports()
 						end
 						addGMMessage(out)
 						stationReports()
-					end)					
+					end)
 				end
 				tpa:destroy()
 			end
@@ -1477,7 +1477,7 @@ function getDuration()
 							if seconds > 1 then
 								duration_string = string.format(_("msgMainscreen","%s hour, %s minute and %s seconds"),hours,minutes,seconds)
 							else
-								duration_string = string.format(_("msgMainscreen","%s hour, %s minute and %s second"),hours,minutes,seconds)									
+								duration_string = string.format(_("msgMainscreen","%s hour, %s minute and %s second"),hours,minutes,seconds)
 							end
 						end
 					end
@@ -1579,7 +1579,7 @@ function constructEnvironment()
 		"Kraylor",		--	Ene	Neu	Ene	Ene
 		"Ghosts",		--	Ene	Ene	Neu	Ene
 --	enemy count:			5	5	5	4
---	neutral/friendly count:	6	6	6	7	
+--	neutral/friendly count:	6	6	6	7
 	}
 	local faction_letter = {
 		["Human Navy"] = "H",
@@ -1629,11 +1629,11 @@ function constructEnvironment()
 	table.insert(station_list,circle_station)
 	table.insert(inner_circle,circle_station)
 	table.insert(place_space,{obj=circle_station,dist=station_defend_dist[station_size],shape="circle"})
-	--energy, hull, probe, 
-	--homing, nuke, emp, mine, hvli, 
+	--energy, hull, probe,
+	--homing, nuke, emp, mine, hvli,
 	--scan, hack, launch probe, combat maneuver, self destruct
 	--reactor, beam, missile, maneuver, impulse, warp, jump, front shield, rear shield
-	--supply drop, reinforcements, jump overcharge, shield overcharge, 
+	--supply drop, reinforcements, jump overcharge, shield overcharge,
 	for _,station in ipairs(inner_circle) do
 		station:setSharesEnergyWithDocked(false)
 		station:setRepairDocked(false)
@@ -1661,7 +1661,7 @@ function constructEnvironment()
         	["rearshield"] =	{cost = math.random(1,9),	max = random(.7, .99),	avail = false},
         }
         station.comms_data.service_available = {
-        	supplydrop =			false, 
+        	supplydrop =			false,
         	reinforcements =		false,
    			hornet_reinforcements =	false,
 			phobos_reinforcements =	false,
@@ -1672,7 +1672,7 @@ function constructEnvironment()
 	        jonque =				false,
 		}
         station.comms_data.service_cost = {
-        	supplydrop = math.random(90,110), 
+        	supplydrop = math.random(90,110),
         	reinforcements = math.random(140,160),
    			hornet_reinforcements =	math.random(75,125),
 			phobos_reinforcements =	math.random(175,225),
@@ -1812,7 +1812,7 @@ function constructEnvironment()
 		["Small Station"] =	{count = 3, dist = 2000},
 		["Medium Station"] ={count = 4, dist = 3300},
 		["Large Station"] =	{count = 5, dist = 4000},
-		["Huge Station"] =	{count = 6, dist = 4500}, 
+		["Huge Station"] =	{count = 6, dist = 4500},
 	}
 	circle_stations = {}
 	local station_circle_distance_base = 25000
@@ -1863,7 +1863,7 @@ function constructEnvironment()
         	["rearshield"] =	{cost = math.random(1,9),	max = random(.7, .99),	avail = false},
         }
         station.comms_data.service_available = {
-        	supplydrop =			false, 
+        	supplydrop =			false,
         	reinforcements =		false,
    			hornet_reinforcements =	false,
 			phobos_reinforcements =	false,
@@ -1874,7 +1874,7 @@ function constructEnvironment()
 	        jonque =				false,
 		}
         station.comms_data.service_cost = {
-        	supplydrop = math.random(90,110), 
+        	supplydrop = math.random(90,110),
         	reinforcements = math.random(140,160),
    			hornet_reinforcements =	math.random(75,125),
 			phobos_reinforcements =	math.random(175,225),
@@ -2056,43 +2056,43 @@ function constructEnvironment()
 			{
 				name = {"Alderaan","Dagobah","Dantooine","Rigel"},
 				color = {
-					red = random(0,0.2), 
-					green = random(0,0.2), 
+					red = random(0,0.2),
+					green = random(0,0.2),
 					blue = random(0.8,1)
 				},
 				texture = {
-					surface = "planets/planet-1.png", 
-					cloud = "planets/clouds-1.png", 
+					surface = "planets/planet-1.png",
+					cloud = "planets/clouds-1.png",
 					atmosphere = "planets/atmosphere.png"
 				},
 			},
 			{
 				name = {"Pahvo","Penthara","Scalos"},
 				color = {
-					red = random(0,0.2), 
-					green = random(0,0.2), 
+					red = random(0,0.2),
+					green = random(0,0.2),
 					blue = random(0.8,1)
 				},
 				texture = {
-					surface = "planets/planet-4.png", 
-					cloud = "planets/clouds-3.png", 
+					surface = "planets/planet-4.png",
+					cloud = "planets/clouds-3.png",
 					atmosphere = "planets/atmosphere.png"
 				},
 			},
 			{
 				name = {"Tanuga","Vacca","Terlina","Timor"},
 				color = {
-					red = random(0,0.2), 
-					green = random(0,0.2), 
+					red = random(0,0.2),
+					green = random(0,0.2),
 					blue = random(0.8,1)
 				},
 				texture = {
-					surface = "planets/planet-5.png", 
-					cloud = "planets/clouds-2.png", 
+					surface = "planets/planet-5.png",
+					cloud = "planets/clouds-2.png",
 					atmosphere = "planets/atmosphere.png"
 				},
 			},
-		}	
+		}
 		local selected_planet = math.random(1,#planet_list)
 		planet_barrier:setCallSign(planet_list[selected_planet].name[math.random(1,#planet_list[selected_planet].name)])
 		planet_barrier:setPlanetSurfaceTexture(planet_list[selected_planet].texture.surface)
@@ -2276,7 +2276,7 @@ function constructEnvironment()
         	["rearshield"] =	{cost = math.random(1,9),	max = random(.7, .99),	avail = false},
         }
         station.comms_data.service_available = {
-        	supplydrop =			false, 
+        	supplydrop =			false,
         	reinforcements =		false,
    			hornet_reinforcements =	false,
 			phobos_reinforcements =	false,
@@ -2287,7 +2287,7 @@ function constructEnvironment()
 	        jonque =				false,
 		}
         station.comms_data.service_cost = {
-        	supplydrop = math.random(90,110), 
+        	supplydrop = math.random(90,110),
         	reinforcements = math.random(140,160),
    			hornet_reinforcements =	math.random(75,125),
 			phobos_reinforcements =	math.random(175,225),
@@ -2494,7 +2494,7 @@ function placeSensorJammer(axis)
 		local range_increment = (hi_range - lo_range)/8
 		local impact_increment = (hi_impact - lo_impact)/4
 		local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--2-6, 2-8, 2-10
-		sensor_jammer_scan_complexity = 1 
+		sensor_jammer_scan_complexity = 1
 		sensor_jammer_scan_depth = 1
 		if mix > 5 then
 			sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)
@@ -2687,7 +2687,7 @@ function placeEnvironmentStation(axis)
 		local faction_choices = {
 			circle_stations[match_index]:getFaction(),
 			circle_stations[hi_neighbor]:getFaction(),
-			circle_stations[lo_neighbor]:getFaction(),		
+			circle_stations[lo_neighbor]:getFaction(),
 		}
 		local selected_faction = faction_choices[math.random(1,3)]
 		local name_group = "RandomHumanNeutral"
@@ -2727,7 +2727,7 @@ function placeEnvironmentStation(axis)
         	["rearshield"] =	{cost = math.random(1,9),	max = random(.7, .99),	avail = tfa[math.random(1,2)]},
         }
         station.comms_data.service_available = {
-        	supplydrop =			tfa[math.random(1,2)], 
+        	supplydrop =			tfa[math.random(1,2)],
         	reinforcements =		tfa[math.random(1,2)],
    			hornet_reinforcements =	tfa[math.random(1,2)],
 			phobos_reinforcements =	tfa[math.random(1,2)],
@@ -2738,7 +2738,7 @@ function placeEnvironmentStation(axis)
 	        jonque =				tfa[math.random(1,2)],
 		}
         station.comms_data.service_cost = {
-        	supplydrop = math.random(90,110), 
+        	supplydrop = math.random(90,110),
         	reinforcements = math.random(140,160),
    			hornet_reinforcements =	math.random(75,125),
 			phobos_reinforcements =	math.random(175,225),
@@ -2851,7 +2851,7 @@ function farEnough(o_x,o_y,obj_dist)
 				end
 			end
 		elseif item.shape == "rectangle" then
-			if	o_x > item.lo_x and 
+			if	o_x > item.lo_x and
 				o_x < item.hi_x and
 				o_y > item.lo_y and
 				o_y < item.hi_y then
@@ -3211,7 +3211,7 @@ function handleDockedState()
 		if comms_source.transport_mission.destination ~= nil and comms_source.transport_mission.destination:isValid() then
 			if comms_source.transport_mission.destination == comms_target then
 				addCommsReply(string.format(_("station-comms","Deliver %s to %s"),comms_source.transport_mission.character,comms_target:getCallSign()),function()
-					if not comms_source:isDocked(comms_target) then 
+					if not comms_source:isDocked(comms_target) then
 						setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 						return
 					end
@@ -3393,7 +3393,7 @@ function handleDockedState()
 				setCommsMessage(out)
 --				setCommsMessage(string.format("%s wishes to be transported to %s station %s in sector %s. Your reputation would go up by %s if you agree to transport %s.",comms_target.transport_mission.character,comms_target.transport_mission.destination:getFaction().comms_target.transport_mission.destination_name,comms_target.transport_mission.destination:getSectorName(),comms_target.transport_mission.reward,comms_target.transport_mission.character))
 				addCommsReply(string.format(_("station-comms","Agree to transport %s to %s station %s"),comms_target.transport_mission.character,comms_target.transport_mission.destination:getFaction(),comms_target.transport_mission.destination_name),function()
-					if not comms_source:isDocked(comms_target) then 
+					if not comms_source:isDocked(comms_target) then
 						setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 						return
 					end
@@ -3421,7 +3421,7 @@ function handleDockedState()
 			if comms_source.cargo_mission.destination ~= nil and comms_source.cargo_mission.destination:isValid() then
 				if comms_source.cargo_mission.destination == comms_target then
 					addCommsReply(string.format(_("station-comms","Deliver cargo to %s on %s"),comms_source.cargo_mission.character,comms_target:getCallSign()),function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 							return
 						end
@@ -3440,7 +3440,7 @@ function handleDockedState()
 			if comms_source.cargo_mission.origin ~= nil and comms_source.cargo_mission.origin:isValid() then
 				if comms_source.cargo_mission.origin == comms_target then
 					addCommsReply(string.format(_("station-comms","Pick up cargo for %s"),comms_source.cargo_mission.character),function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 							return
 						end
@@ -3627,7 +3627,7 @@ function handleDockedState()
 				out = string.format(_("station-comms","%s Retrieving and delivering this cargo for %s would increase your reputation by %s."),out,comms_target.cargo_mission.character,comms_target.cargo_mission.reward)
 				setCommsMessage(out)
 				addCommsReply(string.format(_("station-comms","Agree to retrieve cargo for %s"),comms_target.cargo_mission.character),function()
-					if not comms_source:isDocked(comms_target) then 
+					if not comms_source:isDocked(comms_target) then
 						setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 						return
 					end
@@ -3662,7 +3662,7 @@ function handleDockedState()
 						if u_max > p_upgrade_level then
 							upgrade_count = upgrade_count + 1
 							addCommsReply(string.format(_("upgrade-comms","%s: %s (%s)"),u_type,upgrade_path[p_ship_type][u_type][p_upgrade_level + 1].desc,math.ceil(base_upgrade_cost+((p_upgrade_level+1)*upgrade_price))),function()
-								if not comms_source:isDocked(comms_target) then 
+								if not comms_source:isDocked(comms_target) then
 									setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 									return
 								end
@@ -3691,10 +3691,10 @@ function handleDockedState()
 			missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 		end
 		if missilePresence > 0 then
-			if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-				(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-				(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-				(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
+			if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or
+				(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or
+				(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or
+				(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or
 				(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
 				addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
 					if stationCommsDiagnostic then print("in restock function") end
@@ -3837,7 +3837,7 @@ function handleDockedState()
 				end
 				if comms_source:getJumpDriveCharge() >= max_charge then
 					addCommsReply(_("stationServices-comms", "Overcharge Jump Drive (10 Rep)"),function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 							return
 						end
@@ -3874,7 +3874,7 @@ function handleDockedState()
 				if comms_target.comms_data.probe_launch_repair then
 					if not comms_source:getCanLaunchProbe() then
 						addCommsReply(string.format(_("stationServices-comms","Repair probe launch system (%s Rep)"),comms_target.comms_data.service_cost.probe_launch_repair),function()
-							if not comms_source:isDocked(comms_target) then 
+							if not comms_source:isDocked(comms_target) then
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
@@ -3891,7 +3891,7 @@ function handleDockedState()
 				if comms_target.comms_data.hack_repair then
 					if not comms_source:getCanHack() then
 						addCommsReply(string.format(_("stationServices-comms","Repair hacking system (%s Rep)"),comms_target.comms_data.service_cost.hack_repair),function()
-							if not comms_source:isDocked(comms_target) then 
+							if not comms_source:isDocked(comms_target) then
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
@@ -3908,7 +3908,7 @@ function handleDockedState()
 				if comms_target.comms_data.scan_repair then
 					if not comms_source:getCanScan() then
 						addCommsReply(string.format(_("stationServices-comms","Repair scanning system (%s Rep)"),comms_target.comms_data.service_cost.scan_repair),function()
-							if not comms_source:isDocked(comms_target) then 
+							if not comms_source:isDocked(comms_target) then
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
@@ -3926,7 +3926,7 @@ function handleDockedState()
 					if not comms_source:getCanCombatManeuver() then
 						if comms_source.combat_maneuver_capable then
 							addCommsReply(string.format(_("stationServices-comms","Repair combat maneuver (%s Rep)"),comms_target.comms_data.service_cost.combat_maneuver_repair),function()
-								if not comms_source:isDocked(comms_target) then 
+								if not comms_source:isDocked(comms_target) then
 									setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 									return
 								end
@@ -3944,7 +3944,7 @@ function handleDockedState()
 				if comms_target.comms_data.self_destruct_repair then
 					if not comms_source:getCanSelfDestruct() then
 						addCommsReply(string.format(_("stationServices-comms","Repair self destruct system (%s Rep)"),comms_target.comms_data.service_cost.self_destruct_repair),function()
-							if not comms_source:isDocked(comms_target) then 
+							if not comms_source:isDocked(comms_target) then
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
@@ -4097,7 +4097,7 @@ function handleDockedState()
 				setCommsMessage(goodsReport)
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,goodData["cost"]), function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 							return
 						end
@@ -4132,7 +4132,7 @@ function handleDockedState()
 					for good, price in pairs(comms_target.comms_data.buy) do
 						if comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
 							addCommsReply(string.format(_("trade-comms", "Sell one %s for %i reputation"),good,price), function()
-								if not comms_source:isDocked(comms_target) then 
+								if not comms_source:isDocked(comms_target) then
 									setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 									return
 								end
@@ -4153,7 +4153,7 @@ function handleDockedState()
 							if comms_source.goods.food.quantity > 0 then
 								for good, goodData in pairs(comms_target.comms_data.goods) do
 									addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good), function()
-										if not comms_source:isDocked(comms_target) then 
+										if not comms_source:isDocked(comms_target) then
 											setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 											return
 										end
@@ -4186,7 +4186,7 @@ function handleDockedState()
 							if comms_source.goods.medicine.quantity > 0 then
 								for good, goodData in pairs(comms_target.comms_data.goods) do
 									addCommsReply(string.format(_("trade-comms", "Trade medicine for %s"),good), function()
-										if not comms_source:isDocked(comms_target) then 
+										if not comms_source:isDocked(comms_target) then
 											setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 											return
 										end
@@ -4219,7 +4219,7 @@ function handleDockedState()
 							if comms_source.goods.luxury.quantity > 0 then
 								for good, goodData in pairs(comms_target.comms_data.goods) do
 									addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
-										if not comms_source:isDocked(comms_target) then 
+										if not comms_source:isDocked(comms_target) then
 											setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 											return
 										end
@@ -4300,7 +4300,7 @@ function getRepairCrewFromStation(relationship)
 					end
 					setCommsMessage(_("trade-comms","We have a repair crew candidate for you to consider"))
 					addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hire_cost), function()
-						if not comms_source:isDocked(comms_target) then 
+						if not comms_source:isDocked(comms_target) then
 							setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 							return
 						end
@@ -4363,7 +4363,7 @@ function getRepairCrewFromStation(relationship)
 						delay_status = string.format(_("trade-comms","%i minutes and %s"),delay_minutes,delay_status)
 					else
 						delay_status = string.format(_("trade-comms","%i minute and %s"),delay_minutes,delay_status)
-					end							
+					end
 				end
 				setCommsMessage(string.format(_("trade-comms","There are some repair crew recruits in route for %s. Travel time remaining is %s."),comms_target:getCallSign(),delay_status))
 			end
@@ -4395,7 +4395,7 @@ function getCoolantFromStation(relationship)
 						end
 						setCommsMessage(_("trade-comms","We've got some coolant available for you"))
 						addCommsReply(string.format(_("trade-comms", "Purchase coolant for %i reputation"),coolantCost), function()
-							if not comms_source:isDocked(comms_target) then 
+							if not comms_source:isDocked(comms_target) then
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
@@ -4446,7 +4446,7 @@ function getCoolantFromStation(relationship)
 							delay_status = string.format(_("trade-comms","%i minutes and %s"),delay_minutes,delay_status)
 						else
 							delay_status = string.format(_("trade-comms","%i minute and %s"),delay_minutes,delay_status)
-						end							
+						end
 					end
 					setCommsMessage(string.format(_("trade-comms","Our coolant production facility is making more right now. Coolant manufacturing time remaining is %s."),delay_status))
 				end
@@ -4596,7 +4596,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -4646,7 +4646,7 @@ function handleWeaponRestock(weapon)
 				end)
 			else
 	            setCommsMessage(_("needRep-comms", "Not enough reputation."))
-				return				
+				return
 			end
 		end
         addCommsReply(_("Back"), commsStation)
@@ -5129,7 +5129,7 @@ function handleUndockedState()
 				for n=0,shields-1 do
 					msg = msg .. string.format(_("stationAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 				end
-			end			
+			end
 			setCommsMessage(msg);
 			addCommsReply(_("Back"), commsStation)
 		end)
@@ -5393,7 +5393,7 @@ function upgradePlayerShip(p,u_type)
 			p:setWarpDrive(true)
 			p:setWarpSpeed(upgrade_path[tempTypeName].ftl[current_level+1].warp)
 		end
-	elseif u_type == "sensors" then		
+	elseif u_type == "sensors" then
 		p:setLongRangeRadarRange(upgrade_path[tempTypeName].sensors[current_level+1].long)
 		p.normal_long_range_radar = upgrade_path[tempTypeName].sensors[current_level+1].long
 		p:setShortRangeRadarRange(upgrade_path[tempTypeName].sensors[current_level+1].short)
@@ -5462,9 +5462,9 @@ function saboteurOption()
 							setCommsMessage(string.format(_("orders-comms","From our observations, %s station %s in %s is one of them.\n\nOne more thing about this plan..."),comms_source.aggressive_enemy:getFaction(),comms_source.aggressive_enemy:getCallSign(),comms_source.aggressive_enemy:getSectorName()))
 							addCommsReply(_("orders-comms","Just one? What is it?"),function()
 								setCommsMessage(_("orders-comms","If there are any friendly or neutral stations you haven't contacted yet to ask for their help, you should contact them at your earliest opportunity. A truce benefits them, too, assuming you succeed. The help they provide in protecting the outpost can free you up to destroy the aggressive stations."))
-								addCommsReply(_("Back"), commsStation)					
+								addCommsReply(_("Back"), commsStation)
 							end)
-							addCommsReply(_("Back"), commsStation)					
+							addCommsReply(_("Back"), commsStation)
 						end)
 					else
 						if comms_source.aggressive_enemy:isValid() then
@@ -5479,14 +5479,14 @@ function saboteurOption()
 							comms_source.aggressive_enemy = tableRemoveRandom(aggressive_enemies)
 							setCommsMessage(string.format(_("orders-comms","%s station %s in %s is probably another aggressive station"),comms_source.aggressive_enemy:getFaction(),comms_source.aggressive_enemy:getCallSign(),comms_source.aggressive_enemy:getSectorName()))
 						end
-					end						
-					addCommsReply(_("Back"), commsStation)					
+					end
+					addCommsReply(_("Back"), commsStation)
 				end)
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("Back"), commsStation)
 		end)
-	else		
+	else
 		addCommsReply(_("orders-comms","Any better chance at victory for this outpost?"),function()
 			local out = ""
 			if comms_source.aggressive_enemy:isValid() then
@@ -6310,7 +6310,7 @@ function getEnemyHealth(enemy)
 	end
 	if change_enemy_order_diagnostic then print(string.format("   faction:         %s",faction)) end
 	if faction == "Kraylor" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .3	+
 			enemy_hull		* .4	+
 			enemy_reactor	* .1 	+
@@ -6321,7 +6321,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .03	+
 			enemy_jump		* .03
 	elseif faction == "Arlenians" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .45	+
 			enemy_reactor	* .05 	+
@@ -6330,9 +6330,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .02	+
 			enemy_missile	* .02	+
 			enemy_warp		* .02	+
-			enemy_jump		* .02	
+			enemy_jump		* .02
 	elseif faction == "Exuari" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .2	+
 			enemy_hull		* .3	+
 			enemy_reactor	* .2 	+
@@ -6341,9 +6341,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .05	+
 			enemy_missile	* .05	+
 			enemy_warp		* .05	+
-			enemy_jump		* .05	
+			enemy_jump		* .05
 	elseif faction == "Ghosts" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .25	+
 			enemy_hull		* .25	+
 			enemy_reactor	* .25 	+
@@ -6352,9 +6352,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .04	+
 			enemy_missile	* .04	+
 			enemy_warp		* .04	+
-			enemy_jump		* .04	
+			enemy_jump		* .04
 	elseif faction == "Ktlitans" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .2	+
 			enemy_hull		* .3	+
 			enemy_reactor	* .1 	+
@@ -6363,9 +6363,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .05	+
 			enemy_missile	* .05	+
 			enemy_warp		* .1	+
-			enemy_jump		* .1	
+			enemy_jump		* .1
 	elseif faction == "TSN" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .35	+
 			enemy_reactor	* .08 	+
@@ -6374,9 +6374,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .02	+
 			enemy_missile	* .01	+
 			enemy_warp		* .08	+
-			enemy_jump		* .08	
+			enemy_jump		* .08
 	elseif faction == "USN" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .38	+
 			enemy_hull		* .38	+
 			enemy_reactor	* .05 	+
@@ -6385,9 +6385,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .02	+
 			enemy_missile	* .02	+
 			enemy_warp		* .05	+
-			enemy_jump		* .05	
+			enemy_jump		* .05
 	elseif faction == "CUF" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .38	+
 			enemy_reactor	* .05 	+
@@ -6396,9 +6396,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .03	+
 			enemy_missile	* .03	+
 			enemy_warp		* .06	+
-			enemy_jump		* .04	
+			enemy_jump		* .04
 	else
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .3	+
 			enemy_hull		* .4	+
 			enemy_reactor	* .06 	+
@@ -6407,7 +6407,7 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .03	+
 			enemy_missile	* .03	+
 			enemy_warp		* .05	+
-			enemy_jump		* .05	
+			enemy_jump		* .05
 	end
 	return enemy_health
 end
@@ -7324,7 +7324,7 @@ function spawnSingleEnemy(xOrigin, yOrigin, danger, enemyFaction, enemyStrength,
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	if enemyStrength == nil then
@@ -7351,7 +7351,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	if enemyStrength == nil then
@@ -7407,7 +7407,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 		for index, ship in ipairs(enemyList) do
 			if index <= max_pyramid_tier then
 				local pyramid_angle = spawn_angle + formation_delta.pyramid[pyramid_tier][index].angle
-				if pyramid_angle < 0 then 
+				if pyramid_angle < 0 then
 					pyramid_angle = pyramid_angle + 360
 				end
 				pyramid_angle = pyramid_angle % 360
@@ -7541,13 +7541,13 @@ function createPlayerShipMixer()
 	playerAmalgam:setTubeSize(0,"large")				--left tube large (vs normal)
 	playerAmalgam:setTubeSize(1,"large")				--right tube large (vs normal)
 	playerAmalgam:setWeaponStorageMax("Homing", 16)		--more (vs 12)
-	playerAmalgam:setWeaponStorage("Homing", 16)				
+	playerAmalgam:setWeaponStorage("Homing", 16)
 	playerAmalgam:setWeaponStorageMax("Nuke", 0)		--less (vs 4)
-	playerAmalgam:setWeaponStorage("Nuke", 0)				
+	playerAmalgam:setWeaponStorage("Nuke", 0)
 	playerAmalgam:setWeaponStorageMax("Mine", 10)		--more (vs 8)
-	playerAmalgam:setWeaponStorage("Mine", 10)				
+	playerAmalgam:setWeaponStorage("Mine", 10)
 	playerAmalgam:setWeaponStorageMax("EMP", 0)			--less (vs 6)
-	playerAmalgam:setWeaponStorage("EMP", 0)				
+	playerAmalgam:setWeaponStorage("EMP", 0)
 	playerAmalgam:setWeaponStorageMax("HVLI", 0)		--less (vs 20)
 	playerAmalgam:setWeaponStorage("HVLI", 0)
 	return playerAmalgam
@@ -7583,13 +7583,13 @@ function createPlayerShipFlipper()
 	playerFlipper:setTubeLoadTime(3,12)
 	playerFlipper:setTubeLoadTime(4,15)
 	playerFlipper:setWeaponStorageMax("Homing",16)		--less (vs 30)
-	playerFlipper:setWeaponStorage("Homing",   16)				
+	playerFlipper:setWeaponStorage("Homing",   16)
 	playerFlipper:setWeaponStorageMax("Nuke",   2)		--less (vs 8)
-	playerFlipper:setWeaponStorage("Nuke",      2)				
+	playerFlipper:setWeaponStorage("Nuke",      2)
 	playerFlipper:setWeaponStorageMax("EMP",    5)		--less (vs 10)
-	playerFlipper:setWeaponStorage("EMP",       5)				
+	playerFlipper:setWeaponStorage("EMP",       5)
 	playerFlipper:setWeaponStorageMax("Mine",   5)		--less (vs 12)
-	playerFlipper:setWeaponStorage("Mine",      5)				
+	playerFlipper:setWeaponStorage("Mine",      5)
 	playerFlipper:setWeaponStorageMax("HVLI",  16)		--more (vs 0)
 	playerFlipper:setWeaponStorage("HVLI",     16)
 	playerFlipper.smallHomingOnly = true
@@ -7602,7 +7602,7 @@ function createPlayerShipInk()
 	playerInk:setShieldsMax(100, 100)				--stronger shields (vs 70, 70)
 	playerInk:setShields(100, 100)
 	playerInk:setHullMax(130)						--stronger (vs 120)
-	playerInk:setHull(130)							
+	playerInk:setHull(130)
 	playerInk.max_jump_range = 20000				--shorter than typical (vs 50)
 	playerInk.min_jump_range = 2000					--shorter than typical (vs 5)
 	playerInk:setJumpDriveRange(playerInk.min_jump_range,playerInk.max_jump_range)
@@ -7610,7 +7610,7 @@ function createPlayerShipInk()
 --                 				 Arc, Dir, Range, CycleTime, Damage
 	playerInk:setBeamWeapon(0, 10,	0,	1000,		4,		4)		--one beam (vs 0)
 --									   Arc,	  Dir, Rotate speed
-	playerInk:setBeamWeaponTurret(0,	80,		0,		1)			--slow turret 
+	playerInk:setBeamWeaponTurret(0,	80,		0,		1)			--slow turret
 	playerInk:setWeaponTubeDirection(0,0)					--forward facing (vs left)
 	playerInk:setWeaponTubeDirection(3,0)					--forward facing (vs right)
 	playerInk:setTubeLoadTime(0,12)							--slower (vs 8)
@@ -7626,15 +7626,15 @@ function createPlayerShipInk()
 	playerInk:weaponTubeDisallowMissle(1,"Mine")			--no sideways mines
 	playerInk:weaponTubeDisallowMissle(4,"Mine")			--no sideways mines
 	playerInk:setWeaponStorageMax("HVLI",10)				--fewer HVLI (vs 20)
-	playerInk:setWeaponStorage("HVLI", 10)				
+	playerInk:setWeaponStorage("HVLI", 10)
 	playerInk:setWeaponStorageMax("Homing",10)				--fewer Homing (vs 12)
-	playerInk:setWeaponStorage("Homing", 10)				
+	playerInk:setWeaponStorage("Homing", 10)
 	playerInk:setWeaponStorageMax("Mine",6)					--fewer mines (vs 8)
-	playerInk:setWeaponStorage("Mine", 6)				
+	playerInk:setWeaponStorage("Mine", 6)
 	playerInk:setWeaponStorageMax("EMP",4)					--more EMPs (vs 0)
-	playerInk:setWeaponStorage("EMP", 4)					
+	playerInk:setWeaponStorage("EMP", 4)
 	playerInk:setWeaponStorageMax("Nuke",4)					--fewer Nukes (vs 6)
-	playerInk:setWeaponStorage("Nuke", 4)				
+	playerInk:setWeaponStorage("Nuke", 4)
 	playerInk:setLongRangeRadarRange(25000)					--shorter long range sensors (vs 30000)
 	playerInk.normal_long_range_radar = 25000
 	return playerInk
@@ -7642,7 +7642,7 @@ end
 function createPlayerShipClaw()
 	playerRaven = PlayerSpaceship():setTemplate("Player Cruiser"):setFaction("Human Navy"):setCallSign("Claw")
 	playerRaven:setTypeName("Raven")
-	playerRaven:setJumpDrive(false)						
+	playerRaven:setJumpDrive(false)
 	playerRaven:setWarpDrive(true)						--warp drive (vs jump)
 	playerRaven:setWarpSpeed(300)
 	playerRaven:setShieldsMax(100, 100)					--stronger shields (vs 80, 80)
@@ -7653,8 +7653,8 @@ function createPlayerShipClaw()
 	playerRaven:setBeamWeapon(0,  10, -90,	 900, 			6,	10)	--left (vs front) shorter (vs 1000)
 	playerRaven:setBeamWeapon(1,  10,  90,	 900, 			6,	10)	--right (vs front) shorter (vs 1000)
 --										Arc,  Dir, Rotate speed
-	playerRaven:setBeamWeaponTurret(0,	 90,  -90,			1)	
-	playerRaven:setBeamWeaponTurret(1,	 90,   90,			1)	
+	playerRaven:setBeamWeaponTurret(0,	 90,  -90,			1)
+	playerRaven:setBeamWeaponTurret(1,	 90,   90,			1)
 	playerRaven:setWeaponTubeCount(6)					--more (vs 3)
 	playerRaven:setWeaponTubeDirection(0, -30)			--more angled (vs -5)
 	playerRaven:setWeaponTubeDirection(1,  30)			--more angled (vs 5)
@@ -7662,7 +7662,7 @@ function createPlayerShipClaw()
 	playerRaven:setTubeSize(1,"small")					--small (vs medium)
 	playerRaven:setWeaponTubeExclusiveFor(0,"Nuke")		--Nuke only (vs all but mine)
 	playerRaven:setWeaponTubeExclusiveFor(1,"Nuke")		--Nuke only (vs all but mine)
-	playerRaven:setWeaponTubeDirection(2, -60)			
+	playerRaven:setWeaponTubeDirection(2, -60)
 	playerRaven:setWeaponTubeDirection(3,  60)
 	playerRaven:setTubeSize(2,"small")
 	playerRaven:setTubeSize(3,"small")
@@ -8372,7 +8372,7 @@ function crewFate(p, fatalityChance)
 		end
 	end
 end
---      Inventory button and functions for relay/operations 
+--      Inventory button and functions for relay/operations
 function cargoInventory(delta)
 	for pidx=1,32 do
 		local p = getPlayerShip(pidx)

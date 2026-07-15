@@ -196,7 +196,7 @@ function SetResistance()
     Resistance.pickupArtifacts = 5
     Resistance.minesToSpawn = 20
     Resistance.turnoverWaveDelay = 120
-    Resistance.idleWaveDelay = 120 
+    Resistance.idleWaveDelay = 120
   elseif difficulty == "Hard" then
     Resistance.waveInterval = 120
     Resistance.maxWaveSize = 6

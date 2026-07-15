@@ -1,6 +1,6 @@
 -- Name: Weapons
 -- Description: <h3><color=#C0C0FF>Tutorial: Weapons</>
---- 
+---
 --- This tutorial covers how the <color=#C0C0FF>Weapons</> officer manages a ship's offensive and defensive systems. This includes loading, unloading, aiming, and firing weapon tubes; targeting beam weapons; and setting beam and shield frequencies, if applicable.
 ---
 --- To begin this tutorial, click the <color=#C0C0FF>Start tutorial</> button at the bottom right of this screen.

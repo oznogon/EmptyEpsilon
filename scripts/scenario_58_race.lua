@@ -37,7 +37,7 @@ function init()
 		print("Lua version:",_VERSION)
 	end
 	-- 27 types of goods so far
-	goodsList = {	
+	goodsList = {
 		{"food",0},
 		{"medicine",0},
 		{"nickel",0},
@@ -64,7 +64,7 @@ function init()
 		{"android",0},
 		{"nanites",0},
 		{"software",0},
-		{"battery",0}	
+		{"battery",0}
 	}
 	component_goods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	mineral_goods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
@@ -102,7 +102,7 @@ function init()
 	diagnostic = false
 	player_count = 0
 	player_start_list = {}
-	player_ship_stats = {	
+	player_ship_stats = {
 		["MP52 Hornet"] 		= { strength = 7, 	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 4000, probes = 10,	},
 		["Piranha"]				= { strength = 16,	cargo = 8,	distance = 200,	long_range_radar = 25000, short_range_radar = 6000, probes = 15,	},
 		["Flavia P.Falcon"]		= { strength = 13,	cargo = 15,	distance = 200,	long_range_radar = 40000, short_range_radar = 5000, probes = 27	,	},
@@ -121,7 +121,7 @@ function init()
 		["Hathcock"]			= { strength = 30,	cargo = 6,	distance = 200,	long_range_radar = 35000, short_range_radar = 6000, probes = 20,	},
 		["Maverick"]			= { strength = 45,	cargo = 5,	distance = 200,	long_range_radar = 20000, short_range_radar = 4000, probes = 18,	},
 		["Crucible"]			= { strength = 45,	cargo = 5,	distance = 200,	long_range_radar = 20000, short_range_radar = 6000, probes = 20,	},
-	}		
+	}
 	--Player ship name lists to supplant standard randomized call sign generation
 	playerShipNamesFor = {}
 	playerShipNamesFor["MP52 Hornet"] = {"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny","Buzz"}
@@ -738,8 +738,8 @@ function mainGMButtonsAfterPause()
 		local stats = gatherStats()
 		local out = _("msgGM", "Current Statistics:\nShip: state, laps, waypoint goal, drone pts")
 		for name, details in pairs(stats.ship) do
-			out = out .. "\n" .. name .. ": " 
-			if details.is_alive then 
+			out = out .. "\n" .. name .. ": "
+			if details.is_alive then
 				out = out .. _("msgGM", "alive, ")
 			else
 				out = out .. _("msgGM", "dead, ")
@@ -910,7 +910,7 @@ function setStations()
 	stationAnderson = placeStation(random(15000,20000),random(-25000,48000),"Anderson","Independent","Small Station")
 	table.insert(stationList,stationAnderson)
 	stationAnderson.comms_data.goods.battery = {cost = 65, quantity = 5}
-	stationAnderson.comms_data.goods.software = {cost = 115, quantity = 5}	
+	stationAnderson.comms_data.goods.software = {cost = 115, quantity = 5}
 	--Feynman
 	stationFeynman = placeStation(random(-90000,-55000),random(25000,36250),"Feynman","Human Navy","Small Station")
 	table.insert(stationList,stationFeynman)
@@ -998,7 +998,7 @@ function setStations()
 	local shortGrupEnd = random(40,90)
 	local shortGrupEndQ = shortGrupEnd
 	shortGrupEnd = negAxisGrup - shortGrupEnd
-	if shortGrupEnd < 0 then 
+	if shortGrupEnd < 0 then
 		shortGrupEnd = shortGrupEnd + 360
 	end
 	createRandomAlongArc(Asteroid, afd+shortGrupEndQ, xGrup+xShortAngleGrup, yGrup+yShortAngleGrup, shortGrup, shortGrupEnd, negAxisGrup, spreadGrup)
@@ -1262,11 +1262,11 @@ function setStations()
 		ax, ay = vectorFromAngle(180,150)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 180
-		table.insert(asteroid150,ta)	
-		ax, ay = vectorFromAngle(270,150)	
+		table.insert(asteroid150,ta)
+		ax, ay = vectorFromAngle(270,150)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 270
-		table.insert(asteroid150,ta)	
+		table.insert(asteroid150,ta)
 		asteroid300 = {}
 		ax, ay = vectorFromAngle(0,300)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
@@ -1279,11 +1279,11 @@ function setStations()
 		ax, ay = vectorFromAngle(180,300)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 180
-		table.insert(asteroid300,ta)	
-		ax, ay = vectorFromAngle(270,300)	
+		table.insert(asteroid300,ta)
+		ax, ay = vectorFromAngle(270,300)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 270
-		table.insert(asteroid300,ta)	
+		table.insert(asteroid300,ta)
 		asteroid450 = {}
 		ax, ay = vectorFromAngle(0,450)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
@@ -1296,11 +1296,11 @@ function setStations()
 		ax, ay = vectorFromAngle(180,450)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 180
-		table.insert(asteroid450,ta)	
-		ax, ay = vectorFromAngle(270,450)	
+		table.insert(asteroid450,ta)
+		ax, ay = vectorFromAngle(270,450)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 270
-		table.insert(asteroid450,ta)	
+		table.insert(asteroid450,ta)
 		asteroid600 = {}
 		ax, ay = vectorFromAngle(0,600)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
@@ -1313,11 +1313,11 @@ function setStations()
 		ax, ay = vectorFromAngle(180,600)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 180
-		table.insert(asteroid600,ta)	
-		ax, ay = vectorFromAngle(270,600)	
+		table.insert(asteroid600,ta)
+		ax, ay = vectorFromAngle(270,600)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 270
-		table.insert(asteroid600,ta)	
+		table.insert(asteroid600,ta)
 		asteroid750 = {}
 		ax, ay = vectorFromAngle(0,750)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
@@ -1330,11 +1330,11 @@ function setStations()
 		ax, ay = vectorFromAngle(180,750)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 180
-		table.insert(asteroid750,ta)	
-		ax, ay = vectorFromAngle(270,750)	
+		table.insert(asteroid750,ta)
+		ax, ay = vectorFromAngle(270,750)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 270
-		table.insert(asteroid750,ta)	
+		table.insert(asteroid750,ta)
 		asteroid900 = {}
 		ax, ay = vectorFromAngle(0,900)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
@@ -1347,11 +1347,11 @@ function setStations()
 		ax, ay = vectorFromAngle(180,900)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 180
-		table.insert(asteroid900,ta)	
-		ax, ay = vectorFromAngle(270,900)	
+		table.insert(asteroid900,ta)
+		ax, ay = vectorFromAngle(270,900)
 		ta = Asteroid():setPosition(racePoint2x+ax,racePoint2y+ay)
 		ta.angle = 270
-		table.insert(asteroid900,ta)	
+		table.insert(asteroid900,ta)
 		mine150 = {}
 		mx, my = vectorFromAngle(0,150)
 		tm = Mine():setPosition(racePoint3x+mx,racePoint3y+my)
@@ -1565,12 +1565,12 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 		for ndex=1,arcLen do
 			radialPoint = startArc+ndex
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 		end
 		for ndex=1,amount-arcLen do
 			radialPoint = random(startArc,endArcClockwise)
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 		end
 	else
 		for ndex=1,amount do
@@ -2340,7 +2340,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -2416,7 +2416,7 @@ function handleUndockedState()
 				end
 				addCommsReply(_("Back"), commsStation)
 			end)
-		end	
+		end
 		addCommsReply(_("station-comms","Station docking service status"),function()
 			local out = _("station-comms","Station docking services report:")
 			out = string.format(_("station-comms","%s\nRestock scan probes: %s"),out,comms_target:getRestocksScanProbes())
@@ -2424,7 +2424,7 @@ function handleUndockedState()
 			out = string.format(_("station-comms","%s\nRepair hull: %s"),out,comms_target:getRepairDocked())
 			setCommsMessage(out)
 			addCommsReply(_("Back"), commsStation)
-		end)	
+		end)
 	end)
 	if comms_source:isFriendly(comms_target) then
 		addCommsReply(_("orders-comms", "What are my current orders?"), function()
@@ -2548,7 +2548,7 @@ function tableSelectRandom(array)
     if array_item_count == 0 then
         return nil
     end
-	return array[math.random(1,#array)]	
+	return array[math.random(1,#array)]
 end
 --------------------------
 --	Ship communication  --
@@ -3088,7 +3088,7 @@ function droneTally()
 		eliminatedDrones = countEliminatedDrones(playerList[pl])
 		playerList[pl].score = playerList[pl].timePoints + eliminatedDrones
 		playerList[pl].dronePoints = eliminatedDrones
-	end	
+	end
 end
 function countEliminatedDrones(ePlayer)
 	local remainingDrones = 0
@@ -3104,7 +3104,7 @@ function countEliminatedDrones(ePlayer)
 	else
 		remainingDrones = 12
 	end
-	return 12 - remainingDrones	
+	return 12 - remainingDrones
 end
 function countEliminatedDronesByName(name)
 	local remainingDrones = 0
@@ -3119,7 +3119,7 @@ function countEliminatedDronesByName(name)
 	else
 		remainingDrones = 12
 	end
-	return 12 - remainingDrones	
+	return 12 - remainingDrones
 end
 function unorderedFinalTally()
 	for pl=1,#playerList do
@@ -3234,7 +3234,7 @@ function gatherStats(final_score)
 							score_list[name].time = p.raceTime
 						end
 					end
-					stat_list.ship[name] = {is_alive = false, participant = participant, lap_count = laps, waypoint_goal = goal, drone_points = drone_points, rank_points = 0, score = 0, time = 0} 
+					stat_list.ship[name] = {is_alive = false, participant = participant, lap_count = laps, waypoint_goal = goal, drone_points = drone_points, rank_points = 0, score = 0, time = 0}
 				end
 			end
 		end
@@ -3256,7 +3256,7 @@ function gatherStats(final_score)
 			end
 			local reward = reward_grid[player_count][reward_index]
 			stat_list.ship[item.name].rank_points = reward
-			stat_list.ship[item.name].time = item.time	
+			stat_list.ship[item.name].time = item.time
 			place_index = place_index + 1
 			prev_value = item.rank
 		end
@@ -3275,7 +3275,7 @@ function gatherStats(final_score)
 			table.insert(sorted_stat_list,{name=name,lap_count=details.lap_count,waypoint_goal=details.waypoint_goal,score=details.score,rank_points=details.rank_points,drone_points=details.drone_points,time=details.time})
 		end
 		table.sort(sorted_stat_list,function(a,b)
-			return 
+			return
 				a.score > b.score or
 				(a.score == b.score and a.lap_count > b.lap_count) or
 				(a.score == b.score and a.lap_count == b.lap_count and a.time < b.time)
@@ -3615,7 +3615,7 @@ function update(delta)
 								p5.c2:setFaction("Kraylor"):orderAttack(p5)
 								cx, cy = vectorFromAngle(raceAxis,random(1000,3000))
 								p5.c3 = CpuShip():setTemplate("Piranha F12"):setPosition(racePoint1x+cx,racePoint1y+cy)
-								p5.c3:setFaction("Kraylor"):orderDefendLocation(racePoint1x,racePoint1y)						
+								p5.c3:setFaction("Kraylor"):orderDefendLocation(racePoint1x,racePoint1y)
 							end
 						end
 					end

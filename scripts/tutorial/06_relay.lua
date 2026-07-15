@@ -1,6 +1,6 @@
 -- Name: Relay
 -- Description: <h3><color=#C0C0FF>Tutorial: Relay</>
---- 
+---
 --- This tutorial covers how the <color=#C0C0FF>Relay</> officer manages the flow of information between their ship and other ships and space stations across the region. This includes hailing and communicating with other entities, launching probes, setting navigational waypoints, and hacking hostile entities.
 ---
 --- To begin this tutorial, click the <color=#C0C0FF>Start tutorial</> button at the bottom right of this screen.

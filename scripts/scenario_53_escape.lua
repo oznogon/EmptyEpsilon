@@ -1,10 +1,10 @@
 -- Name: Escape
--- Description: Escape imprisonment and return home. 
+-- Description: Escape imprisonment and return home.
 --- Mission consists of one ship with a full crew. Engineer and Science will be busy.
 ---
 --- Version 5
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome.
 -- Type: Replayable
 -- Author: Xansta
 -- Setting[Enemies]: Configures the amount/strength of enemies spawned in the scenario.
@@ -46,7 +46,7 @@ function init()
 	commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
-	diagnostic = false			
+	diagnostic = false
 	GMDiagnosticOn = _("buttonGM", "Turn On Diagnostic")
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 	independentTransportSpawnDelay = 20
@@ -59,7 +59,7 @@ function init()
 	kraylorPatrolGroupList = {}
 	goods = {}					--overall tracking of goods
 	stationList = {}			--friendly and neutral stations
-	friendlyStationList = {}	
+	friendlyStationList = {}
 	enemyStationList = {}
 	tradeFood = {}				--stations that will trade food for other goods
 	tradeLuxury = {}			--stations that will trade luxury for other goods
@@ -133,7 +133,7 @@ function init()
 	signx, signy = pickCoordinate(junkYardSignX, junkYardSignY)
 	Sign3 = Artifact():setPosition(signx, signy):setModel("SensorBuoyMKI"):allowPickup(false):setScanningParameters(1,1)
 	Sign3:setDescriptions(_("scienceDescription-buoy", "Space Message Buoy"),_("scienceDescription-buoy", "Space Message Buoy reading 'Boris Junk Yard: Best prices in 20 sectors' in the Kraylor language"))
-	plotSign = billboardUpdate	
+	plotSign = billboardUpdate
 	--Initial player ship
 	scrag_system_health = {
 		["reactor"] =		{initial = .01,	max = .5,				msg = _("repair-msgEngineer&+", "Reached maximum repair on reactor"),			},
@@ -183,7 +183,7 @@ function init()
 	}
 	local ship_spot = tableRemoveRandom(ship_spots)
     junkRepulse = CpuShip():setFaction("Independent"):setTemplate("Repulse"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(14):setShields(0.00,2.00):setWeaponStorage("HVLI",0):setWeaponStorage("Homing",1)
-	table.insert(junkShips,junkRepulse)	
+	table.insert(junkShips,junkRepulse)
 	ship_spot = tableRemoveRandom(ship_spots)
     junkAdder = CpuShip():setFaction("Kraylor"):setTemplate("Adder MK4"):setPosition(ship_spot.x, ship_spot.y):orderIdle():setHull(9):setShields(0.00):setWeaponStorage("HVLI", 1)
 	table.insert(junkShips,junkAdder)
@@ -457,12 +457,12 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 		for ndex=1,arcLen do
 			radialPoint = startArc+ndex
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 		end
 		for ndex=1,amount-arcLen do
 			radialPoint = random(startArc,endArcClockwise)
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 		end
 	else
 		for ndex=1,amount do
@@ -524,7 +524,7 @@ function createRandomAsteroidAlongArc(amount, x, y, distance, startArc, endArcCl
 end
 function buildNearbyStations()
 -- Organically (simulated asymetrically) grow stations from a central grid location
--- Order of creation: 	enemy stations, planet, enemy stations, planet, 
+-- Order of creation: 	enemy stations, planet, enemy stations, planet,
 -- 						independent stations, black hole, independent stations, black hole
 -- Human Navy stations (friendly stations) come later in the game after the communications get repaired.
 	brigx, brigy = brigStation:getPosition()
@@ -570,7 +570,7 @@ function buildNearbyStations()
 	end
 	adjList = getAdjacentGridLocations(gx,gy)
 	if #adjList < 1 then
-		adjList = getAllAdjacentGridLocations(gx,gy)	
+		adjList = getAllAdjacentGridLocations(gx,gy)
 	end
 	sri = math.random(1,#gRegion)
 	bwx = brigx + (gRegion[sri][1] - (gbHigh/2))*gSize
@@ -603,7 +603,7 @@ function buildNearbyStations()
 	end
 	adjList = getAdjacentGridLocations(gx,gy)
 	if #adjList < 1 then
-		adjList = getAllAdjacentGridLocations(gx,gy)	
+		adjList = getAllAdjacentGridLocations(gx,gy)
 	end
 	sri = math.random(1,#gRegion)
 	msx = brigx + (gRegion[sri][1] - (gbHigh/2))*gSize
@@ -648,7 +648,7 @@ function addEnemyStations()
 	--get adjacent list after done growing region
 	adjList = getAdjacentGridLocations(gx,gy)
 	if #adjList < 1 then
-		adjList = getAllAdjacentGridLocations(gx,gy)	
+		adjList = getAllAdjacentGridLocations(gx,gy)
 	else
 		if random(1,100) >= 17 then
 			adjList = getAllAdjacentGridLocations(gx,gy)
@@ -699,7 +699,7 @@ function placeEStation(x,y,name,faction)
 				station.comms_data.goods.dilithium = {quantity = 5, cost = math.random(40,50)}
 			else	--Impala
 				station.comms_data.goods.tritanium = {quantity = 5, cost = math.random(40,50)}
-			end			
+			end
 		end
 	elseif station_name == "Jabba" or station_name == "Lando" or station_name == "Maverick" or station_name == "Okun" or station_name == "Outpost-8" or station_name == "Prada" or station_name == "Research-11" or station_name == "Research-19" or station_name == "Science-2" or station_name == "Science-4" or station_name == "Spot" or station_name == "Starnet" or station_name == "Tandon" then
 		if chosen_goods < 33 then
@@ -858,7 +858,7 @@ function addIndependentStations()
 	--get list after done growing region
 	adjList = getAdjacentGridLocations(gx,gy)
 	if #adjList < 1 then
-		adjList = getFactionAdjacentGridLocations(gx,gy)	
+		adjList = getFactionAdjacentGridLocations(gx,gy)
 		if #adjList < 1 then
 			adjList = getAllAdjacentGridLocations(gx,gy)
 		end
@@ -900,7 +900,7 @@ function addBlackHole()
 	end
 	adjList = getAdjacentGridLocations(gx,gy)
 	if #adjList < 1 then
-		adjList = getAllAdjacentGridLocations(gx,gy)	
+		adjList = getAllAdjacentGridLocations(gx,gy)
 	else
 		if random(1,100) >= 35 then
 			adjList = getAllAdjacentGridLocations(gx,gy)
@@ -941,7 +941,7 @@ function getAdjacentGridLocations(lx,ly)
 			tempGrid[lx][ly-1] = 1
 			if grid[lx][ly-1] == nil then
 				table.insert(ol,{lx,ly-1})
-			elseif grid[lx][ly-1] == gp then		
+			elseif grid[lx][ly-1] == gp then
 				--case 2: traveling up, skip down check
 				getAdjacentGridLocationsSkip(2,lx,ly-1)
 			end
@@ -1059,7 +1059,7 @@ function getAllAdjacentGridLocations(lx,ly)
 			tempGrid[lx][ly-1] = 1
 			if grid[lx][ly-1] == nil then
 				table.insert(ol,{lx,ly-1})
-			else		
+			else
 				--case 2: traveling up, skip down check
 				getAllAdjacentGridLocationsSkip(2,lx,ly-1)
 			end
@@ -1177,7 +1177,7 @@ function getFactionAdjacentGridLocations(lx,ly)
 			tempGrid[lx][ly-1] = 1
 			if grid[lx][ly-1] == nil then
 				table.insert(ol,{lx,ly-1})
-			elseif grid[lx][ly-1] >= fb then		
+			elseif grid[lx][ly-1] >= fb then
 				--case 2: traveling up, skip down check
 				getFactionAdjacentGridLocationsSkip(2,lx,ly-1)
 			end
@@ -1342,10 +1342,10 @@ function handleDockedState()
 		missilePresence = missilePresence + player:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
+		if 	(ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or
+			(ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or
+			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or
+			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
 			addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
 				setCommsMessage(_("ammo-comms","What type of ordnance do you need?"))
@@ -1619,7 +1619,7 @@ function handleDockedState()
 							--get adjacent list after done growing region
 							adjList = getAdjacentGridLocations(gx,gy)
 							if #adjList < 1 then
-								adjList = getAllAdjacentGridLocations(gx,gy)	
+								adjList = getAllAdjacentGridLocations(gx,gy)
 							else
 								if random(1,100) >= 17 then
 									adjList = getAllAdjacentGridLocations(gx,gy)
@@ -1631,7 +1631,7 @@ function handleDockedState()
 							pStation = placeEStation(psx,psy,"RandomHumanNeutral",stationFaction)
 							--print(string.format("placed %s in %s: %.1f, %.1f",pStation:getCallSign(),pStation:getSectorName(),psx,psy))
 							table.insert(stationList,pStation)			--save station in general station list
-							table.insert(friendlyStationList,pStation)	
+							table.insert(friendlyStationList,pStation)
 							gp = gp + 1						--set next station number
 							rn = math.random(1,#adjList)	--random next station start location
 							gx = adjList[rn][1]
@@ -2051,7 +2051,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then 
+    if not player:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -2101,7 +2101,7 @@ function handleWeaponRestock(weapon)
 				end)
 			else
 				setCommsMessage(_("needRep-comms", "Not enough reputation."))
-				return				
+				return
 			end
 		end
         addCommsReply(_("Back"), commsStation)
@@ -2564,7 +2564,7 @@ function friendlyComms(comms_data)
 					msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
 			end
 		end
-		
+
 		setCommsMessage(msg);
 		addCommsReply(_("Back"), commsShip)
 	end)
@@ -3146,7 +3146,7 @@ function damageSummaryReport(delta)
 	end
 end
 function fixFlood(delta)
---trigger: beam repaired 
+--trigger: beam repaired
 	fixFloodTimer = fixFloodTimer - delta
 	if fixFloodTimer < 0 then
 		if missileFixStation == nil then
@@ -3310,7 +3310,7 @@ function showCrewFixers()
 			playerRepulse:removeCustom(crewFixButtonMsg)
 		end
 		if crewFixButtonMsgOp ~= nil then
-			playerRepulse:removeCustom(crewFixButtonMsgOp)		
+			playerRepulse:removeCustom(crewFixButtonMsgOp)
 		end
 	else
 		playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew suggested locations for ship fixes:"),"Magenta")
@@ -3450,7 +3450,7 @@ function jumpPartRecognition(delta)
 	end
 end
 function jumpPartFabrication(delta)
---Jump drive repairable 
+--Jump drive repairable
 	jumpPartFabricationTimer = jumpPartFabricationTimer - delta
 	if jumpPartFabricationTimer < 0 then
 		playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew finished jump drive part fabrication. They believe the jump drive should be functional soon."),"Magenta")
@@ -3495,7 +3495,7 @@ function kraylorPatrol(delta)
 					kpobj:orderFlyTowards(ktx, kty)
 				end
 				if junkZone:isInside(kpobj) then
-					ktx, kty = kpobj.target:getPosition()					
+					ktx, kty = kpobj.target:getPosition()
 					kpobj:orderFlyTowardsBlind(ktx, kty)
 				end
 				kgr[kpobj.groupID] = true
@@ -3525,7 +3525,7 @@ function kraylorPatrol(delta)
 				nearFriend, rest = nearStations(playerRepulse, friendlyStationList)
 				nfx, nfy = nearFriend:getPosition()
 				plx, ply = playerRepulse:getPosition()
-				patrolGroup = spawnEnemies((nfx+plx)/2,(nfy+ply)/2,random(.8,1.2),"Kraylor")				
+				patrolGroup = spawnEnemies((nfx+plx)/2,(nfy+ply)/2,random(.8,1.2),"Kraylor")
 			else
 				dx, dy = vectorFromAngle(random(0,360),random(25000,40000))
 				patrolGroup = spawnEnemies(tx+dx,ty+dy,random(.8,2.2),"Kraylor")
@@ -3544,7 +3544,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	enemyStrength = math.max(danger * enemy_power * 14, 5)	--assume player ship repulse at strength 14
@@ -3557,7 +3557,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 		shipTemplateType = math.random(1,#stsl)
 		while stsl[shipTemplateType] > enemyStrength * 1.1 + 5 do
 			shipTemplateType = math.random(1,#stsl)
-		end		
+		end
 		ship = CpuShip():setFaction(enemyFaction):setTemplate(stnl[shipTemplateType]):orderRoaming()
 		enemyPosition = enemyPosition + 1
 		if deployConfig < 50 then
@@ -3738,7 +3738,7 @@ function independentTransportPlot(delta)
 		if independentTransportCount < #stationList then
 			target = nil
 			repeat
-				target = randomStation(stationList)				
+				target = randomStation(stationList)
 			until(target ~= nil and target:isValid())
 			rnd = irandom(1,5)
 			if rnd == 1 then

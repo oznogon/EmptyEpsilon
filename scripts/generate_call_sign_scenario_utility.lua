@@ -34,14 +34,14 @@
 --	Global variables (set here if not set externally)
 --		suffix_index - set to zero if not set externally
 --		prefix_length - set to zero if not set externally
---		Faction flavored call sign prefixes: 
+--		Faction flavored call sign prefixes:
 --			kraylor_names, exuari_names, ghosts_names, independent_names, human_names,
 --			arlenian_names, usn_names, tsn_names, cuf_names, ktlitan_names
 --	Faction flavored prefix names
 --		The Kraylor, Arlenian, Exuari and Ktlitan names are supposed to sound alien. They
---		follow an internal pattern so that with enough experience, one can tell by the 
+--		follow an internal pattern so that with enough experience, one can tell by the
 --		ship name what faction they belong to. The Ghost names come from computer hardware
---		and software terminology in keeping with their cyber origins. The USN names follow 
+--		and software terminology in keeping with their cyber origins. The USN names follow
 --		a pirate theme. The TSN names follow a traditional space ship theme from science
 --		fiction. The CUF names are somewhat whimsical with alliteration for multipart names.
 --		The independent names borrow from every group since they represent ships that come
@@ -65,7 +65,7 @@ function generateCallSign(prefix,faction)
 		suffix_index = 0
 	end
 	suffix_index = suffix_index + math.random(1,3)
-	if suffix_index > 999 then 
+	if suffix_index > 999 then
 		suffix_index = 1
 	end
 	return string.format("%s%i",prefix,suffix_index)
@@ -442,7 +442,7 @@ function setExuariNames()
 	table.insert(exuari_names,"Zapondehex")
 	table.insert(exuari_names,"Zikandelat")
 end
-function setKraylorNames()		
+function setKraylorNames()
 	kraylor_names = {}
 	table.insert(kraylor_names,"Abroten")
 	table.insert(kraylor_names,"Ankwar")

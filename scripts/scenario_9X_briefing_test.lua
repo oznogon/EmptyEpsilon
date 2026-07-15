@@ -9,13 +9,13 @@ function init()
 
     -- Populate 5 briefing pages on the player ship using images from resources/images/
     -- and audio from resources/audio/scenario/55/
-    setBriefingPage(player, 1, _([[[If you run stock missions, you can make do without GM, but a lot of missions have some controls to tweak that exact mission on the fly. 
+    setBriefingPage(player, 1, _([[[If you run stock missions, you can make do without GM, but a lot of missions have some controls to tweak that exact mission on the fly.
 
 Here is full description of GM screen with controls: https://github.com/daid/EmptyEpsilon/wiki/Game-Master
 
-I recommend toying with it too get a handle on what things actually do (and what objects can you create in top of our what the scenario itself creates). 
+I recommend toying with it too get a handle on what things actually do (and what objects can you create in top of our what the scenario itself creates).
 
-I believe, taky there is also mistake/imprecise info - faction selector can also change faction for selected objects. But check that for yourself. 
+I believe, taky there is also mistake/imprecise info - faction selector can also change faction for selected objects. But check that for yourself.
 
 If you want to create your own scenarios, see mission scripting page from there and also mission scripting tutorial on EE's web page. But that is entirely new can of worms.]]), "images/black_hole_wireframe.jpg", "audio/scenario/55/sa_55_Commander1.ogg", 8)
     setBriefingPage(player, 2, _("If you run stock missions, you can make do without GM, but a lot of missions have some controls to tweak that exact mission on the fly."), "images/frequency_graph.png", "audio/scenario/55/sa_55_Commander2.ogg", 10)

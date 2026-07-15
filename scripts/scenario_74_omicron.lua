@@ -1,13 +1,13 @@
 -- Name: The Omicron Plague
 -- Description: A routine patrol mission turns into a desperate attempt to save humanity from an Exuari biological weapon
---- 
+---
 --- Designed to run in a limited time with different terrain each time. Multiple player ships may join
 ---
 --- Duration: approximately 45 minutes depending on the configuration options chosen
 ---
 --- Version 1
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience levels are welcome.
 -- Type: Replayable
 -- Author: Xansta
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
@@ -38,7 +38,7 @@
 -- Reputation[Super Hero]: 200 reputation - everyone knows you and relies on you for help
 -- Setting[Unique Ship]: Choose player ship outside of standard player ship list
 -- Unique Ship[None|Default]: None: just use standard player ship list on spawn screen
--- Unique Ship[Amalgam]: Based on Atlantis, 4 beams (vs 2), single broadside tube on each side for large homing missiles only, 2 mining tubes, weaker defenses and engines 
+-- Unique Ship[Amalgam]: Based on Atlantis, 4 beams (vs 2), single broadside tube on each side for large homing missiles only, 2 mining tubes, weaker defenses and engines
 -- Unique Ship[Midian]: Based on missile cruiser, reduced tubes, missiles and base warp speed to get beam weapons and HVLI
 -- Unique Ship[Raven]: Based on Cruiser, stronger shields, weaker hull, broadside beams, tweaked tubes and missiles, low powered warp drive, tweaked sensor ranges
 -- Unique Ship[Squid]: Based on Piranha, stronger defenses, added a beam weapon, reduced missile load, large homing missiles, reconfigured tubes, shorter jump and sensor ranges
@@ -158,7 +158,7 @@ function setConstants()
 	prefix_length = 0
 	suffix_index = 0
 	star_list = {
-		{radius = random(600,1400), distance = random(-2500,-1400), 
+		{radius = random(600,1400), distance = random(-2500,-1400),
 			name = {"Gamma Piscium","Beta Lyporis","Sigma Draconis","Iota Carinae","Theta Arietis","Epsilon Indi","Beta Hydri"},
 			color = {
 				red = random(0.8,1), green = random(0.8,1), blue = random(0.8,1)
@@ -167,7 +167,7 @@ function setConstants()
 				atmosphere = "planets/star-1.png"
 			},
 		},
-	}	
+	}
 	station_defend_dist = {
 		["Small Station"] = 2800,
 		["Medium Station"] = 4200,
@@ -384,7 +384,7 @@ function setConstants()
 		["Jacket Drone"] =					300,
 		["Jade 5"] =						100,
 		["Jagger"] =						100,
-		["Jump Carrier"] =					800,		
+		["Jump Carrier"] =					800,
 		["Karnack"] =						200,
 		["K2 Fighter"] =					300,
 		["K3 Fighter"] =					300,
@@ -651,7 +651,7 @@ function setConstants()
 						{angle = 150, dist = 2	},
 						{angle = 210, dist = 2	},
 					},
-	}	
+	}
 	formation_delta = {
 		["square"] = {
 			x = {0,1,0,-1, 0,1,-1, 1,-1,2,0,-2, 0,2,-2, 2,-2,2, 2,-2,-2,1,-1, 1,-1,0, 0,3,-3,1, 1,3,-3,-1,-1, 3,-3,2, 2,3,-3,-2,-2, 3,-3,3, 3,-3,-3,4,0,-4, 0,4,-4, 4,-4,-4,-4,-4,-4,-4,-4,4, 4,4, 4,4, 4, 1,-1, 2,-2, 3,-3,1,-1,2,-2,3,-3,5,-5,0, 0,5, 5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,5, 5,5, 5,5, 5,5, 5, 1,-1, 2,-2, 3,-3, 4,-4,1,-1,2,-2,3,-3,4,-4},
@@ -672,13 +672,13 @@ function setConstants()
 			[3] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
-				{angle =  1, distance = 1},				
+				{angle =  1, distance = 1},
 			},
 			[4] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
 				{angle =  1, distance = 1},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[5] = {
 				{angle =  0, distance = 0},
@@ -693,7 +693,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[7] = {
 				{angle =  0, distance = 0},
@@ -710,7 +710,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 			},
@@ -731,7 +731,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -756,7 +756,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -785,7 +785,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 4},
@@ -801,7 +801,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 3},
@@ -813,10 +813,10 @@ function setConstants()
 				{angle =  0, distance = 6},
 			},
 		},
-	}		
-	max_pyramid_tier = 15	
---	patrol_probe value should be between 0 and 5 not inclusive (0 = no patrol probes). The higher the value, the faster the patrol probe and the fewer patrol probes available 
-	playerShipStats = {	
+	}
+	max_pyramid_tier = 15
+--	patrol_probe value should be between 0 and 5 not inclusive (0 = no patrol probes). The higher the value, the faster the patrol probe and the fewer patrol probes available
+	playerShipStats = {
 		["Atlantis"]			= { strength = 52,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 10,	pods = 2,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Benedict"]			= { strength = 10,	cargo = 9,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 10,	pods = 3,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Crucible"]			= { strength = 45,	cargo = 5,	distance = 200,	long_range_radar = 20000, short_range_radar = 6000, tractor = false,	mining = false,	probes = 9,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 1,	epjam = 0,	},
@@ -835,7 +835,7 @@ function setConstants()
 		["Repulse"]				= { strength = 14,	cargo = 12,	distance = 200,	long_range_radar = 38000, short_range_radar = 5000, tractor = true,		mining = false,	probes = 8,		pods = 5,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Striker"]				= { strength = 8,	cargo = 4,	distance = 200,	long_range_radar = 35000, short_range_radar = 5000, tractor = false,	mining = false,	probes = 6,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["ZX-Lindworm"]			= { strength = 8,	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 5500, tractor = false,	mining = false,	probes = 4,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 1,	epjam = 0,	},
-	--	Custom player ships	
+	--	Custom player ships
 		["Amalgam"]				= { strength = 42,	cargo = 7,	distance = 400,	long_range_radar = 36000, short_range_radar = 5000, tractor = false,	mining = false,	probes = 11,	pods = 3,	turbo_torp = true,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Atlantis II"]			= { strength = 60,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 11,	pods = 3,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 0,	},
 		["Barrow"]				= { strength = 9,	cargo = 9,	distance = 400,	long_range_radar = 35000, short_range_radar = 5000, tractor = true,		mining = true,	probes = 12,	pods = 3,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 0,	epjam = 2,	},
@@ -896,7 +896,7 @@ function setConstants()
 		["Wombat"]				= { strength = 18,	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 6000, tractor = false,	mining = false,	probes = 5,		pods = 1,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 1,	epjam = 2,	},
 		["Wrocket"]				= { strength = 19,	cargo = 8,	distance = 200,	long_range_radar = 32000, short_range_radar = 5500, tractor = false,	mining = false,	probes = 10,	pods = 2,	turbo_torp = false,	patrol_probe = 0,	prox_scan = 1,	epjam = 0,	},
 		["XR-Lindworm"]			= { strength = 12,	cargo = 3,	distance = 100,	long_range_radar = 20000, short_range_radar = 6000, tractor = false,	mining = false,	probes = 5,		pods = 1,	turbo_torp = false,	patrol_probe = 3.9,	prox_scan = 9,	epjam = 0,	},
-	}	
+	}
 	commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
@@ -1114,7 +1114,7 @@ function stationReports()
 						end
 						addGMMessage(out)
 						stationReports()
-					end)					
+					end)
 				end
 				tpa:destroy()
 			end
@@ -1403,7 +1403,7 @@ function constructEnvironment()
 		["Small Station"] =	{count = 3, dist = 2000},
 		["Medium Station"] ={count = 4, dist = 3300},
 		["Large Station"] =	{count = 5, dist = 4000},
-		["Huge Station"] =	{count = 6, dist = 4500}, 
+		["Huge Station"] =	{count = 6, dist = 4500},
 	}
 	circle_stations = {}
 	local station_circle_distance_base = 30000
@@ -1510,43 +1510,43 @@ function constructEnvironment()
 			{
 				name = {"Alderaan","Dagobah","Dantooine","Rigel"},
 				color = {
-					red = random(0,0.2), 
-					green = random(0,0.2), 
+					red = random(0,0.2),
+					green = random(0,0.2),
 					blue = random(0.8,1)
 				},
 				texture = {
-					surface = "planets/planet-1.png", 
-					cloud = "planets/clouds-1.png", 
+					surface = "planets/planet-1.png",
+					cloud = "planets/clouds-1.png",
 					atmosphere = "planets/atmosphere.png"
 				},
 			},
 			{
 				name = {"Pahvo","Penthara","Scalos"},
 				color = {
-					red = random(0,0.2), 
-					green = random(0,0.2), 
+					red = random(0,0.2),
+					green = random(0,0.2),
 					blue = random(0.8,1)
 				},
 				texture = {
-					surface = "planets/planet-4.png", 
-					cloud = "planets/clouds-3.png", 
+					surface = "planets/planet-4.png",
+					cloud = "planets/clouds-3.png",
 					atmosphere = "planets/atmosphere.png"
 				},
 			},
 			{
 				name = {"Tanuga","Vacca","Terlina","Timor"},
 				color = {
-					red = random(0,0.2), 
-					green = random(0,0.2), 
+					red = random(0,0.2),
+					green = random(0,0.2),
 					blue = random(0.8,1)
 				},
 				texture = {
-					surface = "planets/planet-5.png", 
-					cloud = "planets/clouds-2.png", 
+					surface = "planets/planet-5.png",
+					cloud = "planets/clouds-2.png",
 					atmosphere = "planets/atmosphere.png"
 				},
 			},
-		}	
+		}
 		local selected_planet = math.random(1,#planet_list)
 		planet_barrier:setCallSign(planet_list[selected_planet].name[math.random(1,#planet_list[selected_planet].name)])
 		planet_barrier:setPlanetSurfaceTexture(planet_list[selected_planet].texture.surface)
@@ -2344,7 +2344,7 @@ function placeSensorJammer(axis)
 	local range_increment = (hi_range - lo_range)/8
 	local impact_increment = (hi_impact - lo_impact)/4
 	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--2-6, 2-8, 2-10
-	sensor_jammer_scan_complexity = 1 
+	sensor_jammer_scan_complexity = 1
 	sensor_jammer_scan_depth = 1
 	if mix > 5 then
 		sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)
@@ -2533,7 +2533,7 @@ function placeEnvironmentStation(axis)
 		local faction_choices = {
 			circle_stations[match_index]:getFaction(),
 			circle_stations[hi_neighbor]:getFaction(),
-			circle_stations[lo_neighbor]:getFaction(),		
+			circle_stations[lo_neighbor]:getFaction(),
 		}
 		local selected_faction = faction_choices[math.random(1,3)]
 		local name_group = "RandomHumanNeutral"
@@ -2645,7 +2645,7 @@ function farEnough(o_x,o_y,obj_dist)
 				end
 			end
 		elseif item.shape == "rectangle" then
-			if	o_x > item.lo_x and 
+			if	o_x > item.lo_x and
 				o_x < item.hi_x and
 				o_y > item.lo_y and
 				o_y < item.hi_y then
@@ -3541,7 +3541,7 @@ function handleDockedState()
 			end
 			addCommsReply(_("Back"), commsStation)
 		end)
-	end 
+	end
 	if comms_target == station_regional_hq and medical_research_obtained and not plague_victim_treated then
 		addCommsReply(_("mission2ndBis-comms","Give medical treatment and research to sickbay"), function()
 			if comms_source.medical_research then
@@ -3559,10 +3559,10 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
+		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or
+			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or
+			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or
+			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or
 			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
 			addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
 				if stationCommsDiagnostic then print("in restock function") end
@@ -4124,7 +4124,7 @@ function getRepairCrewFromStation(relationship)
 						delay_status = string.format(_("trade-comms","%i minutes and %s"),delay_minutes,delay_status)
 					else
 						delay_status = string.format(_("trade-comms","%i minute and %s"),delay_minutes,delay_status)
-					end							
+					end
 				end
 				setCommsMessage(string.format(_("trade-comms","There are some repair crew recruits in route for %s. Travel time remaining is %s."),comms_target:getCallSign(),delay_status))
 			end
@@ -4203,7 +4203,7 @@ function getCoolantFromStation(relationship)
 							delay_status = string.format(_("trade-comms","%i minutes and %s"),delay_minutes,delay_status)
 						else
 							delay_status = string.format(_("trade-comms","%i minute and %s"),delay_minutes,delay_status)
-						end							
+						end
 					end
 					setCommsMessage(string.format(_("trade-comms","Our coolant production facility is making more right now. Coolant manufacturing time remaining is %s."),delay_status))
 				end
@@ -4228,7 +4228,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -4278,7 +4278,7 @@ function handleWeaponRestock(weapon)
 				end)
 			else
 	            setCommsMessage(_("needRep-comms", "Not enough reputation."))
-				return				
+				return
 			end
 		end
         addCommsReply(_("Back"), commsStation)
@@ -4701,7 +4701,7 @@ if #accessible_warp_jammers > 0 then
 				for n=0,shields-1 do
 					msg = msg .. string.format(_("stationAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 				end
-			end			
+			end
 			setCommsMessage(msg);
 			addCommsReply(_("Back"), commsStation)
 		end)
@@ -5032,7 +5032,7 @@ function medicalBaseLocationAssistanceComms()
 						setCommsMessage(string.format(_("mission3th-comms","The Exuari! They're getting closer! Please come to us in sector %s as soon as you can."),station_medical_research:getSectorName()))
 					else
 						local dsx, dsy = station_medical_research:getPosition()
-						comms_source:commandAddWaypoint(dsx,dsy)								
+						comms_source:commandAddWaypoint(dsx,dsy)
 						setCommsMessage(string.format(_("mission3th-comms","The Exuari! They're getting closer! I'm adding waypoint %i into your system for our station. Please get here as soon as you can."),comms_source:getWaypointCount()))
 					end
 				end)
@@ -5541,7 +5541,7 @@ function getEnemyHealth(enemy)
 	end
 	if change_enemy_order_diagnostic then print(string.format("   faction:         %s",faction)) end
 	if faction == "Kraylor" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .3	+
 			enemy_hull		* .4	+
 			enemy_reactor	* .1 	+
@@ -5552,7 +5552,7 @@ function getEnemyHealth(enemy)
 			enemy_warp		* .03	+
 			enemy_jump		* .03
 	elseif faction == "Arlenians" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .45	+
 			enemy_reactor	* .05 	+
@@ -5561,9 +5561,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .02	+
 			enemy_missile	* .02	+
 			enemy_warp		* .02	+
-			enemy_jump		* .02	
+			enemy_jump		* .02
 	elseif faction == "Exuari" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .2	+
 			enemy_hull		* .3	+
 			enemy_reactor	* .2 	+
@@ -5572,9 +5572,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .05	+
 			enemy_missile	* .05	+
 			enemy_warp		* .05	+
-			enemy_jump		* .05	
+			enemy_jump		* .05
 	elseif faction == "Ghosts" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .25	+
 			enemy_hull		* .25	+
 			enemy_reactor	* .25 	+
@@ -5583,9 +5583,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .04	+
 			enemy_missile	* .04	+
 			enemy_warp		* .04	+
-			enemy_jump		* .04	
+			enemy_jump		* .04
 	elseif faction == "Ktlitans" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .2	+
 			enemy_hull		* .3	+
 			enemy_reactor	* .1 	+
@@ -5594,9 +5594,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .05	+
 			enemy_missile	* .05	+
 			enemy_warp		* .1	+
-			enemy_jump		* .1	
+			enemy_jump		* .1
 	elseif faction == "TSN" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .35	+
 			enemy_reactor	* .08 	+
@@ -5605,9 +5605,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .02	+
 			enemy_missile	* .01	+
 			enemy_warp		* .08	+
-			enemy_jump		* .08	
+			enemy_jump		* .08
 	elseif faction == "USN" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .38	+
 			enemy_hull		* .38	+
 			enemy_reactor	* .05 	+
@@ -5616,9 +5616,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .02	+
 			enemy_missile	* .02	+
 			enemy_warp		* .05	+
-			enemy_jump		* .05	
+			enemy_jump		* .05
 	elseif faction == "CUF" then
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .35	+
 			enemy_hull		* .38	+
 			enemy_reactor	* .05 	+
@@ -5627,9 +5627,9 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .03	+
 			enemy_missile	* .03	+
 			enemy_warp		* .06	+
-			enemy_jump		* .04	
+			enemy_jump		* .04
 	else
-		enemy_health = 
+		enemy_health =
 			enemy_shield 	* .3	+
 			enemy_hull		* .4	+
 			enemy_reactor	* .06 	+
@@ -5638,7 +5638,7 @@ function getEnemyHealth(enemy)
 			enemy_beam		* .03	+
 			enemy_missile	* .03	+
 			enemy_warp		* .05	+
-			enemy_jump		* .05	
+			enemy_jump		* .05
 	end
 	return enemy_health
 end
@@ -6554,7 +6554,7 @@ function spawnSingleEnemy(xOrigin, yOrigin, danger, enemyFaction, enemyStrength,
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	if enemyStrength == nil then
@@ -6581,7 +6581,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 	if enemyFaction == nil then
 		enemyFaction = "Kraylor"
 	end
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	if enemyStrength == nil then
@@ -6636,7 +6636,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 		for index, ship in ipairs(enemyList) do
 			if index <= max_pyramid_tier then
 				local pyramid_angle = spawn_angle + formation_delta.pyramid[pyramid_tier][index].angle
-				if pyramid_angle < 0 then 
+				if pyramid_angle < 0 then
 					pyramid_angle = pyramid_angle + 360
 				end
 				pyramid_angle = pyramid_angle % 360
@@ -6989,7 +6989,7 @@ function crewFate(p, fatalityChance)
 		end
 	end
 end
---      Inventory button and functions for relay/operations 
+--      Inventory button and functions for relay/operations
 function cargoInventory(delta)
 	for pidx=1,32 do
 		local p = getPlayerShip(pidx)
@@ -7050,7 +7050,7 @@ function generateCallSign(prefix,faction)
 		end
 	end
 	suffix_index = suffix_index + math.random(1,3)
-	if suffix_index > 999 then 
+	if suffix_index > 999 then
 		suffix_index = 1
 	end
 	return string.format("%s%i",prefix,suffix_index)
@@ -7424,7 +7424,7 @@ function setExuariNames()
 	table.insert(exuari_names,"Zapondehex")
 	table.insert(exuari_names,"Zikandelat")
 end
-function setKraylorNames()		
+function setKraylorNames()
 	kraylor_names = {}
 	table.insert(kraylor_names,"Abroten")
 	table.insert(kraylor_names,"Ankwar")
@@ -8001,7 +8001,7 @@ function farco3(enemyFaction)
 	end)
 	ship:setTypeName("Farco 3")
 	ship:setShieldsMax(60, 40)									--stronger shields (vs 50, 40)
-	ship:setShields(60, 40)					
+	ship:setShields(60, 40)
 --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
 	ship:setBeamWeapon(0,	90,	-15,	 1500,	5.0,	6.0)	--longer (vs 1200), faster (vs 8)
 	ship:setBeamWeapon(1,	90,	 15,	 1500,	5.0,	6.0)
@@ -8036,9 +8036,9 @@ function farco5(enemyFaction)
 	end)
 	ship:setTypeName("Farco 5")
 	ship:setShieldsMax(60, 40)				--stronger shields (vs 50, 40)
-	ship:setShields(60, 40)	
+	ship:setShields(60, 40)
 	ship:setTubeLoadTime(0,30)				--faster (vs 60)
-	ship:setTubeLoadTime(0,30)				
+	ship:setTubeLoadTime(0,30)
 	local farco_5_db = queryScienceDatabase("Ships","Frigate","Farco 5")
 	if farco_5_db == nil then
 		local frigate_db = queryScienceDatabase("Ships","Frigate")
@@ -8070,12 +8070,12 @@ function farco8(enemyFaction)
 	end)
 	ship:setTypeName("Farco 8")
 	ship:setShieldsMax(80, 50)				--stronger shields (vs 50, 40)
-	ship:setShields(80, 50)	
+	ship:setShields(80, 50)
 --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
 	ship:setBeamWeapon(0,	90,	-15,	 1500,	5.0,	6.0)	--longer (vs 1200), faster (vs 8)
 	ship:setBeamWeapon(1,	90,	 15,	 1500,	5.0,	6.0)
 	ship:setTubeLoadTime(0,30)				--faster (vs 60)
-	ship:setTubeLoadTime(0,30)				
+	ship:setTubeLoadTime(0,30)
 	local farco_8_db = queryScienceDatabase("Ships","Frigate","Farco 8")
 	if farco_8_db == nil then
 		local frigate_db = queryScienceDatabase("Ships","Frigate")
@@ -8107,7 +8107,7 @@ function farco11(enemyFaction)
 	end)
 	ship:setTypeName("Farco 11")
 	ship:setShieldsMax(80, 50)				--stronger shields (vs 50, 40)
-	ship:setShields(80, 50)	
+	ship:setShields(80, 50)
 	ship:setRotationMaxSpeed(15)								--faster maneuver (vs 10)
 --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
 	ship:setBeamWeapon(0,	90,	-15,	 1500,	5.0,	6.0)	--longer (vs 1200), faster (vs 8)
@@ -8144,16 +8144,16 @@ function farco13(enemyFaction)
 	end)
 	ship:setTypeName("Farco 13")
 	ship:setShieldsMax(90, 70)				--stronger shields (vs 50, 40)
-	ship:setShields(90, 70)	
+	ship:setShields(90, 70)
 	ship:setRotationMaxSpeed(15)								--faster maneuver (vs 10)
 --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
 	ship:setBeamWeapon(0,	90,	-15,	 1500,	5.0,	6.0)	--longer (vs 1200), faster (vs 8)
 	ship:setBeamWeapon(1,	90,	 15,	 1500,	5.0,	6.0)
 	ship:setBeamWeapon(2,	20,	  0,	 1800,	5.0,	4.0)	--additional sniping beam
 	ship:setTubeLoadTime(0,30)				--faster (vs 60)
-	ship:setTubeLoadTime(0,30)				
+	ship:setTubeLoadTime(0,30)
 	ship:setWeaponStorageMax("Homing",16)						--more (vs 6)
-	ship:setWeaponStorage("Homing", 16)		
+	ship:setWeaponStorage("Homing", 16)
 	ship:setWeaponStorageMax("HVLI",30)							--more (vs 20)
 	ship:setWeaponStorage("HVLI", 30)
 	local farco_13_db = queryScienceDatabase("Ships","Frigate","Farco 13")
@@ -8187,17 +8187,17 @@ function whirlwind(enemyFaction)
 	end)
 	ship:setTypeName("Whirlwind")
 	ship:setWeaponTubeCount(9)					--more (vs 5)
-	ship:setWeaponTubeDirection(0,-90)			--3 left, 3 right, 3 front (vs 5 front)	
-	ship:setWeaponTubeDirection(1,-92)				
-	ship:setWeaponTubeDirection(2,-88)				
-	ship:setWeaponTubeDirection(3, 90)				
-	ship:setWeaponTubeDirection(4, 92)				
-	ship:setWeaponTubeDirection(5, 88)				
-	ship:setWeaponTubeDirection(6,  0)				
-	ship:setWeaponTubeDirection(7,  2)				
-	ship:setWeaponTubeDirection(8, -2)				
+	ship:setWeaponTubeDirection(0,-90)			--3 left, 3 right, 3 front (vs 5 front)
+	ship:setWeaponTubeDirection(1,-92)
+	ship:setWeaponTubeDirection(2,-88)
+	ship:setWeaponTubeDirection(3, 90)
+	ship:setWeaponTubeDirection(4, 92)
+	ship:setWeaponTubeDirection(5, 88)
+	ship:setWeaponTubeDirection(6,  0)
+	ship:setWeaponTubeDirection(7,  2)
+	ship:setWeaponTubeDirection(8, -2)
 	ship:setWeaponStorageMax("Homing",36)						--more (vs 15)
-	ship:setWeaponStorage("Homing", 36)		
+	ship:setWeaponStorage("Homing", 36)
 	ship:setWeaponStorageMax("HVLI",36)							--more (vs 15)
 	ship:setWeaponStorage("HVLI", 36)
 	local whirlwind_db = queryScienceDatabase("Ships","Frigate","Whirlwind")
@@ -8238,7 +8238,7 @@ function phobosR2(enemyFaction)
 	end)
 	ship:setTypeName("Phobos R2")
 	ship:setWeaponTubeCount(1)			--one tube (vs 2)
-	ship:setWeaponTubeDirection(0,0)	
+	ship:setWeaponTubeDirection(0,0)
 	ship:setImpulseMaxSpeed(55)			--slower impulse (vs 60)
 	ship:setRotationMaxSpeed(15)		--faster maneuver (vs 10)
 	local phobos_r2_db = queryScienceDatabase("Ships","Frigate","Phobos R2")
@@ -8314,7 +8314,7 @@ function k2fighter(enemyFaction)
 		end
 	end
 	return ship
-end	
+end
 function k3fighter(enemyFaction)
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Fighter")
 	ship:setTypeName("K3 Fighter")
@@ -8338,7 +8338,7 @@ function k3fighter(enemyFaction)
 		end
 	end
 	return ship
-end	
+end
 function waddle5(enemyFaction)
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
 	ship:onTakingDamage(function(self,instigator)
@@ -8534,16 +8534,16 @@ function tempest(enemyFaction)
 	ship:setWeaponTubeDirection(1, -89)				--slight angle spread
 	ship:setWeaponTubeDirection(3,  88)				--3 for HVLI each side
 	ship:setWeaponTubeDirection(4,  89)				--2 for homing and nuke each side
-	ship:setWeaponTubeDirection(6, -91)				
-	ship:setWeaponTubeDirection(7, -92)				
-	ship:setWeaponTubeDirection(8,  91)				
-	ship:setWeaponTubeDirection(9,  92)				
+	ship:setWeaponTubeDirection(6, -91)
+	ship:setWeaponTubeDirection(7, -92)
+	ship:setWeaponTubeDirection(8,  91)
+	ship:setWeaponTubeDirection(9,  92)
 	ship:setWeaponTubeExclusiveFor(7,"HVLI")
 	ship:setWeaponTubeExclusiveFor(9,"HVLI")
 	ship:setWeaponStorageMax("Homing",16)			--more (vs 6)
-	ship:setWeaponStorage("Homing", 16)				
+	ship:setWeaponStorage("Homing", 16)
 	ship:setWeaponStorageMax("Nuke",8)				--more (vs 0)
-	ship:setWeaponStorage("Nuke", 8)				
+	ship:setWeaponStorage("Nuke", 8)
 	ship:setWeaponStorageMax("HVLI",34)				--more (vs 20)
 	ship:setWeaponStorage("HVLI", 34)
 	local tempest_db = queryScienceDatabase("Ships","Frigate","Tempest")
@@ -8590,7 +8590,7 @@ function enforcer(enemyFaction)
 	ship:setImpulseMaxSpeed(100)								--faster impulse (vs 60)
 	ship:setRotationMaxSpeed(20)								--faster maneuver (vs 15)
 	ship:setShieldsMax(200,100,100)								--stronger shields (vs 100,150)
-	ship:setShields(200,100,100)					
+	ship:setShields(200,100,100)
 	ship:setHullMax(100)										--stronger hull (vs 70)
 	ship:setHull(100)
 --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
@@ -8600,11 +8600,11 @@ function enforcer(enemyFaction)
 	ship:setBeamWeapon(3,	 0,	    0,	   0,		0,		 0)
 	ship:setWeaponTubeCount(3)									--more (vs 0)
 	ship:setTubeSize(0,"large")									--large (vs normal)
-	ship:setWeaponTubeDirection(1,-15)				
-	ship:setWeaponTubeDirection(2, 15)				
+	ship:setWeaponTubeDirection(1,-15)
+	ship:setWeaponTubeDirection(2, 15)
 	ship:setTubeLoadTime(0,18)
 	ship:setTubeLoadTime(1,12)
-	ship:setTubeLoadTime(2,12)			
+	ship:setTubeLoadTime(2,12)
 	ship:setWeaponStorageMax("Homing",18)						--more (vs 0)
 	ship:setWeaponStorage("Homing", 18)
 	local enforcer_db = queryScienceDatabase("Ships","Frigate","Enforcer")
@@ -8628,7 +8628,7 @@ function enforcer(enemyFaction)
 			enforcer_db:setImage("radar/ktlitan_destroyer.png")		--override default radar image
 		end
 	end
-	return ship		
+	return ship
 end
 function predator(enemyFaction)
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F8")
@@ -8640,25 +8640,25 @@ function predator(enemyFaction)
 	end)
 	ship:setTypeName("Predator")
 	ship:setShieldsMax(100,100)									--stronger shields (vs 30,30)
-	ship:setShields(100,100)					
+	ship:setShields(100,100)
 	ship:setHullMax(80)											--stronger hull (vs 70)
 	ship:setHull(80)
 	ship:setImpulseMaxSpeed(65)									--faster impulse (vs 40)
 	ship:setRotationMaxSpeed(15)								--faster maneuver (vs 6)
 	ship:setJumpDrive(true)
-	ship:setJumpDriveRange(5000,35000)			
+	ship:setJumpDriveRange(5000,35000)
 --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
 	ship:setBeamWeapon(0,	90,	    0,	1000,		6,		 4)	--more (vs 0)
-	ship:setBeamWeapon(1,	90,	  180,	1000,		6,		 4)	
+	ship:setBeamWeapon(1,	90,	  180,	1000,		6,		 4)
 	ship:setWeaponTubeCount(8)									--more (vs 3)
-	ship:setWeaponTubeDirection(0,-60)				
-	ship:setWeaponTubeDirection(1,-90)				
-	ship:setWeaponTubeDirection(2,-90)				
-	ship:setWeaponTubeDirection(3, 60)				
-	ship:setWeaponTubeDirection(4, 90)				
-	ship:setWeaponTubeDirection(5, 90)				
-	ship:setWeaponTubeDirection(6,-120)				
-	ship:setWeaponTubeDirection(7, 120)				
+	ship:setWeaponTubeDirection(0,-60)
+	ship:setWeaponTubeDirection(1,-90)
+	ship:setWeaponTubeDirection(2,-90)
+	ship:setWeaponTubeDirection(3, 60)
+	ship:setWeaponTubeDirection(4, 90)
+	ship:setWeaponTubeDirection(5, 90)
+	ship:setWeaponTubeDirection(6,-120)
+	ship:setWeaponTubeDirection(7, 120)
 	ship:setWeaponTubeExclusiveFor(0,"Homing")
 	ship:setWeaponTubeExclusiveFor(1,"Homing")
 	ship:setWeaponTubeExclusiveFor(2,"Homing")
@@ -8668,7 +8668,7 @@ function predator(enemyFaction)
 	ship:setWeaponTubeExclusiveFor(6,"Homing")
 	ship:setWeaponTubeExclusiveFor(7,"Homing")
 	ship:setWeaponStorageMax("Homing",32)						--more (vs 5)
-	ship:setWeaponStorage("Homing", 32)		
+	ship:setWeaponStorage("Homing", 32)
 	ship:setWeaponStorageMax("HVLI",0)							--less (vs 10)
 	ship:setWeaponStorage("HVLI", 0)
 	ship:setRadarTrace("missile_cruiser.png")				--different radar trace
@@ -8699,7 +8699,7 @@ function predator(enemyFaction)
 			predator_db:setModelDataName("HeavyCorvetteRed")
 		end
 	end
-	return ship		
+	return ship
 end
 function atlantisY42(enemyFaction)
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Atlantis X23")
@@ -8711,7 +8711,7 @@ function atlantisY42(enemyFaction)
 	end)
 	ship:setTypeName("Atlantis Y42")
 	ship:setShieldsMax(300,200,300,200)							--stronger shields (vs 200,200,200,200)
-	ship:setShields(300,200,300,200)					
+	ship:setShields(300,200,300,200)
 	ship:setImpulseMaxSpeed(65)									--faster impulse (vs 30)
 	ship:setRotationMaxSpeed(15)								--faster maneuver (vs 3.5)
 --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
@@ -8740,7 +8740,7 @@ function atlantisY42(enemyFaction)
 			)
 		end
 	end
-	return ship		
+	return ship
 end
 function starhammerV(enemyFaction)
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Starhammer II")
@@ -8754,11 +8754,11 @@ function starhammerV(enemyFaction)
 	ship:setImpulseMaxSpeed(65)									--faster impulse (vs 35)
 	ship:setRotationMaxSpeed(15)								--faster maneuver (vs 6)
 	ship:setShieldsMax(450, 350, 250, 250, 350)					--stronger shields (vs 450, 350, 150, 150, 350)
-	ship:setShields(450, 350, 250, 250, 350)					
+	ship:setShields(450, 350, 250, 250, 350)
 --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
 	ship:setBeamWeapon(4,	60,	  180,	1500,		8,		11)	--extra rear facing beam
 	ship:setWeaponStorageMax("Homing",16)						--more (vs 4)
-	ship:setWeaponStorage("Homing", 16)		
+	ship:setWeaponStorage("Homing", 16)
 	ship:setWeaponStorageMax("HVLI",36)							--more (vs 20)
 	ship:setWeaponStorage("HVLI", 36)
 	local starhammer_v_db = queryScienceDatabase("Ships","Corvette","Starhammer V")
@@ -8780,7 +8780,7 @@ function starhammerV(enemyFaction)
 			)
 		end
 	end
-	return ship		
+	return ship
 end
 function tyr(enemyFaction)
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Battlestation")
@@ -8794,7 +8794,7 @@ function tyr(enemyFaction)
 	ship:setImpulseMaxSpeed(50)									--faster impulse (vs 30)
 	ship:setRotationMaxSpeed(10)								--faster maneuver (vs 1.5)
 	ship:setShieldsMax(400, 300, 300, 400, 300, 300)			--stronger shields (vs 300, 300, 300, 300, 300)
-	ship:setShields(400, 300, 300, 400, 300, 300)					
+	ship:setShields(400, 300, 300, 400, 300, 300)
 	ship:setHullMax(100)										--stronger hull (vs 70)
 	ship:setHull(100)
 --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
@@ -8865,7 +8865,7 @@ function cucaracha(enemyFaction)
 	end)
 	ship:setTypeName("Cucaracha")
 	ship:setShieldsMax(200, 50, 50, 50, 50, 50)		--stronger shields (vs 20)
-	ship:setShields(200, 50, 50, 50, 50, 50)					
+	ship:setShields(200, 50, 50, 50, 50, 50)
 	ship:setHullMax(100)							--stronger hull (vs 50)
 	ship:setHull(100)
 	ship:setRotationMaxSpeed(20)					--faster maneuver (vs 10)
@@ -8903,7 +8903,7 @@ function starhammerIII(enemyFaction)
 	ship:setBeamWeapon(4,	60,	  180,	1500,		8,		11)	--extra rear facing beam
 	ship:setTubeSize(0,"large")
 	ship:setWeaponStorageMax("Homing",16)						--more (vs 4)
-	ship:setWeaponStorage("Homing", 16)		
+	ship:setWeaponStorage("Homing", 16)
 	ship:setWeaponStorageMax("HVLI",36)							--more (vs 20)
 	ship:setWeaponStorage("HVLI", 36)
 	local starhammer_iii_db = queryScienceDatabase("Ships","Corvette","Starhammer III")
@@ -8940,7 +8940,7 @@ function k2breaker(enemyFaction)
 	ship:setHull(200)
 	ship:setWeaponTubeCount(3)						--more (vs 1)
 	ship:setTubeSize(0,"large")						--large (vs normal)
-	ship:setWeaponTubeDirection(1,-30)				
+	ship:setWeaponTubeDirection(1,-30)
 	ship:setWeaponTubeDirection(2, 30)
 	ship:setWeaponTubeExclusiveFor(0,"HVLI")		--only HVLI (vs any)
 	ship:setWeaponStorageMax("Homing",16)			--more (vs 0)
@@ -8979,11 +8979,11 @@ function hurricane(enemyFaction)
 	end)
 	ship:setTypeName("Hurricane")
 	ship:setJumpDrive(true)
-	ship:setJumpDriveRange(5000,40000)			
+	ship:setJumpDriveRange(5000,40000)
 	ship:setWeaponTubeCount(8)						--more (vs 3)
 	ship:setWeaponTubeExclusiveFor(1,"HVLI")		--only HVLI (vs any)
 	ship:setWeaponTubeDirection(1,  0)				--forward (vs -90)
-	ship:setTubeSize(3,"large")						
+	ship:setTubeSize(3,"large")
 	ship:setWeaponTubeDirection(3,-90)
 	ship:setTubeSize(4,"small")
 	ship:setWeaponTubeExclusiveFor(4,"Homing")
@@ -9035,10 +9035,10 @@ function phobosT4(enemyFaction)
 	ship:setTypeName("Phobos T4")
 	ship:setRotationMaxSpeed(20)								--faster maneuver (vs 10)
 	ship:setShieldsMax(80,30)									--stronger shields (vs 50,40)
-	ship:setShields(80,30)					
+	ship:setShields(80,30)
 --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
 	ship:setBeamWeapon(0,	90,	  -15,	1500,		6,		6)	--longer (vs 1200), faster (vs 8)
-	ship:setBeamWeapon(1,	90,	   15,	1500,		6,		6)	
+	ship:setBeamWeapon(1,	90,	   15,	1500,		6,		6)
 	local phobos_t4_db = queryScienceDatabase("Ships","Frigate","Phobos T4")
 	if phobos_t4_db == nil then
 		local frigate_db = queryScienceDatabase("Ships","Frigate")
@@ -9290,13 +9290,13 @@ function createPlayerShipMixer()
 	playerAmalgam:setTubeSize(0,"large")				--left tube large (vs normal)
 	playerAmalgam:setTubeSize(1,"large")				--right tube large (vs normal)
 	playerAmalgam:setWeaponStorageMax("Homing", 16)		--more (vs 12)
-	playerAmalgam:setWeaponStorage("Homing", 16)				
+	playerAmalgam:setWeaponStorage("Homing", 16)
 	playerAmalgam:setWeaponStorageMax("Nuke", 0)		--less (vs 4)
-	playerAmalgam:setWeaponStorage("Nuke", 0)				
+	playerAmalgam:setWeaponStorage("Nuke", 0)
 	playerAmalgam:setWeaponStorageMax("Mine", 10)		--more (vs 8)
-	playerAmalgam:setWeaponStorage("Mine", 10)				
+	playerAmalgam:setWeaponStorage("Mine", 10)
 	playerAmalgam:setWeaponStorageMax("EMP", 0)			--less (vs 6)
-	playerAmalgam:setWeaponStorage("EMP", 0)				
+	playerAmalgam:setWeaponStorage("EMP", 0)
 	playerAmalgam:setWeaponStorageMax("HVLI", 0)		--less (vs 20)
 	playerAmalgam:setWeaponStorage("HVLI", 0)
 	return playerAmalgam
@@ -9332,13 +9332,13 @@ function createPlayerShipFlipper()
 	playerFlipper:setTubeLoadTime(3,12)
 	playerFlipper:setTubeLoadTime(4,15)
 	playerFlipper:setWeaponStorageMax("Homing",16)		--less (vs 30)
-	playerFlipper:setWeaponStorage("Homing",   16)				
+	playerFlipper:setWeaponStorage("Homing",   16)
 	playerFlipper:setWeaponStorageMax("Nuke",   2)		--less (vs 8)
-	playerFlipper:setWeaponStorage("Nuke",      2)				
+	playerFlipper:setWeaponStorage("Nuke",      2)
 	playerFlipper:setWeaponStorageMax("EMP",    5)		--less (vs 10)
-	playerFlipper:setWeaponStorage("EMP",       5)				
+	playerFlipper:setWeaponStorage("EMP",       5)
 	playerFlipper:setWeaponStorageMax("Mine",   5)		--less (vs 12)
-	playerFlipper:setWeaponStorage("Mine",      5)				
+	playerFlipper:setWeaponStorage("Mine",      5)
 	playerFlipper:setWeaponStorageMax("HVLI",  16)		--more (vs 0)
 	playerFlipper:setWeaponStorage("HVLI",     16)
 	playerFlipper.smallHomingOnly = true
@@ -9351,7 +9351,7 @@ function createPlayerShipInk()
 	playerInk:setShieldsMax(100, 100)				--stronger shields (vs 70, 70)
 	playerInk:setShields(100, 100)
 	playerInk:setHullMax(130)						--stronger (vs 120)
-	playerInk:setHull(130)							
+	playerInk:setHull(130)
 	playerInk.max_jump_range = 20000				--shorter than typical (vs 50)
 	playerInk.min_jump_range = 2000					--shorter than typical (vs 5)
 	playerInk:setJumpDriveRange(playerInk.min_jump_range,playerInk.max_jump_range)
@@ -9359,7 +9359,7 @@ function createPlayerShipInk()
 --                 				 Arc, Dir, Range, CycleTime, Damage
 	playerInk:setBeamWeapon(0, 10,	0,	1000,		4,		4)		--one beam (vs 0)
 --									   Arc,	  Dir, Rotate speed
-	playerInk:setBeamWeaponTurret(0,	80,		0,		1)			--slow turret 
+	playerInk:setBeamWeaponTurret(0,	80,		0,		1)			--slow turret
 	playerInk:setWeaponTubeDirection(0,0)					--forward facing (vs left)
 	playerInk:setWeaponTubeDirection(3,0)					--forward facing (vs right)
 	playerInk:setTubeLoadTime(0,12)							--slower (vs 8)
@@ -9375,15 +9375,15 @@ function createPlayerShipInk()
 	playerInk:weaponTubeDisallowMissle(1,"Mine")			--no sideways mines
 	playerInk:weaponTubeDisallowMissle(4,"Mine")			--no sideways mines
 	playerInk:setWeaponStorageMax("HVLI",10)				--fewer HVLI (vs 20)
-	playerInk:setWeaponStorage("HVLI", 10)				
+	playerInk:setWeaponStorage("HVLI", 10)
 	playerInk:setWeaponStorageMax("Homing",10)				--fewer Homing (vs 12)
-	playerInk:setWeaponStorage("Homing", 10)				
+	playerInk:setWeaponStorage("Homing", 10)
 	playerInk:setWeaponStorageMax("Mine",6)					--fewer mines (vs 8)
-	playerInk:setWeaponStorage("Mine", 6)				
+	playerInk:setWeaponStorage("Mine", 6)
 	playerInk:setWeaponStorageMax("EMP",4)					--more EMPs (vs 0)
-	playerInk:setWeaponStorage("EMP", 4)					
+	playerInk:setWeaponStorage("EMP", 4)
 	playerInk:setWeaponStorageMax("Nuke",4)					--fewer Nukes (vs 6)
-	playerInk:setWeaponStorage("Nuke", 4)				
+	playerInk:setWeaponStorage("Nuke", 4)
 	playerInk:setLongRangeRadarRange(25000)					--shorter long range sensors (vs 30000)
 	playerInk.normal_long_range_radar = 25000
 	return playerInk
@@ -9391,7 +9391,7 @@ end
 function createPlayerShipClaw()
 	playerRaven = PlayerSpaceship():setTemplate("Player Cruiser"):setFaction("Human Navy"):setCallSign("Claw")
 	playerRaven:setTypeName("Raven")
-	playerRaven:setJumpDrive(false)						
+	playerRaven:setJumpDrive(false)
 	playerRaven:setWarpDrive(true)						--warp drive (vs jump)
 	playerRaven:setWarpSpeed(300)
 	playerRaven:setShieldsMax(100, 100)					--stronger shields (vs 80, 80)
@@ -9402,8 +9402,8 @@ function createPlayerShipClaw()
 	playerRaven:setBeamWeapon(0,  10, -90,	 900, 			6,	10)	--left (vs front) shorter (vs 1000)
 	playerRaven:setBeamWeapon(1,  10,  90,	 900, 			6,	10)	--right (vs front) shorter (vs 1000)
 --										Arc,  Dir, Rotate speed
-	playerRaven:setBeamWeaponTurret(0,	 90,  -90,			1)	
-	playerRaven:setBeamWeaponTurret(1,	 90,   90,			1)	
+	playerRaven:setBeamWeaponTurret(0,	 90,  -90,			1)
+	playerRaven:setBeamWeaponTurret(1,	 90,   90,			1)
 	playerRaven:setWeaponTubeCount(6)					--more (vs 3)
 	playerRaven:setWeaponTubeDirection(0, -30)			--more angled (vs -5)
 	playerRaven:setWeaponTubeDirection(1,  30)			--more angled (vs 5)
@@ -9411,7 +9411,7 @@ function createPlayerShipClaw()
 	playerRaven:setTubeSize(1,"small")					--small (vs medium)
 	playerRaven:setWeaponTubeExclusiveFor(0,"Nuke")		--Nuke only (vs all but mine)
 	playerRaven:setWeaponTubeExclusiveFor(1,"Nuke")		--Nuke only (vs all but mine)
-	playerRaven:setWeaponTubeDirection(2, -60)			
+	playerRaven:setWeaponTubeDirection(2, -60)
 	playerRaven:setWeaponTubeDirection(3,  60)
 	playerRaven:setTubeSize(2,"small")
 	playerRaven:setTubeSize(3,"small")
@@ -9892,7 +9892,7 @@ function destroyExuariMessage(delta)
 			primary_orders = string.format(_("orders-comms","Destroy Exuari Omicron plague research station in roughly direction %i"),math.floor(plague_axis))
 			plague_spread_timer = destroy_time_limit * 60
 			mainLinearPlot = eliminatePlague
-			
+
 		end
 	end
 	if getScenarioTime() > plague_message_milestone + 90 then
@@ -10054,7 +10054,7 @@ function getScore()
 	else
 		player_survival = 1 - (player_ship_death_count/player_ship_spawn_count)
 	end
-	local score = 
+	local score =
 		(freighter_mission *	.1) +
 		(ensign_saved *			.1) +
 		(rapid_cure *			.1) +

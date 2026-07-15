@@ -1,6 +1,6 @@
 -- Name: Science
 -- Description: <h3><color=#C0C0FF>Tutorial: Science</>
---- 
+---
 --- This tutorial covers how the <color=#C0C0FF>Science</> officer can examine the ship's surroundings and research entities using the ship's sensors.
 ---
 --- To begin this tutorial, click the <color=#C0C0FF>Start tutorial</> button at the bottom right of this screen.

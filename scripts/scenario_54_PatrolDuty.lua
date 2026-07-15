@@ -57,12 +57,12 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
         for ndex=1,arcLen do
             radialPoint = startArc+ndex
             pointDist = distance + random(-randomize,randomize)
-            object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)   
+            object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
         end
         for ndex=1,amount-arcLen do
             radialPoint = random(startArc,endArcClockwise)
             pointDist = distance + random(-randomize,randomize)
-            object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)   
+            object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
         end
     else
         for ndex=1,amount do
@@ -280,7 +280,7 @@ function setConstants()
     playerShipNamesFor["Leftovers"] = {"Foregone","Righteous","Masher"}
     posseShipNames = {"Bubba","George","Winifred","Daniel","Darla","Stephen","Bob","Porky","Sally","Tommy","Jenny","Johnny","Lizzy","Billy"}
     -- station_pool populated by place_station_scenario_utility.lua
-    
+
     primaryOrders = _("orders-comms", "Patrol Asimov, Utopia Planitia and Armstrong stations. Defend if enemies attack. Dock with each station at the end of each patrol leg")
     secondaryOrders = ""
     optionalOrders = ""
@@ -501,15 +501,15 @@ function generateStaticWorld()
     totalStations = 0
     friendlyStations = 0
     neutralStations = 0
-    
+
     createRandomAsteroidAlongArc(30,70000,160000,100000,180,225,3000)
     createRandomAsteroidAlongArc(30,-70000,20000,100000,0,45,3000)
     createRandomAsteroidAlongArc(40,160000,20000,130000,180,225,3000)
     placeRandomAsteroidsAroundPoint(25,1,15000,150000,-30000)
-    
+
     createRandomAlongArc(Nebula,30,150000,0,150000,110,220,30000)
     createRandomAlongArc(Nebula,30,50000,200000,200000,200,300,40000)
-    
+
     artAnchor1 = Artifact():setPosition(150000,-30000):setScanningParameters(3,2):setRadarSignatureInfo(random(2,8),random(22,87),random(2,8))
     artAnchor1:setModel("artifact3"):allowPickup(false):setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Potential object of scientific research"))
     artAnchor2 = Artifact():setPosition(random(0,100000),random(70000,100000)):setScanningParameters(2,3):setRadarSignatureInfo(random(2,8),random(22,87),random(2,8))
@@ -526,7 +526,7 @@ function generateStaticWorld()
     table.insert(stationList,stationAsimov)
     table.insert(patrolStationList,stationAsimov)
     friendlyStations = friendlyStations + 1
-    
+
     --Utopia Planitia
     utopiaPlanitiax = random(120500,139500)
     utopiaPlanitiay = random(-4500,44500)
@@ -632,10 +632,10 @@ function generateStaticWorld()
     stationAnderson = placeStation(130000+xAnderson,20000+yAnderson,"Alt Sci Fi","Independent","Small Station")
     table.insert(stationList,stationAnderson)
     neutralStations = neutralStations + 1
-    
+
     stationFaction = "Independent"
     stationSize = "Small Station"
-    
+
     --Spot
     stationSpot = placeStation(random(-50000,9500),random(200500,210000),"Generic","Independent","Small Station")
     if stationGoodChoice == 1 then
@@ -697,7 +697,7 @@ function generateStaticWorld()
         stationPrada.comms_data.goods.cobalt = {quantity = 5, cost = math.random(55,67)}
     else
         stationPrada.comms_data.goods.dilithium = {quantity = 5, cost = math.random(61,69)}
-    end 
+    end
     table.insert(stationList,stationPrada)
     neutralStations = neutralStations + 1
     --Broeck
@@ -754,7 +754,7 @@ function generateStaticWorld()
     end
     table.insert(stationList,stationImpala)
     neutralStations = neutralStations + 1
-    
+
     if random(1,100) < 50 then
         stationGrasberg.comms_data.goods.luxury = {quantity = 5, cost = 70}
         stationGrasberg.comms_data.goods.platinum = {quantity = 5, cost = 25}
@@ -764,7 +764,7 @@ function generateStaticWorld()
         stationImpala.comms_data.goods.platinum = {quantity = 5, cost = 25}
         stationGrasberg.comms_data.goods.dilithium = {quantity = 4, cost = 50}
     end
-    
+
     --Cyrus
     stationCyrus = placeStation(random(-20000,35000),random(-60000,-50500),"Alt Sci Fi","Independent","Small Station")
     stationCyrus.comms_data.trade.medicine = random(1,100) < 34
@@ -1057,7 +1057,7 @@ function generateStaticWorld()
     stationMadison = placeStation(random(110000,119500),random(0,19500),"History","Independent","Medium Station")
     table.insert(stationList,stationMadison)
     neutralStations = neutralStations + 1
--- Named nebulas 
+-- Named nebulas
     nebAx = (asimovx + armstrongx)/2
     nebAy = (asimovy + armstrongy)/2
     nebA = Nebula():setPosition(nebAx,nebAy)
@@ -1078,7 +1078,7 @@ function generateStaticWorld()
         neb2 = nebA
         neb2x = nebAx
         neb2y = nebAy
-    end 
+    end
 end
 
 ----------------------------------------------
@@ -1324,10 +1324,10 @@ function handleDockedState()
         missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
     end
     if missilePresence > 0 then
-        if  (ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or 
-            (ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or 
-            (ctd.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
-            (ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
+        if  (ctd.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke") > 0)   or
+            (ctd.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP") > 0)    or
+            (ctd.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or
+            (ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or
             (ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
             addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
                 local ctd = comms_target.comms_data
@@ -1486,8 +1486,8 @@ function handleDockedState()
             end
         end
         local has_gossip = random(1,100) < (100 - (30 * (difficulty - .5)))
-        if (ctd.general ~= nil and ctd.general ~= "") or 
-            (ctd.history ~= nil and ctd.history ~= "") or 
+        if (ctd.general ~= nil and ctd.general ~= "") or
+            (ctd.history ~= nil and ctd.history ~= "") or
             (comms_source:isFriendly(comms_target) and ctd.gossip ~= nil and has_gossip) then
             addCommsReply(_("station-comms", "Tell me more about your station"), function()
                 setCommsMessage(_("station-comms", "What would you like to know?"))
@@ -2156,14 +2156,14 @@ function handleDockedState()
                                 flakyTubeTimer = 300
                             end
                         else
-                            setCommsMessage(string.format(_("upgrade-comms", "We're running short of supplies. To add the homing torpedo tube, we need you to bring us %s and %s"),comms_source.addTubeUpgradePart1,comms_source.addTubeUpgradePart2))    
+                            setCommsMessage(string.format(_("upgrade-comms", "We're running short of supplies. To add the homing torpedo tube, we need you to bring us %s and %s"),comms_source.addTubeUpgradePart1,comms_source.addTubeUpgradePart2))
                         end
                     end
                     addCommsReply(_("Back"), commsStation)
                 end)
-            end 
+            end
             addCommsReply(_("Back"), commsStation)
-        end) 
+        end)
     end
 end
 function masterCartographer()
@@ -2267,7 +2267,7 @@ function artifactUpgrade()
     if maneuverDone ~= "played" then
         playSoundFile("audio/scenario/54/sa_54_UTManeuver.ogg")
         maneuverDone = "played"
-    end 
+    end
 end
 function lisbonBeamUpgrade()
     local bi = 0
@@ -2313,7 +2313,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
         setCommsMessage(_("station-comms", "You need to stay docked for that action."))
         return
     end
@@ -2437,9 +2437,9 @@ function handleUndockedState()
                     if enemiesInRange > 1 then
                         setCommsMessage(string.format(_("helpfullWarning-comms", "Yes, we see %i enemies within 30U"),enemiesInRange))
                     else
-                        setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))      
+                        setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))
                     end
-                    comms_source:addReputationPoints(2.0)     
+                    comms_source:addReputationPoints(2.0)
                 else
                     setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
                     comms_source:addReputationPoints(1.0)
@@ -2506,8 +2506,8 @@ function handleUndockedState()
             addCommsReply(_("Back"), commsStation)
         end)
         local has_gossip = random(1,100) < 50
-        if (ctd.general ~= nil and ctd.general ~= "") or 
-            (ctd.history ~= nil and ctd.history ~= "") or 
+        if (ctd.general ~= nil and ctd.general ~= "") or
+            (ctd.history ~= nil and ctd.history ~= "") or
             (comms_source:isFriendly(comms_target) and ctd.gossip ~= nil and has_gossip) then
             addCommsReply(_("station-comms", "Tell me more about your station"), function()
                 setCommsMessage(_("station-comms", "What would you like to know?"))
@@ -2647,7 +2647,7 @@ function commsShip()
         if random(1,100) < 50 then
             comms_data.goods[mineralGoods[math.random(1,#mineralGoods)]] = {quantity = 1, cost = random(20,80)}
         else
-            comms_data.goods[componentGoods[math.random(1,#componentGoods)]] = {quantity = 1, cost = random(20,80)}   
+            comms_data.goods[componentGoods[math.random(1,#componentGoods)]] = {quantity = 1, cost = random(20,80)}
         end
         local shipType = comms_target:getTypeName()
         local goodCount = 0
@@ -2734,7 +2734,7 @@ function friendlyComms(comms_data)
                     msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
             end
         end
-        
+
         setCommsMessage(msg);
         addCommsReply(_("Back"), commsShip)
     end)
@@ -3003,7 +3003,7 @@ function generateCallSign(prefix,faction)
         end
     end
     suffix_index = suffix_index + math.random(1,3)
-    if suffix_index > 999 then 
+    if suffix_index > 999 then
         suffix_index = 1
     end
     return string.format("%s%i",prefix,suffix_index)
@@ -3305,7 +3305,7 @@ function setExuariNames()
     table.insert(exuari_names,"Zapondehex")
     table.insert(exuari_names,"Zikandelat")
 end
-function setKraylorNames()  
+function setKraylorNames()
     kraylor_names = {}
     table.insert(kraylor_names,"Abroten")
     table.insert(kraylor_names,"Ankwar")
@@ -3629,7 +3629,7 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
                 attack2spawned = "ready"
                 plot5 = attack2
                 removeGMFunction(_("buttonGM", "Start plot 5"))
-            end  
+            end
         end
         if patrolComplete then
             plot1 = afterPatrol
@@ -3923,13 +3923,13 @@ function destroyEnemyStronghold(delta)
         wp57 = CpuShip():setFaction("Kraylor"):setposition(scarletx+x,scarlety+y):setTemplate("Defense platform"):setCallSign("WP-57")
         if difficulty > 2 then
             x, y = vectorFromAngle(45,wpRadius)
-            wp62 = CpuShip():setFaction("Kraylor"):setposition(scarletx+x,scarlety+y):setTemplate("Defense platform"):setCallSign("WP-62")   
+            wp62 = CpuShip():setFaction("Kraylor"):setposition(scarletx+x,scarlety+y):setTemplate("Defense platform"):setCallSign("WP-62")
             x, y = vectorFromAngle(135,wpRadius)
-            wp78 = CpuShip():setFaction("Kraylor"):setposition(scarletx+x,scarlety+y):setTemplate("Defense platform"):setCallSign("WP-78")   
+            wp78 = CpuShip():setFaction("Kraylor"):setposition(scarletx+x,scarlety+y):setTemplate("Defense platform"):setCallSign("WP-78")
             x, y = vectorFromAngle(225,wpRadius)
-            wp25 = CpuShip():setFaction("Kraylor"):setposition(scarletx+x,scarlety+y):setTemplate("Defense platform"):setCallSign("WP-25")   
+            wp25 = CpuShip():setFaction("Kraylor"):setposition(scarletx+x,scarlety+y):setTemplate("Defense platform"):setCallSign("WP-25")
             x, y = vectorFromAngle(315,wpRadius)
-            wp27 = CpuShip():setFaction("Kraylor"):setposition(scarletx+x,scarlety+y):setTemplate("Defense platform"):setCallSign("WP-27")   
+            wp27 = CpuShip():setFaction("Kraylor"):setposition(scarletx+x,scarlety+y):setTemplate("Defense platform"):setCallSign("WP-27")
         end
         strongholdDefense = spawnEnemies(scarletx-5000,scarlety-5000,1,"Kraylor")
         for i, enemy in ipairs(strongholdDefense) do
@@ -4016,7 +4016,7 @@ function nuisance(delta)
                     closestPlayer:addCustomButton("Relay",playMsgFromAsimovButton,_("Asimov1Audio-buttonRelay", "|> ASMVSNSR003"),playAsimovSensorTechMessage)
                     playMsgFromAsimovButtonOps = "playMsgFromAsimovButtonOps"
                     closestPlayer:addCustomButton("Operations",playMsgFromAsimovButtonOps,_("Asimov1Audio-buttonOperations", "|> ASMVSNSR003"),playAsimovSensorTechMessage)
-                end  
+                end
             end
         end
     end
@@ -4073,7 +4073,7 @@ function sickMiner(delta)
                     closestSickMinerPlayer:addCustomButton("Relay",playMsgFromSickStationButton,_("Kojak1Audio-buttonRelay", "|> MINSTN014"),playSickStationMessage)
                     playMsgFromSickStationButtonOps = "playMsgFromSickStationButtonOps"
                     closestSickMinerPlayer:addCustomButton("Operations",playMsgFromSickStationButtonOps,_("Kojak1Audio-buttonOperations", "|> MINSTN014"),playSickStationMessage)
-                end    
+                end
             end
             sickMinerState = "sick on station"
             plot2 = getSickMinerFromStation
@@ -4520,7 +4520,7 @@ function returnStowaway(delta)
     if francisShip:isValid() then
         if stationBethesda ~= nil and stationBethesda:isValid() then
             if francisShip:isDocked(stationBethesda) and francisShip.francisAboard then
-                francisShip:addToShipLog(_("Lisbon3-shipLog", "[Commander Lisbon] Thanks for bringing Francis back. I am entrusting you with my beam system cooling algorithm research. Take it to station Utopia Planitia so that they can decrypt it and it may be applied to human navy ships"),"Magenta") 
+                francisShip:addToShipLog(_("Lisbon3-shipLog", "[Commander Lisbon] Thanks for bringing Francis back. I am entrusting you with my beam system cooling algorithm research. Take it to station Utopia Planitia so that they can decrypt it and it may be applied to human navy ships"),"Magenta")
                 plot4 = deliverAlgorithm
                 plot4reminder = string.format(_("Lisbon3Orders-comms", "%s: Deliver Commander Lisbon's encrypted beam system cooling algorithm to station Utopia Planitia"),francisShip:getCallSign())
                 francisShip.lisbonAlgorithm = true
@@ -4600,7 +4600,7 @@ function jumpStart(delta)
             if distance(cp, nebAmbush) < 5000 then
                 ax, ay = vectorFromAngle(random(0,360),15000)
                 ax = x + ax
-                ay = y + ay    
+                ay = y + ay
             end
         else
             ax, ay = vectorFromAngle(random(0,360),15000)
@@ -4656,7 +4656,7 @@ function ambush5(delta)
             else
                 attack5Timer = delta + 10
             end
-        end  
+        end
         enemy_count = 0
         for i, enemy in ipairs(attack5list) do
             if enemy:isValid() then
@@ -4666,7 +4666,7 @@ function ambush5(delta)
         if enemy_count == 0 then
             plot10 = nil
         end
-    end 
+    end
 end
 
 function pursue5()
@@ -4719,7 +4719,7 @@ function ambush4(delta)
             else
                 attack4Timer = delta + 10
             end
-        end  
+        end
         enemy_count = 0
         for i, enemy in ipairs(attack4list) do
             if enemy:isValid() then
@@ -4966,7 +4966,7 @@ function afterAmbush(delta)
     gameTimeLimit = gameTimeLimit - delta
     if gameTimeLimit < 0 then
         playSoundFile("audio/scenario/54/sa_54_AuthMBVictory.ogg")
-        victory("Human Navy") 
+        victory("Human Navy")
     end
 end
 -------------------------------------------------------------------------
@@ -4976,7 +4976,7 @@ function unscannedAnchors(delta)
     plotArtName = "unscannedAnchors"
     if artAnchor1:isScannedByFaction("Human Navy") and artAnchor2:isScannedByFaction("Human Navy") then
         artAnchor1:allowPickup(true)
-        artAnchor2:allowPickup(true)  
+        artAnchor2:allowPickup(true)
         plotArt = scannedAnchors
     end
     trackArtAnchors()
@@ -5143,7 +5143,7 @@ function skipToDefendUP()
     nabbitUpgrade = true
     lisbonUpgrade = true
     waveDelayTimer = 120
-    plot1 = defendUtopia 
+    plot1 = defendUtopia
     removeGMFunction(_("buttonGM", "Skip to defend U.P."))
 end
 function skipToDestroySC()
@@ -5153,7 +5153,7 @@ function skipToDestroySC()
     nabbitUpgrade = true
     lisbonUpgrade = true
     waveDelayTimer = 120
-    plot1 = destroyEnemyStronghold 
+    plot1 = destroyEnemyStronghold
     removeGMFunction(_("buttonGM", "Skip to destroy S.C."))
 end
 ------------------------------------
@@ -5221,7 +5221,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
     if enemyFaction == nil then
         enemyFaction = "Kraylor"
     end
-    if danger == nil then 
+    if danger == nil then
         danger = 1
     end
     enemyStrength = math.max(danger * enemy_power * playerPower(),5)
@@ -5234,7 +5234,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
         shipTemplateType = irandom(1,17)
         while stsl[shipTemplateType] > enemyStrength * 1.1 + 5 do
             shipTemplateType = irandom(1,17)
-        end  
+        end
         ship = CpuShip():setFaction(enemyFaction):setTemplate(stnl[shipTemplateType]):orderRoaming()
         enemyPosition = enemyPosition + 1
         if deployConfig < 50 then

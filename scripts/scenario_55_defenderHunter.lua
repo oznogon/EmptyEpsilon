@@ -1,13 +1,13 @@
 -- Name: Defender Hunter
 -- Description: Defend home station and hunt down enemies
---- 
+---
 --- Initially, you're tasked with defending your home base.  Over time, you'll discover more about the enemies harassing you and you'll be ordered to find and destroy the enemies responsible.  There may be various missions given along the way, but the enemy harassment will continue.  You must balance your two missions.
 ---
 --- Designed for any number of cooperating player ships. Randomization makes many details different for each game, but the primary goals remain the same. Untimed variations can take an hour or longer for full mission completion. Different sub-missions may be chosen by the players or will be chosen at random. Achieving victory in a timed hunter variation is quite a challenge. Like the Waves scenario, the enemies get harder over time.
 ---
 --- Version 11
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one almost every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one almost every weekend. All experience levels are welcome.
 -- Type: Replayable
 -- Setting[Enemies]: Configures the number and type of enemies
 -- Enemies[Easy]: Fewer and/or weaker enemy ships
@@ -77,7 +77,7 @@ function init()
 	setVariations()
 	setConstants()
 	setGlobals()
-	diagnostic = false		
+	diagnostic = false
 	helpfulWarningDiagnostic = false
 	constructEnvironment()
 	mainGMButtons = mainGMButtonsDuringPause
@@ -120,7 +120,7 @@ function setVariations()
 end
 function setGlobals()
 	--list of goods available to buy, sell or trade (sell still under development)
-	goodsList = {	
+	goodsList = {
 		{"food",0},
 		{"medicine",0},
 		{"nickel",0},
@@ -148,7 +148,7 @@ function setGlobals()
 		{"nanites",0},
 		{"software",0},
 		{"circuit",0},
-		{"battery",0}	
+		{"battery",0}
 	}
 	jump_start = true
 	recurring_prods = {
@@ -159,7 +159,7 @@ function setGlobals()
 	interWave = 280
 	goods = {}					--overall tracking of goods
 	stationList = {}			--friendly and neutral stations
-	friendlyStationList = {}	
+	friendlyStationList = {}
 	enemyStationList = {}
 	tradeFood = {}				--stations that will trade food for other goods
 	tradeLuxury = {}			--stations that will trade luxury for other goods
@@ -248,7 +248,7 @@ function setConstants()
 		["Repulse"]				= { strength = 14,	cargo = 12,	distance = 200,	long_range_radar = 38000, short_range_radar = 5000},
 		["Striker"]				= { strength = 8,	cargo = 4,	distance = 200,	long_range_radar = 35000, short_range_radar = 5000},
 		["ZX-Lindworm"]			= { strength = 8,	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 5500},
-	}	
+	}
 	ship_template = {	--ordered by relative strength
 		["Gnat"] =				{strength = 2,	create = gnat},
 		["Lite Drone"] =		{strength = 3,	create = droneLite},
@@ -333,13 +333,13 @@ function setConstants()
 			[3] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
-				{angle =  1, distance = 1},				
+				{angle =  1, distance = 1},
 			},
 			[4] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
 				{angle =  1, distance = 1},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[5] = {
 				{angle =  0, distance = 0},
@@ -354,7 +354,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[7] = {
 				{angle =  0, distance = 0},
@@ -371,7 +371,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 			},
@@ -392,7 +392,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -417,7 +417,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -446,7 +446,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 4},
@@ -462,7 +462,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 3},
@@ -474,7 +474,7 @@ function setConstants()
 				{angle =  0, distance = 6},
 			},
 		},
-	}		
+	}
 	commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
@@ -730,7 +730,7 @@ function buildStations()
 		--get adjacent list after done growing region
 		adjList = getAdjacentGridLocations(gx,gy)
 		if #adjList < 1 then
-			adjList = getAllAdjacentGridLocations(gx,gy)	
+			adjList = getAllAdjacentGridLocations(gx,gy)
 		else
 			if random(1,5) >= 2 then
 				adjList = getAllAdjacentGridLocations(gx,gy)
@@ -782,7 +782,7 @@ function buildStations()
 	end
 	adjList = getAdjacentGridLocations(gx,gy)
 	if #adjList < 1 then
-		adjList = getAllAdjacentGridLocations(gx,gy)	
+		adjList = getAllAdjacentGridLocations(gx,gy)
 	else
 		if random(1,5) >= 2 then
 			adjList = getAllAdjacentGridLocations(gx,gy)
@@ -822,7 +822,7 @@ function buildStations()
 		--get list after done growing region
 		adjList = getAdjacentGridLocations(gx,gy)
 		if #adjList < 1 then
-			adjList = getFactionAdjacentGridLocations(gx,gy)	
+			adjList = getFactionAdjacentGridLocations(gx,gy)
 			if #adjList < 1 then
 				adjList = getAllAdjacentGridLocations(gx,gy)
 			end
@@ -863,7 +863,7 @@ function buildStations()
 	end
 	adjList = getAdjacentGridLocations(gx,gy)
 	if #adjList < 1 then
-		adjList = getAllAdjacentGridLocations(gx,gy)	
+		adjList = getAllAdjacentGridLocations(gx,gy)
 	else
 		if random(1,5) >= 2 then
 			adjList = getAllAdjacentGridLocations(gx,gy)
@@ -897,7 +897,7 @@ function buildStations()
 		--get list after done growing region
 		adjList = getAdjacentGridLocations(gx,gy)
 		if #adjList < 1 then
-			adjList = getFactionAdjacentGridLocations(gx,gy)	
+			adjList = getFactionAdjacentGridLocations(gx,gy)
 			if #adjList < 1 then
 				adjList = getAllAdjacentGridLocations(gx,gy)
 			end
@@ -942,7 +942,7 @@ function buildStations()
 		--get list after done growing region
 		adjList = getAdjacentGridLocations(gx,gy)
 		if #adjList < 1 then
-			adjList = getFactionAdjacentGridLocations(gx,gy)	
+			adjList = getFactionAdjacentGridLocations(gx,gy)
 			if #adjList < 1 then
 				adjList = getAllAdjacentGridLocations(gx,gy)
 			end
@@ -1081,7 +1081,7 @@ function placeDHStation(x,y,name,faction,size)
 				station.comms_data.goods.dilithium = {quantity = 5, cost = math.random(40,50)}
 			else	--Impala
 				station.comms_data.goods.tritanium = {quantity = 5, cost = math.random(40,50)}
-			end			
+			end
 		end
 	elseif station_name == "Jabba" or station_name == "Lando" or station_name == "Maverick" or station_name == "Okun" or station_name == "Outpost-8" or station_name == "Prada" or station_name == "Research-11" or station_name == "Research-19" or station_name == "Science-2" or station_name == "Science-4" or station_name == "Spot" or station_name == "Starnet" or station_name == "Tandon" then
 		if chosen_goods < 33 then
@@ -1222,7 +1222,7 @@ function placeDHStation(x,y,name,faction,size)
 	return station
 end
 function placeRandomListAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
--- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0) 
+-- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
 -- save in a list that is returned to caller
 	local object_list = {}
     for n=1,amount do
@@ -1260,7 +1260,7 @@ function getFactionAdjacentGridLocations(lx,ly)
 			tempGrid[lx][ly-1] = 1
 			if grid[lx][ly-1] == nil then
 				table.insert(ol,{lx,ly-1})
-			elseif grid[lx][ly-1] >= fb then		
+			elseif grid[lx][ly-1] >= fb then
 				--case 2: traveling up, skip down check
 				getFactionAdjacentGridLocationsSkip(2,lx,ly-1)
 			end
@@ -1378,7 +1378,7 @@ function getAllAdjacentGridLocations(lx,ly)
 			tempGrid[lx][ly-1] = 1
 			if grid[lx][ly-1] == nil then
 				table.insert(ol,{lx,ly-1})
-			else		
+			else
 				--case 2: traveling up, skip down check
 				getAllAdjacentGridLocationsSkip(2,lx,ly-1)
 			end
@@ -1496,7 +1496,7 @@ function getAdjacentGridLocations(lx,ly)
 			tempGrid[lx][ly-1] = 1
 			if grid[lx][ly-1] == nil then
 				table.insert(ol,{lx,ly-1})
-			elseif grid[lx][ly-1] == gp then		
+			elseif grid[lx][ly-1] == gp then
 				--case 2: traveling up, skip down check
 				getAdjacentGridLocationsSkip(2,lx,ly-1)
 			end
@@ -1689,7 +1689,7 @@ function transportPlot(delta)
 		end
 		if #transportList < #stationList then
 			repeat
-				target = randomStation()				
+				target = randomStation()
 			until(target ~= nil)
 			rnd = irandom(1,5)
 			if rnd == 1 then
@@ -2149,7 +2149,7 @@ function handleDockedState()
 					addCommsReply(_("-comms", "Provide cargo"), function()
 						setCommsMessage(_("-comms", "Do you have something for us?"))
 						if easyCargoAboard then
-							homeStationEasyDelivery()					
+							homeStationEasyDelivery()
 						end
 						if randomCargoAboard then
 							homeStationRandomDelivery()
@@ -2309,9 +2309,9 @@ function handleDockedState()
 			end
 			if comms_target.comms_data.trade ~= nil and
 				comms_target.comms_data.trade.food ~= nil and
-				comms_target.comms_data.trade.food and 
-				comms_source.goods ~= nil and 
-				comms_source.goods.food ~= nil and 
+				comms_target.comms_data.trade.food and
+				comms_source.goods ~= nil and
+				comms_source.goods.food ~= nil and
 				comms_source.goods.food > 0 then
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good), function()
@@ -2335,11 +2335,11 @@ function handleDockedState()
 					end)
 				end
 			end
-			if comms_target.comms_data.trade ~= nil and 
-				comms_target.comms_data.trade.medicine ~= nil and 
-				comms_target.comms_data.trade.medicine and 
-				comms_source.goods ~= nil and 
-				comms_source.goods.medicine ~= nil and 
+			if comms_target.comms_data.trade ~= nil and
+				comms_target.comms_data.trade.medicine ~= nil and
+				comms_target.comms_data.trade.medicine and
+				comms_source.goods ~= nil and
+				comms_source.goods.medicine ~= nil and
 				comms_source.goods.medicine > 0 then
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade medicine for %s"),good), function()
@@ -2365,9 +2365,9 @@ function handleDockedState()
 			end
 			if comms_target.comms_data.trade ~= nil and
 				comms_target.comms_data.trade.luxury ~= nil and
-				comms_target.comms_data.trade.luxury and 
-				comms_source.goods ~= nil and 
-				comms_source.goods.luxury ~= nil and 
+				comms_target.comms_data.trade.luxury and
+				comms_source.goods ~= nil and
+				comms_source.goods.luxury ~= nil and
 				comms_source.goods.luxury > 0 then
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
@@ -2693,7 +2693,7 @@ function secondIntelligenceStation()
 				plot2reminder = string.format(_("intelligence-comms", "Investigate enemy bases in %s, %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName())
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("Back"), commsStation)				
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 end
@@ -2793,7 +2793,7 @@ function setOptionalOrders()
 			elseif rotateReveal == 1 then
 				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign())
 			elseif rotateReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName()) 
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName())
 			elseif rotateReveal == 3 then
 				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s may have %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGood)
 			else
@@ -2838,7 +2838,7 @@ function isAllowedTo(state)
     return false
 end
 function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -3040,9 +3040,9 @@ function handleUndockedState()
 					if enemiesInRange > 1 then
 						setCommsMessage(string.format(_("helpfullWarning-comms", "Yes, we see %i enemies within 30U"),enemiesInRange))
 					else
-						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))						
+						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))
 					end
-					comms_source:addReputationPoints(2.0)					
+					comms_source:addReputationPoints(2.0)
 				else
 					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
 					comms_source:addReputationPoints(1.0)
@@ -3315,7 +3315,7 @@ function friendlyComms()
 					msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
 			end
 		end
-		
+
 		setCommsMessage(msg);
 		addCommsReply(_("Back"), commsShip)
 	end)
@@ -3414,7 +3414,7 @@ function neutralComms()
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
-						end	
+						end
 					end
 				end
 				-- Offer to sell goods
@@ -3730,7 +3730,7 @@ function pressureWaves(delta)
 		local lo = 5 + difficulty * 4
 		local hi = 500 - difficulty * 100
 		local chance = math.max(lo,getPlayerShip(-1):getReputationPoints()/hi*100)
-		if jump_start then 
+		if jump_start then
 			chance = math.max(chance,50)
 		end
 		waveSpawned = false
@@ -4483,7 +4483,7 @@ function randomDelivery(delta)
 								end
 							end
 						end
-					end 
+					end
 				until(randomDeliverGood ~= nil or attempt_count > 50)
 			end
 			if randomDeliverGood == nil then
@@ -4568,7 +4568,7 @@ function beamTimeUpgradeStart(delta)
 					if good ~= "food" and good ~= "medicine" and good ~= "luxury" then
 						beamTimeBase = candidate
 					end
-				end		
+				end
 			end
 		until(beamTimeBase ~= nil)
 		pickBeamTimeBase = "done"
@@ -4625,7 +4625,7 @@ function cleanUpBeamTimers(delta)
 		plot4 = delayef4v2
 		p = closestPlayerTo(targetEnemyStation)
 		p:addReputationPoints(20)
-	end	
+	end
 end
 function hullUpgradeStart(delta)
 	plot4name = "hullUpgradeStart"
@@ -4698,7 +4698,7 @@ function cleanUpHullers(delta)
 		if p ~= nil and p:isValid() then
 			p:addReputationPoints(20)
 		end
-	end	
+	end
 end
 function delayef4v2(delta)
 	plot4name = "delayef4v2"
@@ -5306,7 +5306,7 @@ function helpfulWarning(delta)
 									if hl < hm then
 										if helpfulWarningDiagnostic then print("hull not fully repaired") end
 										if not shieldsDamaged then
-											p:addToShipLog(_("helpfullWarning-shipLog", "Station Status:"),"Red")										
+											p:addToShipLog(_("helpfullWarning-shipLog", "Station Status:"),"Red")
 										end
 										local hLine = string.format(_("helpfullWarning-shipLog", "   Hull: %i%% (%.1f/%i)"),math.floor(hl/hm*100),hl,hm)
 										p:addToShipLog(hLine,"Red")
@@ -5442,7 +5442,7 @@ function tableSelectRandom(array)
     if array_item_count == 0 then
         return nil
     end
-	return array[math.random(1,#array)]	
+	return array[math.random(1,#array)]
 end
 function vectorOn(obj,danger,radius,angle,list)
 	if obj == nil then
@@ -5474,7 +5474,7 @@ function vectorOn(obj,danger,radius,angle,list)
 	for index, ship in ipairs(enemy_list) do
 		if index <= tier_max then
 			local pyramid_angle = angle + formation_delta.pyramid[pyramid_tier][index].angle
-			if pyramid_angle < 0 then 
+			if pyramid_angle < 0 then
 				pyramid_angle = pyramid_angle + 360
 			end
 			pyramid_angle = pyramid_angle % 360
@@ -5507,12 +5507,12 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 		for ndex=1,arcLen do
 			radialPoint = startArc+ndex
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 		end
 		for ndex=1,amount-arcLen do
 			radialPoint = random(startArc,endArcClockwise)
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
 		end
 	else
 		for ndex=1,amount do
@@ -5802,7 +5802,7 @@ function spawnEnemies(origin_x, origin_y, danger, faction, strength, pool_size, 
 	local ship_template_by_strength = getStrengthSort(ship_template, function(a,b)
 		return a.strength > b.strength
 	end)
-	if danger == nil then 
+	if danger == nil then
 		danger = 1
 	end
 	if faction == nil then
@@ -6421,8 +6421,8 @@ function update(delta)
 						end
 					end
 				end
-				
-				
+
+
 			end
 		end
 	end
@@ -6464,7 +6464,7 @@ function update(delta)
 			wp66cpos = 0
 			rx, ry = vectorFromAngle(wp66cpos,6000)
 			wp66 = CpuShip():setCallSign("WP-66"):setFaction(stationFaction):setPosition(tesx+rx,tesy+ry):setTemplate("Defense platform"):orderRoaming()
-		end		
+		end
 	end
 	if difficulty > 1 then
 		if wp66:isValid() then

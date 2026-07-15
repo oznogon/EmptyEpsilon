@@ -1,5 +1,5 @@
 -- Name: Chaos of War
--- Description: Two, three or four species battle for ultimate dominion. Designed as a replayable player versus player (PVP) scenario for individuals or teams. Terrain is randomly symmetrically generated for every game. 
+-- Description: Two, three or four species battle for ultimate dominion. Designed as a replayable player versus player (PVP) scenario for individuals or teams. Terrain is randomly symmetrically generated for every game.
 ---
 --- Use Gamemaster (GM) screen to adjust parameters. The GM screen covers all of the parameters on the next page plus a variety of others.
 ---
@@ -155,7 +155,7 @@ function setConstants()
 		ships_per_team = 2
 		player_team_count = 2
 	end
-	max_game_time = game_time_limit	
+	max_game_time = game_time_limit
 	game_state = "paused"	--then moves to "terrain generated" then to "running"
 	respawn_count = 0
 	storage = getScriptStorage()
@@ -209,7 +209,7 @@ function setConstants()
 			jumpsupplydrop = "friend",
 		},
 		service_cost = {
-			supplydrop =		math.random(80,120), 
+			supplydrop =		math.random(80,120),
 			reinforcements =	math.random(125,175),
 			jumpsupplydrop =	math.random(110,140),
 		},
@@ -221,7 +221,7 @@ function setConstants()
         self_destruct_repair =	random(1,13)<=(3-difficulty),
         tube_slow_down_repair =	random(1,13)<=(3-difficulty),
 		reputation_cost_multipliers = {
-			friend = 			1.0, 
+			friend = 			1.0,
 			neutral = 			3.0,
 		},
 		goods = {},
@@ -576,7 +576,7 @@ function setConstants()
 			"Scimitar",
 		},
 	}
-	player_ship_stats = {	
+	player_ship_stats = {
 		["Atlantis"]			= { strength = 52,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, probes = 10,	long_jump = 50,	short_jump = 5,		warp = 0,		stock = true,	},
 		["Benedict"]			= { strength = 10,	cargo = 9,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, probes = 10,	long_jump = 90,	short_jump = 5,		warp = 0,		stock = true,	},
 		["Crucible"]			= { strength = 45,	cargo = 5,	distance = 200,	long_range_radar = 20000, short_range_radar = 6000, probes = 9,		long_jump = 0,	short_jump = 0,		warp = 750,		stock = true,	},
@@ -595,13 +595,13 @@ function setConstants()
 		["Repulse"]				= { strength = 14,	cargo = 12,	distance = 200,	long_range_radar = 38000, short_range_radar = 5000, probes = 8,		long_jump = 50,	short_jump = 5,		warp = 0,		stock = true,	},
 		["Striker"]				= { strength = 8,	cargo = 4,	distance = 200,	long_range_radar = 35000, short_range_radar = 5000, probes = 6,		long_jump = 40,	short_jump = 3,		warp = 0,		stock = true,	},
 		["ZX-Lindworm"]			= { strength = 8,	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 5500, probes = 4,		long_jump = 0,	short_jump = 0,		warp = 950,		stock = true,	},
-	--	Stock above, custom below	
+	--	Stock above, custom below
 		["Focus"]				= { strength = 35,	cargo = 4,	distance = 200,	long_range_radar = 32000, short_range_radar = 5000, probes = 8,		long_jump = 25,	short_jump = 2.5,	warp = 0,		stock = false,	},
 		["Holmes"]				= { strength = 35,	cargo = 6,	distance = 200,	long_range_radar = 35000, short_range_radar = 4000, probes = 8,		long_jump = 0,	short_jump = 0,		warp = 750,		stock = false,	},
 		["Maverick XP"]			= { strength = 23,	cargo = 5,	distance = 200,	long_range_radar = 25000, short_range_radar = 7000, probes = 10,	long_jump = 20,	short_jump = 2,		warp = 0,		stock = false,	},
 		["Phobos T2"]			= { strength = 19,	cargo = 9,	distance = 200,	long_range_radar = 25000, short_range_radar = 5000, probes = 5,		long_jump = 25,	short_jump = 2,		warp = 0,		stock = false,	},
 		["Striker LX"]			= { strength = 16,	cargo = 4,	distance = 200,	long_range_radar = 20000, short_range_radar = 4000, probes = 7,		long_jump = 20,	short_jump = 2,		warp = 0,		stock = false,	},
-	}		
+	}
 	npc_ships = false
 	npc_lower = 30
 	npc_upper = 60
@@ -696,7 +696,7 @@ function setConstants()
 			x = {0,2,-2,1,-1, 1,-1,4,-4,0, 0,2,-2,-2, 2,3,-3, 3,-3,6,-6,1,-1, 1,-1,3,-3, 3,-3,4,-4, 4,-4,5,-5, 5,-5,8,-8,4,-4, 4,-4,5,5 ,-5,-5,2, 2,-2,-2,0, 0,6, 6,-6,-6,7, 7,-7,-7,10,-10,5, 5,-5,-5,6, 6,-6,-6,7, 7,-7,-7,8, 8,-8,-8,9, 9,-9,-9,3, 3,-3,-3,1, 1,-1,-1,12,-12,6,-6, 6,-6,7,-7, 7,-7,8,-8, 8,-8,9,-9, 9,-9,10,-10,10,-10,11,-11,11,-11,4,-4, 4,-4,2,-2, 2,-2,0, 0},
 			y = {0,0, 0,1, 1,-1,-1,0, 0,2,-2,2,-2, 2,-2,1,-1,-1, 1,0, 0,3, 3,-3,-3,3,-3,-3, 3,2,-2,-2, 2,1,-1,-1, 1,0, 0,4,-4,-4, 4,3,-3, 3,-3,4,-4, 4,-4,4,-4,2,-2, 2,-2,1,-1, 1,-1, 0,  0,5,-5, 5,-5,4,-4, 4,-4,3,-3, 3,-7,2,-2, 2,-2,1,-1, 1,-1,5,-5, 5,-5,5,-5, 5,-5, 0,  0,6, 6,-6,-6,5, 5,-5,-5,4, 4,-4,-4,3, 3,-3,-3, 2,  2,-2, -2, 1,  1,-1, -1,6, 6,-6,-6,6, 6,-6,-6,6,-6},
 		},
-	}	
+	}
 	fleet_group = {
 		["adder"] = "Adders",
 		["Adders"] = "adder",
@@ -712,7 +712,7 @@ function setConstants()
 		["Fighters"] = "fighter",
 		["drone"] = "Drones",
 		["Drones"] = "drone",
-	}	
+	}
 	ship_template = {	--ordered by relative strength
 		["Gnat"] =				{strength = 2,	adder = false,	missiler = false,	beamer = true,	frigate = false,	chaser = false,	fighter = true,		drone = true,	unusual = false,	base = false,	create = gnat},
 		["Lite Drone"] =		{strength = 3,	adder = false,	missiler = false,	beamer = true,	frigate = false,	chaser = false,	fighter = true, 	drone = true,	unusual = false,	base = false,	create = droneLite},
@@ -792,7 +792,7 @@ function setConstants()
 		["Battlestation"] =		{strength = 100,adder = false,	missiler = false,	beamer = true,	frigate = false,	chaser = true,	fighter = false,	drone = false,	unusual = false,	base = false,	create = stockTemplate},
 		["Tyr"] =				{strength = 150,adder = false,	missiler = false,	beamer = true,	frigate = false,	chaser = true,	fighter = false,	drone = false,	unusual = false,	base = false,	create = tyr},
 		["Odin"] =				{strength = 250,adder = false,	missiler = false,	beamer = false,	frigate = false,	chaser = true,	fighter = false,	drone = false,	unusual = false,	base = false,	create = stockTemplate},
-	}	
+	}
 	control_code_stem = {	--All control codes must use capital letters or they will not work.
 		"ALWAYS",
 		"BLACK",
@@ -844,7 +844,7 @@ function setConstants()
 	healthCheckTimer = healthCheckTimerInterval
 	commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
-	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}	
+	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
 	good_desc = {
 		["food"] =			_("trade-comms","food"),
 		["medicine"] =		_("trade-comms","medicine"),
@@ -2369,7 +2369,7 @@ function generateTerrain()
 	ta:destroy()
 	place_ref_list = {}
 	human_ref_list = {}
-	
+
 	--	decide what lives at the center of the universe
 	local center_choice_list = {"Planet","Star","Black Hole"}
 	local center_choice = center_choice_list[math.random(1,#center_choice_list)]
@@ -2411,7 +2411,7 @@ function generateTerrain()
 		}
 		table.insert(place_ref_list,BlackHole():setPosition(terrain_center_x,terrain_center_y):setCallSign(black_hole_names[math.random(1,#black_hole_names)]))
 	end
-	
+
 	--	Set angles
 	faction_angle = {}
 	npc_fleet = {}
@@ -2432,7 +2432,7 @@ function generateTerrain()
 		faction_angle["Ktlitans"] = ktlitan_angle
 		npc_fleet["Ktlitans"] = {}
 	end
-	
+
 	if respawn_type == "self" then
 		death_penalty = {}
 		death_penalty["Human Navy"] = 0
@@ -2444,7 +2444,7 @@ function generateTerrain()
 			death_penalty["Ktlitans"] = 0
 		end
 	end
-	
+
 	--	Set primary stations
 	local primary_station_distance = random(50000,100000)
 	local primary_station_size = primary_station_size_options[primary_station_size_index]
@@ -2473,11 +2473,11 @@ function generateTerrain()
 	station_primary_human.comms_data = {
     	friendlyness = random(75,100),
         weapon_cost =		{
-        	Homing =	math.random(1,6), 		
-        	Nuke =		math.random(10,30),					
+        	Homing =	math.random(1,6),
+        	Nuke =		math.random(10,30),
         	Mine =		math.random(2,25),
-        	EMP =		math.random(8,20), 
-        	HVLI =		math.random(1,4),				
+        	EMP =		math.random(8,20),
+        	HVLI =		math.random(1,4),
         },
 		weapon_available = 	{
 			Homing =			true,
@@ -2505,7 +2505,7 @@ function generateTerrain()
 			jumpsupplydrop = "friend",
 		},
 		service_cost = {
-			supplydrop =		math.random(80,120), 
+			supplydrop =		math.random(80,120),
 			reinforcements =	math.random(125,175),
 			hornetreinforcements =	math.random(75,125),
 			phobosreinforcements =	math.random(175,225),
@@ -2523,7 +2523,7 @@ function generateTerrain()
 		tube_slow_down_repair =	true,
         sensor_boost = {value = primary_station_distance-35000, cost = 0},
 		reputation_cost_multipliers = {
-			friend = 			1.0, 
+			friend = 			1.0,
 			neutral = 			3.0,
 		},
         max_weapon_refill_amount = {friend = 1.0, neutral = 0.5 },
@@ -2560,7 +2560,7 @@ function generateTerrain()
 		table.insert(place_ref_list,station_primary_ktlitan)
 		station_primary_ktlitan.comms_data = station_primary_human.comms_data
 	end
-	
+
 	--	Set defense platforms and jammers (if applicable)
 	defense_platform_count = defense_platform_count_options[defense_platform_count_index].count
 	defense_platform_distance = defense_platform_count_options[defense_platform_count_index].distance
@@ -2625,7 +2625,7 @@ function generateTerrain()
 					jumpsupplydrop = "friend",
 				},
 				service_cost = {
-					supplydrop =		math.random(80,120), 
+					supplydrop =		math.random(80,120),
 					reinforcements =	math.random(125,175),
 					jumpsupplydrop =	math.random(110,140),
 				},
@@ -2637,7 +2637,7 @@ function generateTerrain()
 				self_destruct_repair =	random(1,100) <= (25 - difficulty*2.5),
 				tube_slow_down_repair =	random(1,100) <= (18 - difficulty*2.5),
 				reputation_cost_multipliers = {
-					friend = 			1.0, 
+					friend = 			1.0,
 					neutral = 			3.0,
 				},
 			}
@@ -2753,7 +2753,7 @@ function generateTerrain()
 			end
 		end
 	end
-	
+
 	--	Place players
 	player_restart = {}
 	if player_ship_types == "spawned" then
@@ -2829,7 +2829,7 @@ function generateTerrain()
 			end
 		end
 	end
-	
+
 	--	Place NPC ships (if applicable)
 	local npc_fleet_count = 0
 	if npc_ships then
@@ -2958,11 +2958,11 @@ function generateTerrain()
 		pStation.comms_data = {
 			friendlyness = random(15,100),
 			weapon_cost =		{
-				Homing =	math.random(2,8), 		
-				Nuke =		math.random(12,30),					
+				Homing =	math.random(2,8),
+				Nuke =		math.random(12,30),
 				Mine =		math.random(3,28),
-				EMP =		math.random(9,25), 
-				HVLI =		math.random(2,5),				
+				EMP =		math.random(9,25),
+				HVLI =		math.random(2,5),
 			},
 			weapon_available = 	{
 				Homing =	random(1,13)<=(6-difficulty),
@@ -2989,7 +2989,7 @@ function generateTerrain()
 				jumpovercharge = "neutral",
 			},
 			service_cost = {
-				supplydrop =		math.random(80,120), 
+				supplydrop =		math.random(80,120),
 				reinforcements =	math.random(125,175),
 				hornetreinforcements =	math.random(75,125),
 				phobosreinforcements =	math.random(175,225),
@@ -3005,7 +3005,7 @@ function generateTerrain()
 			self_destruct_repair =	random(1,100) <= (25 - difficulty*2.5),
 			tube_slow_down_repair =	random(1,100) <= (35 - difficulty*2.5),
 			reputation_cost_multipliers = {
-				friend = 			1.0, 
+				friend = 			1.0,
 				neutral = 			3.0,
 			},
 			max_weapon_refill_amount = {friend = 1.0, neutral = 0.5 },
@@ -3022,12 +3022,12 @@ function generateTerrain()
 				table.insert(
 					scientist_list["Human Navy"],
 					{
-						name = tableRemoveRandom(scientist_names), 
-						topic = tableRemoveRandom(scientist_topics), 
-						location = pStation, 
-						location_name = pStation:getCallSign(), 
-						score_value = scientist_score_value, 
-						upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)], 
+						name = tableRemoveRandom(scientist_names),
+						topic = tableRemoveRandom(scientist_topics),
+						location = pStation,
+						location_name = pStation:getCallSign(),
+						score_value = scientist_score_value,
+						upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)],
 						upgrade = tableRemoveRandom(upgrade_list),
 						upgrade_automated_application = upgrade_automated_applications[math.random(1,#upgrade_automated_applications)],
 					}
@@ -3035,7 +3035,7 @@ function generateTerrain()
 				scientist_count = scientist_count + 1
 			end
 		end
-		
+
 		local obj_ref_angle = angleFromVectorNorth(candidate_x, candidate_y, terrain_center_x, terrain_center_y)
 		local obj_ref_distance = distance(terrain_center_x, terrain_center_y, candidate_x, candidate_y)
 		obj_ref_angle = (obj_ref_angle + replicant_increment) % 360
@@ -3056,12 +3056,12 @@ function generateTerrain()
 				table.insert(
 					scientist_list["Kraylor"],
 					{
-						name = tableRemoveRandom(scientist_names), 
-						topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic, 
-						location = pStation, 
-						location_name = pStation:getCallSign(), 
-						score_value = scientist_score_value, 
-						upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)], 
+						name = tableRemoveRandom(scientist_names),
+						topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic,
+						location = pStation,
+						location_name = pStation:getCallSign(),
+						score_value = scientist_score_value,
+						upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)],
 						upgrade = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade,
 						upgrade_automated_application = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade_automated_application,
 					}
@@ -3087,12 +3087,12 @@ function generateTerrain()
 					table.insert(
 						scientist_list["Exuari"],
 						{
-							name = tableRemoveRandom(scientist_names), 
-							topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic, 
-							location = pStation, 
-							location_name = pStation:getCallSign(), 
-							score_value = scientist_score_value, 
-							upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)], 
+							name = tableRemoveRandom(scientist_names),
+							topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic,
+							location = pStation,
+							location_name = pStation:getCallSign(),
+							score_value = scientist_score_value,
+							upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)],
 							upgrade = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade,
 							upgrade_automated_application = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade_automated_application,
 						}
@@ -3119,12 +3119,12 @@ function generateTerrain()
 					table.insert(
 						scientist_list["Ktlitans"],
 						{
-							name = tableRemoveRandom(scientist_names), 
-							topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic, 
-							location = pStation, 
-							location_name = pStation:getCallSign(), 
-							score_value = scientist_score_value, 
-							upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)], 
+							name = tableRemoveRandom(scientist_names),
+							topic = scientist_list["Human Navy"][#scientist_list["Human Navy"]].topic,
+							location = pStation,
+							location_name = pStation:getCallSign(),
+							score_value = scientist_score_value,
+							upgrade_requirement = upgrade_requirements[math.random(1,#upgrade_requirements)],
 							upgrade = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade,
 							upgrade_automated_application = scientist_list["Human Navy"][#scientist_list["Human Navy"]].upgrade_automated_application,
 						}
@@ -3133,7 +3133,7 @@ function generateTerrain()
 			end
 		end
 	end	--station build loop
-	
+
 	--	Build some wormholes if applicable
 	local hole_list = {}
 	local wormhole_count = math.random(0,3)
@@ -3167,7 +3167,7 @@ function generateTerrain()
 			table.insert(place_ref_list,ta)
 			table.insert(human_ref_list,ta)
 			wormhole:setTargetPosition(target_candidate_x,target_candidate_y)
-			
+
 			local obj_ref_angle = angleFromVectorNorth(candidate_x, candidate_y, terrain_center_x, terrain_center_y)
 			local obj_ref_distance = distance(terrain_center_x, terrain_center_y, candidate_x, candidate_y)
 			obj_ref_angle = (obj_ref_angle + replicant_increment) % 360
@@ -3180,7 +3180,7 @@ function generateTerrain()
 			target_ref_angle = (target_ref_angle + replicant_increment) % 360
 			rep_x, rep_y = vectorFromAngleNorth(target_ref_angle,target_ref_distance)
 			wormhole:setTargetPosition(terrain_center_x + rep_x, terrain_center_y + rep_y)
-			
+
 			if exuari_angle ~= nil then
 				obj_ref_angle = (obj_ref_angle + replicant_increment) % 360
 				rep_x, rep_y = vectorFromAngleNorth(obj_ref_angle,obj_ref_distance)
@@ -3203,7 +3203,7 @@ function generateTerrain()
 			end
 		end
 	end	--wormhole build
-	
+
 	--	Maybe sprinkle in some black holes
 	local blackhole_count = math.random(0,6)
 	if blackhole_count > 0 then
@@ -3244,7 +3244,7 @@ function generateTerrain()
 			end
 		end
 	end	--blackhole build
-	
+
 	local mine_field_count = math.random(0,(6-player_team_count))
 	local mine_field_type_list = {"line","arc"}
 	if mine_field_count > 0 then
@@ -3348,7 +3348,7 @@ function generateTerrain()
 			end
 		end
 	end
-	
+
 	--	Asteroid build
 	local asteroid_field_count = math.random(2,(10-player_team_count))
 	local asteroid_field_type_list = {"blob","line","arc"}
@@ -3470,7 +3470,7 @@ function generateTerrain()
 			end
 		end
 	end	--	asteroid fields build
-	
+
 	--	Nebula build
 	local nebula_field_count = math.random(2,8)
 	center_x, center_y, perimeter, avg_dist = analyzeBlob(human_ref_list)
@@ -3527,7 +3527,7 @@ function generateTerrain()
 		end
 	end	--	nebula field build
 	game_state = "terrain generated"
-	
+
 	--	Store (then print) original values for later comparison
 	local stat_list = gatherStats()
 	original_score = {}
@@ -3625,7 +3625,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template][fleet_group[fleetComposition]] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -3646,7 +3646,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template][fleet_group[fleetComposition]] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -3665,7 +3665,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template][fleet_group[fleetComposition]] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -3782,7 +3782,7 @@ function createObjectsListOnLine(x1, y1, x2, y2, spacing, object_type, rows, cha
     return list
 end
 function placeRandomListAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
--- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0) 
+-- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
 -- save in a list that is returned to caller
 	local object_list = {}
     for n=1,amount do
@@ -3808,7 +3808,7 @@ end
 function choosePlanet(index,x,y)
 	local planet_list = {
 		{
-			radius = random(500,1500), distance = -2000, 
+			radius = random(500,1500), distance = -2000,
 			name = {"Gamma Piscium","Beta Lyporis","Sigma Draconis","Iota Carinae","Theta Arietis","Epsilon Indi","Beta Hydri"},
 			color = {
 				red = random(0.9,1), green = random(0.85,1), blue = random(0.9,1)
@@ -4023,18 +4023,18 @@ function customPlayerShip(custom_template,p)
 		p:setBeamWeaponTurret(0, 100, -15, .2)		--slower turret speed (vs 6)
 		p:setBeamWeaponTurret(1, 100,  15, .2)
 		p:setWeaponTubeCount(2)						--more tubes (vs 0)
-		p:setWeaponTubeDirection(0,180)				
+		p:setWeaponTubeDirection(0,180)
 		p:setWeaponTubeDirection(1,180)
 		p:setWeaponStorageMax("Homing",4)
-		p:setWeaponStorage("Homing", 4)	
-		p:setWeaponStorageMax("Nuke",2)	
-		p:setWeaponStorage("Nuke", 2)	
-		p:setWeaponStorageMax("EMP",3)	
-		p:setWeaponStorage("EMP", 3)		
-		p:setWeaponStorageMax("Mine",3)	
-		p:setWeaponStorage("Mine", 3)	
-		p:setWeaponStorageMax("HVLI",6)	
-		p:setWeaponStorage("HVLI", 6)	
+		p:setWeaponStorage("Homing", 4)
+		p:setWeaponStorageMax("Nuke",2)
+		p:setWeaponStorage("Nuke", 2)
+		p:setWeaponStorageMax("EMP",3)
+		p:setWeaponStorage("EMP", 3)
+		p:setWeaponStorageMax("Mine",3)
+		p:setWeaponStorage("Mine", 3)
+		p:setWeaponStorageMax("HVLI",6)
+		p:setWeaponStorage("HVLI", 6)
 	elseif custom_template == "Focus" then
 		p:setTemplate("Crucible")
 		p:setTypeName("Focus")
@@ -4047,7 +4047,7 @@ function customPlayerShip(custom_template,p)
 		p:setShields(100, 100)
 	--                 	   Arc, Dir,  Range,  CycleTime, Damage
 		p:setBeamWeapon(0,  60, -20, 1000.0,		6.0, 5)	--narrower (vs 70)
-		p:setBeamWeapon(1,  60,  20, 1000.0,		6.0, 5)	
+		p:setBeamWeapon(1,  60,  20, 1000.0,		6.0, 5)
 		p:setWeaponTubeCount(4)						--fewer (vs 6)
 		p:weaponTubeAllowMissle(2,"Homing")			--big tube shoots more stuff (vs HVLI)
 		p:weaponTubeAllowMissle(2,"EMP")
@@ -4055,18 +4055,18 @@ function customPlayerShip(custom_template,p)
 		p:setWeaponTubeExclusiveFor(3,"Mine")		--rear (vs left)
 		p:setWeaponTubeDirection(3, 180)
 		p:setWeaponStorageMax("EMP",2)				--fewer (vs 6)
-		p:setWeaponStorage("EMP", 2)				
+		p:setWeaponStorage("EMP", 2)
 		p:setWeaponStorageMax("Nuke",1)				--fewer (vs 4)
-		p:setWeaponStorage("Nuke", 1)	
+		p:setWeaponStorage("Nuke", 1)
 	elseif custom_template == "Holmes" then
 		p:setTemplate("Crucible")
 		p:setTypeName("Holmes")
 		p:setImpulseMaxSpeed(70)					--slower (vs 80)
 	--					  Arc, Dir, Range, CycleTime, Dmg
 		p:setBeamWeapon(0, 50, -85, 900.0, 		6.0, 5)	--broadside beams, narrower (vs 70)
-		p:setBeamWeapon(1, 50, -95, 900.0, 		6.0, 5)	
-		p:setBeamWeapon(2, 50,  85, 900.0, 		6.0, 5)	
-		p:setBeamWeapon(3, 50,  95, 900.0, 		6.0, 5)	
+		p:setBeamWeapon(1, 50, -95, 900.0, 		6.0, 5)
+		p:setBeamWeapon(2, 50,  85, 900.0, 		6.0, 5)
+		p:setBeamWeapon(3, 50,  95, 900.0, 		6.0, 5)
 		p:setWeaponTubeCount(4)						--fewer (vs 6)
 		p:setWeaponTubeExclusiveFor(0,"Homing")		--tubes only shoot homing missiles (vs more options)
 		p:setWeaponTubeExclusiveFor(1,"Homing")
@@ -4074,13 +4074,13 @@ function customPlayerShip(custom_template,p)
 		p:setWeaponTubeExclusiveFor(3,"Mine")
 		p:setWeaponTubeDirection(3, 180)
 		p:setWeaponStorageMax("Homing",10)			--more (vs 8)
-		p:setWeaponStorage("Homing", 10)				
+		p:setWeaponStorage("Homing", 10)
 		p:setWeaponStorageMax("HVLI",0)				--fewer
-		p:setWeaponStorage("HVLI", 0)				
+		p:setWeaponStorage("HVLI", 0)
 		p:setWeaponStorageMax("EMP",0)				--fewer
-		p:setWeaponStorage("EMP", 0)				
+		p:setWeaponStorage("EMP", 0)
 		p:setWeaponStorageMax("Nuke",0)				--fewer
-		p:setWeaponStorage("Nuke", 0)	
+		p:setWeaponStorage("Nuke", 0)
 	elseif custom_template == "Maverick XP" then
 		p:setTemplate("Maverick")
 		p:setTypeName("Maverick XP")
@@ -4093,10 +4093,10 @@ function customPlayerShip(custom_template,p)
 		p:setBeamWeaponEnergyPerFire(0,p:getBeamWeaponEnergyPerFire(0)*6)
 		p:setBeamWeaponHeatPerFire(0,p:getBeamWeaponHeatPerFire(0)*5)
 		p:setBeamWeapon(1, 0, 0, 0, 0, 0)		--eliminate 5 beams
-		p:setBeamWeapon(2, 0, 0, 0, 0, 0)				
-		p:setBeamWeapon(3, 0, 0, 0, 0, 0)				
-		p:setBeamWeapon(4, 0, 0, 0, 0, 0)	
-		p:setBeamWeapon(5, 0, 0, 0, 0, 0)	
+		p:setBeamWeapon(2, 0, 0, 0, 0, 0)
+		p:setBeamWeapon(3, 0, 0, 0, 0, 0)
+		p:setBeamWeapon(4, 0, 0, 0, 0, 0)
+		p:setBeamWeapon(5, 0, 0, 0, 0, 0)
 	elseif custom_template == "Phobos T2" then
 		p:setTemplate("Phobos M3P")
 		p:setTypeName("Phobos T2")
@@ -4611,7 +4611,7 @@ function handleDockedState()
 						setCommsMessage(string.format(_("station-comms","Certainly, %s\n\n%s boards your ship"),comms_source:getCallSign(),scientist.name))
 						scientist.location = comms_source
 						scientist.location_name = comms_source:getCallSign()
-						addCommsReply(_("Back"), commsStation)				
+						addCommsReply(_("Back"), commsStation)
 					end)
 					addCommsReply(_("station-comms","Can you tell me some more about your ideas?"),function()
 						local rc = false
@@ -4791,7 +4791,7 @@ function handleDockedState()
 			addCommsReply(name,function()
 				string.format("")	--Serious Proton needs global reference/context
 				local rc, msg = action(comms_source)
-				if rc then	
+				if rc then
 					setCommsMessage(string.format(_("station-comms","Congratulations!\n%s"),msg))
 				else
 					setCommsMessage(string.format(_("station-comms","Sorry.\n%s"),msg))
@@ -5090,7 +5090,7 @@ function stationDefenseReport(return_function)
 			for n=0,shields-1 do
 				msg = string.format(_("stationAssist-comms", "%sShield %s: %d%%\n"),msg,n,math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
-		end			
+		end
 		setCommsMessage(msg);
 		addCommsReply(_("Back"), return_function)
 	end)
@@ -5421,32 +5421,32 @@ function expediteDock(return_function)
 					end
 					if comms_source.preorder_homing ~= nil then
 						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   Homings: %i",comms_source.preorder_homing)						
+						existing_expedite = existing_expedite .. string.format("\n   Homings: %i",comms_source.preorder_homing)
 					end
 					if comms_source.preorder_mine ~= nil then
 						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   Mines: %i",comms_source.preorder_mine)						
+						existing_expedite = existing_expedite .. string.format("\n   Mines: %i",comms_source.preorder_mine)
 					end
 					if comms_source.preorder_emp ~= nil then
 						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   EMPs: %i",comms_source.preorder_emp)						
+						existing_expedite = existing_expedite .. string.format("\n   EMPs: %i",comms_source.preorder_emp)
 					end
 					if comms_source.preorder_nuke ~= nil then
 						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   Nukes: %i",comms_source.preorder_nuke)						
+						existing_expedite = existing_expedite .. string.format("\n   Nukes: %i",comms_source.preorder_nuke)
 					end
 					if comms_source.preorder_repair_crew ~= nil then
 						preorders_identified = true
-						existing_expedite = existing_expedite .. "\n   One repair crew"						
+						existing_expedite = existing_expedite .. "\n   One repair crew"
 					end
 					if comms_source.preorder_coolant ~= nil then
 						preorders_identified = true
-						existing_expedite = existing_expedite .. "\n   Coolant"						
+						existing_expedite = existing_expedite .. "\n   Coolant"
 					end
 					if preorders_identified then
 						existing_expedite = existing_expedite .. "\nWould you like to preorder anything else?"
 					else
-						existing_expedite = existing_expedite .. " none.\nWould you like to preorder anything?"						
+						existing_expedite = existing_expedite .. " none.\nWould you like to preorder anything?"
 					end
 					preorder_message = existing_expedite
 					preOrderOrdnance(return_function)
@@ -5632,7 +5632,7 @@ function preOrderOrdnance(return_function)
 					else
 						comms_source.preorder_repair_crew = 1
 						setCommsMessage("Repair crew hired on your behalf. They will board when you dock")
-					end				
+					end
 					preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
 					addCommsReply(_("Back"),return_function)
 				end)
@@ -5664,7 +5664,7 @@ function preOrderOrdnance(return_function)
 end
 --]]
 function activateDefenseFleet(return_function)
-    if isAllowedTo(comms_target.comms_data.services.activatedefensefleet) and 
+    if isAllowedTo(comms_target.comms_data.services.activatedefensefleet) and
     	comms_target.comms_data.idle_defense_fleet ~= nil then
     	local defense_fleet_count = 0
     	for name, template in pairs(comms_target.comms_data.idle_defense_fleet) do
@@ -5705,10 +5705,10 @@ function restockOrdnance(return_function)
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke")	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Nuke	> 0) or 
-			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP")	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.EMP		> 0) or 
-			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing")	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Homing	> 0) or 
-			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine")	> 0)   	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Mine	> 0) or 
+		if 	(comms_target.comms_data.weapon_available.Nuke   and comms_source:getWeaponStorageMax("Nuke")	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Nuke	> 0) or
+			(comms_target.comms_data.weapon_available.EMP    and comms_source:getWeaponStorageMax("EMP")	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.EMP		> 0) or
+			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing")	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Homing	> 0) or
+			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine")	> 0)   	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Mine	> 0) or
 			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI")	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.HVLI	> 0) then
 			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				setCommsMessage(_("ammo-comms", "What type of ordnance?"))
@@ -5922,7 +5922,7 @@ function repairSubsystems(return_function)
 	end
 end
 function handleWeaponRestock(weapon, return_function)
-    if not comms_source:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then
 		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
@@ -5981,7 +5981,7 @@ function handleWeaponRestock(weapon, return_function)
 				end)
 			else
 				setCommsMessage(_("needRep-comms", "Not enough reputation."))
-				return				
+				return
 			end
 		end
         addCommsReply(_("Back"), return_function)
@@ -6209,7 +6209,7 @@ function missileLoadSpeedUpgrade(p)
 			repeat
 				p:setTubeLoadTime(tube_index,p.normal_tube_load_time[tube_index]*.8)
 				p.normal_tube_load_time[tube_index] = p.normal_tube_load_time[tube_index]*.8
-				tube_index = tube_index + 1				
+				tube_index = tube_index + 1
 			until(tube_index >= tube_count)
 			return true, _("upgrade-comms","Your missile tube load time has been reduced by 20%")
 		else
@@ -7093,7 +7093,7 @@ function gatherStats()
 	stat_list.human.station = {}
 	stat_list.kraylor = {}
 	stat_list.kraylor.ship = {}
-	stat_list.kraylor.ship_score_total = 0	
+	stat_list.kraylor.ship_score_total = 0
 	stat_list.kraylor.npc = {}
 	stat_list.kraylor.npc_score_total = 0
 	stat_list.kraylor.station_score_total = 0
@@ -7110,7 +7110,7 @@ function gatherStats()
 	if ktlitan_angle ~= nil then
 		stat_list.ktlitan = {}
 		stat_list.ktlitan.ship = {}
-		stat_list.ktlitan.ship_score_total = 0	
+		stat_list.ktlitan.ship_score_total = 0
 		stat_list.ktlitan.npc = {}
 		stat_list.ktlitan.npc_score_total = 0
 		stat_list.ktlitan.station_score_total = 0
@@ -7145,7 +7145,7 @@ function gatherStats()
 			for idx, scientist in ipairs(list) do
 				if scientist.location:isValid() then
 					stat_list[f2s[faction]].npc_score_total = stat_list[f2s[faction]].npc_score_total + scientist.score_value
-					stat_list[f2s[faction]].npc[scientist.name] = {topic = scientist.topic, is_alive = true, score_value = scientist.score_value, location_name = scientist.location_name}	
+					stat_list[f2s[faction]].npc[scientist.name] = {topic = scientist.topic, is_alive = true, score_value = scientist.score_value, location_name = scientist.location_name}
 				end
 			end
 		end
@@ -7213,39 +7213,39 @@ function gatherStats()
 			end
 		end
 	end
-	stat_list.human.weighted_score = 
-		stat_list.human.station_score_total*station_weight + 
-		stat_list.human.ship_score_total*player_ship_weight + 
-		stat_list.human.npc_score_total*npc_ship_weight - 
+	stat_list.human.weighted_score =
+		stat_list.human.station_score_total*station_weight +
+		stat_list.human.ship_score_total*player_ship_weight +
+		stat_list.human.npc_score_total*npc_ship_weight -
 		human_death_penalty*player_ship_weight
-	stat_list.human.comprehensive_weighted_score = 
-		stat_list.human.weighted_score + 
+	stat_list.human.comprehensive_weighted_score =
+		stat_list.human.weighted_score +
 		stat_list.human.tie_breaker
-	stat_list.kraylor.weighted_score = 
-		stat_list.kraylor.station_score_total*station_weight + 
-		stat_list.kraylor.ship_score_total*player_ship_weight + 
-		stat_list.kraylor.npc_score_total*npc_ship_weight - 
+	stat_list.kraylor.weighted_score =
+		stat_list.kraylor.station_score_total*station_weight +
+		stat_list.kraylor.ship_score_total*player_ship_weight +
+		stat_list.kraylor.npc_score_total*npc_ship_weight -
 		kraylor_death_penalty*player_ship_weight
-	stat_list.kraylor.comprehensive_weighted_score = 
-		stat_list.kraylor.weighted_score + 
+	stat_list.kraylor.comprehensive_weighted_score =
+		stat_list.kraylor.weighted_score +
 		stat_list.kraylor.tie_breaker
 	if exuari_angle ~= nil then
-		stat_list.exuari.weighted_score = 
-			stat_list.exuari.station_score_total*station_weight + 
-			stat_list.exuari.ship_score_total*player_ship_weight + 
-			stat_list.exuari.npc_score_total*npc_ship_weight - 
+		stat_list.exuari.weighted_score =
+			stat_list.exuari.station_score_total*station_weight +
+			stat_list.exuari.ship_score_total*player_ship_weight +
+			stat_list.exuari.npc_score_total*npc_ship_weight -
 			exuari_death_penalty*player_ship_weight
-		stat_list.exuari.comprehensive_weighted_score = 
+		stat_list.exuari.comprehensive_weighted_score =
 			stat_list.exuari.weighted_score +
 			stat_list.exuari.tie_breaker
 	end
 	if ktlitan_angle ~= nil then
-		stat_list.ktlitan.weighted_score = 
-			stat_list.ktlitan.station_score_total*station_weight + 
-			stat_list.ktlitan.ship_score_total*player_ship_weight + 
-			stat_list.ktlitan.npc_score_total*npc_ship_weight - 
+		stat_list.ktlitan.weighted_score =
+			stat_list.ktlitan.station_score_total*station_weight +
+			stat_list.ktlitan.ship_score_total*player_ship_weight +
+			stat_list.ktlitan.npc_score_total*npc_ship_weight -
 			ktlitan_death_penalty*player_ship_weight
-		stat_list.ktlitan.comprehensive_weighted_score = 
+		stat_list.ktlitan.comprehensive_weighted_score =
 			stat_list.ktlitan.weighted_score +
 			stat_list.ktlitan.tie_breaker
 	end

@@ -42,7 +42,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
 			beam_db:setModelDataName(template_descriptions[template].model)
 			beam_db:setImage(template_descriptions[template].image)
 			for i,beam in ipairs(upgrade_path[template]["beam"]) do
-				local level_key = string.format(_("scienceDB","Level %2i"),i) 
+				local level_key = string.format(_("scienceDB","Level %2i"),i)
 				beam_db:addEntry(level_key)
 				local level_db = queryScienceDatabase(ship_yard_key,template,beam_key,level_key)
 				level_db:setModelDataName(template_descriptions[template].model)
@@ -126,7 +126,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
 					end
 					local type_key = string.format(_("scienceDB","Tube %i missile type"),j)
 					if type_count > 1 then
-						type_key = string.format(_("scienceDB","Tube %i missile types"),j)						
+						type_key = string.format(_("scienceDB","Tube %i missile types"),j)
 					end
 					level_db:setKeyValue(type_key,type_list)
 				end
@@ -176,7 +176,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
 					shield_arc_key = _("scienceDB","Front shield strength")
 					level_db:setKeyValue(shield_arc_key,shield[1].max)
 					shield_arc_key = _("scienceDB","Rear shield strength")
-					level_db:setKeyValue(shield_arc_key,shield[2].max)					
+					level_db:setKeyValue(shield_arc_key,shield[2].max)
 				end
 			end
 			--	add hull upgrade info
@@ -356,8 +356,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","decreased missile stock capacity")},																				--1
-				{tube = 1,	ord = 2, desc = _("upgrade-comms","increase missile stock capacity"),	downgrade = _("downgrade-comms","decreased homing missile capacity")},				--2  
-				{tube = 1,	ord = 3, desc = _("upgrade-comms","increase homing missile capacity"),	downgrade = _("downgrade-comms","removed mine tube")},								--3  
+				{tube = 1,	ord = 2, desc = _("upgrade-comms","increase missile stock capacity"),	downgrade = _("downgrade-comms","decreased homing missile capacity")},				--2
+				{tube = 1,	ord = 3, desc = _("upgrade-comms","increase homing missile capacity"),	downgrade = _("downgrade-comms","removed mine tube")},								--3
 				{tube = 2,	ord = 4, desc = _("upgrade-comms","add a mine tube"),					downgrade = _("downgrade-comms","increased tube load times")},						--4
 				{tube = 3,	ord = 4, desc = _("upgrade-comms","decrease tube load times"),			downgrade = _("downgrade-comms","removed mines, EMPs and nukes")},					--5
 				{tube = 3,	ord = 5, desc = _("upgrade-comms","add mines, emps and nukes"),			downgrade = _("downgrade-comms","removed two medium sized side tubes")},			--6
@@ -416,12 +416,12 @@ function playerShipUpgradeDowngradeData()
 			},
 			["ordnance"] = {
 				{hom = 4,  nuk = 0, emp = 0, min = 0, hvl = 10},	--1
-				{hom = 6,  nuk = 0, emp = 0, min = 0, hvl = 20},	--2		
-				{hom = 12, nuk = 0, emp = 0, min = 0, hvl = 20},	--3		
-				{hom = 12, nuk = 0, emp = 0, min = 4, hvl = 20},	--4		
-				{hom = 12, nuk = 2, emp = 4, min = 8, hvl = 20},	--5		
-				{hom = 12, nuk = 2, emp = 6, min = 8, hvl = 20},	--6		
-				{hom = 12, nuk = 4, emp = 6, min = 8, hvl = 20},	--7		
+				{hom = 6,  nuk = 0, emp = 0, min = 0, hvl = 20},	--2
+				{hom = 12, nuk = 0, emp = 0, min = 0, hvl = 20},	--3
+				{hom = 12, nuk = 0, emp = 0, min = 4, hvl = 20},	--4
+				{hom = 12, nuk = 2, emp = 4, min = 8, hvl = 20},	--5
+				{hom = 12, nuk = 2, emp = 6, min = 8, hvl = 20},	--6
+				{hom = 12, nuk = 4, emp = 6, min = 8, hvl = 20},	--7
 				["stock"] = {hom = 12, nuk = 4, emp = 6, min = 8, hvl = 20},
 				["start"] = 4,
 			},
@@ -823,8 +823,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed medium tube")},																							--1
-				{tube = 2,	ord = 1, desc = _("upgrade-comms","add medium tube"), downgrade = _("downgrade-comms","reduced HVLI missile capacity")},									--2  
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","increase HVLI missile capacity"), downgrade = _("downgrade-comms","removed large tube and reduced HVLI capacity")},		--3  
+				{tube = 2,	ord = 1, desc = _("upgrade-comms","add medium tube"), downgrade = _("downgrade-comms","reduced HVLI missile capacity")},									--2
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","increase HVLI missile capacity"), downgrade = _("downgrade-comms","removed large tube and reduced HVLI capacity")},		--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","add large tube and increase HVLI capacity"), downgrade = _("downgrade-comms","increased tube load times")},				--4
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","decrease tube load times"), downgrade = _("downgrade-comms","removed broadside tubes and homing missiles")},				--5
 				{tube = 5,	ord = 4, desc = _("upgrade-comms","add broadside tubes and homing missiles"), downgrade = _("downgrade-comms","removed mining tube")},						--6
@@ -897,11 +897,11 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 12},	--1
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 18},	--2
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 24},	--3
-				{hom = 6,  nuk = 0, emp = 0, min = 0, hvl = 24},	--4		
-				{hom = 6,  nuk = 0, emp = 0, min = 4, hvl = 24},	--5		
-				{hom = 8,  nuk = 2, emp = 4, min = 4, hvl = 24},	--6		
-				{hom = 8,  nuk = 4, emp = 6, min = 6, hvl = 24},	--7	
-				{hom = 12, nuk = 6, emp = 9, min = 8, hvl = 30},	--8		
+				{hom = 6,  nuk = 0, emp = 0, min = 0, hvl = 24},	--4
+				{hom = 6,  nuk = 0, emp = 0, min = 4, hvl = 24},	--5
+				{hom = 8,  nuk = 2, emp = 4, min = 4, hvl = 24},	--6
+				{hom = 8,  nuk = 4, emp = 6, min = 6, hvl = 24},	--7
+				{hom = 12, nuk = 6, emp = 9, min = 8, hvl = 30},	--8
 				["stock"] = {hom = 8, nuk = 4, emp = 6, min = 6, hvl = 24},
 			},
 			["shield"] = {
@@ -965,7 +965,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 160},
 				},
 				["start"] = 5,
-			},	
+			},
 			["hull"] = {
 				{max = 100, downgrade = _("downgrade-comms","decreased hull max by ~17%")},																--1
 				{max = 120, ["desc"] = _("upgrade-comms","increase hull max by 20%"), downgrade = _("downgrade-comms","decreased hull max by 1/7")},		--2
@@ -1365,8 +1365,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed homing")},																					--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add homing"), downgrade = _("downgrade-comms","cut homing missile capacity in half")},						--2  
-				{tube = 2,	ord = 3, desc = _("upgrade-comms","double homing missile capacity"), downgrade = _("downgrade-comms","increased tube load speed by 25%")},		--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add homing"), downgrade = _("downgrade-comms","cut homing missile capacity in half")},						--2
+				{tube = 2,	ord = 3, desc = _("upgrade-comms","double homing missile capacity"), downgrade = _("downgrade-comms","increased tube load speed by 25%")},		--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","decrease tube load speed by 20%"), downgrade = _("downgrade-comms","reduced HVLI capacity by 20%")},			--4
 				{tube = 3,	ord = 4, desc = _("upgrade-comms","increase HVLI capacity by 25%"), downgrade = _("downgrade-comms","removed mining tube")},					--5
 				{tube = 4,	ord = 5, desc = _("upgrade-comms","add mining tube"), downgrade = _("downgrade-comms","removed EMPs")},											--6
@@ -1427,13 +1427,13 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 8},		--1
 				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 8},		--2
 				{hom = 4,  nuk = 0, emp = 0, min = 0, hvl = 8},		--3
-				{hom = 4,  nuk = 0, emp = 0, min = 0, hvl = 10},	--4		
-				{hom = 4,  nuk = 0, emp = 0, min = 2, hvl = 10},	--5		
-				{hom = 4,  nuk = 0, emp = 2, min = 2, hvl = 10},	--6		
-				{hom = 4,  nuk = 1, emp = 2, min = 2, hvl = 10},	--7		
-				{hom = 6,  nuk = 2, emp = 4, min = 2, hvl = 10},	--8	
-				{hom = 8,  nuk = 2, emp = 4, min = 3, hvl = 12},	--9		
-				{hom = 8,  nuk = 2, emp = 4, min = 5, hvl = 14},	--10		
+				{hom = 4,  nuk = 0, emp = 0, min = 0, hvl = 10},	--4
+				{hom = 4,  nuk = 0, emp = 0, min = 2, hvl = 10},	--5
+				{hom = 4,  nuk = 0, emp = 2, min = 2, hvl = 10},	--6
+				{hom = 4,  nuk = 1, emp = 2, min = 2, hvl = 10},	--7
+				{hom = 6,  nuk = 2, emp = 4, min = 2, hvl = 10},	--8
+				{hom = 8,  nuk = 2, emp = 4, min = 3, hvl = 12},	--9
+				{hom = 8,  nuk = 2, emp = 4, min = 5, hvl = 14},	--10
 				["stock"] = {hom = 6, nuk = 2, emp = 4, min = 2, hvl = 10},
 			},
 			["shield"] = {
@@ -1497,7 +1497,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 160},
 				},
 				["start"] = 5,
-			},	
+			},
 			["hull"] = {
 				{max = 100, downgrade = _("downgrade-comms","reduced hull max by 1/6")},															--1
 				{max = 120, ["desc"] = _("upgrade-comms","increase hull max by 20%"),	downgrade = _("downgrade-comms","reduced hull max by 1/7")},	--2
@@ -1861,8 +1861,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed mines")},																		--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add mines"), downgrade = _("downgrade-comms","slowed tube load speeds")},								--2  
-				{tube = 3,	ord = 2, desc = _("upgrade-comms","speed up tube load speed by 25%"), downgrade = _("downgrade-comms","reduced mine capacity")},			--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add mines"), downgrade = _("downgrade-comms","slowed tube load speeds")},								--2
+				{tube = 3,	ord = 2, desc = _("upgrade-comms","speed up tube load speed by 25%"), downgrade = _("downgrade-comms","reduced mine capacity")},			--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","increase mine capacity by 50%"), downgrade = _("downgrade-comms","reduced tobe load speeds by 25%")},			--4
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","speed up tube load speed by 1/3"), downgrade = _("downgrade-comms","reduced mine capacity by 25%")},			--5
 				{tube = 4,	ord = 4, desc = _("upgrade-comms","increase mine capacity by 1/3"), downgrade = _("downgrade-comms","reduced mine load speed")},			--6
@@ -1924,12 +1924,12 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 0},		--1
 				{hom = 0,  nuk = 0, emp = 0, min = 2, hvl = 0},		--2
 				{hom = 0,  nuk = 0, emp = 0, min = 3, hvl = 0},		--3
-				{hom = 0,  nuk = 0, emp = 0, min = 4, hvl = 0},		--4		
-				{hom = 0,  nuk = 0, emp = 0, min = 5, hvl = 0},		--5		
-				{hom = 5,  nuk = 0, emp = 0, min = 5, hvl = 0},		--6		
-				{hom = 10, nuk = 0, emp = 0, min = 5, hvl = 0},		--7		
-				{hom = 15, nuk = 0, emp = 0, min = 5, hvl = 0},		--8		
-				{hom = 15, nuk = 0, emp = 0, min = 6, hvl = 0},		--9		
+				{hom = 0,  nuk = 0, emp = 0, min = 4, hvl = 0},		--4
+				{hom = 0,  nuk = 0, emp = 0, min = 5, hvl = 0},		--5
+				{hom = 5,  nuk = 0, emp = 0, min = 5, hvl = 0},		--6
+				{hom = 10, nuk = 0, emp = 0, min = 5, hvl = 0},		--7
+				{hom = 15, nuk = 0, emp = 0, min = 5, hvl = 0},		--8
+				{hom = 15, nuk = 0, emp = 0, min = 6, hvl = 0},		--9
 				["stock"] = {hom = 0, nuk = 0, emp = 0, min = 0, hvl = 0},
 			},
 			["shield"] = {
@@ -1993,7 +1993,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 70},
 				},
 				["start"] = 3,
-			},	
+			},
 			["hull"] = {
 				{max = 100, downgrade = _("downgrade-comms","reduced hull max by 1/6")},															--1
 				{max = 120, ["desc"] = _("upgrade-comms","increase hull max by 20%"), downgrade = _("downgrade-comms","reduced hull max by 20%")},	--2
@@ -2347,8 +2347,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed mines")},														--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add mines"), downgrade = _("downgrade-comms","slowed tube load speed by 20%")},									--2  
-				{tube = 3,	ord = 2, desc = _("upgrade-comms","speed up tube load speed by 25%"), downgrade = _("downgrade-comms","reduced mine capacity by 1/3")},				--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add mines"), downgrade = _("downgrade-comms","slowed tube load speed by 20%")},									--2
+				{tube = 3,	ord = 2, desc = _("upgrade-comms","speed up tube load speed by 25%"), downgrade = _("downgrade-comms","reduced mine capacity by 1/3")},				--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","increase mine capacity by 50%"), downgrade = _("downgrade-comms","slowed tube load speeds by 25%")},				--4
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","speed up tube load speed by 1/3"), downgrade = _("downgrade-comms","reduced mine capacity by 25%")},				--5
 				{tube = 4,	ord = 4, desc = _("upgrade-comms","increase mine capacity by 1/3"), downgrade = _("downgrade-comms","reduced tube load speed")},				--6
@@ -2410,12 +2410,12 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 0},		--1
 				{hom = 0,  nuk = 0, emp = 0, min = 2, hvl = 0},		--2
 				{hom = 0,  nuk = 0, emp = 0, min = 3, hvl = 0},		--3
-				{hom = 0,  nuk = 0, emp = 0, min = 4, hvl = 0},		--4		
-				{hom = 0,  nuk = 0, emp = 0, min = 5, hvl = 0},		--5		
-				{hom = 5,  nuk = 0, emp = 0, min = 5, hvl = 0},		--6		
-				{hom = 10, nuk = 0, emp = 0, min = 5, hvl = 0},		--7		
-				{hom = 15, nuk = 0, emp = 0, min = 5, hvl = 0},		--8		
-				{hom = 15, nuk = 0, emp = 0, min = 6, hvl = 0},		--9		
+				{hom = 0,  nuk = 0, emp = 0, min = 4, hvl = 0},		--4
+				{hom = 0,  nuk = 0, emp = 0, min = 5, hvl = 0},		--5
+				{hom = 5,  nuk = 0, emp = 0, min = 5, hvl = 0},		--6
+				{hom = 10, nuk = 0, emp = 0, min = 5, hvl = 0},		--7
+				{hom = 15, nuk = 0, emp = 0, min = 5, hvl = 0},		--8
+				{hom = 15, nuk = 0, emp = 0, min = 6, hvl = 0},		--9
 				["stock"] = {hom = 0, nuk = 0, emp = 0, min = 0, hvl = 0},
 			},
 			["shield"] = {
@@ -2479,7 +2479,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 70},
 				},
 				["start"] = 3,
-			},	
+			},
 			["hull"] = {
 				{max = 100, downgrade = _("downgrade-comms","reduced hull max by 1/6")},															--1
 				{max = 120, ["desc"] = _("upgrade-comms","increase hull max by 20%"), downgrade = _("downgrade-comms","reduced hull max by 20%")},	--2
@@ -2825,8 +2825,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","reduced tube load speed")},																		--1
-				{tube = 2,	ord = 1, desc = _("upgrade-comms","increase tube load speed by ~17%"), downgrade = _("downgrade-comms","removed homing missiles")},			--2  
-				{tube = 3,	ord = 2, desc = _("upgrade-comms","add homing missiles"), downgrade = _("downgrade-comms","reduced homing missile capacity by 1/3")},						--3  
+				{tube = 2,	ord = 1, desc = _("upgrade-comms","increase tube load speed by ~17%"), downgrade = _("downgrade-comms","removed homing missiles")},			--2
+				{tube = 3,	ord = 2, desc = _("upgrade-comms","add homing missiles"), downgrade = _("downgrade-comms","reduced homing missile capacity by 1/3")},						--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","increase homing missile capacity by 50%"), downgrade = _("downgrade-comms","reduced HVLI capacity by 3/8")},	--4
 				{tube = 3,	ord = 4, desc = _("upgrade-comms","increase HVLI capacity by 60%"), downgrade = _("downgrade-comms","removed mining tube")},			--5
 				{tube = 4,	ord = 5, desc = _("upgrade-comms","add mining tube"), downgrade = _("downgrade-comms","reduced forward tube load speed by 1/6")},							--6
@@ -2886,13 +2886,13 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 10},	--1
 				{hom = 4,  nuk = 0, emp = 0, min = 0, hvl = 10},	--2
 				{hom = 6,  nuk = 0, emp = 0, min = 0, hvl = 10},	--3
-				{hom = 6,  nuk = 0, emp = 0, min = 0, hvl = 16},	--4		
-				{hom = 6,  nuk = 0, emp = 0, min = 2, hvl = 16},	--5		
-				{hom = 6,  nuk = 0, emp = 2, min = 2, hvl = 16},	--6		
-				{hom = 6,  nuk = 2, emp = 4, min = 2, hvl = 16},	--7		
-				{hom = 8,  nuk = 2, emp = 4, min = 2, hvl = 16},	--8	
-				{hom = 10, nuk = 2, emp = 4, min = 2, hvl = 20},	--9		
-				{hom = 12, nuk = 3, emp = 5, min = 4, hvl = 20},	--10		
+				{hom = 6,  nuk = 0, emp = 0, min = 0, hvl = 16},	--4
+				{hom = 6,  nuk = 0, emp = 0, min = 2, hvl = 16},	--5
+				{hom = 6,  nuk = 0, emp = 2, min = 2, hvl = 16},	--6
+				{hom = 6,  nuk = 2, emp = 4, min = 2, hvl = 16},	--7
+				{hom = 8,  nuk = 2, emp = 4, min = 2, hvl = 16},	--8
+				{hom = 10, nuk = 2, emp = 4, min = 2, hvl = 20},	--9
+				{hom = 12, nuk = 3, emp = 5, min = 4, hvl = 20},	--10
 				["stock"] = {hom = 10, nuk = 2, emp = 3, min = 4, hvl = 20},
 			},
 			["shield"] = {
@@ -2956,7 +2956,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 100},
 				},
 				["start"] = 5
-			},	
+			},
 			["hull"] = {
 				{max = 100, downgrade = _("downgrade-comms","reduced hull max by 1/6")},															--1
 				{max = 120, ["desc"] = _("upgrade-comms","increase hull max by 20%"), downgrade = _("downgrade-comms","reduced hull max by 20%")},	--2
@@ -3299,8 +3299,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed homing")},																					--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add homing"), downgrade = _("downgrade-comms","reduced tube size")},											--2  
-				{tube = 3,	ord = 2, desc = _("upgrade-comms","increase tube size"), downgrade = _("downgrade-comms","reduced HVLI capacity by 1/3")},						--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add homing"), downgrade = _("downgrade-comms","reduced tube size")},											--2
+				{tube = 3,	ord = 2, desc = _("upgrade-comms","increase tube size"), downgrade = _("downgrade-comms","reduced HVLI capacity by 1/3")},						--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","increase HVLI capacity by 50%"), downgrade = _("downgrade-comms","cut homing capacity in half")},			--4
 				{tube = 3,	ord = 4, desc = _("upgrade-comms","double homing capacity"), downgrade = _("downgrade-comms","slowed tube load speed")},						--5
 				{tube = 4,	ord = 4, desc = _("upgrade-comms","speed up missile load time by 10%"), downgrade = _("downgrade-comms","removed nukes and EMPs")},				--6
@@ -3358,13 +3358,13 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 4},		--1
 				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 4},		--2
 				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 6},		--3
-				{hom = 4,  nuk = 0, emp = 0, min = 0, hvl = 6},		--4		
-				{hom = 4,  nuk = 1, emp = 2, min = 0, hvl = 6},		--5		
-				{hom = 4,  nuk = 1, emp = 2, min = 0, hvl = 8},		--6		
-				{hom = 4,  nuk = 1, emp = 2, min = 2, hvl = 8},		--7		
-				{hom = 6,  nuk = 1, emp = 2, min = 3, hvl = 10},	--8	
-				{hom = 6,  nuk = 2, emp = 4, min = 3, hvl = 10},	--9		
-				{hom = 8,  nuk = 2, emp = 4, min = 4, hvl = 10},	--10		
+				{hom = 4,  nuk = 0, emp = 0, min = 0, hvl = 6},		--4
+				{hom = 4,  nuk = 1, emp = 2, min = 0, hvl = 6},		--5
+				{hom = 4,  nuk = 1, emp = 2, min = 0, hvl = 8},		--6
+				{hom = 4,  nuk = 1, emp = 2, min = 2, hvl = 8},		--7
+				{hom = 6,  nuk = 1, emp = 2, min = 3, hvl = 10},	--8
+				{hom = 6,  nuk = 2, emp = 4, min = 3, hvl = 10},	--9
+				{hom = 8,  nuk = 2, emp = 4, min = 4, hvl = 10},	--10
 				["stock"] = {hom = 4, nuk = 1, emp = 2, min = 0, hvl = 8},
 			},
 			["shield"] = {
@@ -3428,7 +3428,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 70},
 				},
 				["start"] = 6,
-			},	
+			},
 			["hull"] = {
 				{max = 80, downgrade = _("downgrade-comms","reduced hull max by 20%")},												--1
 				{max = 100, ["desc"] = _("upgrade-comms","increase hull max by 25%"), downgrade = _("downgrade-comms","reduced hull max by 1/6")},		--2
@@ -3735,8 +3735,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed large tubes")},																							--1
-				{tube = 2,	ord = 1, desc = _("upgrade-comms","large tubes"), downgrade = _("downgrade-comms","increased load times by 20%")},													--2  
-				{tube = 3,	ord = 1, desc = _("upgrade-comms","decrease load time by 25%"), downgrade = _("downgrade-comms","removed mining tube")},									--3  
+				{tube = 2,	ord = 1, desc = _("upgrade-comms","large tubes"), downgrade = _("downgrade-comms","increased load times by 20%")},													--2
+				{tube = 3,	ord = 1, desc = _("upgrade-comms","decrease load time by 25%"), downgrade = _("downgrade-comms","removed mining tube")},									--3
 				{tube = 4,	ord = 2, desc = _("upgrade-comms","add mining tube"), downgrade = _("downgrade-comms","removed medium homing tube and homing missiles")},												--4
 				{tube = 5,	ord = 3, desc = _("upgrade-comms","add medium homing tubes and homing missiles"), downgrade = _("downgrade-comms","reduced homing missile capacity by 1/3")},					--5
 				{tube = 5,	ord = 4, desc = _("upgrade-comms","increase homing missile capacity by 50%"), downgrade = _("downgrade-comms","removed homing capability from large tubes")},						--6
@@ -3751,7 +3751,7 @@ function playerShipUpgradeDowngradeData()
 				{tube = 13,	ord = 9, desc = _("upgrade-comms","increase tube load speeds, increase nuke and HVLI capacity"), downgrade = _("downgrade-comms","reduced homing, EMP, mine and HVLI capacity")},	--15
 				{tube = 13,	ord = 10,desc = _("upgrade-comms","increase homing, EMP, mine and HVLI capacity")},				--16
 				["start"] = 5,
-			},		
+			},
 			["tube"] = {
 				{	--1
 					{idx = 0, dir = -90, siz = "M", spd = 20, hom = false, nuk = false, emp = false, min = false, hvl = true },
@@ -3863,13 +3863,13 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 10},	--1
 				{hom = 0,  nuk = 0, emp = 0, min = 3, hvl = 10},	--2
 				{hom = 4,  nuk = 0, emp = 0, min = 3, hvl = 10},	--3
-				{hom = 6,  nuk = 0, emp = 0, min = 3, hvl = 10},	--4		
-				{hom = 8,  nuk = 2, emp = 2, min = 3, hvl = 16},	--5		
-				{hom = 8,  nuk = 2, emp = 4, min = 4, hvl = 16},	--6		
-				{hom = 12, nuk = 2, emp = 4, min = 4, hvl = 16},	--7		
-				{hom = 12, nuk = 4, emp = 6, min = 6, hvl = 16},	--8	
-				{hom = 12, nuk = 6, emp = 6, min = 6, hvl = 20},	--9		
-				{hom = 16, nuk = 6, emp = 8, min = 9, hvl = 24},	--10		
+				{hom = 6,  nuk = 0, emp = 0, min = 3, hvl = 10},	--4
+				{hom = 8,  nuk = 2, emp = 2, min = 3, hvl = 16},	--5
+				{hom = 8,  nuk = 2, emp = 4, min = 4, hvl = 16},	--6
+				{hom = 12, nuk = 2, emp = 4, min = 4, hvl = 16},	--7
+				{hom = 12, nuk = 4, emp = 6, min = 6, hvl = 16},	--8
+				{hom = 12, nuk = 6, emp = 6, min = 6, hvl = 20},	--9
+				{hom = 16, nuk = 6, emp = 8, min = 9, hvl = 24},	--10
 				["stock"] = {hom = 12, nuk = 6, emp = 0, min = 8, hvl = 20},
 			},
 			["shield"] = {
@@ -3927,7 +3927,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 70},
 				},
 				["start"] = 3,
-			},	
+			},
 			["hull"] = {
 				{max = 80, downgrade = _("downgrade-comms","reduced hull max by 20%")},																--1
 				{max = 100, ["desc"] = _("upgrade-comms","increase hull max by 25%"), downgrade = _("downgrade-comms","reduced hull max by 1/6")},	--2
@@ -4022,7 +4022,7 @@ function playerShipUpgradeDowngradeData()
 					{max_front = 60, turn = 10, accel_front = 8, max_back = 60, accel_back = 8, boost = 200, strafe = 150},
 				},
 				["start"] = 3,
-			},		
+			},
 			["ftl"] = {
 				{	--1
 					jump_long = 0, jump_short = 0, warp = 0,
@@ -4204,8 +4204,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed homing")},																				--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add homing"), downgrade = _("downgrade-comms","slowed tube load times")},										--2  
-				{tube = 3,	ord = 2, desc = _("upgrade-comms","speed up tube load time by 25%"), downgrade = _("downgrade-comms","reduced missile capacity: homing: 1/3, HVLI: 20%")},					--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add homing"), downgrade = _("downgrade-comms","slowed tube load times")},										--2
+				{tube = 3,	ord = 2, desc = _("upgrade-comms","speed up tube load time by 25%"), downgrade = _("downgrade-comms","reduced missile capacity: homing: 1/3, HVLI: 20%")},					--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","increase missile capacity: homing: 50%, HVLI: 25%"), downgrade = _("downgrade-comms","removed nuke")},--4
 				{tube = 4,	ord = 4, desc = _("upgrade-comms","add nuke"), downgrade = _("downgrade-comms","reduced homing capacity")},											--5
 				{tube = 4,	ord = 5, desc = _("upgrade-comms","increase homing capacity by 2/3"), downgrade = _("downgrade-comms","removed medium sized homing and mine tube")},					--6
@@ -4269,13 +4269,13 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 1, hvl = 4},		--1
 				{hom = 2,  nuk = 0, emp = 0, min = 1, hvl = 4},		--2
 				{hom = 3,  nuk = 0, emp = 0, min = 1, hvl = 5},		--3
-				{hom = 3,  nuk = 1, emp = 0, min = 1, hvl = 5},		--4		
-				{hom = 5,  nuk = 1, emp = 0, min = 1, hvl = 5},		--5		
-				{hom = 5,  nuk = 1, emp = 0, min = 1, hvl = 7},		--6		
-				{hom = 5,  nuk = 2, emp = 0, min = 2, hvl = 7},		--7		
-				{hom = 6,  nuk = 2, emp = 0, min = 2, hvl = 7},		--8	
-				{hom = 6,  nuk = 2, emp = 4, min = 2, hvl = 7},		--9		
-				{hom = 7,  nuk = 2, emp = 4, min = 4, hvl = 9},		--10		
+				{hom = 3,  nuk = 1, emp = 0, min = 1, hvl = 5},		--4
+				{hom = 5,  nuk = 1, emp = 0, min = 1, hvl = 5},		--5
+				{hom = 5,  nuk = 1, emp = 0, min = 1, hvl = 7},		--6
+				{hom = 5,  nuk = 2, emp = 0, min = 2, hvl = 7},		--7
+				{hom = 6,  nuk = 2, emp = 0, min = 2, hvl = 7},		--8
+				{hom = 6,  nuk = 2, emp = 4, min = 2, hvl = 7},		--9
+				{hom = 7,  nuk = 2, emp = 4, min = 4, hvl = 9},		--10
 				["stock"] = {hom = 4, nuk = 1, emp = 2, min = 0, hvl = 8},
 			},
 			["shield"] = {
@@ -4339,7 +4339,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 70},
 				},
 				["start"] = 3,
-			},	
+			},
 			["hull"] = {
 				{max = 80, downgrade = _("downgrade-comms","reduced hull max by 20%")},																--1
 				{max = 100, ["desc"] = _("upgrade-comms","increase hull max by 25%"), downgrade = _("downgrade-comms","reduced hull max by 1/6")},	--2
@@ -4638,8 +4638,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","increased tube load time")},																			--1
-				{tube = 2,	ord = 1, desc = _("upgrade-comms","decrease tube load time by 20%"), downgrade = _("downgrade-comms","reduced capacity: homing:50%, HVLI: 1/3")},				--2  
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","increase capacity: homing: 100%, HVLI: 50%"), downgrade = _("downgrade-comms","reduced tube size to small")},	--3  
+				{tube = 2,	ord = 1, desc = _("upgrade-comms","decrease tube load time by 20%"), downgrade = _("downgrade-comms","reduced capacity: homing:50%, HVLI: 1/3")},				--2
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","increase capacity: homing: 100%, HVLI: 50%"), downgrade = _("downgrade-comms","reduced tube size to small")},	--3
 				{tube = 3,	ord = 2, desc = _("upgrade-comms","increase tube size to medium"), downgrade = _("downgrade-comms","reduced capacity: homing: 1/3, HVLI: 25%")},					--4
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","increase capacity: homing: 50%, HVLI: 1/3"), downgrade = _("downgrade-comms","slowed tube load time")},	--5
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","speed up missile load time by 25%"), downgrade = _("downgrade-comms","reduced capacity: homing: 25%, HVLI: 20%")},			--6
@@ -4697,11 +4697,11 @@ function playerShipUpgradeDowngradeData()
 				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 4},		--1
 				{hom = 4,  nuk = 0, emp = 0, min = 0, hvl = 6},		--2
 				{hom = 6,  nuk = 0, emp = 0, min = 0, hvl = 8},		--3
-				{hom = 8,  nuk = 0, emp = 0, min = 0, hvl = 10},	--4		
-				{hom = 8,  nuk = 0, emp = 0, min = 1, hvl = 10},	--5		
-				{hom = 8,  nuk = 0, emp = 0, min = 2, hvl = 10},	--6		
-				{hom = 8,  nuk = 0, emp = 0, min = 3, hvl = 10},	--7		
-				{hom = 10, nuk = 0, emp = 0, min = 4, hvl = 12},	--8	
+				{hom = 8,  nuk = 0, emp = 0, min = 0, hvl = 10},	--4
+				{hom = 8,  nuk = 0, emp = 0, min = 1, hvl = 10},	--5
+				{hom = 8,  nuk = 0, emp = 0, min = 2, hvl = 10},	--6
+				{hom = 8,  nuk = 0, emp = 0, min = 3, hvl = 10},	--7
+				{hom = 10, nuk = 0, emp = 0, min = 4, hvl = 12},	--8
 				["stock"] = {hom = 4, nuk = 0, emp = 0, min = 0, hvl = 6},
 			},
 			["shield"] = {
@@ -4759,7 +4759,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 80},
 				},
 				["start"] = 5,
-			},	
+			},
 			["hull"] = {
 				{max = 80, downgrade = _("downgrade-comms","reduced hull max by 20%")},																--1
 				{max = 100, ["desc"] = _("upgrade-comms","increase hull max by 25%"), downgrade = _("downgrade-comms","reduced hull max by 1/6")},	--2
@@ -5041,8 +5041,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","cut HVLI capacity in half")},																				--1
-				{tube = 1,	ord = 2, desc = _("upgrade-comms","double HVLI capacity"), downgrade = _("downgrade-comms","removed mining tube")},								--2  
-				{tube = 2,	ord = 3, desc = _("upgrade-comms","add mining tube"), downgrade = _("downgrade-comms","cut mine capacity by 2/3")},									--3  
+				{tube = 1,	ord = 2, desc = _("upgrade-comms","double HVLI capacity"), downgrade = _("downgrade-comms","removed mining tube")},								--2
+				{tube = 2,	ord = 3, desc = _("upgrade-comms","add mining tube"), downgrade = _("downgrade-comms","cut mine capacity by 2/3")},									--3
 				{tube = 2,	ord = 4, desc = _("upgrade-comms","triple mine capacity"), downgrade = _("downgrade-comms","removed homing missiles")},								--4
 				{tube = 3,	ord = 5, desc = _("upgrade-comms","add homing missiles"), downgrade = _("downgrade-comms","reduced tube size to small")},								--5
 				{tube = 4,	ord = 5, desc = _("upgrade-comms","increase tube size to medium"), downgrade = _("downgrade-comms","slowed tube load speed")},						--6
@@ -5100,13 +5100,13 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 4},		--1
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 8},		--2
 				{hom = 0,  nuk = 0, emp = 0, min = 1, hvl = 8},		--3
-				{hom = 0,  nuk = 0, emp = 0, min = 3, hvl = 8},		--4		
-				{hom = 4,  nuk = 0, emp = 0, min = 3, hvl = 8},		--5		
-				{hom = 6,  nuk = 0, emp = 0, min = 3, hvl = 8},		--6		
-				{hom = 6,  nuk = 1, emp = 2, min = 3, hvl = 8},		--7		
-				{hom = 6,  nuk = 1, emp = 2, min = 3, hvl = 10},	--8	
-				{hom = 8,  nuk = 1, emp = 2, min = 3, hvl = 10},	--9		
-				{hom = 8,  nuk = 2, emp = 4, min = 4, hvl = 10},	--10		
+				{hom = 0,  nuk = 0, emp = 0, min = 3, hvl = 8},		--4
+				{hom = 4,  nuk = 0, emp = 0, min = 3, hvl = 8},		--5
+				{hom = 6,  nuk = 0, emp = 0, min = 3, hvl = 8},		--6
+				{hom = 6,  nuk = 1, emp = 2, min = 3, hvl = 8},		--7
+				{hom = 6,  nuk = 1, emp = 2, min = 3, hvl = 10},	--8
+				{hom = 8,  nuk = 1, emp = 2, min = 3, hvl = 10},	--9
+				{hom = 8,  nuk = 2, emp = 4, min = 4, hvl = 10},	--10
 				["stock"] = {hom = 4, nuk = 1, emp = 2, min = 0, hvl = 8},
 			},
 			["shield"] = {
@@ -5164,7 +5164,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 80},
 				},
 				["start"] = 4,
-			},	
+			},
 			["hull"] = {
 				{max = 100, downgrade = _("downgrade-comms","reduced hull max by 1/6"),},															--1
 				{max = 120, ["desc"] = _("upgrade-comms","increase hull max by 20%"), downgrade = _("downgrade-comms","reduced hull max by 20%")},	--2
@@ -5468,8 +5468,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed mining tube")},																							--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","mining tube"), downgrade = _("downgrade-comms","reduced homing and HVLI capacity by 20%")},													--2  
-				{tube = 2,	ord = 3, desc = _("upgrade-comms","increase homing and HVLI capacity by 25%"), downgrade = _("downgrade-comms","removed broadside tubes")},						--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","mining tube"), downgrade = _("downgrade-comms","reduced homing and HVLI capacity by 20%")},													--2
+				{tube = 2,	ord = 3, desc = _("upgrade-comms","increase homing and HVLI capacity by 25%"), downgrade = _("downgrade-comms","removed broadside tubes")},						--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","add broadside tubes"), downgrade = _("downgrade-comms","switched to small tubes from medium tubes")},											--4
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","switch to medium sized tubes"), downgrade = _("downgrade-comms","removed nukes and EMPs from front tubes")},									--5
 				{tube = 5,	ord = 4, desc = _("upgrade-comms","add nukes and EMPs to front tubes"), downgrade = _("downgrade-comms","reduced homing capacity")},							--6
@@ -5486,7 +5486,7 @@ function playerShipUpgradeDowngradeData()
 				{tube = 10,	ord = 10,desc = _("upgrade-comms","increase load speed of medium tubes ~16%"), downgrade = _("downgrade-comms","reduced capacity")},						--17
 				{tube = 10,	ord = 11,desc = _("upgrade-comms","increase capacity by ~14% on average")},							--18
 				["start"] = 5,
-			},	
+			},
 			["tube"] = {
 				{	--1
 					{idx = 0, dir =   0, siz = "S", spd = 10, hom = true,  nuk = false, emp = false, min = false, hvl = true },
@@ -5646,7 +5646,7 @@ function playerShipUpgradeDowngradeData()
 					{idx = 1, max = 70},
 				},
 				["start"] = 4,
-			},	
+			},
 			["hull"] = {
 				{max = 100, downgrade = _("downgrade-comms","reduced hull max by 1/6")},															--1
 				{max = 120, ["desc"] = _("upgrade-comms","increase hull max by 20%"), downgrade = _("downgrade-comms","reduced hull max by 20%")},	--2
@@ -5943,8 +5943,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","increased tube load speed")},																						--1
-				{tube = 2,	ord = 1, desc = _("upgrade-comms","reduce tube load speed by 1/3"), downgrade = _("downgrade-comms","cut HVLI capacity in half")},							--2  
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","double HVLI capacity"), downgrade = _("downgrade-comms","made tube small sized")},										--3  
+				{tube = 2,	ord = 1, desc = _("upgrade-comms","reduce tube load speed by 1/3"), downgrade = _("downgrade-comms","cut HVLI capacity in half")},							--2
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","double HVLI capacity"), downgrade = _("downgrade-comms","made tube small sized")},										--3
 				{tube = 3,	ord = 2, desc = _("upgrade-comms","make tube medium sized"), downgrade = _("downgrade-comms","removed a small tube")},									--4
 				{tube = 4,	ord = 2, desc = _("upgrade-comms","add a small tube"), downgrade = _("downgrade-comms","removed homing missile capability from small tube")},											--5
 				{tube = 5,	ord = 3, desc = _("upgrade-comms","add homing capability to small tube"), downgrade = _("downgrade-comms","reduced HVLI capacity by 20%")},						--6
@@ -5991,10 +5991,10 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 2},		--1
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 4},		--2
 				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 4},		--3
-				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 5},		--4		
-				{hom = 3,  nuk = 0, emp = 0, min = 0, hvl = 5},		--5		
-				{hom = 3,  nuk = 0, emp = 0, min = 1, hvl = 5},		--6		
-				{hom = 4,  nuk = 0, emp = 0, min = 2, hvl = 6},		--7		
+				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 5},		--4
+				{hom = 3,  nuk = 0, emp = 0, min = 0, hvl = 5},		--5
+				{hom = 3,  nuk = 0, emp = 0, min = 1, hvl = 5},		--6
+				{hom = 4,  nuk = 0, emp = 0, min = 2, hvl = 6},		--7
 				["stock"] = {hom = 0, nuk = 0, emp = 0, min = 0, hvl = 4},
 			},
 			["shield"] = {
@@ -6309,8 +6309,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","reduced mine capacity by 25%")},																					--1
-				{tube = 1,	ord = 2, desc = _("upgrade-comms","increase mine capacity by 1/3"), downgrade = _("downgrade-comms","removed mining tube")},						--2  
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add another mining tube"), downgrade = _("downgrade-comms","increased load time")},								--3  
+				{tube = 1,	ord = 2, desc = _("upgrade-comms","increase mine capacity by 1/3"), downgrade = _("downgrade-comms","removed mining tube")},						--2
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add another mining tube"), downgrade = _("downgrade-comms","increased load time")},								--3
 				{tube = 3,	ord = 2, desc = _("upgrade-comms","reduce tube load time by 25%"), downgrade = _("downgrade-comms","reduced mine capacity by 1/3")},							--4
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","increase mine capacity by 50%"), downgrade = _("downgrade-comms","increased load time")},						--5
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","reduce load speed by 1/3"), downgrade = _("downgrade-comms","removed a mining tube")},								--6
@@ -6380,11 +6380,11 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 3, hvl = 0},		--1
 				{hom = 0,  nuk = 0, emp = 0, min = 4, hvl = 0},		--2
 				{hom = 0,  nuk = 0, emp = 0, min = 6, hvl = 0},		--3
-				{hom = 0,  nuk = 0, emp = 0, min = 6, hvl = 4},		--4		
-				{hom = 2,  nuk = 0, emp = 0, min = 6, hvl = 4},		--5		
-				{hom = 2,  nuk = 0, emp = 0, min = 9, hvl = 4},		--6		
-				{hom = 2,  nuk = 0, emp = 0, min = 9, hvl = 5},		--7		
-				{hom = 4,  nuk = 0, emp = 0, min = 12,hvl = 6},		--8	
+				{hom = 0,  nuk = 0, emp = 0, min = 6, hvl = 4},		--4
+				{hom = 2,  nuk = 0, emp = 0, min = 6, hvl = 4},		--5
+				{hom = 2,  nuk = 0, emp = 0, min = 9, hvl = 4},		--6
+				{hom = 2,  nuk = 0, emp = 0, min = 9, hvl = 5},		--7
+				{hom = 4,  nuk = 0, emp = 0, min = 12,hvl = 6},		--8
 				["stock"] = {hom = 0, nuk = 0, emp = 0, min = 12, hvl = 0},
 			},
 			["shield"] = {
@@ -6711,8 +6711,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed small HVLI broadsides")},																		--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add small HVLI broadsides"), downgrade = _("downgrade-comms","slowed tube load time")},				--2  
-				{tube = 3,	ord = 2, desc = _("upgrade-comms","reduce tube load time by 10%"), downgrade = _("downgrade-comms","cut HVLI capacity in half")},				--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add small HVLI broadsides"), downgrade = _("downgrade-comms","slowed tube load time")},				--2
+				{tube = 3,	ord = 2, desc = _("upgrade-comms","reduce tube load time by 10%"), downgrade = _("downgrade-comms","cut HVLI capacity in half")},				--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","double HVLI capacity"), downgrade = _("downgrade-comms","slowed tube load time")},						--4
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","reduce tube load time by 1/3"), downgrade = _("downgrade-comms","removed homing capability from tubes")},				--5
 				{tube = 5,	ord = 4, desc = _("upgrade-comms","add homing capability to tubes"), downgrade = _("downgrade-comms","reduced capacity: homing: 50%, HVLI: 1/3")},			--6
@@ -7190,8 +7190,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed medium homing tubes")},																	--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add medium homing tubes"), downgrade = _("downgrade-comms","cut capacity in half")},				--2  
-				{tube = 2,	ord = 3, desc = _("upgrade-comms","double capacity"), downgrade = _("downgrade-comms","slowed tube load time")},						--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add medium homing tubes"), downgrade = _("downgrade-comms","cut capacity in half")},				--2
+				{tube = 2,	ord = 3, desc = _("upgrade-comms","double capacity"), downgrade = _("downgrade-comms","slowed tube load time")},						--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","reduce tube load time by 10%"), downgrade = _("downgrade-comms","reduced capacity by 1/3")},			--4
 				{tube = 3,	ord = 4, desc = _("upgrade-comms","increase capacity by 50%"), downgrade = _("downgrade-comms","removed some tubes")},				--5
 				{tube = 4,	ord = 4, desc = _("upgrade-comms","add more tubes"), downgrade = _("downgrade-comms","slowed tube load times")},						--6
@@ -7650,8 +7650,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","removed rear HVLI tube")},																					--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add rear HVLI tube"), downgrade = _("downgrade-comms","cut HVLI capacity in half")},									--2  
-				{tube = 2,	ord = 3, desc = _("upgrade-comms","double HVLI capacity"), downgrade = _("downgrade-comms","slowed tube load time")},									--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add rear HVLI tube"), downgrade = _("downgrade-comms","cut HVLI capacity in half")},									--2
+				{tube = 2,	ord = 3, desc = _("upgrade-comms","double HVLI capacity"), downgrade = _("downgrade-comms","slowed tube load time")},									--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","reduce tube load time by 25%"), downgrade = _("downgrade-comms","switched medium tube to small")},							--4
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","make small tube medium sized"), downgrade = _("downgrade-comms","slowed tube load time")},							--5
 				{tube = 5,	ord = 3, desc = _("upgrade-comms","reduce tube load time by 20%"), downgrade = _("downgrade-comms","removed small tube")},							--6
@@ -7706,10 +7706,10 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 1},		--2
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 2},		--3
 				{hom = 1,  nuk = 0, emp = 0, min = 0, hvl = 2},		--4
-				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 4},		--5		
-				{hom = 3,  nuk = 0, emp = 0, min = 0, hvl = 4},		--6		
-				{hom = 3,  nuk = 0, emp = 0, min = 1, hvl = 4},		--7		
-				{hom = 4,  nuk = 0, emp = 0, min = 2, hvl = 6},		--8		
+				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 4},		--5
+				{hom = 3,  nuk = 0, emp = 0, min = 0, hvl = 4},		--6
+				{hom = 3,  nuk = 0, emp = 0, min = 1, hvl = 4},		--7
+				{hom = 4,  nuk = 0, emp = 0, min = 2, hvl = 6},		--8
 				["stock"] = {hom = 0, nuk = 0, emp = 0, min = 0, hvl = 0},
 			},
 			["shield"] = {
@@ -7972,8 +7972,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1, downgrade = _("downgrade-comms","reduced HVLI capacity by 20%")},														--1
-				{tube = 1,	ord = 2, desc = _("upgrade-comms","increase HVLI capacity by 25%"), downgrade = _("downgrade-comms","removed homing capability")},				--2  
-				{tube = 2,	ord = 3, desc = _("upgrade-comms","add homing capability"), downgrade = _("downgrade-comms","reduced HVLI capacity by 1/6")},						--3  
+				{tube = 1,	ord = 2, desc = _("upgrade-comms","increase HVLI capacity by 25%"), downgrade = _("downgrade-comms","removed homing capability")},				--2
+				{tube = 2,	ord = 3, desc = _("upgrade-comms","add homing capability"), downgrade = _("downgrade-comms","reduced HVLI capacity by 1/6")},						--3
 				{tube = 2,	ord = 4, desc = _("upgrade-comms","increase HVLI capacity by 20%"), downgrade = _("downgrade-comms","removed two small HVLI tubes, reduced HVLI capacity by 25%")},				--4
 				{tube = 3,	ord = 5, desc = _("upgrade-comms","add two small HVLI tubes, increase HVLI capacity by 1/3"), downgrade = _("downgrade-comms","slowed tube load speed")},	--5
 				{tube = 4,	ord = 5, desc = _("upgrade-comms","reduce tube load speed by ~17%"), downgrade = _("downgrade-comms","reduced HVLI capacity by 20%")},				--6
@@ -8054,13 +8054,13 @@ function playerShipUpgradeDowngradeData()
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 4},		--1
 				{hom = 0,  nuk = 0, emp = 0, min = 0, hvl = 5},		--2
 				{hom = 1,  nuk = 0, emp = 0, min = 0, hvl = 5},		--3
-				{hom = 1,  nuk = 0, emp = 0, min = 0, hvl = 6},		--4		
-				{hom = 1,  nuk = 0, emp = 0, min = 0, hvl = 8},		--5		
-				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 10},	--6		
-				{hom = 3,  nuk = 0, emp = 0, min = 0, hvl = 12},	--7		
-				{hom = 3,  nuk = 0, emp = 0, min = 0, hvl = 14},	--8	
+				{hom = 1,  nuk = 0, emp = 0, min = 0, hvl = 6},		--4
+				{hom = 1,  nuk = 0, emp = 0, min = 0, hvl = 8},		--5
+				{hom = 2,  nuk = 0, emp = 0, min = 0, hvl = 10},	--6
+				{hom = 3,  nuk = 0, emp = 0, min = 0, hvl = 12},	--7
+				{hom = 3,  nuk = 0, emp = 0, min = 0, hvl = 14},	--8
 				{hom = 3,  nuk = 0, emp = 0, min = 0, hvl = 16},	--9
-				{hom = 4,  nuk = 0, emp = 0, min = 0, hvl = 20},	--10	
+				{hom = 4,  nuk = 0, emp = 0, min = 0, hvl = 20},	--10
 				["stock"] = {hom = 1, nuk = 0, emp = 0, min = 0, hvl = 4},
 			},
 			["shield"] = {
@@ -8354,8 +8354,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1},																		--1
-				{tube = 2,	ord = 1, desc = _("upgrade-comms","make broadside tubes medium sized")},		--2  
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","increase homing capacity by 50%")},			--3  
+				{tube = 2,	ord = 1, desc = _("upgrade-comms","make broadside tubes medium sized")},		--2
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","increase homing capacity by 50%")},			--3
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","add a mine tube and mine")},					--4
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","decrease broadside load times by ~17%")},	--5
 				{tube = 4,	ord = 4, desc = _("upgrade-comms","double missile capacity")},					--6
@@ -8671,8 +8671,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1},														--1
-				{tube = 1,	ord = 2, desc = _("upgrade-comms","increase homing capacity by 1/3")},				--2  
-				{tube = 2,	ord = 3, desc = _("upgrade-comms","add broadsides for nukes, EMPs and HVLIs")},	--3  
+				{tube = 1,	ord = 2, desc = _("upgrade-comms","increase homing capacity by 1/3")},				--2
+				{tube = 2,	ord = 3, desc = _("upgrade-comms","add broadsides for nukes, EMPs and HVLIs")},	--3
 				{tube = 2,	ord = 4, desc = _("upgrade-comms","increase EMP capacity by 25%")},				--4
 				{tube = 3,	ord = 4, desc = _("upgrade-comms","make broadside tubes medium sized")},			--5
 				{tube = 4,	ord = 4, desc = _("upgrade-comms","reduce front tubes' load time by 20%")},		--6
@@ -9033,8 +9033,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1},														--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add mining tube and mines")},					--2  
-				{tube = 3,	ord = 2, desc = _("upgrade-comms","increase tube load speed by ~23%")},			--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add mining tube and mines")},					--2
+				{tube = 3,	ord = 2, desc = _("upgrade-comms","increase tube load speed by ~23%")},			--3
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","add small nuke tubes and nukes")},				--4
 				{tube = 5,	ord = 3, desc = _("upgrade-comms","make homing tube medium sized")},				--5
 				{tube = 6,	ord = 4, desc = _("upgrade-comms","add small EMP tubes and EMPs")},				--6
@@ -9339,8 +9339,8 @@ function playerShipUpgradeDowngradeData()
 			},
 			["missiles"] = {
 				{tube = 1,	ord = 1},														--1
-				{tube = 2,	ord = 2, desc = _("upgrade-comms","add forward HVLI tube and HVLIs")},				--2  
-				{tube = 3,	ord = 3, desc = _("upgrade-comms","add heavy broadsides and missiles")},			--3  
+				{tube = 2,	ord = 2, desc = _("upgrade-comms","add forward HVLI tube and HVLIs")},				--2
+				{tube = 3,	ord = 3, desc = _("upgrade-comms","add heavy broadsides and missiles")},			--3
 				{tube = 4,	ord = 4, desc = _("upgrade-comms","add mining tube and mines")},					--4
 				{tube = 5,	ord = 4, desc = _("upgrade-comms","add another forward tube and mining tube")},	--5
 				{tube = 5,	ord = 5, desc = _("upgrade-comms","double capacity: nuke, EMP, mine")},			--6
