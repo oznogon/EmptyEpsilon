@@ -39,7 +39,7 @@ local enemyList
 local friendlyList
 local stationList
 local playerList
-local addWavesToGMPosition      -- If set to true, add wave will require GM to click on the map to position, where the wave should be spawned.
+local addWavesToGMPosition -- If set to true, add wave will require GM to click on the map to position, where the wave should be spawned.
 
 local gametimeleft = nil -- Maximum game time in seconds.
 local timewarning = nil -- Used for checking when to give a warning, and to update it so the warning happens once.
@@ -110,7 +110,7 @@ local ship_names = {
     "Starcruiser Kirk",
     "Aluminum Falcon",
     "SS Essess",
-    "Jenny"
+    "Jenny",
 }
 
 --- Wrapper to adding an enemy wave
@@ -125,9 +125,14 @@ local ship_names = {
 -- @tparam number d The spawned wave's distance from the players' spawn point (ignored when on GM positioning).
 function addWave(list, kind, a, d)
     if addWavesToGMPosition then
-        onGMClick(function(x,y)
+        onGMClick(function(x, y)
             onGMClick(nil)
-            addWaveInner(list, kind, angleRotation(0, 0, x, y), distance(0, 0, x, y))
+            addWaveInner(
+                list,
+                kind,
+                angleRotation(0, 0, x, y),
+                distance(0, 0, x, y)
+            )
         end)
     else
         addWaveInner(list, kind, a, d)
@@ -145,38 +150,284 @@ end
 -- @tparam number d The spawned wave's distance from the players' spawn point.
 function addWaveInner(list, kind, a, d)
     if kind < 1.0 then
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Stalker Q7"):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Stalker Q7")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a,
+                d
+            )
+        )
     elseif kind < 2.0 then
-        local leader = setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-1, 1), d + random(-100, 100))
+        local leader = setCirclePos(
+            CpuShip()
+                :setTemplate("Phobos T3")
+                :setRotation(a + 180)
+                :orderRoaming(),
+            0,
+            0,
+            a + random(-1, 1),
+            d + random(-100, 100)
+        )
         table.insert(list, leader)
-        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("MT52 Hornet")
+                    :setRotation(a + 180)
+                    :orderFlyFormation(leader, -400, 0),
+                0,
+                0,
+                a + random(-1, 1),
+                d + random(-100, 100)
+            )
+        )
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("MT52 Hornet")
+                    :setRotation(a + 180)
+                    :orderFlyFormation(leader, 400, 0),
+                0,
+                0,
+                a + random(-1, 1),
+                d + random(-100, 100)
+            )
+        )
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("MT52 Hornet")
+                    :setRotation(a + 180)
+                    :orderFlyFormation(leader, -400, 400),
+                0,
+                0,
+                a + random(-1, 1),
+                d + random(-100, 100)
+            )
+        )
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("MT52 Hornet")
+                    :setRotation(a + 180)
+                    :orderFlyFormation(leader, 400, 400),
+                0,
+                0,
+                a + random(-1, 1),
+                d + random(-100, 100)
+            )
+        )
     elseif kind < 3.0 then
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Adder MK5")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Adder MK5")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
     elseif kind < 4.0 then
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Phobos T3")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Phobos T3")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Phobos T3")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
     elseif kind < 5.0 then
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Atlantis X23"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Atlantis X23")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
     elseif kind < 6.0 then
-        local leader = setCirclePos(CpuShip():setTemplate("Piranha F12"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
+        local leader = setCirclePos(
+            CpuShip()
+                :setTemplate("Piranha F12")
+                :setRotation(a + 180)
+                :orderRoaming(),
+            0,
+            0,
+            a + random(-5, 5),
+            d + random(-100, 100)
+        )
         table.insert(list, leader)
-        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("MT52 Hornet")
+                    :setRotation(a + 180)
+                    :orderFlyFormation(leader, -1500, 400),
+                0,
+                0,
+                a + random(-1, 1),
+                d + random(-100, 100)
+            )
+        )
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("MT52 Hornet")
+                    :setRotation(a + 180)
+                    :orderFlyFormation(leader, 1500, 400),
+                0,
+                0,
+                a + random(-1, 1),
+                d + random(-100, 100)
+            )
+        )
     elseif kind < 7.0 then
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Phobos T3")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Phobos T3")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
     elseif kind < 8.0 then
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Nirvana R5"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Nirvana R5")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
     elseif kind < 9.0 then
-        table.insert(list, setCirclePos(CpuShip():setTemplate("MU52 Hornet"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("MU52 Hornet")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
     else
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Stalker R7"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(list, setCirclePos(CpuShip():setTemplate("Stalker R7"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Stalker R7")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
+        table.insert(
+            list,
+            setCirclePos(
+                CpuShip()
+                    :setTemplate("Stalker R7")
+                    :setRotation(a + 180)
+                    :orderRoaming(),
+                0,
+                0,
+                a + random(-5, 5),
+                d + random(-100, 100)
+            )
+        )
     end
 end
 
@@ -202,12 +453,12 @@ end
 --- Initializes main GM Menu
 function gmButtons()
     clearGMFunctions()
-    addGMFunction(_("buttonGM", "+Named Waves"),namedWaves)
-    addGMFunction(_("buttonGM", "Random wave"),function()
+    addGMFunction(_("buttonGM", "+Named Waves"), namedWaves)
+    addGMFunction(_("buttonGM", "Random wave"), function()
         addWave(
             enemyList,
-            random(0,10),
-            randomWaveAngle(math.random(20),math.random(20)),
+            random(0, 10),
+            randomWaveAngle(math.random(20), math.random(20)),
             randomWaveDistance(math.random(20))
         )
     end)
@@ -215,38 +466,71 @@ function gmButtons()
     -- Let the GM spawn random reinforcements. Their distance from the
     -- players' spawn point is about half that of enemy waves.
     addGMFunction(_("buttonGM", "Random friendly"), function()
-        local friendlyShip = {"Phobos T3", "MU52 Hornet", "Piranha F12"}
+        local friendlyShip = { "Phobos T3", "MU52 Hornet", "Piranha F12" }
         local friendlyShipIndex = math.random(#friendlyShip)
 
         if addWavesToGMPosition then
-            onGMClick(function(x,y)
+            onGMClick(function(x, y)
                 onGMClick(nil)
                 local a = angleRotation(0, 0, x, y)
                 local d = distance(0, 0, x, y)
-                table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+                table.insert(
+                    friendlyList,
+                    setCirclePos(
+                        CpuShip()
+                            :setTemplate(friendlyShip[friendlyShipIndex])
+                            :setRotation(a)
+                            :setFaction("Human Navy")
+                            :orderRoaming()
+                            :setScanned(true),
+                        0,
+                        0,
+                        a + random(-5, 5),
+                        d + random(-100, 100)
+                    )
+                )
             end)
         else
             local a = randomWaveAngle(math.random(20), math.random(20))
             local d = random(15000, 20000 + math.random(20) * 1500)
-            table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+            table.insert(
+                friendlyList,
+                setCirclePos(
+                    CpuShip()
+                        :setTemplate(friendlyShip[friendlyShipIndex])
+                        :setRotation(a)
+                        :setFaction("Human Navy")
+                        :orderRoaming()
+                        :setScanned(true),
+                    0,
+                    0,
+                    a + random(-5, 5),
+                    d + random(-100, 100)
+                )
+            )
         end
     end)
 
     addGMPositionToggle()
 
     -- End scenario with Human Navy (players) victorious.
-    addGMFunction(_("buttonGM", "Win"),gmVictoryYesNo)
+    addGMFunction(_("buttonGM", "Win"), gmVictoryYesNo)
 end
 
 --- Shows Yes/No question dialogue GM submenu with question if Human Navy should win.
 function gmVictoryYesNo()
     clearGMFunctions()
-    addGMFunction(_("buttonGM", "Victory?"), function() string.format("") end)
+    addGMFunction(_("buttonGM", "Victory?"), function()
+        string.format("")
+    end)
     addGMFunction(_("buttonGM", "Yes"), function()
         victory("Human Navy")
         clearGMFunctions()
-        addGMMessage(_("msgGM", [[Players have won.
-Scenario ended.]]))
+        addGMMessage(_(
+            "msgGM",
+            [[Players have won.
+Scenario ended.]]
+        ))
     end)
     addGMFunction(_("buttonGM", "No"), gmButtons)
 end
@@ -255,14 +539,14 @@ end
 function addGMPositionToggle()
     local name = _("buttonGM", "Position: ")
 
-    if(addWavesToGMPosition) then
-        name = name.._("buttonGM", "GM")
+    if addWavesToGMPosition then
+        name = name .. _("buttonGM", "GM")
     else
-        name = name.._("buttonGM", "Random")
+        name = name .. _("buttonGM", "Random")
     end
 
     addGMFunction(name, function()
-        string.format("")   -- Provides global context for SeriousProton
+        string.format("") -- Provides global context for SeriousProton
         addWavesToGMPosition = not addWavesToGMPosition
         gmButtons()
     end)
@@ -280,11 +564,16 @@ function namedWaves()
         [9] = _("buttonGM", "Adv. striker"),
     }
     clearGMFunctions()
-    addGMFunction(_("buttonGM", "-From Named Waves"),gmButtons)
+    addGMFunction(_("buttonGM", "-From Named Waves"), gmButtons)
     for index, name in pairs(wave_names) do
-        addGMFunction(name,function()
+        addGMFunction(name, function()
             string.format("")
-            addWave(enemyList,index,randomWaveAngle(math.random(20), math.random(20)), randomWaveDistance(math.random(5)))
+            addWave(
+                enemyList,
+                index,
+                randomWaveAngle(math.random(20), math.random(20)),
+                randomWaveDistance(math.random(5))
+            )
         end)
     end
 end
@@ -292,7 +581,9 @@ end
 --- Initialize scenario.
 function init()
     -- Spawn a player Atlantis.
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(getScenarioSetting("PlayerShip"))
+    player = PlayerSpaceship()
+        :setFaction("Human Navy")
+        :setTemplate(getScenarioSetting("PlayerShip"))
     player:setCallSign(ship_names[irandom(1, #ship_names)])
     if not player:hasWarpDrive() and not player:hasJumpDrive() then
         player:setWarpDrive(true)
@@ -301,7 +592,7 @@ function init()
     enemyList = {}
     friendlyList = {}
     stationList = {}
-    playerList = {player}
+    playerList = { player }
 
     onNewPlayerShip(function(ship)
         table.insert(playerList, ship)
@@ -313,38 +604,65 @@ function init()
     local n
     n = 0
     -- station_X.comms_data are not yet used, it is here for time when Defense Fleet functionality is implemented to comms_station.lua
-    station_1 = SpaceStation():setTemplate("Small Station"):setRotation(random(0, 360)):setFaction("Human Navy")
-    setCirclePos(station_1, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
+    station_1 = SpaceStation()
+        :setTemplate("Small Station")
+        :setRotation(random(0, 360))
+        :setFaction("Human Navy")
+    setCirclePos(
+        station_1,
+        0,
+        0,
+        n * 360 / 3 + random(-30, 30),
+        random(10000, 22000)
+    )
     station_1.comms_data = {
         idle_defense_fleet = {
             DF1 = "MT52 Hornet",
             DF2 = "MT52 Hornet",
             DF3 = "MT52 Hornet",
-        }
+        },
     }
     table.insert(stationList, station_1)
     table.insert(friendlyList, station_1)
     n = 1
-    station_2 = SpaceStation():setTemplate("Medium Station"):setRotation(random(0, 360)):setFaction("Human Navy")
-    setCirclePos(station_2, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
+    station_2 = SpaceStation()
+        :setTemplate("Medium Station")
+        :setRotation(random(0, 360))
+        :setFaction("Human Navy")
+    setCirclePos(
+        station_2,
+        0,
+        0,
+        n * 360 / 3 + random(-30, 30),
+        random(10000, 22000)
+    )
     station_2.comms_data = {
         idle_defense_fleet = {
             DF1 = "Adder MK5",
             DF2 = "Adder MK5",
             DF3 = "Adder MK5",
-        }
+        },
     }
     table.insert(stationList, station_2)
     table.insert(friendlyList, station_2)
     n = 2
-    station_3 = SpaceStation():setTemplate("Large Station"):setRotation(random(0, 360)):setFaction("Human Navy")
-    setCirclePos(station_3, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
+    station_3 = SpaceStation()
+        :setTemplate("Large Station")
+        :setRotation(random(0, 360))
+        :setFaction("Human Navy")
+    setCirclePos(
+        station_3,
+        0,
+        0,
+        n * 360 / 3 + random(-30, 30),
+        random(10000, 22000)
+    )
     station_3.comms_data = {
         idle_defense_fleet = {
             DF1 = "Phobos T3",
             DF2 = "Phobos T3",
             DF3 = "Phobos T3",
-        }
+        },
     }
     table.insert(stationList, station_3)
     table.insert(friendlyList, station_3)
@@ -383,13 +701,25 @@ function init()
     -- Randomly scatter nebulae near the players' spawn point.
     local cx, cy = friendlyList[1]:getPosition()
     local ndx, ndy = vectorFromAngle(random(0, 360), 6000)
-    if not (black_hole and black_hole:isValid() and distance(bh_x, bh_y, cx + ndx, cy + ndy) < 5000) then
+    if
+        not (
+            black_hole
+            and black_hole:isValid()
+            and distance(bh_x, bh_y, cx + ndx, cy + ndy) < 5000
+        )
+    then
         Nebula():setPosition(cx + ndx, cy + ndy)
     end
 
     for idx = 1, 5 do
         local ndx, ndy = vectorFromAngle(random(0, 360), random(20000, 45000))
-        if not (black_hole and black_hole:isValid() and distance(bh_x, bh_y, ndx, ndy) < 5000) then
+        if
+            not (
+                black_hole
+                and black_hole:isValid()
+                and distance(bh_x, bh_y, ndx, ndy) < 5000
+            )
+        then
             Nebula():setPosition(ndx, ndy)
         end
     end
@@ -401,10 +731,15 @@ function init()
         ["Hard"] = 8,
         ["Normal"] = 5,
         ["Easy"] = 3,
-        ["Empty"] = 0
+        ["Empty"] = 0,
     }
     local enemy_group_count = counts[getScenarioSetting("Enemies")]
-    assert(enemy_group_count, "unknown enemies setting: " .. getScenarioSetting("Enemies") .. " could not set enemy_group_count")
+    assert(
+        enemy_group_count,
+        "unknown enemies setting: "
+            .. getScenarioSetting("Enemies")
+            .. " could not set enemy_group_count"
+    )
 
     local timesetting = {
         ["Unlimited"] = nil,
@@ -451,7 +786,9 @@ function init()
 
         local asteroids_this_belt = 0
         for attempt = 1, 500 do
-            if asteroids_this_belt >= 50 then break end
+            if asteroids_this_belt >= 50 then
+                break
+            end
             local dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
             local posx = x + dx1 + dx2
@@ -464,19 +801,27 @@ function init()
                         break
                     end
                 end
-                if allow_spawn and black_hole and black_hole:isValid() and distance(bh_x, bh_y, posx, posy) < 5000 then
+                if
+                    allow_spawn
+                    and black_hole
+                    and black_hole:isValid()
+                    and distance(bh_x, bh_y, posx, posy) < 5000
+                then
                     allow_spawn = false
                 end
                 if allow_spawn then
                     local size = random(100, 500)
                     for _, ap in ipairs(asteroid_positions) do
-                        if distance(ap[1], ap[2], posx, posy) < ap[3] + size then
+                        if
+                            distance(ap[1], ap[2], posx, posy)
+                            < ap[3] + size
+                        then
                             allow_spawn = false
                             break
                         end
                     end
                     if allow_spawn then
-                        table.insert(asteroid_positions, {posx, posy, size})
+                        table.insert(asteroid_positions, { posx, posy, size })
                         Asteroid():setPosition(posx, posy):setSize(size)
                         asteroids_this_belt = asteroids_this_belt + 1
                     end
@@ -486,12 +831,20 @@ function init()
 
         local vis_asteroids_this_belt = 0
         for attempt = 1, 500 do
-            if vis_asteroids_this_belt >= 50 then break end
+            if vis_asteroids_this_belt >= 50 then
+                break
+            end
             local dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
             local vax = x + dx1 + dx2
             local vay = y + dy1 + dy2
-            if not (black_hole and black_hole:isValid() and distance(bh_x, bh_y, vax, vay) < 5000) then
+            if
+                not (
+                    black_hole
+                    and black_hole:isValid()
+                    and distance(bh_x, bh_y, vax, vay) < 5000
+                )
+            then
                 VisualAsteroid():setPosition(vax, vay)
                 vis_asteroids_this_belt = vis_asteroids_this_belt + 1
             end
@@ -508,11 +861,21 @@ function init()
         for nx = -1, 1 do
             for ny = -5, 5 do
                 if random(0, 100) < 90 then
-                    local dx1, dy1 = vectorFromAngle(a2, (nx * 1000) + random(-100, 100))
-                    local dx2, dy2 = vectorFromAngle(a2 + 90, (ny * 1000) + random(-100, 100))
+                    local dx1, dy1 =
+                        vectorFromAngle(a2, (nx * 1000) + random(-100, 100))
+                    local dx2, dy2 = vectorFromAngle(
+                        a2 + 90,
+                        (ny * 1000) + random(-100, 100)
+                    )
                     local mx = x + dx1 + dx2
                     local my = y + dy1 + dy2
-                    if not (black_hole and black_hole:isValid() and distance(bh_x, bh_y, mx, my) < 5000) then
+                    if
+                        not (
+                            black_hole
+                            and black_hole:isValid()
+                            and distance(bh_x, bh_y, mx, my) < 5000
+                        )
+                    then
                         Mine():setPosition(mx, my)
                     end
                 end
@@ -526,19 +889,34 @@ function init()
     local station = friendlyList[1]
     if gametimeleft ~= nil then
         station:sendCommsMessage(
-            player, string.format(_("goal-incCall", [[%s, your objective is to fend off the incoming Kraylor attack.
+            player,
+            string.format(
+                _(
+                    "goal-incCall",
+                    [[%s, your objective is to fend off the incoming Kraylor attack.
 
 Please inform your Captain and crew that you have a total of %d minutes for this mission.
 
 The mission started at the arrival of this message.
 
-Good luck.]]), player:getCallSign(), gametimeleft / 60)
+Good luck.]]
+                ),
+                player:getCallSign(),
+                gametimeleft / 60
+            )
         )
     else
         station:sendCommsMessage(
-            player, string.format(_("goal-incCall", [[%s, your objective is to fend off the incoming Kraylor attack.
+            player,
+            string.format(
+                _(
+                    "goal-incCall",
+                    [[%s, your objective is to fend off the incoming Kraylor attack.
 
-Good luck.]]), player:getCallSign())
+Good luck.]]
+                ),
+                player:getCallSign()
+            )
         )
     end
 end
@@ -568,10 +946,16 @@ function update(delta)
     --
     -- In the Empty variation, the GM must use the Win button to declare
     -- a Human victory.
-    if (enemy_count == 0 and getScenarioSetting("Enemies") ~= "Empty") then
+    if enemy_count == 0 and getScenarioSetting("Enemies") ~= "Empty" then
         victory("Human Navy")
         if gametimeleft ~= nil then
-            local text = string.format(_("msgMainscreen&Spectbanner", "Mission: SUCCESS (%d seconds left)"), math.floor(gametimeleft))
+            local text = string.format(
+                _(
+                    "msgMainscreen&Spectbanner",
+                    "Mission: SUCCESS (%d seconds left)"
+                ),
+                math.floor(gametimeleft)
+            )
             globalMessage(text)
             setBanner(text)
             return
@@ -582,7 +966,10 @@ function update(delta)
         gametimeleft = gametimeleft - delta
         if gametimeleft < 0 then
             victory("Kraylor")
-            local text = _("msgMainscreen&Spectbanner", "Mission: FAILED (time has run out)")
+            local text = _(
+                "msgMainscreen&Spectbanner",
+                "Mission: FAILED (time has run out)"
+            )
             globalMessage(text)
             setBanner(text)
             return
@@ -591,17 +978,53 @@ function update(delta)
             local minutes = timewarning / 60
             if timewarning <= 1 * 60 then -- Less then 1 minutes left.
                 for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(player, string.format(_(minutes, "time-incCall", [[%s, you have one minute remaining.]], [[%s, you have %d minutes remaining.]]), player:getCallSign(), minutes))
+                    friendlyList[1]:sendCommsMessage(
+                        player,
+                        string.format(
+                            _(
+                                minutes,
+                                "time-incCall",
+                                [[%s, you have one minute remaining.]],
+                                [[%s, you have %d minutes remaining.]]
+                            ),
+                            player:getCallSign(),
+                            minutes
+                        )
+                    )
                 end
                 timewarning = timewarning - 2 * 60
             elseif timewarning <= 5 * 60 then -- Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
                 for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(player, string.format(_(minutes, "time-incCall", [[%s, you have one minute remaining.]], [[%s, you have %d minutes remaining.]]), player:getCallSign(), minutes))
+                    friendlyList[1]:sendCommsMessage(
+                        player,
+                        string.format(
+                            _(
+                                minutes,
+                                "time-incCall",
+                                [[%s, you have one minute remaining.]],
+                                [[%s, you have %d minutes remaining.]]
+                            ),
+                            player:getCallSign(),
+                            minutes
+                        )
+                    )
                 end
                 timewarning = timewarning - 2 * 60
             else
                 for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(player, string.format(_(minutes, "time-incCall", [[%s, you have one minute remaining.]], [[%s, you have %d minutes remaining.]]), player:getCallSign(), minutes))
+                    friendlyList[1]:sendCommsMessage(
+                        player,
+                        string.format(
+                            _(
+                                minutes,
+                                "time-incCall",
+                                [[%s, you have one minute remaining.]],
+                                [[%s, you have %d minutes remaining.]]
+                            ),
+                            player:getCallSign(),
+                            minutes
+                        )
+                    )
                 end
                 timewarning = timewarning - 5 * 60
             end
@@ -611,7 +1034,10 @@ function update(delta)
     -- If all allies are destroyed, the Humans (players) lose.
     if friendly_count == 0 then
         victory("Kraylor")
-        local text = _("msgMainscreen&Spectbanner", "Mission: FAILED (no friendlies left)")
+        local text = _(
+            "msgMainscreen&Spectbanner",
+            "Mission: FAILED (no friendlies left)"
+        )
         globalMessage(text)
         setBanner(text)
         return
@@ -628,7 +1054,10 @@ function update(delta)
     -- If last player ship is destroyed, the Humans (players) lose.
     if player_count == 0 then
         victory("Kraylor")
-        local text = _("msgMainscreen&Spectbanner", "Mission: FAILED (all your ships destroyed)")
+        local text = _(
+            "msgMainscreen&Spectbanner",
+            "Mission: FAILED (all your ships destroyed)"
+        )
         globalMessage(text)
         setBanner(text)
         return
@@ -636,6 +1065,16 @@ function update(delta)
 
     -- Set banner for cinematic and top down views.
     if gametimeleft ~= nil then
-        setBanner(string.format(_("msgSpectbanner", "Mission in progress - Time left: %d:%02d - Enemies: %d"), math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count))
+        setBanner(
+            string.format(
+                _(
+                    "msgSpectbanner",
+                    "Mission in progress - Time left: %d:%02d - Enemies: %d"
+                ),
+                math.floor(gametimeleft / 60),
+                math.floor(gametimeleft % 60),
+                enemy_count
+            )
+        )
     end
 end

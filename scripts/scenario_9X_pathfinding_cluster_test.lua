@@ -13,8 +13,16 @@ function init()
     -- SpaceStation at (0, -400) with radius ~800 means it covers up to y=400.
     -- SpaceStation at (0, 600) with radius ~800 means it covers down to y=-200.
     -- These overlap slightly and create a narrow passable corridor.
-    SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setPosition(0, -400):setRotation(0)
-    SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setPosition(0, 600):setRotation(0)
+    SpaceStation()
+        :setTemplate("Medium Station")
+        :setFaction("Independent")
+        :setPosition(0, -400)
+        :setRotation(0)
+    SpaceStation()
+        :setTemplate("Medium Station")
+        :setFaction("Independent")
+        :setPosition(0, 600)
+        :setRotation(0)
 
     -- A few asteroids scattered to add noise
     for n = 1, 15 do
@@ -36,7 +44,13 @@ function init()
     elapsed = 0
     log_interval = 3
     local ax, ay = ally:getPosition()
-    print(string.format("Pathfinding Cluster Test: AI at (%.0f, %.0f) must navigate to (3000, 0)", ax, ay))
+    print(
+        string.format(
+            "Pathfinding Cluster Test: AI at (%.0f, %.0f) must navigate to (3000, 0)",
+            ax,
+            ay
+        )
+    )
     print("Medium Stations at (0,-400) and (0,600) with scattered asteroids.")
 end
 
@@ -47,7 +61,15 @@ function update(delta)
         timer = 0
         local ax, ay = ally:getPosition()
         local dist = distance(ax, ay, 3000, 0)
-        print(string.format("[t=%.0fs] Position: (%.0f, %.0f)  dist to target: %.0f", elapsed, ax, ay, dist))
+        print(
+            string.format(
+                "[t=%.0fs] Position: (%.0f, %.0f)  dist to target: %.0f",
+                elapsed,
+                ax,
+                ay,
+                dist
+            )
+        )
         if dist < 500 then
             print("=== PASS: Ally reached the target. ===")
         end

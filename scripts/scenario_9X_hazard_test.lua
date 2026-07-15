@@ -16,7 +16,10 @@ function init()
     -- Mines in front of the black hole (closer to ship start)
     for i = 1, 5 do
         local angle = math.rad(i * 72)
-        Mine():setPosition(-1000 + math.cos(angle) * 400, 0 + math.sin(angle) * 400)
+        Mine():setPosition(
+            -1000 + math.cos(angle) * 400,
+            0 + math.sin(angle) * 400
+        )
     end
 
     -- Asteroid cluster on the other side
@@ -39,7 +42,13 @@ function init()
     elapsed = 0
     log_interval = 3
     local ax, ay = ally:getPosition()
-    print(string.format("AI ship at (%.0f, %.0f) ordered to (3000, 0). Direct path goes through black hole.", ax, ay))
+    print(
+        string.format(
+            "AI ship at (%.0f, %.0f) ordered to (3000, 0). Direct path goes through black hole.",
+            ax,
+            ay
+        )
+    )
 end
 
 function update(delta)
@@ -49,7 +58,15 @@ function update(delta)
         timer = 0
         local ax, ay = ally:getPosition()
         local dist = distance(ax, ay, 3000, 0)
-        print(string.format("[t=%.0fs] Position: (%.0f, %.0f)  dist: %.0f", elapsed, ax, ay, dist))
+        print(
+            string.format(
+                "[t=%.0fs] Position: (%.0f, %.0f)  dist: %.0f",
+                elapsed,
+                ax,
+                ay,
+                dist
+            )
+        )
         if dist < 500 then
             print("=== PASS: Ally reached the target. ===")
         end

@@ -16,47 +16,47 @@ function init()
         name = "Static Right",
         pitch = 45,
         z_position = 500,
-        field_of_view = 60
+        field_of_view = 60,
     }
 
     -- Create a static camera looking at origin from above
     cam_top = createEntity()
     cam_top.components.transform = {}
     cam_top:setPosition(0, 3000)
-    cam_top:setRotation(-90)  -- Yaw
+    cam_top:setRotation(-90) -- Yaw
     cam_top.components.cinematic_camera = {
         name = "Static Top",
         pitch = 80,
         z_position = 800,
-        field_of_view = 50
+        field_of_view = 50,
     }
 
     -- Create an orbiting camera
     cam_orbit = createEntity()
     cam_orbit.components.transform = {}
     cam_orbit:setPosition(4000, 0)
-    cam_orbit:setRotation(180)  -- Yaw
+    cam_orbit:setRotation(180) -- Yaw
     cam_orbit.components.cinematic_camera = {
         name = "Orbiting",
         pitch = 30,
         z_position = 300,
-        field_of_view = 70
+        field_of_view = 70,
     }
 
     -- Create a camera attached to the player (chase cam)
     cam_chase = createEntity()
     cam_chase.components.transform = {}
-    cam_chase:setPosition(0, -500)  -- Will be updated to follow player
-    cam_chase:setRotation(0)  -- Yaw
+    cam_chase:setPosition(0, -500) -- Will be updated to follow player
+    cam_chase:setRotation(0) -- Yaw
     cam_chase.components.cinematic_camera = {
         name = "Chase Cam",
         pitch = 20,
         z_position = 200,
         field_of_view = 80,
-        assigned_entity = player,  -- Assign to player ship
+        assigned_entity = player, -- Assign to player ship
         use_velocity_fov_scaling = true,
         base_fov_for_velocity = 80,
-        fov_velocity_range = 15
+        fov_velocity_range = 15,
     }
 
     -- Store orbit state
@@ -65,7 +65,7 @@ end
 
 function update(delta)
     -- Update orbiting camera position
-    orbit_angle = orbit_angle + delta * 20  -- 20 degrees per second
+    orbit_angle = orbit_angle + delta * 20 -- 20 degrees per second
     if orbit_angle >= 360 then
         orbit_angle = orbit_angle - 360
     end
@@ -78,7 +78,7 @@ function update(delta)
 
     -- Update orbit camera to look at origin
     local angle_to_origin = math.deg(math.atan2(-y, -x))
-    cam_orbit:setRotation(angle_to_origin)  -- Yaw via Transform rotation
+    cam_orbit:setRotation(angle_to_origin) -- Yaw via Transform rotation
 
     -- Update chase camera position to follow player (offset behind)
     local px, py = player:getPosition()
@@ -90,5 +90,5 @@ function update(delta)
     local offset_y = math.cos(math.rad(player_heading)) * offset_distance
 
     cam_chase:setPosition(px + offset_x, py + offset_y)
-    cam_chase:setRotation(player_heading - 90)  -- Yaw via Transform rotation
+    cam_chase:setRotation(player_heading - 90) -- Yaw via Transform rotation
 end

@@ -19,7 +19,7 @@ function init()
         energy_drain_per_sec = 0.0,
     }
 
-    local drone_templates = {"Atlantis", "Phobos T3", "MT52 Hornet"}
+    local drone_templates = { "Atlantis", "Phobos T3", "MT52 Hornet" }
     for i = 1, 3 do
         local angle = math.rad((i - 1) * 120)
         local x = math.cos(angle) * 1000
@@ -30,9 +30,8 @@ function init()
             :setPosition(x, y)
             :setScanned(true)
             :orderIdle()
-        drone.components.allow_drone_link = {owner = player}
+        drone.components.allow_drone_link = { owner = player }
     end
 end
 
-function update(delta)
-end
+function update(delta) end

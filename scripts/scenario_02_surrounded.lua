@@ -10,7 +10,10 @@
 -- @script scenario_02_surrounded
 
 function setCirclePos(obj, angle, distance)
-    obj:setPosition(math.sin(angle / 180 * math.pi) * distance, -math.cos(angle / 180 * math.pi) * distance)
+    obj:setPosition(
+        math.sin(angle / 180 * math.pi) * distance,
+        -math.cos(angle / 180 * math.pi) * distance
+    )
 end
 
 local enemyList
@@ -21,7 +24,11 @@ function init()
 
     -- a station near the center
     -- (Currently, it is not necessary to defend it.)
-    SpaceStation():setTemplate("Small Station"):setPosition(0, -500):setRotation(random(0, 360)):setFaction("Independent")
+    SpaceStation()
+        :setTemplate("Small Station")
+        :setPosition(0, -500)
+        :setRotation(random(0, 360))
+        :setFaction("Independent")
 
     -- several single Phobos
     for _ = 1, 5 do
@@ -41,24 +48,30 @@ function init()
     do
         local a = random(0, 360)
         local d = 9000
-        local ship = CpuShip():setTemplate("Atlantis X23"):setRotation(a + 180):orderRoaming()
+        local ship = CpuShip()
+            :setTemplate("Atlantis X23")
+            :setRotation(a + 180)
+            :orderRoaming()
         table.insert(enemyList, ship)
         setCirclePos(ship, a, d)
 
         do
-            local wingman = CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
+            local wingman =
+                CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
             table.insert(enemyList, wingman)
             setCirclePos(wingman, a - 5, d + 100)
             wingman:orderFlyFormation(ship, 500, 100)
         end
         do
-            local wingman = CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
+            local wingman =
+                CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
             table.insert(enemyList, wingman)
             setCirclePos(wingman, a + 5, d + 100)
             wingman:orderFlyFormation(ship, -500, 100)
         end
         do
-            local wingman = CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
+            local wingman =
+                CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
             table.insert(enemyList, wingman)
             setCirclePos(wingman, a + random(-5, 5), d - 500)
             wingman:orderFlyFormation(ship, 0, 600)

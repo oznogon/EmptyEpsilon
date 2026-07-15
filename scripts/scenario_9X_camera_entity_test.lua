@@ -16,7 +16,7 @@ function init()
         name = "Static Cam 1",
         pitch = 30,
         z_position = 500,
-        field_of_view = 60
+        field_of_view = 60,
     }
     cam1:setRotation(-90)
 
@@ -28,7 +28,7 @@ function init()
         name = "Static Cam 2",
         pitch = 45,
         z_position = 300,
-        field_of_view = 70
+        field_of_view = 70,
     }
     cam2:setRotation(90)
 
@@ -40,7 +40,7 @@ function init()
         name = "Top Cam",
         pitch = 80,
         z_position = 800,
-        field_of_view = 50
+        field_of_view = 50,
     }
     cam3:setRotation(-90)
 end
