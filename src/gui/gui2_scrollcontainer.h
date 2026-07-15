@@ -39,6 +39,9 @@ public:
     void scrollToFraction(float fraction);
     // Scroll element to this pixel offset from the top (clamped to valid range).
     void scrollToOffset(float pixel_offset);
+    // When enabled, automatically scrolls to the bottom when content grows.
+    void enableAutoScrollDown();
+    void disableAutoScrollDown();
 
     // Clean up the scroll container's tree: clear internal focus/click
     // pointers before the base class removes destroyed children via
@@ -98,6 +101,8 @@ private:
     bool scroll_start_applied = false;
     // Defines the total height of content, in virtual pixels.
     float content_height = 0.0f;
+    // Tracks whether to auto-scroll to the bottom on content growth.
+    bool auto_scroll_down = false;
     // Defines the visible height of the element, in virtual pixels.
     float visible_height = 0.0f;
 

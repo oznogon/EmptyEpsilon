@@ -55,8 +55,9 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
             if (d.position.y > max_y)
                 max_y = d.position.y;
         }
+        content_height = max_y + linespacing * 0.3f;
         if (wrap && !layout.fill_height) {
-            auto required_height = std::max(linespacing, max_y + linespacing * 0.3f);
+            auto required_height = std::max(linespacing, content_height);
             rect.size.y = required_height;
             layout.size.y = required_height;
             text_rect.size.y = rect.size.y;
@@ -94,47 +95,45 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
         {
             start_x = d.position.x;
         }
-        if (focus) {
-            if ((d.string_offset == selection_max) || (d.char_code == 0 && start_x > -1.0f))
+        if ((d.string_offset == selection_max) || (d.char_code == 0 && start_x > -1.0f))
+        {
+            float end_x = d.position.x;
+            float start_y = d.position.y - text_size;
+            float end_y = start_y + text_size * 1.1f;
+            if (end_y < 0.0f)
+                continue;
+            if (start_y > text_rect.size.y)
+                continue;
+            start_y = std::max(0.0f, start_y);
+            end_x = std::min(text_rect.size.x, end_x);
+            end_y = std::min(text_rect.size.y, end_y);
+            if (end_x != start_x)
             {
-                float end_x = d.position.x;
-                float start_y = d.position.y - text_size;
-                float end_y = start_y + text_size * 1.1f;
-                if (end_y < 0.0f)
-                    continue;
-                if (start_y > text_rect.size.y)
-                    continue;
-                start_y = std::max(0.0f, start_y);
-                end_x = std::min(text_rect.size.x, end_x);
-                end_y = std::min(text_rect.size.y, end_y);
-                if (end_x != start_x)
-                {
-                    renderer.fillRect(
-                        sp::Rect(rect.position + glm::vec2{start_x + 16, start_y},
-                        glm::vec2{end_x - start_x, end_y - start_y}),
-                        {255, 255, 255, 128});
-                }
-                if (d.string_offset == selection_max)
-                    start_x = -1.0f;
-                else
-                    start_x = 0.0f;
-            }
-            if (d.string_offset == selection_end && typing_indicator)
-            {
-                float start_y = d.position.y - text_size;
-                float end_y = start_y + text_size * 1.1f;
-                if (end_y < 0.0f)
-                    continue;
-                if (start_y > text_rect.size.y)
-                    continue;
-                start_y = std::max(0.0f, start_y);
-                end_y = std::min(text_rect.size.y, end_y);
-
                 renderer.fillRect(
-                    sp::Rect(rect.position + glm::vec2{d.position.x + 16 - text_size * 0.05f, start_y},
-                    glm::vec2{text_size * 0.1f, end_y - start_y}),
-                    {255, 255, 255, 255});
+                    sp::Rect(rect.position + glm::vec2{start_x + 16, start_y},
+                    glm::vec2{end_x - start_x, end_y - start_y}),
+                    {255, 255, 255, 128});
             }
+            if (d.string_offset == selection_max)
+                start_x = -1.0f;
+            else
+                start_x = 0.0f;
+        }
+        if (focus && d.string_offset == selection_end && typing_indicator)
+        {
+            float start_y = d.position.y - text_size;
+            float end_y = start_y + text_size * 1.1f;
+            if (end_y < 0.0f)
+                continue;
+            if (start_y > text_rect.size.y)
+                continue;
+            start_y = std::max(0.0f, start_y);
+            end_y = std::min(text_rect.size.y, end_y);
+
+            renderer.fillRect(
+                sp::Rect(rect.position + glm::vec2{d.position.x + 16 - text_size * 0.05f, start_y},
+                glm::vec2{text_size * 0.1f, end_y - start_y}),
+                {255, 255, 255, 255});
         }
     }
     renderer.drawText(text_rect, prepared, sp::Font::FlagClip);
@@ -489,6 +488,11 @@ GuiTextEntry* GuiTextEntry::downCallback(func_t func)
 void GuiTextEntry::setCursorPosition(int offset)
 {
     selection_start = selection_end = std::clamp(offset, 0, int(text.size()));
+}
+
+void GuiTextEntry::setScrollOffset(float y)
+{
+    render_offset.y = y;
 }
 
 int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)

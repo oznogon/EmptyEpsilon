@@ -33,6 +33,7 @@ protected:
     bool typing_indicator{false};
 
     glm::vec2 render_offset{0, 0};
+    float content_height = 0;
 public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
     virtual ~GuiTextEntry();
@@ -61,6 +62,7 @@ public:
     float getLineSpacing() const;
 
     void setCursorPosition(int offset);
+    void setScrollOffset(float y);
 protected:
     int getTextOffsetForPosition(glm::vec2 position);
     void runChangeCallback();

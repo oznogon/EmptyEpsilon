@@ -200,6 +200,19 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
         ->setRange(0, static_cast<int>(content_height))
         ->setValueSize(static_cast<int>(visible_height))
         ->setValue(static_cast<int>(scroll_offset + scroll_offset_bias));
+
+    if (auto_scroll_down)
+        scrollToFraction(1.0f);
+}
+
+void GuiScrollContainer::enableAutoScrollDown()
+{
+    auto_scroll_down = true;
+}
+
+void GuiScrollContainer::disableAutoScrollDown()
+{
+    auto_scroll_down = false;
 }
 
 void GuiScrollContainer::drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::RenderTarget& renderer)
