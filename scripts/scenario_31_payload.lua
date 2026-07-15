@@ -964,6 +964,7 @@ function UpdateTraffic()
   local x, y = RandPositionInRadius(MidX, MidY, FieldSize + 5000, FieldSize, 0, 360)
   local station = Traffic.stations[irandom(1,#Traffic.stations)]
   local new_ship = CpuShip():setFaction(faction):setTemplate(type):setPosition(x, y):orderDock(station)
+  new_ship.components.coolant = nil -- remove coolant from PlayerShip templates used as CpuShips
   table.insert(Traffic.new_ships, new_ship)
 end
 
