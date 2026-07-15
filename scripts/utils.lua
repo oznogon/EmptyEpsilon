@@ -83,10 +83,10 @@ function angleRotation(a, b, c, d)
     local x1, y1, x2, y2
     x1, y1, x2, y2 = _fourArgumentsIntoCoordinates(a, b, c, d)
 
-    local dx = x2-x1
-    local dy = y2-y1
-    local d = math.atan2(dy,dx)*180/math.pi     -- Get degrees in range -180, 180 where 0 is to the left from point 1.
-    return d%360                                -- Transform degrees to range [0, 360]
+    local dx = x2 - x1
+    local dy = y2 - y1
+    local d = math.atan2(dy, dx) * 180 / math.pi -- Get degrees in range -180, 180 where 0 is to the left from point 1.
+    return d % 360 -- Transform degrees to range [0, 360]
 end
 
 -- Given enough information, calculate heading from first position/object to second position/object.
@@ -126,8 +126,8 @@ end
 --     angleRotation(-100, 100, 0, 100) -- Returns 0.0
 function angleHeading(a, b, c, d)
     local d = angleRotation(a, b, c, d) -- Get rotation vector
-    d = d+90                            -- Convert to heading
-    return d%360                        -- Transform degrees to range [0, 360]
+    d = d + 90 -- Convert to heading
+    return d % 360 -- Transform degrees to range [0, 360]
 end
 
 -- Given an angle and length, return a relative vector (x, y coordinates).
@@ -145,9 +145,10 @@ end
 --     x, y = vectorFromAngle(45, 1000, true)
 function vectorFromAngle(angle, length, angle_is_heading)
     if angle_is_heading ~= nil and angle_is_heading == true then
-        angle=angle-90  -- if angle was set as heading, sanitize it.
+        angle = angle - 90 -- if angle was set as heading, sanitize it.
     end
-    return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
+    return math.cos(angle / 180 * math.pi) * length,
+        math.sin(angle / 180 * math.pi) * length
 end
 
 -- Place an object relative to a vector. Returns the object with its position
@@ -195,7 +196,17 @@ end
 --   The `randomize` parameter adds chaos to the pattern. This works well for
 --   asteroid fields:
 --     createObjectsOnLine(0, 0, 10000, 0, 300, Asteroid, 4, 100, 800)
-function createObjectsOnLine(x1, y1, x2, y2, spacing, object_type, rows, chance, randomize)
+function createObjectsOnLine(
+    x1,
+    y1,
+    x2,
+    y2,
+    spacing,
+    object_type,
+    rows,
+    chance,
+    randomize
+)
     if rows == nil then
         rows = 1
     end
@@ -210,8 +221,14 @@ function createObjectsOnLine(x1, y1, x2, y2, spacing, object_type, rows, chance,
     local yd = (y2 - y1) / d
     for cnt_x = 0, d, spacing do
         for cnt_y = 0, (rows - 1) * spacing, spacing do
-            local px = x1 + xd * cnt_x + yd * (cnt_y - (rows - 1) * spacing * 0.5) + random(-randomize, randomize)
-            local py = y1 + yd * cnt_x - xd * (cnt_y - (rows - 1) * spacing * 0.5) + random(-randomize, randomize)
+            local px = x1
+                + xd * cnt_x
+                + yd * (cnt_y - (rows - 1) * spacing * 0.5)
+                + random(-randomize, randomize)
+            local py = y1
+                + yd * cnt_x
+                - xd * (cnt_y - (rows - 1) * spacing * 0.5)
+                + random(-randomize, randomize)
             if random(0, 100) < chance then
                 object_type():setPosition(px, py)
             end
@@ -256,7 +273,15 @@ end
 --   placeRandomObjects(Asteroid, 30, 0.3, 0, 0, 10, 10)
 --   placeRandomObjects(VisualAsteroid, 30, 0.3, 0, 0, 10, 10)
 --   placeRandomObjects(Nebula, 15, 0.3, 0, 0, 10, 10)
-function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_grids)
+function placeRandomObjects(
+    object_type,
+    density,
+    perlin_z,
+    x,
+    y,
+    x_grids,
+    y_grids
+)
     -- Prepare the Perlin Noise generator (if needed)
     require("perlin_noise.lua")
     perlin:load()
@@ -275,18 +300,31 @@ function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_gri
     for i = 1, x_grids do
         for j = 1, y_grids do
             -- Get intensity from perlin distribution, and do a very rough normalization to {0 .. 0.6}
-            local intensity = (perlin:noise(i + perlin_section_i, j + perlin_section_j, perlin_magic_z) + perlin_magic_z)
+            local intensity = (
+                perlin:noise(
+                    i + perlin_section_i,
+                    j + perlin_section_j,
+                    perlin_magic_z
+                ) + perlin_magic_z
+            )
 
             -- Cube it to get blobs of objects
             intensity = intensity * intensity * intensity
 
             -- Use it to fill patches of space with randomly placed objects
-            if (intensity > 0) then
+            if intensity > 0 then
                 local nr_of_objects = intensity * density
                 local x_start = ((i - x_grids / 2) * grid_size) + x
                 local y_start = ((j - x_grids / 2) * grid_size) + y
 
-                placeRandomAroundPoint(object_type, nr_of_objects, 0, grid_size / 1.5, x_start, y_start)
+                placeRandomAroundPoint(
+                    object_type,
+                    nr_of_objects,
+                    0,
+                    grid_size / 1.5,
+                    x_start,
+                    y_start
+                )
             end
         end
     end
@@ -296,38 +334,63 @@ end
 -- This is only helper function for distance(a,b,c,d) and angle(a,b,c,d).
 -- Returns two sets of coordinates: x1, y1, x2, y2.
 function _fourArgumentsIntoCoordinates(a, b, c, d)
-	local table_or_userdata = "table"
-	if createEntity then
-		table_or_userdata = "userdata"
-	end
+    local table_or_userdata = "table"
+    if createEntity then
+        table_or_userdata = "userdata"
+    end
     local x1, y1 = 0, 0
     local x2, y2 = 0, 0
     if type(a) == table_or_userdata and type(b) == table_or_userdata then
         -- a and b are bth tables.
         -- Assume function(obj1, obj2)
         if a.isValid and not a:isValid() then
-            error("First object passed to distance/angle function is not valid (destroyed?)", 2)
+            error(
+                "First object passed to distance/angle function is not valid (destroyed?)",
+                2
+            )
         end
         if b.isValid and not b:isValid() then
-            error("Second object passed to distance/angle function is not valid (destroyed?)", 2)
+            error(
+                "Second object passed to distance/angle function is not valid (destroyed?)",
+                2
+            )
         end
         x1, y1 = a:getPosition()
         x2, y2 = b:getPosition()
-    elseif type(a) == table_or_userdata and type(b) == "number" and type(c) == "number" then
+    elseif
+        type(a) == table_or_userdata
+        and type(b) == "number"
+        and type(c) == "number"
+    then
         -- Assume function(obj1, x2, y2)
         if a.isValid and not a:isValid() then
-            error("Object passed to distance/angle function is not valid (destroyed?)", 2)
+            error(
+                "Object passed to distance/angle function is not valid (destroyed?)",
+                2
+            )
         end
         x1, y1 = a:getPosition()
         x2, y2 = b, c
-    elseif type(a) == "number" and type(b) == "number" and type(c) == table_or_userdata then
+    elseif
+        type(a) == "number"
+        and type(b) == "number"
+        and type(c) == table_or_userdata
+    then
         -- Assume function(x1, y1, obj2)
         if c.isValid and not c:isValid() then
-            error("Object passed to distance/angle function is not valid (destroyed?)", 2)
+            error(
+                "Object passed to distance/angle function is not valid (destroyed?)",
+                2
+            )
         end
         x1, y1 = a, b
         x2, y2 = c:getPosition()
-    elseif type(a) == "number" and type(b) == "number" and type(c) == "number" and type(d) == "number" then
+    elseif
+        type(a) == "number"
+        and type(b) == "number"
+        and type(c) == "number"
+        and type(d) == "number"
+    then
         -- Assume function(x1, y1, x2, y2)
         x1, y1 = a, b
         x2, y2 = c, d
@@ -339,7 +402,10 @@ function _fourArgumentsIntoCoordinates(a, b, c, d)
 
     -- Validate that getPosition() returned valid coordinates
     if x1 == nil or y1 == nil or x2 == nil or y2 == nil then
-        error("getPosition() returned nil coordinates - object may be invalid", 2)
+        error(
+            "getPosition() returned nil coordinates - object may be invalid",
+            2
+        )
     end
 
     return x1, y1, x2, y2
@@ -366,112 +432,118 @@ end
 --	Function returns true or false depending on whether the first parameter is the second parameter type or not
 --	The test is made according to the environment the scenario is running in
 --	Sets global variable ECS
-function isObjectType(obj,typ)
-	if not createEntity then
-		-- not ecs, use the pre-ECS typeName field
-		ECS = false
-		return obj.typeName == typ
-	end
-	ECS = true
-	if obj == nil or not obj:isValid() or typ == nil then
-		-- object doesn't exist or type wasn't specified
-		return false
-	end
+function isObjectType(obj, typ)
+    if not createEntity then
+        -- not ecs, use the pre-ECS typeName field
+        ECS = false
+        return obj.typeName == typ
+    end
+    ECS = true
+    if obj == nil or not obj:isValid() or typ == nil then
+        -- object doesn't exist or type wasn't specified
+        return false
+    end
 
     --- ShipTemplateBasedObject-derived types
     -- STBOs typically require a ship template applied with setTemplate().
     -- These conditions might fail if no template is applied, especially for
     -- SpaceStations
-	if typ == "SpaceStation" then
-		return obj.components.docking_bay
+    if typ == "SpaceStation" then
+        return obj.components.docking_bay
             and obj.components.physics
             and obj.components.physics.type == "static"
-	elseif typ == "PlayerSpaceship" then
-		return obj.components.player_control
-	elseif typ == "CpuShip" then
-		return obj.components.ai_controller
+    elseif typ == "PlayerSpaceship" then
+        return obj.components.player_control
+    elseif typ == "CpuShip" then
+        return obj.components.ai_controller
     --- Probes
-	elseif typ == "ScanProbe" then
-		return obj.components.allow_radar_link
+    elseif typ == "ScanProbe" then
+        return obj.components.allow_radar_link
     --- Terrain
     -- Asteroids are uniquely identified by having Spin, AvoidObject, and
     -- ExplodeOnTouch. Missiles don't Spin and Mines use DelayedExplodeOnTouch
-	elseif typ == "Asteroid" then
-		return obj.components.spin
+    elseif typ == "Asteroid" then
+        return obj.components.spin
             and obj.components.avoid_object
             and obj.components.explode_on_touch
     -- VisualAsteroids lack physics or avoid_object. This can match a false
     -- positive for non-asteroid decorative objects, but are there any that
     -- didn't use either VisualAsteroid or Planet?
-	elseif typ == "VisualAsteroid" then
-		return obj.components.spin
+    elseif typ == "VisualAsteroid" then
+        return obj.components.spin
             and obj.components.mesh_render
             and not obj.components.physics
             and not obj.components.avoid_object
-	elseif typ == "Nebula" then
-		return obj.components.nebula_renderer
-	elseif typ == "Planet" then
-		return obj.components.planet_render
-	elseif typ == "BlackHole" then
-		return obj.components.gravity
+    elseif typ == "Nebula" then
+        return obj.components.nebula_renderer
+    elseif typ == "Planet" then
+        return obj.components.planet_render
+    elseif typ == "BlackHole" then
+        return obj.components.gravity
             and obj.components.billboard_render
             and obj.components.gravity.damage
     -- All Gravity components have a default wormhole_target of {0,0}, so
     -- wormholes are distinguished from black holes primarily by not dealing
     -- damage or pointing to {0,0}. A wormhole pointing to {0,0} therefore won't
     -- be detected as a wormhole.
-	elseif typ == "WormHole" then
-		return obj.components.gravity
+    elseif typ == "WormHole" then
+        return obj.components.gravity
             and obj.components.billboard_render
             and not obj.components.gravity.damage
-            and (obj.components.gravity.wormhole_target[1] ~= 0 or obj.components.gravity.wormhole_target[2] ~= 0)
+            and (
+                obj.components.gravity.wormhole_target[1] ~= 0
+                or obj.components.gravity.wormhole_target[2] ~= 0
+            )
     --- Items
     -- Artifact check is fragile because its mesh filename doesn't need to
     -- contain `mesh/Artifact`.
-	elseif typ == "Artifact" then
-		return obj.components.mesh_render
-            and string.sub(obj.components.mesh_render.mesh, 1, 13) == "mesh/Artifact"
+    elseif typ == "Artifact" then
+        return obj.components.mesh_render
+            and string.sub(obj.components.mesh_render.mesh, 1, 13)
+                == "mesh/Artifact"
     -- A SupplyDrop must carry at least one supply, distinguishing it from an
     -- Artifact with allowPickup(true). This check therefore doesn't match a
     -- SupplyDrop that doesn't have any supplies.
-	elseif typ == "SupplyDrop" then
-		return obj.components.pickup
-            and (obj.components.pickup.give_energy > 0
+    elseif typ == "SupplyDrop" then
+        return obj.components.pickup
+            and (
+                obj.components.pickup.give_energy > 0
                 or obj.components.pickup.give_homing > 0
                 or obj.components.pickup.give_nuke > 0
                 or obj.components.pickup.give_mine > 0
                 or obj.components.pickup.give_emp > 0
-                or obj.components.pickup.give_hvli > 0)
+                or obj.components.pickup.give_hvli > 0
+            )
     --- Countermeasures
-	elseif typ == "WarpJammer" then
-		return obj.components.warp_jammer
+    elseif typ == "WarpJammer" then
+        return obj.components.warp_jammer
     --- Weapons
     -- Launched mines have missile_flight, scripted mines don't, so that
     -- unintuitively isn't checked for the Mine type
-	elseif typ == "Mine" then
-		return obj.components.delayed_explode_on_touch
+    elseif typ == "Mine" then
+        return obj.components.delayed_explode_on_touch
             and obj.components.constant_particle_emitter
     -- HVLIs lack homing, HomingMissiles lack ExplodeOnTimeout, Nukes lack EMP
     -- damage
-	elseif typ == "EMPMissile" then
-		return obj.components.missile_flight
+    elseif typ == "EMPMissile" then
+        return obj.components.missile_flight
             and obj.components.missile_homing
             and obj.components.explode_on_timeout
             and obj.components.explode_on_touch
             and obj.components.explode_on_touch.damage_type == "emp"
-	elseif typ == "Nuke" then
-		return obj.components.missile_flight
+    elseif typ == "Nuke" then
+        return obj.components.missile_flight
             and obj.components.missile_homing
             and obj.components.explode_on_timeout
             and obj.components.explode_on_touch
             and obj.components.explode_on_touch.damage_type ~= "emp"
-	elseif typ == "HomingMissile" then
-		return obj.components.missile_flight
+    elseif typ == "HomingMissile" then
+        return obj.components.missile_flight
             and obj.components.missile_homing
             and obj.components.explode_on_touch
             and not obj.components.explode_on_timeout
-	elseif typ == "HVLI" then
-		return obj.components.missile_flight
+    elseif typ == "HVLI" then
+        return obj.components.missile_flight
             and not obj.components.missile_homing
             and obj.components.explode_on_touch
             and not obj.components.explode_on_timeout
@@ -482,16 +554,16 @@ function isObjectType(obj,typ)
     elseif typ == "ElectricExplosionEffect" then
         return obj.components.explosion_effect
             and obj.components.explosion_effect.electrical
-	elseif typ == "BeamEffect" then
-		return obj.components.beam_effect
+    elseif typ == "BeamEffect" then
+        return obj.components.beam_effect
     --- Data
-	elseif typ == "Zone" then
-		return obj.components.zone
-	elseif typ == "ScienceDatabase" then
-		return obj.components.science_database
-	elseif typ == "FactionInfo" then
-		return obj.components.faction_info
-	else
-		return false
-	end
+    elseif typ == "Zone" then
+        return obj.components.zone
+    elseif typ == "ScienceDatabase" then
+        return obj.components.science_database
+    elseif typ == "FactionInfo" then
+        return obj.components.faction_info
+    else
+        return false
+    end
 end
