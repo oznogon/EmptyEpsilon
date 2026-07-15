@@ -72,7 +72,7 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
     }
 
     float radius = 7000.0;
-    
+
     auto transform = ship.getComponent<sp::Transform>();
     if (transform) {
         auto ship_position = transform->getPosition();

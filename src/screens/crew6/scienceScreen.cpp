@@ -222,7 +222,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setAttribute("layout", "vertical");
     info_sidebar
         ->setAttribute("margin", "0, 0, 0, 75");
-    
+
     custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
     float height = crew_position == CrewPosition::operationsOfficer
         ? 550.0f

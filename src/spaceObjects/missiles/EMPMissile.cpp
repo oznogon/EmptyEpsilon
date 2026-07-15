@@ -38,15 +38,15 @@ void EMPMissile::lifeEnded()
 {
     explode();
 }
-    
+
 void EMPMissile::update(float delta)
 {
     MissileWeapon::update(delta);
-    
+
     if(!avoid_area_added && data.lifetime / 1.5f > lifetime)
     {
-        // We won't want to add the avoid area right away, since that would wreak havoc on the path planning 
-        // Ships would try to avoid their own nukes, which is just really silly. 
+        // We won't want to add the avoid area right away, since that would wreak havoc on the path planning
+        // Ships would try to avoid their own nukes, which is just really silly.
         entity.getOrAddComponent<AvoidObject>().range = 1000.0f;
         avoid_area_added = true;
     }

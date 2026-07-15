@@ -212,7 +212,7 @@ void ShieldSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, 
             glm::vec2 delta_a = vec2FromAngle(direction - arc / 2.0f);
             glm::vec2 delta_b = vec2FromAngle(direction);
             glm::vec2 delta_c = vec2FromAngle(direction + arc / 2.0f);
-            
+
             auto p0 = screen_position + delta_b * sprite_scale * 0.05f;
             renderer.drawTexturedQuad("shield_circle.png",
                 p0,

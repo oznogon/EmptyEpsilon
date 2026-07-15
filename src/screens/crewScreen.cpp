@@ -250,7 +250,7 @@ void CrewScreen::update(float delta)
     }
 
     // If we're using autoconnect, do nothing on escape. Otherwise, go back to
-    // ship selection. 
+    // ship selection.
     if (keys.escape.getDown() && PreferencesManager::get("autoconnect") == "")
     {
         destroy();
@@ -362,7 +362,7 @@ void CrewScreen::showTab(GuiElement* element)
             // via hotkey.
             focus(main_panel);
         }
-        else 
+        else
         {
             info.element->hide();
             info.button->setValue(false);

@@ -1503,7 +1503,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_CLOSE_TEXT_COMM:
         CommsSystem::close(ship);
         break;
-    case CMD_ANSWER_COMM_HAIL: 
+    case CMD_ANSWER_COMM_HAIL:
         {
             bool answer = false;
             packet >> answer;

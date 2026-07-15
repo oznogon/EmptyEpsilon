@@ -384,7 +384,7 @@ private:
             [](sp::ecs::Entity e) { return e.hasComponent<sp::Transform>(); });
 
         page.description = tr("tweak-transform", "Sets the entity's position (X, Y) and rotation angle. Position is in game units (1000 = 1U), rotation in degrees (0 = right/east-facing/heading 90).");
-        addVec2Tweak(page.page, tr("tweak-text", "Position:"), ".components.transform.position", 
+        addVec2Tweak(page.page, tr("tweak-text", "Position:"), ".components.transform.position",
             [this]()
             {
                 if (auto t = entity.getComponent<sp::Transform>()) return t->getPosition();
@@ -418,7 +418,7 @@ private:
             },
             page.update_funcs
         );
-        addVec2Tweak(page.page, tr("tweak-text", "Velocity:"), ".components.physics.velocity", 
+        addVec2Tweak(page.page, tr("tweak-text", "Velocity:"), ".components.physics.velocity",
             [this]()
             {
                 if (auto v = entity.getComponent<sp::Physics>()) return v->getVelocity();
@@ -441,7 +441,7 @@ private:
         auto& page = addPage(tr("tweak-tab", "CallSign"),
             [](sp::ecs::Entity e) { return e.hasComponent<CallSign>(); });
         page.description = tr("tweak-callsign", "The callsign displayed on radar views and in communications.");
-        addTextTweak(page.page, tr("tweak-text", "Callsign:"), ".components.callsign.callsign", 
+        addTextTweak(page.page, tr("tweak-text", "Callsign:"), ".components.callsign.callsign",
             [this]()
             {
                 if (auto v = entity.getComponent<CallSign>()) return v->callsign;
@@ -541,7 +541,7 @@ private:
             },
             page.update_funcs
         );
-        addFloatTweak(page.page, tr("tweak-text", "Level:"), ".components.shields.entries[1].level", 
+        addFloatTweak(page.page, tr("tweak-text", "Level:"), ".components.shields.entries[1].level",
             [this]()
             {
                 if (auto v = entity.getComponent<Shields>())
@@ -550,7 +550,7 @@ private:
             },
             page.update_funcs
         );
-        addFloatTweak(page.page, tr("tweak-text", "Max:"), ".components.shields.entries[1].max", 
+        addFloatTweak(page.page, tr("tweak-text", "Max:"), ".components.shields.entries[1].max",
             [this]()
             {
                 if (auto v = entity.getComponent<Shields>())
@@ -603,7 +603,7 @@ private:
             [](sp::ecs::Entity e) { return e.hasComponent<BeamWeaponSys>(); });
         page.description = tr("tweak-beam-system", "Ship system providing beam weapon configuration. Defines arc, range, damage, cycle time, and optional turret tracking.");
 
-        addFloatTweak(page.page, tr("tweak-text", "Health:"), ".components.beam_weapons.health", 
+        addFloatTweak(page.page, tr("tweak-text", "Health:"), ".components.beam_weapons.health",
             [this]()
             {
                 if (auto v = entity.getComponent<BeamWeaponSys>()) return v->health;
@@ -724,7 +724,7 @@ private:
             [this]()
             {
                 if (auto v = entity.getComponent<ImpulseEngine>()) return v->acceleration_forward;
-               
+
                 return 0.0f;
             },
             page.update_funcs
@@ -828,7 +828,7 @@ private:
             [this]()
             {
                 if (auto v = entity.getComponent<CommsTransmitter>()) return static_cast<int>(v->state);
-               
+
                 return 0;
             },
             page.update_funcs
@@ -849,7 +849,7 @@ private:
             [this]()
             {
                 if (auto v = entity.getComponent<DockingPort>()) return static_cast<int>(v->state);
-               
+
                 return 0;
             },
             page.update_funcs

@@ -182,7 +182,7 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
             ->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
     }
 
-    // TODO: Fix overlap with some ships 
+    // TODO: Fix overlap with some ships
     (new GuiCustomShipFunctions(this, CrewPosition::damageControl, ""))
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, 150.0f);

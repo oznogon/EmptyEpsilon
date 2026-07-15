@@ -60,7 +60,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = starbox_shader->getAttributeLocation("a_position");
 
     // Load up the ebo and vbo for the cube.
-    /*   
+    /*
            .2------6
          .' |    .'|
         3---+--7'  |
@@ -122,7 +122,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 
     // Generate and update the alternating vertices signs.
     std::array<float, 2 * spacedust_particle_count> signs;
-    
+
     for (auto n = 0U; n < signs.size(); n += 2)
     {
         signs[n] = -1.f;
@@ -152,12 +152,12 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         return;
     }
     renderer.finish();
-   
+
     if (auto transform = my_spaceship.getComponent<sp::Transform>())
         soundManager->setListenerPosition(transform->getPosition(), transform->getRotation());
     else
         soundManager->setListenerPosition(glm::vec2(camera_position.x, camera_position.y), camera_yaw);
-    
+
     glActiveTexture(GL_TEXTURE0);
 
     float camera_fov = std::clamp(base_fov + fov_modifier, 30.0f, 140.0f);
@@ -334,14 +334,14 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         local_skybox_texture->bind();
 
         glUniform1f(starbox_uniforms[static_cast<size_t>(Uniforms::BoxLerp)], local_skybox_factor);
-        
+
         // Uniform
         // Upload matrices (only float 4x4 supported in es2)
         // For skybox, remove translation from view matrix to make it appear infinitely far away
         glm::mat4 skybox_view = glm::mat4(glm::mat3(view_matrix));
         glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
         glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::View)], 1, GL_FALSE, glm::value_ptr(skybox_view));
-        
+
         // Bind our cube
         {
             gl::ScopedVertexAttribArray positions(starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)]);
@@ -570,13 +570,13 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         auto transform = my_spaceship.getComponent<sp::Transform>();
         auto physics = my_spaceship.getComponent<sp::Physics>();
         static std::vector<glm::vec3> space_dust(2 * spacedust_particle_count);
-        
+
         glm::vec2 dust_vector = physics ? (physics->getVelocity() / 100.f) : glm::vec2{0, 0};
         glm::vec3 dust_center = transform ? glm::vec3(transform->getPosition().x, transform->getPosition().y, 0.f) : camera_position;
 
         constexpr float maxDustDist = 500.f;
         constexpr float minDustDist = 100.f;
-        
+
         bool update_required = false; // Do we need to update the GPU buffer?
 
         for (auto n = 0U; n < space_dust.size(); n += 2)
@@ -599,19 +599,19 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         // Ship information for flying particles
         glUniform2f(spacedust_shader->getUniformLocation("u_velocity"), dust_vector.x, dust_vector.y);
-        
+
         {
             gl::ScopedVertexAttribArray positions(spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)]);
             gl::ScopedVertexAttribArray signs(spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Sign)]);
             glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
-            
+
             if (update_required)
             {
                 glBufferSubData(GL_ARRAY_BUFFER, 0, space_dust.size() * sizeof(glm::vec3), space_dust.data());
             }
             glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
             glVertexAttribPointer(signs.get(), 1, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(2 * spacedust_particle_count * sizeof(glm::vec3)));
-            
+
             glDrawArrays(GL_LINES, 0, 2 * spacedust_particle_count);
             glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
         }
@@ -661,7 +661,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 /*
 #ifdef DEBUG
     glDisable(GL_DEPTH_TEST);
-    
+
     {
         ShaderRegistry::ScopedShader debug_shader(ShaderRegistry::Shaders::BasicColor);
         // Common state: color, projection matrix.
@@ -693,7 +693,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
             for (unsigned int n = 0; n < collisionShape.size(); n++)
                 points[n] = glm::vec3(collisionShape[n].x, collisionShape[n].y, 0.f);
-            
+
             glDrawArrays(GL_LINE_LOOP, 0, collisionShape.size());
             glPopMatrix();
         }

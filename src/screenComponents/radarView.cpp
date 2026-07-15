@@ -126,7 +126,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 
     // Draw the initial background 'clear' color.
     if (style == Rectangular) drawBackground(renderer);
-    
+
     // Draw the radar's outline first, and before any stencil kicks in.
     // This way, the outline is not even part of the rendering area.
     const float radar_outline_thickness = 4.0f;
@@ -137,7 +137,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     renderer.finish();
     glEnable(GL_STENCIL_TEST);
     glStencilMask(as_mask(RadarStencil::InBoundsAndVisible));
-    
+
     // By default, nothing's visible.
     auto clear_mask = as_mask(RadarStencil::None);
     if (style == Rectangular)
@@ -153,9 +153,9 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     glClear(GL_STENCIL_BUFFER_BIT);
 
     glDepthMask(GL_FALSE); // Nothing in this process writes in the depth.
-    
+
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-    
+
     if ((style == CircularMasked || style == Circular))
     {
         // When drawing the radar 'scope', mark the area as "in sight" and "visible".
@@ -401,7 +401,7 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
             {
                 // Inside a nebula - everything is blocked out.
                 renderer.fillRect(rect, glm::u8vec4(0, 0, 0, 255));
-                
+
                 // Leave the loop here: there's no point adding more blocked areas.
                 break;
             }
@@ -623,7 +623,7 @@ void GuiRadarView::drawRangeIndicators(sp::RenderTarget& renderer)
         );
         renderer.drawText(
             sp::Rect(radar_screen_center.x, radar_screen_center.y - s - 20, 0, 0),
-            string(static_cast<int>(circle_size / 1000.0f + 0.1f)) + DISTANCE_UNIT_1K, 
+            string(static_cast<int>(circle_size / 1000.0f + 0.1f)) + DISTANCE_UNIT_1K,
             sp::Alignment::Center,
             range_indicators_style.size,
             font,

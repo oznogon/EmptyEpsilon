@@ -48,7 +48,7 @@ namespace ShaderRegistry
             "u_camera_position",
             "u_atmosphereColor",
             "u_illuminationModulation",
-            
+
             "u_textureMap",
             "u_baseMap",
             "u_specularMap",
@@ -84,7 +84,7 @@ namespace ShaderRegistry
 
             if (!entry.shader)
                 return false;
-            
+
             if (entry.shader)
             {
                 entry.get()->bind();
@@ -131,7 +131,7 @@ namespace ShaderRegistry
             view = view_in.value();
             camera = glm::inverse(view)[3];
         }
-            
+
         for (auto i = 0; i < Shaders_t(Shaders::Count); ++i)
         {
             auto& shader = get(Shaders(i));
@@ -193,7 +193,7 @@ namespace ShaderRegistry
 
     void setupLights(const Shader& shader, const glm::vec3& target_worldspace)
     {
-        const auto lights = { 
+        const auto lights = {
             std::tuple{Uniforms::AmbientLightDirection, ambient_light_offset},
                       {Uniforms::SpecularLightDirection, specular_light_offset}
         };

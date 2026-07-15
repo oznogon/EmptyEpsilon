@@ -4176,7 +4176,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VEC2_TWEAK(tr("tweak-text", "Position:"), InternalCrew, position);
     ADD_IVEC2_TWEAK(tr("tweak-text", "Target position:"), InternalCrew, target_position);
     */
-    
+
     ADD_PAGE(tr("tweak-tab", "Pickup"), PickupCallback);
     new_page->description = tr("tweak-pickup", "If present, this component makes this entity collectible by other entities. Upon collision, this component grants energy, missiles, or other resources to the colliding entity, then immediately destroys itself. Can be set to be picked up only by player ships.\n\nCallback member callback can't be tweaked via this dialog.");
     ADD_BOOL_TWEAK(tr("tweak-text", "Only players can pick up this entity"), PickupCallback, player);
@@ -4597,7 +4597,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         row
             ->setSize(GuiElement::GuiSizeMax, 30.0f)
             ->setAttribute("layout", "horizontal");
-        auto ui = new GuiToggleTweak(row, tr("tweak-text", "Color by faction"), 
+        auto ui = new GuiToggleTweak(row, tr("tweak-text", "Color by faction"),
             [this](bool value)
             {
                 if (auto v = entity.getComponent<RadarTrace>())

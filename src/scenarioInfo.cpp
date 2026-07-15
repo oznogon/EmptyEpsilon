@@ -175,7 +175,7 @@ void ScenarioInfo::clearCache()
 std::vector<ScenarioInfo> ScenarioInfo::getScenarios(const string& category)
 {
     std::vector<ScenarioInfo> result;
-    
+
     for(const auto& info : getScenarios())
     {
         if (info.hasCategory(category))

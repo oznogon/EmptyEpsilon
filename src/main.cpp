@@ -300,7 +300,7 @@ int main(int argc, char** argv)
         LOG(Info, "Launching server_scenario " + server_scenario + " on port " + string(server_port));
         new EpsilonServer(server_port);
 
-        // Exit returning 1 if server is invalid. 
+        // Exit returning 1 if server is invalid.
         if(!gameGlobalInfo) return 1;
 
         if (PreferencesManager::get("server_name") != "") game_server->setServerName(PreferencesManager::get("server_name"));

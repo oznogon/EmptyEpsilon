@@ -163,8 +163,8 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 
             // Draw the line's prefix, then draw its contents.
             renderer.drawText(
-                rect, 
-                prepared_prefix, 
+                rect,
+                prepared_prefix,
                 sp::Font::FlagClip
             );
             renderer.drawText(

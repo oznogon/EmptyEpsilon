@@ -96,7 +96,7 @@ void JoinServerScreen::update(float delta)
         auto reason = game_client->getDisconnectReason();
         destroy();
         disconnectFromServer();
-        
+
         new ServerBrowserMenu(reason);
     }
     break;

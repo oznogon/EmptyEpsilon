@@ -1147,7 +1147,7 @@ void luaCommandFireTube(sp::ecs::Entity ship, int tube_nr, float missile_target_
 
 void luaCommandFireTubeAtTarget(sp::ecs::Entity ship, int tube_nr, sp::ecs::Entity target) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandFireTubeAtTarget(tube_nr, target); return; }
-    
+
     float targetAngle = 0.0;
     auto missiletubes = ship.getComponent<MissileTubes>();
 
@@ -1579,7 +1579,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// -- Defines strings for singular and plural forms, depending on the value of the minutes variable:
     /// minutes = 5; comms = string.format(_(minutes, "comms-timer", [[Atlantis, you have 1 minute remaining.]], [[Atlantis, you have %d minutes remaining.]]), minutes))
     env.setGlobal("_", &luaTranslate);
-    
+
     /// entity createEntity()
     /// Creates an entity with no components.
     /// Example:
@@ -1941,7 +1941,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandAnswerCommHail", &luaCommandAnswerCommHail);
     /// void commandSendComm(entity ship, integer index)
     /// Selects a reply option by index in an active script-based communications dialogue for the given ship. If the ship has no active scripted comms, this does nothing.
-    /// The index corresponds to the order in which reply options were added with addCommsReply(). 
+    /// The index corresponds to the order in which reply options were added with addCommsReply().
     /// This is equivalent to clicking the equivalent buttons in a scripted comms panel on the Relay screen.
     /// Example:
     /// commandSendComm(getPlayerShip(-1), 0) -- select the first comms reply option
@@ -2170,7 +2170,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// 0 = Simple
     /// 1 = Normal
     /// 2 = Difficult (default)
-    /// 3 = Fiendish 
+    /// 3 = Fiendish
     /// Example: getHackingDifficulty() -- returns 2 by default
     env.setGlobal("getHackingDifficulty", &luaGetHackingDifficulty);
     /// EHackingGames getHackingGames()

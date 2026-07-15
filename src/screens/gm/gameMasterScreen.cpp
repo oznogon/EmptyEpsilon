@@ -1153,7 +1153,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         {
                             auto port = entity.getComponent<DockingPort>();
                             auto bay = target.getComponent<DockingBay>();
-                            if (!shift_down && port && bay && port->canDockOn(*bay) != DockingStyle::None) 
+                            if (!shift_down && port && bay && port->canDockOn(*bay) != DockingStyle::None)
                                 ai->orders = AIOrder::Dock;
                             else
                                 ai->orders = AIOrder::DefendTarget;

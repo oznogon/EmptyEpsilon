@@ -110,7 +110,7 @@ TutorialMenu::TutorialMenu()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Start tutorial button.
-    start_tutorial_button = new GuiButton(bottom_row, "START_TUTORIAL", tr("Start tutorial"), 
+    start_tutorial_button = new GuiButton(bottom_row, "START_TUTORIAL", tr("Start tutorial"),
         [this]()
         {
             destroy();

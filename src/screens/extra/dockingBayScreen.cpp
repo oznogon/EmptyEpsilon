@@ -1082,10 +1082,10 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         entity_hull->setValue("");
         entity_probes->setValue("");
         for (auto kv : entity_missiles) kv->setValue("");
-        
+
         return;
     }
-    
+
     // Select the panel by index.
     for (size_t i = 0; i < berth_panels.size(); i++)
         berth_panels[i]->selected = (static_cast<int>(i) == selected_berth_index);

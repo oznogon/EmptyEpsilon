@@ -86,7 +86,7 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
         glUniform3fv(uniforms[as_index(Uniforms::FogColor)], 1, glm::value_ptr(fc));
         glUniform1f(uniforms[as_index(Uniforms::FogDistance)], fd);
     }
-    
+
     {
         gl::ScopedVertexAttribArray centers(attributes[as_index(Attributes::Center)]);
         gl::ScopedVertexAttribArray texcoords(attributes[as_index(Attributes::TexCoords)]);
@@ -101,7 +101,7 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
         glVertexAttribPointer(sizes.get(), 1, GL_FLOAT, GL_FALSE, sizeof(ParticleData), reinterpret_cast<const GLvoid*>(offsetof(ParticleData, size)));
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  
+
         // Process only non-expired
         size_t live_particle_count = first_expired - std::begin(particles);
 
@@ -132,10 +132,10 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
 
             // Send instances to shader.
             glBufferSubData(GL_ARRAY_BUFFER, 0, instance_count * vertices_per_instance * sizeof(ParticleData), particles_renderdata.data());
-        
+
             // Draw our instances
             glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements_per_instance * instance_count), GL_UNSIGNED_SHORT, nullptr);
-            
+
             n += instance_count;
         }
 

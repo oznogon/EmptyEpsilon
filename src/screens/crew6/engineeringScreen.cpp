@@ -819,7 +819,7 @@ void EngineeringScreen::onUpdate()
         if (power_adjust != 0.0f)
         {
             auto sys = ShipSystem::get(my_spaceship, selected_system);
-            if (sys) 
+            if (sys)
             {
                 power_slider->setValue(sys->power_request + power_adjust);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
@@ -833,7 +833,7 @@ void EngineeringScreen::onUpdate()
         if (coolant_adjust != 0.0f)
         {
             auto sys = ShipSystem::get(my_spaceship, selected_system);
-            if (sys) 
+            if (sys)
             {
                 coolant_slider->setValue(sys->coolant_request + coolant_adjust);
                 my_player_info->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());

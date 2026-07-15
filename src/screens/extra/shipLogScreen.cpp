@@ -15,9 +15,9 @@ ShipLogScreen::ShipLogScreen(GuiContainer* owner)
     // Draw background elements.
     (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
-    
+
     new AlertLevelOverlay(this);
-    
+
     GuiElement* shiplog_layout = new GuiElement(this, "SHIPLOG_LAYOUT");
     shiplog_layout
         ->setPosition(50.0f, 120.0f)
