@@ -20,6 +20,7 @@ private:
 };
 
 class GuiTextEntry;
+class GuiScrollContainer;
 class LuaConsole : public GuiCanvas, public Updatable
 {
 public:
@@ -35,11 +36,13 @@ public:
 
     void update(float delta) override;
     bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    void onTextInput(sp::TextInputEvent e) override;
 private:
     std::vector<string> log_messages;
     ConsoleHistory history;
     GuiElement* top;
     GuiTextEntry* log;
+    GuiScrollContainer* log_scroll;
     GuiTextEntry* entry;
 
     bool is_open = false;

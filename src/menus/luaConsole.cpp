@@ -7,6 +7,7 @@
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_textentry.h"
+#include "gui/gui2_scrollcontainer.h"
 
 #include "io/keybinding.h"
 
@@ -27,9 +28,15 @@ LuaConsole::LuaConsole()
     top->getLayout().margin.right = 50;
     top->setAttribute("layout", "vertical");
 
-    log = new GuiTextEntry(top, "", "");
+    log_scroll = new GuiScrollContainer(top, "", GuiScrollContainer::ScrollMode::Scroll);
+    log_scroll->setAttribute("stretch", "true");
+    log_scroll->setScrollbarWidth(25);
+    log_scroll->setScrollStart(GuiScrollContainer::ScrollStart::Bottom);
+    log_scroll->enableAutoScrollDown();
+
+    log = new GuiTextEntry(log_scroll, "", "");
     log->setAttribute("style", "luaconsole.log");
-    log->setAttribute("stretch", "true");
+    log->getLayout().fill_width = true;
     log->setMultiline(true);
     log->setWrap(true);
     log->setTextSize(12);
@@ -65,10 +72,12 @@ LuaConsole::LuaConsole()
 
 bool LuaConsole::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    bool result = GuiCanvas::onPointerDown(button, position, id);
-    if (!entry->getRect().contains(position))
+    if (!top->isVisible())
+        return false;
+    GuiCanvas::onPointerDown(button, position, id);
+    if (!log->getRect().contains(position) && !entry->getRect().contains(position))
         focus(nullptr);
-    return result;
+    return true;
 }
 
 void LuaConsole::addLog(const string& message)
@@ -79,7 +88,6 @@ void LuaConsole::addLog(const string& message)
     while(console->log_messages.size() > 50)
         console->log_messages.erase(console->log_messages.begin());
     console->log->setText(string("\n").join(console->log_messages));
-    console->log->setCursorPosition(console->log->getText().size());
     if (!console->is_open) {
         console->message_show_timers.emplace_back();
         console->message_show_timers.back().start(5.0f);
@@ -114,6 +122,23 @@ void LuaConsole::update(float delta)
             auto linespace = console->log->getLineSpacing();
             top->getLayout().size.y = std::min(450.0f, (0.3f + message_show_timers.size()) * linespace);
         }
+    }
+
+}
+
+void LuaConsole::onTextInput(sp::TextInputEvent e)
+{
+    switch(e)
+    {
+    case sp::TextInputEvent::Up:
+    case sp::TextInputEvent::UpWithSelection:
+    case sp::TextInputEvent::Down:
+    case sp::TextInputEvent::DownWithSelection:
+        entry->onTextInput(e);
+        break;
+    default:
+        GuiCanvas::onTextInput(e);
+        break;
     }
 }
 
