@@ -86,7 +86,7 @@ require("tutorial/99_all.lua")
 function tutorial_init()
     tutorial_list = {
         engineeringTutorial,
-        endOfTutorial
+        endOfTutorial,
     }
     startTutorial()
 end

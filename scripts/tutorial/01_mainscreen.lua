@@ -26,7 +26,7 @@ function tutorial_init()
     tutorial_list = {
         mainscreenTutorial,
         radarTutorial,
-        endOfTutorial
+        endOfTutorial,
     }
 
     startTutorial()

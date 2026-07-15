@@ -51,7 +51,7 @@ require("tutorial/99_all.lua")
 function tutorial_init()
     tutorial_list = {
         helmsTutorial,
-        endOfTutorial
+        endOfTutorial,
     }
     startTutorial()
 end

@@ -59,7 +59,7 @@ require("tutorial/99_all.lua")
 function tutorial_init()
     tutorial_list = {
         scienceTutorial,
-        endOfTutorial
+        endOfTutorial,
     }
     startTutorial()
 end

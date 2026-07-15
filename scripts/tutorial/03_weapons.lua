@@ -81,7 +81,7 @@ require("tutorial/99_all.lua")
 function tutorial_init()
     tutorial_list = {
         weaponsTutorial,
-        endOfTutorial
+        endOfTutorial,
     }
     startTutorial()
 end

@@ -75,7 +75,7 @@ require("tutorial/99_all.lua")
 function tutorial_init()
     tutorial_list = {
         relayTutorial,
-        endOfTutorial
+        endOfTutorial,
     }
     startTutorial()
 end
