@@ -125,8 +125,7 @@ namespace ShaderRegistry
     {
         const auto has_projection = projection_in.has_value();
         const auto has_view = view_in.has_value();
-        if (has_projection)
-            projection = projection_in.value();
+        if (has_projection) projection = projection_in.value();
         if (has_view)
         {
             view = view_in.value();
@@ -141,6 +140,7 @@ namespace ShaderRegistry
             auto fog_color_location = shader.uniform(Uniforms::FogColor);
             auto fog_distance_location = shader.uniform(Uniforms::FogDistance);
             auto time_location = shader.uniform(Uniforms::Time);
+
             if (projection_location != -1 || view_location != -1 || fog_color_location != -1 || fog_distance_location != -1 || time_location != -1)
             {
                 shader.get()->bind();
@@ -194,16 +194,14 @@ namespace ShaderRegistry
     void setupLights(const Shader& shader, const glm::vec3& target_worldspace)
     {
         const auto lights = { 
-            std::tuple	{Uniforms::AmbientLightDirection, ambient_light_offset},
-                        {Uniforms::SpecularLightDirection, specular_light_offset}
+            std::tuple{Uniforms::AmbientLightDirection, ambient_light_offset},
+                      {Uniforms::SpecularLightDirection, specular_light_offset}
         };
 
         for (auto [uniform, offset] : lights)
         {
             if (auto position = shader.uniform(uniform); position != -1)
-            {
                 glUniform3fv(position, 1, glm::value_ptr(glm::normalize((camera + offset) - target_worldspace)));
-            }
         }
     }
 
@@ -215,8 +213,7 @@ namespace ShaderRegistry
 
     ScopedShader::~ScopedShader() noexcept
     {
-        if (shader)
-            glUseProgram(GL_NONE);
+        if (shader) glUseProgram(GL_NONE);
     }
 
     ScopedShader::ScopedShader(ScopedShader&& other) noexcept

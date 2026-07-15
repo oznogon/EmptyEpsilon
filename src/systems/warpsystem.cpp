@@ -107,7 +107,7 @@ glm::vec2 WarpSystem::getFirstNonJammedPosition(glm::vec2 start, glm::vec2 end)
     for(auto [entity, jammer, jt] : sp::ecs::Query<WarpJammer, sp::Transform>())
     {
         float f_inf = glm::dot(startEndDiff, jt.getPosition() - start) / startEndLength;
-	    float f_limited = std::min(std::max(0.0f, f_inf), startEndLength);
+        float f_limited = std::min(std::max(0.0f, f_inf), startEndLength);
         glm::vec2 q_limited = start + startEndDiff / startEndLength * f_limited;
         if (glm::length2(q_limited - jt.getPosition()) < jammer.range*jammer.range)
         {
