@@ -14,10 +14,10 @@ __default_cpu_ship_faction = "Kraylor"
 function CpuShip()
     local e = createEntity()
     e.components = {
-        transform = {rotation=random(0, 360)},
-        ai_controller = {new_name="default", orders="roaming"},
-        scan_state = {allow_simple_scan=true},
-        callsign = {callsign=generateRandomCallSign()},
+        transform = { rotation = random(0, 360) },
+        ai_controller = { new_name = "default", orders = "roaming" },
+        scan_state = { allow_simple_scan = true },
+        callsign = { callsign = generateRandomCallSign() },
         dynamic_radar_signature = {},
     }
     e:setFaction(__default_cpu_ship_faction)
@@ -35,14 +35,18 @@ end
 --- - "missilevolley" prefers lining up missile attacks from long range
 --- Example: ship:setAI("fighter")
 function Entity:setAI(ai_name)
-    if self.components.ai_controller then self.components.ai_controller.new_name = ai_name end
+    if self.components.ai_controller then
+        self.components.ai_controller.new_name = ai_name
+    end
     return self
 end
 --- Orders this AI-controlled ship to stay at its current position and do nothing.
 --- Idle ships don't target or attack nearby enemies.
 --- Example: ship:orderIdle()
 function Entity:orderIdle()
-    if self.components.ai_controller then self.components.ai_controller.orders = "idle" end
+    if self.components.ai_controller then
+        self.components.ai_controller.orders = "idle"
+    end
     return self
 end
 --- Orders this AI-controlled ship to roam and engage at will, without a specific target.
@@ -50,12 +54,22 @@ end
 --- If this ship has weapon tubes but lacks beam weapons and is out of weapons stock, it attempts to Retreat to a weapons restock target within long-range radar range.
 --- Example: ship:orderRoaming()
 function Entity:orderRoaming()
-    if self.components.transform == nil then return self end
-    if self.components.ai_controller then self.components.ai_controller = {orders = "roaming", order_target_location=self.components.transform.position} end
+    if self.components.transform == nil then
+        return self
+    end
+    if self.components.ai_controller then
+        self.components.ai_controller = {
+            orders = "roaming",
+            order_target_location = self.components.transform.position,
+        }
+    end
     return self
 end
 function Entity:orderRoamingAt(x, y)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "roaming", order_target_location={x, y}} end
+    if self.components.ai_controller then
+        self.components.ai_controller =
+            { orders = "roaming", order_target_location = { x, y } }
+    end
     return self
 end
 --- Orders this AI-controlled ship to move toward the given entity and dock, restock weapons, and repair its hull.
@@ -64,21 +78,29 @@ end
 --- If this ship still can't find a restocking target, or it is fully repaired and re-stocked, this ship reverts to Roaming orders.
 --- Example: ship:orderRetreat(base) -- retreat to the entity `base`
 function Entity:orderRetreat(target)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "retreat", order_target=target} end
+    if self.components.ai_controller then
+        self.components.ai_controller =
+            { orders = "retreat", order_target = target }
+    end
     return self
 end
 --- Orders this AI-controlled ship to stay at its current position and attack nearby hostiles.
 --- This ship will rotate to face a target and fires missiles within 4.5U if it has any, but won't move, roam, or patrol.
 --- Example: ship:orderStandGround()
 function Entity:orderStandGround()
-    if self.components.ai_controller then self.components.ai_controller = {orders = "stand ground"} end
+    if self.components.ai_controller then
+        self.components.ai_controller = { orders = "stand ground" }
+    end
     return self
 end
 --- Orders this AI-controlled ship to move to the given coordinates, patrol within a 1.5U radius, and attack any hostiles that move within 2U of its short-range radar range.
 --- If a targeted hostile moves more than 3U out of this ship's short-range radar range, this ship drops the target and resumes defending its position.
 --- Example: ship:orderDefendLocation(500, 1000) -- defend the space near these coordinates
 function Entity:orderDefendLocation(x, y)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "defend location", order_target_location={x, y}} end
+    if self.components.ai_controller then
+        self.components.ai_controller =
+            { orders = "defend location", order_target_location = { x, y } }
+    end
     return self
 end
 --- Orders this AI-controlled ship to maintain a 2U escort distance from the given entity and attack nearby hostiles.
@@ -86,7 +108,10 @@ end
 --- If the entity being defended is destroyed, this ship reverts to Roaming orders.
 --- Example: ship:orderDefendTarget(base) -- defend the space near the entity `base`
 function Entity:orderDefendTarget(target)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "defend target", order_target=target} end
+    if self.components.ai_controller then
+        self.components.ai_controller =
+            { orders = "defend target", order_target = target }
+    end
     return self
 end
 --- Orders this AI-controlled ship to fly toward the given entity and follow it from the given offset distance.
@@ -95,7 +120,13 @@ end
 --- Give multiple ships the same entity and different offsets to create a formation.
 --- Example: ship:orderFlyFormation(leader, 500, 250) -- fly 0.5U off the wing and 0.25U off the tail of the entity `leader`
 function Entity:orderFlyFormation(target, offset_x, offset_y)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "Fly in formation", order_target=target, order_target_location={offset_x, offset_y}} end
+    if self.components.ai_controller then
+        self.components.ai_controller = {
+            orders = "Fly in formation",
+            order_target = target,
+            order_target_location = { offset_x, offset_y },
+        }
+    end
     return self
 end
 --- Orders this AI-controlled ship to move toward the given coordinates, and to attack hostiles that approach within its short-range radar range during transit.
@@ -104,33 +135,49 @@ end
 --- Upon arrival, this ship reverts to the Defend Location orders with its destination as the target.
 --- Example: ship:orderFlyTowards(500, 1000) -- move to these coordinates, attacking nearby hostiles on the way
 function Entity:orderFlyTowards(x, y)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "fly towards", order_target_location={x, y}} end
+    if self.components.ai_controller then
+        self.components.ai_controller =
+            { orders = "fly towards", order_target_location = { x, y } }
+    end
     return self
 end
 --- Orders this AI-controlled ship to move toward the given coordinates, ignoring all hostiles on the way.
 --- Upon arrival, this ship reverts to the Idle orders.
 --- Example: ship:orderFlyTowardsBlind(500, 1000) -- move to these coordinates, ignoring hostiles
 function Entity:orderFlyTowardsBlind(x, y)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "fly towards (ignore all)", order_target_location={x, y}} end
+    if self.components.ai_controller then
+        self.components.ai_controller = {
+            orders = "fly towards (ignore all)",
+            order_target_location = { x, y },
+        }
+    end
     return self
 end
 --- Orders this AI-controlled ship to attack the given entity.
 --- Example: ship:orderAttack(player)
 function Entity:orderAttack(target)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "attack", order_target=target} end
+    if self.components.ai_controller then
+        self.components.ai_controller =
+            { orders = "attack", order_target = target }
+    end
     return self
 end
 --- Orders this AI-controlled ship to Fly Toward and dock with the given entity, if possible.
 --- If its target doesn't exist, revert to Roaming orders.
 --- Example: ship:orderDock(spaceStation)
 function Entity:orderDock(target)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "dock", order_target=target} end
+    if self.components.ai_controller then
+        self.components.ai_controller =
+            { orders = "dock", order_target = target }
+    end
     return self
 end
 --- Returns this AI-controlled ship's current orders.
 --- Example: ship_orders = ship:getOrder()
 function Entity:getOrder()
-    if self.components.ai_controller then return self.components.ai_controller.orders end
+    if self.components.ai_controller then
+        return self.components.ai_controller.orders
+    end
 end
 --- Returns the coordinates for this AI-controlled ship's orders.
 --- If the orders target an entity instead of coordinates, use getOrderTarget().
@@ -138,12 +185,16 @@ end
 --- Returns the order's x,y coordinates, or 0,0 if not defined.
 --- Example: x,y = ship:getOrderTargetLocation()
 function Entity:getOrderTargetLocation()
-    if self.components.ai_controller then return table.unpack(self.components.ai_controller.order_target_location) end
+    if self.components.ai_controller then
+        return table.unpack(self.components.ai_controller.order_target_location)
+    end
 end
 --- Returns the target entity for this AI-controlled ship's orders.
 --- If the orders target coordinates instead of an object, use getOrderTargetLocation().
 --- Some orders, such as Roaming, have no target. If an AI-controlled ship is engaging in combat while Roaming, its target is accessible through its Target component.
 --- Example: target = ship:getOrderTarget()
 function Entity:getOrderTarget()
-    if self.components.ai_controller then return self.components.ai_controller.order_target end
+    if self.components.ai_controller then
+        return self.components.ai_controller.order_target
+    end
 end

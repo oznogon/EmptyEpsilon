@@ -7,8 +7,10 @@ local Entity = getLuaEntityFunctionTable()
 --- Use isFriendOrFoeIdentifiedBy() or isFriendOrFoeIdentifiedByFaction().
 function Entity:isFriendOrFoeIdentified()
     if self.components.scan_state then
-        for n=1,#self.components.scan_state do
-            if self.components.scan_state[n].state ~= "none" then return true end
+        for n = 1, #self.components.scan_state do
+            if self.components.scan_state[n].state ~= "none" then
+                return true
+            end
         end
     end
     return false
@@ -17,8 +19,10 @@ end
 --- Use isFullyScannedBy() or isFullyScannedByFaction().
 function Entity:isFullyScanned()
     if self.components.scan_state then
-        for n=1,#self.components.scan_state do
-            if self.components.scan_state[n].state == "full" then return true end
+        for n = 1, #self.components.scan_state do
+            if self.components.scan_state[n].state == "full" then
+                return true
+            end
         end
     end
     return false
@@ -28,13 +32,19 @@ end
 --- Example: ship:isFriendOrFoeIdentifiedBy(enemy)
 function Entity:isFriendOrFoeIdentifiedBy(enemy)
     local scan_state = self.components.scan_state
-    if enemy == nil or not enemy:isValid() then return false end
+    if enemy == nil or not enemy:isValid() then
+        return false
+    end
     local faction = enemy.components.faction
-    if faction == nil then return false end
+    if faction == nil then
+        return false
+    end
     faction = faction.entity
     if scan_state then
-        for n=1,#scan_state do
-            if scan_state[n].faction == faction then return scan_state[n].state ~= "none" end
+        for n = 1, #scan_state do
+            if scan_state[n].faction == faction then
+                return scan_state[n].state ~= "none"
+            end
         end
     end
     return false
@@ -44,13 +54,19 @@ end
 --- Example: ship:isFullyScannedBy(enemy)
 function Entity:isFullyScannedBy(enemy)
     local scan_state = self.components.scan_state
-    if enemy == nil or not enemy:isValid() then return false end
+    if enemy == nil or not enemy:isValid() then
+        return false
+    end
     local faction = enemy.components.faction
-    if faction == nil then return false end
+    if faction == nil then
+        return false
+    end
     faction = faction.entity
     if scan_state then
-        for n=1,#scan_state do
-            if scan_state[n].faction == faction then return scan_state[n].state == "full" end
+        for n = 1, #scan_state do
+            if scan_state[n].faction == faction then
+                return scan_state[n].state == "full"
+            end
         end
     end
     return false
@@ -58,13 +74,19 @@ end
 --- Returns whether this ship has been identified by the given faction as either hostile or friendly.
 --- Example: ship:isFriendOrFoeIdentifiedByFaction("Kraylor")
 function Entity:isFriendOrFoeIdentifiedByFaction(faction)
-    if faction == nil then return false end
+    if faction == nil then
+        return false
+    end
     local scan_state = self.components.scan_state
     faction = getFactionInfo(faction)
-    if faction == nil or not faction:isValid() then return false end
+    if faction == nil or not faction:isValid() then
+        return false
+    end
     if scan_state then
         for n = 1, #scan_state do
-            if scan_state[n].faction == faction then return scan_state[n].state ~= "none" end
+            if scan_state[n].faction == faction then
+                return scan_state[n].state ~= "none"
+            end
         end
     end
     return false
@@ -73,13 +95,19 @@ end
 --- See also isScannedByFaction().
 --- Example: ship:isFullyScannedByFaction("Kraylor")
 function Entity:isFullyScannedByFaction(faction)
-    if faction == nil then return false end
+    if faction == nil then
+        return false
+    end
     local scan_state = self.components.scan_state
     faction = getFactionInfo(faction)
-    if faction == nil or not faction:isValid() then return false end
+    if faction == nil or not faction:isValid() then
+        return false
+    end
     if scan_state then
         for n = 1, #scan_state do
-            if scan_state[n].faction == faction then return scan_state[n].state == "full" end
+            if scan_state[n].faction == faction then
+                return scan_state[n].state == "full"
+            end
         end
     end
     return false
@@ -88,7 +116,10 @@ end
 --- Returns whether this ship is docked with the given entity.
 --- Example: ship:isDocked(base) -- returns true if `ship` is fully docked with `base`
 function Entity:isDocked(target)
-    if self.components.docking_port and self.components.docking_port.state == "docked" then
+    if
+        self.components.docking_port
+        and self.components.docking_port.state == "docked"
+    then
         return self.components.docking_port.target == target
     end
     return false
@@ -96,7 +127,10 @@ end
 --- Returns the entity with which this ship is docked.
 --- Example: base = ship:getDockedWith()
 function Entity:getDockedWith()
-    if self.components.docking_port and self.components.docking_port.state == "docked" then
+    if
+        self.components.docking_port
+        and self.components.docking_port.state == "docked"
+    then
         return self.components.docking_port.target
     end
     return false
@@ -109,8 +143,12 @@ end
 function Entity:getDockingState()
     if self.components.docking_port then
         local state = self.components.docking_port.state
-        if state == "docking" then return 1 end
-        if state == "docked" then return 2 end
+        if state == "docking" then
+            return 1
+        end
+        if state == "docked" then
+            return 2
+        end
     end
     return 0
 end
@@ -120,11 +158,21 @@ end
 function Entity:getWeaponStorage(weapon_type)
     if self.components.missile_tubes then
         weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then return self.components.missile_tubes.storage_homing end
-        if weapon_type == "nuke" then return self.components.missile_tubes.storage_nuke end
-        if weapon_type == "mine" then return self.components.missile_tubes.storage_mine end
-        if weapon_type == "emp" then return self.components.missile_tubes.storage_emp end
-        if weapon_type == "hvli" then return self.components.missile_tubes.storage_hvli end
+        if weapon_type == "homing" then
+            return self.components.missile_tubes.storage_homing
+        end
+        if weapon_type == "nuke" then
+            return self.components.missile_tubes.storage_nuke
+        end
+        if weapon_type == "mine" then
+            return self.components.missile_tubes.storage_mine
+        end
+        if weapon_type == "emp" then
+            return self.components.missile_tubes.storage_emp
+        end
+        if weapon_type == "hvli" then
+            return self.components.missile_tubes.storage_hvli
+        end
     end
     return 0
 end
@@ -133,11 +181,21 @@ end
 function Entity:getWeaponStorageMax(weapon_type)
     if self.components.missile_tubes then
         weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then return self.components.missile_tubes.max_homing end
-        if weapon_type == "nuke" then return self.components.missile_tubes.max_nuke end
-        if weapon_type == "mine" then return self.components.missile_tubes.max_mine end
-        if weapon_type == "emp" then return self.components.missile_tubes.max_emp end
-        if weapon_type == "hvli" then return self.components.missile_tubes.max_hvli end
+        if weapon_type == "homing" then
+            return self.components.missile_tubes.max_homing
+        end
+        if weapon_type == "nuke" then
+            return self.components.missile_tubes.max_nuke
+        end
+        if weapon_type == "mine" then
+            return self.components.missile_tubes.max_mine
+        end
+        if weapon_type == "emp" then
+            return self.components.missile_tubes.max_emp
+        end
+        if weapon_type == "hvli" then
+            return self.components.missile_tubes.max_hvli
+        end
     end
     return 0
 end
@@ -151,28 +209,43 @@ function Entity:setWeaponStorage(weapon_type, amount)
     if self.components.missile_tubes then
         weapon_type = string.lower(weapon_type)
         if weapon_type == "homing" then
-            self.components.missile_tubes.storage_homing = math.min(self.components.missile_tubes.max_homing, amount)
+            self.components.missile_tubes.storage_homing =
+                math.min(self.components.missile_tubes.max_homing, amount)
         end
         if weapon_type == "nuke" then
-            self.components.missile_tubes.storage_nuke = math.min(self.components.missile_tubes.max_nuke, amount)
+            self.components.missile_tubes.storage_nuke =
+                math.min(self.components.missile_tubes.max_nuke, amount)
         end
         if weapon_type == "mine" then
-            self.components.missile_tubes.storage_mine = math.min(self.components.missile_tubes.max_mine, amount)
+            self.components.missile_tubes.storage_mine =
+                math.min(self.components.missile_tubes.max_mine, amount)
         end
         if weapon_type == "emp" then
-            self.components.missile_tubes.storage_emp = math.min(self.components.missile_tubes.max_emp, amount)
+            self.components.missile_tubes.storage_emp =
+                math.min(self.components.missile_tubes.max_emp, amount)
         end
         if weapon_type == "hvli" then
-            self.components.missile_tubes.storage_hvli = math.min(self.components.missile_tubes.max_hvli, amount)
+            self.components.missile_tubes.storage_hvli =
+                math.min(self.components.missile_tubes.max_hvli, amount)
         end
     end
     if self.components.pickup then
         weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then self.components.pickup.give_homing = amount end
-        if weapon_type == "nuke" then self.components.pickup.give_nuke = amount end
-        if weapon_type == "mine" then self.components.pickup.give_mine = amount end
-        if weapon_type == "emp" then self.components.pickup.give_emp = amount end
-        if weapon_type == "hvli" then self.components.pickup.give_hvli = amount end
+        if weapon_type == "homing" then
+            self.components.pickup.give_homing = amount
+        end
+        if weapon_type == "nuke" then
+            self.components.pickup.give_nuke = amount
+        end
+        if weapon_type == "mine" then
+            self.components.pickup.give_mine = amount
+        end
+        if weapon_type == "emp" then
+            self.components.pickup.give_emp = amount
+        end
+        if weapon_type == "hvli" then
+            self.components.pickup.give_hvli = amount
+        end
     end
     return self
 end
@@ -186,23 +259,38 @@ function Entity:setWeaponStorageMax(weapon_type, amount)
         weapon_type = string.lower(weapon_type)
         if weapon_type == "homing" then
             self.components.missile_tubes.max_homing = amount
-            self:setWeaponStorage("homing", self.components.missile_tubes.storage_homing)
+            self:setWeaponStorage(
+                "homing",
+                self.components.missile_tubes.storage_homing
+            )
         end
         if weapon_type == "nuke" then
             self.components.missile_tubes.max_nuke = amount
-            self:setWeaponStorage("nuke", self.components.missile_tubes.storage_nuke)
+            self:setWeaponStorage(
+                "nuke",
+                self.components.missile_tubes.storage_nuke
+            )
         end
         if weapon_type == "mine" then
             self.components.missile_tubes.max_mine = amount
-            self:setWeaponStorage("mine", self.components.missile_tubes.storage_mine)
+            self:setWeaponStorage(
+                "mine",
+                self.components.missile_tubes.storage_mine
+            )
         end
         if weapon_type == "emp" then
             self.components.missile_tubes.max_emp = amount
-            self:setWeaponStorage("emp", self.components.missile_tubes.storage_emp)
+            self:setWeaponStorage(
+                "emp",
+                self.components.missile_tubes.storage_emp
+            )
         end
         if weapon_type == "hvli" then
             self.components.missile_tubes.max_hvli = amount
-            self:setWeaponStorage("hvli", self.components.missile_tubes.storage_hvli)
+            self:setWeaponStorage(
+                "hvli",
+                self.components.missile_tubes.storage_hvli
+            )
         end
     end
     return self
@@ -214,7 +302,9 @@ end
 --- -- Outputs "Ship's shield frequency is 600THz"
 --- print("Ship's shield frequency is " .. (frequency * 20) + 400 .. "THz")
 function Entity:getShieldsFrequency()
-    if self.components.shields then return self.components.shields.frequency end
+    if self.components.shields then
+        return self.components.shields.frequency
+    end
     return 0
 end
 --- Sets this ship's shield frequency index.
@@ -223,7 +313,9 @@ end
 --- Unlike commandSetShieldFrequency(), this instantly changes the frequency with no calibration delay.
 --- Example: ship:setShieldsFrequency(10) -- sets the shield frequency to 600THz
 function Entity:setShieldsFrequency(frequency)
-    if self.components.shields then self.components.shields.frequency = frequency end
+    if self.components.shields then
+        self.components.shields.frequency = frequency
+    end
     return self
 end
 --- Returns this ship's beam weapon frequency.
@@ -233,13 +325,17 @@ end
 --- -- Outputs "Ship's beam frequency is 600THz"
 --- print("Ship's beam frequency is " .. (frequency * 20) + 400 .. "THz")
 function Entity:getBeamFrequency()
-    if self.components.beam_weapons then return self.components.beam_weapons.frequency end
+    if self.components.beam_weapons then
+        return self.components.beam_weapons.frequency
+    end
     return 0
 end
 --- Returns this ship's energy capacity.
 --- Example: ship:getMaxEnergy()
 function Entity:getMaxEnergy()
-    if self.components.reactor then return self.components.reactor.max_energy end
+    if self.components.reactor then
+        return self.components.reactor.max_energy
+    end
     return 1000
 end
 --- Sets this ship's energy capacity.
@@ -247,48 +343,87 @@ end
 --- For player ships, see setEnergyLevelMax().
 --- Example: ship:setMaxEnergy(800)
 function Entity:setMaxEnergy(amount)
-    if self.components.reactor then self.components.reactor.max_energy = amount end
+    if self.components.reactor then
+        self.components.reactor.max_energy = amount
+    end
     return self
 end
 --- Returns this ship's energy level.
 --- Example: ship:getEnergy()
 function Entity:getEnergy()
-    if self.components.reactor then return self.components.reactor.energy end
+    if self.components.reactor then
+        return self.components.reactor.energy
+    end
     return 1000
 end
 
-
 function __getSystemByName(entity, system_name)
     system_name = string.lower(system_name)
-    if system_name == "reactor" then return entity.components.reactor end
-    if system_name == "beamweapons" then return entity.components.beam_weapons end
-    if system_name == "missilesystem" then return entity.components.missile_tubes end
-    if system_name == "maneuver" then return entity.components.maneuvering_thrusters end
-    if system_name == "impulse" then return entity.components.impulse_engine end
-    if system_name == "warp" then return entity.components.warp_drive end
-    if system_name == "jumpdrive" then return entity.components.jump_drive end
-    if system_name == "frontshield" then return entity.components.shields end
-    if system_name == "rearshield" and entity.components.shields and #entity.components.shields > 1 then return entity.components.shields end
-    if system_name == "utilitybeam" then return entity.components.utility_beam end
+    if system_name == "reactor" then
+        return entity.components.reactor
+    end
+    if system_name == "beamweapons" then
+        return entity.components.beam_weapons
+    end
+    if system_name == "missilesystem" then
+        return entity.components.missile_tubes
+    end
+    if system_name == "maneuver" then
+        return entity.components.maneuvering_thrusters
+    end
+    if system_name == "impulse" then
+        return entity.components.impulse_engine
+    end
+    if system_name == "warp" then
+        return entity.components.warp_drive
+    end
+    if system_name == "jumpdrive" then
+        return entity.components.jump_drive
+    end
+    if system_name == "frontshield" then
+        return entity.components.shields
+    end
+    if
+        system_name == "rearshield"
+        and entity.components.shields
+        and #entity.components.shields > 1
+    then
+        return entity.components.shields
+    end
+    if system_name == "utilitybeam" then
+        return entity.components.utility_beam
+    end
     return nil
 end
 
 function __getSystemPropertyByName(entity, system_name, property)
     system_name = string.lower(system_name)
     local sys = __getSystemByName(entity, system_name)
-    if sys == nil then return 0.0 end
-    if system_name == "frontshield" then return sys["front_" .. property] end
-    if system_name == "rearshield" then return sys["rear_" .. property] end
+    if sys == nil then
+        return 0.0
+    end
+    if system_name == "frontshield" then
+        return sys["front_" .. property]
+    end
+    if system_name == "rearshield" then
+        return sys["rear_" .. property]
+    end
     return sys[property]
 end
 
 function __setSystemPropertyByName(entity, system_name, property, value)
     system_name = string.lower(system_name)
     local sys = __getSystemByName(entity, system_name)
-    if sys == nil then return end
-    if system_name == "frontshield" then sys["front_" .. property] = value
-    elseif system_name == "rearshield" then sys["rear_" .. property] = value
-    else sys[property] = value end
+    if sys == nil then
+        return
+    end
+    if system_name == "frontshield" then
+        sys["front_" .. property] = value
+    elseif system_name == "rearshield" then
+        sys["rear_" .. property] = value
+    else
+        sys[property] = value
+    end
 end
 
 --- Returns whether this ship has the given system.
@@ -354,13 +489,22 @@ end
 --- Returns the given system's rate of heating or cooling, in percent (0.01 = 1%) per second?, on this ship.
 --- Example: ship:getSystemHeatRate("impulse")
 function Entity:getSystemHeatRate(system_name)
-    return __getSystemPropertyByName(self, system_name, "heat_add_rate_per_second")
+    return __getSystemPropertyByName(
+        self,
+        system_name,
+        "heat_add_rate_per_second"
+    )
 end
 --- Sets the given system's rate of heating or cooling, in percent (0.01 = 1%) per second?, on this ship.
 --- CPU ships don't generate or manage heat. Setting this has no effect on them.
 --- Example: ship:setSystemHeatRate("impulse", 0.05)
 function Entity:setSystemHeatRate(system_name, amount)
-    __setSystemPropertyByName(self, system_name, "heat_add_rate_per_second", amount)
+    __setSystemPropertyByName(
+        self,
+        system_name,
+        "heat_add_rate_per_second",
+        amount
+    )
     return self
 end
 --- Returns the given system's power level on this ship.
@@ -379,13 +523,22 @@ end
 --- Returns the given system's rate of consuming power, in points per second?, in this ship.
 --- Example: ship:getSystemPowerRate("impulse")
 function Entity:getSystemPowerRate(system_name)
-    return __getSystemPropertyByName(self, system_name, "power_change_rate_per_second")
+    return __getSystemPropertyByName(
+        self,
+        system_name,
+        "power_change_rate_per_second"
+    )
 end
 --- Sets the given system's rate of consuming power, in points per second?, in this ship.
 --- CPU ships don't consume energy. Setting this has no effect.
 --- Example: ship:setSystemPowerRate("impulse", 0.4)
 function Entity:setSystemPowerRate(system_name, amount)
-    __setSystemPropertyByName(self, system_name, "power_change_rate_per_second", amount)
+    __setSystemPropertyByName(
+        self,
+        system_name,
+        "power_change_rate_per_second",
+        amount
+    )
     return self
 end
 --- Returns the relative power drain factor for the given system.
@@ -418,13 +571,22 @@ end
 --- Returns the rate at which the given system in this ship takes coolant, in points per second?
 --- Example: ship:getSystemCoolantRate("impulse")
 function Entity:getSystemCoolantRate(system_name)
-    return __getSystemPropertyByName(self, system_name, "coolant_change_rate_per_second")
+    return __getSystemPropertyByName(
+        self,
+        system_name,
+        "coolant_change_rate_per_second"
+    )
 end
 --- Sets the rate at which the given system in this ship takes coolant, in points per second?
 --- CPU ships don't generate or manage heat. Setting this has no effect on them.
 --- Example: ship:setSystemCoolantRate("impulse", 1.2)
 function Entity:setSystemCoolantRate(system_name, amount)
-    __setSystemPropertyByName(self, system_name, "coolant_change_rate_per_second", amount)
+    __setSystemPropertyByName(
+        self,
+        system_name,
+        "coolant_change_rate_per_second",
+        amount
+    )
     return self
 end
 --- Returns this ship's forward and reverse impulse speed limits.
@@ -432,7 +594,10 @@ end
 --- forward,reverse = ship:getImpulseMaxSpeed()
 --- forward = ship:getImpulseMaxSpeed() -- forward speed only
 function Entity:getImpulseMaxSpeed()
-    if self.components.impulse_engine then return self.components.impulse_engine.max_speed_forward, self.components.impulse_engine.max_speed_reverse end
+    if self.components.impulse_engine then
+        return self.components.impulse_engine.max_speed_forward,
+            self.components.impulse_engine.max_speed_reverse
+    end
     return 0.0, 0.0
 end
 --- Sets this ship's maximum forward and reverse impulse speeds.
@@ -455,19 +620,25 @@ end
 --- Returns this ship's maximum rotational speed, in degrees per second?
 --- Example: ship:getRotationMaxSpeed()
 function Entity:getRotationMaxSpeed()
-    if self.components.maneuvering_thrusters then return self.components.maneuvering_thrusters.speed end
+    if self.components.maneuvering_thrusters then
+        return self.components.maneuvering_thrusters.speed
+    end
     return 0.0
 end
 --- Sets this ship's maximum rotational speed, in degrees per second?
 --- Example: ship:setRotationMaxSpeed(10)
 function Entity:setRotationMaxSpeed(speed)
-    if self.components.maneuvering_thrusters then self.components.maneuvering_thrusters.speed = speed end
+    if self.components.maneuvering_thrusters then
+        self.components.maneuvering_thrusters.speed = speed
+    end
     return self
 end
 --- Returns the ship's forward impulse acceleration value, in (unit?)
 --- Example: forward = ship:getAcceleration()
 function Entity:getAcceleration()
-    if self.components.impulse_engine then return self.components.impulse_engine.acceleration_forward end
+    if self.components.impulse_engine then
+        return self.components.impulse_engine.acceleration_forward
+    end
     return 0.0
 end
 --- Sets the ship's forward and reverse impulse acceleration values, in (unit?)
@@ -491,7 +662,8 @@ end
 --- The boost value sets the forward maneuver capacity, and the strafe value sets the lateral maneuver capacity.
 --- Example: ship:setCombatManeuver(400,250) -- sets boost capacity to 400 and lateral to 250
 function Entity:setCombatManeuver(boost, strafe)
-    self.components.combat_maneuvering_thrusters = {boost_speed=boost, strafe_speed=strafe}
+    self.components.combat_maneuvering_thrusters =
+        { boost_speed = boost, strafe_speed = strafe }
     return self
 end
 --- Returns whether the ship has a jump drive.
@@ -503,7 +675,11 @@ end
 --- If true, this ship gains jump drive controls and a "jumpdrive" ship system.
 --- Example: ship:setJumpDrive(true) -- gives this ship a jump drive
 function Entity:setJumpDrive(enabled)
-    if enabled then self.components.jump_drive = {} else self.components.jump_drive = nil end
+    if enabled then
+        self.components.jump_drive = {}
+    else
+        self.components.jump_drive = nil
+    end
     return self
 end
 --- Sets the minimum and maximum jump distances for this ship.
@@ -524,13 +700,17 @@ end
 --- Jump drive charge regenerates at a rate modified by the "jumpdrive" system's effectiveness.
 --- Example: ship:setJumpDriveCharge(50000)
 function Entity:setJumpDriveCharge(charge)
-    if self.components.jump_drive then self.components.jump_drive.charge = charge end
+    if self.components.jump_drive then
+        self.components.jump_drive.charge = charge
+    end
     return self
 end
 --- Returns this ship's current jump drive charge.
 --- Example: jump_charge = ship:getJumpDriveCharge()
 function Entity:getJumpDriveCharge()
-    if self.components.jump_drive then return self.components.jump_drive.charge end
+    if self.components.jump_drive then
+        return self.components.jump_drive.charge
+    end
     return 0.0
 end
 --- Returns the time required by this ship to complete a jump once initiated.
@@ -540,7 +720,9 @@ end
 --- System effectiveness can modify this delay.
 --- Example: ship:getJumpDelay()
 function Entity:getJumpDelay()
-    if self.components.jump_drive then return self.components.jump_drive.delay end
+    if self.components.jump_drive then
+        return self.components.jump_drive.delay
+    end
     return 0.0
 
 end
@@ -553,7 +735,11 @@ end
 --- If true, this ship gains warp drive controls and a "warp" ship system.
 --- Example: ship:setWarpDrive(true)
 function Entity:setWarpDrive(enabled)
-    if enabled then self.components.warp_drive = {} else self.components.warp_drive = nil end
+    if enabled then
+        self.components.warp_drive = {}
+    else
+        self.components.warp_drive = nil
+    end
     return self
 end
 --- Sets this ship's warp speed factor.
@@ -561,78 +747,132 @@ end
 --- Unlike ShipTemplate:setWarpSpeed(), setting this value does NOT also grant this ship a warp drive.
 --- Example: ship:setWarpSpeed(1000);
 function Entity:setWarpSpeed(speed)
-    if self.components.warp_drive then self.components.warp_drive.speed_per_level = speed end
+    if self.components.warp_drive then
+        self.components.warp_drive.speed_per_level = speed
+    end
     return self
 end
 --- Returns this ship's warp speed factor.
 --- Actual warp speed can be modified by "warp" system effectiveness.
 --- Example: ship:getWarpSpeed()
 function Entity:getWarpSpeed()
-    if self.components.warp_drive then return self.components.warp_drive.speed_per_level end
+    if self.components.warp_drive then
+        return self.components.warp_drive.speed_per_level
+    end
     return 0.0
 end
 --- Returns the arc, in degrees, for the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponArc(0); -- returns beam weapon 0's arc
 function Entity:getBeamWeaponArc(index)
-    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].arc end
+    if
+        self.components.beam_weapons
+        and #self.components.beam_weapons > index
+    then
+        return self.components.beam_weapons[index + 1].arc
+    end
     return 0.0
 end
 --- Returns the direction, in degrees relative to the ship's forward bearing, for the arc's center of the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponDirection(0); -- returns beam weapon 0's direction
 function Entity:getBeamWeaponDirection(index)
-    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].direction end
+    if
+        self.components.beam_weapons
+        and #self.components.beam_weapons > index
+    then
+        return self.components.beam_weapons[index + 1].direction
+    end
     return 0.0
 end
 --- Returns the range for the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponRange(0); -- returns beam weapon 0's range
 function Entity:getBeamWeaponRange(index)
-    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].range end
+    if
+        self.components.beam_weapons
+        and #self.components.beam_weapons > index
+    then
+        return self.components.beam_weapons[index + 1].range
+    end
     return 0.0
 end
 --- Returns the turret arc, in degrees, for the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponTurretArc(0); -- returns beam weapon 0's turret arc
 function Entity:getBeamWeaponTurretArc(index)
-    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].turret_arc end
+    if
+        self.components.beam_weapons
+        and #self.components.beam_weapons > index
+    then
+        return self.components.beam_weapons[index + 1].turret_arc
+    end
     return 0.0
 end
 --- Returns the direction, in degrees relative to the ship's forward bearing, for the turret arc's center for the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponTurretDirection(0); -- returns beam weapon 0's turret direction
 function Entity:getBeamWeaponTurretDirection(index)
-    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].turret_direction end
+    if
+        self.components.beam_weapons
+        and #self.components.beam_weapons > index
+    then
+        return self.components.beam_weapons[index + 1].turret_direction
+    end
     return 0.0
 end
 --- Returns the turret's rotation rate, in degrees per tick, for the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponTurretRotationRate(0) -- returns beam weapon 0's turret rotation rate
 function Entity:getBeamWeaponTurretRotationRate(index)
-    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].turret_rotation_rate end
+    if
+        self.components.beam_weapons
+        and #self.components.beam_weapons > index
+    then
+        return self.components.beam_weapons[index + 1].turret_rotation_rate
+    end
     return 0.0
 end
 --- Returns the base firing delay, in seconds, for the BeamWeapon with the given index on this ship.
 --- Actual cycle time can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponCycleTime(0); -- returns beam weapon 0's cycle time
 function Entity:getBeamWeaponCycleTime(index)
-    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].cycle_time end
+    if
+        self.components.beam_weapons
+        and #self.components.beam_weapons > index
+    then
+        return self.components.beam_weapons[index + 1].cycle_time
+    end
     return 0.0
 end
 --- Returns the base damage dealt by the BeamWeapon with the given index on this ship.
 --- Actual damage can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponDamage(0); -- returns beam weapon 0's damage
 function Entity:getBeamWeaponDamage(index)
-    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].damage end
+    if
+        self.components.beam_weapons
+        and #self.components.beam_weapons > index
+    then
+        return self.components.beam_weapons[index + 1].damage
+    end
     return 0.0
 end
 --- Returns how much of this ship's energy is drained each time the BeamWeapon with the given index is fired.
 --- Actual drain can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponEnergyPerFire(0); -- returns beam weapon 0's energy use per firing
 function Entity:getBeamWeaponEnergyPerFire(index)
-    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].energy_per_beam_fire end
+    if
+        self.components.beam_weapons
+        and #self.components.beam_weapons > index
+    then
+        return self.components.beam_weapons[index + 1].energy_per_beam_fire
+    end
     return 0.0
 end
 --- Returns the heat generated by each firing of the BeamWeapon with the given index on this ship.
 --- Actual heat generation can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponHeatPerFire(0); -- returns beam weapon 0's heat generation per firing
 function Entity:getBeamWeaponHeatPerFire(index)
-    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].heat_per_beam_fire end
+    if
+        self.components.beam_weapons
+        and #self.components.beam_weapons > index
+    then
+        return self.components.beam_weapons[index + 1].heat_per_beam_fire
+    end
     return 0.0
 end
 --- Defines the traits of a BeamWeapon with the given index on this ship.
@@ -647,11 +887,19 @@ end
 --- -- Creates a beam weapon with index 0, arc of 90 degrees, direction pointing backward, range of 1U, base cycle time of 1 second, and base damage of 1 point
 --- ship:setBeamWeapon(0,90,180,1000,1,1)
 function Entity:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
-    if self.components.beam_weapons == nil then self.components.beam_weapons = {} end
+    if self.components.beam_weapons == nil then
+        self.components.beam_weapons = {}
+    end
     while #self.components.beam_weapons < index + 1 do
         self.components.beam_weapons[#self.components.beam_weapons + 1] = {}
     end
-    self.components.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage}
+    self.components.beam_weapons[index + 1] = {
+        arc = arc,
+        direction = direction,
+        range = range,
+        cycle_time = cycle_time,
+        damage = damage,
+    }
     return self
 end
 --- Converts a BeamWeapon with the given index on this ship into a turret and defines its traits.
@@ -665,7 +913,12 @@ end
 --- -- Makes beam weapon 0 a turret with a 200-degree turret arc centered on 90 degrees from forward, rotating at 5 degrees per tick (unit?)
 --- ship:setBeamWeaponTurret(0,200,90,5)
 function Entity:setBeamWeaponTurret(index, arc, direction, rotation_rate)
-    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    if
+        self.components.beam_weapons == nil
+        or #self.components.beam_weapons <= index
+    then
+        return self
+    end
     self.components.beam_weapons[index + 1].turret_arc = arc
     self.components.beam_weapons[index + 1].turret_direction = direction
     self.components.beam_weapons[index + 1].turret_rotation_rate = rotation_rate
@@ -675,7 +928,12 @@ end
 --- See BeamEffect:setTexture().
 --- Example: ship:setBeamWeaponTexture(0,"texture/beam_blue.png")
 function Entity:setBeamWeaponTexture(index, texture)
-    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    if
+        self.components.beam_weapons == nil
+        or #self.components.beam_weapons <= index
+    then
+        return self
+    end
     self.components.beam_weapons[index + 1].texture = texture
     return self
 end
@@ -683,7 +941,12 @@ end
 --- Only player ships consume energy. Setting this for other entity types has no effect.
 --- Example: ship:setBeamWeaponEnergyPerFire(0,1) -- sets beam 0 to use 1 energy per firing
 function Entity:setBeamWeaponEnergyPerFire(index, energy)
-    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    if
+        self.components.beam_weapons == nil
+        or #self.components.beam_weapons <= index
+    then
+        return self
+    end
     self.components.beam_weapons[index + 1].energy_per_beam_fire = energy
     return self
 end
@@ -691,23 +954,48 @@ end
 --- Only player ships generate and manage heat. Setting this for other entity types has no effect.
 --- Example: ship:setBeamWeaponHeatPerFire(0,0.02) -- sets beam 0 to generate 0.02 (2%) system heat per firing
 function Entity:setBeamWeaponHeatPerFire(index, heat)
-    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    if
+        self.components.beam_weapons == nil
+        or #self.components.beam_weapons <= index
+    then
+        return self
+    end
     self.components.beam_weapons[index + 1].heat_per_beam_fire = heat
     return self
 end
 --- Sets the colors used to draw the radar arc for the BeamWeapon with the given index on this ship.
 --- The first three-number value sets the RGB color for the arc when idle, and the second sets the color when firing.
 --- Example: ship:setBeamWeaponArcColor(0,0,0.5,0,0,1.0,0) -- makes beam 0's arc green
-function Entity:setBeamWeaponArcColor(index, idle_r, idle_g, idle_b, fire_r, fire_g, fire_b)
-    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
-    self.components.beam_weapons[index + 1].arc_color = {255*idle_r, 255*idle_g, 255*idle_b, 255}
-    self.components.beam_weapons[index + 1].arc_color_fire = {255*fire_r, 255*fire_g, 255*fire_b, 255}
+function Entity:setBeamWeaponArcColor(
+    index,
+    idle_r,
+    idle_g,
+    idle_b,
+    fire_r,
+    fire_g,
+    fire_b
+)
+    if
+        self.components.beam_weapons == nil
+        or #self.components.beam_weapons <= index
+    then
+        return self
+    end
+    self.components.beam_weapons[index + 1].arc_color =
+        { 255 * idle_r, 255 * idle_g, 255 * idle_b, 255 }
+    self.components.beam_weapons[index + 1].arc_color_fire =
+        { 255 * fire_r, 255 * fire_g, 255 * fire_b, 255 }
     return self
 end
 --- Sets the damage type dealt by the BeamWeapon with the given index on this ship.
 --- Example: ship:setBeamWeaponDamageType(0,"emp") -- makes beam 0 deal EMP damage
 function Entity:setBeamWeaponDamageType(index, damage_type)
-    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    if
+        self.components.beam_weapons == nil
+        or #self.components.beam_weapons <= index
+    then
+        return self
+    end
     self.components.beam_weapons[index + 1].damage_type = damage_type
     return self
 end
@@ -715,8 +1003,10 @@ end
 --- Weapon tubes are 0-indexed. For example, 3 tubes would be indexed 0, 1, and 2.
 --- Example: ship:setWeaponTubeCount(4)
 function Entity:setWeaponTubeCount(amount)
-    if self.components.missile_tubes == nil then self.components.missile_tubes = {} end
-    for n=1,amount do
+    if self.components.missile_tubes == nil then
+        self.components.missile_tubes = {}
+    end
+    for n = 1, amount do
         self.components.missile_tubes[n] = {}
     end
     while #self.components.missile_tubes > amount do
@@ -727,7 +1017,9 @@ end
 --- Returns the number of WeaponTube on this ship.
 --- Example: ship:getWeaponTubeCount()
 function Entity:getWeaponTubeCount()
-    if self.components.missile_tubes then return #self.components.missile_tubes end
+    if self.components.missile_tubes then
+        return #self.components.missile_tubes
+    end
     return 0
 end
 --- Returns the weapon type loaded into the WeaponTube with the given index on this ship.
@@ -737,9 +1029,11 @@ function Entity:getWeaponTubeLoadType(index)
     local tubes = self.components.missile_tubes
     local missile_type = "none"
     if tubes and index >= 0 and index < #tubes then
-        missile_type = tubes[index+1].type_loaded
+        missile_type = tubes[index + 1].type_loaded
     end
-    if missile_type == "none" then return nil end
+    if missile_type == "none" then
+        return nil
+    end
     return missile_type
 end
 --- Sets which weapon types the WeaponTube with the given index on this ship can load.
@@ -747,7 +1041,9 @@ end
 --- Example: ship:weaponTubeAllowMissle(0,"Homing") -- allows Homing missiles to be loaded in WeaponTube 0
 function Entity:weaponTubeAllowMissle(index, weapon_type)
     local tubes = self.components.missile_tubes
-    if tubes and index >= 0 and index < #tubes then tubes[index+1]["allow_"..string.lower(weapon_type)] = true end
+    if tubes and index >= 0 and index < #tubes then
+        tubes[index + 1]["allow_" .. string.lower(weapon_type)] = true
+    end
     return self
 end
 --- Sets which weapon types the WeaponTube with the given index can't load on this ship.
@@ -755,7 +1051,9 @@ end
 --- Example: ship:weaponTubeDisallowMissle(0,"Homing") -- prevents Homing missiles from being loaded in tube 0
 function Entity:weaponTubeDisallowMissle(index, weapon_type)
     local tubes = self.components.missile_tubes
-    if tubes and index >= 0 and index < #tubes then tubes[index+1]["allow_"..string.lower(weapon_type)] = false end
+    if tubes and index >= 0 and index < #tubes then
+        tubes[index + 1]["allow_" .. string.lower(weapon_type)] = false
+    end
     return self
 end
 --- Sets a weapon tube with the given index on this ship to allow loading only the given weapon type.
@@ -763,12 +1061,12 @@ end
 function Entity:setWeaponTubeExclusiveFor(index, weapon_type)
     local tubes = self.components.missile_tubes
     if tubes and index >= 0 and index < #tubes then
-        tubes[index+1]["allow_homing"] = false
-        tubes[index+1]["allow_nuke"] = false
-        tubes[index+1]["allow_mine"] = false
-        tubes[index+1]["allow_emp"] = false
-        tubes[index+1]["allow_hvli"] = false
-        tubes[index+1]["allow_"..string.lower(weapon_type)] = true
+        tubes[index + 1]["allow_homing"] = false
+        tubes[index + 1]["allow_nuke"] = false
+        tubes[index + 1]["allow_mine"] = false
+        tubes[index + 1]["allow_emp"] = false
+        tubes[index + 1]["allow_hvli"] = false
+        tubes[index + 1]["allow_" .. string.lower(weapon_type)] = true
     end
     return self
 end
@@ -780,7 +1078,7 @@ end
 function Entity:setWeaponTubeDirection(index, direction)
     local tubes = self.components.missile_tubes
     if tubes and index >= 0 and index < #tubes then
-        self.components.missile_tubes[index+1].direction = direction
+        self.components.missile_tubes[index + 1].direction = direction
     end
     return self
 end
@@ -789,7 +1087,7 @@ end
 function Entity:setTubeSize(index, size)
     local tubes = self.components.missile_tubes
     if tubes and index >= 0 and index < #tubes then
-        self.components.missile_tubes[index+1].size = size
+        self.components.missile_tubes[index + 1].size = size
     end
     return self
 end
@@ -798,7 +1096,7 @@ end
 function Entity:getTubeSize(index)
     local tubes = self.components.missile_tubes
     if tubes and index >= 0 and index < #tubes then
-        return self.components.missile_tubes[index+1].size
+        return self.components.missile_tubes[index + 1].size
     end
     return "none"
 end
@@ -807,7 +1105,7 @@ end
 function Entity:getTubeLoadTime(index)
     local tubes = self.components.missile_tubes
     if tubes and index >= 0 and index < #tubes then
-        return self.components.missile_tubes[index+1].load_time
+        return self.components.missile_tubes[index + 1].load_time
     end
     return 0.0
 end
@@ -816,7 +1114,7 @@ end
 function Entity:setTubeLoadTime(index, load_time)
     local tubes = self.components.missile_tubes
     if tubes and index >= 0 and index < #tubes then
-        self.components.missile_tubes[index+1].load_time = load_time
+        self.components.missile_tubes[index + 1].load_time = load_time
     end
     return self
 end
@@ -824,7 +1122,9 @@ end
 --- Ship functions can dynamically modify this ship's radar signature values.
 --- Example: ship:getDynamicRadarSignatureGravitational()
 function Entity:getDynamicRadarSignatureGravitational()
-    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.gravitational end
+    if self.components.dynamic_radar_signature then
+        return self.components.dynamic_radar_signature.gravitational
+    end
     return 0.0
 end
 --- [DEPRECATED]
@@ -836,14 +1136,18 @@ end
 --- Ship functions can dynamically modify this ship's radar signature values.
 --- Example: ship:getDynamicRadarSignatureElectrical()
 function Entity:getDynamicRadarSignatureElectrical()
-    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.electrical end
+    if self.components.dynamic_radar_signature then
+        return self.components.dynamic_radar_signature.electrical
+    end
     return 0.0
 end
 --- Returns the dynamic thermal radar signature value emitted by this ship.
 --- Ship functions can dynamically modify this ship's radar signature values.
 --- Example: ship:getDynamicRadarSignatureThermal()
 function Entity:getDynamicRadarSignatureThermal()
-    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.thermal end
+    if self.components.dynamic_radar_signature then
+        return self.components.dynamic_radar_signature.thermal
+    end
     return 0.0
 end
 --- Broadcasts a message from this ship to the comms of all other ships matching the threshold.
@@ -856,25 +1160,27 @@ end
 --- ship:addBroadcast(1, "Help!")
 --- ship:addBroadcast(2, "We're taking over!")
 function Entity:addBroadcast(target, message)
-    if target < 0 or target > 2 then target = 0 end
+    if target < 0 or target > 2 then
+        target = 0
+    end
 
-    local fullMessage = self:getCallSign() .. " : " .. message;
+    local fullMessage = self:getCallSign() .. " : " .. message
 
     for idx, ent in ipairs(getEntitiesWithComponent("ship_log")) do
         local add = false
-        local color = {255, 204, 51, 255}
+        local color = { 255, 204, 51, 255 }
 
         if ent:isFriendly(self) then
             add = true
-            color = {154, 255, 154, 255}
+            color = { 154, 255, 154, 255 }
 
         elseif not ent:isEnemy(self) and target >= 1 then
             add = true
-            color = {128, 128, 128, 255}
+            color = { 128, 128, 128, 255 }
 
         elseif target >= 2 then
             add = true
-            color = {255, 102, 102, 255}
+            color = { 255, 102, 102, 255 }
         end
 
         if add then
@@ -901,13 +1207,13 @@ function Entity:setScanStateByFaction(faction, state)
     if ss ~= nil then
         local f = getFactionInfo(faction)
         if f ~= nil then
-            for n=1,#ss do
+            for n = 1, #ss do
                 if ss[n].faction == f then
                     ss[n].state = state
                     return self
                 end
             end
-            ss[#ss+1] = {faction=f, state=state}
+            ss[#ss + 1] = { faction = f, state = state }
         end
     end
     return self

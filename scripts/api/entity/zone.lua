@@ -23,12 +23,12 @@ local Entity = getLuaEntityFunctionTable()
 --- Example: zone:setPoints(2000,0, 0,3000, -2000,0) -- defines a triangular zone
 function Entity:setPoints(...)
     if self.components.zone then
-        local coords = {...}
+        local coords = { ... }
         local points = {}
         local sum_x, sum_y, count = 0, 0, 0
         for n = 1, #coords, 2 do
-            local x, y = coords[n], coords[n+1]
-            table.insert(points, {x, y})
+            local x, y = coords[n], coords[n + 1]
+            table.insert(points, { x, y })
             sum_x = sum_x + x
             sum_y = sum_y + y
             count = count + 1
@@ -39,7 +39,10 @@ function Entity:setPoints(...)
             self:setPosition(center_x, center_y)
             local relative_points = {}
             for _, pt in ipairs(points) do
-                table.insert(relative_points, {pt[1] - center_x, pt[2] - center_y})
+                table.insert(
+                    relative_points,
+                    { pt[1] - center_x, pt[2] - center_y }
+                )
             end
             self.components.zone.points = relative_points
         end
@@ -52,8 +55,8 @@ end
 --- Example: zone:setColor(255,140,0)
 function Entity:setColor(r, g, b)
     if self.components.zone then
-        self.components.zone.color = {r, g, b, 255}
-        self.components.zone.fill_color = {r, g, b, 64}
+        self.components.zone.color = { r, g, b, 255 }
+        self.components.zone.fill_color = { r, g, b, 64 }
     end
     return self
 end
@@ -61,28 +64,40 @@ end
 --- If the fill alpha is 0, the filled area is not drawn.
 --- Example: zone:setFillColor(0, 0, 255, 32) -- translucent blue fill
 function Entity:setFillColor(r, g, b, a)
-    if not a then a = 64 end
-    if self.components.zone then self.components.zone.fill_color = {r, g, b, a} end
+    if not a then
+        a = 64
+    end
+    if self.components.zone then
+        self.components.zone.fill_color = { r, g, b, a }
+    end
     return self
 end
 --- Sets this Zone's outline color when drawn on radar. The outline color defaults to white with alpha 255.
 --- Also sets the label text color. If the outline alpha is 0, the outline and label are not drawn.
 --- Example: zone:setOutlineColor(255, 0, 0, 192) -- semi-transparent red outline
 function Entity:setOutlineColor(r, g, b, a)
-    if not a then a = 255 end
-    if self.components.zone then self.components.zone.color = {r, g, b, a} end
+    if not a then
+        a = 255
+    end
+    if self.components.zone then
+        self.components.zone.color = { r, g, b, a }
+    end
     return self
 end
 --- Sets this Zone's text label, rendered at the zone's center point.
 --- Example: zone:setLabel("Hostile space")
 function Entity:setLabel(label)
-    if self.components.zone then self.components.zone.label = label end
+    if self.components.zone then
+        self.components.zone.label = label
+    end
     return self
 end
 --- Returns this Zone's text label.
 --- Example: zone:getLabel()
 function Entity:getLabel()
-    if self.components.zone then return self.components.zone.label end
+    if self.components.zone then
+        return self.components.zone.label
+    end
     return ""
 end
 --- Sets this Zone's local skybox. Optionally also sets this zone's skybox fade transition distance, which defaults to 0.

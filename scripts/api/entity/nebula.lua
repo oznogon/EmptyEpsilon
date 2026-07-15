@@ -14,29 +14,29 @@ function Nebula()
     e.components.radar_signature = {
         gravitational = 0.0,
         electrical = 0.8,
-        thermal = -1.0
+        thermal = -1.0,
     }
-    e.components.transform = {rotation=random(0, 360)}
+    e.components.transform = { rotation = random(0, 360) }
     e.components.radar_trace = {
         icon = "Nebula" .. irandom(1, 3) .. ".png",
         min_size = 0,
         max_size = 2048,
         radius = radius * 1.5,
-        color = {255, 255, 255, 128}
+        color = { 255, 255, 255, 128 },
     }
     e.components.radar_block = {
         range = radius,
-        behind = true
+        behind = true,
     }
     e.components.never_radar_blocked = {}
     e.components.nebula_renderer = {
         radius = radius,
         skybox = "purple",
         skybox_fade_distance = 2000,
-        fog_color = {0.08, 0.03, 0.10},
+        fog_color = { 0.08, 0.03, 0.10 },
         cloud_density = 1.0,
         visibility_distance = 1000.0,
-        seed = irandom(1, 2147483647)
+        seed = irandom(1, 2147483647),
     }
     return e
 end

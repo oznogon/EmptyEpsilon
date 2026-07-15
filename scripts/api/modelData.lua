@@ -34,8 +34,10 @@ end
 --- model:setMesh("space_station_1/space_station_1.model") -- loads this model from a resource pack
 --- model:setMesh("mesh/sphere.obj") -- loads this model from the resources/ directory
 function ModelData:setMesh(name)
-    if self.mesh_render == nil then self.mesh_render = {} end
-    self.mesh_render.mesh=name
+    if self.mesh_render == nil then
+        self.mesh_render = {}
+    end
+    self.mesh_render.mesh = name
     return self
 end
 --- Sets this ModelData's albedo map, or base flat-light color texture.
@@ -47,8 +49,10 @@ end
 --- model:setTexture("space_station_1/space_station_1_color.jpg") -- loads this texture from a resource pack
 --- model:setTexture("mesh/ship/Ender Battlecruiser.png") -- loads this texture from the resources/ directory
 function ModelData:setTexture(texture)
-    if self.mesh_render == nil then self.mesh_render = {} end
-    self.mesh_render.texture=texture
+    if self.mesh_render == nil then
+        self.mesh_render = {}
+    end
+    self.mesh_render.texture = texture
     return self
 end
 --- Sets this ModelData's specular map, or shininess texture. Some models use this to load a normal map.
@@ -60,8 +64,10 @@ end
 --- model:setSpecular("space_station_1/space_station_1_specular.jpg") -- loads this texture from a resource pack
 --- model:setSpecular("mesh/various/debris-blog-specular.jpg") -- loads this texture from the resources/ directory
 function ModelData:setSpecular(texture)
-    if self.mesh_render == nil then self.mesh_render = {} end
-    self.mesh_render.specular_texture=texture
+    if self.mesh_render == nil then
+        self.mesh_render = {}
+    end
+    self.mesh_render.specular_texture = texture
     return self
 end
 --- Sets this ModelData's illumination map, or glow texture, which defines which parts of the texture appear to be luminescent.
@@ -73,8 +79,10 @@ end
 --- model:setIllumination("space_station_1/space_station_1_illumination.jpg") -- loads this texture from a resource pack
 --- model:setIllumination("mesh/ship/Ender Battlecruiser_illumination.png") -- loads this texture from the resources/ directory
 function ModelData:setIllumination(texture)
-    if self.mesh_render == nil then self.mesh_render = {} end
-    self.mesh_render.illumination_texture=texture
+    if self.mesh_render == nil then
+        self.mesh_render = {}
+    end
+    self.mesh_render.illumination_texture = texture
     return self
 end
 --- Sets this ModelData's normal map.
@@ -84,8 +92,10 @@ end
 --- model:setNormalMap("space_station_1/space_station_1_normal.jpg") -- loads this texture from a resource pack
 --- model:setNormalMap("mesh/ship/Ender Battlecruiser_normal.png") -- loads this texture from the resources/ directory
 function ModelData:setNormalMap(texture)
-    if self.mesh_render == nil then self.mesh_render = {} end
-    self.mesh_render.normal_texture=texture
+    if self.mesh_render == nil then
+        self.mesh_render = {}
+    end
+    self.mesh_render.normal_texture = texture
     return self
 end
 --- Modulates this ModelData's illumination map as RGBA values.
@@ -96,7 +106,7 @@ end
 --- model:modulateIllumination(1.0, 1.0, 1.0, 0.0) -- unlit
 function ModelData:modulateIllumination(r, g, b, a)
     if self.mesh_render.illumination_texture then
-        self.mesh_render.illumination_modulation = {r, g, b, a}
+        self.mesh_render.illumination_modulation = { r, g, b, a }
     end
     return self
 end
@@ -105,8 +115,10 @@ end
 --- If you view the model in Blender, these values are equivalent to -X,+Y,+Z.
 --- Example: model:setRenderOffset(1,2,5) -- offsets its in-game position from its mesh file position when rendered
 function ModelData:setRenderOffset(x, y, z)
-    if self.mesh_render == nil then self.mesh_render = {} end
-    self.mesh_render.mesh_offset = {x, y, z}
+    if self.mesh_render == nil then
+        self.mesh_render = {}
+    end
+    self.mesh_render.mesh_offset = { x, y, z }
     return self
 end
 --- Scales this ModelData's mesh by the given factor.
@@ -115,7 +127,9 @@ end
 --- Defaults to 1.0.
 --- Example: model:setScale(20) -- scales the model up by 20x
 function ModelData:setScale(scale)
-    if self.mesh_render == nil then self.mesh_render = {} end
+    if self.mesh_render == nil then
+        self.mesh_render = {}
+    end
     self.mesh_render.scale = scale
     return self
 end
@@ -126,7 +140,9 @@ end
 --- Defaults to 1.0.
 --- Example: model:setRadius(100) -- sets the object's collisionable radius to 0.1U
 function ModelData:setRadius(radius)
-    if self.physics == nil then self.physics={type="dynamic"} end
+    if self.physics == nil then
+        self.physics = { type = "dynamic" }
+    end
     self.physics.size = radius
     return self
 end
@@ -135,8 +151,10 @@ end
 --- Defaults to 0,0.
 --- Example: model:setCollisionBox(400, 400) -- sets the object's collision box to 0.4U by 0.4U
 function ModelData:setCollisionBox(w, h)
-    if self.physics == nil then self.physics={type="dynamic"} end
-    self.physics.size = {w, h}
+    if self.physics == nil then
+        self.physics = { type = "dynamic" }
+    end
+    self.physics.size = { w, h }
     return self
 end
 --- Adds a beam weapons origin position to this ModelData.
@@ -146,8 +164,10 @@ end
 --- -- Add a beam position at the given model X/Y/Z coordinates.
 --- model:addBeamPosition(21, -28.2, -2)
 function ModelData:addBeamPosition(x, y, z)
-    if self.__beam_positions == nil then self.__beam_positions = {} end
-    self.__beam_positions[#self.__beam_positions + 1] = {x, y, z}
+    if self.__beam_positions == nil then
+        self.__beam_positions = {}
+    end
+    self.__beam_positions[#self.__beam_positions + 1] = { x, y, z }
     return self
 end
 --- Adds a weapons tube origin position to this ModelData.
@@ -156,8 +176,10 @@ end
 --- -- Add a tube position at the given model X/Y/Z coordinates.
 --- model:addTubePosition(21, -28.2, -2)
 function ModelData:addTubePosition(x, y, z)
-    if self.__tube_positions == nil then self.__tube_positions = {} end
-    self.__tube_positions[#self.__tube_positions + 1] = {x, y, z}
+    if self.__tube_positions == nil then
+        self.__tube_positions = {}
+    end
+    self.__tube_positions[#self.__tube_positions + 1] = { x, y, z }
     return self
 end
 --- [DEPRECATED]
@@ -175,11 +197,15 @@ end
 --- -- Add an engine emitter at model X/Y/Z coordinates -28.0, 1.5, -5.0, with a RGB color of 1.0, 0.2, 0.2 and scale of 3.0.
 --- model:addEngineEmitter(-28.0, 1.5, -5.0, 1.0, 0.2, 0.2, 3.0)
 function ModelData:addEngineEmitter(x, y, z, r, g, b, scale)
-    if self.engine_emitter == nil then self.engine_emitter = {} end
+    if self.engine_emitter == nil then
+        self.engine_emitter = {}
+    end
     if self.mesh_render then
         -- Set mesh_render.scale to 1.0 and warn if not defined
         if self.mesh_render.scale == nil then
-            print("addEngineEmitter() called without mesh_render.scale value; using default 1.0 for mesh_render.scale")
+            print(
+                "addEngineEmitter() called without mesh_render.scale value; using default 1.0 for mesh_render.scale"
+            )
             self.mesh_render.scale = 1.0
         else
             scale = scale * self.mesh_render.scale
@@ -189,6 +215,7 @@ function ModelData:addEngineEmitter(x, y, z, r, g, b, scale)
         y = y * self.mesh_render.scale
         z = z * self.mesh_render.scale
     end
-    self.engine_emitter[#self.engine_emitter+1] = {position = {x, y, z}, color={r, g, b}, scale=scale}
+    self.engine_emitter[#self.engine_emitter + 1] =
+        { position = { x, y, z }, color = { r, g, b }, scale = scale }
     return self
 end

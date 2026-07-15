@@ -14,7 +14,7 @@ function createCamera(x, y, z)
         name = "Camera",
         pitch = 30,
         z_position = z or 200,
-        field_of_view = 60
+        field_of_view = 60,
     }
     cam:setRotation(-90)
     return cam
@@ -84,7 +84,8 @@ end
 -- @param fov Field of view in degrees (30 to 140)
 function setCameraFoV(camera, fov)
     if camera and camera.components.cinematic_camera then
-        camera.components.cinematic_camera.field_of_view = math.max(30, math.min(140, fov))
+        camera.components.cinematic_camera.field_of_view =
+            math.max(30, math.min(140, fov))
     end
 end
 
@@ -150,7 +151,7 @@ function flyCameraTo(camera, x, y, z, yaw, pitch, roll, duration)
 
         -- Continue until duration reached
         if t >= 1.0 then
-            return true  -- Thread complete
+            return true -- Thread complete
         end
         return false
     end
@@ -199,7 +200,12 @@ function shakeCamera(camera, intensity, duration)
         local offset_yaw = (math.random() - 0.5) * shake_amount * 2
         local offset_pitch = (math.random() - 0.5) * shake_amount * 2
 
-        setCameraPosition(camera, original_x + offset_x, original_y + offset_y, original_z + offset_z)
+        setCameraPosition(
+            camera,
+            original_x + offset_x,
+            original_y + offset_y,
+            original_z + offset_z
+        )
         setCameraYaw(camera, original_yaw + offset_yaw)
         setCameraPitch(camera, original_pitch + offset_pitch)
 
@@ -237,14 +243,14 @@ function cameraChaseTarget(camera, target, distance)
         local target_rotation = target:getRotation()
 
         -- Position camera behind target
-        local angle_rad = math.rad(target_rotation + 180)  -- Opposite direction
+        local angle_rad = math.rad(target_rotation + 180) -- Opposite direction
         local cam_x = target_x + math.cos(angle_rad) * distance
         local cam_y = target_y + math.sin(angle_rad) * distance
 
         setCameraPosition(camera, cam_x, cam_y)
         pointCameraAt(camera, target)
 
-        return false  -- Continue indefinitely
+        return false -- Continue indefinitely
     end
 
     table.insert(gameGlobalInfo.script_threads, sp.script.CoroutinePtr(thread))
@@ -283,7 +289,7 @@ function cameraOrbitTarget(camera, target, distance, period)
         setCameraPosition(camera, cam_x, cam_y)
         pointCameraAt(camera, target)
 
-        return false  -- Continue indefinitely
+        return false -- Continue indefinitely
     end
 
     table.insert(gameGlobalInfo.script_threads, sp.script.CoroutinePtr(thread))
@@ -304,7 +310,7 @@ function cameraTargetFlyBy(camera, target, distance, angle)
 
     distance = distance or 1000
     angle = angle or 0
-    local duration = 5.0  -- Fly-by takes 5 seconds
+    local duration = 5.0 -- Fly-by takes 5 seconds
 
     local target_x, target_y = target:getPosition()
     local angle_rad = math.rad(angle)

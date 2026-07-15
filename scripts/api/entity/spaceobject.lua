@@ -5,13 +5,17 @@ local Entity = getLuaEntityFunctionTable()
 --- Sets this entity's position on the map, in game units from the origin.
 --- Example: entity:setPosition(x,y)
 function Entity:setPosition(x, y)
-    if self.components.transform then self.components.transform.position = {x, y} end
+    if self.components.transform then
+        self.components.transform.position = { x, y }
+    end
     return self
 end
 --- Returns this entity's position on the map, as X/Y coordinates in game units from the origin.
 --- Example: x,y = entity:getPosition()
 function Entity:getPosition()
-    if self.components.transform then return table.unpack(self.components.transform.position) end
+    if self.components.transform then
+        return table.unpack(self.components.transform.position)
+    end
 end
 --- Sets this entity's absolute rotation, in degrees.
 --- Unlike setHeading(), a value of 0 points to the right of the map ("east").
@@ -19,13 +23,17 @@ end
 --- setHeading() and setRotation() do not change the helm's target heading on player ships. To do that, use commandTargetRotation().
 --- Example: entity:setRotation(270)
 function Entity:setRotation(rotation)
-    if self.components.transform then self.components.transform.rotation = rotation end
+    if self.components.transform then
+        self.components.transform.rotation = rotation
+    end
     return self
 end
 --- Returns this entity's absolute rotation, in degrees.
 --- Example: rotation = entity:getRotation()
 function Entity:getRotation()
-    if self.components.transform then return self.components.transform.rotation end
+    if self.components.transform then
+        return self.components.transform.rotation
+    end
 end
 --- Sets this entity's heading, in degrees ranging from 0 to 360.
 --- Unlike setRotation(), a value of 0 points to the top of the map ("north"), which matches player radars.
@@ -43,7 +51,9 @@ end
 function Entity:getHeading()
     if self.components.transform then
         local heading = (self.components.transform.rotation - 270) % 360
-        if heading < 0 then heading = heading + 360 end
+        if heading < 0 then
+            heading = heading + 360
+        end
         return heading
     end
     return 0
@@ -52,12 +62,16 @@ end
 --- The values are relative x/y coordinates from the entity's current position (a 2D velocity vector).
 --- Example: vx,vy = entity:getVelocity()
 function Entity:getVelocity()
-    if self.components.physics then return table.unpack(self.components.physics.velocity) end
+    if self.components.physics then
+        return table.unpack(self.components.physics.velocity)
+    end
 end
 --- Returns this entity's rotational velocity within 2D space, in degrees per second.
 --- Example: entity:getAngularVelocity()
 function Entity:getAngularVelocity()
-    if self.components.physics then return self.components.physics.angular_velocity end
+    if self.components.physics then
+        return self.components.physics.angular_velocity
+    end
 end
 --- Sets the faction to which this entity belongs, by faction name.
 --- Factions are defined by the FactionInfo class, and default factions are defined in scripts/factionInfo.lua.
@@ -75,7 +89,7 @@ function Entity:setFaction(faction_name)
         print("Failed to find faction: " .. faction_name)
         self.components.faction = nil
     else
-        self.components.faction = {entity=faction}
+        self.components.faction = { entity = faction }
     end
     return self
 end
@@ -102,7 +116,7 @@ function Entity:setFactionId(faction_id)
     if faction_id == nil then
         self.components.faction = nil
     else
-        self.components.faction = {entity=faction_id}
+        self.components.faction = { entity = faction_id }
     end
     return self
 end
@@ -118,14 +132,22 @@ end
 --- Returns true if the given entity's faction is hostile to this entity's.
 --- Example: entity:isEnemy(target)
 function Entity:isEnemy(target)
-    if target == nil then return false end
+    if target == nil then
+        return false
+    end
     local my_faction = self:getFactionId()
-    if my_faction == nil then return false end
+    if my_faction == nil then
+        return false
+    end
     local my_faction_info = my_faction.components.faction_info
-    if my_faction_info == nil then return false end
+    if my_faction_info == nil then
+        return false
+    end
     local target_faction = target:getFactionId()
-    if target_faction == nil then return false end
-    for n=1,#my_faction_info do
+    if target_faction == nil then
+        return false
+    end
+    for n = 1, #my_faction_info do
         local relation = my_faction_info[n]
         if relation.other_faction == target_faction then
             return relation.relation == "enemy"
@@ -138,14 +160,22 @@ end
 --- If an entity is neither friendly nor enemy, it is neutral.
 --- Example: entity:isFriendly(target)
 function Entity:isFriendly(target)
-    if target == nil then return false end
+    if target == nil then
+        return false
+    end
     local my_faction = self:getFactionId()
-    if my_faction == nil then return false end
+    if my_faction == nil then
+        return false
+    end
     local my_faction_info = my_faction.components.faction_info
-    if my_faction_info == nil then return false end
+    if my_faction_info == nil then
+        return false
+    end
     local target_faction = target:getFactionId()
-    if target_faction == nil then return false end
-    for n=1,#my_faction_info do
+    if target_faction == nil then
+        return false
+    end
+    for n = 1, #my_faction_info do
         local relation = my_faction_info[n]
         if relation.other_faction == target_faction then
             return relation.relation == "friendly"
@@ -164,7 +194,7 @@ end
 --- entity:setCommsScript("comms_custom_script.lua") -- sets scripts/comms_custom_script.lua as this entity's comms script
 --- entity:setCommsScript("") -- disables comms with this entity
 function Entity:setCommsScript(script_name)
-    self.components.comms_receiver = {script=script_name}
+    self.components.comms_receiver = { script = script_name }
     self.components.comms_receiver.callback = nil
     return self
 end
@@ -178,7 +208,7 @@ end
 --- entity:setCommsFunction(function(comms_source, comms_target) ... end)
 --- Example: entity:setCommsFunction(commsStation) -- where commsStation is a function that calls setCommsMessage() at least once, and uses addCommsReply() to let players respond
 function Entity:setCommsFunction(callback)
-    self.components.comms_receiver = {callback=callback}
+    self.components.comms_receiver = { callback = callback }
     self.components.comms_receiver.script = ""
     return self
 end
@@ -186,7 +216,7 @@ end
 --- EmptyEpsilon generates random callsigns for entities upon creation, and this function overrides that default.
 --- Example: entity:setCallSign("Epsilon")
 function Entity:setCallSign(callsign)
-    self.components.callsign = {callsign=callsign}
+    self.components.callsign = { callsign = callsign }
     return self
 end
 --- Hails a player ship from this entity.
@@ -222,7 +252,10 @@ end
 --- Example: entity:openCommsTo(player)
 function Entity:openCommsTo(target)
     if target and target.components.comms_transmitter then
-        if target.components.comms_transmitter.state == "inactive" or target.components.comms_transmitter.state == "broken" then
+        if
+            target.components.comms_transmitter.state == "inactive"
+            or target.components.comms_transmitter.state == "broken"
+        then
             target.components.comms_transmitter.state = "hailed"
             target.components.comms_transmitter.incomming_message = ""
             target.components.comms_transmitter.target = self
@@ -235,7 +268,9 @@ end
 --- Returns this entity's callsign.
 --- Example: entity:getCallSign()
 function Entity:getCallSign()
-    if self.components.callsign then return self.components.callsign.callsign end
+    if self.components.callsign then
+        return self.components.callsign.callsign
+    end
     return "?"
 end
 --- Returns whether any entity from a hostile faction are within a given radius of this entity, in (unit?).
@@ -253,15 +288,24 @@ end
 --- Returns this entity's faction reputation points.
 --- Example: entity:getReputationPoints()
 function Entity:getReputationPoints()
-    if self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
+    if
+        self.components.faction
+        and self.components.faction.entity
+        and self.components.faction.entity.components.faction_info
+    then
         return self.components.faction.entity.components.faction_info.reputation_points
     end
 end
 --- Sets this entity's faction reputation points to the given amount.
 --- Example: entity:setReputationPoints(1000)
 function Entity:setReputationPoints(amount)
-    if self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
-        self.components.faction.entity.components.faction_info.reputation_points = amount
+    if
+        self.components.faction
+        and self.components.faction.entity
+        and self.components.faction.entity.components.faction_info
+    then
+        self.components.faction.entity.components.faction_info.reputation_points =
+            amount
     end
     return self
 end
@@ -272,10 +316,17 @@ end
 --- -- Return false if `obj` has fewer than 1000 reputation points or the passed value is negative. Otherwise, return true and deduct the points.
 --- entity:takeReputationPoints(1000)
 function Entity:takeReputationPoints(amount)
-    if amount > 0 and self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
-        local points = self.components.faction.entity.components.faction_info.reputation_points
+    if
+        amount > 0
+        and self.components.faction
+        and self.components.faction.entity
+        and self.components.faction.entity.components.faction_info
+    then
+        local points =
+            self.components.faction.entity.components.faction_info.reputation_points
         if points >= amount then
-            self.components.faction.entity.components.faction_info.reputation_points = points - amount
+            self.components.faction.entity.components.faction_info.reputation_points = points
+                - amount
             return true
         end
     end
@@ -285,8 +336,14 @@ end
 --- Discards negative values. Returns the entity.
 --- Example: entity:addReputationPoints(1000)
 function Entity:addReputationPoints(amount)
-    if amount > 0 and self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
-        self.components.faction.entity.components.faction_info.reputation_points = self.components.faction.entity.components.faction_info.reputation_points + amount
+    if
+        amount > 0
+        and self.components.faction
+        and self.components.faction.entity
+        and self.components.faction.entity.components.faction_info
+    then
+        self.components.faction.entity.components.faction_info.reputation_points = self.components.faction.entity.components.faction_info.reputation_points
+            + amount
     end
     return self
 end
@@ -306,7 +363,7 @@ end
 --- entity:takeDamage(20, "emp", 1000, 0) -- deals 20 EMP damage as if it had originated from coordinates 1000,0
 --- entity:takeDamage(20) -- deals 20 energy damage
 function Entity:takeDamage(amount, type, originx, originy)
-    applyDamageToEntity(self, amount, {type=type, x=originx, y=originy})
+    applyDamageToEntity(self, amount, { type = type, x = originx, y = originy })
 end
 --- Sets this entity's description in unscanned and scanned states.
 --- The science screen displays these descriptions when targeting a scanned entity.
@@ -314,7 +371,12 @@ end
 --- Example:
 --- entity:setDescriptions("A refitted Atlantis X23...", "It's a trap!")
 function Entity:setDescriptions(unscanned_description, scanned_description)
-    self.components.science_description = {not_scanned=unscanned_description, friend_or_foe_identified=unscanned_description, simple_scan=scanned_description, full_scan=scanned_description}
+    self.components.science_description = {
+        not_scanned = unscanned_description,
+        friend_or_foe_identified = unscanned_description,
+        simple_scan = scanned_description,
+        full_scan = scanned_description,
+    }
     return self
 end
 --- Sets a description for a given EScannedState on this entity.
@@ -325,11 +387,22 @@ end
 --- - "fullscan" or "full": The entity is fully scanned.
 --- Example: entity:setDescriptionForScanState("friendorfoeidentified", "A refitted...")
 function Entity:setDescriptionForScanState(state, description)
-    if self.components.science_description == nil then self.components.science_description = {} end
-    if state == "notscanned" or state == "not" then self.components.science_description.not_scanned = description end
-    if state == "friendorfoeidentified" then self.components.science_description.friend_or_foe_identified = description end
-    if state == "simplescan" or state == "simple" then self.components.science_description.simple_scan = description end
-    if state == "fullscan" or state == "full" then self.components.science_description.full_scan = description end
+    if self.components.science_description == nil then
+        self.components.science_description = {}
+    end
+    if state == "notscanned" or state == "not" then
+        self.components.science_description.not_scanned = description
+    end
+    if state == "friendorfoeidentified" then
+        self.components.science_description.friend_or_foe_identified =
+            description
+    end
+    if state == "simplescan" or state == "simple" then
+        self.components.science_description.simple_scan = description
+    end
+    if state == "fullscan" or state == "full" then
+        self.components.science_description.full_scan = description
+    end
     return self
 end
 --- Returns this entity's description for the given EScannedState.
@@ -339,10 +412,18 @@ end
 --- entity:getDescription() -- returns the "fullscan" description
 --- entity:getDescription("friendorfoeidentified") -- returns the "friendorfoeidentified" description
 function Entity:getDescription(state)
-    if self.components.science_description == nil then return "" end
-    if state == "notscanned" or state == "not" then return self.components.science_description.not_scanned end
-    if state == "friendorfoeidentified" then return self.components.science_description.friend_or_foe_identified end
-    if state == "simplescan" or state == "simple" then return self.components.science_description.simple_scan end
+    if self.components.science_description == nil then
+        return ""
+    end
+    if state == "notscanned" or state == "not" then
+        return self.components.science_description.not_scanned
+    end
+    if state == "friendorfoeidentified" then
+        return self.components.science_description.friend_or_foe_identified
+    end
+    if state == "simplescan" or state == "simple" then
+        return self.components.science_description.simple_scan
+    end
     return self.components.science_description.full_scan
 end
 --- Sets this entity's radar signature, which creates noise on the science screen's raw radar signal ring.
@@ -352,13 +433,19 @@ end
 --- Larger and negative values are possible, but currently have no visual effect on the bands.
 --- Example: entity:setRadarSignatureInfo(0.0, 0.5, 1.0) -- a radar signature of 0 gravitational, 0.5 electrical, and 1.0 thermal
 function Entity:setRadarSignatureInfo(gravitational, electrical, thermal)
-    self.components.radar_signature = {gravitational=gravitational, electrical=electrical, thermal=thermal}
+    self.components.radar_signature = {
+        gravitational = gravitational,
+        electrical = electrical,
+        thermal = thermal,
+    }
     return self
 end
 --- Returns this entity's gravitational radar signature value.
 --- Example: entity:getRadarSignatureGravitational()
 function Entity:getRadarSignatureGravitational()
-    if self.components.radar_signature then return self.components.radar_signature.gravitational end
+    if self.components.radar_signature then
+        return self.components.radar_signature.gravitational
+    end
     return 0.0
 end
 --- [DEPRECATED]
@@ -369,33 +456,41 @@ end
 --- Returns this entity's electrical radar signature value.
 --- Example: entity:getRadarSignatureElectrical()
 function Entity:getRadarSignatureElectrical()
-    if self.components.radar_signature then return self.components.radar_signature.electrical end
+    if self.components.radar_signature then
+        return self.components.radar_signature.electrical
+    end
     return 0.0
 end
 --- Returns this entity's thermal radar signature value.
 --- Example: entity:getRadarSignatureThermal()
 function Entity:getRadarSignatureThermal()
-    if self.components.radar_signature then return self.components.radar_signature.thermal end
+    if self.components.radar_signature then
+        return self.components.radar_signature.thermal
+    end
     return 0.0
 end
 --- Sets this entity's scanning complexity (number of bars in the scanning minigame) and depth (number of scanning minigames to complete until fully scanned), respectively.
 --- Setting this also clears the entity's scanned state.
 --- Example: entity:setScanningParameters(2, 3)
 function Entity:setScanningParameters(complexity, depth)
-    self.components.scan_state = {complexity=complexity, depth=depth}
+    self.components.scan_state = { complexity = complexity, depth = depth }
     self:setScanned(false)
     return self
 end
 --- Returns the scanning complexity for this entity.
 --- Example: entity:scanningComplexity()
 function Entity:scanningComplexity()
-    if self.components.scan_state then return self.components.scan_state.complexity end
+    if self.components.scan_state then
+        return self.components.scan_state.complexity
+    end
     return 0
 end
 --- Returns the maximum scanning depth for this entity.
 --- Example: entity:scanningChannelDepth()
 function Entity:scanningChannelDepth()
-    if self.components.scan_state then return self.components.scan_state.depth end
+    if self.components.scan_state then
+        return self.components.scan_state.depth
+    end
     return 0
 end
 --- Sets a per-entity hacking difficulty override for this entity, replacing the global hacking difficulty for this target.
@@ -404,15 +499,17 @@ end
 --- Example: entity:setHackingDifficulty(3)
 function Entity:setHackingDifficulty(difficulty)
     if difficulty < 0 then
-        local games = self.components.hacking_target and self.components.hacking_target.games or -1
+        local games = self.components.hacking_target
+                and self.components.hacking_target.games
+            or -1
         -- If neither difficulty nor game type is customized, remove the HackingTarget component.
         if games < 0 then
             self.components.hacking_target = nil
         else
-            self.components.hacking_target = {difficulty=-1}
+            self.components.hacking_target = { difficulty = -1 }
         end
     else
-        self.components.hacking_target = {difficulty=difficulty}
+        self.components.hacking_target = { difficulty = difficulty }
     end
     return self
 end
@@ -422,7 +519,9 @@ end
 --- entity:setHackingDifficulty(3)
 --- entity:getHackingDifficulty() -- returns 3
 function Entity:getHackingDifficulty()
-    if self.components.hacking_target then return self.components.hacking_target.difficulty end
+    if self.components.hacking_target then
+        return self.components.hacking_target.difficulty
+    end
     return -1
 end
 --- Sets a per-entity hacking game override for this entity, replacing the global hacking game setting for this target.
@@ -430,20 +529,25 @@ end
 --- Example: entity:setHackingGame("mines")
 function Entity:setHackingGame(game)
     local games = -1
-    if game == "mines" then games = 0
-    elseif game == "lights" then games = 1
-    elseif game == "all" then games = 2
+    if game == "mines" then
+        games = 0
+    elseif game == "lights" then
+        games = 1
+    elseif game == "all" then
+        games = 2
     end
     -- If neither difficulty nor game type is customized, remove the HackingTarget component.
     if games < 0 then
-        local difficulty = self.components.hacking_target and self.components.hacking_target.difficulty or -1
+        local difficulty = self.components.hacking_target
+                and self.components.hacking_target.difficulty
+            or -1
         if difficulty < 0 then
             self.components.hacking_target = nil
         else
-            self.components.hacking_target = {games=-1}
+            self.components.hacking_target = { games = -1 }
         end
     else
-        self.components.hacking_target = {games=games}
+        self.components.hacking_target = { games = games }
     end
     return self
 end
@@ -455,9 +559,12 @@ end
 function Entity:getHackingGame()
     if self.components.hacking_target then
         local g = self.components.hacking_target.games
-        if g == 0 then return "mines"
-        elseif g == 1 then return "lights"
-        elseif g == 2 then return "all"
+        if g == 0 then
+            return "mines"
+        elseif g == 1 then
+            return "lights"
+        elseif g == 2 then
+            return "all"
         end
     end
     return nil
@@ -468,7 +575,11 @@ end
 --- If true, all factions treat this entity as fully scanned.
 --- Example: entity:setScanned(true)
 function Entity:setScanned(is_scanned)
-    if is_scanned then self:setScanState("full") else self:setScanState("none") end
+    if is_scanned then
+        self:setScanState("full")
+    else
+        self:setScanState("none")
+    end
     return self
 end
 --- [DEPRECATED]
@@ -477,9 +588,13 @@ end
 function Entity:isScanned()
     local ss = self.components.scan_state
     if ss then
-        for n=1,#ss do
-            if ss[n].state == "full" then return true end
-            if ss[n].state == "simple" then return true end
+        for n = 1, #ss do
+            if ss[n].state == "full" then
+                return true
+            end
+            if ss[n].state == "simple" then
+                return true
+            end
         end
         return false
     end
@@ -488,15 +603,21 @@ end
 --- Returns whether the given entity has successfully scanned this entity.
 --- Example: entity:isScannedBy(other)
 function Entity:isScannedBy(other)
-    if not other then return false end
+    if not other then
+        return false
+    end
     local f = other:getFactionId()
     if f then
         local ss = self.components.scan_state
         if ss then
-            for n=1,#ss do
+            for n = 1, #ss do
                 if ss[n].faction == f then
-                    if ss[n].state == "full" then return true end
-                    if ss[n].state == "simple" then return true end
+                    if ss[n].state == "full" then
+                        return true
+                    end
+                    if ss[n].state == "simple" then
+                        return true
+                    end
                     return false
                 end
             end
@@ -526,8 +647,12 @@ function Entity:isScannedByFaction(faction_name)
         if f ~= nil then
             for n = 1, #ss do
                 if ss[n].faction == f then
-                    if ss[n].state == "full" then return true end
-                    if ss[n].state == "simple" then return true end
+                    if ss[n].state == "full" then
+                        return true
+                    end
+                    if ss[n].state == "simple" then
+                        return true
+                    end
                     return false
                 end
             end
@@ -556,7 +681,9 @@ end
 ---     end
 --- end)
 function Entity:onScanInitiated(callback)
-    if self.components.scan_state then self.components.scan_state.on_scan_initiated = callback end
+    if self.components.scan_state then
+        self.components.scan_state.on_scan_initiated = callback
+    end
     return self
 end
 --- Defines a function to call when a scan is completed against this entity.
@@ -572,7 +699,9 @@ end
 ---     end
 --- end)
 function Entity:onScanCompleted(callback)
-    if self.components.scan_state then self.components.scan_state.on_scan_completed = callback end
+    if self.components.scan_state then
+        self.components.scan_state.on_scan_completed = callback
+    end
     return self
 end
 --- Defines a function to call when a scan is cancelled against this entity.
@@ -585,7 +714,9 @@ end
 ---     print("Scan of " .. target:getCallSign() .. " was cancelled")
 --- end)
 function Entity:onScanCancelled(callback)
-    if self.components.scan_state then self.components.scan_state.on_scan_cancelled = callback end
+    if self.components.scan_state then
+        self.components.scan_state.on_scan_cancelled = callback
+    end
     return self
 end
 --- Defines this entity as a drone controllable by the given owner entity.
@@ -596,7 +727,7 @@ function Entity:setDroneOwner(owner)
     if owner == nil then
         self.components.allow_drone_link = nil
     else
-        self.components.allow_drone_link = {owner = owner}
+        self.components.allow_drone_link = { owner = owner }
     end
     return self
 end
@@ -607,7 +738,7 @@ end
 function Entity:setDroneController(range, energy_drain)
     self.components.drone_controller = {
         control_range = range,
-        energy_drain_per_sec = energy_drain
+        energy_drain_per_sec = energy_drain,
     }
     return self
 end

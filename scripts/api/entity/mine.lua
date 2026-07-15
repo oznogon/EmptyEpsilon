@@ -15,28 +15,28 @@ function Mine()
         radar_trace = {
             icon = "radar/mine.png",
             min_size = 10,
-            max_size = 10
+            max_size = 10,
         },
         constant_particle_emitter = {
             interval = 0.4,
-            start_color = {1, 1, 1},
-            end_color = {0, 0, 1},
+            start_color = { 1, 1, 1 },
+            end_color = { 0, 0, 1 },
             start_size = 30.0,
             end_size = 0.0,
-            life_time = 10.0
+            life_time = 10.0,
         },
-        radar_signature = {electrical = 0.05},
-        avoid_object = {range = blast_range * 1.2},
+        radar_signature = { electrical = 0.05 },
+        avoid_object = { range = blast_range * 1.2 },
         physics = {
             type = "sensor",
-            size = blast_range * 0.6
+            size = blast_range * 0.6,
         },
         delayed_explode_on_touch = {
             delay = 1.0,
             damage_at_center = 160.0,
             damage_at_edge = 30.0,
-            blast_range = blast_range
-        }
+            blast_range = blast_range,
+        },
     }
     return e
 end

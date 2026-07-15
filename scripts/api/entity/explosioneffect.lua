@@ -6,8 +6,8 @@ function ExplosionEffect()
     local e = createEntity()
     e.components = {
         transform = {},
-        explosion_effect = {size=1.0, radar=false},
-        sfx = {sound="sfx/explosion.wav"},
+        explosion_effect = { size = 1.0, radar = false },
+        sfx = { sound = "sfx/explosion.wav" },
     }
     return e
 end
@@ -20,8 +20,8 @@ function ElectricExplosionEffect()
     local e = createEntity()
     e.components = {
         transform = {},
-        explosion_effect = {size=1.0, radar=false, electrical=true},
-        sfx = {sound="sfx/emp_explosion.wav"},
+        explosion_effect = { size = 1.0, radar = false, electrical = true },
+        sfx = { sound = "sfx/emp_explosion.wav" },
     }
     return e
 end
@@ -31,6 +31,8 @@ local Entity = getLuaEntityFunctionTable()
 --- Defaults to false.
 --- Example: explosion:setOnRadar(true)
 function Entity:setOnRadar(is_on_radar)
-    if self.components.explosion_effect then self.components.explosion_effect.radar = is_on_radar end
+    if self.components.explosion_effect then
+        self.components.explosion_effect.radar = is_on_radar
+    end
     return self
 end

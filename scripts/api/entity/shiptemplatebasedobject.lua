@@ -29,28 +29,57 @@ function Entity:setTemplate(template_name)
     if template.__type == "station" then
         comp.physics.type = "static"
     elseif template.__type == "playership" then
-        if comp.shields then comp.shields.active = false end
+        if comp.shields then
+            comp.shields.active = false
+        end
     end
 
     if comp.reactor then
         local reactor_power_factor = 0
-        if comp.beam_weapons then comp.beam_weapons.power_factor = 3.0; reactor_power_factor = reactor_power_factor - 3.0 end
-        if comp.missile_tubes then comp.missile_tubes.power_factor = 1.0; reactor_power_factor = reactor_power_factor - 1.0 end
-        if comp.maneuvering_thrusters then comp.maneuvering_thrusters.power_factor = 2.0; reactor_power_factor = reactor_power_factor - 2.0 end
-        if comp.impulse_engine then comp.impulse_engine.power_factor = 4.0; reactor_power_factor = reactor_power_factor - 4.0 end
-        if comp.warp_drive then comp.warp_drive.power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0 end
-        if comp.jump_drive then comp.jump_drive.power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0 end
-        if comp.shields then
-            comp.shields.front_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
-            comp.shields.rear_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
+        if comp.beam_weapons then
+            comp.beam_weapons.power_factor = 3.0
+            reactor_power_factor = reactor_power_factor - 3.0
         end
-        if comp.utility_beam then comp.utility_beam.power_factor = 1.0; reactor_power_factor = reactor_power_factor - 1.0 end
+        if comp.missile_tubes then
+            comp.missile_tubes.power_factor = 1.0
+            reactor_power_factor = reactor_power_factor - 1.0
+        end
+        if comp.maneuvering_thrusters then
+            comp.maneuvering_thrusters.power_factor = 2.0
+            reactor_power_factor = reactor_power_factor - 2.0
+        end
+        if comp.impulse_engine then
+            comp.impulse_engine.power_factor = 4.0
+            reactor_power_factor = reactor_power_factor - 4.0
+        end
+        if comp.warp_drive then
+            comp.warp_drive.power_factor = 5.0
+            reactor_power_factor = reactor_power_factor - 5.0
+        end
+        if comp.jump_drive then
+            comp.jump_drive.power_factor = 5.0
+            reactor_power_factor = reactor_power_factor - 5.0
+        end
+        if comp.shields then
+            comp.shields.front_power_factor = 5.0
+            reactor_power_factor = reactor_power_factor - 5.0
+            comp.shields.rear_power_factor = 5.0
+            reactor_power_factor = reactor_power_factor - 5.0
+        end
+        if comp.utility_beam then
+            comp.utility_beam.power_factor = 1.0
+            reactor_power_factor = reactor_power_factor - 1.0
+        end
         comp.reactor.power_factor = reactor_power_factor
     end
-    if comp.internal_rooms and template.__repair_crew_count and template.__repair_crew_count > 0 then
-        for n=1,template.__repair_crew_count do
+    if
+        comp.internal_rooms
+        and template.__repair_crew_count
+        and template.__repair_crew_count > 0
+    then
+        for n = 1, template.__repair_crew_count do
             local crew = createEntity()
-            crew.components.internal_crew = {ship=self}
+            crew.components.internal_crew = { ship = self }
             crew.components.internal_repair_crew = {}
         end
     end
@@ -61,23 +90,42 @@ function Entity:setTemplate(template_name)
         comp.beam_weapons.frequency = irandom(0, 20)
     end
     if comp.internal_rooms == nil then -- No internal rooms, so auto-repair
-        if comp.beam_weapons then comp.beam_weapons.auto_repair_per_second = 0.005; end
-        if comp.missile_tubes then comp.missile_tubes.auto_repair_per_second = 0.005 end
-        if comp.maneuvering_thrusters then comp.maneuvering_thrusters.auto_repair_per_second = 0.005 end
-        if comp.impulse_engine then comp.impulse_engine.auto_repair_per_second = 0.005 end
-        if comp.warp_drive then comp.warp_drive.auto_repair_per_second = 0.005 end
-        if comp.jump_drive then comp.jump_drive.auto_repair_per_second = 0.005 end
+        if comp.beam_weapons then
+            comp.beam_weapons.auto_repair_per_second = 0.005
+        end
+        if comp.missile_tubes then
+            comp.missile_tubes.auto_repair_per_second = 0.005
+        end
+        if comp.maneuvering_thrusters then
+            comp.maneuvering_thrusters.auto_repair_per_second = 0.005
+        end
+        if comp.impulse_engine then
+            comp.impulse_engine.auto_repair_per_second = 0.005
+        end
+        if comp.warp_drive then
+            comp.warp_drive.auto_repair_per_second = 0.005
+        end
+        if comp.jump_drive then
+            comp.jump_drive.auto_repair_per_second = 0.005
+        end
         if comp.shields then
             comp.shields.front_auto_repair_per_second = 0.005
             comp.shields.rear_auto_repair_per_second = 0.005
         end
-        if comp.utility_beam then comp.utility_beam.auto_repair_per_second = 0.005 end
-        if comp.reactor then comp.reactor.auto_repair_per_second = 0.005 end
+        if comp.utility_beam then
+            comp.utility_beam.auto_repair_per_second = 0.005
+        end
+        if comp.reactor then
+            comp.reactor.auto_repair_per_second = 0.005
+        end
     end
     if isNewPlayerShip then
-        local res = {pcall(__on_new_player_ship, self)}
+        local res = { pcall(__on_new_player_ship, self) }
         if not res[1] then
-            print("onNewPlayerShip callback function error:", table.unpack(res, 2))
+            print(
+                "onNewPlayerShip callback function error:",
+                table.unpack(res, 2)
+            )
         end
     end
     return self
@@ -92,7 +140,7 @@ end
 --- This overrides the vessel class name provided by the ShipTemplate.
 --- Example: stbo:setTypeName("Prototype")
 function Entity:setTypeName(type_name)
-    self.components.typename = {type_name=type_name, localized=type_name}
+    self.components.typename = { type_name = type_name, localized = type_name }
     return self
 end
 --- Returns this entity's vessel classification name.
@@ -105,13 +153,17 @@ end
 --- Returns this entity's hull points.
 --- Example: stbo:getHull()
 function Entity:getHull()
-    if self.components.hull then return self.components.hull.current end
+    if self.components.hull then
+        return self.components.hull.current
+    end
     return 0
 end
 --- Returns this entity's maximum limit of hull points.
 --- Example: stbo:getHullMax()
 function Entity:getHullMax()
-    if self.components.hull then return self.components.hull.max end
+    if self.components.hull then
+        return self.components.hull.max
+    end
     return 0
 end
 --- Sets this entity's hull points.
@@ -120,7 +172,10 @@ end
 --- Note that setting this value to 0 doesn't immediately destroy the entity.
 --- Example: stbo:setHull(100) -- sets the hull point limit to either 100, or the limit if less than 100
 function Entity:setHull(amount)
-    if self.components.hull then self.components.hull.current = math.min(math.max(0, amount), self.components.hull.max) end
+    if self.components.hull then
+        self.components.hull.current =
+            math.min(math.max(0, amount), self.components.hull.max)
+    end
     return self
 end
 --- Sets this entity's maximum limit of hull points.
@@ -139,13 +194,17 @@ end
 --- Defaults to true.
 --- Example: stbo:setCanBeDestroyed(false) -- prevents the entity from being destroyed by damage
 function Entity:setCanBeDestroyed(allow_destroy)
-    if self.components.hull then self.components.hull.allow_destruction = allow_destroy end
+    if self.components.hull then
+        self.components.hull.allow_destruction = allow_destroy
+    end
     return self
 end
 --- Returns whether the entity can be destroyed by damage.
 --- Example: stbo:getCanBeDestroyed()
 function Entity:getCanBeDestroyed()
-    if self.components.hull then return self.components.hull.allow_destruction end
+    if self.components.hull then
+        return self.components.hull.allow_destruction
+    end
     return false
 end
 --- Returns the shield points for this entity's shield segment with the given index.
@@ -155,7 +214,7 @@ end
 --- stbo:getShieldLevel(1) -- returns rear shield points
 function Entity:getShieldLevel(index)
     if self.components.shields and index < #self.components.shields then
-        return self.components.shields[index+1].level
+        return self.components.shields[index + 1].level
     end
     return 0
 end
@@ -164,14 +223,16 @@ end
 --- The segments' order starts with the front-facing segment, then proceeds clockwise.
 --- Example: stbo:getShieldCount()
 function Entity:getShieldCount()
-    if self.components.shields then return #self.components.shields end
+    if self.components.shields then
+        return #self.components.shields
+    end
     return 0
 end
 --- Returns the maximum shield points for the entity's shield segment with the given index.
 --- Example: stbo:getShieldMax(0) -- returns the max shield strength for segment 0
 function Entity:getShieldMax(index)
     if self.components.shields and index < #self.components.shields then
-        return self.components.shields[index+1].max
+        return self.components.shields[index + 1].max
     end
     return 0
 end
@@ -185,7 +246,7 @@ end
 --- stbo:setShields(50,40,30,20)
 function Entity:setShields(...)
     if self.components.shields then
-        for i, level in ipairs({...}) do
+        for i, level in ipairs({ ... }) do
             if i <= #self.components.shields then
                 self.components.shields[i].level = level
             end
@@ -206,14 +267,14 @@ end
 --- stbo:setShieldsMax(50,40,30,20)
 function Entity:setShieldsMax(...)
     if self.components.shields then
-        for i, max in ipairs({...}) do
+        for i, max in ipairs({ ... }) do
             if self.components.shields[i] then
                 self.components.shields[i].max = max
             else
-                self.components.shields[i] = {max=max, level=max}
+                self.components.shields[i] = { max = max, level = max }
             end
         end
-        while select('#', ...) < #self.components.shields do
+        while select("#", ...) < #self.components.shields do
             self.components.shields[#self.components.shields] = nil
         end
     end
@@ -238,69 +299,91 @@ end
 --- Use a looping sound file that tolerates being pitched up and down as the ship's impulse speed changes.
 --- Example: stbo:setImpulseSoundFile("sfx/engine_fighter.wav") -- sets the impulse sound to resources/sfx/engine_fighter.wav
 function Entity:setImpulseSoundFile(filename)
-    if self.components.impulse_engine then self.components.impulse_engine.sound = filename end
+    if self.components.impulse_engine then
+        self.components.impulse_engine.sound = filename
+    end
     return self
 end
 --- Returns whether this entity's shields are activated.
 --- Always returns true except for player ships, because only players can deactivate shields.
 --- Example: stbo:getShieldsActive() -- returns true if up, false if down
 function Entity:getShieldsActive()
-    if self.components.shields then return self.components.shields.active end
+    if self.components.shields then
+        return self.components.shields.active
+    end
     return false
 end
 --- Returns whether this entity supplies energy to docked player ships.
 --- Example: stbo:getSharesEnergyWithDocked()
 function Entity:getSharesEnergyWithDocked()
-    if self.components.docking_bay then return self.components.docking_bay.share_energy end
+    if self.components.docking_bay then
+        return self.components.docking_bay.share_energy
+    end
     return false
 end
 --- Defines whether this entity supplies energy to docked player ships.
 --- Example: stbo:setSharesEnergyWithDocked(false)
 function Entity:setSharesEnergyWithDocked(allow_energy_share)
-    if self.components.docking_bay then self.components.docking_bay.share_energy = allow_energy_share end
+    if self.components.docking_bay then
+        self.components.docking_bay.share_energy = allow_energy_share
+    end
     return self
 end
 --- Returns whether this entity repairs docked ships.
 --- Example: stbo:getRepairDocked()
 function Entity:getRepairDocked()
-    if self.components.docking_bay then return self.components.docking_bay.repair end
+    if self.components.docking_bay then
+        return self.components.docking_bay.repair
+    end
     return false
 end
 --- Defines whether this entity repairs docked ships.
 --- Example: stbo:setRepairDocked(true)
 function Entity:setRepairDocked(allow_repair)
-    if self.components.docking_bay then self.components.docking_bay.repair = allow_repair end
+    if self.components.docking_bay then
+        self.components.docking_bay.repair = allow_repair
+    end
     return self
 end
 --- Returns whether the entity restocks scan probes for docked player ships.
 --- Example: stbo:getRestocksScanProbes()
 function Entity:getRestocksScanProbes()
-    if self.components.docking_bay then return self.components.docking_bay.restock_probes end
+    if self.components.docking_bay then
+        return self.components.docking_bay.restock_probes
+    end
     return false
 end
 --- Defines whether the entity restocks scan probes for docked player ships.
 --- Example: stbo:setRestocksScanProbes(true)
 function Entity:setRestocksScanProbes(allow_restock)
-    if self.components.docking_bay then self.components.docking_bay.restock_probes = allow_restock end
+    if self.components.docking_bay then
+        self.components.docking_bay.restock_probes = allow_restock
+    end
     return self
 end
 --- Returns whether this entity restocks missiles for docked CPU ships.
 --- Example: stbo:getRestocksMissilesDocked()
 function Entity:getRestocksMissilesDocked()
-    if self.components.docking_bay then return self.components.docking_bay.restock_missiles end
+    if self.components.docking_bay then
+        return self.components.docking_bay.restock_missiles
+    end
     return false
 end
 --- Defines whether this entity restocks missiles for docked CPU ships.
 --- To restock docked player ships' weapons, use a comms script. See setCommsScript() and :setCommsFunction().
 --- Example: stbo:setRestocksMissilesDocked(true)
 function Entity:setRestocksMissilesDocked(allow_restock)
-    if self.components.docking_bay then self.components.docking_bay.restock_missiles = allow_restock end
+    if self.components.docking_bay then
+        self.components.docking_bay.restock_missiles = allow_restock
+    end
     return self
 end
 --- Defines this ship's utility beam, a scenario-defined scriptable ship system.
 --- Example: stbo:setUtilityBeam(180, 5000, 1, 500)
 function Entity:setUtilityBeam(max_arc, max_range, cycle_time, strength)
-    if self.components.utility_beam == nil then self.components.utility_beam = {} end
+    if self.components.utility_beam == nil then
+        self.components.utility_beam = {}
+    end
 
     self.components.utility_beam.max_arc = max_arc
     self.components.utility_beam.max_range = max_range
@@ -338,8 +421,24 @@ end
 ---   -- end callback
 ---   end
 --- )
-function Entity:addCustomUtilityBeamMode(name, energy_per_sec, heat_per_sec, requires_target, callback, deactivate_callback)
-    setCustomUtilityBeamMode(self, name, 0, energy_per_sec, heat_per_sec, requires_target, callback, deactivate_callback)
+function Entity:addCustomUtilityBeamMode(
+    name,
+    energy_per_sec,
+    heat_per_sec,
+    requires_target,
+    callback,
+    deactivate_callback
+)
+    setCustomUtilityBeamMode(
+        self,
+        name,
+        0,
+        energy_per_sec,
+        heat_per_sec,
+        requires_target,
+        callback,
+        deactivate_callback
+    )
     return self
 end
 
@@ -360,13 +459,17 @@ end
 --- [DEPRECATED]
 --- Use setShields() with an index value.
 function Entity:setFrontShield(amount)
-    if self.components.shields then self.components.shields[1].level = amount end
+    if self.components.shields then
+        self.components.shields[1].level = amount
+    end
     return self
 end
 --- [DEPRECATED]
 --- Use setShieldsMax() with the appropriate number of arguments.
 function Entity:setFrontShieldMax(amount)
-    if self.components.shields then self.components.shields[1].max = amount end
+    if self.components.shields then
+        self.components.shields[1].max = amount
+    end
     return self
 end
 --- [DEPRECATED]
@@ -382,26 +485,34 @@ end
 --- [DEPRECATED]
 --- Use setShields() with an index value.
 function Entity:setRearShield(amount)
-    if self.components.shields then self.components.shields[2].level = amount end
+    if self.components.shields then
+        self.components.shields[2].level = amount
+    end
     return self
 end
 --- [DEPRECATED]
 --- Use setShieldsMax() with the appropriate number of arguments.
 function Entity:setRearShieldMax(amount)
-    if self.components.shields then self.components.shields[2].max = amount end
+    if self.components.shields then
+        self.components.shields[2].max = amount
+    end
     return self
 end
 --- Defines a function to call when this entity takes damage.
 --- Passes the object taking damage and the instigator entity (or nil) to the function.
 --- Example: stbo:onTakingDamage(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was damaged by " .. instigator:getCallSign()) end)
 function Entity:onTakingDamage(callback)
-    if self.components.hull then self.components.hull.on_taking_damage = callback end
+    if self.components.hull then
+        self.components.hull.on_taking_damage = callback
+    end
     return self
 end
 --- Defines a function to call when this entity is destroyed by taking damage.
 --- Passes the object taking damage and the instigator entity that delivered the destroying damage (or nil) to the function.
 --- Example: stbo:onDestruction(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was destroyed by " .. instigator:getCallSign()) end)
 function Entity:onDestruction(callback)
-    if self.components.hull then self.components.hull.on_destruction = callback end
+    if self.components.hull then
+        self.components.hull.on_destruction = callback
+    end
     return self
 end

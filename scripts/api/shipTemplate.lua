@@ -11,14 +11,21 @@ function getSpawnablePlayerShips()
     if __allow_new_player_ships then
         for i, v in ipairs(__player_ship_templates) do
             if not v.__hidden then
-                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, v.__description, v.radar_trace.icon}
+                result[#result + 1] = {
+                    __spawnPlayerShipFunc(v.typename.type_name),
+                    v.typename.localized,
+                    v.__description,
+                    v.radar_trace.icon,
+                }
             end
         end
     end
     return result
 end
 function __spawnPlayerShipFunc(key)
-    return function() return PlayerSpaceship():setTemplate(key):setRotation(random(0, 360)) end
+    return function()
+        return PlayerSpaceship():setTemplate(key):setRotation(random(0, 360))
+    end
 end
 
 function allowNewPlayerShips(enabled)
@@ -29,13 +36,17 @@ function allowNewPlayerShips(enabled)
 end
 
 function onNewPlayerShip(callback)
-	if type(callback) == "function" then
-		__on_new_player_ship = callback
-	elseif callback == nil then
-		__on_new_player_ship = function() end
-	else
-		error("bad callback value: expected function or nil, got " .. type(callback), 2)
-	end
+    if type(callback) == "function" then
+        __on_new_player_ship = callback
+    elseif callback == nil then
+        __on_new_player_ship = function() end
+    else
+        error(
+            "bad callback value: expected function or nil, got "
+                .. type(callback),
+            2
+        )
+    end
 end
 
 --- A ShipTemplate defines the base functionality, stats, models, and other details for entities created from it.
@@ -53,16 +64,17 @@ end
 ShipTemplate = createClass()
 function ShipTemplate:__init__()
     self.radar_trace = {
-        icon="radar/ship.png",
-        radius=300.0*0.8,
-        max_size=1024,
-        color_by_faction=true,
-        arrow_if_not_scanned=true,
+        icon = "radar/ship.png",
+        radius = 300.0 * 0.8,
+        max_size = 1024,
+        color_by_faction = true,
+        arrow_if_not_scanned = true,
     }
-    self.radar_signature = {gravitational=0, electrical=0.4, thermal=0.4}
+    self.radar_signature =
+        { gravitational = 0, electrical = 0.4, thermal = 0.4 }
     self.__repair_crew_count = 3
     self.share_short_range_radar = {}
-    self.comms_receiver = {script="comms_ship.lua"}
+    self.comms_receiver = { script = "comms_ship.lua" }
 end
 
 --- Sets this ShipTemplate's unique reference name.
@@ -72,7 +84,7 @@ end
 --- Example: template:setName("Phobos T3")
 function ShipTemplate:setName(name)
     __ship_templates[name] = self
-    self.typename = {type_name=name, localized=name}
+    self.typename = { type_name = name, localized = name }
     return self
 end
 --- Sets the displayed vessel model designation for entities created from this ShipTemplate.
@@ -136,14 +148,16 @@ function ShipTemplate:setType(template_type)
         end
     end
     if template_type == "station" then
-        if self.docking_bay == nil then self.docking_bay = {} end
+        if self.docking_bay == nil then
+            self.docking_bay = {}
+        end
         self.docking_bay.repair = true
         self.docking_bay.restock_probes = true
         self.docking_bay.share_energy = true
         if self.radar_trace.icon == "radar/ship.png" then
             self.radar_trace.icon = "radar/blip.png"
         end
-        self.comms_receiver = {script="comms_station.lua"}
+        self.comms_receiver = { script = "comms_station.lua" }
     end
     return self
 end
@@ -164,7 +178,7 @@ end
 --- - "missilevolley" prefers lining up missile attacks from long range
 --- Example: template:setDefaultAI("fighter") -- default to the "fighter" combat AI state
 function ShipTemplate:setDefaultAI(default_ai)
-    self.ai_controller = {new_name=default_ai}
+    self.ai_controller = { new_name = default_ai }
     return self
 end
 --- Sets the 3D appearance, by ModelData name, of entities created from this ShipTemplate.
@@ -183,7 +197,9 @@ function ShipTemplate:setModel(model_data_name)
     end
     if self.physics and self.radar_trace then
         if type(self.physics.size) == "table" then
-            self.radar_trace.radius = math.sqrt(self.physics.size[1]^2 + self.physics.size[2]^2) * 0.5
+            self.radar_trace.radius = math.sqrt(
+                self.physics.size[1] ^ 2 + self.physics.size[2] ^ 2
+            ) * 0.5
         else
             self.radar_trace.radius = self.physics.size * 0.8
         end
@@ -200,8 +216,10 @@ end
 --- For consistent class usage across translations, wrap class name strings in the _ function.
 --- Example: template:setExternalDockClasses(_("class","Frigate"),_("class","Corvette")) -- all Frigate and Corvette ships can dock to the outside of this entity
 function ShipTemplate:setExternalDockClasses(...)
-    if self.docking_bay == nil then self.docking_bay = {} end
-    self.docking_bay.external_dock_classes = {...}
+    if self.docking_bay == nil then
+        self.docking_bay = {}
+    end
+    self.docking_bay.external_dock_classes = { ... }
     return self
 end
 --- Defines a list of ship classes that can be docked inside of entities created from this ShipTemplate.
@@ -209,8 +227,10 @@ end
 --- For consistent class usage across translations, wrap class name strings in the _ function.
 --- Example: template:setInternalDockClasses(_("class","Starfighter")) -- all Starfighter ships can dock inside of this entity
 function ShipTemplate:setInternalDockClasses(...)
-    if self.docking_bay == nil then self.docking_bay = {} end
-    self.docking_bay.internal_dock_classes = {...}
+    if self.docking_bay == nil then
+        self.docking_bay = {}
+    end
+    self.docking_bay.internal_dock_classes = { ... }
     return self
 end
 --- Sets the amount of energy available for player ships created from this ShipTemplate.
@@ -218,7 +238,7 @@ end
 --- Defaults to 1000.
 --- Example: template:setEnergyStorage(500)
 function ShipTemplate:setEnergyStorage(amount)
-    self.reactor = {max_energy=amount, energy=amount}
+    self.reactor = { max_energy = amount, energy = amount }
     return self
 end
 --- Sets the default number of repair crew for player ships created from this ShipTemplate.
@@ -243,19 +263,35 @@ end
 --- To add multiple beam weapons to a ship, invoke this function multiple times, assigning each weapon a unique index value.
 --- To create a turreted beam, also add ShipTemplate:setBeamWeaponTurret(), and set the beam weapon's arc to be smaller than the turret's arc.
 --- Example: template:setBeamWeapon(0,90,-15,1200,3,1) -- index 0, 90-degree arc centered -15 degrees from forward, extending 1.2U, firing every 3 seconds and dealing 1 damage
-function ShipTemplate:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
-    if self.beam_weapons == nil then self.beam_weapons = {} end
+function ShipTemplate:setBeamWeapon(
+    index,
+    arc,
+    direction,
+    range,
+    cycle_time,
+    damage
+)
+    if self.beam_weapons == nil then
+        self.beam_weapons = {}
+    end
     while #self.beam_weapons < index + 1 do
         self.beam_weapons[#self.beam_weapons + 1] = {}
     end
 
     local model = __model_data[self.__model_data_name]
     local scale = model.mesh_render.scale or 1
-    local pos = (model.__beam_positions or {})[index+1]
+    local pos = (model.__beam_positions or {})[index + 1]
     if pos then
-        pos = {pos[1] * scale, pos[2] * scale, pos[3] * scale}
+        pos = { pos[1] * scale, pos[2] * scale, pos[3] * scale }
     end
-    self.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage, position=pos}
+    self.beam_weapons[index + 1] = {
+        arc = arc,
+        direction = direction,
+        range = range,
+        cycle_time = cycle_time,
+        damage = damage,
+        position = pos,
+    }
     if range <= 0 and #self.beam_weapons == index + 1 then
         self.beam_weapons[index + 1] = nil
     end
@@ -303,8 +339,15 @@ end
 
 --- Defines the ship's Utility Beam and sets its maximum arc, range, cycle_time, and strength.
 function ShipTemplate:setUtilityBeam(max_arc, max_range, cycle_time, strength)
-    if self.utility_beam == nil then self.utility_beam = {} end
-    self.utility_beam = {max_arc=max_arc, max_range=max_range, cycle_time=cycle_time, strength=strength}
+    if self.utility_beam == nil then
+        self.utility_beam = {}
+    end
+    self.utility_beam = {
+        max_arc = max_arc,
+        max_range = max_range,
+        cycle_time = cycle_time,
+        strength = strength,
+    }
     return self
 end
 
@@ -314,22 +357,24 @@ end
 --- The default ShipTemplate adds 0 tubes and an 8-second loading time.
 --- Example: template:setTubes(6,15.0) -- creates 6 weapon tubes with 15-second loading times
 function ShipTemplate:setTubes(amount, loading_time)
-    if self.missile_tubes == nil then self.missile_tubes = {} end
-    for n=1,amount do
+    if self.missile_tubes == nil then
+        self.missile_tubes = {}
+    end
+    for n = 1, amount do
         if #self.missile_tubes < n then
-            self.missile_tubes[n] = {load_time=loading_time}
+            self.missile_tubes[n] = { load_time = loading_time }
         else
             self.missile_tubes[n].load_time = loading_time
         end
     end
-    self.missile_tubes[amount+1] = nil
+    self.missile_tubes[amount + 1] = nil
     return self
 end
 --- Sets the delay, in seconds, for loading and unloading the WeaponTube with the given index.
 --- Defaults to 8.0.
 --- Example: template:setTubeLoadTime(0,12) -- sets the loading time for tube 0 to 12 seconds
 function ShipTemplate:setTubeLoadTime(index, time)
-    self.missile_tubes[index+1].load_time = time
+    self.missile_tubes[index + 1].load_time = time
     return self
 end
 --- Sets which weapon types the WeaponTube with the given index can load.
@@ -337,7 +382,7 @@ end
 --- Example: template:weaponTubeAllowMissle(0,"Homing") -- allows Homing missiles to be loaded in tube 0
 function ShipTemplate:weaponTubeAllowMissle(index, type)
     local type = string.lower(type)
-    self.missile_tubes[index+1]["allow_"..type] = true
+    self.missile_tubes[index + 1]["allow_" .. type] = true
     return self
 end
 --- Sets which weapon types the WeaponTube with the given index can't load.
@@ -345,19 +390,19 @@ end
 --- Example: template:weaponTubeDisallowMissle(0,"Homing") -- prevents Homing missiles from being loaded in tube 0
 function ShipTemplate:weaponTubeDisallowMissle(index, type)
     local type = string.lower(type)
-    self.missile_tubes[index+1]["allow_"..type] = false
+    self.missile_tubes[index + 1]["allow_" .. type] = false
     return self
 end
 --- Sets a WeaponTube with the given index to allow loading only the given weapon type.
 --- Example: template:setWeaponTubeExclusiveFor(0,"Homing") -- allows only Homing missiles to be loaded in tube 0
 function ShipTemplate:setWeaponTubeExclusiveFor(index, type)
     local type = string.lower(type)
-    self.missile_tubes[index+1]["allow_homing"] = false
-    self.missile_tubes[index+1]["allow_nuke"] = false
-    self.missile_tubes[index+1]["allow_mine"] = false
-    self.missile_tubes[index+1]["allow_emp"] = false
-    self.missile_tubes[index+1]["allow_hvli"] = false
-    self.missile_tubes[index+1]["allow_"..type] = true
+    self.missile_tubes[index + 1]["allow_homing"] = false
+    self.missile_tubes[index + 1]["allow_nuke"] = false
+    self.missile_tubes[index + 1]["allow_mine"] = false
+    self.missile_tubes[index + 1]["allow_emp"] = false
+    self.missile_tubes[index + 1]["allow_hvli"] = false
+    self.missile_tubes[index + 1]["allow_" .. type] = true
     return self
 end
 --- Sets the angle, relative to the entity's forward bearing, toward which the WeaponTube with the given index points.
@@ -366,20 +411,20 @@ end
 --- -- Sets tube 0 to point 90 degrees right of forward, and tube 1 to point 90 degrees left of forward
 --- template:setTubeDirection(0,90):setTubeDirection(1,-90)
 function ShipTemplate:setTubeDirection(index, direction)
-    self.missile_tubes[index+1].direction = direction
+    self.missile_tubes[index + 1].direction = direction
     return self
 end
 --- Sets the weapon size launched from the WeaponTube with the given index.
 --- Defaults to "medium".
 --- Example: template:setTubeSize(0,"large") -- sets tube 0 to fire large weapons
 function ShipTemplate:setTubeSize(index, size)
-    self.missile_tubes[index+1].size = size
+    self.missile_tubes[index + 1].size = size
     return self
 end
 --- Sets the number of default hull points for entities created from this ShipTemplate.
 --- Example: template:setHull(100)
 function ShipTemplate:setHull(amount)
-    self.hull = {current=amount, max=amount}
+    self.hull = { current = amount, max = amount }
     return self
 end
 --- Sets the maximum points per shield segment for entities created from this ShipTemplate.
@@ -392,11 +437,13 @@ end
 --- template:setShields(100,80) -- two shield segments; the front 180-degree shield has 100 points, the rear 80
 --- template:setShields(100,50,40,30) -- four shield segments; the front 90-degree shield has 100, right 50, rear 40, and left 30
 function ShipTemplate:setShields(...)
-    if self.shields == nil then self.shields = {} end
-    for n, level in ipairs({...}) do
-        self.shields[n] = {level=level, max=level}
+    if self.shields == nil then
+        self.shields = {}
     end
-    for n=#{...} + 1, #self.shields do
+    for n, level in ipairs({ ... }) do
+        self.shields[n] = { level = level, max = level }
+    end
+    for n = #{ ... } + 1, #self.shields do
         self.shields[n] = nil
     end
     return self
@@ -410,11 +457,25 @@ end
 --- Example:
 --- -- Sets the forward impulse speed to 80, rotational speed to 15, forward acceleration to 25, reverse speed to 20, and reverse acceleration to the same as the forward acceleration
 --- template:setSpeed(80,15,25,20)
-function ShipTemplate:setSpeed(forward_speed, turn_rate, forward_acceleration, reverse_speed, reverse_acceleration)
-    if reverse_speed == nil then reverse_speed = forward_speed end
-    if reverse_acceleration == nil then reverse_acceleration = forward_acceleration end
-    if self.maneuvering_thrusters == nil then self.maneuvering_thrusters = {} end
-    if self.impulse_engine == nil then self.impulse_engine = {} end
+function ShipTemplate:setSpeed(
+    forward_speed,
+    turn_rate,
+    forward_acceleration,
+    reverse_speed,
+    reverse_acceleration
+)
+    if reverse_speed == nil then
+        reverse_speed = forward_speed
+    end
+    if reverse_acceleration == nil then
+        reverse_acceleration = forward_acceleration
+    end
+    if self.maneuvering_thrusters == nil then
+        self.maneuvering_thrusters = {}
+    end
+    if self.impulse_engine == nil then
+        self.impulse_engine = {}
+    end
     self.maneuvering_thrusters.speed = turn_rate
     self.impulse_engine.max_speed_forward = forward_speed
     self.impulse_engine.max_speed_reverse = reverse_speed
@@ -427,7 +488,9 @@ end
 --- Defaults to (0,0).
 --- Example: template:setCombatManeuver(400,250)
 function ShipTemplate:setCombatManeuver(boost, strafe)
-    if self.combat_maneuvering_thrusters == nil then self.combat_maneuvering_thrusters = {} end
+    if self.combat_maneuvering_thrusters == nil then
+        self.combat_maneuvering_thrusters = {}
+    end
     self.combat_maneuvering_thrusters.boost_speed = boost
     self.combat_maneuvering_thrusters.strafe_speed = strafe
     return self
@@ -440,7 +503,9 @@ function ShipTemplate:setWarpSpeed(speed)
     if speed <= 0 then
         self.warp_drive = nil
     else
-        if self.warp_drive == nil then self.warp_drive = {} end
+        if self.warp_drive == nil then
+            self.warp_drive = {}
+        end
         self.warp_drive.speed_per_level = speed
     end
     return self
@@ -449,21 +514,27 @@ end
 --- Defaults to true.
 --- Example: template:setSharesEnergyWithDocked(false)
 function ShipTemplate:setSharesEnergyWithDocked(enabled)
-    if self.docking_bay then self.docking_bay.share_energy = enabled end
+    if self.docking_bay then
+        self.docking_bay.share_energy = enabled
+    end
     return self
 end
 --- Defines whether entities created from this template repair docked ships.
 --- Defaults to false. ShipTemplate:setType("station") sets this to true.
 --- Example: template:setRepairDocked(true)
 function ShipTemplate:setRepairDocked(enabled)
-    if self.docking_bay then self.docking_bay.repair = enabled end
+    if self.docking_bay then
+        self.docking_bay.repair = enabled
+    end
     return self
 end
 --- Defines whether entities created from this ShipTemplate restock scan probes on docked player ships.
 --- Defaults to false.
 --- Example: template:setRestocksScanProbes(true)
 function ShipTemplate:setRestocksScanProbes(enabled)
-    if self.docking_bay then self.docking_bay.restock_probes = enabled end
+    if self.docking_bay then
+        self.docking_bay.restock_probes = enabled
+    end
     return self
 end
 --- Defines whether entities created from this ShipTemplate restock missiles on docked CPU ships.
@@ -471,7 +542,9 @@ end
 --- Defaults to false.
 --- Example: template:setRestocksMissilesDocked(true)
 function ShipTemplate:setRestocksMissilesDocked(enabled)
-    if self.docking_bay then self.docking_bay.restock_missiles = enabled end
+    if self.docking_bay then
+        self.docking_bay.restock_missiles = enabled
+    end
     return self
 end
 --- Defines whether ships created from this ShipTemplate have a jump drive.
@@ -489,7 +562,9 @@ end
 --- Defaults to (5000,50000).
 --- Example: template:setJumpDriveRange(2500,25000) -- sets the minimum jump distance to 2.5U and maximum to 25U
 function ShipTemplate:setJumpDriveRange(min, max)
-    if self.jump_drive == nil then self.jump_drive = {} end
+    if self.jump_drive == nil then
+        self.jump_drive = {}
+    end
     self.jump_drive.min_distance = min
     self.jump_drive.max_distance = max
     return self
@@ -504,7 +579,9 @@ end
 --- Sets the storage capacity of the given weapon type for entities created from this ShipTemplate.
 --- Example: template:setWeaponStorage("HVLI", 6):setWeaponStorage("Homing",4) -- sets HVLI capacity to 6 and Homing capacity to 4
 function ShipTemplate:setWeaponStorage(type, amount)
-    if self.missile_tubes == nil then self.missile_tubes = {} end
+    if self.missile_tubes == nil then
+        self.missile_tubes = {}
+    end
     local type = string.lower(type)
     self.missile_tubes["storage_" .. type] = amount
     self.missile_tubes["max_" .. type] = amount
@@ -518,8 +595,11 @@ end
 --- To place multiple rooms, declare addRoom() multiple times.
 --- Example: template:addRoom(0,0,3,2) -- adds a 3x2 room with its upper-left coordinate at position 0,0
 function ShipTemplate:addRoom(x, y, w, h)
-    if self.internal_rooms == nil then self.internal_rooms = {} end
-    self.internal_rooms[#self.internal_rooms+1] = {position={x, y}, size={w, h}}
+    if self.internal_rooms == nil then
+        self.internal_rooms = {}
+    end
+    self.internal_rooms[#self.internal_rooms + 1] =
+        { position = { x, y }, size = { w, h } }
     return self
 end
 
@@ -530,8 +610,11 @@ end
 --- To place multiple rooms, declare addRoomSystem() multiple times.
 --- Example: template:addRoomSystem(1,2,3,4,"reactor")  -- adds a 3x4 room with its upper-left coordinate at position 1,2 that contains the Reactor system
 function ShipTemplate:addRoomSystem(x, y, w, h, system)
-    if self.internal_rooms == nil then self.internal_rooms = {} end
-    self.internal_rooms[#self.internal_rooms+1] = {position={x, y}, size={w, h}, system=system}
+    if self.internal_rooms == nil then
+        self.internal_rooms = {}
+    end
+    self.internal_rooms[#self.internal_rooms + 1] =
+        { position = { x, y }, size = { w, h }, system = system }
     return self
 end
 --- Adds a door between rooms in a ShipTemplate.
@@ -542,9 +625,14 @@ end
 --- To place multiple doors, declare addDoor() multiple times.
 --- Example: template:addDoor(2,1,true) -- places a horizontal door with its left-most point at 2,1
 function ShipTemplate:addDoor(x, y, horizontal)
-    if self.internal_rooms == nil then self.internal_rooms = {} end
-    if self.internal_rooms.doors == nil then self.internal_rooms.doors = {} end
-    self.internal_rooms.doors[#self.internal_rooms.doors+1] = {x, y, horizontal}
+    if self.internal_rooms == nil then
+        self.internal_rooms = {}
+    end
+    if self.internal_rooms.doors == nil then
+        self.internal_rooms.doors = {}
+    end
+    self.internal_rooms.doors[#self.internal_rooms.doors + 1] =
+        { x, y, horizontal }
     return self
 end
 --- Sets the default radar trace image for entities created from this ShipTemplate.
@@ -562,7 +650,9 @@ end
 --- Defaults to 30000.0 (30U).
 --- Example: template:setLongRangeRadarRange(20000) -- sets the long-range radar range to 20U
 function ShipTemplate:setLongRangeRadarRange(range)
-    if self.long_range_radar then self.long_range_radar.long_range = range end
+    if self.long_range_radar then
+        self.long_range_radar.long_range = range
+    end
     return self
 end
 --- Sets the short-range radar range of ships created from this ShipTemplate.
@@ -572,7 +662,9 @@ end
 --- Defaults to 5000.0 (5U).
 --- Example: template:setShortRangeRadarRange(4000) -- sets the short-range radar range to 4U
 function ShipTemplate:setShortRangeRadarRange(range)
-    if self.long_range_radar then self.long_range_radar.short_range = range end
+    if self.long_range_radar then
+        self.long_range_radar.short_range = range
+    end
     return self
 end
 --- Sets the sound file used for the impulse drive sounds on ships created from this ShipTemplate.
@@ -581,21 +673,31 @@ end
 --- Defaults to sfx/engine.wav.
 --- Example: template:setImpulseSoundFile("sfx/engine_fighter.wav")
 function ShipTemplate:setImpulseSoundFile(sfx)
-    if self.impulse_engine then self.impulse_engine.sound = sfx end
+    if self.impulse_engine then
+        self.impulse_engine.sound = sfx
+    end
     return self
 end
 --- Defines whether scanning features appear on related crew screens in player ships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanScan(false)
 function ShipTemplate:setCanScan(enabled)
-    if enabled then self.science_scanner = {} else self.science_scanner = nil end
+    if enabled then
+        self.science_scanner = {}
+    else
+        self.science_scanner = nil
+    end
     return self
 end
 --- Defines whether hacking features appear on related crew screens in player ships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanHack(false)
 function ShipTemplate:setCanHack(enabled)
-    if enabled then self.hacking_device = {} else self.hacking_device = nil end
+    if enabled then
+        self.hacking_device = {}
+    else
+        self.hacking_device = nil
+    end
     return self
 end
 --- Defines whether the entity can dock with other entities.
@@ -620,14 +722,22 @@ end
 --- Defaults to true.
 --- Example: template:setCanCombatManeuver(false)
 function ShipTemplate:setCanCombatManeuver(enabled)
-    if enabled then self.combat_maneuvering_thrusters = {} else self.combat_maneuvering_thrusters = nil end
+    if enabled then
+        self.combat_maneuvering_thrusters = {}
+    else
+        self.combat_maneuvering_thrusters = nil
+    end
     return self
 end
 --- Defines whether self-destruct controls appear on related crew screens in player ships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanSelfDestruct(false)
 function ShipTemplate:setCanSelfDestruct(enabled)
-    if enabled then self.self_destruct = {} else self.self_destruct = nil end
+    if enabled then
+        self.self_destruct = {}
+    else
+        self.self_destruct = nil
+    end
     return self
 end
 --- Defines whether ScanProbe-launching controls appear on related crew screens in player ships created from this ShipTemplate.

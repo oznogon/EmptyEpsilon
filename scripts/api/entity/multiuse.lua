@@ -29,7 +29,12 @@ function Entity:setDescription(description)
     if self.components.faction_info then
         self.components.faction_info.description = description
     else
-        self.components.science_description = {not_scanned=description, friend_or_foe_identified=description, simple_scan=description, full_scan=description}
+        self.components.science_description = {
+            not_scanned = description,
+            friend_or_foe_identified = description,
+            simple_scan = description,
+            full_scan = description,
+        }
     end
     return self
 end
@@ -41,12 +46,24 @@ end
 ---           explosion:setSize(1000) -- sets the explosion radius to 1U
 function Entity:setSize(radius)
     local comp = self.components
-    if comp.physics then comp.physics.size=radius end
-    if comp.mesh_render then comp.mesh_render.scale=radius end
-    if comp.avoid_object then comp.avoid_object.range=radius*2 end
-    if comp.explosion_effect then comp.explosion_effect.size=radius end
-    if comp.explode_on_touch then comp.explode_on_touch.blast_range=radius end
-    if comp.radar_trace then comp.radar_trace.radius=radius end
+    if comp.physics then
+        comp.physics.size = radius
+    end
+    if comp.mesh_render then
+        comp.mesh_render.scale = radius
+    end
+    if comp.avoid_object then
+        comp.avoid_object.range = radius * 2
+    end
+    if comp.explosion_effect then
+        comp.explosion_effect.size = radius
+    end
+    if comp.explode_on_touch then
+        comp.explode_on_touch.blast_range = radius
+    end
+    if comp.radar_trace then
+        comp.radar_trace.radius = radius
+    end
     return self
 end
 
@@ -56,8 +73,12 @@ end
 --- Example: obj:getSize()
 function Entity:getSize()
     local comp = self.components
-    if comp.physics then return comp.physics.size end
-    if comp.mesh_render then return comp.mesh_render.scale end
+    if comp.physics then
+        return comp.physics.size
+    end
+    if comp.mesh_render then
+        return comp.mesh_render.scale
+    end
     return 100.0
 end
 
@@ -70,8 +91,12 @@ end
 --- Sets the amount of energy recharged upon pickup when a player ship collides with this SupplyDrop.
 --- Example: supply_drop:setEnergy(500)
 function Entity:setEnergy(amount)
-    if self.components.reactor then self.components.reactor.energy = amount end
-    if self.components.pickup then self.components.pickup.give_energy = amount end
+    if self.components.reactor then
+        self.components.reactor.energy = amount
+    end
+    if self.components.pickup then
+        self.components.pickup.give_energy = amount
+    end
     return self
 end
 
@@ -111,11 +136,11 @@ end
 --- Example: beamfx:setTarget(target,0,0,0)
 function Entity:setTarget(a, b, c, d)
     if self.components.allow_radar_link then -- Scan probe, order it to move the the target.
-        self.components.move_to = {target={a, b}}
+        self.components.move_to = { target = { a, b } }
     end
     if self.components.beam_effect then
         self.components.beam_effect.target = a
-        self.components.beam_effect.target_offset = {b, c, d}
+        self.components.beam_effect.target_offset = { b, c, d }
     end
     return self
 end
