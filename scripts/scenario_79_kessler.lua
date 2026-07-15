@@ -96,7 +96,7 @@ function unusual_readings(delta)
     spyprobe = CpuShip():setFaction("Ghosts"):setTemplate("ANT 615"):setCallSign("NC3"):setHullMax(100):setHull(100):setPosition(48885, -45317):orderIdle()
     spyprobe:setDescriptions(_("An abandoned satellite"),_("An old military satellite. Capturing frequency is blocked. Behaviour unknown. Recommendation: Jump not closer than 10U, then advance using the impulse drive."))
     geo_1:sendCommsMessage(player1, _("We are getting strange readings from sector ") .. spyprobe:getSectorName() .. _(". It looks like the source is an abandoned satellite. Please investigate, but be careful."))
-    spyprobe:onDestruction(function(art, player)  ;
+    spyprobe:onDestruction(function(art, player)
         mission_state=order_dock
         globalMessage(_("Additional debris created!"))
     end)
@@ -154,8 +154,8 @@ function spyprobe_disabled(delta)
         dock_message_sent=0
         mission_state=order_dock
         shieldfreq= 400+(player1:getShieldsFrequency())*20
-        local ax, ay = art:getPosition();
-        local x, y = player:getPosition();
+        local ax, ay = art:getPosition()
+        local x, y = player:getPosition()
         if shieldfreq == art.freq and player:getShieldsActive() == true then
             ElectricExplosionEffect():setPosition(x,y):setSize(200)
             player:takeDamage(1, "kinetic",ax, ay)
@@ -445,13 +445,13 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
         debris.components.radar_trace.radius=120 -- same scaling as asteroids
         debris.components.radar_trace.min_size=4 -- to look similar on the radar
 
-        debris:onPickUp(function(art, player)  ;
+        debris:onPickUp(function(art, player)
             shieldfreq= 400+(player1:getShieldsFrequency())*20
-            local ax, ay = art:getPosition();
-            local x, y = player:getPosition();
+            local ax, ay = art:getPosition()
+            local x, y = player:getPosition()
             if shieldfreq == art.freq and player:getShieldsActive() == true then
                 ElectricExplosionEffect():setPosition(x,y):setSize(200)
-                player:takeDamage(1, "kinetic",ax,ay );
+                player:takeDamage(1, "kinetic",ax, ay)
                 player:setReputationPoints((player:getReputationPoints()+10))
                 if player:getReputationPoints() == 20 then
                     geo_1:sendCommsMessage(player1, _([[Very good so far! Don't worry, you don't have to clean up all of the marked space junk in your first test run, but we still need quite a few of them before we call it a day.]]))
@@ -459,10 +459,10 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
                 end
             else
                 ExplosionEffect():setPosition(ax,ay):setSize(200)
-                player:takeDamage(50, "kinetic",ax,ay );
+                player:takeDamage(50, "kinetic",ax, ay)
             end
             debris_interactions=debris_interactions+1
-        end);
+        end)
 
     end
 end
@@ -491,12 +491,12 @@ function placeArtifactsAroundPoint( amount, dist_min, dist_max, x0, y0)
         sat:setModel("cubesat"):setCallSign(callsign):setRadarTraceIcon("satellite.png"):setRadarTraceScale(1)
         sat:allowPickup(true)
 
-        sat:onPickUp(function(art, player)  ;
-            local ax, ay = art:getPosition();
-            local x, y = player:getPosition();
+        sat:onPickUp(function(art, player)
+            local ax, ay = art:getPosition()
+            local x, y = player:getPosition()
             ExplosionEffect():setPosition(ax,ay):setSize(200)
-            player:takeDamage(50, "kinetic",ax,ay );
+            player:takeDamage(50, "kinetic",ax, ay)
             player1:setReputationPoints((player1:getReputationPoints()-10))
-        end);
+        end)
     end
 end
