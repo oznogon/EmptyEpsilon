@@ -1,19 +1,17 @@
 #include "luaConsole.h"
+#include "i18n.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_textentry.h"
-#include "gui/theme.h"
-#include "i18n.h"
 
 #include "io/keybinding.h"
 
-
 static LuaConsole* console;
 sp::io::Keybinding open_console_key("CONSOLE_KEY", {"`"});
-
 
 LuaConsole::LuaConsole()
 : GuiCanvas(consoleRenderLayer)
@@ -33,12 +31,14 @@ LuaConsole::LuaConsole()
     log->setAttribute("style", "luaconsole.log");
     log->setAttribute("stretch", "true");
     log->setMultiline(true);
+    log->setWrap(true);
     log->setTextSize(12);
     log->setAttribute("readonly", "true");
     entry = new GuiTextEntry(top, "", "");
     entry->setAttribute("style", "luaconsole.entry");
     entry->getLayout().fill_width = true;
-    entry->getLayout().size.y = 20;
+    entry->setMultiline(true);
+    entry->setWrap(true);
     entry->setTextSize(12);
     entry->enterCallback([this](string s) {
         if (gameGlobalInfo) {
