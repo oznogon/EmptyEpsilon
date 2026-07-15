@@ -39,7 +39,10 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
     }
     if (shown_text.empty()) shown_text = " ";
     sp::Rect text_rect(rect.position.x + 16, rect.position.y, rect.size.x - 32, rect.size.y);
-    auto prepared = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip);
+    auto flags = sp::Font::FlagClip;
+    if (wrap)
+        flags |= sp::Font::FlagLineWrap;
+    auto prepared = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, flags);
     auto linespacing = front.font->getLineSpacing(32) * text_size / float(32);
 
     if (multiline) {
@@ -51,6 +54,12 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
                 min_y = d.position.y;
             if (d.position.y > max_y)
                 max_y = d.position.y;
+        }
+        if (wrap) {
+            auto required_height = std::max(linespacing, max_y + linespacing * 0.3f);
+            rect.size.y = required_height;
+            layout.size.y = required_height;
+            text_rect.size.y = rect.size.y;
         }
         auto clipped_from_top = -min_y - render_offset.y;
         auto space_at_bottom = rect.size.y - max_y - render_offset.y - linespacing * 0.3f;
@@ -346,15 +355,21 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
     case sp::TextInputEvent::Return:
         if (readonly)
             return;
-        if (multiline)
-        {
-            onTextInput("\n");
-        }
-        else if (enter_func)
+        if (enter_func)
         {
             auto f = enter_func;
             f(text);
         }
+        else if (multiline)
+        {
+            onTextInput("\n");
+        }
+        break;
+    case sp::TextInputEvent::ReturnWithNewline:
+        if (readonly)
+            return;
+        if (multiline)
+            onTextInput("\n");
         break;
     case sp::TextInputEvent::Copy:
         Clipboard::setClipboard(text.substr(std::min(selection_start, selection_end), std::max(selection_start, selection_end)));
@@ -429,6 +444,12 @@ GuiTextEntry* GuiTextEntry::setMultiline(bool enabled)
     return this;
 }
 
+GuiTextEntry* GuiTextEntry::setWrap(bool enabled)
+{
+    wrap = enabled;
+    return this;
+}
+
 GuiTextEntry* GuiTextEntry::setSelectOnFocus(bool enabled)
 {
     select_on_focus = enabled;
@@ -482,7 +503,7 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
     if (hide_password) {
         shown_text = std::string(text.size(), '*');
     }
-    auto pfs = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
+    auto pfs = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, wrap ? sp::Font::FlagLineWrap : 0);
     unsigned int n;
     for(n=0; n<pfs.data.size(); n++)
     {

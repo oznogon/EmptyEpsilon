@@ -17,6 +17,7 @@ protected:
 
     float text_size;
     bool multiline = false;
+    bool wrap = false;
     bool select_on_focus = false;
     bool readonly = false;
     bool hide_password = false;
@@ -49,6 +50,7 @@ public:
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
     GuiTextEntry* setMultiline(bool enabled=true);
+    GuiTextEntry* setWrap(bool enabled=true);
     GuiTextEntry* setSelectOnFocus(bool enabled=true);
     GuiTextEntry* setHidePassword(bool enabled=true);
     GuiTextEntry* callback(func_t func);
