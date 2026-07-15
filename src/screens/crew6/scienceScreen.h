@@ -100,4 +100,5 @@ private:
     float previous_long_range_radar = 0.0f;
     float previous_short_range_radar = 0.0f;
     sp::ecs::Entity previous_target;
+    string previous_description;
 };

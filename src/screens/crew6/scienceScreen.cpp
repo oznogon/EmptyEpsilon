@@ -286,7 +286,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_faction_button
         ->setTextSize(20.0f)
         ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
-        ->setSize(GuiElement::GuiSizeRow, 25.0f);
+        ->setSize(30.0f, 25.0f);
     (new GuiTextTooltip(info_faction_button, "FACTION_DB_TIP", tr("tooltips", "Open this faction's entry in the science database."), 20.0f))->setWidth(280.0f);
 
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4f, tr("science", "Type"), "");
@@ -311,7 +311,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_type_button
         ->setTextSize(20.0f)
         ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
-        ->setSize(GuiElement::GuiSizeRow, 25.0f);
+        ->setSize(30.0f, 25.0f);
     (new GuiTextTooltip(info_type_button, "TYPE_DB_TIP", tr("tooltips", "Open this ship type's entry in the science database."), 20.0f))->setWidth(280.0f);
 
     info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4f, tr("science", "Shields"), "");
@@ -328,17 +328,12 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->hide();
     (new GuiTextTooltip(sidebar_pager, "SIDEBAR_PAGER_TIP", tr("tooltips", "Browse different data views for the selected target: tactical, systems, signals, or description."), 20.0f))->setWidth(280.0f);
 
+    // Add sidebar pages.
     // If the server uses frequencies, add the Tactical sidebar page.
     if (gameGlobalInfo->use_beam_shield_frequencies)
         sidebar_pager->addEntry(tr("scienceTab", "Tactical"), "Tactical");
-
-    // Add sidebar page for systems.
     sidebar_pager->addEntry(tr("scienceTab", "Systems"), "Systems");
-
-    // Add sidebar page for signals.
     sidebar_pager->addEntry(tr("scienceTab", "Signals"), "Signals");
-
-    // Add sidebar page for a description.
     sidebar_pager->addEntry(tr("scienceTab", "Description"), "Description");
 
     // Default the pager to the first item.
@@ -367,28 +362,28 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_electrical_signal_band
         ->showGreen(false)
         ->showBlue(false)
+        ->addModeButton()
         ->setSize(GuiElement::GuiSizeMax, 80.0f);
     info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"), 30.0f);
     info_electrical_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    info_electrical_signal_band->addModeButton();
 
     info_gravitational_signal_band = new GuiSignalQualityIndicator(sidebar_signals_page, "SCIENCE_GRAVITY_SIGNAL");
     info_gravitational_signal_band
         ->showRed(false)
         ->showGreen(false)
+        ->addModeButton()
         ->setSize(GuiElement::GuiSizeMax, 80.0f);
     info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
     info_gravitational_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    info_gravitational_signal_band->addModeButton();
 
     info_thermal_signal_band = new GuiSignalQualityIndicator(sidebar_signals_page, "SCIENCE_THERMAL_SIGNAL");
     info_thermal_signal_band
         ->showRed(false)
         ->showBlue(false)
+        ->addModeButton()
         ->setSize(GuiElement::GuiSizeMax, 80.0f);
     info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", tr("Thermal"), 30.0f);
     info_thermal_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    info_thermal_signal_band->addModeButton();
 
     // Prep and hide the frequency graphs.
     info_shield_frequency = new GuiFrequencyCurve(sidebar_frequencies_page, "SCIENCE_SHIELD_FREQUENCY", GuiFrequencyCurve::FrequencyType::Other, GuiFrequencyCurve::DamageEffect::Positive);
@@ -834,6 +829,75 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 sidebar_pager->setSelectionIndex(0);
         }
 
+        // Only show Tactical tab if the target has been fully scanned and has
+        // actual frequency data to report (shield frequency >= 0 or a beam
+        // weapon system exists).
+        bool has_tactical_data = false;
+        if (target && gameGlobalInfo->use_beam_shield_frequencies && scanstate >= ScanState::State::FullScan)
+        {
+            auto shields_system = target.getComponent<Shields>();
+            auto beam_system = target.getComponent<BeamWeaponSys>();
+            has_tactical_data = (shields_system && shields_system->frequency >= 0) || beam_system;
+        }
+        int tactical_idx = sidebar_pager->indexByValue("Tactical");
+        if (has_tactical_data && tactical_idx < 0)
+            sidebar_pager->addEntry(tr("scienceTab", "Tactical"), "Tactical");
+        else if (!has_tactical_data && tactical_idx >= 0)
+        {
+            bool tactical_was_selected = sidebar_pager->getSelectionValue() == "Tactical";
+            sidebar_pager->removeEntry(tactical_idx);
+            if (tactical_was_selected || sidebar_pager->getSelectionIndex() < 0)
+                sidebar_pager->setSelectionIndex(0);
+        }
+
+        // Only show Systems tab if the target has subsystems to report.
+        bool has_systems_data = false;
+        if (target)
+        {
+            for (int n = 0; n < ShipSystem::COUNT; n++)
+            {
+                if (ShipSystem::get(target, ShipSystem::Type(n)))
+                {
+                    has_systems_data = true;
+                    break;
+                }
+            }
+        }
+        int systems_idx = sidebar_pager->indexByValue("Systems");
+        if (has_systems_data && systems_idx < 0)
+            sidebar_pager->addEntry(tr("scienceTab", "Systems"), "Systems");
+        else if (!has_systems_data && systems_idx >= 0)
+        {
+            bool systems_was_selected = sidebar_pager->getSelectionValue() == "Systems";
+            sidebar_pager->removeEntry(systems_idx);
+            if (systems_was_selected || sidebar_pager->getSelectionIndex() < 0)
+                sidebar_pager->setSelectionIndex(0);
+        }
+
+        // Only show Signals tab if the target has radar signature data.
+        bool has_signals_data = false;
+        if (target)
+            has_signals_data = target.hasComponent<RawRadarSignatureInfo>() || target.hasComponent<DynamicRadarSignatureInfo>();
+        int signals_idx = sidebar_pager->indexByValue("Signals");
+        if (has_signals_data && signals_idx < 0)
+            sidebar_pager->addEntry(tr("scienceTab", "Signals"), "Signals");
+        else if (!has_signals_data && signals_idx >= 0)
+        {
+            bool signals_was_selected = sidebar_pager->getSelectionValue() == "Signals";
+            sidebar_pager->removeEntry(signals_idx);
+            if (signals_was_selected || sidebar_pager->getSelectionIndex() < 0)
+                sidebar_pager->setSelectionIndex(0);
+        }
+
+        // Auto-switch to the Description tab when the description text changes.
+        if (!description.empty() && description != previous_description)
+        {
+            int desc_idx = sidebar_pager->indexByValue("Description");
+            if (desc_idx >= 0)
+                sidebar_pager->setSelectionIndex(desc_idx);
+        }
+        previous_description = description;
+
         string sidebar_pager_selection = sidebar_pager->getSelectionValue();
 
         // On a simple scan or deeper, show the faction, ship type, shields,
@@ -901,7 +965,11 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             sidebar_systems_page->show();
 
             if (scanstate >= ScanState::State::FullScan)
-                for (int n = 0; n < ShipSystem::COUNT; n++) info_system[n]->show();
+                for (int n = 0; n < ShipSystem::COUNT; n++)
+                {
+                    if (ShipSystem::get(target, ShipSystem::Type(n)))
+                        info_system[n]->show();
+                }
 
             sidebar_frequencies_page->hide();
             sidebar_signals_page->hide();
