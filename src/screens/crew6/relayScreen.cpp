@@ -182,7 +182,10 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     // Option buttons for comms, waypoints, and probes.
     option_buttons = new GuiElement(this, "BUTTONS");
-    option_buttons->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    option_buttons
+        ->setPosition(20.0f, 50.0f, sp::Alignment::TopLeft)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 
     // Mode cancellation button.
     cancel_button = new GuiButton(this, "CANCEL_MODE", tr("Cancel"),

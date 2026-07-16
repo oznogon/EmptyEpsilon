@@ -454,6 +454,15 @@ void TacticalScreen::onUpdate()
     {
         sidebar_selector->addEntry(tr("tacticalTab", "Functions"), "func");
         sidebar_selector->show();
+        if (sidebar_selector->getSelectionIndex() == -1)
+        {
+            int func_idx = sidebar_selector->indexByValue("func");
+            if (func_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(func_idx);
+                custom_function_sidebar->show();
+            }
+        }
     }
     else if (!should_have_func_tab && has_func_tab)
     {
@@ -486,6 +495,16 @@ void TacticalScreen::onUpdate()
     {
         sidebar_selector->addEntry(tr("tacticalTab", "Utility Beam"), "util");
         sidebar_selector->show();
+        if (sidebar_selector->getSelectionIndex() == -1)
+        {
+            int util_idx = sidebar_selector->indexByValue("util");
+            if (util_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(util_idx);
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
+            }
+        }
     }
     else if (!should_have_util_tab && has_util_tab)
     {
