@@ -116,6 +116,66 @@ function Entity:getTarget()
     return nil
 end
 
+--- Returns the entity targeted by this entity's weapons (beam/missile).
+--- Returns nil if no weapons target is set.
+--- Example: target = ship:getWeaponsTarget()
+function Entity:getWeaponsTarget()
+    if self.components.weapons_target then
+        return self.components.weapons_target.entity
+    end
+    return nil
+end
+
+--- Returns the entity this entity is scanning.
+--- Returns nil if no scan target is set.
+--- Example: target = ship:getScanTarget()
+function Entity:getScanTarget()
+    if self.components.science_scanner then
+        return self.components.science_scanner.target
+    end
+    return nil
+end
+
+--- Returns the entity this entity is communicating with.
+--- Returns nil if no comms target is set.
+--- Example: target = ship:getCommsTarget()
+function Entity:getCommsTarget()
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.target
+    end
+    return nil
+end
+
+--- Returns the entity targeted by this entity's beam weapons.
+--- Returns nil if no beam weapon target is set.
+--- Example: target = ship:getBeamWeaponTarget()
+function Entity:getBeamWeaponTarget()
+    if self.components.beam_weapon_target then
+        return self.components.beam_weapon_target.entity
+    end
+    return nil
+end
+
+--- Returns the entity targeted by this entity's missile weapons.
+--- Returns nil if no missile weapon target is set.
+--- Example: target = ship:getMissileWeaponTarget()
+function Entity:getMissileWeaponTarget()
+    if self.components.missile_weapon_target then
+        return self.components.missile_weapon_target.entity
+    end
+    return nil
+end
+
+--- Returns the entity targeted for hacking.
+--- Returns nil if no hack target is set.
+--- Example: target = ship:getHackTarget()
+function Entity:getHackTarget()
+    if self.components.hack_target then
+        return self.components.hack_target.entity
+    end
+    return nil
+end
+
 --- Returns this ScanProbe's owner entity.
 --- Example: probe:getOwner()
 function Entity:getOwner()
