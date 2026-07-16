@@ -66,6 +66,7 @@ public:
     float elapsed_delta;
     string scenario;
     std::unordered_map<string, string> scenario_settings;
+    string previous_scenario_filename;
 
     //List of script functions that can be called from the GM interface (Server only!)
     std::list<GMScriptCallback> gm_callback_functions;
