@@ -245,7 +245,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     system_rows_container = new GuiScrollContainer(bottom_left, "SYSTEM_ROWS");
     system_rows_container
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setAttribute("layout", "verticalbottom");
+        ->setAttribute("layout", "vertical");
 
     for (int n = 0; n < ShipSystem::COUNT; n++)
     {
@@ -313,14 +313,18 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
             ->setVisible(has_coolant);
 
         if (!gameGlobalInfo->use_system_damage) info.damage_bar->hide();
+
         (new GuiTextTooltip(info.button, id + "_SELECT_TIP", tr("tooltips", "Select this system for detailed power and coolant adjustment."), 20.0f))->setWidth(280.0f);
+
         if (gameGlobalInfo->use_system_damage)
             (new GuiTextTooltip(info.damage_bar, id + "_DAMAGE_TIP", tr("tooltips", "Current damage level of this system. Lower values mean reduced performance."), 20.0f))->setWidth(280.0f);
+
         if (has_coolant)
         {
             (new GuiTextTooltip(info.heat_bar, id + "_HEAT_TIP", tr("tooltips", "Current heat level of this system. High heat reduces performance and may cause damage."), 20.0f))->setWidth(280.0f);
             (new GuiTextTooltip(info.coolant_bar, id + "_COOLANT_TIP", tr("tooltips", "Drag to allocate coolant to this system. Coolant reduces heat buildup."), 20.0f))->setWidth(280.0f);
         }
+
         (new GuiTextTooltip(info.power_bar, id + "_POWER_TIP", tr("tooltips", "Drag to allocate power to this system. More power improves performance."), 20.0f))->setWidth(280.0f);
 
         info.coolant_max_indicator = new GuiImage(info.coolant_bar, "", slider_tick_style->get(getState()).texture);
@@ -329,7 +333,6 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
             ->setColor(glm::u8vec4{255, 255, 255, 0})
             ->setSize(40.0f, 40.0f);
 
-        info.row->moveToBack();
         system_rows.push_back(info);
     }
 
@@ -432,7 +435,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
         system_health_icon->setVisible(gameGlobalInfo->use_system_damage);
         heat_icon->setVisible(coolant);
 
-        for (int n = 0; n < ShipSystem::COUNT; n++)
+        for (int n = ShipSystem::COUNT - 1; n >= 0; n--)
         {
             SystemRow info = system_rows[n];
             auto system = ShipSystem::get(my_spaceship, ShipSystem::Type(n));
