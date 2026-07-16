@@ -8,10 +8,10 @@
 --- Module API description:
 --- * customElements:modifyOperatorPositions(operator_key, position_list) = Modify ECrewPositions for specified station
 --- * customElements:closeAllMessagesUponClose(boolean_value) = change closing behavior
---- * customElements:addCustomButton(player_ship, operator, name, caption, callback) = wrapper around PlayerSpaceship:addCustomButton
---- * customElements:addCustomInfo(player_ship, operator, name, caption) = wrapper around PlayerSpaceship:addCustomInfo
---- * customElements:addCustomMessage(player_ship, operator, name, caption) = wrapper around PlayerSpaceship:addCustomMessage
---- * customElements:addCustomMessageWithCallback(player_ship, operator, name, caption, callback) = wrapper around PlayerSpaceship:addCustomMessageWithCallback
+--- * customElements:addCustomButton(player_ship, operator, name, caption, callback, order) = wrapper around PlayerSpaceship:addCustomButton
+--- * customElements:addCustomInfo(player_ship, operator, name, caption, order) = wrapper around PlayerSpaceship:addCustomInfo
+--- * customElements:addCustomMessage(player_ship, operator, name, caption, order) = wrapper around PlayerSpaceship:addCustomMessage
+--- * customElements:addCustomMessageWithCallback(player_ship, operator, name, caption, callback, order) = wrapper around PlayerSpaceship:addCustomMessageWithCallback
 --- * customElements:removeCustom(player_ship, name) = wrapper around PlayerSpaceship:removeCustom
 
 --- Functions that might be interesting in specific use-cases:
@@ -81,15 +81,17 @@ end
 -- @param name: String identifier of the button (parameter of PlayerShip:addCustomButton)
 -- @param caption: Label of the button (parameter of PlayerShip:addCustomButton)
 -- @param callback: Callback function to be run when button is pressed (parameter of PlayerShip:addCustomButton)
+-- @param order: Priority of the button (lower is higher priority, default 0)
 function customElements:addCustomButton(
     player_ship,
     operator,
     name,
     caption,
-    callback
+    callback,
+    order
 )
     for idx, station in ipairs(self:operatorPositions(operator)) do
-        player_ship:addCustomButton(station, name .. station, caption, callback)
+        player_ship:addCustomButton(station, name .. station, caption, callback, order)
     end
 end
 
@@ -98,9 +100,10 @@ end
 -- @param operator: String identification of operator.
 -- @param name: String identifier of the message (parameter of PlayerShip:addCustomInfo)
 -- @param caption: Text content of the info field (parameter of PlayerShip:addCustomInfo)
-function customElements:addCustomInfo(player_ship, operator, name, caption)
+-- @param order: Priority of the info (lower is higher priority, default 0)
+function customElements:addCustomInfo(player_ship, operator, name, caption, order)
     for idx, station in ipairs(self:operatorPositions(operator)) do
-        player_ship:addCustomInfo(station, name .. station, caption)
+        player_ship:addCustomInfo(station, name .. station, caption, order)
     end
 end
 
@@ -109,7 +112,8 @@ end
 -- @param operator: String identification of operator.
 -- @param name: String identifier of the message (parameter of PlayerShip:addCustomMessage)
 -- @param caption: Text of the message (parameter of PlayerShip:addCustomMessage)
-function customElements:addCustomMessage(player_ship, operator, name, caption)
+-- @param order: Priority of the message (lower is higher priority, default 0)
+function customElements:addCustomMessage(player_ship, operator, name, caption, order)
     for idx, station in ipairs(self:operatorPositions(operator)) do
         if self.close_all_messages_upon_close then
             player_ship:addCustomMessageWithCallback(
@@ -118,10 +122,11 @@ function customElements:addCustomMessage(player_ship, operator, name, caption)
                 caption,
                 function()
                     customElements:removeCustom(player_ship, name)
-                end
+                end,
+                order
             )
         else
-            player_ship:addCustomMessage(station, name .. station, caption)
+            player_ship:addCustomMessage(station, name .. station, caption, order)
         end
     end
 end
@@ -132,12 +137,14 @@ end
 -- @param name: String identifier of the message (parameter of PlayerShip:addCustomMessageWithCallback)
 -- @param caption: Text of the message (parameter of PlayerShip:addCustomMessageWithCallback)
 -- @param callback: Callback function to be run when message is closed (parameter of PlayerShip:addCustomMessageWithCallback)
+-- @param order: Priority of the message (lower is higher priority, default 0)
 function customElements:addCustomMessageWithCallback(
     player_ship,
     operator,
     name,
     caption,
-    callback
+    callback,
+    order
 )
     for idx, station in ipairs(self:operatorPositions(operator)) do
         if self.close_all_messages_upon_close then
@@ -148,14 +155,16 @@ function customElements:addCustomMessageWithCallback(
                 function()
                     customElements:removeCustom(player_ship, name)
                     callback()
-                end
+                end,
+                order
             )
         else
             player_ship:addCustomMessageWithCallback(
                 station,
                 name .. station,
                 caption,
-                callback
+                callback,
+                order
             )
         end
     end

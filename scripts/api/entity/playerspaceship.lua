@@ -492,15 +492,15 @@ end
 --- Example:
 --- -- Displays the coolant max value on Engineering as a dismissable message
 --- ship:addCustomMessage("engineering", "message_coolant_max", "Coolant max: " .. ship:getMaxCoolant())
-function Entity:addCustomMessage(station, key, message)
-    setPlayerShipCustomFunction(self, "message", key, message, station, nil, 0)
+function Entity:addCustomMessage(station, key, message, order)
+    setPlayerShipCustomFunction(self, "message", key, message, station, nil, order or 0)
     return self
 end
 --- As addCustomMessage(), but calls the given function when dismissed.
 --- Example:
 --- -- Displays the coolant max value on Engineering as a dismissable message, and prints "dismissed" to the console or logging file when dismissed
 --- ship:addCustomMessageWithCallback("engineering", "message_coolant_max", "Coolant max: " .. ship:getMaxCoolant(), function() print("Dismissed!") end)
-function Entity:addCustomMessageWithCallback(station, key, message, callback)
+function Entity:addCustomMessageWithCallback(station, key, message, callback, order)
     setPlayerShipCustomFunction(
         self,
         "message",
@@ -508,7 +508,7 @@ function Entity:addCustomMessageWithCallback(station, key, message, callback)
         message,
         station,
         callback,
-        0
+        order or 0
     )
     return self
 end
