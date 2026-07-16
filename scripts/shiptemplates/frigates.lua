@@ -14,7 +14,7 @@ They are divided in 3 different sub-classes:
 local template = ShipTemplate()
     :setName("Phobos T3")
     :setLocaleName(_("ship", "Phobos T3"))
-    :setClass(_("class", "Frigate"), _("subclass", "Cruiser"))
+    :setClass(_("class", "Frigate"), _("subclass", "Patrol"))
     :setModel("AtlasHeavyFighterYellow")
 template:setRadarTrace("cruiser.png")
 template:setDescription(
@@ -115,7 +115,7 @@ variation:addDoor(8, 4, false)
 template = ShipTemplate()
     :setName("Nirvana R5")
     :setLocaleName(_("ship", "Nirvana R5"))
-    :setClass(_("class", "Frigate"), _("subclass", "Cruiser: Anti-fighter"))
+    :setClass(_("class", "Frigate"), _("subclass", "Anti-fighter"))
     :setModel("small_frigate_5") -- TODO: Better 3D model selection
 template:setRadarTrace("cruiser.png")
 template:setDescription(
@@ -160,7 +160,7 @@ variation:setSpeed(65, 12, 10)
 template = ShipTemplate()
     :setName("Storm")
     :setLocaleName(_("ship", "Storm"))
-    :setClass(_("class", "Frigate"), _("subclass", "Cruiser: Heavy Artillery"))
+    :setClass(_("class", "Frigate"), _("subclass", "Artillery"))
     :setModel("HeavyCorvetteYellow") --Yellow, Green, Blue, White, Red
 template:setRadarTrace("piranha.png")
 template:setDescription(
@@ -185,7 +185,7 @@ template:setDefaultAI("missilevolley")
 template = ShipTemplate()
     :setName("Hathcock")
     :setLocaleName(_("playerShip", "Hathcock"))
-    :setClass(_("class", "Frigate"), _("subclass", "Cruiser: Sniper"))
+    :setClass(_("class", "Frigate"), _("subclass", "Sniper"))
     :setModel("HeavyCorvetteGreen")
     :setType("playership")
 template:setRadarTrace("piranha.png")
@@ -239,7 +239,7 @@ template:addDoor(5, 1, false)
 template = ShipTemplate()
     :setName("Piranha F12")
     :setLocaleName(_("ship", "Piranha F12"))
-    :setClass(_("class", "Frigate"), _("subclass", "Cruiser: Light Artillery"))
+    :setClass(_("class", "Frigate"), _("subclass", "Artillery"))
     :setModel("HeavyCorvetteRed")
 template:setRadarTrace("piranha.png")
 template:setDescription(
@@ -293,6 +293,7 @@ variation = template
     :copy("Piranha")
     :setLocaleName(_("playerShip", "Piranha"))
     :setType("playership")
+    :setClass(_("class", "Frigate"), _("subclass", "Assault"))
 variation:setDescription(
     _(
         [[This combat-specialized Piranha F12 adds mine-laying tubes, combat maneuvering systems, and a jump drive.]]
@@ -355,7 +356,7 @@ variation:addDoor(7, 3, false)
 template = ShipTemplate()
     :setName("Stalker Q7")
     :setLocaleName(_("ship", "Stalker Q7"))
-    :setClass(_("class", "Frigate"), _("subclass", "Cruiser: Strike ship"))
+    :setClass(_("class", "Frigate"), _("subclass", "Strike"))
     :setModel("small_frigate_3")
 template:setRadarTrace("cruiser.png")
 template:setDescription(
@@ -402,7 +403,7 @@ variation:setSpeed(70, 15, 12)
 template = ShipTemplate()
     :setName("Ranus U")
     :setLocaleName(_("ship", "Ranus U"))
-    :setClass(_("class", "Frigate"), _("subclass", "Cruiser: Sniper"))
+    :setClass(_("class", "Frigate"), _("subclass", "Sniper"))
     :setModel("MissileCorvetteGreen")
 template:setRadarTrace("cruiser.png")
 template:setDescription(
@@ -418,137 +419,7 @@ template:weaponTubeDisallowMissle(1, "Nuke"):weaponTubeDisallowMissle(2, "Nuke")
 template:setWeaponStorage("Homing", 6)
 template:setWeaponStorage("Nuke", 2)
 
---Cruiser: tackler
 
-template = ShipTemplate()
-    :setName("Flavia")
-    :setLocaleName(_("ship", "Flavia"))
-    :setClass(_("class", "Frigate"), _("subclass", "Light transport"))
-    :setModel("LightCorvetteGrey")
-template:setRadarTrace("tug.png")
-template:setDescription(
-    _(
-        [[Popular among traders and smugglers, the Flavia is a small cargo and passenger transport. It's cheaper than a freighter for small loads and short distances, and is often used to carry high-value cargo discreetly.]]
-    )
-)
-template:setHull(50)
-template:setShields(50, 50)
-template:setSpeed(30, 8, 10)
-template:setInternalDockClasses(_("class", "Cargo"))
-
-variation =
-    template:copy("Flavia Falcon"):setLocaleName(_("ship", "Flavia Falcon"))
-variation:setDescription(
-    _(
-        [[The Flavia Falcon is a Flavia transport modified for faster flight, and adds rear-mounted lasers to keep enemies off its back.]]
-    )
-)
-variation:setSpeed(50, 8, 10)
-variation:setBeam(0, 40, 170, 1200.0, 6.0, 6)
-variation:setBeam(1, 40, 190, 1200.0, 6.0, 6)
-
-variation = variation
-    :copy("Flavia P.Falcon")
-    :setLocaleName(_("playerShip", "Flavia P.Falcon"))
-    :setType("playership")
-variation:setDescription(
-    _(
-        [[The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp drive.]]
-    )
-)
-variation:setHull(100)
-variation:setShields(70, 70)
-variation:setSpeed(60, 10, 10)
-variation:setWarpSpeed(500)
-variation:setCombatManeuver(250, 150)
-variation:setTubes(1, 20.0)
-variation:setTubeDirection(0, 180)
-variation:setWeaponStorage("HVLI", 5)
-variation:setWeaponStorage("Homing", 3)
-variation:setWeaponStorage("Mine", 1)
-variation:setWeaponStorage("Nuke", 1)
-
-variation:setRepairCrewCount(8)
-
-variation:addRoomSystem(1, 0, 6, 1, "DockingBay")
-variation:addRoom(1, 5, 6, 1)
-variation:addRoomSystem(0, 1, 2, 2, "RearShield")
-variation:addRoomSystem(0, 3, 2, 2, "MissileSystem")
-variation:addRoomSystem(2, 1, 2, 2, "Beamweapons")
-variation:addRoomSystem(2, 3, 2, 2, "Reactor")
-variation:addRoomSystem(4, 1, 2, 2, "Warp")
-variation:addRoomSystem(4, 3, 2, 2, "JumpDrive")
-variation:addRoomSystem(6, 1, 2, 2, "Impulse")
-variation:addRoomSystem(6, 3, 2, 2, "Maneuver")
-variation:addRoomSystem(8, 2, 2, 2, "FrontShield")
-
-variation:addDoor(1, 1, true)
-variation:addDoor(3, 1, true)
-variation:addDoor(4, 1, true)
-variation:addDoor(6, 1, true)
-
-variation:addDoor(4, 3, true)
-variation:addDoor(5, 3, true)
-
-variation:addDoor(8, 2, false)
-variation:addDoor(8, 3, false)
-
-variation:addDoor(1, 5, true)
-variation:addDoor(2, 5, true)
-variation:addDoor(5, 5, true)
-variation:addDoor(6, 5, true)
-
-template = ShipTemplate()
-    :setName("Repulse")
-    :setLocaleName(_("playerShip", "Repulse"))
-    :setClass(_("class", "Frigate"), _("subclass", "Armored Transport"))
-    :setModel("LightCorvetteRed")
-    :setType("playership")
-template:setRadarTrace("tug.png")
-template:setDescription(_("Jump/Turret version of Flavia Falcon"))
-template:setHull(120)
-template:setShields(80, 80)
-template:setSpeed(55, 9, 10)
-template:setInternalDockClasses(_("class", "Cargo"))
-
---                 Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 10, 90, 1200.0, 6.0, 5)
-template:setBeam(1, 10, -90, 1200.0, 6.0, 5)
---                                Arc, Dir, Rotate speed
-template:setBeamWeaponTurret(0, 200, 90, 5)
-template:setBeamWeaponTurret(1, 200, -90, 5)
-template:setJumpDrive(true)
-template:setCombatManeuver(250, 150)
-template:setTubes(2, 20.0)
-template:setTubeDirection(0, 0)
-template:setTubeDirection(1, 180)
-template:setWeaponStorage("HVLI", 6)
-template:setWeaponStorage("Homing", 4)
-
-template:setRepairCrewCount(8)
---    (H)oriz, (V)ert       HC,VC,HS,VS, system    (C)oordinate (S)ize
-template:addRoomSystem(0, 1, 2, 4, "Impulse")
-template:addRoomSystem(2, 0, 2, 2, "RearShield")
-template:addRoomSystem(2, 2, 2, 2, "Warp")
-template:addRoomSystem(2, 4, 2, 2, "DockingBay")
-template:addRoomSystem(4, 1, 1, 4, "Maneuver")
-template:addRoom(5, 0, 2, 2)
-template:addRoomSystem(5, 2, 2, 2, "JumpDrive")
-template:addRoomSystem(5, 4, 2, 2, "Beamweapons")
-template:addRoomSystem(7, 1, 3, 2, "Reactor")
-template:addRoomSystem(7, 3, 3, 2, "MissileSystem")
-template:addRoomSystem(10, 2, 2, 2, "FrontShield")
-
-template:addDoor(2, 2, false)
-template:addDoor(2, 4, false)
-template:addDoor(3, 2, true)
-template:addDoor(4, 3, false)
-template:addDoor(5, 2, false)
-template:addDoor(5, 4, true)
-template:addDoor(7, 3, false)
-template:addDoor(7, 1, false)
-template:addDoor(8, 3, true)
-template:addDoor(10, 2, false)
 
 template = ShipTemplate()
     :setName("Fiend G3")

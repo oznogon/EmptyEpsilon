@@ -1,15 +1,14 @@
---[[                  Dreadnought
-Dreadnoughts are the largest ships.
-They are so large and uncommon that every type is pretty much their own subclass.
-They usually come with 6 or more shield sections, require a crew of 250+ to operate.
-
-Think: Stardestroyer.
+--[[                  Battleships
+Battleships are the largest and most powerful combat vessels.
+They are so large and uncommon that every type is practically
+its own subclass. They usually come with 6 or more shield sections
+and require a crew of 250+ to operate.
 ----------------------------------------------------------]]
 
 local template = ShipTemplate()
     :setName("Odin")
     :setLocaleName(_("ship", "Odin"))
-    :setClass(_("class", "Dreadnought"), _("subclass", "Odin"))
+    :setClass(_("class", "Battleship"), _("subclass", "Dreadnought"))
     :setModel("space_station_2")
 template:setRadarTrace("largestation.png")
 template:setDescription(
