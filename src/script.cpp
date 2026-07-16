@@ -835,25 +835,30 @@ static void luaUnpauseGame()
     if (engine->getGameSpeed() == 0.0f) engine->setGameSpeed(1.0f);
 }
 
-static void luaSetGameSpeed(int game_speed)
+static void luaSetGameSpeed(float game_speed)
 {
-  switch (game_speed)
-  {
-      case 0:
-      case 1:
-      case 2:
-      case 4:
-      case 8:
-          engine->setGameSpeed(static_cast<float>(game_speed));
-          break;
-      default:
-          LOG(Warning, "Lua setGameSpeed: Invalid value ", game_speed, "; must be 0, 1, 2, 4, or 8");
-  }
+    static constexpr float valid_speeds[] = {0.1f, 0.25f, 0.5f, 1.0f, 2.0f, 4.0f, 8.0f};
+    bool valid = game_speed == 0.0f;
+    if (!valid)
+    {
+        for(float v : valid_speeds)
+        {
+            if (fabsf(game_speed - v) < 0.001f)
+            {
+                valid = true;
+                break;
+            }
+        }
+    }
+    if (valid)
+        engine->setGameSpeed(game_speed);
+    else
+        LOG(Warning, "Lua setGameSpeed: Invalid value ", game_speed, "; must be 0, 0.1, 0.25, 0.5, 1, 2, 4, or 8");
 }
 
-static int luaGetGameSpeed()
+static float luaGetGameSpeed()
 {
-    return static_cast<int>(engine->getGameSpeed());
+    return engine->getGameSpeed();
 }
 
 static bool luaIsGamePaused()
@@ -1754,13 +1759,13 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Equivalent to if getGameSpeed() == 0 then setGameSpeed(1) end.
     /// Example: unpauseGame() -- Sets the game speed to 1x if paused
     env.setGlobal("unpauseGame", &luaUnpauseGame);
-    /// void setGameSpeed()
-    /// Sets the game speed multiplier. Valid values are 0 (paused), 1, 2, 4, or 8.
+    /// void setGameSpeed(number speed)
+    /// Sets the game speed multiplier. Valid values are 0 (paused), 0.1, 0.25, 0.5, 1, 2, 4, or 8.
     /// Use to set the game speed on a headless server, which doesn't have access to the GM screen.
     /// Example: setGameSpeed(4) -- Sets the game speed to 4x
     env.setGlobal("setGameSpeed", &luaSetGameSpeed);
-    /// int getGameSpeed()
-    /// Returns the game speed as an integer multiplier.
+    /// number getGameSpeed()
+    /// Returns the game speed as a multiplier.
     /// Example: getGameSpeed() -- Returns 4 at 4x
     env.setGlobal("getGameSpeed", &luaGetGameSpeed);
     /// bool isGamePaused()

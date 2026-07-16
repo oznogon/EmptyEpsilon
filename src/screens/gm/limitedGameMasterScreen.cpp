@@ -41,6 +41,8 @@
 #include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/helpOverlay.h"
 
+#include <cmath>
+
 #include "gui/mouseRenderer.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
@@ -51,6 +53,10 @@
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_tooltip.h"
 #include "gui/gui2_scrollcontainer.h"
+
+namespace {
+    constexpr float game_speed_values[] = {0.1f, 0.25f, 0.5f, 1.0f, 2.0f, 4.0f, 8.0f};
+}
 
 static std::vector<std::pair<string, string>> getGMInfo(sp::ecs::Entity entity)
 {
@@ -1039,7 +1045,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
             if (value)
                 runScript("pauseGame()");
             else
-                runScript("setGameSpeed(" + string(static_cast<int>(pow(2.0f, game_time_scale->getSelectionIndex()))) + ")");
+                runScript("setGameSpeed(" + string(game_speed_values[game_time_scale->getSelectionIndex()], 2) + ")");
         }
     );
     pause_button
@@ -1053,12 +1059,12 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR",
         [this](int index, string value)
         {
-            runScript("setGameSpeed(" + string(static_cast<int>(pow(2, index))) + ")");
+            runScript("setGameSpeed(" + string(game_speed_values[index], 2) + ")");
         }
     );
     game_time_scale
-        ->setOptions({"1x", "2x", "4x", "8x"})
-        ->setSelectionIndex(0)
+        ->setOptions({"0.1x", "0.25x", "0.5x", "1x", "2x", "4x", "8x"})
+        ->setSelectionIndex(3)
         ->setPosition(170.0f, 20.0f, sp::Alignment::TopLeft)
         ->setSize(100.0f, GuiElement::GuiSizeRow);
 
@@ -1446,20 +1452,22 @@ void LimitedGameMasterScreen::update(float delta)
             if (game_speed == 0.0f)
             {
                 pause_button->setValue(true);
-                game_time_scale->setSelectionIndex(0);
+                game_time_scale->setSelectionIndex(3);
                 game_time_scale->disable();
             }
             else
             {
                 pause_button->setValue(false);
                 game_time_scale->enable();
-                switch (static_cast<int>(game_speed))
                 {
-                    case 1: game_time_scale->setSelectionIndex(0); break;
-                    case 2: game_time_scale->setSelectionIndex(1); break;
-                    case 4: game_time_scale->setSelectionIndex(2); break;
-                    case 8: game_time_scale->setSelectionIndex(3); break;
-                    default: break;
+                    for(int i = 0; i < static_cast<int>(sizeof(game_speed_values) / sizeof(game_speed_values[0])); i++)
+                    {
+                        if (fabsf(game_speed - game_speed_values[i]) < 0.01f)
+                        {
+                            game_time_scale->setSelectionIndex(i);
+                            break;
+                        }
+                    }
                 }
             }
         }
