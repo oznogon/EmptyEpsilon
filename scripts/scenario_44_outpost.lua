@@ -56,7 +56,7 @@ require("control_code_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 
---	also uses supply_drop.lua
+-- also uses supply_drop.lua
 
 --------------------
 -- Initialization --
@@ -122,16 +122,16 @@ function setVariations()
             },
         }
         difficulty = murphy_config[getScenarioSetting("Murphy")].number
-        --	affects:
-        --		sensor buoy scan complexity and depth (ads, transport info, station info)
-        --		sensor jammer scan complexity and depth
-        --		nebula concealment of mine fields
-        --		availability of gossip
-        --		repair crew availability
-        --		coolant availability
-        --		named character availability
-        --		taunted enemy retaliation choice possibilities
-        --		revival of repair crew chance when zero repair crew present
+        -- affects:
+        -- sensor buoy scan complexity and depth (ads, transport info, station info)
+        -- sensor jammer scan complexity and depth
+        -- nebula concealment of mine fields
+        -- availability of gossip
+        -- repair crew availability
+        -- coolant availability
+        -- named character availability
+        -- taunted enemy retaliation choice possibilities
+        -- revival of repair crew chance when zero repair crew present
         adverseEffect = murphy_config[getScenarioSetting("Murphy")].adverse
         coolant_loss = murphy_config[getScenarioSetting("Murphy")].lose_coolant
         coolant_gain = murphy_config[getScenarioSetting("Murphy")].gain_coolant
@@ -1661,7 +1661,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            --	Custom player ships
+            -- Custom player ships
             ["Amalgam"] = {
                 strength = 42,
                 cargo = 7,
@@ -2905,7 +2905,7 @@ function stationReports()
                                 station.comms_data.weapon_available.HVLI,
                                 station.comms_data.weapon_cost.HVLI
                             )
-                            --							out = string.format(_("stationReport-msgGM", "%s\n      Cost multipliers and Max Refill:   Friend: %.1f %.1f,   Neutral: %.1f %.1f"),out,station.comms_data.reputation_cost_multipliers.friend,station.comms_data.max_weapon_refill_amount.friend,station.comms_data.reputation_cost_multipliers.neutral,station.comms_data.max_weapon_refill_amount.neutral)
+                            -- out = string.format(_("stationReport-msgGM", "%s\n      Cost multipliers and Max Refill:   Friend: %.1f %.1f,   Neutral: %.1f %.1f"),out,station.comms_data.reputation_cost_multipliers.friend,station.comms_data.max_weapon_refill_amount.friend,station.comms_data.reputation_cost_multipliers.neutral,station.comms_data.max_weapon_refill_amount.neutral)
                             out = string.format(
                                 _(
                                     "stationReport-msgGM",
@@ -2916,7 +2916,7 @@ function stationReports()
                             for service, cost in
                                 pairs(station.comms_data.service_cost)
                             do
-                                --							out = string.format(_("stationReport-msgGM", "%s\n      %s: %s"),out,service,cost)
+                                -- out = string.format(_("stationReport-msgGM", "%s\n      %s: %s"),out,service,cost)
                                 out = string.format(
                                     _(
                                         "stationReport-msgGM",
@@ -3114,7 +3114,7 @@ function testNonDBShips()
         end)
     end
 end
---	Player ship functions
+-- Player ship functions
 function updatePlayerSoftTemplate(p)
     local tempTypeName = p:getTypeName()
     if tempTypeName ~= nil then
@@ -3170,7 +3170,7 @@ function updatePlayerSoftTemplate(p)
                 end
             end
             for i, o in ipairs(missile_trans) do
-                --				print("type:",o.typ,"amount:",upgrade_path[tempTypeName].ordnance[1][o.short_type])
+                -- print("type:",o.typ,"amount:",upgrade_path[tempTypeName].ordnance[1][o.short_type])
                 p:setWeaponStorageMax(
                     o.typ,
                     upgrade_path[tempTypeName].ordnance[1][o.short_type]
@@ -3347,7 +3347,7 @@ function updatePlayerSoftTemplate(p)
             p.tractor = playerShipStats[tempTypeName].tractor
             p.tractor_target_lock = false
             p.mining = playerShipStats[tempTypeName].mining
-            --			p.prox_scan = playerShipStats[tempTypeName].prox_scan
+            -- p.prox_scan = playerShipStats[tempTypeName].prox_scan
             local player_ship_name_list = player_ship_names_for[tempTypeName]
             local player_ship_name = nil
             if player_ship_name_list ~= nil then
@@ -3452,7 +3452,7 @@ function setPlayers(p)
     end
 end
 function playerDestruction(self, instigator)
-    --	Note: invoked by destruction by damage
+    -- Note: invoked by destruction by damage
     local players = getActivePlayerShips()
     if #players <= 1 then --last player ship destroyed
         local outpost_count = 0
@@ -3491,7 +3491,7 @@ end
 function playerDestroyed(self, instigator)
     player_ship_death_count = player_ship_death_count + 1
 end
---	End of game messaging functions
+-- End of game messaging functions
 function getTripleFactorRank()
     local outpost_count = 0
     for _, station in ipairs(inner_circle) do
@@ -3952,7 +3952,7 @@ function getDuration()
     end
     return duration_string
 end
---	Construct environment and related functions
+-- Construct environment and related functions
 function environmentObject(ref_x, ref_y, dist, axis)
     if ref_x == nil or ref_y == nil or dist == nil then
         print(
@@ -4037,20 +4037,20 @@ end
 function constructEnvironment()
     place_space = {}
     local faction_circle = {
-        --	player faction:	Hum	USN	TSN	CUF
-        "Exuari", --	Ene	Ene	Ene	Ene
-        "Ghosts", --	Ene	Ene	Neu	Ene
-        "TSN", --	Frn	Ene	Frn	Neu
-        "Independent", --	Neu	Neu	Neu	Neu
-        "Human Navy", --	Frn	Frn	Frn	Frn
-        "Arlenians", --	Neu	Neu	Ene	Neu
-        "Ktlitans", --	Ene	Ene	Ene	Neu
-        "CUF", --	Frn	Neu	Neu	Frn
-        "USN", --	Frn	Frn	Ene	Neu
-        "Kraylor", --	Ene	Neu	Ene	Ene
-        "Ghosts", --	Ene	Ene	Neu	Ene
-        --	enemy count:			5	5	5	4
-        --	neutral/friendly count:	6	6	6	7
+        -- player faction:        Hum    USN    TSN    CUF
+        "Exuari", --              Ene    Ene    Ene    Ene
+        "Ghosts", --              Ene    Ene    Neu    Ene
+        "TSN", --                 Frn    Ene    Frn    Neu
+        "Independent", --         Neu    Neu    Neu    Neu
+        "Human Navy", --          Frn    Frn    Frn    Frn
+        "Arlenians", --           Neu    Neu    Ene    Neu
+        "Ktlitans", --            Ene    Ene    Ene    Neu
+        "CUF", --                 Frn    Neu    Neu    Frn
+        "USN", --                 Frn    Frn    Ene    Neu
+        "Kraylor", --             Ene    Neu    Ene    Ene
+        "Ghosts", --              Ene    Ene    Neu    Ene
+        -- enemy count:            5      5      5      4
+        -- neutral/friendly count: 6      6      6      7
     }
     local faction_letter = {
         ["Human Navy"] = "H",
@@ -4855,7 +4855,7 @@ function constructEnvironment()
             (wja_x + wjb_x) / 2,
             (wja_y + wjb_y) / 2 + (gap_size / 2) * 1.2
         )
-        --		moon_barrier:setDistanceFromMovementPlane(-planet_radius*.08*.2)
+        -- moon_barrier:setDistanceFromMovementPlane(-planet_radius*.08*.2)
         moon_barrier:setCallSign(
             moon_list[selected_moon].name[math.random(
                 1,
@@ -5956,16 +5956,16 @@ function angleFromVectorNorth(p1x, p1y, p2x, p2y)
     return (360 - (RAD2DEG * theta)) % 360
 end
 function vectorFromAngleNorth(angle, distance)
-    --	print("input angle to vectorFromAngleNorth:")
-    --	print(angle)
+    -- print("input angle to vectorFromAngleNorth:")
+    -- print(angle)
     angle = (angle + 270) % 360
     local x, y = vectorFromAngle(angle, distance)
     return x, y
 end
 ---------------------------------------
---	Support for constant plot lines  --
+-- Support for constant plot lines  --
 ---------------------------------------
---	Maintenance functions
+-- Maintenance functions
 function defenseMaintenance(delta)
     if #station_list > 0 then
         for station_index, station in ipairs(station_list) do
@@ -6094,7 +6094,7 @@ function warpJammerMaintenance()
     end
     maintenancePlot = defenseMaintenance
 end
---	Sensor jammer functions
+-- Sensor jammer functions
 function sensorJammerPickupProcess(self, retriever)
     local jammer_call_sign = self:getCallSign()
     sensor_jammer_list[jammer_call_sign] = nil
@@ -6241,13 +6241,13 @@ function updatePlayerLongRangeSensors(p)
         end
     end
 end
---	Transport selection and direction functions
+-- Transport selection and direction functions
 function pickTransportTarget(transport)
     local transport_target = nil
     if #station_list > 0 then
         local count_repeat_loop = 0
         repeat
-            --		transport_target = transport_stations[math.random(1,#transport_stations)]
+            -- transport_target = transport_stations[math.random(1,#transport_stations)]
             transport_target = station_list[math.random(1, #station_list)]
             count_repeat_loop = count_repeat_loop + 1
         until count_repeat_loop > max_repeat_loop
@@ -6635,17 +6635,17 @@ function handleDockedState()
             end
         end
         if comms_target.transport_mission ~= nil then
-            --			print("comms target transport mission",comms_target.transport_mission)
-            --			print("comms target transport mission character",comms_target.transport_mission.character)
-            --			print("comms target transport mission destination",comms_target.transport_mission.destination,"name:",comms_target.transport_mission.destination_name)
+            -- print("comms target transport mission",comms_target.transport_mission)
+            -- print("comms target transport mission character",comms_target.transport_mission.character)
+            -- print("comms target transport mission destination",comms_target.transport_mission.destination,"name:",comms_target.transport_mission.destination_name)
             addCommsReply(_("station-comms", "Transport Passenger"), function()
-                --				local out = string.format("%s",comms_target.transport_mission.character)
-                --				out = string.format(_("station-comms","%s wishes to be transported to %s"),out,comms_target.transport_mission.destination:getFaction())
-                --				out = string.format(_("station-comms","%s station %s"),out,comms_target.transport_mission.destination_name)
-                --				local sector_name = comms_target.transport_mission.destination:getSectorName()
-                --				out = string.format(_("station-comms","%s in sector %s"),out,comms_target.transport_mission.destination:getSectorName())
-                --				out = string.format(_("station-comms","%s. Your reputation would increase by %s"),out,comms_target.transport_mission.reward)
-                --				out = string.format(_("station-comms","%s if you agree to transport %s."),out,comms_target.transport_mission.character)
+                -- local out = string.format("%s",comms_target.transport_mission.character)
+                -- out = string.format(_("station-comms","%s wishes to be transported to %s"),out,comms_target.transport_mission.destination:getFaction())
+                -- out = string.format(_("station-comms","%s station %s"),out,comms_target.transport_mission.destination_name)
+                -- local sector_name = comms_target.transport_mission.destination:getSectorName()
+                -- out = string.format(_("station-comms","%s in sector %s"),out,comms_target.transport_mission.destination:getSectorName())
+                -- out = string.format(_("station-comms","%s. Your reputation would increase by %s"),out,comms_target.transport_mission.reward)
+                -- out = string.format(_("station-comms","%s if you agree to transport %s."),out,comms_target.transport_mission.character)
                 local out = string.format(
                     _(
                         "station-comms",
@@ -6666,7 +6666,7 @@ function handleDockedState()
                     comms_target.transport_mission.reward
                 )
                 setCommsMessage(out)
-                --				setCommsMessage(string.format("%s wishes to be transported to %s station %s in sector %s. Your reputation would go up by %s if you agree to transport %s.",comms_target.transport_mission.character,comms_target.transport_mission.destination:getFaction().comms_target.transport_mission.destination_name,comms_target.transport_mission.destination:getSectorName(),comms_target.transport_mission.reward,comms_target.transport_mission.character))
+                -- setCommsMessage(string.format("%s wishes to be transported to %s station %s in sector %s. Your reputation would go up by %s if you agree to transport %s.",comms_target.transport_mission.character,comms_target.transport_mission.destination:getFaction().comms_target.transport_mission.destination_name,comms_target.transport_mission.destination:getSectorName(),comms_target.transport_mission.reward,comms_target.transport_mission.character))
                 addCommsReply(
                     string.format(
                         _(
@@ -7057,13 +7057,13 @@ function handleDockedState()
         end
         if comms_target.cargo_mission ~= nil then
             addCommsReply(_("station-comms", "Retrieve Cargo"), function()
-                --				local out = string.format("%s",comms_target.cargo_mission.character)
-                --				out = string.format(_("station-comms","%s wishes you to pick up cargo from %s"),out,comms_target.cargo_mission.origin:getFaction())
-                --				out = string.format(_("station-comms","%s station %s"),out,comms_target.cargo_mission.origin_name)
-                --				local sector_name = comms_target.cargo_mission.destination:getSectorName()
-                --				out = string.format(_("station-comms","%s in sector %s and deliver it here"),out,comms_target.cargo_mission.origin:getSectorName())
-                --				out = string.format(_("station-comms","%s. Your reputation would increase by %s"),out,comms_target.cargo_mission.reward)
-                --				out = string.format(_("station-comms","%s if you agree to retrieve this cargo for %s."),out,comms_target.cargo_mission.character)
+                -- local out = string.format("%s",comms_target.cargo_mission.character)
+                -- out = string.format(_("station-comms","%s wishes you to pick up cargo from %s"),out,comms_target.cargo_mission.origin:getFaction())
+                -- out = string.format(_("station-comms","%s station %s"),out,comms_target.cargo_mission.origin_name)
+                -- local sector_name = comms_target.cargo_mission.destination:getSectorName()
+                -- out = string.format(_("station-comms","%s in sector %s and deliver it here"),out,comms_target.cargo_mission.origin:getSectorName())
+                -- out = string.format(_("station-comms","%s. Your reputation would increase by %s"),out,comms_target.cargo_mission.reward)
+                -- out = string.format(_("station-comms","%s if you agree to retrieve this cargo for %s."),out,comms_target.cargo_mission.character)
                 local out = string.format(
                     _(
                         "station-comms",
@@ -11086,7 +11086,7 @@ function getFriendStatus()
         return "neutral"
     end
 end
---	Non-standard communications functions
+-- Non-standard communications functions
 function upgradePlayerShip(p, u_type)
     local tempTypeName = p:getTypeName()
     local current_level = p.upgrade_path[u_type]
@@ -11139,7 +11139,7 @@ function upgradePlayerShip(p, u_type)
             end
         end
         for i, o in ipairs(missile_trans) do
-            --			print("upgrade ship missiles: o typ:",o.typ,"template:",tempTypeName,"ordnance level:",ordnance_level,"o short type:",o.short_type)
+            -- print("upgrade ship missiles: o typ:",o.typ,"template:",tempTypeName,"ordnance level:",ordnance_level,"o short type:",o.short_type)
             p:setWeaponStorageMax(
                 o.typ,
                 upgrade_path[tempTypeName].ordnance[ordnance_level][o.short_type]
@@ -13170,7 +13170,7 @@ function enemyComms(comms_data)
         addCommsReply(taunt_option, function()
             if random(0, 100) <= taunt_threshold then
                 local current_order = comms_target:getOrder()
-                --				print("order: " .. current_order)
+                -- print("order: " .. current_order)
                 --Possible order strings returned:
                 --Roaming
                 --Fly towards
@@ -15317,7 +15317,7 @@ end
 -- Utility functions --
 -----------------------
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -15727,7 +15727,7 @@ function getTemplatePool(max_strength)
         end
     else --full
         for current_ship_template, details in pairs(ship_template) do
-            --			print("current ship template",current_ship_template,"details",details,"max strength:",max_strength)
+            -- print("current ship template",current_ship_template,"details",details,"max strength:",max_strength)
             if details.strength <= max_strength then
                 table.insert(template_pool, current_ship_template)
             end
@@ -15753,64 +15753,63 @@ end
 function friendlyVesselDestroyed(self, instigator)
     string.format("")
     --[[
-	tempShipType = self:getTypeName()
-	table.insert(friendlyVesselDestroyedNameList,self:getCallSign())
-	table.insert(friendlyVesselDestroyedType,tempShipType)
-	table.insert(friendlyVesselDestroyedValue,ship_template[tempShipType].strength)
-	--]]
+    tempShipType = self:getTypeName()
+    table.insert(friendlyVesselDestroyedNameList,self:getCallSign())
+    table.insert(friendlyVesselDestroyedType,tempShipType)
+    table.insert(friendlyVesselDestroyedValue,ship_template[tempShipType].strength)
+    ]]
 end
 
 ----------------------------------------------------------------------------------------
---	Additional player ships with modifications from the original template parameters  --
+--  Additional player ships with modifications from the original template parameters  --
 ----------------------------------------------------------------------------------------
 function createPlayerShipMixer()
     playerAmalgam = PlayerSpaceship()
         :setTemplate("Atlantis")
         :setFaction("Human Navy")
         :setCallSign("Mixer")
-    playerAmalgam:setTypeName("Amalgam")
-    playerAmalgam:setRepairCrewCount(5) --more repair crew (vs 3)
+        :setTypeName("Amalgam")
+        :setRepairCrewCount(5) --more repair crew (vs 3)
     playerAmalgam.max_jump_range = 40000 --shorter (vs 50)
     playerAmalgam.min_jump_range = 4000 --shorter (vs 5)
-    playerAmalgam:setJumpDriveRange(
-        playerAmalgam.min_jump_range,
-        playerAmalgam.max_jump_range
-    )
-    playerAmalgam:setJumpDriveCharge(playerAmalgam.max_jump_range)
-    playerAmalgam:setImpulseMaxSpeed(80) --slower (vs 90)
-    playerAmalgam:setRotationMaxSpeed(8) --slower (vs 10)
-    playerAmalgam:setShieldsMax(150, 150) --weaker shields (vs 200)
-    playerAmalgam:setShields(150, 150)
-    --								  Arc, Dir, Range, CycleTime, Dmg
-    playerAmalgam:setBeamWeapon(0, 90, -20, 1200, 6, 8) --narrower (vs 100), shorter (vs 1500)
-    playerAmalgam:setBeamWeapon(1, 90, 20, 1200, 6, 8) --narrower (vs 100), shorter (vs 1500)
-    playerAmalgam:setBeamWeapon(2, 10, -60, 1000, 4, 6) --additional beam
-    playerAmalgam:setBeamWeapon(3, 10, 60, 1000, 4, 6) --additional beam
-    --											Arc,  Dir, Rotate speed
-    playerAmalgam:setBeamWeaponTurret(2, 60, -60, 0.6)
-    playerAmalgam:setBeamWeaponTurret(3, 60, 60, 0.6)
-    playerAmalgam:setWeaponTubeCount(4) --2 fewer broadside, 1 extra mine (vs 5)
-    playerAmalgam:setWeaponTubeDirection(1, 90) --mine tube points right (vs left)
-    playerAmalgam:setWeaponTubeDirection(2, 180) --mine tube points back (vs right)
-    playerAmalgam:setWeaponTubeDirection(3, 180) --mine tube points back (vs right)
-    playerAmalgam:setWeaponTubeExclusiveFor(0, "Homing") --homing only (vs any)
-    playerAmalgam:setWeaponTubeExclusiveFor(1, "Homing") --homing only (vs any)
-    playerAmalgam:setWeaponTubeExclusiveFor(2, "Mine") --mine only (vs any)
-    playerAmalgam:setWeaponTubeExclusiveFor(3, "Mine") --mine only (vs any)
-    playerAmalgam:setTubeLoadTime(2, 16) --rear tube slower (vs 8)
-    playerAmalgam:setTubeLoadTime(3, 16) --rear tube slower (vs 8)
-    playerAmalgam:setTubeSize(0, "large") --left tube large (vs normal)
-    playerAmalgam:setTubeSize(1, "large") --right tube large (vs normal)
-    playerAmalgam:setWeaponStorageMax("Homing", 16) --more (vs 12)
-    playerAmalgam:setWeaponStorage("Homing", 16)
-    playerAmalgam:setWeaponStorageMax("Nuke", 0) --less (vs 4)
-    playerAmalgam:setWeaponStorage("Nuke", 0)
-    playerAmalgam:setWeaponStorageMax("Mine", 10) --more (vs 8)
-    playerAmalgam:setWeaponStorage("Mine", 10)
-    playerAmalgam:setWeaponStorageMax("EMP", 0) --less (vs 6)
-    playerAmalgam:setWeaponStorage("EMP", 0)
-    playerAmalgam:setWeaponStorageMax("HVLI", 0) --less (vs 20)
-    playerAmalgam:setWeaponStorage("HVLI", 0)
+    playerAmalgam
+        :setJumpDriveRange(
+            playerAmalgam.min_jump_range,
+            playerAmalgam.max_jump_range
+        )
+        :setJumpDriveCharge(playerAmalgam.max_jump_range)
+        :setImpulseMaxSpeed(80) --slower (vs 90)
+        :setRotationMaxSpeed(8) --slower (vs 10)
+        :setShieldsMax(150, 150) --weaker shields (vs 200)
+        :setShields(150, 150)
+        :setBeamWeapon(0, 90, -20, 1200, 6, 8) --narrower (vs 100), shorter (vs 1500)
+        :setBeamWeapon(1, 90, 20, 1200, 6, 8) --narrower (vs 100), shorter (vs 1500)
+        :setBeamWeapon(2, 10, -60, 1000, 4, 6) --additional beam
+        :setBeamWeapon(3, 10, 60, 1000, 4, 6) --additional beam
+        :setBeamWeaponTurret(2, 60, -60, 0.6)
+        :setBeamWeaponTurret(3, 60, 60, 0.6)
+        :setWeaponTubeCount(4) --2 fewer broadside, 1 extra mine (vs 5)
+        :setWeaponTubeDirection(1, 90) --mine tube points right (vs left)
+        :setWeaponTubeDirection(2, 180) --mine tube points back (vs right)
+        :setWeaponTubeDirection(3, 180) --mine tube points back (vs right)
+        :setWeaponTubeExclusiveFor(0, "Homing") --homing only (vs any)
+        :setWeaponTubeExclusiveFor(1, "Homing") --homing only (vs any)
+        :setWeaponTubeExclusiveFor(2, "Mine") --mine only (vs any)
+        :setWeaponTubeExclusiveFor(3, "Mine") --mine only (vs any)
+        :setTubeLoadTime(2, 16) --rear tube slower (vs 8)
+        :setTubeLoadTime(3, 16) --rear tube slower (vs 8)
+        :setTubeSize(0, "large") --left tube large (vs normal)
+        :setTubeSize(1, "large") --right tube large (vs normal)
+        :setWeaponStorageMax("Homing", 16) --more (vs 12)
+        :setWeaponStorage("Homing", 16)
+        :setWeaponStorageMax("Nuke", 0) --less (vs 4)
+        :setWeaponStorage("Nuke", 0)
+        :setWeaponStorageMax("Mine", 10) --more (vs 8)
+        :setWeaponStorage("Mine", 10)
+        :setWeaponStorageMax("EMP", 0) --less (vs 6)
+        :setWeaponStorage("EMP", 0)
+        :setWeaponStorageMax("HVLI", 0) --less (vs 20)
+        :setWeaponStorage("HVLI", 0)
     return playerAmalgam
 end
 function createPlayerShipFlipper()
@@ -15818,44 +15817,42 @@ function createPlayerShipFlipper()
         :setTemplate("Player Missile Cr.")
         :setFaction("Human Navy")
         :setCallSign("Flipper")
-    playerFlipper:setTypeName("Midian")
-    playerFlipper:setRadarTrace("cruiser.png") --different radar trace
-    playerFlipper:setWarpSpeed(320)
-    --                  				Arc, Dir, Range, CycleTime, Dmg
-    playerFlipper:setBeamWeapon(0, 50, -20, 1000, 6, 4) --beams (vs none)
-    playerFlipper:setBeamWeapon(1, 50, 20, 1000, 6, 4)
-    playerFlipper:setBeamWeapon(2, 10, 180, 1000, 6, 2)
-    --									     Arc, Dir, Rotate speed
-    playerFlipper:setBeamWeaponTurret(2, 220, 180, 0.3)
-    playerFlipper:setWeaponTubeCount(5) --fewer (vs 7)
-    playerFlipper:setWeaponTubeDirection(0, -2) --angled (vs front)
-    playerFlipper:setWeaponTubeDirection(1, 2) --angled (vs front)
-    playerFlipper:setWeaponTubeDirection(2, -90) --left (vs right)
-    playerFlipper:setWeaponTubeDirection(4, 180) --rear (vs left)
-    playerFlipper:setTubeSize(0, "small") --small vs medium
-    playerFlipper:setTubeSize(1, "small") --small vs medium
-    playerFlipper:setWeaponTubeExclusiveFor(0, "Homing") --homing only
-    playerFlipper:setWeaponTubeExclusiveFor(1, "Homing") --homing only
-    playerFlipper:setWeaponTubeExclusiveFor(2, "HVLI")
-    playerFlipper:setWeaponTubeExclusiveFor(3, "HVLI")
-    playerFlipper:setWeaponTubeExclusiveFor(4, "Mine")
-    playerFlipper:weaponTubeAllowMissle(2, "EMP")
-    playerFlipper:weaponTubeAllowMissle(3, "EMP")
-    playerFlipper:weaponTubeAllowMissle(2, "Nuke")
-    playerFlipper:weaponTubeAllowMissle(3, "Nuke")
-    playerFlipper:setTubeLoadTime(2, 12)
-    playerFlipper:setTubeLoadTime(3, 12)
-    playerFlipper:setTubeLoadTime(4, 15)
-    playerFlipper:setWeaponStorageMax("Homing", 16) --less (vs 30)
-    playerFlipper:setWeaponStorage("Homing", 16)
-    playerFlipper:setWeaponStorageMax("Nuke", 2) --less (vs 8)
-    playerFlipper:setWeaponStorage("Nuke", 2)
-    playerFlipper:setWeaponStorageMax("EMP", 5) --less (vs 10)
-    playerFlipper:setWeaponStorage("EMP", 5)
-    playerFlipper:setWeaponStorageMax("Mine", 5) --less (vs 12)
-    playerFlipper:setWeaponStorage("Mine", 5)
-    playerFlipper:setWeaponStorageMax("HVLI", 16) --more (vs 0)
-    playerFlipper:setWeaponStorage("HVLI", 16)
+        :setTypeName("Midian")
+        :setRadarTrace("cruiser.png") --different radar trace
+        :setWarpSpeed(320)
+        :setBeamWeapon(0, 50, -20, 1000, 6, 4) --beams (vs none)
+        :setBeamWeapon(1, 50, 20, 1000, 6, 4)
+        :setBeamWeapon(2, 10, 180, 1000, 6, 2)
+        :setBeamWeaponTurret(2, 220, 180, 0.3)
+        :setWeaponTubeCount(5) --fewer (vs 7)
+        :setWeaponTubeDirection(0, -2) --angled (vs front)
+        :setWeaponTubeDirection(1, 2) --angled (vs front)
+        :setWeaponTubeDirection(2, -90) --left (vs right)
+        :setWeaponTubeDirection(4, 180) --rear (vs left)
+        :setTubeSize(0, "small") --small vs medium
+        :setTubeSize(1, "small") --small vs medium
+        :setWeaponTubeExclusiveFor(0, "Homing") --homing only
+        :setWeaponTubeExclusiveFor(1, "Homing") --homing only
+        :setWeaponTubeExclusiveFor(2, "HVLI")
+        :setWeaponTubeExclusiveFor(3, "HVLI")
+        :setWeaponTubeExclusiveFor(4, "Mine")
+        :weaponTubeAllowMissle(2, "EMP")
+        :weaponTubeAllowMissle(3, "EMP")
+        :weaponTubeAllowMissle(2, "Nuke")
+        :weaponTubeAllowMissle(3, "Nuke")
+        :setTubeLoadTime(2, 12)
+        :setTubeLoadTime(3, 12)
+        :setTubeLoadTime(4, 15)
+        :setWeaponStorageMax("Homing", 16) --less (vs 30)
+        :setWeaponStorage("Homing", 16)
+        :setWeaponStorageMax("Nuke", 2) --less (vs 8)
+        :setWeaponStorage("Nuke", 2)
+        :setWeaponStorageMax("EMP", 5) --less (vs 10)
+        :setWeaponStorage("EMP", 5)
+        :setWeaponStorageMax("Mine", 5) --less (vs 12)
+        :setWeaponStorage("Mine", 5)
+        :setWeaponStorageMax("HVLI", 16) --more (vs 0)
+        :setWeaponStorage("HVLI", 16)
     playerFlipper.smallHomingOnly = true
     return playerFlipper
 end
@@ -15864,48 +15861,47 @@ function createPlayerShipInk()
         :setTemplate("Piranha")
         :setFaction("Human Navy")
         :setCallSign("Ink")
-    playerInk:setTypeName("Squid")
-    playerInk:setRepairCrewCount(5) --more repair crew (vs 2)
-    playerInk:setShieldsMax(100, 100) --stronger shields (vs 70, 70)
-    playerInk:setShields(100, 100)
-    playerInk:setHullMax(130) --stronger (vs 120)
-    playerInk:setHull(130)
+        :setTypeName("Squid")
+        :setRepairCrewCount(5) --more repair crew (vs 2)
+        :setShieldsMax(100, 100) --stronger shields (vs 70, 70)
+        :setShields(100, 100)
+        :setHullMax(130) --stronger (vs 120)
+        :setHull(130)
     playerInk.max_jump_range = 20000 --shorter than typical (vs 50)
     playerInk.min_jump_range = 2000 --shorter than typical (vs 5)
-    playerInk:setJumpDriveRange(
-        playerInk.min_jump_range,
-        playerInk.max_jump_range
-    )
-    playerInk:setJumpDriveCharge(playerInk.max_jump_range)
-    --                 				 Arc, Dir, Range, CycleTime, Damage
-    playerInk:setBeamWeapon(0, 10, 0, 1000, 4, 4) --one beam (vs 0)
-    --									   Arc,	  Dir, Rotate speed
-    playerInk:setBeamWeaponTurret(0, 80, 0, 1) --slow turret
-    playerInk:setWeaponTubeDirection(0, 0) --forward facing (vs left)
-    playerInk:setWeaponTubeDirection(3, 0) --forward facing (vs right)
-    playerInk:setTubeLoadTime(0, 12) --slower (vs 8)
-    playerInk:setTubeLoadTime(3, 12) --slower (vs 8)
-    playerInk:setWeaponTubeExclusiveFor(2, "Homing") --homing only (vs HVLI)
-    playerInk:setWeaponTubeExclusiveFor(5, "Homing") --homing only (vs HVLI)
-    playerInk:setTubeLoadTime(2, 10) --slower (vs 8)
-    playerInk:setTubeLoadTime(5, 10) --slower (vs 8)
-    playerInk:setTubeLoadTime(6, 15) --slower (vs 8)
-    playerInk:setTubeLoadTime(7, 15) --slower (vs 8)
-    playerInk:setWeaponTubeExclusiveFor(0, "HVLI") --HVLI only (vs Homing + HVLI)
-    playerInk:setWeaponTubeExclusiveFor(3, "HVLI") --HVLI only (vs Homing + HVLI)
-    playerInk:weaponTubeDisallowMissle(1, "Mine") --no sideways mines
-    playerInk:weaponTubeDisallowMissle(4, "Mine") --no sideways mines
-    playerInk:setWeaponStorageMax("HVLI", 10) --fewer HVLI (vs 20)
-    playerInk:setWeaponStorage("HVLI", 10)
-    playerInk:setWeaponStorageMax("Homing", 10) --fewer Homing (vs 12)
-    playerInk:setWeaponStorage("Homing", 10)
-    playerInk:setWeaponStorageMax("Mine", 6) --fewer mines (vs 8)
-    playerInk:setWeaponStorage("Mine", 6)
-    playerInk:setWeaponStorageMax("EMP", 4) --more EMPs (vs 0)
-    playerInk:setWeaponStorage("EMP", 4)
-    playerInk:setWeaponStorageMax("Nuke", 4) --fewer Nukes (vs 6)
-    playerInk:setWeaponStorage("Nuke", 4)
-    playerInk:setLongRangeRadarRange(25000) --shorter long range sensors (vs 30000)
+    playerInk
+        :setJumpDriveRange(
+            playerInk.min_jump_range,
+            playerInk.max_jump_range
+        )
+        :setJumpDriveCharge(playerInk.max_jump_range)
+        :setBeamWeapon(0, 10, 0, 1000, 4, 4) --one beam (vs 0)
+        :setBeamWeaponTurret(0, 80, 0, 1) --slow turret
+        :setWeaponTubeDirection(0, 0) --forward facing (vs left)
+        :setWeaponTubeDirection(3, 0) --forward facing (vs right)
+        :setTubeLoadTime(0, 12) --slower (vs 8)
+        :setTubeLoadTime(3, 12) --slower (vs 8)
+        :setWeaponTubeExclusiveFor(2, "Homing") --homing only (vs HVLI)
+        :setWeaponTubeExclusiveFor(5, "Homing") --homing only (vs HVLI)
+        :setTubeLoadTime(2, 10) --slower (vs 8)
+        :setTubeLoadTime(5, 10) --slower (vs 8)
+        :setTubeLoadTime(6, 15) --slower (vs 8)
+        :setTubeLoadTime(7, 15) --slower (vs 8)
+        :setWeaponTubeExclusiveFor(0, "HVLI") --HVLI only (vs Homing + HVLI)
+        :setWeaponTubeExclusiveFor(3, "HVLI") --HVLI only (vs Homing + HVLI)
+        :weaponTubeDisallowMissle(1, "Mine") --no sideways mines
+        :weaponTubeDisallowMissle(4, "Mine") --no sideways mines
+        :setWeaponStorageMax("HVLI", 10) --fewer HVLI (vs 20)
+        :setWeaponStorage("HVLI", 10)
+        :setWeaponStorageMax("Homing", 10) --fewer Homing (vs 12)
+        :setWeaponStorage("Homing", 10)
+        :setWeaponStorageMax("Mine", 6) --fewer mines (vs 8)
+        :setWeaponStorage("Mine", 6)
+        :setWeaponStorageMax("EMP", 4) --more EMPs (vs 0)
+        :setWeaponStorage("EMP", 4)
+        :setWeaponStorageMax("Nuke", 4) --fewer Nukes (vs 6)
+        :setWeaponStorage("Nuke", 4)
+        :setLongRangeRadarRange(25000) --shorter long range sensors (vs 30000)
     playerInk.normal_long_range_radar = 25000
     return playerInk
 end
@@ -15914,51 +15910,49 @@ function createPlayerShipClaw()
         :setTemplate("Player Cruiser")
         :setFaction("Human Navy")
         :setCallSign("Claw")
-    playerRaven:setTypeName("Raven")
-    playerRaven:setJumpDrive(false)
-    playerRaven:setWarpDrive(true) --warp drive (vs jump)
-    playerRaven:setWarpSpeed(300)
-    playerRaven:setShieldsMax(100, 100) --stronger shields (vs 80, 80)
-    playerRaven:setShields(100, 100)
-    playerRaven:setHullMax(150) --weaker hull (vs 200)
-    playerRaven:setHull(150)
-    --                 				 Arc, Dir, Range,   CycleTime,  Damage
-    playerRaven:setBeamWeapon(0, 10, -90, 900, 6, 10) --left (vs front) shorter (vs 1000)
-    playerRaven:setBeamWeapon(1, 10, 90, 900, 6, 10) --right (vs front) shorter (vs 1000)
-    --										Arc,  Dir, Rotate speed
-    playerRaven:setBeamWeaponTurret(0, 90, -90, 1)
-    playerRaven:setBeamWeaponTurret(1, 90, 90, 1)
-    playerRaven:setWeaponTubeCount(6) --more (vs 3)
-    playerRaven:setWeaponTubeDirection(0, -30) --more angled (vs -5)
-    playerRaven:setWeaponTubeDirection(1, 30) --more angled (vs 5)
-    playerRaven:setTubeSize(0, "small") --small (vs medium)
-    playerRaven:setTubeSize(1, "small") --small (vs medium)
-    playerRaven:setWeaponTubeExclusiveFor(0, "Nuke") --Nuke only (vs all but mine)
-    playerRaven:setWeaponTubeExclusiveFor(1, "Nuke") --Nuke only (vs all but mine)
-    playerRaven:setWeaponTubeDirection(2, -60)
-    playerRaven:setWeaponTubeDirection(3, 60)
-    playerRaven:setTubeSize(2, "small")
-    playerRaven:setTubeSize(3, "small")
-    playerRaven:setWeaponTubeExclusiveFor(2, "EMP")
-    playerRaven:setWeaponTubeExclusiveFor(3, "EMP")
-    playerRaven:setTubeLoadTime(4, 12) --slower (vs 8)
-    playerRaven:setTubeSize(4, "large")
-    playerRaven:setWeaponTubeExclusiveFor(4, "Homing")
-    playerRaven:setWeaponTubeDirection(5, 180)
-    playerRaven:setTubeLoadTime(5, 10) --slower (vs 8)
-    playerRaven:setWeaponTubeExclusiveFor(5, "Mine")
-    playerRaven:setWeaponStorageMax("Homing", 4) --less (vs 12)
-    playerRaven:setWeaponStorage("Homing", 4)
-    playerRaven:setWeaponStorageMax("EMP", 4) --less (vs 6)
-    playerRaven:setWeaponStorage("EMP", 4)
-    playerRaven:setWeaponStorageMax("Mine", 4) --less (vs 8)
-    playerRaven:setWeaponStorage("Mine", 4)
+        :setTypeName("Raven")
+        :setJumpDrive(false)
+        :setWarpDrive(true) --warp drive (vs jump)
+        :setWarpSpeed(300)
+        :setShieldsMax(100, 100) --stronger shields (vs 80, 80)
+        :setShields(100, 100)
+        :setHullMax(150) --weaker hull (vs 200)
+        :setHull(150)
+        :setBeamWeapon(0, 10, -90, 900, 6, 10) --left (vs front) shorter (vs 1000)
+        :setBeamWeapon(1, 10, 90, 900, 6, 10) --right (vs front) shorter (vs 1000)
+        :setBeamWeaponTurret(0, 90, -90, 1)
+        :setBeamWeaponTurret(1, 90, 90, 1)
+        :setWeaponTubeCount(6) --more (vs 3)
+        :setWeaponTubeDirection(0, -30) --more angled (vs -5)
+        :setWeaponTubeDirection(1, 30) --more angled (vs 5)
+        :setTubeSize(0, "small") --small (vs medium)
+        :setTubeSize(1, "small") --small (vs medium)
+        :setWeaponTubeExclusiveFor(0, "Nuke") --Nuke only (vs all but mine)
+        :setWeaponTubeExclusiveFor(1, "Nuke") --Nuke only (vs all but mine)
+        :setWeaponTubeDirection(2, -60)
+        :setWeaponTubeDirection(3, 60)
+        :setTubeSize(2, "small")
+        :setTubeSize(3, "small")
+        :setWeaponTubeExclusiveFor(2, "EMP")
+        :setWeaponTubeExclusiveFor(3, "EMP")
+        :setTubeLoadTime(4, 12) --slower (vs 8)
+        :setTubeSize(4, "large")
+        :setWeaponTubeExclusiveFor(4, "Homing")
+        :setWeaponTubeDirection(5, 180)
+        :setTubeLoadTime(5, 10) --slower (vs 8)
+        :setWeaponTubeExclusiveFor(5, "Mine")
+        :setWeaponStorageMax("Homing", 4) --less (vs 12)
+        :setWeaponStorage("Homing", 4)
+        :setWeaponStorageMax("EMP", 4) --less (vs 6)
+        :setWeaponStorage("EMP", 4)
+        :setWeaponStorageMax("Mine", 4) --less (vs 8)
+        :setWeaponStorage("Mine", 4)
     return playerRaven
 end
 ------------------------
---	Update functions  --
+-- Update functions  --
 ------------------------
---	Update loop related functions
+-- Update loop related functions
 function continuousSpawn(delta)
     if #spawn_source_pool < 1 then
         for _, station in ipairs(circle_stations) do
@@ -16467,7 +16461,7 @@ function moonCollisionCheck()
                 else
                     ship_distance = 400
                 end
-                --				print("CPU ship object distance:",obj_dist,"ship distance:",ship_distance,"moon radius:",moon_barrier.moon_radius)
+                -- print("CPU ship object distance:",obj_dist,"ship distance:",ship_distance,"moon radius:",moon_barrier.moon_radius)
                 if
                     obj_dist
                     <= moon_barrier.moon_radius + ship_distance + 200
@@ -16488,7 +16482,7 @@ function moonCollisionCheck()
                 else
                     ship_distance = 400
                 end
-                --				print("Player ship object distance:",obj_dist,"ship distance:",ship_distance,"moon radius:",moon_barrier.moon_radius)
+                -- print("Player ship object distance:",obj_dist,"ship distance:",ship_distance,"moon radius:",moon_barrier.moon_radius)
                 if
                     obj_dist
                     <= moon_barrier.moon_radius + ship_distance + 200
@@ -16680,7 +16674,7 @@ function whammyTime(p)
         return false
     end
 end
---		Mortal repair crew functions. Includes coolant loss as option to losing repair crew
+-- Mortal repair crew functions. Includes coolant loss as option to losing repair crew
 function healthCheck(delta)
     healthCheckTimer = healthCheckTimer - delta
     if healthCheckTimer < 0 then
@@ -17414,7 +17408,7 @@ function updateInner(delta)
     if whammy_count >= active_player_count then
         whammy = whammy * 0.8 + getScenarioTime() + random(30, 90)
         total_whammies = total_whammies + 1
-        --		whammy = 3000 + getScenarioTime()
+        -- whammy = 3000 + getScenarioTime()
     end
     if s_time > possible_victory_time then
         local p = getPlayerShip(-1)

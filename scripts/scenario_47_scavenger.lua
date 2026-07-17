@@ -62,7 +62,7 @@ function init()
     healthCheckTimerInterval = 5
     independent_station = {}
     station_list = {}
-    --	print("init: place first station")
+    -- print("init: place first station")
     --place first station where missions start
     first_station_angle = random(0, 360)
     local player_to_station_distance = random(8000, 15000)
@@ -84,7 +84,7 @@ function init()
         Nuke = 12,
         EMP = 9,
     }
-    --	print("init: place first enemy station")
+    -- print("init: place first enemy station")
     --place first enemy station for first mission
     exuari_station = {}
     local exuari_station_angle = first_station_angle + random(-20, 20)
@@ -132,7 +132,7 @@ function init()
     evx = evx + psx
     evy = evy + psy
     ev_angle = (exuari_station_angle + 180) % 360 --exuari vengeance attack angle
-    --	print("init: place research asteroids")
+    -- print("init: place research asteroids")
     local arx, ary, brx, bry, asteroids = curvaceousAsteroids1(
         first_station_x,
         first_station_y,
@@ -208,7 +208,7 @@ function init()
             :allowPickup(true)
             :onPickUp(burnOutArtifactPickup)
     end
-    --	print("init: place second and third stations")
+    -- print("init: place second and third stations")
     --place second and third stations
     local second_station_angle = first_station_angle + random(90, 140)
     if second_station_angle > 360 then
@@ -235,7 +235,7 @@ function init()
     first_station:setRepairDocked(true)
     first_station.comms_data.scan_repair = true
     first_station.comms_data.jump_overcharge = true
-    --	print("init: set work transports")
+    -- print("init: set work transports")
     --Independent trio transports
     plotT = workingTransports
     transports_around_independent_trio = {}
@@ -274,10 +274,10 @@ function init()
         table.insert(transports_around_independent_trio, tempTransport)
     end
     mainGMButtons()
-    --	print("end of init")
+    -- print("end of init")
     allowNewPlayerShips(false)
 end
---	Initialization
+-- Initialization
 function setVariations()
     local enemy_config = {
         ["Easy"] = { number = 0.5 },
@@ -1836,9 +1836,9 @@ function mainGMButtons()
     clearGMFunctions()
     addGMFunction(_("buttonGM", "+Missions"), missionSelection)
     addGMFunction(_("buttonGM", "+Spawn Ship(s)"), spawnGMShips)
-    --	addGMFunction("Explode test",function()
-    --		plot7 = explodingPlanetDebris
-    --	end)
+    -- addGMFunction("Explode test",function()
+    --     plot7 = explodingPlanetDebris
+    -- end)
 end
 function missionSelection()
     clearGMFunctions()
@@ -2386,7 +2386,7 @@ function missionSelection()
             player = getPlayerShip(-1)
             impulseUpgrade(player)
             missileTubeUpgrade(player)
-            --	beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned)
+            -- beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned)
             beamUpgrade(true, nil, true, true)
             player.beam_damage_upgrade = true
             jumpDriveUpgrade(player)
@@ -2464,7 +2464,7 @@ function missionSelection()
     end)
 end
 -----------------
---	Utilities  --
+--  Utilities  --
 -----------------
 function createRandomAlongArc(
     object_type,
@@ -2563,7 +2563,7 @@ function angleFromVectorNorth(p1x, p1y, p2x, p2y)
     return (360 - (RAD2DEG * theta)) % 360
 end
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -2594,7 +2594,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
     local bry = nil
     local asteroid_list = {}
     local temp_list = nil
-    --	print("curvaceous asteroids: above asteroids")
+    -- print("curvaceous asteroids: above asteroids")
     if random(1, 100) <= 47 then --center closer to station
         local aax, aay = vectorFromAngle(first_station_angle, arc_leg)
         if random(1, 100) <= 47 then --right curve
@@ -2806,12 +2806,12 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
             end
         end
     end
-    --	print("curvaceous asteroids: below asteroids")
+    -- print("curvaceous asteroids: below asteroids")
     local full_list = {}
     for i = 1, #asteroid_list do
         table.insert(full_list, asteroid_list[i])
     end
-    --	print("curvaceous asteroids: list replicated")
+    -- print("curvaceous asteroids: list replicated")
     if difficulty >= 1 then
         repeat
             crx, cry =
@@ -2833,15 +2833,15 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
     --Iron asteroid: Iron 91%, Nickel 8.5%, Cobalt
     --Stone asteroid: Oxygen, Silicon, Magnesium, Calcium
     --Other components: olivine, pyroxene, nickel-iron, water-ice
-    --					carbon, Nitrogen, Hydrogen, Oxygen
-    --					nickel, iridium, palladium, platinum, gold, magnesium, osmium, ruthenium, rhodium
+    --                  carbon, Nitrogen, Hydrogen, Oxygen
+    --                  nickel, iridium, palladium, platinum, gold, magnesium, osmium, ruthenium, rhodium
     --Asteroid structures: most are solid, rubble, binary
-    --Sizes:	30 > 200km
-    --			250 > 100km
-    --			million > 1 km
-    --Types: 	C: 75% Carbonaceous Chondrite, Carbon
-    --			S: 17% Nickel-iron mixed with iron and magnesium silicates
-    --			M: most of the rest: nickel-iron
+    --Sizes: 30 > 200km
+    --       250 > 100km
+    --       million > 1 km
+    --Types: C: 75% Carbonaceous Chondrite, Carbon
+    --       M: most of the rest: nickel-iron
+    --       S: 17% Nickel-iron mixed with iron and magnesium silicates
     for i = 1, #asteroid_list do
         local selected_asteroid_index = math.random(1, #asteroid_list)
         local selected_asteroid = asteroid_list[selected_asteroid_index]
@@ -2891,7 +2891,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
             )
             target_asteroid = selected_asteroid
             target_asteroid_x, target_asteroid_y = target_asteroid:getPosition()
-        --			print(string.format("Target Asteroid: Sector:%s X:%i Y:%i Osmium:%.1f, Iridium:%.1f, Olivine:%.1f, Nickel:%.1f",target_asteroid:getSectorName(),math.floor(target_asteroid_x),math.floor(target_asteroid_y),target_asteroid.osmium,target_asteroid.iridium,target_asteroid.olivine,target_asteroid.nickel))
+        -- print(string.format("Target Asteroid: Sector:%s X:%i Y:%i Osmium:%.1f, Iridium:%.1f, Olivine:%.1f, Nickel:%.1f",target_asteroid:getSectorName(),math.floor(target_asteroid_x),math.floor(target_asteroid_y),target_asteroid.osmium,target_asteroid.iridium,target_asteroid.olivine,target_asteroid.nickel))
         else
             if random(0, 100) < 2 and selected_asteroid.composition < 100 then
                 selected_asteroid.osmium = math.random(1, 20) / 10
@@ -3183,7 +3183,7 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
         end
         selected_asteroid:setScanningParameters(scan_complexity, scan_depth)
     end
-    --	print("curvaceous asteroids: just before return")
+    -- print("curvaceous asteroids: just before return")
     --return coordinates for asteroids: one in each arc
     return arx, ary, brx, bry, full_list
 end
@@ -3292,7 +3292,7 @@ function playerShipCargoInventory(p)
         "Yellow"
     )
 end
---	Spawning
+-- Spawning
 function getTemplatePool(max_strength)
     local function getStrengthSort(tbl, sortFunction)
         local keys = {}
@@ -3422,9 +3422,9 @@ function playerPower()
     return playerShipScore
 end
 ------------
---	Plot  --
+--  Plot  --
 ------------
---	Contract for increased hull strength functions  --
+-- Contract for increased hull strength functions  --
 function start1to2delivery()
     if independent_station[2] ~= nil and independent_station[2]:isValid() then
         if comms_source.cargo < 3 then
@@ -3619,7 +3619,7 @@ function complete2to3delivery()
     end
     addCommsReply(_("Back"), commsStation)
 end
---	Optional missions
+-- Optional missions
 function setOptionalAddBeamMission(beam_station)
     if efficient_battery_diagnostic then
         print("top of setOptionalAddBeamMission")
@@ -3743,7 +3743,7 @@ function stationComponentGood(component_station, preferred_good)
     end
     return preferred_good
 end
---	Artifact pick up functions
+-- Artifact pick up functions
 function burnOutArtifactPickup(self, picker)
     if self:isScannedBy(picker) then
         picker:setSystemHealth(
@@ -3808,7 +3808,7 @@ function maneuverArtifactPickup(self, picker)
     )
 end
 ------------------------------
---	Station communications  --
+--  Station communications  --
 ------------------------------
 function impulseUpgrade(ship)
     ship.impulse_upgrade = true
@@ -5149,7 +5149,7 @@ function handleDockedState()
                                 function()
                                     player.asteroid_upgrade = "done"
                                     beamUpgrade(nil, true)
-                                    --	beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned)
+                                    -- beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned)
                                     setCommsMessage(
                                         string.format(
                                             _(
@@ -7811,7 +7811,7 @@ function getFriendStatus()
     end
 end
 --------------------------
---	Ship communication  --
+--  Ship communication  --
 --------------------------
 function commsShip()
     if comms_target.comms_data == nil then
@@ -7874,26 +7874,27 @@ function friendlyComms()
         end
     end
     if #nearby_enemy_ships > 0 then
-        --[[	--setBeamFrequency is not available
-		if comms_target:getBeamWeaponRange(0) > 1 then
-			addCommsReply("Set your beam frequency",function()
-				local out = "Enemy ships nearby:"
-				for i, ship in ipairs(nearby_enemy_ships) do
-					if ship.shield ~= nil then
-						out = string.format("%s\n%s: Shields best against beams at %i THz",out,ship.name,ship.shield * 20 + 400)
-					else
-						out = string.format("%s\n%s",out,ship.name)
-					end
-				end
-				setCommsMessage(out)
-				for i=0,20 do
-					addCommsReply(string.format("Set beams to frequency %i THz",i * 20 + 400),function()
-						comms_target:setBeamFrequency(i)
-					end)
-				end
-			end)
-		end
-		--]]
+        --[[
+        --setBeamFrequency is not available
+        if comms_target:getBeamWeaponRange(0) > 1 then
+            addCommsReply("Set your beam frequency",function()
+                local out = "Enemy ships nearby:"
+                for i, ship in ipairs(nearby_enemy_ships) do
+                    if ship.shield ~= nil then
+                        out = string.format("%s\n%s: Shields best against beams at %i THz",out,ship.name,ship.shield * 20 + 400)
+                    else
+                        out = string.format("%s\n%s",out,ship.name)
+                    end
+                end
+                setCommsMessage(out)
+                for i=0,20 do
+                    addCommsReply(string.format("Set beams to frequency %i THz",i * 20 + 400),function()
+                        comms_target:setBeamFrequency(i)
+                    end)
+                end
+            end)
+        end
+        ]]
         addCommsReply(
             _("shipAssist-comms", "Set your shield frequency"),
             function()
@@ -9193,7 +9194,7 @@ function neutralComms()
     end --end non-freighter communications else branch
     return true
 end --end neutral communications function
---	Player ship improvements
+-- Player ship improvements
 function addForwardBeam()
     if comms_source.add_forward_beam == nil then
         addCommsReply(_("upgrade-comms", "Add beam weapon"), function()
@@ -9323,7 +9324,7 @@ function shrinkBeamCycle()
                             - 1
                         comms_source.cargo = comms_source.cargo + 1
                         beamUpgrade(nil, true)
-                        --	beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned)
+                        -- beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned)
                         setCommsMessage(
                             _(
                                 "upgrade-comms",
@@ -9345,7 +9346,7 @@ function shrinkBeamCycle()
                 else
                     comms_source.shrinkBeamCycleUpgrade = "done"
                     beamUpgrade(nil, true)
-                    --	beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned)
+                    -- beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned)
                     setCommsMessage(
                         string.format(
                             _(
@@ -9367,7 +9368,7 @@ function shrinkBeamCycle()
         end)
     end
 end
---	Mortal repair crew functions. Includes coolant loss as option to losing repair crew
+-- Mortal repair crew functions. Includes coolant loss as option to losing repair crew
 function healthCheck(delta)
     healthCheckTimer = healthCheckTimer - delta
     if healthCheckTimer < 0 then
@@ -9776,7 +9777,7 @@ function crewFate(p, fatalityChance)
     end
 end
 -------------------------------
---	Working transports plot  --
+--  Working transports plot  --
 -------------------------------
 function workingTransports(delta)
     transportCheckDelayTimer = transportCheckDelayTimer - delta
@@ -9805,7 +9806,7 @@ function workingTransports(delta)
     end
 end
 -------------------------------------------------------------
---	Plot 1 Initial Exuari harassment, transition contract  --
+--  Plot 1 Initial Exuari harassment, transition contract  --
 -------------------------------------------------------------
 function exuariHarassment(delta)
     if player.captain_log == nil then
@@ -10443,7 +10444,7 @@ function longDistanceCargo(delta)
                     p:setMaxEnergy(p:getMaxEnergy() + 100)
                     p:setEnergy(p:getMaxEnergy())
                     beamUpgrade(nil, true)
-                    --	beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned)
+                    -- beamUpgrade(damage,cycle_time,power_use,heat_generated,artifact_scanned)
                     p:addToShipLog(
                         string.format(
                             _(
@@ -11028,7 +11029,7 @@ function transitionStationDestroyed(self, instigator)
     victory("Exuari")
 end
 ---------------------------------
---	Plot 2 Contract targeting  --
+--  Plot 2 Contract targeting  --
 ---------------------------------
 function contractTarget(delta)
     if exuari_vengance_fleet_time == nil then
@@ -11172,7 +11173,7 @@ function contractTarget(delta)
                     victory("Exuari")
                 end
                 transition_contract_message = true
-            --			plot2 = nil
+            -- plot2 = nil
             else
                 if player.captain_log < 2 then
                     if getScenarioTime() < transition_contract_delay_msg then
@@ -11246,7 +11247,7 @@ function contractTarget(delta)
                         victory("Exuari")
                     end
                     transition_contract_message = true
-                    --					plot2 = nil
+                    -- plot2 = nil
                 end
             end
         end
@@ -11272,7 +11273,7 @@ function jennyAsteroid(delta)
     end
 end
 -------------------------
---	Plot 4 Highwaymen  --
+--  Plot 4 Highwaymen  --
 -------------------------
 function highwaymen(delta)
     if distance(player, drop_bait) < 30000 then

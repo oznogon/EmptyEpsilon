@@ -48,7 +48,7 @@ Scenario filenames follow a naming convention of `scenario_XX_name.lua`, where `
 
 ## Tutorials
 
-Tutorials are located in the `tutorial` directory and implemented in the monolithic `99_all.lua` script. The individual tutorial files invoke the corresponding tutorials. 
+Tutorials are located in the `tutorial` directory and implemented in the monolithic `99_all.lua` script. The individual tutorial files invoke the corresponding tutorials.
 
 The `tutorialUtils.lua` script provides supporting functions for tutorials.
 

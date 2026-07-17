@@ -178,7 +178,7 @@ function init()
             _("scienceDescription-station", "Major military installation")
         )
     table.insert(stationList, stationPangora)
-    --	Set up variables based on difficulty setting
+    -- Set up variables based on difficulty setting
     local config_diff = {
         ["Normal"] = { val = 1, rep = 150 },
         ["Easy"] = { val = 0.5, rep = 150 },
@@ -312,9 +312,9 @@ function mainGMButtons()
     addGMFunction(_("buttonGM", "+Control Codes"), manageControlCodes)
     addGMFunction(_("buttonGM", "Terrorist End"), terroristEnd)
 end
---	Utilities
+-- Utilities
 function audioButtonTimers(delta)
-    --	Make the audio playback buttons on Relay go after 3 minutes
+    -- Make the audio playback buttons on Relay go after 3 minutes
     if player.message_expire_time == nil then
         player.message_expire_time = {}
     end
@@ -524,8 +524,8 @@ function vectorFromAngleNorth(angle, distance)
     if spew_function_diagnostic then
         print("top of vector from angle north")
     end
-    --	print("input angle to vectorFromAngleNorth:")
-    --	print(angle)
+    -- print("input angle to vectorFromAngleNorth:")
+    -- print(angle)
     angle = (angle + 270) % 360
     local x, y = vectorFromAngle(angle, distance)
     if spew_function_diagnostic then
@@ -534,9 +534,9 @@ function vectorFromAngleNorth(angle, distance)
     return x, y
 end
 ------------------------------
---	Plot related functions  --
+--  Plot related functions  --
 ------------------------------
---	Plot 1 (the main plot points)
+-- Plot 1 (the main plot points)
 function chasePlayer(delta) -- Chase player until enemies destroyed or player gets away
     --linear from init
     kraylorChaserCount = 0
@@ -916,7 +916,7 @@ function finalMessage(delta)
         plot1 = nil
     end
 end
---	Plot 2 (revolution, last batch of enemies)
+-- Plot 2 (revolution, last batch of enemies)
 function revolutionFomenting(delta) --At foment time, send fomenting msg (limited time) and set revolution time
     --started from plot 1, get ambassador
     if getScenarioTime() > foment_time then
@@ -1143,7 +1143,7 @@ function lastSabotage(delta) --Last ditch attempt to sabotage mission, the big g
         plot2 = nil
     end
 end
---	Plot 3 (enemies and artifacts)
+-- Plot 3 (enemies and artifacts)
 function balindorInterceptor(delta) --Mission prevention enemies
     --started from plot 1, get ambassador
     if distance(player, -50500, 84000) < 35000 then
@@ -1490,10 +1490,10 @@ function artifactByStation(delta) --When player docks, create nearby artifact. E
                     _(
                         "scienceDescription-artifact",
                         [[Object gives off unusual readings:
-			Beta radiation: %i
-			Gravity disruption: %i
-			Ionic phase shift: %i
-			Doppler instability: %i]]
+Beta radiation: %i
+Gravity disruption: %i
+Ionic phase shift: %i
+Doppler instability: %i]]
                     ),
                     nPangora.beta_radiation,
                     nPangora.gravity_disruption,
@@ -1525,9 +1525,9 @@ function artifactByStation(delta) --When player docks, create nearby artifact. E
                     _(
                         "scienceDescription-artifact",
                         [[Sensor readings of interest:
-			Gamma radiation: %i
-			Organic decay: %i
-			Gravity disruption: %i]]
+Gamma radiation: %i
+Organic decay: %i
+Gravity disruption: %i]]
                     ),
                     nNakor.gamma_radiation,
                     nNakor.organic_decay,
@@ -1558,9 +1558,9 @@ function artifactByStation(delta) --When player docks, create nearby artifact. E
                     _(
                         "scienceDescription-artifact",
                         [[Sensors show:
-			Ionic pase shift: %i
-			Organic decay: %i
-			Theta particle emission: %i]]
+Ionic pase shift: %i
+Organic decay: %i
+Theta particle emission: %i]]
                     ),
                     nScience37.ionic_phase_shift,
                     nScience37.organic_decay,
@@ -1588,10 +1588,10 @@ function artifactByStation(delta) --When player docks, create nearby artifact. E
                     _(
                         "scienceDescription-artifact",
                         [[Object gives off unusual readings:
-			Beta radiation: %i
-			Gravity disruption: %i
-			Ionic phase shift: %i
-			Doppler instability: %i]]
+Beta radiation: %i
+Gravity disruption: %i
+Ionic phase shift: %i
+Doppler instability: %i]]
                     ),
                     nPangora.beta_radiation,
                     nPangora.gravity_disruption,
@@ -1618,7 +1618,7 @@ function artifactByStation(delta) --When player docks, create nearby artifact. E
         end
     end
 end
---	Plot 4 (exploding artifact)
+-- Plot 4 (exploding artifact)
 function pangoraArtifactChange(delta)
     --started from plot 3, artifact by station
     if player.pangora_reading_change_message == nil then
@@ -1679,7 +1679,7 @@ function pangoraArtifactExplode(delta)
         plot4 = nil
     end
 end
---	Plot 5 (terrorist end)
+-- Plot 5 (terrorist end)
 function terroristEnd()
     plot5 = maintainTerrorists
     addGMMessage(_("msgGM", "Terrorist ending initiated"))
@@ -1736,7 +1736,7 @@ function maintainTerrorists()
     end
 end
 ------------------------------
---	Station Communications  --
+--  Station Communications  --
 ------------------------------
 function commsStation()
     if comms_target.comms_data == nil then

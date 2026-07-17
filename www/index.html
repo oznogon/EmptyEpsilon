@@ -83,11 +83,11 @@
         font-size: 3rem;
       }
 
-      h1:first-of-type, 
-      h2:first-of-type, 
-      h3:first-of-type, 
-      h4:first-of-type, 
-      h5:first-of-type, 
+      h1:first-of-type,
+      h2:first-of-type,
+      h3:first-of-type,
+      h4:first-of-type,
+      h5:first-of-type,
       h6:first-of-type {
         margin-top: 0;
       }
@@ -306,7 +306,7 @@
         display: inline-block;
       }
 
-      .ui-state-active a, .ui-state-active a:link, 
+      .ui-state-active a, .ui-state-active a:link,
       .ui-state-active a:visited {
         background: rgba(0,0,0,0.65);
       }
@@ -500,7 +500,7 @@
         line-height: 40px;
       }
 
-      h2.station::before, 
+      h2.station::before,
       h2.station::after {
         font-family: empty-epsilon;
       }
@@ -524,157 +524,157 @@
         opacity: 0.1;
       }
 
-      h2.helms::before, 
+      h2.helms::before,
       h2.helms::after {
         content: "r";
       }
 
-      h2.weapons::before, 
+      h2.weapons::before,
       h2.weapons::after {
         content: "l";
       }
 
-      h2.engineering::before, 
+      h2.engineering::before,
       h2.engineering::after {
         content: "q";
       }
 
-      h2.science::before, 
+      h2.science::before,
       h2.science::after {
         content: "k";
       }
 
-      h2.relay::before, 
+      h2.relay::before,
       h2.relay::after {
         content: "j";
       }
 
       @media only screen and (max-width: 1200px) {
-        
+
         #tabs {
           width: 1000px;
         }
-        
+
         .ui-tabs-vertical .ui-tabs-nav li a {
           font-size: 24px;
         }
-        
+
       }
 
       @media only screen and (max-width: 1000px) {
-        
+
         #tabs {
           width: 80%;
         }
-        
+
         .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
           font-size: 22px;
         }
-        
+
         .ui-tabs-vertical .ui-tabs-nav li a {
           font-size: 18px!important;
           padding: 0 15px!important;
         }
-        
+
         .ui-tabs-vertical .ui-tabs-panel {
           width: 68%;
         }
-        
+
       }
 
       @media only screen and (max-width: 800px) {
-        
+
         body {
           margin: 40px 0;
         }
-        
+
         h1.logo {
           width: 600px;
           height: 120px;
         }
-        
+
         a.image-link {
-          
+
         }
-        
+
         a.image-link.float-right {
           float: none;
           display: block;
           margin: 0 0 20px;
           text-align: center;
         }
-        
+
         .ui-tabs-vertical .ui-tabs-nav {
           width: 100%;
           float: none;
         }
-        
+
         .ui-tabs-vertical .ui-tabs-panel {
           width: 100%;
           float: none;
           box-sizing: border-box;
         }
-        
+
       }
 
       @media only screen and (max-width: 600px) {
-        
+
         body {
           margin: 30px 0;
         }
-        
+
         #tabs {
           width: 90%;
         }
-        
+
         a.image-link img {
           width: 100%;
         }
-        
+
         .ui-tabs-anchor {
           padding: 0 10px!important;
         }
-        
+
         .ui-tabs .ui-tabs-panel {
           padding: 20px 0;
         }
-        
+
         .gallery-image {
           width: 100%;
           display: block;
           margin: 20px 0 0;
         }
-        
+
         a.download {
           padding: 5px 10px;
-          height: auto; 
+          height: auto;
           line-height: inherit;
           border-radius: 100px;
         }
-        
+
         table.downloads tr td {
           padding: 5px 0;
         }
-        
+
         table.downloads tr th {
           font-size: 20px;
           padding: 25px 0 5px 0;
         }
-        
+
         h1.logo {
           width: 300px;
           height: 60px;
           margin: ;
         }
-        
+
         .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
           font-size: 21px;
         }
-        
+
         a.icon span.icon::before {
           margin: 0;
         }
-        
+
         a.icon {
           padding-left: 40px!important;
         }
@@ -728,12 +728,12 @@
         <script>
           function exec_send()
           {
-	          $.post('exec.lua', $("#exec-script").val(), function(data) {
-		          $("#exec-output").text(JSON.stringify(data));
-	          }, "json")
-	          .fail(function(x, y, reason) {
-		          $("#exec-output").text("FAIL:" + reason);
-	          });
+            $.post('exec.lua', $("#exec-script").val(), function(data) {
+              $("#exec-output").text(JSON.stringify(data));
+            }, "json")
+            .fail(function(x, y, reason) {
+              $("#exec-output").text("FAIL:" + reason);
+            });
           }
         </script>
       </section>
@@ -758,9 +758,9 @@
               .done(function(data) {
                 $("#get-output").text(JSON.stringify(JSON.parse(data), null, 2));
               })
-	            .fail(function(x, y, reason) {
-		            $("#get-output").text("FAIL:" + reason);
-	            });
+              .fail(function(x, y, reason) {
+                $("#get-output").text("FAIL:" + reason);
+              });
           }
         </script>
       </section>
@@ -786,8 +786,8 @@
               .done(function(data) {
                 $("#set-output").text(JSON.stringify(JSON.parse(data), null, 2));
               }).fail(function(x, y, reason) {
-		        $("#set-output").text("FAIL:" + reason);
-	          });
+            $("#set-output").text("FAIL:" + reason);
+            });
           }
         </script>
       </section>
@@ -855,5 +855,5 @@
       </script>
 
     </body>
-  
+
   </html>

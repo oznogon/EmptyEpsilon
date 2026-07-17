@@ -45,7 +45,7 @@
 
 require("utils.lua")
 require("place_station_scenario_utility.lua")
---	also uses supply_drop.lua
+-- also uses supply_drop.lua
 
 --------------------
 -- Initialization --
@@ -1498,7 +1498,7 @@ function setConstants()
         },
     }
     max_pyramid_tier = 15
-    --	patrol_probe value should be between 0 and 5 not inclusive (0 = no patrol probes). The higher the value, the faster the patrol probe and the fewer patrol probes available
+    -- patrol_probe value should be between 0 and 5 not inclusive (0 = no patrol probes). The higher the value, the faster the patrol probe and the fewer patrol probes available
     playerShipStats = {
         ["Atlantis"] = {
             strength = 52,
@@ -1770,7 +1770,7 @@ function setConstants()
             prox_scan = 1,
             epjam = 0,
         },
-        --	Custom player ships
+        -- Custom player ships
         ["Amalgam"] = {
             strength = 42,
             cargo = 7,
@@ -3017,7 +3017,7 @@ function stationReports()
                                 station.comms_data.weapon_available.HVLI,
                                 station.comms_data.weapon_cost.HVLI
                             )
-                            --							out = string.format("%s\n      Cost multipliers and Max Refill:   Friend: %.1f %.1f,   Neutral: %.1f %.1f",out,station.comms_data.reputation_cost_multipliers.friend,station.comms_data.max_weapon_refill_amount.friend,station.comms_data.reputation_cost_multipliers.neutral,station.comms_data.max_weapon_refill_amount.neutral)
+                            -- out = string.format("%s\n      Cost multipliers and Max Refill:   Friend: %.1f %.1f,   Neutral: %.1f %.1f",out,station.comms_data.reputation_cost_multipliers.friend,station.comms_data.max_weapon_refill_amount.friend,station.comms_data.reputation_cost_multipliers.neutral,station.comms_data.max_weapon_refill_amount.neutral)
                             out = string.format(
                                 _(
                                     "stationReport-msgGM",
@@ -3186,7 +3186,7 @@ function testNonDBShips()
         end)
     end
 end
---	Player ship functions
+-- Player ship functions
 function updatePlayerSoftTemplate(p)
     local tempTypeName = p:getTypeName()
     if tempTypeName ~= nil then
@@ -3326,7 +3326,7 @@ end
 function playerDestroyed(self, instigator)
     player_ship_death_count = player_ship_death_count + 1
 end
---	Construct environment and related functions
+-- Construct environment and related functions
 function environmentObject(ref_x, ref_y, dist, axis)
     if ref_x == nil or ref_y == nil or dist == nil then
         print(
@@ -3741,7 +3741,7 @@ function constructEnvironment()
             (wja_x + wjb_x) / 2,
             (wja_y + wjb_y) / 2 + (gap_size / 2) * 1.2
         )
-        --		moon_barrier:setDistanceFromMovementPlane(-planet_radius*.08*.2)
+        -- moon_barrier:setDistanceFromMovementPlane(-planet_radius*.08*.2)
         moon_barrier:setCallSign(
             moon_list[selected_moon].name[math.random(
                 1,
@@ -3809,7 +3809,7 @@ function constructEnvironment()
             end
             local barrier_choice =
                 barrier_choices[math.random(1, #barrier_choices)]
-            --			local barrier_choice = "Asteroids"
+            -- local barrier_choice = "Asteroids"
             if barrier_choice == "Black Hole" then
                 local bh =
                     BlackHole():setPosition(barrier_center_x, barrier_center_y)
@@ -3820,14 +3820,14 @@ function constructEnvironment()
                 station.barrier = "black hole"
                 local a_to_bh = distance(warp_jammer_a, bh)
                 local b_to_bh = distance(warp_jammer_b, bh)
-                --				print("a to bh:",a_to_bh,"b to bh:",b_to_bh,"a range:",warp_jammer_a.range,"b range:",warp_jammer_b.range)
-                --				print("a and b:",warp_jammer_a,warp_jammer_b)
-                --				print(station:getCallSign(),station_b:getCallSign())
+                -- print("a to bh:",a_to_bh,"b to bh:",b_to_bh,"a range:",warp_jammer_a.range,"b range:",warp_jammer_b.range)
+                -- print("a and b:",warp_jammer_a,warp_jammer_b)
+                -- print(station:getCallSign(),station_b:getCallSign())
                 if
                     a_to_bh > warp_jammer_a.range + 5000
                     and b_to_bh > warp_jammer_b.range + 5000
                 then
-                    --				   	print("met")
+                    -- print("met")
                     local aj_x, aj_y = vectorFromAngleNorth(aj_angle, 6000)
                     local ncj_x = 0
                     local ncj_y = 0
@@ -3899,7 +3899,7 @@ function constructEnvironment()
                 local wj_range =
                     math.min(warp_jammer_a.range, warp_jammer_b.range)
                 wj_range = distance(warp_jammer_a, wj) - wj_range
-                --				print("range:",wj_range)
+                -- print("range:",wj_range)
                 wj:setRange(wj_range)
                 wj.range = wj_range
                 table.insert(station.warp_jammer_list, wj)
@@ -4144,7 +4144,7 @@ function constructEnvironment()
             end
         end
     end
-    --	set up for protect the freighter plot
+    -- set up for protect the freighter plot
     local t_x, t_y =
         vectorFromAngleNorth(initial_angle, 6000 + difficulty * 5000)
     critical_transport = randomTransportType()
@@ -4165,7 +4165,7 @@ function constructEnvironment()
         critical_transport:getCallSign(),
         station_regional_hq:getCallSign()
     )
-    --	freighter attackers
+    -- freighter attackers
     local attack_angle = initial_angle + 180
     local l1_x, l1_y = vectorFromAngleNorth(initial_angle, 25000)
     local leader_1 = CpuShip()
@@ -5328,7 +5328,7 @@ function farEnough(o_x, o_y, obj_dist)
     return far_enough
 end
 ---------------------------------------
---	Support for constant plot lines  --
+--  Support for constant plot lines  --
 ---------------------------------------
 function refreshBarrierPatrol(self, instigator)
     if
@@ -5535,8 +5535,8 @@ function expeditionMaintenance(delta)
                         ship:setCallSign(
                             generateCallSign(nil, ship:getFaction())
                         )
-                        --						ship:setAcceleration(ship:getAcceleration()*1.1)
-                        --						ship:setImpulseMaxSpeed(ship:getImpulseMaxSpeed()*1.1)
+                        -- ship:setAcceleration(ship:getAcceleration()*1.1)
+                        -- ship:setImpulseMaxSpeed(ship:getImpulseMaxSpeed()*1.1)
                         ship.home_station = station
                         ship.home_station_name = station:getCallSign()
                         ship:setCommsScript(""):setCommsFunction(commsShip)
@@ -5714,8 +5714,8 @@ function taskMaintenance(delta)
                             ship:setCallSign(
                                 generateCallSign(nil, ship:getFaction())
                             )
-                            --							ship:setAcceleration(ship:getAcceleration()*1.1)
-                            --							ship:setImpulseMaxSpeed(ship:getImpulseMaxSpeed()*1.1)
+                            -- ship:setAcceleration(ship:getAcceleration()*1.1)
+                            -- ship:setImpulseMaxSpeed(ship:getImpulseMaxSpeed()*1.1)
                             table.insert(station.task_fleet, ship)
                         end
                     end
@@ -6230,7 +6230,7 @@ function pickTransportTarget(transport)
     if #station_list > 0 then
         local count_repeat_loop = 0
         repeat
-            --		transport_target = transport_stations[math.random(1,#transport_stations)]
+            -- transport_target = transport_stations[math.random(1,#transport_stations)]
             transport_target = station_list[math.random(1, #station_list)]
             count_repeat_loop = count_repeat_loop + 1
         until count_repeat_loop > max_repeat_loop
@@ -6281,8 +6281,8 @@ function angleFromVectorNorth(p1x, p1y, p2x, p2y)
     return (360 - (RAD2DEG * theta)) % 360
 end
 function vectorFromAngleNorth(angle, distance)
-    --	print("input angle to vectorFromAngleNorth:")
-    --	print(angle)
+    -- print("input angle to vectorFromAngleNorth:")
+    -- print(angle)
     angle = (angle + 270) % 360
     local x, y = vectorFromAngle(angle, distance)
     return x, y
@@ -11117,7 +11117,7 @@ function enemyComms(comms_data)
         addCommsReply(taunt_option, function()
             if random(0, 100) <= taunt_threshold then
                 local current_order = comms_target:getOrder()
-                --				print("order: " .. current_order)
+                -- print("order: " .. current_order)
                 --Possible order strings returned:
                 --Roaming
                 --Fly towards
@@ -13263,7 +13263,7 @@ end
 -- Utility functions --
 -----------------------
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -13672,7 +13672,7 @@ function getTemplatePool(max_strength)
         end
     else --full
         for current_ship_template, details in pairs(ship_template) do
-            --			print("current ship template",current_ship_template,"details",details,"max strength:",max_strength)
+            -- print("current ship template",current_ship_template,"details",details,"max strength:",max_strength)
             if details.strength <= max_strength then
                 table.insert(template_pool, current_ship_template)
             end
@@ -13698,13 +13698,13 @@ end
 function friendlyVesselDestroyed(self, instigator)
     string.format("")
     --[[
-	tempShipType = self:getTypeName()
-	table.insert(friendlyVesselDestroyedNameList,self:getCallSign())
-	table.insert(friendlyVesselDestroyedType,tempShipType)
-	table.insert(friendlyVesselDestroyedValue,ship_template[tempShipType].strength)
-	--]]
+    tempShipType = self:getTypeName()
+    table.insert(friendlyVesselDestroyedNameList,self:getCallSign())
+    table.insert(friendlyVesselDestroyedType,tempShipType)
+    table.insert(friendlyVesselDestroyedValue,ship_template[tempShipType].strength)
+    ]]
 end
---		Mortal repair crew functions. Includes coolant loss as option to losing repair crew
+-- Mortal repair crew functions. Includes coolant loss as option to losing repair crew
 function healthCheck(delta)
     healthCheckTimer = healthCheckTimer - delta
     if healthCheckTimer < 0 then
@@ -14241,7 +14241,7 @@ function playerShipCargoInventory(p)
         "Yellow"
     )
 end
---		Generate call sign functions
+-- Generate call sign functions
 function generateCallSign(prefix, faction)
     if faction == nil then
         if prefix == nil then
@@ -15194,7 +15194,7 @@ function stockTemplate(enemyFaction, template)
     return ship
 end
 --------------------------------------------------------------------------------------------
---	Additional enemy ships with some modifications from the original template parameters  --
+--  Additional enemy ships with some modifications from the original template parameters  --
 --------------------------------------------------------------------------------------------
 function farco3(enemyFaction)
     local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
@@ -15207,7 +15207,6 @@ function farco3(enemyFaction)
     ship:setTypeName("Farco 3")
     ship:setShieldsMax(60, 40) --stronger shields (vs 50, 40)
     ship:setShields(60, 40)
-    --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
     ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
     ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
     local farco_3_db = queryScienceDatabase("Ships", "Frigate", "Farco 3")
@@ -15282,7 +15281,6 @@ function farco8(enemyFaction)
     ship:setTypeName("Farco 8")
     ship:setShieldsMax(80, 50) --stronger shields (vs 50, 40)
     ship:setShields(80, 50)
-    --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
     ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
     ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
     ship:setTubeLoadTime(0, 30) --faster (vs 60)
@@ -15323,7 +15321,6 @@ function farco11(enemyFaction)
     ship:setShieldsMax(80, 50) --stronger shields (vs 50, 40)
     ship:setShields(80, 50)
     ship:setRotationMaxSpeed(15) --faster maneuver (vs 10)
-    --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
     ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
     ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
     ship:setBeamWeapon(2, 20, 0, 1800, 5.0, 4.0) --additional sniping beam
@@ -15363,7 +15360,6 @@ function farco13(enemyFaction)
     ship:setShieldsMax(90, 70) --stronger shields (vs 50, 40)
     ship:setShields(90, 70)
     ship:setRotationMaxSpeed(15) --faster maneuver (vs 10)
-    --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
     ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
     ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
     ship:setBeamWeapon(2, 20, 0, 1800, 5.0, 4.0) --additional sniping beam
@@ -15592,7 +15588,6 @@ function waddle5(enemyFaction)
     end)
     ship:setTypeName("Waddle 5")
     ship:setWarpDrive(true)
-    --				   Index,  Arc,	  Dir, Range, Cycle,	Damage
     ship:setBeamWeapon(2, 70, -30, 600, 5.0, 2.0) --adjust beam direction to match starboard side (vs -35)
     local waddle_5_db = queryScienceDatabase("Ships", "Starfighter", "Waddle 5")
     if waddle_5_db == nil then
@@ -15629,7 +15624,6 @@ function jade5(enemyFaction)
     ship:setTypeName("Jade 5")
     ship:setJumpDrive(true)
     ship:setJumpDriveRange(5000, 35000)
-    --				   Index,  Arc,	  Dir, Range, Cycle,	Damage
     ship:setBeamWeapon(2, 70, -30, 600, 5.0, 2.0) --adjust beam direction to match starboard side (vs -35)
     local jade_5_db = queryScienceDatabase("Ships", "Starfighter", "Jade 5")
     if jade_5_db == nil then
@@ -15867,7 +15861,6 @@ function enforcer(enemyFaction)
     ship:setShields(200, 100, 100)
     ship:setHullMax(100) --stronger hull (vs 70)
     ship:setHull(100)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 30, 5, 1500, 6, 10) --narrower (vs 60), longer (vs 1000), stronger (vs 8)
     ship:setBeamWeapon(1, 30, -5, 1500, 6, 10)
     ship:setBeamWeapon(2, 0, 0, 0, 0, 0) --fewer (vs 4)
@@ -15924,7 +15917,6 @@ function predator(enemyFaction)
     ship:setRotationMaxSpeed(15) --faster maneuver (vs 6)
     ship:setJumpDrive(true)
     ship:setJumpDriveRange(5000, 35000)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 90, 0, 1000, 6, 4) --more (vs 0)
     ship:setBeamWeapon(1, 90, 180, 1000, 6, 4)
     ship:setWeaponTubeCount(8) --more (vs 3)
@@ -15994,7 +15986,6 @@ function atlantisY42(enemyFaction)
     ship:setShields(300, 200, 300, 200)
     ship:setImpulseMaxSpeed(65) --faster impulse (vs 30)
     ship:setRotationMaxSpeed(15) --faster maneuver (vs 3.5)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(2, 80, 190, 1500, 6, 8) --narrower (vs 100)
     ship:setBeamWeapon(3, 80, 170, 1500, 6, 8) --extra (vs 3 beams)
     ship:setWeaponStorageMax("Homing", 16) --more (vs 4)
@@ -16040,7 +16031,6 @@ function starhammerV(enemyFaction)
     ship:setRotationMaxSpeed(15) --faster maneuver (vs 6)
     ship:setShieldsMax(450, 350, 250, 250, 350) --stronger shields (vs 450, 350, 150, 150, 350)
     ship:setShields(450, 350, 250, 250, 350)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(4, 60, 180, 1500, 8, 11) --extra rear facing beam
     ship:setWeaponStorageMax("Homing", 16) --more (vs 4)
     ship:setWeaponStorage("Homing", 16)
@@ -16087,7 +16077,6 @@ function tyr(enemyFaction)
     ship:setShields(400, 300, 300, 400, 300, 300)
     ship:setHullMax(100) --stronger hull (vs 70)
     ship:setHull(100)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 90, -60, 2500, 6, 8) --stronger beams, broader coverage
     ship:setBeamWeapon(1, 90, -120, 2500, 6, 8)
     ship:setBeamWeapon(2, 90, 60, 2500, 6, 8)
@@ -16128,7 +16117,6 @@ function gnat(enemyFaction)
     ship:setHull(15)
     ship:setImpulseMaxSpeed(140) --faster impulse (vs 120)
     ship:setRotationMaxSpeed(25) --faster maneuver (vs 10)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 40, 0, 600, 4, 3) --weaker (vs 6) beam
     local gnat_db = queryScienceDatabase("Ships", "No Class", "Gnat")
     if gnat_db == nil then
@@ -16166,7 +16154,6 @@ function cucaracha(enemyFaction)
     ship:setHull(100)
     ship:setRotationMaxSpeed(20) --faster maneuver (vs 10)
     ship:setAcceleration(30) --faster acceleration (vs 15)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 60, 0, 1500, 6, 10) --extra rear facing beam
     local cucaracha_db = queryScienceDatabase("Ships", "No Class", "Cucaracha")
     if cucaracha_db == nil then
@@ -16199,7 +16186,6 @@ function starhammerIII(enemyFaction)
         end
     end)
     ship:setTypeName("Starhammer III")
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(4, 60, 180, 1500, 8, 11) --extra rear facing beam
     ship:setTubeSize(0, "large")
     ship:setWeaponStorageMax("Homing", 16) --more (vs 4)
@@ -16350,7 +16336,6 @@ function phobosT4(enemyFaction)
     ship:setRotationMaxSpeed(20) --faster maneuver (vs 10)
     ship:setShieldsMax(80, 30) --stronger shields (vs 50,40)
     ship:setShields(80, 30)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 90, -15, 1500, 6, 6) --longer (vs 1200), faster (vs 8)
     ship:setBeamWeapon(1, 90, 15, 1500, 6, 6)
     local phobos_t4_db = queryScienceDatabase("Ships", "Frigate", "Phobos T4")
@@ -16731,7 +16716,7 @@ function addShipToDatabase(
     end
 end
 ----------------------------------------------------------------------------------------
---	Additional player ships with modifications from the original template parameters  --
+--  Additional player ships with modifications from the original template parameters  --
 ----------------------------------------------------------------------------------------
 function createPlayerShipMixer()
     playerAmalgam = PlayerSpaceship()
@@ -16751,12 +16736,10 @@ function createPlayerShipMixer()
     playerAmalgam:setRotationMaxSpeed(8) --slower (vs 10)
     playerAmalgam:setShieldsMax(150, 150) --weaker shields (vs 200)
     playerAmalgam:setShields(150, 150)
-    --								  Arc, Dir, Range, CycleTime, Dmg
     playerAmalgam:setBeamWeapon(0, 90, -20, 1200, 6, 8) --narrower (vs 100), shorter (vs 1500)
     playerAmalgam:setBeamWeapon(1, 90, 20, 1200, 6, 8) --narrower (vs 100), shorter (vs 1500)
     playerAmalgam:setBeamWeapon(2, 10, -60, 1000, 4, 6) --additional beam
     playerAmalgam:setBeamWeapon(3, 10, 60, 1000, 4, 6) --additional beam
-    --											Arc,  Dir, Rotate speed
     playerAmalgam:setBeamWeaponTurret(2, 60, -60, 0.6)
     playerAmalgam:setBeamWeaponTurret(3, 60, 60, 0.6)
     playerAmalgam:setWeaponTubeCount(4) --2 fewer broadside, 1 extra mine (vs 5)
@@ -16791,11 +16774,9 @@ function createPlayerShipFlipper()
     playerFlipper:setTypeName("Midian")
     playerFlipper:setRadarTrace("cruiser.png") --different radar trace
     playerFlipper:setWarpSpeed(320)
-    --                  				Arc, Dir, Range, CycleTime, Dmg
     playerFlipper:setBeamWeapon(0, 50, -20, 1000, 6, 4) --beams (vs none)
     playerFlipper:setBeamWeapon(1, 50, 20, 1000, 6, 4)
     playerFlipper:setBeamWeapon(2, 10, 180, 1000, 6, 2)
-    --									     Arc, Dir, Rotate speed
     playerFlipper:setBeamWeaponTurret(2, 220, 180, 0.3)
     playerFlipper:setWeaponTubeCount(5) --fewer (vs 7)
     playerFlipper:setWeaponTubeDirection(0, -2) --angled (vs front)
@@ -16847,9 +16828,7 @@ function createPlayerShipInk()
         playerInk.max_jump_range
     )
     playerInk:setJumpDriveCharge(playerInk.max_jump_range)
-    --                 				 Arc, Dir, Range, CycleTime, Damage
     playerInk:setBeamWeapon(0, 10, 0, 1000, 4, 4) --one beam (vs 0)
-    --									   Arc,	  Dir, Rotate speed
     playerInk:setBeamWeaponTurret(0, 80, 0, 1) --slow turret
     playerInk:setWeaponTubeDirection(0, 0) --forward facing (vs left)
     playerInk:setWeaponTubeDirection(3, 0) --forward facing (vs right)
@@ -16892,10 +16871,8 @@ function createPlayerShipClaw()
     playerRaven:setShields(100, 100)
     playerRaven:setHullMax(150) --weaker hull (vs 200)
     playerRaven:setHull(150)
-    --                 				 Arc, Dir, Range,   CycleTime,  Damage
     playerRaven:setBeamWeapon(0, 10, -90, 900, 6, 10) --left (vs front) shorter (vs 1000)
     playerRaven:setBeamWeapon(1, 10, 90, 900, 6, 10) --right (vs front) shorter (vs 1000)
-    --										Arc,  Dir, Rotate speed
     playerRaven:setBeamWeaponTurret(0, 90, -90, 1)
     playerRaven:setBeamWeaponTurret(1, 90, 90, 1)
     playerRaven:setWeaponTubeCount(6) --more (vs 3)
@@ -16953,7 +16930,7 @@ function moonCollisionCheck()
                 else
                     ship_distance = 400
                 end
-                --				print("CPU ship object distance:",obj_dist,"ship distance:",ship_distance,"moon radius:",moon_barrier.moon_radius)
+                -- print("CPU ship object distance:",obj_dist,"ship distance:",ship_distance,"moon radius:",moon_barrier.moon_radius)
                 if
                     obj_dist
                     <= moon_barrier.moon_radius + ship_distance + 200
@@ -16974,7 +16951,7 @@ function moonCollisionCheck()
                 else
                     ship_distance = 400
                 end
-                --				print("Player ship object distance:",obj_dist,"ship distance:",ship_distance,"moon radius:",moon_barrier.moon_radius)
+                -- print("Player ship object distance:",obj_dist,"ship distance:",ship_distance,"moon radius:",moon_barrier.moon_radius)
                 if
                     obj_dist
                     <= moon_barrier.moon_radius + ship_distance + 200
@@ -18128,13 +18105,13 @@ function bioSignatureCycle(obj, delta)
     if bio < 0 then
         bio = 1
     end
-    --	bio = random(0,1)
+    -- bio = random(0,1)
     obj:setRadarSignatureInfo(grv, ele, bio)
-    --	obj:setCallSign(string.format("%f",obj:getRadarSignatureBiological()))
+    -- obj:setCallSign(string.format("%f",obj:getRadarSignatureBiological()))
 end
 
 ------------------------
---	Update functions  --
+--  Update functions  --
 ------------------------
 function updateInner(delta)
     if delta == 0 then

@@ -53,7 +53,7 @@ public:
     static GuiTheme* getTheme(const string& name);
     //Will return default theme if not found
     static GuiTheme* getCurrentTheme();
-    static void setCurrentTheme(const string &name); 
+    static void setCurrentTheme(const string &name);
     static bool loadTheme(const string& name, const string& resource_name);
 
     static glm::u8vec4 toColor(const string& s);

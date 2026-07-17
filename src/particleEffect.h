@@ -79,7 +79,7 @@ private:
 
     std::vector<Particle> particles;
     std::vector<Particle>::iterator first_expired;
-    
+
     std::vector<ParticleData> particles_renderdata;
     sp::Shader* shader = nullptr;
 };

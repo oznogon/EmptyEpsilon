@@ -29,7 +29,7 @@ require("utils.lua")
 require("place_station_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
---	also uses supply_drop.lua
+-- also uses supply_drop.lua
 
 --------------------
 -- Initialization --
@@ -94,16 +94,16 @@ function setVariations()
             },
         }
         difficulty = murphy_config[getScenarioSetting("Murphy")].number
-        --	affects:
-        --		sensor buoy scan complexity and depth (ads, transport info, station info)
-        --		sensor jammer scan complexity and depth
-        --		nebula concealment of mine fields
-        --		availability of gossip
-        --		repair crew availability
-        --		coolant availability
-        --		named character availability
-        --		taunted enemy retaliation choice possibilities
-        --		revival of repair crew chance when zero repair crew present
+        -- affects:
+        -- sensor buoy scan complexity and depth (ads, transport info, station info)
+        -- sensor jammer scan complexity and depth
+        -- nebula concealment of mine fields
+        -- availability of gossip
+        -- repair crew availability
+        -- coolant availability
+        -- named character availability
+        -- taunted enemy retaliation choice possibilities
+        -- revival of repair crew chance when zero repair crew present
         adverseEffect = murphy_config[getScenarioSetting("Murphy")].adverse
         coolant_loss = murphy_config[getScenarioSetting("Murphy")].lose_coolant
         coolant_gain = murphy_config[getScenarioSetting("Murphy")].gain_coolant
@@ -1616,7 +1616,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            --	Custom player ships
+            -- Custom player ships
             ["Amalgam"] = {
                 strength = 42,
                 cargo = 7,
@@ -2701,7 +2701,7 @@ function mainGMButtonsAfterPause()
     addGMFunction(_("buttonGM", "+Station Reports"), stationReports)
     addGMFunction(_("buttonGM", "Nerf Devourer"), nerfDevourer)
     addGMFunction(_("buttonGM", "Un-nerf Devourer"), function()
-        --           					 Arc, Dir, Range, Cycle, Damage
+        --  Arc, Dir, Range, Cycle, Damage
         devourer:setBeamWeapon(0, 90, 0, 3200, 3, 10)
         devourer:setBeamWeapon(1, 90, 22.5, 3200, 3, 10)
         devourer:setBeamWeapon(2, 90, 45, 3200, 3, 10)
@@ -2889,7 +2889,7 @@ function stationReports()
                                 station.comms_data.weapon_available.HVLI,
                                 station.comms_data.weapon_cost.HVLI
                             )
-                            --							out = string.format(_("stationReport-msgGM", "%s\n      Cost multipliers and Max Refill:   Friend: %.1f %.1f,   Neutral: %.1f %.1f"),out,station.comms_data.reputation_cost_multipliers.friend,station.comms_data.max_weapon_refill_amount.friend,station.comms_data.reputation_cost_multipliers.neutral,station.comms_data.max_weapon_refill_amount.neutral)
+                            -- out = string.format(_("stationReport-msgGM", "%s\n      Cost multipliers and Max Refill:   Friend: %.1f %.1f,   Neutral: %.1f %.1f"),out,station.comms_data.reputation_cost_multipliers.friend,station.comms_data.max_weapon_refill_amount.friend,station.comms_data.reputation_cost_multipliers.neutral,station.comms_data.max_weapon_refill_amount.neutral)
                             out = string.format(
                                 _(
                                     "stationReport-msgGM",
@@ -2906,7 +2906,7 @@ function stationReports()
                                     service,
                                     cost
                                 )
-                                --							out = string.format(_("stationReport-msgGM", "%s\n      %s: %s %s"),out,service,cost,station.comms_data.service_available[service])
+                                -- out = string.format(_("stationReport-msgGM", "%s\n      %s: %s %s"),out,service,cost,station.comms_data.service_available[service])
                             end
                             if station.comms_data.jump_overcharge then
                                 out = string.format(
@@ -3052,7 +3052,7 @@ function stationReports()
         mainGMButtons()
     end
 end
---	Player ship functions
+-- Player ship functions
 function updatePlayerSoftTemplate(p)
     local tempTypeName = p:getTypeName()
     if tempTypeName ~= nil then
@@ -3168,13 +3168,13 @@ function setPlayers(p)
     p:setFaction(player_faction)
     updatePlayerSoftTemplate(p)
     player_ship_spawn_count = player_ship_spawn_count + 1
-    --	p:onDestroyed(playerDestroyed)
-    --	p:onDestruction(playerDestruction)
+    -- p:onDestroyed(playerDestroyed)
+    -- p:onDestruction(playerDestruction)
     if p:getReputationPoints() == 0 then
         p:setReputationPoints(reputation_start_amount)
     end
 end
---	Construct environment and related functions
+-- Construct environment and related functions
 function environmentObject(ref_x, ref_y, dist, axis)
     if ref_x == nil or ref_y == nil or dist == nil then
         print(
@@ -3252,20 +3252,20 @@ end
 function constructEnvironment()
     place_space = {}
     local faction_circle = {
-        --	player faction:	Hum	USN	TSN	CUF
-        "Exuari", --	Ene	Ene	Ene	Ene
-        "Ghosts", --	Ene	Ene	Neu	Ene
-        "TSN", --	Frn	Ene	Frn	Neu
-        "Independent", --	Neu	Neu	Neu	Neu
-        "Human Navy", --	Frn	Frn	Frn	Frn
-        "Arlenians", --	Neu	Neu	Ene	Neu
-        "Ktlitans", --	Ene	Ene	Ene	Neu
-        "CUF", --	Frn	Neu	Neu	Frn
-        "USN", --	Frn	Frn	Ene	Neu
-        "Kraylor", --	Ene	Neu	Ene	Ene
-        "Ghosts", --	Ene	Ene	Neu	Ene
-        --	enemy count:			5	5	5	4
-        --	neutral/friendly count:	6	6	6	7
+        -- player faction:        Hum    USN    TSN    CUF
+        "Exuari", --              Ene    Ene    Ene    Ene
+        "Ghosts", --              Ene    Ene    Neu    Ene
+        "TSN", --                 Frn    Ene    Frn    Neu
+        "Independent", --         Neu    Neu    Neu    Neu
+        "Human Navy", --          Frn    Frn    Frn    Frn
+        "Arlenians", --           Neu    Neu    Ene    Neu
+        "Ktlitans", --            Ene    Ene    Ene    Neu
+        "CUF", --                 Frn    Neu    Neu    Frn
+        "USN", --                 Frn    Frn    Ene    Neu
+        "Kraylor", --             Ene    Neu    Ene    Ene
+        "Ghosts", --              Ene    Ene    Neu    Ene
+        -- enemy count:            5      5      5      4
+        -- neutral/friendly count: 6      6      6      7
     }
     local faction_letter = {
         ["Human Navy"] = "H",
@@ -3300,12 +3300,12 @@ function constructEnvironment()
         ["Mehklar"] = { id = "M", count = 0 },
     }
     station_list = {}
-    --	player_factions = {"Human Navy","CUF","USN","TSN"}
-    --	player_faction = player_factions[math.random(1,#player_factions)]
-    --	ir_faction = {player_faction,"Human Navy"}	--inner ring faction list
-    --	if player_faction == "Human Navy" then
-    --		ir_faction = {"Human Navy","CUF","USN","TSN"}
-    --	end
+    -- player_factions = {"Human Navy","CUF","USN","TSN"}
+    -- player_faction = player_factions[math.random(1,#player_factions)]
+    -- ir_faction = {player_faction,"Human Navy"} --inner ring faction list
+    -- if player_faction == "Human Navy" then
+    -- ir_faction = {"Human Navy","CUF","USN","TSN"}
+    -- end
     player_faction = "Human Navy"
     dev_x = random(100000, 130000)
     dev_y = random(100000, 130000)
@@ -4358,9 +4358,9 @@ function vectorFromAngleNorth(angle, distance)
     return x, y
 end
 ---------------------------------------
---	Support for constant plot lines  --
+-- Support for constant plot lines  --
 ---------------------------------------
---	Maintenance functions
+-- Maintenance functions
 function defenseMaintenance(delta)
     if #station_list > 0 then
         for station_index, station in ipairs(station_list) do
@@ -4489,7 +4489,7 @@ function warpJammerMaintenance()
     end
     maintenancePlot = defenseMaintenance
 end
---	Sensor jammer functions
+-- Sensor jammer functions
 function sensorJammerPickupProcess(self, retriever)
     local jammer_call_sign = self:getCallSign()
     sensor_jammer_list[jammer_call_sign] = nil
@@ -4635,13 +4635,13 @@ function updatePlayerLongRangeSensors(p)
         end
     end
 end
---	Transport selection and direction functions
+-- Transport selection and direction functions
 function pickTransportTarget(transport)
     local transport_target = nil
     if #station_list > 0 then
         local count_repeat_loop = 0
         repeat
-            --		transport_target = transport_stations[math.random(1,#transport_stations)]
+            -- transport_target = transport_stations[math.random(1,#transport_stations)]
             transport_target = station_list[math.random(1, #station_list)]
             count_repeat_loop = count_repeat_loop + 1
         until count_repeat_loop > max_repeat_loop
@@ -4678,7 +4678,7 @@ function randomTransportType()
         :setCommsFunction(commsShip),
         freighter_size
 end
---	Early end
+-- Early end
 function enforcerEnd()
     enforcers = {}
     for i, p in ipairs(getActivePlayerShips()) do
@@ -9152,7 +9152,7 @@ function enemyComms(comms_data)
         addCommsReply(taunt_option, function()
             if random(0, 100) <= taunt_threshold then
                 local current_order = comms_target:getOrder()
-                --				print("order: " .. current_order)
+                -- print("order: " .. current_order)
                 --Possible order strings returned:
                 --Roaming
                 --Fly towards
@@ -11346,7 +11346,7 @@ end
 -- Utility functions --
 -----------------------
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -11754,7 +11754,7 @@ function getTemplatePool(max_strength)
         end
     else --full
         for current_ship_template, details in pairs(ship_template) do
-            --			print("current ship template",current_ship_template,"details",details,"max strength:",max_strength)
+            -- print("current ship template",current_ship_template,"details",details,"max strength:",max_strength)
             if details.strength <= max_strength then
                 table.insert(template_pool, current_ship_template)
             end
@@ -11780,17 +11780,17 @@ end
 function friendlyVesselDestroyed(self, instigator)
     string.format("")
     --[[
-	tempShipType = self:getTypeName()
-	table.insert(friendlyVesselDestroyedNameList,self:getCallSign())
-	table.insert(friendlyVesselDestroyedType,tempShipType)
-	table.insert(friendlyVesselDestroyedValue,ship_template[tempShipType].strength)
-	--]]
+    tempShipType = self:getTypeName()
+    table.insert(friendlyVesselDestroyedNameList,self:getCallSign())
+    table.insert(friendlyVesselDestroyedType,tempShipType)
+    table.insert(friendlyVesselDestroyedValue,ship_template[tempShipType].strength)
+    ]]
 end
 
 ------------------------
---	Update functions  --
+-- Update functions  --
 ------------------------
---	Update loop related functions
+-- Update loop related functions
 function updatePlayerTubeSizeBanner(p)
     if p.tube_size ~= nil then
         local tube_size_banner = string.format(
@@ -12592,7 +12592,7 @@ function deployVirus(p)
 end
 function nerfDevourer()
     if devourer ~= nil and devourer:isValid() then
-        --           				 Arc, Dir, Range, Cycle, Damage
+        --  Arc, Dir, Range, Cycle, Damage
         devourer:setBeamWeapon(0, 90, 0, 1000, 30, 10)
         devourer:setBeamWeapon(1, 90, 22.5, 1000, 30, 10)
         devourer:setBeamWeapon(2, 90, 45, 1000, 30, 10)
@@ -12601,7 +12601,7 @@ function nerfDevourer()
         devourer:setTubeLoadTime(1, 180)
         devourer:setTubeLoadTime(2, 180)
         if difficulty <= 1 then
-            --           				 Arc, Dir, Range, Cycle, Damage
+            --  Arc, Dir, Range, Cycle, Damage
             devourer:setBeamWeapon(4, 90, 0, 1000, 30, 10)
             devourer:setBeamWeapon(5, 90, 22.5, 1000, 30, 10)
             devourer:setTubeLoadTime(3, 180)
@@ -12609,7 +12609,7 @@ function nerfDevourer()
             devourer:setTubeLoadTime(5, 180)
         end
         if difficulty < 1 then
-            --           				 Arc, Dir, Range, Cycle, Damage
+            --  Arc, Dir, Range, Cycle, Damage
             devourer:setBeamWeapon(6, 90, 0, 1000, 30, 10)
             devourer:setBeamWeapon(7, 90, 22.5, 1000, 30, 10)
             devourer:setTubeLoadTime(6, 180)
@@ -12752,7 +12752,7 @@ function defendDevourer(p)
         end
     end
 end
---		Mortal repair crew functions. Includes coolant loss as option to losing repair crew
+-- Mortal repair crew functions. Includes coolant loss as option to losing repair crew
 function healthCheck(delta)
     healthCheckTimer = healthCheckTimer - delta
     if healthCheckTimer < 0 then

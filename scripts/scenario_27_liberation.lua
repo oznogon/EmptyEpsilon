@@ -47,7 +47,7 @@ require("player_ship_upgrade_downgrade_path_scenario_utility.lua")
 require("spawn_ships_scenario_utility.lua")
 require("comms_scenario_utility.lua")
 
---	Initialization routines
+-- Initialization routines
 function init()
     scenario_version = "1.0.1"
     ee_version = "2024.12.08"
@@ -1466,7 +1466,7 @@ function setConstants() --variables that don't change
             hop_range = 580,
             create = stockTemplate,
         },
-        --		["Brush"] =				{strength = 10,	adder = true,	missiler = false,	beamer = false,	frigate = false,	chaser = false,	warper = false,	jumper = false,	fighter = false,	drone = false,	unusual = false,	base = false,	short_range_radar = 5000,	hop_angle = 0,	hop_range = 580,	create = brush},
+        -- ["Brush"] = {strength = 10, adder = true, missiler = false, beamer = false, frigate = false, chaser = false, warper = false, jumper = false, fighter = false, drone = false, unusual = false, base = false, short_range_radar = 5000, hop_angle = 0, hop_range = 580, create = brush},
         ["Adder MK8"] = {
             strength = 10,
             adder = true,
@@ -3602,7 +3602,7 @@ function mainGMButtons()
     addGMFunction(_("buttonGM", "+Spawn Ship(s)"), spawnGMShips)
 end
 function constructEnvironment()
-    --	set player faction and friendly factions
+    -- set player faction and friendly factions
     player_factions = { "Human Navy", "CUF", "USN", "TSN" }
     player_faction = tableSelectRandom(player_factions)
     friendly_factions = { "Human Navy" }
@@ -3632,7 +3632,7 @@ function constructEnvironment()
     constructConnectingStations()
     constructRescueStations()
     constructNemesisStation()
-    --	set terrain in the doomed circle
+    -- set terrain in the doomed circle
     placement_areas = {
         ["Doomed Ring"] = {
             stations = outer_stations,
@@ -3765,7 +3765,7 @@ function constructEnvironment()
         end
         objects_placed_count = objects_placed_count + 1
     until objects_placed_count >= 20
-    --	set terrain just outside the doomed circle
+    -- set terrain just outside the doomed circle
     terrain = {
         {
             chance = 4,
@@ -3900,7 +3900,7 @@ function constructEnvironment()
             end
         end
     until objects_placed_count >= 100 and #transport_list >= 10
-    --	set terrain in connecting area
+    -- set terrain in connecting area
     terrain = {
         {
             chance = 4,
@@ -4036,7 +4036,7 @@ function constructEnvironment()
         end
         objects_placed_count = objects_placed_count + 1
     until objects_placed_count >= 20
-    --	set terrain in the rescue circle
+    -- set terrain in the rescue circle
     terrain = {
         {
             chance = 4,
@@ -4157,7 +4157,7 @@ function constructEnvironment()
         end
         objects_placed_count = objects_placed_count + 1
     until objects_placed_count >= 18
-    --	set terrain in the area just outside the rescue circle
+    -- set terrain in the area just outside the rescue circle
     terrain = {
         {
             chance = 4,
@@ -4286,7 +4286,7 @@ function constructEnvironment()
         end
         objects_placed_count = objects_placed_count + 1
     until objects_placed_count >= 50
-    --	set terrain in the outer rescue ring
+    -- set terrain in the outer rescue ring
     terrain = {
         {
             chance = 4,
@@ -4316,7 +4316,7 @@ function constructEnvironment()
             func = placeWarpJammer,
             desc = "Warp jammer",
         }, --4
-        --		{chance = 3,	count = 0,	max = math.random(2,9),		func = placeWormHole,		desc = "Worm hole",			},	--5
+        -- {chance = 3, count = 0, max = math.random(2,9),  func = placeWormHole,  desc = "Worm hole",   }, --5
         {
             chance = 7,
             count = 0,
@@ -4428,12 +4428,12 @@ function constructEnvironment()
     tsa:destroy()
 end
 function constructRescueBodies()
-    --	80k to center of connection area
+    -- 80k to center of connection area
     rescue_system_x, rescue_system_y =
         vectorFromAngleNorth(connection_angle, 200000)
     rescue_system_x = rescue_system_x + doomed_system_x
     rescue_system_y = rescue_system_y + doomed_system_y
-    --	set rescue star
+    -- set rescue star
     rescue_star_radius = random(600, 2400)
     original_rescue_star_radius = rescue_star_radius
     rescue_star = Planet()
@@ -4455,7 +4455,7 @@ function constructRescueBodies()
             shape = "circle",
         }
     )
-    --	set inner rescue planet
+    -- set inner rescue planet
     local inner_planet_angle = random(0, 360)
     local inner_rescue_planet_x, inner_rescue_planet_y =
         vectorFromAngleNorth(inner_planet_angle, 20000)
@@ -4484,7 +4484,7 @@ function constructRescueBodies()
     inner_rescue_planet.check_boom = true
     inner_rescue_planet:setAxialRotationTime(random(350, 500))
     inner_rescue_planet:setOrbit(rescue_star, 1100) --proposed final: 1100
-    --	set outer rescue planet
+    -- set outer rescue planet
     local outer_rescue_angle = (inner_planet_angle + random(-135, 135) + 360)
         % 360
     local outer_rescue_planet_x, outer_rescue_planet_y =
@@ -4511,7 +4511,7 @@ function constructRescueBodies()
     local outer_orbit = 3000 --proposed final: 3000
     outer_rescue_planet:setOrbit(rescue_star, outer_orbit)
     rescue_edge_distance = distance(outer_rescue_planet, rescue_star)
-    --	set outer rescue binary
+    -- set outer rescue binary
     outer_rescue_angle = (outer_rescue_angle + 180 + 360) % 360
     local outer_rescue_binary_x, outer_rescue_binary_y =
         vectorFromAngleNorth(outer_rescue_angle, 60000)
@@ -4538,7 +4538,7 @@ function constructDoomedBodiesAndStation()
         vectorFromAngleNorth(random(0, 360), 8500)
     doomed_system_x = doomed_system_x + player_spawn_x
     doomed_system_y = doomed_system_y + player_spawn_y
-    --	set doomed star
+    -- set doomed star
     star_radius = random(600, 2400)
     original_star_radius = star_radius
     doomed_star = Planet()
@@ -4558,7 +4558,7 @@ function constructDoomedBodiesAndStation()
         { obj = doomed_star, dist = star_radius + 1000, shape = "circle" }
     )
     initializeNovaBeamTargets(true)
-    --	set doomed planet
+    -- set doomed planet
     local planet_angle = (star_angle + random(-135, 135) + 360) % 360
     local doomed_planet_x, doomed_planet_y =
         vectorFromAngleNorth(planet_angle, 25000)
@@ -4587,7 +4587,7 @@ function constructDoomedBodiesAndStation()
     doomed_planet:setAxialRotationTime(random(350, 500))
     doomed_planet:setOrbit(doomed_star, 850) --proposed final:850
     doomed_edge_distance = distance(doomed_star, doomed_planet)
-    --	set doomed moon
+    -- set doomed moon
     local moon_angle = random(0, 300)
     local doomed_moon_x, doomed_moon_y = vectorFromAngleNorth(moon_angle, 6000)
     doomed_moon_x = doomed_moon_x + doomed_planet_x
@@ -4601,7 +4601,7 @@ function constructDoomedBodiesAndStation()
     doomed_moon.check_boom = true
     doomed_moon:setOrbit(doomed_planet, 300) --proposed final: 300
     doomed_moon:setAxialRotationTime(random(150, 250))
-    --	set doomed station
+    -- set doomed station
     local psx, psy = vectorFromAngleNorth(
         (star_angle + 180 + random(-135, 135) + 360) % 360,
         random(2000, 15000)
@@ -4685,7 +4685,7 @@ function constructMinorEnemyTrap()
         table.insert(minor_enemy_ambush, ship)
         table.insert(minor_trap_ships, ship)
     end
-    --	set minor enemy station
+    -- set minor enemy station
     psx, psy = vectorFromAngleNorth(minor_enemy_angle, 50000)
     psx = psx + doomed_system_x
     psy = psy + doomed_system_y
@@ -4697,7 +4697,7 @@ function constructMinorEnemyTrap()
         shape = "circle",
     })
     table.insert(outer_stations, minor_enemy_station)
-    --	set warp side of pincer action
+    -- set warp side of pincer action
     right_pincer = {}
     right_pincer.angle = (minor_enemy_angle + random(25, 40)) % 360
     right_pincer.distance = random(35000, 40000)
@@ -4723,7 +4723,7 @@ function constructMinorEnemyTrap()
     table.insert(inner_space, { obj = right_pincer.zone, shape = "zone" })
     table.insert(outer_space, { obj = right_pincer.zone, shape = "zone" })
     table.insert(outer_space, { obj = vam, dist = 2000, shape = "circle" })
-    --	set jump side of pincer action
+    -- set jump side of pincer action
     left_pincer = {}
     left_pincer.angle = (minor_enemy_angle - random(25, 40) + 360) % 360
     left_pincer.distance = random(35000, 40000)
@@ -4885,7 +4885,7 @@ function constructRescueStations()
             table.insert(faction_pool, faction)
         end
     end
-    --	set inner rescue station
+    -- set inner rescue station
     local psx, psy = vectorFromAngleNorth(random(0, 360), random(2000, 12000))
     psx = psx + rescue_system_x
     psy = psy + rescue_system_y
@@ -4898,7 +4898,7 @@ function constructRescueStations()
         shape = "circle",
     })
     table.insert(outer_stations, central_rescue_station)
-    --	set rescue inner ring stations
+    -- set rescue inner ring stations
     for i = 1, 3 do
         psx, psy = findClearSpot(
             rescue_inner_ring_space,
@@ -4931,7 +4931,7 @@ function constructRescueStations()
             end
         end
     end
-    --	set rescue outer ring stations
+    -- set rescue outer ring stations
     for i, faction in ipairs(faction_pool) do
         psx, psy = findClearSpot(
             rescue_outer_ring_space,
@@ -5087,7 +5087,7 @@ function constructNovaDemo()
         math.random(1, 2)
     )
     nova_demo_artifact:setFaction("Exuari")
-    --	test code to show start location of nova demo artifact
+    -- test code to show start location of nova demo artifact
     local nzp = {}
     local nzp_angle = 0
     for i = 1, 6 do
@@ -5109,9 +5109,9 @@ function constructNovaDemo()
         nzp[6].x,
         nzp[6].y
     )
-    --	end of test code showing artifact location
+    -- end of test code showing artifact location
 end
---	Utilities
+-- Utilities
 function angleFromVectorNorth(p1x, p1y, p2x, p2y)
     TWOPI = 6.2831853071795865
     RAD2DEG = 57.2957795130823209
@@ -5312,7 +5312,7 @@ function getTemplatePool(max_strength)
     end
     --print("returning template pool containing these templates:")
     --for _, template in ipairs(template_pool) do
-    --	print(template)
+    -- print(template)
     --end
     return template_pool
 end
@@ -5328,7 +5328,7 @@ function playerPower()
     end
     return playerShipScore
 end
---	Scenario specific utilities
+-- Scenario specific utilities
 function minorTrapScan(p)
     for i, ship in ipairs(minor_trap_ships) do
         if ship ~= nil and ship:isValid() then
@@ -5697,7 +5697,7 @@ function populateMessageStationList(p)
         end
     end
 end
---	Construct environment utilities
+-- Construct environment utilities
 function findClearSpot(
     objects,
     area_shape,
@@ -6725,8 +6725,8 @@ function placeSensorJammer(placement_area)
     local hi_impact = 20000
     local range_increment = (hi_range - lo_range) / 8
     local impact_increment = (hi_impact - lo_impact) / 4
-    --	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--	2-6, 2-8, 2-10
-    local mix = math.random(2, 10 - (4 - 2)) --	2-8
+    -- local mix = math.random(2,10 - (4 - (2*math.floor(difficulty)))) -- 2-6, 2-8, 2-10
+    local mix = math.random(2, 10 - (4 - 2)) -- 2-8
     sensor_jammer_scan_complexity = 1
     sensor_jammer_scan_depth = 1
     if mix > 5 then
@@ -7529,7 +7529,7 @@ function placeAsteroid(placement_area)
         return false
     end
 end
---	Transport utilities
+-- Transport utilities
 function goodsOnShip(comms_target, comms_data)
     comms_data.goods = {}
     comms_data.goods[commonGoods[math.random(1, #commonGoods)]] =
@@ -7709,7 +7709,7 @@ function maintainTransports()
         end
     end
 end
---	Sensor jammer utilities
+-- Sensor jammer utilities
 function sensorJammerPickupProcess(self, retriever)
     string.format("")
     local jammer_call_sign = self:getCallSign()
@@ -7770,7 +7770,7 @@ function sensorJammer(x, y)
     sensor_jammer.jam_impact_units = sensor_jammer_power_units
     return sensor_jammer
 end
---	Nova functions
+-- Nova functions
 function addEjecta(start_x, start_y, lo, hi)
     local max_ejecta = math.random(lo, hi)
     local actions = { "dissipate", "explode", "stop" }
@@ -7951,7 +7951,7 @@ function finalNova()
             rescue_system_x,
             rescue_system_y
         )
-        --		print("final nova angle:",final_nova_angle)
+        -- print("final nova angle:",final_nova_angle)
         final_nova_artifact = Artifact():setPosition(nemesis_x, nemesis_y)
         final_nova_artifact.arrival_time = getScenarioTime() + final_nova_delay
         final_nova_artifact.start_distance =
@@ -8372,7 +8372,7 @@ function novaDemoArtifact()
         end
     end
 end
---	Various communications routines specific to Liberation Day
+-- Various communications routines specific to Liberation Day
 function scenarioMissions()
     local option_count = 0
     if nova_demo_artifact ~= nil and nova_demo_artifact:isValid() then
@@ -8918,7 +8918,7 @@ function scenarioShipMissions()
                         jasmine_freighter_responses = nil
                         setCommsMessage(_("ship-comms", "Try someone else"))
                     end
-                    --	Do not go back. Make player establish communication again
+                    -- Do not go back. Make player establish communication again
                 end
             )
         end
@@ -9124,14 +9124,14 @@ function jasmineExuariConversationTopics()
                     w_name,
                     riddle_w * 2
                 )
-                if riddle_w > riddle_x then --	lo to hi: x,w
+                if riddle_w > riddle_x then -- lo to hi: x,w
                     equation_2 = string.format(
                         _("ship-comms", "%s is %s and %s."),
                         w_name,
                         x_name,
                         riddle_w - riddle_x
                     )
-                    if riddle_y > riddle_w then --	lo to hi: x,w,y
+                    if riddle_y > riddle_w then -- lo to hi: x,w,y
                         if riddle_w + riddle_x > riddle_y then
                             equation_3 = string.format(
                                 _(
@@ -9162,14 +9162,14 @@ function jasmineExuariConversationTopics()
                                 y_name
                             )
                         end
-                        if riddle_z > riddle_y then --	lo to hi: x,w,y,z
+                        if riddle_z > riddle_y then -- lo to hi: x,w,y,z
                             equation_4 = string.format(
                                 _("ship-comms", "%s is more than %s."),
                                 z_name,
                                 y_name
                             )
                         else
-                            if riddle_z > riddle_w then --	lo to hi: x,w,z,y
+                            if riddle_z > riddle_w then -- lo to hi: x,w,z,y
                                 equation_4 = string.format(
                                     _(
                                         "ship-comms",
@@ -9180,7 +9180,7 @@ function jasmineExuariConversationTopics()
                                     y_name
                                 )
                             else
-                                if riddle_z > riddle_x then --	lo to hi: x,z,w,y
+                                if riddle_z > riddle_x then -- lo to hi: x,z,w,y
                                     equation_4 = string.format(
                                         _(
                                             "ship-comms",
@@ -9190,7 +9190,7 @@ function jasmineExuariConversationTopics()
                                         x_name,
                                         w_name
                                     )
-                                else --	lo to hi: z,x,w,y
+                                else -- lo to hi: z,x,w,y
                                     equation_4 = string.format(
                                         _("ship-comms", "%s is less than %s."),
                                         z_name,
@@ -9199,7 +9199,7 @@ function jasmineExuariConversationTopics()
                                 end
                             end
                         end
-                    else --	lo to hi: y,x,w or x,y,w
+                    else -- lo to hi: y,x,w or x,y,w
                         if riddle_y + riddle_x > riddle_w then
                             equation_3 = string.format(
                                 _(
@@ -9230,15 +9230,15 @@ function jasmineExuariConversationTopics()
                                 w_name
                             )
                         end
-                        if riddle_z > riddle_w then --	lo to hi: y,x,w,z or x,y,w,z
+                        if riddle_z > riddle_w then -- lo to hi: y,x,w,z or x,y,w,z
                             equation_4 = string.format(
                                 _("ship-comms", "%s is more than %s."),
                                 z_name,
                                 w_name
                             )
                         else
-                            if riddle_y < riddle_x then --	lo to hi: y,x,w
-                                if riddle_z > riddle_x then --	lo to hi: y,x,z,w
+                            if riddle_y < riddle_x then -- lo to hi: y,x,w
+                                if riddle_z > riddle_x then -- lo to hi: y,x,z,w
                                     equation_4 = string.format(
                                         _(
                                             "ship-comms",
@@ -9249,7 +9249,7 @@ function jasmineExuariConversationTopics()
                                         w_name
                                     )
                                 else
-                                    if riddle_z < riddle_y then --	lo to hi: z,y,x,w
+                                    if riddle_z < riddle_y then -- lo to hi: z,y,x,w
                                         equation_4 = string.format(
                                             _(
                                                 "ship-comms",
@@ -9258,7 +9258,7 @@ function jasmineExuariConversationTopics()
                                             z_name,
                                             y_name
                                         )
-                                    else --	lo to hi: y,z,x,w
+                                    else -- lo to hi: y,z,x,w
                                         equation_4 = string.format(
                                             _(
                                                 "ship-comms",
@@ -9270,15 +9270,15 @@ function jasmineExuariConversationTopics()
                                         )
                                     end
                                 end
-                            else --	lo to hi: x,y,w
-                                if riddle_z < riddle_x then --	lo to hi: z,x,y,w
+                            else -- lo to hi: x,y,w
+                                if riddle_z < riddle_x then -- lo to hi: z,x,y,w
                                     equation_4 = string.format(
                                         _("ship-comms", "%s is less than %s."),
                                         z_name,
                                         x_name
                                     )
                                 else
-                                    if riddle_z < riddle_y then --	lo to hi: x,z,y,w
+                                    if riddle_z < riddle_y then -- lo to hi: x,z,y,w
                                         equation_4 = string.format(
                                             _(
                                                 "ship-comms",
@@ -9288,7 +9288,7 @@ function jasmineExuariConversationTopics()
                                             x_name,
                                             y_name
                                         )
-                                    else --	lo to hi: x,y,z,w
+                                    else -- lo to hi: x,y,z,w
                                         equation_4 = string.format(
                                             _(
                                                 "ship-comms",
@@ -9310,7 +9310,7 @@ function jasmineExuariConversationTopics()
                         w_name,
                         riddle_x - riddle_w
                     )
-                    if riddle_y > riddle_x then --	lo to hi: w,x,y
+                    if riddle_y > riddle_x then -- lo to hi: w,x,y
                         if riddle_w + riddle_x > riddle_y then
                             equation_3 = string.format(
                                 _(
@@ -9348,7 +9348,7 @@ function jasmineExuariConversationTopics()
                                 y_name
                             )
                         end
-                    else --	lo to hi: y,w,x or w,y,x
+                    else -- lo to hi: y,w,x or w,y,x
                         if riddle_y + riddle_w > riddle_x then
                             equation_3 = string.format(
                                 _(
@@ -9379,22 +9379,22 @@ function jasmineExuariConversationTopics()
                                 x_name
                             )
                         end
-                        if riddle_z > riddle_x then --	lo to hi: y,w,x,z or w,y,x,z
+                        if riddle_z > riddle_x then -- lo to hi: y,w,x,z or w,y,x,z
                             equation_4 = string.format(
                                 _("ship-comms", "%s is more than %s."),
                                 z_name,
                                 x_name
                             )
                         else
-                            if riddle_y > riddle_w then --	lo to hi: w,y,x
-                                if riddle_z < riddle_w then --	lo to hi: z,w,y,x
+                            if riddle_y > riddle_w then -- lo to hi: w,y,x
+                                if riddle_z < riddle_w then -- lo to hi: z,w,y,x
                                     equation_4 = string.format(
                                         _("ship-comms", "%s is less than %s."),
                                         z_name,
                                         w_name
                                     )
                                 else
-                                    if riddle_z < riddle_y then --	lo to hi: w,z,y,x
+                                    if riddle_z < riddle_y then -- lo to hi: w,z,y,x
                                         equation_4 = string.format(
                                             _(
                                                 "ship-comms",
@@ -9404,7 +9404,7 @@ function jasmineExuariConversationTopics()
                                             w_name,
                                             y_name
                                         )
-                                    else --	lo to hi: w,y,z,x
+                                    else -- lo to hi: w,y,z,x
                                         equation_4 = string.format(
                                             _(
                                                 "ship-comms",
@@ -9416,15 +9416,15 @@ function jasmineExuariConversationTopics()
                                         )
                                     end
                                 end
-                            else --	lo to hi: y,w,x
-                                if riddle_z < riddle_y then --	lo to hi: z,y,w,x
+                            else -- lo to hi: y,w,x
+                                if riddle_z < riddle_y then -- lo to hi: z,y,w,x
                                     equation_4 = string.format(
                                         _("ship-comms", "%s is less than %s."),
                                         z_name,
                                         y_name
                                     )
                                 else
-                                    if riddle_z < riddle_w then --	lo to hi: y,z,w,x
+                                    if riddle_z < riddle_w then -- lo to hi: y,z,w,x
                                         equation_4 = string.format(
                                             _(
                                                 "ship-comms",
@@ -9434,7 +9434,7 @@ function jasmineExuariConversationTopics()
                                             y_name,
                                             w_name
                                         )
-                                    else --	lo to hi: y,w,z,x
+                                    else -- lo to hi: y,w,z,x
                                         equation_4 = string.format(
                                             _(
                                                 "ship-comms",
@@ -9617,7 +9617,7 @@ function commsNova()
                         math.floor(time_remaining)
                     )
                 )
-                --	add timer here
+                -- add timer here
                 addCommsReply(_("artifact-comms", "Back"), commsNova)
             end)
             addCommsReply(
@@ -9844,7 +9844,7 @@ function availableForComms(p)
     end
     return true
 end
---	Update player ship functions
+-- Update player ship functions
 function powerSensorEnabledButtons(p)
     p.power_sensor_state = "enabled"
     updatePowerSensorButtons(p)
@@ -10001,9 +10001,9 @@ function updatePlayerLongRangeSensors(delta, p)
             base_range = base_range
                 + (1000 * p.power_sensor_interval * p.power_sensor_level)
             local power_decrement = delta * p.power_sensor_level * 2
-            --			print("boost sensor power drain value:",power_decrement,"before energy:",p:getEnergyLevel())
+            -- print("boost sensor power drain value:",power_decrement,"before energy:",p:getEnergyLevel())
             p:setEnergyLevel(p:getEnergyLevel() - power_decrement)
-            --			print("after:",p:getEnergyLevel())
+            -- print("after:",p:getEnergyLevel())
         end
     else
         if p.power_sensor_state ~= nil then
@@ -10144,7 +10144,7 @@ function updatePlayerLongRangeSensors(delta, p)
     )
     p:setLongRangeRadarRange(impact_range)
 end
---	Scenario specific update functions
+-- Scenario specific update functions
 function cloakDevice()
     if cloak_level > 0 then
         if cloak_time == nil then
@@ -10338,7 +10338,7 @@ function nemesisDefenseOrbit(delta)
         end
     end
 end
---	Minor enemy attack functions
+-- Minor enemy attack functions
 function minorTrap()
     if minor_trap_set == nil then
         fleetComposition = "Warpers"

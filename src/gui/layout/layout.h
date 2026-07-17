@@ -26,11 +26,11 @@ class GuiLayoutClassRegistry : sp::NonCopyable
 {
 public:
     static GuiLayoutClassRegistry* first;
-    
+
     GuiLayoutClassRegistry* next;
     string name;
     std::function<std::unique_ptr<GuiLayout>()> creation_function;
-    
+
     GuiLayoutClassRegistry(const string& name, std::function<std::unique_ptr<GuiLayout>()> creation_function)
     : name(name), creation_function(creation_function)
     {

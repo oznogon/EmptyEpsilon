@@ -78,21 +78,21 @@ function init()
     setConstants()
     constructEnvironment()
     ----------------------------------------------------------------------------------------------
-    --	Plot functions that swap in and out of the update loop either in a line or in a circle  --
+    --  Plot functions that swap in and out of the update loop either in a line or in a circle  --
     ----------------------------------------------------------------------------------------------
-    --	Main plot
+    -- Main plot
     plot1 = treatyHolds --start main plot with the treaty in place
     treaty = true
     initialAssetsEvaluated = false
 
-    --	Ship health plot
+    -- Ship health plot
     healthCheckTimer = 5
     healthCheckTimerInterval = 5
 
     plotPB = playerBorderCheck --monitor players positions relative to neutral border zone
     plotMF = muckAndFlies
 
-    --	Enemy border check plot
+    -- Enemy border check plot
     enemyEverDetected = false
     enemyBorderCheckInterval = 3
     enemyBorderCheckTimer = enemyBorderCheckInterval
@@ -102,13 +102,13 @@ function init()
     independentTransportList = {}
     friendlyTransportList = {}
 
-    --	End war plot
+    -- End war plot
     endWarTimerInterval = 3
     endWarTimer = endWarTimerInterval
 
     plotPA = personalAmbush
 
-    --	Enemy reversion
+    -- Enemy reversion
     enemy_reverts = {}
     revert_timer_interval = 7
     revert_timer = revert_timer_interval
@@ -164,10 +164,10 @@ function setGlobals()
     primaryOrders = ""
     secondaryOrders = ""
     optionalOrders = ""
-    --	Ship type selection
+    -- Ship type selection
     pool_selectivity = "full"
     template_pool_size = 5
-    --	Tracking ships and stations
+    -- Tracking ships and stations
     enemyVesselDestroyedNameList = {}
     enemyVesselDestroyedType = {}
     enemyVesselDestroyedValue = {}
@@ -238,31 +238,31 @@ function setVariations()
             },
         }
         difficulty = murphy_config[getScenarioSetting("Murphy")].number
-        --	difficulty impacts several things including:
-        --		mining drain on power
-        --		benefit or detriment chance of items dropped by destroyed enemies
-        --		degree of effect of scanning items dropped by destroyed enemies as to their benefit or detriment
-        --		whether warnings about enemies include ship type
-        --		the chance of retrieving minerals when mining asteroids
-        --		the amount of heat generated when mining
-        --		the amount of damage given when attacking armored warp jammers
-        --		the delay before a sleeper awakes and attacks
-        --		the type of missile a sleeper is armed with
-        --		delay between muck and fly attacks
-        --		the number of flies in a muck and fly attack
-        --		strength of muck armor in muck and fly attack
-        --		size of jammer fleet
-        --		speed of station defense deployment
-        --		speed of station defense orbiting defense platform or warp jammer
-        --		strength of station defense drone fleet or fighter fleet
-        --		chance of repair crew recovering when zero repair crew remain
-        --		degree of damage when space time continuum disrupted
-        --		chance of space time continuum disruption
-        --		chance of getting information about upgrade characters
-        --		chance of coolant and repair crew availability
-        --		when upgrades are free
-        --		reputation cost of ordnance
-        --		scanning difficulty for intel artifacts
+        -- difficulty impacts several things including:
+        -- mining drain on power
+        -- benefit or detriment chance of items dropped by destroyed enemies
+        -- degree of effect of scanning items dropped by destroyed enemies as to their benefit or detriment
+        -- whether warnings about enemies include ship type
+        -- the chance of retrieving minerals when mining asteroids
+        -- the amount of heat generated when mining
+        -- the amount of damage given when attacking armored warp jammers
+        -- the delay before a sleeper awakes and attacks
+        -- the type of missile a sleeper is armed with
+        -- delay between muck and fly attacks
+        -- the number of flies in a muck and fly attack
+        -- strength of muck armor in muck and fly attack
+        -- size of jammer fleet
+        -- speed of station defense deployment
+        -- speed of station defense orbiting defense platform or warp jammer
+        -- strength of station defense drone fleet or fighter fleet
+        -- chance of repair crew recovering when zero repair crew remain
+        -- degree of damage when space time continuum disrupted
+        -- chance of space time continuum disruption
+        -- chance of getting information about upgrade characters
+        -- chance of coolant and repair crew availability
+        -- when upgrades are free
+        -- reputation cost of ordnance
+        -- scanning difficulty for intel artifacts
         adverseEffect = murphy_config[getScenarioSetting("Murphy")].adverse
         coolant_loss = murphy_config[getScenarioSetting("Murphy")].lose_coolant
         coolant_gain = murphy_config[getScenarioSetting("Murphy")].gain_coolant
@@ -340,7 +340,7 @@ function setVariations()
     end
 end
 function setConstants()
-    --	various testing diagnostics
+    -- various testing diagnostics
     initDiagnostic = false
     diagnostic = false
     mf_diagnostic = false
@@ -370,7 +370,7 @@ function setConstants()
     --random range 3 final: 120, 180 (lowered for test) initial attack, pincer attack, vengence
     lrr3 = 120 --lower random range
     urr3 = 180 --upper random range
-    --random range 4 final: 30, 300 (lowered for test)	treaty for timed game
+    --random range 4 final: 30, 300 (lowered for test)    treaty for timed game
     lrr4 = 30
     urr4 = 300
     --random range 4 final: 240, 540 (lowered for test) treaty for game with no time limit
@@ -2030,7 +2030,7 @@ function setConstants()
             desc = "Primary ship system component",
             scan_desc = "Coolant pump component",
         }, --32
-        --		{func=wreckModPowerRegulator,	desc="Primary ship system component",	scan_desc="Power Regulator component"},				--33
+        -- {func=wreckModPowerRegulator,    desc="Primary ship system component",    scan_desc="Power Regulator component"},                --33
     }
 end
 -- Terrain and environment creation functions
@@ -2148,7 +2148,7 @@ function setBorderZones()
     outerZoneList = {}
     local bzi = 1 --border zone index
     --Note: "left" and "right" refer to someone standing on the 2D board at the spawn point (0,0) looking at the zones being added;
-    --		"inner" means closer to the spawn point, "outer" means further away from the spawn point
+    -- "inner" means closer to the spawn point, "outer" means further away from the spawn point
     local borderZoneLeftInnerX = {}
     local borderZoneLeftInnerY = {}
     local borderZoneRightInnerX = {}
@@ -3579,7 +3579,7 @@ function getAdjacentGridLocationsSkip(dSkip, lx, ly)
         end
     end
 end
---	Modifications from wreck artifact functions
+-- Modifications from wreck artifact functions
 function wreckModCommonArtifact(wma)
     wma:setScanningParameters(math.random(1, 2), math.random(1, 3))
     wma:setRadarTraceScale(0.5)
@@ -11186,20 +11186,20 @@ function describeSpecialPlayerShips()
             )
         )
     end)
-    --[[	ships not present yet
-	addGMFunction(_("buttonGM"), "Cobra",function()
-		addGMMessage(_("msgGM", "Striker LX(Cobra): Starfighter, Patrol   Hull:120   Shield:100,100   Size:200   Repair Crew:2   Cargo:4   R.Strength:15\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:65   Spin:15   Accelerate:30   C.Maneuver: Boost:250 Strafe:150   Energy:800\nBeams:2 Turreted Speed:0.1\n   Arc:100   Direction:-15   Range:1   Cycle:6   Damage:6\n   Arc:100   Direction: 15   Range:1   Cycle:6   Damage:6\nTubes:2 Rear:2\n   Direction:180   Type:Any\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      2 Nuke\n      3 Mine\n      3 EMP\n      6 HVLI\nBased on Striker: stronger shields, more energy, jump drive (vs none), faster impulse, slower turret, two rear tubes (vs none)"))
-	end)
-	addGMFunction(_("buttonGM"), "Holmes",function()
-		addGMMessage(_("msgGM", "Holmes: Corvette, Popper   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo Space:6   R.Strength:35\nDefault advanced engine:Warp (750)   Speeds: Impulse:70   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:4 Broadside\n   Arc:60   Direction:-85   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction:-95   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction: 85   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction: 95   Range:1   Cycle:6   Damage:5\nTubes:4   Load Speed:8   Front:3   Back:1\n   Direction:   0   Type:Homing Only - Small\n   Direction:   0   Type:Homing Only\n   Direction:   0   Type:Homing Only - Large\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      06 Mine\nBased on Crucible: Slower impulse, broadside beams, no side tubes, front tubes homing only"))
-	end)
-	addGMFunction(_("buttonGM"), "Rattler",function()
-		addGMMessage(_("msgGM", "MX-Lindworm (Rattler): Starfighter, Bomber   Hull:75   Shield:40   Size:100   Repair Crew:2   Cargo:3   R.Strength:10\nDefault advanced engine:Jump (3U - 20U)   Speeds: Impulse:85   Spin:15   Accelerate:25   C.Maneuver: Boost:250 Strafe:150   Energy:400\nBeam:1 Turreted Speed:1\n   Arc:270   Direction:180   Range:0.7   Cycle:6   Damage:2\nTubes:3   Load Speed:10   Front:3 (small)\n   Direction: 0   Type:Any - small\n   Direction: 1   Type:HVLI Only - small\n   Direction:-1   Type:HVLI Only - small\n   Ordnance stock and type:\n      03 Homing\n      12 HVLI\nBased on ZX-Lindworm: More repair crew, faster impulse, jump drive, slower turret"))
-	end)
-	addGMFunction(_("buttonGM"), "Rogue",function()
-		addGMMessage(_("msgGM", "Maverick XP(Rogue): Corvette, Gunner   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo:5   R.Strength:23\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:65   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:1 Turreted Speed:0.1   5X heat   5X energy\n   Arc:270   Direction:  0   Range:1.8   Cycle:18   Damage:18\nTubes:3   Load Speed:8   Side:2   Back:1\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      06 Homing\n      02 Nuke\n      02 Mine\n      04 EMP\n      10 HVLI\nBased on Maverick: slower impulse, jump (no warp), one heavy slow turreted beam (not 6 beams)"))
-	end)
-	--]]
+    --[[    ships not present yet
+    addGMFunction(_("buttonGM"), "Cobra",function()
+        addGMMessage(_("msgGM", "Striker LX(Cobra): Starfighter, Patrol   Hull:120   Shield:100,100   Size:200   Repair Crew:2   Cargo:4   R.Strength:15\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:65   Spin:15   Accelerate:30   C.Maneuver: Boost:250 Strafe:150   Energy:800\nBeams:2 Turreted Speed:0.1\n   Arc:100   Direction:-15   Range:1   Cycle:6   Damage:6\n   Arc:100   Direction: 15   Range:1   Cycle:6   Damage:6\nTubes:2 Rear:2\n   Direction:180   Type:Any\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      2 Nuke\n      3 Mine\n      3 EMP\n      6 HVLI\nBased on Striker: stronger shields, more energy, jump drive (vs none), faster impulse, slower turret, two rear tubes (vs none)"))
+    end)
+    addGMFunction(_("buttonGM"), "Holmes",function()
+        addGMMessage(_("msgGM", "Holmes: Corvette, Popper   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo Space:6   R.Strength:35\nDefault advanced engine:Warp (750)   Speeds: Impulse:70   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:4 Broadside\n   Arc:60   Direction:-85   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction:-95   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction: 85   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction: 95   Range:1   Cycle:6   Damage:5\nTubes:4   Load Speed:8   Front:3   Back:1\n   Direction:   0   Type:Homing Only - Small\n   Direction:   0   Type:Homing Only\n   Direction:   0   Type:Homing Only - Large\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      06 Mine\nBased on Crucible: Slower impulse, broadside beams, no side tubes, front tubes homing only"))
+    end)
+    addGMFunction(_("buttonGM"), "Rattler",function()
+        addGMMessage(_("msgGM", "MX-Lindworm (Rattler): Starfighter, Bomber   Hull:75   Shield:40   Size:100   Repair Crew:2   Cargo:3   R.Strength:10\nDefault advanced engine:Jump (3U - 20U)   Speeds: Impulse:85   Spin:15   Accelerate:25   C.Maneuver: Boost:250 Strafe:150   Energy:400\nBeam:1 Turreted Speed:1\n   Arc:270   Direction:180   Range:0.7   Cycle:6   Damage:2\nTubes:3   Load Speed:10   Front:3 (small)\n   Direction: 0   Type:Any - small\n   Direction: 1   Type:HVLI Only - small\n   Direction:-1   Type:HVLI Only - small\n   Ordnance stock and type:\n      03 Homing\n      12 HVLI\nBased on ZX-Lindworm: More repair crew, faster impulse, jump drive, slower turret"))
+    end)
+    addGMFunction(_("buttonGM"), "Rogue",function()
+        addGMMessage(_("msgGM", "Maverick XP(Rogue): Corvette, Gunner   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo:5   R.Strength:23\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:65   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:1 Turreted Speed:0.1   5X heat   5X energy\n   Arc:270   Direction:  0   Range:1.8   Cycle:18   Damage:18\nTubes:3   Load Speed:8   Side:2   Back:1\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      06 Homing\n      02 Nuke\n      02 Mine\n      04 EMP\n      10 HVLI\nBased on Maverick: slower impulse, jump (no warp), one heavy slow turreted beam (not 6 beams)"))
+    end)
+    --]]
 end
 function describeStockPlayerShips()
     clearGMFunctions()
@@ -11442,10 +11442,10 @@ function createPlayerShipNarsil()
     playerNarsil:setHull(200)
     playerNarsil:setShieldsMax(150, 150) --weaker shields (vs 200)
     playerNarsil:setShields(150, 150)
-    --                  				Arc, Dir, Range, CycleTime, Dmg
+    -- Arc, Dir, Range, CycleTime, Dmg
     playerNarsil:setBeamWeapon(2, 10, -90, 1000, 6, 4)
     playerNarsil:setBeamWeapon(3, 10, 90, 1000, 6, 4)
-    --									     Arc, Dir, Rotate speed
+    --      Arc, Dir, Rotate speed
     playerNarsil:setBeamWeaponTurret(2, 60, -90, 0.5)
     playerNarsil:setBeamWeaponTurret(3, 60, 90, 0.5)
     playerNarsil:setWeaponTubeCount(6) --one more forward tube, less flexible ordnance
@@ -11540,9 +11540,9 @@ function createPlayerShipSimian()
     playerSimian:setJumpDriveRange(2000, 20000) --shorter than typical jump drive range (vs 5-50)
     playerSimian:setHullMax(100) --weaker hull (vs 200)
     playerSimian:setHull(100)
-    --                 				 Arc, Dir, Range, CycleTime, Damage
+    --  Arc, Dir, Range, CycleTime, Damage
     playerSimian:setBeamWeapon(0, 8, 0, 800.0, 5, 6) --turreted beam (vs none)
-    --									    Arc, Dir, Rotate speed
+    --     Arc, Dir, Rotate speed
     playerSimian:setBeamWeaponTurret(0, 270, 0, 0.2) --slow turret
     playerSimian:setWeaponTubeCount(5) --fewer (vs 7)
     playerSimian:setWeaponTubeDirection(2, -90) --left (vs right)
@@ -12521,7 +12521,7 @@ function chooseUpgradeGoodBase(upgradeBase)
                         for upgradeBaseGood, upgradeBaseGoodData in
                             pairs(upgradeBase.comms_data.goods)
                         do
-                            --							print(string.format("upgrade base good: %s",upgradeBaseGood))
+                            -- print(string.format("upgrade base good: %s",upgradeBaseGood))
                             if good == upgradeBaseGood then
                                 if optionalMissionDiagnostic then
                                     print(
@@ -12559,7 +12559,7 @@ function chooseUpgradeGoodBase(upgradeBase)
     end
 end
 function setOptionalMissions()
-    --	faster beams
+    -- faster beams
     local missionAttemptCount = 0
     local goodCount = 0
     local matchAway = false
@@ -12645,7 +12645,7 @@ function setOptionalMissions()
             print("  no clue base defined")
         end
     end
-    --	spin faster
+    -- spin faster
     spinBase = chooseUpgradeBase()
     if spinBase ~= nil then
         spinGood, spinGoodBase = chooseUpgradeGoodBase(spinBase)
@@ -12725,7 +12725,7 @@ function setOptionalMissions()
             print("  no clue base defined")
         end
     end
-    --	extra missile tube
+    -- extra missile tube
     auxTubeBase = chooseUpgradeBase()
     if auxTubeBase ~= nil then
         auxTubeGood, auxTubeGoodBase = chooseUpgradeGoodBase(auxTubeBase)
@@ -12805,7 +12805,7 @@ function setOptionalMissions()
             print("  no clue base defined")
         end
     end
-    --	cooler beam weapon firing
+    -- cooler beam weapon firing
     coolBeamBase = chooseUpgradeBase()
     if coolBeamBase ~= nil then
         coolBeamGood, coolBeamGoodBase = chooseUpgradeGoodBase(coolBeamBase)
@@ -12885,7 +12885,7 @@ function setOptionalMissions()
             print("  no clue base defined")
         end
     end
-    --	longer beam range
+    -- longer beam range
     longerBeamBase = chooseUpgradeBase()
     if longerBeamBase ~= nil then
         longerBeamGood, longerBeamGoodBase =
@@ -12966,7 +12966,7 @@ function setOptionalMissions()
             print("  no clue base defined")
         end
     end
-    --	increased beam damage
+    -- increased beam damage
     damageBeamBase = chooseUpgradeBase()
     if damageBeamBase ~= nil then
         damageBeamGood, damageBeamGoodBase =
@@ -13045,7 +13045,7 @@ function setOptionalMissions()
             print("  no clue base defined")
         end
     end
-    --	increased maximum missile storage capacity
+    -- increased maximum missile storage capacity
     moreMissilesBase = chooseUpgradeBase()
     if moreMissilesBase ~= nil then
         moreMissilesGood, moreMissilesGoodBase =
@@ -13126,7 +13126,7 @@ function setOptionalMissions()
             print("  no clue base defined")
         end
     end
-    --	faster impulse
+    -- faster impulse
     fasterImpulseBase = chooseUpgradeBase()
     if fasterImpulseBase ~= nil then
         fasterImpulseGood, fasterImpulseGoodBase =
@@ -13205,7 +13205,7 @@ function setOptionalMissions()
             print("  no clue base defined")
         end
     end
-    --	stronger hull
+    -- stronger hull
     strongerHullBase = chooseUpgradeBase()
     if strongerHullBase ~= nil then
         strongerHullGood, strongerHullGoodBase =
@@ -13284,7 +13284,7 @@ function setOptionalMissions()
             print("  no clue base defined")
         end
     end
-    --	efficient batteries
+    -- efficient batteries
     efficientBatteriesBase = chooseUpgradeBase()
     if efficientBatteriesBase ~= nil then
         efficientBatteriesGood, efficientBatteriesGoodBase =
@@ -13370,7 +13370,7 @@ function setOptionalMissions()
             print("  no clue base defined")
         end
     end
-    --	stronger shields
+    -- stronger shields
     strongerShieldsBase = chooseUpgradeBase()
     if strongerShieldsBase ~= nil then
         strongerShieldsGood, strongerShieldsGoodBase =
@@ -17571,99 +17571,99 @@ function handleUndockedState()
             )
     end
     setCommsMessage(oMsg)
-    --[[	Disabling until I find the bug
-	if isAllowedTo(ctd.services.preorder) then
-		addCommsReply("Expedite Dock",function()
-			if comms_source.expedite_dock == nil then
-				comms_source.expedite_dock = false
-			end
-			if comms_source.expedite_dock then
-				--handle expedite request already present
-				local existing_expedite = "Docking crew is standing by"
-				if comms_target == comms_source.expedite_dock_station then
-					existing_expedite = existing_expedite .. ". Current preorders:"
-					local preorders_identified = false
-					if comms_source.preorder_hvli ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   HVLIs: %i",comms_source.preorder_hvli)
-					end
-					if comms_source.preorder_homing ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   Homings: %i",comms_source.preorder_homing)
-					end
-					if comms_source.preorder_mine ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   Mines: %i",comms_source.preorder_mine)
-					end
-					if comms_source.preorder_emp ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   EMPs: %i",comms_source.preorder_emp)
-					end
-					if comms_source.preorder_nuke ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   Nukes: %i",comms_source.preorder_nuke)
-					end
-					if comms_source.preorder_repair_crew ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. "\n   One repair crew"
-					end
-					if comms_source.preorder_coolant ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. "\n   Coolant"
-					end
-					if preorders_identified then
-						existing_expedite = existing_expedite .. "\nWould you like to preorder anything else?"
-					else
-						existing_expedite = existing_expedite .. " none.\nWould you like to preorder anything?"
-					end
-					preorder_message = existing_expedite
-					preOrderOrdnance()
-				else
-					existing_expedite = existing_expedite .. string.format(" on station %s (not this station, %s).",comms_source.expedite_dock_station:getCallSign(),comms_target:getCallSign())
-					setCommsMessage(existing_expedite)
-				end
-				addCommsReply(_("Back"),commsStation)
-			else
-				setCommsMessage("If you would like to speed up the addition of resources such as energy, ordnance, etc., please provide a time frame for your arrival. A docking crew will stand by until that time, after which they will return to their normal duties")
-				preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
-				addCommsReply("One minute (5 rep)", function()
-					if comms_source:takeReputationPoints(5) then
-						comms_source.expedite_dock = true
-						comms_source.expedite_dock_station = comms_target
-						comms_source.expedite_dock_timer_max = 60
-						preOrderOrdnance()
-					else
-						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-					end
-					addCommsReply(_("Back"), commsStation)
-				end)
-				addCommsReply("Two minutes (10 Rep)", function()
-					if comms_source:takeReputationPoints(10) then
-						comms_source.expedite_dock = true
-						comms_source.expedite_dock_station = comms_target
-						comms_source.expedite_dock_timer_max = 120
-						preOrderOrdnance()
-					else
-						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-					end
-					addCommsReply(_("Back"), commsStation)
-				end)
-				addCommsReply("Three minutes (15 Rep)", function()
-					if comms_source:takeReputationPoints(15) then
-						comms_source.expedite_dock = true
-						comms_source.expedite_dock_station = comms_target
-						comms_source.expedite_dock_timer_max = 180
-						preOrderOrdnance()
-					else
-						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-					end
-					addCommsReply(_("Back"), commsStation)
-				end)
-			end
-			addCommsReply(_("Back"), commsStation)
-		end)
-	end
-	--]]
+    --[[ Disabling until I find the bug
+    if isAllowedTo(ctd.services.preorder) then
+        addCommsReply("Expedite Dock",function()
+            if comms_source.expedite_dock == nil then
+                comms_source.expedite_dock = false
+            end
+            if comms_source.expedite_dock then
+                --handle expedite request already present
+                local existing_expedite = "Docking crew is standing by"
+                if comms_target == comms_source.expedite_dock_station then
+                    existing_expedite = existing_expedite .. ". Current preorders:"
+                    local preorders_identified = false
+                    if comms_source.preorder_hvli ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. string.format("\n   HVLIs: %i",comms_source.preorder_hvli)
+                    end
+                    if comms_source.preorder_homing ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. string.format("\n   Homings: %i",comms_source.preorder_homing)
+                    end
+                    if comms_source.preorder_mine ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. string.format("\n   Mines: %i",comms_source.preorder_mine)
+                    end
+                    if comms_source.preorder_emp ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. string.format("\n   EMPs: %i",comms_source.preorder_emp)
+                    end
+                    if comms_source.preorder_nuke ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. string.format("\n   Nukes: %i",comms_source.preorder_nuke)
+                    end
+                    if comms_source.preorder_repair_crew ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. "\n   One repair crew"
+                    end
+                    if comms_source.preorder_coolant ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. "\n   Coolant"
+                    end
+                    if preorders_identified then
+                        existing_expedite = existing_expedite .. "\nWould you like to preorder anything else?"
+                    else
+                        existing_expedite = existing_expedite .. " none.\nWould you like to preorder anything?"
+                    end
+                    preorder_message = existing_expedite
+                    preOrderOrdnance()
+                else
+                    existing_expedite = existing_expedite .. string.format(" on station %s (not this station, %s).",comms_source.expedite_dock_station:getCallSign(),comms_target:getCallSign())
+                    setCommsMessage(existing_expedite)
+                end
+                addCommsReply(_("Back"),commsStation)
+            else
+                setCommsMessage("If you would like to speed up the addition of resources such as energy, ordnance, etc., please provide a time frame for your arrival. A docking crew will stand by until that time, after which they will return to their normal duties")
+                preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
+                addCommsReply("One minute (5 rep)", function()
+                    if comms_source:takeReputationPoints(5) then
+                        comms_source.expedite_dock = true
+                        comms_source.expedite_dock_station = comms_target
+                        comms_source.expedite_dock_timer_max = 60
+                        preOrderOrdnance()
+                    else
+                        setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+                    end
+                    addCommsReply(_("Back"), commsStation)
+                end)
+                addCommsReply("Two minutes (10 Rep)", function()
+                    if comms_source:takeReputationPoints(10) then
+                        comms_source.expedite_dock = true
+                        comms_source.expedite_dock_station = comms_target
+                        comms_source.expedite_dock_timer_max = 120
+                        preOrderOrdnance()
+                    else
+                        setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+                    end
+                    addCommsReply(_("Back"), commsStation)
+                end)
+                addCommsReply("Three minutes (15 Rep)", function()
+                    if comms_source:takeReputationPoints(15) then
+                        comms_source.expedite_dock = true
+                        comms_source.expedite_dock_station = comms_target
+                        comms_source.expedite_dock_timer_max = 180
+                        preOrderOrdnance()
+                    else
+                        setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+                    end
+                    addCommsReply(_("Back"), commsStation)
+                end)
+            end
+            addCommsReply(_("Back"), commsStation)
+        end)
+    end
+    --]]
     addCommsReply(_("station-comms", "I need information"), function()
         setCommsMessage(
             _("station-comms", "What kind of information do you need?")
@@ -19273,7 +19273,7 @@ function wartimeStatistics()
     end)
 end
 function addStationToDatabase(station)
-    --	Assumes all player ships will be the same faction
+    -- Assumes all player ships will be the same faction
     local player_faction = "Human Navy"
     local stations_key = _("scienceDB", "Stations")
     local stations_db = queryScienceDatabase(stations_key)
@@ -20025,7 +20025,7 @@ function friendlyComms(comms_data)
             )
         end
     end
-    --	print("comms target dot fleet:",comms_target.fleet,"initial assets evaluated:",initialAssetsEvaluated,"game time limit:",gameTimeLimit)
+    -- print("comms target dot fleet:",comms_target.fleet,"initial assets evaluated:",initialAssetsEvaluated,"game time limit:",gameTimeLimit)
     if comms_target.fleet ~= nil and initialAssetsEvaluated then
         addCommsReply(
             string.format(
@@ -21864,7 +21864,7 @@ end --end neutral communications function
 -- Utility functions --
 -----------------------
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -22312,7 +22312,7 @@ function nameShip(p, p_type)
         end
     end
 end
---	Player functions
+-- Player functions
 function setPlayer(pobj)
     if pobj.goods == nil then
         pobj.goods = {}
@@ -22693,7 +22693,7 @@ function expediteDockCheck(delta, p)
         end
     end
 end
---		Mortal repair crew functions. Includes coolant loss as option to losing repair crew
+-- Mortal repair crew functions. Includes coolant loss as option to losing repair crew
 function healthCheck(delta, p)
     healthCheckTimer = healthCheckTimer - delta
     if healthCheckTimer < 0 then
@@ -23503,11 +23503,11 @@ function autoCoolant(p)
         end
     end
 end
---		Gain or lose coolant from nebula functions
+-- Gain or lose coolant from nebula functions
 function coolantNebulae(delta, p)
     local inside_gain_coolant_nebula = false
     for i = 1, #coolant_nebula do
-        --		if distance_diagnostic then print("distance_diagnostic 12",p,coolant_nebula[i]) end
+        -- if distance_diagnostic then print("distance_diagnostic 12",p,coolant_nebula[i]) end
         if distance(p, coolant_nebula[i]) < 5000 then
             if coolant_nebula[i].lose then
                 p:setMaxCoolant(p:getMaxCoolant() * coolant_loss)
@@ -24615,35 +24615,35 @@ function setEnemyStationDefenses()
         then
             curEStation.defenseDeployed = false
             local defensiveChoice = random(1, 100)
-            --local defensiveChoice = 85	--test ambush
-            if defensiveChoice < 10 then --	fighter fleet
+            --local defensiveChoice = 85    --test ambush
+            if defensiveChoice < 10 then -- fighter fleet
                 curEStation.defenseType = "fighterFleet"
                 curEStation.defenseTriggerDistance = random(2000, 5000)
-            elseif defensiveChoice < 20 then --	zone of ship damage (and temporary counter)
+            elseif defensiveChoice < 20 then -- zone of ship damage (and temporary counter)
                 curEStation.defenseType = "zoneDamage"
                 curEStation.defenseTriggerDistance = random(2000, 5000)
-            elseif defensiveChoice < 30 then --	call for help from nearby station
+            elseif defensiveChoice < 30 then -- call for help from nearby station
                 curEStation.defenseType = "callInHelp"
                 curEStation.defenseTriggerDistance = random(2000, 5000)
-            elseif defensiveChoice < 40 then --	mine or minefield
+            elseif defensiveChoice < 40 then -- mine or minefield
                 curEStation.defenseType = "minefield"
                 curEStation.defenseTriggerDistance = random(2000, 5000)
-            elseif defensiveChoice < 50 then --	deploy wormhole
+            elseif defensiveChoice < 50 then -- deploy wormhole
                 curEStation.defenseType = "wormhole"
                 curEStation.defenseTriggerDistance = random(2000, 5000)
-            elseif defensiveChoice < 60 then --	decoy transport (explosive)
+            elseif defensiveChoice < 60 then -- decoy transport (explosive)
                 curEStation.defenseType = "transport"
                 curEStation.defenseTriggerDistance = random(2000, 5000)
-            elseif defensiveChoice < 70 then --	deploy weapons platform
+            elseif defensiveChoice < 70 then -- deploy weapons platform
                 curEStation.defenseType = "weaponPlatform"
                 curEStation.defenseTriggerDistance = random(2000, 5000)
-            elseif defensiveChoice < 80 then --	jammer fleet
+            elseif defensiveChoice < 80 then -- jammer fleet
                 curEStation.defenseType = "jammerFleet"
                 curEStation.defenseTriggerDistance = random(2000, 5000)
             elseif defensiveChoice < 90 then
                 curEStation.defenseType = "ambush"
                 curEStation.defenseTriggerDistance = random(2000, 5000)
-            else --	drone fleet
+            else -- drone fleet
                 curEStation.defenseType = "droneFleet"
                 curEStation.defenseTriggerDistance = random(2000, 5000)
             end
@@ -24662,7 +24662,7 @@ function enemyDefenseCheck(delta)
                     and enemyStation:isValid()
                     and not enemyStation.defenseDeployed
                 then
-                    --					if distance_diagnostic then print("distance_diagnostic 14",p,enemyStation) end
+                    -- if distance_diagnostic then print("distance_diagnostic 14",p,enemyStation) end
                     local distToEnemyStation = distance(p, enemyStation)
                     if
                         distToEnemyStation < enemyStation.defenseTriggerDistance
@@ -24952,9 +24952,9 @@ function warpJammerOrbit(delta)
         if tj ~= nil and tj:isValid() then
             if tj.orbit then
                 tj.travelAngle = tj.travelAngle + 0.05 * difficulty
-                --				if tj.travelAngle >= 360 then
-                --					tj.travelAngle = 0
-                --				end
+                -- if tj.travelAngle >= 360 then
+                -- tj.travelAngle = 0
+                -- end
                 newx, newy = vectorFromAngle(tj.travelAngle, tj.triggerDistance)
                 tj:setPosition(tj.originX + newx, tj.originY + newy)
             else
@@ -25520,7 +25520,7 @@ function muckAndFlies(delta)
         muckFlyCounter = math.random(1, upper_counter)
     end
     if muckFlyTimer == nil then
-        --		muckFlyTimer = 10
+        -- muckFlyTimer = 10
         muckFlyTimer = delta + 400 - difficulty * 90 + random(1, 200) --final: 400, 90 and 200
     end
     muckFlyTimer = muckFlyTimer - delta
@@ -26852,7 +26852,7 @@ function enemyVesselDestroyed(self, instigator)
                     1,
                     #wreck_mod_type_index_list
                 )]
-                --				local wmt = 32	--for testing
+                -- local wmt = 32    --for testing
                 local wma = wreck_mod_type[wmt].func(self_x, self_y)
                 wma.debris_end_x = self_x + debris_x
                 wma.debris_end_y = self_y + debris_y

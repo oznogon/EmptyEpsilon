@@ -1,16 +1,16 @@
---	Supporting script for a station's defensive fleet in Borderline Fever scenario.
---	In the main script, the station will need a defensive fleet attached/defined.
---	For example:
---	station_1 = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy")
---	station_1.comms_data = {
---		idle_defense_fleet = {
---			DF1 = "MT52 Hornet",
---			DF2 = "MT52 Hornet",
---			DF3 = "Adder MK5",
---			DF4 = "Adder MK5",
---			DF5 = "Phobos T3",
---		}
---	}
+-- Supporting script for a station's defensive fleet in Borderline Fever scenario.
+-- In the main script, the station will need a defensive fleet attached/defined.
+-- For example:
+-- station_1 = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy")
+-- station_1.comms_data = {
+--     idle_defense_fleet = {
+--         DF1 = "MT52 Hornet",
+--         DF2 = "MT52 Hornet",
+--         DF3 = "Adder MK5",
+--         DF4 = "Adder MK5",
+--         DF5 = "Phobos T3",
+--     }
+-- }
 require("utils.lua")
 function init()
     check_interval = random(4, 6)

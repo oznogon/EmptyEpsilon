@@ -46,6 +46,7 @@ public:
 
     GuiSelector* sidebar_selector;
     GuiElement* info_sidebar;
+    GuiElement* info_scan_content;
     GuiScrollContainer* sidebar_signals_page;
     GuiScrollContainer* sidebar_frequencies_page;
     GuiScrollContainer* sidebar_systems_page;

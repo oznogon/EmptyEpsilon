@@ -26,7 +26,7 @@ class ScriptFunction:
                 doc_example = True
             else:
                 self.doc.append(doc_line)
-    
+
     def check_filters(self, filters):
         for k, v in filters.items():
             if k not in self.metadata:
@@ -50,7 +50,7 @@ class ScriptFunctionDatabase:
         # Map from Lua filename to a creation-type function name.
         # This is brittle
         self._file_category_map = {}
-    
+
     def filter(self, filters):
         for name, func in self.__functions.items():
             if func.check_filters(filters):

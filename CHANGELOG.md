@@ -901,7 +901,7 @@
 - Configuration file path now logged
 - Server port now configurable on server setup screen
 - API functions
-  - `getFactionInfo()` returns a FactionInfo reference e36c7ea 
+  - `getFactionInfo()` returns a FactionInfo reference e36c7ea
   - Ship template functions `setExternalDockClasses()` and `setInternalDockClasses()` to configure how other classes of ship dock 55e7992
   - `sectorToXY()` converts a sector name to x/y coordinates #1651
   - `SpaceObject:sendCommsMessageNoLog()` hails a player ship to send a message, but doesn't log a failed delivery
@@ -1383,7 +1383,7 @@ This release replaced core engine components, and it and future releases require
   - German translation updated #1258, #1280, #1324
   - French translation expanded #1151, #1153, #1154, #1182, #1183, #1243, #1245, #1250, #1258, #1261, #1263, #1265, #1269
 - Scenario updates
-  - _Waves_ refactored 
+  - _Waves_ refactored
   - _Basic_ scenario logs variant on error #1155, #1216
   - _Fermi 500_ updated #1302
   - _Capture the Flag_ updated #1301
@@ -1412,7 +1412,7 @@ This release replaced core engine components, and it and future releases require
 - Sounds play on remote clients #1224, #1225
 - Weapon tubes no longer desync on load/unload #1048
 - Black holes confirm whether an object still exists before trying to move it #1180
-- Discord library issue blocking Linux builds #1000 
+- Discord library issue blocking Linux builds #1000
 - Ship templates now have and use a default AI
 - Scenario and ship template typos #1156, #1157
 - Pathing algorithm now accounts for ship size to better avoid mines and asteroids
@@ -1975,7 +1975,7 @@ This release replaced core engine components, and it and future releases require
 - Spelling on _Birth of the Atlantis_ scenario.
 - `TOGGLE_AIM_LOCK` will only work if button state is properly set.
 
-## [2017-05-06] 
+## [2017-05-06]
 
 ### Added
 
@@ -2292,7 +2292,7 @@ This release replaced core engine components, and it and future releases require
     - Beam weapon and engine emitter positions on some models
     - Extra set of 3d models for use as frigates
 - Headless server options
-- Allow tweaking weapon tube details and availability at load time 
+- Allow tweaking weapon tube details and availability at load time
 - Allow game master to change a ship's callsign
 
 ### Changed

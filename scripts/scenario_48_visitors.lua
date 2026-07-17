@@ -37,16 +37,16 @@
 -- Mission[Region|Default]: Players may skip to the next region of missions
 -- Mission[Selectable]: Players may choose each individual mission in each region
 
---	Custom Info Indexes
---		Virus Fatality Timer	4
---		Gather Coolant			8
---		Sensor scan time		10
+-- Custom Info Indexes
+--     Virus Fatality Timer 4
+--     Gather Coolant       8
+--     Sensor scan time     10
 
---	Custom Button Indexes
---		Virus Status	9
---		Inventory		6
---		Get Coolant		7
---		Polly scan time	11
+-- Custom Button Indexes
+--     Virus Status    9
+--     Inventory       6
+--     Get Coolant     7
+--     Polly scan time 11
 
 require("utils.lua")
 require("generate_call_sign_scenario_utility.lua")
@@ -2581,7 +2581,7 @@ function setConstants()
         "Miguel Lopez",
         "Renata Rodriguez",
     }
-    --				short clip name		length in seconds
+    -- short clip name = length in seconds
     voice_clips = {
         ["Avery01"] = 0.971,
         ["Avery02"] = 7.187,
@@ -4768,7 +4768,7 @@ end
 -- Optional mission functions to upgrade player ship --
 -------------------------------------------------------
 function setOptionalMissions()
-    --	faster beams
+    -- faster beams
     local required_good = chooseUpgradeGood("beam", playerSpawnBandStations[1])
     playerSpawnBandStations[1].comms_data.character = "Horace Grayson"
     playerSpawnBandStations[1].comms_data.characterDescription = _(
@@ -4790,7 +4790,7 @@ function setOptionalMissions()
         playerSpawnBandStations[1]:getCallSign(),
         playerSpawnBandStations[1]:getSectorName()
     )
-    --	spin faster
+    -- spin faster
     required_good = chooseUpgradeGood("circuit", playerSpawnBandStations[2])
     playerSpawnBandStations[2].comms_data.character = "Emily Patel"
     playerSpawnBandStations[2].comms_data.characterDescription = _(
@@ -4812,7 +4812,7 @@ function setOptionalMissions()
         playerSpawnBandStations[2]:getCallSign(),
         playerSpawnBandStations[2]:getSectorName()
     )
-    --	extra missile tube
+    -- extra missile tube
     required_good = chooseUpgradeGood("nanites", playerSpawnBandStations[3])
     playerSpawnBandStations[3].comms_data.character = "Fred McLassiter"
     playerSpawnBandStations[3].comms_data.characterDescription = _(
@@ -4834,7 +4834,7 @@ function setOptionalMissions()
         playerSpawnBandStations[3]:getCallSign(),
         playerSpawnBandStations[3]:getSectorName()
     )
-    --	cooler beam weapon firing
+    -- cooler beam weapon firing
     required_good = chooseUpgradeGood("software", playerSpawnBandStations[4])
     playerSpawnBandStations[4].comms_data.character = "Dorothy Ly"
     playerSpawnBandStations[4].comms_data.characterDescription = _(
@@ -4856,7 +4856,7 @@ function setOptionalMissions()
         playerSpawnBandStations[4]:getSectorName(),
         playerSpawnBandStations[4].comms_data.character
     )
-    --	longer beam range
+    -- longer beam range
     required_good = chooseUpgradeGood("optic", playerSpawnBandStations[5])
     playerSpawnBandStations[5].comms_data.character = "Gerald Cook"
     playerSpawnBandStations[5].comms_data.characterDescription = _(
@@ -4878,7 +4878,7 @@ function setOptionalMissions()
         playerSpawnBandStations[5]:getCallSign(),
         playerSpawnBandStations[5]:getSectorName()
     )
-    --	increased beam damage
+    -- increased beam damage
     required_good = chooseUpgradeGood("filament", playerSpawnBandStations[6])
     playerSpawnBandStations[6].comms_data.character = "Sally Jenkins"
     playerSpawnBandStations[6].comms_data.characterDescription =
@@ -4898,7 +4898,7 @@ function setOptionalMissions()
         playerSpawnBandStations[6]:getSectorName(),
         playerSpawnBandStations[6].comms_data.character
     )
-    --	increased maximum missile storage capacity
+    -- increased maximum missile storage capacity
     required_good = chooseUpgradeGood("transporter", playerSpawnBandStations[7])
     playerSpawnBandStations[7].comms_data.character = "Anh Dung Ly"
     playerSpawnBandStations[7].comms_data.characterDescription =
@@ -4918,7 +4918,7 @@ function setOptionalMissions()
         playerSpawnBandStations[7]:getCallSign(),
         playerSpawnBandStations[7]:getSectorName()
     )
-    --	faster impulse
+    -- faster impulse
     required_good = chooseUpgradeGood("impulse", playerSpawnBandStations[8])
     playerSpawnBandStations[8].comms_data.character = "Doralla Ognats"
     playerSpawnBandStations[8].comms_data.characterDescription =
@@ -4938,7 +4938,7 @@ function setOptionalMissions()
         playerSpawnBandStations[8]:getCallSign(),
         playerSpawnBandStations[8]:getSectorName()
     )
-    --	stronger hull
+    -- stronger hull
     required_good = chooseUpgradeGood("repulsor", tertiusStation)
     tertiusStation.comms_data.character = "Maduka Lawal"
     tertiusStation.comms_data.characterDescription =
@@ -4959,7 +4959,7 @@ function setOptionalMissions()
         tertiusStation:getSectorName(),
         tertiusStation.comms_data.character
     )
-    --	efficient batteries
+    -- efficient batteries
     required_good = chooseUpgradeGood("battery", tertiusMoon1Station)
     tertiusMoon1Station.comms_data.character = "Susil Tarigan"
     tertiusMoon1Station.comms_data.characterDescription = _(
@@ -4982,7 +4982,7 @@ function setOptionalMissions()
         tertiusMoon1Station:getCallSign(),
         tertiusMoon1Station:getSectorName()
     )
-    --	stronger shields
+    -- stronger shields
     required_good = chooseUpgradeGood("shield", tertiusAsteroidStations[1])
     tertiusAsteroidStations[1].comms_data.character = "Paulo Silva"
     tertiusAsteroidStations[1].comms_data.characterDescription =
@@ -10756,7 +10756,7 @@ function getFriendStatus()
     end
 end
 function addStationToDatabase(station)
-    --	Assumes all player ships will be the same faction
+    -- Assumes all player ships will be the same faction
     local player_faction = "Human Navy"
     local stations_key = _("scienceDB", "Stations")
     local stations_db = queryScienceDatabase(stations_key)
@@ -15029,7 +15029,7 @@ function checkSurviveEvents(delta)
         end
     end
 end
---	Abrupt end plot
+-- Abrupt end plot
 function humorousExuari()
     for i, p in ipairs(getActivePlayerShips()) do
         if p:getDockedWith() == nil then
@@ -15462,7 +15462,7 @@ function showEndStats(reason)
             _("msgMainscreen", "\nMissions completed: %i"),
             mission_complete_count
         )
-    --	optional_missions[comms_source:getCallSign()] = optional_missions[comms_source:getCallSign()] + 1
+    -- optional_missions[comms_source:getCallSign()] = optional_missions[comms_source:getCallSign()] + 1
     local opt_msg = ""
     for player, count in pairs(optional_missions) do
         if count ~= nil and count > 0 then
@@ -15492,7 +15492,7 @@ function showEndStats(reason)
     globalMessage(stat_message)
 end
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array

@@ -5,7 +5,7 @@ if(APPLE)
   if(NOT DEFINED ENV{MACOSX_DEPLOYMENT_TARGET})
     set(ENV{MACOSX_DEPLOYMENT_TARGET} "10.15")
   endif()
-  
+
   message(STATUS "Mac deployment target is: $ENV{MACOSX_DEPLOYMENT_TARGET}")
 endif()
 
@@ -24,7 +24,7 @@ if(DEFINED CPACK_PACKAGE_VERSION_MAJOR)
     set(MINOR "${CPACK_PACKAGE_VERSION_MINOR}")
     set(PATCH "${CPACK_PACKAGE_VERSION_PATCH}")
 else()
-    # Following [CMake docs](https://cmake.org/cmake/help/v3.7/command/project.html) 
+    # Following [CMake docs](https://cmake.org/cmake/help/v3.7/command/project.html)
     # You can override these by setting CMAKE_PROJECT_EmptyEpsilon_INCLUDE=<a_file>
     # In which you'd define the following variables:
     # - PROJECT_VERSION
@@ -93,13 +93,13 @@ if(WITH_DISCORD)
   endif()
   add_library(discord_h INTERFACE IMPORTED)
   set_target_properties(discord_h PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES "${DISCORD_INCLUDE_PATH}"  
+    INTERFACE_INCLUDE_DIRECTORIES "${DISCORD_INCLUDE_PATH}"
   )
   add_library(discord SHARED IMPORTED)
   set_target_properties(discord PROPERTIES
     IMPORTED_LOCATION "${DISCORD_LIB_PATH}/discord_game_sdk${CMAKE_SHARED_LIBRARY_SUFFIX}"
   )
-  
+
   if (WIN32)
     set_target_properties(discord PROPERTIES
       IMPORTED_IMPLIB "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib"
@@ -849,7 +849,7 @@ if(Python3_Interpreter_FOUND)
         DEPENDS ${SCRIPT_REFERENCE_SOURCES}
         COMMENT "Building script reference documentation.")
     add_custom_target(script_reference ALL DEPENDS "${SCRIPT_REFERENCE_HTML}")
-  
+
   # Matches install logic above.
   if(WIN32 OR STEAMSDK)
     install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION . OPTIONAL)
@@ -930,14 +930,14 @@ set(sp_runtime_root "/")
 
 if ("WIX" IN_LIST CPACK_GENERATOR)
     if (EmptyEpsilon_VERSION_MAJOR GREATER 100)
-	    # WIX does not like major version number > 256.
-	    # So if we're above 100, assume it's a year-like format and strip out century/millenium.
-	    math(EXPR wix_major "${EmptyEpsilon_VERSION_MAJOR} % 100")
+      # WIX does not like major version number > 256.
+      # So if we're above 100, assume it's a year-like format and strip out century/millenium.
+      math(EXPR wix_major "${EmptyEpsilon_VERSION_MAJOR} % 100")
 
         # WIX only care for the bundled PACKAGE_VERSION - fix only this one.
         set(CPACK_PACKAGE_VERSION "${wix_major}.${EmptyEpsilon_VERSION_MINOR}.${EmptyEpsilon_VERSION_PATCH}")
     endif()
-    
+
     # WIX is... weird.
     # When packaging, it puts each 'component' into a subdirectory.
     # Things without a specific component fall under an 'Unspecified' catch-all one[1]

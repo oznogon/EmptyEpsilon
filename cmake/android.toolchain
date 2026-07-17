@@ -10,7 +10,7 @@
 #   - build-tools (aapt, dx, zipalign, apksigner)
 #   - platform/android-{target_api} (for android.jar)
 # - java JDK with:
-#   - javac compiler for java 8 
+#   - javac compiler for java 8
 # - SDL2 build with the toolchain
 # - a signing key
 # This toolchain file is designed to setup everything if it's not supplied by the user, with the exception of the java JDK
@@ -55,7 +55,7 @@ if(ANDROID_SDK_PATH STREQUAL "")
         execute_process_ex(COMMAND ${CMAKE_COMMAND} -E tar -xf commandlinetools-tools.zip WORKING_DIRECTORY "${ANDROID_SDK_PATH}")
         find_program(sdkmanager sdkmanager PATHS "${ANDROID_SDK_PATH}/cmdline-tools/bin" NO_DEFAULT_PATH)
     endif()
- 
+
     if(NOT EXISTS "${ANDROID_SDK_PATH}/platforms/android-${ANDROID_API_TARGET}")
         execute_process_ex(COMMAND "${sdkmanager}" --sdk_root=${ANDROID_SDK_PATH} "platforms\;android-${ANDROID_API_TARGET}")
     endif()
@@ -141,10 +141,10 @@ macro(android_apk NAME APK_WITH_PACKS)
         COMMAND "${DX}" ARGS "--dex" "--min-sdk-version=26" "--output=${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/java_compiled/"
         DEPENDS "java_compiled/eu/daid/${NAME}/R.class"
     )
-    
+
     file(COPY "${SDL_INSTALL_PATH}/lib/libSDL2.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
     #file(COPY "${SDL_INSTALL_PATH}/lib/libhidapi.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
-    
+
     set(MAINLIB_FILENAME lib${MAINLIB_NAME}.so)
     add_custom_command(
         OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/${MAINLIB_FILENAME}"
@@ -157,13 +157,13 @@ macro(android_apk NAME APK_WITH_PACKS)
     file(REMOVE_RECURSE "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
     file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
     file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/scripts" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
-    
+
     if(APK_WITH_PACKS)
         file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/packs" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
     endif()
 
     file(GLOB_RECURSE ASSETS LIST_DIRECTORIES false RELATIVE "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/*")
-    
+
     add_custom_command(
         OUTPUT "${APK}"
         COMMAND "${AAPT}" ARGS package -f -M "${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml" -S "${CMAKE_CURRENT_SOURCE_DIR}/android/res" -I "${ANDROID_PLATFORM_JAR}" -F "${APK}"
@@ -173,7 +173,7 @@ macro(android_apk NAME APK_WITH_PACKS)
         WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/"
         DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}>"
     )
-    
+
     add_custom_command(
         OUTPUT "${APK_ALIGNED}"
         COMMAND "${CMAKE_COMMAND}" -E remove -f "${APK_ALIGNED}"

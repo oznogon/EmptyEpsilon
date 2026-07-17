@@ -1,30 +1,30 @@
-----------     CPU Ship Diversification Utility     ----------
---	Created from a desire to have a more diverse set up ships flying around out there.
---	Some of these are simple tweaks to existing ships. Some are more radically changed.
---	The intent for the armed ships is for them to be mixed in with the stock armed ships.
---	I usually end up creating a list of CPU ship templates:
---	ship_template = {	--ordered by relative strength
---		["Gnat"] =				{strength = 2,		create = gnat},
---		["Lite Drone"] =		{strength = 3,		create = droneLite},
---		["Jacket Drone"] =		{strength = 4,		create = droneJacket},
---		["Ktlitan Drone"] =		{strength = 4,		create = stockTemplate},
---	}
---	I order them by relative strength. This is an arbitrary value I give each ship to
---	help create groups of ships that are a consistent degree of difficulty compared to
---	the player ship or ships in the game. It's the create portion that is more
---	interesting in this context. With the templates set up in a list like this with the
---	create function in the list, a ship can be spawned like this:
---		local ship = ship_template[selected_template].create(enemyFaction,selected_template)
---	...where you specify selected_template and enemyFaction using whatever criteria your
---	scenario requires.
+-- CPU Ship Diversification Utility
+-- Created from a desire to have a more diverse set up ships flying around out there.
+-- Some of these are simple tweaks to existing ships. Some are more radically changed.
+-- The intent for the armed ships is for them to be mixed in with the stock armed ships.
+-- I usually end up creating a list of CPU ship templates:
+-- ship_template = { --ordered by relative strength
+--     ["Gnat"] = {strength = 2, create = gnat},
+--     ["Lite Drone"] = {strength = 3, create = droneLite},
+--     ["Jacket Drone"] = {strength = 4, create = droneJacket},
+--     ["Ktlitan Drone"] = {strength = 4, create = stockTemplate},
+-- }
+-- I order them by relative strength. This is an arbitrary value I give each ship to
+-- help create groups of ships that are a consistent degree of difficulty compared to
+-- the player ship or ships in the game. It's the create portion that is more
+-- interesting in this context. With the templates set up in a list like this with the
+-- create function in the list, a ship can be spawned like this:
+--     local ship = ship_template[selected_template].create(enemyFaction,selected_template)
+-- ...where you specify selected_template and enemyFaction using whatever criteria your
+-- scenario requires.
 --
---	The ship creation function also adds the ship to the science database.
+-- The ship creation function also adds the ship to the science database.
 --
---	No global variables per se, just the function names themselves. These functions were
---	cloned from scenario to scenario until I put them in this document in an effort to
---	reduce the workload on the pull request reviewer.
+-- No global variables per se, just the function names themselves. These functions were
+-- cloned from scenario to scenario until I put them in this document in an effort to
+-- reduce the workload on the pull request reviewer.
 --
---	Version 2.1
+-- Version 2.1
 function stockTemplate(enemyFaction, template)
     local ship = CpuShip():setFaction(enemyFaction):setTemplate(template)
     ship:onTakingDamage(function(self, instigator)
@@ -36,7 +36,7 @@ function stockTemplate(enemyFaction, template)
     return ship
 end
 --------------------------------------------------------------------------------------------
---	Additional enemy ships with some modifications from the original template parameters  --
+--  Additional enemy ships with some modifications from the original template parameters  --
 --------------------------------------------------------------------------------------------
 function atlantisY42(enemyFaction)
     --Relative strength reference number: 60
@@ -52,7 +52,6 @@ function atlantisY42(enemyFaction)
     ship:setShields(300, 200, 300, 200)
     ship:setImpulseMaxSpeed(65) --faster impulse (vs 30)
     ship:setRotationMaxSpeed(15) --faster maneuver (vs 3.5)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(2, 80, 190, 1500, 6, 8) --narrower (vs 100)
     ship:setBeamWeapon(3, 80, 170, 1500, 6, 8) --extra (vs 3 beams)
     ship:setWeaponStorageMax("Homing", 16) --more (vs 4)
@@ -253,10 +252,10 @@ function cruiserdrone(enemyFaction)
     end)
     local cruiserdrone_key = _("scienceDB", "Cruiser Drone")
     ship:setTypeName(cruiserdrone_key)
-    ship:setHullMax(80):setHull(80) --	stronger (vs 70)
-    ship:setShieldsMax(60, 60):setShields(60, 60) --	stronger (vs 40,40)
-    ship:setImpulseMaxSpeed(70) --	faster (vs 60)
-    ship:setRotationMaxSpeed(15) --	faster spin (vs 6)
+    ship:setHullMax(80):setHull(80) -- stronger (vs 70)
+    ship:setShieldsMax(60, 60):setShields(60, 60) -- stronger (vs 40,40)
+    ship:setImpulseMaxSpeed(70) -- faster (vs 60)
+    ship:setRotationMaxSpeed(15) -- faster spin (vs 6)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local cruiser_key = _("scienceDB", "Cruiser")
@@ -307,7 +306,6 @@ function cucaracha(enemyFaction)
     ship:setHull(100)
     ship:setRotationMaxSpeed(20) --faster maneuver (vs 10)
     ship:setAcceleration(30) --faster acceleration (vs 15)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 60, 0, 1500, 6, 10) --extra rear facing beam
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
@@ -538,7 +536,6 @@ function enforcer(enemyFaction)
     ship:setShields(200, 100, 100)
     ship:setHullMax(100) --stronger hull (vs 70)
     ship:setHull(100)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 30, 5, 1500, 6, 10) --narrower (vs 60), longer (vs 1000), stronger (vs 8)
     ship:setBeamWeapon(1, 30, -5, 1500, 6, 10)
     ship:setBeamWeapon(2, 0, 0, 0, 0, 0) --fewer (vs 4)
@@ -606,7 +603,6 @@ function farco3(enemyFaction)
     ship:setTypeName("Farco 3")
     ship:setShieldsMax(60, 40) --stronger shields (vs 50, 40)
     ship:setShields(60, 40)
-    --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
     ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
     ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
     local ships_key = _("scienceDB", "Ships")
@@ -699,7 +695,6 @@ function farco8(enemyFaction)
     ship:setTypeName("Farco 8")
     ship:setShieldsMax(80, 50) --stronger shields (vs 50, 40)
     ship:setShields(80, 50)
-    --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
     ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
     ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
     ship:setTubeLoadTime(0, 30) --faster (vs 60)
@@ -749,7 +744,6 @@ function farco11(enemyFaction)
     ship:setShieldsMax(80, 50) --stronger shields (vs 50, 40)
     ship:setShields(80, 50)
     ship:setRotationMaxSpeed(15) --faster maneuver (vs 10)
-    --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
     ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
     ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
     ship:setBeamWeapon(2, 20, 0, 1800, 5.0, 4.0) --additional sniping beam
@@ -799,7 +793,6 @@ function farco13(enemyFaction)
     ship:setShieldsMax(90, 70) --stronger shields (vs 50, 40)
     ship:setShields(90, 70)
     ship:setRotationMaxSpeed(15) --faster maneuver (vs 10)
-    --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
     ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
     ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
     ship:setBeamWeapon(2, 20, 0, 1800, 5.0, 4.0) --additional sniping beam
@@ -907,7 +900,6 @@ function gnat(enemyFaction)
     ship:setHull(15)
     ship:setImpulseMaxSpeed(140) --faster impulse (vs 120)
     ship:setRotationMaxSpeed(25) --faster maneuver (vs 10)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 40, 0, 600, 4, 3) --weaker (vs 6) beam
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
@@ -1213,7 +1205,6 @@ function jade5(enemyFaction)
     ship:setTypeName("Jade 5")
     ship:setJumpDrive(true)
     ship:setJumpDriveRange(5000, 35000)
-    --				   Index,  Arc,	  Dir, Range, Cycle,	Damage
     ship:setBeamWeapon(2, 70, -30, 600, 5.0, 2.0) --adjust beam direction to match starboard side (vs -35)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
@@ -1538,7 +1529,6 @@ function phobosT4(enemyFaction)
     ship:setRotationMaxSpeed(20) --faster maneuver (vs 10)
     ship:setShieldsMax(80, 30) --stronger shields (vs 50,40)
     ship:setShields(80, 30)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 90, -15, 1500, 6, 6) --longer (vs 1200), faster (vs 8)
     ship:setBeamWeapon(1, 90, 15, 1500, 6, 6)
     local ships_key = _("scienceDB", "Ships")
@@ -1591,7 +1581,6 @@ function predator(enemyFaction)
     ship:setRotationMaxSpeed(15) --faster maneuver (vs 6)
     ship:setJumpDrive(true)
     ship:setJumpDriveRange(5000, 35000)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 90, 0, 1000, 6, 4) --more (vs 0)
     ship:setBeamWeapon(1, 90, 180, 1000, 6, 4)
     ship:setWeaponTubeCount(8) --more (vs 3)
@@ -1673,7 +1662,6 @@ function shepherd(enemyFaction)
         end
     end)
     ship:setTypeName("Shepherd")
-    --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
     ship:setBeamWeapon(0, 10, 0, 3000, 4, 4) --narrower (vs 60), longer (vs 1000)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
@@ -1715,7 +1703,6 @@ function starhammerIII(enemyFaction)
         end
     end)
     ship:setTypeName("Starhammer III")
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(4, 60, 180, 1500, 8, 11) --extra rear facing beam
     ship:setTubeSize(0, "large")
     ship:setWeaponStorageMax("Homing", 16) --more (vs 4)
@@ -1770,7 +1757,6 @@ function starhammerV(enemyFaction)
     ship:setRotationMaxSpeed(15) --faster maneuver (vs 6)
     ship:setShieldsMax(450, 350, 250, 250, 350) --stronger shields (vs 450, 350, 150, 150, 350)
     ship:setShields(450, 350, 250, 250, 350)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(4, 60, 180, 1500, 8, 11) --extra rear facing beam
     ship:setWeaponStorageMax("Homing", 16) --more (vs 4)
     ship:setWeaponStorage("Homing", 16)
@@ -1896,7 +1882,6 @@ function touchy(enemyFaction)
         end
     end)
     ship:setTypeName("Touchy")
-    --				   Index,  Arc,	Dir,	Range, Cycle,	Damage
     ship:setBeamWeapon(0, 12, 0, 2200, 9.0, 9.0) --narrower (vs 60), longer (vs 1000), slower (vs 4),  stronger (vs 4)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
@@ -1943,7 +1928,6 @@ function tyr(enemyFaction)
     ship:setShields(400, 300, 300, 400, 300, 300)
     ship:setHullMax(100) --stronger hull (vs 70)
     ship:setHull(100)
-    --				   Index,  Arc,	  Dir, Range,	Cycle,	Damage
     ship:setBeamWeapon(0, 90, -60, 2500, 6, 8) --stronger beams, broader coverage
     ship:setBeamWeapon(1, 90, -120, 2500, 6, 8)
     ship:setBeamWeapon(2, 90, 60, 2500, 6, 8)
@@ -1997,7 +1981,6 @@ function waddle5(enemyFaction)
     end)
     ship:setTypeName("Waddle 5")
     ship:setWarpDrive(true)
-    --				   Index,  Arc,	  Dir, Range, Cycle,	Damage
     ship:setBeamWeapon(2, 70, -30, 600, 5.0, 2.0) --adjust beam direction to match starboard side (vs -35)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
@@ -2206,7 +2189,7 @@ function wzLindworm(enemyFaction)
     end
     return ship
 end
---	unarmed ships
+-- unarmed ships
 function spaceSedan(enemyFaction)
     --Relative strength reference number: 1
     local ship = CpuShip():setTemplate("Personnel Jump Freighter 3")
@@ -2297,7 +2280,7 @@ function serviceJonque(enemyFaction)
     addFreighter(jonque_key, ship) --update science database if applicable
     return ship
 end
---	science database update functions
+-- science database update functions
 function genericFreighterScienceInfo(specific_freighter_db, base_db, ship)
     local freighter_key = _("scienceDB", "Freighter")
     local subclass_key = _("scienceDB", "Sub-class")

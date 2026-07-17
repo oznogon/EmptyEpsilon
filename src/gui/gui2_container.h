@@ -31,7 +31,7 @@ public:
             float top = 0.0f;
             float bottom = 0.0f;
         };
-        
+
         glm::vec2 position{0.0f, 0.0f};
         sp::Alignment alignment = sp::Alignment::TopLeft;
         glm::vec2 size{1.0f, 1.0f};

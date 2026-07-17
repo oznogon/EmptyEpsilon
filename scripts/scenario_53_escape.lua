@@ -20,7 +20,7 @@ require("utils.lua")
 require("place_station_scenario_utility.lua")
 
 -------------------------------
---	Initialization routines  --
+--  Initialization routines  --
 -------------------------------
 function init()
     scenario_version = "5.0.12"
@@ -933,7 +933,7 @@ function init()
     --print("end of init")
 end
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -979,7 +979,7 @@ function setSettings()
 end
 function addRepulseToDatabase()
     --------------------------------------------------------------------------------------
-    --	Generic station descriptions: text and details from shipTemplates_stations.lua  --
+    --  Generic station descriptions: text and details from shipTemplates_stations.lua  --
     --------------------------------------------------------------------------------------
     local station_key = _("scienceDB", "Stations")
     local station_db = queryScienceDatabase(station_key)
@@ -988,53 +988,53 @@ function addRepulseToDatabase()
     local shield_key = _("scienceDB", "Shield")
     local hull_key = _("scienceDB", "Hull")
     --[[
-	if station_db == nil then
-		station_db = ScienceDatabase():setName(station_key)
-		station_db:setLongDescription(_("scienceDB","Stations are places for ships to dock, get repaired and replenished, interact with station personnel, etc. They are like oases, service stations, villages, towns, cities, etc."))
-		local small_station_key = _("scienceDB","Small Station")
-		station_db:addEntry(small_station_key)
-		local small_station_db = queryScienceDatabase(station_key,small_station_key)
-		small_station_db:setLongDescription(_("scienceDB","Stations of this size are often used as research outposts, listening stations, and security checkpoints. Crews turn over frequently in a small station's cramped accommodatations, but they are small enough to look like ships on many long-range sensors, and organized raiders sometimes take advantage of this by placing small stations in nebulae to serve as raiding bases. They are lightly shielded and vulnerable to swarming assaults."))
-		small_station_db:setImage("radar/smallstation.png")
-		small_station_db:setKeyValue(class_key,_("scienceDB","Small"))
-		small_station_db:setKeyValue(size_key,300)
-		small_station_db:setKeyValue(shield_key,300)
-		small_station_db:setKeyValue(hull_key,150)
-		small_station_db:setModelDataName("space_station_4")
-		local medium_station_key = _("scienceDB","Medium Station")
-		station_db:addEntry(medium_station_key)
-		local medium_station_db = queryScienceDatabase(station_key,medium_station_key)
-		medium_station_db:setLongDescription(_("scienceDB","Large enough to accommodate small crews for extended periods of times, stations of this size are often trading posts, refuelling bases, mining operations, and forward military bases. While their shields are strong, concerted attacks by many ships can bring them down quickly."))
-		medium_station_db:setImage("radar/mediumstation.png")
-		medium_station_db:setKeyValue(class_key,_("scienceDB","Medium"))
-		medium_station_db:setKeyValue(size_key,1000)
-		medium_station_db:setKeyValue(shield_key,800)
-		medium_station_db:setKeyValue(hull_key,400)
-		medium_station_db:setModelDataName("space_station_3")
-		local large_station_key = _("scienceDB","Large Station")
-		station_db:addEntry(large_station_key)
-		local large_station_db = queryScienceDatabase(station_key,large_station_key)
-		large_station_db:setLongDescription(_("scienceDB","These spaceborne communities often represent permanent bases in a sector. Stations of this size can be military installations, commercial hubs, deep-space settlements, and small shipyards. Only a concentrated attack can penetrate a large station's shields, and its hull can withstand all but the most powerful weaponry."))
-		large_station_db:setImage("radar/largestation.png")
-		large_station_db:setKeyValue(class_key,_("scienceDB","Large"))
-		large_station_db:setKeyValue(size_key,1300)
-		large_station_db:setKeyValue(shield_key,"1000/1000/1000")
-		large_station_db:setKeyValue(hull_key,500)
-		large_station_db:setModelDataName("space_station_2")
-		local huge_station_key = _("scienceDB","Huge Station")
-		station_db:addEntry(huge_station_key)
-		local huge_station_db = queryScienceDatabase(station_key,huge_station_key)
-		huge_station_db:setLongDescription(_("scienceDB","The size of a sprawling town, stations at this scale represent a faction's center of spaceborne power in a region. They serve many functions at once and represent an extensive investment of time, money, and labor. A huge station's shields and thick hull can keep it intact long enough for reinforcements to arrive, even when faced with an ongoing siege or massive, perfectly coordinated assault."))
-		huge_station_db:setImage("radar/hugestation.png")
-		huge_station_db:setKeyValue(class_key,_("scienceDB","Huge"))
-		huge_station_db:setKeyValue(size_key,1500)
-		huge_station_db:setKeyValue(shield_key,"1200/1200/1200/1200")
-		huge_station_db:setKeyValue(hull_key,800)
-		huge_station_db:setModelDataName("space_station_1")
-	end
-	--]]
+    if station_db == nil then
+        station_db = ScienceDatabase():setName(station_key)
+        station_db:setLongDescription(_("scienceDB","Stations are places for ships to dock, get repaired and replenished, interact with station personnel, etc. They are like oases, service stations, villages, towns, cities, etc."))
+        local small_station_key = _("scienceDB","Small Station")
+        station_db:addEntry(small_station_key)
+        local small_station_db = queryScienceDatabase(station_key,small_station_key)
+        small_station_db:setLongDescription(_("scienceDB","Stations of this size are often used as research outposts, listening stations, and security checkpoints. Crews turn over frequently in a small station's cramped accommodatations, but they are small enough to look like ships on many long-range sensors, and organized raiders sometimes take advantage of this by placing small stations in nebulae to serve as raiding bases. They are lightly shielded and vulnerable to swarming assaults."))
+        small_station_db:setImage("radar/smallstation.png")
+        small_station_db:setKeyValue(class_key,_("scienceDB","Small"))
+        small_station_db:setKeyValue(size_key,300)
+        small_station_db:setKeyValue(shield_key,300)
+        small_station_db:setKeyValue(hull_key,150)
+        small_station_db:setModelDataName("space_station_4")
+        local medium_station_key = _("scienceDB","Medium Station")
+        station_db:addEntry(medium_station_key)
+        local medium_station_db = queryScienceDatabase(station_key,medium_station_key)
+        medium_station_db:setLongDescription(_("scienceDB","Large enough to accommodate small crews for extended periods of times, stations of this size are often trading posts, refuelling bases, mining operations, and forward military bases. While their shields are strong, concerted attacks by many ships can bring them down quickly."))
+        medium_station_db:setImage("radar/mediumstation.png")
+        medium_station_db:setKeyValue(class_key,_("scienceDB","Medium"))
+        medium_station_db:setKeyValue(size_key,1000)
+        medium_station_db:setKeyValue(shield_key,800)
+        medium_station_db:setKeyValue(hull_key,400)
+        medium_station_db:setModelDataName("space_station_3")
+        local large_station_key = _("scienceDB","Large Station")
+        station_db:addEntry(large_station_key)
+        local large_station_db = queryScienceDatabase(station_key,large_station_key)
+        large_station_db:setLongDescription(_("scienceDB","These spaceborne communities often represent permanent bases in a sector. Stations of this size can be military installations, commercial hubs, deep-space settlements, and small shipyards. Only a concentrated attack can penetrate a large station's shields, and its hull can withstand all but the most powerful weaponry."))
+        large_station_db:setImage("radar/largestation.png")
+        large_station_db:setKeyValue(class_key,_("scienceDB","Large"))
+        large_station_db:setKeyValue(size_key,1300)
+        large_station_db:setKeyValue(shield_key,"1000/1000/1000")
+        large_station_db:setKeyValue(hull_key,500)
+        large_station_db:setModelDataName("space_station_2")
+        local huge_station_key = _("scienceDB","Huge Station")
+        station_db:addEntry(huge_station_key)
+        local huge_station_db = queryScienceDatabase(station_key,huge_station_key)
+        huge_station_db:setLongDescription(_("scienceDB","The size of a sprawling town, stations at this scale represent a faction's center of spaceborne power in a region. They serve many functions at once and represent an extensive investment of time, money, and labor. A huge station's shields and thick hull can keep it intact long enough for reinforcements to arrive, even when faced with an ongoing siege or massive, perfectly coordinated assault."))
+        huge_station_db:setImage("radar/hugestation.png")
+        huge_station_db:setKeyValue(class_key,_("scienceDB","Huge"))
+        huge_station_db:setKeyValue(size_key,1500)
+        huge_station_db:setKeyValue(shield_key,"1200/1200/1200/1200")
+        huge_station_db:setKeyValue(hull_key,800)
+        huge_station_db:setModelDataName("space_station_1")
+    end
+    --]]
     -----------------------------------------------------------------------------------
-    --	Template ship category descriptions: text from other shipTemplates... files  --
+    --  Template ship category descriptions: text from other shipTemplates... files  --
     -----------------------------------------------------------------------------------
     local ships_key = _("scienceDB", "Ships")
     local ships_db = queryScienceDatabase(ships_key)
@@ -1079,7 +1079,7 @@ function addRepulseToDatabase()
         )
     end
     ---------------------------------------------------------------------
-    --	Cruiser (identified as Karnack MK2 in stock science database)  --
+    --  Cruiser (identified as Karnack MK2 in stock science database)  --
     ---------------------------------------------------------------------
     local cruiser_key = _("scienceDB", "Cruiser")
     local cruiser_db = queryScienceDatabase(ships_key, frigate_key, cruiser_key)
@@ -1087,25 +1087,25 @@ function addRepulseToDatabase()
     local move_speed_key = _("scienceDB", "Move speed")
     local turn_speed_key = _("scienceDB", "Turn speed")
     --[[
-	if cruiser_db == nil then
-		frigate_db:addEntry(cruiser_key)
-		cruiser_db = queryScienceDatabase(ships_key,frigate_key,cruiser_key)
-		cruiser_db:setLongDescription(_("scienceDB","Fabricated by: Repulse shipyards. The Cruiser, sometimes known as the Karnack Cruiser Mark 2, is the sucessor to the widly sucesfull mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savoury purposes."))
-		cruiser_db:setKeyValue(class_key,frigate_key)
-		cruiser_db:setKeyValue(subclass_key,cruiser_key)
-		cruiser_db:setKeyValue(size_key,"100")
-		cruiser_db:setKeyValue(shield_key,"40/40")
-		cruiser_db:setKeyValue(hull_key,"70")
-		cruiser_db:setKeyValue(move_speed_key,_("scienceDB","3.6 U/min"))	--60
-		cruiser_db:setKeyValue(turn_speed_key,_("scienceDB","6 deg/sec"))
-		cruiser_db:setKeyValue(_("scienceDB","Beam weapon 345:90"),_("scienceDB","Rng:1 Dmg:6 Cyc:6"))
-		cruiser_db:setKeyValue(_("scienceDB","Beam weapon 15:90"),_("scienceDB","Rng:1 Dmg:6 Cyc:6"))
-		cruiser_db:setImage("radar/cruiser.png")
-		cruiser_db:setModelDataName("small_frigate_4")
-	end
-	--]]
+    if cruiser_db == nil then
+        frigate_db:addEntry(cruiser_key)
+        cruiser_db = queryScienceDatabase(ships_key,frigate_key,cruiser_key)
+        cruiser_db:setLongDescription(_("scienceDB","Fabricated by: Repulse shipyards. The Cruiser, sometimes known as the Karnack Cruiser Mark 2, is the sucessor to the widly sucesfull mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savoury purposes."))
+        cruiser_db:setKeyValue(class_key,frigate_key)
+        cruiser_db:setKeyValue(subclass_key,cruiser_key)
+        cruiser_db:setKeyValue(size_key,"100")
+        cruiser_db:setKeyValue(shield_key,"40/40")
+        cruiser_db:setKeyValue(hull_key,"70")
+        cruiser_db:setKeyValue(move_speed_key,_("scienceDB","3.6 U/min")) --60
+        cruiser_db:setKeyValue(turn_speed_key,_("scienceDB","6 deg/sec"))
+        cruiser_db:setKeyValue(_("scienceDB","Beam weapon 345:90"),_("scienceDB","Rng:1 Dmg:6 Cyc:6"))
+        cruiser_db:setKeyValue(_("scienceDB","Beam weapon 15:90"),_("scienceDB","Rng:1 Dmg:6 Cyc:6"))
+        cruiser_db:setImage("radar/cruiser.png")
+        cruiser_db:setModelDataName("small_frigate_4")
+    end
+    --]]
     --------------------------
-    --	Stock player ships  --
+    --  Stock player ships  --
     --------------------------
     local mainstream_key = _("scienceDB", "Mainstream")
     local stock_db = ships_db:addEntry(mainstream_key)
@@ -1116,7 +1116,7 @@ function addRepulseToDatabase()
             "Mainstream ships are those ship types that are commonly available to CUF crews serving on the front lines or in well established areas under the protection of the Human Navy more generally."
         )
     )
-    ----	Frigates
+    ---- Frigates
     local frigate_stock_db = stock_db:addEntry(frigate_key)
     frigate_stock_db:setLongDescription(
         _(
@@ -1124,7 +1124,7 @@ function addRepulseToDatabase()
             "Frigates are one size up from starfighters. They require a crew from 3 to 20 people.\nThink, Firefly, millennium falcon, slave I (Boba fett's ship).\n\nThey generally have 2 or more shield sections, but hardly ever more than 4.\n\nThis class of ships is normally not fitted with jump or warp drives. But in some cases ships are modified to include these, or for certain roles it is built in.\n\nThey are divided in 3 different sub-classes:\n* Cruiser: Weaponized frigates, focused on combat. These come in various roles.\n* Light transport: Small transports, like transporting up to 50 soldiers in spartan conditions or a few diplomats in luxury. Depending on the role it can have some weaponry.\n* Support: Support types come in many varieties. They are simply a frigate hull fitted with whatever was needed. Anything from mine-layers to science vessels."
         )
     )
-    --	Repulse
+    -- Repulse
     local repulse_key = _("scienceDB", "Repulse")
     frigate_stock_db:addEntry(repulse_key)
     local repulse_db = queryScienceDatabase(
@@ -1187,7 +1187,7 @@ function createRandomAlongArc(
     -- Center defined by x and y
     -- Radius defined by distance
     -- Start of arc between 0 and 360 (startArc), end arc: endArcClockwise
-    -- Use randomize to vary the distance from the center point. Omit to keep distance constant
+    -- Use randomize to vary the distance from the center point. Omit to keep distance constant.
     -- Example:
     --   createRandomAlongArc(Asteroid, 100, 500, 3000, 65, 120, 450)
     if randomize == nil then
@@ -1358,8 +1358,8 @@ function createRandomAsteroidAlongArc(
 end
 function buildNearbyStations()
     -- Organically (simulated asymetrically) grow stations from a central grid location
-    -- Order of creation: 	enemy stations, planet, enemy stations, planet,
-    -- 						independent stations, black hole, independent stations, black hole
+    -- Order of creation: enemy stations, planet, enemy stations, planet,
+    --     independent stations, black hole, independent stations, black hole
     -- Human Navy stations (friendly stations) come later in the game after the communications get repaired.
     brigx, brigy = brigStation:getPosition()
     gbLow = 1 --grid boundary low
@@ -2259,7 +2259,7 @@ function getFactionAdjacentGridLocationsSkip(dSkip, lx, ly)
     end
 end
 -----------------------------
---	Station communication  --
+--  Station communication  --
 -----------------------------
 function commsStation()
     if comms_target.comms_data == nil then
@@ -4572,7 +4572,7 @@ function getFriendStatus()
     end
 end
 --------------------------
---	Ship communication  --
+--  Ship communication  --
 --------------------------
 function commsShip()
     if comms_target.comms_data == nil then
@@ -5410,7 +5410,7 @@ function neutralComms(comms_data)
     return true
 end
 ------------------------------------------------------
---	First Plot starts when repulse hulk is scanned  --
+--  First Plot starts when repulse hulk is scanned  --
 ------------------------------------------------------
 function scanRepulse(delta)
     if difficulty >= 1 then
@@ -6296,7 +6296,7 @@ function showCrewFixers()
     end
 end
 ------------------------------------
---	Second Plot port beam repair  --
+--  Second Plot port beam repair  --
 ------------------------------------
 function portBeamEnable(delta)
     if playerRepulse:getRepairCrewCount() > 1 then
@@ -6514,7 +6514,7 @@ function resetBoris(self, instigator)
     )
 end
 ------------------------------------
---	Third Plot jump drive repair  --
+--  Third Plot jump drive repair  --
 ------------------------------------
 function jumpPartGathering(delta)
     if playerRepulse.debris1 then
@@ -6553,7 +6553,7 @@ function jumpPartFabrication(delta)
     end
 end
 -------------------------------
---	Fourth plot return home  --
+--  Fourth plot return home  --
 -------------------------------
 function returnHome(delta)
     for i = 1, #friendlyStationList do
@@ -6573,7 +6573,7 @@ function returnHome(delta)
     end
 end
 ---------------------------
---	Kraylor Patrol plot  --
+--  Kraylor Patrol plot  --
 ---------------------------
 function kraylorPatrol(delta)
     if kraylorPatrolSpawnDelay > 0 then
@@ -6695,7 +6695,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
     return enemyList
 end
 ----------------------
---	Transport plot  --
+--  Transport plot  --
 ----------------------
 function randomStation(randomStations)
     stationCount = 0
@@ -6921,7 +6921,7 @@ function independentTransportPlot(delta)
     end
 end
 --------------------------------
---	Junk Yard Billboard Plot  --
+--  Junk Yard Billboard Plot  --
 --------------------------------
 function billboardUpdate(delta)
     signsScanned = 0
@@ -6974,7 +6974,7 @@ function billboardFlash(delta)
     end
 end
 ------------------------
---	Ship Health Plot  --
+--  Ship Health Plot  --
 ------------------------
 function shipHealth(delta)
     playerShipHealth(delta)

@@ -526,7 +526,7 @@
             }
         }
     }
-    
+
     # GuiResizableDialog
     [resizabledialog] {
         # Corner handle for resizing the dialog.

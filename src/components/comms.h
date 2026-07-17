@@ -42,6 +42,6 @@ public:
 };
 class CommsTransmitterEnvironment
 {
-public:    
+public:
     std::unique_ptr<sp::script::Environment> script_environment;
 };

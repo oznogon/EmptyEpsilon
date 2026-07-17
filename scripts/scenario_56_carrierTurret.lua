@@ -43,25 +43,25 @@
 -- change "plot4 = doNotPush" to "plot4 = nil" in this scenario file
 
 -- typical colors used in ship log
--- 	"Red"			Red									Enemies spotted
---	"Blue"			Blue
---	"Yellow"		Yellow
---	"Magenta"		Magenta								Headquarters
---	"Green"			Green
---	"Cyan"			Cyan
---	"Black"			Black
---	"#555555"		Dark gray			"55,55,55"
---	"#ff4500"		Orange red			"255,69,0"
---	"#ff7f50"		Coral				"255,127,80"
---	"#5f9ea0"		Cadet blue			"95,158,160"	scientist station
---	"#4169e1"		Royal blue			"65,105,225"
---	"#8a2be2"		Blue violet			"138,43,226"	doctor station
---	"#ba55d3"		Medium orchid		"186,85,211"
---	"#a0522d"		Sienna				"160,82,45"
---	"#b29650"		Arbitrary			"178,150,80"	repair station
---	"#556b2f"		Dark olive green	"85,107,47"		tractor ship
---	"#228b22"		Forest green		"34,139,34"
---	"#b22222"		Firebrick			"178,34,34"
+--     "Red"        Red                          Enemies spotted
+--    "Blue"       Blue
+--  "Yellow"     Yellow
+-- "Magenta"    Magenta                          Headquarters
+--   "Green"      Green
+--    "Cyan"       Cyan
+--   "Black"      Black
+-- "#555555"    Dark gray        " 55,  55,  55"
+-- "#ff4500"    Orange red       "255,  69,   0"
+-- "#ff7f50"    Coral            "255, 127,  80"
+-- "#5f9ea0"    Cadet blue       " 95, 158, 160" Scientist station
+-- "#4169e1"    Royal blue       " 65, 105, 225"
+-- "#8a2be2"    Blue violet      "138,  43, 226" Doctor station
+-- "#ba55d3"    Medium orchid    "186,  85, 211"
+-- "#a0522d"    Sienna           "160,  82,  45"
+-- "#b29650"    Arbitrary        "178, 150,  80" Repair station
+-- "#556b2f"    Dark olive green " 85, 107,  47" Tractor ship
+-- "#228b22"    Forest green     " 34, 139,  34"
+-- "#b22222"    Firebrick        "178,  34,  34"
 
 require("utils.lua")
 require("place_station_scenario_utility.lua")
@@ -858,7 +858,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            --	Custom player ships
+            -- Custom player ships
             ["Amalgam"] = {
                 strength = 42,
                 cargo = 7,
@@ -2379,7 +2379,7 @@ function GMSpawnsEnemies()
         enemy:orderAttack(gmPlayer)
     end
 end
---	Set up terrain
+-- Set up terrain
 function setMovingAsteroids()
     movingAsteroidList = {}
     for aidx = 1, 30 do
@@ -3139,8 +3139,8 @@ function placeCTStation(x, y, name, faction, size)
     if station == nil then
         return nil
     end
-    --	station.comms_data.system_repair = {}
-    --	station.comms_data.coolant_pump_repair = {}
+    -- station.comms_data.system_repair = {}
+    -- station.comms_data.coolant_pump_repair = {}
     local station_name = station:getCallSign()
     local chosen_goods = random(1, 100)
     if
@@ -4009,7 +4009,7 @@ function friendlyDefense()
         end
     end
 end
---	Station communication
+-- Station communication
 function availableForComms(p)
     if not p:isCommsInactive() then
         return false
@@ -6466,7 +6466,7 @@ function missionMessages()
         end
     end
 end
---	Ship communication
+-- Ship communication
 function commsShip()
     if comms_target.comms_data == nil then
         comms_target.comms_data = { friendlyness = random(0.0, 100.0) }
@@ -7264,7 +7264,7 @@ function neutralComms()
     end
     return true
 end
---	Defend ship communication --
+-- Defend ship communication --
 function commsDefendShip()
     if comms_target.comms_data == nil then
         comms_target.comms_data = { friendlyness = random(0.0, 100.0) }
@@ -7442,7 +7442,7 @@ function neutralDefendComms()
     end
     return true
 end
---	Cargo management
+-- Cargo management
 function cargoTransfer()
     if
         playerCarrier:isValid()
@@ -8105,7 +8105,7 @@ function playerShipCargoInventory(p)
     )
     return out
 end
---	First plot line. Mission briefing, spawn other plots, wave handling
+-- First plot line. Mission briefing, spawn other plots, wave handling
 function initialOrders()
     plot1name = "initialOrders"
     if getScenarioTime() > initialOrderTimer then
@@ -8298,7 +8298,7 @@ function pressureWaves(delta)
         end
     end
 end
---	Plot 2
+-- Plot 2
 function destroyef2(delta)
     plot2name = "destroyef2"
     for i, ship in ipairs(ef2) do
@@ -9250,7 +9250,7 @@ function scientistDies()
     end
     betweenPlot2fleet()
 end
---	Plot 3
+-- Plot 3
 function destroyef3(delta)
     plot3name = "destroyef3"
     for i, ship in ipairs(ef3) do
@@ -10149,7 +10149,7 @@ function awaitRepairs(delta)
         return true
     end
 end
---	Plot 4 - more depth to plot 4 to come in a later revision
+-- Plot 4 - more depth to plot 4 to come in a later revision
 function destroyef4(delta)
     plot4name = "destroyef4"
     for i, ship in ipairs(ef4) do
@@ -10223,7 +10223,7 @@ function pushed()
     playerCarrier:removeCustom(doNotPushButtonTac)
 end
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -10244,8 +10244,8 @@ function tableSelectRandom(array)
     return array[math.random(1, #array)]
 end
 function setPlayers()
-    --	Give player ships defaults for this script. Called at the start
-    --	while paused & each time a ship's relay officer interacts with a station
+    -- Give player ships defaults for this script. Called at the start
+    -- while paused & each time a ship's relay officer interacts with a station
     for i, pobj in ipairs(getActivePlayerShips()) do
         if pobj.initialRep == nil then
             pobj:addReputationPoints(43 - (difficulty * 6))
@@ -10487,7 +10487,7 @@ function playerPower()
     end
     return playerShipScore
 end
---	Care and maintenance of repair crew directed by engineer or damage control
+-- Care and maintenance of repair crew directed by engineer or damage control
 function healthCheck()
     if health_check_time == nil then
         health_check_time = getScenarioTime() + healthCheckTimerInterval

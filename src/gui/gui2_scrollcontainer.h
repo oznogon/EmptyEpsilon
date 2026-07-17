@@ -54,7 +54,7 @@ public:
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
     // Pass mouse down to child elements, but only if they're visible.
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
-    // Pass mouse drag to child elements. This relies on 
+    // Pass mouse drag to child elements. This relies on
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     // Pass mouse up to child elements.
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
@@ -93,7 +93,7 @@ private:
     // Defines the scroll offset in virtual pixels, with 0 as the top.
     float scroll_offset = 0.0f;
     // Bias applied to map scroll_offset to the scrollbar's non-negative value
-    // range. (Negative for upward overflow) 
+    // range. (Negative for upward overflow)
     float scroll_offset_bias = 0.0f;
     // Defines the starting scroll position applied on first layout.
     ScrollStart scroll_start = ScrollStart::Top;

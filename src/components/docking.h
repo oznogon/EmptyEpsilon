@@ -151,7 +151,7 @@ public:
         Docking,
         Docked
     } state = State::NotDocking;
-    
+
     sp::ecs::Entity target;
     glm::vec2 docked_offset;
 

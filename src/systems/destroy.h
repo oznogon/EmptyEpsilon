@@ -5,5 +5,5 @@
 class OnDestroySystem
 {
 public:
-	static void destroyCallback(sp::ecs::Entity e);
+    static void destroyCallback(sp::ecs::Entity e);
 };

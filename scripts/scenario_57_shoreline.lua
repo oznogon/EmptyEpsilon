@@ -21,11 +21,11 @@
 -- Timed[None|Default]: No time limit
 -- Timed[45]: Scenario ends in 45 minutes
 
---improvements:
---	Add stations of other factions.
---	Have transports of various factions
---	Have other enemies cruising the area
---	Add defensive fleets around some stations
+-- improvements:
+-- - Add stations of other factions.
+-- - Have transports of various factions
+-- - Have other enemies cruising the area
+-- - Add defensive fleets around some stations
 
 require("utils.lua")
 
@@ -209,7 +209,7 @@ function createRandomAsteroidAlongArc(
     end
 end
 -----------------------------
---	Dynamic map functions  --
+--  Dynamic map functions  --
 -----------------------------
 function moveBlackHole(delta)
     local mbhx, mbhy = grawp:getPosition()
@@ -315,7 +315,7 @@ function moveAsteroids(delta)
     end
 end
 ----------------------
---	Initialization  --
+--  Initialization  --
 ----------------------
 function init()
     scenario_version = "2.0.4"
@@ -8029,11 +8029,11 @@ end
 function placeStation(x, y, name, faction, size)
     --x and y are the position of the station
     --name should be the name of the station or the name of the station group
-    --		omit name to get random station from groups in priority order
+    --    omit name to get random station from groups in priority order
     --faction is the faction of the station
-    --		omit and stationFaction will be used
+    --    omit and stationFaction will be used
     --size is the name of the station template to use
-    --		omit and station template will be chosen at random via szt function
+    --    omit and station template will be chosen at random via szt function
     if x == nil then
         return nil
     end
@@ -8550,7 +8550,7 @@ function pickStation(name)
     return nil
 end
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- - Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -8611,9 +8611,9 @@ function setStationsFromList()
         ["Exuari"] = exuari_names,
         ["Ktlitans"] = ktlitan_names,
     }
-    --	for name, list in pairs(faction_name) do
-    --		print("faction name:",name,"list:",list)
-    --	end
+    -- for name, list in pairs(faction_name) do
+    --     print("faction name:",name,"list:",list)
+    -- end
     local o_x = 0
     local o_y = 0
     local base_area_radius = 100000
@@ -8632,15 +8632,15 @@ function setStationsFromList()
             }
         end
         stationFaction = tableRemoveRandom(faction_list)
-        --		print("station faction:",stationFaction)
+        -- print("station faction:",stationFaction)
         local list_station_size = szt()
         local name_list = faction_name[stationFaction]
-        --		print("faction:",stationFaction,"name list:",name_list)
-        --		for _, name in ipairs(name_list) do
-        --			print("name:",name)
-        --		end
+        -- print("faction:",stationFaction,"name list:",name_list)
+        -- for _, name in ipairs(name_list) do
+        --     print("name:",name)
+        -- end
         local station_name = tableRemoveRandom(name_list)
-        --		print("Station name:",station_name)
+        -- print("Station name:",station_name)
         local area_radius = base_area_radius
         repeat
             o_x, o_y = vectorFromAngle(random(0, 360), random(0, area_radius))
@@ -8961,17 +8961,17 @@ function addPatrol(delta)
         },
     }
     --[[
-	if patrol_plot_diagnostic then
-		for member_count, group in pairs(formation_groups) do
-			print("Member count:",member_count)
-			for i=1,4 do
-				print(string.format("    Set %i of 4",i))
-				for j=1,member_count do
-					print("        Angle:",group[i][j].angle,"Distance:",group[i][j].dist)
-				end
-			end
-		end
-	end
+    if patrol_plot_diagnostic then
+        for member_count, group in pairs(formation_groups) do
+            print("Member count:",member_count)
+            for i=1,4 do
+                print(string.format("    Set %i of 4",i))
+                for j=1,member_count do
+                    print("        Angle:",group[i][j].angle,"Distance:",group[i][j].dist)
+                end
+            end
+        end
+    end
 --]]
     if #patrol_fleet > 7 then
         print("-----     Patrol fleet larger than available formations")
@@ -9020,7 +9020,7 @@ function addPatrol(delta)
     patrolPlot = checkPatrol
 end
 function resetPatrolDelay()
-    --	patrol_delay = random(50,100)
+    -- patrol_delay = random(50,100)
     patrol_delay = random(10, 20)
 end
 function pickPatrolPoint(faction, start_station)
@@ -9173,7 +9173,7 @@ function pickPatrolPoint(faction, start_station)
 end
 function checkPatrol(delta)
     if patrol_plot_diagnostic then
-        --		print("Patrol plot diagnostic, check patrol. patrol delay:",patrol_delay)
+        -- print("Patrol plot diagnostic, check patrol. patrol delay:",patrol_delay)
     end
     patrol_delay = patrol_delay - delta
     if patrol_delay < 0 then
@@ -9196,7 +9196,7 @@ function checkPatrol(delta)
 end
 function checkPatrolDestination(delta)
     if patrol_plot_diagnostic then
-        --		print("Patrol plot diagnostic, check patrol destination. patrol delay:",patrol_delay)
+        -- print("Patrol plot diagnostic, check patrol destination. patrol delay:",patrol_delay)
     end
     patrol_delay = patrol_delay - delta
     if patrol_delay < 0 then
@@ -9430,7 +9430,7 @@ function checkPatrolDestination(delta)
 end
 function checkPatrolEnemyProximity(delta)
     if patrol_plot_diagnostic then
-        --		print("Patrol plot diagnostic, check patrol enemy proximity. patrol delay:",patrol_delay)
+        -- print("Patrol plot diagnostic, check patrol enemy proximity. patrol delay:",patrol_delay)
     end
     patrol_delay = patrol_delay - delta
     if patrol_delay < 0 then
@@ -9514,8 +9514,8 @@ function checkPatrolEnemyProximity(delta)
     patrolPlot = checkPatrol
 end
 function vectorFromAngleNorth(angle, distance)
-    --	print("input angle to vectorFromAngleNorth:")
-    --	print(angle)
+    -- print("input angle to vectorFromAngleNorth:")
+    -- print(angle)
     angle = (angle + 270) % 360
     local x, y = vectorFromAngle(angle, distance)
     return x, y
@@ -10551,7 +10551,7 @@ function cargoInventory8()
     local p = getPlayerShip(8)
     cargoInventoryGivenShip(p)
 end
---		Gain or lose coolant from nebula functions
+-- Gain or lose coolant from nebula functions
 function coolantNebulae(delta)
     local x1, y1, x2, y2
     for pidx = 1, 8 do
@@ -10561,16 +10561,16 @@ function coolantNebulae(delta)
             local wonky_nebula_index = 0
             for i = 1, #coolant_nebula do
                 --[[
-				if p == nil then print("p is nil") end
-				if coolant_nebula[i] == nil then print("coolant_nebula[i] is nil") end
-				x1, y1 = p:getPosition()
-				x2, y2 = coolant_nebula[i]:getPosition()
-				if x2 == nil or y2 == nil then
-					print("wonky nebula")
-					print(string.format("i: %i",i))
-					print(string.format("#coolant_nebula: %i",#coolant_nebula))
-				end
-				--]]
+                if p == nil then print("p is nil") end
+                if coolant_nebula[i] == nil then print("coolant_nebula[i] is nil") end
+                x1, y1 = p:getPosition()
+                x2, y2 = coolant_nebula[i]:getPosition()
+                if x2 == nil or y2 == nil then
+                    print("wonky nebula")
+                    print(string.format("i: %i",i))
+                    print(string.format("#coolant_nebula: %i",#coolant_nebula))
+                end
+                ]]
                 if x2 ~= nil and y2 ~= nil then
                     if distanceDiagnostic then
                         print(
@@ -10742,7 +10742,7 @@ function getCoolant8()
     getCoolantGivenPlayer(p)
 end
 ----------------------------------------------
---	Transport ship generation and handling  --
+--  Transport ship generation and handling  --
 ----------------------------------------------
 function randomStation()
     local stationCount = 0
@@ -10991,7 +10991,7 @@ function randomTransportType()
 end
 
 -----------------------------
---	Station communication  --
+--  Station communication  --
 -----------------------------
 function commsStation()
     if comms_target.comms_data == nil then
@@ -12776,7 +12776,7 @@ function researchManeuverUpgrade()
 end
 
 --------------------------
---	Ship communication  --
+--  Ship communication  --
 --------------------------
 function altShipComms()
     if comms_target.comms_data == nil then
@@ -13278,7 +13278,7 @@ function friendlyFreighterComms()
                     chat_index
                 )
                 addCommsReply(_("Back"), function()
-                    --					setCommsMessage(c_msg)
+                    -- setCommsMessage(c_msg)
                     setCommsMessage("")
                     friendlyFreighterComms()
                 end)
@@ -13294,7 +13294,7 @@ function friendlyFreighterComms()
         or random(1, 100) < 22
     then
         if comms_target.comms_data.friendlyness > 66 then
-            --				setCommsMessage(_("trade-comms", "Yes?"))
+            -- setCommsMessage(_("trade-comms", "Yes?"))
             addCommsReply(
                 _("trade-comms", "Do you have cargo you might sell?"),
                 function()
@@ -15420,7 +15420,7 @@ function neutralComms(comms_data)
     return true
 end
 ------------------------------------
---	Generate call sign functions  --
+--  Generate call sign functions  --
 ------------------------------------
 function generateCallSign(prefix)
     if prefix == nil then
@@ -15462,7 +15462,7 @@ function fillPrefixPool()
     end
 end
 -----------------------
---	Wave management  --
+--  Wave management  --
 -----------------------
 function spawnEnemies(
     xOrigin,
@@ -15606,7 +15606,7 @@ function launchWaves()
             wave_start_incursion_distance + waveProgress * 10000,
             wave_start_incursion_distance + 20000 + waveProgress * 10000
         )
-        --		if wave2angle == nil then print("wave2angle is nil") end
+        -- if wave2angle == nil then print("wave2angle is nil") end
         local wave2startx, wave2starty =
             vectorFromAngle(wave2angle, wave2distance)
         wave2list = {}
@@ -15627,7 +15627,7 @@ function launchWaves()
         else
             wave3angle = wave2angle + random(60, 180)
         end
-        --		if wave3angle == nil then print("wave3angle is nil") end
+        -- if wave3angle == nil then print("wave3angle is nil") end
         local wave3startx, wave3starty = vectorFromAngle(
             wave3angle,
             random(
@@ -15648,7 +15648,7 @@ function launchWaves()
     end
     if waveSize == 4 then
         wave4angle = wave3angle + random(60, 120)
-        --		if wave4angle == nil then print("wave4angle is nil") end
+        -- if wave4angle == nil then print("wave4angle is nil") end
         local wave4startx, wave4starty = vectorFromAngle(
             wave4angle,
             random(
@@ -15739,8 +15739,8 @@ function monitorWaves(delta)
                     for p6idx = 1, 8 do
                         local p6obj = getPlayerShip(p6idx)
                         if p6obj ~= nil and p6obj:isValid() then
-                            --							if p6obj == nil then print("p6obj is nil") end
-                            --							if enemy == nil then print("enemy is nil") end
+                            -- if p6obj == nil then print("p6obj is nil") end
+                            -- if enemy == nil then print("enemy is nil") end
                             local x1, y1 = p6obj:getPosition()
                             local x2, y2 = enemy:getPosition()
                             local curdist = distance(x1, y1, x2, y2)
@@ -15985,14 +15985,14 @@ function showGameEndStatistics()
     end
 end
 -----------------------------
---	Required plot choices  --
+--  Required plot choices  --
 -----------------------------
---		Required plot choice: Undercut leads to base destruction
---			Randomly choose between stations (Outpost-21, Outpost-33, Lando, Outpost-8) as the base where Charles Undercut hides
---			At the base, player told that Undercut took a job on a freighter
---			At the freighter, the captain will want cargo before allowing Undercut to talk
---			Undercut identifies an enemy Kraylor base after cargo provided
---			Destruction of enemy base completes mission.
+-- Required plot choice: Undercut leads to base destruction
+--     Randomly choose between stations (Outpost-21, Outpost-33, Lando, Outpost-8) as the base where Charles Undercut hides
+--     At the base, player told that Undercut took a job on a freighter
+--     At the freighter, the captain will want cargo before allowing Undercut to talk
+--     Undercut identifies an enemy Kraylor base after cargo provided
+--     Destruction of enemy base completes mission.
 function chooseUndercutBase()
     local hideChoice = math.random(1, 4)
     if hideChoice == 1 then
@@ -16366,11 +16366,11 @@ function undercutEnemyBase(delta)
         removeGMFunction("Req Undercut")
     end
 end
---      Required plot choice: Stettor sensors find enemy base - destroy
---			Randomly choose between stations (Vactel, Archer, Deer, Cavor) as the base to bring random cargo items to
---			Randomly select cargo items (part 1: dilithium, cobalt, tritanium; part 2: software, optic, robotic; part 3: sensor)
---			After the cargo is brought, sensors detect an enemy base to destroy
---			Destruction of enemy base completes the mission
+-- Required plot choice: Stettor sensors find enemy base - destroy
+-- - Randomly choose between stations (Vactel, Archer, Deer, Cavor) as the base to bring random cargo items to
+-- - Randomly select cargo items (part 1: dilithium, cobalt, tritanium; part 2: software, optic, robotic; part 3: sensor)
+-- - After the cargo is brought, sensors detect an enemy base to destroy
+-- - Destruction of enemy base completes the mission
 function chooseSensorBase()
     if sensorBase == nil then
         local sensorChoice = math.floor(random(1, 4))
@@ -16509,11 +16509,11 @@ function stettorEnemyBase(delta)
     end
 end
 --      Required plot choice: Traitor bought identifies enemy base
---			Randomly choose between stations (Marconi, Muddville, Alcaleica) for spy location
---			At the station, find out spy is on a freighter
---			The freighter will demand cargo for spy (randomly selected)
---			Spy will identify an enemy base
---			Destruction of enemy base completes the mission
+-- - Randomly choose between stations (Marconi, Muddville, Alcaleica) for spy location
+-- - At the station, find out spy is on a freighter
+-- - The freighter will demand cargo for spy (randomly selected)
+-- - Spy will identify an enemy base
+-- - Destruction of enemy base completes the mission
 function chooseTraitorBase()
     if traitorBase == nil then
         local traiterBaseChoice = math.floor(random(1, 3))
@@ -16774,9 +16774,9 @@ function sporiskyEnemyBase(delta)
     end
 end
 --      Required plot choice: black hole horizon research
---			Randomly choose necessary research cargo (part 1: communication, lifter, repulsor; part 2: sensor) to bring to station Emory
---			Once parts are gathered, player will need to gather data from black hole by staying close to get sensor readings
---			Getting the black hole scans completes the mission
+-- - Randomly choose necessary research cargo (part 1: communication, lifter, repulsor; part 2: sensor) to bring to station Emory
+-- - Once parts are gathered, player will need to gather data from black hole by staying close to get sensor readings
+-- - Getting the black hole scans completes the mission
 function chooseHorizonParts()
     if hr1part == nil then
         local hr1Choice = math.random(3)
@@ -17063,9 +17063,9 @@ function scanBlackHole()
     )
 end
 -----------------------------
--- 	Optional plot choices  --
+--  Optional plot choices  --
 -----------------------------
---      Optional plot choice: Beam range upgrade
+-- Optional plot choice: Beam range upgrade
 function chooseBeamRangeParts()
     if br1part == nil then
         local br1partChoice = math.floor(random(1, 3))

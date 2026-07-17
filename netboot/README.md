@@ -44,7 +44,7 @@ To launch it, run `python config_manager.py` from the server's home directory. T
 
 ## Rename clients (setname)
 
-By default, each client uses its hardware MAC address as its name and displays its name in the upper-left corner of the EmptyEpsilon main menu. You can configure names for each client using the `config_manager.py` tool's `setname` command. 
+By default, each client uses its hardware MAC address as its name and displays its name in the upper-left corner of the EmptyEpsilon main menu. You can configure names for each client using the `config_manager.py` tool's `setname` command.
 
 For example, to rename the system with a specific MAC address to `Red_shirt` from the `(Cmd)` prompt, run:
 

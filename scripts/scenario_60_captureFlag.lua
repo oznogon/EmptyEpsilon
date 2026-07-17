@@ -94,134 +94,134 @@ function init()
 end
 function presetOptionVariables()
     --[[
-	--If you insert a custom ship_name here, be sure to remove it from the pool of random names
-	preset_players = {}
-	--1st ship spawned: Maverick
-	table.insert(preset_players,
-		{
-			xo = "Starry",				--1st choice
-			ship_name = "Phoenix",
-			faction = "Human Navy",
-			ship_pref_1 = "Maverick",	--pref 2
-			ship_pref_2 = "Nautilus",	--pref 1
-			ship_pref_3 = "Player Cruiser",
-		}
-	)
-	table.insert(preset_players,
-		{
-			xo = "Aldric",				--3rd choice
-			faction = "Kraylor",
-			ship_name = "Durance",
-			ship_pref_1 = "Maverick",	--pref 2
-			ship_pref_2 = "Atlantis",	--pref 1
-			ship_pref_3 = "Crucible",
-			ship_pref_4 = "Piranha",
-			ship_pref_5 = "Player Cruiser",
-			ship_pref_6 = "Player Missile Cr.",
-		}
-	)
-	--2nd ship spawned: Atlantis
-	table.insert(preset_players,
-		{
-			xo = "Larry",
-			ship_name = "Mondo",
-			faction = "Human Navy",
-		}
-	)
-	table.insert(preset_players,
-		{
-			xo = "Epeac",				--2nd choice
-			faction = "Kraylor",
-			ship_name = "Dauntless",
-			ship_pref_1 = "Atlantis",
-			ship_pref_2 = "Maverick",
-			ship_pref_3 = "Crucible",
-		}
-	)
-	--3rd ship spawned: Phobos M3P
-	table.insert(preset_players,
-		{
-			xo = "Lupus",				--5th choice
-			faction = "Human Navy",
-			ship_name = "Harbinger",
-			ship_pref_1 = "PhobosM3P",		--Lupus prefers warp
-			ship_pref_4 = "Atlantis",		--Theta pref 1
-			ship_pref_2 = "Crucible",
-			ship_pref_3 = "Maverick",
-		}
-	)
-	table.insert(preset_players,
-		{
-			xo = "Daid",
-			faction = "Kraylor",
-			ship_name = "UltiShiptastic",
-		}
-	)
-	--4th ship spawned: Crucible
-	table.insert(preset_players,
-		{
-			xo = "Mo",
-			ship_name = "Shotgun",
-			faction = "Human Navy",
-		}
-	)
-	table.insert(preset_players,
-		{
-			xo = "Theta",				--4th choice
-			faction = "Kraylor",
-			ship_name = "Prokop",
-			ship_pref_1 = "Crucible",	--pref 2
-			ship_pref_2 = "Atlantis",	--pref 1
-			ship_pref_3 = "Maverick",
-			ship_pref_4 = "Phobos M3P",
-		}
-	)
-	--5th ship spawned: Flavia P.Falcon
-	table.insert(preset_players,
-		{
-			xo = "Curly",
-			ship_name = "Jayhawk",
-			faction = "Human Navy",
-		}
-	)
-	table.insert(preset_players,
-		{
-			xo = "AJ",
-			ship_name = "Roc",
-			faction = "Kraylor",
-		}
-	)
-	--6th ship spawned: Repulse
-	table.insert(preset_players,
-		{
-			xo = "Shemp",
-			ship_name = "Lizard",
-			faction = "Human Navy",
-		}
-	)
-	table.insert(preset_players,
-		{
-			xo = "Hemmond",
-			faction = "Kraylor",
-			ship_name = "Sentinel",
-		}
-	)
-	--7th ship spawned: Player Missile Cr.
-	table.insert(preset_players,
-		{
-			xo = "Ted",
-			ship_name = "Cremator",
-			faction = "Human Navy",
-		}
-	)
-	table.insert(preset_players,
-		{
-			xo = "Hermann",
-			ship_name = "Charger",
-			faction = "Kraylor",
-		}
-	)
-	--]]
+    --If you insert a custom ship_name here, be sure to remove it from the pool of random names
+    preset_players = {}
+    --1st ship spawned: Maverick
+    table.insert(preset_players,
+        {
+            xo = "Starry", --1st choice
+            ship_name = "Phoenix",
+            faction = "Human Navy",
+            ship_pref_1 = "Maverick", --pref 2
+            ship_pref_2 = "Nautilus", --pref 1
+            ship_pref_3 = "Player Cruiser",
+        }
+    )
+    table.insert(preset_players,
+        {
+            xo = "Aldric", --3rd choice
+            faction = "Kraylor",
+            ship_name = "Durance",
+            ship_pref_1 = "Maverick", --pref 2
+            ship_pref_2 = "Atlantis", --pref 1
+            ship_pref_3 = "Crucible",
+            ship_pref_4 = "Piranha",
+            ship_pref_5 = "Player Cruiser",
+            ship_pref_6 = "Player Missile Cr.",
+        }
+    )
+    --2nd ship spawned: Atlantis
+    table.insert(preset_players,
+        {
+            xo = "Larry",
+            ship_name = "Mondo",
+            faction = "Human Navy",
+        }
+    )
+    table.insert(preset_players,
+        {
+            xo = "Epeac", --2nd choice
+            faction = "Kraylor",
+            ship_name = "Dauntless",
+            ship_pref_1 = "Atlantis",
+            ship_pref_2 = "Maverick",
+            ship_pref_3 = "Crucible",
+        }
+    )
+    --3rd ship spawned: Phobos M3P
+    table.insert(preset_players,
+        {
+            xo = "Lupus", --5th choice
+            faction = "Human Navy",
+            ship_name = "Harbinger",
+            ship_pref_1 = "PhobosM3P", --Lupus prefers warp
+            ship_pref_4 = "Atlantis", --Theta pref 1
+            ship_pref_2 = "Crucible",
+            ship_pref_3 = "Maverick",
+        }
+    )
+    table.insert(preset_players,
+        {
+            xo = "Daid",
+            faction = "Kraylor",
+            ship_name = "UltiShiptastic",
+        }
+    )
+    --4th ship spawned: Crucible
+    table.insert(preset_players,
+        {
+            xo = "Mo",
+            ship_name = "Shotgun",
+            faction = "Human Navy",
+        }
+    )
+    table.insert(preset_players,
+        {
+            xo = "Theta", --4th choice
+            faction = "Kraylor",
+            ship_name = "Prokop",
+            ship_pref_1 = "Crucible", --pref 2
+            ship_pref_2 = "Atlantis", --pref 1
+            ship_pref_3 = "Maverick",
+            ship_pref_4 = "Phobos M3P",
+        }
+    )
+    --5th ship spawned: Flavia P.Falcon
+    table.insert(preset_players,
+        {
+            xo = "Curly",
+            ship_name = "Jayhawk",
+            faction = "Human Navy",
+        }
+    )
+    table.insert(preset_players,
+        {
+            xo = "AJ",
+            ship_name = "Roc",
+            faction = "Kraylor",
+        }
+    )
+    --6th ship spawned: Repulse
+    table.insert(preset_players,
+        {
+            xo = "Shemp",
+            ship_name = "Lizard",
+            faction = "Human Navy",
+        }
+    )
+    table.insert(preset_players,
+        {
+            xo = "Hemmond",
+            faction = "Kraylor",
+            ship_name = "Sentinel",
+        }
+    )
+    --7th ship spawned: Player Missile Cr.
+    table.insert(preset_players,
+        {
+            xo = "Ted",
+            ship_name = "Cremator",
+            faction = "Human Navy",
+        }
+    )
+    table.insert(preset_players,
+        {
+            xo = "Hermann",
+            ship_name = "Charger",
+            faction = "Kraylor",
+        }
+    )
+    ]]
 end
 function setConstants()
     player_wing_names = {
@@ -1403,8 +1403,8 @@ function setGlobals()
     hideFlagTime = 300 -- See GM button. Time given to hide flag; this is measured in real time seconds; (300 secs or 5 mins is the normal setting; 60 for certain tests)
     maxGameTime = gameTimeLimit -- See GM Button.
     -- intial player placement locations; note that these locations are intended to be generally consistent and independent of the environment option chosen
-    --player side   		  Hum   Kra    Hum   Kra    Hum    Kra    Hum   Kra    Hum    Kra    Hum   Kra	  Hum	 Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra
-    --player index   		   1     2      3     4      5      6      7     8      9     10     11    12	  13	 14     15     16     17     18     19     20     21     22     23     24     25     26     27     28     29     30     31     32
+    --player side   Hum   Kra    Hum   Kra    Hum    Kra    Hum   Kra    Hum    Kra    Hum   Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra
+    --player index    1     2      3     4      5      6      7     8      9     10     11    12     13     14     15     16     17     18     19     20     21     22     23     24     25     26     27     28     29     30     31     32
     playerStartX = {
         -1000,
         1000,
@@ -1809,21 +1809,21 @@ function setVariations()
     adverseEffect = murphy_config[getScenarioSetting("Murphy")].adverse --not used
     coolant_loss = murphy_config[getScenarioSetting("Murphy")].lose_coolant --not used
     coolant_gain = murphy_config[getScenarioSetting("Murphy")].gain_coolant --not used
-    --	difficulty impacts:
-    --		placing decoys (easy: no decoys)
-    --		enemy danger value
-    --			Easy:	starts at .5,	increments by .1
-    --			Normal:	starts at .8,	increments by .2
-    --			Hard:	starts at 1,	increments by .5
-    --		missile type availability
-    --		repair crew availability
-    --		flag is pre-scanned on easy difficulty
-    --		shape of radar signature on science edge (identical between flag and decoy on hard)
-    --		messages to Science from drones:
-    --			Easy:	messages from all drones
-    --			Normal:	messages from friendly drones
-    --			Hard:	messages from drones launched from a player's ship
-    --	Note: these might be divided out in a future release
+    -- difficulty impacts:
+    --     placing decoys (easy: no decoys)
+    --     enemy danger value
+    --         Easy:   starts at 0.5, increments by .1
+    --         Normal: starts at 0.8, increments by .2
+    --         Hard:   starts at 1.0, increments by .5
+    --     missile type availability
+    --     repair crew availability
+    --     flag is pre-scanned on easy difficulty
+    --     shape of radar signature on science edge (identical between flag and decoy on hard)
+    --     messages to Science from drones:
+    --         Easy: messages from all drones
+    --         Normal: messages from friendly drones
+    --         Hard: messages from drones launched from a player's ship
+    -- Note: these might be divided out in a future release
     arena_config = {
         { name = "Normal", boundary = 100000, text = _("buttonGM", "medium") },
         { name = "Small", boundary = 50000, text = _("buttonGM", "small") },
@@ -1952,7 +1952,7 @@ function setVariations()
     terrain_text = terrain_selection.text
 end
 ------------------
---	GM Buttons  --
+--  GM Buttons  --
 ------------------
 function setGMButtons()
     mainGMButtons = mainGMButtonsDuringPause
@@ -2478,11 +2478,11 @@ function playerConfig()
     end
     addGMFunction(button_label, configureDrones)
     --[[
-	local p = getPlayerShip(-1)
-	if p == nil then
-		addGMFunction(string.format(_("buttonGM", "+Probes %i"),revisedPlayerShipProbeCount),setPlayerProbes)
-	end
-	--]]
+    local p = getPlayerShip(-1)
+    if p == nil then
+        addGMFunction(string.format(_("buttonGM", "+Probes %i"),revisedPlayerShipProbeCount),setPlayerProbes)
+    end
+    --]]
 end
 function setGameTimeLimit()
     clearGMFunctions()
@@ -2794,7 +2794,7 @@ function setTagDamage()
         )
     end
 end
---	Drone related GM button functions
+-- Drone related GM button functions
 function setDroneCarryingCapacity()
     clearGMFunctions()
     addGMFunction(_("buttonGM", "-Main"), mainGMButtons)
@@ -3543,23 +3543,23 @@ function gatherStats()
         end
     end
     --[[sort
-	local sorted_ships = {}
-	for ship, details in pairs(stat_list.human.ship) do
-		table.insert(sorted_ships,{name=ship,details=details})
-	end
-	table.sort(sorted_ships, function(a,b)
-		return a.name < b.name
-	end)
-	stat_list.human.sorted_ships = sorted_ships
-	sorted_ships = {}
-	for ship, details in pairs(stat_list.kraylor.ship) do
-		table.insert(sorted_ships,{name=ship,details=details})
-	end
-	table.sort(sorted_ships, function(a,b)
-		return a.name < b.name
-	end)
-	stat_list.kraylor.sorted_ships = sorted_ships
-	--]]
+    local sorted_ships = {}
+    for ship, details in pairs(stat_list.human.ship) do
+        table.insert(sorted_ships,{name=ship,details=details})
+    end
+    table.sort(sorted_ships, function(a,b)
+        return a.name < b.name
+    end)
+    stat_list.human.sorted_ships = sorted_ships
+    sorted_ships = {}
+    for ship, details in pairs(stat_list.kraylor.ship) do
+        table.insert(sorted_ships,{name=ship,details=details})
+    end
+    table.sort(sorted_ships, function(a,b)
+        return a.name < b.name
+    end)
+    stat_list.kraylor.sorted_ships = sorted_ships
+    --]]
     storage.stats = stat_list
     return stat_list
 end
@@ -3689,7 +3689,7 @@ function detailedDroneReport()
     print(">>>>>>>>>>>>>>>>>END DETAILED REPORT<<<<<<<<<<<<<<<<<<<")
 end
 ----------------------------------------
---	Initialization support functions  --
+--  Initialization support functions  --
 ----------------------------------------
 function initializeDroneButtonFunctionTables()
     drop_decoy_functions = {
@@ -3705,23 +3705,23 @@ function initializeDroneButtonFunctionTables()
 end
 function namePlayer(p, player_type)
     if p.name == nil then
-        --		print("template:",player_type)
+        -- print("template:",player_type)
         if preset_players ~= nil then
-            --			print("preset players exist")
+            -- print("preset players exist")
             if #preset_players > 0 then
-                --				print("preset players remain:",#preset_players)
+                -- print("preset players remain:",#preset_players)
                 for i = 1, #preset_players do
-                    --					print("Checking item number:",i,"XO:",preset_players[i].xo)
+                    -- print("Checking item number:",i,"XO:",preset_players[i].xo)
                     if preset_players[i].ship_pref_1 ~= nil then --preference
-                        --						print("has ship preference:",preset_players[i].ship_pref_1,"current template:",player_type)
+                        -- print("has ship preference:",preset_players[i].ship_pref_1,"current template:",player_type)
                         if preset_players[i].ship_pref_1 == player_type then
-                            --							print("ship preference matches")
+                            -- print("ship preference matches")
                             if preset_players[i].faction ~= nil then
-                                --								print("has preferred faction:",preset_players[i].faction)
+                                -- print("has preferred faction:",preset_players[i].faction)
                                 if
                                     preset_players[i].faction == p:getFaction()
                                 then
-                                    --									print("faction matches")
+                                    -- print("faction matches")
                                     if preset_players[i].ship_name ~= nil then --preference, faction, name
                                         p:setCallSign(
                                             preset_players[i].ship_name
@@ -3784,7 +3784,7 @@ function namePlayer(p, player_type)
                             end
                         end
                     elseif preset_players[i].ship_name ~= nil then --name
-                        --						print("has ship name:",preset_players[i].ship_name)
+                        -- print("has ship name:",preset_players[i].ship_name)
                         if preset_players[i].faction ~= nil then
                             if preset_players[i].faction == p:getFaction() then --name, faction, no preference
                                 p:setCallSign(preset_players[i].ship_name)
@@ -4479,10 +4479,10 @@ function setPlayer(pobj, playerIndex)
     end)
 end
 -----------------
---	Utilities  --
+--  Utilities  --
 -----------------
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -4574,7 +4574,7 @@ function createRandomAlongArc(
     end
     return arcObjects
 end
---	Mortal repair crew
+-- Mortal repair crew
 function healthCheck(delta)
     if getScenarioTime() > health_check_time then
         for pidx = 1, 32 do
@@ -4754,7 +4754,7 @@ function resetPreviousSystemHealth(p)
     end
 end
 
---	Marauding enemies
+-- Marauding enemies
 function marauderWaves(delta)
     if getScenarioTime() > wave_time then
         if autoEnemies then
@@ -4844,10 +4844,10 @@ function marauderWaves(delta)
                 )
                 ship:orderFlyTowards(mkex, mkey)
             end
-            --			kmf = spawnEnemies(mksx,mksy,dangerValue,"Exuari")
-            --			for i, enemy in ipairs(kmf) do
-            --				enemy:orderFlyTowards(mkex,mkey)
-            --			end
+            -- kmf = spawnEnemies(mksx,mksy,dangerValue,"Exuari")
+            -- for i, enemy in ipairs(kmf) do
+            --     enemy:orderFlyTowards(mkex,mkey)
+            -- end
             wakeList =
                 getObjectsInRadius(playerStartX[1], playerStartY[1], 1000)
             for i, obj in ipairs(wakeList) do
@@ -4980,7 +4980,7 @@ function stockTemplate(enemyFaction, template)
     return ship
 end
 -----------------------------------
---	Different terrain functions  --
+--  Different terrain functions  --
 -----------------------------------
 function emptyTerrain()
     -- there is no terrain except for the center 'Zebra Station'
@@ -5470,7 +5470,7 @@ function szt()
     end
     return sizeTemplate
 end
---	Random symmetric terrain
+-- Random symmetric terrain
 function mirrorKrikAsteroids()
     local ax = nil
     local ay = nil
@@ -5611,7 +5611,7 @@ function randomSymmetric()
         nebLine0Direction = "out" --nebula line zero direction of travel
     end
 end
---	Just passing by terrain
+-- Just passing by terrain
 function justPassingBy()
     dynamicTerrain = moveJustPassingBy
     -- this environment design places a black hole to the rear of each startup area and has large bands of nebula and some asteroids orbiting the black holes in opposite directions
@@ -6192,24 +6192,24 @@ function moveJustPassingBy(delta)
     -- use this section if you want to do this, comment out if you don't
     -- note that once underway, 'left' and 'right' refer to the original configurations as their positions will change (duh....)
     --[[
-		-- update the angular positions around the origin and adjust for 360
-		left_bh_angle_to_origin = left_bh_angle_to_origin + orbital_velocity
-		if left_bh_angle_to_origin > 360 then
-			left_bh_angle_to_origin = left_bh_angle_to_origin - 360
-		end
-		right_bh_angle_to_origin = right_bh_angle_to_origin + orbital_velocity
-		if right_bh_angle_to_origin > 360 then
-			right_bh_angle_to_origin = right_bh_angle_to_origin - 360
-		end
+        -- update the angular positions around the origin and adjust for 360
+        left_bh_angle_to_origin = left_bh_angle_to_origin + orbital_velocity
+        if left_bh_angle_to_origin > 360 then
+            left_bh_angle_to_origin = left_bh_angle_to_origin - 360
+        end
+        right_bh_angle_to_origin = right_bh_angle_to_origin + orbital_velocity
+        if right_bh_angle_to_origin > 360 then
+            right_bh_angle_to_origin = right_bh_angle_to_origin - 360
+        end
 
-		-- set the new blackhole positions before updating all their orbiting bodies
-		-- setCirclePos(obj, x, y, angle, distance)
-			--   obj: An object.
-			--   x, y: Origin coordinates.
-			--   angle, distance: Relative heading and distance from the origin.
-		setCirclePos(left_blackhole, 0, 0, left_bh_angle_to_origin, orbital_radius)
-		setCirclePos(right_blackhole, 0, 0, right_bh_angle_to_origin, orbital_radius)
-		--]]
+        -- set the new blackhole positions before updating all their orbiting bodies
+        -- setCirclePos(obj, x, y, angle, distance)
+            --   obj: An object.
+            --   x, y: Origin coordinates.
+            --   angle, distance: Relative heading and distance from the origin.
+        setCirclePos(left_blackhole, 0, 0, left_bh_angle_to_origin, orbital_radius)
+        setCirclePos(right_blackhole, 0, 0, right_bh_angle_to_origin, orbital_radius)
+    ]]
 
     -- first do the left side
     left_bh_center_x, left_bh_center_y = left_blackhole:getPosition()
@@ -6322,7 +6322,7 @@ function moveJustPassingBy(delta)
     end
 
 end --moveJustPassingBy
---	Down The Rabbit Hole Terrain  --
+-- Down The Rabbit Hole Terrain  --
 function downTheRabbitHole()
     -- This terrain is a collection of interconnected worm holes that connect the interiors of the opposing sides; in effect, it creates a "multi-front" because now the opposing team can come from the
     -- rear as well as the front; this will no doubt cause a great deal of consternation... ha
@@ -6335,13 +6335,13 @@ function downTheRabbitHole()
     -- WORM HOLES
     worm_hole_list = {}
     local worm_hole_coordinates = {
-        --	human side
+        -- human side
         { x = -180057, y = 462, target_x = 175945, target_y = -56 },
         { x = -129765, y = 49780, target_x = 126325, target_y = -47942 },
         { x = -50428, y = 29117, target_x = 46238, target_y = -28454 },
         { x = -51402, y = -29753, target_x = 45106, target_y = 26256 },
         { x = -130545, y = -50220, target_x = 124937, target_y = 46904 },
-        --	kraylor side
+        -- kraylor side
         { x = 48792, y = 28337, target_x = -48201, target_y = -27799 },
         { x = 48403, y = -30337, target_x = -47101, target_y = 26969 },
         { x = 130665, y = -49904, target_x = -125248, target_y = 47945 },
@@ -7396,8 +7396,8 @@ function downTheRabbitHole()
     kx = kraylor_planet_center_x
         - kraylor_planet_radius
         - (kraylor_moon_1_orbit_distance / 2)
-    --player side   		  Hum   Kra    Hum   Kra    Hum    Kra    Hum   Kra    Hum    Kra    Hum   Kra	  Hum	 Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra
-    --player index   		   1     2      3     4      5      6      7     8      9     10     11    12	  13	 14     15     16     17     18     19     20     21     22     23     24     25     26     27     28     29     30     31     32
+    --player side     Hum   Kra    Hum   Kra    Hum    Kra    Hum   Kra    Hum    Kra    Hum   Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra
+    --player index      1     2      3     4      5      6      7     8      9     10     11    12     13     14     15     16     17     18     19     20     21     22     23     24     25     26     27     28     29     30     31     32
     player_tag_relocate_x = {
         hx,
         kx,
@@ -7678,7 +7678,7 @@ function moveDownTheRabbitHole()
 end
 
 -------------------------------
---	Cargo related functions  --
+--  Cargo related functions  --
 -------------------------------
 function setupTailoredShipAttributes()
     -- part of Xansta's larger overall script core for randomized stations and NPC ships;
@@ -8074,7 +8074,7 @@ function setupBarteringGoods()
 
 end
 -----------------------------
---	Station communication  --
+--  Station communication  --
 -----------------------------
 function resupplyStation()
     if comms_target.comms_data == nil then
@@ -9242,9 +9242,9 @@ function handleUndockedState()
             oMsg = string.format("Difficulty: %.1f", difficulty)
             oMsg = oMsg
                 .. string.format("  time remaining: %.1f", gameTimeLimit)
-            --			if waveTimer ~= nil then
-            --				oMsg = oMsg .. string.format("\nwave timer: %.1f",waveTimer)
-            --			end
+            -- if waveTimer ~= nil then
+            --     oMsg = oMsg .. string.format("\nwave timer: %.1f",waveTimer)
+            -- end
             if timeDivision ~= nil then
                 oMsg = oMsg .. "  " .. timeDivision
             end
@@ -9484,9 +9484,9 @@ function getFriendStatus()
 end
 
 -----------------------------------------------
---	Custom player ship buttons and messages  --
+--  Custom player ship buttons and messages  --
 -----------------------------------------------
---	Player Ship Flag Buttons and call-back functions  --
+--  Player Ship Flag Buttons and call-back functions  --
 function setP1FlagButton()
     if p1FlagButton == nil and not p1FlagDrop then
         p1FlagButton = "p1FlagButton"
@@ -9595,7 +9595,7 @@ function p2DropFlag()
     end
 end
 
---	Player Ship Decoy Buttons and call-back functions
+-- Player Ship Decoy Buttons and call-back functions
 function p1DropDecoy()
     if p1.decoy_drop == nil then
         p1.decoy_drop = {}
@@ -9912,7 +9912,7 @@ function removeP8DecoyButton()
 end
 
 -----------------------------------------------------------------------
---	Player Ship Drone Deployment Related Button Call-Back Functions  --
+--  Player Ship Drone Deployment Related Button Call-Back Functions  --
 -----------------------------------------------------------------------
 function notEnoughDronesMessage(p, count)
     local pName = p:getCallSign()
@@ -9988,7 +9988,7 @@ function updateDroneAvailableCount(p)
 end
 
 --------------------------------------
---	Drone creation and destruction  --
+--  Drone creation and destruction  --
 --------------------------------------
 function deployDronesForPlayer(p, playerIndex, droneNumber)
     local px, py = p:getPosition()
@@ -10137,7 +10137,7 @@ function deployDronesForPlayer(p, playerIndex, droneNumber)
             "White"
         )
     end
-    --	updateDroneAvailableCount(p)
+    -- updateDroneAvailableCount(p)
 end
 function droneDestructionManagement(destroyed_drone, attacker_ship)
     local drone_name = destroyed_drone:getCallSign()
@@ -10263,7 +10263,7 @@ function droneDestructionManagement(destroyed_drone, attacker_ship)
 end
 
 --------------------------
---	Ship communication  --
+--  Ship communication  --
 --------------------------
 -- Based on comms_ship.lua
 -- variable player replaced with variable comms_source
@@ -11068,7 +11068,7 @@ function neutralComms(comms_data)
 end
 
 ------------------------
---	Update functions  --
+--  Update functions  --
 ------------------------
 function createTwinPlayer(twin, player_index)
     local template = twin:getTypeName()
@@ -11628,7 +11628,7 @@ function transitionFromPreparationToHunt()
         if p1Flagx == nil then
             if p1 ~= nil and p1:isValid() then
                 p1Flagx, p1Flagy = p1:getPosition()
-            --				print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(ship is valid)")
+            -- print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(ship is valid)")
             else
                 if
                     p1.point_of_destruction_x ~= nil
@@ -11636,17 +11636,17 @@ function transitionFromPreparationToHunt()
                 then
                     p1Flagx = p1.point_of_destruction_x
                     p1Flagy = p1.point_of_destruction_y
-                --					print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(ship not valid, using point of destruction)")
+                -- print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(ship not valid, using point of destruction)")
                 else
                     p1Flagx = playerStartX[1]
                     p1Flagy = playerStartY[1]
-                    --					print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(ship not valid, using starting point)")
+                    -- print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(ship not valid, using starting point)")
                 end
             end
         end
         if p1Flagx > 0 then
             p1Flagx = -1
-            --			print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(point was in the wrong territory)")
+            -- print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(point was in the wrong territory)")
         end
         if p1Flagx < -1 * boundary then
             p1Flagx = -1 * boundary
@@ -11676,7 +11676,7 @@ function transitionFromPreparationToHunt()
         if p2Flagx == nil then
             if p2 ~= nil and p2:isValid() then
                 p2Flagx, p2Flagy = p2:getPosition()
-            --				print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(ship is valid)")
+            -- print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(ship is valid)")
             else
                 if
                     p2.point_of_destruction_x ~= nil
@@ -11684,17 +11684,17 @@ function transitionFromPreparationToHunt()
                 then
                     p2Flagx = p2.point_of_destruction_x
                     p2Flagy = p2.point_of_destruction_y
-                --					print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(ship not valid, using point of destruction)")
+                -- print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(ship not valid, using point of destruction)")
                 else
                     p2Flagx = playerStartX[2]
                     p2Flagy = playerStartY[2]
-                    --					print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(ship not valid, using starting point)")
+                    -- print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(ship not valid, using starting point)")
                 end
             end
         end
         if p2Flagx < 0 then
             p2Flagx = 1
-            --			print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(point was in the wrong territory)")
+            -- print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(point was in the wrong territory)")
         end
         if p2Flagx > boundary then
             p2Flagx = boundary
@@ -12601,17 +12601,17 @@ function manageHuntPhaseMechanics()
 end
 function droneDetectFlagCheck(delta)
     --[[  debug group
-	print("---------------")
-	print("droneDetectFlagCheck() parameters:")
-	print("drone_flag_check_interval:  " .. drone_flag_check_interval)
-	print("drone_note_message_reset_interval:  " .. drone_note_message_reset_interval)
-	print("delta: " .. delta)
+    print("---------------")
+    print("droneDetectFlagCheck() parameters:")
+    print("drone_flag_check_interval:  " .. drone_flag_check_interval)
+    print("drone_note_message_reset_interval:  " .. drone_note_message_reset_interval)
+    print("delta: " .. delta)
 --]]
     if drone_flag_check_timer == nil then
         drone_flag_check_timer = delta + drone_flag_check_interval
     end
     drone_flag_check_timer = drone_flag_check_timer - delta
-    --	print("drone_flag_check_timer = drone_flag_check_timer - delta:  " .. drone_flag_check_timer)
+    -- print("drone_flag_check_timer = drone_flag_check_timer - delta:  " .. drone_flag_check_timer)
     if drone_flag_check_timer < 0 then
         for hfi = 1, #human_flags do
             local flag = human_flags[hfi]
@@ -13097,7 +13097,7 @@ function update(delta)
         timeDivision = "victory-exuari"
         victory("Exuari")
     end
-    --	print(string.format("Max game time: %i, Hide flag time: %i, Game time limit: %.1f",maxGameTime,hideFlagTime,gameTimeLimit))
+    -- print(string.format("Max game time: %i, Hide flag time: %i, Game time limit: %.1f",maxGameTime,hideFlagTime,gameTimeLimit))
     if gameTimeLimit < (maxGameTime - hideFlagTime - 1) then --1499
         --hunt begins
         manageHuntPhaseMechanics()

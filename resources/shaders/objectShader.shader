@@ -24,7 +24,7 @@ void main()
     v_tangent = normalize((u_model * vec4(a_tangent, 0.)).xyz);
     vec4 modelview_position = u_view * u_model * vec4(a_position, 1.);
     v_distance = length(modelview_position.xyz);
-    
+
     v_texcoords = a_texcoords;
     gl_Position = u_projection * modelview_position;
 }
@@ -64,10 +64,10 @@ void main()
 #ifdef NORMAL
     vec3 bitangent = cross(v_tangent, n);
     mat3 TBN = mat3(normalize(v_tangent), normalize(bitangent), normalize(n));
-    n = normalize(TBN * (texture2D(u_normalMap, v_texcoords.st).rgb * 2.0 - 1.0)); 
+    n = normalize(TBN * (texture2D(u_normalMap, v_texcoords.st).rgb * 2.0 - 1.0));
 #endif
     float intensity = max(0.1, dot(u_ambientLightDirection, n));
-    
+
     vec4 base = texture2D(u_baseMap, v_texcoords.st);
 #ifdef ILLUMINATION
     vec4 illumination = texture2D(u_illuminationMap, v_texcoords.st) * u_illuminationModulation;

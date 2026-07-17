@@ -19,7 +19,7 @@ void main()
     v_normal = normalize((u_model * vec4(a_normal, 0.)).xyz);
     vec4 modelview_position = u_view * u_model * vec4(a_position, 1.);
     v_distance = length(modelview_position.xyz);
-    
+
     v_texcoords = a_texcoords;
     gl_Position = u_projection * modelview_position;
 }
@@ -46,9 +46,9 @@ varying float v_distance;
 void main()
 {
     float intensity = max(0.0, dot(u_specularLightDirection, v_normal));
-    
+
     vec3 base = texture2D(u_baseMap, v_texcoords.st).rgb;
-    
+
     gl_FragColor = vec4((base * intensity) + (u_atmosphereColor.rgb * (1.0 - intensity)), u_color.a);
 
     if (u_fogDistance > 0.0)

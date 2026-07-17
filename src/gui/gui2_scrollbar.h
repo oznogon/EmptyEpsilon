@@ -42,11 +42,11 @@ public:
     int getValue() const;
 
     /// @brief For some reason this returns max when the values are between min and (max - value_size)
-    /// @return 
+    /// @return
     int getMax() const;
 
     /// @brief Returns the proper max considering value_size
-    /// @return 
+    /// @return
     int getCorrectedMax() const;
     int getMin() const;
 };

@@ -53,8 +53,8 @@
 -- Time[100]: Game ends in 100 minutes (one hour and 40 minutes)
 
 --------------------------------------------------------------------------------------------------------
---	Note: This script requires a version of supply_drop.lua that handles the variable jump_freighter  --
---			See pull request 1185                                                                     --
+--  Note: This script requires a version of supply_drop.lua that handles the variable jump_freighter  --
+--  See pull request 1185                                                                             --
 --------------------------------------------------------------------------------------------------------
 
 require("utils.lua")
@@ -1491,7 +1491,7 @@ function setConstants()
             "Gage",
             "Buran",
             "Kearsarge",
-            --			"Cheyenne",
+            -- "Cheyenne",
             "Ahwahnee",
             "Constellation",
             "Gettysburg",
@@ -1527,14 +1527,14 @@ function setConstants()
             "Crockett",
             "Fearless",
             "Fredrickson",
-            --			"Gorkon",
+            -- "Gorkon",
             "Hood",
             "Lakota",
             "Malinche",
             "Melbourne",
             "Freedom",
             "Concorde",
-            --			"Firebrand",
+            -- "Firebrand",
             "Galaxy",
             "Challenger",
             "Odyssey",
@@ -1861,7 +1861,7 @@ function setConstants()
             warp = 950,
             stock = true,
         },
-        --	Stock above, custom below
+        -- Stock above, custom below
         ["Focus"] = {
             strength = 35,
             cargo = 4,
@@ -3713,7 +3713,7 @@ function setConstants()
 end
 function setStaticScienceDatabase()
     --------------------------------------------------------------------------------------
-    --	Generic station descriptions: text and details from shipTemplates_stations.lua  --
+    --  Generic station descriptions: text and details from shipTemplates_stations.lua  --
     --------------------------------------------------------------------------------------
     local station_db = queryScienceDatabase("Stations")
     if station_db == nil then
@@ -3763,7 +3763,7 @@ function setStaticScienceDatabase()
         huge_station_db:setKeyValue("Hull", 800)
     end
     -----------------------------------------------------------------------------------
-    --	Template ship category descriptions: text from other shipTemplates... files  --
+    --  Template ship category descriptions: text from other shipTemplates... files  --
     -----------------------------------------------------------------------------------
     local ships_db = queryScienceDatabase("Ships")
     if ships_db == nil then
@@ -3802,19 +3802,19 @@ function setStaticScienceDatabase()
         "Dreadnoughts are the largest ships.\nThey are so large and uncommon that every type is pretty much their own subclass.\nThey usually come with 6 or more shield sections, require a crew of 250+ to operate.\n\nThink: Stardestroyer."
     )
     --------------------------
-    --	Stock player ships  --
+    --  Stock player ships  --
     --------------------------
     ships_db:addEntry("Mainstream")
     local stock_db = queryScienceDatabase("Ships", "Mainstream")
     stock_db:setLongDescription(
         "Mainstream ships are those ship types that are commonly available to crews serving on the front lines or in well established areas"
     )
-    ----	Starfighters
+    ---- Starfighters
     stock_db:addEntry("Starfighter")
     local fighter_stock_db =
         queryScienceDatabase("Ships", "Mainstream", "Starfighter")
     fighter_stock_db:setLongDescription(generic_starfighter_description)
-    --	MP52 Hornet
+    -- MP52 Hornet
     fighter_stock_db:addEntry("MP52 Hornet")
     local mp52_hornet_db = queryScienceDatabase(
         "Ships",
@@ -3834,12 +3834,12 @@ function setStaticScienceDatabase()
     mp52_hornet_db:setKeyValue("Warp Speed", "60 U/min") --1000 (added for scenario)
     mp52_hornet_db:setKeyValue("Battery Capacity", 400)
     mp52_hornet_db:setKeyValue("Sensor Ranges", "Long: 18 U / Short: 4 U")
-    mp52_hornet_db:setKeyValue("Move speed", "7.5 U/min") --125	(value * 60 / 1000 = units per minute)
+    mp52_hornet_db:setKeyValue("Move speed", "7.5 U/min") --125 (value * 60 / 1000 = units per minute)
     mp52_hornet_db:setKeyValue("Turn speed", "32 deg/sec")
     mp52_hornet_db:setKeyValue("Beam weapon 355:30", "Rng:.9 Dmg:2.5 Cyc:4")
     mp52_hornet_db:setKeyValue("Beam weapon 5:30", "Rng:.9 Dmg:2.5 Cyc:4")
     mp52_hornet_db:setImage("radar/fighter.png")
-    --	Player Fighter
+    -- Player Fighter
     fighter_stock_db:addEntry("Player Fighter")
     local player_fighter_db = queryScienceDatabase(
         "Ships",
@@ -3858,7 +3858,7 @@ function setStaticScienceDatabase()
     player_fighter_db:setKeyValue("Warp Speed", "60 U/min") --1000 (added for scenario)
     player_fighter_db:setKeyValue("Battery Capacity", 400)
     player_fighter_db:setKeyValue("Sensor Ranges", "Long: 15 U / Short: 4.5 U")
-    player_fighter_db:setKeyValue("Move speed", "6.6 U/min") --110	(value * 60 / 1000 = units per minute)
+    player_fighter_db:setKeyValue("Move speed", "6.6 U/min") --110 (value * 60 / 1000 = units per minute)
     player_fighter_db:setKeyValue("Turn speed", "20 deg/sec")
     player_fighter_db:setKeyValue("Beam weapon 0:40", "Rng:.5 Dmg:4 Cyc:6") --modified for scenario: added short forward beam so others balance
     player_fighter_db:setKeyValue("Beam weapon 10:40", "Rng:1 Dmg:8 Cyc:6")
@@ -3866,7 +3866,7 @@ function setStaticScienceDatabase()
     player_fighter_db:setKeyValue("Tube 0", "10 sec")
     player_fighter_db:setKeyValue("Storage HVLI", "4")
     player_fighter_db:setImage("radar/fighter.png")
-    --	Striker
+    -- Striker
     fighter_stock_db:addEntry("Striker")
     local striker_db =
         queryScienceDatabase("Ships", "Mainstream", "Starfighter", "Striker")
@@ -3886,7 +3886,7 @@ function setStaticScienceDatabase()
     striker_db:setKeyValue("Beam weapon 345:100", "Rng:1 Dmg:6 Cyc:6 Tur:6")
     striker_db:setKeyValue("Beam weapon 15:100", "Rng:1 Dmg:6 Cyc:6 Tur:6")
     striker_db:setImage("radar_adv_striker.png")
-    --	ZX-Lindworm
+    -- ZX-Lindworm
     fighter_stock_db:addEntry("ZX-Lindworm")
     local zx_lindworm_db = queryScienceDatabase(
         "Ships",
@@ -3906,7 +3906,7 @@ function setStaticScienceDatabase()
     zx_lindworm_db:setKeyValue("Warp Speed", "57 U/min") --950 (added for scenario)
     zx_lindworm_db:setKeyValue("Battery Capacity", 400)
     zx_lindworm_db:setKeyValue("Sensor Ranges", "Long: 18 U / Short: 5.5 U")
-    zx_lindworm_db:setKeyValue("Move speed", "4.2 U/min") --70	(value * 60 / 1000 = units per minute)
+    zx_lindworm_db:setKeyValue("Move speed", "4.2 U/min") --70 (value * 60 / 1000 = units per minute)
     zx_lindworm_db:setKeyValue("Turn speed", "15 deg/sec")
     zx_lindworm_db:setKeyValue("Beam weapon 180:270", "Rng:.7 Dmg:2 Cyc:6")
     zx_lindworm_db:setKeyValue("Small Tube 0", "10 sec")
@@ -3915,12 +3915,12 @@ function setStaticScienceDatabase()
     zx_lindworm_db:setKeyValue("Storage Homing", "3")
     zx_lindworm_db:setKeyValue("Storage HVLI", "12")
     zx_lindworm_db:setImage("radar/fighter.png")
-    ----	Frigates
+    ---- Frigates
     stock_db:addEntry("Frigate")
     local frigate_stock_db =
         queryScienceDatabase("Ships", "Mainstream", "Frigate")
     frigate_stock_db:setLongDescription(generic_frigate_description)
-    --	Flavia P.Falcon
+    -- Flavia P.Falcon
     frigate_stock_db:addEntry("Flavia P.Falcon")
     local flavia_p_falcon_db = queryScienceDatabase(
         "Ships",
@@ -3949,7 +3949,7 @@ function setStaticScienceDatabase()
     flavia_p_falcon_db:setKeyValue("Storage Mine", "1")
     flavia_p_falcon_db:setKeyValue("Storage HVLI", "5")
     flavia_p_falcon_db:setImage("radar/tug.png")
-    --	Hathcock
+    -- Hathcock
     frigate_stock_db:addEntry("Hathcock")
     local hathcock_db =
         queryScienceDatabase("Ships", "Mainstream", "Frigate", "Hathcock")
@@ -3977,7 +3977,7 @@ function setStaticScienceDatabase()
     hathcock_db:setKeyValue("Storage EMP", "2")
     hathcock_db:setKeyValue("Storage HVLI", "8")
     hathcock_db:setImage("radar/piranha.png")
-    --	Nautilus
+    -- Nautilus
     frigate_stock_db:addEntry("Nautilus")
     local nautilus_db =
         queryScienceDatabase("Ships", "Mainstream", "Frigate", "Nautilus")
@@ -4001,7 +4001,7 @@ function setStaticScienceDatabase()
     nautilus_db:setKeyValue("  Tube 180", "10 sec / Mine")
     nautilus_db:setKeyValue("Storage Mine", "12")
     nautilus_db:setImage("radar/tug.png")
-    --	Phobos M3P
+    -- Phobos M3P
     frigate_stock_db:addEntry("Phobos M3P")
     local phobos_m3p_db =
         queryScienceDatabase("Ships", "Mainstream", "Frigate", "Phobos M3P")
@@ -4029,7 +4029,7 @@ function setStaticScienceDatabase()
     phobos_m3p_db:setKeyValue("Storage EMP", "3")
     phobos_m3p_db:setKeyValue("Storage HVLI", "20")
     phobos_m3p_db:setImage("radar/cruiser.png")
-    --	Piranha
+    -- Piranha
     frigate_stock_db:addEntry("Piranha")
     local piranha_db =
         queryScienceDatabase("Ships", "Mainstream", "Frigate", "Piranha")
@@ -4059,7 +4059,7 @@ function setStaticScienceDatabase()
     piranha_db:setKeyValue("Storage Mine", "8")
     piranha_db:setKeyValue("Storage HVLI", "20")
     piranha_db:setImage("radar/piranha.png")
-    --	Repulse
+    -- Repulse
     frigate_stock_db:addEntry("Repulse")
     local repulse_db =
         queryScienceDatabase("Ships", "Mainstream", "Frigate", "Repulse")
@@ -4083,12 +4083,12 @@ function setStaticScienceDatabase()
     repulse_db:setKeyValue("Storage Homing", "4")
     repulse_db:setKeyValue("Storage HVLI", "6")
     repulse_db:setImage("radar/tug.png")
-    ----	Corvettes
+    ---- Corvettes
     stock_db:addEntry("Corvette")
     local corvette_stock_db =
         queryScienceDatabase("Ships", "Mainstream", "Corvette")
     corvette_stock_db:setLongDescription(generic_corvette_description)
-    --	Atlantis
+    -- Atlantis
     corvette_stock_db:addEntry("Atlantis")
     local atlantis_db =
         queryScienceDatabase("Ships", "Mainstream", "Corvette", "Atlantis")
@@ -4118,7 +4118,7 @@ function setStaticScienceDatabase()
     atlantis_db:setKeyValue("Storage EMP", "6")
     atlantis_db:setKeyValue("Storage HVLI", "20")
     atlantis_db:setImage("radar/dread.png")
-    --	Benedict
+    -- Benedict
     corvette_stock_db:addEntry("Benedict")
     local benedict_db =
         queryScienceDatabase("Ships", "Mainstream", "Corvette", "Benedict")
@@ -4138,7 +4138,7 @@ function setStaticScienceDatabase()
     benedict_db:setKeyValue("Beam weapon 0:90", "Rng:1.5 Dmg:4 Cyc:6 Tur:6")
     benedict_db:setKeyValue("Beam weapon 180:90", "Rng:1.5 Dmg:4 Cyc:6 Tur:6")
     benedict_db:setImage("radar/transport.png")
-    --	Crucible
+    -- Crucible
     corvette_stock_db:addEntry("Crucible")
     local crucible_db =
         queryScienceDatabase("Ships", "Mainstream", "Corvette", "Crucible")
@@ -4165,7 +4165,7 @@ function setStaticScienceDatabase()
     crucible_db:setKeyValue("Tube 180", "8 sec / Mine")
     crucible_db:setKeyValue("Storage Missiles", "H:8 N:4 M:6 E:6 L:24")
     crucible_db:setImage("radar/laser.png")
-    --	Kiriya
+    -- Kiriya
     corvette_stock_db:addEntry("Kiriya")
     local kiriya_db =
         queryScienceDatabase("Ships", "Mainstream", "Corvette", "Kiriya")
@@ -4185,7 +4185,7 @@ function setStaticScienceDatabase()
     kiriya_db:setKeyValue("Beam weapon 0:90", "Rng:1.5 Dmg:4 Cyc:6 Tur:6")
     kiriya_db:setKeyValue("Beam weapon 180:90", "Rng:1.5 Dmg:4 Cyc:6 Tur:6")
     kiriya_db:setImage("radar/transport.png")
-    --	Maverick
+    -- Maverick
     corvette_stock_db:addEntry("Maverick")
     local maverick_db =
         queryScienceDatabase("Ships", "Mainstream", "Corvette", "Maverick")
@@ -4213,7 +4213,7 @@ function setStaticScienceDatabase()
     maverick_db:setKeyValue("Tube 180", "8 sec / Mine")
     maverick_db:setKeyValue("Storage Missiles", "H:6 N:2 M:2 E:4 L:10")
     maverick_db:setImage("radar/laser.png")
-    --	Player Cruiser
+    -- Player Cruiser
     corvette_stock_db:addEntry("Player Cruiser")
     local player_cruiser_db = queryScienceDatabase(
         "Ships",
@@ -4243,7 +4243,7 @@ function setStaticScienceDatabase()
     player_cruiser_db:setKeyValue("Storage Mine", "8")
     player_cruiser_db:setKeyValue("Storage EMP", "6")
     player_cruiser_db:setImage("radar/cruiser.png")
-    --	Player Missile Cruiser
+    -- Player Missile Cruiser
     corvette_stock_db:addEntry("Player Missile Cr.")
     local player_missile_cruiser_db = queryScienceDatabase(
         "Ships",
@@ -4279,7 +4279,7 @@ function setStaticScienceDatabase()
     player_missile_cruiser_db:setKeyValue("Storage EMP", "10")
     player_missile_cruiser_db:setImage("radar/cruiser.png")
     ---------------------------
-    --	Custom player ships  --
+    --  Custom player ships  --
     ---------------------------
     ships_db:addEntry("Prototype")
     local prototype_db = queryScienceDatabase("Ships", "Prototype")
@@ -4287,12 +4287,12 @@ function setStaticScienceDatabase()
         "Prototype ships are those that are under development or are otherwise considered experimental. Some have been through several iterations after being tested in the field. Many have been scrapped due to poor design, the ravages of space or perhaps the simple passage of time."
     )
     prototype_db:setImage("gui/icons/station-engineering.png")
-    ----	Starfighters
+    ---- Starfighters
     prototype_db:addEntry("Starfighter")
     local fighter_prototype_db =
         queryScienceDatabase("Ships", "Prototype", "Starfighter")
     fighter_prototype_db:setLongDescription(generic_starfighter_description)
-    --	Striker LX
+    -- Striker LX
     fighter_prototype_db:addEntry("Striker LX")
     local striker_lx_db =
         queryScienceDatabase("Ships", "Prototype", "Starfighter", "Striker LX")
@@ -4308,7 +4308,7 @@ function setStaticScienceDatabase()
     striker_lx_db:setKeyValue("Battery Capacity", 600)
     striker_lx_db:setKeyValue("Jump Range", "2 - 20 U")
     striker_lx_db:setKeyValue("Sensor Ranges", "Long: 20 U / Short: 4 U")
-    striker_lx_db:setKeyValue("Move speed", "3.9 U/min") --65	(value * 60 / 1000 = units per minute)
+    striker_lx_db:setKeyValue("Move speed", "3.9 U/min") --65 (value * 60 / 1000 = units per minute)
     striker_lx_db:setKeyValue("Turn speed", "35 deg/sec")
     striker_lx_db:setKeyValue(
         "Beam weapon 345:100",
@@ -4326,12 +4326,12 @@ function setStaticScienceDatabase()
     striker_lx_db:setKeyValue("Storage EMP", "3")
     striker_lx_db:setKeyValue("Storage HVLI", "6")
     striker_lx_db:setImage("radar/adv_striker.png")
-    ----	Frigates
+    ---- Frigates
     prototype_db:addEntry("Frigate")
     local frigate_prototype_db =
         queryScienceDatabase("Ships", "Prototype", "Frigate")
     frigate_prototype_db:setLongDescription(generic_frigate_description)
-    --	Phobos T2
+    -- Phobos T2
     frigate_prototype_db:addEntry("Phobos T2")
     local phobos_t2_db =
         queryScienceDatabase("Ships", "Prototype", "Frigate", "Phobos T2")
@@ -4359,12 +4359,12 @@ function setStaticScienceDatabase()
     phobos_t2_db:setKeyValue("Storage EMP", 3)
     phobos_t2_db:setKeyValue("Storage HVLI", 16)
     phobos_t2_db:setImage("radar/cruiser.png")
-    ----	Corvettes
+    ---- Corvettes
     prototype_db:addEntry("Corvette")
     local corvette_prototype_db =
         queryScienceDatabase("Ships", "Prototype", "Corvette")
     corvette_prototype_db:setLongDescription(generic_corvette_description)
-    --	Focus
+    -- Focus
     corvette_prototype_db:addEntry("Focus")
     local focus_db =
         queryScienceDatabase("Ships", "Prototype", "Corvette", "Focus")
@@ -4393,7 +4393,7 @@ function setStaticScienceDatabase()
     focus_db:setKeyValue("Storage EMP", 2)
     focus_db:setKeyValue("Storage HVLI", 24)
     focus_db:setImage("radar/laser.png")
-    --	Holmes
+    -- Holmes
     corvette_prototype_db:addEntry("Holmes")
     local holmes_db =
         queryScienceDatabase("Ships", "Prototype", "Corvette", "Holmes")
@@ -4421,7 +4421,7 @@ function setStaticScienceDatabase()
     holmes_db:setKeyValue("Storage Homing", 10)
     holmes_db:setKeyValue("Storage Mine", 6)
     holmes_db:setImage("radar/laser.png")
-    --	Maverick XP
+    -- Maverick XP
     corvette_prototype_db:addEntry("Maverick XP")
     local maverick_xp_db =
         queryScienceDatabase("Ships", "Prototype", "Corvette", "Maverick XP")
@@ -4453,7 +4453,7 @@ function setStaticScienceDatabase()
     maverick_xp_db:setImage("radar/laser.png")
 end
 ------------------
---	GM Buttons  --
+--  GM Buttons  --
 ------------------
 function setGMButtons()
     mainGMButtons = mainGMButtonsDuringPause
@@ -5378,7 +5378,7 @@ function mainGMButtonsAfterPause()
         addGMMessage(out)
     end)
 end
---	Player related GM configuration functions
+-- Player related GM configuration functions
 function setPlayerTeamCount()
     clearGMFunctions()
     addGMFunction(_("buttonGM", "-Main from Teams"), mainGMButtons)
@@ -5629,7 +5629,7 @@ function setCustomPlayerShipSet()
                     custom_player_ship_sets[custom_player_ship_type][ships_per_team]
                 )
             do
-                --				print("index:",index,"ship type:",ship_type)
+                -- print("index:",index,"ship type:",ship_type)
                 out = out .. "\n   " .. index .. ") " .. ship_type
             end
             addGMMessage(out)
@@ -5760,7 +5760,7 @@ function setAdvanceIntel()
         )
     end)
 end
---	Terrain related GM configuration functions
+-- Terrain related GM configuration functions
 function setTerrainParameters()
     clearGMFunctions()
     addGMFunction(_("buttonGM", "-Main from Terrain"), mainGMButtons)
@@ -5980,7 +5980,7 @@ function setDefensePlatformCount()
         )
     end)
 end
---	Display player control codes
+-- Display player control codes
 function showKraylorCodes()
     showControlCodes("Kraylor")
 end
@@ -6058,7 +6058,7 @@ function resetControlCodes()
     end
     showControlCodes()
 end
---	General configuration functions
+-- General configuration functions
 function setGameTimeLimit()
     clearGMFunctions()
     addGMFunction(_("buttonGM", "-Main from Time"), mainGMButtons)
@@ -6219,16 +6219,16 @@ function setNPCShips()
     end)
 end
 -------------------------------------
---	Generate terrain and stations  --
+--  Generate terrain and stations  --
 -------------------------------------
 function generateTerrain()
-    --	Activities include:
-    --		Central terrain feature
-    --		Angle from center for each faction (used to place objects symmetrically)
-    --		Primary station and any defense platforms and/or defensive warp jammers
-    --		Positioning players around primary station
-    --		Placing other stations with varying capabilities and capacities
-    --		Wormholes, black holes, asteroids and nebulae
+    -- Activities include:
+    -- Central terrain feature
+    -- Angle from center for each faction (used to place objects symmetrically)
+    -- Primary station and any defense platforms and/or defensive warp jammers
+    -- Positioning players around primary station
+    -- Placing other stations with varying capabilities and capacities
+    -- Wormholes, black holes, asteroids and nebulae
     if terrain_generated then
         return
     end
@@ -6247,7 +6247,7 @@ function generateTerrain()
     place_ref_list = {}
     human_ref_list = {}
 
-    --	decide what lives at the center of the universe
+    -- decide what lives at the center of the universe
     local center_choice_list = { "Planet", "Star", "Black Hole" }
     local center_choice =
         center_choice_list[math.random(1, #center_choice_list)]
@@ -6317,7 +6317,7 @@ function generateTerrain()
         )
     end
 
-    --	Set angles
+    -- Set angles
     faction_angle = {}
     npc_fleet = {}
     npc_fleet["Human Navy"] = {}
@@ -6350,7 +6350,7 @@ function generateTerrain()
         end
     end
 
-    --	Set primary stations
+    -- Set primary stations
     local primary_station_distance = random(50000, 100000)
     local primary_station_size =
         primary_station_size_options[primary_station_size_index]
@@ -6517,7 +6517,7 @@ function generateTerrain()
         station_primary_ktlitan.comms_data = station_primary_human.comms_data
     end
 
-    --	Set defense platforms and jammers (if applicable)
+    -- Set defense platforms and jammers (if applicable)
     defense_platform_count =
         defense_platform_count_options[defense_platform_count_index].count
     defense_platform_distance =
@@ -6820,7 +6820,7 @@ function generateTerrain()
         end
     end
 
-    --	Place players
+    -- Place players
     player_restart = {}
     if player_ship_types == "spawned" then
         local player_count = 0
@@ -6941,7 +6941,7 @@ function generateTerrain()
         end
     end
 
-    --	Place NPC ships (if applicable)
+    -- Place NPC ships (if applicable)
     local npc_fleet_count = 0
     if npc_ships then
         npc_fleet_count = math.random(1, ships_per_team)
@@ -7107,7 +7107,7 @@ function generateTerrain()
         end
     end
 
-    --	Place stations
+    -- Place stations
     local candidate_x = 0
     local candidate_y = 0
     local center_x = 0
@@ -7388,7 +7388,7 @@ function generateTerrain()
         end
     end --station build loop
 
-    --	Build some wormholes if applicable
+    -- Build some wormholes if applicable
     local hole_list = {}
     local wormhole_count = math.random(0, 3)
     if wormhole_count > 0 then
@@ -7398,7 +7398,7 @@ function generateTerrain()
             stretch_bound = 5000
             bubble = 6000
             repeat
-                --				print("wormhole candidate numbers. average distance:",avg_dist,"perimeter:",perimeter)
+                -- print("wormhole candidate numbers. average distance:",avg_dist,"perimeter:",perimeter)
                 candidate_x, candidate_y = vectorFromAngleNorth(
                     random(0, 360),
                     random(
@@ -7523,7 +7523,7 @@ function generateTerrain()
         end
     end --wormhole build
 
-    --	Maybe sprinkle in some black holes
+    -- Maybe sprinkle in some black holes
     local blackhole_count = math.random(0, 6)
     if blackhole_count > 0 then
         for b = 1, blackhole_count do
@@ -7799,7 +7799,7 @@ function generateTerrain()
         end
     end
 
-    --	Asteroid build
+    -- Asteroid build
     local asteroid_field_count = math.random(2, (10 - player_team_count))
     local asteroid_field_type_list = { "blob", "line", "arc" }
     for a = 1, asteroid_field_count do
@@ -7824,7 +7824,7 @@ function generateTerrain()
         local asteroid_ref_list = {}
         if asteroid_field_type == "blob" then
             local blob_count = math.random(10, 30)
-            --			print("blob count:",blob_count)
+            -- print("blob count:",blob_count)
             asteroid_list = placeRandomListAroundPoint(
                 Asteroid,
                 blob_count,
@@ -7899,7 +7899,7 @@ function generateTerrain()
                 table.insert(place_ref_list, ta)
             end
         elseif asteroid_field_type == "line" then
-            --			print("asteroid line")
+            -- print("asteroid line")
             local ale_x, ale_y =
                 vectorFromAngleNorth(random(0, 360), random(8000, 30000))
             asteroid_list = createObjectsListOnLine(
@@ -7986,7 +7986,7 @@ function generateTerrain()
             local spread = random(10, 30)
             local number_in_arc =
                 math.min(math.floor(spread * 2) + math.random(5, 20), 35)
-            --			print("asteroid arc number:",number_in_arc)
+            -- print("asteroid arc number:",number_in_arc)
             asteroid_list = createRandomListAlongArc(
                 Asteroid,
                 number_in_arc,
@@ -8063,9 +8063,9 @@ function generateTerrain()
                 table.insert(place_ref_list, ta)
             end
         end
-    end --	asteroid fields build
+    end -- asteroid fields build
 
-    --	Nebula build
+    -- Nebula build
     local nebula_field_count = math.random(2, 8)
     center_x, center_y, perimeter, avg_dist = analyzeBlob(human_ref_list)
     for n = 1, nebula_field_count do
@@ -8150,10 +8150,10 @@ function generateTerrain()
                 )
             end
         end
-    end --	nebula field build
+    end -- nebula field build
     game_state = "terrain generated"
 
-    --	Store (then print) original values for later comparison
+    -- Store (then print) original values for later comparison
     local stat_list = gatherStats()
     original_score = {}
     local out = "Original scores:"
@@ -8178,7 +8178,7 @@ function generateTerrain()
     end
     allowNewPlayerShips(false)
     print(out)
-    --	Provide summary terrain details in console log
+    -- Provide summary terrain details in console log
     print("-----     Terrain Info     -----")
     print("Center:", terrain_center_sector, "featuring:", center_choice)
     print(
@@ -8251,8 +8251,8 @@ function spawnRandomArmed(x, y, enemyStrength, fleetIndex, shape, angle)
     local fleet_prefix = generateCallSignPrefix()
     while enemyStrength > 0 do
         local selected_template = template_pool[math.random(1, #template_pool)]
-        --		print("selected template:",selected_template)
-        --		print("base:",ship_template[selected_template].base)
+        -- print("selected template:",selected_template)
+        -- print("base:",ship_template[selected_template].base)
         local ship = ship_template[selected_template].create(
             "Human Navy",
             selected_template
@@ -8292,10 +8292,10 @@ function getTemplatePool(max_strength)
         end
     )
     local template_pool = {}
-    --	print("fleet composition:",fleetComposition,"fleet group sub fleet composition:",fleet_group[fleetComposition])
+    -- print("fleet composition:",fleetComposition,"fleet group sub fleet composition:",fleet_group[fleetComposition])
     if pool_selectivity == "less/heavy" then
         for idx, current_ship_template in ipairs(ship_template_by_strength) do
-            --			print("currrent ship template:",current_ship_template,"strength:",ship_template[current_ship_template].strength,"max strength:",max_strength)
+            -- print("currrent ship template:",current_ship_template,"strength:",ship_template[current_ship_template].strength,"max strength:",max_strength)
             if
                 ship_template[current_ship_template].strength <= max_strength
             then
@@ -8323,7 +8323,7 @@ function getTemplatePool(max_strength)
     elseif pool_selectivity == "more/light" then
         for i = #ship_template_by_strength, 1, -1 do
             local current_ship_template = ship_template_by_strength[i]
-            --			print("currrent ship template:",current_ship_template,"strength:",ship_template[current_ship_template].strength,"max strength:",max_strength)
+            -- print("currrent ship template:",current_ship_template,"strength:",ship_template[current_ship_template].strength,"max strength:",max_strength)
             if
                 ship_template[current_ship_template].strength <= max_strength
             then
@@ -8372,7 +8372,7 @@ function getTemplatePool(max_strength)
     end
     --print("returning template pool containing these templates:")
     --for idx, template in ipairs(template_pool) do
-    --	print(template)
+    -- print(template)
     --end
     return template_pool
 end
@@ -8389,7 +8389,7 @@ function stockTemplate(enemyFaction, template)
 end
 
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -8730,21 +8730,21 @@ function analyzeBlob(object_list)
         center_y = center_y / #object_list
         for i = 1, #object_list do
             --[[
-			if distance_diagnostic then
-				print("function analyzeBlob")
-				if object_list[i] == nil then
-					print("   object_list[i] is nil")
-					print("   " .. i)
-					print("   " .. object_list)
-				else
-					print("   " .. i,object_list[i])
-				end
-				if center_x == nil then
-					print("   center_x is nil")
-				else
-					print("   center_x: " .. center_x)
-				end
-			end
+            if distance_diagnostic then
+                print("function analyzeBlob")
+                if object_list[i] == nil then
+                    print("   object_list[i] is nil")
+                    print("   " .. i)
+                    print("   " .. object_list)
+                else
+                    print("   " .. i,object_list[i])
+                end
+                if center_x == nil then
+                    print("   center_x is nil")
+                else
+                    print("   center_x: " .. center_x)
+                end
+            end
 --]]
             local current_distance =
                 distance(object_list[i], center_x, center_y)
@@ -8762,22 +8762,22 @@ function farEnough(list, pos_x, pos_y, bubble)
     for i = 1, #list do
         local list_item = list[i]
         --[[
-		if distance_diagnostic then
-			print("function farEnough")
-			if list_item == nil then
-				print("   list_item is nil")
-				print("   " .. i)
-				print("   " .. list)
-			else
-				print("   " .. i)
-				print(list_item)
-			end
-			if pos_x == nil then
-				print("   pos_x is nil")
-			else
-				print("   pos_x: " .. pos_x)
-			end
-		end
+        if distance_diagnostic then
+            print("function farEnough")
+            if list_item == nil then
+                print("   list_item is nil")
+                print("   " .. i)
+                print("   " .. list)
+            else
+                print("   " .. i)
+                print(list_item)
+            end
+            if pos_x == nil then
+                print("   pos_x is nil")
+            else
+                print("   pos_x: " .. pos_x)
+            end
+        end
 --]]
         local distance_away = distance(list_item, pos_x, pos_y)
         if distance_away < bubble then
@@ -8802,7 +8802,7 @@ function farEnough(list, pos_x, pos_y, bubble)
     end
     return far_enough
 end
---	Player ship types, placement and naming functions
+-- Player ship types, placement and naming functions
 function placeCustomPlayerShips()
     print("place custom player ships")
     player_restart = {}
@@ -8816,7 +8816,7 @@ function placeCustomPlayerShips()
     for idx, template in
         ipairs(custom_player_ship_sets[custom_player_ship_type][ships_per_team])
     do
-        --		print("Human ships per team template:",template)
+        -- print("Human ships per team template:",template)
         local p = nil
         if player_ship_stats[template].stock then
             p = PlayerSpaceship():setTemplate(template):setFaction("Human Navy")
@@ -8866,10 +8866,10 @@ function customPlayerShip(custom_template, p)
         p:setMaxEnergy(600) --more maximum energy (vs 500)
         p:setEnergy(600)
         p:setImpulseMaxSpeed(65) --faster impulse max (vs 45)
-        --                 	   Arc, Dir,   Range, CycleTime, Damage
+        --    Arc, Dir,   Range, CycleTime, Damage
         p:setBeamWeapon(0, 10, -15, 1100, 6.0, 6.5) --shorter (vs 1200) more damage (vs 6.0)
         p:setBeamWeapon(1, 10, 15, 1100, 6.0, 6.5)
-        --							 Arc, Dir, Rotate speed
+        --  Arc, Dir, Rotate speed
         p:setBeamWeaponTurret(0, 100, -15, 0.2) --slower turret speed (vs 6)
         p:setBeamWeaponTurret(1, 100, 15, 0.2)
         p:setWeaponTubeCount(2) --more tubes (vs 0)
@@ -8895,7 +8895,7 @@ function customPlayerShip(custom_template, p)
         p:setHull(100)
         p:setShieldsMax(100, 100) --weaker shields (vs 160, 160)
         p:setShields(100, 100)
-        --                 	   Arc, Dir,  Range,  CycleTime, Damage
+        --    Arc, Dir,  Range,  CycleTime, Damage
         p:setBeamWeapon(0, 60, -20, 1000.0, 6.0, 5) --narrower (vs 70)
         p:setBeamWeapon(1, 60, 20, 1000.0, 6.0, 5)
         p:setWeaponTubeCount(4) --fewer (vs 6)
@@ -8912,7 +8912,7 @@ function customPlayerShip(custom_template, p)
         p:setTemplate("Crucible")
         p:setTypeName("Holmes")
         p:setImpulseMaxSpeed(70) --slower (vs 80)
-        --					  Arc, Dir, Range, CycleTime, Dmg
+        --   Arc, Dir, Range, CycleTime, Dmg
         p:setBeamWeapon(0, 50, -85, 900.0, 6.0, 5) --broadside beams, narrower (vs 70)
         p:setBeamWeapon(1, 50, -95, 900.0, 6.0, 5)
         p:setBeamWeapon(2, 50, 85, 900.0, 6.0, 5)
@@ -8936,9 +8936,9 @@ function customPlayerShip(custom_template, p)
         p:setTypeName("Maverick XP")
         p:setImpulseMaxSpeed(65) --slower impulse max (vs 80)
         p:setWarpDrive(false) --no warp
-        --					  Arc, Dir,  Range, CycleTime, Dmg
+        --   Arc, Dir,  Range, CycleTime, Dmg
         p:setBeamWeapon(0, 10, 0, 1000.0, 20.0, 20)
-        --							 Arc, Dir, Rotate speed
+        --  Arc, Dir, Rotate speed
         p:setBeamWeaponTurret(0, 270, 0, 0.4)
         p:setBeamWeaponEnergyPerFire(0, p:getBeamWeaponEnergyPerFire(0) * 6)
         p:setBeamWeaponHeatPerFire(0, p:getBeamWeaponHeatPerFire(0) * 5)
@@ -8956,10 +8956,10 @@ function customPlayerShip(custom_template, p)
         p:setShields(120, 80)
         p:setMaxEnergy(800) --less maximum energy (vs 1000)
         p:setEnergy(800)
-        --					  Arc, Dir, Range, CycleTime, Dmg
+        --   Arc, Dir, Range, CycleTime, Dmg
         p:setBeamWeapon(0, 10, -30, 1200, 4, 6) --split direction (30 vs 15)
         p:setBeamWeapon(1, 10, 30, 1200, 4, 6) --reduced cycle time (4 vs 8)
-        --							Arc, Dir, Rotate speed
+        -- Arc, Dir, Rotate speed
         p:setBeamWeaponTurret(0, 60, -30, 0.3) --slow turret beams
         p:setBeamWeaponTurret(1, 60, 30, 0.3)
         p:setWeaponTubeCount(2) --one fewer tube (1 forward, 1 rear vs 2 forward, 1 rear)
@@ -9009,7 +9009,7 @@ function placeDefaultPlayerShips()
     end
 end
 function startPlayerPosition(p, angle)
-    --	print("start player position angle:",angle)
+    -- print("start player position angle:",angle)
     vx, vy = vectorFromAngleNorth(angle, player_position_distance)
     p:setPosition(
         faction_primary_station[p:getFaction()].x + vx,
@@ -9019,14 +9019,14 @@ function startPlayerPosition(p, angle)
         :commandTargetRotation((angle + 270) % 360)
 end
 function replicatePlayers(faction)
-    --	Replicate the Human Navy player ships to the designated faction
-    --	print("replicate players faction:",faction)
+    -- Replicate the Human Navy player ships to the designated faction
+    -- print("replicate players faction:",faction)
     local angle = faction_angle[faction]
     local temp_player_restart = {}
     for name, details in pairs(player_restart) do
-        --		print("player restart item faction:",details.faction)
+        -- print("player restart item faction:",details.faction)
         if details.faction == "Human Navy" then
-            --			print("name:",name,"details:",details,"details.template:",details.template,"faction:",faction)
+            -- print("name:",name,"details:",details,"details.template:",details.template,"faction:",faction)
             local p = PlayerSpaceship()
             if p ~= nil and p:isValid() then
                 if player_ship_stats[details.template].stock then
@@ -9137,7 +9137,7 @@ function playerDestroyed(self, instigator)
         p:setControlCode(p.control_code)
         local name_19 = string.lpad(p:getCallSign(), 19)
         local cc_19 = string.lpad(p.control_code, 19)
-        --		print(p:getCallSign(),"Control code:",p.control_code,"Faction:",faction)
+        -- print(p:getCallSign(),"Control code:",p.control_code,"Faction:",faction)
         print(name_19, "Control code:", cc_19, "Faction:", faction)
         if respawn_type == "lindworm" then
             if old_template == "ZX-Lindworm" then
@@ -9215,7 +9215,7 @@ function delayedRespawn(name)
             local name_19 = string.lpad(p:getCallSign(), 19)
             local cc_19 = string.lpad(p.control_code, 19)
             print(name_19, "Control code:", cc_19, "Faction:", faction)
-            --			print(p:getCallSign(),"Control code:",p.control_code,"Faction:",faction)
+            -- print(p:getCallSign(),"Control code:",p.control_code,"Faction:",faction)
             if respawn_type == "lindworm" then
                 if old_template == "ZX-Lindworm" then
                     resetPlayer(p, name)
@@ -9291,7 +9291,7 @@ end
 function commonPlayerSet(p)
     local template_player_type = p:getTypeName()
     if template_player_type == "Player Fighter" then
-        --						  Arc, Dir, Range, CycleTime, Dmg
+        --   Arc, Dir, Range, CycleTime, Dmg
         p:setBeamWeapon(0, 40, 0, 500, 6, 4)
         p:setBeamWeapon(2, 40, -10, 1000, 6, 8)
     end
@@ -9363,7 +9363,7 @@ end
 function setPlayer(p)
     local faction = p:getFaction()
     namePlayerShip(p) --always name it before giving it the control code
-    --	p:addReputationPoints(1000)	--testing only
+    -- p:addReputationPoints(1000) --testing only
     p:addReputationPoints(base_reputation)
     if
         predefined_player_ships ~= nil
@@ -9378,14 +9378,14 @@ function setPlayer(p)
         p.control_code = stem .. branch
         p:setControlCode(stem .. branch)
     end
-    --	local name_19 = string.lpad(p:getCallSign(),19)
-    --	local cc_19 = string.lpad(p.control_code,19)
-    --	print(name_19,"Control code:",cc_19,"Faction:",faction)
-    --	print(p:getCallSign(),"Control code:",p.control_code,"Faction:",faction)
+    -- local name_19 = string.lpad(p:getCallSign(),19)
+    -- local cc_19 = string.lpad(p.control_code,19)
+    -- print(name_19,"Control code:",cc_19,"Faction:",faction)
+    -- print(p:getCallSign(),"Control code:",p.control_code,"Faction:",faction)
     commonPlayerSet(p)
 end
 ------------------------------
---	Station communications  --
+--  Station communications  --
 ------------------------------
 function commsStation()
     if comms_target.comms_data == nil then
@@ -10331,7 +10331,7 @@ function handleUndockedState()
             )
     end
     setCommsMessage(oMsg)
-    --	expediteDock(commsStation)		--may reinstate if time permits. Needs code in update function, player loop
+    -- expediteDock(commsStation) --may reinstate if time permits. Needs code in update function, player loop
     addCommsReply(_("station-comms", "I need information"), function()
         setCommsMessage(
             _("station-comms", "What kind of information do you need?")
@@ -11229,7 +11229,7 @@ function advanceIntel(return_function)
         end
     )
 end
---	Undocked actions
+-- Undocked actions
 function getServiceCost(service)
     return math.ceil(comms_data.service_cost[service])
 end
@@ -11873,263 +11873,263 @@ function goodsAvailabilityOnStation(return_function)
 end
 --[[
 function expediteDock(return_function)
-	if isAllowedTo(comms_target.comms_data.services.preorder) then
-		addCommsReply("Expedite Dock",function()
-			if comms_source.expedite_dock == nil then
-				comms_source.expedite_dock = false
-			end
-			if comms_source.expedite_dock then
-				--handle expedite request already present
-				local existing_expedite = "Docking crew is standing by"
-				if comms_target == comms_source.expedite_dock_station then
-					existing_expedite = existing_expedite .. ". Current preorders:"
-					local preorders_identified = false
-					if comms_source.preorder_hvli ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   HVLIs: %i",comms_source.preorder_hvli)
-					end
-					if comms_source.preorder_homing ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   Homings: %i",comms_source.preorder_homing)
-					end
-					if comms_source.preorder_mine ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   Mines: %i",comms_source.preorder_mine)
-					end
-					if comms_source.preorder_emp ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   EMPs: %i",comms_source.preorder_emp)
-					end
-					if comms_source.preorder_nuke ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. string.format("\n   Nukes: %i",comms_source.preorder_nuke)
-					end
-					if comms_source.preorder_repair_crew ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. "\n   One repair crew"
-					end
-					if comms_source.preorder_coolant ~= nil then
-						preorders_identified = true
-						existing_expedite = existing_expedite .. "\n   Coolant"
-					end
-					if preorders_identified then
-						existing_expedite = existing_expedite .. "\nWould you like to preorder anything else?"
-					else
-						existing_expedite = existing_expedite .. " none.\nWould you like to preorder anything?"
-					end
-					preorder_message = existing_expedite
-					preOrderOrdnance(return_function)
-				else
-					existing_expedite = existing_expedite .. string.format(" on station %s (not this station, %s).",comms_source.expedite_dock_station:getCallSign(),comms_target:getCallSign())
-					setCommsMessage(existing_expedite)
-				end
-				addCommsReply(_("Back"),return_function)
-			else
-				setCommsMessage("If you would like to speed up the addition of resources such as energy, ordnance, etc., please provide a time frame for your arrival. A docking crew will stand by until that time, after which they will return to their normal duties")
-				preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
-				addCommsReply("One minute (5 rep)", function()
-					if comms_source:takeReputationPoints(5) then
-						comms_source.expedite_dock = true
-						comms_source.expedite_dock_station = comms_target
-						comms_source.expedite_dock_timer_max = 60
-						preOrderOrdnance(return_function)
-					else
-						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-					end
-					addCommsReply(_("Back"), return_function)
-				end)
-				addCommsReply("Two minutes (10 Rep)", function()
-					if comms_source:takeReputationPoints(10) then
-						comms_source.expedite_dock = true
-						comms_source.expedite_dock_station = comms_target
-						comms_source.expedite_dock_timer_max = 120
-						preOrderOrdnance(return_function)
-					else
-						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-					end
-					addCommsReply(_("Back"), return_function)
-				end)
-				addCommsReply("Three minutes (15 Rep)", function()
-					if comms_source:takeReputationPoints(15) then
-						comms_source.expedite_dock = true
-						comms_source.expedite_dock_station = comms_target
-						comms_source.expedite_dock_timer_max = 180
-						preOrderOrdnance(return_function)
-					else
-						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-					end
-					addCommsReply(_("Back"), return_function)
-				end)
-			end
-			addCommsReply(_("Back"), return_function)
-		end)
-	end
+    if isAllowedTo(comms_target.comms_data.services.preorder) then
+        addCommsReply("Expedite Dock",function()
+            if comms_source.expedite_dock == nil then
+                comms_source.expedite_dock = false
+            end
+            if comms_source.expedite_dock then
+                --handle expedite request already present
+                local existing_expedite = "Docking crew is standing by"
+                if comms_target == comms_source.expedite_dock_station then
+                    existing_expedite = existing_expedite .. ". Current preorders:"
+                    local preorders_identified = false
+                    if comms_source.preorder_hvli ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. string.format("\n   HVLIs: %i",comms_source.preorder_hvli)
+                    end
+                    if comms_source.preorder_homing ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. string.format("\n   Homings: %i",comms_source.preorder_homing)
+                    end
+                    if comms_source.preorder_mine ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. string.format("\n   Mines: %i",comms_source.preorder_mine)
+                    end
+                    if comms_source.preorder_emp ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. string.format("\n   EMPs: %i",comms_source.preorder_emp)
+                    end
+                    if comms_source.preorder_nuke ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. string.format("\n   Nukes: %i",comms_source.preorder_nuke)
+                    end
+                    if comms_source.preorder_repair_crew ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. "\n   One repair crew"
+                    end
+                    if comms_source.preorder_coolant ~= nil then
+                        preorders_identified = true
+                        existing_expedite = existing_expedite .. "\n   Coolant"
+                    end
+                    if preorders_identified then
+                        existing_expedite = existing_expedite .. "\nWould you like to preorder anything else?"
+                    else
+                        existing_expedite = existing_expedite .. " none.\nWould you like to preorder anything?"
+                    end
+                    preorder_message = existing_expedite
+                    preOrderOrdnance(return_function)
+                else
+                    existing_expedite = existing_expedite .. string.format(" on station %s (not this station, %s).",comms_source.expedite_dock_station:getCallSign(),comms_target:getCallSign())
+                    setCommsMessage(existing_expedite)
+                end
+                addCommsReply(_("Back"),return_function)
+            else
+                setCommsMessage("If you would like to speed up the addition of resources such as energy, ordnance, etc., please provide a time frame for your arrival. A docking crew will stand by until that time, after which they will return to their normal duties")
+                preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
+                addCommsReply("One minute (5 rep)", function()
+                    if comms_source:takeReputationPoints(5) then
+                        comms_source.expedite_dock = true
+                        comms_source.expedite_dock_station = comms_target
+                        comms_source.expedite_dock_timer_max = 60
+                        preOrderOrdnance(return_function)
+                    else
+                        setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+                    end
+                    addCommsReply(_("Back"), return_function)
+                end)
+                addCommsReply("Two minutes (10 Rep)", function()
+                    if comms_source:takeReputationPoints(10) then
+                        comms_source.expedite_dock = true
+                        comms_source.expedite_dock_station = comms_target
+                        comms_source.expedite_dock_timer_max = 120
+                        preOrderOrdnance(return_function)
+                    else
+                        setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+                    end
+                    addCommsReply(_("Back"), return_function)
+                end)
+                addCommsReply("Three minutes (15 Rep)", function()
+                    if comms_source:takeReputationPoints(15) then
+                        comms_source.expedite_dock = true
+                        comms_source.expedite_dock_station = comms_target
+                        comms_source.expedite_dock_timer_max = 180
+                        preOrderOrdnance(return_function)
+                    else
+                        setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+                    end
+                    addCommsReply(_("Back"), return_function)
+                end)
+            end
+            addCommsReply(_("Back"), return_function)
+        end)
+    end
 end
 function preOrderOrdnance(return_function)
-	setCommsMessage(preorder_message)
-	local hvli_count = math.floor(comms_source:getWeaponStorageMax("HVLI") * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage("HVLI")
-	if comms_target.comms_data.weapon_available.HVLI and isAllowedTo(comms_target.comms_data.weapons["HVLI"]) and hvli_count > 0 then
-		local hvli_prompt = ""
-		local hvli_cost = getWeaponCost("HVLI")
-		if hvli_count > 1 then
-			hvli_prompt = string.format("%i HVLIs * %i Rep = %i Rep",hvli_count,hvli_cost,hvli_count*hvli_cost)
-		else
-			hvli_prompt = string.format("%i HVLI * %i Rep = %i Rep",hvli_count,hvli_cost,hvli_count*hvli_cost)
-		end
-		addCommsReply(hvli_prompt,function()
-			if comms_source:takeReputationPoints(hvli_count*hvli_cost) then
-				comms_source.preorder_hvli = hvli_count
-				if hvli_count > 1 then
-					setCommsMessage(string.format("%i HVLIs preordered",hvli_count))
-				else
-					setCommsMessage(string.format("%i HVLI preordered",hvli_count))
-				end
-			else
-				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-			end
-			preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
-			addCommsReply(_("Back"),return_function)
-		end)
-	end
-	local homing_count = math.floor(comms_source:getWeaponStorageMax("Homing") * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage("Homing")
-	if comms_target.comms_data.weapon_available.Homing and isAllowedTo(comms_target.comms_data.weapons["Homing"]) and homing_count > 0 then
-		local homing_prompt = ""
-		local homing_cost = getWeaponCost("Homing")
-		if homing_count > 1 then
-			homing_prompt = string.format("%i Homings * %i Rep = %i Rep",homing_count,homing_cost,homing_count*homing_cost)
-		else
-			homing_prompt = string.format("%i Homing * %i Rep = %i Rep",homing_count,homing_cost,homing_count*homing_cost)
-		end
-		addCommsReply(homing_prompt,function()
-			if comms_source:takeReputationPoints(homing_count*homing_cost) then
-				comms_source.preorder_homing = homing_count
-				if homing_count > 1 then
-					setCommsMessage(string.format("%i Homings preordered",homing_count))
-				else
-					setCommsMessage(string.format("%i Homing preordered",homing_count))
-				end
-			else
-				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-			end
-			preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
-			addCommsReply(_("Back"),return_function)
-		end)
-	end
-	local mine_count = math.floor(comms_source:getWeaponStorageMax("Mine") * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage("Mine")
-	if comms_target.comms_data.weapon_available.Mine and isAllowedTo(comms_target.comms_data.weapons["Mine"]) and mine_count > 0 then
-		local mine_prompt = ""
-		local mine_cost = getWeaponCost("Mine")
-		if mine_count > 1 then
-			mine_prompt = string.format("%i Mines * %i Rep = %i Rep",mine_count,mine_cost,mine_count*mine_cost)
-		else
-			mine_prompt = string.format("%i Mine * %i Rep = %i Rep",mine_count,mine_cost,mine_count*mine_cost)
-		end
-		addCommsReply(mine_prompt,function()
-			if comms_source:takeReputationPoints(mine_count*mine_cost) then
-				comms_source.preorder_mine = mine_count
-				if mine_count > 1 then
-					setCommsMessage(string.format("%i Mines preordered",mine_count))
-				else
-					setCommsMessage(string.format("%i Mine preordered",mine_count))
-				end
-			else
-				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-			end
-			preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
-			addCommsReply(_("Back"),return_function)
-		end)
-	end
-	local emp_count = math.floor(comms_source:getWeaponStorageMax("EMP") * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage("EMP")
-	if comms_target.comms_data.weapon_available.EMP and isAllowedTo(comms_target.comms_data.weapons["EMP"]) and emp_count > 0 then
-		local emp_prompt = ""
-		local emp_cost = getWeaponCost("EMP")
-		if emp_count > 1 then
-			emp_prompt = string.format("%i EMPs * %i Rep = %i Rep",emp_count,emp_cost,emp_count*emp_cost)
-		else
-			emp_prompt = string.format("%i EMP * %i Rep = %i Rep",emp_count,emp_cost,emp_count*emp_cost)
-		end
-		addCommsReply(emp_prompt,function()
-			if comms_source:takeReputationPoints(emp_count*emp_cost) then
-				comms_source.preorder_emp = emp_count
-				if emp_count > 1 then
-					setCommsMessage(string.format("%i EMPs preordered",emp_count))
-				else
-					setCommsMessage(string.format("%i EMP preordered",emp_count))
-				end
-			else
-				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-			end
-			preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
-			addCommsReply(_("Back"),return_function)
-		end)
-	end
-	local nuke_count = math.floor(comms_source:getWeaponStorageMax("Nuke") * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage("Nuke")
-	if comms_target.comms_data.weapon_available.Nuke and isAllowedTo(comms_target.comms_data.weapons["Nuke"]) and nuke_count > 0 then
-		local nuke_prompt = ""
-		local nuke_cost = getWeaponCost("Nuke")
-		if nuke_count > 1 then
-			nuke_prompt = string.format("%i Nukes * %i Rep = %i Rep",nuke_count,nuke_cost,nuke_count*nuke_cost)
-		else
-			nuke_prompt = string.format("%i Nuke * %i Rep = %i Rep",nuke_count,nuke_cost,nuke_count*nuke_cost)
-		end
-		addCommsReply(nuke_prompt,function()
-			if comms_source:takeReputationPoints(nuke_count*nuke_cost) then
-				comms_source.preorder_nuke = nuke_count
-				if nuke_count > 1 then
-					setCommsMessage(string.format("%i Nukes preordered",nuke_count))
-				else
-					setCommsMessage(string.format("%i Nuke preordered",nuke_count))
-				end
-			else
-				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-			end
-			preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
-			addCommsReply(_("Back"),return_function)
-		end)
-	end
-	if comms_source.preorder_repair_crew == nil then
-		if random(1,100) <= 20 then
-			if comms_source:isFriendly(comms_target) then
-				if comms_source:getRepairCrewCount() < comms_source.maxRepairCrew then
-					hireCost = math.random(30,60)
-				else
-					hireCost = math.random(45,90)
-				end
-				addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
-					if not comms_source:takeReputationPoints(hireCost) then
-						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-					else
-						comms_source.preorder_repair_crew = 1
-						setCommsMessage("Repair crew hired on your behalf. They will board when you dock")
-					end
-					preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
-					addCommsReply(_("Back"),return_function)
-				end)
-			end
-		end
-	end
-	if comms_source.preorder_coolant == nil then
-		if random(1,100) <= 20 then
-			if comms_source:isFriendly(comms_target) then
-				if comms_source.initialCoolant ~= nil then
-					local coolant_cost = math.random(45,90)
-					if comms_source:getMaxCoolant() < comms_source.initialCoolant then
-						coolant_cost = math.random(30,60)
-					end
-					addCommsReply(string.format("Set aside coolant for %i reputation",coolant_cost), function()
-						if comms_source:takeReputationPoints(coolant_cost) then
-							comms_source.preorder_coolant = 2
-							setCommsMessage("Coolant set aside for you. It will be loaded when you dock")
-						else
-							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
-						end
-						preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
-						addCommsReply(_("Back"),return_function)
-					end)
-				end
-			end
-		end
-	end
+    setCommsMessage(preorder_message)
+    local hvli_count = math.floor(comms_source:getWeaponStorageMax("HVLI") * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage("HVLI")
+    if comms_target.comms_data.weapon_available.HVLI and isAllowedTo(comms_target.comms_data.weapons["HVLI"]) and hvli_count > 0 then
+        local hvli_prompt = ""
+        local hvli_cost = getWeaponCost("HVLI")
+        if hvli_count > 1 then
+            hvli_prompt = string.format("%i HVLIs * %i Rep = %i Rep",hvli_count,hvli_cost,hvli_count*hvli_cost)
+        else
+            hvli_prompt = string.format("%i HVLI * %i Rep = %i Rep",hvli_count,hvli_cost,hvli_count*hvli_cost)
+        end
+        addCommsReply(hvli_prompt,function()
+            if comms_source:takeReputationPoints(hvli_count*hvli_cost) then
+                comms_source.preorder_hvli = hvli_count
+                if hvli_count > 1 then
+                    setCommsMessage(string.format("%i HVLIs preordered",hvli_count))
+                else
+                    setCommsMessage(string.format("%i HVLI preordered",hvli_count))
+                end
+            else
+                setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+            end
+            preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
+            addCommsReply(_("Back"),return_function)
+        end)
+    end
+    local homing_count = math.floor(comms_source:getWeaponStorageMax("Homing") * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage("Homing")
+    if comms_target.comms_data.weapon_available.Homing and isAllowedTo(comms_target.comms_data.weapons["Homing"]) and homing_count > 0 then
+        local homing_prompt = ""
+        local homing_cost = getWeaponCost("Homing")
+        if homing_count > 1 then
+            homing_prompt = string.format("%i Homings * %i Rep = %i Rep",homing_count,homing_cost,homing_count*homing_cost)
+        else
+            homing_prompt = string.format("%i Homing * %i Rep = %i Rep",homing_count,homing_cost,homing_count*homing_cost)
+        end
+        addCommsReply(homing_prompt,function()
+            if comms_source:takeReputationPoints(homing_count*homing_cost) then
+                comms_source.preorder_homing = homing_count
+                if homing_count > 1 then
+                    setCommsMessage(string.format("%i Homings preordered",homing_count))
+                else
+                    setCommsMessage(string.format("%i Homing preordered",homing_count))
+                end
+            else
+                setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+            end
+            preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
+            addCommsReply(_("Back"),return_function)
+        end)
+    end
+    local mine_count = math.floor(comms_source:getWeaponStorageMax("Mine") * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage("Mine")
+    if comms_target.comms_data.weapon_available.Mine and isAllowedTo(comms_target.comms_data.weapons["Mine"]) and mine_count > 0 then
+        local mine_prompt = ""
+        local mine_cost = getWeaponCost("Mine")
+        if mine_count > 1 then
+            mine_prompt = string.format("%i Mines * %i Rep = %i Rep",mine_count,mine_cost,mine_count*mine_cost)
+        else
+            mine_prompt = string.format("%i Mine * %i Rep = %i Rep",mine_count,mine_cost,mine_count*mine_cost)
+        end
+        addCommsReply(mine_prompt,function()
+            if comms_source:takeReputationPoints(mine_count*mine_cost) then
+                comms_source.preorder_mine = mine_count
+                if mine_count > 1 then
+                    setCommsMessage(string.format("%i Mines preordered",mine_count))
+                else
+                    setCommsMessage(string.format("%i Mine preordered",mine_count))
+                end
+            else
+                setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+            end
+            preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
+            addCommsReply(_("Back"),return_function)
+        end)
+    end
+    local emp_count = math.floor(comms_source:getWeaponStorageMax("EMP") * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage("EMP")
+    if comms_target.comms_data.weapon_available.EMP and isAllowedTo(comms_target.comms_data.weapons["EMP"]) and emp_count > 0 then
+        local emp_prompt = ""
+        local emp_cost = getWeaponCost("EMP")
+        if emp_count > 1 then
+            emp_prompt = string.format("%i EMPs * %i Rep = %i Rep",emp_count,emp_cost,emp_count*emp_cost)
+        else
+            emp_prompt = string.format("%i EMP * %i Rep = %i Rep",emp_count,emp_cost,emp_count*emp_cost)
+        end
+        addCommsReply(emp_prompt,function()
+            if comms_source:takeReputationPoints(emp_count*emp_cost) then
+                comms_source.preorder_emp = emp_count
+                if emp_count > 1 then
+                    setCommsMessage(string.format("%i EMPs preordered",emp_count))
+                else
+                    setCommsMessage(string.format("%i EMP preordered",emp_count))
+                end
+            else
+                setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+            end
+            preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
+            addCommsReply(_("Back"),return_function)
+        end)
+    end
+    local nuke_count = math.floor(comms_source:getWeaponStorageMax("Nuke") * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage("Nuke")
+    if comms_target.comms_data.weapon_available.Nuke and isAllowedTo(comms_target.comms_data.weapons["Nuke"]) and nuke_count > 0 then
+        local nuke_prompt = ""
+        local nuke_cost = getWeaponCost("Nuke")
+        if nuke_count > 1 then
+            nuke_prompt = string.format("%i Nukes * %i Rep = %i Rep",nuke_count,nuke_cost,nuke_count*nuke_cost)
+        else
+            nuke_prompt = string.format("%i Nuke * %i Rep = %i Rep",nuke_count,nuke_cost,nuke_count*nuke_cost)
+        end
+        addCommsReply(nuke_prompt,function()
+            if comms_source:takeReputationPoints(nuke_count*nuke_cost) then
+                comms_source.preorder_nuke = nuke_count
+                if nuke_count > 1 then
+                    setCommsMessage(string.format("%i Nukes preordered",nuke_count))
+                else
+                    setCommsMessage(string.format("%i Nuke preordered",nuke_count))
+                end
+            else
+                setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+            end
+            preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
+            addCommsReply(_("Back"),return_function)
+        end)
+    end
+    if comms_source.preorder_repair_crew == nil then
+        if random(1,100) <= 20 then
+            if comms_source:isFriendly(comms_target) then
+                if comms_source:getRepairCrewCount() < comms_source.maxRepairCrew then
+                    hireCost = math.random(30,60)
+                else
+                    hireCost = math.random(45,90)
+                end
+                addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
+                    if not comms_source:takeReputationPoints(hireCost) then
+                        setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+                    else
+                        comms_source.preorder_repair_crew = 1
+                        setCommsMessage("Repair crew hired on your behalf. They will board when you dock")
+                    end
+                    preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
+                    addCommsReply(_("Back"),return_function)
+                end)
+            end
+        end
+    end
+    if comms_source.preorder_coolant == nil then
+        if random(1,100) <= 20 then
+            if comms_source:isFriendly(comms_target) then
+                if comms_source.initialCoolant ~= nil then
+                    local coolant_cost = math.random(45,90)
+                    if comms_source:getMaxCoolant() < comms_source.initialCoolant then
+                        coolant_cost = math.random(30,60)
+                    end
+                    addCommsReply(string.format("Set aside coolant for %i reputation",coolant_cost), function()
+                        if comms_source:takeReputationPoints(coolant_cost) then
+                            comms_source.preorder_coolant = 2
+                            setCommsMessage("Coolant set aside for you. It will be loaded when you dock")
+                        else
+                            setCommsMessage(_("needRep-comms", "Insufficient reputation"))
+                        end
+                        preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
+                        addCommsReply(_("Back"),return_function)
+                    end)
+                end
+            end
+        end
+    end
 end
 --]]
 function activateDefenseFleet(return_function)
@@ -12198,7 +12198,7 @@ function activateDefenseFleet(return_function)
         end
     end
 end
---	Docked actions
+-- Docked actions
 function restockOrdnance(return_function)
     local missilePresence = 0
     local missile_types = { "Homing", "Nuke", "Mine", "EMP", "HVLI" }
@@ -13269,7 +13269,7 @@ function overchargeJump(return_function)
         end
     end
 end
---	Upgrades
+-- Upgrades
 function hullStrengthUpgrade(p)
     if p.hull_strength_upgrade == nil then
         p.hull_strength_upgrade = "done"
@@ -13512,7 +13512,7 @@ function fasterSpinUpgrade(p)
     end
 end
 ---------------------------
---	Ship Communications  --
+--  Ship Communications  --
 ---------------------------
 function commsShip()
     if comms_target.comms_data == nil then
@@ -15626,7 +15626,7 @@ function update(delta)
                         end
                     end
                 end
-            end --	current station not nil and is valid
+            end -- current station not nil and is valid
         end
     end
     for pidx = 1, 32 do

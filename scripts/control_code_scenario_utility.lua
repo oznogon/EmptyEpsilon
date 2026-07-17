@@ -1,19 +1,19 @@
---------	Control code scenario utility
---	This utility adds a set of buttons to the GM screen allowing for the viewing and
---	setting of player ship control codes
+-- Control code scenario utility
+-- This utility adds a set of buttons to the GM screen allowing for the viewing and
+-- setting of player ship control codes
 --
---	In addition to requiring this file, you will need to add a line to call these buttons:
---		addGMFunction("+Control Codes",manageControlCodes)
---	Further, you should put this call line in function mainGMButtons that can be returned to:
---		function mainGMButtons()
---			clearGMFunctions()
---			addGMFunction("+Control Codes",manageControlCodes)
---		end
+-- In addition to requiring this file, you will need to add a line to call these buttons:
+--     addGMFunction("+Control Codes",manageControlCodes)
+-- Further, you should put this call line in function mainGMButtons that can be returned to:
+--     function mainGMButtons()
+--         clearGMFunctions()
+--         addGMFunction("+Control Codes",manageControlCodes)
+--     end
 --
---	The plus sign at the start of the button label indicates that another set of
---	buttons comes up when clicking the button. Similarly, the minus sign at the start of
---	the button label indicates that the GM will return to a previous set of buttons when
---	clicking the button.
+-- The plus sign at the start of the button label indicates that another set of
+-- buttons comes up when clicking the button. Similarly, the minus sign at the start of
+-- the button label indicates that the GM will return to a previous set of buttons when
+-- clicking the button.
 function manageControlCodes()
     setControlCodeGlobals()
     clearGMFunctions()
@@ -34,17 +34,17 @@ function manageControlCodes()
     end
 end
 function setControlCodeGlobals()
-    --	code_object is set and used in this utility
+    -- code_object is set and used in this utility
 
-    --	This is where you set default codes based on the ship names you are using. Example:
-    --	default_player_ship_control_code = {
-    --		["Phoenix"] =	"BURN265",
-    --		["Callisto"] =	"MOON558",
-    --		["Charybdis"] =	"JACKPOT777",
-    --		["Sentinel"] =	"FERENGI432",
-    --		["Omnivore"] =	"EQUILATERAL180",
-    --		["Tarquin"] =	"TIME909",
-    --	}
+    -- This is where you set default codes based on the ship names you are using. Example:
+    --     default_player_ship_control_code = {
+    --         ["Phoenix"] = "BURN265",
+    --         ["Callisto"] = "MOON558",
+    --         ["Charybdis"] = "JACKPOT777",
+    --         ["Sentinel"] = "FERENGI432",
+    --         ["Omnivore"] = "EQUILATERAL180",
+    --         ["Tarquin"] = "TIME909",
+    --     }
 end
 function viewControlCodes()
     local code_count = 0

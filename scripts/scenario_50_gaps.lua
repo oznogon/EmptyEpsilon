@@ -1269,7 +1269,7 @@ function buildAsteroids()
     ax, ay = vectorFromAngle(random(290, 340), 20000)
     placeRandomAroundPoint(Asteroid, 40, 1, 5000, ax, ay)
 end
---	Transport ship generation and handling
+-- Transport ship generation and handling
 function nearStations(station, compareStationList)
     remainingStations = {}
     if compareStationList[1]:isValid() then
@@ -1392,7 +1392,7 @@ function transportPlot(delta)
         end
     end
 end
---	Station communication
+-- Station communication
 function tableSelectRandom(array)
     local array_item_count = #array
     if array_item_count == 0 then
@@ -2464,15 +2464,15 @@ function commsEastGap()
     if difficulty < 1 then
         cMsg = string.format(_("minefield-comms", "%s\nYou need twelve."), cMsg)
     elseif difficulty > 1 then
-        --		-
-        --		3
+        --              -
+        --              3
         -- -750 -
-        --		2
-        --		- 0
-        --		1
-        --	750 -
-        --		4
-        --		-
+        --              2
+        --              - 0
+        --              1
+        --      750 -
+        --              4
+        --              -
         cMsg = string.format(
             _("minefield-comms", "%s\nCount near middle below: %i"),
             cMsg,
@@ -2539,15 +2539,15 @@ function commsWestGap()
     if difficulty < 1 then
         cMsg = string.format(_("minefield-comms", "%s\nYou need twelve."), cMsg)
     elseif difficulty > 1 then
-        --		-
-        --		3
-        --		- -750
-        --		2
-        --	  0 -
-        --		1
-        --		-  750
-        --		4
-        --		-
+        --              -
+        --              3
+        --              - -750
+        --              2
+        --        0 -
+        --              1
+        --              -  750
+        --              4
+        --              -
         cMsg = string.format(
             _("minefield-comms", "%s\nCount near middle below: %i"),
             cMsg,
@@ -3277,7 +3277,7 @@ function getFriendStatus()
         return "neutral"
     end
 end
---	Ship communication
+-- Ship communication
 function commsShip()
     if comms_target.comms_data == nil then
         comms_target.comms_data = { friendlyness = random(0.0, 100.0) }
@@ -4487,15 +4487,15 @@ function checkEasternernGap()
             gapClosed = true
         end
     elseif difficulty > 1 then
-        ediv2s1 = 0 --division 2, section 1		--		-
-        ediv2s2 = 0 --division 2, section 2		--		3
-        ediv2s3 = 0 --division 2, section 3		-- -750 -
-        ediv2s4 = 0 --division 2, section 4		--		2
-        for i, m in ipairs(east_mines) do --		- 0
-            local mx, my = m:getPosition() --		1
-            if mx < 20375 and mx > 19625 then --	750 -
-                if my > 0 then --		4
-                    if my > 750 then --		-
+        ediv2s1 = 0 --division 2, section 1             --              -
+        ediv2s2 = 0 --division 2, section 2             --              3
+        ediv2s3 = 0 --division 2, section 3             -- -750 -
+        ediv2s4 = 0 --division 2, section 4             --              2
+        for i, m in ipairs(east_mines) do --            - 0
+            local mx, my = m:getPosition() --           1
+            if mx < 20375 and mx > 19625 then --        750 -
+                if my > 0 then --               4
+                    if my > 750 then --         -
                         ediv2s4 = ediv2s4 + 1
                     else
                         ediv2s1 = ediv2s1 + 1
@@ -4547,15 +4547,15 @@ function checkWesternernGap()
             gapClosed = true
         end
     elseif difficulty > 1 then
-        wdiv2s1 = 0 --division 2, section 1		--		-
-        wdiv2s2 = 0 --division 2, section 2		--		3
-        wdiv2s3 = 0 --division 2, section 3		--		- -750
-        wdiv2s4 = 0 --division 2, section 4		--		2
-        for i, m in ipairs(west_mines) do --	  0 -
-            local mx, my = m:getPosition() --		1
-            if mx < 20375 and mx > 19625 then --		-  750
-                if my > 0 then --		4
-                    if my > 750 then --		-
+        wdiv2s1 = 0 --division 2, section 1             --              -
+        wdiv2s2 = 0 --division 2, section 2             --              3
+        wdiv2s3 = 0 --division 2, section 3             --              - -750
+        wdiv2s4 = 0 --division 2, section 4             --              2
+        for i, m in ipairs(west_mines) do --      0 -
+            local mx, my = m:getPosition() --           1
+            if mx < 20375 and mx > 19625 then --                -  750
+                if my > 0 then --               4
+                    if my > 750 then --         -
                         wdiv2s4 = wdiv2s4 + 1
                     else
                         wdiv2s1 = wdiv2s1 + 1

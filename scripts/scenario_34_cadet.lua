@@ -3177,8 +3177,8 @@ function constructEnvironment()
     local hi_impact = 40000
     local range_increment = (hi_range - lo_range) / 8
     local impact_increment = (hi_impact - lo_impact) / 4
-    --	local mix = math.random(2,10 - (4 - (2)))	--	2-8
-    local mix = math.random(6, 8) --	6-8
+    -- local mix = math.random(2,10 - (4 - (2))) -- 2-8
+    local mix = math.random(6, 8) -- 6-8
     sensor_jammer_scan_complexity = 1
     sensor_jammer_scan_depth = 1
     if mix > 5 then
@@ -4079,7 +4079,7 @@ function placeTerrain(placement_area, terrain)
         radius = 200
     end
     local eo_x, eo_y = nil
-    --	exceptions to a simple radius for findClearSpot
+    -- exceptions to a simple radius for findClearSpot
     local field_size = 0
     if terrain.desc == "Circle" then
         field_size = math.random(1, 3)
@@ -4168,8 +4168,8 @@ function placeTerrain(placement_area, terrain)
             local hi_impact = 20000
             local range_increment = (hi_range - lo_range) / 8
             local impact_increment = (hi_impact - lo_impact) / 4
-            --	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--	2-6, 2-8, 2-10
-            local mix = math.random(2, 10 - (4 - 2)) --	2-8
+            -- local mix = math.random(2,10 - (4 - (2*math.floor(difficulty)))) -- 2-6, 2-8, 2-10
+            local mix = math.random(2, 10 - (4 - 2)) -- 2-8
             sensor_jammer_scan_complexity = 1
             sensor_jammer_scan_depth = 1
             if mix > 5 then
@@ -4198,7 +4198,7 @@ function placeTerrain(placement_area, terrain)
                 { inner_count = 9, mid_count = 15, outer_count = 20 }, --2
                 { inner_count = 15, mid_count = 20, outer_count = 25 }, --3
             }
-            --	field_size randomized earlier (1 to 3)
+            -- field_size randomized earlier (1 to 3)
             local angle = random(0, 360)
             local mine_x, mine_y = 0
             for i = 1, mine_circle[field_size].inner_count do
@@ -4807,7 +4807,7 @@ function placeTerrain(placement_area, terrain)
         return false
     end
 end
---	Transport utilities
+-- Transport utilities
 function goodsOnShip(comms_target, comms_data)
     comms_data.goods = {}
     comms_data.goods[commonGoods[math.random(1, #commonGoods)]] =
@@ -4932,7 +4932,7 @@ function maintainTransports()
         end
     end
 end
---	Sensor jammer utilities
+-- Sensor jammer utilities
 function sensorJammerPickupProcess(self, retriever)
     string.format("")
     local jammer_call_sign = self:getCallSign()
@@ -4993,7 +4993,7 @@ function sensorJammer(x, y)
     sensor_jammer.jam_impact_units = sensor_jammer_power_units
     return sensor_jammer
 end
---	Storage
+-- Storage
 function clearStore()
     local i = 1
     while store:get(i) ~= "" do
@@ -5265,7 +5265,7 @@ function decryptShip(success, ship_key)
         )
     end
 end
---	Communication
+-- Communication
 function scenarioMissionsUndocked()
     if not player:getCanDock() then
         addCommsReply(
@@ -5292,21 +5292,21 @@ function scenarioMissionsUndocked()
     end
 end
 function scenarioMissions()
-    --	save levels
-    --	0	ship name
-    --	1	enemy ship group 1 destroyed
-    --	2	ship has EMP capability
-    --	3	enemy ship group 2 destroyed
-    --	4	long range sensors out to 30u
-    --	5	enemy ship group 3 destroyed
-    --	6	combat maneuver
-    --	7	enemy ship group 4 destroyed
-    --	8	jump drive
-    --	9	enemy ship group 5 destroyed
-    --	10	rescued freighter from enemy group 5
-    --	11	ship has Nuke capability
-    --	12	picked up cargo for home station
-    --	13	probe launch capability
+    -- save levels
+    --  0 ship name
+    --  1 enemy ship group 1 destroyed
+    --  2 ship has EMP capability
+    --  3 enemy ship group 2 destroyed
+    --  4 long range sensors out to 30u
+    --  5 enemy ship group 3 destroyed
+    --  6 combat maneuver
+    --  7 enemy ship group 4 destroyed
+    --  8 jump drive
+    --  9 enemy ship group 5 destroyed
+    -- 10 rescued freighter from enemy group 5
+    -- 11 ship has Nuke capability
+    -- 12 picked up cargo for home station
+    -- 13 probe launch capability
     local presented = 0
     if comms_target:isFriendly(comms_source) then
         presented = commsEncryptDecrypt()
@@ -5869,7 +5869,7 @@ function availableForComms(p)
     end
     return true
 end
---	Spawning
+-- Spawning
 function getTemplatePool(max_strength)
     local function getStrengthSort(tbl, sortFunction)
         local keys = {}
@@ -5998,7 +5998,7 @@ function spawnRandomArmed(x, y, enemy_strength, template_pool)
     end
     while enemy_strength > 0 do
         local selected_template = template_pool[math.random(1, #template_pool)]
-        --		print("selected template:",selected_template)
+        -- print("selected template:",selected_template)
         local ship = ship_template[selected_template].create(
             fleetSpawnFaction,
             selected_template
@@ -6016,7 +6016,7 @@ function spawnRandomArmed(x, y, enemy_strength, template_pool)
     end
     return enemyList
 end
---	Missions
+-- Missions
 function nonCombatMissions(m)
     if player.level == 11 then
         if player.get_cargo_message == nil then
@@ -6322,7 +6322,7 @@ function buildDefensePlatforms()
                         local build_angle = (def.angle + 60 * def.cur) % 360
                         local build_dist =
                             station_spacing[def.station:getTypeName()].platform
-                        --						print("build angle:",build_angle,"build dist:",build_dist)
+                        -- print("build angle:",build_angle,"build dist:",build_dist)
                         local cx, cy =
                             vectorFromAngle(build_angle, build_dist, true)
                         def.freighter.task = "build"
@@ -6431,9 +6431,9 @@ function updatePlayerLongRangeSensors(delta, p)
             base_range = base_range
                 + (1000 * p.power_sensor_interval * p.power_sensor_level)
             local power_decrement = delta * p.power_sensor_level * 2
-            --			print("boost sensor power drain value:",power_decrement,"before energy:",p:getEnergyLevel())
+            -- print("boost sensor power drain value:",power_decrement,"before energy:",p:getEnergyLevel())
             p:setEnergyLevel(p:getEnergyLevel() - power_decrement)
-            --			print("after:",p:getEnergyLevel())
+            -- print("after:",p:getEnergyLevel())
         end
     else
         if p.power_sensor_state ~= nil then
@@ -6610,7 +6610,7 @@ function update(delta)
     if delta == 0 then
         return
     end
-    --	game is no longer paused
+    -- game is no longer paused
     if player.opening_message == nil then
         if availableForComms(player) then
             home_station:sendCommsMessage(

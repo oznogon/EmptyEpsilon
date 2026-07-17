@@ -165,7 +165,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
             template_db:setLongDescription(template_descriptions[template].desc)
             template_db:setModelDataName(template_descriptions[template].model)
             template_db:setImage(template_descriptions[template].image)
-            --	add beam upgrade info
+            -- add beam upgrade info
             local beam_key = _("scienceDB", "Beam Weapons")
             template_db:addEntry(beam_key)
             local beam_db =
@@ -251,7 +251,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     end
                 end
             end
-            --	add missile upgrade info
+            -- add missile upgrade info
             local missile_key = _("scienceDB", "Missile systems")
             template_db:addEntry(missile_key)
             local missile_db =
@@ -406,7 +406,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     )
                 end
             end
-            --	add shield upgrade info
+            -- add shield upgrade info
             local shield_key = _("scienceDB", "Shield system")
             template_db:addEntry(shield_key)
             local shield_db =
@@ -456,7 +456,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     level_db:setKeyValue(shield_arc_key, shield[2].max)
                 end
             end
-            --	add hull upgrade info
+            -- add hull upgrade info
             local hull_key = _("scienceDB", "Hull")
             template_db:addEntry(hull_key)
             local hull_db =
@@ -498,7 +498,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                 level_db:setLongDescription(out)
                 level_db:setKeyValue(_("scienceDB", "Hull strength"), hull.max)
             end
-            --	add impulse upgrade info
+            -- add impulse upgrade info
             local impulse_key = _("scienceDB", "Impulse systems")
             template_db:addEntry(impulse_key)
             local impulse_db =
@@ -584,7 +584,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     )
                 end
             end
-            --	add ftl upgrade info
+            -- add ftl upgrade info
             local ftl_key = _("scienceDB", "FTL system")
             template_db:addEntry(ftl_key)
             local ftl_db =
@@ -659,7 +659,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     )
                 end
             end
-            --	add sensor upgrade info
+            -- add sensor upgrade info
             local sensor_key = _("scienceDB", "Sensor system")
             template_db:addEntry(sensor_key)
             local sensor_db =

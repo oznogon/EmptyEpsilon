@@ -426,12 +426,12 @@ function formatTime(seconds)
     end
     return str
 end
---	Temporary function to be used as a helper function until the transition to ECS is complete
---	First parameter is a space object of some kind
---	Second parameter is the pre-ECS value of .typeName (eg "CpuShip")
---	Function returns true or false depending on whether the first parameter is the second parameter type or not
---	The test is made according to the environment the scenario is running in
---	Sets global variable ECS
+-- Temporary function to be used as a helper function until the transition to ECS is complete
+-- First parameter is a space object of some kind
+-- Second parameter is the pre-ECS value of .typeName (eg "CpuShip")
+-- Function returns true or false depending on whether the first parameter is the second parameter type or not
+-- The test is made according to the environment the scenario is running in
+-- Sets global variable ECS
 function isObjectType(obj, typ)
     if not createEntity then
         -- not ecs, use the pre-ECS typeName field

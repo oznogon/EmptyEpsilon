@@ -1,54 +1,54 @@
-----------     Generate call sign functions     ----------
---	Usage
---		generateCallSign()
---			No passed parameters. Prefix generated internally. No related faction prefix.
---		generateCallSign(prefix)
---			A call sign prefix has already been determined and passed in. The numeric
---			part after the prefix is what is generated. Especially useful if you want a
---			group of call signs with the same prefix, but with different numeric suffixes.
---		generateCallSign(nil,faction)
---			No prefix specified, but a faction is specified. The prefix will be taken from
---			the list of faction prefixes for the faction provided. The numeric suffix is
---			also generated.
---		generateCallSign(prefix,faction)
---			Both prefix and faction specified. Assumes you want a faction flavored prefix
---			along with the prefix provided. The prefix portion will be the faction flavored
---			prefix followed by a space followed by the provided prefix. The numeric suffix
---			follows.
---		generateCallSignPrefix()
---			No length specified. A call sign prefix of random characters of length
---			prefix_length will be generated. The randomness comes from a pool of characters
---			to reduce the chance of repetition. The pool is rebuilt when exhausted. Called
---			by generateCallSign when prefix is not provided. Useful when you want the same
---			prefix for a group of call signs, but you want it randomly generated: use
---			generateCallSignPrefix and pass the result to generateCallSign for each call
---			sign desired for your group.
---		generateCallSignPrefix(length)
---			Generates a random group of characters of the length passed.
---		getFactionPrefix()
---			Calls generateCallSignPrefix() if the faction is omitted
---		getFactionPrefix(faction)
---			Provides a faction flavored call sign prefix. Called internally by
---			generateCallSign(<>,faction). Pulled from the pool of faction prefixes. The
---			faction prefix pool is refilled when exhausted.
---	Global variables (set here if not set externally)
---		suffix_index - set to zero if not set externally
---		prefix_length - set to zero if not set externally
---		Faction flavored call sign prefixes:
---			kraylor_names, exuari_names, ghosts_names, independent_names, human_names,
---			arlenian_names, usn_names, tsn_names, cuf_names, ktlitan_names
---	Faction flavored prefix names
---		The Kraylor, Arlenian, Exuari and Ktlitan names are supposed to sound alien. They
---		follow an internal pattern so that with enough experience, one can tell by the
---		ship name what faction they belong to. The Ghost names come from computer hardware
---		and software terminology in keeping with their cyber origins. The USN names follow
---		a pirate theme. The TSN names follow a traditional space ship theme from science
---		fiction. The CUF names are somewhat whimsical with alliteration for multipart names.
---		The independent names borrow from every group since they represent ships that come
---		from a variety of sources.
+-- Generate call sign functions
+-- Usage
+--     generateCallSign()
+--         No passed parameters. Prefix generated internally. No related faction prefix.
+--     generateCallSign(prefix)
+--         A call sign prefix has already been determined and passed in. The numeric
+--         part after the prefix is what is generated. Especially useful if you want a
+--         group of call signs with the same prefix, but with different numeric suffixes.
+--     generateCallSign(nil,faction)
+--         No prefix specified, but a faction is specified. The prefix will be taken from
+--         the list of faction prefixes for the faction provided. The numeric suffix is
+--         also generated.
+--     generateCallSign(prefix,faction)
+--         Both prefix and faction specified. Assumes you want a faction flavored prefix
+--         along with the prefix provided. The prefix portion will be the faction flavored
+--         prefix followed by a space followed by the provided prefix. The numeric suffix
+--         follows.
+--     generateCallSignPrefix()
+--         No length specified. A call sign prefix of random characters of length
+--         prefix_length will be generated. The randomness comes from a pool of characters
+--         to reduce the chance of repetition. The pool is rebuilt when exhausted. Called
+--         by generateCallSign when prefix is not provided. Useful when you want the same
+--         prefix for a group of call signs, but you want it randomly generated: use
+--         generateCallSignPrefix and pass the result to generateCallSign for each call
+--         sign desired for your group.
+--     generateCallSignPrefix(length)
+--         Generates a random group of characters of the length passed.
+--     getFactionPrefix()
+--         Calls generateCallSignPrefix() if the faction is omitted
+--     getFactionPrefix(faction)
+--         Provides a faction flavored call sign prefix. Called internally by
+--         generateCallSign(<>,faction). Pulled from the pool of faction prefixes. The
+--         faction prefix pool is refilled when exhausted.
+-- Global variables (set here if not set externally)
+--     suffix_index - set to zero if not set externally
+--     prefix_length - set to zero if not set externally
+--     Faction flavored call sign prefixes:
+--         kraylor_names, exuari_names, ghosts_names, independent_names, human_names,
+--         arlenian_names, usn_names, tsn_names, cuf_names, ktlitan_names
+-- Faction flavored prefix names
+--     The Kraylor, Arlenian, Exuari and Ktlitan names are supposed to sound alien. They
+--     follow an internal pattern so that with enough experience, one can tell by the
+--     ship name what faction they belong to. The Ghost names come from computer hardware
+--     and software terminology in keeping with their cyber origins. The USN names follow
+--     a pirate theme. The TSN names follow a traditional space ship theme from science
+--     fiction. The CUF names are somewhat whimsical with alliteration for multipart names.
+--     The independent names borrow from every group since they represent ships that come
+--     from a variety of sources.
 --
---		You can set up your own list of names using the same list name and format. Once
---		your names have been exhausted, the pool will be refilled with the names here.
+--     You can set up your own list of names using the same list name and format. Once
+--     your names have been exhausted, the pool will be refilled with the names here.
 function generateCallSign(prefix, faction)
     if faction == nil then
         if prefix == nil then

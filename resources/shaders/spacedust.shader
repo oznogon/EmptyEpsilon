@@ -11,7 +11,7 @@ attribute float a_sign_value;
 varying float v_distance;
 
 void main()
-{    
+{
     vec4 view_pos = u_view * vec4(a_position.xy + a_sign_value * u_velocity, a_position.z, 1.);
     v_distance = length(view_pos.xyz);
     gl_Position = u_projection * view_pos;

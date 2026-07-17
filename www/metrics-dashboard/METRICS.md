@@ -350,7 +350,7 @@ The `ee_kills_total{instigator}` counter metric counts entities destroyed by dam
 4. Set `"gridPos"` so the panel fits below the last existing panel. The `y` coordinate of your row must be at least `y + h` of the last panel above it.
 
    Row template:
-   
+
    ```json
    {
      "collapsed": false,
@@ -361,9 +361,9 @@ The `ee_kills_total{instigator}` counter metric counts entities destroyed by dam
      "type": "row"
    }
    ```
-   
+
    Panel template (bar chart, instant query):
-   
+
    ```json
    {
      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },

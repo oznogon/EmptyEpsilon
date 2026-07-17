@@ -164,21 +164,21 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     {
         if (value == "scan")
         {
-            info_sidebar->show();
+            info_scan_content->show();
             custom_function_sidebar->hide();
             utility_beam_sidebar->hide();
             utility_beam_dial->hide();
         }
         else if (value == "func")
         {
-            info_sidebar->hide();
+            info_scan_content->hide();
             custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
             utility_beam_sidebar->hide();
             utility_beam_dial->hide();
         }
         else if (value == "util")
         {
-            info_sidebar->hide();
+            info_scan_content->hide();
             custom_function_sidebar->hide();
             utility_beam_sidebar->show();
             utility_beam_dial->show();
@@ -220,15 +220,21 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setSize(250.0f, height)
         ->hide();
 
+    // Scan data container. Hiding this hides all scan data without hiding info_sidebar.
+    info_scan_content = new GuiElement(info_sidebar, "SCAN_CONTENT");
+    info_scan_content
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
     // Scan button.
-    scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
+    scan_button = new GuiScanTargetButton(info_scan_content, "SCAN_BUTTON", &targets);
     scan_button
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setVisible(my_spaceship.hasComponent<ScienceScanner>());
     (new GuiTextTooltip(scan_button, "SCAN_BUTTON_TIP", tr("tooltips", "Initiate a scan of the selected target to reveal its data and subsystems."), 20.0f))->setWidth(280.0f);
 
     // Link to analysis button.
-    link_to_analysis_button = new GuiButton(info_sidebar, "LINK_TO_ANALYSIS", tr("scienceButton", "Link to analysis"),
+    link_to_analysis_button = new GuiButton(info_scan_content, "LINK_TO_ANALYSIS", tr("scienceButton", "Link to analysis"),
         [this]()
         {
             if (my_player_info && targets.get())
@@ -239,19 +245,19 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     (new GuiTextTooltip(link_to_analysis_button, "LINK_TO_ANALYSIS_TIP", tr("tooltips", "Send the selected target's data to the analysis screen for comparison."), 20.0f))->setWidth(280.0f);
 
     // Simple scan data.
-    info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4f, tr("science", "Callsign"), "");
+    info_callsign = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_CALLSIGN", 0.4f, tr("science", "Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4f, tr("science", "Distance"), "");
+    info_distance = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_DISTANCE", 0.4f, tr("science", "Distance"), "");
     info_distance->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    info_heading = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEADING", 0.4f, tr("science", "Bearing"), "");
+    info_heading = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_HEADING", 0.4f, tr("science", "Bearing"), "");
     info_heading->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4f, tr("science", "Rel. speed"), "");
+    info_relspeed = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_REL_SPEED", 0.4f, tr("science", "Rel. speed"), "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4f, tr("science", "Faction"), "");
+    info_faction = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_FACTION", 0.4f, tr("science", "Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30.0f);
     info_faction_button = new GuiButton(info_faction, "SCIENCE_FACTION_BUTTON", tr("scienceButton", "DB"),
         [this]()
@@ -277,7 +283,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setSize(30.0f, 25.0f);
     (new GuiTextTooltip(info_faction_button, "FACTION_DB_TIP", tr("tooltips", "Open this faction's entry in the science database."), 20.0f))->setWidth(280.0f);
 
-    info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4f, tr("science", "Type"), "");
+    info_type = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_TYPE", 0.4f, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("scienceButton", "DB"),
@@ -302,15 +308,15 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setSize(30.0f, 25.0f);
     (new GuiTextTooltip(info_type_button, "TYPE_DB_TIP", tr("tooltips", "Open this ship type's entry in the science database."), 20.0f))->setWidth(280.0f);
 
-    info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4f, tr("science", "Shields"), "");
+    info_shields = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_SHIELDS", 0.4f, tr("science", "Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4f, tr("science", "Hull"), "");
+    info_hull = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_HULL", 0.4f, tr("science", "Hull"), "");
     info_hull->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     // Full scan data sidebar.
     // Draw and hide the sidebar pager. Tabs are populated dynamically in onDraw.
-    sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [](int index, string value) {});
+    sidebar_pager = new GuiSelector(info_scan_content, "SIDEBAR_PAGER", [](int index, string value) {});
     sidebar_pager
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->hide();
@@ -327,19 +333,19 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Default the pager to the first item.
     sidebar_pager->setSelectionIndex(0);
 
-    sidebar_signals_page = new GuiScrollContainer(info_sidebar, "");
+    sidebar_signals_page = new GuiScrollContainer(info_scan_content, "");
     sidebar_signals_page
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    sidebar_frequencies_page = new GuiScrollContainer(info_sidebar, "");
+    sidebar_frequencies_page = new GuiScrollContainer(info_scan_content, "");
     sidebar_frequencies_page
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    sidebar_systems_page = new GuiScrollContainer(info_sidebar, "");
+    sidebar_systems_page = new GuiScrollContainer(info_scan_content, "");
     sidebar_systems_page
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
@@ -392,7 +398,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     }
 
     // Prep and hide the description text area.
-    info_description = new GuiScrollFormattedText(info_sidebar, "SCIENCE_DESC", "");
+    info_description = new GuiScrollFormattedText(info_scan_content, "SCIENCE_DESC", "");
     info_description
         ->setTextSize(28.0f)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -402,10 +408,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // END info_sidebar
 
     // Utility sidebar.
-    utility_beam_sidebar = new GuiUtilityBeamControls(radar_view, crew_position, "UTILITY_BEAM_CONTROLS");
+    utility_beam_sidebar = new GuiUtilityBeamControls(info_sidebar, crew_position, "UTILITY_BEAM_CONTROLS");
     utility_beam_sidebar
-        ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
-        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
@@ -699,7 +704,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         custom_function_sidebar
             ->setPosition(-20.0f, 210.0f, sp::Alignment::TopRight)
             ->setVisible(current_width < 1435 && sidebar_selector->getSelectionIndex() == 1 && sidebar_selector->indexByValue("func") >= 0);
-        info_sidebar->setVisible(current_width >= 1435 || sidebar_selector->getSelectionIndex() == 0);
+        info_sidebar->setVisible(current_width >= 1435 || sidebar_selector->getSelectionValue() != "func");
     }
     else
     {
@@ -1179,7 +1184,9 @@ void ScienceScreen::onUpdate()
         if (func_was_selected)
         {
             sidebar_selector->setSelectionIndex(0);
-            info_sidebar->show();
+            info_scan_content->show();
+            utility_beam_sidebar->hide();
+            utility_beam_dial->hide();
         }
     }
 
@@ -1197,7 +1204,7 @@ void ScienceScreen::onUpdate()
         if (util_was_selected)
         {
             sidebar_selector->setSelectionIndex(0);
-            info_sidebar->show();
+            info_scan_content->show();
             custom_function_sidebar->hide();
         }
     }

@@ -33,32 +33,32 @@
 -- Murphy[Hard]: Random factors are more against you
 
 -- typical colors used in ship log
--- 	"Red"			Red									Enemies spotted
---	"Blue"			Blue
---	"Yellow"		Yellow								Maria Shrivner
---	"Magenta"		Magenta								Headquarters
---	"Green"			Green
---	"Cyan"			Cyan
---	"Black"			Black
---	"#555555"		Dark gray			"55,55,55"
---	"#ff4500"		Orange red			"255,69,0"		HMS Bounty
---	"#ff7f50"		Coral				"255,127,80"
---	"#5f9ea0"		Cadet blue			"95,158,160"	Paul Straight
---	"#4169e1"		Royal blue			"65,105,225"
---	"#8a2be2"		Blue violet			"138,43,226"
---	"#ba55d3"		Medium orchid		"186,85,211"	Maria's station
---	"#a0522d"		Sienna				"160,82,45"
---	"#b29650"		Arbitrary			"178,150,80"
---	"#556b2f"		Dark olive green	"85,107,47"		Home station
---	"#228b22"		Forest green		"34,139,34"
---	"#b22222"		Firebrick			"178,34,34"
+--     "Red"        Red                          Enemies spotted
+--    "Blue"       Blue
+--  "Yellow"     Yellow                          Maria Shrivner
+-- "Magenta"    Magenta                          Headquarters
+--   "Green"      Green
+--    "Cyan"       Cyan
+--   "Black"      Black
+-- "#555555"    Dark gray        " 55,  55,  55"
+-- "#ff4500"    Orange red       "255,  69,   0" HMS Bounty
+-- "#ff7f50"    Coral            "255, 127,  80"
+-- "#5f9ea0"    Cadet blue       " 95, 158, 160" Paul Straight
+-- "#4169e1"    Royal blue       " 65, 105, 225"
+-- "#8a2be2"    Blue violet      "138,  43, 226"
+-- "#ba55d3"    Medium orchid    "186,  85, 211" Maria's station
+-- "#a0522d"    Sienna           "160,  82,  45"
+-- "#b29650"    Arbitrary        "178, 150,  80"
+-- "#556b2f"    Dark olive green " 85, 107,  47" Home station
+-- "#228b22"    Forest green     " 34, 139,  34"
+-- "#b22222"    Firebrick        "178,  34,  34"
 
 require("utils.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("place_station_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 -------------------------------
---	Initialization routines  --
+--  Initialization routines  --
 -------------------------------
 function init()
     wfv = "nowhere" --wolf fence value - used for debugging
@@ -1505,7 +1505,7 @@ function mainGMButtonsAfterPause()
     addGMFunction(button_label, GMSpawnsEnemies)
 end
 function GMSpawnsEnemies()
-    --	Let the GM spawn a random group of enemies to attack a player
+    -- Let the GM spawn a random group of enemies to attack a player
     local gmPlayer = nil
     local gmSelect = getGMSelection()
     for idx, obj in ipairs(gmSelect) do
@@ -2001,18 +2001,17 @@ function buildStations()
         gy = adjList[rn][2]
     end
     --show adjacent list with a bunch of small stations for testing result purposes
-    --[[--
-	if #adjList >= 1 then
-		for i=1,#adjList do
-			tsix = adjList[i][1]
-			tsiy = adjList[i][2]
-			tsx = (tsix - 250)*gSize
-			tsy = (tsiy - 250)*gSize
-			SpaceStation():setTemplate("Small Station"):setCallSign(string.format("%i i:%i x:%i y:%i",sPool,i,tsix,tsiy)):setPosition(tsx,tsy)
-		end
-	end
-	--]]
-    --
+    --[[
+    if #adjList >= 1 then
+        for i=1,#adjList do
+            tsix = adjList[i][1]
+            tsiy = adjList[i][2]
+            tsx = (tsix - 250)*gSize
+            tsy = (tsiy - 250)*gSize
+            SpaceStation():setTemplate("Small Station"):setCallSign(string.format("%i i:%i x:%i y:%i",sPool,i,tsix,tsiy)):setPosition(tsx,tsy)
+        end
+    end
+    ]]
     if not diagnostic then
         --placeRandomAroundPoint(Nebula,math.random(10,30),1,150000,0,0)
         local nebula_count = math.random(10, 30)
@@ -2723,7 +2722,7 @@ function getAdjacentGridLocationsSkip(dSkip, lx, ly)
     end
 end
 ----------------------------------------------
---	Transport ship generation and handling  --
+--  Transport ship generation and handling  --
 ----------------------------------------------
 function randomStation()
     local clean_list = true
@@ -9612,7 +9611,7 @@ function wormBirth3(delta)
     end
 end
 ------------------------------------
---	Generic or utility functions  --
+--  Generic or utility functions  --
 ------------------------------------
 function tableRemoveRandom(array)
     local array_item_count = #array
@@ -10070,7 +10069,7 @@ function setPlayers()
                     pobj.autoCoolant = false
                     pobj:setJumpDrive(true)
                     pobj:setJumpDriveRange(3000, 40000)
-                    --            		  Arc, Dir,Range, Cyc,Dmg
+                    --               Arc, Dir,Range, Cyc,Dmg
                     pobj:setBeamWeapon(0, 20, 0, 1200, 6, 8)
                         :setBeamWeaponDamageType(0, "emp")
                         :setBeamWeaponArcColor(0, 0, 0, 0.5, 0, 0, 1.0)
@@ -10157,7 +10156,7 @@ function spawnEnemies(
     if faction == nil then
         faction = "Exuari"
     end
-    --	print("danger in spawnEnemies: " .. danger)
+    -- print("danger in spawnEnemies: " .. danger)
     if strength == nil then
         strength = math.max(danger * enemy_power * playerPower(), 5)
     end
@@ -10170,7 +10169,7 @@ function spawnEnemies(
             shape = "hexagonal"
         end
     end
-    --	print("shape: " .. shape)
+    -- print("shape: " .. shape)
     local enemy_position = 0
     local sp = irandom(500, 1000) --random spacing of spawned group
     local enemy_list = {}
@@ -10895,7 +10894,7 @@ function endStatistics()
             enemyStationsSurvived,
             destroyedEnemyStations
         )
-    --	gMsg = gMsg .. string.format(_("msgMainscreen", "\n\n\n\nRequired missions completed: %i"),requiredMissionCount)
+    -- gMsg = gMsg .. string.format(_("msgMainscreen", "\n\n\n\nRequired missions completed: %i"),requiredMissionCount)
     rankVal = survivedFriendlyStations / startingFriendlyStations * 0.6
         + survivedNeutralStations / startingNeutralStations * 0.2
         + (1 - enemyStationsSurvived / startingEnemyStations) * 0.2

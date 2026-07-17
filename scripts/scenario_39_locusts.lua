@@ -710,7 +710,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            --	Custom player ships
+            -- Custom player ships
             ["Amalgam"] = {
                 strength = 42,
                 cargo = 7,
@@ -1658,7 +1658,7 @@ function setConstants()
     deployed_factions = {}
     factions = {}
 end
---	Terrain
+-- Terrain
 function constructEnvironment()
     local common_scattered_objects = 0
     local obj_type_sizes = {
@@ -2094,7 +2094,7 @@ function constructEnvironment()
             end
         end
     end
-    --	testFormation()
+    -- testFormation()
 end
 function placeAsteroidBlob(x, y, field_radius)
     local asteroid_list = {}
@@ -2191,7 +2191,7 @@ function placeMinefieldBlob(x, y, mine_blob_radius)
     until reached_the_edge
     return mine_list
 end
---	Player
+-- Player
 function setPlayers(p)
     string.format("")
     if p == nil then
@@ -2363,7 +2363,7 @@ function locustStatus(p, console)
         string.format("locust_status_message_%s", console)
     p:addCustomMessage(console, p.locust_status_message[console], out)
 end
---	Events
+-- Events
 function wormholeTax(self, teleportee)
     string.format("")
     if
@@ -2388,20 +2388,17 @@ function playerDestruction()
 end
 function organicSystems(self, instigator)
     if locust_template == "Fighter" then
-        --						Arc Dir	Range	Cycle time			Damage
         self:setBeamWeapon(0, 60, 0, 1000, 4 + random(-1, 1), 4 + random(-1, 1))
         self:setRotationMaxSpeed(28 + random(-2, 2))
     elseif locust_template == "MT52 Hornet" then
-        --						Arc Dir	Range	Cycle time			Damage
         self:setBeamWeapon(0, 30, 0, 700, 4 + random(-1, 1), 3 + random(-2, 3))
         self:setRotationMaxSpeed(28 + random(-2, 2))
     elseif locust_template == "Ktlitan Drone" then
-        --						Arc Dir	Range	Cycle time			Damage
         self:setBeamWeapon(0, 40, 0, 600, 4 + random(-1, 1), 6 + random(-1, 1))
         self:setRotationMaxSpeed(15 + random(-2, 2))
     end
 end
---	Utility
+-- Utility
 function angleFromVectorNorth(p1x, p1y, p2x, p2y)
     TWOPI = 6.2831853071795865
     RAD2DEG = 57.2957795130823209
@@ -2414,14 +2411,14 @@ function angleFromVectorNorth(p1x, p1y, p2x, p2y)
     return (360 - (RAD2DEG * theta)) % 360
 end
 function vectorFromAngleNorth(angle, distance)
-    --	print("input angle to vectorFromAngleNorth:")
-    --	print(angle)
+    -- print("input angle to vectorFromAngleNorth:")
+    -- print(angle)
     angle = (angle + 270) % 360
     local x, y = vectorFromAngle(angle, distance)
     return x, y
 end
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -2753,7 +2750,7 @@ function testFormation()
     end
     leader_ship:orderFlyTowards(100000, 100000)
 end
---	Communications
+-- Communications
 function commsBriefing()
     string.format("")
     setCommsMessage(
@@ -2913,7 +2910,7 @@ function getBriefingStation(p)
     end
     return station_briefing
 end
---	Update
+-- Update
 function gatherSwarm()
     if swarm_gather == nil then
         local total_x = 0

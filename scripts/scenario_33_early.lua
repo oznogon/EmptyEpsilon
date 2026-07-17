@@ -39,29 +39,29 @@
 -- Names[Random]: Player ship names are selected at random from a list
 
 ---------- Tasks given to players ----------
---	First Task: Dock
---		Hurdles: request permission to dock, calibrate shields and beams, power down missiles
---		Participants: Helm, weapons, relay, engineering
+-- First Task: Dock
+--     Hurdles: request permission to dock, calibrate shields and beams, power down missiles
+--     Participants: Helm, weapons, relay, engineering
 
---	Second Task: Scan to discriminate targets
---		Hurdles: nebula obscures some targets
---		Participants: Science, relay
+-- Second Task: Scan to discriminate targets
+--     Hurdles: nebula obscures some targets
+--     Participants: Science, relay
 
---	Third Task: Destroy enemy freighter
---		Hurdles: Limited beam function, only HVLI type missiles
---		Participants: Helm, Weapons, engineering, science, relay
+-- Third Task: Destroy enemy freighter
+--     Hurdles: Limited beam function, only HVLI type missiles
+--     Participants: Helm, Weapons, engineering, science, relay
 
---	Fourth Task: Assist freighter
---		Hurdles: Get parts from station, find freighter, fend off attackers
---		Participants: Helm, science, relay, engineering, weapons
+-- Fourth Task: Assist freighter
+--     Hurdles: Get parts from station, find freighter, fend off attackers
+--     Participants: Helm, science, relay, engineering, weapons
 
---	Fifth task: Research anomalous planetary orbital behavior
---		Hurdles: Bumping into planets causes severe damage to ship, navigate carefully
---		Participants: Helm, Science, Relay, Engineering
+-- Fifth task: Research anomalous planetary orbital behavior
+--     Hurdles: Bumping into planets causes severe damage to ship, navigate carefully
+--     Participants: Helm, Science, Relay, Engineering
 
---	Bonus task: Destroy enemy base
---		Hurdles: Enemy space ships, enemy base is far from primary base
---		Participants: Helm, Weapons, Engineering, Science, Relay
+-- Bonus task: Destroy enemy base
+--     Hurdles: Enemy space ships, enemy base is far from primary base
+--     Participants: Helm, Weapons, Engineering, Science, Relay
 
 require("utils.lua") -- common math/geometry utility library
 require("place_station_scenario_utility.lua")
@@ -2020,7 +2020,7 @@ function setConstants()
         "Centaur",
         "Challenger",
         "Charlseton",
-        --					"Chekov",
+        -- "Chekov",
         "Cheyenne",
         "Clement",
         "Cochraine",
@@ -2035,7 +2035,7 @@ function setConstants()
         "Crockett",
         "Daedalus",
         "Danube",
-        --					"Defiant",
+        -- "Defiant",
         "Deneva",
         "Denver",
         "Discovery",
@@ -2054,7 +2054,7 @@ function setConstants()
         "Gage",
         "Galaxy",
         "Galileo",
-        --					"Ganges",
+        -- "Ganges",
         "Gander",
         "Gettysburg",
         "Ghandi",
@@ -2063,7 +2063,7 @@ function setConstants()
         "Hathaway",
         "Helin",
         "Hera",
-        --					"Heracles",
+        -- "Heracles",
         "Hokule'a",
         "Honshu",
         "Hood",
@@ -2071,7 +2071,7 @@ function setConstants()
         "Horatio",
         "Horizon",
         "Interceptor",
-        --					"Intrepid",
+        -- "Intrepid",
         "Istanbul",
         "Jenolen",
         "Kearsarge",
@@ -2086,7 +2086,7 @@ function setConstants()
         "Leeds",
         "Lexington",
         "Luna",
-        --					"Magellan",
+        -- "Magellan",
         "Majestic",
         "Malinche",
         "Maryland",
@@ -2099,7 +2099,7 @@ function setConstants()
         "Nash",
         "Nebula",
         "New Orleans",
-        --					"Newton",
+        -- "Newton",
         "Niagra",
         "Nobel",
         "Norway",
@@ -2120,7 +2120,7 @@ function setConstants()
         "Rabin",
         "Raman",
         "Relativity",
-        --					"Reliant",
+        -- "Reliant",
         "Renaissance",
         "Renegade",
         "Republic",
@@ -2377,7 +2377,7 @@ function playerRestartAdd(
     }
 end
 ----------------------------------------------------
---	Game Master buttons and supporting functions  --
+-- Game Master buttons and supporting functions  --
 ----------------------------------------------------
 function setGMButtons()
     mainGMButtons = mainGMButtonsDuringPause
@@ -2435,7 +2435,7 @@ function mainGMButtonsAfterPause()
     addGMFunction(_("buttonGM", "+Evaluations"), showEvaluations)
     addGMFunction(_("buttonGM", "+Trigger Waves"), triggerWaves)
     addGMFunction(_("buttonGM", "+End Scenario"), gracefulConculsion)
-    --	addGMFunction(_("buttonGM","+Jump to task"),jumpToTask)		--when this line is commented out, you can't reach any of the jump to functions
+    -- addGMFunction(_("buttonGM","+Jump to task"),jumpToTask) -- when this line is commented out, you can't reach any of the jump to functions
     addGMFunction(_("buttonGM", "+Trigger end task"), function()
         addGMMessage(
             _(
@@ -2640,7 +2640,7 @@ function jumpToResearch()
                 p.scan_message = "sent"
                 p.destroy_freighter_message = "sent"
                 p.assist_freighter_message = "sent"
-                p:setWeaponStorageMax("Homing", 12) --	restore missiles
+                p:setWeaponStorageMax("Homing", 12) -- restore missiles
                 p:setWeaponStorage("Homing", 12)
                 p:setWeaponStorageMax("Mine", 8)
                 p:setWeaponStorage("Mine", 8)
@@ -2648,8 +2648,8 @@ function jumpToResearch()
                 p:setWeaponStorage("EMP", 6)
                 p:setWeaponStorageMax("Nuke", 4)
                 p:setWeaponStorage("Nuke", 4)
-                --                 		   Arc,  Dir, Range, CycleTime, Dmg
-                p:setBeamWeapon(0, 100, -20, 1500, 6, 8) --	restore cycle time
+                --                 Arc,  Dir, Range, CycleTime, Dmg
+                p:setBeamWeapon(0, 100, -20, 1500, 6, 8) -- restore cycle time
                 p:setBeamWeapon(1, 100, 20, 1500, 6, 8)
                 jumpToTask()
             end
@@ -2978,7 +2978,7 @@ function dockEvaluations()
     end
 end
 -----------------------------
---	Environment Functions  --
+-- Environment Functions  --
 -----------------------------
 function setOrbitalScheme()
     --GM function that impacts the environment
@@ -3475,9 +3475,9 @@ function createRandomAsteroidAlongArc(
         end
     end
 end
---------------------------
---	Utility Functions	--
---------------------------
+-----------------------
+-- Utility Functions --
+-----------------------
 function gatherStats()
     if func_diagnostic then
         print("gather stats")
@@ -3556,8 +3556,8 @@ function vectorFromAngleNorth(angle, distance)
     if func_diagnostic then
         print("vector from angle north")
     end
-    --	print("input angle to vectorFromAngleNorth:")
-    --	print(angle)
+    -- print("input angle to vectorFromAngleNorth:")
+    -- print(angle)
     angle = (angle + 270) % 360
     local x, y = vectorFromAngle(angle, distance)
     return x, y
@@ -3566,7 +3566,7 @@ function tableRemoveRandom(array)
     if func_diagnostic then
         print("table remove random")
     end
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -4155,7 +4155,7 @@ function spawnEnemies(
                 template_info,
                 enemyFaction
             )
-            --			print("Spawn Enemies selected template:",selected_template,"enemy strength:",enemyStrength,"template strength:",ship_template[selected_template].strength,"Enemy faction:",enemyFaction)
+            -- print("Spawn Enemies selected template:",selected_template,"enemy strength:",enemyStrength,"template strength:",ship_template[selected_template].strength,"Enemy faction:",enemyFaction)
         end
         local ship = ship_template[selected_template].create(
             enemyFaction,
@@ -4276,7 +4276,7 @@ function getTemplatePool(max_strength)
         end
     else --full
         for current_ship_template, details in pairs(ship_template) do
-            --			print("current ship template",current_ship_template,"details",details,"max strength:",max_strength)
+            -- print("current ship template",current_ship_template,"details",details,"max strength:",max_strength)
             if details.strength <= max_strength then
                 table.insert(template_pool, current_ship_template)
             end
@@ -4285,7 +4285,7 @@ function getTemplatePool(max_strength)
     return template_pool
 end
 ------------------------------------------------
---	Enemy (Computer controlled Exuari) Waves  --
+-- Enemy (Computer controlled Exuari) Waves  --
 ------------------------------------------------
 function addWave(enemyList, type, a, d)
     if func_diagnostic then
@@ -4773,7 +4773,7 @@ function enemyCpuShipDestroyed(self, instigator)
     end
 end
 ---------------------------------------------
---	Player setup and management functions  --
+-- Player setup and management functions  --
 ---------------------------------------------
 function identifyPlayerShip(p, paused)
     if func_diagnostic then
@@ -4791,7 +4791,7 @@ function identifyPlayerShip(p, paused)
         p:setWeaponStorage("EMP", 0)
         p:setWeaponStorageMax("Nuke", 0)
         p:setWeaponStorage("Nuke", 0)
-        --                 		   Arc,  Dir, Range, CycleTime, Dmg
+        --                 Arc,  Dir, Range, CycleTime, Dmg
         p:setBeamWeapon(0, 100, -20, 1500, 60, 8) --raise cycle time from 6
         p:setBeamWeapon(1, 100, 20, 1500, 60, 8) --these beams are corrected later
         player_restart.add(
@@ -4806,7 +4806,7 @@ function identifyPlayerShip(p, paused)
         )
         --this is where you might reset based on the tasks completed so far
     end
-    --	print("identify player ship")
+    -- print("identify player ship")
     local pidx = nil
     if p.pidx == nil then
         if paused then
@@ -4824,7 +4824,7 @@ function identifyPlayerShip(p, paused)
         pidx = p.pidx
     end
     p:onDestroyed(playerDestroyed)
-    --	print("pidx:",pidx)
+    -- print("pidx:",pidx)
     if paused then --you can only spawn trainees while paused
         transformTrainee(p)
     else
@@ -4902,7 +4902,7 @@ function identifyPlayerShip(p, paused)
                 end
             end
         end
-    --		print("set player ship name to stored player ship name:",player_restart[pidx].name)
+    -- print("set player ship name to stored player ship name:",player_restart[pidx].name)
     else
         if paused ~= nil and paused == true then
             if
@@ -4910,18 +4910,18 @@ function identifyPlayerShip(p, paused)
                 and predefined_player_ships[pidx] ~= nil
             then
                 p:setCallSign(predefined_player_ships[pidx].name)
-            --				print("setting player ship name to predefined name:",predefined_player_ships[pidx].name)
+            -- print("setting player ship name to predefined name:",predefined_player_ships[pidx].name)
             else
                 local selected_name_index =
                     math.random(1, #trainee_player_ship_names)
                 p:setCallSign(trainee_player_ship_names[selected_name_index])
-                --				print("setting player name to randomly selected trainee name:",trainee_player_ship_names[selected_name_index])
+                -- print("setting player name to randomly selected trainee name:",trainee_player_ship_names[selected_name_index])
                 table.remove(trainee_player_ship_names, selected_name_index)
             end
         else
             selected_name_index = math.random(1, #trainer_player_ship_names)
             p:setCallSign(trainer_player_ship_names[selected_name_index])
-            --			print("setting player ship name to randomly selected trainer name:",trainer_player_ship_names[selected_name_index])
+            -- print("setting player ship name to randomly selected trainer name:",trainer_player_ship_names[selected_name_index])
             table.remove(trainer_player_ship_names, selected_name_index)
         end
         player_restart.add(pidx, p:getCallSign())
@@ -5263,7 +5263,7 @@ function commsStation()
         )
         return true
     end
-    --	modal dialog - can't leave the conversation until you say you're ready
+    -- modal dialog - can't leave the conversation until you say you're ready
     if comms_target == comms_source.home_station then
         if comms_source.start_dock_message == "start" then
             setCommsMessage(
@@ -7316,7 +7316,7 @@ function reportFreighterEngineProblems()
     end
 end
 ------------------------------------------------------------------
---	Task evaluations. Used by GM and via station communication	--
+-- Task evaluations. Used by GM and via station communication    --
 ------------------------------------------------------------------
 function colonTime(time)
     if func_diagnostic then
@@ -7336,9 +7336,9 @@ function colonTime(time)
     end
     return math.floor(time)
 end
---	First Task: Dock
---	Hurdles: request permission to dock, calibrate shields and beams, power down missiles
---	Participants: Helm, weapons, relay, engineering
+-- First Task: Dock
+-- Hurdles: request permission to dock, calibrate shields and beams, power down missiles
+-- Participants: Helm, weapons, relay, engineering
 function dockTaskEvaluation()
     if func_diagnostic then
         print("dock task evaluation")
@@ -7358,7 +7358,7 @@ function dockTaskEvaluationOutput(p, gm)
     if func_diagnostic then
         print("dock task evaluation output")
     end
-    --	S = Superior, E = Exceeds expectations, C = Competent, N = Needs improvement
+    -- S = Superior, E = Exceeds expectations, C = Competent, N = Needs improvement
     if player_insight then
         gm = "gm"
     end
@@ -7541,9 +7541,9 @@ function dockTaskEvaluationOutput(p, gm)
     end
     return out
 end
---	Second Task: Scan to discriminate targets
---	Hurdles: nebula obscures some targets
---	Participants: Science, relay
+-- Second Task: Scan to discriminate targets
+-- Hurdles: nebula obscures some targets
+-- Participants: Science, relay
 function scanTaskEvaluation()
     if func_diagnostic then
         print("scan task evaluation")
@@ -7698,9 +7698,9 @@ function scanTaskEvaluationOutput(p, gm)
     end
     return out
 end
---	Third Task: Destroy enemy freighter
---	Hurdles: Limited beam function, only HVLI type missiles
---	Participants: Helm, Weapons, engineering, science, relay
+-- Third Task: Destroy enemy freighter
+-- Hurdles: Limited beam function, only HVLI type missiles
+-- Participants: Helm, Weapons, engineering, science, relay
 function destroyFreighterTaskEvaluation()
     if func_diagnostic then
         print("destroy freighter task evaluation")
@@ -7799,9 +7799,9 @@ function destroyFreighterTaskEvaluationOutput(p, gm)
     end
     return out
 end
---	Fourth Task: Assist freighter
---	Hurdles: Get parts from station, find freighter, fend off attackers
---	Participants: Helm, science, relay, engineering, weapons
+-- Fourth Task: Assist freighter
+-- Hurdles: Get parts from station, find freighter, fend off attackers
+-- Participants: Helm, science, relay, engineering, weapons
 function assistFreighterTaskEvaluation()
     if func_diagnostic then
         print("assist freighter task evaluation")
@@ -8185,9 +8185,9 @@ function assistFreighterTaskEvaluationOutput(p, gm)
     end
     return out
 end
---	Fifth task: Research anomalous planetary orbital behavior
---	Hurdles: Bumping into planets causes severe damage to ship, navigate carefully
---	Participants: Helm, Science, Relay, Engineering
+-- Fifth task: Research anomalous planetary orbital behavior
+-- Hurdles: Bumping into planets causes severe damage to ship, navigate carefully
+-- Participants: Helm, Science, Relay, Engineering
 function researchTaskEvaluation()
     if func_diagnostic then
         print("research task evaluation")
@@ -8368,9 +8368,9 @@ function researchTaskEvaluationOutput(p, gm)
     end
     return out
 end
---	Bonus task: Destroy enemy base
---	Hurdles: Enemy space ships, enemy base is far from primary base
---	Participants: Helm, Weapons, Engineering, Science, Relay
+-- Bonus task: Destroy enemy base
+-- Hurdles: Enemy space ships, enemy base is far from primary base
+-- Participants: Helm, Weapons, Engineering, Science, Relay
 function bonusTaskEvaluation()
     if func_diagnostic then
         print("bonus task evaluation")
@@ -9269,7 +9269,7 @@ function enemyComms(comms_data)
         addCommsReply(taunt_option, function()
             if random(0, 100) <= taunt_threshold then
                 local current_order = comms_target:getOrder()
-                --				print("order: " .. current_order)
+                -- print("order: " .. current_order)
                 --Possible order strings returned:
                 --Roaming
                 --Fly towards
@@ -10360,7 +10360,7 @@ function neutralComms(comms_data)
     return true
 end --end neutral communications function
 ------------------------------------------
---	Plot functions tied to update loop	--
+-- Plot functions tied to update loop    --
 ------------------------------------------
 function sendCrutch(p, task)
     if func_diagnostic then
@@ -10375,7 +10375,7 @@ function sendCrutch(p, task)
             elseif p:hasPlayerAtPosition("Operations") then
                 p.protocol_source = "Operations"
             end
-            --	helm
+            -- helm
             p.crutch_dock_hlm_msg = string.format(
                 _(
                     "msgHelms",
@@ -10389,7 +10389,7 @@ function sendCrutch(p, task)
                 p.crutch_dock_hlm,
                 p.crutch_dock_hlm_msg
             )
-            --	weapons
+            -- weapons
             p.crutch_dock_wea_msg = string.format(
                 _(
                     "msgWeapons",
@@ -10403,7 +10403,7 @@ function sendCrutch(p, task)
                 p.crutch_dock_wea,
                 p.crutch_dock_wea_msg
             )
-            --	tactical
+            -- tactical
             p.crutch_dock_tac_msg = string.format(
                 _(
                     "msgTactical",
@@ -10418,7 +10418,7 @@ function sendCrutch(p, task)
                 p.crutch_dock_tac,
                 p.crutch_dock_tac_msg
             )
-            --	engineering
+            -- engineering
             p.crutch_dock_eng_msg = string.format(
                 _(
                     "msgEngineer",
@@ -10432,7 +10432,7 @@ function sendCrutch(p, task)
                 p.crutch_dock_eng,
                 p.crutch_dock_eng_msg
             )
-            --	engineering plus
+            -- engineering plus
             p.crutch_dock_epl_msg = string.format(
                 _(
                     "msgEngineer+",
@@ -10446,7 +10446,7 @@ function sendCrutch(p, task)
                 p.crutch_dock_epl,
                 p.crutch_dock_epl_msg
             )
-            --	relay
+            -- relay
             p.crutch_dock_rel_msg = string.format(
                 _(
                     "msgRelay",
@@ -10461,7 +10461,7 @@ function sendCrutch(p, task)
                 p.crutch_dock_rel,
                 p.crutch_dock_rel_msg
             )
-            --	operations
+            -- operations
             p.crutch_dock_ops_msg = string.format(
                 _(
                     "msgOperations",
@@ -10479,7 +10479,7 @@ function sendCrutch(p, task)
         end
     elseif task == "scan" then
         if not p:hasPlayerAtPosition("Relay") then
-            --	helm
+            -- helm
             p.crutch_scan_hlm_msg = _(
                 "msgHelms",
                 "You might be asked to jump into the nearby nebula so that a freighter can be scanned."
@@ -10490,7 +10490,7 @@ function sendCrutch(p, task)
                 p.crutch_scan_hlm,
                 p.crutch_scan_hlm_msg
             )
-            --	tactical
+            -- tactical
             p.crutch_scan_tac_msg = p.crutch_scan_hlm_msg
             p.crutch_scan_tac = "crutch_scan_tac"
             p:addCustomMessage(
@@ -10499,7 +10499,7 @@ function sendCrutch(p, task)
                 p.crutch_scan_tac_msg
             )
         end
-        --	science
+        -- science
         p.crutch_scan_sci_msg = string.format(
             _(
                 "msgScience",
@@ -10509,14 +10509,14 @@ function sendCrutch(p, task)
         )
         p.crutch_scan_sci = "crutch_scan_sci"
         p:addCustomMessage("Science", p.crutch_scan_sci, p.crutch_scan_sci_msg)
-        --	relay
+        -- relay
         p.crutch_scan_rel_msg = _(
             "msgRelay",
             "Send a probe to the middle of the nearest nebula: click the launch probe button, then click the middle of the nebula. Once it's there, link it to science. Be ready to report the ship type and the frequency as soon as Science completes each scan."
         )
         p.crutch_scan_rel = "crutch_scan_rel"
         p:addCustomMessage("Relay", p.crutch_scan_rel, p.crutch_scan_rel_msg)
-        --	operations
+        -- operations
         p.crutch_scan_ops_msg = string.format(
             _(
                 "msgOperations",
@@ -10532,7 +10532,7 @@ function sendCrutch(p, task)
             p.crutch_scan_ops_msg
         )
     elseif task == "destroy freighter" then
-        --	helm
+        -- helm
         p.crutch_destroy_hlm_msg = _(
             "msgHelms",
             "Jump to the enemy freighter if it's farther than 5 units away. Get the bearing and distance from Science or Operations, subtract 2 units to place you in optimal firing range. Once you're near, rotate to point the left or right tube to the enemy. He'll try to run away, so be ready to angle the tube to lead the HVLIs in front of the enemy freighter."
@@ -10543,7 +10543,7 @@ function sendCrutch(p, task)
             p.crutch_destroy_hlm,
             p.crutch_destroy_hlm_msg
         )
-        --	weapons
+        -- weapons
         p.crutch_destroy_wea_msg = _(
             "msgWeapons",
             "Load up HVLIs on both sides. You may have to ask Engineering for power to missile systems."
@@ -10554,7 +10554,7 @@ function sendCrutch(p, task)
             p.crutch_destroy_wea,
             p.crutch_destroy_wea_msg
         )
-        --	tactical
+        -- tactical
         p.crutch_destroy_tac_msg = string.format(
             "%s %s",
             p.crutch_destroy_wea_msg,
@@ -10566,7 +10566,7 @@ function sendCrutch(p, task)
             p.crutch_destroy_tac,
             p.crutch_destroy_tac_msg
         )
-        --	engineering
+        -- engineering
         p.crutch_destroy_eng_msg = _(
             "msgEngineer",
             "Raise power to missile systems to 100%. Put even more in along with coolant to make them load faster. Be ready to add power to impulse and/or maneuvering as requested."
@@ -10577,7 +10577,7 @@ function sendCrutch(p, task)
             p.crutch_destroy_eng,
             p.crutch_destroy_eng_msg
         )
-        --	engineering plus
+        -- engineering plus
         p.crutch_destroy_epl_msg = p.crutch_destroy_eng_msg
         p.crutch_destroy_epl = "crutch_destroy_epl"
         p:addCustomMessage(
@@ -10585,7 +10585,7 @@ function sendCrutch(p, task)
             p.crutch_destroy_epl,
             p.crutch_destroy_epl_msg
         )
-        --	science
+        -- science
         p.crutch_destroy_sci_msg = _(
             "msgScience",
             "Select the enemy freighter. Use radar or probe view as applicable. Provide bearing and distance to freighter to crew. You can find it along the right of your console screen."
@@ -10596,7 +10596,7 @@ function sendCrutch(p, task)
             p.crutch_destroy_sci,
             p.crutch_destroy_sci_msg
         )
-        --	operations
+        -- operations
         p.crutch_destroy_ops_msg = _(
             "msgOperations",
             "Provide bearing and range to enemy freighter. If nebula obscures your view, estimate based on recent scans, otherwise click the enemy freighter and read the bearing and distance from your console."
@@ -10607,7 +10607,7 @@ function sendCrutch(p, task)
             p.crutch_destroy_ops,
             p.crutch_destroy_ops_msg
         )
-        --	relay
+        -- relay
         p.crutch_destroy_rel_msg = _(
             "msgRelay",
             "Hack enemy ships once they are in range either via probe or your ship. Impulse engines for the fighter types is a good choice since it makes it easier to shoot them down."
@@ -10619,7 +10619,7 @@ function sendCrutch(p, task)
             p.crutch_destroy_rel_msg
         )
     elseif task == "assist freighter" then
-        --	helm
+        -- helm
         p.crutch_assist_hlm_msg = _(
             "msgHelms",
             "You will have to go to the distressed freighter to help defend it against Kraylor and to help repair it. You may have to pick up parts from your home station. Deciding which to do first will be up to your commanding officer or CO. Be thinking about both options."
@@ -10630,7 +10630,7 @@ function sendCrutch(p, task)
             p.crutch_assist_hlm,
             p.crutch_assist_hlm_msg
         )
-        --	weapons
+        -- weapons
         p.crutch_assist_wea_msg = _(
             "msgWeapons",
             "Your beams are fully functional. Your missiles have been returned to you. Load up your tubes in preparation for combat. Homing missiles are recommended. Even homing missiles can be dodged by the enemy. Try for as straight a shot as possible."
@@ -10641,7 +10641,7 @@ function sendCrutch(p, task)
             p.crutch_assist_wea,
             p.crutch_assist_wea_msg
         )
-        --	tactical
+        -- tactical
         p.crutch_assist_tac_msg = string.format(
             "%s %s",
             p.crutch_assist_hlm_msg,
@@ -10653,7 +10653,7 @@ function sendCrutch(p, task)
             p.crutch_assist_tac,
             p.crutch_assist_tac_msg
         )
-        --	engineering
+        -- engineering
         p.crutch_assist_eng_msg = _(
             "msgEngineer",
             "Pay careful attention to what systems are used and give them additional power when needed (along with coolant). Remember the docking/undocking protocol (no missile energy)"
@@ -10664,7 +10664,7 @@ function sendCrutch(p, task)
             p.crutch_assist_eng,
             p.crutch_assist_eng_msg
         )
-        --	engineering plus
+        -- engineering plus
         p.crutch_assist_epl_msg = p.crutch_assist_eng_msg
         p.crutch_assist_epl = "crutch_assist_epl"
         p:addCustomMessage(
@@ -10672,7 +10672,7 @@ function sendCrutch(p, task)
             p.crutch_assist_epl,
             p.crutch_assist_epl_msg
         )
-        --	science
+        -- science
         p.crutch_assist_sci_msg = _(
             "msgScience",
             "Scan the distressed Arlenian freighter as soon as you can (twice). After the second scan, get the impulse engine damage percentage by clicking the Tactical widget and selecting Systems. Report it to Relay who will report it to the home station."
@@ -10683,7 +10683,7 @@ function sendCrutch(p, task)
             p.crutch_assist_sci,
             p.crutch_assist_sci_msg
         )
-        --	relay
+        -- relay
         p.crutch_assist_rel_msg = _(
             "msgRelay",
             "Launch probes to cover the sector where the distressed Arlenian freighter is located. Link the probe that finds the freighter to science. Contact the freighter. Report Science's scan results to your home station."
@@ -10694,7 +10694,7 @@ function sendCrutch(p, task)
             p.crutch_assist_rel,
             p.crutch_assist_rel_msg
         )
-        --	operations
+        -- operations
         p.crutch_assist_ops_msg = _(
             "msgOperations",
             "Contact the distressed Arlenian freighter, then scan the freighter as soon as you can (twice). After the second scan, get the impulse engine damage percentage by clicking the Tactical widget and selecting Systems. Report it to the home station."
@@ -10706,7 +10706,7 @@ function sendCrutch(p, task)
             p.crutch_assist_ops_msg
         )
     elseif task == "research" then
-        --	helm
+        -- helm
         p.crutch_research_hlm_msg = _(
             "msgHelms",
             "Use warp to approach but not intersect the planets and moons in motion. Intersetion will damage and quickly destroy your ship. Use guidance from Relay/Science/Operations for good approach vectors. Warn Engineering when you use warp, especially anything above warp one."
@@ -10717,7 +10717,7 @@ function sendCrutch(p, task)
             p.crutch_research_hlm,
             p.crutch_research_hlm_msg
         )
-        --	weapons
+        -- weapons
         p.crutch_research_wea_msg = _(
             "msgWeapons",
             "Watch for enemy targets of opportunity. The planets and moons are far more dangerous, but if you leave the enemies alone, eventually, they will start attacking your home station."
@@ -10728,7 +10728,7 @@ function sendCrutch(p, task)
             p.crutch_research_wea,
             p.crutch_research_wea_msg
         )
-        --	tactical
+        -- tactical
         p.crutch_research_tac_msg = string.format(
             "%s %s",
             p.crutch_research_hlm_msg,
@@ -10740,7 +10740,7 @@ function sendCrutch(p, task)
             p.crutch_research_tac,
             p.crutch_research_tac_msg
         )
-        --	engineering
+        -- engineering
         p.crutch_research_eng_msg = _(
             "msgEngineer",
             "Suggested default settings: 50% coolant in warp, 50% coolant in maneuvering, 150% power in maneuvering, remaining systems: 100%, remainig coolant: 0. Watch energy carefully and let the commanding officer know when you get below 200 so you can dock and get more. The reactor will help, but charging at a station is more efficient."
@@ -10751,7 +10751,7 @@ function sendCrutch(p, task)
             p.crutch_research_eng,
             p.crutch_research_eng_msg
         )
-        --	engineering plus
+        -- engineering plus
         p.crutch_research_epl_msg = p.crutch_research_eng_msg
         p.crutch_research_epl = "crutch_research_epl"
         p:addCustomMessage(
@@ -10759,7 +10759,7 @@ function sendCrutch(p, task)
             p.crutch_research_epl,
             p.crutch_research_epl_msg
         )
-        --	science
+        -- science
         p.crutch_research_sci_msg =
             "Quickly tell Helm/Tactical when planets or moons are coming. They don't see as far as you do. Study the orbiting bodies. Know that there are orbits of orbits. Tell everyone when you are notified that the data has been gathered on a moon or planet."
         p.crutch_research_sci = "crutch_research_sci"
@@ -10768,7 +10768,7 @@ function sendCrutch(p, task)
             p.crutch_research_sci,
             p.crutch_research_sci_msg
         )
-        --	relay
+        -- relay
         p.crutch_research_rel_msg =
             "Quickly tell Helm/Tactical when planets or moons are coming. They don't see as far as you do. Study the orbiting bodies. Know that there are orbits of orbits. Plan approach vectors for Helm and clearly communicate them. Provide updates on what's scanned and what remains by using the 'Orbit research' button."
         p.crutch_research_rel = "crutch_research_rel"
@@ -10777,7 +10777,7 @@ function sendCrutch(p, task)
             p.crutch_research_rel,
             p.crutch_research_rel_msg
         )
-        --	operations
+        -- operations
         p.crutch_research_ops_msg =
             "Quickly tell Helm/Tactical when planets or moons are coming. They don't see as far as you do. Study the orbiting bodies. Know that there are orbits of orbits. Plan approach vectors for Helm and clearly communicate them. Tell everyone when you are notified that the data has been gathered on a moon or planet."
         p.crutch_research_ops = "crutch_research_ops"
@@ -10809,7 +10809,7 @@ function playerTask(p)
         end
         p.start_heading = p:getHeading()
         p:setCanDock(false)
-        --		print("shield frequency:",p:getShieldsFrequency(),string.format("(%i THz)",p:getShieldsFrequency()*20+400),"beam frequency:",p:getBeamFrequency(),string.format("(%i THz)",p:getBeamFrequency()*20+400))
+        -- print("shield frequency:",p:getShieldsFrequency(),string.format("(%i THz)",p:getShieldsFrequency()*20+400),"beam frequency:",p:getBeamFrequency(),string.format("(%i THz)",p:getBeamFrequency()*20+400))
         local current_shield_frequency = p:getShieldsFrequency()
         local current_beam_frequency = p:getBeamFrequency()
         repeat
@@ -10823,9 +10823,9 @@ function playerTask(p)
         task_list[p.task](p)
     end
 end
---	First Task: Dock
---	Hurdles: request permission to dock, calibrate shields and beams, power down missiles
---	Participants: Helm, weapons, relay, engineering
+-- First Task: Dock
+-- Hurdles: request permission to dock, calibrate shields and beams, power down missiles
+-- Participants: Helm, weapons, relay, engineering
 function taskDock(p)
     if func_diagnostic then
         print("task dock")
@@ -10902,7 +10902,7 @@ function taskCompletedDock(p)
             desc = dockTaskEvaluationOutput(p, "gm"),
         })
     end
-    --	handle pre-launched scan probes
+    -- handle pre-launched scan probes
     if probe_list ~= nil and #probe_list > 0 then
         for i, pr in ipairs(probe_list) do
             if pr.probe:isValid() then
@@ -10941,7 +10941,7 @@ function taskCompletedDock(p)
             end
         end
     end
-    --	add scan targets
+    -- add scan targets
     local scan_target_coordinates = {}
     table.insert(
         scan_target_coordinates,
@@ -11036,7 +11036,7 @@ function taskCompletedDock(p)
         front_shield = ship:getShieldLevel(0),
         rear_shield = ship:getShieldLevel(1),
     })
-    --		destroy_freighter = {ship = ship,front_shield = ship:getShieldLevel(0),rear_shield = ship:getShieldLevel(1)}
+    --     destroy_freighter = {ship = ship,front_shield = ship:getShieldLevel(0),rear_shield = ship:getShieldLevel(1)}
     table.insert(p.scan_targets, {
         ship = ship,
         name = ship:getCallSign(),
@@ -11051,9 +11051,9 @@ function taskCompletedDock(p)
         frequency_report_clock = nil,
     })
 end
---	Second Task: Scan to discriminate targets
---	Hurdles: nebula obscures some targets
---	Participants: Science, relay
+-- Second Task: Scan to discriminate targets
+-- Hurdles: nebula obscures some targets
+-- Participants: Science, relay
 function taskScan(p)
     if func_diagnostic then
         print("task scan")
@@ -11061,10 +11061,10 @@ function taskScan(p)
     if p.scan_message == nil then
         if availableForComms(p) then
             p.scan_message = "start"
-            p.home_station:openCommsTo(p) --	send scan task instructional message
+            p.home_station:openCommsTo(p) -- send scan task instructional message
         end
     end
-    if p.scan_start_clock == nil then --	check for non-relay message start triggers
+    if p.scan_start_clock == nil then -- check for non-relay message start triggers
         if not p:isDocked(p.home_station) then
             p.scan_start_clock = getScenarioTime()
         end
@@ -11082,7 +11082,7 @@ function taskScan(p)
                 end
             end
         end
-    else --	scan task started, check for task completion
+    else -- scan task started, check for task completion
         local identified_type_count = 0
         local identified_frequency_count = 0
         for i, scan_target in ipairs(p.scan_targets) do
@@ -11155,9 +11155,9 @@ function taskCompletedScan(p)
         }
     end
 end
---	Third Task: Destroy enemy freighter
---	Hurdles: Limited beam function, only HVLI type missiles
---	Participants: Helm, Weapons, engineering, science, relay
+-- Third Task: Destroy enemy freighter
+-- Hurdles: Limited beam function, only HVLI type missiles
+-- Participants: Helm, Weapons, engineering, science, relay
 function taskDestroyFreighter(p)
     if func_diagnostic then
         print("task destroy freighter")
@@ -11165,7 +11165,7 @@ function taskDestroyFreighter(p)
     if p.destroy_freighter_message == nil then
         if availableForComms(p) then
             p.destroy_freighter_message = "start"
-            p.home_station:openCommsTo(p) --	send destroy freighter task instructional message
+            p.home_station:openCommsTo(p) -- send destroy freighter task instructional message
         end
     end
     local destroy_freighter = nil
@@ -11174,7 +11174,7 @@ function taskDestroyFreighter(p)
             destroy_freighter = d
         end
     end
-    if p.destroy_freighter_start_clock == nil then --	check for non-relay message start triggers
+    if p.destroy_freighter_start_clock == nil then -- check for non-relay message start triggers
         if
             destroy_freighter.ship:getShieldLevel(0)
             < destroy_freighter.front_shield
@@ -11190,7 +11190,7 @@ function taskDestroyFreighter(p)
         if p:getWeaponStorage("HVLI") < 16 then
             p.destroy_freighter_start_clock = getScenarioTime()
         end
-    else --	destroy freighter task started, check for completion
+    else -- destroy freighter task started, check for completion
         if not destroy_freighter.ship:isValid() then
             p.destroy_freighter_end_clock = getScenarioTime()
             p.destroy_freighter_remaining_HVLI = p:getWeaponStorage("HVLI")
@@ -11275,7 +11275,7 @@ function taskCompletedDestroyFreighter(p)
             bonus_task_end_clock = getScenarioTime()
         end
     end)
-    --	spawn some fighters to chase freighter
+    -- spawn some fighters to chase freighter
     local attack_angle = p.home_station.heading_angle
     local poa_x, poa_y = vectorFromAngleNorth(attack_angle, 3000)
     poa_x = poa_x + psx + station_x
@@ -11332,8 +11332,8 @@ function taskCompletedDestroyFreighter(p)
     p:setWeaponStorage("EMP", 6)
     p:setWeaponStorageMax("Nuke", 4)
     p:setWeaponStorage("Nuke", 4)
-    --                 		   Arc,  Dir, Range, CycleTime, Dmg
-    p:setBeamWeapon(0, 100, -20, 1500, 6, 8) --	restore cycle time
+    --                            Arc,  Dir, Range, CycleTime, Dmg
+    p:setBeamWeapon(0, 100, -20, 1500, 6, 8) -- restore cycle time
     p:setBeamWeapon(1, 100, 20, 1500, 6, 8)
     psx, psy = vectorFromAngleNorth(p.home_station.heading_angle, 103000)
     local wh = WormHole():setPosition(station_x + psx, station_y + psy)
@@ -11349,9 +11349,9 @@ function taskCompletedDestroyFreighter(p)
         end
     end)
 end
---	Fourth Task: Assist freighter
---	Hurdles: Get parts from station, find freighter, fend off attackers
---	Participants: Helm, science, relay, engineering, weapons
+-- Fourth Task: Assist freighter
+-- Hurdles: Get parts from station, find freighter, fend off attackers
+-- Participants: Helm, science, relay, engineering, weapons
 function taskAssistFreighter(p)
     if func_diagnostic then
         print("task assist freighter")
@@ -11359,10 +11359,10 @@ function taskAssistFreighter(p)
     if p.assist_freighter_message == nil then
         if availableForComms(p) then
             p.assist_freighter_message = "start"
-            p.home_station:openCommsTo(p) --	send assist freighter task instructional message
+            p.home_station:openCommsTo(p) -- send assist freighter task instructional message
         end
     end
-    if p.assist_freighter_start_clock == nil then --	check for non-relay message start triggers
+    if p.assist_freighter_start_clock == nil then -- check for non-relay message start triggers
         if p.assist_freighter:isValid() then
             for i, m in ipairs(p.assist_freighter_marauders) do
                 if m.ship:isValid() then
@@ -11372,7 +11372,7 @@ function taskAssistFreighter(p)
                 end
             end
         end
-    else --	task has started, check for completion
+    else -- task has started, check for completion
         local freighter_part_complete = false
         if p.assist_freighter:isValid() then
             if p.assist_freighter_fixed_clock ~= nil then
@@ -11392,7 +11392,7 @@ function taskAssistFreighter(p)
                 end
             end
         else
-            freighter_part_complete = true --	freighter was destroyed
+            freighter_part_complete = true -- freighter was destroyed
         end
         local marauder_count = 0
         for i, m in ipairs(p.assist_freighter_marauders) do
@@ -11455,9 +11455,9 @@ function taskCompletedAssistFreighter(p)
     end
     p.task = "research"
 end
---	Fifth task: Research anomalous planetary orbital behavior
---	Hurdles: Bumping into planets causes severe damage to ship, navigate carefully
---	Participants: Helm, Science, Relay, Engineering
+-- Fifth task: Research anomalous planetary orbital behavior
+-- Hurdles: Bumping into planets causes severe damage to ship, navigate carefully
+-- Participants: Helm, Science, Relay, Engineering
 function taskResearch(p)
     if func_diagnostic then
         print("task research")
@@ -11465,7 +11465,7 @@ function taskResearch(p)
     if p.research_message == nil then
         if availableForComms(p) then
             p.research_message = "start"
-            p.home_station:openCommsTo(p) --	send research task instructional message
+            p.home_station:openCommsTo(p) -- send research task instructional message
         end
     elseif p.research_message == "sent" then
         if p.orbit_research_button_rel == nil then
@@ -11503,7 +11503,7 @@ function taskResearch(p)
                 break
             end
         end
-    else --	task started, check for completion conditions
+    else -- task started, check for completion conditions
         if p.research_fleet == nil then
             p.research_fleet = {}
             p.research_fleet_clock = getScenarioTime()
@@ -11672,9 +11672,9 @@ function taskResearchCleanup(p)
         end
     end
 end
---	Bonus task: Destroy enemy base
---	Hurdles: Enemy space ships, enemy base is far from primary base
---	Participants: Helm, Weapons, Engineering, Science, Relay
+-- Bonus task: Destroy enemy base
+-- Hurdles: Enemy space ships, enemy base is far from primary base
+-- Participants: Helm, Weapons, Engineering, Science, Relay
 function taskBonus(p)
     if func_diagnostic then
         print("task bonus")

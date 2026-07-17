@@ -49,20 +49,20 @@ class Client:
                 elif key == "autoconnectship":
                     self.__ship = value
             f.close()
-    
+
     def getMac(self):
         return self.__mac
 
     def getIp(self):
         return self.__ip
-    
+
     def getName(self):
         return self.__name
 
     def setName(self, name):
         self.__name = name
         self.replaceInIni("instance_name", name)
-    
+
     def setPosition(self, position):
         idx = None
         for pos in self.POSITIONS:
@@ -72,10 +72,10 @@ class Client:
             print("Unknown position: [%s], possible positions: %s" % (position, ', '.join(self.POSITIONS)))
             return
         self.replaceInIni("autoconnect", idx)
-    
+
     def getIniFilename(self):
         return os.path.join(self.__CONFIG_PATH, "%s.ini" % self.__mac)
-    
+
     def replaceInIni(self, key, value):
         lines = []
         try:
@@ -106,7 +106,7 @@ class ClientDatabase:
     def __init__(self):
         if os.path.isfile("test/dnsmasq.leases"):
             self.__LEASES_FILE = "test/dnsmasq.leases"
-    
+
     def getClients(self):
         clients = []
         for line in open(self.__LEASES_FILE, "rt"):
@@ -115,7 +115,7 @@ class ClientDatabase:
             mac_address = mac_address.replace(":", "")
             clients.append(Client(mac_address, ip_address))
         return clients
-    
+
     def getWithName(self, name):
         if name == "":
             return []
@@ -143,7 +143,7 @@ class ConfigCmd(cmd.Cmd):
     def __init__(self, client_database):
         cmd.Cmd.__init__(self)
         self.__client_database = client_database
-    
+
     def _getClient(self, args):
         clients = self.__client_database.getWithName(args)
         if len(clients) == 1:
@@ -157,7 +157,7 @@ class ConfigCmd(cmd.Cmd):
             return clients
         print("Failed to find clients with name '%s'." % (args))
         return []
-    
+
     def do_list(self, args):
         'List all clients known to the server by their MAC address and name (if configured), and if connected to the server by their crew position and ship.'
         print()
@@ -166,14 +166,14 @@ class ConfigCmd(cmd.Cmd):
         for client in self.__client_database.getClients():
             print(client)
         print()
-    
+
     def do_edit(self, args):
         'Open the specified client\'s EmptyEpsilon Preferences File in the nano editor, or create a new file if none exists.\nExample: edit 00abcdef1234'
         client = self._getClient(args)
         if not client:
             return
         os.system("nano \"%s\"" % (client.getIniFilename()))
-    
+
     def complete_edit(self, text, line, begidx, endidx):
         result = []
         for client in self.__client_database.getClients():
@@ -190,7 +190,7 @@ class ConfigCmd(cmd.Cmd):
         if not client:
             return
         client.setName(args[1])
-    
+
     def complete_setname(self, text, line, begidx, endidx):
         return self.complete_edit(text, line, begidx, endidx)
 
@@ -202,7 +202,7 @@ class ConfigCmd(cmd.Cmd):
         if not client:
             return
         client.setPosition(args[1])
-    
+
     def complete_setname(self, text, line, begidx, endidx):
         return self.complete_edit(text, line, begidx, endidx)
 
@@ -239,7 +239,7 @@ class ConfigCmd(cmd.Cmd):
 
     def complete_restart(self, text, line, begidx, endidx):
         return self.complete_edit(text, line, begidx, endidx)
-    
+
     def do_exit(self, args):
         'Exit this configuration tool.'
         return True

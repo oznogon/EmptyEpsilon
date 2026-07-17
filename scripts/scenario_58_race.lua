@@ -27,7 +27,7 @@ require("utils.lua")
 require("place_station_scenario_utility.lua")
 
 ----------------------
---	Initialization  --
+--  Initialization  --
 ----------------------
 function init()
     scenario_version = "2.2.3"
@@ -1127,7 +1127,7 @@ function getPredefinedPlayerShipNames()
     }
     return predefined_player_ships
 end
---	GM Buttons
+-- GM Buttons
 function setGMButtons()
     mainGMButtons = mainGMButtonsDuringPause
     mainGMButtons()
@@ -1181,7 +1181,7 @@ function showControlCodes(faction_filter)
     end
     addGMMessage(output)
 end
---	GM buttons while paused
+-- GM buttons while paused
 function mainGMButtonsDuringPause()
     clearGMFunctions()
     addGMFunction(
@@ -1394,7 +1394,7 @@ function setStartDelay()
         )
     end
 end
---	GM buttons after pause
+-- GM buttons after pause
 function mainGMButtonsAfterPause()
     clearGMFunctions()
     addGMFunction(
@@ -1426,11 +1426,11 @@ function mainGMButtonsAfterPause()
             if details.participant ~= nil then
                 out = out .. details.participant .. _("msgGM", ", ")
             end
-            --			if details.participant == "participant" then
-            --				out = out .. "participant, "
-            --			else
-            --				out = out .. "forfeit, "
-            --			end
+            -- if details.participant == "participant" then
+            --     out = out .. "participant, "
+            -- else
+            --     out = out .. "forfeit, "
+            -- end
             out = string.format(
                 _("msgGM", "%s%i, %i, %i"),
                 out,
@@ -2790,7 +2790,7 @@ function createRandomAlongArc(
     end
 end
 -----------------------------
---	Station communication  --
+--  Station communication  --
 -----------------------------
 function commsStation()
     if comms_target.comms_data == nil then
@@ -4815,7 +4815,7 @@ function tableSelectRandom(array)
     return array[math.random(1, #array)]
 end
 --------------------------
---	Ship communication  --
+--  Ship communication  --
 --------------------------
 function commsShip()
     if comms_target.comms_data == nil then
@@ -5410,7 +5410,7 @@ function neutralComms()
     return true
 end
 ------------------------
---	Cargo management  --
+--  Cargo management  --
 ------------------------
 function incrementPlayerGoods(goodsType)
     local gi = 1
@@ -5448,7 +5448,7 @@ function decrementShipGoods(goodsType)
         gi = gi + 1
     until gi > #goods[comms_target]
 end
---	Target drones
+-- Target drones
 function spawnTargetDrone(originx, originy, targetDroneID, area, sequenceNumber)
     if shootBack then
         enemyTemplate = "Atlantis X23"
@@ -5472,7 +5472,7 @@ function spawnTargetDrone(originx, originy, targetDroneID, area, sequenceNumber)
     end
     table.insert(droneList, td)
 end
---	Moving terrain
+-- Moving terrain
 function moveHazardAsteroids(aList, aDiameter)
     for hai = 1, 4 do
         if aList[hai]:isValid() then
@@ -5509,9 +5509,9 @@ function moveHazardPacMines(pmList, pmDiameter)
         end
     end
 end
---	Naming player ships
+-- Naming player ships
 function tableRemoveRandom(array)
-    --	Remove random element from array and return it.
+    -- Remove random element from array and return it.
     -- Returns nil if the array is empty,
     -- analogous to `table.remove`.
     local array_item_count = #array
@@ -5533,7 +5533,7 @@ function namePlayerShip(p, template_type)
         p:setCallSign(tableRemoveRandom(playerShipNamesFor["Leftovers"]))
     end
 end
---	End of game handling
+-- End of game handling
 function allRacersFinished()
     print("in all racers finished function")
     calculateTimeRank()
@@ -6377,14 +6377,14 @@ function update(delta)
                                     place_name[i],
                                     reward_grid[player_count][i]
                                 )
-                            --								msg = msg .. ", " .. place_name[i] .. ":" .. reward_grid[player_count][i]
+                            -- msg = msg .. ", " .. place_name[i] .. ":" .. reward_grid[player_count][i]
                             else
                                 msg = string.format(
                                     _("race-shipLog", "%s:%s"),
                                     place_name[i],
                                     reward_grid[player_count][i]
                                 )
-                                --								msg = place_name[i] .. ":" .. reward_grid[player_count][i]
+                                -- msg = place_name[i] .. ":" .. reward_grid[player_count][i]
                             end
                         else
                             break
