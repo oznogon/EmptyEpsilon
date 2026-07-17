@@ -2,6 +2,7 @@
 
 #include "gui/gui2_overlay.h"
 
+class GuiBriefingMap;
 class GuiButton;
 class GuiImageContain;
 class GuiLabel;
@@ -17,6 +18,7 @@ private:
     GuiLabel* no_pages_label;
     GuiElement* page_container;
     GuiImageContain* page_image;
+    GuiBriefingMap* page_map;
     GuiScrollFormattedText* page_caption;
     GuiSlider* page_slider;
     GuiButton* prev_button;
