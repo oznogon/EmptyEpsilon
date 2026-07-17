@@ -45,16 +45,45 @@ void AISystem::update(float delta)
     // Perf tracking.
     sp::SystemStopwatch sw;
 
+    int immediate_heavy_count = 0;
+
     // PASS 1: Light update — all entities, every frame.
-    for (auto& entry : ai_list)
+    // Entities whose AI orders changed since last check get an immediate
+    // heavy update so that GM-issued orders (via UI, Lua, or network)
+    // take effect on the same frame instead of being deferred to the
+    // round-robin schedule.
+    for (auto& entry : ai_list) {
+        auto entity_id = entry.entity.getIndex();
+        auto& last = last_ai_state[entity_id];
+
+        bool orders_changed = (last.orders != entry.controller->orders
+            || last.order_target_location != entry.controller->order_target_location
+            || last.order_target != entry.controller->order_target);
+
+        if (orders_changed) {
+            last.orders = entry.controller->orders;
+            last.order_target_location = entry.controller->order_target_location;
+            last.order_target = entry.controller->order_target;
+
+            // Clear the stale route so the AI doesn't fly to the old
+            // destination, then re-plan immediately with the new orders.
+            entry.controller->ai->clearPath();
+            entry.controller->ai->runHeavy(delta);
+            immediate_heavy_count++;
+        }
+
         entry.controller->ai->runLight(delta);
+    }
     float light_time = sw.restart();
 
     // PASS 2: Heavy update — round-robin, MAX_HEAVY_PER_FRAME entities.
+    int scheduled_heavy = 0;
     if (ai_list.size() <= static_cast<size_t>(MAX_HEAVY_PER_FRAME))
     {
-        for (auto& entry : ai_list)
+        for (auto& entry : ai_list) {
             entry.controller->ai->runHeavy(delta);
+            scheduled_heavy++;
+        }
     }
     else
     {
@@ -63,6 +92,7 @@ void AISystem::update(float delta)
         {
             ai_list[next_heavy_index].controller->ai->runHeavy(delta);
             next_heavy_index = (next_heavy_index + 1) % ai_list.size();
+            scheduled_heavy++;
         }
     }
     float heavy_time = sw.restart();
@@ -80,13 +110,13 @@ void AISystem::update(float delta)
         float heavy_per_frame_us = (frame_count > 0)
             ? (total_heavy_time / frame_count) * 1e6f : 0.0f;
         float total_ms = (light_per_frame_us + heavy_per_frame_us) / 1000.0f;
-        LOG(
-	    Debug, "[AISystem] ", total_ai_count, " AIs | ",
-                   "light=", light_per_frame_us, "us | ",
-                   "heavy=", heavy_per_frame_us, "us | ",
-                   "total=", total_ms, "ms/frame ",
-                   "(budget=", MAX_HEAVY_PER_FRAME, "/frame)"
-        );
+        LOG(INFO) << "[AISystem] " << total_ai_count << " AIs | "
+                  << "light=" << light_per_frame_us << "us | "
+                  << "heavy=" << heavy_per_frame_us << "us | "
+                  << "total=" << total_ms << "ms/frame "
+                  << "imm_heavy=" << immediate_heavy_count
+                  << " (budget=" << MAX_HEAVY_PER_FRAME << "/frame)";
+        immediate_heavy_count = 0;
         log_timer = 0.0f;
         total_light_time = 0.0f;
         total_heavy_time = 0.0f;

@@ -64,6 +64,10 @@ public:
     // object will be destroyed and a new one will be created.
     virtual bool canSwitchAI();
 
+    // Clear the current path planning route. Called when GM issues new orders
+    // so the AI doesn't continue flying toward a stale destination.
+    void clearPath() { pathPlanner.clear(); }
+
     // Visualize AI behaviors on the GM screen.
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, float scale);
 protected:
