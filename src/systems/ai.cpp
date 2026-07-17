@@ -80,11 +80,13 @@ void AISystem::update(float delta)
         float heavy_per_frame_us = (frame_count > 0)
             ? (total_heavy_time / frame_count) * 1e6f : 0.0f;
         float total_ms = (light_per_frame_us + heavy_per_frame_us) / 1000.0f;
-        LOG(Debug) << "[AISystem] " << total_ai_count << " AIs | "
-                  << "light=" << light_per_frame_us << "us | "
-                  << "heavy=" << heavy_per_frame_us << "us | "
-                  << "total=" << total_ms << "ms/frame "
-                  << "(budget=" << MAX_HEAVY_PER_FRAME << "/frame)";
+        LOG(
+	    Debug, "[AISystem] ", total_ai_count, " AIs | ",
+                   "light=", light_per_frame_us, "us | ",
+                   "heavy=", heavy_per_frame_us, "us | ",
+                   "total=", total_ms, "ms/frame ",
+                   "(budget=", MAX_HEAVY_PER_FRAME, "/frame)"
+        );
         log_timer = 0.0f;
         total_light_time = 0.0f;
         total_heavy_time = 0.0f;

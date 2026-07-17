@@ -35,6 +35,28 @@ void FighterAI::runLight(float delta)
 {
     if (timeout > 0.0f)
         timeout -= delta;
+
+    // Evade state sets rotation/impulse directly (no route). These
+    // perishable commands must be re-applied every frame since
+    // ShipAI::runLight resets them. runAttack() only runs on heavy
+    // frames (~117ms apart), so without this the fighter coasts.
+    if (attack_state == State::Evade)
+    {
+        // Do the essential light work manually to avoid ShipAI::runLight
+        // resetting thrusters/impulse or firing missiles during evade.
+        pathPlanner.tryCollectResult();
+
+        if (missile_fire_delay > 0.0f) missile_fire_delay -= delta;
+        if (pathfind_cooldown > 0.0f) pathfind_cooldown -= delta;
+        if (update_target_delay > 0.0f) update_target_delay -= delta;
+
+        auto thrusters = owner.getComponent<ManeuveringThrusters>();
+        if (thrusters) thrusters->target = evade_direction;
+        auto impulse = owner.getComponent<ImpulseEngine>();
+        if (impulse) impulse->request = 1.0f;
+        return;
+    }
+
     ShipAI::runLight(delta);
 }
 
