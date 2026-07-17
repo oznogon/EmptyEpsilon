@@ -37,6 +37,10 @@ protected:
     float pathfind_cooldown = 0.0f;
     bool had_target_last_frame = false;
 
+    // When false, flyTowards/flyFormation skip path re-planning even if
+    // cooldowns have expired. Used by runLight to defer A* to runHeavy.
+    bool m_allow_path_planning = true;
+
     PathPlanner pathPlanner;
 public:
     sp::ecs::Entity owner;
@@ -46,6 +50,14 @@ public:
 
     // Run is called every frame to update the AI state and let the AI take actions.
     virtual void run(float delta);
+
+    // Lightweight per-frame execution: issues movement/fire commands from
+    // cached state. Does NOT run expensive pathfinding or target search.
+    virtual void runLight(float delta);
+
+    // Heavy strategic update: weapon analysis, target selection, path
+    // planning. Called on a staggered schedule, not every frame.
+    virtual void runHeavy(float delta);
 
     // Are we allowed to switch to a different AI right now?
     // When true is returned and the CpuShip wants to change their AI, this AI

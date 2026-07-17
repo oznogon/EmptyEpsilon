@@ -29,6 +29,8 @@ REGISTER_SHIP_AI(ShipAI, "default");
 ShipAI::ShipAI(sp::ecs::Entity owner)
 : owner(owner)
 {
+    update_target_delay = random(0.0f, 0.5f);
+    pathfind_cooldown = random(0.0f, 1.0f);
 }
 
 bool ShipAI::canSwitchAI()
@@ -62,6 +64,15 @@ void ShipAI::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, 
 
 void ShipAI::run(float delta)
 {
+    runLight(delta);
+    runHeavy(delta);
+}
+
+void ShipAI::runLight(float delta)
+{
+    // Collect any completed async pathfinding results.
+    pathPlanner.tryCollectResult();
+
     if (auto thrusters = owner.getComponent<ManeuveringThrusters>())
         thrusters->stop();
 
@@ -88,15 +99,8 @@ void ShipAI::run(float delta)
     }
 
     if (pathfind_cooldown > 0.0f) pathfind_cooldown -= delta;
-
-    updateWeaponState(delta);
-    if (update_target_delay > 0.0f)
-        update_target_delay -= delta;
-    else
-    {
-        update_target_delay = random(0.25f, 0.5f);
-        updateTarget();
-    }
+    if (missile_fire_delay > 0.0f) missile_fire_delay -= delta;
+    if (update_target_delay > 0.0f) update_target_delay -= delta;
 
     // Stagger pathfinding when many ships simultaneously lose their target.
     bool has_target = owner.hasComponent<Target>();
@@ -104,7 +108,151 @@ void ShipAI::run(float delta)
         pathfind_cooldown = random(0.0f, 1.0f);
     had_target_last_frame = has_target;
 
-    //If we have a target and weapons, engage the target.
+    // Execute movement from the existing cached route. No decision-making,
+    // no collision queries, no path re-planning. Heavy strategy work is
+    // deferred to runHeavy().
+    if (pathPlanner.route.size() > 0)
+    {
+        auto docking_port = owner.getComponent<DockingPort>();
+
+        // We're moving now, so don't dock.
+        if (docking_port)
+        {
+            if (docking_port->state == DockingPort::State::Docked)
+                DockingSystem::requestUndock(owner);
+            else if (docking_port->state == DockingPort::State::Docking)
+                DockingSystem::abortDock(owner);
+        }
+
+        auto ot = owner.getComponent<sp::Transform>();
+        if (ot)
+        {
+            auto diff = pathPlanner.route[0] - ot->getPosition();
+            float distance = glm::length(diff);
+            auto target_rotation = vec2ToAngle(diff);
+            float rotation_diff = fabs(angleDifference(target_rotation, ot->getRotation()));
+
+            if (auto thrusters = owner.getComponent<ManeuveringThrusters>())
+                thrusters->target = target_rotation;
+
+            auto warp = owner.getComponent<WarpDrive>();
+            auto jump = owner.getComponent<JumpDrive>();
+            if ((warp || jump) && !WarpSystem::isWarpJammed(owner))
+            {
+                if (warp)
+                {
+                    warp->request = (rotation_diff < 30.0f && distance > 2000.0f)
+                        ? 1.0f
+                        : 0.0f;
+                }
+
+                if (distance > 10000.0f
+                    && jump
+                    && jump->delay <= 0.0f
+                    && jump->charge >= jump->max_distance)
+                {
+                    if (rotation_diff < 1.0f)
+                    {
+                        float jump_distance = distance;
+                        if (pathPlanner.route.size() < 2)
+                        {
+                            jump_distance -= 3000.0f;
+                            if (has_missiles) jump_distance -= 5000.0f;
+                        }
+                        float jump_limit = std::max({long_range - 5000.0f, 15000.0f, jump->max_distance - 1500.0f});
+                        if (jump_distance > jump_limit)
+                            jump_distance = jump_limit;
+                        jump_distance += random(-1500.0f, 1500.0f);
+                        JumpSystem::initializeJump(owner, jump_distance);
+                    }
+                }
+            }
+
+            float keep_distance = 0.0f;
+            if (pathPlanner.route.size() > 1) keep_distance = 0.0f;
+
+            auto impulse = owner.getComponent<ImpulseEngine>();
+            if (impulse && impulse->max_speed_forward > 0.0f)
+            {
+                if (distance > keep_distance + impulse->max_speed_forward * 5.0f)
+                    impulse->request = 1.0f;
+                else
+                    impulse->request = (distance - keep_distance) / impulse->max_speed_forward * 5.0f;
+
+                if (rotation_diff > 90.0f)
+                    impulse->request = -impulse->request;
+                else if (rotation_diff < 45.0f)
+                    impulse->request *= 1.0f - ((rotation_diff - 45.0f) / 45.0f);
+            }
+        }
+    }
+
+    // Fire ready missiles at the current target every frame.
+    if (has_target && has_missiles)
+    {
+        if (auto ot = owner.getComponent<sp::Transform>())
+        {
+            if (auto target_component = owner.getComponent<Target>())
+            {
+                if (auto tt = target_component->entity.getComponent<sp::Transform>())
+                {
+                    float distance = glm::length(tt->getPosition() - ot->getPosition());
+                    if (distance < 4500.0f)
+                    {
+                        if (auto tubes = owner.getComponent<MissileTubes>())
+                        {
+                            for (auto& tube : tubes->mounts)
+                            {
+                                if (tube.state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
+                                {
+                                    const float target_angle = calculateFiringSolution(target_component->entity, tube);
+                                    if (target_angle != std::numeric_limits<float>::infinity())
+                                    {
+                                        MissileSystem::fire(owner, tube, target_angle, target_component->entity);
+                                        missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // StandGround: just rotate toward the target.
+    if (has_target && (has_missiles || has_beams))
+    {
+        auto ai = owner.getComponent<AIController>();
+        if (ai && ai->orders == AIOrder::StandGround)
+        {
+            if (auto ot = owner.getComponent<sp::Transform>())
+            {
+                if (auto tc = owner.getComponent<Target>())
+                {
+                    if (auto tt = tc->entity.getComponent<sp::Transform>())
+                    {
+                        if (auto thrusters = owner.getComponent<ManeuveringThrusters>())
+                            thrusters->target = vec2ToAngle(tt->getPosition() - ot->getPosition());
+                    }
+                }
+            }
+        }
+    }
+}
+
+void ShipAI::runHeavy(float delta)
+{
+    updateWeaponState(delta);
+    if (update_target_delay <= 0.0f)
+    {
+        update_target_delay = random(0.25f, 0.5f);
+        updateTarget();
+    }
+
+    // On a heavy frame, ensure the route gets re-planned if needed.
+    m_allow_path_planning = true;
+    bool has_target = owner.hasComponent<Target>();
     if (has_target && (has_missiles || has_beams))
         runAttack(owner.getComponent<Target>()->entity);
     else runOrders();
@@ -121,7 +269,7 @@ static int getDirectionIndex(float direction, float arc)
 
 void ShipAI::updateWeaponState(float delta)
 {
-    if (missile_fire_delay > 0.0f) missile_fire_delay -= delta;
+    // missile_fire_delay is decremented in runLight every frame.
 
     // Update the weapon state and set our main attack vector. If we have
     // missile and/or beam weapons, and what we should prefer.
@@ -737,10 +885,11 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
     if (auto physics = owner.getComponent<sp::Physics>()) my_radius = physics->getSize().x;
 
     // Throttle expensive pathfinding for ships with an existing route.
-    if (pathPlanner.route.empty() || pathfind_cooldown <= 0.0f)
+    // When async pathfinding is available, offload A* to a worker thread.
+    if (pathPlanner.route.empty() || (pathfind_cooldown <= 0.0f && m_allow_path_planning))
     {
-        pathPlanner.plan(my_radius, ot->getPosition(), target, owner);
-        if (pathPlanner.route.size() > 1)
+        pathPlanner.planAsync(my_radius, ot->getPosition(), target, owner);
+        if (pathPlanner.route.size() > 1 || pathPlanner.hasPendingAsyncJob())
             pathfind_cooldown = 0.5f + random(0.0f, 0.5f);
     }
 
@@ -849,10 +998,10 @@ void ShipAI::flyFormation(sp::ecs::Entity target, glm::vec2 offset)
     if (auto physics = owner.getComponent<sp::Physics>())
         my_radius = std::max(physics->getSize().x, physics->getSize().y);
 
-    if (pathPlanner.route.empty() || pathfind_cooldown <= 0.0f)
+    if (pathPlanner.route.empty() || (pathfind_cooldown <= 0.0f && m_allow_path_planning))
     {
-        pathPlanner.plan(my_radius, ot->getPosition(), target_position, owner);
-        if (pathPlanner.route.size() > 1)
+        pathPlanner.planAsync(my_radius, ot->getPosition(), target_position, owner);
+        if (pathPlanner.route.size() > 1 || pathPlanner.hasPendingAsyncJob())
             pathfind_cooldown = 0.5f + random(0.0f, 0.5f);
     }
 

@@ -31,11 +31,16 @@ bool FighterAI::canSwitchAI()
     return true;
 }
 
-void FighterAI::run(float delta)
+void FighterAI::runLight(float delta)
 {
     if (timeout > 0.0f)
         timeout -= delta;
-    ShipAI::run(delta);
+    ShipAI::runLight(delta);
+}
+
+void FighterAI::runHeavy(float delta)
+{
+    ShipAI::runHeavy(delta);
 }
 
 void FighterAI::runOrders()

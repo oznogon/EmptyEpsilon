@@ -19,9 +19,14 @@ bool MissileVolleyAI::canSwitchAI()
     return true;
 }
 
-void MissileVolleyAI::run(float delta)
+void MissileVolleyAI::runLight(float delta)
 {
-    ShipAI::run(delta);
+    ShipAI::runLight(delta);
+}
+
+void MissileVolleyAI::runHeavy(float delta)
+{
+    ShipAI::runHeavy(delta);
 }
 
 void MissileVolleyAI::runOrders()

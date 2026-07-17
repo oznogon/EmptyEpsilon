@@ -19,6 +19,7 @@ class PathFindingSystem : public sp::ecs::System
 {
 public:
     PathFindingSystem();
+    ~PathFindingSystem();
     void update(float delta) override;
 
     const std::vector<Obstacle>& getObstacles() const { return obstacles; }
@@ -58,6 +59,9 @@ public:
     std::vector<glm::vec2> route;
 
     void plan(float my_radius, glm::vec2 start, glm::vec2 end, sp::ecs::Entity exclude_entity = {});
+    void planAsync(float my_radius, glm::vec2 start, glm::vec2 end, sp::ecs::Entity exclude_entity = {});
+    bool tryCollectResult();
+    bool hasPendingAsyncJob() const { return pending_async_job; }
     void clear();
 
 private:
@@ -74,6 +78,10 @@ private:
     glm::vec2 cached_start;
     glm::vec2 cached_end;
     std::chrono::steady_clock::time_point cached_time;
+
+    // Async pathfinding state.
+    bool pending_async_job = false;
+    uint32_t async_entity_id = 0;
 
     // Checks whether the line segment is free of obstacles that would block an
     // entity of radius my_radius. Uses the spatial hash grid to test only

@@ -1,4 +1,5 @@
 #include "systems/pathfinding.h"
+#include "systems/pathworker.h"
 #include "ecs/query.h"
 #include "glm/gtx/norm.hpp"
 
@@ -50,6 +51,14 @@ static bool isFormationObstacle(sp::ecs::Entity obstacle_entity, sp::ecs::Entity
 PathFindingSystem::PathFindingSystem()
 {
     path_finding_system = this;
+    PathWorker::instance = new PathWorker();
+}
+
+PathFindingSystem::~PathFindingSystem()
+{
+    delete PathWorker::instance;
+    PathWorker::instance = nullptr;
+    path_finding_system = nullptr;
 }
 
 void PathFindingSystem::update(float delta)
@@ -531,4 +540,77 @@ void PathPlanner::plan(float my_radius, glm::vec2 start, glm::vec2 end, sp::ecs:
         cached_end = end;
         cached_time = std::chrono::steady_clock::now();
     }
+}
+
+void PathPlanner::planAsync(float my_radius, glm::vec2 start, glm::vec2 end, sp::ecs::Entity exclude_entity)
+{
+    if (!PathWorker::instance)
+    {
+        plan(my_radius, start, end, exclude_entity);
+        return;
+    }
+
+    // Skip if identical to the cached route (same dest, very close start).
+    if (route.size() > 1)
+    {
+        auto now = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration<float>(now - cached_time).count();
+        if (elapsed < 1.0f
+            && glm::length2(start - cached_start) < 1000000.0f
+            && glm::length2(end - cached_end) < 1000000.0f)
+            return;
+    }
+
+    // Close target: just set the direct route synchronously.
+    if (glm::length2(end - start) < 10000.0f)
+    {
+        route.clear();
+        route.push_back(end);
+        return;
+    }
+
+    PathJob job;
+    job.entity_id = exclude_entity ? exclude_entity.getIndex() : 0;
+    job.my_radius = my_radius;
+    job.start = start;
+    job.end = end;
+    job.exclude_entity_id = exclude_entity ? exclude_entity.getIndex() : 0;
+    job.obstacles = path_finding_system->getObstacles();
+    job.max_obstacle_radius = path_finding_system->getMaxObstacleRadius();
+
+    my_size = my_radius;
+    pending_async_job = true;
+    async_entity_id = job.entity_id;
+
+    cached_start = start;
+    cached_end = end;
+    cached_time = std::chrono::steady_clock::now();
+
+    PathWorker::instance->submit(std::move(job));
+
+    // Fallback: use a direct path to the target while A* runs on the
+    // worker thread. This ensures the AI moves immediately instead of
+    // sitting still waiting for the async result.
+    route.clear();
+    route.push_back(end);
+}
+
+bool PathPlanner::tryCollectResult()
+{
+    if (!pending_async_job)
+        return false;
+    if (!PathWorker::instance)
+        return false;
+
+    auto results = PathWorker::instance->collect();
+    for (auto& result : results)
+    {
+        if (result.entity_id == async_entity_id)
+        {
+            route = std::move(result.route);
+            pending_async_job = false;
+            return true;
+        }
+    }
+    return false;
 }

@@ -24,7 +24,8 @@ public:
      */
     virtual bool canSwitchAI() override;
 
-    virtual void run(float delta) override;
+    virtual void runLight(float delta) override;
+    virtual void runHeavy(float delta) override;
     virtual void runOrders() override;
     virtual void runAttack(sp::ecs::Entity target) override;
 };

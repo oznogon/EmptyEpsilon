@@ -454,6 +454,8 @@ set(MAIN_SOURCES
     src/systems/internalcrew.cpp
     src/systems/pathfinding.h
     src/systems/pathfinding.cpp
+    src/systems/pathworker.h
+    src/systems/pathworker.cpp
     src/systems/rendering.h
     src/systems/rendering.cpp
     src/systems/scanning.h
