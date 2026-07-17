@@ -541,6 +541,281 @@ static void luaRemoveBriefingPage(sp::ecs::Entity entity, int index)
         briefing->pages.erase(briefing->pages.begin() + zero_index);
 }
 
+static int luaSetBriefingMapPage(lua_State* L)
+{
+    auto entity = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
+    if (!entity)
+        return luaL_error(L, "setBriefingMapPage() requires a valid entity");
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing)
+        briefing = &entity.getOrAddComponent<Briefing>();
+
+    int index = luaL_checkinteger(L, 2);
+    if (index < 1)
+        return luaL_error(L, "setBriefingMapPage() index must be >= 1");
+
+    int zero_index = index - 1;
+    if (zero_index >= static_cast<int>(briefing->pages.size()))
+        briefing->pages.resize(zero_index + 1);
+
+    if (lua_gettop(L) >= 3 && !lua_isnil(L, 3))
+        briefing->pages[zero_index].map_data.duration = static_cast<float>(luaL_checknumber(L, 3));
+
+    return 0;
+}
+
+static int luaAddBriefingMapKeyframe(lua_State* L)
+{
+    auto entity = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
+    if (!entity)
+        return luaL_error(L, "addBriefingMapKeyframe() requires a valid entity");
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing)
+        return luaL_error(L, "addBriefingMapKeyframe() requires a briefing component");
+
+    int page_idx = luaL_checkinteger(L, 2);
+    if (page_idx < 1)
+        return luaL_error(L, "addBriefingMapKeyframe() page index must be >= 1");
+
+    int zero_page = page_idx - 1;
+    if (zero_page >= static_cast<int>(briefing->pages.size()))
+        return luaL_error(L, "addBriefingMapKeyframe() page index out of range");
+
+    int kf_idx = luaL_checkinteger(L, 3);
+    if (kf_idx < 1)
+        return luaL_error(L, "addBriefingMapKeyframe() keyframe index must be >= 1");
+
+    int zero_kf = kf_idx - 1;
+    auto& keyframes = briefing->pages[zero_page].map_data.keyframes;
+    if (zero_kf >= static_cast<int>(keyframes.size()))
+        keyframes.resize(zero_kf + 1);
+
+    if (lua_gettop(L) >= 4 && !lua_isnil(L, 4))
+        keyframes[zero_kf].timestamp = static_cast<float>(luaL_checknumber(L, 4));
+
+    if (lua_gettop(L) >= 5 && !lua_isnil(L, 5))
+        keyframes[zero_kf].camera_position.x = static_cast<float>(luaL_checknumber(L, 5));
+
+    if (lua_gettop(L) >= 6 && !lua_isnil(L, 6))
+        keyframes[zero_kf].camera_position.y = static_cast<float>(luaL_checknumber(L, 6));
+
+    if (lua_gettop(L) >= 7 && !lua_isnil(L, 7))
+        keyframes[zero_kf].zoom = static_cast<float>(luaL_checknumber(L, 7));
+
+    return 0;
+}
+
+static int luaAddBriefingMapEntity(lua_State* L)
+{
+    auto entity = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
+    if (!entity)
+        return luaL_error(L, "addBriefingMapEntity() requires a valid entity");
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing)
+        return luaL_error(L, "addBriefingMapEntity() requires a briefing component");
+
+    int page_idx = luaL_checkinteger(L, 2);
+    if (page_idx < 1)
+        return luaL_error(L, "addBriefingMapEntity() page index must be >= 1");
+
+    int zero_page = page_idx - 1;
+    if (zero_page >= static_cast<int>(briefing->pages.size()))
+        return luaL_error(L, "addBriefingMapEntity() page index out of range");
+
+    int kf_idx = luaL_checkinteger(L, 3);
+    if (kf_idx < 1)
+        return luaL_error(L, "addBriefingMapEntity() keyframe index must be >= 1");
+
+    int zero_kf = kf_idx - 1;
+    auto& keyframes = briefing->pages[zero_page].map_data.keyframes;
+    if (zero_kf >= static_cast<int>(keyframes.size()))
+        return luaL_error(L, "addBriefingMapEntity() keyframe index out of range");
+
+    BriefingMapEntity ent;
+
+    if (lua_gettop(L) >= 4 && !lua_isnil(L, 4))
+        ent.id = static_cast<int32_t>(luaL_checkinteger(L, 4));
+
+    if (lua_gettop(L) >= 5 && !lua_isnil(L, 5))
+        ent.position.x = static_cast<float>(luaL_checknumber(L, 5));
+
+    if (lua_gettop(L) >= 6 && !lua_isnil(L, 6))
+        ent.position.y = static_cast<float>(luaL_checknumber(L, 6));
+
+    if (lua_gettop(L) >= 7 && !lua_isnil(L, 7))
+        ent.rotation = static_cast<float>(luaL_checknumber(L, 7));
+
+    if (lua_gettop(L) >= 8 && !lua_isnil(L, 8))
+        ent.world_size = static_cast<float>(luaL_checknumber(L, 8));
+
+    if (lua_gettop(L) >= 9 && !lua_isnil(L, 9))
+        ent.radar_trace_image = luaL_checkstring(L, 9);
+
+    if (lua_gettop(L) >= 10 && !lua_isnil(L, 10))
+        ent.color.r = static_cast<uint8_t>(luaL_checkinteger(L, 10));
+
+    if (lua_gettop(L) >= 11 && !lua_isnil(L, 11))
+        ent.color.g = static_cast<uint8_t>(luaL_checkinteger(L, 11));
+
+    if (lua_gettop(L) >= 12 && !lua_isnil(L, 12))
+        ent.color.b = static_cast<uint8_t>(luaL_checkinteger(L, 12));
+
+    if (lua_gettop(L) >= 13 && !lua_isnil(L, 13))
+        ent.color.a = static_cast<uint8_t>(luaL_checkinteger(L, 13));
+
+    if (lua_gettop(L) >= 14 && !lua_isnil(L, 14))
+        ent.visible = lua_toboolean(L, 14);
+
+    if (lua_gettop(L) >= 15 && !lua_isnil(L, 15))
+        ent.label = luaL_checkstring(L, 15);
+
+    keyframes[zero_kf].entities.push_back(ent);
+
+    return 0;
+}
+
+static void luaClearBriefingMapPage(sp::ecs::Entity entity, int page_index)
+{
+    if (!entity || page_index < 1) return;
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing) return;
+
+    int zero_index = page_index - 1;
+    if (zero_index < static_cast<int>(briefing->pages.size()))
+        briefing->pages[zero_index].map_data = BriefingMapPage();
+}
+
+static BriefingMapEntity* findBriefingMapEntity(lua_State* L, int entity_arg, int page_arg, int kf_arg, int id_arg)
+{
+    auto entity = sp::script::Convert<sp::ecs::Entity>::fromLua(L, entity_arg);
+    if (!entity)
+    {
+        luaL_error(L, "requires a valid entity");
+        return nullptr;
+    }
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing)
+    {
+        luaL_error(L, "requires a briefing component");
+        return nullptr;
+    }
+
+    int page_idx = luaL_checkinteger(L, page_arg);
+    if (page_idx < 1)
+    {
+        luaL_error(L, "page index must be >= 1");
+        return nullptr;
+    }
+
+    int zero_page = page_idx - 1;
+    if (zero_page >= static_cast<int>(briefing->pages.size()))
+    {
+        luaL_error(L, "page index out of range");
+        return nullptr;
+    }
+
+    int kf_idx = luaL_checkinteger(L, kf_arg);
+    if (kf_idx < 1)
+    {
+        luaL_error(L, "keyframe index must be >= 1");
+        return nullptr;
+    }
+
+    int zero_kf = kf_idx - 1;
+    auto& keyframes = briefing->pages[zero_page].map_data.keyframes;
+    if (zero_kf >= static_cast<int>(keyframes.size()))
+    {
+        luaL_error(L, "keyframe index out of range");
+        return nullptr;
+    }
+
+    int32_t ent_id = static_cast<int32_t>(luaL_checkinteger(L, id_arg));
+
+    auto& entities = keyframes[zero_kf].entities;
+    for (auto& e : entities)
+    {
+        if (e.id == ent_id)
+            return &e;
+    }
+
+    entities.emplace_back();
+    auto* target = &entities.back();
+    target->id = ent_id;
+    return target;
+}
+
+static int luaSetBriefingMapEntityPosition(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->position.x = static_cast<float>(luaL_checknumber(L, 5));
+    target->position.y = static_cast<float>(luaL_checknumber(L, 6));
+    return 0;
+}
+
+static int luaSetBriefingMapEntityRotation(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->rotation = static_cast<float>(luaL_checknumber(L, 5));
+    return 0;
+}
+
+static int luaSetBriefingMapEntitySize(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->world_size = static_cast<float>(luaL_checknumber(L, 5));
+    return 0;
+}
+
+static int luaSetBriefingMapEntityImage(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->radar_trace_image = luaL_checkstring(L, 5);
+    return 0;
+}
+
+static int luaSetBriefingMapEntityColor(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->color.r = static_cast<uint8_t>(luaL_checkinteger(L, 5));
+    target->color.g = static_cast<uint8_t>(luaL_checkinteger(L, 6));
+    target->color.b = static_cast<uint8_t>(luaL_checkinteger(L, 7));
+    target->color.a = static_cast<uint8_t>(luaL_checkinteger(L, 8));
+    return 0;
+}
+
+static int luaSetBriefingMapEntityVisible(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->visible = lua_toboolean(L, 5);
+    return 0;
+}
+
+static int luaSetBriefingMapEntityLabel(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->label = luaL_checkstring(L, 5);
+    return 0;
+}
+
 static float luaGetScenarioTime()
 {
     return gameGlobalInfo->elapsed_time;
@@ -1697,6 +1972,58 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// If the briefing is currently playing, playback stops and resets to page 1.
     /// Example: removeBriefingPage(player, 2)
     env.setGlobal("removeBriefingPage", &luaRemoveBriefingPage);
+    /// void setBriefingMapPage(entity ship, int index, float map_duration)
+    /// Sets the map page at the given 1-based index on the specified entity.
+    /// Replaces the page image, which will be ignored.
+    /// If the index is beyond the current page count, intermediate pages are created.
+    /// Example: setBriefingMapPage(player, 1, 10)
+    env.setGlobal("setBriefingMapPage", &luaSetBriefingMapPage);
+    /// void addBriefingMapKeyframe(entity ship, int page_index, int keyframe_index, float timestamp, float cam_x, float cam_y, float zoom)
+    /// Adds a keyframe to the map page at the given 1-based page index.
+    /// keyframe_index is 1-based. If the keyframe already exists, its values are updated.
+    /// zoom is the visible world distance (like radar distance), e.g. 5000.0.
+    /// Example: addBriefingMapKeyframe(player, 1, 1, 0.0, 0.0, 0.0, 5000.0)
+    env.setGlobal("addBriefingMapKeyframe", &luaAddBriefingMapKeyframe);
+    /// void addBriefingMapEntity(entity ship, int page_index, int keyframe_index, int entity_id, float x, float y, float rotation, float world_size, string radar_trace, int r, int g, int b, int a, bool visible, string label)
+    /// Adds a pseudoentity to a keyframe on a briefing map page.
+    /// Pseudoentities with the same id across keyframes will be tweened between keyframes.
+    /// All parameters after entity_id are optional; pass nil to use defaults.
+    /// Example: addBriefingMapEntity(player, 1, 1, 1, 5000.0, -3000.0, 45.0, 1000.0, "radar/blip.png", 255, 0, 0, 255, true, "Enemy")
+    env.setGlobal("addBriefingMapEntity", &luaAddBriefingMapEntity);
+    /// void clearBriefingMapPage(entity ship, int page_index)
+    /// Removes all map data from the briefing page at the given 1-based index.
+    /// The page reverts to displaying its image, if set.
+    /// Example: clearBriefingMapPage(player, 2)
+    env.setGlobal("clearBriefingMapPage", &luaClearBriefingMapPage);
+    /// void setBriefingMapEntityPosition(entity ship, int page_index, int keyframe_index, int entity_id, float x, float y)
+    /// Sets the world position of a pseudoentity on a briefing map keyframe.
+    /// If the entity doesn't exist, it is created with the given id.
+    /// Example: setBriefingMapEntityPosition(player, 1, 2, 1, 15000.0, 5000.0)
+    env.setGlobal("setBriefingMapEntityPosition", &luaSetBriefingMapEntityPosition);
+    /// void setBriefingMapEntityRotation(entity ship, int page_index, int keyframe_index, int entity_id, float rotation)
+    /// Sets the rotation (degrees) of a pseudoentity on a briefing map keyframe.
+    /// Example: setBriefingMapEntityRotation(player, 1, 2, 1, 45.0)
+    env.setGlobal("setBriefingMapEntityRotation", &luaSetBriefingMapEntityRotation);
+    /// void setBriefingMapEntitySize(entity ship, int page_index, int keyframe_index, int entity_id, float world_size)
+    /// Sets the world-unit size of a pseudoentity on a briefing map keyframe.
+    /// Example: setBriefingMapEntitySize(player, 1, 2, 1, 1500.0)
+    env.setGlobal("setBriefingMapEntitySize", &luaSetBriefingMapEntitySize);
+    /// void setBriefingMapEntityImage(entity ship, int page_index, int keyframe_index, int entity_id, string radar_trace)
+    /// Sets the radar trace image path of a pseudoentity on a briefing map keyframe.
+    /// Example: setBriefingMapEntityImage(player, 1, 2, 1, "radar/adv_gunship.png")
+    env.setGlobal("setBriefingMapEntityImage", &luaSetBriefingMapEntityImage);
+    /// void setBriefingMapEntityColor(entity ship, int page_index, int keyframe_index, int entity_id, int r, int g, int b, int a)
+    /// Sets the RGBA color of a pseudoentity on a briefing map keyframe. Values are 0-255.
+    /// Example: setBriefingMapEntityColor(player, 1, 2, 1, 255, 0, 0, 255)
+    env.setGlobal("setBriefingMapEntityColor", &luaSetBriefingMapEntityColor);
+    /// void setBriefingMapEntityVisible(entity ship, int page_index, int keyframe_index, int entity_id, bool visible)
+    /// Sets the visibility flag of a pseudoentity on a briefing map keyframe.
+    /// Example: setBriefingMapEntityVisible(player, 1, 2, 1, false)
+    env.setGlobal("setBriefingMapEntityVisible", &luaSetBriefingMapEntityVisible);
+    /// void setBriefingMapEntityLabel(entity ship, int page_index, int keyframe_index, int entity_id, string label)
+    /// Sets the label text of a pseudoentity on a briefing map keyframe.
+    /// Example: setBriefingMapEntityLabel(player, 1, 2, 1, "Enemy Fleet")
+    env.setGlobal("setBriefingMapEntityLabel", &luaSetBriefingMapEntityLabel);
     /// float getScenarioTime()
     /// Returns the elapsed time of the scenario, in seconds.
     /// This timer stops when the game is paused.

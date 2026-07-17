@@ -120,6 +120,14 @@
         }
     }
 
+    [briefing] {
+        [briefing.map] {
+            # Grid line color for briefing map.
+            # Subsector dot alpha is half of this.
+            color: #404080FF
+        }
+    }
+
     [missile_data] {
         [missile_data.homing] {
             color: #FFC800
