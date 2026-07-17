@@ -157,6 +157,7 @@ set(GUI_LIB_SOURCES
     src/gui/gui2_label.cpp
     src/gui/gui2_image.cpp
     src/gui/gui2_arrowbutton.cpp
+    src/gui/gui2_briefingmap.cpp
     src/gui/gui2_entrylist.cpp
     src/gui/gui2_progressbar.cpp
     src/gui/gui2_progressslider.cpp
@@ -183,6 +184,7 @@ set(GUI_LIB_SOURCES
     src/gui/gui2_advancedscrolltext.h
     src/gui/gui2_arrowbutton.h
     src/gui/gui2_arrow.h
+    src/gui/gui2_briefingmap.h
     src/gui/gui2_button.h
     src/gui/gui2_canvas.h
     src/gui/gui2_container.h
