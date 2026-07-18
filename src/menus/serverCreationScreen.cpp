@@ -1,78 +1,147 @@
+#include "serverCreationScreen.h"
 #include <i18n.h>
 #include "preferenceManager.h"
-#include "serverCreationScreen.h"
 #include "shipSelectionScreen.h"
 #include "gameGlobalInfo.h"
 #include "epsilonServer.h"
-#include "gui/gui2_overlay.h"
-#include "gui/gui2_label.h"
-#include "gui/gui2_togglebutton.h"
-#include "gui/gui2_selector.h"
-#include "gui/gui2_textentry.h"
-#include "gui/gui2_listbox.h"
-#include "gui/gui2_panel.h"
-#include "gui/gui2_scrolltextcontainer.h"
-#include "gui/theme.h"
 #include "scenarioInfo.h"
 #include "main.h"
+#include "clipboard.h"
 
+#include "gui/theme.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_overlay.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_scrolltextcontainer.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_textentry.h"
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_tooltip.h"
 
 ServerSetupScreen::ServerSetupScreen()
 {
-    // Background elements.
+    // Draw background elements.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
     // Layout elements.
     GuiElement* container = new GuiElement(this, "CONTAINER");
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-             ->setAttribute("padding", "50");
-    container->setAttribute("layout", "vertical");
+    container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("padding", "50");
+    container
+        ->setAttribute("layout", "vertical");
+
+    (new GuiLabel(container, "HEADER", tr("title", "Host game"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 20");
 
     GuiElement* column = new GuiElement(container, "COLUMN");
-    column->setSize(750.0f, GuiElement::GuiSizeMax)
-          ->setAttribute("layout", "vertical");
-    column->setAttribute("alignment", "topcenter");
+    column
+        ->setSize(800.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    column
+        ->setAttribute("alignment", "topcenter");
 
     // Server configuration section.
-    (new GuiLabel(column, "CONFIG_LABEL", tr("Server configuration"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50.0f);
+    (new GuiLabel(column, "CONFIG_LABEL", tr("Server configuration"), 30.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
     // Server name row.
     GuiElement* row = new GuiElement(column, "");
-    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "NAME_LABEL", tr("Server name: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("layout", "horizontal");
+
+    (new GuiLabel(row, "NAME_LABEL", tr("Server name:"), 30.0f))
+        ->setAlignment(sp::Alignment::CenterRight)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, 10, 0, 0");
+
     server_name = new GuiTextEntry(row, "SERVER_NAME", "server");
     server_name->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(server_name, "SERVER_NAME_TIP", tr("tooltips", "Set the name that appears in the server browser for other players."), 20.0f))->setWidth(280.0f);
 
     // Server password row.
     row = new GuiElement(column, "");
-    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "PASSWORD_LABEL", tr("Server password: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("layout", "horizontal");
+
+    (new GuiLabel(row, "PASSWORD_LABEL", tr("Server password:"), 30.0f))
+        ->setAlignment(sp::Alignment::CenterRight)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, 10, 0, 0");
+
     server_password = new GuiTextEntry(row, "SERVER_PASSWORD", "");
     server_password->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(server_password, "SERVER_PASSWORD_TIP", tr("tooltips", "Set a password to restrict who can join your game. Leave empty for no password."), 20.0f))->setWidth(280.0f);
 
     // GM control code row.
     row = new GuiElement(column, "");
-    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "GM_CONTROL_CODE_LABEL", tr("GM control code: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("layout", "horizontal");
+
+    (new GuiLabel(row, "GM_CONTROL_CODE_LABEL", tr("GM control code:"), 30.0f))
+        ->setAlignment(sp::Alignment::CenterRight)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, 10, 0, 0");
+
     gm_password = new GuiTextEntry(row, "GM_CONTROL_CODE", "");
     gm_password->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(gm_password, "GM_CODE_TIP", tr("tooltips", "Set the control code players must enter to access game master functions."), 20.0f))->setWidth(280.0f);
 
     // LAN/Internet row.
     row = new GuiElement(column, "");
-    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "LAN_INTERNET_LABEL", tr("List on master server: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    server_visibility = new GuiSelector(row, "LAN_INTERNET_SELECT", [](int index, string value) { });
-    server_visibility->setOptions({tr("No"), tr("Yes")})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("layout", "horizontal");
+
+    (new GuiLabel(row, "LAN_INTERNET_LABEL", tr("List on internet registry:"), 30.0f))
+        ->setAlignment(sp::Alignment::CenterRight)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, 10, 0, 0");
+
+    server_visibility = new GuiToggleButton(row, "LAN_INTERNET_SELECT", tr("No"),
+        [this](bool active)
+        {
+            if (active) server_visibility->setText("Yes (" + PreferencesManager::get("registry_registration_url", DEFAULT_REGISTRY) + ")");
+            else server_visibility->setText(tr("No"));
+        }
+    );
+    server_visibility
+        ->setValue(false)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(server_visibility, "SERVER_VISIBILITY_TIP", tr("tooltips", "List this server on the internet master registry so players can find it online."), 20.0f))->setWidth(280.0f);
 
     row = new GuiElement(column, "");
-    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "SERVER_PORT", tr("Server port: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("layout", "horizontal");
+    row
+        ->setAttribute("margin", "0, 0, 0, 20");
+
+    (new GuiLabel(row, "SERVER_PORT", tr("Server port:"), 30.0f))
+        ->setAlignment(sp::Alignment::CenterRight)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, 10, 0, 0");
+
     server_port = new GuiTextEntry(row, "SERVER_PORT", string(defaultServerPort));
-    server_port->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    server_port
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(server_port, "SERVER_PORT_TIP", tr("tooltips", "Set the network port for the server. Default is 35666."), 20.0f))->setWidth(280.0f);
 
     // Server info section.
-    (new GuiLabel(column, "INFO_LABEL", tr("Server info"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(column, "INFO_LABEL", tr("Server information"), 30.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
 
     // Reverse proxy server IP row.
     string reverse_proxy_value = PreferencesManager::get("serverproxy");
@@ -80,26 +149,44 @@ ServerSetupScreen::ServerSetupScreen()
     server_proxy_panel
         ->setSize(GuiElement::GuiSizeMax, 80.0f)
         ->setVisible(reverse_proxy_value != "");
-    // Serverproxy (reverse proxy) is directly configured in options or command
-    // line
-    (new GuiLabel(server_proxy_panel, "PROXY_LABEL", tr("Server was configured to connect to reverse proxy:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    // Serverproxy (reverse proxy) is directly configured as a preference.
+    (new GuiLabel(server_proxy_panel, "PROXY_LABEL", tr("Server configured to connect to reverse proxy at "), 30.0f))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
     string proxy_ips;
-    string sep="";
+    string sep = "";
     for (auto proxy_ip : reverse_proxy_value.split(":"))
     {
         proxy_ips = proxy_ips + sep + "[" + proxy_ip + "]";
         sep = ",";
     }
-    (new GuiLabel(server_proxy_panel, "PROXY_IPS", proxy_ips, 30))->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0,30);
+    (new GuiLabel(server_proxy_panel, "PROXY_IPS", proxy_ips, 30.0f))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setPosition(0.0f, 30.0f);
 
     // Server IP row.
     row = new GuiElement(column, "");
-    row->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "SERVER_IP_LABEL", tr("Server IP: "), 30))->setAlignment(sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "horizontal");
 
-    auto server_ips = new GuiListbox(row, "SERVER_IPS", [](int index, string value){});
-    server_ips->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    server_ips->setTextSize(20);
+    (new GuiLabel(row, "SERVER_IP_LABEL", tr("Server IPs:\n(click to copy)"), 30.0f))
+        ->setAlignment(sp::Alignment::TopRight)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, 10, 0, 0");
+
+    auto server_ips = new GuiListbox(row, "SERVER_IPS",
+        [](int index, string value)
+        {
+            // Copy the IP to the clipboard.
+            Clipboard::setClipboard(value);
+        }
+    );
+    server_ips
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("margin", "0, 0, 0, 40");
+    (new GuiTextTooltip(server_ips, "SERVER_IPS_TIP", tr("tooltips", "Click an IP address to copy it to the clipboard for sharing."), 20.0f))->setWidth(280.0f);
+
     for (auto addr_str : sp::io::network::Address::getLocalAddress().getHumanReadable())
     {
         if (addr_str == "::1" || addr_str == "127.0.0.1") continue;
@@ -108,67 +195,103 @@ ServerSetupScreen::ServerSetupScreen()
 
     // Bottom buttons.
     row = new GuiElement(container, "");
-    row->setSize(GuiElement::GuiSizeMax, 50.0f)
-       ->setAttribute("margin", "0, 0, 50, 0");
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("layout", "horizontal");
 
     // Close server button.
-    (new GuiButton(row, "CLOSE_SERVER", tr("Close"), [this]() {
-        destroy();
-        returnToMainMenu(getRenderLayer());
-    }))->setSize(300.0f, GuiElement::GuiSizeMax)
-       ->setPosition(-250.0f, 0.0f, sp::Alignment::BottomCenter);
+    auto* cancel_server = new GuiButton(row, "CANCEL_SERVER", tr("Cancel server"),
+        [this]()
+        {
+            destroy();
+            returnToMainMenu(getRenderLayer());
+        }
+    );
+    cancel_server->setSize(250.0f, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(cancel_server, "CANCEL_SERVER_TIP", tr("tooltips", "Cancel and return to the main menu without starting a server."), 20.0f))->setWidth(280.0f);
+
+    (new GuiElement(row, "SPACER"))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Start server button.
-    (new GuiButton(row, "START_SERVER", tr("Start server"), [this]() {
-        int port = server_port->getText().toInt();
-        if (port < 1)
-            port = defaultServerPort;
-        new EpsilonServer(port);
-        game_server->setServerName(server_name->getText());
-        game_server->setPassword(server_password->getText().upper());
-        gameGlobalInfo->gm_control_code = gm_password->getText().upper();
-        if (server_visibility->getSelectionIndex() == 1)
+    auto* start_server = new GuiButton(row, "START_SERVER", tr("Start server"),
+        [this]()
         {
-            game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
-            new ServerSetupMasterServerRegistrationScreen();
+            int port = server_port->getText().toInt();
+            if (port < 80) port = defaultServerPort;
+            new EpsilonServer(port);
+            if (!game_server.isAlive())
+            {
+                LOG(Error, "Failed to start server on port " + string(port) + " (port may be in use)");
+                return;
+            }
+            game_server->setServerName(server_name->getText());
+            game_server->setPassword(server_password->getText().upper());
+            gameGlobalInfo->gm_control_code = gm_password->getText().upper();
+
+            if (server_visibility->getValue())
+            {
+                game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", DEFAULT_REGISTRY));
+                new ServerSetupMasterServerRegistrationScreen();
+            }
+            else new ServerScenarioSelectionScreen();
+            destroy();
         }
-        else
-        {
-            new ServerScenarioSelectionScreen();
-        }
-        destroy();
-    }))->setSize(300.0f, GuiElement::GuiSizeMax)
-       ->setPosition(250.0f, 0.0f, sp::Alignment::BottomCenter);
+    );
+    start_server->setSize(250.0f, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(start_server, "START_SERVER_TIP", tr("tooltips", "Start the server with the configured settings and select a scenario."), 20.0f))->setWidth(280.0f);
 }
 
 ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationScreen()
 {
+    // Draw background elements.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
-    info_label = new GuiLabel(this, "INFO", "", 30);
-    info_label->setPosition({0, 0}, sp::Alignment::Center);
+    info_label = new GuiLabel(this, "INFO", "", GuiElement::GuiSizeLabel);
+    info_label->setPosition(0.0f, 0.0f, sp::Alignment::Center);
 
-    (new GuiButton(this, "CLOSE_SERVER", tr("Close"), [this]() {
-        disconnectFromServer();
-        new ServerSetupScreen();
-        destroy();
-    }))->setPosition(-250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
+    auto* row = new GuiElement(this, "");
+    row
+        ->setPosition(0.0f, -50.0f, sp::Alignment::BottomCenter)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("padding", "50, 0");
+    row
+        ->setAttribute("layout", "horizontal");
 
-    // Start server button.
-    continue_button = new GuiButton(this, "CONTINUE", tr("Continue"), [this]() {
-        new ServerScenarioSelectionScreen();
-        destroy();
-    });
-    continue_button->setPosition(250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
+    auto* close_registration = new GuiButton(row, "CLOSE_SERVER", tr("Close"),
+        [this]()
+        {
+            disconnectFromServer();
+            new ServerSetupScreen();
+            destroy();
+        }
+    );
+    close_registration->setSize(250.0f, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(close_registration, "CLOSE_REGISTRATION_TIP", tr("tooltips", "Cancel master server registration and return to server setup."), 20.0f))->setWidth(280.0f);
+
+    (new GuiElement(row, "SPACER"))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Continue button.
+    continue_button = new GuiButton(row, "CONTINUE", tr("Continue"),
+        [this]()
+        {
+            new ServerScenarioSelectionScreen();
+            destroy();
+        }
+    );
+    continue_button->setSize(250.0f, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(continue_button, "CONTINUE_REGISTRATION_TIP", tr("tooltips", "Proceed to scenario selection after master server registration."), 20.0f))->setWidth(280.0f);
 }
 
 void ServerSetupMasterServerRegistrationScreen::update(float delta)
 {
-    switch(game_server->getMasterServerState())
+    switch (game_server->getMasterServerState())
     {
     case GameServer::MasterServerState::Disabled:
-        info_label->setText("Not connecting to masterserver?");
+        info_label->setText("Not connecting to master server?");
         continue_button->enable();
         break;
     case GameServer::MasterServerState::Registering:
@@ -180,11 +303,11 @@ void ServerSetupMasterServerRegistrationScreen::update(float delta)
         continue_button->enable();
         break;
     case GameServer::MasterServerState::FailedToReachMasterServer:
-        info_label->setText("Failed to reach the master server.");
+        info_label->setText("Failed to reach the master server");
         continue_button->disable();
         break;
     case GameServer::MasterServerState::FailedPortForwarding:
-        info_label->setText("Port forwarding check failed.");
+        info_label->setText("Port forwarding check failed");
         continue_button->disable();
         break;
     }
@@ -192,113 +315,177 @@ void ServerSetupMasterServerRegistrationScreen::update(float delta)
 
 ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
 {
-    // Background elements.
+    // Draw background elements.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
     // Layout elements.
     GuiElement* container = new GuiElement(this, "");
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-             ->setAttribute("padding", "50");
-    container->setAttribute("layout", "vertical");
+    container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("padding", "50");
+    container
+        ->setAttribute("layout", "vertical");
+
+    (new GuiLabel(container, "HEADER", tr("title", "Select scenario"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 20");
 
     GuiElement* columns = new GuiElement(container, "");
-    columns->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-           ->setAttribute("layout", "horizontal");
+    columns
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "horizontal");
 
     GuiElement* left = new GuiElement(columns, "LEFT_COLUMN");
-    left->setSize(350.0f, GuiElement::GuiSizeMax)
+    left
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
+
     GuiElement* middle = new GuiElement(columns, "MIDDLE_COLUMN");
-    middle->setSize(350.0f, GuiElement::GuiSizeMax)
-          ->setAttribute("layout", "vertical");
-    middle->setAttribute("margin", "20, 0");
+    middle
+        ->setSize(350.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    middle
+        ->setAttribute("margin", "20, 0");
+
     GuiElement* right = new GuiElement(columns, "RIGHT_COLUMN");
-    right->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-         ->setAttribute("layout", "vertical");
+    right
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 
     // Scenario categories.
-    (new GuiLabel(left, "CATEGORY_LABEL", tr("Category"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    category_list = new GuiListbox(left, "SCENARIO_CATEGORY", [this](int index, string value) {
-        loadScenarioList(value);
-    });
+    (new GuiLabel(left, "CATEGORY_LABEL", tr("Category"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
+
+    category_list = new GuiListbox(left, "SCENARIO_CATEGORY",
+        [this](int index, string value)
+        {
+            loadScenarioList(value);
+        }
+    );
     category_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(category_list, "SCENARIO_CATEGORY_TIP", tr("tooltips", "Filter the scenario list by category."), 20.0f))->setWidth(280.0f);
 
     // Scenario list.
-    (new GuiLabel(middle, "LIST_LABEL", tr("Scenario"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    scenario_list = new GuiListbox(middle, "SCENARIO_LIST", [this](int index, string value)
-    {
-        ScenarioInfo info(value);
-        description_text->setText(info.description);
-        start_button->enable();
-    });
+    (new GuiLabel(middle, "LIST_LABEL", tr("Scenario"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
+
+    scenario_list = new GuiListbox(middle, "SCENARIO_LIST",
+        [this](int index, string value)
+        {
+            ScenarioInfo info(value);
+            description_text->setText(info.description);
+            start_button
+                ->setText(info.settings.empty()
+                    ? tr("Start scenario")
+                    : tr("Configure scenario")
+                )
+                ->enable();
+        }
+    );
     scenario_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(scenario_list, "SCENARIO_LIST_TIP", tr("tooltips", "Select a scenario to host. Its description appears on the right."), 20.0f))->setWidth(280.0f);
 
     // Scenario description.
-    (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 10");
+
     description_text = new GuiScrollFormattedText(right, "SCENARIO_DESCRIPTION", tr("Select a scenario..."));
     description_text->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    for(const auto& category : ScenarioInfo::getCategories())
-        category_list->addEntry(category, category);
+    for (const auto& category : ScenarioInfo::getCategories())
+        category_list->addEntry(tr("category", category), category);
 
     // Bottom buttons.
     GuiElement* row = new GuiElement(container, "");
-    row->setSize(GuiElement::GuiSizeMax, 50.0f)
-       ->setAttribute("margin", "0, 0, 50, 0");
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 50, 0");
+    row
+        ->setAttribute("layout", "horizontal");
 
     // Close server button.
-    (new GuiButton(row, "CLOSE_SERVER", tr("Close"), [this]() {
-        destroy();
-        disconnectFromServer();
-        new ServerSetupScreen();
-    }))->setPosition(-250.0f, 0.0f, sp::Alignment::BottomCenter)
-       ->setSize(300.0f, GuiElement::GuiSizeMax);
+    auto* close_server = new GuiButton(row, "CLOSE_SERVER", tr("Close server"),
+        [this]()
+        {
+            destroy();
+            disconnectFromServer();
+            new ServerSetupScreen();
+        }
+    );
+    close_server->setSize(250.0f, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(close_server, "CLOSE_SERVER_TIP", tr("tooltips", "Stop the server and return to the server setup screen."), 20.0f))->setWidth(280.0f);
+
+    (new GuiElement(row, "SPACER"))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Start server button.
-    start_button = new GuiButton(row, "START_SCENARIO", tr("Start scenario"), [this]() {
-        if (scenario_list->getSelectionIndex() == -1)
-            return;
-        auto filename = scenario_list->getEntryValue(scenario_list->getSelectionIndex());
-        ScenarioInfo info(filename);
-
-        if (info.settings.empty())
+    start_button = new GuiButton(row, "START_SCENARIO", tr("Start scenario"),
+        [this]()
         {
-            // Start the selected scenario.
-            gameGlobalInfo->scenario = info.name;
-            gameGlobalInfo->startScenario(filename);
+            if (scenario_list->getSelectionIndex() == -1) return;
 
-            // Destroy this screen and move on to ship selection.
-            destroy();
-            returnToShipSelection(getRenderLayer());
+            auto filename = scenario_list->getEntryValue(scenario_list->getSelectionIndex());
+            ScenarioInfo info(filename);
+
+            if (info.settings.empty())
+            {
+                // Start the selected scenario.
+                gameGlobalInfo->scenario = info.name;
+                gameGlobalInfo->startScenario(filename);
+
+                // Destroy this screen and move on to ship selection.
+                destroy();
+                returnToShipSelection(getRenderLayer());
+            }
+            else
+            {
+                new ServerScenarioOptionsScreen(filename);
+                destroy();
+            }
         }
-        else
-        {
-            new ServerScenarioOptionsScreen(filename);
-            destroy();
-        }
-    });
-    start_button->setPosition(250.0f, 0.0f, sp::Alignment::BottomCenter)
-                ->setSize(300.0f, GuiElement::GuiSizeMax)->disable();
+    );
+    start_button
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->disable();
+    (new GuiTextTooltip(start_button, "START_SCENARIO_TIP", tr("tooltips", "Begin the selected scenario and proceed to ship selection."), 20.0f))->setWidth(280.0f);
 
     // Select the previously selected scenario.
-    for(const auto& info : ScenarioInfo::getScenarios()) {
-        if (info.name == gameGlobalInfo->scenario) {
-            for(int n=0; n<category_list->entryCount(); n++) {
-                if (info.hasCategory(category_list->getEntryValue(n))) {
+    for (const auto& info : ScenarioInfo::getScenarios())
+    {
+        if (info.name == gameGlobalInfo->scenario)
+        {
+            for (int n = 0; n < category_list->entryCount(); n++)
+            {
+                if (info.hasCategory(category_list->getEntryValue(n)))
+                {
                     category_list->setSelectionIndex(n);
                     category_list->scrollTo(n);
                     loadScenarioList(category_list->getEntryValue(n));
                     break;
                 }
             }
-            for(int n=0; n<scenario_list->entryCount(); n++) {
+            for (int n = 0; n < scenario_list->entryCount(); n++)
+            {
                 if (info.filename == scenario_list->getEntryValue(n))
                 {
                     scenario_list->setSelectionIndex(n);
                     scenario_list->scrollTo(n);
                     description_text->setText(info.description);
-                    start_button->enable();
+                    start_button
+                        ->setText(info.settings.empty()
+                            ? tr("Start scenario")
+                            : tr("Configure scenario")
+                        )
+                        ->enable();
                     break;
                 }
             }
@@ -311,11 +498,16 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
 
 void ServerScenarioSelectionScreen::loadScenarioList(const string& category)
 {
-    scenario_list->setSelectionIndex(-1);
-    scenario_list->setOptions({});
-    for(const auto& info : ScenarioInfo::getScenarios(category))
+    scenario_list
+        ->setSelectionIndex(-1)
+        ->setOptions({});
+
+    for (const auto& info : ScenarioInfo::getScenarios(category))
         scenario_list->addEntry(info.name, info.filename);
-    start_button->disable();
+
+    start_button
+        ->setText(tr("Start scenario"))
+        ->disable();
     description_text->setText(tr("Select a scenario..."));
 }
 
@@ -326,17 +518,26 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
 
     // Background elements.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
     // Layout elements.
     GuiElement* container = new GuiElement(this, "");
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-             ->setAttribute("padding", "50");
-    container->setAttribute("layout", "vertical");
+    container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("padding", "50");
+    container
+        ->setAttribute("layout", "vertical");
+
+    (new GuiLabel(container, "HEADER", tr("title", "Configure scenario"), GuiElement::GuiSizeLabel))
+        ->addBackground()
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 0, 20");
 
     GuiElement* columns = new GuiElement(container, "");
-    columns->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-           ->setAttribute("layout", "horizontal");
+    columns
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "horizontal");
 
     // Scenario options.
     GuiElement* option_container = nullptr;
@@ -347,7 +548,8 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
         : 300.0f;
 
     // Left centering spacer for dynamic-width column.
-    (new GuiElement(columns, ""))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiElement(columns, ""))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Add an item per option, in up to 2 rows of 3 columns.
     for (auto& setting : info.settings)
@@ -360,14 +562,17 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
                 ->setSize(column_width, GuiElement::GuiSizeMax)
                 ->setAttribute("layout", "vertical");
             // Add margin to columns after the first.
-            if (count == 2) option_container->setAttribute("margin", "20, 0, 0, 0");
+            if (count == 2)
+                option_container->setAttribute("margin", "20, 0, 0, 0");
+
             count = 0;
         }
 
         // Option name.
         (new GuiLabel(option_container, "", setting.key_localized, 30.0f))
             ->addBackground()
-            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 10");
 
         // Option value selector.
         GuiSelector* selector = new GuiSelector(option_container, "",
@@ -379,10 +584,11 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
                     if (option.value == value)
                         description_per_setting[setting.key]->setText(option.description);
                 }
+
                 start_button->setEnable(this->scenario_settings.size() >= info.settings.size());
             }
         );
-        selector->setSize(GuiElement::GuiSizeMax, 50.0f);
+        selector->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
         for (auto& option : setting.options)
         {
@@ -405,32 +611,46 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
     }
 
     // Right centering spacer for dynamic-width column.
-    (new GuiElement(columns, ""))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiElement(columns, ""))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Bottom buttons.
     GuiElement* row = new GuiElement(container, "");
-    row->setSize(GuiElement::GuiSizeMax, 50.0f)
-       ->setAttribute("margin", "0, 0, 50, 0");
+    row
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+        ->setAttribute("margin", "0, 0, 50, 0");
+    row
+        ->setAttribute("layout", "horizontal");
 
-    // Close server button.
-    (new GuiButton(row, "BACK", tr("Back"), [this]() {
-        new ServerScenarioSelectionScreen();
-        destroy();
-    }))->setPosition(-250.0f, 0.0f, sp::Alignment::BottomCenter)
-       ->setSize(300.0f, GuiElement::GuiSizeMax);
+    // Back button.
+    auto* back_options = new GuiButton(row, "BACK", tr("Back"),
+        [this]()
+        {
+            new ServerScenarioSelectionScreen();
+            destroy();
+        }
+    );
+    back_options->setSize(250.0f, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(back_options, "BACK_OPTIONS_TIP", tr("tooltips", "Return to the scenario selection screen without starting."), 20.0f))->setWidth(280.0f);
+
+    (new GuiElement(row, "SPACER"))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Start server button.
-    start_button = new GuiButton(row, "START_SCENARIO", tr("Start scenario"), [this, info, filename]() {
-        // Start the selected scenario.
-        gameGlobalInfo->scenario = info.name;
-        gameGlobalInfo->startScenario(filename, this->scenario_settings);
+    start_button = new GuiButton(row, "START_SCENARIO", tr("Start scenario"),
+        [this, info, filename]()
+        {
+            // Start the selected scenario.
+            gameGlobalInfo->scenario = info.name;
+            gameGlobalInfo->startScenario(filename, this->scenario_settings);
 
-        // Destroy this screen and move on to ship selection.
-        destroy();
-        returnToShipSelection(getRenderLayer());
-    });
+            // Destroy this screen and move on to ship selection.
+            destroy();
+            returnToShipSelection(getRenderLayer());
+        }
+    );
     start_button
-        ->setPosition(250.0f, 0.0f, sp::Alignment::BottomCenter)
-        ->setSize(300.0f, GuiElement::GuiSizeMax)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setEnable(scenario_settings.size() >= info.settings.size());
+    (new GuiTextTooltip(start_button, "START_CONFIGURED_SCENARIO_TIP", tr("tooltips", "Begin the scenario with the configured options."), 20.0f))->setWidth(280.0f);
 }

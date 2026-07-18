@@ -46,7 +46,7 @@ GuiHelpOverlay::GuiHelpOverlay(GuiContainer* owner, string help_title, string he
         frame->hide();
     }))
         ->setPosition(0.0f, 0.0f, sp::Alignment::BottomCenter)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 }
 
 GuiHelpOverlay* GuiHelpOverlay::setTitle(string new_title)
@@ -137,7 +137,7 @@ void GuiHotkeyHelpOverlay::updateText()
                 include = true;
             else if (special_position == CrewPosition::tacticalOfficer)
                 include = shield_labels.find(bind_label) == shield_labels.end();
-            else if (special_position == CrewPosition::engineeringAdvanced)
+            else if (special_position == CrewPosition::engineeringPlus)
                 include = shield_labels.find(bind_label) != shield_labels.end();
 
             if (!include) continue;
@@ -156,10 +156,10 @@ void GuiHotkeyHelpOverlay::updateText()
             updateCategory(getCrewPositionName(CrewPosition::helmsOfficer));
             updateCategory(getCrewPositionName(CrewPosition::weaponsOfficer), CrewPosition::tacticalOfficer);
         }
-        else if (category == getCrewPositionName(CrewPosition::engineeringAdvanced))
+        else if (category == getCrewPositionName(CrewPosition::engineeringPlus))
         {
             updateCategory(getCrewPositionName(CrewPosition::engineering));
-            updateCategory(getCrewPositionName(CrewPosition::weaponsOfficer), CrewPosition::engineeringAdvanced);
+            updateCategory(getCrewPositionName(CrewPosition::weaponsOfficer), CrewPosition::engineeringPlus);
         }
         else if (category == getCrewPositionName(CrewPosition::operationsOfficer))
         {

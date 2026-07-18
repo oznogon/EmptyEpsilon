@@ -163,7 +163,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
             {
                 LOG(ERROR) << "Json parsing failed: " << err;
             }
-         
+
 
 
         }

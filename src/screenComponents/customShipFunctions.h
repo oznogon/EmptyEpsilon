@@ -19,7 +19,6 @@ private:
         GuiElement* element;
     };
 
-    const float ROW_HEIGHT = 50.0f;
     CrewPosition position;
     std::vector<Entry> entries;
 

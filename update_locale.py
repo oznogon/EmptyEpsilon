@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # python3 script to update localization files.
 
 import glob
@@ -11,7 +12,7 @@ def update_other_languages(base):
         if other == base:
             continue
         print("Merge %s -> %s" % (base, other))
-        cmd = ["msgmerge", "-U", other, base]
+        cmd = ["msgmerge", "--no-fuzzy", "-U", other, base]
         subprocess.run(cmd, check=True)
 
 

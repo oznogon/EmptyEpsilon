@@ -1,5 +1,4 @@
-#ifndef STEAM_RICH_PRESENCE_H
-#define STEAM_RICH_PRESENCE_H
+#pragma once
 
 #include "Updatable.h"
 #include "dynamicLibrary.h"
@@ -15,5 +14,3 @@ public:
 private:
     float updateDelay = 0.0f;
 };
-
-#endif//STEAM_RICH_PRESENCE_H

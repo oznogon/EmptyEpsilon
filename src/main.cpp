@@ -32,6 +32,7 @@
 #include "stdinLuaConsole.h"
 
 #include "graphics/opengl.h"
+#include "graphics/renderTarget.h"
 
 #include "hardware/hardwareController.h"
 #if WITH_DISCORD
@@ -46,12 +47,17 @@
 #include "glObjects.h"
 #include "particleEffect.h"
 
+// Global 3D camera properties.
 glm::vec3 camera_position;
 float camera_yaw;
 float camera_pitch;
 float camera_roll = 0.0f;
+
+// Global font properties.
 sp::Font* main_font;
 sp::Font* bold_font;
+
+// Global rendering properties.
 RenderLayer* consoleRenderLayer;
 RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
@@ -59,6 +65,7 @@ PostProcessor* warpPostProcessor;
 PVector<Window> windows;
 std::vector<RenderLayer*> window_render_layers;
 
+// Global GUI layout modes' registration.
 #include "gui/layout/vertical.h"
 #include "gui/layout/horizontal.h"
 GUI_REGISTER_LAYOUT("default", GuiLayout);
@@ -69,7 +76,6 @@ GUI_REGISTER_LAYOUT("horizontal", GuiLayoutHorizontal);
 GUI_REGISTER_LAYOUT("horizontalright", GuiLayoutHorizontalRight);
 GUI_REGISTER_LAYOUT("horizontalcenter", GuiLayoutHorizontalCenter);
 
-
 int runProxyServer()
 {
     int port = defaultServerPort;
@@ -78,14 +84,17 @@ int runProxyServer()
     string proxyName = "";
     auto parts = PreferencesManager::get("proxy").split(":");
     string host = parts[0];
+
     if (parts.size() > 1) port = parts[1].toInt();
     if (parts.size() > 2) password = parts[2].upper();
     if (parts.size() > 3) listenPort = parts[3].toInt();
     if (parts.size() > 4) proxyName = parts[4];
+
     if (host == "listen")
         new GameServerProxy(password, listenPort, proxyName);
     else
         new GameServerProxy(host, port, password, listenPort, proxyName);
+
     engine->runMainLoop();
     return 0;
 }
@@ -147,8 +156,7 @@ int main(int argc, char** argv)
 #endif // _WIN32
     }
 
-    if (PreferencesManager::get("proxy") != "")
-        return runProxyServer();
+    if (PreferencesManager::get("proxy") != "") return runProxyServer();
 
     if (PreferencesManager::get("headless") != "")
     {
@@ -161,48 +169,59 @@ int main(int argc, char** argv)
     textureManager.setDefaultRepeated(true);
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
     keys.init();
+
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {
         int port_nr = PreferencesManager::get("httpserver").toInt();
-        if (port_nr < 10)
-            port_nr = 80;
-        LOG(INFO) << "Enabling HTTP script access on port: " << port_nr;
-        LOG(INFO) << "NOTE: This is potentially a risk!";
+        if (port_nr < 80) port_nr = 80;
+        LOG(Info, "Enabling HTTP script access on port: ", port_nr, "\nNOTE: This is potentially a risk!");
         new EEHttpServer(port_nr, PreferencesManager::get("www_directory", "www"));
     }
 
-    if (PreferencesManager::get("metricsserver").toInt() != 0)
+    if (PreferencesManager::get("metrics_server").toInt() != 0)
     {
-        int metrics_port = PreferencesManager::get("metricsserver").toInt();
-        if (metrics_port < 10) metrics_port = 80;
-        LOG(Info, "Prometheus metrics endpoint enabled on port ", metrics_port);
-        new PrometheusMetricsServer(metrics_port);
+        int metrics_port = PreferencesManager::get("metrics_server").toInt();
+        if (metrics_port < 1024 || metrics_port > 65535)
+            LOG(Warning, "metrics_server set to invalid port ", string(metrics_port), ". Prometheus metrics endpoint not enabled.");
+        else
+        {
+            LOG(Info, "Prometheus metrics endpoint enabled on port ", metrics_port);
+            new PrometheusMetricsServer(metrics_port);
+        }
     }
 
     string theme_name = PreferencesManager::get("guitheme", "default");
     if (!GuiTheme::loadTheme(theme_name, "gui/" + theme_name + ".theme.txt"))
     {
         LOG(Error, "Failed to load " + theme_name + " theme, trying default. Resources missing or contains errors? Check gui/" + theme_name + ".theme.txt");
+
         if (!GuiTheme::loadTheme("default", "gui/default.theme.txt"))
         {
             LOG(Error, "Failed to load default theme, exiting. Check gui/default.theme.txt"); //Yes, we may try to load twice default theme but this should be a rare error case which always finish in exit
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing or contains errors? Check gui/default.theme.txt", nullptr);
             return 1;
         }
+
         GuiTheme::setCurrentTheme("default");
     }
-    else
+    else GuiTheme::setCurrentTheme(theme_name);
+
+    // Apply atlas size mode from preferences before window creation.
     {
-        GuiTheme::setCurrentTheme(theme_name);
+        auto atlas_pref = PreferencesManager::get("atlas_size", "auto");
+        if (atlas_pref == "4k")
+            sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Force4K);
+        else if (atlas_pref == "2k")
+            sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Force2K);
+        else
+            sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Automatic);
     }
 
     if (PreferencesManager::get("headless") == "")
     {
-        if (!createDisplayWindows())
-            return 1;
-    } else {
-        new StdinLuaConsole();
+        if (!createDisplayWindows()) return 1;
     }
+    else new StdinLuaConsole();
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
@@ -212,17 +231,12 @@ int main(int argc, char** argv)
     bold_font = active_theme->getStyle("bold")->get(GuiElement::State::Normal).font;
     if (!main_font || !bold_font)
     {
-        LOG(ERROR, "Missing font or bold font.");
+        LOG(Error, "Can't load UI beacuse either the main and/or bold fonts are missing from the theme.");
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load main or bold font, resources missing?", nullptr);
         return 1;
     }
 
     sp::RenderTarget::setDefaultFont(main_font);
-
-    // Apply baseline offset adjustments to fonts
-    // Positive values move text down, negative values move text up
-    main_font->setBaselineOffset(active_theme->getStyle("base")->get(GuiElement::State::Normal).font_offset);
-    bold_font->setBaselineOffset(active_theme->getStyle("bold")->get(GuiElement::State::Normal).font_offset);
 
     // On Android, this requires the 'record audio' permissions,
     // which is always a scary thing for users.
@@ -253,15 +267,15 @@ int main(int argc, char** argv)
 #endif // WITH_DISCORD
 #if STEAMSDK
     new SteamRichPresence();
-#endif //STEAMSDK
+#endif // STEAMSDK
 
-    string tutorial = PreferencesManager::get("tutorial");   // use "00_all.lua" for all tutorials
+    string tutorial = PreferencesManager::get("tutorial"); // use "00_all.lua" for all tutorials
     string server_scenario = PreferencesManager::get("server_scenario");
 
     if (!tutorial.empty())
     {
         bool repeat_tutorial = PreferencesManager::get("repeat_tutorial", "false") == "true";
-        LOG(DEBUG) << "Starting tutorial: " << tutorial;
+        LOG(Debug, "Starting tutorial: ", tutorial);
         new TutorialGame(repeat_tutorial, tutorial);
     }
     else if (server_scenario.empty())
@@ -277,7 +291,7 @@ int main(int argc, char** argv)
         // value (toInt returns 0 if empty or not an int).
         int server_port = PreferencesManager::get("server_port").toInt();
 
-        if (server_port < 10 || server_port > 65535)
+        if (server_port < 1024 || server_port > 65535)
         {
             LOG(Warning, "Invalid server_port " + string(server_port));
             server_port = defaultServerPort;
@@ -286,8 +300,8 @@ int main(int argc, char** argv)
         LOG(Info, "Launching server_scenario " + server_scenario + " on port " + string(server_port));
         new EpsilonServer(server_port);
 
-        if(!gameGlobalInfo) // => failed to start server
-            return 1;
+        // Exit returning 1 if server is invalid.
+        if(!gameGlobalInfo) return 1;
 
         if (PreferencesManager::get("server_name") != "") game_server->setServerName(PreferencesManager::get("server_name"));
         if (PreferencesManager::get("server_password") != "") game_server->setPassword(PreferencesManager::get("server_password").upper());
@@ -312,6 +326,23 @@ int main(int argc, char** argv)
             sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::Quad);
         else
             sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::GL);
+    }
+
+    // Sync atlas size mode back to preferences.
+    {
+        auto mode = sp::RenderTarget::getAtlasSizeMode();
+        switch (mode)
+        {
+        case sp::RenderTarget::AtlasSizeMode::Force4K:
+            PreferencesManager::set("atlas_size", "4k");
+            break;
+        case sp::RenderTarget::AtlasSizeMode::Force2K:
+            PreferencesManager::set("atlas_size", "2k");
+            break;
+        default:
+            PreferencesManager::set("atlas_size", "auto");
+            break;
+        }
     }
 
     // Set the default music_, sound_, and engine_volume to the current volume.
@@ -355,7 +386,7 @@ void returnToMainMenu(RenderLayer* render_layer)
         // value (toInt returns 0).
         int headless_port = PreferencesManager::get("server_port").toInt();
         // This is the same process as server_port and could be made DRY.
-        if (headless_port < 10 || headless_port > 65535)
+        if (headless_port < 1024 || headless_port > 65535)
         {
             LOG(Warning, "Invalid server_port: " + string(headless_port));
             headless_port = defaultServerPort;
@@ -383,29 +414,27 @@ void returnToMainMenu(RenderLayer* render_layer)
 
         new AutoConnectScreen(window_positions, PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
     }
-    else
-    {
-        new MainMenu();
-    }
+    else new MainMenu();
 }
 
 void returnToShipSelection(RenderLayer* render_layer)
 {
     if (render_layer != defaultRenderLayer)
     {
-        for(size_t n=0; n<window_render_layers.size(); n++)
+        for (size_t n = 0; n < window_render_layers.size(); n++)
+        {
             if (window_render_layers[n] == render_layer)
                 new SecondMonitorScreen(n);
-    } else {
+        }
+    }
+    // If we're using autoconnect, return to the autoconnect screen instead
+    // of ship selection. returnToMainMenu will handle this.
+    else
+    {
         if (PreferencesManager::get("autoconnect") != "")
-        {
-            //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
             returnToMainMenu(render_layer);
-        }
         else
-        {
             new ShipSelectionScreen();
-        }
     }
 }
 
@@ -419,10 +448,9 @@ std::unordered_map<string, string> loadScenarioSettingsFromPrefs()
     string preferenceValue = PreferencesManager::get("scenario_settings");
 
     std::unordered_map<string, string> settings = {};
-    if (preferenceValue == "")
-        return settings;
+    if (preferenceValue == "") return settings;
 
-    for(string setting : preferenceValue.split(";"))
+    for (string setting : preferenceValue.split(";"))
     {
         auto [key, value] = setting.partition("=");
         if (!key.empty() && !value.empty())

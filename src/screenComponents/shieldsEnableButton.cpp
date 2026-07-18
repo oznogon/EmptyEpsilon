@@ -62,7 +62,7 @@ void GuiShieldsEnableButton::onDraw(sp::RenderTarget& target)
 void GuiShieldsEnableButton::onUpdate()
 {
     setVisible(my_spaceship.hasComponent<Shields>());
-    if (my_spaceship && isVisible())
+    if (my_spaceship && isEffectivelyVisible())
     {
         if (keys.weapons_toggle_shields.getDown()) {
             auto shields = my_spaceship.getComponent<Shields>();

@@ -44,13 +44,13 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     {
         game->reset();
     });
-    reset_button->setSize(150.0f, 50.0f);
+    reset_button->setSize(150.0f, GuiElement::GuiSizeRow);
     reset_button->setPosition(25, -25, sp::Alignment::BottomLeft);
     close_button = new GuiButton(minigame_box, "", tr("button", "Close"), [this]()
     {
         hide();
     });
-    close_button->setSize(150.0f, 50.0f);
+    close_button->setSize(150.0f, GuiElement::GuiSizeRow);
     close_button->setPosition(-25, -25, sp::Alignment::BottomRight);
 
     progress_bar = new GuiProgressbar(minigame_box, "", 0, 1, 0.0);
@@ -69,7 +69,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     GuiLabel* target_selection_label = new GuiLabel(target_selection_box, "", tr("hacking", "Target system"), 25.0f);
     target_selection_label
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 20, 0, 0");
 
     target_list = new GuiListbox(target_selection_box, "TARGET_SYSTEMS",
@@ -137,7 +137,7 @@ void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
         }
     } else {
         progress_bar->setValue(game->getProgress());
-        status_label->setText(tr("hacking", "Hacking in Progress: {percent}%").format({{"percent", string(int(100 * game->getProgress()))}}));
+        status_label->setText(tr("hacking", "Hacking in progress: {percent}%").format({{"percent", string(static_cast<int>(100 * game->getProgress()))}}));
     }
     if (target_system != ShipSystem::Type::None)
     {

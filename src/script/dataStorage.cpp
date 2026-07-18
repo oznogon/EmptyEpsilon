@@ -1,6 +1,5 @@
 #include "dataStorage.h"
 #include "io/json.h"
-#include <unordered_map>
 
 
 static string scriptstorage_path = "scriptstorage.json";
@@ -147,7 +146,7 @@ static int luaScriptDataStorageGet(lua_State* L)
     auto it = data.find(key);
     if (it == data.end())
         return 0;
-    
+
     luaPushJson(L, *it);
     return 1;
 }

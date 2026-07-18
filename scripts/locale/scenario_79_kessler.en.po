@@ -100,21 +100,25 @@ msgid ""
 "in extra settings."
 msgstr ""
 
-#: scripts/scenario_79_kessler.lua:96
-msgid ""
-"We are getting strange readings from sector C7. It looks like the source is "
-"an abandoned satellite. Please investigate, but be careful."
-msgstr ""
-
-#: scripts/scenario_79_kessler.lua:98
+#: scripts/scenario_79_kessler.lua:97
 msgid "An abandoned satellite"
 msgstr ""
 
-#: scripts/scenario_79_kessler.lua:98
+#: scripts/scenario_79_kessler.lua:97
 msgid ""
 "An old military satellite. Capturing frequency is blocked. Behaviour "
 "unknown. Recommendation: Jump not closer than 10U, then advance using the "
 "impulse drive."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:98
+msgid "We are getting strange readings from sector "
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:98
+msgid ""
+". It looks like the source is an abandoned satellite. Please investigate, "
+"but be careful."
 msgstr ""
 
 #: scripts/scenario_79_kessler.lua:101 scripts/scenario_79_kessler.lua:166

@@ -7,7 +7,7 @@
 
 void CinematicCameraSystem::update(float delta)
 {
-    if (!game_server) return; // Server-only
+    if (!game_server.isAlive()) return; // Server-only
 
     for (auto [entity, camera, transform] : sp::ecs::Query<CinematicCamera, sp::Transform>())
     {

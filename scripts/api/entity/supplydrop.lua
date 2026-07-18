@@ -9,17 +9,17 @@ function SupplyDrop()
     local e = createEntity()
     e.components = {
         transform = {},
-        physics={type="Sensor"},
-        radar_trace={
-            color={100, 200, 255},
-            icon="radar/blip.png",
-            radius=120.0,
-            rotate=false,
-            color_by_faction=true,
+        physics = { type = "Sensor" },
+        radar_trace = {
+            color = { 100, 200, 255 },
+            icon = "radar/blip.png",
+            radius = 120.0,
+            rotate = false,
+            color_by_faction = true,
         },
-        pickup={},
-        docking_port={
-            dock_class = _("class", "Cargo")
+        pickup = {},
+        docking_port = {
+            dock_class = _("class", "Cargo"),
         },
     }
     for k, v in pairs(__model_data["ammo_box"]) do

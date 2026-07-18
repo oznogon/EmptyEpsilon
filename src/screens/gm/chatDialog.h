@@ -1,5 +1,4 @@
-#ifndef CHAT_DIALOG_H
-#define CHAT_DIALOG_H
+#pragma once
 
 #include "gui/gui2_resizabledialog.h"
 #include "ecs/entity.h"
@@ -30,5 +29,3 @@ private:
 
     void onClose() override;
 };
-
-#endif//CHAT_DIALOG_H

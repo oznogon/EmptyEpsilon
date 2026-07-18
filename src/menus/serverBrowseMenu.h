@@ -1,5 +1,4 @@
-#ifndef SERVER_BROWSE_MENU_H
-#define SERVER_BROWSE_MENU_H
+#pragma once
 
 #include "gui/gui2_canvas.h"
 #include "multiplayer_client.h"
@@ -9,15 +8,12 @@
 class GuiTextEntry;
 class GuiButton;
 class GuiListbox;
-class GuiSelector;
-class ServerScanner;
 
 class ServerBrowserMenu : public GuiCanvas
 {
 public:
     ServerBrowserMenu(std::optional<GameClient::DisconnectReason> last_attempt = {});
     virtual ~ServerBrowserMenu();
-
 private:
     GuiTextEntry* manual_ip;
     GuiButton* connect_button;
@@ -31,5 +27,3 @@ private:
     void connect(string host);
     void connect(const ServerScanner::ServerInfo& info);
 };
-
-#endif//SERVER_BROWSE_MENU_H

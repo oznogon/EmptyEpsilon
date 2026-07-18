@@ -36,7 +36,7 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
     (new GuiButton(code_entry, id + "_BUTTON_3", "3", [this]() {code_entry_label->setText(code_entry_label->getText() + "3");}))->setSize(50, 50)->setPosition(150, 200, sp::Alignment::TopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_Clr", "Clr", [this]() {code_entry_label->setText("");}))->setSize(50, 50)->setPosition(50, 250, sp::Alignment::TopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_0", "0", [this]() {code_entry_label->setText(code_entry_label->getText() + "0");}))->setSize(50, 50)->setPosition(100, 250, sp::Alignment::TopLeft);
-    (new GuiButton(code_entry, id + "_BUTTON_OK", "OK", [this]() {
+    (new GuiButton(code_entry, id + "_BUTTON_OK", tr("OK"), [this]() {
         if (my_spaceship)
             my_player_info->commandConfirmDestructCode(code_entry_position, code_entry_label->getText().toInt());
         code_entry_label->setText("");

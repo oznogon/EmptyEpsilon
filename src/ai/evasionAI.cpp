@@ -30,11 +30,16 @@ bool EvasionAI::canSwitchAI()
     return true;
 }
 
-void EvasionAI::run(float delta)
+void EvasionAI::runLight(float delta)
 {
     if (evasion_calculation_delay > 0.0f)
         evasion_calculation_delay -= delta;
-    ShipAI::run(delta);
+    ShipAI::runLight(delta);
+}
+
+void EvasionAI::runHeavy(float delta)
+{
+    ShipAI::runHeavy(delta);
 }
 
 // @TODO: consider jump drives

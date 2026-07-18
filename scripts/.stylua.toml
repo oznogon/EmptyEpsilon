@@ -1,0 +1,9 @@
+syntax = "Lua54"
+indent_width = 4
+indent_type = "Spaces"
+line_endings = "Unix"
+column_width = 80
+block_newline_gaps = "Preserve"
+
+[sort_requires]
+enabled = true

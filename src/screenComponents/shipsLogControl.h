@@ -2,7 +2,6 @@
 
 #include "gui/gui2_element.h"
 
-class GuiPanel;
 class GuiAdvancedScrollText;
 
 class ShipsLog : public GuiElement

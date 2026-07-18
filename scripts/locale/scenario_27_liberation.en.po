@@ -781,7 +781,7 @@ msgstr ""
 #: scripts/scenario_27_liberation.lua:3520
 msgctxt "station-comms"
 msgid ""
-"Ok. We've rigged it to contact you when you close communications with us."
+"OK. We've rigged it to contact you when you close communications with us."
 msgstr ""
 
 #: scripts/scenario_27_liberation.lua:3531

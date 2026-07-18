@@ -1,44 +1,834 @@
 # Change Log
 
-## [...]
+## [2026-06]
+
+### Added
+
+- Nebula rendering overhaul: volumetric fog, dynamic lighting, particle dithering, entity occlusion, configurable draw distance
+- Collision damage tunable via ShipSelection setting
+- Beam weapon autofire toggle
+- Beam safety replication
+- Scanner ShipSystem affects scanning speed, drone sensor range, and shared radar ranges
+- DockingBayScreen supply drop system with berth management
+- Remote GM (limited)
+- Omega `retro_` font line_height theme support
+- GuiElement constants for consistent row, label, and padding/margin sizes
+- GuiButtonTweak for onDraw status updates
+- Client latency simulation controls for servers
+- Science screen incoming-threat indicators: "Missile" and "Beam" panels visible on the science radar when an entity's homing missile or in-range beam weapon is targeting the player
+- Server setting to show missiles on long-range radar (off by default, preserving original gameplay)
+- Scenario selection button shows "Configure" instead of "Start" for scenarios with config steps
+- Crew position requirement checks consolidated into `CrewPositionRequirements` class
+- ShipSelectionScreen describes most recently clicked crew screen
+- Server/UDP port change available from server creation screen
+- Script descriptions expanded and formatted on TutorialMenu
+- Alert overlay background pulse/stretch animation
+- Menu screen titles added and refactored (Server Browse, Options, Tutorial)
+- Scenario categories available for translation
+
+### Changed
+
+- Shield hit effect with new texture and mesh-based implementation
+- Zone entity transform visualization and documentation
+- Sector naming refactor (numeric 100x100 grids in Lua)
+- GuiToggleButton on-state style
+- GuiEntityInfoPanel theme styles
+- Renamed "crew station" to "crew screen" throughout
+- Renamed `altRelay` to `BriefingOfficer`, `briefingOfficer` crew roles
+- Weapons screens (Tactical, Weapons, BeamWeapons, MissileWeapons) refactored layout, added shields display
+- Spectator map renamed, "(view all)" suffix removed
+- `CrewStationScreen` refactored into `crewScreen`, crew screen selector placed in `GuiScrollContainer`
+- `TutorialMenu` refactored into two-column layout using layout properties
+- ShipSelectionScreen and playerInfo code reformatted
+- Alert overlay converted to `DrawStretchedHV`, full-screen color multiply removed
+- cpp translation keys migrated to Lua equivalents
+- Translation PO files swept of deleted cpp strings
+- RED/YELLOW ALERT no longer uppercased
+- Header guard `#ifdef` blocks replaced with `#pragma once`
+- Forward declarations audited and cleaned up
+- Station space setup in Surf's Up replaced with util script
+- Various Xansta util and scenario scripts cleaned up
+- French science_db and PO file corrections
+- Pathfinding system rewritten: A* grid search with line-of-sight smoothing replaces recursive binary-detour planner, improving route quality around clustered obstacles; obstacle registration uses flat spatial list instead of big/small entity classification; AvoidObject internal state enum and position_hash removed
+
+### Fixed
+
+- Fighter AI strafing runs now fly directly at the target on initial approach (bypassing pathfinding avoidance) until the ship has fired or closed within beam range, ensuring beam weapons get on target before evasion kicks in
+
+- Theme offset application
+- Radar trace radius synced to physics radius on asteroid update
+- GuiScrollContainer tree explicit cleanup
+- GL_SCISSOR_TEST state tracking in GuiRenderedModelSprite
+- Space station entry population in ScienceDatabase
+- Missile targeting across screens for new targeting modes
+- Zone transform position when modifying points via GM Tweak
+- 0-size rooms in InternalCrewSystem
+- PackResourceProvider string reading
+- CrewPosition MAX limit reduced to 30 for 32-bit mask
+- HardwareController invalid effect setting handling
+- GuiTheme getter null return for undefined themes/styles
+- AdvancedScrollText bounds handling
+- Comms message row taking up space when hidden
+- Broken French science_db translation (key collision)
+- Missing numeric type check in science_db values
+- Executable permission restored on scripts and resources
+- Scenario names, descriptions, and settings not updating when changing the interface language: cache is now invalidated and all locale files are reloaded on language change
+
+## [2026-05]
+
+### Added
+
+- Target types system (analysis, beams, missiles, hacks, scannable, selectable)
+- Per-type targeting in crew screens
+- DroneOperations station with Sensors ShipSystem
+- Icons across all crew screens
+- Crew selection Alternative options expanded
+- Internal docking as managed berths fully implemented
+- PlayerControl `allowed_positions` settable via Lua
+- Zone transform visualized on GM radar
+
+### Changed
+
+- Cinematic camera modes polished with auto-zoom and target tracking
+- GuiScrollContainer replaces GuiScrollText / GuiScrollFormattedText
+- DatabaseViewComponent refactored with persistent scroll position
+- Sector naming moved to Lua with numeric 100x100 grids
+
+### Fixed
+
+- Missile types restored to science DB
+- Debug renderer time series chart with larger color palette
+- Autoconnect off-by-one (#2873)
+
+## [2026-04]
+
+### Added
+
+- Strategic Map view to main screen (#2175)
+- Science, Relay, Operations keybinds
+- New cinematic camera modes: fly-by, orbital, chase, isometric, top-down with mouselook, auto-zoom, target-of-target tracking
+- Docking redesigned as managed berths (DockingBayScreen, supply drops)
+- Extra crew screens: DroneOperations, MissileWeapons, BeamWeapons, Target Analysis, Probe Camera
+- Modulated illumination shader support
+- Waypoint management on GM screen (routes, sets)
+- Screen time scale selector
+- HackingTarget component
+- Scriptable hacking difficulty
+- DB button for faction key/values on Science scan target
+
+### Changed
+
+- Engine controls moved on Single screen (room for docking/overheat indicator)
+- Power Management screen rewritten
+- GM screen chat/script comms overlay refactored
+- "Request dock" button converted to a menu
+- Trixie PXE netboot script updated
+- GuiScrollContainer integrated across multiple screens (OptionsMenu, GuiSelector, CustomShipFunctions, DockingBayScreen, etc.)
+
+### Fixed
+
+- Control visibility on component removal
+- MissileSystem mines hidden on LongRange radar
+- Comms overlay, utility beam, docking, scanning, weapon storage validation, crew screens when components missing, zone labeling, scrollbar scrolling, strict compilation
+
+## [2026-03]
+
+### Added
+
+- InternalCrew Lua helper functions
+- Beam effects rendered on radar with fire color
+- Callsigns assigned to player-launched ScanProbes
+- Hacking minigame help
+- Theme inheritance
+- GM and Spectator zoom out to 10kU
+- GM screen modal mouse cursors reimplemented
+- MouseRenderer customization
+- Dynamic FoV changes in Viewport
+- i18n plural handling exposed to Lua
+- `Entity:onDestroyed` using new SP callback
+- Beam frequency randomization by default
+- F12 colliders toggle in Debug builds
+- DMX serial Break delay configurable
+- EmptyEpsilon logo as window icon
+- GuiScrollContainer for arbitrary/nested scrolling
+- GM tweaks: Transform, Physics, Zone, DockingBay, Faction, AIController, Orbit, AvoidObject, Target, InternalRooms, MoveTo, Database, LifeTime, WarpJammer, Spin component editing and search
+
+### Changed
+
+- GuiRotationDial and AimLock rendering refactored
+- Beam frequency validation
+- Theme coverage expanded across GUI elements
+- Lua docstrings reviewed and edited
+
+### Fixed
+
+- AvoidObject range edge cases (#2776)
+- MSVC strict compilation (tweak.cpp with /bigobj)
+
+## [2026-02]
+
+### Added
+
+- StdinLuaConsole history and commands
+- Minesweeper flagging and remaining attempts tracker
+- Lua API exposure: `MissileFlight`, `MissileHoming`, `ExplodeOnTimeout`, `JumpDrive.just_jumped`
+- Explosions rendered on radar
+- Voice chat disable via `voice_chat_enabled=0` pref
+- Entity rotation on GM screen creation (drag after click)
+- Scriptable utility beam ship system
+- Abort jump keybinding
+
+### Changed
+
+- macOS CI/CD re-enabled with hdiutil workarounds
+- Beam arc handling improved
+- DatabaseViewComponent refactored
+- Tutorials made repeatable
+- Lua console improvements
+
+### Fixed
+
+- BillboardRenderer replication
+
+## [2026-01]
+
+### Added
+
+- GM chat dialog can switch to scripted comms
+- Relay/Ops states visually indicated
+
+### Changed
+
+- GuiOpenCommsButton states disambiguated
+- Translation updates (German)
+
+### Fixed
+
+- Waypoints vector flagged as dirty after removal
+- Scan autosolve prevention with multiple GuiScanDialogs
+- Text entry cursor position in themed/long-content fields
+- Functions marked dirty after message dismissal
+
+## [2025-12]
+
+### Added
+
+- Hotkey menu Reset button
+- CrewPositionSelection shows when main screen is split
+- Pause keybind toggles out of pause
+- Missing GuiThemeStyle hooks
+- Lua functions: `isGamePaused()`, `isInsideZone()`, `setLocalSkybox()`, `getEntitiesWithComponent()`
+- Sfx component for missile launches
+
+### Changed
+
+- GuiScrollingBanner refactored
+- Interface page of Options Menu refactored
+- `Convert<CrewPosition>` moved to `script/crewPosition.h`
+
+### Fixed
+
+- `ShipSystemsSystem` no longer updates on clients
+- Wormhole exits hidden on client Spectator screens
+- Broadside AI
+- DMX event non-float numbers
+- Scan probe stocking restored to space stations
+- GM control codes enforced on privileged views
+- ScienceDatabase `removeKey()` logic
+
+## [2025-11]
+
+### Added
+
+- Lua thread support
+- Sfx component and implementation
+- Asteroid normal maps
+- Viewport3D callsign toggle on top-down and cinematic views
+- PowerDamageIndicator docking mode
+
+### Changed
+
+- Power and coolant request behaviors aligned
+- LongRange radar component split; stable waypoint numbering
+- AI ships default to flying to target instead of stopping 0.1U short
+- GM screen click selects only closest entity
+- Sector naming functions (`getSectorName()`) added to multiple scenarios
+- Warp request/decharge behavior modified
+
+### Fixed
+
+- Hex values from Lua handled correctly
+- Debug graph bounds checking
+- Hotkey menu backtracking
+- Crashes in AI and cinematic views
+
+## [2025-10]
+
+### Added
+
+- GuiLabel text clipping support
+
+### Changed
+
+- Non-functional GameStateLogger removed
+- Coolant sliders disabled when auto coolant enabled
+- GuiMainScreenControls refactored
+- GuiResizableDialog drag-to-reposition refactored
+- Icons enhanced on buttons
+- Scenario Broken Glass sector naming updated
+
+### Fixed
+
+- Translation markers and autoconnect label sizes
+
+## [2025-09]
+
+### Changed
+
+- macOS CI/CD re-enabled with ARM64 support, then re-disabled
+- Impulse keybinds ported to jump drive distance
+
+## [2025-08]
+
+### Changed
+
+- Translation updates (German: main, science DB, ship names)
+
+## [2025-07]
+
+### Added
+
+- Ship Selection main screen with options menu
+- GM screen callsign toggle
+- Spectator view callsign toggle and enhancements
+- Relay radar centering toggleable
+- Own faction relationship listed in database
+- Explosion effect API
+- Database visuals for technologies and natural
+- GM mouse cursor customizable and modal
+- Spawnable entity icons and traces associated
+
+### Changed
+
+- CrewPositionSelection panel enhanced
+- PlayerShip list on ShipSelectionScreen better default selection
+- Faction keys sorted alphabetically by locale name
+- Info/custom buttons bar swapped
+- Hotkey help categories use localized strings
+- Translation updates (German)
+
+## [2025-06]
+
+### Added
+
+- F1 keyboard reference to GM, cinematic, and top-down views
+- Slider controls to GM tweaks
+- Boolmask and enum support in tweak menu
+- Jump controls can abort a jump in progress
+- Missile weapon type stats to Science DB
+- Partial clipboard support restored
+- Debug renderers for collision shapes (radar, 3D)
+
+### Changed
+
+- GM screen creation window redesigned with descriptions, categories, filters
+- Accurate jump timing in UI elements
+- AI docking abort logic improved
+- Android SDL version updated, 32-bit disabled
+- Performance graphs improved
+- Scenario updates: _Delta Quadrant Patrol Duty_, _Escape_, _Chaos of War_, _Deliver Ambassador Gremus_, _Locust Swarm_, _Doomed Outpost_, _Shoreline_, _Scurvy Scavenger_, _Fermi 500_, _Unwanted Visitors_, _What the Dickens_
+- Translation updates (German, scenario-specific)
+
+### Fixed
+
+- Warp shader alpha handling
+- Beam weapon range against large targets
+- Undocking from internal docking
+- Probe mesh rendering
+
+## [2025-05]
+
+### Added
+
+- Warp/jump drive GM tweak sliders
+- Autoconnect extended to N stations across M monitors
+- Preferences for autoconnect server selection
+- Beam weapons added to science database
+
+### Changed
+
+- Lua constants de-const'd and exposed
+- Responsive layout for Science/Operations custom buttons
+- Translation updates (French, German)
+
+### Fixed
+
+- Scanning synchronisation
+- Shield synchronisation
+- Missile supply drop not giving missiles
+- `toJSON()` failing with nested tables
+- Tutorial init function handling
+
+## [2025-04]
+
+### Added
+
+- Default comms ship script
+- Engineering hotkeys for previous/next system
+- Cadet Patrol scenario
+- Lua utilities for scenarios
+
+### Changed
+
+- Translation proofreading updates (French)
+
+## [2025-03]
+
+### Added
+
+- New scenario: _Empty Space_
+- Comms scenario utility
+
+### Changed
+
+- Tutorials start specific tutorial before autoconnect
+- Log limit raised to 10,000 entries
+- `getImpulseMaxSpeed()` returns both forward and reverse values
+
+### Fixed
+
+- Planets no longer block radar (legacy behavior restored)
+- Lua error reporting for `onGMClick`
+- French translations: _Early Evaluation Exercise_ (100%), _Borderline Fever_ (100%)
+- Scenario payload and Cadet Patrol translations
+
+## [2025-02]
+
+### Added
+
+- New scenario: _Push The Payload_
+- Relay "center on ship" button
+
+### Changed
+
+- CPU ships now auto-repair
+- Hardware.ini reimplemented with ECS
+
+### Fixed
+
+- Artifact pickups and collision callbacks
+- Scenario updates: _Carrier_, _Borderline Fever_ translations
+
+## [2025-01]
+
+### Changed
+
+- Lua script storage: keys deletable by setting to nil, complex data structures supported
+- Mixed-size and mixed-color text rendering
+- Scenario updates: _Allies and Enemies_, _Escape_, _Planet Devourer_, _Fermi 500_, _Shoreline_, _Close the Gaps_
+- Translation updates (French)
+
+## [2024-12-08]
+
+### Added
+
+- New scenarios
+  - _Surf's Up!_ #2173
+  - _Early Evaluation Exercise_ #2172
+  - _Liberation Day_ #2163
+- Scenario utilities
+  - Comms scenario utility #2162
+  - Player ship upgrade and downgrade #2171
+- Features
+  - MetaInfo file for Linux desktop metadata #2180
+  - Desktop file and icon renamed for improved Linux integration #2179
+  - Options can now be saved with custom config directory #2204
+  - Enter key callback for server password dialog #2199
+  - Failed-to-connect reason shown to client #c767a6150
+  - Extracted translator comments from C++ and Lua sources #2245
+- Translation markers added to many scenarios and scripts (#2243, #2249, #2236, #2225, #2223, #2219, #2174, #2176)
+
+### Changed
+
+- Server scanner updated to use new API; removed LAN/Internet selection toggle #289041c6e
+- Radar signal signatures simplified into clearer bands #2227
+- Carriers and Turrets scenario variations converted to translatable format #2165
+- Lua console improvements: input line prefixing, command history #747c97f24
+- Scenario "Birth of the Atlantis" updated with artifact radar signatures and probe suggestions #2153
+- Scenario updates
+  - _Defender Hunter_ updated #2209
+  - _Deliver Ambassador Gremus_: initial heading set explicitly #2198
+  - _Surf's Up!_: current orders display, comms utility integration, translation contexts #2252
+  - Comms utility: updated comments, ordnance availability, bug fixes #2253
+  - _Carriers and Turrets_ variation format updated #2165
+
+### Fixed
+
+- Custom button/info swapping not syncing to UI #2221
+- Comms UI desync issue #2207
+- Comms overlay showing focus highlight on previous selection #2201
+- Auto repair attempting to repair systems that can't be repaired further #2144
+- Combat maneuver generating heat without firing any thrusters #2142
+- Camera glitches with small window offset #2233
+- modelData documentation incorrectly referring to normal maps as specular maps #2232
+- Ninja package build error using wiki instructions #2211
+- Misspelled faction name #2195
+- Maneuvering system oscillations in fast-turning ships #2151
+- Internal docking breaking ships #2150
+- Products checked for presence before processing goods #2167
+- Cinematic view crash #2136
+- Rotation behavior in tactical and single pilot views #2157
+- Spelling errors in training scenario and science database #2152
+
+### Translation additions
+
+- German: _Surf's Up!_, _Capture the Flag_, _Delta Quadrant Patrol Duty_, _Allies and Enemies_, _Shoreline_, _Close the Gaps_, _Escape_, _Broken Glass_, _Fermi 500_, _Carriers and Turrets_, ship diversification utility, main and science database updates (#2257, #2251, #2241, #2222, #2208, #2203, #2197, #2155, #2147, #2169, #2178, #2161, #2167)
+- French: _Carriers and Turrets_, _Surf's Up!_, _Liberation Day_, _Outpost_, _PvP_, _Defender Hunter_, comms scenario utility, player ship upgrade/downgrade utility, science database (#2244, #2238, #2224, #2226, #2217, #2220, #2214, #2216, #2239, #2213, #2215, #2212, #2218, #2235, #2237, #2242, #2259)
+
+## [2024-10-03] (Pre-release)
+
+### Added
+
+- New scenarios
+  - _Liberation Day_ #2163
+- Scenario utilities
+  - _Comms Scenario Utility_ #2162
+  - _Player Ship Upgrade and Downgrade_ #2171
+- Lua scripting API
+  - `applyDamage()` function for applying damage from scripts
+  - Pseudo-random number generator for reproducible random sequences
+  - `log()` function for script-side logging
+  - Warp drive script bindings (different max warp levels, warp speed control)
+  - Command function Lua APIs (`command*` bindings)
+  - Comms messages from scripts
+  - SupplyDrop API
+  - Zone script bindings and rendering
+  - `getEnemiesInRadius()` function
+  - Many additional entity and faction API bindings
+- Game features
+  - Stdin Lua console when running headless
+  - Logging to stdout in Windows headless mode
+  - Option to disable reactor overload explosion
+  - Failed-to-connect reason now reported to client
+  - Custom functions can be assigned to multiple stations simultaneously
+  - Lua API to limit which crew positions can be used
+  - Single click to select objects in GM screen
+- Rendering
+  - Warp jammer range rendering on radar
+  - Radar trace for warp jammers
+  - Configurable nebulae render range
+  - Billboard rendering
+  - Shield hit effect rendering
+  - Engine emitters
+  - Zone rendering
+  - Mine trigger range rendering
+  - Nebula GM screen rendering
+
+### Changed
+
+- Lua REPL now shows return results and stores command history
+- Lua console improved with input line prefixing and history
+- Server scanner unified: no LAN/Internet toggle, always lists all servers, prepares for Steam server listing
+- Crew position refactored into a typed enum with helper set class
+- Improved error handling in `require()` to avoid stack corruption
+- Better error reporting when Lua-to-vecX conversion receives wrong data type
+- Remove `'f'` suffix from numeric literal usage in Lua scripts
+- Script documentation system started (new format)
+- Removed unused files and cleaned up remaining TODOs
+- Apple-specific bundle initialization moved from `main()` to SeriousProton engine
+- Color config now loaded after resource paths are setup
+- Keybindings locale now initialized after loading locale
+- Limited multiplayer update rate of certain components to reduce network load
+- Reduced network replication rate (fixed 500+kb/s/client issue)
+
+### Fixed
+
+- Maneuvering system inducing oscillations in fast-turning ships #2151
+- Internal docking breaking ships #2150
+- Lua script environment `require()` issues across different script environments
+- Combat maneuver generating heat without firing any thrusters #2142
+- Auto repair trying to repair systems that can't be repaired further #2144
+- Hardware DMX blink effect (on/off times were swapped) #2143
+- Missiles incorrectly getting hull component (making them targetable)
+- AI controller incorrectly added to player ship templates
+- Steam and Discord builds fixed
+- Ships missing default AI
+- Black hole radar trace
+- Probe 3D model rendering
+- Nebulae not rendering in 3D, beam effects rendered incorrectly
+- Scan probes, shields count, beam weapon damage location
+- Ship docking issues
+- Player ship spawning from UI
+- Cinematic view crash (#2136)
+- Color config and keybinding locale initialization ordering
+
+### Translation additions
+
+- German: _Broken Glass_, _Fermi 500_ scenarios (#2155, #2147)
+- German: scenario translations and main translation updates (#2154, #2161)
+
+## [2024-08-09]
+
+### Added
+
+- Beam frequency and system target controls to Single Pilot station #2133
+- Script callback error reporting to Lua console
+- Missing script bindings
+
+### Translation updates
+
+- German (#2128)
+
+### Fixed
+
+- Missing translation wrappers in engineering screen #2125
+
+## [2024-06-20]
+
+### Added
+
+- New scenario _Outpost V2_ #2123
+- Hardware state for shields reconfiguring #2119
+- `toJSON()` / `fromJSON()` Lua script functions
+- French translation for _Borderline Fever_ scenario
+
+### Changed
+
+- Scenario updates
+  - _Borderline Fever_ (#2110): localization fix, scenario utilities, new enemy ships, visual asteroids, science database entries
+
+### Fixed
+
+- Warp and jump commands now clamped
+- Glitch post processor on certain hardware
+- Translation marker conflicts resolved
+- Loop index `_` replaced with named index `idx` to prevent localization issues
+- Undefined behavior in scrollbar prevented
+- Segfault prevented when ship template does not exist #2113
+- Command-line parameters no longer written into `options.ini` (treated as temporary overrides only)
+
+## [2024-05-16]
+
+### Added
+
+- Theme selection in options menu, with font changing on theme switch
+- New wormhole visuals for 3D viewports and radar representation
+- Lua `log()` function that writes only to log files (unlike `print()`)
+- Mine radar icon separated from other icons for easier customization
+- Arrow images split into multiple image files
+- New translation files
+  - `scenario_39_locusts.fr.po` and `.en.po`
+  - `scenario_53_escape.fr.po`
+  - `scenario_48_visitors.fr.po`
+  - `scenario_58_race.fr.po`
+  - `scenario_60_captureFlag.fr.po`
+  - `control_code_scenario_utility.fr.po` and `.en.po`
+- German translations for _Deliver Ambassador Gremus_, _Edge of Space_, _Locust Swarm_, _PvP_
+
+### Changed
+
+- Script error renderer removed (superseded by Lua console)
+- Theme selector hidden when only one theme is available
+- Place Station scenario utility updated with translation tags and contexts
+- Scenario updates
+  - _Planet Devourer_ (#2091): fewer black holes on hard difficulty, timer bug fix
+  - _Fermi 500_ (#2081): localization fixes, GM stats buttons, distance info
+  - _Escape_ (#2080): EE max health system, science database entries, refactored code
+  - _Capture the Flag_ (#2083): settings instead of varieties, scenario utilities, refactored
+  - _Deliver Ambassador Gremus_ (#2082): scenario utilities, visual asteroids, `getScenarioTime()`
+  - _Unwanted Visitors_ (#2085): spawn ships utility, control code utility, damage control console
+  - _Scurvy Scavenger_ (#2077): scenario utilities, versioning, GM button, eased gameplay
+  - _Borderline Fever_: refactored with localization and scenario utilities
+  - Translation contexts and tags added to multiple scenarios
+
+### Fixed
+
+- Voice paths in Scenarios 48 and 51
+- Keybinding conflict between Lua console and ship voice
+- Lua console key text labels set up
+- `ShipTemplateBasedObject` hull max exceeding 100%
+- Scenario 20 (Training 1) made playable again for non-English languages
+- Spelling error in ship diversification utility
+
+## [2024-04-28] (Pre-release)
+
+### Added
+
+- Lua console backported from ECS branch, replacing the script error renderer
+- New keybindings
+  - Direct power/coolant setting for Engineering (supports joystick bindings)
+  - Arrow keys to move crew in Engineering, avoiding S key conflict with shields
+- `setImpulseRequest()` function validating impulse request values
+- `EE_CONF_DIR` environment variable to configure the configuration path
+- New player ship template: _Saipan_ corvette carrier, with internal/external docking, energy sharing, hull repair, and probe supply
+- New scenario utilities: CPU Ship Diversification Scenario Utility
+- New scenarios: _Kessler_ #1982, _Locust Swarm_ #2032
+- New API functions
+  - `setSelectOnFocus()` method for textentry
+- Auto-connect for ship windows
+- New translation files
+  - `spawn_ships_scenario_utility.en.po` and `.fr.po`
+  - `cpu_ship_diversification_scenario_utility.fr.po`
+  - `scenario_79_kessler.en.po` and `.fr.po`
+
+### Changed
+
+- Keybinding menu clarified with explanations that bindings work for joysticks as well
+- Weapons hotkey menu label clarified to "Disable missile aim lock"
+- Window angle input converted from slider to textentry
+- Firing solution calculation improved, fixing NaN behavior in turn angle calculation
+- Joystick bindings standardized
+- Science screen shows max hull/shields, hides non-existing systems
+- Science band colors increased in contrast for better accessibility
+- Weapons tutorial clarified and expanded with homing and manual-aiming sections
+- Radar and Helms tutorial text clarified and fixed
+- Station selection screen rearranged with added crew info and headcount per station
+- Combat maneuvers removed from helms tutorial
+- `GuiAdvancedScrollText` performance improvements
+- `GuiAdvancedScrollText` scrollbar click change based on text size
+- Model scale for Striker (`dark_6_fighter`) changed from 5 to 3
+- Place Station scenario utility updated: documentation, diagnostics, faction-based service availability
+- Scenario updates
+  - _The Omicron Plague_ (#2051): warp jammer range fix, goods purchase fix, repair crew buttons for damage control
+  - _Planet Devourer_ (#2052): locale updates, custom UI elements on Damage Control console
+  - _Broken Glass_ (#2053): locale adjustments, context label fix
+  - _What the Dickens_ (#2041): all stations use modified comms, visual asteroids, instructional hints, defeat explanations
+  - _Scurvy Scavenger_ (#2034): loop index conflict fix, Striker speed increase, varied contract prompts
+  - _Unwanted Visitors_ (#2027): switched to scenario settings, external utilities, refactored code, science database entries
+  - _Visitors_ (#2029): restored translation contexts for standardization
+  - _Planet Devourer_ (#2008): translation capability updated, `devour.en.po` created
+- Translation updates: French UI and scenarios (#2005, #2010, #2017, #2043, #2044, #2046, #2050, #2054, #2055, #2056, #2073), German UI and tutorial translation (#2045, #2057, #2065, #2071)
+- Translation tags added to scenario utilities and scenarios
+
+### Fixed
+
+- New hotkeys improperly operating on selected system instead of hotkey system
+- Duplicate default keybind for Science and Relay
+- Crash when using impulse set keybinding
+- `ShipsLogControl` update failure with duplicate text
+- `GuiScrollbar` limits preventing full range on large lists
+- Division by zero and out-of-range array indexing in `crewStationScreen`
+- Missing translation tags added in scenarios (#2006)
+
+## [2023-06-17]
+
+### Added
+
+- Scenario settings added for _Scavenger_, _Shoreline_, and _Patrol Duty_ scenarios #1988
+
+## [2023-06-12] (Pre-release)
 
 ### Added
 
 - New scenarios
   - _Broken Glass_ #1795, #1796, #1798
+  - _Doomed Outpost_ #1838
+  - _Chaos of War_ #1863
+  - _Planetary Devourer_ #1972
+- New utility scripts
+  - Call sign generation utility for scenarios
+  - CPU ship diversification utility for scenarios
+- API functions
+  - `FactionInfo:setNeutral()` for three-way faction relationships #1953
+  - `WarpJammer:getHull()` and `WarpJammer:setHull()` exported for scripting #1828
+- GM tweaks
+  - ShipTemplateBasedObject (including stations) tab with acceleration and warp speed tweaks #1912
+  - Beam heat and energy per fire sliders #1901
+  - Repair crew count for PlayerSpaceship #1858
+  - WarpJammer hull slider #1828
+- New keybinds to adjust impulse by 1% and 10% increments #1948
+- Player ship descriptions shown on ship selection screen (server side) #1981
+- Reverse proxy status displayed in server creation screen #1920
+- Icons on GuiListbox entries #1930
+- Icons in GM object creation view's ship lists #1931
+- ScienceDatabase entries for stations, technologies, and in-game features #1857
+- Themed hover behavior on GuiListbox entries #1935
 - New translations
+  - Translation hooks for credits screen #1884
+  - Extensive `_()` translation tagging in Xansta's scenarios (Scavenger, Shoreline, Patrol Duty, Outpost) #1890, #1897, #1945, #1950, #1961, #1979
   - French scenario translations
-    - _The Omicron Plague_ #1771, #1772, #1782, #1783, #1784, #1785, #1787
+    - _The Omicron Plague_ #1771, #1772, #1782, #1783, #1784, #1785
+    - _Broken Glass_ #1798, #1843, #1859
+    - _Outpost_ #1844, #1868, #1870, #1875, #1880, #1882, #1883, #1887, #1889, #1895
+    - _Patrol Duty_ #1890, #1896, #1976
+    - _Scavenger_ #1945, #1950, #1979, #1985
+    - _Shoreline_ #1897, #1936, #1983
     - _Defender Hunter_ audio clips #1790
-  - Translation hooks #1779, #1783
+    - Main UI #1973, #1986
+  - German translations: Main UI (#1980), general updates (#1984)
 
 ### Changed
 
-- Added and edited scripting docs for SpaceShips #1820
 - Mission time clock now uses `hh:mm:ss`-formatted time #1773
-- Stats on Operations screen resized to match other screens #1774
+- Stats on Operations screen resized to match other stations #1774
+- Asteroid rendering on radar refactored #1902
+- Strafe and boost power-damage indicators separated #1907
+- Ship password dialog improvements: show asterisks, remember last used password, Enter callback #1778
+- ScienceDatabase beam and shield frequency display simplified #1867
+- Scenario settings initialization rewritten: always initialize settings on scenario start #1848
+- HTTP script access uses server-selected player ship as default #1776
+- `CpuShip` uses locale names for order display in GMInfo #1860
+- Faction names on ship selection screen use `getLocaleFaction()` #1917
+- Keyboard shortcut list population improved with i18n reload and more crew positions #1877
+- Escape key ignored during autoconnect state #1919
+- onDraw argument names aligned between definitions and implementations #1943
+- GameStateLogger replaces float-to-string conversion with `to_chars` #1911
+- Player ship call signs hidden for internally docked ships #1905
+- Loop variable uses reference type in `GuiObjectCreationView` to prevent copying #1908
+- `SpaceShip` extraneous `getGMInfo()` override removed #1921
+- Scripting documentation edited and expanded
+  - SpaceShip, SpaceStation, CpuShip, PlayerSpaceship, ShipTemplate, ShipTemplateBasedObject docs #1820, #1821, #1822, #1823, #1819
+  - FactionInfo, ScienceDatabase, GameGlobalInfo docs #1851, #1852, #1853, #1842
+  - SpaceObject, item, terrain, weapon functions #1824, #1825, #1826, #1827
+  - GM functions and messages #1808
+  - Scripting object functions #1809
+  - EDockingState enum and EMainScreen enums #1806, #1898
+  - ModelData functions #1854
+  - Energy functions and collisions clarified #1864
+  - Faction relationship documentation corrected #1871, #1954
 - Build changes
-  - RPM CPack builds with `-DCPACK_GENERATOR="RPM"` now set resource paths #1840
-- API changes
-  - HTTP script access now uses the server-selected player ship as the default #1776
-- Translation updates
-  - French #1772, #1781, #1793
+  - RPM CPack builds set `CMAKE_INSTALL_PREFIX` for correct resource paths #1840
+  - Android NDK bumped to 23c, enabling 64-bit ARM v8 builds #1888
+  - Android API properly set in APK name
+  - 64-bit ARM Android builds added for newer devices
+  - `update_locale` build target fixed
+- README expanded with download, install, community, and docs sections #1856
+- README links ARM v8 Android build, notes emulation #1965
+- Reference to `emptyepsilon.org` removed
+- Scenario updates
+  - _Broken Glass_ GM buttons grouped and translation tags added #1843
+  - _Borderline Fever_ converted from scenario variations to scenario settings #1841
+  - _Outpost_ updated with typos, science database entry, translation tags #1949
+  - _Chaos of War_ database entry safeguards for translated versions #1863
+  - _Planetary Devourer_ call sign generation and CPU ship diversification moved to utility files #1972
+  - _The Omicron Plague_ bugs fixed #1783, #1784, #1785, #1787, #1794
+- Translation updates: French (#1772, #1781, #1793, #1859, #1866, #1868, #1882, #1883, #1887, #1889, #1895, #1936, #1973, #1976, #1979, #1985, #1986), German (#1980, #1984)
 
 ### Fixed
 
-- ShipTemplate:setHull() and ShipTemplateBasedObject:setHull() respect limits #1811
-- ShipTemplate:copy() respects tube count limit for tubes, instead of beam count limit #1810
-- URL for EmptyEpsilon website in scripting reference fixed #1791
+- `ShipTemplate:setHull()` and `ShipTemplateBasedObject:setHull()` respect limits #1811
+- `ShipTemplate:getSystemName()` uses import values for enum conversion #1834
+- `ShipTemplate:copy()` respects tube count limit for tubes, instead of beam count limit #1810
+- Inability to repair systems fixed
+- `CpuShip:orderAttack()` no longer targets non-hostile ships #1812
+- `SpaceShip` no longer attempts to dock with itself #1906
+- Relay probe launch button disabled when ship has 0 probes #1918
 - Relay can once again select alert level buttons #1786
+- GM chat windows properly un-minimized after closing #1928
+- `GuiSelfDestructIndicator` typo fixed
+- `GuiEntryList` clears entries when passing options and values to `setOptions()` #1916
+- `BeamEffect` checks existence of source and target before use #1874
 - Main screen comms info no longer persists after it should be closed
 - Banner text now cleared on scenario reset #1775
-- Heading, velocity displays fixed on Single Pilot, Tactical screens #1774
-- Build fixes
-  - `update_locale` script target fixed
+- Heading and velocity displays fixed on Single Pilot and Tactical screens
+- URL for EmptyEpsilon website in scripting reference fixed #1791
+- WarpJammer mesh loading fixed with better OBJ format handling
 - Scenario fixes
   - _The Omicron Plague_ bugs fixed #1783, #1784, #1785, #1787, #1794
-- Translation fixes
-  - Translation hooks #1780
+  - Custom ships missing from science database in _Scenario 20_ worked around #1869
+  - Scenario settings initialized on scenario start #1848
+  - Spelling mistakes fixed across 4 scenarios
+- `update_locale` build target fixed
 
 ## [2022-10-28]
 
@@ -111,7 +901,7 @@
 - Configuration file path now logged
 - Server port now configurable on server setup screen
 - API functions
-  - `getFactionInfo()` returns a FactionInfo reference e36c7ea 
+  - `getFactionInfo()` returns a FactionInfo reference e36c7ea
   - Ship template functions `setExternalDockClasses()` and `setInternalDockClasses()` to configure how other classes of ship dock 55e7992
   - `sectorToXY()` converts a sector name to x/y coordinates #1651
   - `SpaceObject:sendCommsMessageNoLog()` hails a player ship to send a message, but doesn't log a failed delivery
@@ -593,7 +1383,7 @@ This release replaced core engine components, and it and future releases require
   - German translation updated #1258, #1280, #1324
   - French translation expanded #1151, #1153, #1154, #1182, #1183, #1243, #1245, #1250, #1258, #1261, #1263, #1265, #1269
 - Scenario updates
-  - _Waves_ refactored 
+  - _Waves_ refactored
   - _Basic_ scenario logs variant on error #1155, #1216
   - _Fermi 500_ updated #1302
   - _Capture the Flag_ updated #1301
@@ -622,7 +1412,7 @@ This release replaced core engine components, and it and future releases require
 - Sounds play on remote clients #1224, #1225
 - Weapon tubes no longer desync on load/unload #1048
 - Black holes confirm whether an object still exists before trying to move it #1180
-- Discord library issue blocking Linux builds #1000 
+- Discord library issue blocking Linux builds #1000
 - Ship templates now have and use a default AI
 - Scenario and ship template typos #1156, #1157
 - Pathing algorithm now accounts for ship size to better avoid mines and asteroids
@@ -1185,7 +1975,7 @@ This release replaced core engine components, and it and future releases require
 - Spelling on _Birth of the Atlantis_ scenario.
 - `TOGGLE_AIM_LOCK` will only work if button state is properly set.
 
-## [2017-05-06] 
+## [2017-05-06]
 
 ### Added
 
@@ -1502,7 +2292,7 @@ This release replaced core engine components, and it and future releases require
     - Beam weapon and engine emitter positions on some models
     - Extra set of 3d models for use as frigates
 - Headless server options
-- Allow tweaking weapon tube details and availability at load time 
+- Allow tweaking weapon tube details and availability at load time
 - Allow game master to change a ship's callsign
 
 ### Changed

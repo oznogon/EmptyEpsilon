@@ -40,7 +40,7 @@ void BasicMovementSystem::update(float delta)
                 movement = std::sqrt(distance);
             transform.setPositionNoReplication(transform.getPosition() + v * movement);
         }
-        else if (game_server)
+        else if (game_server.isAlive())
         {
             if (moveto.on_arrival)
                 LuaConsole::checkResult(moveto.on_arrival.call<void>(entity, transform.getPosition().x, transform.getPosition().y));

@@ -15,6 +15,7 @@ class GuiListbox;
 class GuiRadarView;
 class GuiRadarZoomSlider;
 class GuiScanTargetButton;
+class GuiScanningDialog;
 class GuiScrollContainer;
 class GuiScrollFormattedText;
 class GuiSelector;
@@ -45,6 +46,7 @@ public:
 
     GuiSelector* sidebar_selector;
     GuiElement* info_sidebar;
+    GuiElement* info_scan_content;
     GuiScrollContainer* sidebar_signals_page;
     GuiScrollContainer* sidebar_frequencies_page;
     GuiScrollContainer* sidebar_systems_page;
@@ -80,9 +82,13 @@ public:
 
     GuiToggleButton* probe_view_button;
     GuiLabel* no_radar_label;
+    GuiScanningDialog* scanning_dialog;
     sp::ecs::Entity observation_point;
     sp::ecs::Entity target_entity;
     GuiListbox* view_mode_selection;
+
+    GuiLabel* missile_threat_label;
+    GuiLabel* beam_threat_label;
 
     ScienceScreen(GuiContainer* owner, CrewPosition crew_position=CrewPosition::scienceOfficer);
 
@@ -95,4 +101,5 @@ private:
     float previous_long_range_radar = 0.0f;
     float previous_short_range_radar = 0.0f;
     sp::ecs::Entity previous_target;
+    string previous_description;
 };

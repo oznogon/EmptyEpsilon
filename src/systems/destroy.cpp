@@ -4,13 +4,13 @@
 
 void OnDestroySystem::destroyCallback(sp::ecs::Entity e)
 {
-	auto destroyed = e.getComponent<Destroyed>();
-	if (destroyed)
-		return;
+    if (e.hasComponent<Destroyed>()) return;
 
-	auto od = e.getComponent<OnDestroyed>();
-	if (od && od->callback) {
-		e.addComponent<Destroyed>(); // prevent recursive calls
-		LuaConsole::checkResult(od->callback.call<void>(e));
-	}
+    auto od = e.getComponent<OnDestroyed>();
+    if (od && od->callback)
+    {
+        // Prevent recursive calls
+        e.addComponent<Destroyed>();
+        LuaConsole::checkResult(od->callback.call<void>(e));
+    }
 }

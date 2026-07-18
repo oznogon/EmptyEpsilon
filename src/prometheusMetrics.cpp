@@ -16,6 +16,7 @@
 #include "ecs/query.h"
 #include "playerInfo.h"
 #include "crewPosition.h"
+#include "systems/ai.h"
 
 #include <cstdio>
 #include <unordered_map>
@@ -89,23 +90,22 @@ static void collectEngineMetrics(string& output)
     );
 
     auto timing = engine->getEngineTiming();
-    if (!timing.empty())
-    {
-        string timing_lines;
-        for (auto& [key, value] : timing)
-            timing_lines += "ee_update_duration_seconds{phase=\"" + escapeLabelValue(key) + "\"} " + formatFloat(value) + "\n";
-        writeGaugeMetric(
-            output,
-            "ee_update_duration_seconds",
-            "Time spent in each update phase (seconds)",
-            timing_lines
-        );
-    }
+    if (timing.empty()) return;
+
+    string timing_lines;
+    for (auto& [key, value] : timing)
+        timing_lines += "ee_update_duration_seconds{phase=\"" + escapeLabelValue(key) + "\"} " + formatFloat(value) + "\n";
+    writeGaugeMetric(
+        output,
+        "ee_update_duration_seconds",
+        "Time spent in each update phase (seconds)",
+        timing_lines
+    );
 }
 
 static void collectServerMetrics(string& output)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
 
     writeGaugeMetric(
         output,
@@ -163,7 +163,9 @@ static void collectGameMetrics(string& output)
     if (!gameGlobalInfo) return;
 
     string scenario = gameGlobalInfo->scenario;
-    string server_name = game_server ? game_server->getServerName() : "";
+    string server_name = game_server
+        ? game_server->getServerName()
+        : "";
 
     writeGaugeMetric(
         output,
@@ -200,8 +202,7 @@ static void collectGameMetrics(string& output)
         }
 
         CrewPositions all_positions;
-        for (auto& cps : pi->crew_positions)
-            all_positions.mask |= cps.mask;
+        for (auto& cps : pi->crew_positions) all_positions.mask |= cps.mask;
 
         string positions_str;
         for (auto cp : all_positions)
@@ -219,9 +220,11 @@ static void collectGameMetrics(string& output)
     }
 
     if (!connection_lines.empty())
+    {
         writeGaugeMetric(output, "ee_player_connection",
             "Connected players with their name, ship, and crew positions (always 1)",
             connection_lines);
+    }
 
     // Player ships: one row per PlayerControl entity
     int player_ship_count = 0;
@@ -313,9 +316,58 @@ static void collectGameMetrics(string& output)
     }
 }
 
+static void collectAIMetrics(string& output)
+{
+#ifdef DEBUG
+    auto& m = AISystem::metrics_snapshot;
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_entity_count",
+        "Number of active AI-controlled entities",
+        "ee_ai_entity_count " + formatInt(m.ai_count)
+    );
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_light_update_duration_seconds",
+        "Average light-pass AI update duration per frame (seconds)",
+        "ee_ai_light_update_duration_seconds " + formatFloat(m.light_time_us / 1e6f)
+    );
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_heavy_update_duration_seconds",
+        "Average heavy-pass AI update duration per frame (seconds)",
+        "ee_ai_heavy_update_duration_seconds " + formatFloat(m.heavy_time_us / 1e6f)
+    );
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_total_update_duration_seconds",
+        "Total AI update duration per frame (seconds)",
+        "ee_ai_total_update_duration_seconds " + formatFloat(m.total_ms / 1000.0f)
+    );
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_immediate_heavy_count",
+        "Number of immediate heavy updates in the current 5-second window",
+        "ee_ai_immediate_heavy_count " + formatInt(m.immediate_heavy_count)
+    );
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_heavy_budget",
+        "Maximum heavy updates scheduled per frame",
+        "ee_ai_heavy_budget " + formatInt(m.heavy_budget)
+    );
+#endif
+}
+
 static void collectDebugMetrics(string& output)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
 
 #ifdef DEBUG
     writeGaugeMetric(
@@ -327,26 +379,24 @@ static void collectDebugMetrics(string& output)
 #endif
 
     auto& stats = game_server->getNetworkStatsSnapshot();
-    if (!stats.empty())
-    {
-        string stats_lines;
+    if (stats.empty()) return;
 
-        for (auto& [key, bytes] : stats)
-            stats_lines += "ee_server_network_bytes{component=\"" + escapeLabelValue(key) + "\"} " + formatInt(bytes) + "\n";
+    string stats_lines;
 
-        writeGaugeMetric(
-            output,
-            "ee_server_network_bytes",
-            "Per-component-type network bandwidth in bytes (accumulated over ~1 second interval)",
-            stats_lines
-        );
-    }
+    for (auto& [key, bytes] : stats)
+        stats_lines += "ee_server_network_bytes{component=\"" + escapeLabelValue(key) + "\"} " + formatInt(bytes) + "\n";
+
+    writeGaugeMetric(
+        output,
+        "ee_server_network_bytes",
+        "Per-component-type network bandwidth in bytes (accumulated over ~1 second interval)",
+        stats_lines
+    );
 }
 
 static void collectKillMetrics(string& output)
 {
-    if (kill_counts.empty())
-        return;
+    if (kill_counts.empty()) return;
 
     string kill_lines;
     for (auto& [instigator, count] : kill_counts)
@@ -363,6 +413,9 @@ static void collectKillMetrics(string& output)
 PrometheusMetricsServer::PrometheusMetricsServer(int port)
 : server(port)
 {
+    // Enable engine timing collection.
+    engine->setCollectEngineTiming();
+    // Add a /metrics endpoint and produce Prometheus-compatible metrics.
     server.addURLHandler("/metrics", [](const sp::io::http::Server::Request& request) -> string
     {
         string output;
@@ -375,6 +428,8 @@ PrometheusMetricsServer::PrometheusMetricsServer(int port)
         collectServerMetrics(output);
         output += "\n";
         collectGameMetrics(output);
+        output += "\n";
+        collectAIMetrics(output);
         output += "\n";
         collectKillMetrics(output);
         output += "\n";

@@ -1,5 +1,4 @@
-#ifndef EPSILON_SERVER_H
-#define EPSILON_SERVER_H
+#pragma once
 
 #include "multiplayer_server.h"
 
@@ -16,5 +15,3 @@ public:
 };
 
 void disconnectFromServer();
-
-#endif//EPSILON_SERVER_H

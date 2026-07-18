@@ -1,5 +1,4 @@
-#ifndef SCENARIO_INFO_H
-#define SCENARIO_INFO_H
+#pragma once
 
 #include <i18n.h>
 #include "stringImproved.h"
@@ -37,11 +36,10 @@ public:
     static std::vector<string> getCategories();
     static const std::vector<ScenarioInfo>& getScenarios();
     static std::vector<ScenarioInfo> getScenarios(const string& category);
+    static void clearCache();
 private:
     void addKeyValue(string key, string value);
     bool addSettingOption(string key, string option, string description);
 
     static std::vector<ScenarioInfo> cached_full_list;
 };
-
-#endif//SCENARIO_INFO_H

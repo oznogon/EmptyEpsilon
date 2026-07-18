@@ -70,7 +70,7 @@ void GuiWarpControls::onUpdate()
 
     auto warp = my_spaceship.getComponent<WarpDrive>();
     setVisible(warp != nullptr);
-    if (!isVisible()) return;
+    if (!isEffectivelyVisible()) return;
 
     auto docking_port = my_spaceship.getComponent<DockingPort>();
     slider->setEnable(!docking_port || docking_port->state == DockingPort::State::NotDocking);

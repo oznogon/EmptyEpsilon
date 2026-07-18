@@ -7,31 +7,43 @@
 class TargetsContainer
 {
 public:
+    // Targeting behavior can depend on the targeting interaction. Comms
+    // targetability has different requirements than weapons, GM screen,
+    // scanning, etc.
     enum ESelectionType
     {
         Selectable,
-        Targetable,
-        Scannable,
-        Hackable,
-        Analyzable,
-        Communicable,
+        Targetable,   // Weapons
+        Scannable,    // Scanner
+        Hackable,     // Hacking
+        Analyzable,   // Target analysis
+        Communicable, // Comms
         UtilityBeam
     };
 
+    // Entities' faction relationships with one another are either friendly,
+    // neutral, or hostile. On radar, their relationship is either known
+    // (relationship is visible) or unknown (not scanned or interacted with).
+    //
+    // Targetability can depend on both dimensions. For instance, an entity
+    // whose FoF is unknown might be targetable by weapons regardless of faction
+    // relationship, while if its FoF is both known and friendly, it might not
+    // be weapons targetable. Different targeting navigation methods, such as
+    // selecting the next enemy or unscanned target, also filter by FoF type.
     enum class KnownFriendOrFoe
     {
-        Any,
-        Known,
-        Unknown,
-        KnownFriendly,
-        KnownNonFriendly,
-        NotKnownFriendly,
-        KnownNeutral,
-        KnownNonNeutral,
-        NotKnownNeutral,
-        KnownHostile,
-        KnownNonHostile,
-        NotKnownHostile
+        Any,              // Any FoF state
+        Known,            // If FoF is known
+        Unknown,          // If unknown
+        KnownFriendly,    // If known and friendly
+        KnownNonFriendly, // If known and either neutral or hostile
+        NotKnownFriendly, // If unknown, neutral, or hostile
+        KnownNeutral,     // If known and neither friendly nor hostile
+        KnownNonNeutral,  // If known and either friendly or hostile
+        NotKnownNeutral,  // If unknown, friendly, or hostile
+        KnownHostile,     // If known and hostile
+        KnownNonHostile,  // If known and either neutral or friendly
+        NotKnownHostile   // If unknown, neutral, or friendly
     };
 
     TargetsContainer();

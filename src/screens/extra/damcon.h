@@ -21,7 +21,6 @@ private:
     };
 
     GuiShipInternalView* internal_view;
-    float room_size = 72.0f; // 48.0f * 1.5f
     GuiKeyValueDisplay* hull_display;
     GuiKeyValueDisplay* shield_display;
     GuiKeyValueDisplay* energy_display;

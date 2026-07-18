@@ -14,7 +14,6 @@
 #include "screens/crew6/scienceScreen.h"
 #include "screens/crew6/relayScreen.h"
 #include "screens/crew4/tacticalScreen.h"
-#include "screens/crew4/engineeringAdvancedScreen.h"
 #include "screens/crew4/operationsScreen.h"
 
 #include "menus/luaConsole.h"
@@ -23,6 +22,7 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_button.h"
+
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/indicatorOverlays.h"
@@ -34,8 +34,10 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
     instance = this;
     new LocalOnlyGame();
 
+    // Draw background elements.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
+    (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiledThemed("background.crosses");
 
     this->viewport = nullptr;
     this->repeated_tutorial = repeated_tutorial;
@@ -61,15 +63,28 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 void TutorialGame::createScreens()
 {
     viewport = new GuiViewport3D(this, "");
-    viewport->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft);
+    viewport
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     tactical_radar = new GuiRadarView(this, "TACTICAL", nullptr);
-    tactical_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
+    tactical_radar
+        ->setRangeIndicatorStepSize(1000.0f)
+        ->shortRange()
+        ->enableCallsigns()
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
+
     long_range_radar = new GuiRadarView(this, "LONG_RANGE", nullptr);
-    long_range_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
-    long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+    long_range_radar
+        ->setRangeIndicatorStepSize(5000.0f)
+        ->longRange()
+        ->enableCallsigns()
+        ->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
 
     station_screen[0] = new HelmsScreen(this);
     station_screen[1] = new WeaponsScreen(this);
@@ -77,94 +92,115 @@ void TutorialGame::createScreens()
     station_screen[3] = new ScienceScreen(this);
     station_screen[4] = new RelayScreen(this, true);
     station_screen[5] = new TacticalScreen(this);
-    station_screen[6] = new EngineeringAdvancedScreen(this);
+    station_screen[6] = new EngineeringScreen(this, CrewPosition::engineeringPlus);
     station_screen[7] = new OperationScreen(this);
-    for(int n=0; n<8; n++)
-        station_screen[n]->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft);
+
+    for (int n = 0; n < 8; n++)
+        station_screen[n]
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+            ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft);
 
     new GuiIndicatorOverlays(this);
 
     frame = new GuiPanel(this, "");
-    frame->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(900, 230)->hide();
+    frame
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter)
+        ->setSize(900.0f, 230.0f)
+        ->hide();
 
     text = new GuiScrollFormattedText(frame, "", "");
-    text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
-    next_button = new GuiButton(frame, "", tr("Next"), [this]() {
-        LuaConsole::checkResult(_onNext.call<void>());
-    });
-    next_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
+    text
+        ->setTextSize(20.0f)
+        ->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)
+        ->setSize(860.0f /* 900.0f - 40.0f */, 160.0f /* 200.0f - 40.0f */);
+
+    next_button = new GuiButton(frame, "", tr("Next"),
+        [this]()
+        {
+            LuaConsole::checkResult(_onNext.call<void>());
+        }
+    );
+    next_button
+        ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
+        ->setSize(300.0f, 30.0f);
 
     if (repeated_tutorial)
     {
-        (new GuiButton(this, "", tr("Reset"), []()
-        {
-            finish();
-        }))->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(120, 50);
+        (new GuiButton(this, "", tr("Reset"),
+            []()
+            {
+                finish();
+            }
+        ))
+            ->setPosition(-20.0f, 20.0f, sp::Alignment::TopRight)
+            ->setSize(120.0f, GuiElement::GuiSizeRow);
     }
     hideAllScreens();
 
-    engine->setGameSpeed(1.0);
+    engine->setGameSpeed(1.0f);
 }
 
 void TutorialGame::update(float delta)
 {
-    if (keys.escape.getDown())
-        quit(); // NOT finish() -- finish can choose to loop
-    if (my_spaceship)
+    // quit(), don't finish(); finish can choose to loop
+    if (keys.escape.getDown()) quit();
+
+    if (!my_spaceship) return;
+
+    auto pc = my_spaceship.getComponent<PlayerControl>();
+    auto physics = my_spaceship.getComponent<sp::Transform>();
+    float target_camera_yaw = physics
+        ? physics->getRotation()
+        : 0.0f;
+
+    switch (pc ? pc->main_screen_setting : MainScreenSetting::Front)
     {
-        auto pc = my_spaceship.getComponent<PlayerControl>();
-        auto physics = my_spaceship.getComponent<sp::Transform>();
-        float target_camera_yaw = physics ? physics->getRotation() : 0.0f;
-        switch(pc ? pc->main_screen_setting : MainScreenSetting::Front)
-        {
-        case MainScreenSetting::Back: target_camera_yaw += 180; break;
-        case MainScreenSetting::Left: target_camera_yaw -= 90; break;
-        case MainScreenSetting::Right: target_camera_yaw += 90; break;
-        default: break;
-        }
-        camera_pitch = 30.0f;
-
-        const float camera_ship_distance = 420.0f;
-        const float camera_ship_height = 420.0f;
-        glm::vec2 cameraPosition2D = (physics ? physics->getPosition() : glm::vec2{0, 0}) + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
-        glm::vec3 targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
-
-        camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
-        camera_yaw += angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
+    case MainScreenSetting::Back:  target_camera_yaw += 180.0f; break;
+    case MainScreenSetting::Left:  target_camera_yaw -=  90.0f; break;
+    case MainScreenSetting::Right: target_camera_yaw +=  90.0f; break;
+    default: break;
     }
+
+    camera_pitch = 30.0f;
+
+    const float camera_ship_distance = 420.0f;
+    const float camera_ship_height = 420.0f;
+    glm::vec2 cameraPosition2D = (physics ? physics->getPosition() : glm::vec2{0, 0}) + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
+    glm::vec3 targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
+
+    camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
+    camera_yaw += angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
 }
 
 void TutorialGame::setPlayerShip(sp::ecs::Entity ship)
 {
     my_player_info->commandSetShip(ship);
 
-    if (instance->viewport == nullptr)
-        instance->createScreens();
+    if (instance->viewport == nullptr) instance->createScreens();
 }
 
 void TutorialGame::showMessage(string message, bool show_next)
 {
-    if (instance->viewport == nullptr)
-        return;
+    if (instance->viewport == nullptr) return;
 
     instance->frame->show();
     instance->text->setText(message);
+
     if (show_next)
     {
         instance->next_button->show();
-        instance->frame->setSize(900, 230);
+        instance->frame->setSize(900.0f, 230.0f);
     }
     else
     {
         instance->next_button->hide();
-        instance->frame->setSize(900, 200);
+        instance->frame->setSize(900.0f, 200.0f);
     }
 }
 
 void TutorialGame::switchViewToMainScreen()
 {
-    if (instance->viewport == nullptr)
-        return;
+    if (instance->viewport == nullptr) return;
 
     instance->hideAllScreens();
     instance->viewport->show();
@@ -172,8 +208,7 @@ void TutorialGame::switchViewToMainScreen()
 
 void TutorialGame::switchViewToTactical()
 {
-    if (instance->viewport == nullptr)
-        return;
+    if (instance->viewport == nullptr) return;
 
     instance->hideAllScreens();
     instance->tactical_radar->show();
@@ -181,8 +216,7 @@ void TutorialGame::switchViewToTactical()
 
 void TutorialGame::switchViewToLongRange()
 {
-    if (instance->viewport == nullptr)
-        return;
+    if (instance->viewport == nullptr) return;
 
     instance->hideAllScreens();
     instance->long_range_radar->show();
@@ -190,29 +224,25 @@ void TutorialGame::switchViewToLongRange()
 
 void TutorialGame::switchViewToScreen(int n)
 {
-    if (instance->viewport == nullptr)
-        return;
+    if (instance->viewport == nullptr) return;
+    if (n < 0 || n >= 8) return;
 
-    if (n < 0 || n >= 8)
-        return;
     instance->hideAllScreens();
     instance->station_screen[n]->show();
 }
 
 void TutorialGame::setMessageToTopPosition()
 {
-    if (instance->viewport == nullptr)
-        return;
+    if (instance->viewport == nullptr) return;
 
-    instance->frame->setPosition(0, 0, sp::Alignment::TopCenter);
+    instance->frame->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter);
 }
 
 void TutorialGame::setMessageToBottomPosition()
 {
-    if (instance->viewport == nullptr)
-        return;
+    if (instance->viewport == nullptr) return;
 
-    instance->frame->setPosition(0, -50, sp::Alignment::BottomCenter);
+    instance->frame->setPosition(0.0f, -50.0f, sp::Alignment::BottomCenter);
 }
 
 void TutorialGame::finish()
@@ -237,9 +267,8 @@ void TutorialGame::finish()
 
         auto res = gameGlobalInfo->main_scenario_script->call<void>("tutorial_init");
         LuaConsole::checkResult(res);
-    } else {
-        quit();
     }
+    else quit();
 }
 
 void TutorialGame::quit()
@@ -251,17 +280,14 @@ void TutorialGame::quit()
 
 void TutorialGame::hideAllScreens()
 {
-    if (viewport == nullptr)
-        return;
+    if (viewport == nullptr) return;
 
     viewport->hide();
     tactical_radar->hide();
     long_range_radar->hide();
 
-    for(int n=0; n<8; n++)
-    {
+    for (int n = 0; n < 8; n++)
         station_screen[n]->hide();
-    }
 }
 
 void LocalOnlyGame::update(float delta)

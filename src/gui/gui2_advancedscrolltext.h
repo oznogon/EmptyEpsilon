@@ -1,5 +1,4 @@
-#ifndef GUI2_ADVANCEDSCROLLTEXT_H
-#define GUI2_ADVANCEDSCROLLTEXT_H
+#pragma once
 
 #include "gui2_element.h"
 #include "gui2_scrollbar.h"
@@ -20,9 +19,9 @@ protected:
 
     std::vector<Entry> entries;
     GuiScrollbar* scrollbar;
-    float text_size;
+    float text_size = 30.0f;
     float rect_width;
-    float max_prefix_width;
+    float max_prefix_width = 0.0f;
     std::map<float, int> prefix_widths;
     bool auto_scroll_down;
     Entry prepEntry(Entry& e);
@@ -45,5 +44,3 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
-
-#endif//GUI2_ADVANCEDSCROLLTEXT_H

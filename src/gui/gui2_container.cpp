@@ -111,7 +111,7 @@ void GuiContainer::updateLayout(const sp::Rect& bounds)
 
         glm::vec2 padding_size(layout.padding.left + layout.padding.right, layout.padding.top + layout.padding.bottom);
         layout_manager->updateLoop(*this, sp::Rect(rect.position + glm::vec2{layout.padding.left, layout.padding.top}, rect.size - padding_size));
-        if (layout.match_content_size)
+        if (layout.match_content_x || layout.match_content_y)
         {
             bool has_visible_child = false;
             glm::vec2 content_size_min;
@@ -125,24 +125,36 @@ void GuiContainer::updateLayout(const sp::Rect& bounds)
                     glm::vec2 p1 = p0 + w->rect.size;
                     if (!has_visible_child)
                     {
-                        content_size_min = {p0.x - w->layout.margin.left, p0.y - w->layout.margin.top};
-                        content_size_max = {p1.x + w->layout.margin.right, p1.y + w->layout.margin.bottom};
+                        content_size_min = {
+                            p0.x - w->layout.margin.left,
+                            p0.y - w->layout.margin.top
+                        };
+                        content_size_max = {
+                            p1.x + w->layout.margin.right,
+                            p1.y + w->layout.margin.bottom
+                        };
                         has_visible_child = true;
                     }
                     else
                     {
-                        content_size_min.x = std::min(content_size_min.x, p0.x - w->layout.margin.left);
-                        content_size_min.y = std::min(content_size_min.y, p0.y - w->layout.margin.top);
-                        content_size_max.x = std::max(content_size_max.x, p1.x + w->layout.margin.right);
-                        content_size_max.y = std::max(content_size_max.y, p1.y + w->layout.margin.bottom);
+                        content_size_min = {
+                            std::min(content_size_min.x, p0.x - w->layout.margin.left),
+                            std::min(content_size_min.y, p0.y - w->layout.margin.top)
+                        };
+                        content_size_max = {
+                            std::max(content_size_max.x, p1.x + w->layout.margin.right),
+                            std::max(content_size_max.y, p1.y + w->layout.margin.bottom)
+                        };
                     }
                 }
             }
 
             if (has_visible_child)
             {
-                this->rect.size = (content_size_max - content_size_min) + padding_size;
-                layout.size = this->rect.size;
+                auto new_size = (content_size_max - content_size_min) + padding_size;
+                if (layout.match_content_x) rect.size.x = new_size.x;
+                if (layout.match_content_y) rect.size.y = new_size.y;
+                layout.size = rect.size;
             }
         }
     }
@@ -187,19 +199,22 @@ bool GuiContainer::setAttribute(const string& key, const string& value)
         auto p = value.partition(",");
         layout.size.x = p.first.strip().toFloat();
         layout.size.y = p.second.strip().toFloat();
-        layout.match_content_size = false;
+        layout.match_content_x = false;
+        layout.match_content_y = false;
         return true;
     }
     else if (key == "width")
     {
         layout.size.x = value.toFloat();
-        layout.match_content_size = false;
+        layout.match_content_x = false;
+        layout.match_content_y = false;
         return true;
     }
     else if (key == "height")
     {
         layout.size.y = value.toFloat();
-        layout.match_content_size = false;
+        layout.match_content_x = false;
+        layout.match_content_y = false;
         return true;
     }
     else if (key == "position")
@@ -263,19 +278,22 @@ bool GuiContainer::setAttribute(const string& key, const string& value)
         else
             layout.fill_height = layout.fill_width = value.toBool();
 
-        layout.match_content_size = false;
+        layout.match_content_x = false;
+        layout.match_content_y = false;
         return true;
     }
     else if (key == "fill_height")
     {
         layout.fill_height = value.toBool();
-        layout.match_content_size = false;
+        layout.match_content_x = false;
+        layout.match_content_y = false;
         return true;
     }
     else if (key == "fill_width")
     {
         layout.fill_width = value.toBool();
-        layout.match_content_size = false;
+        layout.match_content_x = false;
+        layout.match_content_y = false;
         return true;
     }
     else

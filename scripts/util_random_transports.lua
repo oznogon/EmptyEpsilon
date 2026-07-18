@@ -7,7 +7,8 @@ transportList = {}
 spawn_delay = 0
 
 function vectorFromAngle(angle, length)
-    return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
+    return math.cos(angle / 180 * math.pi) * length,
+        math.sin(angle / 180 * math.pi) * length
 end
 
 function init()

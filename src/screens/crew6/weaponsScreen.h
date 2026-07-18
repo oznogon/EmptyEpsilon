@@ -12,7 +12,6 @@ class GuiLabel;
 class GuiMissileTubeControls;
 class GuiRadarView;
 class GuiToggleButton;
-class GuiRotationDial;
 class GuiSelector;
 class GuiCustomShipFunctions;
 class GuiUtilityBeamControls;
@@ -33,6 +32,7 @@ private:
     AimLock* missile_aim;
     AimLockButton* lock_aim;
     GuiElement* beam_info_box;
+    GuiToggleButton* beam_safety;
     GuiSelector* sidebar_selector;
     GuiCustomShipFunctions* custom_function_sidebar;
     GuiUtilityBeamControls* utility_beam_sidebar;

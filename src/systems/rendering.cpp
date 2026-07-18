@@ -9,76 +9,128 @@
 #include "tween.h"
 #include "random.h"
 #include "components/maneuveringthrusters.h"
+#include "dynamicLight.h"
 #include <algorithm>
 
 std::vector<RenderSystem::RenderHandler> RenderSystem::render_handlers;
 std::function<void()> RenderSystem::post_opaque_render;
+std::vector<RenderSystem::NebulaOccluder> RenderSystem::nebula_occluder_cache;
+
+void RenderSystem::refreshNebulaCache()
+{
+    nebula_occluder_cache.clear();
+    glm::vec2 source{ camera_position.x, camera_position.y };
+
+    for (auto [entity, radar_block, transform] : sp::ecs::Query<RadarBlock, sp::Transform>())
+    {
+        NebulaOccluder occ;
+        occ.position = transform.getPosition();
+        const float occlusion_radius = radar_block.range * 0.8f;
+
+        if (auto nr = entity.getComponent<NebulaRenderer>())
+        {
+            const float fade_zone = nr->skybox_fade_distance > 0.0f
+                ? nr->skybox_fade_distance
+                : 1000.0f;
+            const float camera_dist = glm::length(source - occ.position);
+            const float transition_start = nr->radius + 1.5f * fade_zone;
+            const float transition_end = std::max(0.0f, nr->radius - 0.5f * fade_zone);
+
+            float t = (camera_dist - nr->radius) / (transition_start - nr->radius);
+            t = std::clamp(t, 0.0f, 1.0f);
+            t = t * t * (3.0f - 2.0f * t);
+            occ.occlusion_radius = transition_end * t;
+        }
+        else
+        {
+            if (glm::length(source - occ.position) >= occlusion_radius)
+                occ.occlusion_radius = occlusion_radius;
+            else
+                occ.occlusion_radius = 0.0f;
+        }
+
+        nebula_occluder_cache.push_back(occ);
+    }
+}
 
 bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target)
 {
-    for (auto [entity, radar_block, transform] : sp::ecs::Query<RadarBlock, sp::Transform>())
+    refreshNebulaCache();
+    return isOccludedByNebula(source, target, nebula_occluder_cache);
+}
+
+bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target, const std::vector<NebulaOccluder>& occluders)
+{
+    for (const auto& occ : occluders)
     {
-        glm::vec2 nebula_pos = transform.getPosition();
-        float range = radar_block.range * 0.8f;
-
-        // Camera inside occlusion radius: no occlusion for this nebula
-        if (glm::length2(source - nebula_pos) < range * range)
-            continue;
-
-        // Target inside occlusion radius: occluded
-        if (glm::length2(target - nebula_pos) < range * range)
+        // Target occluded due to being inside occlusion radius.
+        if (glm::length2(target - occ.position) < occ.occlusion_radius * occ.occlusion_radius)
             return true;
 
-        // Target behind occlusion radius: occluded if line from camera to target passes through it
-        glm::vec2 diff = target - source;
-        float dist = glm::length(diff);
+        // Target occluded due to the line from camera to target passing through
+        // the occlusion radius.
+        const glm::vec2 diff = target - source;
+        const float dist = glm::length(diff);
         if (dist < 0.01f) continue;
 
-        float f = glm::dot(diff, nebula_pos - source) / dist;
-        if (f < 0.0f) f = 0.0f;
-        if (f > dist) f = dist;
-        glm::vec2 q = source + diff * (f / dist);
+        const float f = std::clamp(glm::dot(diff, occ.position - source) / dist, 0.0f, dist);
+        const glm::vec2 q = source + diff * (f / dist);
 
-        if (glm::length2(q - nebula_pos) < range * range)
+        if (glm::length2(q - occ.position) < occ.occlusion_radius * occ.occlusion_radius)
             return true;
     }
+
     return false;
 }
 
 void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType projection_type, float far_plane)
 {
+    refreshNebulaCache();
     view_vector = vec2FromAngle(camera_yaw);
-    depth_cutoff_back = camera_position.z * -tanf(glm::radians(90+camera_pitch + camera_fov/2.f));
-    depth_cutoff_front = camera_position.z * -tanf(glm::radians(90+camera_pitch - camera_fov/2.f));
-    if (camera_pitch - camera_fov/2.f <= 0.f)
-        depth_cutoff_front = std::numeric_limits<float>::infinity();
-    if (camera_pitch + camera_fov/2.f >= 180.f)
-        depth_cutoff_back = -std::numeric_limits<float>::infinity();
-    for(auto& handler : render_handlers)
-        (this->*(handler.func))(handler.rif);
-
-    for(auto& render_list : render_lists)
+    if (camera_position.z <= 0.0f)
     {
-        for(auto it = render_list.begin(); it != render_list.end(); )
+        depth_cutoff_near = -std::numeric_limits<float>::infinity();
+        depth_cutoff_far = std::numeric_limits<float>::infinity();
+    }
+    else
+    {
+        float near_angle = glm::radians(camera_pitch + camera_fov * 0.5f);
+        float far_angle = glm::radians(camera_pitch - camera_fov * 0.5f);
+        depth_cutoff_near = camera_position.z * glm::cos(near_angle) / glm::sin(near_angle);
+        depth_cutoff_far = camera_position.z * glm::cos(far_angle) / glm::sin(far_angle);
+        if (camera_pitch + camera_fov * 0.5f >= 180.f)
+            depth_cutoff_near = -std::numeric_limits<float>::infinity();
+        if (camera_pitch - camera_fov * 0.5f <= 0.0f)
+            depth_cutoff_far = std::numeric_limits<float>::infinity();
+    }
+    for (auto& handler : render_handlers) (this->*(handler.func))(handler.rif);
+
+    for (auto& render_list : render_lists)
+    {
+        for (auto it = render_list.begin(); it != render_list.end(); )
         {
             if (!it->entity.hasComponent<NeverRadarBlocked>()
                 && !it->entity.hasComponent<RadarBlock>()
-                && isOccludedByNebula(glm::vec2(camera_position.x, camera_position.y), it->transform->getPosition()))
+                && isOccludedByNebula(glm::vec2(camera_position.x, camera_position.y),
+                                      it->transform->getPosition(),
+                                      nebula_occluder_cache))
                 it = render_list.erase(it);
-            else
-                ++it;
+            else ++it;
         }
     }
 
     // Sort all render lists back-to-front once
-    for(int n=render_lists.size() - 1; n >= 0; n--)
+    for (int n = render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
-        std::sort(render_list.begin(), render_list.end(), [](const RenderEntry& a, const RenderEntry& b) { return a.depth > b.depth; });
+        std::sort(render_list.begin(), render_list.end(),
+            [](const RenderEntry& a, const RenderEntry& b)
+            { return a.depth > b.depth; }
+        );
     }
 
     // Opaque passes (back to front)
-    for(int n=render_lists.size() - 1; n >= 0; n--)
+    for (int n = render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
         glm::mat4 projection;
@@ -89,7 +141,7 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
             float reference_distance = std::max(100.0f, camera_position.z);
             float height = reference_distance * glm::tan(glm::radians(camera_fov / 2.0f));
             float width = height * aspect;
-            projection = glm::ortho(-width, width, -height, height, 1.f, far_plane * (n + 1));
+            projection = glm::ortho(-width, width, -height, height, 1.0f, far_plane * (n + 1));
         }
         else
             projection = glm::perspective(glm::radians(camera_fov), aspect, 1.f, far_plane * (n + 1));
@@ -98,47 +150,77 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
 
         glDepthMask(true);
         glDisable(GL_BLEND);
-        for(auto info : render_list)
+        for (auto info : render_list)
+        {
             if (!info.transparent)
                 info.call_rif(info.rif, info.entity, *info.transform, info.component_ptr);
+        }
     }
 
-    // Post-opaque render (particles): rendered here so transparent nebula clouds cover them
+    // Post-opaque render (particles).
     glEnable(GL_BLEND);
     glDepthMask(false);
-    if (post_opaque_render)
-        post_opaque_render();
+    if (post_opaque_render) post_opaque_render();
     glDepthMask(true);
 
-    // Transparent passes (back to front)
-    for(int n=render_lists.size() - 1; n >= 0; n--)
+    // Transparent passes, non-nebula first, back to front
+    for (int n = render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
         glm::mat4 projection;
         if (projection_type == ProjectionType::Orthographic)
         {
-            float reference_distance = std::max(100.0f, camera_position.z);
-            float height = reference_distance * glm::tan(glm::radians(camera_fov / 2.0f));
-            float width = height * aspect;
-            projection = glm::ortho(-width, width, -height, height, 1.f, far_plane * (n + 1));
+            const float reference_distance = std::max(100.0f, camera_position.z);
+            const float height = reference_distance * glm::tan(glm::radians(camera_fov * 0.5f));
+            const float width = height * aspect;
+            projection = glm::ortho(-width, width, -height, height, 1.0f, far_plane * (n + 1));
+        }
+        else
+            projection = glm::perspective(glm::radians(camera_fov), aspect, 1.0f, far_plane * (n + 1));
+        ShaderRegistry::updateProjectionView(projection, {});
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE);
+        glDepthMask(false);
+        for (auto info : render_list)
+        {
+            if (info.transparent && !info.entity.hasComponent<NebulaRenderer>())
+                info.call_rif(info.rif, info.entity, *info.transform, info.component_ptr);
+        }
+    }
+
+    // Nebula clouds rendered last so alpha blending occludes effects behind them.
+    for (int n=render_lists.size() - 1; n >= 0; n--)
+    {
+        auto& render_list = render_lists[n];
+        glm::mat4 projection;
+        if (projection_type == ProjectionType::Orthographic)
+        {
+            const float reference_distance = std::max(100.0f, camera_position.z);
+            const float height = reference_distance * glm::tan(glm::radians(camera_fov * 0.5f));
+            const float width = height * aspect;
+            projection = glm::ortho(-width, width, -height, height, 1.0f, far_plane * (n + 1));
         }
         else
             projection = glm::perspective(glm::radians(camera_fov), aspect, 1.f, far_plane * (n + 1));
         ShaderRegistry::updateProjectionView(projection, {});
 
         glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ONE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glDepthMask(false);
-        for(auto info : render_list)
-            if (info.transparent)
+        for (auto info : render_list)
+        {
+            if (info.transparent && info.entity.hasComponent<NebulaRenderer>())
                 info.call_rif(info.rif, info.entity, *info.transform, info.component_ptr);
+        }
     }
 }
 
-glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, glm::vec3 mesh_offset, float scale) {
-    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
-    model_matrix = glm::rotate(model_matrix, glm::pi<float>(), glm::vec3{ 0.f, 0.f, 1.f });
-    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
+glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, glm::vec3 mesh_offset, float scale)
+{
+    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.0f });
+    model_matrix = glm::rotate(model_matrix, glm::pi<float>(), glm::vec3{ 0.0f, 0.0f, 1.0f });
+    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.0f, 0.0f, 1.0f });
     model_matrix = glm::translate(model_matrix, mesh_offset);
     model_matrix = glm::scale(model_matrix, glm::vec3{scale});
 
@@ -148,7 +230,8 @@ glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, glm::vec3 mes
 ShaderRegistry::ScopedShader lookUpShader(MeshRenderComponent& mrc)
 {
     auto shader_id = ShaderRegistry::Shaders::Object;
-    if (mrc.getNormalTexture()) {
+    if (mrc.getNormalTexture())
+    {
         if (mrc.getTexture() && mrc.getSpecularTexture() && mrc.getIlluminationTexture())
             shader_id = ShaderRegistry::Shaders::ObjectSpecularIlluminationNormal;
         else if (mrc.getTexture() && mrc.getSpecularTexture())
@@ -157,7 +240,9 @@ ShaderRegistry::ScopedShader lookUpShader(MeshRenderComponent& mrc)
             shader_id = ShaderRegistry::Shaders::ObjectIlluminationNormal;
         else
             shader_id = ShaderRegistry::Shaders::ObjectNormal;
-    } else {
+    }
+    else
+    {
         if (mrc.getTexture() && mrc.getSpecularTexture() && mrc.getIlluminationTexture())
             shader_id = ShaderRegistry::Shaders::ObjectSpecularIllumination;
         else if (mrc.getTexture() && mrc.getSpecularTexture())
@@ -171,8 +256,7 @@ ShaderRegistry::ScopedShader lookUpShader(MeshRenderComponent& mrc)
 
 void activateAndBindMeshTextures(MeshRenderComponent& mrc)
 {
-    if (mrc.getTexture())
-        mrc.getTexture()->bind();
+    if (mrc.getTexture()) mrc.getTexture()->bind();
 
     if (mrc.getSpecularTexture())
     {
@@ -222,10 +306,11 @@ void MeshRenderSystem::update(float delta)
 void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, MeshRenderComponent& mrc)
 {
     auto model_matrix = calculateModelMatrix(
-            transform.getPosition(),
-            transform.getRotation(),
-            mrc.mesh_offset,
-            mrc.scale);
+        transform.getPosition(),
+        transform.getRotation(),
+        mrc.mesh_offset,
+        mrc.scale
+    );
 
     // Bank slightly around forward axis while rotating.
     if (mrc.bank_angle != 0.0f)
@@ -240,21 +325,20 @@ void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Mes
     auto shader = lookUpShader(mrc);
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
-    auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
+    auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.0f), {0.0f, 0.0f, 1.0f});
     modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{mrc.scale});
 
     // Lights setup.
     ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
 
-    // Set illumination modulation
+    // Set illumination modulation.
     glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::IlluminationModulation), 1, glm::value_ptr(mrc.illumination_modulation));
 
-    // Textures
+    // Textures.
     activateAndBindMeshTextures(mrc);
 
-    // Draw
+    // Draw.
     drawMesh(mrc, shader);
-
 }
 
 void NebulaRenderSystem::update(float delta)
@@ -263,6 +347,7 @@ void NebulaRenderSystem::update(float delta)
 
 void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, NebulaRenderer& nr)
 {
+    nr.generateCloudsFromSeed();
     if (nr.clouds.empty())
         return;
 
@@ -271,12 +356,16 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     float dist_to_center = glm::length(nebula_pos - camera_2d);
 
     float shell_alpha;
-    if (dist_to_center <= nr.radius)
-        shell_alpha = 1.0f;
-    else
-        shell_alpha = nr.radius / dist_to_center;
+    if (dist_to_center <= nr.radius) shell_alpha = 1.0f;
+    else shell_alpha = nr.radius / dist_to_center;
+
+    const float cloud_density = std::max(0.0f, nr.cloud_density);
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+
+    // Dynamic lights for nebula cloud illumination.
+    // Only lights whose source is inside the nebula radius affect the clouds.
+    const auto& lights = DynamicLightManager::getLights();
 
     struct VertexAndTexCoords
     {
@@ -284,10 +373,10 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
         glm::vec2 texcoords;
     };
     std::array<VertexAndTexCoords, 4> quad{
-        VertexAndTexCoords{glm::vec3{}, {0.f, 1.f}},
-        VertexAndTexCoords{glm::vec3{}, {1.f, 1.f}},
-        VertexAndTexCoords{glm::vec3{}, {1.f, 0.f}},
-        VertexAndTexCoords{glm::vec3{}, {0.f, 0.f}}
+        VertexAndTexCoords{glm::vec3{}, {0.0f, 1.0f}},
+        VertexAndTexCoords{glm::vec3{}, {1.0f, 1.0f}},
+        VertexAndTexCoords{glm::vec3{}, {1.0f, 0.0f}},
+        VertexAndTexCoords{glm::vec3{}, {0.0f, 0.0f}}
     };
 
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -295,16 +384,61 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    // Pre-compute light contributions for all clouds (batched, not per-draw-call)
+    std::vector<float> cloud_lights(nr.clouds.size(), 0.0f);
+    glm::vec3 ring_center = glm::vec3(nebula_pos.x, nebula_pos.y, 0);
+    for (int i = 0; i < static_cast<int>(nr.clouds.size()); i++)
+    {
+        glm::vec3 cloud_pos = ring_center + glm::vec3(nr.clouds[i].offset.x, nr.clouds[i].offset.y, 0);
+        float total = 0.0f;
+        for (const auto& light : lights)
+        {
+            glm::vec2 light_pos_2d{light.position.x, light.position.y};
+            if (glm::length(light_pos_2d - nebula_pos) > nr.radius)
+                continue;
+
+            const float dist = glm::length(cloud_pos - light.position);
+            if (dist < light.radius)
+            {
+                float atten = 1.0f - dist / light.radius;
+                total += light.intensity * atten * atten;
+            }
+        }
+        cloud_lights[i] = std::min(total, 1.0f);
+    }
+
+    // Pre-compute fog ring light contributions
+    std::array<float, 6> ring_lights{};
+    for (int v = 0; v < 6; v++)
+    {
+        float volume_size = nr.radius * (0.3f + v * 0.15f);
+        float total = 0.0f;
+        for (const auto& light : lights)
+        {
+            glm::vec2 light_pos_2d{light.position.x, light.position.y};
+            if (glm::length(light_pos_2d - nebula_pos) > nr.radius)
+                continue;
+            float dist_to_ring_center = glm::length(light.position - ring_center);
+            float dist_to_ring = std::abs(dist_to_ring_center - volume_size);
+            if (dist_to_ring < light.radius)
+            {
+                float atten = 1.0f - dist_to_ring / light.radius;
+                total += light.intensity * atten * atten;
+            }
+        }
+        ring_lights[v] = std::min(total, 1.0f);
+    }
+
     // Render fog volume billboards when camera is near or inside the nebula
     if (shell_alpha > 0.001f)
     {
-        float volume_color_val = 0.25f;
         for (int v = 0; v < 6; v++)
         {
             int tex_idx = v % nr.clouds.size();
             auto& cloud = nr.clouds[tex_idx];
             float volume_size = nr.radius * (0.3f + v * 0.15f);
-            float volume_alpha = shell_alpha * 0.8f * (1.0f - v * 0.16f);
+            float volume_alpha = shell_alpha * 0.8f * (1.0f - v * 0.16f) * cloud_density;
+            float volume_color_val = 0.25f + ring_lights[v] * 0.5f;
 
             if (!cloud.texture.ptr)
                 cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
@@ -330,6 +464,10 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
             }
 
             glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), volume_color_val, volume_alpha, 0.0f, volume_size);
+            {
+                auto loc = shader.get().get()->getUniformLocation("u_lightIntensity");
+                if (loc != -1) glUniform1f(loc, ring_lights[v]);
+            }
 
             auto volume_model = glm::identity<glm::mat4>();
             glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(volume_model));
@@ -344,35 +482,37 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     // Build sorted list of cloud indices (back to front)
     std::vector<int> sorted_indices;
     sorted_indices.reserve(nr.clouds.size());
-    for (int i = 0; i < (int)nr.clouds.size(); i++)
+    for (int i = 0; i < static_cast<int>(nr.clouds.size()); i++)
         sorted_indices.push_back(i);
 
-    std::sort(sorted_indices.begin(), sorted_indices.end(), [&](int a, int b) {
-        glm::vec3 pos_a = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(nr.clouds[a].offset.x, nr.clouds[a].offset.y, 0);
-        glm::vec3 pos_b = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(nr.clouds[b].offset.x, nr.clouds[b].offset.y, 0);
-        return glm::length2(camera_position - pos_a) > glm::length2(camera_position - pos_b);
-    });
+    std::sort(sorted_indices.begin(), sorted_indices.end(),
+        [&](int a, int b)
+        {
+            glm::vec3 pos_a = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(nr.clouds[a].offset.x, nr.clouds[a].offset.y, 0);
+            glm::vec3 pos_b = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(nr.clouds[b].offset.x, nr.clouds[b].offset.y, 0);
+            return glm::length2(camera_position - pos_a) > glm::length2(camera_position - pos_b);
+        }
+    );
 
     for (int idx : sorted_indices)
     {
         auto& cloud = nr.clouds[idx];
-        glm::vec3 cloud_pos = glm::vec3(nebula_pos.x, nebula_pos.y, 0) + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
+        glm::vec3 cloud_pos = ring_center + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
 
-        float per_cloud_alpha = 0.6f * shell_alpha;
+        float per_cloud_alpha = 0.6f * shell_alpha * cloud_density;
 
-        if (per_cloud_alpha <= 0.0f)
-            continue;
+        if (per_cloud_alpha <= 0.0f) continue;
 
         // Per-cloud billboard rotation for visual variety
-        float rotation = glm::mod(cloud.offset.x * 1.73f + cloud.offset.y * 3.14f, 360.0f);
-        float cos_r = glm::cos(glm::radians(rotation));
-        float sin_r = glm::sin(glm::radians(rotation));
+        const float rotation = glm::mod(cloud.offset.x * 1.73f + cloud.offset.y * 3.14f, 360.0f);
+        const float cos_r = glm::cos(glm::radians(rotation));
+        const float sin_r = glm::sin(glm::radians(rotation));
 
         VertexAndTexCoords rquad[4];
         for (int v = 0; v < 4; v++)
         {
-            float u = quad[v].texcoords.x - 0.5f;
-            float vt = quad[v].texcoords.y - 0.5f;
+            const float u = quad[v].texcoords.x - 0.5f;
+            const float vt = quad[v].texcoords.y - 0.5f;
             rquad[v].vertex = cloud_pos;
             rquad[v].texcoords = {
                 u * cos_r - vt * sin_r + 0.5f,
@@ -387,8 +527,13 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-        float color_val = 0.8f;
+        float cloud_light = cloud_lights[idx];
+        float color_val = std::min(0.8f + cloud_light * 0.3f, 1.0f);
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), color_val, per_cloud_alpha, 0.0f, cloud.size);
+        {
+            auto loc = shader.get().get()->getUniformLocation("u_lightIntensity");
+            if (loc != -1) glUniform1f(loc, cloud_light);
+        }
 
         auto cloud_model_matrix = glm::identity<glm::mat4>();
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(cloud_model_matrix));
@@ -405,10 +550,10 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
 
 void ExplosionRenderSystem::update(float delta)
 {
-    for(auto [entity, ee] : sp::ecs::Query<ExplosionEffect>()) {
+    for (auto [entity, ee] : sp::ecs::Query<ExplosionEffect>())
+    {
         ee.lifetime -= delta;
-        if (ee.lifetime < 0.0f)
-            entity.destroy();
+        if (ee.lifetime < 0.0f) entity.destroy();
     }
 }
 
@@ -434,10 +579,10 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
             scale *= 0.8f;
     } else {
         if (ee.electrical)
-            scale = Tween<float>::easeOutQuad(f, 0.2f, 1.f, 0.8f, 1.0f);
+            scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 0.8f, 1.0f);
         else
-            scale = Tween<float>::easeOutQuad(f, 0.2f, 1.f, 1.0f, 1.3f);
-        alpha = Tween<float>::easeInQuad(f, 0.2f, 1.f, 0.5f, 0.0f);
+            scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 1.0f, 1.3f);
+        alpha = Tween<float>::easeInQuad(f, 0.2f, 1.0f, 0.5f, 0.0f);
     }
 
     auto position = transform.getPosition();

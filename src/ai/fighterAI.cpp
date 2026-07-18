@@ -4,6 +4,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/collision.h"
 #include "components/target.h"
+#include "components/beamweapon.h"
 #include "systems/missilesystem.h"
 #include "ai/fighterAI.h"
 #include "ai/aiFactory.h"
@@ -30,11 +31,38 @@ bool FighterAI::canSwitchAI()
     return true;
 }
 
-void FighterAI::run(float delta)
+void FighterAI::runLight(float delta)
 {
     if (timeout > 0.0f)
         timeout -= delta;
-    ShipAI::run(delta);
+
+    // Evade state sets rotation/impulse directly (no route). These
+    // perishable commands must be re-applied every frame since
+    // ShipAI::runLight resets them. runAttack() only runs on heavy
+    // frames (~117ms apart), so without this the fighter coasts.
+    if (attack_state == State::Evade)
+    {
+        // Do the essential light work manually to avoid ShipAI::runLight
+        // resetting thrusters/impulse or firing missiles during evade.
+        pathPlanner.tryCollectResult();
+
+        if (missile_fire_delay > 0.0f) missile_fire_delay -= delta;
+        if (pathfind_cooldown > 0.0f) pathfind_cooldown -= delta;
+        if (update_target_delay > 0.0f) update_target_delay -= delta;
+
+        auto thrusters = owner.getComponent<ManeuveringThrusters>();
+        if (thrusters) thrusters->target = evade_direction;
+        auto impulse = owner.getComponent<ImpulseEngine>();
+        if (impulse) impulse->request = 1.0f;
+        return;
+    }
+
+    ShipAI::runLight(delta);
+}
+
+void FighterAI::runHeavy(float delta)
+{
+    ShipAI::runHeavy(delta);
 }
 
 void FighterAI::runOrders()
@@ -70,8 +98,25 @@ void FighterAI::runAttack(sp::ecs::Entity target)
                     {
                         MissileSystem::fire(owner, tube, target_angle, target);
                         missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
+                        strafing_fired = true;
                     }
                 }
+            }
+        }
+
+        if (!strafing_fired)
+        {
+            float target_angle = vec2ToAngle(position_diff);
+
+            if (has_beams && distance < beam_weapon_range * 0.9f)
+            {
+                float rotation_diff = fabs(angleDifference(target_angle, transform->getRotation()));
+                if (rotation_diff < 45.0f)
+                    strafing_fired = true;
+            }
+            else if (!has_beams && distance < 500 + (target_physics ? target_physics->getSize().x : 0.0f))
+            {
+                strafing_fired = true;
             }
         }
 
@@ -102,6 +147,7 @@ void FighterAI::runAttack(sp::ecs::Entity target)
         if (distance > 2500 || timeout <= 0.0f)
         {
             attack_state = State::Dive;
+            strafing_fired = false;
         }
         else
         {
@@ -116,6 +162,7 @@ void FighterAI::runAttack(sp::ecs::Entity target)
         if ((shields && !shields->entries.empty() && shields->entries[0].level < shields->entries[0].max * 0.9f) || timeout <= 0.0f)
         {
             attack_state = State::Dive;
+            strafing_fired = false;
         }else{
             auto target_position = tt->getPosition();
             float circle_distance = 3000.0f;

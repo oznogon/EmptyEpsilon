@@ -333,141 +333,141 @@ msgctxt "orders-comms"
 msgid "Defend friendly stations."
 msgstr "Défendre les stations amies."
 
-#: scripts/scenario_29_surf.lua:140 scripts/scenario_29_surf.lua:284
+#: scripts/scenario_29_surf.lua:140 scripts/scenario_29_surf.lua:281
 msgctxt "situationReport-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
 
-#: scripts/scenario_29_surf.lua:143 scripts/scenario_29_surf.lua:285
+#: scripts/scenario_29_surf.lua:143 scripts/scenario_29_surf.lua:282
 msgctxt "situationReport-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
 
-#: scripts/scenario_29_surf.lua:146 scripts/scenario_29_surf.lua:286
+#: scripts/scenario_29_surf.lua:146 scripts/scenario_29_surf.lua:283
 msgctxt "situationReport-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
 msgstr ""
 
-#: scripts/scenario_29_surf.lua:151 scripts/scenario_29_surf.lua:273
+#: scripts/scenario_29_surf.lua:151 scripts/scenario_29_surf.lua:270
 msgctxt "situationReport-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
 
-#: scripts/scenario_29_surf.lua:154 scripts/scenario_29_surf.lua:274
+#: scripts/scenario_29_surf.lua:154 scripts/scenario_29_surf.lua:271
 msgctxt "situationReport-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
 
-#: scripts/scenario_29_surf.lua:157 scripts/scenario_29_surf.lua:275
+#: scripts/scenario_29_surf.lua:157 scripts/scenario_29_surf.lua:272
 msgctxt "situationReport-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
 
-#: scripts/scenario_29_surf.lua:162 scripts/scenario_29_surf.lua:262
+#: scripts/scenario_29_surf.lua:162 scripts/scenario_29_surf.lua:259
 msgctxt "situationReport-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
 
-#: scripts/scenario_29_surf.lua:165 scripts/scenario_29_surf.lua:263
+#: scripts/scenario_29_surf.lua:165 scripts/scenario_29_surf.lua:260
 msgctxt "situationReport-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
 
-#: scripts/scenario_29_surf.lua:168 scripts/scenario_29_surf.lua:264
+#: scripts/scenario_29_surf.lua:168 scripts/scenario_29_surf.lua:261
 msgctxt "situationReport-comms"
 msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
 msgstr ""
 
-#: scripts/scenario_29_surf.lua:702
+#: scripts/scenario_29_surf.lua:699
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minutes and %s seconds"
 msgstr "%s heures, %s minutes et %s secondes"
 
-#: scripts/scenario_29_surf.lua:704
+#: scripts/scenario_29_surf.lua:701
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minutes and %s second"
 msgstr "%s heures, %s minutes et %s seconde"
 
-#: scripts/scenario_29_surf.lua:708
+#: scripts/scenario_29_surf.lua:705
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minute and %s seconds"
 msgstr "%s heures, %s minute et %s secondes"
 
-#: scripts/scenario_29_surf.lua:710
+#: scripts/scenario_29_surf.lua:707
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minute and %s second"
 msgstr "%s heures, %s minute et %s seconde"
 
-#: scripts/scenario_29_surf.lua:716
+#: scripts/scenario_29_surf.lua:713
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minutes and %s seconds"
 msgstr "%s heure, %s minutes et %s secondes"
 
-#: scripts/scenario_29_surf.lua:718
+#: scripts/scenario_29_surf.lua:715
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minutes and %s second"
 msgstr "%s heure, %s minutes et %s seconde"
 
-#: scripts/scenario_29_surf.lua:722
+#: scripts/scenario_29_surf.lua:719
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minute and %s seconds"
 msgstr "%s heure, %s minute et %s secondes"
 
-#: scripts/scenario_29_surf.lua:724
+#: scripts/scenario_29_surf.lua:721
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minute and %s second"
 msgstr "%s heure, %s minute et %s seconde"
 
-#: scripts/scenario_29_surf.lua:730
+#: scripts/scenario_29_surf.lua:727
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s minutes and %s seconds"
 msgstr "%s minutes et %s secondes"
 
-#: scripts/scenario_29_surf.lua:732
+#: scripts/scenario_29_surf.lua:729
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s minutes and %s second"
 msgstr "%s minutes et %s seconde"
 
-#: scripts/scenario_29_surf.lua:736
+#: scripts/scenario_29_surf.lua:733
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s minute and %s seconds"
 msgstr "%s minute et %s secondes"
 
-#: scripts/scenario_29_surf.lua:739
+#: scripts/scenario_29_surf.lua:736
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s seconds"
 msgstr "%s secondes"
 
-#: scripts/scenario_29_surf.lua:744
+#: scripts/scenario_29_surf.lua:741
 #, lua-format
 msgctxt "name-tab"
 msgid "%s in %s"
 msgstr "%s est en secteur %s"
 
-#: scripts/scenario_29_surf.lua:761
+#: scripts/scenario_29_surf.lua:758
 msgctxt "buttonGM"
 msgid "End with Odin"
 msgstr "Terminer avec l'Odin"
 
-#: scripts/scenario_29_surf.lua:763
+#: scripts/scenario_29_surf.lua:760
 msgctxt "shipLog"
 msgid ""
 "We picked up an anomalous chroniton particle reading nearby. Encoded within "
@@ -486,27 +486,27 @@ msgstr ""
 "part des Fantômes. Nous avons placé un compte à rebours sur certains de vos "
 "postes indiquant quand cet événement est censé se produire."
 
-#: scripts/scenario_29_surf.lua:767
+#: scripts/scenario_29_surf.lua:764
 msgctxt "msgGM"
 msgid "30 second countdown to Odin spawn has begun."
 msgstr "Le compte à rebours de 30s avant l'apparition d'Odin a commencé."
 
-#: scripts/scenario_29_surf.lua:821
+#: scripts/scenario_29_surf.lua:818
 #, lua-format
 msgctxt "timer-tab"
 msgid "Anomalous Time:%s"
 msgstr "Évènement anormal dans %ss"
 
-#: scripts/scenario_29_surf.lua:839
+#: scripts/scenario_29_surf.lua:836
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr "Quels sont nos ordres en cours ?"
 
-#: scripts/scenario_29_surf.lua:842
+#: scripts/scenario_29_surf.lua:839
 msgid "Back"
 msgstr "Précédent"
 
-#: scripts/scenario_29_surf.lua:873 scripts/scenario_29_surf.lua:874
+#: scripts/scenario_29_surf.lua:870 scripts/scenario_29_surf.lua:871
 #, lua-format
 msgctxt "shipLog"
 msgid "Wave %i. Hunt down enemy base."
@@ -514,18 +514,18 @@ msgstr ""
 "Vague n°%i\n"
 "Trouvez et éliminez également la base ennemie."
 
-#: scripts/scenario_29_surf.lua:875 scripts/scenario_29_surf.lua:876
+#: scripts/scenario_29_surf.lua:872 scripts/scenario_29_surf.lua:873
 #, lua-format
 msgctxt "shipLog"
 msgid "Wave %i."
 msgstr "Vague n°%i"
 
-#: scripts/scenario_29_surf.lua:889
+#: scripts/scenario_29_surf.lua:886
 msgctxt "orders-comms"
 msgid "Hunt down enemy base."
 msgstr "Trouver et éliminer tous les ennemis ainsi que leur base."
 
-#: scripts/scenario_29_surf.lua:895
+#: scripts/scenario_29_surf.lua:892
 #, lua-format
 msgctxt "shipLog"
 msgid "%s Asteroid storm reported."
@@ -533,18 +533,18 @@ msgstr ""
 "%s\n"
 "Tempête d'astéroïdes signalée."
 
-#: scripts/scenario_29_surf.lua:900
+#: scripts/scenario_29_surf.lua:897
 #, lua-format
 msgctxt "tabRelay&Ops"
 msgid "Wave %i"
 msgstr "Vague n°%i en cours"
 
-#: scripts/scenario_29_surf.lua:1007
+#: scripts/scenario_29_surf.lua:1004
 msgctxt "shipLog"
 msgid "Defense platform self destruct activated."
 msgstr "Autodestruction des plateformes de défense activée."
 
-#: scripts/scenario_29_surf.lua:1651
+#: scripts/scenario_29_surf.lua:1648
 msgctxt "msgScience"
 msgid ""
 "In addition to jamming our FTL drive, there's a warp jammer that is damaging "
@@ -553,7 +553,7 @@ msgstr ""
 "En plus de bloquer notre moteur FTL (vitesse lumière/téléportation), un "
 "brouilleur FTL endommage également nos faisceaux laser."
 
-#: scripts/scenario_29_surf.lua:1653
+#: scripts/scenario_29_surf.lua:1650
 msgctxt "msgOperations"
 msgid ""
 "In addition to jamming our FTL drive, there's a warp jammer that is damaging "
@@ -562,7 +562,7 @@ msgstr ""
 "En plus de bloquer notre moteur FTL (vitesse lumière/téléportation), un "
 "brouilleur FTL endommage également nos faisceaux laser."
 
-#: scripts/scenario_29_surf.lua:1670
+#: scripts/scenario_29_surf.lua:1667
 msgctxt "msgScience"
 msgid ""
 "In addition to jamming our FTL drive, there's a warp jammer that is damaging "
@@ -571,7 +571,7 @@ msgstr ""
 "En plus de bloquer notre moteur FTL (vitesse lumière/téléportation), un "
 "brouilleur FTL endommage également notre système de missiles."
 
-#: scripts/scenario_29_surf.lua:1672
+#: scripts/scenario_29_surf.lua:1669
 msgctxt "msgOperations"
 msgid ""
 "In addition to jamming our FTL drive, there's a warp jammer that is damaging "
@@ -580,25 +580,25 @@ msgstr ""
 "En plus de bloquer notre moteur FTL (vitesse lumière/téléportation), un "
 "brouilleur FTL endommage également notre système de missiles."
 
-#: scripts/scenario_29_surf.lua:1737
+#: scripts/scenario_29_surf.lua:1734
 msgctxt "msgMainscreen"
 msgid "Surf's up! Let the waves begin."
 msgstr ""
 "Surfez !\n"
 "Que les vagues commencent."
 
-#: scripts/scenario_29_surf.lua:1739
+#: scripts/scenario_29_surf.lua:1736
 msgctxt "msgMainscreen"
 msgid "Wave cleared!"
 msgstr "Vague éliminée !"
 
-#: scripts/scenario_29_surf.lua:1741
+#: scripts/scenario_29_surf.lua:1738
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Wave %i cleared."
 msgstr "Vague n°%i éliminée !"
 
-#: scripts/scenario_29_surf.lua:1753
+#: scripts/scenario_29_surf.lua:1750
 msgctxt "msgMainscreen"
 msgid "All friendly bases destroyed."
 msgstr ""
@@ -606,7 +606,7 @@ msgstr ""
 "\n"
 "Toutes vos bases ont été détruites."
 
-#: scripts/scenario_29_surf.lua:1755
+#: scripts/scenario_29_surf.lua:1752
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -616,7 +616,7 @@ msgstr ""
 "%s\n"
 "%i vaisseaux joueurs déployés."
 
-#: scripts/scenario_29_surf.lua:1757
+#: scripts/scenario_29_surf.lua:1754
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -626,7 +626,7 @@ msgstr ""
 "%s\n"
 "1 vaisseau joueur déployé."
 
-#: scripts/scenario_29_surf.lua:1760
+#: scripts/scenario_29_surf.lua:1757
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -636,7 +636,7 @@ msgstr ""
 "%s\n"
 "%i vagues réussies en difficulté %s."
 
-#: scripts/scenario_29_surf.lua:1762
+#: scripts/scenario_29_surf.lua:1759
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -646,7 +646,7 @@ msgstr ""
 "%s\n"
 "1 seule vague réussie en difficulté %s."
 
-#: scripts/scenario_29_surf.lua:1764
+#: scripts/scenario_29_surf.lua:1761
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -656,7 +656,7 @@ msgstr ""
 "%s\n"
 "Aucune vague réussie en difficulté %s."
 
-#: scripts/scenario_29_surf.lua:1767
+#: scripts/scenario_29_surf.lua:1764
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -666,7 +666,7 @@ msgstr ""
 "%s\n"
 "Vous avez tenu %s."
 
-#: scripts/scenario_29_surf.lua:1769
+#: scripts/scenario_29_surf.lua:1766
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -676,7 +676,7 @@ msgstr ""
 "%s\n"
 "Niveau de difficulté de la vague de départ : %s"
 
-#: scripts/scenario_29_surf.lua:1772
+#: scripts/scenario_29_surf.lua:1769
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""

@@ -5,7 +5,7 @@ function BeamEffect()
     local e = createEntity()
     e.components = {
         transform = {},
-        beam_effect = {beam_texture = "texture/beam_orange.png"},
+        beam_effect = { beam_texture = "texture/beam_orange.png" },
     }
     return e
 end
@@ -17,7 +17,7 @@ local Entity = getLuaEntityFunctionTable()
 function Entity:setSource(source, x, y, z)
     if self.components.beam_effect then
         self.components.beam_effect.source = source
-        self.components.beam_effect.source_offset = {x, y, z}
+        self.components.beam_effect.source_offset = { x, y, z }
     end
     return self
 end

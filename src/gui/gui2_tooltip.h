@@ -4,7 +4,6 @@
 #include "timer.h"
 
 class GuiLabel;
-class GuiPanel;
 class GuiThemeStyle;
 
 // GuiTooltip is a layout container that renders on top of all other elements.
@@ -55,6 +54,11 @@ private:
     // Position locked when triggered by press, so the tooltip doesn't follow
     // the cursor.
     glm::vec2 frozen_position{0.0f, 0.0f};
+    // Ensures the press position is captured once per press rather than reused
+    // from a previous hover or press cycle.
+    bool position_captured_on_press = false;
+    // Tracks the press state across frames to detect release transitions.
+    bool was_pressed = false;
 
     // Called by Anchor::~Anchor() when the watched element's tree is destroyed.
     void anchorDestroyed();

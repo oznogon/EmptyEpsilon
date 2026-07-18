@@ -6,14 +6,16 @@
 #include "glm/vec3.hpp"
 #include "glm/gtc/type_precision.hpp"
 
-
-class BeamWeaponSys : public ShipSystem {
+class BeamWeaponSys : public ShipSystem
+{
 public:
-    class MountPoint {
+    class MountPoint
+    {
     public:
-        glm::vec3 position;//Visual position on the 3D model where this beam is fired from.
+        // Visual position on the 3D model where this beam is fired from.
+        glm::vec3 position;
 
-        //Beam configuration
+        // Beam configuration
         float arc = 0.0f;
         float direction = 0.0f;
         float range = 0.0f;
@@ -28,7 +30,7 @@ public:
         glm::u8vec4 arc_color_fire{255, 255, 0, 128};
         DamageType damage_type = DamageType::Energy;
 
-        //Beam runtime state
+        // Beam runtime state.
         float cooldown = 0.0f;
         string texture = "texture/beam_orange.png";
     };
@@ -38,6 +40,7 @@ public:
     int getFrequency() const { return frequency; }
     void setFrequency(int freq) { frequency = std::clamp(freq, 0, max_frequency); }
     ShipSystem::Type system_target = ShipSystem::Type::None;
+    bool is_firing_enabled = true;
 
     std::vector<MountPoint> mounts;
 };

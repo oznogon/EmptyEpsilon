@@ -1,9 +1,7 @@
-#ifndef SELF_DESTRUCT_ENTRY_H
-#define SELF_DESTRUCT_ENTRY_H
+#pragma once
 
 #include "gui/gui2_element.h"
 #include "playerInfo.h"
-
 
 class GuiPanel;
 class GuiLabel;
@@ -26,5 +24,3 @@ public:
 
     void enablePosition(CrewPosition position) { has_position.add(position); }
 };
-
-#endif//SELF_DESTRUCT_ENTRY_H

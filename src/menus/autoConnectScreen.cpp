@@ -1,26 +1,26 @@
-#include "main.h"
-#include "i18n.h"
 #include "autoConnectScreen.h"
+#include "i18n.h"
+#include "main.h"
 #include "preferenceManager.h"
 #include "epsilonServer.h"
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
 #include "multiplayer_client.h"
 #include "multiplayer_server_scanner.h"
+#include "config.h"
 #include "ecs/query.h"
+
 #include "components/faction.h"
 #include "components/name.h"
+
 #include "screens/windowScreen.h"
-#include "config.h"
 
 #include "gui/gui2_label.h"
-
 
 AutoConnectScreen::AutoConnectScreen(std::vector<AutoConnectPosition> positions, bool control_main_screen, string ship_filter)
 : positions(positions), control_main_screen(control_main_screen)
 {
-    if (positions.size() < 1)
-        positions = {AutoConnectPosition("helms")};
+    if (positions.size() < 1) positions = {AutoConnectPosition("helms")};
 
     if (!game_client)
     {
@@ -29,32 +29,39 @@ AutoConnectScreen::AutoConnectScreen(std::vector<AutoConnectPosition> positions,
     }
 
     status_label = new GuiLabel(this, "STATUS", tr("Searching for server..."), 50.0f);
-    status_label->setPosition(0.0f, 300.0f, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, 50.0f);
+    status_label
+        ->setPosition(0.0f, 300.0f, sp::Alignment::TopCenter)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-    (new GuiLabel(this, "POSITION", positions[0].describe(), 50.0f))->setPosition(0.0f, 400.0f, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, 30.0f);
+    (new GuiLabel(this, "POSITION", positions[0].describe(), 50.0f))
+        ->setPosition(0.0f, 400.0f, sp::Alignment::TopCenter)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-    for(string filter : ship_filter.split(";"))
+    for (string filter : ship_filter.split(";"))
     {
         std::vector<string> key_value = filter.split("=", 1);
         string key = key_value[0].strip().lower();
-        if (key.length() < 1)
-            continue;
+        if (key.length() < 1) continue;
 
         if (key_value.size() == 1)
             ship_filters[key] = "1";
         else if (key_value.size() == 2)
             ship_filters[key] = key_value[1].strip();
-        LOG(INFO) << "Auto connect filter: " << key << " = " << ship_filters[key];
+        LOG(Info, "Auto connect filter: ", key, " = ", ship_filters[key]);
     }
 
     if (PreferencesManager::get("instance_name") != "")
-        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25.0f))->setAlignment(sp::Alignment::CenterLeft)->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 18.0f);
+    {
+        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25.0f))
+            ->setAlignment(sp::Alignment::CenterLeft)
+            ->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)
+            ->setSize(GuiElement::GuiSizeMax, 18.0f);
+    }
 }
 
 AutoConnectScreen::~AutoConnectScreen()
 {
-    if (scanner)
-        scanner->destroy();
+    if (scanner) scanner->destroy();
 }
 
 void AutoConnectScreen::update(float delta)
@@ -76,7 +83,7 @@ void AutoConnectScreen::update(float delta)
                 autoconnect_port = autoconnect_address.substr(autoconnect_address.find(":") + 1).toInt();
                 autoconnect_address = autoconnect_address.substr(0, autoconnect_address.find(":"));
 
-                if (autoconnect_port < 10 || autoconnect_port > 65535)
+                if (autoconnect_port < 1024 || autoconnect_port > 65535)
                 {
                     LOG(Warning, "Invalid autoconnect port " + string(autoconnect_port));
                     autoconnect_port = defaultServerPort;
@@ -90,11 +97,12 @@ void AutoConnectScreen::update(float delta)
             tried_password = false;
             new GameClient(VERSION_NUMBER, connect_to_address, connect_to_port);
             scanner->destroy();
-        } else {
+        }
+        else
+        {
             auto name_filter = PreferencesManager::get("autoconnect_servername", "");
             for (auto server : serverList) {
-                if (name_filter != "" && name_filter != server.name)
-                    continue;
+                if (name_filter != "" && name_filter != server.name) continue;
 
                 status_label->setText(tr("Found server ") + server.name);
                 connect_to_address = server.address;
@@ -107,27 +115,31 @@ void AutoConnectScreen::update(float delta)
 
             status_label->setText(tr("Searching for server..."));
         }
-    } else {
-        switch(game_client->getStatus())
+    }
+    else
+    {
+        switch (game_client->getStatus())
         {
         case GameClient::Connecting:
         case GameClient::Authenticating:
             if (!connect_to_address.getHumanReadable().empty())
-                status_label->setText(tr("Connecting: ") + connect_to_address.getHumanReadable()[0]);
+                status_label->setText(tr("Connecting") + ": " + connect_to_address.getHumanReadable()[0]);
             else
-                status_label->setText(tr("Connecting..."));
+                status_label->setText(tr("Connecting") + "...");
             break;
         case GameClient::WaitingForPassword:
             if (!tried_password) {
                 auto password = PreferencesManager::get("autoconnect_password");
-                if (password != "") {
+                if (password != "")
+                {
                     game_client->sendPassword(password.upper());
                     tried_password = true;
                     return;
                 }
             }
-            // if we don't have a password or we already tried it and it didn't work,
-            // fallthrough
+            // If we don't have a password or we already tried it and it didn't
+            // work, fall through.
+            [[fallthrough]];
         case GameClient::Disconnected:
             disconnectFromServer();
             scanner = new ServerScanner(VERSION_NUMBER);
@@ -136,9 +148,12 @@ void AutoConnectScreen::update(float delta)
         case GameClient::Connected:
             if (game_client->getClientId() > 0)
             {
-                foreach(PlayerInfo, i, player_info_list)
+                foreach (PlayerInfo, i, player_info_list)
+                {
                     if (i->client_id == game_client->getClientId())
                         my_player_info = i;
+                }
+
                 if (my_player_info && gameGlobalInfo)
                 {
                     my_player_info->commandSetName(PreferencesManager::get("username"));
@@ -146,9 +161,10 @@ void AutoConnectScreen::update(float delta)
                         status_label->setText(tr("Waiting for ship on ") + connect_to_address.getHumanReadable()[0] + "...");
                     else
                         status_label->setText(tr("Waiting for ship..."));
+
                     if (!my_spaceship)
                     {
-                        for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+                        for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
                         {
                             if (isValidShip(entity))
                             {
@@ -156,7 +172,9 @@ void AutoConnectScreen::update(float delta)
                                 break;
                             }
                         }
-                    } else {
+                    }
+                    else
+                    {
                         if (my_spaceship == my_player_info->ship)
                         {
                             destroy();
@@ -165,19 +183,20 @@ void AutoConnectScreen::update(float delta)
                                 auto pos = positions[idx];
                                 auto layer = window_render_layers[idx];
 
-                                if (pos.is_ship_window) {
+                                if (pos.is_ship_window)
+                                {
                                     // TODO currently all ship windows share one angle
                                     uint8_t window_flags = PreferencesManager::get("ship_window_flags", "1").toInt();
                                     new WindowScreen(layer, pos.ship_window_angle, window_flags);
-                                } else {
-                                    my_player_info->spawnUI(idx, layer);
                                 }
+                                else
+                                    my_player_info->spawnUI(idx, layer);
                             }
                         }
                     }
-                }else{
-                    status_label->setText(tr("Connected, waiting for game data..."));
                 }
+                else
+                    status_label->setText(tr("Connected, waiting for game data..."));
             }
             break;
         }
@@ -186,26 +205,28 @@ void AutoConnectScreen::update(float delta)
 
 bool AutoConnectScreen::isValidShip(sp::ecs::Entity ship)
 {
-    if (!ship)
-        return false;
+    if (!ship) return false;
 
-    for(auto it : ship_filters)
+    for (auto it : ship_filters)
     {
         if (it.first == "solo")
         {
             int crew_at_position = 0;
-            foreach(PlayerInfo, i, player_info_list)
+            foreach (PlayerInfo, i, player_info_list)
             {
                 if (i->ship == ship)
                 {
                     for (auto position : positions)
+                    {
                         for (auto crew_position : position.crew_positions)
+                        {
                             if (i->hasPosition(crew_position))
                                 crew_at_position++;
+                        }
+                    }
                 }
             }
-            if (crew_at_position > 0)
-                return false;
+            if (crew_at_position > 0) return false;
         }
         else if (it.first == "faction")
         {
@@ -225,10 +246,9 @@ bool AutoConnectScreen::isValidShip(sp::ecs::Entity ship)
                 return false;
         }
         else
-        {
-            LOG(WARNING) << "Unknown ship filter: " << it.first << " = " << it.second;
-        }
+            LOG(Warning, "Unknown ship filter: ", it.first, " = ", it.second);
     }
+
     return true;
 }
 
@@ -253,25 +273,29 @@ void AutoConnectScreen::connectToShip(sp::ecs::Entity ship)
 
 AutoConnectPosition::AutoConnectPosition(string value)
 {
-    for (auto part : value.split(",")) {
+    for (auto part : value.split(","))
+    {
         CrewPosition crew_position;
         auto parse_result = tryParseCrewPosition(part);
-        if (parse_result.has_value()) {
+        if (parse_result.has_value())
             crew_position = *parse_result;
-        } else {
+        else
+        {
             auto pos = part.toInt();
-            if (!pos) {
-                LOG(ERROR) << "Unknown crew position " << part;
+            if (!pos)
+            {
+                LOG(Error, "Unknown crew position ", part);
                 continue;
             }
 
-            if (pos >= 1000 && pos <= 1360) {
+            if (pos >= 1000 && pos <= 1360)
+            {
                 is_ship_window = true;
                 ship_window_angle = pos - 1000;
                 continue;
             }
 
-            pos -= 1;  // Shift for legacy compatibility
+            pos -= 1; // Shift for legacy compatibility
             if (pos < 0) pos = 0;
             if (pos > static_cast<int>(CrewPosition::MAX)) pos = static_cast<int>(CrewPosition::MAX);
             crew_position = CrewPosition(pos);
@@ -286,14 +310,9 @@ AutoConnectPosition::AutoConnectPosition(string value)
 
 string AutoConnectPosition::describe()
 {
-    if (is_ship_window)
-        return tr("Ship window");
-
-    if (is_main_screen)
-        return tr("Main screen");
-
-    for (auto pos : crew_positions)
-        return getCrewPositionName(pos);
+    if (is_ship_window) return tr("Ship window");
+    if (is_main_screen) return tr("Main screen");
+    for (auto pos : crew_positions) return getCrewPositionName(pos);
 
     return "None";
 }

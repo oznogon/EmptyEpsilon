@@ -19,12 +19,12 @@ AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeContr
     this->missile_aim = missile_aim;
 
     setValue(true);
-    setIcon("gui/icons/lock");
+    setIcon("gui/icons/lock-missile");
 }
 
 void AimLockButton::onUpdate()
 {
-    if (!isVisible()) return;
+    if (!isEffectivelyVisible()) return;
 
     // Handle AimLock visibility keybinds.
     if (keys.weapons_toggle_aim_lock.getDown())

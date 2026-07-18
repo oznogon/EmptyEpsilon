@@ -3,11 +3,11 @@
 #include "gui/gui2_canvas.h"
 #include "Updatable.h"
 
-class GuiSelector;
 class GuiBasicSlider;
 class GuiSlider;
 class GuiToggleButton;
 class GuiLabel;
+class GuiSelector;
 
 class OptionsMenu : public GuiCanvas, public Updatable
 {
@@ -20,9 +20,7 @@ public:
     };
 private:
     GuiElement* container;
-    GuiToggleButton* graphics_button;
-    GuiToggleButton* audio_button;
-    GuiToggleButton* interface_button;
+    GuiSelector* options_selector;
     GuiElement* graphics_page;
     GuiElement* audio_page;
     GuiElement* interface_page;
@@ -40,6 +38,8 @@ private:
 
     GuiBasicSlider* graphics_fov_slider{};
     GuiLabel* graphics_fov_overlay_label{};
+    GuiBasicSlider* graphics_draw_distance_slider{};
+    GuiLabel* graphics_draw_distance_overlay_label{};
 
     std::vector<string> hotkey_categories;
     GuiLabel* impulse_volume_overlay_label;
@@ -48,6 +48,7 @@ private:
     void setupInterfaceOptions(OptionsMenu::ReturnTo return_to);
     void setupGraphicsOptions();
     void setupAudioOptions();
+    void setTabOptions();
 public:
     OptionsMenu(ReturnTo return_to=ReturnTo::Main);
 

@@ -1,5 +1,4 @@
-#ifndef SHIELDS_ENABLE_BUTTON_H
-#define SHIELDS_ENABLE_BUTTON_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -17,5 +16,3 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 };
-
-#endif//SHIELDS_ENABLE_BUTTON_H

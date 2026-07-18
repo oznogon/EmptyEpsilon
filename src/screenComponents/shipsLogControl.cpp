@@ -78,7 +78,7 @@ void ShipsLog::onDraw(sp::RenderTarget& renderer)
 void ShipsLog::toggle()
 {
     open = !open;
-    setSize(getSize().x, open ? 800.0f : 50.0f);
+    setSize(getSize().x, open ? 800.0f : GuiElement::GuiSizeRow);
 }
 
 bool ShipsLog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)

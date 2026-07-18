@@ -299,11 +299,13 @@ Keys::Keys() :
     voice_all("VOICE_ALL", "Backspace"),
     voice_ship("VOICE_SHIP"),
     debug_modifier("DEBUG_MODIFIER", "Left Ctrl"),
-    debug_show_fps("DEBUG_SHOW_FPS", "F10"),
+    debug_show("DEBUG_SHOW", "F10"),
     debug_show_timing("DEBUG_SHOW_TIMING", "F11"),
+    debug_minimize("DEBUG_MINIMIZE", ""),
 #ifdef DEBUG
     debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
     debug_show_gui("DEBUG_SHOW_GUI", "Insert"),
+    debug_show_atlas("DEBUG_SHOW_ATLAS", ""),
 #endif
 
     // Rebinding binds
@@ -611,7 +613,7 @@ Keys::Keys() :
     radar_strategic("RADAR_STRATEGIC", "3"),
     radar_linked_probe("RADAR_LINKED_PROBE", "4"),
 
-    // Damage control screen
+    // Damage Control screen
     damcon_toggle_detail_lines("DAMCON_TOGGLE_DETAIL_LINES"),
 
     // GM screen
@@ -677,15 +679,19 @@ void Keys::init()
     screenshot_key.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     debug_modifier.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Debug timing modifier"));
     debug_modifier.setSupportedInteractions(sp::io::Keybinding::Interaction::Continuous);
-    debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
-    debug_show_fps.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
+    debug_show.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug menu"));
+    debug_show.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing graph"));
     debug_show_timing.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    debug_minimize.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Minimize debug dialog"));
+    debug_minimize.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 #ifdef DEBUG
     debug_show_colliders.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug colliders"));
     debug_show_colliders.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    debug_show_gui.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug GUI"));
+    debug_show_gui.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug GUI overlay"));
     debug_show_gui.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    debug_show_atlas.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug texture atlas"));
+    debug_show_atlas.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 #endif
 
     // Rebinding binds
@@ -1472,8 +1478,8 @@ void Keys::init()
     radar_strategic.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Strategic"));
     radar_linked_probe.setLabel(tr("hotkey_menu", "Radar"), tr("hotkey_Radar", "Linked probe"));
 
-    // Damage Control
-    damcon_toggle_detail_lines.setLabel(tr("hotkey_menu", "Damage Control"), tr("hotkey_Damcon", "Toggle system detail lines"));
+    // Damage control
+    damcon_toggle_detail_lines.setLabel(tr("hotkey_menu", "Damage control"), tr("hotkey_Damcon", "Toggle system detail lines"));
 
     // Cinematic view
     cinematic.init();
@@ -1498,8 +1504,8 @@ void Keys::init()
     spectator_show_callsigns.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
     // Probe Camera screen
-    probe_turn_left.setLabel(tr("hotkey_menu", "Probe Camera"), tr("hotkey_ProbeCamera", "Turn left"));
-    probe_turn_right.setLabel(tr("hotkey_menu", "Probe Camera"), tr("hotkey_ProbeCamera", "Turn right"));
+    probe_turn_left.setLabel(tr("hotkey_menu", "Probe camera"), tr("hotkey_ProbeCamera", "Turn left"));
+    probe_turn_right.setLabel(tr("hotkey_menu", "Probe camera"), tr("hotkey_ProbeCamera", "Turn right"));
 
     // Briefing screen
     briefing_next_page.setLabel(tr("hotkey_menu", "Briefing"), tr("hotkey_Briefing", "Next page"));

@@ -1,9 +1,7 @@
-#ifndef SHIP_INTERNAL_VIEW_H
-#define SHIP_INTERNAL_VIEW_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
-class RepairCrew;
 class GuiShipRoomContainer;
 class GuiShipCrew;
 class GuiThemeStyle;
@@ -13,6 +11,7 @@ class GuiShipInternalView : public GuiElement
 private:
     sp::ecs::Entity viewing_ship;
     float room_size;
+    float current_room_size = 0.0f;
     GuiShipRoomContainer* room_container;
     sp::ecs::Entity selected_crew_member;
     std::vector<GuiShipCrew*> crew_list;
@@ -23,6 +22,8 @@ public:
     GuiShipInternalView(GuiContainer* owner, string id, float room_size);
 
     GuiShipInternalView* setShip(sp::ecs::Entity ship);
+
+    float getRoomSize() const { return current_room_size; }
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
@@ -67,7 +68,6 @@ class GuiShipDoor : public GuiElement
 {
 public:
     typedef std::function<void()> func_t;
-
 private:
     bool horizontal;
     func_t func;
@@ -102,5 +102,3 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 };
-
-#endif//SHIP_INTERNAL_VIEW_H

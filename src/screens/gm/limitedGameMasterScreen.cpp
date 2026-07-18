@@ -41,6 +41,8 @@
 #include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/helpOverlay.h"
 
+#include <cmath>
+
 #include "gui/mouseRenderer.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
@@ -51,6 +53,10 @@
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_tooltip.h"
 #include "gui/gui2_scrollcontainer.h"
+
+namespace {
+    constexpr float game_speed_values[] = {0.1f, 0.25f, 0.5f, 1.0f, 2.0f, 4.0f, 8.0f};
+}
 
 static std::vector<std::pair<string, string>> getGMInfo(sp::ecs::Entity entity)
 {
@@ -384,7 +390,7 @@ private:
             [](sp::ecs::Entity e) { return e.hasComponent<sp::Transform>(); });
 
         page.description = tr("tweak-transform", "Sets the entity's position (X, Y) and rotation angle. Position is in game units (1000 = 1U), rotation in degrees (0 = right/east-facing/heading 90).");
-        addVec2Tweak(page.page, tr("tweak-text", "Position:"), ".components.transform.position", 
+        addVec2Tweak(page.page, tr("tweak-text", "Position:"), ".components.transform.position",
             [this]()
             {
                 if (auto t = entity.getComponent<sp::Transform>()) return t->getPosition();
@@ -418,7 +424,7 @@ private:
             },
             page.update_funcs
         );
-        addVec2Tweak(page.page, tr("tweak-text", "Velocity:"), ".components.physics.velocity", 
+        addVec2Tweak(page.page, tr("tweak-text", "Velocity:"), ".components.physics.velocity",
             [this]()
             {
                 if (auto v = entity.getComponent<sp::Physics>()) return v->getVelocity();
@@ -441,7 +447,7 @@ private:
         auto& page = addPage(tr("tweak-tab", "CallSign"),
             [](sp::ecs::Entity e) { return e.hasComponent<CallSign>(); });
         page.description = tr("tweak-callsign", "The callsign displayed on radar views and in communications.");
-        addTextTweak(page.page, tr("tweak-text", "Callsign:"), ".components.callsign.callsign", 
+        addTextTweak(page.page, tr("tweak-text", "Callsign:"), ".components.callsign.callsign",
             [this]()
             {
                 if (auto v = entity.getComponent<CallSign>()) return v->callsign;
@@ -541,7 +547,7 @@ private:
             },
             page.update_funcs
         );
-        addFloatTweak(page.page, tr("tweak-text", "Level:"), ".components.shields.entries[1].level", 
+        addFloatTweak(page.page, tr("tweak-text", "Level:"), ".components.shields.entries[1].level",
             [this]()
             {
                 if (auto v = entity.getComponent<Shields>())
@@ -550,7 +556,7 @@ private:
             },
             page.update_funcs
         );
-        addFloatTweak(page.page, tr("tweak-text", "Max:"), ".components.shields.entries[1].max", 
+        addFloatTweak(page.page, tr("tweak-text", "Max:"), ".components.shields.entries[1].max",
             [this]()
             {
                 if (auto v = entity.getComponent<Shields>())
@@ -603,7 +609,7 @@ private:
             [](sp::ecs::Entity e) { return e.hasComponent<BeamWeaponSys>(); });
         page.description = tr("tweak-beam-system", "Ship system providing beam weapon configuration. Defines arc, range, damage, cycle time, and optional turret tracking.");
 
-        addFloatTweak(page.page, tr("tweak-text", "Health:"), ".components.beam_weapons.health", 
+        addFloatTweak(page.page, tr("tweak-text", "Health:"), ".components.beam_weapons.health",
             [this]()
             {
                 if (auto v = entity.getComponent<BeamWeaponSys>()) return v->health;
@@ -724,7 +730,7 @@ private:
             [this]()
             {
                 if (auto v = entity.getComponent<ImpulseEngine>()) return v->acceleration_forward;
-               
+
                 return 0.0f;
             },
             page.update_funcs
@@ -828,7 +834,7 @@ private:
             [this]()
             {
                 if (auto v = entity.getComponent<CommsTransmitter>()) return static_cast<int>(v->state);
-               
+
                 return 0;
             },
             page.update_funcs
@@ -849,7 +855,7 @@ private:
             [this]()
             {
                 if (auto v = entity.getComponent<DockingPort>()) return static_cast<int>(v->state);
-               
+
                 return 0;
             },
             page.update_funcs
@@ -1029,7 +1035,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     faction_selector
         ->setSelectionIndex(0)
         ->setPosition(20.0f, 70.0f, sp::Alignment::TopLeft)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     (new GuiTextTooltip(faction_selector, "FACTION_SELECTOR_TIP", tr("gm_tooltip", "Change the faction of selected objects."), 20.0f))->setWidth(280.0f);
 
@@ -1039,13 +1045,13 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
             if (value)
                 runScript("pauseGame()");
             else
-                runScript("setGameSpeed(" + string(static_cast<int>(pow(2.0f, game_time_scale->getSelectionIndex()))) + ")");
+                runScript("setGameSpeed(" + string(game_speed_values[game_time_scale->getSelectionIndex()], 2) + ")");
         }
     );
     pause_button
         ->setValue(false)
         ->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     (new GuiTextTooltip(pause_button, "PAUSE_BUTTON_TIP", tr("gm_tooltip", "Toggle pausing the game simulation."), 20.0f))
         ->setWidth(280.0f);
@@ -1053,14 +1059,14 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR",
         [this](int index, string value)
         {
-            runScript("setGameSpeed(" + string(static_cast<int>(pow(2, index))) + ")");
+            runScript("setGameSpeed(" + string(game_speed_values[index], 2) + ")");
         }
     );
     game_time_scale
-        ->setOptions({"1x", "2x", "4x", "8x"})
-        ->setSelectionIndex(0)
+        ->setOptions({"0.1x", "0.25x", "0.5x", "1x", "2x", "4x", "8x"})
+        ->setSelectionIndex(3)
         ->setPosition(170.0f, 20.0f, sp::Alignment::TopLeft)
-        ->setSize(100.0f, 50.0f);
+        ->setSize(100.0f, GuiElement::GuiSizeRow);
 
     tweak_dialog = new LimitedGuiEntityTweak(this,
         [this](sp::ecs::Entity entity, const string& expression)
@@ -1082,7 +1088,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     );
     tweak_button
         ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
-        ->setSize(250.0f, 50.0f)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     (new GuiTextTooltip(tweak_button, "TWEAK_OBJECT_TIP", tr("gm_tooltip", "Edit properties of the selected entity."), 20.0f))
@@ -1093,7 +1099,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     );
     global_message_button
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     (new GuiTextTooltip(global_message_button, "GLOBAL_MESSAGE_TIP", tr("gm_tooltip", "Broadcast a message to all players."), 20.0f))
         ->setWidth(280.0f);
@@ -1112,7 +1118,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     );
     player_ship_selector
         ->setPosition(270.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(350.0f, 50.0f);
+        ->setSize(350.0f, GuiElement::GuiSizeRow);
 
     (new GuiTextTooltip(player_ship_selector, "PLAYER_SHIP_SELECTOR_TIP", tr("gm_tooltip", "Select a player ship to track on the map."), 20.0f))
         ->setWidth(280.0f);
@@ -1122,7 +1128,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
         ->setZoomReference(LONG_RANGE_DISTANCE)
         ->setLabelPrecision(3)
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", tr("button", "Hail ship"),
         [this]()
@@ -1145,7 +1151,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
     );
     player_comms_hail
         ->setPosition(20.0f, -170.0f, sp::Alignment::BottomLeft)
-        ->setSize(250.0f, 50.0f)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     (new GuiTextTooltip(player_comms_hail, "HAIL_PLAYER_TIP", tr("gm_tooltip", "Open a communication channel with the selected player ship."), 20.0f))
@@ -1446,20 +1452,22 @@ void LimitedGameMasterScreen::update(float delta)
             if (game_speed == 0.0f)
             {
                 pause_button->setValue(true);
-                game_time_scale->setSelectionIndex(0);
+                game_time_scale->setSelectionIndex(3);
                 game_time_scale->disable();
             }
             else
             {
                 pause_button->setValue(false);
                 game_time_scale->enable();
-                switch (static_cast<int>(game_speed))
                 {
-                    case 1: game_time_scale->setSelectionIndex(0); break;
-                    case 2: game_time_scale->setSelectionIndex(1); break;
-                    case 4: game_time_scale->setSelectionIndex(2); break;
-                    case 8: game_time_scale->setSelectionIndex(3); break;
-                    default: break;
+                    for(int i = 0; i < static_cast<int>(sizeof(game_speed_values) / sizeof(game_speed_values[0])); i++)
+                    {
+                        if (fabsf(game_speed - game_speed_values[i]) < 0.01f)
+                        {
+                            game_time_scale->setSelectionIndex(i);
+                            break;
+                        }
+                    }
                 }
             }
         }

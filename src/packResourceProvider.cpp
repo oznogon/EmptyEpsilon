@@ -1,6 +1,5 @@
 #include "packResourceProvider.h"
 
-#include <cstdio>
 #include <SDL_endian.h>
 #include <SDL_rwops.h>
 
@@ -100,9 +99,9 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
             LOG(WARNING, entry.path().u8string(), " encountered an error: ", error_code.message());
     }
 #else
-    //Limitation : 
+    //Limitation :
     //As far as I know, Android NDK won't provide a way to list subdirectories
-    //So we will only list files in the first level directory 
+    //So we will only list files in the first level directory
     static jobject asset_manager_jobject;
     static AAssetManager* asset_manager = nullptr;
     if (!asset_manager)

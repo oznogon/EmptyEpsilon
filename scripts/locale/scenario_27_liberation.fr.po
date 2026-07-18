@@ -916,7 +916,7 @@ msgstr "Oui, connectez-nous à l'objet s'il vous plaît"
 #: scripts/scenario_27_liberation.lua:3520
 msgctxt "station-comms"
 msgid ""
-"Ok. We've rigged it to contact you when you close communications with us."
+"OK. We've rigged it to contact you when you close communications with us."
 msgstr ""
 "D'accord.\n"
 "Nous l'avons trafiqué afin qu'il vous contacte immédiatement dès que notre "

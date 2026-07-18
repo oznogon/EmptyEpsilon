@@ -1,19 +1,19 @@
-#ifndef INDICATOR_OVERLAYS_H
-#define INDICATOR_OVERLAYS_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
 class GuiOverlay;
 class GuiPanel;
 class GuiLabel;
-/**
-    * Full screen overlay for shield hit effect
-    * Full screen overlay for hull hit effect
-    * Full screen overlay for shields low warning
-    * Full screen overlay for jump indication
-    * Activating the warp/jump post process shaders
-    * Pause full screen overlay and text indicator
-    * Victory/defeat result
+
+/*
+- Full screen overlay for shield hit effect
+- Full screen overlay for hull hit effect
+- Full screen overlay for shields low warning
+- Full screen overlay for jump indication
+- Activating the warp/jump post process shaders
+- Pause full screen overlay and text indicator
+- Victory/defeat result
 */
 class GuiIndicatorOverlays : public GuiElement
 {
@@ -35,8 +35,4 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
 
     void hasGlobalMessage() { has_global_message = true; }
-private:
-    void drawAlertLevel(sp::RenderTarget& renderer);
 };
-
-#endif//INDICATOR_OVERLAYS_H

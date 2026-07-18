@@ -81,6 +81,7 @@ public:
     void commandSetAutoRepair(bool enabled);
     void commandSetBeamFrequency(int32_t frequency);
     void commandSetBeamSystemTarget(ShipSystem::Type system);
+    void commandSetBeamFiringEnabled(bool enabled);
     void commandSetShieldFrequency(int32_t frequency);
     void commandAddWaypoint(glm::vec2 position, int32_t set_id = 1);
     void commandRemoveWaypoint(int32_t index, int32_t set_id = 1);

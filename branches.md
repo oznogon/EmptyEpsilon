@@ -133,3 +133,12 @@ generic-scrolling-container 20260613 -- fix scissor conflict affecting DockingBa
 docking-bay 20260613 -- fix some issues related to berths; berth reordering after window resize is broken, mitigated on the fork with GuiScrollContainer
 
 nebula-rendering 20260616
+
+nebula-rendering 20260619
+
+collision-damage 20260620
+beam-weapon-safety 20260620
+
+collision-damage 20260621 -- change server setting to selector
+
+nebula-rendering 20260622 -- dynamic lighting

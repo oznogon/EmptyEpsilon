@@ -6,7 +6,7 @@ msgstr ""
 #: scripts/api/gm.lua:3 scripts/api/gm.lua:4 scripts/api/gm.lua:5
 #: scripts/api/gm.lua:10 scripts/api/gm.lua:11 scripts/api/gm.lua:12
 #: scripts/api/gm.lua:13 scripts/api/gm.lua:14 scripts/api/gm.lua:15
-#: scripts/api/gm.lua:16 scripts/api/gm.lua:17
+#: scripts/api/gm.lua:16 scripts/api/gm.lua:17 scripts/api/gm.lua:29
 msgctxt "create"
 msgid "Various"
 msgstr ""
@@ -87,17 +87,27 @@ msgctxt "create"
 msgid "Worm hole"
 msgstr ""
 
-#: scripts/api/gm.lua:22
+#: scripts/api/gm.lua:29
+msgctxt "create"
+msgid "Camera"
+msgstr ""
+
+#: scripts/api/gm.lua:29
+msgctxt "create"
+msgid "Cinematic camera viewpoint"
+msgstr ""
+
+#: scripts/api/gm.lua:34
 msgctxt "create"
 msgid "Player ship"
 msgstr ""
 
-#: scripts/api/gm.lua:24
+#: scripts/api/gm.lua:36
 msgctxt "create"
 msgid "Station"
 msgstr ""
 
-#: scripts/api/gm.lua:26
+#: scripts/api/gm.lua:38
 msgctxt "create"
 msgid "CPU ship"
 msgstr ""

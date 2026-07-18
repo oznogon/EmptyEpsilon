@@ -60,7 +60,7 @@ static string getTubeName(float direction)
 
 void GuiMissileTubeControls::onUpdate()
 {
-    if (!my_spaceship || !isVisible())
+    if (!my_spaceship || !isEffectivelyVisible())
         return;
     auto tubes = my_spaceship.getComponent<MissileTubes>();
     if (!tubes) {

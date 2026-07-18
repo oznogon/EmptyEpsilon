@@ -2,6 +2,7 @@
 #include "random.h"
 #include "i18n.h"
 #include "gameGlobalInfo.h"
+#include "crewPositionRequirements.h"
 
 #include "gui/theme.h"
 #include "gui/gui2_arrow.h"
@@ -48,11 +49,11 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Exit if we don't have a docking bay.
-    if (!my_spaceship.hasComponent<DockingBay>())
+    if (!crewPositionRequirements::hasRequirements(CrewPosition::dockingBay, my_spaceship))
     {
-        (new GuiLabel(this, "NO_DOCKING_BAY_LABEL", tr("dockingbay", "No docking bay"), 50.0f))
+        (new GuiLabel(this, "NO_DOCKING_BAY_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::dockingBay), 50.0f))
             ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
-            ->setSize(300.0f, 50.0f);
+            ->setSize(300.0f, GuiElement::GuiSizeRow);
         return;
     }
 
@@ -78,7 +79,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     // Left column: Docking bay berths
     (new GuiLabel(left_column, "DOCKING_BAY_BERTHS_LABEL", tr("dockingbay", "Berths"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     docking_bay_berths = new GuiScrollContainer(left_column, "DOCKING_BAY_BERTHS");
@@ -103,7 +104,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiLabel(docking_bay_info_layout, "DOCKING_BAY_INFO_LABEL", tr("dockingbay", "Selected berth"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     docking_bay_info = new GuiElement(docking_bay_info_layout, "DOCKING_BAY_INFO_PANEL");
@@ -156,13 +157,13 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     // Right column, bottom row
     (new GuiLabel(right_column, "DOCKING_BAY_BERTH_LABEL", tr("dockingbay", "Berth operations"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     // Controls to move ships between berths.
     move_controls_row = new GuiElement(right_column, "DOCKING_BAY_MOVE_CONTROLS");
     move_controls_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
     move_controls_row
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -173,7 +174,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             if (selected_entity && selected_entity != sp::ecs::Entity() && my_player_info)
                 my_player_info->commandMoveInternalToBerth(selected_entity, target_berth->getSelectionValue().toInt());
         }
-    ))->setSize(150.0f, 50.0f);
+    ))->setSize(150.0f, GuiElement::GuiSizeRow);
 
     target_berth = new GuiSelector(move_controls_row, "", [](int index, string value) {} );
     target_berth
@@ -192,7 +193,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     // Progress row (initially hidden, replaces move controls during moves)
     move_progress_row = new GuiElement(right_column, "DOCKING_BAY_MOVE_PROGRESS");
     move_progress_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
     move_progress_row
         ->setAttribute("layout", "horizontal");
     move_progress_row
@@ -201,7 +202,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     move_progress_bar = new GuiProgressbar(move_progress_row, "MOVE_PROGRESS", 0.0f, 1.0f, 0.0f);
     move_progress_bar
-        ->setSize(400.0f, 50.0f);
+        ->setSize(400.0f, GuiElement::GuiSizeRow);
 
     cancel_move_button = new GuiButton(move_progress_row, "CANCEL_MOVE", tr("dockingbay", "Cancel move"),
         [this]()
@@ -238,7 +239,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         }
     );
     cancel_move_button
-        ->setSize(150.0f, 50.0f)
+        ->setSize(150.0f, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "10, 0, 0, 0");
 
     (new GuiElement(move_progress_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -270,7 +271,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     scramble
         ->setOnStyle("button.dockingbay_scramble.on")
         ->setStyle("button.dockingbay_scramble")
-        ->setSize(220.0f, 50.0f);
+        ->setSize(220.0f, GuiElement::GuiSizeRow);
 
     // Hangar-specific berth controls.
     hangar_controls = new GuiElement(right_column, "DOCKING_BAY_HANGAR_CONTROLS");
@@ -281,12 +282,12 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiLabel(hangar_controls, "DOCKING_BAY_HANGAR_LABEL", tr("dockingbay", "Hangar operations"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     GuiElement* undock_controls_row = new GuiElement(hangar_controls, "DOCKING_BAY_UNDOCK_CONTROLS");
     undock_controls_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
     (new GuiButton(undock_controls_row, "", tr("dockingbay", "Launch"),
@@ -296,7 +297,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
                 my_player_info->commandLaunchInternal(selected_entity);
         }
     ))->setIcon("gui/icons/docking")
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     // TODO: "Approve docking" to detect internally dockable ships within 1U, select from them, and compel docking
 
@@ -309,17 +310,17 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiLabel(energy_controls, "DOCKING_BAY_ENERGY_OPERATIONS_LABEL", tr("dockingbay", "Energy operations"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     GuiElement* energy_transfer_row = new GuiElement(energy_controls, "DOCKING_BAY_ENERGY_TRANSFER_CONTROLS");
     energy_transfer_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
     (new GuiLabel(energy_transfer_row, "DOCKING_BAY_ENERGY_TRANSFER_LABEL", tr("dockingbay", "Transfer energy:"), 30.0f))
         ->setAlignment(sp::Alignment::CenterRight)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     energy_transfer_direction = new GuiSlider(energy_transfer_row, "DOCKING_BAY_ENERGY_SLIDER",
         static_cast<float>(DockingBay::Berth::TransferDirection::ToDocked),
@@ -347,7 +348,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     GuiElement* energy_transfer_labels_row = new GuiElement(energy_controls, "DOCKING_BAY_ENERGY_TRANSFER_LABELS");
     energy_transfer_labels_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
     (new GuiElement(energy_transfer_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -375,12 +376,12 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiLabel(thermal_controls, "DOCKING_BAY_THERMAL_LABEL", tr("dockingbay", "Thermal operations"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     GuiElement* vent_controls_row = new GuiElement(thermal_controls, "DOCKING_BAY_VENT_CONTROLS");
     vent_controls_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
     (new GuiLabel(vent_controls_row, "DOCKING_BAY_VENT_LABEL", tr("dockingbay", "Vent heat:"), 30.0f))
@@ -413,7 +414,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     GuiElement* thermal_venting_labels_row = new GuiElement(thermal_controls, "DOCKING_BAY_HEAT_TRANSFER_LABELS");
     thermal_venting_labels_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
     (new GuiElement(thermal_venting_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -507,12 +508,12 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiLabel(repair_controls, "DOCKING_BAY_REPAIR_LABEL", tr("dockingbay", "Repair operations"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     GuiElement* repair_controls_row = new GuiElement(repair_controls, "DOCKING_BAY_REPAIR_CONTROLS_ROW");
     repair_controls_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
     (new GuiLabel(repair_controls_row, "DOCKING_BAY_VENT_LABEL", tr("dockingbay", "Prioritize repairs:"), 30.0f))
@@ -545,7 +546,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     GuiElement* repair_prioritization_labels_row = new GuiElement(repair_controls, "DOCKING_BAY_ENERGY_TRANSFER_LABELS");
     repair_prioritization_labels_row
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
     (new GuiElement(repair_prioritization_labels_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -622,7 +623,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiLabel(supply_controls, "DOCKING_BAY_SUPPLY_LABEL", tr("dockingbay", "Supply operations"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     GuiElement* supply_controls_row = new GuiElement(supply_controls, "DOCKING_BAY_SUPPLY_CONTROLS_ROW");
@@ -798,7 +799,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             my_player_info->commandGenerateSupplyDrop(selected_berth_index);
         }
     );
-    generate_supply_drop->setSize(300.0f, 50.0f);
+    generate_supply_drop->setSize(300.0f, GuiElement::GuiSizeRow);
 
     // Storage-specific berth controls.
     storage_controls = new GuiElement(right_column, "DOCKING_BAY_STORAGE_CONTROLS");
@@ -809,7 +810,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiLabel(storage_controls, "DOCKING_BAY_STORAGE_LABEL", tr("dockingbay", "Storage operations"), 30.0f))
         ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     // TODO: Are controls necessary for this berth type?
@@ -826,12 +827,13 @@ void DockingBayScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship) return;
 
-    auto bay = my_spaceship.getComponent<DockingBay>();
-    if (!bay)
+    if (!crewPositionRequirements::hasRequirements(CrewPosition::dockingBay, my_spaceship))
     {
         GuiOverlay::onDraw(renderer);
         return;
     }
+
+    auto bay = my_spaceship.getComponent<DockingBay>();
 
     // Check for changes in the berths.
     bool list_changed = cached_berth_entities.size() != bay->berths.size();
@@ -1080,10 +1082,10 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         entity_hull->setValue("");
         entity_probes->setValue("");
         for (auto kv : entity_missiles) kv->setValue("");
-        
+
         return;
     }
-    
+
     // Select the panel by index.
     for (size_t i = 0; i < berth_panels.size(); i++)
         berth_panels[i]->selected = (static_cast<int>(i) == selected_berth_index);

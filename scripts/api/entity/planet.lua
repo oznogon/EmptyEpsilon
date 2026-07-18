@@ -12,14 +12,14 @@
 function Planet()
     local e = createEntity()
     e.components = {
-        transform = {rotation=random(0, 360)},
-        radar_signature = {gravitational=0.5, thermal=0.3},
+        transform = { rotation = random(0, 360) },
+        radar_signature = { gravitational = 0.5, thermal = 0.3 },
         planet_render = {
-            size=5000,
+            size = 5000,
             cloud_size = 5200,
         },
-        physics = {type="static", size=5000},
-        never_radar_blocked = {}
+        physics = { type = "static", size = 5000 },
+        never_radar_blocked = {},
     }
     return e
 end
@@ -28,7 +28,9 @@ local Entity = getLuaEntityFunctionTable()
 --- Sets this Planet's atmospheric effect color.
 --- Example: planet:setPlanetAtmosphereColor(0.2,0.2,1.0) -- sets a blue atmosphere
 function Entity:setPlanetAtmosphereColor(r, g, b)
-    if self.components.planet_render then self.components.planet_render.atmosphere_color = {r, g, b} end
+    if self.components.planet_render then
+        self.components.planet_render.atmosphere_color = { r, g, b }
+    end
     return self
 end
 --- Sets this Planet's atmospheric effect texture.
@@ -37,7 +39,9 @@ end
 --- For stars, you can set an atmosphere texture such as planets/star-1.png with no surface texture.
 --- Example: planet:setPlanetAtmosphereTexture("planets/atmosphere.png")
 function Entity:setPlanetAtmosphereTexture(texture)
-    if self.components.planet_render then self.components.planet_render.atmosphere_texture = texture end
+    if self.components.planet_render then
+        self.components.planet_render.atmosphere_texture = texture
+    end
     return self
 end
 --- Sets this Planet's surface texture.
@@ -45,7 +49,9 @@ end
 --- Optional; if defined, surface textures should be opaque and use a 2:1-ratio equirectangular projection.
 --- Example: planet:setPlanetSurfaceTexture("planets/planet-1.png")
 function Entity:setPlanetSurfaceTexture(texture)
-    if self.components.planet_render then self.components.planet_render.texture = texture end
+    if self.components.planet_render then
+        self.components.planet_render.texture = texture
+    end
     return self
 end
 --- Sets this Planet's cloud layer effect texture, which rotates independently of the planet.
@@ -53,7 +59,9 @@ end
 --- Optional; if defined, cloud layer textures should be transparent or translucent.
 --- Example: planet:setPlanetCloudTexture("planets/cloud-1.png")
 function Entity:setPlanetCloudTexture(texture)
-    if self.components.planet_render then self.components.planet_render.cloud_texture = texture end
+    if self.components.planet_render then
+        self.components.planet_render.cloud_texture = texture
+    end
     return self
 end
 --- Returns this Planet's radius.
@@ -74,11 +82,22 @@ function Entity:setPlanetRadius(size)
     local pr = self.components.planet_render
     if pr then
         pr.size = size
-        pr.cloud_size = size*1.05
-        pr.atmosphere_size = size*1.2
-        if (pr.size * pr.size) > (pr.distance_from_movement_plane * pr.distance_from_movement_plane) then
-            local collision_size = math.sqrt((pr.size * pr.size) - (pr.distance_from_movement_plane * pr.distance_from_movement_plane)) * 1.1;
-            self.components.physics = {type="static", size=collision_size}
+        pr.cloud_size = size * 1.05
+        pr.atmosphere_size = size * 1.2
+        if
+            (pr.size * pr.size)
+            > (
+                pr.distance_from_movement_plane * pr.distance_from_movement_plane
+            )
+        then
+            local collision_size = math.sqrt(
+                (pr.size * pr.size)
+                    - (
+                        pr.distance_from_movement_plane
+                        * pr.distance_from_movement_plane
+                    )
+            ) * 1.1
+            self.components.physics = { type = "static", size = collision_size }
         else
             self.components.physics = nil
         end
@@ -100,7 +119,9 @@ end
 --- If this value isn't larger than the Planet's radius, the cloud layer won't be visible.
 --- Example: planet:setPlanetCloudRadius(2500) -- sets this Planet's cloud radius to 2.5U
 function Entity:setPlanetCloudRadius(radius)
-    if self.components.planet_render then self.components.planet_render.cloud_size = radius end
+    if self.components.planet_render then
+        self.components.planet_render.cloud_size = radius
+    end
     return self
 end
 --- Sets the z-position of this Planet, the distance by which it's offset above (positive) or below (negative) the movement plane.
@@ -111,9 +132,20 @@ function Entity:setDistanceFromMovementPlane(z)
     local pr = self.components.planet_render
     if pr then
         pr.distance_from_movement_plane = z
-        if (pr.size * pr.size) > (pr.distance_from_movement_plane * pr.distance_from_movement_plane) then
-            local collision_size = math.sqrt((pr.size * pr.size) - (pr.distance_from_movement_plane * pr.distance_from_movement_plane)) * 1.1;
-            self.components.physics = {type="static", size=collision_size}
+        if
+            (pr.size * pr.size)
+            > (
+                pr.distance_from_movement_plane * pr.distance_from_movement_plane
+            )
+        then
+            local collision_size = math.sqrt(
+                (pr.size * pr.size)
+                    - (
+                        pr.distance_from_movement_plane
+                        * pr.distance_from_movement_plane
+                    )
+            ) * 1.1
+            self.components.physics = { type = "static", size = collision_size }
         else
             self.components.physics = nil
         end
@@ -126,7 +158,7 @@ end
 --- Example: entity:setAxialRotationTime(20)
 function Entity:setAxialRotationTime(rotation_time)
     if rotation_time ~= 0.0 then
-        self.components.spin = {rate=360.0/rotation_time}
+        self.components.spin = { rate = 360.0 / rotation_time }
     else
         self.components.spin = nil
     end
@@ -148,7 +180,7 @@ function Entity:setOrbit(target, time)
     local distance = math.sqrt(xd * xd + yd * yd)
     self.components.orbit = {
         target = target,
-        center = {x1, y1},
+        center = { x1, y1 },
         distance = distance,
         time = time,
     }

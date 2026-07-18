@@ -19,7 +19,7 @@ void main()
     v_normal = normalize((u_model * vec4(a_normal, 0.)).xyz);
     vec4 modelview_position = u_view * u_model * vec4(a_position, 1.);
     v_distance = length(modelview_position.xyz);
-    
+
     v_texcoords = a_texcoords;
     gl_Position = u_projection * modelview_position;
 }
@@ -46,22 +46,14 @@ varying float v_distance;
 void main()
 {
     float intensity = max(0.0, dot(u_specularLightDirection, v_normal));
-    
+
     vec3 base = texture2D(u_baseMap, v_texcoords.st).rgb;
-    
+
     gl_FragColor = vec4((base * intensity) + (u_atmosphereColor.rgb * (1.0 - intensity)), u_color.a);
 
     if (u_fogDistance > 0.0)
     {
         float color_fog = clamp(1.0 - v_distance / u_fogDistance, 0.0, 1.0);
         gl_FragColor.rgb = mix(u_fogColor, gl_FragColor.rgb, color_fog);
-        if (v_distance > 1000.0)
-        {
-            float dither_range = max(u_fogDistance - 1000.0, 200.0);
-            float dither_factor = clamp(1.0 - (v_distance - 1000.0) / dither_range, 0.0, 1.0);
-            float dither = fract(sin(dot(gl_FragCoord.xy + u_time * 100.0, vec2(12.9898, 78.233))) * 43758.5453);
-            if (dither > dither_factor)
-                discard;
-        }
     }
 }

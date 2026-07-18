@@ -1,11 +1,9 @@
-#ifndef THREAT_LEVEL_ESTIMATE_H
-#define THREAT_LEVEL_ESTIMATE_H
+#pragma once
 
 #include "Updatable.h"
 #include <ecs/entity.h>
 #include <functional>
 
-class SpaceShip;
 class ThreatLevelEstimate : public Updatable
 {
 private:
@@ -28,8 +26,10 @@ public:
     void setCallbacks(func_t low, func_t high);
 
     virtual void update(float delta) override;
+
+    static float debug_max_threat;
+    static float debug_smoothed_threat;
+    static bool debug_threat_high;
 private:
     float getThreatFor(sp::ecs::Entity ship);
 };
-
-#endif//THREAT_LEVEL_ESTIMATE_H

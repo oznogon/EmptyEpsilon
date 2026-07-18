@@ -10,7 +10,6 @@ class GuiImage;
 class GuiLabel;
 class GuiMissileTubeControls;
 class GuiRadarView;
-class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiSelector;
 class GuiCustomShipFunctions;
@@ -31,6 +30,7 @@ private:
     AimLock* missile_aim;
     AimLockButton* lock_aim;
     GuiMissileTubeControls* tube_controls;
+    GuiToggleButton* beam_safety;
     GuiElement* beam_info_box;
     GuiSelector* sidebar_selector;
     GuiCustomShipFunctions* custom_function_sidebar;

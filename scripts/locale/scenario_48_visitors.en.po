@@ -2064,7 +2064,7 @@ msgstr ""
 
 #: scripts/scenario_48_visitors.lua:3898
 msgctxt "station-comms"
-msgid "He moves a slider and says, 'Ok.'"
+msgid "He moves a slider and says, 'OK.'"
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:3905

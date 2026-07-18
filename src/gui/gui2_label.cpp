@@ -12,7 +12,7 @@ void GuiLabel::onDraw(sp::RenderTarget& renderer)
 {
     const auto& back = back_style->get(getState());
     const auto& front = front_style->get(getState());
-    
+
     if (background) renderer.drawStretchedHV(rect, 8.0f, back.texture, override_bg_color ? bg_color : back.color);
 
     renderer.drawText(rect, text, text_alignment, text_size, front.font, text_color, font_flag);

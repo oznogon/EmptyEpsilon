@@ -51,6 +51,7 @@ msgid "Black hole"
 msgstr "Trou noir"
 
 #: scripts/science_db.lua:18
+#, fuzzy
 msgid ""
 "A black hole is a point of supercondensed mass with a gravitational pull so "
 "powerful that not even light can escape it. It has no locally detectable "
@@ -58,7 +59,7 @@ msgid ""
 "distorting its surroundings, creating a strange circular mirror image of the "
 "galaxy. The black disc in the middle marks the event horizon, the boundary "
 "where even light can't escape it anymore. \n"
-"\t\n"
+"    \n"
 "On the sensors, a black hole appears as a disc indicating the zone where the "
 "gravitational pull is getting dangerous, and soon will be stronger then the "
 "ship's impulse engines. An object that crosses a black hole is drawn toward "
@@ -303,15 +304,15 @@ msgstr "Électrique"
 #: scripts/science_db.lua:67
 #, fuzzy
 msgid "Red (outer band)"
-msgstr "Bandes de couleurs associées"
+msgstr "Rouge (bande extérieure)"
 
 #: scripts/science_db.lua:68
 msgid "Thermal"
-msgstr ""
+msgstr "Thermique"
 
 #: scripts/science_db.lua:68
 msgid "Green (middle band)"
-msgstr ""
+msgstr "Verte (bande centrale)"
 
 #: scripts/science_db.lua:69
 msgid "Gravitational"
@@ -319,7 +320,7 @@ msgstr "Gravitationnelle"
 
 #: scripts/science_db.lua:69
 msgid "Blue (inner band)"
-msgstr ""
+msgstr "Bleu (bande intérieure)"
 
 #: scripts/science_db.lua:70
 #, fuzzy
@@ -335,7 +336,7 @@ msgid ""
 "under- or over-powered, its electrical (red) readings change accordingly.\n"
 "\n"
 "A ship warping or preparing to jump exponentially increases its "
-"gravitational (blue) output. After completing a jump a ship performs a "
+"gravitational (blue) output. After completing a jump, a ship performs a "
 "massive power transfer that raw sensor data reads as an electrical spike."
 msgstr ""
 "La signature est l'ensemble des éléments qui permet de caractériser la "
@@ -440,7 +441,7 @@ msgstr "Contenu"
 
 #: scripts/science_db.lua:92
 msgid "Weapons, energy"
-msgstr "munitions, énergie"
+msgstr "Munitions, énergie"
 
 #: scripts/science_db.lua:93
 msgid "Close-range retrieval"
@@ -525,7 +526,7 @@ msgstr ""
 #: scripts/science_db.lua:114
 #, fuzzy
 msgid "Beam weapons"
-msgstr "Armement"
+msgstr "Faisceaux laser"
 
 #: scripts/science_db.lua:115 scripts/science_db.lua:126
 msgid "Range"
@@ -607,9 +608,8 @@ msgstr ""
 "    L = Large (2x plus puissant et lent)"
 
 #: scripts/science_db.lua:136 scripts/science_db.lua:146
-#, fuzzy
 msgid "Damage type"
-msgstr "Dégâts au bord"
+msgstr "Type de dégâts"
 
 #: scripts/science_db.lua:137 scripts/science_db.lua:147
 #: scripts/science_db.lua:175
@@ -625,7 +625,7 @@ msgstr "Dégâts au bord"
 #: scripts/science_db.lua:177
 #, fuzzy
 msgid "Blast radius (u)"
-msgstr "Rayon d'action"
+msgstr "Rayon d'explosion (u)"
 
 #: scripts/science_db.lua:140 scripts/science_db.lua:187
 msgid "Speed (u/sec.)"
@@ -655,7 +655,7 @@ msgstr ""
 #: scripts/science_db.lua:153
 #, fuzzy
 msgid "Trigger distance (u)"
-msgstr "Déclenchement"
+msgstr "Dist. de déclenchement (u)"
 
 #: scripts/science_db.lua:157 scripts/science_db.lua:158
 #: scripts/science_db.lua:160 scripts/science_db.lua:161
@@ -684,7 +684,7 @@ msgstr ""
 
 #: scripts/science_db.lua:204
 msgid "Homing missile"
-msgstr "Homing missile"
+msgstr "Missile à tête chercheuse"
 
 #: scripts/science_db.lua:205 scripts/science_db.lua:210
 #: scripts/science_db.lua:217 scripts/science_db.lua:224
@@ -815,192 +815,172 @@ msgstr ""
 "\n"
 "Chaque tir d'un HVLI déclenche une rafale de 5 projectiles, ce qui augmente "
 "les chances de toucher mais nécessite d'être suffisamment près et d'être "
-"precis pour être efficace, surtout si les tubes de lancement se trouvent sur "
+"précis pour être efficace, surtout si les tubes de lancement se trouvent sur "
 "les cotés du vaisseau. Le tir atteint son plein potentiel de dégâts dans un "
 "rayon de 2u."
 
 #: scripts/science_db.lua:244
 msgctxt "database direction"
 msgid "Front"
-msgstr ""
+msgstr "Avant"
 
 #: scripts/science_db.lua:245
 msgctxt "database direction"
 msgid "Right"
-msgstr ""
+msgstr "Droite"
 
 #: scripts/science_db.lua:246
 msgctxt "database direction"
 msgid "Left"
-msgstr ""
+msgstr "Gauche"
 
 #: scripts/science_db.lua:247
 msgctxt "database direction"
 msgid "Rear"
-msgstr ""
+msgstr "Arrière"
 
 #: scripts/science_db.lua:254
 #, fuzzy
 msgctxt "database"
 msgid "Factions"
-msgstr "Champ d'action"
+msgstr "Factions"
 
 #: scripts/science_db.lua:276 scripts/science_db.lua:279
 msgctxt "stance"
 msgid "Neutral"
-msgstr ""
+msgstr "Neutre"
 
 #: scripts/science_db.lua:280
 msgctxt "stance"
 msgid "Enemy"
-msgstr ""
+msgstr "Ennemi"
 
 #: scripts/science_db.lua:281
 msgctxt "stance"
 msgid "Friendly"
-msgstr ""
+msgstr "Amical"
 
 #: scripts/science_db.lua:291
 msgctxt "database"
 msgid "Ships"
-msgstr ""
+msgstr "Vaisseaux"
 
 #: scripts/science_db.lua:292
 msgid ""
 "Spaceships are vessels capable of withstanding the dangers of travel through "
 "deep space. They can fill many functions and vary broadly in size, from "
 "small tugs to massive dreadnoughts."
-msgstr ""
+msgstr "Les vaisseaux spatiaux sont des vaisseaux capables de résister aux dangers des voyages dans l'espace. Ils peuvent remplir de nombreuses fonctions et varient considérablement en taille, du petit remorqueur à l'énorme cuirassé, mais aussi en équipement, équipage et armement."
 
 #: scripts/science_db.lua:294
 #, fuzzy
 msgctxt "database"
 msgid "Stations"
-msgstr "Champ d'action"
+msgstr "Stations spatiale"
 
 #: scripts/science_db.lua:295
 msgid ""
 "Space stations are permanent, immobile structures ranging in scale from "
 "small outposts to city-sized communities. Many provide restocking and repair "
 "services to neutral and friendly ships."
-msgstr ""
+msgstr "Les stations spatiales sont des structures fixes et permanentes, de tailles et de fonctions diverses : petits avant-postes, stations-service, villages, villes, oasis etc.\n\nBeaucoup d'entre elles fournissent divers services de réapprovisionnement, de réparation, de soutien militaire et d'information aux vaisseaux neutres et amis qui les contactent ou s'y amarrent."
 
-#: scripts/science_db.lua:304 scripts/science_db.lua:328
+#: scripts/science_db.lua:305 scripts/science_db.lua:330
 msgid "No class"
-msgstr ""
+msgstr "Sans classe"
 
-#: scripts/science_db.lua:329
+#: scripts/science_db.lua:331
 msgid "No sub-class"
-msgstr ""
+msgstr "Sans sous-classe"
 
-#: scripts/science_db.lua:345
+#: scripts/science_db.lua:340
 msgctxt "database"
 msgid "Class"
-msgstr ""
+msgstr "Classe"
 
-#: scripts/science_db.lua:346
+#: scripts/science_db.lua:341
 msgctxt "database"
 msgid "Sub-class"
-msgstr ""
+msgstr "Sous-classe"
 
-#: scripts/science_db.lua:349 scripts/science_db.lua:351
+#: scripts/science_db.lua:353 scripts/science_db.lua:355
 msgctxt "database"
 msgid "Size"
-msgstr ""
-
-#: scripts/science_db.lua:363
-msgctxt "database"
-msgid "Shield"
-msgstr ""
+msgstr "Taille"
 
 #: scripts/science_db.lua:367
-msgid "Hull"
-msgstr ""
+msgctxt "database"
+msgid "Shield"
+msgstr "Boucliers"
 
 #: scripts/science_db.lua:371
-msgctxt "database"
-msgid "Move speed"
-msgstr ""
-
-#: scripts/science_db.lua:372
-msgctxt "database"
-msgid "Reverse move speed"
-msgstr ""
+msgid "Hull"
+msgstr "Coque"
 
 #: scripts/science_db.lua:375
 msgctxt "database"
-msgid "Turn speed"
-msgstr ""
+msgid "Move speed"
+msgstr "Vit. de dépl. avant"
 
-#: scripts/science_db.lua:378
+#: scripts/science_db.lua:376
+msgctxt "database"
+msgid "Reverse move speed"
+msgstr "Vit. de dépl. arrière"
+
+#: scripts/science_db.lua:379
+msgctxt "database"
+msgid "Turn speed"
+msgstr "Vit. de rotation"
+
+#: scripts/science_db.lua:382
 msgctxt "database"
 msgid "Warp speed"
-msgstr ""
+msgstr "Vitesse lumière"
 
-#: scripts/science_db.lua:381
+#: scripts/science_db.lua:385
 msgctxt "database"
 msgid "Jump range"
-msgstr ""
+msgstr "Portée de téléportation"
 
-#: scripts/science_db.lua:388
+#: scripts/science_db.lua:392
 #, lua-format
 msgctxt "database"
 msgid "%s beam weapon"
-msgstr ""
+msgstr "Faisceau %s"
 
-#: scripts/science_db.lua:389
+#: scripts/science_db.lua:393
 #, lua-format
 msgctxt "database"
-msgid "%.1f Dmg / %.1f sec"
-msgstr ""
+msgid "%.1f dmg. / %.1f sec."
+msgstr "Dégâts %.1f   Cycle %.1fs"
 
-#: scripts/science_db.lua:397
+#: scripts/science_db.lua:401
 #, lua-format
 msgctxt "database"
 msgid "%s tube"
-msgstr ""
+msgstr "Tube %s"
 
-#: scripts/science_db.lua:399
+#: scripts/science_db.lua:403
 #, lua-format
 msgctxt "database"
 msgid "%s small tube"
-msgstr ""
-
-#: scripts/science_db.lua:402
-#, lua-format
-msgctxt "database"
-msgid "%s large tube"
-msgstr ""
+msgstr "Tube léger %s"
 
 #: scripts/science_db.lua:406
 #, lua-format
 msgctxt "database"
-msgid "%.1f sec"
+msgid "%s large tube"
+msgstr "Tube large %s"
+
+#: scripts/science_db.lua:410
+#, lua-format
+msgctxt "database"
+msgid "%.1f sec."
+msgstr "Vit. de charge %.1fs"
+
+#: scripts/science_db.lua:422
+#, lua-format
+msgctxt "database"
+msgid "%s capacity"
 msgstr ""
 
-#~ msgid "Biological"
-#~ msgstr "Biologique"
-
-#~ msgid "Green"
-#~ msgstr "Verte"
-
-#~ msgid "Red"
-#~ msgstr "Rouge"
-
-#~ msgid "Blue"
-#~ msgstr "Bleue"
-
-#~ msgid "Drop distance"
-#~ msgstr "Distance de largage"
-
-#~ msgid "10 each, 50 total"
-#~ msgstr "10 chacune, 50 total"
-
-#~ msgid "Burst"
-#~ msgstr "Rafale"
-
-#~ msgid "Red, green"
-#~ msgstr "rouge, verte"
-
-#~ msgid "Red, blue"
-#~ msgstr "rouge, bleue"

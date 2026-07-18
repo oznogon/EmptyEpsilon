@@ -4176,7 +4176,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VEC2_TWEAK(tr("tweak-text", "Position:"), InternalCrew, position);
     ADD_IVEC2_TWEAK(tr("tweak-text", "Target position:"), InternalCrew, target_position);
     */
-    
+
     ADD_PAGE(tr("tweak-tab", "Pickup"), PickupCallback);
     new_page->description = tr("tweak-pickup", "If present, this component makes this entity collectible by other entities. Upon collision, this component grants energy, missiles, or other resources to the colliding entity, then immediately destroys itself. Can be set to be picked up only by player ships.\n\nCallback member callback can't be tweaked via this dialog.");
     ADD_BOOL_TWEAK(tr("tweak-text", "Only players can pick up this entity"), PickupCallback, player);
@@ -4597,7 +4597,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         row
             ->setSize(GuiElement::GuiSizeMax, 30.0f)
             ->setAttribute("layout", "horizontal");
-        auto ui = new GuiToggleTweak(row, tr("tweak-text", "Color by faction"), 
+        auto ui = new GuiToggleTweak(row, tr("tweak-text", "Color by faction"),
             [this](bool value)
             {
                 if (auto v = entity.getComponent<RadarTrace>())
@@ -4940,7 +4940,14 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     ADD_PAGE(tr("tweak-tab", "Nebula renderer"), NebulaRenderer);
     new_page->description = tr("tweak-nebula-renderer", "Nebula cloud rendering. Defines how far from the nebula it should be visible in 3D views.\n\nclouds_dirty is an internal flag and can't be tweaked.");
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), NebulaRenderer, radius);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Skybox:"), NebulaRenderer, skybox);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Skybox fade distance:"), NebulaRenderer, skybox_fade_distance);
+    ADD_VEC3_COLOR_TWEAK(tr("tweak-text", "Fog color:"), NebulaRenderer, fog_color);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Render range:"), NebulaRenderer, render_range);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Cloud density:"), NebulaRenderer, cloud_density);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "In-nebula visibility distance:"), NebulaRenderer, visibility_distance);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Seed (0=default):"), NebulaRenderer, seed);
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row->setSize(GuiElement::GuiSizeMax, 210.0f)->setAttribute("layout", "horizontal");
@@ -5020,7 +5027,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(ship_systems_group);
 
     ADD_PAGE(tr("tweak-tab", "Sensors system"), SensorsSystem);
-    new_page->description = tr("tweak-sensors-system", "Ship system for the sensors array. Affects drone control range and energy consumption based on system health.");
+    new_page->description = tr("tweak-sensors-system", "Ship system for the sensors array. Affects drone control range and energy consumption, the short- and long-range radar range of this ship, the short-range radar coverage of scan probes owned by this ship, and the lock range and lock delay of the science scanning dialog, all based on system health.");
     ADD_SHIP_SYSTEM_TWEAK(SensorsSystem);
     addPageToGroup(ship_systems_group);
 
@@ -5154,6 +5161,7 @@ void GuiEntityTweak::open(sp::ecs::Entity e, string select_component)
                     component_list->setSelectionIndex(component_index + 1);
                     for (auto page : pages) page->hide();
                     pages[page_index]->show();
+                    showPageDescription(page_index);
                     show();
                     return;
                 }
@@ -5248,7 +5256,7 @@ GuiTweakPage::GuiTweakPage(GuiContainer* owner)
             add_component(entity);
     });
     add_remove_button
-        ->setSize(300.0f, 50.0f)
+        ->setSize(300.0f, GuiElement::GuiSizeRow)
         ->setAttribute("alignment", "topcenter");
 
     tweaks = new GuiScrollContainer(this, "TWEAKS");

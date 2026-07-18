@@ -17,7 +17,7 @@ void CommsSystem::update(float delta)
     for(auto [entity, comms] : sp::ecs::Query<CommsTransmitter>()) {
         if (comms.open_delay > 0.0f) comms.open_delay -= delta;
 
-        if (game_server)
+        if (game_server.isAlive())
         {
             // If the channel opening delay is expired, determine whether to
             // initialize comms with the target.
@@ -316,10 +316,14 @@ void CommsSystem::addCommsIncommingMessage(sp::ecs::Entity player, string messag
     auto transmitter = player.getComponent<CommsTransmitter>();
     if (!transmitter) return;
 
+    string prefix;
+    if (transmitter->target_name != "?")
+        prefix = "[" + transmitter->target_name + "] ";
+
     // Record incoming comms messages to the ship's log.
     if (auto log = player.getComponent<ShipLog>())
         for(string line : message.split("\n"))
-            log->add(line, glm::u8vec4(192, 192, 255, 255));
+            log->add(prefix + line, glm::u8vec4(192, 192, 255, 255));
     // Add the message to the messaging window.
     transmitter->incomming_message = transmitter->incomming_message + "\n> " + message;
 }
@@ -342,10 +346,14 @@ void CommsSystem::setCommsMessage(sp::ecs::Entity player, string message)
     auto transmitter = player.getComponent<CommsTransmitter>();
     if (!transmitter) return;
 
+    string prefix;
+    if (transmitter->target_name != "?")
+        prefix = "[" + transmitter->target_name + "] ";
+
     // Record a new comms message to the ship's log.
     if (auto log = player.getComponent<ShipLog>())
         for(string line : message.split("\n"))
-            log->add(line, glm::u8vec4(192, 192, 255, 255));
+            log->add(prefix + line, glm::u8vec4(192, 192, 255, 255));
     // Display the message in the messaging window.
     transmitter->incomming_message = message;
 }

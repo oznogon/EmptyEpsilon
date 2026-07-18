@@ -1,3 +1,5 @@
+# display_name: Default
+
 [base] {
     # Full-game interface properties:
 
@@ -5,6 +7,8 @@
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
     # Positive offset moves the font down, negative moves it up.
     font_offset: 0.0
+    # Multiline text line-height multiplier. 1.0 uses the font's default spacing.
+    line_height: 1.0
 
     # Stronger font used at a few locations without UI widgets.
     # UI widgets with their own font theme properties might set this on their own.
@@ -112,6 +116,14 @@
             font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
             size: 24.0
             # Main grid line alpha; subsector line alpha is half of this.
+            color: #404080FF
+        }
+    }
+
+    [briefing] {
+        [briefing.map] {
+            # Grid line color for briefing map.
+            # Subsector dot alpha is half of this.
             color: #404080FF
         }
     }
@@ -522,7 +534,7 @@
             }
         }
     }
-    
+
     # GuiResizableDialog
     [resizabledialog] {
         # Corner handle for resizing the dialog.
@@ -564,7 +576,7 @@
     # Stronger font used at a few locations without UI widgets.
     [bold] {
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
-        offset: 0.0
+        font_offset: 0.0
         color: #FFFFFF
     }
 

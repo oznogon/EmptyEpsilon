@@ -1,5 +1,4 @@
-#ifndef PACK_RESOURCE_PROVIDER_H
-#define PACK_RESOURCE_PROVIDER_H
+#pragma once
 
 #include "resources.h"
 #include <unordered_map>
@@ -44,5 +43,3 @@ public:
 
     friend class PackResourceProvider;
 };
-
-#endif//PACK_RESOURCE_PROVIDER_H

@@ -10,7 +10,6 @@ class GuiRadarView;
 class GuiLabel;
 class GuiRadarZoomSlider;
 class GuiSelector;
-class GuiSlider;
 class GuiToggleButton;
 class GuiHotkeyHelpOverlay;
 

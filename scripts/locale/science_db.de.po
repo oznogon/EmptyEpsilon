@@ -49,6 +49,7 @@ msgid "Black hole"
 msgstr "Schwarzes Loch"
 
 #: scripts/science_db.lua:18
+#, fuzzy
 msgid ""
 "A black hole is a point of supercondensed mass with a gravitational pull so "
 "powerful that not even light can escape it. It has no locally detectable "
@@ -56,7 +57,7 @@ msgid ""
 "distorting its surroundings, creating a strange circular mirror image of the "
 "galaxy. The black disc in the middle marks the event horizon, the boundary "
 "where even light can't escape it anymore. \n"
-"\t\n"
+"    \n"
 "On the sensors, a black hole appears as a disc indicating the zone where the "
 "gravitational pull is getting dangerous, and soon will be stronger then the "
 "ship's impulse engines. An object that crosses a black hole is drawn toward "
@@ -296,7 +297,7 @@ msgid ""
 "under- or over-powered, its electrical (red) readings change accordingly.\n"
 "\n"
 "A ship warping or preparing to jump exponentially increases its "
-"gravitational (blue) output. After completing a jump a ship performs a "
+"gravitational (blue) output. After completing a jump, a ship performs a "
 "massive power transfer that raw sensor data reads as an electrical spike."
 msgstr ""
 "Der äußere Ring der Wissenschaft-Radarschirme enthält drei farbige Bänder, "
@@ -817,100 +818,107 @@ msgid ""
 "Space stations are permanent, immobile structures ranging in scale from "
 "small outposts to city-sized communities. Many provide restocking and repair "
 "services to neutral and friendly ships."
-msgstr ""
+msgstr "Raumstationen sind permanente, unbewegliche Strukturen, die von kleinen Außenposten bis zu städtegroßen Gemeinschaften reichen können. Viele bieten neutralen und befreundeten Schiffen Dienste wie Reparaturen und Versorgung an."
 
-#: scripts/science_db.lua:304 scripts/science_db.lua:328
+#: scripts/science_db.lua:305 scripts/science_db.lua:330
 msgid "No class"
 msgstr "Keine Klasse"
 
-#: scripts/science_db.lua:329
+#: scripts/science_db.lua:331
 msgid "No sub-class"
 msgstr "Keine Unterklasse"
 
-#: scripts/science_db.lua:345
+#: scripts/science_db.lua:340
 msgctxt "database"
 msgid "Class"
 msgstr "Klasse"
 
-#: scripts/science_db.lua:346
+#: scripts/science_db.lua:341
 msgctxt "database"
 msgid "Sub-class"
 msgstr "Unterklasse"
 
-#: scripts/science_db.lua:349 scripts/science_db.lua:351
+#: scripts/science_db.lua:353 scripts/science_db.lua:355
 msgctxt "database"
 msgid "Size"
 msgstr "Größe"
 
-#: scripts/science_db.lua:363
+#: scripts/science_db.lua:367
 msgctxt "database"
 msgid "Shield"
 msgstr "Schilde"
 
-#: scripts/science_db.lua:367
+#: scripts/science_db.lua:371
 msgid "Hull"
 msgstr "Hülle"
 
-#: scripts/science_db.lua:371
+#: scripts/science_db.lua:375
 msgctxt "database"
 msgid "Move speed"
 msgstr "Geschwindigkeit"
 
-#: scripts/science_db.lua:372
+#: scripts/science_db.lua:376
 msgctxt "database"
 msgid "Reverse move speed"
 msgstr "Geschw. rückwärts"
 
-#: scripts/science_db.lua:375
+#: scripts/science_db.lua:379
 msgctxt "database"
 msgid "Turn speed"
 msgstr "Wendigkeit"
 
-#: scripts/science_db.lua:378
+#: scripts/science_db.lua:382
 msgctxt "database"
 msgid "Warp speed"
 msgstr "Warpgeschwindigkeit"
 
-#: scripts/science_db.lua:381
+#: scripts/science_db.lua:385
 msgctxt "database"
 msgid "Jump range"
 msgstr "Sprungreichweite"
 
-#: scripts/science_db.lua:388
+#: scripts/science_db.lua:392
 #, lua-format
 msgctxt "database"
 msgid "%s beam weapon"
 msgstr "Laser %s"
 
-#: scripts/science_db.lua:389
-#, lua-format
+#: scripts/science_db.lua:393
+#, fuzzy, lua-format
 msgctxt "database"
-msgid "%.1f Dmg / %.1f sec"
+msgid "%.1f dmg. / %.1f sec."
 msgstr "%.1f Schaden / %.1f Sek."
 
-#: scripts/science_db.lua:397
+#: scripts/science_db.lua:401
 #, lua-format
 msgctxt "database"
 msgid "%s tube"
 msgstr "Schacht %s"
 
-#: scripts/science_db.lua:399
+#: scripts/science_db.lua:403
 #, lua-format
 msgctxt "database"
 msgid "%s small tube"
 msgstr "Kleiner Schacht %s"
 
-#: scripts/science_db.lua:402
+#: scripts/science_db.lua:406
 #, lua-format
 msgctxt "database"
 msgid "%s large tube"
 msgstr "Großer Schacht %s"
 
-#: scripts/science_db.lua:406
+#: scripts/science_db.lua:410
+#, fuzzy, lua-format
+msgctxt "database"
+msgid "%.1f sec."
+msgstr "%.1f Sek."
+
+#: scripts/science_db.lua:422
 #, lua-format
 msgctxt "database"
-msgid "%.1f sec"
-msgstr "%.1f Sek."
+msgid "%s capacity"
+msgstr ""
 
 #~ msgid "Biological"
 #~ msgstr "Biologisch"
+

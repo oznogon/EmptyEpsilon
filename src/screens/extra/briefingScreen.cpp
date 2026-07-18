@@ -13,6 +13,7 @@
 
 #include "gui/hotkeyConfig.h"
 #include "gui/theme.h"
+#include "gui/gui2_briefingmap.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_image.h"
@@ -62,6 +63,10 @@ BriefingScreen::BriefingScreen(GuiContainer* owner)
     page_image
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    page_map = new GuiBriefingMap(page_container, "BRIEFING_PAGE_MAP");
+    page_map
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
     page_caption = new GuiScrollFormattedText(page_container, "PAGE_CAPTION", "");
     page_caption
         ->setAlignment(sp::Alignment::Center)
@@ -72,7 +77,7 @@ BriefingScreen::BriefingScreen(GuiContainer* owner)
 
     auto page_nav = new GuiElement(page_container, "PAGE_NAV");
     page_nav
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "50");
 
     // Playback timing progress indicator.
@@ -203,6 +208,7 @@ void BriefingScreen::updatePage()
     {
         current_page = 0;
         page_image->hide();
+        page_map->hide();
         page_caption->hide();
         no_pages_label->show();
         page_slider->hide();
@@ -220,10 +226,22 @@ void BriefingScreen::updatePage()
     // Clamp the page to valid values.
     current_page = std::clamp(current_page, 0, static_cast<int>(pages.size()) - 1);
 
-    // Show the page image, if any, and hide the no-pages message.
-    page_image
-        ->setTexture(pages[current_page].image)
-        ->show();
+    // Show the page image or map, whichever is defined, and hide the no-pages
+    // message.
+    if (!pages[current_page].map_data.keyframes.empty())
+    {
+        page_image->hide();
+        page_map->clearMapData();
+        page_map->setMapData(&pages[current_page].map_data);
+        page_map->show();
+    }
+    else
+    {
+        page_image
+            ->setTexture(pages[current_page].image)
+            ->show();
+        page_map->hide();
+    }
     no_pages_label->hide();
 
     bool has_audio = false;

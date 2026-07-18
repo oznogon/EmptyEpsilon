@@ -3,14 +3,16 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "crewPositionRequirements.h"
 
-#include "components/reactor.h"
-#include "components/target.h"
-#include "components/beamWeaponTarget.h"
-#include "components/radar.h"
-#include "components/drone.h"
 #include "components/beamweapon.h"
+#include "components/beamWeaponTarget.h"
 #include "components/collision.h"
+#include "components/drone.h"
+#include "components/radar.h"
+#include "components/reactor.h"
+#include "components/shields.h"
+#include "components/target.h"
 #include "components/utilityBeam.h"
 
 #include "screenComponents/alertOverlay.h"
@@ -27,10 +29,12 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_selector.h"
+#include "gui/gui2_togglebutton.h"
 
 BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "BEAM_WEAPONS_SCREEN", GuiTheme::getColor("background"))
 {
+    // Draw background decorations.
     background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
     background_gradient
         ->setTextureThemed("background.gradient")
@@ -43,7 +47,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Message if entity lacks the DroneController component.
-    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", tr("drone", "No beam weapons"), 50.0f);
+    no_weapons_label = new GuiLabel(this, "NO_WEAPONS_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::beamWeaponsOfficer), GuiElement::GuiSizeRow);
     no_weapons_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -76,23 +80,41 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMatchHeight, 800.0f);
 
+    beam_safety = new GuiToggleButton(beam_controls, "BEAM_SAFETY", tr("Autofire"),
+        [this](bool active)
+        {
+            my_player_info->commandSetBeamFiringEnabled(active);
+        }
+    );
+    beam_safety
+        ->setIcon("gui/icons/lock-beams")
+        ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
+
     beam_info_box = new GuiElement(beam_controls, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(280.0f, 150.0f)
+        ->setSize(280.0f, 230.0f)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam targeting"), 30.0f))
-        ->addBackground()
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
-    (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
-    (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
-    (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
-        ->setPosition(0.0f, 50.0f, sp::Alignment::TopLeft);
+    if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
+    {
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam targeting"), 30.0f))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Frequency"), 25.0f))
+            ->setSize(GuiElement::GuiSizeMax, 40.0f);
+        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Target system"), 25.0f))
+            ->setSize(GuiElement::GuiSizeMax, 40.0f);
+        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setPosition(0.0f, GuiElement::GuiSizeRow, sp::Alignment::TopLeft);
+    }
 
     auto stats = new GuiElement(beam_controls, "WEAPONS_STATS");
     stats
@@ -100,9 +122,19 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setSize(240.0f, 120.0f)
         ->setAttribute("layout", "vertical");
 
-    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45f, tr("Energy"), "");
     energy_display
         ->setIcon("gui/icons/energy")
+        ->setTextSize(20.0f)
+        ->setSize(240.0f, 40.0f);
+    front_shield_display = new GuiKeyValueDisplay(stats, "FRONT_SHIELD_DISPLAY", 0.45f, tr("shields","Front"), "");
+    front_shield_display
+        ->setIcon("gui/icons/shields-fore")
+        ->setTextSize(20.0f)
+        ->setSize(240.0f, 40.0f);
+    rear_shield_display = new GuiKeyValueDisplay(stats, "REAR_SHIELD_DISPLAY", 0.45f, tr("shields", "Rear"), "");
+    rear_shield_display
+        ->setIcon("gui/icons/shields-aft")
         ->setTextSize(20.0f)
         ->setSize(240.0f, 40.0f);
 
@@ -125,7 +157,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
     );
     sidebar_selector
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
-        ->setSize(250.0f, 50.0f)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     custom_function_sidebar = new GuiCustomShipFunctions(beam_controls, CrewPosition::beamWeaponsOfficer, "BEAM_WEAPONS_CUSTOM_FUNCS");
@@ -176,8 +208,9 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto beam_weapon_sys = my_spaceship.getComponent<BeamWeaponSys>();
-        const bool bw = beam_weapon_sys && beam_weapon_sys->mounts.size() > 0;
+        auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
+        if (beam_sys) beam_safety->setValue(beam_sys->is_firing_enabled);
+        const bool bw = crewPositionRequirements::hasRequirements(CrewPosition::beamWeaponsOfficer, my_spaceship);
         background_gradient->setVisible(bw);
         beam_controls->setVisible(bw);
         no_weapons_label->setVisible(!bw);
@@ -192,12 +225,32 @@ void BeamWeaponsScreen::onDraw(sp::RenderTarget& renderer)
         if (reactor)
             energy_display->setValue(string(static_cast<int>(reactor->energy)));
 
+        auto shields = my_spaceship.getComponent<Shields>();
+        if (shields && shields->entries.size() > 0)
+        {
+            front_shield_display
+                ->setValue(string(shields->entries[0].percentage()) + "%")
+                ->show();
+        }
+        else front_shield_display->hide();
+
+        if (shields && shields->entries.size() > 1)
+        {
+            rear_shield_display
+                ->setValue(string(shields->entries[1].percentage()) + "%")
+                ->show();
+        }
+        else rear_shield_display->hide();
+
+        // Get the beam weapons target. If none, check for a legacy target.
         if (auto tg = my_spaceship.getComponent<BeamWeaponTarget>())
             targets.set(tg->entity);
         else if (auto tg = my_spaceship.getComponent<Target>())
             targets.set(tg->entity);
         else
             targets.set(sp::ecs::Entity{});
+
+        beam_info_box->setVisible(beam_sys && (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage));
     }
 
     GuiOverlay::onDraw(renderer);
@@ -287,12 +340,22 @@ void BeamWeaponsScreen::onUpdate()
     {
         sidebar_selector->addEntry(tr("weaponsTab", "Functions"), "func");
         sidebar_selector->show();
+        if (sidebar_selector->getSelectionIndex() == -1)
+        {
+            int func_idx = sidebar_selector->indexByValue("func");
+            if (func_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(func_idx);
+                custom_function_sidebar->show();
+            }
+        }
     }
     else if (!should_have_func_tab && has_func_tab)
     {
         bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
         sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
         custom_function_sidebar->hide();
+
         if (func_was_selected)
         {
             int util_idx = sidebar_selector->indexByValue("util");
@@ -321,6 +384,16 @@ void BeamWeaponsScreen::onUpdate()
     {
         sidebar_selector->addEntry(tr("weaponsTab", "Utility Beam"), "util");
         sidebar_selector->show();
+        if (sidebar_selector->getSelectionIndex() == -1)
+        {
+            int util_idx = sidebar_selector->indexByValue("util");
+            if (util_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(util_idx);
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
+            }
+        }
     }
     else if (!should_have_util_tab && has_util_tab)
     {
@@ -328,6 +401,7 @@ void BeamWeaponsScreen::onUpdate()
         sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
         utility_beam_sidebar->hide();
         utility_beam_dial->hide();
+
         if (util_was_selected)
         {
             int func_idx = sidebar_selector->indexByValue("func");

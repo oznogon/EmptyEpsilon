@@ -14,7 +14,6 @@ namespace sp {
 }
 
 class GuiElement;
-class GuiLayout;
 class GuiTheme;
 
 class GuiContainer : sp::NonCopyable
@@ -32,7 +31,7 @@ public:
             float top = 0.0f;
             float bottom = 0.0f;
         };
-        
+
         glm::vec2 position{0.0f, 0.0f};
         sp::Alignment alignment = sp::Alignment::TopLeft;
         glm::vec2 size{1.0f, 1.0f};
@@ -45,7 +44,8 @@ public:
         // Defaulting to true means containers auto-size to fit their children
         // unless explicitly given a fixed size. Callers setting layout.size
         // directly should also set this to false.
-        bool match_content_size = true;
+        bool match_content_x = true;
+        bool match_content_y = true;
     };
 
     GuiContainer() = default;
@@ -73,7 +73,7 @@ protected:
     sp::Rect rect{0,0,0,0};
     std::unique_ptr<GuiLayout> layout_manager = nullptr;
 
-    void cleanTree();
+    virtual void cleanTree();
 
     template<typename RecurseFunc, typename TestFunc>
     GuiElement* dispatchToChildren(glm::vec2 position, RecurseFunc recurse, TestFunc test);

@@ -237,6 +237,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             style.states[n].size = 30.0f;
             style.states[n].font = nullptr;
             style.states[n].font_offset = 0.0f;
+            style.states[n].line_height = 1.0f;
             style.states[n].texture = "";
             style.states[n].sound = "";
         }
@@ -247,6 +248,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
         global_style.size = 30.0f;
         global_style.font = nullptr;
         global_style.font_offset = 0.0f;
+        global_style.line_height = 1.0f;
         global_style.texture = "";
         global_style.sound = "";
 
@@ -269,7 +271,17 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             }
         }
         if (input.find("font_offset") != input.end())
+        {
             global_style.font_offset = input["font_offset"].toFloat();
+            if (global_style.font)
+                global_style.font->setBaselineOffset(global_style.font_offset);
+        }
+        if (input.find("line_height") != input.end())
+        {
+            global_style.line_height = input["line_height"].toFloat();
+            if (global_style.font)
+                global_style.font->setLineHeight(global_style.line_height);
+        }
         if (input.find("size") != input.end())
             global_style.size = input["size"].toFloat();
         if (input.find("sound") != input.end())
@@ -306,6 +318,8 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 style.states[n].font = global_style.font;
             if (input.find("font_offset") != input.end())
                 style.states[n].font_offset = global_style.font_offset;
+            if (input.find("line_height") != input.end())
+                style.states[n].line_height = global_style.line_height;
             if (input.find("size") != input.end())
                 style.states[n].size = global_style.size;
             if (input.find("sound") != input.end())
@@ -324,11 +338,32 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                     LOG(Debug, "State-specific font '", state_font_path, "' failed to load for element ", element_name, " state ", postfix, " in theme ", name);
             }
             if (input.find("font_offset." + postfix) != input.end())
+            {
                 style.states[n].font_offset = input["font_offset." + postfix].toFloat();
+                if (style.states[n].font)
+                    style.states[n].font->setBaselineOffset(style.states[n].font_offset);
+            }
+            if (input.find("line_height." + postfix) != input.end())
+            {
+                style.states[n].line_height = input["line_height." + postfix].toFloat();
+                if (style.states[n].font)
+                    style.states[n].font->setLineHeight(style.states[n].line_height);
+            }
             if (input.find("size." + postfix) != input.end())
                 style.states[n].size = input["size." + postfix].toFloat();
             if (input.find("sound." + postfix) != input.end())
                 style.states[n].sound = input["sound." + postfix];
+        }
+
+        // Apply baseline offset and line height to each state's font object so
+        // they take effect regardless of where the values came from.
+        for (int n = 0; n < int(GuiElement::State::COUNT); n++)
+        {
+            if (style.states[n].font)
+            {
+                style.states[n].font->setBaselineOffset(style.states[n].font_offset);
+                style.states[n].font->setLineHeight(style.states[n].line_height);
+            }
         }
 
         theme->styles[element_name] = style;
@@ -351,6 +386,7 @@ GuiTheme::GuiTheme(const string& name)
     if(fonts.size() > 0)
         fallback_state.font = cacheFont(fonts[0]);
     fallback_state.font_offset = 0.0f;
+    fallback_state.line_height = 1.0f;
     fallback_state.texture = "";
     GuiThemeStyle fallback;
     for(unsigned int n=0; n<int(GuiElement::State::COUNT); n++)

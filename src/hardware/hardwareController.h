@@ -1,14 +1,13 @@
-#ifndef HARDWARE_CONTROLLER_H
-#define HARDWARE_CONTROLLER_H
+#pragma once
 
 #include "engine.h"
 #include "hardwareOutputDevice.h"
 #include "timer.h"
 #include "Updatable.h"
 
-
 class HardwareOutputDevice;
 class HardwareMappingEffect;
+
 class HardwareMappingState
 {
 public:
@@ -27,6 +26,7 @@ public:
 
     HardwareMappingEffect* effect;
 };
+
 class HardwareMappingEvent
 {
 public:
@@ -48,6 +48,7 @@ public:
 
     HardwareMappingEffect* effect;
 };
+
 class HardwareController : public Updatable
 {
 private:
@@ -71,5 +72,3 @@ private:
     void createNewHardwareMappingEvent(int channel_number, std::unordered_map<string, string>& settings);
     HardwareMappingEffect* createEffect(std::unordered_map<string, string>& settings);
 };
-
-#endif//HARDWARE_CONTROLLER_H

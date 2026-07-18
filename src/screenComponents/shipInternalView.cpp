@@ -9,15 +9,37 @@ GuiShipInternalView::GuiShipInternalView(GuiContainer* owner, string id, float r
 {
 }
 
+static float computeEffectiveRoomSize(float base_room_size, glm::vec2 available_size, glm::ivec2 room_grid_size)
+{
+    if (available_size.x <= 0 || available_size.y <= 0 || room_grid_size.x <= 0 || room_grid_size.y <= 0)
+        return base_room_size;
+    float scale = std::min(available_size.x / (room_grid_size.x * base_room_size),
+                           available_size.y / (room_grid_size.y * base_room_size));
+    scale = std::min(1.0f, scale);
+    return base_room_size * scale;
+}
+
 GuiShipInternalView* GuiShipInternalView::setShip(sp::ecs::Entity ship)
 {
     if (viewing_ship == ship)
     {
         auto ir = ship.getComponent<InternalRooms>();
         if (!ir || (!ir->rooms_dirty && !ir->doors_dirty))
-            return this;
-        // Room or door layout changed; force rebuild below.
-        viewing_ship = sp::ecs::Entity();
+        {
+            if (room_container && ir)
+            {
+                auto room_min = ir->roomMin();
+                auto max_size = ir->roomMax() - room_min;
+                float new_size = computeEffectiveRoomSize(room_size, rect.size, max_size);
+                if (std::abs(new_size - current_room_size) > 0.5f)
+                    viewing_ship = sp::ecs::Entity();
+            }
+            if (viewing_ship == ship)
+                return this;
+        }else{
+            // Room or door layout changed; force rebuild below.
+            viewing_ship = sp::ecs::Entity();
+        }
     }
     viewing_ship = ship;
     if (room_container)
@@ -32,19 +54,22 @@ GuiShipInternalView* GuiShipInternalView::setShip(sp::ecs::Entity ship)
     if (!ir)
         return this;
 
-    room_container = new GuiShipRoomContainer(this, id + "_ROOM_CONTAINER", room_size, [this](glm::ivec2 position) {
+    auto room_min = ir->roomMin();
+    auto max_size = ir->roomMax() - room_min;
+
+    current_room_size = computeEffectiveRoomSize(room_size, rect.size, max_size);
+
+    room_container = new GuiShipRoomContainer(this, id + "_ROOM_CONTAINER", current_room_size, [this](glm::ivec2 position) {
         if (selected_crew_member)
             my_player_info->commandCrewSetTargetPosition(selected_crew_member, position);
     });
     room_container->setPosition(0, 0, sp::Alignment::Center);
-    auto room_min = ir->roomMin();
-    auto max_size = ir->roomMax() - room_min;
 
     for(unsigned int n=0; n<ir->rooms.size(); n++)
     {
         auto& rt = ir->rooms[n];
-        GuiShipRoom* room = new GuiShipRoom(room_container, id + "_ROOM_" + string(n), room_size, rt.size, nullptr);
-        room->setPosition(glm::vec2(rt.position - room_min) * room_size, sp::Alignment::TopLeft);
+        GuiShipRoom* room = new GuiShipRoom(room_container, id + "_ROOM_" + string(n), current_room_size, rt.size, nullptr);
+        room->setPosition(glm::vec2(rt.position - room_min) * current_room_size, sp::Alignment::TopLeft);
         room->setSystem(ship, rt.system);
     }
 
@@ -53,16 +78,16 @@ GuiShipInternalView* GuiShipInternalView::setShip(sp::ecs::Entity ship)
         auto& dt = ir->doors[n];
 
         GuiShipDoor* door = new GuiShipDoor(room_container, id + "_DOOR_" + string(n), nullptr);
-        door->setSize(room_size, room_size);
+        door->setSize(current_room_size, current_room_size);
         if (dt.horizontal)
         {
             door->setHorizontal();
-            door->setPosition(glm::vec2(dt.position - room_min) * room_size - glm::vec2(0, room_size / 2.0f));
+            door->setPosition(glm::vec2(dt.position - room_min) * current_room_size - glm::vec2(0, current_room_size / 2.0f));
         }else{
-            door->setPosition(glm::vec2(dt.position - room_min) * room_size - glm::vec2(room_size / 2.0f, 0));
+            door->setPosition(glm::vec2(dt.position - room_min) * current_room_size - glm::vec2(current_room_size / 2.0f, 0));
         }
     }
-    room_container->setSize(glm::vec2(max_size) * room_size);
+    room_container->setSize(glm::vec2(max_size) * current_room_size);
     ir->rooms_dirty = false;
     ir->doors_dirty = false;
 
@@ -94,7 +119,7 @@ void GuiShipInternalView::onDraw(sp::RenderTarget& target)
                 crew_list.push_back(new GuiShipCrew(room_container, "CREW", entity, selected_crew_member, [this](sp::ecs::Entity crew_member){
                     selected_crew_member = crew_member;
                 }));
-                crew_list.back()->setSize(room_size, room_size);
+                crew_list.back()->setSize(current_room_size, current_room_size);
             }
         }
         crew_list.erase(std::remove_if(crew_list.begin(), crew_list.end(), [](GuiShipCrew* cr) {

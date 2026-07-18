@@ -511,7 +511,7 @@ GuiEntityInfoPanelGrid* GuiEntityInfoPanelGrid::setCustomLabel(int panel_index, 
     {
         cached_panels[panel_index]->setCustomLabel(label_index, new_label);
     }
-    
+
     return this;
 }
 
@@ -522,7 +522,7 @@ GuiEntityInfoPanelGrid* GuiEntityInfoPanelGrid::setCustomIcon(int panel_index, i
     {
         cached_panels[panel_index]->setCustomIcon(icon_index, new_image);
     }
-    
+
     return this;
 }
 

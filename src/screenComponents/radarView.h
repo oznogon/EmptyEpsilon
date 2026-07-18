@@ -6,7 +6,6 @@
 
 class GuiMissileTubeControls;
 class TargetsContainer;
-class GuiThemeStyle;
 class Waypoints;
 
 class GuiRadarView : public GuiElement

@@ -48,7 +48,7 @@ void InternalCrewSystem::update(float delta)
 
         if (ir->rooms.size() == 0)
         {
-            if (game_server) entity.destroy();
+            if (game_server.isAlive()) entity.destroy();
             continue;
         }
 

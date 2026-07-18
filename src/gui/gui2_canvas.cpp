@@ -165,8 +165,10 @@ static void dumpGuiTree(FILE* f, GuiContainer* c)
         fprintf(f, "<div style='position:fixed;left:%fpx;top:%fpx;width:%fpx;height:%fpx;background:rgba(0,0,0,0.1);'>ID:%s", double(r.position.x), double(r.position.y), double(r.size.x), double(r.size.y), child->getID().c_str());
         fprintf(f, "<br>%s", typeid(child).name());
         fprintf(f, "<br>size=%f,%f", double(child->getLayout().size.x), double(child->getLayout().size.y));
-        if (child->getLayout().match_content_size)
-            fprintf(f, "<br>match_content_size=true");
+        if (child->getLayout().match_content_x)
+            fprintf(f, "<br>match_content_x=true");
+        if (child->getLayout().match_content_y)
+            fprintf(f, "<br>match_content_y=true");
         if (child->getLayout().fill_width)
             fprintf(f, "<br>fill_width=true");
         if (child->getLayout().fill_height)

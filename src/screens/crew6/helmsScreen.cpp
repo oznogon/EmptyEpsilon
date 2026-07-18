@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "preferenceManager.h"
 #include "featureDefs.h"
+#include "crewPositionRequirements.h"
 
 #include "components/reactor.h"
 #include "components/warpdrive.h"
@@ -34,6 +35,7 @@
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_image.h"
+#include "gui/gui2_tooltip.h"
 
 HelmsScreen::HelmsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "HELMS_SCREEN", GuiTheme::getColor("background"))
@@ -53,7 +55,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
     // Message if entity lacks all propulsion, maneuver, and docking
     // components.
-    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", tr("helms", "No helms controls"), 50.0f);
+    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::helmsOfficer), GuiElement::GuiSizeRow);
     no_controls_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -66,6 +68,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
     combat_maneuver = new GuiCombatManeuver(helms_controls, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 215);
+    (new GuiTextTooltip(combat_maneuver, "COMBAT_MANEUVER_TIP", tr("tooltips", "Execute combat maneuvers: strafe laterally or boost forward to evade enemies."), 20.0f))->setWidth(280.0f);
 
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
@@ -130,19 +133,29 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
     auto energy_display = new EnergyInfoDisplay(helms_controls, "ENERGY_DISPLAY", 0.45);
     energy_display->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 40);
+    (new GuiTextTooltip(energy_display, "HELMS_ENERGY_TIP", tr("tooltips", "Current reactor energy level."), 20.0f))->setWidth(280.0f);
     auto heading_display = new HeadingInfoDisplay(helms_controls, "HEADING_DISPLAY", 0.45);
     heading_display->setPosition(20, 140, sp::Alignment::TopLeft)->setSize(240, 40);
+    (new GuiTextTooltip(heading_display, "HEADING_TIP", tr("tooltips", "Current ship heading in degrees."), 20.0f))->setWidth(280.0f);
     auto velocity_display = new VelocityInfoDisplay(helms_controls, "VELOCITY_DISPLAY", 0.45);
     velocity_display->setPosition(20, 180, sp::Alignment::TopLeft)->setSize(240, 40);
+    (new GuiTextTooltip(velocity_display, "VELOCITY_TIP", tr("tooltips", "Current ship velocity."), 20.0f))->setWidth(280.0f);
 
     GuiElement* engine_layout = new GuiElement(helms_controls, "ENGINE_LAYOUT");
     engine_layout->setPosition(20, -100, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 300)->setAttribute("layout", "horizontal");
-    (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
-    (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
-    (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
+    auto* impulse = new GuiImpulseControls(engine_layout, "IMPULSE");
+    impulse->setSize(100, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(impulse, "IMPULSE_TIP", tr("tooltips", "Adjust impulse engine throttle forward and reverse for sub-light travel."), 20.0f))->setWidth(280.0f);
+    auto* warp = new GuiWarpControls(engine_layout, "WARP");
+    warp->setSize(100, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(warp, "WARP_TIP", tr("tooltips", "Engage or disengage the warp drive for faster-than-light travel."), 20.0f))->setWidth(280.0f);
+    auto* jump = new GuiJumpControls(engine_layout, "JUMP");
+    jump->setSize(100, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(jump, "JUMP_TIP", tr("tooltips", "Charge and activate the jump drive to instantly travel long distances."), 20.0f))->setWidth(280.0f);
 
     docking_button = new GuiDockingButton(helms_controls, "DOCKING");
     docking_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(280, 50)->setVisible(my_spaceship.hasComponent<DockingPort>());
+    (new GuiTextTooltip(docking_button, "DOCKING_TIP", tr("tooltips", "Request docking with or undocking from the nearest station or ship."), 20.0f))->setWidth(280.0f);
 
     auto ub = my_spaceship.getComponent<UtilityBeam>();
 
@@ -162,6 +175,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
         }
     });
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
+    (new GuiTextTooltip(sidebar_selector, "HELMS_SIDEBAR_TIP", tr("tooltips", "Switch between custom ship functions and utility beam controls."), 20.0f))->setWidth(280.0f);
 
     custom_function_sidebar = new GuiCustomShipFunctions(helms_controls, CrewPosition::helmsOfficer, "HELMS_CUSTOM_FUNCS");
     custom_function_sidebar
@@ -205,12 +219,7 @@ void HelmsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        const bool has_any_propulsion = my_spaceship.hasComponent<ImpulseEngine>()
-            || my_spaceship.hasComponent<JumpDrive>()
-            || my_spaceship.hasComponent<WarpDrive>()
-            || my_spaceship.hasComponent<CombatManeuveringThrusters>()
-            || my_spaceship.hasComponent<ManeuveringThrusters>()
-            || my_spaceship.hasComponent<DockingPort>();
+        const bool has_any_propulsion = crewPositionRequirements::hasRequirements(CrewPosition::helmsOfficer, my_spaceship);
         if (!has_any_propulsion)
         {
             GuiOverlay::onDraw(renderer);
@@ -224,12 +233,7 @@ void HelmsScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
 
-    const bool has_any_propulsion = my_spaceship.hasComponent<ImpulseEngine>()
-        || my_spaceship.hasComponent<JumpDrive>()
-        || my_spaceship.hasComponent<WarpDrive>()
-        || my_spaceship.hasComponent<CombatManeuveringThrusters>()
-        || my_spaceship.hasComponent<ManeuveringThrusters>()
-        || my_spaceship.hasComponent<DockingPort>();
+    const bool has_any_propulsion = crewPositionRequirements::hasRequirements(CrewPosition::helmsOfficer, my_spaceship);
 
     background_gradient->setVisible(has_any_propulsion);
     helms_controls->setVisible(has_any_propulsion);
@@ -277,6 +281,15 @@ void HelmsScreen::onUpdate()
     {
         sidebar_selector->addEntry(tr("helmsTab", "Functions"), "func");
         sidebar_selector->show();
+        if (sidebar_selector->getSelectionIndex() == -1)
+        {
+            int func_idx = sidebar_selector->indexByValue("func");
+            if (func_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(func_idx);
+                custom_function_sidebar->show();
+            }
+        }
     }
     else if (!should_have_func_tab && has_func_tab)
     {
@@ -309,6 +322,16 @@ void HelmsScreen::onUpdate()
     {
         sidebar_selector->addEntry(tr("helmsTab", "Utility Beam"), "util");
         sidebar_selector->show();
+        if (sidebar_selector->getSelectionIndex() == -1)
+        {
+            int util_idx = sidebar_selector->indexByValue("util");
+            if (util_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(util_idx);
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
+            }
+        }
     }
     else if (!should_have_util_tab && has_util_tab)
     {

@@ -73,7 +73,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     camera_lock_selector
         ->setSelectionIndex(camera_mode_flyby_int)
         ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     // Auto-zoom toggle (works across all camera modes)
     camera_auto_zoom_toggle = new GuiToggleButton(camera_controls, "CAMERA_AUTO_ZOOM_TOGGLE", tr("button", "Auto-zoom camera"),
@@ -84,7 +84,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     camera_auto_zoom_toggle
         ->setValue(false)
         ->setPosition(320.0f, -70.0f, sp::Alignment::BottomLeft)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     // Mode-context option trigger
     camera_reset = new GuiToggleButton(camera_controls, "CAMERA_RESET", tr("button", "Reset camera"),
@@ -158,13 +158,13 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     camera_reset
         ->setValue(false)
         ->setPosition(320.0f, -120.0f, sp::Alignment::BottomLeft)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     // Camera mode selector
     camera_mode_selector = new GuiSelector(camera_controls, "CAMERA_MODE_SELECTOR", [this](int index, string value) {});
     camera_mode_selector
         ->setPosition(20.0f, -70.0f, sp::Alignment::BottomLeft)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     // Toggle whether to lock the camera onto a ship.
     camera_lock_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"),
@@ -175,13 +175,13 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     camera_lock_toggle
         ->setValue(true)
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     camera_lock_tot_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Point at ship's target"), [this](bool value) {});
     camera_lock_tot_toggle
         ->setValue(false)
         ->setPosition(320.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     // Progress bar for cinematic cycle
     cycle_progress = new GuiProgressbar(camera_controls, "CYCLE_PROGRESS", 0.0f, cinematic_cycle_period, cinematic_cycle_period);
@@ -197,13 +197,13 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     camera_lock_cycle_toggle
         ->setValue(false)
         ->setPosition(620.0f, -20.0f, sp::Alignment::BottomLeft)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     camera_mode_cycle_toggle = new GuiToggleButton(camera_controls, "CAMERA_MODE_CYCLE_TOGGLE", tr("button", "Cycle camera modes"), [this](bool value) {});
     camera_mode_cycle_toggle
         ->setValue(false)
         ->setPosition(620.0f, -70.0f, sp::Alignment::BottomLeft)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     // Toggle callsign visibility.
     callsigns_toggle = new GuiToggleButton(camera_controls, "CAMERA_CALLSIGNS_TOGGLE", tr("button", "Show callsigns"),
@@ -213,7 +213,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     callsigns_toggle
         ->setValue(viewport->areCallsignsVisible())
         ->setPosition(620.0f, -120.0f, sp::Alignment::BottomLeft)
-        ->setSize(300.0f, 50.0f);
+        ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     // Toggle UI controls. Once invisible, the toggle_ui keybind or any mouse
     // click reveals them.
@@ -242,7 +242,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     damping_selector
         ->setSelectionIndex(static_cast<int>(DampingType::Exponential))
         ->setPosition(-20.0f, -70.0f, sp::Alignment::BottomRight)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 #endif
 
     // Overlays
@@ -907,7 +907,7 @@ void CinematicViewScreen::update(float delta)
             camera_lock_cycle_toggle->enable();
             camera_mode_cycle_toggle->disable();
 
-            if (game_server)
+            if (game_server.isAlive())
             {
                 // Server: Read directly from camera, no smoothing
                 applyCameraView(camera_component, target_transform);
@@ -1801,7 +1801,7 @@ void CinematicViewScreen::applyCameraView(CinematicCamera* cam, sp::Transform* t
 void CinematicViewScreen::updateCameraFromUI(CinematicCamera* cam, sp::Transform* transform)
 {
     // Server only: Write current UI state to camera component and transform for replication
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
 
     // Update camera component fields
     cam->z_position = camera_position.z;
@@ -1820,7 +1820,7 @@ void CinematicViewScreen::updateCameraFromUI(CinematicCamera* cam, sp::Transform
 void CinematicViewScreen::updateCameraSmoothing(CinematicCamera* cam, sp::Transform* transform, float delta)
 {
     // Client-side only: smooth camera updates to hide network jitter
-    if (game_server)
+    if (game_server.isAlive())
         return;
 
     // Update target values from camera component (replicated from server)

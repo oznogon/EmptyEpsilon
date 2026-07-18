@@ -9,24 +9,28 @@ function ScanProbe()
     local e = createEntity()
     e.components = {
         transform = {},
-        lifetime = {lifetime=60*10},
+        lifetime = { lifetime = 60 * 10 },
         radar_trace = {
-            icon="radar/probe.png",
-            min_size=10.0,
-            max_size=10.0,
-            color={96, 192, 128, 255},
-            rotate=false,
+            icon = "radar/probe.png",
+            min_size = 10.0,
+            max_size = 10.0,
+            color = { 96, 192, 128, 255 },
+            rotate = false,
         },
-        hull = {max=1, current=1},
+        hull = { max = 1, current = 1 },
         share_short_range_radar = {},
         allow_radar_link = {},
-        radar_signature = {gravitational=0.0, electrical=0.2, thermal=0.0},
-        maneuvering_thrusters = {}
+        radar_signature = { gravitational = 0.0, electrical = 0.2, thermal = 0.0 },
+        maneuvering_thrusters = {},
     }
     local model = "SensorBuoyMKI"
     local idx = irandom(1, 3)
-    if idx == 2 then model = "SensorBuoyMKII" end
-    if idx == 3 then model = "SensorBuoyMKIII" end
+    if idx == 2 then
+        model = "SensorBuoyMKII"
+    end
+    if idx == 3 then
+        model = "SensorBuoyMKIII"
+    end
     for k, v in pairs(__model_data[model]) do
         if string.sub(k, 1, 2) ~= "__" then
             e.components[k] = table.deepcopy(v)
@@ -42,34 +46,44 @@ local Entity = getLuaEntityFunctionTable()
 --- Defaults to 1000 (1U/second).
 --- Example: probe:setSpeed(2000)
 function Entity:setSpeed(speed)
-    if self.components.move_to then self.components.move_to.speed = speed end
+    if self.components.move_to then
+        self.components.move_to.speed = speed
+    end
     return self
 end
 --- Returns this ScanProbe's speed.
 --- Example: probe:getSpeed()
 function Entity:getSpeed()
-    if self.components.move_to then return self.components.move_to.speed end
+    if self.components.move_to then
+        return self.components.move_to.speed
+    end
     return 0.0
 end
 --- Sets this ScanProbe's remaining lifetime, in seconds.
 --- Defaults to 600 seconds (10 minutes).
 --- Example: probe:setLifetime(60 * 5) -- sets the lifetime to 5 minutes
 function Entity:setLifetime(lifetime)
-    if self.components.lifetime then self.components.lifetime.lifetime = lifetime end
+    if self.components.lifetime then
+        self.components.lifetime.lifetime = lifetime
+    end
     return self
 end
 --- Returns this ScanProbe's remaining lifetime.
 --- Example: probe:getLifetime()
 function Entity:getLifetime()
-    if self.components.lifetime then return self.components.lifetime.lifetime end
+    if self.components.lifetime then
+        return self.components.lifetime.lifetime
+    end
     return 0.0
 end
 --- Sets this ScanProbe's owner entity.
 --- Example: probe:setOwner(owner)
 function Entity:setOwner(owner)
-    if self.components.allow_radar_link then self.components.allow_radar_link.owner = owner end
+    if self.components.allow_radar_link then
+        self.components.allow_radar_link.owner = owner
+    end
     if owner and owner:isValid() and owner.components.faction then
-        self.components.faction = {entity = owner.components.faction.entity}
+        self.components.faction = { entity = owner.components.faction.entity }
     else
         self.components.faction = nil
     end
@@ -79,13 +93,17 @@ end
 --- Passes the probe and position as arguments to the function.
 --- Example: probe:onArrival(function(this_probe, coords) print("Probe arrived!") end)
 function Entity:onArrival(callback)
-    if self.components.move_to then self.components.move_to.on_arrival = callback end
+    if self.components.move_to then
+        self.components.move_to.on_arrival = callback
+    end
     return self
 end
 --- Defines a function to call when this ScanProbe's lifetime expires.
 --- Passes the probe as an argument to the function.
 --- Example: probe:onExpiration(function(this_probe) print("Probe expired!") end)
 function Entity:onExpiration(callback)
-    if self.components.lifetime then self.components.lifetime.on_expire = callback end
+    if self.components.lifetime then
+        self.components.lifetime.on_expire = callback
+    end
     return self
 end

@@ -34,7 +34,7 @@ if(NOT SDL2_ROOT)
         execute_process_ex(COMMAND ${CMAKE_COMMAND} -E tar xzvf SDL2.32.8.tar.gz WORKING_DIRECTORY "${WIN64_BASE}")
         execute_process_ex(COMMAND sed -i "s|set(prefix .*)|set(prefix \"${WIN64_BASE}/SDL2-2.32.8/x86_64-w64-mingw32/\")|g" ${WIN64_BASE}/SDL2-2.32.8/x86_64-w64-mingw32/lib/cmake/SDL2/sdl2-config.cmake)
     endif()
-    
+
     set(SDL2_ROOT "${WIN64_BASE}/SDL2-2.32.8/x86_64-w64-mingw32/")
 
     option(ENABLE_CRASH_LOGGER "" ON)

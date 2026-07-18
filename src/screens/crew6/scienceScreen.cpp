@@ -5,17 +5,23 @@
 #include "multiplayer_client.h"
 #include "i18n.h"
 #include "featureDefs.h"
+#include "crewPositionRequirements.h"
 
 #include "components/beamweapon.h"
+#include "components/beamWeaponTarget.h"
 #include "components/customshipfunction.h"
 #include "components/utilityBeam.h"
 #include "components/shields.h"
 #include "components/hull.h"
 #include "components/collision.h"
+#include "components/missile.h"
 #include "components/radar.h"
 #include "components/drone.h"
 #include "components/scanning.h"
 #include "components/name.h"
+#include "components/target.h"
+
+#include "ecs/query.h"
 
 #include "systems/radarblock.h"
 
@@ -45,6 +51,7 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_image.h"
+#include "gui/gui2_tooltip.h"
 #include "screenComponents/utilityBeamRotationDial.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
@@ -85,7 +92,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Message if entity lacks the LongRangeRadar component.
-    no_radar_label = new GuiLabel(radar_view, "NO_RADAR_LABEL", tr("science", "No long-range radar"), 50.0f);
+    no_radar_label = new GuiLabel(radar_view, "NO_RADAR_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::scienceOfficer), GuiElement::GuiSizeRow);
     no_radar_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -153,40 +160,28 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     probe_raw_signals = new RawScannerDataRadarOverlay(probe_radar, "");
 
-    sidebar_selector = new GuiSelector(radar_view, "", [this, utility_beam](int index, string value)
+    sidebar_selector = new GuiSelector(radar_view, "", [this](int index, string value)
     {
         if (value == "scan")
         {
-            info_sidebar->show();
+            info_scan_content->show();
             custom_function_sidebar->hide();
             utility_beam_sidebar->hide();
             utility_beam_dial->hide();
         }
         else if (value == "func")
         {
-            info_sidebar->hide();
+            info_scan_content->hide();
             custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
             utility_beam_sidebar->hide();
             utility_beam_dial->hide();
         }
         else if (value == "util")
         {
-            info_sidebar->hide();
+            info_scan_content->hide();
             custom_function_sidebar->hide();
-            if (utility_beam)
-            {
-                const bool show = utility_beam->crew_positions.has(this->crew_position);
-                utility_beam_sidebar->setVisible(show);
-                utility_beam_dial->setVisible(show);
-            }
-            else
-            {
-                LOG(Warning, "Utility beam controls requested on Science, but this entity lacks a UtilityBeam component");
-            }
-        }
-        else
-        {
-            LOG(Warning, "Science sidebar selector is bad: ", value);
+            utility_beam_sidebar->show();
+            utility_beam_dial->show();
         }
     });
 
@@ -204,7 +199,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     sidebar_selector
         ->setSelectionIndex(0)
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(sidebar_selector, "SCIENCE_SIDEBAR_TIP", tr("tooltips", "Switch between scanning data, custom functions, and utility beam controls."), 20.0f))->setWidth(280.0f);
 
     // Target scan data sidebar.
     info_sidebar = new GuiElement(radar_view, "SIDEBAR");
@@ -214,7 +210,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setAttribute("layout", "vertical");
     info_sidebar
         ->setAttribute("margin", "0, 0, 0, 75");
-    
+
     custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
     float height = crew_position == CrewPosition::operationsOfficer
         ? 550.0f
@@ -224,36 +220,44 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setSize(250.0f, height)
         ->hide();
 
+    // Scan data container. Hiding this hides all scan data without hiding info_sidebar.
+    info_scan_content = new GuiElement(info_sidebar, "SCAN_CONTENT");
+    info_scan_content
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
     // Scan button.
-    scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
+    scan_button = new GuiScanTargetButton(info_scan_content, "SCAN_BUTTON", &targets);
     scan_button
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setVisible(my_spaceship.hasComponent<ScienceScanner>());
+    (new GuiTextTooltip(scan_button, "SCAN_BUTTON_TIP", tr("tooltips", "Initiate a scan of the selected target to reveal its data and subsystems."), 20.0f))->setWidth(280.0f);
 
     // Link to analysis button.
-    link_to_analysis_button = new GuiButton(info_sidebar, "LINK_TO_ANALYSIS", tr("scienceButton", "Link to analysis"),
+    link_to_analysis_button = new GuiButton(info_scan_content, "LINK_TO_ANALYSIS", tr("scienceButton", "Link to analysis"),
         [this]()
         {
             if (my_player_info && targets.get())
                 my_player_info->commandSetAnalysisTarget(targets.get());
         }
     );
-    link_to_analysis_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+    link_to_analysis_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(link_to_analysis_button, "LINK_TO_ANALYSIS_TIP", tr("tooltips", "Send the selected target's data to the analysis screen for comparison."), 20.0f))->setWidth(280.0f);
 
     // Simple scan data.
-    info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4f, tr("science", "Callsign"), "");
+    info_callsign = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_CALLSIGN", 0.4f, tr("science", "Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4f, tr("science", "Distance"), "");
+    info_distance = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_DISTANCE", 0.4f, tr("science", "Distance"), "");
     info_distance->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    info_heading = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEADING", 0.4f, tr("science", "Bearing"), "");
+    info_heading = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_HEADING", 0.4f, tr("science", "Bearing"), "");
     info_heading->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4f, tr("science", "Rel. speed"), "");
+    info_relspeed = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_REL_SPEED", 0.4f, tr("science", "Rel. speed"), "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4f, tr("science", "Faction"), "");
+    info_faction = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_FACTION", 0.4f, tr("science", "Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30.0f);
     info_faction_button = new GuiButton(info_faction, "SCIENCE_FACTION_BUTTON", tr("scienceButton", "DB"),
         [this]()
@@ -276,9 +280,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_faction_button
         ->setTextSize(20.0f)
         ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
-        ->setSize(50.0f, 28.0f);
+        ->setSize(30.0f, 25.0f);
+    (new GuiTextTooltip(info_faction_button, "FACTION_DB_TIP", tr("tooltips", "Open this faction's entry in the science database."), 20.0f))->setWidth(280.0f);
 
-    info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4f, tr("science", "Type"), "");
+    info_type = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_TYPE", 0.4f, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("scienceButton", "DB"),
@@ -300,50 +305,47 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_type_button
         ->setTextSize(20.0f)
         ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
-        ->setSize(50.0f, 28.0f);
+        ->setSize(30.0f, 25.0f);
+    (new GuiTextTooltip(info_type_button, "TYPE_DB_TIP", tr("tooltips", "Open this ship type's entry in the science database."), 20.0f))->setWidth(280.0f);
 
-    info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4f, tr("science", "Shields"), "");
+    info_shields = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_SHIELDS", 0.4f, tr("science", "Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4f, tr("science", "Hull"), "");
+    info_hull = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_HULL", 0.4f, tr("science", "Hull"), "");
     info_hull->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     // Full scan data sidebar.
     // Draw and hide the sidebar pager. Tabs are populated dynamically in onDraw.
-    sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [](int index, string value) {});
+    sidebar_pager = new GuiSelector(info_scan_content, "SIDEBAR_PAGER", [](int index, string value) {});
     sidebar_pager
-        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->hide();
+    (new GuiTextTooltip(sidebar_pager, "SIDEBAR_PAGER_TIP", tr("tooltips", "Browse different data views for the selected target: tactical, systems, signals, or description."), 20.0f))->setWidth(280.0f);
 
+    // Add sidebar pages.
     // If the server uses frequencies, add the Tactical sidebar page.
     if (gameGlobalInfo->use_beam_shield_frequencies)
         sidebar_pager->addEntry(tr("scienceTab", "Tactical"), "Tactical");
-
-    // Add sidebar page for systems.
     sidebar_pager->addEntry(tr("scienceTab", "Systems"), "Systems");
-
-    // Add sidebar page for signals.
     sidebar_pager->addEntry(tr("scienceTab", "Signals"), "Signals");
-
-    // Add sidebar page for a description.
     sidebar_pager->addEntry(tr("scienceTab", "Description"), "Description");
 
     // Default the pager to the first item.
     sidebar_pager->setSelectionIndex(0);
 
-    sidebar_signals_page = new GuiScrollContainer(info_sidebar, "");
+    sidebar_signals_page = new GuiScrollContainer(info_scan_content, "");
     sidebar_signals_page
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    sidebar_frequencies_page = new GuiScrollContainer(info_sidebar, "");
+    sidebar_frequencies_page = new GuiScrollContainer(info_scan_content, "");
     sidebar_frequencies_page
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    sidebar_systems_page = new GuiScrollContainer(info_sidebar, "");
+    sidebar_systems_page = new GuiScrollContainer(info_scan_content, "");
     sidebar_systems_page
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide()
@@ -354,35 +356,37 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_electrical_signal_band
         ->showGreen(false)
         ->showBlue(false)
+        ->addModeButton()
         ->setSize(GuiElement::GuiSizeMax, 80.0f);
     info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"), 30.0f);
     info_electrical_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    info_electrical_signal_band->addModeButton();
 
     info_gravitational_signal_band = new GuiSignalQualityIndicator(sidebar_signals_page, "SCIENCE_GRAVITY_SIGNAL");
     info_gravitational_signal_band
         ->showRed(false)
         ->showGreen(false)
+        ->addModeButton()
         ->setSize(GuiElement::GuiSizeMax, 80.0f);
     info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
     info_gravitational_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    info_gravitational_signal_band->addModeButton();
 
     info_thermal_signal_band = new GuiSignalQualityIndicator(sidebar_signals_page, "SCIENCE_THERMAL_SIGNAL");
     info_thermal_signal_band
         ->showRed(false)
         ->showBlue(false)
+        ->addModeButton()
         ->setSize(GuiElement::GuiSizeMax, 80.0f);
     info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", tr("Thermal"), 30.0f);
     info_thermal_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    info_thermal_signal_band->addModeButton();
 
     // Prep and hide the frequency graphs.
     info_shield_frequency = new GuiFrequencyCurve(sidebar_frequencies_page, "SCIENCE_SHIELD_FREQUENCY", GuiFrequencyCurve::FrequencyType::Other, GuiFrequencyCurve::DamageEffect::Positive);
     info_shield_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(info_shield_frequency, "SHIELD_FREQ_CURVE_TIP", tr("tooltips", "Shield frequency calibration of the target. Match your beam frequency to penetrate."), 20.0f))->setWidth(280.0f);
 
     info_beam_frequency = new GuiFrequencyCurve(sidebar_frequencies_page, "SCIENCE_BEAM_FREQUENCY", GuiFrequencyCurve::FrequencyType::Beam, GuiFrequencyCurve::DamageEffect::Negative);
     info_beam_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextTooltip(info_beam_frequency, "BEAM_FREQ_CURVE_TIP", tr("tooltips", "Beam weapon frequency of the target. Adjust your shield frequency to resist."), 20.0f))->setWidth(280.0f);
 
     // List each system's status.
     for (int n = 0; n < ShipSystem::COUNT; n++)
@@ -394,7 +398,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     }
 
     // Prep and hide the description text area.
-    info_description = new GuiScrollFormattedText(info_sidebar, "SCIENCE_DESC", "");
+    info_description = new GuiScrollFormattedText(info_scan_content, "SCIENCE_DESC", "");
     info_description
         ->setTextSize(28.0f)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -461,14 +465,16 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     );
     probe_view_button
         ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
-        ->setSize(200.0f, 50.0f)
+        ->setSize(200.0f, GuiElement::GuiSizeRow)
         ->disable();
+    (new GuiTextTooltip(probe_view_button, "PROBE_VIEW_TIP", tr("tooltips", "Switch to the camera view from a linked probe to see from its perspective."), 20.0f))->setWidth(280.0f);
 
     // Draw the zoom slider.
     zoom_slider = new GuiRadarZoomSlider(radar_view, "RADAR_ZOOM", effective_short_range, effective_long_range, effective_long_range, science_radar);
     zoom_slider
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(zoom_slider, "SCIENCE_ZOOM_TIP", tr("tooltips", "Adjust the science radar zoom level for closer or wider views."), 20.0f))->setWidth(280.0f);
 
     // Radar/database view toggle.
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION",
@@ -484,9 +490,32 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setSelectionIndex(0)
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(200.0f, 100.0f);
+    (new GuiTextTooltip(view_mode_selection, "VIEW_MODE_TIP", tr("tooltips", "Switch between the radar view and the science database browser."), 20.0f))->setWidth(280.0f);
 
     // Scanning dialog.
-    new GuiScanningDialog(this, "SCANNING_DIALOG");
+    scanning_dialog = new GuiScanningDialog(this, "SCANNING_DIALOG");
+
+    missile_threat_label = new GuiLabel(this, "MISSILE_THREAT_LABEL", tr("scienceThreat", "Missile"), 30.0f);
+    missile_threat_label
+        ->setAlignment(sp::Alignment::Center)
+        ->addBackground()
+        ->setTextColor(glm::u8vec4(255, 0, 0, 255))
+        ->setBackgroundColor(glm::u8vec4(255, 0, 0, 255))
+        ->setPosition(20.0f, -25.0f, sp::Alignment::CenterLeft)
+        ->setSize(150.0f, GuiElement::GuiSizeRow)
+        ->hide();
+    (new GuiTextTooltip(missile_threat_label, "MISSILE_THREAT_TIP", tr("tooltips", "Warning: Incoming missiles detected targeting your ship."), 20.0f))->setWidth(280.0f);
+
+    beam_threat_label = new GuiLabel(this, "BEAM_THREAT_LABEL", tr("scienceThreat", "Beam"), 30.0f);
+    beam_threat_label
+        ->setAlignment(sp::Alignment::Center)
+        ->addBackground()
+        ->setTextColor(glm::u8vec4(255, 0, 0, 255))
+        ->setBackgroundColor(glm::u8vec4(255, 0, 0, 255))
+        ->setPosition(20.0f, 25.0f, sp::Alignment::CenterLeft)
+        ->setSize(150.0f, GuiElement::GuiSizeRow)
+        ->hide();
+    (new GuiTextTooltip(beam_threat_label, "BEAM_THREAT_TIP", tr("tooltips", "Warning: Enemy beam weapons are targeting your ship."), 20.0f))->setWidth(280.0f);
 }
 
 static float calculateSignalError(float signal)
@@ -527,6 +556,21 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         }
     }
 
+    // Scale the scan dialog's lock tolerance and lock delay by the ship's
+    // Sensors system effectiveness: higher effectiveness widens the tolerance
+    // and shortens the wait, lower effectiveness tightens it and lengthens it.
+    if (scanning_dialog)
+    {
+        if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+        {
+            constexpr float base_lock_range = 0.05f;
+            constexpr float base_lock_delay = 2.0f;
+            float eff = sensors->getSystemEffectiveness();
+            scanning_dialog->setLockRange(base_lock_range * eff);
+            scanning_dialog->setLockDelay(base_lock_delay / std::max(0.01f, eff));
+        }
+    }
+
     // Manage probe view button state. Probe view is independent of LRR.
     probe_view_button->setVisible(rl);
     if (rl && rl->linked_entity)
@@ -543,7 +587,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         probe_radar->hide();
     }
 
-    if (!lrr)
+    if (!crewPositionRequirements::hasRequirements(CrewPosition::scienceOfficer, my_spaceship))
     {
         const bool probe_view_active = rl && rl->linked_entity && probe_view_button->getValue();
         background_gradient->setVisible(probe_view_active);
@@ -660,7 +704,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         custom_function_sidebar
             ->setPosition(-20.0f, 210.0f, sp::Alignment::TopRight)
             ->setVisible(current_width < 1435 && sidebar_selector->getSelectionIndex() == 1 && sidebar_selector->indexByValue("func") >= 0);
-        info_sidebar->setVisible(current_width >= 1435 || sidebar_selector->getSelectionIndex() == 0);
+        info_sidebar->setVisible(current_width >= 1435 || sidebar_selector->getSelectionValue() != "func");
     }
     else
     {
@@ -679,6 +723,10 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     info_type->setValue("-");
     info_shields->setValue("-");
     info_hull->setValue("-");
+    info_callsign->hide();
+    info_faction->hide();
+    info_type->hide();
+    info_hull->hide();
     info_shield_frequency->setFrequency(-1);
     info_beam_frequency->setFrequency(-1);
     info_faction_button->hide();
@@ -739,7 +787,10 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         }
 
         if (auto cs = target.getComponent<CallSign>())
+        {
             info_callsign->setValue(cs->callsign);
+            info_callsign->show();
+        }
 
         auto scanstate_component = target.getComponent<ScanState>();
         auto scanstate = scanstate_component ? scanstate_component->getStateFor(my_spaceship) : ScanState::State::FullScan;
@@ -772,19 +823,95 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 sidebar_pager->setSelectionIndex(0);
         }
 
+        // Only show Tactical tab if the target has been fully scanned and has
+        // actual frequency data to report (shield frequency >= 0 or a beam
+        // weapon system exists).
+        bool has_tactical_data = false;
+        if (target && gameGlobalInfo->use_beam_shield_frequencies && scanstate >= ScanState::State::FullScan)
+        {
+            auto shields_system = target.getComponent<Shields>();
+            auto beam_system = target.getComponent<BeamWeaponSys>();
+            has_tactical_data = (shields_system && shields_system->frequency >= 0) || beam_system;
+        }
+        int tactical_idx = sidebar_pager->indexByValue("Tactical");
+        if (has_tactical_data && tactical_idx < 0)
+            sidebar_pager->addEntry(tr("scienceTab", "Tactical"), "Tactical");
+        else if (!has_tactical_data && tactical_idx >= 0)
+        {
+            bool tactical_was_selected = sidebar_pager->getSelectionValue() == "Tactical";
+            sidebar_pager->removeEntry(tactical_idx);
+            if (tactical_was_selected || sidebar_pager->getSelectionIndex() < 0)
+                sidebar_pager->setSelectionIndex(0);
+        }
+
+        // Only show Systems tab if the target has subsystems to report.
+        bool has_systems_data = false;
+        if (target)
+        {
+            for (int n = 0; n < ShipSystem::COUNT; n++)
+            {
+                if (ShipSystem::get(target, ShipSystem::Type(n)))
+                {
+                    has_systems_data = true;
+                    break;
+                }
+            }
+        }
+        int systems_idx = sidebar_pager->indexByValue("Systems");
+        if (has_systems_data && systems_idx < 0)
+            sidebar_pager->addEntry(tr("scienceTab", "Systems"), "Systems");
+        else if (!has_systems_data && systems_idx >= 0)
+        {
+            bool systems_was_selected = sidebar_pager->getSelectionValue() == "Systems";
+            sidebar_pager->removeEntry(systems_idx);
+            if (systems_was_selected || sidebar_pager->getSelectionIndex() < 0)
+                sidebar_pager->setSelectionIndex(0);
+        }
+
+        // Only show Signals tab if the target has radar signature data.
+        bool has_signals_data = false;
+        if (target)
+            has_signals_data = target.hasComponent<RawRadarSignatureInfo>() || target.hasComponent<DynamicRadarSignatureInfo>();
+        int signals_idx = sidebar_pager->indexByValue("Signals");
+        if (has_signals_data && signals_idx < 0)
+            sidebar_pager->addEntry(tr("scienceTab", "Signals"), "Signals");
+        else if (!has_signals_data && signals_idx >= 0)
+        {
+            bool signals_was_selected = sidebar_pager->getSelectionValue() == "Signals";
+            sidebar_pager->removeEntry(signals_idx);
+            if (signals_was_selected || sidebar_pager->getSelectionIndex() < 0)
+                sidebar_pager->setSelectionIndex(0);
+        }
+
+        // Auto-switch to the Description tab when the description text changes.
+        if (!description.empty() && description != previous_description)
+        {
+            int desc_idx = sidebar_pager->indexByValue("Description");
+            if (desc_idx >= 0)
+                sidebar_pager->setSelectionIndex(desc_idx);
+        }
+        previous_description = description;
+
         string sidebar_pager_selection = sidebar_pager->getSelectionValue();
 
         // On a simple scan or deeper, show the faction, ship type, shields,
         // hull integrity, and database reference button.
         if (scanstate >= ScanState::State::SimpleScan)
         {
-            auto faction = Faction::getInfo(target);
-            info_faction_button->show();
-            info_faction->setValue(faction.locale_name);
+            if (auto faction_component = target.getComponent<Faction>())
+            {
+                auto faction = Faction::getInfo(target);
+                info_faction_button->show();
+                info_faction->setValue(faction.locale_name);
+                info_faction->show();
+            }
 
-            info_type_button->show();
             if (auto tn = target.getComponent<TypeName>())
+            {
+                info_type_button->show();
                 info_type->setValue(tn->localized);
+                info_type->show();
+            }
 
             if (auto shields = target.getComponent<Shields>())
             {
@@ -799,7 +926,13 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             }
 
             if (auto hull = target.getComponent<Hull>())
-                info_hull->setValue(static_cast<int>(ceil(hull->current)));
+            {
+                if (hull->max > 1.0f)
+                {
+                    info_hull->setValue(static_cast<int>(ceil(hull->current)));
+                    info_hull->show();
+                }
+            }
         }
 
         sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
@@ -826,7 +959,11 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             sidebar_systems_page->show();
 
             if (scanstate >= ScanState::State::FullScan)
-                for (int n = 0; n < ShipSystem::COUNT; n++) info_system[n]->show();
+                for (int n = 0; n < ShipSystem::COUNT; n++)
+                {
+                    if (ShipSystem::get(target, ShipSystem::Type(n)))
+                        info_system[n]->show();
+                }
 
             sidebar_frequencies_page->hide();
             sidebar_signals_page->hide();
@@ -966,10 +1103,62 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             }
         }
     }
-    else
+    else target_entity = {};
+
+    // Show threat indicators only when the science radar is the active view.
+    const bool science_radar_active = view_mode_selection->getSelectionIndex() == 0
+        && !probe_view_button->getValue();
+
+    bool missile_threat = false;
+    bool beam_threat = false;
+
+    if (science_radar_active && my_spaceship)
     {
-        target_entity = {};
+        for (auto [entity, homing] : sp::ecs::Query<MissileHoming>())
+        {
+            if (homing.target == my_spaceship)
+            {
+                missile_threat = true;
+                break;
+            }
+        }
+
+        if (auto my_transform = my_spaceship.getComponent<sp::Transform>())
+        {
+            for (auto [entity, beamsys, transform] : sp::ecs::Query<BeamWeaponSys, sp::Transform>())
+            {
+                sp::ecs::Entity beam_target;
+                if (auto bt = entity.getComponent<BeamWeaponTarget>())
+                    beam_target = bt->entity;
+                else if (auto t = entity.getComponent<Target>())
+                    beam_target = t->entity;
+
+                if (beam_target != my_spaceship) continue;
+
+                for (const auto& mount : beamsys.mounts)
+                {
+                    if (mount.range <= 0.0f) continue;
+
+                    auto mount_world = transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation());
+                    float distance = glm::length(my_transform->getPosition() - mount_world);
+
+                    if (auto physics = entity.getComponent<sp::Physics>())
+                        distance -= std::max(physics->getSize().x, physics->getSize().y);
+
+                    if (distance < mount.range)
+                    {
+                        beam_threat = true;
+                        break;
+                    }
+                }
+
+                if (beam_threat) break;
+            }
+        }
     }
+
+    missile_threat_label->setVisible(missile_threat);
+    beam_threat_label->setVisible(beam_threat);
 }
 
 void ScienceScreen::onUpdate()
@@ -980,47 +1169,49 @@ void ScienceScreen::onUpdate()
     auto science_scanner = my_spaceship.getComponent<ScienceScanner>();
     auto my_transform = my_spaceship.getComponent<sp::Transform>();
 
+    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+
+    // Synchronize the Functions sidebar tab with current custom ship functions.
+    bool should_have_func_tab = custom_function_sidebar->hasEntries();
+    bool has_func_tab = sidebar_selector->indexByValue("func") != -1;
+    if (should_have_func_tab && !has_func_tab)
+        sidebar_selector->addEntry(tr("scienceTab", "Functions"), "func");
+    else if (!should_have_func_tab && has_func_tab)
+    {
+        bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
+        sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
+        custom_function_sidebar->hide();
+        if (func_was_selected)
+        {
+            sidebar_selector->setSelectionIndex(0);
+            info_scan_content->show();
+            utility_beam_sidebar->hide();
+            utility_beam_dial->hide();
+        }
+    }
+
+    // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
+    bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(crew_position);
+    bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
+    if (should_have_util_tab && !has_util_tab)
+        sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");
+    else if (!should_have_util_tab && has_util_tab)
+    {
+        bool util_was_selected = sidebar_selector->getSelectionValue() == "util";
+        sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
+        utility_beam_sidebar->hide();
+        utility_beam_dial->hide();
+        if (util_was_selected)
+        {
+            sidebar_selector->setSelectionIndex(0);
+            info_scan_content->show();
+            custom_function_sidebar->hide();
+        }
+    }
+
     // Initiate a scan on scannable objects.
     if (science_scanner && science_scanner->delay == 0.0f)
     {
-        auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
-
-        // Synchronize the Functions sidebar tab with current custom ship functions.
-        bool should_have_func_tab = custom_function_sidebar->hasEntries();
-        bool has_func_tab = sidebar_selector->indexByValue("func") != -1;
-        if (should_have_func_tab && !has_func_tab)
-            sidebar_selector->addEntry(tr("scienceTab", "Functions"), "func");
-        else if (!should_have_func_tab && has_func_tab)
-        {
-            bool func_was_selected = sidebar_selector->getSelectionValue() == "func";
-            sidebar_selector->removeEntry(sidebar_selector->indexByValue("func"));
-            custom_function_sidebar->hide();
-            if (func_was_selected)
-            {
-                sidebar_selector->setSelectionIndex(0);
-                info_sidebar->show();
-            }
-        }
-
-        // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
-        bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(crew_position);
-        bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
-        if (should_have_util_tab && !has_util_tab)
-            sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");
-        else if (!should_have_util_tab && has_util_tab)
-        {
-            bool util_was_selected = sidebar_selector->getSelectionValue() == "util";
-            sidebar_selector->removeEntry(sidebar_selector->indexByValue("util"));
-            utility_beam_sidebar->hide();
-            utility_beam_dial->hide();
-            if (util_was_selected)
-            {
-                sidebar_selector->setSelectionIndex(0);
-                info_sidebar->show();
-                custom_function_sidebar->hide();
-            }
-        }
-
         // Initiate a scan on scannable objects.
         if (keys.science_scan_object.isDiscreteStepDown() && science_scanner && science_scanner->delay == 0.0f)
         {

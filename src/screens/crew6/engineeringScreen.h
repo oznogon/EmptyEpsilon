@@ -3,6 +3,7 @@
 #include "gui/gui2_overlay.h"
 #include "playerInfo.h"
 
+class GuiScrollContainer;
 class GuiSelfDestructButton;
 class GuiKeyValueDisplay;
 class GuiLabel;
@@ -24,11 +25,15 @@ private:
     GuiSelfDestructButton* self_destruct_button;
     GuiLabel* power_label;
     GuiSlider* power_slider;
+    GuiProgressbar* power_bar;
     GuiLabel* coolant_label;
     GuiSlider* coolant_slider;
+    GuiProgressbar* coolant_bar;
     GuiImage* system_health_icon;
     GuiImage* heat_icon;
     GuiProgressbar* coolant_remaining_bar;
+    GuiElement* icon_layout;
+    GuiScrollContainer* system_rows_container;
 
     class SystemRow
     {

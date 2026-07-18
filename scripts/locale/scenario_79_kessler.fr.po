@@ -179,22 +179,11 @@ msgstr ""
 "Ce scénario nécessite que l'option Fréquences des faisceaux/boucliers soit "
 "activée dans les réglages."
 
-#: scripts/scenario_79_kessler.lua:96
-msgid ""
-"We are getting strange readings from sector C7. It looks like the source is "
-"an abandoned satellite. Please investigate, but be careful."
-msgstr ""
-"Équipage du Tidy-1,\n"
-"Nous captons des signaux inhabituels en provenance du secteur C7, juste à "
-"coté de notre base. Il semble que la source soit un satellite abandonné. \n"
-"\n"
-"Cessez les essais et veuillez enquêter, mais soyez prudent."
-
-#: scripts/scenario_79_kessler.lua:98
+#: scripts/scenario_79_kessler.lua:97
 msgid "An abandoned satellite"
 msgstr "Un satellite abandonné"
 
-#: scripts/scenario_79_kessler.lua:98
+#: scripts/scenario_79_kessler.lua:97
 msgid ""
 "An old military satellite. Capturing frequency is blocked. Behaviour "
 "unknown. Recommendation: Jump not closer than 10U, then advance using the "
@@ -203,6 +192,16 @@ msgstr ""
 "Un ancien satellite militaire. Fréquence de ramassage bloquée. Comportement "
 "inconnu.\n"
 "Recommandation : pas de téléportation à moins de 10u, utiliser les moteurs."
+
+#: scripts/scenario_79_kessler.lua:98
+msgid "We are getting strange readings from sector "
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:98
+msgid ""
+". It looks like the source is an abandoned satellite. Please investigate, "
+"but be careful."
+msgstr ""
 
 #: scripts/scenario_79_kessler.lua:101 scripts/scenario_79_kessler.lua:166
 msgid "Additional debris created!"
@@ -566,3 +565,14 @@ msgstr "Un satellite opérationnel"
 #: scripts/scenario_79_kessler.lua:490
 msgid "This satellite is fully operational. Do not capture!"
 msgstr "Ce satellite est pleinement opérationnel. Ne le ramassez pas !"
+
+#~ msgid ""
+#~ "We are getting strange readings from sector C7. It looks like the source "
+#~ "is an abandoned satellite. Please investigate, but be careful."
+#~ msgstr ""
+#~ "Équipage du Tidy-1,\n"
+#~ "Nous captons des signaux inhabituels en provenance du secteur C7, juste à "
+#~ "coté de notre base. Il semble que la source soit un satellite "
+#~ "abandonné. \n"
+#~ "\n"
+#~ "Cessez les essais et veuillez enquêter, mais soyez prudent."

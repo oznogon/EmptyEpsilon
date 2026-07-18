@@ -1,5 +1,4 @@
-#ifndef EVASION_AI_H
-#define EVASION_AI_H
+#pragma once
 
 #include "ai.h"
 
@@ -13,12 +12,10 @@ public:
     EvasionAI(sp::ecs::Entity owner);
 
     virtual bool canSwitchAI() override;
-    virtual void run(float delta) override;
+    virtual void runLight(float delta) override;
+    virtual void runHeavy(float delta) override;
     virtual void runOrders() override;
 
     virtual bool evadeIfNecessary();
     float evasionDangerScore(sp::ecs::Entity ship, float scan_radius);
 };
-
-
-#endif//EVASION_AI_H

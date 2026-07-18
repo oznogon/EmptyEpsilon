@@ -314,7 +314,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:38
 msgctxt "scienceDB"
 msgid "Beam Weapons"
-msgstr "Faisceaux laser"
+msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:41
 #, lua-format
@@ -7500,3 +7500,7 @@ msgstr "ajouter un moteur de téléportation de 15U de distance"
 msgctxt "upgrade-comms"
 msgid "increase long range scan range by 20%"
 msgstr "augmenter la portée du scanner longue portée de 20%"
+
+#~ msgctxt "scienceDB"
+#~ msgid "Beam weapons"
+#~ msgstr "Faisceaux laser"

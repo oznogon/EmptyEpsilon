@@ -1,0 +1,9 @@
+# Scenario name
+msgid "Pathfinding Hazard Test"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Tests AI avoidance of black holes, mines, and asteroids with AvoidObject "
+"components."
+msgstr ""

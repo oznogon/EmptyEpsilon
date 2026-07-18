@@ -34,6 +34,8 @@ GameGlobalInfo::GameGlobalInfo()
     enable_multiple_waypoint_sets = false;
     enable_waypoint_routes = false;
     use_drone_energy_drain = false;
+    missiles_on_long_range_radar = false;
+    collision_damage_factor = 0.0f;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
     allow_main_screen_strategic_map = true;
@@ -55,6 +57,8 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&enable_multiple_waypoint_sets);
     registerMemberReplication(&enable_waypoint_routes);
     registerMemberReplication(&use_drone_energy_drain);
+    registerMemberReplication(&missiles_on_long_range_radar);
+    registerMemberReplication(&collision_damage_factor);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&allow_main_screen_strategic_map);
@@ -310,11 +314,11 @@ void GameGlobalInfo::setScenarioSettings(const string filename, std::unordered_m
 
     // Set the scenario name.
     gameGlobalInfo->scenario = info.name;
-    LOG(INFO) << "Configuring settings for scenario " << gameGlobalInfo->scenario;
+    LOG(Info, "Configuring settings for scenario ", gameGlobalInfo->scenario);
 
     // Set each scenario setting to either a matching passed new value, or the
     // default if there's no match (or no new value).
-    for(auto& setting : info.settings)
+    for (auto& setting : info.settings)
     {
         // Initialize with defaults.
         gameGlobalInfo->scenario_settings[setting.key] = setting.default_option;
@@ -325,11 +329,9 @@ void GameGlobalInfo::setScenarioSettings(const string filename, std::unordered_m
             // ... confirm that this setting key exists in the new settings.
             if (new_settings.find(setting.key) != new_settings.end())
             {
+                // If so, override the default with the new value.
                 if (new_settings[setting.key] != "")
-                {
-                    // If so, override the default with the new value.
                     gameGlobalInfo->scenario_settings[setting.key] = new_settings[setting.key];
-                }
             }
         }
 
@@ -340,7 +342,13 @@ void GameGlobalInfo::setScenarioSettings(const string filename, std::unordered_m
 
 void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, string> new_settings)
 {
+    bool same_scenario = (previous_scenario_filename == filename);
+
     reset();
+
+    // Clear crew positions only if a new scenario is being started.
+    if (!same_scenario)
+        foreach (PlayerInfo, p, player_info_list) p->crew_positions.clear();
 
     i18n::reset();
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
@@ -352,18 +360,26 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
 
     script_environment_base = std::make_unique<sp::script::Environment>();
     main_script_error_count = 0;
-    if (setupScriptEnvironment(*script_environment_base.get())) {
+
+    // Load hardcoded scripts, and throw errors if they fail to load.
+    if (setupScriptEnvironment(*script_environment_base.get()))
+    {
         auto res = script_environment_base->runFile<void>("model_data.lua");
         LuaConsole::checkResult(res);
-        if (!res.isErr()) {
+        if (!res.isErr())
+        {
             res = script_environment_base->runFile<void>("factionInfo.lua");
             LuaConsole::checkResult(res);
         }
-        if (!res.isErr()) {
+
+        if (!res.isErr())
+        {
             res = script_environment_base->runFile<void>("shipTemplates.lua");
             LuaConsole::checkResult(res);
         }
-        if (!res.isErr()) {
+
+        if (!res.isErr())
+        {
             res = script_environment_base->runFile<void>("science_db.lua");
             LuaConsole::checkResult(res);
         }
@@ -403,6 +419,8 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
             fflush(stdout);
         }
     }
+
+    previous_scenario_filename = filename;
 }
 
 void GameGlobalInfo::destroy()

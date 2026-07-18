@@ -1,6 +1,7 @@
 --[[
 playerspaceship.lua - Functions that were associated with the legacy PlayerSpaceship class. These functions aren't necessarily limited to player ships in ECS.
-]]--
+]]
+--
 
 local Entity = getLuaEntityFunctionTable()
 __default_player_ship_faction = "Human Navy"
@@ -16,17 +17,17 @@ function PlayerSpaceship()
     local e = createEntity()
 
     -- Player ships default to fully scanned
-    local scan_state = {allow_simple_scan = true}
+    local scan_state = { allow_simple_scan = true }
     for idx, faction in ipairs(getEntitiesWithComponent("faction_info")) do
-        table.insert(scan_state, {faction = faction, state = "fullscan"})
+        table.insert(scan_state, { faction = faction, state = "fullscan" })
     end
 
     e.components = {
         player_control = {},
         ship_log = {},
         custom_ship_functions = {},
-        transform = {rotation=random(0, 360)},
-        callsign = {callsign=generateRandomCallSign()},
+        transform = { rotation = random(0, 360) },
+        callsign = { callsign = generateRandomCallSign() },
         scan_state = scan_state,
         dynamic_radar_signature = {},
     }
@@ -46,7 +47,9 @@ function Entity:getWaypoint(index, set_id)
         for _, wp in ipairs(self.components.waypoints) do
             if wp.set_id == set_id then
                 n = n + 1
-                if n == index then return wp.x, wp.y end
+                if n == index then
+                    return wp.x, wp.y
+                end
             end
         end
     end
@@ -64,7 +67,9 @@ function Entity:getWaypointID(index, set_id)
         for _, wp in ipairs(self.components.waypoints) do
             if wp.set_id == set_id then
                 n = n + 1
-                if n == index then return wp.id end
+                if n == index then
+                    return wp.id
+                end
             end
         end
     end
@@ -77,26 +82,34 @@ end
 --- ship:getWaypointCount(2) -- count in set 2
 function Entity:getWaypointCount(set_id)
     set_id = set_id or 1
-    if not self.components.waypoints then return 0 end
+    if not self.components.waypoints then
+        return 0
+    end
     local count = 0
     for _, wp in ipairs(self.components.waypoints) do
-        if wp.set_id == set_id then count = count + 1 end
+        if wp.set_id == set_id then
+            count = count + 1
+        end
     end
     return count
 end
 --- Returns this player ship's EAlertLevel.
---- Returns "Normal", "YELLOW ALERT", "RED ALERT", which differ from the valid values for commandSetAlertLevel().
+--- Returns "Normal", "Yellow alert", "Red alert", which differ from the valid values for commandSetAlertLevel().
 --- Example:
 --- ship:getAlertLevel()
 function Entity:getAlertLevel()
-    if self.components.player_control then return self.components.player_control.alert_level end
+    if self.components.player_control then
+        return self.components.player_control.alert_level
+    end
     return "Normal"
 end
 --- Defines whether this ship's shields are raised (true) or lowered (false).
 --- Example:
 --- ship:setShieldsActive(true)
 function Entity:setShieldsActive(active)
-    if self.components.shields ~= nil then self.components.shields.active = active end
+    if self.components.shields ~= nil then
+        self.components.shields.active = active
+    end
     return self
 end
 --- Adds a message to this player ship's log.
@@ -121,13 +134,21 @@ end
 --- ship:addAllowedCrewPositions("helms") -- adds Helms to the allowed positions
 --- ship:addAllowedCrewPositions({"helms", "weapons"}) -- adds Helms and Weapons
 function Entity:addAllowedCrewPositions(positions)
-    if not self.components.player_control then return self end
-    if type(positions) ~= "table" then positions = {positions} end
+    if not self.components.player_control then
+        return self
+    end
+    if type(positions) ~= "table" then
+        positions = { positions }
+    end
     local current = self.components.player_control.allowed_positions
     local seen = {}
-    for _, p in ipairs(current) do seen[p] = true end
+    for _, p in ipairs(current) do
+        seen[p] = true
+    end
     for _, p in ipairs(positions) do
-        if not seen[p] then table.insert(current, p) end
+        if not seen[p] then
+            table.insert(current, p)
+        end
     end
     self.components.player_control.allowed_positions = current
     return self
@@ -139,14 +160,22 @@ end
 --- ship:removeAllowedCrewPositions("helms") -- removes Helms from the allowed positions
 --- ship:removeAllowedCrewPositions({"helms", "weapons"}) -- removes Helms and Weapons
 function Entity:removeAllowedCrewPositions(positions)
-    if not self.components.player_control then return self end
-    if type(positions) ~= "table" then positions = {positions} end
+    if not self.components.player_control then
+        return self
+    end
+    if type(positions) ~= "table" then
+        positions = { positions }
+    end
     local current = self.components.player_control.allowed_positions
     local to_remove = {}
-    for _, p in ipairs(positions) do to_remove[p] = true end
+    for _, p in ipairs(positions) do
+        to_remove[p] = true
+    end
     local new_positions = {}
     for _, p in ipairs(current) do
-        if not to_remove[p] then table.insert(new_positions, p) end
+        if not to_remove[p] then
+            table.insert(new_positions, p)
+        end
     end
     self.components.player_control.allowed_positions = new_positions
     return self
@@ -182,7 +211,9 @@ end
 --- Example:
 --- ship:isCommsInactive()
 function Entity:isCommsInactive()
-    if self.components.comms_transmitter then return self.components.comms_transmitter.state == "inactive" end
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.state == "inactive"
+    end
     return true
 end
 --- Returns whether this ship is opening comms with another entity.
@@ -274,7 +305,9 @@ end
 --- Example:
 --- ship:setEnergyLevel(1000) -- sets the ship's energy to either 1000 or the max limit, whichever is lower
 function Entity:setEnergyLevel(amount)
-    if self.components.reactor then self.components.reactor.energy = amount end
+    if self.components.reactor then
+        self.components.reactor.energy = amount
+    end
     return self
 end
 --- Sets this ship's energy capacity.
@@ -284,7 +317,9 @@ end
 --- Example:
 --- ship:setEnergyLevelMax(1000) -- sets the ship's energy limit to 1000
 function Entity:setEnergyLevelMax(amount)
-    if self.components.reactor then self.components.reactor.max_energy = amount end
+    if self.components.reactor then
+        self.components.reactor.max_energy = amount
+    end
     return self
 end
 --- Returns this ship's energy level.
@@ -292,7 +327,9 @@ end
 --- Example:
 --- ship:getEnergyLevel()
 function Entity:getEnergyLevel()
-    if self.components.reactor then return self.components.reactor.energy end
+    if self.components.reactor then
+        return self.components.reactor.energy
+    end
     return 0
 end
 --- Returns this ship's energy capacity.
@@ -300,7 +337,9 @@ end
 --- Example:
 --- ship:getEnergyLevelMax()
 function Entity:getEnergyLevelMax()
-    if self.components.reactor then return self.components.reactor.max_energy end
+    if self.components.reactor then
+        return self.components.reactor.max_energy
+    end
     return 0
 end
 
@@ -309,7 +348,9 @@ end
 --- Example:
 --- ship:getEnergyShieldUsePerSecond()
 function Entity:getEnergyShieldUsePerSecond()
-    if self.components.shields then return self.components.shields.energy_use_per_second end
+    if self.components.shields then
+        return self.components.shields.energy_use_per_second
+    end
     return 0.0
 end
 --- Sets how much energy is consumed per second by this ship's shields while active.
@@ -317,7 +358,9 @@ end
 --- Example:
 --- ship:setEnergyShieldUsePerSecond(1.5)
 function Entity:setEnergyShieldUsePerSecond(amount)
-    if self.components.shields then self.components.shields.energy_use_per_second = amount end
+    if self.components.shields then
+        self.components.shields.energy_use_per_second = amount
+    end
     return self
 end
 --- Returns how much energy is consumed per second by this ship's warp drive while in use.
@@ -325,7 +368,9 @@ end
 --- Example:
 --- ship:getEnergyWarpPerSecond()
 function Entity:getEnergyWarpPerSecond()
-    if self.components.warp_drive then return self.components.warp_drive.energy_warp_per_second end
+    if self.components.warp_drive then
+        return self.components.warp_drive.energy_warp_per_second
+    end
     return 0.0
 end
 --- Sets how much energy is consumed per second by this player ship's warp drive while in use.
@@ -333,7 +378,9 @@ end
 --- Example:
 --- ship:setEnergyWarpPerSecond(1.7)
 function Entity:setEnergyWarpPerSecond(amount)
-    if self.components.warp_drive then self.components.warp_drive.energy_warp_per_second = amount end
+    if self.components.warp_drive then
+        self.components.warp_drive.energy_warp_per_second = amount
+    end
     return self
 end
 
@@ -345,7 +392,9 @@ end
 --- Example:
 --- ship:setMaxCoolant(5) -- halves the amount of available coolant
 function Entity:setMaxCoolant(amount)
-    if self.components.coolant then self.components.coolant.max = amount end
+    if self.components.coolant then
+        self.components.coolant.max = amount
+    end
     return self
 end
 --- Returns the maximum amount of coolant available to engineering on this player ship.
@@ -353,7 +402,9 @@ end
 --- Example:
 --- ship:getMaxCoolant()
 function Entity:getMaxCoolant()
-    if self.components.coolant then return self.components.coolant.max end
+    if self.components.coolant then
+        return self.components.coolant.max
+    end
     return 0.0
 end
 
@@ -362,14 +413,18 @@ end
 --- Example:
 --- ship:setScanProbeCount(20) -- sets the ship's scan probes to either 20 or the max limit, whichever is fewer
 function Entity:setScanProbeCount(amount)
-    if self.components.scan_probe_launcher then self.components.scan_probe_launcher.stock = amount end
+    if self.components.scan_probe_launcher then
+        self.components.scan_probe_launcher.stock = amount
+    end
     return self
 end
 --- Returns the number of scan probes stocked by this ship.
 --- Example:
 --- ship:getScanProbeCount()
 function Entity:getScanProbeCount()
-    if self.components.scan_probe_launcher then return self.components.scan_probe_launcher.stock end
+    if self.components.scan_probe_launcher then
+        return self.components.scan_probe_launcher.stock
+    end
     return 0
 end
 --- Sets this ship's capacity for scan probes.
@@ -378,14 +433,18 @@ end
 --- Example:
 --- ship:setMaxScanProbeCount(30) -- sets the ship's scan probe capacity to 30
 function Entity:setMaxScanProbeCount(amount)
-    if self.components.scan_probe_launcher then self.components.scan_probe_launcher.max = amount end
+    if self.components.scan_probe_launcher then
+        self.components.scan_probe_launcher.max = amount
+    end
     return self
 end
 --- Returns this ship's capacity for scan probes.
 --- Example:
 --- ship:getMaxScanProbeCount()
 function Entity:getMaxScanProbeCount()
-    if self.components.scan_probe_launcher then return self.components.scan_probe_launcher.max end
+    if self.components.scan_probe_launcher then
+        return self.components.scan_probe_launcher.max
+    end
     return 0
 end
 --- Adds a custom interactive button with the given reference name to the given crew position screen.
@@ -397,7 +456,15 @@ end
 --- -- Add a custom button to Engineering that prints the player ship's coolant max to the console or logging file when clicked
 --- ship:addCustomButton("engineering", "get_coolant_max", "Get Coolant Max", function() print("Coolant: " .. ship:getMaxCoolant()) end)
 function Entity:addCustomButton(station, key, label, callback, order)
-    setPlayerShipCustomFunction(self, "button", key, label, station, callback, order or 0)
+    setPlayerShipCustomFunction(
+        self,
+        "button",
+        key,
+        label,
+        station,
+        callback,
+        order or 0
+    )
     return self
 end
 
@@ -409,7 +476,15 @@ end
 --- -- Displays the coolant max value on Engineering at or near the top of the custom button/info order
 --- ship:addCustomInfo("engineering", "show_coolant_max", "Coolant Max: " .. ship:getMaxCoolant(), 0)
 function Entity:addCustomInfo(station, key, label, order)
-    setPlayerShipCustomFunction(self, "info", key, label, station, nil, order or 0)
+    setPlayerShipCustomFunction(
+        self,
+        "info",
+        key,
+        label,
+        station,
+        nil,
+        order or 0
+    )
     return self
 end
 --- Displays a dismissable message with the given reference name on the given crew position screen.
@@ -417,16 +492,24 @@ end
 --- Example:
 --- -- Displays the coolant max value on Engineering as a dismissable message
 --- ship:addCustomMessage("engineering", "message_coolant_max", "Coolant max: " .. ship:getMaxCoolant())
-function Entity:addCustomMessage(station, key, message)
-    setPlayerShipCustomFunction(self, "message", key, message, station, nil, 0)
+function Entity:addCustomMessage(station, key, message, order)
+    setPlayerShipCustomFunction(self, "message", key, message, station, nil, order or 0)
     return self
 end
 --- As addCustomMessage(), but calls the given function when dismissed.
 --- Example:
 --- -- Displays the coolant max value on Engineering as a dismissable message, and prints "dismissed" to the console or logging file when dismissed
 --- ship:addCustomMessageWithCallback("engineering", "message_coolant_max", "Coolant max: " .. ship:getMaxCoolant(), function() print("Dismissed!") end)
-function Entity:addCustomMessageWithCallback(station, key, message, callback)
-    setPlayerShipCustomFunction(self, "message", key, message, station, callback, 0)
+function Entity:addCustomMessageWithCallback(station, key, message, callback, order)
+    setPlayerShipCustomFunction(
+        self,
+        "message",
+        key,
+        message,
+        station,
+        callback,
+        order or 0
+    )
     return self
 end
 --- Removes the custom function, info, or message with the given reference name.
@@ -443,15 +526,33 @@ end
 --- ship:getBeamSystemTarget()
 function Entity:getBeamSystemTarget()
     local target_name = self:getBeamSystemTargetName()
-    if target_name == "reactor" then return 0 end
-    if target_name == "beamweapons" then return 1 end
-    if target_name == "missilesystem" then return 2 end
-    if target_name == "maneuver" then return 3 end
-    if target_name == "impulse" then return 4 end
-    if target_name == "warp" then return 5 end
-    if target_name == "jumpdrive" then return 6 end
-    if target_name == "frontshield" then return 7 end
-    if target_name == "rearshield" then return 8 end
+    if target_name == "reactor" then
+        return 0
+    end
+    if target_name == "beamweapons" then
+        return 1
+    end
+    if target_name == "missilesystem" then
+        return 2
+    end
+    if target_name == "maneuver" then
+        return 3
+    end
+    if target_name == "impulse" then
+        return 4
+    end
+    if target_name == "warp" then
+        return 5
+    end
+    if target_name == "jumpdrive" then
+        return 6
+    end
+    if target_name == "frontshield" then
+        return 7
+    end
+    if target_name == "rearshield" then
+        return 8
+    end
     return -1
 end
 --- Returns the name of the ESystem targeted by this player ship's weapons.
@@ -459,7 +560,9 @@ end
 --- Example:
 --- ship:getBeamSystemTargetName()
 function Entity:getBeamSystemTargetName()
-    if self.components.beam_weapons then return self.components.beam_weapons.system_target end
+    if self.components.beam_weapons then
+        return self.components.beam_weapons.system_target
+    end
     return "UNKNOWN"
 end
 
@@ -831,7 +934,7 @@ function Entity:setRepairCrewCount(amount)
         end
         for n = 1, amount do
             local crew = createEntity()
-            crew.components.internal_crew = {ship=self}
+            crew.components.internal_crew = { ship = self }
             crew.components.internal_repair_crew = {}
         end
     end
@@ -844,12 +947,19 @@ end
 --- entity:isValidCrewPosition({3,2}) -- returns true on default player Atlantis
 function Entity:isValidCrewPosition(pos)
     local ir = self.components.internal_rooms
-    if not ir then return false end
+    if not ir then
+        return false
+    end
 
     for i = 1, #ir do
         local rp = ir[i].position
         local rs = ir[i].size
-        if pos[1] >= rp[1] and pos[1] < rp[1] + rs[1] and pos[2] >= rp[2] and pos[2] < rp[2] + rs[2] then
+        if
+            pos[1] >= rp[1]
+            and pos[1] < rp[1] + rs[1]
+            and pos[2] >= rp[2]
+            and pos[2] < rp[2] + rs[2]
+        then
             return true
         end
     end
@@ -862,7 +972,9 @@ end
 --- entity:getInternalRoomForSystem("beamweapons")
 function Entity:getInternalRoomForSystem(system)
     local ir = self.components.internal_rooms
-    if not ir then return nil end
+    if not ir then
+        return nil
+    end
 
     for i = 1, #ir do
         if system == ir[i].system then
@@ -877,12 +989,14 @@ end
 --- local room = entity:getInternalRoomForSystem("beamweapons")
 --- local coords = entity:getCoordinatesForInternalRoom(room)
 function Entity:getCoordinatesForInternalRoom(room)
-    if not room then return nil end
+    if not room then
+        return nil
+    end
 
     local coords = {}
     for x = room.position[1], room.position[1] + room.size[1] - 1 do
         for y = room.position[2], room.position[2] + room.size[2] - 1 do
-            table.insert(coords, {x, y})
+            table.insert(coords, { x, y })
         end
     end
 
@@ -898,12 +1012,18 @@ end
 --- entity:moveRepairCrewToPosition(1, target_position)
 function Entity:moveRepairCrewToPosition(crew_index, pos)
     local ir = self.components.internal_rooms
-    if not ir then return false end
+    if not ir then
+        return false
+    end
 
-    if not self:isValidCrewPosition(pos) then return false end
+    if not self:isValidCrewPosition(pos) then
+        return false
+    end
 
     local crew = self:getRepairCrew()
-    if not crew[crew_index] then return false end
+    if not crew[crew_index] then
+        return false
+    end
 
     crew[crew_index].components.internal_crew.target_position = pos
     return true
@@ -918,13 +1038,19 @@ end
 --- entity:moveRepairCrewToRoom(1, target_room)
 function Entity:moveRepairCrewToRoom(crew_index, room)
     local ir = self.components.internal_rooms
-    if not ir then return false end
+    if not ir then
+        return false
+    end
 
     local crew = self:getRepairCrew()
-    if not crew[crew_index] then return false end
+    if not crew[crew_index] then
+        return false
+    end
 
     local coordinates_list = self:getCoordinatesForInternalRoom(room)
-    if not coordinates_list or #coordinates_list == 0 then return false end
+    if not coordinates_list or #coordinates_list == 0 then
+        return false
+    end
     local coords = coordinates_list[math.random(#coordinates_list)]
     crew[crew_index].components.internal_crew.target_position = coords
     return true
@@ -935,7 +1061,9 @@ end
 --- Example:
 --- ship:setAutoCoolant(true)
 function Entity:setAutoCoolant(enabled)
-    if self.components.coolant then self.components.coolant.auto_levels = enabled end
+    if self.components.coolant then
+        self.components.coolant.auto_levels = enabled
+    end
     return self
 end
 --- Sets a control code password required for a player to join this player ship.
@@ -943,7 +1071,9 @@ end
 --- Example:
 --- ship:setControlCode("abcde") -- matches "abcde", "ABCDE", "aBcDe"
 function Entity:setControlCode(code)
-    if self.components.player_control then self.components.player_control.control_code = code end
+    if self.components.player_control then
+        self.components.player_control.control_code = code
+    end
     return self
 end
 --- Defines a function to call when this player ship launches a probe.
@@ -954,7 +1084,9 @@ end
 --- print("Probe " .. probe:getCallSign() .. " launched from ship " .. ship:getCallSign())
 --- end)
 function Entity:onProbeLaunch(callback)
-    if self.components.scan_probe_launcher then self.components.scan_probe_launcher.on_launch = callback end
+    if self.components.scan_probe_launcher then
+        self.components.scan_probe_launcher.on_launch = callback
+    end
     return self
 end
 --- Defines a function to call when this player ship links a probe to the science screen.
@@ -965,7 +1097,9 @@ end
 --- print("Probe " .. probe:getCallSign() .. " linked to Science on ship " .. ship:getCallSign())
 --- end)
 function Entity:onProbeLink(callback)
-    if self.components.radar_link then self.components.radar_link.on_link = callback end
+    if self.components.radar_link then
+        self.components.radar_link.on_link = callback
+    end
     return self
 end
 --- Defines a function to call when this player ship unlinks a probe from the science screen.
@@ -978,21 +1112,27 @@ end
 --- print("Probe " .. probe:getCallSign() .. " unlinked from Science on ship " .. ship:getCallSign())
 --- end)
 function Entity:onProbeUnlink(callback)
-    if self.components.radar_link then self.components.radar_link.on_unlink = callback end
+    if self.components.radar_link then
+        self.components.radar_link.on_unlink = callback
+    end
     return self
 end
 --- Returns this ships's long-range radar range.
 --- Example:
 --- ship:getLongRangeRadarRange()
 function Entity:getLongRangeRadarRange()
-    if self.components.long_range_radar then return self.components.long_range_radar.long_range end
+    if self.components.long_range_radar then
+        return self.components.long_range_radar.long_range
+    end
     return 50000
 end
 --- Returns this player ship's short-range radar range.
 --- Example:
 --- ship:getShortRangeRadarRange()
 function Entity:getShortRangeRadarRange()
-    if self.components.long_range_radar then return self.components.long_range_radar.short_range end
+    if self.components.long_range_radar then
+        return self.components.long_range_radar.short_range
+    end
     return 5000
 end
 --- Sets this player ship's long-range radar range.
@@ -1000,7 +1140,9 @@ end
 --- Example:
 --- ship:setLongRangeRadarRange(30000) -- sets the ship's long-range radar range to 30U
 function Entity:setLongRangeRadarRange(range)
-    if self.components.long_range_radar then self.components.long_range_radar.long_range = range end
+    if self.components.long_range_radar then
+        self.components.long_range_radar.long_range = range
+    end
     return self
 end
 --- Sets this player ship's short-range radar range.
@@ -1009,14 +1151,20 @@ end
 --- Example:
 --- ship:setShortRangeRadarRange(5000) -- sets the ship's short-range radar range to 5U
 function Entity:setShortRangeRadarRange(range)
-    if self.components.long_range_radar then self.components.long_range_radar.short_range = range end
+    if self.components.long_range_radar then
+        self.components.long_range_radar.short_range = range
+    end
     return self
 end
 --- Defines whether scanning features appear on related crew screens in this player ship.
 --- Example:
 --- ship:setCanScan(true)
 function Entity:setCanScan(enabled)
-    if enabled then self.components.science_scanner = {} else self.components.science_scanner = nil end
+    if enabled then
+        self.components.science_scanner = {}
+    else
+        self.components.science_scanner = nil
+    end
     return self
 end
 --- Returns whether scanning features appear on related crew screens in this player ship.
@@ -1029,7 +1177,11 @@ end
 --- Example:
 --- ship:setCanHack(true)
 function Entity:setCanHack(enabled)
-    if enabled then self.components.hacking_device = {} else self.components.hacking_device = nil end
+    if enabled then
+        self.components.hacking_device = {}
+    else
+        self.components.hacking_device = nil
+    end
     return self
 end
 --- Returns whether hacking features appear on related crew screens in this player ship.
@@ -1060,7 +1212,11 @@ end
 --- Example:
 --- ship:setCanCombatManeuver(true)
 function Entity:setCanCombatManeuver(enabled)
-    if enabled then self.components.combat_maneuvering_thrusters = {} else self.components.combat_maneuvering_thrusters = nil end
+    if enabled then
+        self.components.combat_maneuvering_thrusters = {}
+    else
+        self.components.combat_maneuvering_thrusters = nil
+    end
     return self
 end
 --- Returns whether combat maneuver controls appear on related crew screens in this player ship.
@@ -1073,7 +1229,11 @@ end
 --- Example:
 --- ship:setCanLaunchProbe(true)
 function Entity:setCanLaunchProbe(enabled)
-    if enabled then self.components.scan_probe_launcher = {} else self.components.scan_probe_launcher = nil end
+    if enabled then
+        self.components.scan_probe_launcher = {}
+    else
+        self.components.scan_probe_launcher = nil
+    end
     return self
 end
 --- Returns whether ScanProbe-launching controls appear on related crew screens in this player ship.
@@ -1086,7 +1246,11 @@ end
 --- Example:
 --- ship:setCanSelfDestruct(true)
 function Entity:setCanSelfDestruct(enabled)
-    if enabled then self.components.self_destruct = {} else self.components.self_destruct = nil end
+    if enabled then
+        self.components.self_destruct = {}
+    else
+        self.components.self_destruct = nil
+    end
     return self
 end
 --- Returns whether self-destruct controls appear on related crew screens in this player ship.
@@ -1101,14 +1265,18 @@ end
 --- Example:
 --- ship:setSelfDestructDamage(150)
 function Entity:setSelfDestructDamage(amount)
-    if self.components.self_destruct then self.components.self_destruct.damage = amount end
+    if self.components.self_destruct then
+        self.components.self_destruct.damage = amount
+    end
     return self
 end
 --- Returns the amount of base damage done to nearby entities when this player ship self-destructs.
 --- Example:
 --- ship:getSelfDestructDamage()
 function Entity:getSelfDestructDamage()
-    if self.components.self_destruct then return self.components.self_destruct.damage end
+    if self.components.self_destruct then
+        return self.components.self_destruct.damage
+    end
     return 0
 end
 --- Sets the radius of the explosion created when this player ship self-destructs.
@@ -1116,7 +1284,9 @@ end
 --- Example:
 --- ship:setSelfDestructSize(1500) -- sets a 1.5U self-destruction explosion and damage radius
 function Entity:setSelfDestructSize(size)
-    if self.components.self_destruct then self.components.self_destruct.size = size end
+    if self.components.self_destruct then
+        self.components.self_destruct.size = size
+    end
     return self
 end
 --- Returns the radius of the explosion created when this player ship self-destructs.
@@ -1124,14 +1294,18 @@ end
 --- Example:
 --- ship:getSelfDestructSize()
 function Entity:getSelfDestructSize()
-    if self.components.self_destruct then return self.components.self_destruct.size end
+    if self.components.self_destruct then
+        return self.components.self_destruct.size
+    end
     return 0
 end
 --- Returns the entity to which this player ship currently has an active drone connection.
 --- Returns nil if no drone is connected.
 --- Example: ship:getDroneLink()
 function Entity:getDroneLink()
-    if self.components.drone_link then return self.components.drone_link.linked_drone end
+    if self.components.drone_link then
+        return self.components.drone_link.linked_drone
+    end
     return nil
 end
 --- Commands this player ship to connect to the given entity as a drone.

@@ -1,5 +1,4 @@
-#ifndef FIGHTER_AI_H
-#define FIGHTER_AI_H
+#pragma once
 
 #include "ai.h"
 
@@ -15,6 +14,7 @@ class FighterAI : public ShipAI
     float timeout;
     float evade_direction;
     float aggression;
+    bool strafing_fired = false;
 public:
     FighterAI(sp::ecs::Entity owner);
 
@@ -24,10 +24,8 @@ public:
      */
     virtual bool canSwitchAI() override;
 
-    virtual void run(float delta) override;
+    virtual void runLight(float delta) override;
+    virtual void runHeavy(float delta) override;
     virtual void runOrders() override;
     virtual void runAttack(sp::ecs::Entity target) override;
 };
-
-
-#endif//FIGHTER_AI_H

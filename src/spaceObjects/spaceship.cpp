@@ -118,7 +118,7 @@ void SpaceShip::update(float delta)
         model_info.warp_scale = (10.0f - jump->delay) / 10.0f;
     else
         model_info.warp_scale = 0.f;
-    
+
     updateDynamicRadarSignature();
 }
 */

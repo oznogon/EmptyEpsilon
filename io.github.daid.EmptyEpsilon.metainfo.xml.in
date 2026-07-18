@@ -2,17 +2,17 @@
 <!-- Copyright 2024 daid -->
 <component type="desktop-application">
   <id>io.github.daid.EmptyEpsilon</id>
-  
+
   <name>EmptyEpsilon</name>
   <summary>Spaceship bridge simulator game</summary>
-  
+
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-only AND LicenseRef-TurboSquid-Royalty-Free-License AND OFL-1.1 AND Apache-2.0</project_license>
-  
+
   <developer id="io.github.daid">
     <name>daid</name>
   </developer>
-  
+
   <description>
     <p>EmptyEpsilon is a spaceship bridge simulator game. It&apos;s fully open source, so it can be modified in any way people wish.</p>
     <p>EmptyEpsilon places you in the roles of a spaceship&apos;s bridge officers, like those seen in Star Trek. While you can play EmptyEpsilon alone or with friends, the best experience involves 6 players working together on each ship.</p>
@@ -25,17 +25,17 @@
     <category>Game</category>
     <category>Simulation</category>
   </categories>
-  
+
   <content_rating type="oars-1.1">
     <content_attribute id="violence-fantasy">moderate</content_attribute>
     <content_attribute id="social-chat">intense</content_attribute>
     <content_attribute id="social-audio">intense</content_attribute>
   </content_rating>
-  
+
   <url type="homepage">https://daid.github.io/EmptyEpsilon/</url>
   <url type="bugtracker">https://github.com/daid/EmptyEpsilon/issues</url>
   <url type="vcs-browser">https://github.com/daid/EmptyEpsilon/</url>
-  
+
   <screenshots>
     <screenshot type="default">
       <image>https://daid.github.io/EmptyEpsilon/screenshots/mainscreen.png</image>
@@ -62,7 +62,7 @@
       <caption>View of the relay officer's screen, which can see and hail allies, share their short-range radar, and launch remote probes.</caption>
     </screenshot>
   </screenshots>
-  
+
   <releases>
     <release version="@MAJOR@.@MINOR@.@PATCH@" date="@MAJOR@-@MINOR@-@PATCH@" />
   </releases>

@@ -23,11 +23,13 @@ public:
     sp::io::Keybinding voice_all;
     sp::io::Keybinding voice_ship;
     sp::io::Keybinding debug_modifier;
-    sp::io::Keybinding debug_show_fps;
+    sp::io::Keybinding debug_show;
     sp::io::Keybinding debug_show_timing;
+    sp::io::Keybinding debug_minimize;
 #ifdef DEBUG
     sp::io::Keybinding debug_show_colliders;
     sp::io::Keybinding debug_show_gui;
+    sp::io::Keybinding debug_show_atlas;
 #endif
     // Rebinding binds
     sp::io::Keybinding cancel_rebind;

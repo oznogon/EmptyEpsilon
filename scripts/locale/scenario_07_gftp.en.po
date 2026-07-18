@@ -318,9 +318,7 @@ msgid ""
 "\n"
 "STAKHANOV IS NOT THE TRUE TARGET -STOP-\n"
 "\n"
-"CEASE CURRENT OPERATIONS AND PROCEED IMMEDIATELY TO SECTOR E2 -STOP-\n"
-"\n"
-"URGENCY AND DISCRETION ARE KEY -STOP-"
+"CEASE CURRENT OPERATIONS AND PROCEED IMMEDIATELY TO SECTOR "
 msgstr ""
 
 #: scripts/scenario_07_gftp.lua:309
@@ -450,8 +448,7 @@ msgid ""
 "This structure did not participate in any of the assaults, so we presume "
 "that it is a command platform hiding in a nebula.\n"
 "\n"
-"We want to deliver the first blow. Use the Nosy Sensing Array in sector F5 "
-"to locate it, then destroy it.\""
+"We want to deliver the first blow. Use the Nosy Sensing Array in sector "
 msgstr ""
 
 #: scripts/scenario_07_gftp.lua:551
@@ -502,8 +499,7 @@ msgid ""
 "A black ops military officer hails the ship:\n"
 "\n"
 "\"We have confirmed the command platform's location in the nebula around "
-"sector H6. All Navy ships, converge on the location. We advise you to deploy "
-"probes near the nebula for better visibility.\""
+"sector "
 msgstr ""
 
 #: scripts/scenario_07_gftp.lua:660
@@ -526,7 +522,7 @@ msgstr ""
 msgctxt "incCall"
 msgid ""
 "The fallen station is down. Epsilon, gather as soon as possible with the "
-"other ships in sector H6."
+"other ships in sector "
 msgstr ""
 
 #: scripts/scenario_07_gftp.lua:717

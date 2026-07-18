@@ -3,6 +3,7 @@
 #include "io/dataBuffer.h"
 #include "script/callback.h"
 #include "tween.h"
+#include "components/drone.h"
 
 
 inline float sensorsScaleShortRange(float base_range, float effectiveness)
@@ -102,3 +103,28 @@ class AllowRadarLink
 public:
     sp::ecs::Entity owner;
 };
+
+// Returns the short-range radar range used for sharing visibility, scaling
+// by the entity's own Sensors system when present. Entities that do not carry
+// a LongRangeRadar component (e.g. scan probes) fall back to a fixed default
+// of 5000.0f; when the entity is linked to an owner via AllowRadarLink, the
+// default is scaled by the owner's Sensors system effectiveness so that
+// upgrading the owner's Sensors extends the probe's shared short-range
+// coverage.
+inline float getEffectiveShortRangeRadarRange(sp::ecs::Entity entity)
+{
+    constexpr float default_short_range = 5000.0f;
+    if (auto lrr = entity.getComponent<LongRangeRadar>())
+    {
+        float r = lrr->short_range;
+        if (auto sensors = entity.getComponent<SensorsSystem>())
+            r = sensorsScaleShortRange(r, sensors->getSystemEffectiveness());
+        return r;
+    }
+    if (auto arl = entity.getComponent<AllowRadarLink>())
+    {
+        if (auto owner_sensors = arl->owner.getComponent<SensorsSystem>())
+            return sensorsScaleShortRange(default_short_range, owner_sensors->getSystemEffectiveness());
+    }
+    return default_short_range;
+}

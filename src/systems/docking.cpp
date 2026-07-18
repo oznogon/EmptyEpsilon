@@ -23,7 +23,7 @@ DockingSystem::DockingSystem()
 
 void DockingSystem::update(float delta)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
 
     for (auto [entity, docking_port, transform] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Transform>>()) {
         sp::Transform* target_transform;

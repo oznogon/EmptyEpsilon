@@ -42,22 +42,30 @@ function init()
     PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 
     -- Give the mission to the (first) player ship
-    local text = _("goal-shipLog", [[At least one friendly base must survive.
+    local text = _(
+        "goal-shipLog",
+        [[At least one friendly base must survive.
 
 Destroy all enemy ships. After a short delay, the next wave will appear. And so on ...
 
-How many waves can you destroy?]])
+How many waves can you destroy?]]
+    )
     getPlayerShip(-1):addToShipLog(text, "white")
 
     -- Random friendly stations
     for _ = 1, 2 do
-        local station = SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000))
+        local station = SpaceStation()
+            :setTemplate(randomStationTemplate())
+            :setFaction("Human Navy")
+            :setPosition(random(-5000, 5000), random(-5000, 5000))
         table.insert(friendlyList, station)
     end
 
     -- Random neutral stations
     for _ = 1, 6 do
-        local station = SpaceStation():setTemplate(randomStationTemplate()):setFaction("Independent")
+        local station = SpaceStation()
+            :setTemplate(randomStationTemplate())
+            :setFaction("Independent")
         setCirclePos(station, 0, 0, random(0, 360), random(15000, 30000))
     end
     friendlyList[1]:addReputationPoints(150.0)
@@ -124,13 +132,16 @@ end
 
 function spawnWave()
     waveNumber = waveNumber + 1
-    getPlayerShip(-1):addToShipLog(string.format(_("shipLog", "Wave %d"), waveNumber), "red")
+    getPlayerShip(-1):addToShipLog(
+        string.format(_("shipLog", "Wave %d"), waveNumber),
+        "red"
+    )
     friendlyList[1]:addReputationPoints(150 + waveNumber * 15)
 
     enemyList = {}
 
     -- Calculate score of wave
-    local totalScoreRequirement  -- actually: remainingScoreRequirement
+    local totalScoreRequirement -- actually: remainingScoreRequirement
     if getScenarioSetting("Enemies") == "Hard" then
         totalScoreRequirement = math.pow(waveNumber * 1.5 + 4, 1.3) * 10
     elseif getScenarioSetting("Enemies") == "Easy" then
@@ -142,10 +153,14 @@ function spawnWave()
     local scoreInSpawnPoint = 0
     local spawnDistance = 20000
     local spawnPointLeader = nil
-    local spawn_x, spawn_y, spawn_range_x, spawn_range_y = randomSpawnPointInfo(spawnDistance)
+    local spawn_x, spawn_y, spawn_range_x, spawn_range_y =
+        randomSpawnPointInfo(spawnDistance)
     while totalScoreRequirement > 0 do
         local ship = CpuShip():setFaction("Ghosts")
-        ship:setPosition(random(-spawn_range_x, spawn_range_x) + spawn_x, random(-spawn_range_y, spawn_range_y) + spawn_y)
+        ship:setPosition(
+            random(-spawn_range_x, spawn_range_x) + spawn_x,
+            random(-spawn_range_y, spawn_range_y) + spawn_y
+        )
 
         -- Make the first ship the leader at this spawn point
         if spawnPointLeader == nil then
@@ -201,7 +216,9 @@ function spawnWave()
         -- Destroy ship if it was too strong else take it
         if score > totalScoreRequirement * 1.1 + 5 then
             ship:destroy()
-            if ship == spawnPointLeader then spawnPointLeader = nil end
+            if ship == spawnPointLeader then
+                spawnPointLeader = nil
+            end
         else
             table.insert(enemyList, ship)
             totalScoreRequirement = totalScoreRequirement - score
@@ -211,7 +228,8 @@ function spawnWave()
         -- Start new spawn point farther away
         if scoreInSpawnPoint > totalScoreRequirement * 2.0 then
             spawnDistance = spawnDistance + 5000
-            spawn_x, spawn_y, spawn_range_x, spawn_range_y = randomSpawnPointInfo(spawnDistance)
+            spawn_x, spawn_y, spawn_range_x, spawn_range_y =
+                randomSpawnPointInfo(spawnDistance)
             scoreInSpawnPoint = 0
             spawnPointLeader = nil
         end
@@ -251,7 +269,10 @@ function update(delta)
     if enemy_count == 0 then
         spawnWaveDelay = 15.0
         globalMessage(_("msgMainscreen", "Wave cleared!"))
-        getPlayerShip(-1):addToShipLog(string.format(_("shipLog", "Wave %d cleared."), waveNumber), "green")
+        getPlayerShip(-1):addToShipLog(
+            string.format(_("shipLog", "Wave %d cleared."), waveNumber),
+            "green"
+        )
     end
     -- ... or lose
     if friendly_count == 0 then

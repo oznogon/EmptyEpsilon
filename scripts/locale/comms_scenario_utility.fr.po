@@ -3611,7 +3611,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:2809
 #, lua-format
 msgctxt "station-comms"
-msgid "Ok, we just cancelled your expedited docking contract with %s"
+msgid "OK, we just cancelled your expedited docking contract with %s"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:2810
@@ -3650,7 +3650,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:2825
 #, lua-format
 msgctxt "station-comms"
-msgid "Ok, we left the fast dock contract in place with %s"
+msgid "OK, we left the fast dock contract in place with %s"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:2826
@@ -9235,7 +9235,7 @@ msgstr ""
 
 #: scripts/comms_scenario_utility.lua:7650
 msgctxt "upgrade-comms"
-msgid "Ok, we will give you ours (add 5 rep)"
+msgid "OK, we will give you ours (add 5 rep)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:7651

@@ -12,12 +12,12 @@ void ImpulseSystem::update(float delta)
     {
         //Here we want to have max speed at 100% impulse, and max reverse speed at -100% impulse
         float cap_speed = impulse.max_speed_forward;
-        
+
         if(impulse.actual < 0 && impulse.max_speed_reverse <= 0.01f)
         {
             impulse.actual = 0; //we could get stuck with a ship with no reverse speed, not being able to accelerate
         }
-        if(impulse.actual < 0) 
+        if(impulse.actual < 0)
         {
             cap_speed = impulse.max_speed_reverse;
         }

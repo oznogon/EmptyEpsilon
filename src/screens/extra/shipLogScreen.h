@@ -1,5 +1,4 @@
-#ifndef SHIP_LOG_SCREEN_H
-#define SHIP_LOG_SCREEN_H
+#pragma once
 
 #include "gui/gui2_overlay.h"
 
@@ -16,5 +15,3 @@ public:
 
     void onDraw(sp::RenderTarget& target) override;
 };
-
-#endif//SHIP_LOG_SCREEN_H

@@ -2451,10 +2451,10 @@ msgstr "Réduire la vitesse orbitale de la lune en orbite autour de %s"
 
 #: scripts/scenario_48_visitors.lua:3898
 msgctxt "station-comms"
-msgid "He moves a slider and says, 'Ok.'"
+msgid "He moves a slider and says, 'OK.'"
 msgstr ""
 "...Le petit homme déplace un curseur et dit :\n"
-"\"Ok\""
+"\"OK\""
 
 #: scripts/scenario_48_visitors.lua:3905
 msgctxt "station-comms"

@@ -4,6 +4,7 @@
 #include "featureDefs.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "crewPositionRequirements.h"
 
 #include "components/customshipfunction.h"
 #include "components/reactor.h"
@@ -54,7 +55,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
     background_gradient
         ->setTextureThemed("background.gradient_single")
-        ->setPosition(glm::vec2(0.0f, 0.0f), sp::Alignment::Center)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(1200.0f, 900.0f);
 
     (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
@@ -65,7 +66,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     // Message if entity lacks all propulsion, maneuver, docking, and weapon
     // components.
-    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", tr("tactical", "No tactical controls"), 50.0f);
+    no_controls_label = new GuiLabel(this, "NO_CONTROLS_LABEL", crewPositionRequirements::getMissingMessage(CrewPosition::tacticalOfficer), GuiElement::GuiSizeRow);
     no_controls_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -76,104 +77,175 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     // Short-range tactical radar with a 5U range.
     radar = new GuiRadarView(tactical_controls, "TACTICAL_RADAR", &targets);
-    radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 750);
-    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
-
-    // Control targeting and piloting with radar interactions.
-    radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) {
-            auto last_target = targets.get();
-            targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
-            if (my_spaceship && targets.get() && (targets.get() != last_target)) {
-                my_player_info->commandSetBeamTarget(targets.get());
-                my_player_info->commandSetMissileTarget(targets.get());
-                drag_rotate = false;
-            } else if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
-                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
-                drag_rotate = true;
-            }
-        },
-        [this](glm::vec2 position) {
-            if (drag_rotate) {
-                if (auto transform = my_spaceship.getComponent<sp::Transform>())
+    radar
+        ->setRangeIndicatorStepSize(1000.0f)
+        ->shortRange()
+        ->enableGhostDots()
+        ->enableWaypoints()
+        ->enableCallsigns()
+        ->enableHeadingIndicators()
+        ->setStyle(GuiRadarView::Circular)
+        ->setCallbacks(
+            // Button down: Select combined weapons targets within 0.25U of the
+            // click, or command rotation to the clicked bearing if nothing's
+            // nearby.
+            [this](sp::io::Pointer::Button button, glm::vec2 position)
+            {
+                auto last_target = targets.get();
+                targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
+                if (my_spaceship && targets.get() && (targets.get() != last_target))
+                {
+                    my_player_info->commandSetBeamTarget(targets.get());
+                    my_player_info->commandSetMissileTarget(targets.get());
+                    drag_rotate = false;
+                }
+                else if (auto transform = my_spaceship.getComponent<sp::Transform>())
+                {
                     my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
-            }
-        },
-        [this](glm::vec2 position) {
-            drag_rotate=false;
-        }, nullptr
-    );
-    radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
+                    drag_rotate = true;
+                }
+            },
+            // Button dragged: Continue rotating if tapping and dragging.
+            [this](glm::vec2 position)
+            {
+                if (drag_rotate)
+                {
+                    if (auto transform = my_spaceship.getComponent<sp::Transform>())
+                        my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
+                }
+            },
+            // Button up: Reset drag state.
+            [this](glm::vec2 position)
+            {
+                drag_rotate = false;
+            },
+            nullptr
+        )
+        ->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0") == "1")
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMatchHeight, 750.0f);
 
     auto stats = new GuiElement(tactical_controls, "STATS");
-    stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 160)->setAttribute("layout", "vertical");
+    stats
+        ->setPosition(20.0f, 100.0f, sp::Alignment::TopLeft)
+        ->setSize(240.0f, 160.0f)
+        ->setAttribute("layout", "vertical");
 
-    // Ship statistics in the top left corner.
-    auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45);
-    energy_display->setSize(240, 40);
-    auto heading_display = new HeadingInfoDisplay(stats, "HEADING_DISPLAY", 0.45);
-    heading_display->setSize(240, 40);
-    auto velocity_display = new VelocityInfoDisplay(stats, "VELOCITY_DISPLAY", 0.45);
-    velocity_display->setSize(240, 40);
-    auto shields_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45);
-    shields_display->setSize(240, 40);
+    // Ship statistics in the top-left corner.
+    auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45f);
+    energy_display->setSize(240.0f, 40.0f);
+    auto heading_display = new HeadingInfoDisplay(stats, "HEADING_DISPLAY", 0.45f);
+    heading_display->setSize(240.0f, 40.0f);
+    auto velocity_display = new VelocityInfoDisplay(stats, "VELOCITY_DISPLAY", 0.45f);
+    velocity_display->setSize(240.0f, 40.0f);
+    auto shields_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45f);
+    shields_display->setSize(240.0f, 40.0f);
 
-    // Weapon tube loading controls in the bottom left corner.
+    // Weapon tube loading controls in the bottom-left corner.
     tube_controls = new GuiMissileTubeControls(tactical_controls, "MISSILE_TUBES");
-    tube_controls->setPosition(20, -20, sp::Alignment::BottomLeft);
+    tube_controls->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft);
     radar->enableTargetProjections(tube_controls);
 
+    // Beam controls beneath the radar.
     beam_info_box = new GuiElement(tactical_controls, "BEAM_INFO_BOX");
     beam_info_box
         ->setPosition(0.0f, -20.0f, sp::Alignment::BottomCenter)
-        ->setSize(500.0f, 50.0f)
+        ->setSize(500.0f, GuiElement::GuiSizeRow)
         ->hide();
 
-    // Beam controls beneath the radar.
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
         beam_info_box->show();
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), 30))->addBackground()->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(80, 50);
-        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, sp::Alignment::BottomLeft)->setSize(132, 50);
-        (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(212, 50);
-        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(288, 50);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), GuiElement::GuiSizeLabel))
+            ->addBackground()
+            ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
+            ->setSize(80.0f, GuiElement::GuiSizeRow);
+        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))
+            ->setPosition(80.0f, 0.0f, sp::Alignment::BottomLeft)
+            ->setSize(132.0f, GuiElement::GuiSizeRow);
+        (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))
+            ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
+            ->setSize(212.0f, GuiElement::GuiSizeRow);
+        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))
+            ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
+            ->setSize(288.0f, GuiElement::GuiSizeRow);
     }
 
     // Weapon tube locking, and manual aiming controls.
-    missile_aim = new AimLock(tactical_controls, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
-        tube_controls->setMissileTargetAngle(value);
-    });
-    missile_aim->hide()->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
+    missile_aim = new AimLock(tactical_controls, "MISSILE_AIM", radar, -90.0f, 250.0f /* 360 - 90 */, 0.0f,
+        [this](float value)
+        {
+            tube_controls->setMissileTargetAngle(value);
+        }
+    );
+    missile_aim
+        ->hide()
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+        ->setSize(GuiElement::GuiSizeMatchHeight, 800.0f);
     lock_aim = new AimLockButton(tactical_controls, "LOCK_AIM", tube_controls, missile_aim);
-    lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(110, 50);
+    lock_aim
+        ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
-    // Combat maneuver and propulsion controls in the bottom right corner.
-    (new GuiCombatManeuver(tactical_controls, "COMBAT_MANEUVER"))->setPosition(-20, -390, sp::Alignment::BottomRight)->setSize(200, 150);
+    // Beam weapons autofire safety toggle.
+    beam_safety = new GuiToggleButton(tactical_controls, "BEAM_SAFETY", tr("Autofire"),
+        [this](bool active)
+        {
+            my_player_info->commandSetBeamFiringEnabled(active);
+        }
+    );
+    beam_safety
+        ->setIcon("gui/icons/lock-beams")
+        ->setPosition(250.0f, 70.0f, sp::Alignment::TopCenter)
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
+
+    // Combat maneuver and propulsion controls in the bottom-right corner.
+    (new GuiCombatManeuver(tactical_controls, "COMBAT_MANEUVER"))
+        ->setPosition(-20.0f, -390.0f, sp::Alignment::BottomRight)
+        ->setSize(200.0f, 150.0f);
+
     GuiElement* engine_layout = new GuiElement(tactical_controls, "ENGINE_LAYOUT");
-    engine_layout->setPosition(-20, -80, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 300)->setAttribute("layout", "horizontalright");
-    (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
-    warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
-    jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
-    (new GuiDockingButton(tactical_controls, "DOCKING"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 50);
+    engine_layout
+        ->setPosition(-20.0f, -80.0f, sp::Alignment::BottomRight)
+        ->setSize(GuiElement::GuiSizeMax, 300.0f)
+        ->setAttribute("layout", "horizontalright");
+
+    (new GuiImpulseControls(engine_layout, "IMPULSE"))
+        ->setSize(100.0f, GuiElement::GuiSizeMax);
+
+    warp_controls = new GuiWarpControls(engine_layout, "WARP");
+    warp_controls->setSize(100.0f, GuiElement::GuiSizeMax);
+
+    jump_controls = new GuiJumpControls(engine_layout, "JUMP");
+    jump_controls->setSize(100, GuiElement::GuiSizeMax);
+
+    (new GuiDockingButton(tactical_controls, "DOCKING"))
+        ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
+        ->setSize(280.0f, GuiElement::GuiSizeRow);
 
     auto ub = my_spaceship.getComponent<UtilityBeam>();
 
-    sidebar_selector = new GuiSelector(tactical_controls, "TACTICAL_SIDEBAR_SELECTOR", [this](int index, string value)
-    {
-        if (value == "func")
+    sidebar_selector = new GuiSelector(tactical_controls, "TACTICAL_SIDEBAR_SELECTOR",
+        [this](int index, string value)
         {
-            custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
-            utility_beam_sidebar->hide();
-            utility_beam_dial->hide();
+            if (value == "func")
+            {
+                custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+                utility_beam_sidebar->hide();
+                utility_beam_dial->hide();
+            }
+            else if (value == "util")
+            {
+                custom_function_sidebar->hide();
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
+            }
         }
-        else if (value == "util")
-        {
-            custom_function_sidebar->hide();
-            utility_beam_sidebar->show();
-            utility_beam_dial->show();
-        }
-    });
-    sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50)->hide();
+    );
+    sidebar_selector
+        ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
+        ->hide();
 
     custom_function_sidebar = new GuiCustomShipFunctions(tactical_controls, CrewPosition::tacticalOfficer, "TACTICAL_CUSTOM_FUNCS");
     custom_function_sidebar
@@ -182,17 +254,23 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         ->hide();
 
     utility_beam_sidebar = new GuiUtilityBeamControls(tactical_controls, CrewPosition::tacticalOfficer, "UTILITY_BEAM_CONTROLS");
-    utility_beam_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-    utility_beam_sidebar->hide();
+    utility_beam_sidebar
+        ->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight)
+        ->setSize(250.0f, GuiElement::GuiSizeMax)
+        ->hide()
+        ->setAttribute("layout", "vertical");
 
     utility_beam_dial = new GuiUtilityBeamRotationDial(radar, "UTILITY_BEAM_DIAL", radar);
-    utility_beam_dial->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    utility_beam_dial
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
 
     if (custom_function_sidebar->hasEntries())
     {
         sidebar_selector->addEntry(tr("tacticalTab", "Functions"), "func");
         sidebar_selector->show();
     }
+
     if (ub && ub->crew_positions.has(CrewPosition::tacticalOfficer))
     {
         sidebar_selector->addEntry(tr("tacticalTab", "Utility Beam"), "util");
@@ -218,15 +296,10 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
+        if (beam_sys) beam_safety->setValue(beam_sys->is_firing_enabled);
         auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
-        const bool has_any_ability = my_spaceship.hasComponent<ImpulseEngine>()
-            || my_spaceship.hasComponent<JumpDrive>()
-            || my_spaceship.hasComponent<WarpDrive>()
-            || my_spaceship.hasComponent<CombatManeuveringThrusters>()
-            || my_spaceship.hasComponent<ManeuveringThrusters>()
-            || my_spaceship.hasComponent<DockingPort>()
-            || (beam_sys && beam_sys->mounts.size() > 0)
-            || (missile_tubes && missile_tubes->mounts.size() > 0);
+        const bool has_any_ability = crewPositionRequirements::hasRequirements(CrewPosition::tacticalOfficer, my_spaceship);
+
         if (!has_any_ability)
         {
             GuiOverlay::onDraw(renderer);
@@ -235,11 +308,10 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
 
         warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
         jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
-        beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>() && (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage));
+        beam_info_box->setVisible(beam_sys && (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage));
 
-        const bool has_tubes = my_spaceship.hasComponent<MissileTubes>();
-        lock_aim->setVisible(has_tubes);
-        missile_aim->setVisible(has_tubes && tube_controls->getManualAim());
+        lock_aim->setVisible(missile_tubes);
+        missile_aim->setVisible(missile_tubes && tube_controls->getManualAim());
 
         sp::ecs::Entity target_entity;
         if (auto t = my_spaceship.getComponent<BeamWeaponTarget>()) target_entity = t->entity;
@@ -252,6 +324,7 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
         else
             missile_aim->setVisible(tube_controls->getManualAim());
     }
+
     GuiOverlay::onDraw(renderer);
 }
 
@@ -259,16 +332,7 @@ void TacticalScreen::onUpdate()
 {
     if (!my_spaceship || !isVisible()) return;
 
-    auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
-    auto missile_tubes = my_spaceship.getComponent<MissileTubes>();
-    const bool has_any_ability = my_spaceship.hasComponent<ImpulseEngine>()
-        || my_spaceship.hasComponent<JumpDrive>()
-        || my_spaceship.hasComponent<WarpDrive>()
-        || my_spaceship.hasComponent<CombatManeuveringThrusters>()
-        || my_spaceship.hasComponent<ManeuveringThrusters>()
-        || my_spaceship.hasComponent<DockingPort>()
-        || (beam_sys && beam_sys->mounts.size() > 0)
-        || (missile_tubes && missile_tubes->mounts.size() > 0);
+    const bool has_any_ability = crewPositionRequirements::hasRequirements(CrewPosition::tacticalOfficer, my_spaceship);
 
     background_gradient->setVisible(has_any_ability);
     tactical_controls->setVisible(has_any_ability);
@@ -390,6 +454,15 @@ void TacticalScreen::onUpdate()
     {
         sidebar_selector->addEntry(tr("tacticalTab", "Functions"), "func");
         sidebar_selector->show();
+        if (sidebar_selector->getSelectionIndex() == -1)
+        {
+            int func_idx = sidebar_selector->indexByValue("func");
+            if (func_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(func_idx);
+                custom_function_sidebar->show();
+            }
+        }
     }
     else if (!should_have_func_tab && has_func_tab)
     {
@@ -422,6 +495,16 @@ void TacticalScreen::onUpdate()
     {
         sidebar_selector->addEntry(tr("tacticalTab", "Utility Beam"), "util");
         sidebar_selector->show();
+        if (sidebar_selector->getSelectionIndex() == -1)
+        {
+            int util_idx = sidebar_selector->indexByValue("util");
+            if (util_idx != -1)
+            {
+                sidebar_selector->setSelectionIndex(util_idx);
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
+            }
+        }
     }
     else if (!should_have_util_tab && has_util_tab)
     {

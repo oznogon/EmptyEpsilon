@@ -20,6 +20,7 @@ BASIC_REPLICATION_IMPL(BeamWeaponSysReplication, BeamWeaponSys)
 
     BASIC_REPLICATION_FIELD(frequency);
     BASIC_REPLICATION_FIELD(system_target);
+    BASIC_REPLICATION_FIELD(is_firing_enabled);
 
     BASIC_REPLICATION_VECTOR(mounts)
         VECTOR_REPLICATION_FIELD(position);

@@ -3,12 +3,16 @@ These are older ship templates, going to be replaced soon.
 ----------------------------------------------------------]]
 
 --[[ Player ships --]]
-local template = ShipTemplate():setName("Player Cruiser"):setLocaleName(_("playerShip", "Player Cruiser")):setModel("battleship_destroyer_5_upgraded"):setType("playership")
+local template = ShipTemplate()
+    :setName("Player Cruiser")
+    :setLocaleName(_("playerShip", "Player Cruiser"))
+    :setModel("battleship_destroyer_5_upgraded")
+    :setType("playership")
 template:hidden() -- The player cruiser is pretty much replaced by the Atlantis.
 template:setRadarTrace("cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
-template:setBeam(1, 90,  15, 1000.0, 6.0, 10)
+template:setBeam(1, 90, 15, 1000.0, 6.0, 10)
 -- Setup 3 missile tubes. 2 forward at a slight angle, and 1 in the rear exclusive for mines.
 template:setTubes(3, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
 template:setTubeDirection(0, -5):weaponTubeDisallowMissle(0, "Mine")
@@ -25,54 +29,56 @@ template:setWeaponStorage("Nuke", 4)
 template:setWeaponStorage("Mine", 8)
 template:setWeaponStorage("EMP", 6)
 
-template:addRoomSystem(1, 0, 2, 1, "Maneuver");
-template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-template:addRoomSystem(2, 2, 2, 1, "DockingBay");
+template:addRoomSystem(1, 0, 2, 1, "Maneuver")
+template:addRoomSystem(1, 1, 2, 1, "BeamWeapons")
+template:addRoomSystem(2, 2, 2, 1, "DockingBay")
 
-template:addRoomSystem(0, 3, 1, 2, "RearShield");
-template:addRoomSystem(1, 3, 2, 2, "Reactor");
-template:addRoomSystem(3, 3, 2, 2, "Warp");
-template:addRoomSystem(5, 3, 1, 2, "JumpDrive");
-template:addRoom(6, 3, 2, 1);
-template:addRoom(6, 4, 2, 1);
-template:addRoomSystem(8, 3, 1, 2, "FrontShield");
+template:addRoomSystem(0, 3, 1, 2, "RearShield")
+template:addRoomSystem(1, 3, 2, 2, "Reactor")
+template:addRoomSystem(3, 3, 2, 2, "Warp")
+template:addRoomSystem(5, 3, 1, 2, "JumpDrive")
+template:addRoom(6, 3, 2, 1)
+template:addRoom(6, 4, 2, 1)
+template:addRoomSystem(8, 3, 1, 2, "FrontShield")
 
-template:addRoom(2, 5, 2, 1);
-template:addRoomSystem(1, 6, 2, 1, "MissileSystem");
-template:addRoomSystem(1, 7, 2, 1, "Impulse");
+template:addRoom(2, 5, 2, 1)
+template:addRoomSystem(1, 6, 2, 1, "MissileSystem")
+template:addRoomSystem(1, 7, 2, 1, "Impulse")
 
-template:addDoor(1, 1, true);
-template:addDoor(2, 2, true);
-template:addDoor(3, 3, true);
-template:addDoor(1, 3, false);
-template:addDoor(3, 4, false);
-template:addDoor(3, 5, true);
-template:addDoor(2, 6, true);
-template:addDoor(1, 7, true);
-template:addDoor(5, 3, false);
-template:addDoor(6, 3, false);
-template:addDoor(6, 4, false);
-template:addDoor(8, 3, false);
-template:addDoor(8, 4, false);
-
+template:addDoor(1, 1, true)
+template:addDoor(2, 2, true)
+template:addDoor(3, 3, true)
+template:addDoor(1, 3, false)
+template:addDoor(3, 4, false)
+template:addDoor(3, 5, true)
+template:addDoor(2, 6, true)
+template:addDoor(1, 7, true)
+template:addDoor(5, 3, false)
+template:addDoor(6, 3, false)
+template:addDoor(6, 4, false)
+template:addDoor(8, 3, false)
+template:addDoor(8, 4, false)
 
 --Airlock doors
 --template:addDoor(2, 2, false);
 --template:addDoor(2, 5, false);
 
-template = ShipTemplate():setName("Player Missile Cr."):setLocaleName(_("playerShip", "Player Missile Cr.")):setModel("space_cruiser_4"):setType("playership")
+template = ShipTemplate()
+    :setName("Player Missile Cr.")
+    :setLocaleName(_("playerShip", "Player Missile Cr."))
+    :setModel("space_cruiser_4")
+    :setType("playership")
 template:hidden() -- The Player Missile Cr. is pretty much replaced by the Crucible
 template:setRadarTrace("missile_cruiser.png")
---                  Arc, Dir, Range, CycleTime, Dmg
---Setup 7 tubes. 2 forward for any type of missile, and 2 on each side of the ship and 1 in the rear. The side tubes are exclusive for homing missiles. The rear is exclusive for mines.
+-- Setup 7 tubes. 2 forward for any type of missile, and 2 on each side of the ship and 1 in the rear. The side tubes are exclusive for homing missiles. The rear is exclusive for mines.
 template:setTubes(7, 8.0)
-template:setTubeDirection(0,  0):weaponTubeDisallowMissle(0, "Mine")
-template:setTubeDirection(1,  0):weaponTubeDisallowMissle(1, "Mine")
+template:setTubeDirection(0, 0):weaponTubeDisallowMissle(0, "Mine")
+template:setTubeDirection(1, 0):weaponTubeDisallowMissle(1, "Mine")
 template:setTubeDirection(2, 90):setWeaponTubeExclusiveFor(2, "Homing")
 template:setTubeDirection(3, 90):setWeaponTubeExclusiveFor(3, "Homing")
-template:setTubeDirection(4,-90):setWeaponTubeExclusiveFor(4, "Homing")
-template:setTubeDirection(5,-90):setWeaponTubeExclusiveFor(5, "Homing")
-template:setTubeDirection(6,180):setWeaponTubeExclusiveFor(6, "Mine")
+template:setTubeDirection(4, -90):setWeaponTubeExclusiveFor(4, "Homing")
+template:setTubeDirection(5, -90):setWeaponTubeExclusiveFor(5, "Homing")
+template:setTubeDirection(6, 180):setWeaponTubeExclusiveFor(6, "Mine")
 template:setHull(200)
 template:setShields(110, 70)
 template:setSpeed(60, 8, 15)
@@ -85,42 +91,46 @@ template:setWeaponStorage("Nuke", 8)
 template:setWeaponStorage("Mine", 12)
 template:setWeaponStorage("EMP", 10)
 
-template:addRoomSystem(1, 0, 2, 1, "Maneuver");
-template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-template:addRoomSystem(2, 2, 2, 1, "DockingBay");
+template:addRoomSystem(1, 0, 2, 1, "Maneuver")
+template:addRoomSystem(1, 1, 2, 1, "BeamWeapons")
+template:addRoomSystem(2, 2, 2, 1, "DockingBay")
 
-template:addRoomSystem(0, 3, 1, 2, "RearShield");
-template:addRoomSystem(1, 3, 2, 2, "Reactor");
-template:addRoomSystem(3, 3, 2, 2, "Warp");
-template:addRoomSystem(5, 3, 1, 2, "JumpDrive");
-template:addRoom(6, 3, 2, 1);
-template:addRoom(6, 4, 2, 1);
-template:addRoomSystem(8, 3, 1, 2, "FrontShield");
+template:addRoomSystem(0, 3, 1, 2, "RearShield")
+template:addRoomSystem(1, 3, 2, 2, "Reactor")
+template:addRoomSystem(3, 3, 2, 2, "Warp")
+template:addRoomSystem(5, 3, 1, 2, "JumpDrive")
+template:addRoom(6, 3, 2, 1)
+template:addRoom(6, 4, 2, 1)
+template:addRoomSystem(8, 3, 1, 2, "FrontShield")
 
-template:addRoom(2, 5, 2, 1);
-template:addRoomSystem(1, 6, 2, 1, "MissileSystem");
-template:addRoomSystem(1, 7, 2, 1, "Impulse");
+template:addRoom(2, 5, 2, 1)
+template:addRoomSystem(1, 6, 2, 1, "MissileSystem")
+template:addRoomSystem(1, 7, 2, 1, "Impulse")
 
-template:addDoor(1, 1, true);
-template:addDoor(2, 2, true);
-template:addDoor(3, 3, true);
-template:addDoor(1, 3, false);
-template:addDoor(3, 4, false);
-template:addDoor(3, 5, true);
-template:addDoor(2, 6, true);
-template:addDoor(1, 7, true);
-template:addDoor(5, 3, false);
-template:addDoor(6, 3, false);
-template:addDoor(6, 4, false);
-template:addDoor(8, 3, false);
-template:addDoor(8, 4, false);
+template:addDoor(1, 1, true)
+template:addDoor(2, 2, true)
+template:addDoor(3, 3, true)
+template:addDoor(1, 3, false)
+template:addDoor(3, 4, false)
+template:addDoor(3, 5, true)
+template:addDoor(2, 6, true)
+template:addDoor(1, 7, true)
+template:addDoor(5, 3, false)
+template:addDoor(6, 3, false)
+template:addDoor(6, 4, false)
+template:addDoor(8, 3, false)
+template:addDoor(8, 4, false)
 
-template = ShipTemplate():setName("Player Fighter"):setLocaleName(_("playerShip", "Player Fighter")):setModel("small_fighter_1"):setType("playership")
+template = ShipTemplate()
+    :setName("Player Fighter")
+    :setLocaleName(_("playerShip", "Player Fighter"))
+    :setModel("small_fighter_1")
+    :setType("playership")
 template:hidden() -- The Player Figher is replaced by the MP52 Hornet
 template:setRadarTrace("fighter.png")
---                  Arc, Dir, Range, CycleTime, Dmg
+--                 Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
-template:setBeam(1, 40,  10, 1000.0, 6.0, 8)
+template:setBeam(1, 40, 10, 1000.0, 6.0, 8)
 template:setHull(60)
 template:setShields(40)
 template:setSpeed(110, 20, 40)
@@ -132,34 +142,37 @@ template:setEnergyStorage(400)
 template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
 template:setWeaponStorage("HVLI", 4)
 
-template:addRoomSystem(3, 0, 1, 1, "Maneuver");
-template:addRoomSystem(1, 0, 2, 1, "BeamWeapons");
+template:addRoomSystem(3, 0, 1, 1, "Maneuver")
+template:addRoomSystem(1, 0, 2, 1, "BeamWeapons")
 
-template:addRoomSystem(0, 1, 1, 2, "RearShield");
-template:addRoomSystem(1, 1, 2, 2, "Reactor");
-template:addRoomSystem(3, 1, 2, 1, "Warp");
-template:addRoomSystem(3, 2, 2, 1, "JumpDrive");
-template:addRoomSystem(5, 1, 1, 2, "FrontShield");
+template:addRoomSystem(0, 1, 1, 2, "RearShield")
+template:addRoomSystem(1, 1, 2, 2, "Reactor")
+template:addRoomSystem(3, 1, 2, 1, "Warp")
+template:addRoomSystem(3, 2, 2, 1, "JumpDrive")
+template:addRoomSystem(5, 1, 1, 2, "FrontShield")
 
-template:addRoomSystem(1, 3, 2, 1, "MissileSystem");
-template:addRoomSystem(3, 3, 1, 1, "Impulse");
+template:addRoomSystem(1, 3, 2, 1, "MissileSystem")
+template:addRoomSystem(3, 3, 1, 1, "Impulse")
 
 template:addRoomSystem(0, 0, 1, 1, "DockingBay")
 
 template:addDoor(1, 0, false)
-template:addDoor(2, 1, true);
-template:addDoor(3, 1, true);
-template:addDoor(1, 1, false);
-template:addDoor(3, 1, false);
-template:addDoor(3, 2, false);
-template:addDoor(3, 3, true);
-template:addDoor(2, 3, true);
-template:addDoor(5, 1, false);
-template:addDoor(5, 2, false);
+template:addDoor(2, 1, true)
+template:addDoor(3, 1, true)
+template:addDoor(1, 1, false)
+template:addDoor(3, 1, false)
+template:addDoor(3, 2, false)
+template:addDoor(3, 3, true)
+template:addDoor(2, 3, true)
+template:addDoor(5, 1, false)
+template:addDoor(5, 2, false)
 
 --[[ Neutral or special ship types --]]
 --Tug, used for transport of small goods (like weapons)
-template = ShipTemplate():setName("Tug"):setLocaleName(_("ship", "Tug")):setModel("space_tug")
+template = ShipTemplate()
+    :setName("Tug")
+    :setLocaleName(_("ship", "Tug"))
+    :setModel("space_tug")
 template:setRadarTrace("tug.png")
 template:setHull(50)
 template:setShields(20)
@@ -168,27 +181,39 @@ template:setWeaponStorage("Homing", 5)
 template:setWeaponStorage("Nuke", 1)
 template:setWeaponStorage("Mine", 3)
 template:setWeaponStorage("EMP", 2)
-template:setDescription(_([[The tugboat is a reliable, but small and un-armed transport ship. Due to it's low cost, it is a favourite ship to teach the ropes to fledgeling captains, without risking friendly fire.]]))
+template:setDescription(
+    _(
+        [[The tugboat is a reliable, but small and un-armed transport ship. Due to its low cost, it is a favorite ship to teach the ropes to fledgling captains, without risking friendly fire.]]
+    )
+)
 
---List of possible fighters --
+-- List of possible fighters --
 -- Interceptor (anti fighter) -> High speed, low visibility, front beam weapons
 -- Bomber (anti capital) -> Low speed, high visibility, high armor (for a fighter), high shields (for a fighter), multiple missiles
-    -- Bomber mine
+-- Bomber mine
 
 -- Mine ship --
-local variation = template:copy("Nautilus"):setLocaleName(_("playerShip", "Nautilus")):setType("playership"):setClass(_("class", "Frigate"), _("subclass", "Mine Layer"))
-variation:setDescription(_("Small mine laying vessel with minimal armament, shields and hull"))
-variation:setShields(60,60)
+local variation = template
+    :copy("Nautilus")
+    :setLocaleName(_("playerShip", "Nautilus"))
+    :setType("playership")
+    :setClass(_("class", "Frigate"), _("subclass", "Mine Layer"))
+variation:setDescription(
+    _(
+        [[Small mine laying vessel with minimal armament, shields, and hull.]]
+    )
+)
+variation:setShields(60, 60)
 variation:setHull(100)
 --                  Arc, Dir, Range, CycleTime, Dmg
-variation:setBeam(0, 10,  35, 1000.0, 6.0, 6)
+variation:setBeam(0, 10, 35, 1000.0, 6.0, 6)
 variation:setBeam(1, 10, -35, 1000.0, 6.0, 6)
---								Arc, Dir, Rotate speed
-variation:setBeamWeaponTurret(0, 90,  35, 6)
+--                              Arc, Dir, Rotate speed
+variation:setBeamWeaponTurret(0, 90, 35, 6)
 variation:setBeamWeaponTurret(1, 90, -35, 6)
 variation:setJumpDrive(true)
 template:setEnergyStorage(800)
-variation:setCombatManeuver(250,150)
+variation:setCombatManeuver(250, 150)
 variation:setTubes(3, 10.0)
 variation:setTubeDirection(0, 180)
 variation:setTubeDirection(1, 180)
@@ -199,55 +224,67 @@ variation:setWeaponStorage("Nuke", 0)
 variation:setWeaponStorage("EMP", 0)
 
 variation:setRepairCrewCount(4)
---	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
-variation:addRoomSystem( 0, 1, 1, 2, "Impulse")
-variation:addRoomSystem( 1, 0, 2, 1, "RearShield")
-variation:addRoomSystem( 1, 1, 2, 2, "JumpDrive")
-variation:addRoomSystem( 1, 3, 2, 1, "FrontShield")
-variation:addRoomSystem( 3, 0, 2, 1, "Beamweapons")
-variation:addRoomSystem( 3, 1, 3, 1, "Warp")
-variation:addRoomSystem( 3, 2, 3, 1, "Reactor")
-variation:addRoomSystem( 3, 3, 2, 1, "MissileSystem")
-variation:addRoomSystem( 6, 1, 1, 2, "Maneuver")
 
-variation:addRoomSystem( 0, 0, 1, 1, "DockingBay")
+variation:addRoomSystem(0, 1, 1, 2, "Impulse")
+variation:addRoomSystem(1, 0, 2, 1, "RearShield")
+variation:addRoomSystem(1, 1, 2, 2, "JumpDrive")
+variation:addRoomSystem(1, 3, 2, 1, "FrontShield")
+variation:addRoomSystem(3, 0, 2, 1, "Beamweapons")
+variation:addRoomSystem(3, 1, 3, 1, "Warp")
+variation:addRoomSystem(3, 2, 3, 1, "Reactor")
+variation:addRoomSystem(3, 3, 2, 1, "MissileSystem")
+variation:addRoomSystem(6, 1, 1, 2, "Maneuver")
+variation:addRoomSystem(0, 0, 1, 1, "DockingBay")
 
--- (H)oriz, (V)ert H, V, true = horizontal
-variation:addDoor( 1, 0, false)
-variation:addDoor( 1, 1, false)
-variation:addDoor( 2, 1, true)
-variation:addDoor( 1, 3, true)
-variation:addDoor( 3, 2, false)
-variation:addDoor( 4, 3, true)
-variation:addDoor( 6, 1, false)
-variation:addDoor( 4, 2, true)
-variation:addDoor( 4, 1, true)
-
+variation:addDoor(1, 0, false)
+variation:addDoor(1, 1, false)
+variation:addDoor(2, 1, true)
+variation:addDoor(1, 3, true)
+variation:addDoor(3, 2, false)
+variation:addDoor(4, 3, true)
+variation:addDoor(6, 1, false)
+variation:addDoor(4, 2, true)
+variation:addDoor(4, 1, true)
 
 --[[ Enemy ship types --]]
 -- Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated.
-template = ShipTemplate():setName("Fighter"):setLocaleName(_("ship", "Fighter")):setModel("small_fighter_1")
+template = ShipTemplate()
+    :setName("Fighter")
+    :setLocaleName(_("ship", "Fighter"))
+    :setModel("small_fighter_1")
 template:hidden() -- Replaced by the Hornet class
 template:setRadarTrace("fighter.png")
-template:setDescription(_("Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated."))
---                  Arc, Dir, Range, CycleTime, Dmg
+template:setDescription(
+    _(
+        [[Fighters are quick, agile ships that don't do much damage individually, but usually engage in larger groups. They are easy to take out but shouldn't be underestimated.]]
+    )
+)
+--                 Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 60, 0, 1000.0, 4.0, 4)
 template:setHull(30)
 template:setShields(30)
 template:setSpeed(120, 30, 25)
-template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
+template:setDefaultAI("fighter") -- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
 
 -- The cruiser is an average ship you can encounter, it has average shields, and average beams. It's pretty much average with nothing special.
 -- Karnack cruiser mark I
 -- Fabricated by: Repulse shipyards
 -- Due to it's versatility, this ship has found wide adaptation in most factions. Most factions have extensively retrofitted these ships
 -- to suit their combat doctrines. Because it's an older model, most factions have been selling stripped versions. This practice has led to this ship becoming an all time favorite with smugglers and other civilian parties. However, they have used it's adaptable nature to re-fit them with (illegal) weaponry.
-template = ShipTemplate():setName("Karnack"):setLocaleName(_("ship", "Karnack")):setModel("small_frigate_4"):setClass(_("class", "Frigate"), _("subclass", "Cruiser"))
+template = ShipTemplate()
+    :setName("Karnack")
+    :setLocaleName(_("ship", "Karnack"))
+    :setModel("small_frigate_4")
+    :setClass(_("class", "Frigate"), _("subclass", "Cruiser"))
 template:setRadarTrace("cruiser.png")
-template:setDescription(_("Fabricated by: Repulse shipyards. Due to it's versatility, this ship has found wide adaptation in most factions. Most factions have extensively retrofitted these ships to suit their combat doctrines. Because it's an older model, most factions have been selling stripped versions. This practice has led to this ship becoming an all time favorite with smugglers and other civilian parties. However, they have used it's adaptable nature to re-fit them with (illegal) weaponry."))
+template:setDescription(
+    _(
+        "Fabricated by: Repulse shipyards. Due to it's versatility, this ship has found wide adaptation in most factions. Most factions have extensively retrofitted these ships to suit their combat doctrines. Because it's an older model, most factions have been selling stripped versions. This practice has led to this ship becoming an all time favorite with smugglers and other civilian parties. However, they have used it's adaptable nature to re-fit them with (illegal) weaponry."
+    )
+)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 60, -15, 1000.0, 6.0, 6)
-template:setBeam(1, 60,  15, 1000.0, 6.0, 6)
+template:setBeam(1, 60, 15, 1000.0, 6.0, 6)
 template:setHull(60)
 template:setShields(40, 40)
 template:setSpeed(60, 6, 10)
@@ -256,10 +293,14 @@ template:setSpeed(60, 6, 10)
 -- Fabricated by: Repulse shipyards
 -- The successor to the widely successful mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savory purposes.
 variation = template:copy("Cruiser"):setLocaleName(_("ship", "Cruiser"))
-variation:setDescription(_("Fabricated by: Repulse shipyards. The successor to the widely successful mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savory purposes."))
+variation:setDescription(
+    _(
+        "Fabricated by: Repulse shipyards. The successor to the widely successful mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savory purposes."
+    )
+)
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 90, -15, 1000.0, 6.0, 6)
-variation:setBeam(1, 90,  15, 1000.0, 6.0, 6)
+variation:setBeam(1, 90, 15, 1000.0, 6.0, 6)
 variation:setHull(70)
 variation:copy("Karnack MK2"):setLocaleName(_("ship", "Karnack MK2"))
 variation:hidden() -- Hide the old "Cruiser" name after making the copy.
@@ -268,9 +309,17 @@ variation:hidden() -- Hide the old "Cruiser" name after making the copy.
 -- Fabricated by: Repulse shipyards
 -- TODO
 -- The missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealt with properly.
-template = ShipTemplate():setName("Missile Cruiser"):setLocaleName(_("ship", "Missile Cruiser")):setModel("space_cruiser_4"):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Missile"))
+template = ShipTemplate()
+    :setName("Missile Cruiser")
+    :setLocaleName(_("ship", "Missile Cruiser"))
+    :setModel("space_cruiser_4")
+    :setClass(_("class", "Frigate"), _("subclass", "Cruiser: Missile"))
 template:setRadarTrace("missile_cruiser.png")
-template:setDescription(_("Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealt with properly."))
+template:setDescription(
+    _(
+        "Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealt with properly."
+    )
+)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setTubes(1, 25.0)
 template:setHull(40)
@@ -279,11 +328,19 @@ template:setSpeed(45, 3, 10)
 template:setWeaponStorage("Homing", 10)
 
 -- The gunship is a ship equipped with a homing missile tube to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
-template = ShipTemplate():setName("Gunship"):setLocaleName(_("ship", "Gunship")):setModel("battleship_destroyer_4_upgraded"):setClass(_("class", "Frigate"), _("subclass", "Gunship"))
+template = ShipTemplate()
+    :setName("Gunship")
+    :setLocaleName(_("ship", "Gunship"))
+    :setModel("battleship_destroyer_4_upgraded")
+    :setClass(_("class", "Frigate"), _("subclass", "Gunship"))
 template:setRadarTrace("adv_gunship.png")
-template:setDescription(_("The gunship is a ship equipped with a homing missile tube to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself."))
+template:setDescription(
+    _(
+        "The gunship is a ship equipped with a homing missile tube to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself."
+    )
+)
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 50,-15, 1000.0, 6.0, 8)
+template:setBeam(0, 50, -15, 1000.0, 6.0, 8)
 template:setBeam(1, 50, 15, 1000.0, 6.0, 8)
 template:setTubes(1, 8.0) -- Amount of torpedo tubes
 template:setHull(100)
@@ -292,16 +349,29 @@ template:setSpeed(60, 5, 10)
 template:setWeaponStorage("Homing", 4)
 
 -- The advanced gunship is a ship equipped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
-variation = template:copy("Adv. Gunship"):setLocaleName(_("ship", "Adv. Gunship"))
-variation:setDescription(_("The advanced gunship is a ship equipped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself."))
+variation =
+    template:copy("Adv. Gunship"):setLocaleName(_("ship", "Adv. Gunship"))
+variation:setDescription(
+    _(
+        "The advanced gunship is a ship equipped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself."
+    )
+)
 variation:setTubes(2, 8.0) -- Amount of torpedo tubes
 
 -- The Strikeship is a warp-drive equipped fighter build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields.
-template = ShipTemplate():setName("Strikeship"):setLocaleName(_("ship", "Strikeship")):setModel("small_frigate_3"):setClass(_("class", "Starfighter"), _("subclass", "Strike"))
+template = ShipTemplate()
+    :setName("Strikeship")
+    :setLocaleName(_("ship", "Strikeship"))
+    :setModel("small_frigate_3")
+    :setClass(_("class", "Starfighter"), _("subclass", "Strike"))
 template:setRadarTrace("striker.png")
-template:setDescription(_("The Strikeship is a warp-drive equipped fighter build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields."))
+template:setDescription(
+    _(
+        "The Strikeship is a warp-drive equipped fighter build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields."
+    )
+)
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
+template:setBeam(0, 40, -5, 1000.0, 6.0, 6)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 6)
 template:setHull(100)
 template:setShields(80, 30, 30, 30)
@@ -309,24 +379,39 @@ template:setSpeed(70, 12, 12)
 template:setWarpSpeed(1000)
 
 -- The Advanced Striker is a jump-drive equipped fighter build for quick strikes, it's slow but very agile, but does not do an extreme amount of damage, and lacks in shields. However, due to the jump drive, it's quick to get into the action.
-template = ShipTemplate():setName("Adv. Striker"):setLocaleName(_("ship", "Adv. Striker")):setClass(_("class", "Starfighter"), _("subclass", "Patrol")):setModel("dark_fighter_6")
+template = ShipTemplate()
+    :setName("Adv. Striker")
+    :setLocaleName(_("ship", "Adv. Striker"))
+    :setClass(_("class", "Starfighter"), _("subclass", "Patrol"))
+    :setModel("dark_fighter_6")
 template:setRadarTrace("adv_striker.png")
-template:setDescription(_("The Advanced Striker is a jump-drive equipped fighter build for quick strikes, it's slow but very agile, but does not do an extreme amount of damage, and lacks in shields. However, due to the jump drive, it's quick to get into the action."))
+template:setDescription(
+    _(
+        "The Advanced Striker is a jump-drive equipped fighter build for quick strikes, it's slow but very agile, but does not do an extreme amount of damage, and lacks in shields. However, due to the jump drive, it's quick to get into the action."
+    )
+)
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 50,-15, 1000.0, 6.0, 6)
+template:setBeam(0, 50, -15, 1000.0, 6.0, 6)
 template:setBeam(1, 50, 15, 1000.0, 6.0, 6)
 template:setHull(70)
 template:setShields(50, 30)
 template:setSpeed(45, 12, 15)
 template:setJumpDrive(true)
 
-variation = template:copy("Striker"):setLocaleName(_("playerShip", "Striker")):setType("playership")
-variation:setDescription(_("The Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields"))
-variation:setBeam(0, 10,-15, 1000.0, 6.0, 6)
+variation = template
+    :copy("Striker")
+    :setLocaleName(_("playerShip", "Striker"))
+    :setType("playership")
+variation:setDescription(
+    _(
+        "The Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields"
+    )
+)
+variation:setBeam(0, 10, -15, 1000.0, 6.0, 6)
 variation:setBeam(1, 10, 15, 1000.0, 6.0, 6)
---								  Arc, Dir, Rotate speed
-variation:setBeamWeaponTurret( 0, 100, -15, 6)
-variation:setBeamWeaponTurret( 1, 100,  15, 6)
+--                                  Arc, Dir, Rotate speed
+variation:setBeamWeaponTurret(0, 100, -15, 6)
+variation:setBeamWeaponTurret(1, 100, 15, 6)
 variation:setHull(120)
 variation:setSpeed(45, 15, 30)
 variation:setJumpDrive(false)
@@ -335,96 +420,121 @@ variation:setEnergyStorage(500)
 
 variation:setRepairCrewCount(2)
 
-variation:addRoomSystem(4,0,3,1,"RearShield")
-variation:addRoomSystem(3,1,3,1,"MissileSystem")
-variation:addRoomSystem(0,1,1,1,"Beamweapons")
-variation:addRoomSystem(1,1,1,3,"Reactor")
-variation:addRoomSystem(2,2,3,1,"Warp")
-variation:addRoomSystem(5,2,4,1,"JumpDrive")
-variation:addRoomSystem(0,3,1,1,"Impulse")
-variation:addRoomSystem(3,3,3,1,"Maneuver")
-variation:addRoomSystem(4,4,3,1,"FrontShield")
-
+variation:addRoomSystem(4, 0, 3, 1, "RearShield")
+variation:addRoomSystem(3, 1, 3, 1, "MissileSystem")
+variation:addRoomSystem(0, 1, 1, 1, "Beamweapons")
+variation:addRoomSystem(1, 1, 1, 3, "Reactor")
+variation:addRoomSystem(2, 2, 3, 1, "Warp")
+variation:addRoomSystem(5, 2, 4, 1, "JumpDrive")
+variation:addRoomSystem(0, 3, 1, 1, "Impulse")
+variation:addRoomSystem(3, 3, 3, 1, "Maneuver")
+variation:addRoomSystem(4, 4, 3, 1, "FrontShield")
 variation:addRoomSystem(0, 0, 1, 1, "DockingBay")
 
 variation:addDoor(0, 1, true)
-variation:addDoor(1,1,false)
-variation:addDoor(1,3,false)
-variation:addDoor(2,2,false)
-variation:addDoor(5,2,false)
-variation:addDoor(4,3,true)
-variation:addDoor(5,2,true)
-variation:addDoor(4,1,true)
-variation:addDoor(5,4,true)
-
+variation:addDoor(1, 1, false)
+variation:addDoor(1, 3, false)
+variation:addDoor(2, 2, false)
+variation:addDoor(5, 2, false)
+variation:addDoor(4, 3, true)
+variation:addDoor(5, 2, true)
+variation:addDoor(4, 1, true)
+variation:addDoor(5, 4, true)
 
 -- The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a huge amount of beam weapons in the front. Taking it head-on is suicide.
-template = ShipTemplate():setName("Dreadnought"):setLocaleName(_("ship", "Dreadnought")):setModel("battleship_destroyer_1_upgraded"):setClass(_("class", "Dreadnought"), _("subclass", "Assault"))
+template = ShipTemplate()
+    :setName("Dreadnought")
+    :setLocaleName(_("ship", "Dreadnought"))
+    :setModel("battleship_destroyer_1_upgraded")
+    :setClass(_("class", "Dreadnought"), _("subclass", "Assault"))
 template:setRadarTrace("dread.png")
-template:setDescription(_("The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a huge amount of beam weapons in the front. Taking it head-on is suicide."))
+template:setDescription(
+    _(
+        "The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a huge amount of beam weapons in the front. Taking it head-on is suicide."
+    )
+)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -25, 1500.0, 6.0, 8)
-template:setBeam(1, 90,  25, 1500.0, 6.0, 8)
-template:setBeam(2,100, -60, 1000.0, 6.0, 8)
-template:setBeam(3,100,  60, 1000.0, 6.0, 8)
-template:setBeam(4, 30,   0, 2000.0, 6.0, 8)
-template:setBeam(5,100, 180, 1200.0, 6.0, 8)
+template:setBeam(1, 90, 25, 1500.0, 6.0, 8)
+template:setBeam(2, 100, -60, 1000.0, 6.0, 8)
+template:setBeam(3, 100, 60, 1000.0, 6.0, 8)
+template:setBeam(4, 30, 0, 2000.0, 6.0, 8)
+template:setBeam(5, 100, 180, 1200.0, 6.0, 8)
 template:setHull(70)
 template:setShields(300, 300, 300, 300, 300)
 template:setSpeed(30, 1.5, 5)
 
--- The battle station is a huge ship with many defensive features. It can be docked by smaller ships.
-template = ShipTemplate():setName("Battlestation"):setLocaleName(_("ship", "Battlestation")):setModel("Ender Battlecruiser"):setClass(_("class", "Dreadnought"), _("subclass", "Battlecruiser"))
+-- Battlestation
+template = ShipTemplate()
+    :setName("Battlestation")
+    :setLocaleName(_("ship", "Battlestation"))
+    :setModel("Ender Battlecruiser")
+    :setClass(_("class", "Dreadnought"), _("subclass", "Battlecruiser"))
 template:setRadarTrace("battleship.png")
-template:setDescription(_("The battle station is a huge ship with many defensive features. It can be docked by smaller ships."))
+template:setDescription(
+    _(
+        [[The battle station is a huge ship with many defensive features. It can be docked by smaller ships.]]
+    )
+)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 120, -90, 2500.0, 6.1, 4)
 template:setBeam(1, 120, -90, 2500.0, 6.0, 4)
-template:setBeam(2, 120,  90, 2500.0, 6.1, 4)
-template:setBeam(3, 120,  90, 2500.0, 6.0, 4)
+template:setBeam(2, 120, 90, 2500.0, 6.1, 4)
+template:setBeam(3, 120, 90, 2500.0, 6.0, 4)
 template:setBeam(4, 120, -90, 2500.0, 5.9, 4)
 template:setBeam(5, 120, -90, 2500.0, 6.2, 4)
-template:setBeam(6, 120,  90, 2500.0, 5.9, 4)
-template:setBeam(7, 120,  90, 2500.0, 6.2, 4)
+template:setBeam(6, 120, 90, 2500.0, 5.9, 4)
+template:setBeam(7, 120, 90, 2500.0, 6.2, 4)
 template:setBeam(8, 120, -90, 2500.0, 6.1, 4)
 template:setBeam(9, 120, -90, 2500.0, 6.0, 4)
-template:setBeam(10, 120,  90, 2500.0, 6.1, 4)
-template:setBeam(11, 120,  90, 2500.0, 6.0, 4)
+template:setBeam(10, 120, 90, 2500.0, 6.1, 4)
+template:setBeam(11, 120, 90, 2500.0, 6.0, 4)
 template:setHull(100)
 template:setShields(2500)
 template:setSpeed(20, 1.5, 3)
 template:setJumpDrive(true)
-template:setDockClasses(_("class", "Starfighter"), _("class", "Frigate"), _("class", "Corvette"))
+template:setDockClasses(
+    _("class", "Starfighter"),
+    _("class", "Frigate"),
+    _("class", "Corvette")
+)
 template:setSharesEnergyWithDocked(true)
 
-variation = template:copy("Ender"):setType("playership"):setLocaleName(_("playerShip", "Ender"))
-variation:setDescription(_("Player version of the battle station. Only half as much shield strength, but more speed and maneuverability, so it is surprisingly agile - for a capital ship, of course. Piloting this colossus still feels very different compared to other ships. It also has two additional missile tubes."))
+variation = template
+    :copy("Ender")
+    :setType("playership")
+    :setLocaleName(_("playerShip", "Ender"))
+variation:setDescription(
+    _(
+        [[Player version of the battle station. Only half as much shield strength, but more speed and maneuverability, so it is surprisingly agile for a capital ship. Piloting this colossus still feels very different compared to other ships. It also has two additional missile tubes.]]
+    )
+)
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 10, -90, 2500.0, 6.1, 4)
 variation:setBeam(1, 10, -90, 2500.0, 6.0, 4)
-variation:setBeam(2, 10,  90, 2500.0, 5.8, 4)
-variation:setBeam(3, 10,  90, 2500.0, 6.3, 4)
+variation:setBeam(2, 10, 90, 2500.0, 5.8, 4)
+variation:setBeam(3, 10, 90, 2500.0, 6.3, 4)
 variation:setBeam(4, 10, -90, 2500.0, 5.9, 4)
 variation:setBeam(5, 10, -90, 2500.0, 6.4, 4)
-variation:setBeam(6, 10,  90, 2500.0, 5.7, 4)
-variation:setBeam(7, 10,  90, 2500.0, 5.6, 4)
+variation:setBeam(6, 10, 90, 2500.0, 5.7, 4)
+variation:setBeam(7, 10, 90, 2500.0, 5.6, 4)
 variation:setBeam(8, 10, -90, 2500.0, 6.6, 4)
 variation:setBeam(9, 10, -90, 2500.0, 5.5, 4)
-variation:setBeam(10, 10,  90, 2500.0, 6.5, 4)
-variation:setBeam(11, 10,  90, 2500.0, 6.2, 4)
---								  Arc, Dir, Rotate speed
-variation:setBeamWeaponTurret( 0, 120, -90, 6)
-variation:setBeamWeaponTurret( 1, 120, -90, 6)
-variation:setBeamWeaponTurret( 2, 120,  90, 6)
-variation:setBeamWeaponTurret( 3, 120,  90, 6)
-variation:setBeamWeaponTurret( 4, 120, -90, 6)
-variation:setBeamWeaponTurret( 5, 120, -90, 6)
-variation:setBeamWeaponTurret( 6, 120,  90, 6)
-variation:setBeamWeaponTurret( 7, 120,  90, 6)
-variation:setBeamWeaponTurret( 8, 120, -90, 6)
-variation:setBeamWeaponTurret( 9, 120, -90, 6)
-variation:setBeamWeaponTurret(10, 120,  90, 6)
-variation:setBeamWeaponTurret(11, 120,  90, 6)
+variation:setBeam(10, 10, 90, 2500.0, 6.5, 4)
+variation:setBeam(11, 10, 90, 2500.0, 6.2, 4)
+--                                  Arc, Dir, Rotate speed
+variation:setBeamWeaponTurret(0, 120, -90, 6)
+variation:setBeamWeaponTurret(1, 120, -90, 6)
+variation:setBeamWeaponTurret(2, 120, 90, 6)
+variation:setBeamWeaponTurret(3, 120, 90, 6)
+variation:setBeamWeaponTurret(4, 120, -90, 6)
+variation:setBeamWeaponTurret(5, 120, -90, 6)
+variation:setBeamWeaponTurret(6, 120, 90, 6)
+variation:setBeamWeaponTurret(7, 120, 90, 6)
+variation:setBeamWeaponTurret(8, 120, -90, 6)
+variation:setBeamWeaponTurret(9, 120, -90, 6)
+variation:setBeamWeaponTurret(10, 120, 90, 6)
+variation:setBeamWeaponTurret(11, 120, 90, 6)
 variation:setEnergyStorage(1200)
 variation:setTubes(2, 8.0) -- Amount of torpedo tubes, loading time
 variation:setWeaponStorage("Homing", 6)
@@ -437,42 +547,49 @@ variation:setCombatManeuver(800, 500)
 
 variation:setRepairCrewCount(8)
 
-variation:addRoomSystem(0,1,2,4,"RearShield")
-variation:addRoom(3,0,2,1)
-variation:addRoomSystem(7,0,2,1,"Maneuver")
-variation:addRoomSystem(11,0,2,1,"MissileSystem")
-variation:addRoomSystem(2,1,4,2,"Reactor")
-variation:addRoomSystem(6,1,4,2,"Warp")
-variation:addRoomSystem(10,1,4,2,"DockingBay")
-variation:addRoomSystem(14,2,2,2,"FrontShield")
-variation:addRoomSystem(2,3,4,2,"Impulse")
-variation:addRoomSystem(6,3,4,2,"JumpDrive")
-variation:addRoom(10,3,4,2)
-variation:addRoom(3,5,2,1)
-variation:addRoom(7,5,2,1)
-variation:addRoomSystem(11,5,2,1,"Beamweapons")
+variation:addRoomSystem(0, 1, 2, 4, "RearShield")
+variation:addRoom(3, 0, 2, 1)
+variation:addRoomSystem(7, 0, 2, 1, "Maneuver")
+variation:addRoomSystem(11, 0, 2, 1, "MissileSystem")
+variation:addRoomSystem(2, 1, 4, 2, "Reactor")
+variation:addRoomSystem(6, 1, 4, 2, "Warp")
+variation:addRoomSystem(10, 1, 4, 2, "DockingBay")
+variation:addRoomSystem(14, 2, 2, 2, "FrontShield")
+variation:addRoomSystem(2, 3, 4, 2, "Impulse")
+variation:addRoomSystem(6, 3, 4, 2, "JumpDrive")
+variation:addRoom(10, 3, 4, 2)
+variation:addRoom(3, 5, 2, 1)
+variation:addRoom(7, 5, 2, 1)
+variation:addRoomSystem(11, 5, 2, 1, "Beamweapons")
 
-variation:addDoor(3,1,true)
-variation:addDoor(7,1,true)
-variation:addDoor(11,1,true)
-variation:addDoor(2,2,false)
-variation:addDoor(6,1,false)
-variation:addDoor(10,2,false)
-variation:addDoor(14,3,false)
-variation:addDoor(10,4,false)
-variation:addDoor(6,3,false)
-variation:addDoor(8,3,true)
-variation:addDoor(4,5,true)
-variation:addDoor(8,5,true)
-variation:addDoor(12,5,true)
+variation:addDoor(3, 1, true)
+variation:addDoor(7, 1, true)
+variation:addDoor(11, 1, true)
+variation:addDoor(2, 2, false)
+variation:addDoor(6, 1, false)
+variation:addDoor(10, 2, false)
+variation:addDoor(14, 3, false)
+variation:addDoor(10, 4, false)
+variation:addDoor(6, 3, false)
+variation:addDoor(8, 3, true)
+variation:addDoor(4, 5, true)
+variation:addDoor(8, 5, true)
+variation:addDoor(12, 5, true)
 
--- The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage.
-template = ShipTemplate():setName("Weapons platform"):setLocaleName(_("ship", "Weapons platform")):setModel("space_cruiser_4")
+-- Weapons platform
+template = ShipTemplate()
+    :setName("Weapons platform")
+    :setLocaleName(_("ship", "Weapons platform"))
+    :setModel("space_cruiser_4")
 template:setRadarTrace("missile_cruiser.png")
-template:setDescription(_("The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage."))
+template:setDescription(
+    _(
+        [[The weapons-platform is a stationary platform with beam weapons. It's extremely slow to turn, but its beam weapons deal a huge amount of damage.]]
+    )
+)
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 30,   0, 4000.0, 1.5, 20)
-template:setBeam(1, 30,  60, 4000.0, 1.5, 20)
+template:setBeam(0, 30, 0, 4000.0, 1.5, 20)
+template:setBeam(1, 30, 60, 4000.0, 1.5, 20)
 template:setBeam(2, 30, 120, 4000.0, 1.5, 20)
 template:setBeam(3, 30, 180, 4000.0, 1.5, 20)
 template:setBeam(4, 30, 240, 4000.0, 1.5, 20)
@@ -481,15 +598,23 @@ template:setHull(70)
 template:setShields(120, 120, 120, 120, 120, 120)
 template:setSpeed(0, 0.5, 0)
 
--- Blockade runner is a reasonably fast, high shield, slow on weapons ship designed to break through defense lines and deliver goods.
-template = ShipTemplate():setName("Blockade Runner"):setLocaleName(_("ship", "Blockade Runner")):setModel("battleship_destroyer_3_upgraded"):setClass(_("class", "Frigate"),_("subclass", "High Punch"))
+-- Blockade runner
+template = ShipTemplate()
+    :setName("Blockade Runner")
+    :setLocaleName(_("ship", "Blockade Runner"))
+    :setModel("battleship_destroyer_3_upgraded")
+    :setClass(_("class", "Frigate"), _("subclass", "High Punch"))
 template:setRadarTrace("blockade.png")
-template:setDescription(_("Blockade runner is a reasonably fast, high shield, slow on weapons ship designed to break through defense lines and deliver goods."))
---                  Arc, Dir, Range, CycleTime, Dmg
+template:setDescription(
+    _(
+        [[Blockade runners are reasonably fast, highly shielded, slow-firing ship designed to break through defensive lines and deliver goods.]]
+    )
+)
+--                 Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 60, -15, 1000.0, 6.0, 8)
-template:setBeam(1, 60,  15, 1000.0, 6.0, 8)
-template:setBeam(2, 25,  170, 1000.0, 6.0, 8)
-template:setBeam(3, 25,  190, 1000.0, 6.0, 8)
+template:setBeam(1, 60, 15, 1000.0, 6.0, 8)
+template:setBeam(2, 25, 170, 1000.0, 6.0, 8)
+template:setBeam(3, 25, 190, 1000.0, 6.0, 8)
 template:setHull(70)
 template:setShields(100, 150)
 template:setSpeed(60, 15, 25)

@@ -3,7 +3,6 @@
 #include "gui/gui2_element.h"
 
 class GuiToggleButton;
-class GuiButton;
 class GuiPanel;
 
 class GuiMainScreenControls : public GuiElement

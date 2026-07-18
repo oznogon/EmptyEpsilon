@@ -15,7 +15,7 @@ public:
 
     virtual void onUpdate() override;
 private:
-    static constexpr float item_height = 50.0f;
+    static constexpr float item_height = GuiElement::GuiSizeRow;
 
     GuiPanel* background_panel;
     GuiButton* action_button;

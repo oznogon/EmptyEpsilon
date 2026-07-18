@@ -1,52 +1,54 @@
+#include "script.h"
 #include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "soundManager.h"
 #include "preferenceManager.h"
-#include "script.h"
 #include "resources.h"
 #include "random.h"
 #include "config.h"
-#include "script/vector.h"
-#include "menus/luaConsole.h"
-#include "systems/comms.h"
 #include "ecs/query.h"
-#include "components/collision.h"
-#include "systems/collision.h"
 #include "playerInfo.h"
 #include "io/json.h"
-#include "script/enum.h"
-#include "script/crewPosition.h"
-#include "script/dataStorage.h"
-#include "script/gm.h"
-#include "script/component.h"
-#include "script/damageInfo.h"
-#include "script/scriptRandom.h"
-#include "components/impulse.h"
-#include "components/warpdrive.h"
-#include "components/maneuveringthrusters.h"
-#include "components/target.h"
-#include "components/shields.h"
-#include "components/coolant.h"
-#include "components/beamweapon.h"
-#include "components/utilityBeam.h"
-#include "components/internalrooms.h"
-#include "components/zone.h"
-#include "components/shiplog.h"
-#include "components/selfdestruct.h"
-#include "components/radar.h"
-#include "components/drone.h"
-#include "systems/probe.h"
-#include "components/briefing.h"
-#include "components/faction.h"
 #include "audio/sound.h"
-#include "systems/probe.h"
-#include "systems/jumpsystem.h"
-#include "systems/missilesystem.h"
-#include "systems/docking.h"
-#include "systems/selfdestruct.h"
-#include "systems/radarblock.h"
 #include "math/centerOfMass.h"
 
+#include "script/component.h"
+#include "script/crewPosition.h"
+#include "script/damageInfo.h"
+#include "script/dataStorage.h"
+#include "script/enum.h"
+#include "script/gm.h"
+#include "script/scriptRandom.h"
+#include "script/vector.h"
+
+#include "components/beamweapon.h"
+#include "components/briefing.h"
+#include "components/collision.h"
+#include "components/coolant.h"
+#include "components/drone.h"
+#include "components/faction.h"
+#include "components/impulse.h"
+#include "components/internalrooms.h"
+#include "components/maneuveringthrusters.h"
+#include "components/radar.h"
+#include "components/selfdestruct.h"
+#include "components/shields.h"
+#include "components/shiplog.h"
+#include "components/target.h"
+#include "components/utilityBeam.h"
+#include "components/warpdrive.h"
+#include "components/zone.h"
+
+#include "systems/collision.h"
+#include "systems/comms.h"
+#include "systems/docking.h"
+#include "systems/jumpsystem.h"
+#include "systems/missilesystem.h"
+#include "systems/probe.h"
+#include "systems/radarblock.h"
+#include "systems/selfdestruct.h"
+
+#include "menus/luaConsole.h"
 
 /// void require(string filename)
 /// Runs the Lua script with the given filename in the same context as the running Script.
@@ -541,6 +543,281 @@ static void luaRemoveBriefingPage(sp::ecs::Entity entity, int index)
         briefing->pages.erase(briefing->pages.begin() + zero_index);
 }
 
+static int luaSetBriefingMapPage(lua_State* L)
+{
+    auto entity = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
+    if (!entity)
+        return luaL_error(L, "setBriefingMapPage() requires a valid entity");
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing)
+        briefing = &entity.getOrAddComponent<Briefing>();
+
+    int index = luaL_checkinteger(L, 2);
+    if (index < 1)
+        return luaL_error(L, "setBriefingMapPage() index must be >= 1");
+
+    int zero_index = index - 1;
+    if (zero_index >= static_cast<int>(briefing->pages.size()))
+        briefing->pages.resize(zero_index + 1);
+
+    if (lua_gettop(L) >= 3 && !lua_isnil(L, 3))
+        briefing->pages[zero_index].map_data.duration = static_cast<float>(luaL_checknumber(L, 3));
+
+    return 0;
+}
+
+static int luaAddBriefingMapKeyframe(lua_State* L)
+{
+    auto entity = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
+    if (!entity)
+        return luaL_error(L, "addBriefingMapKeyframe() requires a valid entity");
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing)
+        return luaL_error(L, "addBriefingMapKeyframe() requires a briefing component");
+
+    int page_idx = luaL_checkinteger(L, 2);
+    if (page_idx < 1)
+        return luaL_error(L, "addBriefingMapKeyframe() page index must be >= 1");
+
+    int zero_page = page_idx - 1;
+    if (zero_page >= static_cast<int>(briefing->pages.size()))
+        return luaL_error(L, "addBriefingMapKeyframe() page index out of range");
+
+    int kf_idx = luaL_checkinteger(L, 3);
+    if (kf_idx < 1)
+        return luaL_error(L, "addBriefingMapKeyframe() keyframe index must be >= 1");
+
+    int zero_kf = kf_idx - 1;
+    auto& keyframes = briefing->pages[zero_page].map_data.keyframes;
+    if (zero_kf >= static_cast<int>(keyframes.size()))
+        keyframes.resize(zero_kf + 1);
+
+    if (lua_gettop(L) >= 4 && !lua_isnil(L, 4))
+        keyframes[zero_kf].timestamp = static_cast<float>(luaL_checknumber(L, 4));
+
+    if (lua_gettop(L) >= 5 && !lua_isnil(L, 5))
+        keyframes[zero_kf].camera_position.x = static_cast<float>(luaL_checknumber(L, 5));
+
+    if (lua_gettop(L) >= 6 && !lua_isnil(L, 6))
+        keyframes[zero_kf].camera_position.y = static_cast<float>(luaL_checknumber(L, 6));
+
+    if (lua_gettop(L) >= 7 && !lua_isnil(L, 7))
+        keyframes[zero_kf].zoom = static_cast<float>(luaL_checknumber(L, 7));
+
+    return 0;
+}
+
+static int luaAddBriefingMapEntity(lua_State* L)
+{
+    auto entity = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
+    if (!entity)
+        return luaL_error(L, "addBriefingMapEntity() requires a valid entity");
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing)
+        return luaL_error(L, "addBriefingMapEntity() requires a briefing component");
+
+    int page_idx = luaL_checkinteger(L, 2);
+    if (page_idx < 1)
+        return luaL_error(L, "addBriefingMapEntity() page index must be >= 1");
+
+    int zero_page = page_idx - 1;
+    if (zero_page >= static_cast<int>(briefing->pages.size()))
+        return luaL_error(L, "addBriefingMapEntity() page index out of range");
+
+    int kf_idx = luaL_checkinteger(L, 3);
+    if (kf_idx < 1)
+        return luaL_error(L, "addBriefingMapEntity() keyframe index must be >= 1");
+
+    int zero_kf = kf_idx - 1;
+    auto& keyframes = briefing->pages[zero_page].map_data.keyframes;
+    if (zero_kf >= static_cast<int>(keyframes.size()))
+        return luaL_error(L, "addBriefingMapEntity() keyframe index out of range");
+
+    BriefingMapEntity ent;
+
+    if (lua_gettop(L) >= 4 && !lua_isnil(L, 4))
+        ent.id = static_cast<int32_t>(luaL_checkinteger(L, 4));
+
+    if (lua_gettop(L) >= 5 && !lua_isnil(L, 5))
+        ent.position.x = static_cast<float>(luaL_checknumber(L, 5));
+
+    if (lua_gettop(L) >= 6 && !lua_isnil(L, 6))
+        ent.position.y = static_cast<float>(luaL_checknumber(L, 6));
+
+    if (lua_gettop(L) >= 7 && !lua_isnil(L, 7))
+        ent.rotation = static_cast<float>(luaL_checknumber(L, 7));
+
+    if (lua_gettop(L) >= 8 && !lua_isnil(L, 8))
+        ent.world_size = static_cast<float>(luaL_checknumber(L, 8));
+
+    if (lua_gettop(L) >= 9 && !lua_isnil(L, 9))
+        ent.radar_trace_image = luaL_checkstring(L, 9);
+
+    if (lua_gettop(L) >= 10 && !lua_isnil(L, 10))
+        ent.color.r = static_cast<uint8_t>(luaL_checkinteger(L, 10));
+
+    if (lua_gettop(L) >= 11 && !lua_isnil(L, 11))
+        ent.color.g = static_cast<uint8_t>(luaL_checkinteger(L, 11));
+
+    if (lua_gettop(L) >= 12 && !lua_isnil(L, 12))
+        ent.color.b = static_cast<uint8_t>(luaL_checkinteger(L, 12));
+
+    if (lua_gettop(L) >= 13 && !lua_isnil(L, 13))
+        ent.color.a = static_cast<uint8_t>(luaL_checkinteger(L, 13));
+
+    if (lua_gettop(L) >= 14 && !lua_isnil(L, 14))
+        ent.visible = lua_toboolean(L, 14);
+
+    if (lua_gettop(L) >= 15 && !lua_isnil(L, 15))
+        ent.label = luaL_checkstring(L, 15);
+
+    keyframes[zero_kf].entities.push_back(ent);
+
+    return 0;
+}
+
+static void luaClearBriefingMapPage(sp::ecs::Entity entity, int page_index)
+{
+    if (!entity || page_index < 1) return;
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing) return;
+
+    int zero_index = page_index - 1;
+    if (zero_index < static_cast<int>(briefing->pages.size()))
+        briefing->pages[zero_index].map_data = BriefingMapPage();
+}
+
+static BriefingMapEntity* findBriefingMapEntity(lua_State* L, int entity_arg, int page_arg, int kf_arg, int id_arg)
+{
+    auto entity = sp::script::Convert<sp::ecs::Entity>::fromLua(L, entity_arg);
+    if (!entity)
+    {
+        luaL_error(L, "requires a valid entity");
+        return nullptr;
+    }
+
+    auto* briefing = entity.getComponent<Briefing>();
+    if (!briefing)
+    {
+        luaL_error(L, "requires a briefing component");
+        return nullptr;
+    }
+
+    int page_idx = luaL_checkinteger(L, page_arg);
+    if (page_idx < 1)
+    {
+        luaL_error(L, "page index must be >= 1");
+        return nullptr;
+    }
+
+    int zero_page = page_idx - 1;
+    if (zero_page >= static_cast<int>(briefing->pages.size()))
+    {
+        luaL_error(L, "page index out of range");
+        return nullptr;
+    }
+
+    int kf_idx = luaL_checkinteger(L, kf_arg);
+    if (kf_idx < 1)
+    {
+        luaL_error(L, "keyframe index must be >= 1");
+        return nullptr;
+    }
+
+    int zero_kf = kf_idx - 1;
+    auto& keyframes = briefing->pages[zero_page].map_data.keyframes;
+    if (zero_kf >= static_cast<int>(keyframes.size()))
+    {
+        luaL_error(L, "keyframe index out of range");
+        return nullptr;
+    }
+
+    int32_t ent_id = static_cast<int32_t>(luaL_checkinteger(L, id_arg));
+
+    auto& entities = keyframes[zero_kf].entities;
+    for (auto& e : entities)
+    {
+        if (e.id == ent_id)
+            return &e;
+    }
+
+    entities.emplace_back();
+    auto* target = &entities.back();
+    target->id = ent_id;
+    return target;
+}
+
+static int luaSetBriefingMapEntityPosition(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->position.x = static_cast<float>(luaL_checknumber(L, 5));
+    target->position.y = static_cast<float>(luaL_checknumber(L, 6));
+    return 0;
+}
+
+static int luaSetBriefingMapEntityRotation(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->rotation = static_cast<float>(luaL_checknumber(L, 5));
+    return 0;
+}
+
+static int luaSetBriefingMapEntitySize(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->world_size = static_cast<float>(luaL_checknumber(L, 5));
+    return 0;
+}
+
+static int luaSetBriefingMapEntityImage(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->radar_trace_image = luaL_checkstring(L, 5);
+    return 0;
+}
+
+static int luaSetBriefingMapEntityColor(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->color.r = static_cast<uint8_t>(luaL_checkinteger(L, 5));
+    target->color.g = static_cast<uint8_t>(luaL_checkinteger(L, 6));
+    target->color.b = static_cast<uint8_t>(luaL_checkinteger(L, 7));
+    target->color.a = static_cast<uint8_t>(luaL_checkinteger(L, 8));
+    return 0;
+}
+
+static int luaSetBriefingMapEntityVisible(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->visible = lua_toboolean(L, 5);
+    return 0;
+}
+
+static int luaSetBriefingMapEntityLabel(lua_State* L)
+{
+    auto* target = findBriefingMapEntity(L, 1, 2, 3, 4);
+    if (!target) return 0;
+
+    target->label = luaL_checkstring(L, 5);
+    return 0;
+}
+
 static float luaGetScenarioTime()
 {
     return gameGlobalInfo->elapsed_time;
@@ -835,25 +1112,30 @@ static void luaUnpauseGame()
     if (engine->getGameSpeed() == 0.0f) engine->setGameSpeed(1.0f);
 }
 
-static void luaSetGameSpeed(int game_speed)
+static void luaSetGameSpeed(float game_speed)
 {
-  switch (game_speed)
-  {
-      case 0:
-      case 1:
-      case 2:
-      case 4:
-      case 8:
-          engine->setGameSpeed(static_cast<float>(game_speed));
-          break;
-      default:
-          LOG(Warning, "Lua setGameSpeed: Invalid value ", game_speed, "; must be 0, 1, 2, 4, or 8");
-  }
+    static constexpr float valid_speeds[] = {0.1f, 0.25f, 0.5f, 1.0f, 2.0f, 4.0f, 8.0f};
+    bool valid = game_speed == 0.0f;
+    if (!valid)
+    {
+        for(float v : valid_speeds)
+        {
+            if (fabsf(game_speed - v) < 0.001f)
+            {
+                valid = true;
+                break;
+            }
+        }
+    }
+    if (valid)
+        engine->setGameSpeed(game_speed);
+    else
+        LOG(Warning, "Lua setGameSpeed: Invalid value ", game_speed, "; must be 0, 0.1, 0.25, 0.5, 1, 2, 4, or 8");
 }
 
-static int luaGetGameSpeed()
+static float luaGetGameSpeed()
 {
-    return static_cast<int>(engine->getGameSpeed());
+    return engine->getGameSpeed();
 }
 
 static bool luaIsGamePaused()
@@ -1078,6 +1360,11 @@ static bool luaIsStrategicMapAllowed()
     return gameGlobalInfo->allow_main_screen_strategic_map;
 }
 
+static bool luaAreMissilesOnLongRangeRadar()
+{
+    return gameGlobalInfo->missiles_on_long_range_radar;
+}
+
 void luaCommandTargetRotation(sp::ecs::Entity ship, float rotation) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandTargetRotation(rotation); return; }
     auto thrusters = ship.getComponent<ManeuveringThrusters>();
@@ -1142,7 +1429,7 @@ void luaCommandFireTube(sp::ecs::Entity ship, int tube_nr, float missile_target_
 
 void luaCommandFireTubeAtTarget(sp::ecs::Entity ship, int tube_nr, sp::ecs::Entity target) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandFireTubeAtTarget(tube_nr, target); return; }
-    
+
     float targetAngle = 0.0;
     auto missiletubes = ship.getComponent<MissileTubes>();
 
@@ -1574,7 +1861,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// -- Defines strings for singular and plural forms, depending on the value of the minutes variable:
     /// minutes = 5; comms = string.format(_(minutes, "comms-timer", [[Atlantis, you have 1 minute remaining.]], [[Atlantis, you have %d minutes remaining.]]), minutes))
     env.setGlobal("_", &luaTranslate);
-    
+
     /// entity createEntity()
     /// Creates an entity with no components.
     /// Example:
@@ -1692,6 +1979,58 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// If the briefing is currently playing, playback stops and resets to page 1.
     /// Example: removeBriefingPage(player, 2)
     env.setGlobal("removeBriefingPage", &luaRemoveBriefingPage);
+    /// void setBriefingMapPage(entity ship, int index, float map_duration)
+    /// Sets the map page at the given 1-based index on the specified entity.
+    /// Replaces the page image, which will be ignored.
+    /// If the index is beyond the current page count, intermediate pages are created.
+    /// Example: setBriefingMapPage(player, 1, 10)
+    env.setGlobal("setBriefingMapPage", &luaSetBriefingMapPage);
+    /// void addBriefingMapKeyframe(entity ship, int page_index, int keyframe_index, float timestamp, float cam_x, float cam_y, float zoom)
+    /// Adds a keyframe to the map page at the given 1-based page index.
+    /// keyframe_index is 1-based. If the keyframe already exists, its values are updated.
+    /// zoom is the visible world distance (like radar distance), e.g. 5000.0.
+    /// Example: addBriefingMapKeyframe(player, 1, 1, 0.0, 0.0, 0.0, 5000.0)
+    env.setGlobal("addBriefingMapKeyframe", &luaAddBriefingMapKeyframe);
+    /// void addBriefingMapEntity(entity ship, int page_index, int keyframe_index, int entity_id, float x, float y, float rotation, float world_size, string radar_trace, int r, int g, int b, int a, bool visible, string label)
+    /// Adds a pseudoentity to a keyframe on a briefing map page.
+    /// Pseudoentities with the same id across keyframes will be tweened between keyframes.
+    /// All parameters after entity_id are optional; pass nil to use defaults.
+    /// Example: addBriefingMapEntity(player, 1, 1, 1, 5000.0, -3000.0, 45.0, 1000.0, "radar/blip.png", 255, 0, 0, 255, true, "Enemy")
+    env.setGlobal("addBriefingMapEntity", &luaAddBriefingMapEntity);
+    /// void clearBriefingMapPage(entity ship, int page_index)
+    /// Removes all map data from the briefing page at the given 1-based index.
+    /// The page reverts to displaying its image, if set.
+    /// Example: clearBriefingMapPage(player, 2)
+    env.setGlobal("clearBriefingMapPage", &luaClearBriefingMapPage);
+    /// void setBriefingMapEntityPosition(entity ship, int page_index, int keyframe_index, int entity_id, float x, float y)
+    /// Sets the world position of a pseudoentity on a briefing map keyframe.
+    /// If the entity doesn't exist, it is created with the given id.
+    /// Example: setBriefingMapEntityPosition(player, 1, 2, 1, 15000.0, 5000.0)
+    env.setGlobal("setBriefingMapEntityPosition", &luaSetBriefingMapEntityPosition);
+    /// void setBriefingMapEntityRotation(entity ship, int page_index, int keyframe_index, int entity_id, float rotation)
+    /// Sets the rotation (degrees) of a pseudoentity on a briefing map keyframe.
+    /// Example: setBriefingMapEntityRotation(player, 1, 2, 1, 45.0)
+    env.setGlobal("setBriefingMapEntityRotation", &luaSetBriefingMapEntityRotation);
+    /// void setBriefingMapEntitySize(entity ship, int page_index, int keyframe_index, int entity_id, float world_size)
+    /// Sets the world-unit size of a pseudoentity on a briefing map keyframe.
+    /// Example: setBriefingMapEntitySize(player, 1, 2, 1, 1500.0)
+    env.setGlobal("setBriefingMapEntitySize", &luaSetBriefingMapEntitySize);
+    /// void setBriefingMapEntityImage(entity ship, int page_index, int keyframe_index, int entity_id, string radar_trace)
+    /// Sets the radar trace image path of a pseudoentity on a briefing map keyframe.
+    /// Example: setBriefingMapEntityImage(player, 1, 2, 1, "radar/adv_gunship.png")
+    env.setGlobal("setBriefingMapEntityImage", &luaSetBriefingMapEntityImage);
+    /// void setBriefingMapEntityColor(entity ship, int page_index, int keyframe_index, int entity_id, int r, int g, int b, int a)
+    /// Sets the RGBA color of a pseudoentity on a briefing map keyframe. Values are 0-255.
+    /// Example: setBriefingMapEntityColor(player, 1, 2, 1, 255, 0, 0, 255)
+    env.setGlobal("setBriefingMapEntityColor", &luaSetBriefingMapEntityColor);
+    /// void setBriefingMapEntityVisible(entity ship, int page_index, int keyframe_index, int entity_id, bool visible)
+    /// Sets the visibility flag of a pseudoentity on a briefing map keyframe.
+    /// Example: setBriefingMapEntityVisible(player, 1, 2, 1, false)
+    env.setGlobal("setBriefingMapEntityVisible", &luaSetBriefingMapEntityVisible);
+    /// void setBriefingMapEntityLabel(entity ship, int page_index, int keyframe_index, int entity_id, string label)
+    /// Sets the label text of a pseudoentity on a briefing map keyframe.
+    /// Example: setBriefingMapEntityLabel(player, 1, 2, 1, "Enemy Fleet")
+    env.setGlobal("setBriefingMapEntityLabel", &luaSetBriefingMapEntityLabel);
     /// float getScenarioTime()
     /// Returns the elapsed time of the scenario, in seconds.
     /// This timer stops when the game is paused.
@@ -1749,13 +2088,13 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Equivalent to if getGameSpeed() == 0 then setGameSpeed(1) end.
     /// Example: unpauseGame() -- Sets the game speed to 1x if paused
     env.setGlobal("unpauseGame", &luaUnpauseGame);
-    /// void setGameSpeed()
-    /// Sets the game speed multiplier. Valid values are 0 (paused), 1, 2, 4, or 8.
+    /// void setGameSpeed(number speed)
+    /// Sets the game speed multiplier. Valid values are 0 (paused), 0.1, 0.25, 0.5, 1, 2, 4, or 8.
     /// Use to set the game speed on a headless server, which doesn't have access to the GM screen.
     /// Example: setGameSpeed(4) -- Sets the game speed to 4x
     env.setGlobal("setGameSpeed", &luaSetGameSpeed);
-    /// int getGameSpeed()
-    /// Returns the game speed as an integer multiplier.
+    /// number getGameSpeed()
+    /// Returns the game speed as a multiplier.
     /// Example: getGameSpeed() -- Returns 4 at 4x
     env.setGlobal("getGameSpeed", &luaGetGameSpeed);
     /// bool isGamePaused()
@@ -1936,7 +2275,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandAnswerCommHail", &luaCommandAnswerCommHail);
     /// void commandSendComm(entity ship, integer index)
     /// Selects a reply option by index in an active script-based communications dialogue for the given ship. If the ship has no active scripted comms, this does nothing.
-    /// The index corresponds to the order in which reply options were added with addCommsReply(). 
+    /// The index corresponds to the order in which reply options were added with addCommsReply().
     /// This is equivalent to clicking the equivalent buttons in a scripted comms panel on the Relay screen.
     /// Example:
     /// commandSendComm(getPlayerShip(-1), 0) -- select the first comms reply option
@@ -2071,7 +2410,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Sets the alert level for the given ship. See EAlertLevel for valid values.
     /// This is equivalent to clicking the Relay screen's alert level button and then selecting a level.
     /// Example:
-    /// commandSetAlertLevel(getPlayerShip(-1), "RED ALERT") -- set red alert
+    /// commandSetAlertLevel(getPlayerShip(-1), "Red alert") -- set red alert
     env.setGlobal("commandSetAlertLevel", &luaCommandSetAlertLevel);
 
     /// void setCustomUtilityBeamMode(entity ship, string name, int order, float energy_per_sec, float heat_per_sec, bool requires_target, function callback, function deactivate_callback)
@@ -2165,7 +2504,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// 0 = Simple
     /// 1 = Normal
     /// 2 = Difficult (default)
-    /// 3 = Fiendish 
+    /// 3 = Fiendish
     /// Example: getHackingDifficulty() -- returns 2 by default
     env.setGlobal("getHackingDifficulty", &luaGetHackingDifficulty);
     /// EHackingGames getHackingGames()
@@ -2192,6 +2531,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns whether the "Strategic Map" setting for main screens is enabled in the running scenario.
     /// Example: isStrategicMapAllowed() -- returns true by default
     env.setGlobal("isStrategicMapAllowed", &luaIsStrategicMapAllowed);
+    /// bool areMissilesOnLongRangeRadar()
+    /// Returns whether the "Long-range missile visibility" setting is enabled in the running scenario.
+    /// Example: areMissilesOnLongRangeRadar() -- returns false by default
+    env.setGlobal("areMissilesOnLongRangeRadar", &luaAreMissilesOnLongRangeRadar);
 
 
     /// void addGMFunction(string label, function callback)

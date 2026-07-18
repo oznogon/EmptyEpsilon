@@ -1,5 +1,4 @@
-#ifndef GLOBAL_MESSAGE_H
-#define GLOBAL_MESSAGE_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -16,5 +15,3 @@ public:
 
     virtual void onUpdate() override;
 };
-
-#endif//GLOBAL_MESSAGE_H

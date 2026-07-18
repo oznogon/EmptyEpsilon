@@ -36,13 +36,13 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 
     top_row = new GuiElement(container, "TOP_ROW_CONTAINER");
     top_row
-        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 20");
 
     // Fixed column header row (shows KB/JS/Mouse labels, not scrollable).
     auto* header_row = new GuiElement(container, "HOTKEY_HEADER");
     header_row
-        ->setSize(KEY_COLUMN_WIDTH + FRAME_MARGIN, ROW_HEIGHT * 0.5f)
+        ->setSize(KEY_COLUMN_WIDTH + FRAME_MARGIN, GuiElement::GuiSizeRow * 0.5f)
         ->setAttribute("layout", "horizontal");
     header_row
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -67,14 +67,14 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 
     info_container = new GuiElement(container, "INFO_CONTAINER");
     info_container
-        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 3.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow * 3.0f);
 
     bottom_row = new GuiElement(container, "BOTTOM_ROW_CONTAINER");
     bottom_row
-        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Title label
-    (new GuiLabel(top_row, "CONFIGURE_CONTROLS_LABEL", tr("Configure controls"), 30.0f))
+    (new GuiLabel(top_row, "HEADER", tr("Configure controls"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
         ->setSize(300.0f, GuiElement::GuiSizeMax);
@@ -96,7 +96,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     // Info text for non-dialog mode
     (new GuiScrollFormattedText(info_container, "HOTKEY_INFO_LABEL", tr("Left click: Assign input. Middle click: Add input. Right click: Delete inputs.\nPossible inputs: Keyboard keys, joystick buttons, joystick axes, mouse axes.")))
         ->setPosition(10.0f, 0.0f, sp::Alignment::TopCenter)
-        ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 3.0f);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow * 3.0f);
 
     (new GuiButton(bottom_row, "BACK", tr("button", "Back"),
         [this, return_to]()
@@ -110,12 +110,12 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         ->setSize(250.0f, GuiElement::GuiSizeMax);
 
     // Reset keybinds confirmation
-    reset_label = new GuiLabel(bottom_row, "RESET_LABEL", tr("Bindings reset to defaults"), 30.0f);
+    reset_label = new GuiLabel(bottom_row, "RESET_LABEL", tr("Bindings reset to defaults"), GuiElement::GuiSizeLabel);
     reset_label
         ->addBackground()
         ->setAlignment(sp::Alignment::Center)
         ->setPosition(-250.0f, 0.0f, sp::Alignment::BottomRight)
-        ->setSize(300.0f, 50.0f)
+        ->setSize(300.0f, GuiElement::GuiSizeRow)
         ->hide();
 
     // Reset keybinds button

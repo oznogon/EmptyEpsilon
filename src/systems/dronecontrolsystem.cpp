@@ -9,7 +9,7 @@
 
 void DroneControlSystem::update(float delta)
 {
-    if (!game_server)
+    if (!game_server.isAlive())
         return;
 
     for (auto [entity, dc, dl] : sp::ecs::Query<DroneController, DroneLink>())

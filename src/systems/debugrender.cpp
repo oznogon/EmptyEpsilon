@@ -30,7 +30,7 @@ void DebugRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, sp
 
     glUniformMatrix4fv(color_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
     glUniform4f(color_shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.0f, 1.0f, 1.0f, .5f);
-    
+
     if (physics.getShape() == sp::Physics::Shape::Circle)
     {
         gl::ScopedVertexAttribArray positions(color_shader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -44,7 +44,7 @@ void DebugRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, sp
             indices.push_back(idx);
         }
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<GLvoid*>(&vertices[0]));
-        
+
         glDrawElements(GL_LINE_LOOP, point_count, GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid*>(&indices[0]));
     }
     else if (physics.getShape() == sp::Physics::Shape::Rectangle)

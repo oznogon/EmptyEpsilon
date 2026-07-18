@@ -201,7 +201,7 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
                 points += shield.max * 0.1f;
             points /= shields->entries.size();
         }
-        
+
         if (Faction::getRelation(info.instigator, entity) == FactionRelation::Enemy)
             Faction::getInfo(info.instigator).reputation_points += points;
         else

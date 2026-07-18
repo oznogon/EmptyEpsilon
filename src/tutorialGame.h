@@ -1,12 +1,10 @@
-#ifndef TUTORIAL_GAME_H
-#define TUTORIAL_GAME_H
+#pragma once
 
 #include "epsilonServer.h"
 #include "script/environment.h"
 #include "script/callback.h"
 #include "gui/gui2_canvas.h"
 
-class PlayerSpaceship;
 class GuiRadarView;
 class GuiPanel;
 class GuiButton;
@@ -58,5 +56,3 @@ public:
     //Overide the update function from the game server, so no actuall socket communication is done.
     virtual void update(float delta) override;
 };
-
-#endif//TUTORIAL_GAME_H

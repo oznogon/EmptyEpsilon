@@ -9,13 +9,12 @@
 #include "graphics/renderTarget.h"
 #include "io/textinput.h"
 
-class Layout;
 class GuiCanvas;
 
 class GuiElement : public GuiContainer
 {
 private:
-    bool destroyed;
+    bool destroyed = false;
     bool pressed = false;
 protected:
     GuiContainer* owner;
@@ -31,6 +30,9 @@ public:
     constexpr static float GuiSizeMatchHeight = -1.0f;
     constexpr static float GuiSizeMatchWidth = -1.0f;
     constexpr static float GuiSizeMax = -2.0f;
+    constexpr static float GuiSizeRow = 50.0f;
+    constexpr static float GuiSizeLabel = 30.0f;
+    constexpr static float GuiSizePad = 20.0f;
 
     enum class State
     {
@@ -87,7 +89,8 @@ public:
     GuiCanvas* getRootCanvas() const { return root_canvas; }
     const string& getID() { return id; }
 
-    // Change this element's owner/container safely (removes from old owner and adds to new owner)
+    // Change this element's owner/container safely (removes from old owner and
+    // adds to new owner)
     GuiElement* setParent(GuiContainer* new_owner);
     // Return if the element has cursor hover state.
     bool isHovered() const { return hover; }
@@ -96,7 +99,8 @@ public:
     bool isPressed() const { return pressed; }
     void setFocus(bool has_focus) { focus = has_focus; }
 
-    //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
+    // Flag this GuiElement for destruction at a safe point and time, handled by
+    // the container.
     void destroy();
 
     bool isDestroyed();

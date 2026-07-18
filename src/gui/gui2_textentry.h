@@ -15,14 +15,15 @@ protected:
     int selection_start = 0;
     int selection_end = 0;
 
-    float text_size;
+    float text_size = 30.0f;
     bool multiline = false;
+    bool wrap = false;
     bool select_on_focus = false;
     bool readonly = false;
     bool hide_password = false;
     const GuiThemeStyle* front_style;
     const GuiThemeStyle* back_style;
-    func_t func;
+    func_t func = nullptr;
     func_t enter_func;
     func_t up_func;
     func_t down_func;
@@ -31,7 +32,8 @@ protected:
     sp::SystemTimer blink_timer;
     bool typing_indicator{false};
 
-    glm::vec2 render_offset{0, 0};
+    glm::vec2 render_offset{0.0f, 0.0f};
+    float content_height = 0.0f;
 public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
     virtual ~GuiTextEntry();
@@ -49,6 +51,7 @@ public:
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
     GuiTextEntry* setMultiline(bool enabled=true);
+    GuiTextEntry* setWrap(bool enabled=true);
     GuiTextEntry* setSelectOnFocus(bool enabled=true);
     GuiTextEntry* setHidePassword(bool enabled=true);
     GuiTextEntry* callback(func_t func);
@@ -59,6 +62,7 @@ public:
     float getLineSpacing() const;
 
     void setCursorPosition(int offset);
+    void setScrollOffset(float y);
 protected:
     int getTextOffsetForPosition(glm::vec2 position);
     void runChangeCallback();

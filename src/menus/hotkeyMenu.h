@@ -7,17 +7,12 @@
 #include "Updatable.h"
 #include <timer.h>
 
-class GuiButton;
 class GuiLabel;
-class GuiCanvas;
 class GuiSelector;
-class GuiToggleButton;
-class GuiHotkeyBinder;
 
 class HotkeyMenu : public GuiCanvas, public Updatable
 {
 private:
-    const float ROW_HEIGHT = 50.0f;
     const float FRAME_MARGIN = 50.0f;
     const float KEY_LABEL_WIDTH = 250.0f;
     const float KEY_BINDER_WIDTH = 250.0f;
@@ -26,8 +21,8 @@ private:
     const float RESET_LABEL_TIMEOUT = 5.0f;
 
     const float KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + 3.0f * KEY_BINDER_WIDTH + 4.0f * KEY_BINDER_MARGIN;
-    const float KEY_ROW_HEIGHT = ROW_HEIGHT + GuiHotkeyBinder::SELECTOR_HEIGHT;
-    const float KEY_COLUMN_TOP = ROW_HEIGHT * 1.5f + ROW_HEIGHT * 0.5f;
+    const float KEY_ROW_HEIGHT = GuiElement::GuiSizeRow + GuiHotkeyBinder::SELECTOR_HEIGHT;
+    const float KEY_COLUMN_TOP = GuiElement::GuiSizeRow * 1.5f + GuiElement::GuiSizeRow * 0.5f;
 
     GuiElement* container;
     GuiElement* top_row;

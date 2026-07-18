@@ -1,5 +1,4 @@
-#ifndef GUI2_OVERLAY_H
-#define GUI2_OVERLAY_H
+#pragma once
 
 #include "gui2_element.h"
 
@@ -24,5 +23,3 @@ public:
     GuiOverlay* setTextureTiledThemed(string theme_element, GuiElement::State state = GuiElement::State::Normal);
     GuiOverlay* setTextureNone();
 };
-
-#endif//GUI2_OVERLAY_H

@@ -82,7 +82,7 @@ void GuiDockingButton::onUpdate()
     if (!port) return;
 
     // Keyboard shortcuts dock to the nearest.
-    if (isVisible())
+    if (isEffectivelyVisible())
     {
         if (keys.helms_dock_action.getDown())
         {

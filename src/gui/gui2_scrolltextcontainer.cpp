@@ -6,7 +6,8 @@
 GuiScrollFormattedText::GuiScrollFormattedText(GuiContainer* owner, string id, string text)
 : GuiElement(owner, id), text(text)
 {
-    layout.match_content_size = false;
+    layout.match_content_x = false;
+    layout.match_content_y = false;
     text_theme = theme->getStyle("textbox.front");
 
     scroll_container = new GuiScrollContainer(this, id + "_SCROLL_CONTAINER");

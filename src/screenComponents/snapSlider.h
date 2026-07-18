@@ -1,5 +1,4 @@
-#ifndef SNAP_SLIDER_H
-#define SNAP_SLIDER_H
+#pragma once
 
 #include "gui/gui2_slider.h"
 
@@ -22,5 +21,3 @@ public:
 
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 };
-
-#endif//SNAP_SLIDER_H

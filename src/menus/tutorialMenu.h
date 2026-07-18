@@ -1,17 +1,15 @@
-#ifndef TUTORIAL_MENU_H
-#define TUTORIAL_MENU_H
+#pragma once
 
 #include "gui/gui2_canvas.h"
 #include "Updatable.h"
 
-class GuiElement;
-class GuiSlider;
-class GuiLabel;
-class GuiScrollFormattedText;
 class GuiButton;
+class GuiElement;
+class GuiScrollFormattedText;
 
 class TutorialMenu : public GuiCanvas, public Updatable
 {
+private:
     string selected_tutorial_filename;
 
     GuiElement* container;
@@ -19,12 +17,9 @@ class TutorialMenu : public GuiCanvas, public Updatable
     GuiScrollFormattedText* tutorial_description;
     GuiButton* start_tutorial_button;
 
-private:
     void selectTutorial(string filename);
-
 public:
     TutorialMenu();
 
     virtual void update(float delta) override;
 };
-#endif//TUTORIAL_MENU_H

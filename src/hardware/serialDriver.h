@@ -1,10 +1,9 @@
-#ifndef SERIAL_DRIVER_H
-#define SERIAL_DRIVER_H
+#pragma once
 
 #include "stringImproved.h"
 
-//Class to interact with serial ports. Abstracts the difference between UNIX and Windows API.
-//  And uses some tricks to help identify serial ports.
+// Class to interact with serial ports. Abstracts the difference between UNIX and Windows API.
+// Uses some tricks to help identify serial ports.
 class SerialPort
 {
 private:
@@ -50,5 +49,3 @@ public:
     static string getPseudoDriverName(string port);
     static std::vector<string> portsByPseudoDriverName(string driver_name);
 };
-
-#endif//SERIAL_DRIVER_H

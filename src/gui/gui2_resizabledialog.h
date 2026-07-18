@@ -23,6 +23,7 @@ public:
 private:
     static constexpr float resize_icon_size = 25.0f;
     static constexpr float title_bar_height = 30.0f;
+    static constexpr float button_size = title_bar_height - 4.0f;
 
     GuiAutoSizeLabel* title_bar;
     GuiToggleButton* minimize_button;
@@ -45,7 +46,8 @@ private:
 
     virtual void onClose();
 protected:
-    glm::vec2 min_size;
+    glm::vec2 min_size = glm::vec2(200.0f, title_bar_height + resize_icon_size);
+    glm::vec2 max_size = glm::vec2(1200.0f, 900.0f);
     GuiElement* contents;
     const GuiThemeStyle* resize_corner_style;
 };

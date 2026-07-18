@@ -4016,7 +4016,7 @@ msgstr ""
 #, fuzzy
 msgctxt "orders-comms"
 msgid "We can't dock with an enemy station"
-msgstr "Ok mais on ne peut pas s'amarrer à une station ennemie"
+msgstr "OK mais on ne peut pas s'amarrer à une station ennemie"
 
 #: scripts/scenario_44_outpost.lua:5527
 #, fuzzy

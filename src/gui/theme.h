@@ -15,6 +15,7 @@ public:
         float size; // General size parameter, depends on the widget type what it means.
         sp::Font* font;
         float font_offset = 0.0f;
+        float line_height = 1.0f;
         string sound;   //Sound effect played by the widget on certain actions.
     };
     StateStyle states[int(GuiElement::State::COUNT)];
@@ -33,7 +34,8 @@ public:
     - texture
     - color
     - font
-    - offset
+    - font_offset
+    - line_height (multiplier, 1.0 = default font spacing)
     - size
     - sound
 
@@ -51,7 +53,7 @@ public:
     static GuiTheme* getTheme(const string& name);
     //Will return default theme if not found
     static GuiTheme* getCurrentTheme();
-    static void setCurrentTheme(const string &name); 
+    static void setCurrentTheme(const string &name);
     static bool loadTheme(const string& name, const string& resource_name);
 
     static glm::u8vec4 toColor(const string& s);

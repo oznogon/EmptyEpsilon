@@ -19,7 +19,7 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
     attempts_label
         ->setAlignment(sp::Alignment::CenterRight)
         ->setPosition(-185.0f, -25.0f, sp::Alignment::BottomRight)
-        ->setSize(150.0f, 50.0f);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     // Create flag mode toggle button for touch/no right click
     flag_mode_toggle = new GuiToggleButton(owner, "MINESWEEPER_FLAG_MODE", "",
@@ -31,7 +31,7 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
     flag_mode_toggle
         ->setIcon("waypoint.png", sp::Alignment::Center)
         ->setPosition(185.0f, -25.0f, sp::Alignment::BottomLeft)
-        ->setSize(50.0f, 50.0f);
+        ->setSize(GuiElement::GuiSizeRow, GuiElement::GuiSizeRow);
 
     for(int x=0; x<field_size; x++)
     {

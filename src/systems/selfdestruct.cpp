@@ -12,7 +12,7 @@
 
 void SelfDestructSystem::update(float delta)
 {
-    if (!game_server) return;
+    if (!game_server.isAlive()) return;
 
     for(auto [entity, self_destruct] : sp::ecs::Query<SelfDestruct>()) {
         if (!self_destruct.active) continue;

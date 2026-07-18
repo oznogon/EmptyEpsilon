@@ -1,5 +1,4 @@
-#ifndef WINDOW_SCREEN_H
-#define WINDOW_SCREEN_H
+#pragma once
 
 #include "engine.h"
 #include "gui/gui2_canvas.h"
@@ -19,7 +18,4 @@ public:
     constexpr static uint8_t flag_callsigns = 0x04;
     constexpr static uint8_t flag_headings  = 0x02;
     constexpr static uint8_t flag_spacedust = 0x01;
-
 };
-
-#endif//WINDOW_SCREEN_H

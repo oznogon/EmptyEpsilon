@@ -20,7 +20,7 @@ protected:
     // (0.0-1.0 = 0-100%).
     float icon_size = 0.6f;
     // The buttons' height, in virtual pixels.
-    float button_height = 50.0f;
+    float button_height = GuiElement::GuiSizeRow;
 
     // Text entry field for text filter search.
     GuiTextEntry* search_entry = nullptr;

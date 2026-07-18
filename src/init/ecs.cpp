@@ -77,6 +77,7 @@
 #include "systems/zone.h"
 #include "systems/gm.h"
 #include "systems/pickup.h"
+#include "systems/collisionDamage.h"
 #include "systems/destroy.h"
 #include "systems/debugrender.h"
 #include "systems/dronecontrolsystem.h"
@@ -200,6 +201,7 @@ void initSystemsAndComponents()
     engine->registerSystem<GMRadarRender>();
     engine->registerSystem<CinematicCameraSystem>();
     engine->registerSystem<PickupSystem>();
+    engine->registerSystem<CollisionDamageSystem>();
     engine->registerSystem<DroneControlSystem>();
 #ifdef DEBUG
     engine->registerSystem<DebugRenderSystem>();

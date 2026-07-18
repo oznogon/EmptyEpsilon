@@ -63,11 +63,11 @@ MISSILE_HVLI = "HVLI"
 
 --- Array of the missile types.
 MISSILE_TYPES = {
-  MISSILE_HOMING,
-  MISSILE_NUKE,
-  MISSILE_MINE,
-  MISSILE_EMP,
-  MISSILE_HVLI
+    MISSILE_HOMING,
+    MISSILE_NUKE,
+    MISSILE_MINE,
+    MISSILE_EMP,
+    MISSILE_HVLI,
 }
 
 --- Systems.
@@ -99,6 +99,8 @@ SYS_FRONTSHIELD = "frontshield"
 SYS_REARSHIELD = "rearshield"
 --- `"utilitybeam"`
 SYS_UTILITYBEAM = "utilitybeam"
+--- `"sensors"`
+SYS_SENSORS = "sensors"
 
 --- Array of the system names.
 --
@@ -113,16 +115,17 @@ SYS_UTILITYBEAM = "utilitybeam"
 --   pship:commandSetSystemCoolantRequest(system, 0.0)
 -- end
 SYSTEMS = {
-  SYS_REACTOR,
-  SYS_BEAMWEAPONS,
-  SYS_MISSILESYSTEM,
-  SYS_MANEUVER,
-  SYS_IMPULSE,
-  SYS_WARP,
-  SYS_JUMPDRIVE,
-  SYS_FRONTSHIELD,
-  SYS_REARSHIELD,
-  SYS_UTILITYBEAM
+    SYS_REACTOR,
+    SYS_BEAMWEAPONS,
+    SYS_MISSILESYSTEM,
+    SYS_MANEUVER,
+    SYS_IMPULSE,
+    SYS_WARP,
+    SYS_JUMPDRIVE,
+    SYS_FRONTSHIELD,
+    SYS_REARSHIELD,
+    SYS_UTILITYBEAM,
+    SYS_SENSORS,
 }
 
 --- Scanned states.
@@ -144,10 +147,10 @@ SS_FULL_SCAN = "fullscan"
 
 --- Array of the scanned states.
 SCANNED_STATES = {
-  SS_NOT_SCANNED,
-  SS_FRIEND_OR_FOE_IDENTIFIED,
-  SS_SIMPLE_SCAN,
-  SS_FULL_SCAN
+    SS_NOT_SCANNED,
+    SS_FRIEND_OR_FOE_IDENTIFIED,
+    SS_SIMPLE_SCAN,
+    SS_FULL_SCAN,
 }
 
 --- Alert Levels.
@@ -158,18 +161,15 @@ SCANNED_STATES = {
 --
 -- @section alert_levels
 
---- `"Normal"` alert
 ALERT_NORMAL = "Normal"
---- `"YELLOW ALERT"`
-ALERT_YELLOW = "YELLOW ALERT"
---- `"RED ALERT"`
-ALERT_RED = "RED ALERT"
+ALERT_YELLOW = "Yellow alert"
+ALERT_RED = "Red alert"
 
 --- Array of the alert levels.
 ALERT_LEVELS = {
-  ALERT_NORMAL,
-  ALERT_YELLOW,
-  ALERT_RED
+    ALERT_NORMAL,
+    ALERT_YELLOW,
+    ALERT_RED,
 }
 
 --- Scanning Complexity.
@@ -185,10 +185,10 @@ SC_ADVANCED = "advanced"
 
 --- Array of the scan complexities.
 SCANNING_COMPLEXITIES = {
-  SC_NONE,
-  SC_SIMPLE,
-  SC_NORMAL,
-  SC_ADVANCED
+    SC_NONE,
+    SC_SIMPLE,
+    SC_NORMAL,
+    SC_ADVANCED,
 }
 
 --- Hacking Games.
@@ -203,7 +203,7 @@ HG_All = "all"
 
 --- Array of the scan complexities.
 HACKING_GAMES = {
-  HG_Mine,
-  HG_Lights,
-  HG_All,
+    HG_Mine,
+    HG_Lights,
+    HG_All,
 }

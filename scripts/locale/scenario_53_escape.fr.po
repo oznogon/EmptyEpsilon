@@ -1124,7 +1124,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:1579
 msgctxt "crewFriends-comms"
 msgid "I understand the consequences. Please proceed"
-msgstr "Ok oui, on comprends. S'il te plait fais-le !"
+msgstr "OK oui, on comprends. S'il te plait fais-le !"
 
 #: scripts/scenario_53_escape.lua:1641
 msgctxt "crewFriends-comms"
@@ -1151,10 +1151,10 @@ msgstr "Je vais lui en parler et on vous recontacte"
 
 #: scripts/scenario_53_escape.lua:1650
 msgctxt "crewFriends-comms"
-msgid "Ok."
+msgid "OK."
 msgstr ""
 "[Femme de Fred]\n"
-"Ok. Fais bien attention à toi mon chéri.\n"
+"OK. Fais bien attention à toi mon chéri.\n"
 "Je t'aime."
 
 #: scripts/scenario_53_escape.lua:1661 scripts/scenario_53_escape.lua:1730
@@ -1288,7 +1288,7 @@ msgstr "Oups, nous n'avons pas de %s à bord"
 
 #: scripts/scenario_53_escape.lua:1754
 msgctxt "crewFriends-comms"
-msgid "Ok, good luck."
+msgid "OK, good luck."
 msgstr ""
 "[Sœur d'Amir]\n"
 "D'accord, tant pis. Bonne chance alors."

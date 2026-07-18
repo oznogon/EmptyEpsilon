@@ -28,6 +28,8 @@
 #include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/helpOverlay.h"
 
+#include <cmath>
+
 #include "gui/mouseRenderer.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
@@ -37,6 +39,10 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_tooltip.h"
+
+namespace {
+    constexpr float game_speed_values[] = {0.1f, 0.25f, 0.5f, 1.0f, 2.0f, 4.0f, 8.0f};
+}
 
 static std::vector<std::pair<string, string>> getGMInfo(sp::ecs::Entity entity)
 {
@@ -99,6 +105,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
                 {
                     for (auto [entity, hull, transform, trace] : sp::ecs::Query<Hull, sp::Transform, sp::ecs::optional<RadarTrace>>())
                     {
+                        if (hull.max <= 1) continue;
                         const float hull_norm = hull.current / hull.max;
                         float bar_distance = bar_height * 4.0f;
                         if (trace) bar_distance = std::clamp(trace->radius * main_radar->getScale() * 2.0f, trace->min_size, trace->max_size) * 0.75f;
@@ -177,20 +184,21 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     box_selection_overlay->hide();
 
     pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [this](bool value) {
-        if (!value) engine->setGameSpeed(pow(2.0f, game_time_scale->getSelectionIndex()));
+        if (!value) engine->setGameSpeed(game_speed_values[game_time_scale->getSelectionIndex()]);
         else engine->setGameSpeed(0.0f);
     });
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(150, 50);
     (new GuiTextTooltip(pause_button, "PAUSE_BUTTON_TIP", tr("gm_tooltip", "Toggle pausing the game simulation."), 20.0f))->setWidth(280.0f);
 
     game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR", [](int index, string value) {
-        engine->setGameSpeed(pow(2, index));
+        engine->setGameSpeed(game_speed_values[index]);
     });
     game_time_scale
-        ->setOptions({"1x", "2x", "4x", "8x"})
-        ->setSelectionIndex(0)
+        ->setOptions({"0.1x", "0.25x", "0.5x", "1x", "2x", "4x", "8x"})
+        ->setSelectionIndex(3)
         ->setPosition(170, 20, sp::Alignment::TopLeft)
         ->setSize(100, 50);
+    (new GuiTextTooltip(game_time_scale, "GAME_TIME_SCALE_TIP", tr("gm_tooltip", "Set the game simulation speed multiplier."), 20.0f))->setWidth(280.0f);
 
     intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"), [](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;
@@ -207,7 +215,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     faction_selector
         ->setSelectionIndex(0)
         ->setPosition(20.0f, 70.0f, sp::Alignment::TopLeft)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
     (new GuiTextTooltip(faction_selector, "FACTION_SELECTOR_TIP", tr("gm_tooltip", "Change the faction of selected objects."), 20.0f))->setWidth(280.0f);
 
     global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", tr("button", "Global message"), [this]() {
@@ -238,7 +246,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setZoomReference(LONG_RANGE_DISTANCE)
         ->setLabelPrecision(3)
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-        ->setSize(250.0f, 50.0f);
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
 
     copy_scenario_button = new GuiButton(this, "COPY_SCENARIO_BUTTON", tr("button", "Copy scenario"), [this]() {
         Clipboard::setClipboard(getScriptExport(false));
@@ -612,7 +620,7 @@ void GameMasterScreen::update(float delta)
             engine->setGameSpeed(
                 game_speed > 0.0f
                     ? 0.0f
-                    : std::powf(2.0f, static_cast<float>(game_time_scale->getSelectionIndex()))
+                    : game_speed_values[game_time_scale->getSelectionIndex()]
             );
     }
 
@@ -620,7 +628,7 @@ void GameMasterScreen::update(float delta)
     {
         pause_button->setValue(true);
         game_time_scale
-            ->setSelectionIndex(0)
+            ->setSelectionIndex(3)
             ->disable();
     }
     else
@@ -628,22 +636,18 @@ void GameMasterScreen::update(float delta)
         pause_button->setValue(false);
         game_time_scale->enable();
 
-        switch (static_cast<int>(game_speed))
         {
-            case 1:
-                game_time_scale->setSelectionIndex(0);
-                break;
-            case 2:
-                game_time_scale->setSelectionIndex(1);
-                break;
-            case 4:
-                game_time_scale->setSelectionIndex(2);
-                break;
-            case 8:
-                game_time_scale->setSelectionIndex(3);
-                break;
-            default:
-                LOG(Warning, "Lua setGameSpeed: Invalid value ", static_cast<int>(game_speed), "; must be 0, 1, 2, 4, or 8");
+            int idx = -1;
+            for(int i = 0; i < static_cast<int>(sizeof(game_speed_values) / sizeof(game_speed_values[0])); i++)
+            {
+                if (fabsf(game_speed - game_speed_values[i]) < 0.01f)
+                {
+                    idx = i;
+                    break;
+                }
+            }
+            if (idx >= 0)
+                game_time_scale->setSelectionIndex(idx);
         }
     }
 
@@ -1151,7 +1155,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         {
                             auto port = entity.getComponent<DockingPort>();
                             auto bay = target.getComponent<DockingBay>();
-                            if (!shift_down && port && bay && port->canDockOn(*bay) != DockingStyle::None) 
+                            if (!shift_down && port && bay && port->canDockOn(*bay) != DockingStyle::None)
                                 ai->orders = AIOrder::Dock;
                             else
                                 ai->orders = AIOrder::DefendTarget;

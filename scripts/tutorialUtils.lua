@@ -1,18 +1,23 @@
---[[ Assist function in creating tutorial sequences --]]
+-- Helper function for creating tutorial sequences
 function startTutorial()
-    setDefaultSkybox("simulation")
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
+    player =
+        PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
+
     tutorial_setPlayerShip(player)
+    setDefaultSkybox("simulation")
+    tutorial_showMessage(
+        _([[Welcome to the EmptyEpsilon tutorial.
 
-    tutorial_showMessage(_([[Welcome to the EmptyEpsilon tutorial.
-Note that this tutorial is designed to give you a quick overview of the basic options for the game, but does not cover every single aspect.
+This tutorial covers basic gameplay to get you started quickly. For more in-depth tutorials and strategies for each role, run each of those roles' tutorials.
 
-Press next to continue...]]), true)
+Press Next to continue.]]),
+        true
+    )
+
     tutorial_onNext(function()
         tutorial_list_index = 1
         startSequence(tutorial_list[tutorial_list_index])
     end)
-
 end
 
 function startSequence(sequence)
@@ -24,6 +29,7 @@ end
 function runNextSequenceStep()
     local data = current_sequence[current_index]
     current_index = current_index + 1
+
     if data == nil then
         tutorial_list_index = tutorial_list_index + 1
         if tutorial_list[tutorial_list_index] ~= nil then
@@ -32,7 +38,11 @@ function runNextSequenceStep()
             tutorial_finish()
         end
     elseif data["message"] ~= nil then
-        tutorial_showMessage(data["message"], data["finish_check_function"] == nil)
+        tutorial_showMessage(
+            data["message"],
+            data["finish_check_function"] == nil
+        )
+
         if data["finish_check_function"] == nil then
             update = nil
             tutorial_onNext(runNextSequenceStep)
@@ -47,6 +57,7 @@ function runNextSequenceStep()
     elseif data["run_function"] ~= nil then
         local has_next_step = current_index <= #current_sequence
         data["run_function"]()
+
         if has_next_step then
             runNextSequenceStep()
         end
@@ -60,37 +71,53 @@ end
 function addToSequence(sequence, data, data2)
     if type(data) == "string" then
         if data2 == nil then
-            table.insert(sequence, {message = data})
+            table.insert(sequence, { message = data })
         else
-            table.insert(sequence, {message = data, finish_check_function = data2})
+            table.insert(
+                sequence,
+                { message = data, finish_check_function = data2 }
+            )
         end
     elseif type(data) == "function" then
-        table.insert(sequence, {run_function = data})
+        table.insert(sequence, { run_function = data })
     end
 end
 
 function resetPlayerShip()
-    player:setJumpDrive(false)
-    player:setWarpDrive(false)
-    player:setImpulseMaxSpeed(1)
-    player:setRotationMaxSpeed(1)
-    for idx, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
-        player:setSystemHealth(system, 1.0)
-        player:setSystemHeat(system, 0.0)
-        player:setSystemPower(system, 1.0)
-        player:commandSetSystemPowerRequest(system, 1.0)
-        player:setSystemCoolant(system, 0.0)
-        player:commandSetSystemCoolantRequest(system, 0.0)
+    player
+        :setJumpDrive(false)
+        :setWarpDrive(false)
+        :setImpulseMaxSpeed(1)
+        :setRotationMaxSpeed(1)
+        :setPosition(0, 0)
+        :setRotation(0)
+        :setWeaponStorageMax("homing", 0)
+        :setWeaponStorageMax("nuke", 0)
+        :setWeaponStorageMax("mine", 0)
+        :setWeaponStorageMax("emp", 0)
+        :setWeaponStorageMax("hvli", 0)
+        :commandImpulse(0)
+        :commandWarp(0)
+        :commandTargetRotation(0)
+        :commandSetShields(false)
+
+    for idx, system in ipairs({
+        "reactor",
+        "beamweapons",
+        "missilesystem",
+        "maneuver",
+        "impulse",
+        "warp",
+        "jumpdrive",
+        "frontshield",
+        "rearshield",
+    }) do
+        player
+            :setSystemHealth(system, 1.0)
+            :setSystemHeat(system, 0.0)
+            :setSystemPower(system, 1.0)
+            :setSystemCoolant(system, 0.0)
+            :commandSetSystemPowerRequest(system, 1.0)
+            :commandSetSystemCoolantRequest(system, 0.0)
     end
-    player:setPosition(0, 0)
-    player:setRotation(0)
-    player:commandImpulse(0)
-    player:commandWarp(0)
-    player:commandTargetRotation(0)
-    player:commandSetShields(false)
-    player:setWeaponStorageMax("homing", 0)
-    player:setWeaponStorageMax("nuke", 0)
-    player:setWeaponStorageMax("mine", 0)
-    player:setWeaponStorageMax("emp", 0)
-    player:setWeaponStorageMax("hvli", 0)
 end

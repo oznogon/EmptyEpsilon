@@ -55,6 +55,8 @@ public:
     bool enable_multiple_waypoint_sets;
     bool enable_waypoint_routes;
     bool use_drone_energy_drain;
+    bool missiles_on_long_range_radar;
+    float collision_damage_factor;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
     bool allow_main_screen_strategic_map;
@@ -64,6 +66,7 @@ public:
     float elapsed_delta;
     string scenario;
     std::unordered_map<string, string> scenario_settings;
+    string previous_scenario_filename;
 
     //List of script functions that can be called from the GM interface (Server only!)
     std::list<GMScriptCallback> gm_callback_functions;

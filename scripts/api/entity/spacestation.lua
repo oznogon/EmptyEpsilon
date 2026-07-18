@@ -11,8 +11,8 @@ __default_station_faction = "Independent"
 function SpaceStation()
     local e = createEntity()
     e.components = {
-        transform = {rotation=random(0, 360)},
-        callsign = {callsign=generateRandomCallSign("DS")},
+        transform = { rotation = random(0, 360) },
+        callsign = { callsign = generateRandomCallSign("DS") },
         dynamic_radar_signature = {},
     }
     e:setFaction(__default_station_faction)

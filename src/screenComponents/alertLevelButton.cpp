@@ -35,7 +35,7 @@ GuiAlertLevelSelect::GuiAlertLevelSelect(GuiContainer* owner, string id)
 
 void GuiAlertLevelSelect::onUpdate()
 {
-    if (my_spaceship && isVisible())
+    if (my_spaceship && isEffectivelyVisible())
     {
         if (keys.relay_alert_level_none.getDown())
             my_player_info->commandSetAlertLevel(AlertLevel::Normal);
