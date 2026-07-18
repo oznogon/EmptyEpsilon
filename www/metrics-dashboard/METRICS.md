@@ -79,8 +79,14 @@ If the endpoint is unreachable, confirm that the server's firewall isn't blockin
 | `ee_server_network_bytes{component}` | Per-component network bytes (1-second window) |
 | `ee_kills_total{instigator}` | Entities destroyed by damage per instigator (session total) |
 | `ee_debug_pobject_count` | Active PObject count (debug builds only) |
+| `ee_ai_entity_count` | Number of active AI-controlled entities (debug builds only) |
+| `ee_ai_light_update_duration_seconds` | Average light-pass AI update duration per frame in seconds (debug builds only) |
+| `ee_ai_heavy_update_duration_seconds` | Average heavy-pass AI update duration per frame in seconds (debug builds only) |
+| `ee_ai_total_update_duration_seconds` | Total AI update duration per frame in seconds (debug builds only) |
+| `ee_ai_immediate_heavy_count` | Number of immediate heavy updates in the current 5-second window (debug builds only) |
+| `ee_ai_heavy_budget` | Maximum heavy updates scheduled per frame (debug builds only) |
 
-> **Note:** `ee_server_network_bytes` and the per-subsystem detail in `ee_update_duration_seconds` are collected only when `metrics_server` is set to a non-zero port. They incur a small performance overhead and are disabled when the metrics server is off.
+> **Note:** `ee_server_network_bytes`, the per-subsystem detail in `ee_update_duration_seconds`, and all `ee_ai_*` metrics are collected only when `metrics_server` is set to a non-zero port. They incur a small performance overhead and are disabled when the metrics server is off. `ee_ai_*` metrics are only available in debug builds.
 
 ## Install and configure Prometheus
 

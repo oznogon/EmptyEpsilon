@@ -19,12 +19,21 @@ static float segmentPointDistance2(glm::vec2 p, glm::vec2 a, glm::vec2 b)
     return glm::length2(p - projection);
 }
 
+static bool isEntityExcluded(uint32_t obs_id, uint32_t exclude_id, const std::vector<uint32_t>& exclude_ids)
+{
+    if (obs_id == exclude_id) return true;
+    for (auto id : exclude_ids)
+        if (obs_id == id) return true;
+    return false;
+}
+
 static bool threadLineOfSight(glm::vec2 a, glm::vec2 b, float my_radius,
-    const std::vector<Obstacle>& obstacles, uint32_t exclude_entity_id)
+    const std::vector<Obstacle>& obstacles, uint32_t exclude_entity_id,
+    const std::vector<uint32_t>& exclude_entity_ids)
 {
     for (const auto& obs : obstacles)
     {
-        if (obs.entity.getIndex() == exclude_entity_id)
+        if (isEntityExcluded(obs.entity.getIndex(), exclude_entity_id, exclude_entity_ids))
             continue;
 
         const float r = obs.radius + my_radius;
@@ -42,6 +51,7 @@ static bool threadLineOfSight(glm::vec2 a, glm::vec2 b, float my_radius,
 static std::vector<glm::vec2> computePath(
     float my_radius, glm::vec2 start, glm::vec2 end,
     uint32_t exclude_entity_id,
+    const std::vector<uint32_t>& exclude_entity_ids,
     const std::vector<Obstacle>& obstacles, float max_or)
 {
     static constexpr int MAX_EXPANSIONS = 5000;
@@ -59,7 +69,7 @@ static std::vector<glm::vec2> computePath(
     }
 
     // We have direct line-of-sight to the destination.
-    if (threadLineOfSight(start, end, my_radius, obstacles, exclude_entity_id))
+    if (threadLineOfSight(start, end, my_radius, obstacles, exclude_entity_id, exclude_entity_ids))
     {
         std::vector<glm::vec2> route;
         route.push_back(end);
@@ -107,7 +117,7 @@ static std::vector<glm::vec2> computePath(
     // Rasterise each obstacle onto the grid.
     for (const auto& obs : obstacles)
     {
-        if (obs.entity.getIndex() == exclude_entity_id)
+        if (isEntityExcluded(obs.entity.getIndex(), exclude_entity_id, exclude_entity_ids))
             continue;
 
         const float r_hard = std::max(obs.radius * 0.2f, 100.0f);
@@ -261,7 +271,7 @@ static std::vector<glm::vec2> computePath(
             size_t furthest = i;
             for (size_t j = i; j < raw_path.size(); j++)
             {
-                if (threadLineOfSight(smoothed.back(), raw_path[j], my_radius, obstacles, exclude_entity_id))
+                if (threadLineOfSight(smoothed.back(), raw_path[j], my_radius, obstacles, exclude_entity_id, exclude_entity_ids))
                     furthest = j;
             }
 
@@ -313,14 +323,19 @@ void PathWorker::submit(PathJob job)
     cv.notify_one();
 }
 
-std::vector<PathResult> PathWorker::collect()
+PathResult PathWorker::collect(uint32_t entity_id)
 {
-    std::vector<PathResult> results;
+    std::lock_guard<std::mutex> lock(mutex);
+    for (auto it = completed_results.begin(); it != completed_results.end(); ++it)
     {
-        std::lock_guard<std::mutex> lock(mutex);
-        results.swap(completed_results);
+        if (it->entity_id == entity_id)
+        {
+            PathResult result = std::move(*it);
+            completed_results.erase(it);
+            return result;
+        }
     }
-    return results;
+    return {entity_id, {}};
 }
 
 void PathWorker::run()
@@ -342,7 +357,7 @@ void PathWorker::run()
             PathResult result;
             result.entity_id = job.entity_id;
             result.route = computePath(job.my_radius, job.start, job.end,
-                job.exclude_entity_id, job.obstacles, job.max_obstacle_radius);
+                job.exclude_entity_id, job.exclude_entity_ids, job.obstacles, job.max_obstacle_radius);
             results.push_back(std::move(result));
         }
 

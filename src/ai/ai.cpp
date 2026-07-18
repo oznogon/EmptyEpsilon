@@ -1000,7 +1000,17 @@ void ShipAI::flyFormation(sp::ecs::Entity target, glm::vec2 offset)
 
     if (pathPlanner.route.empty() || (pathfind_cooldown <= 0.0f && m_allow_path_planning))
     {
-        pathPlanner.planAsync(my_radius, ot->getPosition(), target_position, owner);
+        // Collect all formation entity IDs so the async worker can exclude
+        // the leader and other wingmen from obstacle checks, matching the
+        // sync plan() isFormationObstacle() behavior.
+        std::vector<uint32_t> formation_ids;
+        formation_ids.push_back(target.getIndex());
+        for (auto [entity, ctrl] : sp::ecs::Query<AIController>()) {
+            if (ctrl.orders == AIOrder::FlyFormation && ctrl.order_target == target)
+                formation_ids.push_back(entity.getIndex());
+        }
+
+        pathPlanner.planAsync(my_radius, ot->getPosition(), target_position, owner, formation_ids);
         if (pathPlanner.route.size() > 1 || pathPlanner.hasPendingAsyncJob())
             pathfind_cooldown = 0.5f + random(0.0f, 0.5f);
     }

@@ -68,6 +68,9 @@ public:
     // so the AI doesn't continue flying toward a stale destination.
     void clearPath() { pathPlanner.clear(); }
 
+    // Force an immediate target re-evaluation on the next runHeavy call.
+    void resetTargetDelay() { update_target_delay = 0.0f; }
+
     // Visualize AI behaviors on the GM screen.
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, float scale);
 protected:

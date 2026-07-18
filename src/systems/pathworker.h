@@ -17,6 +17,7 @@ struct PathJob {
     glm::vec2 start;
     glm::vec2 end;
     uint32_t exclude_entity_id;
+    std::vector<uint32_t> exclude_entity_ids;
     std::vector<Obstacle> obstacles;
     float max_obstacle_radius;
 };
@@ -34,7 +35,7 @@ public:
     ~PathWorker();
 
     void submit(PathJob job);
-    std::vector<PathResult> collect();
+    PathResult collect(uint32_t entity_id);
 
     static PathWorker* instance;
 

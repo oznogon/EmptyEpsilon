@@ -16,6 +16,7 @@
 #include "ecs/query.h"
 #include "playerInfo.h"
 #include "crewPosition.h"
+#include "systems/ai.h"
 
 #include <cstdio>
 #include <unordered_map>
@@ -315,6 +316,55 @@ static void collectGameMetrics(string& output)
     }
 }
 
+static void collectAIMetrics(string& output)
+{
+#ifdef DEBUG
+    auto& m = AISystem::metrics_snapshot;
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_entity_count",
+        "Number of active AI-controlled entities",
+        "ee_ai_entity_count " + formatInt(m.ai_count)
+    );
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_light_update_duration_seconds",
+        "Average light-pass AI update duration per frame (seconds)",
+        "ee_ai_light_update_duration_seconds " + formatFloat(m.light_time_us / 1e6f)
+    );
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_heavy_update_duration_seconds",
+        "Average heavy-pass AI update duration per frame (seconds)",
+        "ee_ai_heavy_update_duration_seconds " + formatFloat(m.heavy_time_us / 1e6f)
+    );
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_total_update_duration_seconds",
+        "Total AI update duration per frame (seconds)",
+        "ee_ai_total_update_duration_seconds " + formatFloat(m.total_ms / 1000.0f)
+    );
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_immediate_heavy_count",
+        "Number of immediate heavy updates in the current 5-second window",
+        "ee_ai_immediate_heavy_count " + formatInt(m.immediate_heavy_count)
+    );
+
+    writeGaugeMetric(
+        output,
+        "ee_ai_heavy_budget",
+        "Maximum heavy updates scheduled per frame",
+        "ee_ai_heavy_budget " + formatInt(m.heavy_budget)
+    );
+#endif
+}
+
 static void collectDebugMetrics(string& output)
 {
     if (!game_server.isAlive()) return;
@@ -378,6 +428,8 @@ PrometheusMetricsServer::PrometheusMetricsServer(int port)
         collectServerMetrics(output);
         output += "\n";
         collectGameMetrics(output);
+        output += "\n";
+        collectAIMetrics(output);
         output += "\n";
         collectKillMetrics(output);
         output += "\n";

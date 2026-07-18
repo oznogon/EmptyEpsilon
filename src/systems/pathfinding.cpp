@@ -542,13 +542,18 @@ void PathPlanner::plan(float my_radius, glm::vec2 start, glm::vec2 end, sp::ecs:
     }
 }
 
-void PathPlanner::planAsync(float my_radius, glm::vec2 start, glm::vec2 end, sp::ecs::Entity exclude_entity)
+void PathPlanner::planAsync(float my_radius, glm::vec2 start, glm::vec2 end, sp::ecs::Entity exclude_entity,
+                             const std::vector<uint32_t>& extra_exclude_ids)
 {
     if (!PathWorker::instance)
     {
         plan(my_radius, start, end, exclude_entity);
         return;
     }
+
+    // Skip if a job is already in-flight for this entity.
+    if (pending_async_job)
+        return;
 
     // Skip if identical to the cached route (same dest, very close start).
     if (route.size() > 1)
@@ -566,15 +571,28 @@ void PathPlanner::planAsync(float my_radius, glm::vec2 start, glm::vec2 end, sp:
     {
         route.clear();
         route.push_back(end);
+        pending_async_job = false;
         return;
     }
 
+    // If we don't have a route yet, compute one synchronously so the AI
+    // starts with a proper obstacle-avoiding path. Async is only used for
+    // re-planning when an existing route becomes stale.
+    if (route.empty())
+    {
+        pending_async_job = false;
+        plan(my_radius, start, end, exclude_entity);
+        return;
+    }
+
+    // Re-planning: submit an async job and keep the existing route.
     PathJob job;
     job.entity_id = exclude_entity ? exclude_entity.getIndex() : 0;
     job.my_radius = my_radius;
     job.start = start;
     job.end = end;
     job.exclude_entity_id = exclude_entity ? exclude_entity.getIndex() : 0;
+    job.exclude_entity_ids = extra_exclude_ids;
     job.obstacles = path_finding_system->getObstacles();
     job.max_obstacle_radius = path_finding_system->getMaxObstacleRadius();
 
@@ -587,12 +605,6 @@ void PathPlanner::planAsync(float my_radius, glm::vec2 start, glm::vec2 end, sp:
     cached_time = std::chrono::steady_clock::now();
 
     PathWorker::instance->submit(std::move(job));
-
-    // Fallback: use a direct path to the target while A* runs on the
-    // worker thread. This ensures the AI moves immediately instead of
-    // sitting still waiting for the async result.
-    route.clear();
-    route.push_back(end);
 }
 
 bool PathPlanner::tryCollectResult()
@@ -602,15 +614,12 @@ bool PathPlanner::tryCollectResult()
     if (!PathWorker::instance)
         return false;
 
-    auto results = PathWorker::instance->collect();
-    for (auto& result : results)
+    PathResult result = PathWorker::instance->collect(async_entity_id);
+    if (result.entity_id == async_entity_id && !result.route.empty())
     {
-        if (result.entity_id == async_entity_id)
-        {
-            route = std::move(result.route);
-            pending_async_job = false;
-            return true;
-        }
+        route = std::move(result.route);
+        pending_async_job = false;
+        return true;
     }
     return false;
 }

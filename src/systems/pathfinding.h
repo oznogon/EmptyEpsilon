@@ -59,7 +59,8 @@ public:
     std::vector<glm::vec2> route;
 
     void plan(float my_radius, glm::vec2 start, glm::vec2 end, sp::ecs::Entity exclude_entity = {});
-    void planAsync(float my_radius, glm::vec2 start, glm::vec2 end, sp::ecs::Entity exclude_entity = {});
+    void planAsync(float my_radius, glm::vec2 start, glm::vec2 end, sp::ecs::Entity exclude_entity = {},
+                   const std::vector<uint32_t>& extra_exclude_ids = {});
     bool tryCollectResult();
     bool hasPendingAsyncJob() const { return pending_async_job; }
     void clear();

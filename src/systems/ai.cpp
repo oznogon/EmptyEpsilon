@@ -10,6 +10,8 @@
 #include <vector>
 #include <algorithm>
 
+AIMetricsSnapshot AISystem::metrics_snapshot;
+
 
 void AISystem::update(float delta)
 {
@@ -54,22 +56,35 @@ void AISystem::update(float delta)
     // round-robin schedule.
     for (auto& entry : ai_list) {
         auto entity_id = entry.entity.getIndex();
-        auto& last = last_ai_state[entity_id];
+        auto it = last_ai_state.find(entity_id);
+        if (it == last_ai_state.end())
+        {
+            // First time seeing this entity: store state without triggering
+            // heavy. Otherwise all spawned ships would hit immediate heavy
+            // on frame 1 comparing against the default Idle state.
+            last_ai_state[entity_id] = {
+                entry.controller->orders,
+                entry.controller->order_target_location,
+                entry.controller->order_target
+            };
+        }
+        else
+        {
+            auto& last = it->second;
+            bool orders_changed = (last.orders != entry.controller->orders
+                || last.order_target_location != entry.controller->order_target_location
+                || last.order_target != entry.controller->order_target);
 
-        bool orders_changed = (last.orders != entry.controller->orders
-            || last.order_target_location != entry.controller->order_target_location
-            || last.order_target != entry.controller->order_target);
+            if (orders_changed) {
+                last.orders = entry.controller->orders;
+                last.order_target_location = entry.controller->order_target_location;
+                last.order_target = entry.controller->order_target;
 
-        if (orders_changed) {
-            last.orders = entry.controller->orders;
-            last.order_target_location = entry.controller->order_target_location;
-            last.order_target = entry.controller->order_target;
-
-            // Clear the stale route so the AI doesn't fly to the old
-            // destination, then re-plan immediately with the new orders.
-            entry.controller->ai->clearPath();
-            entry.controller->ai->runHeavy(delta);
-            immediate_heavy_count++;
+                entry.controller->ai->clearPath();
+                entry.controller->ai->resetTargetDelay();
+                entry.controller->ai->runHeavy(delta);
+                immediate_heavy_count++;
+            }
         }
 
         entry.controller->ai->runLight(delta);
@@ -77,13 +92,10 @@ void AISystem::update(float delta)
     float light_time = sw.restart();
 
     // PASS 2: Heavy update — round-robin, MAX_HEAVY_PER_FRAME entities.
-    int scheduled_heavy = 0;
     if (ai_list.size() <= static_cast<size_t>(MAX_HEAVY_PER_FRAME))
     {
-        for (auto& entry : ai_list) {
+        for (auto& entry : ai_list)
             entry.controller->ai->runHeavy(delta);
-            scheduled_heavy++;
-        }
     }
     else
     {
@@ -92,7 +104,6 @@ void AISystem::update(float delta)
         {
             ai_list[next_heavy_index].controller->ai->runHeavy(delta);
             next_heavy_index = (next_heavy_index + 1) % ai_list.size();
-            scheduled_heavy++;
         }
     }
     float heavy_time = sw.restart();
@@ -110,7 +121,15 @@ void AISystem::update(float delta)
         float heavy_per_frame_us = (frame_count > 0)
             ? (total_heavy_time / frame_count) * 1e6f : 0.0f;
         float total_ms = (light_per_frame_us + heavy_per_frame_us) / 1000.0f;
-        LOG(INFO) << "[AISystem] " << total_ai_count << " AIs | "
+
+        metrics_snapshot.ai_count = total_ai_count;
+        metrics_snapshot.light_time_us = light_per_frame_us;
+        metrics_snapshot.heavy_time_us = heavy_per_frame_us;
+        metrics_snapshot.total_ms = total_ms;
+        metrics_snapshot.immediate_heavy_count = immediate_heavy_count;
+        metrics_snapshot.heavy_budget = MAX_HEAVY_PER_FRAME;
+
+        LOG(DEBUG) << "[AISystem] " << total_ai_count << " AIs | "
                   << "light=" << light_per_frame_us << "us | "
                   << "heavy=" << heavy_per_frame_us << "us | "
                   << "total=" << total_ms << "ms/frame "
