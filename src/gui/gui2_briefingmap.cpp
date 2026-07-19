@@ -100,8 +100,8 @@ void GuiBriefingMap::tweenToTime(float time)
         return;
     }
 
-    float time_a = kfs[idx_a].timestamp;
-    float time_b = kfs[idx_b].timestamp;
+    const float time_a = kfs[idx_a].timestamp;
+    const float time_b = kfs[idx_b].timestamp;
 
     // Camera tween
     camera_position = Tween<glm::vec2>::easeInOutSine(clamped_time, time_a, time_b,
@@ -210,7 +210,7 @@ void GuiBriefingMap::onDraw(sp::RenderTarget& renderer)
     // Background
     renderer.fillRect(rect, glm::u8vec4{20, 20, 20, 255});
 
-    // Grid
+    // Map grid, mimicking Relay map style.
     glm::u8vec4 grid_color = glm::u8vec4{64, 64, 128, 255};
     glm::u8vec4 subsector_grid_color = glm::u8vec4{64, 64, 128, 64};
     float grid_font_size = 24.0f;
@@ -229,13 +229,13 @@ void GuiBriefingMap::onDraw(sp::RenderTarget& renderer)
     const float sub_sector_size = sector_size / 8.0f;
 
     glm::vec2 map_center = rect.center();
-    float scale = std::min(rect.size.x, rect.size.y) / 2.0f / zoom;
+    const float scale = std::min(rect.size.x, rect.size.y) / 2.0f / zoom;
 
     // Visible bounds in world coordinates
-    int sector_x_min = static_cast<int>(std::floor((camera_position.x - (map_center.x - rect.position.x) / scale) / sector_size)) + 1;
-    int sector_x_max = static_cast<int>(std::floor((camera_position.x + (rect.position.x + rect.size.x - map_center.x) / scale) / sector_size));
-    int sector_y_min = static_cast<int>(std::floor((camera_position.y - (map_center.y - rect.position.y) / scale) / sector_size)) + 1;
-    int sector_y_max = static_cast<int>(std::floor((camera_position.y + (rect.position.y + rect.size.y - map_center.y) / scale) / sector_size));
+    const int sector_x_min = static_cast<int>(std::floor((camera_position.x - (map_center.x - rect.position.x) / scale) / sector_size)) + 1;
+    const int sector_x_max = static_cast<int>(std::floor((camera_position.x + (rect.position.x + rect.size.x - map_center.x) / scale) / sector_size));
+    const int sector_y_min = static_cast<int>(std::floor((camera_position.y - (map_center.y - rect.position.y) / scale) / sector_size)) + 1;
+    const int sector_y_max = static_cast<int>(std::floor((camera_position.y + (rect.position.y + rect.size.y - map_center.y) / scale) / sector_size));
 
     // Sector name labels
     if (zoom <= super_sector_size)
@@ -270,7 +270,7 @@ void GuiBriefingMap::onDraw(sp::RenderTarget& renderer)
     // Major grid lines
     for (int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
     {
-        float x = sector_x * sector_size;
+        const float x = sector_x * sector_size;
         renderer.drawLine(
             worldToScreen(glm::vec2(x, (sector_y_min - 1) * sector_size)),
             worldToScreen(glm::vec2(x, (sector_y_max + 1) * sector_size)),
@@ -280,7 +280,7 @@ void GuiBriefingMap::onDraw(sp::RenderTarget& renderer)
     }
     for (int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
     {
-        float y = sector_y * sector_size;
+        const float y = sector_y * sector_size;
         renderer.drawLine(
             worldToScreen(glm::vec2((sector_x_min - 1) * sector_size, y)),
             worldToScreen(glm::vec2((sector_x_max + 1) * sector_size, y)),
@@ -289,19 +289,18 @@ void GuiBriefingMap::onDraw(sp::RenderTarget& renderer)
     }
 
     // Sub-sector dots
-    int sub_sector_x_min = static_cast<int>(std::floor((camera_position.x - (map_center.x - rect.position.x) / scale) / sub_sector_size)) + 1;
-    int sub_sector_x_max = static_cast<int>(std::floor((camera_position.x + (rect.position.x + rect.size.x - map_center.x) / scale) / sub_sector_size));
-    int sub_sector_y_min = static_cast<int>(std::floor((camera_position.y - (map_center.y - rect.position.y) / scale) / sub_sector_size)) + 1;
-    int sub_sector_y_max = static_cast<int>(std::floor((camera_position.y + (rect.position.y + rect.size.y - map_center.y) / scale) / sub_sector_size));
+    const int sub_sector_x_min = static_cast<int>(std::floor((camera_position.x - (map_center.x - rect.position.x) / scale) / sub_sector_size)) + 1;
+    const int sub_sector_x_max = static_cast<int>(std::floor((camera_position.x + (rect.position.x + rect.size.x - map_center.x) / scale) / sub_sector_size));
+    const int sub_sector_y_min = static_cast<int>(std::floor((camera_position.y - (map_center.y - rect.position.y) / scale) / sub_sector_size)) + 1;
+    const int sub_sector_y_max = static_cast<int>(std::floor((camera_position.y + (rect.position.y + rect.size.y - map_center.y) / scale) / sub_sector_size));
 
     for (int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
     {
-        float x = sector_x * sub_sector_size;
+        const float x = sector_x * sub_sector_size;
         for (int sector_y = sub_sector_y_min; sector_y <= sub_sector_y_max; sector_y++)
         {
-            float y = sector_y * sub_sector_size;
             renderer.drawPoint(
-                worldToScreen(glm::vec2(x, y)),
+                worldToScreen(glm::vec2(x, sector_y * sub_sector_size)),
                 grid_color
             );
         }
@@ -315,7 +314,7 @@ void GuiBriefingMap::onDraw(sp::RenderTarget& renderer)
         if (!entity.visible) continue;
 
         auto screen_pos = worldToScreen(entity.position);
-        float screen_size = entity.world_size * scale;
+        const float screen_size = entity.world_size * scale;
 
         if (!entity.radar_trace_image.empty())
         {
