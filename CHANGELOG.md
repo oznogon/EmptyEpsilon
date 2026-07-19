@@ -1,78 +1,174 @@
-# Change Log
+# Changelog
+
+## [2026-07]
+
+### New features
+
+- Map pages for BriefingMap screen, with new briefing map script functions
+  - Map mimics Relay/Strategic Map, using script-defined pseudoentities
+  - Supports keyframe animation
+- 4K texture atlas detection and support
+  - Default behavior uses largest available of 2K (old default) and 4K
+  - If 4K, double font rendering texture size
+- Hull component added to missiles and asteroids, making them targetable and destroyable
+- Fractional (<1x) time scales on GM screen (upstream 2887)
+- Multiline text entry now allowed in certain GuiTextEntry fields, primarily LuaConsole (shift+enter for linebreak; linebreaks also copy/paste correctly)
+- Background thread for AI/pathfinding logic
+- Expanded music library with Rafael Krux CC-BY tracks
+- Read and display artist-title OGG tags in Options menu music preview
+- StyLua configuration TOML to enforce consistent Lua code formatting
+- `getEffectiveScrollbarWidth()` exposed from GuiScrollContainer
+  - Pause, scale, and stacking controls on the debug timing graph
+  - Tooltips on hover added to timing graph to view timings at a specific point in time
+  - Timing graph forces GL lines for better performance
+- Long-range missile visibility toggle button in server options
+
+### Changed
+
+- Migrate SDL from SDL2 to SDL3
+  - Builds now require SDL3 to be installed or built from source, see https://github.com/oznogon/EmptyEpsilon/wiki/Build
+  - See commit 7d86049 "Migrate from SDL2 to SDL3" for implementation details
+- Reorganize and refactor ship template classes
+  - Add, rename, and reorganize ship template class files and `setClass()` definitions
+  - Corvettes are no longer described as "larger" than frigates
+  - Exuari and Ktlitan templates split into subdirectories
+  - Non-combat ships split into Auxiliaries file
+  - Edit some ship descriptions to facilitate i18n reuse
+- Codebase-wide formatting edits
+  - All Lua scripts reformatted using StyLua
+  - Tab (indents and most inline tabs) converted to spaces in C++ and Lua
+  - All line endings normalized (dos2unix)
+- Refactor Engineering screen
+  - Apply layout attributes
+  - Engineering+ screen logic consolidated into Engineering screen
+  - ShipSystem list made scrollable; rows now render from top
+- Refactor DebugRenderer to use GuiResizableDialog, GuiKeyValueDisplays, GuiButtons, etc. instead of bespoke drawText
+- Enforce both `max_size` and `min_size` on GuiResizableDialog
+- Rewrite AI system
+  - AI/pathfinding split into light (every server update) and heavy (batched) logic to prevent AI updates from blocking main thread
+  - Pathfinding rewritten with split A* and spatial hash grid for improved accuracy, reduced update jitter, and better performance
+  - Formation collision over-avoidance mitigated
+- Nebulae performance tweaks
+  - Nebula occlusion queries cached and dynamic lights pre-computed
+  - Nebulae default to seed-only cloud randomization, reducing replication load
+  - Add OptionsMenu toggles for nebula fog, dynamic lighting
+- Refactor OptionsMenu
+  - Use a single-column GuiScrollContainer instead of multiple columns
+  - Use consistent header styling and selector tabs
+  - Split i18n keys
+  - Consistently apply layout padding and formatting
+- Refactor GuiTextEntry for multiline input and autoscroll support
+- LuaConsole refactored
+  - LuaConsole now uses GuiScrollContainer for output
+  - LuaConsole output selection and copying restored
+  - LuaConsole output lines now wrap to fit
+  - LuaConsole now supports multiline text on GuiTextEntry
+- Science screen hides empty tabs and sidebar key/value fields without values
+- Theme files support `display_name` display metadata for OptionsMenu theme selector
+- Language selector disabled in OptionsMenu when serving a scenario, to prevent scenario/UI language drift
+- `metricsserver` preference renamed to `metrics_server` for consistency
+- Scenarios reorganized
+  - Training: Cruiser scenario renumbered per convention
+  - Replayable Mission scenario category renamed to "Replayable"
+- Scenario fixes
+  - `getSectorName()` used instead of hardcoded sector names in scenarios and scripts
+- PanelBackground transparent padding removed from default theme's sprite
+- Beam weapons can now target non-friendly entities, not only hostiles
+
+### Fixed
+
+- GuiScrollContainer no longer exhibits first-frame layout flicker
+- Utility Beam controls now appear on default Science screen when UtilityBeam component is added to a player ship mid-game
+- Tooltip no longer renders in unusual or persistent locations on button hold/release
+- ThreatLevelEstimate more correctly influences music selection and looping
+- French i18n fixes
+- Line rendering selector options no longer transposed
+- Component description is now correct upon direct GM Tweak page open (i.e. Database editor)
+- GuiScrollContainer layout with `verticalbottom` children no longer breaks GuiScrollContainer scrolling
+- GuiContainer::cleanTree() no longer leaves dangling scroll container pointers
+- Push the Payload scenario fixes
+  - Artifact pickup fixed for ECS in Push the Payload scenario
+  - Player detection and crash on PlayerShip destruction in Push the Payload
+  - Remove unmanaged Coolant component from CpuShip spawns using PlayerShip templates in Push the Payload to prevent ship systems from overheating
+- Kessler scenario end-of-line semicolons removed to prevent script breakage
+- DebugRenderer click capture bounding issues removed by move to GuiResizableDialog
+- `metrics_server` port validity now checked
 
 ## [2026-06]
 
-### Added
+### New features
 
 - Nebula rendering overhaul: volumetric fog, dynamic lighting, particle dithering, entity occlusion, configurable draw distance
-- Collision damage tunable via ShipSelection setting
-- Beam weapon autofire toggle
-- Beam safety replication
-- Scanner ShipSystem affects scanning speed, drone sensor range, and shared radar ranges
-- DockingBayScreen supply drop system with berth management
-- Remote GM (limited)
-- Omega `retro_` font line_height theme support
+  - Default behavior is a significant gameplay change; nebulae are no longer see-through, eyeballs are no longer more powerful than radar, instruments required to fight/navigate through nebulae
+- Collision damage, factor tunable via ShipSelection setting; defaults to 0/off
+- Beam weapon autofire/safety toggle, allows disabling firing of beam weapons at valid targets
+- Scanner ShipSystem affects radar range, scanning speed, drone sensor range, and shared radar ranges
+- DockingBayScreen supply drop creation and stocking system with berth management
+- Limited remote GM prototype (entity movement, editing of remote-exposed properties)
+- Font line_height supported in themes
 - GuiElement constants for consistent row, label, and padding/margin sizes
-- GuiButtonTweak for onDraw status updates
-- Client latency simulation controls for servers
-- Science screen incoming-threat indicators: "Missile" and "Beam" panels visible on the science radar when an entity's homing missile or in-range beam weapon is targeting the player
+- Client latency simulation controls for servers in DebugRenderer, adds flat 250ms delay randomized 0-250ms delay on outgoing packets
+- Science screen missile/beam lock indicators, visible when an entity's homing missile or in-range beam weapon is actively targeting the player
 - Server setting to show missiles on long-range radar (off by default, preserving original gameplay)
 - Scenario selection button shows "Configure" instead of "Start" for scenarios with config steps
 - Crew position requirement checks consolidated into `CrewPositionRequirements` class
 - ShipSelectionScreen describes most recently clicked crew screen
 - Server/UDP port change available from server creation screen
 - Script descriptions expanded and formatted on TutorialMenu
-- Alert overlay background pulse/stretch animation
-- Menu screen titles added and refactored (Server Browse, Options, Tutorial)
-- Scenario categories available for translation
+- Refactor alert overlay
+  - Background image now stretches as a 9-segment texture
+  - Transparency pulses
+  - Alert overlay now rendered on all screens, including Relay/Strategic Map
+- Menu screen titles added and refactored
+- Scenario categories made available to translation
 
 ### Changed
 
-- Shield hit effect with new texture and mesh-based implementation
-- Zone entity transform visualization and documentation
-- Sector naming refactor (numeric 100x100 grids in Lua)
-- GuiToggleButton on-state style
-- GuiEntityInfoPanel theme styles
-- Renamed "crew station" to "crew screen" throughout
-- Renamed `altRelay` to `BriefingOfficer`, `briefingOfficer` crew roles
-- Weapons screens (Tactical, Weapons, BeamWeapons, MissileWeapons) refactored layout, added shields display
-- Spectator map renamed, "(view all)" suffix removed
-- `CrewStationScreen` refactored into `crewScreen`, crew screen selector placed in `GuiScrollContainer`
+- Rewrite pathfinding system rewritten
+  - A* grid search with line-of-sight smoothing replaces recursive binary-detour planner, improving route quality around clustered obstacles
+  - Obstacle registration uses flat spatial list instead of big/small entity classification
+  - AvoidObject internal state enum and position_hash removed
+- Shield hit effect now uses ship mesh instead of generic sphere, with new texture
+- Update themes
+  - GuiToggleButton on-state style now applied
+  - GuiEntityInfoPanel theme styles now applied
+- Deprecate `altRelay` role name in favor of `strategicMap`; alias retained for compatibility
+- Refactor Weapons screens' (Tactical, Weapons, BeamWeapons, MissileWeapons) layouts
+- Refactor `CrewStationScreen`
+  - Renamed "crew station" to "crew screen" throughout, including `CrewStationScreen` to `CrewScreen`, to avoid ambiguity with space stations
+  - Crew screen selector placed in `GuiScrollContainer`, for rare cases where more are selected than will fit on the screen
 - `TutorialMenu` refactored into two-column layout using layout properties
 - ShipSelectionScreen and playerInfo code reformatted
 - Alert overlay converted to `DrawStretchedHV`, full-screen color multiply removed
-- cpp translation keys migrated to Lua equivalents
-- Translation PO files swept of deleted cpp strings
+- Update i18n implementation
+  - Redundant/legacy C++-defined translation keys migrated to canonical Lua equivalents
+  - Translation PO files swept of deleted C++-defined strings
+  - French science_db and PO file corrections
 - RED/YELLOW ALERT no longer uppercased
-- Header guard `#ifdef` blocks replaced with `#pragma once`
-- Forward declarations audited and cleaned up
-- Station space setup in Surf's Up replaced with util script
-- Various Xansta util and scenario scripts cleaned up
-- French science_db and PO file corrections
-- Pathfinding system rewritten: A* grid search with line-of-sight smoothing replaces recursive binary-detour planner, improving route quality around clustered obstacles; obstacle registration uses flat spatial list instead of big/small entity classification; AvoidObject internal state enum and position_hash removed
+- Update scenarios
+  - Station space setup in Surf's Up scenario replaced with util script
+  - Xansta util and scenario scripts cleaned up
+- GM Tweak button state now updates every frame
 
 ### Fixed
 
-- Fighter AI strafing runs now fly directly at the target on initial approach (bypassing pathfinding avoidance) until the ship has fired or closed within beam range, ensuring beam weapons get on target before evasion kicks in
-
-- Theme offset application
-- Radar trace radius synced to physics radius on asteroid update
+- Fighter AI strafing runs now fly directly at the target on initial approach (bypassing pathfinding avoidance) until the ship has fired or closed within beam range, ensuring beam weapons get on target before collision evasion kicks in
+- Theme font offset now correctly applied
+- Asteroid radar trace radius once again synced to physics radius
 - GuiScrollContainer tree explicit cleanup
-- GL_SCISSOR_TEST state tracking in GuiRenderedModelSprite
-- Space station entry population in ScienceDatabase
-- Missile targeting across screens for new targeting modes
-- Zone transform position when modifying points via GM Tweak
-- 0-size rooms in InternalCrewSystem
-- PackResourceProvider string reading
-- CrewPosition MAX limit reduced to 30 for 32-bit mask
+- GuiRenderedModelSprite correctly tracks GL_SCISSOR_TEST state
+- Space station entries now populated as expected in ScienceDatabase
+- Zone transform positions update correctly when moved on GM Tweak
+- Prevent 0-size rooms in InternalCrewSystem
+- CrewPosition MAX limit reduced to 30 to fit 32-bit mask
 - HardwareController invalid effect setting handling
-- GuiTheme getter null return for undefined themes/styles
-- AdvancedScrollText bounds handling
-- Comms message row taking up space when hidden
-- Broken French science_db translation (key collision)
-- Missing numeric type check in science_db values
-- Executable permission restored on scripts and resources
-- Scenario names, descriptions, and settings not updating when changing the interface language: cache is now invalidated and all locale files are reloaded on language change
+- Avoid GuiTheme getter null return for undefined themes/styles
+- AdvancedScrollText bounds handling updated to prevent cutoffs of final line
+- Relay's comms message row no longer takes up space on Strategic Map screen, where it's hidden
+- Several keys no longer collide on French science_db translation
+- Added missing numeric type check in science_db values
+- Unix permissions fixed on scripts and resources
+- Scenario names, descriptions, and settings now update when changing the interface language
 
 ## [2026-05]
 
@@ -86,18 +182,19 @@
 - Internal docking as managed berths fully implemented
 - PlayerControl `allowed_positions` settable via Lua
 - Zone transform visualized on GM radar
+- Larger color palette for debug renderer time series chart
 
 ### Changed
 
-- Cinematic camera modes polished with auto-zoom and target tracking
-- GuiScrollContainer replaces GuiScrollText / GuiScrollFormattedText
+- GuiScrollContainer replaces GuiScrollText/GuiScrollFormattedText
 - DatabaseViewComponent refactored with persistent scroll position
-- Sector naming moved to Lua with numeric 100x100 grids
+- Refactor sector naming
+  - Sector naming conventions are now defined via Lua and can be changed by scenarios
+  - Default sector naming now uses numeric 100x100 grids (`50-50`) instead of letter-number (`F4`). Internal coords 0,0 are now at top-left of sector 50-50.
 
 ### Fixed
 
 - Missile types restored to science DB
-- Debug renderer time series chart with larger color palette
 - Autoconnect off-by-one (#2873)
 
 ## [2026-04]
@@ -105,16 +202,28 @@
 ### Added
 
 - Strategic Map view to main screen (#2175)
+- Rewritten cinematic camera
+  - Redesigned fly-by and top-down modes
+  - New modes: Orbital, chase, isometric,
+  - New modifiers: Auto-zoom, auto-cycling camera modes
+  - Target-of-target tracking revised and made available to all modes
+  - Separate Top-down View screen removed as redundant
+- Internal docking redesigned as managed berths
+  - Docking Bay crew screen manages storage, berth assignment, launching, repair, resupply of internally docked ships
+  - Berths can be defined via script or use a default group
+- Extra crew screens
+  - Drone Operations, control ships with drone control component
+  - Missile Weapons and Beam Weapons screens split from Weapons
+  - Target Analysis, shows Science details and model of linked entity
+  - Probe Camera, 3D viewport of linked probe with rotational controls
+- Modulated emissive texture shader support
+- GM Screen features
+  - Waypoint management on GM screen (routes, sets)
+  - GM screenScreen time scale selector (1x, 2x, 4x, 8x)
+- HackingTarget component, to track when a screen has selected a hackable target
+- Scriptable hacking difficulty allows per-entity deviation from server setting
+- DB link button for faction key/values on Science scan target
 - Science, Relay, Operations keybinds
-- New cinematic camera modes: fly-by, orbital, chase, isometric, top-down with mouselook, auto-zoom, target-of-target tracking
-- Docking redesigned as managed berths (DockingBayScreen, supply drops)
-- Extra crew screens: DroneOperations, MissileWeapons, BeamWeapons, Target Analysis, Probe Camera
-- Modulated illumination shader support
-- Waypoint management on GM screen (routes, sets)
-- Screen time scale selector
-- HackingTarget component
-- Scriptable hacking difficulty
-- DB button for faction key/values on Science scan target
 
 ### Changed
 
