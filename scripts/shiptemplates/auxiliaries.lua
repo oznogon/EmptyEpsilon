@@ -1,12 +1,11 @@
---[[                  Auxiliaries
-Auxiliary ships provide non-combat support roles: freighters, transports,
-tugs, and other vessels that supply, repair, and move materiel.
-They are generally lightly armed or unarmed and rely on escorts
-for protection in hostile space.
-----------------------------------------------------------]]
+--[[ Auxiliaries
+
+Auxiliary ships fill non-combat support roles. This includes freighters,
+transports, tugs, and other vessels that supply, repair, and move materiel.
+They are generally lightly armed or unarmed and rely on escorts for protection.
+]]
 
 -- Freighters
-
 for cnt = 1, 5 do
     local template = ShipTemplate()
         :setName("Personnel Freighter " .. cnt)
@@ -40,7 +39,7 @@ for cnt = 1, 5 do
         :setModel("transport_2_" .. cnt)
         :setDescription(
             _(
-                [[Cargo freighters haul large loads of cargo across long distances on impulse power. Their cargo bays include climate control and stabilization systems that keep the cargo in good condition.]]
+                [[Cargo freighters haul large loads across long distances on impulse power. Their cargo bays include climate control and stabilization systems that keep the cargo in good condition.]]
             )
         )
         :setHull(100)
@@ -136,87 +135,6 @@ end
 
 -- Transports
 
--- Jump Carrier
-local template = ShipTemplate()
-    :setName("Jump Carrier")
-    :setLocaleName(_("ship", "Jump Carrier"))
-    :setClass(_("class", "Auxiliary"), _("subclass", "Transport"))
-    :setModel("transport_4_2")
-    :setDescription(
-        _(
-            [[The Jump Carrier is a specialized freighter. Its cargo bay is replaced with a jump drive and the energy storage required to run it.
-Rather than carrying cargo, the Jump Carrier is designed to carry other ships deep into space. It accordingly has special docking parameters that allow other ships to attach themselves to it.]]
-        )
-    )
-    :setHull(100)
-    :setShields(50, 50)
-    :setSpeed(50, 6, 10)
-    :setRadarTrace("transport.png")
-    :setJumpDrive(true)
-    :setJumpDriveRange(5000, 100 * 50000)
-    :setExternalDockClasses(_("class", "Frigate"), _("class", "Destroyer"))
-    :setInternalDockClasses(_("class", "Starfighter"), _("class", "Cargo"))
-    :setDefaultAI("evasion")
-
--- Benedict
-local variation = template
-    :copy("Benedict")
-    :setLocaleName(_("playerShip", "Benedict"))
-    :setType("playership")
-    :setClass(_("class", "Auxiliary"), _("subclass", "Transport"))
-variation
-    :setDescription(
-        _(
-            [[The Benedict is an improved version of the Jump Carrier.]]
-        )
-    )
-    :setShields(70, 70)
-    :setHull(200)
-    :setSpeed(60, 6, 8)
-    :setBeam(0, 10, 0, 1500.0, 6.0, 4)
-    :setBeam(1, 10, 180, 1500.0, 6.0, 4)
-    :setBeamWeaponTurret(0, 90, 0, 6)
-    :setBeamWeaponTurret(1, 90, 180, 6)
-    :setCombatManeuver(400, 250)
-    :setJumpDriveRange(5000, 90000)
-    :setRepairCrewCount(6)
-    :addRoomSystem(3, 0, 2, 3, "Reactor")
-    :addRoomSystem(3, 3, 2, 3, "Warp")
-    :addRoomSystem(6, 0, 2, 3, "JumpDrive")
-    :addRoomSystem(6, 3, 2, 3, "MissileSystem")
-    :addRoomSystem(5, 2, 1, 2, "Maneuver")
-    :addRoomSystem(2, 2, 1, 2, "RearShield")
-    :addRoomSystem(0, 1, 2, 4, "Beamweapons")
-    :addRoomSystem(8, 2, 1, 2, "FrontShield")
-    :addRoomSystem(0, 0, 1, 1, "DockingBay")
-    :addRoomSystem(9, 1, 2, 4, "Impulse")
-    :addDoor(0, 1, true)
-    :addDoor(3, 3, true)
-    :addDoor(6, 3, true)
-    :addDoor(5, 2, false)
-    :addDoor(6, 3, false)
-    :addDoor(3, 2, false)
-    :addDoor(2, 3, false)
-    :addDoor(8, 2, false)
-    :addDoor(9, 3, false)
-
--- Kiriya
-local var2 = variation
-    :copy("Kiriya")
-    :setLocaleName(_("playerShip", "Kiriya"))
-var2
-    :setDescription(
-        _(
-            [[The Kiriya is an improved warp-drive version of the Jump Carrier.]]
-        )
-    )
-    :setBeam(0, 10, 0, 1500.0, 6.0, 4)
-    :setBeam(1, 10, 180, 1500.0, 6.0, 4)
-    :setBeamWeaponTurret(0, 90, 0, 6)
-    :setBeamWeaponTurret(1, 90, 180, 6)
-    :setJumpDrive(false)
-    :setWarpSpeed(750)
-
 -- Generic transports
 for type = 1, 5 do
     for cnt = 1, 5 do
@@ -235,7 +153,7 @@ for type = 1, 5 do
     end
 end
 
--- Light Transports (Frigate-sized)
+-- Light transports
 
 -- Flavia
 template = ShipTemplate()
@@ -261,14 +179,14 @@ variation = template
 variation
     :setDescription(
         _(
-            [[The Flavia Falcon is a Flavia transport modified for faster flight, and adds rear-mounted lasers to keep enemies off its back.]]
+            [[The Flavia Falcon is a variant of the Flavia small transport modified for faster flight, and adds rear-mounted beam weapons to keep enemies off its back.]]
         )
     )
     :setSpeed(50, 8, 10)
     :setBeam(0, 40, 170, 1200.0, 6.0, 6)
     :setBeam(1, 40, 190, 1200.0, 6.0, 6)
 
--- Flavia P.Falcon
+-- Flavia P.Falcon (PlayerControl variant)
 variation = variation
     :copy("Flavia P.Falcon")
     :setLocaleName(_("playerShip", "Flavia P.Falcon"))
@@ -276,7 +194,7 @@ variation = variation
 variation
     :setDescription(
         _(
-            [[The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp drive.]]
+            [[The Flavia P.Falcon is a variant of the Flavia Falcon, and adds a nuclear-capable rear-facing weapon tube and warp drive to its improved impulse engine and rear-facing beam weapons.]]
         )
     )
     :setHull(100)
@@ -315,7 +233,7 @@ variation
     :addDoor(5, 5, true)
     :addDoor(6, 5, true)
 
--- Repulse
+-- Repulse (PlayerControl ship)
 template = ShipTemplate()
     :setName("Repulse")
     :setLocaleName(_("playerShip", "Repulse"))
@@ -323,7 +241,11 @@ template = ShipTemplate()
     :setModel("LightCorvetteRed")
     :setType("playership")
     :setRadarTrace("tug.png")
-    :setDescription(_("Jump/Turret version of Flavia Falcon"))
+    :setDescription(
+        _(
+            [[The Repulse is an armed and armored transport ship based on the popular Flavia design. Despite its bolstered shields and hull, it remains faster than a stock Flavia, or even the Flavia Falcon, but is slightly slower than the Flavia P.Falcon variant.]]
+        )
+    )
     :setHull(120)
     :setShields(80, 80)
     :setSpeed(55, 9, 10)
@@ -363,7 +285,6 @@ template = ShipTemplate()
     :addDoor(10, 2, false)
 
 -- Tugs
-
 -- Hylas
 template = ShipTemplate()
     :setName("Hylas")
@@ -371,6 +292,11 @@ template = ShipTemplate()
     :setClass(_("class", "Auxiliary"), _("subclass", "Tug"))
     :setModel("space_tug")
     :setRadarTrace("tug.png")
+    :setDescription(
+        _(
+            [[The Hylas is an unarmed tugboat with a powerful short-range tractor beam capable of moving much larger ships through gravity-field manipulation. It's nimble on its own and lightly shielded to avoid taking damage from collisions with larger ships, but it's otherwise defenseless.]]
+        )
+    )
     :setHull(50)
     :setShields(20)
     :setSpeed(100, 10, 15)
@@ -385,7 +311,7 @@ variation = template
 variation
     :setDescription(
         _(
-            [[The Heracles tug model is a Hylas suited for carrier use in deep-space operations. Improvements include a stronger hull, minimal shield system, full sensor suite, and a shield-disrupting beam for use on abandoned hostile or unknown ships.]]
+            [[The Heracles tug model is a Hylas suited for carrier use in deep-space operations. Improvements include a stronger hull, bolstered shield, full sensor suite, and a shield-disrupting beam for use in boarding operations, salvaging abandoned vessels, or investigating unknown ships.]]
         )
     )
     :setShields(100)
@@ -401,7 +327,7 @@ variation
     :addRoomSystem(6, 3, 2, 1, "UtilityBeam")
     :addRoom(6, 4, 2, 1)
     :addRoomSystem(8, 3, 1, 2, "FrontShield")
-    :addRoom(2, 5, 2, 1)
+    :addRoomSystem(2, 5, 2, 1, "Sensors")
     :addRoomSystem(1, 6, 2, 1, "MissileSystem")
     :addRoomSystem(1, 7, 2, 1, "Impulse")
     :addDoor(1, 1, true)

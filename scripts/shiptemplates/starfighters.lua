@@ -1,14 +1,16 @@
---[[ Starfighter templates
+--[[ Starfighters
 
 Starfighters are small ships most commonly used in light firepower roles.
 
-Fighters have crews of 1 to 3 and lack long-term life support for extended missions, requiring a nearby station or carrier. They're commonly deployed in larger groups, and most have a single shield segment and light armaments.
+Fighters have crews of 1 to 3. They lack long-term life support and require a
+nearby station or carrier for extended deployments. They're commonly deployed
+in larger groups, and most have a single shield segment and light armaments.
 
-Starfighters come in 3 subclasses:
+Starfighters come in the following subclasses:
 
-- Interceptors: Fast. Low on firepower, high on maneuverability.
+- Interceptors: Fast, lightly armed, very maneuverable.
 - Gunship: Equipped with more weapons at the expense of maneuverability.
-- Bomber: Slowest of all starfighters, but packs a larger punch. While typically lacking any beam weapons, larger bombers can deliver nukes.
+- Bomber: Slowest among starfighters, but packs a larger punch. While typically lacking any beam weapons, larger bombers can deliver nukes.
 ]]
 
 -- MT52 Hornet
@@ -20,7 +22,7 @@ local template = ShipTemplate()
     :setRadarTrace("fighter.png")
     :setDescription(
         _(
-            [[The MT52 Hornet is a basic interceptor found in many corners of the galaxy. It's easy to find spare parts for MT52s, not only because they are produced in large numbers, but also because they suffer high losses in combat.]]
+            [[The MT52 Hornet is a basic interceptor-class starfighter found in many corners of the galaxy. It's easy to find spare parts for MT52s, not only because they're produced in large numbers, but also because they suffer high losses in combat.]]
         )
     )
     :setHull(30)
@@ -36,7 +38,7 @@ local variation = template
     :setModel("WespeScoutRed")
     :setDescription(
         _(
-            [[The MU52 Hornet is a new, upgraded version of the MT52. All of its systems are slightly improved over the MT52 model.]]
+            [[The MU52 Hornet is an upgraded version of the MT52 interceptor-class starfighter. All of its systems are slightly improved over the MT52 model.]]
         )
     )
     :setHull(35)
@@ -51,7 +53,7 @@ variation = variation
     :setType("playership")
     :setDescription(
         _(
-            [[The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength, nearly three times the shielding, better acceleration, impulse boosters, and a second laser cannon.]]
+            [[The MP52 Hornet is a significantly upgraded version of MU52 Hornet interceptor-class starfighter, with nearly twice the hull strength, nearly three times the shielding, better acceleration, impulse boosters, and a second laser cannon.]]
         )
     )
     :setImpulseSoundFile("sfx/engine_fighter.wav")
@@ -93,7 +95,9 @@ template = ShipTemplate()
     :setRadarTrace("fighter.png")
     :setDescription(
         _(
-            [[The Adder line's fifth iteration proved to be a great success among pirates and law officers alike. It is cheap, fast, and easy to maintain, and it packs a decent punch.]]
+            [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
+        ) .. " " .. _(
+            [[The Adder MK5 has proven to be a great success amongst pirates and system patrols alike. It's cheap, fast, easy to maintain, and packs a decent punch.]]
         )
     )
     :setHull(50)
@@ -113,7 +117,9 @@ variation = template
     :setModel("AdlerLongRangeScoutBlue")
     :setDescription(
         _(
-            [[The mark 4 Adder is a rare sight these days due to the success its successor, the mark 5 Adder, which often replaces this model. Its similar hull, however, means careless buyers are sometimes conned into buying mark 4 models disguised as the mark 5.]]
+            [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
+        ) .. " " .. _(
+            [[The Adder MK4 is a rare sight these days due to the success its successor, the Adder MK5, which often replaces this model. Its similar hull, however, means careless buyers are sometimes conned into buying mark 4 models disguised as the mark 5.]]
         )
     )
     :setHull(40)
@@ -129,7 +135,9 @@ var2 = variation
     :setLocaleName(_("ship", "Adder MK3"))
     :setDescription(
         _(
-            [[The Adder MK3 is one of the first of the Adder line to meet with some success. A large number of them were made before the manufacturer went through its first bankruptcy. There has been a recent surge of purchases of the Adder MK3 in the secondary market due to its low price and its similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 has weaker shields and hull, but a faster turn speed]]
+            [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
+        ) .. " " .. _(
+            [[The Adder MK3 is one of the first of the Adder line to meet with some success, and many were made before the manufacturer went through its first bankruptcy. Its low price and similarity to subsequent models has led to a resurgence of secondhand sales of the mark 3 model. Compared to the Adder MK4, the mark 3 has weaker shields and hull, but a faster turning rate.]]
         )
     )
     :setHull(35)
@@ -143,7 +151,9 @@ variation = template
     :setModel("AdlerLongRangeScoutRed")
     :setDescription(
         _(
-            [[The mark 6 Adder is a small upgrade compared to the highly successful mark 5 model. Since people still prefer the more familiar and reliable mark 5, the mark 6 has not seen the same level of success.]]
+            [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
+        ) .. " " .. _(
+            [[The Adder MK6 is a small upgrade compared to the highly successful Adder MK5. Since people still prefer the more familiar and reliable mark 5, the mark 6 hasn't seen the same level of success.]]
         )
     )
     :setBeam(3, 35, 180, 600, 6.0, 2.0)
@@ -156,7 +166,9 @@ var2 = variation
     :setModel("AdlerLongRangeScoutGreen")
     :setDescription(
         _(
-            [[The release of the Adder Mark 7 sent the manufacturer into a second bankruptcy. They made improvements to the Mark 7 over the Mark 6 like stronger shields and longer beams, but the popularity of their previous models, especially the Mark 5, prevented them from raising the purchase price enough to recoup the development and manufacturing costs of the Mark 7]]
+            [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
+        ) .. " " .. _(
+            [[The release of the Adder MK7 sent the manufacturer into a second bankruptcy. Despite stronger shields and longer beam ranges, the popularity of previous models (especially the Adder MK5) prevented them from raising the purchase price enough to recoup the mark 7's development and manufacturing costs.]]
         )
     )
     :setShields(40)
@@ -169,7 +181,9 @@ variation = template
     :setModel("AdlerLongRangeScoutGreen")
     :setDescription(
         _(
-            [[New management after bankruptcy revisited their most popular Adder Mark 5 model with improvements: stronger shields, longer and stronger beams and a faster turn speed. Thus was born the Adder Mark 8 model. Targeted to the practical but nostalgic buyer who must purchase replacements for their Adder Mark 5 fleet]]
+            [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
+        ) .. " " .. _(
+            [[After replacing its management, the Adder MK8 returned to the roots of its most popular Adder MK5 model with modernized shields, longer-ranged and stronger beam weapons, and a faster turning rate. The mark 8 targeted practical but nostalgic buyers replacing their mark 5 hardware.]]
         )
     )
     :setShields(50)
@@ -183,7 +197,9 @@ variation = template
     :setModel("AdlerLongRangeScoutRed")
     :setDescription(
         _(
-            [[Hot on the heels of the Adder Mark 8 comes the Adder Mark 9. Still using the Adder Mark 5 as a base, the designers provided stronger shields, stronger, longer and faster beams, faster turn speed and for that extra special touch, two nuclear missiles. As their ad says, 'You'll feel better in an Adder Mark 9.']]
+            [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
+        ) .. " " .. _(
+            [[The Adder MK9 quickly followed the Adder MK8. While still using the popular Adder MK5 as a base, the designers further strengthened its shields, increased the beam weapons' fire rate and thrusters' turning rate, and storage for two nuclear missiles.]]
         )
     )
     :setShields(50)
@@ -212,8 +228,10 @@ template = ShipTemplate()
     :setTubeSize(0, "small")
     :setTubeSize(1, "small")
     :setTubeSize(2, "small")
-    :setTubeDirection(1, 1):setWeaponTubeExclusiveFor(1, "HVLI")
-    :setTubeDirection(2, -1):setWeaponTubeExclusiveFor(2, "HVLI")
+    :setTubeDirection(1, 1)
+    :setWeaponTubeExclusiveFor(1, "HVLI")
+    :setTubeDirection(2, -1)
+    :setWeaponTubeExclusiveFor(2, "HVLI")
 
 -- ZX-Lindworm (PlayerControl variant)
 variation = template
@@ -223,7 +241,7 @@ variation = template
     :setType("playership")
     :setDescription(
         _(
-            [[The ZX-Lindworm is a vastly improved version of the WX-Lindworm, with an additional beam weapon, more missiles, tougher hull, faster engine, and more agile thrusters.]]
+            [[The ZX-Lindworm is a vastly improved version of the WX-Lindworm bomber-class starfighter, with an additional beam weapon, more missiles, tougher hull, faster engine, and more agile thrusters.]]
         )
     )
     :setHull(75)
@@ -233,14 +251,12 @@ variation = template
     :setTubeSize(0, "small")
     :setTubeSize(1, "small")
     :setTubeSize(2, "small")
-
     :setWeaponStorage("HVLI", 12)
     :setWeaponStorage("Homing", 3)
     :setBeam(0, 10, 180, 700, 6.0, 2)
     :setBeamWeaponTurret(0, 270, 180, 4)
     :setCombatManeuver(250, 150)
     :setEnergyStorage(400)
-
     :setRepairCrewCount(1)
     :addRoomSystem(0, 0, 1, 3, "RearShield")
     :addRoomSystem(1, 1, 3, 1, "MissileSystem")
@@ -252,7 +268,6 @@ variation = template
     :addRoomSystem(3, 4, 2, 1, "Maneuver")
     :addRoomSystem(1, 5, 3, 1, "FrontShield")
     :addRoomSystem(4, 5, 2, 1, "DockingBay")
-
     :addDoor(1, 1, false)
     :addDoor(1, 5, false)
     :addDoor(3, 2, true)

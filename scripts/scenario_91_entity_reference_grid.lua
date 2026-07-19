@@ -136,7 +136,7 @@ function init()
     -- ==========================
     local s_idx = 0
 
-    -- starFighters.lua
+    -- starfighters.lua
     s_idx = s_idx + 1
     CpuShip()
         :setTemplate("MT52 Hornet")

@@ -2,7 +2,19 @@
 
 Frigates are generally larger than corvettes and smaller than destroyers, with 2 to 4 shield segments.
 
-This class of vessel typically lacks FTL propulsion unless specialized for a role that requires it.
+This class of vessel often lacks FTL propulsion unless specialized for a role that requires it.
+
+Frigates come in the following subclasses:
+
+- Patrol: Self-sufficient ships that use their sensors to detect threats and
+  either engage or call in larger reinforcements.
+- Anti-fighter: Escort frigates with point-defense beams to clear the area
+  around larger ships or convoys of missile and starfighter threats.
+- Artillery: Missile batteries that engage at long range, but often rely on
+  other ships for defensive support.
+- Sniper: Uses a long-range beam weapon to quickly burn down less-mobile
+  targets.
+- Strike: Uses FTL propulsion to quickly strike a target and retreat.
 ]]
 
 -- Phobos T3
@@ -35,7 +47,7 @@ local variation = template
 variation
     :setDescription(
         _(
-            [[Inspired by the Phobos T3 design, the Elara P2 adds a warp drive and stronger front shields.]]
+            [[Inspired by the Phobos T3's design, the Elara P2 adds a warp drive and stronger front shields.]]
         )
     )
     :setWarpSpeed(800)
@@ -119,9 +131,9 @@ template = ShipTemplate()
     :setRadarTrace("cruiser.png")
     :setDescription(
         _(
-            [[The Nirvana R5 is an anti-fighter frigate with several rapid-firing, low-damage point-defense weapons to quickly take out starfighters.
-            
-            Compared to the older, rarer Nirvana R3, it has longer beam range, stronger shields and hull, and a faster impulse drive. Its successor, the R5A, has a faster turning speed and firing rates.]]
+            [[The Nirvana series of anti-fighter frigates have several rapid-firing, low-damage point-defense weapons to quickly take out starfighters.]]
+        ) .. " " .. _(
+            [[Compared to the older, rarer Nirvana R3, it has longer beam range, stronger shields and hull, and a faster impulse drive. Its successor, the R5A, has a faster turning speed and firing rates.]]
         )
     )
     :setBeamWeapon(0, 90, -15, 1200, 3, 1)
@@ -139,6 +151,8 @@ variation = template
 variation
     :setDescription(
         _(
+            [[The Nirvana series of anti-fighter frigates have several rapid-firing, low-damage point-defense weapons to quickly take out starfighters.]]
+        ) .. " " .. _(
             [[This improved version of the Nirvana R5 has a faster turning speed and firing rates.]]
         )
     )
@@ -155,7 +169,9 @@ variation = template
 variation
     :setDescription(
         _(
-            [[The Nirvana R3 is an anti-fighter frigate with several rapid-firing, low-damage point-defense weapons to quickly take out starfighters. Compared to the newer, more common Nirvana R5, it has shorter beams, weaker shields and hull, and a slower impulse drive.]]
+            [[The Nirvana series of anti-fighter frigates have several rapid-firing, low-damage point-defense weapons to quickly take out starfighters.]]
+        ) .. " " .. _(
+            [[Compared to the newer, more common Nirvana R5, it has shorter beams, weaker shields and hull, and a slower impulse drive.]]
         )
     )
     :setBeamWeapon(0, 90, -15, 1000.0, 3, 1)
@@ -377,10 +393,10 @@ template
     :setRadarTrace("cruiser.png")
     :setDescription(
         _(
-            [[The Stalker line of strike ships are designed to swoop into battle, deal damage quickly, and get out fast. ]]
-        ) .. _(
-            [[The Q series is fitted with a warp drive. ]]
-        ) .. _(
+            [[Ships of the Stalker line are designed to swoop into battle, deal damage quickly, and get out fast.]]
+        ) .. " " .. _(
+            [[The Q series is fitted with a warp drive.]]
+        ) .. " " .. _(
             [[Compared to its predecessor, the Q5, the Q7 has stronger shields and hull but a slower turning rate.]]
         )
     )
@@ -398,10 +414,10 @@ variation = template
 variation
     :setDescription(
         _(
-            [[The Stalker line of strike ships are designed to swoop into battle, deal damage quickly, and get out fast. ]]
-        ) .. _(
-            [[The Q series is fitted with a warp drive. ]]
-        ) .. _(
+            [[Ships of the Stalker line are designed to swoop into battle, deal damage quickly, and get out fast.]]
+        ) .. " " .. _(
+            [[The Q series is fitted with a warp drive.]]
+        ) .. " " .. _(
             [[Compared to its successor, the Q7, the Q5 has weaker shields and hull but a faster turning rate.]]
         )
     )
@@ -416,10 +432,10 @@ variation = template
 variation
     :setDescription(
         _(
-            [[The Stalker line of strike ships are designed to swoop into battle, deal damage quickly, and get out fast. ]]
-        ) .. _(
-            [[The R series is fitted with a jump drive. ]]
-        ) .. _(
+            [[Ships of the Stalker line are designed to swoop into battle, deal damage quickly, and get out fast.]]
+        ) .. " " .. _(
+            [[The R series is fitted with a jump drive.]]
+        ) .. " " .. _(
             [[Compared to its predecessor, the R5, the R7 has stronger shields and hull but a slower turning rate.]]
         )
     )
@@ -433,10 +449,10 @@ var2 = variation
 var2
     :setDescription(
         _(
-            [[The Stalker line of strike ships are designed to swoop into battle, deal damage quickly, and get out fast. ]]
-        ) .. _(
-            [[The R series is fitted with a jump drive. ]]
-        ) .. _(
+            [[Ships of the Stalker line are designed to swoop into battle, deal damage quickly, and get out fast.]]
+        ) .. " " .. _(
+            [[The R series is fitted with a jump drive.]]
+        ) .. " " .. _(
             [[Compared to its successor, the R7, the R5 has weaker shields and hull but a faster turning rate.]]
         )
     )
@@ -470,12 +486,12 @@ template = ShipTemplate()
     :setName("Fiend G3")
     :setLocaleName(_("ship", "Fiend G3"))
     :setModel("battleship_destroyer_4_upgraded")
-    :setClass(_("class", "Frigate"), _("subclass", "Gunship"))
+    :setClass(_("class", "Frigate"), _("subclass", "Strike"))
     :setRadarTrace("adv_gunship.png")
     :setDescription(
         _(
             [[The first model produced by Conversions R Us, the Fiend G3 is simply a decommissioned gunship hull with a cheap FTL drive installed. It has the same homing missile tube and beams as a gunship to take down weaker ships, but its FTL drive makes it a more dangerous foe.]]
-        ) .. _(
+        ) .. " " .. _(
             [[The G3 is fitted with a jump drive.]]
         )
     )
@@ -497,7 +513,7 @@ variation
     :setDescription(
         _(
             [[The second model produced by Conversions R Us, the Fiend G4 is simply a decommissioned gunship hull with a cheap FTL drive installed. It has the same homing missile tube and beams as a gunship to take down weaker ships, but its FTL drive makes it a more dangerous foe.]]
-        ) .. _(
+        ) .. " " .. _(
             [[The G4 is fitted with a warp drive.]]
         )
     )
@@ -511,8 +527,8 @@ variation = variation
 variation
     :setDescription(
         _(
-            [[Following the success of the Fiend G3 and G4, the Fiend G6 is simply a decommissioned advanced gunship hull with a cheap FTL drive installed. It has the same two homing missile tubes and beams as an advanced gunship to take down weaker ships, but its FTL drive makes it a more dangerous foe.]]
-        ) .. _(
+            [[Following the success of the Fiend G3 and G4, the Fiend G5 and G6 are simply decommissioned advanced gunship hulls with a cheap FTL drive installed. It has the same two homing missile tubes and beams as an advanced gunship to take down weaker ships, but its FTL drive makes it a more dangerous foe.]]
+        ) .. " " .. _(
             [[The G6 is fitted with a warp drive.]]
         )
     )
@@ -525,8 +541,8 @@ variation = template
 variation
     :setDescription(
         _(
-            [[Following the success of the Fiend G3 and G4, the Fiend G6 is simply a decommissioned advanced gunship hull with a cheap FTL drive installed. It has the same two homing missile tubes and beams as an advanced gunship to take down weaker ships, but its FTL drive makes it a more dangerous foe.]]
-        ) .. _(
+            [[Following the success of the Fiend G3 and G4, the Fiend G5 and G6 are simply decommissioned advanced gunship hulls with a cheap FTL drive installed. It has the same two homing missile tubes and beams as an advanced gunship to take down weaker ships, but its FTL drive makes it a more dangerous foe.]]
+        ) .. " " .. _(
             [[The G6 is fitted with a jump drive.]]
         )
     )

@@ -1,4 +1,4 @@
---[[               Exuari Light Carriers
+--[[ Exuari light carriers
 Exuari carriers are large spacecraft with many defensive features.
 They serve as mobile bases for Exuari strike groups, carrying fighters,
 frigates, and supplies into battle. They are equipped with slow impulse
@@ -10,7 +10,7 @@ local template = ShipTemplate()
     :setName("Ryder")
     :setLocaleName(_("ship", "Ryder"))
     :setModel("Ender Battlecruiser")
-    :setClass(_("class", "Light Carrier"), _("subclass", "Escort"))
+    :setClass(_("class", "Light carrier"), _("subclass", "Escort"))
     :setRadarTrace("battleship.png")
     :setDescription(
         _(

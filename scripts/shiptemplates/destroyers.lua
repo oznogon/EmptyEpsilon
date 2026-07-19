@@ -1,8 +1,13 @@
---[[                  Destroyers
-Destroyers are larger combat-oriented ships. They pack significant firepower
-and shielding, and often carry jump drives for intersystem patrol.
-They generally have 4 or more shield sections and run with a crew of 50 to 250.
-----------------------------------------------------------]]
+--[[ Destroyers
+
+Destroyers are large combat-oriented ships, larger than a frigate and smaller
+than a battleship. Despite their size, destroyers focus on manueverability and
+endurance, and they often serve as escorts for carriers or battleships. They
+pack significant firepower and shielding, and many deploy FTL drives to function
+as intersystem patrol vessels.
+
+Destroyers have 2 or more shield sections and operate with a crew of 50 to 250.
+]]
 
 -- Atlantis X23
 local template = ShipTemplate()
@@ -10,12 +15,12 @@ local template = ShipTemplate()
     :setLocaleName(_("ship", "Atlantis X23"))
     :setClass(_("class", "Destroyer"), _("subclass", "Escort"))
     :setModel("battleship_destroyer_1_upgraded")
+    :setRadarTrace("dread.png")
     :setDescription(
         _(
-            [[The Atlantis X23 is the smallest model of destroyer, and its combination of frigate-like size and corvette-like power makes it an excellent escort ship when defending larger ships against multiple smaller enemies. Because the Atlantis X23 is fitted with a jump drive, it can also serve as an intersystem patrol craft.]]
+            [[The Atlantis X23 is the experimental predecessor of the production-model Atlantis destroyer. Compared to its successor, the X23 has stronger shields, less maneuverability, and a simpler weapons loadout.]]
         )
     )
-    :setRadarTrace("dread.png")
     :setHull(100)
     :setShields(200, 200, 200, 200)
     :setSpeed(30, 3.5, 5)
@@ -31,7 +36,7 @@ local template = ShipTemplate()
     :setTubeDirection(2, 90)
     :setTubeDirection(3, 90)
 
--- Atlantis
+-- Atlantis (PlayerControl variant)
 local variation = template
     :copy("Atlantis")
     :setLocaleName(_("playerShip", "Atlantis"))
@@ -39,7 +44,9 @@ local variation = template
 variation
     :setDescription(
         _(
-            [[A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]]
+            [[The Atlantis is the smallest model of destroyer, and its combination of frigate-like size and destroyer-like power makes it an excellent escort for larger ships facing multiple smaller enemies. Because the Atlantis is fitted with a jump drive, it can also serve as an intersystem patrol craft.
+
+The production-model Atlantis replaced its experimental X23 predecessor's large shield system with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse, including nukes, EMP missiles, and a dedicated mine-laying tube.]]
         )
     )
     :setShields(200, 200)
@@ -111,7 +118,7 @@ template = ShipTemplate()
     :setWeaponStorage("EMP", 2)
     :weaponTubeDisallowMissle(1, "EMP")
 
--- Crucible
+-- Crucible (PlayerControl ship)
 template = ShipTemplate()
     :setName("Crucible")
     :setLocaleName(_("playerShip", "Crucible"))
@@ -120,7 +127,7 @@ template = ShipTemplate()
     :setType("playership")
     :setDescription(
         _(
-            [[The Crucible bears a number of missile tubes around its hull. Beams were deemed lower priority, though they are still present. It has stronger defenses than a frigate, but not as strong as the Atlantis.]]
+            [[The Crucible has several missile tubes positioned around its hull. Beams were deemed lower priority, though they are still present. It has stronger defenses than a frigate, but not as strong as the Atlantis.]]
         )
     )
     :setRadarTrace("laser.png")
@@ -173,7 +180,7 @@ template = ShipTemplate()
     :addDoor(9, 2, true)
     :addDoor(10, 4, true)
 
--- Maverick
+-- Maverick (PlayerControl ship)
 template = ShipTemplate()
     :setName("Maverick")
     :setLocaleName(_("playerShip", "Maverick"))
@@ -182,7 +189,7 @@ template = ShipTemplate()
     :setType("playership")
     :setDescription(
         _(
-            [[A number of beams bristle from various points on this gunner. Weapon tubes were deemed lower priority, though they are still present. It has stronger defenses than a frigate, but not as strong as the Atlantis.]]
+            [[The Maverick has several beam weapons positioned around its hull, including a rear-facing turret to deter pursuers. Weapon tubes were deemed lower priority, though they are still present. It has stronger defenses than a frigate, but not as strong as the Atlantis.]]
         )
     )
     :setRadarTrace("laser.png")
