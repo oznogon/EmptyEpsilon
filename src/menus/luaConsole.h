@@ -36,6 +36,7 @@ public:
 
     void update(float delta) override;
     bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    using GuiCanvas::onTextInput;
     void onTextInput(sp::TextInputEvent e) override;
 private:
     std::vector<string> log_messages;
