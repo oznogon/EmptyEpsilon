@@ -1,15 +1,17 @@
---[[               Exuari Corvettes
-Exuari corvettes are non-warp capable ships used to defend bases,
+--[[ Exuari corvettes
+
+Exuari corvettes are ships without FTL capabilities used to defend bases,
 build the rear line in an assault, or deliver ordnance from a distance.
-They are larger than frigates but lack jump capability.
-----------------------------------------------------------]]
+They are larger than frigates.
+]]
 
 local template = ShipTemplate()
     :setName("Guard")
     :setLocaleName(_("ship", "Guard"))
     :setClass(_("class", "Corvette"), _("subclass", "Escort"))
-template:setModel("transport_1_1"):setRadarTrace("exuari_frigate_1.png")
-template:setDescription(
+    :setModel("transport_1_1")
+    :setRadarTrace("exuari_frigate_1.png")
+    :setDescription(
     _(
         [[The Exuari Guard is not impressive, trying to be a alround escort or defense vessel. It has powering problems, causing the reload cycle of beams and missiles to take longer than expected. The Guard is equipped with turret beams and a large stock of different missiles, including homing missiles and mines.]]
     )

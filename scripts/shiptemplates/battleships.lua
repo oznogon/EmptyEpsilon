@@ -5,15 +5,16 @@ its own subclass. They usually come with 6 or more shield sections
 and require a crew of 250+ to operate.
 ----------------------------------------------------------]]
 
+-- Odin
 local template = ShipTemplate()
     :setName("Odin")
     :setLocaleName(_("ship", "Odin"))
     :setClass(_("class", "Battleship"), _("subclass", "Dreadnought"))
     :setModel("space_station_2")
-template:setRadarTrace("largestation.png")
-template:setDescription(
-    _(
-        [[The Odin is a "ship" so large and unique that it's almost a class of its own.
+    :setRadarTrace("largestation.png")
+    :setDescription(
+        _(
+            [[The Odin is a "ship" so large and unique that it's almost a class of its own.
 
 The ship is often nicknamed the "all-father", a name that aptly describes the many roles this ship can fulfill. It's both a supply station and an extremely heavily armored and shielded weapon station capable of annihilating small fleets on its own.
 
@@ -22,11 +23,11 @@ Odin's core contains the largest jump drive ever created. About 150 support crew
 Due to the enormous cost of this Dreadnought, only the richest star systems are able to build and maintain ships like the Odin.
 
 This machine's primary tactic is to jump into an unsuspecting enemy system and destroy everything before they know what hit them. It's effective and destructive, but extremely expensive.]]
+        )
     )
-)
-template:setJumpDrive(true)
-template:setTubes(16, 3.0)
-template:setWeaponStorage("Homing", 1000)
+    :setJumpDrive(true)
+    :setTubes(16, 3.0)
+    :setWeaponStorage("Homing", 1000)
 for n = 0, 15 do
     template:setBeamWeapon(n, 90, n * 22.5, 3200, 3, 10)
     template:setTubeDirection(n, n * 22.5)
