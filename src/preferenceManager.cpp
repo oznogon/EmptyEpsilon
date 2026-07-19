@@ -1,7 +1,7 @@
 #include "preferenceManager.h"
 
 #if defined(ANDROID)
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #endif
 
 std::unordered_map<string, string> PreferencesManager::preference;
@@ -30,7 +30,7 @@ string PreferencesManager::get(string key, string default_value)
 void PreferencesManager::load(string filename)
 {
 #if defined(ANDROID)
-    filename = string(SDL_AndroidGetInternalStoragePath()) + "/" + filename.substr(filename.rfind("/")+1);
+    filename = string(SDL_GetAndroidInternalStoragePath()) + "/" + filename.substr(filename.rfind("/")+1);
 #endif
     FILE* f = fopen(filename.c_str(), "r");
     if (f)
@@ -59,7 +59,7 @@ void PreferencesManager::save(string filename)
     //I guess nobody wants to set something like options.ini and then some_directory/options.ini
     //so here the directory hierarchy is not kept.
     //On Android you have to write your user files to a specific directory.
-    filename = string(SDL_AndroidGetInternalStoragePath()) + "/" + filename.substr(filename.rfind("/")+1);
+    filename = string(SDL_GetAndroidInternalStoragePath()) + "/" + filename.substr(filename.rfind("/")+1);
 #endif
     FILE* f = fopen(filename.c_str(), "w");
     if (f)

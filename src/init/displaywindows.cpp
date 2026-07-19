@@ -76,7 +76,9 @@ bool createDisplayWindows()
     auto n = PreferencesManager::get("multimonitor", "0").toInt();
     if (n != 0)
     {
-        if (n < 2) n = SDL_GetNumVideoDisplays();
+        int num_displays = 0;
+        SDL_GetDisplays(&num_displays);
+        if (n < 2) n = num_displays;
         SDL_SetHint(SDL_HINT_MOUSE_AUTO_CAPTURE, "0");
 
         while (static_cast<int>(windows.size()) < n)

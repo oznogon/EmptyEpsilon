@@ -13,7 +13,7 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 
 GuiTextEntry::~GuiTextEntry()
 {
-    if (focus) SDL_StopTextInput();
+    if (focus) SDL_StopTextInput(SDL_GetKeyboardFocus());
 }
 
 float GuiTextEntry::getLineSpacing() const {
@@ -421,12 +421,12 @@ void GuiTextEntry::onFocusGained()
 
     typing_indicator = true;
     blink_timer.repeat(blink_rate);
-    SDL_StartTextInput();
+    SDL_StartTextInput(SDL_GetKeyboardFocus());
 }
 
 void GuiTextEntry::onFocusLost()
 {
-    SDL_StopTextInput();
+    SDL_StopTextInput(SDL_GetKeyboardFocus());
 }
 
 bool GuiTextEntry::setAttribute(const string& key, const string& value)

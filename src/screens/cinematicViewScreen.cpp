@@ -268,7 +268,7 @@ CinematicViewScreen::~CinematicViewScreen()
 {
     // Reset mouse visibility.
     mouse_renderer->should_be_visible = true;
-    SDL_SetRelativeMouseMode(SDL_FALSE);
+    SDL_SetWindowRelativeMouseMode(SDL_GetKeyboardFocus(), false);
 }
 
 void CinematicViewScreen::update(float delta)
@@ -277,7 +277,7 @@ void CinematicViewScreen::update(float delta)
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         mouse_renderer->should_be_visible = true;
-        SDL_SetRelativeMouseMode(SDL_FALSE); // Redundant with destructor?
+        SDL_SetWindowRelativeMouseMode(SDL_GetKeyboardFocus(), false); // Redundant with destructor?
         destroy();
         disconnectFromServer();
         returnToMainMenu(getRenderLayer());
@@ -1652,7 +1652,7 @@ void CinematicViewScreen::setUIVisibility(bool is_visible)
     {
         // Disable manual control when showing UI.
         manual_camera_controls_enabled = false;
-        SDL_SetRelativeMouseMode(SDL_FALSE);
+        SDL_SetWindowRelativeMouseMode(SDL_GetKeyboardFocus(), false);
     }
 
     // Bind mouse visibility.
@@ -1673,7 +1673,7 @@ void CinematicViewScreen::setManualCameraControl(bool is_manual)
         }
 
         // Bind relative mouse state and visibility.
-        SDL_SetRelativeMouseMode(is_manual ? SDL_TRUE : SDL_FALSE);
+        SDL_SetWindowRelativeMouseMode(SDL_GetKeyboardFocus(), is_manual);
         mouse_renderer->should_be_visible = !is_manual;
     }
 }

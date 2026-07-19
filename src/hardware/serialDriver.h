@@ -10,7 +10,7 @@ private:
 #ifdef _WIN32
     void* handle;
 #endif
-#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
+#if defined(__gnu_linux__) || (defined(SDL_PLATFORM_APPLE) && defined(__MACH__))
     int handle;
 #endif
 

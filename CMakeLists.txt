@@ -905,7 +905,7 @@ if(NOT DEFINED CPACK_GENERATOR)
     set(CPACK_GENERATOR "ZIP")
   elseif(UNIX)
     set(CPACK_GENERATOR "DEB")
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libfreetype6, libsdl2-2.0-0")
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libfreetype6, libsdl3-0")
   endif()
 endif()
 
@@ -915,17 +915,17 @@ set(CPACK_PROJECT_CONFIG_FILE "${PROJECT_BINARY_DIR}/CPackProjectConfig.cmake")
 
 if(APPLE)
   if("DragNDrop" IN_LIST CPACK_GENERATOR)
-    if(SDL2_LIBRARIES MATCHES "\\.framework$")
-      # SDL2_LIBRARIES points to the framework itself.
+    if(SDL3_LIBRARIES MATCHES "\\.framework$")
+      # SDL3_LIBRARIES points to the framework itself.
       # For fixup_bundle to pick it up, we need to get its parent directory as the 'root'.
-      # SDL2 also depends on hidapi.framework, which comes with the official DMG (https://libsdl.org/download-2.0.php)
+      # SDL3 also depends on hidapi.framework, which comes with the official DMG (https://libsdl.org/download-3.0.php)
       # Same idea - need the path to it for the dependency manager to pick it up.
       install(CODE "
         include(BundleUtilities)
-        fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/EmptyEpsilon.app\" \"\" \"${SDL2_LIBRARIES}/..;${SDL2_LIBRARIES}/Versions/Current/Frameworks\")
+        fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/EmptyEpsilon.app\" \"\" \"${SDL3_LIBRARIES}/..;${SDL3_LIBRARIES}/Versions/Current/Frameworks\")
       ")
     else()
-      message(WARNING "macOS DMG packaging: ${SDL2_LIBRARIES} does not appear to be a framework. The bundle will not be fixed up properly.")
+      message(WARNING "macOS DMG packaging: ${SDL3_LIBRARIES} does not appear to be a framework. The bundle will not be fixed up properly.")
     endif()
   endif()
 endif()

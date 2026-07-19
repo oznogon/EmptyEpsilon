@@ -871,17 +871,17 @@ void GameMasterScreen::update(float delta)
         else
         {
             gm_cursor_mode = GMCursorMode::None;
-            if (mods & KMOD_SHIFT) gm_cursor_mode |= GMCursorMode::AddToSelection;
-            if (mods & KMOD_CTRL) gm_cursor_mode |= GMCursorMode::SelectShips;
-            if (mods & KMOD_ALT) gm_cursor_mode |= GMCursorMode::SelectFaction;
+            if (mods & SDL_KMOD_SHIFT) gm_cursor_mode |= GMCursorMode::AddToSelection;
+            if (mods & SDL_KMOD_CTRL) gm_cursor_mode |= GMCursorMode::SelectShips;
+            if (mods & SDL_KMOD_ALT) gm_cursor_mode |= GMCursorMode::SelectFaction;
         }
     }
     else if (click_and_drag_state == ClickAndDragState::BoxSelect)
     {
         gm_cursor_mode = GMCursorMode::SelectArea;
-        if (mods & KMOD_SHIFT) gm_cursor_mode |= GMCursorMode::AddToSelection;
-        if (mods & KMOD_CTRL) gm_cursor_mode |= GMCursorMode::SelectShips;
-        if (mods & KMOD_ALT) gm_cursor_mode |= GMCursorMode::SelectFaction;
+        if (mods & SDL_KMOD_SHIFT) gm_cursor_mode |= GMCursorMode::AddToSelection;
+        if (mods & SDL_KMOD_CTRL) gm_cursor_mode |= GMCursorMode::SelectShips;
+        if (mods & SDL_KMOD_ALT) gm_cursor_mode |= GMCursorMode::SelectFaction;
     }
     else if (click_and_drag_state == ClickAndDragState::DragViewOrOrder)
         gm_cursor_mode = GMCursorMode::SetAITarget;
@@ -1101,9 +1101,9 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     }
 
     auto mods = SDL_GetModState();
-    const bool shift_down = mods & KMOD_SHIFT;
-    const bool ctrl_down = mods & KMOD_CTRL;
-    const bool alt_down = mods & KMOD_ALT;
+    const bool shift_down = mods & SDL_KMOD_SHIFT;
+    const bool ctrl_down = mods & SDL_KMOD_CTRL;
+    const bool alt_down = mods & SDL_KMOD_ALT;
 
     switch (click_and_drag_state)
     {

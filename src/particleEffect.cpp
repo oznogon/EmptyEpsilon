@@ -8,7 +8,7 @@
 #include "shaderRegistry.h"
 #include "systems/rendering.h"
 
-#include <SDL_assert.h>
+#include <SDL3/SDL.h>
 
 #include <glm/gtx/norm.hpp>
 #include <glm/gtc/type_ptr.hpp>
