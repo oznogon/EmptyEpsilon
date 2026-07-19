@@ -898,7 +898,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         // hull integrity, and database reference button.
         if (scanstate >= ScanState::State::SimpleScan)
         {
-            if (auto faction_component = target.getComponent<Faction>())
+            if (target.hasComponent<Faction>())
             {
                 auto faction = Faction::getInfo(target);
                 info_faction_button->show();
