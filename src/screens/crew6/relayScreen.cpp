@@ -37,8 +37,22 @@
 //TODO: This function does not belong here.
 static bool canHack(sp::ecs::Entity entity)
 {
+    {
+        bool hasSystems = false;
+        for(int n=0; n<int(ShipSystem::Type::COUNT); n++) {
+            if (ShipSystem::get(entity, ShipSystem::Type(n))) {
+                hasSystems = true;
+                break;
+            }
+        }
+        if (!hasSystems) {
+            auto ht = entity.getComponent<HackingTarget>();
+            if (!ht || ht->difficulty < 0)
+                return false;
+        }
+    }
+
     auto scanstate = entity.getComponent<ScanState>();
-    //TODO: Check if there are actually hackable systems.
     if (scanstate && scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
         return true;
     return Faction::getRelation(entity, my_spaceship) != FactionRelation::Friendly;
