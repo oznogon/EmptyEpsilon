@@ -142,7 +142,7 @@ int main(int argc, char** argv)
         mkdir(configuration_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 // On macOS non-debug builds, redirect the log to the configuration directory if
 // invoked as an app bundle.
-#ifdef SDL_PLATFORM_APPLE
+#ifdef __APPLE__
         const char* argv0 = *argv;
         std::string launch_path(argv0);
 
@@ -153,7 +153,7 @@ int main(int argc, char** argv)
             Logging::setLogFile(configuration_path + "/EmptyEpsilon.log");
         // If not, we might be invoked as a binary and can log to STDOUT.
         else Logging::setLogStdout();
-#endif // SDL_PLATFORM_APPLE
+#endif // __APPLE__
 
 #endif // _WIN32
     }
