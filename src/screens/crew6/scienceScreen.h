@@ -55,7 +55,7 @@ public:
     GuiSelector* sidebar_pager;
     // info_sidebar
     GuiScanTargetButton* scan_button;
-    GuiButton* link_to_analysis_button;
+    GuiButton* link_target_analysis_button;
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_heading;

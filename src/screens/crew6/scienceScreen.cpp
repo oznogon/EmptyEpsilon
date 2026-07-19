@@ -233,16 +233,16 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setVisible(my_spaceship.hasComponent<ScienceScanner>());
     (new GuiTextTooltip(scan_button, "SCAN_BUTTON_TIP", tr("tooltips", "Initiate a scan of the selected target to reveal its data and subsystems."), 20.0f))->setWidth(280.0f);
 
-    // Link to analysis button.
-    link_to_analysis_button = new GuiButton(info_scan_content, "LINK_TO_ANALYSIS", tr("scienceButton", "Link to analysis"),
+    // Link target analysis button.
+    link_target_analysis_button = new GuiButton(info_scan_content, "LINK_TARGET_ANALYSIS_BUTTON", tr("scienceButton", "Link target analysis"),
         [this]()
         {
             if (my_player_info && targets.get())
                 my_player_info->commandSetAnalysisTarget(targets.get());
         }
     );
-    link_to_analysis_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(link_to_analysis_button, "LINK_TO_ANALYSIS_TIP", tr("tooltips", "Send the selected target's data to the analysis screen for comparison."), 20.0f))->setWidth(280.0f);
+    link_target_analysis_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+    (new GuiTextTooltip(link_target_analysis_button, "LINK_TARGET_ANALYSIS_TIP", tr("tooltips", "Send the selected target's data to the analysis screen for comparison."), 20.0f))->setWidth(280.0f);
 
     // Simple scan data.
     info_callsign = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_CALLSIGN", 0.4f, tr("science", "Callsign"), "");
@@ -609,7 +609,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             info_beam_frequency->setFrequency(-1);
             info_faction_button->hide();
             info_type_button->hide();
-            link_to_analysis_button->hide();
+            link_target_analysis_button->hide();
             sidebar_frequencies_page->hide();
             sidebar_signals_page->hide();
             sidebar_systems_page->hide();
@@ -731,7 +731,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     info_beam_frequency->setFrequency(-1);
     info_faction_button->hide();
     info_type_button->hide();
-    link_to_analysis_button->hide();
+    link_target_analysis_button->hide();
     sidebar_frequencies_page->hide();
     sidebar_signals_page->hide();
     sidebar_systems_page->hide();
@@ -756,7 +756,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     if (target)
     {
         target_entity = target;
-        link_to_analysis_button->show();
+        link_target_analysis_button->show();
 
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
         auto target_transform = target.getComponent<sp::Transform>();
