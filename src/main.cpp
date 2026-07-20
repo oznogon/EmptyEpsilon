@@ -123,6 +123,14 @@ int main(int argc, char** argv)
     new Engine();
     initSystemsAndComponents();
 
+#if !defined(DEBUG)
+    // Allow overriding log level and output.
+    if (PreferencesManager::get("log_level") == "debug")
+        Logging::setLogLevel(LOGLEVEL_DEBUG);
+    if (PreferencesManager::get("log_output") == "file")
+        Logging::setLogFile("EmptyEpsilon.log");
+#endif
+
     if (PreferencesManager::get("headless") == "")
     {
 #ifdef _WIN32
