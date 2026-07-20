@@ -9,7 +9,7 @@ Light carriers come in the following subclasses:
 
 - Escort: Armed carriers capable of defending itself and its nearby launched
   fighters.
-- Transport: Unarmed carriers that require escort ships or active starfighter
+- Support: Unarmed carriers that require escort ships or active starfighter
   patrols for defense.
 ]]
 
@@ -31,8 +31,13 @@ local template = ShipTemplate()
     :setSpeed(80, 10, 20)
     :setJumpDrive(true)
     :setCombatManeuver(400, 250)
-    :setExternalDockClasses(_("class", "Frigate"))
-    :setInternalDockClasses(_("class", "Starfighter"), _("class", "Cargo"))
+    :setExternalDockClasses(
+        _("class", "Corvette")
+    )
+    :setInternalDockClasses(
+        _("class", "Cargo"),
+        _("class", "Starfighter")
+    )
     :setSharesEnergyWithDocked(false)
     :setRepairDocked(true)
     :setRestocksScanProbes(false)
@@ -95,7 +100,7 @@ local template = ShipTemplate()
 template = ShipTemplate()
     :setName("Jump Carrier")
     :setLocaleName(_("ship", "Jump Carrier"))
-    :setClass(_("class", "Light carrier"), _("subclass", "Transport"))
+    :setClass(_("class", "Light carrier"), _("subclass", "Support"))
     :setModel("transport_4_2")
     :setRadarTrace("transport.png")
     :setDescription(
@@ -110,8 +115,17 @@ template = ShipTemplate()
     :setSpeed(50, 6, 10)
     :setJumpDrive(true)
     :setJumpDriveRange(5000, 100 * 50000)
-    :setExternalDockClasses(_("class", "Frigate"), _("class", "Destroyer"))
-    :setInternalDockClasses(_("class", "Starfighter"), _("class", "Cargo"))
+    :setExternalDockClasses(
+        _("class", "Corvette"),
+        _("class", "Frigate"),
+        _("class", "Destroyer")
+    )
+    :setInternalDockClasses(
+        _("class", "Cargo"),
+        _("class", "Starfighter"),
+        _("subclass", "Tug"),
+        _("subclass", "Transport")
+    )
     :setDefaultAI("evasion")
 
 -- Benedict

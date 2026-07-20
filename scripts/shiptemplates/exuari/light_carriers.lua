@@ -14,7 +14,7 @@ local template = ShipTemplate()
     :setRadarTrace("battleship.png")
     :setDescription(
         _(
-            "The Exuari 'Ryder' is a large carrier spacecraft with many defensive features. It can be docked by smaller ships to refuel or carry them. Unlike a station it is equipped with a slow impulse drive and capable of interstellar travel. It is used as a habitation for Exuari crews and has a hangar bay. A commom Exuari assault strategy is to keep a Ryder off the sensor range of the desired target, while fighters and artillery start from the carrier."
+            "The Ryder is a large carrier spacecraft with many defensive features deployed by the Exuari. It can be docked by smaller ships to refuel or carry them. Unlike a station it is equipped with a slow impulse drive and capable of interstellar travel. It is used as a habitation for Exuari crews and has a hangar bay. A commom Exuari assault strategy is to keep a Ryder off the sensor range of the desired target, while fighters and artillery start from the carrier."
         )
     )
     :setBeam(0, 20, -90, 1200.0, 6.1, 4)
@@ -44,7 +44,15 @@ local template = ShipTemplate()
     :setHull(100)
     :setShields(250)
     :setSpeed(20, 1.5, 3)
-    :setDockClasses(_("class", "Starfighter"), _("class", "Frigate"), _("class", "Corvette"))
+    :setExternalDockClasses(
+        _("class", "Frigate"),
+        _("class", "Corvette"),
+        _("class", "Transport")
+    )
+    :setInternalDockClasses(
+        _("class", "Starfighter"),
+        _("class", "Tug")
+    )
     :setSharesEnergyWithDocked(true)
     :setRepairDocked(true)
     :setRestocksMissilesDocked(true)
@@ -54,10 +62,9 @@ local template = ShipTemplate()
 local variation = template
     :copy("Fortress")
     :setLocaleName(_("ship", "Fortress"))
-variation
     :setDescription(
         _(
-            "The Exuari Fortress is a huge carrier with many defensive features. It can be docked by smaller ships to refuel or carry them. Unlike a station it is equipped with a slow impulse drive. The shields of this base carrier are saied to be undestroyable."
+            [[The Exuari Fortress is a huge carrier with many defensive features deployed by the Exuari. It can be docked by smaller ships to refuel or carry them, and is equipped with a slow impulse drive. The shields of this base carrier are believed to be impenetrable.]]
         )
     )
     :setBeam(0, 20, -90, 2400.0, 6.1, 4)

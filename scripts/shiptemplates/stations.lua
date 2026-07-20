@@ -58,20 +58,19 @@ template = ShipTemplate()
 
 -- Defense platform
 template = ShipTemplate()
-    :setName("Defense platform")
-    :setLocaleName(_("ship", "Defense platform"))
-    :setClass(_("class", "Platform"), _("subclass", "Defense"))
+    :setName("Weapons platform")
+    :setLocaleName(_("ship", "Weapons platform"))
+    :setClass(_("class", "Platform"), _("subclass", "Fortification"))
     :setModel("space_station_4")
-    :setRadarTrace("smallstation.png")
+    :setRadarTrace("piranha.png")
     :setDescription(
         _(
-            [[This stationary defense platform operates like a station, with docking and resupply functions, but is armed with powerful beam weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships.]]
+            [[This stationary weapons platform resembles a station armed with powerful beam weapons, and it can slowly rotate. Unlike defense platforms, weapons platforms lack docking bays and have a more vulnerable hull.]]
         )
     )
-    :setHull(150)
+    :setHull(70)
     :setShields(120, 120, 120, 120, 120, 120)
     :setSpeed(0, 0.5, 0)
-    :setDockClasses(_("class", "Starfighter"), _("class", "Frigate"))
     :setBeam(0, 30, 0, 4000.0, 1.5, 20)
     :setBeam(1, 30, 60, 4000.0, 1.5, 20)
     :setBeam(2, 30, 120, 4000.0, 1.5, 20)
@@ -81,13 +80,21 @@ template = ShipTemplate()
 
 -- Weapons platform
 variant = template
-    :copy("Weapons platform")
-    :setLocaleName(_("ship", "Weapons platform"))
-    :setRadarTrace("piranha.png")
+    :copy("Defense platform")
+    :setLocaleName(_("ship", "Defense platform"))
+    :setRadarTrace("smallstation.png")
     :setDescription(
         _(
-            [[This stationary weapons platform resembles a station armed with powerful beam weapons, and it can slowly rotate. Unlike defense platforms, weapons platforms lack docking bays and have a more vulnerable hull.]]
+            [[This stationary defense platform operates like a station, with docking and resupply functions, but is armed with powerful beam weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships.]]
         )
     )
-    :setHull(70)
-    :setDockClasses()
+    :setHull(150)
+    :setExternalDockClasses(
+        _("class", "Corvette"),
+        _("class", "Frigate")
+    )
+    :setInternalDockClasses(
+        _("class", "Cargo"),
+        _("class", "Starfighter"),
+        _("class", "Tug")
+    )

@@ -97,7 +97,7 @@ template = ShipTemplate()
     :setRadarTrace("missile_cruiser.png")
     :setDescription(
         _(
-            [[Polaris missile corvette is a platform for launching long-range missiles. It can't take much damage, but it can deal a lot if not dealt with quickly. Its single shield segment and lack of point-defense beam weapons leave it vulnerable to being swarmed by starfighters that can evade its missiles.]]
+            [[The Polaris missile corvette is a platform for launching long-range missiles. It can't take much damage, but it can deal a lot if not dealt with quickly. Its single shield segment and lack of point-defense beam weapons leave it vulnerable to being swarmed by starfighters that can evade its missiles.]]
         )
     )
     :setTubes(1, 25.0)

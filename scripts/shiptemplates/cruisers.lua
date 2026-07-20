@@ -4,7 +4,8 @@ Cruisers are large capital ships, dwarfed only by battleships. Particularly larg
 
 What cruisers lose in agility compared to destroyers, they gain in armor and weaponry. A cruiser bristling with weapon tubes or beam weapons can cleave through even large space stations in short order if not countered by a coordinated, focused defense.
 ]]
---
+
+-- Vindicator (Player Cruiser)
 local template = ShipTemplate()
     :setName("Vindicator")
     :setLocaleName(_("playerShip", "Vindicator"))
@@ -68,6 +69,7 @@ A skilled navigator and helms officer can use the Vindicator's jump drive and im
 --template:addDoor(2, 2, false);
 --template:addDoor(2, 5, false);
 
+-- Avalanche (Player Missile Cr.)
 template = ShipTemplate()
     :setName("Avalanche")
     :setLocaleName(_("playerShip", "Avalanche"))
@@ -164,10 +166,15 @@ Battlestations are meant to join large-fleet ambushes, drop their docked vessels
     :setShields(2500)
     :setSpeed(20, 1.5, 3)
     :setJumpDrive(true)
-    :setDockClasses(
-        _("class", "Starfighter"),
+    :setExternalDockClasses(
         _("class", "Corvette"),
         _("class", "Frigate")
+    )
+    :setInternalDockClasses(
+        _("class", "Cargo"),
+        _("class", "Starfighter"),
+        _("class", "Tug"),
+        _("class", "Transport")
     )
     :setSharesEnergyWithDocked(true)
 
@@ -246,4 +253,3 @@ The Ender's revisions also made space to install 2 weapon tubes, one dedicated t
     :addDoor(4, 5, true)
     :addDoor(8, 5, true)
     :addDoor(12, 5, true)
-
