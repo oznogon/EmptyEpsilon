@@ -42,6 +42,10 @@ public:
     // When enabled, automatically scrolls to the bottom when content grows.
     void enableAutoScrollDown();
     void disableAutoScrollDown();
+    // Force scroll to the bottom on the next layout pass, after content
+    // dimensions have been recalculated. Use when adding new content to a
+    // container that may not have been laid out yet (e.g., after showing it).
+    void setPendingScrollToBottom();
 
     // Clean up the scroll container's tree: clear internal focus/click
     // pointers before the base class removes destroyed children via
@@ -103,6 +107,9 @@ private:
     float content_height = 0.0f;
     // Tracks whether to auto-scroll to the bottom on content growth.
     bool auto_scroll_down = false;
+    // When set, forces scroll to bottom on the next layout pass after content
+    // dimensions have been freshly calculated.
+    bool pending_scroll_to_bottom = false;
     // Defines the visible height of the element, in virtual pixels.
     float visible_height = 0.0f;
 

@@ -89,6 +89,7 @@ void LuaConsole::addLog(const string& message)
         console->log_messages.erase(console->log_messages.begin());
     console->log->setText(string("\n").join(console->log_messages));
     if (!console->is_open) {
+        console->log_scroll->setPendingScrollToBottom();
         console->message_show_timers.emplace_back();
         console->message_show_timers.back().start(5.0f);
         auto linespace = console->log->getLineSpacing();
@@ -121,6 +122,7 @@ void LuaConsole::update(float delta)
         } else {
             auto linespace = console->log->getLineSpacing();
             top->getLayout().size.y = std::min(450.0f, (0.3f + message_show_timers.size()) * linespace);
+            log_scroll->setPendingScrollToBottom();
         }
     }
 

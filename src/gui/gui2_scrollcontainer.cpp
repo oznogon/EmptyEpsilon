@@ -222,11 +222,21 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
         ->setValueSize(static_cast<int>(visible_height))
         ->setValue(static_cast<int>(scroll_offset + scroll_offset_bias));
 
-    if (auto_scroll_down)
+    if (pending_scroll_to_bottom)
+    {
+        scrollToFraction(1.0f);
+        pending_scroll_to_bottom = false;
+    }
+    else if (auto_scroll_down)
     {
         if (scroll_offset + scroll_offset_bias >= std::max(0.0f, content_height - visible_height) - 0.5f)
             scrollToFraction(1.0f);
     }
+}
+
+void GuiScrollContainer::setPendingScrollToBottom()
+{
+    pending_scroll_to_bottom = true;
 }
 
 void GuiScrollContainer::enableAutoScrollDown()
