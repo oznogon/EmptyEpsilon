@@ -547,3 +547,24 @@ variation
         )
     )
     :setTubes(2, 8.0)
+
+-- Blockade runner
+template = ShipTemplate()
+    :setName("Blockade Runner")
+    :setLocaleName(_("ship", "Blockade Runner"))
+    :setModel("battleship_destroyer_3_upgraded")
+    :setClass(_("class", "Frigate"), _("subclass", "Assault"))
+    :setRadarTrace("blockade.png")
+    :setDescription(
+        _(
+            [[Blockade Runners are reasonably fast, highly shielded, slow-firing ships designed to break through defensive lines and deliver goods.]]
+        )
+    )
+    :setBeam(0, 60, -15, 1000.0, 6.0, 8)
+    :setBeam(1, 60, 15, 1000.0, 6.0, 8)
+    :setBeam(2, 25, 170, 1000.0, 6.0, 8)
+    :setBeam(3, 25, 190, 1000.0, 6.0, 8)
+    :setHull(70)
+    :setShields(100, 150)
+    :setSpeed(60, 15, 25)
+

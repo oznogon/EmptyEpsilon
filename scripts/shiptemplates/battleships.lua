@@ -38,3 +38,26 @@ for n = 0, 15 do
         :setTubeDirection(n, n * 22.5)
         :setTubeSize(n, "large")
 end
+
+-- Dreadnought
+template = ShipTemplate()
+    :setName("Dreadnought")
+    :setLocaleName(_("ship", "Dreadnought"))
+    :setModel("battleship_destroyer_1_upgraded")
+    :setClass(_("class", "Battleship"), _("subclass", "Dreadnought"))
+    :setRadarTrace("dread.png")
+    :setDescription(
+        _(
+            [[The Dreadnought is a flying fortress. It's slow and maneuvers poorly, but packs an array of forward-facing beam weapons. Attacking it head-on is suicidal.]]
+        )
+    )
+template:setBeam(0, 90, -25, 1500.0, 6.0, 8)
+template:setBeam(1, 90, 25, 1500.0, 6.0, 8)
+template:setBeam(2, 100, -60, 1000.0, 6.0, 8)
+template:setBeam(3, 100, 60, 1000.0, 6.0, 8)
+template:setBeam(4, 30, 0, 2000.0, 6.0, 8)
+template:setBeam(5, 100, 180, 1200.0, 6.0, 8)
+template:setHull(70)
+template:setShields(300, 300, 300, 300, 300)
+template:setSpeed(30, 1.5, 5)
+

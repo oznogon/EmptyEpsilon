@@ -278,3 +278,148 @@ variation = template
     :addDoor(4, 4, true)
     :addDoor(3, 5, true)
     :addDoor(4, 5, true)
+
+-- Stingray (PlayerControl ship, fka Player Fighter)
+template = ShipTemplate()
+    :setName("Stingray")
+    :setLocaleName(_("playerShip", "Stingray"))
+    :setModel("small_fighter_1")
+    :setType("playership")
+    :setRadarTrace("fighter.png")
+    :setDescription(
+        _(
+            [[The Stingray is a little-known predecessor to the MU52 Hornet. Once commonplace, most of the few remaining Stingrays have been converted to couriers and illegal racers due to their (frankly unsafe) impulse engines.]]
+        )
+    )
+    :setHull(60)
+    :setShields(40)
+    :setSpeed(110, 20, 40)
+    :setCombatManeuver(600, 0)
+    :setEnergyStorage(400)
+    :setBeam(0, 40, -10, 1000.0, 6.0, 8)
+    :setBeam(1, 40, 10, 1000.0, 6.0, 8)
+    :setTubes(1, 10.0)
+    :setWeaponStorage("HVLI", 4)
+    :addRoomSystem(3, 0, 1, 1, "Maneuver")
+    :addRoomSystem(1, 0, 2, 1, "BeamWeapons")
+    :addRoomSystem(0, 1, 1, 2, "RearShield")
+    :addRoomSystem(1, 1, 2, 2, "Reactor")
+    :addRoomSystem(3, 1, 2, 1, "Warp")
+    :addRoomSystem(3, 2, 2, 1, "JumpDrive")
+    :addRoomSystem(5, 1, 1, 2, "FrontShield")
+    :addRoomSystem(1, 3, 2, 1, "MissileSystem")
+    :addRoomSystem(3, 3, 1, 1, "Impulse")
+    :addRoomSystem(0, 0, 1, 1, "Sensors")
+    :addDoor(1, 0, false)
+    :addDoor(2, 1, true)
+    :addDoor(3, 1, true)
+    :addDoor(1, 1, false)
+    :addDoor(3, 1, false)
+    :addDoor(3, 2, false)
+    :addDoor(3, 3, true)
+    :addDoor(2, 3, true)
+    :addDoor(5, 1, false)
+    :addDoor(5, 2, false)
+
+-- Riposte
+template = ShipTemplate()
+    :setName("Riposte")
+    :setLocaleName(_("ship", "Fighter"))
+    :setModel("small_fighter_1")
+    :setRadarTrace("fighter.png")
+    :setClass(_("class", "Starfighter"), _("subclass", "Interceptor"))
+    :setDescription(
+        _(
+            [[Ripostes are weak, nimble interceptors with a single beam weapon that become a greater threat when they engage in larger groups. They're often deployed in reconnaissance, patrol, and outpost-defense roles.]]
+        )
+    )
+    :setBeam(0, 60, 0, 1000.0, 4.0, 4)
+    :setHull(30)
+    :setShields(30)
+    :setSpeed(120, 30, 25)
+    :setDefaultAI("fighter")
+
+-- Strix
+template = ShipTemplate()
+    :setName("Strix")
+    :setLocaleName(_("ship", "Strix"))
+    :setModel("small_frigate_3")
+    :setClass(_("class", "Starfighter"), _("subclass", "Interceptor"))
+    :setRadarTrace("striker.png")
+    :setDescription(
+        _(
+            [[The Strix is a warp-equipped interceptor built for ambush tactics.]]
+        ) .. " " .. _(
+            [[For a starfighter it's slow at sublight flight and lacks manueverability, and most of its shielding is focused forward. However, thanks to its paired beam weapons and ability to strike quickly and escape, they've become a favorite of raiders that seek to catch poorly defended convoys unaware.]]
+        ) .. " " .. _(
+            [[Strixes are often accompanied or complemented by Magpies, which have similar capabilities but use a jump drive for FTL travel.]]
+        )
+    )
+    :setBeam(0, 40, -5, 1000.0, 6.0, 6)
+    :setBeam(1, 40, 5, 1000.0, 6.0, 6)
+    :setHull(100)
+    :setShields(80, 30, 30, 30)
+    :setSpeed(70, 12, 12)
+    :setWarpSpeed(1000)
+
+template = ShipTemplate()
+    :setName("Magpie")
+    :setLocaleName(_("ship", "Magpie"))
+    :setClass(_("class", "Starfighter"), _("subclass", "Gunship"))
+    :setModel("dark_fighter_6")
+    :setRadarTrace("adv_striker.png")
+    :setDescription(
+        _(
+            [[The Magpie is a jump-equipped gunship built for ambush tactics.]]
+        ) .. " " .. _(
+            [[For a starfighter it's slow at sublight flight and lacks manueverability, and most of its shielding is focused forward. However, thanks to its paired beam weapons and ability to strike quickly and escape, they've become a favorite of raiders that seek to catch poorly defended convoys unaware.]]
+        ) .. " " .. _(
+            [[Magpies are often accompanied or complemented by Strixes, which have similar capabilities but use a warp drive for FTL travel.]]
+        )
+)
+    :setBeam(0, 50, -15, 1000.0, 6.0, 6)
+    :setBeam(1, 50, 15, 1000.0, 6.0, 6)
+    :setHull(70)
+    :setShields(50, 30)
+    :setSpeed(45, 12, 15)
+    :setJumpDrive(true)
+
+variation = template
+    :copy("Crow")
+    :setLocaleName(_("playerShip", "Crow"))
+    :setClass(_("class", "Starfighter"), _("subclass", "Gunship"))
+    :setType("playership")
+    :setDescription(
+        _(
+            [[The Crow gunship is the predecessor to the Magpie starfighter. Slow, weakly armed, and lacking in shields, it's at least relatively agile.]]
+        )
+    )
+    :setBeam(0, 10, -15, 1000.0, 6.0, 6)
+    :setBeam(1, 10, 15, 1000.0, 6.0, 6)
+    :setBeamWeaponTurret(0, 100, -15, 6)
+    :setBeamWeaponTurret(1, 100, 15, 6)
+    :setHull(120)
+    :setSpeed(45, 15, 30)
+    :setJumpDrive(false)
+    :setCombatManeuver(250, 150)
+    :setEnergyStorage(500)
+    :setRepairCrewCount(2)
+    :addRoomSystem(4, 0, 3, 1, "RearShield")
+    :addRoomSystem(3, 1, 3, 1, "MissileSystem")
+    :addRoomSystem(0, 1, 1, 1, "Beamweapons")
+    :addRoomSystem(1, 1, 1, 3, "Reactor")
+    :addRoomSystem(2, 2, 3, 1, "Warp")
+    :addRoomSystem(5, 2, 4, 1, "JumpDrive")
+    :addRoomSystem(0, 3, 1, 1, "Impulse")
+    :addRoomSystem(3, 3, 3, 1, "Maneuver")
+    :addRoomSystem(4, 4, 3, 1, "FrontShield")
+    :addRoomSystem(0, 0, 1, 1, "Sensors")
+    :addDoor(0, 1, true)
+    :addDoor(1, 1, false)
+    :addDoor(1, 3, false)
+    :addDoor(2, 2, false)
+    :addDoor(5, 2, false)
+    :addDoor(4, 3, true)
+    :addDoor(5, 2, true)
+    :addDoor(4, 1, true)
+    :addDoor(5, 4, true)

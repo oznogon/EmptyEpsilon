@@ -285,33 +285,43 @@ template = ShipTemplate()
     :addDoor(10, 2, false)
 
 -- Tugs
--- Hylas
+-- Apis
 template = ShipTemplate()
-    :setName("Hylas")
-    :setLocaleName(_("ship", "Hylas"))
+    :setName("Apis")
+    :setLocaleName(_("ship", "Apis"))
     :setClass(_("class", "Auxiliary"), _("subclass", "Tug"))
     :setModel("space_tug")
     :setRadarTrace("tug.png")
     :setDescription(
         _(
-            [[The Hylas is an unarmed tugboat with a powerful short-range tractor beam capable of moving much larger ships through gravity-field manipulation. It's nimble on its own and lightly shielded to avoid taking damage from collisions with larger ships, but it's otherwise defenseless.]]
+            [[The unarmed Apis tugboat, named for the genus of honeybees, is a reliable but small transport. Due to its low cost, it's commonly used to train fledgling captains and crews without risking friendly fire.]]
         )
     )
     :setHull(50)
     :setShields(20)
     :setSpeed(100, 10, 15)
+
+-- Hylas
+variation = template
+    :copy("Hylas")
+    :setLocaleName(_("ship", "Hylas"))
+    :setClass(_("class", "Auxiliary"), _("subclass", "Tug"))
+    :setDescription(
+        _(
+            [[The Hylas is an unarmed tugboat with a powerful short-range tractor beam capable of moving much larger ships through gravity-field manipulation. It's nimble on its own and lightly shielded to avoid taking damage from collisions with larger ships, but it's otherwise defenseless.]]
+        )
+    )
     :setUtilityBeam(90, 2000, 6.0, 1000.0)
 
--- Heracles
-variation = template
+-- Heracles (PlayerControl variant)
+variation2 = variation
     :copy("Hylas")
     :setName("Heracles")
     :setLocaleName(_("playerShip", "Heracles"))
     :setType("playership")
-variation
     :setDescription(
         _(
-            [[The Heracles tug model is a Hylas suited for carrier use in deep-space operations. Improvements include a stronger hull, bolstered shield, full sensor suite, and a shield-disrupting beam for use in boarding operations, salvaging abandoned vessels, or investigating unknown ships.]]
+            [[The Heracles tug model is a Hylas suited for carrier use in deep-space operations. Improvements include a stronger hull, bolstered shield, full sensor suite, and a shield-disrupting beam for use in boarding-operation support, abandoned vessel salvage, and investigations of unknown ships.]]
         )
     )
     :setShields(100)

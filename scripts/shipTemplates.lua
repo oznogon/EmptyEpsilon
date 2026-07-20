@@ -15,33 +15,31 @@ These are:
 - Auxiliaries: Non-combat support roles, such as freighters, transports, and
   tugs.
 
-- Exuari: Ships with a similar style, designed (but not limited) for the Exuari
-  faction.
-- Ktlitan: Alien Ktlitan swarm ships.
+Some ship templates are strongly associated with certain factions and have their own subdirectories and file structures:
+
+- Exuari
+- Ktlitan
 
 Player ships are generally large corvettes to small frigates.
 ]]
-require("shiptemplates/stations.lua")
-require("shiptemplates/starfighters.lua")
 require("shiptemplates/satellites.lua")
+require("shiptemplates/starfighters.lua")
+require("shiptemplates/corvettes.lua")
 require("shiptemplates/frigates.lua")
 require("shiptemplates/destroyers.lua")
-require("shiptemplates/corvettes.lua")
-require("shiptemplates/battleships.lua")
 require("shiptemplates/light_carriers.lua")
+require("shiptemplates/battleships.lua")
 require("shiptemplates/auxiliaries.lua")
+require("shiptemplates/stations.lua")
 
 require("shiptemplates/exuari/starfighters.lua")
-require("shiptemplates/exuari/frigates.lua")
 require("shiptemplates/exuari/corvettes.lua")
+require("shiptemplates/exuari/frigates.lua")
 require("shiptemplates/exuari/light_carriers.lua")
 
 require("shiptemplates/ktlitan/starfighters.lua")
-require("shiptemplates/ktlitan/frigates.lua")
 require("shiptemplates/ktlitan/corvettes.lua")
+require("shiptemplates/ktlitan/frigates.lua")
 require("shiptemplates/ktlitan/destroyers.lua")
-require("shiptemplates/ktlitan/auxiliaries.lua")
 require("shiptemplates/ktlitan/battleships.lua")
-
---For now, we add our old ship templates as well. These should be removed at some point.
-require("shiptemplates/OLD.lua")
+require("shiptemplates/ktlitan/auxiliaries.lua")
