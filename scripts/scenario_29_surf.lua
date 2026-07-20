@@ -1032,10 +1032,13 @@ end
 --------------------------------
 function setPlayer(p)
     player_spawn_count = player_spawn_count + 1
-    local player_ship_name =
-        tableRemoveRandom(player_ship_names[p:getTypeName()])
+    local name_pool = player_ship_names[p:getTypeName()]
+    local player_ship_name = name_pool and tableRemoveRandom(name_pool)
     if player_ship_name == nil then
-        player_ship_name = tableRemoveRandom(player_ship_names["Leftovers"])
+        name_pool = player_ship_names["Leftovers"]
+        if name_pool then
+            player_ship_name = tableRemoveRandom(name_pool)
+        end
     end
     if player_ship_name ~= nil then
         p:setCallSign(player_ship_name)
