@@ -74,10 +74,10 @@ bool LuaConsole::onPointerDown(sp::io::Pointer::Button button, glm::vec2 positio
 {
     if (!top->isVisible())
         return false;
-    GuiCanvas::onPointerDown(button, position, id);
+    bool handled = GuiCanvas::onPointerDown(button, position, id);
     if (!log->getRect().contains(position) && !entry->getRect().contains(position))
         focus(nullptr);
-    return true;
+    return handled;
 }
 
 void LuaConsole::addLog(const string& message)
