@@ -120,17 +120,6 @@ int main(int argc, char** argv)
     LOG(Info, "Starting...");
     auto configuration_path = initConfiguration(argc, argv);
 
-    // On Linux, default to Wayland if reported and not overridden by
-    // SDL_VIDEODRIVER. This inverts SDL2's default behavior, aligns with
-    // SDL3's, and is required if multimonitor is enabled.
-#if defined(__linux__) && !defined(ANDROID)
-    if (!getenv("SDL_VIDEODRIVER") && getenv("WAYLAND_DISPLAY"))
-    {
-        setenv("SDL_VIDEODRIVER", "wayland", 0);
-        LOG(Info, "Wayland display detected. Setting SDL_VIDEODRIVER=wayland.");
-    }
-#endif
-
     new Engine();
     initSystemsAndComponents();
 
