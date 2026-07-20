@@ -4889,6 +4889,15 @@ function identifyPlayerShip(p, paused)
                 end
             end
         end
+        if p.home_station == nil then
+            for i, station in ipairs(allied_stations) do
+                if station:isValid() then
+                    p.home_station = station
+                    station.home_player_name = p:getCallSign()
+                    break
+                end
+            end
+        end
         if nemesis_stations ~= nil then
             for i, nemesis in ipairs(nemesis_stations) do
                 local station = nemesis.station
