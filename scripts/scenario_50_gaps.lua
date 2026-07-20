@@ -91,7 +91,7 @@ function setConstants()
         "Cruiser",
         "Missile Cruiser",
         "Strikeship",
-        "Adv. Striker",
+        "Magpie",
         "Dreadnought",
         "Battlestation",
         "Blockade Runner",
@@ -4070,7 +4070,7 @@ function setPlayers()
                     end
                     pobj.shipScore = 52
                     pobj.maxCargo = 6
-                elseif tempPlayerType == "Player Cruiser" then
+                elseif tempPlayerType == "Vindicator" then
                     if #playerShipNamesForCruiser > 0 then
                         ni = math.random(1, #playerShipNamesForCruiser)
                         pobj:setCallSign(playerShipNamesForCruiser[ni])
@@ -4078,7 +4078,7 @@ function setPlayers()
                     end
                     pobj.shipScore = 40
                     pobj.maxCargo = 6
-                elseif tempPlayerType == "Player Missile Cr." then
+                elseif tempPlayerType == "Avalanche" then
                     if #playerShipNamesForMissileCruiser > 0 then
                         ni = math.random(1, #playerShipNamesForMissileCruiser)
                         pobj:setCallSign(playerShipNamesForMissileCruiser[ni])
@@ -4086,7 +4086,7 @@ function setPlayers()
                     end
                     pobj.shipScore = 45
                     pobj.maxCargo = 8
-                elseif tempPlayerType == "Player Fighter" then
+                elseif tempPlayerType == "Stingray" then
                     if #playerShipNamesForFighter > 0 then
                         ni = math.random(1, #playerShipNamesForFighter)
                         pobj:setCallSign(playerShipNamesForFighter[ni])

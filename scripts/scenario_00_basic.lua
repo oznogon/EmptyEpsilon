@@ -453,7 +453,7 @@ end
 --- Initializes main GM Menu
 function gmButtons()
     clearGMFunctions()
-    addGMFunction(_("buttonGM", "+Named Waves"), namedWaves)
+    addGMFunction(_("buttonGM", "+Named waves"), namedWaves)
     addGMFunction(_("buttonGM", "Random wave"), function()
         addWave(
             enemyList,
@@ -559,12 +559,12 @@ function namedWaves()
         [1] = _("buttonGM", "Fighter"),
         [2] = _("buttonGM", "Gunship"),
         [4] = _("buttonGM", "Dreadnought"),
-        [5] = _("buttonGM", "Missile Cruiser"),
+        [5] = _("buttonGM", "Missile cruiser"),
         [6] = _("buttonGM", "Cruiser"),
         [9] = _("buttonGM", "Adv. striker"),
     }
     clearGMFunctions()
-    addGMFunction(_("buttonGM", "-From Named Waves"), gmButtons)
+    addGMFunction(_("buttonGM", "-From named waves"), gmButtons)
     for index, name in pairs(wave_names) do
         addGMFunction(name, function()
             string.format("")

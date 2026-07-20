@@ -104,7 +104,7 @@ function presetOptionVariables()
             faction = "Human Navy",
             ship_pref_1 = "Maverick", --pref 2
             ship_pref_2 = "Nautilus", --pref 1
-            ship_pref_3 = "Player Cruiser",
+            ship_pref_3 = "Vindicator",
         }
     )
     table.insert(preset_players,
@@ -116,8 +116,8 @@ function presetOptionVariables()
             ship_pref_2 = "Atlantis", --pref 1
             ship_pref_3 = "Crucible",
             ship_pref_4 = "Piranha",
-            ship_pref_5 = "Player Cruiser",
-            ship_pref_6 = "Player Missile Cr.",
+            ship_pref_5 = "Vindicator",
+            ship_pref_6 = "Avalanche",
         }
     )
     --2nd ship spawned: Atlantis
@@ -571,7 +571,7 @@ function setConstants()
             short_range_radar = 5000,
             probes = 25,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -579,7 +579,7 @@ function setConstants()
             short_range_radar = 5000,
             probes = 22,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -587,7 +587,7 @@ function setConstants()
             short_range_radar = 6000,
             probes = 26,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -711,7 +711,7 @@ function setConstants()
         ["Ranus U"] = { strength = 25, create = stockTemplate },
         ["Stalker Q7"] = { strength = 25, create = stockTemplate },
         ["Stalker R7"] = { strength = 25, create = stockTemplate },
-        ["Adv. Striker"] = { strength = 27, create = stockTemplate },
+        ["Magpie"] = { strength = 27, create = stockTemplate },
         ["Elara P2"] = { strength = 28, create = stockTemplate },
         ["Strikeship"] = { strength = 30, create = stockTemplate },
         ["Fiend G3"] = { strength = 33, create = stockTemplate },
@@ -3878,12 +3878,12 @@ function setPlayer(pobj, playerIndex)
     elseif tempPlayerType == "Phobos M3P" then
         pobj:setWarpDrive(true)
         pobj:setWarpSpeed(900)
-    elseif tempPlayerType == "Player Cruiser" then
+    elseif tempPlayerType == "Vindicator" then
         pobj.max_jump_range = 80000
         pobj.min_jump_range = 5000
         pobj:setJumpDriveRange(pobj.min_jump_range, pobj.max_jump_range)
         pobj:setJumpDriveCharge(pobj.max_jump_range)
-    elseif tempPlayerType == "Player Fighter" then
+    elseif tempPlayerType == "Stingray" then
         pobj.autoCoolant = false
         pobj:setJumpDrive(true)
         pobj.max_jump_range = 40000
@@ -7734,7 +7734,7 @@ function setupTailoredShipAttributes()
         "Parchim",
         "Coronado",
     }
-    playerShipNamesFor["Player Cruiser"] = {
+    playerShipNamesFor["Vindicator"] = {
         "Excelsior",
         "Velociraptor",
         "Thunder",
@@ -7744,7 +7744,7 @@ function setupTailoredShipAttributes()
         "Aspern",
         "Panther",
     }
-    playerShipNamesFor["Player Missile Cr."] = {
+    playerShipNamesFor["Avalanche"] = {
         "Projectus",
         "Hurlmeister",
         "Flinger",
@@ -7753,7 +7753,7 @@ function setupTailoredShipAttributes()
         "Nakhimov",
         "Antigone",
     }
-    playerShipNamesFor["Player Fighter"] = {
+    playerShipNamesFor["Stingray"] = {
         "Buzzer",
         "Flitter",
         "Zippiticus",

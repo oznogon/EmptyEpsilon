@@ -305,7 +305,7 @@ function setConstants()
         "Cruiser",
         "Missile Cruiser",
         "Strikeship",
-        "Adv. Striker",
+        "Magpie",
         "Dreadnought",
         "Battlestation",
         "Blockade Runner",
@@ -738,7 +738,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Player Cruiser"] = {
+            ["Vindicator"] = {
                 strength = 40,
                 cargo = 6,
                 distance = 400,
@@ -753,7 +753,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Player Missile Cr."] = {
+            ["Avalanche"] = {
                 strength = 45,
                 cargo = 8,
                 distance = 200,
@@ -768,7 +768,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Player Fighter"] = {
+            ["Stingray"] = {
                 strength = 7,
                 cargo = 3,
                 distance = 100,
@@ -1997,7 +1997,7 @@ function setGlobals()
             "Vulture",
             "Predator",
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -2007,7 +2007,7 @@ function setGlobals()
             "Aspern",
             "Panther",
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -2016,7 +2016,7 @@ function setGlobals()
             "Stinger",
             "Stripe",
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -9661,7 +9661,7 @@ function tractorDisabledShip(delta)
                 "Greeble",
             }
             tractorShip = CpuShip()
-                :setTemplate("Strikeship")
+                :setTemplate("Strix")
                 :setFaction("Human Navy")
                 :setPosition(ppx + tpx, ppy + tpy)
                 :setScanned(true)

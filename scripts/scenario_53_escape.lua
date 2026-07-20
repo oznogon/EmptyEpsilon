@@ -58,11 +58,11 @@ function init()
         "Atlantis X23",
         "Starhammer II",
         "Odin",
-        "Fighter",
-        "Cruiser",
-        "Missile Cruiser",
-        "Strikeship",
-        "Adv. Striker",
+        "Riposte",
+        "Vindicator",
+        "Polaris",
+        "Strix",
+        "Magpie",
         "Dreadnought",
         "Battlestation",
         "Blockade Runner",
@@ -821,7 +821,7 @@ function init()
     ship_spot = tableRemoveRandom(ship_spots)
     junkStrikeship = CpuShip()
         :setFaction("Kraylor")
-        :setTemplate("Strikeship")
+        :setTemplate("Strix")
         :setPosition(ship_spot.x, ship_spot.y)
         :orderIdle()
         :setHull(0)
@@ -6359,7 +6359,7 @@ function junkYardDog(delta)
                 elseif difficulty > 1 then
                     junk_yard_dog = CpuShip()
                         :setFaction("Exuari")
-                        :setTemplate("Fighter")
+                        :setTemplate("Riposte")
                         :setPosition(brigx - 50, brigy - 50)
                         :orderAttack(playerRepulse)
                         :setRotation(180)
@@ -6453,7 +6453,7 @@ function borisChase(delta)
                 elseif difficulty > 1 then
                     junkChaser = CpuShip()
                         :setFaction("Exuari")
-                        :setTemplate("Fighter")
+                        :setTemplate("Riposte")
                         :setPosition(brigx - 100, brigy - 100)
                         :orderAttack(playerRepulse)
                         :setRotation(180)

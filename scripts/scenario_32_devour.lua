@@ -316,7 +316,7 @@ function setConstants()
         "Vulture",
         "Predator",
     }
-    player_ship_names_for["Player Cruiser"] = {
+    player_ship_names_for["Vindicator"] = {
         "Excelsior",
         "Velociraptor",
         "Thunder",
@@ -326,7 +326,7 @@ function setConstants()
         "Aspern",
         "Panther",
     }
-    player_ship_names_for["Player Fighter"] = {
+    player_ship_names_for["Stingray"] = {
         "Buzzer",
         "Flitter",
         "Zippiticus",
@@ -335,7 +335,7 @@ function setConstants()
         "Stinger",
         "Stripe",
     }
-    player_ship_names_for["Player Missile Cr."] = {
+    player_ship_names_for["Avalanche"] = {
         "Projectus",
         "Hurlmeister",
         "Flinger",
@@ -435,7 +435,7 @@ function setConstants()
         ["Stalker Q7"] = { strength = 25, create = stockTemplate },
         ["Stalker R7"] = { strength = 25, create = stockTemplate },
         ["Whirlwind"] = { strength = 26, create = whirlwind },
-        ["Adv. Striker"] = { strength = 27, create = stockTemplate },
+        ["Magpie"] = { strength = 27, create = stockTemplate },
         ["Elara P2"] = { strength = 28, create = stockTemplate },
         ["Tempest"] = { strength = 30, create = tempest },
         ["Strikeship"] = { strength = 30, create = stockTemplate },
@@ -473,7 +473,7 @@ function setConstants()
         ["Adder MK8"] = 100,
         ["Adder MK9"] = 100,
         ["Adv. Gunship"] = 400,
-        ["Adv. Striker"] = 300,
+        ["Magpie"] = 300,
         ["Atlantis X23"] = 400,
         ["Atlantis Y42"] = 400,
         ["Barracuda"] = 200,
@@ -642,7 +642,7 @@ function setConstants()
         ["Transport5x3"] = 600,
         ["Transport5x4"] = 800,
         ["Transport5x5"] = 800,
-        ["Tug"] = 200,
+        ["Apis"] = 200,
         ["Tyr"] = 2000,
         ["Waddle 5"] = 100,
         ["Warden"] = 600,
@@ -1526,7 +1526,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Player Cruiser"] = {
+            ["Vindicator"] = {
                 strength = 40,
                 cargo = 6,
                 distance = 400,
@@ -1541,7 +1541,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Player Missile Cr."] = {
+            ["Avalanche"] = {
                 strength = 45,
                 cargo = 8,
                 distance = 200,
@@ -1556,7 +1556,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Player Fighter"] = {
+            ["Stingray"] = {
                 strength = 7,
                 cargo = 3,
                 distance = 100,

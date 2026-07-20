@@ -98,9 +98,9 @@ function setVariations()
     -- Alternative player ship
     local prototype_config = {
         ["None"] = "None",
-        ["Cruiser"] = "Player Cruiser",
-        ["Missile Cruiser"] = "Player Missile Cr.",
-        ["Fighter"] = "Player Fighter",
+        ["Cruiser"] = "Vindicator",
+        ["Missile Cruiser"] = "Avalanche",
+        ["Fighter"] = "Stingray",
     }
     if getScenarioSetting("Prototype") ~= "None" then
         local ship = PlayerSpaceship():setTemplate(
@@ -108,7 +108,7 @@ function setVariations()
         )
         if
             prototype_config[getScenarioSetting("Prototype")]
-            == "Player Fighter"
+            == "Stingray"
         then
             --               Arc, Dir,Range,Cycle, Dmg
             ship:setBeamWeapon(0, 65, 0, 700, 4, 4)
@@ -495,19 +495,19 @@ function setGlobals()
             long_range_radar = 25000,
             short_range_radar = 6000,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             long_range_radar = 30000,
             short_range_radar = 5000,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             long_range_radar = 15000,
             short_range_radar = 4500,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             long_range_radar = 35000,
@@ -655,7 +655,7 @@ function setGlobals()
             "Vulture",
             "Predator",
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -665,7 +665,7 @@ function setGlobals()
             "Aspern",
             "Panther",
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -674,7 +674,7 @@ function setGlobals()
             "Stinger",
             "Stripe",
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",

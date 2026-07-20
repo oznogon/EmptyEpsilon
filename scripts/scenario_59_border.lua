@@ -451,7 +451,7 @@ function setConstants()
         ["Stalker Q7"] = { strength = 25, create = stockTemplate },
         ["Stalker R7"] = { strength = 25, create = stockTemplate },
         ["Whirlwind"] = { strength = 26, create = whirlwind },
-        ["Adv. Striker"] = { strength = 27, create = stockTemplate },
+        ["Magpie"] = { strength = 27, create = stockTemplate },
         ["Tempest"] = { strength = 30, create = tempest },
         ["Strikeship"] = { strength = 30, create = stockTemplate },
         ["Maniapak"] = { strength = 34, create = maniapak },
@@ -1193,7 +1193,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -1204,7 +1204,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -1215,7 +1215,7 @@ function setConstants()
             cm_boost = 450,
             cm_strafe = 150,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -1587,7 +1587,7 @@ function setConstants()
         "Parchim",
         "Coronado",
     }
-    playerShipNamesFor["Player Cruiser"] = {
+    playerShipNamesFor["Vindicator"] = {
         "Excelsior",
         "Velociraptor",
         "Thunder",
@@ -1597,7 +1597,7 @@ function setConstants()
         "Aspern",
         "Panther",
     }
-    playerShipNamesFor["Player Missile Cr."] = {
+    playerShipNamesFor["Avalanche"] = {
         "Projectus",
         "Hurlmeister",
         "Flinger",
@@ -1606,7 +1606,7 @@ function setConstants()
         "Nakhimov",
         "Antigone",
     }
-    playerShipNamesFor["Player Fighter"] = {
+    playerShipNamesFor["Stingray"] = {
         "Buzzer",
         "Flitter",
         "Zippiticus",
@@ -11300,7 +11300,7 @@ function describeStockPlayerShips()
             )
         )
     end)
-    addGMFunction(_("buttonGM", "Player Cruiser"), function()
+    addGMFunction(_("buttonGM", "Vindicator"), function()
         addGMMessage(
             _(
                 "msgGM",
@@ -11308,7 +11308,7 @@ function describeStockPlayerShips()
             )
         )
     end)
-    addGMFunction(_("buttonGM", "Player Fighter"), function()
+    addGMFunction(_("buttonGM", "Stingray"), function()
         addGMMessage(
             _(
                 "msgGM",
@@ -11316,7 +11316,7 @@ function describeStockPlayerShips()
             )
         )
     end)
-    addGMFunction(_("buttonGM", "Player Missile Cr."), function()
+    addGMFunction(_("buttonGM", "Avalanche"), function()
         addGMMessage(
             _(
                 "msgGM",
@@ -11531,7 +11531,7 @@ function createPlayerShipBlazon()
 end
 function createPlayerShipSimian()
     playerSimian = PlayerSpaceship()
-        :setTemplate("Player Missile Cr.")
+        :setTemplate("Avalanche")
         :setFaction("Human Navy")
         :setCallSign("Simian")
     playerSimian:setTypeName("Destroyer III")
@@ -22343,7 +22343,7 @@ function setPlayer(pobj)
         elseif tempPlayerType == "Phobos M3P" then
             pobj:setWarpDrive(true)
             pobj:setWarpSpeed(500)
-        elseif tempPlayerType == "Player Fighter" then
+        elseif tempPlayerType == "Stingray" then
             pobj.autoCoolant = false
             pobj:setJumpDrive(true)
             pobj.max_jump_range = 40000

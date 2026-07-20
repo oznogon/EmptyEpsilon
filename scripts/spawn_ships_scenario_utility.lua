@@ -1973,7 +1973,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Adv. Striker"] = {
+            ["Magpie"] = {
                 strength = 27,
                 adder = false,
                 missiler = false,
@@ -4947,9 +4947,9 @@ function playerPower()
                 ["Repulse"] = 14,
                 ["Striker"] = 8,
                 ["ZX-Lindworm"] = 8,
-                ["Player Cruiser"] = 40,
-                ["Player Missile Cr."] = 45,
-                ["Player Fighter"] = 7,
+                ["Vindicator"] = 40,
+                ["Avalanche"] = 45,
+                ["Stingray"] = 7,
             }
             if spawn_player_score[p:getTypeName()] ~= nil then
                 player_ship_score = player_ship_score

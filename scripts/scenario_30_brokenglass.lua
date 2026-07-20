@@ -862,19 +862,19 @@ function init()
     Kw_enemies = {
         CpuShip()
             :setFaction("Kraylor")
-            :setTemplate("Strikeship")
+            :setTemplate("Strix")
             :setCallSign("BR5")
             :setPosition(377672, 540642)
             :orderStandGround(),
         CpuShip()
             :setFaction("Kraylor")
-            :setTemplate("Strikeship")
+            :setTemplate("Strix")
             :setCallSign("BR6")
             :setPosition(377541, 545431)
             :orderStandGround(),
         CpuShip()
             :setFaction("Kraylor")
-            :setTemplate("Missile Cruiser")
+            :setTemplate("Polaris")
             :setCallSign("CSS4")
             :setPosition(373724, 542711)
             :orderStandGround(),
@@ -1912,7 +1912,7 @@ function SpawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
         "Cruiser",
         "Missile Cruiser",
         "Strikeship",
-        "Adv. Striker",
+        "Magpie",
         "Dreadnought",
         "Battlestation",
         "Blockade Runner",

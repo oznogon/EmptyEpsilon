@@ -2831,7 +2831,7 @@ msgstr ""
 
 #: scripts/scenario_59_border.lua:5337
 msgctxt "buttonGM"
-msgid "Player Cruiser"
+msgid "Vindicator"
 msgstr ""
 
 #: scripts/scenario_59_border.lua:5338
@@ -2857,7 +2857,7 @@ msgstr ""
 
 #: scripts/scenario_59_border.lua:5340
 msgctxt "buttonGM"
-msgid "Player Fighter"
+msgid "Stingray"
 msgstr ""
 
 #: scripts/scenario_59_border.lua:5341
@@ -2878,7 +2878,7 @@ msgstr ""
 
 #: scripts/scenario_59_border.lua:5343
 msgctxt "buttonGM"
-msgid "Player Missile Cr."
+msgid "Avalanche"
 msgstr ""
 
 #: scripts/scenario_59_border.lua:5344

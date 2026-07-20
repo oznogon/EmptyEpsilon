@@ -74,7 +74,7 @@ function setVariations()
     swarm_estimate = swarm_config[getScenarioSetting("Swarm")].estimate
     local basis_config = {
         ["Fighter"] = {
-            template = "Fighter",
+            template = "Riposte",
             desc = _("orders-comms", "fighter"),
         },
         ["Hornet"] = {
@@ -375,7 +375,7 @@ function setConstants()
         "Vulture",
         "Predator",
     }
-    player_ship_names_for["Player Cruiser"] = {
+    player_ship_names_for["Vindicator"] = {
         "Excelsior",
         "Velociraptor",
         "Thunder",
@@ -385,7 +385,7 @@ function setConstants()
         "Aspern",
         "Panther",
     }
-    player_ship_names_for["Player Fighter"] = {
+    player_ship_names_for["Stingray"] = {
         "Buzzer",
         "Flitter",
         "Zippiticus",
@@ -394,7 +394,7 @@ function setConstants()
         "Stinger",
         "Stripe",
     }
-    player_ship_names_for["Player Missile Cr."] = {
+    player_ship_names_for["Avalanche"] = {
         "Projectus",
         "Hurlmeister",
         "Flinger",
@@ -620,7 +620,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Player Cruiser"] = {
+            ["Vindicator"] = {
                 strength = 40,
                 cargo = 6,
                 distance = 400,
@@ -635,7 +635,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Player Missile Cr."] = {
+            ["Avalanche"] = {
                 strength = 45,
                 cargo = 8,
                 distance = 200,
@@ -650,7 +650,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Player Fighter"] = {
+            ["Stingray"] = {
                 strength = 7,
                 cargo = 3,
                 distance = 100,

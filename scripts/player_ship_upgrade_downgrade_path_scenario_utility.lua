@@ -110,7 +110,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "Kiriya is Warp Carrier based on the jump carrier with stronger shields and hull and with minimal armament"
                 ),
             },
-            ["Player Cruiser"] = {
+            ["Vindicator"] = {
                 image = "radar/cruiser.png",
                 model = "battleship_destroyer_5_upgraded",
                 desc = _(
@@ -118,7 +118,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "A fairly standard cruiser. Stronger than average beams, weaker than average shields, farther than average jump drive range"
                 ),
             },
-            ["Player Missile Cr."] = {
+            ["Avalanche"] = {
                 image = "radar/missile_cruiser.png",
                 model = "space_cruiser_4",
                 desc = _(
@@ -150,7 +150,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "The Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields."
                 ),
             },
-            ["Player Fighter"] = {
+            ["Stingray"] = {
                 image = "radar/fighter.png",
                 model = "small_fighter_1",
                 desc = _(
@@ -15309,7 +15309,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 30,
         },
-        ["Player Cruiser"] = { --10 + beam(8) + missile(12) + shield(8) + hull(6) + impulse(10) + ftl(10) + sensors(10) = 74
+        ["Vindicator"] = { --10 + beam(8) + missile(12) + shield(8) + hull(6) + impulse(10) + ftl(10) + sensors(10) = 74
             ["beam"] = {
                 { --1
                     {
@@ -16489,7 +16489,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 29,
         },
-        ["Player Missile Cr."] = { --10 + beam(9) + missile(17) + shield(8) + hull(6) + impulse(10) + ftl(9) + sensors(10) = 79
+        ["Avalanche"] = { --10 + beam(9) + missile(17) + shield(8) + hull(6) + impulse(10) + ftl(9) + sensors(10) = 79
             ["beam"] = {
                 { --1
                     { idx = -1 },
@@ -18305,7 +18305,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 30,
         },
-        ["Player Fighter"] = { --5 + beam(11) + missile(10) + shield(7) + hull(5) + impulse(8) + ftl(9) + sensors(7) = 62
+        ["Stingray"] = { --5 + beam(11) + missile(10) + shield(7) + hull(5) + impulse(8) + ftl(9) + sensors(7) = 62
             ["beam"] = {
                 { --1
                     {

@@ -1070,7 +1070,7 @@ function setConstants()
             short_range_radar = 5500,
             create = stockTemplate,
         },
-        ["Adv. Striker"] = {
+        ["Magpie"] = {
             strength = 27,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -1964,7 +1964,7 @@ function setConstants()
             "Vulture",
             "Predator",
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -1974,7 +1974,7 @@ function setConstants()
             "Aspern",
             "Panther",
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -1983,7 +1983,7 @@ function setConstants()
             "Stinger",
             "Stripe",
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -2089,7 +2089,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -2100,7 +2100,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -2111,7 +2111,7 @@ function setConstants()
             cm_boost = 450,
             cm_strafe = 150,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -15544,7 +15544,7 @@ function setPlayers()
                 pobj:setWarpDrive(true)
             elseif tempPlayerType == "Phobos M3P" then
                 pobj:setWarpDrive(true)
-            elseif tempPlayerType == "Player Fighter" then
+            elseif tempPlayerType == "Stingray" then
                 pobj.autoCoolant = false
                 pobj:setJumpDrive(true)
                 pobj:setJumpDriveRange(3000, 40000)

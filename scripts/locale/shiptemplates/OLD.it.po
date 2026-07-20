@@ -14,19 +14,19 @@ msgstr ""
 #: scripts/shiptemplates/OLD.lua:6
 #, fuzzy
 msgctxt "playerShip"
-msgid "Player Cruiser"
+msgid "Vindicator"
 msgstr "Incrociatore (Giocatore)"
 
 #: scripts/shiptemplates/OLD.lua:63
 #, fuzzy
 msgctxt "playerShip"
-msgid "Player Missile Cr."
+msgid "Avalanche"
 msgstr "Incr. Missilistico (Giocatore)"
 
 #: scripts/shiptemplates/OLD.lua:118
 #, fuzzy
 msgctxt "playerShip"
-msgid "Player Fighter"
+msgid "Stingray"
 msgstr "Caccia (Giocatore)"
 
 #: scripts/shiptemplates/OLD.lua:162
@@ -237,7 +237,7 @@ msgstr ""
 #: scripts/shiptemplates/OLD.lua:312
 #, fuzzy
 msgctxt "ship"
-msgid "Adv. Striker"
+msgid "Magpie"
 msgstr "Striker Avanzato"
 
 #: scripts/shiptemplates/OLD.lua:312

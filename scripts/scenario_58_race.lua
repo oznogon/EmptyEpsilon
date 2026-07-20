@@ -170,7 +170,7 @@ function init()
             short_range_radar = 5000,
             probes = 25,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -178,7 +178,7 @@ function init()
             short_range_radar = 5000,
             probes = 22,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -186,7 +186,7 @@ function init()
             short_range_radar = 6000,
             probes = 26,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -327,7 +327,7 @@ function init()
         "Parchim",
         "Coronado",
     }
-    playerShipNamesFor["Player Cruiser"] = {
+    playerShipNamesFor["Vindicator"] = {
         "Excelsior",
         "Velociraptor",
         "Thunder",
@@ -337,7 +337,7 @@ function init()
         "Aspern",
         "Panther",
     }
-    playerShipNamesFor["Player Missile Cr."] = {
+    playerShipNamesFor["Avalanche"] = {
         "Projectus",
         "Hurlmeister",
         "Flinger",
@@ -346,7 +346,7 @@ function init()
         "Nakhimov",
         "Antigone",
     }
-    playerShipNamesFor["Player Fighter"] = {
+    playerShipNamesFor["Stingray"] = {
         "Buzzer",
         "Flitter",
         "Zippiticus",
@@ -3869,7 +3869,7 @@ function handleDockedState()
                                 comms_source.cargo = comms_source.cargo + 1
                                 if
                                     comms_source:getTypeName()
-                                    == "Player Fighter"
+                                    == "Stingray"
                                 then
                                     comms_source:setJumpDriveRange(3000, 45000)
                                 else
@@ -3909,7 +3909,7 @@ function handleDockedState()
                                 comms_source.cargo = comms_source.cargo + 1
                                 if
                                     comms_source:getTypeName()
-                                    == "Player Fighter"
+                                    == "Stingray"
                                 then
                                     comms_source:setJumpDriveRange(3000, 45000)
                                 else
@@ -6051,7 +6051,7 @@ function update(delta)
                         p:setWarpDrive(true)
                     elseif tempPlayerType == "Phobos M3P" then
                         p:setWarpDrive(true)
-                    elseif tempPlayerType == "Player Fighter" then
+                    elseif tempPlayerType == "Stingray" then
                         p:setJumpDrive(true)
                         p:setJumpDriveRange(3000, 40000)
                     end

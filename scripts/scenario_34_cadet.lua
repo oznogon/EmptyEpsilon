@@ -1503,7 +1503,7 @@ function setConstants()
             hop_range = 980,
             create = stockTemplate,
         },
-        ["Adv. Striker"] = {
+        ["Magpie"] = {
             strength = 27,
             adder = false,
             missiler = false,
@@ -2818,7 +2818,7 @@ function setGlobals()
             "Vulture",
             "Predator",
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -2828,7 +2828,7 @@ function setGlobals()
             "Aspern",
             "Panther",
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -2837,7 +2837,7 @@ function setGlobals()
             "Stinger",
             "Stripe",
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",

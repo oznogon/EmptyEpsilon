@@ -69,7 +69,7 @@ end
 player_fighter = PlayerSpaceship()
     :setFaction("Human Navy")
     :setTemplate("Striker")
-    :setCallSign("Player fighter")
+    :setCallSign("Stingray")
     :setWeaponTubeCount(7)
     :weaponTubeAllowMissle(0, "Homing")
     :weaponTubeAllowMissle(1, "Nuke")

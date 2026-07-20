@@ -470,7 +470,7 @@ function setGlobals()
             "Pixie",
             "Tinkerbell",
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -480,7 +480,7 @@ function setGlobals()
             "Aspern",
             "Panther",
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -489,7 +489,7 @@ function setGlobals()
             "Nakhimov",
             "Antigone",
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -611,21 +611,21 @@ function setConstants()
             long_range_radar = 25000,
             short_range_radar = 6000,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             distance = 400,
             long_range_radar = 30000,
             short_range_radar = 5000,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             distance = 100,
             long_range_radar = 15000,
             short_range_radar = 4500,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -695,7 +695,7 @@ function setConstants()
         ["Ranus U"] = { strength = 25, create = stockTemplate },
         ["Stalker Q7"] = { strength = 25, create = stockTemplate },
         ["Stalker R7"] = { strength = 25, create = stockTemplate },
-        ["Adv. Striker"] = { strength = 27, create = stockTemplate },
+        ["Magpie"] = { strength = 27, create = stockTemplate },
         ["Elara P2"] = { strength = 28, create = stockTemplate },
         ["Tempest"] = { strength = 30, create = tempest },
         ["Strikeship"] = { strength = 30, create = stockTemplate },
@@ -7404,7 +7404,7 @@ function warpJamLineStart(delta)
             :orderDefendTarget(wjCenter)
         wjCenterE3 = CpuShip()
             :setFaction("Kraylor")
-            :setTemplate("Fighter")
+            :setTemplate("Riposte")
             :setPosition((esx + cpx) / 2, (esy + cpy) / 2)
             :orderDefendTarget(wjCenter)
         wjCenterE4 = CpuShip()
@@ -7424,7 +7424,7 @@ function warpJamLineStart(delta)
             :orderDefendTarget(wjP1)
         wjP1E3 = CpuShip()
             :setFaction("Kraylor")
-            :setTemplate("Fighter")
+            :setTemplate("Riposte")
             :setPosition((esx + cpx) / 2 + 20000, (esy + cpy) / 2 + 20000)
             :orderDefendTarget(wjP1)
         wjP1E4 = CpuShip()
@@ -7444,7 +7444,7 @@ function warpJamLineStart(delta)
             :orderDefendTarget(wjP2)
         wjP2E3 = CpuShip()
             :setFaction("Kraylor")
-            :setTemplate("Fighter")
+            :setTemplate("Riposte")
             :setPosition((esx + cpx) / 2 - 20000, (esy + cpy) / 2 - 20000)
             :orderDefendTarget(wjP2)
         wjP2E4 = CpuShip()
@@ -7464,7 +7464,7 @@ function warpJamLineStart(delta)
             :orderDefendTarget(wjP3)
         wjP3E3 = CpuShip()
             :setFaction("Kraylor")
-            :setTemplate("Fighter")
+            :setTemplate("Riposte")
             :setPosition((esx + cpx) / 2 + 20000, (esy + cpy) / 2 - 20000)
             :orderDefendTarget(wjP3)
         wjP3E4 = CpuShip()
@@ -7484,7 +7484,7 @@ function warpJamLineStart(delta)
             :orderDefendTarget(wjP4)
         wjP4E3 = CpuShip()
             :setFaction("Kraylor")
-            :setTemplate("Fighter")
+            :setTemplate("Riposte")
             :setPosition((esx + cpx) / 2 - 20000, (esy + cpy) / 2 + 20000)
             :orderDefendTarget(wjP4)
         wjP4E4 = CpuShip()
@@ -10065,7 +10065,7 @@ function setPlayers()
                     pobj:setWarpDrive(true)
                 elseif tempPlayerType == "Phobos M3P" then
                     pobj:setWarpDrive(true)
-                elseif tempPlayerType == "Player Fighter" then
+                elseif tempPlayerType == "Stingray" then
                     pobj.autoCoolant = false
                     pobj:setJumpDrive(true)
                     pobj:setJumpDriveRange(3000, 40000)

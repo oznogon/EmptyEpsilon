@@ -243,7 +243,7 @@ end
 function cruiserdrone(enemyFaction)
     --Relative strength reference number: 23
     --courtesy of Black Wall scenario
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Cruiser")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Karnack")
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -292,7 +292,7 @@ function cruiserdrone(enemyFaction)
 end
 function cucaracha(enemyFaction)
     --Relative strength reference number: 36
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Tug")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Apis")
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -310,7 +310,7 @@ function cucaracha(enemyFaction)
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
     local cucaracha_key = _("scienceDB", "Cucaracha")
-    local tug_key = _("scienceDB", "Tug")
+    local tug_key = _("scienceDB", "Apis")
     local cucaracha_db =
         queryScienceDatabase(ships_key, no_class_key, cucaracha_key)
     if cucaracha_db == nil then
@@ -838,7 +838,7 @@ end
 function fighter2(enemyFaction)
     --courtesy of Black Wall scenario
     --Relative strength reference number: 9
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Fighter")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Riposte")
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -856,7 +856,7 @@ function fighter2(enemyFaction)
     ship:setWeaponStorageMax("Homing", 2):setWeaponStorage("Homing", 2)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
-    local fighter_key = _("scienceDB", "Fighter")
+    local fighter_key = _("scienceDB", "Riposte")
     local fighter2_db =
         queryScienceDatabase(ships_key, starfighter_key, fighter2_key)
     if fighter2_db == nil then
@@ -1654,7 +1654,7 @@ function predator(enemyFaction)
 end
 function shepherd(enemyFaction)
     --Relative strength reference number: 6
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Fighter")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Riposte")
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -1666,7 +1666,7 @@ function shepherd(enemyFaction)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local shepherd_key = _("scienceDB", "Shepherd")
-    local fighter_key = _("scienceDB", "Fighter")
+    local fighter_key = _("scienceDB", "Riposte")
     local shepherd_db =
         queryScienceDatabase(ships_key, starfighter_key, shepherd_key)
     if shepherd_db == nil then
@@ -1874,7 +1874,7 @@ function tempest(enemyFaction)
 end
 function touchy(enemyFaction)
     --Relative strength reference number: 7
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Fighter")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Riposte")
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then

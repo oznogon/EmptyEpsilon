@@ -645,7 +645,7 @@ function setConstants()
             short_range_radar = 5500,
             create = stockTemplate,
         },
-        ["Adv. Striker"] = {
+        ["Magpie"] = {
             strength = 27,
             short_range_radar = 5000,
             create = stockTemplate,

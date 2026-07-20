@@ -224,7 +224,7 @@ msgstr ""
 
 #: scripts/scenario_00_basic.lua:280
 msgctxt "buttonGM"
-msgid "Adv. striker"
+msgid "Magpie"
 msgstr ""
 
 #: scripts/scenario_00_basic.lua:283

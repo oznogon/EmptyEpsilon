@@ -2205,7 +2205,7 @@ function setConstants() --variables that don't change
             hop_range = 980,
             create = stockTemplate,
         },
-        ["Adv. Striker"] = {
+        ["Magpie"] = {
             strength = 27,
             adder = false,
             missiler = false,
@@ -2802,7 +2802,7 @@ function setConstants() --variables that don't change
             tractor = true,
             mining = true,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -2812,7 +2812,7 @@ function setConstants() --variables that don't change
             tractor = false,
             mining = false,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -2822,7 +2822,7 @@ function setConstants() --variables that don't change
             tractor = false,
             mining = false,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -3391,7 +3391,7 @@ function setGlobals() --variables that might change
             "Vulture",
             "Predator",
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -3401,7 +3401,7 @@ function setGlobals() --variables that might change
             "Aspern",
             "Panther",
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -3410,7 +3410,7 @@ function setGlobals() --variables that might change
             "Stinger",
             "Stripe",
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",

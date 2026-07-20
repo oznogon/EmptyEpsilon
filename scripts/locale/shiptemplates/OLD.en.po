@@ -1,16 +1,16 @@
 #: scripts/shiptemplates/OLD.lua:6
 msgctxt "playerShip"
-msgid "Player Cruiser"
+msgid "Vindicator"
 msgstr ""
 
 #: scripts/shiptemplates/OLD.lua:63
 msgctxt "playerShip"
-msgid "Player Missile Cr."
+msgid "Avalanche"
 msgstr ""
 
 #: scripts/shiptemplates/OLD.lua:118
 msgctxt "playerShip"
-msgid "Player Fighter"
+msgid "Stingray"
 msgstr ""
 
 #: scripts/shiptemplates/OLD.lua:162
@@ -170,7 +170,7 @@ msgstr ""
 
 #: scripts/shiptemplates/OLD.lua:312
 msgctxt "ship"
-msgid "Adv. Striker"
+msgid "Magpie"
 msgstr ""
 
 #: scripts/shiptemplates/OLD.lua:312

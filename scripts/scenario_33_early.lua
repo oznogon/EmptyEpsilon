@@ -972,7 +972,7 @@ function setConstants()
             probes = 6,
             pods = 2,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -983,7 +983,7 @@ function setConstants()
             probes = 10,
             pods = 2,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -994,7 +994,7 @@ function setConstants()
             probes = 9,
             pods = 2,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -1048,7 +1048,7 @@ function setConstants()
         ["Adder MK8"] = 100,
         ["Adder MK9"] = 100,
         ["Adv. Gunship"] = 400,
-        ["Adv. Striker"] = 300,
+        ["Magpie"] = 300,
         ["Atlantis X23"] = 400,
         ["Atlantis Y42"] = 400,
         ["Battlestation"] = 2000,
@@ -1246,7 +1246,7 @@ function setConstants()
         ["Transport5x3"] = 600,
         ["Transport5x4"] = 800,
         ["Transport5x5"] = 800,
-        ["Tug"] = 200,
+        ["Apis"] = 200,
         ["Tyr"] = 2000,
         ["Waddle 5"] = 100,
         ["Warden"] = 600,
@@ -1293,14 +1293,14 @@ function setConstants()
             long_range_radar = 20000,
             short_range_radar = 4000,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             distance = 200,
             long_range_radar = 35000,
             short_range_radar = 6000,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -1384,7 +1384,7 @@ function setConstants()
             long_range_radar = 18000,
             short_range_radar = 4000,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -1731,7 +1731,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Adv. Striker"] = {
+        ["Magpie"] = {
             strength = 27,
             adder = false,
             missiler = false,

@@ -17415,7 +17415,7 @@ function minorUpgrades()
                                 tspd = 5,
                             },
                         },
-                        ["Player Cruiser"] = {
+                        ["Vindicator"] = {
                             {
                                 index = 2,
                                 arc = 45,

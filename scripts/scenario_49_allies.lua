@@ -226,7 +226,7 @@ function setConstants()
         "Cruiser",
         "Missile Cruiser",
         "Strikeship",
-        "Adv. Striker",
+        "Magpie",
         "Dreadnought",
         "Battlestation",
         "Blockade Runner",
@@ -539,7 +539,7 @@ function setConstants()
             "Vulture",
             "Predator",
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -549,7 +549,7 @@ function setConstants()
             "Aspern",
             "Panther",
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -558,7 +558,7 @@ function setConstants()
             "Stinger",
             "Stripe",
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -814,7 +814,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Player Cruiser"] = {
+            ["Vindicator"] = {
                 strength = 40,
                 cargo = 6,
                 distance = 400,
@@ -829,7 +829,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Player Missile Cr."] = {
+            ["Avalanche"] = {
                 strength = 45,
                 cargo = 8,
                 distance = 200,
@@ -844,7 +844,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Player Fighter"] = {
+            ["Stingray"] = {
                 strength = 7,
                 cargo = 3,
                 distance = 100,
@@ -11632,7 +11632,7 @@ function setPlayers()
                 p.setWarpDrive(true)
             elseif temp_player_type == "Phobos M3P" then
                 p.setWarpDrive(true)
-            elseif temp_player_type == "Player Fighter" then
+            elseif temp_player_type == "Stingray" then
                 p.autoCoolant = false
                 p.setJumpDrive(true)
                 p:setJumpDriveRange(3000, 40000)
