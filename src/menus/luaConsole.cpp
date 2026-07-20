@@ -2,6 +2,7 @@
 #include "i18n.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
+#include "preferenceManager.h"
 
 #include "gui/theme.h"
 #include "gui/gui2_overlay.h"
@@ -88,7 +89,7 @@ void LuaConsole::addLog(const string& message)
     while(console->log_messages.size() > 50)
         console->log_messages.erase(console->log_messages.begin());
     console->log->setText(string("\n").join(console->log_messages));
-    if (!console->is_open) {
+    if (!console->is_open && PreferencesManager::get("lua_console_popup", "1") == "1") {
         console->log_scroll->setPendingScrollToBottom();
         console->message_show_timers.emplace_back();
         console->message_show_timers.back().start(5.0f);

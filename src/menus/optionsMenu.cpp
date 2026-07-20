@@ -370,6 +370,19 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("margin", "0, 0, 0, 20");
         (new GuiTextTooltip(tooltip_toggle, "TOOLTIP_VISIBILITY_TIP", tr("tooltips", "Show or hide descriptive tooltips when hovering over controls."), 20.0f))->setWidth(280.0f);
+
+        // Lua console popup toggle.
+        auto* lua_console_popup_toggle = new GuiToggleButton(interface_page, "LUA_CONSOLE_POPUP", tr("options", "Show Lua console popup"),
+            [](bool value)
+            {
+                PreferencesManager::set("lua_console_popup", value ? "1" : "0");
+            }
+        );
+        lua_console_popup_toggle
+            ->setValue(PreferencesManager::get("lua_console_popup", "1") == "1")
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 20");
+        (new GuiTextTooltip(lua_console_popup_toggle, "LUA_CONSOLE_POPUP_TIP", tr("tooltips", "Show a popup overlay when Lua log messages are printed. Disable to reduce on-screen distractions."), 20.0f))->setWidth(280.0f);
     }
 
     // Control configuration
