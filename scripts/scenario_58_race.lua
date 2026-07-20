@@ -1554,7 +1554,7 @@ function setStations()
     local muddAngle = marconiAngle + random(60, 180)
     local xMudd, yMudd = vectorFromAngle(muddAngle, random(12500, 15000))
     stationMudd =
-        placeStation(xMudd, yMudd, "Muddville", "Independent", "Medium Station")
+        placeStation(xMudd, yMudd, "Nefatha", "Independent", "Medium Station")
     table.insert(stationList, stationMudd)
     stationMudd.comms_data.goods.luxury = { cost = 60, quantity = 10 }
     --Alcaleica
@@ -1630,7 +1630,7 @@ function setStations()
     local archerAngle = vactelAngle + random(60, 120)
     local xArcher, yArcher = vectorFromAngle(archerAngle, random(50000, 61250))
     stationArcher =
-        placeStation(xArcher, yArcher, "Archer", "Independent", "Small Station")
+        placeStation(xArcher, yArcher, "Toohie", "Independent", "Small Station")
     table.insert(stationList, stationArcher)
     stationArcher.comms_data.goods.shield = { cost = 90, quantity = 5 }
     --Deer
@@ -1645,14 +1645,14 @@ function setStations()
     local cavorAngle = deerAngle + random(60, 90)
     local xCavor, yCavor = vectorFromAngle(cavorAngle, random(50000, 61250))
     stationCavor =
-        placeStation(xCavor, yCavor, "Cavor", "Independent", "Small Station")
+        placeStation(xCavor, yCavor, "Tensilica", "Independent", "Small Station")
     table.insert(stationList, stationCavor)
     stationCavor.comms_data.goods.filament = { cost = 42, quantity = 5 }
     --Emory
     stationEmory = placeStation(
         random(72000, 85000),
         random(-50000, -26000),
-        "Erickson",
+        "Beamhold",
         "Human Navy",
         "Small Station"
     )
@@ -1784,7 +1784,7 @@ function setStations()
     stationTiberius = placeStation(
         random(-30000, -26000),
         random(-14000, 35000),
-        "Tiberius",
+        "Logi Lodge",
         "Human Navy",
         "Medium Station"
     )

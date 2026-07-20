@@ -3097,7 +3097,7 @@ function constructEnvironment()
     home_station = placeStation(
         center_x,
         center_y,
-        "Tiberius",
+        "Logi Lodge",
         "Human Navy",
         "Large Station"
     )
