@@ -206,11 +206,11 @@ function ShipTemplate:setModel(model_data_name)
     end
     return self
 end
---- As ShipTemplate:setExternalDockClasses().
+--- DEPRECATED: Use ShipTemplate:setExternalDockClasses().
 function ShipTemplate:setDockClasses(...)
     return self:setExternalDockClasses(...)
 end
---- Defines a list of vessel classes that can be externally docked to entities created from this ShipTemplate.
+--- Defines a list of vessel classes or subclasses that can be externally docked to entities created from this ShipTemplate.
 --- External docking keeps the docked ship attached to the outside of the carrier.
 --- By default, stations allow all classes of ships to dock externally.
 --- For consistent class usage across translations, wrap class name strings in the _ function.
@@ -222,7 +222,7 @@ function ShipTemplate:setExternalDockClasses(...)
     self.docking_bay.external_dock_classes = { ... }
     return self
 end
---- Defines a list of ship classes that can be docked inside of entities created from this ShipTemplate.
+--- Defines a list of ship classes or subclasses that can be docked inside of entities created from this ShipTemplate.
 --- Internal docking stores the docked ship inside of this entity.
 --- For consistent class usage across translations, wrap class name strings in the _ function.
 --- Example: template:setInternalDockClasses(_("class","Starfighter")) -- all Starfighter ships can dock inside of this entity
