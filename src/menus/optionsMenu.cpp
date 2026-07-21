@@ -209,7 +209,8 @@ static string getLanguageDisplayName(const string& code)
     static std::unordered_map<string, string> msgids = {
         {"cs", "Czech"},
         {"de", "German"},
-        {"en", "English"},
+        {"en_GB", "English (UK)"},
+        {"en_US", "English (US)"},
         {"fr", "French"},
         {"it", "Italian"},
     };
@@ -245,7 +246,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         auto default_elem = std::find(
             languages.begin(),
             languages.end(),
-            PreferencesManager::get("language", "en")
+            PreferencesManager::get("language", "en_US")
         );
         if (default_elem != languages.end())
             default_index = static_cast<int>(default_elem - languages.begin());

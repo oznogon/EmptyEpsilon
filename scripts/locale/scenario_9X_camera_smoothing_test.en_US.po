@@ -1,0 +1,7 @@
+# Scenario name
+msgid "Camera Smoothing Test"
+msgstr ""
+
+# Scenario description
+msgid "Test scenario for camera smoothing with moving cameras"
+msgstr ""

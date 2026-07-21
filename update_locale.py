@@ -7,7 +7,7 @@ import json
 import os
 
 def update_other_languages(base):
-    assert base.endswith(".en.po")
+    assert base.endswith(".en_US.po")
     for other in glob.glob(base[:-5] + "*.po"):
         if other == base:
             continue
@@ -18,7 +18,7 @@ def update_other_languages(base):
 
 os.makedirs("scripts/locale", exist_ok=True)
 for script in glob.glob("scripts/**/*.lua", recursive=True):
-    output = script.replace(".lua", ".en.po").replace("scripts/", "scripts/locale/")
+    output = script.replace(".lua", ".en_US.po").replace("scripts/", "scripts/locale/")
     info = {}
     key = None
     for line in open(script):
@@ -83,4 +83,4 @@ for script in glob.glob("scripts/**/*.lua", recursive=True):
         update_other_languages(output)
         print("Done %s" % (script))
 
-update_other_languages("resources/locale/main.en.po")
+update_other_languages("resources/locale/main.en_US.po")

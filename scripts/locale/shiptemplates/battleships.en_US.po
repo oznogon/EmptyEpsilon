@@ -1,0 +1,50 @@
+#: scripts/shiptemplates/battleships.lua:11
+msgctxt "ship"
+msgid "Odin"
+msgstr ""
+
+#: scripts/shiptemplates/battleships.lua:12
+#: scripts/shiptemplates/battleships.lua:47
+msgctxt "class"
+msgid "Battleship"
+msgstr ""
+
+#: scripts/shiptemplates/battleships.lua:12
+#: scripts/shiptemplates/battleships.lua:47
+msgctxt "subclass"
+msgid "Dreadnought"
+msgstr ""
+
+#: scripts/shiptemplates/battleships.lua:17
+msgid ""
+"The Odin is a \"ship\" so large and unique that it's almost a class of its "
+"own.\n"
+"\n"
+"The ship is often nicknamed the \"all-father\", a name that aptly describes "
+"the many roles it can fulfill. It's both a supply station and an extremely "
+"heavily armored and shielded weapon station capable of annihilating small "
+"fleets on its own.\n"
+"\n"
+"Odin's core contains the largest jump drive ever created. About 150 support "
+"crew are needed to operate the jump drive alone, and it takes 5 days of "
+"continuous operation to power it.\n"
+"\n"
+"Due to the enormous cost of this dreadnought, only the richest star systems "
+"can build and maintain an Odin, much less a fleet of them.\n"
+"\n"
+"This machine's primary tactic is to jump into an unsuspecting enemy system "
+"and destroy everything before they know what hit them. Despite the extreme "
+"cost, it's effective and destructive."
+msgstr ""
+
+#: scripts/shiptemplates/battleships.lua:45
+msgctxt "ship"
+msgid "Dreadnought"
+msgstr ""
+
+#: scripts/shiptemplates/battleships.lua:51
+msgid ""
+"The Dreadnought is a flying fortress. It's slow and maneuvers poorly, but "
+"packs an array of forward-facing beam weapons. Attacking it head-on is "
+"suicidal."
+msgstr ""

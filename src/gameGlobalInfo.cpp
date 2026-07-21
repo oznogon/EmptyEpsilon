@@ -351,12 +351,12 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
         foreach (PlayerInfo, p, player_info_list) p->crew_positions.clear();
 
     i18n::reset();
-    i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/comms_ship." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/comms_station." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/factionInfo." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/science_db." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+    i18n::load("locale/main." + PreferencesManager::get("language", "en_US") + ".po");
+    i18n::load("locale/comms_ship." + PreferencesManager::get("language", "en_US") + ".po");
+    i18n::load("locale/comms_station." + PreferencesManager::get("language", "en_US") + ".po");
+    i18n::load("locale/factionInfo." + PreferencesManager::get("language", "en_US") + ".po");
+    i18n::load("locale/science_db." + PreferencesManager::get("language", "en_US") + ".po");
+    i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en_US") + ".po"));
 
     script_environment_base = std::make_unique<sp::script::Environment>();
     main_script_error_count = 0;

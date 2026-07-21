@@ -28,7 +28,7 @@ static int playBriefingAudio(const string& filename)
     if (n > -1)
     {
         // Get locale audio file if present.
-        string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en") + filename.substr(n);
+        string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en_US") + filename.substr(n);
         if (getResourceStream(filename_with_locale))
             return soundManager->playSound(filename_with_locale);
     }

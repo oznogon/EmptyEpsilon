@@ -387,7 +387,7 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
         env.script_environment->setGlobal("player", player);
         env.script_environment->setGlobal("comms_source", player);
         env.script_environment->setGlobal("comms_target", target);
-        i18n::load("locale/" + script_name.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+        i18n::load("locale/" + script_name.replace(".lua", "." + PreferencesManager::get("language", "en_US") + ".po"));
         LuaConsole::checkResult(env.script_environment->runFile<void>(script_name));
     }
     else if (receiver->callback)

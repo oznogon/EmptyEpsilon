@@ -1,0 +1,3809 @@
+# Scenario name
+msgid "Scurvy Scavenger"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Stay alive while scavenging treasures. Length: > 2 hours\n"
+"\n"
+"Version 1"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures strength and/or number of enemies in this scenario"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Fewer or weaker enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal number or strength of enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "More or stronger enemies"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Murphy"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures the perversity of the universe according to Murphy's law"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are more in your favor"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are normal"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are more against you"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:60
+msgctxt "orders-comms"
+msgid "No primary orders"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:153
+#: scripts/scenario_36_scurvy_scavenger.lua:169
+#: scripts/scenario_36_scurvy_scavenger.lua:186
+#: scripts/scenario_36_scurvy_scavenger.lua:204
+#: scripts/scenario_36_scurvy_scavenger.lua:5910
+#: scripts/scenario_36_scurvy_scavenger.lua:5924
+#: scripts/scenario_36_scurvy_scavenger.lua:5943
+#: scripts/scenario_36_scurvy_scavenger.lua:5968
+msgctxt "scienceDescription-artifact"
+msgid "Object of unknown origin"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:156
+#: scripts/scenario_36_scurvy_scavenger.lua:172
+#: scripts/scenario_36_scurvy_scavenger.lua:189
+#: scripts/scenario_36_scurvy_scavenger.lua:207
+#: scripts/scenario_36_scurvy_scavenger.lua:5913
+#: scripts/scenario_36_scurvy_scavenger.lua:5927
+#: scripts/scenario_36_scurvy_scavenger.lua:5946
+#: scripts/scenario_36_scurvy_scavenger.lua:5971
+msgctxt "scienceDescription-artifact"
+msgid "Object of unknown origin, advanced technology detected"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1634
+msgctxt "trade-comms"
+msgid "food"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1635
+msgctxt "trade-comms"
+msgid "medicine"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1636
+msgctxt "trade-comms"
+msgid "luxury"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1637
+msgctxt "trade-comms"
+msgid "cobalt"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1638
+msgctxt "trade-comms"
+msgid "dilithium"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1639
+msgctxt "trade-comms"
+msgid "gold"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1640
+msgctxt "trade-comms"
+msgid "nickel"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1641
+msgctxt "trade-comms"
+msgid "platinum"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1642
+msgctxt "trade-comms"
+msgid "tritanium"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1643
+msgctxt "trade-comms"
+msgid "autodoc"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1644
+msgctxt "trade-comms"
+msgid "android"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1645
+msgctxt "trade-comms"
+msgid "battery"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1646
+msgctxt "trade-comms"
+msgid "beam"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1647
+msgctxt "trade-comms"
+msgid "circuit"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1648
+msgctxt "trade-comms"
+msgid "communication"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1649
+msgctxt "trade-comms"
+msgid "filament"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1650
+msgctxt "trade-comms"
+msgid "impulse"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1651
+msgctxt "trade-comms"
+msgid "lifter"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1652
+msgctxt "trade-comms"
+msgid "nanites"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1653
+msgctxt "trade-comms"
+msgid "optic"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1654
+msgctxt "trade-comms"
+msgid "repulsor"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1655
+msgctxt "trade-comms"
+msgid "robotic"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1656
+msgctxt "trade-comms"
+msgid "sensor"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1657
+msgctxt "trade-comms"
+msgid "shield"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1658
+msgctxt "trade-comms"
+msgid "software"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1659
+msgctxt "trade-comms"
+msgid "tractor"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1660
+msgctxt "trade-comms"
+msgid "transporter"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1661
+msgctxt "trade-comms"
+msgid "warp"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1662
+msgctxt "trade-comms"
+msgid "gold pressed latinum"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1663
+msgctxt "trade-comms"
+msgid "unobtanium"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1664
+msgctxt "trade-comms"
+msgid "eludium"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1665
+msgctxt "trade-comms"
+msgid "impossibrium"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1770
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"Deliver three %s to %s. Upon delivery, they will increase your hull strength"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1776
+#, lua-format
+msgctxt "contract-comms"
+msgid "Three %s to %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1787
+#, lua-format
+msgctxt "contract-comms"
+msgid "Fulfill %s 3 %s %s contract"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1793
+#, lua-format
+msgctxt "contract-comms"
+msgid "Three %s from %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1806
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"Deliver two %s to %s. Upon delivery, they will increase your shield strength"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1812
+#, lua-format
+msgctxt "contract-comms"
+msgid "Two %s to %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1823
+#, lua-format
+msgctxt "contract-comms"
+msgid "Fulfill %s 2 %s %s contract"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1829
+#, lua-format
+msgctxt "contract-comms"
+msgid "Two %s from %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1839
+msgctxt "buttonGM"
+msgid "+Missions"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1840
+msgctxt "buttonGM"
+msgid "+Spawn Ship(s)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1847
+msgctxt "buttonGM"
+msgid "-Main from missions"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1848
+msgctxt "buttonGM"
+msgid "Mission Status"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1849
+msgctxt "msgGM"
+msgid "Plot 1:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1851
+#: scripts/scenario_36_scurvy_scavenger.lua:2040
+#: scripts/scenario_36_scurvy_scavenger.lua:2132
+#: scripts/scenario_36_scurvy_scavenger.lua:2213
+#: scripts/scenario_36_scurvy_scavenger.lua:2249
+#: scripts/scenario_36_scurvy_scavenger.lua:2262
+#: scripts/scenario_36_scurvy_scavenger.lua:2334
+#: scripts/scenario_36_scurvy_scavenger.lua:2350
+#, lua-format
+msgctxt "msgGM"
+msgid "%s nil"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1855
+#, lua-format
+msgctxt "msgGM"
+msgid "%s Kraylor diversionary sabotage"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1859
+#, lua-format
+msgctxt "msgGM"
+msgid "%s long distance cargo"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1861
+#, lua-format
+msgctxt "msgGM"
+msgid "%s transition contract"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1863
+#, lua-format
+msgctxt "msgGM"
+msgid "%s Exuari harassment"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1866
+#, lua-format
+msgctxt "msgGM"
+msgid "%s (optional)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1873
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    seconds remaining until next harassment wave:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1885
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    defensive fleet size:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1895
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    seconds remaining until next defensive fleet:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1904
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    danger:%.2f"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1911
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    fleets destroyed:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1925
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    last defense fleet size:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1941
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    Kraylor diversionary fleet size:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1950
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    seconds remaining until next check for reinforcements:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1960
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    Kraylor diversion danger:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1975
+#, lua-format
+msgctxt "msgGM"
+msgid "%s/n    defend against Kraylor fleet size:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:1992
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    supply depot station %s has been sabotaged."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2002
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    supply depot station has been destroyed"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2014
+#, lua-format
+msgctxt "msgGM"
+msgid "%s    distance between %s and %s:%i units"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2031
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    supply sabotage fleet size:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2038
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Plot 2:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2042
+#, lua-format
+msgctxt "msgGM"
+msgid "%s contract target"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2047
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    seconds remaining until next Exuari vengance fleet:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2056
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    contract target station %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2068
+#, lua-format
+msgctxt "msgGM"
+msgid "%s, harassing Exuari fleet size:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2077
+#, lua-format
+msgctxt "msgGM"
+msgid "%s, seconds until next harassment check:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2097
+msgctxt "msgGM"
+msgid "accepted"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2099
+msgctxt "msgGM"
+msgid "not accepted"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2103
+msgctxt "msgGM"
+msgid "fulfilled"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2105
+msgctxt "msgGM"
+msgid "not fulfilled"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2111
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    contract at %s: %s status: %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2124
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    seconds until transition contract:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2130
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Plot 3:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2134
+#, lua-format
+msgctxt "msgGM"
+msgid "%s Jenny asteroid (optional)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2138
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    asteroid structure in notes"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2147
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    asteroid identified"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2152
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    Jenny is aboard"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2163
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    asteroid research reward is available on %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2172
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    asteroid research reward has not yet been claimed by %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2182
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    asteroid research reward is not yet available on %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2192
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    mission cannot be completed due to the destruction of the first mission "
+"station."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2199
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    Jenny has not yet boarded %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2206
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    asteroid has not yet been identified"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2211
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Plot 4:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2216
+#, lua-format
+msgctxt "msgGM"
+msgid "%s highwaymen"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2218
+#, lua-format
+msgctxt "msgGM"
+msgid "%s highwaymen alerted"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2220
+#, lua-format
+msgctxt "msgGM"
+msgid "%s highwaymen pounce"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2222
+#, lua-format
+msgctxt "msgGM"
+msgid "%s highwaymen aftermath"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2224
+#, lua-format
+msgctxt "msgGM"
+msgid "%s highwaymen reset"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2228
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    seconds until next event:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2241
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    highwaymen fleet size:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2247
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Plot 5:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2251
+#, lua-format
+msgctxt "msgGM"
+msgid "%s highwaymen warning zone"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2254
+#, lua-format
+msgctxt "msgGM"
+msgid "%s: seconds until zone removal:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2260
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Plot 6:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2265
+#, lua-format
+msgctxt "msgGM"
+msgid "%s world end"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2267
+#, lua-format
+msgctxt "msgGM"
+msgid "%s Kraylor planet buster"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2270
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    seconds until next fleet check:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2281
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    seconds until next fleet target adjustment/planet check:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2298
+#, lua-format
+msgctxt "msgGM"
+msgid "Ships: %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2303
+#, lua-format
+msgctxt "msgGM"
+msgid "%s, %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2311
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    planetary attack fleet size:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2317
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2325
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    Kraylor planetary danger:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2332
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Plot 7:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2336
+#, lua-format
+msgctxt "msgGM"
+msgid "%s exploding planet debris"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2341
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    seconds remaining until explosion actions are done:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2348
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Plot 8:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2352
+#, lua-format
+msgctxt "msgGM"
+msgid "%s opportunistic pirates"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2361
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    greedy pirate fleet size:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2370
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    seconds remaining until next pirate fleet adjustment check:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2378
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    greedy pirate danger:%i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2387
+msgctxt "buttonGM"
+msgid "Skip Harassment"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2405
+msgctxt "msgGM"
+msgid "Harassment skipped"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2410
+msgctxt "buttonGM"
+msgid "Skip Local Contracts"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2437
+#: scripts/scenario_36_scurvy_scavenger.lua:11162
+#: scripts/scenario_36_scurvy_scavenger.lua:11236
+#, lua-format
+msgctxt "contract-shipLog"
+msgid "A rare long range contract has been posted at station %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2445
+msgctxt "msgGM"
+msgid "Local contracts skipped"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2449
+msgctxt "buttonGM"
+msgid "Mark asteroids"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2854
+msgctxt "scienceDescription-asteroid"
+msgid "Structure: solid"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2857
+msgctxt "scienceDescription-asteroid"
+msgid "Structure: rubble"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2860
+msgctxt "scienceDescription-asteroid"
+msgid "Structure: binary"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2867
+#: scripts/scenario_36_scurvy_scavenger.lua:2903
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%sosmium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2873
+#: scripts/scenario_36_scurvy_scavenger.lua:2953
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%siridium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2879
+#: scripts/scenario_36_scurvy_scavenger.lua:3046
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%solivine:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2885
+#: scripts/scenario_36_scurvy_scavenger.lua:3117
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%snickel:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2890
+#: scripts/scenario_36_scurvy_scavenger.lua:3143
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%s, %srock:remainder"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2913
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%sruthenium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2923
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%srhodium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2933
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%smagnesium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2943
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%splatinum:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2963
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%sgold:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2973
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%spalladium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2983
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%soxygen:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:2993
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%ssilicon:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3003
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%shydrogen:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3013
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%snitrogen:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3024
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%spyroxene:remainder"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3029
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%spyroxene:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3041
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%solivine:remainder"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3058
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%scobalt:remainder"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3063
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%scobalt:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3077
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%sdilithium:remainder"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3083
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%sdilithium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3095
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%scalcium:remainder"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3100
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%scalcium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3112
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%snickel:remainder"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3129
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%siron:remainder"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3134
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%siron:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3150
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%s, just rock"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3270
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "%s Current cargo:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3281
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3290
+msgctxt "inventory-shipLog"
+msgid "     Empty"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3293
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "Available space: %i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3367
+msgctxt "msgGM"
+msgid "Empty Template pool: fix excludes or other criteria"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3437
+#: scripts/scenario_36_scurvy_scavenger.lua:3530
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"Your available cargo space, %i, is insufficient for this contract. You need "
+"at least 3"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3456
+#, lua-format
+msgctxt "contract-comms"
+msgid "Cargo of three %s has been loaded onto your ship. Deliver to %s in %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3471
+#: scripts/scenario_36_scurvy_scavenger.lua:3565
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"This contract is no longer valid since the destination, %s, no longer "
+"exists. Sorry for the clerical error. Have a nice day"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3478
+#: scripts/scenario_36_scurvy_scavenger.lua:3521
+#: scripts/scenario_36_scurvy_scavenger.lua:3573
+#: scripts/scenario_36_scurvy_scavenger.lua:3622
+#: scripts/scenario_36_scurvy_scavenger.lua:4314
+#: scripts/scenario_36_scurvy_scavenger.lua:4345
+#: scripts/scenario_36_scurvy_scavenger.lua:4357
+#: scripts/scenario_36_scurvy_scavenger.lua:4373
+#: scripts/scenario_36_scurvy_scavenger.lua:4379
+#: scripts/scenario_36_scurvy_scavenger.lua:4524
+#: scripts/scenario_36_scurvy_scavenger.lua:4549
+#: scripts/scenario_36_scurvy_scavenger.lua:4566
+#: scripts/scenario_36_scurvy_scavenger.lua:4625
+#: scripts/scenario_36_scurvy_scavenger.lua:4640
+#: scripts/scenario_36_scurvy_scavenger.lua:4670
+#: scripts/scenario_36_scurvy_scavenger.lua:4745
+#: scripts/scenario_36_scurvy_scavenger.lua:4774
+#: scripts/scenario_36_scurvy_scavenger.lua:4803
+#: scripts/scenario_36_scurvy_scavenger.lua:4832
+#: scripts/scenario_36_scurvy_scavenger.lua:4861
+#: scripts/scenario_36_scurvy_scavenger.lua:4866
+#: scripts/scenario_36_scurvy_scavenger.lua:4962
+#: scripts/scenario_36_scurvy_scavenger.lua:4964
+#: scripts/scenario_36_scurvy_scavenger.lua:5013
+#: scripts/scenario_36_scurvy_scavenger.lua:5039
+#: scripts/scenario_36_scurvy_scavenger.lua:5059
+#: scripts/scenario_36_scurvy_scavenger.lua:5074
+#: scripts/scenario_36_scurvy_scavenger.lua:5119
+#: scripts/scenario_36_scurvy_scavenger.lua:5122
+#: scripts/scenario_36_scurvy_scavenger.lua:5125
+#: scripts/scenario_36_scurvy_scavenger.lua:5166
+#: scripts/scenario_36_scurvy_scavenger.lua:5201
+#: scripts/scenario_36_scurvy_scavenger.lua:5222
+#: scripts/scenario_36_scurvy_scavenger.lua:5290
+#: scripts/scenario_36_scurvy_scavenger.lua:5292
+#: scripts/scenario_36_scurvy_scavenger.lua:5367
+#: scripts/scenario_36_scurvy_scavenger.lua:5403
+#: scripts/scenario_36_scurvy_scavenger.lua:5437
+#: scripts/scenario_36_scurvy_scavenger.lua:5583
+#: scripts/scenario_36_scurvy_scavenger.lua:5632
+#: scripts/scenario_36_scurvy_scavenger.lua:5682
+#: scripts/scenario_36_scurvy_scavenger.lua:5732
+#: scripts/scenario_36_scurvy_scavenger.lua:5771
+#: scripts/scenario_36_scurvy_scavenger.lua:5808
+#: scripts/scenario_36_scurvy_scavenger.lua:5812
+#: scripts/scenario_36_scurvy_scavenger.lua:5816
+#: scripts/scenario_36_scurvy_scavenger.lua:5827
+#: scripts/scenario_36_scurvy_scavenger.lua:6595
+#: scripts/scenario_36_scurvy_scavenger.lua:6604
+#: scripts/scenario_36_scurvy_scavenger.lua:6613
+#: scripts/scenario_36_scurvy_scavenger.lua:6622
+#: scripts/scenario_36_scurvy_scavenger.lua:6631
+#: scripts/scenario_36_scurvy_scavenger.lua:6640
+#: scripts/scenario_36_scurvy_scavenger.lua:6649
+#: scripts/scenario_36_scurvy_scavenger.lua:6658
+#: scripts/scenario_36_scurvy_scavenger.lua:6666
+#: scripts/scenario_36_scurvy_scavenger.lua:6673
+#: scripts/scenario_36_scurvy_scavenger.lua:6679
+#: scripts/scenario_36_scurvy_scavenger.lua:6683
+#: scripts/scenario_36_scurvy_scavenger.lua:6687
+#: scripts/scenario_36_scurvy_scavenger.lua:6689
+#: scripts/scenario_36_scurvy_scavenger.lua:6731
+#: scripts/scenario_36_scurvy_scavenger.lua:6796
+#: scripts/scenario_36_scurvy_scavenger.lua:6824
+#: scripts/scenario_36_scurvy_scavenger.lua:6841
+#: scripts/scenario_36_scurvy_scavenger.lua:6862
+#: scripts/scenario_36_scurvy_scavenger.lua:6930
+#: scripts/scenario_36_scurvy_scavenger.lua:7009
+#: scripts/scenario_36_scurvy_scavenger.lua:7129
+#: scripts/scenario_36_scurvy_scavenger.lua:7154
+#: scripts/scenario_36_scurvy_scavenger.lua:7211
+#: scripts/scenario_36_scurvy_scavenger.lua:7369
+#: scripts/scenario_36_scurvy_scavenger.lua:7404
+#: scripts/scenario_36_scurvy_scavenger.lua:7436
+#: scripts/scenario_36_scurvy_scavenger.lua:7448
+#: scripts/scenario_36_scurvy_scavenger.lua:7460
+#: scripts/scenario_36_scurvy_scavenger.lua:7465
+#: scripts/scenario_36_scurvy_scavenger.lua:7502
+#: scripts/scenario_36_scurvy_scavenger.lua:7504
+#: scripts/scenario_36_scurvy_scavenger.lua:7573
+#: scripts/scenario_36_scurvy_scavenger.lua:7578
+#: scripts/scenario_36_scurvy_scavenger.lua:7648
+#: scripts/scenario_36_scurvy_scavenger.lua:7653
+#: scripts/scenario_36_scurvy_scavenger.lua:7721
+#: scripts/scenario_36_scurvy_scavenger.lua:7726
+#: scripts/scenario_36_scurvy_scavenger.lua:7794
+#: scripts/scenario_36_scurvy_scavenger.lua:7799
+#: scripts/scenario_36_scurvy_scavenger.lua:7940
+#: scripts/scenario_36_scurvy_scavenger.lua:7944
+#: scripts/scenario_36_scurvy_scavenger.lua:7956
+#: scripts/scenario_36_scurvy_scavenger.lua:7980
+#: scripts/scenario_36_scurvy_scavenger.lua:7992
+#: scripts/scenario_36_scurvy_scavenger.lua:8060
+#: scripts/scenario_36_scurvy_scavenger.lua:8079
+#: scripts/scenario_36_scurvy_scavenger.lua:8194
+#: scripts/scenario_36_scurvy_scavenger.lua:8255
+#: scripts/scenario_36_scurvy_scavenger.lua:8275
+#: scripts/scenario_36_scurvy_scavenger.lua:8287
+#: scripts/scenario_36_scurvy_scavenger.lua:8325
+#: scripts/scenario_36_scurvy_scavenger.lua:8407
+#: scripts/scenario_36_scurvy_scavenger.lua:8471
+#: scripts/scenario_36_scurvy_scavenger.lua:8549
+#: scripts/scenario_36_scurvy_scavenger.lua:8615
+#: scripts/scenario_36_scurvy_scavenger.lua:8694
+#: scripts/scenario_36_scurvy_scavenger.lua:8733
+#: scripts/scenario_36_scurvy_scavenger.lua:8936
+#: scripts/scenario_36_scurvy_scavenger.lua:8993
+#: scripts/scenario_36_scurvy_scavenger.lua:9055
+#: scripts/scenario_36_scurvy_scavenger.lua:9112
+#: scripts/scenario_36_scurvy_scavenger.lua:9174
+#: scripts/scenario_36_scurvy_scavenger.lua:9241
+#: scripts/scenario_36_scurvy_scavenger.lua:9303
+msgid "Back"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3504
+#, lua-format
+msgctxt "contract-comms"
+msgid "Thanks for the %s, %s. We increased your hull strength by 50%%"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3515
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"The terms of the contract require the delivery of three %s. This has not "
+"been met"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3549
+#, lua-format
+msgctxt "contract-comms"
+msgid "Cargo of two %s has been loaded onto your ship. Deliver to %s in %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3605
+#, lua-format
+msgctxt "contract-comms"
+msgid "Thanks for the %s, %s. We increased your shield strength by 25%%"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3616
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"The terms of the contract require the delivery of two %s. This has not been "
+"met"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3635
+msgctxt "characterInfo-comms"
+msgid ""
+"His penchant for miniaturization and tinkering allows him to add a beam "
+"weapon to any ship"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3673
+msgctxt "characterInfo-comms"
+msgid ""
+"She knows how to increase your maximum energy capacity by improving battery "
+"efficiency"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3777
+msgctxt "artifact-shipLog"
+msgid "The artifact we picked up has damaged our ship"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3788
+msgctxt "artifact-shipLog"
+msgid ""
+"The technology gleaned from the artifact has allowed our technicians to "
+"increase the damage inflicted by our beam weapons"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3805
+#, lua-format
+msgctxt "artifact-shipLog"
+msgid ""
+"The technology gleaned from the artifact has allowed our technicians to "
+"increase our maneuver speed by %.1f%%"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3927
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3954
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings %s!\n"
+"How may we help you today?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3960
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3963
+msgctxt "station-comms"
+msgid "Hello, may I help you?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3966
+msgctxt "station-comms"
+msgid "Welcome to our lovely station."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:3972
+msgctxt "station-comms"
+msgid ""
+" Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4007
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4012
+msgctxt "ammo-comms"
+msgid "What type of ordnance?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4032
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes? ("
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4037
+msgctxt "ammo-comms"
+msgid "We really need some nukes ("
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4045
+#: scripts/scenario_36_scurvy_scavenger.lua:4072
+#: scripts/scenario_36_scurvy_scavenger.lua:4097
+#: scripts/scenario_36_scurvy_scavenger.lua:4120
+#: scripts/scenario_36_scurvy_scavenger.lua:4141
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s%d rep each)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4065
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles. ("
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4068
+msgctxt "ammo-comms"
+msgid "Got any EMPs? ("
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4087
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us? ("
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4092
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles? ("
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4112
+msgctxt "ammo-comms"
+msgid "We could use some mines. ("
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4116
+msgctxt "ammo-comms"
+msgid "How about mines? ("
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4134
+msgctxt "ammo-comms"
+msgid "What about HVLI? ("
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4137
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI? ("
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4155
+#: scripts/scenario_36_scurvy_scavenger.lua:7052
+msgctxt "station-comms"
+msgid "I need information"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4157
+msgctxt "station-comms"
+msgid "What kind of information are you looking for?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4160
+#: scripts/scenario_36_scurvy_scavenger.lua:7215
+msgctxt "stationServices-comms"
+msgid "Docking services status"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4165
+#: scripts/scenario_36_scurvy_scavenger.lua:7220
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s docking services status:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4171
+#: scripts/scenario_36_scurvy_scavenger.lua:7226
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Replenish scan probes."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4179
+#: scripts/scenario_36_scurvy_scavenger.lua:7234
+msgctxt "stationServices-comms"
+msgid "Cannot replenish scan probes due to fabrication unit failure."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4183
+#: scripts/scenario_36_scurvy_scavenger.lua:7238
+msgctxt "stationServices-comms"
+msgid "Parts shortage prevents scan probe replenishment."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4187
+#: scripts/scenario_36_scurvy_scavenger.lua:7242
+msgctxt "stationServices-comms"
+msgid ""
+"Station management has curtailed scan probe replenishment for cost cutting "
+"reasons."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4194
+#: scripts/scenario_36_scurvy_scavenger.lua:4224
+#: scripts/scenario_36_scurvy_scavenger.lua:4257
+#: scripts/scenario_36_scurvy_scavenger.lua:7249
+#: scripts/scenario_36_scurvy_scavenger.lua:7279
+#: scripts/scenario_36_scurvy_scavenger.lua:7312
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4201
+#: scripts/scenario_36_scurvy_scavenger.lua:7256
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Ship hull repair."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4209
+#: scripts/scenario_36_scurvy_scavenger.lua:7264
+msgctxt "stationServices-comms"
+msgid "We're out of the necessary materials and supplies for hull repair."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4213
+#: scripts/scenario_36_scurvy_scavenger.lua:7268
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable while it is undergoing maintenance."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4217
+#: scripts/scenario_36_scurvy_scavenger.lua:7272
+msgctxt "stationServices-comms"
+msgid "All hull repair technicians quarantined to quarters due to illness."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4233
+#: scripts/scenario_36_scurvy_scavenger.lua:7288
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Recharge ship energy stores."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4242
+#: scripts/scenario_36_scurvy_scavenger.lua:7297
+msgctxt "stationServices-comms"
+msgid ""
+"A recent reactor failure has put us on auxiliary power, so we cannot "
+"recharge ships."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4246
+#: scripts/scenario_36_scurvy_scavenger.lua:7301
+msgctxt "stationServices-comms"
+msgid "A damaged power coupling makes it too dangerous to recharge ships."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4250
+#: scripts/scenario_36_scurvy_scavenger.lua:7305
+msgctxt "stationServices-comms"
+msgid ""
+"An asteroid strike damaged our solar cells and we are short on power, so we "
+"can't recharge ships right now."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4266
+#: scripts/scenario_36_scurvy_scavenger.lua:7321
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May overcharge jump drive"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4275
+#: scripts/scenario_36_scurvy_scavenger.lua:7330
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair probe launch system"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4284
+#: scripts/scenario_36_scurvy_scavenger.lua:7339
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair hacking system"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4291
+#: scripts/scenario_36_scurvy_scavenger.lua:7346
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair scanners"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4299
+#: scripts/scenario_36_scurvy_scavenger.lua:7354
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair combat maneuver"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4308
+#: scripts/scenario_36_scurvy_scavenger.lua:7363
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair self destruct system"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4332
+#: scripts/scenario_36_scurvy_scavenger.lua:7423
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4335
+#: scripts/scenario_36_scurvy_scavenger.lua:7426
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4342
+#: scripts/scenario_36_scurvy_scavenger.lua:7433
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4354
+#: scripts/scenario_36_scurvy_scavenger.lua:7445
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4368
+#: scripts/scenario_36_scurvy_scavenger.lua:7455
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4389
+#: scripts/scenario_36_scurvy_scavenger.lua:7065
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Tell me about %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4405
+#: scripts/scenario_36_scurvy_scavenger.lua:7081
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Never heard of %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4414
+#: scripts/scenario_36_scurvy_scavenger.lua:7090
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s died last week. The funeral was yesterday"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4423
+#: scripts/scenario_36_scurvy_scavenger.lua:7099
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s? Who's %s? There's nobody here named %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4434
+#: scripts/scenario_36_scurvy_scavenger.lua:7110
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "We don't talk about %s. They are gone and good riddance"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4443
+#: scripts/scenario_36_scurvy_scavenger.lua:7119
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "I think %s moved away"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4530
+#: scripts/scenario_36_scurvy_scavenger.lua:7135
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4535
+#: scripts/scenario_36_scurvy_scavenger.lua:7140
+msgctxt "orders-comms"
+msgid "\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4543
+#: scripts/scenario_36_scurvy_scavenger.lua:7148
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4557
+msgctxt "explainGoods-comms"
+msgid "No tutorial covered goods or cargo. Explain"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4563
+msgctxt "explainGoods-comms"
+msgid ""
+"Different types of cargo or goods may be obtained from stations, freighters "
+"or other sources. They go by one word descriptions such as dilithium, optic, "
+"warp, etc. Certain mission goals may require a particular type or types of "
+"cargo. Each player ship differs in cargo carrying capacity. Goods may be "
+"obtained by spending reputation points or by trading other types of cargo "
+"(typically food, medicine or luxury)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4579
+msgctxt "stationServices-comms"
+msgid "Overcharge Jump Drive (10 Rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4585
+msgctxt "stationServices-comms"
+msgid ""
+"Overcharging your jump drive further would exceed the safety protocol "
+"established by commisioner Muerte."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4591
+msgctxt "stationServices-comms"
+msgid "Overcharge Jump Drive anyway (10 Rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4605
+#: scripts/scenario_36_scurvy_scavenger.lua:4653
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Your jump drive has been overcharged to %ik"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4621
+#: scripts/scenario_36_scurvy_scavenger.lua:4665
+#: scripts/scenario_36_scurvy_scavenger.lua:4741
+#: scripts/scenario_36_scurvy_scavenger.lua:4770
+#: scripts/scenario_36_scurvy_scavenger.lua:4799
+#: scripts/scenario_36_scurvy_scavenger.lua:4828
+#: scripts/scenario_36_scurvy_scavenger.lua:4857
+#: scripts/scenario_36_scurvy_scavenger.lua:5393
+#: scripts/scenario_36_scurvy_scavenger.lua:5427
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4631
+msgctxt "stationServices-comms"
+msgid "What happens if we overcharge past the Muerte limit?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4637
+msgctxt "stationServices-comms"
+msgid ""
+"Unknown. A teenager on his staff wrote a cautionary document that Muerte "
+"took to heart. From that information, Muerte established the safety protocol."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4713
+msgctxt "stationServices-comms"
+msgid "Repair ship system"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4718
+msgctxt "stationServices-comms"
+msgid "What system would you like repaired?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4726
+msgctxt "stationServices-comms"
+msgid "Repair probe launch system (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4734
+msgctxt "stationServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4755
+msgctxt "stationServices-comms"
+msgid "Repair hacking system (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4763
+msgctxt "stationServices-comms"
+msgid "Your hack system has been repaired"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4784
+msgctxt "stationServices-comms"
+msgid "Repair scanners (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4792
+msgctxt "stationServices-comms"
+msgid "Your scanners have been repaired"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4813
+msgctxt "stationServices-comms"
+msgid "Repair combat maneuver (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4821
+msgctxt "stationServices-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4842
+msgctxt "stationServices-comms"
+msgid "Repair self destruct system (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4850
+msgctxt "stationServices-comms"
+msgid "Your self destruct system has been repaired"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4873
+#: scripts/scenario_36_scurvy_scavenger.lua:4969
+msgctxt "contract-comms"
+msgid "Check long distance contract"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4880
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"Contract Details:\n"
+"Travel to %s system to deliver cargo to supply station %s. Distance to "
+"system: %i units. Upon delivery, %s technicians will upgrade your battery "
+"efficiency and beam cycle time."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4890
+#: scripts/scenario_36_scurvy_scavenger.lua:5248
+msgctxt "contract-comms"
+msgid "Accept"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4896
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"The Human Navy requires all armed ships be equipped with the ability to drop "
+"mines. We have modified %s with a rear facing mining tube. Due to ship size "
+"constraints, we were only able to provide you with two mines."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4910
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"%s\n"
+"\n"
+"Your current cargo (%s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4917
+#, lua-format
+msgctxt "contract-comms"
+msgid "%s, %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4927
+msgctxt "contract-comms"
+msgid ""
+") has been removed to make room for your contract cargo and to help defray "
+"the cost of upgrading your ship to Human Navy standards."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4932
+#, lua-format
+msgctxt "contract-comms"
+msgid "%s%s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4949
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"\n"
+"\n"
+"Critical cargo has been loaded aboard your ship, %s. Take the cargo to the "
+"%s system centered in sector %s. Find %s, the second planet out from star "
+"%s. Dock at station %s in orbit around %s's moon, %s to deliver the cargo. "
+"They will have crew standing by to immediately offload the cargo"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4972
+msgctxt "contract-comms"
+msgid "No long distance contract here."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4977
+msgctxt "contract-comms"
+msgid "I was told there was a long distance contract that started here"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4984
+msgctxt "contract-comms"
+msgid "You mean I came all this way for nothing?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:4991
+msgctxt "contract-comms"
+msgid "I risked my ship for a contract that does not exist?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5004
+msgctxt "ridExuari-comms"
+msgid "Upgrade impulse engines"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5010
+msgctxt "ridExuari-comms"
+msgid ""
+"Thanks for taking care of those Exuari. We've upgraded the topspeed of your "
+"impulse engines"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5022
+msgctxt "ridExuari-comms"
+msgid "Add missile tubes"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5028
+msgctxt "ridExuari-comms"
+msgid ""
+"Thanks for continuing to shoot down those Exuari. We've added some missile "
+"tubes to help you destroy the Exuari station"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5034
+#, lua-format
+msgctxt "ridExuari-"
+msgid ""
+"%s has asked for help against Exuari forces and has provided your ship with "
+"missile weapons to help you destroy %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5048
+msgctxt "ridExuari-comms"
+msgid "Upgrade beam damage"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5056
+msgctxt "ridExuari-comms"
+msgid ""
+"Looks like you're having a hard time with those Exuari. We've increased the "
+"damage your beam weapons deal out"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5066
+msgctxt "ridExuari-comms"
+msgid "Add jump drive"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5071
+msgctxt "ridExuari-comms"
+msgid ""
+"That Exuari station was a pain. Thanks for getting rid of it. We have fitted "
+"your ship with a 25 unit jump drive as a token of our gratitude.\n"
+"\n"
+"We have also formally recognized your competence. This allows you to enter "
+"into contracts with independent entities in the area. There may even be "
+"contracts available originating from this station."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5080
+msgctxt "Jenny-comms"
+msgid "Asteroid research request"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5085
+msgctxt "Jenny-comms"
+msgid ""
+"Posted on the station electronic request board:\n"
+"\n"
+"Request services of vessel in the area to scan asteroids in search of "
+"asteroid with particular characteristics. Substantial reward. No formal "
+"contract available. For further details, contact Jenny McGuire"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5089
+#: scripts/scenario_36_scurvy_scavenger.lua:6221
+#: scripts/scenario_36_scurvy_scavenger.lua:6695
+msgctxt "Jenny-comms"
+msgid "Contact Jenny McGuire"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5095
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"Hi %s, I'm so glad you contacted me. I've been researching many of the "
+"nearby asteroids. There is one in particular that I am interested in. "
+"Unfortunately, I lost access to sensors with enough detail to scan from a "
+"distance and my research ship was shot out from under me by pirates. I was "
+"lucky to escape with my life. I would like to locate my special asteroid, "
+"but I did not record location details, only sensor details. The asteroid I "
+"am interested in has traces of osmium and iridium, both of which are fairly "
+"rare, but together, they are exceptionally rare. If you run across an "
+"asteroid like that, could you let me know? If I were able to continue my "
+"research, I would be very appreciative. I know several technicians that "
+"would be more than willing to provide your ship with a valuable upgrade."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5103
+msgctxt "Jenny-comms"
+msgid "We will look, but can't promise anything"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5109
+msgctxt "Jenny-comms"
+msgid ""
+"Thanks. I understand about priorities. Please contact me if you find anything"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5140
+msgctxt "Jenny-comms"
+msgid "Get ship upgrade promised by Jenny McGuire"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5146
+msgctxt "Jenny-comms"
+msgid "Choose one of these upgrades from Jenny McGuire's friends"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5150
+msgctxt "Jenny-comms"
+msgid "Decrease beam cycle time"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5159
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"Your beam cycle time has been reduced. Jenny McGuire thanks you again and "
+"leaves %s to resume her work on %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5172
+msgctxt "Jenny-comms"
+msgid "Decrease heat generated per beam fired"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5194
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"The heat generated when firing your beams has been reduced. Jenny McGuire "
+"thanks you again and leaves %s to resume her work on %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5205
+msgctxt "Jenny-comms"
+msgid "Increase ship acceleration"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5215
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"Your ship acceleration has been increased. Jenny McGuire thanks you again "
+"and leaves %s to resume her work on %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5232
+msgctxt "contract-comms"
+msgid "Check long range contract"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5241
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"The contract outline indicates that the contract starts at station %s, a "
+"Human Navy station %i units from here. It looks like a relatively "
+"straighforward delivery to another Human Navy station between 100 and 200 "
+"units away. It also mentions that only Human Navy ships may fulfill this "
+"contract. That should not be a problem since station %s will gladly fit your "
+"ship with a Human Navy squawker if you desire based on the service you've "
+"already provided in this area."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5258
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"Station %s has fitted you with a Human Navy Identification Friend or Foe "
+"(IFF) and increased your jump drive and sensor ranges to 30 units."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5268
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"%s\n"
+"They also placed waypoint %i in your navigation system for station %s in "
+"sector %s."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5281
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"%s\n"
+"You can find station %s in sector %s."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5313
+#, lua-format
+msgctxt "contract-comms"
+msgid "Contract report from station %s:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5318
+msgctxt "contract-comms"
+msgid "Browse Contracts"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5330
+msgctxt "contract-comms"
+msgid ""
+"\n"
+"To Accept: "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5336
+#, lua-format
+msgctxt "contract-comms"
+msgid "Accept %s contract"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5351
+msgctxt "contract-comms"
+msgid ""
+"\n"
+"To Fulfill: "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5357
+#, lua-format
+msgctxt "contract-comms"
+msgid "Fulfill %s contract"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5386
+#: scripts/scenario_36_scurvy_scavenger.lua:5420
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5400
+#: scripts/scenario_36_scurvy_scavenger.lua:5434
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5443
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5447
+#, lua-format
+msgctxt "forSaleTrade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available for sale: quantity, cost in reputation\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5453
+#, lua-format
+msgctxt "forSaleTrade-comms"
+msgid "%s     %s: %i, %i\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5464
+#, lua-format
+msgctxt "willBuyTrade-comms"
+msgid "%sGoods or components station will buy: price in reputation\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5470
+#, lua-format
+msgctxt "willBuyTrade-comms"
+msgid "%s     %s: %i\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5478
+#, lua-format
+msgctxt "onBoardTrade-comms"
+msgid "%sCurrent cargo aboard %s:\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5488
+#, lua-format
+msgctxt "onBoardTrade-comms"
+msgid "%s     %s: %i\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5497
+#, lua-format
+msgctxt "onBoardTrade-comms"
+msgid "%s     Empty\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5504
+#, lua-format
+msgctxt "trade-comms"
+msgid "%sAvailable Space: %i, Available Reputation: %i\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5514
+#: scripts/scenario_36_scurvy_scavenger.lua:8430
+#: scripts/scenario_36_scurvy_scavenger.lua:8506
+#: scripts/scenario_36_scurvy_scavenger.lua:8572
+#: scripts/scenario_36_scurvy_scavenger.lua:8651
+#: scripts/scenario_36_scurvy_scavenger.lua:8893
+#: scripts/scenario_36_scurvy_scavenger.lua:8950
+#: scripts/scenario_36_scurvy_scavenger.lua:9012
+#: scripts/scenario_36_scurvy_scavenger.lua:9069
+#: scripts/scenario_36_scurvy_scavenger.lua:9131
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5520
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5529
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5540
+#: scripts/scenario_36_scurvy_scavenger.lua:5576
+#, lua-format
+msgctxt "needRep-comms"
+msgid ""
+"%s\n"
+"Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5548
+#: scripts/scenario_36_scurvy_scavenger.lua:5610
+#: scripts/scenario_36_scurvy_scavenger.lua:5660
+#: scripts/scenario_36_scurvy_scavenger.lua:5710
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Insufficient station inventory"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5569
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"purchased"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5597
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5602
+#: scripts/scenario_36_scurvy_scavenger.lua:5652
+#: scripts/scenario_36_scurvy_scavenger.lua:5702
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5627
+#: scripts/scenario_36_scurvy_scavenger.lua:5677
+#: scripts/scenario_36_scurvy_scavenger.lua:5727
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Traded"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5647
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5697
+#: scripts/scenario_36_scurvy_scavenger.lua:8381
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5748
+#, lua-format
+msgctxt "trade-comms"
+msgid "Sell one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5757
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Reputation price: %i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5766
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"One sold"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5786
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5791
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5804
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5824
+msgctxt "contract-comms"
+msgid ""
+"I'm sure there will be one soon, but the administrators are nervously "
+"watching enemies fly around. I suggest you make a good name for yourself and "
+"go kill those enemies."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5985
+msgctxt "scienceDescription-supply"
+msgid "Supply Drop"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:5988
+msgctxt "scienceDescription-supply"
+msgid ""
+"Supply Drop containing energy, missiles and various ship system repair parts"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6225
+msgctxt "Jenny-comms"
+msgid "Were you able to find an asteroid with osmium and iridium?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6228
+msgctxt "Jenny-comms"
+msgid "We think so"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6231
+msgctxt "Jenny-comms"
+msgid ""
+"Excellent! I found my notes on the asteroid composition. Let's compare your "
+"readings to the ones I took. Overall, the asteroid had osmium, iridium, "
+"olivine and nickel. The rest was rock.\n"
+"\n"
+"What was your reading on osmium?\n"
+"Enter the 10's digit. For example, for 23.5, the 10's digit is 2"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6239
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"Excellent! I found my notes on the asteroid composition. Let's compare your "
+"readings to the ones I took. %s, the asteroid had osmium, iridium, olivine "
+"and nickel. The rest was rock.\n"
+"\n"
+"What was your reading on osmium?\n"
+"Enter the 10's digit. For example, for 23.5, the 10's digit is 2"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6247
+#: scripts/scenario_36_scurvy_scavenger.lua:6305
+#: scripts/scenario_36_scurvy_scavenger.lua:6388
+#: scripts/scenario_36_scurvy_scavenger.lua:6476
+#, lua-format
+msgctxt "Jenny-comms"
+msgid "10's digit %i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6253
+msgctxt "Jenny-comms"
+msgid "Now for the osmium 1's digit. For example, for 23.5, the 1's digit is 3"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6259
+#: scripts/scenario_36_scurvy_scavenger.lua:6325
+#: scripts/scenario_36_scurvy_scavenger.lua:6408
+#: scripts/scenario_36_scurvy_scavenger.lua:6496
+#, lua-format
+msgctxt "Jenny-comms"
+msgid "1's digit %i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6267
+#: scripts/scenario_36_scurvy_scavenger.lua:6337
+#: scripts/scenario_36_scurvy_scavenger.lua:6420
+#: scripts/scenario_36_scurvy_scavenger.lua:6508
+msgctxt "Jenny-comms"
+msgid ""
+"And one digit after the decimal point. For example, for 23.5, the digit "
+"after the decimal point is 5"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6275
+#: scripts/scenario_36_scurvy_scavenger.lua:6345
+#: scripts/scenario_36_scurvy_scavenger.lua:6428
+#: scripts/scenario_36_scurvy_scavenger.lua:6516
+#, lua-format
+msgctxt "Jenny-comms"
+msgid "after decimal digit %i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6295
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"Osmium: %.1f\n"
+"The Iridium 10's digit. For example, for 23.5, the 10's digit is 2"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6317
+msgctxt "Jenny-comms"
+msgid ""
+"Now for the iridium 1's digit. For example, for 23.5, the 1's digit is 3"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6369
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"Osmium: %.1f\n"
+"Iridium: %.1f\n"
+"The Olivine 10's digit. For example, for 23.5, the 10's digit is 2"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6400
+msgctxt "Jenny-comms"
+msgid ""
+"Now for the olivine 1's digit. For example, for 23.5, the 1's digit is 3"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6452
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"Osmium: %.1f\n"
+"Iridium: %.1f\n"
+"Olivine: %.1f\n"
+"The Nickel 10's digit. For example, for 23.5, the 10's digit is 2"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6488
+msgctxt "Jenny-comms"
+msgid "Now for the nickel 1's digit. For example, for 23.5, the 1's digit is 3"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6540
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"osmium: %.1f\n"
+"iridium: %.1f\n"
+"Olivine: %.1f\n"
+"Nickel: %.1f"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6575
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"That's it! Your reported compositional percentages:\n"
+"%s\n"
+"...exactly match my recorded compositional percentages! Now I need you to "
+"take me to within 5 units of the asteroid. You may want to put a waypoint on "
+"it"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6587
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"Unfortunately, those compositional percentages you provided:\n"
+"%s\n"
+"...do not match the asteroid I am looking for. But don't give up! Please "
+"keep looking and contact me when you find another asteroid candidate."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6702
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"Communication routed to guest quarters aboard %s\n"
+"\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6709
+#, lua-format
+msgctxt "Jenny-comms"
+msgid "%sYes? What can I do for you?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6716
+msgctxt "Jenny-comms"
+msgid "What were those asteroid compositional percentages?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6723
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"Osmium: %.1f\n"
+"Iridium: %.1f\n"
+"Olivine: %.1f\n"
+"Nickel: %.1f"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6739
+msgctxt "Jenny-comms"
+msgid "Asteroid under 1.5 units away"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6748
+#, lua-format
+msgctxt "Jenny-comms"
+msgid ""
+"%s must come to a complete stop before I can deactivate the cloaking "
+"mechanism"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6757
+msgctxt "Jenny-comms"
+msgid "Cloaking mechanism deactivated, please retrieve my data store"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6766
+msgctxt "scienceDescription-artifact"
+msgid "Stasis container"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6770
+msgctxt "scienceDescription-artifact"
+msgid "Stasis container with a high density data store inside"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6785
+#, lua-format
+msgctxt "Jenny-shipLog"
+msgid ""
+"[Jenny McGuire] Thank you for picking up my research for me, %s. Next time "
+"you dock with %s you can get the upgrade I promised"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6803
+msgctxt "Jenny-comms"
+msgid "What is the asteroid approach procedure?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6810
+msgctxt "Jenny-comms"
+msgid ""
+"Get within 1.5 units of the asteroid and contact me. I will deactivate the "
+"cloaking mechanism on my research data store so that you can then pick it up"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6818
+#, lua-format
+msgctxt "Jenny-comms"
+msgid "First, you have to pick me up from %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6832
+msgctxt "Jenny-comms"
+msgid "The asteroid may have been destroyed"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6838
+msgctxt "Jenny-comms"
+msgid ""
+"So it seems. Looks like I'll have to find another asteroid. Thanks for your "
+"help."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6851
+#, lua-format
+msgctxt "Jenny-comms"
+msgid "Thanks for getting my research for me. Dock with %s to get the upgrade"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6858
+msgctxt "Jenny-comms"
+msgid "Please retrieve my data store"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6888
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6897
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6902
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6905
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6919
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6926
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6950
+#: scripts/scenario_36_scurvy_scavenger.lua:6986
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6957
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6962
+#: scripts/scenario_36_scurvy_scavenger.lua:6999
+#: scripts/scenario_36_scurvy_scavenger.lua:7005
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6970
+msgctxt "ammo-comms"
+msgid "You can't afford as much as I'd like to give you"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6973
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:6993
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with one weapon charge.\n"
+"Put it to good use."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7027
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7032
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7039
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7054
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7159
+msgctxt "ammo-comms"
+msgid "What ordnance do you have available for restock?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7166
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Nuke"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7171
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   EMP"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7176
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Homing"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7181
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Mine"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7186
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   HVLI"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7191
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7197
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7205
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7384
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7390
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7396
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"   %14s: %2i, %3i"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7469
+msgctxt "stationAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7471
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7480
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7491
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7509
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7517
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7524
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7530
+#: scripts/scenario_36_scurvy_scavenger.lua:7609
+#: scripts/scenario_36_scurvy_scavenger.lua:7682
+#: scripts/scenario_36_scurvy_scavenger.lua:7755
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7560
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7569
+#: scripts/scenario_36_scurvy_scavenger.lua:7644
+#: scripts/scenario_36_scurvy_scavenger.lua:7717
+#: scripts/scenario_36_scurvy_scavenger.lua:7790
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7587
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send Adder MK5 reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7596
+#: scripts/scenario_36_scurvy_scavenger.lua:7669
+#: scripts/scenario_36_scurvy_scavenger.lua:7742
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7603
+#: scripts/scenario_36_scurvy_scavenger.lua:7676
+#: scripts/scenario_36_scurvy_scavenger.lua:7749
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7634
+#: scripts/scenario_36_scurvy_scavenger.lua:7707
+#: scripts/scenario_36_scurvy_scavenger.lua:7780
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at waypoint %d"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7660
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send Phobos T3 reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7733
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send Stalker Q7 reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7860
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7862
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7901
+msgctxt "shipAssist-comms"
+msgid "Set your shield frequency"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7903
+msgctxt "shipAssist-comms"
+msgid "Enemy ships nearby:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7909
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"%s: Beams penetrate best against shields at %i THz"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7925
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Set shields to frequency %i THz"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7935
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shields set to %i THz"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7948
+#: scripts/scenario_36_scurvy_scavenger.lua:8278
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7953
+#: scripts/scenario_36_scurvy_scavenger.lua:8284
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7959
+#: scripts/scenario_36_scurvy_scavenger.lua:8292
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7964
+#: scripts/scenario_36_scurvy_scavenger.lua:8298
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7975
+#: scripts/scenario_36_scurvy_scavenger.lua:8320
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7987
+#: scripts/scenario_36_scurvy_scavenger.lua:8258
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7989
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7995
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:7997
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8004
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8014
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8023
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8034
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8050
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s Missiles: %d/%d\n"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8068
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8074
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8087
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Direct %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8095
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "What command should be given to %s?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8101
+msgctxt "shipAssist-comms"
+msgid "Report hull and shield status"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8103
+msgctxt "shipAssist-comms"
+msgid "Fleet status:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8112
+#: scripts/scenario_36_scurvy_scavenger.lua:8209
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+" %s:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8119
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Hull: %d%%"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8133
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Shield: %d%%"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8145
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Shields: "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8152
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front: %d%% Rear: %d%%"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8175
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid " %d:%d%%"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8198
+msgctxt "shipAssist-comms"
+msgid "Report missile status"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8200
+msgctxt "shipAssist-comms"
+msgid "Fleet missile status:"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8226
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"      %s: %d/%d"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8247
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Missiles: %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8270
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s heading toward you to assist"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8401
+#, lua-format
+msgctxt "trade-comms"
+msgid "Traded your luxury for %s from %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8457
+#: scripts/scenario_36_scurvy_scavenger.lua:8535
+#: scripts/scenario_36_scurvy_scavenger.lua:8601
+#: scripts/scenario_36_scurvy_scavenger.lua:8680
+#: scripts/scenario_36_scurvy_scavenger.lua:8922
+#: scripts/scenario_36_scurvy_scavenger.lua:8979
+#: scripts/scenario_36_scurvy_scavenger.lua:9041
+#: scripts/scenario_36_scurvy_scavenger.lua:9098
+#: scripts/scenario_36_scurvy_scavenger.lua:9160
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchased %s from %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8467
+#: scripts/scenario_36_scurvy_scavenger.lua:8545
+#: scripts/scenario_36_scurvy_scavenger.lua:8611
+#: scripts/scenario_36_scurvy_scavenger.lua:8690
+#: scripts/scenario_36_scurvy_scavenger.lua:8932
+#: scripts/scenario_36_scurvy_scavenger.lua:8989
+#: scripts/scenario_36_scurvy_scavenger.lua:9051
+#: scripts/scenario_36_scurvy_scavenger.lua:9108
+#: scripts/scenario_36_scurvy_scavenger.lua:9170
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8704
+#: scripts/scenario_36_scurvy_scavenger.lua:8849
+msgctxt "trade-comms"
+msgid "Do you have cargo you might sell?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8707
+#: scripts/scenario_36_scurvy_scavenger.lua:8852
+msgctxt "trade-comms"
+msgid "We've got "
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8712
+#: scripts/scenario_36_scurvy_scavenger.lua:8857
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s, %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8718
+#: scripts/scenario_36_scurvy_scavenger.lua:8863
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s%s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8728
+#: scripts/scenario_36_scurvy_scavenger.lua:8873
+#, lua-format
+msgctxt "trade-comms"
+msgid "%snothing"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8744
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8746
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8748
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8751
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8755
+msgctxt "shipEnemy-comms"
+msgid "We will destroy you"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8758
+msgctxt "shipEnemy-comms"
+msgid "We think not. It is you who will experience destruction!"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8761
+msgctxt "shipEnemy-comms"
+msgid "You have no honor"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8764
+msgctxt "shipEnemy-comms"
+msgid "Your insult has brought our wrath upon you. Prepare to die."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8768
+msgctxt "shipEnemy-comms"
+msgid "Your comments about honor have no meaning to us"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8772
+msgctxt "shipEnemy-comms"
+msgid "We pity your pathetic race"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8775
+msgctxt "shipEnemy-comms"
+msgid "Pathetic? You will regret your disparagement!"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8778
+msgctxt "shipEnemy-comms"
+msgid "We don't care what you think of us"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8784
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8791
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8798
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8801
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8804
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8807
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8812
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8817
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8821
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8825
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8828
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:8847
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9188
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9193
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9202
+msgctxt "upgrade-comms"
+msgid "Add beam weapon"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9226
+msgctxt "upgrade-comms"
+msgid "A beam wepon has been added to your ship"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9234
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s cannot add a beam weapon to your ship unless you provide %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9248
+msgctxt "upgrade-comms"
+msgid "Increase battery efficiency"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9283
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I appreciate the %s and %s. You have a 50%% greater energy capacity due "
+"to increased battery efficiency"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9295
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: You need to bring me some %s and %s before I can increase your battery "
+"efficiency"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9310
+msgctxt "upgrade-comms"
+msgid "Reduce beam cycle time"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9333
+msgctxt "upgrade-comms"
+msgid "After accepting your gift, he reduced your Beam cycle time."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9341
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s for the upgrade"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9356
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s reduced your Beam cycle time at no cost in trade with the message, 'Go "
+"get those Kraylors.'"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9366
+msgctxt "upgrade-comms"
+msgid "Your ship type does not support a beam weapon upgrade."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9457
+msgctxt "repairCrew-msgEngineer"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9468
+msgctxt "repairCrew-msgEngineer+"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9504
+msgctxt "coolant-msgEngineer"
+msgid "Automated systems have recovered some coolant"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9514
+msgctxt "coolant-msgEngineer+"
+msgid "Automated systems have recovered some coolant"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9562
+#: scripts/scenario_36_scurvy_scavenger.lua:9611
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9573
+#: scripts/scenario_36_scurvy_scavenger.lua:9622
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9649
+msgctxt "coolant-msgEngineer"
+msgid "Damage has caused a loss of coolant"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9660
+msgctxt "coolant-msgEngineer+"
+msgid "Damage has caused a loss of coolant"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9674
+msgctxt "damage-msgEngineer"
+msgid "The probe launch system has been damaged"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9684
+msgctxt "damage-msgEngineer+"
+msgid "The probe launch system has been damaged"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9696
+msgctxt "damage-msgEngineer"
+msgid "The hacking system has been damaged"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9706
+msgctxt "damage-msgEngineer+"
+msgid "The hacking system has been damaged"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9718
+msgctxt "damage-msgEngineer"
+msgid "The scanners have been damaged"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9728
+msgctxt "damage-msgEngineer+"
+msgid "The scanners have been damaged"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9740
+msgctxt "damage-msgEngineer"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9750
+msgctxt "damage-msgEngineer+"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9762
+msgctxt "damage-msgEngineer"
+msgid "Self destruct system has been damaged"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9772
+msgctxt "damage-msgEngineer+"
+msgid "Self destruct system has been damaged"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9828
+#, lua-format
+msgctxt "ridExuari-incCall"
+msgid ""
+"[%s in %s] Hostile Exuari approach. Help us, please. We cannot defend "
+"ourselves. Your ship is the only thing that stands between us and "
+"destruction."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9837
+#, lua-format
+msgctxt "ridExuari-incCall"
+msgid ""
+"%s\n"
+"\n"
+"We think there is an Exuari base hiding in a nebula in sector %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9849
+#, lua-format
+msgctxt "ridExuari-incCall"
+msgid "%s has asked for help against the Exuari"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9858
+#, lua-format
+msgctxt "ridExuari-msgMainscreen"
+msgid "Station %s destroyed"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9869
+#, lua-format
+msgctxt "ridExuari-shipLog"
+msgid ""
+"[Captain's Log] We have started our initial shakedown cruise of %s, a %s "
+"class ship. The crew are glad to be moving up from the class three freighter "
+"we used to run. After several years of doing cargo delivery runs and "
+"personnel transfers, it's nice to be on a ship with more self reliance. "
+"We've got beam weapons! Our previous ship was defenseless. Unfortunately, "
+"our impulse engines are not as fast as our previous ship, but we might be "
+"able to fix that. That's the kind of compromise you make when you purchase "
+"surplus military hardware. I suspect that we got such a good deal on the "
+"ship because the previous owner, the governer of station %s, has an ulterior "
+"motive. After all, we are the best qualified to run this ship in the sector "
+"and we have not seen any other friendly armed ships around here."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9890
+#, lua-format
+msgctxt "ridExuari-shipLog"
+msgid ""
+"[Station %s] Based on our observation of the Exuari base %s in %s, we think "
+"it will continue to launch harassing spacecraft in our direction. We know "
+"it's a large target for a small fighter, but we believe you can destroy it, "
+"%s. We would be very grateful if you would do just that. Our defenses are "
+"very limited."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:9947
+msgctxt "ridExuari-incCall"
+msgid ""
+"Thanks for taking care of that Exuari base and all the Exuari ships it "
+"deployed. Dock with us for a token of our appreciation"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10327
+#, lua-format
+msgctxt "ridExuari-shipLog"
+msgid "%s just launched these ships: %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10337
+#, lua-format
+msgctxt "ridExuari-shipLog"
+msgid "%s just launched %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10362
+#, lua-format
+msgctxt "contract-shipLog"
+msgid ""
+"Our first contract to a station far away from 'home' marks a significant "
+"change in our development as a crew. %s and the rest of the stations know us "
+"now as self-sufficient contractors, capable of more than mere deliveries. We "
+"now go to develop further standing with the Human Navy."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10431
+#, lua-format
+msgctxt "cargo-shipLog"
+msgid ""
+"[%s] Your delivery contract calls for food, medicine, dilithium and "
+"tritanium. Return when you have all four of these and we'll consider your "
+"contract fulfilled"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10454
+#, lua-format
+msgctxt "cargo-shipLog"
+msgid ""
+"[%s] Thanks for the cargo, %s. We'll make good use of it. We've added 100 "
+"units to your battery capacity and reduced your beam cycle time. Enjoy your "
+"visit to the %s system"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10515
+msgctxt "msgMainscreen"
+msgid "The supply depot station has been destroyed"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10664
+msgctxt "msgMainscreen"
+msgid "You successfully handled the Kraylor threat"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10684
+msgctxt "Kraylor-shipLog"
+msgid ""
+"[Human Navy Regional Headquarters] All Human Navy vessels are hereby ordered "
+"to assist in the repelling of inbound Kraylor ships. We are not sure of "
+"their intent, but we are sure it is not good. Destroy them before they can "
+"destroy us"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10690
+#, lua-format
+msgctxt "Kraylor-shipLog"
+msgid "This includes you, %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10695
+msgctxt "KraylorOrders-comms"
+msgid "Repel Kraylor"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10911
+#, lua-format
+msgctxt "Kraylor-shipLog"
+msgid ""
+"Looks like the Kraylor have developed some kind of planet busting weapon. "
+"They just destroyed %s with it. Keep them away from %s!"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10921
+#, lua-format
+msgctxt "KraylorOrders-comms"
+msgid ""
+"Save planet %s from Kraylor destruction like they destroyed %s by keeping "
+"the Kraylor away from %s."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10944
+#, lua-format
+msgctxt "Kraylor-shipLog"
+msgid "Oops, there goes %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:10955
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "You've saved planet %s"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11017
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Planet %s was destroyed"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11027
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "station %s destroyed"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11147
+msgctxt "msgMainscreen"
+msgid "A contract destination station was destroyed"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11172
+#: scripts/scenario_36_scurvy_scavenger.lua:11246
+msgctxt "msgMainscreen"
+msgid ""
+"Mourning over the loss of the station has halted all business\n"
+"The mission is over"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11191
+#, lua-format
+msgctxt "contract-shipLog"
+msgid ""
+"[Captain's Log] Why can't the Exuari just leave us alone? I don't understand "
+"what it is about them that makes them want to prey on everyone.\n"
+"The upgrades for %s are very nice. They certainly came in handy. With the "
+"confidence of stations %s, %s and %s, I feel we will succeed as the space "
+"entrepeneurs we want to be."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11267
+#, lua-format
+msgctxt "Jenny-shipLog"
+msgid ""
+"Jenny McGuire is now aboard. She's a bit paranoid and has sealed the door to "
+"her quarters. You'll have to contact %s to talk to her"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11328
+msgctxt "energy-msgScience"
+msgid "Energy surge from supply drop"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11337
+msgctxt "energy-msgOperations"
+msgid "Energy surge from supply drop"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11361
+msgctxt "energy-msgScience"
+msgid "Energy surge from area highlighted in yellow"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11373
+msgctxt "energy-msgOperations"
+msgid "Energy surge from area highlighted in yellow"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11415
+msgctxt "scienceDescription-jammer"
+msgid "Jump and Warp Jammer"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11418
+msgctxt "scienceDescription-jammer"
+msgid ""
+"Jump and Warp Jammer with external dynamic range control and sensor decoy "
+"mechanism"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11542
+msgctxt "scienceDescription-artifact"
+msgid "Unknown tech device"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11546
+msgctxt "scienceDescription-artifact"
+msgid "Partly melted machinery"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11550
+msgctxt "scienceDescription-artifact"
+msgid "Device of unknown purpose"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11554
+msgctxt "scienceDescription-artifact"
+msgid "Fragment of advanced technology"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11565
+msgctxt "scienceDescription-artifact"
+msgid "Origin: Kraylor. Purpose: unknown."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11569
+msgctxt "scienceDescription-artifact"
+msgid "Source: Kraylor. Possibly a remnant of a planet-busting device."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11573
+msgctxt "scienceDescription-artifact"
+msgid "Purpose: unknown. Volatile material detected."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11577
+msgctxt "scienceDescription-artifact"
+msgid "Origin: Kraylor."
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11673
+#, lua-format
+msgctxt "Kraylor-shipLog"
+msgid ""
+"Kraylor have sabotaged station %s. It can no longer maintain orbit around "
+"%s. Fortunately, it looks to be in no danger from %s or %s, but the Kraylor "
+"pose a more significant threat"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11693
+msgctxt "ridExuari-msgMainscreen"
+msgid "Dash your hopes and dreams again?"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11714
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_36_scurvy_scavenger.lua:11726
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr ""

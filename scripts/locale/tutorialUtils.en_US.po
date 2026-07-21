@@ -1,0 +1,10 @@
+#: scripts/tutorialUtils.lua:9
+msgid ""
+"Welcome to the EmptyEpsilon tutorial.\n"
+"\n"
+"This tutorial covers basic gameplay to get you started quickly. For more in-"
+"depth tutorials and strategies for each role, run each of those roles' "
+"tutorials.\n"
+"\n"
+"Press Next to continue."
+msgstr ""

@@ -1,0 +1,127 @@
+#: scripts/shiptemplates/cruisers.lua:11
+msgctxt "playerShip"
+msgid "Vindicator"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:13 scripts/shiptemplates/cruisers.lua:77
+msgctxt "class"
+msgid "Cruiser"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:13
+msgctxt "subclass"
+msgid "Assault"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:18
+msgid ""
+"The fearsome Vindicator cruiser hull balances a stout hull and forward-"
+"facing weapons with a tremendous impulse engine, which grants it the "
+"sublight speed of a pursuer even if it lacks the turning rate of a smaller "
+"craft.\n"
+"\n"
+"A skilled navigator and helms officer can use the Vindicator's jump drive "
+"and impulse engine to appear at missile range, launch an array of missiles "
+"as powerful as nuclear weapons, and then outrun defenders in a race while "
+"its jump drive recharges. Its combat thrusters aid as much in its defensive "
+"maneuverability as it does to close in on fleeing targets."
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:75
+msgctxt "playerShip"
+msgid "Avalanche"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:77
+msgctxt "subclass"
+msgid "Bombardment"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:82
+msgid ""
+"The Avalanche cruiser is a warp-capable, missile-laden vessel that carries "
+"enough munitions on its own to level a system full of space stations. Its 6 "
+"missile tubes cover all but its rear angles, which houses a mine-laying "
+"tube.\n"
+"\n"
+"The Avalanche earned its moniker for being unstoppable, but also for being "
+"spotted from sectors away as it races into position. If not covered by "
+"escorts, its vulnerable rear shields and slow maneuverability can leave it "
+"prey to smaller ships that don't fear it on sight."
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:142
+msgctxt "ship"
+msgid "Battlestation"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:144
+msgctxt "class"
+msgid "Battlecruiser"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:144
+msgctxt "subclass"
+msgid "Superiority"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:148
+msgid ""
+"The Battlestation is a battlecruiser with a dozen beam emplacements, a jump "
+"drive, and docking clamps to carry ships as large as frigates on its "
+"exterior into battle. Its offensive capabilities are offset by a single, if "
+"powerful, shield generator and a relatively fragile hull for a vessel its "
+"size.\n"
+"\n"
+"Battlestations are meant to join large-fleet ambushes, drop their docked "
+"vessels, provide coverage against retaliating starfighters, and then jump "
+"out the moment the tide of battle turns in their favor. However, a barrage "
+"of EMPs and HVLIs can quickly whittle it down."
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:170
+msgctxt "class"
+msgid "Corvette"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:171
+msgctxt "class"
+msgid "Frigate"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:174
+msgctxt "class"
+msgid "Cargo"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:175
+msgctxt "class"
+msgid "Starfighter"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:176
+msgctxt "class"
+msgid "Tug"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:177
+msgctxt "class"
+msgid "Transport"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:185
+msgctxt "playerShip"
+msgid "Ender"
+msgstr ""
+
+#: scripts/shiptemplates/cruisers.lua:188
+msgid ""
+"The Ender revision to the Battlestation divided its shields into two smaller "
+"generators, which opened space for more capable impulse engines and "
+"thrusters. These changes grant it surprising agility for a capital ship, "
+"although it still handles much differently than a destroyer.\n"
+"\n"
+"The Ender's revisions also made space to install 2 weapon tubes, one "
+"dedicated to laying mines in order to deter pursuing capital ships and "
+"immediately secure territory that it helped win."
+msgstr ""

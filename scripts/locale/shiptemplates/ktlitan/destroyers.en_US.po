@@ -1,0 +1,14 @@
+#: scripts/shiptemplates/ktlitan/destroyers.lua:9
+msgctxt "ship"
+msgid "Ktlitan Destroyer"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan/destroyers.lua:10
+msgctxt "class"
+msgid "Destroyer"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan/destroyers.lua:10
+msgctxt "subclass"
+msgid "Assault"
+msgstr ""

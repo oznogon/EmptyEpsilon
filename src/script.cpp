@@ -70,7 +70,7 @@ static int luaRequire(lua_State* L)
 
         if (!error) {
             // Load the locale file for this script.
-            i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+            i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en_US") + ".po"));
 
             string filecontents = stream->readAll();
             stream->destroy();
@@ -294,7 +294,7 @@ static int luaCreateAdditionalScript(lua_State* L)
             auto ptr = reinterpret_cast<sp::script::Environment**>(luaL_checkudata(LL, 1, "ScriptObject"));
             if (!ptr) return 0;
             string filename = luaL_checkstring(LL, 2);
-            i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+            i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en_US") + ".po"));
             auto res = (*ptr)->runFile<void>(filename);
             LuaConsole::checkResult(res);
             if (res.isOk()) {
@@ -456,7 +456,7 @@ static float getAudioDuration(const string& filename)
     int n = filename.rfind(".");
     if (n > -1)
     {
-        string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en") + filename.substr(n);
+        string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en_US") + filename.substr(n);
         if (getResourceStream(filename_with_locale))
         {
             sp::audio::Sound sound(filename_with_locale);
@@ -1041,7 +1041,7 @@ static int luaGetActivePlayerShips(lua_State* L)
 
 static string luaGetGameLanguage()
 {
-    return PreferencesManager::get("language", "en").c_str();
+    return PreferencesManager::get("language", "en_US").c_str();
 }
 
 /** Short lived object to do a scenario change on the update loop. See "setScenario" for details */
@@ -1148,7 +1148,7 @@ static void luaPlaySoundFile(string filename)
     int n = filename.rfind(".");
     if (n > -1)
     {
-        string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en") + filename.substr(n);
+        string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en_US") + filename.substr(n);
         if (getResourceStream(filename_with_locale)) {
             soundManager->playSound(filename_with_locale);
             return;
@@ -2065,7 +2065,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("getActivePlayerShips", &luaGetActivePlayerShips);
     /// string getGameLanguage()
     /// Returns the language as the string value of the language key in game preferences.
-    /// Example: getGameLanguage() -- returns "en" if the game language is set to English
+    /// Example: getGameLanguage() -- returns "en_US" if the game language is set to English (US)
     env.setGlobal("getGameLanguage", &luaGetGameLanguage);
     /// void setScenario(string script_name, std::optional<string> variation_name)
     /// Launches the given scenario, even if another scenario is running.

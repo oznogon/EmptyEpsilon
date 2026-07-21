@@ -1,0 +1,16 @@
+# Scenario name
+msgid "Entity Reference Grid"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Places one of each entity type and ship template in grids, spaced 5U apart. "
+"Useful as a visual reference for entity types, their default sizes, and "
+"radar signatures. GMs can also use this as a starting point to copy-paste "
+"individual entity patterns."
+msgstr ""
+
+#: scripts/scenario_91_entityReferenceGrid.lua:297
+msgctxt "buttonGM"
+msgid "Print all grid positions"
+msgstr ""
