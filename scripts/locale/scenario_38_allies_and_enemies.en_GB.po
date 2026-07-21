@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Allies and Enemies"
-msgstr ""
+msgstr "Allies and Enemies"
 
 # Scenario description
 msgid ""
@@ -12,222 +12,222 @@ msgid ""
 "\n"
 "USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
 "There's one nearly every weekend. All experience levels are welcome."
-msgstr ""
+msgstr "The Arlenians are your allies. The Kraylors and Exuari are your enemies and will try to prevent you from completing your missions. Duration: approximately 30 minutes\n\nVersion 2 - Nov2024\n\nUSN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one nearly every weekend. All experience levels are welcome."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Murphy"
-msgstr ""
+msgstr "Murphy"
 
 msgctxt "setting"
 msgid "Configures how the odds are stacked against you - Murphy's law."
-msgstr ""
+msgstr "Configures how the odds are stacked against you - Murphy's law."
 
 msgctxt "Murphy"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Murphy"
 msgid "Murphy generally smiles on you"
-msgstr ""
+msgstr "Murphy generally smiles on you"
 
 msgctxt "Murphy"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Murphy"
 msgid "The normal distribution of the odds against you"
-msgstr ""
+msgstr "The normal distribution of the odds against you"
 
 msgctxt "Murphy"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Murphy"
 msgid "Murphy is in particularly strong form today"
-msgstr ""
+msgstr "Murphy is in particularly strong form today"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Missions"
-msgstr ""
+msgstr "Missions"
 
 msgctxt "setting"
 msgid "Configures the way missions work"
-msgstr ""
+msgstr "Configures the way missions work"
 
 msgctxt "Missions"
 msgid "All"
-msgstr ""
+msgstr "All"
 
 msgctxt "Missions"
 msgid "Missions are conducted in random order"
-msgstr ""
+msgstr "Missions are conducted in random order"
 
 msgctxt "Missions"
 msgid "One"
-msgstr ""
+msgstr "One"
 
 msgctxt "Missions"
 msgid "One mission is is selected at random (shorter duration)"
-msgstr ""
+msgstr "One mission is is selected at random (shorter duration)"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr ""
+msgstr "Enemies"
 
 msgctxt "setting"
 msgid "Configures the strength and/or number of enemy forces"
-msgstr ""
+msgstr "Configures the strength and/or number of enemy forces"
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Enemies"
 msgid "Easier set of enemies"
-msgstr ""
+msgstr "Easier set of enemies"
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Enemies"
 msgid "Normal set of enemies"
-msgstr ""
+msgstr "Normal set of enemies"
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Enemies"
 msgid "Hard set of enemies"
-msgstr ""
+msgstr "Hard set of enemies"
 
 #: scripts/scenario_38_allies_and_enemies.lua:70
 msgctxt "buttonGM"
 msgid "Mining"
-msgstr ""
+msgstr "Mining"
 
 #: scripts/scenario_38_allies_and_enemies.lua:72
 msgctxt "buttonGM"
 msgid "Admiral"
-msgstr ""
+msgstr "Admiral"
 
 #: scripts/scenario_38_allies_and_enemies.lua:74
 msgctxt "buttonGM"
 msgid "Doomsday"
-msgstr ""
+msgstr "Doomsday"
 
 #: scripts/scenario_38_allies_and_enemies.lua:76
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
-msgstr ""
+msgstr "+Spawn Ship(s)"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1017
 msgctxt "gossip-comms"
 msgid ""
 "I hear the head of operations has a thing for his administrative assistant"
-msgstr ""
+msgstr "I hear the head of operations has a thing for his administrative assistant"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1024
 msgctxt "gossip-comms"
 msgid "My mining friends tell me Krak or Kruk is about to strike it rich"
-msgstr ""
+msgstr "My mining friends tell me Krak or Kruk is about to strike it rich"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1031
 msgctxt "gossip-comms"
 msgid ""
 "Did you know you can usually hire replacement repair crew cheaper at "
 "friendly stations?"
-msgstr ""
+msgstr "Did you know you can usually hire replacement repair crew cheaper at friendly stations?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1038
 msgctxt "gossip-comms"
 msgid ""
 "Under their uniforms, the Kraylors have an extra appendage. I wonder what "
 "they use it for"
-msgstr ""
+msgstr "Under their uniforms, the Kraylors have an extra appendage. I wonder what they use it for"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1045
 msgctxt "gossip-comms"
 msgid ""
 "The Kraylors may be human navy enemies, but they make some mighty fine BBQ "
 "Mynock"
-msgstr ""
+msgstr "The Kraylors may be human navy enemies, but they make some mighty fine BBQ Mynock"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1052
 msgctxt "gossip-comms"
 msgid ""
 "The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. "
 "That'd be bad news for us"
-msgstr ""
+msgstr "The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. That'd be bad news for us"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1059
 msgctxt "gossip-comms"
 msgid ""
 "Docking bay 7 has interesting mind altering substances for sale, but they're "
 "monitored between 1900 and 2300"
-msgstr ""
+msgstr "Docking bay 7 has interesting mind altering substances for sale, but they're monitored between 1900 and 2300"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1066
 msgctxt "gossip-comms"
 msgid ""
 "Watch the sky tonight in quadrant J around 2243. It should be spectacular"
-msgstr ""
+msgstr "Watch the sky tonight in quadrant J around 2243. It should be spectacular"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1073
 msgctxt "gossip-comms"
 msgid ""
 "I think the shuttle pilot has a tame miniature Ktlitan caged in his "
 "quarters. Sometimes I hear it at night"
-msgstr ""
+msgstr "I think the shuttle pilot has a tame miniature Ktlitan caged in his quarters. Sometimes I hear it at night"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1080
 msgctxt "gossip-comms"
 msgid ""
 "Did you hear the screaming chase in the corridors on level 4 last night? "
 "Three Kraylors were captured and put in the brig"
-msgstr ""
+msgstr "Did you hear the screaming chase in the corridors on level 4 last night? Three Kraylors were captured and put in the brig"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1087
 msgctxt "gossip-comms"
 msgid ""
 "Rumor has it that the two Lichten brothers are on the verge of a new "
 "discovery. And it's not another wine flavor either"
-msgstr ""
+msgstr "Rumour has it that the two Lichten brothers are on the verge of a new discovery. And it's not another wine flavour either"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1683
 msgctxt "ZoneLabelDescription-faction"
 msgid "Human"
-msgstr ""
+msgstr "Human"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1686
 msgctxt "ZoneLabelDescription-faction"
 msgid "Arlenian"
-msgstr ""
+msgstr "Arlenian"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1689
 msgctxt "ZoneLabelDescription-faction"
 msgid "Kraylor"
-msgstr ""
+msgstr "Kraylor"
 
 #: scripts/scenario_38_allies_and_enemies.lua:1692
 msgctxt "ZoneLabelDescription-faction"
 msgid "Exuari"
-msgstr ""
+msgstr "Exuari"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2447
 msgctxt "scienceDescription-station"
 msgid "Optical Components"
-msgstr ""
+msgstr "Optical Components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2468
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We make and supply optic components for various station and ship systems"
-msgstr ""
+msgstr "We make and supply optic components for various station and ship systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2472
 msgctxt "stationStory-comms"
@@ -235,19 +235,19 @@ msgid ""
 "This station continues the businesses from Earth based on the merging of "
 "several companies including Leica from Switzerland, the lens manufacturer "
 "and the Japanese advanced low carbon electronic and optic company"
-msgstr ""
+msgstr "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon electronic and optic company"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2487
 msgctxt "scienceDescription-station"
 msgid "Battery and software engineering"
-msgstr ""
+msgstr "Battery and software engineering"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2512
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide high quality high capacity batteries and specialized software for "
 "all shipboard systems"
-msgstr ""
+msgstr "We provide high quality high capacity batteries and specialised software for all shipboard systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2516
 msgctxt "stationStory-comms"
@@ -255,34 +255,34 @@ msgid ""
 "The station is named after a fictional software engineer in a late 20th "
 "century movie depicting humanity unknowingly conquered by aliens and kept "
 "docile by software generated illusion"
-msgstr ""
+msgstr "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2528
 msgctxt "scienceDescription-station"
 msgid "Shield and Armor Research"
-msgstr ""
+msgstr "Shield and Armour Research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2550
 msgctxt "stationGeneralInfo-comms"
 msgid "The finest shield and armor manufacturer in the quadrant"
-msgstr ""
+msgstr "The finest shield and armour manufacturer in the quadrant"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2554
 msgctxt "stationStory-comms"
 msgid ""
 "We named this station for the pioneering spirit of the 22nd century "
 "Starfleet explorer, Captain Jonathan Archer"
-msgstr ""
+msgstr "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2571
 msgctxt "scienceDescription-station"
 msgid "Energy and particle beam components"
-msgstr ""
+msgstr "Energy and particle beam components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2594
 msgctxt "stationGeneralInfo-comms"
 msgid "We fabricate general and specialized components for ship beam systems"
-msgstr ""
+msgstr "We fabricate general and specialised components for ship beam systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2598
 msgctxt "stationStory-comms"
@@ -290,19 +290,19 @@ msgid ""
 "This station was named after Archimedes who, according to legend, used a "
 "series of adjustable focal length mirrors to focus sunlight on a Roman naval "
 "fleet invading Syracuse, setting fire to it"
-msgstr ""
+msgstr "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2615
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
-msgstr ""
+msgstr "Warp and Impulse engine manufacturing"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2636
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
-msgstr ""
+msgstr "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2640
 msgctxt "stationStory-comms"
@@ -311,19 +311,19 @@ msgid ""
 "fictionlized stations that followed. The station initially constructed "
 "entire space worthy vessels. In time, it transitioned into specializeing in "
 "propulsion systems."
-msgstr ""
+msgstr "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems."
 
 #: scripts/scenario_38_allies_and_enemies.lua:2654
 msgctxt "scienceDescription-station"
 msgid "Training and Coordination"
-msgstr ""
+msgstr "Training and Coordination"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2674
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We train naval cadets in routine and specialized functions aboard space "
 "vessels and coordinate naval activity throughout the sector"
-msgstr ""
+msgstr "We train naval cadets in routine and specialised functions aboard space vessels and coordinate naval activity throughout the sector"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2678
 msgctxt "stationStory-comms"
@@ -333,19 +333,19 @@ msgid ""
 "later changed simply to Asimov. It started off as a stellar observatory, "
 "then became a supply stop and as it has grown has become an educational and "
 "coordination hub for the region"
-msgstr ""
+msgstr "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2693
 msgctxt "scienceDescription-station"
 msgid "Communication components"
-msgstr ""
+msgstr "Communication components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2716
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide a range of communication equipment and software for use aboard "
 "ships"
-msgstr ""
+msgstr "We provide a range of communication equipment and software for use aboard ships"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2720
 msgctxt "stationStory-comms"
@@ -354,17 +354,17 @@ msgid ""
 "transgalactic com link through the creative application of a quantum "
 "singularity. Station personnel often refer to the station as the Broccoli "
 "station"
-msgstr ""
+msgstr "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2734
 msgctxt "scienceDescription-station"
 msgid "Medical research"
-msgstr ""
+msgstr "Medical research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2743
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and treat exotic medical conditions"
-msgstr ""
+msgstr "We research and treat exotic medical conditions"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2747
 msgctxt "stationStory-comms"
@@ -372,24 +372,24 @@ msgid ""
 "The station is named after the United States national medical research "
 "center based in Bethesda, Maryland on earth which was established in the mid "
 "20th century"
-msgstr ""
+msgstr "The station is named after the United States national medical research centre based in Bethesda, Maryland on earth which was established in the mid 20th century"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2762
 msgctxt "scienceDescription-station"
 msgid "Warp drive components"
-msgstr ""
+msgstr "Warp drive components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2799
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide warp drive engines and components"
-msgstr ""
+msgstr "We provide warp drive engines and components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2803
 msgctxt "stationStory-comms"
 msgid ""
 "This station is named after Chris Van Den Broeck who did some initial "
 "research into the possibility of warp drive in the late 20th century on Earth"
-msgstr ""
+msgstr "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2817
 #: scripts/scenario_38_allies_and_enemies.lua:3628
@@ -397,75 +397,75 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:4998
 msgctxt "scienceDescription-station"
 msgid "Mining station"
-msgstr ""
+msgstr "Mining station"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2848
 msgctxt "scienceDescription-station"
 msgid "Robotic research"
-msgstr ""
+msgstr "Robotic research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2870
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and provide robotic systems and components"
-msgstr ""
+msgstr "We research and provide robotic systems and components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2874
 msgctxt "stationStory-comms"
 msgid ""
 "This station is named after Dr. Susan Calvin who pioneered robotic "
 "behavioral research and programming"
-msgstr ""
+msgstr "This station is named after Dr. Susan Calvin who pioneered robotic behavioural research and programming"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2886
 msgctxt "scienceDescription-station"
 msgid "Advanced Material components"
-msgstr ""
+msgstr "Advanced Material components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2921
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We fabricate several different kinds of materials critical to various space "
 "industries like ship building, station construction and mineral extraction"
-msgstr ""
+msgstr "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2925
 msgctxt "stationStory-comms"
 msgid ""
 "We named our station after Dr. Cavor, the physicist that invented a barrier "
 "material for gravity waves - Cavorite"
-msgstr ""
+msgstr "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2939
 #: scripts/scenario_38_allies_and_enemies.lua:4023
 msgctxt "scienceDescription-station"
 msgid "Trading station"
-msgstr ""
+msgstr "Trading station"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2957
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "Only the largest market and trading location in twenty sectors. You can find "
 "your heart's desire here"
-msgstr ""
+msgstr "Only the largest market and trading location in twenty sectors. You can find your heart's desire here"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2961
 msgctxt "stationStory-comms"
 msgid ""
 "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. "
 "Designed and built with trade and commerce in mind"
-msgstr ""
+msgstr "Modelled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind"
 
 #: scripts/scenario_38_allies_and_enemies.lua:2973
 msgctxt "scienceDescription-station"
 msgid "Shielded circuitry fabrication"
-msgstr ""
+msgstr "Shielded circuitry fabrication"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3004
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We make a large variety of circuits for numerous ship systems shielded from "
 "sensor detection and external control interference"
-msgstr ""
+msgstr "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3008
 msgctxt "stationStory-comms"
@@ -473,56 +473,56 @@ msgid ""
 "Our station is named after the law which quantifies the amount of force with "
 "which stationary electrically charged particals repel or attact each other - "
 "a fundamental principle in the design of our circuits"
-msgstr ""
+msgstr "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3020
 #: scripts/scenario_38_allies_and_enemies.lua:4568
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
-msgstr ""
+msgstr "Impulse engine components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3051
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
-msgstr ""
+msgstr "We supply high quality impulse engines and parts for use aboard ships"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3055
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after the fictional engineer, Cyrus Smith created by "
 "19th century author Jules Verne"
-msgstr ""
+msgstr "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3069
 #: scripts/scenario_38_allies_and_enemies.lua:4059
 #: scripts/scenario_38_allies_and_enemies.lua:4651
 msgctxt "scienceDescription-station"
 msgid "Android components"
-msgstr ""
+msgstr "Android components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3089
 msgctxt "stationGeneralInfo-comms"
 msgid "Supplier of android components, programming and service"
-msgstr ""
+msgstr "Supplier of android components, programming and service"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3093
 msgctxt "stationStory-comms"
 msgid ""
 "Named for Richard Deckard who inspired many of the sophisticated safety "
 "security algorithms now required for all androids"
-msgstr ""
+msgstr "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3105
 msgctxt "scienceDescription-station"
 msgid "Repulsor and Tractor Beam Components"
-msgstr ""
+msgstr "Repulsor and Tractor Beam Components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3132
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We can meet all your pushing and pulling needs with specialized equipment "
 "custom made"
-msgstr ""
+msgstr "We can meet all your pushing and pulling needs with specialised equipment custom made"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3136
 msgctxt "stationStory-comms"
@@ -530,20 +530,20 @@ msgid ""
 "The station name comes from a short story by the 20th century author "
 "Clifford D. Simak as well as from the 19th century developer John Deere who "
 "inspired a company that makes the Earth bound equivalents of our products"
-msgstr ""
+msgstr "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3151
 #: scripts/scenario_38_allies_and_enemies.lua:4098
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
-msgstr ""
+msgstr "Transporter components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3174
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide transporters used aboard ships as well as the components for "
 "repair and maintenance"
-msgstr ""
+msgstr "We provide transporters used aboard ships as well as the components for repair and maintenance"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3178
 msgctxt "stationStory-comms"
@@ -551,54 +551,54 @@ msgid ""
 "The station is named after the early 22nd century inventor of the "
 "transporter, Dr. Emory Erickson. This station is proud to have received the "
 "endorsement of Admiral Leonard McCoy"
-msgstr ""
+msgstr "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3192
 #: scripts/scenario_38_allies_and_enemies.lua:3808
 msgctxt "scienceDescription-station"
 msgid "Autodoc components"
-msgstr ""
+msgstr "Autodoc components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3215
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide components for automated medical machinery"
-msgstr ""
+msgstr "We provide components for automated medical machinery"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3219
 msgctxt "stationStory-comms"
 msgid ""
 "The station is the evolution of the company that started automated "
 "pharmaceutical dispensing in the early 21st century on Earth in Finland"
-msgstr ""
+msgstr "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3234
 msgctxt "scienceDescription-station"
 msgid "Nanotechnology research"
-msgstr ""
+msgstr "Nanotechnology research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3262
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide nanites and software for a variety of ship-board systems"
-msgstr ""
+msgstr "We provide nanites and software for a variety of ship-board systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3266
 msgctxt "stationStory-comms"
 msgid ""
 "This station's name recognizes one of the first scientific researchers into "
 "nanotechnology, physicist Richard Feynman"
-msgstr ""
+msgstr "This station's name recognises one of the first scientific researchers into nanotechnology, physicist Richard Feynman"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3281
 #: scripts/scenario_38_allies_and_enemies.lua:3491
 msgctxt "scienceDescription-station"
 msgid "Mining"
-msgstr ""
+msgstr "Mining"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3285
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We mine nearby asteroids for precious minerals and process them for sale"
-msgstr ""
+msgstr "We mine nearby asteroids for precious minerals and process them for sale"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3289
 msgctxt "stationStory-comms"
@@ -606,30 +606,30 @@ msgid ""
 "This station's name is inspired by a large gold mine on Earth in Indonesia. "
 "The station builders hoped to have a similar amount of minerals found "
 "amongst these asteroids"
-msgstr ""
+msgstr "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3372
 msgctxt "scienceDescription-station"
 msgid "Observatory and stellar mapping"
-msgstr ""
+msgstr "Observatory and stellar mapping"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3391
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We study the cosmos and map stellar phenomena. We also track moving "
 "asteroids. Look out! Just kidding"
-msgstr ""
+msgstr "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3405
 #: scripts/scenario_38_allies_and_enemies.lua:4880
 msgctxt "scienceDescription-station"
 msgid "Sensor components"
-msgstr ""
+msgstr "Sensor components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3424
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture sensor components and systems"
-msgstr ""
+msgstr "We research and manufacture sensor components and systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3428
 msgctxt "stationStory-comms"
@@ -637,41 +637,41 @@ msgid ""
 "The station is named after Tony Heyes the inventor of some of the earliest "
 "electromagnetic sensors in the mid 20th century on Earth in the United "
 "Kingdom to assist blind human mobility"
-msgstr ""
+msgstr "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3442
 msgctxt "scienceDescription-station"
 msgid "Nanite supplier"
-msgstr ""
+msgstr "Nanite supplier"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3472
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide nanites for various organic and non-organic systems"
-msgstr ""
+msgstr "We provide nanites for various organic and non-organic systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3476
 msgctxt "stationStory-comms"
 msgid ""
 "This station is named after the nanotechnologist Hossam Haick from the early "
 "21st century on Earth in Israel"
-msgstr ""
+msgstr "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3497
 msgctxt "stationGeneralInfo-comms"
 msgid "We mine nearby asteroids for precious minerals"
-msgstr ""
+msgstr "We mine nearby asteroids for precious minerals"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3582
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology training"
-msgstr ""
+msgstr "Xenopsychology training"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3610
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide classes and simulation to help train diverse species in how to "
 "relate to each other"
-msgstr ""
+msgstr "We provide classes and simulation to help train diverse species in how to relate to each other"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3614
 msgctxt "stationStory-comms"
@@ -679,7 +679,7 @@ msgid ""
 "A continuation of the research initially conducted by Dr. Gennady Komov in "
 "the early 22nd century on Venus, supported by the application of these "
 "principles"
-msgstr ""
+msgstr "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3828
 msgctxt "stationGeneralInfo-comms"
@@ -687,7 +687,7 @@ msgid ""
 "We build and repair and provide components and upgrades for automated "
 "facilities designed for ships where a doctor cannot be a crew member "
 "(commonly called autodocs)"
-msgstr ""
+msgstr "We build and repair and provide components and upgrades for automated facilities designed for ships where a doctor cannot be a crew member (commonly called autodocs)"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3832
 msgctxt "stationStory-comms"
@@ -695,17 +695,17 @@ msgid ""
 "The station is named after Dr. Lipkin who pioneered some of the research and "
 "application around robot assisted surgery in the area of partial nephrectomy "
 "for renal tumors in the early 21st century on Earth"
-msgstr ""
+msgstr "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3844
 msgctxt "scienceDescription-station"
 msgid "Zero gravity sports and entertainment"
-msgstr ""
+msgstr "Zero gravity sports and entertainment"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3865
 msgctxt "stationGeneralInfo-comms"
 msgid "Come take in a game or two or perhaps see a show"
-msgstr ""
+msgstr "Come take in a game or two or perhaps see a show"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3869
 msgctxt "stationStory-comms"
@@ -713,34 +713,34 @@ msgid ""
 "Named after Madison Square Gardens from 21st century Earth, this station was "
 "designed to serve similar purposes in space - a venue for sports and "
 "entertainment"
-msgstr ""
+msgstr "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3884
 msgctxt "scienceDescription-station"
 msgid "Energy beam components"
-msgstr ""
+msgstr "Energy beam components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3905
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture energy beam components and systems"
-msgstr ""
+msgstr "We research and manufacture energy beam components and systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3909
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Theodore Maiman who researched and built the "
 "first laser in the mid 20th centuryon Earth"
-msgstr ""
+msgstr "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th centuryon Earth"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3924
 msgctxt "scienceDescription-station"
 msgid "Energy Beam Components"
-msgstr ""
+msgstr "Energy Beam Components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3946
 msgctxt "stationGeneralInfo-comms"
 msgid "We manufacture energy beam components"
-msgstr ""
+msgstr "We manufacture energy beam components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3949
 msgctxt "stationStory-comms"
@@ -748,46 +748,46 @@ msgid ""
 "Station named after Guglielmo Marconi an Italian inventor from early 20th "
 "century Earth who, along with Nicolo Tesla, claimed to have invented a death "
 "ray or particle beam weapon"
-msgstr ""
+msgstr "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3963
 msgctxt "scienceDescription-station"
 msgid "Medical Research"
-msgstr ""
+msgstr "Medical Research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3969
 msgctxt "stationGeneralInfo-comms"
 msgid "We research exotic diseases and other human medical conditions"
-msgstr ""
+msgstr "We research exotic diseases and other human medical conditions"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3973
 msgctxt "stationStory-comms"
 msgid ""
 "We continue the medical work started by William Worrall Mayo in the late "
 "19th century on Earth"
-msgstr ""
+msgstr "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth"
 
 #: scripts/scenario_38_allies_and_enemies.lua:3987
 msgctxt "scienceDescription-station"
 msgid "Exobiology research"
-msgstr ""
+msgstr "Exobiology research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4005
 msgctxt "stationGeneralInfo-comms"
 msgid "We study recently discovered life forms not native to Earth"
-msgstr ""
+msgstr "We study recently discovered life forms not native to Earth"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4009
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after one the early exobiologists from mid 20th "
 "century Earth, Dr. Stanley Miller"
-msgstr ""
+msgstr "This station was named after one the early exobiologists from mid 20th century Earth, Dr. Stanley Miller"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4041
 msgctxt "stationGeneralInfo-comms"
 msgid "Come to Muddvile for all your trade and commerce needs and desires"
-msgstr ""
+msgstr "Come to Muddvile for all your trade and commerce needs and desires"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4045
 msgctxt "stationStory-comms"
@@ -795,47 +795,47 @@ msgid ""
 "Upon retirement, Harry Mudd started this commercial venture using his "
 "leftover inventory and extensive connections obtained while he traveled the "
 "stars as a salesman"
-msgstr ""
+msgstr "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he travelled the stars as a salesman"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4079
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and manufacture android components and systems. Our design our "
 "androids to maximize their likeness to humans"
-msgstr ""
+msgstr "We research and manufacture android components and systems. Our design our androids to maximise their likeness to humans"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4083
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after the ground breaking model of android produced by "
 "the Tyrell corporation"
-msgstr ""
+msgstr "The station is named after the ground breaking model of android produced by the Tyrell corporation"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4130
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and fabricate high quality transporters and transporter "
 "components for use aboard ships"
-msgstr ""
+msgstr "We research and fabricate high quality transporters and transporter components for use aboard ships"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4134
 msgctxt "stationStory-comms"
 msgid ""
 "Miles O'Brien started this business after his experience as a transporter "
 "chief"
-msgstr ""
+msgstr "Miles O'Brien started this business after his experience as a transporter chief"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4148
 msgctxt "scienceDescription-station"
 msgid "Optical components"
-msgstr ""
+msgstr "Optical components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4169
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We fabricate optical lenses and related equipment as well as fiber optic "
 "cabling and components"
-msgstr ""
+msgstr "We fabricate optical lenses and related equipment as well as fibre optic cabling and components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4173
 msgctxt "stationStory-comms"
@@ -843,45 +843,45 @@ msgid ""
 "This station grew out of the Olympus company based on earth in the early "
 "21st century. It merged with Infinera, then bought several software "
 "comapnies before branching out into space based industry"
-msgstr ""
+msgstr "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4187
 msgctxt "scienceDescription-station"
 msgid "Diplomatic training"
-msgstr ""
+msgstr "Diplomatic training"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4192
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "The premeire academy for leadership and diplomacy training in the region"
-msgstr ""
+msgstr "The premeire academy for leadership and diplomacy training in the region"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4196
 msgctxt "stationStory-comms"
 msgid ""
 "Established by the royal family so critical during the political upheaval era"
-msgstr ""
+msgstr "Established by the royal family so critical during the political upheaval era"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4210
 msgctxt "scienceDescription-station"
 msgid "Mining and trade"
-msgstr ""
+msgstr "Mining and trade"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4296
 msgctxt "scienceDescription-station"
 msgid "Mining and gambling"
-msgstr ""
+msgstr "Mining and gambling"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4386
 #: scripts/scenario_38_allies_and_enemies.lua:4469
 msgctxt "scienceDescription-station"
 msgid "Load lifters and components"
-msgstr ""
+msgstr "Load lifters and components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4407
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide load lifters and components for various ship systems"
-msgstr ""
+msgstr "We provide load lifters and components for various ship systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4411
 msgctxt "stationStory-comms"
@@ -891,46 +891,46 @@ msgid ""
 "expand into building and manufacturing the equipment adding innovations "
 "based on his years of experience using load lifters and their relative "
 "cousins, moisture vaporators"
-msgstr ""
+msgstr "The station is named after Lars Owen. After his extensive eperience with tempermental machinery on Tatooine, he used his subject matter expertise to expand into building and manufacturing the equipment adding innovations based on his years of experience using load lifters and their relative cousins, moisture vaporators"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4425
 msgctxt "scienceDescription-station"
 msgid "Optic components"
-msgstr ""
+msgstr "Optic components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4453
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide optic components for various ship systems"
-msgstr ""
+msgstr "We provide optic components for various ship systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4457
 msgctxt "stationStory-comms"
 msgid ""
 "This station is an outgrowth of the Panduit corporation started in the mid "
 "20th century on Earth in the United States"
-msgstr ""
+msgstr "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4495
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide load lifters and components"
-msgstr ""
+msgstr "We provide load lifters and components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4498
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Ellen Ripley who made creative and effective use "
 "of one of our load lifters when defending her ship"
-msgstr ""
+msgstr "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4513
 msgctxt "scienceDescription-station"
 msgid "Shield components and research"
-msgstr ""
+msgstr "Shield components and research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4538
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and fabricate components for ship shield systems"
-msgstr ""
+msgstr "We research and fabricate components for ship shield systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4542
 msgctxt "stationStory-comms"
@@ -939,36 +939,36 @@ msgid ""
 "Appleton Laboratory in the United Kingdom which conducted some preliminary "
 "research into the feasability of generating an energy shield in the late "
 "20th century"
-msgstr ""
+msgstr "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4556
 #: scripts/scenario_38_allies_and_enemies.lua:5369
 msgctxt "scienceDescription-station"
 msgid "Observatory"
-msgstr ""
+msgstr "Observatory"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4590
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture impulse engine components and systems"
-msgstr ""
+msgstr "We research and manufacture impulse engine components and systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4594
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Roger Shawyer who built the first prototype "
 "impulse engine in the early 21st century"
-msgstr ""
+msgstr "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4606
 msgctxt "scienceDescription-station"
 msgid "Repulsor and tractor beam components"
-msgstr ""
+msgstr "Repulsor and tractor beam components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4633
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We make ship systems designed to push or pull other objects around in space"
-msgstr ""
+msgstr "We make ship systems designed to push or pull other objects around in space"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4637
 msgctxt "stationStory-comms"
@@ -977,69 +977,69 @@ msgid ""
 "early 21st century on Earth in India. Tugboats serve a similar purpose for "
 "ocean-going vessels on earth as tractor and repulsor beams serve for space-"
 "going vessels today"
-msgstr ""
+msgstr "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4671
 msgctxt "stationGeneralInfo-comms"
 msgid "We create androids and android components"
-msgstr ""
+msgstr "We create androids and android components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4675
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Dr. Noonian Soong, the famous android researcher "
 "and builder"
-msgstr ""
+msgstr "The station is named after Dr. Noonian Soong, the famous android researcher and builder"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4690
 msgctxt "scienceDescription-station"
 msgid "Logistics coordination"
-msgstr ""
+msgstr "Logistics coordination"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4696
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We support the stations and ships in the area with planning and "
 "communication services"
-msgstr ""
+msgstr "We support the stations and ships in the area with planning and communication services"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4700
 msgctxt "stationStory-comms"
 msgid ""
 "We recognize the influence of Starfleet Captain James Tiberius Kirk in the "
 "23rd century in our station name"
-msgstr ""
+msgstr "We recognise the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4712
 msgctxt "scienceDescription-station"
 msgid "Advanced material components"
-msgstr ""
+msgstr "Advanced material components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4745
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We create multiple types of advanced material components. Our most popular "
 "products are our filaments"
-msgstr ""
+msgstr "We create multiple types of advanced material components. Our most popular products are our filaments"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4749
 msgctxt "stationStory-comms"
 msgid ""
 "We learned several of our critical industrial processes from the Tokra race, "
 "so we honor our fortune by naming the station after them"
-msgstr ""
+msgstr "We learned several of our critical industrial processes from the Tokra race, so we honour our fortune by naming the station after them"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4763
 msgctxt "scienceDescription-station"
 msgid "Shield and armor components and research"
-msgstr ""
+msgstr "Shield and armour components and research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4790
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and make general and specialized components for ship shield and "
 "ship armor systems"
-msgstr ""
+msgstr "We research and make general and specialised components for ship shield and ship armour systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4794
 msgctxt "stationStory-comms"
@@ -1047,13 +1047,13 @@ msgid ""
 "This station was named after one of the earliest researchers in shield "
 "technology, Alexander Toohie back when it was considered impractical to "
 "construct shields due to the physics involved."
-msgstr ""
+msgstr "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved."
 
 #: scripts/scenario_38_allies_and_enemies.lua:4811
 #: scripts/scenario_38_allies_and_enemies.lua:5438
 msgctxt "scienceDescription-station"
 msgid "Ship building and maintenance facility"
-msgstr ""
+msgstr "Ship building and maintenance facility"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4831
 msgctxt "stationGeneralInfo-comms"
@@ -1062,33 +1062,33 @@ msgid ""
 "naval models are researched, designed and built right here on this station. "
 "Our design goals seek to make the space faring experience as simple as "
 "possible given the tremendous capabilities of the modern naval vessel"
-msgstr ""
+msgstr "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4843
 msgctxt "scienceDescription-station"
 msgid "Shielded Circuitry Fabrication"
-msgstr ""
+msgstr "Shielded Circuitry Fabrication"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4862
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We specialize in circuitry shielded from external hacking suitable for ship "
 "systems"
-msgstr ""
+msgstr "We specialise in circuitry shielded from external hacking suitable for ship systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4866
 msgctxt "stationStory-comms"
 msgid ""
 "We started as an expansion from the lunar based chip manufacturer of Earth "
 "legacy Intel electronic chips"
-msgstr ""
+msgstr "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4901
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and construct components for the most powerful and accurate "
 "sensors used aboard ships along with the software to make them easy to use"
-msgstr ""
+msgstr "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4905
 msgctxt "stationStory-comms"
@@ -1099,61 +1099,61 @@ msgid ""
 "include various sensors for space vehicles. Veloquan was the result of "
 "numerous mergers and acquisitions of several companies including Velodyne "
 "and Quanergy"
-msgstr ""
+msgstr "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4920
 msgctxt "scienceDescription-station"
 msgid "Warp engine components"
-msgstr ""
+msgstr "Warp engine components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4949
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We specialize in the esoteric components necessary to make warp drives "
 "function properly"
-msgstr ""
+msgstr "We specialise in the esoteric components necessary to make warp drives function properly"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4953
 msgctxt "stationStory-comms"
 msgid ""
 "Zefram Cochrane constructed the first warp drive in human history. We named "
 "our station after him because of the specialized warp systems work we do"
-msgstr ""
+msgstr "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialised warp systems work we do"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4971
 msgctxt "scienceDescription-station"
 msgid "Commerce and gambling"
-msgstr ""
+msgstr "Commerce and gambling"
 
 #: scripts/scenario_38_allies_and_enemies.lua:4984
 msgctxt "stationGeneralInfo-comms"
 msgid "Come play some games and shop. House take does not exceed 4 percent"
-msgstr ""
+msgstr "Come play some games and shop. House take does not exceed 4 percent"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5086
 msgctxt "scienceDescription-station"
 msgid "Casino and Gambling"
-msgstr ""
+msgstr "Casino and Gambling"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5108
 msgctxt "scienceDescription-station"
 msgid "Gambling and resupply"
-msgstr ""
+msgstr "Gambling and resupply"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5120
 msgctxt "stationGeneralInfo-comms"
 msgid "Relax and meet some interesting players"
-msgstr ""
+msgstr "Relax and meet some interesting players"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5134
 msgctxt "scienceDescription-station"
 msgid "Commerce and recreation"
-msgstr ""
+msgstr "Commerce and recreation"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5150
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology research"
-msgstr ""
+msgstr "Xenopsychology research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5172
 #: scripts/scenario_38_allies_and_enemies.lua:5204
@@ -1161,49 +1161,49 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:5454
 msgctxt "scienceDescription-station"
 msgid "Resupply"
-msgstr ""
+msgstr "Resupply"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5218
 msgctxt "scienceDescription-station"
 msgid "Textiles and fashion"
-msgstr ""
+msgstr "Textiles and fashion"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5240
 msgctxt "scienceDescription-station"
 msgid "Stress Psychology Research"
-msgstr ""
+msgstr "Stress Psychology Research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5262
 msgctxt "scienceDescription-station"
 msgid "Low gravity research"
-msgstr ""
+msgstr "Low gravity research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5289
 msgctxt "stationGeneralInfo-comms"
 msgid "Get your energy here! Grab a drink before you go!"
-msgstr ""
+msgstr "Get your energy here! Grab a drink before you go!"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5304
 msgctxt "scienceDescription-station"
 msgid "Research Lab and Observatory"
-msgstr ""
+msgstr "Research Lab and Observatory"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5326
 msgctxt "scienceDescription-station"
 msgid "Biotech research"
-msgstr ""
+msgstr "Biotech research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5345
 msgctxt "scienceDescription-station"
 msgid "Routine maintenance and entertainment"
-msgstr ""
+msgstr "Routine maintenance and entertainment"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5351
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "Stop by for repairs. Take in one of our juggling shows featuring the four-"
 "armed Skandars"
-msgstr ""
+msgstr "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5355
 msgctxt "stationStory-comms"
@@ -1211,68 +1211,68 @@ msgid ""
 "The nomadic Skandars have set up at this station to practice their "
 "entertainment and maintenance skills as well as build a community where "
 "Skandars can relax"
-msgstr ""
+msgstr "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5388
 msgctxt "scienceDescription-station"
 msgid "Automated weapons systems"
-msgstr ""
+msgstr "Automated weapons systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5401
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and create automated weapons systems to improve ship combat "
 "capability"
-msgstr ""
+msgstr "We research and create automated weapons systems to improve ship combat capability"
 
 #: scripts/scenario_38_allies_and_enemies.lua:5416
 msgctxt "scienceDescription-station"
 msgid "Biotechnology research"
-msgstr ""
+msgstr "Biotechnology research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6083
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
-msgstr ""
+msgstr "We are under attack! No time for chatting!"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6098
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?\n"
-msgstr ""
+msgstr "Good day, officer!\nWhat can we do for you today?\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6101
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
-msgstr ""
+msgstr "Welcome to our lovely station.\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6107
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
-msgstr ""
+msgstr "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
 
 #: scripts/scenario_38_allies_and_enemies.lua:6153
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr ""
+msgstr "I need ordnance restocked"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6155
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr ""
+msgstr "What type of ordnance?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6161
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
-msgstr ""
+msgstr "Can you supply us with some nukes? ("
 
 #: scripts/scenario_38_allies_and_enemies.lua:6166
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr ""
+msgstr "We really need some nukes ("
 
 #: scripts/scenario_38_allies_and_enemies.lua:6171
 #: scripts/scenario_38_allies_and_enemies.lua:6193
@@ -1282,65 +1282,65 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr ""
+msgstr "%s%d rep each)"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6186
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr ""
+msgstr "Please re-stock our EMP missiles. ("
 
 #: scripts/scenario_38_allies_and_enemies.lua:6189
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
-msgstr ""
+msgstr "Got any EMPs? ("
 
 #: scripts/scenario_38_allies_and_enemies.lua:6208
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr ""
+msgstr "Do you have spare homing missiles for us? ("
 
 #: scripts/scenario_38_allies_and_enemies.lua:6213
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr ""
+msgstr "Do you have extra homing missiles? ("
 
 #: scripts/scenario_38_allies_and_enemies.lua:6233
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr ""
+msgstr "We could use some mines. ("
 
 #: scripts/scenario_38_allies_and_enemies.lua:6237
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr ""
+msgstr "How about mines? ("
 
 #: scripts/scenario_38_allies_and_enemies.lua:6255
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
-msgstr ""
+msgstr "What about HVLI? ("
 
 #: scripts/scenario_38_allies_and_enemies.lua:6258
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
-msgstr ""
+msgstr "Could you provide HVLI? ("
 
 #: scripts/scenario_38_allies_and_enemies.lua:6278
 #: scripts/scenario_38_allies_and_enemies.lua:8405
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr ""
+msgstr "Tell me more about your station"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6281
 #: scripts/scenario_38_allies_and_enemies.lua:8408
 msgctxt "station-comms"
 msgid "What would you like to know?"
-msgstr ""
+msgstr "What would you like to know?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6284
 #: scripts/scenario_38_allies_and_enemies.lua:8411
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
-msgstr ""
+msgstr "General information"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6287
 #: scripts/scenario_38_allies_and_enemies.lua:6295
@@ -1412,45 +1412,45 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:9688
 #: scripts/scenario_38_allies_and_enemies.lua:9750
 msgid "Back"
-msgstr ""
+msgstr "Back"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6292
 #: scripts/scenario_38_allies_and_enemies.lua:8419
 msgctxt "stationStory-comms"
 msgid "Station history"
-msgstr ""
+msgstr "Station history"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6303
 #: scripts/scenario_38_allies_and_enemies.lua:8430
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr ""
+msgstr "Gossip"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6318
 #: scripts/scenario_38_allies_and_enemies.lua:8113
 msgctxt "doomsday-comms"
 msgid "Tell me about Gregory Unruh"
-msgstr ""
+msgstr "Tell me about Gregory Unruh"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6323
 msgctxt "doomsday-comms"
 msgid "He's a retired scientist here. He's on C deck if you'd like to visit"
-msgstr ""
+msgstr "He's a retired scientist here. He's on C deck if you'd like to visit"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6327
 msgctxt "doomsday-comms"
 msgid "Visit Gregory Unruh on C deck"
-msgstr ""
+msgstr "Visit Gregory Unruh on C deck"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6332
 msgctxt "doomsday-comms"
 msgid "[Gregory Unruh] What can I do for you?"
-msgstr ""
+msgstr "[Gregory Unruh] What can I do for you?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6338
 msgctxt "doomsday-comms"
 msgid "We need your plans for a doomsday device defense mechanism"
-msgstr ""
+msgstr "We need your plans for a doomsday device defence mechanism"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6344
 msgctxt "doomsday-comms"
@@ -1458,67 +1458,67 @@ msgid ""
 "Ah, I see someone is taking my research seriously. Here is my incomplete "
 "prototype along with the plans. You'll notice that certain components are "
 "still required."
-msgstr ""
+msgstr "Ah, I see someone is taking my research seriously. Here is my incomplete prototype along with the plans. You'll notice that certain components are still required."
 
 #: scripts/scenario_38_allies_and_enemies.lua:6360
 #: scripts/scenario_38_allies_and_enemies.lua:8139
 msgctxt "doctor-comms"
 msgid "Tell me about Morrigan Thultris"
-msgstr ""
+msgstr "Tell me about Morrigan Thultris"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6363
 msgctxt "doctor-comms"
 msgid "She does medical research here"
-msgstr ""
+msgstr "She does medical research here"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6366
 msgctxt "doctor-comms"
 msgid "May I speak with her?"
-msgstr ""
+msgstr "May I speak with her?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6371
 msgctxt "doctor-comms"
 msgid ""
 "She won't come to the communications nexus, but you may visit her in her "
 "quarters"
-msgstr ""
+msgstr "She won't come to the communications nexus, but you may visit her in her quarters"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6375
 msgctxt "doctor-comms"
 msgid "Visit Dr. Thultris"
-msgstr ""
+msgstr "Visit Dr. Thultris"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6380
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Who is it?"
-msgstr ""
+msgstr "[Dr. Thultris behind closed quarters door]\nWho is it?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6387
 #, lua-format
 msgctxt "doctor-comms"
 msgid "I am an officer from the Human Navy ship, %s"
-msgstr ""
+msgstr "I am an officer from the Human Navy ship, %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6395
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "What do you want?"
-msgstr ""
+msgstr "[Dr. Thultris behind closed quarters door]\nWhat do you want?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6401
 msgctxt "doctor-comms"
 msgid "We need your help"
-msgstr ""
+msgstr "We need your help"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6412
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris opens her door]\n"
 "With what?"
-msgstr ""
+msgstr "[Dr. Thultris opens her door]\nWith what?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6418
 #: scripts/scenario_38_allies_and_enemies.lua:6684
@@ -1527,7 +1527,7 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:7101
 msgctxt "doctor-comms"
 msgid "Grab Dr. Thultris"
-msgstr ""
+msgstr "Grab Dr. Thultris"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6428
 #: scripts/scenario_38_allies_and_enemies.lua:6561
@@ -1540,7 +1540,7 @@ msgid ""
 "As you pull her down the corridor back to the ship, explaining why you've "
 "come for her, she protests initially then eventually runs back with you, "
 "convinced of the urgency of the situation"
-msgstr ""
+msgstr "As you pull her down the corridor back to the ship, explaining why you've come for her, she protests initially then eventually runs back with you, convinced of the urgency of the situation"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6439
 #: scripts/scenario_38_allies_and_enemies.lua:6572
@@ -1550,12 +1550,12 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:7122
 msgctxt "doctor-comms"
 msgid "She slams the door in your face as you reach for her"
-msgstr ""
+msgstr "She slams the door in your face as you reach for her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6450
 msgctxt "doctor-comms"
 msgid "A dying patient needs your expertise"
-msgstr ""
+msgstr "A dying patient needs your expertise"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6464
 msgctxt "doctor-comms"
@@ -1563,19 +1563,19 @@ msgid ""
 "[Dr. Thultris] Then let's get going to help the patient\n"
 "\n"
 "As you both return, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] Then let's get going to help the patient\n\nAs you both return, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6475
 msgctxt "doctor-comms"
 msgid ""
 "People die all the time\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "People die all the time\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6486
 msgctxt "doctor-comms"
 msgid "An Arlenian Admiral shows symptoms like those you published"
-msgstr ""
+msgstr "An Arlenian Admiral shows symptoms like those you published"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6500
 msgctxt "doctor-comms"
@@ -1583,43 +1583,43 @@ msgid ""
 "[Dr. Thultris] Take me to the admiral\n"
 "\n"
 "As you both return to the ship, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] Take me to the admiral\n\nAs you both return to the ship, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6511
 msgctxt "doctor-comms"
 msgid ""
 "An Arlenian Admiral? Who cares!\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "An Arlenian Admiral? Who cares!\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6523
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Go away, I'm busy"
-msgstr ""
+msgstr "[Dr. Thultris behind closed quarters door]\nGo away, I'm busy"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6534
 msgctxt "doctor-comms"
 msgid "Medical team suggested your research for a patient"
-msgstr ""
+msgstr "Medical team suggested your research for a patient"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6545
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris opens her door]\n"
 "How does my research apply to a patient?"
-msgstr ""
+msgstr "[Dr. Thultris opens her door]\nHow does my research apply to a patient?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6551
 msgctxt "Doctor-comms"
 msgid "Grab Dr. Thultris"
-msgstr ""
+msgstr "Grab Dr. Thultris"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6583
 msgctxt "doctor-comms"
 msgid "The symptoms closely correlate to your research"
-msgstr ""
+msgstr "The symptoms closely correlate to your research"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6597
 msgctxt "doctor-comms"
@@ -1627,19 +1627,19 @@ msgid ""
 "[Dr. Thultris] I think I can help\n"
 "\n"
 "As you both return, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] I think I can help\n\nAs you both return, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6608
 msgctxt "doctor-comms"
 msgid ""
 "Let me know what happens with the patient\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "Let me know what happens with the patient\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6619
 msgctxt "doctor-comms"
 msgid "Your research may save an Arlenian Admiral's life"
-msgstr ""
+msgstr "Your research may save an Arlenian Admiral's life"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6633
 msgctxt "doctor-comms"
@@ -1647,38 +1647,38 @@ msgid ""
 "[Dr. Thultris] I would love to apply my research\n"
 "\n"
 "As you both return, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] I would love to apply my research\n\nAs you both return, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6644
 msgctxt "doctor-comms"
 msgid ""
 "Diplomacy and military matters bore me\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "Diplomacy and military matters bore me\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6656
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "That's nice. Leave me alone"
-msgstr ""
+msgstr "[Dr. Thultris behind closed quarters door]\nThat's nice. Leave me alone"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6667
 msgctxt "doctor-comms"
 msgid "Arlenian with an unusual disease is near death"
-msgstr ""
+msgstr "Arlenian with an unusual disease is near death"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6678
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris opens her door]\n"
 "Why come to me?"
-msgstr ""
+msgstr "[Dr. Thultris opens her door]\nWhy come to me?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6716
 msgctxt "doctor-comms"
 msgid "The Arlenian medical team referred us to you"
-msgstr ""
+msgstr "The Arlenian medical team referred us to you"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6730
 msgctxt "doctor-comms"
@@ -1686,19 +1686,19 @@ msgid ""
 "[Dr. Thultris] Nice to be recognized outside of human space\n"
 "\n"
 "As you both return, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] Nice to be recognised outside of human space\n\nAs you both return, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6741
 msgctxt "doctor-comms"
 msgid ""
 "What do the Arlenians know?\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "What do the Arlenians know?\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6752
 msgctxt "doctor-comms"
 msgid "Your research accurately describes the symptoms"
-msgstr ""
+msgstr "Your research accurately describes the symptoms"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6766
 msgctxt "doctor-comms"
@@ -1706,50 +1706,50 @@ msgid ""
 "[Dr. Thultris] I would like to see the patient\n"
 "\n"
 "As you both return, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] I would like to see the patient\n\nAs you both return, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6777
 msgctxt "doctor-comms"
 msgid ""
 "Coincidental, I'm sure\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "Coincidental, I'm sure\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6789
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "My condolences. Goodbye"
-msgstr ""
+msgstr "[Dr. Thultris behind closed quarters door]\nMy condolences. Goodbye"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6806
 msgctxt "doctor-comms"
 msgid "I am an admirer of your research and have questions"
-msgstr ""
+msgstr "I am an admirer of your research and have questions"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6812
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Really? What is it about my research you admire?"
-msgstr ""
+msgstr "[Dr. Thultris behind closed quarters door]\nReally? What is it about my research you admire?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6818
 msgctxt "doctor-comms"
 msgid "The depth of your most recent publication"
-msgstr ""
+msgstr "The depth of your most recent publication"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6829
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris opens her door]\n"
 "Why does this research interest you?"
-msgstr ""
+msgstr "[Dr. Thultris opens her door]\nWhy does this research interest you?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6867
 msgctxt "doctor-comms"
 msgid "I know of a patient that might benefit"
-msgstr ""
+msgstr "I know of a patient that might benefit"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6881
 msgctxt "doctor-comms"
@@ -1757,19 +1757,19 @@ msgid ""
 "[Dr. Thultris] Those are rare. May I see the patient?\n"
 "\n"
 "As you both return, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] Those are rare. May I see the patient?\n\nAs you both return, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6892
 msgctxt "doctor-comms"
 msgid ""
 "My research is unlikely to apply\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "My research is unlikely to apply\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6903
 msgctxt "doctor-comms"
 msgid "Your research could help a sick Arlenian Admiral"
-msgstr ""
+msgstr "Your research could help a sick Arlenian Admiral"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6917
 msgctxt "doctor-comms"
@@ -1777,38 +1777,38 @@ msgid ""
 "[Dr. Thultris] I would like to see my research in the Arlenian context\n"
 "\n"
 "As you both return, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] I would like to see my research in the Arlenian context\n\nAs you both return, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6928
 msgctxt "doctor-comms"
 msgid ""
 "I don't think it applies to Arlenians\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "I don't think it applies to Arlenians\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6940
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Publish a review and we'll talk"
-msgstr ""
+msgstr "[Dr. Thultris behind closed quarters door]\nPublish a review and we'll talk"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6951
 msgctxt "doctor-comms"
 msgid "The breadth of knowledge you demonstrate"
-msgstr ""
+msgstr "The breadth of knowledge you demonstrate"
 
 #: scripts/scenario_38_allies_and_enemies.lua:6962
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris opens her door]\n"
 "I doubt that. Why are you *really* here?"
-msgstr ""
+msgstr "[Dr. Thultris opens her door]\nI doubt that. Why are you *really* here?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7000
 msgctxt "doctor-comms"
 msgid "We need your help with a dying Arlenian Admiral"
-msgstr ""
+msgstr "We need your help with a dying Arlenian Admiral"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7014
 #: scripts/scenario_38_allies_and_enemies.lua:7147
@@ -1817,19 +1817,19 @@ msgid ""
 "[Dr. Thultris] Why didn't you say so? Of course I'll help\n"
 "\n"
 "As you both return, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] Why didn't you say so? Of course I'll help\n\nAs you both return, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7025
 msgctxt "doctor-comms"
 msgid ""
 "Your first story was better\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "Your first story was better\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7036
 msgctxt "doctor-comms"
 msgid "An Arlenian medical team thinks you can help a dying patient"
-msgstr ""
+msgstr "An Arlenian medical team thinks you can help a dying patient"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7050
 msgctxt "doctor-comms"
@@ -1837,50 +1837,50 @@ msgid ""
 "[Dr. Thultris] That's reasonable. Let's go\n"
 "\n"
 "As you both return, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] That's reasonable. Let's go\n\nAs you both return, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7061
 msgctxt "doctor-comms"
 msgid ""
 "I'm not concerned with Arlenian patients\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "I'm not concerned with Arlenian patients\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7073
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Faint praise insults me. Go away"
-msgstr ""
+msgstr "[Dr. Thultris behind closed quarters door]\nFaint praise insults me. Go away"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7084
 msgctxt "doctor-comms"
 msgid "Your superb publication presentation"
-msgstr ""
+msgstr "Your superb publication presentation"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7095
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris opens her door]\n"
 "Ha! Is that why you're here?"
-msgstr ""
+msgstr "[Dr. Thultris opens her door]\nHa! Is that why you're here?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7133
 msgctxt "doctor-comms"
 msgid "Not really. We need your help"
-msgstr ""
+msgstr "Not really. We need your help"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7158
 msgctxt "doctor-comms"
 msgid ""
 "I'm sorry, but I'm too busy right now\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "I'm sorry, but I'm too busy right now\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7169
 msgctxt "doctor-comms"
 msgid "Of course! I've got a case study for you to examine"
-msgstr ""
+msgstr "Of course! I've got a case study for you to examine"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7183
 msgctxt "doctor-comms"
@@ -1888,102 +1888,102 @@ msgid ""
 "[Dr. Thultris] An application for my research?! Goody Goody!\n"
 "\n"
 "As you both return, you explain the situation to her"
-msgstr ""
+msgstr "[Dr. Thultris] An application for my research?! Goody Goody!\n\nAs you both return, you explain the situation to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7194
 msgctxt "doctor-comms"
 msgid ""
 "Sounds interesting, but not right now, thanks\n"
 "[Dr. Thultris closes her door]"
-msgstr ""
+msgstr "Sounds interesting, but not right now, thanks\n[Dr. Thultris closes her door]"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7206
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Get a writing advisor and get out of here"
-msgstr ""
+msgstr "[Dr. Thultris behind closed quarters door]\nGet a writing advisor and get out of here"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7234
 #: scripts/scenario_38_allies_and_enemies.lua:8179
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
-msgstr ""
+msgstr "Tell me about %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7245
 #: scripts/scenario_38_allies_and_enemies.lua:8192
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Never heard of %s"
-msgstr ""
+msgstr "Never heard of %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7252
 #: scripts/scenario_38_allies_and_enemies.lua:8200
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s died last week. The funeral was yesterday"
-msgstr ""
+msgstr "%s died last week. The funeral was yesterday"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7260
 #: scripts/scenario_38_allies_and_enemies.lua:8208
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s? Who's %s? There's nobody here named %s"
-msgstr ""
+msgstr "%s? Who's %s? There's nobody here named %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7270
 #: scripts/scenario_38_allies_and_enemies.lua:8218
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "We don't talk about %s. They are gone and good riddance"
-msgstr ""
+msgstr "We don't talk about %s. They are gone and good riddance"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7278
 #: scripts/scenario_38_allies_and_enemies.lua:8226
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "I think %s moved away"
-msgstr ""
+msgstr "I think %s moved away"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7292
 #: scripts/scenario_38_allies_and_enemies.lua:8240
 msgctxt "orders-comms"
 msgid "What are my current orders?"
-msgstr ""
+msgstr "What are my current orders?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7314
 #: scripts/scenario_38_allies_and_enemies.lua:7345
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr ""
+msgstr "Recruit repair crew member for %i reputation"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7321
 #: scripts/scenario_38_allies_and_enemies.lua:7352
 #: scripts/scenario_38_allies_and_enemies.lua:9574
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr ""
+msgstr "Insufficient reputation"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7328
 #: scripts/scenario_38_allies_and_enemies.lua:7359
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
-msgstr ""
+msgstr "Repair crew member hired"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7368
 #: scripts/scenario_38_allies_and_enemies.lua:8100
 #: scripts/scenario_38_allies_and_enemies.lua:9433
 msgctxt "path-comms"
 msgid "Where is Bespin?"
-msgstr ""
+msgstr "Where is Bespin?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7378
 #, lua-format
 msgctxt "path-comms"
 msgid "Bespin is in %s and enemies are within 30U of Cloud City"
-msgstr ""
+msgstr "Bespin is in %s and enemies are within 30U of Cloud City"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7386
 #: scripts/scenario_38_allies_and_enemies.lua:8103
@@ -1991,12 +1991,12 @@ msgstr ""
 #, lua-format
 msgctxt "path-comms"
 msgid "Bespin is in %s"
-msgstr ""
+msgstr "Bespin is in %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7399
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr ""
+msgstr "No tutorial covered goods or cargo. Explain"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7405
 msgctxt "explainGoods-comms"
@@ -2007,27 +2007,27 @@ msgid ""
 "cargo. Each player ship differs in cargo carrying capacity. Goods may be "
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
-msgstr ""
+msgstr "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7411
 msgctxt "explainGoodsComponent-comms"
 msgid "Explain the component goods"
-msgstr ""
+msgstr "Explain the component goods"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7416
 msgctxt "explainGoodsMineral-comms"
 msgid "Explain the mineral goods"
-msgstr ""
+msgstr "Explain the mineral goods"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7420
 msgctxt "explainGoodsTrade-comms"
 msgid "Explain the trade goods"
-msgstr ""
+msgstr "Explain the trade goods"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7424
 msgctxt "explainGoodsVapor-comms"
 msgid "Explain vapor goods"
-msgstr ""
+msgstr "Explain vapour goods"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7429
 msgctxt "explainGoodsVapor-comms"
@@ -2039,12 +2039,12 @@ msgid ""
 "If you see one of these, that means that the good is not available. The need "
 "or desire for that good will go unmet or the mission will have to be "
 "satisfied in some other fashion."
-msgstr ""
+msgstr "On rare occasions, the system cannot determine an appropriate good. In that case one of these 'vapour' or fake goods will be listed:\n   gold pressed latinum, unobtanium, eludium, impossibrium\n\nIf you see one of these, that means that the good is not available. The need or desire for that good will go unmet or the mission will have to be satisfied in some other fashion."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7438
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
-msgstr ""
+msgstr "Buy, sell, trade"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7442
 #: scripts/scenario_38_allies_and_enemies.lua:8325
@@ -2053,35 +2053,35 @@ msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available: quantity, cost in reputation\n"
-msgstr ""
+msgstr "Station %s:\nGoods or components available: quantity, cost in reputation\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7453
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr ""
+msgstr "     %s: %i, %i\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7460
 msgctxt "trade-comms"
 msgid "Current Cargo:\n"
-msgstr ""
+msgstr "Current Cargo:\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7469
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr ""
+msgstr "     %s: %i\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7478
 msgctxt "trade-comms"
 msgid "     Empty\n"
-msgstr ""
+msgstr "     Empty\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7485
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr ""
+msgstr "Available Space: %i, Available Reputation: %i\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7499
 #: scripts/scenario_38_allies_and_enemies.lua:9101
@@ -2095,20 +2095,20 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr ""
+msgstr "Buy one %s for %i reputation"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7505
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr ""
+msgstr "Type: %s, Quantity: %i, Rep: %i"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7514
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient cargo space for purchase"
-msgstr ""
+msgstr "\nInsufficient cargo space for purchase"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7520
 #: scripts/scenario_38_allies_and_enemies.lua:7533
@@ -2116,7 +2116,7 @@ msgctxt "needRep-comms"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
-msgstr ""
+msgstr "\nInsufficient reputation for purchase"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7526
 #: scripts/scenario_38_allies_and_enemies.lua:7578
@@ -2126,20 +2126,20 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient station inventory"
-msgstr ""
+msgstr "\nInsufficient station inventory"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7539
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "purchased"
-msgstr ""
+msgstr "\npurchased"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7565
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr ""
+msgstr "Trade food for %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7570
 #: scripts/scenario_38_allies_and_enemies.lua:7616
@@ -2147,7 +2147,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr ""
+msgstr "Type: %s,  Quantity: %i"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7584
 #: scripts/scenario_38_allies_and_enemies.lua:7630
@@ -2156,7 +2156,7 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "Traded"
-msgstr ""
+msgstr "\nTraded"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7611
 #: scripts/scenario_38_allies_and_enemies.lua:9068
@@ -2164,18 +2164,18 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
-msgstr ""
+msgstr "Trade luxury for %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7657
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr ""
+msgstr "Trade medicine for %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7699
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr ""
+msgstr "Jettison cargo"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7704
 #, lua-format
@@ -2183,55 +2183,55 @@ msgctxt "trade-comms"
 msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
-msgstr ""
+msgstr "Available space: %i\nWhat would you like to jettison?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7719
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr ""
+msgstr "One %s jettisoned"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7737
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Technicians use impulse components to fix or enhance impulse engines or "
 "related impulse systems."
-msgstr ""
+msgstr "Technicians use impulse components to fix or enhance impulse engines or related impulse systems."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7741
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers use warp components to fix or enhance warp engines, warp cores and/"
 "or other related warp technology based systems."
-msgstr ""
+msgstr "Engineers use warp components to fix or enhance warp engines, warp cores and/or other related warp technology based systems."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7745
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Technicians use shield components to enhance or fix shield capacitors, "
 "shield charging systems and other shield or energy field generation systems."
-msgstr ""
+msgstr "Technicians use shield components to enhance or fix shield capacitors, shield charging systems and other shield or energy field generation systems."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7749
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers and technicians use tractor components to repair or enhance "
 "systems designed to pull objects towards the ship."
-msgstr ""
+msgstr "Engineers and technicians use tractor components to repair or enhance systems designed to pull objects towards the ship."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7753
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Technicians use repulsor components to repair or enhance systems designed to "
 "move objects away from the ship."
-msgstr ""
+msgstr "Technicians use repulsor components to repair or enhance systems designed to move objects away from the ship."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7757
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers and weapon systems repair specialists use beam components to fix, "
 "improve and/or tune beam weapons or related beam systems."
-msgstr ""
+msgstr "Engineers and weapon systems repair specialists use beam components to fix, improve and/or tune beam weapons or related beam systems."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7761
 msgctxt "explainGoodsComponent-comms"
@@ -2239,7 +2239,7 @@ msgid ""
 "Repair crew use optic components in a variety of ship systems. Optic "
 "components serve as the information pathways and linkages between many ship "
 "systems"
-msgstr ""
+msgstr "Repair crew use optic components in a variety of ship systems. Optic components serve as the information pathways and linkages between many ship systems"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7765
 msgctxt "explainGoodsComponent-comms"
@@ -2247,14 +2247,14 @@ msgid ""
 "Engineers often use robotic components to facilitate missile loading. Other "
 "typical systems needing robotic components include medical bays, food "
 "preparation, automated repair systems, etc."
-msgstr ""
+msgstr "Engineers often use robotic components to facilitate missile loading. Other typical systems needing robotic components include medical bays, food preparation, automated repair systems, etc."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7769
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Some of the esoteric ship systems have specialized material requirements. "
 "These are typically satisfied with a filament component of some kind"
-msgstr ""
+msgstr "Some of the esoteric ship systems have specialised material requirements. These are typically satisfied with a filament component of some kind"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7773
 msgctxt "explainGoodsComponent-comms"
@@ -2262,7 +2262,7 @@ msgid ""
 "Engineers use transporter components to fix systems designed to move objects "
 "from one location to another. The movement methods range from simple belt "
 "rollers to atomic disassembly and reassembly."
-msgstr ""
+msgstr "Engineers use transporter components to fix systems designed to move objects from one location to another. The movement methods range from simple belt rollers to atomic disassembly and reassembly."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7777
 msgctxt "explainGoodsComponent-comms"
@@ -2270,7 +2270,7 @@ msgid ""
 "Repair crew use sensor components to fix or repair those systems that "
 "support the Science console in gathering information about the universe "
 "around the ship."
-msgstr ""
+msgstr "Repair crew use sensor components to fix or repair those systems that support the Science console in gathering information about the universe around the ship."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7781
 msgctxt "explainGoodsComponent-comms"
@@ -2278,7 +2278,7 @@ msgid ""
 "Technicians use communication components to fix the various systems used to "
 "connect the ship to other ships, stations and/or alien entities on the Relay "
 "console."
-msgstr ""
+msgstr "Technicians use communication components to fix the various systems used to connect the ship to other ships, stations and/or alien entities on the Relay console."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7785
 msgctxt "explainGoodsComponent-comms"
@@ -2286,7 +2286,7 @@ msgid ""
 "Technicians use autodoc components to repair or maintain the automated "
 "medical facilities used on many ships in place of a medical doctor or "
 "medical staff."
-msgstr ""
+msgstr "Technicians use autodoc components to repair or maintain the automated medical facilities used on many ships in place of a medical doctor or medical staff."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7789
 msgctxt "explainGoodsComponent-comms"
@@ -2294,14 +2294,14 @@ msgid ""
 "Engineers need lifter components for a variety of systems needing to "
 "temporarily move mechanisms or portions of mechanisms against the "
 "acceleration or gravity aboard a ship."
-msgstr ""
+msgstr "Engineers need lifter components for a variety of systems needing to temporarily move mechanisms or portions of mechanisms against the acceleration or gravity aboard a ship."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7793
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers use android components to build, repair and maintain androids that "
 "serve on ships. Repair crews on many ships consist largely of androids."
-msgstr ""
+msgstr "Engineers use android components to build, repair and maintain androids that serve on ships. Repair crews on many ships consist largely of androids."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7797
 msgctxt "explainGoodsComponent-comms"
@@ -2310,21 +2310,21 @@ msgid ""
 "shield, reactor, impulse engines, jump drives and warp drives. The nanites "
 "are programmed to fix things at the molecular level, often in conditions "
 "hazardous to organic beings such as humans."
-msgstr ""
+msgstr "Technicians and engineers use nanites in a number of systems including shield, reactor, impulse engines, jump drives and warp drives. The nanites are programmed to fix things at the molecular level, often in conditions hazardous to organic beings such as humans."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7801
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "With all the automated systems on a ship, technicians often need software "
 "components to upgrade or adjust systems."
-msgstr ""
+msgstr "With all the automated systems on a ship, technicians often need software components to upgrade or adjust systems."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7805
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Many systems have specialized circuits that need upgrading or replacing via "
 "one or more circuit components."
-msgstr ""
+msgstr "Many systems have specialised circuits that need upgrading or replacing via one or more circuit components."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7809
 msgctxt "explainGoodsComponent-comms"
@@ -2332,21 +2332,21 @@ msgid ""
 "Batteries on a ship range in size from the ones that provide most of the "
 "energy to run the ship to tiny ones used in EVA space suits. Battery "
 "components help maintain and improve these systems."
-msgstr ""
+msgstr "Batteries on a ship range in size from the ones that provide most of the energy to run the ship to tiny ones used in EVA space suits. Battery components help maintain and improve these systems."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7815
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "These are the typical component goods available. Which one would you like a "
 "greater explanation of?"
-msgstr ""
+msgstr "These are the typical component goods available. Which one would you like a greater explanation of?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7829
 msgctxt "explainGoodsTrade-comms"
 msgid ""
 "These are the typical trade goods available. Which one would you like a "
 "greater explanation of?"
-msgstr ""
+msgstr "These are the typical trade goods available. Which one would you like a greater explanation of?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7835
 msgctxt "explainGoodsTrade-comms"
@@ -2354,7 +2354,7 @@ msgid ""
 "Many people want or need food to sustain themselves or to enjoy. A good "
 "Relay officer will try to keep at least one food on board for the potential "
 "trade benefit. When offered for sale, it's usually very cheap."
-msgstr ""
+msgstr "Many people want or need food to sustain themselves or to enjoy. A good Relay officer will try to keep at least one food on board for the potential trade benefit. When offered for sale, it's usually very cheap."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7839
 msgctxt "explainGoodsTrade-comms"
@@ -2363,7 +2363,7 @@ msgid ""
 "illness. Medicine is almost as cheap as food. The trade benefits are usually "
 "very high. A good Relay officer will try to keep at least on medicine on "
 "board for the potential trade benefit."
-msgstr ""
+msgstr "Many people need medicine to cure illness or symptoms associated with illness. Medicine is almost as cheap as food. The trade benefits are usually very high. A good Relay officer will try to keep at least on medicine on board for the potential trade benefit."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7843
 msgctxt "explainGoodsTrade-comms"
@@ -2373,143 +2373,143 @@ msgid ""
 "not as high as food or medicine, but can still give some trade benefit. A "
 "good Relay officer will be watching for relatively low priced luxury which "
 "can be used to trade for higher priced components or minerals."
-msgstr ""
+msgstr "A luxury good is anything someone considers valuable. Luxury types include jewelry, specialised clothing, rare art, etc. The trade value of luxury is not as high as food or medicine, but can still give some trade benefit. A good Relay officer will be watching for relatively low priced luxury which can be used to trade for higher priced components or minerals."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7857
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "These are the typical mineral goods available. Which one would you like a "
 "greater explanation of?"
-msgstr ""
+msgstr "These are the typical mineral goods available. Which one would you like a greater explanation of?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7863
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Nickel is one of the most common metals found among asteroids. As such, it "
 "has become the defacto standard metal for most of the structure of ships."
-msgstr ""
+msgstr "Nickel is one of the most common metals found among asteroids. As such, it has become the defacto standard metal for most of the structure of ships."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7867
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Platinum has electronic, explosive and medical applications, so techniciams "
 "use it to repair and upgrade a variety of ship systems."
-msgstr ""
+msgstr "Platinum has electronic, explosive and medical applications, so techniciams use it to repair and upgrade a variety of ship systems."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7871
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Civilians and military technicians value gold for a variety of reasons "
 "including use in jewelry and electronics."
-msgstr ""
+msgstr "Civilians and military technicians value gold for a variety of reasons including use in jewelry and electronics."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7875
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Due to its high potential for energy storage, engineers value dilithium in "
 "ship engines and shields."
-msgstr ""
+msgstr "Due to its high potential for energy storage, engineers value dilithium in ship engines and shields."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7879
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Designers and engineers use tritanium in many aspects of ship construction "
 "due to how it interacts with warp fields and jump mechanics."
-msgstr ""
+msgstr "Designers and engineers use tritanium in many aspects of ship construction due to how it interacts with warp fields and jump mechanics."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7883
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Engineers value cobalt due to its magnetic, alloy and energy storage "
 "applications."
-msgstr ""
+msgstr "Engineers value cobalt due to its magnetic, alloy and energy storage applications."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7911
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
-msgstr ""
+msgstr "You need to stay docked for that action."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7920
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr ""
+msgstr "We do not deal in weapons of mass destruction."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7925
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr ""
+msgstr "We do not deal in weapons of mass disruption."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7928
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr ""
+msgstr "We do not deal in those weapons."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7936
 msgctxt "ammo-comms"
 msgid ""
 " The Kraylor threat to mineral resources has reduced ordnance availablilty"
-msgstr ""
+msgstr " The Kraylor threat to mineral resources has reduced ordnance availablilty"
 
 #: scripts/scenario_38_allies_and_enemies.lua:7952
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr ""
+msgstr "All nukes are charged and primed for destruction."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7959
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
-msgstr ""
+msgstr "Sorry, sir, but you are as fully stocked as I can allow."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7978
 #: scripts/scenario_38_allies_and_enemies.lua:8014
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr ""
+msgstr "You are fully loaded and ready to explode things."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7985
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
-msgstr ""
+msgstr "We generously resupplied you with some weapon charges.\nPut them to good use."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7990
 #: scripts/scenario_38_allies_and_enemies.lua:8027
 #: scripts/scenario_38_allies_and_enemies.lua:8033
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
-msgstr ""
+msgstr "Not enough reputation."
 
 #: scripts/scenario_38_allies_and_enemies.lua:7998
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
-msgstr ""
+msgstr "You can't afford as much as I'd like to give you"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8001
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr ""
+msgstr "Get just one"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8021
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with one weapon charge.\n"
 "Put it to good use."
-msgstr ""
+msgstr "We generously resupplied you with one weapon charge.\nPut it to good use."
 
 #: scripts/scenario_38_allies_and_enemies.lua:8051
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
-msgstr ""
+msgstr "Good day, officer.\nIf you need supplies, please dock with us first."
 
 #: scripts/scenario_38_allies_and_enemies.lua:8056
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
-msgstr ""
+msgstr "Greetings.\nIf you want to do business, please dock with us first."
 
 #: scripts/scenario_38_allies_and_enemies.lua:8063
 msgctxt "station-comms"
@@ -2517,44 +2517,44 @@ msgid ""
 "\n"
 "Be aware that if enemies in the area get much closer, we will be too busy to "
 "conduct business with you."
-msgstr ""
+msgstr "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
 
 #: scripts/scenario_38_allies_and_enemies.lua:8094
 msgctxt "station-comms"
 msgid "I need information"
-msgstr ""
+msgstr "I need information"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8096
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
-msgstr ""
+msgstr "What kind of information do you need?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8118
 msgctxt "doomsday-comms"
 msgid "He's got nice retirement quarters here"
-msgstr ""
+msgstr "He's got nice retirement quarters here"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8122
 msgctxt "doomsday-comms"
 msgid "May we speak with him?"
-msgstr ""
+msgstr "May we speak with him?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8127
 msgctxt "doomsday-comms"
 msgid ""
 "He won't talk with anyone from the Human Navy. He's still bitter over early "
 "retirement. You'll need to visit in person"
-msgstr ""
+msgstr "He won't talk with anyone from the Human Navy. He's still bitter over early retirement. You'll need to visit in person"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8141
 msgctxt "doctor-comms"
 msgid "She does research here"
-msgstr ""
+msgstr "She does research here"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8145
 msgctxt "doctor-comms"
 msgid "We need her skills. May I speak with her?"
-msgstr ""
+msgstr "We need her skills. May I speak with her?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8151
 msgctxt "doctor-comms"
@@ -2563,12 +2563,12 @@ msgid ""
 "usually means only outgoing communications. There is a very short list of "
 "contacts she will respond to and you are not on that list. If you wish to "
 "speak with her, you will need to dock and visit in person"
-msgstr ""
+msgstr "She refuses to come to the communications nexus except on her terms. This usually means only outgoing communications. There is a very short list of contacts she will respond to and you are not on that list. If you wish to speak with her, you will need to dock and visit in person"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8157
 msgctxt "doctor-comms"
 msgid "The Arlenian Admiral is critically ill and she could help"
-msgstr ""
+msgstr "The Arlenian Admiral is critically ill and she could help"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8163
 msgctxt "doctor-comms"
@@ -2578,87 +2578,87 @@ msgid ""
 "destroyed all other personnel on the station. Even then, it might take her a "
 "few days to realize everyone else was dead. You really will need to dock to "
 "talk to her"
-msgstr ""
+msgstr "There could be a deadly plague covering all of Human and Arlenian space and she would remain in her quarters tending to her research until the plague destroyed all other personnel on the station. Even then, it might take her a few days to realize everyone else was dead. You really will need to dock to talk to her"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8254
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
-msgstr ""
+msgstr "What ordnance do you have available for restock?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8260
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Nuke"
-msgstr ""
+msgstr "\n   Nuke"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8264
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   EMP"
-msgstr ""
+msgstr "\n   EMP"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8268
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Homing"
-msgstr ""
+msgstr "\n   Homing"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8272
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Mine"
-msgstr ""
+msgstr "\n   Mine"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8276
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   HVLI"
-msgstr ""
+msgstr "\n   HVLI"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8281
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
-msgstr ""
+msgstr "We have no ordnance available for restock"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8287
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr ""
+msgstr "We have the following type of ordnance available for restock:%s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8295
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr ""
+msgstr "We have the following types of ordnance available for restock:%s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8319
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
-msgstr ""
+msgstr "What goods do you have available for sale or trade?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8336
 #, lua-format
 msgctxt "trade-comms"
 msgid "   %14s: %2i, %3i\n"
-msgstr ""
+msgstr "   %14s: %2i, %3i\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8349
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
-msgstr ""
+msgstr "Where can I find particular goods?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8353
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations generally have food or medicine or both. Neutral stations "
 "often trade their goods for food, medicine or luxury."
-msgstr ""
+msgstr "Friendly stations generally have food or medicine or both. Neutral stations often trade their goods for food, medicine or luxury."
 
 #: scripts/scenario_38_allies_and_enemies.lua:8359
 msgctxt "trade-comms"
@@ -2666,12 +2666,12 @@ msgid ""
 " Beyond that, I have no knowledge of specific stations.\n"
 "\n"
 "Check back later, someone else may have better knowledge"
-msgstr ""
+msgstr " Beyond that, I have no knowledge of specific stations.\n\nCheck back later, someone else may have better knowledge"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8369
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr ""
+msgstr " Beyond that, I have no knowledge of specific stations"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8375
 msgctxt "trade-comms"
@@ -2680,52 +2680,52 @@ msgid ""
 "\n"
 "What goods are you interested in?\n"
 "I've heard about these:"
-msgstr ""
+msgstr "\n\nWhat goods are you interested in?\nI've heard about these:"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8385
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s%s"
-msgstr ""
+msgstr "Station %s in sector %s has %s%s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8442
 msgctxt "stationAssist-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Report status"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8444
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Hull: %d%%\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8453
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield: %d%%\n"
-msgstr ""
+msgstr "Shield: %d%%\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8464
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr ""
+msgstr "Shield %s: %d%%\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8481
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%i rep)"
-msgstr ""
+msgstr "Can you send a supply drop? (%i rep)"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8489
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request supplies."
-msgstr ""
+msgstr "You need to set a waypoint before you can request supplies."
 
 #: scripts/scenario_38_allies_and_enemies.lua:8496
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr ""
+msgstr "To which waypoint should we deliver your supplies?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8502
 #: scripts/scenario_38_allies_and_enemies.lua:8581
@@ -2734,13 +2734,13 @@ msgstr ""
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Waypoint %d"
-msgstr ""
+msgstr "Waypoint %d"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8532
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward waypoint %d"
-msgstr ""
+msgstr "We have dispatched a supply ship toward waypoint %d"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8541
 #: scripts/scenario_38_allies_and_enemies.lua:8619
@@ -2748,27 +2748,27 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:8775
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
-msgstr ""
+msgstr "Not enough reputation!"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8559
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Adder MK5 reinforcements! (%i rep)"
-msgstr ""
+msgstr "Please send Adder MK5 reinforcements! (%i rep)"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8568
 #: scripts/scenario_38_allies_and_enemies.lua:8644
 #: scripts/scenario_38_allies_and_enemies.lua:8722
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
+msgstr "You need to set a waypoint before you can request reinforcements."
 
 #: scripts/scenario_38_allies_and_enemies.lua:8575
 #: scripts/scenario_38_allies_and_enemies.lua:8651
 #: scripts/scenario_38_allies_and_enemies.lua:8729
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr ""
+msgstr "To which waypoint should we dispatch the reinforcements?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8609
 #: scripts/scenario_38_allies_and_enemies.lua:8687
@@ -2776,157 +2776,157 @@ msgstr ""
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at waypoint %d"
-msgstr ""
+msgstr "We have dispatched %s to assist at waypoint %d"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8635
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Phobos T3 reinforcements! (%i rep)"
-msgstr ""
+msgstr "Please send Phobos T3 reinforcements! (%i rep)"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8713
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Stalker Q7 reinforcements! (%i rep)"
-msgstr ""
+msgstr "Please send Stalker Q7 reinforcements! (%i rep)"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8826
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
-msgstr ""
+msgstr " and will trade it for medicine"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8832
 msgctxt "trade-comms"
 msgid " or food"
-msgstr ""
+msgstr " or food"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8837
 msgctxt "trade-comms"
 msgid " and will trade it for food"
-msgstr ""
+msgstr " and will trade it for food"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8845
 msgctxt "trade-comms"
 msgid " or luxury"
-msgstr ""
+msgstr " or luxury"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8850
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
-msgstr ""
+msgstr " and will trade it for luxury"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8905
 #: scripts/scenario_38_allies_and_enemies.lua:9560
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr ""
+msgstr "What do you want?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8907
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Sir, how can we assist?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8909
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Defend a waypoint"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8914
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
-msgstr ""
+msgstr "No waypoints set. Please set a waypoint first."
 
 #: scripts/scenario_38_allies_and_enemies.lua:8920
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Which waypoint should we defend?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8925
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend waypoint %d"
-msgstr ""
+msgstr "Defend waypoint %d"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8934
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at waypoint %d."
-msgstr ""
+msgstr "We are heading to assist at waypoint %d."
 
 #: scripts/scenario_38_allies_and_enemies.lua:8946
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr ""
+msgstr "Assist me"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8948
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Heading toward you to assist."
 
 #: scripts/scenario_38_allies_and_enemies.lua:8954
 msgctxt "shipAssist-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Report status"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8956
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Hull: %d%%\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8963
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
-msgstr ""
+msgstr "Shield: %d%%\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8973
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
-msgstr ""
+msgstr "Front Shield: %d%%\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8982
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
-msgstr ""
+msgstr "Rear Shield: %d%%\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:8993
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr ""
+msgstr "Shield %s: %d%%\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9009
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr ""
+msgstr "%s Missiles: %d/%d\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9028
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Dock at %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9034
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
-msgstr ""
+msgstr "Docking at %s."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9076
 #: scripts/scenario_38_allies_and_enemies.lua:9482
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter for trade"
-msgstr ""
+msgstr "Insufficient inventory on freighter for trade"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9084
 #: scripts/scenario_38_allies_and_enemies.lua:9490
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr ""
+msgstr "Traded"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9110
 #: scripts/scenario_38_allies_and_enemies.lua:9171
@@ -2938,7 +2938,7 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:9719
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
-msgstr ""
+msgstr "Insufficient cargo space for purchase"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9117
 #: scripts/scenario_38_allies_and_enemies.lua:9178
@@ -2950,7 +2950,7 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:9726
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter"
-msgstr ""
+msgstr "Insufficient inventory on freighter"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9129
 #: scripts/scenario_38_allies_and_enemies.lua:9190
@@ -2962,7 +2962,7 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:9738
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr ""
+msgstr "Insufficient reputation for purchase"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9137
 #: scripts/scenario_38_allies_and_enemies.lua:9198
@@ -2974,81 +2974,81 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:9746
 msgctxt "trade-comms"
 msgid "Purchased"
-msgstr ""
+msgstr "Purchased"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9331
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr ""
+msgstr "We will see to your destruction!"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9333
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
-msgstr ""
+msgstr "Your bloodline will end here!"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9335
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr ""
+msgstr "Your feeble threats are meaningless."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9338
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
-msgstr ""
+msgstr "Ktzzzsss.\nYou will DIEEee weaklingsss!"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9342
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
-msgstr ""
+msgstr "We will destroy you"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9345
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
-msgstr ""
+msgstr "We think not. It is you who will experience destruction!"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9348
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr ""
+msgstr "You have no honour"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9351
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
-msgstr ""
+msgstr "Your insult has brought our wrath upon you. Prepare to die."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9355
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
-msgstr ""
+msgstr "Your comments about honour have no meaning to us"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9359
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
-msgstr ""
+msgstr "We pity your pathetic race"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9362
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
-msgstr ""
+msgstr "Pathetic? You will regret your disparagement!"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9365
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
-msgstr ""
+msgstr "We don't care what you think of us"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9371
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
-msgstr ""
+msgstr "We wish you no harm, but will harm you if we must.\nEnd of transmission."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9378
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
-msgstr ""
+msgstr "Stay out of our way, or your death will amuse us extremely!"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9385
 msgctxt "shipEnemy-comms"
@@ -3059,22 +3059,22 @@ msgid ""
 "Generating appropriate response for target from human language archives.\n"
 ":Do not cross us:\n"
 "Communication halted."
-msgstr ""
+msgstr "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9388
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr ""
+msgstr "EXECUTE: SELFDESTRUCT"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9391
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr ""
+msgstr "Rogue command received. Targeting source."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9394
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
-msgstr ""
+msgstr "External command ignored."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9399
 msgctxt "shipEnemy-comms"
@@ -3082,77 +3082,77 @@ msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
 "all.\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
-msgstr ""
+msgstr "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9404
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr ""
+msgstr "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9408
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr ""
+msgstr "We do not need permission to pluck apart such an insignificant threat."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9412
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
-msgstr ""
+msgstr "The hive has greater priorities than exterminating pests."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9415
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
-msgstr ""
+msgstr "Mind your own business!"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9447
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr ""
+msgstr "Yes?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9449
 msgctxt "trade-comms"
 msgid "Where are you headed?"
-msgstr ""
+msgstr "Where are you headed?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9500
 msgctxt "trade-comms"
 msgid "Insufficient luxury to trade"
-msgstr ""
+msgstr "Insufficient luxury to trade"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9567
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %.1f reputation)"
-msgstr ""
+msgstr "Where are you headed? (cost: %.1f reputation)"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9696
 msgctxt "trade-comms"
 msgid "Why are you bothering me?"
-msgstr ""
+msgstr "Why are you bothering me?"
 
 #: scripts/scenario_38_allies_and_enemies.lua:9763
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
-msgstr ""
+msgstr "Sorry, we have no time to chat with you.\nWe are on an important mission."
 
 #: scripts/scenario_38_allies_and_enemies.lua:9768
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
-msgstr ""
+msgstr "We have nothing for you.\nGood day."
 
 #: scripts/scenario_38_allies_and_enemies.lua:10047
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
-msgstr ""
+msgstr "Inventory"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10059
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
-msgstr ""
+msgstr "Inventory"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10073
 #: scripts/scenario_38_allies_and_enemies.lua:10108
@@ -3165,7 +3165,7 @@ msgstr ""
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
-msgstr ""
+msgstr "%s Current cargo:"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10086
 #: scripts/scenario_38_allies_and_enemies.lua:10121
@@ -3178,7 +3178,7 @@ msgstr ""
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
-msgstr ""
+msgstr "     %s: %i"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10097
 #: scripts/scenario_38_allies_and_enemies.lua:10132
@@ -3190,7 +3190,7 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:10342
 msgctxt "inventory-shipLog"
 msgid "     Empty\n"
-msgstr ""
+msgstr "     Empty\n"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10100
 #: scripts/scenario_38_allies_and_enemies.lua:10135
@@ -3203,44 +3203,44 @@ msgstr ""
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
-msgstr ""
+msgstr "Available space: %i"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10377
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
-msgstr ""
+msgstr "Get Coolant"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10387
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
-msgstr ""
+msgstr "Get Coolant"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10431
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr ""
+msgstr "Gathering Coolant"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10435
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Deploying Collectors %i"
-msgstr ""
+msgstr "Deploying Collectors %i"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10441
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Configuring Collectors %i"
-msgstr ""
+msgstr "Configuring Collectors %i"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10481
 msgctxt "msgMainscreen"
 msgid "Single selected mission completed"
-msgstr ""
+msgstr "Single selected mission completed"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10493
 msgctxt "msgMainscreen"
 msgid "All missions completed"
-msgstr ""
+msgstr "All missions completed"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10531
 msgctxt "doomsdayGoal-shipLog"
@@ -3249,18 +3249,18 @@ msgid ""
 "Retired scientist, Gregory Unruh warned us before he retired about this "
 "possibility, but we did not take him seriously. He was working on a defense "
 "mechanism. Find professor Unruh and get the plans for his defense mechanism"
-msgstr ""
+msgstr "Intelligence tells us the Exuari have nearly completed a 'doomsday' device. Retired scientist, Gregory Unruh warned us before he retired about this possibility, but we did not take him seriously. He was working on a defence mechanism. Find professor Unruh and get the plans for his defence mechanism"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10539
 msgctxt "doomsdayOrders-comms"
 msgid "Find professor Unruh for doomsday defense mechanism plans"
-msgstr ""
+msgstr "Find professor Unruh for doomsday defence mechanism plans"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10580
 #, lua-format
 msgctxt "doomsday-comms"
 msgid "Gregory Unruh resides on station %s"
-msgstr ""
+msgstr "Gregory Unruh resides on station %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10673
 #, lua-format
@@ -3268,19 +3268,19 @@ msgctxt "doomsday-shipLog"
 msgid ""
 "Intelligence estimates %i minutes remain before the Exuari deploy the "
 "doomsday device. Exuari and Kraylors both seem to be on a pillaging rampage"
-msgstr ""
+msgstr "Intelligence estimates %i minutes remain before the Exuari deploy the doomsday device. Exuari and Kraylors both seem to be on a pillaging rampage"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10688
 #, lua-format
 msgctxt "doomsdayOrders-comms"
 msgid "Get %s, %s and %s to build doomsday defense mechanism"
-msgstr ""
+msgstr "Get %s, %s and %s to build doomsday defence mechanism"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10703
 #, lua-format
 msgctxt "doomsday-shipLog"
 msgid "The instructions list %s, %s and %s as necessary components"
-msgstr ""
+msgstr "The instructions list %s, %s and %s as necessary components"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10724
 #, lua-format
@@ -3288,42 +3288,42 @@ msgctxt "doomsday-shipLog"
 msgid ""
 "Further inspection of Gregory Unruh's plans reveal notes in the margin: %s "
 "on %s, %s on %s, %s on %s"
-msgstr ""
+msgstr "Further inspection of Gregory Unruh's plans reveal notes in the margin: %s on %s, %s on %s, %s on %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10772
 msgctxt "doomsday-shipLog"
 msgid ""
 "With all three components obtained, Engineering and Science quickly complete "
 "and deploy the doomsday device defense mechanism"
-msgstr ""
+msgstr "With all three components obtained, Engineering and Science quickly complete and deploy the doomsday device defence mechanism"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10836
 #: scripts/scenario_38_allies_and_enemies.lua:10844
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "Doomsday Device:"
-msgstr ""
+msgstr "Doomsday Device:"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10839
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "Doomsday Device Built"
-msgstr ""
+msgstr "Doomsday Device Built"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10847
 #, lua-format
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10853
 #, lua-format
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "%s %i:%.2i"
-msgstr ""
+msgstr "%s %i:%.2i"
 
 #: scripts/scenario_38_allies_and_enemies.lua:10898
 msgctxt "doomsday-msgMainscreen"
 msgid "All human stations destroyed"
-msgstr ""
+msgstr "All human stations destroyed"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11024
 msgctxt "doctorGoal-shipLog"
@@ -3339,23 +3339,23 @@ msgid ""
 "relative seclusion. Search the Human Navy stations and find her and enlist "
 "her aid if applicable. Do it quickly, Admiral Koshenz likely does not have "
 "long to live"
-msgstr ""
+msgstr "Our allies, the Arlenians tell us that Admiral Koshenz has contracted a severe disease. The Arlenian doctors have struggled for days with the disease with minimal change in his condition. They fear he does not have much longer to live. They have asked for assistance from any Human researchers in Arlenian disease. One of their medical team referred to a Dr. Morrigan Thultris who recently published information regarding a disease that shares symptoms and characteristics with the admiral's affliction. Dr. Thultris does not show up on our military registry implying she works in relative seclusion. Search the Human Navy stations and find her and enlist her aid if applicable. Do it quickly, Admiral Koshenz likely does not have long to live"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11032
 msgctxt "doctorOrders-comms"
 msgid "Find Dr. Thultris for help with Arlenian Admiral Koshenz"
-msgstr ""
+msgstr "Find Dr. Thultris for help with Arlenian Admiral Koshenz"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11071
 #, lua-format
 msgctxt "doctor-comms"
 msgid "Dr. Thultris resides on station %s"
-msgstr ""
+msgstr "Dr. Thultris resides on station %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11092
 msgctxt "doctor-msgMainscreen"
 msgid "Arlenian Admiral Koshenz dies"
-msgstr ""
+msgstr "Arlenian Admiral Koshenz dies"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11100
 #, lua-format
@@ -3363,14 +3363,14 @@ msgctxt "doctor-msgMainscreen"
 msgid ""
 "Arlenian Admiral Koshenz dies along with the rest of the Arlenians on "
 "station %s"
-msgstr ""
+msgstr "Arlenian Admiral Koshenz dies along with the rest of the Arlenians on station %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11116
 msgctxt "doctor-shipLog"
 msgid ""
 "The Arlenians say that they think the admiral has less than three minutes to "
 "live"
-msgstr ""
+msgstr "The Arlenians say that they think the admiral has less than three minutes to live"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11145
 #, lua-format
@@ -3378,41 +3378,41 @@ msgctxt "doctor-shipLog"
 msgid ""
 "The Kraylors seem to have discovered the location of Admiral Koshenz. We "
 "detect Kraylor ships en route to %s"
-msgstr ""
+msgstr "The Kraylors seem to have discovered the location of Admiral Koshenz. We detect Kraylor ships en route to %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11172
 #, lua-format
 msgctxt "doctor-shipLog"
 msgid "Admiral Koshenz is on %s in %s"
-msgstr ""
+msgstr "Admiral Koshenz is on %s in %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11182
 #, lua-format
 msgctxt "doctorOrders-comms"
 msgid "Take Dr. Thultris to %s in %s"
-msgstr ""
+msgstr "Take Dr. Thultris to %s in %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11195
 msgctxt "doctor-shipLog"
 msgid "Dr. Thultris applied her knowledge and Admiral Koshenz is improving"
-msgstr ""
+msgstr "Dr. Thultris applied her knowledge and Admiral Koshenz is improving"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11216
 msgctxt "doctor-tabScience&Operations"
 msgid "Koshenz Death:"
-msgstr ""
+msgstr "Koshenz Death:"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11219
 #, lua-format
 msgctxt "doctor-tabScience&Operations"
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11225
 #, lua-format
 msgctxt "doctor-tabScience&Operations"
 msgid "%s %i:%.2i"
-msgstr ""
+msgstr "%s %i:%.2i"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11261
 msgctxt "BespinGoal-shipLog"
@@ -3421,56 +3421,56 @@ msgid ""
 "facility around the planet Bespin. We rely heavily on that mineral supply "
 "for commerce and military operations. Contact the Arlenians and render "
 "assistance"
-msgstr ""
+msgstr "Our allies, the Arlenians tell us that the Kraylors are attacking the mining facility around the planet Bespin. We rely heavily on that mineral supply for commerce and military operations. Contact the Arlenians and render assistance"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11269
 msgctxt "BespinOrders-comms"
 msgid "Contact Arlenians and render assistance with Kraylor attack"
-msgstr ""
+msgstr "Contact Arlenians and render assistance with Kraylor attack"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11284
 msgctxt "scienceDescription-planet"
 msgid "Gas giant suitable for mining"
-msgstr ""
+msgstr "Gas giant suitable for mining"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11294
 msgctxt "scienceDescription-station"
 msgid "Bespin Gas Mining"
-msgstr ""
+msgstr "Bespin Gas Mining"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11396
 msgctxt "Bespin-shipLog"
 msgid ""
 "Looks like the Exuari are taking advantage of the Kraylor mining incident by "
 "sending forces against us and the Arlenians"
-msgstr ""
+msgstr "Looks like the Exuari are taking advantage of the Kraylor mining incident by sending forces against us and the Arlenians"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11418
 msgctxt "Bespin-shipLog"
 msgid ""
 "The Arlenians thanked us for the help with the Kraylors around Cloud City"
-msgstr ""
+msgstr "The Arlenians thanked us for the help with the Kraylors around Cloud City"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11430
 msgctxt "Bespin-msgMainscreen"
 msgid "Mining station Cloud City destroyed"
-msgstr ""
+msgstr "Mining station Cloud City destroyed"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11588
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "One of your repair crew has perished"
 
 #: scripts/scenario_38_allies_and_enemies.lua:11599
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "One of your repair crew has perished"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12016
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Human stations: survived:%.1f%%"
-msgstr ""
+msgstr "Human stations: survived:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12023
 #: scripts/scenario_38_allies_and_enemies.lua:12044
@@ -3480,108 +3480,108 @@ msgstr ""
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s, strength:%.1f%%"
-msgstr ""
+msgstr "%s, strength:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12029
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Human stations: strength:%.1f%%"
-msgstr ""
+msgstr "Human stations: strength:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12037
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Arlenian stations: survived:%.1f%%"
-msgstr ""
+msgstr "Arlenian stations: survived:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12050
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Arlenian stations: strength:%.1f%%"
-msgstr ""
+msgstr "Arlenian stations: strength:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12058
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Kraylor stations: survived:%.1f%%"
-msgstr ""
+msgstr "Kraylor stations: survived:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12071
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Kraylor stations: strength:%.1f%%"
-msgstr ""
+msgstr "Kraylor stations: strength:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12079
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Exuari stations: survived:%.1f%%"
-msgstr ""
+msgstr "Exuari stations: survived:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12092
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Exuari stations: strength:%.1f%%"
-msgstr ""
+msgstr "Exuari stations: strength:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12100
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Neutral stations: survived:%.1f%%"
-msgstr ""
+msgstr "Neutral stations: survived:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12113
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Neutral stations: strength:%.1f%%"
-msgstr ""
+msgstr "Neutral stations: strength:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12121
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Human ships: strength:%.1f%%"
-msgstr ""
+msgstr "Human ships: strength:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12128
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Arlenian ships: strength:%.1f%%"
-msgstr ""
+msgstr "Arlenian ships: strength:%.1f%%"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12144
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Mission ended because %s"
-msgstr ""
+msgstr "Mission ended because %s"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12149
 msgctxt "msgMainscreen"
 msgid "Ensign"
-msgstr ""
+msgstr "Ensign"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12151
 msgctxt "msgMainscreen"
 msgid "Lieutenant"
-msgstr ""
+msgstr "Lieutenant"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12156
 msgctxt "msgMainscreen"
 msgid "Commander"
-msgstr ""
+msgstr "Commander"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12161
 msgctxt "msgMainscreen"
 msgid "Captain"
-msgstr ""
+msgstr "Captain"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12165
 msgctxt "msgMainscreen"
 msgid "Admiral"
-msgstr ""
+msgstr "Admiral"
 
 #: scripts/scenario_38_allies_and_enemies.lua:12172
 #: scripts/scenario_38_allies_and_enemies.lua:12180
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Earned rank: %s"
-msgstr ""
+msgstr "Earned rank: %s"

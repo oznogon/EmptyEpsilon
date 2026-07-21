@@ -1,34 +1,34 @@
 #: scripts/control_code_scenario_utility.lua:20
 msgctxt "buttonGM"
 msgid "-Main From Ctl Codes"
-msgstr ""
+msgstr "-Main From Ctl Codes"
 
 #: scripts/control_code_scenario_utility.lua:26
 msgctxt "msgGM"
 msgid ""
 "There are no active player ships for you to view or set the control codes "
 "for."
-msgstr ""
+msgstr "There are no active player ships for you to view or set the control codes for."
 
 #: scripts/control_code_scenario_utility.lua:32
 msgctxt "buttonGM"
 msgid "View Control Codes"
-msgstr ""
+msgstr "View Control Codes"
 
 #: scripts/control_code_scenario_utility.lua:33
 msgctxt "buttonGM"
 msgid "+Set Control Codes"
-msgstr ""
+msgstr "+Set Control Codes"
 
 #: scripts/control_code_scenario_utility.lua:70
 msgctxt "msgGM"
 msgid "Player ships and some of their control codes:"
-msgstr ""
+msgstr "Player ships and some of their control codes:"
 
 #: scripts/control_code_scenario_utility.lua:72
 msgctxt "msgGM"
 msgid "Player ships and their control codes:"
-msgstr ""
+msgstr "Player ships and their control codes:"
 
 #: scripts/control_code_scenario_utility.lua:77
 #, lua-format
@@ -36,7 +36,7 @@ msgctxt "msgGM"
 msgid ""
 "%s\n"
 "%s: <none> (%s)"
-msgstr ""
+msgstr "%s\n%s: <none> (%s)"
 
 #: scripts/control_code_scenario_utility.lua:84
 #, lua-format
@@ -44,60 +44,60 @@ msgctxt "msgGM"
 msgid ""
 "%s\n"
 "%s: %s (%s)"
-msgstr ""
+msgstr "%s\n%s: %s (%s)"
 
 #: scripts/control_code_scenario_utility.lua:97
 msgctxt "msgGM"
 msgid ""
 "None of the active player ships have a control code set for you to view."
-msgstr ""
+msgstr "None of the active player ships have a control code set for you to view."
 
 #: scripts/control_code_scenario_utility.lua:104
 msgctxt "buttonGM"
 msgid "-Main From Set Codes"
-msgstr ""
+msgstr "-Main From Set Codes"
 
 #: scripts/control_code_scenario_utility.lua:105
 #: scripts/control_code_scenario_utility.lua:203
 msgctxt "buttonGM"
 msgid "-Control Codes"
-msgstr ""
+msgstr "-Control Codes"
 
 #: scripts/control_code_scenario_utility.lua:106
 msgctxt "buttonGM"
 msgid "Change Code Object"
-msgstr ""
+msgstr "Change Code Object"
 
 #: scripts/control_code_scenario_utility.lua:108
 msgctxt "buttonGM"
 msgid "+Select Code Object"
-msgstr ""
+msgstr "+Select Code Object"
 
 #: scripts/control_code_scenario_utility.lua:114
 msgctxt "buttonGM"
 msgid "+Set Control Code"
-msgstr ""
+msgstr "+Set Control Code"
 
 #: scripts/control_code_scenario_utility.lua:121
 #, lua-format
 msgctxt "msgGM"
 msgid "%s now has a control code of %s"
-msgstr ""
+msgstr "%s now has a control code of %s"
 
 #: scripts/control_code_scenario_utility.lua:128
 msgctxt "msgGM"
 msgid "Player ship not selected. No action taken"
-msgstr ""
+msgstr "Player ship not selected. No action taken"
 
 #: scripts/control_code_scenario_utility.lua:134
 msgctxt "buttonGM"
 msgid "+Select Player"
-msgstr ""
+msgstr "+Select Player"
 
 #: scripts/control_code_scenario_utility.lua:139
 msgctxt "buttonGM"
 msgid "+Default Control Codes"
-msgstr ""
+msgstr "+Default Control Codes"
 
 #: scripts/control_code_scenario_utility.lua:153
 #, lua-format
@@ -105,51 +105,51 @@ msgctxt "msgGM"
 msgid ""
 "Object in %s selected to set control code.\n"
 "Place control code in unscanned description field via tweak button"
-msgstr ""
+msgstr "Object in %s selected to set control code.\nPlace control code in unscanned description field via tweak button"
 
 #: scripts/control_code_scenario_utility.lua:163
 msgctxt "msgGM"
 msgid ""
 "Select only one object to use to set control code via its unscanned "
 "description field. No action taken"
-msgstr ""
+msgstr "Select only one object to use to set control code via its unscanned description field. No action taken"
 
 #: scripts/control_code_scenario_utility.lua:172
 msgctxt "msgGM"
 msgid ""
 "Select an object to use to set control code via its unscanned description "
 "field. No action taken"
-msgstr ""
+msgstr "Select an object to use to set control code via its unscanned description field. No action taken"
 
 #: scripts/control_code_scenario_utility.lua:202
 msgctxt "buttonGM"
 msgid "-Main From Defaults"
-msgstr ""
+msgstr "-Main From Defaults"
 
 #: scripts/control_code_scenario_utility.lua:204
 msgctxt "buttonGM"
 msgid "-Set Codes"
-msgstr ""
+msgstr "-Set Codes"
 
 #: scripts/control_code_scenario_utility.lua:206
 msgctxt "buttonGM"
 msgid "View Defaults"
-msgstr ""
+msgstr "View Defaults"
 
 #: scripts/control_code_scenario_utility.lua:207
 msgctxt "buttonGM"
 msgid "Set Defaults"
-msgstr ""
+msgstr "Set Defaults"
 
 #: scripts/control_code_scenario_utility.lua:218
 msgctxt "msgGM"
 msgid "No matches found. No codes set."
-msgstr ""
+msgstr "No matches found. No codes set."
 
 #: scripts/control_code_scenario_utility.lua:222
 msgctxt "msgGM"
 msgid "The following player ships have their control codes set:"
-msgstr ""
+msgstr "The following player ships have their control codes set:"
 
 #: scripts/control_code_scenario_utility.lua:227
 #, lua-format
@@ -157,17 +157,17 @@ msgctxt "msgGM"
 msgid ""
 "%s\n"
 "%s: %s"
-msgstr ""
+msgstr "%s\n%s: %s"
 
 #: scripts/control_code_scenario_utility.lua:248
 msgctxt "msgGM"
 msgid "No matches between player ships and defaults."
-msgstr ""
+msgstr "No matches between player ships and defaults."
 
 #: scripts/control_code_scenario_utility.lua:252
 msgctxt "msgGM"
 msgid "Matches between active player ships and defaults:"
-msgstr ""
+msgstr "Matches between active player ships and defaults:"
 
 #: scripts/control_code_scenario_utility.lua:254
 #: scripts/control_code_scenario_utility.lua:265
@@ -177,28 +177,28 @@ msgctxt "msgGM"
 msgid ""
 "%s\n"
 "%s"
-msgstr ""
+msgstr "%s\n%s"
 
 #: scripts/control_code_scenario_utility.lua:262
 msgctxt "msgGM"
 msgid "Active player ships:"
-msgstr ""
+msgstr "Active player ships:"
 
 #: scripts/control_code_scenario_utility.lua:271
 #, lua-format
 msgctxt "msgGM"
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: scripts/control_code_scenario_utility.lua:275
 msgctxt "msgGM"
 msgid "Default ship control codes:"
-msgstr ""
+msgstr "Default ship control codes:"
 
 #: scripts/control_code_scenario_utility.lua:284
 msgctxt "msgGM"
 msgid "All active player ships have matches in the list of defaults.\n"
-msgstr ""
+msgstr "All active player ships have matches in the list of defaults.\n"
 
 #: scripts/control_code_scenario_utility.lua:288
 #, lua-format
@@ -206,7 +206,7 @@ msgctxt "msgGM"
 msgid ""
 "%s\n"
 "All defaults have matching player ships.\n"
-msgstr ""
+msgstr "%s\nAll defaults have matching player ships.\n"
 
 #: scripts/control_code_scenario_utility.lua:295
 #, lua-format
@@ -215,4 +215,4 @@ msgid ""
 "%s%s\n"
 "%s\n"
 "%s"
-msgstr ""
+msgstr "%s%s\n%s\n%s"

@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Waves"
-msgstr ""
+msgstr "Waves"
 
 # Scenario description
 msgid ""
@@ -9,44 +9,44 @@ msgid ""
 "\n"
 "Spawn the player ships you want. The strength of enemy ships is independent "
 "of the number and type of player ships."
-msgstr ""
+msgstr "Waves of increasingly difficult enemies attack friendly stations. There is no victory. How many waves can you destroy?\n\nSpawn the player ships you want. The strength of enemy ships is independent of the number and type of player ships."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr ""
+msgstr "Enemies"
 
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
-msgstr ""
+msgstr "Configures the amount of enemies spawned in the scenario."
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Enemies"
 msgid ""
 "Decreases the number of ships in each wave. Good for new players, but takes "
 "longer for the players to be overwhelmed."
-msgstr ""
+msgstr "Decreases the number of ships in each wave. Good for new players, but takes longer for the players to be overwhelmed."
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Enemies"
 msgid "Normal amount of enemies. Recommended for a normal crew."
-msgstr ""
+msgstr "Normal amount of enemies. Recommended for a normal crew."
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Enemies"
 msgid ""
 "Difficulty starts at wave 5 and increases by 1.5 after the players defeat "
 "each wave. Players are overwhelmed more quickly, leading to shorter games."
-msgstr ""
+msgstr "Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. Players are overwhelmed more quickly, leading to shorter games."
 
 #: scripts/scenario_02_waves.lua:47
 msgctxt "goal-shipLog"
@@ -57,27 +57,27 @@ msgid ""
 "so on ...\n"
 "\n"
 "How many waves can you destroy?"
-msgstr ""
+msgstr "At least one friendly base must survive.\n\nDestroy all enemy ships. After a short delay, the next wave will appear. And so on ...\n\nHow many waves can you destroy?"
 
 #: scripts/scenario_02_waves.lua:136
 #, lua-format
 msgctxt "shipLog"
 msgid "Wave %d"
-msgstr ""
+msgstr "Wave %d"
 
 #: scripts/scenario_02_waves.lua:238
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Wave %d"
-msgstr ""
+msgstr "Wave %d"
 
 #: scripts/scenario_02_waves.lua:271
 msgctxt "msgMainscreen"
 msgid "Wave cleared!"
-msgstr ""
+msgstr "Wave cleared!"
 
 #: scripts/scenario_02_waves.lua:273
 #, lua-format
 msgctxt "shipLog"
 msgid "Wave %d cleared."
-msgstr ""
+msgstr "Wave %d cleared."

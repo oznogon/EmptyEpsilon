@@ -1,32 +1,32 @@
 #: scripts/shiptemplates/ktlitan/frigates.lua:9
 msgctxt "ship"
 msgid "Ktlitan Breaker"
-msgstr ""
+msgstr "Ktlitan Breaker"
 
 #: scripts/shiptemplates/ktlitan/frigates.lua:10
 #: scripts/shiptemplates/ktlitan/frigates.lua:25
 #: scripts/shiptemplates/ktlitan/frigates.lua:36
 msgctxt "class"
 msgid "Frigate"
-msgstr ""
+msgstr "Frigate"
 
 #: scripts/shiptemplates/ktlitan/frigates.lua:10
 msgctxt "subclass"
 msgid "Assault"
-msgstr ""
+msgstr "Assault"
 
 #: scripts/shiptemplates/ktlitan/frigates.lua:24
 msgctxt "ship"
 msgid "Ktlitan Drone"
-msgstr ""
+msgstr "Ktlitan Drone"
 
 #: scripts/shiptemplates/ktlitan/frigates.lua:25
 #: scripts/shiptemplates/ktlitan/frigates.lua:36
 msgctxt "subclass"
 msgid "Scout"
-msgstr ""
+msgstr "Scout"
 
 #: scripts/shiptemplates/ktlitan/frigates.lua:35
 msgctxt "ship"
 msgid "Ktlitan Scout"
-msgstr ""
+msgstr "Ktlitan Scout"

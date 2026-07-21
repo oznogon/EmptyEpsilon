@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Training: Cruiser"
-msgstr ""
+msgstr "Training: Cruiser"
 
 # Scenario description
 msgid ""
@@ -15,22 +15,22 @@ msgid ""
 "Your ship is a Phobos light cruiser - the most common vessel in the navy.\n"
 "\n"
 "This is a short mission for inexperienced players."
-msgstr ""
+msgstr "Basic Training Course\n\nObjective: Destroy all enemy ships in the area.\n\nDescription:\nDuring this training you will learn to coordinate the actions of your crew and destroy an Exuari training ground.\n\nYour ship is a Phobos light cruiser - the most common vessel in the navy.\n\nThis is a short mission for inexperienced players."
 
 #: scripts/scenario_03_training_cruiser.lua:51
 msgctxt "scienceDescription-shipname"
 msgid "Exuari transport"
-msgstr ""
+msgstr "Exuari transport"
 
 #: scripts/scenario_03_training_cruiser.lua:61
 msgctxt "scienceDescription-shipname"
 msgid "Exuari freighter"
-msgstr ""
+msgstr "Exuari freighter"
 
 #: scripts/scenario_03_training_cruiser.lua:71
 msgctxt "scienceDescription-shipname"
 msgid "Exuari shuttle"
-msgstr ""
+msgstr "Exuari shuttle"
 
 #: scripts/scenario_03_training_cruiser.lua:206
 msgctxt "goal-incCall"
@@ -46,17 +46,17 @@ msgid ""
 "\n"
 "Here's your chance to beat up some helpless opponents.\n"
 "Commander Saberhagen out."
-msgstr ""
+msgstr "This is Commander Saberhagen.\n\nIn this training mission, you will practice the basic controls of a Phobos light cruiser.\nSince this is not a tutorial, you will be on your own to decide how to destroy all enemy targets in an Exuari training ground.\nThere will be not much resistance, so you can try different approaches and tactics safely.\n\nHere's your chance to beat up some helpless opponents.\nCommander Saberhagen out."
 
 #: scripts/scenario_03_training_cruiser.lua:226
 msgctxt "msgMainscreen-bonusTarget"
 msgid "escaped."
-msgstr ""
+msgstr "escaped."
 
 #: scripts/scenario_03_training_cruiser.lua:228
 msgctxt "msgMainscreen-bonusTarget"
 msgid "destroyed."
-msgstr ""
+msgstr "destroyed."
 
 #: scripts/scenario_03_training_cruiser.lua:234
 #, lua-format
@@ -71,4 +71,4 @@ msgid ""
 "\n"
 "If you need more practice, play this training again\n"
 "with different stations assigned to your crew members."
-msgstr ""
+msgstr "Mission Complete.\nYour Time: %d\nBonus target %s\n\nIf you feel ready for combat, play scenario 'Basic Battle'.\nIf you want to try another ship, play the next training mission.\n\nIf you need more practice, play this training again\nwith different stations assigned to your crew members."

@@ -1,7 +1,7 @@
 #: scripts/shiptemplates/corvettes.lua:11
 msgctxt "playerShip"
 msgid "Nautilus"
-msgstr ""
+msgstr "Nautilus"
 
 #: scripts/shiptemplates/corvettes.lua:13
 #: scripts/shiptemplates/corvettes.lua:63
@@ -9,12 +9,12 @@ msgstr ""
 #: scripts/shiptemplates/corvettes.lua:114
 msgctxt "class"
 msgid "Corvette"
-msgstr ""
+msgstr "Corvette"
 
 #: scripts/shiptemplates/corvettes.lua:13
 msgctxt "subclass"
 msgid "Mine layer"
-msgstr ""
+msgstr "Mine layer"
 
 #: scripts/shiptemplates/corvettes.lua:18
 msgid ""
@@ -27,17 +27,17 @@ msgid ""
 "Point-defense beams grant it a modicum of self-defense, but a Nautilus "
 "largely relies on its manueverability and supporting forces to survive "
 "direct combat."
-msgstr ""
+msgstr "The Nautilus is a mine-laying corvette with minimal armament, shields, energy storage, and hull. While not particularly fast or capable, its triple rear-facing weapon tubes, combat thrusters, and surprising acceleration allow it to efficiently blanket an area with up to a dozen mines before resupplying.\n\nPoint-defence beams grant it a modicum of self-defence, but a Nautilus largely relies on its manueverability and supporting forces to survive direct combat."
 
 #: scripts/shiptemplates/corvettes.lua:61
 msgctxt "ship"
 msgid "Karnack"
-msgstr ""
+msgstr "Karnack"
 
 #: scripts/shiptemplates/corvettes.lua:63
 msgctxt "subclass"
 msgid "Patrol"
-msgstr ""
+msgstr "Patrol"
 
 #: scripts/shiptemplates/corvettes.lua:67
 msgid ""
@@ -48,12 +48,12 @@ msgid ""
 "Due to the design's age, most factions procure stripped-down versions, a "
 "practice that's led to the Karnack becoming a favorite among smugglers and "
 "other civilian parties to refit them with (often illegal) weaponry."
-msgstr ""
+msgstr "Due to its versatility, the Karnack design has found wide adoptation across factions. Most have extensively retrofitted these older Repulse shipyards-fabricated patrol corvettes to suit their combat doctrines.\n\nDue to the design's age, most factions procure stripped-down versions, a practice that's led to the Karnack becoming a favourite among smugglers and other civilian parties to refit them with (often illegal) weaponry."
 
 #: scripts/shiptemplates/corvettes.lua:81
 msgctxt "ship"
 msgid "Karnack MK2"
-msgstr ""
+msgstr "Karnack MK2"
 
 #: scripts/shiptemplates/corvettes.lua:84
 msgid ""
@@ -63,17 +63,17 @@ msgid ""
 "improvement was the most requested feature by several factions once they "
 "realized that their old surplus mark I ships were used for less savory "
 "purposes."
-msgstr ""
+msgstr "The successor to the widely successful Karnack corvette, the mark 2 has several notable improvements over the original ship, including better armour, slightly improved weaponry, and customisation by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savory purposes."
 
 #: scripts/shiptemplates/corvettes.lua:94
 msgctxt "ship"
 msgid "Polaris"
-msgstr ""
+msgstr "Polaris"
 
 #: scripts/shiptemplates/corvettes.lua:96
 msgctxt "subclass"
 msgid "Missile"
-msgstr ""
+msgstr "Missile"
 
 #: scripts/shiptemplates/corvettes.lua:100
 msgid ""
@@ -82,33 +82,33 @@ msgid ""
 "quickly. Its single shield segment and lack of point-defense beam weapons "
 "leave it vulnerable to being swarmed by starfighters that can evade its "
 "missiles."
-msgstr ""
+msgstr "The Polaris missile corvette is a platform for launching long-range missiles. It can't take much damage, but it can deal a lot if not dealt with quickly. Its single shield segment and lack of point-defence beam weapons leave it vulnerable to being swarmed by starfighters that can evade its missiles."
 
 #: scripts/shiptemplates/corvettes.lua:112
 msgctxt "ship"
 msgid "Gunship"
-msgstr ""
+msgstr "Gunship"
 
 #: scripts/shiptemplates/corvettes.lua:114
 msgctxt "subclass"
 msgid "Gunship"
-msgstr ""
+msgstr "Gunship"
 
 #: scripts/shiptemplates/corvettes.lua:118
 msgid ""
 "The plainly named Gunship corvette is equipped with a homing missile tube "
 "damage a target at range, and dual front-firing beams to finish the target "
 "off. It's designed to quickly take out enemies weaker then itself."
-msgstr ""
+msgstr "The plainly named Gunship corvette is equipped with a homing missile tube damage a target at range, and dual front-firing beams to finish the target off. It's designed to quickly take out enemies weaker then itself."
 
 #: scripts/shiptemplates/corvettes.lua:133
 msgctxt "ship"
 msgid "Adv. Gunship"
-msgstr ""
+msgstr "Adv. Gunship"
 
 #: scripts/shiptemplates/corvettes.lua:136
 msgid ""
 "The Advanced Gunship corvette adds a second homing missile tube to damage "
 "targets at range, and dual front-firing beams to finish its foes off. It's "
 "designed to quickly take out enemies weaker then itself."
-msgstr ""
+msgstr "The Advanced Gunship corvette adds a second homing missile tube to damage targets at range, and dual front-firing beams to finish its foes off. It's designed to quickly take out enemies weaker then itself."

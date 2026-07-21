@@ -1,61 +1,61 @@
 #: scripts/shiptemplates/light_carriers.lua:19
 msgctxt "playerShip"
 msgid "Saipan"
-msgstr ""
+msgstr "Saipan"
 
 #: scripts/shiptemplates/light_carriers.lua:22
 #: scripts/shiptemplates/light_carriers.lua:103
 #: scripts/shiptemplates/light_carriers.lua:135
 msgctxt "class"
 msgid "Light carrier"
-msgstr ""
+msgstr "Light carrier"
 
 #: scripts/shiptemplates/light_carriers.lua:22
 #: scripts/shiptemplates/light_carriers.lua:135
 msgctxt "subclass"
 msgid "Escort"
-msgstr ""
+msgstr "Escort"
 
 #: scripts/shiptemplates/light_carriers.lua:26
 msgid ""
 "The Saipan combines most of the strengths of the frigate class with the "
 "capability to carry and launch starfighters. Its weapons compare favorably "
 "with other frigate-class ships."
-msgstr ""
+msgstr "The Saipan combines most of the strengths of the frigate class with the capability to carry and launch starfighters. Its weapons compare favourably with other frigate-class ships."
 
 #: scripts/shiptemplates/light_carriers.lua:35
 #: scripts/shiptemplates/light_carriers.lua:119
 msgctxt "class"
 msgid "Corvette"
-msgstr ""
+msgstr "Corvette"
 
 #: scripts/shiptemplates/light_carriers.lua:38
 #: scripts/shiptemplates/light_carriers.lua:124
 msgctxt "class"
 msgid "Cargo"
-msgstr ""
+msgstr "Cargo"
 
 #: scripts/shiptemplates/light_carriers.lua:39
 #: scripts/shiptemplates/light_carriers.lua:125
 msgctxt "class"
 msgid "Starfighter"
-msgstr ""
+msgstr "Starfighter"
 
 #: scripts/shiptemplates/light_carriers.lua:102
 msgctxt "ship"
 msgid "Jump Carrier"
-msgstr ""
+msgstr "Jump Carrier"
 
 #: scripts/shiptemplates/light_carriers.lua:103
 msgctxt "subclass"
 msgid "Support"
-msgstr ""
+msgstr "Support"
 
 #: scripts/shiptemplates/light_carriers.lua:108
 msgid ""
 "The Jump Carrier is a freighter hull, but with a jump drive and energy "
 "storage in place of its cargo bay."
-msgstr ""
+msgstr "The Jump Carrier is a freighter hull, but with a jump drive and energy storage in place of its cargo bay."
 
 #: scripts/shiptemplates/light_carriers.lua:110
 #: scripts/shiptemplates/light_carriers.lua:142
@@ -65,46 +65,46 @@ msgid ""
 "frigate-class hulls, and it accordingly has special docking parameters that "
 "allow ships too big to fit in its docking bay to attach themselves to its "
 "hull."
-msgstr ""
+msgstr "It's designed to carry other ships deep into space, up to and including frigate-class hulls, and it accordingly has special docking parameters that allow ships too big to fit in its docking bay to attach themselves to its hull."
 
 #: scripts/shiptemplates/light_carriers.lua:120
 msgctxt "class"
 msgid "Frigate"
-msgstr ""
+msgstr "Frigate"
 
 #: scripts/shiptemplates/light_carriers.lua:121
 msgctxt "class"
 msgid "Destroyer"
-msgstr ""
+msgstr "Destroyer"
 
 #: scripts/shiptemplates/light_carriers.lua:126
 msgctxt "subclass"
 msgid "Tug"
-msgstr ""
+msgstr "Tug"
 
 #: scripts/shiptemplates/light_carriers.lua:127
 msgctxt "subclass"
 msgid "Transport"
-msgstr ""
+msgstr "Transport"
 
 #: scripts/shiptemplates/light_carriers.lua:134
 msgctxt "playerShip"
 msgid "Benedict"
-msgstr ""
+msgstr "Benedict"
 
 #: scripts/shiptemplates/light_carriers.lua:140
 msgid ""
 "The Benedict is an improved version of the Jump Carrier armed with point-"
 "defense beam turrets."
-msgstr ""
+msgstr "The Benedict is an improved version of the Jump Carrier armed with point-defence beam turrets."
 
 #: scripts/shiptemplates/light_carriers.lua:178
 msgctxt "playerShip"
 msgid "Kiriya"
-msgstr ""
+msgstr "Kiriya"
 
 #: scripts/shiptemplates/light_carriers.lua:182
 msgid ""
 "The Kiriya is a warp-drive variant of the Benedict. Like the Benedict, it's "
 "armed with point-defense beam turrets."
-msgstr ""
+msgstr "The Kiriya is a warp-drive variant of the Benedict. Like the Benedict, it's armed with point-defence beam turrets."

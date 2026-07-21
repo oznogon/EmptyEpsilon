@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Beacon of Light series"
-msgstr ""
+msgstr "Beacon of Light series"
 
 # Scenario description
 msgid ""
@@ -12,7 +12,7 @@ msgid ""
 "\n"
 "This scenario is limited to one player ship: the Atlantis Epsilon. Estimated "
 "duration: 1 hour"
-msgstr ""
+msgstr "The Beacon of Light scenario, based on the tutorial from https://daid.github.io/EmptyEpsilon/#tabs=4.\n\nNear the far outpost of Orion-5, Exuari attacks are increasing. A diplomat went missing, and your first mission is to recover him.\n\nThis scenario is limited to one player ship: the Atlantis Epsilon. Estimated duration: 1 hour"
 
 #: scripts/scenario_10_beacon_of_light.lua:109
 msgctxt "goal-incCall"
@@ -24,19 +24,19 @@ msgid ""
 "Orion-5.\n"
 "\n"
 "Our last contact with RT-4 was before it entered the nebula at sector "
-msgstr ""
+msgstr "Epsilon, please come in.\n\nWe lost contact with one of our transports, callsign RT-4, transporting the diplomat named J.J. Johnson. They were heading from our research station to Orion-5.\n\nOur last contact with RT-4 was before it entered the nebula at sector "
 
 #: scripts/scenario_10_beacon_of_light.lua:137
 #: scripts/scenario_10_beacon_of_light.lua:164
 msgctxt "scienceDescription-lifepod"
 msgid "Life Pod"
-msgstr ""
+msgstr "Life Pod"
 
 #: scripts/scenario_10_beacon_of_light.lua:138
 #: scripts/scenario_10_beacon_of_light.lua:165
 msgctxt "scienceDescription-lifepod"
 msgid "J. J. Johnson in Life Pod"
-msgstr ""
+msgstr "J. J. Johnson in Life Pod"
 
 #: scripts/scenario_10_beacon_of_light.lua:146
 #: scripts/scenario_10_beacon_of_light.lua:173
@@ -47,12 +47,12 @@ msgid ""
 "Life signs are detected in the pod. Please retrieve the pod to see if J.J. "
 "Johnson survived. His death would be a great blow to the region's peace "
 "negotiations."
-msgstr ""
+msgstr "RT-4 has been destroyed, but not before it launched an escape pod.\n\nLife signs are detected in the pod. Please retrieve the pod to see if J.J. Johnson survived. His death would be a great blow to the region's peace negotiations."
 
 #: scripts/scenario_10_beacon_of_light.lua:152
 msgctxt "incCall"
 msgid "And destroy those Exuari scum while you are at it!"
-msgstr ""
+msgstr "And destroy those Exuari scum while you are at it!"
 
 #: scripts/scenario_10_beacon_of_light.lua:192
 msgctxt "incCall"
@@ -62,7 +62,7 @@ msgid ""
 "\n"
 "Please deliver his body back to Research-1. We will arrange for you to take "
 "over his mission."
-msgstr ""
+msgstr "J.J. Johnson seems to have suffocated. This is a great loss for our cause of peace.\n\nPlease deliver his body back to Research-1. We will arrange for you to take over his mission."
 
 #: scripts/scenario_10_beacon_of_light.lua:205
 msgctxt "incCall"
@@ -71,14 +71,14 @@ msgid ""
 "job!\n"
 "\n"
 "Please deliver the diplomat to Orion-5 in sector "
-msgstr ""
+msgstr "Just received message that Sir Johnson is safely aboard your ship! Great job!\n\nPlease deliver the diplomat to Orion-5 in sector "
 
 #: scripts/scenario_10_beacon_of_light.lua:223
 msgctxt "incCall"
 msgid ""
 "J.J. Johnson thanks you for rescuing him and tells you about his mission.\n"
 "\n"
-msgstr ""
+msgstr "J.J. Johnson thanks you for rescuing him and tells you about his mission.\n\n"
 
 #: scripts/scenario_10_beacon_of_light.lua:229
 #: scripts/scenario_10_beacon_of_light.lua:251
@@ -93,21 +93,21 @@ msgid ""
 "\n"
 "The officers at Orion-5 will gladly make this trade, and they ask that you "
 "retrieve the criminals for them at Refugee-X in sector "
-msgstr ""
+msgstr "He just returned from a mission from the Refugee-X station, a neutral station in the area known to house anyone regardless of their history.\n\nRefugee-X has recently been attacked by Exuari ships, and some criminals living there have offered to give themselves up in exchange for better protection of the station.\n\nThe officers at Orion-5 will gladly make this trade, and they ask that you retrieve the criminals for them at Refugee-X in sector "
 
 #: scripts/scenario_10_beacon_of_light.lua:245
 msgctxt "incCall"
 msgid ""
 "J.J. Johnson's message toward Orion-5 is clear:\n"
 "\n"
-msgstr ""
+msgstr "J.J. Johnson's message toward Orion-5 is clear:\n\n"
 
 #: scripts/scenario_10_beacon_of_light.lua:280
 msgctxt "incCall"
 msgid ""
 "J.J. Johnson transmitted his mission details to Orion-5 before he passed "
 "away. Head to Orion-5 in sector "
-msgstr ""
+msgstr "J.J. Johnson transmitted his mission details to Orion-5 before he passed away. Head to Orion-5 in sector "
 
 #: scripts/scenario_10_beacon_of_light.lua:295
 msgctxt "incCall"
@@ -122,17 +122,17 @@ msgid ""
 "How voluntary is this exchange?\n"
 "\n"
 "Head back to Orion-5 to deliver the criminals."
-msgstr ""
+msgstr "Two tough-looking criminals board your ship. They are already cuffed and do not look too happy about the situation.\n\nOne of them is a human pirate, who is blind in one eye and has clearly seen his fair share of battles. The other is Exuari who hisses what you presume is a curse in their native language.\n\nHow voluntary is this exchange?\n\nHead back to Orion-5 to deliver the criminals."
 
 #: scripts/scenario_10_beacon_of_light.lua:315
 msgctxt "scienceDescription-artifact"
 msgid "High powered field generator"
-msgstr ""
+msgstr "High powered field generator"
 
 #: scripts/scenario_10_beacon_of_light.lua:318
 msgctxt "scienceDescription-artifact"
 msgid "Warp/Jump Jammer. Radius visible if jammer visible"
-msgstr ""
+msgstr "Warp/Jump Jammer. Radius visible if jammer visible"
 
 #: scripts/scenario_10_beacon_of_light.lua:349
 msgctxt "incCall"
@@ -142,7 +142,7 @@ msgid ""
 "Your translator has difficulty translating the message, but it seems to come "
 "down to the fact that they want you dead and that your death will bring them "
 "great fun."
-msgstr ""
+msgstr "Sllaaami graa kully fartsy!\n\nYour translator has difficulty translating the message, but it seems to come down to the fact that they want you dead and that your death will bring them great fun."
 
 #: scripts/scenario_10_beacon_of_light.lua:377
 msgctxt "incCall"
@@ -153,23 +153,23 @@ msgid ""
 "We extracted some vital info from the Exuari. In the next transport convoy "
 "toward Research-1, an Exuari death squad is hiding in one of the ships. The "
 "transport detail is heading in from sector "
-msgstr ""
+msgstr "Good job dealing with those Exuari scum. The criminals are safely in our custody, and we'll send a protection detail to Refugee-X.\n\nWe extracted some vital info from the Exuari. In the next transport convoy toward Research-1, an Exuari death squad is hiding in one of the ships. The transport detail is heading in from sector "
 
 #: scripts/scenario_10_beacon_of_light.lua:385
 #: scripts/scenario_10_beacon_of_light.lua:438
 msgctxt "incCall"
 msgid "We have refitted your nukes and EMPs."
-msgstr ""
+msgstr "We have refitted your nukes and EMPs."
 
 #: scripts/scenario_10_beacon_of_light.lua:388
 msgctxt "incCall"
 msgid "Awesome job taking out the Exuari without those."
-msgstr ""
+msgstr "Awesome job taking out the Exuari without those."
 
 #: scripts/scenario_10_beacon_of_light.lua:439
 msgctxt "incCall"
 msgid "Now to get those Exuari!"
-msgstr ""
+msgstr "Now to get those Exuari!"
 
 #: scripts/scenario_10_beacon_of_light.lua:451
 msgctxt "incCall"
@@ -178,20 +178,20 @@ msgid ""
 "do NOT destroy it.\n"
 "\n"
 "Target its impulse engines with your beam weapons to halt its progress."
-msgstr ""
+msgstr "Scan the transports to identify the Exuari one. When you have identified it, do NOT destroy it.\n\nTarget its impulse engines with your beam weapons to halt its progress."
 
 #: scripts/scenario_10_beacon_of_light.lua:473
 #: scripts/scenario_10_beacon_of_light.lua:496
 #: scripts/scenario_10_beacon_of_light.lua:534
 msgctxt "incCall"
 msgid "What the hell? I told you NOT to destroy the transport."
-msgstr ""
+msgstr "What the hell? I told you NOT to destroy the transport."
 
 #: scripts/scenario_10_beacon_of_light.lua:482
 msgctxt "incCall"
 msgid ""
 "Transport identified. Take out their impulse engines so we can capture it."
-msgstr ""
+msgstr "Transport identified. Take out their impulse engines so we can capture it."
 
 #: scripts/scenario_10_beacon_of_light.lua:505
 msgctxt "incCall"
@@ -199,7 +199,7 @@ msgid ""
 "The transport is disabled. We're dispatching a recovery team and need you to "
 "defend the transport from the Exuari, who will likely destroy it rather then "
 "let it fall into our hands."
-msgstr ""
+msgstr "The transport is disabled. We're dispatching a recovery team and need you to defend the transport from the Exuari, who will likely destroy it rather then let it fall into our hands."
 
 #: scripts/scenario_10_beacon_of_light.lua:572
 msgctxt "incCall"
@@ -208,7 +208,7 @@ msgid ""
 "\n"
 "\"We succesfully captured the Exuari transport. Taking it back to Orion-5. "
 "Please head to Orion-5 for debriefing.\""
-msgstr ""
+msgstr "Transport recovery team coming in:\n\n\"We succesfully captured the Exuari transport. Taking it back to Orion-5. Please head to Orion-5 for debriefing.\""
 
 #: scripts/scenario_10_beacon_of_light.lua:587
 msgctxt "incCall"
@@ -217,4 +217,4 @@ msgid ""
 "Exuari base in the area.\n"
 "\n"
 "Lead the assault on the Exuari base in sector "
-msgstr ""
+msgstr "Thanks to the captured Exuari death squad, we now know the location of the Exuari base in the area.\n\nLead the assault on the Exuari base in sector "

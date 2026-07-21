@@ -1,7 +1,7 @@
 #: scripts/shiptemplates/destroyers.lua:15
 msgctxt "ship"
 msgid "Atlantis X23"
-msgstr ""
+msgstr "Atlantis X23"
 
 #: scripts/shiptemplates/destroyers.lua:16
 #: scripts/shiptemplates/destroyers.lua:99
@@ -9,24 +9,24 @@ msgstr ""
 #: scripts/shiptemplates/destroyers.lua:187
 msgctxt "class"
 msgid "Destroyer"
-msgstr ""
+msgstr "Destroyer"
 
 #: scripts/shiptemplates/destroyers.lua:16
 msgctxt "subclass"
 msgid "Escort"
-msgstr ""
+msgstr "Escort"
 
 #: scripts/shiptemplates/destroyers.lua:21
 msgid ""
 "The Atlantis X23 is the experimental predecessor of the production-model "
 "Atlantis destroyer. Compared to its successor, the X23 has stronger shields, "
 "less maneuverability, and a simpler weapons loadout."
-msgstr ""
+msgstr "The Atlantis X23 is the experimental predecessor of the production-model Atlantis destroyer. Compared to its successor, the X23 has stronger shields, less maneuverability, and a simpler weapons loadout."
 
 #: scripts/shiptemplates/destroyers.lua:42
 msgctxt "playerShip"
 msgid "Atlantis"
-msgstr ""
+msgstr "Atlantis"
 
 #: scripts/shiptemplates/destroyers.lua:47
 msgid ""
@@ -39,17 +39,17 @@ msgid ""
 "large shield system with an advanced combat maneuvering systems and improved "
 "impulse engines. Its missile loadout is also more diverse, including nukes, "
 "EMP missiles, and a dedicated mine-laying tube."
-msgstr ""
+msgstr "The Atlantis is the smallest model of destroyer, and its combination of frigate-like size and destroyer-like power makes it an excellent escort for larger ships facing multiple smaller enemies. Because the Atlantis is fitted with a jump drive, it can also serve as an intersystem patrol craft.\n\nThe production-model Atlantis replaced its experimental X23 predecessor's large shield system with an advanced combat manoeuvring systems and improved impulse engines. Its missile loadout is also more diverse, including nukes, EMP missiles, and a dedicated mine-laying tube."
 
 #: scripts/shiptemplates/destroyers.lua:98
 msgctxt "ship"
 msgid "Starhammer II"
-msgstr ""
+msgstr "Starhammer II"
 
 #: scripts/shiptemplates/destroyers.lua:99
 msgctxt "subclass"
 msgid "Assault"
-msgstr ""
+msgstr "Assault"
 
 #: scripts/shiptemplates/destroyers.lua:103
 msgid ""
@@ -59,34 +59,34 @@ msgid ""
 "makes it difficult to position, but when in the right place at the right "
 "time, even the strongest shields can't withstand a Starhammer's assault for "
 "long."
-msgstr ""
+msgstr "Contrary to its predecessor, the Starhammer II lives up to its name. By resolving the original Starhammer's power and heat management issues, the updated model makes for a phenomenal frontal assault ship. Its low speed makes it difficult to position, but when in the right place at the right time, even the strongest shields can't withstand a Starhammer's assault for long."
 
 #: scripts/shiptemplates/destroyers.lua:124
 msgctxt "playerShip"
 msgid "Crucible"
-msgstr ""
+msgstr "Crucible"
 
 #: scripts/shiptemplates/destroyers.lua:125
 msgctxt "subclass"
 msgid "Missile"
-msgstr ""
+msgstr "Missile"
 
 #: scripts/shiptemplates/destroyers.lua:130
 msgid ""
 "The Crucible has several missile tubes positioned around its hull. Beams "
 "were deemed lower priority, though they are still present. It has stronger "
 "defenses than a frigate, but not as strong as the Atlantis."
-msgstr ""
+msgstr "The Crucible has several missile tubes positioned around its hull. Beams were deemed lower priority, though they are still present. It has stronger defences than a frigate, but not as strong as the Atlantis."
 
 #: scripts/shiptemplates/destroyers.lua:186
 msgctxt "playerShip"
 msgid "Maverick"
-msgstr ""
+msgstr "Maverick"
 
 #: scripts/shiptemplates/destroyers.lua:187
 msgctxt "subclass"
 msgid "Gunner"
-msgstr ""
+msgstr "Gunner"
 
 #: scripts/shiptemplates/destroyers.lua:192
 msgid ""
@@ -94,4 +94,4 @@ msgid ""
 "a rear-facing turret to deter pursuers. Weapon tubes were deemed lower "
 "priority, though they are still present. It has stronger defenses than a "
 "frigate, but not as strong as the Atlantis."
-msgstr ""
+msgstr "The Maverick has several beam weapons positioned around its hull, including a rear-facing turret to deter pursuers. Weapon tubes were deemed lower priority, though they are still present. It has stronger defences than a frigate, but not as strong as the Atlantis."

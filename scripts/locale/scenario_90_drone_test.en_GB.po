@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Drone Controller Test"
-msgstr ""
+msgstr "Drone Controller Test"
 
 # Scenario description
 msgid ""
@@ -11,4 +11,4 @@ msgid ""
 "set to allow control by the player ship.\n"
 "\n"
 "Use the Drone Operations crew screen to link to and control the drones."
-msgstr ""
+msgstr "A minimal test scenario for the drone controller feature.\n\nA Saipan player ship spawns with the DroneController component enabled.\nThree drones spawn nearby, each with the AllowDroneLink component\nset to allow control by the player ship.\n\nUse the Drone Operations crew screen to link to and control the drones."

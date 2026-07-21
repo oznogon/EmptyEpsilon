@@ -1,22 +1,22 @@
 # Scenario name
 msgid "Utility beam test"
-msgstr ""
+msgstr "Utility beam test"
 
 # Scenario description
 msgid "Test utility beam system functions"
-msgstr ""
+msgstr "Test utility beam system functions"
 
 #: scripts/scenario_98_utility_beam_test.lua:714
 msgctxt "buttonGM"
 msgid "Random asteroid field"
-msgstr ""
+msgstr "Random asteroid field"
 
 #: scripts/scenario_98_utility_beam_test.lua:724
 msgctxt "buttonGM"
 msgid "Random nebula field"
-msgstr ""
+msgstr "Random nebula field"
 
 #: scripts/scenario_98_utility_beam_test.lua:733
 msgctxt "buttonGM"
 msgid "Delete unselected"
-msgstr ""
+msgstr "Delete unselected"

@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Battlefield"
-msgstr ""
+msgstr "Battlefield"
 
 # Scenario description
 msgid ""
@@ -8,37 +8,37 @@ msgid ""
 "neutral station.\n"
 "\n"
 "(This scenario is designed for performance testing.)"
-msgstr ""
+msgstr "More than 60 Human Navy and Exuari ships face off in all-out war near a neutral station.\n\n(This scenario is designed for performance testing.)"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr ""
+msgstr "Enemies"
 
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
-msgstr ""
+msgstr "Configures the amount of enemies spawned in the scenario."
 
 msgctxt "Enemies"
 msgid "Large"
-msgstr ""
+msgstr "Large"
 
 msgctxt "Enemies"
 msgid "Larger battle. This increases the fleet sizes to 100 ships per side."
-msgstr ""
+msgstr "Larger battle. This increases the fleet sizes to 100 ships per side."
 
 msgctxt "Enemies"
 msgid "Medium"
-msgstr ""
+msgstr "Medium"
 
 msgctxt "Enemies"
 msgid "Medium battle. 60 ships per side."
-msgstr ""
+msgstr "Medium battle. 60 ships per side."
 
 msgctxt "Enemies"
 msgid "Huge"
-msgstr ""
+msgstr "Huge"
 
 msgctxt "Enemies"
 msgid "Huge battle. This increases the fleet sizes to 500 ships per side."
-msgstr ""
+msgstr "Huge battle. This increases the fleet sizes to 500 ships per side."

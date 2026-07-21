@@ -1,7 +1,7 @@
 #: scripts/api/gm.lua:7
 msgctxt "create"
 msgid "Artifact"
-msgstr ""
+msgstr "Artifact"
 
 #: scripts/api/gm.lua:8 scripts/api/gm.lua:17 scripts/api/gm.lua:26
 #: scripts/api/gm.lua:76 scripts/api/gm.lua:85 scripts/api/gm.lua:94
@@ -9,105 +9,105 @@ msgstr ""
 #: scripts/api/gm.lua:130 scripts/api/gm.lua:139 scripts/api/gm.lua:157
 msgctxt "create"
 msgid "Various"
-msgstr ""
+msgstr "Various"
 
 #: scripts/api/gm.lua:16
 msgctxt "create"
 msgid "Warp jammer"
-msgstr ""
+msgstr "Warp jammer"
 
 #: scripts/api/gm.lua:25
 msgctxt "create"
 msgid "Mine"
-msgstr ""
+msgstr "Mine"
 
 #: scripts/api/gm.lua:34
 msgctxt "create"
 msgid "Homing missile"
-msgstr ""
+msgstr "Homing missile"
 
 #: scripts/api/gm.lua:35 scripts/api/gm.lua:44 scripts/api/gm.lua:53
 #: scripts/api/gm.lua:62
 msgctxt "create"
 msgid "Missiles"
-msgstr ""
+msgstr "Missiles"
 
 #: scripts/api/gm.lua:43
 msgctxt "create"
 msgid "Nuke"
-msgstr ""
+msgstr "Nuke"
 
 #: scripts/api/gm.lua:52
 msgctxt "create"
 msgid "EMP missile"
-msgstr ""
+msgstr "EMP missile"
 
 #: scripts/api/gm.lua:61
 msgctxt "create"
 msgid "HVLI"
-msgstr ""
+msgstr "HVLI"
 
 #: scripts/api/gm.lua:75
 msgctxt "create"
 msgid "Supply drop"
-msgstr ""
+msgstr "Supply drop"
 
 #: scripts/api/gm.lua:84
 msgctxt "create"
 msgid "Scan probe"
-msgstr ""
+msgstr "Scan probe"
 
 #: scripts/api/gm.lua:93
 msgctxt "create"
 msgid "Asteroid"
-msgstr ""
+msgstr "Asteroid"
 
 #: scripts/api/gm.lua:102
 msgctxt "create"
 msgid "Visual asteroid"
-msgstr ""
+msgstr "Visual asteroid"
 
 #: scripts/api/gm.lua:111
 msgctxt "create"
 msgid "Planet"
-msgstr ""
+msgstr "Planet"
 
 #: scripts/api/gm.lua:120
 msgctxt "create"
 msgid "Black hole"
-msgstr ""
+msgstr "Black hole"
 
 #: scripts/api/gm.lua:129
 msgctxt "create"
 msgid "Nebula"
-msgstr ""
+msgstr "Nebula"
 
 #: scripts/api/gm.lua:138
 msgctxt "create"
 msgid "Worm hole"
-msgstr ""
+msgstr "Worm hole"
 
 #: scripts/api/gm.lua:156
 msgctxt "create"
 msgid "Camera"
-msgstr ""
+msgstr "Camera"
 
 #: scripts/api/gm.lua:158
 msgctxt "create"
 msgid "Cinematic camera viewpoint"
-msgstr ""
+msgstr "Cinematic camera viewpoint"
 
 #: scripts/api/gm.lua:168
 msgctxt "create"
 msgid "Player ship"
-msgstr ""
+msgstr "Player ship"
 
 #: scripts/api/gm.lua:176
 msgctxt "create"
 msgid "Station"
-msgstr ""
+msgstr "Station"
 
 #: scripts/api/gm.lua:184
 msgctxt "create"
 msgid "CPU ship"
-msgstr ""
+msgstr "CPU ship"

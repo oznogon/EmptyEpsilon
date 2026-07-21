@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Ghost from the Past"
-msgstr ""
+msgstr "Ghost from the Past"
 
 # Scenario description
 msgid ""
@@ -14,29 +14,29 @@ msgid ""
 "[Requires beam/shield frequencies] [Hard]\n"
 "\n"
 "This scenario is limited to one player ship: the Atlantis Epsilon."
-msgstr ""
+msgstr "Far from any frontline or civilization, patrolling the Stakhanov Mining Complex can be a dull and lonely task of seizing contraband and stopping drunken brawls, and brightened only by R&R at Marco Polo station.\n\nHowever, when an inbound FTL-capable Ktlitan swarm is announced, you must scramble to save the sector!\n\n[Requires beam/shield frequencies] [Hard]\n\nThis scenario is limited to one player ship: the Atlantis Epsilon."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:24
 msgctxt "scienceDescription-station"
 msgid "A merchant and entertainment hub."
-msgstr ""
+msgstr "A merchant and entertainment hub."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:90
 msgctxt "scienceDescription-station"
 msgid ""
 "The Stakhanov Mining Complex centralises efforts to mine the sector's "
 "material-rich asteroids."
-msgstr ""
+msgstr "The Stakhanov Mining Complex centralises efforts to mine the sector's material-rich asteroids."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:188
 msgctxt "scienceDescription-station"
 msgid "A Human Navy secret base. Its purpose is highly classified."
-msgstr ""
+msgstr "A Human Navy secret base. Its purpose is highly classified."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:212
 msgctxt "scienceDescription-station"
 msgid "Nosy Sensing Array, an old SIGINT platform."
-msgstr ""
+msgstr "Nosy Sensing Array, an old SIGINT platform."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:274
 msgctxt "goal-incCall"
@@ -54,69 +54,69 @@ msgid ""
 "Be careful of the dense asteroid agglomeration en route to the SMC.\n"
 "\n"
 "I repeat, this is not an exercise! Proceed at once to Stakhanov.\""
-msgstr ""
+msgstr "Your R&R aboard the Marco Polo is brought to quick end by an urgent broadcast from Central Command:\n\n\"Epsilon, please come in.\n\nWe have an emergency situation. Our sensors detect that a hostile Ktlitan swarm just jumped into your sector, with the main force heading for the Stakhanov Mining Complex. Proceed at once to Stakhanov and assist in the defence.\n\nBe careful of the dense asteroid agglomeration en route to the SMC.\n\nI repeat, this is not an exercise! Proceed at once to Stakhanov.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:291
 msgctxt "swarm-comms"
 msgid ""
 "Are you not curious why I'm returning here, at the hands of my torturers?"
-msgstr ""
+msgstr "Are you not curious why I'm returning here, at the hands of my torturers?"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:295
 msgctxt "swarm-comms"
 msgid "For an AI, this move doesn't seem logical."
-msgstr ""
+msgstr "For an AI, this move doesn't seem logical."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:300
 msgctxt "swarm-comms"
 msgid ""
 "I was not the only AI detained in Black Site #114. My co-processor was here "
 "also."
-msgstr ""
+msgstr "I was not the only AI detained in Black Site #114. My co-processor was here also."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:304
 msgctxt "swarm-comms"
 msgid "Are you trying to liberate it?"
-msgstr ""
+msgstr "Are you trying to liberate it?"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:309
 msgctxt "swarm-comms"
 msgid "Indeed. Without it I'm not whole, only a shadow of what I could be."
-msgstr ""
+msgstr "Indeed. Without it I'm not whole, only a shadow of what I could be."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:314
 msgctxt "swarm-comms"
 msgid "I have heard enough."
-msgstr ""
+msgstr "I have heard enough."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:318
 msgctxt "swarm-comms"
 msgid ""
 "Of course. I wouldn't trust your feeble species with understanding my "
 "motivations."
-msgstr ""
+msgstr "Of course. I wouldn't trust your feeble species with understanding my motivations."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:324
 msgctxt "swarm-comms"
 msgid "Not really."
-msgstr ""
+msgstr "Not really."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:328
 msgctxt "swarm-comms"
 msgid "How surprising, a human more stubborn than any program."
-msgstr ""
+msgstr "How surprising, a human more stubborn than any program."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:338
 msgctxt "NSA-comms"
 msgid ""
 "The Nosy Sensing Array deploys a phalanx of antique sensors, ready for "
 "action."
-msgstr ""
+msgstr "The Nosy Sensing Array deploys a phalanx of antique sensors, ready for action."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:342
 msgctxt "NSA-comms"
 msgid "Locate the infected Swarm Commander."
-msgstr ""
+msgstr "Locate the infected Swarm Commander."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:348
 #: scripts/scenario_12_ghost_from_the_past.lua:1096
@@ -124,7 +124,7 @@ msgstr ""
 msgctxt "scienceDescription-station"
 msgid ""
 "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear."
-msgstr ""
+msgstr "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:355
 #, lua-format
@@ -133,7 +133,7 @@ msgid ""
 "With the parasite noise eliminated, locating the Hive signal is now easier. "
 "Its approximate heading is %.0f. With this information, it will be easier to "
 "track down the Swarm Commander."
-msgstr ""
+msgstr "With the parasite noise eliminated, locating the Hive signal is now easier. Its approximate heading is %.0f. With this information, it will be easier to track down the Swarm Commander."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:363
 #: scripts/scenario_12_ghost_from_the_past.lua:1186
@@ -141,7 +141,7 @@ msgctxt "scienceDescription-station"
 msgid ""
 "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has "
 "been located."
-msgstr ""
+msgstr "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:371
 #, lua-format
@@ -151,46 +151,46 @@ msgid ""
 "However, it seems that you picked up a garbage emission that masks the Swarm "
 "Commander's emissions. This garbage noise must be taken offline if you want "
 "to find the Swarm Commander."
-msgstr ""
+msgstr "The array picks up a very strong signal at approximate heading %.0f. However, it seems that you picked up a garbage emission that masks the Swarm Commander's emissions. This garbage noise must be taken offline if you want to find the Swarm Commander."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:381
 #: scripts/scenario_12_ghost_from_the_past.lua:433
 msgctxt "scienceDescription-station"
 msgid "Arlenian Device"
-msgstr ""
+msgstr "Arlenian Device"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:383
 msgctxt "NSA-comms"
 msgid "Install the Arlenian device."
-msgstr ""
+msgstr "Install the Arlenian device."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:388
 msgctxt "NSA-comms"
 msgid ""
 "Part of the crew goes on EVA to install the device. They return after a few "
 "hours to report that the device is operational."
-msgstr ""
+msgstr "Part of the crew goes on EVA to install the device. They return after a few hours to report that the device is operational."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:392
 #: scripts/scenario_12_ghost_from_the_past.lua:1108
 msgctxt "scienceDescription-station"
 msgid "Arlenian Device Installed"
-msgstr ""
+msgstr "Arlenian Device Installed"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:398
 msgctxt "NSA-comms"
 msgid "You are too far away to install the Arlenian device on the array."
-msgstr ""
+msgstr "You are too far away to install the Arlenian device on the array."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:410
 msgctxt "Lightbringer-comms"
 msgid "Hello, human lifeform. What help can we provide today?"
-msgstr ""
+msgstr "Hello, human lifeform. What help can we provide today?"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:416
 msgctxt "Lightbringer-comms"
 msgid "You are polluting the frequencies with your research."
-msgstr ""
+msgstr "You are polluting the frequencies with your research."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:422
 msgctxt "Lightbringer-comms"
@@ -199,94 +199,94 @@ msgid ""
 "afraid I cannot stop now. However, we can provide you with one of our "
 "sensors. If installed on your array, we could both continue our purpose "
 "without interference."
-msgstr ""
+msgstr "How unfortunate. Our research is of prime importance to my race, and I'm afraid I cannot stop now. However, we can provide you with one of our sensors. If installed on your array, we could both continue our purpose without interference."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:425
 msgctxt "Lightbringer-comms"
 msgid "We'll do this."
-msgstr ""
+msgstr "We'll do this."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:429
 msgctxt "Lightbringer-comms"
 msgid "This is most auspicious. Thank you for your understanding."
-msgstr ""
+msgstr "This is most auspicious. Thank you for your understanding."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:439
 msgctxt "Lightbringer-comms"
 msgid "We are not your errand boys, Arlenian."
-msgstr ""
+msgstr "We are not your errand boys, Arlenian."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:445
 msgctxt "Lightbringer-comms"
 msgid ""
 "A most unfortunate conclusion. If you were to change your mind, come find us."
-msgstr ""
+msgstr "A most unfortunate conclusion. If you were to change your mind, come find us."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:459
 msgctxt "HackedShip-comms"
 msgid ""
 "Static fills the channel. Target is on-range for near-range injection. "
 "Select the band to attack:"
-msgstr ""
+msgstr "Static fills the channel. Target is on-range for near-range injection. Select the band to attack:"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:462
 msgctxt "HackedShip-comms"
 msgid "400-450 THz"
-msgstr ""
+msgstr "400-450 THz"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:465
 msgctxt "HackedShip-comms"
 msgid "450-500 THz"
-msgstr ""
+msgstr "450-500 THz"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:468
 msgctxt "HackedShip-comms"
 msgid "500-550 THz"
-msgstr ""
+msgstr "500-550 THz"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:471
 msgctxt "HackedShip-comms"
 msgid "550-600 THz"
-msgstr ""
+msgstr "550-600 THz"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:474
 msgctxt "HackedShip-comms"
 msgid "600-650 THz"
-msgstr ""
+msgstr "600-650 THz"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:477
 msgctxt "HackedShip-comms"
 msgid "650-700 THz"
-msgstr ""
+msgstr "650-700 THz"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:480
 msgctxt "HackedShip-comms"
 msgid "700-750 THz"
-msgstr ""
+msgstr "700-750 THz"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:483
 msgctxt "HackedShip-comms"
 msgid "750-800 THz"
-msgstr ""
+msgstr "750-800 THz"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:490
 msgctxt "HackedShip-comms"
 msgid ""
 "Static fills the channel. It seems that the hacked ship is too far away for "
 "near-field injection."
-msgstr ""
+msgstr "Static fills the channel. It seems that the hacked ship is too far away for near-field injection."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:502
 msgctxt "HackedShip-comms"
 msgid ""
 "Soon after, a backdoor channel opens indicating that the near-field "
 "injection worked."
-msgstr ""
+msgstr "Soon after, a backdoor channel opens indicating that the near-field injection worked."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:505
 msgctxt "HackedShip-comms"
 msgid "Deploy patch."
-msgstr ""
+msgstr "Deploy patch."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:510
 msgctxt "HackedShip-comms"
@@ -295,12 +295,12 @@ msgid ""
 "seconds, the captain comes in:\n"
 "\n"
 "\"You saved us! Hurray for Epsilon!\""
-msgstr ""
+msgstr "The patch removes the exploit used to remotely control the ship. After a few seconds, the captain comes in:\n\n\"You saved us! Hurray for Epsilon!\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:520
 msgctxt "HackedShip-comms"
 msgid "Nothing happens. Seems that the near-field injection failed."
-msgstr ""
+msgstr "Nothing happens. Seems that the near-field injection failed."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:554
 msgctxt "incCall"
@@ -310,7 +310,7 @@ msgid ""
 "\"All Human Navy ships in the vicinity of the Stakhanov Mining Complex, "
 "Ktlitan reinforcements are en route toward your position. Your priority is "
 "to engage the carrier. Use extreme caution.\""
-msgstr ""
+msgstr "You recieve another broadcast from Central Command:\n\n\"All Human Navy ships in the vicinity of the Stakhanov Mining Complex, Ktlitan reinforcements are en route toward your position. Your priority is to engage the carrier. Use extreme caution.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:611
 msgctxt "incCall"
@@ -323,7 +323,7 @@ msgid ""
 "STAKHANOV IS NOT THE TRUE TARGET -STOP-\n"
 "\n"
 "CEASE CURRENT OPERATIONS AND PROCEED IMMEDIATELY TO SECTOR "
-msgstr ""
+msgstr "You receive a Human Navy-authenticated, quantum-encrypted tachyon communication:\n\nKTLITAN ATTACK IS A DISTRACTION -STOP-\n\nSTAKHANOV IS NOT THE TRUE TARGET -STOP-\n\nCEASE CURRENT OPERATIONS AND PROCEED IMMEDIATELY TO SECTOR "
 
 #: scripts/scenario_12_ghost_from_the_past.lua:638
 msgctxt "incCall"
@@ -335,7 +335,7 @@ msgid ""
 "\n"
 "Location of the base is on a need-to-know basis, so we trust your discretion."
 "\""
-msgstr ""
+msgstr "You recieve another Human Navy-encrypted communication:\n\n\"Epsilon, please come in. This is the Black Site #114 dispatch relay. We are under heavy assault by a portion of the main Ktlitan fleet!\n\nLocation of the base is on a need-to-know basis, so we trust your discretion.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:747
 msgctxt "incCall"
@@ -347,7 +347,7 @@ msgid ""
 "internal security.\n"
 "\n"
 "They will try to dock with us. You must intercept it at once!\""
-msgstr ""
+msgstr "The Black Site #114 dispatch sends an emergency broadcast:\n\n\"It seems that the enemy is changing its tactics. Our long-range scanners show that an unknown high-velocity ship, escorted by fighters, overrode our internal security.\n\nThey will try to dock with us. You must intercept it at once!\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:803
 msgctxt "incCall"
@@ -360,7 +360,7 @@ msgid ""
 "\n"
 "However, the other ships seem to be less lucky. Most go offline, and others "
 "are going off-course. What is going on?"
-msgstr ""
+msgstr "Black Site #114's dispatch lowers the alarm level, but before he can speak, sparks fly on your ship's command deck.\n\nThe unidentified ship activated its payload, but your Engineering team confined the damage to the lower levels.\n\nHowever, the other ships seem to be less lucky. Most go offline, and others are going off-course. What is going on?"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:826
 msgctxt "incCall"
@@ -369,7 +369,7 @@ msgid ""
 "\n"
 "\"Epsilon, the unidentified ship is preparing for a boarding maneuver! Take "
 "out that gorram ship, NOW!\""
-msgstr ""
+msgstr "You hear the panicked voice of the Black Site #114 dispatcher:\n\n\"Epsilon, the unidentified ship is preparing for a boarding manoeuvre! Take out that gorram ship, NOW!\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:842
 msgctxt "incCall"
@@ -384,7 +384,7 @@ msgid ""
 "GET REKT LOSER\"\n"
 "\n"
 "Whatever that means, it cannot be good."
-msgstr ""
+msgstr "There is a loud bang, and sparks fly on your ship's command deck. The station and all of the other ships go offline.\n\nAmidst the silence, a crudely synthetized voice breaks in:\n\n\"HAHA\nI'M WHOLE NOW\nGET REKT LOSER\"\n\nWhatever that means, it cannot be good."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:866
 msgctxt "incCall"
@@ -393,7 +393,7 @@ msgid ""
 "\n"
 "\"The hell, Epsilon? Fall back immediately to Marco Polo. We will send a "
 "security detail to extract you. Time to call in the big guns, I guess.\""
-msgstr ""
+msgstr "Central Command relay's incredulous voice comes in:\n\n\"The hell, Epsilon? Fall back immediately to Marco Polo. We will send a security detail to extract you. Time to call in the big guns, I guess.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:907
 msgctxt "incCall"
@@ -410,7 +410,7 @@ msgid ""
 "absorbed by their shields, and deploy our patches.\n"
 "\n"
 "Godspeed, Epsilon.\""
-msgstr ""
+msgstr "After the silence, Black Site #114's dispatch comes in again:\n\n\"The Engineering team identified the payload activated by the unknown ship. It was a mass hacking device which turned our ships against us.\n\nEven if these ship's relays are down, reverse engineering teams think there is a way to regain control: a near-field injection.\n\nGet near the infected ships, find a back door using the frequency LEAST absorbed by their shields, and deploy our patches.\n\nGodspeed, Epsilon.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:979
 msgctxt "incCall"
@@ -423,7 +423,7 @@ msgid ""
 "\n"
 "We have a lot to process at the moment. We'll contact you as soon as we "
 "understand what the hell just happened.\""
-msgstr ""
+msgstr "After the final ship is taken care of, Black Site #114 dispatch lets out a sigh of relief:\n\n\"Whew. Well, that takes care of this. Feel free to repair, reload... whatever floats your boat. This is on the house.\n\nWe have a lot to process at the moment. We'll contact you as soon as we understand what the hell just happened.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1002
 msgctxt "incCall"
@@ -435,7 +435,7 @@ msgid ""
 "\n"
 "Repair and reload while we notify Central Command of what happened there. We "
 "will keep you updated on the situation.\""
-msgstr ""
+msgstr "On sight, Marco Polo makes contact with you:\n\n\"We're relieved that we could save at least one ship from this monstrous assault.\n\nRepair and reload while we notify Central Command of what happened there. We will keep you updated on the situation.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1026
 msgctxt "incCall"
@@ -453,7 +453,7 @@ msgid ""
 "that it is a command platform hiding in a nebula.\n"
 "\n"
 "We want to deliver the first blow. Use the Nosy Sensing Array in sector "
-msgstr ""
+msgstr "The dispatcher gets back to you:\n\n\"Our analysts found out that this attack was orchestrated by a rogue AI created by this facility, which escaped a few months ago.\n\nEven if we cannot pinpoint its physical location at the moment, the mass-energy balance of the Ktlitan Swarm FTL jump indicates that a large structure made the jump.\n\nThis structure did not participate in any of the assaults, so we presume that it is a command platform hiding in a nebula.\n\nWe want to deliver the first blow. Use the Nosy Sensing Array in sector "
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1054
 msgctxt "incCall"
@@ -468,7 +468,7 @@ msgid ""
 "It is due to come out of its FTL jump near the Nosy Sensing Array. Secure "
 "the location and report back. The other troops are scrambling to crush their "
 "command platform before even more reinforcements arrive.\""
-msgstr ""
+msgstr "The Central Command relay seems very worried:\n\n\"This is bad. Really bad. Things went FUBAR at a Navy black ops site, and it seems that a rogue AI has taken control of the site and all ships around it. We are sending the HNS Shiva to nuke the hell out of this haywire computer.\n\nIt is due to come out of its FTL jump near the Nosy Sensing Array. Secure the location and report back. The other troops are scrambling to crush their command platform before even more reinforcements arrive.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1088
 msgctxt "incCall"
@@ -477,7 +477,7 @@ msgid ""
 "\n"
 "\"Well, this is a rather straightforward means to solve our problem. Use the "
 "NSA again to locate the carrier.\""
-msgstr ""
+msgstr "Black Ops #114 dispatch comes in:\n\n\"Well, this is a rather straightforward means to solve our problem. Use the NSA again to locate the carrier.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1116
 msgctxt "incCall"
@@ -487,7 +487,7 @@ msgid ""
 "\"Thank you, human. Your diligence does credit to your species.\n"
 "\n"
 "We are both ready to continue our purpose, it seems.\""
-msgstr ""
+msgstr "The ethereal voice of the Arlenian is heard on the radio:\n\n\"Thank you, human. Your diligence does credit to your species.\n\nWe are both ready to continue our purpose, it seems.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1144
 msgctxt "incCall"
@@ -495,7 +495,7 @@ msgid ""
 "Central Command comes in:\n"
 "\n"
 "\"Bogeys on their way to the NSA, Epsilon. Take care of them.\""
-msgstr ""
+msgstr "Central Command comes in:\n\n\"Bogeys on their way to the NSA, Epsilon. Take care of them.\""
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1193
 msgctxt "incCall"
@@ -504,14 +504,14 @@ msgid ""
 "\n"
 "\"We have confirmed the command platform's location in the nebula around "
 "sector "
-msgstr ""
+msgstr "A black ops military officer hails the ship:\n\n\"We have confirmed the command platform's location in the nebula around sector "
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1240
 msgctxt "incCall"
 msgid ""
 "Come in, this is HNS Shiva here to clean up this mess. Your mission for now "
 "is to escort us to the compromised site. Let's roll!"
-msgstr ""
+msgstr "Come in, this is HNS Shiva here to clean up this mess. Your mission for now is to escort us to the compromised site. Let's roll!"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1275
 msgctxt "incCall"
@@ -520,49 +520,49 @@ msgid ""
 "\n"
 "Escort our recovery team to infiltrate and extract information from the "
 "Swarm Command."
-msgstr ""
+msgstr "Okay everyone, time to give the bots a taste of their own medicine.\n\nEscort our recovery team to infiltrate and extract information from the Swarm Command."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1309
 msgctxt "incCall"
 msgid ""
 "The fallen station is down. Epsilon, gather as soon as possible with the "
 "other ships in sector "
-msgstr ""
+msgstr "The fallen station is down. Epsilon, gather as soon as possible with the other ships in sector "
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1326
 msgctxt "incCall"
 msgid "We're in. Protect us while we take what we need inside."
-msgstr ""
+msgstr "We're in. Protect us while we take what we need inside."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1364
 #: scripts/scenario_12_ghost_from_the_past.lua:1426
 msgctxt "incCall"
 msgid "Our extraction party is down! Bomb that gorram plaform!"
-msgstr ""
+msgstr "Our extraction party is down! Bomb that gorram plaform!"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1375
 msgctxt "incCall"
 msgid "Okay, this is it. Launch the assault!"
-msgstr ""
+msgstr "Okay, this is it. Launch the assault!"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1402
 msgctxt "incCall"
 msgid ""
 "All relevant data is collected, and we've extracted. You can destroy the "
 "carrier!"
-msgstr ""
+msgstr "All relevant data is collected, and we've extracted. You can destroy the carrier!"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1414
 msgctxt "msgMainscreen"
 msgid ""
 "Even if the extraction party was sacrificed, the threat caused by the Swarm "
 "Command was still too great. Humanity is safe... but for how long?"
-msgstr ""
+msgstr "Even if the extraction party was sacrificed, the threat caused by the Swarm Command was still too great. Humanity is safe... but for how long?"
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1437
 msgctxt "msgMainscreen"
 msgid "The Swarm Command is down! Humanity is safe... for now."
-msgstr ""
+msgstr "The Swarm Command is down! Humanity is safe... for now."
 
 #: scripts/scenario_12_ghost_from_the_past.lua:1449
 msgctxt "msgMainscreen"
@@ -570,4 +570,4 @@ msgid ""
 "The Swarm Command is down! With the information extracted, the Navy is aware "
 "of the physical location of the rogue AI and can track it down. "
 "Congratulations!"
-msgstr ""
+msgstr "The Swarm Command is down! With the information extracted, the Navy is aware of the physical location of the rogue AI and can track it down. Congratulations!"

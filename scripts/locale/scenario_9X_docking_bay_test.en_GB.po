@@ -1,7 +1,7 @@
 # Scenario name
 msgid "Docking Bay Test"
-msgstr ""
+msgstr "Docking Bay Test"
 
 # Scenario description
 msgid "Test scenario for docking bay behaviors"
-msgstr ""
+msgstr "Test scenario for docking bay behaviours"

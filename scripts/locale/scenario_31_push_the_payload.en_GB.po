@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Push The Payload"
-msgstr ""
+msgstr "Push The Payload"
 
 # Scenario description
 msgid ""
@@ -13,220 +13,220 @@ msgid ""
 "Author: Chris Sibbitt and Crew\n"
 "Created: Jan2025\n"
 "Feedback: USN Discord: https://discord.gg/7Kr32ezJFF"
-msgstr ""
+msgstr "Deliver the payload of flowers to the opposing station in order to end the war\n\nDuration: As little as 30 mins on default settings\nPlayer ships: 1\n\nAuthor: Chris Sibbitt and Crew\nCreated: Jan2025\nFeedback: USN Discord: https://discord.gg/7Kr32ezJFF"
 
 # Scenario setting
 msgctxt "setting"
 msgid "WaveRandomNess"
-msgstr ""
+msgstr "WaveRandomNess"
 
 msgctxt "setting"
 msgid "Random variation in wave timing. Default is 0.25"
-msgstr ""
+msgstr "Random variation in wave timing. Default is 0.25"
 
 msgctxt "WaveRandomNess"
 msgid "0"
-msgstr ""
+msgstr "0"
 
 msgctxt "WaveRandomNess"
 msgid "Random variation in wave timing."
-msgstr ""
+msgstr "Random variation in wave timing."
 
 msgctxt "WaveRandomNess"
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 msgctxt "WaveRandomNess"
 msgid "0.25"
-msgstr ""
+msgstr "0.25"
 
 msgctxt "WaveRandomNess"
 msgid "Random variation in wave timing. (Default)"
-msgstr ""
+msgstr "Random variation in wave timing. (Default)"
 
 msgctxt "WaveRandomNess"
 msgid "0.5"
-msgstr ""
+msgstr "0.5"
 
 # Scenario setting
 msgctxt "setting"
 msgid "WaveTimer"
-msgstr ""
+msgstr "WaveTimer"
 
 msgctxt "setting"
 msgid "Display a wave timer in the Science/Ops console. Default is Disabled"
-msgstr ""
+msgstr "Display a wave timer in the Science/Ops console. Default is Disabled"
 
 msgctxt "WaveTimer"
 msgid "Disabled"
-msgstr ""
+msgstr "Disabled"
 
 msgctxt "WaveTimer"
 msgid "No visible wave timer (Default)"
-msgstr ""
+msgstr "No visible wave timer (Default)"
 
 msgctxt "WaveTimer"
 msgid "Enabled"
-msgstr ""
+msgstr "Enabled"
 
 msgctxt "WaveTimer"
 msgid "Display a wave timer in the Science/Ops console"
-msgstr ""
+msgstr "Display a wave timer in the Science/Ops console"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Resistance"
-msgstr ""
+msgstr "Resistance"
 
 msgctxt "setting"
 msgid "Resistance level. Default is Normal"
-msgstr ""
+msgstr "Resistance level. Default is Normal"
 
 msgctxt "Resistance"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Resistance"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Resistance"
 msgid "Normal (Default)"
-msgstr ""
+msgstr "Normal (Default)"
 
 msgctxt "Resistance"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Resistance"
 msgid "Nightmare"
-msgstr ""
+msgstr "Nightmare"
 
 # Scenario setting
 msgctxt "setting"
 msgid "TimeLimit"
-msgstr ""
+msgstr "TimeLimit"
 
 msgctxt "setting"
 msgid "Time limit before Kraylor victory. Default is 0 (no time limit)"
-msgstr ""
+msgstr "Time limit before Kraylor victory. Default is 0 (no time limit)"
 
 msgctxt "TimeLimit"
 msgid "0"
-msgstr ""
+msgstr "0"
 
 msgctxt "TimeLimit"
 msgid "No time limit (Default)"
-msgstr ""
+msgstr "No time limit (Default)"
 
 msgctxt "TimeLimit"
 msgid "15"
-msgstr ""
+msgstr "15"
 
 msgctxt "TimeLimit"
 msgid "15 mins"
-msgstr ""
+msgstr "15 mins"
 
 msgctxt "TimeLimit"
 msgid "30"
-msgstr ""
+msgstr "30"
 
 msgctxt "TimeLimit"
 msgid "30 mins"
-msgstr ""
+msgstr "30 mins"
 
 msgctxt "TimeLimit"
 msgid "60"
-msgstr ""
+msgstr "60"
 
 msgctxt "TimeLimit"
 msgid "1 hour"
-msgstr ""
+msgstr "1 hour"
 
 msgctxt "TimeLimit"
 msgid "90"
-msgstr ""
+msgstr "90"
 
 msgctxt "TimeLimit"
 msgid "1.5 hours"
-msgstr ""
+msgstr "1.5 hours"
 
 msgctxt "TimeLimit"
 msgid "120"
-msgstr ""
+msgstr "120"
 
 msgctxt "TimeLimit"
 msgid "2 hours"
-msgstr ""
+msgstr "2 hours"
 
 msgctxt "TimeLimit"
 msgid "180"
-msgstr ""
+msgstr "180"
 
 msgctxt "TimeLimit"
 msgid "3 hours"
-msgstr ""
+msgstr "3 hours"
 
 # Scenario setting
 msgctxt "setting"
 msgid "FieldSize"
-msgstr ""
+msgstr "FieldSize"
 
 msgctxt "setting"
 msgid ""
 "Distance between factions stations. Affects difficulty and time. Default is "
 "Medium"
-msgstr ""
+msgstr "Distance between factions stations. Affects difficulty and time. Default is Medium"
 
 msgctxt "FieldSize"
 msgid "50000"
-msgstr ""
+msgstr "50000"
 
 msgctxt "FieldSize"
 msgid "Tiny field size"
-msgstr ""
+msgstr "Tiny field size"
 
 msgctxt "FieldSize"
 msgid "75000"
-msgstr ""
+msgstr "75000"
 
 msgctxt "FieldSize"
 msgid "Small field size"
-msgstr ""
+msgstr "Small field size"
 
 msgctxt "FieldSize"
 msgid "100000"
-msgstr ""
+msgstr "100000"
 
 msgctxt "FieldSize"
 msgid "Medium field size (Default)"
-msgstr ""
+msgstr "Medium field size (Default)"
 
 msgctxt "FieldSize"
 msgid "150000"
-msgstr ""
+msgstr "150000"
 
 msgctxt "FieldSize"
 msgid "Large field size"
-msgstr ""
+msgstr "Large field size"
 
 msgctxt "FieldSize"
 msgid "200000"
-msgstr ""
+msgstr "200000"
 
 msgctxt "FieldSize"
 msgid "Extra Large"
-msgstr ""
+msgstr "Extra Large"
 
 #: scripts/scenario_31_push_the_payload.lua:61
 msgctxt "mission"
 msgid "Your Stn"
-msgstr ""
+msgstr "Your Stn"
 
 #: scripts/scenario_31_push_the_payload.lua:74
 msgctxt "mission"
 msgid "Kraylor Stn"
-msgstr ""
+msgstr "Kraylor Stn"
 
 #: scripts/scenario_31_push_the_payload.lua:244
 msgctxt "mission"
@@ -240,97 +240,97 @@ msgid ""
 "in order to end this war. Scan the alien artifact and stay close to it.\n"
 "\n"
 "The artifact is located in Sector "
-msgstr ""
+msgstr "The war with the Kraylor has been at a standstill for decades.\n\nOur scientists have discovered an alien artifact. Long range scans\nindicate that it is a bouquet of ancient flowers.\n\nBring the flowers to the enemy station as a gesture of good faith\nin order to end this war. Scan the alien artifact and stay close to it.\n\nThe artifact is located in Sector "
 
 #: scripts/scenario_31_push_the_payload.lua:423
 msgctxt "artifacts"
 msgid "Something to salvage"
-msgstr ""
+msgstr "Something to salvage"
 
 #: scripts/scenario_31_push_the_payload.lua:424
 msgctxt "artifacts"
 msgid "It looks like a "
-msgstr ""
+msgstr "It looks like a "
 
 #: scripts/scenario_31_push_the_payload.lua:439
 msgctxt "artifacts"
 msgid "Picked up a "
-msgstr ""
+msgstr "Picked up a "
 
 #: scripts/scenario_31_push_the_payload.lua:526
 #, lua-format
 msgctxt "station-comms"
 msgid "We sell %s for %d"
-msgstr ""
+msgstr "We sell %s for %d"
 
 #: scripts/scenario_31_push_the_payload.lua:534
 msgctxt "station-comms"
 msgid "You need?"
-msgstr ""
+msgstr "You need?"
 
 #: scripts/scenario_31_push_the_payload.lua:538
 #, lua-format
 msgctxt "station-comms"
 msgid "Buy full complement of %s (%d rep)"
-msgstr ""
+msgstr "Buy full complement of %s (%d rep)"
 
 #: scripts/scenario_31_push_the_payload.lua:555
 #, lua-format
 msgctxt "station-comms"
 msgid "You have purchased a full complement of %s."
-msgstr ""
+msgstr "You have purchased a full complement of %s."
 
 #: scripts/scenario_31_push_the_payload.lua:564
 msgctxt "station-comms"
 msgid "You do not have enough reputation points."
-msgstr ""
+msgstr "You do not have enough reputation points."
 
 #: scripts/scenario_31_push_the_payload.lua:572
 msgctxt "station-comms"
 msgid "Gossip with the locals about salvage"
-msgstr ""
+msgstr "Gossip with the locals about salvage"
 
 #: scripts/scenario_31_push_the_payload.lua:582
 #, lua-format
 msgctxt "station-comms"
 msgid "We've heard about some shiny things in sector %s."
-msgstr ""
+msgstr "We've heard about some shiny things in sector %s."
 
 #: scripts/scenario_31_push_the_payload.lua:591
 msgctxt "station-comms"
 msgid "No one seems to know of any more salvage to be had."
-msgstr ""
+msgstr "No one seems to know of any more salvage to be had."
 
 #: scripts/scenario_31_push_the_payload.lua:781
 msgctxt "payload-comms"
 msgid "What can I do for you?"
-msgstr ""
+msgstr "What can I do for you?"
 
 #: scripts/scenario_31_push_the_payload.lua:782
 msgctxt "payload-comms"
 msgid "Recalculate route"
-msgstr ""
+msgstr "Recalculate route"
 
 #: scripts/scenario_31_push_the_payload.lua:784
 msgctxt "payload-comms"
 msgid "Route recalculated."
-msgstr ""
+msgstr "Route recalculated."
 
 #: scripts/scenario_31_push_the_payload.lua:788
 msgctxt "payload-comms"
 msgid "No target set for the payload ship."
-msgstr ""
+msgstr "No target set for the payload ship."
 
 #: scripts/scenario_31_push_the_payload.lua:974
 #: scripts/scenario_31_push_the_payload.lua:975
 msgctxt "payload-comms"
 msgid "You are out of time!"
-msgstr ""
+msgstr "You are out of time!"
 
 #: scripts/scenario_31_push_the_payload.lua:995
 msgctxt "payload-comms"
 msgid "You need to be closer to the Payload to guide it."
-msgstr ""
+msgstr "You need to be closer to the Payload to guide it."
 
 #: scripts/scenario_31_push_the_payload.lua:1007
 #, lua-format
@@ -338,74 +338,74 @@ msgctxt "payload-comms"
 msgid ""
 "Must be clear of enemies before the Payload can move. The enemy has %d ships "
 "nearby."
-msgstr ""
+msgstr "Must be clear of enemies before the Payload can move. The enemy has %d ships nearby."
 
 #: scripts/scenario_31_push_the_payload.lua:1046
 msgctxt "payload-comms"
 msgid "DANGER, The payload is moving towards the Human Navy station!"
-msgstr ""
+msgstr "DANGER, The payload is moving towards the Human Navy station!"
 
 #: scripts/scenario_31_push_the_payload.lua:1054
 msgctxt "payload-comms"
 msgid "Payload is being delivered to the Kraylor station."
-msgstr ""
+msgstr "Payload is being delivered to the Kraylor station."
 
 #: scripts/scenario_31_push_the_payload.lua:1122
 msgctxt "wave-timer"
 msgid "Next wave: "
-msgstr ""
+msgstr "Next wave: "
 
 #: scripts/scenario_31_push_the_payload.lua:1130
 #: scripts/scenario_31_push_the_payload.lua:1135
 msgctxt "wave-timer"
 msgid "Next wave:"
-msgstr ""
+msgstr "Next wave:"
 
 #: scripts/scenario_31_push_the_payload.lua:1161
 msgctxt "payload-comms"
 msgid "Payload has stopped moving."
-msgstr ""
+msgstr "Payload has stopped moving."
 
 #: scripts/scenario_31_push_the_payload.lua:1243
 #, lua-format
 msgctxt "gm-buttons"
 msgid "Wave Time +15 (%ds)"
-msgstr ""
+msgstr "Wave Time +15 (%ds)"
 
 #: scripts/scenario_31_push_the_payload.lua:1252
 #, lua-format
 msgctxt "gm-buttons"
 msgid "Wave Time -15 (%ds)"
-msgstr ""
+msgstr "Wave Time -15 (%ds)"
 
 #: scripts/scenario_31_push_the_payload.lua:1260
 #, lua-format
 msgctxt "gm-buttons"
 msgid "Wave Size + (%d)"
-msgstr ""
+msgstr "Wave Size + (%d)"
 
 #: scripts/scenario_31_push_the_payload.lua:1266
 #, lua-format
 msgctxt "gm-buttons"
 msgid "Wave Size - (%d)"
-msgstr ""
+msgstr "Wave Size - (%d)"
 
 #: scripts/scenario_31_push_the_payload.lua:1271
 msgctxt "gm-buttons"
 msgid "Kraylor Wave"
-msgstr ""
+msgstr "Kraylor Wave"
 
 #: scripts/scenario_31_push_the_payload.lua:1274
 msgctxt "gm-buttons"
 msgid "Human Wave"
-msgstr ""
+msgstr "Human Wave"
 
 #: scripts/scenario_31_push_the_payload.lua:1277
 msgctxt "gm-buttons"
 msgid "Both Waves"
-msgstr ""
+msgstr "Both Waves"
 
 #: scripts/scenario_31_push_the_payload.lua:1280
 msgctxt "gm-buttons"
 msgid "New Payload Route"
-msgstr ""
+msgstr "New Payload Route"

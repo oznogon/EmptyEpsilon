@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Close the Gaps"
-msgstr ""
+msgstr "Close the Gaps"
 
 # Scenario description
 msgid ""
@@ -10,339 +10,339 @@ msgid ""
 "Version 2 - Jan2025\n"
 "\n"
 "Mission advice: It's better to hit an asteroid than a mine"
-msgstr ""
+msgstr "Using Nautilus class mine layer, lay mines across the space lanes expected to be used by invading enemies\n\nVersion 2 - Jan2025\n\nMission advice: It's better to hit an asteroid than a mine"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr ""
+msgstr "Enemies"
 
 msgctxt "setting"
 msgid "Configures strength and/or number of enemies in this scenario"
-msgstr ""
+msgstr "Configures strength and/or number of enemies in this scenario"
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Enemies"
 msgid "Fewer or weaker enemies"
-msgstr ""
+msgstr "Fewer or weaker enemies"
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Enemies"
 msgid "Normal number or strength of enemies"
-msgstr ""
+msgstr "Normal number or strength of enemies"
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Enemies"
 msgid "More or stronger enemies"
-msgstr ""
+msgstr "More or stronger enemies"
 
 msgctxt "Enemies"
 msgid "Extreme"
-msgstr ""
+msgstr "Extreme"
 
 msgctxt "Enemies"
 msgid "Much stronger, many more enemies"
-msgstr ""
+msgstr "Much stronger, many more enemies"
 
 msgctxt "Enemies"
 msgid "Quixotic"
-msgstr ""
+msgstr "Quixotic"
 
 msgctxt "Enemies"
 msgid "Insanely strong and/or inordinately large numbers of enemies"
-msgstr ""
+msgstr "Insanely strong and/or inordinately large numbers of enemies"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Murphy"
-msgstr ""
+msgstr "Murphy"
 
 msgctxt "setting"
 msgid "Configures the perversity of the universe according to Murphy's law"
-msgstr ""
+msgstr "Configures the perversity of the universe according to Murphy's law"
 
 msgctxt "Murphy"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Murphy"
 msgid "Random factors or puzzle difficulties are easier than normal"
-msgstr ""
+msgstr "Random factors or puzzle difficulties are easier than normal"
 
 msgctxt "Murphy"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Murphy"
 msgid "Random factors or puzzle difficulties are normal"
-msgstr ""
+msgstr "Random factors or puzzle difficulties are normal"
 
 msgctxt "Murphy"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Murphy"
 msgid "Random factors or puzzle difficulties are more challenging than normal"
-msgstr ""
+msgstr "Random factors or puzzle difficulties are more challenging than normal"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Timed"
-msgstr ""
+msgstr "Timed"
 
 msgctxt "setting"
 msgid ""
 "Sets whether or not the scenario has a time limit. Default is no time limit"
-msgstr ""
+msgstr "Sets whether or not the scenario has a time limit. Default is no time limit"
 
 msgctxt "Timed"
 msgid "None"
-msgstr ""
+msgstr "None"
 
 msgctxt "Timed"
 msgid "No time limit"
-msgstr ""
+msgstr "No time limit"
 
 msgctxt "Timed"
 msgid "30"
-msgstr ""
+msgstr "30"
 
 msgctxt "Timed"
 msgid "Scenario ends in 30 minutes"
-msgstr ""
+msgstr "Scenario ends in 30 minutes"
 
 msgctxt "Timed"
 msgid "40"
-msgstr ""
+msgstr "40"
 
 msgctxt "Timed"
 msgid "Scenario ends in 40 minutes"
-msgstr ""
+msgstr "Scenario ends in 40 minutes"
 
 msgctxt "Timed"
 msgid "45"
-msgstr ""
+msgstr "45"
 
 msgctxt "Timed"
 msgid "Scenario ends in 45 minutes"
-msgstr ""
+msgstr "Scenario ends in 45 minutes"
 
 msgctxt "Timed"
 msgid "50"
-msgstr ""
+msgstr "50"
 
 msgctxt "Timed"
 msgid "Scenario ends in 50 minutes"
-msgstr ""
+msgstr "Scenario ends in 50 minutes"
 
 msgctxt "Timed"
 msgid "55"
-msgstr ""
+msgstr "55"
 
 msgctxt "Timed"
 msgid "Scenario ends in 55 minutes"
-msgstr ""
+msgstr "Scenario ends in 55 minutes"
 
 msgctxt "Timed"
 msgid "60"
-msgstr ""
+msgstr "60"
 
 msgctxt "Timed"
 msgid "Scenario ends in 60 minutes"
-msgstr ""
+msgstr "Scenario ends in 60 minutes"
 
 msgctxt "Timed"
 msgid "70"
-msgstr ""
+msgstr "70"
 
 msgctxt "Timed"
 msgid "Scenario ends in 70 minutes"
-msgstr ""
+msgstr "Scenario ends in 70 minutes"
 
 msgctxt "Timed"
 msgid "80"
-msgstr ""
+msgstr "80"
 
 msgctxt "Timed"
 msgid "Scenario ends in 80 minutes"
-msgstr ""
+msgstr "Scenario ends in 80 minutes"
 
 msgctxt "Timed"
 msgid "90"
-msgstr ""
+msgstr "90"
 
 msgctxt "Timed"
 msgid "Scenario ends in 90 minutes"
-msgstr ""
+msgstr "Scenario ends in 90 minutes"
 
 #: scripts/scenario_15_close_the_gaps.lua:650
 msgctxt "trade-comms"
 msgid "food"
-msgstr ""
+msgstr "food"
 
 #: scripts/scenario_15_close_the_gaps.lua:651
 msgctxt "trade-comms"
 msgid "medicine"
-msgstr ""
+msgstr "medicine"
 
 #: scripts/scenario_15_close_the_gaps.lua:652
 msgctxt "trade-comms"
 msgid "luxury"
-msgstr ""
+msgstr "luxury"
 
 #: scripts/scenario_15_close_the_gaps.lua:653
 msgctxt "trade-comms"
 msgid "cobalt"
-msgstr ""
+msgstr "cobalt"
 
 #: scripts/scenario_15_close_the_gaps.lua:654
 msgctxt "trade-comms"
 msgid "dilithium"
-msgstr ""
+msgstr "dilithium"
 
 #: scripts/scenario_15_close_the_gaps.lua:655
 msgctxt "trade-comms"
 msgid "gold"
-msgstr ""
+msgstr "gold"
 
 #: scripts/scenario_15_close_the_gaps.lua:656
 msgctxt "trade-comms"
 msgid "nickel"
-msgstr ""
+msgstr "nickel"
 
 #: scripts/scenario_15_close_the_gaps.lua:657
 msgctxt "trade-comms"
 msgid "platinum"
-msgstr ""
+msgstr "platinum"
 
 #: scripts/scenario_15_close_the_gaps.lua:658
 msgctxt "trade-comms"
 msgid "tritanium"
-msgstr ""
+msgstr "tritanium"
 
 #: scripts/scenario_15_close_the_gaps.lua:659
 msgctxt "trade-comms"
 msgid "autodoc"
-msgstr ""
+msgstr "autodoc"
 
 #: scripts/scenario_15_close_the_gaps.lua:660
 msgctxt "trade-comms"
 msgid "android"
-msgstr ""
+msgstr "android"
 
 #: scripts/scenario_15_close_the_gaps.lua:661
 msgctxt "trade-comms"
 msgid "battery"
-msgstr ""
+msgstr "battery"
 
 #: scripts/scenario_15_close_the_gaps.lua:662
 msgctxt "trade-comms"
 msgid "beam"
-msgstr ""
+msgstr "beam"
 
 #: scripts/scenario_15_close_the_gaps.lua:663
 msgctxt "trade-comms"
 msgid "circuit"
-msgstr ""
+msgstr "circuit"
 
 #: scripts/scenario_15_close_the_gaps.lua:664
 msgctxt "trade-comms"
 msgid "communication"
-msgstr ""
+msgstr "communication"
 
 #: scripts/scenario_15_close_the_gaps.lua:665
 msgctxt "trade-comms"
 msgid "filament"
-msgstr ""
+msgstr "filament"
 
 #: scripts/scenario_15_close_the_gaps.lua:666
 msgctxt "trade-comms"
 msgid "impulse"
-msgstr ""
+msgstr "impulse"
 
 #: scripts/scenario_15_close_the_gaps.lua:667
 msgctxt "trade-comms"
 msgid "lifter"
-msgstr ""
+msgstr "lifter"
 
 #: scripts/scenario_15_close_the_gaps.lua:668
 msgctxt "trade-comms"
 msgid "nanites"
-msgstr ""
+msgstr "nanites"
 
 #: scripts/scenario_15_close_the_gaps.lua:669
 msgctxt "trade-comms"
 msgid "optic"
-msgstr ""
+msgstr "optic"
 
 #: scripts/scenario_15_close_the_gaps.lua:670
 msgctxt "trade-comms"
 msgid "repulsor"
-msgstr ""
+msgstr "repulsor"
 
 #: scripts/scenario_15_close_the_gaps.lua:671
 msgctxt "trade-comms"
 msgid "robotic"
-msgstr ""
+msgstr "robotic"
 
 #: scripts/scenario_15_close_the_gaps.lua:672
 msgctxt "trade-comms"
 msgid "sensor"
-msgstr ""
+msgstr "sensor"
 
 #: scripts/scenario_15_close_the_gaps.lua:673
 msgctxt "trade-comms"
 msgid "shield"
-msgstr ""
+msgstr "shield"
 
 #: scripts/scenario_15_close_the_gaps.lua:674
 msgctxt "trade-comms"
 msgid "software"
-msgstr ""
+msgstr "software"
 
 #: scripts/scenario_15_close_the_gaps.lua:675
 msgctxt "trade-comms"
 msgid "tractor"
-msgstr ""
+msgstr "tractor"
 
 #: scripts/scenario_15_close_the_gaps.lua:676
 msgctxt "trade-comms"
 msgid "transporter"
-msgstr ""
+msgstr "transporter"
 
 #: scripts/scenario_15_close_the_gaps.lua:677
 msgctxt "trade-comms"
 msgid "warp"
-msgstr ""
+msgstr "warp"
 
 #: scripts/scenario_15_close_the_gaps.lua:678
 msgctxt "trade-comms"
 msgid "gold pressed latinum"
-msgstr ""
+msgstr "gold pressed latinum"
 
 #: scripts/scenario_15_close_the_gaps.lua:679
 msgctxt "trade-comms"
 msgid "unobtanium"
-msgstr ""
+msgstr "unobtanium"
 
 #: scripts/scenario_15_close_the_gaps.lua:680
 msgctxt "trade-comms"
 msgid "eludium"
-msgstr ""
+msgstr "eludium"
 
 #: scripts/scenario_15_close_the_gaps.lua:681
 msgctxt "trade-comms"
 msgid "impossibrium"
-msgstr ""
+msgstr "impossibrium"
 
 #: scripts/scenario_15_close_the_gaps.lua:770
 #: scripts/scenario_15_close_the_gaps.lua:1025
@@ -350,92 +350,92 @@ msgstr ""
 #: scripts/scenario_15_close_the_gaps.lua:1030
 msgctxt "buttonGM"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: scripts/scenario_15_close_the_gaps.lua:990
 msgctxt "diagnosticState"
 msgid "true"
-msgstr ""
+msgstr "true"
 
 #: scripts/scenario_15_close_the_gaps.lua:992
 msgctxt "diagnosticState"
 msgid "false"
-msgstr ""
+msgstr "false"
 
 #: scripts/scenario_15_close_the_gaps.lua:995
 #, lua-format
 msgctxt "buttonGM"
 msgid "Diagnostic %s"
-msgstr ""
+msgstr "Diagnostic %s"
 
 #: scripts/scenario_15_close_the_gaps.lua:1007
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Delay %s"
-msgstr ""
+msgstr "+Delay %s"
 
 #: scripts/scenario_15_close_the_gaps.lua:1013
 msgctxt "buttonGM"
 msgid "-Main from delay"
-msgstr ""
+msgstr "-Main from delay"
 
 #: scripts/scenario_15_close_the_gaps.lua:1015
 #: scripts/scenario_15_close_the_gaps.lua:1016
 #: scripts/scenario_15_close_the_gaps.lua:1020
 msgctxt "buttonGM"
 msgid "Slow"
-msgstr ""
+msgstr "Slow"
 
 #: scripts/scenario_15_close_the_gaps.lua:1035
 #: scripts/scenario_15_close_the_gaps.lua:1036
 #: scripts/scenario_15_close_the_gaps.lua:1040
 msgctxt "buttonGM"
 msgid "Fast"
-msgstr ""
+msgstr "Fast"
 
 #: scripts/scenario_15_close_the_gaps.lua:1446
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
-msgstr ""
+msgstr "We are under attack! No time for chatting!"
 
 #: scripts/scenario_15_close_the_gaps.lua:1461
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?\n"
-msgstr ""
+msgstr "Good day, officer!\nWhat can we do for you today?\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:1464
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
-msgstr ""
+msgstr "Welcome to our lovely station.\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:1470
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
-msgstr ""
+msgstr "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
 
 #: scripts/scenario_15_close_the_gaps.lua:1499
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr ""
+msgstr "I need ordnance restocked"
 
 #: scripts/scenario_15_close_the_gaps.lua:1501
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr ""
+msgstr "What type of ordnance?"
 
 #: scripts/scenario_15_close_the_gaps.lua:1507
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
-msgstr ""
+msgstr "Can you supply us with some nukes? ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1512
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr ""
+msgstr "We really need some nukes ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1517
 #: scripts/scenario_15_close_the_gaps.lua:1539
@@ -445,68 +445,68 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr ""
+msgstr "%s%d rep each)"
 
 #: scripts/scenario_15_close_the_gaps.lua:1532
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr ""
+msgstr "Please re-stock our EMP missiles. ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1535
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
-msgstr ""
+msgstr "Got any EMPs? ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1554
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr ""
+msgstr "Do you have spare homing missiles for us? ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1559
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr ""
+msgstr "Do you have extra homing missiles? ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1577
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr ""
+msgstr "We could use some mines. ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1578
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr ""
+msgstr "How about mines? ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1579
 msgctxt "ammo-comms"
 msgid "More mines ("
-msgstr ""
+msgstr "More mines ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1580
 msgctxt "ammo-comms"
 msgid "All the mines we can take. ("
-msgstr ""
+msgstr "All the mines we can take. ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1581
 msgctxt "ammo-comms"
 msgid "Mines! What else? ("
-msgstr ""
+msgstr "Mines! What else? ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1599
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
-msgstr ""
+msgstr "What about HVLI? ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1602
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
-msgstr ""
+msgstr "Could you provide HVLI? ("
 
 #: scripts/scenario_15_close_the_gaps.lua:1622
 #: scripts/scenario_15_close_the_gaps.lua:2985
 msgctxt "orders-comms"
 msgid "What are my current orders?"
-msgstr ""
+msgstr "What are my current orders?"
 
 #: scripts/scenario_15_close_the_gaps.lua:1632
 #, lua-format
@@ -514,13 +514,13 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   %i Minutes remain in game"
-msgstr ""
+msgstr "\n   %i Minutes remain in game"
 
 #: scripts/scenario_15_close_the_gaps.lua:1638
 #: scripts/scenario_15_close_the_gaps.lua:3003
 msgctxt "minefield-comms"
 msgid "What is a minefield?"
-msgstr ""
+msgstr "What is a minefield?"
 
 #: scripts/scenario_15_close_the_gaps.lua:1643
 #: scripts/scenario_15_close_the_gaps.lua:3008
@@ -529,7 +529,7 @@ msgctxt "minefield-comms"
 msgid ""
 "For the automated sensors on station %s to register a minefield as completed "
 "across a gap, it must meet the following criteria:"
-msgstr ""
+msgstr "For the automated sensors on station %s to register a minefield as completed across a gap, it must meet the following criteria:"
 
 #: scripts/scenario_15_close_the_gaps.lua:1650
 #: scripts/scenario_15_close_the_gaps.lua:3015
@@ -538,7 +538,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "   1. Must contain at least 12 mines: Nautilus class standard load"
-msgstr ""
+msgstr "%s\n   1. Must contain at least 12 mines: Nautilus class standard load"
 
 #: scripts/scenario_15_close_the_gaps.lua:1657
 #: scripts/scenario_15_close_the_gaps.lua:3022
@@ -547,7 +547,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "   2. Must be within a 1.5U radius of sector corner in gap"
-msgstr ""
+msgstr "%s\n   2. Must be within a 1.5U radius of sector corner in gap"
 
 #: scripts/scenario_15_close_the_gaps.lua:1665
 #: scripts/scenario_15_close_the_gaps.lua:3030
@@ -556,7 +556,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "   3. Must be centered: 6 on one side and 6 on the other"
-msgstr ""
+msgstr "%s\n   3. Must be centred: 6 on one side and 6 on the other"
 
 #: scripts/scenario_15_close_the_gaps.lua:1674
 #: scripts/scenario_15_close_the_gaps.lua:3039
@@ -565,31 +565,31 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "   4. Must be along 20U distance from station line connecting asteroids"
-msgstr ""
+msgstr "%s\n   4. Must be along 20U distance from station line connecting asteroids"
 
 #: scripts/scenario_15_close_the_gaps.lua:1684
 #: scripts/scenario_15_close_the_gaps.lua:3049
 msgctxt "minefield-comms"
 msgid "What do the sensors show for the north gap?"
-msgstr ""
+msgstr "What do the sensors show for the north gap?"
 
 #: scripts/scenario_15_close_the_gaps.lua:1693
 #: scripts/scenario_15_close_the_gaps.lua:3058
 msgctxt "minefield-comms"
 msgid "What do the sensors show for the south gap?"
-msgstr ""
+msgstr "What do the sensors show for the south gap?"
 
 #: scripts/scenario_15_close_the_gaps.lua:1702
 #: scripts/scenario_15_close_the_gaps.lua:3067
 msgctxt "minefield-comms"
 msgid "What do the sensors show for the east gap?"
-msgstr ""
+msgstr "What do the sensors show for the east gap?"
 
 #: scripts/scenario_15_close_the_gaps.lua:1711
 #: scripts/scenario_15_close_the_gaps.lua:3076
 msgctxt "minefield-comms"
 msgid "What do the sensors show for the west gap?"
-msgstr ""
+msgstr "What do the sensors show for the west gap?"
 
 #: scripts/scenario_15_close_the_gaps.lua:1716
 #: scripts/scenario_15_close_the_gaps.lua:1719
@@ -640,57 +640,57 @@ msgstr ""
 #: scripts/scenario_15_close_the_gaps.lua:3903
 #: scripts/scenario_15_close_the_gaps.lua:3985
 msgid "Back"
-msgstr ""
+msgstr "Back"
 
 #: scripts/scenario_15_close_the_gaps.lua:1734
 #: scripts/scenario_15_close_the_gaps.lua:1767
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr ""
+msgstr "Recruit repair crew member for %i reputation"
 
 #: scripts/scenario_15_close_the_gaps.lua:1741
 #: scripts/scenario_15_close_the_gaps.lua:1774
 #: scripts/scenario_15_close_the_gaps.lua:3751
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr ""
+msgstr "Insufficient reputation"
 
 #: scripts/scenario_15_close_the_gaps.lua:1748
 #: scripts/scenario_15_close_the_gaps.lua:1781
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
-msgstr ""
+msgstr "Repair crew member hired"
 
 #: scripts/scenario_15_close_the_gaps.lua:1790
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr ""
+msgstr "Tell me more about your station"
 
 #: scripts/scenario_15_close_the_gaps.lua:1793
 msgctxt "station-comms"
 msgid "What would you like to know?"
-msgstr ""
+msgstr "What would you like to know?"
 
 #: scripts/scenario_15_close_the_gaps.lua:1796
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
-msgstr ""
+msgstr "General information"
 
 #: scripts/scenario_15_close_the_gaps.lua:1804
 msgctxt "stationStory-comms"
 msgid "Station history"
-msgstr ""
+msgstr "Station history"
 
 #: scripts/scenario_15_close_the_gaps.lua:1815
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr ""
+msgstr "Gossip"
 
 #: scripts/scenario_15_close_the_gaps.lua:1834
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
-msgstr ""
+msgstr "Buy, sell, trade"
 
 #: scripts/scenario_15_close_the_gaps.lua:1838
 #, lua-format
@@ -698,50 +698,50 @@ msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available for sale: quantity, cost in reputation\n"
-msgstr ""
+msgstr "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:1844
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s     %s: %i, %i\n"
-msgstr ""
+msgstr "%s     %s: %i, %i\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:1855
 #, lua-format
 msgctxt "trade-comms"
 msgid "%sGoods or components station will buy: price in reputation\n"
-msgstr ""
+msgstr "%sGoods or components station will buy: price in reputation\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:1861
 #: scripts/scenario_15_close_the_gaps.lua:1879
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s     %s: %i\n"
-msgstr ""
+msgstr "%s     %s: %i\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:1869
 #, lua-format
 msgctxt "trade-comms"
 msgid "%sCurrent cargo aboard %s:\n"
-msgstr ""
+msgstr "%sCurrent cargo aboard %s:\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:1888
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s     Empty\n"
-msgstr ""
+msgstr "%s     Empty\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:1895
 #, lua-format
 msgctxt "trade-comms"
 msgid "%sAvailable Space: %i, Available Reputation: %i\n"
-msgstr ""
+msgstr "%sAvailable Space: %i, Available Reputation: %i\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:1905
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr ""
+msgstr "Buy one %s for %i reputation"
 
 #: scripts/scenario_15_close_the_gaps.lua:1914
 #: scripts/scenario_15_close_the_gaps.lua:2007
@@ -751,13 +751,13 @@ msgstr ""
 #: scripts/scenario_15_close_the_gaps.lua:2623
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
-msgstr ""
+msgstr "You need to stay docked for that action."
 
 #: scripts/scenario_15_close_the_gaps.lua:1920
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr ""
+msgstr "Type: %s, Quantity: %i, Rep: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:1929
 #, lua-format
@@ -765,7 +765,7 @@ msgctxt "trade-comms"
 msgid ""
 "%s\n"
 "Insufficient cargo space for purchase"
-msgstr ""
+msgstr "%s\nInsufficient cargo space for purchase"
 
 #: scripts/scenario_15_close_the_gaps.lua:1940
 #: scripts/scenario_15_close_the_gaps.lua:1976
@@ -774,7 +774,7 @@ msgctxt "needRep-comms"
 msgid ""
 "%s\n"
 "Insufficient reputation for purchase"
-msgstr ""
+msgstr "%s\nInsufficient reputation for purchase"
 
 #: scripts/scenario_15_close_the_gaps.lua:1948
 #: scripts/scenario_15_close_the_gaps.lua:2075
@@ -785,7 +785,7 @@ msgctxt "trade-comms"
 msgid ""
 "%s\n"
 "Insufficient station inventory"
-msgstr ""
+msgstr "%s\nInsufficient station inventory"
 
 #: scripts/scenario_15_close_the_gaps.lua:1969
 #, lua-format
@@ -793,19 +793,19 @@ msgctxt "trade-comms"
 msgid ""
 "%s\n"
 "purchased"
-msgstr ""
+msgstr "%s\npurchased"
 
 #: scripts/scenario_15_close_the_gaps.lua:1997
 #, lua-format
 msgctxt "trade-comms"
 msgid "Sell one %s for %i reputation"
-msgstr ""
+msgstr "Sell one %s for %i reputation"
 
 #: scripts/scenario_15_close_the_gaps.lua:2015
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
-msgstr ""
+msgstr "Type: %s,  Reputation price: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2024
 #, lua-format
@@ -813,13 +813,13 @@ msgctxt "trade-comms"
 msgid ""
 "%s\n"
 "One sold"
-msgstr ""
+msgstr "%s\nOne sold"
 
 #: scripts/scenario_15_close_the_gaps.lua:2044
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr ""
+msgstr "Trade food for %s"
 
 #: scripts/scenario_15_close_the_gaps.lua:2065
 #: scripts/scenario_15_close_the_gaps.lua:2145
@@ -827,7 +827,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr ""
+msgstr "Type: %s,  Quantity: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2098
 #, lua-format
@@ -835,13 +835,13 @@ msgctxt "trade-comms"
 msgid ""
 "%s\n"
 "Traded"
-msgstr ""
+msgstr "%s\nTraded"
 
 #: scripts/scenario_15_close_the_gaps.lua:2123
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr ""
+msgstr "Trade medicine for %s"
 
 #: scripts/scenario_15_close_the_gaps.lua:2176
 #: scripts/scenario_15_close_the_gaps.lua:2250
@@ -849,20 +849,20 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "Traded"
-msgstr ""
+msgstr "\nTraded"
 
 #: scripts/scenario_15_close_the_gaps.lua:2198
 #: scripts/scenario_15_close_the_gaps.lua:3623
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
-msgstr ""
+msgstr "Trade luxury for %s"
 
 #: scripts/scenario_15_close_the_gaps.lua:2272
 #: scripts/scenario_15_close_the_gaps.lua:3566
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr ""
+msgstr "Jettison cargo"
 
 #: scripts/scenario_15_close_the_gaps.lua:2277
 #: scripts/scenario_15_close_the_gaps.lua:3571
@@ -871,19 +871,19 @@ msgctxt "trade-comms"
 msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
-msgstr ""
+msgstr "Available space: %i\nWhat would you like to jettison?"
 
 #: scripts/scenario_15_close_the_gaps.lua:2290
 #: scripts/scenario_15_close_the_gaps.lua:3586
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr ""
+msgstr "One %s jettisoned"
 
 #: scripts/scenario_15_close_the_gaps.lua:2304
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr ""
+msgstr "No tutorial covered goods or cargo. Explain"
 
 #: scripts/scenario_15_close_the_gaps.lua:2310
 msgctxt "explainGoods-comms"
@@ -894,13 +894,13 @@ msgid ""
 "cargo. Each player ship differs in cargo carrying capacity. Goods may be "
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
-msgstr ""
+msgstr "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"
 
 #: scripts/scenario_15_close_the_gaps.lua:2321
 #, lua-format
 msgctxt "minefield-comms"
 msgid "Count within 1.5U radius: %i."
-msgstr ""
+msgstr "Count within 1.5U radius: %i."
 
 #: scripts/scenario_15_close_the_gaps.lua:2325
 #: scripts/scenario_15_close_the_gaps.lua:2395
@@ -911,7 +911,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "You need twelve."
-msgstr ""
+msgstr "%s\nYou need twelve."
 
 #: scripts/scenario_15_close_the_gaps.lua:2332
 #, lua-format
@@ -919,7 +919,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near middle on the right: %i."
-msgstr ""
+msgstr "%s\nCount near middle on the right: %i."
 
 #: scripts/scenario_15_close_the_gaps.lua:2337
 #, lua-format
@@ -927,7 +927,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near middle on the left: %i."
-msgstr ""
+msgstr "%s\nCount near middle on the left: %i."
 
 #: scripts/scenario_15_close_the_gaps.lua:2342
 #, lua-format
@@ -935,7 +935,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near asteroids on the left: %i."
-msgstr ""
+msgstr "%s\nCount near asteroids on the left: %i."
 
 #: scripts/scenario_15_close_the_gaps.lua:2347
 #, lua-format
@@ -943,7 +943,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near asteroids on the right: %i."
-msgstr ""
+msgstr "%s\nCount near asteroids on the right: %i."
 
 #: scripts/scenario_15_close_the_gaps.lua:2354
 #, lua-format
@@ -952,7 +952,7 @@ msgid ""
 "%s\n"
 "\n"
 "You need three in each sensor scan area."
-msgstr ""
+msgstr "%s\n\nYou need three in each sensor scan area."
 
 #: scripts/scenario_15_close_the_gaps.lua:2360
 #, lua-format
@@ -960,7 +960,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count on the right: %i."
-msgstr ""
+msgstr "%s\nCount on the right: %i."
 
 #: scripts/scenario_15_close_the_gaps.lua:2365
 #, lua-format
@@ -968,7 +968,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count on the left: %i."
-msgstr ""
+msgstr "%s\nCount on the left: %i."
 
 #: scripts/scenario_15_close_the_gaps.lua:2370
 #, lua-format
@@ -977,7 +977,7 @@ msgid ""
 "%s\n"
 "\n"
 "You need six in each sensor scan area."
-msgstr ""
+msgstr "%s\n\nYou need six in each sensor scan area."
 
 #: scripts/scenario_15_close_the_gaps.lua:2375
 #, lua-format
@@ -985,7 +985,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Sensors refresh every %i seconds."
-msgstr ""
+msgstr "%s\nSensors refresh every %i seconds."
 
 #: scripts/scenario_15_close_the_gaps.lua:2380
 #: scripts/scenario_15_close_the_gaps.lua:2450
@@ -996,13 +996,13 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Next refresh in approximately %i seconds."
-msgstr ""
+msgstr "%s\nNext refresh in approximately %i seconds."
 
 #: scripts/scenario_15_close_the_gaps.lua:2391
 #, lua-format
 msgctxt "minefield-comms"
 msgid "Count within 1.5U radius: %i"
-msgstr ""
+msgstr "Count within 1.5U radius: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2402
 #, lua-format
@@ -1010,7 +1010,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near middle on the right: %i"
-msgstr ""
+msgstr "%s\nCount near middle on the right: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2407
 #, lua-format
@@ -1018,7 +1018,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near middle on the left: %i"
-msgstr ""
+msgstr "%s\nCount near middle on the left: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2412
 #, lua-format
@@ -1026,7 +1026,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near asteroids on the left: %i"
-msgstr ""
+msgstr "%s\nCount near asteroids on the left: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2417
 #, lua-format
@@ -1034,7 +1034,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near asteroids on the right: %i"
-msgstr ""
+msgstr "%s\nCount near asteroids on the right: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2424
 #: scripts/scenario_15_close_the_gaps.lua:2499
@@ -1045,7 +1045,7 @@ msgid ""
 "%s\n"
 "\n"
 "You need three in each sensor scan area"
-msgstr ""
+msgstr "%s\n\nYou need three in each sensor scan area"
 
 #: scripts/scenario_15_close_the_gaps.lua:2430
 #, lua-format
@@ -1053,7 +1053,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count on the right: %i"
-msgstr ""
+msgstr "%s\nCount on the right: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2435
 #, lua-format
@@ -1061,7 +1061,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count on the left: %i"
-msgstr ""
+msgstr "%s\nCount on the left: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2440
 #: scripts/scenario_15_close_the_gaps.lua:2515
@@ -1072,7 +1072,7 @@ msgid ""
 "%s\n"
 "\n"
 "You need six in each sensor scan area"
-msgstr ""
+msgstr "%s\n\nYou need six in each sensor scan area"
 
 #: scripts/scenario_15_close_the_gaps.lua:2445
 #: scripts/scenario_15_close_the_gaps.lua:2520
@@ -1082,14 +1082,14 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Sensors refresh every %i seconds"
-msgstr ""
+msgstr "%s\nSensors refresh every %i seconds"
 
 #: scripts/scenario_15_close_the_gaps.lua:2461
 #: scripts/scenario_15_close_the_gaps.lua:2536
 #, lua-format
 msgctxt "minefield-comms"
 msgid "Count within radius: %i"
-msgstr ""
+msgstr "Count within radius: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2477
 #: scripts/scenario_15_close_the_gaps.lua:2552
@@ -1098,7 +1098,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near middle below: %i"
-msgstr ""
+msgstr "%s\nCount near middle below: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2482
 #: scripts/scenario_15_close_the_gaps.lua:2557
@@ -1107,7 +1107,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near middle above: %i"
-msgstr ""
+msgstr "%s\nCount near middle above: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2487
 #: scripts/scenario_15_close_the_gaps.lua:2562
@@ -1116,7 +1116,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near asteroids above: %i"
-msgstr ""
+msgstr "%s\nCount near asteroids above: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2492
 #: scripts/scenario_15_close_the_gaps.lua:2567
@@ -1125,7 +1125,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count near asteroids below: %i"
-msgstr ""
+msgstr "%s\nCount near asteroids below: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2505
 #: scripts/scenario_15_close_the_gaps.lua:2580
@@ -1134,7 +1134,7 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count below: %i"
-msgstr ""
+msgstr "%s\nCount below: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2510
 #: scripts/scenario_15_close_the_gaps.lua:2585
@@ -1143,63 +1143,63 @@ msgctxt "minefield-comms"
 msgid ""
 "%s\n"
 "Count above: %i"
-msgstr ""
+msgstr "%s\nCount above: %i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2632
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr ""
+msgstr "We do not deal in weapons of mass destruction."
 
 #: scripts/scenario_15_close_the_gaps.lua:2637
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr ""
+msgstr "We do not deal in weapons of mass disruption."
 
 #: scripts/scenario_15_close_the_gaps.lua:2640
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr ""
+msgstr "We do not deal in those weapons."
 
 #: scripts/scenario_15_close_the_gaps.lua:2654
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr ""
+msgstr "All nukes are charged and primed for destruction."
 
 #: scripts/scenario_15_close_the_gaps.lua:2661
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
-msgstr ""
+msgstr "Sorry, sir, but you are as fully stocked as I can allow."
 
 #: scripts/scenario_15_close_the_gaps.lua:2670
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
-msgstr ""
+msgstr "Not enough reputation."
 
 #: scripts/scenario_15_close_the_gaps.lua:2684
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr ""
+msgstr "You are fully loaded and ready to explode things."
 
 #: scripts/scenario_15_close_the_gaps.lua:2691
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
-msgstr ""
+msgstr "We generously resupplied you with some weapon charges.\nPut them to good use."
 
 #: scripts/scenario_15_close_the_gaps.lua:2709
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
-msgstr ""
+msgstr "Good day, officer.\nIf you need supplies, please dock with us first."
 
 #: scripts/scenario_15_close_the_gaps.lua:2714
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
-msgstr ""
+msgstr "Greetings.\nIf you want to do business, please dock with us first."
 
 #: scripts/scenario_15_close_the_gaps.lua:2721
 msgctxt "station-comms"
@@ -1207,22 +1207,22 @@ msgid ""
 "\n"
 "Be aware that if enemies in the area get much closer, we will be too busy to "
 "conduct business with you."
-msgstr ""
+msgstr "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
 
 #: scripts/scenario_15_close_the_gaps.lua:2736
 msgctxt "station-comms"
 msgid "I need information"
-msgstr ""
+msgstr "I need information"
 
 #: scripts/scenario_15_close_the_gaps.lua:2738
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
-msgstr ""
+msgstr "What kind of information do you need?"
 
 #: scripts/scenario_15_close_the_gaps.lua:2741
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
-msgstr ""
+msgstr "What ordnance do you have available for restock?"
 
 #: scripts/scenario_15_close_the_gaps.lua:2747
 #, lua-format
@@ -1230,7 +1230,7 @@ msgctxt "ammo-comms"
 msgid ""
 "%s\n"
 "   Nuke"
-msgstr ""
+msgstr "%s\n   Nuke"
 
 #: scripts/scenario_15_close_the_gaps.lua:2751
 #, lua-format
@@ -1238,7 +1238,7 @@ msgctxt "ammo-comms"
 msgid ""
 "%s\n"
 "   EMP"
-msgstr ""
+msgstr "%s\n   EMP"
 
 #: scripts/scenario_15_close_the_gaps.lua:2755
 #, lua-format
@@ -1246,7 +1246,7 @@ msgctxt "ammo-comms"
 msgid ""
 "%s\n"
 "   Homing"
-msgstr ""
+msgstr "%s\n   Homing"
 
 #: scripts/scenario_15_close_the_gaps.lua:2759
 #, lua-format
@@ -1254,7 +1254,7 @@ msgctxt "ammo-comms"
 msgid ""
 "%s\n"
 "   Mine"
-msgstr ""
+msgstr "%s\n   Mine"
 
 #: scripts/scenario_15_close_the_gaps.lua:2763
 #, lua-format
@@ -1262,29 +1262,29 @@ msgctxt "ammo-comms"
 msgid ""
 "%s\n"
 "   HVLI"
-msgstr ""
+msgstr "%s\n   HVLI"
 
 #: scripts/scenario_15_close_the_gaps.lua:2768
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
-msgstr ""
+msgstr "We have no ordnance available for restock"
 
 #: scripts/scenario_15_close_the_gaps.lua:2774
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr ""
+msgstr "We have the following type of ordnance available for restock:%s"
 
 #: scripts/scenario_15_close_the_gaps.lua:2782
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr ""
+msgstr "We have the following types of ordnance available for restock:%s"
 
 #: scripts/scenario_15_close_the_gaps.lua:2803
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
-msgstr ""
+msgstr "What goods do you have available for sale or trade?"
 
 #: scripts/scenario_15_close_the_gaps.lua:2809
 #, lua-format
@@ -1292,7 +1292,7 @@ msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available: quantity, cost in reputation"
-msgstr ""
+msgstr "Station %s:\nGoods or components available: quantity, cost in reputation"
 
 #: scripts/scenario_15_close_the_gaps.lua:2815
 #, lua-format
@@ -1300,51 +1300,51 @@ msgctxt "trade-comms"
 msgid ""
 "%s\n"
 "   %14s: %2i, %3i"
-msgstr ""
+msgstr "%s\n   %14s: %2i, %3i"
 
 #: scripts/scenario_15_close_the_gaps.lua:2828
 msgctxt "helpfullWarning-comms"
 msgid "See any enemies in your area?"
-msgstr ""
+msgstr "See any enemies in your area?"
 
 #: scripts/scenario_15_close_the_gaps.lua:2843
 #, lua-format
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see %i enemies within 30U"
-msgstr ""
+msgstr "Yes, we see %i enemies within 30U"
 
 #: scripts/scenario_15_close_the_gaps.lua:2852
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see one enemy within 30U"
-msgstr ""
+msgstr "Yes, we see one enemy within 30U"
 
 #: scripts/scenario_15_close_the_gaps.lua:2859
 msgctxt "helpfullWarning-comms"
 msgid "No enemies within 30U"
-msgstr ""
+msgstr "No enemies within 30U"
 
 #: scripts/scenario_15_close_the_gaps.lua:2865
 msgctxt "helpfullWarning-comms"
 msgid "Not really"
-msgstr ""
+msgstr "Not really"
 
 #: scripts/scenario_15_close_the_gaps.lua:2872
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
-msgstr ""
+msgstr "Where can I find particular goods?"
 
 #: scripts/scenario_15_close_the_gaps.lua:2876
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
-msgstr ""
+msgstr "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury."
 
 #: scripts/scenario_15_close_the_gaps.lua:2941
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr ""
+msgstr "Station %s in sector %s has %s for %i reputation"
 
 #: scripts/scenario_15_close_the_gaps.lua:2956
 #, lua-format
@@ -1354,18 +1354,18 @@ msgid ""
 "\n"
 "What goods are you interested in?\n"
 "I've heard about these:"
-msgstr ""
+msgstr "%s\n\nWhat goods are you interested in?\nI've heard about these:"
 
 #: scripts/scenario_15_close_the_gaps.lua:2964
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s Beyond that, I have no knowledge of specific stations"
-msgstr ""
+msgstr "%s Beyond that, I have no knowledge of specific stations"
 
 #: scripts/scenario_15_close_the_gaps.lua:2975
 msgctxt "stationGeneralInfo-comms"
 msgid "General station information"
-msgstr ""
+msgstr "General station information"
 
 #: scripts/scenario_15_close_the_gaps.lua:2989
 #, lua-format
@@ -1373,7 +1373,7 @@ msgctxt "orders-comms"
 msgid ""
 "%s\n"
 "%s%s"
-msgstr ""
+msgstr "%s\n%s%s"
 
 #: scripts/scenario_15_close_the_gaps.lua:2996
 #, lua-format
@@ -1381,199 +1381,199 @@ msgctxt "orders-comms"
 msgid ""
 "%s\n"
 "   %i Minutes remain in game"
-msgstr ""
+msgstr "%s\n   %i Minutes remain in game"
 
 #: scripts/scenario_15_close_the_gaps.lua:3124
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr ""
+msgstr "Can you send a supply drop? (%d rep)"
 
 #: scripts/scenario_15_close_the_gaps.lua:3132
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
-msgstr ""
+msgstr "You need to set a waypoint before you can request backup."
 
 #: scripts/scenario_15_close_the_gaps.lua:3139
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr ""
+msgstr "To which waypoint should we deliver your supplies?"
 
 #: scripts/scenario_15_close_the_gaps.lua:3145
 #: scripts/scenario_15_close_the_gaps.lua:3221
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
-msgstr ""
+msgstr "WP %d"
 
 #: scripts/scenario_15_close_the_gaps.lua:3175
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
-msgstr ""
+msgstr "We have dispatched a supply ship toward WP %d"
 
 #: scripts/scenario_15_close_the_gaps.lua:3184
 #: scripts/scenario_15_close_the_gaps.lua:3254
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
-msgstr ""
+msgstr "Not enough reputation!"
 
 #: scripts/scenario_15_close_the_gaps.lua:3200
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
-msgstr ""
+msgstr "Please send reinforcements! (%d rep)"
 
 #: scripts/scenario_15_close_the_gaps.lua:3208
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
+msgstr "You need to set a waypoint before you can request reinforcements."
 
 #: scripts/scenario_15_close_the_gaps.lua:3215
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr ""
+msgstr "To which waypoint should we dispatch the reinforcements?"
 
 #: scripts/scenario_15_close_the_gaps.lua:3244
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
-msgstr ""
+msgstr "We have dispatched %s to assist at WP %d"
 
 #: scripts/scenario_15_close_the_gaps.lua:3330
 #: scripts/scenario_15_close_the_gaps.lua:3737
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr ""
+msgstr "What do you want?"
 
 #: scripts/scenario_15_close_the_gaps.lua:3332
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Sir, how can we assist?"
 
 #: scripts/scenario_15_close_the_gaps.lua:3334
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Defend a waypoint"
 
 #: scripts/scenario_15_close_the_gaps.lua:3339
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
-msgstr ""
+msgstr "No waypoints set. Please set a waypoint first."
 
 #: scripts/scenario_15_close_the_gaps.lua:3345
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Which waypoint should we defend?"
 
 #: scripts/scenario_15_close_the_gaps.lua:3350
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr ""
+msgstr "Defend WP %d"
 
 #: scripts/scenario_15_close_the_gaps.lua:3361
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
-msgstr ""
+msgstr "We are heading to assist at WP %d."
 
 #: scripts/scenario_15_close_the_gaps.lua:3373
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr ""
+msgstr "Assist me"
 
 #: scripts/scenario_15_close_the_gaps.lua:3375
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Heading toward you to assist."
 
 #: scripts/scenario_15_close_the_gaps.lua:3381
 msgctxt "shipAssist-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Report status"
 
 #: scripts/scenario_15_close_the_gaps.lua:3383
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Hull: %d%%\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:3389
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sShield: %d%%\n"
-msgstr ""
+msgstr "%sShield: %d%%\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:3399
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sFront Shield: %d%%\n"
-msgstr ""
+msgstr "%sFront Shield: %d%%\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:3408
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sRear Shield: %d%%\n"
-msgstr ""
+msgstr "%sRear Shield: %d%%\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:3419
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sShield %s: %d%%\n"
-msgstr ""
+msgstr "%sShield %s: %d%%\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:3434
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s%s Missiles: %d/%d\n"
-msgstr ""
+msgstr "%s%s Missiles: %d/%d\n"
 
 #: scripts/scenario_15_close_the_gaps.lua:3451
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Dock at %s"
 
 #: scripts/scenario_15_close_the_gaps.lua:3457
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
-msgstr ""
+msgstr "Docking at %s."
 
 #: scripts/scenario_15_close_the_gaps.lua:3472
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr ""
+msgstr "We will see to your destruction!"
 
 #: scripts/scenario_15_close_the_gaps.lua:3474
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
-msgstr ""
+msgstr "Your bloodline will end here!"
 
 #: scripts/scenario_15_close_the_gaps.lua:3476
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr ""
+msgstr "Your feeble threats are meaningless."
 
 #: scripts/scenario_15_close_the_gaps.lua:3479
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
-msgstr ""
+msgstr "Ktzzzsss.\nYou will DIEEee weaklingsss!"
 
 #: scripts/scenario_15_close_the_gaps.lua:3485
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
-msgstr ""
+msgstr "We wish you no harm, but will harm you if we must.\nEnd of transmission."
 
 #: scripts/scenario_15_close_the_gaps.lua:3492
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
-msgstr ""
+msgstr "Stay out of our way, or your death will amuse us extremely!"
 
 #: scripts/scenario_15_close_the_gaps.lua:3499
 msgctxt "shipEnemy-comms"
@@ -1584,22 +1584,22 @@ msgid ""
 "Generating appropriate response for target from human language archives.\n"
 ":Do not cross us:\n"
 "Communication halted."
-msgstr ""
+msgstr "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."
 
 #: scripts/scenario_15_close_the_gaps.lua:3502
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr ""
+msgstr "EXECUTE: SELFDESTRUCT"
 
 #: scripts/scenario_15_close_the_gaps.lua:3505
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr ""
+msgstr "Rogue command received. Targeting source."
 
 #: scripts/scenario_15_close_the_gaps.lua:3508
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
-msgstr ""
+msgstr "External command ignored."
 
 #: scripts/scenario_15_close_the_gaps.lua:3513
 msgctxt "shipEnemy-comms"
@@ -1607,52 +1607,52 @@ msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
 "all.\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
-msgstr ""
+msgstr "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."
 
 #: scripts/scenario_15_close_the_gaps.lua:3518
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr ""
+msgstr "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 
 #: scripts/scenario_15_close_the_gaps.lua:3522
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr ""
+msgstr "We do not need permission to pluck apart such an insignificant threat."
 
 #: scripts/scenario_15_close_the_gaps.lua:3526
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
-msgstr ""
+msgstr "The hive has greater priorities than exterminating pests."
 
 #: scripts/scenario_15_close_the_gaps.lua:3529
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
-msgstr ""
+msgstr "Mind your own business!"
 
 #: scripts/scenario_15_close_the_gaps.lua:3549
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr ""
+msgstr "Yes?"
 
 #: scripts/scenario_15_close_the_gaps.lua:3551
 msgctxt "trade-comms"
 msgid "Where are you headed?"
-msgstr ""
+msgstr "Where are you headed?"
 
 #: scripts/scenario_15_close_the_gaps.lua:3633
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter for trade."
-msgstr ""
+msgstr "Insufficient inventory on freighter for trade."
 
 #: scripts/scenario_15_close_the_gaps.lua:3642
 msgctxt "trade-comms"
 msgid "Insufficient inventory on your ship for trade."
-msgstr ""
+msgstr "Insufficient inventory on your ship for trade."
 
 #: scripts/scenario_15_close_the_gaps.lua:3653
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr ""
+msgstr "Traded"
 
 #: scripts/scenario_15_close_the_gaps.lua:3680
 #: scripts/scenario_15_close_the_gaps.lua:3781
@@ -1660,7 +1660,7 @@ msgstr ""
 #: scripts/scenario_15_close_the_gaps.lua:3935
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
-msgstr ""
+msgstr "Insufficient cargo space for purchase"
 
 #: scripts/scenario_15_close_the_gaps.lua:3687
 #: scripts/scenario_15_close_the_gaps.lua:3788
@@ -1668,7 +1668,7 @@ msgstr ""
 #: scripts/scenario_15_close_the_gaps.lua:3942
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter"
-msgstr ""
+msgstr "Insufficient inventory on freighter"
 
 #: scripts/scenario_15_close_the_gaps.lua:3714
 #: scripts/scenario_15_close_the_gaps.lua:3815
@@ -1676,7 +1676,7 @@ msgstr ""
 #: scripts/scenario_15_close_the_gaps.lua:3971
 msgctxt "trade-comms"
 msgid "Purchased"
-msgstr ""
+msgstr "Purchased"
 
 #: scripts/scenario_15_close_the_gaps.lua:3723
 #: scripts/scenario_15_close_the_gaps.lua:3824
@@ -1684,42 +1684,42 @@ msgstr ""
 #: scripts/scenario_15_close_the_gaps.lua:3980
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr ""
+msgstr "Insufficient reputation for purchase"
 
 #: scripts/scenario_15_close_the_gaps.lua:3744
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %i reputation)"
-msgstr ""
+msgstr "Where are you headed? (cost: %i reputation)"
 
 #: scripts/scenario_15_close_the_gaps.lua:3912
 msgctxt "trade-comms"
 msgid "Why are you bothering me?"
-msgstr ""
+msgstr "Why are you bothering me?"
 
 #: scripts/scenario_15_close_the_gaps.lua:3999
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
-msgstr ""
+msgstr "Sorry, we have no time to chat with you.\nWe are on an important mission."
 
 #: scripts/scenario_15_close_the_gaps.lua:4004
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
-msgstr ""
+msgstr "We have nothing for you.\nGood day."
 
 #: scripts/scenario_15_close_the_gaps.lua:4299
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "One of your repair crew has perished"
 
 #: scripts/scenario_15_close_the_gaps.lua:4310
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "One of your repair crew has perished"
 
 #: scripts/scenario_15_close_the_gaps.lua:4324
 #, lua-format
@@ -1727,56 +1727,56 @@ msgctxt "goal-shiplog"
 msgid ""
 "Since %s is so isolated and so close to enemy territory, we need you to lay "
 "a minefield across each gap in the surrounding asteroids"
-msgstr ""
+msgstr "Since %s is so isolated and so close to enemy territory, we need you to lay a minefield across each gap in the surrounding asteroids"
 
 #: scripts/scenario_15_close_the_gaps.lua:4332
 msgctxt "goal-comms"
 msgid "Lay minefield across each gap in surrounding asteroids."
-msgstr ""
+msgstr "Lay minefield across each gap in surrounding asteroids."
 
 #: scripts/scenario_15_close_the_gaps.lua:4354
 #, lua-format
 msgctxt "minefieldOrder-shiplog"
 msgid "Congratulations, You've closed the gap at heading 180 from %s"
-msgstr ""
+msgstr "Congratulations, You've closed the gap at heading 180 from %s"
 
 #: scripts/scenario_15_close_the_gaps.lua:4361
 msgctxt "minefieldOrders-comms"
 msgid " South gap closed."
-msgstr ""
+msgstr " South gap closed."
 
 #: scripts/scenario_15_close_the_gaps.lua:4375
 #, lua-format
 msgctxt "minefieldOrders-shiplog"
 msgid "Congratulations, You've closed the gap at heading 0 from %s"
-msgstr ""
+msgstr "Congratulations, You've closed the gap at heading 0 from %s"
 
 #: scripts/scenario_15_close_the_gaps.lua:4382
 msgctxt "minefieldOrders-comms"
 msgid " North gap closed."
-msgstr ""
+msgstr " North gap closed."
 
 #: scripts/scenario_15_close_the_gaps.lua:4396
 #, lua-format
 msgctxt "minefieldOrders-shiplog"
 msgid "Congratulations, You've closed the gap at heading 270 from %s"
-msgstr ""
+msgstr "Congratulations, You've closed the gap at heading 270 from %s"
 
 #: scripts/scenario_15_close_the_gaps.lua:4403
 msgctxt "minefieldOrders-comms"
 msgid " West gap closed."
-msgstr ""
+msgstr " West gap closed."
 
 #: scripts/scenario_15_close_the_gaps.lua:4417
 #, lua-format
 msgctxt "minefieldOrders-shiplog"
 msgid "Congratulations, You've closed the gap at heading 90 from %s"
-msgstr ""
+msgstr "Congratulations, You've closed the gap at heading 90 from %s"
 
 #: scripts/scenario_15_close_the_gaps.lua:4424
 msgctxt "minefieldOrders-comms"
 msgid " East gap closed."
-msgstr ""
+msgstr " East gap closed."
 
 #: scripts/scenario_15_close_the_gaps.lua:4438
 #, lua-format
@@ -1785,10 +1785,10 @@ msgid ""
 "You've closed the gaps. Now for the Quixotic part: go destroy the enemy "
 "bases surrounding us while keeping %s alive. You'll find them straight out "
 "from the gaps"
-msgstr ""
+msgstr "You've closed the gaps. Now for the Quixotic part: go destroy the enemy bases surrounding us while keeping %s alive. You'll find them straight out from the gaps"
 
 #: scripts/scenario_15_close_the_gaps.lua:4447
 #, lua-format
 msgctxt "minefieldOrders-comms"
 msgid "Protect %s. Destroy enemy bases straight out from gaps"
-msgstr ""
+msgstr "Protect %s. Destroy enemy bases straight out from gaps"

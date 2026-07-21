@@ -1,6 +1,6 @@
 # Scenario name
 msgid "All crew screens"
-msgstr ""
+msgstr "All crew screens"
 
 # Scenario description
 msgid ""
@@ -12,7 +12,7 @@ msgid ""
 "\n"
 "To begin these tutorials, click the <color=#C0C0FF>Start tutorial</> button "
 "at the bottom right of this screen."
-msgstr ""
+msgstr "<h3><colour=#C0C0FF>Tutorial: All crew screens</>\n\nThis option runs all major crew screen tutorials (Captain, Helms, Weapons, Engineering, Science, and Relay) in seqeuence. For information on each tutorial, or to run them individually, select them from this list.\n\nTo begin these tutorials, click the <colour=#C0C0FF>Start tutorial</> button at the bottom right of this screen."
 
 #: scripts/tutorial/99_all.lua:40
 msgid ""
@@ -20,52 +20,52 @@ msgid ""
 "space.\n"
 "While you cannot move the ship from this screen, you can use it to visually "
 "identify objects."
-msgstr ""
+msgstr "This is the main screen, which displays your ship and the surrounding space.\nWhile you cannot move the ship from this screen, you can use it to visually identify objects."
 
 #: scripts/tutorial/99_all.lua:52
 msgid ""
 "Welcome to the long-range radar. This radar can detect objects up to 30u "
 "from your ship, depicted at the radar's center. This radar allows you to "
 "quickly identify distant objects."
-msgstr ""
+msgstr "Welcome to the long-range radar. This radar can detect objects up to 30u from your ship, depicted at the radar's centre. This radar allows you to quickly identify distant objects."
 
 #: scripts/tutorial/99_all.lua:61
 msgid ""
 "This is an asteroid. Flying into an asteroid will damage your ship, so avoid "
 "hitting them."
-msgstr ""
+msgstr "This is an asteroid. Flying into an asteroid will damage your ship, so avoid hitting them."
 
 #: scripts/tutorial/99_all.lua:73
 msgid ""
 "The white dot is a mine. When you move near a mine, it explodes with a "
 "powerful 1U-radius blast. Striking a mine while your shields are down will "
 "surely destroy your ship."
-msgstr ""
+msgstr "The white dot is a mine. When you move near a mine, it explodes with a powerful 1U-radius blast. Striking a mine while your shields are down will surely destroy your ship."
 
 #: scripts/tutorial/99_all.lua:100
 msgid ""
 "These are stations. Stations can be several different sizes and belong to "
 "different factions. Their color indicates whether the station is friendly "
 "(green), neutral (light blue), or hostile (red)."
-msgstr ""
+msgstr "These are stations. Stations can be several different sizes and belong to different factions. Their colour indicates whether the station is friendly (green), neutral (light blue), or hostile (red)."
 
 #: scripts/tutorial/99_all.lua:118
 msgid ""
 "The rainbow-colored cloud is a nebula. Nebulae block long-range sensors, "
 "preventing ships from detecting what's inside of them at distances of more "
 "than 5u. Sensors also cannot detect objects behind nebulae."
-msgstr ""
+msgstr "The rainbow-coloured cloud is a nebula. Nebulae block long-range sensors, preventing ships from detecting what's inside of them at distances of more than 5u. Sensors also cannot detect objects behind nebulae."
 
 #: scripts/tutorial/99_all.lua:159
 msgid ""
 "Finally, these are ships. They look like you on radar, and their attitude "
 "toward you is reflected by the same colors as stations. In addition to "
 "green, blue, and red, ships of unknown attitude appear as gray objects."
-msgstr ""
+msgstr "Finally, these are ships. They look like you on radar, and their attitude toward you is reflected by the same colours as stations. In addition to green, blue, and red, ships of unknown attitude appear as grey objects."
 
 #: scripts/tutorial/99_all.lua:177
 msgid "Next, we'll look at the short-range radar."
-msgstr ""
+msgstr "Next, we'll look at the short-range radar."
 
 #: scripts/tutorial/99_all.lua:186
 msgid ""
@@ -73,13 +73,13 @@ msgid ""
 "depicts the range of your own beam weapons.\n"
 "Your ship has 2 beam weapons aimed forward. Each type of ship has different "
 "beam weapon layouts, with different ranges and locations."
-msgstr ""
+msgstr "The short-range radar can detect objects up to 5U from your ship. It also depicts the range of your own beam weapons.\nYour ship has 2 beam weapons aimed forward. Each type of ship has different beam weapon layouts, with different ranges and locations."
 
 #: scripts/tutorial/99_all.lua:205
 msgid ""
 "This is the helms screen. As the helms officer, you command your ship's "
 "movement in space."
-msgstr ""
+msgstr "This is the helms screen. As the helms officer, you command your ship's movement in space."
 
 #: scripts/tutorial/99_all.lua:214
 msgid ""
@@ -87,7 +87,7 @@ msgid ""
 "Your impulse controls are on the left side of the screen.\n"
 "\n"
 "Raise your impulse level to 100% to fly forward right now."
-msgstr ""
+msgstr "Your primary controls are your impulse engines and manoeuvring thrusters.\nYour impulse controls are on the left side of the screen.\n\nRaise your impulse level to 100% to fly forward right now."
 
 #: scripts/tutorial/99_all.lua:229
 msgid ""
@@ -97,7 +97,7 @@ msgid ""
 "Rotating the ship is easy. Simply press a heading on the radar screen to "
 "rotate your ship in that direction.\n"
 "Try rotating to heading 200 right now."
-msgstr ""
+msgstr "Good. You now know how to move forward.\n\nI've disabled your impulse engine for now. Next, let's rotate your ship.\nRotating the ship is easy. Simply press a heading on the radar screen to rotate your ship in that direction.\nTry rotating to heading 200 right now."
 
 #: scripts/tutorial/99_all.lua:251
 msgid ""
@@ -109,13 +109,13 @@ msgid ""
 "To dock, maneuver within 1U of a station and press the \"Request Dock\" "
 "button, from which point docking is fully automated.\n"
 "Maneuver to the nearby station and request permission to dock."
-msgstr ""
+msgstr "Excellent!\n\nNext up: docking. Docking with a station recharges your energy, repairs your hull, and allows the relay officer to request weapon refills. It can also be important for other mission-related events.\nTo dock, manoeuvre within 1U of a station and press the \"Request Dock\" button, from which point docking is fully automated.\nManeuver to the nearby station and request permission to dock."
 
 #: scripts/tutorial/99_all.lua:264
 msgid ""
 "Now that you are docked, your movement is locked. As helms officer, there is "
 "nothing else you can do but undock, so do that now."
-msgstr ""
+msgstr "Now that you are docked, your movement is locked. As helms officer, there is nothing else you can do but undock, so do that now."
 
 #: scripts/tutorial/99_all.lua:289
 msgid ""
@@ -125,7 +125,7 @@ msgid ""
 "I've set up an stationary enemy ship as a target. Destroy it with your beam "
 "weapons. Note that at every shot, the corresponding firing arc will change "
 "color."
-msgstr ""
+msgstr "OK, there are just a few more things that you need to know.\nSee the red arcs coming from your ship? Those are your beam weapons. As helms officer, it is your task to keep those beams on your target.\nI've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change colour."
 
 #: scripts/tutorial/99_all.lua:300
 msgid ""
@@ -136,7 +136,7 @@ msgid ""
 "ship, you either have a warp drive or a jump drive.\n"
 "The warp drive moves your ship at high speed, while the jump drive instantly "
 "teleports your ship a great distance."
-msgstr ""
+msgstr "Aggression is not always the solution, but boy, it is fun!\n\nOn to the next task: moving long distances.\nThere are two methods of moving long distances quickly. Depending on your ship, you either have a warp drive or a jump drive.\nThe warp drive moves your ship at high speed, while the jump drive instantly teleports your ship a great distance."
 
 #: scripts/tutorial/99_all.lua:313
 msgid ""
@@ -145,7 +145,7 @@ msgid ""
 "It functions like the impulse drive, but it propels your ship only forward, "
 "and it consumes energy and generates heat at much faster rates.\n"
 "Use the warp drive to move more than 30U away from this starting point."
-msgstr ""
+msgstr "First, let's try the warp drive.\n\nIt functions like the impulse drive, but it propels your ship only forward, and it consumes energy and generates heat at much faster rates.\nUse the warp drive to move more than 30U away from this starting point."
 
 #: scripts/tutorial/99_all.lua:328
 msgid ""
@@ -155,7 +155,7 @@ msgid ""
 "jump, configure a distance to jump, and then initiate it. The jump typically "
 "occurs 10 seconds after you initiate it. Use the jump drive to jump more "
 "than 30U from this starting point, in any direction."
-msgstr ""
+msgstr "Next, let's demonstrate the jump drive.\n\nTo use the jump drive, point your ship in the direction where you want to jump, configure a distance to jump, and then initiate it. The jump typically occurs 10 seconds after you initiate it. Use the jump drive to jump more than 30U from this starting point, in any direction."
 
 #: scripts/tutorial/99_all.lua:339
 msgid ""
@@ -164,14 +164,14 @@ msgid ""
 "generates heat.\n"
 "\n"
 "This covers the basics of the helms officer."
-msgstr ""
+msgstr "Notice how your jump drive needs to recharge after use. This recharge consumes a significant amount of the ship's energy, and the jump also generates heat.\n\nThis covers the basics of the helms officer."
 
 #: scripts/tutorial/99_all.lua:359
 msgid ""
 "This is the weapons screen.\n"
 "As the weapons officer, you are responsible for targeting beam weapons, "
 "loading and firing missile weapons, and controlling your shields."
-msgstr ""
+msgstr "This is the weapons screen.\nAs the weapons officer, you are responsible for targeting beam weapons, loading and firing missile weapons, and controlling your shields."
 
 #: scripts/tutorial/99_all.lua:375
 msgid ""
@@ -180,7 +180,7 @@ msgid ""
 "travel toward your selected target.\n"
 "\n"
 "Target the ship in front of you by pressing it."
-msgstr ""
+msgstr "Your most fundamental task is to target your ship's weapons.\nYour beam weapons fire only at your selected target, and homing missiles travel toward your selected target.\n\nTarget the ship in front of you by pressing it."
 
 #: scripts/tutorial/99_all.lua:387
 msgid ""
@@ -188,7 +188,7 @@ msgid ""
 "targeted it.\n"
 "\n"
 "Next up: shield controls."
-msgstr ""
+msgstr "Good! Notice that your beam weapons did not fire on this ship until you targeted it.\n\nNext up: shield controls."
 
 #: scripts/tutorial/99_all.lua:408
 msgid ""
@@ -196,7 +196,7 @@ msgid ""
 "now.\n"
 "\n"
 "You're taking damage, however, so enable your shields to protect yourself."
-msgstr ""
+msgstr "As you might notice, you're being shot at. Don't worry, you can't die right now.\n\nYou're taking damage, however, so enable your shields to protect yourself."
 
 #: scripts/tutorial/99_all.lua:429
 msgid ""
@@ -205,7 +205,7 @@ msgid ""
 "recharge. Eventually, this enemy's attacks will get through your shields.\n"
 "\n"
 "Disable your shields to continue."
-msgstr ""
+msgstr "Shields protect your ship from direct damage, but they cost extra energy to maintain, can take only a limited amount of damage, and are slow to recharge. Eventually, this enemy's attacks will get through your shields.\n\nDisable your shields to continue."
 
 #: scripts/tutorial/99_all.lua:443
 msgid ""
@@ -214,7 +214,7 @@ msgid ""
 "mines, and collisions with objects such as asteroids.\n"
 "\n"
 "Next up, the real fun starts: missile weapons."
-msgstr ""
+msgstr "While only a single button, your shields are vital for survival. They protect against all kinds of damage, including beam weapons, missiles, mines, and collisions with objects such as asteroids.\n\nNext up, the real fun starts: missile weapons."
 
 #: scripts/tutorial/99_all.lua:465
 msgid ""
@@ -225,15 +225,15 @@ msgid ""
 "Load this homing missile into the weapon tube by selecting the homing "
 "missile, and then pressing the load button for this tube. Note that it takes "
 "some time to load missiles into tubes."
-msgstr ""
+msgstr "You have 1 homing missile in your missile storage, and 1 weapon tube.\nYou can load this missile into your weapon tube. Depending on your ship type, you might have more types of missiles and more weapon tubes.\n\nLoad this homing missile into the weapon tube by selecting the homing missile, and then pressing the load button for this tube. Note that it takes some time to load missiles into tubes."
 
 #: scripts/tutorial/99_all.lua:477
 msgid "Great! Now fire this missile by clicking on the tube."
-msgstr ""
+msgstr "Great! Now fire this missile by clicking on the tube."
 
 #: scripts/tutorial/99_all.lua:483
 msgid "Missile away!"
-msgstr ""
+msgstr "Missile away!"
 
 #: scripts/tutorial/99_all.lua:504
 msgid ""
@@ -244,13 +244,13 @@ msgid ""
 "Next, target the enemy ship by pressing it to guide your homing missile "
 "toward your selected target.\n"
 "Then fire your missile!"
-msgstr ""
+msgstr "BOOM! That was just firing straight ahead, but homing missiles can pursue their targets, so let's try that!\n\nFirst, load a homing missile in the tube.\nNext, target the enemy ship by pressing it to guide your homing missile toward your selected target.\nThen fire your missile!"
 
 #: scripts/tutorial/99_all.lua:520
 msgid ""
 "While not necessary against a stationary target, this homing ability can "
 "make all the difference against a moving target."
-msgstr ""
+msgstr "While not necessary against a stationary target, this homing ability can make all the difference against a moving target."
 
 #: scripts/tutorial/99_all.lua:538
 msgid ""
@@ -260,7 +260,7 @@ msgid ""
 "Load a missile to view your missile's trajectory.\n"
 "Next, aim your missiles with the aiming dial surrounding the radar.\n"
 "Point the aiming dial at the next ship and fire."
-msgstr ""
+msgstr "You can also manually aim missiles with homing features.\n\nFirst, unlock your aim by pressing the [Lock] button above the radar view.\nLoad a missile to view your missile's trajectory.\nNext, aim your missiles with the aiming dial surrounding the radar.\nPoint the aiming dial at the next ship and fire."
 
 #: scripts/tutorial/99_all.lua:567
 msgid ""
@@ -274,7 +274,7 @@ msgid ""
 "Next, target the enemy ship by pressing it.\n"
 "Then fire! The missile will first follow your manually aimed trajectory, and "
 "then start homing in on the enemy.\n"
-msgstr ""
+msgstr "Perfect aim! The next ship is behind you. Notice how it's out of reach when you try to aim manually, and if you use only the homing ability, the missile's trajectory won't reach the enemy. You can hit the ship if you combine manual aiming with the missile's own homing ability.\n\nFirst, make sure your aim is unlocked and aim your missile as close to the enemy as you can.\nNext, target the enemy ship by pressing it.\nThen fire! The missile will first follow your manually aimed trajectory, and then start homing in on the enemy.\n"
 
 #: scripts/tutorial/99_all.lua:591
 msgid ""
@@ -286,7 +286,7 @@ msgid ""
 "shielded targets.\n"
 "        HVLI stands for \"High Velocity Lead Impactor\". They lack homing or "
 "turning abilities and fire only in a straight line."
-msgstr ""
+msgstr "In addition to homing missiles, your ship might have HVLIs, nukes, EMPs, and mines.\n        Nukes and EMPs also have homing abilities, and have a 1U-radius blast and do more damage.\n        EMPs damage only shields, and thus are great for weakening heavily shielded targets.\n        HVLI stands for \"High Velocity Lead Impactor\". They lack homing or turning abilities and fire only in a straight line."
 
 #: scripts/tutorial/99_all.lua:607
 msgid ""
@@ -294,7 +294,7 @@ msgid ""
 "The Engineering screen is split into two parts: your ship's interior "
 "(including damage control teams stationed throughout) at top, and your ship "
 "systems' power and coolant controls at bottom."
-msgstr ""
+msgstr "Welcome to Engineering.\nThe Engineering screen is split into two parts: your ship's interior (including damage control teams stationed throughout) at top, and your ship systems' power and coolant controls at bottom."
 
 #: scripts/tutorial/99_all.lua:613 scripts/tutorial/99_all.lua:621
 msgid ""
@@ -306,14 +306,14 @@ msgid ""
 "Heat accumulates when systems are overpowered (powered above 100%), or for "
 "some systems when its related functionality is used (such as firing beams, "
 "engaging jump and warp drives, and using combat maneuvering thrusters)."
-msgstr ""
+msgstr "First, we'll explain your control over your ship's systems.\nEach row on the bottom area of the screen represents one of your ship's system, and each system has a damage level, heat level, power level, and coolant level.\n\nHeat accumulates when systems are overpowered (powered above 100%), or for some systems when its related functionality is used (such as firing beams, engaging jump and warp drives, and using combat manoeuvring thrusters)."
 
 #: scripts/tutorial/99_all.lua:635
 msgid ""
 "I've overheated your warp system. An overheating system can damage that "
 "system. You can prevent this by adding coolant in your warp system. Select "
 "the warp system and increase the coolant slider."
-msgstr ""
+msgstr "I've overheated your warp system. An overheating system can damage that system. You can prevent this by adding coolant in your warp system. Select the warp system and increase the coolant slider."
 
 #: scripts/tutorial/99_all.lua:647
 msgid ""
@@ -323,7 +323,7 @@ msgid ""
 "\n"
 "This is because you have a limited amount of coolant available to distribute "
 "this across your ship's systems."
-msgstr ""
+msgstr "I've also overheated the impulse system. As before, increase the system's coolant level to mitigate the effect. Note that the warp system's coolant level is automatically reduced to allow for coolant in the impulse system.\n\nThis is because you have a limited amount of coolant available to distribute this across your ship's systems."
 
 #: scripts/tutorial/99_all.lua:658
 msgid ""
@@ -334,14 +334,14 @@ msgid ""
 "system.\n"
 "\n"
 "Maximize the power to the front shield system."
-msgstr ""
+msgstr "Good! Next up: power levels.\nYou can manage each system's power level independently. Adding power to a system makes it perform more effectively, but also generates more heat, and thus requires coolant to prevent it from overheating and damaging the system.\n\nMaximize the power to the front shield system."
 
 #: scripts/tutorial/99_all.lua:670
 msgid ""
 "The added power increases the amount of heat in the system.\n"
 "\n"
 "Overpower the system until it overheats."
-msgstr ""
+msgstr "The added power increases the amount of heat in the system.\n\nOverpower the system until it overheats."
 
 #: scripts/tutorial/99_all.lua:687
 msgid ""
@@ -350,11 +350,11 @@ msgid ""
 "\n"
 "Systems can also take damage when your ship is hit while the shields are "
 "down."
-msgstr ""
+msgstr "Note that as the system overheats, it takes damage. Because the system is damaged, it functions less effectively.\n\nSystems can also take damage when your ship is hit while the shields are down."
 
 #: scripts/tutorial/99_all.lua:698
 msgid "In this top area, you can see your damage control teams in your ship."
-msgstr ""
+msgstr "In this top area, you can see your damage control teams in your ship."
 
 #: scripts/tutorial/99_all.lua:704
 msgid ""
@@ -364,7 +364,7 @@ msgid ""
 "Select a damage control team from elsewhere on the ship by pressing it, then "
 "press on that room to initiate repairs.\n"
 "(Repairs will take a while.)"
-msgstr ""
+msgstr "The front shield system is damaged, as indicated by the colour of this room's outline.\n\nSelect a damage control team from elsewhere on the ship by pressing it, then press on that room to initiate repairs.\n(Repairs will take a while.)"
 
 #: scripts/tutorial/99_all.lua:720
 msgid ""
@@ -373,7 +373,7 @@ msgid ""
 "Remember, each system performs better with more power, but performs less "
 "well when damaged. Your job is to keep vital systems running as well as you "
 "can."
-msgstr ""
+msgstr "Good. Now you know your most important tasks. Next, we'll go over each system's function in detail.\nRemember, each system performs better with more power, but performs less well when damaged. Your job is to keep vital systems running as well as you can."
 
 #: scripts/tutorial/99_all.lua:727
 msgid ""
@@ -381,7 +381,7 @@ msgid ""
 "\n"
 "The reactor generates energy. Adding power to the reactor increases your "
 "energy generation rate."
-msgstr ""
+msgstr "Reactor:\n\nThe reactor generates energy. Adding power to the reactor increases your energy generation rate."
 
 #: scripts/tutorial/99_all.lua:735
 msgid ""
@@ -390,14 +390,14 @@ msgid ""
 "Adding power to the beam weapons system increases their rate of fire, which "
 "causes them to deal damage faster.\n"
 "Note that every beam you fire adds additional heat to the system."
-msgstr ""
+msgstr "Beam weapons:\n\nAdding power to the beam weapons system increases their rate of fire, which causes them to deal damage faster.\nNote that every beam you fire adds additional heat to the system."
 
 #: scripts/tutorial/99_all.lua:744
 msgid ""
 "Missile weapons:\n"
 "\n"
 "Increased missile system power lowers the reload time of weapon tubes."
-msgstr ""
+msgstr "Missile weapons:\n\nIncreased missile system power lowers the reload time of weapon tubes."
 
 #: scripts/tutorial/99_all.lua:752
 msgid ""
@@ -405,21 +405,21 @@ msgid ""
 "\n"
 "Increasing power to the maneuvering system allows the ship to turn faster. "
 "It also increases the recharge rate for the combat maneuvering system."
-msgstr ""
+msgstr "Manoeuvring:\n\nIncreasing power to the manoeuvring system allows the ship to turn faster. It also increases the recharge rate for the combat manoeuvring system."
 
 #: scripts/tutorial/99_all.lua:760
 msgid ""
 "Impulse engines:\n"
 "\n"
 "Adding power to the impulse engines increases your impulse speed."
-msgstr ""
+msgstr "Impulse engines:\n\nAdding power to the impulse engines increases your impulse speed."
 
 #: scripts/tutorial/99_all.lua:767
 msgid ""
 "Warp drive:\n"
 "\n"
 "Adding power to the warp drive increases your warp drive speed."
-msgstr ""
+msgstr "Warp drive:\n\nAdding power to the warp drive increases your warp drive speed."
 
 #: scripts/tutorial/99_all.lua:775
 msgid ""
@@ -427,7 +427,7 @@ msgid ""
 "\n"
 "Adding power to the jump drive recharges it faster and reduces the 10-second "
 "delay before jumping."
-msgstr ""
+msgstr "Jump Drive:\n\nAdding power to the jump drive recharges it faster and reduces the 10-second delay before jumping."
 
 #: scripts/tutorial/99_all.lua:783
 msgid ""
@@ -435,20 +435,20 @@ msgid ""
 "\n"
 "Adding power to the shield systems increases their rate of recharge, and "
 "decreases the amount of degradation your shields sustain when damaged."
-msgstr ""
+msgstr "Shields:\n\nAdding power to the shield systems increases their rate of recharge, and decreases the amount of degradation your shields sustain when damaged."
 
 #: scripts/tutorial/99_all.lua:791
 msgid ""
 "Some ships have additional, more specialized systems, such as a utility "
 "beam, docking bay, or sensors. These systems, and engineering's interactions "
 "with them, are covered in their own tutorials."
-msgstr ""
+msgstr "Some ships have additional, more specialised systems, such as a utility beam, docking bay, or sensors. These systems, and engineering's interactions with them, are covered in their own tutorials."
 
 #: scripts/tutorial/99_all.lua:797
 msgid ""
 "This concludes the overview of the engineering station. Be sure to keep your "
 "ship running in top condition!"
-msgstr ""
+msgstr "This concludes the overview of the engineering station. Be sure to keep your ship running in top condition!"
 
 #: scripts/tutorial/99_all.lua:810
 msgid ""
@@ -457,7 +457,7 @@ msgid ""
 "You are the eyes of the ship. Your job is to supply the captain and crew "
 "with information. From your screen, you can detect and scan objects at a "
 "longer range than other crew screens, typically up to 30U."
-msgstr ""
+msgstr "Welcome, science officer.\n\nYou are the eyes of the ship. Your job is to supply the captain and crew with information. From your screen, you can detect and scan objects at a longer range than other crew screens, typically up to 30U."
 
 #: scripts/tutorial/99_all.lua:832
 msgid ""
@@ -466,7 +466,7 @@ msgid ""
 "notice how much information you can observe.\n"
 "Heading and distance are of particular importance, as without these, the "
 "helms officer will be jumping in the dark."
-msgstr ""
+msgstr "You can select objects on your radar to get information about them.\nI've added a friendly ship and a station for you to examine. Select them and notice how much information you can observe.\nHeading and distance are of particular importance, as without these, the helms officer will be jumping in the dark."
 
 #: scripts/tutorial/99_all.lua:850
 msgid ""
@@ -475,13 +475,13 @@ msgid ""
 "To learn about it, you must scan it. Scanning requires you to match your "
 "scanner's frequency bands to your target's.\n"
 "Scan this ship now."
-msgstr ""
+msgstr "I've replaced the friendly station with an unknown ship. Once you select it, notice that you know nothing about this ship.\nTo learn about it, you must scan it. Scanning requires you to match your scanner's frequency bands to your target's.\nScan this ship now."
 
 #: scripts/tutorial/99_all.lua:861
 msgid ""
 "Good. Notice that you now know this ship is unfriendly. It might have been a "
 "friendly or neutral ship as well, but until you scanned it, you do not know."
-msgstr ""
+msgstr "Good. Notice that you now know this ship is unfriendly. It might have been a friendly or neutral ship as well, but until you scanned it, you do not know."
 
 #: scripts/tutorial/99_all.lua:867
 msgid ""
@@ -490,14 +490,14 @@ msgid ""
 "A deep scan takes more effort and requires you to align 2 or more frequency "
 "bands simultaneously.\n"
 "Deep scan the enemy now."
-msgstr ""
+msgstr "Note that you have less information about this ship than the friendly ship. You must perform a deep scan of this ship to acquire more information.\nA deep scan takes more effort and requires you to align 2 or more frequency bands simultaneously.\nDeep scan the enemy now."
 
 #: scripts/tutorial/99_all.lua:878
 msgid ""
 "Excellent. Notice that this took more time and concentration than the simple "
 "scan, so be careful to perform deep scans only when necessary or you could "
 "run out of time."
-msgstr ""
+msgstr "Excellent. Notice that this took more time and concentration than the simple scan, so be careful to perform deep scans only when necessary or you could run out of time."
 
 #: scripts/tutorial/99_all.lua:893
 msgid ""
@@ -507,7 +507,7 @@ msgid ""
 "In this database, you can look up details on things like ship types, "
 "weapons, and other objects. The DB buttons on your target's details also "
 "links you directly to the relevant entry."
-msgstr ""
+msgstr "Next to the long-range radar, the science station can also access the science database.\n\nIn this database, you can look up details on things like ship types, weapons, and other objects. The DB buttons on your target's details also links you directly to the relevant entry."
 
 #: scripts/tutorial/99_all.lua:901
 msgid ""
@@ -516,13 +516,13 @@ msgid ""
 "pressing the Probe view button.\n"
 "\n"
 "You can scan targets within the probe's radar range while in probe view."
-msgstr ""
+msgstr "The Relay officer can launch scan probes and link them to your screen. Once linked, you can view the short-range radar available from the probe by pressing the Probe view button.\n\nYou can scan targets within the probe's radar range while in probe view."
 
 #: scripts/tutorial/99_all.lua:909
 msgid ""
 "Some ships might deploy a target analysis screen, to which you can link your "
 "target."
-msgstr ""
+msgstr "Some ships might deploy a target analysis screen, to which you can link your target."
 
 #: scripts/tutorial/99_all.lua:915
 msgid ""
@@ -530,7 +530,7 @@ msgid ""
 "of other ships is vital to your captain.\n"
 "\n"
 "Without your information, the crew is mostly blind."
-msgstr ""
+msgstr "Remember, your job is to supply information. Knowing the location and status of other ships is vital to your captain.\n\nWithout your information, the crew is mostly blind."
 
 #: scripts/tutorial/99_all.lua:930
 msgid ""
@@ -539,7 +539,7 @@ msgid ""
 "It is your job to communicate with stations and ships. You also have access "
 "to short-range radar data from friendly ships and stations, and can place "
 "navigational waypoints and launch scanning probes."
-msgstr ""
+msgstr "Welcome to relay!\n\nIt is your job to communicate with stations and ships. You also have access to short-range radar data from friendly ships and stations, and can place navigational waypoints and launch scanning probes."
 
 #: scripts/tutorial/99_all.lua:938
 msgid ""
@@ -547,36 +547,36 @@ msgid ""
 "\n"
 "You can target any station or ship and attempt to communicate with it. Other "
 "ships can also attempt to contact you."
-msgstr ""
+msgstr "Your first responsibility is to coordinate the ship's communications.\n\nYou can target any station or ship and attempt to communicate with it. Other ships can also attempt to contact you."
 
 #: scripts/tutorial/99_all.lua:950
 msgid "You successfully opened communications. Congratulations."
-msgstr ""
+msgstr "You successfully opened communications. Congratulations."
 
 #: scripts/tutorial/99_all.lua:952
 msgid "Tell me more!"
-msgstr ""
+msgstr "Tell me more!"
 
 #: scripts/tutorial/99_all.lua:953
 msgid "Sorry, there's nothing more to tell you."
-msgstr ""
+msgstr "Sorry, there's nothing more to tell you."
 
 #: scripts/tutorial/99_all.lua:955
 msgid "Continue with the tutorial."
-msgstr ""
+msgstr "Continue with the tutorial."
 
 #: scripts/tutorial/99_all.lua:958
 msgid ""
 "The tutorial will continue when you close communications with this station."
-msgstr ""
+msgstr "The tutorial will continue when you close communications with this station."
 
 #: scripts/tutorial/99_all.lua:967
 msgid "Open communications with the station near you to continue the tutorial."
-msgstr ""
+msgstr "Open communications with the station near you to continue the tutorial."
 
 #: scripts/tutorial/99_all.lua:979
 msgid "Now finish your talk with the station."
-msgstr ""
+msgstr "Now finish your talk with the station."
 
 #: scripts/tutorial/99_all.lua:994
 msgid ""
@@ -585,7 +585,7 @@ msgid ""
 "They might inform you about new objectives and your mission progress, ask "
 "for backup, or resupply your weapons. This is all part of your "
 "responsibilities as relay officer."
-msgstr ""
+msgstr "Depending on the scenario, you might have different options when communicating with stations.\nThey might inform you about new objectives and your mission progress, ask for backup, or resupply your weapons. This is all part of your responsibilities as relay officer."
 
 #: scripts/tutorial/99_all.lua:1039
 msgid ""
@@ -594,14 +594,14 @@ msgid ""
 "On this map, you can detect objects within short-range radar range of all "
 "allied ships and stations. Everything else is invisible to you. This gives "
 "you a different view from the science officer."
-msgstr ""
+msgstr "Your screen also includes this radar map.\n\nOn this map, you can detect objects within short-range radar range of all allied ships and stations. Everything else is invisible to you. This gives you a different view from the science officer."
 
 #: scripts/tutorial/99_all.lua:1047
 msgid ""
 "You can add navigational waypoints that appear on other officers' screens. "
 "For example, the helms officer can see the heading of waypoints outside of "
 "their short-range radar to help them navigate to a destination."
-msgstr ""
+msgstr "You can add navigational waypoints that appear on other officers' screens. For example, the helms officer can see the heading of waypoints outside of their short-range radar to help them navigate to a destination."
 
 #: scripts/tutorial/99_all.lua:1053
 msgid ""
@@ -609,7 +609,7 @@ msgid ""
 "the map where you want to place the waypoint.\n"
 "To move a waypoint, press and drag it to a new location.\n"
 "To delete a waypoint, press it to select it, then press \"Delete waypoint\"."
-msgstr ""
+msgstr "To place a waypoint, press \"Place waypoint\", then press the location on the map where you want to place the waypoint.\nTo move a waypoint, press and drag it to a new location.\nTo delete a waypoint, press it to select it, then press \"Delete waypoint\"."
 
 #: scripts/tutorial/99_all.lua:1061
 msgid ""
@@ -618,20 +618,20 @@ msgid ""
 "to degrade its systems remotely.\n"
 "\n"
 "For details on hacking, see the ship's database entries on hacking."
-msgstr ""
+msgstr "You also have access to your ship's hacking terminal. If you press a potentially hostile object on your radar, press \"Start hacking\" to attempt to degrade its systems remotely.\n\nFor details on hacking, see the ship's database entries on hacking."
 
 #: scripts/tutorial/99_all.lua:1069
 msgid ""
 "Finally, you also control your ship's probes. Probes can expand your radar "
 "view. Launch a probe to the top right, toward the ship designated DMY-01."
-msgstr ""
+msgstr "Finally, you also control your ship's probes. Probes can expand your radar view. Launch a probe to the top right, toward the ship designated DMY-01."
 
 #: scripts/tutorial/99_all.lua:1094
 msgid ""
 "Probes can expand your sensory capabilities beyond your normal range and "
 "explore nebulae. However, you have a limited supply of them and can't "
 "replenish them until you to dock with a station."
-msgstr ""
+msgstr "Probes can expand your sensory capabilities beyond your normal range and explore nebulae. However, you have a limited supply of them and can't replenish them until you to dock with a station."
 
 #: scripts/tutorial/99_all.lua:1100
 msgid ""
@@ -640,10 +640,10 @@ msgid ""
 "range.\n"
 "\n"
 "To link a probe, select it on the map, then press \"Link to science\"."
-msgstr ""
+msgstr "You can link probes you've launched to your science and operations officers, who can then view the probe's radar and remotely scan objects within its range.\n\nTo link a probe, select it on the map, then press \"Link to science\"."
 
 #: scripts/tutorial/99_all.lua:1116
 msgid ""
 "This concludes the tutorial. While we have covered the basics, there are "
 "more advanced features in the game that you might discover."
-msgstr ""
+msgstr "This concludes the tutorial. While we have covered the basics, there are more advanced features in the game that you might discover."

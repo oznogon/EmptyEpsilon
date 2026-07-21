@@ -1,9 +1,9 @@
 # Scenario name
 msgid "Pathfinding Cluster Test"
-msgstr ""
+msgstr "Pathfinding Cluster Test"
 
 # Scenario description
 msgid ""
 "Validates that the AI pathfinder finds and navigates through a narrow gap in "
 "a dense obstacle cluster."
-msgstr ""
+msgstr "Validates that the AI pathfinder finds and navigates through a narrow gap in a dense obstacle cluster."

@@ -1,9 +1,9 @@
 # Scenario name
 msgid "Fighter Strafing Avoidance Test"
-msgstr ""
+msgstr "Fighter Strafing Avoidance Test"
 
 # Scenario description
 msgid ""
 "Validates that fighter AI avoids obstacles (mines, asteroids) on its "
 "strafing approach to a target."
-msgstr ""
+msgstr "Validates that fighter AI avoids obstacles (mines, asteroids) on its strafing approach to a target."

@@ -1,7 +1,7 @@
 #: scripts/shiptemplates/exuari/corvettes.lua:9
 msgctxt "ship"
 msgid "Guard"
-msgstr ""
+msgstr "Guard"
 
 #: scripts/shiptemplates/exuari/corvettes.lua:10
 #: scripts/shiptemplates/exuari/corvettes.lua:39
@@ -9,12 +9,12 @@ msgstr ""
 #: scripts/shiptemplates/exuari/corvettes.lua:87
 msgctxt "class"
 msgid "Corvette"
-msgstr ""
+msgstr "Corvette"
 
 #: scripts/shiptemplates/exuari/corvettes.lua:10
 msgctxt "subclass"
 msgid "Escort"
-msgstr ""
+msgstr "Escort"
 
 #: scripts/shiptemplates/exuari/corvettes.lua:15
 msgid ""
@@ -22,46 +22,46 @@ msgid ""
 "cause its beam and missile systems to take longer than expected to rearm "
 "after firing. The Guard is equipped with turreted beams and a diverse and "
 "large stock of missiles, including homing missiles and mines."
-msgstr ""
+msgstr "The Exuari Guard is an all-around escort and defence corvette. Power issues cause its beam and missile systems to take longer than expected to rearm after firing. The Guard is equipped with turreted beams and a diverse and large stock of missiles, including homing missiles and mines."
 
 #: scripts/shiptemplates/exuari/corvettes.lua:38
 msgctxt "ship"
 msgid "Sentinel"
-msgstr ""
+msgstr "Sentinel"
 
 #: scripts/shiptemplates/exuari/corvettes.lua:39
 msgctxt "subclass"
 msgid "Anti-fighter"
-msgstr ""
+msgstr "Anti-fighter"
 
 #: scripts/shiptemplates/exuari/corvettes.lua:44
 msgid ""
 "The Exuari Sentinel is an anti-fighter frigate. It has several rapid-firing, "
 "low-damage point-defense turret beams to quickly take out starfighters."
-msgstr ""
+msgstr "The Exuari Sentinel is an anti-fighter frigate. It has several rapid-firing, low-damage point-defence turret beams to quickly take out starfighters."
 
 #: scripts/shiptemplates/exuari/corvettes.lua:61
 msgctxt "ship"
 msgid "Warden"
-msgstr ""
+msgstr "Warden"
 
 #: scripts/shiptemplates/exuari/corvettes.lua:62
 #: scripts/shiptemplates/exuari/corvettes.lua:87
 msgctxt "subclass"
 msgid "Artillery"
-msgstr ""
+msgstr "Artillery"
 
 #: scripts/shiptemplates/exuari/corvettes.lua:67
 msgid ""
 "The Exuari Warden is a heavy artillery corvette that fires volleys of "
 "missiles from forward-facing tubes. It has only a single point-defense "
 "turret beam weapon."
-msgstr ""
+msgstr "The Exuari Warden is a heavy artillery corvette that fires volleys of missiles from forward-facing tubes. It has only a single point-defence turret beam weapon."
 
 #: scripts/shiptemplates/exuari/corvettes.lua:86
 msgctxt "ship"
 msgid "Flash"
-msgstr ""
+msgstr "Flash"
 
 #: scripts/shiptemplates/exuari/corvettes.lua:92
 msgid ""
@@ -69,12 +69,12 @@ msgid ""
 "amounts of damage quickly and from a distance before escaping. Its simple "
 "design consists of a freighter hull full of nuclear weapons, and rumors "
 "suggest that the Exuari refit captured freighters into Flashes."
-msgstr ""
+msgstr "The Exuari Flash is a special artillery sniper designed to deal large amounts of damage quickly and from a distance before escaping. Its simple design consists of a freighter hull full of nuclear weapons, and rumours suggest that the Exuari refit captured freighters into Flashes."
 
 #: scripts/shiptemplates/exuari/corvettes.lua:106
 msgctxt "ship"
 msgid "Ranger"
-msgstr ""
+msgstr "Ranger"
 
 #: scripts/shiptemplates/exuari/corvettes.lua:109
 msgid ""
@@ -82,12 +82,12 @@ msgid ""
 "amounts of damage quickly and from a distance before escaping. Despite being "
 "a basic design and among the smallest corvette-class ships, it also carries "
 "nuclear weapons."
-msgstr ""
+msgstr "The Exuari Ranger is a special artillery sniper designed to deal large amounts of damage quickly and from a distance before escaping. Despite being a basic design and among the smallest corvette-class ships, it also carries nuclear weapons."
 
 #: scripts/shiptemplates/exuari/corvettes.lua:120
 msgctxt "ship"
 msgid "Buster"
-msgstr ""
+msgstr "Buster"
 
 #: scripts/shiptemplates/exuari/corvettes.lua:124
 msgid ""
@@ -95,4 +95,4 @@ msgid ""
 "amounts of damage quickly and from a distance before escaping. Despite being "
 "a basic design and among the smallest corvette-class ships, it also carries "
 "nuclear weapons."
-msgstr ""
+msgstr "The Exuari Buster is a special artillery sniper designed to deal large amounts of damage quickly and from a distance before escaping. Despite being a basic design and among the smallest corvette-class ships, it also carries nuclear weapons."

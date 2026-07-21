@@ -1,17 +1,17 @@
 #: scripts/shiptemplates/tug.lua:7
 msgctxt "ship"
 msgid "Hylas"
-msgstr ""
+msgstr "Hylas"
 
 #: scripts/shiptemplates/tug.lua:7
 msgctxt "class"
 msgid "Tug"
-msgstr ""
+msgstr "Tug"
 
 #: scripts/shiptemplates/tug.lua:15
 msgctxt "playerShip"
 msgid "Heracles"
-msgstr ""
+msgstr "Heracles"
 
 #: scripts/shiptemplates/tug.lua:16
 msgid ""
@@ -19,4 +19,4 @@ msgid ""
 "operations. Improvements include a stronger hull, minimal shield system, "
 "full sensor suite, and a shield-disrupting beam for use on abandoned hostile "
 "or unknown ships."
-msgstr ""
+msgstr "The Heracles tug model is a Hylas suited for carrier use in deep-space operations. Improvements include a stronger hull, minimal shield system, full sensor suite, and a shield-disrupting beam for use on abandoned hostile or unknown ships."

@@ -1,14 +1,14 @@
 #: scripts/shiptemplates/ktlitan/starfighters.lua:9
 msgctxt "ship"
 msgid "Ktlitan Fighter"
-msgstr ""
+msgstr "Ktlitan Fighter"
 
 #: scripts/shiptemplates/ktlitan/starfighters.lua:10
 msgctxt "class"
 msgid "Starfighter"
-msgstr ""
+msgstr "Starfighter"
 
 #: scripts/shiptemplates/ktlitan/starfighters.lua:10
 msgctxt "subclass"
 msgid "Interceptor"
-msgstr ""
+msgstr "Interceptor"

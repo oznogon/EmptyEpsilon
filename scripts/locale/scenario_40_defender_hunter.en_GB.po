@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Defender Hunter"
-msgstr ""
+msgstr "Defender Hunter"
 
 # Scenario description
 msgid ""
@@ -23,355 +23,355 @@ msgid ""
 "\n"
 "USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
 "There's one almost every weekend. All experience levels are welcome."
-msgstr ""
+msgstr "Defend home station and hunt down enemies\n\nInitially, you're tasked with defending your home base.  Over time, you'll discover more about the enemies harassing you and you'll be ordered to find and destroy the enemies responsible.  There may be various missions given along the way, but the enemy harassment will continue.  You must balance your two missions.\n\nDesigned for any number of cooperating player ships. Randomisation makes many details different for each game, but the primary goals remain the same. Untimed variations can take an hour or longer for full mission completion. Different sub-missions may be chosen by the players or will be chosen at random. Achieving victory in a timed hunter variation is quite a challenge. Like the Waves scenario, the enemies get harder over time.\n\nVersion 11\n\nUSN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one almost every weekend. All experience levels are welcome."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr ""
+msgstr "Enemies"
 
 msgctxt "setting"
 msgid "Configures the number and type of enemies"
-msgstr ""
+msgstr "Configures the number and type of enemies"
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Enemies"
 msgid "Fewer and/or weaker enemy ships"
-msgstr ""
+msgstr "Fewer and/or weaker enemy ships"
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Enemies"
 msgid "Normal difficulty"
-msgstr ""
+msgstr "Normal difficulty"
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Enemies"
 msgid "More and/or stronger enemy ships"
-msgstr ""
+msgstr "More and/or stronger enemy ships"
 
 msgctxt "Enemies"
 msgid "Extreme"
-msgstr ""
+msgstr "Extreme"
 
 msgctxt "Enemies"
 msgid "Many more or much stronger enemy ships"
-msgstr ""
+msgstr "Many more or much stronger enemy ships"
 
 msgctxt "Enemies"
 msgid "Quixotic"
-msgstr ""
+msgstr "Quixotic"
 
 msgctxt "Enemies"
 msgid "Enemies likely to overwhelm you"
-msgstr ""
+msgstr "Enemies likely to overwhelm you"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Time"
-msgstr ""
+msgstr "Time"
 
 msgctxt "setting"
 msgid "Sets the length of time for the scenario"
-msgstr ""
+msgstr "Sets the length of time for the scenario"
 
 msgctxt "Time"
 msgid "Unlimited"
-msgstr ""
+msgstr "Unlimited"
 
 msgctxt "Time"
 msgid ""
 "No time limit. Protect home station and hunt and destroy designated enemy "
 "station."
-msgstr ""
+msgstr "No time limit. Protect home station and hunt and destroy designated enemy station."
 
 msgctxt "Time"
 msgid "30min"
-msgstr ""
+msgstr "30min"
 
 msgctxt "Time"
 msgid "Scenario ends in 30 minutes"
-msgstr ""
+msgstr "Scenario ends in 30 minutes"
 
 msgctxt "Time"
 msgid "35min"
-msgstr ""
+msgstr "35min"
 
 msgctxt "Time"
 msgid "Scenario ends in 35 minutes"
-msgstr ""
+msgstr "Scenario ends in 35 minutes"
 
 msgctxt "Time"
 msgid "40min"
-msgstr ""
+msgstr "40min"
 
 msgctxt "Time"
 msgid "Scenario ends in 40 minutes"
-msgstr ""
+msgstr "Scenario ends in 40 minutes"
 
 msgctxt "Time"
 msgid "45min"
-msgstr ""
+msgstr "45min"
 
 msgctxt "Time"
 msgid "Scenario ends in 45 minutes"
-msgstr ""
+msgstr "Scenario ends in 45 minutes"
 
 msgctxt "Time"
 msgid "50min"
-msgstr ""
+msgstr "50min"
 
 msgctxt "Time"
 msgid "Scenario ends in 50 minutes"
-msgstr ""
+msgstr "Scenario ends in 50 minutes"
 
 msgctxt "Time"
 msgid "55min"
-msgstr ""
+msgstr "55min"
 
 msgctxt "Time"
 msgid "Scenario ends in 55 minutes"
-msgstr ""
+msgstr "Scenario ends in 55 minutes"
 
 msgctxt "Time"
 msgid "60min"
-msgstr ""
+msgstr "60min"
 
 msgctxt "Time"
 msgid "Scenario ends in 60 minutes"
-msgstr ""
+msgstr "Scenario ends in 60 minutes"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Goal"
-msgstr ""
+msgstr "Goal"
 
 msgctxt "setting"
 msgid "Sets primary goal. Pertinent to timed scenario"
-msgstr ""
+msgstr "Sets primary goal. Pertinent to timed scenario"
 
 msgctxt "Goal"
 msgid "Defender"
-msgstr ""
+msgstr "Defender"
 
 msgctxt "Goal"
 msgid ""
 "Protect home station. If timed scenario, victory after time runs out if home "
 "station survives."
-msgstr ""
+msgstr "Protect home station. If timed scenario, victory after time runs out if home station survives."
 
 msgctxt "Goal"
 msgid "Hunter"
-msgstr ""
+msgstr "Hunter"
 
 msgctxt "Goal"
 msgid ""
 "Protect home station and hunt down designated enemy station. If timed "
 "scenario, defeat after time runs out if designated enemy station survives."
-msgstr ""
+msgstr "Protect home station and hunt down designated enemy station. If timed scenario, defeat after time runs out if designated enemy station survives."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Murphy"
-msgstr ""
+msgstr "Murphy"
 
 msgctxt "setting"
 msgid "Configures the perversity of the universe according to Murphy's law"
-msgstr ""
+msgstr "Configures the perversity of the universe according to Murphy's law"
 
 msgctxt "Murphy"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Murphy"
 msgid "Random factors are more in your favor"
-msgstr ""
+msgstr "Random factors are more in your favour"
 
 msgctxt "Murphy"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Murphy"
 msgid "Random factors are normal"
-msgstr ""
+msgstr "Random factors are normal"
 
 msgctxt "Murphy"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Murphy"
 msgid "Random factors are more against you"
-msgstr ""
+msgstr "Random factors are more against you"
 
 #: scripts/scenario_40_defender_hunter.lua:238
 msgctxt "gossip-comms"
 msgid ""
 "I hear the head of operations has a thing for his administrative assistant"
-msgstr ""
+msgstr "I hear the head of operations has a thing for his administrative assistant"
 
 #: scripts/scenario_40_defender_hunter.lua:245
 msgctxt "gossip-comms"
 msgid "My mining friends tell me Krak or Kruk is about to strike it rich"
-msgstr ""
+msgstr "My mining friends tell me Krak or Kruk is about to strike it rich"
 
 #: scripts/scenario_40_defender_hunter.lua:252
 msgctxt "gossip-comms"
 msgid ""
 "Did you know you can usually hire replacement repair crew cheaper at "
 "friendly stations?"
-msgstr ""
+msgstr "Did you know you can usually hire replacement repair crew cheaper at friendly stations?"
 
 #: scripts/scenario_40_defender_hunter.lua:259
 msgctxt "gossip-comms"
 msgid ""
 "Under their uniforms, the Kraylors have an extra appendage. I wonder what "
 "they use it for"
-msgstr ""
+msgstr "Under their uniforms, the Kraylors have an extra appendage. I wonder what they use it for"
 
 #: scripts/scenario_40_defender_hunter.lua:266
 msgctxt "gossip-comms"
 msgid ""
 "The Kraylors may be human navy enemies, but they make some mighty fine BBQ "
 "Mynock"
-msgstr ""
+msgstr "The Kraylors may be human navy enemies, but they make some mighty fine BBQ Mynock"
 
 #: scripts/scenario_40_defender_hunter.lua:273
 msgctxt "gossip-comms"
 msgid ""
 "The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. "
 "That'd be bad news for us"
-msgstr ""
+msgstr "The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. That'd be bad news for us"
 
 #: scripts/scenario_40_defender_hunter.lua:280
 msgctxt "gossip-comms"
 msgid ""
 "Docking bay 7 has interesting mind altering substances for sale, but they're "
 "monitored between 1900 and 2300"
-msgstr ""
+msgstr "Docking bay 7 has interesting mind altering substances for sale, but they're monitored between 1900 and 2300"
 
 #: scripts/scenario_40_defender_hunter.lua:287
 msgctxt "gossip-comms"
 msgid ""
 "Watch the sky tonight in quadrant J around 2243. It should be spectacular"
-msgstr ""
+msgstr "Watch the sky tonight in quadrant J around 2243. It should be spectacular"
 
 #: scripts/scenario_40_defender_hunter.lua:294
 msgctxt "gossip-comms"
 msgid ""
 "I think the shuttle pilot has a tame miniature Ktlitan caged in his "
 "quarters. Sometimes I hear it at night"
-msgstr ""
+msgstr "I think the shuttle pilot has a tame miniature Ktlitan caged in his quarters. Sometimes I hear it at night"
 
 #: scripts/scenario_40_defender_hunter.lua:301
 msgctxt "gossip-comms"
 msgid ""
 "Did you hear the screaming chase in the corridors on level 4 last night? "
 "Three Kraylors were captured and put in the brig"
-msgstr ""
+msgstr "Did you hear the screaming chase in the corridors on level 4 last night? Three Kraylors were captured and put in the brig"
 
 #: scripts/scenario_40_defender_hunter.lua:308
 msgctxt "gossip-comms"
 msgid ""
 "Rumor has it that the two Lichten brothers are on the verge of a new "
 "discovery. And it's not another wine flavor either"
-msgstr ""
+msgstr "Rumour has it that the two Lichten brothers are on the verge of a new discovery. And it's not another wine flavour either"
 
 #: scripts/scenario_40_defender_hunter.lua:1445
 #: scripts/scenario_40_defender_hunter.lua:1476
 msgctxt "buttonGM"
 msgid "Turn On Diagnostic"
-msgstr ""
+msgstr "Turn On Diagnostic"
 
 #: scripts/scenario_40_defender_hunter.lua:1447
 #: scripts/scenario_40_defender_hunter.lua:1478
 msgctxt "buttonGM"
 msgid "Turn Off Diagnostic"
-msgstr ""
+msgstr "Turn Off Diagnostic"
 
 #: scripts/scenario_40_defender_hunter.lua:1457
 #: scripts/scenario_40_defender_hunter.lua:1488
 msgctxt "buttonGM"
 msgid "Delay normal to slow"
-msgstr ""
+msgstr "Delay normal to slow"
 
 #: scripts/scenario_40_defender_hunter.lua:1459
 #: scripts/scenario_40_defender_hunter.lua:1490
 msgctxt "buttonGM"
 msgid "Delay slow to fast"
-msgstr ""
+msgstr "Delay slow to fast"
 
 #: scripts/scenario_40_defender_hunter.lua:1461
 #: scripts/scenario_40_defender_hunter.lua:1492
 msgctxt "buttonGM"
 msgid "Delay fast to normal"
-msgstr ""
+msgstr "Delay fast to normal"
 
 #: scripts/scenario_40_defender_hunter.lua:1504
 msgctxt "buttonGM"
 msgid "Spawn Enemies"
-msgstr ""
+msgstr "Spawn Enemies"
 
 #: scripts/scenario_40_defender_hunter.lua:1808
 msgctxt "scienceDescription-planet"
 msgid "Lush planet with only mild seasonal variations"
-msgstr ""
+msgstr "Lush planet with only mild seasonal variations"
 
 #: scripts/scenario_40_defender_hunter.lua:1819
 msgctxt "scienceDescription-station"
 msgid "Alderaan communications network hub"
-msgstr ""
+msgstr "Alderaan communications network hub"
 
 #: scripts/scenario_40_defender_hunter.lua:2918
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
-msgstr ""
+msgstr "We are under attack! No time for chatting!"
 
 #: scripts/scenario_40_defender_hunter.lua:2933
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?\n"
-msgstr ""
+msgstr "Good day, officer!\nWhat can we do for you today?\n"
 
 #: scripts/scenario_40_defender_hunter.lua:2936
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
-msgstr ""
+msgstr "Welcome to our lovely station.\n"
 
 #: scripts/scenario_40_defender_hunter.lua:2942
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
-msgstr ""
+msgstr "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
 
 #: scripts/scenario_40_defender_hunter.lua:2988
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr ""
+msgstr "I need ordnance restocked"
 
 #: scripts/scenario_40_defender_hunter.lua:2990
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr ""
+msgstr "What type of ordnance?"
 
 #: scripts/scenario_40_defender_hunter.lua:2996
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
-msgstr ""
+msgstr "Can you supply us with some nukes? ("
 
 #: scripts/scenario_40_defender_hunter.lua:3001
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr ""
+msgstr "We really need some nukes ("
 
 #: scripts/scenario_40_defender_hunter.lua:3006
 #: scripts/scenario_40_defender_hunter.lua:3028
@@ -381,60 +381,60 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr ""
+msgstr "%s%d rep each)"
 
 #: scripts/scenario_40_defender_hunter.lua:3021
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr ""
+msgstr "Please re-stock our EMP missiles. ("
 
 #: scripts/scenario_40_defender_hunter.lua:3024
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
-msgstr ""
+msgstr "Got any EMPs? ("
 
 #: scripts/scenario_40_defender_hunter.lua:3043
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr ""
+msgstr "Do you have spare homing missiles for us? ("
 
 #: scripts/scenario_40_defender_hunter.lua:3048
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr ""
+msgstr "Do you have extra homing missiles? ("
 
 #: scripts/scenario_40_defender_hunter.lua:3068
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr ""
+msgstr "We could use some mines. ("
 
 #: scripts/scenario_40_defender_hunter.lua:3072
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr ""
+msgstr "How about mines? ("
 
 #: scripts/scenario_40_defender_hunter.lua:3090
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
-msgstr ""
+msgstr "What about HVLI? ("
 
 #: scripts/scenario_40_defender_hunter.lua:3093
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
-msgstr ""
+msgstr "Could you provide HVLI? ("
 
 #: scripts/scenario_40_defender_hunter.lua:3112
 #: scripts/scenario_40_defender_hunter.lua:5554
 msgctxt "stationServices-comms"
 msgid "Docking services status"
-msgstr ""
+msgstr "Docking services status"
 
 #: scripts/scenario_40_defender_hunter.lua:3117
 #: scripts/scenario_40_defender_hunter.lua:5560
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
-msgstr ""
+msgstr "Station %s docking services status:"
 
 #: scripts/scenario_40_defender_hunter.lua:3123
 #: scripts/scenario_40_defender_hunter.lua:5566
@@ -443,19 +443,19 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "Replenish scan probes."
-msgstr ""
+msgstr "%s\nReplenish scan probes."
 
 #: scripts/scenario_40_defender_hunter.lua:3131
 #: scripts/scenario_40_defender_hunter.lua:5574
 msgctxt "stationServices-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
-msgstr ""
+msgstr "Cannot replenish scan probes due to fabrication unit failure."
 
 #: scripts/scenario_40_defender_hunter.lua:3135
 #: scripts/scenario_40_defender_hunter.lua:5578
 msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
-msgstr ""
+msgstr "Parts shortage prevents scan probe replenishment."
 
 #: scripts/scenario_40_defender_hunter.lua:3139
 #: scripts/scenario_40_defender_hunter.lua:5582
@@ -463,7 +463,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
-msgstr ""
+msgstr "Station management has curtailed scan probe replenishment for cost cutting reasons."
 
 #: scripts/scenario_40_defender_hunter.lua:3146
 #: scripts/scenario_40_defender_hunter.lua:3176
@@ -476,7 +476,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "%s"
-msgstr ""
+msgstr "%s\n%s"
 
 #: scripts/scenario_40_defender_hunter.lua:3153
 #: scripts/scenario_40_defender_hunter.lua:5596
@@ -485,24 +485,24 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "Ship hull repair."
-msgstr ""
+msgstr "%s\nShip hull repair."
 
 #: scripts/scenario_40_defender_hunter.lua:3161
 #: scripts/scenario_40_defender_hunter.lua:5604
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
-msgstr ""
+msgstr "We're out of the necessary materials and supplies for hull repair."
 
 #: scripts/scenario_40_defender_hunter.lua:3165
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
-msgstr ""
+msgstr "Hull repair automation unavailable while it is undergoing maintenance."
 
 #: scripts/scenario_40_defender_hunter.lua:3169
 #: scripts/scenario_40_defender_hunter.lua:5612
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
-msgstr ""
+msgstr "All hull repair technicians quarantined to quarters due to illness."
 
 #: scripts/scenario_40_defender_hunter.lua:3185
 #: scripts/scenario_40_defender_hunter.lua:5628
@@ -511,7 +511,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "Recharge ship energy stores."
-msgstr ""
+msgstr "%s\nRecharge ship energy stores."
 
 #: scripts/scenario_40_defender_hunter.lua:3194
 #: scripts/scenario_40_defender_hunter.lua:5637
@@ -519,13 +519,13 @@ msgctxt "stationServices-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
-msgstr ""
+msgstr "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships."
 
 #: scripts/scenario_40_defender_hunter.lua:3198
 #: scripts/scenario_40_defender_hunter.lua:5641
 msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
-msgstr ""
+msgstr "A damaged power coupling makes it too dangerous to recharge ships."
 
 #: scripts/scenario_40_defender_hunter.lua:3202
 #: scripts/scenario_40_defender_hunter.lua:5645
@@ -533,7 +533,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
-msgstr ""
+msgstr "An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now."
 
 #: scripts/scenario_40_defender_hunter.lua:3216
 #: scripts/scenario_40_defender_hunter.lua:5661
@@ -542,7 +542,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May overcharge jump drive"
-msgstr ""
+msgstr "%s\nMay overcharge jump drive"
 
 #: scripts/scenario_40_defender_hunter.lua:3224
 #: scripts/scenario_40_defender_hunter.lua:5670
@@ -551,7 +551,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair probe launch system"
-msgstr ""
+msgstr "%s\nMay repair probe launch system"
 
 #: scripts/scenario_40_defender_hunter.lua:3231
 #: scripts/scenario_40_defender_hunter.lua:5679
@@ -560,7 +560,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair hacking system"
-msgstr ""
+msgstr "%s\nMay repair hacking system"
 
 #: scripts/scenario_40_defender_hunter.lua:3237
 #: scripts/scenario_40_defender_hunter.lua:5686
@@ -569,7 +569,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair scanners"
-msgstr ""
+msgstr "%s\nMay repair scanners"
 
 #: scripts/scenario_40_defender_hunter.lua:3243
 #: scripts/scenario_40_defender_hunter.lua:5694
@@ -578,7 +578,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair combat maneuver"
-msgstr ""
+msgstr "%s\nMay repair combat manoeuvre"
 
 #: scripts/scenario_40_defender_hunter.lua:3251
 #: scripts/scenario_40_defender_hunter.lua:5703
@@ -587,7 +587,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair self destruct system"
-msgstr ""
+msgstr "%s\nMay repair self destruct system"
 
 #: scripts/scenario_40_defender_hunter.lua:3257
 #: scripts/scenario_40_defender_hunter.lua:3290
@@ -672,18 +672,18 @@ msgstr ""
 #: scripts/scenario_40_defender_hunter.lua:6655
 #: scripts/scenario_40_defender_hunter.lua:6718
 msgid "Back"
-msgstr ""
+msgstr "Back"
 
 #: scripts/scenario_40_defender_hunter.lua:3268
 msgctxt "stationServices-comms"
 msgid "Overcharge Jump Drive (10 Rep)"
-msgstr ""
+msgstr "Overcharge Jump Drive (10 Rep)"
 
 #: scripts/scenario_40_defender_hunter.lua:3278
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
-msgstr ""
+msgstr "Your jump drive has been overcharged to %ik"
 
 #: scripts/scenario_40_defender_hunter.lua:3287
 #: scripts/scenario_40_defender_hunter.lua:3361
@@ -698,73 +698,73 @@ msgstr ""
 #: scripts/scenario_40_defender_hunter.lua:6538
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr ""
+msgstr "Insufficient reputation"
 
 #: scripts/scenario_40_defender_hunter.lua:3333
 msgctxt "stationServices-comms"
 msgid "Repair ship system"
-msgstr ""
+msgstr "Repair ship system"
 
 #: scripts/scenario_40_defender_hunter.lua:3338
 msgctxt "stationServices-comms"
 msgid "What system would you like repaired?"
-msgstr ""
+msgstr "What system would you like repaired?"
 
 #: scripts/scenario_40_defender_hunter.lua:3346
 msgctxt "stationServices-comms"
 msgid "Repair probe launch system (5 Rep)"
-msgstr ""
+msgstr "Repair probe launch system (5 Rep)"
 
 #: scripts/scenario_40_defender_hunter.lua:3354
 msgctxt "stationServices-comms"
 msgid "Your probe launch system has been repaired"
-msgstr ""
+msgstr "Your probe launch system has been repaired"
 
 #: scripts/scenario_40_defender_hunter.lua:3375
 msgctxt "stationServices-comms"
 msgid "Repair hacking system (5 Rep)"
-msgstr ""
+msgstr "Repair hacking system (5 Rep)"
 
 #: scripts/scenario_40_defender_hunter.lua:3383
 msgctxt "stationServices-comms"
 msgid "Your hack system has been repaired"
-msgstr ""
+msgstr "Your hack system has been repaired"
 
 #: scripts/scenario_40_defender_hunter.lua:3404
 msgctxt "stationServices-comms"
 msgid "Repair scanners (5 Rep)"
-msgstr ""
+msgstr "Repair scanners (5 Rep)"
 
 #: scripts/scenario_40_defender_hunter.lua:3412
 msgctxt "stationServices-comms"
 msgid "Your scanners have been repaired"
-msgstr ""
+msgstr "Your scanners have been repaired"
 
 #: scripts/scenario_40_defender_hunter.lua:3433
 msgctxt "stationServices-comms"
 msgid "Repair combat maneuver (5 Rep)"
-msgstr ""
+msgstr "Repair combat manoeuvre (5 Rep)"
 
 #: scripts/scenario_40_defender_hunter.lua:3441
 msgctxt "stationServices-comms"
 msgid "Your combat maneuver has been repaired"
-msgstr ""
+msgstr "Your combat manoeuvre has been repaired"
 
 #: scripts/scenario_40_defender_hunter.lua:3462
 msgctxt "stationServices-comms"
 msgid "Repair self destruct system (5 Rep)"
-msgstr ""
+msgstr "Repair self destruct system (5 Rep)"
 
 #: scripts/scenario_40_defender_hunter.lua:3470
 msgctxt "stationServices-comms"
 msgid "Your self destruct system has been repaired"
-msgstr ""
+msgstr "Your self destruct system has been repaired"
 
 #: scripts/scenario_40_defender_hunter.lua:3492
 #: scripts/scenario_40_defender_hunter.lua:5860
 msgctxt "orders-comms"
 msgid "What are my current orders?"
-msgstr ""
+msgstr "What are my current orders?"
 
 #: scripts/scenario_40_defender_hunter.lua:3502
 #: scripts/scenario_40_defender_hunter.lua:5870
@@ -773,37 +773,37 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   %i Minutes remain in game"
-msgstr ""
+msgstr "\n   %i Minutes remain in game"
 
 #: scripts/scenario_40_defender_hunter.lua:3522
 #: scripts/scenario_40_defender_hunter.lua:3588
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr ""
+msgstr "Recruit repair crew member for %i reputation"
 
 #: scripts/scenario_40_defender_hunter.lua:3536
 #: scripts/scenario_40_defender_hunter.lua:3602
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
-msgstr ""
+msgstr "Repair crew member hired"
 
 #: scripts/scenario_40_defender_hunter.lua:3552
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchase coolant for %i reputation"
-msgstr ""
+msgstr "Purchase coolant for %i reputation"
 
 #: scripts/scenario_40_defender_hunter.lua:3567
 msgctxt "trade-comms"
 msgid "Additional coolant purchased"
-msgstr ""
+msgstr "Additional coolant purchased"
 
 #: scripts/scenario_40_defender_hunter.lua:3617
 #, lua-format
 msgctxt "defTelemetry-comms"
 msgid "Establish defensive system telemetry (%i rep)"
-msgstr ""
+msgstr "Establish defensive system telemetry (%i rep)"
 
 #: scripts/scenario_40_defender_hunter.lua:3629
 #, lua-format
@@ -811,57 +811,57 @@ msgctxt "defTelemetry-comms"
 msgid ""
 "Defensive telemetry established with station %s.\n"
 "Damage should show on Relay when it occurs"
-msgstr ""
+msgstr "Defensive telemetry established with station %s.\nDamage should show on Relay when it occurs"
 
 #: scripts/scenario_40_defender_hunter.lua:3664
 msgctxt "-comms"
 msgid "Provide cargo"
-msgstr ""
+msgstr "Provide cargo"
 
 #: scripts/scenario_40_defender_hunter.lua:3666
 msgctxt "-comms"
 msgid "Do you have something for us?"
-msgstr ""
+msgstr "Do you have something for us?"
 
 #: scripts/scenario_40_defender_hunter.lua:3687
 msgctxt "upgrade-comms"
 msgid "Request promised information"
-msgstr ""
+msgstr "Request promised information"
 
 #: scripts/scenario_40_defender_hunter.lua:3692
 msgctxt "upgrade-comms"
 msgid "Remind me what information I promised"
-msgstr ""
+msgstr "Remind me what information I promised"
 
 #: scripts/scenario_40_defender_hunter.lua:3752
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr ""
+msgstr "Tell me more about your station"
 
 #: scripts/scenario_40_defender_hunter.lua:3755
 msgctxt "station-comms"
 msgid "What would you like to know?"
-msgstr ""
+msgstr "What would you like to know?"
 
 #: scripts/scenario_40_defender_hunter.lua:3762
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
-msgstr ""
+msgstr "General information"
 
 #: scripts/scenario_40_defender_hunter.lua:3776
 msgctxt "stationStory-comms"
 msgid "Station history"
-msgstr ""
+msgstr "Station history"
 
 #: scripts/scenario_40_defender_hunter.lua:3790
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr ""
+msgstr "Gossip"
 
 #: scripts/scenario_40_defender_hunter.lua:3809
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
-msgstr ""
+msgstr "Buy, sell, trade"
 
 #: scripts/scenario_40_defender_hunter.lua:3813
 #, lua-format
@@ -869,42 +869,42 @@ msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available for sale: quantity, cost in reputation\n"
-msgstr ""
+msgstr "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"
 
 #: scripts/scenario_40_defender_hunter.lua:3820
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr ""
+msgstr "     %s: %i, %i\n"
 
 #: scripts/scenario_40_defender_hunter.lua:3830
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
-msgstr ""
+msgstr "Goods or components station will buy: price in reputation\n"
 
 #: scripts/scenario_40_defender_hunter.lua:3835
 #: scripts/scenario_40_defender_hunter.lua:3853
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr ""
+msgstr "     %s: %i\n"
 
 #: scripts/scenario_40_defender_hunter.lua:3843
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
-msgstr ""
+msgstr "Current cargo aboard %s:\n"
 
 #: scripts/scenario_40_defender_hunter.lua:3860
 msgctxt "trade-comms"
 msgid "     Empty\n"
-msgstr ""
+msgstr "     Empty\n"
 
 #: scripts/scenario_40_defender_hunter.lua:3866
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr ""
+msgstr "Available Space: %i, Available Reputation: %i\n"
 
 #: scripts/scenario_40_defender_hunter.lua:3875
 #: scripts/scenario_40_defender_hunter.lua:6472
@@ -914,20 +914,20 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr ""
+msgstr "Buy one %s for %i reputation"
 
 #: scripts/scenario_40_defender_hunter.lua:3881
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr ""
+msgstr "Type: %s, Quantity: %i, Rep: %i"
 
 #: scripts/scenario_40_defender_hunter.lua:3890
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient cargo space for purchase"
-msgstr ""
+msgstr "\nInsufficient cargo space for purchase"
 
 #: scripts/scenario_40_defender_hunter.lua:3899
 #: scripts/scenario_40_defender_hunter.lua:3929
@@ -935,7 +935,7 @@ msgctxt "needRep-comms"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
-msgstr ""
+msgstr "\nInsufficient reputation for purchase"
 
 #: scripts/scenario_40_defender_hunter.lua:3905
 #: scripts/scenario_40_defender_hunter.lua:4000
@@ -945,39 +945,39 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient station inventory"
-msgstr ""
+msgstr "\nInsufficient station inventory"
 
 #: scripts/scenario_40_defender_hunter.lua:3924
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "purchased"
-msgstr ""
+msgstr "\npurchased"
 
 #: scripts/scenario_40_defender_hunter.lua:3949
 #, lua-format
 msgctxt "trade-comms"
 msgid "Sell one %s for %i reputation"
-msgstr ""
+msgstr "Sell one %s for %i reputation"
 
 #: scripts/scenario_40_defender_hunter.lua:3958
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
-msgstr ""
+msgstr "Type: %s,  Reputation price: %i"
 
 #: scripts/scenario_40_defender_hunter.lua:3967
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "One sold"
-msgstr ""
+msgstr "\nOne sold"
 
 #: scripts/scenario_40_defender_hunter.lua:3987
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr ""
+msgstr "Trade food for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:3992
 #: scripts/scenario_40_defender_hunter.lua:4039
@@ -985,7 +985,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr ""
+msgstr "Type: %s,  Quantity: %i"
 
 #: scripts/scenario_40_defender_hunter.lua:4015
 #: scripts/scenario_40_defender_hunter.lua:4062
@@ -994,26 +994,26 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "Traded"
-msgstr ""
+msgstr "\nTraded"
 
 #: scripts/scenario_40_defender_hunter.lua:4034
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr ""
+msgstr "Trade medicine for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4081
 #: scripts/scenario_40_defender_hunter.lua:6432
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
-msgstr ""
+msgstr "Trade luxury for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4126
 #: scripts/scenario_40_defender_hunter.lua:6384
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr ""
+msgstr "Jettison cargo"
 
 #: scripts/scenario_40_defender_hunter.lua:4131
 #: scripts/scenario_40_defender_hunter.lua:6390
@@ -1022,19 +1022,19 @@ msgctxt "trade-comms"
 msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
-msgstr ""
+msgstr "Available space: %i\nWhat would you like to jettison?"
 
 #: scripts/scenario_40_defender_hunter.lua:4144
 #: scripts/scenario_40_defender_hunter.lua:6408
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr ""
+msgstr "One %s jettisoned"
 
 #: scripts/scenario_40_defender_hunter.lua:4158
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr ""
+msgstr "No tutorial covered goods or cargo. Explain"
 
 #: scripts/scenario_40_defender_hunter.lua:4164
 msgctxt "explainGoods-comms"
@@ -1045,13 +1045,13 @@ msgid ""
 "cargo. Each player ship differs in cargo carrying capacity. Goods may be "
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
-msgstr ""
+msgstr "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"
 
 #: scripts/scenario_40_defender_hunter.lua:4175
 #, lua-format
 msgctxt "trade-comms"
 msgid "Provide %s as requested"
-msgstr ""
+msgstr "Provide %s as requested"
 
 #: scripts/scenario_40_defender_hunter.lua:4186
 msgctxt "trade-comms"
@@ -1059,29 +1059,29 @@ msgid ""
 "Thanks, we really needed that.\n"
 "\n"
 "I have some information for you. Decide which one you want"
-msgstr ""
+msgstr "Thanks, we really needed that.\n\nI have some information for you. Decide which one you want"
 
 #: scripts/scenario_40_defender_hunter.lua:4190
 msgctxt "upgrade-comms"
 msgid "Ship maneuver upgrade"
-msgstr ""
+msgstr "Ship manoeuvre upgrade"
 
 #: scripts/scenario_40_defender_hunter.lua:4196
 #: scripts/scenario_40_defender_hunter.lua:4206
 msgctxt "upgrade-comms"
 msgid "Check back shortly and I'll tell you all about it"
-msgstr ""
+msgstr "Check back shortly and I'll tell you all about it"
 
 #: scripts/scenario_40_defender_hunter.lua:4201
 msgctxt "intelligence-comms"
 msgid "Intelligence"
-msgstr ""
+msgstr "Intelligence"
 
 #: scripts/scenario_40_defender_hunter.lua:4216
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Give %s as requested"
-msgstr ""
+msgstr "Give %s as requested"
 
 #: scripts/scenario_40_defender_hunter.lua:4228
 #, lua-format
@@ -1090,75 +1090,75 @@ msgid ""
 "Thanks, we needed that %s.\n"
 "\n"
 "I have information for you. Decide which one you want"
-msgstr ""
+msgstr "Thanks, we needed that %s.\n\nI have information for you. Decide which one you want"
 
 #: scripts/scenario_40_defender_hunter.lua:4235
 #: scripts/scenario_40_defender_hunter.lua:4762
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Upgrade %s to auto-rotate"
-msgstr ""
+msgstr "Upgrade %s to auto-rotate"
 
 #: scripts/scenario_40_defender_hunter.lua:4243
 #: scripts/scenario_40_defender_hunter.lua:4255
 #: scripts/scenario_40_defender_hunter.lua:4267
 msgctxt "upgrade-comms"
 msgid "Check back in a bit and I'll tell you all about it"
-msgstr ""
+msgstr "Check back in a bit and I'll tell you all about it"
 
 #: scripts/scenario_40_defender_hunter.lua:4249
 msgctxt "upgrade-comms"
 msgid "Upgrade beam weapon cycle time"
-msgstr ""
+msgstr "Upgrade beam weapon cycle time"
 
 #: scripts/scenario_40_defender_hunter.lua:4261
 #: scripts/scenario_40_defender_hunter.lua:4952
 msgctxt "upgrade-comms"
 msgid "Upgrade hull damage capacity"
-msgstr ""
+msgstr "Upgrade hull damage capacity"
 
 #: scripts/scenario_40_defender_hunter.lua:4279
 msgctxt "upgrade-comms"
 msgid "What about that maneuver upgrade information you promised?"
-msgstr ""
+msgstr "What about that manoeuvre upgrade information you promised?"
 
 #: scripts/scenario_40_defender_hunter.lua:4286
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "I hear %s can upgrade your maneuverability, but they need %s to do the job"
-msgstr ""
+msgstr "I hear %s can upgrade your maneuverability, but they need %s to do the job"
 
 #: scripts/scenario_40_defender_hunter.lua:4297
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Where is %s?"
-msgstr ""
+msgstr "Where is %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4303
 #: scripts/scenario_40_defender_hunter.lua:4585
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s is in sector %s"
-msgstr ""
+msgstr "%s is in sector %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4316
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Where might I find some %s?"
-msgstr ""
+msgstr "Where might I find some %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4322
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "I think %s might have some"
-msgstr ""
+msgstr "I think %s might have some"
 
 #: scripts/scenario_40_defender_hunter.lua:4332
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "And where the heck is %s?"
-msgstr ""
+msgstr "And where the heck is %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4340
 #, lua-format
@@ -1166,36 +1166,36 @@ msgctxt "upgrade-comms"
 msgid ""
 "My, my, you're quite inquisitive.\n"
 "%s is in sector %s"
-msgstr ""
+msgstr "My, my, you're quite inquisitive.\n%s is in sector %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4362
 msgctxt "upgrade-comms"
 msgid "You mentioned a beam weapon cycle time upgrade..."
-msgstr ""
+msgstr "You mentioned a beam weapon cycle time upgrade..."
 
 #: scripts/scenario_40_defender_hunter.lua:4366
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Station %s can do that for %s"
-msgstr ""
+msgstr "Station %s can do that for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4376
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "I've never heard of %s. Where is %s?"
-msgstr ""
+msgstr "I've never heard of %s. Where is %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4385
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "You haven't? I'm surprised. %s is in %s"
-msgstr ""
+msgstr "You haven't? I'm surprised. %s is in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4401
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Can you direct me to a station with %s?"
-msgstr ""
+msgstr "Can you direct me to a station with %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4410
 #, lua-format
@@ -1203,71 +1203,71 @@ msgctxt "upgrade-comms"
 msgid ""
 "%s has %s *and* they have the best indigenous Kraylor honey you've ever "
 "tasted"
-msgstr ""
+msgstr "%s has %s *and* they have the best indigenous Kraylor honey you've ever tasted"
 
 #: scripts/scenario_40_defender_hunter.lua:4422
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Sounds tasty. Where is %s?"
-msgstr ""
+msgstr "Sounds tasty. Where is %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4428
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "It's in %s"
-msgstr ""
+msgstr "It's in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4448
 msgctxt "upgrade-comms"
 msgid "Where's that station rotation upgrade information?"
-msgstr ""
+msgstr "Where's that station rotation upgrade information?"
 
 #: scripts/scenario_40_defender_hunter.lua:4454
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "station %s has the technical knowledge but lacks the %s"
-msgstr ""
+msgstr "station %s has the technical knowledge but lacks the %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4465
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Where is station %s?"
-msgstr ""
+msgstr "Where is station %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4471
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s is in %s"
-msgstr ""
+msgstr "%s is in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4485
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Where could I get %s?"
-msgstr ""
+msgstr "Where could I get %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4491
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s should have %s"
-msgstr ""
+msgstr "%s should have %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4504
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Do you know where %s is located?"
-msgstr ""
+msgstr "Do you know where %s is located?"
 
 #: scripts/scenario_40_defender_hunter.lua:4513
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Yes, it's in %s"
-msgstr ""
+msgstr "Yes, it's in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4537
 msgctxt "intelligence-comms"
 msgid "What about that intelligence information you promised?"
-msgstr ""
+msgstr "What about that intelligence information you promised?"
 
 #: scripts/scenario_40_defender_hunter.lua:4544
 #, lua-format
@@ -1276,93 +1276,93 @@ msgid ""
 "I hear Marcy Sorenson just got back from an enemy scouting expedition. She "
 "was talking about enemy bases. She can probably tell you where some of these "
 "bases are located. She's based on %s"
-msgstr ""
+msgstr "I hear Marcy Sorenson just got back from an enemy scouting expedition. She was talking about enemy bases. She can probably tell you where some of these bases are located. She's based on %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4550
 #: scripts/scenario_40_defender_hunter.lua:4821
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Talk with Marcy Sorenson on %s"
-msgstr ""
+msgstr "Talk with Marcy Sorenson on %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4561
 msgctxt "upgrade-comms"
 msgid "Remember, you promised some ship hull upgrade information?"
-msgstr ""
+msgstr "Remember, you promised some ship hull upgrade information?"
 
 #: scripts/scenario_40_defender_hunter.lua:4568
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Oh yes, %s can upgrade your hull, but they want %s to do the job"
-msgstr ""
+msgstr "Oh yes, %s can upgrade your hull, but they want %s to do the job"
 
 #: scripts/scenario_40_defender_hunter.lua:4579
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "So, where is %s?"
-msgstr ""
+msgstr "So, where is %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4598
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Where could I find some %s?"
-msgstr ""
+msgstr "Where could I find some %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4604
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "I think %s may have some"
-msgstr ""
+msgstr "I think %s may have some"
 
 #: scripts/scenario_40_defender_hunter.lua:4614
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "And just where is %s?"
-msgstr ""
+msgstr "And just where is %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4622
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "If you must know, %s is in sector %s"
-msgstr ""
+msgstr "If you must know, %s is in sector %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4646
 msgctxt "upgrade-comms"
 msgid "Upgrade maneuverability"
-msgstr ""
+msgstr "Upgrade maneuverability"
 
 #: scripts/scenario_40_defender_hunter.lua:4665
 msgctxt "upgrade-comms"
 msgid "Upgraded maneuverability"
-msgstr ""
+msgstr "Upgraded maneuverability"
 
 #: scripts/scenario_40_defender_hunter.lua:4672
 #: scripts/scenario_40_defender_hunter.lua:4796
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "You need to bring some %s for the upgrade"
-msgstr ""
+msgstr "You need to bring some %s for the upgrade"
 
 #: scripts/scenario_40_defender_hunter.lua:4688
 msgctxt "upgrade-comms"
 msgid "Upgrade beam cycle time"
-msgstr ""
+msgstr "Upgrade beam cycle time"
 
 #: scripts/scenario_40_defender_hunter.lua:4694
 msgctxt "upgrade-comms"
 msgid "Your ship type does not support a beam weapon upgrade."
-msgstr ""
+msgstr "Your ship type does not support a beam weapon upgrade."
 
 #: scripts/scenario_40_defender_hunter.lua:4737
 msgctxt "upgrade-comms"
 msgid "Beam cycle time reduced by 20%"
-msgstr ""
+msgstr "Beam cycle time reduced by 20%"
 
 #: scripts/scenario_40_defender_hunter.lua:4745
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "We require %s before we can upgrade your beam weapons"
-msgstr ""
+msgstr "We require %s before we can upgrade your beam weapons"
 
 #: scripts/scenario_40_defender_hunter.lua:4784
 #, lua-format
@@ -1370,111 +1370,111 @@ msgctxt "upgrade-comms"
 msgid ""
 "%s was just what we needed. The technical details have been transmitted to "
 "%s. The auto-rotation has begun"
-msgstr ""
+msgstr "%s was just what we needed. The technical details have been transmitted to %s. The auto-rotation has begun"
 
 #: scripts/scenario_40_defender_hunter.lua:4810
 msgctxt "intelligence-comms"
 msgid "May I speak with Marcy Sorenson?"
-msgstr ""
+msgstr "May I speak with Marcy Sorenson?"
 
 #: scripts/scenario_40_defender_hunter.lua:4816
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "She transferred to %s"
-msgstr ""
+msgstr "She transferred to %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4826
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Where exactly is %s?"
-msgstr ""
+msgstr "Where exactly is %s?"
 
 #: scripts/scenario_40_defender_hunter.lua:4832
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "%s is in %s"
-msgstr ""
+msgstr "%s is in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4840
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Talk with Marcy Sorenson on %s in %s"
-msgstr ""
+msgstr "Talk with Marcy Sorenson on %s in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4851
 #: scripts/scenario_40_defender_hunter.lua:4901
 msgctxt "intelligence-comms"
 msgid "This is Marcy. Whatcha want?"
-msgstr ""
+msgstr "This is Marcy. Whatcha want?"
 
 #: scripts/scenario_40_defender_hunter.lua:4856
 #: scripts/scenario_40_defender_hunter.lua:4906
 msgctxt "intelligence-comms"
 msgid "Please tell me about the enemy bases found"
-msgstr ""
+msgstr "Please tell me about the enemy bases found"
 
 #: scripts/scenario_40_defender_hunter.lua:4873
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Sure. We found a couple of enemy stations in %s and %s"
-msgstr ""
+msgstr "Sure. We found a couple of enemy stations in %s and %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4882
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Investigate enemy bases in %s and %s"
-msgstr ""
+msgstr "Investigate enemy bases in %s and %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4898
 msgctxt "intelligence-comms"
 msgid "May I speak with Marcy Sorenson, please?"
-msgstr ""
+msgstr "May I speak with Marcy Sorenson, please?"
 
 #: scripts/scenario_40_defender_hunter.lua:4924
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Sure. We found some enemy stations in %s, %s and %s"
-msgstr ""
+msgstr "Sure. We found some enemy stations in %s, %s and %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4934
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Investigate enemy bases in %s, %s and %s"
-msgstr ""
+msgstr "Investigate enemy bases in %s, %s and %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4971
 msgctxt "upgrade-comms"
 msgid "Upgraded hull capacity for damage by 20%"
-msgstr ""
+msgstr "Upgraded hull capacity for damage by 20%"
 
 #: scripts/scenario_40_defender_hunter.lua:4979
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "We won't upgrade your hull until we have %s"
-msgstr ""
+msgstr "We won't upgrade your hull until we have %s"
 
 #: scripts/scenario_40_defender_hunter.lua:4994
 msgctxt "Maria-comms"
 msgid "Offer gift on behalf of Maria Shrivner"
-msgstr ""
+msgstr "Offer gift on behalf of Maria Shrivner"
 
 #: scripts/scenario_40_defender_hunter.lua:5048
 msgctxt "Maria-comms"
 msgid ""
 "Thanks. He's impressed with the gift to such a degree that he's speechless"
-msgstr ""
+msgstr "Thanks. He's impressed with the gift to such a degree that he's speechless"
 
 #: scripts/scenario_40_defender_hunter.lua:5055
 msgctxt "Maria-comms"
 msgid ""
 "I know this couple (or former couple). Only gold, platinum, dilithium, "
 "tritanium or cobolt will work as a gift"
-msgstr ""
+msgstr "I know this couple (or former couple). Only gold, platinum, dilithium, tritanium or cobolt will work as a gift"
 
 #: scripts/scenario_40_defender_hunter.lua:5070
 msgctxt "upgradeOrders-comms"
 msgid "Get ship maneuver upgrade"
-msgstr ""
+msgstr "Get ship manoeuvre upgrade"
 
 #: scripts/scenario_40_defender_hunter.lua:5073
 #: scripts/scenario_40_defender_hunter.lua:5121
@@ -1483,7 +1483,7 @@ msgctxt "upgradeOrders-comms"
 msgid ""
 "\n"
 "Optional:\n"
-msgstr ""
+msgstr "\nOptional:\n"
 
 #: scripts/scenario_40_defender_hunter.lua:5079
 #, lua-format
@@ -1492,7 +1492,7 @@ msgid ""
 "\n"
 "Optional:\n"
 "Get ship maneuver upgrade from %s for %s"
-msgstr ""
+msgstr "\nOptional:\nGet ship manoeuvre upgrade from %s for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5088
 #, lua-format
@@ -1501,7 +1501,7 @@ msgid ""
 "\n"
 "Optional:\n"
 "Get ship maneuver upgrade from %s in sector %s for %s"
-msgstr ""
+msgstr "\nOptional:\nGet ship manoeuvre upgrade from %s in sector %s for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5098
 #, lua-format
@@ -1511,7 +1511,7 @@ msgid ""
 "Optional:\n"
 "Get ship maneuver upgrade from %s in sector %s for %s.\n"
 "    You might find %s at %s"
-msgstr ""
+msgstr "\nOptional:\nGet ship manoeuvre upgrade from %s in sector %s for %s.\n    You might find %s at %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5110
 #, lua-format
@@ -1521,25 +1521,25 @@ msgid ""
 "Optional:\n"
 "Get ship maneuver upgrade from %s in sector %s for %s.\n"
 "    You might find %s at %s in sector %s"
-msgstr ""
+msgstr "\nOptional:\nGet ship manoeuvre upgrade from %s in sector %s for %s.\n    You might find %s at %s in sector %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5136
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Upgrade %s to rotate"
-msgstr ""
+msgstr "Upgrade %s to rotate"
 
 #: scripts/scenario_40_defender_hunter.lua:5148
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Upgrade %s to auto-rotate by taking %s to %s"
-msgstr ""
+msgstr "Upgrade %s to auto-rotate by taking %s to %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5160
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Upgrade %s to auto-rotate by taking %s to %s in %s"
-msgstr ""
+msgstr "Upgrade %s to auto-rotate by taking %s to %s in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5173
 #, lua-format
@@ -1547,7 +1547,7 @@ msgctxt "upgradeOrders-comms"
 msgid ""
 "Upgrade %s to auto-rotate by taking %s to %s in %s.\n"
 "    %s may have %s"
-msgstr ""
+msgstr "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s may have %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5188
 #, lua-format
@@ -1555,24 +1555,24 @@ msgctxt "upgradeOrders-comms"
 msgid ""
 "Upgrade %s to auto-rotate by taking %s to %s in %s.\n"
 "    %s in %s may have %s"
-msgstr ""
+msgstr "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s in %s may have %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5201
 msgctxt "upgradeOrders-comms"
 msgid "Get beam cycle time upgrade"
-msgstr ""
+msgstr "Get beam cycle time upgrade"
 
 #: scripts/scenario_40_defender_hunter.lua:5211
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Get beam cycle time upgrade from %s for %s"
-msgstr ""
+msgstr "Get beam cycle time upgrade from %s for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5222
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Get beam cycle time upgrade from %s in %s for %s"
-msgstr ""
+msgstr "Get beam cycle time upgrade from %s in %s for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5234
 #, lua-format
@@ -1580,7 +1580,7 @@ msgctxt "upgradeOrders-comms"
 msgid ""
 "Get beam cycle time upgrade from %s in %s for %s\n"
 "    You might find %s at %s"
-msgstr ""
+msgstr "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5248
 #, lua-format
@@ -1588,24 +1588,24 @@ msgctxt "upgradeOrders-comms"
 msgid ""
 "Get beam cycle time upgrade from %s in %s for %s\n"
 "    You might find %s at %s in %s"
-msgstr ""
+msgstr "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5259
 msgctxt "upgradeOrders-comms"
 msgid "Get hull upgrade"
-msgstr ""
+msgstr "Get hull upgrade"
 
 #: scripts/scenario_40_defender_hunter.lua:5269
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Get %s to upgrade hull for %s"
-msgstr ""
+msgstr "Get %s to upgrade hull for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5280
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Get %s in %s to upgrade hull for %s"
-msgstr ""
+msgstr "Get %s in %s to upgrade hull for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5292
 #, lua-format
@@ -1613,7 +1613,7 @@ msgctxt "upgradeOrders-comms"
 msgid ""
 "Get %s in %s to upgrade hull for %s\n"
 "    %s might have %s"
-msgstr ""
+msgstr "Get %s in %s to upgrade hull for %s\n    %s might have %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5306
 #, lua-format
@@ -1621,68 +1621,68 @@ msgctxt "upgradeOrders-comms"
 msgid ""
 "Get %s in %s to upgrade hull for %s\n"
 "    %s in %s might have %s"
-msgstr ""
+msgstr "Get %s in %s to upgrade hull for %s\n    %s in %s might have %s"
 
 #: scripts/scenario_40_defender_hunter.lua:5333
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
-msgstr ""
+msgstr "You need to stay docked for that action."
 
 #: scripts/scenario_40_defender_hunter.lua:5342
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr ""
+msgstr "We do not deal in weapons of mass destruction."
 
 #: scripts/scenario_40_defender_hunter.lua:5347
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr ""
+msgstr "We do not deal in weapons of mass disruption."
 
 #: scripts/scenario_40_defender_hunter.lua:5350
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr ""
+msgstr "We do not deal in those weapons."
 
 #: scripts/scenario_40_defender_hunter.lua:5364
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr ""
+msgstr "All nukes are charged and primed for destruction."
 
 #: scripts/scenario_40_defender_hunter.lua:5371
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
-msgstr ""
+msgstr "Sorry, sir, but you are as fully stocked as I can allow."
 
 #: scripts/scenario_40_defender_hunter.lua:5380
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
-msgstr ""
+msgstr "Not enough reputation."
 
 #: scripts/scenario_40_defender_hunter.lua:5394
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr ""
+msgstr "You are fully loaded and ready to explode things."
 
 #: scripts/scenario_40_defender_hunter.lua:5401
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
-msgstr ""
+msgstr "We generously resupplied you with some weapon charges.\nPut them to good use."
 
 #: scripts/scenario_40_defender_hunter.lua:5419
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
-msgstr ""
+msgstr "Good day, officer.\nIf you need supplies, please dock with us first."
 
 #: scripts/scenario_40_defender_hunter.lua:5424
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
-msgstr ""
+msgstr "Greetings.\nIf you want to do business, please dock with us first."
 
 #: scripts/scenario_40_defender_hunter.lua:5431
 msgctxt "station-comms"
@@ -1690,79 +1690,79 @@ msgid ""
 "\n"
 "Be aware that if enemies in the area get much closer, we will be too busy to "
 "conduct business with you."
-msgstr ""
+msgstr "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
 
 #: scripts/scenario_40_defender_hunter.lua:5462
 msgctxt "station-comms"
 msgid "I need information"
-msgstr ""
+msgstr "I need information"
 
 #: scripts/scenario_40_defender_hunter.lua:5464
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
-msgstr ""
+msgstr "What kind of information do you need?"
 
 #: scripts/scenario_40_defender_hunter.lua:5467
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
-msgstr ""
+msgstr "What ordnance do you have available for restock?"
 
 #: scripts/scenario_40_defender_hunter.lua:5473
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Nuke"
-msgstr ""
+msgstr "\n   Nuke"
 
 #: scripts/scenario_40_defender_hunter.lua:5477
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   EMP"
-msgstr ""
+msgstr "\n   EMP"
 
 #: scripts/scenario_40_defender_hunter.lua:5481
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Homing"
-msgstr ""
+msgstr "\n   Homing"
 
 #: scripts/scenario_40_defender_hunter.lua:5485
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Mine"
-msgstr ""
+msgstr "\n   Mine"
 
 #: scripts/scenario_40_defender_hunter.lua:5489
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   HVLI"
-msgstr ""
+msgstr "\n   HVLI"
 
 #: scripts/scenario_40_defender_hunter.lua:5494
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
-msgstr ""
+msgstr "We have no ordnance available for restock"
 
 #: scripts/scenario_40_defender_hunter.lua:5500
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr ""
+msgstr "We have the following type of ordnance available for restock:%s"
 
 #: scripts/scenario_40_defender_hunter.lua:5508
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr ""
+msgstr "We have the following types of ordnance available for restock:%s"
 
 #: scripts/scenario_40_defender_hunter.lua:5529
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
-msgstr ""
+msgstr "What goods do you have available for sale or trade?"
 
 #: scripts/scenario_40_defender_hunter.lua:5535
 #, lua-format
@@ -1770,7 +1770,7 @@ msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available: quantity, cost in reputation"
-msgstr ""
+msgstr "Station %s:\nGoods or components available: quantity, cost in reputation"
 
 #: scripts/scenario_40_defender_hunter.lua:5542
 #, lua-format
@@ -1778,56 +1778,56 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "   %14s: %2i, %3i"
-msgstr ""
+msgstr "\n   %14s: %2i, %3i"
 
 #: scripts/scenario_40_defender_hunter.lua:5608
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable whie it is undergoing maintenance."
-msgstr ""
+msgstr "Hull repair automation unavailable whie it is undergoing maintenance."
 
 #: scripts/scenario_40_defender_hunter.lua:5713
 msgctxt "helpfullWarning-comms"
 msgid "See any enemies in your area?"
-msgstr ""
+msgstr "See any enemies in your area?"
 
 #: scripts/scenario_40_defender_hunter.lua:5728
 #, lua-format
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see %i enemies within 30U"
-msgstr ""
+msgstr "Yes, we see %i enemies within 30U"
 
 #: scripts/scenario_40_defender_hunter.lua:5737
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see one enemy within 30U"
-msgstr ""
+msgstr "Yes, we see one enemy within 30U"
 
 #: scripts/scenario_40_defender_hunter.lua:5744
 msgctxt "helpfullWarning-comms"
 msgid "No enemies within 30U"
-msgstr ""
+msgstr "No enemies within 30U"
 
 #: scripts/scenario_40_defender_hunter.lua:5750
 msgctxt "helpfullWarning-comms"
 msgid "Not really"
-msgstr ""
+msgstr "Not really"
 
 #: scripts/scenario_40_defender_hunter.lua:5757
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
-msgstr ""
+msgstr "Where can I find particular goods?"
 
 #: scripts/scenario_40_defender_hunter.lua:5761
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
-msgstr ""
+msgstr "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury."
 
 #: scripts/scenario_40_defender_hunter.lua:5817
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr ""
+msgstr "Station %s in sector %s has %s for %i reputation"
 
 #: scripts/scenario_40_defender_hunter.lua:5832
 msgctxt "trade-comms"
@@ -1836,209 +1836,209 @@ msgid ""
 "\n"
 "What goods are you interested in?\n"
 "I've heard about these:"
-msgstr ""
+msgstr "\n\nWhat goods are you interested in?\nI've heard about these:"
 
 #: scripts/scenario_40_defender_hunter.lua:5838
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr ""
+msgstr " Beyond that, I have no knowledge of specific stations"
 
 #: scripts/scenario_40_defender_hunter.lua:5850
 msgctxt "stationGeneralInfo-comms"
 msgid "General station information"
-msgstr ""
+msgstr "General station information"
 
 #: scripts/scenario_40_defender_hunter.lua:5961
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr ""
+msgstr "Can you send a supply drop? (%d rep)"
 
 #: scripts/scenario_40_defender_hunter.lua:5969
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
-msgstr ""
+msgstr "You need to set a waypoint before you can request backup."
 
 #: scripts/scenario_40_defender_hunter.lua:5976
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr ""
+msgstr "To which waypoint should we deliver your supplies?"
 
 #: scripts/scenario_40_defender_hunter.lua:5982
 #: scripts/scenario_40_defender_hunter.lua:6058
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
-msgstr ""
+msgstr "WP %d"
 
 #: scripts/scenario_40_defender_hunter.lua:6012
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
-msgstr ""
+msgstr "We have dispatched a supply ship toward WP %d"
 
 #: scripts/scenario_40_defender_hunter.lua:6021
 #: scripts/scenario_40_defender_hunter.lua:6091
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
-msgstr ""
+msgstr "Not enough reputation!"
 
 #: scripts/scenario_40_defender_hunter.lua:6037
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
-msgstr ""
+msgstr "Please send reinforcements! (%d rep)"
 
 #: scripts/scenario_40_defender_hunter.lua:6045
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
+msgstr "You need to set a waypoint before you can request reinforcements."
 
 #: scripts/scenario_40_defender_hunter.lua:6052
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr ""
+msgstr "To which waypoint should we dispatch the reinforcements?"
 
 #: scripts/scenario_40_defender_hunter.lua:6081
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
-msgstr ""
+msgstr "We have dispatched %s to assist at WP %d"
 
 #: scripts/scenario_40_defender_hunter.lua:6142
 #: scripts/scenario_40_defender_hunter.lua:6524
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr ""
+msgstr "What do you want?"
 
 #: scripts/scenario_40_defender_hunter.lua:6144
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Sir, how can we assist?"
 
 #: scripts/scenario_40_defender_hunter.lua:6146
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Defend a waypoint"
 
 #: scripts/scenario_40_defender_hunter.lua:6151
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
-msgstr ""
+msgstr "No waypoints set. Please set a waypoint first."
 
 #: scripts/scenario_40_defender_hunter.lua:6157
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Which waypoint should we defend?"
 
 #: scripts/scenario_40_defender_hunter.lua:6162
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr ""
+msgstr "Defend WP %d"
 
 #: scripts/scenario_40_defender_hunter.lua:6173
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
-msgstr ""
+msgstr "We are heading to assist at WP %d."
 
 #: scripts/scenario_40_defender_hunter.lua:6185
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr ""
+msgstr "Assist me"
 
 #: scripts/scenario_40_defender_hunter.lua:6187
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Heading toward you to assist."
 
 #: scripts/scenario_40_defender_hunter.lua:6193
 msgctxt "shipAssist-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Report status"
 
 #: scripts/scenario_40_defender_hunter.lua:6195
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Hull: %d%%\n"
 
 #: scripts/scenario_40_defender_hunter.lua:6202
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
-msgstr ""
+msgstr "Shield: %d%%\n"
 
 #: scripts/scenario_40_defender_hunter.lua:6212
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
-msgstr ""
+msgstr "Front Shield: %d%%\n"
 
 #: scripts/scenario_40_defender_hunter.lua:6221
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
-msgstr ""
+msgstr "Rear Shield: %d%%\n"
 
 #: scripts/scenario_40_defender_hunter.lua:6232
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr ""
+msgstr "Shield %s: %d%%\n"
 
 #: scripts/scenario_40_defender_hunter.lua:6247
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr ""
+msgstr "%s Missiles: %d/%d\n"
 
 #: scripts/scenario_40_defender_hunter.lua:6266
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Dock at %s"
 
 #: scripts/scenario_40_defender_hunter.lua:6272
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
-msgstr ""
+msgstr "Docking at %s."
 
 #: scripts/scenario_40_defender_hunter.lua:6287
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr ""
+msgstr "We will see to your destruction!"
 
 #: scripts/scenario_40_defender_hunter.lua:6289
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
-msgstr ""
+msgstr "Your bloodline will end here!"
 
 #: scripts/scenario_40_defender_hunter.lua:6291
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr ""
+msgstr "Your feeble threats are meaningless."
 
 #: scripts/scenario_40_defender_hunter.lua:6294
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
-msgstr ""
+msgstr "Ktzzzsss.\nYou will DIEEee weaklingsss!"
 
 #: scripts/scenario_40_defender_hunter.lua:6300
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
-msgstr ""
+msgstr "We wish you no harm, but will harm you if we must.\nEnd of transmission."
 
 #: scripts/scenario_40_defender_hunter.lua:6307
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
-msgstr ""
+msgstr "Stay out of our way, or your death will amuse us extremely!"
 
 #: scripts/scenario_40_defender_hunter.lua:6314
 msgctxt "shipEnemy-comms"
@@ -2049,22 +2049,22 @@ msgid ""
 "Generating appropriate response for target from human language archives.\n"
 ":Do not cross us:\n"
 "Communication halted."
-msgstr ""
+msgstr "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."
 
 #: scripts/scenario_40_defender_hunter.lua:6317
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr ""
+msgstr "EXECUTE: SELFDESTRUCT"
 
 #: scripts/scenario_40_defender_hunter.lua:6320
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr ""
+msgstr "Rogue command received. Targeting source."
 
 #: scripts/scenario_40_defender_hunter.lua:6323
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
-msgstr ""
+msgstr "External command ignored."
 
 #: scripts/scenario_40_defender_hunter.lua:6328
 msgctxt "shipEnemy-comms"
@@ -2072,49 +2072,49 @@ msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
 "all.\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
-msgstr ""
+msgstr "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."
 
 #: scripts/scenario_40_defender_hunter.lua:6333
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr ""
+msgstr "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 
 #: scripts/scenario_40_defender_hunter.lua:6337
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr ""
+msgstr "We do not need permission to pluck apart such an insignificant threat."
 
 #: scripts/scenario_40_defender_hunter.lua:6341
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
-msgstr ""
+msgstr "The hive has greater priorities than exterminating pests."
 
 #: scripts/scenario_40_defender_hunter.lua:6344
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
-msgstr ""
+msgstr "Mind your own business!"
 
 #: scripts/scenario_40_defender_hunter.lua:6364
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr ""
+msgstr "Yes?"
 
 #: scripts/scenario_40_defender_hunter.lua:6366
 msgctxt "trade-comms"
 msgid "Where are you headed?"
-msgstr ""
+msgstr "Where are you headed?"
 
 #: scripts/scenario_40_defender_hunter.lua:6446
 #, lua-format
 msgctxt "trade-comms"
 msgid "Traded luxury for %s"
-msgstr ""
+msgstr "Traded luxury for %s"
 
 #: scripts/scenario_40_defender_hunter.lua:6501
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
-msgstr ""
+msgstr "Purchased %s from %s"
 
 #: scripts/scenario_40_defender_hunter.lua:6511
 #: scripts/scenario_40_defender_hunter.lua:6587
@@ -2122,53 +2122,53 @@ msgstr ""
 #: scripts/scenario_40_defender_hunter.lua:6705
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr ""
+msgstr "Insufficient reputation for purchase"
 
 #: scripts/scenario_40_defender_hunter.lua:6531
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr ""
+msgstr "Where are you headed? (cost: %f reputation)"
 
 #: scripts/scenario_40_defender_hunter.lua:6568
 #: scripts/scenario_40_defender_hunter.lua:6623
 #: scripts/scenario_40_defender_hunter.lua:6686
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
-msgstr ""
+msgstr "Insufficient cargo space for purchase"
 
 #: scripts/scenario_40_defender_hunter.lua:6575
 #: scripts/scenario_40_defender_hunter.lua:6630
 #: scripts/scenario_40_defender_hunter.lua:6693
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter"
-msgstr ""
+msgstr "Insufficient inventory on freighter"
 
 #: scripts/scenario_40_defender_hunter.lua:6596
 #: scripts/scenario_40_defender_hunter.lua:6651
 #: scripts/scenario_40_defender_hunter.lua:6714
 msgctxt "trade-comms"
 msgid "Purchased"
-msgstr ""
+msgstr "Purchased"
 
 #: scripts/scenario_40_defender_hunter.lua:6663
 msgctxt "trade-comms"
 msgid "Why are you bothering me?"
-msgstr ""
+msgstr "Why are you bothering me?"
 
 #: scripts/scenario_40_defender_hunter.lua:6731
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
-msgstr ""
+msgstr "Sorry, we have no time to chat with you.\nWe are on an important mission."
 
 #: scripts/scenario_40_defender_hunter.lua:6736
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
-msgstr ""
+msgstr "We have nothing for you.\nGood day."
 
 #: scripts/scenario_40_defender_hunter.lua:6801
 #, lua-format
@@ -2176,30 +2176,30 @@ msgctxt "goalAudio-shipLog"
 msgid ""
 "You are to protect your home base, %s, against enemy attack. Respond to "
 "other requests as you see fit"
-msgstr ""
+msgstr "You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit"
 
 #: scripts/scenario_40_defender_hunter.lua:6808
 #, lua-format
 msgctxt "goal-comms"
 msgid "Protect %s"
-msgstr ""
+msgstr "Protect %s"
 
 #: scripts/scenario_40_defender_hunter.lua:7197
 #, lua-format
 msgctxt "intelligenceOrdersAudio-shipLog"
 msgid "[%s] We need some goods of type %s. Can you help? I hear %s has some"
-msgstr ""
+msgstr "[%s] We need some goods of type %s. Can you help? I hear %s has some"
 
 #: scripts/scenario_40_defender_hunter.lua:7208
 #, lua-format
 msgctxt "intelligenceOrders-comms"
 msgid "Bring %s to %s. Possible source: %s"
-msgstr ""
+msgstr "Bring %s to %s. Possible source: %s"
 
 #: scripts/scenario_40_defender_hunter.lua:7227
 msgctxt "upgrade-comms"
 msgid "Get ship maneuver upgrade"
-msgstr ""
+msgstr "Get ship manoeuvre upgrade"
 
 #: scripts/scenario_40_defender_hunter.lua:7588
 #, lua-format
@@ -2207,13 +2207,13 @@ msgctxt "intelligenceOrders-comms"
 msgid ""
 "The enemy activity has been traced back to enemy bases nearby. Find these "
 "bases and stop these incursions. Threat Assessment: %.1f"
-msgstr ""
+msgstr "The enemy activity has been traced back to enemy bases nearby. Find these bases and stop these incursions. Threat Assessment: %.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7601
 #, lua-format
 msgctxt "intelligenceOrders-comms"
 msgid "Find enemy bases. Stop enemy incursions. TA:%.1f"
-msgstr ""
+msgstr "Find enemy bases. Stop enemy incursions. TA:%.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7636
 #, lua-format
@@ -2221,27 +2221,27 @@ msgctxt "intelligenceOrdersAudio-shipLog"
 msgid ""
 "Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy "
 "that station and the Kraylor incursion will crumble. Threat Assessment: %.1f"
-msgstr ""
+msgstr "Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy that station and the Kraylor incursion will crumble. Threat Assessment: %.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7650
 #, lua-format
 msgctxt "intelligenceOrders-comms"
 msgid "Destroy enemy base with Prefect Ghalontor aboard. TA:%.1f"
-msgstr ""
+msgstr "Destroy enemy base with Prefect Ghalontor aboard. TA:%.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7694
 #, lua-format
 msgctxt "intelligenceOrders-comms"
 msgid ""
 "Enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"
-msgstr ""
+msgstr "Enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7708
 #, lua-format
 msgctxt "intelligenceOrders-comms"
 msgid ""
 "Destroy enemy base possibly near %s with Prefect Ghalontor aboard. TA:%.1f"
-msgstr ""
+msgstr "Destroy enemy base possibly near %s with Prefect Ghalontor aboard. TA:%.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7753
 #: scripts/scenario_40_defender_hunter.lua:7813
@@ -2250,7 +2250,7 @@ msgctxt "intelligenceOrders-comms"
 msgid ""
 "Another enemy base located in %s. Others expected nearby. Threat Assessment: "
 "%.1f"
-msgstr ""
+msgstr "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7767
 #, lua-format
@@ -2258,7 +2258,7 @@ msgctxt "intelligenceOrders-comms"
 msgid ""
 "Destroy enemy base possibly near %s or %s with Prefect Ghalontor aboard. TA:"
 "%.1f"
-msgstr ""
+msgstr "Destroy enemy base possibly near %s or %s with Prefect Ghalontor aboard. TA:%.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7827
 #, lua-format
@@ -2266,7 +2266,7 @@ msgctxt "IntelligenceOrders-comms"
 msgid ""
 "Destroy enemy base possibly near %s, %s or %s with Prefect Ghalontor aboard. "
 "TA:%.1f"
-msgstr ""
+msgstr "Destroy enemy base possibly near %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7863
 #, lua-format
@@ -2274,7 +2274,7 @@ msgctxt "intelligenceOrders-comms"
 msgid ""
 "Another enemy base located in %s. Others expected nearby: Threat Assessment: "
 "%.1f"
-msgstr ""
+msgstr "Another enemy base located in %s. Others expected nearby: Threat Assessment: %.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7877
 #, lua-format
@@ -2282,7 +2282,7 @@ msgctxt "intelligenceOrders-comms"
 msgid ""
 "Destroy enemy base possibly near %s, %s, %s or %s with Prefect Ghalontor "
 "aboard. TA:%.1f"
-msgstr ""
+msgstr "Destroy enemy base possibly near %s, %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7914
 #, lua-format
@@ -2290,13 +2290,13 @@ msgctxt "intelligenceOrders-comms"
 msgid ""
 "We confirmed Prefect Ghalontor is aboard enemy station %s in %s. Threat "
 "Assessment: %.1f"
-msgstr ""
+msgstr "We confirmed Prefect Ghalontor is aboard enemy station %s in %s. Threat Assessment: %.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:7929
 #, lua-format
 msgctxt "intelligenceOrders-comms"
 msgid "Destroy enemy base %s in %s. TA:%.1f"
-msgstr ""
+msgstr "Destroy enemy base %s in %s. TA:%.1f"
 
 #: scripts/scenario_40_defender_hunter.lua:8039
 #, lua-format
@@ -2304,29 +2304,29 @@ msgctxt "upgradeOrdersAudio-shipLog"
 msgid ""
 "[%s] We are running low on goods of type %s. Can you help? %s in %s should "
 "have some"
-msgstr ""
+msgstr "[%s] We are running low on goods of type %s. Can you help? %s in %s should have some"
 
 #: scripts/scenario_40_defender_hunter.lua:8051
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Bring %s to %s. Possible source: %s in %s"
-msgstr ""
+msgstr "Bring %s to %s. Possible source: %s in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8070
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Upgrade %s to rotate"
-msgstr ""
+msgstr "Upgrade %s to rotate"
 
 #: scripts/scenario_40_defender_hunter.lua:8142
 msgctxt "upgrade-comms"
 msgid "Get beam cycle time upgrade"
-msgstr ""
+msgstr "Get beam cycle time upgrade"
 
 #: scripts/scenario_40_defender_hunter.lua:8237
 msgctxt "upgrade-comms"
 msgid "Get hull upgrade"
-msgstr ""
+msgstr "Get hull upgrade"
 
 #: scripts/scenario_40_defender_hunter.lua:8410
 #, lua-format
@@ -2334,13 +2334,13 @@ msgctxt "PaulOrders-shiplog"
 msgid ""
 "Agent Paul Straight has information on enemies in the area and a proposal. "
 "Pick him and his equipment up at station %s"
-msgstr ""
+msgstr "Agent Paul Straight has information on enemies in the area and a proposal. Pick him and his equipment up at station %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8417
 #, lua-format
 msgctxt "PaulOrders-comms"
 msgid "Get Paul Straight at station %s"
-msgstr ""
+msgstr "Get Paul Straight at station %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8443
 #, lua-format
@@ -2351,35 +2351,35 @@ msgid ""
 "range transporter that should be able to beam me onto the station through "
 "their shields. I need to get refined readings from 20 units or closer for "
 "final calibration. Please take me to within 20 units of %s"
-msgstr ""
+msgstr "[Paul Straight] I've been studying enemy station %s in %s: traffic patterns, communication traffic, energy signature, etc. I've built a specialised short range transporter that should be able to beam me onto the station through their shields. I need to get refined readings from 20 units or closer for final calibration. Please take me to within 20 units of %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8454
 #, lua-format
 msgctxt "PaulOrders-comms"
 msgid "Take Paul Straight to within 20U of %s in %s"
-msgstr ""
+msgstr "Take Paul Straight to within 20U of %s in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8475
 msgctxt "Paul-shiplog"
 msgid "[Paul Straight] I've got my readings. Let me calibrate the transporter"
-msgstr ""
+msgstr "[Paul Straight] I've got my readings. Let me calibrate the transporter"
 
 #: scripts/scenario_40_defender_hunter.lua:8486
 msgctxt "Paul-msgHelms"
 msgid "[Paul Straight] The ship is in range. I completed my scans. Thank you"
-msgstr ""
+msgstr "[Paul Straight] The ship is in range. I completed my scans. Thank you"
 
 #: scripts/scenario_40_defender_hunter.lua:8497
 msgctxt "Paul-msgTactical"
 msgid "[Paul Straight] The ship is in range. I completed my scans. Thank you"
-msgstr ""
+msgstr "[Paul Straight] The ship is in range. I completed my scans. Thank you"
 
 #: scripts/scenario_40_defender_hunter.lua:8512
 #: scripts/scenario_40_defender_hunter.lua:8560
 #: scripts/scenario_40_defender_hunter.lua:8625
 msgctxt "Paul-shiplog"
 msgid "[Paul Straight] It's too bad the station was destroyed"
-msgstr ""
+msgstr "[Paul Straight] It's too bad the station was destroyed"
 
 #: scripts/scenario_40_defender_hunter.lua:8534
 #, lua-format
@@ -2390,37 +2390,37 @@ msgid ""
 "defeat any patrols, but there might be some enemy interest in your ship "
 "flying so close to the station. After I am aboard %s, I will gether "
 "intelligence and transmit it back. I'm ready to proceed"
-msgstr ""
+msgstr "[Paul Straight] My transporter is ready. I've disguised myself as a Kraylor technician. I need you to take the ship within 2.5U of %s. You don't need to defeat any patrols, but there might be some enemy interest in your ship flying so close to the station. After I am aboard %s, I will gether intelligence and transmit it back. I'm ready to proceed"
 
 #: scripts/scenario_40_defender_hunter.lua:8544
 #, lua-format
 msgctxt "PaulOrders-comms"
 msgid "Get ship within 2.5U of %s in %s to secretly transport Paul Straight"
-msgstr ""
+msgstr "Get ship within 2.5U of %s in %s to secretly transport Paul Straight"
 
 #: scripts/scenario_40_defender_hunter.lua:8586
 #, lua-format
 msgctxt "Paul-msgScience"
 msgid "Paul Straight has transported aboard %s"
-msgstr ""
+msgstr "Paul Straight has transported aboard %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8600
 #, lua-format
 msgctxt "Paul-msgOperations"
 msgid "Paul Straight has transported aboard %s"
-msgstr ""
+msgstr "Paul Straight has transported aboard %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8610
 #, lua-format
 msgctxt "Paul-comms"
 msgid "Await intelligence results from Paul Straight on %s"
-msgstr ""
+msgstr "Await intelligence results from Paul Straight on %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8642
 msgctxt "Paul-comms"
 msgid ""
 "[Paul Straight] I discovered the location of the enemy bases in the area:"
-msgstr ""
+msgstr "[Paul Straight] I discovered the location of the enemy bases in the area:"
 
 #: scripts/scenario_40_defender_hunter.lua:8648
 #, lua-format
@@ -2428,7 +2428,7 @@ msgctxt "Paul-comms"
 msgid ""
 "\n"
 "%s in %s"
-msgstr ""
+msgstr "\n%s in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8670
 #: scripts/scenario_40_defender_hunter.lua:8720
@@ -2437,7 +2437,7 @@ msgstr ""
 #: scripts/scenario_40_defender_hunter.lua:8832
 msgctxt "Paul-msgScience"
 msgid "Lifesign telemetry from Paul Straight's equipment has ceased"
-msgstr ""
+msgstr "Lifesign telemetry from Paul Straight's equipment has ceased"
 
 #: scripts/scenario_40_defender_hunter.lua:8681
 #: scripts/scenario_40_defender_hunter.lua:8731
@@ -2446,7 +2446,7 @@ msgstr ""
 #: scripts/scenario_40_defender_hunter.lua:8843
 msgctxt "Paul-msgOperations"
 msgid "Lifesign telemetry from Paul Straight's equipment has ceased"
-msgstr ""
+msgstr "Lifesign telemetry from Paul Straight's equipment has ceased"
 
 #: scripts/scenario_40_defender_hunter.lua:8700
 #, lua-format
@@ -2454,14 +2454,14 @@ msgctxt "Paul-shipLog"
 msgid ""
 "[Paul Straight] Prefect Ghalantor is on station %s. Wait, someone is "
 "coming..."
-msgstr ""
+msgstr "[Paul Straight] Prefect Ghalantor is on station %s. Wait, someone is coming..."
 
 #: scripts/scenario_40_defender_hunter.lua:8750
 msgctxt "Paul-incCall"
 msgid ""
 "We discovered your perfidious spy aboard our station. He will be executed "
 "for his treasonous activities"
-msgstr ""
+msgstr "We discovered your perfidious spy aboard our station. He will be executed for his treasonous activities"
 
 #: scripts/scenario_40_defender_hunter.lua:8880
 #, lua-format
@@ -2469,40 +2469,40 @@ msgctxt "HMSBounty-shipLog"
 msgid ""
 "[HMS Bounty] We stole a Kraylor ship, but were damaged during the escape. "
 "Can you help? We are in %s"
-msgstr ""
+msgstr "[HMS Bounty] We stole a Kraylor ship, but were damaged during the escape. Can you help? We are in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8887
 #, lua-format
 msgctxt "HMSBounty-comms"
 msgid "Help HMS Bounty in %s"
-msgstr ""
+msgstr "Help HMS Bounty in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:8910
 msgctxt "HMSBounty-shipLog"
 msgid ""
 "[HMS Bounty] Please ask your engineer to transport a spare repair technician "
 "to help with repairs"
-msgstr ""
+msgstr "[HMS Bounty] Please ask your engineer to transport a spare repair technician to help with repairs"
 
 #: scripts/scenario_40_defender_hunter.lua:8920
 msgctxt "crewTransfer-buttonEngineer"
 msgid "Transport technician"
-msgstr ""
+msgstr "Transport technician"
 
 #: scripts/scenario_40_defender_hunter.lua:8932
 msgctxt "crewTransfer-buttonEngineer+"
 msgid "Transport technician"
-msgstr ""
+msgstr "Transport technician"
 
 #: scripts/scenario_40_defender_hunter.lua:8942
 msgctxt "HMSBounty-shipLog"
 msgid "HMS Bounty has been destroyed"
-msgstr ""
+msgstr "HMS Bounty has been destroyed"
 
 #: scripts/scenario_40_defender_hunter.lua:8966
 msgctxt "HMSBounty-shipLog"
 msgid "[HMS Bounty] Our engines have been repaired. We stand ready to assist"
-msgstr ""
+msgstr "[HMS Bounty] Our engines have been repaired. We stand ready to assist"
 
 #: scripts/scenario_40_defender_hunter.lua:8992
 #, lua-format
@@ -2511,13 +2511,13 @@ msgid ""
 "Intelligence analysis shows research on the network that could double the "
 "shield strength of station %s. The analysis shows that the technical expert "
 "can be found on station %s in sector %s"
-msgstr ""
+msgstr "Intelligence analysis shows research on the network that could double the shield strength of station %s. The analysis shows that the technical expert can be found on station %s in sector %s"
 
 #: scripts/scenario_40_defender_hunter.lua:9004
 #, lua-format
 msgctxt "MariaOrders-comms"
 msgid "Find shield expert at station %s in %s"
-msgstr ""
+msgstr "Find shield expert at station %s in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:9030
 #, lua-format
@@ -2528,14 +2528,14 @@ msgid ""
 "technology. We've been looking for her. We only just found out that she left "
 "the station after a severe romantic breakup with her supervisor. She took a "
 "job on a freighter %s which was last reported in %s"
-msgstr ""
+msgstr "We heard you were looking for our former shield maintenance technician, Maria Shrivner who's been publishing hints about advances in shield technology. We've been looking for her. We only just found out that she left the station after a severe romantic breakup with her supervisor. She took a job on a freighter %s which was last reported in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:9041
 #: scripts/scenario_40_defender_hunter.lua:9070
 #, lua-format
 msgctxt "MariaOrders-comms"
 msgid "Meet transport %s last reported in %s to find Maria Shrivner"
-msgstr ""
+msgstr "Meet transport %s last reported in %s to find Maria Shrivner"
 
 #: scripts/scenario_40_defender_hunter.lua:9059
 #, lua-format
@@ -2544,14 +2544,14 @@ msgid ""
 "We received word that station %s has been destroyed. However, in some of "
 "their final records we see that Maria Shrivner left the station to take a "
 "job on freighter %s which was last reported in %s"
-msgstr ""
+msgstr "We received word that station %s has been destroyed. However, in some of their final records we see that Maria Shrivner left the station to take a job on freighter %s which was last reported in %s"
 
 #: scripts/scenario_40_defender_hunter.lua:9084
 #, lua-format
 msgctxt "Maria-shipLog"
 msgid ""
 "Station %s has been destroyed leaving no hints for shield upgrade followup"
-msgstr ""
+msgstr "Station %s has been destroyed leaving no hints for shield upgrade followup"
 
 #: scripts/scenario_40_defender_hunter.lua:9106
 #, lua-format
@@ -2559,14 +2559,14 @@ msgctxt "MariaOrdersAudio-shipLog"
 msgid ""
 "[Maria Shrivner] It was tragic that %s was destroyed. Bring me to %s and "
 "I'll double %s's shield effectiveness"
-msgstr ""
+msgstr "[Maria Shrivner] It was tragic that %s was destroyed. Bring me to %s and I'll double %s's shield effectiveness"
 
 #: scripts/scenario_40_defender_hunter.lua:9118
 #: scripts/scenario_40_defender_hunter.lua:9183
 #: scripts/scenario_40_defender_hunter.lua:9220
 msgctxt "MariaOrders-comms"
 msgid "Return to home base with Maria Shrivner to double shield capacity"
-msgstr ""
+msgstr "Return to home base with Maria Shrivner to double shield capacity"
 
 #: scripts/scenario_40_defender_hunter.lua:9138
 #, lua-format
@@ -2575,7 +2575,7 @@ msgid ""
 "[Maria Shrivner] I should not have broken up with him, it was all a "
 "misunderstanding. Help me get him some rare material as a gift and I'll "
 "double %s's shield effectiveness"
-msgstr ""
+msgstr "[Maria Shrivner] I should not have broken up with him, it was all a misunderstanding. Help me get him some rare material as a gift and I'll double %s's shield effectiveness"
 
 #: scripts/scenario_40_defender_hunter.lua:9150
 #, lua-format
@@ -2583,7 +2583,7 @@ msgctxt "MariaOrders-comms"
 msgid ""
 "Get gold, platinum, dilithium, tritanium or cobalt and bring it and Maria "
 "Shrivner to %s"
-msgstr ""
+msgstr "Get gold, platinum, dilithium, tritanium or cobalt and bring it and Maria Shrivner to %s"
 
 #: scripts/scenario_40_defender_hunter.lua:9173
 #, lua-format
@@ -2591,13 +2591,13 @@ msgctxt "MariaOrdersAudio-shipLog"
 msgid ""
 "[Maria Shrivner] Well, he's at least thinking about it. He liked the gift. "
 "Take me to %s and let's get those shields upgraded"
-msgstr ""
+msgstr "[Maria Shrivner] Well, he's at least thinking about it. He liked the gift. Take me to %s and let's get those shields upgraded"
 
 #: scripts/scenario_40_defender_hunter.lua:9198
 #, lua-format
 msgctxt "Maria-shipLog"
 msgid "We were just notified that station %s has been destroyed"
-msgstr ""
+msgstr "We were just notified that station %s has been destroyed"
 
 #: scripts/scenario_40_defender_hunter.lua:9209
 #, lua-format
@@ -2606,7 +2606,7 @@ msgid ""
 "[Maria Shrivner] Oh no! I'm too late! Now we'll never be reconciled. *sniff* "
 "Well, the least I can do is upgrade %s's shields. Take me there and I'll "
 "double %s's shield capacity"
-msgstr ""
+msgstr "[Maria Shrivner] Oh no! I'm too late! Now we'll never be reconciled. *sniff* Well, the least I can do is upgrade %s's shields. Take me there and I'll double %s's shield capacity"
 
 #: scripts/scenario_40_defender_hunter.lua:9255
 #, lua-format
@@ -2614,232 +2614,232 @@ msgctxt "MariaAudio-shipLog"
 msgid ""
 "[Maria Shrivner] %s's shield capacity has been doubled. They should charge "
 "up to their new capacity eventually"
-msgstr ""
+msgstr "[Maria Shrivner] %s's shield capacity has been doubled. They should charge up to their new capacity eventually"
 
 #: scripts/scenario_40_defender_hunter.lua:9295
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "[%s] Our sensors detect enemies nearby"
-msgstr ""
+msgstr "[%s] Our sensors detect enemies nearby"
 
 #: scripts/scenario_40_defender_hunter.lua:9304
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid " - Type: %s"
-msgstr ""
+msgstr " - Type: %s"
 
 #: scripts/scenario_40_defender_hunter.lua:9351
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "   Shield: %.1f%% (%.1f/%.1f) "
-msgstr ""
+msgstr "   Shield: %.1f%% (%.1f/%.1f) "
 
 #: scripts/scenario_40_defender_hunter.lua:9368
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "   Shield count: %i "
-msgstr ""
+msgstr "   Shield count: %i "
 
 #: scripts/scenario_40_defender_hunter.lua:9408
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "      Shield %i: %i%% (%.1f/%i) "
-msgstr ""
+msgstr "      Shield %i: %i%% (%.1f/%i) "
 
 #: scripts/scenario_40_defender_hunter.lua:9429
 #: scripts/scenario_40_defender_hunter.lua:9465
 msgctxt "helpfullWarning-shipLog"
 msgid "Station Status:"
-msgstr ""
+msgstr "Station Status:"
 
 #: scripts/scenario_40_defender_hunter.lua:9473
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "   Hull: %i%% (%.1f/%i)"
-msgstr ""
+msgstr "   Hull: %i%% (%.1f/%i)"
 
 #: scripts/scenario_40_defender_hunter.lua:9524
 msgctxt "scienceDescription-artifact"
 msgid "sprightly unassuming object"
-msgstr ""
+msgstr "sprightly unassuming object"
 
 #: scripts/scenario_40_defender_hunter.lua:9527
 msgctxt "scienceDescription-artifact"
 msgid "Object shows rapidly building energy"
-msgstr ""
+msgstr "Object shows rapidly building energy"
 
 #: scripts/scenario_40_defender_hunter.lua:10303
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
-msgstr ""
+msgstr "Medical team has revived one of your repair crew"
 
 #: scripts/scenario_40_defender_hunter.lua:10315
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
-msgstr ""
+msgstr "Medical team has revived one of your repair crew"
 
 #: scripts/scenario_40_defender_hunter.lua:10352
 msgctxt "coolant-msgEngineer"
 msgid "Automated systems have recovered some coolant"
-msgstr ""
+msgstr "Automated systems have recovered some coolant"
 
 #: scripts/scenario_40_defender_hunter.lua:10364
 msgctxt "coolant-msgEngineer+"
 msgid "Automated systems have recovered some coolant"
-msgstr ""
+msgstr "Automated systems have recovered some coolant"
 
 #: scripts/scenario_40_defender_hunter.lua:10437
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "One of your repair crew has perished"
 
 #: scripts/scenario_40_defender_hunter.lua:10448
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "One of your repair crew has perished"
 
 #: scripts/scenario_40_defender_hunter.lua:10475
 msgctxt "coolant-msgEngineer"
 msgid "Damage has caused a loss of coolant"
-msgstr ""
+msgstr "Damage has caused a loss of coolant"
 
 #: scripts/scenario_40_defender_hunter.lua:10486
 msgctxt "coolant-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
-msgstr ""
+msgstr "Damage has caused a loss of coolant"
 
 #: scripts/scenario_40_defender_hunter.lua:10500
 msgctxt "damage-msgEngineer"
 msgid "The probe launch system has been damaged"
-msgstr ""
+msgstr "The probe launch system has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10510
 msgctxt "damage-msgEngineer+"
 msgid "The probe launch system has been damaged"
-msgstr ""
+msgstr "The probe launch system has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10520
 msgctxt "damage-msgRelay"
 msgid "The probe launch system has been damaged"
-msgstr ""
+msgstr "The probe launch system has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10530
 msgctxt "damage-msgOperations"
 msgid "The probe launch system has been damaged"
-msgstr ""
+msgstr "The probe launch system has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10542
 msgctxt "damage-msgEngineer"
 msgid "The hacking system has been damaged"
-msgstr ""
+msgstr "The hacking system has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10552
 msgctxt "damage-msgEngineer+"
 msgid "The hacking system has been damaged"
-msgstr ""
+msgstr "The hacking system has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10562
 msgctxt "damage-msgRelay"
 msgid "The hacking system has been damaged"
-msgstr ""
+msgstr "The hacking system has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10572
 msgctxt "damage-msgOperations"
 msgid "The hacking system has been damaged"
-msgstr ""
+msgstr "The hacking system has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10584
 msgctxt "damage-msgEngineer"
 msgid "The scanners have been damaged"
-msgstr ""
+msgstr "The scanners have been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10594
 msgctxt "damage-msgEngineer+"
 msgid "The scanners have been damaged"
-msgstr ""
+msgstr "The scanners have been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10602
 msgctxt "damage-msgScience"
 msgid "The scanners have been damaged"
-msgstr ""
+msgstr "The scanners have been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10611
 msgctxt "damage-msgOperations"
 msgid "The scanners have been damaged"
-msgstr ""
+msgstr "The scanners have been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10623
 msgctxt "damage-msgEngineer"
 msgid "Combat maneuver has been damaged"
-msgstr ""
+msgstr "Combat manoeuvre has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10633
 msgctxt "damage-msgEngineer+"
 msgid "Combat maneuver has been damaged"
-msgstr ""
+msgstr "Combat manoeuvre has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10641
 msgctxt "damage-msgHelms"
 msgid "Combat maneuver has been damaged"
-msgstr ""
+msgstr "Combat manoeuvre has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10650
 msgctxt "damage-msgTactical"
 msgid "Combat maneuver has been damaged"
-msgstr ""
+msgstr "Combat manoeuvre has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10662
 msgctxt "damage-msgEngineer"
 msgid "Self destruct system has been damaged"
-msgstr ""
+msgstr "Self destruct system has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10672
 msgctxt "damage-msgEngineer+"
 msgid "Self destruct system has been damaged"
-msgstr ""
+msgstr "Self destruct system has been damaged"
 
 #: scripts/scenario_40_defender_hunter.lua:10691
 msgctxt "coolant-buttonEngineer"
 msgid "Auto cool"
-msgstr ""
+msgstr "Auto cool"
 
 #: scripts/scenario_40_defender_hunter.lua:10703
 msgctxt "coolant-buttonEngineer"
 msgid "Manual cool"
-msgstr ""
+msgstr "Manual cool"
 
 #: scripts/scenario_40_defender_hunter.lua:10720
 msgctxt "coolant-buttonEngineer+"
 msgid "Auto cool"
-msgstr ""
+msgstr "Auto cool"
 
 #: scripts/scenario_40_defender_hunter.lua:10732
 msgctxt "coolant-buttonEngineer+"
 msgid "Manual cool"
-msgstr ""
+msgstr "Manual cool"
 
 #: scripts/scenario_40_defender_hunter.lua:10760
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr ""
+msgstr "Gathering Coolant"
 
 #: scripts/scenario_40_defender_hunter.lua:10787
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Deploying Collectors %i"
-msgstr ""
+msgstr "Deploying Collectors %i"
 
 #: scripts/scenario_40_defender_hunter.lua:10793
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Configuring Collectors %i"
-msgstr ""
+msgstr "Configuring Collectors %i"
 
 #: scripts/scenario_40_defender_hunter.lua:10862
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Stations: %i\t survived: %i\t destroyed: %i"
-msgstr ""
+msgstr "Stations: %i\t survived: %i\t destroyed: %i"
 
 #: scripts/scenario_40_defender_hunter.lua:10871
 #, lua-format
@@ -2847,7 +2847,7 @@ msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Friendly Stations: %i\t survived: %i\t destroyed: %i"
-msgstr ""
+msgstr "\nFriendly Stations: %i\t survived: %i\t destroyed: %i"
 
 #: scripts/scenario_40_defender_hunter.lua:10881
 #, lua-format
@@ -2855,7 +2855,7 @@ msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Neutral Stations: %i\t survived: %i\t destroyed: %i"
-msgstr ""
+msgstr "\nNeutral Stations: %i\t survived: %i\t destroyed: %i"
 
 #: scripts/scenario_40_defender_hunter.lua:10891
 #, lua-format
@@ -2866,37 +2866,37 @@ msgid ""
 "\n"
 "\n"
 "Enemy Stations: %i\t survived: %i\t destroyed: %i"
-msgstr ""
+msgstr "\n\n\n\nEnemy Stations: %i\t survived: %i\t destroyed: %i"
 
 #: scripts/scenario_40_defender_hunter.lua:10903
 #: scripts/scenario_40_defender_hunter.lua:10917
 msgctxt "msgMainscreen"
 msgid "Ensign"
-msgstr ""
+msgstr "Ensign"
 
 #: scripts/scenario_40_defender_hunter.lua:10905
 #: scripts/scenario_40_defender_hunter.lua:10919
 msgctxt "msgMainscreen"
 msgid "Lieutenant"
-msgstr ""
+msgstr "Lieutenant"
 
 #: scripts/scenario_40_defender_hunter.lua:10907
 #: scripts/scenario_40_defender_hunter.lua:10921
 msgctxt "msgMainscreen"
 msgid "Commander"
-msgstr ""
+msgstr "Commander"
 
 #: scripts/scenario_40_defender_hunter.lua:10909
 #: scripts/scenario_40_defender_hunter.lua:10923
 msgctxt "msgMainscreen"
 msgid "Captain"
-msgstr ""
+msgstr "Captain"
 
 #: scripts/scenario_40_defender_hunter.lua:10911
 #: scripts/scenario_40_defender_hunter.lua:10925
 msgctxt "msgMainscreen"
 msgid "Admiral"
-msgstr ""
+msgstr "Admiral"
 
 #: scripts/scenario_40_defender_hunter.lua:10914
 #, lua-format
@@ -2904,7 +2904,7 @@ msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Earned rank:  %s"
-msgstr ""
+msgstr "\nEarned rank:  %s"
 
 #: scripts/scenario_40_defender_hunter.lua:10932
 #, lua-format
@@ -2912,7 +2912,7 @@ msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Post Target Enemy Base Survival Rank: %s"
-msgstr ""
+msgstr "\nPost Target Enemy Base Survival Rank: %s"
 
 #: scripts/scenario_40_defender_hunter.lua:10939
 #, lua-format
@@ -2920,20 +2920,20 @@ msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Post Home Base Destruction Rank: %s"
-msgstr ""
+msgstr "\nPost Home Base Destruction Rank: %s"
 
 #: scripts/scenario_40_defender_hunter.lua:10978
 #, lua-format
 msgctxt "homeStationHealth-tabRelay&Operations"
 msgid "%s %s:%i%% H:%i%%"
-msgstr ""
+msgstr "%s %s:%i%% H:%i%%"
 
 #: scripts/scenario_40_defender_hunter.lua:11079
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
-msgstr ""
+msgstr "Get Coolant"
 
 #: scripts/scenario_40_defender_hunter.lua:11093
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
-msgstr ""
+msgstr "Get Coolant"

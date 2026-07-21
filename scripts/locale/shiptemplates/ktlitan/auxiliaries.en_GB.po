@@ -1,14 +1,14 @@
 #: scripts/shiptemplates/ktlitan/auxiliaries.lua:9
 msgctxt "ship"
 msgid "Ktlitan Worker"
-msgstr ""
+msgstr "Ktlitan Worker"
 
 #: scripts/shiptemplates/ktlitan/auxiliaries.lua:10
 msgctxt "class"
 msgid "Auxiliary"
-msgstr ""
+msgstr "Auxiliary"
 
 #: scripts/shiptemplates/ktlitan/auxiliaries.lua:10
 msgctxt "subclass"
 msgid "Support"
-msgstr ""
+msgstr "Support"

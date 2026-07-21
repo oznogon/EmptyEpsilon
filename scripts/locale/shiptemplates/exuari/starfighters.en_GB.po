@@ -1,7 +1,7 @@
 #: scripts/shiptemplates/exuari/starfighters.lua:9
 msgctxt "ship"
 msgid "Dagger"
-msgstr ""
+msgstr "Dagger"
 
 #: scripts/shiptemplates/exuari/starfighters.lua:10
 #: scripts/shiptemplates/exuari/starfighters.lua:30
@@ -10,13 +10,13 @@ msgstr ""
 #: scripts/shiptemplates/exuari/starfighters.lua:84
 msgctxt "class"
 msgid "Starfighter"
-msgstr ""
+msgstr "Starfighter"
 
 #: scripts/shiptemplates/exuari/starfighters.lua:10
 #: scripts/shiptemplates/exuari/starfighters.lua:31
 msgctxt "subclass"
 msgid "Interceptor"
-msgstr ""
+msgstr "Interceptor"
 
 #: scripts/shiptemplates/exuari/starfighters.lua:15
 msgid ""
@@ -26,12 +26,12 @@ msgid ""
 "enemies ships. However most of the Exuari fighter pilots expect their own "
 "death and do not care much about the enemies weapons ranges. Fighters are "
 "easy to take out, but should not be underestimated."
-msgstr ""
+msgstr "The Exuari fighter 'Dagger' is a single-seated spacecraft, very quick and agile, that does not do a lot of damage, but usually comes in larger groups. They are able to dodge most missiles and attack undefended areas of their enemies ships. However most of the Exuari fighter pilots expect their own death and do not care much about the enemies weapons ranges. Fighters are easy to take out, but should not be underestimated."
 
 #: scripts/shiptemplates/exuari/starfighters.lua:27
 msgctxt "ship"
 msgid "Blade"
-msgstr ""
+msgstr "Blade"
 
 #: scripts/shiptemplates/exuari/starfighters.lua:36
 msgid ""
@@ -40,19 +40,19 @@ msgid ""
 "attack wave of a larger assault, closely followed by Daggers. Blade pilots "
 "are often considered as fearless, but most of them are just consumed by "
 "their instinct for hunting."
-msgstr ""
+msgstr "The Exuari interceptor 'Blade' is a improved fighter, originaly designed to hunt down rougue fighters. Nowadays Blades are often seen as the first attack wave of a larger assault, closely followed by Daggers. Blade pilots are often considered as fearless, but most of them are just consumed by their instinct for hunting."
 
 #: scripts/shiptemplates/exuari/starfighters.lua:46
 msgctxt "ship"
 msgid "Gunner"
-msgstr ""
+msgstr "Gunner"
 
 #: scripts/shiptemplates/exuari/starfighters.lua:47
 #: scripts/shiptemplates/exuari/starfighters.lua:69
 #: scripts/shiptemplates/exuari/starfighters.lua:85
 msgctxt "subclass"
 msgid "Bomber"
-msgstr ""
+msgstr "Bomber"
 
 #: scripts/shiptemplates/exuari/starfighters.lua:52
 msgid ""
@@ -64,12 +64,12 @@ msgid ""
 "their weapons range. Piloting a Gunner is considered to be a recreational "
 "(and often lethal) activity within the Exuari society, so don't expect "
 "experienced pilots."
-msgstr ""
+msgstr "The Exuari light bomber 'Gunner' is a single-seated spacecraft, designed to circumvent their enemies defence lines and bring its deadly load to slow moving targets. Gunners are not as agile as other fighters, but still faster than most capitol ships. A group of Gunners can do a lot of damage to a single stationary target if not destroyed before their target is inside their weapons range. Piloting a Gunner is considered to be a recreational (and often lethal) activity within the Exuari society, so don't expect experienced pilots."
 
 #: scripts/shiptemplates/exuari/starfighters.lua:67
 msgctxt "ship"
 msgid "Shooter"
-msgstr ""
+msgstr "Shooter"
 
 #: scripts/shiptemplates/exuari/starfighters.lua:72
 msgid ""
@@ -79,16 +79,16 @@ msgid ""
 "the battlefield, even without ammunition and enjoy death spreading. Due to "
 "it's long reload cycle a Shooter may easily be destroyed between its attack "
 "runs."
-msgstr ""
+msgstr "The Exuari bomber 'Shooter' carries two rounds of HVLIs. To keep the vessel at low costs, it has no automatic missile recharge system, so the single pilot has to load the second round manually. Shooter pilots tend to stay on the battlefield, even without ammunition and enjoy death spreading. Due to it's long reload cycle a Shooter may easily be destroyed between its attack runs."
 
 #: scripts/shiptemplates/exuari/starfighters.lua:81
 msgctxt "ship"
 msgid "Jagger"
-msgstr ""
+msgstr "Jagger"
 
 #: scripts/shiptemplates/exuari/starfighters.lua:89
 msgid ""
 "The Exuari heavy bomber 'Jagger' carries just a single round of improved "
 "HVLIs. Those are considered to be hull-penetrating and cause multiple times "
 "the damage of Gunner HVLIs."
-msgstr ""
+msgstr "The Exuari heavy bomber 'Jagger' carries just a single round of improved HVLIs. Those are considered to be hull-penetrating and cause multiple times the damage of Gunner HVLIs."

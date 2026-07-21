@@ -1,155 +1,155 @@
 # Scenario name
 msgid "Delta quadrant patrol duty"
-msgstr ""
+msgstr "Delta quadrant patrol duty"
 
 # Scenario description
 msgid ""
 "Patrol between three stations in the Delta quadrant to protect from enemies\n"
 "\n"
 "Version 8"
-msgstr ""
+msgstr "Patrol between three stations in the Delta quadrant to protect from enemies\n\nVersion 8"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr ""
+msgstr "Enemies"
 
 msgctxt "setting"
 msgid "Configures strength and/or number of enemies in this scenario"
-msgstr ""
+msgstr "Configures strength and/or number of enemies in this scenario"
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Enemies"
 msgid "Fewer or weaker enemies"
-msgstr ""
+msgstr "Fewer or weaker enemies"
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Enemies"
 msgid "Normal number or strength of enemies"
-msgstr ""
+msgstr "Normal number or strength of enemies"
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Enemies"
 msgid "More or stronger enemies"
-msgstr ""
+msgstr "More or stronger enemies"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Murphy"
-msgstr ""
+msgstr "Murphy"
 
 msgctxt "setting"
 msgid "Configures the perversity of the universe according to Murphy's law"
-msgstr ""
+msgstr "Configures the perversity of the universe according to Murphy's law"
 
 msgctxt "Murphy"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Murphy"
 msgid "Random factors are more in your favor"
-msgstr ""
+msgstr "Random factors are more in your favour"
 
 msgctxt "Murphy"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Murphy"
 msgid "Random factors are normal"
-msgstr ""
+msgstr "Random factors are normal"
 
 msgctxt "Murphy"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Murphy"
 msgid "Random factors are more against you"
-msgstr ""
+msgstr "Random factors are more against you"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Length"
-msgstr ""
+msgstr "Length"
 
 msgctxt "setting"
 msgid "Determines the number of mission goals"
-msgstr ""
+msgstr "Determines the number of mission goals"
 
 msgctxt "Length"
 msgid "Short"
-msgstr ""
+msgstr "Short"
 
 msgctxt "Length"
 msgid "Fewer mission goals"
-msgstr ""
+msgstr "Fewer mission goals"
 
 msgctxt "Length"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Length"
 msgid "Normal number of mission goals"
-msgstr ""
+msgstr "Normal number of mission goals"
 
 msgctxt "Length"
 msgid "Long"
-msgstr ""
+msgstr "Long"
 
 msgctxt "Length"
 msgid "More mission goals"
-msgstr ""
+msgstr "More mission goals"
 
 msgctxt "Length"
 msgid "Extended"
-msgstr ""
+msgstr "Extended"
 
 msgctxt "Length"
 msgid "Maximum number of mission goals"
-msgstr ""
+msgstr "Maximum number of mission goals"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Timed"
-msgstr ""
+msgstr "Timed"
 
 msgctxt "setting"
 msgid ""
 "Determines whether or not there is a fixed time limit for the game and its "
 "duration"
-msgstr ""
+msgstr "Determines whether or not there is a fixed time limit for the game and its duration"
 
 msgctxt "Timed"
 msgid "No"
-msgstr ""
+msgstr "No"
 
 msgctxt "Timed"
 msgid "No game time limit"
-msgstr ""
+msgstr "No game time limit"
 
 msgctxt "Timed"
 msgid "15"
-msgstr ""
+msgstr "15"
 
 msgctxt "Timed"
 msgid "Fifteen minute time limit"
-msgstr ""
+msgstr "Fifteen minute time limit"
 
 msgctxt "Timed"
 msgid "30"
-msgstr ""
+msgstr "30"
 
 msgctxt "Timed"
 msgid "Thirty minute time limit"
-msgstr ""
+msgstr "Thirty minute time limit"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:230
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6540
@@ -157,7 +157,7 @@ msgstr ""
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8799
 msgctxt "buttonGM"
 msgid "Start plot 2 sick Kojak"
-msgstr ""
+msgstr "Start plot 2 sick Kojak"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:231
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6564
@@ -167,83 +167,83 @@ msgstr ""
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8805
 msgctxt "buttonGM"
 msgid "Start p 3 McNabbit ride"
-msgstr ""
+msgstr "Start p 3 McNabbit ride"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:232
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6580
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8811
 msgctxt "buttonGM"
 msgid "St p4 Lisbon's stowaway"
-msgstr ""
+msgstr "St p4 Lisbon's stowaway"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:233
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6587
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8816
 msgctxt "buttonGM"
 msgid "Start plot 5"
-msgstr ""
+msgstr "Start plot 5"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:234
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6548
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8821
 msgctxt "buttonGM"
 msgid "Strt plot 8 Sheila dies"
-msgstr ""
+msgstr "Strt plot 8 Sheila dies"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:235
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6556
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8826
 msgctxt "buttonGM"
 msgid "Start plot 9 ambush"
-msgstr ""
+msgstr "Start plot 9 ambush"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:236
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6572
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8831
 msgctxt "buttonGM"
 msgid "Start plot 10 ambush"
-msgstr ""
+msgstr "Start plot 10 ambush"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:237
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6773
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8841
 msgctxt "buttonGM"
 msgid "Skip to defend U.P."
-msgstr ""
+msgstr "Skip to defend U.P."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:238
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6964
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8851
 msgctxt "buttonGM"
 msgid "Skip to destroy S.C."
-msgstr ""
+msgstr "Skip to destroy S.C."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:772
 msgctxt "orders-comms"
 msgid ""
 "Patrol Asimov, Utopia Planitia and Armstrong stations. Defend if enemies "
 "attack. Dock with each station at the end of each patrol leg"
-msgstr ""
+msgstr "Patrol Asimov, Utopia Planitia and Armstrong stations. Defend if enemies attack. Dock with each station at the end of each patrol leg"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1062
 msgctxt "scienceDescription-artifact"
 msgid "Unusual object"
-msgstr ""
+msgstr "Unusual object"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1065
 msgctxt "scienceDescription-artifact"
 msgid "Potential object of scientific research"
-msgstr ""
+msgstr "Potential object of scientific research"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1073
 msgctxt "scienceDescription-artifact"
 msgid "Object outside of normal parameters"
-msgstr ""
+msgstr "Object outside of normal parameters"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1074
 msgctxt "scienceDescription-artifact"
 msgid "Good research material"
-msgstr ""
+msgstr "Good research material"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1813
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1921
@@ -252,7 +252,7 @@ msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract platinum, tritanium and dilithium from these "
 "rocks. Come get some if you want some"
-msgstr ""
+msgstr "We've been able to extract platinum, tritanium and dilithium from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1822
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1928
@@ -261,7 +261,7 @@ msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract platinum and tritanium from these rocks. Come get "
 "some if you want some"
-msgstr ""
+msgstr "We've been able to extract platinum and tritanium from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1831
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1935
@@ -270,7 +270,7 @@ msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract platinum and dilithium from these rocks. Come get "
 "some if you want some"
-msgstr ""
+msgstr "We've been able to extract platinum and dilithium from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1840
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1942
@@ -279,7 +279,7 @@ msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract tritanium and dilithium from these rocks. Come "
 "get some if you want some"
-msgstr ""
+msgstr "We've been able to extract tritanium and dilithium from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1847
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1948
@@ -288,7 +288,7 @@ msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract dilithium from these rocks. Come get some if you "
 "want some"
-msgstr ""
+msgstr "We've been able to extract dilithium from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1854
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1954
@@ -297,7 +297,7 @@ msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract platinum from these rocks. Come get some if you "
 "want some"
-msgstr ""
+msgstr "We've been able to extract platinum from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1861
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1960
@@ -306,21 +306,21 @@ msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract tritanium from these rocks. Come get some if you "
 "want some"
-msgstr ""
+msgstr "We've been able to extract tritanium from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1868
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract cobalt from these rocks. Come get some if you "
 "want some"
-msgstr ""
+msgstr "We've been able to extract cobalt from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1877
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract cobalt and dilithium from these rocks. Come get "
 "some if you want some"
-msgstr ""
+msgstr "We've been able to extract cobalt and dilithium from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1967
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2084
@@ -328,7 +328,7 @@ msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract tritanium and gold from these rocks. Come get "
 "some if you want some"
-msgstr ""
+msgstr "We've been able to extract tritanium and gold from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1974
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2093
@@ -336,7 +336,7 @@ msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract gold and dilithium from these rocks. Come get "
 "some if you want some"
-msgstr ""
+msgstr "We've been able to extract gold and dilithium from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:1980
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2100
@@ -344,22 +344,22 @@ msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract gold from these rocks. Come get some if you want "
 "some"
-msgstr ""
+msgstr "We've been able to extract gold from these rocks. Come get some if you want some"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2235
 #, lua-format
 msgid "station chosen: %s"
-msgstr ""
+msgstr "station chosen: %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2253
 #, lua-format
 msgid "transport model: %s"
-msgstr ""
+msgstr "transport model: %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2324
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
-msgstr ""
+msgstr "We are under attack! No time for chatting!"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2339
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2346
@@ -370,7 +370,7 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "Optional:\n"
-msgstr ""
+msgstr "\nOptional:\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2380
 #, lua-format
@@ -378,51 +378,51 @@ msgctxt "station-comms"
 msgid ""
 "Greetings %s!\n"
 "How may we help you today?"
-msgstr ""
+msgstr "Greetings %s!\nHow may we help you today?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2386
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?"
-msgstr ""
+msgstr "Good day, officer!\nWhat can we do for you today?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2389
 msgctxt "station-comms"
 msgid "Hello, may I help you?"
-msgstr ""
+msgstr "Hello, may I help you?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2392
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
-msgstr ""
+msgstr "Welcome to our lovely station.\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2398
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
-msgstr ""
+msgstr "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2429
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr ""
+msgstr "I need ordnance restocked"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2432
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr ""
+msgstr "What type of ordnance?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2441
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
-msgstr ""
+msgstr "Can you supply us with some nukes? ("
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2446
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr ""
+msgstr "We really need some nukes ("
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2451
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2478
@@ -432,65 +432,65 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr ""
+msgstr "%s%d rep each)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2471
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr ""
+msgstr "Please re-stock our EMP missiles. ("
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2474
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
-msgstr ""
+msgstr "Got any EMPs? ("
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2493
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr ""
+msgstr "Do you have spare homing missiles for us? ("
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2498
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr ""
+msgstr "Do you have extra homing missiles? ("
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2518
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr ""
+msgstr "We could use some mines. ("
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2522
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr ""
+msgstr "How about mines? ("
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2540
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
-msgstr ""
+msgstr "What about HVLI? ("
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2543
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
-msgstr ""
+msgstr "Could you provide HVLI? ("
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2561
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4696
 msgctxt "station-comms"
 msgid "I need information"
-msgstr ""
+msgstr "I need information"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2564
 #, lua-format
 msgctxt "station-comms"
 msgid "What kind of information do you need, %s"
-msgstr ""
+msgstr "What kind of information do you need, %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2570
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4974
 msgctxt "orders-comms"
 msgid "What are my current orders?"
-msgstr ""
+msgstr "What are my current orders?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2579
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4981
@@ -499,7 +499,7 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   %i Minutes remain in game"
-msgstr ""
+msgstr "\n   %i Minutes remain in game"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2588
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4987
@@ -507,7 +507,7 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "Patrol mission complete"
-msgstr ""
+msgstr "\nPatrol mission complete"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2600
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4998
@@ -516,7 +516,7 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   patrol is %.2f percent complete"
-msgstr ""
+msgstr "\n   patrol is %.2f percent complete"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2621
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5020
@@ -524,7 +524,7 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   Least patrolled station: Utopia Panitia"
-msgstr ""
+msgstr "\n   Least patrolled station: Utopia Panitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2627
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5026
@@ -532,7 +532,7 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   Most patrolled station: Utopia Planitia"
-msgstr ""
+msgstr "\n   Most patrolled station: Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2641
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5040
@@ -540,7 +540,7 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   Least patrolled station: Asimov"
-msgstr ""
+msgstr "\n   Least patrolled station: Asimov"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2647
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5046
@@ -548,7 +548,7 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   Most patrolled station: Asimov"
-msgstr ""
+msgstr "\n   Most patrolled station: Asimov"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2658
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5057
@@ -556,7 +556,7 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   Least patrolled station: Armstrong"
-msgstr ""
+msgstr "\n   Least patrolled station: Armstrong"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2664
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5063
@@ -564,7 +564,7 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   Most patrolled station: Armstrong"
-msgstr ""
+msgstr "\n   Most patrolled station: Armstrong"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2672
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2705
@@ -637,14 +637,14 @@ msgstr ""
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5818
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5882
 msgid "Back"
-msgstr ""
+msgstr "Back"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2688
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2765
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr ""
+msgstr "Recruit repair crew member for %i reputation"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2695
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2741
@@ -657,62 +657,62 @@ msgstr ""
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5719
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr ""
+msgstr "Insufficient reputation"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2702
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2779
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
-msgstr ""
+msgstr "Repair crew member hired"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2720
 #, lua-format
 msgctxt "defTelemetry-comms"
 msgid "Establish defensive telemetry link (%i rep)"
-msgstr ""
+msgstr "Establish defensive telemetry link (%i rep)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2734
 msgctxt "defTelemetry-comms"
 msgid ""
 "Automated telemetry for shields and hull established.\n"
 "Damage summary should appear on Relay when damage taken"
-msgstr ""
+msgstr "Automated telemetry for shields and hull established.\nDamage summary should appear on Relay when damage taken"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2797
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4934
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr ""
+msgstr "Tell me more about your station"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2800
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4937
 msgctxt "station-comms"
 msgid "What would you like to know?"
-msgstr ""
+msgstr "What would you like to know?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2803
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4940
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
-msgstr ""
+msgstr "General information"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2811
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4948
 msgctxt "stationStory-comms"
 msgid "Station history"
-msgstr ""
+msgstr "Station history"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2822
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4959
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr ""
+msgstr "Gossip"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2835
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4839
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
-msgstr ""
+msgstr "Where can I find particular goods?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2840
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4844
@@ -720,14 +720,14 @@ msgctxt "trade-comms"
 msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
-msgstr ""
+msgstr "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2891
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4895
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr ""
+msgstr "Station %s in sector %s has %s for %i reputation"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2906
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4910
@@ -737,39 +737,39 @@ msgid ""
 "\n"
 "What goods are you interested in?\n"
 "I've heard about these:"
-msgstr ""
+msgstr "\n\nWhat goods are you interested in?\nI've heard about these:"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2912
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4916
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr ""
+msgstr " Beyond that, I have no knowledge of specific stations"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2922
 msgctxt "cartographyOffice-comms"
 msgid "Visit cartography office"
-msgstr ""
+msgstr "Visit cartography office"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2929
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk looks up briefly at you then goes back to filing "
 "her nails."
-msgstr ""
+msgstr "The clerk behind the desk looks up briefly at you then goes back to filing her nails."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2934
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk examines you then returns to grooming her "
 "tentacles."
-msgstr ""
+msgstr "The clerk behind the desk examines you then returns to grooming her tentacles."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2939
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk glances at you then returns to preening her "
 "feathers."
-msgstr ""
+msgstr "The clerk behind the desk glances at you then returns to preening her feathers."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2947
 #, lua-format
@@ -779,12 +779,12 @@ msgid ""
 "\n"
 "You can examine the brochure on the coffee table, talk to the apprentice "
 "cartographer or talk to the master cartographer"
-msgstr ""
+msgstr "%s\n\nYou can examine the brochure on the coffee table, talk to the apprentice cartographer or talk to the master cartographer"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2955
 msgctxt "cartographyOffice-comms"
 msgid "What's the difference between the apprentice and the master?"
-msgstr ""
+msgstr "What's the difference between the apprentice and the master?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2961
 msgctxt "cartographyOffice-comms"
@@ -792,25 +792,25 @@ msgid ""
 "The clerk responds in a bored voice, 'The apprentice knows the local area "
 "and is learning the broader area. The master knows the local and the broader "
 "area but can't be bothered with the local area'"
-msgstr ""
+msgstr "The clerk responds in a bored voice, 'The apprentice knows the local area and is learning the broader area. The master knows the local and the broader area but can't be bothered with the local area'"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2969
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine brochure (%i rep)"
-msgstr ""
+msgstr "Examine brochure (%i rep)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2977
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The brochure has a list of nearby stations and has a list of goods nearby"
-msgstr ""
+msgstr "The brochure has a list of nearby stations and has a list of goods nearby"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:2984
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine station list (%i rep)"
-msgstr ""
+msgstr "Examine station list (%i rep)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3006
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3162
@@ -818,7 +818,7 @@ msgstr ""
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s %s %s"
-msgstr ""
+msgstr "%s %s %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3017
 #, lua-format
@@ -826,13 +826,13 @@ msgctxt "cartographyOffice-comms"
 msgid ""
 "%s\n"
 "%s %s %s"
-msgstr ""
+msgstr "%s\n%s %s %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3044
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine goods list (%i rep)"
-msgstr ""
+msgstr "Examine goods list (%i rep)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3076
 #, lua-format
@@ -840,7 +840,7 @@ msgctxt "cartographyOffice-comms"
 msgid ""
 "Good, quantity, cost, station:\n"
 "%s, %i, %i, %s"
-msgstr ""
+msgstr "Good, quantity, cost, station:\n%s, %i, %i, %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3088
 #, lua-format
@@ -848,28 +848,28 @@ msgctxt "cartographyOffice-comms"
 msgid ""
 "%s\n"
 "%s, %i, %i, %s"
-msgstr ""
+msgstr "%s\n%s, %i, %i, %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3126
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to apprentice cartographer (%i rep)"
-msgstr ""
+msgstr "Talk to apprentice cartographer (%i rep)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3135
 msgctxt "cartographyOffice-comms"
 msgid "Hi, would you like for me to locate a station or some goods for you?"
-msgstr ""
+msgstr "Hi, would you like for me to locate a station or some goods for you?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3139
 msgctxt "cartographyOffice-comms"
 msgid "Locate station"
-msgstr ""
+msgstr "Locate station"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3144
 msgctxt "cartographyOffice-comms"
 msgid "These are stations I have learned"
-msgstr ""
+msgstr "These are stations I have learned"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3176
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3305
@@ -880,7 +880,7 @@ msgctxt "cartographyOffice-comms"
 msgid ""
 "%s\n"
 "Good, quantity, cost"
-msgstr ""
+msgstr "%s\nGood, quantity, cost"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3189
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3315
@@ -891,7 +891,7 @@ msgctxt "cartographyOffice-comms"
 msgid ""
 "%s\n"
 "   %s, %i, %i"
-msgstr ""
+msgstr "%s\n   %s, %i, %i"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3206
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3331
@@ -903,7 +903,7 @@ msgid ""
 "%s\n"
 "General Information:\n"
 "   %s"
-msgstr ""
+msgstr "%s\nGeneral Information:\n   %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3220
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3341
@@ -915,7 +915,7 @@ msgid ""
 "%s\n"
 "History:\n"
 "   %s"
-msgstr ""
+msgstr "%s\nHistory:\n   %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3234
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3351
@@ -927,28 +927,28 @@ msgid ""
 "%s\n"
 "Gossip:\n"
 "   %s"
-msgstr ""
+msgstr "%s\nGossip:\n   %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3256
 msgctxt "cartographyOffice-comms"
 msgid "I have learned of no stations yet"
-msgstr ""
+msgstr "I have learned of no stations yet"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3264
 msgctxt "cartographyOffice-comms"
 msgid "Locate goods"
-msgstr ""
+msgstr "Locate goods"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3269
 msgctxt "cartographyOffice-comms"
 msgid "These are the goods I know about"
-msgstr ""
+msgstr "These are the goods I know about"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3380
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to master cartographer (%i rep)"
-msgstr ""
+msgstr "Talk to master cartographer (%i rep)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3389
 msgctxt "cartographyOffice-comms"
@@ -960,17 +960,17 @@ msgid ""
 "your systems appropriately.\n"
 "\n"
 "I just want you to get the maximum benefit for the time you spend with him"
-msgstr ""
+msgstr "The clerk clears her throat:\n\nMy indicators show you have zero available waypoints. To get the most from the master cartographer, you should delete one or more so that he can update your systems appropriately.\n\nI just want you to get the maximum benefit for the time you spend with him"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3395
 msgctxt "cartographyOffice-comms"
 msgid "Continue to Master Cartographer"
-msgstr ""
+msgstr "Continue to Master Cartographer"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3413
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
-msgstr ""
+msgstr "Buy, sell, trade"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3418
 #, lua-format
@@ -978,42 +978,42 @@ msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available for sale: quantity, cost in reputation\n"
-msgstr ""
+msgstr "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3425
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr ""
+msgstr "     %s: %i, %i\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3435
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
-msgstr ""
+msgstr "Goods or components station will buy: price in reputation\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3440
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3458
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr ""
+msgstr "     %s: %i\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3448
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
-msgstr ""
+msgstr "Current cargo aboard %s:\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3465
 msgctxt "trade-comms"
 msgid "     Empty\n"
-msgstr ""
+msgstr "     Empty\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3471
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr ""
+msgstr "Available Space: %i, Available Reputation: %i\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3480
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5660
@@ -1022,20 +1022,20 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr ""
+msgstr "Buy one %s for %i reputation"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3486
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr ""
+msgstr "Type: %s, Quantity: %i, Rep: %i"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3495
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient cargo space for purchase"
-msgstr ""
+msgstr "\nInsufficient cargo space for purchase"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3504
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3534
@@ -1043,7 +1043,7 @@ msgctxt "needRep-comms"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
-msgstr ""
+msgstr "\nInsufficient reputation for purchase"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3510
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3603
@@ -1053,39 +1053,39 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient station inventory"
-msgstr ""
+msgstr "\nInsufficient station inventory"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3529
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "purchased"
-msgstr ""
+msgstr "\npurchased"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3554
 #, lua-format
 msgctxt "trade-comms"
 msgid "Sell one %s for %i reputation"
-msgstr ""
+msgstr "Sell one %s for %i reputation"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3563
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
-msgstr ""
+msgstr "Type: %s,  Reputation price: %i"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3572
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "One sold"
-msgstr ""
+msgstr "\nOne sold"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3590
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr ""
+msgstr "Trade food for %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3595
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3640
@@ -1093,7 +1093,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr ""
+msgstr "Type: %s,  Quantity: %i"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3618
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3663
@@ -1102,27 +1102,27 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "Traded"
-msgstr ""
+msgstr "\nTraded"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3635
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr ""
+msgstr "Trade medicine for %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3680
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5623
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
-msgstr ""
+msgstr "Trade luxury for %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3725
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5571
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5736
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr ""
+msgstr "Jettison cargo"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3730
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5576
@@ -1132,7 +1132,7 @@ msgctxt "trade-comms"
 msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
-msgstr ""
+msgstr "Available space: %i\nWhat would you like to jettison?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3743
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5591
@@ -1140,12 +1140,12 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr ""
+msgstr "One %s jettisoned"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3757
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr ""
+msgstr "No tutorial covered goods or cargo. Explain"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3763
 msgctxt "explainGoods-comms"
@@ -1156,12 +1156,12 @@ msgid ""
 "cargo. Each player ship differs in cargo carrying capacity. Goods may be "
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
-msgstr ""
+msgstr "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3781
 msgctxt "upgrade-comms"
 msgid "Check maintenance bay for ship upgrade"
-msgstr ""
+msgstr "Check maintenance bay for ship upgrade"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3787
 #, lua-format
@@ -1169,24 +1169,24 @@ msgctxt "upgrade-comms"
 msgid ""
 "Greetings %s,\n"
 "Welcome to the ship maintenance bay of %s. What can we do for you?"
-msgstr ""
+msgstr "Greetings %s,\nWelcome to the ship maintenance bay of %s. What can we do for you?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3797
 msgctxt "upgrade-comms"
 msgid "Upgrade beam weapons with Joshua Kojak's research"
-msgstr ""
+msgstr "Upgrade beam weapons with Joshua Kojak's research"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3804
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3998
 msgctxt "upgrade-comms"
 msgid "You already have the upgrade."
-msgstr ""
+msgstr "You already have the upgrade."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3812
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4006
 msgctxt "upgrade-comms"
 msgid "Your ship type does not support a beam weapon upgrade."
-msgstr ""
+msgstr "Your ship type does not support a beam weapon upgrade."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3856
 #, lua-format
@@ -1194,7 +1194,7 @@ msgctxt "upgradeAudio1-comms"
 msgid ""
 "Thanks for the %s. Your beam weapons now have improved range, cycle time and "
 "damage."
-msgstr ""
+msgstr "Thanks for the %s. Your beam weapons now have improved range, cycle time and damage."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3866
 #, lua-format
@@ -1202,30 +1202,30 @@ msgctxt "upgradeAudio1"
 msgid ""
 "We find ourselves short of %s. Please bring us some of that kind of cargo "
 "and we can upgrade your beams"
-msgstr ""
+msgstr "We find ourselves short of %s. Please bring us some of that kind of cargo and we can upgrade your beams"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3877
 msgctxt "upgradeAudio1-comms"
 msgid "Your beam weapons now have improved range, cycle time and damage."
-msgstr ""
+msgstr "Your beam weapons now have improved range, cycle time and damage."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3892
 msgctxt "upgrade-comms"
 msgid "Upgrade impulse engines with Dan McNabbit's tuning parameters"
-msgstr ""
+msgstr "Upgrade impulse engines with Dan McNabbit's tuning parameters"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3899
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4088
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4179
 msgctxt "upgrade-comms"
 msgid "You already have the upgrade"
-msgstr ""
+msgstr "You already have the upgrade"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3947
 #, lua-format
 msgctxt "upgradeAudio2-comms"
 msgid "Thanks for the %s. Your impulse engines now have improved speed"
-msgstr ""
+msgstr "Thanks for the %s. Your impulse engines now have improved speed"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3958
 #, lua-format
@@ -1233,17 +1233,17 @@ msgctxt "upgradeAudio2-comms"
 msgid ""
 "We're short of %s. Please bring us some of that kind of cargo and we can "
 "upgrade your impulse engines"
-msgstr ""
+msgstr "We're short of %s. Please bring us some of that kind of cargo and we can upgrade your impulse engines"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3977
 msgctxt "upgradeAudio2-comms"
 msgid "Your impulse engines now have improved speed"
-msgstr ""
+msgstr "Your impulse engines now have improved speed"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:3991
 msgctxt "upgrade-comms"
 msgid "Apply Commander Lisbon's beam cooling algorithm"
-msgstr ""
+msgstr "Apply Commander Lisbon's beam cooling algorithm"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4049
 #, lua-format
@@ -1251,7 +1251,7 @@ msgctxt "upgradeAudio3-comms"
 msgid ""
 "Thanks for bringing us %s. Your beam weapons now generate less heat when "
 "firing"
-msgstr ""
+msgstr "Thanks for bringing us %s. Your beam weapons now generate less heat when firing"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4059
 #, lua-format
@@ -1259,17 +1259,17 @@ msgctxt "upgradeAudio3-comms"
 msgid ""
 "The algorithm requires components we don't have right now. Please bring us "
 "some %s and we can apply the upgrade"
-msgstr ""
+msgstr "The algorithm requires components we don't have right now. Please bring us some %s and we can apply the upgrade"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4070
 msgctxt "upgradeAudio3-comms"
 msgid "Your beam weapons now generate less heat when firing."
-msgstr ""
+msgstr "Your beam weapons now generate less heat when firing."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4082
 msgctxt "upgrade-comms"
 msgid "Upgrade maneuverability"
-msgstr ""
+msgstr "Upgrade maneuverability"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4141
 #, lua-format
@@ -1277,30 +1277,30 @@ msgctxt "upgradeAudio4-comms"
 msgid ""
 "We needed that %s, thanks. Your maneuverability has been significantly "
 "improved"
-msgstr ""
+msgstr "We needed that %s, thanks. Your maneuverability has been significantly improved"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4151
 #, lua-format
 msgctxt "upgradeAudio4-comms"
 msgid "To upgrade, we need you to bring us some %s"
-msgstr ""
+msgstr "To upgrade, we need you to bring us some %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4162
 msgctxt "upgradeAudio4-comms"
 msgid "Your maneuverability has been significantly improved"
-msgstr ""
+msgstr "Your maneuverability has been significantly improved"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4173
 msgctxt "upgrade-comms"
 msgid "Add homing missile tube upgrade"
-msgstr ""
+msgstr "Add homing missile tube upgrade"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4273
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "Thanks for the %s and %s. You now have an additional homing torpedo tube"
-msgstr ""
+msgstr "Thanks for the %s and %s. You now have an additional homing torpedo tube"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4290
 #, lua-format
@@ -1308,31 +1308,31 @@ msgctxt "upgrade-comms"
 msgid ""
 "We're running short of supplies. To add the homing torpedo tube, we need you "
 "to bring us %s and %s"
-msgstr ""
+msgstr "We're running short of supplies. To add the homing torpedo tube, we need you to bring us %s and %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4312
 msgctxt "cartographyOffice-comms"
 msgid ""
 "Greetings,\n"
 "May I help you find a station or goods?"
-msgstr ""
+msgstr "Greetings,\nMay I help you find a station or goods?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4315
 msgctxt "cartographyOffice-comms"
 msgid "Find station"
-msgstr ""
+msgstr "Find station"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4316
 msgctxt "cartographyOffice-comms"
 msgid "What station?"
-msgstr ""
+msgstr "What station?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4329
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4444
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s %s %s Distance:%.1fU"
-msgstr ""
+msgstr "%s %s %s Distance:%.1fU"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4393
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4500
@@ -1341,83 +1341,83 @@ msgctxt "cartographyOffice-comms"
 msgid ""
 "%s\n"
 "Added waypoint %i to your navigation system for %s"
-msgstr ""
+msgstr "%s\nAdded waypoint %i to your navigation system for %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4412
 msgctxt "cartographyOffice-comms"
 msgid "Try the apprentice, I'm tired"
-msgstr ""
+msgstr "Try the apprentice, I'm tyred"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4418
 msgctxt "cartographyOffice-comms"
 msgid "Find Goods"
-msgstr ""
+msgstr "Find Goods"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4420
 msgctxt "cartographyOffice-comms"
 msgid "What goods are you looking for?"
-msgstr ""
+msgstr "What goods are you looking for?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4582
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
-msgstr ""
+msgstr "You need to stay docked for that action."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4591
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr ""
+msgstr "We do not deal in weapons of mass destruction."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4596
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr ""
+msgstr "We do not deal in weapons of mass disruption."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4599
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr ""
+msgstr "We do not deal in those weapons."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4613
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr ""
+msgstr "All nukes are charged and primed for destruction."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4620
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
-msgstr ""
+msgstr "Sorry, sir, but you are as fully stocked as I can allow."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4629
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
-msgstr ""
+msgstr "Not enough reputation."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4643
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr ""
+msgstr "You are fully loaded and ready to explode things."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4650
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
-msgstr ""
+msgstr "We generously resupplied you with some weapon charges.\nPut them to good use."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4680
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
-msgstr ""
+msgstr "Good day, officer.\nIf you need supplies, please dock with us first."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4685
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
-msgstr ""
+msgstr "Greetings.\nIf you want to do business, please dock with us first."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4692
 msgctxt "station-comms"
@@ -1425,74 +1425,74 @@ msgid ""
 "\n"
 "Be aware that if enemies in the area get much closer, we will be too busy to "
 "conduct business with you."
-msgstr ""
+msgstr "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4698
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
-msgstr ""
+msgstr "What kind of information do you need?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4701
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
-msgstr ""
+msgstr "What ordnance do you have available for restock?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4709
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Nuke"
-msgstr ""
+msgstr "\n   Nuke"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4714
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   EMP"
-msgstr ""
+msgstr "\n   EMP"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4719
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Homing"
-msgstr ""
+msgstr "\n   Homing"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4724
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Mine"
-msgstr ""
+msgstr "\n   Mine"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4729
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   HVLI"
-msgstr ""
+msgstr "\n   HVLI"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4734
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
-msgstr ""
+msgstr "We have no ordnance available for restock"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4740
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr ""
+msgstr "We have the following type of ordnance available for restock:%s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4748
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr ""
+msgstr "We have the following types of ordnance available for restock:%s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4769
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
-msgstr ""
+msgstr "What goods do you have available for sale or trade?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4776
 #, lua-format
@@ -1500,7 +1500,7 @@ msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available: quantity, cost in reputation"
-msgstr ""
+msgstr "Station %s:\nGoods or components available: quantity, cost in reputation"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4783
 #, lua-format
@@ -1508,225 +1508,225 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "   %14s: %2i, %3i"
-msgstr ""
+msgstr "\n   %14s: %2i, %3i"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4795
 msgctxt "helpfullWarning-comms"
 msgid "See any enemies in your area?"
-msgstr ""
+msgstr "See any enemies in your area?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4810
 #, lua-format
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see %i enemies within 30U"
-msgstr ""
+msgstr "Yes, we see %i enemies within 30U"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4819
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see one enemy within 30U"
-msgstr ""
+msgstr "Yes, we see one enemy within 30U"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4826
 msgctxt "helpfullWarning-comms"
 msgid "No enemies within 30U"
-msgstr ""
+msgstr "No enemies within 30U"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:4832
 msgctxt "helpfullWarning-comms"
 msgid "Not really"
-msgstr ""
+msgstr "Not really"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5078
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr ""
+msgstr "Can you send a supply drop? (%d rep)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5086
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
-msgstr ""
+msgstr "You need to set a waypoint before you can request backup."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5093
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr ""
+msgstr "To which waypoint should we deliver your supplies?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5099
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5175
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
-msgstr ""
+msgstr "WP %d"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5129
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
-msgstr ""
+msgstr "We have dispatched a supply ship toward WP %d"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5138
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5208
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
-msgstr ""
+msgstr "Not enough reputation!"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5154
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
-msgstr ""
+msgstr "Please send reinforcements! (%d rep)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5162
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
+msgstr "You need to set a waypoint before you can request reinforcements."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5169
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr ""
+msgstr "To which waypoint should we dispatch the reinforcements?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5198
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
-msgstr ""
+msgstr "We have dispatched %s to assist at WP %d"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5309
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5705
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr ""
+msgstr "What do you want?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5311
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Sir, how can we assist?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5313
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Defend a waypoint"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5318
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
-msgstr ""
+msgstr "No waypoints set. Please set a waypoint first."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5324
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Which waypoint should we defend?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5329
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr ""
+msgstr "Defend WP %d"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5340
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
-msgstr ""
+msgstr "We are heading to assist at WP %d."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5352
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr ""
+msgstr "Assist me"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5354
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Heading toward you to assist."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5360
 msgctxt "shipAssist-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Report status"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5362
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Hull: %d%%\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5369
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
-msgstr ""
+msgstr "Shield: %d%%\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5379
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
-msgstr ""
+msgstr "Front Shield: %d%%\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5388
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
-msgstr ""
+msgstr "Rear Shield: %d%%\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5399
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr ""
+msgstr "Shield %s: %d%%\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5415
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr ""
+msgstr "%s Missiles: %d/%d\n"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5434
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Dock at %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5440
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
-msgstr ""
+msgstr "Docking at %s."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5455
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr ""
+msgstr "We will see to your destruction!"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5457
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
-msgstr ""
+msgstr "Your bloodline will end here!"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5459
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr ""
+msgstr "Your feeble threats are meaningless."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5462
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
-msgstr ""
+msgstr "Ktzzzsss.\nYou will DIEEee weaklingsss!"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5468
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
-msgstr ""
+msgstr "We wish you no harm, but will harm you if we must.\nEnd of transmission."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5475
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
-msgstr ""
+msgstr "Stay out of our way, or your death will amuse us extremely!"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5482
 msgctxt "shipEnemy-comms"
@@ -1737,22 +1737,22 @@ msgid ""
 "Generating appropriate response for target from human language archives.\n"
 ":Do not cross us:\n"
 "Communication halted."
-msgstr ""
+msgstr "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5485
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr ""
+msgstr "EXECUTE: SELFDESTRUCT"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5488
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr ""
+msgstr "Rogue command received. Targeting source."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5491
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
-msgstr ""
+msgstr "External command ignored."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5496
 msgctxt "shipEnemy-comms"
@@ -1760,63 +1760,63 @@ msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
 "all.\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
-msgstr ""
+msgstr "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5501
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr ""
+msgstr "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5505
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr ""
+msgstr "We do not need permission to pluck apart such an insignificant threat."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5509
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
-msgstr ""
+msgstr "The hive has greater priorities than exterminating pests."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5512
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
-msgstr ""
+msgstr "Mind your own business!"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5530
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5556
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr ""
+msgstr "Yes?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5532
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
-msgstr ""
+msgstr "Do you have cargo you might sell?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5535
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr ""
+msgstr "We've got "
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5540
 msgctxt "trade-comms"
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5549
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr ""
+msgstr "nothing"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5558
 msgctxt "trade-comms"
 msgid "Where are you headed?"
-msgstr ""
+msgstr "Where are you headed?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5638
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr ""
+msgstr "Traded"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5684
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5804
@@ -1824,39 +1824,39 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
-msgstr ""
+msgstr "Purchased %s from %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5694
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5814
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5878
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr ""
+msgstr "Insufficient reputation for purchase"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5712
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr ""
+msgstr "Where are you headed? (cost: %f reputation)"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5825
 msgctxt "trade-comms"
 msgid "Why are you bothering me?"
-msgstr ""
+msgstr "Why are you bothering me?"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5895
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
-msgstr ""
+msgstr "Sorry, we have no time to chat with you.\nWe are on an important mission."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:5900
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
-msgstr ""
+msgstr "We have nothing for you.\nGood day."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6420
 #, lua-format
@@ -1864,7 +1864,7 @@ msgctxt "goal-shipLog"
 msgid ""
 "Welcome to the delta quadrant, %s. The independent stations in the area "
 "outnumber the human naval stations, but they all rely on us to protect them."
-msgstr ""
+msgstr "Welcome to the delta quadrant, %s. The independent stations in the area outnumber the human naval stations, but they all rely on us to protect them."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6429
 msgctxt "goal-shipLog"
@@ -1879,32 +1879,32 @@ msgid ""
 "secondary objective. Spread goodwill in this high growth, high value "
 "quadrant. Our enemies dearly wish to give us a black eye here and claim it "
 "for their own."
-msgstr ""
+msgstr "Your job is to patrol between the three major human naval stations: Asimov, Utopia Planitia and Armstrong. You'll need to dock with each of these stations. Automated systems will extract your routes and track your progress on patrolling between these stations. The primary objective of your patrol is to watch for enemy ships and intercept them, prevent them from destroying the three bases mentioned as your patrol endpoints. Enemies in the area may harass other stations in the area. Protecting the other stations is your secondary objective. Spread goodwill in this high growth, high value quadrant. Our enemies dearly wish to give us a black eye here and claim it for their own."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6441
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6639
 msgctxt "msgMainscreen"
 msgid "Asimov station destroyed"
-msgstr ""
+msgstr "Asimov station destroyed"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6447
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6644
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6791
 msgctxt "msgMainscreen"
 msgid "Utopia Planitia station destroyed"
-msgstr ""
+msgstr "Utopia Planitia station destroyed"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6453
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6649
 msgctxt "msgMainscreen"
 msgid "Armstrong station destroyed"
-msgstr ""
+msgstr "Armstrong station destroyed"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6691
 #, lua-format
 msgctxt "orders-comms"
 msgid "Rid the area of remaining enemies. Combined sensors show %i ships"
-msgstr ""
+msgstr "Rid the area of remaining enemies. Combined sensors show %i ships"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6703
 #, lua-format
@@ -1915,19 +1915,19 @@ msgid ""
 "put the current count at %i enemy ships. Feel free to continue to dock to "
 "repair and replenish if desired. Oh yes, I almost forgot, you're still "
 "responsible for protecting stations Asimov, Armstrong and Utopia Planitia"
-msgstr ""
+msgstr "You completed your patrol docking duties, but enemy ships still pollute the area. Be sure to clean those up. Combined sensor readings from area stations put the current count at %i enemy ships. Feel free to continue to dock to repair and replenish if desired. Oh yes, I almost forgot, you're still responsible for protecting stations Asimov, Armstrong and Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6721
 msgctxt "UPlanitia1Orders-shipLog"
 msgid "Stop patrol and Defend Utopia Planitia"
-msgstr ""
+msgstr "Stop patrol and Defend Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6734
 msgctxt "UPlanitia1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed to log, stored for playback: "
 "UTPLNT441"
-msgstr ""
+msgstr "Audio message received, auto-transcribed to log, stored for playback: UTPLNT441"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6740
 msgctxt "UPlanitia1Audio-shipLog"
@@ -1935,36 +1935,36 @@ msgid ""
 "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy "
 "ships approaching. Cease patrolling other stations and defend station Utopia "
 "Planitia"
-msgstr ""
+msgstr "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6749
 msgctxt "UPlanitia1Audio-buttonRelay"
 msgid "|> UTPLNT441"
-msgstr ""
+msgstr "|> UTPLNT441"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6756
 msgctxt "UPlanitia1Audio-buttonOperations"
 msgid "|> UTPLNT441"
-msgstr ""
+msgstr "|> UTPLNT441"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6765
 msgctxt "UPlanitia1Audio-incCall"
 msgid ""
 "Our long range sensors show a number of enemy ships approaching. Cease "
 "patrolling other stations and defend station Utopia Planitia"
-msgstr ""
+msgstr "Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6769
 msgctxt "UPlanitia1AudioOrders-comms"
 msgid "Defend Utopia Planitia"
-msgstr ""
+msgstr "Defend Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6849
 msgctxt "UPlanitia2Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed to log, stored for playback: "
 "UTPLNT477"
-msgstr ""
+msgstr "Audio message received, auto-transcribed to log, stored for playback: UTPLNT477"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6855
 msgctxt "UPlanitia2Audio-shipLog"
@@ -1972,22 +1972,22 @@ msgid ""
 "[UTPLNT477](Utopia Planitia) You have taken care of the closest enemies. Our "
 "extreme range sensors show more, but they should not arrive for a couple of "
 "minutes"
-msgstr ""
+msgstr "[UTPLNT477](Utopia Planitia) You have taken care of the closest enemies. Our extreme range sensors show more, but they should not arrive for a couple of minutes"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6864
 msgctxt "UPlanitia2Audio-buttonRelay"
 msgid "|> UTPLNT477"
-msgstr ""
+msgstr "|> UTPLNT477"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6873
 msgctxt "UPlanitia2Audio-buttonOperations"
 msgid "|> UTPLNT477"
-msgstr ""
+msgstr "|> UTPLNT477"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6885
 msgctxt "UPlanitia2Audio-shipLog"
 msgid "Nearest ships cleared. More to come shortly"
-msgstr ""
+msgstr "Nearest ships cleared. More to come shortly"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7060
 #, lua-format
@@ -1995,50 +1995,50 @@ msgctxt "strongHold-shipLog"
 msgid ""
 "Enemy base nearby located in sector %s. Fleet assembled near Utopia Planitia "
 "to assist if needed. Destroy base."
-msgstr ""
+msgstr "Enemy base nearby located in sector %s. Fleet assembled near Utopia Planitia to assist if needed. Destroy base."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7074
 #, lua-format
 msgctxt "strongHoldOrders-comms"
 msgid "Destroy enemy base in sector %s"
-msgstr ""
+msgstr "Destroy enemy base in sector %s"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7160
 msgctxt "Asimov1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "ASMVSNSR003"
-msgstr ""
+msgstr "Audio message received, auto-transcribed into log, stored for playback: ASMVSNSR003"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7166
 msgctxt "Asimov1Audio-shipLog"
 msgid ""
 "[ASMVSNSR003](Asimov sensor technician) Our long range sensors show enemies "
 "approaching"
-msgstr ""
+msgstr "[ASMVSNSR003](Asimov sensor technician) Our long range sensors show enemies approaching"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7175
 msgctxt "Asimov1Audio-buttonRelay"
 msgid "|> ASMVSNSR003"
-msgstr ""
+msgstr "|> ASMVSNSR003"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7182
 msgctxt "Asimov1Audio-buttonOperations"
 msgid "|> ASMVSNSR003"
-msgstr ""
+msgstr "|> ASMVSNSR003"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7234
 #, lua-format
 msgctxt "Kojak1AudioOrders-comms"
 msgid "Pick up Joshua Kojak from %s in sector %s and take him to Bethesda"
-msgstr ""
+msgstr "Pick up Joshua Kojak from %s in sector %s and take him to Bethesda"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7246
 msgctxt "Kojak1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "MINSTN014"
-msgstr ""
+msgstr "Audio message received, auto-transcribed into log, stored for playback: MINSTN014"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7253
 #, lua-format
@@ -2049,70 +2049,70 @@ msgid ""
 "but he can't do us any good while he's sick. Can you transport him to "
 "Bethesda station? I hear they've got some clever doctors there that might "
 "help."
-msgstr ""
+msgstr "[MINSTN014](%s in sector %s) Joshua Kojak has come down with something our autodoc can't handle. He's supposed to be helping us mine these asteroids, but he can't do us any good while he's sick. Can you transport him to Bethesda station? I hear they've got some clever doctors there that might help."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7266
 msgctxt "Kojak1Audio-buttonRelay"
 msgid "|> MINSTN014"
-msgstr ""
+msgstr "|> MINSTN014"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7274
 msgctxt "Kojak1Audio-buttonOperations"
 msgid "|> MINSTN014"
-msgstr ""
+msgstr "|> MINSTN014"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7303
 msgctxt "Kojak2Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "MINSTN019"
-msgstr ""
+msgstr "Audio message received, auto-transcribed into log, stored for playback: MINSTN019"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7309
 msgctxt "Kojak2Audio-shipLog"
 msgid ""
 "[MINSTN019]Thanks for getting Joshua aboard. Please take him to Bethesda"
-msgstr ""
+msgstr "[MINSTN019]Thanks for getting Joshua aboard. Please take him to Bethesda"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7320
 msgctxt "Kojak2Audio-buttonRelay"
 msgid "|> MINSTN019"
-msgstr ""
+msgstr "|> MINSTN019"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7328
 msgctxt "Kojak2Audio-buttonOperations"
 msgid "|> MINSTN019"
-msgstr ""
+msgstr "|> MINSTN019"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7354
 msgctxt "Kojak3Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "BTHSDA002"
-msgstr ""
+msgstr "Audio message received, auto-transcribed into log, stored for playback: BTHSDA002"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7360
 msgctxt "Kojak3Audio-shipLog"
 msgid ""
 "[BTHSDA002] Joshua Kojak is being treated. He shows every sign of recovering"
-msgstr ""
+msgstr "[BTHSDA002] Joshua Kojak is being treated. He shows every sign of recovering"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7369
 msgctxt "Kojak3Audio-buttonRelay"
 msgid "|> BTHSDA002"
-msgstr ""
+msgstr "|> BTHSDA002"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7376
 msgctxt "Kojak3Audio-buttonOperations"
 msgid "|> BTHSDA002"
-msgstr ""
+msgstr "|> BTHSDA002"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7407
 msgctxt "Kojak4Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "BTHSDA034"
-msgstr ""
+msgstr "Audio message received, auto-transcribed into log, stored for playback: BTHSDA034"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7413
 msgctxt "Kojak4Audio-shipLog"
@@ -2121,17 +2121,17 @@ msgid ""
 "much better. I'm transmitting my research on power systems and exotic "
 "metals. You may find it interesting. Mining leaves me lots of time for "
 "thinking"
-msgstr ""
+msgstr "[BTHSDA034](Joshua Kojak) Thanks for bringing me to Bethesda. I'm feeling much better. I'm transmitting my research on power systems and exotic metals. You may find it interesting. Mining leaves me lots of time for thinking"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7423
 msgctxt "Kojak4Audio-buttonRelay"
 msgid "|> BTHSDA034"
-msgstr ""
+msgstr "|> BTHSDA034"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7430
 msgctxt "Kojak4Audio-buttonOperations"
 msgid "|> BTHSDA034"
-msgstr ""
+msgstr "|> BTHSDA034"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7458
 msgctxt "Kojak5-msgScience"
@@ -2140,7 +2140,7 @@ msgid ""
 "application to on-board ship systems. Click the 'Send to engineer' button to "
 "submit insight to engineering. You may find the button under the 'scanning' "
 "label"
-msgstr ""
+msgstr "While reading through Joshua Kojak's research, you discover a potential application to on-board ship systems. Click the 'Send to engineer' button to submit insight to engineering. You may find the button under the 'scanning' label"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7467
 msgctxt "Kojak5-msgOperations"
@@ -2148,17 +2148,17 @@ msgid ""
 "While reading through Joshua Kojak's research, you discover a potential "
 "application to on-board ship systems. Click the 'Send to engineer' button to "
 "submit insight to engineering."
-msgstr ""
+msgstr "While reading through Joshua Kojak's research, you discover a potential application to on-board ship systems. Click the 'Send to engineer' button to submit insight to engineering."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7474
 msgctxt "Kojak5-buttonScience"
 msgid "Send to engineer"
-msgstr ""
+msgstr "Send to engineer"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7481
 msgctxt "Kojak5-buttonOperations"
 msgid "Send to engineer"
-msgstr ""
+msgstr "Send to engineer"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7515
 msgctxt "Kojak6-msgEngineer"
@@ -2166,7 +2166,7 @@ msgid ""
 "The science officer sent you some thoughts on Joshua Kojak's research. You "
 "think it applies to beam weapon improvement. Click the 'Send to weapons' "
 "button to suggest changes to weapons"
-msgstr ""
+msgstr "The science officer sent you some thoughts on Joshua Kojak's research. You think it applies to beam weapon improvement. Click the 'Send to weapons' button to suggest changes to weapons"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7524
 msgctxt "Kojak6-msgEngineer+"
@@ -2174,17 +2174,17 @@ msgid ""
 "The science officer sent you some thoughts on Joshua Kojak's research. You "
 "think it applies to beam weapon improvement. Click the 'Send to weapons' "
 "button to suggest changes to weapons"
-msgstr ""
+msgstr "The science officer sent you some thoughts on Joshua Kojak's research. You think it applies to beam weapon improvement. Click the 'Send to weapons' button to suggest changes to weapons"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7531
 msgctxt "Kojak6-buttonEngineer"
 msgid "Send to weapons"
-msgstr ""
+msgstr "Send to weapons"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7538
 msgctxt "Kojak6-buttonEngineer+"
 msgid "Send to weapons"
-msgstr ""
+msgstr "Send to weapons"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7581
 msgctxt "Kojak7-msgWeapons"
@@ -2193,7 +2193,7 @@ msgid ""
 "to apply it to the beam weapons, but lack the tools to do it immediately. "
 "Click the 'Send to Utopia Planitia' button to transmit upgrade instructions "
 "to Utopia Planitia station"
-msgstr ""
+msgstr "The engineer sent you some thoughts on Joshua Kojak's research. You know how to apply it to the beam weapons, but lack the tools to do it immediately. Click the 'Send to Utopia Planitia' button to transmit upgrade instructions to Utopia Planitia station"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7590
 msgctxt "Kojak7-msgTactical"
@@ -2202,77 +2202,77 @@ msgid ""
 "to apply it to the beam weapons, but lack the tools to do it immediately. "
 "Click the 'Send to Utopia Planitia' button to transmit upgrade instructions "
 "to Utopia Planitia station"
-msgstr ""
+msgstr "The engineer sent you some thoughts on Joshua Kojak's research. You know how to apply it to the beam weapons, but lack the tools to do it immediately. Click the 'Send to Utopia Planitia' button to transmit upgrade instructions to Utopia Planitia station"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7597
 msgctxt "Kojak7-buttonWeapons"
 msgid "Send to Utopia Planitia"
-msgstr ""
+msgstr "Send to Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7604
 msgctxt "Kojak7-buttonTactical"
 msgid "Send to Utopia Planitia"
-msgstr ""
+msgstr "Send to Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7645
 msgctxt "Koja8kUP-incCall"
 msgid "Thanks for the information. We can upgrade you next time you dock."
-msgstr ""
+msgstr "Thanks for the information. We can upgrade you next time you dock."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7651
 msgctxt "Kojak8UP-shipLog"
 msgid ""
 "[Utopia Planitia] Thanks for the information. We can upgrade you next time "
 "you dock"
-msgstr ""
+msgstr "[Utopia Planitia] Thanks for the information. We can upgrade you next time you dock"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7707
 msgctxt "UPlanitia3Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "UTPLNT103"
-msgstr ""
+msgstr "Audio message received, auto-transcribed into log, stored for playback: UTPLNT103"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7713
 msgctxt "UPlanitia3Audio-shipLog"
 msgid ""
 "[UTPLNT103](Utopia Planitia sensor technician) Our long range sensors show "
 "enemies approaching"
-msgstr ""
+msgstr "[UTPLNT103](Utopia Planitia sensor technician) Our long range sensors show enemies approaching"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7724
 msgctxt "UPlanitia3Audio-buttonRelay"
 msgid "|> UTPLNT103"
-msgstr ""
+msgstr "|> UTPLNT103"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7732
 msgctxt "UPlanitia3Audio-buttonOperations"
 msgid "|> UTPLNT103"
-msgstr ""
+msgstr "|> UTPLNT103"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7776
 #, lua-format
 msgctxt "Nabbit1-shipLog"
 msgid "[%s in sector %s] Engineer Dan McNabbit requests a ride to Armstrong"
-msgstr ""
+msgstr "[%s in sector %s] Engineer Dan McNabbit requests a ride to Armstrong"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7786
 #, lua-format
 msgctxt "Nabbit1Orders-comms"
 msgid "Pick up Dan McNabbit from %s in sector %s and take him to Armstrong"
-msgstr ""
+msgstr "Pick up Dan McNabbit from %s in sector %s and take him to Armstrong"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7810
 msgctxt "Nabbit2-shipLog"
 msgid "Engineer Dan McNabbit aboard and ready to go to Armstrong"
-msgstr ""
+msgstr "Engineer Dan McNabbit aboard and ready to go to Armstrong"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7844
 msgctxt "Nabbit3Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "ASTGDN038"
-msgstr ""
+msgstr "Audio message received, auto-transcribed into log, stored for playback: ASTGDN038"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7850
 msgctxt "Nabbit3Audio-shipLog"
@@ -2280,17 +2280,17 @@ msgid ""
 "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse "
 "engines en route. I transmitted my engine tuning parameters to Utopia "
 "Planitia. Expect faster impulse speeds"
-msgstr ""
+msgstr "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse engines en route. I transmitted my engine tuning parameters to Utopia Planitia. Expect faster impulse speeds"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7866
 msgctxt "Nabbit3Audio-buttonRelay"
 msgid "|> ASTGDN038"
-msgstr ""
+msgstr "|> ASTGDN038"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7873
 msgctxt "Nabbit3Audio-buttonOperations"
 msgid "|> ASTGDN038"
-msgstr ""
+msgstr "|> ASTGDN038"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7910
 msgctxt "attackTimer-shipLog"
@@ -2300,14 +2300,14 @@ msgid ""
 "preventing accurate sensor readings. We suggest you check with these "
 "stations periodically to see if their normal sensors have picked up any "
 "enemy activity"
-msgstr ""
+msgstr "Stations Asimov, Utopia Planitia and Armstrong say that their long range sensors no longer read properly beyond 30U. This implies enemy activity is preventing accurate sensor readings. We suggest you check with these stations periodically to see if their normal sensors have picked up any enemy activity"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7960
 msgctxt "Lisbon1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "BTHSDA271"
-msgstr ""
+msgstr "Audio message received, auto-transcribed into log, stored for playback: BTHSDA271"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7967
 #, lua-format
@@ -2317,17 +2317,17 @@ msgid ""
 "After extensive investigation, she believes Francis is aboard %s currently "
 "in sector %s\n"
 "She requests a rendezvous with the freighter to bring back her child"
-msgstr ""
+msgstr "[BTHSDA271] Commander Lisbon reports her child stowed away on a freighter. After extensive investigation, she believes Francis is aboard %s currently in sector %s\nShe requests a rendezvous with the freighter to bring back her child"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7980
 msgctxt "Lisbon1Audio-buttonRelay"
 msgid "|> BTHSDA271"
-msgstr ""
+msgstr "|> BTHSDA271"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7987
 msgctxt "Lisbon1Audio-buttonOperations"
 msgid "|> BTHSDA271"
-msgstr ""
+msgstr "|> BTHSDA271"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7995
 #, lua-format
@@ -2335,18 +2335,18 @@ msgctxt "Lisbon1AudioOrders-comms"
 msgid ""
 "Retrieve Francis from freighter %s last reported in sector %s and return "
 "child to station Bethesda"
-msgstr ""
+msgstr "Retrieve Francis from freighter %s last reported in sector %s and return child to station Bethesda"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8017
 msgctxt "Lisbon2-shipLog"
 msgid "The stowaway, Francis, is aboard. Commander Lisbon awaits at Bethesda"
-msgstr ""
+msgstr "The stowaway, Francis, is aboard. Commander Lisbon awaits at Bethesda"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8024
 #, lua-format
 msgctxt "Lisbon2Orders-comms"
 msgid "%s: Return Commander Lisbon's child to station Bethesda"
-msgstr ""
+msgstr "%s: Return Commander Lisbon's child to station Bethesda"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8049
 msgctxt "Lisbon3-shipLog"
@@ -2355,7 +2355,7 @@ msgid ""
 "with my beam system cooling algorithm research. Take it to station Utopia "
 "Planitia so that they can decrypt it and it may be applied to human navy "
 "ships"
-msgstr ""
+msgstr "[Commander Lisbon] Thanks for bringing Francis back. I am entrusting you with my beam system cooling algorithm research. Take it to station Utopia Planitia so that they can decrypt it and it may be applied to human navy ships"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8057
 #, lua-format
@@ -2363,27 +2363,27 @@ msgctxt "Lisbon3Orders-comms"
 msgid ""
 "%s: Deliver Commander Lisbon's encrypted beam system cooling algorithm to "
 "station Utopia Planitia"
-msgstr ""
+msgstr "%s: Deliver Commander Lisbon's encrypted beam system cooling algorithm to station Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8081
 msgctxt "Lisbon4-shipLog"
 msgid ""
 "[Utopia Planitia] Received Commander Lisbon's beam cooling research. Upgrade "
 "available to human navy ships"
-msgstr ""
+msgstr "[Utopia Planitia] Received Commander Lisbon's beam cooling research. Upgrade available to human navy ships"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8316
 #, lua-format
 msgctxt "Asimov2-shipLog"
 msgid "[Asimov] Our sensors show enemies approximately %.2f units away"
-msgstr ""
+msgstr "[Asimov] Our sensors show enemies approximately %.2f units away"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8347
 #, lua-format
 msgctxt "Armstrong1-shipLog"
 msgid ""
 "[Armstrong] Our long range sensors show enemies approximately %.2f units away"
-msgstr ""
+msgstr "[Armstrong] Our long range sensors show enemies approximately %.2f units away"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8378
 #, lua-format
@@ -2391,7 +2391,7 @@ msgctxt "UPlanitia4-shipLog"
 msgid ""
 "[Utopia Planitia] Our long range sensors show enemies approximately %.2f "
 "units away"
-msgstr ""
+msgstr "[Utopia Planitia] Our long range sensors show enemies approximately %.2f units away"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8430
 #, lua-format
@@ -2401,19 +2401,19 @@ msgid ""
 "effects she left a data store for the academy on station Asimov. Her "
 "personal effects are located on station %s in sector %s. Please dock and "
 "pick up the data store and transport it to station Asimov"
-msgstr ""
+msgstr "Sheila Long, A former naval officer recenly perished. Among her personal effects she left a data store for the academy on station Asimov. Her personal effects are located on station %s in sector %s. Please dock and pick up the data store and transport it to station Asimov"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8440
 #, lua-format
 msgctxt "Sheila1Orders-comms"
 msgid ""
 "Get Sheila Long's package from %s in sector %s and take to station Asimov"
-msgstr ""
+msgstr "Get Sheila Long's package from %s in sector %s and take to station Asimov"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8463
 msgctxt "Sheila2-shipLog"
 msgid "Sheila Long's package for station Asimov is aboard"
-msgstr ""
+msgstr "Sheila Long's package for station Asimov is aboard"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8485
 msgctxt "Sheila3-shipLog"
@@ -2423,167 +2423,167 @@ msgid ""
 "received the information and stated that they believe they can add an extra "
 "homing missile weapons tube to any ship in the fleet if the ship will dock "
 "with Utopia Planitia"
-msgstr ""
+msgstr "Sheila Long's package received. The archive curator discovered some research on weapons systems miniaturization in the data store. Utopia Planitia received the information and stated that they believe they can add an extra homing missile weapons tube to any ship in the fleet if the ship will dock with Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8526
 msgctxt "tube-msgWeapons"
 msgid ""
 "Automated systems removed our new weapons tube due to malfunction. "
 "Technicians investigating"
-msgstr ""
+msgstr "Automated systems removed our new weapons tube due to malfunction. Technicians investigating"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8535
 msgctxt "tube-msgTactical"
 msgid ""
 "Automated systems removed our new weapons tube due to malfunction. "
 "Technicians investigating"
-msgstr ""
+msgstr "Automated systems removed our new weapons tube due to malfunction. Technicians investigating"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8546
 msgctxt "tube-msgWeapons"
 msgid "Technicians fixed the new tube. Click 'Redeploy' button to enable"
-msgstr ""
+msgstr "Technicians fixed the new tube. Click 'Redeploy' button to enable"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8555
 msgctxt "tube-msgTactical"
 msgid "Technicians fixed the new tube. Click 'Redeploy' button to enable"
-msgstr ""
+msgstr "Technicians fixed the new tube. Click 'Redeploy' button to enable"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8562
 msgctxt "tube-buttonWeapons"
 msgid "Redeploy"
-msgstr ""
+msgstr "Redeploy"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8569
 msgctxt "tube-buttonTactical"
 msgid "Redeploy"
-msgstr ""
+msgstr "Redeploy"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8659
 msgctxt "UPlanitia5Audio-shipLog"
 msgid ""
 "[UTPLNT116](Utopia Planitia) Scanned artifacts show promise for ship systems "
 "improvement. Recommend retrieval"
-msgstr ""
+msgstr "[UTPLNT116](Utopia Planitia) Scanned artifacts show promise for ship systems improvement. Recommend retrieval"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8671
 msgctxt "UPlanitia5Audio-incCall"
 msgid "Audio message received, stored for playback: UTPLNT116"
-msgstr ""
+msgstr "Audio message received, stored for playback: UTPLNT116"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8677
 msgctxt "UPlanitia5Audio-buttonRelay"
 msgid "|> UTPLNT116"
-msgstr ""
+msgstr "|> UTPLNT116"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8684
 msgctxt "UPlanitia5Audio-buttonOperations"
 msgid "|> UTPLNT116"
-msgstr ""
+msgstr "|> UTPLNT116"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8713
 msgctxt "UPlanitia6-shipLog"
 msgid ""
 "[Utopia Planitia] Bring artifacts to Utopia Planitia and we can improve ship "
 "maneuverability"
-msgstr ""
+msgstr "[Utopia Planitia] Bring artifacts to Utopia Planitia and we can improve ship maneuverability"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:8746
 msgctxt "UPlanitia7-shipLog"
 msgid ""
 "[Utopia Planitia] We received the artifacts. We can improve ship "
 "maneuverability next time you dock"
-msgstr ""
+msgstr "[Utopia Planitia] We received the artifacts. We can improve ship maneuverability next time you dock"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9057
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
-msgstr ""
+msgstr "Medical team has revived one of your repair crew"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9069
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
-msgstr ""
+msgstr "Medical team has revived one of your repair crew"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9115
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "One of your repair crew has perished"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9126
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "One of your repair crew has perished"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9135
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9144
 msgctxt "-tabRelay&Operations"
 msgid "Game Timer"
-msgstr ""
+msgstr "Game Timer"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9147
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9153
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
-msgstr ""
+msgstr "%s %i:%.2i"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9188
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%i%% Complete"
-msgstr ""
+msgstr "%i%% Complete"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9202
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s -Utopia Planitia"
-msgstr ""
+msgstr "%s -Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9210
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s +Utopia Planitia"
-msgstr ""
+msgstr "%s +Utopia Planitia"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9220
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s -Asimov"
-msgstr ""
+msgstr "%s -Asimov"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9225
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s +Asimov"
-msgstr ""
+msgstr "%s +Asimov"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9232
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s -Armstrong"
-msgstr ""
+msgstr "%s -Armstrong"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9237
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s +Armstrong"
-msgstr ""
+msgstr "%s +Armstrong"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9268
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "Asimov S:%i%% H:%i%%"
-msgstr ""
+msgstr "Asimov S:%i%% H:%i%%"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9336
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:9403
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "U.P. WS:%i%% H:%i%%"
-msgstr ""
+msgstr "U.P. WS:%i%% H:%i%%"

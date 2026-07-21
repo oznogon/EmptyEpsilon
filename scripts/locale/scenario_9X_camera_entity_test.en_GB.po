@@ -1,7 +1,7 @@
 # Scenario name
 msgid "Camera Entity Test"
-msgstr ""
+msgstr "Camera Entity Test"
 
 # Scenario description
 msgid "Test scenario for camera entities"
-msgstr ""
+msgstr "Test scenario for camera entities"

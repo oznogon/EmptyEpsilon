@@ -1,6 +1,6 @@
 # Scenario name
 msgid "utils_customElements"
-msgstr ""
+msgstr "utils_customElements"
 
 # Scenario description
 msgid ""
@@ -12,4 +12,4 @@ msgid ""
 "Operator in context of this module means player fulfilling specific duties "
 "aboard the ship\n"
 "(for example Engineer can use \"Engineering\" or \"Engineering+\")."
-msgstr ""
+msgstr "Wrapper upon different stations, so mission author can add button/information to station Operator,\nabstracting the position through which the operator fulfills his duties.\nThis module should remove multiple boilerplate to accomodate 6/5 and 4/3 station categories.\nOperator in context of this module means player fulfilling specific duties aboard the ship\n(for example Engineer can use \"Engineering\" or \"Engineering+\")."

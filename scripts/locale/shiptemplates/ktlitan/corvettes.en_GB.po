@@ -1,14 +1,14 @@
 #: scripts/shiptemplates/ktlitan/corvettes.lua:9
 msgctxt "ship"
 msgid "Ktlitan Feeder"
-msgstr ""
+msgstr "Ktlitan Feeder"
 
 #: scripts/shiptemplates/ktlitan/corvettes.lua:10
 msgctxt "class"
 msgid "Corvette"
-msgstr ""
+msgstr "Corvette"
 
 #: scripts/shiptemplates/ktlitan/corvettes.lua:10
 msgctxt "subclass"
 msgid "Assault"
-msgstr ""
+msgstr "Assault"

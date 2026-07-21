@@ -1,13 +1,13 @@
 # Scenario name
 msgid "Briefing Map Test"
-msgstr ""
+msgstr "Briefing Map Test"
 
 # Scenario description
 msgid ""
 "Test scenario for the scriptable briefing map with keyframe-tweened "
 "pseudoentities."
-msgstr ""
+msgstr "Test scenario for the scriptable briefing map with keyframe-tweened pseudoentities."
 
 #: scripts/scenario_9X_briefing_map_test.lua:11
 msgid "This is a standard static image page."
-msgstr ""
+msgstr "This is a standard static image page."

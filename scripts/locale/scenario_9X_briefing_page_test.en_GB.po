@@ -1,10 +1,10 @@
 # Scenario name
 msgid "Briefing Screen Test"
-msgstr ""
+msgstr "Briefing Screen Test"
 
 # Scenario description
 msgid "Test scenario that populates a briefing with images and audio."
-msgstr ""
+msgstr "Test scenario that populates a briefing with images and audio."
 
 #: scripts/scenario_9X_briefing_page_test.lua:16
 msgid ""
@@ -24,22 +24,22 @@ msgid ""
 "If you want to create your own scenarios, see mission scripting page from "
 "there and also mission scripting tutorial on EE's web page. But that is "
 "entirely new can of worms."
-msgstr ""
+msgstr "[If you run stock missions, you can make do without GM, but a lot of missions have some controls to tweak that exact mission on the fly.\n\nHere is full description of GM screen with controls: https://github.com/daid/EmptyEpsilon/wiki/Game-Master\n\nI recommend toying with it too get a handle on what things actually do (and what objects can you create in top of our what the scenario itself creates).\n\nI believe, taky there is also mistake/imprecise info - faction selector can also change faction for selected objects. But check that for yourself.\n\nIf you want to create your own scenarios, see mission scripting page from there and also mission scripting tutorial on EE's web page. But that is entirely new can of worms."
 
 #: scripts/scenario_9X_briefing_page_test.lua:34
 msgid ""
 "If you run stock missions, you can make do without GM, but a lot of missions "
 "have some controls to tweak that exact mission on the fly."
-msgstr ""
+msgstr "If you run stock missions, you can make do without GM, but a lot of missions have some controls to tweak that exact mission on the fly."
 
 #: scripts/scenario_9X_briefing_page_test.lua:43
 msgid "Hack Minigames"
-msgstr ""
+msgstr "Hack Minigames"
 
 #: scripts/scenario_9X_briefing_page_test.lua:51
 msgid "Radar Rings"
-msgstr ""
+msgstr "Radar Rings"
 
 #: scripts/scenario_9X_briefing_page_test.lua:59
 msgid "Wormhole"
-msgstr ""
+msgstr "Wormhole"

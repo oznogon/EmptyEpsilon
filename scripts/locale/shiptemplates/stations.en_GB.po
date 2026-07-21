@@ -1,6 +1,6 @@
 #: scripts/shiptemplates/stations.lua:5
 msgid "Small Station"
-msgstr ""
+msgstr "Small Station"
 
 #: scripts/shiptemplates/stations.lua:11
 msgid ""
@@ -10,11 +10,11 @@ msgid ""
 "ships on many long-range sensors, and organized raiders sometimes take "
 "advantage of this by placing small stations in nebulae to serve as raiding "
 "bases. They are lightly shielded and vulnerable to swarming assaults."
-msgstr ""
+msgstr "Stations of this size are often used as research outposts, listening stations, and security checkpoints. Crews turn over frequently in a small station's cramped accommodatations, but they are small enough to look like ships on many long-range sensors, and organised raiders sometimes take advantage of this by placing small stations in nebulae to serve as raiding bases. They are lightly shielded and vulnerable to swarming assaults."
 
 #: scripts/shiptemplates/stations.lua:19
 msgid "Medium Station"
-msgstr ""
+msgstr "Medium Station"
 
 #: scripts/shiptemplates/stations.lua:25
 msgid ""
@@ -22,11 +22,11 @@ msgid ""
 "stations of this size are often trading posts, refuelling bases, mining "
 "operations, and forward military bases. While their shields are strong, "
 "concerted attacks by many ships can bring them down quickly."
-msgstr ""
+msgstr "Large enough to accommodate small crews for extended periods of times, stations of this size are often trading posts, refuelling bases, mining operations, and forward military bases. While their shields are strong, concerted attacks by many ships can bring them down quickly."
 
 #: scripts/shiptemplates/stations.lua:33
 msgid "Large Station"
-msgstr ""
+msgstr "Large Station"
 
 #: scripts/shiptemplates/stations.lua:39
 msgid ""
@@ -35,11 +35,11 @@ msgid ""
 "space settlements, and small shipyards. Only a concentrated attack can "
 "penetrate a large station's shields, and its hull can withstand all but the "
 "most powerful weaponry."
-msgstr ""
+msgstr "These spaceborne communities often represent permanent bases in a sector. Stations of this size can be military installations, commercial hubs, deep-space settlements, and small shipyards. Only a concentrated attack can penetrate a large station's shields, and its hull can withstand all but the most powerful weaponry."
 
 #: scripts/shiptemplates/stations.lua:47
 msgid "Huge Station"
-msgstr ""
+msgstr "Huge Station"
 
 #: scripts/shiptemplates/stations.lua:53
 msgid ""
@@ -49,63 +49,63 @@ msgid ""
 "station's shields and thick hull can keep it intact long enough for "
 "reinforcements to arrive, even when faced with an ongoing siege or massive, "
 "perfectly coordinated assault."
-msgstr ""
+msgstr "The size of a sprawling town, stations at this scale represent a faction's centre of spaceborne power in a region. They serve many functions at once and represent an extensive investment of time, money, and labour. A huge station's shields and thick hull can keep it intact long enough for reinforcements to arrive, even when faced with an ongoing siege or massive, perfectly coordinated assault."
 
 #: scripts/shiptemplates/stations.lua:62
 msgctxt "ship"
 msgid "Weapons platform"
-msgstr ""
+msgstr "Weapons platform"
 
 #: scripts/shiptemplates/stations.lua:63
 msgctxt "class"
 msgid "Platform"
-msgstr ""
+msgstr "Platform"
 
 #: scripts/shiptemplates/stations.lua:63
 msgctxt "subclass"
 msgid "Fortification"
-msgstr ""
+msgstr "Fortification"
 
 #: scripts/shiptemplates/stations.lua:68
 msgid ""
 "This stationary weapons platform resembles a station armed with powerful "
 "beam weapons, and it can slowly rotate. Unlike defense platforms, weapons "
 "platforms lack docking bays and have a more vulnerable hull."
-msgstr ""
+msgstr "This stationary weapons platform resembles a station armed with powerful beam weapons, and it can slowly rotate. Unlike defence platforms, weapons platforms lack docking bays and have a more vulnerable hull."
 
 #: scripts/shiptemplates/stations.lua:84
 msgctxt "ship"
 msgid "Defense platform"
-msgstr ""
+msgstr "Defence platform"
 
 #: scripts/shiptemplates/stations.lua:88
 msgid ""
 "This stationary defense platform operates like a station, with docking and "
 "resupply functions, but is armed with powerful beam weapons and can slowly "
 "rotate. Larger systems often use these platforms to resupply patrol ships."
-msgstr ""
+msgstr "This stationary defence platform operates like a station, with docking and resupply functions, but is armed with powerful beam weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships."
 
 #: scripts/shiptemplates/stations.lua:93
 msgctxt "class"
 msgid "Corvette"
-msgstr ""
+msgstr "Corvette"
 
 #: scripts/shiptemplates/stations.lua:94
 msgctxt "class"
 msgid "Frigate"
-msgstr ""
+msgstr "Frigate"
 
 #: scripts/shiptemplates/stations.lua:97
 msgctxt "class"
 msgid "Cargo"
-msgstr ""
+msgstr "Cargo"
 
 #: scripts/shiptemplates/stations.lua:98
 msgctxt "class"
 msgid "Starfighter"
-msgstr ""
+msgstr "Starfighter"
 
 #: scripts/shiptemplates/stations.lua:99
 msgctxt "class"
 msgid "Tug"
-msgstr ""
+msgstr "Tug"

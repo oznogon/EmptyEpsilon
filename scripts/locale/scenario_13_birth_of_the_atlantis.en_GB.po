@@ -1,6 +1,6 @@
 # Scenario name
 msgid "Birth of the Atlantis"
-msgstr ""
+msgstr "Birth of the Atlantis"
 
 # Scenario description
 msgid ""
@@ -10,14 +10,14 @@ msgid ""
 "You must check out ship systems and complete an initial mission.\n"
 "\n"
 "This scenario is limited to one player ship: the Atlantis Atlantis-1."
-msgstr ""
+msgstr "You are the first crew of a new and improved version of the Atlantis space explorer.\n\nYou must check out ship systems and complete an initial mission.\n\nThis scenario is limited to one player ship: the Atlantis Atlantis-1."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:278
 #: scripts/scenario_13_birth_of_the_atlantis.lua:303
 #: scripts/scenario_13_birth_of_the_atlantis.lua:319
 msgctxt "scienceDescription-artifact"
 msgid "An odd object floating in space."
-msgstr ""
+msgstr "An odd object floating in space."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:282
 #, lua-format
@@ -29,7 +29,7 @@ msgid ""
 "Gravity disruption: %i\n"
 "Ionic phase shift: %i\n"
 "Doppler instability: %i"
-msgstr ""
+msgstr "This object is giving off strange readings.\nSensor readings:\nBeta radiation: %i\nGravity disruption: %i\nIonic phase shift: %i\nDoppler instability: %i"
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:306
 #: scripts/scenario_13_birth_of_the_atlantis.lua:322
@@ -37,7 +37,7 @@ msgctxt "scienceDescription-artifact"
 msgid ""
 "This object seems to be inert, and not giving any interesting readings on "
 "your sensors. The actual object must be somewhere else."
-msgstr ""
+msgstr "This object seems to be inert, and not giving any interesting readings on your sensors. The actual object must be somewhere else."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:599
 msgctxt "station-incCall"
@@ -52,7 +52,7 @@ msgid ""
 "\n"
 "First, have your engineer power up all systems to 100%, as you are currently "
 "in powered down mode."
-msgstr ""
+msgstr "Come in, Atlantis-1.\n\nGood, your communication systems seems to be working.\n\nAs you well know, you are aboard the newest version of the Atlantis space explorer. We will take you through a few quick tests to see if the ship is operating as expected.\n\nFirst, have your engineer power up all systems to 100%, as you are currently in powered down mode."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:632
 #, lua-format
@@ -62,7 +62,7 @@ msgid ""
 "\n"
 "Head to sector %s, where F-1 has dropped missile supplies. Pick them up to "
 "stock up on weapons."
-msgstr ""
+msgstr "Good, Atlantis-1, we read all systems are go. You can safely undock now.\n\nHead to sector %s, where F-1 has dropped missile supplies. Pick them up to stock up on weapons."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:661
 msgctxt "station-incCall"
@@ -75,7 +75,7 @@ msgid ""
 "\n"
 "Have your science officer scan the Dummy-1 and Dummy-2 ships to properly "
 "identify them."
-msgstr ""
+msgstr "I see you are stocked up on missiles now, Atlantis-1.\n\nThere are two dummy ships in your vicinity. Before we test your weapon systems, we should first identify the ships to ensure we destroy the correct ones.\n\nHave your science officer scan the Dummy-1 and Dummy-2 ships to properly identify them."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:686
 msgctxt "station-incCall"
@@ -88,7 +88,7 @@ msgid ""
 "\n"
 "The shields of Dummy-2 are configured so that your beam weapons will not "
 "penetrate them."
-msgstr ""
+msgstr "Perfect, Atlantis-1. They identify as Kraylor ships because we put fake IDs in them.\n\nDestroy Dummy-1 with your beam weapons, and use a homing missile to take out Dummy-2.\n\nThe shields of Dummy-2 are configured so that your beam weapons will not penetrate them."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:711
 msgctxt "station-incCall"
@@ -98,13 +98,13 @@ msgid ""
 "\n"
 "When you are ready to take on your first mission, contact us at Shipyard-"
 "Gamma. You can also dock with Supply-6 to resupply."
-msgstr ""
+msgstr "Good, all weapons are operational. Atlantis-1 seems to be in perfect operating condition.\n\nWhen you are ready to take on your first mission, contact us at Shipyard-Gamma. You can also dock with Supply-6 to resupply."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:737
 #, lua-format
 msgctxt "JumpCarrier-incCall"
 msgid "Hold on tight, heading for sector %s."
-msgstr ""
+msgstr "Hold on tight, heading for sector %s."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:749
 #, lua-format
@@ -120,7 +120,7 @@ msgid ""
 "Report back when you have found the source of the odd sensor readings. This "
 "should be a good opportunity to make use of your ship's probes, or your "
 "Science Officer might be able to track it down based on its radar signature."
-msgstr ""
+msgstr "Atlantis-1,\n\nHere we are, sector %s. Looks like there are some lingering Kraylor here.\n\nWe are outside of the no-fire zone and at war with the Kraylor, so you are clear to engage.\n\nReport back when you have found the source of the odd sensor readings. This should be a good opportunity to make use of your ship's probes, or your Science Officer might be able to track it down based on its radar signature."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:780
 msgctxt "artifact-comms"
@@ -128,7 +128,7 @@ msgid ""
 "It seems like the artifact is stabilizing.\n"
 "It would be good to get some more readings close to the object, as the "
 "nebula may be causing issues for your sensors."
-msgstr ""
+msgstr "It seems like the artifact is stabilizing.\nIt would be good to get some more readings close to the object, as the nebula may be causing issues for your sensors."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:795
 msgctxt "JumpCarrier-incCall"
@@ -137,7 +137,7 @@ msgid ""
 "\n"
 "We are reading a huge gravity surge from your direction. Get the hell out of "
 "there."
-msgstr ""
+msgstr "Atlantis-1, what is happening?\n\nWe are reading a huge gravity surge from your direction. Get the hell out of there."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:853
 msgctxt "station-incCall"
@@ -148,7 +148,7 @@ msgid ""
 "defense line.\n"
 "\n"
 "Do NOT engage the Kraylor. I repeat, DO NOT ENGAGE."
-msgstr ""
+msgstr "Atlantis-1,\n\nCome in. Come in. We suddenly read that your position is behind the Kraylor defence line.\n\nDo NOT engage the Kraylor. I repeat, DO NOT ENGAGE."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:878
 #, lua-format
@@ -159,7 +159,7 @@ msgid ""
 "Finally! We thought we lost you. You are not out of the woods yet, though.\n"
 "\n"
 "Try to get to sector %s. We are sending JC88 to get you out of there."
-msgstr ""
+msgstr "Atlantis-1, come in.\n\nFinally! We thought we lost you. You are not out of the woods yet, though.\n\nTry to get to sector %s. We are sending JC88 to get you out of there."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:889
 #, lua-format
@@ -171,13 +171,13 @@ msgid ""
 "\n"
 "Search for a hole in the Kraylor defenses, then try to get to sector %s. We "
 "are sending JC88 to get you out of there."
-msgstr ""
+msgstr "Atlantis-1, come in.\n\nFinally! We thought we lost you. You are not out of the woods yet, though.\n\nSearch for a hole in the Kraylor defences, then try to get to sector %s. We are sending JC88 to get you out of there."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:912
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1050
 msgctxt "JumpCarrier-incCall"
 msgid "Hold on tight, heading for Shipyard-Gamma."
-msgstr ""
+msgstr "Hold on tight, heading for Shipyard-Gamma."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:921
 msgctxt "JumpCarrier-incCall"
@@ -186,7 +186,7 @@ msgid ""
 "\n"
 "Dock with Supply-6 to recharge and restock, then report to Shipyard-Gamma "
 "for your mission report."
-msgstr ""
+msgstr "Welcome home, Atlantis-1.\n\nDock with Supply-6 to recharge and restock, then report to Shipyard-Gamma for your mission report."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:942
 msgctxt "station-incCall"
@@ -211,12 +211,12 @@ msgid ""
 "\n"
 "However, do NOT engage any of the Kraylor bases directly. You are not "
 "equipped to handle a full-on assault."
-msgstr ""
+msgstr "Atlantis-1, we've worked through the data you collected on the anomaly that collapsed into the wormhole.\n\nThere are traces of both Kraylor and Arlenian technology in there, which does not make any sense. The Arlenians are a peaceful race, and the Kraylor are keen on trying to destroy them.\n\nWe can only assume that the Kraylor stole some kind of advanced technology from the Arlenians.\n\nWe've seen an increase in Kraylor transport activity near the Kraylor defence line. We believe these transports might carry more information regarding this technology.\n\nWe're tasking you to head back to the Kraylor defence line, destroy one of these transports, and recover any cargo that might remain. It could provide valuable intel.\n\nHowever, do NOT engage any of the Kraylor bases directly. You are not equipped to handle a full-on assault."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:985
 msgctxt "JumpCarrier-incCall"
 msgid "Hold on tight, heading for Kraylor defense line."
-msgstr ""
+msgstr "Hold on tight, heading for Kraylor defence line."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:994
 msgctxt "JumpCarrier-incCall"
@@ -225,14 +225,14 @@ msgid ""
 "cargo, and then dock with us.\n"
 "\n"
 "Expect heavy retaliation as soon as you attack the transport."
-msgstr ""
+msgstr "We have arrived. Find the right moment to take out that transport, grab the cargo, and then dock with us.\n\nExpect heavy retaliation as soon as you attack the transport."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1032
 msgctxt "JumpCarrier-incCall"
 msgid ""
 "Return to the carrier IMMEDIATELY. The entire Kraylor fleet is after you. "
 "Whatever you picked up must be valuable."
-msgstr ""
+msgstr "Return to the carrier IMMEDIATELY. The entire Kraylor fleet is after you. Whatever you picked up must be valuable."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1059
 msgctxt "station-incCall"
@@ -241,7 +241,7 @@ msgid ""
 "encrypted documents.\n"
 "\n"
 "Dock with us and we'll take a shot at cracking them."
-msgstr ""
+msgstr "Perfect recovery, Atlantis-1. Seems like the transport was moving highly encrypted documents.\n\nDock with us and we'll take a shot at cracking them."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1082
 msgctxt "station-incCall"
@@ -250,7 +250,7 @@ msgid ""
 "encryption, but this is pretty advanced by their standards.\n"
 "\n"
 "It will take some time to crack this, but we should be successful."
-msgstr ""
+msgstr "We are processing the recovered documents. The Kraylor do not excel at encryption, but this is pretty advanced by their standards.\n\nIt will take some time to crack this, but we should be successful."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1100
 msgctxt "station-incCall"
@@ -263,7 +263,7 @@ msgid ""
 "\n"
 "This seems to require particles with a negative mass. We're working on "
 "getting more information from these documents. They are a bit of a mess."
-msgstr ""
+msgstr "We've cracked the first part of the documents.\n\nIt looks like the Kraylor stole some advanced jump drive technology from the Arlenians, something called a Heisenberg-Einstein bridge, that folds the fabric of spacetime.\n\nThis seems to require particles with a negative mass. We're working on getting more information from these documents. They are a bit of a mess."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1121
 msgctxt "station-incCall"
@@ -280,7 +280,7 @@ msgid ""
 "tear.\n"
 "\n"
 "We'll keep you updated with more information."
-msgstr ""
+msgstr "More results from the decryption team.\n\nThe Arlenians managed to create negative-mass particles. However, the end result was extremely unstable and could collapse into a black hole at any second. Stabilizing the particles requires a huge amount of power with specially formed magnetic fields.\n\nIn the end, they managed to make long-distance travel possible by opening a rip in the fabric of spacetime and sending specialised ships through this tear.\n\nWe'll keep you updated with more information."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1145
 #, lua-format
@@ -296,7 +296,7 @@ msgid ""
 "the documents must have been scrambled here, because they go from mentioning "
 "distances of 2000U to talking about infeasibly large troop counts and "
 "missile storage."
-msgstr ""
+msgstr "It looks like the Kraylor were watching these experiments and waiting for their moment to steal the end result.\n\nAccording to these documents, the Kraylor continued the experiments at sector %s, explaining the phenomenon you experienced there.\n\nIt looks like they successfully created a working prototype jump drive, but the documents must have been scrambled here, because they go from mentioning distances of 2000U to talking about infeasibly large troop counts and missile storage."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1164
 msgctxt "station-incCall"
@@ -310,7 +310,7 @@ msgid ""
 "While the technology behind the wormhole jump drive isn't stable, the "
 "Kraylor are reckless enough to do this in order to gain a huge tactical "
 "advantage."
-msgstr ""
+msgstr "We cracked the final piece of the puzzle.\n\nIt seems that the Kraylor are constructing a long-range, moving battle station equipped with unprecedented firepower. The wormhole-powered jump drive is at the centre of this station.\n\nWhile the technology behind the wormhole jump drive isn't stable, the Kraylor are reckless enough to do this in order to gain a huge tactical advantage."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1182
 msgctxt "station-incCall"
@@ -321,22 +321,22 @@ msgid ""
 "\n"
 "All hands on deck! Man all combat stations and evacuate all non-essential "
 "personnel! Save what you can!"
-msgstr ""
+msgstr "We've just detected a power surge.\n\nIT'S THE BATTLE STATION!\n\nAll hands on deck! Man all combat stations and evacuate all non-essential personnel! Save what you can!"
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1205
 msgctxt "msgMainscreen"
 msgid "Bonus points for destroying the battlestation!"
-msgstr ""
+msgstr "Bonus points for destroying the battlestation!"
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1247
 msgctxt "station-comms"
 msgid "Atlantis-1, are you ready for your first mission?"
-msgstr ""
+msgstr "Atlantis-1, are you ready for your first mission?"
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1250
 msgctxt "station-comms"
 msgid "Yes."
-msgstr ""
+msgstr "Yes."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1255
 #, lua-format
@@ -349,17 +349,17 @@ msgid ""
 "tasked jump carrier JC-88 to take you there.\n"
 "\n"
 "Dock with JC-88 and it will handle the rest."
-msgstr ""
+msgstr "Good. Your first mission is to identify odd readings coming from the nebula cloud near sector %s.\n\nYour ship is not equipped to travel this distance by itself, so we have tasked jump carrier JC-88 to take you there.\n\nDock with JC-88 and it will handle the rest."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1262
 msgctxt "station-comms"
 msgid "No."
-msgstr ""
+msgstr "No."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1264
 msgctxt "station-comms"
 msgid "Then hail us again when you are ready."
-msgstr ""
+msgstr "Then hail us again when you are ready."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1280
 msgctxt "station-comms"
@@ -371,7 +371,7 @@ msgid ""
 "\n"
 "We're working through the data and will contact you when we have more "
 "details."
-msgstr ""
+msgstr "Atlantis-1,\n\nWe've downloaded all the data you collected thanks to the short-range quantum-entangled data communication radar.\n\nWe're working through the data and will contact you when we have more details."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1294
 msgctxt "station-comms"
@@ -379,22 +379,22 @@ msgid ""
 "Good day, Atlantis-1.\n"
 "\n"
 "Please continue with your current objective."
-msgstr ""
+msgstr "Good day, Atlantis-1.\n\nPlease continue with your current objective."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1315
 msgctxt "JumpCarrier-comms"
 msgid "Jump carrier JC-88 reporting. All system nominal."
-msgstr ""
+msgstr "Jump carrier JC-88 reporting. All system nominal."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1324
 msgctxt "artifact-comms"
 msgid "Atlantis-1, did you find the source of the odd sensor readings?"
-msgstr ""
+msgstr "Atlantis-1, did you find the source of the odd sensor readings?"
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1327
 msgctxt "artifact-comms"
 msgid "Yes."
-msgstr ""
+msgstr "Yes."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1331
 msgctxt "artifact-comms"
@@ -403,22 +403,22 @@ msgid ""
 "readings to us?\n"
 "\n"
 "First, what is the beta radiation reading?"
-msgstr ""
+msgstr "Great, because our sensor readings are inconclusive. Can you report your readings to us?\n\nFirst, what is the beta radiation reading?"
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1341
 msgctxt "artifact-comms"
 msgid "Next, what is the ionic phase shift reading?"
-msgstr ""
+msgstr "Next, what is the ionic phase shift reading?"
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1349
 msgctxt "artifact-comms"
 msgid "Next, what is the gravity disruption reading?"
-msgstr ""
+msgstr "Next, what is the gravity disruption reading?"
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1357
 msgctxt "artifact-comms"
 msgid "Finally, what is the doppler instability reading?"
-msgstr ""
+msgstr "Finally, what is the doppler instability reading?"
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1377
 msgctxt "artifact-comms"
@@ -426,7 +426,7 @@ msgid ""
 "Are you sure? Those readings are really off the normal scale.\n"
 "\n"
 "These readings indicate it is very unstable! Please move away from it."
-msgstr ""
+msgstr "Are you sure? Those readings are really off the normal scale.\n\nThese readings indicate it is very unstable! Please move away from it."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1388
 msgctxt "artifact-comms"
@@ -435,26 +435,26 @@ msgid ""
 "\n"
 "Can you move close to the object and get a second readings? The nebula might "
 "be interfering with your sensors."
-msgstr ""
+msgstr "Are you sure? Those readings are really off the normal scale.\n\nCan you move close to the object and get a second readings? The nebula might be interfering with your sensors."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1400
 msgctxt "artifact-comms"
 msgid ""
 "Can you confirm your readings and report back? These numbers do not match "
 "our readings at all."
-msgstr ""
+msgstr "Can you confirm your readings and report back? These numbers do not match our readings at all."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1413
 msgctxt "artifact-comms"
 msgid "No."
-msgstr ""
+msgstr "No."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1417
 msgctxt "artifact-comms"
 msgid ""
 "Then continue looking for it. Try launching some probes or asking the "
 "Science Officer if they notice any odd radar signatures."
-msgstr ""
+msgstr "Then continue looking for it. Try launching some probes or asking the Science Officer if they notice any odd radar signatures."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1443
 #, lua-format
@@ -463,7 +463,7 @@ msgid ""
 "(The transmission is loaded with static noise.)\n"
 "\n"
 "%s"
-msgstr ""
+msgstr "(The transmission is loaded with static noise.)\n\n%s"
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1486
 msgctxt "JumpCarrier-incCall"
@@ -471,9 +471,9 @@ msgid ""
 "Looks like the docking couplers detached prematurely.\n"
 "\n"
 "This happens sometimes. I am on my way so we can try again."
-msgstr ""
+msgstr "Looks like the docking couplers detached prematurely.\n\nThis happens sometimes. I am on my way so we can try again."
 
 #: scripts/scenario_13_birth_of_the_atlantis.lua:1506
 msgctxt "shipEnemy-incCall"
 msgid "Surrender yourself, human intruder."
-msgstr ""
+msgstr "Surrender yourself, human intruder."

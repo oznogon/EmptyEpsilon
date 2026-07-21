@@ -1,6 +1,6 @@
 # Scenario name
 msgid "The Omicron Plague"
-msgstr ""
+msgstr "The Omicron Plague"
 
 # Scenario description
 msgid ""
@@ -18,289 +18,289 @@ msgid ""
 "USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
 "There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience "
 "levels are welcome."
-msgstr ""
+msgstr "A routine patrol mission turns into a desperate attempt to save humanity from an Exuari biological weapon\n\nDesigned to run in a limited time with different terrain each time. Multiple player ships may join\n\nDuration: approximately 45 minutes depending on the configuration options chosen\n\nVersion 1\n\nUSN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience levels are welcome."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr ""
+msgstr "Enemies"
 
 msgctxt "setting"
 msgid "Configures strength and/or number of enemies in this scenario"
-msgstr ""
+msgstr "Configures strength and/or number of enemies in this scenario"
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Enemies"
 msgid "Fewer or weaker enemies"
-msgstr ""
+msgstr "Fewer or weaker enemies"
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Enemies"
 msgid "Normal number or strength of enemies"
-msgstr ""
+msgstr "Normal number or strength of enemies"
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Enemies"
 msgid "More or stronger enemies"
-msgstr ""
+msgstr "More or stronger enemies"
 
 msgctxt "Enemies"
 msgid "Extreme"
-msgstr ""
+msgstr "Extreme"
 
 msgctxt "Enemies"
 msgid "Much stronger, many more enemies"
-msgstr ""
+msgstr "Much stronger, many more enemies"
 
 msgctxt "Enemies"
 msgid "Quixotic"
-msgstr ""
+msgstr "Quixotic"
 
 msgctxt "Enemies"
 msgid "Insanely strong and/or inordinately large numbers of enemies"
-msgstr ""
+msgstr "Insanely strong and/or inordinately large numbers of enemies"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Murphy"
-msgstr ""
+msgstr "Murphy"
 
 msgctxt "setting"
 msgid "Configures the perversity of the universe according to Murphy's law"
-msgstr ""
+msgstr "Configures the perversity of the universe according to Murphy's law"
 
 msgctxt "Murphy"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 msgctxt "Murphy"
 msgid "Random factors are more in your favor"
-msgstr ""
+msgstr "Random factors are more in your favour"
 
 msgctxt "Murphy"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Murphy"
 msgid "Random factors are normal"
-msgstr ""
+msgstr "Random factors are normal"
 
 msgctxt "Murphy"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 msgctxt "Murphy"
 msgid "Random factors are more against you"
-msgstr ""
+msgstr "Random factors are more against you"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Rescue"
-msgstr ""
+msgstr "Rescue"
 
 msgctxt "setting"
 msgid ""
 "Number of minutes given to rescue an ailing ensign. Grant more time to make "
 "it easier, less time to make it harder."
-msgstr ""
+msgstr "Number of minutes given to rescue an ailing ensign. Grant more time to make it easier, less time to make it harder."
 
 msgctxt "Rescue"
 msgid "15"
-msgstr ""
+msgstr "15"
 
 msgctxt "Rescue"
 msgid "Fifteen minutes to help ensign"
-msgstr ""
+msgstr "Fifteen minutes to help ensign"
 
 msgctxt "Rescue"
 msgid "20"
-msgstr ""
+msgstr "20"
 
 msgctxt "Rescue"
 msgid "Twenty minutes to help ensign"
-msgstr ""
+msgstr "Twenty minutes to help ensign"
 
 msgctxt "Rescue"
 msgid "25"
-msgstr ""
+msgstr "25"
 
 msgctxt "Rescue"
 msgid "Twenty-five minutes to help ensign"
-msgstr ""
+msgstr "Twenty-five minutes to help ensign"
 
 msgctxt "Rescue"
 msgid "30"
-msgstr ""
+msgstr "30"
 
 msgctxt "Rescue"
 msgid "Thirty minutes to help ensign"
-msgstr ""
+msgstr "Thirty minutes to help ensign"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Destroy"
-msgstr ""
+msgstr "Destroy"
 
 msgctxt "setting"
 msgid ""
 "Number of minutes given to destroy designated enemy base. Grant more time to "
 "make it easier, less time to make it harder."
-msgstr ""
+msgstr "Number of minutes given to destroy designated enemy base. Grant more time to make it easier, less time to make it harder."
 
 msgctxt "Destroy"
 msgid "15"
-msgstr ""
+msgstr "15"
 
 msgctxt "Destroy"
 msgid "Fifteen minutes to destroy base"
-msgstr ""
+msgstr "Fifteen minutes to destroy base"
 
 msgctxt "Destroy"
 msgid "20"
-msgstr ""
+msgstr "20"
 
 msgctxt "Destroy"
 msgid "Twenty minutes to destroy base"
-msgstr ""
+msgstr "Twenty minutes to destroy base"
 
 msgctxt "Destroy"
 msgid "25"
-msgstr ""
+msgstr "25"
 
 msgctxt "Destroy"
 msgid "Twenty-five minutes to destroy base"
-msgstr ""
+msgstr "Twenty-five minutes to destroy base"
 
 msgctxt "Destroy"
 msgid "30"
-msgstr ""
+msgstr "30"
 
 msgctxt "Destroy"
 msgid "Thirty minutes to destroy base"
-msgstr ""
+msgstr "Thirty minutes to destroy base"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Reputation"
-msgstr ""
+msgstr "Reputation"
 
 msgctxt "setting"
 msgid "Amount of reputation to start with"
-msgstr ""
+msgstr "Amount of reputation to start with"
 
 msgctxt "Reputation"
 msgid "Unknown"
-msgstr ""
+msgstr "Unknown"
 
 msgctxt "Reputation"
 msgid "Zero reputation - nobody knows anything about you"
-msgstr ""
+msgstr "Zero reputation - nobody knows anything about you"
 
 msgctxt "Reputation"
 msgid "Nice"
-msgstr ""
+msgstr "Nice"
 
 msgctxt "Reputation"
 msgid ""
 "20 reputation - you've had a small positive influence on the local community"
-msgstr ""
+msgstr "20 reputation - you've had a small positive influence on the local community"
 
 msgctxt "Reputation"
 msgid "Hero"
-msgstr ""
+msgstr "Hero"
 
 msgctxt "Reputation"
 msgid "50 reputation - you helped important people or lots of people"
-msgstr ""
+msgstr "50 reputation - you helped important people or lots of people"
 
 msgctxt "Reputation"
 msgid "Major Hero"
-msgstr ""
+msgstr "Major Hero"
 
 msgctxt "Reputation"
 msgid ""
 "100 reputation - you're well known by nearly everyone as a force for good"
-msgstr ""
+msgstr "100 reputation - you're well known by nearly everyone as a force for good"
 
 msgctxt "Reputation"
 msgid "Super Hero"
-msgstr ""
+msgstr "Super Hero"
 
 msgctxt "Reputation"
 msgid "200 reputation - everyone knows you and relies on you for help"
-msgstr ""
+msgstr "200 reputation - everyone knows you and relies on you for help"
 
 # Scenario setting
 msgctxt "setting"
 msgid "Unique Ship"
-msgstr ""
+msgstr "Unique Ship"
 
 msgctxt "setting"
 msgid "Choose player ship outside of standard player ship list"
-msgstr ""
+msgstr "Choose player ship outside of standard player ship list"
 
 msgctxt "Unique Ship"
 msgid "None"
-msgstr ""
+msgstr "None"
 
 msgctxt "Unique Ship"
 msgid "None: just use standard player ship list on spawn screen"
-msgstr ""
+msgstr "None: just use standard player ship list on spawn screen"
 
 msgctxt "Unique Ship"
 msgid "Amalgam"
-msgstr ""
+msgstr "Amalgam"
 
 msgctxt "Unique Ship"
 msgid ""
 "Based on Atlantis, 4 beams (vs 2), single broadside tube on each side for "
 "large homing missiles only, 2 mining tubes, weaker defenses and engines"
-msgstr ""
+msgstr "Based on Atlantis, 4 beams (vs 2), single broadside tube on each side for large homing missiles only, 2 mining tubes, weaker defences and engines"
 
 msgctxt "Unique Ship"
 msgid "Midian"
-msgstr ""
+msgstr "Midian"
 
 msgctxt "Unique Ship"
 msgid ""
 "Based on missile cruiser, reduced tubes, missiles and base warp speed to get "
 "beam weapons and HVLI"
-msgstr ""
+msgstr "Based on missile cruiser, reduced tubes, missiles and base warp speed to get beam weapons and HVLI"
 
 msgctxt "Unique Ship"
 msgid "Raven"
-msgstr ""
+msgstr "Raven"
 
 msgctxt "Unique Ship"
 msgid ""
 "Based on Cruiser, stronger shields, weaker hull, broadside beams, tweaked "
 "tubes and missiles, low powered warp drive, tweaked sensor ranges"
-msgstr ""
+msgstr "Based on Cruiser, stronger shields, weaker hull, broadside beams, tweaked tubes and missiles, low powered warp drive, tweaked sensor ranges"
 
 msgctxt "Unique Ship"
 msgid "Squid"
-msgstr ""
+msgstr "Squid"
 
 msgctxt "Unique Ship"
 msgid ""
 "Based on Piranha, stronger defenses, added a beam weapon, reduced missile "
 "load, large homing missiles, reconfigured tubes, shorter jump and sensor "
 "ranges"
-msgstr ""
+msgstr "Based on Piranha, stronger defences, added a beam weapon, reduced missile load, large homing missiles, reconfigured tubes, shorter jump and sensor ranges"
 
 #: scripts/scenario_43_the_omicron_plague.lua:177
 msgctxt "orders-comms"
 msgid "Contact regional headquarters"
-msgstr ""
+msgstr "Contact regional headquarters"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2748
 #: scripts/scenario_43_the_omicron_plague.lua:2764
@@ -308,7 +308,7 @@ msgstr ""
 #, lua-format
 msgctxt "buttonGM"
 msgid "Version %s"
-msgstr ""
+msgstr "Version %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2751
 #: scripts/scenario_43_the_omicron_plague.lua:2767
@@ -318,44 +318,44 @@ msgctxt "msgGM"
 msgid ""
 "Scenario version %s\n"
 " LUA version %s"
-msgstr ""
+msgstr "Scenario version %s\n LUA version %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2759
 #: scripts/scenario_43_the_omicron_plague.lua:2775
 #: scripts/scenario_43_the_omicron_plague.lua:2796
 msgctxt "buttonGM"
 msgid "+Station Reports"
-msgstr ""
+msgstr "+Station Reports"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2776
 msgctxt "buttonGM"
 msgid "+Rescue Time"
-msgstr ""
+msgstr "+Rescue Time"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2777
 msgctxt "buttonGM"
 msgid "+Destroy Time"
-msgstr ""
+msgstr "+Destroy Time"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2778
 msgctxt "buttonGM"
 msgid "+Difficulty"
-msgstr ""
+msgstr "+Difficulty"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2779
 msgctxt "buttonGM"
 msgid "+Enemy Power"
-msgstr ""
+msgstr "+Enemy Power"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2780
 msgctxt "buttonGM"
 msgid "+Reputation"
-msgstr ""
+msgstr "+Reputation"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2797
 msgctxt "buttonGM"
 msgid "Mission Stations"
-msgstr ""
+msgstr "Mission Stations"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2802
 #, lua-format
@@ -371,128 +371,128 @@ msgid ""
 "\n"
 "Medical research station: %s in sector %s\n"
 "Plague station %s in %s"
-msgstr ""
+msgstr "This is spoiler information. Consider carefully before you reveal this to the rest of the players. If you feel you have to reveal this information, I suggest you select the player ship using the widget to the right of the 'Global message' button, then click the 'Hail ship' button, identify yourself as a character in game like the regional headquarters stellar cartography technician, then type the information as if you were that character helping them out on their mission.\n\nMedical research station: %s in sector %s\nPlague station %s in %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2811
 msgctxt "buttonGM"
 msgid "+Test Non-DB Ships"
-msgstr ""
+msgstr "+Test Non-DB Ships"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2815
 msgctxt "buttonGM"
 msgid "-From Enemy Power"
-msgstr ""
+msgstr "-From Enemy Power"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2817
 #: scripts/scenario_43_the_omicron_plague.lua:2839
 msgctxt "buttonGM"
 msgid "Easy"
-msgstr ""
+msgstr "Easy"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2818
 #: scripts/scenario_43_the_omicron_plague.lua:2840
 msgctxt "buttonGM"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2819
 #: scripts/scenario_43_the_omicron_plague.lua:2841
 msgctxt "buttonGM"
 msgid "Hard"
-msgstr ""
+msgstr "Hard"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2820
 msgctxt "buttonGM"
 msgid "Extreme"
-msgstr ""
+msgstr "Extreme"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2821
 msgctxt "buttonGM"
 msgid "Quixotic"
-msgstr ""
+msgstr "Quixotic"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2825
 #: scripts/scenario_43_the_omicron_plague.lua:2845
 #, lua-format
 msgctxt "buttonGM"
 msgid "%s %.1f"
-msgstr ""
+msgstr "%s %.1f"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2837
 msgctxt "buttonGM"
 msgid "-From Difficulty"
-msgstr ""
+msgstr "-From Difficulty"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2857
 msgctxt "buttonGM"
 msgid "-From Destroy Time"
-msgstr ""
+msgstr "-From Destroy Time"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2860
 #: scripts/scenario_43_the_omicron_plague.lua:2875
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i minutes"
-msgstr ""
+msgstr "%i minutes"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2872
 msgctxt "buttonGM"
 msgid "-From Rescue Time"
-msgstr ""
+msgstr "-From Rescue Time"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2887
 msgctxt "buttonGM"
 msgid "-From Reputation"
-msgstr ""
+msgstr "-From Reputation"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2889
 msgctxt "buttonGM"
 msgid "Unknown"
-msgstr ""
+msgstr "Unknown"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2890
 msgctxt "buttonGM"
 msgid "Nice"
-msgstr ""
+msgstr "Nice"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2891
 msgctxt "buttonGM"
 msgid "Hero"
-msgstr ""
+msgstr "Hero"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2892
 msgctxt "buttonGM"
 msgid "Major Hero"
-msgstr ""
+msgstr "Major Hero"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2893
 msgctxt "buttonGM"
 msgid "Super Hero"
-msgstr ""
+msgstr "Super Hero"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2897
 #, lua-format
 msgctxt "buttonGM"
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2909
 #: scripts/scenario_43_the_omicron_plague.lua:3150
 msgctxt "buttonGM"
 msgid "-Main"
-msgstr ""
+msgstr "-Main"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2923
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2931
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid "%s %s  %s  %s  Friendliness:%s"
-msgstr ""
+msgstr "%s %s  %s  %s  Friendliness:%s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2942
 #, lua-format
@@ -500,7 +500,7 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "Shares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"
-msgstr ""
+msgstr "%s\nShares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:2952
 #, lua-format
@@ -509,7 +509,7 @@ msgid ""
 "%s\n"
 "Fix Probes: %s,  Fix Hack: %s,  Fix Scan: %s,  Fix Combat Maneuver: %s,  Fix "
 "Destruct: %s, Fix Slow Tube: %s"
-msgstr ""
+msgstr "%s\nFix Probes: %s,  Fix Hack: %s,  Fix Scan: %s,  Fix Combat Manoeuvre: %s,  Fix Destruct: %s, Fix Slow Tube: %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3006
 #, lua-format
@@ -517,7 +517,7 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "Homing: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"
-msgstr ""
+msgstr "%s\nHoming: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3024
 #, lua-format
@@ -525,7 +525,7 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "Services and their costs:"
-msgstr ""
+msgstr "%s\nServices and their costs:"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3032
 #, lua-format
@@ -533,7 +533,7 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "      %s: %s"
-msgstr ""
+msgstr "%s\n      %s: %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3042
 #, lua-format
@@ -541,7 +541,7 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "      jump overcharge: 10"
-msgstr ""
+msgstr "%s\n      jump overcharge: 10"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3053
 #, lua-format
@@ -549,7 +549,7 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "Goods:"
-msgstr ""
+msgstr "%s\nGoods:"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3060
 #, lua-format
@@ -557,7 +557,7 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "    Sell:"
-msgstr ""
+msgstr "%s\n    Sell:"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3070
 #, lua-format
@@ -565,7 +565,7 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "        %s: Cost:%s   Quantity:%s"
-msgstr ""
+msgstr "%s\n        %s: Cost:%s   Quantity:%s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3083
 #, lua-format
@@ -573,7 +573,7 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "    Trade:"
-msgstr ""
+msgstr "%s\n    Trade:"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3093
 #: scripts/scenario_43_the_omicron_plague.lua:3112
@@ -582,7 +582,7 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "        %s: %s"
-msgstr ""
+msgstr "%s\n        %s: %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3103
 #, lua-format
@@ -590,13 +590,13 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "    Buy:"
-msgstr ""
+msgstr "%s\n    Buy:"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3133
 #: scripts/scenario_43_the_omicron_plague.lua:3142
 msgctxt "stationReport-msgGM"
 msgid "No applicable stations. Reports useless. No action taken"
-msgstr ""
+msgstr "No applicable stations. Reports useless. No action taken"
 
 #: scripts/scenario_43_the_omicron_plague.lua:3228
 #, lua-format
@@ -604,123 +604,123 @@ msgctxt "stationReport-msgGM"
 msgid ""
 "Player ship %s's template type (%s) could not be found in table "
 "PlayerShipStats"
-msgstr ""
+msgstr "Player ship %s's template type (%s) could not be found in table PlayerShipStats"
 
 #: scripts/scenario_43_the_omicron_plague.lua:4164
 #, lua-format
 msgctxt "orders-comms"
 msgid "Protect freighter %s until they dock at %s"
-msgstr ""
+msgstr "Protect freighter %s until they dock at %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:4886
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s station %s in %s"
-msgstr ""
+msgstr "Sensor Record: %s station %s in %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:4896
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
-msgstr ""
+msgstr "%s, %s station %s in %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:4940
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s %s %s in %s carrying %s"
-msgstr ""
+msgstr "Sensor Record: %s %s %s in %s carrying %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:4952
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s; %s %s %s in %s carrying %s"
-msgstr ""
+msgstr "%s; %s %s %s in %s carrying %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:4968
 msgctxt "scienceDescription-buoy"
 msgid "No data recorded"
-msgstr ""
+msgstr "No data recorded"
 
 #: scripts/scenario_43_the_omicron_plague.lua:4971
 #: scripts/scenario_43_the_omicron_plague.lua:5031
 msgctxt "scienceDescription-buoy"
 msgid "Automated data gathering device"
-msgstr ""
+msgstr "Automated data gathering device"
 
 #: scripts/scenario_43_the_omicron_plague.lua:4988
 msgctxt "scienceDescription-buoy"
 msgid "Come to Billy Bob's for the best food in the sector"
-msgstr ""
+msgstr "Come to Billy Bob's for the best food in the sector"
 
 #: scripts/scenario_43_the_omicron_plague.lua:4992
 msgctxt "scienceDescription-buoy"
 msgid "It's never too late to buy life insurance"
-msgstr ""
+msgstr "It's never too late to buy life insurance"
 
 #: scripts/scenario_43_the_omicron_plague.lua:4996
 msgctxt "scienceDescription-buoy"
 msgid "You'll feel better in an Adder Mark 9"
-msgstr ""
+msgstr "You'll feel better in an Adder Mark 9"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5000
 msgctxt "scienceDescription-buoy"
 msgid "Visit Repulse shipyards for the best deals"
-msgstr ""
+msgstr "Visit Repulse shipyards for the best deals"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5002
 msgctxt "scienceDescription-buoy"
 msgid "Fresh fish! We catch, you buy!"
-msgstr ""
+msgstr "Fresh fish! We catch, you buy!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5005
 msgctxt "scienceDescription-buoy"
 msgid "Get your fuel cells at Melinda's Market"
-msgstr ""
+msgstr "Get your fuel cells at Melinda's Market"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5009
 msgctxt "scienceDescription-buoy"
 msgid "Find a companion. All species available"
-msgstr ""
+msgstr "Find a companion. All species available"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5013
 msgctxt "scienceDescription-buoy"
 msgid "Feeling down? Robotherapist is there for you"
-msgstr ""
+msgstr "Feeling down? Robotherapist is there for you"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5015
 msgctxt "scienceDescription-buoy"
 msgid "30 days, 30 kilograms, guaranteed"
-msgstr ""
+msgstr "30 days, 30 kilograms, guaranteed"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5018
 msgctxt "scienceDescription-buoy"
 msgid "Try our asteroid dust diet weight loss program"
-msgstr ""
+msgstr "Try our asteroid dust diet weight loss program"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5020
 msgctxt "scienceDescription-buoy"
 msgid "Best tasting water in the quadrant"
-msgstr ""
+msgstr "Best tasting water in the quadrant"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5023
 msgctxt "scienceDescription-buoy"
 msgid "Amazing shows every night at Lenny's Lounge"
-msgstr ""
+msgstr "Amazing shows every night at Lenny's Lounge"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5027
 msgctxt "scienceDescription-buoy"
 msgid "Tip: make lemons an integral part of your diet"
-msgstr ""
+msgstr "Tip: make lemons an integral part of your diet"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5849
 msgctxt "damage-msgScience"
 msgid "The unscanned artifact we just picked up has fried our scanners"
-msgstr ""
+msgstr "The unscanned artifact we just picked up has fried our scanners"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5858
 msgctxt "damage-msgOperations"
 msgid "The unscanned artifact we just picked up has fried our scanners"
-msgstr ""
+msgstr "The unscanned artifact we just picked up has fried our scanners"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5872
 #, lua-format
@@ -728,19 +728,19 @@ msgctxt "scienceDescription-artifact"
 msgid ""
 "Source of emanations interfering with long range sensors. Range:%.1fu Impact:"
 "%.1fu"
-msgstr ""
+msgstr "Source of emanations interfering with long range sensors. Range:%.1fu Impact:%.1fu"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5886
 msgctxt "scienceDescription-artifact"
 msgid "Source of unusual emanations"
-msgstr ""
+msgstr "Source of unusual emanations"
 
 #: scripts/scenario_43_the_omicron_plague.lua:5994
 #, lua-format
 msgctxt "upgrade-msgEngineer"
 msgid ""
 "With the %s just acquired, you improve your impulse engine top speed by 13%%"
-msgstr ""
+msgstr "With the %s just acquired, you improve your impulse engine top speed by 13%%"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6026
 #, lua-format
@@ -748,34 +748,34 @@ msgctxt "upgrade-msgEngineer"
 msgid ""
 "With the %s just acquired, you improve your shield charge capacity top speed "
 "by 11%%"
-msgstr ""
+msgstr "With the %s just acquired, you improve your shield charge capacity top speed by 11%%"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6059
 #, lua-format
 msgctxt "upgrade-msgEngineer"
 msgid ""
 "With the %s just acquired, you improve your weapon tube load time by 33%%"
-msgstr ""
+msgstr "With the %s just acquired, you improve your weapon tube load time by 33%%"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6113
 msgctxt "msgScience"
 msgid "beam weapons"
-msgstr ""
+msgstr "beam weapons"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6116
 msgctxt "msgScience"
 msgid "missile weapons system"
-msgstr ""
+msgstr "missile weapons system"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6118
 msgctxt "msgScience"
 msgid "front shield"
-msgstr ""
+msgstr "front shield"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6119
 msgctxt "msgScience"
 msgid "rear shield"
-msgstr ""
+msgstr "rear shield"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6125
 #, lua-format
@@ -784,24 +784,24 @@ msgid ""
 "Sensors just picked up an energy field. The ship must have triggered it. It "
 "seems to impact our %s and possibly other ship systems. The ship computers "
 "have plotted it on Science and Relay."
-msgstr ""
+msgstr "Sensors just picked up an energy field. The ship must have triggered it. It seems to impact our %s and possibly other ship systems. The ship computers have plotted it on Science and Relay."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6210
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tubes: %s"
-msgstr ""
+msgstr "%s tubes: %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6216
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tube: %s"
-msgstr ""
+msgstr "%s tube: %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6398
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
-msgstr ""
+msgstr "We are under attack! No time for chatting!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6413
 #, lua-format
@@ -809,24 +809,24 @@ msgctxt "station-comms"
 msgid ""
 "Greetings %s!\n"
 "How may we help you today?"
-msgstr ""
+msgstr "Greetings %s!\nHow may we help you today?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6419
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?"
-msgstr ""
+msgstr "Good day, officer!\nWhat can we do for you today?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6422
 msgctxt "station-comms"
 msgid "Hello, may I help you?"
-msgstr ""
+msgstr "Hello, may I help you?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6425
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
-msgstr ""
+msgstr "Welcome to our lovely station."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6431
 msgctxt "station-comms"
@@ -834,7 +834,7 @@ msgid ""
 "\n"
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
-msgstr ""
+msgstr "\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6435
 #, lua-format
@@ -843,53 +843,53 @@ msgid ""
 "%s\n"
 "\n"
 "Reputation: %i"
-msgstr ""
+msgstr "%s\n\nReputation: %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6445
 msgctxt "mission2ndBis-comms"
 msgid "Request medical research for Fargalli"
-msgstr ""
+msgstr "Request medical research for Fargalli"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6474
 msgctxt "mission3th-comms"
 msgid "We also upgraded your impulse engines."
-msgstr ""
+msgstr "We also upgraded your impulse engines."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6492
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "The technicians are standing by to transport you back to %s."
-msgstr ""
+msgstr "The technicians are standing by to transport you back to %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6531
 msgctxt "mission3th-comms"
 msgid "We also upgrded the damage your beams inflict."
-msgstr ""
+msgstr "We also upgrded the damage your beams inflict."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6564
 msgctxt "mission3th-comms"
 msgid "We also replenished your ordnance."
-msgstr ""
+msgstr "We also replenished your ordnance."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6593
 msgctxt "mission3th-comms"
 msgid "We also increased your shield charge capacity."
-msgstr ""
+msgstr "We also increased your shield charge capacity."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6616
 msgctxt "mission3th-comms"
 msgid "We also upgraded your maneuvering system."
-msgstr ""
+msgstr "We also upgraded your manoeuvring system."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6634
 msgctxt "mission3th-comms"
 msgid "We also upgraded your base warp speed."
-msgstr ""
+msgstr "We also upgraded your base warp speed."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6653
 msgctxt "mission3th-comms"
 msgid "We also overcharged your jump drive to three times your maximum range."
-msgstr ""
+msgstr "We also overcharged your jump drive to three times your maximum range."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6697
 #, lua-format
@@ -900,18 +900,18 @@ msgid ""
 "we believe will cure any victims of the plague along with unique raw "
 "materials required to manufacture more of the treatment. I hope you are able "
 "get this to Ensign Fargalli in time. %s"
-msgstr ""
+msgstr "We have transmitted all of our current research on the Omicron plague including treatment fabrication instructions. We have also transported what we believe will cure any victims of the plague along with unique raw materials required to manufacture more of the treatment. I hope you are able get this to Ensign Fargalli in time. %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6707
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "Take return transit from %s to %s"
-msgstr ""
+msgstr "Take return transit from %s to %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6717
 msgctxt "mission3th-comms"
 msgid "Thanks for your help"
-msgstr ""
+msgstr "Thanks for your help"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6722
 #: scripts/scenario_43_the_omicron_plague.lua:6753
@@ -1012,12 +1012,12 @@ msgstr ""
 #: scripts/scenario_43_the_omicron_plague.lua:13178
 #: scripts/scenario_43_the_omicron_plague.lua:13235
 msgid "Back"
-msgstr ""
+msgstr "Back"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6734
 msgctxt "mission2ndBis-comms"
 msgid "Give medical treatment and research to sickbay"
-msgstr ""
+msgstr "Give medical treatment and research to sickbay"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6741
 msgctxt "mission2ndBis-comms"
@@ -1025,17 +1025,17 @@ msgid ""
 "Treatment received. Fargalli is expected to live. We are beginning to "
 "conduct in depth analysis of the research material with an eye to prevention "
 "of future infection."
-msgstr ""
+msgstr "Treatment received. Fargalli is expected to live. We are beginning to conduct in depth analysis of the research material with an eye to prevention of future infection."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6749
 msgctxt "mission2ndBis-comms"
 msgid "The medical research and treatment is not aboard your ship"
-msgstr ""
+msgstr "The medical research and treatment is not aboard your ship"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6784
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr ""
+msgstr "I need ordnance restocked"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6793
 #, lua-format
@@ -1044,17 +1044,17 @@ msgid ""
 "What type of ordnance?\n"
 "\n"
 "Reputation: %i"
-msgstr ""
+msgstr "What type of ordnance?\n\nReputation: %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6817
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
-msgstr ""
+msgstr "Can you supply us with some nukes? ("
 
 #: scripts/scenario_43_the_omicron_plague.lua:6822
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr ""
+msgstr "We really need some nukes ("
 
 #: scripts/scenario_43_the_omicron_plague.lua:6830
 #: scripts/scenario_43_the_omicron_plague.lua:6857
@@ -1064,60 +1064,60 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr ""
+msgstr "%s%d rep each)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6850
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr ""
+msgstr "Please re-stock our EMP missiles. ("
 
 #: scripts/scenario_43_the_omicron_plague.lua:6853
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
-msgstr ""
+msgstr "Got any EMPs? ("
 
 #: scripts/scenario_43_the_omicron_plague.lua:6872
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr ""
+msgstr "Do you have spare homing missiles for us? ("
 
 #: scripts/scenario_43_the_omicron_plague.lua:6877
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr ""
+msgstr "Do you have extra homing missiles? ("
 
 #: scripts/scenario_43_the_omicron_plague.lua:6897
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr ""
+msgstr "We could use some mines. ("
 
 #: scripts/scenario_43_the_omicron_plague.lua:6901
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr ""
+msgstr "How about mines? ("
 
 #: scripts/scenario_43_the_omicron_plague.lua:6919
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
-msgstr ""
+msgstr "What about HVLI? ("
 
 #: scripts/scenario_43_the_omicron_plague.lua:6922
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
-msgstr ""
+msgstr "Could you provide HVLI? ("
 
 #: scripts/scenario_43_the_omicron_plague.lua:6941
 #: scripts/scenario_43_the_omicron_plague.lua:8809
 msgctxt "stationServices-comms"
 msgid "Docking services status"
-msgstr ""
+msgstr "Docking services status"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6946
 #: scripts/scenario_43_the_omicron_plague.lua:8814
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
-msgstr ""
+msgstr "Station %s docking services status:"
 
 #: scripts/scenario_43_the_omicron_plague.lua:6952
 #: scripts/scenario_43_the_omicron_plague.lua:8820
@@ -1126,19 +1126,19 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "Replenish scan probes."
-msgstr ""
+msgstr "%s\nReplenish scan probes."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6960
 #: scripts/scenario_43_the_omicron_plague.lua:8828
 msgctxt "stationServices-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
-msgstr ""
+msgstr "Cannot replenish scan probes due to fabrication unit failure."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6964
 #: scripts/scenario_43_the_omicron_plague.lua:8832
 msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
-msgstr ""
+msgstr "Parts shortage prevents scan probe replenishment."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6968
 #: scripts/scenario_43_the_omicron_plague.lua:8836
@@ -1146,7 +1146,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
-msgstr ""
+msgstr "Station management has curtailed scan probe replenishment for cost cutting reasons."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6982
 #: scripts/scenario_43_the_omicron_plague.lua:8850
@@ -1155,24 +1155,24 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "Ship hull repair."
-msgstr ""
+msgstr "%s\nShip hull repair."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6990
 #: scripts/scenario_43_the_omicron_plague.lua:8858
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
-msgstr ""
+msgstr "We're out of the necessary materials and supplies for hull repair."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6994
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
-msgstr ""
+msgstr "Hull repair automation unavailable while it is undergoing maintenance."
 
 #: scripts/scenario_43_the_omicron_plague.lua:6998
 #: scripts/scenario_43_the_omicron_plague.lua:8866
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
-msgstr ""
+msgstr "All hull repair technicians quarantined to quarters due to illness."
 
 #: scripts/scenario_43_the_omicron_plague.lua:7014
 #: scripts/scenario_43_the_omicron_plague.lua:8882
@@ -1181,7 +1181,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "Recharge ship energy stores."
-msgstr ""
+msgstr "%s\nRecharge ship energy stores."
 
 #: scripts/scenario_43_the_omicron_plague.lua:7023
 #: scripts/scenario_43_the_omicron_plague.lua:8891
@@ -1189,13 +1189,13 @@ msgctxt "stationServices-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
-msgstr ""
+msgstr "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships."
 
 #: scripts/scenario_43_the_omicron_plague.lua:7027
 #: scripts/scenario_43_the_omicron_plague.lua:8895
 msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
-msgstr ""
+msgstr "A damaged power coupling makes it too dangerous to recharge ships."
 
 #: scripts/scenario_43_the_omicron_plague.lua:7031
 #: scripts/scenario_43_the_omicron_plague.lua:8899
@@ -1203,7 +1203,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
-msgstr ""
+msgstr "An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now."
 
 #: scripts/scenario_43_the_omicron_plague.lua:7038
 #, lua-format
@@ -1211,7 +1211,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "%s"
-msgstr ""
+msgstr "%s\n%s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7045
 #: scripts/scenario_43_the_omicron_plague.lua:8915
@@ -1220,7 +1220,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May overcharge jump drive"
-msgstr ""
+msgstr "%s\nMay overcharge jump drive"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7053
 #: scripts/scenario_43_the_omicron_plague.lua:8924
@@ -1229,7 +1229,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair probe launch system"
-msgstr ""
+msgstr "%s\nMay repair probe launch system"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7060
 #: scripts/scenario_43_the_omicron_plague.lua:8933
@@ -1238,7 +1238,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair hacking system"
-msgstr ""
+msgstr "%s\nMay repair hacking system"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7066
 #: scripts/scenario_43_the_omicron_plague.lua:8940
@@ -1247,7 +1247,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair scanners"
-msgstr ""
+msgstr "%s\nMay repair scanners"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7072
 #: scripts/scenario_43_the_omicron_plague.lua:8948
@@ -1256,7 +1256,7 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair combat maneuver"
-msgstr ""
+msgstr "%s\nMay repair combat manoeuvre"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7080
 #: scripts/scenario_43_the_omicron_plague.lua:8957
@@ -1265,18 +1265,18 @@ msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair self destruct system"
-msgstr ""
+msgstr "%s\nMay repair self destruct system"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7097
 msgctxt "stationServices-comms"
 msgid "Overcharge Jump Drive (10 Rep)"
-msgstr ""
+msgstr "Overcharge Jump Drive (10 Rep)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7107
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
-msgstr ""
+msgstr "Your jump drive has been overcharged to %ik"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7116
 #: scripts/scenario_43_the_omicron_plague.lua:7200
@@ -1300,12 +1300,12 @@ msgstr ""
 #: scripts/scenario_43_the_omicron_plague.lua:13224
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr ""
+msgstr "Insufficient reputation"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7162
 msgctxt "stationServices-comms"
 msgid "Repair ship system"
-msgstr ""
+msgstr "Repair ship system"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7168
 #, lua-format
@@ -1314,98 +1314,98 @@ msgid ""
 "What system would you like repaired?\n"
 "\n"
 "Reputation: %i"
-msgstr ""
+msgstr "What system would you like repaired?\n\nReputation: %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7179
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair probe launch system (%s Rep)"
-msgstr ""
+msgstr "Repair probe launch system (%s Rep)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7193
 msgctxt "stationServices-comms"
 msgid "Your probe launch system has been repaired"
-msgstr ""
+msgstr "Your probe launch system has been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7215
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair hacking system (%s Rep)"
-msgstr ""
+msgstr "Repair hacking system (%s Rep)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7229
 msgctxt "stationServices-comms"
 msgid "Your hack system has been repaired"
-msgstr ""
+msgstr "Your hack system has been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7251
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair scanning system (%s Rep)"
-msgstr ""
+msgstr "Repair scanning system (%s Rep)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7265
 msgctxt "stationServices-comms"
 msgid "Your scanners have been repaired"
-msgstr ""
+msgstr "Your scanners have been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7287
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair combat maneuver (%s Rep)"
-msgstr ""
+msgstr "Repair combat manoeuvre (%s Rep)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7301
 msgctxt "stationServices-comms"
 msgid "Your combat maneuver has been repaired"
-msgstr ""
+msgstr "Your combat manoeuvre has been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7323
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair self destruct system (%s Rep)"
-msgstr ""
+msgstr "Repair self destruct system (%s Rep)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7337
 msgctxt "stationServices-comms"
 msgid "Your self destruct system has been repaired"
-msgstr ""
+msgstr "Your self destruct system has been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7372
 #: scripts/scenario_43_the_omicron_plague.lua:9115
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr ""
+msgstr "Tell me more about your station"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7375
 #: scripts/scenario_43_the_omicron_plague.lua:9118
 msgctxt "station-comms"
 msgid "What would you like to know?"
-msgstr ""
+msgstr "What would you like to know?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7382
 #: scripts/scenario_43_the_omicron_plague.lua:9125
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
-msgstr ""
+msgstr "General information"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7394
 #: scripts/scenario_43_the_omicron_plague.lua:9137
 msgctxt "stationStory-comms"
 msgid "Station history"
-msgstr ""
+msgstr "Station history"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7410
 #: scripts/scenario_43_the_omicron_plague.lua:9151
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr ""
+msgstr "Gossip"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7427
 #: scripts/scenario_43_the_omicron_plague.lua:8714
 msgctxt "orders-comms"
 msgid "What are my current orders?"
-msgstr ""
+msgstr "What are my current orders?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7438
 #: scripts/scenario_43_the_omicron_plague.lua:8725
@@ -1414,12 +1414,12 @@ msgctxt "orders-comms"
 msgid ""
 "\n"
 "   %i Minutes remain in game"
-msgstr ""
+msgstr "\n   %i Minutes remain in game"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7457
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
-msgstr ""
+msgstr "Buy, sell, trade"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7461
 #, lua-format
@@ -1427,42 +1427,42 @@ msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available for sale: quantity, cost in reputation\n"
-msgstr ""
+msgstr "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7468
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr ""
+msgstr "     %s: %i, %i\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7478
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
-msgstr ""
+msgstr "Goods or components station will buy: price in reputation\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7483
 #: scripts/scenario_43_the_omicron_plague.lua:7501
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr ""
+msgstr "     %s: %i\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7491
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
-msgstr ""
+msgstr "Current cargo aboard %s:\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7508
 msgctxt "trade-comms"
 msgid "     Empty\n"
-msgstr ""
+msgstr "     Empty\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7514
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr ""
+msgstr "Available Space: %i, Available Reputation: %i\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7523
 #: scripts/scenario_43_the_omicron_plague.lua:10743
@@ -1477,20 +1477,20 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr ""
+msgstr "Buy one %s for %i reputation"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7529
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr ""
+msgstr "Type: %s, Quantity: %i, Rep: %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7538
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient cargo space for purchase"
-msgstr ""
+msgstr "\nInsufficient cargo space for purchase"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7547
 #: scripts/scenario_43_the_omicron_plague.lua:7577
@@ -1498,7 +1498,7 @@ msgctxt "needRep-comms"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
-msgstr ""
+msgstr "\nInsufficient reputation for purchase"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7553
 #: scripts/scenario_43_the_omicron_plague.lua:7649
@@ -1508,39 +1508,39 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient station inventory"
-msgstr ""
+msgstr "\nInsufficient station inventory"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7572
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "purchased"
-msgstr ""
+msgstr "\npurchased"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7596
 #, lua-format
 msgctxt "trade-comms"
 msgid "Sell one %s for %i reputation"
-msgstr ""
+msgstr "Sell one %s for %i reputation"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7605
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
-msgstr ""
+msgstr "Type: %s,  Reputation price: %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7614
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "One sold"
-msgstr ""
+msgstr "\nOne sold"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7632
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr ""
+msgstr "Trade food for %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7640
 #: scripts/scenario_43_the_omicron_plague.lua:7698
@@ -1548,7 +1548,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr ""
+msgstr "Type: %s,  Quantity: %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7667
 #: scripts/scenario_43_the_omicron_plague.lua:7725
@@ -1557,27 +1557,27 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "Traded"
-msgstr ""
+msgstr "\nTraded"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7689
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr ""
+msgstr "Trade medicine for %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7745
 #: scripts/scenario_43_the_omicron_plague.lua:10704
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
-msgstr ""
+msgstr "Trade luxury for %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7800
 #: scripts/scenario_43_the_omicron_plague.lua:10661
 #: scripts/scenario_43_the_omicron_plague.lua:11727
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr ""
+msgstr "Jettison cargo"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7805
 #: scripts/scenario_43_the_omicron_plague.lua:10666
@@ -1587,7 +1587,7 @@ msgctxt "trade-comms"
 msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
-msgstr ""
+msgstr "Available space: %i\nWhat would you like to jettison?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7818
 #: scripts/scenario_43_the_omicron_plague.lua:10679
@@ -1595,12 +1595,12 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr ""
+msgstr "One %s jettisoned"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7832
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr ""
+msgstr "No tutorial covered goods or cargo. Explain"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7838
 msgctxt "explainGoods-comms"
@@ -1611,28 +1611,28 @@ msgid ""
 "cargo. Each player ship differs in cargo carrying capacity. Goods may be "
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
-msgstr ""
+msgstr "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7847
 msgctxt "trade-comms"
 msgid "Recruit repair crew member"
-msgstr ""
+msgstr "Recruit repair crew member"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7875
 msgctxt "trade-comms"
 msgid "We have a repair crew candidate for you to consider"
-msgstr ""
+msgstr "We have a repair crew candidate for you to consider"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7882
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr ""
+msgstr "Recruit repair crew member for %i reputation"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7910
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
-msgstr ""
+msgstr "Repair crew member hired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7920
 #: scripts/scenario_43_the_omicron_plague.lua:7979
@@ -1640,7 +1640,7 @@ msgctxt "trade-comms"
 msgid ""
 "A possible repair recruit is awaiting final certification. They should be "
 "available in "
-msgstr ""
+msgstr "A possible repair recruit is awaiting final certification. They should be available in "
 
 #: scripts/scenario_43_the_omicron_plague.lua:7924
 #: scripts/scenario_43_the_omicron_plague.lua:7983
@@ -1648,60 +1648,60 @@ msgctxt "trade-comms"
 msgid ""
 "There's one repair crew candidate completing their license application. They "
 "should be available in "
-msgstr ""
+msgstr "There's one repair crew candidate completing their license application. They should be available in "
 
 #: scripts/scenario_43_the_omicron_plague.lua:7928
 #: scripts/scenario_43_the_omicron_plague.lua:7987
 msgctxt "trade-comms"
 msgid "One repair crew should be getting here from their medical checkout in "
-msgstr ""
+msgstr "One repair crew should be getting here from their medical checkout in "
 
 #: scripts/scenario_43_the_omicron_plague.lua:7938
 #: scripts/scenario_43_the_omicron_plague.lua:7952
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s %i seconds"
-msgstr ""
+msgstr "%s %i seconds"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7960
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s a second"
-msgstr ""
+msgstr "%s a second"
 
 #: scripts/scenario_43_the_omicron_plague.lua:7999
 #, lua-format
 msgctxt "trade-comms"
 msgid "Several arrived on station earlier. %s %i seconds"
-msgstr ""
+msgstr "Several arrived on station earlier. %s %i seconds"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8013
 #: scripts/scenario_43_the_omicron_plague.lua:8198
 #, lua-format
 msgctxt "trade-comms"
 msgid "%i seconds"
-msgstr ""
+msgstr "%i seconds"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8016
 #: scripts/scenario_43_the_omicron_plague.lua:8203
 #, lua-format
 msgctxt "trade-comms"
 msgid "%i second"
-msgstr ""
+msgstr "%i second"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8023
 #: scripts/scenario_43_the_omicron_plague.lua:8210
 #, lua-format
 msgctxt "trade-comms"
 msgid "%i minutes and %s"
-msgstr ""
+msgstr "%i minutes and %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8029
 #: scripts/scenario_43_the_omicron_plague.lua:8216
 #, lua-format
 msgctxt "trade-comms"
 msgid "%i minute and %s"
-msgstr ""
+msgstr "%i minute and %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8039
 #, lua-format
@@ -1709,28 +1709,28 @@ msgctxt "trade-comms"
 msgid ""
 "There are some repair crew recruits in route for %s. Travel time remaining "
 "is %s."
-msgstr ""
+msgstr "There are some repair crew recruits in route for %s. Travel time remaining is %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8052
 msgctxt "trade-comms"
 msgid "Purchase Coolant"
-msgstr ""
+msgstr "Purchase Coolant"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8082
 msgctxt "trade-comms"
 msgid "We've got some coolant available for you"
-msgstr ""
+msgstr "We've got some coolant available for you"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8089
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchase coolant for %i reputation"
-msgstr ""
+msgstr "Purchase coolant for %i reputation"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8121
 msgctxt "trade-comms"
 msgid "Additional coolant purchased"
-msgstr ""
+msgstr "Additional coolant purchased"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8136
 #: scripts/scenario_43_the_omicron_plague.lua:8152
@@ -1739,14 +1739,14 @@ msgctxt "trade-comms"
 msgid ""
 "The coolant preparation facility is having difficulty packaging the coolant "
 "for transport. They say they should have it working in about %i seconds"
-msgstr ""
+msgstr "The coolant preparation facility is having difficulty packaging the coolant for transport. They say they should have it working in about %i seconds"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8161
 msgctxt "trade-comms"
 msgid ""
 "The coolant preparation facility is having difficulty packaging the coolant "
 "for transportation. They say they should have it working in a second"
-msgstr ""
+msgstr "The coolant preparation facility is having difficulty packaging the coolant for transportation. They say they should have it working in a second"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8185
 #, lua-format
@@ -1754,7 +1754,7 @@ msgctxt "trade-comms"
 msgid ""
 "Our coolant production facility just made some, but it's not quite ready to "
 "be transported. The preparation facility says it should take about %i seconds"
-msgstr ""
+msgstr "Our coolant production facility just made some, but it's not quite ready to be transported. The preparation facility says it should take about %i seconds"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8226
 #, lua-format
@@ -1762,43 +1762,43 @@ msgctxt "trade-comms"
 msgid ""
 "Our coolant production facility is making more right now. Coolant "
 "manufacturing time remaining is %s."
-msgstr ""
+msgstr "Our coolant production facility is making more right now. Coolant manufacturing time remaining is %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8255
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
-msgstr ""
+msgstr "You need to stay docked for that action."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8264
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr ""
+msgstr "We do not deal in weapons of mass destruction."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8269
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr ""
+msgstr "We do not deal in weapons of mass disruption."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8272
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr ""
+msgstr "We do not deal in those weapons."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8286
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr ""
+msgstr "All nukes are charged and primed for destruction."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8293
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
-msgstr ""
+msgstr "Sorry, sir, but you are as fully stocked as I can allow."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8317
 #: scripts/scenario_43_the_omicron_plague.lua:8353
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr ""
+msgstr "You are fully loaded and ready to explode things."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8324
 #: scripts/scenario_43_the_omicron_plague.lua:8360
@@ -1806,38 +1806,38 @@ msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
-msgstr ""
+msgstr "We generously resupplied you with some weapon charges.\nPut them to good use."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8329
 #: scripts/scenario_43_the_omicron_plague.lua:8366
 #: scripts/scenario_43_the_omicron_plague.lua:8372
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
-msgstr ""
+msgstr "Not enough reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8337
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
-msgstr ""
+msgstr "You can't afford as much as I'd like to give you"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8340
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr ""
+msgstr "Get just one"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8390
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
-msgstr ""
+msgstr "Good day, officer.\nIf you need supplies, please dock with us first."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8395
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
-msgstr ""
+msgstr "Greetings.\nIf you want to do business, please dock with us first."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8402
 msgctxt "station-comms"
@@ -1845,57 +1845,57 @@ msgid ""
 "\n"
 "Be aware that if enemies in the area get much closer, we will be too busy to "
 "conduct business with you."
-msgstr ""
+msgstr "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8465
 msgctxt "station-comms"
 msgid "Connect to warp jammer"
-msgstr ""
+msgstr "Connect to warp jammer"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8467
 msgctxt "station-comms"
 msgid "Which one would you like to connect to?"
-msgstr ""
+msgstr "Which one would you like to connect to?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8514
 #, lua-format
 msgctxt "station-comms"
 msgid "(%i reputation)"
-msgstr ""
+msgstr "(%i reputation)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8526
 #, lua-format
 msgctxt "station-comms"
 msgid "%s Automated warp jammer access menu"
-msgstr ""
+msgstr "%s Automated warp jammer access menu"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8534
 msgctxt "station-comms"
 msgid "Reduce range to 1 unit for 1 minute"
-msgstr ""
+msgstr "Reduce range to 1 unit for 1 minute"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8542
 #: scripts/scenario_43_the_omicron_plague.lua:8559
 #: scripts/scenario_43_the_omicron_plague.lua:8576
 msgctxt "station-comms"
 msgid "Acknowledged. Range adjusted. Reset timer engaged."
-msgstr ""
+msgstr "Acknowledged. Range adjusted. Reset timer engaged."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8551
 msgctxt "station-comms"
 msgid "Reduce range by 50% for 2 minutes"
-msgstr ""
+msgstr "Reduce range by 50% for 2 minutes"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8568
 msgctxt "station-comms"
 msgid "Reduce range by 25% for 3 minutes"
-msgstr ""
+msgstr "Reduce range by 25% for 3 minutes"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8594
 msgctxt "station-comms"
 msgid ""
 "Why do I have to pay reputation to log in to some of these warp jammers?"
-msgstr ""
+msgstr "Why do I have to pay reputation to log in to some of these warp jammers?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8601
 #, lua-format
@@ -1904,17 +1904,17 @@ msgid ""
 "It's complicated. It depends on the relationships between the warp jammer "
 "owner, us, station %s and you, %s. The farther apart the relationship, the "
 "more reputation it costs to gain access. Do you want more details?"
-msgstr ""
+msgstr "It's complicated. It depends on the relationships between the warp jammer owner, us, station %s and you, %s. The farther apart the relationship, the more reputation it costs to gain access. Do you want more details?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8610
 msgctxt "station-comms"
 msgid "Yes, please provide more details"
-msgstr ""
+msgstr "Yes, please provide more details"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8615
 msgctxt "station-comms"
 msgid "These are the cases and their reputation costs:"
-msgstr ""
+msgstr "These are the cases and their reputation costs:"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8620
 #, lua-format
@@ -1922,7 +1922,7 @@ msgctxt "station-comms"
 msgid ""
 "%s\n"
 "    WJ friendly to %s and WJ is friendly to %s = no reputation."
-msgstr ""
+msgstr "%s\n    WJ friendly to %s and WJ is friendly to %s = no reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8629
 #, lua-format
@@ -1930,7 +1930,7 @@ msgctxt "station-comms"
 msgid ""
 "%s\n"
 "    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
-msgstr ""
+msgstr "%s\n    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8638
 #, lua-format
@@ -1938,7 +1938,7 @@ msgctxt "station-comms"
 msgid ""
 "%s\n"
 "    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
-msgstr ""
+msgstr "%s\n    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8647
 #, lua-format
@@ -1946,7 +1946,7 @@ msgctxt "station-comms"
 msgid ""
 "%s\n"
 "    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
-msgstr ""
+msgstr "%s\n    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8656
 #, lua-format
@@ -1954,7 +1954,7 @@ msgctxt "station-comms"
 msgid ""
 "%s\n"
 "    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
-msgstr ""
+msgstr "%s\n    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8665
 #, lua-format
@@ -1962,7 +1962,7 @@ msgctxt "station-comms"
 msgid ""
 "%s\n"
 "    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
-msgstr ""
+msgstr "%s\n    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8674
 #, lua-format
@@ -1970,7 +1970,7 @@ msgctxt "station-comms"
 msgid ""
 "%s\n"
 "    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
-msgstr ""
+msgstr "%s\n    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8683
 #, lua-format
@@ -1978,7 +1978,7 @@ msgctxt "station-comms"
 msgid ""
 "%s\n"
 "    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
-msgstr ""
+msgstr "%s\n    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8692
 #, lua-format
@@ -1986,22 +1986,22 @@ msgctxt "station-comms"
 msgid ""
 "%s\n"
 "    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
-msgstr ""
+msgstr "%s\n    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8709
 msgctxt "station-comms"
 msgid "I need information"
-msgstr ""
+msgstr "I need information"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8711
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
-msgstr ""
+msgstr "What kind of information do you need?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8735
 msgctxt "station-comms"
 msgid "Where am I?"
-msgstr ""
+msgstr "Where am I?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8743
 #, lua-format
@@ -2009,74 +2009,74 @@ msgctxt "station-comms"
 msgid ""
 "Based on triangulation and signal strength, our communications software says "
 "you're on a bearing of %.1f from us at a distance of %.1f units"
-msgstr ""
+msgstr "Based on triangulation and signal strength, our communications software says you're on a bearing of %.1f from us at a distance of %.1f units"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8753
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
-msgstr ""
+msgstr "What ordnance do you have available for restock?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8760
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Nuke"
-msgstr ""
+msgstr "\n   Nuke"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8765
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   EMP"
-msgstr ""
+msgstr "\n   EMP"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8770
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Homing"
-msgstr ""
+msgstr "\n   Homing"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8775
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Mine"
-msgstr ""
+msgstr "\n   Mine"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8780
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   HVLI"
-msgstr ""
+msgstr "\n   HVLI"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8785
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
-msgstr ""
+msgstr "We have no ordnance available for restock"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8791
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr ""
+msgstr "We have the following type of ordnance available for restock:%s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8799
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr ""
+msgstr "We have the following types of ordnance available for restock:%s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8862
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable whie it is undergoing maintenance."
-msgstr ""
+msgstr "Hull repair automation unavailable whie it is undergoing maintenance."
 
 #: scripts/scenario_43_the_omicron_plague.lua:8978
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
-msgstr ""
+msgstr "What goods do you have available for sale or trade?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8984
 #, lua-format
@@ -2084,7 +2084,7 @@ msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available: quantity, cost in reputation"
-msgstr ""
+msgstr "Station %s:\nGoods or components available: quantity, cost in reputation"
 
 #: scripts/scenario_43_the_omicron_plague.lua:8991
 #, lua-format
@@ -2092,25 +2092,25 @@ msgctxt "trade-comms"
 msgid ""
 "\n"
 "   %14s: %2i, %3i"
-msgstr ""
+msgstr "\n   %14s: %2i, %3i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9003
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
-msgstr ""
+msgstr "Where can I find particular goods?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9007
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
-msgstr ""
+msgstr "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9072
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr ""
+msgstr "Station %s in sector %s has %s for %i reputation"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9087
 msgctxt "trade-comms"
@@ -2119,100 +2119,100 @@ msgid ""
 "\n"
 "What goods are you interested in?\n"
 "I've heard about these:"
-msgstr ""
+msgstr "\n\nWhat goods are you interested in?\nI've heard about these:"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9093
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr ""
+msgstr " Beyond that, I have no knowledge of specific stations"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9169
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
-msgstr ""
+msgstr "Tell me about %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9189
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Never heard of %s"
-msgstr ""
+msgstr "Never heard of %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9198
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s died last week. The funeral was yesterday"
-msgstr ""
+msgstr "%s died last week. The funeral was yesterday"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9207
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s? Who's %s? There's nobody here named %s"
-msgstr ""
+msgstr "%s? Who's %s? There's nobody here named %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9218
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "We don't talk about %s. They are gone and good riddance"
-msgstr ""
+msgstr "We don't talk about %s. They are gone and good riddance"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9227
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "I think %s moved away"
-msgstr ""
+msgstr "I think %s moved away"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9242
 msgctxt "stationAssist-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Report status"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9244
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Hull: %d%%\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9253
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield: %d%%\n"
-msgstr ""
+msgstr "Shield: %d%%\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9264
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr ""
+msgstr "Shield %s: %d%%\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9281
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr ""
+msgstr "Can you send a supply drop? (%d rep)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9289
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
-msgstr ""
+msgstr "You need to set a waypoint before you can request backup."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9296
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr ""
+msgstr "To which waypoint should we deliver your supplies?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9301
 #: scripts/scenario_43_the_omicron_plague.lua:9374
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
-msgstr ""
+msgstr "WP %d"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9329
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
-msgstr ""
+msgstr "We have dispatched a supply ship toward WP %d"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9338
 #: scripts/scenario_43_the_omicron_plague.lua:9411
@@ -2220,34 +2220,34 @@ msgstr ""
 #: scripts/scenario_43_the_omicron_plague.lua:9602
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
-msgstr ""
+msgstr "Not enough reputation!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9354
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
-msgstr ""
+msgstr "Please send reinforcements! (%d rep)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9362
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
+msgstr "You need to set a waypoint before you can request reinforcements."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9369
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr ""
+msgstr "To which waypoint should we dispatch the reinforcements?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9401
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
-msgstr ""
+msgstr "We have dispatched %s to assist at WP %d"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9426
 msgctxt "stationAssist-comms"
 msgid "Please send a service jonque for repairs"
-msgstr ""
+msgstr "Please send a service jonque for repairs"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9431
 #, lua-format
@@ -2256,13 +2256,13 @@ msgid ""
 "Would you like the service jonque to come to you directly or would you "
 "prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f "
 "reputation."
-msgstr ""
+msgstr "Would you like the service jonque to come to you directly or would you prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f reputation."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9496
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to come to you to help with repairs"
-msgstr ""
+msgstr "We have dispatched %s to come to you to help with repairs"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9511
 msgctxt "stationAssist-comms"
@@ -2271,19 +2271,19 @@ msgid ""
 "\n"
 "Note: if you want to use a waypoint, you will have to back out and set one "
 "and come back."
-msgstr ""
+msgstr "\n\nNote: if you want to use a waypoint, you will have to back out and set one and come back."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9519
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Rendezvous at waypoint %d"
-msgstr ""
+msgstr "Rendezvous at waypoint %d"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9592
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to rendezvous at waypoint %d"
-msgstr ""
+msgstr "We have dispatched %s to rendezvous at waypoint %d"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9634
 #, lua-format
@@ -2295,24 +2295,24 @@ msgid ""
 "After treating Ensign Fargalli, we took a closer look at the accompanying "
 "research. Analysis of the research material, the telemetry from your ship, "
 "and recent reports from intelligence brings us to an ominous conclusion."
-msgstr ""
+msgstr "To: %s\nFrom: %s\n\nAfter treating Ensign Fargalli, we took a closer look at the accompanying research. Analysis of the research material, the telemetry from your ship, and recent reports from intelligence brings us to an ominous conclusion."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9640
 msgctxt "mission4th-comms"
 msgid "What have you concluded?"
-msgstr ""
+msgstr "What have you concluded?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9644
 msgctxt "mission4th-comms"
 msgid ""
 "Fargalli's illness and the previous similar cases experienced were not "
 "accidental. They were deliberately infected."
-msgstr ""
+msgstr "Fargalli's illness and the previous similar cases experienced were not accidental. They were deliberately infected."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9648
 msgctxt "mission4th-comms"
 msgid "What? Who infected them?"
-msgstr ""
+msgstr "What? Who infected them?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9653
 msgctxt "mission4th-comms"
@@ -2321,12 +2321,12 @@ msgid ""
 "experimental biological attack. The Exuari have code named this biological "
 "agent Omicron after the early 21st century pandemic virus variant on Earth "
 "which was highly contagious."
-msgstr ""
+msgstr "The Exuari. Fargalli and others are apparently the victims of a preliminary experimental biological attack. The Exuari have code named this biological agent Omicron after the early 21st century pandemic virus variant on Earth which was highly contagious."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9659
 msgctxt "mission4th-comms"
 msgid "That's sobering. Do we have more information?"
-msgstr ""
+msgstr "That's sobering. Do we have more information?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9665
 msgctxt "mission4th-comms"
@@ -2334,24 +2334,24 @@ msgid ""
 "Indeed we do. It looks like Omicron might be transmitted via subspace. We "
 "believe the Exuari plan to 'broadcast' Omicron to every known human "
 "location. Needless to say, this would have extinction level consequences."
-msgstr ""
+msgstr "Indeed we do. It looks like Omicron might be transmitted via subspace. We believe the Exuari plan to 'broadcast' Omicron to every known human location. Needless to say, this would have extinction level consequences."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9671
 msgctxt "mission4th-comms"
 msgid "Ouch. Is there a planned response?"
-msgstr ""
+msgstr "Ouch. Is there a planned response?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9677
 msgctxt "mission4th-comms"
 msgid ""
 "Destruction of the Exuari Omicron production and broadcast facility is the "
 "best thing we can think of."
-msgstr ""
+msgstr "Destruction of the Exuari Omicron production and broadcast facility is the best thing we can think of."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9681
 msgctxt "mission4th-comms"
 msgid "Can we help?"
-msgstr ""
+msgstr "Can we help?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9686
 msgctxt "mission4th-comms"
@@ -2360,12 +2360,12 @@ msgid ""
 "facility, just a general direction. However, when we examined the telemetry "
 "from your science officer's console when you were near the independent "
 "medical research facility, we noticed something interesting."
-msgstr ""
+msgstr "We hope that you can. We don't know the precise location of the Exuari facility, just a general direction. However, when we examined the telemetry from your science officer's console when you were near the independent medical research facility, we noticed something interesting."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9692
 msgctxt "mission4th-comms"
 msgid "What did you notice?"
-msgstr ""
+msgstr "What did you notice?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9698
 msgctxt "mission4th-comms"
@@ -2373,12 +2373,12 @@ msgid ""
 "The entity used to produce the treatment is also likely to be used to create "
 "Omicron. It gives off a powerful bio-signature that is periodic in nature, "
 "vaguely resembling a heartbeat."
-msgstr ""
+msgstr "The entity used to produce the treatment is also likely to be used to create Omicron. It gives off a powerful bio-signature that is periodic in nature, vaguely resembling a heartbeat."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9704
 msgctxt "mission4th-comms"
 msgid "This signature can identify the Exuari Omicron facility?"
-msgstr ""
+msgstr "This signature can identify the Exuari Omicron facility?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9711
 #, lua-format
@@ -2389,7 +2389,7 @@ msgid ""
 "%i from station %s to find the Omicron facility and destroy it. Our best "
 "intelligence estimates that deployment will occur within the next %i "
 "minutes. Happy hunting!"
-msgstr ""
+msgstr "Yes, but if you're unsure, you are authorised to destroy every Exuari facility. You will need to travel into Exuari infested space along bearing %i from station %s to find the Omicron facility and destroy it. Our best intelligence estimates that deployment will occur within the next %i minutes. Happy hunting!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9739
 #, lua-format
@@ -2402,12 +2402,12 @@ msgid ""
 "just reported to sickbay here on %s. We can treat his symptoms, but don't "
 "have a treatment for the root cause of his illness. This is the third case "
 "of this type we've seen in the last week. The last two ended up being fatal."
-msgstr ""
+msgstr "To %s\nFrom: %s\n\nEnsign Fargalli, one of the maintenance engineers aboard the freighter %s, just reported to sickbay here on %s. We can treat his symptoms, but don't have a treatment for the root cause of his illness. This is the third case of this type we've seen in the last week. The last two ended up being fatal."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9748
 msgctxt "mission2nd-comms"
 msgid "Why are you telling me this?"
-msgstr ""
+msgstr "Why are you telling me this?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9754
 #, lua-format
@@ -2415,13 +2415,13 @@ msgctxt "mission2nd-comms"
 msgid ""
 "We've received word that Independent station %s is conducting ongoing "
 "research into this malady and may have more information, maybe even a remedy."
-msgstr ""
+msgstr "We've received word that Independent station %s is conducting ongoing research into this malady and may have more information, maybe even a remedy."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9763
 #, lua-format
 msgctxt "mission2nd-comms"
 msgid "Then you should get that treatment from %s to save Fargalli"
-msgstr ""
+msgstr "Then you should get that treatment from %s to save Fargalli"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9772
 #, lua-format
@@ -2429,12 +2429,12 @@ msgctxt "mission2nd-comms"
 msgid ""
 "We can't contact %s directly since they are not on our communications "
 "network."
-msgstr ""
+msgstr "We can't contact %s directly since they are not on our communications network."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9778
 msgctxt "mission2nd-comms"
 msgid "A courier could get it"
-msgstr ""
+msgstr "A courier could get it"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9784
 #, lua-format
@@ -2443,12 +2443,12 @@ msgid ""
 "We tried sending couriers. All of our couriers were shot down. We are "
 "telling you all this because we need you to go to %s and bring back any "
 "medical research or treatment or medicine they may have"
-msgstr ""
+msgstr "We tried sending couriers. All of our couriers were shot down. We are telling you all this because we need you to go to %s and bring back any medical research or treatment or medicine they may have"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9790
 msgctxt "mission2nd-comms"
 msgid "Now I understand"
-msgstr ""
+msgstr "Now I understand"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9796
 #, lua-format
@@ -2456,19 +2456,19 @@ msgctxt "mission2nd-comms"
 msgid ""
 "There is some urgency. Based on the previous cases, Fargalli has about %i "
 "minutes to live"
-msgstr ""
+msgstr "There is some urgency. Based on the previous cases, Fargalli has about %i minutes to live"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9805
 #, lua-format
 msgctxt "mission2nd-comms"
 msgid "Where is station %s?"
-msgstr ""
+msgstr "Where is station %s?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9815
 #, lua-format
 msgctxt "mission2nd-comms"
 msgid "%s is in sector %s. Good luck"
-msgstr ""
+msgstr "%s is in sector %s. Good luck"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9826
 #, lua-format
@@ -2476,7 +2476,7 @@ msgctxt "mission2nd-comms"
 msgid ""
 "%s is on an approximate bearing of %i from %s. Distance is greater than %.1f "
 "units."
-msgstr ""
+msgstr "%s is on an approximate bearing of %i from %s. Distance is greater than %.1f units."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9851
 #, lua-format
@@ -2484,7 +2484,7 @@ msgctxt "mission2nd-comms"
 msgid ""
 "%s is on a precise bearing of %.1f from %s. Distance is greater than %.1f "
 "units."
-msgstr ""
+msgstr "%s is on a precise bearing of %.1f from %s. Distance is greater than %.1f units."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9875
 #, lua-format
@@ -2494,71 +2494,71 @@ msgid ""
 "From: %s\n"
 "\n"
 "Hello, %s"
-msgstr ""
+msgstr "To: %s\nFrom: %s\n\nHello, %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9883
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "Hello, %s"
-msgstr ""
+msgstr "Hello, %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9890
 msgctxt "mission3th-comms"
 msgid ""
 "One of the commercial freighters just docked up and their personnel inferred "
 "that you might be traveling in our direction."
-msgstr ""
+msgstr "One of the commercial freighters just docked up and their personnel inferred that you might be travelling in our direction."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9894
 msgctxt "mission3th-comms"
 msgid "Those are well informed personnel"
-msgstr ""
+msgstr "Those are well informed personnel"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9899
 msgctxt "mission3th-comms"
 msgid ""
 "It's amazing what commercial freighters learn and how quickly they learn it."
-msgstr ""
+msgstr "It's amazing what commercial freighters learn and how quickly they learn it."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9905
 msgctxt "mission3th-comms"
 msgid "Indeed. Why are you contacting us?"
-msgstr ""
+msgstr "Indeed. Why are you contacting us?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9911
 msgctxt "mission3th-comms"
 msgid ""
 "We were wondering how soon you might get here. You see, there's this group "
 "of Exuari approaching and they don't look terribly friendly."
-msgstr ""
+msgstr "We were wondering how soon you might get here. You see, there's this group of Exuari approaching and they don't look terribly friendly."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9917
 msgctxt "mission3th-comms"
 msgid "We intend to get medical research, not necessarily engage Exuari"
-msgstr ""
+msgstr "We intend to get medical research, not necessarily engage Exuari"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9923
 msgctxt "mission3th-comms"
 msgid ""
 "We could make it worth your while if you were to protect our station from "
 "these Exuari."
-msgstr ""
+msgstr "We could make it worth your while if you were to protect our station from these Exuari."
 
 #: scripts/scenario_43_the_omicron_plague.lua:9927
 msgctxt "mission3th-comms"
 msgid "How so?"
-msgstr ""
+msgstr "How so?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9932
 msgctxt "mission3th-comms"
 msgid ""
 "If you were to destroy the attacking Exuari, we could offer you one of these:"
-msgstr ""
+msgstr "If you were to destroy the attacking Exuari, we could offer you one of these:"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9938
 msgctxt "mission3th-comms"
 msgid "25% faster impulse speed"
-msgstr ""
+msgstr "25% faster impulse speed"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9947
 #: scripts/scenario_43_the_omicron_plague.lua:9969
@@ -2567,28 +2567,28 @@ msgstr ""
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "You got it. We're in sector %s"
-msgstr ""
+msgstr "You got it. We're in sector %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9958
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "Rapid transit back to %s"
-msgstr ""
+msgstr "Rapid transit back to %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:9984
 msgctxt "mission3th-comms"
 msgid "25% stronger beam weapons"
-msgstr ""
+msgstr "25% stronger beam weapons"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10009
 msgctxt "mission3th-comms"
 msgid "Replenish all your ordnance"
-msgstr ""
+msgstr "Replenish all your ordnance"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10031
 msgctxt "mission3th-comms"
 msgid "We just need to know where you are located"
-msgstr ""
+msgstr "We just need to know where you are located"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10045
 #, lua-format
@@ -2597,7 +2597,7 @@ msgid ""
 "We added paypoint %i to your system which identifies our station. We may or "
 "may not be able to provide what you request depending on how busy we are "
 "fighting off Exuari."
-msgstr ""
+msgstr "We added paypoint %i to your system which identifies our station. We may or may not be able to provide what you request depending on how busy we are fighting off Exuari."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10055
 #, lua-format
@@ -2605,34 +2605,34 @@ msgctxt "mission3th-comms"
 msgid ""
 "We are in sector %s. We may or may not be able to provide what you request "
 "depending on how busy we are fighting off Exuari."
-msgstr ""
+msgstr "We are in sector %s. We may or may not be able to provide what you request depending on how busy we are fighting off Exuari."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10068
 msgctxt "mission3th-comms"
 msgid "Sounds bad. Do you need help?"
-msgstr ""
+msgstr "Sounds bad. Do you need help?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10074
 msgctxt "mission3th-comms"
 msgid ""
 "We welcome any help you might provide. It would facilitate our survival."
-msgstr ""
+msgstr "We welcome any help you might provide. It would facilitate our survival."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10080
 msgctxt "mission3th-comms"
 msgid "Could you provide us with your location?"
-msgstr ""
+msgstr "Could you provide us with your location?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10087
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "You mean %s did not tell you where to find us?"
-msgstr ""
+msgstr "You mean %s did not tell you where to find us?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10096
 msgctxt "mission3th-comms"
 msgid "They did, but we prefer greater precision"
-msgstr ""
+msgstr "They did, but we prefer greater precision"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10109
 #, lua-format
@@ -2640,165 +2640,165 @@ msgctxt "mission3th-comms"
 msgid ""
 "We added waypoint %i to your system for our station. Your timely arrival "
 "would be greatly appreciated."
-msgstr ""
+msgstr "We added waypoint %i to your system for our station. Your timely arrival would be greatly appreciated."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10121
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "%s provided a bearing, but we prefer greater precision"
-msgstr ""
+msgstr "%s provided a bearing, but we prefer greater precision"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10130
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "We are in sector %s. Your timely arrival would be greatly appreciated."
-msgstr ""
+msgstr "We are in sector %s. Your timely arrival would be greatly appreciated."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10147
 msgctxt "mission3th-comms"
 msgid "Your information is correct"
-msgstr ""
+msgstr "Your information is correct"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10152
 msgctxt "mission3th-comms"
 msgid "That's great news. We've got some pesky Exuari in the area."
-msgstr ""
+msgstr "That's great news. We've got some pesky Exuari in the area."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10158
 msgctxt "mission3th-comms"
 msgid "Let me guess, you want our help with the Exuari?"
-msgstr ""
+msgstr "Let me guess, you want our help with the Exuari?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10165
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "Got it in one. We're in sector %s. Please don't dawdle"
-msgstr ""
+msgstr "Got it in one. We're in sector %s. Please don't dawdle"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10173
 msgctxt "mission3th-comms"
 msgid "They're everywhere"
-msgstr ""
+msgstr "They're everywhere"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10178
 msgctxt "mission3th-comms"
 msgid ""
 "This batch is in our back yard. If you're going to be in the neighborhood "
 "already, could you help us out?"
-msgstr ""
+msgstr "This batch is in our back yard. If you're going to be in the neighbourhood already, could you help us out?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10182
 msgctxt "mission3th-comms"
 msgid "Sure"
-msgstr ""
+msgstr "Sure"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10188
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "Great. We're in sector %s"
-msgstr ""
+msgstr "Great. We're in sector %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10200
 msgctxt "mission3th-comms"
 msgid "We're really only coming to get medical research"
-msgstr ""
+msgstr "We're really only coming to get medical research"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10204
 msgctxt "mission3th-comms"
 msgid "Understood."
-msgstr ""
+msgstr "Understood."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10213
 msgctxt "mission3th-comms"
 msgid "Identify your sector and we'll help"
-msgstr ""
+msgstr "Identify your sector and we'll help"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10220
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "Fair enough. We're in sector %s"
-msgstr ""
+msgstr "Fair enough. We're in sector %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10231
 msgctxt "mission3th-comms"
 msgid "We might be. Why do you ask?"
-msgstr ""
+msgstr "We might be. Why do you ask?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10236
 msgctxt "mission3th-comms"
 msgid ""
 "Well, we've observed some Exuari headed our way. We don't think they're "
 "making a courtesy call"
-msgstr ""
+msgstr "Well, we've observed some Exuari headed our way. We don't think they're making a courtesy call"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10242
 msgctxt "mission3th-comms"
 msgid "They never do. Would you like our help?"
-msgstr ""
+msgstr "They never do. Would you like our help?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10249
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "Yes, please. We're in sector %s"
-msgstr ""
+msgstr "Yes, please. We're in sector %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10258
 msgctxt "mission3th-comms"
 msgid "Where exactly is 'your way?'"
-msgstr ""
+msgstr "Where exactly is 'your way?'"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10264
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "Our station is located in sector %s. We hope to see you soon."
-msgstr ""
+msgstr "Our station is located in sector %s. We hope to see you soon."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10274
 msgctxt "mission3th-comms"
 msgid "We'd like to help, but we're having a hard time finding you"
-msgstr ""
+msgstr "We'd like to help, but we're having a hard time finding you"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10281
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "We're in sector %s. Please hurry, the Exuari look dangerous."
-msgstr ""
+msgstr "We're in sector %s. Please hurry, the Exuari look dangerous."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10292
 msgctxt "mission3th-comms"
 msgid "Technically, our mission does not cover protection from Exuari"
-msgstr ""
+msgstr "Technically, our mission does not cover protection from Exuari"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10295
 msgctxt "mission3th-comms"
 msgid "Drat"
-msgstr ""
+msgstr "Drat"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10302
 msgctxt "mission3th-comms"
 msgid "Where are you located?"
-msgstr ""
+msgstr "Where are you located?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10307
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "We are in sector %s. Please hurry, the Exuari are approaching."
-msgstr ""
+msgstr "We are in sector %s. Please hurry, the Exuari are approaching."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10314
 msgctxt "mission3th-comms"
 msgid "We are glad you contacted us"
-msgstr ""
+msgstr "We are glad you contacted us"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10319
 msgctxt "mission3th-comms"
 msgid "Coincidentally, we are glad to be in contact with you, too."
-msgstr ""
+msgstr "Coincidentally, we are glad to be in contact with you, too."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10322
 msgctxt "mission3th-comms"
 msgid "Why is that?"
-msgstr ""
+msgstr "Why is that?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10327
 #, lua-format
@@ -2806,22 +2806,22 @@ msgctxt "mission3th-comms"
 msgid ""
 "We are in need of some assistance with Exuari that are approaching our "
 "station, %s."
-msgstr ""
+msgstr "We are in need of some assistance with Exuari that are approaching our station, %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10332
 msgctxt "mission3th-comms"
 msgid "We can help"
-msgstr ""
+msgstr "We can help"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10336
 msgctxt "mission3th-comms"
 msgid "That's so good to hear. You may want to hurry, though."
-msgstr ""
+msgstr "That's so good to hear. You may want to hurry, though."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10340
 msgctxt "mission3th-comms"
 msgid "Why the rush?"
-msgstr ""
+msgstr "Why the rush?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10347
 #, lua-format
@@ -2829,7 +2829,7 @@ msgctxt "mission3th-comms"
 msgid ""
 "The Exuari! They're getting closer! Please come to us in sector %s as soon "
 "as you can."
-msgstr ""
+msgstr "The Exuari! They're getting closer! Please come to us in sector %s as soon as you can."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10360
 #, lua-format
@@ -2837,7 +2837,7 @@ msgctxt "mission3th-comms"
 msgid ""
 "The Exuari! They're getting closer! I'm adding waypoint %i into your system "
 "for our station. Please get here as soon as you can."
-msgstr ""
+msgstr "The Exuari! They're getting closer! I'm adding waypoint %i into your system for our station. Please get here as soon as you can."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10373
 #: scripts/scenario_43_the_omicron_plague.lua:10394
@@ -2846,7 +2846,7 @@ msgstr ""
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "In what sector is %s located?"
-msgstr ""
+msgstr "In what sector is %s located?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10382
 #: scripts/scenario_43_the_omicron_plague.lua:10403
@@ -2855,69 +2855,69 @@ msgstr ""
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "%s is located in sector %s."
-msgstr ""
+msgstr "%s is located in sector %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10512
 #: scripts/scenario_43_the_omicron_plague.lua:12084
 #: scripts/scenario_43_the_omicron_plague.lua:12215
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr ""
+msgstr "What do you want?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10514
 #: scripts/scenario_43_the_omicron_plague.lua:12086
 #: scripts/scenario_43_the_omicron_plague.lua:12217
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Sir, how can we assist?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10516
 #: scripts/scenario_43_the_omicron_plague.lua:12088
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Defend a waypoint"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10521
 #: scripts/scenario_43_the_omicron_plague.lua:12093
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
-msgstr ""
+msgstr "No waypoints set. Please set a waypoint first."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10526
 #: scripts/scenario_43_the_omicron_plague.lua:12098
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Which waypoint should we defend?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10531
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr ""
+msgstr "Defend WP %d"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10542
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
-msgstr ""
+msgstr "We are heading to assist at WP %d."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10555
 #: scripts/scenario_43_the_omicron_plague.lua:12127
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr ""
+msgstr "Assist me"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10557
 #: scripts/scenario_43_the_omicron_plague.lua:12129
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Heading toward you to assist."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10563
 #: scripts/scenario_43_the_omicron_plague.lua:12135
 msgctxt "shipAssist-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Report status"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10565
 #: scripts/scenario_43_the_omicron_plague.lua:12137
@@ -2925,7 +2925,7 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Hull: %d%%\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10572
 #: scripts/scenario_43_the_omicron_plague.lua:12144
@@ -2933,7 +2933,7 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
-msgstr ""
+msgstr "Shield: %d%%\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10582
 #: scripts/scenario_43_the_omicron_plague.lua:12154
@@ -2941,7 +2941,7 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
-msgstr ""
+msgstr "Front Shield: %d%%\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10591
 #: scripts/scenario_43_the_omicron_plague.lua:12163
@@ -2949,7 +2949,7 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
-msgstr ""
+msgstr "Rear Shield: %d%%\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10602
 #: scripts/scenario_43_the_omicron_plague.lua:12174
@@ -2957,33 +2957,33 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr ""
+msgstr "Shield %s: %d%%\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10617
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr ""
+msgstr "%s Missiles: %d/%d\n"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10635
 #: scripts/scenario_43_the_omicron_plague.lua:12193
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Dock at %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10641
 #: scripts/scenario_43_the_omicron_plague.lua:12199
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
-msgstr ""
+msgstr "Docking at %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:10724
 #, lua-format
 msgctxt "trade-comms"
 msgid "Traded luxury for %s"
-msgstr ""
+msgstr "Traded luxury for %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10770
 #: scripts/scenario_43_the_omicron_plague.lua:10831
@@ -2997,7 +2997,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
-msgstr ""
+msgstr "Purchased %s from %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10780
 #: scripts/scenario_43_the_omicron_plague.lua:10841
@@ -3010,105 +3010,105 @@ msgstr ""
 #: scripts/scenario_43_the_omicron_plague.lua:12037
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr ""
+msgstr "Insufficient reputation for purchase"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10972
 #: scripts/scenario_43_the_omicron_plague.lua:11694
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
-msgstr ""
+msgstr "Do you have cargo you might sell?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:10975
 #: scripts/scenario_43_the_omicron_plague.lua:11697
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr ""
+msgstr "We've got "
 
 #: scripts/scenario_43_the_omicron_plague.lua:10980
 #: scripts/scenario_43_the_omicron_plague.lua:11702
 msgctxt "trade-comms"
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: scripts/scenario_43_the_omicron_plague.lua:10989
 #: scripts/scenario_43_the_omicron_plague.lua:11711
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr ""
+msgstr "nothing"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11006
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr ""
+msgstr "We will see to your destruction!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11008
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
-msgstr ""
+msgstr "Your bloodline will end here!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11010
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr ""
+msgstr "Your feeble threats are meaningless."
 
 #: scripts/scenario_43_the_omicron_plague.lua:11017
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
-msgstr ""
+msgstr "Ktzzzsss.\nYou will DIEEee weaklingsss!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11021
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
-msgstr ""
+msgstr "We will destroy you"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11024
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
-msgstr ""
+msgstr "We think not. It is you who will experience destruction!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11027
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr ""
+msgstr "You have no honour"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11030
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
-msgstr ""
+msgstr "Your insult has brought our wrath upon you. Prepare to die."
 
 #: scripts/scenario_43_the_omicron_plague.lua:11034
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
-msgstr ""
+msgstr "Your comments about honour have no meaning to us"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11038
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
-msgstr ""
+msgstr "We pity your pathetic race"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11041
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
-msgstr ""
+msgstr "Pathetic? You will regret your disparagement!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11044
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
-msgstr ""
+msgstr "We don't care what you think of us"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11052
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
-msgstr ""
+msgstr "We wish you no harm, but will harm you if we must.\nEnd of transmission."
 
 #: scripts/scenario_43_the_omicron_plague.lua:11061
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
-msgstr ""
+msgstr "Stay out of our way, or your death will amuse us extremely!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11070
 msgctxt "shipEnemy-comms"
@@ -3119,22 +3119,22 @@ msgid ""
 "Generating appropriate response for target from human language archives.\n"
 ":Do not cross us:\n"
 "Communication halted."
-msgstr ""
+msgstr "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."
 
 #: scripts/scenario_43_the_omicron_plague.lua:11073
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr ""
+msgstr "EXECUTE: SELFDESTRUCT"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11076
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr ""
+msgstr "Rogue command received. Targeting source."
 
 #: scripts/scenario_43_the_omicron_plague.lua:11079
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
-msgstr ""
+msgstr "External command ignored."
 
 #: scripts/scenario_43_the_omicron_plague.lua:11084
 msgctxt "shipEnemy-comms"
@@ -3142,129 +3142,129 @@ msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
 "all.\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
-msgstr ""
+msgstr "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."
 
 #: scripts/scenario_43_the_omicron_plague.lua:11089
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr ""
+msgstr "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11093
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr ""
+msgstr "We do not need permission to pluck apart such an insignificant threat."
 
 #: scripts/scenario_43_the_omicron_plague.lua:11097
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
-msgstr ""
+msgstr "The hive has greater priorities than exterminating pests."
 
 #: scripts/scenario_43_the_omicron_plague.lua:11102
 msgctxt "shipEnemy-comms"
 msgid "State your business"
-msgstr ""
+msgstr "State your business"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11107
 msgctxt "shipEnemy-comms"
 msgid "What do you want? (not that we care)"
-msgstr ""
+msgstr "What do you want? (not that we care)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11112
 msgctxt "shipEnemy-comms"
 msgid "Don't waste our time"
-msgstr ""
+msgstr "Don't waste our time"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11114
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
-msgstr ""
+msgstr "Mind your own business!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11166
 msgctxt "shipEnemy-comms"
 msgid "Subspace and time continuum disruption authorized"
-msgstr ""
+msgstr "Subspace and time continuum disruption authorised"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11195
 msgctxt "shipEnemy-comms"
 msgid "Stop your actions"
-msgstr ""
+msgstr "Stop your actions"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11233
 msgctxt "shipEnemy-comms"
 msgid "Just this once, we'll take your advice"
-msgstr ""
+msgstr "Just this once, we'll take your advice"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11237
 msgctxt "shipEnemy-comms"
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11647
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "Disruption %i"
-msgstr ""
+msgstr "Disruption %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:11692
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr ""
+msgstr "Yes?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12055
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
-msgstr ""
+msgstr "Sorry, we have no time to chat with you.\nWe are on an important mission."
 
 #: scripts/scenario_43_the_omicron_plague.lua:12060
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
-msgstr ""
+msgstr "We have nothing for you.\nGood day."
 
 #: scripts/scenario_43_the_omicron_plague.lua:12103
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %i"
-msgstr ""
+msgstr "Defend WP %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12114
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %i."
-msgstr ""
+msgstr "We are heading to assist at WP %i."
 
 #: scripts/scenario_43_the_omicron_plague.lua:12219
 msgctxt "shipAssist-comms"
 msgid "How are you doing?"
-msgstr ""
+msgstr "How are you doing?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12274
 msgctxt "shipServices-comms"
 msgid "Service options"
-msgstr ""
+msgstr "Service options"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12293
 msgctxt "shipServices-comms"
 msgid "Repair ship system"
-msgstr ""
+msgstr "Repair ship system"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12298
 msgctxt "shipServices-comms"
 msgid "What system would you like repaired?"
-msgstr ""
+msgstr "What system would you like repaired?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12305
 msgctxt "shipServices-comms"
 msgid "Repair probe launch system"
-msgstr ""
+msgstr "Repair probe launch system"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12315
 msgctxt "shipServices-comms"
 msgid "Your probe launch system has been repaired"
-msgstr ""
+msgstr "Your probe launch system has been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12322
 #: scripts/scenario_43_the_omicron_plague.lua:12348
@@ -3276,93 +3276,93 @@ msgstr ""
 #: scripts/scenario_43_the_omicron_plague.lua:12562
 msgctxt "shipServices-comms"
 msgid "You need to stay close if you want me to fix your ship"
-msgstr ""
+msgstr "You need to stay close if you want me to fix your ship"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12332
 msgctxt "shipServices-comms"
 msgid "Repair hacking system"
-msgstr ""
+msgstr "Repair hacking system"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12341
 msgctxt "shipServices-comms"
 msgid "Your hack system has been repaired"
-msgstr ""
+msgstr "Your hack system has been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12358
 msgctxt "shipServices-comms"
 msgid "Repair scanning system"
-msgstr ""
+msgstr "Repair scanning system"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12367
 msgctxt "shipServices-comms"
 msgid "Your scanners have been repaired"
-msgstr ""
+msgstr "Your scanners have been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12384
 msgctxt "shipServices-comms"
 msgid "Repair combat maneuver"
-msgstr ""
+msgstr "Repair combat manoeuvre"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12393
 msgctxt "shipServices-comms"
 msgid "Your combat maneuver has been repaired"
-msgstr ""
+msgstr "Your combat manoeuvre has been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12412
 msgctxt "shipServices-comms"
 msgid "Repair self destruct system"
-msgstr ""
+msgstr "Repair self destruct system"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12422
 msgctxt "shipServices-comms"
 msgid "Your self destruct system has been repaired"
-msgstr ""
+msgstr "Your self destruct system has been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12456
 #, lua-format
 msgctxt "shipServices-comms"
 msgid "Full hull repair (%i reputation)"
-msgstr ""
+msgstr "Full hull repair (%i reputation)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12470
 msgctxt "shipServices-comms"
 msgid "All fixed up and ready to go"
-msgstr ""
+msgstr "All fixed up and ready to go"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12491
 #: scripts/scenario_43_the_omicron_plague.lua:12531
 #, lua-format
 msgctxt "shipServices-comms"
 msgid "Add %i%% to hull (%i reputation)"
-msgstr ""
+msgstr "Add %i%% to hull (%i reputation)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12510
 #: scripts/scenario_43_the_omicron_plague.lua:12550
 msgctxt "shipServices-comms"
 msgid "Repairs completed as requested"
-msgstr ""
+msgstr "Repairs completed as requested"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12603
 msgctxt "ammo-comms"
 msgid "Restock ordnance"
-msgstr ""
+msgstr "Restock ordnance"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12612
 msgctxt "ammo-comms"
 msgid "What kind of ordnance?"
-msgstr ""
+msgstr "What kind of ordnance?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12616
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%i reputation each)"
-msgstr ""
+msgstr "%s (%i reputation each)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12644
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Restocked your %s type ordnance"
-msgstr ""
+msgstr "Restocked your %s type ordnance"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12658
 #, lua-format
@@ -3370,7 +3370,7 @@ msgctxt "needRep-comms"
 msgid ""
 "You don't have enough reputation to fully replenish your %s type ordnance. "
 "You need %i and you only have %i. How would you like to proceed?"
-msgstr ""
+msgstr "You don't have enough reputation to fully replenish your %s type ordnance. You need %i and you only have %i. How would you like to proceed?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12674
 #: scripts/scenario_43_the_omicron_plague.lua:12911
@@ -3378,7 +3378,7 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Get one (%i reputation)"
-msgstr ""
+msgstr "Get one (%i reputation)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12708
 #: scripts/scenario_43_the_omicron_plague.lua:12882
@@ -3387,7 +3387,7 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "One %s provided"
-msgstr ""
+msgstr "One %s provided"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12725
 #: scripts/scenario_43_the_omicron_plague.lua:12812
@@ -3397,14 +3397,14 @@ msgstr ""
 #: scripts/scenario_43_the_omicron_plague.lua:13131
 msgctxt "ammo-comms"
 msgid "You need to stay close if you want me to restock your ordnance"
-msgstr ""
+msgstr "You need to stay close if you want me to restock your ordnance"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12760
 #: scripts/scenario_43_the_omicron_plague.lua:12997
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Get %i (%i reputation)"
-msgstr ""
+msgstr "Get %i (%i reputation)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12794
 #: scripts/scenario_43_the_omicron_plague.lua:12871
@@ -3412,7 +3412,7 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%i %ss provided"
-msgstr ""
+msgstr "%i %ss provided"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12837
 #, lua-format
@@ -3420,12 +3420,12 @@ msgctxt "ammo-comms"
 msgid ""
 "I don't have enough %s type ordnance to fully restock you. How would you "
 "like to proceed?"
-msgstr ""
+msgstr "I don't have enough %s type ordnance to fully restock you. How would you like to proceed?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12845
 msgctxt "ammo-comms"
 msgid "We'll take all you've got"
-msgstr ""
+msgstr "We'll take all you've got"
 
 #: scripts/scenario_43_the_omicron_plague.lua:12895
 #, lua-format
@@ -3433,178 +3433,178 @@ msgctxt "needRep-comms"
 msgid ""
 "You don't have enough reputation to get all of our %s type ordnance. You "
 "need %i and you only have %i. How would you like to proceed?"
-msgstr ""
+msgstr "You don't have enough reputation to get all of our %s type ordnance. You need %i and you only have %i. How would you like to proceed?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13152
 msgctxt "shipServices-comms"
 msgid "Restock scan probes (5 reputation)"
-msgstr ""
+msgstr "Restock scan probes (5 reputation)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13162
 msgctxt "shipServices-comms"
 msgid "I replenished your probes for you."
-msgstr ""
+msgstr "I replenished your probes for you."
 
 #: scripts/scenario_43_the_omicron_plague.lua:13174
 msgctxt "shipServices-comms"
 msgid "You need to stay close if you want me to restock your probes"
-msgstr ""
+msgstr "You need to stay close if you want me to restock your probes"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13200
 #, lua-format
 msgctxt "shipServices-comms"
 msgid "Quick charge the main batteries (%i reputation)"
-msgstr ""
+msgstr "Quick charge the main batteries (%i reputation)"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13219
 msgctxt "shipServices-comms"
 msgid "Your batteries have been charged"
-msgstr ""
+msgstr "Your batteries have been charged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13231
 msgctxt "shipServices-comms"
 msgid "You need to stay close if you want your batteries charged quickly"
-msgstr ""
+msgstr "You need to stay close if you want your batteries charged quickly"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13249
 msgctxt "shipServices-comms"
 msgid "How can I help you get your ship in good running order?"
-msgstr ""
+msgstr "How can I help you get your ship in good running order?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13256
 msgctxt "shipServices-comms"
 msgid "There's nothing on your ship that I can help you fix. Sorry."
-msgstr ""
+msgstr "There's nothing on your ship that I can help you fix. Sorry."
 
 #: scripts/scenario_43_the_omicron_plague.lua:13541
 msgctxt "msgGM"
 msgid "Empty Template pool: fix excludes or other criteria"
-msgstr ""
+msgstr "Empty Template pool: fix excludes or other criteria"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13839
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
-msgstr ""
+msgstr "Medical team has revived one of your repair crew"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13851
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
-msgstr ""
+msgstr "Medical team has revived one of your repair crew"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13887
 msgctxt "coolant-msgEngineer"
 msgid "Automated systems have recovered some coolant"
-msgstr ""
+msgstr "Automated systems have recovered some coolant"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13897
 msgctxt "coolant-msgEngineer+"
 msgid "Automated systems have recovered some coolant"
-msgstr ""
+msgstr "Automated systems have recovered some coolant"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13946
 #: scripts/scenario_43_the_omicron_plague.lua:13995
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "One of your repair crew has perished"
 
 #: scripts/scenario_43_the_omicron_plague.lua:13957
 #: scripts/scenario_43_the_omicron_plague.lua:14006
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "One of your repair crew has perished"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14033
 msgctxt "coolant-msgEngineer"
 msgid "Damage has caused a loss of coolant"
-msgstr ""
+msgstr "Damage has caused a loss of coolant"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14044
 msgctxt "coolant-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
-msgstr ""
+msgstr "Damage has caused a loss of coolant"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14058
 msgctxt "damage-msgEngineer"
 msgid "The probe launch system has been damaged"
-msgstr ""
+msgstr "The probe launch system has been damaged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14068
 msgctxt "damage-msgEngineer+"
 msgid "The probe launch system has been damaged"
-msgstr ""
+msgstr "The probe launch system has been damaged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14080
 msgctxt "damage-msgEngineer"
 msgid "The hacking system has been damaged"
-msgstr ""
+msgstr "The hacking system has been damaged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14090
 msgctxt "damage-msgEngineer+"
 msgid "The hacking system has been damaged"
-msgstr ""
+msgstr "The hacking system has been damaged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14102
 msgctxt "damage-msgEngineer"
 msgid "The scanners have been damaged"
-msgstr ""
+msgstr "The scanners have been damaged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14112
 msgctxt "damage-msgEngineer+"
 msgid "The scanners have been damaged"
-msgstr ""
+msgstr "The scanners have been damaged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14124
 msgctxt "damage-msgEngineer"
 msgid "Combat maneuver has been damaged"
-msgstr ""
+msgstr "Combat manoeuvre has been damaged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14134
 msgctxt "damage-msgEngineer+"
 msgid "Combat maneuver has been damaged"
-msgstr ""
+msgstr "Combat manoeuvre has been damaged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14146
 msgctxt "damage-msgEngineer"
 msgid "Self destruct system has been damaged"
-msgstr ""
+msgstr "Self destruct system has been damaged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14156
 msgctxt "damage-msgEngineer+"
 msgid "Self destruct system has been damaged"
-msgstr ""
+msgstr "Self destruct system has been damaged"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14186
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
-msgstr ""
+msgstr "Inventory"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14201
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
-msgstr ""
+msgstr "Inventory"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14217
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
-msgstr ""
+msgstr "%s Current cargo:"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14228
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
-msgstr ""
+msgstr "     %s: %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14237
 msgctxt "inventory-shipLog"
 msgid "     Empty"
-msgstr ""
+msgstr "     Empty"
 
 #: scripts/scenario_43_the_omicron_plague.lua:14240
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
-msgstr ""
+msgstr "Available space: %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:15224
 msgctxt "scienceDB"
@@ -3612,14 +3612,14 @@ msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
 "the Farco 3, the beams are longer and faster and the shields are slightly "
 "stronger."
-msgstr ""
+msgstr "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 3, the beams are longer and faster and the shields are slightly stronger."
 
 #: scripts/scenario_43_the_omicron_plague.lua:15261
 msgctxt "scienceDB"
 msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
 "the Farco 5, the tubes load faster and the shields are slightly stronger."
-msgstr ""
+msgstr "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 5, the tubes load faster and the shields are slightly stronger."
 
 #: scripts/scenario_43_the_omicron_plague.lua:15300
 msgctxt "scienceDB"
@@ -3627,7 +3627,7 @@ msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
 "the Farco 8, the beams are longer and faster, the tubes load faster and the "
 "shields are stronger."
-msgstr ""
+msgstr "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 8, the beams are longer and faster, the tubes load faster and the shields are stronger."
 
 #: scripts/scenario_43_the_omicron_plague.lua:15339
 msgctxt "scienceDB"
@@ -3635,7 +3635,7 @@ msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
 "the Farco 11, the maneuver speed is faster, the beams are longer and faster, "
 "there's an added longer sniping beam and the shields are stronger."
-msgstr ""
+msgstr "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 11, the manoeuvre speed is faster, the beams are longer and faster, there's an added longer sniping beam and the shields are stronger."
 
 #: scripts/scenario_43_the_omicron_plague.lua:15384
 msgctxt "scienceDB"
@@ -3644,7 +3644,7 @@ msgid ""
 "the Farco 13, the maneuver speed is faster, the beams are longer and faster, "
 "there's an added longer sniping beam, the tubes load faster, there are more "
 "missiles and the shields are stronger."
-msgstr ""
+msgstr "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 13, the manoeuvre speed is faster, the beams are longer and faster, there's an added longer sniping beam, the tubes load faster, there are more missiles and the shields are stronger."
 
 #: scripts/scenario_43_the_omicron_plague.lua:15431
 msgctxt "scienceDB"
@@ -3652,14 +3652,14 @@ msgid ""
 "The Whirlwind, another heavy artillery cruiser, takes the Storm and adds "
 "tubes and missiles. It's as if the Storm swallowed a Pirahna and grew gills. "
 "Expect to see missiles, lots of missiles"
-msgstr ""
+msgstr "The Whirlwind, another heavy artillery cruiser, takes the Storm and adds tubes and missiles. It's as if the Storm swallowed a Pirahna and grew gills. Expect to see missiles, lots of missiles"
 
 #: scripts/scenario_43_the_omicron_plague.lua:15475
 msgctxt "scienceDB"
 msgid ""
 "The Phobos R2 model is very similar to the Phobos T3. It's got a faster turn "
 "speed, but only one missile tube"
-msgstr ""
+msgstr "The Phobos R2 model is very similar to the Phobos T3. It's got a faster turn speed, but only one missile tube"
 
 #: scripts/scenario_43_the_omicron_plague.lua:15512
 msgctxt "scienceDB"
@@ -3668,7 +3668,7 @@ msgid ""
 "more damage than both of the other Hornet models, it's max impulse speed is "
 "faster than both of the other Hornet models, it turns faster than the MT52, "
 "but slower than the MU52"
-msgstr ""
+msgstr "The MV52 Hornet is very similar to the MT52 and MU52 models. The beam does more damage than both of the other Hornet models, it's max impulse speed is faster than both of the other Hornet models, it turns faster than the MT52, but slower than the MU52"
 
 #: scripts/scenario_43_the_omicron_plague.lua:15542
 msgctxt "scienceDB"
@@ -3676,7 +3676,7 @@ msgid ""
 "Enterprising designers published this design specification based on salvaged "
 "Ktlitan Fighters. Comparatively, it's got beams that cycle faster, but the "
 "hull is a bit weaker."
-msgstr ""
+msgstr "Enterprising designers published this design specification based on salvaged Ktlitan Fighters. Comparatively, it's got beams that cycle faster, but the hull is a bit weaker."
 
 #: scripts/scenario_43_the_omicron_plague.lua:15572
 msgctxt "scienceDB"
@@ -3684,21 +3684,21 @@ msgid ""
 "Enterprising designers published this design specification based on salvaged "
 "Ktlitan Fighters. Comparatively, it's got beams that are stronger and that "
 "cycle faster, but the hull is weaker."
-msgstr ""
+msgstr "Enterprising designers published this design specification based on salvaged Ktlitan Fighters. Comparatively, it's got beams that are stronger and that cycle faster, but the hull is weaker."
 
 #: scripts/scenario_43_the_omicron_plague.lua:15605
 msgctxt "scienceDB"
 msgid ""
 "Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
 "warp drives to them to produce the Waddle 5"
-msgstr ""
+msgstr "Conversions R Us purchased a number of Adder MK 5 ships at auction and added warp drives to them to produce the Waddle 5"
 
 #: scripts/scenario_43_the_omicron_plague.lua:15640
 msgctxt "scienceDB"
 msgid ""
 "Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
 "jump drives to them to produce the Jade 5"
-msgstr ""
+msgstr "Conversions R Us purchased a number of Adder MK 5 ships at auction and added jump drives to them to produce the Jade 5"
 
 #: scripts/scenario_43_the_omicron_plague.lua:15673
 msgctxt "scienceDB"
@@ -3706,14 +3706,14 @@ msgid ""
 "The light drone was pieced together from scavenged parts of various damaged "
 "Ktlitan drones. Compared to the Ktlitan drone, the lite drone has a weaker "
 "hull, and a weaker beam, but a faster turn and impulse speed"
-msgstr ""
+msgstr "The light drone was pieced together from scavenged parts of various damaged Ktlitan drones. Compared to the Ktlitan drone, the lite drone has a weaker hull, and a weaker beam, but a faster turn and impulse speed"
 
 #: scripts/scenario_43_the_omicron_plague.lua:15703
 msgctxt "scienceDB"
 msgid ""
 "The heavy drone has a stronger hull and a stronger beam than the normal "
 "Ktlitan Drone, but it also moves slower"
-msgstr ""
+msgstr "The heavy drone has a stronger hull and a stronger beam than the normal Ktlitan Drone, but it also moves slower"
 
 #: scripts/scenario_43_the_omicron_plague.lua:15739
 msgctxt "scienceDB"
@@ -3721,7 +3721,7 @@ msgid ""
 "The Jacket Drone is a Ktlitan Drone with a shield. It's also slightly slower "
 "and has a slightly weaker beam due to the energy requirements of the added "
 "shield"
-msgstr ""
+msgstr "The Jacket Drone is a Ktlitan Drone with a shield. It's also slightly slower and has a slightly weaker beam due to the energy requirements of the added shield"
 
 #: scripts/scenario_43_the_omicron_plague.lua:15774
 msgctxt "scienceDB"
@@ -3730,7 +3730,7 @@ msgid ""
 "homing missiles and added nukes. They had to remove some of the armor to get "
 "the additional missiles to fit, so the hull is weaker. Also, the WZ turns a "
 "little more slowly than the WX. This little bomber packs quite a whallop."
-msgstr ""
+msgstr "The WZ-Lindworm is essentially the stock WX-Lindworm with more HVLIs, more homing missiles and added nukes. They had to remove some of the armour to get the additional missiles to fit, so the hull is weaker. Also, the WZ turns a little more slowly than the WX. This little bomber packs quite a whallop."
 
 #: scripts/scenario_43_the_omicron_plague.lua:15825
 msgctxt "scienceDB"
@@ -3739,7 +3739,7 @@ msgid ""
 "tubes (two on each side), more HVLIs, more Homing missiles and 8 Nukes. The "
 "Tempest can strike fear into the hearts of your enemies. Get yourself one "
 "today!"
-msgstr ""
+msgstr "Loosely based on the Piranha F12 model, the Tempest adds four more broadside tubes (two on each side), more HVLIs, more Homing missiles and 8 Nukes. The Tempest can strike fear into the hearts of your enemies. Get yourself one today!"
 
 #: scripts/scenario_43_the_omicron_plague.lua:15889
 msgctxt "scienceDB"
@@ -3748,7 +3748,7 @@ msgid ""
 "and impulse engines boosted along with turning speed. Three missile tubes "
 "were added to shoot homing missiles, large ones straight ahead. Stronger "
 "shields and hull. Removed rear facing beams and strengthened front beams."
-msgstr ""
+msgstr "The Enforcer is a highly modified Blockade Runner. A warp drive was added and impulse engines boosted along with turning speed. Three missile tubes were added to shoot homing missiles, large ones straight ahead. Stronger shields and hull. Removed rear facing beams and strengthened front beams."
 
 #: scripts/scenario_43_the_omicron_plague.lua:15956
 msgctxt "scienceDB"
@@ -3757,14 +3757,14 @@ msgid ""
 "hull, faster impulse and turning speeds, a jump drive, beam weapons, eight "
 "missile tubes pointing in six directions and a large number of homing "
 "missiles to shoot."
-msgstr ""
+msgstr "The Predator is a significantly improved Piranha F8. Stronger shields and hull, faster impulse and turning speeds, a jump drive, beam weapons, eight missile tubes pointing in six directions and a large number of homing missiles to shoot."
 
 #: scripts/scenario_43_the_omicron_plague.lua:16007
 msgctxt "scienceDB"
 msgid ""
 "The Atlantis Y42 improves on the Atlantis X23 with stronger shields, faster "
 "impulse and turn speeds, an extra beam in back and a larger missile stock"
-msgstr ""
+msgstr "The Atlantis Y42 improves on the Atlantis X23 with stronger shields, faster impulse and turn speeds, an extra beam in back and a larger missile stock"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16053
 msgctxt "scienceDB"
@@ -3773,7 +3773,7 @@ msgid ""
 "Starhammer II: stronger shields, faster impulse and turning speeds, "
 "additional rear beam and more missiles to shoot. These changes make the "
 "Starhammer V a force to be reckoned with."
-msgstr ""
+msgstr "The Starhammer V recognises common modifications made in the field to the Starhammer II: stronger shields, faster impulse and turning speeds, additional rear beam and more missiles to shoot. These changes make the Starhammer V a force to be reckoned with."
 
 #: scripts/scenario_43_the_omicron_plague.lua:16104
 msgctxt "scienceDB"
@@ -3783,21 +3783,21 @@ msgid ""
 "on the Battlestation by fitting the Tyr with more than twice the impulse "
 "speed and more than six times the turn speed. They threw in stronger shields "
 "and hull and wider beam coverage just to show that they could"
-msgstr ""
+msgstr "The Tyr is the shipyard's answer to admiral Konstatz' casual statement that the Battlestation model was too slow to be effective. The shipyards improved on the Battlestation by fitting the Tyr with more than twice the impulse speed and more than six times the turn speed. They threw in stronger shields and hull and wider beam coverage just to show that they could"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16133
 msgctxt "scienceDB"
 msgid ""
 "The Gnat is a nimbler version of the Ktlitan Drone. It's got half the hull, "
 "but it moves and turns faster"
-msgstr ""
+msgstr "The Gnat is a nimbler version of the Ktlitan Drone. It's got half the hull, but it moves and turns faster"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16171
 msgctxt "scienceDB"
 msgid ""
 "The Cucaracha is a quick ship built around the Tug model with heavy shields "
 "and a heavy beam designed to be difficult to squash"
-msgstr ""
+msgstr "The Cucaracha is a quick ship built around the Tug model with heavy shields and a heavy beam designed to be difficult to squash"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16209
 msgctxt "scienceDB"
@@ -3805,7 +3805,7 @@ msgid ""
 "The designers of the Starhammer III took the Starhammer II and added a rear "
 "facing beam, enlarged one of the missile tubes and added more missiles to "
 "fire"
-msgstr ""
+msgstr "The designers of the Starhammer III took the Starhammer II and added a rear facing beam, enlarged one of the missile tubes and added more missiles to fire"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16256
 msgctxt "scienceDB"
@@ -3813,7 +3813,7 @@ msgid ""
 "The K2 Breaker designers took the Ktlitan Breaker and beefed up the hull, "
 "added two bracketing tubes, enlarged the center tube and added more missiles "
 "to shoot. Should be good for a couple of enemy ships"
-msgstr ""
+msgstr "The K2 Breaker designers took the Ktlitan Breaker and beefed up the hull, added two bracketing tubes, enlarged the centre tube and added more missiles to shoot. Should be good for a couple of enemy ships"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16309
 msgctxt "scienceDB"
@@ -3821,7 +3821,7 @@ msgid ""
 "The Hurricane is designed to jump in and shower the target with missiles. It "
 "is based on the Piranha F8, but with a jump drive, five more tubes in "
 "various directions and sizes and lots more missiles to shoot"
-msgstr ""
+msgstr "The Hurricane is designed to jump in and shower the target with missiles. It is based on the Piranha F8, but with a jump drive, five more tubes in various directions and sizes and lots more missiles to shoot"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16353
 msgctxt "scienceDB"
@@ -3829,7 +3829,7 @@ msgid ""
 "The Phobos T4 makes some simple improvements on the Phobos T3: faster "
 "maneuver, stronger front shields, though weaker rear shields and longer and "
 "faster beam weapons"
-msgstr ""
+msgstr "The Phobos T4 makes some simple improvements on the Phobos T3: faster manoeuvre, stronger front shields, though weaker rear shields and longer and faster beam weapons"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16434
 msgctxt "scienceDB"
@@ -3837,7 +3837,7 @@ msgid ""
 "Small, medium and large scale transport ships. These are the working ships "
 "that keep commerce going in any sector. They may carry personnel, goods, "
 "cargo, equipment, garbage, fuel, research material, etc."
-msgstr ""
+msgstr "Small, medium and large scale transport ships. These are the working ships that keep commerce going in any sector. They may carry personnel, goods, cargo, equipment, garbage, fuel, research material, etc."
 
 #: scripts/scenario_43_the_omicron_plague.lua:16505
 msgctxt "scienceDB"
@@ -3845,31 +3845,31 @@ msgid ""
 "The Service Jonque is a modified Equipment Jump Freighter 4. It's designed "
 "to carry spare parts and equipment as well as the necessary repair personnel "
 "to where it's needed to repair stations and ships"
-msgstr ""
+msgstr "The Service Jonque is a modified Equipment Jump Freighter 4. It's designed to carry spare parts and equipment as well as the necessary repair personnel to where it's needed to repair stations and ships"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16658
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f u/min"
-msgstr ""
+msgstr "%.1f u/min"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16673
 #, lua-format
 msgctxt "scienceDB"
 msgid "Beam weapon %i:%i"
-msgstr ""
+msgstr "Beam weapon %i:%i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16683
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f Dmg / %.1f sec"
-msgstr ""
+msgstr "%.1f Dmg / %.1f sec"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16711
 #, lua-format
 msgctxt "scienceDB"
 msgid "Storage %s"
-msgstr ""
+msgstr "Storage %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16975
 #, lua-format
@@ -3882,19 +3882,19 @@ msgid ""
 "\n"
 "Please ensure the safe arrival of freighter %s at %s. Looks like the Exuari "
 "might attack them."
-msgstr ""
+msgstr "To: %s\nFrom: %s\n\nGreetings %s,\n\nPlease ensure the safe arrival of freighter %s at %s. Looks like the Exuari might attack them."
 
 #: scripts/scenario_43_the_omicron_plague.lua:16992
 #: scripts/scenario_43_the_omicron_plague.lua:17111
 msgctxt "msgMainscreen"
 msgid "The freighter blew up"
-msgstr ""
+msgstr "The freighter blew up"
 
 #: scripts/scenario_43_the_omicron_plague.lua:16996
 #: scripts/scenario_43_the_omicron_plague.lua:17106
 msgctxt "msgMainscreen"
 msgid "Regional headquarters blew up"
-msgstr ""
+msgstr "Regional headquarters blew up"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17016
 #, lua-format
@@ -3908,66 +3908,66 @@ msgid ""
 "Our engines just conked out and the only person we have that can fix them is "
 "too sick to work on them. Can you send over one of you repair crew to help "
 "us, please?"
-msgstr ""
+msgstr "To: %s\nFrom: %s\n\n%s,\n\nOur engines just conked out and the only person we have that can fix them is too sick to work on them. Can you send over one of you repair crew to help us, please?"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17030
 msgctxt "crewTransfer-buttonEngineer"
 msgid "Send Repair Crew"
-msgstr ""
+msgstr "Send Repair Crew"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17044
 msgctxt "crewTransfer-buttonEngineer+"
 msgid "Send Repair Crew"
-msgstr ""
+msgstr "Send Repair Crew"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17058
 msgctxt "crewTransfer-buttonDamageControl"
 msgid "Send Repair Crew"
-msgstr ""
+msgstr "Send Repair Crew"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17095
 #, lua-format
 msgctxt "shipLog"
 msgid "The engines on %s have been repaired"
-msgstr ""
+msgstr "The engines on %s have been repaired"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17130
 #, lua-format
 msgctxt "crewTransfer-msgEngineer"
 msgid ""
 "We cannot transport a repair crew member from %s while the shields are up."
-msgstr ""
+msgstr "We cannot transport a repair crew member from %s while the shields are up."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17143
 #, lua-format
 msgctxt "crewTransfer-msgEngineer+"
 msgid ""
 "We cannot transport a repair crew member from %s while the shields are up."
-msgstr ""
+msgstr "We cannot transport a repair crew member from %s while the shields are up."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17163
 #, lua-format
 msgctxt "crewTransfer-msgEngineer"
 msgid "%s is moving too fast to transport a repair crew member from %s."
-msgstr ""
+msgstr "%s is moving too fast to transport a repair crew member from %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17177
 #, lua-format
 msgctxt "crewTransfer-msgEngineer+"
 msgid "%s is moving too fast to transport a repair crew member from %s."
-msgstr ""
+msgstr "%s is moving too fast to transport a repair crew member from %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17192
 #, lua-format
 msgctxt "crewTransfer-msgEngineer"
 msgid "Repair crew member retrieved from %s"
-msgstr ""
+msgstr "Repair crew member retrieved from %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17205
 #, lua-format
 msgctxt "crewTransfer-msgEngineer+"
 msgid "Repair crew member retrieved from %s"
-msgstr ""
+msgstr "Repair crew member retrieved from %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17231
 #: scripts/scenario_43_the_omicron_plague.lua:17489
@@ -3976,7 +3976,7 @@ msgctxt "crewTransfer-msgEngineer"
 msgid ""
 "%s is too far from %s to transport a repair crew member. Functional "
 "transport may occur at or under 3 units"
-msgstr ""
+msgstr "%s is too far from %s to transport a repair crew member. Functional transport may occur at or under 3 units"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17244
 #: scripts/scenario_43_the_omicron_plague.lua:17502
@@ -3985,30 +3985,30 @@ msgctxt "crewTransfer-msgEngineer+"
 msgid ""
 "%s is too far from %s to transport a repair crew member. Functional "
 "transport may occur at or under 3 units"
-msgstr ""
+msgstr "%s is too far from %s to transport a repair crew member. Functional transport may occur at or under 3 units"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17260
 msgctxt "repairs-msgEngineer"
 msgid "Estimated time remaining on repairs: "
-msgstr ""
+msgstr "Estimated time remaining on repairs: "
 
 #: scripts/scenario_43_the_omicron_plague.lua:17264
 #, lua-format
 msgctxt "repairs-msgEngineer"
 msgid "%s %i seconds"
-msgstr ""
+msgstr "%s %i seconds"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17271
 #, lua-format
 msgctxt "repairs-msgEngineer"
 msgid "%s %i minutes and %i seconds"
-msgstr ""
+msgstr "%s %i minutes and %i seconds"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17278
 #, lua-format
 msgctxt "repairs-msgEngineer"
 msgid "%s %i minute and %i seconds"
-msgstr ""
+msgstr "%s %i minute and %i seconds"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17292
 #: scripts/scenario_43_the_omicron_plague.lua:17306
@@ -4018,33 +4018,33 @@ msgid ""
 "[Repair Crewmember on %s]\n"
 "We're not done with engine repairs on %s yet.\n"
 "%s."
-msgstr ""
+msgstr "[Repair Crewmember on %s]\nWe're not done with engine repairs on %s yet.\n%s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17328
 #, lua-format
 msgctxt "crewTransfer-msgEngineer"
 msgid ""
 "We cannot transport a repair crew member to %s while the shields are up."
-msgstr ""
+msgstr "We cannot transport a repair crew member to %s while the shields are up."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17341
 #, lua-format
 msgctxt "crewTransfer-msgEngineer+"
 msgid ""
 "We cannot transport a repair crew member to %s while the shields are up."
-msgstr ""
+msgstr "We cannot transport a repair crew member to %s while the shields are up."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17360
 #, lua-format
 msgctxt "crewTransfer-msgEngineer"
 msgid "%s is moving too fast to transport a repair crew member to %s."
-msgstr ""
+msgstr "%s is moving too fast to transport a repair crew member to %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17373
 #, lua-format
 msgctxt "crewTransfer-msgEngineer+"
 msgid "%s is moving too fast to transport a repair crew member to %s."
-msgstr ""
+msgstr "%s is moving too fast to transport a repair crew member to %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17390
 #, lua-format
@@ -4052,47 +4052,47 @@ msgctxt "crewTransfer-shipLog"
 msgid ""
 "%s has transported one of her repair crew to %s. They report that the "
 "engines should be fixed in a minute or two."
-msgstr ""
+msgstr "%s has transported one of her repair crew to %s. They report that the engines should be fixed in a minute or two."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17413
 msgctxt "crewTransfer-buttonEngineer"
 msgid "Get Repair Crew"
-msgstr ""
+msgstr "Get Repair Crew"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17427
 #: scripts/scenario_43_the_omicron_plague.lua:17441
 msgctxt "crewTransfer-buttonEngineer+"
 msgid "Get Repair Crew"
-msgstr ""
+msgstr "Get Repair Crew"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17458
 #, lua-format
 msgctxt "crewTransfer-msgEngineer"
 msgid ""
 "We don't have any repair crew to send over to %s. We might get one from %s"
-msgstr ""
+msgstr "We don't have any repair crew to send over to %s. We might get one from %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17472
 #, lua-format
 msgctxt "crewTransfer-msgEngineer+"
 msgid ""
 "We don't have any repair crew to send over to %s. We might get one from %s"
-msgstr ""
+msgstr "We don't have any repair crew to send over to %s. We might get one from %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17514
 msgctxt "mission1st-comms"
 msgid "unloading cargo"
-msgstr ""
+msgstr "unloading cargo"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17516
 msgctxt "mission1st-comms"
 msgid "picking up cargo"
-msgstr ""
+msgstr "picking up cargo"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17518
 msgctxt "mission1st-comms"
 msgid "disembarking passengers"
-msgstr ""
+msgstr "disembarking passengers"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17527
 #, lua-format
@@ -4104,14 +4104,14 @@ msgid ""
 "Hello %s,\n"
 "\n"
 "Freighter %s has safely docked and is %s. Thanks for your assistance."
-msgstr ""
+msgstr "To: %s\nFrom: %s\n\nHello %s,\n\nFreighter %s has safely docked and is %s. Thanks for your assistance."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17543
 #: scripts/scenario_43_the_omicron_plague.lua:17664
 #, lua-format
 msgctxt "orders-comms"
 msgid "Protect station %s and other friendly stations and ships"
-msgstr ""
+msgstr "Protect station %s and other friendly stations and ships"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17579
 #, lua-format
@@ -4119,58 +4119,58 @@ msgctxt "orders-comms"
 msgid ""
 "Gather medical details and possible treatment from %s in roughly direction "
 "%i and return to %s"
-msgstr ""
+msgstr "Gather medical details and possible treatment from %s in roughly direction %i and return to %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17609
 msgctxt "msgMainscreen"
 msgid "Fargalli died. Omicron plague destroyed humanity"
-msgstr ""
+msgstr "Fargalli died. Omicron plague destroyed humanity"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17615
 msgctxt "-tabRelay&Operations"
 msgid "Ensign Death"
-msgstr ""
+msgstr "Ensign Death"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17618
 #: scripts/scenario_43_the_omicron_plague.lua:17860
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17624
 #: scripts/scenario_43_the_omicron_plague.lua:17866
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
-msgstr ""
+msgstr "%s %i:%.2i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17651
 #: scripts/scenario_43_the_omicron_plague.lua:17685
 msgctxt "msgMainscreen"
 msgid "HQ destroyed. Omicron plague destroyed humanity"
-msgstr ""
+msgstr "HQ destroyed. Omicron plague destroyed humanity"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17678
 msgctxt "msgMainscreen"
 msgid "Station destroyed. Omicron plague destroyed humanity"
-msgstr ""
+msgstr "Station destroyed. Omicron plague destroyed humanity"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17828
 #, lua-format
 msgctxt "orders-comms"
 msgid "Destroy Exuari Omicron plague research station in roughly direction %i"
-msgstr ""
+msgstr "Destroy Exuari Omicron plague research station in roughly direction %i"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17851
 msgctxt "msgMainscreen"
 msgid "The Exuari deployed the Omicron plague. Humanity destroyed"
-msgstr ""
+msgstr "The Exuari deployed the Omicron plague. Humanity destroyed"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17857
 msgctxt "-tabRelay&Operations"
 msgid "Omicron Broadcast"
-msgstr ""
+msgstr "Omicron Broadcast"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17903
 #, lua-format
@@ -4178,19 +4178,19 @@ msgctxt "shipLog"
 msgid ""
 "[%s] Our analysis of your routine ship telemetry indicates that you passed "
 "the Exuari plague station, %s."
-msgstr ""
+msgstr "[%s] Our analysis of your routine ship telemetry indicates that you passed the Exuari plague station, %s."
 
 #: scripts/scenario_43_the_omicron_plague.lua:17933
 #: scripts/scenario_43_the_omicron_plague.lua:17940
 msgctxt "msgMainscreen"
 msgid "Exuari Omicron plague station destroyed. Humanity saved"
-msgstr ""
+msgstr "Exuari Omicron plague station destroyed. Humanity saved"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17952
 #: scripts/scenario_43_the_omicron_plague.lua:17995
 msgctxt "msgMainscreen"
 msgid "Duration"
-msgstr ""
+msgstr "Duration"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17974
 #: scripts/scenario_43_the_omicron_plague.lua:18017
@@ -4199,16 +4199,16 @@ msgctxt "msgMainscreen"
 msgid ""
 "%s.\n"
 "Score: %i. %s"
-msgstr ""
+msgstr "%s.\nScore: %i. %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:17980
 #: scripts/scenario_43_the_omicron_plague.lua:18023
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s. Score: %i. %s"
-msgstr ""
+msgstr "%s. Score: %i. %s"
 
 #: scripts/scenario_43_the_omicron_plague.lua:18180
 msgctxt "stationReport-msgGM"
 msgid "script error - \n"
-msgstr ""
+msgstr "script error - \n"
