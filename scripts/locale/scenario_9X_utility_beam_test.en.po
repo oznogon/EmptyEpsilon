@@ -6,17 +6,17 @@ msgstr ""
 msgid "Test utility beam system functions"
 msgstr ""
 
-#: scripts/scenario_9X_utility_beam_test.lua:714
+#: scripts/scenario_9X_utility_beam_test.lua:1265
 msgctxt "buttonGM"
 msgid "Random asteroid field"
 msgstr ""
 
-#: scripts/scenario_9X_utility_beam_test.lua:724
+#: scripts/scenario_9X_utility_beam_test.lua:1276
 msgctxt "buttonGM"
 msgid "Random nebula field"
 msgstr ""
 
-#: scripts/scenario_9X_utility_beam_test.lua:733
+#: scripts/scenario_9X_utility_beam_test.lua:1282
 msgctxt "buttonGM"
 msgid "Delete unselected"
 msgstr ""

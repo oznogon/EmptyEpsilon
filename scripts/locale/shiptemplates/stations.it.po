@@ -10,10 +10,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.1\n"
+
 #: scripts/shiptemplates/stations.lua:5
 msgid "Small Station"
 msgstr "Stazione piccola"
-#: scripts/shiptemplates/stations.lua:6
+
+#: scripts/shiptemplates/stations.lua:11
 msgid ""
 "Stations of this size are often used as research outposts, listening "
 "stations, and security checkpoints. Crews turn over frequently in a small "
@@ -29,10 +31,12 @@ msgstr ""
 "predoni organizzati a volte ne approfittano posizionando nelle nebulose "
 "stazioni piccole che fungono da basi per incursioni. Hanno scudi leggeri e "
 "sono vulnerabili ad assalti in gruppo."
-#: scripts/shiptemplates/stations.lua:11
+
+#: scripts/shiptemplates/stations.lua:19
 msgid "Medium Station"
 msgstr "Stazione media"
-#: scripts/shiptemplates/stations.lua:12
+
+#: scripts/shiptemplates/stations.lua:25
 msgid ""
 "Large enough to accommodate small crews for extended periods of times, "
 "stations of this size are often trading posts, refuelling bases, mining "
@@ -44,10 +48,12 @@ msgstr ""
 "rifornimento, avamposti minerari e basi militari avanzate. Sebbene i loro "
 "scudi siano resistenti, gli attacchi combinati di molte navi possono "
 "abbatterli rapidamente."
-#: scripts/shiptemplates/stations.lua:17
+
+#: scripts/shiptemplates/stations.lua:33
 msgid "Large Station"
 msgstr "Stazione grande"
-#: scripts/shiptemplates/stations.lua:18
+
+#: scripts/shiptemplates/stations.lua:39
 msgid ""
 "These spaceborne communities often represent permanent bases in a sector. "
 "Stations of this size can be military installations, commercial hubs, deep-"
@@ -60,10 +66,12 @@ msgstr ""
 "commerciali, insediamenti nello spazio profondo e piccoli cantieri navali. "
 "Solo un attacco concentrato può penetrare gli scudi di una stazione grande e "
 "il suo scafo può resistere a tutte le armi tranne le più potenti."
-#: scripts/shiptemplates/stations.lua:23
+
+#: scripts/shiptemplates/stations.lua:47
 msgid "Huge Station"
 msgstr "Stazione enorme"
-#: scripts/shiptemplates/stations.lua:24
+
+#: scripts/shiptemplates/stations.lua:53
 msgid ""
 "The size of a sprawling town, stations at this scale represent a faction's "
 "center of spaceborne power in a region. They serve many functions at once "
@@ -78,294 +86,62 @@ msgstr ""
 "Gli scudi di una stazione enorme e lo spesso scafo possono mantenerla "
 "intatta abbastanza a lungo da far arrivare i rinforzi, anche di fronte ad un "
 "assedio in corso, o ad un massiccio assalto perfettamente coordinato."
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-# destroyer->incrociatore come hanno fatto per star wars
-# letteralmente sarebbe cacciatorpediniere
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
+
+#: scripts/shiptemplates/stations.lua:62
+msgctxt "ship"
+msgid "Weapons platform"
+msgstr ""
+
+#: scripts/shiptemplates/stations.lua:63
+msgctxt "class"
+msgid "Platform"
+msgstr ""
+
+#: scripts/shiptemplates/stations.lua:63
+msgctxt "subclass"
+msgid "Fortification"
+msgstr ""
+
+#: scripts/shiptemplates/stations.lua:68
+msgid ""
+"This stationary weapons platform resembles a station armed with powerful "
+"beam weapons, and it can slowly rotate. Unlike defense platforms, weapons "
+"platforms lack docking bays and have a more vulnerable hull."
+msgstr ""
+
+#: scripts/shiptemplates/stations.lua:84
+msgctxt "ship"
+msgid "Defense platform"
+msgstr ""
+
+#: scripts/shiptemplates/stations.lua:88
+msgid ""
+"This stationary defense platform operates like a station, with docking and "
+"resupply functions, but is armed with powerful beam weapons and can slowly "
+"rotate. Larger systems often use these platforms to resupply patrol ships."
+msgstr ""
+
+#: scripts/shiptemplates/stations.lua:93
+msgctxt "class"
+msgid "Corvette"
+msgstr ""
+
+#: scripts/shiptemplates/stations.lua:94
+msgctxt "class"
+msgid "Frigate"
+msgstr ""
+
+#: scripts/shiptemplates/stations.lua:97
+msgctxt "class"
+msgid "Cargo"
+msgstr ""
+
+#: scripts/shiptemplates/stations.lua:98
+msgctxt "class"
+msgid "Starfighter"
+msgstr ""
+
+#: scripts/shiptemplates/stations.lua:99
+msgctxt "class"
+msgid "Tug"
+msgstr ""

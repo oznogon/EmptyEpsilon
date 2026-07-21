@@ -10,17 +10,17 @@ msgid ""
 "clipboard for use in scenario scripts."
 msgstr ""
 
-#: scripts/scenario_90_empty_space.lua:102
+#: scripts/scenario_90_empty_space.lua:109
 msgctxt "buttonGM"
 msgid "Reset to asteroids"
 msgstr ""
 
-#: scripts/scenario_90_empty_space.lua:113
+#: scripts/scenario_90_empty_space.lua:121
 msgctxt "buttonGM"
 msgid "Reset to nebulae"
 msgstr ""
 
-#: scripts/scenario_90_empty_space.lua:123
+#: scripts/scenario_90_empty_space.lua:128
 msgctxt "buttonGM"
 msgid "Delete unselected"
 msgstr ""

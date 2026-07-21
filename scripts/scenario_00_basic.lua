@@ -1,16 +1,13 @@
 -- Name: Basic Battle
--- Description: A few random stations are under attack by enemies, with random terrain around them. Destroy all enemies to win.
----
---- The scenario provides a single player-controlled Atlantis, which is sufficient to win even in the "Extreme" variant.
----
---- Other player ships can be spawned, but the strength of enemy ships is independent of the number and types of player ships.
 -- Type: Basic
+--
 -- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
 -- Enemies[Empty]: No enemies. Recommended for GM-controlled scenarios and rookie crew orientation. The scenario continues until the GM declares victory or all Human Navy ships are destroyed.
 -- Enemies[Easy]: Fewer enemies. Recommended for inexperienced crews.
 -- Enemies[Normal|Default]: Normal amount of enemies. Recommended for a normal crew.
 -- Enemies[Hard]: More enemies. Recommended if you have multiple player-controlled ships.
 -- Enemies[Extreme]: Many enemies. Inexperienced player crews will pretty surely be overwhelmed.
+--
 -- Setting[Time]: Sets up how much time the players have for the scenario
 -- Time[Unlimited|Default]: No time limit
 -- Time[20min]: Automatic loss after 20 minutes
@@ -19,6 +16,12 @@
 -- Setting[PlayerShip]: Sets the default player ship
 -- PlayerShip[Atlantis|Default]: Powerful ship with sidewards missile tubes. Requires more advanced play.
 -- PlayerShip[Phobos M3P]: Simpler, less powerful ship. But easier to handle. Recommended for new crews.
+--
+-- Description: A few random stations are under attack by enemies, with random terrain around them. Destroy all enemies to win.
+---
+--- The scenario provides a single player-controlled Atlantis, which is sufficient to win even in the "Extreme" variant.
+---
+--- Other player ships can be spawned, but the strength of enemy ships is independent of the number and types of player ships.
 
 --- Scenario
 -- @script scenario_00_basic

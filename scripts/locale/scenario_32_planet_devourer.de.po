@@ -1,0 +1,4085 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+# Scenario name
+msgid "Planet Devourer"
+msgstr "Der Planetenverschlinger"
+
+# Scenario description
+msgid ""
+"Stop the Planet Devourer before all the planets are gone\n"
+"\n"
+"Written for EE games on May 4th, 2023 = \"May the 4th be with you\"\n"
+"\n"
+"Version 1\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+"There's one every weekend. All experience levels are welcome."
+msgstr ""
+"Haltet den Planetenverschlinger auf, bevor alle Planeten vernichtet werden\n"
+"\n"
+"Geschrieben für EE-Spiele am 4. Mai 2023 = „May the 4th be with you“\n"
+"\n"
+"Version 1\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a, wo ihr online an einem Spiel "
+"teilnehmen könnt. Fast jedes Wochenende findet eines statt. Alle "
+"Erfahrungsstufen sind willkommen."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr "Feinde"
+
+msgctxt "setting"
+msgid "Configures strength and/or number of enemies in this scenario"
+msgstr "Bestimmt Stärke und/oder Anzahl von feindlichen Schiffen im Szenario"
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr "Einfach"
+
+msgctxt "Enemies"
+msgid "Fewer or weaker enemies"
+msgstr "Weniger oder schwächere Feinde"
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "Enemies"
+msgid "Normal number or strength of enemies"
+msgstr "Normale Anzahl bzw. Stärke der Feinde"
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr "Schwer"
+
+msgctxt "Enemies"
+msgid "More or stronger enemies"
+msgstr "Mehr oder stärkere Feinde"
+
+msgctxt "Enemies"
+msgid "Extreme"
+msgstr "Extrem"
+
+msgctxt "Enemies"
+msgid "Much stronger, many more enemies"
+msgstr "Viel mehr, viel stärkere Feinde"
+
+msgctxt "Enemies"
+msgid "Quixotic"
+msgstr "Absurd"
+
+msgctxt "Enemies"
+msgid "Insanely strong and/or inordinately large numbers of enemies"
+msgstr "Wahnsinnig starke und/oder extrem viele Feinde"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Murphy"
+msgstr "Murphy"
+
+msgctxt "setting"
+msgid "Configures the perversity of the universe according to Murphy's law"
+msgstr "Konfiguriert die Bösartigkeit des Universums nach Murphys Gesetz"
+
+msgctxt "Murphy"
+msgid "Easy"
+msgstr "Einfach"
+
+msgctxt "Murphy"
+msgid "Random factors are more in your favor"
+msgstr "Der Zufall neigt sich zu euren Gunsten"
+
+msgctxt "Murphy"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "Murphy"
+msgid "Random factors are normal"
+msgstr "Zufallsfaktoren sind normal"
+
+msgctxt "Murphy"
+msgid "Hard"
+msgstr "Schwer"
+
+msgctxt "Murphy"
+msgid "Random factors are more against you"
+msgstr "Zufallsfaktoren sind eher gegen die Crew gerichtet"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Reputation"
+msgstr "Ruf"
+
+msgctxt "setting"
+msgid "Amount of reputation to start with"
+msgstr "Höhe des Rufs zu Beginn"
+
+msgctxt "Reputation"
+msgid "Unknown"
+msgstr "Unbekannt"
+
+msgctxt "Reputation"
+msgid "Zero reputation - nobody knows anything about you"
+msgstr "Keinerlei Ruf - Niemand weiß irgendwas über euch"
+
+msgctxt "Reputation"
+msgid "Nice"
+msgstr "Sympathisch"
+
+msgctxt "Reputation"
+msgid ""
+"20 reputation - you've had a small positive influence on the local community"
+msgstr ""
+"Ruf 20 - ihr habt ein wenig positiven Einfluss auf die lokale Community"
+
+msgctxt "Reputation"
+msgid "Hero"
+msgstr "Heldenhaft"
+
+msgctxt "Reputation"
+msgid "50 reputation - you helped important people or lots of people"
+msgstr ""
+"Ruf 50 - ihr habt schon mehreren Leuten oder wenigen wichtigen "
+"Persönlichkeiten geholfen"
+
+msgctxt "Reputation"
+msgid "Major Hero"
+msgstr "Sehr heldenhaft"
+
+msgctxt "Reputation"
+msgid ""
+"100 reputation - you're well known by nearly everyone as a force for good"
+msgstr "100 Ruf - Ihr seid bei nahezu allen als eine Kraft des Guten bekannt"
+
+msgctxt "Reputation"
+msgid "Super Hero"
+msgstr "Superheldenhaft"
+
+msgctxt "Reputation"
+msgid "200 reputation - everyone knows you and relies on you for help"
+msgstr ""
+"200 Ruf - Ihr seit überall bekannt, und alle zählen auf euch und eure Hilfe"
+
+#: scripts/scenario_32_planet_devourer.lua:134
+#: scripts/scenario_32_planet_devourer.lua:6028
+msgctxt "orders-comms"
+msgid "Save the planets from destruction"
+msgstr "Retten Sie die Planeten vor der Zerstörung"
+
+#: scripts/scenario_32_planet_devourer.lua:2577
+msgctxt "trade-comms"
+msgid "food"
+msgstr "Lebensmittel"
+
+#: scripts/scenario_32_planet_devourer.lua:2578
+msgctxt "trade-comms"
+msgid "medicine"
+msgstr "Medizin"
+
+#: scripts/scenario_32_planet_devourer.lua:2579
+msgctxt "trade-comms"
+msgid "luxury"
+msgstr "Luxus"
+
+#: scripts/scenario_32_planet_devourer.lua:2580
+msgctxt "trade-comms"
+msgid "cobalt"
+msgstr "Kobalt"
+
+#: scripts/scenario_32_planet_devourer.lua:2581
+msgctxt "trade-comms"
+msgid "dilithium"
+msgstr "Dilithium"
+
+#: scripts/scenario_32_planet_devourer.lua:2582
+msgctxt "trade-comms"
+msgid "gold"
+msgstr "Gold"
+
+#: scripts/scenario_32_planet_devourer.lua:2583
+msgctxt "trade-comms"
+msgid "nickel"
+msgstr "Nickel"
+
+#: scripts/scenario_32_planet_devourer.lua:2584
+msgctxt "trade-comms"
+msgid "platinum"
+msgstr "Platin"
+
+#: scripts/scenario_32_planet_devourer.lua:2585
+msgctxt "trade-comms"
+msgid "tritanium"
+msgstr "Tritanium"
+
+#: scripts/scenario_32_planet_devourer.lua:2586
+msgctxt "trade-comms"
+msgid "autodoc"
+msgstr "Autodocs"
+
+#: scripts/scenario_32_planet_devourer.lua:2587
+msgctxt "trade-comms"
+msgid "android"
+msgstr "Androidenkomp."
+
+#: scripts/scenario_32_planet_devourer.lua:2588
+msgctxt "trade-comms"
+msgid "battery"
+msgstr "Batterien"
+
+#: scripts/scenario_32_planet_devourer.lua:2589
+msgctxt "trade-comms"
+msgid "beam"
+msgstr "Laser"
+
+#: scripts/scenario_32_planet_devourer.lua:2590
+msgctxt "trade-comms"
+msgid "circuit"
+msgstr "Schaltkreise"
+
+#: scripts/scenario_32_planet_devourer.lua:2591
+msgctxt "trade-comms"
+msgid "communication"
+msgstr "Kommunikation"
+
+#: scripts/scenario_32_planet_devourer.lua:2592
+msgctxt "trade-comms"
+msgid "filament"
+msgstr "Filament"
+
+#: scripts/scenario_32_planet_devourer.lua:2593
+msgctxt "trade-comms"
+msgid "impulse"
+msgstr "Impuls"
+
+#: scripts/scenario_32_planet_devourer.lua:2594
+msgctxt "trade-comms"
+msgid "lifter"
+msgstr "Lastenheber"
+
+#: scripts/scenario_32_planet_devourer.lua:2595
+msgctxt "trade-comms"
+msgid "nanites"
+msgstr "Naniten"
+
+#: scripts/scenario_32_planet_devourer.lua:2596
+msgctxt "trade-comms"
+msgid "optic"
+msgstr "Optik"
+
+#: scripts/scenario_32_planet_devourer.lua:2597
+msgctxt "trade-comms"
+msgid "repulsor"
+msgstr "Repulsor"
+
+#: scripts/scenario_32_planet_devourer.lua:2598
+msgctxt "trade-comms"
+msgid "robotic"
+msgstr "Robotik"
+
+#: scripts/scenario_32_planet_devourer.lua:2599
+msgctxt "trade-comms"
+msgid "sensor"
+msgstr "Sensor"
+
+#: scripts/scenario_32_planet_devourer.lua:2600
+msgctxt "trade-comms"
+msgid "shield"
+msgstr "Schilde"
+
+#: scripts/scenario_32_planet_devourer.lua:2601
+msgctxt "trade-comms"
+msgid "software"
+msgstr "Software"
+
+#: scripts/scenario_32_planet_devourer.lua:2602
+msgctxt "trade-comms"
+msgid "tractor"
+msgstr "Traktor"
+
+#: scripts/scenario_32_planet_devourer.lua:2603
+msgctxt "trade-comms"
+msgid "transporter"
+msgstr "Transporter"
+
+#: scripts/scenario_32_planet_devourer.lua:2604
+msgctxt "trade-comms"
+msgid "warp"
+msgstr "Warp"
+
+#: scripts/scenario_32_planet_devourer.lua:2605
+msgctxt "trade-comms"
+msgid "gold pressed latinum"
+msgstr "goldgepresstes Latinum"
+
+#: scripts/scenario_32_planet_devourer.lua:2606
+msgctxt "trade-comms"
+msgid "unobtanium"
+msgstr "Unobtanium"
+
+#: scripts/scenario_32_planet_devourer.lua:2607
+msgctxt "trade-comms"
+msgid "eludium"
+msgstr "Eludium"
+
+#: scripts/scenario_32_planet_devourer.lua:2608
+msgctxt "trade-comms"
+msgid "impossibrium"
+msgstr "Impossibrium"
+
+#: scripts/scenario_32_planet_devourer.lua:2638
+msgctxt "scienceDB"
+msgid "Weapons"
+msgstr "Waffen"
+
+#: scripts/scenario_32_planet_devourer.lua:2646
+msgctxt "scienceDB"
+msgid ""
+"This database only covers the basic versions of the missiles used throughout "
+"the galaxy.\n"
+"\n"
+"It has been reported that some battleships started using larger variations "
+"of those missiles. Small fighters and even frigates should not have too much "
+"trouble dodging them, but space captains of bigger ships should be wary of "
+"their doubled damage potential.\n"
+"\n"
+"Smaller variations of these missiles have become common in the galaxy, too. "
+"Fighter pilots praise their speed and maneuverability, because it gives them "
+"an edge against small and fast-moving targets. They only deal half the "
+"damage of their basic counterparts, but what good is a missile if it does "
+"not hit its target?\n"
+"\n"
+"Some ships in your fleet have been equipped with these different sized "
+"weapons tubes. In some cases, the weapons officer might see a banner on the "
+"weapons console describing these tubes using the following shorthand:\n"
+"    S = Small\n"
+"    M = Medium (the normal sized missile tube)\n"
+"    L = Large\n"
+"These letters describe the tube sizes in order from top to bottom."
+msgstr ""
+"Diese Datenbank umfasst nur die Grundversionen der in der Galaxie "
+"verwendeten Raketen. \n"
+"\n"
+"Es wurde berichtet, dass einige Schlachtschiffe begonnen haben, größere "
+"Varianten dieser Raketen zu verwenden. Kleine Jäger und sogar Fregatten "
+"sollten keine allzu großen Probleme haben, ihnen auszuweichen, aber Captains "
+"größerer Schiffe sollten sich vor ihrem doppelten Schadenspotenzial in Acht "
+"nehmen.\n"
+"\n"
+"Kleinere Varianten dieser Raketen sind in der Galaxis ebenfalls weit "
+"verbreitet. Die Crew von von Raumjägern lobt ihre Geschwindigkeit und "
+"Manövrierfähigkeit, weil sie ihnen einen Vorteil gegen kleine und sich "
+"schnell bewegende Ziele verschaffen. Sie richten zwar nur halb so viel "
+"Schaden an wie ihre Grundmodelle, aber was nützt eine Rakete, wenn sie ihr "
+"Ziel nicht trifft?\n"
+"\n"
+"Einige Schiffe in Ihrer Flotte sind mit diesen unterschiedlich großen "
+"Raketenschächten ausgestattet. In manchen Fällen ist an der Waffenkonsole "
+"ein Banner zu sehen, auf dem diese Schächte in der folgenden Kurzform "
+"beschrieben werden:\n"
+"    S = Klein\n"
+"    M = Mittel (die normale Größe des Raketenschacht)\n"
+"    L = Groß"
+
+#: scripts/scenario_32_planet_devourer.lua:2658
+#: scripts/scenario_32_planet_devourer.lua:2673
+#: scripts/scenario_32_planet_devourer.lua:2691
+#, lua-format
+msgctxt "buttonGM"
+msgid "Version %s"
+msgstr "Version %s"
+
+#: scripts/scenario_32_planet_devourer.lua:2661
+#: scripts/scenario_32_planet_devourer.lua:2676
+#: scripts/scenario_32_planet_devourer.lua:2694
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Scenario version %s\n"
+" LUA version %s"
+msgstr ""
+"Szenario-Version %s\n"
+" LUA-Version %s"
+
+#: scripts/scenario_32_planet_devourer.lua:2668
+#: scripts/scenario_32_planet_devourer.lua:2683
+#: scripts/scenario_32_planet_devourer.lua:2701
+msgctxt "buttonGM"
+msgid "+Station Reports"
+msgstr "+Stationsbericht"
+
+#: scripts/scenario_32_planet_devourer.lua:2684
+msgctxt "buttonGM"
+msgid "+Difficulty"
+msgstr "+Schwierigkeit"
+
+#: scripts/scenario_32_planet_devourer.lua:2685
+msgctxt "buttonGM"
+msgid "+Enemy Power"
+msgstr "+Feind-Energie"
+
+#: scripts/scenario_32_planet_devourer.lua:2686
+msgctxt "buttonGM"
+msgid "+Reputation"
+msgstr "+Ruf"
+
+#: scripts/scenario_32_planet_devourer.lua:2702
+msgctxt "buttonGM"
+msgid "Nerf Devourer"
+msgstr "Schwäche Verschlinger"
+
+#: scripts/scenario_32_planet_devourer.lua:2703
+msgctxt "buttonGM"
+msgid "Un-nerf Devourer"
+msgstr "Stärke Verschlinger"
+
+#: scripts/scenario_32_planet_devourer.lua:2713
+msgctxt "buttonGM"
+msgid "Protector End"
+msgstr "Protector Ende"
+
+#: scripts/scenario_32_planet_devourer.lua:2717
+msgctxt "buttonGM"
+msgid "-From Enemy Power"
+msgstr "<-Hauptmenü"
+
+#: scripts/scenario_32_planet_devourer.lua:2719
+#: scripts/scenario_32_planet_devourer.lua:2741
+msgctxt "buttonGM"
+msgid "Easy"
+msgstr "Einfach"
+
+#: scripts/scenario_32_planet_devourer.lua:2720
+#: scripts/scenario_32_planet_devourer.lua:2742
+msgctxt "buttonGM"
+msgid "Normal"
+msgstr "Normal"
+
+#: scripts/scenario_32_planet_devourer.lua:2721
+#: scripts/scenario_32_planet_devourer.lua:2743
+msgctxt "buttonGM"
+msgid "Hard"
+msgstr "Schwer"
+
+#: scripts/scenario_32_planet_devourer.lua:2722
+msgctxt "buttonGM"
+msgid "Extreme"
+msgstr "Extrem"
+
+#: scripts/scenario_32_planet_devourer.lua:2723
+msgctxt "buttonGM"
+msgid "Quixotic"
+msgstr "Absurd"
+
+#: scripts/scenario_32_planet_devourer.lua:2727
+#: scripts/scenario_32_planet_devourer.lua:2747
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s %.1f"
+msgstr "%s %.1f"
+
+#: scripts/scenario_32_planet_devourer.lua:2739
+msgctxt "buttonGM"
+msgid "-From Difficulty"
+msgstr "<-Hauptmenü"
+
+#: scripts/scenario_32_planet_devourer.lua:2759
+msgctxt "buttonGM"
+msgid "-From Reputation"
+msgstr "<-Hauptmenü"
+
+#: scripts/scenario_32_planet_devourer.lua:2761
+msgctxt "buttonGM"
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: scripts/scenario_32_planet_devourer.lua:2762
+msgctxt "buttonGM"
+msgid "Nice"
+msgstr "Nett"
+
+#: scripts/scenario_32_planet_devourer.lua:2763
+msgctxt "buttonGM"
+msgid "Hero"
+msgstr "Heldenhaft"
+
+#: scripts/scenario_32_planet_devourer.lua:2764
+msgctxt "buttonGM"
+msgid "Major Hero"
+msgstr "Sehr heldenhaft"
+
+#: scripts/scenario_32_planet_devourer.lua:2765
+msgctxt "buttonGM"
+msgid "Super Hero"
+msgstr "Superheldenhaft"
+
+#: scripts/scenario_32_planet_devourer.lua:2769
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s %i"
+msgstr "%s %i"
+
+#: scripts/scenario_32_planet_devourer.lua:2781
+msgctxt "buttonGM"
+msgid "-Main"
+msgstr "<- Hauptmenü"
+
+#: scripts/scenario_32_planet_devourer.lua:2795
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid "%s %s"
+msgstr "%s %s"
+
+#: scripts/scenario_32_planet_devourer.lua:2803
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid "%s %s  %s  %s  Friendliness:%s"
+msgstr "%s %s  %s  %s  Freundlichkeit:%s"
+
+#: scripts/scenario_32_planet_devourer.lua:2814
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Shares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"
+msgstr ""
+"%s\n"
+"Energie wird geteilt: %s,  Repariert Hülle: %s,  Füllt Sonden wieder auf: %s"
+
+#: scripts/scenario_32_planet_devourer.lua:2824
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Fix Probes: %s,  Fix Hack: %s,  Fix Scan: %s,  Fix Combat Maneuver: %s,  Fix "
+"Destruct: %s, Fix Slow Tube: %s"
+msgstr ""
+"%s\n"
+"Repariert Sonden: %s,  Repariert Hacking: %s,  Repariert Scanning: %s,  "
+"Repariert Ausweichmanövrier-System: %s, Repariert Selbstzerstörung: %s, "
+"Repariert Raketenschacht: %s"
+
+#: scripts/scenario_32_planet_devourer.lua:2878
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Homing: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"
+msgstr ""
+"%s\n"
+"Zielsuch.: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HGBI: %s %s"
+
+#: scripts/scenario_32_planet_devourer.lua:2896
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Services and their costs and availability:"
+msgstr ""
+"%s\n"
+"Dienstleistungen, sowie ihre Kosten und Verfügbarkeit:"
+
+#: scripts/scenario_32_planet_devourer.lua:2904
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"      %s: %s"
+msgstr ""
+"%s\n"
+"      %s: %s"
+
+#: scripts/scenario_32_planet_devourer.lua:2915
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"      jump overcharge: 10"
+msgstr ""
+"%s\n"
+"      Sprung überladen: 10"
+
+#: scripts/scenario_32_planet_devourer.lua:2924
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Upgrade paths for player ship types and their max level:"
+msgstr ""
+"%s\n"
+"Upgradepfade für Schiffstypen und ihre Maximalstufe"
+
+#: scripts/scenario_32_planet_devourer.lua:2934
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"      Ship template type: %s"
+msgstr ""
+"%s\n"
+"      Schiffsblaupause: %s"
+
+#: scripts/scenario_32_planet_devourer.lua:2945
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"            %s: %s"
+msgstr ""
+"%s\n"
+"            %s: %s"
+
+#: scripts/scenario_32_planet_devourer.lua:2960
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Goods:"
+msgstr ""
+"%s\n"
+"Waren:"
+
+#: scripts/scenario_32_planet_devourer.lua:2967
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"    Sell:"
+msgstr ""
+"%s\n"
+"    Verkaufen:"
+
+#: scripts/scenario_32_planet_devourer.lua:2977
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"        %s: Cost:%s   Quantity:%s"
+msgstr ""
+"%s\n"
+"        %s: Kosten:%s   Anzahl:%s"
+
+#: scripts/scenario_32_planet_devourer.lua:2990
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"    Trade:"
+msgstr ""
+"%s\n"
+"    Tauschen:"
+
+#: scripts/scenario_32_planet_devourer.lua:3000
+#: scripts/scenario_32_planet_devourer.lua:3019
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"        %s: %s"
+msgstr ""
+"%s\n"
+"        %s: %s"
+
+#: scripts/scenario_32_planet_devourer.lua:3010
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"    Buy:"
+msgstr ""
+"%s\n"
+"    Kaufen:"
+
+#: scripts/scenario_32_planet_devourer.lua:3040
+#: scripts/scenario_32_planet_devourer.lua:3049
+msgctxt "stationReport-msgGM"
+msgid "No applicable stations. Reports useless. No action taken"
+msgstr ""
+"Keine entsprechenden Stationen gefunden. Kein sinnvoller Bericht möglich."
+
+#: scripts/scenario_32_planet_devourer.lua:3094
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"Player ship %s's template type (%s) could not be found in table "
+"PlayerShipStats"
+msgstr ""
+"Problem mit Spielerschiff %s: Vorlage %s konnte in Tabelle PlayerShipStats "
+"nicht gefunden werden"
+
+#: scripts/scenario_32_planet_devourer.lua:3120
+msgctxt "tubeSize-tabWeapons"
+msgid "S"
+msgstr "S"
+
+#: scripts/scenario_32_planet_devourer.lua:3121
+msgctxt "tubeSize-tabWeapons"
+msgid "M"
+msgstr "M"
+
+#: scripts/scenario_32_planet_devourer.lua:3122
+msgctxt "tubeSize-tabWeapons"
+msgid "L"
+msgstr "L"
+
+#: scripts/scenario_32_planet_devourer.lua:3318
+#: scripts/scenario_32_planet_devourer.lua:3364
+msgctxt "scienceDB"
+msgid "Planet Devourer"
+msgstr "Planetenverschlinger"
+
+#: scripts/scenario_32_planet_devourer.lua:3362
+msgctxt "scienceDB"
+msgid "Ships"
+msgstr "Schiffe"
+
+#: scripts/scenario_32_planet_devourer.lua:3363
+msgctxt "scienceDB"
+msgid "Dreadnought"
+msgstr "Dreadnought"
+
+#: scripts/scenario_32_planet_devourer.lua:3365
+msgctxt "scienceDB"
+msgid "Odin"
+msgstr "Odin"
+
+#: scripts/scenario_32_planet_devourer.lua:3380
+msgctxt "scienceDB"
+msgid ""
+"The Planet Devourer is a modified Odin. The jump drive was removed in favor "
+"of massive impulse engines and beefed up maneuvering thrusters. The tubes "
+"were diversified: five small tubes, five medium tubes and five large tubes. "
+"The store of missiles was increased at least tenfold. Fighter hangars as "
+"well as automated fighter maintenance and construction facilities were "
+"added.\n"
+"\n"
+"As the name implies, it's got some kind of specialized weaponry designed "
+"around engaging planets. At the time of this database entry update, details "
+"on this weaponry are largely unknown.\n"
+"\n"
+"Intercepted communications related to the Planet Devourer refer to it as "
+"LDS. We are accustomed to the ubiquity of acronyms in the military, but we "
+"can't quite decipher this one. We know there is a predominance of late 20th "
+"century movie fans amongst the crew, maintenance techs and construction "
+"personnel. So, our two leading theories are Little Death Star and an "
+"intentionally mangled reference to LSD (lysergic acid diethylamide). Both of "
+"these theories are based on late 20th century space themed movie franchises "
+"(Star Wars and Star Trek respectively)."
+msgstr ""
+"Beim Planetenverschlinger handelt es sich um eine modifizierte Odin. Der "
+"Sprungantrieb wurde zugunsten von massiven Impulstriebwerken und verstärkten "
+"Manövriertriebwerken entfernt. Die Raketenschächte wurden differenziert: "
+"fünf kleine, fünf mittlere und fünf große Raketenschächte. Der Vorrat an "
+"Raketen wurde mindestens verzehnfacht. Jäger-Hangars sowie automatisierte "
+"Wartungs- und Produktionsanlagen für Jäger wurden hinzugefügt.\n"
+"\n"
+"Wie der Name schon sagt, verfügt er über eine Art Spezialwaffe, die für den "
+"Angriff auf Planeten entwickelt wurde. Zum Zeitpunkt der Aktualisierung "
+"dieses Datenbankeintrags sind Details zu diesen Waffen noch weitgehend "
+"unbekannt.\n"
+"\n"
+"In abgefangenen Mitteilungen über den Planetenverschlinger wird er als LDS "
+"bezeichnet. Wir sind an die Allgegenwart von Akronymen im Militär gewöhnt, "
+"aber dieses können wir nicht ganz entziffern. Unter den Fans von Science-"
+"Fiction des 20.Jahrhunderts, von denen es in unseren Reihen einige gibt, "
+"gibt es allerdings verschiedene Theorien. Manche glauben, es stünde für "
+"\"Little Death Star\". Fans eines anderen Franchises glauben, zwei der "
+"Buchstaben seien bewusst vertauscht worden und verweisen auf einen Kinofilm, "
+"in dem zwar ebenfalls ein Planet bedroht wird, allerdings völlig "
+"unabsichtlich."
+
+#: scripts/scenario_32_planet_devourer.lua:3847
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "Sensor Record: %s station %s in %s"
+msgstr "Sensoraufzeichnung: %s Station %s in %s"
+
+#: scripts/scenario_32_planet_devourer.lua:3857
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "%s, %s station %s in %s"
+msgstr "%s, %s-Station %s in Sektor %s"
+
+#: scripts/scenario_32_planet_devourer.lua:3901
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "Sensor Record: %s %s %s in %s carrying %s"
+msgstr "Sensoraufzeichnung: %s-%s %s in Sektor %s transportiert %s"
+
+#: scripts/scenario_32_planet_devourer.lua:3913
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "%s; %s %s %s in %s carrying %s"
+msgstr "%s; %s-%s %s in %s transportiert %s"
+
+#: scripts/scenario_32_planet_devourer.lua:3929
+msgctxt "scienceDescription-buoy"
+msgid "No data recorded"
+msgstr "Keine Daten aufgezeichnet"
+
+#: scripts/scenario_32_planet_devourer.lua:3932
+#: scripts/scenario_32_planet_devourer.lua:3999
+msgctxt "scienceDescription-buoy"
+msgid "Automated data gathering device"
+msgstr "Automatischer Datenlogger"
+
+#: scripts/scenario_32_planet_devourer.lua:3949
+msgctxt "scienceDescription-buoy"
+msgid "Come to Billy Bob's for the best food in the sector"
+msgstr "Bei Billy Bob bekommen Sie das beste Essen im ganzen Sektor!"
+
+#: scripts/scenario_32_planet_devourer.lua:3953
+msgctxt "scienceDescription-buoy"
+msgid "It's never too late to buy life insurance"
+msgstr "Ist es niemals zu spät für eine Lebensversicherung"
+
+#: scripts/scenario_32_planet_devourer.lua:3957
+msgctxt "scienceDescription-buoy"
+msgid "You'll feel better in an Adder Mark 9"
+msgstr "In einer Adder Mark 9 werden Sie sich viel besser fühlen!"
+
+#: scripts/scenario_32_planet_devourer.lua:3961
+msgctxt "scienceDescription-buoy"
+msgid "Visit Repulse shipyards for the best deals"
+msgstr "Besuchen Sie Repulse shipyards für die besten Deals!"
+
+#: scripts/scenario_32_planet_devourer.lua:3963
+msgctxt "scienceDescription-buoy"
+msgid "Fresh fish! We catch, you buy!"
+msgstr "Frischer Fisch! Wir fangen ihn, Sie kaufen ihn!"
+
+#: scripts/scenario_32_planet_devourer.lua:3966
+msgctxt "scienceDescription-buoy"
+msgid "Get your fuel cells at Melinda's Market"
+msgstr ""
+"Sie brauchen neue Energiezellen? Schauen Sie bei Melindas Marktplatz vorbei!"
+
+#: scripts/scenario_32_planet_devourer.lua:3970
+msgctxt "scienceDescription-buoy"
+msgid "Find a special companion. All species available"
+msgstr ""
+"Finden Sie eine ganz besondere Begleitung. Allen bekannten Spezies verfügbar"
+
+#: scripts/scenario_32_planet_devourer.lua:3974
+msgctxt "scienceDescription-buoy"
+msgid "Feeling down? Robotherapist is there for you"
+msgstr "Fühlen sie sich traurig? RoboThera ist für Sie da"
+
+#: scripts/scenario_32_planet_devourer.lua:3976
+msgctxt "scienceDescription-buoy"
+msgid "30 days, 30 kilograms, guaranteed"
+msgstr "30 Tage, 30 Kilos - garantiert!"
+
+#: scripts/scenario_32_planet_devourer.lua:3979
+msgctxt "scienceDescription-buoy"
+msgid "Try our asteroid dust diet weight loss program"
+msgstr "Probieren Sie unsere Asteroidenstaub-Diät!"
+
+#: scripts/scenario_32_planet_devourer.lua:3983
+msgctxt "scienceDescription-buoy"
+msgid "Best tasting water in the quadrant at Willy's Waterway"
+msgstr "Das schmackhafteste Wasser im ganzen Quadranten: Willy's Waterway"
+
+#: scripts/scenario_32_planet_devourer.lua:3987
+msgctxt "scienceDescription-buoy"
+msgid "Amazing shows every night at Lenny's Lounge"
+msgstr "Lennys Lounge: Die aufregendsten Shows, Nacht für Nacht!"
+
+#: scripts/scenario_32_planet_devourer.lua:3991
+msgctxt "scienceDescription-buoy"
+msgid "Tip: make lemons an integral part of your diet"
+msgstr "Tip: Machen sie Limonen zu einem wichtigen Bestandteil ihrer Ernährung"
+
+#: scripts/scenario_32_planet_devourer.lua:3995
+msgctxt "scienceDescription-buoy"
+msgid "Sam's Spacesuits - now with automatic micrometeorite puncture sealing"
+msgstr ""
+"Sam's Raumanzüge - jetzt mit automatischer Versiegelung bei Mikrometeoriten-"
+"Schäden"
+
+#: scripts/scenario_32_planet_devourer.lua:4504
+msgctxt "damage-msgScience"
+msgid "The unscanned artifact we just picked up has fried our scanners"
+msgstr ""
+"Das ungescannte Artefakt das wir an Bord geholt haben, hat unsere Sensoren "
+"durchbrennen lassen"
+
+#: scripts/scenario_32_planet_devourer.lua:4513
+msgctxt "damage-msgOperations"
+msgid "The unscanned artifact we just picked up has fried our scanners"
+msgstr ""
+"Das ungescannte Artefakt das wir an Bord geholt haben, hat unsere Sensoren "
+"durchbrennen lassen"
+
+#: scripts/scenario_32_planet_devourer.lua:4527
+#, lua-format
+msgctxt "scienceDescription-artifact"
+msgid ""
+"Source of emanations interfering with long range sensors. Range:%.1fu Impact:"
+"%.1fu"
+msgstr ""
+"Quelle anomaler Strahlung, die unsere Langstreckenscanner stört. Reichweite "
+"%.1fu, Radar-Reduktion:%.1fu"
+
+#: scripts/scenario_32_planet_devourer.lua:4541
+msgctxt "scienceDescription-artifact"
+msgid "Source of unusual emanations"
+msgstr "Ungewöhnliche Strahlung"
+
+#: scripts/scenario_32_planet_devourer.lua:4706
+msgctxt "shipLog"
+msgid ""
+"Sensors show that the Kraylor have launched a squad of protectors against "
+"you. The current Kraylor protection squad protocol dictates six Barracudas "
+"in an enclosing ambush formation, each equipped with a high powered warp "
+"jammer. Very dangerous. It's been nice knowing you."
+msgstr ""
+"Die Sensoren deuten darauf hin, dass die Kraylor eine  Einheit aus "
+"Verteidigungs-Schiffen gestartet haben. Das derzeitige Protokoll der Kraylor-"
+"Verteidigungs-Einheiten sieht sechs Barracudas in einer geschlossenen "
+"Zangenformation  vor, jede ausgestattet mit einem leistungsstarken Warp-"
+"Störsender. Sehr gefährlich. Es war schön, Sie gekannt zu haben."
+
+#: scripts/scenario_32_planet_devourer.lua:4800
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr "Wir werden angegriffen! Keine Zeit zu plaudern!"
+
+#: scripts/scenario_32_planet_devourer.lua:4815
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings %s!\n"
+"How may we help you today?"
+msgstr ""
+"Guten Tag, %s!\n"
+"Wie können wir Ihnen behilflich sein?"
+
+#: scripts/scenario_32_planet_devourer.lua:4821
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?"
+msgstr ""
+"Guten Tag,\n"
+"was können wir für sie tun?"
+
+#: scripts/scenario_32_planet_devourer.lua:4824
+msgctxt "station-comms"
+msgid "Hello, may I help you?"
+msgstr "Hallo, kann ich Ihnen helfen?"
+
+#: scripts/scenario_32_planet_devourer.lua:4827
+msgctxt "station-comms"
+msgid "Welcome to our lovely station."
+msgstr "Willkommen auf unserer schönen Station!"
+
+#: scripts/scenario_32_planet_devourer.lua:4833
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+"\n"
+"Verzeihen Sie uns, wenn wir ein wenig abgelenkt wirken. Wir beobachten "
+"aufmerksam feindliche Aktivitäten in der Nähe."
+
+#: scripts/scenario_32_planet_devourer.lua:4838
+msgctxt "station-comms"
+msgid "Station services (restock ordnance, repairs)"
+msgstr "Stadions-Dienstleistungen (Munition, Reparaturen)"
+
+#: scripts/scenario_32_planet_devourer.lua:4843
+msgctxt "station-comms"
+msgid "What station service are you interested in?"
+msgstr "An welcher Dienstleistung sind Sie interessiert?"
+
+#: scripts/scenario_32_planet_devourer.lua:4873
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr "Ich benötige Nachschub an Munition."
+
+#: scripts/scenario_32_planet_devourer.lua:4882
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"What type of ordnance?\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+"Welche Art von Munition?\n"
+"\n"
+"Ruf: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:4910
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes? ("
+msgstr "Können Sie uns mit ein paar Nukes versorgen? ("
+
+#: scripts/scenario_32_planet_devourer.lua:4915
+msgctxt "ammo-comms"
+msgid "We really need some nukes ("
+msgstr "Wir brauchen wirklich ein paar Nukes ("
+
+#: scripts/scenario_32_planet_devourer.lua:4923
+#: scripts/scenario_32_planet_devourer.lua:4953
+#: scripts/scenario_32_planet_devourer.lua:4982
+#: scripts/scenario_32_planet_devourer.lua:5009
+#: scripts/scenario_32_planet_devourer.lua:5036
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s%d rep each)"
+msgstr "%sjeweils %d Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:4945
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles. ("
+msgstr "Bitte stocken Sie unsere EMP-Raketen auf. ("
+
+#: scripts/scenario_32_planet_devourer.lua:4949
+msgctxt "ammo-comms"
+msgid "Got any EMPs? ("
+msgstr "Haben Sie EMPs? ("
+
+#: scripts/scenario_32_planet_devourer.lua:4972
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us? ("
+msgstr "Haben Sie noch Zielsuchraketen für uns? ("
+
+#: scripts/scenario_32_planet_devourer.lua:4977
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles? ("
+msgstr "Haben Sie zusätzliche Zielsuchraketen? ("
+
+#: scripts/scenario_32_planet_devourer.lua:4999
+msgctxt "ammo-comms"
+msgid "We could use some mines. ("
+msgstr "Wir könnten ein paar Minen gebrauchen. ("
+
+#: scripts/scenario_32_planet_devourer.lua:5004
+msgctxt "ammo-comms"
+msgid "How about mines? ("
+msgstr "Wie sieht es mit Minen aus?"
+
+#: scripts/scenario_32_planet_devourer.lua:5026
+msgctxt "ammo-comms"
+msgid "What about HVLI? ("
+msgstr "Was ist mit HGBI? ("
+
+#: scripts/scenario_32_planet_devourer.lua:5031
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI? ("
+msgstr "Könnten Sie HGBIs zur Verfügung stellen? ("
+
+#: scripts/scenario_32_planet_devourer.lua:5051
+#: scripts/scenario_32_planet_devourer.lua:7544
+msgctxt "stationServices-comms"
+msgid "Docking services status"
+msgstr "Dock-Dienste: Übersicht"
+
+#: scripts/scenario_32_planet_devourer.lua:5056
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s docking services status:"
+msgstr "Übersicht der Dienste im Dock von Station %s:"
+
+#: scripts/scenario_32_planet_devourer.lua:5064
+#: scripts/scenario_32_planet_devourer.lua:7566
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Replenish scan probes."
+msgstr ""
+"%s\n"
+"Auffüllen des Sonden-Vorrats"
+
+#: scripts/scenario_32_planet_devourer.lua:5073
+#: scripts/scenario_32_planet_devourer.lua:7577
+msgctxt "stationServices-comms"
+msgid "Cannot replenish scan probes due to fabrication unit failure."
+msgstr ""
+"Aufgrund eines Fehlers der Fertigungseinheit können keine neue Sonden "
+"hergestellt werden."
+
+#: scripts/scenario_32_planet_devourer.lua:5077
+#: scripts/scenario_32_planet_devourer.lua:7581
+msgctxt "stationServices-comms"
+msgid "Parts shortage prevents scan probe replenishment."
+msgstr ""
+"Aufgrund von Ersatzteilknappheit kann der Vorrat an Sonden nicht mehr "
+"aufgefüllt werden."
+
+#: scripts/scenario_32_planet_devourer.lua:5081
+#: scripts/scenario_32_planet_devourer.lua:7585
+msgctxt "stationServices-comms"
+msgid ""
+"Station management has curtailed scan probe replenishment for cost cutting "
+"reasons."
+msgstr ""
+"Die Stationsleitung hat aus Kostengründen den Nachschub an Sonden "
+"eingeschränkt."
+
+#: scripts/scenario_32_planet_devourer.lua:5088
+#: scripts/scenario_32_planet_devourer.lua:5118
+#: scripts/scenario_32_planet_devourer.lua:5151
+#: scripts/scenario_32_planet_devourer.lua:7595
+#: scripts/scenario_32_planet_devourer.lua:7633
+#: scripts/scenario_32_planet_devourer.lua:7671
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+"%s\n"
+"%s"
+
+#: scripts/scenario_32_planet_devourer.lua:5095
+#: scripts/scenario_32_planet_devourer.lua:7604
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Ship hull repair."
+msgstr ""
+"%s\n"
+"Reparatur der Schiffshülle"
+
+#: scripts/scenario_32_planet_devourer.lua:5103
+#: scripts/scenario_32_planet_devourer.lua:7615
+msgctxt "stationServices-comms"
+msgid "We're out of the necessary materials and supplies for hull repair."
+msgstr ""
+"Wir haben keine Materialien und Vorräte mehr, die für die Reparatur der "
+"Schiffshülle benötigt werden."
+
+#: scripts/scenario_32_planet_devourer.lua:5107
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable while it is undergoing maintenance."
+msgstr ""
+"Automatische Hüllenreparatur ist aufgrund von Wartungsarbeiten derzeit nicht "
+"möglich."
+
+#: scripts/scenario_32_planet_devourer.lua:5111
+#: scripts/scenario_32_planet_devourer.lua:7623
+msgctxt "stationServices-comms"
+msgid "All hull repair technicians quarantined to quarters due to illness."
+msgstr ""
+"Das komplette Hüllenreparatur-Personal ist aufgrund einer Krankheit derzeit "
+"in Quarantäne"
+
+#: scripts/scenario_32_planet_devourer.lua:5127
+#: scripts/scenario_32_planet_devourer.lua:7642
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Recharge ship energy stores."
+msgstr ""
+"%s\n"
+"Aufladung der Energiespeicher"
+
+#: scripts/scenario_32_planet_devourer.lua:5136
+#: scripts/scenario_32_planet_devourer.lua:7653
+msgctxt "stationServices-comms"
+msgid ""
+"A recent reactor failure has put us on auxiliary power, so we cannot "
+"recharge ships."
+msgstr ""
+"Durch einen kürzlichen Reaktorausfall läuft im Moment alles auf "
+"Hilfsenergie, so dass wir keine Schiffe aufladen können."
+
+#: scripts/scenario_32_planet_devourer.lua:5140
+#: scripts/scenario_32_planet_devourer.lua:7657
+msgctxt "stationServices-comms"
+msgid "A damaged power coupling makes it too dangerous to recharge ships."
+msgstr ""
+"Aufgrund einer beschädigten Energiekupplung ist es gerade zu gefährlich, "
+"andere Schiffe mit Energie zu versorgen."
+
+#: scripts/scenario_32_planet_devourer.lua:5144
+#: scripts/scenario_32_planet_devourer.lua:7661
+msgctxt "stationServices-comms"
+msgid ""
+"An asteroid strike damaged our solar cells and we are short on power, so we "
+"can't recharge ships right now."
+msgstr ""
+"Da ein Asteroideneinschlag unsere Solarzellen beschädigt hat ist unsere "
+"Energie zur Zeit knapp, so dass wir im Moment keine Schiffe aufladen können."
+
+#: scripts/scenario_32_planet_devourer.lua:5160
+#: scripts/scenario_32_planet_devourer.lua:7697
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May overcharge jump drive"
+msgstr ""
+"%s\n"
+"Bietet Überladung des Sprungantriebs an"
+
+#: scripts/scenario_32_planet_devourer.lua:5169
+#: scripts/scenario_32_planet_devourer.lua:7708
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair probe launch system"
+msgstr ""
+"%s\n"
+"Bietet Reparatur der Sonden-Abschussvorrichtung an"
+
+#: scripts/scenario_32_planet_devourer.lua:5178
+#: scripts/scenario_32_planet_devourer.lua:7717
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair hacking system"
+msgstr ""
+"%s\n"
+"Bietet Reparatur des Hacking-Systems an"
+
+#: scripts/scenario_32_planet_devourer.lua:5187
+#: scripts/scenario_32_planet_devourer.lua:7726
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair scanners"
+msgstr ""
+"%s\n"
+"Bietet Reparatur des Scan-Systems an"
+
+#: scripts/scenario_32_planet_devourer.lua:5196
+#: scripts/scenario_32_planet_devourer.lua:7737
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair combat maneuver"
+msgstr ""
+"%s\n"
+"Bietet Reparatur des Ausweichmanöver--Systems an"
+
+#: scripts/scenario_32_planet_devourer.lua:5205
+#: scripts/scenario_32_planet_devourer.lua:7748
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair self destruct system"
+msgstr ""
+"%s\n"
+"Bietet Reparatur des Selbstzerstörungs-Systems an"
+
+#: scripts/scenario_32_planet_devourer.lua:5211
+#: scripts/scenario_32_planet_devourer.lua:5261
+#: scripts/scenario_32_planet_devourer.lua:5360
+#: scripts/scenario_32_planet_devourer.lua:5409
+#: scripts/scenario_32_planet_devourer.lua:5458
+#: scripts/scenario_32_planet_devourer.lua:5511
+#: scripts/scenario_32_planet_devourer.lua:5565
+#: scripts/scenario_32_planet_devourer.lua:5570
+#: scripts/scenario_32_planet_devourer.lua:5587
+#: scripts/scenario_32_planet_devourer.lua:5615
+#: scripts/scenario_32_planet_devourer.lua:5683
+#: scripts/scenario_32_planet_devourer.lua:5688
+#: scripts/scenario_32_planet_devourer.lua:5771
+#: scripts/scenario_32_planet_devourer.lua:5816
+#: scripts/scenario_32_planet_devourer.lua:5824
+#: scripts/scenario_32_planet_devourer.lua:5831
+#: scripts/scenario_32_planet_devourer.lua:5849
+#: scripts/scenario_32_planet_devourer.lua:5873
+#: scripts/scenario_32_planet_devourer.lua:5879
+#: scripts/scenario_32_planet_devourer.lua:5885
+#: scripts/scenario_32_planet_devourer.lua:5898
+#: scripts/scenario_32_planet_devourer.lua:5902
+#: scripts/scenario_32_planet_devourer.lua:5935
+#: scripts/scenario_32_planet_devourer.lua:5947
+#: scripts/scenario_32_planet_devourer.lua:5963
+#: scripts/scenario_32_planet_devourer.lua:5969
+#: scripts/scenario_32_planet_devourer.lua:5992
+#: scripts/scenario_32_planet_devourer.lua:6004
+#: scripts/scenario_32_planet_devourer.lua:6016
+#: scripts/scenario_32_planet_devourer.lua:6019
+#: scripts/scenario_32_planet_devourer.lua:6044
+#: scripts/scenario_32_planet_devourer.lua:6226
+#: scripts/scenario_32_planet_devourer.lua:6278
+#: scripts/scenario_32_planet_devourer.lua:6364
+#: scripts/scenario_32_planet_devourer.lua:6454
+#: scripts/scenario_32_planet_devourer.lua:6544
+#: scripts/scenario_32_planet_devourer.lua:6554
+#: scripts/scenario_32_planet_devourer.lua:6588
+#: scripts/scenario_32_planet_devourer.lua:6592
+#: scripts/scenario_32_planet_devourer.lua:6607
+#: scripts/scenario_32_planet_devourer.lua:6690
+#: scripts/scenario_32_planet_devourer.lua:6824
+#: scripts/scenario_32_planet_devourer.lua:6911
+#: scripts/scenario_32_planet_devourer.lua:7019
+#: scripts/scenario_32_planet_devourer.lua:7095
+#: scripts/scenario_32_planet_devourer.lua:7174
+#: scripts/scenario_32_planet_devourer.lua:7315
+#: scripts/scenario_32_planet_devourer.lua:7332
+#: scripts/scenario_32_planet_devourer.lua:7349
+#: scripts/scenario_32_planet_devourer.lua:7357
+#: scripts/scenario_32_planet_devourer.lua:7361
+#: scripts/scenario_32_planet_devourer.lua:7393
+#: scripts/scenario_32_planet_devourer.lua:7413
+#: scripts/scenario_32_planet_devourer.lua:7428
+#: scripts/scenario_32_planet_devourer.lua:7456
+#: scripts/scenario_32_planet_devourer.lua:7540
+#: scripts/scenario_32_planet_devourer.lua:7677
+#: scripts/scenario_32_planet_devourer.lua:7754
+#: scripts/scenario_32_planet_devourer.lua:7757
+#: scripts/scenario_32_planet_devourer.lua:7806
+#: scripts/scenario_32_planet_devourer.lua:7898
+#: scripts/scenario_32_planet_devourer.lua:7919
+#: scripts/scenario_32_planet_devourer.lua:7952
+#: scripts/scenario_32_planet_devourer.lua:7964
+#: scripts/scenario_32_planet_devourer.lua:7980
+#: scripts/scenario_32_planet_devourer.lua:8061
+#: scripts/scenario_32_planet_devourer.lua:8099
+#: scripts/scenario_32_planet_devourer.lua:8169
+#: scripts/scenario_32_planet_devourer.lua:8174
+#: scripts/scenario_32_planet_devourer.lua:8245
+#: scripts/scenario_32_planet_devourer.lua:8250
+#: scripts/scenario_32_planet_devourer.lua:8438
+#: scripts/scenario_32_planet_devourer.lua:8444
+#: scripts/scenario_32_planet_devourer.lua:8549
+#: scripts/scenario_32_planet_devourer.lua:8554
+#: scripts/scenario_32_planet_devourer.lua:8562
+#: scripts/scenario_32_planet_devourer.lua:8651
+#: scripts/scenario_32_planet_devourer.lua:8671
+#: scripts/scenario_32_planet_devourer.lua:8709
+#: scripts/scenario_32_planet_devourer.lua:8713
+#: scripts/scenario_32_planet_devourer.lua:8755
+#: scripts/scenario_32_planet_devourer.lua:8810
+#: scripts/scenario_32_planet_devourer.lua:8871
+#: scripts/scenario_32_planet_devourer.lua:8926
+#: scripts/scenario_32_planet_devourer.lua:8988
+#: scripts/scenario_32_planet_devourer.lua:9027
+#: scripts/scenario_32_planet_devourer.lua:9798
+#: scripts/scenario_32_planet_devourer.lua:9830
+#: scripts/scenario_32_planet_devourer.lua:9834
+#: scripts/scenario_32_planet_devourer.lua:9892
+#: scripts/scenario_32_planet_devourer.lua:9947
+#: scripts/scenario_32_planet_devourer.lua:10007
+#: scripts/scenario_32_planet_devourer.lua:10062
+#: scripts/scenario_32_planet_devourer.lua:10122
+#: scripts/scenario_32_planet_devourer.lua:10200
+#: scripts/scenario_32_planet_devourer.lua:10205
+#: scripts/scenario_32_planet_devourer.lua:10213
+#: scripts/scenario_32_planet_devourer.lua:10266
+#: scripts/scenario_32_planet_devourer.lua:10286
+#: scripts/scenario_32_planet_devourer.lua:10352
+#: scripts/scenario_32_planet_devourer.lua:10409
+#: scripts/scenario_32_planet_devourer.lua:10435
+#: scripts/scenario_32_planet_devourer.lua:10461
+#: scripts/scenario_32_planet_devourer.lua:10487
+#: scripts/scenario_32_planet_devourer.lua:10516
+#: scripts/scenario_32_planet_devourer.lua:10520
+#: scripts/scenario_32_planet_devourer.lua:10569
+#: scripts/scenario_32_planet_devourer.lua:10609
+#: scripts/scenario_32_planet_devourer.lua:10649
+#: scripts/scenario_32_planet_devourer.lua:10813
+#: scripts/scenario_32_planet_devourer.lua:10900
+#: scripts/scenario_32_planet_devourer.lua:11050
+#: scripts/scenario_32_planet_devourer.lua:11137
+#: scripts/scenario_32_planet_devourer.lua:11204
+#: scripts/scenario_32_planet_devourer.lua:11218
+#: scripts/scenario_32_planet_devourer.lua:11223
+#: scripts/scenario_32_planet_devourer.lua:11261
+#: scripts/scenario_32_planet_devourer.lua:11318
+msgid "Back"
+msgstr "Zurück"
+
+#: scripts/scenario_32_planet_devourer.lua:5224
+msgctxt "stationServices-comms"
+msgid "Overcharge Jump Drive (10 Rep)"
+msgstr "Sprungantrieb überladen (10 Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:5231
+#: scripts/scenario_32_planet_devourer.lua:5335
+#: scripts/scenario_32_planet_devourer.lua:5384
+#: scripts/scenario_32_planet_devourer.lua:5433
+#: scripts/scenario_32_planet_devourer.lua:5483
+#: scripts/scenario_32_planet_devourer.lua:5538
+#: scripts/scenario_32_planet_devourer.lua:6150
+#: scripts/scenario_32_planet_devourer.lua:6254
+#: scripts/scenario_32_planet_devourer.lua:6308
+#: scripts/scenario_32_planet_devourer.lua:6398
+#: scripts/scenario_32_planet_devourer.lua:6488
+#: scripts/scenario_32_planet_devourer.lua:6659
+#: scripts/scenario_32_planet_devourer.lua:6875
+#: scripts/scenario_32_planet_devourer.lua:7053
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr "Für diese Aktion müssen Sie angedockt bleiben."
+
+#: scripts/scenario_32_planet_devourer.lua:5245
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Your jump drive has been overcharged to %ik"
+msgstr "Ihr Sprungantrieb wurde auf %i 000 überladen"
+
+#: scripts/scenario_32_planet_devourer.lua:5257
+#: scripts/scenario_32_planet_devourer.lua:5356
+#: scripts/scenario_32_planet_devourer.lua:5405
+#: scripts/scenario_32_planet_devourer.lua:5454
+#: scripts/scenario_32_planet_devourer.lua:5506
+#: scripts/scenario_32_planet_devourer.lua:5561
+#: scripts/scenario_32_planet_devourer.lua:6670
+#: scripts/scenario_32_planet_devourer.lua:6888
+#: scripts/scenario_32_planet_devourer.lua:7354
+#: scripts/scenario_32_planet_devourer.lua:10558
+#: scripts/scenario_32_planet_devourer.lua:10598
+#: scripts/scenario_32_planet_devourer.lua:10638
+#: scripts/scenario_32_planet_devourer.lua:10800
+#: scripts/scenario_32_planet_devourer.lua:10887
+#: scripts/scenario_32_planet_devourer.lua:10910
+#: scripts/scenario_32_planet_devourer.lua:11037
+#: scripts/scenario_32_planet_devourer.lua:11124
+#: scripts/scenario_32_planet_devourer.lua:11191
+#: scripts/scenario_32_planet_devourer.lua:11250
+#: scripts/scenario_32_planet_devourer.lua:11307
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr "Ruf ist zu niedrig."
+
+#: scripts/scenario_32_planet_devourer.lua:5305
+msgctxt "stationServices-comms"
+msgid "Repair ship system"
+msgstr "Schiffssystem reparieren"
+
+#: scripts/scenario_32_planet_devourer.lua:5311
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"What system would you like repaired?\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+"Welches System soll repariert werden?\n"
+"\n"
+"Ruf: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:5322
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair probe launch system (%s Rep)"
+msgstr "Sonden-Abschussvorrichtung reparieren (%s Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:5349
+msgctxt "stationServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr "Ihre Sonden-Abschussvorrichtung wurde repariert"
+
+#: scripts/scenario_32_planet_devourer.lua:5371
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair hacking system (%s Rep)"
+msgstr "Hackingsystem reparieren (%s Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:5398
+msgctxt "stationServices-comms"
+msgid "Your hack system has been repaired"
+msgstr "Ihr Hackingsystem wurde repariert"
+
+#: scripts/scenario_32_planet_devourer.lua:5420
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair scanning system (%s Rep)"
+msgstr "Scansystem reparieren (%s Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:5447
+msgctxt "stationServices-comms"
+msgid "Your scanners have been repaired"
+msgstr "Ihre Scanner wurden repariert"
+
+#: scripts/scenario_32_planet_devourer.lua:5470
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair combat maneuver (%s Rep)"
+msgstr "Ausweichmanöver-System reparieren (%s Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:5499
+msgctxt "stationServices-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr "Ihr Ausweichmanöversystem wurde repariert"
+
+#: scripts/scenario_32_planet_devourer.lua:5525
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair self destruct system (%s Rep)"
+msgstr "Selbstzerstörungs-System reparieren (%s Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:5554
+msgctxt "stationServices-comms"
+msgid "Your self destruct system has been repaired"
+msgstr "Ihr Selbstzerstörungssystem wurde repariert"
+
+#: scripts/scenario_32_planet_devourer.lua:5576
+#: scripts/scenario_32_planet_devourer.lua:7364
+msgctxt "station-comms"
+msgid "I need information"
+msgstr "Ich brauche Informationen."
+
+#: scripts/scenario_32_planet_devourer.lua:5577
+msgctxt "station-comms"
+msgid "What do you need to know?"
+msgstr "Was wollen Sie wissen?"
+
+#: scripts/scenario_32_planet_devourer.lua:5579
+msgctxt "station-comms"
+msgid "What's with the warp jammers?"
+msgstr "Was können Sie zu den Warp-Störsendern sagen?"
+
+#: scripts/scenario_32_planet_devourer.lua:5584
+msgctxt "station-comms"
+msgid ""
+"When factions in various stations in the area started attacking each other, "
+"there was a particularly nasty tactic employed where warp or jump ships "
+"would ambush a station. Stations could not maintain defensive patrols "
+"indefinitely due to the expense. Putting in a warp jammer gives the station "
+"a chance to scramble their defense fleet when an enemy approaches. Of "
+"course, it slows friendly traffic, commercial or military, too. So, most "
+"warp jammers are controlled by nearby factions to allow them to enable or "
+"disable them upon request to facilitate the flow of ships. You can't connect "
+"to the warp jammer while docked because you're clearly not yet ready to "
+"traverse the controlled area. Destroying a warp jammer may have undesired "
+"indirect consequences, but there's no official rule against it."
+msgstr ""
+"Als die Fraktionen in den verschiedenen Stationen des Gebiets begannen, sich "
+"gegenseitig anzugreifen, gab es häufig Überraschungsangriffe, bei der Warp- "
+"oder Sprungschiffen wehrlose Stationen überfielen. Die Stationen konnten aus "
+"Kostengründen nicht unbegrenzt Verteidigungspatrouillen aufrechterhalten. "
+"Der Betrieb von Warp-Störsendern gibt der Station die Möglichkeit, ihre "
+"Verteidigungsflotte zu verlegen, wenn sich ein Feind nähert. Natürlich wird "
+"dadurch auch der befreundete Verkehr, ob kommerziell oder militärisch, "
+"verlangsamt. Daher werden die meisten Störsender von Fraktionen in der Nähe "
+"kontrolliert, damit diese sie auf Anfrage aktivieren oder deaktivieren "
+"können, um den Schiffsverkehr zu erleichtern. Sie können sich nicht mit dem "
+"Warp-Störsender verbinden, während Sie angedockt sind, weil Sie "
+"offensichtlich noch nicht bereit sind, das kontrollierte Gebiet zu "
+"durchqueren. Die Zerstörung eines Warp-Störsenders kann unerwünschte "
+"indirekte Folgen haben, aber es gibt keine offizielles Gesetz dagegen."
+
+#: scripts/scenario_32_planet_devourer.lua:5592
+#: scripts/scenario_32_planet_devourer.lua:7370
+msgctxt "mission-comms"
+msgid "Locate Planet Devourer"
+msgstr "Planetenverschlinger lokalisieren"
+
+#: scripts/scenario_32_planet_devourer.lua:5595
+#: scripts/scenario_32_planet_devourer.lua:7373
+#, lua-format
+msgctxt "mission-comms"
+msgid "%s is located in sector %s."
+msgstr "%s befindet sich in Sektor %s."
+
+#: scripts/scenario_32_planet_devourer.lua:5606
+#: scripts/scenario_32_planet_devourer.lua:7384
+#, lua-format
+msgctxt "mission-comms"
+msgid "%s We project that %s plans to destroy %s in sector %s"
+msgstr "%s Wir vermuten, dass %s plant, %s in Sektor %s zu zerstören"
+
+#: scripts/scenario_32_planet_devourer.lua:5621
+#: scripts/scenario_32_planet_devourer.lua:7403
+#, lua-format
+msgctxt "mission-comms"
+msgid "How do we destroy %s?"
+msgstr "Wie zerstören wir %s?"
+
+#: scripts/scenario_32_planet_devourer.lua:5632
+msgctxt "mission-comms"
+msgid "Were you able to get the plans?"
+msgstr "Konnten Sie die Pläne besorgen?"
+
+#: scripts/scenario_32_planet_devourer.lua:5638
+#: scripts/scenario_32_planet_devourer.lua:7420
+msgctxt "mission-comms"
+msgid "We got the plans. Now what?"
+msgstr "Wir haben die Pläne. Was jetzt?"
+
+#: scripts/scenario_32_planet_devourer.lua:5641
+msgctxt "mission-comms"
+msgid "Four"
+msgstr "Vier"
+
+#: scripts/scenario_32_planet_devourer.lua:5643
+msgctxt "mission-comms"
+msgid "three"
+msgstr "Drei"
+
+#: scripts/scenario_32_planet_devourer.lua:5645
+msgctxt "mission-comms"
+msgid "Six"
+msgstr "Sechs"
+
+#: scripts/scenario_32_planet_devourer.lua:5646
+msgctxt "mission-comms"
+msgid "six"
+msgstr "Sechs"
+
+#: scripts/scenario_32_planet_devourer.lua:5648
+msgctxt "mission-comms"
+msgid "Eight"
+msgstr "Acht"
+
+#: scripts/scenario_32_planet_devourer.lua:5650
+msgctxt "mission-comms"
+msgid "nine"
+msgstr "Neun"
+
+#: scripts/scenario_32_planet_devourer.lua:5656
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Good job bringing in those plans. Our analysis shows a weakness in the "
+"weapons control system of the %s. If we can upload a digital virus through a "
+"small thermal exhaust port just below the main port, we should be able to "
+"create a virtual canyon between the weapons systems by forcing them into "
+"maintenance mode. %s out of sixteen beam emplacements will be reduced in "
+"range from 3.2 units to 1 unit and their cycle time will be increased from 3 "
+"seconds to 30 seconds. Similarly, %s out of fifteen weapons tubes will have "
+"their load times increased from 3 seconds to 3 minutes. This should make it "
+"easier for you to deliver destructuve beam and missile fire to %s"
+msgstr ""
+"Gute Arbeit bei der Beschaffung dieser Pläne. Unsere Analyse zeigt eine "
+"Schwachstelle im Waffenkontrollsystem der %s. Wenn wir einen digitalen Virus "
+"durch eine kleine thermische Abluftöffnung direkt unter der Hauptöffnung "
+"einschleusen können, sollten wir in der Lage sein, einen virtuellen Graben "
+"zwischen den Waffensystemen zu schaffen, indem wir sie in den Wartungsmodus "
+"versetzen. Die Reichweite von %s der sechzehn Laserwaffen wird von 3,2u auf "
+"1u reduziert und ihre Ladezeit wird von 3 Sekunden auf 30 Sekunden erhöht. "
+"Ebenso wird die Ladezeit von %s der fünfzehn Waffenrohre von 3 Sekunden auf "
+"3 Minuten erhöht. Dies sollte es Ihnen erleichtern, %s mit zerstörerischen "
+"Lasern und Raketen anzugreifen."
+
+#: scripts/scenario_32_planet_devourer.lua:5667
+msgctxt "mission-comms"
+msgid "How do we upload this virus?"
+msgstr "Wie können wir das Virus übertragen?"
+
+#: scripts/scenario_32_planet_devourer.lua:5676
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"The approach will not be easy. You are required to maneuver straight down "
+"this trench and skim the surface to this point. The target area is only two "
+"meters wide... ...uh... ...sorry, I'm reading from the wrong script. Simply "
+"approach within 3 units of %s and have your engineer activate the upload "
+"using the button that should appear on the engineering console. Remember "
+"that the beam range on the %s is 3.2 units, so you'll have to take a couple "
+"of hits to deliver the virus. Your engineer will want to boost the shields "
+"for better protection. You'll probably also want your weapons officer to "
+"calibrate your shields, too."
+msgstr ""
+"Der Anflug wird nicht einfach sein. Sie müssen geradeaus in diesen Graben "
+"manövrieren und die Oberfläche bis zu diesem Punkt überfliegen. Das "
+"Zielgebiet ist nur zwei Meter breit... ...äh... ...sorry, ich lese aus dem "
+"falschen Dokument. Nähern Sie sich einfach bis auf 3u an %s heran, dann "
+"sollte im Maschinenraum der Upload über eine entsprechende Schaltfläche "
+"gestartet werden können. Denken Sie daran, dass die Laserreichweite der %s "
+"3,2u beträgt, Sie müssen also ein paar Treffer einstecken, bis das Virus "
+"übertragen ist. Daher empfehle ich, mehr Energie auf die Schilde zu geben. "
+"Außerdem ist es wahrscheinlich sinnvoll, die Schilde über die Waffenkonsole "
+"neu zu kalibrieren."
+
+#: scripts/scenario_32_planet_devourer.lua:5695
+msgctxt "mission-comms"
+msgid ""
+"It's a monster. If we had the technical readouts for the Planet Devourer, we "
+"might find a weakness, and exploit it."
+msgstr ""
+"Es ist ein Monster. Wenn wir die Blaupausen des Planetenverschlingers "
+"hätten, könnten wir sicher eine Schwäche finden und sie ausnutzen."
+
+#: scripts/scenario_32_planet_devourer.lua:5701
+msgctxt "mission-comms"
+msgid "Where can we get the plans for the Planet Devourer?"
+msgstr "Wie kommen wir an die Pläne des Planetenverschlingers?"
+
+#: scripts/scenario_32_planet_devourer.lua:5728
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Kraylor station %s in sector %s probably has them. But they are likely to be "
+"heavily protected."
+msgstr ""
+"Sie befinden sich vermutlich auf der Kraylor-Station %s in Sektor %s. Aber "
+"vermutlich sind sie stark bewacht."
+
+#: scripts/scenario_32_planet_devourer.lua:5737
+msgctxt "mission-comms"
+msgid "How can we get those plans?"
+msgstr "Wie kommen wir an diese Pläne?"
+
+#: scripts/scenario_32_planet_devourer.lua:5743
+msgctxt "mission-comms"
+msgid "You can't"
+msgstr "Gar nicht"
+
+#: scripts/scenario_32_planet_devourer.lua:5749
+msgctxt "mission-comms"
+msgid "What? There must be something we can do"
+msgstr "Was? Irgendetwas müssen wir doch tun können"
+
+#: scripts/scenario_32_planet_devourer.lua:5755
+msgctxt "mission-comms"
+msgid "I can't think of anything. Do you have any ideas?"
+msgstr "Ich wüsste nicht, was? Haben Sie Vorschläge?"
+
+#: scripts/scenario_32_planet_devourer.lua:5761
+msgctxt "mission-comms"
+msgid "Threaten to destroy them unless they give up the plans."
+msgstr "Wie drohen mit Ihrer Zerstörung, wenn Sie uns nicht die Pläne geben"
+
+#: scripts/scenario_32_planet_devourer.lua:5767
+msgctxt "mission-comms"
+msgid ""
+"They'd call your bluff. We can't get the plans if the station has been "
+"destroyed."
+msgstr ""
+"Diesen Bluff würden sie erkennen. Schließlich kommen wir nicht mehr an die "
+"Pläne, wenn die Station zerstört ist"
+
+#: scripts/scenario_32_planet_devourer.lua:5779
+msgctxt "mission-comms"
+msgid "Sneak aboard the station and steal the plans."
+msgstr "Wir schleichen uns an Bord und stehlen die Pläne."
+
+#: scripts/scenario_32_planet_devourer.lua:5785
+msgctxt "mission-comms"
+msgid ""
+"They would not let you dock. Even if you could force your way onto the "
+"station, standard protocol is to wipe the databanks. However, we might be "
+"able to install a powerful cyber system on your ship. You'd have to get "
+"close and stay close for it to work."
+msgstr ""
+"Sie würden Sie nicht andocken lassen. Selbst wenn Sie sich Ihren Weg durch "
+"die Station kämpfen können, wäre das Standardvorgehen in solchen Fällen, "
+"alle Datenbanken zu löschen. Wir könnten jedoch ein spezialisiertes Cyber-"
+"System auf Ihrem Schiff installieren, mit dem wir die Daten auslesen "
+"könnten. Damit das funktioniert, müssen Sie allerdings sehr nahe herankommen "
+"und auch in der Nähe bleiben, bis die Extraktion abgeschlossen ist."
+
+#: scripts/scenario_32_planet_devourer.lua:5791
+msgctxt "mission-comms"
+msgid "That sounds better than nothing. Let's try it"
+msgstr "Das klingt besser als nichts. Versuchen wir es!"
+
+#: scripts/scenario_32_planet_devourer.lua:5797
+msgctxt "mission-comms"
+msgid ""
+"You'd have to get within 2.5 units and stay there for at least 47 seconds "
+"for the system to infiltrate and extract the plans."
+msgstr ""
+"Sie müssen bis auf 2,5u herankommen und dort für mindestens 47 Sekunden "
+"bleiben, um das System zu hacken und die Pläne auszulesen"
+
+#: scripts/scenario_32_planet_devourer.lua:5803
+msgctxt "mission-comms"
+msgid "Got it. Please install it quickly"
+msgstr "Verstanden. Bitte installieren Sie das System so schnell wie möglich"
+
+#: scripts/scenario_32_planet_devourer.lua:5811
+msgctxt "mission-comms"
+msgid ""
+"We installed the cyber system. Your engineer will see an activation button "
+"when you get in range."
+msgstr ""
+"Wir haben das Cybersystem installiert. Auf der Konsole im Maschinenraum "
+"sollte eine Schaltfläche zur Aktivierung erscheinen, sobald sie in "
+"Reichweite kommen."
+
+#: scripts/scenario_32_planet_devourer.lua:5839
+msgctxt "mission-comms"
+msgid "Check with other stations for the plans."
+msgstr "Wir könnten uns bei anderen Stationen umhören"
+
+#: scripts/scenario_32_planet_devourer.lua:5845
+msgctxt "mission-comms"
+msgid ""
+"Those plans are highly classified by the Kraylor. We've been trying to talk "
+"to anyone that's worked on it outside of Kraylor controlled groups, but that "
+"information is just not available anywhere but within Kraylor controlled "
+"space."
+msgstr ""
+"Diese Pläne werden von den Kraylor streng geheim gehalten. Wir haben "
+"versucht, mit jedem zu sprechen, der außerhalb der von den Kraylor "
+"kontrollierten Gruppen daran gearbeitet hat, aber dieses Wissen ist nur im "
+"von den Kraylor kontrollierten Raum verfügbar."
+
+#: scripts/scenario_32_planet_devourer.lua:5858
+#, lua-format
+msgctxt "mission-comms"
+msgid "Deep scan %s ourselves to determine a weakness"
+msgstr "Per Tiefenscan mögliche Schwächen von %s herausfinden"
+
+#: scripts/scenario_32_planet_devourer.lua:5867
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"%s has very strong shields. They prevent detailed analysis of ship "
+"functions. Even if you got some information, by the time you determined a "
+"weakness, the planets in this area will all have been destroyed."
+msgstr ""
+"%s verfügt über sehr starke Schilde, die eine genaue Analyse der "
+"Schiffsfunktionen verhindern. Selbst wenn sie an ein paar Informationen "
+"kommen würden, würde das so lange dauern, dass bis dahin alle Planeten in "
+"der Nähe zerstört sein würden."
+
+#: scripts/scenario_32_planet_devourer.lua:5894
+msgctxt "mission-comms"
+msgid "All the Kraylor stations in the area have been destroyed. Too bad."
+msgstr ""
+"Unglücklicherweise wurden alle Kraylor-Stationen der Umgebung zerstört."
+
+#: scripts/scenario_32_planet_devourer.lua:5922
+#: scripts/scenario_32_planet_devourer.lua:7939
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr "Erzählen Sie mir mehr über Ihre Station."
+
+#: scripts/scenario_32_planet_devourer.lua:5925
+#: scripts/scenario_32_planet_devourer.lua:7942
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr "Was würden Sie gerne wissen?"
+
+#: scripts/scenario_32_planet_devourer.lua:5932
+#: scripts/scenario_32_planet_devourer.lua:7949
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr "Allgemeine Informationen"
+
+#: scripts/scenario_32_planet_devourer.lua:5944
+#: scripts/scenario_32_planet_devourer.lua:7961
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr "Geschichte der Station"
+
+#: scripts/scenario_32_planet_devourer.lua:5958
+#: scripts/scenario_32_planet_devourer.lua:7975
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr "Klatsch und Tratsch"
+
+#: scripts/scenario_32_planet_devourer.lua:5975
+msgctxt "station-comms"
+msgid "Explain sensor jammers"
+msgstr "Was wissen Sie über Sensor-Störsender?"
+
+#: scripts/scenario_32_planet_devourer.lua:5980
+msgctxt "station-comms"
+msgid "You mean those things that have a call sign that starts with SJ?"
+msgstr "Sie meinen diese Dinger, deren Rufzeichen mit SJ beginnt?"
+
+#: scripts/scenario_32_planet_devourer.lua:5984
+msgctxt "station-comms"
+msgid "Yes. Why so many?"
+msgstr "Ja. Warum sind es so viele?"
+
+#: scripts/scenario_32_planet_devourer.lua:5989
+msgctxt "station-comms"
+msgid ""
+"They were made during a big technological arms race. All the factions tried "
+"to make them to hinder their enemies as they approached. Most ships have got "
+"ways around them now, but nobody has gone out to clean up the leftovers. The "
+"closest thing to clean up done by the factions is to give them all SJ call "
+"signs to make ships aware of the potential navigation hazard."
+msgstr ""
+"Sie wurden während eines großen technologischen Wettrüstens hergestellt. "
+"Alle Fraktionen versuchten, sie zu bauen, um ihre Feinde zu behindern, wenn "
+"sie sich ihnen näherten. Die meisten Schiffe haben inzwischen Wege gefunden, "
+"sie zu umgehen, aber niemand hat sich daran gemacht, die Überbleibsel zu "
+"beseitigen. Wenigstens haben die Fraktionen sie mit SJ-Rufzeichen versehen, "
+"um die Schiffe auf das potenzielle Navigationsrisiko aufmerksam zu machen."
+
+#: scripts/scenario_32_planet_devourer.lua:5996
+msgctxt "station-comms"
+msgid "Yes. What do they do?"
+msgstr "Ja. Was genau tun sie?"
+
+#: scripts/scenario_32_planet_devourer.lua:6001
+msgctxt "station-comms"
+msgid ""
+"The sensor jammers reduce your long range sensor range. The degree and range "
+"of effectiveness varies with each one. They're also designed to be booby "
+"traps. If you don't disable the trap, they'll fry your scanners if you pick "
+"them up to neutralize them."
+msgstr ""
+"Die Sensor-Störsender reduzieren die Reichweite ihres Langstreckenradars. "
+"Die Reichweite und Stärke des Einflusses sind von Störsender zu Störsender "
+"unterschiedlich. Außerdem haben sie kleine EMP-Fallen eingebaut. Wenn sie "
+"versuchen, sie einzusammeln, ohne sie vorher entschärft zu haben, würde das "
+"ihre Sensoren grillen."
+
+#: scripts/scenario_32_planet_devourer.lua:6008
+msgctxt "station-comms"
+msgid "Yes. How do I get rid of them?"
+msgstr "Wie werden wir sie los?"
+
+#: scripts/scenario_32_planet_devourer.lua:6013
+msgctxt "station-comms"
+msgid ""
+"Just pick them up. You'll want to scan them first if you don't want your "
+"scanners fried."
+msgstr ""
+"Sammeln Sie einfach ein. Achten Sie darauf, sie vorher zu scannen, ansonsten "
+"würden Ihre Sensoren gegrillt werden"
+
+#: scripts/scenario_32_planet_devourer.lua:6023
+#: scripts/scenario_32_planet_devourer.lua:7433
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr "Was sind unsere derzeitigen Befehle?"
+
+#: scripts/scenario_32_planet_devourer.lua:6038
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+"\n"
+"  %i Verbleibende Spielminuten"
+
+#: scripts/scenario_32_planet_devourer.lua:6050
+msgctxt "station-comms"
+msgid "Resources (repair crew, coolant, goods)"
+msgstr "Ressourcen (Reparaturcrew, Kühlmittel, Waren)"
+
+#: scripts/scenario_32_planet_devourer.lua:6055
+msgctxt "station-comms"
+msgid "Which of the following are you interested in?"
+msgstr "Wofür interessieren Sie sich?"
+
+#: scripts/scenario_32_planet_devourer.lua:6070
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr "Kaufen, verkaufen, handeln"
+
+#: scripts/scenario_32_planet_devourer.lua:6074
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available for sale: quantity, cost in reputation\n"
+msgstr ""
+"Station %s:\n"
+"Zum Verkauf stehende Waren oder Komponenten: Menge, Kosten in Ruf\n"
+
+#: scripts/scenario_32_planet_devourer.lua:6080
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s     %s: %i, %i\n"
+msgstr "%s     %s: %i, %i\n"
+
+#: scripts/scenario_32_planet_devourer.lua:6091
+#, lua-format
+msgctxt "trade-comms"
+msgid "%sGoods or components station will buy: price in reputation\n"
+msgstr "%sWaren oder Komponenten, die die Station kaufen wird: Preis in Ruf\n"
+
+#: scripts/scenario_32_planet_devourer.lua:6097
+#: scripts/scenario_32_planet_devourer.lua:6115
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s     %s: %i\n"
+msgstr "%s     %s: %i\n"
+
+#: scripts/scenario_32_planet_devourer.lua:6105
+#, lua-format
+msgctxt "trade-comms"
+msgid "%sCurrent cargo aboard %s:\n"
+msgstr "%sDerzeitige Fracht an Bord: %s:\n"
+
+#: scripts/scenario_32_planet_devourer.lua:6124
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s     Empty\n"
+msgstr "%s     Leer\n"
+
+#: scripts/scenario_32_planet_devourer.lua:6131
+#, lua-format
+msgctxt "trade-comms"
+msgid "%sAvailable Space: %i, Available Reputation: %i\n"
+msgstr "%sVerfügbarer Platz: %i, Verfügbarer Ruf: %i\n"
+
+#: scripts/scenario_32_planet_devourer.lua:6141
+#: scripts/scenario_32_planet_devourer.lua:8769
+#: scripts/scenario_32_planet_devourer.lua:8828
+#: scripts/scenario_32_planet_devourer.lua:8883
+#: scripts/scenario_32_planet_devourer.lua:8945
+#: scripts/scenario_32_planet_devourer.lua:9849
+#: scripts/scenario_32_planet_devourer.lua:9904
+#: scripts/scenario_32_planet_devourer.lua:9964
+#: scripts/scenario_32_planet_devourer.lua:10019
+#: scripts/scenario_32_planet_devourer.lua:10079
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr "Kaufe 1 %s für %i Ruf"
+
+#: scripts/scenario_32_planet_devourer.lua:6158
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr "Art: %s, Menge: %i, Ruf: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:6168
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+"%s\n"
+"Unzureichender Laderaum für den Kauf."
+
+#: scripts/scenario_32_planet_devourer.lua:6181
+#: scripts/scenario_32_planet_devourer.lua:6219
+#, lua-format
+msgctxt "needRep-comms"
+msgid ""
+"%s\n"
+"Insufficient reputation for purchase"
+msgstr ""
+"%s\n"
+"Unzureichender Ruf für den Kauf."
+
+#: scripts/scenario_32_planet_devourer.lua:6189
+#: scripts/scenario_32_planet_devourer.lua:6327
+#: scripts/scenario_32_planet_devourer.lua:6417
+#: scripts/scenario_32_planet_devourer.lua:6507
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Insufficient station inventory"
+msgstr ""
+"%s\n"
+"Auf der Station ist nicht genug davon vorrätig"
+
+#: scripts/scenario_32_planet_devourer.lua:6212
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"purchased"
+msgstr ""
+"%s\n"
+"Gekauft"
+
+#: scripts/scenario_32_planet_devourer.lua:6240
+#, lua-format
+msgctxt "trade-comms"
+msgid "Sell one %s for %i reputation"
+msgstr "Verkaufe 1 %s für %i Ruf"
+
+#: scripts/scenario_32_planet_devourer.lua:6263
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Reputation price: %i"
+msgstr "Art: %s, Rufkosten: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:6272
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"One sold"
+msgstr ""
+"%s\n"
+"1 verkauft"
+
+#: scripts/scenario_32_planet_devourer.lua:6295
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr "Tausche Lebensmittel gegen %s"
+
+#: scripts/scenario_32_planet_devourer.lua:6317
+#: scripts/scenario_32_planet_devourer.lua:6407
+#: scripts/scenario_32_planet_devourer.lua:6497
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr "Art: %s, Anzahl: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:6355
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Traded"
+msgstr ""
+"%s\n"
+"Handel abgeschlossen"
+
+#: scripts/scenario_32_planet_devourer.lua:6385
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr "Tausche Medizin gegen %s"
+
+#: scripts/scenario_32_planet_devourer.lua:6445
+#: scripts/scenario_32_planet_devourer.lua:6535
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+"\n"
+"Handel abgeschlossen"
+
+#: scripts/scenario_32_planet_devourer.lua:6475
+#: scripts/scenario_32_planet_devourer.lua:8730
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr "Tausche Luxusgüter gegen %s"
+
+#: scripts/scenario_32_planet_devourer.lua:6563
+#: scripts/scenario_32_planet_devourer.lua:8687
+#: scripts/scenario_32_planet_devourer.lua:9808
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr "Fracht abwerfen"
+
+#: scripts/scenario_32_planet_devourer.lua:6568
+#: scripts/scenario_32_planet_devourer.lua:8692
+#: scripts/scenario_32_planet_devourer.lua:9813
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+"Verfügbarer Platz: %i\n"
+"Was würden Sie gerne abwerfen?"
+
+#: scripts/scenario_32_planet_devourer.lua:6583
+#: scripts/scenario_32_planet_devourer.lua:8705
+#: scripts/scenario_32_planet_devourer.lua:9826
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr "1 %s abgeworfen"
+
+#: scripts/scenario_32_planet_devourer.lua:6598
+msgctxt "explainGoods-comms"
+msgid "No tutorial covered goods or cargo. Explain"
+msgstr ""
+"Waren oder Fracht sind vom Tutorial nicht abgedeckt. Bitte um Erklärung."
+
+#: scripts/scenario_32_planet_devourer.lua:6604
+msgctxt "explainGoods-comms"
+msgid ""
+"Different types of cargo or goods may be obtained from stations, freighters "
+"or other sources. They go by one word descriptions such as dilithium, optic, "
+"warp, etc. Certain mission goals may require a particular type or types of "
+"cargo. Each player ship differs in cargo carrying capacity. Goods may be "
+"obtained by spending reputation points or by trading other types of cargo "
+"(typically food, medicine or luxury)"
+msgstr ""
+"Verschiedene Arten von Fracht oder Waren können von Stationen, Frachtern "
+"oder anderen Quellen bezogen werden. Sie werden mit einem Wort beschrieben "
+"und oft abgekürzt, z.B. \"Dilithium\", \"Optik\", \"Warp\", usw. Bestimmte "
+"Missionsziele können eine bestimmte Art oder Arten von Fracht erfordern. "
+"Jedes Spielerschiff unterscheidet sich in seiner Frachtkapazität. Waren "
+"können durch die Ausgabe von Ruf-Punkten oder durch den Handel mit anderen "
+"Arten von Fracht (typischerweise Lebensmittel, Medizin oder Luxusgüter) "
+"erworben werden."
+
+#: scripts/scenario_32_planet_devourer.lua:6615
+msgctxt "trade-comms"
+msgid "Recruit repair crew member"
+msgstr "Rekrutiere Wartungspersonal für %i Ruf."
+
+#: scripts/scenario_32_planet_devourer.lua:6643
+msgctxt "trade-comms"
+msgid "We have a repair crew candidate for you to consider"
+msgstr "Wollen Sie ihr Reparaturteam  vergrößern?"
+
+#: scripts/scenario_32_planet_devourer.lua:6650
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr "Rekrutiere Wartungspersonal für %i Ruf."
+
+#: scripts/scenario_32_planet_devourer.lua:6687
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr "Wartungspersonal eingestellt"
+
+#: scripts/scenario_32_planet_devourer.lua:6697
+#: scripts/scenario_32_planet_devourer.lua:6756
+msgctxt "trade-comms"
+msgid ""
+"A possible repair recruit is awaiting final certification. They should be "
+"available in "
+msgstr ""
+"Wir warten gerade noch auf die Zertifizierung, wir erwarten Sie in etwa"
+
+#: scripts/scenario_32_planet_devourer.lua:6701
+#: scripts/scenario_32_planet_devourer.lua:6760
+msgctxt "trade-comms"
+msgid ""
+"There's one repair crew candidate completing their license application. They "
+"should be available in "
+msgstr ""
+"Sie müssen noch etwas warten, die Abschlussprüfung wurde gerade erst "
+"abgeschlossen. Wir erwarten die Prüfungsergebnisse in etwa "
+
+#: scripts/scenario_32_planet_devourer.lua:6705
+#: scripts/scenario_32_planet_devourer.lua:6764
+msgctxt "trade-comms"
+msgid "One repair crew should be getting here from their medical checkout in "
+msgstr ""
+"Gerade läuft noch eine medizinische Routineprüfung, bitte gedulden Sie sich "
+"noch etwa"
+
+#: scripts/scenario_32_planet_devourer.lua:6715
+#: scripts/scenario_32_planet_devourer.lua:6729
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s %i seconds"
+msgstr "%s %i Sekunden"
+
+#: scripts/scenario_32_planet_devourer.lua:6737
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s a second"
+msgstr "%s einer Sekunde"
+
+#: scripts/scenario_32_planet_devourer.lua:6776
+#, lua-format
+msgctxt "trade-comms"
+msgid "Several arrived on station earlier. %s %i seconds"
+msgstr ""
+"Einige neue Fachkräfte sind kürzlich auf der Station eingetroffen. %s %i "
+"Sekunden"
+
+#: scripts/scenario_32_planet_devourer.lua:6790
+#: scripts/scenario_32_planet_devourer.lua:6984
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i seconds"
+msgstr "%i Sekunden"
+
+#: scripts/scenario_32_planet_devourer.lua:6793
+#: scripts/scenario_32_planet_devourer.lua:6989
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i second"
+msgstr "%i Sekunde"
+
+#: scripts/scenario_32_planet_devourer.lua:6800
+#: scripts/scenario_32_planet_devourer.lua:6996
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i minutes and %s"
+msgstr "%i Minuten und %s"
+
+#: scripts/scenario_32_planet_devourer.lua:6806
+#: scripts/scenario_32_planet_devourer.lua:7002
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i minute and %s"
+msgstr "%i Minute und %s"
+
+#: scripts/scenario_32_planet_devourer.lua:6816
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"There are some repair crew recruits in route for %s. Travel time remaining "
+"is %s."
+msgstr ""
+"Mehr Reparaturpersonal (in Ausbildung) ist nach %s unterwegs. Verbleibende "
+"Reisezeit: %s"
+
+#: scripts/scenario_32_planet_devourer.lua:6829
+msgctxt "trade-comms"
+msgid "Purchase Coolant"
+msgstr "Kühlmittel kaufen"
+
+#: scripts/scenario_32_planet_devourer.lua:6859
+msgctxt "trade-comms"
+msgid "We've got some coolant available for you"
+msgstr "Wie haben etwas Kühlmittel für Sie"
+
+#: scripts/scenario_32_planet_devourer.lua:6866
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchase coolant for %i reputation"
+msgstr "Kühlmittel für %i Ruf kaufen."
+
+#: scripts/scenario_32_planet_devourer.lua:6907
+msgctxt "trade-comms"
+msgid "Additional coolant purchased"
+msgstr "Zusätzliches Kühlmittel gekauft."
+
+#: scripts/scenario_32_planet_devourer.lua:6922
+#: scripts/scenario_32_planet_devourer.lua:6938
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"The coolant preparation facility is having difficulty packaging the coolant "
+"for transport. They say they should have it working in about %i seconds"
+msgstr ""
+"In der Kühlmittel-Abfüllanlage gibt es gerade Schwierigkeiten, das "
+"Kühlmittel für den Transport umzufüllen. Die Probleme sollten in "
+"voraussichtlich %i Sekunden gelöst sein"
+
+#: scripts/scenario_32_planet_devourer.lua:6947
+msgctxt "trade-comms"
+msgid ""
+"The coolant preparation facility is having difficulty packaging the coolant "
+"for transportation. They say they should have it working in a second"
+msgstr ""
+"In der Kühlmittel-Abfüllanlage gibt es gerade Schwierigkeiten, das "
+"Kühlmittel für den Transport umzufüllen. Die Probleme sollten in einer "
+"Sekunde gelöst sein"
+
+#: scripts/scenario_32_planet_devourer.lua:6971
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Our coolant production facility just made some, but it's not quite ready to "
+"be transported. The preparation facility says it should take about %i seconds"
+msgstr ""
+"Unsere Kühlmittel-Fertigungsanlage hat gerade welches hergestellt, aber es "
+"ist noch nicht für den Transport bereit. Laut Auskunft aus der Abfüllanlage "
+"sollte es noch etwa %i Sekunden dauern"
+
+#: scripts/scenario_32_planet_devourer.lua:7012
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Our coolant production facility is making more right now. Coolant "
+"manufacturing time remaining is %s."
+msgstr ""
+"Unsere Kühlmittel-Fertigungsanlage stellt gerade mehr davon her. Bis zur "
+"Fertigstellung sollte es noch etwa %s Sekunden dauern."
+
+#: scripts/scenario_32_planet_devourer.lua:7027
+msgctxt "orders-comms"
+msgid "Steal Planet Devourer plans from Kraylor"
+msgstr "Stehlen Sie die Pläne des Planetenverschlingers von den Kraylor"
+
+#: scripts/scenario_32_planet_devourer.lua:7031
+msgctxt "orders-comms"
+msgid "Deliver stolen Planet Devourer plans to friendly station"
+msgstr "Übergeben Sie die gestohlenen Pläne zu einer freundlichen Station"
+
+#: scripts/scenario_32_planet_devourer.lua:7035
+msgctxt "orders-comms"
+msgid "Upload virus to Planet Devourer"
+msgstr "Virus zum Planetenverschlinger übertragen"
+
+#: scripts/scenario_32_planet_devourer.lua:7062
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr "Wir handeln nicht mit Massenvernichtungswaffen."
+
+#: scripts/scenario_32_planet_devourer.lua:7067
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr "Wir handeln nicht mit Störwaffen."
+
+#: scripts/scenario_32_planet_devourer.lua:7070
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr "Wir handeln nicht mit solchen Waffen."
+
+#: scripts/scenario_32_planet_devourer.lua:7084
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr "Alle Nukes sind geladen."
+
+#: scripts/scenario_32_planet_devourer.lua:7091
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+"Es tut mir leid, aber sie haben bereits das zulässige Höchstlimit erreicht."
+
+#: scripts/scenario_32_planet_devourer.lua:7115
+#: scripts/scenario_32_planet_devourer.lua:7151
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr "Ihr Vorrat an Nukes wurde wieder aufgefüllt."
+
+#: scripts/scenario_32_planet_devourer.lua:7122
+#: scripts/scenario_32_planet_devourer.lua:7158
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+"Wir waren so frei und haben Ihre Waffenvorräte etwas aufgefüllt.\n"
+"Setzen Sie sie weise ein."
+
+#: scripts/scenario_32_planet_devourer.lua:7127
+#: scripts/scenario_32_planet_devourer.lua:7164
+#: scripts/scenario_32_planet_devourer.lua:7170
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr "Ruf nicht hoch genug."
+
+#: scripts/scenario_32_planet_devourer.lua:7135
+msgctxt "ammo-comms"
+msgid "You can't afford as much as I'd like to give you"
+msgstr ""
+"Leider können sie sich nicht soviel leisten, auch wenn ich Ihnen gerne mehr "
+"geben würde,"
+
+#: scripts/scenario_32_planet_devourer.lua:7138
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr "Geben Sie uns bitte wenigstens 1"
+
+#: scripts/scenario_32_planet_devourer.lua:7188
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+"Guten Tag, \n"
+"wenn Sie Vorräte benötigen, docken Sie bitte bei uns an."
+
+#: scripts/scenario_32_planet_devourer.lua:7193
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+"Guten Tag,\n"
+"wenn Sie mit uns handeln wollen, docken Sie bitte bei uns an."
+
+#: scripts/scenario_32_planet_devourer.lua:7200
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+"\n"
+"Seien Sie sich darüber im Klaren, dass wir zu beschäftigt sein werden, um "
+"mit Ihnen Geschäfte zu machen, wenn die Feinde in der Gegend näher kommen."
+
+#: scripts/scenario_32_planet_devourer.lua:7242
+msgctxt "station-comms"
+msgid "Connect to warp jammer"
+msgstr "Mit Warp-Störsender verbinden"
+
+#: scripts/scenario_32_planet_devourer.lua:7244
+msgctxt "station-comms"
+msgid "Which one would you like to connect to?"
+msgstr "Mit welchem möchten Sie eine Verbindung herstellen?"
+
+#: scripts/scenario_32_planet_devourer.lua:7283
+#, lua-format
+msgctxt "station-comms"
+msgid "(%i reputation)"
+msgstr "(%i Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:7296
+#, lua-format
+msgctxt "station-comms"
+msgid "%s Automated warp jammer access menu"
+msgstr "%s Automatischen Störsender-Interface"
+
+#: scripts/scenario_32_planet_devourer.lua:7304
+msgctxt "station-comms"
+msgid "Reduce range to 1 unit for 1 minute"
+msgstr "Reichweite für eine Minute auf 1u verringern"
+
+#: scripts/scenario_32_planet_devourer.lua:7312
+#: scripts/scenario_32_planet_devourer.lua:7329
+#: scripts/scenario_32_planet_devourer.lua:7346
+msgctxt "station-comms"
+msgid "Acknowledged. Range adjusted. Reset timer engaged."
+msgstr "Bestätigt. Reichweite angepasst. Reset-Timer gestartet"
+
+#: scripts/scenario_32_planet_devourer.lua:7321
+msgctxt "station-comms"
+msgid "Reduce range by 50% for 2 minutes"
+msgstr "Reichweite für zwei Minuten auf die Hälfte verringern"
+
+#: scripts/scenario_32_planet_devourer.lua:7338
+msgctxt "station-comms"
+msgid "Reduce range by 25% for 3 minutes"
+msgstr "Reichweite für 3 Minuten auf 25% verringern"
+
+#: scripts/scenario_32_planet_devourer.lua:7366
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr "Welche Art von Informationen benötigen Sie?"
+
+#: scripts/scenario_32_planet_devourer.lua:7410
+msgctxt "mission-comms"
+msgid ""
+"What a terrible thing to contemplate, much less say out loud. Seriously, if "
+"you want to discuss such things, you should dock first so that the Kraylor "
+"cannot intercept the transmission no matter how good the encryption "
+"protocols."
+msgstr ""
+"Schlimm genug über so etwas Schreckliches nachzudenken, aber es auch noch "
+"laut sagen? Im Ernst, wenn Sie über solche Dinge reden wollen, sollten Sie "
+"zunächst andocken, so dass die Kraylor keine Chance haben, die Kommunikation "
+"abzuhören"
+
+#: scripts/scenario_32_planet_devourer.lua:7425
+msgctxt "mission-comms"
+msgid ""
+"Bring them to a friendly station for analysis. Subspace communications "
+"bandwidth prevent transmission and decryption without Kraylor destructive "
+"interference. We've started analysis based on the gestalt, but need the "
+"physical plans to complete it and provide an exploitable weakness."
+msgstr ""
+"Bringen Sie sie zu einer befreundeten Station zur Analyse. Bei einer "
+"Übertragung per Subraumkommunikation, besteht die Gefahr, dass die Kraylor "
+"die Übertragung abfangen und verfälschen. Wir haben bereits mit der Analyse "
+"anhand der Äußeren Merkmale begonnen, brauchen aber die physischen Pläne, um "
+"sie zu vervollständigen und eine ausnutzbare Schwäche zu finden."
+
+#: scripts/scenario_32_planet_devourer.lua:7438
+msgctxt "orders-comms"
+msgid "Save the planets from destruction."
+msgstr "Retten Sie die Planeten vor der Zerstörung."
+
+#: scripts/scenario_32_planet_devourer.lua:7440
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"%s%s"
+msgstr ""
+"%s\n"
+"%s%s"
+
+#: scripts/scenario_32_planet_devourer.lua:7449
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"   %i Minutes remain in game"
+msgstr ""
+"%s\n"
+"  %i Verbleibende Spielminuten"
+
+#: scripts/scenario_32_planet_devourer.lua:7461
+msgctxt "station-comms"
+msgid "Station services (ordnance restock, repair)"
+msgstr "Dienstleistungen (Munition auffüllen, Reparaturen)"
+
+#: scripts/scenario_32_planet_devourer.lua:7466
+msgctxt "station-comms"
+msgid "We offer a variety of services when you dock with us."
+msgstr ""
+"Wenn Sie bei uns andocken, können wir Ihnen eine Reihe an Dienstleistungen "
+"anbieten"
+
+#: scripts/scenario_32_planet_devourer.lua:7472
+msgctxt "ammo-comms"
+msgid "What ordnance do you have available for restock?"
+msgstr "Welche Munition können Sie uns anbieten?"
+
+#: scripts/scenario_32_planet_devourer.lua:7481
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"%s\n"
+"   Nuke"
+msgstr ""
+"%s\n"
+"   Nuke"
+
+#: scripts/scenario_32_planet_devourer.lua:7489
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"%s\n"
+"   EMP"
+msgstr ""
+"%s\n"
+"   EMP"
+
+#: scripts/scenario_32_planet_devourer.lua:7497
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"%s\n"
+"   Homing"
+msgstr ""
+"%s\n"
+"   Zielsuchraketen"
+
+#: scripts/scenario_32_planet_devourer.lua:7505
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"%s\n"
+"   Mine"
+msgstr ""
+"%s\n"
+"   Mine"
+
+#: scripts/scenario_32_planet_devourer.lua:7513
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"%s\n"
+"   HVLI"
+msgstr ""
+"%s\n"
+"   HGBI"
+
+#: scripts/scenario_32_planet_devourer.lua:7520
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr "Wir können Ihnen leider nichts anbieten"
+
+#: scripts/scenario_32_planet_devourer.lua:7526
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr "Wir haben folgende Munitionsart vorrätig:%s"
+
+#: scripts/scenario_32_planet_devourer.lua:7534
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr "Wir haben folgende Munitionsarten vorrätig:%s"
+
+#: scripts/scenario_32_planet_devourer.lua:7549
+msgctxt "stationServices-comms"
+msgid ""
+"Which docking service category do you want a status for?\n"
+"    Primary services:\n"
+"        Charge battery, repair hull, replenish probes\n"
+"    Secondary systems repair:\n"
+"        Scanners, hacking, probe launch, combat maneuver, self destruct"
+msgstr ""
+"Für welche Kategorie von Andockdiensten möchten Sie einen Status erhalten?\n"
+"    Primäre Dienstleistungen:\n"
+"        Batterie aufladen, Rumpf reparieren, Sonden auffüllen\n"
+"    Sekundäre Dienstleistungen - Systemreparatur von:\n"
+"        Scanner, Hacken, Sondenstart, Ausweichmanöver, Selbstzerstörung"
+
+#: scripts/scenario_32_planet_devourer.lua:7553
+msgctxt "stationServices-comms"
+msgid "Primary services"
+msgstr "Primäre Dienstleistungen"
+
+#: scripts/scenario_32_planet_devourer.lua:7558
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s primary docking services status:"
+msgstr "Status der primären Dienstleistungen von Station %s:"
+
+#: scripts/scenario_32_planet_devourer.lua:7619
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable whie it is undergoing maintenance."
+msgstr ""
+"Automatische Hüllenreparatur aufgrund von Wartungsarbeiten nicht verfügbar"
+
+#: scripts/scenario_32_planet_devourer.lua:7683
+msgctxt "stationServices-comms"
+msgid "Secondary systems repair"
+msgstr "System-Reparatur:"
+
+#: scripts/scenario_32_planet_devourer.lua:7689
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s docking repair services status:"
+msgstr "Status der Reparatur-Dienstleistungen von Station %s:"
+
+#: scripts/scenario_32_planet_devourer.lua:7764
+#, lua-format
+msgctxt "station-comms"
+msgid "Goods information at %s or near %s"
+msgstr "Infos zu Waren auf %s oder in der Nähe von %s"
+
+#: scripts/scenario_32_planet_devourer.lua:7770
+msgctxt "station-comms"
+msgid "Always good to get some goods"
+msgstr "Immer gut, neue Waren zu bekommen"
+
+#: scripts/scenario_32_planet_devourer.lua:7784
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr "Welche Waren bieten Sie zum Verkauf oder Tausch an?"
+
+#: scripts/scenario_32_planet_devourer.lua:7790
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation"
+msgstr ""
+"Station %s:\n"
+"Verfügbare Waren oder Komponenten: Menge, Ruf-Kosten"
+
+#: scripts/scenario_32_planet_devourer.lua:7798
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"   %14s: %2i, %3i"
+msgstr ""
+"%s\n"
+"   %14s: %2i, %3i"
+
+#: scripts/scenario_32_planet_devourer.lua:7811
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr "Wo kann ich bestimmte Waren finden?"
+
+#: scripts/scenario_32_planet_devourer.lua:7815
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations often have food or medicine or both. Neutral stations may "
+"trade their goods for food, medicine or luxury."
+msgstr ""
+"Freundliche Stationen haben oft Lebensmittel, Medizin oder beides. Neutrale "
+"Stationen können ihre Waren gegen Lebensmittel, Medizin oder Luxusgüter "
+"eintauschen."
+
+#: scripts/scenario_32_planet_devourer.lua:7890
+#, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s for %i reputation"
+msgstr "Station %s in Sektor %s bietet %s für %i Ruf."
+
+#: scripts/scenario_32_planet_devourer.lua:7905
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+"%s\n"
+"\n"
+"An welchen Waren sind Sie interessiert?\n"
+"Ich habe von diesen hier gehört:"
+
+#: scripts/scenario_32_planet_devourer.lua:7913
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s Beyond that, I have no knowledge of specific stations"
+msgstr "%s Darüber hinaus habe ich keine Kenntnis von bestimmten Stationen."
+
+#: scripts/scenario_32_planet_devourer.lua:7993
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Tell me about %s"
+msgstr "Erzählen Sie mir von %s"
+
+#: scripts/scenario_32_planet_devourer.lua:8013
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Never heard of %s"
+msgstr "Nie etwas von %s gehört"
+
+#: scripts/scenario_32_planet_devourer.lua:8022
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s died last week. The funeral was yesterday"
+msgstr "%s ist letzte Woche verstorben. Gestern war die Beerdigung"
+
+#: scripts/scenario_32_planet_devourer.lua:8031
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s? Who's %s? There's nobody here named %s"
+msgstr "%s? Wer ist %s? Hier gibt es niemanden namens %s"
+
+#: scripts/scenario_32_planet_devourer.lua:8042
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "We don't talk about %s. They are gone and good riddance"
+msgstr "Da gibt es nichts zu reden. %s ist weg und das ist auch gut so."
+
+#: scripts/scenario_32_planet_devourer.lua:8051
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "I think %s moved away"
+msgstr "Ich glaube %s ist weg gezogen."
+
+#: scripts/scenario_32_planet_devourer.lua:8066
+msgctxt "stationAssist-comms"
+msgid "Report status"
+msgstr "Statusbericht"
+
+#: scripts/scenario_32_planet_devourer.lua:8068
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr "Hülle: %d%%\n"
+
+#: scripts/scenario_32_planet_devourer.lua:8077
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr "Schilde: %d%%\n"
+
+#: scripts/scenario_32_planet_devourer.lua:8088
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr "Schilde %s: %d%%\n"
+
+#: scripts/scenario_32_planet_devourer.lua:8105
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr "Können Sie eine Versorgungslieferung schicken? (%d Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:8113
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+"Sie müssen einen Wegpunkt setzen, bevor Sie Unterstützung anfordern können."
+
+#: scripts/scenario_32_planet_devourer.lua:8120
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr "An welchen Wegpunkt sollen wir das Transportschiff schicken?"
+
+#: scripts/scenario_32_planet_devourer.lua:8126
+#: scripts/scenario_32_planet_devourer.lua:8202
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr "WP %d"
+
+#: scripts/scenario_32_planet_devourer.lua:8156
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr "Wir haben ein Versorgungsschiff zu WP %d geschickt."
+
+#: scripts/scenario_32_planet_devourer.lua:8165
+#: scripts/scenario_32_planet_devourer.lua:8241
+#: scripts/scenario_32_planet_devourer.lua:8333
+#: scripts/scenario_32_planet_devourer.lua:8434
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr "Ruf nicht hoch genug!"
+
+#: scripts/scenario_32_planet_devourer.lua:8181
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send reinforcements! (%d rep)"
+msgstr "Bitte schicken Sie Verstärkung! (%d Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:8189
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr ""
+"Sie müssen einen Wegpunkt setzen, bevor Sie Verstärkung anfordern können."
+
+#: scripts/scenario_32_planet_devourer.lua:8196
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr "Zu welchem Wegpunkt sollen wir die Verstärkung schicken?"
+
+#: scripts/scenario_32_planet_devourer.lua:8231
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at WP %d"
+msgstr "Wir haben %s losgeschickt um Sie bei WP %d zu unterstützen."
+
+#: scripts/scenario_32_planet_devourer.lua:8256
+msgctxt "stationAssist-comms"
+msgid "Please send a service jonque for repairs"
+msgstr "Bitte senden Sie ein Wartungsshuttle für Reparaturen"
+
+#: scripts/scenario_32_planet_devourer.lua:8261
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid ""
+"Would you like the service jonque to come to you directly or would you "
+"prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f "
+"reputation."
+msgstr ""
+"Soll das Service-Shuttle direkt zu Ihnen kommen oder möchten Sie lieber "
+"einen Treffpunkt an einem Wegpunkt vereinbaren? In beiden Fällen würde das "
+"%.1f Ruf kosten."
+
+#: scripts/scenario_32_planet_devourer.lua:8326
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to come to you to help with repairs"
+msgstr "Wir haben %s losgeschickt, um Ihnen mit den  Reparaturen zu helfen"
+
+#: scripts/scenario_32_planet_devourer.lua:8341
+msgctxt "stationAssist-comms"
+msgid ""
+"\n"
+"\n"
+"Note: if you want to use a waypoint, you will have to back out and set one "
+"and come back."
+msgstr ""
+"\n"
+"\n"
+"Hinweis: Wenn sie einen Wegpunkt setzen wollen, müssen Sie zuerst die "
+"Kommunikation beenden, und nach dem Setzen wieder starten."
+
+#: scripts/scenario_32_planet_devourer.lua:8351
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Rendezvous at waypoint %i"
+msgstr "Treffpunkt bei Wegpunkt %i"
+
+#: scripts/scenario_32_planet_devourer.lua:8424
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to rendezvous at waypoint %i"
+msgstr "Wir haben %s zum Treffpunkt bei Wegpunkt %i geschickt"
+
+#: scripts/scenario_32_planet_devourer.lua:8514
+#: scripts/scenario_32_planet_devourer.lua:10165
+#: scripts/scenario_32_planet_devourer.lua:10298
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr "Sie wünschen?"
+
+#: scripts/scenario_32_planet_devourer.lua:8516
+#: scripts/scenario_32_planet_devourer.lua:10167
+#: scripts/scenario_32_planet_devourer.lua:10300
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr "Wie können wir Ihnen behilflich sein?"
+
+#: scripts/scenario_32_planet_devourer.lua:8518
+#: scripts/scenario_32_planet_devourer.lua:10169
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr "Verteidigen Sie einen Wegpunkt"
+
+#: scripts/scenario_32_planet_devourer.lua:8523
+#: scripts/scenario_32_planet_devourer.lua:10174
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr "Keine Wegpunkte gesetzt. Bitte setzen Sie zuerst einen Wegpunkt."
+
+#: scripts/scenario_32_planet_devourer.lua:8528
+#: scripts/scenario_32_planet_devourer.lua:10179
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr "Welchen Wegpunkt sollen wir verteidigen?"
+
+#: scripts/scenario_32_planet_devourer.lua:8533
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr "Verteidige WP %d."
+
+#: scripts/scenario_32_planet_devourer.lua:8544
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr "Wir sind auf dem Weg zur Unterstützung bei WP %d."
+
+#: scripts/scenario_32_planet_devourer.lua:8557
+#: scripts/scenario_32_planet_devourer.lua:10208
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr "Unterstützen Sie uns."
+
+#: scripts/scenario_32_planet_devourer.lua:8559
+#: scripts/scenario_32_planet_devourer.lua:10210
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr "Wir machen uns auf den Weg, um Ihnen zu helfen."
+
+#: scripts/scenario_32_planet_devourer.lua:8565
+#: scripts/scenario_32_planet_devourer.lua:10216
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr "Statusbericht"
+
+#: scripts/scenario_32_planet_devourer.lua:8567
+#: scripts/scenario_32_planet_devourer.lua:10218
+#: scripts/scenario_32_planet_devourer.lua:10304
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr "Hülle: %d%%\n"
+
+#: scripts/scenario_32_planet_devourer.lua:8573
+#: scripts/scenario_32_planet_devourer.lua:10224
+#: scripts/scenario_32_planet_devourer.lua:10310
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sShield: %d%%\n"
+msgstr "%sSchilde: %d%%\n"
+
+#: scripts/scenario_32_planet_devourer.lua:8583
+#: scripts/scenario_32_planet_devourer.lua:10234
+#: scripts/scenario_32_planet_devourer.lua:10320
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sFront Shield: %d%%\n"
+msgstr "%sFrontschilde:  %d%%\n"
+
+#: scripts/scenario_32_planet_devourer.lua:8592
+#: scripts/scenario_32_planet_devourer.lua:10243
+#: scripts/scenario_32_planet_devourer.lua:10329
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sRear Shield: %d%%\n"
+msgstr "%sHeckschilde: %d%%\n"
+
+#: scripts/scenario_32_planet_devourer.lua:8603
+#: scripts/scenario_32_planet_devourer.lua:10254
+#: scripts/scenario_32_planet_devourer.lua:10340
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sShield %s: %d%%\n"
+msgstr "%sSchild %s: %d%%\n"
+
+#: scripts/scenario_32_planet_devourer.lua:8618
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s%s Missiles: %d/%d\n"
+msgstr "%s%s Raketen: %d/%d\n"
+
+#: scripts/scenario_32_planet_devourer.lua:8629
+#: scripts/scenario_32_planet_devourer.lua:9772
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Docked with %s"
+msgstr ""
+"%s\n"
+"Angedockt an %s"
+
+#: scripts/scenario_32_planet_devourer.lua:8640
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Heading for %s station %s in %s"
+msgstr ""
+"%s\n"
+"Ziel: %s Station %s in %s"
+
+#: scripts/scenario_32_planet_devourer.lua:8660
+#: scripts/scenario_32_planet_devourer.lua:10275
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr "Docke bei %s an"
+
+#: scripts/scenario_32_planet_devourer.lua:8666
+#: scripts/scenario_32_planet_devourer.lua:10281
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr "Wir docken bei %s an."
+
+#: scripts/scenario_32_planet_devourer.lua:8750
+#, lua-format
+msgctxt "trade-comms"
+msgid "Traded luxury for %s"
+msgstr "Luxus für %s gehandelt."
+
+#: scripts/scenario_32_planet_devourer.lua:8796
+#: scripts/scenario_32_planet_devourer.lua:8857
+#: scripts/scenario_32_planet_devourer.lua:8912
+#: scripts/scenario_32_planet_devourer.lua:8974
+#: scripts/scenario_32_planet_devourer.lua:9878
+#: scripts/scenario_32_planet_devourer.lua:9933
+#: scripts/scenario_32_planet_devourer.lua:9993
+#: scripts/scenario_32_planet_devourer.lua:10048
+#: scripts/scenario_32_planet_devourer.lua:10108
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchased %s from %s"
+msgstr "Gekauft: %s von %s."
+
+#: scripts/scenario_32_planet_devourer.lua:8806
+#: scripts/scenario_32_planet_devourer.lua:8867
+#: scripts/scenario_32_planet_devourer.lua:8922
+#: scripts/scenario_32_planet_devourer.lua:8984
+#: scripts/scenario_32_planet_devourer.lua:9888
+#: scripts/scenario_32_planet_devourer.lua:9943
+#: scripts/scenario_32_planet_devourer.lua:10003
+#: scripts/scenario_32_planet_devourer.lua:10058
+#: scripts/scenario_32_planet_devourer.lua:10118
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr "Zu wenig Ruf, um den Kauf abzuschließen"
+
+#: scripts/scenario_32_planet_devourer.lua:8998
+#: scripts/scenario_32_planet_devourer.lua:9729
+msgctxt "trade-comms"
+msgid "Do you have cargo you might sell?"
+msgstr "Haben Sie Fracht, die Sie verkaufen könnten?"
+
+#: scripts/scenario_32_planet_devourer.lua:9001
+#: scripts/scenario_32_planet_devourer.lua:9732
+msgctxt "trade-comms"
+msgid "We've got "
+msgstr "Wir haben "
+
+#: scripts/scenario_32_planet_devourer.lua:9006
+#: scripts/scenario_32_planet_devourer.lua:9737
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s, %s"
+msgstr "%s, %s"
+
+#: scripts/scenario_32_planet_devourer.lua:9012
+#: scripts/scenario_32_planet_devourer.lua:9743
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s%s"
+msgstr "%s%s"
+
+#: scripts/scenario_32_planet_devourer.lua:9022
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s nothing"
+msgstr "%s nichts"
+
+#: scripts/scenario_32_planet_devourer.lua:9041
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr "Wir sehen Ihrer Zerstörung entgegen!"
+
+#: scripts/scenario_32_planet_devourer.lua:9043
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr "Ihre Blutlinie wird hier enden!"
+
+#: scripts/scenario_32_planet_devourer.lua:9045
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr "Ihre schwächlichen Drohungen sind bedeutungslos."
+
+#: scripts/scenario_32_planet_devourer.lua:9052
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+"Ktzzzsss.\n"
+"\n"
+"Ihr werdet sterrrben, Schwächchchchlinge!!"
+
+#: scripts/scenario_32_planet_devourer.lua:9056
+msgctxt "shipEnemy-comms"
+msgid "We will destroy you"
+msgstr "Wir werden Sie zerstören"
+
+#: scripts/scenario_32_planet_devourer.lua:9059
+msgctxt "shipEnemy-comms"
+msgid "We think not. It is you who will experience destruction!"
+msgstr "Das bezweifeln wir. Sie sind es, die zerstört werden!"
+
+#: scripts/scenario_32_planet_devourer.lua:9062
+msgctxt "shipEnemy-comms"
+msgid "You have no honor"
+msgstr "Sie haben keinerlei Ehre!"
+
+#: scripts/scenario_32_planet_devourer.lua:9065
+msgctxt "shipEnemy-comms"
+msgid "Your insult has brought our wrath upon you. Prepare to die."
+msgstr ""
+"Ihre Beleidigung hat unseren Zorn über Sie gebracht. Machen Sie sich bereit, "
+"zu sterben!"
+
+#: scripts/scenario_32_planet_devourer.lua:9069
+msgctxt "shipEnemy-comms"
+msgid "Your comments about honor have no meaning to us"
+msgstr "Ihre Bemerkung über Ehre hat keinerlei Bedeutung für uns"
+
+#: scripts/scenario_32_planet_devourer.lua:9073
+msgctxt "shipEnemy-comms"
+msgid "We pity your pathetic race"
+msgstr "Wir bemitleiden Ihre erbärmliche Spezies"
+
+#: scripts/scenario_32_planet_devourer.lua:9076
+msgctxt "shipEnemy-comms"
+msgid "Pathetic? You will regret your disparagement!"
+msgstr "Erbärmlich? Das werden Sie bereuen!"
+
+#: scripts/scenario_32_planet_devourer.lua:9079
+msgctxt "shipEnemy-comms"
+msgid "We don't care what you think of us"
+msgstr "Es kümmert uns nicht, was Sie von uns denken."
+
+#: scripts/scenario_32_planet_devourer.lua:9087
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+"Wir wollen Ihnen keinen Schaden zufügen, aber wir werden es tun, wenn wir "
+"müssen.\n"
+"Ende der Nachricht."
+
+#: scripts/scenario_32_planet_devourer.lua:9096
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr "Gehen Sie uns aus dem Weg, oder Ihr Tod wird uns köstlich amüsieren!"
+
+#: scripts/scenario_32_planet_devourer.lua:9105
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+"Eins Null Eins.\n"
+"\n"
+"Nichtbinäre Kommunikation erkannt. Wechsle zu universeller Sprache.\n"
+"\n"
+"Generiere angemessene Antwort aus menschlichen Archiven.\n"
+"\n"
+":Kommen Sie uns nicht in die Quere.:\n"
+"\n"
+"Verbindung beendet."
+
+#: scripts/scenario_32_planet_devourer.lua:9108
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr "FÜHRE AUS: SELBSTZERSTÖRUNG"
+
+#: scripts/scenario_32_planet_devourer.lua:9111
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr "Schadhafter Befehl entdeckt. Erfasse Quelle."
+
+#: scripts/scenario_32_planet_devourer.lua:9114
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr "Externer Befehl wird ignoriert."
+
+#: scripts/scenario_32_planet_devourer.lua:9119
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+"Der Schwarm duldet keine Drohungen. Feindseligkeit gegen eines von uns ist "
+"Feindseligkeit gegen uns alle.\n"
+"\n"
+"Halten Sie ihre Position und machen Sie sich bereit, Ihre Körper als Nahrung "
+"zu spenden."
+
+#: scripts/scenario_32_planet_devourer.lua:9124
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr "<Sende 'The Itsy-Bitsy Spider' auf allen Frequenzen>"
+
+#: scripts/scenario_32_planet_devourer.lua:9128
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+"Wir brauchen keine Erlaubnis um so eine unbedeutende Bedrohung zu "
+"zerpflücken."
+
+#: scripts/scenario_32_planet_devourer.lua:9132
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr "Der Schwarm hat wichtigeres zu tun als Schädlingsbekämpfung."
+
+#: scripts/scenario_32_planet_devourer.lua:9137
+msgctxt "shipEnemy-comms"
+msgid "State your business"
+msgstr "Was wollen Sie?"
+
+#: scripts/scenario_32_planet_devourer.lua:9142
+msgctxt "shipEnemy-comms"
+msgid "What do you want? (not that we care)"
+msgstr "Was wollen Sie? (Nicht dass es uns interessieren würde)"
+
+#: scripts/scenario_32_planet_devourer.lua:9147
+msgctxt "shipEnemy-comms"
+msgid "Don't waste our time"
+msgstr "Verschwenden Sie nicht unsere Zeit"
+
+#: scripts/scenario_32_planet_devourer.lua:9149
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr "Kümmern Sie sich um Ihre eigenen Angelegenheiten!"
+
+#: scripts/scenario_32_planet_devourer.lua:9201
+msgctxt "shipEnemy-comms"
+msgid "Subspace and time continuum disruption authorized"
+msgstr "Subraumstörung autorisiert"
+
+#: scripts/scenario_32_planet_devourer.lua:9230
+msgctxt "shipEnemy-comms"
+msgid "Stop your actions"
+msgstr "Hören Sie auf mit dem, was Sie gerade tun!"
+
+#: scripts/scenario_32_planet_devourer.lua:9268
+msgctxt "shipEnemy-comms"
+msgid "Just this once, we'll take your advice"
+msgstr "Diese eine Mal werden wir auf Ihren Rat hören"
+
+#: scripts/scenario_32_planet_devourer.lua:9272
+msgctxt "shipEnemy-comms"
+msgid "No"
+msgstr "Nein"
+
+#: scripts/scenario_32_planet_devourer.lua:9682
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "Disruption %i"
+msgstr "Subraumstörung %i"
+
+#: scripts/scenario_32_planet_devourer.lua:9727
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr "Ja?"
+
+#: scripts/scenario_32_planet_devourer.lua:9753
+#, lua-format
+msgctxt "trade-comms"
+msgid "%snothing"
+msgstr "/%snichts"
+
+#: scripts/scenario_32_planet_devourer.lua:9763
+msgctxt "shipAssist-comms"
+msgid "Where are you going?"
+msgstr "Wohin sind Sie unterwegs?"
+
+#: scripts/scenario_32_planet_devourer.lua:9767
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hi %s,"
+msgstr "Hallo %s,"
+
+#: scripts/scenario_32_planet_devourer.lua:9787
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Heading for %s station %s in sector %s"
+msgstr ""
+"%s\n"
+"Unterwegs zu %s-Station %s in Sektor %s"
+
+#: scripts/scenario_32_planet_devourer.lua:10136
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+"Es tut uns leid, wir haben keine Zeit, mit Ihnen zu plaudern.\n"
+"Wir befinden uns auf einer wichtige Mission."
+
+#: scripts/scenario_32_planet_devourer.lua:10141
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+"Wir können nichts für Sie tun.\n"
+"Einen schönen Tag noch."
+
+#: scripts/scenario_32_planet_devourer.lua:10184
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %i"
+msgstr "Verteidigen Sie WP %i"
+
+#: scripts/scenario_32_planet_devourer.lua:10195
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %i."
+msgstr "Wir sind auf dem Weg, Sie bei WP %d zu unterstützen."
+
+#: scripts/scenario_32_planet_devourer.lua:10302
+msgctxt "shipAssist-comms"
+msgid "How are you doing?"
+msgstr "Wie geht's?"
+
+#: scripts/scenario_32_planet_devourer.lua:10357
+msgctxt "shipServices-comms"
+msgid "Service options"
+msgstr "Mögliche Dienstleistungen"
+
+#: scripts/scenario_32_planet_devourer.lua:10376
+msgctxt "shipServices-comms"
+msgid "Repair ship system"
+msgstr "Schiffssystem reparieren"
+
+#: scripts/scenario_32_planet_devourer.lua:10381
+msgctxt "shipServices-comms"
+msgid "What system would you like repaired?"
+msgstr "Welches System soll repariert werden?"
+
+#: scripts/scenario_32_planet_devourer.lua:10388
+msgctxt "shipServices-comms"
+msgid "Repair probe launch system"
+msgstr "Sonden-Abschussvorrichtung reparieren"
+
+#: scripts/scenario_32_planet_devourer.lua:10398
+msgctxt "shipServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr "Ihre Sonden-Abschussvorrichtung wurde repariert"
+
+#: scripts/scenario_32_planet_devourer.lua:10405
+#: scripts/scenario_32_planet_devourer.lua:10431
+#: scripts/scenario_32_planet_devourer.lua:10457
+#: scripts/scenario_32_planet_devourer.lua:10483
+#: scripts/scenario_32_planet_devourer.lua:10512
+#: scripts/scenario_32_planet_devourer.lua:10565
+#: scripts/scenario_32_planet_devourer.lua:10605
+#: scripts/scenario_32_planet_devourer.lua:10645
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want me to fix your ship"
+msgstr ""
+"Sie müssen in nächster Nähe bleiben, damit ich das Schiff reparieren kann"
+
+#: scripts/scenario_32_planet_devourer.lua:10415
+msgctxt "shipServices-comms"
+msgid "Repair hacking system"
+msgstr "Hackingsystem reparieren"
+
+#: scripts/scenario_32_planet_devourer.lua:10424
+msgctxt "shipServices-comms"
+msgid "Your hack system has been repaired"
+msgstr "Ihr Hackingsystem wurde repariert"
+
+#: scripts/scenario_32_planet_devourer.lua:10441
+msgctxt "shipServices-comms"
+msgid "Repair scanning system"
+msgstr "Scansystem reparieren"
+
+#: scripts/scenario_32_planet_devourer.lua:10450
+msgctxt "shipServices-comms"
+msgid "Your scanners have been repaired"
+msgstr "Ihre Scanner wurden repariert"
+
+#: scripts/scenario_32_planet_devourer.lua:10467
+msgctxt "shipServices-comms"
+msgid "Repair combat maneuver"
+msgstr "Ausweichmanöversystem reparieren"
+
+#: scripts/scenario_32_planet_devourer.lua:10476
+msgctxt "shipServices-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr "Ihr Ausweichmanöversystem wurde repariert"
+
+#: scripts/scenario_32_planet_devourer.lua:10495
+msgctxt "shipServices-comms"
+msgid "Repair self destruct system"
+msgstr "Selbstzerstörungs-System reparieren"
+
+#: scripts/scenario_32_planet_devourer.lua:10505
+msgctxt "shipServices-comms"
+msgid "Your self destruct system has been repaired"
+msgstr "Ihr Selbstzerstörungssystem wurde repariert"
+
+#: scripts/scenario_32_planet_devourer.lua:10539
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Full hull repair (%i reputation)"
+msgstr "Komplette Hüllenreparatur (%i Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:10553
+msgctxt "shipServices-comms"
+msgid "All fixed up and ready to go"
+msgstr "Reparatur vollständig!"
+
+#: scripts/scenario_32_planet_devourer.lua:10574
+#: scripts/scenario_32_planet_devourer.lua:10614
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Add %i%% to hull (%i reputation)"
+msgstr "Hülle um %i%% reparieren (%i Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:10593
+#: scripts/scenario_32_planet_devourer.lua:10633
+msgctxt "shipServices-comms"
+msgid "Repairs completed as requested"
+msgstr "Reparatur wurde wie gewünscht erledigt"
+
+#: scripts/scenario_32_planet_devourer.lua:10686
+msgctxt "ammo-comms"
+msgid "Restock ordnance"
+msgstr "Munition auffüllen"
+
+#: scripts/scenario_32_planet_devourer.lua:10695
+msgctxt "ammo-comms"
+msgid "What kind of ordnance?"
+msgstr "Welche Art von Munition?"
+
+#: scripts/scenario_32_planet_devourer.lua:10699
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s (%i reputation each)"
+msgstr "%s (jeweils %i Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:10727
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Restocked your %s type ordnance"
+msgstr "%s-Munition wieder aufgefüllt"
+
+#: scripts/scenario_32_planet_devourer.lua:10741
+#, lua-format
+msgctxt "needRep-comms"
+msgid ""
+"You don't have enough reputation to fully replenish your %s type ordnance. "
+"You need %i and you only have %i. How would you like to proceed?"
+msgstr ""
+"Ihr Ruf ist nicht hoch genug um ihren Vorrat an %s  komplett aufzufüllen. "
+"Sie benötigen %i Ruf, haben aber lediglich %i."
+
+#: scripts/scenario_32_planet_devourer.lua:10757
+#: scripts/scenario_32_planet_devourer.lua:10994
+#: scripts/scenario_32_planet_devourer.lua:11150
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Get one (%i reputation)"
+msgstr "1 auffüllen (%i Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:10791
+#: scripts/scenario_32_planet_devourer.lua:10965
+#: scripts/scenario_32_planet_devourer.lua:11028
+#: scripts/scenario_32_planet_devourer.lua:11182
+#, lua-format
+msgctxt "ammo-comms"
+msgid "One %s provided"
+msgstr "1 %s übergeben"
+
+#: scripts/scenario_32_planet_devourer.lua:10808
+#: scripts/scenario_32_planet_devourer.lua:10895
+#: scripts/scenario_32_planet_devourer.lua:11045
+#: scripts/scenario_32_planet_devourer.lua:11132
+#: scripts/scenario_32_planet_devourer.lua:11199
+#: scripts/scenario_32_planet_devourer.lua:11214
+msgctxt "ammo-comms"
+msgid "You need to stay close if you want me to restock your ordnance"
+msgstr "Sie müssen in der Nähe bleiben, damit Munition aufgestockt werden kann"
+
+#: scripts/scenario_32_planet_devourer.lua:10843
+#: scripts/scenario_32_planet_devourer.lua:11080
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Get %i (%i reputation)"
+msgstr "%i (für %i Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:10877
+#: scripts/scenario_32_planet_devourer.lua:10954
+#: scripts/scenario_32_planet_devourer.lua:11114
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%i %ss provided"
+msgstr "%i x %s übergeben"
+
+#: scripts/scenario_32_planet_devourer.lua:10920
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"I don't have enough %s type ordnance to fully restock you. How would you "
+"like to proceed?"
+msgstr ""
+"Ich habe nicht genügen %s-Munition, um Ihren Vorrat vollständig aufzufüllen."
+
+#: scripts/scenario_32_planet_devourer.lua:10928
+msgctxt "ammo-comms"
+msgid "We'll take all you've got"
+msgstr "Wir nehmen alles was Sie haben"
+
+#: scripts/scenario_32_planet_devourer.lua:10978
+#, lua-format
+msgctxt "needRep-comms"
+msgid ""
+"You don't have enough reputation to get all of our %s type ordnance. You "
+"need %i and you only have %i. How would you like to proceed?"
+msgstr ""
+"Ihr Ruf ist nicht hoch genug um unseren gesamten Vorrat an %s zu bekommen. "
+"Sie benötigen dafür %i Ruf, haben aber lediglich %i."
+
+#: scripts/scenario_32_planet_devourer.lua:11235
+msgctxt "shipServices-comms"
+msgid "Restock scan probes (5 reputation)"
+msgstr "Sonden wieder auffüllen (5 Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:11245
+msgctxt "shipServices-comms"
+msgid "I replenished your probes for you."
+msgstr "Ich habe Ihren Sondenvorrat wieder aufgefüllt"
+
+#: scripts/scenario_32_planet_devourer.lua:11257
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want me to restock your probes"
+msgstr ""
+"Sie müssen in der Nähe bleiben, damit ich Ihren Sondenvorrat wieder "
+"auffüllen kann"
+
+#: scripts/scenario_32_planet_devourer.lua:11283
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Quick charge the main batteries (%i reputation)"
+msgstr "Schnell-Laden der Hauptenergiezellen (%i Ruf)"
+
+#: scripts/scenario_32_planet_devourer.lua:11302
+msgctxt "shipServices-comms"
+msgid "Your batteries have been charged"
+msgstr "Ihre Energiezellen wurden aufgeladen"
+
+#: scripts/scenario_32_planet_devourer.lua:11314
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want your batteries charged quickly"
+msgstr ""
+"Sie müssen in nächster Nähe bleiben, damit ich Ihre Energiezellen schnell "
+"wieder aufladen kann"
+
+#: scripts/scenario_32_planet_devourer.lua:11332
+msgctxt "shipServices-comms"
+msgid "How can I help you get your ship in good running order?"
+msgstr "Wie kann ich helfen, ihr Schiff wieder flott zu bekommen?"
+
+#: scripts/scenario_32_planet_devourer.lua:11339
+msgctxt "shipServices-comms"
+msgid "There's nothing on your ship that I can help you fix. Sorry."
+msgstr ""
+"Es gibt leider nichts, was ich auf Ihrem Schiff reparieren kann. Tut mir "
+"leid."
+
+#: scripts/scenario_32_planet_devourer.lua:11797
+#, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s tubes: %s"
+msgstr "%s-Schachtgr.: %s"
+
+#: scripts/scenario_32_planet_devourer.lua:11803
+#, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s tube: %s"
+msgstr "%s-Schachtgr.: %s"
+
+#: scripts/scenario_32_planet_devourer.lua:11866
+msgctxt "msgMainscreen"
+msgid "All the planets have been destroyed"
+msgstr "Alle Planeten wurden zerstört"
+
+#: scripts/scenario_32_planet_devourer.lua:12159
+#, lua-format
+msgctxt "mission-msgEngineer"
+msgid ""
+"The technical readouts for %s have been extracted from the databanks on "
+"Kraylor station %s"
+msgstr ""
+"Die Blaupausen für %s wurden aus den Datenbanken der Kraylor-Station %s "
+"extrahiert"
+
+#: scripts/scenario_32_planet_devourer.lua:12172
+#, lua-format
+msgctxt "mission-msgEngineer+"
+msgid ""
+"The technical readouts for %s have been extracted from the databanks on "
+"Kraylor station %s"
+msgstr ""
+"Die Blaupausen für %s wurden aus den Datenbanken der Kraylor-Station %s "
+"extrahiert"
+
+#: scripts/scenario_32_planet_devourer.lua:12185
+#, lua-format
+msgctxt "mission-msgDamageControl"
+msgid ""
+"The technical readouts for %s have been extracted from the databanks on "
+"Kraylor station %s"
+msgstr ""
+"Die Blaupausen für %s wurden aus den Datenbanken der Kraylor-Station %s "
+"extrahiert"
+
+#: scripts/scenario_32_planet_devourer.lua:12197
+#: scripts/scenario_32_planet_devourer.lua:12255
+#: scripts/scenario_32_planet_devourer.lua:12330
+#: scripts/scenario_32_planet_devourer.lua:12405
+#, lua-format
+msgctxt "mission-tabEngineer"
+msgid "Extract timer:%i"
+msgstr "Auslesen: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:12207
+#: scripts/scenario_32_planet_devourer.lua:12270
+#: scripts/scenario_32_planet_devourer.lua:12345
+#: scripts/scenario_32_planet_devourer.lua:12420
+#, lua-format
+msgctxt "mission-tabEngineer+"
+msgid "Extract timer:%i"
+msgstr "Auslesen: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:12219
+#: scripts/scenario_32_planet_devourer.lua:12285
+#: scripts/scenario_32_planet_devourer.lua:12360
+#: scripts/scenario_32_planet_devourer.lua:12435
+#, lua-format
+msgctxt "mission-tabDamageControl"
+msgid "Extract timer:%i"
+msgstr "Auslesen: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:12230
+#: scripts/scenario_32_planet_devourer.lua:12300
+#: scripts/scenario_32_planet_devourer.lua:12375
+#: scripts/scenario_32_planet_devourer.lua:12450
+#, lua-format
+msgctxt "mission-tabHelms"
+msgid "Extract timer:%i"
+msgstr "Auslesen: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:12242
+msgctxt "mission-buttonEngineer"
+msgid "Extract Plans"
+msgstr "Pläne auslesen"
+
+#: scripts/scenario_32_planet_devourer.lua:12317
+msgctxt "mission-buttonEngineer+"
+msgid "Extract Plans"
+msgstr "Pläne auslesen"
+
+#: scripts/scenario_32_planet_devourer.lua:12392
+msgctxt "mission-buttonDamageControl"
+msgid "Extract Plans"
+msgstr "Pläne auslesen"
+
+#: scripts/scenario_32_planet_devourer.lua:12493
+msgctxt "mission-buttonEngineer"
+msgid "Upload Virus"
+msgstr "Virus übertragen"
+
+#: scripts/scenario_32_planet_devourer.lua:12510
+#, lua-format
+msgctxt "mission-msgEngineer"
+msgid ""
+"The virus has been uploaded to %s. A portion of the Planet Devourer's beam "
+"and missile systems have entered maintenance mode."
+msgstr ""
+"Das Virus wurde zu %s übertragen. Ein Teil der Hauptwaffe des "
+"Planetenverschlingers und einige seiner Raketensysteme wurden in den "
+"Wartungsmodus versetzt"
+
+#: scripts/scenario_32_planet_devourer.lua:12522
+msgctxt "mission-buttonEngineer+"
+msgid "Upload Virus"
+msgstr "Virus übertragen"
+
+#: scripts/scenario_32_planet_devourer.lua:12539
+#, lua-format
+msgctxt "mission-msgEngineer+"
+msgid ""
+"The virus has been uploaded to %s. A portion of the Planet Devourer's beam "
+"and missile systems have entered maintenance mode."
+msgstr ""
+"Das Virus wurde zu %s übertragen. Ein Teil der Hauptwaffe des "
+"Planetenverschlingers und einige seiner Raketensysteme wurden in den "
+"Wartungsmodus versetzt"
+
+#: scripts/scenario_32_planet_devourer.lua:12551
+msgctxt "mission-buttonDamageControl"
+msgid "Upload Virus"
+msgstr "Virus übertragen"
+
+#: scripts/scenario_32_planet_devourer.lua:12568
+#, lua-format
+msgctxt "mission-msgDamageControl"
+msgid ""
+"The virus has been uploaded to %s. A portion of the Planet Devourer's beam "
+"and missile systems have entered maintenance mode."
+msgstr ""
+"Das Virus wurde zu %s übertragen. Ein Teil der Hauptwaffe des "
+"Planetenverschlingers und einige seiner Raketensysteme wurden in den "
+"Wartungsmodus versetzt"
+
+#: scripts/scenario_32_planet_devourer.lua:12711
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Planet Devourer destroyed. %i out of 5 planets saved."
+msgstr "Planetenverschlinger wurde zerstört. %i von 5 Planeten gerettet."
+
+#: scripts/scenario_32_planet_devourer.lua:12887
+msgctxt "repairCrew-msgEngineer"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+"Das medizinische Team hat ein Mitglied Ihrer Reparaturcrew wiederbelebt."
+
+#: scripts/scenario_32_planet_devourer.lua:12899
+msgctxt "repairCrew-msgEngineer+"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+"Das medizinische Team hat ein Mitglied Ihrer Reparaturcrew wiederbelebt."
+
+#: scripts/scenario_32_planet_devourer.lua:12911
+msgctxt "repairCrew-msgDamageControl"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+"Das medizinische Team hat ein Mitglied Ihrer Reparaturcrew wiederbelebt."
+
+#: scripts/scenario_32_planet_devourer.lua:12947
+msgctxt "coolant-msgEngineer"
+msgid "Automated systems have recovered some coolant"
+msgstr "Automatische Systeme haben etwas Kühlmittel zurückgewonnen."
+
+#: scripts/scenario_32_planet_devourer.lua:12957
+msgctxt "coolant-msgEngineer+"
+msgid "Automated systems have recovered some coolant"
+msgstr "Automatische Systeme haben etwas Kühlmittel zurückgewonnen."
+
+#: scripts/scenario_32_planet_devourer.lua:12967
+msgctxt "coolant-msgDamageControl"
+msgid "Automated systems have recovered some coolant"
+msgstr "Automatische Systeme haben etwas Kühlmittel zurückgewonnen."
+
+#: scripts/scenario_32_planet_devourer.lua:13016
+#: scripts/scenario_32_planet_devourer.lua:13076
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr "Ein Mitglied des Reparaturteams ist verstorben"
+
+#: scripts/scenario_32_planet_devourer.lua:13027
+#: scripts/scenario_32_planet_devourer.lua:13087
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr "Ein Mitglied des Reparaturteams ist verstorben"
+
+#: scripts/scenario_32_planet_devourer.lua:13038
+#: scripts/scenario_32_planet_devourer.lua:13098
+msgctxt "repairCrew-msgDamageControl"
+msgid "One of your repair crew has perished"
+msgstr "Ein Mitglied des Reparaturteams ist verstorben"
+
+#: scripts/scenario_32_planet_devourer.lua:13125
+msgctxt "coolant-msgEngineer"
+msgid "Damage has caused a loss of coolant"
+msgstr "Die Beschädigung hat zu einem Kühlmittelverlust geführt."
+
+#: scripts/scenario_32_planet_devourer.lua:13136
+msgctxt "coolant-msgEngineer+"
+msgid "Damage has caused a loss of coolant"
+msgstr "Die Beschädigung hat zu einem Kühlmittelverlust geführt."
+
+#: scripts/scenario_32_planet_devourer.lua:13147
+msgctxt "coolant-msgDamageControl"
+msgid "Damage has caused a loss of coolant"
+msgstr "Die Beschädigung hat zu einem Kühlmittelverlust geführt."
+
+#: scripts/scenario_32_planet_devourer.lua:13161
+msgctxt "damage-msgEngineer"
+msgid "The probe launch system has been damaged"
+msgstr "Das Sonden-Startsystem wurde beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13171
+msgctxt "damage-msgEngineer+"
+msgid "The probe launch system has been damaged"
+msgstr "Das Sonden-Startsystem wurde beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13181
+msgctxt "damage-msgDamageControl"
+msgid "The probe launch system has been damaged"
+msgstr "Das Sonden-Startsystem wurde beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13193
+msgctxt "damage-msgEngineer"
+msgid "The hacking system has been damaged"
+msgstr "Das Hacking-System wurde beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13203
+msgctxt "damage-msgEngineer+"
+msgid "The hacking system has been damaged"
+msgstr "Das Hacking-System wurde beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13213
+msgctxt "damage-msgDamageControl"
+msgid "The hacking system has been damaged"
+msgstr "Das Hacking-System wurde beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13225
+msgctxt "damage-msgEngineer"
+msgid "The scanners have been damaged"
+msgstr "Die Scanner wurden beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13235
+msgctxt "damage-msgEngineer+"
+msgid "The scanners have been damaged"
+msgstr "Die Scanner wurden beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13245
+msgctxt "damage-msgDamageControl"
+msgid "The scanners have been damaged"
+msgstr "Die Scanner wurden beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13257
+msgctxt "damage-msgEngineer"
+msgid "Combat maneuver has been damaged"
+msgstr "Das Ausweichmanöver-System wurde beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13267
+msgctxt "damage-msgEngineer+"
+msgid "Combat maneuver has been damaged"
+msgstr "Das Ausweichmanöver-System wurde beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13277
+msgctxt "damage-msgDamageControl"
+msgid "Combat maneuver has been damaged"
+msgstr "Das Ausweichmanöver-System wurde beschädigt."
+
+#: scripts/scenario_32_planet_devourer.lua:13289
+msgctxt "damage-msgEngineer"
+msgid "Self destruct system has been damaged"
+msgstr "Selbstzerstörungs-System wurde beschädigt"
+
+#: scripts/scenario_32_planet_devourer.lua:13299
+msgctxt "damage-msgEngineer+"
+msgid "Self destruct system has been damaged"
+msgstr "Selbstzerstörungs-System wurde beschädigt"
+
+#: scripts/scenario_32_planet_devourer.lua:13309
+msgctxt "damage-msgDamageControl"
+msgid "Self destruct system has been damaged"
+msgstr "Selbstzerstörungs-System wurde beschädigt"
+
+#: scripts/scenario_32_planet_devourer.lua:13339
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr "Inventar"
+
+#: scripts/scenario_32_planet_devourer.lua:13354
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr "Inventar"
+
+#: scripts/scenario_32_planet_devourer.lua:13370
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "%s Current cargo:"
+msgstr "%s Aktuelle Fracht"
+
+#: scripts/scenario_32_planet_devourer.lua:13381
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr "     %s: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:13390
+msgctxt "inventory-shipLog"
+msgid "     Empty"
+msgstr "     Leer"
+
+#: scripts/scenario_32_planet_devourer.lua:13393
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "Available space: %i"
+msgstr "Verfügbarer Platz: %i"
+
+#: scripts/scenario_32_planet_devourer.lua:13412
+msgctxt "msgMainscreen"
+msgid "Scenario needs the 'Per-system damage' option under 'Extra settings'"
+msgstr ""
+"Für das Szenario muss die Option \"Schaden pro System\" in den zusätzlichen "
+"Einstellungen aktiviert sein."
+
+#: scripts/scenario_32_planet_devourer.lua:13432
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"From: Headquarters\n"
+"To: Captain and crew of %s\n"
+"The Kraylor have decided to field test some newly developed weaponry. All we "
+"know is that it's big. Find out what they are up to. If, as usual, they are "
+"up to no good, stop them.\n"
+"Good luck."
+msgstr ""
+"von: Hauptquartier\n"
+"An: Captain und Besatzung von %s\n"
+"Die Kraylor haben beschlossen, eine neu entwickelte Waffe zu testen. Alles, "
+"was wir wissen, ist, dass sie groß ist. Finden Sie heraus, was sie vorhaben. "
+"Wenn Sie, wie üblich, nichts Gutes im Schilde führen, halten Sie sie auf.\n"
+"Viel Glück."
+
+#: scripts/scenario_32_planet_devourer.lua:13455
+msgctxt "mission-incCall"
+msgid ""
+"We intercepted some Kraylor transmissions on that weapons test. They say "
+"they are going to demonstrate the destructive power of their ultimate force "
+"in the universe. This is starting to sound like the plot from a late 20th "
+"century space opera movie...\n"
+"Anyway, the ship type is the Planet Devourer (not the Death Star for all you "
+"20th century movie history buffs). We expect the Kraylor to wantonly destroy "
+"all the planets in the area, because that's just the kind of beings they are."
+msgstr ""
+"Wir haben einige Kraylor-Übertragungen zu diesem Waffentest abgefangen. Sie "
+"sagen, sie wollen die zerstörerische Kraft ihrer ultimativen Macht im "
+"Universum demonstrieren. Das hört sich langsam wie die Handlung eines "
+"Science-Fiction-Film aus dem späten 20. Jahrhundert an... \n"
+"Jedenfalls handelt es sich bei dem Schiffstyp um einen sogenannten "
+"\"Planetenverschlinger\" (nicht Todesstern, für alle, die sich mit der "
+"Filmgeschichte des 20. Jahrhunderts auskennen) Wir erwarten, dass die "
+"Kraylor alle Planeten in der Umgebung mutwillig zerstören, denn das ist "
+"genau ihre Art."
+
+#: scripts/scenario_32_planet_devourer.lua:13461
+#, lua-format
+msgctxt "mission-incCall"
+msgid ""
+"We intercepted some Kraylor transmissions on that weapons test. They say "
+"they are going to demonstrate the destructive power of their ultimate force "
+"in the universe. This is starting to sound like the plot from a late 20th "
+"century space opera movie...\n"
+"Anyway, the ship name is the %s (not the Death Star for all you 20th century "
+"movie history buffs). The ship class is Planet Devourer. We expect the "
+"Kraylor to wantonly destroy all the planets in the area, because that's just "
+"the kind of beings they are."
+msgstr ""
+"Wir haben einige Kraylor-Übertragungen zu diesem Waffentest abgefangen. Sie "
+"sagen, sie wollen die zerstörerische Kraft ihrer ultimativen Macht im "
+"Universum demonstrieren. Das hört sich langsam wie die Handlung eines "
+"Science-Fiction-Film aus dem späten 20. Jahrhundert an... \n"
+"Jedenfalls lautet der Name des Schiffs \"%s\" (nicht Todesstern, für alle, "
+"die sich mit der Filmgeschichte des 20. Jahrhunderts auskennen) Wir "
+"erwarten, dass die Kraylor alle Planeten in der Umgebung mutwillig "
+"zerstören, denn das ist genau ihre Art."
+
+#: scripts/scenario_32_planet_devourer.lua:13490
+#, lua-format
+msgctxt "mission-tabHelms"
+msgid "%s %s in %s"
+msgstr "%s %s in %s"
+
+#: scripts/scenario_32_planet_devourer.lua:13502
+#, lua-format
+msgctxt "mission-tabTactical"
+msgid "%s %s in %s"
+msgstr "%s %s in %s"
+
+#~ msgctxt "trade-comms"
+#~ msgid ", "
+#~ msgstr ", "

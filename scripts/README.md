@@ -25,11 +25,13 @@ These files are useful to include on the server, but aren't required:
 
 Scenario filenames follow a naming convention of `scenario_XX_name.lua`, where `XX` is a two-digit numeric ID. This ID follows these conventions:
 
-- 00-04: Basic scenarios
-- 05-79: Missions
-  - 47-79: Xansta's scenarios
-- 80-89: Player vs. player
-- 90-9X: Development and testing scenarios
+- 00-09: Basic scenarios, suitable for short games and new players
+- 10-29: Missions, self-contained stories
+- 30-49: Replayable, designed to be ran repeatedly with randomization
+- 50-59: Race, scenarios designed as time challenges
+- 60-69: Player-vs.-player, designed for multiple player ships on different sides
+- 90-99: Development aids, such as zoos, performance tests, and scenario templates
+- 9X: Test scenarios, designed to validate and demonstrate individual game features
 
 ### Scripts for scenarios
 

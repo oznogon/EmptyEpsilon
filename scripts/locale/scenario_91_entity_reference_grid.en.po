@@ -10,7 +10,7 @@ msgid ""
 "individual entity patterns."
 msgstr ""
 
-#: scripts/scenario_91_entity_reference_grid.lua:297
+#: scripts/scenario_91_entity_reference_grid.lua:1284
 msgctxt "buttonGM"
 msgid "Print all grid positions"
 msgstr ""

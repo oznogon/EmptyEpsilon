@@ -14,123 +14,123 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: scripts/api/gm.lua:3
+#: scripts/api/gm.lua:7
 msgctxt "create"
 msgid "Artifact"
 msgstr "Artefact"
 
-#: scripts/api/gm.lua:3 scripts/api/gm.lua:4 scripts/api/gm.lua:5
-#: scripts/api/gm.lua:10 scripts/api/gm.lua:11 scripts/api/gm.lua:12
-#: scripts/api/gm.lua:13 scripts/api/gm.lua:14 scripts/api/gm.lua:15
-#: scripts/api/gm.lua:16 scripts/api/gm.lua:17 scripts/api/gm.lua:29
+#: scripts/api/gm.lua:8 scripts/api/gm.lua:17 scripts/api/gm.lua:26
+#: scripts/api/gm.lua:76 scripts/api/gm.lua:85 scripts/api/gm.lua:94
+#: scripts/api/gm.lua:103 scripts/api/gm.lua:112 scripts/api/gm.lua:121
+#: scripts/api/gm.lua:130 scripts/api/gm.lua:139 scripts/api/gm.lua:157
 msgctxt "create"
 msgid "Various"
 msgstr "Divers"
 
-#: scripts/api/gm.lua:4
+#: scripts/api/gm.lua:16
 #, fuzzy
 msgctxt "create"
 msgid "Warp jammer"
 msgstr "Brouilleur de vitesse lumière"
 
-#: scripts/api/gm.lua:5
+#: scripts/api/gm.lua:25
 msgctxt "create"
 msgid "Mine"
 msgstr "Mine"
 
-#: scripts/api/gm.lua:6
+#: scripts/api/gm.lua:34
 msgctxt "create"
 msgid "Homing missile"
 msgstr ""
 
-#: scripts/api/gm.lua:6 scripts/api/gm.lua:7 scripts/api/gm.lua:8
-#: scripts/api/gm.lua:9
+#: scripts/api/gm.lua:35 scripts/api/gm.lua:44 scripts/api/gm.lua:53
+#: scripts/api/gm.lua:62
 msgctxt "create"
 msgid "Missiles"
 msgstr ""
 
-#: scripts/api/gm.lua:7
+#: scripts/api/gm.lua:43
 msgctxt "create"
 msgid "Nuke"
 msgstr ""
 
-#: scripts/api/gm.lua:8
+#: scripts/api/gm.lua:52
 msgctxt "create"
 msgid "EMP missile"
 msgstr ""
 
-#: scripts/api/gm.lua:9
+#: scripts/api/gm.lua:61
 msgctxt "create"
 msgid "HVLI"
 msgstr ""
 
-#: scripts/api/gm.lua:10
+#: scripts/api/gm.lua:75
 #, fuzzy
 msgctxt "create"
 msgid "Supply drop"
 msgstr "Caisse d'approvisionnement"
 
-#: scripts/api/gm.lua:11
+#: scripts/api/gm.lua:84
 msgctxt "create"
 msgid "Scan probe"
 msgstr ""
 
-#: scripts/api/gm.lua:12
+#: scripts/api/gm.lua:93
 msgctxt "create"
 msgid "Asteroid"
 msgstr "Astéroïde"
 
-#: scripts/api/gm.lua:13
+#: scripts/api/gm.lua:102
 #, fuzzy
 msgctxt "create"
 msgid "Visual asteroid"
 msgstr "Astéroïde décoratif"
 
-#: scripts/api/gm.lua:14
+#: scripts/api/gm.lua:111
 msgctxt "create"
 msgid "Planet"
 msgstr "Planète"
 
-#: scripts/api/gm.lua:15
+#: scripts/api/gm.lua:120
 #, fuzzy
 msgctxt "create"
 msgid "Black hole"
 msgstr "Trou noir"
 
-#: scripts/api/gm.lua:16
+#: scripts/api/gm.lua:129
 msgctxt "create"
 msgid "Nebula"
 msgstr "Nébuleuse"
 
-#: scripts/api/gm.lua:17
+#: scripts/api/gm.lua:138
 #, fuzzy
 msgctxt "create"
 msgid "Worm hole"
 msgstr "Trou de ver"
 
-#: scripts/api/gm.lua:29
+#: scripts/api/gm.lua:156
 msgctxt "create"
 msgid "Camera"
 msgstr ""
 
-#: scripts/api/gm.lua:29
+#: scripts/api/gm.lua:158
 msgctxt "create"
 msgid "Cinematic camera viewpoint"
 msgstr ""
 
-#: scripts/api/gm.lua:34
+#: scripts/api/gm.lua:168
 #, fuzzy
 msgctxt "create"
 msgid "Player ship"
 msgstr "Vaisseau joueur"
 
-#: scripts/api/gm.lua:36
+#: scripts/api/gm.lua:176
 #, fuzzy
 msgctxt "create"
 msgid "Station"
 msgstr "Station"
 
-#: scripts/api/gm.lua:38
+#: scripts/api/gm.lua:184
 #, fuzzy
 msgctxt "create"
 msgid "CPU ship"

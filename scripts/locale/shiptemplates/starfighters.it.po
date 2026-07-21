@@ -11,220 +11,195 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.1\n"
 
-#: scripts/shiptemplates/starFighters.lua:13
+#: scripts/shiptemplates/starfighters.lua:19
 #, fuzzy
 msgctxt "ship"
 msgid "MT52 Hornet"
 msgstr "MT52 Hornet"
 
-#: scripts/shiptemplates/starFighters.lua:13
-#: scripts/shiptemplates/starFighters.lua:68
-#: scripts/shiptemplates/starFighters.lua:124
+#: scripts/shiptemplates/starfighters.lua:20
+#: scripts/shiptemplates/starfighters.lua:93
+#: scripts/shiptemplates/starfighters.lua:214
+#: scripts/shiptemplates/starfighters.lua:330
+#: scripts/shiptemplates/starfighters.lua:347
+#: scripts/shiptemplates/starfighters.lua:368
+#: scripts/shiptemplates/starfighters.lua:390
 #, fuzzy
 msgctxt "class"
 msgid "Starfighter"
 msgstr "Caccia stellare"
 
-#: scripts/shiptemplates/starFighters.lua:13
+#: scripts/shiptemplates/starfighters.lua:20
+#: scripts/shiptemplates/starfighters.lua:330
+#: scripts/shiptemplates/starfighters.lua:347
 #, fuzzy
 msgctxt "subclass"
 msgid "Interceptor"
 msgstr "Intercettore"
 
-#: scripts/shiptemplates/starFighters.lua:15
+#: scripts/shiptemplates/starfighters.lua:25
 msgid ""
-"The MT52 Hornet is a basic interceptor found in many corners of the galaxy. "
-"It's easy to find spare parts for MT52s, not only because they are produced "
-"in large numbers, but also because they suffer high losses in combat."
+"The MT52 Hornet is a basic interceptor-class starfighter found in many "
+"corners of the galaxy. It's easy to find spare parts for MT52s, not only "
+"because they're produced in large numbers, but also because they suffer high "
+"losses in combat."
 msgstr ""
-"L'MT52 Hornet è un intercettore di base che si trova in molti angoli della "
-"galassia. È facile trovare pezzi di ricambio per MT52, non solo perché sono "
-"prodotti in gran numero, ma anche perché subiscono perdite elevate in "
-"combattimento."
 
-#: scripts/shiptemplates/starFighters.lua:23
+#: scripts/shiptemplates/starfighters.lua:37
 #, fuzzy
 msgctxt "ship"
 msgid "MU52 Hornet"
 msgstr "MU52 Hornet"
 
-#: scripts/shiptemplates/starFighters.lua:25
+#: scripts/shiptemplates/starfighters.lua:41
 msgid ""
-"The MU52 Hornet is a new, upgraded version of the MT52. All of its systems "
-"are slightly improved over the MT52 model."
+"The MU52 Hornet is an upgraded version of the MT52 interceptor-class "
+"starfighter. All of its systems are slightly improved over the MT52 model."
 msgstr ""
-"L'MU52 Hornet è una nuova versione aggiornata dell'MT52. Tutti i suoi "
-"sistemi sono leggermente migliorati rispetto al modello MT52."
 
-#: scripts/shiptemplates/starFighters.lua:31
+#: scripts/shiptemplates/starfighters.lua:52
 #, fuzzy
 msgctxt "playerShip"
 msgid "MP52 Hornet"
 msgstr "MP52 Hornet"
 
-#: scripts/shiptemplates/starFighters.lua:32
+#: scripts/shiptemplates/starfighters.lua:56
 msgid ""
-"The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with "
-"nearly twice the hull strength, nearly three times the shielding, better "
-"acceleration, impulse boosters, and a second laser cannon."
+"The MP52 Hornet is a significantly upgraded version of MU52 Hornet "
+"interceptor-class starfighter, with nearly twice the hull strength, nearly "
+"three times the shielding, better acceleration, impulse boosters, and a "
+"second laser cannon."
 msgstr ""
-"L'MP52 Hornet è una versione notevolmente migliorata dell'MU52 Hornet, con "
-"quasi il doppio della resistenza dello scafo, quasi tre volte gli scudi, "
-"migliore accelerazione, motori a impulsi e un secondo cannone laser."
 
-#: scripts/shiptemplates/starFighters.lua:68
+#: scripts/shiptemplates/starfighters.lua:92
 #, fuzzy
 msgctxt "ship"
 msgid "Adder MK5"
 msgstr "Adder MK5"
 
-#: scripts/shiptemplates/starFighters.lua:68
+#: scripts/shiptemplates/starfighters.lua:93
+#: scripts/shiptemplates/starfighters.lua:368
+#: scripts/shiptemplates/starfighters.lua:390
 msgctxt "subclass"
 msgid "Gunship"
 msgstr "Cannoniera"
 
-#: scripts/shiptemplates/starFighters.lua:70
+#: scripts/shiptemplates/starfighters.lua:98
+#: scripts/shiptemplates/starfighters.lua:120
+#: scripts/shiptemplates/starfighters.lua:138
+#: scripts/shiptemplates/starfighters.lua:154
+#: scripts/shiptemplates/starfighters.lua:169
+#: scripts/shiptemplates/starfighters.lua:184
+#: scripts/shiptemplates/starfighters.lua:200
 msgid ""
-"The Adder line's fifth iteration proved to be a great success among pirates "
-"and law officers alike. It is cheap, fast, and easy to maintain, and it "
-"packs a decent punch."
+"The Adder starfighter hull is a long-running, frequently iterated-upon "
+"design. Adders are commonly classified as gunships, with most models "
+"featuring several beam weapons and at least one weapon tube."
 msgstr ""
-"La quinta iterazione della linea Adder si è rivelata un grande successo tra "
-"i pirati e gli ufficiali della legge. È economico, veloce e di facile "
-"manutenzione e offre un impatto decente."
 
-#: scripts/shiptemplates/starFighters.lua:81
+#: scripts/shiptemplates/starfighters.lua:100
+msgid ""
+"The Adder MK5 has proven to be a great success amongst pirates and system "
+"patrols alike. It's cheap, fast, easy to maintain, and packs a decent punch."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:116
 #, fuzzy
 msgctxt "ship"
 msgid "Adder MK4"
 msgstr "Adder MK4"
 
-#: scripts/shiptemplates/starFighters.lua:83
+#: scripts/shiptemplates/starfighters.lua:122
 msgid ""
-"The mark 4 Adder is a rare sight these days due to the success its "
-"successor, the mark 5 Adder, which often replaces this model. Its similar "
-"hull, however, means careless buyers are sometimes conned into buying mark 4 "
-"models disguised as the mark 5."
+"The Adder MK4 is a rare sight these days due to the success its successor, "
+"the Adder MK5, which often replaces this model. Its similar hull, however, "
+"means careless buyers are sometimes conned into buying mark 4 models "
+"disguised as the mark 5."
 msgstr ""
-"Il Mark 4 Adder è uno spettacolo raro in questi giorni a causa della fama "
-"del suo successore, il Mark 5 Adder, che ha spesso rimpiazzato questo "
-"modello. Il suo scafo simile, tuttavia, significa che a volte acquirenti "
-"disattenti sono indotti ad acquistare modelli Mark 4 mascherati da Mark 5."
 
-#: scripts/shiptemplates/starFighters.lua:91
+#: scripts/shiptemplates/starfighters.lua:135
 #, fuzzy
 msgctxt "ship"
 msgid "Adder MK3"
 msgstr "Adder MK3"
 
-#: scripts/shiptemplates/starFighters.lua:92
+#: scripts/shiptemplates/starfighters.lua:140
 msgid ""
 "The Adder MK3 is one of the first of the Adder line to meet with some "
-"success. A large number of them were made before the manufacturer went "
-"through its first bankruptcy. There has been a recent surge of purchases of "
-"the Adder MK3 in the secondary market due to its low price and its "
-"similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 "
-"has weaker shields and hull, but a faster turn speed"
+"success, and many were made before the manufacturer went through its first "
+"bankruptcy. Its low price and similarity to subsequent models has led to a "
+"resurgence of secondhand sales of the mark 3 model. Compared to the Adder "
+"MK4, the mark 3 has weaker shields and hull, but a faster turning rate."
 msgstr ""
-"L'Adder MK3 è stato uno dei primi della linea Adder a riscuotere un certo "
-"successo. Molti di essi sono stati realizzati prima che il produttore "
-"andasse incontro al suo primo fallimento. C'è stata una recente ondata di "
-"acquisti di Adder MK3 nel mercato secondario a causa del suo prezzo basso e "
-"della sua somiglianza con i modelli successivi. Rispetto all'Adder MK4, "
-"l'Adder MK3 ha scudi e scafo più deboli, ma una velocità di virata maggiore."
 
-#: scripts/shiptemplates/starFighters.lua:97
+#: scripts/shiptemplates/starfighters.lua:150
 #, fuzzy
 msgctxt "ship"
 msgid "Adder MK6"
 msgstr "Adder MK6"
 
-#: scripts/shiptemplates/starFighters.lua:99
-#, fuzzy
+#: scripts/shiptemplates/starfighters.lua:156
 msgid ""
-"The mark 6 Adder is a small upgrade compared to the highly successful mark 5 "
-"model. Since people still prefer the more familiar and reliable mark 5, the "
-"mark 6 has not seen the same level of success."
+"The Adder MK6 is a small upgrade compared to the highly successful Adder "
+"MK5. Since people still prefer the more familiar and reliable mark 5, the "
+"mark 6 hasn't seen the same level of success."
 msgstr ""
-"Il Mark 6 Adder è un piccolo aggiornamento rispetto al modello Mark 5 di "
-"grande successo. Poiché le persone preferiscono ancora il più familiare e "
-"affidabile Mark 5 , il Mark 6 non ha visto lo stesso livello di successo."
 
-#: scripts/shiptemplates/starFighters.lua:103
+#: scripts/shiptemplates/starfighters.lua:165
 #, fuzzy
 msgctxt "ship"
 msgid "Adder MK7"
 msgstr "Adder MK7"
 
-#: scripts/shiptemplates/starFighters.lua:105
+#: scripts/shiptemplates/starfighters.lua:171
 msgid ""
-"The release of the Adder Mark 7 sent the manufacturer into a second "
-"bankruptcy. They made improvements to the Mark 7 over the Mark 6 like "
-"stronger shields and longer beams, but the popularity of their previous "
-"models, especially the Mark 5, prevented them from raising the purchase "
-"price enough to recoup the development and manufacturing costs of the Mark 7"
+"The release of the Adder MK7 sent the manufacturer into a second bankruptcy. "
+"Despite stronger shields and longer beam ranges, the popularity of previous "
+"models (especially the Adder MK5) prevented them from raising the purchase "
+"price enough to recoup the mark 7's development and manufacturing costs."
 msgstr ""
-"Il rilascio dell'Adder Mark 7 ha portato il produttore a un secondo "
-"fallimento. Sono stati apportati miglioramenti al Mark 7 rispetto al Mark 6 "
-"come scudi più forti e cannoni a raggi con gittata maggiore, ma la "
-"popolarità dei modelli precedenti, in particolare il Mark 5, ha impedito "
-"loro di aumentare il prezzo di acquisto abbastanza da recuperare i costi di "
-"sviluppo e produzione del Mark 7."
 
-#: scripts/shiptemplates/starFighters.lua:109
+#: scripts/shiptemplates/starfighters.lua:180
 #, fuzzy
 msgctxt "ship"
 msgid "Adder MK8"
 msgstr "Adder MK8"
 
-#: scripts/shiptemplates/starFighters.lua:111
+#: scripts/shiptemplates/starfighters.lua:186
 msgid ""
-"New management after bankruptcy revisited their most popular Adder Mark 5 "
-"model with improvements: stronger shields, longer and stronger beams and a "
-"faster turn speed. Thus was born the Adder Mark 8 model. Targeted to the "
-"practical but nostalgic buyer who must purchase replacements for their Adder "
-"Mark 5 fleet"
+"After replacing its management, the Adder MK8 returned to the roots of its "
+"most popular Adder MK5 model with modernized shields, longer-ranged and "
+"stronger beam weapons, and a faster turning rate. The mark 8 targeted "
+"practical but nostalgic buyers replacing their mark 5 hardware."
 msgstr ""
-"La nuova dirigenza dopo il fallimento ha rivisitato il loro modello più "
-"popolare, l'Adder Mark 5 con i seguenti miglioramenti: scudi più potenti, "
-"cannoni a raggi con gittata maggiore e più forti e una maggiore velocità di "
-"virata. Nasce così il modello Adder Mark 8. Destinato all'acquirente pratico "
-"ma nostalgico che deve acquistare sostituti per la propria flotta di Adder "
-"Mark 5."
 
-#: scripts/shiptemplates/starFighters.lua:116
+#: scripts/shiptemplates/starfighters.lua:196
 #, fuzzy
 msgctxt "ship"
 msgid "Adder MK9"
 msgstr "Adder MK9"
 
-#: scripts/shiptemplates/starFighters.lua:118
+#: scripts/shiptemplates/starfighters.lua:202
 msgid ""
-"Hot on the heels of the Adder Mark 8 comes the Adder Mark 9. Still using the "
-"Adder Mark 5 as a base, the designers provided stronger shields, stronger, "
-"longer and faster beams, faster turn speed and for that extra special touch, "
-"two nuclear missiles. As their ad says, 'You'll feel better in an Adder Mark "
-"9.'"
+"The Adder MK9 quickly followed the Adder MK8. While still using the popular "
+"Adder MK5 as a base, the designers further strengthened its shields, "
+"increased the beam weapons' fire rate and thrusters' turning rate, and "
+"storage for two nuclear missiles."
 msgstr ""
-"Sulla scia dell'Adder Mark 8 arriva l'Adder Mark 9. Usando ancora l'Adder "
-"Mark 5 come base, i progettisti hanno fornito scudi più forti, cannoni a "
-"raggi più forti, con gittata maggiore e più veloci, velocità di virata più "
-"rapida e, per quel tocco speciale in più, due missili. Come dice il loro "
-"annuncio, \"Ti sentirai meglio in un Adder Mark 9.\""
 
-#: scripts/shiptemplates/starFighters.lua:124
+#: scripts/shiptemplates/starfighters.lua:213
 #, fuzzy
 msgctxt "ship"
 msgid "WX-Lindworm"
 msgstr "WX-Lindworm"
 
-#: scripts/shiptemplates/starFighters.lua:124
+#: scripts/shiptemplates/starfighters.lua:214
 #, fuzzy
 msgctxt "subclass"
 msgid "Bomber"
 msgstr "Bombardiere"
 
-#: scripts/shiptemplates/starFighters.lua:126
+#: scripts/shiptemplates/starfighters.lua:219
 #, fuzzy
 msgid ""
 "The WX-Lindworm, or \"Worm\" as it's often called, is a bomber-class "
@@ -238,14 +213,205 @@ msgstr ""
 "suo obiettivo è arrivare, distruggere il suo bersaglio e andare via o essere "
 "distrutto."
 
-#: scripts/shiptemplates/starFighters.lua:139
+#: scripts/shiptemplates/starfighters.lua:239
 #, fuzzy
 msgctxt "playerShip"
 msgid "ZX-Lindworm"
 msgstr "ZX-Lindworm"
 
-#: scripts/shiptemplates/starFighters.lua:140
+#: scripts/shiptemplates/starfighters.lua:244
 msgid ""
-"The ZX-Lindworm is a vastly improved version of the WX-Lindworm. Additional "
-"beam weapon, more missiles, tougher, faster and more agile."
+"The ZX-Lindworm is a vastly improved version of the WX-Lindworm bomber-class "
+"starfighter, with an additional beam weapon, more missiles, tougher hull, "
+"faster engine, and more agile thrusters."
 msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:285
+msgctxt "playerShip"
+msgid "Stingray"
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:291
+msgid ""
+"The Stingray is a little-known predecessor to the MU52 Hornet. Once "
+"commonplace, most of the few remaining Stingrays have been converted to "
+"couriers and illegal racers due to their (frankly unsafe) impulse engines."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:327
+msgctxt "ship"
+msgid "Fighter"
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:333
+msgid ""
+"Ripostes are weak, nimble interceptors with a single beam weapon that become "
+"a greater threat when they engage in larger groups. They're often deployed "
+"in reconnaissance, patrol, and outpost-defense roles."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:345
+msgctxt "ship"
+msgid "Strix"
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:351
+msgid "The Strix is a warp-equipped interceptor built for ambush tactics."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:353
+#: scripts/shiptemplates/starfighters.lua:375
+msgid ""
+"For a starfighter it's slow at sublight flight and lacks manueverability, "
+"and most of its shielding is focused forward. However, thanks to its paired "
+"beam weapons and ability to strike quickly and escape, they've become a "
+"favorite of raiders that seek to catch poorly defended convoys unaware."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:355
+msgid ""
+"Strixes are often accompanied or complemented by Magpies, which have similar "
+"capabilities but use a jump drive for FTL travel."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:367
+msgctxt "ship"
+msgid "Magpie"
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:373
+msgid "The Magpie is a jump-equipped gunship built for ambush tactics."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:377
+msgid ""
+"Magpies are often accompanied or complemented by Strixes, which have similar "
+"capabilities but use a warp drive for FTL travel."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:389
+msgctxt "playerShip"
+msgid "Crow"
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:394
+msgid ""
+"The Crow gunship is the predecessor to the Magpie starfighter. Slow, weakly "
+"armed, and lacking in shields, it's at least relatively agile."
+msgstr ""
+
+#~ msgid ""
+#~ "The MT52 Hornet is a basic interceptor found in many corners of the "
+#~ "galaxy. It's easy to find spare parts for MT52s, not only because they "
+#~ "are produced in large numbers, but also because they suffer high losses "
+#~ "in combat."
+#~ msgstr ""
+#~ "L'MT52 Hornet è un intercettore di base che si trova in molti angoli "
+#~ "della galassia. È facile trovare pezzi di ricambio per MT52, non solo "
+#~ "perché sono prodotti in gran numero, ma anche perché subiscono perdite "
+#~ "elevate in combattimento."
+
+#~ msgid ""
+#~ "The MU52 Hornet is a new, upgraded version of the MT52. All of its "
+#~ "systems are slightly improved over the MT52 model."
+#~ msgstr ""
+#~ "L'MU52 Hornet è una nuova versione aggiornata dell'MT52. Tutti i suoi "
+#~ "sistemi sono leggermente migliorati rispetto al modello MT52."
+
+#~ msgid ""
+#~ "The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with "
+#~ "nearly twice the hull strength, nearly three times the shielding, better "
+#~ "acceleration, impulse boosters, and a second laser cannon."
+#~ msgstr ""
+#~ "L'MP52 Hornet è una versione notevolmente migliorata dell'MU52 Hornet, "
+#~ "con quasi il doppio della resistenza dello scafo, quasi tre volte gli "
+#~ "scudi, migliore accelerazione, motori a impulsi e un secondo cannone "
+#~ "laser."
+
+#~ msgid ""
+#~ "The Adder line's fifth iteration proved to be a great success among "
+#~ "pirates and law officers alike. It is cheap, fast, and easy to maintain, "
+#~ "and it packs a decent punch."
+#~ msgstr ""
+#~ "La quinta iterazione della linea Adder si è rivelata un grande successo "
+#~ "tra i pirati e gli ufficiali della legge. È economico, veloce e di facile "
+#~ "manutenzione e offre un impatto decente."
+
+#~ msgid ""
+#~ "The mark 4 Adder is a rare sight these days due to the success its "
+#~ "successor, the mark 5 Adder, which often replaces this model. Its similar "
+#~ "hull, however, means careless buyers are sometimes conned into buying "
+#~ "mark 4 models disguised as the mark 5."
+#~ msgstr ""
+#~ "Il Mark 4 Adder è uno spettacolo raro in questi giorni a causa della fama "
+#~ "del suo successore, il Mark 5 Adder, che ha spesso rimpiazzato questo "
+#~ "modello. Il suo scafo simile, tuttavia, significa che a volte acquirenti "
+#~ "disattenti sono indotti ad acquistare modelli Mark 4 mascherati da Mark 5."
+
+#~ msgid ""
+#~ "The Adder MK3 is one of the first of the Adder line to meet with some "
+#~ "success. A large number of them were made before the manufacturer went "
+#~ "through its first bankruptcy. There has been a recent surge of purchases "
+#~ "of the Adder MK3 in the secondary market due to its low price and its "
+#~ "similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 "
+#~ "has weaker shields and hull, but a faster turn speed"
+#~ msgstr ""
+#~ "L'Adder MK3 è stato uno dei primi della linea Adder a riscuotere un certo "
+#~ "successo. Molti di essi sono stati realizzati prima che il produttore "
+#~ "andasse incontro al suo primo fallimento. C'è stata una recente ondata di "
+#~ "acquisti di Adder MK3 nel mercato secondario a causa del suo prezzo basso "
+#~ "e della sua somiglianza con i modelli successivi. Rispetto all'Adder MK4, "
+#~ "l'Adder MK3 ha scudi e scafo più deboli, ma una velocità di virata "
+#~ "maggiore."
+
+#, fuzzy
+#~ msgid ""
+#~ "The mark 6 Adder is a small upgrade compared to the highly successful "
+#~ "mark 5 model. Since people still prefer the more familiar and reliable "
+#~ "mark 5, the mark 6 has not seen the same level of success."
+#~ msgstr ""
+#~ "Il Mark 6 Adder è un piccolo aggiornamento rispetto al modello Mark 5 di "
+#~ "grande successo. Poiché le persone preferiscono ancora il più familiare e "
+#~ "affidabile Mark 5 , il Mark 6 non ha visto lo stesso livello di successo."
+
+#~ msgid ""
+#~ "The release of the Adder Mark 7 sent the manufacturer into a second "
+#~ "bankruptcy. They made improvements to the Mark 7 over the Mark 6 like "
+#~ "stronger shields and longer beams, but the popularity of their previous "
+#~ "models, especially the Mark 5, prevented them from raising the purchase "
+#~ "price enough to recoup the development and manufacturing costs of the "
+#~ "Mark 7"
+#~ msgstr ""
+#~ "Il rilascio dell'Adder Mark 7 ha portato il produttore a un secondo "
+#~ "fallimento. Sono stati apportati miglioramenti al Mark 7 rispetto al Mark "
+#~ "6 come scudi più forti e cannoni a raggi con gittata maggiore, ma la "
+#~ "popolarità dei modelli precedenti, in particolare il Mark 5, ha impedito "
+#~ "loro di aumentare il prezzo di acquisto abbastanza da recuperare i costi "
+#~ "di sviluppo e produzione del Mark 7."
+
+#~ msgid ""
+#~ "New management after bankruptcy revisited their most popular Adder Mark 5 "
+#~ "model with improvements: stronger shields, longer and stronger beams and "
+#~ "a faster turn speed. Thus was born the Adder Mark 8 model. Targeted to "
+#~ "the practical but nostalgic buyer who must purchase replacements for "
+#~ "their Adder Mark 5 fleet"
+#~ msgstr ""
+#~ "La nuova dirigenza dopo il fallimento ha rivisitato il loro modello più "
+#~ "popolare, l'Adder Mark 5 con i seguenti miglioramenti: scudi più potenti, "
+#~ "cannoni a raggi con gittata maggiore e più forti e una maggiore velocità "
+#~ "di virata. Nasce così il modello Adder Mark 8. Destinato all'acquirente "
+#~ "pratico ma nostalgico che deve acquistare sostituti per la propria flotta "
+#~ "di Adder Mark 5."
+
+#~ msgid ""
+#~ "Hot on the heels of the Adder Mark 8 comes the Adder Mark 9. Still using "
+#~ "the Adder Mark 5 as a base, the designers provided stronger shields, "
+#~ "stronger, longer and faster beams, faster turn speed and for that extra "
+#~ "special touch, two nuclear missiles. As their ad says, 'You'll feel "
+#~ "better in an Adder Mark 9.'"
+#~ msgstr ""
+#~ "Sulla scia dell'Adder Mark 8 arriva l'Adder Mark 9. Usando ancora l'Adder "
+#~ "Mark 5 come base, i progettisti hanno fornito scudi più forti, cannoni a "
+#~ "raggi più forti, con gittata maggiore e più veloci, velocità di virata "
+#~ "più rapida e, per quel tocco speciale in più, due missili. Come dice il "
+#~ "loro annuncio, \"Ti sentirai meglio in un Adder Mark 9.\""

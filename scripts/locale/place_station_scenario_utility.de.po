@@ -12,19 +12,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: scripts/place_station_scenario_utility.lua:501
+#: scripts/place_station_scenario_utility.lua:550
 msgctxt "scienceDescription-station"
 msgid "Training and coordination"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:502
+#: scripts/place_station_scenario_utility.lua:554
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We train naval cadets in routine and specialized functions aboard space "
 "vessels and coordinate naval activity throughout the sector."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:503
+#: scripts/place_station_scenario_utility.lua:558
 msgctxt "stationStory-comms"
 msgid ""
 "The original station builders were fans of the late 20th-century scientist "
@@ -33,19 +33,19 @@ msgid ""
 "grown has become the region's educational and coordination hub."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:510
+#: scripts/place_station_scenario_utility.lua:572
 msgctxt "scienceDescription-station"
 msgid "Warp and impulse engine manufacturing"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:511
+#: scripts/place_station_scenario_utility.lua:576
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We manufacture warp, impulse, and jump engines for the Human Navy fleet as "
 "well as other independent clients on a contract basis."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:512
+#: scripts/place_station_scenario_utility.lua:580
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after the 19th-century astronaut as well as the "
@@ -54,17 +54,17 @@ msgid ""
 "propulsion systems."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:518
+#: scripts/place_station_scenario_utility.lua:593
 msgctxt "scienceDescription-station"
 msgid "Warp drive components"
 msgstr "Komponenten des Warpantriebs"
 
-#: scripts/place_station_scenario_utility.lua:519
+#: scripts/place_station_scenario_utility.lua:597
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide warp drive engines and components."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:520
+#: scripts/place_station_scenario_utility.lua:601
 msgctxt "stationStory-comms"
 msgid ""
 "This station is named after Chris Van Den Broeck, who did some initial "
@@ -72,19 +72,19 @@ msgid ""
 "Earth."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:527
+#: scripts/place_station_scenario_utility.lua:615
 msgctxt "scienceDescription-station"
 msgid "Shielded circuitry fabrication"
 msgstr "Herstellung von abgeschirmten Schaltkreisen"
 
-#: scripts/place_station_scenario_utility.lua:528
+#: scripts/place_station_scenario_utility.lua:619
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We make a large variety of circuits for numerous ship systems shielded from "
 "sensor detection and external control interference."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:529
+#: scripts/place_station_scenario_utility.lua:623
 msgctxt "stationStory-comms"
 msgid ""
 "Our station is named after the law which quantifies the amount of force with "
@@ -92,18 +92,18 @@ msgid ""
 "a fundamental principle in the design of our circuits."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:537
-#: scripts/place_station_scenario_utility.lua:969
+#: scripts/place_station_scenario_utility.lua:638
+#: scripts/place_station_scenario_utility.lua:1576
 msgctxt "scienceDescription-station"
 msgid "Sensor components"
 msgstr "Sensor-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:538
+#: scripts/place_station_scenario_utility.lua:642
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture sensor components and systems"
 msgstr "Wir erforschen und fertigen Sensor-Komponenten und -Systeme"
 
-#: scripts/place_station_scenario_utility.lua:539
+#: scripts/place_station_scenario_utility.lua:646
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Tony Heyes, the inventor of some of the earliest "
@@ -111,58 +111,58 @@ msgid ""
 "Kingdom, which aided in mobility for blind humans."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:545
+#: scripts/place_station_scenario_utility.lua:659
 msgctxt "scienceDescription-station"
 msgid "Nanite supplier"
 msgstr "Anbieter von Naniten"
 
-#: scripts/place_station_scenario_utility.lua:546
+#: scripts/place_station_scenario_utility.lua:663
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide nanites for various organic and non-organic systems."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:547
+#: scripts/place_station_scenario_utility.lua:667
 msgctxt "stationStory-comms"
 msgid ""
 "This station is named after the Israeli nanotechnologist Hossam Haick, from "
 "the early 21st century on Earth."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:555
-#: scripts/place_station_scenario_utility.lua:570
+#: scripts/place_station_scenario_utility.lua:682
+#: scripts/place_station_scenario_utility.lua:720
 msgctxt "scienceDescription-station"
 msgid "Energy beam components"
 msgstr "Laserstrahl-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:556
+#: scripts/place_station_scenario_utility.lua:686
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture energy beam components and systems."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:557
+#: scripts/place_station_scenario_utility.lua:690
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Theodore Maiman, who researched and built the "
 "first laser in the mid-20th century on Earth."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:562
-#: scripts/place_station_scenario_utility.lua:1056
+#: scripts/place_station_scenario_utility.lua:702
+#: scripts/place_station_scenario_utility.lua:1717
 msgctxt "scienceDescription-station"
 msgid "Gambling and resupply"
 msgstr "Glücksspiel und Nachschub"
 
-#: scripts/place_station_scenario_utility.lua:563
+#: scripts/place_station_scenario_utility.lua:706
 msgctxt "stationGeneralInfo-comms"
 msgid "The oldest station in the quadrant."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:571
+#: scripts/place_station_scenario_utility.lua:724
 msgctxt "stationGeneralInfo-comms"
 msgid "We manufacture energy beam components."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:572
+#: scripts/place_station_scenario_utility.lua:728
 msgctxt "stationStory-comms"
 msgid ""
 "Station named after Guglielmo Marconi, an Italian inventor from early 20th-"
@@ -170,55 +170,55 @@ msgid ""
 "ray or particle beam weapon."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:578
+#: scripts/place_station_scenario_utility.lua:741
 msgctxt "scienceDescription-station"
 msgid "Exobiology research"
 msgstr "Exobiologische Forschung"
 
-#: scripts/place_station_scenario_utility.lua:579
+#: scripts/place_station_scenario_utility.lua:745
 msgctxt "stationGeneralInfo-comms"
 msgid "We study recently discovered life forms not native to Earth"
 msgstr ""
 "Wir untersuchen kürzlich entdeckte Lebensformen, die nicht auf der Erde "
 "heimisch sind."
 
-#: scripts/place_station_scenario_utility.lua:580
+#: scripts/place_station_scenario_utility.lua:749
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after one of the early exobiologists from mid-20th-"
 "century Earth, Dr. Stanley Miller"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:586
-#: scripts/place_station_scenario_utility.lua:714
-#: scripts/place_station_scenario_utility.lua:994
+#: scripts/place_station_scenario_utility.lua:762
+#: scripts/place_station_scenario_utility.lua:1033
+#: scripts/place_station_scenario_utility.lua:1623
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
 msgstr "Impulsantrieb-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:587
+#: scripts/place_station_scenario_utility.lua:766
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture impulse engine components and systems."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:588
+#: scripts/place_station_scenario_utility.lua:770
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Roger Shawyer, who built the first prototype "
 "impulse engine in the early 21st century."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:596
+#: scripts/place_station_scenario_utility.lua:781
 msgctxt "scienceDescription-station"
 msgid "Energy and particle beam components"
 msgstr "Energie- und Teilchenstrahlkomponenten"
 
-#: scripts/place_station_scenario_utility.lua:597
+#: scripts/place_station_scenario_utility.lua:785
 msgctxt "stationGeneralInfo-comms"
 msgid "We fabricate general and specialized components for ship beam systems."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:598
+#: scripts/place_station_scenario_utility.lua:789
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after Archimedes, who, according to legend, used a "
@@ -226,39 +226,39 @@ msgid ""
 "fleet invading Syracuse and set fire to it."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:610
-#: scripts/place_station_scenario_utility.lua:763
+#: scripts/place_station_scenario_utility.lua:804
+#: scripts/place_station_scenario_utility.lua:1142
 msgctxt "scienceDescription-station"
 msgid "Trading station"
 msgstr "Handelsstation"
 
-#: scripts/place_station_scenario_utility.lua:611
+#: scripts/place_station_scenario_utility.lua:808
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "Only the largest market and trading location in twenty sectors. You can find "
 "your heart's desire here."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:612
+#: scripts/place_station_scenario_utility.lua:812
 msgctxt "stationStory-comms"
 msgid ""
 "Modeled after the early 21st-century bazaar on Earth in Bangkok, Thailand. "
 "Designed and built with trade and commerce in mind."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:619
-#: scripts/place_station_scenario_utility.lua:1003
+#: scripts/place_station_scenario_utility.lua:820
+#: scripts/place_station_scenario_utility.lua:1639
 msgctxt "scienceDescription-station"
 msgid "Mining"
 msgstr "Bergbau"
 
-#: scripts/place_station_scenario_utility.lua:620
+#: scripts/place_station_scenario_utility.lua:823
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We mine nearby asteroids for precious minerals and process them for sale."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:621
+#: scripts/place_station_scenario_utility.lua:827
 msgctxt "stationStory-comms"
 msgid ""
 "This station's name is inspired by a large gold mine on Earth in Indonesia. "
@@ -266,32 +266,32 @@ msgid ""
 "amongst these asteroids."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:627
+#: scripts/place_station_scenario_utility.lua:840
 msgctxt "scienceDescription-station"
 msgid "Observatory and stellar mapping"
 msgstr "Observatorium und stellare Kartierung"
 
-#: scripts/place_station_scenario_utility.lua:628
+#: scripts/place_station_scenario_utility.lua:844
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We study the cosmos and map stellar phenomena. We also track moving "
 "asteroids. Look out! Just kidding."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:629
+#: scripts/place_station_scenario_utility.lua:848
 msgctxt "stationStory-comms"
 msgid ""
 "Station named in honor of Charles Hayden, whose philanthropy continued "
 "astrophysical research and education on Earth in the early 20th century."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:636
-#: scripts/place_station_scenario_utility.lua:908
+#: scripts/place_station_scenario_utility.lua:858
+#: scripts/place_station_scenario_utility.lua:1452
 msgctxt "scienceDescription-station"
 msgid "Autodoc components"
 msgstr "Auto-Doc-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:638
+#: scripts/place_station_scenario_utility.lua:863
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Dr. Lipkin, who pioneered some of the research "
@@ -299,17 +299,17 @@ msgid ""
 "nephrectomy for renal tumors in the early 21st century on Earth."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:645
+#: scripts/place_station_scenario_utility.lua:873
 msgctxt "scienceDescription-station"
 msgid "Zero-gravity sports and entertainment"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:646
+#: scripts/place_station_scenario_utility.lua:877
 msgctxt "stationGeneralInfo-comms"
 msgid "Take in a game or two, or perhaps see a show"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:647
+#: scripts/place_station_scenario_utility.lua:881
 msgctxt "stationStory-comms"
 msgid ""
 "Named after Madison Square Garden from 21st-century Earth, this station was "
@@ -317,17 +317,17 @@ msgid ""
 "entertainment."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:653
+#: scripts/place_station_scenario_utility.lua:894
 msgctxt "scienceDescription-station"
 msgid "Shield components and research"
 msgstr "Schutzschildkomponenten und Forschung"
 
-#: scripts/place_station_scenario_utility.lua:654
+#: scripts/place_station_scenario_utility.lua:898
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and fabricate components for ship shield systems."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:655
+#: scripts/place_station_scenario_utility.lua:902
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after Rutherford Appleton Laboratory, a national "
@@ -336,19 +336,19 @@ msgid ""
 "the late 20th century."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:661
+#: scripts/place_station_scenario_utility.lua:915
 msgctxt "scienceDescription-station"
 msgid "Shield and armor components and research"
 msgstr "Schild- und Panzerungs-Komponenten sowie Forschung"
 
-#: scripts/place_station_scenario_utility.lua:662
+#: scripts/place_station_scenario_utility.lua:919
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and make general and specialized components for ship shield and "
 "ship armor systems."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:663
+#: scripts/place_station_scenario_utility.lua:923
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after Alexander Toohie, one of the earliest "
@@ -356,19 +356,19 @@ msgid ""
 "construct shields due to the physics involved."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:671
+#: scripts/place_station_scenario_utility.lua:937
 msgctxt "scienceDescription-station"
 msgid "Battery and software engineering"
 msgstr "Batterie- und Softwaretechnik"
 
-#: scripts/place_station_scenario_utility.lua:672
+#: scripts/place_station_scenario_utility.lua:941
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide high quality high capacity batteries and specialized software for "
 "all shipboard systems."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:673
+#: scripts/place_station_scenario_utility.lua:945
 msgctxt "stationStory-comms"
 msgid ""
 "The station was founded by a collective of electrical and software engineers "
@@ -376,17 +376,17 @@ msgid ""
 "demand has kept them busy since."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:680
+#: scripts/place_station_scenario_utility.lua:955
 msgctxt "scienceDescription-station"
 msgid "Shield and armor research"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:681
+#: scripts/place_station_scenario_utility.lua:959
 msgctxt "stationGeneralInfo-comms"
 msgid "The finest shield and armor manufacturer in the quadrant."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:682
+#: scripts/place_station_scenario_utility.lua:963
 msgctxt "stationStory-comms"
 msgid ""
 "Originally a military outpost, the station's fabrication bays were "
@@ -394,19 +394,19 @@ msgid ""
 "of their work has never declined."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:689
+#: scripts/place_station_scenario_utility.lua:973
 msgctxt "scienceDescription-station"
 msgid "Communication components"
 msgstr "Kommunikations-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:690
+#: scripts/place_station_scenario_utility.lua:977
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide a range of communication equipment and software for use aboard "
 "ships."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:691
+#: scripts/place_station_scenario_utility.lua:981
 msgctxt "stationStory-comms"
 msgid ""
 "The station was first built as a deep-space relay outpost during the early "
@@ -414,17 +414,17 @@ msgid ""
 "eventually evolving into a full manufacturing hub for communication systems."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:699
+#: scripts/place_station_scenario_utility.lua:996
 msgctxt "scienceDescription-station"
 msgid "Robotic research"
 msgstr "Robotik-Forschung"
 
-#: scripts/place_station_scenario_utility.lua:700
+#: scripts/place_station_scenario_utility.lua:1000
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and provide robotic systems and components."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:701
+#: scripts/place_station_scenario_utility.lua:1004
 msgctxt "stationStory-comms"
 msgid ""
 "A consortium of cyberneticists and mechanical engineers pooled their "
@@ -433,12 +433,12 @@ msgid ""
 "across the sector."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:706
+#: scripts/place_station_scenario_utility.lua:1012
 msgctxt "scienceDescription-station"
 msgid "Advanced Material components"
 msgstr "Fortschrittliche Materialkomponenten"
 
-#: scripts/place_station_scenario_utility.lua:707
+#: scripts/place_station_scenario_utility.lua:1016
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We fabricate several different kinds of materials critical to various space "
@@ -446,7 +446,7 @@ msgid ""
 "extraction"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:708
+#: scripts/place_station_scenario_utility.lua:1020
 msgctxt "stationStory-comms"
 msgid ""
 "The station began as a materials science lab investigating high-tensile "
@@ -454,12 +454,12 @@ msgid ""
 "production line that now supplies construction firms across the sector."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:715
+#: scripts/place_station_scenario_utility.lua:1037
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high-quality impulse engines and parts for use aboard ships"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:716
+#: scripts/place_station_scenario_utility.lua:1041
 msgctxt "stationStory-comms"
 msgid ""
 "The station was founded by a team of propulsion engineers who believed that "
@@ -467,19 +467,19 @@ msgid ""
 "iterative refinements have made them a trusted name in sublight travel."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:722
-#: scripts/place_station_scenario_utility.lua:776
-#: scripts/place_station_scenario_utility.lua:824
+#: scripts/place_station_scenario_utility.lua:1050
+#: scripts/place_station_scenario_utility.lua:1164
+#: scripts/place_station_scenario_utility.lua:1274
 msgctxt "scienceDescription-station"
 msgid "Android components"
 msgstr "Androiden-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:723
+#: scripts/place_station_scenario_utility.lua:1054
 msgctxt "stationGeneralInfo-comms"
 msgid "Supplier of android components, programming, and service"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:724
+#: scripts/place_station_scenario_utility.lua:1058
 msgctxt "stationStory-comms"
 msgid ""
 "Founded by a cooperative of engineers who saw the growing demand for "
@@ -487,20 +487,20 @@ msgid ""
 "repairs and upgrades straightforward."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:729
-#: scripts/place_station_scenario_utility.lua:784
+#: scripts/place_station_scenario_utility.lua:1066
+#: scripts/place_station_scenario_utility.lua:1185
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
 msgstr "Transporter-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:730
+#: scripts/place_station_scenario_utility.lua:1070
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide transporters used aboard ships as well as the components for "
 "repair and maintenance."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:731
+#: scripts/place_station_scenario_utility.lua:1074
 msgctxt "stationStory-comms"
 msgid ""
 "The station was founded by the lead engineers from a defunct transporter "
@@ -508,17 +508,17 @@ msgid ""
 "their severance and built a better facility from the ground up."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:736
+#: scripts/place_station_scenario_utility.lua:1082
 msgctxt "scienceDescription-station"
 msgid "Commerce and gambling"
 msgstr "Handel und Glücksspiel"
 
-#: scripts/place_station_scenario_utility.lua:737
+#: scripts/place_station_scenario_utility.lua:1086
 msgctxt "stationGeneralInfo-comms"
 msgid "Come play some games and shop. House take does not exceed 4 percent."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:738
+#: scripts/place_station_scenario_utility.lua:1090
 msgctxt "stationStory-comms"
 msgid ""
 "What started as a single card table in a maintenance bay grew organically "
@@ -526,19 +526,19 @@ msgid ""
 "is still on display in the main atrium."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:744
+#: scripts/place_station_scenario_utility.lua:1099
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology training"
 msgstr "Xenopsychologie-Ausbildung"
 
-#: scripts/place_station_scenario_utility.lua:745
+#: scripts/place_station_scenario_utility.lua:1103
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide classes and simulation to help train diverse species in how to "
 "relate to each other."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:746
+#: scripts/place_station_scenario_utility.lua:1107
 msgctxt "stationStory-comms"
 msgid ""
 "Psychologists, sociologists, and xenobiologists founded this station as a "
@@ -546,30 +546,30 @@ msgid ""
 "adopted by several naval academies."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:756
+#: scripts/place_station_scenario_utility.lua:1126
 msgctxt "scienceDescription-station"
 msgid "Casino and gambling"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:757
+#: scripts/place_station_scenario_utility.lua:1130
 msgctxt "stationGeneralInfo-comms"
 msgid "We never tell you the odds, because they're always in your favor!"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:758
+#: scripts/place_station_scenario_utility.lua:1134
 msgctxt "stationStory-comms"
 msgid ""
 "A front for an interstellar crime syndicate that launders and fences much of "
 "its ill-gotten goods through this seedy hall of games."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:764
+#: scripts/place_station_scenario_utility.lua:1146
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "Come to Crossway Bazaar for all your trade and commerce needs and desires!"
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:765
+#: scripts/place_station_scenario_utility.lua:1150
 msgctxt "stationStory-comms"
 msgid ""
 "Independent traders from a dozen systems formed a cooperative to establish "
@@ -577,12 +577,12 @@ msgid ""
 "temporary stalls, but the spirit of the bazaar remains."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:777
+#: scripts/place_station_scenario_utility.lua:1168
 msgctxt "stationGeneralInfo-comms"
 msgid "Androids and their parts, maintenance, and recycling."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:778
+#: scripts/place_station_scenario_utility.lua:1172
 msgctxt "stationStory-comms"
 msgid ""
 "The station grew out of a small repair shop that specialized in synthetic "
@@ -590,14 +590,14 @@ msgid ""
 "manufacturing and recycling."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:785
+#: scripts/place_station_scenario_utility.lua:1189
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and fabricate high-quality transporters and transporter "
 "components for use aboard ships."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:786
+#: scripts/place_station_scenario_utility.lua:1193
 msgctxt "stationStory-comms"
 msgid ""
 "The station was founded by a veteran logistics coordinator who saw an "
@@ -605,18 +605,18 @@ msgid ""
 "are now standard equipment on many civilian vessels."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:791
+#: scripts/place_station_scenario_utility.lua:1201
 msgctxt "scienceDescription-station"
 msgid "Diplomatic training"
 msgstr "Diplomatische Ausbildung"
 
-#: scripts/place_station_scenario_utility.lua:792
+#: scripts/place_station_scenario_utility.lua:1205
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "The premeire academy for leadership and diplomacy training in the region."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:793
+#: scripts/place_station_scenario_utility.lua:1209
 msgctxt "stationStory-comms"
 msgid ""
 "The station was conceived during a fragile peace negotiation between human "
@@ -624,18 +624,18 @@ msgid ""
 "would help prevent future conflicts."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:800
-#: scripts/place_station_scenario_utility.lua:809
+#: scripts/place_station_scenario_utility.lua:1219
+#: scripts/place_station_scenario_utility.lua:1241
 msgctxt "scienceDescription-station"
 msgid "Load lifters and components"
 msgstr "Lastenheber und Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:801
+#: scripts/place_station_scenario_utility.lua:1223
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide load lifters and components for various ship systems."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:802
+#: scripts/place_station_scenario_utility.lua:1227
 msgctxt "stationStory-comms"
 msgid ""
 "The station was built around a heavy-equipment machine shop that had been "
@@ -643,12 +643,12 @@ msgid ""
 "the operation and expanded into full-scale manufacturing."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:810
+#: scripts/place_station_scenario_utility.lua:1245
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide load lifters and components."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:811
+#: scripts/place_station_scenario_utility.lua:1249
 msgctxt "stationStory-comms"
 msgid ""
 "The station was started by a cargo-hauler cooperative that grew tired of "
@@ -656,19 +656,19 @@ msgid ""
 "equipment and soon began selling to other haulers."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:816
+#: scripts/place_station_scenario_utility.lua:1257
 msgctxt "scienceDescription-station"
 msgid "Routine maintenance and entertainment"
 msgstr "Routinemäßige Wartung und Unterhaltung"
 
-#: scripts/place_station_scenario_utility.lua:817
+#: scripts/place_station_scenario_utility.lua:1261
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "Stop by for repairs. Take in one of our juggling shows featuring the four-"
 "armed jugglers from the outer ring."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:818
+#: scripts/place_station_scenario_utility.lua:1265
 msgctxt "stationStory-comms"
 msgid ""
 "Traveling entertainers and independent mechanics converged at this waypoint, "
@@ -676,12 +676,12 @@ msgid ""
 "specialists."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:825
+#: scripts/place_station_scenario_utility.lua:1278
 msgctxt "stationGeneralInfo-comms"
 msgid "We create androids and android components."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:826
+#: scripts/place_station_scenario_utility.lua:1282
 msgctxt "stationStory-comms"
 msgid ""
 "The station was established by a group of engineers who believed that "
@@ -690,19 +690,19 @@ msgid ""
 "environment exploration."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:831
+#: scripts/place_station_scenario_utility.lua:1290
 msgctxt "scienceDescription-station"
 msgid "Automated weapons systems"
 msgstr "Automatisierte Waffensysteme"
 
-#: scripts/place_station_scenario_utility.lua:832
+#: scripts/place_station_scenario_utility.lua:1294
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and create automated weapons systems to improve ship combat "
 "capability."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:833
+#: scripts/place_station_scenario_utility.lua:1298
 msgctxt "stationStory-comms"
 msgid ""
 "The station was founded by a group of defense contractors who foresaw the "
@@ -710,19 +710,19 @@ msgid ""
 "warning algorithms have saved countless vessels from ambush."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:837
+#: scripts/place_station_scenario_utility.lua:1305
 msgctxt "scienceDescription-station"
 msgid "Logistics coordination"
 msgstr "Logistische Koordination"
 
-#: scripts/place_station_scenario_utility.lua:838
+#: scripts/place_station_scenario_utility.lua:1309
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We support the stations and ships in the area with planning and "
 "communication services."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:839
+#: scripts/place_station_scenario_utility.lua:1313
 msgctxt "stationStory-comms"
 msgid ""
 "Shipping companies founded this station to coordinate supply routes across "
@@ -730,19 +730,19 @@ msgid ""
 "flowing smoothly."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:844
+#: scripts/place_station_scenario_utility.lua:1321
 msgctxt "scienceDescription-station"
 msgid "Advanced material components"
 msgstr "Fortschrittliche Materialkomponenten"
 
-#: scripts/place_station_scenario_utility.lua:845
+#: scripts/place_station_scenario_utility.lua:1325
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We create multiple types of advanced material components. Our most popular "
 "products are our filaments."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:846
+#: scripts/place_station_scenario_utility.lua:1329
 msgctxt "stationStory-comms"
 msgid ""
 "After discovering a unique high-yield refining process, the station's "
@@ -750,18 +750,18 @@ msgid ""
 "a closely guarded trade secret."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:851
-#: scripts/place_station_scenario_utility.lua:861
+#: scripts/place_station_scenario_utility.lua:1337
+#: scripts/place_station_scenario_utility.lua:1356
 msgctxt "scienceDescription-station"
 msgid "Ship building and maintenance facility"
 msgstr "Schiffsbau- und Wartungseinrichtung"
 
-#: scripts/place_station_scenario_utility.lua:852
+#: scripts/place_station_scenario_utility.lua:1341
 msgctxt "stationGeneralInfo-comms"
 msgid "We work on all aspects of astronaval shipbuilding and maintenance."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:853
+#: scripts/place_station_scenario_utility.lua:1345
 msgctxt "stationStory-comms"
 msgid ""
 "Many of this station's ship models are researched, designed, and built "
@@ -769,14 +769,14 @@ msgid ""
 "simple as possible, given the tremendous capabilities of the modern vessel."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:862
+#: scripts/place_station_scenario_utility.lua:1360
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "If your motivator's shot, there's no cheaper replacement in this quadrant "
 "than here."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:863
+#: scripts/place_station_scenario_utility.lua:1364
 msgctxt "stationStory-comms"
 msgid ""
 "Despite its run-down appearance, this station is home to some of the best "
@@ -784,19 +784,19 @@ msgid ""
 "crews of outdated and out-of-support vessels."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:869
+#: scripts/place_station_scenario_utility.lua:1373
 msgctxt "scienceDescription-station"
 msgid "Warp engine components"
 msgstr "Warpantrieb-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:870
+#: scripts/place_station_scenario_utility.lua:1377
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We specialize in the esoteric components necessary to make warp drives "
 "function properly."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:871
+#: scripts/place_station_scenario_utility.lua:1381
 msgctxt "stationStory-comms"
 msgid ""
 "The station was founded by physicists and engineers who dedicated their "
@@ -804,12 +804,12 @@ msgid ""
 "are trusted by every major shipyard in known space."
 msgstr ""
 
-#: scripts/place_station_scenario_utility.lua:878
+#: scripts/place_station_scenario_utility.lua:1391
 msgctxt "scienceDescription-station"
 msgid "Optical Components"
 msgstr "Optik-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:879
+#: scripts/place_station_scenario_utility.lua:1395
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We make and supply optic components for various station and ship systems"
@@ -817,7 +817,7 @@ msgstr ""
 "Wir fertigen und bieten optische Komponenten für verschiedene Stations- und "
 "Schiffssysteme."
 
-#: scripts/place_station_scenario_utility.lua:880
+#: scripts/place_station_scenario_utility.lua:1399
 msgctxt "stationStory-comms"
 msgid ""
 "This station continues the businesses from Earth based on the merging of "
@@ -830,17 +830,17 @@ msgstr ""
 "Leica und das japanische Forschungs- und Entwicklungsunternehmen für "
 "Elektronik und Optik Advanced Low Carbon (ALCA)."
 
-#: scripts/place_station_scenario_utility.lua:889
+#: scripts/place_station_scenario_utility.lua:1411
 msgctxt "scienceDescription-station"
 msgid "Medical research"
 msgstr "Medizinische Forschung"
 
-#: scripts/place_station_scenario_utility.lua:890
+#: scripts/place_station_scenario_utility.lua:1415
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and treat exotic medical conditions"
 msgstr "Wir erforschen und behandeln exotische Krankheiten."
 
-#: scripts/place_station_scenario_utility.lua:891
+#: scripts/place_station_scenario_utility.lua:1419
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after the United States national medical research "
@@ -851,12 +851,12 @@ msgstr ""
 "Vereinigten Staaten in Bethesda, Maryland, benannt, das Mitte des 20. "
 "Jahrhunderts gegründet wurde."
 
-#: scripts/place_station_scenario_utility.lua:899
+#: scripts/place_station_scenario_utility.lua:1430
 msgctxt "scienceDescription-station"
 msgid "Repulsor and Tractor Beam Components"
 msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:900
+#: scripts/place_station_scenario_utility.lua:1434
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We can meet all your pushing and pulling needs with specialized equipment "
@@ -865,7 +865,7 @@ msgstr ""
 "Wir können alle Ihre Bedürfnisse in Bezug auf das Schieben und Ziehen mit "
 "spezialisierter, maßgeschneiderter Ausrüstung erfüllen."
 
-#: scripts/place_station_scenario_utility.lua:901
+#: scripts/place_station_scenario_utility.lua:1438
 msgctxt "stationStory-comms"
 msgid ""
 "The station name comes from a short story by the 20th century author "
@@ -877,12 +877,12 @@ msgstr ""
 "19. Jahrhundert, der ein Unternehmen inspirierte, das die entsprechenden "
 "Produkte auf der Erde herstellt."
 
-#: scripts/place_station_scenario_utility.lua:909
+#: scripts/place_station_scenario_utility.lua:1456
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide components for automated medical machinery"
 msgstr "Wir bieten Komponenten für automatisierte medizinische Geräte."
 
-#: scripts/place_station_scenario_utility.lua:910
+#: scripts/place_station_scenario_utility.lua:1460
 msgctxt "stationStory-comms"
 msgid ""
 "The station is the evolution of the company that started automated "
@@ -892,17 +892,17 @@ msgstr ""
 "Jahrhunderts mit der automatisierten Arzneimittelabgabe auf der Erde in "
 "Finnland begann."
 
-#: scripts/place_station_scenario_utility.lua:920
+#: scripts/place_station_scenario_utility.lua:1473
 msgctxt "scienceDescription-station"
 msgid "Nanotechnology research"
 msgstr "Nanotechnologie-Forschung"
 
-#: scripts/place_station_scenario_utility.lua:921
+#: scripts/place_station_scenario_utility.lua:1477
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide nanites and software for a variety of ship-board systems"
 msgstr "Wir bieten Naniten und Software für eine Vielzahl von Schiffssystemen."
 
-#: scripts/place_station_scenario_utility.lua:922
+#: scripts/place_station_scenario_utility.lua:1481
 msgctxt "stationStory-comms"
 msgid ""
 "This station's name recognizes one of the first scientific researchers into "
@@ -911,19 +911,19 @@ msgstr ""
 "Der Name dieser Station erinnert an einen der ersten wissenschaftlichen "
 "Forscher auf dem Gebiet der Nanotechnologie, den Physiker Richard Feynman."
 
-#: scripts/place_station_scenario_utility.lua:930
+#: scripts/place_station_scenario_utility.lua:1492
 msgctxt "scienceDescription-station"
 msgid "Medical Research"
 msgstr "Medizinische Forschung"
 
-#: scripts/place_station_scenario_utility.lua:931
+#: scripts/place_station_scenario_utility.lua:1496
 msgctxt "stationGeneralInfo-comms"
 msgid "We research exotic diseases and other human medical conditions"
 msgstr ""
 "Wir erforschen exotische Krankheiten und andere medizinische Probleme des "
 "Menschen."
 
-#: scripts/place_station_scenario_utility.lua:932
+#: scripts/place_station_scenario_utility.lua:1500
 msgctxt "stationStory-comms"
 msgid ""
 "We continue the medical work started by William Worrall Mayo in the late "
@@ -932,12 +932,12 @@ msgstr ""
 "Wir setzen die von William Worrall Mayo Ende des 19. Jahrhunderts begonnene "
 "medizinische Arbeit auf der Erde fort."
 
-#: scripts/place_station_scenario_utility.lua:937
+#: scripts/place_station_scenario_utility.lua:1508
 msgctxt "scienceDescription-station"
 msgid "Optical components"
 msgstr "Optik-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:938
+#: scripts/place_station_scenario_utility.lua:1512
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We fabricate optical lenses and related equipment as well as fiber optic "
@@ -946,7 +946,7 @@ msgstr ""
 "Wir stellen optische Linsen und zugehörige Ausrüstung sowie Glasfaserkabel "
 "und Komponenten her."
 
-#: scripts/place_station_scenario_utility.lua:939
+#: scripts/place_station_scenario_utility.lua:1516
 msgctxt "stationStory-comms"
 msgid ""
 "This station grew out of the Olympus company based on earth in the early "
@@ -958,17 +958,17 @@ msgstr ""
 "kaufte dann mehrere Softwareunternehmen, bevor es sich in der "
 "Raumfahrtindustrie etablierte."
 
-#: scripts/place_station_scenario_utility.lua:945
+#: scripts/place_station_scenario_utility.lua:1525
 msgctxt "scienceDescription-station"
 msgid "Optic components"
 msgstr "Optik-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:946
+#: scripts/place_station_scenario_utility.lua:1529
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide optic components for various ship systems"
 msgstr "Wir bieten optische Komponenten für verschiedene Schiffssysteme."
 
-#: scripts/place_station_scenario_utility.lua:947
+#: scripts/place_station_scenario_utility.lua:1533
 msgctxt "stationStory-comms"
 msgid ""
 "This station is an outgrowth of the Panduit corporation started in the mid "
@@ -977,12 +977,12 @@ msgstr ""
 "Diese Station ist aus dem Unternehmen Panduit hervorgegangen, das Mitte des "
 "20. Jahrhunderts auf der Erde in den Vereinigten Staaten gegründet wurde."
 
-#: scripts/place_station_scenario_utility.lua:956
+#: scripts/place_station_scenario_utility.lua:1545
 msgctxt "scienceDescription-station"
 msgid "Repulsor and tractor beam components"
 msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
-#: scripts/place_station_scenario_utility.lua:957
+#: scripts/place_station_scenario_utility.lua:1549
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We make ship systems designed to push or pull other objects around in space"
@@ -990,7 +990,7 @@ msgstr ""
 "Wir stellen Schiffssysteme her, die andere Objekte im Weltraum schieben oder "
 "ziehen können."
 
-#: scripts/place_station_scenario_utility.lua:958
+#: scripts/place_station_scenario_utility.lua:1553
 msgctxt "stationStory-comms"
 msgid ""
 "Our station is named Shree after one of many tugboat manufacturers in the "
@@ -1003,12 +1003,12 @@ msgstr ""
 "Hochseeschiffe auf der Erde einen ähnlichen Zweck wie heute Traktor- und "
 "Repulsorstrahlen für Raumschiffe."
 
-#: scripts/place_station_scenario_utility.lua:962
+#: scripts/place_station_scenario_utility.lua:1560
 msgctxt "scienceDescription-station"
 msgid "Shielded Circuitry Fabrication"
 msgstr "Herstellung von abgeschirmten Schaltkreisen"
 
-#: scripts/place_station_scenario_utility.lua:963
+#: scripts/place_station_scenario_utility.lua:1564
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We specialize in circuitry shielded from external hacking suitable for ship "
@@ -1017,7 +1017,7 @@ msgstr ""
 "Wir sind auf Schaltkreise spezialisiert, die gegen externe Hackerangriffe "
 "abgeschirmt und für Schiffssysteme geeignet sind."
 
-#: scripts/place_station_scenario_utility.lua:964
+#: scripts/place_station_scenario_utility.lua:1568
 msgctxt "stationStory-comms"
 msgid ""
 "We started as an expansion from the lunar based chip manufacturer of Earth "
@@ -1027,7 +1027,7 @@ msgstr ""
 "der das Vermächtnis des ehemals auf der Erde ansässigen Chipherstellers "
 "Intel weiterführte."
 
-#: scripts/place_station_scenario_utility.lua:970
+#: scripts/place_station_scenario_utility.lua:1580
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and construct components for the most powerful and accurate "
@@ -1037,7 +1037,7 @@ msgstr ""
 "genauesten Sensoren, die an Bord von Schiffen eingesetzt werden, sowie die "
 "Software, die ihre Verwendung erleichtert."
 
-#: scripts/place_station_scenario_utility.lua:971
+#: scripts/place_station_scenario_utility.lua:1584
 msgctxt "stationStory-comms"
 msgid ""
 "The Veloquan company has its roots in the manufacturing of LIDAR sensors in "
@@ -1054,17 +1054,17 @@ msgstr ""
 "Raumfahrzeuge. Veloquan ist das Ergebnis zahlreicher Fusionen und Übernahmen "
 "mehrerer Unternehmen, darunter Velodyne und Quanergy."
 
-#: scripts/place_station_scenario_utility.lua:975
+#: scripts/place_station_scenario_utility.lua:1591
 msgctxt "scienceDescription-station"
 msgid "Biotechnology research"
 msgstr "Biotechnologie-Forschung"
 
-#: scripts/place_station_scenario_utility.lua:976
+#: scripts/place_station_scenario_utility.lua:1595
 msgctxt "stationGeneralInfo-comms"
 msgid "Merging the organic and inorganic through research"
 msgstr "Organisches und Anorganisches durch Forschung vereinen."
 
-#: scripts/place_station_scenario_utility.lua:977
+#: scripts/place_station_scenario_utility.lua:1599
 msgctxt "stationStory-comms"
 msgid ""
 "Continued from the Tandon school of engineering started on Earth in the "
@@ -1073,23 +1073,23 @@ msgstr ""
 "Fortsetzung der Tandon School of Engineering, die Anfang des 21. "
 "Jahrhunderts auf der Erde gegründet wurde."
 
-#: scripts/place_station_scenario_utility.lua:986
-#: scripts/place_station_scenario_utility.lua:1013
-#: scripts/place_station_scenario_utility.lua:1023
-#: scripts/place_station_scenario_utility.lua:1033
-#: scripts/place_station_scenario_utility.lua:1041
-#: scripts/place_station_scenario_utility.lua:1050
+#: scripts/place_station_scenario_utility.lua:1609
+#: scripts/place_station_scenario_utility.lua:1656
+#: scripts/place_station_scenario_utility.lua:1670
+#: scripts/place_station_scenario_utility.lua:1684
+#: scripts/place_station_scenario_utility.lua:1696
+#: scripts/place_station_scenario_utility.lua:1709
 msgctxt "scienceDescription-station"
 msgid "Mining station"
 msgstr "Bergbaustation"
 
-#: scripts/place_station_scenario_utility.lua:995
+#: scripts/place_station_scenario_utility.lua:1627
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture impulse engine components and systems"
 msgstr ""
 "Wir erforschen und fertigen Komponenten und Systeme für Impulsantriebe."
 
-#: scripts/place_station_scenario_utility.lua:996
+#: scripts/place_station_scenario_utility.lua:1631
 msgctxt "stationStory-comms"
 msgid ""
 "Named after one of the station commander's favorite actors from the 20th "
@@ -1098,76 +1098,76 @@ msgstr ""
 "Benannt nach einem der Lieblingsschauspieler der Stationsleitung aus dem "
 "zwanzigsten Jahrhundert."
 
-#: scripts/place_station_scenario_utility.lua:1004
+#: scripts/place_station_scenario_utility.lua:1642
 msgctxt "stationGeneralInfo-comms"
 msgid "We mine nearby asteroids for precious minerals"
 msgstr "Wir bauen nahe gelegene Asteroiden nach wertvollen Mineralien ab."
 
-#: scripts/place_station_scenario_utility.lua:1057
+#: scripts/place_station_scenario_utility.lua:1721
 msgctxt "stationGeneralInfo-comms"
 msgid "Relax and meet some interesting players"
 msgstr "Entspannen Sie sich und treffen Sie einige interessante Spieler."
 
-#: scripts/place_station_scenario_utility.lua:1063
+#: scripts/place_station_scenario_utility.lua:1730
 msgctxt "scienceDescription-station"
 msgid "Commerce and recreation"
 msgstr "Handel und Erholung"
 
-#: scripts/place_station_scenario_utility.lua:1070
+#: scripts/place_station_scenario_utility.lua:1740
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology research"
 msgstr "Xenopsychologische Forschung"
 
-#: scripts/place_station_scenario_utility.lua:1077
+#: scripts/place_station_scenario_utility.lua:1750
 msgctxt "scienceDescription-station"
 msgid "Mining and trade"
 msgstr "Bergbau und Handel"
 
-#: scripts/place_station_scenario_utility.lua:1084
+#: scripts/place_station_scenario_utility.lua:1760
 msgctxt "scienceDescription-station"
 msgid "Mining and gambling"
 msgstr "Bergbau und Glücksspiel"
 
-#: scripts/place_station_scenario_utility.lua:1091
-#: scripts/place_station_scenario_utility.lua:1105
-#: scripts/place_station_scenario_utility.lua:1132
-#: scripts/place_station_scenario_utility.lua:1167
+#: scripts/place_station_scenario_utility.lua:1768
+#: scripts/place_station_scenario_utility.lua:1782
+#: scripts/place_station_scenario_utility.lua:1818
+#: scripts/place_station_scenario_utility.lua:1862
 msgctxt "scienceDescription-station"
 msgid "Resupply"
 msgstr "Nachschub"
 
-#: scripts/place_station_scenario_utility.lua:1112
+#: scripts/place_station_scenario_utility.lua:1791
 msgctxt "scienceDescription-station"
 msgid "Textiles and fashion"
 msgstr "Textilien und Mode"
 
-#: scripts/place_station_scenario_utility.lua:1119
+#: scripts/place_station_scenario_utility.lua:1801
 msgctxt "scienceDescription-station"
 msgid "Stress Psychology Research"
 msgstr "Stresspsychologische Forschung"
 
-#: scripts/place_station_scenario_utility.lua:1125
+#: scripts/place_station_scenario_utility.lua:1810
 msgctxt "scienceDescription-station"
 msgid "Low gravity research"
 msgstr "Niedrig-Schwerkraft Forschung"
 
-#: scripts/place_station_scenario_utility.lua:1133
+#: scripts/place_station_scenario_utility.lua:1821
 msgctxt "stationGeneralInfo-comms"
 msgid "Get your energy here! Grab a drink before you go!"
 msgstr "Holen Sie sich hier Ihre Energie! Hol dir einen Drink, bevor du gehst!"
 
-#: scripts/place_station_scenario_utility.lua:1138
+#: scripts/place_station_scenario_utility.lua:1829
 msgctxt "scienceDescription-station"
 msgid "Research Lab and Observatory"
 msgstr "Forschungslabor und Observatorium"
 
-#: scripts/place_station_scenario_utility.lua:1148
+#: scripts/place_station_scenario_utility.lua:1842
 msgctxt "scienceDescription-station"
 msgid "Biotech research"
 msgstr "Biotechnologie-Forschung"
 
-#: scripts/place_station_scenario_utility.lua:1154
-#: scripts/place_station_scenario_utility.lua:1160
+#: scripts/place_station_scenario_utility.lua:1849
+#: scripts/place_station_scenario_utility.lua:1855
 msgctxt "scienceDescription-station"
 msgid "Observatory"
 msgstr "Observatorium"

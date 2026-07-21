@@ -1,0 +1,4477 @@
+# Scenario name
+msgid "Doomed Outpost"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Far from home, an isolated outpost tries to survive a hostile environment. "
+"This scenario starts off simply enough, but the challenges are significant. "
+"It's not recommended for those players that want to reach victory nearly "
+"every game or feel claustrophobic starting in a starship with limited "
+"capabilities.\n"
+"\n"
+"Designed to run with one or more player ships with different terrain each "
+"time. Player ships start off with more limited capabilities than usual, but "
+"can easily be upgraded beyond the normal player ship capabilities.\n"
+"Rank awarded at the end of the mission from lowest to highest: Cadet, Acting "
+"Ensign, Ensign, Lieutenant, Commander, Captain, Admiral\n"
+"\n"
+"Duration: About an hour if you play to the first major attack. If you "
+"survive the first major attack and wish to attempt a victory, it could take "
+"five hours or more. Know your real life time constraints before you start.\n"
+"\n"
+"Version 2\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+"There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience "
+"levels are welcome."
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures strength and/or number of enemies in this scenario"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Fewer or weaker enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal number or strength of enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "More or stronger enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Extreme"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Much stronger, many more enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Quixotic"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Insanely strong and/or inordinately large numbers of enemies"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Murphy"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures the perversity of the universe according to Murphy's law"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are more in your favor"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are normal"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are more against you"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Pace"
+msgstr ""
+
+msgctxt "setting"
+msgid "How slow or fast do the enemies get more powerful"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Glacial"
+msgstr ""
+
+msgctxt "Pace"
+msgid "The slowest pace"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Snail"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Slower than slow pacing"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Slow"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Slower than normal pacing"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Normal pacing"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Fast"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Faster than normal pacing"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Impatient"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Faster than fast pacing"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Blitz"
+msgstr ""
+
+msgctxt "Pace"
+msgid "Fastest pace"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Reputation"
+msgstr ""
+
+msgctxt "setting"
+msgid "Amount of reputation to start with"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Unknown"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Zero reputation - nobody knows anything about you"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Nice"
+msgstr ""
+
+msgctxt "Reputation"
+msgid ""
+"20 reputation - you've had a small positive influence on the local community"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Hero"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "50 reputation - you helped important people or lots of people"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Major Hero"
+msgstr ""
+
+msgctxt "Reputation"
+msgid ""
+"100 reputation - you're well known by nearly everyone as a force for good"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Super Hero"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "200 reputation - everyone knows you and relies on you for help"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Upgrade"
+msgstr ""
+
+msgctxt "setting"
+msgid "General price of upgrades to player ships"
+msgstr ""
+
+msgctxt "Upgrade"
+msgid "Cheap"
+msgstr ""
+
+msgctxt "Upgrade"
+msgid "Lower priced player ship upgrades"
+msgstr ""
+
+msgctxt "Upgrade"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Upgrade"
+msgid "Normal price for player ship upgrades"
+msgstr ""
+
+msgctxt "Upgrade"
+msgid "Expensive"
+msgstr ""
+
+msgctxt "Upgrade"
+msgid "Higher priced player ship upgrades"
+msgstr ""
+
+msgctxt "Upgrade"
+msgid "Luxurious"
+msgstr ""
+
+msgctxt "Upgrade"
+msgid "Very high prices for player ship upgrades"
+msgstr ""
+
+msgctxt "Upgrade"
+msgid "Monopolistic"
+msgstr ""
+
+msgctxt "Upgrade"
+msgid "Extremely high prices for player ship upgrades"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Unique Ship"
+msgstr ""
+
+msgctxt "setting"
+msgid "Choose player ship outside of standard player ship list"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "None"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "None: just use standard player ship list on spawn screen"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Amalgam"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Atlantis, 4 beams (vs 2), single broadside tube on each side for "
+"large homing missiles only, 2 mining tubes, weaker defenses and engines"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Midian"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on missile cruiser, reduced tubes, missiles and base warp speed to get "
+"beam weapons and HVLI"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Raven"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Cruiser, stronger shields, weaker hull, broadside beams, tweaked "
+"tubes and missiles, low powered warp drive, tweaked sensor ranges"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Squid"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Piranha, stronger defenses, added a beam weapon, reduced missile "
+"load, large homing missiles, reconfigured tubes, shorter jump and sensor "
+"ranges"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:189
+msgctxt "orders-comms"
+msgid "Survive"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2656
+msgctxt "scienceDB"
+msgid "Weapons"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2664
+msgctxt "scienceDB"
+msgid ""
+"This database only covers the basic versions of the missiles used throughout "
+"the galaxy.\n"
+"\n"
+"It has been reported that some battleships started using larger variations "
+"of those missiles. Small fighters and even frigates should not have too much "
+"trouble dodging them, but space captains of bigger ships should be wary of "
+"their doubled damage potential.\n"
+"\n"
+"Smaller variations of these missiles have become common in the galaxy, too. "
+"Fighter pilots praise their speed and maneuverability, because it gives them "
+"an edge against small and fast-moving targets. They only deal half the "
+"damage of their basic counterparts, but what good is a missile if it does "
+"not hit its target?\n"
+"\n"
+"Some ships in your fleet have been equipped with these different sized "
+"weapons tubes. In some cases, the weapons officer might see a banner on the "
+"weapons console describing these tubes using the following shorthand:\n"
+"    S = Small\n"
+"    M = Medium (the normal sized missile tube)\n"
+"    L = Large\n"
+"These letters describe the tube sizes in order from top to bottom."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2672
+#: scripts/scenario_35_doomed_outpost.lua:2692
+#, lua-format
+msgctxt "buttonGM"
+msgid "Version %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2675
+#: scripts/scenario_35_doomed_outpost.lua:2695
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Scenario version %s\n"
+" LUA version %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2683
+#: scripts/scenario_35_doomed_outpost.lua:2703
+msgctxt "buttonGM"
+msgid "+Station Reports"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2684
+msgctxt "buttonGM"
+msgid "+Difficulty"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2685
+msgctxt "buttonGM"
+msgid "+Enemy Power"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2686
+msgctxt "buttonGM"
+msgid "+Reputation"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2687
+#: scripts/scenario_35_doomed_outpost.lua:2729
+msgctxt "buttonGM"
+msgid "+Control Codes"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2704
+msgctxt "buttonGM"
+msgid "Mission Stations"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2709
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"This is spoiler information. Consider carefully before you reveal this to "
+"the rest of the players. If you feel you have to reveal this information, I "
+"suggest you select the player ship using the widget to the right of the "
+"'Global message' button, then click the 'Hail ship' button, identify "
+"yourself as a character in game like the regional headquarters stellar "
+"cartography technician, then type the information as if you were that "
+"character helping them out on their mission.\n"
+"\n"
+"Medical research station: %s in sector %s\n"
+"Plague station %s in %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2718
+msgctxt "buttonGM"
+msgid "+Test Non-DB Ships"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2721
+#, lua-format
+msgctxt "buttonGM"
+msgid "Whammy %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2728
+msgctxt "buttonGM"
+msgid "+Spawn Ship(s)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2733
+msgctxt "buttonGM"
+msgid "-From Enemy Power"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2735
+#: scripts/scenario_35_doomed_outpost.lua:2757
+msgctxt "buttonGM"
+msgid "Easy"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2736
+#: scripts/scenario_35_doomed_outpost.lua:2758
+msgctxt "buttonGM"
+msgid "Normal"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2737
+#: scripts/scenario_35_doomed_outpost.lua:2759
+msgctxt "buttonGM"
+msgid "Hard"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2738
+msgctxt "buttonGM"
+msgid "Extreme"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2739
+msgctxt "buttonGM"
+msgid "Quixotic"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2743
+#: scripts/scenario_35_doomed_outpost.lua:2763
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s %.1f"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2745
+#: scripts/scenario_35_doomed_outpost.lua:2765
+#: scripts/scenario_35_doomed_outpost.lua:2787
+msgctxt "buttonGM"
+msgid "*"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2755
+msgctxt "buttonGM"
+msgid "-From Difficulty"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2775
+msgctxt "buttonGM"
+msgid "-From Reputation"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2777
+msgctxt "buttonGM"
+msgid "Unknown"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2778
+msgctxt "buttonGM"
+msgid "Nice"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2779
+msgctxt "buttonGM"
+msgid "Hero"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2780
+msgctxt "buttonGM"
+msgid "Major Hero"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2781
+msgctxt "buttonGM"
+msgid "Super Hero"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2785
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2797
+#: scripts/scenario_35_doomed_outpost.lua:3077
+msgctxt "buttonGM"
+msgid "-Main"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2811
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid "%s %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2819
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid "%s %s  %s  %s  Friendliness:%s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2830
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Shares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2840
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Fix Probes: %s,  Fix Hack: %s,  Fix Scan: %s,  Fix Combat Maneuver: %s,  Fix "
+"Destruct: %s, Fix Slow Tube: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2894
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Homing: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2912
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Services and their costs and availability:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2923
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"      %s: %s %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2935
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"      jump overcharge: 10"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2944
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Upgrade paths for player ship types and their max level:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2954
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"      Ship template type: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2965
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"            %s: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2980
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Goods:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2987
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"    Sell:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:2997
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"        %s: Cost:%s   Quantity:%s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3010
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"    Trade:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3020
+#: scripts/scenario_35_doomed_outpost.lua:3039
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"        %s: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3030
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"    Buy:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3060
+#: scripts/scenario_35_doomed_outpost.lua:3069
+msgctxt "stationReport-msgGM"
+msgid "No applicable stations. Reports useless. No action taken"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3370
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"Player ship %s's template type (%s) could not be found in table "
+"PlayerShipStats"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3471
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Outpost stations surrendered without you.\n"
+"Outpost resisted for %s.\n"
+"Posthumous rank: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3480
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Last outpost station surrendered without you.\n"
+"Outpost resisted for %s.\n"
+"Posthumous rank: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3504
+#: scripts/scenario_35_doomed_outpost.lua:16223
+msgctxt "msgMainscreen"
+msgid "Cadet"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3510
+#: scripts/scenario_35_doomed_outpost.lua:3534
+#: scripts/scenario_35_doomed_outpost.lua:3582
+#: scripts/scenario_35_doomed_outpost.lua:3630
+#: scripts/scenario_35_doomed_outpost.lua:3678
+#: scripts/scenario_35_doomed_outpost.lua:16287
+#: scripts/scenario_35_doomed_outpost.lua:16313
+#: scripts/scenario_35_doomed_outpost.lua:16339
+#: scripts/scenario_35_doomed_outpost.lua:16365
+#: scripts/scenario_35_doomed_outpost.lua:16391
+msgctxt "msgMainscreen"
+msgid "Admiral"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3516
+#: scripts/scenario_35_doomed_outpost.lua:3540
+#: scripts/scenario_35_doomed_outpost.lua:3546
+#: scripts/scenario_35_doomed_outpost.lua:3588
+#: scripts/scenario_35_doomed_outpost.lua:3636
+#: scripts/scenario_35_doomed_outpost.lua:3684
+#: scripts/scenario_35_doomed_outpost.lua:3726
+#: scripts/scenario_35_doomed_outpost.lua:16266
+#: scripts/scenario_35_doomed_outpost.lua:16292
+#: scripts/scenario_35_doomed_outpost.lua:16318
+#: scripts/scenario_35_doomed_outpost.lua:16344
+#: scripts/scenario_35_doomed_outpost.lua:16370
+#: scripts/scenario_35_doomed_outpost.lua:16396
+msgctxt "msgMainscreen"
+msgid "Captain"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3522
+#: scripts/scenario_35_doomed_outpost.lua:3552
+#: scripts/scenario_35_doomed_outpost.lua:3558
+#: scripts/scenario_35_doomed_outpost.lua:3594
+#: scripts/scenario_35_doomed_outpost.lua:3600
+#: scripts/scenario_35_doomed_outpost.lua:3642
+#: scripts/scenario_35_doomed_outpost.lua:3690
+#: scripts/scenario_35_doomed_outpost.lua:3732
+#: scripts/scenario_35_doomed_outpost.lua:3756
+#: scripts/scenario_35_doomed_outpost.lua:16250
+#: scripts/scenario_35_doomed_outpost.lua:16271
+#: scripts/scenario_35_doomed_outpost.lua:16297
+#: scripts/scenario_35_doomed_outpost.lua:16323
+#: scripts/scenario_35_doomed_outpost.lua:16349
+#: scripts/scenario_35_doomed_outpost.lua:16375
+#: scripts/scenario_35_doomed_outpost.lua:16401
+msgctxt "msgMainscreen"
+msgid "Commander"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3528
+#: scripts/scenario_35_doomed_outpost.lua:3564
+#: scripts/scenario_35_doomed_outpost.lua:3570
+#: scripts/scenario_35_doomed_outpost.lua:3606
+#: scripts/scenario_35_doomed_outpost.lua:3648
+#: scripts/scenario_35_doomed_outpost.lua:3654
+#: scripts/scenario_35_doomed_outpost.lua:3696
+#: scripts/scenario_35_doomed_outpost.lua:3738
+#: scripts/scenario_35_doomed_outpost.lua:3762
+#: scripts/scenario_35_doomed_outpost.lua:3780
+#: scripts/scenario_35_doomed_outpost.lua:16239
+#: scripts/scenario_35_doomed_outpost.lua:16255
+#: scripts/scenario_35_doomed_outpost.lua:16276
+#: scripts/scenario_35_doomed_outpost.lua:16302
+#: scripts/scenario_35_doomed_outpost.lua:16328
+#: scripts/scenario_35_doomed_outpost.lua:16354
+#: scripts/scenario_35_doomed_outpost.lua:16380
+#: scripts/scenario_35_doomed_outpost.lua:16406
+msgctxt "msgMainscreen"
+msgid "Lieutenant"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3576
+#: scripts/scenario_35_doomed_outpost.lua:3612
+#: scripts/scenario_35_doomed_outpost.lua:3618
+#: scripts/scenario_35_doomed_outpost.lua:3660
+#: scripts/scenario_35_doomed_outpost.lua:3666
+#: scripts/scenario_35_doomed_outpost.lua:3702
+#: scripts/scenario_35_doomed_outpost.lua:3744
+#: scripts/scenario_35_doomed_outpost.lua:3768
+#: scripts/scenario_35_doomed_outpost.lua:3786
+#: scripts/scenario_35_doomed_outpost.lua:3798
+#: scripts/scenario_35_doomed_outpost.lua:16230
+#: scripts/scenario_35_doomed_outpost.lua:16241
+#: scripts/scenario_35_doomed_outpost.lua:16257
+#: scripts/scenario_35_doomed_outpost.lua:16278
+#: scripts/scenario_35_doomed_outpost.lua:16304
+#: scripts/scenario_35_doomed_outpost.lua:16330
+#: scripts/scenario_35_doomed_outpost.lua:16356
+#: scripts/scenario_35_doomed_outpost.lua:16382
+#: scripts/scenario_35_doomed_outpost.lua:16408
+msgctxt "msgMainscreen"
+msgid "Ensign"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3624
+#: scripts/scenario_35_doomed_outpost.lua:3672
+#: scripts/scenario_35_doomed_outpost.lua:3708
+#: scripts/scenario_35_doomed_outpost.lua:3714
+#: scripts/scenario_35_doomed_outpost.lua:3720
+#: scripts/scenario_35_doomed_outpost.lua:3750
+#: scripts/scenario_35_doomed_outpost.lua:3774
+#: scripts/scenario_35_doomed_outpost.lua:3792
+#: scripts/scenario_35_doomed_outpost.lua:3804
+#: scripts/scenario_35_doomed_outpost.lua:3810
+#: scripts/scenario_35_doomed_outpost.lua:16228
+#: scripts/scenario_35_doomed_outpost.lua:16234
+#: scripts/scenario_35_doomed_outpost.lua:16245
+#: scripts/scenario_35_doomed_outpost.lua:16261
+#: scripts/scenario_35_doomed_outpost.lua:16282
+#: scripts/scenario_35_doomed_outpost.lua:16308
+#: scripts/scenario_35_doomed_outpost.lua:16334
+#: scripts/scenario_35_doomed_outpost.lua:16360
+#: scripts/scenario_35_doomed_outpost.lua:16386
+#: scripts/scenario_35_doomed_outpost.lua:16412
+msgctxt "msgMainscreen"
+msgid "Acting Ensign"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3843
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s hours, %s minutes and %s seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3853
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s hours, %s minutes and %s second"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3865
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s hours, %s minute and %s seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3875
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s hours, %s minute and %s second"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3889
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s hour, %s minutes and %s seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3899
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s hour, %s minutes and %s second"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3911
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s hour, %s minute and %s seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3921
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s hour, %s minute and %s second"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3933
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s minutes and %s seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:3939
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s minutes and %s second"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5411
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "Sensor Record: %s station %s in %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5421
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "%s, %s station %s in %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5465
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "Sensor Record: %s %s %s in %s carrying %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5477
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "%s; %s %s %s in %s carrying %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5493
+msgctxt "scienceDescription-buoy"
+msgid "No data recorded"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5496
+#: scripts/scenario_35_doomed_outpost.lua:5559
+msgctxt "scienceDescription-buoy"
+msgid "Automated data gathering device"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5513
+msgctxt "scienceDescription-buoy"
+msgid "Come to Billy Bob's for the best food in the sector"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5517
+msgctxt "scienceDescription-buoy"
+msgid "It's never too late to buy life insurance"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5521
+msgctxt "scienceDescription-buoy"
+msgid "You'll feel better in an Adder Mark 9"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5525
+msgctxt "scienceDescription-buoy"
+msgid "Visit Repulse shipyards for the best deals"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5527
+msgctxt "scienceDescription-buoy"
+msgid "Fresh fish! We catch, you buy!"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5530
+msgctxt "scienceDescription-buoy"
+msgid "Get your fuel cells at Melinda's Market"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5534
+msgctxt "scienceDescription-buoy"
+msgid "Find a special companion. All species available"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5538
+msgctxt "scienceDescription-buoy"
+msgid "Feeling down? Robotherapist is there for you"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5540
+msgctxt "scienceDescription-buoy"
+msgid "30 days, 30 kilograms, guaranteed"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5543
+msgctxt "scienceDescription-buoy"
+msgid "Try our asteroid dust diet weight loss program"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5547
+msgctxt "scienceDescription-buoy"
+msgid "Best tasting water in the quadrant at Willy's Waterway"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5551
+msgctxt "scienceDescription-buoy"
+msgid "Amazing shows every night at Lenny's Lounge"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:5555
+msgctxt "scienceDescription-buoy"
+msgid "Tip: make lemons an integral part of your diet"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6109
+msgctxt "damage-msgScience"
+msgid "The unscanned artifact we just picked up has fried our scanners"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6118
+msgctxt "damage-msgOperations"
+msgid "The unscanned artifact we just picked up has fried our scanners"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6133
+#, lua-format
+msgctxt "scienceDescription-artifact"
+msgid ""
+"Source of emanations interfering with long range sensors. Range:%.1fu Impact:"
+"%.1fu"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6147
+msgctxt "scienceDescription-artifact"
+msgid "Source of unusual emanations"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6336
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6351
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings %s!\n"
+"How may we help you today?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6357
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6360
+msgctxt "station-comms"
+msgid "Hello, may I help you?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6363
+msgctxt "station-comms"
+msgid "Welcome to our lovely station."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6369
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6373
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6388
+#, lua-format
+msgctxt "station-comms"
+msgid "Deliver %s to %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6397
+#: scripts/scenario_35_doomed_outpost.lua:6685
+#: scripts/scenario_35_doomed_outpost.lua:6757
+#: scripts/scenario_35_doomed_outpost.lua:6816
+#: scripts/scenario_35_doomed_outpost.lua:7097
+#: scripts/scenario_35_doomed_outpost.lua:7199
+#: scripts/scenario_35_doomed_outpost.lua:7645
+#: scripts/scenario_35_doomed_outpost.lua:7749
+#: scripts/scenario_35_doomed_outpost.lua:7798
+#: scripts/scenario_35_doomed_outpost.lua:7847
+#: scripts/scenario_35_doomed_outpost.lua:7897
+#: scripts/scenario_35_doomed_outpost.lua:7952
+#: scripts/scenario_35_doomed_outpost.lua:8288
+#: scripts/scenario_35_doomed_outpost.lua:8382
+#: scripts/scenario_35_doomed_outpost.lua:8434
+#: scripts/scenario_35_doomed_outpost.lua:8518
+#: scripts/scenario_35_doomed_outpost.lua:8602
+#: scripts/scenario_35_doomed_outpost.lua:8767
+#: scripts/scenario_35_doomed_outpost.lua:8983
+#: scripts/scenario_35_doomed_outpost.lua:9475
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6406
+#, lua-format
+msgctxt "station-comms"
+msgid "%s disembarks at %s and thanks you"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6423
+#: scripts/scenario_35_doomed_outpost.lua:6703
+#: scripts/scenario_35_doomed_outpost.lua:6731
+#: scripts/scenario_35_doomed_outpost.lua:6734
+#: scripts/scenario_35_doomed_outpost.lua:6775
+#: scripts/scenario_35_doomed_outpost.lua:6832
+#: scripts/scenario_35_doomed_outpost.lua:7116
+#: scripts/scenario_35_doomed_outpost.lua:7144
+#: scripts/scenario_35_doomed_outpost.lua:7147
+#: scripts/scenario_35_doomed_outpost.lua:7236
+#: scripts/scenario_35_doomed_outpost.lua:7256
+#: scripts/scenario_35_doomed_outpost.lua:7625
+#: scripts/scenario_35_doomed_outpost.lua:7675
+#: scripts/scenario_35_doomed_outpost.lua:7774
+#: scripts/scenario_35_doomed_outpost.lua:7823
+#: scripts/scenario_35_doomed_outpost.lua:7872
+#: scripts/scenario_35_doomed_outpost.lua:7925
+#: scripts/scenario_35_doomed_outpost.lua:7979
+#: scripts/scenario_35_doomed_outpost.lua:7984
+#: scripts/scenario_35_doomed_outpost.lua:8001
+#: scripts/scenario_35_doomed_outpost.lua:8032
+#: scripts/scenario_35_doomed_outpost.lua:8044
+#: scripts/scenario_35_doomed_outpost.lua:8060
+#: scripts/scenario_35_doomed_outpost.lua:8066
+#: scripts/scenario_35_doomed_outpost.lua:8093
+#: scripts/scenario_35_doomed_outpost.lua:8105
+#: scripts/scenario_35_doomed_outpost.lua:8117
+#: scripts/scenario_35_doomed_outpost.lua:8120
+#: scripts/scenario_35_doomed_outpost.lua:8186
+#: scripts/scenario_35_doomed_outpost.lua:8354
+#: scripts/scenario_35_doomed_outpost.lua:8404
+#: scripts/scenario_35_doomed_outpost.lua:8484
+#: scripts/scenario_35_doomed_outpost.lua:8568
+#: scripts/scenario_35_doomed_outpost.lua:8652
+#: scripts/scenario_35_doomed_outpost.lua:8662
+#: scripts/scenario_35_doomed_outpost.lua:8696
+#: scripts/scenario_35_doomed_outpost.lua:8700
+#: scripts/scenario_35_doomed_outpost.lua:8715
+#: scripts/scenario_35_doomed_outpost.lua:8798
+#: scripts/scenario_35_doomed_outpost.lua:8932
+#: scripts/scenario_35_doomed_outpost.lua:9019
+#: scripts/scenario_35_doomed_outpost.lua:9127
+#: scripts/scenario_35_doomed_outpost.lua:9517
+#: scripts/scenario_35_doomed_outpost.lua:9596
+#: scripts/scenario_35_doomed_outpost.lua:9758
+#: scripts/scenario_35_doomed_outpost.lua:9775
+#: scripts/scenario_35_doomed_outpost.lua:9792
+#: scripts/scenario_35_doomed_outpost.lua:9800
+#: scripts/scenario_35_doomed_outpost.lua:9913
+#: scripts/scenario_35_doomed_outpost.lua:9916
+#: scripts/scenario_35_doomed_outpost.lua:9920
+#: scripts/scenario_35_doomed_outpost.lua:9961
+#: scripts/scenario_35_doomed_outpost.lua:9980
+#: scripts/scenario_35_doomed_outpost.lua:10056
+#: scripts/scenario_35_doomed_outpost.lua:10193
+#: scripts/scenario_35_doomed_outpost.lua:10270
+#: scripts/scenario_35_doomed_outpost.lua:10363
+#: scripts/scenario_35_doomed_outpost.lua:10366
+#: scripts/scenario_35_doomed_outpost.lua:10392
+#: scripts/scenario_35_doomed_outpost.lua:10440
+#: scripts/scenario_35_doomed_outpost.lua:10532
+#: scripts/scenario_35_doomed_outpost.lua:10549
+#: scripts/scenario_35_doomed_outpost.lua:10582
+#: scripts/scenario_35_doomed_outpost.lua:10594
+#: scripts/scenario_35_doomed_outpost.lua:10610
+#: scripts/scenario_35_doomed_outpost.lua:10691
+#: scripts/scenario_35_doomed_outpost.lua:10729
+#: scripts/scenario_35_doomed_outpost.lua:10799
+#: scripts/scenario_35_doomed_outpost.lua:10804
+#: scripts/scenario_35_doomed_outpost.lua:10875
+#: scripts/scenario_35_doomed_outpost.lua:10880
+#: scripts/scenario_35_doomed_outpost.lua:11066
+#: scripts/scenario_35_doomed_outpost.lua:11072
+#: scripts/scenario_35_doomed_outpost.lua:11254
+#: scripts/scenario_35_doomed_outpost.lua:11267
+#: scripts/scenario_35_doomed_outpost.lua:11280
+#: scripts/scenario_35_doomed_outpost.lua:11293
+#: scripts/scenario_35_doomed_outpost.lua:11306
+#: scripts/scenario_35_doomed_outpost.lua:11319
+#: scripts/scenario_35_doomed_outpost.lua:11332
+#: scripts/scenario_35_doomed_outpost.lua:11334
+#: scripts/scenario_35_doomed_outpost.lua:11423
+#: scripts/scenario_35_doomed_outpost.lua:11429
+#: scripts/scenario_35_doomed_outpost.lua:11484
+#: scripts/scenario_35_doomed_outpost.lua:11487
+#: scripts/scenario_35_doomed_outpost.lua:11490
+#: scripts/scenario_35_doomed_outpost.lua:11578
+#: scripts/scenario_35_doomed_outpost.lua:11708
+#: scripts/scenario_35_doomed_outpost.lua:11716
+#: scripts/scenario_35_doomed_outpost.lua:11724
+#: scripts/scenario_35_doomed_outpost.lua:11732
+#: scripts/scenario_35_doomed_outpost.lua:11740
+#: scripts/scenario_35_doomed_outpost.lua:11747
+#: scripts/scenario_35_doomed_outpost.lua:11753
+#: scripts/scenario_35_doomed_outpost.lua:11759
+#: scripts/scenario_35_doomed_outpost.lua:11764
+#: scripts/scenario_35_doomed_outpost.lua:11776
+#: scripts/scenario_35_doomed_outpost.lua:11783
+#: scripts/scenario_35_doomed_outpost.lua:11951
+#: scripts/scenario_35_doomed_outpost.lua:12051
+#: scripts/scenario_35_doomed_outpost.lua:12079
+#: scripts/scenario_35_doomed_outpost.lua:12184
+#: scripts/scenario_35_doomed_outpost.lua:12288
+#: scripts/scenario_35_doomed_outpost.lua:12316
+#: scripts/scenario_35_doomed_outpost.lua:12422
+#: scripts/scenario_35_doomed_outpost.lua:12522
+#: scripts/scenario_35_doomed_outpost.lua:12550
+#: scripts/scenario_35_doomed_outpost.lua:12553
+#: scripts/scenario_35_doomed_outpost.lua:12599
+#: scripts/scenario_35_doomed_outpost.lua:12604
+#: scripts/scenario_35_doomed_outpost.lua:12612
+#: scripts/scenario_35_doomed_outpost.lua:12679
+#: scripts/scenario_35_doomed_outpost.lua:12698
+#: scripts/scenario_35_doomed_outpost.lua:12736
+#: scripts/scenario_35_doomed_outpost.lua:12740
+#: scripts/scenario_35_doomed_outpost.lua:12782
+#: scripts/scenario_35_doomed_outpost.lua:12837
+#: scripts/scenario_35_doomed_outpost.lua:12898
+#: scripts/scenario_35_doomed_outpost.lua:12953
+#: scripts/scenario_35_doomed_outpost.lua:13015
+#: scripts/scenario_35_doomed_outpost.lua:13045
+#: scripts/scenario_35_doomed_outpost.lua:13803
+#: scripts/scenario_35_doomed_outpost.lua:13807
+#: scripts/scenario_35_doomed_outpost.lua:13865
+#: scripts/scenario_35_doomed_outpost.lua:13920
+#: scripts/scenario_35_doomed_outpost.lua:13980
+#: scripts/scenario_35_doomed_outpost.lua:14035
+#: scripts/scenario_35_doomed_outpost.lua:14095
+#: scripts/scenario_35_doomed_outpost.lua:14173
+#: scripts/scenario_35_doomed_outpost.lua:14178
+#: scripts/scenario_35_doomed_outpost.lua:14186
+#: scripts/scenario_35_doomed_outpost.lua:14239
+#: scripts/scenario_35_doomed_outpost.lua:14258
+#: scripts/scenario_35_doomed_outpost.lua:14323
+#: scripts/scenario_35_doomed_outpost.lua:14380
+#: scripts/scenario_35_doomed_outpost.lua:14406
+#: scripts/scenario_35_doomed_outpost.lua:14432
+#: scripts/scenario_35_doomed_outpost.lua:14458
+#: scripts/scenario_35_doomed_outpost.lua:14487
+#: scripts/scenario_35_doomed_outpost.lua:14491
+#: scripts/scenario_35_doomed_outpost.lua:14540
+#: scripts/scenario_35_doomed_outpost.lua:14580
+#: scripts/scenario_35_doomed_outpost.lua:14620
+#: scripts/scenario_35_doomed_outpost.lua:14784
+#: scripts/scenario_35_doomed_outpost.lua:14871
+#: scripts/scenario_35_doomed_outpost.lua:15021
+#: scripts/scenario_35_doomed_outpost.lua:15108
+#: scripts/scenario_35_doomed_outpost.lua:15175
+#: scripts/scenario_35_doomed_outpost.lua:15189
+#: scripts/scenario_35_doomed_outpost.lua:15194
+#: scripts/scenario_35_doomed_outpost.lua:15232
+#: scripts/scenario_35_doomed_outpost.lua:15289
+msgid "Back"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6432
+#, lua-format
+msgctxt "shipLog"
+msgid ""
+"%s disembarks at %s because %s has been destroyed. You receive %s reputation "
+"for your efforts"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6641
+msgctxt "station-comms"
+msgid "Transport Passenger"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6652
+#, lua-format
+msgctxt "station-comms"
+msgid "%s wishes to be transported to %s station %s in sector %s."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6662
+#, lua-format
+msgctxt "station-comms"
+msgid "%s Transporting %s would increase your reputation by %s."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6674
+#, lua-format
+msgctxt "station-comms"
+msgid "Agree to transport %s to %s station %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6697
+#, lua-format
+msgctxt "station-comms"
+msgid "You direct %s to guest quarters and say, 'Welcome aboard the %s'"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6707
+msgctxt "station-comms"
+msgid "Decline transportation request"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6714
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"You tell %s that you cannot take on any transportation missions at this "
+"time. The offer disappears from the message board."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6725
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"You tell %s that you cannot take on any transportation missions at this time."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6748
+#, lua-format
+msgctxt "station-comms"
+msgid "Deliver cargo to %s on %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6766
+#, lua-format
+msgctxt "station-comms"
+msgid "%s thanks you for retrieving the cargo"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6784
+#, lua-format
+msgctxt "shipLog"
+msgid ""
+"Automated systems on %s have informed you of the destruction of station %s. "
+"Your mission to deliver cargo for %s to %s is no longer valid. You unloaded "
+"the cargo and requested the station authorities handle it for the family of "
+"%s. You received %s reputation for your efforts. The mission has been "
+"removed from your mission log."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6808
+#, lua-format
+msgctxt "station-comms"
+msgid "Pick up cargo for %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6825
+#, lua-format
+msgctxt "station-comms"
+msgid "The cargo for %s has been loaded on %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:6841
+#, lua-format
+msgctxt "shipLog"
+msgid ""
+"Automated systems on %s have informed you of the destruction of station %s. "
+"Your mission to retrieve cargo for %s from %s is no longer valid and has "
+"been removed from your mission log."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7059
+msgctxt "station-comms"
+msgid "Retrieve Cargo"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7070
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s wishes you to pick up cargo from %s station %s in sector %s and deliver "
+"it here."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7080
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s Retrieving and delivering this cargo for %s would increase your "
+"reputation by %s."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7089
+#, lua-format
+msgctxt "station-comms"
+msgid "Agree to retrieve cargo for %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7109
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s thanks you and contacts station %s to let them know that %s will be "
+"picking up the cargo."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7120
+msgctxt "station-comms"
+msgid "Decline cargo retrieval request"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7127
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"You tell %s that you cannot take on any cargo retrieval missions at this "
+"time. The offer disappears from the message board."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7138
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"You tell %s that you cannot take on any cargo retrieval missions at this "
+"time."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7154
+msgctxt "station-comms"
+msgid "Station services (restock ordnance, upgrades, repairs)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7160
+msgctxt "station-comms"
+msgid "What station service are you interested in?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7166
+msgctxt "upgrade-comms"
+msgid "Upgrade ship"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7179
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: %s (%s)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7225
+msgctxt "upgrade-comms"
+msgid "Upgrade complete"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7232
+#: scripts/scenario_35_doomed_outpost.lua:7671
+#: scripts/scenario_35_doomed_outpost.lua:7770
+#: scripts/scenario_35_doomed_outpost.lua:7819
+#: scripts/scenario_35_doomed_outpost.lua:7868
+#: scripts/scenario_35_doomed_outpost.lua:7920
+#: scripts/scenario_35_doomed_outpost.lua:7975
+#: scripts/scenario_35_doomed_outpost.lua:8778
+#: scripts/scenario_35_doomed_outpost.lua:8996
+#: scripts/scenario_35_doomed_outpost.lua:9797
+#: scripts/scenario_35_doomed_outpost.lua:11924
+#: scripts/scenario_35_doomed_outpost.lua:12157
+#: scripts/scenario_35_doomed_outpost.lua:12395
+#: scripts/scenario_35_doomed_outpost.lua:14529
+#: scripts/scenario_35_doomed_outpost.lua:14569
+#: scripts/scenario_35_doomed_outpost.lua:14609
+#: scripts/scenario_35_doomed_outpost.lua:14771
+#: scripts/scenario_35_doomed_outpost.lua:14858
+#: scripts/scenario_35_doomed_outpost.lua:14881
+#: scripts/scenario_35_doomed_outpost.lua:15008
+#: scripts/scenario_35_doomed_outpost.lua:15095
+#: scripts/scenario_35_doomed_outpost.lua:15162
+#: scripts/scenario_35_doomed_outpost.lua:15221
+#: scripts/scenario_35_doomed_outpost.lua:15278
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7244
+msgctxt "upgrade-comms"
+msgid ""
+"What kind of upgrade are you interested in? We can provide the following "
+"upgrades\n"
+"system: description (reputation cost)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7251
+msgctxt "upgrade-comms"
+msgid "Alas, we cannot upgrade any of your systems"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7287
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7296
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"What type of ordnance?\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7324
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes? ("
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7329
+msgctxt "ammo-comms"
+msgid "We really need some nukes ("
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7337
+#: scripts/scenario_35_doomed_outpost.lua:7367
+#: scripts/scenario_35_doomed_outpost.lua:7396
+#: scripts/scenario_35_doomed_outpost.lua:7423
+#: scripts/scenario_35_doomed_outpost.lua:7450
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s%d rep each)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7359
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles. ("
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7363
+msgctxt "ammo-comms"
+msgid "Got any EMPs? ("
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7386
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us? ("
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7391
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles? ("
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7413
+msgctxt "ammo-comms"
+msgid "We could use some mines. ("
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7418
+msgctxt "ammo-comms"
+msgid "How about mines? ("
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7440
+msgctxt "ammo-comms"
+msgid "What about HVLI? ("
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7445
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI? ("
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7465
+#: scripts/scenario_35_doomed_outpost.lua:10060
+msgctxt "stationServices-comms"
+msgid "Docking services status"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7470
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s docking services status:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7478
+#: scripts/scenario_35_doomed_outpost.lua:10082
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Replenish scan probes."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7487
+#: scripts/scenario_35_doomed_outpost.lua:10093
+msgctxt "stationServices-comms"
+msgid "Cannot replenish scan probes due to fabrication unit failure."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7491
+#: scripts/scenario_35_doomed_outpost.lua:10097
+msgctxt "stationServices-comms"
+msgid "Parts shortage prevents scan probe replenishment."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7495
+#: scripts/scenario_35_doomed_outpost.lua:10101
+msgctxt "stationServices-comms"
+msgid ""
+"Station management has curtailed scan probe replenishment for cost cutting "
+"reasons."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7502
+#: scripts/scenario_35_doomed_outpost.lua:7532
+#: scripts/scenario_35_doomed_outpost.lua:7565
+#: scripts/scenario_35_doomed_outpost.lua:10111
+#: scripts/scenario_35_doomed_outpost.lua:10149
+#: scripts/scenario_35_doomed_outpost.lua:10187
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7509
+#: scripts/scenario_35_doomed_outpost.lua:10120
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Ship hull repair."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7517
+#: scripts/scenario_35_doomed_outpost.lua:10131
+msgctxt "stationServices-comms"
+msgid "We're out of the necessary materials and supplies for hull repair."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7521
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable while it is undergoing maintenance."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7525
+#: scripts/scenario_35_doomed_outpost.lua:10139
+msgctxt "stationServices-comms"
+msgid "All hull repair technicians quarantined to quarters due to illness."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7541
+#: scripts/scenario_35_doomed_outpost.lua:10158
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Recharge ship energy stores."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7550
+#: scripts/scenario_35_doomed_outpost.lua:10169
+msgctxt "stationServices-comms"
+msgid ""
+"A recent reactor failure has put us on auxiliary power, so we cannot "
+"recharge ships."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7554
+#: scripts/scenario_35_doomed_outpost.lua:10173
+msgctxt "stationServices-comms"
+msgid "A damaged power coupling makes it too dangerous to recharge ships."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7558
+#: scripts/scenario_35_doomed_outpost.lua:10177
+msgctxt "stationServices-comms"
+msgid ""
+"An asteroid strike damaged our solar cells and we are short on power, so we "
+"can't recharge ships right now."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7574
+#: scripts/scenario_35_doomed_outpost.lua:10213
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May overcharge jump drive"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7583
+#: scripts/scenario_35_doomed_outpost.lua:10224
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair probe launch system"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7592
+#: scripts/scenario_35_doomed_outpost.lua:10233
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair hacking system"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7601
+#: scripts/scenario_35_doomed_outpost.lua:10242
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair scanners"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7610
+#: scripts/scenario_35_doomed_outpost.lua:10253
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair combat maneuver"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7619
+#: scripts/scenario_35_doomed_outpost.lua:10264
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair self destruct system"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7638
+msgctxt "stationServices-comms"
+msgid "Overcharge Jump Drive (10 Rep)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7659
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Your jump drive has been overcharged to %ik"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7719
+msgctxt "stationServices-comms"
+msgid "Repair ship system"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7725
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"What system would you like repaired?\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7736
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair probe launch system (%s Rep)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7763
+msgctxt "stationServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7785
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair hacking system (%s Rep)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7812
+msgctxt "stationServices-comms"
+msgid "Your hack system has been repaired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7834
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair scanning system (%s Rep)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7861
+msgctxt "stationServices-comms"
+msgid "Your scanners have been repaired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7884
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair combat maneuver (%s Rep)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7913
+msgctxt "stationServices-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7939
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair self destruct system (%s Rep)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7968
+msgctxt "stationServices-comms"
+msgid "Your self destruct system has been repaired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7990
+#: scripts/scenario_35_doomed_outpost.lua:9923
+msgctxt "station-comms"
+msgid "I need information"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7991
+msgctxt "station-comms"
+msgid "What do you need to know?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7993
+msgctxt "station-comms"
+msgid "What's with all the warp jammers?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:7998
+msgctxt "station-comms"
+msgid ""
+"When factions in various stations in the area started attacking each other, "
+"there was a particularly nasty tactic employed where warp or jump ships "
+"would ambush a station. Stations could not maintain defensive patrols "
+"indefinitely due to the expense. Putting in a warp jammer gives the station "
+"a chance to scramble their defense fleet when an enemy approaches. Of "
+"course, it slows friendly traffic, commercial or military, too. So, most "
+"warp jammers are controlled by nearby factions to allow them to enable or "
+"disable them upon request to facilitate the flow of ships. You can't connect "
+"to the warp jammer while docked because you're clearly not yet ready to "
+"traverse the controlled area. Destroying a warp jammer may have undesired "
+"indirect consequences, but there's no official rule against it."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8019
+#: scripts/scenario_35_doomed_outpost.lua:10569
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8022
+#: scripts/scenario_35_doomed_outpost.lua:10572
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8029
+#: scripts/scenario_35_doomed_outpost.lua:10579
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8041
+#: scripts/scenario_35_doomed_outpost.lua:10591
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8055
+#: scripts/scenario_35_doomed_outpost.lua:10605
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8076
+msgctxt "station-comms"
+msgid "Explain sensor jammers"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8081
+msgctxt "station-comms"
+msgid "You mean those things that have a call sign that starts with SJ?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8085
+msgctxt "station-comms"
+msgid "Yes. Why so many?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8090
+msgctxt "station-comms"
+msgid ""
+"They were made during a big technological arms race. All the factions tried "
+"to make them to hinder their enemies as they approached. Most ships have got "
+"ways around them now, but nobody has gone out to clean up the leftovers. The "
+"closest thing to clean up done by the factions is to give them all SJ call "
+"signs to make ships aware of the potential navigation hazard."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8097
+msgctxt "station-comms"
+msgid "Yes. What do they do?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8102
+msgctxt "station-comms"
+msgid ""
+"The sensor jammers reduce your long range sensor range. The degree and range "
+"of effectiveness varies with each one. They're also designed to be booby "
+"traps. If you don't disable the trap, they'll fry your scanners if you pick "
+"them up to neutralize them."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8109
+msgctxt "station-comms"
+msgid "Yes. How do I get rid of them?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8114
+msgctxt "station-comms"
+msgid ""
+"Just pick them up. You'll want to scan them first if you don't want your "
+"scanners fried."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8125
+#: scripts/scenario_35_doomed_outpost.lua:9928
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8138
+#: scripts/scenario_35_doomed_outpost.lua:9934
+msgctxt "orders-comms"
+msgid "Survive. Protect the outpost which includes the following stations:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8143
+msgctxt "orders-comms"
+msgid "Survive. Protect the outpost which consists of the following station:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8177
+#: scripts/scenario_35_doomed_outpost.lua:9953
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8192
+msgctxt "station-comms"
+msgid "Resources (repair crew, coolant, goods)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8197
+msgctxt "station-comms"
+msgid "Which of the following are you interested in?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8212
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8216
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available for sale: quantity, cost in reputation\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8223
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i, %i\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8233
+msgctxt "trade-comms"
+msgid "Goods or components station will buy: price in reputation\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8238
+#: scripts/scenario_35_doomed_outpost.lua:8256
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8246
+#, lua-format
+msgctxt "trade-comms"
+msgid "Current cargo aboard %s:\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8264
+msgctxt "trade-comms"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8270
+#, lua-format
+msgctxt "trade-comms"
+msgid "Available Space: %i, Available Reputation: %i\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8279
+#: scripts/scenario_35_doomed_outpost.lua:12796
+#: scripts/scenario_35_doomed_outpost.lua:12855
+#: scripts/scenario_35_doomed_outpost.lua:12910
+#: scripts/scenario_35_doomed_outpost.lua:12972
+#: scripts/scenario_35_doomed_outpost.lua:13822
+#: scripts/scenario_35_doomed_outpost.lua:13877
+#: scripts/scenario_35_doomed_outpost.lua:13937
+#: scripts/scenario_35_doomed_outpost.lua:13992
+#: scripts/scenario_35_doomed_outpost.lua:14052
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8296
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8306
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8317
+#: scripts/scenario_35_doomed_outpost.lua:8349
+msgctxt "needRep-comms"
+msgid ""
+"\n"
+"Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8323
+#: scripts/scenario_35_doomed_outpost.lua:8452
+#: scripts/scenario_35_doomed_outpost.lua:8536
+#: scripts/scenario_35_doomed_outpost.lua:8620
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient station inventory"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8344
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"purchased"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8368
+#, lua-format
+msgctxt "trade-comms"
+msgid "Sell one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8391
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Reputation price: %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8400
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"One sold"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8421
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8443
+#: scripts/scenario_35_doomed_outpost.lua:8527
+#: scripts/scenario_35_doomed_outpost.lua:8611
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8477
+#: scripts/scenario_35_doomed_outpost.lua:8561
+#: scripts/scenario_35_doomed_outpost.lua:8645
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8505
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8589
+#: scripts/scenario_35_doomed_outpost.lua:12757
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8671
+#: scripts/scenario_35_doomed_outpost.lua:12714
+#: scripts/scenario_35_doomed_outpost.lua:13781
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8676
+#: scripts/scenario_35_doomed_outpost.lua:12719
+#: scripts/scenario_35_doomed_outpost.lua:13786
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8691
+#: scripts/scenario_35_doomed_outpost.lua:12732
+#: scripts/scenario_35_doomed_outpost.lua:13799
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8706
+msgctxt "explainGoods-comms"
+msgid "No tutorial covered goods or cargo. Explain"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8712
+msgctxt "explainGoods-comms"
+msgid ""
+"Different types of cargo or goods may be obtained from stations, freighters "
+"or other sources. They go by one word descriptions such as dilithium, optic, "
+"warp, etc. Certain mission goals may require a particular type or types of "
+"cargo. Each player ship differs in cargo carrying capacity. Goods may be "
+"obtained by spending reputation points or by trading other types of cargo "
+"(typically food, medicine or luxury)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8723
+msgctxt "trade-comms"
+msgid "Recruit repair crew member"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8751
+msgctxt "trade-comms"
+msgid "We have a repair crew candidate for you to consider"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8758
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8795
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8805
+#: scripts/scenario_35_doomed_outpost.lua:8864
+msgctxt "trade-comms"
+msgid ""
+"A possible repair recruit is awaiting final certification. They should be "
+"available in "
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8809
+#: scripts/scenario_35_doomed_outpost.lua:8868
+msgctxt "trade-comms"
+msgid ""
+"There's one repair crew candidate completing their license application. They "
+"should be available in "
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8813
+#: scripts/scenario_35_doomed_outpost.lua:8872
+msgctxt "trade-comms"
+msgid "One repair crew should be getting here from their medical checkout in "
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8823
+#: scripts/scenario_35_doomed_outpost.lua:8837
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s %i seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8845
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s a second"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8884
+#, lua-format
+msgctxt "trade-comms"
+msgid "Several arrived on station earlier. %s %i seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8898
+#: scripts/scenario_35_doomed_outpost.lua:9092
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8901
+#: scripts/scenario_35_doomed_outpost.lua:9097
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i second"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8908
+#: scripts/scenario_35_doomed_outpost.lua:9104
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i minutes and %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8914
+#: scripts/scenario_35_doomed_outpost.lua:9110
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i minute and %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8924
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"There are some repair crew recruits in route for %s. Travel time remaining "
+"is %s."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8937
+msgctxt "trade-comms"
+msgid "Purchase Coolant"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8967
+msgctxt "trade-comms"
+msgid "We've got some coolant available for you"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:8974
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchase coolant for %i reputation"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9015
+msgctxt "trade-comms"
+msgid "Additional coolant purchased"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9030
+#: scripts/scenario_35_doomed_outpost.lua:9046
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"The coolant preparation facility is having difficulty packaging the coolant "
+"for transport. They say they should have it working in about %i seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9055
+msgctxt "trade-comms"
+msgid ""
+"The coolant preparation facility is having difficulty packaging the coolant "
+"for transportation. They say they should have it working in a second"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9079
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Our coolant production facility just made some, but it's not quite ready to "
+"be transported. The preparation facility says it should take about %i seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9120
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Our coolant production facility is making more right now. Coolant "
+"manufacturing time remaining is %s."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9139
+#, lua-format
+msgctxt "orders-comms"
+msgid "Destroy aggressive enemy bases including %s station %s in %s."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9147
+msgctxt "orders-comms"
+msgid "Destroy aggressive enemy bases."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9158
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9166
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Transport %s to %s station %s in %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9175
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Transport %s to station %s (defunct)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9191
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Deliver cargo for %s to station %s in %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9202
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Deliver cargo for %s to station %s (defunct)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9217
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Pick up cargo for %s at station %s in %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9228
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Pick up cargo for %s at station %s (defunct)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9296
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Explosives planted on aggressive %s station %s. Expect detonation in %s "
+"seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9310
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, docked with %s station %s in sector %s. %s has been "
+"identified as an aggressive station. Explosives have been planted. Expect "
+"detonation in %s seconds"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9328
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Sabotage target station has been destroyed"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9356
+#, lua-format
+msgctxt "orders-comms"
+msgid "%s's destination station, %s in %s, is not an aggressive enemy station."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9366
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s's destination station, %s in %s, has been identified as an aggressive "
+"enemy station."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9377
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, is in transit in sector %s. %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9397
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, docked with %s station %s in sector %s. %s has been "
+"identified as an aggressive station"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9410
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, docked with %s station %s in sector %s. %s is not an "
+"aggressive station"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9424
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, docked with %s station %s in sector %s."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9439
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur successfully destroyed aggressive enemy station %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9449
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, has been destroyed"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9457
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Plant saboteur on freighter"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9484
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9489
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9492
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9506
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9513
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9537
+#: scripts/scenario_35_doomed_outpost.lua:9573
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9544
+#: scripts/scenario_35_doomed_outpost.lua:9580
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9549
+#: scripts/scenario_35_doomed_outpost.lua:9586
+#: scripts/scenario_35_doomed_outpost.lua:9592
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9557
+msgctxt "ammo-comms"
+msgid "You can't afford as much as I'd like to give you"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9560
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9610
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9615
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9622
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9685
+msgctxt "station-comms"
+msgid "Connect to warp jammer"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9687
+msgctxt "station-comms"
+msgid "Which one would you like to connect to?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9726
+#, lua-format
+msgctxt "station-comms"
+msgid "(%i reputation)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9739
+#, lua-format
+msgctxt "station-comms"
+msgid "%s Automated warp jammer access menu"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9747
+msgctxt "station-comms"
+msgid "Reduce range to 1 unit for 1 minute"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9755
+#: scripts/scenario_35_doomed_outpost.lua:9772
+#: scripts/scenario_35_doomed_outpost.lua:9789
+msgctxt "station-comms"
+msgid "Acknowledged. Range adjusted. Reset timer engaged."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9764
+msgctxt "station-comms"
+msgid "Reduce range by 50% for 2 minutes"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9781
+msgctxt "station-comms"
+msgid "Reduce range by 25% for 3 minutes"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9808
+msgctxt "station_comms"
+msgid ""
+"Why do I have to pay reputation to log in to some of these warp jammers?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9815
+#, lua-format
+msgctxt "station_comms"
+msgid ""
+"It's complicated. It depends on the relationships between the warp jammer "
+"owner, us, station %s and you, %s. The farther apart the relationship, the "
+"more reputation it costs to gain access. Do you want more details?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9824
+msgctxt "station-comms"
+msgid "Yes, please provide more details"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9829
+msgctxt "station-comms"
+msgid "These are the cases and their reputation costs:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9834
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ friendly to %s and WJ is friendly to %s = no reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9843
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9852
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9861
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9870
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9879
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9888
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9897
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9906
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9925
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9966
+msgctxt "station-comms"
+msgid "Where am I?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9974
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Based on triangulation and signal strength, our communications software says "
+"you're on a bearing of %.1f from us at a distance of %.1f units"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9986
+msgctxt "station-comms"
+msgid "Station services (ordnance restock, repair, upgrade)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9992
+msgctxt "station-comms"
+msgid "We offer a variety of services when you dock with us."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:9998
+msgctxt "ammo-comms"
+msgid "What ordnance do you have available for restock?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10007
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Nuke"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10013
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   EMP"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10019
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Homing"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10025
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Mine"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10031
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   HVLI"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10036
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10042
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10050
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10065
+msgctxt "stationServices-comms"
+msgid ""
+"Which docking service category do you want a status for?\n"
+"    Primary services:\n"
+"        Charge battery, repair hull, replenish probes\n"
+"    Secondary systems repair:\n"
+"        Scanners, hacking, probe launch, combat maneuver, self destruct\n"
+"    Upgrade ship systems:\n"
+"        Beam, missile, shield, hull, impulse, ftl, sensors"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10069
+msgctxt "stationServices-comms"
+msgid "Primary services"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10074
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s primary docking services status:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10135
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable whie it is undergoing maintenance."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10199
+msgctxt "stationServices-comms"
+msgid "Secondary systems repair"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10205
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s docking repair services status:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10274
+msgctxt "upgrade-comms"
+msgid "Upgrade ship systems"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10279
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Station %s docking upgrade services:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10296
+msgctxt "upgrade-comms"
+msgid ""
+"We can provide the following upgrades:\n"
+"    system: description (reputation cost)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10312
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s\n"
+"        %s: %s (%s)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10336
+msgctxt "upgrade-comms"
+msgid "No more ship upgrades available for your ship"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10344
+msgctxt "upgrade-comms"
+msgid "No ship upgrades available for your ship"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10352
+msgctxt "upgrade-comms"
+msgid "No ship upgrades available"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10359
+msgctxt "upgrade-comms"
+msgid "Explain ship upgrade categories"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10382
+msgctxt "station-comms"
+msgid "Could you help defend our stations with some ships?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10388
+msgctxt "station-comms"
+msgid ""
+"We are also experiencing attacks. However, we will do what we can to help."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10398
+#, lua-format
+msgctxt "station-comms"
+msgid "Goods information at %s or near %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10404
+msgctxt "station-comms"
+msgid "Always good to get some goods"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10418
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10424
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10433
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"   %14s: %2i, %3i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10445
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10449
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations often have food or medicine or both. Neutral stations may "
+"trade their goods for food, medicine or luxury."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10524
+#, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10539
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10545
+msgctxt "trade-comms"
+msgid " Beyond that, I have no knowledge of specific stations"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10623
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Tell me about %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10643
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Never heard of %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10652
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s died last week. The funeral was yesterday"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10661
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s? Who's %s? There's nobody here named %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10672
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "We don't talk about %s. They are gone and good riddance"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10681
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "I think %s moved away"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10696
+msgctxt "stationAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10698
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10707
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10718
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10735
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10743
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10750
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10756
+#: scripts/scenario_35_doomed_outpost.lua:10832
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10786
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10795
+#: scripts/scenario_35_doomed_outpost.lua:10871
+#: scripts/scenario_35_doomed_outpost.lua:10963
+#: scripts/scenario_35_doomed_outpost.lua:11062
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10811
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10819
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10826
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10861
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at WP %d"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10886
+msgctxt "stationAssist-comms"
+msgid "Please send a service jonque for repairs"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10891
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid ""
+"Would you like the service jonque to come to you directly or would you "
+"prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f "
+"reputation."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10956
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to come to you to help with repairs"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10971
+msgctxt "stationAssist-comms"
+msgid ""
+"\n"
+"\n"
+"Note: if you want to use a waypoint, you will have to back out and set one "
+"and come back."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:10979
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Rendezvous at waypoint %d"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11052
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to rendezvous at waypoint %d"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11239
+msgctxt "upgrade-comms"
+msgid "Which ship system upgrade category are you wondering about?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11243
+msgctxt "upgrade-comms"
+msgid "beam"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11247
+msgctxt "upgrade-comms"
+msgid ""
+"Beam upgrades refer to the beam weapons systems. They might include "
+"additional beam mounts, longer range, faster recharge or cycle times, "
+"increased damage, wider beam firing arcs or faster beam turret rotation "
+"speed."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11251
+#: scripts/scenario_35_doomed_outpost.lua:11264
+#: scripts/scenario_35_doomed_outpost.lua:11277
+#: scripts/scenario_35_doomed_outpost.lua:11290
+#: scripts/scenario_35_doomed_outpost.lua:11303
+#: scripts/scenario_35_doomed_outpost.lua:11316
+#: scripts/scenario_35_doomed_outpost.lua:11329
+msgctxt "upgrade-comms"
+msgid "Back to ship upgrade category explanation list"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11256
+msgctxt "upgrade-comms"
+msgid "missiles"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11260
+msgctxt "upgrade-comms"
+msgid ""
+"Missile upgrades refer to aspects of the missile weapons systems. They might "
+"include additional tubes, faster tube load times, increased tube size, "
+"additional missile types or additional missile storage capacity."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11269
+msgctxt "upgrade-comms"
+msgid "shield"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11273
+msgctxt "upgrade-comms"
+msgid ""
+"Shield upgrades refer to the protective energy shields around your ship. "
+"They might include increased charge capacity (overall strength) for the "
+"front, rear or both shield arcs or the addition of a shield arc."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11282
+msgctxt "upgrade-comms"
+msgid "hull"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11286
+msgctxt "upgrade-comms"
+msgid ""
+"Hull upgrades refer to strengthening the ship hull to withstand more damage "
+"in the form of armor plating or structural bolstering."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11295
+msgctxt "upgrade-comms"
+msgid "impulse"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11299
+msgctxt "upgrade-comms"
+msgid ""
+"Impulse upgrades refer to changes related to the impulse engines. They might "
+"include improving the top speed or acceleration (forward, reverse or both), "
+"maneuvering speed or combat maneuver (boost, which is moving forward, or "
+"strafe, which is sideways motion or both)."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11308
+msgctxt "upgrade-comms"
+msgid "ftl"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11312
+msgctxt "upgrade-comms"
+msgid ""
+"FTL (short for faster than light) upgrades refer to warp drive or jump drive "
+"enhancements. They might include the addition of an ftl drive, a change in "
+"the range of the jump drive or an increase in the top speed of the warp drive"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11321
+msgctxt "upgrade-comms"
+msgid "sensors"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11325
+msgctxt "upgrade-comms"
+msgid ""
+"Sensor upgrades refer to the ship's ability to detect other objects. They "
+"might include increased long range sensors, increased short range sensors, "
+"automated proximity scanners for ships or improved range for automated "
+"proximity scanners."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11341
+msgctxt "orders-comms"
+msgid "Is there any chance at victory for this outpost?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11347
+msgctxt "orders-comms"
+msgid ""
+"The outpost leadership have been bemoaning their fate and discussing various "
+"options. They think there's an off chance for long term viability for the "
+"outpost."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11351
+msgctxt "orders-comms"
+msgid "Don't keep me in suspense"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11356
+msgctxt "orders-comms"
+msgid ""
+"It's a low probability scenario, but if we destroyed the most aggressive "
+"enemy stations in the area, we might get the rest to agree to a truce."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11362
+msgctxt "orders-comms"
+msgid "Which ones are the aggressive ones?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11369
+msgctxt "orders-comms"
+msgid ""
+"The ones that keep sending attacking ships. You can just track back along "
+"the attacking ships' approach vector to find their home base."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11375
+msgctxt "orders-comms"
+msgid "Have you tracked any based on approach vector?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11403
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"From our observations, %s station %s in %s is one of them.\n"
+"\n"
+"One more thing about this plan..."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11413
+msgctxt "orders-comms"
+msgid "Just one? What is it?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11419
+msgctxt "orders-comms"
+msgid ""
+"If there are any friendly or neutral stations you haven't contacted yet to "
+"ask for their help, you should contact them at your earliest opportunity. A "
+"truce benefits them, too, assuming you succeed. The help they provide in "
+"protecting the outpost can free you up to destroy the aggressive stations."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11442
+#, lua-format
+msgctxt "orders-comms"
+msgid "%s station %s in %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11475
+#, lua-format
+msgctxt "orders-comms"
+msgid "%s station %s in %s is probably another aggressive station"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11495
+msgctxt "orders-comms"
+msgid "Any better chance at victory for this outpost?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11502
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s station %s in %s is still the one station we've been able to track the "
+"attacking ships back to."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11524
+#, lua-format
+msgctxt "orders-comms"
+msgid "%s station %s in %s is probably another aggressive station."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11536
+msgctxt "orders-comms"
+msgid "Remind me about the saboteur plan"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11541
+msgctxt "orders-comms"
+msgid ""
+"Summary: Be sure you have at least one mine aboard. Find a neutral "
+"freighter. Convince them to take on a new crewmember. From there it's up to "
+"the saboteur."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11547
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"You have already planted the saboteur on %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11559
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"You need to replace one or more of your repair crew. We'll be sure the first "
+"one you get also has saboteur training."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11571
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"You need a mine to give to the saboteur."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11589
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s The outpost leadership have an idea about how an aggressive enemy station "
+"might be destroyed. It differs from the confrontational solution of "
+"attacking an aggressive enemy station directly. Interested?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11596
+msgctxt "orders-comms"
+msgid "Yes, tell me about this idea"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11602
+msgctxt "orders-comms"
+msgid "The idea is to sneak a saboteur aboard an aggressive enemy station."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11608
+msgctxt "orders-comms"
+msgid "We can't dock with an enemy station"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11614
+msgctxt "orders-comms"
+msgid ""
+"That's true. However, commercial freighters dock with those stations all the "
+"time. Commerce must go on despite the hostilities."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11620
+msgctxt "orders-comms"
+msgid "Put a saboteur on a freighter?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11626
+msgctxt "orders-comms"
+msgid ""
+"Right. The saboteur stays on the freighter until the freighter docks with an "
+"aggressive enemy station. The saboteur then plants explosives on the station "
+"at a vulnerable point."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11632
+msgctxt "orders-comms"
+msgid "I see problems with this idea"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11638
+msgctxt "orders-comms"
+msgid ""
+"Oh yes, there are several critical points where the plan could fail. The "
+"freighter you choose might not accept the saboteur. The freighter might get "
+"destroyed before they dock at an aggressive enemy station. The security "
+"measures on the station may prevent the saboteur from planting the "
+"explosives."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11644
+msgctxt "orders-comms"
+msgid "Another point: we don't have a saboteur"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11650
+msgctxt "orders-comms"
+msgid ""
+"Actually, that's not true. One of your repair crew recently completed a "
+"correspondence course in espionage and sabotage and thus could be deployed "
+"as the saboteur for this plan."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11656
+msgctxt "orders-comms"
+msgid "Does graduation come with complimentary explosives?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11662
+msgctxt "orders-comms"
+msgid ""
+"No. We did away with an actual graduation ceremony because too many of our "
+"graduates wanted to test their new sabotage skills as a prank at graduation "
+"causing distressful mayhem. However, your repair crew now has the training "
+"to adapt one of your mines into the appropriate explosives for the plan."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11668
+msgctxt "orders-comms"
+msgid "Isn't it illegal?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11675
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"Your repair crew saboteur has the full backing and approval of the outpost "
+"leadership. The sabotage is sanctioned under the rules outlined in the %s "
+"charter assuming the saboteur knows the risks and volunteers. We've taken "
+"the liberty of providing an outline of the plan to the repair crew saboteur "
+"and secured their agreement to conduct the mission in writing. Copies of "
+"this and the formal sanctioning of the action by the outpost leadership are "
+"in your secure databanks."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11683
+msgctxt "orders-comms"
+msgid "How do we know if this plan succeeds or fails?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11689
+msgctxt "orders-comms"
+msgid ""
+"Every saboteur is trained to send simple status reports through the "
+"microscopic subspace transmitter surgically implanted in them during their "
+"training. When you check on your orders, updates will be shown on the plan "
+"progress in that report."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11695
+msgctxt "orders-comms"
+msgid "That's a convoluted plan. Can you summarize what we need to do?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11701
+msgctxt "orders-comms"
+msgid ""
+"Be sure you have at least one mine aboard. Find a neutral freighter. "
+"Convince them to take on a new crewmember. From there it's up to the "
+"saboteur."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11770
+msgctxt "orders-comms"
+msgid "No, we're having enough trouble as it is"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11774
+msgctxt "orders-comms"
+msgid "Suit yourself"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11847
+msgctxt "ship-comms"
+msgid "Would you like another crewmember?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11851
+msgctxt "ship-comms"
+msgid "We don't really need one"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11856
+msgctxt "ship-comms"
+msgid "This one's got repair crew experience"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11868
+msgctxt "ship-comms"
+msgid "Take on crewmember as a favor (50 reputation)?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11917
+#: scripts/scenario_35_doomed_outpost.lua:12388
+msgctxt "ship-comms"
+msgid ""
+"We have taken on your repair crewmember as a new crewmember on our ship."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11934
+#: scripts/scenario_35_doomed_outpost.lua:12034
+#: scripts/scenario_35_doomed_outpost.lua:12167
+#: scripts/scenario_35_doomed_outpost.lua:12271
+#: scripts/scenario_35_doomed_outpost.lua:12405
+#: scripts/scenario_35_doomed_outpost.lua:12505
+msgctxt "ship-comms"
+msgid "No mine to send with saboteur"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11944
+#: scripts/scenario_35_doomed_outpost.lua:12044
+#: scripts/scenario_35_doomed_outpost.lua:12177
+#: scripts/scenario_35_doomed_outpost.lua:12281
+#: scripts/scenario_35_doomed_outpost.lua:12415
+#: scripts/scenario_35_doomed_outpost.lua:12515
+msgctxt "ship-comms"
+msgid "No repair crew to send"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:11976
+#: scripts/scenario_35_doomed_outpost.lua:12209
+#: scripts/scenario_35_doomed_outpost.lua:12447
+#, lua-format
+msgctxt "ship-comms"
+msgid "Offer %s to take on crewmember"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12025
+#: scripts/scenario_35_doomed_outpost.lua:12496
+#, lua-format
+msgctxt "ship-comms"
+msgid ""
+"Thanks for the %s. We have taken on your repair crewmember as a new "
+"crewmember on our ship."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12063
+#: scripts/scenario_35_doomed_outpost.lua:12300
+#: scripts/scenario_35_doomed_outpost.lua:12534
+msgctxt "ship-comms"
+msgid "I talked to the captain, but he still needs convincing."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12071
+#, lua-format
+msgctxt "ship-comms"
+msgid ""
+"Not interested.\n"
+"\n"
+"[Outpost Leadership] We were monitoring your exchange with %s. Next time, "
+"try convincing the captain using 50 or more reputation or with some cargo "
+"aboard your ship."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12085
+msgctxt "ship-comms"
+msgid "This one can upgrade your impulse engines"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12097
+msgctxt "ship-comms"
+msgid "Take on crewmember as a favor (25 reputation)?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12150
+msgctxt "ship-comms"
+msgid ""
+"We have taken on your repair crewmember as a new crewmember on our ship. The "
+"increased impulse speed is greatly appreciated."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12262
+#, lua-format
+msgctxt "ship-comms"
+msgid ""
+"Thanks for the %s. We have taken on your repair crewmember as a new "
+"crewmember on our ship. The increased impulse speed is greatly appreciated."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12308
+#, lua-format
+msgctxt "ship-comms"
+msgid ""
+"Not interested.\n"
+"\n"
+"[Outpost Leadership] We were monitoring your exchange with %s. Next time, "
+"try convincing the captain using 25 or more reputation or with some cargo "
+"aboard your ship."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12322
+msgctxt "ship-comms"
+msgid "This one wants civilian experience"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12337
+#, lua-format
+msgctxt "ship-comms"
+msgid "Take on crewmember as a favor (%i reputation)?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12542
+#, lua-format
+msgctxt "ship-comms"
+msgid ""
+"Not interested.\n"
+"\n"
+"[Outpost Leadership] We were monitoring your exchange with %s. Next time, "
+"try convincing the captain using 40 to 90 reputation or with some cargo "
+"aboard your ship."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12564
+#: scripts/scenario_35_doomed_outpost.lua:14138
+#: scripts/scenario_35_doomed_outpost.lua:14269
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12566
+#: scripts/scenario_35_doomed_outpost.lua:14140
+#: scripts/scenario_35_doomed_outpost.lua:14271
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12568
+#: scripts/scenario_35_doomed_outpost.lua:14142
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12573
+#: scripts/scenario_35_doomed_outpost.lua:14147
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12578
+#: scripts/scenario_35_doomed_outpost.lua:14152
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12583
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12594
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12607
+#: scripts/scenario_35_doomed_outpost.lua:14181
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12609
+#: scripts/scenario_35_doomed_outpost.lua:14183
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12615
+#: scripts/scenario_35_doomed_outpost.lua:14189
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12617
+#: scripts/scenario_35_doomed_outpost.lua:14191
+#: scripts/scenario_35_doomed_outpost.lua:14275
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12624
+#: scripts/scenario_35_doomed_outpost.lua:14198
+#: scripts/scenario_35_doomed_outpost.lua:14282
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12634
+#: scripts/scenario_35_doomed_outpost.lua:14208
+#: scripts/scenario_35_doomed_outpost.lua:14292
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12643
+#: scripts/scenario_35_doomed_outpost.lua:14217
+#: scripts/scenario_35_doomed_outpost.lua:14301
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12654
+#: scripts/scenario_35_doomed_outpost.lua:14228
+#: scripts/scenario_35_doomed_outpost.lua:14312
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12669
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s Missiles: %d/%d\n"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12687
+#: scripts/scenario_35_doomed_outpost.lua:14247
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12693
+#: scripts/scenario_35_doomed_outpost.lua:14253
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12777
+#, lua-format
+msgctxt "trade-comms"
+msgid "Traded luxury for %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12823
+#: scripts/scenario_35_doomed_outpost.lua:12884
+#: scripts/scenario_35_doomed_outpost.lua:12939
+#: scripts/scenario_35_doomed_outpost.lua:13001
+#: scripts/scenario_35_doomed_outpost.lua:13851
+#: scripts/scenario_35_doomed_outpost.lua:13906
+#: scripts/scenario_35_doomed_outpost.lua:13966
+#: scripts/scenario_35_doomed_outpost.lua:14021
+#: scripts/scenario_35_doomed_outpost.lua:14081
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchased %s from %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:12833
+#: scripts/scenario_35_doomed_outpost.lua:12894
+#: scripts/scenario_35_doomed_outpost.lua:12949
+#: scripts/scenario_35_doomed_outpost.lua:13011
+#: scripts/scenario_35_doomed_outpost.lua:13861
+#: scripts/scenario_35_doomed_outpost.lua:13916
+#: scripts/scenario_35_doomed_outpost.lua:13976
+#: scripts/scenario_35_doomed_outpost.lua:14031
+#: scripts/scenario_35_doomed_outpost.lua:14091
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13025
+#: scripts/scenario_35_doomed_outpost.lua:13747
+msgctxt "trade-comms"
+msgid "Do you have cargo you might sell?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13028
+#: scripts/scenario_35_doomed_outpost.lua:13750
+msgctxt "trade-comms"
+msgid "We've got "
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13033
+#: scripts/scenario_35_doomed_outpost.lua:13755
+msgctxt "trade-comms"
+msgid ", "
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13042
+#: scripts/scenario_35_doomed_outpost.lua:13764
+msgctxt "trade-comms"
+msgid "nothing"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13059
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13061
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13063
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13070
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13074
+msgctxt "shipEnemy-comms"
+msgid "We will destroy you"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13077
+msgctxt "shipEnemy-comms"
+msgid "We think not. It is you who will experience destruction!"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13080
+msgctxt "shipEnemy-comms"
+msgid "You have no honor"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13083
+msgctxt "shipEnemy-comms"
+msgid "Your insult has brought our wrath upon you. Prepare to die."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13087
+msgctxt "shipEnemy-comms"
+msgid "Your comments about honor have no meaning to us"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13091
+msgctxt "shipEnemy-comms"
+msgid "We pity your pathetic race"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13094
+msgctxt "shipEnemy-comms"
+msgid "Pathetic? You will regret your disparagement!"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13097
+msgctxt "shipEnemy-comms"
+msgid "We don't care what you think of us"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13105
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13114
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13123
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13126
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13129
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13132
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13137
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13142
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13146
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13150
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13155
+msgctxt "shipEnemy-comms"
+msgid "State your business"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13160
+msgctxt "shipEnemy-comms"
+msgid "What do you want? (not that we care)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13165
+msgctxt "shipEnemy-comms"
+msgid "Don't waste our time"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13167
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13219
+msgctxt "shipEnemy-comms"
+msgid "Subspace and time continuum disruption authorized"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13248
+msgctxt "shipEnemy-comms"
+msgid "Stop your actions"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13286
+msgctxt "shipEnemy-comms"
+msgid "Just this once, we'll take your advice"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13290
+msgctxt "shipEnemy-comms"
+msgid "No"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13700
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "Disruption %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:13745
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14109
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14114
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14157
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14168
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %i."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14273
+msgctxt "shipAssist-comms"
+msgid "How are you doing?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14328
+msgctxt "shipServices-comms"
+msgid "Service options"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14347
+msgctxt "shipServices-comms"
+msgid "Repair ship system"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14352
+msgctxt "shipServices-comms"
+msgid "What system would you like repaired?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14359
+msgctxt "shipServices-comms"
+msgid "Repair probe launch system"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14369
+msgctxt "shipServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14376
+#: scripts/scenario_35_doomed_outpost.lua:14402
+#: scripts/scenario_35_doomed_outpost.lua:14428
+#: scripts/scenario_35_doomed_outpost.lua:14454
+#: scripts/scenario_35_doomed_outpost.lua:14483
+#: scripts/scenario_35_doomed_outpost.lua:14536
+#: scripts/scenario_35_doomed_outpost.lua:14576
+#: scripts/scenario_35_doomed_outpost.lua:14616
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want me to fix your ship"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14386
+msgctxt "shipServices-comms"
+msgid "Repair hacking system"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14395
+msgctxt "shipServices-comms"
+msgid "Your hack system has been repaired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14412
+msgctxt "shipServices-comms"
+msgid "Repair scanning system"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14421
+msgctxt "shipServices-comms"
+msgid "Your scanners have been repaired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14438
+msgctxt "shipServices-comms"
+msgid "Repair combat maneuver"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14447
+msgctxt "shipServices-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14466
+msgctxt "shipServices-comms"
+msgid "Repair self destruct system"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14476
+msgctxt "shipServices-comms"
+msgid "Your self destruct system has been repaired"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14510
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Full hull repair (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14524
+msgctxt "shipServices-comms"
+msgid "All fixed up and ready to go"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14545
+#: scripts/scenario_35_doomed_outpost.lua:14585
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Add %i%% to hull (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14564
+#: scripts/scenario_35_doomed_outpost.lua:14604
+msgctxt "shipServices-comms"
+msgid "Repairs completed as requested"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14657
+msgctxt "ammo-comms"
+msgid "Restock ordnance"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14666
+msgctxt "ammo-comms"
+msgid "What kind of ordnance?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14670
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s (%i reputation each)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14698
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Restocked your %s type ordnance"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14712
+#, lua-format
+msgctxt "needRep-comms"
+msgid ""
+"You don't have enough reputation to fully replenish your %s type ordnance. "
+"You need %i and you only have %i. How would you like to proceed?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14728
+#: scripts/scenario_35_doomed_outpost.lua:14965
+#: scripts/scenario_35_doomed_outpost.lua:15121
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Get one (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14762
+#: scripts/scenario_35_doomed_outpost.lua:14936
+#: scripts/scenario_35_doomed_outpost.lua:14999
+#: scripts/scenario_35_doomed_outpost.lua:15153
+#, lua-format
+msgctxt "ammo-comms"
+msgid "One %s provided"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14779
+#: scripts/scenario_35_doomed_outpost.lua:14866
+#: scripts/scenario_35_doomed_outpost.lua:15016
+#: scripts/scenario_35_doomed_outpost.lua:15103
+#: scripts/scenario_35_doomed_outpost.lua:15170
+#: scripts/scenario_35_doomed_outpost.lua:15185
+msgctxt "ammo-comms"
+msgid "You need to stay close if you want me to restock your ordnance"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14814
+#: scripts/scenario_35_doomed_outpost.lua:15051
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Get %i (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14848
+#: scripts/scenario_35_doomed_outpost.lua:14925
+#: scripts/scenario_35_doomed_outpost.lua:15085
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%i %ss provided"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14891
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"I don't have enough %s type ordnance to fully restock you. How would you "
+"like to proceed?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14899
+msgctxt "ammo-comms"
+msgid "We'll take all you've got"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:14949
+#, lua-format
+msgctxt "needRep-comms"
+msgid ""
+"You don't have enough reputation to get all of our %s type ordnance. You "
+"need %i and you only have %i. How would you like to proceed?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:15206
+msgctxt "shipServices-comms"
+msgid "Restock scan probes (5 reputation)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:15216
+msgctxt "shipServices-comms"
+msgid "I replenished your probes for you."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:15228
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want me to restock your probes"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:15254
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Quick charge the main batteries (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:15273
+msgctxt "shipServices-comms"
+msgid "Your batteries have been charged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:15285
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want your batteries charged quickly"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:15303
+msgctxt "shipServices-comms"
+msgid "How can I help you get your ship in good running order?"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:15310
+msgctxt "shipServices-comms"
+msgid "There's nothing on your ship that I can help you fix. Sorry."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:15596
+msgctxt "msgGM"
+msgid "Empty Template pool: fix excludes or other criteria"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16426
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"All outpost stations destroyed.\n"
+"Outpost survived for %s. Posthumous rank: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16586
+#, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s tubes: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16592
+#, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s tube: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16669
+msgctxt "shipLog"
+msgid "Encrypted Exuari communications traffic observed"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16809
+msgctxt "repairCrew-msgEngineer"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16821
+msgctxt "repairCrew-msgEngineer+"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16833
+msgctxt "repairCrew-msgDamageControl"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16869
+msgctxt "coolant-msgEngineer"
+msgid "Automated systems have recovered some coolant"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16879
+msgctxt "coolant-msgEngineer+"
+msgid "Automated systems have recovered some coolant"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16889
+msgctxt "coolant-msgDamageControl"
+msgid "Automated systems have recovered some coolant"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16938
+#: scripts/scenario_35_doomed_outpost.lua:16998
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16949
+#: scripts/scenario_35_doomed_outpost.lua:17009
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:16960
+#: scripts/scenario_35_doomed_outpost.lua:17020
+msgctxt "repairCrew-msgDamageControl"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17047
+msgctxt "coolant-msgEngineer"
+msgid "Damage has caused a loss of coolant"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17058
+msgctxt "coolant-msgEngineer+"
+msgid "Damage has caused a loss of coolant"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17069
+msgctxt "coolant-msgDamageControl"
+msgid "Damage has caused a loss of coolant"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17083
+msgctxt "damage-msgEngineer"
+msgid "The probe launch system has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17093
+msgctxt "damage-msgEngineer+"
+msgid "The probe launch system has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17103
+msgctxt "damage-msgDamageControl"
+msgid "The probe launch system has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17115
+msgctxt "damage-msgEngineer"
+msgid "The hacking system has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17125
+msgctxt "damage-msgEngineer+"
+msgid "The hacking system has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17135
+msgctxt "damage-msgDamageControl"
+msgid "The hacking system has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17147
+msgctxt "damage-msgEngineer"
+msgid "The scanners have been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17157
+msgctxt "damage-msgEngineer+"
+msgid "The scanners have been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17167
+msgctxt "damage-msgDamageControl"
+msgid "The scanners have been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17179
+msgctxt "damage-msgEngineer"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17189
+msgctxt "damage-msgEngineer+"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17199
+msgctxt "damage-msgDamageControl"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17211
+msgctxt "damage-msgEngineer"
+msgid "Self destruct system has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17221
+msgctxt "damage-msgEngineer+"
+msgid "Self destruct system has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17231
+msgctxt "damage-msgDamageControl"
+msgid "Self destruct system has been damaged"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17261
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17276
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17292
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "%s Current cargo:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17303
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17312
+msgctxt "inventory-shipLog"
+msgid "     Empty"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17315
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "Available space: %i"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17334
+msgctxt "msgMainscreen"
+msgid "Scenario needs the 'Per-system damage' option under 'Extra settings'"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17374
+msgctxt "shipLog"
+msgid ""
+"You've been assigned to this outpost for what seems like an eternity. "
+"Hostile forces in the area have attacked in wave after wave. Only one "
+"defense platform remains. The more powerful ships assigned to protect this "
+"outpost have been destroyed. Using salvaged ships, the internal ship "
+"maintenance facilities have cobbled together a ship for you. With enough "
+"reputation, you can get ship upgrades from friendly and neutral stations. "
+"These stations might help defend the outpost if asked, but they've been hit "
+"hard, too. Do your best to protect this remote outpost consisting of the "
+"following stations:"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17382
+#, lua-format
+msgctxt "shipLog"
+msgid "%s (%s) in sector %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17401
+msgctxt "shipLog"
+msgid ""
+"Intelligence operatives tell us they monitored Exuari communication traffic "
+"pertinent to the outpost. The Exuari monitor our traffic, too. They know you "
+"plan to protect the outpost, so they have some kind of big attack planned. "
+"Intelligence is still trying to figure out when. Best estimate they have is "
+"'between 15 minutes and 2 hours.' That's intelligence for you. Keep a sharp "
+"eye out."
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17433
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Aggressive enemy stations destroyed. Remaining stations agree to a truce.\n"
+"Conflict lasted %s. Rank: %s"
+msgstr ""
+
+#: scripts/scenario_35_doomed_outpost.lua:17473
+msgctxt "stationReport-msgGM"
+msgid "script error - \n"
+msgstr ""

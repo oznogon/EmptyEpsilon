@@ -1,0 +1,4159 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+# Scenario name
+msgid "Carrier and Fighters"
+msgstr "Träger und Jäger"
+
+# Scenario description
+msgid ""
+"Three player ships: a carrier and two fighters docked with the carrier. "
+"Objective: search out and destroy the designated enemy station. Use the "
+"carrier to travel long distances. Fighters have automatic coolant and repair "
+"management. Carrier provides energy and hull repair to fighters. The "
+"scenario randomizes the terrain and the mini mission order for each run.\n"
+"\n"
+"Version 2 (formerly entitled Carriers and Turrets)\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+"There's usually one every weekend. All experience levels are welcome."
+msgstr ""
+"Drei spielbare Schiffe: ein Träger und zwei an den Träger angedockte Jäger. "
+"Ziel: Sucht und zerstört die vorgegebene feindliche Station. Nutzt den "
+"Träger, um lange Strecken zurückzulegen. Die Jäger verfügen über eine "
+"automatische Kühlmittel- und Reparaturkontrolle. Der Träger versorgt die "
+"Jäger mit Energie und repariert ihre Hüllen. Das Szenario generiert bei "
+"jedem Durchlauf zufällige Geländestrukturen und Mini-Missionen.\n"
+"\n"
+"\n"
+"Version 2 ( alter Titel „Träger und Geschütze” genannt)\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a, wo ihr online einem Spiel beitreten "
+"könnt. In der Regel findet jedes Wochenende ein Spiel statt. Alle "
+"Erfahrungsstufen sind willkommen."
+
+msgctxt "setting"
+msgid "Enemies"
+msgstr "Feinde"
+
+msgctxt "setting"
+msgid "Configures strength and/or number of enemies in this scenario"
+msgstr " Stärke und/oder Anzahl von feindlichen Schiffen im Szenario"
+
+msgctxt "Enemies"
+msgid "Very Easy"
+msgstr "Sehr einfach"
+
+msgctxt "Enemies"
+msgid "The least number of or the weakest enemies"
+msgstr "Die wenigsten bzw. schwächsten Feinde"
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr "Einfach"
+
+msgctxt "Enemies"
+msgid "Fewer or weaker enemies"
+msgstr "Weniger oder schwächere Feinde"
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "Enemies"
+msgid "Normal number or strength of enemies"
+msgstr "Normale Anzahl bzw. Stärke der Feinde"
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr "Schwer"
+
+msgctxt "Enemies"
+msgid "More or stronger enemies"
+msgstr "Mehr oder stärkere Feinde"
+
+msgctxt "Enemies"
+msgid "Extreme"
+msgstr "Extrem"
+
+msgctxt "Enemies"
+msgid "Much stronger, many more enemies"
+msgstr "Viel mehr, viel stärkere Feinde"
+
+msgctxt "Enemies"
+msgid "Quixotic"
+msgstr "Absurd"
+
+msgctxt "Enemies"
+msgid "Insanely strong and/or inordinately large numbers of enemies"
+msgstr "Wahnsinnig starke und/oder extrem viele Feinde"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Murphy"
+msgstr "Murphy"
+
+msgctxt "setting"
+msgid "Configures the perversity of the universe according to Murphy's law"
+msgstr "Konfiguriert die Bösartigkeit des Universums nach Murphys Gesetz"
+
+msgctxt "Murphy"
+msgid "Very Easy"
+msgstr "Sehr einfach"
+
+msgctxt "Murphy"
+msgid "Random factors are very much in your favor"
+msgstr "Der Zufall neigt sich zu euren Gunsten"
+
+msgctxt "Murphy"
+msgid "Easy"
+msgstr "Einfach"
+
+msgctxt "Murphy"
+msgid "Random factors are more in your favor"
+msgstr "Der Zufall neigt sich zu euren Gunsten"
+
+msgctxt "Murphy"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "Murphy"
+msgid "Random factors are normal"
+msgstr "Zufallsfaktoren sind normal"
+
+msgctxt "Murphy"
+msgid "Hard"
+msgstr "Schwer"
+
+msgctxt "Murphy"
+msgid "Random factors are more against you"
+msgstr "Zufallsfaktoren sind eher gegen die Crew gerichtet"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Timed"
+msgstr "Auf Zeit"
+
+msgctxt "setting"
+msgid "Configures whether or not the scenario has a time limit"
+msgstr "Legt fest, ob es ein Zeitlimit gibt."
+
+msgctxt "Timed"
+msgid "None"
+msgstr "Nein"
+
+msgctxt "Timed"
+msgid "Game has no time limit"
+msgstr "Spiel hat kein Zeitlimit"
+
+msgctxt "Timed"
+msgid "1"
+msgstr "1"
+
+msgctxt "Timed"
+msgid "Game has a 1 minute time limit (used for testing)"
+msgstr "Zeitlimit: Eine Minute (für Testzwecke)"
+
+msgctxt "Timed"
+msgid "30"
+msgstr "30"
+
+msgctxt "Timed"
+msgid "Game has a 30 minute time limit"
+msgstr "Zeitlimit: 30 Minuten"
+
+msgctxt "Timed"
+msgid "60"
+msgstr "60"
+
+msgctxt "Timed"
+msgid "Game has a 60 minute time limit"
+msgstr "Zeitlimit: 60 Minuten"
+
+msgctxt "Timed"
+msgid "90"
+msgstr "90"
+
+msgctxt "Timed"
+msgid "Game has a 90 minute time limit"
+msgstr "Zeitlimit: 90 Minuten"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Carrier"
+msgstr "Trägerschiff"
+
+msgctxt "setting"
+msgid "Configures the carrier deployed as a player ship"
+msgstr "Legt fest, welches spielbare Trägerschiff genutzt wird"
+
+msgctxt "Carrier"
+msgid "Random"
+msgstr "Zufällig"
+
+msgctxt "Carrier"
+msgid "A carrier type will be selected at random"
+msgstr "Der Typ des Trägerschiffs wird zufällig gewählt"
+
+msgctxt "Carrier"
+msgid "Benedict"
+msgstr "Benedict"
+
+msgctxt "Carrier"
+msgid "The carrier deployed will be of type Benedict with a jump drive"
+msgstr "Das Trägerschiff ist vom Typ \"Benedict\" (sprungfähig)"
+
+msgctxt "Carrier"
+msgid "Kiriya"
+msgstr "Kiriya"
+
+msgctxt "Carrier"
+msgid "The carrier deployed will be of type Kiriya with a warp drive"
+msgstr "Das Trägerschiff ist vom Typ \"Kiriya\" (warpfähig)"
+
+msgctxt "Carrier"
+msgid "Saipan"
+msgstr "Saipan"
+
+msgctxt "Carrier"
+msgid "The carrier deployed will be of type Saipan with a jump drive"
+msgstr "Das Trägerschiff ist vom Typ \"Saipan\" (sprungfähig)"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Fighter1"
+msgstr "Jäger1"
+
+msgctxt "setting"
+msgid "Configures the first fighter type deployed as a player ship"
+msgstr "Legt fest, welches spielbare Schiff für Jäger 1 genutzt wird"
+
+msgctxt "Fighter1"
+msgid "Random"
+msgstr "Zufällig"
+
+msgctxt "Fighter1"
+msgid "Fighter 1 type will be selected at random"
+msgstr "Der Schiffstyp für Jäger 1 wird zufällig gewählt"
+
+msgctxt "Fighter1"
+msgid "Striker"
+msgstr "Striker"
+
+msgctxt "Fighter1"
+msgid "Fighter 1 will be of type Striker"
+msgstr "Jäger 1 wird vom Typ Striker sein"
+
+msgctxt "Fighter1"
+msgid "Formax"
+msgstr "Formax"
+
+msgctxt "Fighter1"
+msgid "Fighter 1 will be of type Formax"
+msgstr "Jäger 1 wird vom Typ Formax sein"
+
+msgctxt "Fighter1"
+msgid "Foil"
+msgstr "Foil"
+
+msgctxt "Fighter1"
+msgid "Fighter 1 will be of type Foil"
+msgstr "Jäger 1 wird vom Typ Foil sein"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Fighter2"
+msgstr "Jäger2"
+
+msgctxt "setting"
+msgid "Configures the second fighter type deployed as a player ship"
+msgstr "Legt fest, welches spielbare Schiff für Jäger 2 genutzt wird"
+
+msgctxt "Fighter2"
+msgid "Random"
+msgstr "Zufällig"
+
+msgctxt "Fighter2"
+msgid "Fighter 2 type will be selected at random"
+msgstr "Der Schiffstyp für Jäger 2 wird zufällig gewählt"
+
+msgctxt "Fighter2"
+msgid "ZX-Lindworm"
+msgstr "ZX-Lindworm"
+
+msgctxt "Fighter2"
+msgid "Fighter 2 will be of type ZX-Lindworm"
+msgstr "Jäger 2 wird vom Typ ZX-Lindworm sein"
+
+msgctxt "Fighter2"
+msgid "MP52 Hornet"
+msgstr "MP52 Hornet"
+
+msgctxt "Fighter2"
+msgid "Fighter 2 will be of type MP52 Hornet"
+msgstr "Jäger 2 wird vom Typ MP52 Hornet sein"
+
+msgctxt "Fighter2"
+msgid "Red Jacket"
+msgstr "Red Jacket"
+
+msgctxt "Fighter2"
+msgid "Fighter 2 will be of type Red Jacket"
+msgstr "Jäger 2 wird vom Typ Red Jacket sein"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:81
+msgctxt "buttonGM"
+msgid "P2 upgrade spin"
+msgstr "P2 upgrade manöv."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:82
+msgctxt "buttonGM"
+msgid "P2 locate enemy base"
+msgstr "P2: finde feindliche Basis"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:83
+msgctxt "buttonGM"
+msgid "P2 rescue scientist"
+msgstr "P2: Rettungsmission"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:84
+msgctxt "buttonGM"
+msgid "P3 upgrade beam dmg"
+msgstr "P3: Laserupgrade"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:85
+msgctxt "buttonGM"
+msgid "P3 tractor ship"
+msgstr "P3: Defektes Schiff"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:86
+msgctxt "buttonGM"
+msgid "P3 add tube"
+msgstr "P3: neuer Rak.schacht"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:214
+#: scripts/scenario_17_carrier_and_fighters.lua:265
+#: scripts/scenario_17_carrier_and_fighters.lua:4152
+#: scripts/scenario_17_carrier_and_fighters.lua:4197
+#: scripts/scenario_17_carrier_and_fighters.lua:10265
+msgctxt "buttonTactical"
+msgid "Shield"
+msgstr "Schilde"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1821
+msgctxt "trade-comms"
+msgid "food"
+msgstr "Lebensmittel"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1822
+msgctxt "trade-comms"
+msgid "medicine"
+msgstr "Medizin"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1823
+msgctxt "trade-comms"
+msgid "luxury"
+msgstr "Luxusgüter"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1824
+msgctxt "trade-comms"
+msgid "cobalt"
+msgstr "Kobalt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1825
+msgctxt "trade-comms"
+msgid "dilithium"
+msgstr "Dilithium"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1826
+msgctxt "trade-comms"
+msgid "gold"
+msgstr "Gold"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1827
+msgctxt "trade-comms"
+msgid "nickel"
+msgstr "Nickel"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1828
+msgctxt "trade-comms"
+msgid "platinum"
+msgstr "Platin"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1829
+msgctxt "trade-comms"
+msgid "tritanium"
+msgstr "Tritanium"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1830
+msgctxt "trade-comms"
+msgid "autodoc"
+msgstr "Autodocs"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1831
+msgctxt "trade-comms"
+msgid "android"
+msgstr "Androidenkomp."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1832
+msgctxt "trade-comms"
+msgid "battery"
+msgstr "Batterien"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1833
+msgctxt "trade-comms"
+msgid "beam"
+msgstr "Laser"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1834
+msgctxt "trade-comms"
+msgid "circuit"
+msgstr "Schaltkreise"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1835
+msgctxt "trade-comms"
+msgid "communication"
+msgstr "Kommunikation"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1836
+msgctxt "trade-comms"
+msgid "filament"
+msgstr "Filament"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1837
+msgctxt "trade-comms"
+msgid "impulse"
+msgstr "Impuls"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1838
+msgctxt "trade-comms"
+msgid "lifter"
+msgstr "Lastenheber"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1839
+msgctxt "trade-comms"
+msgid "nanites"
+msgstr "Naniten"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1840
+msgctxt "trade-comms"
+msgid "optic"
+msgstr "Optik"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1841
+msgctxt "trade-comms"
+msgid "repulsor"
+msgstr "Repulsor"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1842
+msgctxt "trade-comms"
+msgid "robotic"
+msgstr "Robotik"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1843
+msgctxt "trade-comms"
+msgid "sensor"
+msgstr "Sensor"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1844
+msgctxt "trade-comms"
+msgid "shield"
+msgstr "Schilde"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1845
+msgctxt "trade-comms"
+msgid "software"
+msgstr "Software"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1846
+msgctxt "trade-comms"
+msgid "tractor"
+msgstr "Traktor"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1847
+msgctxt "trade-comms"
+msgid "transporter"
+msgstr "Transporter"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:1848
+msgctxt "trade-comms"
+msgid "warp"
+msgstr "Warp"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2128
+#: scripts/scenario_17_carrier_and_fighters.lua:2172
+msgctxt "buttonGM"
+msgid "Turn On Diagnostic"
+msgstr "Diagnose einschalten"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2130
+#: scripts/scenario_17_carrier_and_fighters.lua:2174
+msgctxt "buttonGM"
+msgid "Turn Off Diagnostic"
+msgstr "Diagnose ausschalten"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2152
+#: scripts/scenario_17_carrier_and_fighters.lua:2189
+msgctxt "buttonGM"
+msgid "Delay normal to slow"
+msgstr "Wellen:normal->langsam"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2154
+#: scripts/scenario_17_carrier_and_fighters.lua:2191
+msgctxt "buttonGM"
+msgid "Delay slow to fast"
+msgstr "Wellen:langsam->schnell"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2156
+#: scripts/scenario_17_carrier_and_fighters.lua:2193
+msgctxt "buttonGM"
+msgid "Delay fast to normal"
+msgstr "Wellen:schnell->normal"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2168
+#: scripts/scenario_17_carrier_and_fighters.lua:2205
+msgctxt "buttonGM"
+msgid "+Select Plot"
+msgstr "+Plot wählen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2206
+msgctxt "buttonGM"
+msgid "Spawn Enemies"
+msgstr "Spawne Feindschiffe"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2224
+msgctxt "msgGM"
+msgid "The upgrade ship spin plot is not available."
+msgstr "Der Plot \"Wendigkeit aufrüsten\" ist nicht mehr verfügbar."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2246
+msgctxt "msgGM"
+msgid "The locate target enemy base plot is no longer available."
+msgstr "Der Plot \"feindliche Basis aufspüren\" ist nicht mehr verfügbar."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2269
+msgctxt "msgGM"
+msgid "The rescue dying scientist plot is no longer available."
+msgstr ""
+"Der Plot \"sterbenden Wissenschaftler retten\" ist nicht mehr verfügbar."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2292
+msgctxt "msgGM"
+msgid "The upgrade beam damage plot is no longer available."
+msgstr "Der Plot \"Laser-Upgrade\" ist nicht mehr verfügbar."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2315
+msgctxt "msgGM"
+msgid "The tractor disabled ship plot is no longer available."
+msgstr "Der Plot \"gestrandetes Schiff abschleppen\" ist nicht mehr verfügbar."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:2338
+msgctxt "msgGM"
+msgid "The add tube to ship plot is no longer available."
+msgstr "Der Plot \"neuer Schacht einbauen\" ist nicht mehr verfügbar."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4083
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr "Wir werden angegriffen! Keine Zeit zum Plaudern!"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4217
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?\n"
+msgstr ""
+"Guten Tag, Officer!\n"
+"Was können wir heute für Sie tun?\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4220
+msgctxt "station-comms"
+msgid "Welcome to our lovely station.\n"
+msgstr "Willkommen in unserer schönen Station.\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4226
+msgctxt "station-comms"
+msgid ""
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+"Verzeiht uns, wenn wir ein wenig abgelenkt wirken. Wir beobachten aufmerksam "
+"feindliche Aktivitäten in der Nähe."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4236
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr "Ich benötige Nachschub an Munition."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4237
+msgctxt "ammo-comms"
+msgid "What type of ordnance?"
+msgstr "Welche Art von Munition?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4242
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s (%d rep each)"
+msgstr "%s (jeweils %d Ruf)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4267
+#: scripts/scenario_17_carrier_and_fighters.lua:4302
+#, lua-format
+msgctxt "station-comms"
+msgid "Get replacement %s fighter (%i reputation)"
+msgstr "Ersatz für %s-Jäger anfordern (%i Ruf)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4279
+#: scripts/scenario_17_carrier_and_fighters.lua:4314
+msgctxt "station-comms"
+msgid "A replacement fighter has been provided"
+msgstr "Ein neuer Jäger steht als Ersatz bereit"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4284
+#: scripts/scenario_17_carrier_and_fighters.lua:4319
+#: scripts/scenario_17_carrier_and_fighters.lua:4356
+#: scripts/scenario_17_carrier_and_fighters.lua:4402
+#: scripts/scenario_17_carrier_and_fighters.lua:4435
+#: scripts/scenario_17_carrier_and_fighters.lua:6979
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr "Unzureichender Ruf"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4339
+#, lua-format
+msgctxt "station-comms"
+msgid "Get replacement %s carrier (%i reputation)"
+msgstr "Ersatz für %s-Träger anfordern (%i Ruf)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4351
+msgctxt "station-comms"
+msgid "A replacement carrier has been provided"
+msgstr "Ein neues Trägerschiff steht als Ersatz bereit"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4365
+#: scripts/scenario_17_carrier_and_fighters.lua:5202
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr "Was sind meine aktuellen Aufträge?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4375
+#: scripts/scenario_17_carrier_and_fighters.lua:5212
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+"\n"
+"  %i Verbleibende Spielminuten"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4380
+#: scripts/scenario_17_carrier_and_fighters.lua:4461
+#: scripts/scenario_17_carrier_and_fighters.lua:4469
+#: scripts/scenario_17_carrier_and_fighters.lua:4480
+#: scripts/scenario_17_carrier_and_fighters.lua:4626
+#: scripts/scenario_17_carrier_and_fighters.lua:4669
+#: scripts/scenario_17_carrier_and_fighters.lua:4713
+#: scripts/scenario_17_carrier_and_fighters.lua:4757
+#: scripts/scenario_17_carrier_and_fighters.lua:4763
+#: scripts/scenario_17_carrier_and_fighters.lua:4797
+#: scripts/scenario_17_carrier_and_fighters.lua:4855
+#: scripts/scenario_17_carrier_and_fighters.lua:4945
+#: scripts/scenario_17_carrier_and_fighters.lua:4975
+#: scripts/scenario_17_carrier_and_fighters.lua:5046
+#: scripts/scenario_17_carrier_and_fighters.lua:5088
+#: scripts/scenario_17_carrier_and_fighters.lua:5092
+#: scripts/scenario_17_carrier_and_fighters.lua:5166
+#: scripts/scenario_17_carrier_and_fighters.lua:5187
+#: scripts/scenario_17_carrier_and_fighters.lua:5195
+#: scripts/scenario_17_carrier_and_fighters.lua:5217
+#: scripts/scenario_17_carrier_and_fighters.lua:5275
+#: scripts/scenario_17_carrier_and_fighters.lua:5345
+#: scripts/scenario_17_carrier_and_fighters.lua:5350
+#: scripts/scenario_17_carrier_and_fighters.lua:5415
+#: scripts/scenario_17_carrier_and_fighters.lua:5420
+#: scripts/scenario_17_carrier_and_fighters.lua:5453
+#: scripts/scenario_17_carrier_and_fighters.lua:5457
+#: scripts/scenario_17_carrier_and_fighters.lua:5508
+#: scripts/scenario_17_carrier_and_fighters.lua:5760
+#: scripts/scenario_17_carrier_and_fighters.lua:5880
+#: scripts/scenario_17_carrier_and_fighters.lua:5984
+#: scripts/scenario_17_carrier_and_fighters.lua:5987
+#: scripts/scenario_17_carrier_and_fighters.lua:6038
+#: scripts/scenario_17_carrier_and_fighters.lua:6059
+#: scripts/scenario_17_carrier_and_fighters.lua:6090
+#: scripts/scenario_17_carrier_and_fighters.lua:6093
+#: scripts/scenario_17_carrier_and_fighters.lua:6135
+#: scripts/scenario_17_carrier_and_fighters.lua:6535
+#: scripts/scenario_17_carrier_and_fighters.lua:6559
+#: scripts/scenario_17_carrier_and_fighters.lua:6571
+#: scripts/scenario_17_carrier_and_fighters.lua:6640
+#: scripts/scenario_17_carrier_and_fighters.lua:6671
+#: scripts/scenario_17_carrier_and_fighters.lua:6702
+#: scripts/scenario_17_carrier_and_fighters.lua:6719
+#: scripts/scenario_17_carrier_and_fighters.lua:6814
+#: scripts/scenario_17_carrier_and_fighters.lua:6857
+#: scripts/scenario_17_carrier_and_fighters.lua:6924
+#: scripts/scenario_17_carrier_and_fighters.lua:6961
+#: scripts/scenario_17_carrier_and_fighters.lua:6984
+#: scripts/scenario_17_carrier_and_fighters.lua:7045
+#: scripts/scenario_17_carrier_and_fighters.lua:7139
+#: scripts/scenario_17_carrier_and_fighters.lua:7239
+#: scripts/scenario_17_carrier_and_fighters.lua:7351
+msgid "Back"
+msgstr "Zurück"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4395
+#: scripts/scenario_17_carrier_and_fighters.lua:4428
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr "Rekrutiere Wartungspersonal für %i Ruf."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4409
+#: scripts/scenario_17_carrier_and_fighters.lua:4442
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr "Wartungspersonal eingestellt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4452
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr "Erzählen Sie mir mehr über Ihre Station."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4455
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr "Was würden Sie gerne wissen?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4458
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr "Allgemeine Informationen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4466
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr "Geschichte der Station"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4477
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr "Klatsch und Tratsch"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4498
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr "Kaufen, verkaufen, handeln"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4502
+#: scripts/scenario_17_carrier_and_fighters.lua:5030
+#, lua-format
+msgctxt "forSaleTrade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation"
+msgstr ""
+"Station %s:\n"
+"Verfügbare Waren oder Komponenten: Menge, Ruf-Kosten"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4508
+#, lua-format
+msgctxt "forSaleTrade-comms"
+msgid ""
+"%s\n"
+"     %s: %i, %i"
+msgstr ""
+"%s\n"
+"     %s: %i, %i"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4516
+#, lua-format
+msgctxt "onBoardTrade-comms"
+msgid ""
+"%s\n"
+"Current Cargo:"
+msgstr ""
+"%s\n"
+"Aktuelle Fracht:"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4525
+#, lua-format
+msgctxt "onBoardTrade-comms"
+msgid ""
+"%s\n"
+"     %s: %s"
+msgstr ""
+"%s\n"
+"     %s: %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4535
+#, lua-format
+msgctxt "onBoardTrade-comms"
+msgid ""
+"%s\n"
+"     Empty"
+msgstr ""
+"%s\n"
+"     Leer"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4543
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Available Space: %i, Available Reputation: %i\n"
+msgstr ""
+"%s\n"
+"Verfügbarer Platz: %i, Verfügbarer Ruf: %i\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4555
+#: scripts/scenario_17_carrier_and_fighters.lua:6873
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr "Kaufe 1 %s für %i Ruf"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4563
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Reputation: %i"
+msgstr "Art: %s, Menge: %i, Ruf: %i"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4573
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+"%s\n"
+"Unzureichender Laderaum für den Kauf."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4581
+#: scripts/scenario_17_carrier_and_fighters.lua:4619
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Insufficient reputation for purchase"
+msgstr ""
+"%s\n"
+"Unzureichender Ruf für den Kauf."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4589
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Insufficient station inventory"
+msgstr ""
+"%s\n"
+"Auf der Station ist nicht genug davon vorrätig"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4611
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"One %s purchased"
+msgstr ""
+"%s\n"
+"Ein mal %s gekauft"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4643
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr "Tausche Lebensmittel gegen %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4648
+#: scripts/scenario_17_carrier_and_fighters.lua:4692
+#: scripts/scenario_17_carrier_and_fighters.lua:4736
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i"
+msgstr "Art: %s, Anzahl: %i"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4662
+#: scripts/scenario_17_carrier_and_fighters.lua:4706
+#: scripts/scenario_17_carrier_and_fighters.lua:4750
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"Traded one %s for one %s"
+msgstr ""
+"%s\n"
+"Ein %s gegen ein %s getauscht"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4687
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr "Tausche Luxusgüter gegen %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4731
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr "Tausche Medikamente (Medizin) gegen %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4774
+#: scripts/scenario_17_carrier_and_fighters.lua:5434
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr "Fracht abwerfen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4780
+#: scripts/scenario_17_carrier_and_fighters.lua:5439
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+"Verfügbarer Platz: %i\n"
+"Was würden Sie gerne abwerfen?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4793
+#: scripts/scenario_17_carrier_and_fighters.lua:5450
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr "1 %s abgeworfen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4810
+#: scripts/scenario_17_carrier_and_fighters.lua:5467
+#, lua-format
+msgctxt "trade-comms"
+msgid "Transfer cargo to %s"
+msgstr "Fracht an %s übergeben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4817
+#: scripts/scenario_17_carrier_and_fighters.lua:5472
+msgctxt "trade-comms"
+msgid "What would you like to transfer?"
+msgstr "Was würden Sie gerne transferieren?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4838
+#: scripts/scenario_17_carrier_and_fighters.lua:5491
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s transferred to %s"
+msgstr "Eine Einheit %s wurde an %s  zwecks Manövrierbarkeits-Upgrade"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4848
+#: scripts/scenario_17_carrier_and_fighters.lua:5501
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s transferred from %s"
+msgstr "1 %s wurde von %s übergeben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4869
+msgctxt "orders-comms"
+msgid "Optional:\n"
+msgstr "Optional:\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4903
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr "Für diese Aktion müssen Sie angedockt sein."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4912
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr "Wir handeln nicht mit Massenvernichtungswaffen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4917
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr "Wir handeln nicht mit Massenstörungswaffen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4920
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr "Wir handeln nicht mit solchen Waffen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4934
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr "Alle Nukes sind geladen und zur Zerstörung bereit."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4941
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+"Es tut mir leid, aber sie haben bereits das zulässige Höchstlimit erreicht."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4950
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr "Ihr Ruf ist nicht ausreichend."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4964
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr "Sie sind voll geladen und bereit, Dinge in die Luft zu jagen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4971
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+"Wir haben Sie großzügig mit einigen Waffen ausgestattet.\n"
+"Setzen Sie sie gut ein."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4989
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+"Guten Tag,\n"
+"wenn Sie Nachschub brauchen, docken Sie bitte zuerst bei uns an."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:4994
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+"Grüße.\n"
+"Wenn Sie Geschäfte machen wollen, docken Sie bitte zuerst bei uns an."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5001
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+"%s\n"
+"Seien Sie sich darüber im Klaren, dass wir zu beschäftigt sein werden, um "
+"mit Ihnen Geschäfte zu machen, wenn die Feinde in der Gegend näher kommen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5007
+msgctxt "station-comms"
+msgid "I need information"
+msgstr "Ich brauche Informationen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5009
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr "Welche Art von Informationen benötigen Sie?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5024
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr "Welche Waren bieten Sie zum Verkauf oder Tausch an?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5037
+#, lua-format
+msgctxt "forSaleTrade-comms"
+msgid ""
+"%s\n"
+"  %s: %i, %i"
+msgstr ""
+"%s\n"
+"  %s: %i, %i"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5051
+msgctxt "helpfullWarning-comms"
+msgid "See any enemies in your area?"
+msgstr "Sehen Sie Feinde in Ihrer Umgebung?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5068
+#, lua-format
+msgctxt "helpfullWarning-comms"
+msgid "Yes, we see %i enemies within 30U"
+msgstr "Ja, wir sehen %i Feinde innerhalb von 30U."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5077
+msgctxt "helpfullWarning-comms"
+msgid "Yes, we see one enemy within 30U"
+msgstr "Ja, wir sehen einen Feind innerhalb von 30U"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5084
+msgctxt "helpfullWarning-comms"
+msgid "No enemies within 30U"
+msgstr "Keine Feinde im Umkreis von 30U"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5090
+msgctxt "helpfullWarning-comms"
+msgid "Not really"
+msgstr "Nicht wirklich."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5097
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr "Wo kann ich bestimmte Waren finden?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5101
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations often have food or medicine or both. Neutral stations may "
+"trade their goods for food, medicine or luxury."
+msgstr ""
+"Freundliche Stationen haben oft Lebensmittel, Medizin oder beides. Neutrale "
+"Stationen können ihre Waren gegen Lebensmittel, Medizin oder Luxusgüter "
+"eintauschen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5158
+#, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s for %i reputation"
+msgstr "Station %s in Sektor %s bietet %s für %i Ruf."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5173
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+"%s\n"
+"\n"
+"An welchen Waren sind Sie interessiert?\n"
+"Ich habe von diesen hier gehört:"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5181
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s Beyond that, I have no knowledge of specific stations"
+msgstr "%s Darüber hinaus habe ich keine Kenntnis von bestimmten Stationen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5192
+msgctxt "stationGeneralInfo-comms"
+msgid "General station information"
+msgstr "Allgemeine Informationen zur Station."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5281
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr "Können Sie eine Versorgungslieferung schicken? (%d Ruf)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5289
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+"Sie müssen einen Wegpunkt setzen, bevor Sie Unterstützung anfordern können."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5296
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr "Zu welchem Wegpunkt sollen wir Ihre Versorgungslieferung schicken?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5302
+#: scripts/scenario_17_carrier_and_fighters.lua:5378
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr "WP %d"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5332
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr "Wir haben ein Versorgungsschiff nach WP %d entsandt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5341
+#: scripts/scenario_17_carrier_and_fighters.lua:5411
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr "Ihr Ruf ist nicht ausreichend."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5357
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send reinforcements! (%d rep)"
+msgstr "Bitte schicken Sie Verstärkung! (%d Ruf)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5365
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr ""
+"Sie müssen einen Wegpunkt setzen, bevor Sie Verstärkung anfordern können."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5372
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr "Zu welchem Wegpunkt sollen wir die Verstärkung schicken?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5401
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at WP %d"
+msgstr "Wir haben %s zur Unterstützung bei WP %d entsandt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5527
+msgctxt "upgrade-comms"
+msgid "Install tractor equipment"
+msgstr "Traktor-Vorrichtung installieren"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5537
+#, lua-format
+msgctxt "-msgEngineer"
+msgid ""
+"The tractor equipment has been transported aboard %s. You need to make the "
+"final connections for full installation"
+msgstr ""
+"Das Traktorsystem wurde an Bord von %s gebracht. Zur vollständigen "
+"Installation muss es noch mit den Bordsystemen verbunden werden"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5551
+#, lua-format
+msgctxt "-msgEngineer+"
+msgid ""
+"The tractor equipment has been transported aboard %s. You need to make the "
+"final connections for full installation"
+msgstr ""
+"Das Traktorsystem wurde an Bord von %s gebracht. Zur vollständigen "
+"Installation muss es noch mit den Bordsystemen verbunden werden"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5562
+msgctxt "-buttonEngineer"
+msgid "Connect Tractor"
+msgstr "Traktorstr. installieren"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5570
+msgctxt "-buttonEngineer+"
+msgid "Connect Tractor"
+msgstr "Traktorstr. installieren"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5576
+msgctxt "upgrade-comms"
+msgid "Tractor equipment transferred to engine room"
+msgstr "Traktorvorrichtung wurde in den Maschinenraum gebracht"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5601
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Give %s to Boris Eggleston for additional tube"
+msgstr "Boris Eggleston %s  zusätzlichen Raketenschachts geben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5610
+msgctxt "upgrade-comms"
+msgid "You already have the extra tube"
+msgstr "Sie haben dieses Upgrade bereits"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5617
+msgctxt "upgrade-comms"
+msgid ""
+"I can install it point to the front or to the rear. Which would you prefer?"
+msgstr ""
+"Der Schacht kann nach vorne oder nach hinten ausgerichtet werden. Wie soll "
+"ich ihn installieren?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5621
+msgctxt "upgrade-comms"
+msgid "Front"
+msgstr "Front"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5650
+msgctxt "upgrade-comms"
+msgid "You now have an additional homing torpedo tube pointing forward"
+msgstr ""
+"Sie besitzen nun einen zusätzlichen, nach vorne ausgerichteten "
+"Raketenschacht. "
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5677
+msgctxt "upgrade-comms"
+msgid "Rear"
+msgstr "Heck"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5706
+msgctxt "upgrade-comms"
+msgid "You now have an additional homing torpedo tube pointing to the rear"
+msgstr "Sie besitzen nun einen zusätzlichen rückwärtigen Raketenschacht"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5737
+msgctxt "upgrade-comms"
+msgid "May I speak with Boris Eggleston?"
+msgstr "Kann ich mit Boris Eggleston sprechen?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5742
+msgctxt "upgrade-comms"
+msgid ""
+"[Boris Eggleston]\n"
+"Hello, what can I do for you?"
+msgstr ""
+"[Boris Eggleston]\n"
+"Guten Tag, Was kann ich für Sie tun?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5748
+msgctxt "upgrade-comms"
+msgid "Can you really add another weapons tube to our ship?"
+msgstr ""
+"Können Sie wirklich einen zusätzlichen Raketenschacht in unser Schiff "
+"einbauen?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5755
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Definitely. But I'll need %s before I can do it"
+msgstr "Absolut. Aber dafür benötige ich %s."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5790
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Give %s and %s to Frederico Booker for upgrade"
+msgstr "Frederico Booker %s und %s für Upgrade geben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5800
+#: scripts/scenario_17_carrier_and_fighters.lua:6117
+msgctxt "upgrade-comms"
+msgid "You already have the upgrade"
+msgstr "Sie haben dieses Upgrade bereits"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5835
+msgctxt "upgrade-comms"
+msgid "Your ship beam weapons now deal 50% more damage"
+msgstr "Ihre Laserwaffen wurden sind nun 50% stärker"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5843
+msgctxt "upgrade-comms"
+msgid "Your ship has no beam weapons to upgrade"
+msgstr ""
+"Ihr Schiff besitzt über kein Lasersystem, das aufgerüstet werden könnte"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5852
+msgctxt "upgrade-comms"
+msgid "Talk to Frederico Booker"
+msgstr "Mit Frederico Booker reden"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5858
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"[Frederico Booker]\n"
+"Greetings, %s. What brings you to %s to talk to me?"
+msgstr ""
+"[Frederico Booker]\n"
+"Grüße, %s.\n"
+"Was führt sie nach %s um mit mir zu reden?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5867
+msgctxt "upgrade-comms"
+msgid "Can you upgrade our beam weapons systems?"
+msgstr "Können Sie unser Lasersystem aufrüsten?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5874
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"[Frederico Booker]\n"
+"Oh, you've heard about my research and the practical results? I can "
+"certainly upgrade the damage dealt by your beam weapons systems, but you'll "
+"need to provide me with %s and %s before I can complete the job"
+msgstr ""
+"[Frederico Booker]\n"
+"Oh, Sie haben von den Ergebnissen meiner Forschung gehört? Ich kann die "
+"Schadenswirkung Ihrer Lasersysteme durchaus verbessern, aber Sie müssen mir "
+"%s und %s zur Verfügung stellen, bevor ich die Arbeit abschließen kann."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5893
+msgctxt "upgrade-comms"
+msgid "Speak with Paulina Lindquist"
+msgstr "Mit Paulina Lindquist sprechen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5899
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Greetings, %s, what can I do for you?"
+msgstr "Guten Tag %s, was kann ich für Sie tun?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5907
+msgctxt "upgrade-comms"
+msgid "Do you want to apply your engine research?"
+msgstr ""
+"Möchten Sie Ihre Forschungsergebnisse zu Triebwerken in der Praxis anwenden?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5913
+msgctxt "upgrade-comms"
+msgid ""
+"Over the years, I've discovered that research does not pay very well. Do you "
+"have some kind of compensation in mind? Gold, platinum or luxury would do "
+"nicely."
+msgstr ""
+"Im Laufe der Jahre habe ich festgestellt, dass Forschung nicht besonders gut "
+"bezahlt wird. Haben Sie eine bestimmte Vergütung im Sinn? Gold, Platin oder "
+"Luxus wären ideal."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5934
+msgctxt "upgrade-comms"
+msgid "Offer compensation from cargo aboard"
+msgstr "Als Entlohnung etwas von der Fracht an Bord anbieten"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5969
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"Thanks for the %s. I've transmitted instructions on conducting the upgrade. "
+"Any friendly station can do the upgrade, but you'll need to provide impulse "
+"cargo for the upgrade"
+msgstr ""
+"Danke für die Waren (%s). Ich habe Anweisungen übermittelt, wie das Upgrade "
+"durchgeführt werden kann. Jede befreundete Station kann das tun, aber Sie "
+"müssen Impuls-Antriebsteile zur Verfügung stellen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5977
+msgctxt "orders-comms"
+msgid "Get spin upgrade from friendly station for impulse"
+msgstr ""
+"Upgrade der Manövrierdüsen von befreundeter Station erhalten (Impulsantriebs-"
+"Komponenten werden benötigt)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:5995
+msgctxt "intelligence-comms"
+msgid "Speak with Herbert Long"
+msgstr "Mit Herbert Long reden"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6001
+#, lua-format
+msgctxt "intelligence-comms"
+msgid "Well, if it isn't the good ship, %s! What brings you to %s?"
+msgstr "Oh, wenn das nicht die gute alte %s ist! Was bringt Sie nach %s?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6010
+msgctxt "intelligence-comms"
+msgid "Please share your enemy base information"
+msgstr "Bitte teilen Sie Ihr Wissen über feindliche Basen mit uns"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6017
+#, lua-format
+msgctxt "intelligence-comms"
+msgid ""
+"That's old news. Wouldn't you rather know about %s's leadership woes or the "
+"latest readings on unique stellar phenomenae in the area?"
+msgstr ""
+"Das ist doch ein alter Hut. Möchten Sie nicht lieber etwas über die "
+"Führungsprobleme von %s oder die neuesten Messwerte zu einzigartigen "
+"Sternenphänomenen in der Region erfahren?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6025
+msgctxt "intelligence-comms"
+msgid "No, I just want to know about the enemy base"
+msgstr "Nein, wir benötigen Informationen über die feindliche Basis"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6032
+#, lua-format
+msgctxt "intelligence-comms"
+msgid "Well, that's easy. The name of the base is %s. Enjoy your stay on %s!"
+msgstr ""
+"Nun, das ist einfach. Der Name der Station lautet \"%s\" Genießen Sie Ihren "
+"Aufenthalt auf %s!"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6045
+#, lua-format
+msgctxt "intelligence-comms"
+msgid "What is %s struggling with?"
+msgstr "Mit welchem Problem hat %s zu kämpfen?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6054
+#, lua-format
+msgctxt "intelligence-comms"
+msgid ""
+"There are so many requests for transfers, %s may be understaffed by next "
+"week."
+msgstr ""
+"Es gibt soviele Versetzungsanträge, dass %s innerhalb einer Woche "
+"unterbesetzt sein könnte."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6065
+msgctxt "intelligence-comms"
+msgid "What kind of unique stellar phenomenae?"
+msgstr "Welche Art von stellaren Phänomenen?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6072
+#, lua-format
+msgctxt "intelligence-comms"
+msgid ""
+"While we were in %s spying on %s, we picked up readings in a nebula hinting "
+"at the formation of a new star."
+msgstr ""
+"Während wir in %s waren, um %s auszukundschaften, haben wir in einer "
+"Nebelwolke Messwerte empfangen, die auf die Entstehung eines neuen Sterns "
+"hindeuten."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6081
+#, lua-format
+msgctxt "orders-comms"
+msgid "Destroy enemy station %s in %s"
+msgstr "Zerstören Sie die feindliche Basis %s in Sektor %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6113
+msgctxt "upgrade-comms"
+msgid "Upgrade ship maneuverability for impulse"
+msgstr "Verbessere Manövriertriebwerke (kostet Impulsantriebskomp.)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6130
+msgctxt "upgrade-comms"
+msgid "Maneuverability upgraded by 50%"
+msgstr "Manövriertriebwerke um 50% verbessert"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6158
+msgctxt "buttonRelay"
+msgid "Command Log"
+msgstr "Aufgaben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6169
+msgctxt "buttonOperations"
+msgid "Command Log"
+msgstr "Aufgaben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6179
+#, lua-format
+msgctxt "msgRelay"
+msgid "Command log for %s (clock - message):"
+msgstr "Aufgabenprotokoll für %s (Zeitstempel - Nachricht)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6194
+#, lua-format
+msgctxt "msgRelay"
+msgid ""
+"%s\n"
+"%s - %s"
+msgstr ""
+"%s\n"
+"%s - %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6219
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"The Ktlitans keep sending harassing ships. We've decrypted some of their "
+"communications - enough to identify their primary base by name if not by "
+"location. Find and destroy Ktlitan station %s. Respond to other requests "
+"from stations in the area if you wish, but your primary goal is do destroy "
+"%s. It is in your best interest to protect your carrier since it will "
+"significantly shorten the duration of your mission. Station %s has been "
+"designated your home station."
+msgstr ""
+"Die Ktlitan bereiten uns weiterhin mit ihren Schiffen Schwierigkeiten. Wir "
+"haben einige ihrer Nachrichten entschlüsselt – genug, um ihre Hauptbasis "
+"zumindest namentlich, wenn auch nicht örtlich zu identifizieren. Finden und "
+"zerstören Sie die Ktlitan-Station %s. Reagieren Sie auf andere Anfragen von "
+"Stationen in der Umgebung, wenn Sie möchten, aber Ihr vorrangiges Ziel ist "
+"die Zerstörung von %s. Es liegt in Ihrem Interesse, Ihr Trägerschiff zu "
+"schützen, da dies die Dauer Ihrer Mission erheblich verkürzt. Die Station %s "
+"wurde als Ihre Basisstation festgelegt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6228
+#, lua-format
+msgctxt "msgRelay"
+msgid ""
+"Ktlitans are harassing us. Destroy their primary station, %s. Respond to "
+"other requests if desired. Protect carrier to reduce mission duration. Home "
+"station is %s."
+msgstr ""
+"Die Ktlitan greifen uns immer wieder an. Zerstören Sie ihre Basis \"%s\". "
+"Reagieren Sie auf andere Anfragen von Stationen in der Umgebung, wenn "
+"erforderlich. Beschützen Sie das Trägerschiff um die Missionszeit kurz zu "
+"halten. Station %s ist Ihre Basisstation."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6243
+#: scripts/scenario_17_carrier_and_fighters.lua:8434
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"Paulina Lindquist, a noted research engineer recently published her latest "
+"theories on engine design. We believe her theories have practical "
+"applications to our ship maneuvering systems. You may want to talk to her "
+"about putting her theories into practice on our naval vessels. She's "
+"currently stationed on %s in %s."
+msgstr ""
+"Paulina Lindquist, eine renommierte Forscherin auf dem Gebiet der "
+"Ingenieurwissenschaften, hat kürzlich ihre neuesten Theorien zum "
+"Triebwerksbau veröffentlicht. Wir glauben, dass ihre Theorien praktische "
+"Anwendungen für unsere Schiffsmanövriersysteme haben. Vielleicht möchten Sie "
+"mit ihr darüber reden, wie ihre Theorien auf unseren Navy-Schiffen umgesetzt "
+"werden können. Sie ist derzeit in %s in %s stationiert."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6251
+#: scripts/scenario_17_carrier_and_fighters.lua:8442
+#, lua-format
+msgctxt "msgRelay"
+msgid ""
+"Visit Paulina Lindquist on station %s in sector %s regarding ship spin "
+"upgrade."
+msgstr ""
+"Paulina Lindquist zwecks Manövrierbarkeits-Upgrade auf %s in Sektor %s "
+"besuchen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6267
+#: scripts/scenario_17_carrier_and_fighters.lua:8618
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"Herbert Long believes he has a lead on some information about the enemy base "
+"that has been the source of the harassing ships. He's stationed on %s in %s."
+msgstr ""
+"Herbert Long glaubt, einen Hinweis auf Informationen über die feindliche "
+"Basis zu haben, von der aus die Schiffe ihre Angriffe starten. Er ist auf %s "
+"in %s stationiert."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6275
+#: scripts/scenario_17_carrier_and_fighters.lua:8626
+#, lua-format
+msgctxt "msgRelay"
+msgid "Talk to Herbert Long on %s in %s regarding enemy base."
+msgstr "Herbert Long auf %s in %s über feindliche Basen befragen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6291
+#: scripts/scenario_17_carrier_and_fighters.lua:8784
+#: scripts/scenario_17_carrier_and_fighters.lua:8822
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"[%s in %s] Medical emergency: Engineering research scientist Terrence "
+"Forsythe has contracted a rare medical condition. After contacting nearly "
+"every station in the area, we found that doctor Geraldine Polaski on %s has "
+"the expertise and facilities to help. However, we don't have the necessary "
+"transport to get Terrence there in time - he has only a few minutes left to "
+"live. Can you take Terrence to %s?"
+msgstr ""
+"[%s in %s] Medizinischer Notfall: Der Wissenschaftler Terrence Forsythe "
+"leidet an einer seltenen Krankheit. Nachdem wir fast alle Stationen in der "
+"Umgebung kontaktiert haben, haben wir herausgefunden, dass Dr. Geraldine "
+"Polaski auf %s über das nötige Fachwissen und die entsprechenden "
+"Einrichtungen verfügt, um ihm zu helfen. Allerdings haben wir kein "
+"geeignetes Transportmittel, um Terrence rechtzeitig dorthin zu bringen – er "
+"hat nur noch wenige Minuten zu leben. Können Sie Terrence nach %s bringen?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6301
+#: scripts/scenario_17_carrier_and_fighters.lua:8794
+#: scripts/scenario_17_carrier_and_fighters.lua:8832
+#, lua-format
+msgctxt "msgRelay"
+msgid "Transport Terrence Forsythe from %s in %s to %s before he dies"
+msgstr ""
+"Transportieren Sie Terrence Forsythe von %s in %s nach %s bevor er stirbt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6318
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"Retired naval officer, Boris Eggleston has taken his expertise in "
+"miniaturization and come up with a way to add a missile tube to naval "
+"vessels. He's vacationing on %s in %s"
+msgstr ""
+"Der pensionierte Navy-Offizier Boris Eggleston hat sein Fachwissen im "
+"Bereich Miniaturisierung genutzt und eine Möglichkeit gefunden, Navy-Schiffe "
+"mit einem zusätzlichen Raketenschacht auszustatten. Er macht Urlaub auf %s "
+"in %s."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6326
+#: scripts/scenario_17_carrier_and_fighters.lua:9441
+#, lua-format
+msgctxt "msgRelay"
+msgid "Get extra weapons tube from Boris Eggleston on %s in %s"
+msgstr ""
+"Zusätzlichen Raketenschacht von Boris Eggleston auf %s in %s einbauen lassen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6342
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"There's a physicist turned maintenance technician named Frederico Booker "
+"that has developed some innovative beam weapon technology that could "
+"increase the damage produced by our beam weapons. He's based on %s in %s"
+msgstr ""
+"Es gibt einen Techniker namens Frederico Booker, der früher Physiker war und "
+"eine innovative Strahlenwaffentechnologie entwickelt hat, mit der sich die "
+"Leistung unserer Laserwaffen erhöhen lässt. Er arbeitet in %s in %s."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6350
+#: scripts/scenario_17_carrier_and_fighters.lua:9612
+#, lua-format
+msgctxt "msgRelay"
+msgid "Talk to Frederico Booker on %s in %s about a beam upgrade"
+msgstr "Mit Frederico Booker auf %s in %s über Laser-Upgrade reden"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6436
+#, lua-format
+msgctxt "centralcommand-incCall"
+msgid "%s (%s until intersection)"
+msgstr ""
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6523
+#: scripts/scenario_17_carrier_and_fighters.lua:6968
+#: scripts/scenario_17_carrier_and_fighters.lua:7285
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr "Was wünschen Sie?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6525
+#: scripts/scenario_17_carrier_and_fighters.lua:7287
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr "Wie können wir behilflich sein?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6527
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr "Verteidigen Sie einen Wegpunkt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6532
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr "Keine Wegpunkte gesetzt. Bitte setzen Sie zuerst einen Wegpunkt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6538
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr "Welchen Wegpunkt sollen wir verteidigen?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6543
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr "Verteidigen Sie WP %d."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6554
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr "Wir sind auf dem Weg zur Unterstützung bei WP %d."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6566
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr "Helfen Sie uns"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6568
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr "Ich mache mich auf den Weg, um Ihnen zu helfen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6574
+#: scripts/scenario_17_carrier_and_fighters.lua:7289
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr "Statusbericht"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6576
+#: scripts/scenario_17_carrier_and_fighters.lua:7291
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr "Hülle: %d%%\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6584
+#: scripts/scenario_17_carrier_and_fighters.lua:7297
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sShield: %d%%\n"
+msgstr "%sSchilde: %d%%\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6594
+#: scripts/scenario_17_carrier_and_fighters.lua:7307
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sFront Shield: %d%%\n"
+msgstr "%sFrontschilde:  %d%%\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6603
+#: scripts/scenario_17_carrier_and_fighters.lua:7316
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sRear Shield: %d%%\n"
+msgstr "%sHeckschilde: %d%%\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6614
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sShield %s: %d%%\n"
+msgstr "%sSchild %s: %d%%\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6629
+#: scripts/scenario_17_carrier_and_fighters.lua:7342
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s%s Missiles: %d/%d\n"
+msgstr "%s%s Raketen: %d/%d\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6660
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr "Docke bei %s an"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6666
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr "Wir docken bei %s an."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6685
+msgctxt "shipAssist-comms"
+msgid "Attack nearby enemy target"
+msgstr "Greifen Sie ein feindliches Ziel in der Nähe an"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6697
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Attacking %s"
+msgstr "Greifen %s an"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6712
+msgctxt "shipAssist-comms"
+msgid "No enemy targets nearby"
+msgstr "Keine feindlichen Ziele in der Nähe"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6716
+msgctxt "shipAssist-comms"
+msgid "Which enemy target?"
+msgstr "Welches Ziel?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6729
+#: scripts/scenario_17_carrier_and_fighters.lua:7359
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr "Wir sehen Ihrer Zerstörung entgegen!"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6731
+#: scripts/scenario_17_carrier_and_fighters.lua:7361
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr "Deine Blutlinie wird hier enden!"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6733
+#: scripts/scenario_17_carrier_and_fighters.lua:7363
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr "Ihre schwächlichen Drohungen sind bedeutungslos."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6736
+#: scripts/scenario_17_carrier_and_fighters.lua:7366
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+"Ktzzzsss.\n"
+"\n"
+"Ihr werdet sterrrben, Schwächchchchlinge!!"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6742
+#: scripts/scenario_17_carrier_and_fighters.lua:7372
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+"Wir wünschen Ihnen nichts Böses, aber wir werden Ihnen etwas antun, wenn wir "
+"müssen.\n"
+"Ende der Übertragung."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6749
+#: scripts/scenario_17_carrier_and_fighters.lua:7379
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr "Gehen Sie uns aus dem Weg, oder Ihr Tod wird uns köstlich amüsieren!"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6756
+#: scripts/scenario_17_carrier_and_fighters.lua:7386
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+"Eins Null Eins.\n"
+"\n"
+"Nichtbinäre Kommunikation erkannt. Wechsle zu universeller Sprache.\n"
+"\n"
+"Generiere angemessene Antwort aus menschlichen Archiven.\n"
+"\n"
+":Kommen Sie uns nicht in die Quere.:\n"
+"\n"
+"Verbindung beendet."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6759
+#: scripts/scenario_17_carrier_and_fighters.lua:7389
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr "FÜHRE AUS: SELBSTZERSTÖRUNG"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6762
+#: scripts/scenario_17_carrier_and_fighters.lua:7392
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr "Schadhafter Befehl entdeckt. Erfasse Quelle."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6765
+#: scripts/scenario_17_carrier_and_fighters.lua:7395
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr "Externer Befehl wird ignoriert."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6770
+#: scripts/scenario_17_carrier_and_fighters.lua:7400
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+"Der Schwarm duldet keine Drohungen. Feindseligkeit gegen eines von uns ist "
+"Feindseligkeit gegen uns alle.\n"
+"\n"
+"Halten Sie ihre Position und machen Sie sich bereit, Ihre Körper als "
+"Lebensmittel zu spenden."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6775
+#: scripts/scenario_17_carrier_and_fighters.lua:7405
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr "<Senden von 'The Itsy-Bitsy Spider' auf allen Kanälen>"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6779
+#: scripts/scenario_17_carrier_and_fighters.lua:7409
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+"Wir brauchen keine Erlaubnis, um eine so unbedeutende Bedrohung zu "
+"zerpflücken."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6783
+#: scripts/scenario_17_carrier_and_fighters.lua:7413
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr "Der Schwarm hat wichtigeres zu tun als Schädlingsbekämpfung."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6786
+#: scripts/scenario_17_carrier_and_fighters.lua:7416
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr "Kümmern Sie sich um Ihre eigenen Angelegenheiten!"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6810
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr "Ja?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6812
+msgctxt "trade-comms"
+msgid "Where are you headed?"
+msgstr "Wohin sind Sie unterwegs?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6883
+#: scripts/scenario_17_carrier_and_fighters.lua:7007
+#: scripts/scenario_17_carrier_and_fighters.lua:7067
+#: scripts/scenario_17_carrier_and_fighters.lua:7167
+msgctxt "trade-comms"
+msgid "Insufficient cargo space for purchase"
+msgstr "Unzureichender Laderaum für den Kauf."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6910
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s purchased"
+msgstr "Ein %s gekauft"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6919
+#: scripts/scenario_17_carrier_and_fighters.lua:7040
+#: scripts/scenario_17_carrier_and_fighters.lua:7100
+#: scripts/scenario_17_carrier_and_fighters.lua:7200
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr "Unzureichender Ruf für den Kauf."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6946
+#: scripts/scenario_17_carrier_and_fighters.lua:7124
+#: scripts/scenario_17_carrier_and_fighters.lua:7224
+msgctxt "trade-comms"
+msgid "What kind of cargo are you carrying?"
+msgstr "Welche Art von Fracht transportieren Sie?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6948
+#: scripts/scenario_17_carrier_and_fighters.lua:7126
+#: scripts/scenario_17_carrier_and_fighters.lua:7226
+msgctxt "trade-comms"
+msgid "Goods aboard:"
+msgstr "Fracht an Bord:"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6954
+#: scripts/scenario_17_carrier_and_fighters.lua:7132
+#: scripts/scenario_17_carrier_and_fighters.lua:7232
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+"%s\n"
+"%s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6973
+#, lua-format
+msgctxt "trade-comms"
+msgid "Where are you headed? (cost: %i reputation)"
+msgstr "Wohin sind Sie unterwegs? (Kosten: %i Ruf)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:7146
+msgctxt "trade-comms"
+msgid "Why are you bothering me?"
+msgstr "Warum belästigen Sie mich?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:7256
+#: scripts/scenario_17_carrier_and_fighters.lua:7437
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+"Leider haben wir keine Zeit, mit Ihnen zu plaudern.\n"
+"Wir sind auf einer wichtigen Mission."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:7261
+#: scripts/scenario_17_carrier_and_fighters.lua:7441
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+"Wir können Ihnen nichts anbieten.\n"
+"\n"
+"Einen schönen Tag noch."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:7327
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr "Schilde %s: %d%%\n"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:7459
+#: scripts/scenario_17_carrier_and_fighters.lua:7492
+msgctxt "-buttonRelay"
+msgid "Transfer Cargo"
+msgstr "Fracht übergeben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:7466
+#: scripts/scenario_17_carrier_and_fighters.lua:7499
+msgctxt "-buttonOperations"
+msgid "Transfer Cargo"
+msgstr "Fracht übergeben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:7894
+#: scripts/scenario_17_carrier_and_fighters.lua:7980
+#, lua-format
+msgctxt "-msgRelay"
+msgid "Cargo aboard %s transferred to %s"
+msgstr "Fracht  an Bord von %s wurde an %s übergeben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:7906
+#: scripts/scenario_17_carrier_and_fighters.lua:7992
+#, lua-format
+msgctxt "-msgOperations"
+msgid "Cargo aboard %s transferred to %s"
+msgstr "Fracht  an Bord von %s wurde an %s übergeben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:7929
+#: scripts/scenario_17_carrier_and_fighters.lua:8015
+#, lua-format
+msgctxt "-msgRelay"
+msgid "Insufficient space on %s to accept your cargo transfer"
+msgstr "Zu wenig Platz im Frachtraum von %s um die Lieferung zu akzeptieren."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:7944
+#: scripts/scenario_17_carrier_and_fighters.lua:8030
+#, lua-format
+msgctxt "-msgOperations"
+msgid "Insufficient space on %s to accept your cargo transfer"
+msgstr "Zu wenig Platz im Frachtraum von %s um die Lieferung zu akzeptieren."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8049
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr "Inventar"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8060
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr "Inventar"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8071
+msgctxt "inventory-buttonPilot"
+msgid "Inventory"
+msgstr "Inventar"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8083
+#, lua-format
+msgctxt "inventory-msgRelay"
+msgid "%s Current cargo:"
+msgstr "%s Aktuelle Fracht"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8091
+#, lua-format
+msgctxt "inventory-msgRelay"
+msgid ""
+"%s\n"
+"     %s: %i"
+msgstr ""
+"%s\n"
+"     %s: %i"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8099
+#, lua-format
+msgctxt "inventory-msgRelay"
+msgid ""
+"%s\n"
+"     Empty"
+msgstr ""
+"%s\n"
+"     Leer"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8102
+#, lua-format
+msgctxt "inventory-msgRelay"
+msgid ""
+"%s\n"
+"Available space: %i"
+msgstr ""
+"%s\n"
+"Verfügbarer Platz: %i"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8119
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"The Ktlitans keep sending harassing ships. We've decrypted some of their "
+"communications - enough to identify their primary base by name if not by "
+"location. Find and destroy Ktlitan station %s. Respond to other requests "
+"from stations in the area if you wish, but your primary goal is do destroy "
+"%s. It is in your best interest to protect your carrier since it will "
+"significantly shorten the duration of your mission. Station %s has been "
+"designated your home station."
+msgstr ""
+"Die Ktlitan bereiten uns weiterhin mit ihren Schiffen Schwierigkeiten. Wir "
+"haben einige ihrer Nachrichten entschlüsselt – genug, um ihre Hauptbasis "
+"zumindest namentlich, wenn auch nicht örtlich zu identifizieren. Finden und "
+"zerstören Sie die Ktlitan-Station %s. Reagieren Sie auf andere Anfragen von "
+"Stationen in der Umgebung, wenn Sie möchten, aber Ihr vorrangiges Ziel ist "
+"die Zerstörung von %s. Es liegt in Ihrem Interesse, Ihr Trägerschiff zu "
+"schützen, da dies die Dauer Ihrer Mission erheblich verkürzt. Die Station %s "
+"wurde als Ihre Basisstation festgelegt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8129
+#, lua-format
+msgctxt "orders-comms"
+msgid "Destroy %s"
+msgstr "Zerstören Sie %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8457
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"Paulina Lindquist, a noted research engineer recently published her latest "
+"theories on engine design. We believe her theories have practical "
+"applications to our ship maneuvering systems. You may want to talk to her "
+"about putting her theories into practice on our naval vessels. She's "
+"currently stationed on %s in %s."
+msgstr ""
+"Paulina Lindquist, eine renommierte Forscherin auf dem Gebiet der "
+"Ingenieurwissenschaften, hat kürzlich ihre neuesten Theorien zum "
+"Triebwerksbau veröffentlicht. Wir glauben, dass ihre Theorien praktische "
+"Anwendungen für unsere Manövriersysteme haben. Vielleicht möchten Sie mit "
+"ihr darüber reden, wie ihre Theorien auf unseren Navy-Schiffen umgesetzt "
+"werden können. Sie ist derzeit in %s in %s stationiert."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8469
+#: scripts/scenario_17_carrier_and_fighters.lua:8563
+#, lua-format
+msgctxt "orders-comms"
+msgid "Visit Paulina Lindquist on %s in %s regarding ship spin upgrade."
+msgstr ""
+"Paulina Lindquist zwecks Manövrierbarkeits-Upgrade auf %s in %s besuchen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8552
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "Paulina Lindquist, has been reassigned to station %s in %s."
+msgstr "Paulina Lindquist wurde auf Station %s in %s versetzt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8573
+#, lua-format
+msgctxt "goal-incCall"
+msgid "Paulina Lindquist, has been reassigned to station %s in %s"
+msgstr "Paulina Lindquist wurde auf Station %s in %s versetzt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8581
+#, lua-format
+msgctxt "msgRelay"
+msgid "Visit Paulina Lindquist on %s in %s regarding ship spin upgrade."
+msgstr ""
+"Paulina Lindquist zwecks Manövrierbarkeits-Upgrade auf %s in %s besuchen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8640
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"Herbert Long believes he has a lead on some information about the enemy base "
+"that has been the source of the harassing ships. He's stationed on %s in %s"
+msgstr ""
+"Herbert Long glaubt, einen Hinweis auf Informationen über die feindliche "
+"Basis zu haben, von der aus die Schiffe ihre Angriffe starten. Er ist auf %s "
+"in %s stationiert."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8651
+#, lua-format
+msgctxt "orders-comms"
+msgid "Talk to Herbert Long on %s in %s regarding enemy base"
+msgstr "Herbert Long auf %s in %s über feindliche Basen befragen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8705
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "Herbert Long has been reassigned to station %s in %s."
+msgstr "Herbert Long wurde auf Station %s in %s versetzt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8716
+#, lua-format
+msgctxt "orders-comms"
+msgid "Visit Herbert Long on %s in %s regarding enemy base."
+msgstr "Herbert Long auf %s in %s zwecks Info zu feindlichen Basen besuchen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8726
+#, lua-format
+msgctxt "goal-incCall"
+msgid "Herbert Long has been reassigned to station %s in %s"
+msgstr "Herbert Long wurde auf Station %s in %s versetzt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8734
+#, lua-format
+msgctxt "msgRelay"
+msgid "Visit Herbert Long on %s in %s regarding enemy base."
+msgstr "Herbert Long auf %s in %s zwecks Info zu feindlichen Basen besuchen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8853
+msgctxt "scienceDescription-artifact"
+msgid "Artificially manufactured object of unknown purpose"
+msgstr "Künstlich hergestelltes Objekt, Zweck: unbekannt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8857
+msgctxt "scienceDescription-artifact"
+msgid "Prototype device intended for ship system integration"
+msgstr "Prototyp-geeignet zur Integration in Schiffs-Systeme"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8866
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"[%s in %s] Medical emergency: Engineering research scientist Terrence "
+"Forsythe has contracted a rare medical condition. After contacting nearly "
+"every station in the area, we found that doctor Geraldine Polaski on %s has "
+"the expertise and facilities to help. However, we don't have the necessary "
+"transport to get Terrence there in time - he has only a few minutes left to "
+"live. Can you take Terrence to %s?"
+msgstr ""
+"[%s in %s] Medizinischer Notfall: Der Wissenschaftler Terrence Forsythe "
+"leidet an einer seltenen Krankheit. Nachdem wir fast alle Stationen in der "
+"Umgebung kontaktiert haben, haben wir herausgefunden, dass Dr. Geraldine "
+"Polaski auf %s über das nötige Fachwissen und die entsprechenden "
+"Einrichtungen verfügt, um ihm zu helfen. Allerdings haben wir kein "
+"geeignetes Transportmittel, um Terrence rechtzeitig dorthin zu bringen – er "
+"hat nur noch wenige Minuten zu leben. Können Sie ihn nach %s bringen?"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8879
+#, lua-format
+msgctxt "orders-comms"
+msgid "Transport Terrence Forsythe from %s in %s to %s before he dies"
+msgstr ""
+"Transportieren Sie Terrence Forsythe von %s in %s nach %s bevor er stirbt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8918
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"[%s] Terrence Forsythe has been transported aboard your ship. Please take "
+"him to Dr. Polaski on %s. "
+msgstr ""
+"[%s] Terrence Forsythe wurde auf Ihr Schiff gebracht. Bitte bringen Sie ihn "
+"zu Dr. Polaski auf %s. "
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8930
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "%sWe believe he has less than a minute to live."
+msgstr "%sWir glauben, er hat weniger als eine Minute zu leben."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8938
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "%sWe think he has about a minute before he dies"
+msgstr "%sWir glauben, er wird noch etwa eine Minute leben."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8946
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "%sHe probably has about %i minutes to live"
+msgstr "%sEr hat vermutlich noch etwa %i Minuten zu leben."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8958
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"Terrence Forsythe transported aboard %s from station %s to be transported "
+"quickly to Dr. Polaski on station %s."
+msgstr ""
+"Terrence Forsythe wurde an Bord von %s von Station %s gebracht, um schnell "
+"zu Dr. Polaski auf Station %s transportiert werden zu können."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8967
+#, lua-format
+msgctxt "msgRelay"
+msgid "%s should take dying scientist to Dr. Polaski on station %s in %s"
+msgstr ""
+"%s sollte den sterbenden Wissenschaftler zu Dr. Polaski auf Station %s in %s "
+"bringen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:8994
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "Terrence Forsyth aboard %s"
+msgstr "Terrence Forsyth befindet sich an Bord von %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9010
+msgctxt "goal-shipLog"
+msgid "The station with Dr. Polaski aboard has been destroyed."
+msgstr "Die Station mit Dr. Polaski an Bord wurde zerstört."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9032
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"[%s] We have received your emergency medical transport of research scientist "
+"Terrence Forsythe. Doctor Geraldine Polaski has stabalized his condition."
+msgstr ""
+"[%s] Ihr Notfalltransport des Forschers Terrence Forsythe war noch "
+"rechtzeitig. Dr. Geraldine Polaski konnte ihn stabilisieren."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9049
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"[%s] We have received your emergency medical transport of research scientist "
+"Terrence Forsythe. Doctor Geraldine Polaski has stabalized his condition."
+msgstr ""
+"[%s] Ihr Notfalltransport des Forschers Terrence Forsythe war noch "
+"rechtzeitig. Dr. Geraldine Polaski konnte ihn stabilisieren."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9056
+#, lua-format
+msgctxt "msgRelay"
+msgid "Terrence Forsythe delivered to Dr. Polaski on station %s"
+msgstr "Terrence Forsythe wurde zu Dr. Polaski auf Station %s gebracht"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9074
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "%s has been destroyed"
+msgstr "%s wurde zerstört"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9090
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"[Terrence Forsythe] I can never repay you for saving my life. However, you "
+"might be able to use the practical results of my latest research. Near %s in "
+"%s you'll find a prototype for ship system integration. This prototype "
+"allows for the rapid and semi-automated repair of hull damage as directed by "
+"your Engineer. I have transmitted the key to allow you to use this prototype."
+msgstr ""
+"[Terrence Forsythe] Ich werde Ihnen nie genug dafür danken können, dass Sie "
+"mir das Leben gerettet haben. Aber vielleicht können Sie die  Ergebnisse "
+"meiner neuesten Forschung gebrauchen. In der Nähe von %s in %s finden Sie "
+"einen Prototyp für die Schiffsintegration. Dieser Prototyp ermöglicht die "
+"schnelle und halbautomatische Reparatur von Rumpfschäden nach Anweisung "
+"Ihres technischen Personals. Ich habe Ihnen den Schlüssel für die Nutzung "
+"dieses Prototyps übermittelt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9102
+#, lua-format
+msgctxt "orders-comms"
+msgid "Recover hull repair prototype near %s in %s."
+msgstr "Berge Hüllenreparatur-Prototypen in der Nähe von %s in %s."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9112
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"[Terrence Forsythe] I can never repay you for saving my life. However, you "
+"might be able to use the practical results of my latest research. Near %s in "
+"%s you'll find a prototype for ship system integration. This prototype "
+"allows for the rapid and semi-automated repair of hull damage as directed by "
+"your Engineer. I have transmitted the key to allow you to use this prototype."
+msgstr ""
+"[Terrence Forsythe] Ich werde Ihnen nie genug dafür danken können, dass Sie "
+"mir das Leben gerettet haben. Aber vielleicht können Sie die  Ergebnisse "
+"meiner neuesten Forschung gebrauchen. In der Nähe von %s in %s finden Sie "
+"einen Prototyp für die Schiffsintegration. Dieser Prototyp ermöglicht die "
+"schnelle und halbautomatische Reparatur von Rumpfschäden nach Anweisung "
+"Ihres technischen Personals. Ich habe Ihnen den Schlüssel für die Nutzung "
+"dieses Prototyps übermittelt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9118
+#, lua-format
+msgctxt "msgRelay"
+msgid "Recover hull repair prototype near %s in %s."
+msgstr "Berge Hüllenreparatur-Prototypen in der Nähe von %s in %s."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9174
+#, lua-format
+msgctxt "-msgEngineer"
+msgid "Hull repair prototype installed. Limited to %i uses"
+msgstr "Hüllenreparatur-Prototyp installiert. Begrenzt auf %i Anwendungen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9186
+#, lua-format
+msgctxt "-msgEngineer+"
+msgid "Hull repair prototype installed. Limited to %i uses"
+msgstr "Hüllenreparatur-Prototyp installiert. Begrenzt auf %i Anwendungen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9195
+#: scripts/scenario_17_carrier_and_fighters.lua:9225
+#, lua-format
+msgctxt "-buttonEngineer"
+msgid "Repair Hull (%i)"
+msgstr "Hülle reparieren (%i)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9203
+#: scripts/scenario_17_carrier_and_fighters.lua:9236
+#, lua-format
+msgctxt "-buttonEngineer+"
+msgid "Repair Hull (%i)"
+msgstr "Hülle reparieren (%i)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9247
+msgctxt "goal-shipLog"
+msgid "Terrence Forsythe has perished"
+msgstr "Terrence Forsythe ist verstorben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9358
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"Retired naval officer, Boris Eggleston has taken his expertise in "
+"miniaturization and come up with a way to add a missile tube to naval "
+"vessels. He's vacationing on %s in %s"
+msgstr ""
+"Der pensionierte Navy-Offizier Boris Eggleston hat sein Fachwissen im "
+"Bereich Miniaturisierung genutzt und eine Möglichkeit gefunden, Navy-Schiffe "
+"mit einem zusätzlichen Raketenschacht auszustatten. Er macht Urlaub auf %s "
+"in %s."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9369
+#: scripts/scenario_17_carrier_and_fighters.lua:9423
+#, lua-format
+msgctxt "orders-comms"
+msgid "Get extra weapons tube from Boris Eggleston on %s in %s"
+msgstr "Zusätzlichen Raketenschacht von Boris Eggleston auf %s in %s erwerben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9412
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "Boris Eggleston changed his vacation spot to %s in %s"
+msgstr "Boris Eggleston hat seinen Urlaubsort geändert auf %s in %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9433
+#, lua-format
+msgctxt "goal-incCall"
+msgid "Boris Eggleston changed his vacation spot to %s in %s"
+msgstr "Boris Eggleston hat seinen Urlaubsort geändert auf %s in %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9529
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"There's a physicist turned maintenance technician named Frederico Booker "
+"that has developed some innovative beam weapon technology that could "
+"increase the damage produced by our beam weapons. He's based on %s in %s"
+msgstr ""
+"Der Techniker Frederico Booker, hat eine innovative "
+"Strahlenwaffentechnologie entwickelt, mit der sich die Leistung unserer "
+"Laserwaffen erhöhen lässt. Er arbeitet in %s in %s."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9540
+#: scripts/scenario_17_carrier_and_fighters.lua:9594
+#, lua-format
+msgctxt "orders-comms"
+msgid "Talk to Frederico Booker on %s in %s about a beam upgrade"
+msgstr "Mit Frederico Booker auf %s in %s über Laser-Upgrade reden"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9583
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "Frederico Booker has moved to station %s in %s"
+msgstr "Frederico Booker ist auf Station %s in %s gezogen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9604
+#, lua-format
+msgctxt "goal-incCall"
+msgid "Frederico Booker has moved to station %s in %s"
+msgstr "Frederico Booker ist auf Station %s in %s gezogen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9678
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"[%s] Help requested: Our engines are damaged beyond our ability to repair. "
+"We are located in %s."
+msgstr ""
+"[%s] Erbitten Hilfe: \"Unser Antrieb ist irreparabel beschädigt. Wir "
+"befinden uns in Sektor %s."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9694
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"%s requests help stating: Our engines are damaged beyond our ability to "
+"repair. We are located in sector %s."
+msgstr ""
+"%s erbittet Hilfe: \"Unser Antrieb ist irreparabel beschädigt. Wir befinden "
+"uns in Sektor %s."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9702
+#, lua-format
+msgctxt "msgRelay"
+msgid "Help %s in sector %s with their damaged engines"
+msgstr "%s in Sektor %s mit defektem Antrieb helfen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9725
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"Station %s in %s has tractor equipment you can use to tractor %s in for "
+"repairs"
+msgstr ""
+"Station %s in %s hat eine Traktorvorrichtung die genutzt werden kann, um %s "
+"für Reparaturen abzuschleppen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9736
+#, lua-format
+msgctxt "orders-comms"
+msgid "Install tractor equipment in %s from station %s in %s"
+msgstr "Traktorsystem auf %s installieren (von Station %s in %s)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9749
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"Station %s in %s has tractor equipment you can use to tractor %s in for "
+"repairs"
+msgstr ""
+"Station %s in %s hat eine Traktorvorrichtung die genutzt werden kann, um %s "
+"für Reparaturen abzuschleppen"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9758
+#, lua-format
+msgctxt "msgRelay"
+msgid "Install tractor equipment in %s from station %s in %s"
+msgstr "Traktorsystem auf %s installieren (von Station %s in %s)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9800
+#, lua-format
+msgctxt "-msgWeapons"
+msgid "%s has been tractored to %s and is now docked"
+msgstr "%s wurde zu %s geschleppt und ist nun angedockt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9814
+#, lua-format
+msgctxt "-msgTactical"
+msgid "%s has been tractored to %s and is now docked"
+msgstr "%s wurde zu %s geschleppt und ist nun angedockt"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9845
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "Tractor %s to %s to be repaired"
+msgstr "Schleppe %s nach %s zur Reparatur"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9853
+#, lua-format
+msgctxt "orders-comms"
+msgid "Tractor %s to %s"
+msgstr "Schleppe %s zu %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9862
+#, lua-format
+msgctxt "goal-incCall"
+msgid "Tractor %s to %s to be repaired"
+msgstr "Schleppe %s nach %s zur Reparatur"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9868
+#, lua-format
+msgctxt "msgRelay"
+msgid "Tractor %s to %s"
+msgstr "Schleppe %s zu %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9896
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"Station %s says: Thanks for bringing %s in for repairs, %s. We'll take it "
+"from here"
+msgstr ""
+"Station %s sagt: Danke, dass sie %s hierher gebracht haben , %s. Wir "
+"übernehmen ab hier"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9919
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"Station %s says: Thanks for bringing %s in for repairs, %s. We'll take it "
+"from here"
+msgstr ""
+"Station %s sagt: Danke, dass sie %s hierher gebracht haben , %s. Wir "
+"übernehmen ab hier"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9928
+#, lua-format
+msgctxt "msgRelay"
+msgid "%s turned over to %s for repairs."
+msgstr "%s für Reparaturen nach %s gebracht."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9950
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"[%s] Greetings, %s. You'll need to tractor %s to within 1.5U before we can "
+"start repairs"
+msgstr ""
+"[%s] Willkommen, %s. %s muss sich innerhalb eines 1.5U-Radius befinden, "
+"bevor wir mit der Reparatur beginnen können."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:9993
+msgctxt "-buttonWeapons"
+msgid "Tractor On"
+msgstr "Traktorstrahl Ein"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10000
+msgctxt "-buttonTactical"
+msgid "Tractor On"
+msgstr "Traktorstrahl Ein"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10024
+msgctxt "-buttonWeapons"
+msgid "Tractor Off"
+msgstr "Traktorstrahl Aus"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10031
+msgctxt "-buttonTactical"
+msgid "Tractor Off"
+msgstr "Traktorstrahl Aus"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10059
+msgctxt "-msgEngineer"
+msgid ""
+"The tractor equipment has been fully integrated with ship systems. It is "
+"ready for the weapons officer to activate at the appropriate time"
+msgstr ""
+"Das Traktorsystem wurde vollständig in die Schiffssysteme integriert. Es "
+"kann nun bei Bedarf auf der Waffen- oder taktischen Konsole aktiviert werden."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10070
+msgctxt "-msgEngineer+"
+msgid ""
+"The tractor equipment has been fully integrated with ship systems. It is "
+"ready for the weapons officer to activate at the appropriate time"
+msgstr ""
+"Das Traktorsystem wurde vollständig in die Schiffssysteme integriert. Es "
+"kann nun bei Bedarf auf der Waffen- oder taktischen Konsole aktiviert werden."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10082
+#, lua-format
+msgctxt "-msgWeapons"
+msgid ""
+"Tractor equipment installed.\n"
+"When %s is in range of the disabled ship, %s, You can engage the tractor "
+"system via the (Tractor On) button. This system works with %s's on board "
+"systems to draw and maneuver %s to %s until it is docked"
+msgstr ""
+"Traktorsystem installiert\n"
+"Wenn %s in Reichweite des deaktivierten Schiffes %s ist, können Sie das "
+"Traktorsystem über die Schaltfläche 'Traktor Ein' aktivieren. Dieses System "
+"arbeitet mit den Bordsystemen von %s zusammen, um %s an %s heranzuziehen und "
+"zu manövrieren, bis es angedockt ist."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10100
+#, lua-format
+msgctxt "-msgTactical"
+msgid ""
+"Tractor equipment installed.\n"
+"When %s is in range of the disabled ship, %s, You can engage the tractor "
+"system via the (Tractor On) button. This system works with %s's on board "
+"systems to draw and maneuver %s to %s until it is docked"
+msgstr ""
+"Traktorsystem installiert\n"
+"Wenn %s in Reichweite des deaktivierten Schiffes %s ist, können Sie das "
+"Traktorsystem über die Schaltfläche 'Traktor Ein' aktivieren. Dieses System "
+"arbeitet mit den Bordsystemen von %s zusammen, um %s an %s heranzuziehen und "
+"zu manövrieren, bis es angedockt ist."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10120
+#, lua-format
+msgctxt "goal-shipLog"
+msgid "[%s] Our engines have been repaired and we stand ready to assist"
+msgstr "[%s] Unsere Triebwerke sind repariert. Wir sind bereit zu helfen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10133
+#, lua-format
+msgctxt "goal-incCall"
+msgid "[From %s] Our engines have been repaired and we stand ready to assist"
+msgstr "[Von %s] Unsere Triebwerke sind repariert. Wir sind bereit zu helfen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10138
+#, lua-format
+msgctxt "msgRelay"
+msgid "%s is ready to help us in our mission."
+msgstr "%s ist bereit, uns bei unserer Mission zu helfen."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10173
+msgctxt "-buttonWeapons"
+msgid "Do Not Push"
+msgstr "Nicht drücken"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10180
+msgctxt "-buttonTactical"
+msgid "Do Not Push"
+msgstr "Nicht drücken"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10190
+msgctxt "-msgScience"
+msgid ""
+"Internal security sensors indicate ship systems hacked by unknown source. "
+"For a moment I thought I heard evil laughter"
+msgstr ""
+"Interne Sicherheitssensoren deuten darauf hin, dass die Schiffssysteme von "
+"einer unbekannten Quelle gehackt wurden.. Für einen Moment schien es, es "
+"wäre ein gehässiges Lachen zu hören."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10201
+msgctxt "-msgOperations"
+msgid ""
+"Internal security sensors indicate ship systems hacked by unknown source. "
+"For a moment I thought I heard evil laughter"
+msgstr ""
+"Interne Sicherheitssensoren deuten darauf hin, dass die Schiffssysteme von "
+"einer unbekannten Quelle gehackt wurden.. Für einen Moment schien es, es "
+"wäre ein gehässiges Lachen zu hören."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10575
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr "Ein Mitglied des Reparaturteams ist verstorben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10586
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr "Ein Mitglied des Reparaturteams ist verstorben"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10613
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%i out of %i friendly stations survived."
+msgstr "%i von %i freundlichen Stationen überlebt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10618
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"%i out of %i neutral stations survived."
+msgstr ""
+"%s\n"
+"%i von %i neutralen Stationen überlebt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10624
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"%i out of %i enemy stations survived."
+msgstr ""
+"%s\n"
+"%i von %i feindlichen Stationen überlebt."
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10630
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Mission milestones completed:%i"
+msgstr ""
+"%s\n"
+"Abgeschlossene Meilensteine der Mission:%i"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10639
+msgctxt "msgMainscreen"
+msgid "Cadet"
+msgstr "Kadett"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10641
+msgctxt "msgMainscreen"
+msgid "Ensign"
+msgstr "Fähnrich"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10643
+msgctxt "msgMainscreen"
+msgid "Lieutenant"
+msgstr "Lieutenant"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10645
+msgctxt "msgMainscreen"
+msgid "Commander"
+msgstr "Commander"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10647
+msgctxt "msgMainscreen"
+msgid "Captain"
+msgstr "Captain"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10649
+msgctxt "msgMainscreen"
+msgid "Admiral"
+msgstr "Admiral"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10652
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Earned rank: %s"
+msgstr ""
+"%s\n"
+"Verdienter Rang:  %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10670
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Rank after several military leaders disappeared: %s"
+msgstr ""
+"%s\n"
+"Rang nachdem mehrere millitärischen Führungskräfte verschwunden sind: %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10682
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Game duration: %s"
+msgstr ""
+"%s\n"
+"Spieldauer: %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10689
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Selected difficulty options: Enemy power: %s, Murphy: %s"
+msgstr ""
+"%s\n"
+"Schwierigkeits-Einstellungen: Feindliche Stärke: %s, Murphy: %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10696
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Carrier type: %s"
+msgstr ""
+"%s\n"
+"Träger-Typ: %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10702
+#: scripts/scenario_17_carrier_and_fighters.lua:10711
+#: scripts/scenario_17_carrier_and_fighters.lua:10720
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10705
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Fighter type 1: %s"
+msgstr ""
+"%s\n"
+"Jäger 1: Typ %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10714
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Fighter type 2: %s"
+msgstr ""
+"%s\n"
+"Jäger 2: Typ %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10746
+#, lua-format
+msgctxt "tabWeaponsTacticalSingle"
+msgid "%s tubes: %s"
+msgstr "%s-Schachtgr.: %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10752
+#, lua-format
+msgctxt "tabWeaponsTacticalSingle"
+msgid "%s tube: %s"
+msgstr "%s-Schachtgr.: %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10765
+#, lua-format
+msgctxt "tabHelm"
+msgid "%s in %s"
+msgstr "%s in %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10775
+#, lua-format
+msgctxt "tabTactical"
+msgid "%s in %s"
+msgstr "%s in %s"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:10785
+#, lua-format
+msgctxt "tabSingle"
+msgid "%s in %s"
+msgstr "%s in %s"
+
+# Scenario description
+#~ msgid ""
+#~ "Three player ships: a carrier and two smaller ships docked with the "
+#~ "carrier. Objective: search out and find the enemy. Use the carrier to "
+#~ "travel long distances.\n"
+#~ "\n"
+#~ "Carrier and several player ships with turrets available for use by the "
+#~ "players made available with this scenario script and the associated files."
+#~ msgstr ""
+#~ "Drei spielbare Schiffe: ein Träger und zwei kleinere Schiffe, die zu "
+#~ "Beginn an den Träger angedockt sind. Ziel: den Feind suchen und finden. "
+#~ "Benutzt den Träger, um große Entfernungen zurückzulegen."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Difficulty"
+#~ msgstr "Schwierigkeitsgrad"
+
+#~ msgctxt "setting"
+#~ msgid "Sets the overall scenario difficulty"
+#~ msgstr "Legt die allgemeine Schwierigkeit des Szenarios fest"
+
+#~ msgctxt "Difficulty"
+#~ msgid "Very Easy goals and/or enemies"
+#~ msgstr "Sehr einfache Ziele und/oder Feinde"
+
+#~ msgctxt "Difficulty"
+#~ msgid "Easy goals and/or enemies"
+#~ msgstr "Einfache Ziele und/oder Feinde"
+
+#~ msgctxt "Difficulty"
+#~ msgid "Hard goals and/or enemies"
+#~ msgstr "Schwere Ziele und/oder Feinde"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Optical Components"
+#~ msgstr "Optik-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We make and supply optic components for various station and ship systems"
+#~ msgstr ""
+#~ "Wir fertigen und bieten optische Komponenten für verschiedene Stations- "
+#~ "und Schiffssysteme."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station continues the businesses from Earth based on the merging of "
+#~ "several companies including Leica from Switzerland, the lens manufacturer "
+#~ "and the Japanese advanced low carbon electronic and optic company"
+#~ msgstr ""
+#~ "Diese Station setzt die Geschäfte der Erde fort, die auf dem "
+#~ "Zusammenschluss mehrerer Unternehmen beruhen, darunter der Schweizer "
+#~ "Objektivhersteller Leica und das japanische Forschungs- und "
+#~ "Entwicklungsunternehmen für Elektronik und Optik Advanced Low Carbon "
+#~ "(ALCA)."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Battery and software engineering"
+#~ msgstr "Batterie- und Softwaretechnik"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We provide high quality high capacity batteries and specialized software "
+#~ "for all shipboard systems"
+#~ msgstr ""
+#~ "Wir bieten qualitativ hochwertige Hochleistungsbatterien und "
+#~ "spezialisierte Software für alle Schiffssysteme."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after a fictional software engineer in a late 20th "
+#~ "century movie depicting humanity unknowingly conquered by aliens and kept "
+#~ "docile by software generated illusion"
+#~ msgstr ""
+#~ "Die Station ist nach einem fiktiven Software-Ingenieur aus einem Film des "
+#~ "späten 20. Jahrhunderts benannt, in dem die Menschheit unwissentlich "
+#~ "erobert und durch softwaregenerierte Illusionen gefügig gehalten wird."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Shield and Armor Research"
+#~ msgstr "Schild- und Panzerungsforschung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "The finest shield and armor manufacturer in the quadrant"
+#~ msgstr "Der beste Schild- und Panzerungshersteller im Quadranten."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We named this station for the pioneering spirit of the 22nd century "
+#~ "Starfleet explorer, Captain Jonathan Archer"
+#~ msgstr ""
+#~ "Wir haben diese Station nach dem Pioniergeist des Sternenflottenforschers "
+#~ "des 22. Jahrhunderts, Captain Jonathan Archer, benannt."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Energy and particle beam components"
+#~ msgstr "Energie- und Teilchenstrahlkomponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We fabricate general and specialized components for ship beam systems"
+#~ msgstr ""
+#~ "Wir stellen allgemeine und spezielle Komponenten für Laserwaffen her."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station was named after Archimedes who, according to legend, used a "
+#~ "series of adjustable focal length mirrors to focus sunlight on a Roman "
+#~ "naval fleet invading Syracuse, setting fire to it"
+#~ msgstr ""
+#~ "Diese Station wurde nach Archimedes benannt, der der Legende nach eine "
+#~ "Reihe von Spiegeln mit verstellbarer Brennweite benutzte, um das "
+#~ "Sonnenlicht auf eine römische Flotte zu richten, die in Syrakus einfiel, "
+#~ "und diese in Brand setzte."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Warp and Impulse engine manufacturing"
+#~ msgstr "Herstellung von Warp- und Impulsantrieben"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We manufacture warp, impulse and jump engines for the human navy fleet as "
+#~ "well as other independent clients on a contract basis"
+#~ msgstr ""
+#~ "Wir stellen Warp-, Impuls- und Sprungtriebwerke für die menschliche Navy "
+#~ "sowie für andere unabhängige Kunden auf Vertragsbasis her."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after the late 19th century astronaut as well as the "
+#~ "fictionlized stations that followed. The station initially constructed "
+#~ "entire space worthy vessels. In time, it transitioned into specializeing "
+#~ "in propulsion systems."
+#~ msgstr ""
+#~ "Die Station ist nach dem Astronauten aus dem späten 20. Jahrhundert "
+#~ "benannt, ebenso wie nach den fiktiven Stationen, die ihm folgten. Die "
+#~ "Station baute zunächst ganze weltraumtaugliche Schiffe. Mit der Zeit "
+#~ "spezialisierte sie sich auf Antriebssysteme."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Training and Coordination"
+#~ msgstr "Ausbildung und Koordinierung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We train naval cadets in routine and specialized functions aboard space "
+#~ "vessels and coordinate naval activity throughout the sector"
+#~ msgstr ""
+#~ "Wir bilden Marinekadetten für Routine- und Spezialaufgaben an Bord von "
+#~ "Raumschiffen aus und koordinieren die Aktivitäten der Marine im gesamten "
+#~ "Sektor."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The original station builders were fans of the late 20th century "
+#~ "scientist and author Isaac Asimov. The station was initially named "
+#~ "Foundation, but was later changed simply to Asimov. It started off as a "
+#~ "stellar observatory, then became a supply stop and as it has grown has "
+#~ "become an educational and coordination hub for the region"
+#~ msgstr ""
+#~ "Die ursprünglichen Erbauer der Station waren Fans des Wissenschaftlers "
+#~ "und Schriftstellers Isaac Asimov aus dem späten 20. Jahrhundert. Die "
+#~ "Station hieß zunächst Foundation, wurde aber später einfach in Asimov "
+#~ "umbenannt. Sie begann als Weltraum-Observatorium, wurde dann zu einer "
+#~ "Versorgungsstation und entwickelte sich zu einem Bildungs- und "
+#~ "Koordinationszentrum für die Region."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We provide a range of communication equipment and software for use aboard "
+#~ "ships"
+#~ msgstr ""
+#~ "Wir bieten eine Reihe von Kommunikationsgeräten und Software für den "
+#~ "Einsatz an Bord von Schiffen."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Reginald Barclay who established the first "
+#~ "transgalactic com link through the creative application of a quantum "
+#~ "singularity. Station personnel often refer to the station as the Broccoli "
+#~ "station"
+#~ msgstr ""
+#~ "Die Station ist nach Reginald Barclay benannt, der durch die kreative "
+#~ "Anwendung einer Quantensingularität die erste transgalaktische "
+#~ "Kommunikationsverbindung herstellte. Das Stationspersonal bezeichnet die "
+#~ "Station oft als Broccoli-Station."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Medical research"
+#~ msgstr "Medizinische Forschung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and treat exotic medical conditions"
+#~ msgstr "Wir erforschen und behandeln exotische Krankheiten."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after the United States national medical research "
+#~ "center based in Bethesda, Maryland on earth which was established in the "
+#~ "mid 20th century"
+#~ msgstr ""
+#~ "Die Station ist nach dem nationalen medizinischen Forschungszentrum der "
+#~ "Vereinigten Staaten in Bethesda, Maryland, benannt, das Mitte des 20. "
+#~ "Jahrhunderts gegründet wurde."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Warp drive components"
+#~ msgstr "Warpantriebs-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide warp drive engines and components"
+#~ msgstr "Wir bieten Warpantriebe und Komponenten."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station is named after Chris Van Den Broeck who did some initial "
+#~ "research into the possibility of warp drive in the late 20th century on "
+#~ "Earth"
+#~ msgstr ""
+#~ "Diese Station ist nach Chris Van Den Broeck benannt, der Ende des 20. "
+#~ "Jahrhunderts auf der Erde erste Forschungen über die Möglichkeit des Warp-"
+#~ "Antriebs anstellte."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Mining station"
+#~ msgstr "Bergbaustation"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Robotic research"
+#~ msgstr "Robotik-Forschung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and provide robotic systems and components"
+#~ msgstr "Wir erforschen und bieten Robotiksysteme und -Komponenten."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station is named after Dr. Susan Calvin who pioneered robotic "
+#~ "behavioral research and programming"
+#~ msgstr ""
+#~ "Diese Station ist nach Dr. Susan Calvin benannt, die Pionierarbeit in der "
+#~ "Verhaltensforschung und Programmierung von Robotern geleistet hat."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Advanced Material components"
+#~ msgstr "Fortschrittliche Material-komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We fabricate several different kinds of materials critical to various "
+#~ "space industries like ship building, station construction and mineral "
+#~ "extraction"
+#~ msgstr ""
+#~ "Wir stellen verschiedene Arten von Materialien her, die für verschiedene "
+#~ "Raumfahrtindustrien wie Schiffsbau, Stationsbau und Mineralienabbau "
+#~ "wichtig sind."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We named our station after Dr. Cavor, the physicist that invented a "
+#~ "barrier material for gravity waves - Cavorite"
+#~ msgstr ""
+#~ "Wir haben unsere Station nach Dr. Cavor benannt, dem Physiker, der ein "
+#~ "Barrierematerial für Gravitationswellen erfunden hat - Cavorit."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Trading station"
+#~ msgstr "Handelsstation"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "Only the largest market and trading location in twenty sectors. You can "
+#~ "find your heart's desire here"
+#~ msgstr ""
+#~ "Der größte Markt- und Handelsplatz in zwanzig Sektoren. Hier finden Sie "
+#~ "alles, was Ihr Herz begehrt."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Modeled after the early 21st century bazaar on Earth in Bangkok, "
+#~ "Thailand. Designed and built with trade and commerce in mind"
+#~ msgstr ""
+#~ "Gestaltet nach dem Vorbild des Basars auf der Erde im frühen 21. "
+#~ "Jahrhundert in Bangkok, Thailand. Entworfen und gebaut mit Blick auf "
+#~ "Handel und Gewerbe."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Shielded circuitry fabrication"
+#~ msgstr "Herstellung von abgeschirmten Schaltkreisen"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We make a large variety of circuits for numerous ship systems shielded "
+#~ "from sensor detection and external control interference"
+#~ msgstr ""
+#~ "Wir stellen eine Vielzahl von Schaltkreisen für zahlreiche Schiffssysteme "
+#~ "her, die vor Sensorerfassung und externen Steuerungsstörungen geschützt "
+#~ "sind."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Our station is named after the law which quantifies the amount of force "
+#~ "with which stationary electrically charged particals repel or attact each "
+#~ "other - a fundamental principle in the design of our circuits"
+#~ msgstr ""
+#~ "Unsere Station ist nach dem Gesetz benannt, das die Kraft angibt, mit der "
+#~ "sich ortsfeste, elektrisch geladene Teilchen abstoßen oder anziehen - ein "
+#~ "grundlegendes Prinzip bei der Entwicklung unserer Schaltungen."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Impulse engine components"
+#~ msgstr "Impulsantrieb-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We supply high quality impulse engines and parts for use aboard ships"
+#~ msgstr ""
+#~ "Wir bieten qualitativ hochwertige Impulsantriebe und Teile für den "
+#~ "Einsatz an Bord von Schiffen."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station was named after the fictional engineer, Cyrus Smith created "
+#~ "by 19th century author Jules Verne"
+#~ msgstr ""
+#~ "Dieser Station wurde nach dem fiktiven Ingenieur Cyrus Smith benannt, "
+#~ "geschaffen vom Autor Jules Verne im 19. Jahrhundert."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Android components"
+#~ msgstr "Androidenkomponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Supplier of android components, programming and service"
+#~ msgstr "Anbieter von Androiden-Komponenten, Programmierung und Service."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Named for Richard Deckard who inspired many of the sophisticated safety "
+#~ "security algorithms now required for all androids"
+#~ msgstr ""
+#~ "Benannt nach Richard Deckard, der viele der hochentwickelten "
+#~ "Sicherheitsalgorithmen inspiriert hat, die heute für alle Androiden "
+#~ "erforderlich sind."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Repulsor and Tractor Beam Components"
+#~ msgstr "Repulsor- und Traktorstrahl-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We can meet all your pushing and pulling needs with specialized equipment "
+#~ "custom made"
+#~ msgstr ""
+#~ "Wir können alle Ihre Bedürfnisse in Bezug auf das Schieben und Ziehen mit "
+#~ "spezialisierter, maßgeschneiderter Ausrüstung erfüllen."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station name comes from a short story by the 20th century author "
+#~ "Clifford D. Simak as well as from the 19th century developer John Deere "
+#~ "who inspired a company that makes the Earth bound equivalents of our "
+#~ "products"
+#~ msgstr ""
+#~ "Der Name der Station stammt aus einer Kurzgeschichte des Autors Clifford "
+#~ "D. Simak aus dem 20. Jahrhundert sowie von dem Entwickler John Deere aus "
+#~ "dem 19. Jahrhundert, der ein Unternehmen inspirierte, das die "
+#~ "entsprechenden Produkte auf der Erde herstellt."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We provide transporters used aboard ships as well as the components for "
+#~ "repair and maintenance"
+#~ msgstr ""
+#~ "Wir liefern Transporter, die an Bord von Schiffen eingesetzt werden, "
+#~ "sowie die Komponenten für deren Reparatur und Wartung."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after the early 22nd century inventor of the "
+#~ "transporter, Dr. Emory Erickson. This station is proud to have received "
+#~ "the endorsement of Admiral Leonard McCoy"
+#~ msgstr ""
+#~ "Die Station ist nach dem Erfinder des Transporters, aus dem frühen 22. "
+#~ "Jahrhundert, Dr. Emory Erickson, benannt. Diese Station ist stolz darauf, "
+#~ "die Unterstützung von Admiral Leonard McCoy erhalten zu haben."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Autodoc components"
+#~ msgstr "Autodoc-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide components for automated medical machinery"
+#~ msgstr "Wir bieten Komponenten für automatisierte medizinische Geräte."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is the evolution of the company that started automated "
+#~ "pharmaceutical dispensing in the early 21st century on Earth in Finland"
+#~ msgstr ""
+#~ "Die Station ist die Weiterentwicklung des Unternehmens, das Anfang des "
+#~ "21. Jahrhunderts mit der automatisierten Arzneimittelabgabe auf der Erde "
+#~ "in Finnland begann."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Nanotechnology research"
+#~ msgstr "Nanotechnologie-Forschung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide nanites and software for a variety of ship-board systems"
+#~ msgstr ""
+#~ "Wir bieten Naniten und Software für eine Vielzahl von Schiffssystemen."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station's name recognizes one of the first scientific researchers "
+#~ "into nanotechnology, physicist Richard Feynman"
+#~ msgstr ""
+#~ "Der Name dieser Station erinnert an einen der ersten wissenschaftlichen "
+#~ "Forscher auf dem Gebiet der Nanotechnologie, den Physiker Richard Feynman."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Mining"
+#~ msgstr "Bergbau"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We mine nearby asteroids for precious minerals and process them for sale"
+#~ msgstr ""
+#~ "Wir bauen nahe gelegene Asteroiden für wertvolle Mineralien ab und "
+#~ "verarbeiten sie für den Verkauf."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station's name is inspired by a large gold mine on Earth in "
+#~ "Indonesia. The station builders hoped to have a similar amount of "
+#~ "minerals found amongst these asteroids"
+#~ msgstr ""
+#~ "Der Name der Station ist inspiriert von einer großen Goldmine auf der "
+#~ "Erde in Indonesien. Die Erbauer der Station hofften, eine ähnliche Menge "
+#~ "an Mineralien in diesen Asteroiden zu finden."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Observatory and stellar mapping"
+#~ msgstr "Observatorium und stellare Kartierung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We study the cosmos and map stellar phenomena. We also track moving "
+#~ "asteroids. Look out! Just kidding"
+#~ msgstr ""
+#~ "Wir untersuchen den Kosmos und kartieren stellare Phänomene. Wir "
+#~ "verfolgen auch die Bewegung von Asteroiden... Passt auf! \n"
+#~ "...\n"
+#~ "Nur ein Scherz ;)."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Sensor components"
+#~ msgstr "Sensor-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and manufacture sensor components and systems"
+#~ msgstr "Wir erforschen und fertigen Sensor-Komponenten und -Systeme"
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Tony Heyes the inventor of some of the "
+#~ "earliest electromagnetic sensors in the mid 20th century on Earth in the "
+#~ "United Kingdom to assist blind human mobility"
+#~ msgstr ""
+#~ "Die Station ist nach Tony Heyes benannt, dem Erfinder einiger der "
+#~ "frühesten elektromagnetischen Sensoren, in der Mitte des 20. Jahrhunderts "
+#~ "auf der Erde im Vereinigten Königreich, um die Mobilität von Blinden zu "
+#~ "unterstützen."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Nanite supplier"
+#~ msgstr "Anbieter von Naniten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide nanites for various organic and non-organic systems"
+#~ msgstr ""
+#~ "Wir bieten Naniten für verschiedene organische und nicht-organische "
+#~ "Systeme"
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station is named after the nanotechnologist Hossam Haick from the "
+#~ "early 21st century on Earth in Israel"
+#~ msgstr ""
+#~ "Diese Station ist nach dem Nanotechnologen Hossam Haick aus dem frühen "
+#~ "21. Jahrhundert auf der Erde in Israel benannt."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We mine nearby asteroids for precious minerals"
+#~ msgstr "Wir bauen nahe gelegene Asteroiden für wertvolle Mineralien ab."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Xenopsychology training"
+#~ msgstr "Xenopsychologie-Ausbildung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We provide classes and simulation to help train diverse species in how to "
+#~ "relate to each other"
+#~ msgstr ""
+#~ "Wir bieten Kurse und Simulationen an, um den Umgang mit verschiedenen "
+#~ "Spezies zu schulen."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "A continuation of the research initially conducted by Dr. Gennady Komov "
+#~ "in the early 22nd century on Venus, supported by the application of these "
+#~ "principles"
+#~ msgstr ""
+#~ "Eine Fortsetzung der ursprünglich von Dr. Gennady Komov zu Beginn des 22. "
+#~ "Jahrhunderts auf der Venus durchgeführten Forschung, unterstützt durch "
+#~ "die Anwendung dieser Grundlagen."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We build and repair and provide components and upgrades for automated "
+#~ "facilities designed for ships where a doctor cannot be a crew member "
+#~ "(commonly called autodocs)"
+#~ msgstr ""
+#~ "Wir bauen, reparieren und liefern Komponenten und Upgrades für "
+#~ "automatisierte Einrichtungen, die für Schiffe entwickelt wurden, auf "
+#~ "denen kein medizinisches Fachpersonal verfügbar ist. Solche Geräte werden "
+#~ "üblicherweise auch  \"Autodocs\" genannt."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Dr. Lipkin who pioneered some of the research "
+#~ "and application around robot assisted surgery in the area of partial "
+#~ "nephrectomy for renal tumors in the early 21st century on Earth"
+#~ msgstr ""
+#~ "Die Station ist nach Dr. Lipkin benannt, der Anfang des 21. Jahrhunderts "
+#~ "auf der Erde Pionierarbeit bei der Erforschung und Anwendung der "
+#~ "robotergestützten Chirurgie im Bereich der partiellen Nephrektomie bei "
+#~ "Nierentumoren geleistet hat."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Zero gravity sports and entertainment"
+#~ msgstr "Sport und Unterhaltung in der Schwerelosigkeit"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Come take in a game or two or perhaps see a show"
+#~ msgstr "Besuchen Sie ein oder zwei Spiele oder vielleicht eine Show."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Named after Madison Square Gardens from 21st century Earth, this station "
+#~ "was designed to serve similar purposes in space - a venue for sports and "
+#~ "entertainment"
+#~ msgstr ""
+#~ "Benannt nach den Madison Square Gardens auf der Erde des 21. "
+#~ "Jahrhunderts, wurde diese Station für ähnliche Zwecke im Weltraum "
+#~ "konzipiert - ein Ort für Sport und Unterhaltung."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Energy beam components"
+#~ msgstr "Laserstrahl-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and manufacture energy beam components and systems"
+#~ msgstr "Wir erforschen und fertigen Komponenten und Systeme für Laser."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Theodore Maiman who researched and built the "
+#~ "first laser in the mid 20th centuryon Earth"
+#~ msgstr ""
+#~ "Diese Station ist nach Theodore Maiman benannt, der im 20. Jahrhundert "
+#~ "auf der Erde die ersten Laser gebaut und erforscht hat."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Energy Beam Components"
+#~ msgstr "Laserstrahl-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We manufacture energy beam components"
+#~ msgstr "Wir erforschen und fertigen Komponenten für Laser."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Station named after Guglielmo Marconi an Italian inventor from early 20th "
+#~ "century Earth who, along with Nicolo Tesla, claimed to have invented a "
+#~ "death ray or particle beam weapon"
+#~ msgstr ""
+#~ "Station benannt nach Guglielmo Marconi, einem italienischen Erfinder aus "
+#~ "dem frühen 20. Jahrhundert, der zusammen mit Nicola Tesla behauptete, "
+#~ "einen Todesstrahl oder eine Teilchenstrahlwaffe erfunden zu haben."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Medical Research"
+#~ msgstr "Medizinische Forschung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research exotic diseases and other human medical conditions"
+#~ msgstr ""
+#~ "Wir erforschen exotische Krankheiten und andere medizinische Probleme des "
+#~ "Menschen."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We continue the medical work started by William Worrall Mayo in the late "
+#~ "19th century on Earth"
+#~ msgstr ""
+#~ "Wir setzen die von William Worrall Mayo Ende des 19. Jahrhunderts "
+#~ "begonnene medizinische Arbeit auf der Erde fort."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Exobiology research"
+#~ msgstr "Exobiologische Forschung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We study recently discovered life forms not native to Earth"
+#~ msgstr ""
+#~ "Wir untersuchen kürzlich entdeckte Lebensformen, die nicht auf der Erde "
+#~ "heimisch sind."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station was named after one the early exobiologists from mid 20th "
+#~ "century Earth, Dr. Stanley Miller"
+#~ msgstr ""
+#~ "DIese Station ist nach einem der ersten Exobiologen aus der Mitte des 20. "
+#~ "Jahrhunderts auf der Erde benannt: Dr. Stanley Miller"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Come to Muddvile for all your trade and commerce needs and desires"
+#~ msgstr ""
+#~ "Kommen Sie zu Muddvile für alle Ihre Bedürfnisse und Wünsche im Bereich "
+#~ "Handel und Gewerbe."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Upon retirement, Harry Mudd started this commercial venture using his "
+#~ "leftover inventory and extensive connections obtained while he traveled "
+#~ "the stars as a salesman"
+#~ msgstr ""
+#~ "Nach seinem Eintritt in den Ruhestand gründete Harry Mudd dieses "
+#~ "kommerzielle Unternehmen, indem er sein Restinventar und seine "
+#~ "weitreichenden Kontakte nutzte, die er während seiner Zeit als reisender "
+#~ "Händler, durch die Sterne, erworben hatte."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We research and manufacture android components and systems. Our design "
+#~ "our androids to maximize their likeness to humans"
+#~ msgstr ""
+#~ "Wir konstruieren Androidenkomponenten und -Systeme und forschen an ihnen. "
+#~ "Wir versuchen, unserer Androiden so menschenähnlich wie möglich zu "
+#~ "gestalten"
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after the ground breaking model of android produced "
+#~ "by the Tyrell corporation"
+#~ msgstr ""
+#~ "Diese Station ist nach dem bahnbrechenden Androidenmodell der Tyrell "
+#~ "Corporation benannt"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We research and fabricate high quality transporters and transporter "
+#~ "components for use aboard ships"
+#~ msgstr ""
+#~ "Wir erforschen und fertigen hochwertige Transporter und Transporter-"
+#~ "Komponenten für den Einsatz an Bord von Schiffen."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Miles O'Brien started this business after his experience as a transporter "
+#~ "chief"
+#~ msgstr ""
+#~ "Miles O'Brien gründete dieses Unternehmen nach seinen Erfahrungen als "
+#~ "Transporterchief."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Optical components"
+#~ msgstr "Optik-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We fabricate optical lenses and related equipment as well as fiber optic "
+#~ "cabling and components"
+#~ msgstr ""
+#~ "Wir stellen optische Linsen und zugehörige Ausrüstung sowie "
+#~ "Glasfaserkabel und Komponenten her."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station grew out of the Olympus company based on earth in the early "
+#~ "21st century. It merged with Infinera, then bought several software "
+#~ "comapnies before branching out into space based industry"
+#~ msgstr ""
+#~ "Diese Station ging Anfang des 21. Jahrhunderts aus dem auf der Erde "
+#~ "ansässigen Unternehmen Olympus hervor. Es fusionierte mit Infinera und "
+#~ "kaufte dann mehrere Softwareunternehmen, bevor es sich in der "
+#~ "Raumfahrtindustrie etablierte."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Diplomatic training"
+#~ msgstr "Diplomatische Ausbildung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "The premeire academy for leadership and diplomacy training in the region"
+#~ msgstr ""
+#~ "Die führende Akademie für die Ausbildung von Führungskräften sowie "
+#~ "Diplomatie-Ausbildung in der Region."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Established by the royal family so critical during the political upheaval "
+#~ "era"
+#~ msgstr ""
+#~ "Gründung von der königlichen Familie, die in der Zeit des politischen "
+#~ "Umbruchs so wichtig war."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Mining and trade"
+#~ msgstr "Bergbau und Handel"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Mining and gambling"
+#~ msgstr "Bergbau und Glücksspiel"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Load lifters and components"
+#~ msgstr "Lastenheber und Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide load lifters and components for various ship systems"
+#~ msgstr ""
+#~ "Wir bieten Lastenheber und Komponenten für verschiedene Schiffssysteme."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Lars Owen. After his extensive eperience with "
+#~ "tempermental machinery on Tatooine, he used his subject matter expertise "
+#~ "to expand into building and manufacturing the equipment adding "
+#~ "innovations based on his years of experience using load lifters and their "
+#~ "relative cousins, moisture vaporators"
+#~ msgstr ""
+#~ "Diese Station ist nach Lars Owen benannt. Nach seinen umfangreichen "
+#~ "Erfahrungen mit großen Maschinen auf Tatooine nutzte er sein Fachwissen, "
+#~ "um in den Bau und die Herstellung dieser Geräte einzusteigen und fügte "
+#~ "Innovationen hinzu, die auf seinen jahrelangen Erfahrungen mit "
+#~ "Lastenhebern und Feuchtigkeitsverdampfern basierten."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Optic components"
+#~ msgstr "Optik-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide optic components for various ship systems"
+#~ msgstr "Wir bieten optische Komponenten für verschiedene Schiffssysteme."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station is an outgrowth of the Panduit corporation started in the "
+#~ "mid 20th century on Earth in the United States"
+#~ msgstr ""
+#~ "Diese Station ist aus dem Unternehmen Panduit hervorgegangen, das Mitte "
+#~ "des 20. Jahrhunderts auf der Erde in den Vereinigten Staaten gegründet "
+#~ "wurde."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide load lifters and components"
+#~ msgstr "Wir bieten Lastenheber und Komponenten."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Ellen Ripley who made creative and effective "
+#~ "use of one of our load lifters when defending her ship"
+#~ msgstr ""
+#~ "Die Station ist nach Ellen Ripley benannt, die bei der Verteidigung ihres "
+#~ "Schiffes einen unserer Lastenheber kreativ und effektiv eingesetzt hat."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Shield components and research"
+#~ msgstr "Schutzschildkomponenten und Forschung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and fabricate components for ship shield systems"
+#~ msgstr "Wir erforschen und fertigen Komponenten für Schutzschildsysteme."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station was named after the national research institution Rutherford "
+#~ "Appleton Laboratory in the United Kingdom which conducted some "
+#~ "preliminary research into the feasability of generating an energy shield "
+#~ "in the late 20th century"
+#~ msgstr ""
+#~ "Diese Station wurde nach der nationalen Forschungseinrichtung Rutherford "
+#~ "Appleton Laboratory im Vereinigten Königreich benannt, die Ende des 20. "
+#~ "Jahrhunderts erste Forschungen über die Machbarkeit eines Energieschilds "
+#~ "durchführte."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Observatory"
+#~ msgstr "Observatorium"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and manufacture impulse engine components and systems"
+#~ msgstr ""
+#~ "Wir erforschen und fertigen Komponenten und Systeme für Impulsantriebe."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Roger Shawyer who built the first prototype "
+#~ "impulse engine in the early 21st century"
+#~ msgstr ""
+#~ "Die Station ist nach Roger Shawyer benannt, der Anfang des 21. "
+#~ "Jahrhunderts den ersten Prototyp eines Impulstriebwerks baute."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Repulsor and tractor beam components"
+#~ msgstr "Repulsor- und Traktorstrahl-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We make ship systems designed to push or pull other objects around in "
+#~ "space"
+#~ msgstr ""
+#~ "Wir stellen Schiffssysteme her, die andere Objekte im Weltraum schieben "
+#~ "oder ziehen können."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Our station is named Shree after one of many tugboat manufacturers in the "
+#~ "early 21st century on Earth in India. Tugboats serve a similar purpose "
+#~ "for ocean-going vessels on earth as tractor and repulsor beams serve for "
+#~ "space-going vessels today"
+#~ msgstr ""
+#~ "Unsere Station ist nach einem der vielen Schlepperhersteller des frühen "
+#~ "21. Jahrhunderts auf der Erde in Indien benannt: Shree. Schlepper "
+#~ "erfüllen für Hochseeschiffe auf der Erde einen ähnlichen Zweck wie heute "
+#~ "Traktor- und Repulsorstrahlen für Raumschiffe."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We create androids and android components"
+#~ msgstr "Wir erstellen Androiden und Androiden-Komponenten"
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Dr. Noonian Soong, the famous android "
+#~ "researcher and builder"
+#~ msgstr ""
+#~ "Die Station ist nach Dr. Noonian Soong benannt, dem berühmten "
+#~ "Androidenforscher und -bauer."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Logistics coordination"
+#~ msgstr "Logistische Koordination"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We support the stations and ships in the area with planning and "
+#~ "communication services"
+#~ msgstr ""
+#~ "Wir unterstützen die Stationen und Schiffe in diesem Gebiet mit Planungs- "
+#~ "und Kommunikationsdienstleistungen."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We recognize the influence of Starfleet Captain James Tiberius Kirk in "
+#~ "the 23rd century in our station name"
+#~ msgstr ""
+#~ "Wir erkennen in unserem Stationsnamen den Einfluss von "
+#~ "Sternenflottenkapitän James Tiberius Kirk im 23. Jahrhundert an."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Advanced material components"
+#~ msgstr "Fortschrittliche Material-komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We create multiple types of advanced material components. Our most "
+#~ "popular products are our filaments"
+#~ msgstr ""
+#~ "Wir stellen verschiedene Arten von Komponenten aus hochentwickelten "
+#~ "Materialien her. Unsere beliebtesten Produkte sind unsere Filamente."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We learned several of our critical industrial processes from the Tokra "
+#~ "race, so we honor our fortune by naming the station after them"
+#~ msgstr ""
+#~ "Wir haben einige unserer kritischen industriellen Prozesse von einer "
+#~ "Spezies namens Tokra gelernt, daher ehren wir sie, indem wir die Station "
+#~ "nach ihnen benennen."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Shield and armor components and research"
+#~ msgstr "Schild- und Panzerungskomponenten und Forschung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We research and make general and specialized components for ship shield "
+#~ "and ship armor systems"
+#~ msgstr ""
+#~ "Wir erforschen und produzieren allgemeine und spezielle Komponenten für "
+#~ "Schutzschilde und Schiffspanzerungen."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station was named after one of the earliest researchers in shield "
+#~ "technology, Alexander Toohie back when it was considered impractical to "
+#~ "construct shields due to the physics involved."
+#~ msgstr ""
+#~ "Diese Station wurde nach einem der ersten Forscher auf dem Gebiet der "
+#~ "Schildtechnologie, Alexander Toohie, benannt. Damals galt die "
+#~ "Konstruktion von Schilden noch als physikalisch unpraktisch."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Ship building and maintenance facility"
+#~ msgstr "Schiffsbau- und Wartungseinrichtung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We work on all aspects of naval ship building and maintenance. Many of "
+#~ "the naval models are researched, designed and built right here on this "
+#~ "station. Our design goals seek to make the space faring experience as "
+#~ "simple as possible given the tremendous capabilities of the modern naval "
+#~ "vessel"
+#~ msgstr ""
+#~ "Wir befassen uns mit allen Aspekten des Baus und der Wartung von "
+#~ "Navyschiffen. Viele der Modelle werden direkt hier auf dieser Station "
+#~ "erforscht, entworfen und gebaut. Unser Ziel ist es, die Raumfahrt "
+#~ "angesichts der enormen Fähigkeiten moderner Schiffe so einfach wie "
+#~ "möglich zu gestalten."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Shielded Circuitry Fabrication"
+#~ msgstr "Herstellung von abgeschirmten Schaltkreisen"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We specialize in circuitry shielded from external hacking suitable for "
+#~ "ship systems"
+#~ msgstr ""
+#~ "Wir sind auf Schaltkreise spezialisiert, die gegen externe Hackerangriffe "
+#~ "abgeschirmt und für Schiffssysteme geeignet sind."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We started as an expansion from the lunar based chip manufacturer of "
+#~ "Earth legacy Intel electronic chips"
+#~ msgstr ""
+#~ "Wir begannen als Erweiterung des auf dem Mond ansässigen Chipherstellers, "
+#~ "der das Vermächtnis des ehemals auf der Erde ansässigen Chipherstellers "
+#~ "Intel weiterführte."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We research and construct components for the most powerful and accurate "
+#~ "sensors used aboard ships along with the software to make them easy to use"
+#~ msgstr ""
+#~ "Wir erforschen und konstruieren Komponenten für die leistungsstärksten "
+#~ "und genauesten Sensoren, die an Bord von Schiffen eingesetzt werden, "
+#~ "sowie die Software, die ihre Verwendung erleichtert."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The Veloquan company has its roots in the manufacturing of LIDAR sensors "
+#~ "in the early 21st century on Earth in the United States for autonomous "
+#~ "ground-based vehicles. They expanded research and manufacturing "
+#~ "operations to include various sensors for space vehicles. Veloquan was "
+#~ "the result of numerous mergers and acquisitions of several companies "
+#~ "including Velodyne and Quanergy"
+#~ msgstr ""
+#~ "Das Unternehmen Veloquan hat seine Wurzeln in der Herstellung von LIDAR-"
+#~ "Sensoren zu Beginn des 21. Jahrhunderts auf der Erde in den Vereinigten "
+#~ "Staaten für autonome bodengestützte Fahrzeuge. Das Unternehmen erweiterte "
+#~ "seine Forschungs- und Produktionsaktivitäten um verschiedene Sensoren für "
+#~ "Raumfahrzeuge. Veloquan ist das Ergebnis zahlreicher Fusionen und "
+#~ "Übernahmen mehrerer Unternehmen, darunter Velodyne und Quanergy."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Warp engine components"
+#~ msgstr "Warpantrieb-Komponenten"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We specialize in the esoteric components necessary to make warp drives "
+#~ "function properly"
+#~ msgstr ""
+#~ "Wir sind auf die esoterischen Komponenten spezialisiert, die für das "
+#~ "ordnungsgemäße Funktionieren von Warp-Antrieben erforderlich sind."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Zefram Cochrane constructed the first warp drive in human history. We "
+#~ "named our station after him because of the specialized warp systems work "
+#~ "we do"
+#~ msgstr ""
+#~ "Zefram Cochrane konstruierte den ersten Warpantrieb in der Geschichte der "
+#~ "Menschheit. Wir haben unsere Station nach ihm benannt, weil wir uns auf "
+#~ "Warp-Systeme spezialisiert haben."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Commerce and gambling"
+#~ msgstr "Handel und Glücksspiel"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Come play some games and shop. House take does not exceed 4 percent"
+#~ msgstr ""
+#~ "Besuchen Sie uns, um zu spielen und einzukaufen. Das Haus nimmt nicht "
+#~ "mehr als 4 Prozent."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Casino and Gambling"
+#~ msgstr "Kasino und Glücksspiel"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Gambling and resupply"
+#~ msgstr "Glücksspiel und Nachschub"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Relax and meet some interesting players"
+#~ msgstr "Entspannen Sie sich und treffen Sie einige interessante Spieler."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Commerce and recreation"
+#~ msgstr "Handel und Erholung"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Xenopsychology research"
+#~ msgstr "Xenopsychologische Forschung"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Resupply"
+#~ msgstr "Nachschub"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Textiles and fashion"
+#~ msgstr "Textilien und Mode"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Stress Psychology Research"
+#~ msgstr "Stresspsychologische Forschung"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Low gravity research"
+#~ msgstr "Niedrig-Schwerkraft Forschung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Get your energy here! Grab a drink before you go!"
+#~ msgstr ""
+#~ "Holen Sie sich hier Ihre Energie! Und genehmigen Sie sich einen Drink "
+#~ "bevor Sie gehen!"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Research Lab and Observatory"
+#~ msgstr "Forschungslabor und Observatorium"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Biotech research"
+#~ msgstr "Biotechnologie-Forschung"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Routine maintenance and entertainment"
+#~ msgstr "Routinemäßige Wartung und Unterhaltung"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "Stop by for repairs. Take in one of our juggling shows featuring the four-"
+#~ "armed Skandars"
+#~ msgstr ""
+#~ "Kommen Sie für Reparaturen vorbei. Sehen Sie sich eine unserer "
+#~ "Jongliershows mit den vierarmigen Skandaren an."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The nomadic Skandars have set up at this station to practice their "
+#~ "entertainment and maintenance skills as well as build a community where "
+#~ "Skandars can relax"
+#~ msgstr ""
+#~ "Die nomadischen Skandare haben sich in dieser Station niedergelassen, um "
+#~ "ihre Unterhaltungs- und Wartungsfähigkeiten zu trainieren und eine "
+#~ "Gemeinschaft aufzubauen, in der sich die Skandare entspannen können."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Automated weapons systems"
+#~ msgstr "Automatisierte Waffensysteme"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We research and create automated weapons systems to improve ship combat "
+#~ "capability"
+#~ msgstr ""
+#~ "Wir erforschen und entwickeln automatisierte Waffensysteme zur "
+#~ "Verbesserung der Kampfkraft von Schiffen."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Biotechnology research"
+#~ msgstr "Biotechnologie-Forschung"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Traded"
+#~ msgstr ""
+#~ "\n"
+#~ "Getauscht"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "   %14s: %2i, %3i\n"
+#~ msgstr "   %14s: %2i, %3i\n"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ " Beyond that, I have no knowledge of specific stations.\n"
+#~ "\n"
+#~ "Check back later, someone else may have better knowledge"
+#~ msgstr ""
+#~ "Darüber hinaus weiß ich leider nichts über bestimmte Stationen\n"
+#~ "\n"
+#~ "Kommen Sie doch später wieder, vielleicht kann Ihnen dann jemand anderes "
+#~ "mit Details weiterhelfen."
+
+#~ msgctxt "trade-comms"
+#~ msgid " and will trade it for medicine"
+#~ msgstr "und tauscht gegen Medikamente (medicine)"
+
+#~ msgctxt "trade-comms"
+#~ msgid " and will trade it for food"
+#~ msgstr "und tauscht gegen Lebensmittel (food)"
+
+#~ msgctxt "trade-comms"
+#~ msgid " and will trade it for luxury"
+#~ msgstr "und tauscht gegen Luxusgüter (luxury)"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Insufficient inventory on freighter for trade"
+#~ msgstr "Auf dem Frachter ist nichts davon geladen"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Traded"
+#~ msgstr "Getauscht"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Insufficient luxury to trade"
+#~ msgstr "Nicht genügend Luxusgüter (luxury) für einen Handel"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Insufficient inventory on freighter"
+#~ msgstr "Auf dem Frachter ist nichts davon geladen"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Purchased"
+#~ msgstr "Gekauft"
+
+#~ msgctxt "trade-comms"
+#~ msgid "\n"
+#~ msgstr "\n"
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid "Stations: %i\t survived: %i\t destroyed: %i"
+#~ msgstr "Stationen: %i\t überlebt: %i\t zerstört: %i"
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "\n"
+#~ "Friendly Stations: %i\t survived: %i\t destroyed: %i"
+#~ msgstr ""
+#~ "\n"
+#~ "Befreundete Stationen: %i\t überlebt: %i\t zerstört: %i"
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "\n"
+#~ "Neutral Stations: %i\t survived: %i\t destroyed: %i"
+#~ msgstr ""
+#~ "\n"
+#~ "Neutrale Stationen: %i\t überlebt: %i\t zerstört: %i"
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Enemy Stations: %i\t survived: %i\t destroyed: %i"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Feindliche Stationen: %i\t überlebt: %i\t zerstört: %i"
+
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "\n"
+#~ "Post Target Enemy Base Survival Rank: "
+#~ msgstr ""
+#~ "\n"
+#~ "Rang nach Überleben der feindlichen Basis: %s"
+
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "\n"
+#~ "Post Home Base Destruction Rank: "
+#~ msgstr ""
+#~ "\n"
+#~ "Rang nach der Zerstörung der Heimatbasis: %s"

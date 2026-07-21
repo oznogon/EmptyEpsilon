@@ -1,0 +1,14 @@
+#: scripts/shiptemplates/ktlitan/battleships.lua:9
+msgctxt "ship"
+msgid "Ktlitan Queen"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan/battleships.lua:10
+msgctxt "class"
+msgid "Battleship"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan/battleships.lua:10
+msgctxt "subclass"
+msgid "Command"
+msgstr ""

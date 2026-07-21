@@ -1,160 +1,178 @@
-#: scripts/shiptemplates/starFighters.lua:13
+#: scripts/shiptemplates/starfighters.lua:19
 msgctxt "ship"
 msgid "MT52 Hornet"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:13
-#: scripts/shiptemplates/starFighters.lua:68
-#: scripts/shiptemplates/starFighters.lua:124
+#: scripts/shiptemplates/starfighters.lua:20
+#: scripts/shiptemplates/starfighters.lua:93
+#: scripts/shiptemplates/starfighters.lua:214
+#: scripts/shiptemplates/starfighters.lua:330
+#: scripts/shiptemplates/starfighters.lua:347
+#: scripts/shiptemplates/starfighters.lua:368
+#: scripts/shiptemplates/starfighters.lua:390
 msgctxt "class"
 msgid "Starfighter"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:13
+#: scripts/shiptemplates/starfighters.lua:20
+#: scripts/shiptemplates/starfighters.lua:330
+#: scripts/shiptemplates/starfighters.lua:347
 msgctxt "subclass"
 msgid "Interceptor"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:15
+#: scripts/shiptemplates/starfighters.lua:25
 msgid ""
-"The MT52 Hornet is a basic interceptor found in many corners of the galaxy. "
-"It's easy to find spare parts for MT52s, not only because they are produced "
-"in large numbers, but also because they suffer high losses in combat."
+"The MT52 Hornet is a basic interceptor-class starfighter found in many "
+"corners of the galaxy. It's easy to find spare parts for MT52s, not only "
+"because they're produced in large numbers, but also because they suffer high "
+"losses in combat."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:23
+#: scripts/shiptemplates/starfighters.lua:37
 msgctxt "ship"
 msgid "MU52 Hornet"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:25
+#: scripts/shiptemplates/starfighters.lua:41
 msgid ""
-"The MU52 Hornet is a new, upgraded version of the MT52. All of its systems "
-"are slightly improved over the MT52 model."
+"The MU52 Hornet is an upgraded version of the MT52 interceptor-class "
+"starfighter. All of its systems are slightly improved over the MT52 model."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:31
+#: scripts/shiptemplates/starfighters.lua:52
 msgctxt "playerShip"
 msgid "MP52 Hornet"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:32
+#: scripts/shiptemplates/starfighters.lua:56
 msgid ""
-"The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with "
-"nearly twice the hull strength, nearly three times the shielding, better "
-"acceleration, impulse boosters, and a second laser cannon."
+"The MP52 Hornet is a significantly upgraded version of MU52 Hornet "
+"interceptor-class starfighter, with nearly twice the hull strength, nearly "
+"three times the shielding, better acceleration, impulse boosters, and a "
+"second laser cannon."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:68
+#: scripts/shiptemplates/starfighters.lua:92
 msgctxt "ship"
 msgid "Adder MK5"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:68
+#: scripts/shiptemplates/starfighters.lua:93
+#: scripts/shiptemplates/starfighters.lua:368
+#: scripts/shiptemplates/starfighters.lua:390
 msgctxt "subclass"
 msgid "Gunship"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:70
+#: scripts/shiptemplates/starfighters.lua:98
+#: scripts/shiptemplates/starfighters.lua:120
+#: scripts/shiptemplates/starfighters.lua:138
+#: scripts/shiptemplates/starfighters.lua:154
+#: scripts/shiptemplates/starfighters.lua:169
+#: scripts/shiptemplates/starfighters.lua:184
+#: scripts/shiptemplates/starfighters.lua:200
 msgid ""
-"The Adder line's fifth iteration proved to be a great success among pirates "
-"and law officers alike. It is cheap, fast, and easy to maintain, and it "
-"packs a decent punch."
+"The Adder starfighter hull is a long-running, frequently iterated-upon "
+"design. Adders are commonly classified as gunships, with most models "
+"featuring several beam weapons and at least one weapon tube."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:81
+#: scripts/shiptemplates/starfighters.lua:100
+msgid ""
+"The Adder MK5 has proven to be a great success amongst pirates and system "
+"patrols alike. It's cheap, fast, easy to maintain, and packs a decent punch."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:116
 msgctxt "ship"
 msgid "Adder MK4"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:83
+#: scripts/shiptemplates/starfighters.lua:122
 msgid ""
-"The mark 4 Adder is a rare sight these days due to the success its "
-"successor, the mark 5 Adder, which often replaces this model. Its similar "
-"hull, however, means careless buyers are sometimes conned into buying mark 4 "
-"models disguised as the mark 5."
+"The Adder MK4 is a rare sight these days due to the success its successor, "
+"the Adder MK5, which often replaces this model. Its similar hull, however, "
+"means careless buyers are sometimes conned into buying mark 4 models "
+"disguised as the mark 5."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:91
+#: scripts/shiptemplates/starfighters.lua:135
 msgctxt "ship"
 msgid "Adder MK3"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:92
+#: scripts/shiptemplates/starfighters.lua:140
 msgid ""
 "The Adder MK3 is one of the first of the Adder line to meet with some "
-"success. A large number of them were made before the manufacturer went "
-"through its first bankruptcy. There has been a recent surge of purchases of "
-"the Adder MK3 in the secondary market due to its low price and its "
-"similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 "
-"has weaker shields and hull, but a faster turn speed"
+"success, and many were made before the manufacturer went through its first "
+"bankruptcy. Its low price and similarity to subsequent models has led to a "
+"resurgence of secondhand sales of the mark 3 model. Compared to the Adder "
+"MK4, the mark 3 has weaker shields and hull, but a faster turning rate."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:97
+#: scripts/shiptemplates/starfighters.lua:150
 msgctxt "ship"
 msgid "Adder MK6"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:99
+#: scripts/shiptemplates/starfighters.lua:156
 msgid ""
-"The mark 6 Adder is a small upgrade compared to the highly successful mark 5 "
-"model. Since people still prefer the more familiar and reliable mark 5, the "
-"mark 6 has not seen the same level of success."
+"The Adder MK6 is a small upgrade compared to the highly successful Adder "
+"MK5. Since people still prefer the more familiar and reliable mark 5, the "
+"mark 6 hasn't seen the same level of success."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:103
+#: scripts/shiptemplates/starfighters.lua:165
 msgctxt "ship"
 msgid "Adder MK7"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:105
+#: scripts/shiptemplates/starfighters.lua:171
 msgid ""
-"The release of the Adder Mark 7 sent the manufacturer into a second "
-"bankruptcy. They made improvements to the Mark 7 over the Mark 6 like "
-"stronger shields and longer beams, but the popularity of their previous "
-"models, especially the Mark 5, prevented them from raising the purchase "
-"price enough to recoup the development and manufacturing costs of the Mark 7"
+"The release of the Adder MK7 sent the manufacturer into a second bankruptcy. "
+"Despite stronger shields and longer beam ranges, the popularity of previous "
+"models (especially the Adder MK5) prevented them from raising the purchase "
+"price enough to recoup the mark 7's development and manufacturing costs."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:109
+#: scripts/shiptemplates/starfighters.lua:180
 msgctxt "ship"
 msgid "Adder MK8"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:111
+#: scripts/shiptemplates/starfighters.lua:186
 msgid ""
-"New management after bankruptcy revisited their most popular Adder Mark 5 "
-"model with improvements: stronger shields, longer and stronger beams and a "
-"faster turn speed. Thus was born the Adder Mark 8 model. Targeted to the "
-"practical but nostalgic buyer who must purchase replacements for their Adder "
-"Mark 5 fleet"
+"After replacing its management, the Adder MK8 returned to the roots of its "
+"most popular Adder MK5 model with modernized shields, longer-ranged and "
+"stronger beam weapons, and a faster turning rate. The mark 8 targeted "
+"practical but nostalgic buyers replacing their mark 5 hardware."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:116
+#: scripts/shiptemplates/starfighters.lua:196
 msgctxt "ship"
 msgid "Adder MK9"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:118
+#: scripts/shiptemplates/starfighters.lua:202
 msgid ""
-"Hot on the heels of the Adder Mark 8 comes the Adder Mark 9. Still using the "
-"Adder Mark 5 as a base, the designers provided stronger shields, stronger, "
-"longer and faster beams, faster turn speed and for that extra special touch, "
-"two nuclear missiles. As their ad says, 'You'll feel better in an Adder Mark "
-"9.'"
+"The Adder MK9 quickly followed the Adder MK8. While still using the popular "
+"Adder MK5 as a base, the designers further strengthened its shields, "
+"increased the beam weapons' fire rate and thrusters' turning rate, and "
+"storage for two nuclear missiles."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:124
+#: scripts/shiptemplates/starfighters.lua:213
 msgctxt "ship"
 msgid "WX-Lindworm"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:124
+#: scripts/shiptemplates/starfighters.lua:214
 msgctxt "subclass"
 msgid "Bomber"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:126
+#: scripts/shiptemplates/starfighters.lua:219
 msgid ""
 "The WX-Lindworm, or \"Worm\" as it's often called, is a bomber-class "
 "starfighter. While one of the least-shielded starfighters in active duty, "
@@ -162,13 +180,88 @@ msgid ""
 "destroy its target, and fly out or be destroyed."
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:139
+#: scripts/shiptemplates/starfighters.lua:239
 msgctxt "playerShip"
 msgid "ZX-Lindworm"
 msgstr ""
 
-#: scripts/shiptemplates/starFighters.lua:140
+#: scripts/shiptemplates/starfighters.lua:244
 msgid ""
-"The ZX-Lindworm is a vastly improved version of the WX-Lindworm. Additional "
-"beam weapon, more missiles, tougher, faster and more agile."
+"The ZX-Lindworm is a vastly improved version of the WX-Lindworm bomber-class "
+"starfighter, with an additional beam weapon, more missiles, tougher hull, "
+"faster engine, and more agile thrusters."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:285
+msgctxt "playerShip"
+msgid "Stingray"
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:291
+msgid ""
+"The Stingray is a little-known predecessor to the MU52 Hornet. Once "
+"commonplace, most of the few remaining Stingrays have been converted to "
+"couriers and illegal racers due to their (frankly unsafe) impulse engines."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:327
+msgctxt "ship"
+msgid "Fighter"
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:333
+msgid ""
+"Ripostes are weak, nimble interceptors with a single beam weapon that become "
+"a greater threat when they engage in larger groups. They're often deployed "
+"in reconnaissance, patrol, and outpost-defense roles."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:345
+msgctxt "ship"
+msgid "Strix"
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:351
+msgid "The Strix is a warp-equipped interceptor built for ambush tactics."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:353
+#: scripts/shiptemplates/starfighters.lua:375
+msgid ""
+"For a starfighter it's slow at sublight flight and lacks manueverability, "
+"and most of its shielding is focused forward. However, thanks to its paired "
+"beam weapons and ability to strike quickly and escape, they've become a "
+"favorite of raiders that seek to catch poorly defended convoys unaware."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:355
+msgid ""
+"Strixes are often accompanied or complemented by Magpies, which have similar "
+"capabilities but use a jump drive for FTL travel."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:367
+msgctxt "ship"
+msgid "Magpie"
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:373
+msgid "The Magpie is a jump-equipped gunship built for ambush tactics."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:377
+msgid ""
+"Magpies are often accompanied or complemented by Strixes, which have similar "
+"capabilities but use a warp drive for FTL travel."
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:389
+msgctxt "playerShip"
+msgid "Crow"
+msgstr ""
+
+#: scripts/shiptemplates/starfighters.lua:394
+msgid ""
+"The Crow gunship is the predecessor to the Magpie starfighter. Slow, weakly "
+"armed, and lacking in shields, it's at least relatively agile."
 msgstr ""

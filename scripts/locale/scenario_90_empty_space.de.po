@@ -1,0 +1,49 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+# Scenario name
+msgid "Empty Space"
+msgstr ""
+
+# Scenario description
+#, fuzzy
+msgid ""
+"Empty scenario with no ships or terrain. Game masters can use this to set up "
+"a scenario in the GM screen. Use the F5 key or \"Copy scenario\" and \"Copy "
+"selection\" buttons on the GM screen to copy Lua code of the layout to the "
+"clipboard for use in scenario scripts."
+msgstr ""
+"Leeres Szenario, weder feindliche noch verbündete Schiffe. Kann von einer "
+"Spielleitung verwendet werden, um ein Szenario auf dem SL-Schirm "
+"einzurichten. Mit der Taste F5 kann das aktuelle Layout in die "
+"Zwischenablage kopiert werden, um es in Szenarioskripts zu verwenden."
+
+#: scripts/scenario_90_empty_space.lua:109
+msgctxt "buttonGM"
+msgid "Reset to asteroids"
+msgstr ""
+
+#: scripts/scenario_90_empty_space.lua:121
+msgctxt "buttonGM"
+msgid "Reset to nebulae"
+msgstr ""
+
+#: scripts/scenario_90_empty_space.lua:128
+msgctxt "buttonGM"
+msgid "Delete unselected"
+msgstr ""
+
+# Scenario name
+#~ msgid "Empty space"
+#~ msgstr "Leerer Raum"

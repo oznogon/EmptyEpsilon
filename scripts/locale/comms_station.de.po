@@ -12,13 +12,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: scripts/comms_station.lua:73
+#: scripts/comms_station.lua:71
 #, fuzzy
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr "Wir werden angegriffen! Keine Zeit zu plaudern!"
 
-#: scripts/comms_station.lua:91
+#: scripts/comms_station.lua:93
 #, fuzzy, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -28,104 +28,104 @@ msgstr ""
 "Guten Tag! Willkommen bei %s.\n"
 "Was kömmem wir für sie tun?"
 
-#: scripts/comms_station.lua:93
+#: scripts/comms_station.lua:99
 #, fuzzy, lua-format
 msgctxt "station-comms"
 msgid "Welcome to our lovely station %s."
 msgstr "Willkommen auf unserer wundervollen Station %s."
 
-#: scripts/comms_station.lua:98
+#: scripts/comms_station.lua:108
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us?"
 msgstr "Haben Sie Zielsuchraketen für uns?"
 
-#: scripts/comms_station.lua:99
+#: scripts/comms_station.lua:110
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "Can you restock us with HVLI?"
 msgstr "Können sie unsere HGBIs wieder auffüllen?"
 
-#: scripts/comms_station.lua:100
+#: scripts/comms_station.lua:111
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines."
 msgstr "Bitte füllen Sie unsere Minen wieder auf."
 
-#: scripts/comms_station.lua:101
+#: scripts/comms_station.lua:112
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
 msgstr "Können Sie unsere Nukes wieder auffüllen?"
 
-#: scripts/comms_station.lua:102
+#: scripts/comms_station.lua:113
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles."
 msgstr "Bitte füllen Sie unsere EMPs wieder auf."
 
-#: scripts/comms_station.lua:108
+#: scripts/comms_station.lua:120
 #, fuzzy, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
 msgstr "%s (%d Ruf jeweils)"
 
-#: scripts/comms_station.lua:124
+#: scripts/comms_station.lua:144
 #, fuzzy
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Für diese Aktion müssen Sie angedockt bleiben."
 
-#: scripts/comms_station.lua:131
+#: scripts/comms_station.lua:160
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr "Wir handeln nicht mit Massenvernichtungswaffen."
 
-#: scripts/comms_station.lua:133
+#: scripts/comms_station.lua:164
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "Wir handeln nicht mit Störwaffen."
 
-#: scripts/comms_station.lua:135
+#: scripts/comms_station.lua:166
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr "Mit dieser Art Waffen handeln wir nicht."
 
-#: scripts/comms_station.lua:146
+#: scripts/comms_station.lua:185
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr "Alle Nukes sind geladen."
 
-#: scripts/comms_station.lua:148
+#: scripts/comms_station.lua:190
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr "Es tut mir leid, aber dieser Vorrat ist bereits randvoll."
 
-#: scripts/comms_station.lua:151 scripts/comms_station.lua:165
-#: scripts/comms_station.lua:229 scripts/comms_station.lua:234
-#: scripts/comms_station.lua:263 scripts/comms_station.lua:289
-#: scripts/comms_station.lua:294
+#: scripts/comms_station.lua:194 scripts/comms_station.lua:222
+#: scripts/comms_station.lua:350 scripts/comms_station.lua:355
+#: scripts/comms_station.lua:439 scripts/comms_station.lua:501
+#: scripts/comms_station.lua:506
 #, fuzzy
 msgid "Back"
 msgstr "Zurück"
 
-#: scripts/comms_station.lua:154
+#: scripts/comms_station.lua:199
 #, fuzzy
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr "Nicht genug Ruf."
 
-#: scripts/comms_station.lua:160
+#: scripts/comms_station.lua:213
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Sie sind voll aufgestockt und bereit Dinge in die Luft zu sprengen."
 
-#: scripts/comms_station.lua:162
+#: scripts/comms_station.lua:218
 #, fuzzy
 msgctxt "ammo-comms"
 msgid ""
@@ -135,7 +135,7 @@ msgstr ""
 "Wir haben ihren Munitionsvorrat entsprechend aufgefüllt.\n"
 "Setzen Sie die Geschosse weise ein."
 
-#: scripts/comms_station.lua:176
+#: scripts/comms_station.lua:236
 #, fuzzy, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -145,7 +145,7 @@ msgstr ""
 "Guten Tag, hier spricht %s.\n"
 "Wenn Sie Vorräte benötigen, docken Sie bitte bei uns an."
 
-#: scripts/comms_station.lua:178
+#: scripts/comms_station.lua:244
 #, fuzzy, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -155,96 +155,98 @@ msgstr ""
 "Guten Tag, hier spricht %s.\n"
 "Wenn Sie mit uns Geschäfte machen wollen, docken Sie bitte bei uns an."
 
-#: scripts/comms_station.lua:185
+#: scripts/comms_station.lua:261
 #, fuzzy, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr "Können Sie uns eine Munitionslieferung schicken?  (%d rep)"
 
-#: scripts/comms_station.lua:194
+#: scripts/comms_station.lua:279
 #, fuzzy, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr "Bitte senden Sie Verstärkung! (%d rep)"
 
-#: scripts/comms_station.lua:209
+#: scripts/comms_station.lua:299
 #, fuzzy
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
-msgstr "Sie müssen einen Wegpunkt setzen, bevor Sie eine Lieferung anfordern können."
+msgstr ""
+"Sie müssen einen Wegpunkt setzen, bevor Sie eine Lieferung anfordern können."
 
-#: scripts/comms_station.lua:211
+#: scripts/comms_station.lua:306
 #, fuzzy
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "An welchen Wegpunkt sollen wir die Lieferung schicken?"
 
-#: scripts/comms_station.lua:224
+#: scripts/comms_station.lua:342
 #, fuzzy, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward %s."
 msgstr "Wir haben ein Versorgungsschiff nach %s geschickt."
 
-#: scripts/comms_station.lua:226 scripts/comms_station.lua:286
+#: scripts/comms_station.lua:347 scripts/comms_station.lua:498
 #, fuzzy
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Nicht genug Ruf!"
 
-#: scripts/comms_station.lua:242
+#: scripts/comms_station.lua:366
 msgctxt "stationAssist-comms"
 msgid "What kind of reinforcement ship would you like?"
 msgstr ""
 
-#: scripts/comms_station.lua:243
+#: scripts/comms_station.lua:371
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Adder MK3 (%d rep)"
 msgstr ""
 
-#: scripts/comms_station.lua:247
+#: scripts/comms_station.lua:385
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "MU52 Hornet (%d rep)"
 msgstr ""
 
-#: scripts/comms_station.lua:251
+#: scripts/comms_station.lua:399
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Standard Adder MK5 (%d rep)"
 msgstr ""
 
-#: scripts/comms_station.lua:255
+#: scripts/comms_station.lua:413
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Adder MK8 (%d rep)"
 msgstr ""
 
-#: scripts/comms_station.lua:259
+#: scripts/comms_station.lua:427
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Phobos T3 (%d rep)"
 msgstr ""
 
-#: scripts/comms_station.lua:267
+#: scripts/comms_station.lua:450
 #, fuzzy
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr "Sie müssen einen Wegpunkt setzen, bevor Sie Verstärkung anfordern können."
+msgstr ""
+"Sie müssen einen Wegpunkt setzen, bevor Sie Verstärkung anfordern können."
 
-#: scripts/comms_station.lua:269
+#: scripts/comms_station.lua:457
 #, fuzzy
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "Zu welchem Wegpunkt sollen wir die Verstärkung schicken?"
 
-#: scripts/comms_station.lua:284
+#: scripts/comms_station.lua:492
 #, fuzzy, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at %s."
 msgstr "Wir haben %s ausgeschickt um  bei %s zu unterstützen."
 
-#: scripts/comms_station.lua:355
+#: scripts/comms_station.lua:570
 #, fuzzy, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"

@@ -1,0 +1,4344 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: muerteFR\n"
+"Language-Team: muerteFR\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+# Scenario name
+msgid "Chaos of War"
+msgstr "Chaos de guerre"
+
+# Scenario description
+msgid ""
+"Two, three or four species battle for ultimate dominion. Designed as a "
+"replayable player versus player (PVP) scenario for individuals or teams. "
+"Terrain is randomly symmetrically generated for every game.\n"
+"\n"
+"Use Gamemaster (GM) screen to adjust parameters. The GM screen covers all of "
+"the parameters on the next page plus a variety of others.\n"
+"\n"
+"Get the player ship access codes from the GM screen after you generate the "
+"terrain\n"
+"\n"
+"Version 2.2"
+msgstr ""
+"EN COURS DE TRADUCTION 50%\n"
+"\n"
+"Two, three or four species battle for ultimate dominion. Designed as a "
+"replayable player versus player (PVP) scenario for individuals or teams. "
+"Terrain is randomly symmetrically generated for every game.\n"
+"\n"
+"Use Gamemaster (GM) screen to adjust parameters. The GM screen covers all of "
+"the parameters on the next page plus a variety of others.\n"
+"\n"
+"Get the player ship access codes from the GM screen after you generate the "
+"terrain\n"
+"\n"
+"Version 2.2"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Difficulty"
+msgstr "Difficulté"
+
+msgctxt "setting"
+msgid "Determines the degree the environment helps or hinders the players"
+msgstr "Détermine dans quelle mesure l'environnement aide ou gêne les joueurs."
+
+msgctxt "Difficulty"
+msgid "Normal"
+msgstr "Normale"
+
+msgctxt "Difficulty"
+msgid "Normal difficulty"
+msgstr "Difficulté normale."
+
+msgctxt "Difficulty"
+msgid "Easy"
+msgstr "Facile"
+
+msgctxt "Difficulty"
+msgid "More resources, services and reputation"
+msgstr "Plus de ressources, de services et de réputation."
+
+msgctxt "Difficulty"
+msgid "Hard"
+msgstr "Difficile"
+
+msgctxt "Difficulty"
+msgid "Fewer resources, services and reputation"
+msgstr "Moins de ressources, de services et de réputation."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Teams"
+msgstr "Nombre d'équipes"
+
+msgctxt "setting"
+msgid ""
+"Number of teams. Each team may have one or more player ships on it. Default: "
+"2 teams"
+msgstr ""
+"Nombre d'équipes participantes. Chaque équipe peut être composée d'un ou "
+"plusieurs vaisseaux joueurs.\n"
+"Par défaut : 2 équipes."
+
+msgctxt "Teams"
+msgid "2"
+msgstr "2"
+
+msgctxt "Teams"
+msgid "Two teams"
+msgstr ""
+"Deux équipes en jeu.\n"
+"Valeur par défaut."
+
+msgctxt "Teams"
+msgid "3"
+msgstr "3"
+
+msgctxt "Teams"
+msgid "Three teams"
+msgstr "Trois équipes en jeu."
+
+msgctxt "Teams"
+msgid "4"
+msgstr "4"
+
+msgctxt "Teams"
+msgid "Four teams"
+msgstr "Quatre équipes en jeu."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Players"
+msgstr "Vaisseaux joueurs par équipe"
+
+msgctxt "setting"
+msgid ""
+"Number of player ships per team. 32 total max. Get player ship control codes "
+"from Game master screen. Default: 2 per team"
+msgstr ""
+"Nombre de vaisseaux joueurs par équipe. 32 max dans la partie.\n"
+"Par défaut : 2 par équipe."
+
+msgctxt "Players"
+msgid "1"
+msgstr "1"
+
+msgctxt "Players"
+msgid ""
+"One player ship per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Un vaisseau joueur par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "2"
+msgstr "2"
+
+msgctxt "Players"
+msgid ""
+"Two player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Deux vaisseaux joueurs par équipe.\n"
+"Valeur par défaut.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "3"
+msgstr "3"
+
+msgctxt "Players"
+msgid ""
+"Three player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Trois vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "4"
+msgstr "4"
+
+msgctxt "Players"
+msgid ""
+"Four player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Quatre vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "5"
+msgstr "5"
+
+msgctxt "Players"
+msgid ""
+"Five player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Cinq vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "6"
+msgstr "6"
+
+msgctxt "Players"
+msgid ""
+"Six player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Six vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "7"
+msgstr "7"
+
+msgctxt "Players"
+msgid ""
+"Seven player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Sept vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "8"
+msgstr "8"
+
+msgctxt "Players"
+msgid ""
+"Eight player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Huit vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "9"
+msgstr "9"
+
+msgctxt "Players"
+msgid ""
+"Nine player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Neuf vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "10"
+msgstr "10"
+
+msgctxt "Players"
+msgid ""
+"Ten player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Dix vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "11"
+msgstr "11"
+
+msgctxt "Players"
+msgid ""
+"Eleven player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Onze vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "12"
+msgstr "12"
+
+msgctxt "Players"
+msgid ""
+"Twelve player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+"Douze vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "13"
+msgstr "13"
+
+msgctxt "Players"
+msgid ""
+"Thirteen player ships per team. Get player ship control codes from Game "
+"master screen"
+msgstr ""
+"Treize vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "14"
+msgstr "14"
+
+msgctxt "Players"
+msgid ""
+"Fourteen player ships per team. Get player ship control codes from Game "
+"master screen"
+msgstr ""
+"Quatorze vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "15"
+msgstr "15"
+
+msgctxt "Players"
+msgid ""
+"Fifteen player ships per team. Get player ship control codes from Game "
+"master screen"
+msgstr ""
+"Quinze vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+msgctxt "Players"
+msgid "16"
+msgstr "16"
+
+msgctxt "Players"
+msgid ""
+"Sixteen player ships per team. Get player ship control codes from Game "
+"master screen"
+msgstr ""
+"Seize vaisseaux joueurs par équipe.\n"
+"Obtenez les codes d'accès de votre vaisseau joueur à partir de l'écran "
+"principal du jeu."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Respawn"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"How a player ship returns to the game after being destroyed. Default: "
+"Lindworm"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Lindworm"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Destroyed player returns in a weak, but fast Lindworm"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Self"
+msgstr ""
+
+msgctxt "Respawn"
+msgid ""
+"Destroyed player returns as the same type of ship they originally started in"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Station Sensors"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Determines range at which station sensors will warn friendly ships about "
+"enemy ships via messages. Default: 20U"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Zero"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Stations don't warn friendly players of enemies"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "5U"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Stations warn friendly players of enemies within 5 units"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "10U"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Stations warn friendly players of enemies within 10 units"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "20U"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Stations warn friendly players of enemies within 20 units"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "30U"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Stations warn friendly players of enemies within 30 units"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Time"
+msgstr "Durée de jeu"
+
+msgctxt "setting"
+msgid "Determines how long the game will last. Default: 50 minutes"
+msgstr ""
+"Définit la durée de la partie.\n"
+"Par défaut : 50 minutes."
+
+msgctxt "Time"
+msgid "20"
+msgstr "20 mn"
+
+msgctxt "Time"
+msgid "Game ends in 20 minutes"
+msgstr "La partie prend fin après 20 minutes."
+
+msgctxt "Time"
+msgid "30"
+msgstr "30 mn"
+
+msgctxt "Time"
+msgid "Game ends in 30 minutes"
+msgstr "La partie prend fin après 30 minutes."
+
+msgctxt "Time"
+msgid "40"
+msgstr "40 mn"
+
+msgctxt "Time"
+msgid "Game ends in 40 minutes"
+msgstr "La partie prend fin après 40 minutes."
+
+msgctxt "Time"
+msgid "50"
+msgstr "50 mn"
+
+msgctxt "Time"
+msgid "Game ends in 50 minutes"
+msgstr ""
+"La partie prend fin après 50 minutes.\n"
+"Durée par défaut."
+
+msgctxt "Time"
+msgid "60"
+msgstr "60 mn"
+
+msgctxt "Time"
+msgid "Game ends in 60 minutes (one hour)"
+msgstr "La partie prend fin après 60 minutes."
+
+msgctxt "Time"
+msgid "70"
+msgstr "70 mn"
+
+msgctxt "Time"
+msgid "Game ends in 70 minutes (one hour and 10 minutes)"
+msgstr "La partie prend fin après 70 minutes."
+
+msgctxt "Time"
+msgid "80"
+msgstr "80 mn"
+
+msgctxt "Time"
+msgid "Game ends in 80 minutes (one hour and 20 minutes)"
+msgstr "La partie prend fin après 80 minutes."
+
+msgctxt "Time"
+msgid "90"
+msgstr "90 mn"
+
+msgctxt "Time"
+msgid "Game ends in 90 minutes (one hour and 30 minutes)"
+msgstr "La partie prend fin après 90 minutes."
+
+msgctxt "Time"
+msgid "100"
+msgstr "100 mn"
+
+msgctxt "Time"
+msgid "Game ends in 100 minutes (one hour and 40 minutes)"
+msgstr "La partie prend fin après 100 minutes."
+
+#: scripts/scenario_62_chaos_of_war.lua:1996
+msgctxt "station-comms"
+msgid "hull strength upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:2000
+msgctxt "station-comms"
+msgid "shield strength upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:2004
+msgctxt "station-comms"
+msgid "missile load speed upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:2008
+msgctxt "station-comms"
+msgid "beam damage upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:2012
+msgctxt "station-comms"
+msgid "beam range upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:2016
+msgctxt "station-comms"
+msgid "battery efficiency upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:2020
+msgctxt "station-comms"
+msgid "faster impulse upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:2024
+msgctxt "station-comms"
+msgid "longer sensor range upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:2028
+msgctxt "station-comms"
+msgid "faster maneuvering speed upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:3684
+msgctxt "trade-comms"
+msgid "food"
+msgstr "nourriture"
+
+#: scripts/scenario_62_chaos_of_war.lua:3685
+msgctxt "trade-comms"
+msgid "medicine"
+msgstr "medicaments"
+
+#: scripts/scenario_62_chaos_of_war.lua:3686
+msgctxt "trade-comms"
+msgid "luxury"
+msgstr "produits de luxe"
+
+#: scripts/scenario_62_chaos_of_war.lua:3687
+msgctxt "trade-comms"
+msgid "cobalt"
+msgstr "cobalt"
+
+#: scripts/scenario_62_chaos_of_war.lua:3688
+msgctxt "trade-comms"
+msgid "dilithium"
+msgstr "dilithium"
+
+#: scripts/scenario_62_chaos_of_war.lua:3689
+msgctxt "trade-comms"
+msgid "gold"
+msgstr "or"
+
+#: scripts/scenario_62_chaos_of_war.lua:3690
+msgctxt "trade-comms"
+msgid "nickel"
+msgstr "nickel"
+
+#: scripts/scenario_62_chaos_of_war.lua:3691
+msgctxt "trade-comms"
+msgid "platinum"
+msgstr "platine"
+
+#: scripts/scenario_62_chaos_of_war.lua:3692
+msgctxt "trade-comms"
+msgid "tritanium"
+msgstr "tritanium"
+
+#: scripts/scenario_62_chaos_of_war.lua:3693
+msgctxt "trade-comms"
+msgid "autodoc"
+msgstr "autodocs"
+
+#: scripts/scenario_62_chaos_of_war.lua:3694
+msgctxt "trade-comms"
+msgid "android"
+msgstr "androïdes"
+
+#: scripts/scenario_62_chaos_of_war.lua:3695
+msgctxt "trade-comms"
+msgid "battery"
+msgstr "batteries"
+
+#: scripts/scenario_62_chaos_of_war.lua:3696
+msgctxt "trade-comms"
+msgid "beam"
+msgstr "faisceaux"
+
+#: scripts/scenario_62_chaos_of_war.lua:3697
+msgctxt "trade-comms"
+msgid "circuit"
+msgstr "circuits"
+
+#: scripts/scenario_62_chaos_of_war.lua:3698
+msgctxt "trade-comms"
+msgid "communication"
+msgstr "communication"
+
+#: scripts/scenario_62_chaos_of_war.lua:3699
+msgctxt "trade-comms"
+msgid "filament"
+msgstr "filaments"
+
+#: scripts/scenario_62_chaos_of_war.lua:3700
+msgctxt "trade-comms"
+msgid "impulse"
+msgstr "impulsion"
+
+#: scripts/scenario_62_chaos_of_war.lua:3701
+msgctxt "trade-comms"
+msgid "lifter"
+msgstr "élévateurs"
+
+#: scripts/scenario_62_chaos_of_war.lua:3702
+msgctxt "trade-comms"
+msgid "nanites"
+msgstr "nanites"
+
+#: scripts/scenario_62_chaos_of_war.lua:3703
+msgctxt "trade-comms"
+msgid "optic"
+msgstr "optique"
+
+#: scripts/scenario_62_chaos_of_war.lua:3704
+msgctxt "trade-comms"
+msgid "repulsor"
+msgstr "répulseurs"
+
+#: scripts/scenario_62_chaos_of_war.lua:3705
+msgctxt "trade-comms"
+msgid "robotic"
+msgstr "robotique"
+
+#: scripts/scenario_62_chaos_of_war.lua:3706
+msgctxt "trade-comms"
+msgid "sensor"
+msgstr "capteurs"
+
+#: scripts/scenario_62_chaos_of_war.lua:3707
+msgctxt "trade-comms"
+msgid "shield"
+msgstr "boucliers"
+
+#: scripts/scenario_62_chaos_of_war.lua:3708
+msgctxt "trade-comms"
+msgid "software"
+msgstr "logiciels"
+
+#: scripts/scenario_62_chaos_of_war.lua:3709
+msgctxt "trade-comms"
+msgid "tractor"
+msgstr "tracteurs"
+
+#: scripts/scenario_62_chaos_of_war.lua:3710
+msgctxt "trade-comms"
+msgid "transporter"
+msgstr "transporteurs"
+
+#: scripts/scenario_62_chaos_of_war.lua:3711
+msgctxt "trade-comms"
+msgid "warp"
+msgstr "distorsion"
+
+#: scripts/scenario_62_chaos_of_war.lua:4466
+#: scripts/scenario_62_chaos_of_war.lua:4591
+#, lua-format
+msgctxt "buttonGM"
+msgid "Version %s"
+msgstr "Version %s"
+
+#: scripts/scenario_62_chaos_of_war.lua:4469
+#: scripts/scenario_62_chaos_of_war.lua:4594
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Scenario version %s\n"
+" LUA version %s"
+msgstr ""
+"Version de scénario %s\n"
+"Version LUA %s"
+
+#: scripts/scenario_62_chaos_of_war.lua:4478
+msgctxt "buttonGM"
+msgid "+Player Config"
+msgstr "+Configuration joueur"
+
+#: scripts/scenario_62_chaos_of_war.lua:4479
+msgctxt "buttonGM"
+msgid "+NPC Ships: 0"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4482
+#, lua-format
+msgctxt "buttonGM"
+msgid "+NPC Ships: %i-%i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4488
+msgctxt "buttonGM"
+msgid "+Terrain"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4490
+#, lua-format
+msgctxt "buttonGM"
+msgid "Respawn: %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4501
+#: scripts/scenario_62_chaos_of_war.lua:4602
+msgctxt "buttonGM"
+msgid "Show control codes"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4502
+#: scripts/scenario_62_chaos_of_war.lua:4603
+msgctxt "buttonGM"
+msgid "Show Human codes"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4503
+#: scripts/scenario_62_chaos_of_war.lua:4604
+msgctxt "buttonGM"
+msgid "Show Kraylor codes"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4505
+#: scripts/scenario_62_chaos_of_war.lua:4606
+msgctxt "buttonGM"
+msgid "Show Exuari codes"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4508
+#: scripts/scenario_62_chaos_of_war.lua:4609
+msgctxt "buttonGM"
+msgid "Show Ktlitan codes"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4514
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Stn Sensors %iU"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4520
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Game Time %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4523
+msgctxt "buttonGM"
+msgid "No"
+msgstr "Non"
+
+#: scripts/scenario_62_chaos_of_war.lua:4525
+msgctxt "buttonGM"
+msgid "Yes"
+msgstr "Oui"
+
+#: scripts/scenario_62_chaos_of_war.lua:4528
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Advance Intel %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4531
+#: scripts/scenario_62_chaos_of_war.lua:4577
+#: scripts/scenario_62_chaos_of_war.lua:5470
+#: scripts/scenario_62_chaos_of_war.lua:5591
+#: scripts/scenario_62_chaos_of_war.lua:5691
+#: scripts/scenario_62_chaos_of_war.lua:5754
+#: scripts/scenario_62_chaos_of_war.lua:5779
+#: scripts/scenario_62_chaos_of_war.lua:5830
+#: scripts/scenario_62_chaos_of_war.lua:5895
+#: scripts/scenario_62_chaos_of_war.lua:5974
+#: scripts/scenario_62_chaos_of_war.lua:6093
+#: scripts/scenario_62_chaos_of_war.lua:6130
+#: scripts/scenario_62_chaos_of_war.lua:6212
+msgctxt "buttonGM"
+msgid "Explain"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4536
+msgctxt "msgGM"
+msgid ""
+"The version button just provides scenario version information on the text of "
+"the button plus the Lua version when you click it. Explanations for Stn "
+"sensors, Game time and Advance intel may be obtained by clicking those "
+"buttons.\n"
+"\n"
+"The various control codes buttons show the control codes for the various "
+"player ships: all or by team faction."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4543
+msgctxt "msgGM"
+msgid ""
+"The version button just provides scenario version information on the text of "
+"the button plus the Lua version when you click it. Explanations for NPC "
+"Ships, Terrain, Stn sensors, Game time and Advance intel may be obtained by "
+"clicking those buttons.\n"
+"\n"
+"The Respawn button determines how a player ship is respawned if it is "
+"destroyed. The Lindworm option means the players come back in a Lindworm. "
+"The Self option means the players come back as the same type of ship they "
+"started in."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4551
+msgctxt "buttonGM"
+msgid "-Main from P. Config"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:4554
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Player Teams: %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4559
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Player Ships: %i (%i)"
+msgstr "+ Vaisseaux joueurs : %i (%i)"
+
+#: scripts/scenario_62_chaos_of_war.lua:4566
+#, lua-format
+msgctxt "buttonGM"
+msgid "+P.Ship Types: %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4570
+msgctxt "buttonGM"
+msgid "Random PShip Names"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4572
+msgctxt "msgGM"
+msgid "Player ship names will be selected at random"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4581
+msgctxt "msgGM"
+msgid ""
+"Player teams is the number of player teams. Player ships and player ship "
+"types are explained after you click those buttons.\n"
+"\n"
+"The button 'Random PShip Names' switches from a fixed list of player ship "
+"names to selecting player ship names at random from a pool of player ship "
+"names. There is no going back to the fixed player ship names once you click "
+"this button unless you restart the server."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4611
+msgctxt "buttonGM"
+msgid "Statistics Summary"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4613
+msgctxt "buttonGM"
+msgid "Current Scores:"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4615
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"   Human Navy: %.2f (%.1f%%)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4621
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"   Kraylor: %.2f (%.1f%%)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4628
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"   Exuari: %.2f (%.1f%%)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4636
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"\n"
+"   Ktlitans: %.2f (%.1f%%)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4644
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Original scores:"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4646
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"   Human Navy: %.2f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4651
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"   Kraylor: %.2f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4657
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"   Exuari: %.2f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4664
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"   Ktlitans: %.2f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4671
+msgctxt "buttonGM"
+msgid "Statistics Details"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4677
+msgctxt "msgGM"
+msgid ""
+"Human Navy:\n"
+"    Stations: (score value, type, name)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4682
+#: scripts/scenario_62_chaos_of_war.lua:4717
+#: scripts/scenario_62_chaos_of_war.lua:4753
+#: scripts/scenario_62_chaos_of_war.lua:4853
+#: scripts/scenario_62_chaos_of_war.lua:4924
+#: scripts/scenario_62_chaos_of_war.lua:5028
+#: scripts/scenario_62_chaos_of_war.lua:5063
+#: scripts/scenario_62_chaos_of_war.lua:5102
+#: scripts/scenario_62_chaos_of_war.lua:5207
+#: scripts/scenario_62_chaos_of_war.lua:5242
+#: scripts/scenario_62_chaos_of_war.lua:5281
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"        %i %s %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4695
+#: scripts/scenario_62_chaos_of_war.lua:4866
+#: scripts/scenario_62_chaos_of_war.lua:5041
+#: scripts/scenario_62_chaos_of_war.lua:5220
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"            Station Total:%i Weight:%.1f Weighted total:%.2f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4711
+#: scripts/scenario_62_chaos_of_war.lua:4882
+#: scripts/scenario_62_chaos_of_war.lua:5236
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    Player Ships: (score value, type, name)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4730
+#: scripts/scenario_62_chaos_of_war.lua:4901
+#: scripts/scenario_62_chaos_of_war.lua:5076
+#: scripts/scenario_62_chaos_of_war.lua:5255
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"            Player Ship Total:%i Weight:%.1f Weighted total:%.2f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4746
+#: scripts/scenario_62_chaos_of_war.lua:4917
+#: scripts/scenario_62_chaos_of_war.lua:5094
+#: scripts/scenario_62_chaos_of_war.lua:5273
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"    NPC Assets: score value, type, name (location)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4762
+#: scripts/scenario_62_chaos_of_war.lua:4933
+#: scripts/scenario_62_chaos_of_war.lua:5111
+#: scripts/scenario_62_chaos_of_war.lua:5290
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"        %i %s %s (%s)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4783
+#: scripts/scenario_62_chaos_of_war.lua:4954
+#: scripts/scenario_62_chaos_of_war.lua:5132
+#: scripts/scenario_62_chaos_of_war.lua:5311
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4804
+#: scripts/scenario_62_chaos_of_war.lua:4975
+#: scripts/scenario_62_chaos_of_war.lua:5153
+#: scripts/scenario_62_chaos_of_war.lua:5332
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"            Player ship death penalty:%i Weight:%.1f Weighted Total:%,2f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4823
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"----Human weighted total:%.1f Original:%.1f Change:%.2f%%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4840
+#, lua-format
+msgctxt "msgGM"
+msgid "%sHuman tie breaker points:%f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4846
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Kraylor:\n"
+"    Stations: (score value, type, name)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4888
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"\n"
+"        %i %s %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:4994
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"----Kraylor weighted total:%.1f Original:%.1f Change:%.2f%%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5011
+#, lua-format
+msgctxt "msgGM"
+msgid "%sKraylor tie breaker points:%f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5020
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"Exuari:\n"
+"    Stations: (score value, type, name)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5057
+msgctxt "msgGM"
+msgid ""
+"\n"
+"    Player Ships: (score value, type, name)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5172
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"----Exuari weighted total:%.1f Original:%.1f Change:%.2f%%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5189
+#, lua-format
+msgctxt "msgGM"
+msgid "%sExuari tie breaker points:%f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5199
+msgctxt "msgGM"
+msgid ""
+"\n"
+"Ktlitan:\n"
+"    Stations: (score value, type, name)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5351
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"----Ktlitan weighted total:%.1f Original:%.1f Change:%.2f%%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5372
+#, lua-format
+msgctxt "msgGM"
+msgid "%sKtlitan tie breaker points:%f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5384
+msgctxt "buttonGM"
+msgid "-Main from Teams"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:5385
+msgctxt "buttonGM"
+msgid "2"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5387
+#: scripts/scenario_62_chaos_of_war.lua:5395
+#: scripts/scenario_62_chaos_of_war.lua:5412
+#: scripts/scenario_62_chaos_of_war.lua:5485
+#: scripts/scenario_62_chaos_of_war.lua:5513
+#: scripts/scenario_62_chaos_of_war.lua:5588
+#: scripts/scenario_62_chaos_of_war.lua:5608
+#: scripts/scenario_62_chaos_of_war.lua:5709
+#: scripts/scenario_62_chaos_of_war.lua:5727
+#: scripts/scenario_62_chaos_of_war.lua:5740
+#: scripts/scenario_62_chaos_of_war.lua:5748
+#: scripts/scenario_62_chaos_of_war.lua:5792
+#: scripts/scenario_62_chaos_of_war.lua:5800
+#: scripts/scenario_62_chaos_of_war.lua:5808
+#: scripts/scenario_62_chaos_of_war.lua:5816
+#: scripts/scenario_62_chaos_of_war.lua:5824
+#: scripts/scenario_62_chaos_of_war.lua:6108
+#: scripts/scenario_62_chaos_of_war.lua:6116
+#: scripts/scenario_62_chaos_of_war.lua:6124
+msgctxt "buttonGM"
+msgid "*"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5393
+msgctxt "buttonGM"
+msgid "3"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5403
+#: scripts/scenario_62_chaos_of_war.lua:5420
+#: scripts/scenario_62_chaos_of_war.lua:5443
+#: scripts/scenario_62_chaos_of_war.lua:5462
+msgctxt "msgGM"
+msgid "Switching player ship type to default"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5410
+msgctxt "buttonGM"
+msgid "4"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5430
+msgctxt "buttonGM"
+msgid "-Main from Ships"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:5431
+#: scripts/scenario_62_chaos_of_war.lua:5482
+msgctxt "buttonGM"
+msgid "-Player Config"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:5435
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i ships add -> %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5454
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i ships del -> %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5474
+msgctxt "msgGM"
+msgid ""
+"This is where you set the number of player ships per team. The number of non-"
+"player ships is set under NPC Ships."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5481
+msgctxt "buttonGM"
+msgid "-Main from Ship Types"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:5496
+#, lua-format
+msgctxt "msgGM"
+msgid "Default ship %s for a team of %i %s:"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5517
+msgctxt "msgGM"
+msgid "Spawned ship type(s):"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5531
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%i player ships spawned. %i are required.\n"
+"\n"
+"Using default ship set.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5541
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Only %i player ship spawned. %i are required.\n"
+"\n"
+"Using default ship set.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5551
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Only %i player ships spawned. %i are required.\n"
+"\n"
+"Using default ship set.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5564
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%i player ships spawned. Only %i is required.\n"
+"\n"
+"Using default ship set.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5574
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%i player ships spawned. Only %i are required.\n"
+"\n"
+"Using default ship set.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5595
+msgctxt "msgGM"
+msgid ""
+"This is where you determine the kinds of ships the players will use.\n"
+"\n"
+"Default: There is a default set of ships depending on the number of players "
+"and the number of teams.\n"
+"\n"
+"Spawned: Whatever is spawned from the first screen for one team will be "
+"replicated for the other team or teams. If the number of ships spawned does "
+"not match the team size selected, the default player ship set will be used.\n"
+"\n"
+"Custom: There are several sets of defaults under custom: Warp (ships "
+"equipped with warp drive), Jump (ships equipped with jump drive), Light "
+"(ships that are not as heavily armed or armored) and Heavy (ships that are "
+"more heavily armed or armored). There is also custom button where you can "
+"select the ship or ships you want from a list. To set up the list, use the "
+"+Customize Custom button."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5602
+#: scripts/scenario_62_chaos_of_war.lua:5642
+msgctxt "buttonGM"
+msgid "-Main from Custom"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:5603
+#: scripts/scenario_62_chaos_of_war.lua:5643
+msgctxt "buttonGM"
+msgid "-Ship Types"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5604
+msgctxt "buttonGM"
+msgid "+Customize Custom"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5616
+#, lua-format
+msgctxt "msgGM"
+msgid "Ship type set %s for %i player:"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5622
+#, lua-format
+msgctxt "msgGM"
+msgid "Ship type set %s for %i players:"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5644
+msgctxt "buttonGM"
+msgid "-Custom Set"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5668
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Out %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5672
+#, lua-format
+msgctxt "buttonGM"
+msgid "+In %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5695
+msgctxt "msgGM"
+msgid ""
+"The +Out button shows the current list of player ships. The ship named on "
+"the button or the one with the asterisk if you click the +Out button is the "
+"ship in the list that you can swap with another.\n"
+"\n"
+"The +In button shows the list of ships that you might want to put in the "
+"custom list of ships. The ship on the button or the one with the asterisk if "
+"you click the +In button is the ship you can place in the custom list.\n"
+"\n"
+"The Swap button swaps the ships on the +In and +Out buttons removing the "
+"ship on the +Out button from the custom list to be used in the game and "
+"putting the ship on the +In button in the custom list of ships to be used.\n"
+"\n"
+"Notice that some of the ships that can be swapped in to the custom list are "
+"not stock Empty Epsilon ships, but are specialized versions of stock Empty "
+"Epsilon ships."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5737
+msgctxt "buttonGM"
+msgid "-Main"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:5738
+msgctxt "buttonGM"
+msgid "Advance Intel Yes"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5746
+msgctxt "buttonGM"
+msgid "Advance Intel No"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5758
+msgctxt "msgGM"
+msgid ""
+"This setting determines whether or not the players will receive a message at "
+"the start of the game indicating the location of their opponent's home base. "
+"Useful if players feel that they spend too much time at the start looking "
+"for their opponents."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5766
+msgctxt "buttonGM"
+msgid "-Main from Terrain"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:5768
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Missiles: %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5772
+msgctxt "buttonGM"
+msgid "+Primary Station"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5775
+msgctxt "buttonGM"
+msgid "Generate"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5783
+msgctxt "msgGM"
+msgid ""
+"Explanations for missiles and primary station available by clicking those "
+"buttons.\n"
+"\n"
+"Clicking the generate button will generate the terrain based on the number "
+"of player teams selected, the number of ships on a team and the terrain "
+"parameters selected.\n"
+"\n"
+"After you generate the terrain, you cannot change the player ships, or the "
+"terrain unless you restart the server. You will be able to get the player "
+"ship access control codes after you generate the terrain."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5790
+msgctxt "buttonGM"
+msgid "Zero"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5798
+msgctxt "buttonGM"
+msgid "5U"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5806
+msgctxt "buttonGM"
+msgid "10U"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5814
+msgctxt "buttonGM"
+msgid "20U"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5822
+msgctxt "buttonGM"
+msgid "30U"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5834
+msgctxt "msgGM"
+msgid ""
+"This is where you set the station enemy detection range. Stations that "
+"detect enemies will send a warning message to friendly player ships."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5841
+msgctxt "buttonGM"
+msgid "-Main from Prm Stn"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:5842
+#: scripts/scenario_62_chaos_of_war.lua:5907
+#: scripts/scenario_62_chaos_of_war.lua:6105
+msgctxt "buttonGM"
+msgid "-Terrain"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5848
+msgctxt "buttonGM"
+msgid "+Platforms: Random"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5854
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Platforms: %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5861
+msgctxt "buttonGM"
+msgid "Random Size ->"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5868
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s ->"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5883
+#, lua-format
+msgctxt "buttonGM"
+msgid "Jammer: %s ->"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5899
+msgctxt "msgGM"
+msgid ""
+"An explanation for platforms can be obtained by clicking the platforms "
+"button.\n"
+"Just under the platforms, you can choose the primary station size from the "
+"options of random, small, medium, large and huge. The label on the button "
+"indicates the current selection.\n"
+"The Jammer button determines the presence of warp jammers around the primary "
+"station from the options of random, on or off. The label on the button "
+"indicates the current selection."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5906
+msgctxt "buttonGM"
+msgid "-Main from Platforms"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:5909
+msgctxt "buttonGM"
+msgid "-Primary Station"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5919
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i Platforms + -> Rnd"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5931
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i Platforms + -> %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5950
+#, lua-format
+msgctxt "buttonGM"
+msgid "Rnd Platforms - -> %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5962
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i Platforms - -> %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:5978
+msgctxt "msgGM"
+msgid ""
+"This is where you determine the number of defense platforms surrounding the "
+"players' primary base. The left portion of the text on the button(s) "
+"indicates the current selection. The right portion of the text on the "
+"button(s) indicates the value after clicking the button."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6044
+#, lua-format
+msgctxt "msgGM"
+msgid "%s: %s %s\n"
+msgstr "%s : %s %s\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:6064
+msgctxt "buttonGM"
+msgid "-Main from Time"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:6068
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i Add 5 -> %i"
+msgstr "Vit. : %iu/min -> %i"
+
+#: scripts/scenario_62_chaos_of_war.lua:6082
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i Del 5 -> %i"
+msgstr "Vit. : %iu/min -> %i"
+
+#: scripts/scenario_62_chaos_of_war.lua:6097
+msgctxt "msgGM"
+msgid ""
+"This is where you set the time limit for the game. The game ends at the end "
+"of the time limit and the faction with the highest score wins."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6104
+msgctxt "buttonGM"
+msgid "-Main from Missiles"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:6134
+msgctxt "msgGM"
+msgid ""
+"This is where you set the missile restock availability for the stations.\n"
+"The 'unlimited' option is typical of most scenarios: you pay reputation to "
+"get missiles at stations that offer them.\n"
+"The 'limited' option indicates that stations have a limited supply of "
+"missiles available for restock.\n"
+"The 'outer limited' option indicates that all stations except the player's "
+"primary station have a limited supply of missiles.\n"
+"For all the options that limit missile availability, the actual stockpiles "
+"of missiles is determined randomly for each game."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6141
+msgctxt "buttonGM"
+msgid "-From NPC Strength"
+msgstr "- Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:6142
+msgctxt "buttonGM"
+msgid "NPC Ships: No"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6145
+#, lua-format
+msgctxt "buttonGM"
+msgid "NPC Ships: %i-%i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6162
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i From Add -> %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6175
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i From Del -> %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6188
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i To Add -> %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6201
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i To Del -> %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6216
+msgctxt "msgGM"
+msgid ""
+"This is where you configure Non Player Character or NPC ships. Each team "
+"will be given NPC ships as configured here. If there should be no NPC ships, "
+"be sure the results show 'No'\n"
+"\n"
+"The numbers being configured represent a range of relative strength values. "
+"For example, the Atlantis has a relative strength of 50. You may set the "
+"lower (From) and upper (To) values of this range. The scenario will add "
+"ships selected at random that have a total strength within the specified "
+"range. Each team will receive identcal NPC ships. These ships will start "
+"near the players' primary base and can be directed by the players via Relay "
+"or Operations."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6565
+#: scripts/scenario_62_chaos_of_war.lua:6646
+#: scripts/scenario_62_chaos_of_war.lua:6730
+#, lua-format
+msgctxt "scienceDescription-ship"
+msgid "%s defense platform %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6684
+#, lua-format
+msgid "scienceDescription-ship"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6839
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"No player ships spawned. %i are required.\n"
+"\n"
+"Using default ship set."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6847
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Only one player ship spawned. %i are required.\n"
+"\n"
+"Using default ship set."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6855
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Only %i player ships spawned. %i are required.\n"
+"\n"
+"Using default ship set."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6869
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%i player ships spawned. Only %i is required.\n"
+"\n"
+"Using default ship set."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6878
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%i player ships spawned. Only %i are required.\n"
+"\n"
+"Using default ship set."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:6911
+msgctxt "msgGM"
+msgid ""
+"One of the player ships spawned is not valid, switching to default ship set"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:8247
+msgctxt "msgGM"
+msgid "Empty Template pool: fix excludes or other criteria"
+msgstr "Pool de modèles vide : correction des exclusions ou d'autres critères"
+
+#: scripts/scenario_62_chaos_of_war.lua:9053
+msgctxt "msgGM"
+msgid "Player creation failed"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9491
+#, lua-format
+msgctxt "defensePlatform-comms"
+msgid "Hi %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9504
+#, lua-format
+msgctxt "defensePlatform-comms"
+msgid "Transfer to %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9528
+#, lua-format
+msgctxt "defensePlatform-comms"
+msgid "Don't let %s forget their friends on duty at %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9540
+msgctxt "defensePlatform-comms"
+msgid "Dock if you want anything"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9543
+msgctxt "defensePlatform-comms"
+msgid "You must dock before we can do anything"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9545
+msgctxt "defensePlatform-comms"
+msgid "Gotta dock first"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9548
+msgctxt "defensePlatform-comms"
+msgid "Can't do anything for you unless you dock"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9550
+msgctxt "defensePlatform-comms"
+msgid "Docking crew is standing by"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9551
+msgctxt "defensePlatform-comms"
+msgid "Dock first, then talk"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9565
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?"
+msgstr ""
+"Bonjour officier !\n"
+"Que pouvons-nous faire pour vous aujourd'hui ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:9568
+msgctxt "station-comms"
+msgid "Welcome to our lovely station."
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:9574
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+"\n"
+"Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
+"attentivement les ennemis à proximité."
+
+#: scripts/scenario_62_chaos_of_war.lua:9593
+#: scripts/scenario_62_chaos_of_war.lua:10358
+#, lua-format
+msgctxt "station-comms"
+msgid "Speak with scientist %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9601
+#: scripts/scenario_62_chaos_of_war.lua:10366
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings, %s\n"
+"I've got great ideas for the war effort.\n"
+"What can I do for you?"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9607
+msgctxt "station-comms"
+msgid "Please come aboard our ship"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9613
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Certainly, %s\n"
+"\n"
+"%s boards your ship"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9622
+#: scripts/scenario_62_chaos_of_war.lua:10165
+#: scripts/scenario_62_chaos_of_war.lua:10189
+#: scripts/scenario_62_chaos_of_war.lua:10247
+#: scripts/scenario_62_chaos_of_war.lua:10279
+#: scripts/scenario_62_chaos_of_war.lua:10641
+#: scripts/scenario_62_chaos_of_war.lua:10826
+#: scripts/scenario_62_chaos_of_war.lua:10855
+#: scripts/scenario_62_chaos_of_war.lua:10867
+#: scripts/scenario_62_chaos_of_war.lua:10916
+#: scripts/scenario_62_chaos_of_war.lua:11080
+#: scripts/scenario_62_chaos_of_war.lua:11114
+#: scripts/scenario_62_chaos_of_war.lua:11161
+#: scripts/scenario_62_chaos_of_war.lua:11164
+#: scripts/scenario_62_chaos_of_war.lua:11228
+#: scripts/scenario_62_chaos_of_war.lua:11304
+#: scripts/scenario_62_chaos_of_war.lua:11309
+#: scripts/scenario_62_chaos_of_war.lua:11386
+#: scripts/scenario_62_chaos_of_war.lua:11391
+#: scripts/scenario_62_chaos_of_war.lua:11498
+#: scripts/scenario_62_chaos_of_war.lua:11505
+#: scripts/scenario_62_chaos_of_war.lua:11593
+#: scripts/scenario_62_chaos_of_war.lua:11600
+#: scripts/scenario_62_chaos_of_war.lua:11689
+#: scripts/scenario_62_chaos_of_war.lua:11696
+#: scripts/scenario_62_chaos_of_war.lua:11701
+#: scripts/scenario_62_chaos_of_war.lua:11832
+#: scripts/scenario_62_chaos_of_war.lua:11869
+#: scripts/scenario_62_chaos_of_war.lua:12195
+#: scripts/scenario_62_chaos_of_war.lua:12519
+#: scripts/scenario_62_chaos_of_war.lua:12548
+#: scripts/scenario_62_chaos_of_war.lua:12577
+#: scripts/scenario_62_chaos_of_war.lua:12606
+#: scripts/scenario_62_chaos_of_war.lua:12635
+#: scripts/scenario_62_chaos_of_war.lua:12690
+#: scripts/scenario_62_chaos_of_war.lua:12695
+#: scripts/scenario_62_chaos_of_war.lua:12745
+#: scripts/scenario_62_chaos_of_war.lua:12862
+#: scripts/scenario_62_chaos_of_war.lua:13001
+#: scripts/scenario_62_chaos_of_war.lua:13038
+#: scripts/scenario_62_chaos_of_war.lua:13083
+#: scripts/scenario_62_chaos_of_war.lua:13126
+#: scripts/scenario_62_chaos_of_war.lua:13169
+#: scripts/scenario_62_chaos_of_war.lua:13174
+#: scripts/scenario_62_chaos_of_war.lua:13218
+#: scripts/scenario_62_chaos_of_war.lua:13265
+#: scripts/scenario_62_chaos_of_war.lua:13928
+#: scripts/scenario_62_chaos_of_war.lua:13966
+#: scripts/scenario_62_chaos_of_war.lua:13975
+#: scripts/scenario_62_chaos_of_war.lua:13990
+#: scripts/scenario_62_chaos_of_war.lua:14003
+#: scripts/scenario_62_chaos_of_war.lua:14027
+#: scripts/scenario_62_chaos_of_war.lua:14045
+#: scripts/scenario_62_chaos_of_war.lua:14069
+#: scripts/scenario_62_chaos_of_war.lua:14084
+#: scripts/scenario_62_chaos_of_war.lua:14130
+#: scripts/scenario_62_chaos_of_war.lua:14268
+#: scripts/scenario_62_chaos_of_war.lua:14341
+#: scripts/scenario_62_chaos_of_war.lua:14363
+#: scripts/scenario_62_chaos_of_war.lua:14375
+#: scripts/scenario_62_chaos_of_war.lua:14421
+#: scripts/scenario_62_chaos_of_war.lua:14443
+#: scripts/scenario_62_chaos_of_war.lua:14486
+#: scripts/scenario_62_chaos_of_war.lua:14505
+#: scripts/scenario_62_chaos_of_war.lua:14548
+#: scripts/scenario_62_chaos_of_war.lua:14583
+#: scripts/scenario_62_chaos_of_war.lua:14604
+#: scripts/scenario_62_chaos_of_war.lua:14622
+#: scripts/scenario_62_chaos_of_war.lua:14691
+#: scripts/scenario_62_chaos_of_war.lua:14729
+#: scripts/scenario_62_chaos_of_war.lua:14775
+msgid "Back"
+msgstr "Précédent"
+
+#: scripts/scenario_62_chaos_of_war.lua:9628
+#: scripts/scenario_62_chaos_of_war.lua:10374
+msgctxt "station-comms"
+msgid "Can you tell me some more about your ideas?"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9639
+#, lua-format
+msgctxt "station-comms"
+msgid "I'd need to visit %s to proceed further"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9678
+#: scripts/scenario_62_chaos_of_war.lua:10411
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"I just sent details on a %s to %s. With their facilities, you should be able "
+"to apply the upgrade the next time you dock there."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9688
+#: scripts/scenario_62_chaos_of_war.lua:10421
+msgctxt "station-comms"
+msgid ""
+"Without your primary station to apply my research, I'm afraid my information "
+"is useless"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9700
+#: scripts/scenario_62_chaos_of_war.lua:10434
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"After an extended conversation with %s and the exchange of technical "
+"information with various crew members, you apply the insight into %s gained "
+"by %s.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9737
+#: scripts/scenario_62_chaos_of_war.lua:9811
+#: scripts/scenario_62_chaos_of_war.lua:10029
+#: scripts/scenario_62_chaos_of_war.lua:10104
+#: scripts/scenario_62_chaos_of_war.lua:10471
+#, lua-format
+msgctxt "shipLog"
+msgid "%s provided details from %s for an upgrade. %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9752
+#: scripts/scenario_62_chaos_of_war.lua:10044
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"The upgrade details were also provided to the other players in your faction."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9788
+#: scripts/scenario_62_chaos_of_war.lua:9910
+#: scripts/scenario_62_chaos_of_war.lua:10081
+#: scripts/scenario_62_chaos_of_war.lua:10522
+msgctxt "station-comms"
+msgid "and npc ships "
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9826
+#: scripts/scenario_62_chaos_of_war.lua:10119
+#: scripts/scenario_62_chaos_of_war.lua:10560
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"The upgrade details were also provided to the other players %sin your "
+"faction."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9838
+#: scripts/scenario_62_chaos_of_war.lua:9929
+#: scripts/scenario_62_chaos_of_war.lua:10572
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Your conversation with %s about %s was interesting, but not directly "
+"applicable.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9861
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"After an extended conversation with %s, various crew members and %s "
+"facilities managers, you apply the insight into %s gained by %s.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9918
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"NPC ships received the upgrade as well"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:9980
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"After an extended conversation with %s, %s, various crew members and %s "
+"facilities managers, you apply the insight into %s and %s gained by %s.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10131
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Your conversation with %s and %s about %s and %s was interesting, but not "
+"directly applicable.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10155
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"I've got this idea for a %s, but I just can't quite get it to crystalize. If "
+"I had another scientist here to collaborate with, I might get further along"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10172
+#, lua-format
+msgctxt "station-comms"
+msgid "Escort %s on to %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10181
+#, lua-format
+msgctxt "station-comms"
+msgid "%s thanks you for your hospitality and disembarks to %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10203
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Congratulations!\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10209
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Sorry.\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10229
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr "Recruter un membre de l'équipe de réparation (%i rép)"
+
+#: scripts/scenario_62_chaos_of_war.lua:10236
+#: scripts/scenario_62_chaos_of_war.lua:10269
+#: scripts/scenario_62_chaos_of_war.lua:12192
+#: scripts/scenario_62_chaos_of_war.lua:12515
+#: scripts/scenario_62_chaos_of_war.lua:12544
+#: scripts/scenario_62_chaos_of_war.lua:12573
+#: scripts/scenario_62_chaos_of_war.lua:12602
+#: scripts/scenario_62_chaos_of_war.lua:12631
+#: scripts/scenario_62_chaos_of_war.lua:12686
+#: scripts/scenario_62_chaos_of_war.lua:13215
+#: scripts/scenario_62_chaos_of_war.lua:13262
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr "Vous n'avez pas assez de réputation."
+
+#: scripts/scenario_62_chaos_of_war.lua:10244
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr "Réparateur embauché."
+
+#: scripts/scenario_62_chaos_of_war.lua:10261
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchase coolant for %i reputation"
+msgstr "Acheter du liquide de refroidissement (%i rép)"
+
+#: scripts/scenario_62_chaos_of_war.lua:10276
+msgctxt "trade-comms"
+msgid "Additional coolant purchased"
+msgstr "Liquide de refroidissement supplémentaire acheté"
+
+#: scripts/scenario_62_chaos_of_war.lua:10318
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+"Bonjour, officier.\n"
+"Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+"station au préalable."
+
+#: scripts/scenario_62_chaos_of_war.lua:10323
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+"Salutations.\n"
+"Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
+
+#: scripts/scenario_62_chaos_of_war.lua:10330
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+"\n"
+"Sachez que si les ennemis de la zone se rapprochent encore, nous serons trop "
+"occupés pour faire affaire avec vous."
+
+#: scripts/scenario_62_chaos_of_war.lua:10335
+msgctxt "station-comms"
+msgid "I need information"
+msgstr "j'aurai besoin d'informations"
+
+#: scripts/scenario_62_chaos_of_war.lua:10337
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr "De quel genre d'informations avez-vous besoin ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:10486
+msgctxt "station-comms"
+msgid ""
+"\n"
+"The upgrade details were also provided to the other players in your faction."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10545
+#, lua-format
+msgctxt "station-comms"
+msgid "%s provided details from %s for an upgrade. %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10607
+#, lua-format
+msgctxt "station-comms"
+msgid "Communication between %s and %s intercepted by enemy faction"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10619
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s conversation intercepted regarding %s. Probable military application. "
+"Suggest you contact our own scientist in the same field"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10635
+msgctxt "station-comms"
+msgid ""
+"I should not discuss it over an open communication line. Perhaps you should "
+"visit and we can talk"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10672
+msgctxt "stationServices-comms"
+msgid "Docking services status"
+msgstr "État des services d'accueil"
+
+#: scripts/scenario_62_chaos_of_war.lua:10677
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s docking services status:"
+msgstr "État des services d'accueil de la station %s :\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:10683
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Replenish scan probes."
+msgstr ""
+"%s\n"
+"- Réapprovisionnement des sondes."
+
+#: scripts/scenario_62_chaos_of_war.lua:10691
+msgctxt "stationServices-comms"
+msgid "Cannot replenish scan probes due to fabrication unit failure."
+msgstr ""
+"- Sondes : impossible de réapprovisionner les sondes en raison d'une "
+"défaillance de l'unité de fabrication."
+
+#: scripts/scenario_62_chaos_of_war.lua:10695
+msgctxt "stationServices-comms"
+msgid "Parts shortage prevents scan probe replenishment."
+msgstr ""
+"- Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
+
+#: scripts/scenario_62_chaos_of_war.lua:10699
+msgctxt "stationServices-comms"
+msgid ""
+"Management has curtailed scan probe replenishment for cost cutting reasons."
+msgstr ""
+"- Sondes : les gestionnaires de la station ont réduit le réapprovisionnement "
+"des sondes pour des raisons de réduction des coûts."
+
+#: scripts/scenario_62_chaos_of_war.lua:10706
+#: scripts/scenario_62_chaos_of_war.lua:10736
+#: scripts/scenario_62_chaos_of_war.lua:10769
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+"%s\n"
+"%s"
+
+#: scripts/scenario_62_chaos_of_war.lua:10713
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Ship hull repair."
+msgstr ""
+"%s\n"
+"- Réparation de la coque."
+
+#: scripts/scenario_62_chaos_of_war.lua:10721
+msgctxt "stationServices-comms"
+msgid "We're out of the necessary materials and supplies for hull repair."
+msgstr ""
+"- Coque : nous n'avons plus les matériaux et fournitures nécessaires pour "
+"réparer la coque."
+
+#: scripts/scenario_62_chaos_of_war.lua:10725
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable while it is undergoing maintenance."
+msgstr ""
+"- Coque : l'automatisation de réparation de la coque n'est pas disponible "
+"pendant la maintenance."
+
+#: scripts/scenario_62_chaos_of_war.lua:10729
+msgctxt "stationServices-comms"
+msgid "All hull repair technicians quarantined to quarters due to illness."
+msgstr ""
+"- Coque : tous les techniciens de réparation de coque sont en quarantaine "
+"dans leur quartiers pour cause de maladie."
+
+#: scripts/scenario_62_chaos_of_war.lua:10745
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Recharge ship energy stores."
+msgstr ""
+"%s\n"
+"- Recharge des réserves d'énergie."
+
+#: scripts/scenario_62_chaos_of_war.lua:10754
+msgctxt "stationServices-comms"
+msgid ""
+"A recent reactor failure has put us on auxiliary power, so we cannot "
+"recharge ships."
+msgstr ""
+"- Énergie : une récente panne de réacteur nous a mis sous tension "
+"auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
+
+#: scripts/scenario_62_chaos_of_war.lua:10758
+msgctxt "stationServices-comms"
+msgid "A damaged power coupling makes it too dangerous to recharge ships."
+msgstr ""
+"- Énergie : un couplage électrique défectueux rend la recharge des vaisseaux "
+"trop risquée."
+
+#: scripts/scenario_62_chaos_of_war.lua:10762
+msgctxt "stationServices-comms"
+msgid ""
+"An asteroid strike damaged our solar cells and we are short on power, so we "
+"can't recharge ships right now."
+msgstr ""
+"- Énergie : une frappe d'astéroïde a endommagé nos cellules solaires et nous "
+"manquons de puissance, nous ne pouvons donc pas recharger les vaisseaux pour "
+"le moment."
+
+#: scripts/scenario_62_chaos_of_war.lua:10776
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May overcharge jump drive"
+msgstr ""
+"%s\n"
+"- Boost du délai de recharge de la téléportation."
+
+#: scripts/scenario_62_chaos_of_war.lua:10784
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair probe launch system"
+msgstr ""
+"%s\n"
+"- Réparation du système de lancement de sonde."
+
+#: scripts/scenario_62_chaos_of_war.lua:10791
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair hacking system"
+msgstr ""
+"%s\n"
+"- Réparation du système de piratage."
+
+#: scripts/scenario_62_chaos_of_war.lua:10797
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair scanners"
+msgstr ""
+"%s\n"
+"- Réparation des scanners."
+
+#: scripts/scenario_62_chaos_of_war.lua:10803
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair combat maneuver"
+msgstr ""
+"%s\n"
+"- Réparation de la manœuvre de combat."
+
+#: scripts/scenario_62_chaos_of_war.lua:10811
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair self destruct system"
+msgstr ""
+"%s\n"
+"- Réparation du système d'autodestruction."
+
+#: scripts/scenario_62_chaos_of_war.lua:10820
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair slow loading tubes"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10842
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr "Dites m'en plus à propos de votre station"
+
+#: scripts/scenario_62_chaos_of_war.lua:10845
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr "Qu'aimeriez-vous savoir ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:10852
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr "Informations générales"
+
+#: scripts/scenario_62_chaos_of_war.lua:10864
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr "L'histoire de la station"
+
+#: scripts/scenario_62_chaos_of_war.lua:10876
+msgctxt "stationAssist-comms"
+msgid "Report status"
+msgstr "Au rapport"
+
+#: scripts/scenario_62_chaos_of_war.lua:10878
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr "Coque : %d%%\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:10884
+#: scripts/scenario_62_chaos_of_war.lua:10893
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "%sShield: %d%%\n"
+msgstr "%sBoucliers : %d%%\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:10904
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "%sShield %s: %d%%\n"
+msgstr "%sBouclier %s : %d%%\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:10920
+msgctxt "stationStats-comms"
+msgid "What ends the war?"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10924
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"The war ends in one of three ways:\n"
+"1) Time runs out\n"
+"2) A faction drops below half of original score\n"
+"3) A faction either leads or trails the other factions by %i%%\n"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10932
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Human Navy Current:%.1f Original:%.1f (%.2f%%)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10944
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Human Navy loss of player ship penalty: %.1f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10953
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Kraylor Current:%.1f Original:%.1f (%.2f%%)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10964
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Kraylor loss of player ship penalty: %.1f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10974
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Exuari Current:%.1f Original:%.1f (%.2f%%)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10986
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Exuari loss of player ship penalty: %.1f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:10997
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Ktlitan Current:%.1f Original:%.1f (%.2f%%)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11009
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Ktlitan loss of player ship penalty: %.1f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11019
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"\n"
+"Station weight:%i%%   Player ship weight:%i%%   NPC weight:%i%%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11031
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Tie breaker points:"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11037
+#, lua-format
+msgctxt "stationStats-comms"
+msgid "%s %s:%f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11044
+#, lua-format
+msgctxt "stationStats-comms"
+msgid "%s %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11051
+#, lua-format
+msgctxt "stationStats-comms"
+msgid "Station values (Total:%i)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11056
+msgctxt "stationStats-comms"
+msgid "Stations: (value, type, name)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11061
+#: scripts/scenario_62_chaos_of_war.lua:11095
+#: scripts/scenario_62_chaos_of_war.lua:11132
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"   %i, %s, %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11071
+#: scripts/scenario_62_chaos_of_war.lua:11105
+#: scripts/scenario_62_chaos_of_war.lua:11152
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"Total:%i multiplied by weight (%i%%) = weighted total:%.1f"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11085
+#, lua-format
+msgctxt "stationStats-comms"
+msgid "Player ship values (Total:%i)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11090
+msgctxt "stationStats-comms"
+msgid "Player ships: (value, type, name)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11119
+#, lua-format
+msgctxt "stationStats-comms"
+msgid "NPC ship values (Total:%i)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11125
+msgctxt "stationStats-comms"
+msgid "NPC assets: value, type, name (location)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11140
+#, lua-format
+msgctxt "stationStats-comms"
+msgid ""
+"%s\n"
+"   %i, %s, %s (%s)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11169
+msgctxt "stationIntel-comms"
+msgid "Where are the enemy headquarters?"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11179
+#, lua-format
+msgctxt "stationIntel-comms"
+msgid "%s primary station %s is located in sector %s."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11189
+#, lua-format
+msgctxt "stationIntel-comms"
+msgid ""
+"%s\n"
+"%s primary station %s is located in sector %s."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11202
+#, lua-format
+msgctxt "stationIntel-comms"
+msgid "%s primary station is off the grid."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11210
+#, lua-format
+msgctxt "stationIntel-comms"
+msgid ""
+"%s\n"
+"%s primary station is off the grid."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11223
+#, lua-format
+msgctxt "stationIntel-comms"
+msgid ""
+"The intelligence department has provided this information:\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11240
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
+
+#: scripts/scenario_62_chaos_of_war.lua:11248
+#: scripts/scenario_62_chaos_of_war.lua:11329
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+"Vous devez définir un marqueur avant de faire une demande de ravitaillement."
+
+#: scripts/scenario_62_chaos_of_war.lua:11255
+#: scripts/scenario_62_chaos_of_war.lua:11336
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:11261
+#: scripts/scenario_62_chaos_of_war.lua:11342
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr "Marqueur %d"
+
+#: scripts/scenario_62_chaos_of_war.lua:11291
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr ""
+"Nous venons de déployer un vaisseau qui vous déposera la capsule de "
+"ravitaillement au marqueur %d."
+
+#: scripts/scenario_62_chaos_of_war.lua:11300
+#: scripts/scenario_62_chaos_of_war.lua:11382
+#: scripts/scenario_62_chaos_of_war.lua:11493
+#: scripts/scenario_62_chaos_of_war.lua:11588
+#: scripts/scenario_62_chaos_of_war.lua:11684
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr "Pas assez de réputation !"
+
+#: scripts/scenario_62_chaos_of_war.lua:11320
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop via jump ship? (%d rep)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11373
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship with a jump drive toward WP %d"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11399
+msgctxt "stationAssist-comms"
+msgid "Please send reinforcements"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11405
+#: scripts/scenario_62_chaos_of_war.lua:11428
+#: scripts/scenario_62_chaos_of_war.lua:11519
+#: scripts/scenario_62_chaos_of_war.lua:11615
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11412
+msgctxt "stationAssist-comms"
+msgid "What kind of reinforcements would you like?"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11419
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Standard Adder MK5 (%d Rep)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11435
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the Adder MK5?"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11443
+#: scripts/scenario_62_chaos_of_war.lua:11534
+#: scripts/scenario_62_chaos_of_war.lua:11630
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Waypoint %d"
+msgstr "Marqueur %d"
+
+#: scripts/scenario_62_chaos_of_war.lua:11481
+#: scripts/scenario_62_chaos_of_war.lua:11576
+#: scripts/scenario_62_chaos_of_war.lua:11672
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at waypoint %d"
+msgstr ""
+"Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+"marqueur %d."
+
+#: scripts/scenario_62_chaos_of_war.lua:11511
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "MU52 Hornet (%d Rep)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11526
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the MU52 Hornet?"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11607
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Phobos T3 (%d Rep)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11622
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the Phobos T3?"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11708
+msgctxt "ammo-comms"
+msgid "What ordnance do you have available for restock?"
+msgstr "De quelles munitions disposez-vous ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:11721
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Homing"
+msgstr ""
+"\n"
+"   Homing"
+
+#: scripts/scenario_62_chaos_of_war.lua:11725
+#: scripts/scenario_62_chaos_of_war.lua:11745
+#: scripts/scenario_62_chaos_of_war.lua:11765
+#: scripts/scenario_62_chaos_of_war.lua:11784
+#: scripts/scenario_62_chaos_of_war.lua:11804
+#, lua-format
+msgctxt "ammo-comms"
+msgid "(%i)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:11741
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Nuke"
+msgstr ""
+"\n"
+"   Nuke"
+
+#: scripts/scenario_62_chaos_of_war.lua:11761
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Mine"
+msgstr ""
+"\n"
+"   Mine"
+
+#: scripts/scenario_62_chaos_of_war.lua:11780
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   EMP"
+msgstr ""
+"\n"
+"   EMP"
+
+#: scripts/scenario_62_chaos_of_war.lua:11800
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   HVLI"
+msgstr ""
+"\n"
+"   HVLI"
+
+#: scripts/scenario_62_chaos_of_war.lua:11813
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
+
+#: scripts/scenario_62_chaos_of_war.lua:11818
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
+
+#: scripts/scenario_62_chaos_of_war.lua:11826
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
+
+#: scripts/scenario_62_chaos_of_war.lua:11849
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:11855
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation"
+msgstr ""
+"Station %s :\n"
+"- Marchandises à vendre : (quantité, coût en réputation)"
+
+#: scripts/scenario_62_chaos_of_war.lua:11862
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"   %14s: %2i, %3i"
+msgstr ""
+"\n"
+"   %14s : x%2i, %3i rép l'unité."
+
+#: scripts/scenario_62_chaos_of_war.lua:12149
+#, lua-format
+msgctxt "station-comms"
+msgid "Activate station defense fleet (%s rep)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:12160
+#, lua-format
+msgctxt "station-comms"
+msgid "%s defense fleet\n"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:12186
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"activated"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:12232
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
+
+#: scripts/scenario_62_chaos_of_war.lua:12234
+msgctxt "ammo-comms"
+msgid "What type of ordnance?"
+msgstr "Quel type de munitions ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:12247
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes?"
+msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:12249
+msgctxt "ammo-comms"
+msgid "We really need some nukes."
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke)"
+
+#: scripts/scenario_62_chaos_of_war.lua:12256
+#: scripts/scenario_62_chaos_of_war.lua:12294
+#: scripts/scenario_62_chaos_of_war.lua:12335
+#: scripts/scenario_62_chaos_of_war.lua:12370
+#: scripts/scenario_62_chaos_of_war.lua:12405
+#, lua-format
+msgctxt "ammo-comms"
+msgid ", %i avail"
+msgstr "; x%i"
+
+#: scripts/scenario_62_chaos_of_war.lua:12263
+#: scripts/scenario_62_chaos_of_war.lua:12301
+#: scripts/scenario_62_chaos_of_war.lua:12342
+#: scripts/scenario_62_chaos_of_war.lua:12377
+#: scripts/scenario_62_chaos_of_war.lua:12412
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s (%i rep each%s)"
+msgstr "%s (%i rép l'unité%s)"
+
+#: scripts/scenario_62_chaos_of_war.lua:12285
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles."
+msgstr "Veuillez réapprovisionner nos missiles EMP"
+
+#: scripts/scenario_62_chaos_of_war.lua:12287
+msgctxt "ammo-comms"
+msgid "Got any EMPs?"
+msgstr "Avez-vous des EMP ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:12323
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us?"
+msgstr "Des missiles à tête chercheuse (homing) pour nous ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:12327
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles?"
+msgstr "Avez-vous des missiles homing supplémentaires ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:12362
+msgctxt "ammo-comms"
+msgid "We could use some mines."
+msgstr "Nous pourrions avoir besoin de quelques mines"
+
+#: scripts/scenario_62_chaos_of_war.lua:12363
+msgctxt "ammo-comms"
+msgid "How about mines?"
+msgstr "Concernant les mines ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:12397
+msgctxt "ammo-comms"
+msgid "What about HVLI?"
+msgstr "Concernant les HVLI ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:12398
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI?"
+msgstr "Pourriez-vous fournir des HVLI ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:12487
+msgctxt "stationServices-comms"
+msgid "Repair ship system"
+msgstr "Réparer les systèmes du vaisseau"
+
+#: scripts/scenario_62_chaos_of_war.lua:12492
+msgctxt "stationServices-comms"
+msgid "What system would you like repaired?"
+msgstr "Quel système souhaitez-vous réparer ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:12500
+msgctxt "stationServices-comms"
+msgid "Repair probe launch system (5 Rep)"
+msgstr "Réparer le système de lancement de sonde (5 rép)"
+
+#: scripts/scenario_62_chaos_of_war.lua:12508
+msgctxt "stationServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr "Votre système de lancement de sonde a été réparé."
+
+#: scripts/scenario_62_chaos_of_war.lua:12529
+msgctxt "stationServices-comms"
+msgid "Repair hacking system (5 Rep)"
+msgstr "Réparer le système de piratage (5 rép)"
+
+#: scripts/scenario_62_chaos_of_war.lua:12537
+msgctxt "stationServices-comms"
+msgid "Your hack system has been repaired"
+msgstr "Votre système de piratage a été réparé."
+
+#: scripts/scenario_62_chaos_of_war.lua:12558
+msgctxt "stationServices-comms"
+msgid "Repair scanners (5 Rep)"
+msgstr "Réparer les scanners (5 rép)"
+
+#: scripts/scenario_62_chaos_of_war.lua:12566
+msgctxt "stationServices-comms"
+msgid "Your scanners have been repaired"
+msgstr "Vos scanners ont été réparés."
+
+#: scripts/scenario_62_chaos_of_war.lua:12587
+msgctxt "stationServices-comms"
+msgid "Repair combat maneuver (5 Rep)"
+msgstr "Réparer la manœuvre de combat (5 rép)"
+
+#: scripts/scenario_62_chaos_of_war.lua:12595
+msgctxt "stationServices-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr "Votre manœuvre de combat a été réparée."
+
+#: scripts/scenario_62_chaos_of_war.lua:12616
+msgctxt "stationServices-comms"
+msgid "Repair self destruct system (5 Rep)"
+msgstr "Réparer le système d'autodestruction (5 rép)"
+
+#: scripts/scenario_62_chaos_of_war.lua:12624
+msgctxt "stationServices-comms"
+msgid "Your self destruct system has been repaired"
+msgstr "Votre système d'autodestruction a été réparé."
+
+#: scripts/scenario_62_chaos_of_war.lua:12662
+msgctxt "stationServices-comms"
+msgid "Repair slow tube loading (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:12679
+msgctxt "stationServices-comms"
+msgid "Your tube load times have been returned to normal"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:12703
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr "Vous devez rester amarré à la station pour cette action."
+
+#: scripts/scenario_62_chaos_of_war.lua:12712
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
+
+#: scripts/scenario_62_chaos_of_war.lua:12717
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
+
+#: scripts/scenario_62_chaos_of_war.lua:12720
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
+
+#: scripts/scenario_62_chaos_of_war.lua:12734
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
+
+#: scripts/scenario_62_chaos_of_war.lua:12741
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+"Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
+
+#: scripts/scenario_62_chaos_of_war.lua:12770
+#: scripts/scenario_62_chaos_of_war.lua:12822
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"Station inventory of %s type weapons reduced to %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:12785
+#: scripts/scenario_62_chaos_of_war.lua:12837
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
+
+#: scripts/scenario_62_chaos_of_war.lua:12792
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
+
+#: scripts/scenario_62_chaos_of_war.lua:12797
+#: scripts/scenario_62_chaos_of_war.lua:12852
+#: scripts/scenario_62_chaos_of_war.lua:12858
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr "Pas assez de réputation."
+
+#: scripts/scenario_62_chaos_of_war.lua:12805
+msgctxt "ammo-comms"
+msgid ""
+"Either you can't afford as much as I'd like to give you, or I don't have "
+"enough to fully restock you."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:12808
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr "Prendre juste 1 munition"
+
+#: scripts/scenario_62_chaos_of_war.lua:12845
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with one weapon charge.\n"
+"Put it to good use."
+msgstr ""
+"Nous vous avons généreusement réapprovisionné avec cette munition.\n"
+"Utilisez-la bien.\n"
+"(Vous entendez quelqu'un ricaner de l'autre coté de la ligne.)"
+
+#: scripts/scenario_62_chaos_of_war.lua:12876
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr "Acheter, vendre, échanger"
+
+#: scripts/scenario_62_chaos_of_war.lua:12880
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available for sale: quantity, cost in reputation\n"
+msgstr ""
+"Station %s :\n"
+"- Marchandises à vendre : (quantité, coût en réputation)\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:12887
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i, %i\n"
+msgstr "     %s : x%i, %i rép l'unité.\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:12897
+msgctxt "trade-comms"
+msgid "Goods or components station will buy: price in reputation\n"
+msgstr "- Marchandises à acheter : (bénéfice en réputation)\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:12902
+#: scripts/scenario_62_chaos_of_war.lua:12920
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i\n"
+msgstr "     %s : %i\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:12910
+#, lua-format
+msgctxt "trade-comms"
+msgid "Current cargo aboard %s:\n"
+msgstr ""
+"\n"
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:12927
+msgctxt "trade-comms"
+msgid "     Empty\n"
+msgstr "     Vide\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:12933
+#, lua-format
+msgctxt "trade-comms"
+msgid "Available Space: %i, Available Reputation: %i\n"
+msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:12942
+#: scripts/scenario_62_chaos_of_war.lua:14741
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr "Acheter 1 %s pour %i rép"
+
+#: scripts/scenario_62_chaos_of_war.lua:12948
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i\n"
+"Coût : %i rép l'unité."
+
+#: scripts/scenario_62_chaos_of_war.lua:12957
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+"\n"
+"\n"
+"Votre espace de stockage est insuffisant pour acheter."
+
+#: scripts/scenario_62_chaos_of_war.lua:12966
+#: scripts/scenario_62_chaos_of_war.lua:12996
+msgctxt "needRep-comms"
+msgid ""
+"\n"
+"Insufficient reputation for purchase"
+msgstr ""
+"\n"
+"\n"
+"Réputation insuffisante pour acheter."
+
+#: scripts/scenario_62_chaos_of_war.lua:12972
+#: scripts/scenario_62_chaos_of_war.lua:13065
+#: scripts/scenario_62_chaos_of_war.lua:13108
+#: scripts/scenario_62_chaos_of_war.lua:13151
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient station inventory"
+msgstr ""
+"\n"
+"\n"
+"Stock insuffisant dans la station pour pouvoir en acheter."
+
+#: scripts/scenario_62_chaos_of_war.lua:12991
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"purchased"
+msgstr ""
+"\n"
+"\n"
+"1 marchandise achetée."
+
+#: scripts/scenario_62_chaos_of_war.lua:13016
+#, lua-format
+msgctxt "trade-comms"
+msgid "Sell one %s for %i reputation"
+msgstr "Vendre 1 %s pour %i rép"
+
+#: scripts/scenario_62_chaos_of_war.lua:13026
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Reputation price: %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Bénéfice : %i rép."
+
+#: scripts/scenario_62_chaos_of_war.lua:13035
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"One sold"
+msgstr ""
+"\n"
+"\n"
+"1 marchandise vendue."
+
+#: scripts/scenario_62_chaos_of_war.lua:13052
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr "Échanger de la nourriture (food) contre %s"
+
+#: scripts/scenario_62_chaos_of_war.lua:13057
+#: scripts/scenario_62_chaos_of_war.lua:13100
+#: scripts/scenario_62_chaos_of_war.lua:13143
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i"
+
+#: scripts/scenario_62_chaos_of_war.lua:13080
+#: scripts/scenario_62_chaos_of_war.lua:13123
+#: scripts/scenario_62_chaos_of_war.lua:13166
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+"\n"
+"\n"
+"Marchandises échangées."
+
+#: scripts/scenario_62_chaos_of_war.lua:13095
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
+
+#: scripts/scenario_62_chaos_of_war.lua:13138
+#: scripts/scenario_62_chaos_of_war.lua:14705
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr "Échanger des produits de luxe (luxury) contre %s"
+
+#: scripts/scenario_62_chaos_of_war.lua:13185
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Augment scan range with station sensors while docked (%i rep)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13207
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "sensors increased by %i units"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13237
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Overcharge Jump Drive (%s rep)"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13253
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Your jump drive has been overcharged to %ik"
+msgstr ""
+"...Après quelques instants.\n"
+"\n"
+"C'est fait. Votre moteur de téléportation a été boosté à %ik. Le temps de "
+"recharge sera plus court."
+
+#: scripts/scenario_62_chaos_of_war.lua:13280
+msgctxt "upgrade-comms"
+msgid "Your hull strength has been increased by 20%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13283
+msgctxt "upgrade-comms"
+msgid "You already have the hull strength upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13312
+msgctxt "upgrade-comms"
+msgid "Your missile tube load time has been reduced by 20%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13318
+msgctxt "upgrade-comms"
+msgid "Your ship has no missile systems and thus cannot be upgraded"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13325
+msgctxt "upgrade-comms"
+msgid "You already have the missile load speed upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13344
+msgctxt "upgrade-comms"
+msgid ""
+"Your ship shields are now 20% stronger. They'll need to charge to their new "
+"higher capacity"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13350
+msgctxt "upgrade-comms"
+msgid "Your ship has no shields and thus cannot be upgraded"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13354
+msgctxt "upgrade-comms"
+msgid "You already have the shield upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13389
+msgctxt "upgrade-comms"
+msgid "Your ship beam weapons damage has been increased by 20%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13395
+#: scripts/scenario_62_chaos_of_war.lua:13441
+msgctxt "upgrade-comms"
+msgid "Your ship has no beam weapons and thus cannot be upgraded"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13400
+msgctxt "upgrade-comms"
+msgid "You already have the beam damage upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13435
+msgctxt "upgrade-comms"
+msgid "Your ship beam weapons range has been increased by 20%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13446
+msgctxt "upgrade-comms"
+msgid "You already have the beam range upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13457
+msgctxt "upgrade-comms"
+msgid ""
+"Your ship batteries can now store 20% more energy. You'll need to charge "
+"them longer to use their full capacity"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13463
+msgctxt "upgrade-comms"
+msgid "You already have the battery efficiency upgrade"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13475
+msgctxt "upgrade-comms"
+msgid "Your maximum impulse top speed has been increased by 20%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13479
+msgctxt "upgrade-comms"
+msgid "You already have an upgraded impulse engine"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13493
+msgctxt "upgrade-comms"
+msgid ""
+"Your ship's long range sensors have had their reach increased by 10 units"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13497
+msgctxt "upgrade-comms"
+msgid "You already have upgraded long range sensors"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13507
+msgctxt "upgrade-comms"
+msgid "Your maneuvering speed has been increased by 20%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13511
+msgctxt "upgrade-comms"
+msgid "You already have upgraded maneuvering speed"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13558
+#: scripts/scenario_62_chaos_of_war.lua:14802
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:13560
+#: scripts/scenario_62_chaos_of_war.lua:14804
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr "Monsieur, comment pouvons-nous vous assister ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:13581
+#: scripts/scenario_62_chaos_of_war.lua:14813
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr "Nous allons vous anéantir"
+
+#: scripts/scenario_62_chaos_of_war.lua:13583
+#: scripts/scenario_62_chaos_of_war.lua:14815
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr "Votre race va s'éteindre ici et maintenant !"
+
+#: scripts/scenario_62_chaos_of_war.lua:13585
+#: scripts/scenario_62_chaos_of_war.lua:14817
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
+
+#: scripts/scenario_62_chaos_of_war.lua:13590
+#: scripts/scenario_62_chaos_of_war.lua:14820
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+"...Ktzzzsss...\n"
+"Vous allez mourir faibles créatures insignifiantes !"
+
+#: scripts/scenario_62_chaos_of_war.lua:13594
+msgctxt "shipEnemy-comms"
+msgid "We will destroy you"
+msgstr "Nous allons vous détruire"
+
+#: scripts/scenario_62_chaos_of_war.lua:13597
+msgctxt "shipEnemy-comms"
+msgid "We think not. It is you who will experience destruction!"
+msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
+
+#: scripts/scenario_62_chaos_of_war.lua:13600
+msgctxt "shipEnemy-comms"
+msgid "You have no honor"
+msgstr "Vous n'avez aucun honneur"
+
+#: scripts/scenario_62_chaos_of_war.lua:13603
+msgctxt "shipEnemy-comms"
+msgid "Your insult has brought our wrath upon you. Prepare to die."
+msgstr "Votre insulte a attiré notre colère sur vous. Préparez-vous à mourir !"
+
+#: scripts/scenario_62_chaos_of_war.lua:13607
+msgctxt "shipEnemy-comms"
+msgid "Your comments about honor have no meaning to us"
+msgstr "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
+
+#: scripts/scenario_62_chaos_of_war.lua:13611
+msgctxt "shipEnemy-comms"
+msgid "We pity your pathetic race"
+msgstr "Nous plaignons votre race pathétique"
+
+#: scripts/scenario_62_chaos_of_war.lua:13614
+msgctxt "shipEnemy-comms"
+msgid "Pathetic? You will regret your disparagement!"
+msgstr ""
+"Pathétique ?\n"
+"Vous allez regretter votre insolence !"
+
+#: scripts/scenario_62_chaos_of_war.lua:13617
+msgctxt "shipEnemy-comms"
+msgid "We don't care what you think of us"
+msgstr "Peu importe ce que vous pensez de nous."
+
+#: scripts/scenario_62_chaos_of_war.lua:13624
+#: scripts/scenario_62_chaos_of_war.lua:14826
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
+"Fin de transmission."
+
+#: scripts/scenario_62_chaos_of_war.lua:13632
+#: scripts/scenario_62_chaos_of_war.lua:14833
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+"Restez en dehors de notre chemin, ou votre mort sera une amusante "
+"distraction pour nous !"
+
+#: scripts/scenario_62_chaos_of_war.lua:13640
+#: scripts/scenario_62_chaos_of_war.lua:14840
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
+"universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir "
+"archives...Grrzzzz\n"
+"\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
+"\n"
+"Communication interrompue."
+
+#: scripts/scenario_62_chaos_of_war.lua:13643
+#: scripts/scenario_62_chaos_of_war.lua:14843
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr "Executer à distance : AUTODESTRUCTION"
+
+#: scripts/scenario_62_chaos_of_war.lua:13646
+#: scripts/scenario_62_chaos_of_war.lua:14846
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
+
+#: scripts/scenario_62_chaos_of_war.lua:13649
+#: scripts/scenario_62_chaos_of_war.lua:14849
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr "Ordre externe ignoré."
+
+#: scripts/scenario_62_chaos_of_war.lua:13654
+#: scripts/scenario_62_chaos_of_war.lua:14854
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+"Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+"s'opposer à nous tous.\n"
+"Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
+
+#: scripts/scenario_62_chaos_of_war.lua:13659
+#: scripts/scenario_62_chaos_of_war.lua:14859
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
+
+#: scripts/scenario_62_chaos_of_war.lua:13663
+#: scripts/scenario_62_chaos_of_war.lua:14863
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:13667
+#: scripts/scenario_62_chaos_of_war.lua:14867
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+"Notre peuple a d'autres priorités que l'extermination de parasites tels que "
+"vous."
+
+#: scripts/scenario_62_chaos_of_war.lua:13671
+msgctxt "shipEnemy-comms"
+msgid "State your business"
+msgstr "Qu'est ce que vous voulez ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:13675
+msgctxt "shipEnemy-comms"
+msgid "What do you want? (not that we care)"
+msgstr "Qu'est-ce que vous voulez ? (non pas que ça nous intéresse)"
+
+#: scripts/scenario_62_chaos_of_war.lua:13679
+msgctxt "shipEnemy-comms"
+msgid "Don't waste our time"
+msgstr "Ne perdons pas notre temps."
+
+#: scripts/scenario_62_chaos_of_war.lua:13681
+#: scripts/scenario_62_chaos_of_war.lua:14870
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr "Occupez-vous de vos affaires !"
+
+#: scripts/scenario_62_chaos_of_war.lua:13810
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr "Oui, c'est pour quoi ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:13847
+#: scripts/scenario_62_chaos_of_war.lua:14890
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+"Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+"Nous sommes en mission de la plus haute importance."
+
+#: scripts/scenario_62_chaos_of_war.lua:13852
+#: scripts/scenario_62_chaos_of_war.lua:14894
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+"Nous n'avons rien pour vous.\n"
+"Bonne journée."
+
+#: scripts/scenario_62_chaos_of_war.lua:13859
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr "Au rapport"
+
+#: scripts/scenario_62_chaos_of_war.lua:13861
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr "Coque : %d%%\n"
+
+#: scripts/scenario_62_chaos_of_war.lua:13867
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sShield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13877
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sFront Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13886
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sRear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13897
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sShield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13912
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s%s Missiles: %d/%d\n"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13922
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sJump drive charge: %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13932
+msgctxt "shipAssist-comms"
+msgid "Stop. Do nothing."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13935
+msgctxt "shipAssist-comms"
+msgid "routine system maintenance"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13936
+msgctxt "shipAssist-comms"
+msgid "for idle ship gossip"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13937
+msgctxt "shipAssist-comms"
+msgid "exterior paint touch-up"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13938
+msgctxt "shipAssist-comms"
+msgid "exercise for continued fitness"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13939
+msgctxt "shipAssist-comms"
+msgid "meditation therapy"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13940
+msgctxt "shipAssist-comms"
+msgid "internal simulated flight routines"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13941
+msgctxt "shipAssist-comms"
+msgid "digital dreamscape construction"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13944
+msgctxt "shipAssist-comms"
+msgid "catching up on reading the latest war drama novel"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13948
+msgctxt "shipAssist-comms"
+msgid "writing up results of bifurcated personality research"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13952
+msgctxt "shipAssist-comms"
+msgid "categorizing nearby miniscule space particles"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13956
+msgctxt "shipAssist-comms"
+msgid "continuing the count of visible stars from this region"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13958
+msgctxt "shipAssist-comms"
+msgid "internal systems diagnostics"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13962
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except %s."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13971
+msgctxt "shipAssist-comms"
+msgid "Attack all enemies. Start with the nearest."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13974
+msgctxt "shipAssist-comms"
+msgid "Searching and destroying"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13981
+msgctxt "shipAssist-comms"
+msgid "Stop and defend your current location"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13987
+msgctxt "shipAssist-comms"
+msgid "Stopping. Shooting any enemy that approaches"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:13995
+#: scripts/scenario_62_chaos_of_war.lua:14366
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr "Défendez un marqueur"
+
+#: scripts/scenario_62_chaos_of_war.lua:14000
+#: scripts/scenario_62_chaos_of_war.lua:14042
+#: scripts/scenario_62_chaos_of_war.lua:14372
+#: scripts/scenario_62_chaos_of_war.lua:14440
+#: scripts/scenario_62_chaos_of_war.lua:14502
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+"Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
+"un."
+
+#: scripts/scenario_62_chaos_of_war.lua:14006
+#: scripts/scenario_62_chaos_of_war.lua:14380
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr "Quel marqueur devons-nous défendre ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:14011
+#: scripts/scenario_62_chaos_of_war.lua:14053
+#: scripts/scenario_62_chaos_of_war.lua:14386
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr "Défendez le marqueur %d"
+
+#: scripts/scenario_62_chaos_of_war.lua:14022
+#: scripts/scenario_62_chaos_of_war.lua:14415
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr "Nous partons immédiatement défendre le marqueur %d."
+
+#: scripts/scenario_62_chaos_of_war.lua:14036
+msgctxt "shipAssist-comms"
+msgid "Go to waypoint, ignore enemies"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14048
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we approach?"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14064
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to WP%d ignoring enemies."
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14079
+#: scripts/scenario_62_chaos_of_war.lua:14344
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr "Aidez-nous !"
+
+#: scripts/scenario_62_chaos_of_war.lua:14081
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr "Entendu, nous partons immédiatement vous aider."
+
+#: scripts/scenario_62_chaos_of_war.lua:14119
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr "Amarrez-vous à %s"
+
+#: scripts/scenario_62_chaos_of_war.lua:14125
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr "En cours d'amarrage à %s."
+
+#: scripts/scenario_62_chaos_of_war.lua:14140
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Direct fleet %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14145
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Fleet %i consists of:\n"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14161
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"\n"
+"What command should be given to fleet %i?"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14168
+msgctxt "shipAssist-comms"
+msgid "Report hull and shield status"
+msgstr "État de la coque et des boucliers"
+
+#: scripts/scenario_62_chaos_of_war.lua:14171
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Fleet %i status:"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14182
+#: scripts/scenario_62_chaos_of_war.lua:14286
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+" %s:"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14189
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"    Hull: %d%%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14203
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"    Shield: %d%%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14216
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"    Shields: "
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14224
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sFront: %d%% Rear: %d%%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14247
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s %d:%d%%"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14272
+msgctxt "shipAssist-comms"
+msgid "Report missile status"
+msgstr "Rapport de l'état des missiles"
+
+#: scripts/scenario_62_chaos_of_war.lua:14275
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Fleet %i missile status:"
+msgstr "État des missiles de la flotte %i :"
+
+#: scripts/scenario_62_chaos_of_war.lua:14310
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"      %s: %d/%d"
+msgstr ""
+"%s\n"
+"      %s : %d/%d"
+
+#: scripts/scenario_62_chaos_of_war.lua:14331
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"    Missiles: %s"
+msgstr ""
+"%s\n"
+"    Missiles : %s"
+
+#: scripts/scenario_62_chaos_of_war.lua:14358
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Fleet %s heading toward you to assist"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14433
+msgctxt "shipAssist-comms"
+msgid "Go to waypoint. Attack enemies en route"
+msgstr "Allez au marqueur et attaquez les ennemis sur votre chemin"
+
+#: scripts/scenario_62_chaos_of_war.lua:14446
+#: scripts/scenario_62_chaos_of_war.lua:14508
+msgctxt "shipAssist-comms"
+msgid "Which waypoint?"
+msgstr "Quel marqueur ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:14451
+#: scripts/scenario_62_chaos_of_war.lua:14513
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Go to WP%d"
+msgstr "Allez au marqueur %d"
+
+#: scripts/scenario_62_chaos_of_war.lua:14480
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Going to WP%d, watching for enemies en route"
+msgstr ""
+"Bien reçu,\n"
+"Nous nous dirigeons maintenant vers le marqueur %d, en surveillant les "
+"ennemis en route."
+
+#: scripts/scenario_62_chaos_of_war.lua:14496
+msgctxt "shipAssist-comms"
+msgid "Go to waypoint. Ignore enemies"
+msgstr "Allez au marqueur en ignorant les ennemis"
+
+#: scripts/scenario_62_chaos_of_war.lua:14542
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Going to WP%d, ignoring enemies"
+msgstr ""
+"Entendu,\n"
+"Nous allons directement au marqueur %d en ignorant tout ennemi que l'on "
+"croiserait."
+
+#: scripts/scenario_62_chaos_of_war.lua:14560
+msgctxt "shipAssist-comms"
+msgid "Go offensive, attack all enemy targets"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14578
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Fleet %s is on an offensive rampage"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14589
+msgctxt "shipAssist-comms"
+msgid "Stop and defend your current position"
+msgstr "Arrêtez-vous et défendez votre position actuelle"
+
+#: scripts/scenario_62_chaos_of_war.lua:14602
+msgctxt "shipAssist-comms"
+msgid "Stopping and defending"
+msgstr ""
+"Bien reçu,\n"
+"À l'arrêt et en position défensive."
+
+#: scripts/scenario_62_chaos_of_war.lua:14608
+msgctxt "shipAssist-comms"
+msgid "Stop and do nothing"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14620
+msgctxt "shipAssist-comms"
+msgid "Stopping and doing nothing"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:14671
+msgctxt "trade-comms"
+msgid "Do you have cargo you might sell?"
+msgstr "Auriez-vous des marchandises à vendre ?"
+
+#: scripts/scenario_62_chaos_of_war.lua:14674
+msgctxt "trade-comms"
+msgid "We've got "
+msgstr "Nous avons : "
+
+#: scripts/scenario_62_chaos_of_war.lua:14679
+msgctxt "trade-comms"
+msgid ", "
+msgstr ", "
+
+#: scripts/scenario_62_chaos_of_war.lua:14688
+msgctxt "trade-comms"
+msgid "nothing"
+msgstr "rien du tout."
+
+#: scripts/scenario_62_chaos_of_war.lua:14723
+#, lua-format
+msgctxt "trade-comms"
+msgid "Traded your luxury for %s from %s"
+msgstr "Échanger vos produits de luxe (luxury) contre du %s auprès de %s"
+
+#: scripts/scenario_62_chaos_of_war.lua:14762
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchased %s from %s"
+msgstr "1 %s acheté auprès de %s."
+
+#: scripts/scenario_62_chaos_of_war.lua:14771
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr "Réputation insuffisante pour acheter."
+
+#: scripts/scenario_62_chaos_of_war.lua:14902
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "%s Current cargo:"
+msgstr ""
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)"
+
+#: scripts/scenario_62_chaos_of_war.lua:14913
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr "     %s : x%i"
+
+#: scripts/scenario_62_chaos_of_war.lua:14922
+msgctxt "inventory-shipLog"
+msgid "     Empty"
+msgstr "     Vide"
+
+#: scripts/scenario_62_chaos_of_war.lua:14925
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "Available space: %i"
+msgstr "Slots de stockage disponibles : %i"
+
+#: scripts/scenario_62_chaos_of_war.lua:15235
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s wins with a score of %f!\n"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:15242
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s:%f "
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:15385
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "H:%i K:%i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:15391
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "%s E:%i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:15398
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "%s B:%i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:15405
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "%s %i:%.2i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:15412
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:15491
+#, lua-format
+msgctxt "helpfullWarning-shipLog"
+msgid ""
+"[%s in %s] We detect one or more enemies nearby. At least one is of type %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:15685
+#, lua-format
+msgctxt "-tabRelay&Ops&Helms&Tactical"
+msgid "%s in %s"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:15729
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr "Inventaire"
+
+#: scripts/scenario_62_chaos_of_war.lua:15743
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr "Inventaire"
+
+#: scripts/scenario_62_chaos_of_war.lua:15836
+#: scripts/scenario_62_chaos_of_war.lua:15899
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr "Un de vos réparateurs a péri."
+
+#: scripts/scenario_62_chaos_of_war.lua:15848
+#: scripts/scenario_62_chaos_of_war.lua:15913
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr "Un de vos réparateurs a péri."
+
+#: scripts/scenario_62_chaos_of_war.lua:15945
+msgctxt "coolant-msgEngineer"
+msgid "Damage has caused a loss of coolant"
+msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#: scripts/scenario_62_chaos_of_war.lua:15959
+msgctxt "coolant-msgEngineer+"
+msgid "Damage has caused a loss of coolant"
+msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#: scripts/scenario_62_chaos_of_war.lua:15976
+msgctxt "damage-msgEngineer"
+msgid "The probe launch system has been damaged"
+msgstr "Le système de lancement des sondes a été endommagé."
+
+#: scripts/scenario_62_chaos_of_war.lua:15990
+msgctxt "damage-msgEngineer+"
+msgid "The probe launch system has been damaged"
+msgstr "Le système de lancement des sondes a été endommagé."
+
+#: scripts/scenario_62_chaos_of_war.lua:16004
+msgctxt "damage-msgEngineer"
+msgid "The hacking system has been damaged"
+msgstr "Le système de piratage a été endommagé."
+
+#: scripts/scenario_62_chaos_of_war.lua:16018
+msgctxt "damage-msgEngineer+"
+msgid "The hacking system has been damaged"
+msgstr "Le système de piratage a été endommagé."
+
+#: scripts/scenario_62_chaos_of_war.lua:16032
+msgctxt "damage-msgEngineer"
+msgid "The scanners have been damaged"
+msgstr "Les scanners ont été endommagés."
+
+#: scripts/scenario_62_chaos_of_war.lua:16046
+msgctxt "damage-msgEngineer+"
+msgid "The scanners have been damaged"
+msgstr "Les scanners ont été endommagés."
+
+#: scripts/scenario_62_chaos_of_war.lua:16062
+msgctxt "damage-msgEngineer"
+msgid "Combat maneuver has been damaged"
+msgstr "La manœuvre de combat a été endommagée."
+
+#: scripts/scenario_62_chaos_of_war.lua:16076
+msgctxt "damage-msgEngineer+"
+msgid "Combat maneuver has been damaged"
+msgstr "La manœuvre de combat a été endommagée."
+
+#: scripts/scenario_62_chaos_of_war.lua:16092
+msgctxt "damage-msgEngineer"
+msgid "Self destruct system has been damaged"
+msgstr "Le système d'autodestruction a été endommagé."
+
+#: scripts/scenario_62_chaos_of_war.lua:16106
+msgctxt "damage-msgEngineer+"
+msgid "Self destruct system has been damaged"
+msgstr "Le système d'autodestruction a été endommagé."
+
+#: scripts/scenario_62_chaos_of_war.lua:16141
+msgctxt "damage-msgEngineer"
+msgid "Tube damage has caused tube load time to increase"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:16155
+msgctxt "damage-msgEngineer+"
+msgid "Tube damage has caused tube load time to increase"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:16174
+msgctxt "repairCrew-msgEngineer"
+msgid "Medical team has revived one of your repair crew"
+msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
+
+#: scripts/scenario_62_chaos_of_war.lua:16186
+msgctxt "repairCrew-msgEngineer+"
+msgid "Medical team has revived one of your repair crew"
+msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
+
+#: scripts/scenario_62_chaos_of_war.lua:16223
+msgctxt "coolant-msgEngineer"
+msgid "Automated systems have recovered some coolant"
+msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#: scripts/scenario_62_chaos_of_war.lua:16235
+msgctxt "coolant-msgEngineer+"
+msgid "Automated systems have recovered some coolant"
+msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#: scripts/scenario_62_chaos_of_war.lua:16292
+msgctxt "-buttonEngineer"
+msgid "Damage Report"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:16327
+msgctxt "damage-msgEngineer"
+msgid ""
+"\n"
+"Weapon tube load time degraded"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:16349
+msgctxt "damage-buttonEngineer"
+msgid "Damage Report"
+msgstr ""
+
+#: scripts/scenario_62_chaos_of_war.lua:16384
+msgctxt "damage-msgEngineer+"
+msgid ""
+"\n"
+"Weapon tube load time degraded"
+msgstr ""

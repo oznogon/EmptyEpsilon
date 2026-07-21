@@ -1,0 +1,63 @@
+#: scripts/shiptemplates/exuari/frigates.lua:10
+msgctxt "ship"
+msgid "Racer"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/frigates.lua:11
+msgctxt "class"
+msgid "Frigate"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/frigates.lua:11
+msgctxt "subclass"
+msgid "Strike"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/frigates.lua:16
+msgid ""
+"The Exuari alpha striker 'Racer' is a warp-drive equipped Figter build for "
+"quick strikes. This spacecraft runs on a small crew and is often used as "
+"scout, interceptor or to perform preemptive attacks. It's fast, it's agile, "
+"but the striker beams do not cause an extreme amount of damage. Like all "
+"strikers, it lacks in rear shields."
+msgstr ""
+
+#: scripts/shiptemplates/exuari/frigates.lua:29
+msgctxt "ship"
+msgid "Hunter"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/frigates.lua:33
+msgid ""
+"The Exuari beta striker 'Hunter' is a warp-drive equipped reinforement "
+"fighter. This spacecraft runs on a small crew and is often sent into battle "
+"to aid other Exuari ships when they engage in combat. It has an extra pair "
+"of striker beams and improved front shields. It's fast, it's agile, and can "
+"clean up what is left of the enemies fleet after an initial strike."
+msgstr ""
+
+#: scripts/shiptemplates/exuari/frigates.lua:46
+msgctxt "ship"
+msgid "Strike"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/frigates.lua:50
+msgid ""
+"The Exuari gamma striker 'Strike' is a warp-drive equipped tactical bomber "
+"build for quick strikes against strong shielded targets. This spacecraft "
+"runs on a small crew and is equipped with HVLIs and an EMP. It's fast, it's "
+"agile, and can do a great amount of damage in short time."
+msgstr ""
+
+#: scripts/shiptemplates/exuari/frigates.lua:63
+msgctxt "ship"
+msgid "Dash"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/frigates.lua:67
+msgid ""
+"The Exuari delta striker 'Dash' is a warp-drive equipped endurance bomber "
+"build for prolonged strikes. This spacecraft runs on a small crew and "
+"combines reinforced front shields with a good amount of HVLIs. It's fast, "
+"it's agile, and can take some damage."
+msgstr ""

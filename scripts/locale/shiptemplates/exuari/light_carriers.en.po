@@ -1,0 +1,63 @@
+#: scripts/shiptemplates/exuari/light_carriers.lua:11
+msgctxt "ship"
+msgid "Ryder"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/light_carriers.lua:13
+msgctxt "class"
+msgid "Light carrier"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/light_carriers.lua:13
+msgctxt "subclass"
+msgid "Escort"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/light_carriers.lua:17
+msgid ""
+"The Ryder is a large carrier spacecraft with many defensive features "
+"deployed by the Exuari. It can be docked by smaller ships to refuel or carry "
+"them. Unlike a station it is equipped with a slow impulse drive and capable "
+"of interstellar travel. It is used as a habitation for Exuari crews and has "
+"a hangar bay. A commom Exuari assault strategy is to keep a Ryder off the "
+"sensor range of the desired target, while fighters and artillery start from "
+"the carrier."
+msgstr ""
+
+#: scripts/shiptemplates/exuari/light_carriers.lua:48
+msgctxt "class"
+msgid "Frigate"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/light_carriers.lua:49
+msgctxt "class"
+msgid "Corvette"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/light_carriers.lua:50
+msgctxt "class"
+msgid "Transport"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/light_carriers.lua:53
+msgctxt "class"
+msgid "Starfighter"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/light_carriers.lua:54
+msgctxt "class"
+msgid "Tug"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/light_carriers.lua:64
+msgctxt "ship"
+msgid "Fortress"
+msgstr ""
+
+#: scripts/shiptemplates/exuari/light_carriers.lua:67
+msgid ""
+"The Exuari Fortress is a huge carrier with many defensive features deployed "
+"by the Exuari. It can be docked by smaller ships to refuel or carry them, "
+"and is equipped with a slow impulse drive. The shields of this base carrier "
+"are believed to be impenetrable."
+msgstr ""

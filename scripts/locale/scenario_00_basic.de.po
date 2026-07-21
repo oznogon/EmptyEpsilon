@@ -167,37 +167,37 @@ msgstr ""
 "Simpleres, weniger starkes Schiff, aber einfacher zu bedienen. Für "
 "unerfahrene Crews empfohlen."
 
-#: scripts/scenario_00_basic.lua:205
+#: scripts/scenario_00_basic.lua:459
 msgctxt "buttonGM"
-msgid "+Named Waves"
-msgstr "+Welle: aus Schiffstyp"
+msgid "+Named waves"
+msgstr ""
 
-#: scripts/scenario_00_basic.lua:206
+#: scripts/scenario_00_basic.lua:460
 msgctxt "buttonGM"
 msgid "Random wave"
 msgstr "Zufällige Welle"
 
-#: scripts/scenario_00_basic.lua:217
+#: scripts/scenario_00_basic.lua:471
 msgctxt "buttonGM"
 msgid "Random friendly"
 msgstr "Zufälliger Verbündeter"
 
-#: scripts/scenario_00_basic.lua:238
+#: scripts/scenario_00_basic.lua:520
 msgctxt "buttonGM"
 msgid "Win"
 msgstr "Sieg für menschl.Navy"
 
-#: scripts/scenario_00_basic.lua:244
+#: scripts/scenario_00_basic.lua:526
 msgctxt "buttonGM"
 msgid "Victory?"
 msgstr "Gewonnen?"
 
-#: scripts/scenario_00_basic.lua:245
+#: scripts/scenario_00_basic.lua:529
 msgctxt "buttonGM"
 msgid "Yes"
 msgstr "Ja"
 
-#: scripts/scenario_00_basic.lua:248
+#: scripts/scenario_00_basic.lua:534
 msgctxt "msgGM"
 msgid ""
 "Players have won.\n"
@@ -206,67 +206,67 @@ msgstr ""
 "Menschliche Navy hat gewonnen.\n"
 "Szenario beendet."
 
-#: scripts/scenario_00_basic.lua:251
+#: scripts/scenario_00_basic.lua:538
 msgctxt "buttonGM"
 msgid "No"
 msgstr "Nein"
 
-#: scripts/scenario_00_basic.lua:256
+#: scripts/scenario_00_basic.lua:543
 msgctxt "buttonGM"
 msgid "Position: "
 msgstr "Position: "
 
-#: scripts/scenario_00_basic.lua:259
+#: scripts/scenario_00_basic.lua:546
 msgctxt "buttonGM"
 msgid "GM"
 msgstr "festlegen"
 
-#: scripts/scenario_00_basic.lua:261
+#: scripts/scenario_00_basic.lua:548
 msgctxt "buttonGM"
 msgid "Random"
 msgstr "Zufall"
 
-#: scripts/scenario_00_basic.lua:274
+#: scripts/scenario_00_basic.lua:561
 msgctxt "buttonGM"
 msgid "Strikeship"
 msgstr ""
 
-#: scripts/scenario_00_basic.lua:275
+#: scripts/scenario_00_basic.lua:562
 msgctxt "buttonGM"
 msgid "Fighter"
 msgstr "Jäger"
 
-#: scripts/scenario_00_basic.lua:276
+#: scripts/scenario_00_basic.lua:563
 msgctxt "buttonGM"
 msgid "Gunship"
 msgstr "Kanonenboot"
 
-#: scripts/scenario_00_basic.lua:277
+#: scripts/scenario_00_basic.lua:564
 msgctxt "buttonGM"
 msgid "Dreadnought"
 msgstr "Dreadnought"
 
-#: scripts/scenario_00_basic.lua:278
+#: scripts/scenario_00_basic.lua:565
 msgctxt "buttonGM"
-msgid "Missile Cruiser"
-msgstr "Raketenkreuzer"
+msgid "Missile cruiser"
+msgstr ""
 
-#: scripts/scenario_00_basic.lua:279
+#: scripts/scenario_00_basic.lua:566
 msgctxt "buttonGM"
 msgid "Cruiser"
 msgstr "Kreuzer"
 
-#: scripts/scenario_00_basic.lua:280
+#: scripts/scenario_00_basic.lua:567
 msgctxt "buttonGM"
-msgid "Magpie"
+msgid "Adv. striker"
 msgstr ""
 
-#: scripts/scenario_00_basic.lua:283
+#: scripts/scenario_00_basic.lua:570
 msgctxt "buttonGM"
-msgid "-From Named Waves"
-msgstr "-Welle: aus Schiffstyp"
+msgid "-From named waves"
+msgstr ""
 
-#: scripts/scenario_00_basic.lua:529
+#: scripts/scenario_00_basic.lua:899
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -288,7 +288,7 @@ msgstr ""
 "\n"
 "Viel Glück."
 
-#: scripts/scenario_00_basic.lua:539
+#: scripts/scenario_00_basic.lua:917
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -300,19 +300,19 @@ msgstr ""
 "\n"
 "Viel Glück."
 
-#: scripts/scenario_00_basic.lua:574
+#: scripts/scenario_00_basic.lua:958
 #, lua-format
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: SUCCESS (%d seconds left)"
 msgstr "Mission ERFOLGREICH!  (%d Sekunden verbleibend)"
 
-#: scripts/scenario_00_basic.lua:585
+#: scripts/scenario_00_basic.lua:974
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (time has run out)"
 msgstr "Mission FEHLGESCHLAGEN (Zeit abgelaufen)"
 
-#: scripts/scenario_00_basic.lua:594 scripts/scenario_00_basic.lua:599
-#: scripts/scenario_00_basic.lua:604
+#: scripts/scenario_00_basic.lua:990 scripts/scenario_00_basic.lua:1007
+#: scripts/scenario_00_basic.lua:1024
 #, fuzzy, lua-format
 msgctxt "time-incCall"
 msgid "%s, you have one minute remaining."
@@ -320,21 +320,33 @@ msgid_plural "%s, you have %d minutes remaining."
 msgstr[0] "%s, Sie haben noch %d Minute Zeit."
 msgstr[1] "%s, Sie haben noch %d Minuten Zeit."
 
-#: scripts/scenario_00_basic.lua:614
+#: scripts/scenario_00_basic.lua:1042
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (no friendlies left)"
 msgstr "Mission FEHLGESCHLAGEN (keine Verbündeten mehr übrig)"
 
-#: scripts/scenario_00_basic.lua:631
+#: scripts/scenario_00_basic.lua:1062
 msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (all your ships destroyed)"
 msgstr "Mission FEHLGESCHLAGEN (alle eigenen Schiffe zerstört)"
 
-#: scripts/scenario_00_basic.lua:639
+#: scripts/scenario_00_basic.lua:1075
 #, lua-format
 msgctxt "msgSpectbanner"
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
 msgstr "Mission läuft. Verbleibende Zeit: %d:%02d - Feinde: %d"
+
+#~ msgctxt "buttonGM"
+#~ msgid "+Named Waves"
+#~ msgstr "+Welle: aus Schiffstyp"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Missile Cruiser"
+#~ msgstr "Raketenkreuzer"
+
+#~ msgctxt "buttonGM"
+#~ msgid "-From Named Waves"
+#~ msgstr "-Welle: aus Schiffstyp"
 
 #~ msgctxt "buttonGM"
 #~ msgid "Scenario ended"
