@@ -275,7 +275,7 @@ function init()
 
 "Epsilon, please come in.
 
-We have an emergency situation. Our sensors detect that a hostile Ktlitan swarm just jumped into your sector, with the main force heading for the Stakhanov Mining Complex. Proceed at once to Stakhanov and assist in the defence.
+We have an emergency situation. Our sensors detect that a hostile Ktlitan swarm just jumped into your sector, with the main force heading for the Stakhanov Mining Complex. Proceed at once to Stakhanov and assist in the defense.
 
 Be careful of the dense asteroid agglomeration en route to the SMC.
 

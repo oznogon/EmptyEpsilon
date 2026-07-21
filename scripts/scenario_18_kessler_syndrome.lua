@@ -660,7 +660,7 @@ function init_player2()
         :setFaction("Human Navy")
         :setTemplate("Flavia P.Falcon")
         :setWeaponTubeCount(0)
-    player2:setCallSign(_("Empty ship")) -- as players might not realise that this is a player ship and could be confused when noone is answering their call
+    player2:setCallSign(_("Empty ship")) -- as players might not realize that this is a player ship and could be confused when noone is answering their call
     player2
         :setWeaponStorageMax("Nuke", 0)
         :setWeaponStorageMax("Homing", 0)

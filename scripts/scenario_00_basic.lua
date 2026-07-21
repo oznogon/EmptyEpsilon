@@ -520,7 +520,7 @@ function gmButtons()
     addGMFunction(_("buttonGM", "Win"), gmVictoryYesNo)
 end
 
---- Shows Yes/No question dialogue GM submenu with question if Human Navy should win.
+--- Shows Yes/No question dialog GM submenu with question if Human Navy should win.
 function gmVictoryYesNo()
     clearGMFunctions()
     addGMFunction(_("buttonGM", "Victory?"), function()
