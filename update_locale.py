@@ -8,6 +8,12 @@ import os
 
 def update_other_languages(base):
     assert base.endswith(".en_US.po")
+    gb = base.replace(".en_US.po", ".en_GB.po")
+    if not os.path.exists(gb):
+        print("Create %s" % (gb))
+        with open(base, "rt") as src:
+            with open(gb, "wt") as dst:
+                dst.write(src.read())
     for other in glob.glob(base[:-5] + "*.po"):
         if other == base:
             continue
