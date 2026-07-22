@@ -4,6 +4,12 @@
 
 ### New features
 
+- Touchscreen pinch-to-zoom gestures on RadarViews
+  - Pinch with two fingers to zoom, centered on the pinch point like mousewheel zoom
+  - Single-finger touch continues to support tap-to-select and drag-to-pan
+  - GuiCanvas updated to correctly forward multi-touch DOWN and UP events
+  - Map recentering suppressed after pinch gesture release
+
 - Map pages for BriefingMap screen, with new briefing map script functions
   - Map mimics Relay/Strategic Map, using script-defined pseudoentities
   - Supports keyframe animation

@@ -61,11 +61,19 @@ bool GuiCanvas::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position
         if (clicked)
         {
             click_element = clicked;
+            if (button == sp::io::Pointer::Button::Touch)
+                touch_pointer_count = 1;
             clicked->pressed = true;
             clicked->onMouseDown(button, position, id);
             focus(clicked);
             return true;
         }
+    }
+    else if (button == sp::io::Pointer::Button::Touch)
+    {
+        touch_pointer_count++;
+        click_element->onMouseDown(button, position, id);
+        return true;
     }
     return false;
 }
@@ -80,9 +88,16 @@ void GuiCanvas::onPointerUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (click_element)
     {
-        click_element->pressed = false;
         click_element->onMouseUp(position, id);
+        if (id != sp::io::Pointer::mouse)
+        {
+            touch_pointer_count--;
+            if (touch_pointer_count > 0)
+                return;
+        }
+        click_element->pressed = false;
         click_element = nullptr;
+        touch_pointer_count = 0;
     }
 }
 
