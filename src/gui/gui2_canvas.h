@@ -7,6 +7,7 @@ class GuiCanvas : public Renderable, public GuiContainer
 {
 private:
     GuiElement* click_element;
+    int touch_pointer_count = 0;
     GuiElement* focus_element;
     glm::vec2 mouse_position{0.0f, 0.0f};
     glm::vec2 mouse_delta{0.0f, 0.0f};

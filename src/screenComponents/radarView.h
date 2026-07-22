@@ -3,6 +3,7 @@
 #include "gui/gui2_element.h"
 #include "gui/theme.h"
 #include "engine.h"
+#include "gestureTracker.h"
 
 class GuiMissileTubeControls;
 class TargetsContainer;
@@ -71,6 +72,15 @@ private:
     pfunc_t mouse_drag_func = nullptr;
     pfunc_t mouse_up_func = nullptr;
     fpfunc_t mouse_wheel_func;
+    GestureTracker gesture_tracker;
+    bool enable_gestures = true;
+    bool gesture_was_active = false;
+    float gesture_start_distance = 0.0f;
+    float gesture_start_pinch = 0.0f;
+    float gesture_prev_pinch = 0.0f;
+    glm::vec2 gesture_start_centroid{0.0f, 0.0f};
+    float min_zoom_distance = 100.0f;
+    float max_zoom_distance = 1000000.0f;
     // Overlay callback
     std::function<void(sp::RenderTarget&)> overlay_func;
 
@@ -137,6 +147,8 @@ public:
     glm::vec2 getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
     float getViewRotation() { return view_rotation; }
+    GuiRadarView* setGesturesEnabled(bool enabled) { this->enable_gestures = enabled; return this; }
+    GuiRadarView* setZoomBounds(float min_distance, float max_distance) { this->min_zoom_distance = min_distance; this->max_zoom_distance = max_distance; return this; }
 
     glm::vec2 worldToScreen(glm::vec2 world_position);
     glm::vec2 screenToWorld(glm::vec2 screen_position);

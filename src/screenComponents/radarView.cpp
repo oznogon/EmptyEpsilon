@@ -1028,6 +1028,26 @@ bool GuiRadarView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 positio
             return false;
     }
 
+    if (enable_gestures && button == sp::io::Pointer::Button::Touch)
+    {
+        gesture_tracker.fingerDown(id, position);
+        if (gesture_tracker.isGestureActive())
+        {
+            gesture_was_active = true;
+            gesture_start_distance = distance;
+            gesture_start_pinch = gesture_tracker.getPinchDistance();
+            gesture_prev_pinch = gesture_start_pinch;
+            gesture_start_centroid = gesture_tracker.getCentroid();
+            LOG(Info, "Gesture start: distance=", gesture_start_distance, " pinch=", gesture_start_pinch, " centroid=", gesture_start_centroid.x, ",", gesture_start_centroid.y);
+        }
+        else
+        {
+            if (mouse_down_func)
+                mouse_down_func(button, screenToWorld(position));
+        }
+        return true;
+    }
+
     if (!mouse_down_func && !mouse_drag_func && !mouse_up_func)
         return false;
 
@@ -1039,13 +1059,76 @@ bool GuiRadarView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 positio
 
 void GuiRadarView::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    if (enable_gestures && gesture_tracker.hasFinger(id))
+    {
+        gesture_tracker.fingerMove(id, position);
+
+        if (gesture_tracker.isGestureActive())
+        {
+            float pinch = gesture_tracker.getPinchDistance();
+
+            if (gesture_start_pinch > 0.0f)
+            {
+                float pinch_ratio = gesture_prev_pinch / pinch;
+                float new_distance = distance * pinch_ratio;
+                new_distance = std::clamp(new_distance, min_zoom_distance, max_zoom_distance);
+
+                glm::vec2 world_before = screenToWorld(gesture_start_centroid);
+                setDistance(new_distance);
+                glm::vec2 world_after = screenToWorld(gesture_start_centroid);
+                setViewPosition(getViewPosition() + world_before - world_after);
+
+                gesture_prev_pinch = pinch;
+
+                LOG(Info, "Pinch gesture: prev_pinch=", gesture_prev_pinch, " current_pinch=", pinch, " new_distance=", new_distance);
+            }
+
+            return;
+        }
+
+        if (!gesture_tracker.isGestureActive())
+        {
+            if (gesture_was_active)
+            {
+                gesture_was_active = false;
+                if (mouse_down_func)
+                    mouse_down_func(sp::io::Pointer::Button::Touch, screenToWorld(position));
+            }
+            if (mouse_drag_func)
+                mouse_drag_func(screenToWorld(position));
+            return;
+        }
+    }
+
     if (mouse_drag_func) mouse_drag_func(screenToWorld(position));
 }
 
 void GuiRadarView::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    if (enable_gestures && gesture_tracker.hasFinger(id))
+    {
+        bool was_gesture = gesture_tracker.isGestureActive();
+        gesture_tracker.fingerUp(id);
+
+        if (was_gesture && !gesture_tracker.isGestureActive())
+        {
+            gesture_start_pinch = 0.0f;
+            gesture_prev_pinch = 0.0f;
+            LOG(Info, "Gesture end");
+        }
+
+        if (gesture_tracker.getFingerCount() == 0)
+        {
+            if (!gesture_was_active && mouse_up_func)
+                mouse_up_func(screenToWorld(position));
+            gesture_was_active = false;
+        }
+        return;
+    }
+
     if (mouse_up_func) mouse_up_func(screenToWorld(position));
 }
+
 
 bool GuiRadarView::onMouseWheelScroll(glm::vec2 position, float value)
 {
