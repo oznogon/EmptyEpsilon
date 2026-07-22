@@ -1140,3 +1140,14 @@ bool GuiRadarView::onMouseWheelScroll(glm::vec2 position, float value)
 
     return false;
 }
+
+void GuiRadarView::onPinch(float scale)
+{
+    if (!enable_gestures)
+        return;
+
+    float new_distance = std::clamp(distance / scale, min_zoom_distance, max_zoom_distance);
+    setDistance(new_distance);
+
+    LOG(Info, "SDL pinch: scale=", scale, " new_distance=", new_distance);
+}

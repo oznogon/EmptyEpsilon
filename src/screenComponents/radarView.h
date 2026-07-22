@@ -157,6 +157,7 @@ public:
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
+    virtual void onPinch(float scale) override;
 private:
     void updateGhostDots();
 

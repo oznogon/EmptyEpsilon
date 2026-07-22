@@ -106,6 +106,12 @@ void GuiCanvas::onMouseWheelScroll(glm::vec2 position, float value)
     executeScrollOnElement(position, value);
 }
 
+void GuiCanvas::onPinch(float scale)
+{
+    if (click_element)
+        click_element->onPinch(scale);
+}
+
 void GuiCanvas::onTextInput(const string& text)
 {
     if (focus_element)
