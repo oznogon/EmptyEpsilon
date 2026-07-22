@@ -147,3 +147,5 @@ sdl3 20260719 -- breaking-change migration to SDL3
 
 GinjaNinja32/multicast-ip -- allow setting sACN multicast behavior
 GinjaNinja32/get-wall-clock -- add getWallClock() Lua function
+
+sdl-fake-gestures -- add rudimentary fingerDown/Up gestures
