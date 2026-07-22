@@ -144,3 +144,6 @@ collision-damage 20260621 -- change server setting to selector
 nebula-rendering 20260622 -- dynamic lighting
 
 sdl3 20260719 -- breaking-change migration to SDL3
+
+GinjaNinja32/multicast-ip -- allow setting sACN multicast behavior
+GinjaNinja32/get-wall-clock -- add getWallClock() Lua function
