@@ -21,7 +21,10 @@ function init()
         :setFaction("Human Navy")
         :setCallSign("Marco Polo")
         :setDescription(
-            _("scienceDescription-station", "A merchant and entertainment hub.")
+            _(
+                "scienceDescription-station",
+                "A merchant and entertainment hub."
+            )
         )
         :setPosition(-21200, 45250)
     parangon = CpuShip()
@@ -344,8 +347,11 @@ function commsNSA()
             if
                 comms_target:getDescription()
                 == _(
-                    "scienceDescription-station",
-                    "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear."
+                        "scienceDescription-station",
+                        "Nosy Sensing Array, an old SIGINT platform."
+                    ) .. " " .. _(
+                        "scienceDescription-station",
+                        "The signal is now crystal clear."
                 )
             then
                 setCommsMessage(
@@ -360,7 +366,10 @@ function commsNSA()
                 comms_target:setDescription(
                     _(
                         "scienceDescription-station",
-                        "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."
+                        "Nosy Sensing Array, an old SIGINT platform."
+                    ) .. " " .. _(
+                        "scienceDescription-station",
+                        "The Ktlitan Swarm Commander has been located.
                     )
                 )
             else
@@ -1093,7 +1102,10 @@ It is due to come out of its FTL jump near the Nosy Sensing Array. Secure the lo
                 nsa:setDescription(
                     _(
                         "scienceDescription-station",
-                        "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear."
+                        "Nosy Sensing Array, an old SIGINT platform."
+                    ) .. " " .. _(
+                        "scienceDescription-station",
+                        "The signal is now crystal clear."
                     )
                 )
                 main_mission = 10
@@ -1105,7 +1117,7 @@ It is due to come out of its FTL jump near the Nosy Sensing Array. Secure the lo
                     player:getDescription()
                     == _(
                         "scienceDescription-station",
-                        "Arlenian Device Installed"
+                        "Arlenian device installed"
                     )
                 )
                 and (
@@ -1125,7 +1137,10 @@ We are both ready to continue our purpose, it seems."]]
                 nsa:setDescription(
                     _(
                         "scienceDescription-station",
-                        "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear."
+                        "Nosy Sensing Array, an old SIGINT platform."
+                    ) .. " " .. _(
+                        "scienceDescription-station",
+                        "The signal is now crystal clear."
                     )
                 )
                 main_mission = 10
@@ -1183,7 +1198,10 @@ We are both ready to continue our purpose, it seems."]]
             (hacked == 0)
             and (nsa:getDescription() == _(
                 "scienceDescription-station",
-                "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."
+                "Nosy Sensing Array, an old SIGINT platform."
+            ) .. " " .. _(
+                "scienceDescription-station",
+                "The Ktlitan Swarm Commander has been located."
             ))
             and (
                 bs114:sendCommsMessageNoLog(
