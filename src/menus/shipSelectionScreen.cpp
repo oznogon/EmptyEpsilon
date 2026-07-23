@@ -696,14 +696,15 @@ ShipSelectionScreen::ShipSelectionScreen()
             ship_template_selector = new GuiSelector(ship_action_row, "CREATE_SHIP_SELECTOR",
                 [this](int index, string value)
                 {
-                    if (index < int(ship_spawn_info.size()))
-                        left_panel_2_text->setText(ship_spawn_info[index].description);
+                    int original_index = value.toInt();
+                    if (original_index >= 0 && original_index < static_cast<int>(ship_spawn_info.size()))
+                        left_panel_2_text->setText(ship_spawn_info[original_index].description);
                 }
             );
 
             ship_template_selector->setSortByName(true);
-            for (const auto& info : ship_spawn_info)
-                ship_template_selector->addEntry(info.label, info.label);
+            for (int n = 0; n < static_cast<int>(ship_spawn_info.size()); n++)
+                ship_template_selector->addEntry(ship_spawn_info[n].label, string(n));
 
             ship_template_selector
                 ->setSelectionIndex(0)
@@ -714,10 +715,10 @@ ShipSelectionScreen::ShipSelectionScreen()
             ship_template_button = new GuiButton(ship_action_row, "CREATE_SHIP_BUTTON", tr("Create"),
                 [this]()
                 {
-                    auto index = ship_template_selector->getSelectionIndex();
-                    if (index < static_cast<int>(ship_spawn_info.size()))
+                    int original_index = ship_template_selector->getSelectionValue().toInt();
+                    if (original_index >= 0 && original_index < static_cast<int>(ship_spawn_info.size()))
                     {
-                        auto res = ship_spawn_info[index].create_callback.call<sp::ecs::Entity>();
+                        auto res = ship_spawn_info[original_index].create_callback.call<sp::ecs::Entity>();
                         LuaConsole::checkResult(res);
                         if (res.isOk())
                         {
@@ -728,7 +729,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             );
 
             ship_template_button->setSize(150.0f, GuiElement::GuiSizeMax);
-            left_panel_2_text->setText(ship_spawn_info[0].description);
+            left_panel_2_text->setText(ship_spawn_info[ship_template_selector->getEntryValue(0).toInt()].description);
         }
         else
         {
