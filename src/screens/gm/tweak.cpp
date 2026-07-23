@@ -3209,31 +3209,30 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         ->setTextSize(20.0f)
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    component_list = new GuiListbox(left_panel, "", [this](int index, string value)
-    {
-        if (in_search_view)
+    component_list = new GuiListbox(left_panel, "",
+        [this](int index, string value)
         {
-            if (index >= 0 && index < static_cast<int>(search_result_indices.size()))
+            if (in_search_view)
             {
-                int pi = search_result_indices[index];
+                if (index >= 0 && index < static_cast<int>(search_result_indices.size()))
+                {
+                    const int pi = search_result_indices[index];
+                    for (auto page : pages) page->hide();
+                    pages[pi]->show();
+                    showPageDescription(pi);
+                }
+            }
+            else if (in_group_view) showGroupComponents(index);
+            else if (index == 0) showGroups();
+            else
+            {
+                const int pi = filtered_indices[index - 1];
                 for (auto page : pages) page->hide();
                 pages[pi]->show();
                 showPageDescription(pi);
             }
         }
-        else if (in_group_view)
-            showGroupComponents(index);
-        else if (index == 0)
-            showGroups();
-        else
-        {
-            int pi = filtered_indices[index - 1];
-            for (auto page : pages)
-                page->hide();
-            pages[pi]->show();
-            showPageDescription(pi);
-        }
-    });
+    );
 
     component_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -3273,13 +3272,16 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         {scripting_group, {}}
     };
 
-    auto addPageToGroup = [&](const string& group_name) {
+    auto addPageToGroup = [&](const string& group_name)
+    {
         for (auto& g : component_groups)
+        {
             if (g.name == group_name)
             {
                 g.page_indices.push_back(static_cast<int>(pages.size()) - 1);
                 return;
             }
+        }
     };
 
     // Transform component, custom implementation since it uses functions
@@ -3299,17 +3301,20 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         ui->update_func = [this, ui]() -> glm::vec2 {
             if (auto t = entity.getComponent<sp::Transform>())
                 return t->getPosition();
-            // Component doesn't exist. Return current widget values to preserve user input.
+            // Component doesn't exist. Return current widget values to preserve
+            // user input.
             return glm::vec2(
                 ui->x_input->getText().toFloat(),
                 ui->y_input->getText().toFloat()
             );
         };
-        ui->callback = [this](glm::vec2 value) {
+        ui->callback = [this](glm::vec2 value)
+        {
             if (auto t = entity.getComponent<sp::Transform>())
                 t->setPosition(value);
         };
-        // Register apply function to initialize from UI when component is created
+        // Register apply function to initialize from UI when component is
+        // created.
         new_page->apply_functions.push_back(
             [this, ui]()
             {
@@ -3338,16 +3343,19 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             ->setAlignment(sp::Alignment::CenterRight)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto ui = new GuiRotationDialTweak(row);
-        ui->update_func = [this, ui]() -> float {
+        ui->update_func = [this, ui]() -> float
+        {
             if (auto t = entity.getComponent<sp::Transform>())
                 return t->getRotation();
             return ui->value_entry->getText().toFloat();
         };
-        ui->callback = [this](float value) {
+        ui->callback = [this](float value)
+        {
             if (auto t = entity.getComponent<sp::Transform>())
                 t->setRotation(value);
         };
-        new_page->apply_functions.push_back([this, ui]() {
+        new_page->apply_functions.push_back([this, ui]()
+        {
             string rot_text = ui->value_entry->getText();
             if (!rot_text.empty())
             {
@@ -3380,23 +3388,32 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     }
     {
         auto row = new GuiElement(new_page->tweaks, "");
-        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
-        (new GuiLabel(row, "", tr("tweak-text", "Shape:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        auto ui = new GuiSelectorTweak(row, "PHYSICS_SHAPE", [this](int index, string value)
-        {
-            if (auto v = entity.getComponent<sp::Physics>())
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+
+        (new GuiLabel(row, "", tr("tweak-text", "Shape:"), 20.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        auto ui = new GuiSelectorTweak(row, "PHYSICS_SHAPE",
+            [this](int index, string value)
             {
-                auto type = v->getType();
-                auto size = v->getSize();
-                if (index == 0)
-                    v->setCircle(type, size.x);
-                else
-                    v->setRectangle(type, size);
+                if (auto v = entity.getComponent<sp::Physics>())
+                {
+                    auto type = v->getType();
+                    auto size = v->getSize();
+                    if (index == 0) v->setCircle(type, size.x);
+                    else v->setRectangle(type, size);
+                }
             }
-        });
+        );
+
         for (int i = 0; i <= 1; i++)
             ui->addEntry(physicsShapeToString(static_cast<sp::Physics::Shape>(i)), string(i));
-        ui->update_func = [this]() -> int {
+
+        ui->update_func = [this]() -> int
+        {
             if (auto v = entity.getComponent<sp::Physics>())
                 return static_cast<int>(v->getShape());
             return 0;
@@ -3404,22 +3421,37 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     }
     {
         auto row = new GuiElement(new_page->tweaks, "");
-        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
-        (new GuiLabel(row, "", tr("tweak-text", "Radius:"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+
+        (new GuiLabel(row, "", tr("tweak-text", "Radius:"), 20.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
         auto ui = new GuiTextTweak(row);
-        ui->update_func = [this]() -> string {
+
+        ui->update_func = [this]() -> string
+        {
             if (auto v = entity.getComponent<sp::Physics>())
                 return string(v->getSize().x, 3);
             return "";
         };
-        ui->callback([this](string text) {
-            if (auto v = entity.getComponent<sp::Physics>())
-                v->setCircle(v->getType(), text.toFloat());
-        });
+
+        ui->callback(
+            [this](string text)
+            {
+                if (auto v = entity.getComponent<sp::Physics>())
+                    v->setCircle(v->getType(), text.toFloat());
+            }
+        );
     }
     {
         auto row = new GuiElement(new_page->tweaks, "");
-        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+
         auto btn = new GuiButtonTweak(row, tr("tweak-button", "Sync radar trace radius to physics radius"),
             [this]()
             {
@@ -3430,17 +3462,24 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
                 }
             }
         );
+
         btn
             ->setTextSize(20.0f)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        btn->enable_update_func = [this]() -> bool {
+        btn->enable_update_func = [this]() -> bool
+        {
             return entity.hasComponent<RadarTrace>();
         };
     }
     {
         auto row = new GuiElement(new_page->tweaks, "");
-        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
-        (new GuiLabel(row, "", tr("tweak-text", "Size (W x H):"), 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+
+        (new GuiLabel(row, "", tr("tweak-text", "Size (W x H):"), 20.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         auto w_ui = new GuiTextTweak(row);
         w_ui->update_func = [this]() -> string {
             if (auto v = entity.getComponent<sp::Physics>())
@@ -5149,7 +5188,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     showGroups();
 
     // Button to close the tweaks window.
-    (new GuiButton(this, "CLOSE_BUTTON", tr("button", "Close"),
+    (new GuiButton(this, "CLOSE_BUTTON", "X",
         [this]()
         {
             hide();
@@ -5157,7 +5196,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ))
         ->setTextSize(20.0f)
         ->setPosition(10.0f, -20.0f, sp::Alignment::TopRight)
-        ->setSize(70.0f, 30.0f);
+        ->setSize(20.0f, 30.0f);
 }
 
 void GuiEntityTweak::open(sp::ecs::Entity e, string select_component)
