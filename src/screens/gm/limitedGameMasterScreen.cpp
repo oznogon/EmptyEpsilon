@@ -227,7 +227,7 @@ private:
 
         auto entry = new GuiTextEntry(row, "", "");
         entry->setTextSize(18.0f)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        entry->callback([this, entry, lua_path](string text)
+        entry->callback([this, lua_path](string text)
         {
             if (entity && script_runner && text.length() > 0)
             {
@@ -251,7 +251,7 @@ private:
 
         auto entry = new GuiTextEntry(row, "", "");
         entry->setTextSize(18.0f)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        entry->callback([this, entry, lua_path](string text)
+        entry->callback([this, lua_path](string text)
         {
             if (entity && script_runner && text.length() > 0)
                 script_runner(entity, lua_path + " = " + string(text.toFloat(), 3));
@@ -278,7 +278,7 @@ private:
         entry
             ->setTextSize(18.0f)
             ->callback(
-                [this, entry, lua_path](string text)
+                [this, lua_path](string text)
                 {
                     if (entity && script_runner && text.length() > 0)
                         script_runner(entity, lua_path + " = " + string(text.toInt()));
@@ -479,6 +479,7 @@ private:
             }
         );
 
+        selector->setSortByName(true);
         for (auto [e, info] : sp::ecs::Query<FactionInfo>())
             selector->addEntry(info.locale_name, info.name);
         selector->setTextSize(18.0f)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -1029,6 +1030,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
             runScriptForEntity(getEntityStringForLua(obj), ".components.faction.entity = findFaction('" + value + "')");
     });
 
+    faction_selector->setSortByName(true);
     for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
         faction_selector->addEntry(info.locale_name, info.name);
 

@@ -50,6 +50,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         }
     );
 
+    faction_selector->setSortByName(true);
     for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
         faction_selector->addEntry(info.locale_name, info.name);
 

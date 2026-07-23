@@ -1037,6 +1037,7 @@ public:
         setSize(GuiElement::GuiSizeMax, 30.0f);
         setTextSize(20.0f);
         addEntry(tr("tweak-faction", "(None)"), "");
+        setSortByName(true);
     }
 
     virtual void onDraw(sp::RenderTarget& target) override
@@ -1083,7 +1084,7 @@ private:
 
         // Add all factions
         for (auto [entity, faction_info] : sp::ecs::Query<FactionInfo>())
-            addEntry(faction_info.name, entity.toString());
+            addEntry(faction_info.locale_name, entity.toString());
 
         // Restore selection if faction still exists.
         if (!current_value.empty())
@@ -3190,6 +3191,31 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         ->setTextSize(20.0f)
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
+    show_existing_toggle = new GuiButton(left_panel, "SHOW_EXISTING_TOGGLE", tr("tweak", "Show existing"), [this]()
+    {
+        only_show_existing = !only_show_existing;
+        if (only_show_existing)
+        {
+            show_existing_toggle->setText(tr("tweak", "Show all"));
+            show_existing_toggle->setStyle("button.toggle.on");
+        }
+        else
+        {
+            show_existing_toggle->setText(tr("tweak", "Show existing"));
+            show_existing_toggle->setStyle("button.toggle.off");
+        }
+
+        if (in_search_view)
+            showSearchResults(search_filter->getText());
+        else if (current_group_index >= 0)
+            showGroupComponents(current_group_index);
+        else
+            showGroups();
+    });
+    show_existing_toggle
+        ->setTextSize(20.0f)
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
+
     component_list = new GuiListbox(left_panel, "", [this](int index, string value)
     {
         if (in_search_view)
@@ -5181,7 +5207,22 @@ void GuiEntityTweak::showGroups()
     for (auto page : pages) page->hide();
     component_list->clear();
     for (auto& group : component_groups)
+    {
+        if (only_show_existing)
+        {
+            bool has_match = false;
+            for (int pi : group.page_indices)
+            {
+                if (pages[pi]->has_component(entity))
+                {
+                    has_match = true;
+                    break;
+                }
+            }
+            if (!has_match) continue;
+        }
         component_list->addEntry(group.name, "");
+    }
     component_list->setSelectionIndex(0);
     component_description->setText("");
 }
@@ -5197,14 +5238,20 @@ void GuiEntityTweak::showGroupComponents(int group_index)
     component_list->addEntry(tr("tweak-nav", "Back"), "");
     auto& group = component_groups[group_index];
 
+    std::vector<int> filtered_indices;
     for (int pi : group.page_indices)
+    {
+        if (only_show_existing && !pages[pi]->has_component(entity))
+            continue;
         component_list->addEntry(page_labels[pi], "");
+        filtered_indices.push_back(pi);
+    }
 
-    if (!group.page_indices.empty())
+    if (!filtered_indices.empty())
     {
         component_list->setSelectionIndex(1);
-        pages[group.page_indices[0]]->show();
-        showPageDescription(group.page_indices[0]);
+        pages[filtered_indices[0]]->show();
+        showPageDescription(filtered_indices[0]);
     }
     else component_description->setText("");
 }
@@ -5222,6 +5269,8 @@ void GuiEntityTweak::showSearchResults(const string& query)
     {
         if (page_labels[i].lower().find(lower_query) != -1)
         {
+            if (only_show_existing && !pages[i]->has_component(entity))
+                continue;
             search_result_indices.push_back(i);
             component_list->addEntry(page_labels[i], "");
         }
