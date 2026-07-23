@@ -35,7 +35,7 @@ function HomingMissile()
         },
         radar_signature = {
             electrical = 0.1,
-            biological = 0.2,
+            thermal = 0.2,
         },
         hull = {
             current = 1,
@@ -73,7 +73,7 @@ function HVLI()
             rotate = true,
             color = { 200, 200, 200, 255 },
         },
-        radar_signature = { gravity = 0.1 },
+        radar_signature = { gravitational = 0.1 },
         hull = {
             current = 1,
             max = 1,
@@ -168,7 +168,7 @@ function Nuke()
         },
         radar_signature = {
             electrical = 0.7,
-            biological = 0.1,
+            thermal = 0.1,
         },
         hull = {
             current = 1,
