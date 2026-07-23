@@ -22,7 +22,6 @@ private:
 
     const float KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + 3.0f * KEY_BINDER_WIDTH + 4.0f * KEY_BINDER_MARGIN;
     const float KEY_ROW_HEIGHT = GuiElement::GuiSizeRow + GuiHotkeyBinder::SELECTOR_HEIGHT;
-    const float KEY_COLUMN_TOP = GuiElement::GuiSizeRow * 1.5f + GuiElement::GuiSizeRow * 0.5f;
 
     GuiElement* container;
     GuiElement* top_row;

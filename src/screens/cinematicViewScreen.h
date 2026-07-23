@@ -69,8 +69,6 @@ private:
         CameraMode::Topdown
     };
     const int camera_mode_flyby_int = static_cast<int>(CameraMode::Flyby);
-    const int camera_mode_free_int = static_cast<int>(CameraMode::Free);
-    const int camera_mode_static_int = static_cast<int>(CameraMode::Static);
 
     // Active camera mode - the source of truth for which mode is currently active
     CameraMode active_camera_mode = CameraMode::Flyby;
@@ -92,7 +90,6 @@ private:
     const float chase_distance_max = 2000.0f;
     const float chase_height_min = 50.0f;
     const float chase_height_max = 500.0f;
-    const float isometric_elevation = 35.264f;
     const float isometric_distance_min = 500.0f;
     const float isometric_distance_max = 3000.0f;
     const float topdown_zoom_min = 500.0f;
@@ -108,8 +105,6 @@ private:
     glm::vec2 camera_rotation_vector{0.0f, 0.0f};
     glm::vec2 camera_destination{0.0f, 0.0f};
     // camera_position, _yaw, _pitch are intiialized in main()
-    float angle_yaw = -90.0f;
-    float angle_pitch = 45.0f;
     P<MouseRenderer> mouse_renderer;
 
     // Initialize pref-defined options
@@ -162,7 +157,6 @@ private:
 
     // Fly-by camera mode state
     float flyby_height = 200.0f;
-    float flyby_distance = 1000.0f;
     float flyby_fov_modifier = 0.0f;
     glm::vec2 flyby_camera_pos{0.0f, 0.0f};
 

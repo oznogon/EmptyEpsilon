@@ -525,13 +525,13 @@ void initComponentScriptBindings()
                 sp::script::Convert<DockingBay::Berth::Type>::toLua(L, berth.type);
                 lua_setfield(L, -2, "type");
 
-                lua_pushnumber(L, berth.move_time);
+                lua_pushnumber(L, static_cast<lua_Number>(berth.move_time));
                 lua_setfield(L, -2, "move_time");
 
-                lua_pushnumber(L, berth.move_progress);
+                lua_pushnumber(L, static_cast<lua_Number>(berth.move_progress));
                 lua_setfield(L, -2, "move_progress");
 
-                lua_pushnumber(L, berth.transfer_rate);
+                lua_pushnumber(L, static_cast<lua_Number>(berth.transfer_rate));
                 lua_setfield(L, -2, "transfer_rate");
 
                 lua_pushinteger(L, static_cast<int>(berth.transfer_direction));

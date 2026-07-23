@@ -81,7 +81,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMatchHeight, 800.0f);
 
     beam_safety = new GuiToggleButton(beam_controls, "BEAM_SAFETY", tr("Autofire"),
-        [this](bool active)
+        [](bool active)
         {
             my_player_info->commandSetBeamFiringEnabled(active);
         }

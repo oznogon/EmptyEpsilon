@@ -426,8 +426,8 @@ static int luaSectorToXY(lua_State* L)
     float x = (sector_x - 50) * sector_size;
     float y = (sector_y - 50) * sector_size;
 
-    lua_pushnumber(L, x);
-    lua_pushnumber(L, y);
+    lua_pushnumber(L, static_cast<lua_Number>(x));
+    lua_pushnumber(L, static_cast<lua_Number>(y));
     lua_pushboolean(L, true);
     return 3;
 }

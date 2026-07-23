@@ -77,7 +77,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
 
     // Auto-zoom toggle (works across all camera modes)
     camera_auto_zoom_toggle = new GuiToggleButton(camera_controls, "CAMERA_AUTO_ZOOM_TOGGLE", tr("button", "Auto-zoom camera"),
-        [this](bool value) {
+        [](bool value) {
             // Functions check the button's state
         }
     );
@@ -161,7 +161,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         ->setSize(300.0f, GuiElement::GuiSizeRow);
 
     // Camera mode selector
-    camera_mode_selector = new GuiSelector(camera_controls, "CAMERA_MODE_SELECTOR", [this](int index, string value) {});
+    camera_mode_selector = new GuiSelector(camera_controls, "CAMERA_MODE_SELECTOR", [](int index, string value) {});
     camera_mode_selector
         ->setPosition(20.0f, -70.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, GuiElement::GuiSizeRow);
@@ -177,7 +177,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, GuiElement::GuiSizeRow);
 
-    camera_lock_tot_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Point at ship's target"), [this](bool value) {});
+    camera_lock_tot_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Point at ship's target"), [](bool value) {});
     camera_lock_tot_toggle
         ->setValue(false)
         ->setPosition(320.0f, -20.0f, sp::Alignment::BottomLeft)
@@ -193,13 +193,13 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
         ->setVertical()
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center);
 
-    camera_lock_cycle_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [this](bool value) {});
+    camera_lock_cycle_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [](bool value) {});
     camera_lock_cycle_toggle
         ->setValue(false)
         ->setPosition(620.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(300.0f, GuiElement::GuiSizeRow);
 
-    camera_mode_cycle_toggle = new GuiToggleButton(camera_controls, "CAMERA_MODE_CYCLE_TOGGLE", tr("button", "Cycle camera modes"), [this](bool value) {});
+    camera_mode_cycle_toggle = new GuiToggleButton(camera_controls, "CAMERA_MODE_CYCLE_TOGGLE", tr("button", "Cycle camera modes"), [](bool value) {});
     camera_mode_cycle_toggle
         ->setValue(false)
         ->setPosition(620.0f, -70.0f, sp::Alignment::BottomLeft)

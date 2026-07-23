@@ -147,7 +147,7 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
 
     // Save options button.
     auto* save_options_button = new GuiButton(bottom_row, "SAVE_OPTIONS", tr("options", "Save options"),
-        [this]()
+        []()
         {
             if (getenv("EE_CONF_DIR"))
                 PreferencesManager::save(string(getenv("EE_CONF_DIR")) + "/options.ini");
@@ -549,7 +549,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 
         // Cinematic fly-by randomization
         auto* randomize_flyby_toggle = new GuiToggleButton(interface_page, "RANDOMIZE_CINEMATIC_FLYBY", tr("options", "Randomize cinematic fly-by angles"),
-            [this](bool value)
+            [](bool value)
             {
                 PreferencesManager::set("camera_flyby_randomized", value ? "1" : "0");
             }

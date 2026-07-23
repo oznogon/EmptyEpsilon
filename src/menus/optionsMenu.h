@@ -19,7 +19,6 @@ public:
         None
     };
 private:
-    GuiElement* container;
     GuiSelector* options_selector;
     GuiElement* graphics_page;
     GuiElement* audio_page;

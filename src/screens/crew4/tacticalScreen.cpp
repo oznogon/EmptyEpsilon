@@ -189,7 +189,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     // Beam weapons autofire safety toggle.
     beam_safety = new GuiToggleButton(tactical_controls, "BEAM_SAFETY", tr("Autofire"),
-        [this](bool active)
+        [](bool active)
         {
             my_player_info->commandSetBeamFiringEnabled(active);
         }

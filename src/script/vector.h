@@ -58,13 +58,13 @@ template<> struct Convert<glm::vec3> {
 template<> struct Convert<glm::vec4> {
     static int toLua(lua_State* L, glm::vec4 value) {
         lua_createtable(L, 4, 0);
-        lua_pushnumber(L, value.x);
+        lua_pushnumber(L, static_cast<lua_Number>(value.x));
         lua_rawseti(L, -2, 1);
-        lua_pushnumber(L, value.y);
+        lua_pushnumber(L, static_cast<lua_Number>(value.y));
         lua_rawseti(L, -2, 2);
-        lua_pushnumber(L, value.z);
+        lua_pushnumber(L, static_cast<lua_Number>(value.z));
         lua_rawseti(L, -2, 3);
-        lua_pushnumber(L, value.w);
+        lua_pushnumber(L, static_cast<lua_Number>(value.w));
         lua_rawseti(L, -2, 4);
         return 1;
     }

@@ -12,7 +12,6 @@ class TutorialMenu : public GuiCanvas, public Updatable
 private:
     string selected_tutorial_filename;
 
-    GuiElement* container;
     GuiElement* bottom_row;
     GuiScrollFormattedText* tutorial_description;
     GuiButton* start_tutorial_button;

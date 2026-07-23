@@ -225,7 +225,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
 
     // Aim lock dial.
     missile_aim = new AimLock(radar_pane, "MISSILE_AIM", radar, -90.0f, 270.0f /* 360 - 90 */, 0.0f,
-        [this](float value)
+        [](float value)
         {
             // missile_target_angle is managed in onUpdate/fire callbacks
         }
@@ -273,7 +273,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
 
     // drone_shields_button shown when connected.
     drone_shields_button = new GuiToggleButton(radar_pane, "DRONE_SHIELDS_BUTTON", tr("drone", "Shields: ON"),
-        [this](bool value)
+        [](bool value)
         {
             my_player_info->commandDroneSetShields(value);
         }
@@ -302,7 +302,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
         auto impulse_controls = new GuiElement(engine_layout, "IMPULSE");
         impulse_controls->setSize(80.0f, GuiElement::GuiSizeMax);
         impulse_slider = new GuiSlider(impulse_controls, "IMPULSE_SLIDER", 1.0f, -1.0f, 0.0f,
-            [this](float value)
+            [](float value)
             {
                 my_player_info->commandDroneImpulse(value);
             }
@@ -494,7 +494,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     auto combat_slider = new GuiSnapSlider2D(combat_maneuver_layout, "COMBAT_SLIDER", glm::vec2(-1.0f, 1.0f), glm::vec2(1.0f, 0.0f), glm::vec2(0.0f, 0.0f),
-        [this](glm::vec2 value)
+        [](glm::vec2 value)
         {
             my_player_info->commandDroneCombatManeuverBoost(value.y);
             my_player_info->commandDroneCombatManeuverStrafe(value.x);
@@ -548,7 +548,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
             ->setSize(80.0f, GuiElement::GuiSizeRow);
 
         beam_freq_selector = new GuiSelector(beam_info_box, "BEAM_FREQ",
-            [this](int index, string value)
+            [](int index, string value)
             {
                 my_player_info->commandDroneSetBeamFrequency(index);
             }
@@ -563,7 +563,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
         if (gameGlobalInfo->use_system_damage)
         {
             beam_sys_selector = new GuiSelector(beam_info_box, "BEAM_SYS_TARGET",
-                [this](int index, string value)
+                [](int index, string value)
                 {
                     my_player_info->commandDroneSetBeamSystemTarget(ShipSystem::Type(index + static_cast<int>(ShipSystem::Type::None)));
                 }
