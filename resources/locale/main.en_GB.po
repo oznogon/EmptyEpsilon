@@ -4543,8 +4543,8 @@ msgstr "Auto repair/sec:"
 
 #: src/screens/gm/tweak.cpp:3194 src/screens/gm/tweak.cpp:3204
 msgctxt "tweak"
-msgid "Show existing"
-msgstr "Show existing"
+msgid "Show only existing components"
+msgstr "Show only existing components"
 
 #: src/screens/gm/tweak.cpp:3199
 msgctxt "tweak"

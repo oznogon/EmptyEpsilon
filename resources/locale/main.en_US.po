@@ -4543,7 +4543,7 @@ msgstr ""
 
 #: src/screens/gm/tweak.cpp:3194 src/screens/gm/tweak.cpp:3204
 msgctxt "tweak"
-msgid "Show existing"
+msgid "Show only existing components"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:3199

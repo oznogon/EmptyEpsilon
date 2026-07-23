@@ -3191,27 +3191,20 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         ->setTextSize(20.0f)
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
-    show_existing_toggle = new GuiButton(left_panel, "SHOW_EXISTING_TOGGLE", tr("tweak", "Show existing"), [this]()
-    {
-        only_show_existing = !only_show_existing;
-        if (only_show_existing)
+    show_existing_toggle = new GuiButton(left_panel, "SHOW_EXISTING_TOGGLE", tr("tweak", "Show only existing components"),
+        [this]()
         {
-            show_existing_toggle->setText(tr("tweak", "Show all"));
-            show_existing_toggle->setStyle("button.toggle.on");
-        }
-        else
-        {
-            show_existing_toggle->setText(tr("tweak", "Show existing"));
-            show_existing_toggle->setStyle("button.toggle.off");
-        }
+            show_only_existing = !show_only_existing;
+            show_existing_toggle->setStyle(show_only_existing ? "button.toggle.on" : "button.toggle.off");
 
-        if (in_search_view)
-            showSearchResults(search_filter->getText());
-        else if (current_group_index >= 0)
-            showGroupComponents(current_group_index);
-        else
-            showGroups();
-    });
+            if (in_search_view)
+                showSearchResults(search_filter->getText());
+            else if (current_group_index >= 0)
+                showGroupComponents(current_group_index);
+            else
+                showGroups();
+        }
+    );
     show_existing_toggle
         ->setTextSize(20.0f)
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
@@ -5215,7 +5208,7 @@ void GuiEntityTweak::showGroups()
     component_list->clear();
     for (auto& group : component_groups)
     {
-        if (only_show_existing)
+        if (show_only_existing)
         {
             bool has_match = false;
             for (int pi : group.page_indices)
@@ -5248,7 +5241,7 @@ void GuiEntityTweak::showGroupComponents(int group_index)
     filtered_indices.clear();
     for (int pi : group.page_indices)
     {
-        if (only_show_existing && !pages[pi]->has_component(entity))
+        if (show_only_existing && !pages[pi]->has_component(entity))
             continue;
         component_list->addEntry(page_labels[pi], "");
         filtered_indices.push_back(pi);
@@ -5276,7 +5269,7 @@ void GuiEntityTweak::showSearchResults(const string& query)
     {
         if (page_labels[i].lower().find(lower_query) != -1)
         {
-            if (only_show_existing && !pages[i]->has_component(entity))
+            if (show_only_existing && !pages[i]->has_component(entity))
                 continue;
             search_result_indices.push_back(i);
             component_list->addEntry(page_labels[i], "");
