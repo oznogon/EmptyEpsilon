@@ -15,7 +15,7 @@ local template = ShipTemplate()
     :setRadarTrace("cruiser.png")
     :setDescription(
         _(
-            [[The fearsome Vindicator cruiser hull balances a stout hull and forward-facing weapons with a tremendous impulse engine, which grants it the sublight speed of a pursuer even if it lacks the turning rate of a smaller craft.
+            [[The fearsome Vindicator cruiser hull balances stout armor and forward-facing weapons with a tremendous impulse engine, which grants it the sublight speed of a pursuer even if it lacks the turning rate of a smaller craft.
 
 A skilled navigator and helms officer can use the Vindicator's jump drive and impulse engine to appear at missile range, launch an array of missiles as powerful as nuclear weapons, and then outrun defenders in a race while its jump drive recharges. Its combat thrusters aid as much in its defensive maneuverability as it does to close in on fleeing targets.]]
         )

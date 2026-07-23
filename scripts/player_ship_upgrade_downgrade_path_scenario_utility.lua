@@ -75,7 +75,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                 model = "battleship_destroyer_1_upgraded",
                 desc = _(
                     "scienceDB",
-                    "A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake."
+                    "A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering system and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake."
                 ),
             },
             ["Crucible"] = {
