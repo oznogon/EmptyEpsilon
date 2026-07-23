@@ -3234,7 +3234,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             showGroups();
         else
         {
-            int pi = component_groups[current_group_index].page_indices[index - 1];
+            int pi = filtered_indices[index - 1];
             for (auto page : pages)
                 page->hide();
             pages[pi]->show();
@@ -5184,7 +5184,14 @@ void GuiEntityTweak::open(sp::ecs::Entity e, string select_component)
                 if (page_labels[page_index].find(select_component) != -1)
                 {
                     showGroupComponents(group);
-                    component_list->setSelectionIndex(component_index + 1);
+                    for (size_t fi = 0; fi < filtered_indices.size(); fi++)
+                    {
+                        if (filtered_indices[fi] == static_cast<int>(page_index))
+                        {
+                            component_list->setSelectionIndex(fi + 1);
+                            break;
+                        }
+                    }
                     for (auto page : pages) page->hide();
                     pages[page_index]->show();
                     showPageDescription(page_index);
@@ -5238,7 +5245,7 @@ void GuiEntityTweak::showGroupComponents(int group_index)
     component_list->addEntry(tr("tweak-nav", "Back"), "");
     auto& group = component_groups[group_index];
 
-    std::vector<int> filtered_indices;
+    filtered_indices.clear();
     for (int pi : group.page_indices)
     {
         if (only_show_existing && !pages[pi]->has_component(entity))

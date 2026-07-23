@@ -87,6 +87,8 @@ private:
     GuiScrollFormattedText* component_description;
     // Tweak page indices that match the search result.
     std::vector<int> search_result_indices;
+    // Tweak page indices filtered by "show existing" in group view.
+    std::vector<int> filtered_indices;
     // Toggle to show only components present on the selected entity.
     GuiButton* show_existing_toggle;
     bool only_show_existing = false;
