@@ -701,6 +701,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 }
             );
 
+            ship_template_selector->setSortByName(true);
             for (const auto& info : ship_spawn_info)
                 ship_template_selector->addEntry(info.label, info.label);
 
