@@ -20,8 +20,9 @@ protected:
     };
 
     std::vector<GuiEntry> entries;
-    int selection_index;
+    int selection_index = -1;
     func_t func;
+    bool sort_by_name = false;
 public:
     GuiEntryList(GuiContainer* owner, string id, func_t func);
 
@@ -45,6 +46,10 @@ public:
     int getSelectionIndex() const;
     GuiEntryList* setSelectionIndex(int index);
     string getSelectionValue() const;
+
+    void sortEntries();
+    GuiEntryList* setSortByName(bool enable);
+    bool getSortByName() const;
 protected:
     void callback();
 private:
