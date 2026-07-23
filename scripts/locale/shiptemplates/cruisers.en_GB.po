@@ -15,17 +15,16 @@ msgstr "Assault"
 
 #: scripts/shiptemplates/cruisers.lua:18
 msgid ""
-"The fearsome Vindicator cruiser hull balances a stout hull and forward-"
-"facing weapons with a tremendous impulse engine, which grants it the "
-"sublight speed of a pursuer even if it lacks the turning rate of a smaller "
-"craft.\n"
+"The fearsome Vindicator cruiser hull balances stout armor and forward-facing "
+"weapons with a tremendous impulse engine, which grants it the sublight speed "
+"of a pursuer even if it lacks the turning rate of a smaller craft.\n"
 "\n"
 "A skilled navigator and helms officer can use the Vindicator's jump drive "
 "and impulse engine to appear at missile range, launch an array of missiles "
 "as powerful as nuclear weapons, and then outrun defenders in a race while "
 "its jump drive recharges. Its combat thrusters aid as much in its defensive "
 "maneuverability as it does to close in on fleeing targets."
-msgstr "The fearsome Vindicator cruiser hull balances a stout hull and forward-facing weapons with a tremendous impulse engine, which grants it the sublight speed of a pursuer even if it lacks the turning rate of a smaller craft.\n\nA skilled navigator and helms officer can use the Vindicator's jump drive and impulse engine to appear at missile range, launch an array of missiles as powerful as nuclear weapons, and then outrun defenders in a race while its jump drive recharges. Its combat thrusters aid as much in its defensive maneuverability as it does to close in on fleeing targets."
+msgstr "The fearsome Vindicator cruiser hull balances stout armour and forward-facing weapons with a tremendous impulse engine, which grants it the sublight speed of a pursuer even if it lacks the turning rate of a smaller craft.\n\nA skilled navigator and helms officer can use the Vindicator's jump drive and impulse engine to appear at missile range, launch an array of missiles as powerful as nuclear weapons, and then outrun defenders in a race while its jump drive recharges. Its combat thrusters aid as much in its defensive maneuverability as it does to close in on fleeing targets."
 
 #: scripts/shiptemplates/cruisers.lua:75
 msgctxt "playerShip"

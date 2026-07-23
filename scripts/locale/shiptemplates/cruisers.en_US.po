@@ -15,10 +15,9 @@ msgstr ""
 
 #: scripts/shiptemplates/cruisers.lua:18
 msgid ""
-"The fearsome Vindicator cruiser hull balances a stout hull and forward-"
-"facing weapons with a tremendous impulse engine, which grants it the "
-"sublight speed of a pursuer even if it lacks the turning rate of a smaller "
-"craft.\n"
+"The fearsome Vindicator cruiser hull balances stout armor and forward-facing "
+"weapons with a tremendous impulse engine, which grants it the sublight speed "
+"of a pursuer even if it lacks the turning rate of a smaller craft.\n"
 "\n"
 "A skilled navigator and helms officer can use the Vindicator's jump drive "
 "and impulse engine to appear at missile range, launch an array of missiles "

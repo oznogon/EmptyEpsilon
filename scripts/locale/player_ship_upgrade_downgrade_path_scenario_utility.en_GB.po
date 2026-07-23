@@ -79,10 +79,10 @@ msgstr "A Flavia P. Falcon with better hull and shields, a jump drive, two turre
 msgctxt "scienceDB"
 msgid ""
 "A refitted Atlantis X23 for more general tasks. The large shield system has "
-"been replaced with an advanced combat maneuvering systems and improved "
+"been replaced with an advanced combat maneuvering system and improved "
 "impulse engines. Its missile loadout is also more diverse. Mistaking the "
 "modified Atlantis for an Atlantis X23 would be a deadly mistake."
-msgstr "A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat manoeuvring systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake."
+msgstr "A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat manoeuvring system and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:86
 msgctxt "scienceDB"

@@ -218,12 +218,12 @@ msgid ""
 "collisions with larger ships, but it's otherwise defenseless."
 msgstr ""
 
-#: scripts/shiptemplates/auxiliaries.lua:320
+#: scripts/shiptemplates/auxiliaries.lua:319
 msgctxt "playerShip"
 msgid "Heracles"
 msgstr ""
 
-#: scripts/shiptemplates/auxiliaries.lua:324
+#: scripts/shiptemplates/auxiliaries.lua:323
 msgid ""
 "The Heracles tug model is a Hylas suited for carrier use in deep-space "
 "operations. Improvements include a stronger hull, bolstered shield, full "

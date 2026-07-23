@@ -218,12 +218,12 @@ msgid ""
 "collisions with larger ships, but it's otherwise defenseless."
 msgstr "The Hylas is an unarmed tugboat with a powerful short-range tractor beam capable of moving much larger ships through gravity-field manipulation. It's nimble on its own and lightly shielded to avoid taking damage from collisions with larger ships, but it's otherwise defenseless."
 
-#: scripts/shiptemplates/auxiliaries.lua:320
+#: scripts/shiptemplates/auxiliaries.lua:319
 msgctxt "playerShip"
 msgid "Heracles"
 msgstr "Heracles"
 
-#: scripts/shiptemplates/auxiliaries.lua:324
+#: scripts/shiptemplates/auxiliaries.lua:323
 msgid ""
 "The Heracles tug model is a Hylas suited for carrier use in deep-space "
 "operations. Improvements include a stronger hull, bolstered shield, full "

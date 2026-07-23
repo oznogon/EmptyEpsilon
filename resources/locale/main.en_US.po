@@ -48,117 +48,117 @@ msgctxt "dockingbay"
 msgid "No docking bay"
 msgstr ""
 
-#: src/playerInfo.cpp:2161 src/menus/shipSelectionScreen.cpp:1334
+#: src/playerInfo.cpp:2161 src/menus/shipSelectionScreen.cpp:1336
 msgctxt "crew_screen"
 msgid "Helms"
 msgstr ""
 
-#: src/playerInfo.cpp:2162 src/menus/shipSelectionScreen.cpp:1337
+#: src/playerInfo.cpp:2162 src/menus/shipSelectionScreen.cpp:1339
 msgctxt "crew_screen"
 msgid "Weapons"
 msgstr ""
 
-#: src/playerInfo.cpp:2163 src/menus/shipSelectionScreen.cpp:1340
+#: src/playerInfo.cpp:2163 src/menus/shipSelectionScreen.cpp:1342
 msgctxt "crew_screen"
 msgid "Engineering"
 msgstr ""
 
-#: src/playerInfo.cpp:2164 src/menus/shipSelectionScreen.cpp:1343
+#: src/playerInfo.cpp:2164 src/menus/shipSelectionScreen.cpp:1345
 msgctxt "crew_screen"
 msgid "Science"
 msgstr ""
 
-#: src/playerInfo.cpp:2165 src/menus/shipSelectionScreen.cpp:1346
+#: src/playerInfo.cpp:2165 src/menus/shipSelectionScreen.cpp:1348
 msgctxt "crew_screen"
 msgid "Relay"
 msgstr ""
 
-#: src/playerInfo.cpp:2166 src/menus/shipSelectionScreen.cpp:1349
+#: src/playerInfo.cpp:2166 src/menus/shipSelectionScreen.cpp:1351
 msgctxt "crew_screen"
 msgid "Tactical"
 msgstr ""
 
-#: src/playerInfo.cpp:2167 src/menus/shipSelectionScreen.cpp:1352
+#: src/playerInfo.cpp:2167 src/menus/shipSelectionScreen.cpp:1354
 msgctxt "crew_screen"
 msgid "Engineering+"
 msgstr ""
 
-#: src/playerInfo.cpp:2168 src/menus/shipSelectionScreen.cpp:1355
+#: src/playerInfo.cpp:2168 src/menus/shipSelectionScreen.cpp:1357
 msgctxt "crew_screen"
 msgid "Operations"
 msgstr ""
 
-#: src/playerInfo.cpp:2169 src/menus/shipSelectionScreen.cpp:1358
+#: src/playerInfo.cpp:2169 src/menus/shipSelectionScreen.cpp:1360
 msgctxt "crew_screen"
 msgid "Single pilot"
 msgstr ""
 
-#: src/playerInfo.cpp:2170 src/menus/shipSelectionScreen.cpp:1367
+#: src/playerInfo.cpp:2170 src/menus/shipSelectionScreen.cpp:1369
 msgctxt "crew_screen"
 msgid "Damage control"
 msgstr ""
 
-#: src/playerInfo.cpp:2171 src/menus/shipSelectionScreen.cpp:1370
+#: src/playerInfo.cpp:2171 src/menus/shipSelectionScreen.cpp:1372
 msgctxt "crew_screen"
 msgid "Power management"
 msgstr ""
 
-#: src/playerInfo.cpp:2172 src/menus/shipSelectionScreen.cpp:1373
+#: src/playerInfo.cpp:2172 src/menus/shipSelectionScreen.cpp:1375
 msgctxt "crew_screen"
 msgid "Database"
 msgstr ""
 
-#: src/playerInfo.cpp:2173 src/menus/shipSelectionScreen.cpp:1376
+#: src/playerInfo.cpp:2173 src/menus/shipSelectionScreen.cpp:1378
 msgctxt "crew_screen"
 msgid "Docking bay"
 msgstr ""
 
-#: src/playerInfo.cpp:2174 src/menus/shipSelectionScreen.cpp:1379
+#: src/playerInfo.cpp:2174 src/menus/shipSelectionScreen.cpp:1381
 msgctxt "crew_screen"
 msgid "Strategic map"
 msgstr ""
 
-#: src/playerInfo.cpp:2175 src/menus/shipSelectionScreen.cpp:1382
+#: src/playerInfo.cpp:2175 src/menus/shipSelectionScreen.cpp:1384
 msgctxt "crew_screen"
 msgid "Comms"
 msgstr ""
 
-#: src/playerInfo.cpp:2176 src/menus/shipSelectionScreen.cpp:1361
+#: src/playerInfo.cpp:2176 src/menus/shipSelectionScreen.cpp:1363
 msgctxt "crew_screen"
 msgid "Beam weapons"
 msgstr ""
 
-#: src/playerInfo.cpp:2177 src/menus/shipSelectionScreen.cpp:1364
+#: src/playerInfo.cpp:2177 src/menus/shipSelectionScreen.cpp:1366
 msgctxt "crew_screen"
 msgid "Missile weapons"
 msgstr ""
 
-#: src/playerInfo.cpp:2178 src/menus/shipSelectionScreen.cpp:1385
+#: src/playerInfo.cpp:2178 src/menus/shipSelectionScreen.cpp:1387
 msgctxt "crew_screen"
 msgid "Ship's log"
 msgstr ""
 
-#: src/playerInfo.cpp:2179 src/menus/shipSelectionScreen.cpp:1388
+#: src/playerInfo.cpp:2179 src/menus/shipSelectionScreen.cpp:1390
 msgctxt "crew_screen"
 msgid "Radar"
 msgstr ""
 
-#: src/playerInfo.cpp:2180 src/menus/shipSelectionScreen.cpp:1391
+#: src/playerInfo.cpp:2180 src/menus/shipSelectionScreen.cpp:1393
 msgctxt "crew_screen"
 msgid "Probe camera"
 msgstr ""
 
-#: src/playerInfo.cpp:2181 src/menus/shipSelectionScreen.cpp:1394
+#: src/playerInfo.cpp:2181 src/menus/shipSelectionScreen.cpp:1396
 msgctxt "crew_screen"
 msgid "Target analysis"
 msgstr ""
 
-#: src/playerInfo.cpp:2182 src/menus/shipSelectionScreen.cpp:1397
+#: src/playerInfo.cpp:2182 src/menus/shipSelectionScreen.cpp:1399
 msgctxt "crew_screen"
 msgid "Briefing"
 msgstr ""
 
-#: src/playerInfo.cpp:2183 src/menus/shipSelectionScreen.cpp:1400
+#: src/playerInfo.cpp:2183 src/menus/shipSelectionScreen.cpp:1402
 msgctxt "crew_screen"
 msgid "Drone operations"
 msgstr ""
@@ -206,9 +206,9 @@ msgid "Connecting..."
 msgstr ""
 
 #: src/menus/joinServerMenu.cpp:26 src/menus/shipSelectionScreen.cpp:77
-#: src/menus/shipSelectionScreen.cpp:1239
-#: src/screens/gm/gameMasterScreen.cpp:269
-#: src/screens/gm/objectCreationView.cpp:167
+#: src/menus/shipSelectionScreen.cpp:1241
+#: src/screens/gm/gameMasterScreen.cpp:270
+#: src/screens/gm/objectCreationView.cpp:168
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:24
 #: src/screenComponents/commsOverlay.cpp:41
@@ -1122,7 +1122,7 @@ msgctxt "tooltips"
 msgid "Click a music track to play it."
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:56 src/menus/shipSelectionScreen.cpp:985
+#: src/menus/shipSelectionScreen.cpp:56 src/menus/shipSelectionScreen.cpp:987
 msgid "Enter this ship's control code:"
 msgstr ""
 
@@ -1334,106 +1334,106 @@ msgstr ""
 msgid "Create player ship"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:713
+#: src/menus/shipSelectionScreen.cpp:715
 msgid "Create"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:734
+#: src/menus/shipSelectionScreen.cpp:736
 msgid "No description provided"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:749 src/menus/shipSelectionScreen.cpp:857
+#: src/menus/shipSelectionScreen.cpp:751 src/menus/shipSelectionScreen.cpp:859
 msgid "Player ship description"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:750 src/menus/shipSelectionScreen.cpp:856
+#: src/menus/shipSelectionScreen.cpp:752 src/menus/shipSelectionScreen.cpp:858
 msgid "No player ship description available"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:752
+#: src/menus/shipSelectionScreen.cpp:754
 msgid "Join ship"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:762
+#: src/menus/shipSelectionScreen.cpp:764
 msgid "Select ship"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:767
+#: src/menus/shipSelectionScreen.cpp:769
 msgid "Waiting for server to spawn a ship"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:791
+#: src/menus/shipSelectionScreen.cpp:793
 msgctxt "ship_selection"
 msgid "Return to scenario selection"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:802
+#: src/menus/shipSelectionScreen.cpp:804
 msgctxt "tooltips"
 msgid "End the running scenario and return to the scenario selection screen."
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:808
+#: src/menus/shipSelectionScreen.cpp:810
 msgctxt "ship_selection"
 msgid "Disconnect from server"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:875
+#: src/menus/shipSelectionScreen.cpp:877
 msgid "{type} description"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1074
+#: src/menus/shipSelectionScreen.cpp:1076
 msgid "4/3/1 player crew"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1080
+#: src/menus/shipSelectionScreen.cpp:1082
 msgid "6/5 player crew"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1130
+#: src/menus/shipSelectionScreen.cpp:1132
 msgid "3D screens"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1137
-#: src/menus/shipSelectionScreen.cpp:1293 src/menus/autoConnectScreen.cpp:314
+#: src/menus/shipSelectionScreen.cpp:1139
+#: src/menus/shipSelectionScreen.cpp:1295 src/menus/autoConnectScreen.cpp:314
 msgid "Main screen"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1151 src/menus/autoConnectScreen.cpp:313
+#: src/menus/shipSelectionScreen.cpp:1153 src/menus/autoConnectScreen.cpp:313
 msgid "Ship window"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1191
+#: src/menus/shipSelectionScreen.cpp:1193
 msgid "Alternative options"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1202
+#: src/menus/shipSelectionScreen.cpp:1204
 msgid "Main screen controls"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1218
+#: src/menus/shipSelectionScreen.cpp:1220
 msgid ""
 "Select at least one crew screen to play.\n"
 "You can select multiple crew screens and switch between them during the game."
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1224
+#: src/menus/shipSelectionScreen.cpp:1226
 msgid "Crew assignments"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1244
+#: src/menus/shipSelectionScreen.cpp:1246
 msgctxt "button"
 msgid "Ready"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1292
+#: src/menus/shipSelectionScreen.cpp:1294
 msgid "No crew members assigned"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1293
+#: src/menus/shipSelectionScreen.cpp:1295
 msgid "Main screen (split)"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1334
+#: src/menus/shipSelectionScreen.cpp:1336
 msgctxt "helms"
 msgid ""
 "Maneuvers the ship with thrusters and impulse engines, employs faster-than-"
@@ -1441,7 +1441,7 @@ msgid ""
 "retrieves objects"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1337
+#: src/menus/shipSelectionScreen.cpp:1339
 msgctxt "weapons"
 msgid ""
 "Manages a ship's offensive and defensive systems; loads, unloads, aims, and "
@@ -1449,21 +1449,21 @@ msgid ""
 "frequencies"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1340
+#: src/menus/shipSelectionScreen.cpp:1342
 msgctxt "engineering"
 msgid ""
 "Manages a ship's power, heat, coolant, and damage; directs repair crews; "
 "tracks system effectiveness; and controls the ship's self-destruct system"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1343
+#: src/menus/shipSelectionScreen.cpp:1345
 msgctxt "science"
 msgid ""
 "Examines and reports on the ship's surroundings, and researches entities "
 "using the ship's sensors and database"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1346
+#: src/menus/shipSelectionScreen.cpp:1348
 msgctxt "relay"
 msgid ""
 "Manages the flow of information between the ship and other ships and space "
@@ -1471,7 +1471,7 @@ msgid ""
 "launches scan probes, sets navigational waypoints, and hacks hostile entities"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1349
+#: src/menus/shipSelectionScreen.cpp:1351
 msgctxt "tactical"
 msgid ""
 "Combines the responsibilities of Helms (maneuvering, propulsion, docking) "
@@ -1479,7 +1479,7 @@ msgid ""
 "Weapons' control over shields."
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1352
+#: src/menus/shipSelectionScreen.cpp:1354
 msgctxt "engineering+"
 msgid ""
 "Manages a ship's power, heat, coolant, and damage; manages shield activation "
@@ -1487,7 +1487,7 @@ msgid ""
 "controls the ship's self-destruct system"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1355
+#: src/menus/shipSelectionScreen.cpp:1357
 msgctxt "operations"
 msgid ""
 "Combines the responsibilities of Science (scanning, research) with Relay "
@@ -1495,56 +1495,56 @@ msgid ""
 "sector map or hacking features."
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1358
+#: src/menus/shipSelectionScreen.cpp:1360
 msgctxt "single_pilot"
 msgid ""
 "Combines essential functions from Helms, Weapons, and Relay, at the expense "
 "of several other features"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1361
+#: src/menus/shipSelectionScreen.cpp:1363
 msgctxt "beam_weapons"
 msgid ""
 "Manages and targets the ship's beam weapons, as a specialized subset of "
 "Weapons functions"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1364
+#: src/menus/shipSelectionScreen.cpp:1366
 msgctxt "missile_weapons"
 msgid ""
 "Manages and targets the ship's weapons tubes, including missiles and mines, "
 "as a specialized subset of Weapons functions"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1367
+#: src/menus/shipSelectionScreen.cpp:1369
 msgctxt "damage_control"
 msgid ""
 "Manages the ship's repair crews from a systems overview display, as a "
 "specialized subset of Engineering functions"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1370
+#: src/menus/shipSelectionScreen.cpp:1372
 msgctxt "power_management"
 msgid ""
 "Routes power and coolant to the ship's systems, as a specialized subset of "
 "Engineering functions"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1373
+#: src/menus/shipSelectionScreen.cpp:1375
 msgctxt "database"
 msgid ""
 "Researches information in the ship's database, as a specialized subset of "
 "Science functions"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1376
+#: src/menus/shipSelectionScreen.cpp:1378
 msgctxt "docking_bay"
 msgid ""
 "Controls the ship's internal docking bay, if any, including launching, "
 "reparing, and restocking berthed ships"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1379
+#: src/menus/shipSelectionScreen.cpp:1381
 msgctxt "strategic_map"
 msgid ""
 "Views a sector map, launches scan probes, sets navigational waypoints, and "
@@ -1552,19 +1552,19 @@ msgid ""
 "communications delegated to the Comms screen."
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1382
+#: src/menus/shipSelectionScreen.cpp:1384
 msgctxt "comms"
 msgid ""
 "Displays active communications with other entities, as a specialized subset "
 "of Relay functions"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1385
+#: src/menus/shipSelectionScreen.cpp:1387
 msgctxt "ships_log"
 msgid "Displays the ship's log, as a specialized subset of Relay functions"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1388
+#: src/menus/shipSelectionScreen.cpp:1390
 msgctxt "radar"
 msgid ""
 "Displays a non-interactive ship's radar at short, long, and sector ranges, "
@@ -1572,33 +1572,33 @@ msgid ""
 "functions"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1391
+#: src/menus/shipSelectionScreen.cpp:1393
 msgctxt "probe_camera"
 msgid ""
 "Displays the view from the linked probe's camera, with rotation controls"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1394
+#: src/menus/shipSelectionScreen.cpp:1396
 msgctxt "target_analysis"
 msgid ""
 "Displays known information about a target linked to this screen by the "
 "Science officer, as a specialized subset of Science functions"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1397
+#: src/menus/shipSelectionScreen.cpp:1399
 msgctxt "briefing"
 msgid ""
 "Displays the scenario's briefing presentation, if implemented by the scenario"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1400
+#: src/menus/shipSelectionScreen.cpp:1402
 msgctxt "drone_operations"
 msgid ""
 "Provides control over linked probes, if the ship has a drone controller and "
 "linked drones are within control range"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:1403
+#: src/menus/shipSelectionScreen.cpp:1405
 msgid ""
 "Select at least one crew screen to play.\n"
 "You can select multiple crew screens and switch between them during the "
@@ -1810,11 +1810,11 @@ msgctxt "button"
 msgid "Static camera"
 msgstr ""
 
-#: src/screens/crewScreen.cpp:80 src/screens/gm/gameMasterScreen.cpp:307
-#: src/screens/gm/gameMasterScreen.cpp:549
+#: src/screens/crewScreen.cpp:80 src/screens/gm/gameMasterScreen.cpp:308
+#: src/screens/gm/gameMasterScreen.cpp:550
 #: src/screens/gm/limitedGameMasterScreen.cpp:140
-#: src/screens/gm/limitedGameMasterScreen.cpp:1387
-#: src/screens/gm/tweak.cpp:5133 src/screenComponents/hackingDialog.cpp:49
+#: src/screens/gm/limitedGameMasterScreen.cpp:1389
+#: src/screens/gm/tweak.cpp:5159 src/screenComponents/hackingDialog.cpp:49
 msgctxt "button"
 msgid "Close"
 msgstr ""
@@ -1834,14 +1834,14 @@ msgctxt "button"
 msgid "Exit to ship selection"
 msgstr ""
 
-#: src/screens/mainScreen.cpp:61 src/screens/gm/gameMasterScreen.cpp:558
-#: src/screens/gm/limitedGameMasterScreen.cpp:1399
+#: src/screens/mainScreen.cpp:61 src/screens/gm/gameMasterScreen.cpp:559
+#: src/screens/gm/limitedGameMasterScreen.cpp:1401
 msgctxt "hotkey_menu"
 msgid "Console"
 msgstr ""
 
-#: src/screens/mainScreen.cpp:61 src/screens/gm/gameMasterScreen.cpp:558
-#: src/screens/gm/limitedGameMasterScreen.cpp:1399
+#: src/screens/mainScreen.cpp:61 src/screens/gm/gameMasterScreen.cpp:559
+#: src/screens/gm/limitedGameMasterScreen.cpp:1401
 msgctxt "hotkey_menu"
 msgid "Basic"
 msgstr ""
@@ -1864,8 +1864,8 @@ msgstr ""
 #: src/screens/spectatorScreen.cpp:111
 #: src/screens/crew4/operationsScreen.cpp:161
 #: src/screens/crew6/relayScreen.cpp:329
-#: src/screens/gm/gameMasterScreen.cpp:344
-#: src/screens/gm/limitedGameMasterScreen.cpp:1166
+#: src/screens/gm/gameMasterScreen.cpp:345
+#: src/screens/gm/limitedGameMasterScreen.cpp:1168
 msgid "Clock"
 msgstr ""
 
@@ -1918,36 +1918,36 @@ msgctxt "gm_info"
 msgid "Hull"
 msgstr ""
 
-#: src/screens/spectatorScreen.cpp:302 src/screens/gm/gameMasterScreen.cpp:808
-#: src/screens/gm/limitedGameMasterScreen.cpp:1630
+#: src/screens/spectatorScreen.cpp:302 src/screens/gm/gameMasterScreen.cpp:809
+#: src/screens/gm/limitedGameMasterScreen.cpp:1632
 msgid "gm_info"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:114
 #: src/screens/crew6/relayScreen.cpp:282
-#: src/screens/gm/gameMasterScreen.cpp:511
-#: src/screens/gm/limitedGameMasterScreen.cpp:1349
+#: src/screens/gm/gameMasterScreen.cpp:512
+#: src/screens/gm/limitedGameMasterScreen.cpp:1351
 msgid "Waypoint set 1"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:114
 #: src/screens/crew6/relayScreen.cpp:282
-#: src/screens/gm/gameMasterScreen.cpp:511
-#: src/screens/gm/limitedGameMasterScreen.cpp:1349
+#: src/screens/gm/gameMasterScreen.cpp:512
+#: src/screens/gm/limitedGameMasterScreen.cpp:1351
 msgid "Waypoint set 2"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:114
 #: src/screens/crew6/relayScreen.cpp:282
-#: src/screens/gm/gameMasterScreen.cpp:511
-#: src/screens/gm/limitedGameMasterScreen.cpp:1349
+#: src/screens/gm/gameMasterScreen.cpp:512
+#: src/screens/gm/limitedGameMasterScreen.cpp:1351
 msgid "Waypoint set 3"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:114
 #: src/screens/crew6/relayScreen.cpp:282
-#: src/screens/gm/gameMasterScreen.cpp:511
-#: src/screens/gm/limitedGameMasterScreen.cpp:1349
+#: src/screens/gm/gameMasterScreen.cpp:512
+#: src/screens/gm/limitedGameMasterScreen.cpp:1351
 msgid "Waypoint set 4"
 msgstr ""
 
@@ -2764,20 +2764,20 @@ msgid "Return"
 msgstr ""
 
 #: src/screens/extra/droneOperationsScreen.cpp:449
-#: src/screens/gm/gameMasterScreen.cpp:368
-#: src/screens/gm/limitedGameMasterScreen.cpp:1200
+#: src/screens/gm/gameMasterScreen.cpp:369
+#: src/screens/gm/limitedGameMasterScreen.cpp:1202
 msgid "Defend location"
 msgstr ""
 
 #: src/screens/extra/droneOperationsScreen.cpp:458
-#: src/screens/gm/gameMasterScreen.cpp:381
-#: src/screens/gm/limitedGameMasterScreen.cpp:1214
+#: src/screens/gm/gameMasterScreen.cpp:382
+#: src/screens/gm/limitedGameMasterScreen.cpp:1216
 msgid "Stand ground"
 msgstr ""
 
 #: src/screens/extra/droneOperationsScreen.cpp:467
-#: src/screens/gm/gameMasterScreen.cpp:401
-#: src/screens/gm/limitedGameMasterScreen.cpp:1242
+#: src/screens/gm/gameMasterScreen.cpp:402
+#: src/screens/gm/limitedGameMasterScreen.cpp:1244
 msgid "Idle"
 msgstr ""
 
@@ -3004,8 +3004,8 @@ msgctxt "dockingbay"
 msgid "Selected berth"
 msgstr ""
 
-#: src/screens/extra/dockingBayScreen.cpp:144 src/screens/gm/tweak.cpp:1978
-#: src/screens/gm/tweak.cpp:2025 src/components/docking.h:122
+#: src/screens/extra/dockingBayScreen.cpp:144 src/screens/gm/tweak.cpp:1979
+#: src/screens/gm/tweak.cpp:2026 src/components/docking.h:122
 msgctxt "dockingbay"
 msgid "Energy"
 msgstr ""
@@ -3371,13 +3371,13 @@ msgid "Shield {n}"
 msgstr ""
 
 #: src/screens/gm/gameMasterScreen.cpp:186
-#: src/screens/gm/limitedGameMasterScreen.cpp:1042
+#: src/screens/gm/limitedGameMasterScreen.cpp:1044
 msgctxt "button"
 msgid "Pause"
 msgstr ""
 
 #: src/screens/gm/gameMasterScreen.cpp:191
-#: src/screens/gm/limitedGameMasterScreen.cpp:1056
+#: src/screens/gm/limitedGameMasterScreen.cpp:1058
 msgctxt "gm_tooltip"
 msgid "Toggle pausing the game simulation."
 msgstr ""
@@ -3397,212 +3397,212 @@ msgctxt "gm_tooltip"
 msgid "Toggle intercepting all player communications."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:219
-#: src/screens/gm/limitedGameMasterScreen.cpp:1040
+#: src/screens/gm/gameMasterScreen.cpp:220
+#: src/screens/gm/limitedGameMasterScreen.cpp:1042
 msgctxt "gm_tooltip"
 msgid "Change the faction of selected objects."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:221
-#: src/screens/gm/limitedGameMasterScreen.cpp:1097
+#: src/screens/gm/gameMasterScreen.cpp:222
+#: src/screens/gm/limitedGameMasterScreen.cpp:1099
 msgctxt "button"
 msgid "Global message"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:225
-#: src/screens/gm/limitedGameMasterScreen.cpp:1104
+#: src/screens/gm/gameMasterScreen.cpp:226
+#: src/screens/gm/limitedGameMasterScreen.cpp:1106
 msgctxt "gm_tooltip"
 msgid "Broadcast a message to all players."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:236
-#: src/screens/gm/limitedGameMasterScreen.cpp:1123
+#: src/screens/gm/gameMasterScreen.cpp:237
+#: src/screens/gm/limitedGameMasterScreen.cpp:1125
 msgctxt "gm_tooltip"
 msgid "Select a player ship to track on the map."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:238
+#: src/screens/gm/gameMasterScreen.cpp:239
 msgctxt "button"
 msgid "Create..."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:242
+#: src/screens/gm/gameMasterScreen.cpp:243
 msgctxt "gm_tooltip"
 msgid "Open the object creation menu to spawn new entities."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:251
+#: src/screens/gm/gameMasterScreen.cpp:252
 msgctxt "button"
 msgid "Copy scenario"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:258
+#: src/screens/gm/gameMasterScreen.cpp:259
 msgctxt "gm_tooltip"
 msgid "Copy all entities as a Lua script to the clipboard."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:260
+#: src/screens/gm/gameMasterScreen.cpp:261
 msgctxt "button"
 msgid "Copy selected"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:267
+#: src/screens/gm/gameMasterScreen.cpp:268
 msgctxt "gm_tooltip"
 msgid "Copy only selected entities as a Lua script to the clipboard."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:274
+#: src/screens/gm/gameMasterScreen.cpp:275
 msgctxt "gm_tooltip"
 msgid "Cancel the current creation action."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:276
-#: src/screens/gm/limitedGameMasterScreen.cpp:1079
+#: src/screens/gm/gameMasterScreen.cpp:277
+#: src/screens/gm/limitedGameMasterScreen.cpp:1081
 msgctxt "button"
 msgid "Tweak"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:284
-#: src/screens/gm/limitedGameMasterScreen.cpp:1094
+#: src/screens/gm/gameMasterScreen.cpp:285
+#: src/screens/gm/limitedGameMasterScreen.cpp:1096
 msgctxt "gm_tooltip"
 msgid "Edit properties of the selected entity."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:289
+#: src/screens/gm/gameMasterScreen.cpp:290
 msgid "Database Entries"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:311
+#: src/screens/gm/gameMasterScreen.cpp:312
 msgctxt "button"
 msgid "Database"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:327
-#: src/screens/gm/limitedGameMasterScreen.cpp:1133
+#: src/screens/gm/gameMasterScreen.cpp:328
+#: src/screens/gm/limitedGameMasterScreen.cpp:1135
 msgctxt "button"
 msgid "Hail ship"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:339
-#: src/screens/gm/limitedGameMasterScreen.cpp:1157
+#: src/screens/gm/gameMasterScreen.cpp:340
+#: src/screens/gm/limitedGameMasterScreen.cpp:1159
 msgctxt "gm_tooltip"
 msgid "Open a communication channel with the selected player ship."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:367
-#: src/screens/gm/limitedGameMasterScreen.cpp:1197
+#: src/screens/gm/gameMasterScreen.cpp:368
+#: src/screens/gm/limitedGameMasterScreen.cpp:1199
 msgid "Right click to issue movement/target orders"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:379
-#: src/screens/gm/limitedGameMasterScreen.cpp:1211
+#: src/screens/gm/gameMasterScreen.cpp:380
+#: src/screens/gm/limitedGameMasterScreen.cpp:1213
 msgctxt "gm_tooltip"
 msgid "Order selected AI entities to defend their current location."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:388
-#: src/screens/gm/limitedGameMasterScreen.cpp:1225
+#: src/screens/gm/gameMasterScreen.cpp:389
+#: src/screens/gm/limitedGameMasterScreen.cpp:1227
 msgctxt "gm_tooltip"
 msgid "Order selected AI entities to hold position and attack nearby enemies."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:390
-#: src/screens/gm/limitedGameMasterScreen.cpp:1228
+#: src/screens/gm/gameMasterScreen.cpp:391
+#: src/screens/gm/limitedGameMasterScreen.cpp:1230
 msgid "Roaming"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:399
-#: src/screens/gm/limitedGameMasterScreen.cpp:1239
+#: src/screens/gm/gameMasterScreen.cpp:400
+#: src/screens/gm/limitedGameMasterScreen.cpp:1241
 msgctxt "gm_tooltip"
 msgid "Order selected AI entities to roam freely and engage enemies."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:410
-#: src/screens/gm/limitedGameMasterScreen.cpp:1253
+#: src/screens/gm/gameMasterScreen.cpp:411
+#: src/screens/gm/limitedGameMasterScreen.cpp:1255
 msgctxt "gm_tooltip"
 msgid "Order selected AI entities to stop all actions."
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:412
-#: src/screens/gm/limitedGameMasterScreen.cpp:1256
+#: src/screens/gm/gameMasterScreen.cpp:413
+#: src/screens/gm/limitedGameMasterScreen.cpp:1258
 msgid "Orders"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:422
-#: src/screens/gm/limitedGameMasterScreen.cpp:1267
+#: src/screens/gm/gameMasterScreen.cpp:423
+#: src/screens/gm/limitedGameMasterScreen.cpp:1269
 msgctxt "button"
 msgid "Delete waypoint"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:440
-#: src/screens/gm/limitedGameMasterScreen.cpp:1283
+#: src/screens/gm/gameMasterScreen.cpp:441
+#: src/screens/gm/limitedGameMasterScreen.cpp:1285
 msgctxt "button"
 msgid "Add waypoint"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:475
-#: src/screens/gm/limitedGameMasterScreen.cpp:1315
+#: src/screens/gm/gameMasterScreen.cpp:476
+#: src/screens/gm/limitedGameMasterScreen.cpp:1317
 msgid "Draw route for this waypoint set"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:516
-#: src/screens/gm/limitedGameMasterScreen.cpp:1353
+#: src/screens/gm/gameMasterScreen.cpp:517
+#: src/screens/gm/limitedGameMasterScreen.cpp:1355
 msgctxt "button"
 msgid "Show waypoints"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:529
-#: src/screens/gm/limitedGameMasterScreen.cpp:1364
+#: src/screens/gm/gameMasterScreen.cpp:530
+#: src/screens/gm/limitedGameMasterScreen.cpp:1366
 msgid "Waypoints"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:558
-#: src/screens/gm/limitedGameMasterScreen.cpp:1399
+#: src/screens/gm/gameMasterScreen.cpp:559
+#: src/screens/gm/limitedGameMasterScreen.cpp:1401
 msgctxt "hotkey_menu"
 msgid "GM"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:767
-#: src/screens/gm/limitedGameMasterScreen.cpp:1591
+#: src/screens/gm/gameMasterScreen.cpp:768
+#: src/screens/gm/limitedGameMasterScreen.cpp:1593
 msgctxt "gm_info"
 msgid "Position"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:792
-#: src/screens/gm/limitedGameMasterScreen.cpp:1615
+#: src/screens/gm/gameMasterScreen.cpp:793
+#: src/screens/gm/limitedGameMasterScreen.cpp:1617
 msgid "*mixed*"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:389 src/screens/gm/tweak.cpp:3268
+#: src/screens/gm/limitedGameMasterScreen.cpp:389 src/screens/gm/tweak.cpp:3294
 msgctxt "tweak-tab"
 msgid "Transform"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:392 src/screens/gm/tweak.cpp:3269
+#: src/screens/gm/limitedGameMasterScreen.cpp:392 src/screens/gm/tweak.cpp:3295
 msgctxt "tweak-transform"
 msgid ""
 "Sets the entity's position (X, Y) and rotation angle. Position is in game "
 "units (1000 = 1U), rotation in degrees (0 = right/east-facing/heading 90)."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:393 src/screens/gm/tweak.cpp:3276
-#: src/screens/gm/tweak.cpp:3664 src/screens/gm/tweak.cpp:3689
-#: src/screens/gm/tweak.cpp:3751
+#: src/screens/gm/limitedGameMasterScreen.cpp:393 src/screens/gm/tweak.cpp:3302
+#: src/screens/gm/tweak.cpp:3690 src/screens/gm/tweak.cpp:3715
+#: src/screens/gm/tweak.cpp:3777
 msgctxt "tweak-text"
 msgid "Position:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:400 src/screens/gm/tweak.cpp:3318
+#: src/screens/gm/limitedGameMasterScreen.cpp:400 src/screens/gm/tweak.cpp:3344
 msgctxt "tweak-text"
 msgid "Rotation:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:411 src/screens/gm/tweak.cpp:3343
+#: src/screens/gm/limitedGameMasterScreen.cpp:411 src/screens/gm/tweak.cpp:3369
 msgctxt "tweak-tab"
 msgid "Physics"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:413 src/screens/gm/tweak.cpp:3344
+#: src/screens/gm/limitedGameMasterScreen.cpp:413 src/screens/gm/tweak.cpp:3370
 msgctxt "tweak-physics"
 msgid ""
 "If present, this component subjects this entity to physics interactions. "
@@ -3610,8 +3610,8 @@ msgid ""
 "Rectangle), size, velocity, and angular velocity."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:414 src/screens/gm/tweak.cpp:2021
-#: src/screens/gm/tweak.cpp:3348
+#: src/screens/gm/limitedGameMasterScreen.cpp:414 src/screens/gm/tweak.cpp:2022
+#: src/screens/gm/tweak.cpp:3374
 msgctxt "tweak-text"
 msgid "Type:"
 msgstr ""
@@ -3631,12 +3631,12 @@ msgctxt "physics_type"
 msgid "Static"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:427 src/screens/gm/tweak.cpp:3455
+#: src/screens/gm/limitedGameMasterScreen.cpp:427 src/screens/gm/tweak.cpp:3481
 msgctxt "tweak-text"
 msgid "Velocity:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:435 src/screens/gm/tweak.cpp:3470
+#: src/screens/gm/limitedGameMasterScreen.cpp:435 src/screens/gm/tweak.cpp:3496
 msgctxt "tweak-text"
 msgid "Angular velocity:"
 msgstr ""
@@ -3646,17 +3646,17 @@ msgctxt "tweak-tab"
 msgid "CallSign"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:449 src/screens/gm/tweak.cpp:3486
+#: src/screens/gm/limitedGameMasterScreen.cpp:449 src/screens/gm/tweak.cpp:3512
 msgctxt "tweak-callsign"
 msgid "The callsign displayed on radar views and in communications."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:450 src/screens/gm/tweak.cpp:3487
+#: src/screens/gm/limitedGameMasterScreen.cpp:450 src/screens/gm/tweak.cpp:3513
 msgctxt "tweak-text"
 msgid "Callsign:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:462 src/screens/gm/tweak.cpp:3960
+#: src/screens/gm/limitedGameMasterScreen.cpp:462 src/screens/gm/tweak.cpp:3986
 msgctxt "tweak-tab"
 msgid "Faction"
 msgstr ""
@@ -3668,498 +3668,498 @@ msgid ""
 "which entities are friendly, neutral, or hostile."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:470 src/screens/gm/tweak.cpp:3962
+#: src/screens/gm/limitedGameMasterScreen.cpp:470 src/screens/gm/tweak.cpp:3988
 msgctxt "tweak-text"
 msgid "Faction:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:506 src/screens/gm/tweak.cpp:3503
+#: src/screens/gm/limitedGameMasterScreen.cpp:507 src/screens/gm/tweak.cpp:3529
 msgctxt "tweak-tab"
 msgid "Hull"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:508
+#: src/screens/gm/limitedGameMasterScreen.cpp:509
 msgctxt "tweak-hull"
 msgid ""
 "Structural hit points. If hull reaches zero and the entity is destructible, "
 "it can be destroyed. Docking to certain entities can restore hull points."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:510
-#: src/screens/gm/limitedGameMasterScreen.cpp:768
+#: src/screens/gm/limitedGameMasterScreen.cpp:511
+#: src/screens/gm/limitedGameMasterScreen.cpp:769
 msgctxt "tweak-text"
 msgid "Current:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:518
-#: src/screens/gm/limitedGameMasterScreen.cpp:559
+#: src/screens/gm/limitedGameMasterScreen.cpp:519
+#: src/screens/gm/limitedGameMasterScreen.cpp:560
 msgctxt "tweak-text"
 msgid "Max:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:526
+#: src/screens/gm/limitedGameMasterScreen.cpp:527
 msgctxt "tweak-text"
 msgid "Allow destruction"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:538 src/screens/gm/tweak.cpp:3758
+#: src/screens/gm/limitedGameMasterScreen.cpp:539 src/screens/gm/tweak.cpp:3784
 msgctxt "tweak-tab"
 msgid "Shields"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:540
+#: src/screens/gm/limitedGameMasterScreen.cpp:541
 msgctxt "tweak-shields"
 msgid ""
 "Shield generators, including active state and per-segment level and maximum "
 "capacity. Ships can have multiple shield segments with equal arcs."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:542
-#: src/screens/gm/limitedGameMasterScreen.cpp:908 src/screens/gm/tweak.cpp:3764
-#: src/screens/gm/tweak.cpp:4498
+#: src/screens/gm/limitedGameMasterScreen.cpp:543
+#: src/screens/gm/limitedGameMasterScreen.cpp:909 src/screens/gm/tweak.cpp:3790
+#: src/screens/gm/tweak.cpp:4524
 msgctxt "tweak-text"
 msgid "Active"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:550
+#: src/screens/gm/limitedGameMasterScreen.cpp:551
 msgctxt "tweak-text"
 msgid "Level:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:572
+#: src/screens/gm/limitedGameMasterScreen.cpp:573
 msgctxt "tweak-tab"
 msgid "AI"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:574
+#: src/screens/gm/limitedGameMasterScreen.cpp:575
 msgctxt "tweak-ai"
 msgid ""
 "Autonomous ship behavior. Set orders (attack, defend, dock, etc.), target "
 "entity, and target location for AI control."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:575 src/screens/gm/tweak.cpp:3942
+#: src/screens/gm/limitedGameMasterScreen.cpp:576 src/screens/gm/tweak.cpp:3968
 msgctxt "tweak-text"
 msgid "Orders:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:577 src/screens/gm/tweak.cpp:72
+#: src/screens/gm/limitedGameMasterScreen.cpp:578 src/screens/gm/tweak.cpp:72
 msgctxt "ai_order"
 msgid "Idle"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:578 src/screens/gm/tweak.cpp:73
+#: src/screens/gm/limitedGameMasterScreen.cpp:579 src/screens/gm/tweak.cpp:73
 msgctxt "ai_order"
 msgid "Roaming"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:579 src/screens/gm/tweak.cpp:74
+#: src/screens/gm/limitedGameMasterScreen.cpp:580 src/screens/gm/tweak.cpp:74
 msgctxt "ai_order"
 msgid "Retreat"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:580 src/screens/gm/tweak.cpp:75
+#: src/screens/gm/limitedGameMasterScreen.cpp:581 src/screens/gm/tweak.cpp:75
 msgctxt "ai_order"
 msgid "Stand Ground"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:581 src/screens/gm/tweak.cpp:76
+#: src/screens/gm/limitedGameMasterScreen.cpp:582 src/screens/gm/tweak.cpp:76
 msgctxt "ai_order"
 msgid "Defend Location"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:582 src/screens/gm/tweak.cpp:77
+#: src/screens/gm/limitedGameMasterScreen.cpp:583 src/screens/gm/tweak.cpp:77
 msgctxt "ai_order"
 msgid "Defend Target"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:583 src/screens/gm/tweak.cpp:78
+#: src/screens/gm/limitedGameMasterScreen.cpp:584 src/screens/gm/tweak.cpp:78
 msgctxt "ai_order"
 msgid "Fly in formation"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:584 src/screens/gm/tweak.cpp:79
+#: src/screens/gm/limitedGameMasterScreen.cpp:585 src/screens/gm/tweak.cpp:79
 msgctxt "ai_order"
 msgid "Fly towards"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:585 src/screens/gm/tweak.cpp:80
+#: src/screens/gm/limitedGameMasterScreen.cpp:586 src/screens/gm/tweak.cpp:80
 msgctxt "ai_order"
 msgid "Fly towards (ignore all)"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:586 src/screens/gm/tweak.cpp:81
+#: src/screens/gm/limitedGameMasterScreen.cpp:587 src/screens/gm/tweak.cpp:81
 msgctxt "ai_order"
 msgid "Dock"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:587 src/screens/gm/tweak.cpp:82
+#: src/screens/gm/limitedGameMasterScreen.cpp:588 src/screens/gm/tweak.cpp:82
 msgctxt "ai_order"
 msgid "Attack"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:596 src/screens/gm/tweak.cpp:3944
+#: src/screens/gm/limitedGameMasterScreen.cpp:597 src/screens/gm/tweak.cpp:3970
 msgctxt "tweak-text"
 msgid "Order target location:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:608
+#: src/screens/gm/limitedGameMasterScreen.cpp:609
 msgctxt "tweak-tab"
 msgid "Beam weapons"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:610
+#: src/screens/gm/limitedGameMasterScreen.cpp:611
 msgctxt "tweak-beam-system"
 msgid ""
 "Ship system providing beam weapon configuration. Defines arc, range, damage, "
 "cycle time, and optional turret tracking."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:612
+#: src/screens/gm/limitedGameMasterScreen.cpp:613
 msgctxt "tweak-text"
 msgid "Health:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:619
+#: src/screens/gm/limitedGameMasterScreen.cpp:620
 msgctxt "tweak-text"
 msgid "Health max:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:627 src/screens/gm/tweak.cpp:2544
-#: src/screens/gm/tweak.cpp:2584
+#: src/screens/gm/limitedGameMasterScreen.cpp:628 src/screens/gm/tweak.cpp:2545
+#: src/screens/gm/tweak.cpp:2585
 msgctxt "tweak-text"
 msgid "Power level:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:635
+#: src/screens/gm/limitedGameMasterScreen.cpp:636
 msgctxt "tweak-text"
 msgid "Heat level:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:647
+#: src/screens/gm/limitedGameMasterScreen.cpp:648
 msgctxt "tweak-tab"
 msgid "Missile tubes"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:649
+#: src/screens/gm/limitedGameMasterScreen.cpp:650
 msgctxt "tweak-missile-system"
 msgid ""
 "Ship system and storage for missiles and mines. Defines current stock and "
 "maximum capacity for each type."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:650 src/screens/gm/tweak.cpp:3733
+#: src/screens/gm/limitedGameMasterScreen.cpp:651 src/screens/gm/tweak.cpp:3759
 msgctxt "tweak-text"
 msgid "Homing:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:658 src/screens/gm/tweak.cpp:3734
+#: src/screens/gm/limitedGameMasterScreen.cpp:659 src/screens/gm/tweak.cpp:3760
 msgctxt "tweak-text"
 msgid "Nuke:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:666
+#: src/screens/gm/limitedGameMasterScreen.cpp:667
 msgctxt "tweak-text"
 msgid "Mine:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:674 src/screens/gm/tweak.cpp:3735
+#: src/screens/gm/limitedGameMasterScreen.cpp:675 src/screens/gm/tweak.cpp:3761
 msgctxt "tweak-text"
 msgid "EMP:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:682 src/screens/gm/tweak.cpp:3736
+#: src/screens/gm/limitedGameMasterScreen.cpp:683 src/screens/gm/tweak.cpp:3762
 msgctxt "tweak-text"
 msgid "HVLI:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:694 src/screens/gm/tweak.cpp:4370
+#: src/screens/gm/limitedGameMasterScreen.cpp:695 src/screens/gm/tweak.cpp:4396
 msgctxt "tweak-tab"
 msgid "Reactor"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:696
+#: src/screens/gm/limitedGameMasterScreen.cpp:697
 msgctxt "tweak-reactor"
 msgid ""
 "Ship system that generates and stores energy. Sets energy capacity and "
 "current energy level."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:698 src/screens/gm/tweak.cpp:4372
+#: src/screens/gm/limitedGameMasterScreen.cpp:699 src/screens/gm/tweak.cpp:4398
 msgctxt "tweak-text"
 msgid "Energy:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:706
+#: src/screens/gm/limitedGameMasterScreen.cpp:707
 msgctxt "tweak-text"
 msgid "Max energy:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:718
+#: src/screens/gm/limitedGameMasterScreen.cpp:719
 msgctxt "tweak-tab"
 msgid "Impulse"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:720 src/screens/gm/tweak.cpp:3567
+#: src/screens/gm/limitedGameMasterScreen.cpp:721 src/screens/gm/tweak.cpp:3593
 msgctxt "tweak-impulse"
 msgid ""
 "Ship system for impulse propulsion. Controls forward/reverse max speeds and "
 "acceleration rates."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:721
+#: src/screens/gm/limitedGameMasterScreen.cpp:722
 msgctxt "tweak-text"
 msgid "Max speed forward:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:729 src/screens/gm/tweak.cpp:3571
+#: src/screens/gm/limitedGameMasterScreen.cpp:730 src/screens/gm/tweak.cpp:3597
 msgctxt "tweak-text"
 msgid "Acceleration forward:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:742
+#: src/screens/gm/limitedGameMasterScreen.cpp:743
 msgctxt "tweak-tab"
 msgid "Maneuvering"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:744 src/screens/gm/tweak.cpp:3609
+#: src/screens/gm/limitedGameMasterScreen.cpp:745 src/screens/gm/tweak.cpp:3635
 msgctxt "tweak-maneuvering"
 msgid "Ship system providing rotational thrusters for the ship."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:745 src/screens/gm/tweak.cpp:4126
-#: src/screens/gm/tweak.cpp:4693
+#: src/screens/gm/limitedGameMasterScreen.cpp:746 src/screens/gm/tweak.cpp:4152
+#: src/screens/gm/tweak.cpp:4719
 msgctxt "tweak-text"
 msgid "Speed:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:757 src/screens/gm/tweak.cpp:3773
+#: src/screens/gm/limitedGameMasterScreen.cpp:758 src/screens/gm/tweak.cpp:3799
 msgctxt "tweak-tab"
 msgid "Warp drive"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:759
+#: src/screens/gm/limitedGameMasterScreen.cpp:760
 msgctxt "tweak-warp"
 msgid ""
 "Ship system for the warp propulsion drive. Active warp usage consumes energy "
 "and generates heat."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:760
+#: src/screens/gm/limitedGameMasterScreen.cpp:761
 msgctxt "tweak-text"
 msgid "Request:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:776
+#: src/screens/gm/limitedGameMasterScreen.cpp:777
 msgctxt "tweak-text"
 msgid "Max level:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:788 src/screens/gm/tweak.cpp:3816
+#: src/screens/gm/limitedGameMasterScreen.cpp:789 src/screens/gm/tweak.cpp:3842
 msgctxt "tweak-tab"
 msgid "Jump drive"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:790
+#: src/screens/gm/limitedGameMasterScreen.cpp:791
 msgctxt "tweak-jump"
 msgid ""
 "Ship system for the jump propulsion drive. Minimum and maximum distance "
 "values define the available jump range."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:791 src/screens/gm/tweak.cpp:3828
+#: src/screens/gm/limitedGameMasterScreen.cpp:792 src/screens/gm/tweak.cpp:3854
 msgctxt "tweak-text"
 msgid "Charge:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:799
+#: src/screens/gm/limitedGameMasterScreen.cpp:800
 msgctxt "tweak-text"
 msgid "Distance:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:807 src/screens/gm/tweak.cpp:3754
+#: src/screens/gm/limitedGameMasterScreen.cpp:808 src/screens/gm/tweak.cpp:3780
 msgctxt "tweak-text"
 msgid "Delay:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:819
+#: src/screens/gm/limitedGameMasterScreen.cpp:820
 msgctxt "tweak-tab"
 msgid "Comms"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:821
+#: src/screens/gm/limitedGameMasterScreen.cpp:822
 msgctxt "tweak-comms-transmitter"
 msgid ""
 "Allows this entity to open communication channels with other ships and "
 "stations."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:822
-#: src/screens/gm/limitedGameMasterScreen.cpp:849 src/screens/gm/tweak.cpp:3753
-#: src/screens/gm/tweak.cpp:4400
+#: src/screens/gm/limitedGameMasterScreen.cpp:823
+#: src/screens/gm/limitedGameMasterScreen.cpp:850 src/screens/gm/tweak.cpp:3779
+#: src/screens/gm/tweak.cpp:4426
 msgctxt "tweak-text"
 msgid "State:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:823 src/screens/gm/tweak.cpp:134
+#: src/screens/gm/limitedGameMasterScreen.cpp:824 src/screens/gm/tweak.cpp:134
 msgctxt "comms_state"
 msgid "Inactive"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:824 src/screens/gm/tweak.cpp:135
+#: src/screens/gm/limitedGameMasterScreen.cpp:825 src/screens/gm/tweak.cpp:135
 msgctxt "comms_state"
 msgid "Opening channel"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:825 src/screens/gm/tweak.cpp:136
+#: src/screens/gm/limitedGameMasterScreen.cpp:826 src/screens/gm/tweak.cpp:136
 msgctxt "comms_state"
 msgid "Being hailed"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:826 src/screens/gm/tweak.cpp:137
+#: src/screens/gm/limitedGameMasterScreen.cpp:827 src/screens/gm/tweak.cpp:137
 msgctxt "comms_state"
 msgid "Being hailed by GM"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:827 src/screens/gm/tweak.cpp:138
+#: src/screens/gm/limitedGameMasterScreen.cpp:828 src/screens/gm/tweak.cpp:138
 msgctxt "comms_state"
 msgid "Channel open"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:828 src/screens/gm/tweak.cpp:139
+#: src/screens/gm/limitedGameMasterScreen.cpp:829 src/screens/gm/tweak.cpp:139
 msgctxt "comms_state"
 msgid "Channel open (player)"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:829 src/screens/gm/tweak.cpp:140
+#: src/screens/gm/limitedGameMasterScreen.cpp:830 src/screens/gm/tweak.cpp:140
 msgctxt "comms_state"
 msgid "Channel open (GM)"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:830 src/screens/gm/tweak.cpp:141
+#: src/screens/gm/limitedGameMasterScreen.cpp:831 src/screens/gm/tweak.cpp:141
 msgctxt "comms_state"
 msgid "Channel failed"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:831 src/screens/gm/tweak.cpp:142
+#: src/screens/gm/limitedGameMasterScreen.cpp:832 src/screens/gm/tweak.cpp:142
 msgctxt "comms_state"
 msgid "Channel broken"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:832 src/screens/gm/tweak.cpp:143
+#: src/screens/gm/limitedGameMasterScreen.cpp:833 src/screens/gm/tweak.cpp:143
 msgctxt "comms_state"
 msgid "Channel closed"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:846
+#: src/screens/gm/limitedGameMasterScreen.cpp:847
 msgctxt "tweak-tab"
 msgid "Docking"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:848
+#: src/screens/gm/limitedGameMasterScreen.cpp:849
 msgctxt "tweak-docking-port"
 msgid ""
 "Allows this entity to dock with entities that have a Docking bay component. "
 "Tracks docking state and auto-reload configuration."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:851 src/screens/gm/tweak.cpp:93
+#: src/screens/gm/limitedGameMasterScreen.cpp:852 src/screens/gm/tweak.cpp:93
 msgctxt "docking_state"
 msgid "Not docking"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:852 src/screens/gm/tweak.cpp:94
+#: src/screens/gm/limitedGameMasterScreen.cpp:853 src/screens/gm/tweak.cpp:94
 msgctxt "docking_state"
 msgid "Docking"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:853 src/screens/gm/tweak.cpp:95
+#: src/screens/gm/limitedGameMasterScreen.cpp:854 src/screens/gm/tweak.cpp:95
 msgctxt "docking_state"
 msgid "Docked"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:863
+#: src/screens/gm/limitedGameMasterScreen.cpp:864
 msgctxt "tweak-text"
 msgid "Auto reload missiles"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:875
+#: src/screens/gm/limitedGameMasterScreen.cpp:876
 msgctxt "tweak-tab"
 msgid "Lifetime"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:877
+#: src/screens/gm/limitedGameMasterScreen.cpp:878
 msgctxt "tweak-lifetime"
 msgid ""
 "Defines a time-limited existence for this entity. The entity is "
 "automatically destroyed when the remaining lifetime expires."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:878 src/screens/gm/tweak.cpp:4738
-#: src/screens/gm/tweak.cpp:5002
+#: src/screens/gm/limitedGameMasterScreen.cpp:879 src/screens/gm/tweak.cpp:4764
+#: src/screens/gm/tweak.cpp:5028
 msgctxt "tweak-text"
 msgid "Lifetime:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:890 src/screens/gm/tweak.cpp:3966
+#: src/screens/gm/limitedGameMasterScreen.cpp:891 src/screens/gm/tweak.cpp:3992
 msgctxt "tweak-tab"
 msgid "Spin"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:892
+#: src/screens/gm/limitedGameMasterScreen.cpp:893
 msgctxt "tweak-spin"
 msgid ""
 "Makes the entity rotate continuously at the given rate in degrees per "
 "second. Useful for asteroids, debris, and planetary rotation effects."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:893
+#: src/screens/gm/limitedGameMasterScreen.cpp:894
 msgctxt "tweak-text"
 msgid "Rate:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:905
+#: src/screens/gm/limitedGameMasterScreen.cpp:906
 msgctxt "tweak-tab"
 msgid "Self destruct"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:907
+#: src/screens/gm/limitedGameMasterScreen.cpp:908
 msgctxt "tweak-self-destruct"
 msgid ""
 "If present and active, starts a countdown and triggers an explosion with the "
 "defined blast damage and radius."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:916 src/screens/gm/tweak.cpp:4499
+#: src/screens/gm/limitedGameMasterScreen.cpp:917 src/screens/gm/tweak.cpp:4525
 msgctxt "tweak-text"
 msgid "Countdown:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:928 src/screens/gm/tweak.cpp:4743
+#: src/screens/gm/limitedGameMasterScreen.cpp:929 src/screens/gm/tweak.cpp:4769
 msgctxt "tweak-tab"
 msgid "Mesh render"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:930
+#: src/screens/gm/limitedGameMasterScreen.cpp:931
 msgctxt "tweak-mesh-render"
 msgid "3D mesh rendering. Defines the model file, texture, and scale."
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:931 src/screens/gm/tweak.cpp:4750
+#: src/screens/gm/limitedGameMasterScreen.cpp:932 src/screens/gm/tweak.cpp:4776
 msgctxt "tweak-text"
 msgid "Mesh:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:939 src/screens/gm/tweak.cpp:2168
-#: src/screens/gm/tweak.cpp:3676 src/screens/gm/tweak.cpp:3705
-#: src/screens/gm/tweak.cpp:4773 src/screens/gm/tweak.cpp:4937
-#: src/screens/gm/tweak.cpp:4994
+#: src/screens/gm/limitedGameMasterScreen.cpp:940 src/screens/gm/tweak.cpp:2169
+#: src/screens/gm/tweak.cpp:3702 src/screens/gm/tweak.cpp:3731
+#: src/screens/gm/tweak.cpp:4799 src/screens/gm/tweak.cpp:4963
+#: src/screens/gm/tweak.cpp:5020
 msgctxt "tweak-text"
 msgid "Texture:"
 msgstr ""
 
-#: src/screens/gm/limitedGameMasterScreen.cpp:947 src/screens/gm/tweak.cpp:1856
-#: src/screens/gm/tweak.cpp:4860
+#: src/screens/gm/limitedGameMasterScreen.cpp:948 src/screens/gm/tweak.cpp:1857
+#: src/screens/gm/tweak.cpp:4886
 msgctxt "tweak-text"
 msgid "Scale:"
 msgstr ""
@@ -4376,274 +4376,284 @@ msgctxt "tweak-faction"
 msgid "(None)"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1167 src/screens/gm/tweak.cpp:1262
-#: src/screens/gm/tweak.cpp:1372 src/screens/gm/tweak.cpp:1485
-#: src/screens/gm/tweak.cpp:1614 src/screens/gm/tweak.cpp:1728
-#: src/screens/gm/tweak.cpp:1870 src/screens/gm/tweak.cpp:2177
-#: src/screens/gm/tweak.cpp:2399
+#: src/screens/gm/tweak.cpp:1168 src/screens/gm/tweak.cpp:1263
+#: src/screens/gm/tweak.cpp:1373 src/screens/gm/tweak.cpp:1486
+#: src/screens/gm/tweak.cpp:1615 src/screens/gm/tweak.cpp:1729
+#: src/screens/gm/tweak.cpp:1871 src/screens/gm/tweak.cpp:2178
+#: src/screens/gm/tweak.cpp:2400
 msgctxt "tweak-button"
 msgid "Add"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1181 src/screens/gm/tweak.cpp:1278
-#: src/screens/gm/tweak.cpp:1391 src/screens/gm/tweak.cpp:1502
-#: src/screens/gm/tweak.cpp:1630 src/screens/gm/tweak.cpp:1743
-#: src/screens/gm/tweak.cpp:1902 src/screens/gm/tweak.cpp:2065
-#: src/screens/gm/tweak.cpp:2209 src/screens/gm/tweak.cpp:2401
+#: src/screens/gm/tweak.cpp:1182 src/screens/gm/tweak.cpp:1279
+#: src/screens/gm/tweak.cpp:1392 src/screens/gm/tweak.cpp:1503
+#: src/screens/gm/tweak.cpp:1631 src/screens/gm/tweak.cpp:1744
+#: src/screens/gm/tweak.cpp:1903 src/screens/gm/tweak.cpp:2066
+#: src/screens/gm/tweak.cpp:2210 src/screens/gm/tweak.cpp:2402
 msgctxt "tweak-button"
 msgid "Del"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1420
+#: src/screens/gm/tweak.cpp:1421
 msgid "{index}: {x}, {y}"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1589
+#: src/screens/gm/tweak.cpp:1590
 msgctxt "tweak-width"
 msgid "W:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1590
+#: src/screens/gm/tweak.cpp:1591
 msgctxt "tweak-height"
 msgid "H:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1597 src/screens/gm/tweak.cpp:1720
+#: src/screens/gm/tweak.cpp:1598 src/screens/gm/tweak.cpp:1721
 msgctxt "tweak-room"
 msgid "Ship system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1601
+#: src/screens/gm/tweak.cpp:1602
 msgctxt "tweak-room"
 msgid "None"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1657
+#: src/screens/gm/tweak.cpp:1658
 msgctxt "tweak-room"
 msgid "({position_x},{position_y} {size_w}x{size_h}) {system_name}"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1723 src/screens/gm/tweak.cpp:1773
+#: src/screens/gm/tweak.cpp:1724 src/screens/gm/tweak.cpp:1774
 msgctxt "tweak-door"
 msgid "Horizontal"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1770
+#: src/screens/gm/tweak.cpp:1771
 msgctxt "tweak-door"
 msgid "({position_x},{position_y}) {orientation}"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1773
+#: src/screens/gm/tweak.cpp:1774
 msgctxt "tweak-door"
 msgid "Vertical"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1886 src/screens/gm/tweak.cpp:2049
-#: src/screens/gm/tweak.cpp:2193
+#: src/screens/gm/tweak.cpp:1887 src/screens/gm/tweak.cpp:2050
+#: src/screens/gm/tweak.cpp:2194
 msgctxt "tweak-button"
 msgid "Apply"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1977 src/screens/gm/tweak.cpp:2024
+#: src/screens/gm/tweak.cpp:1978 src/screens/gm/tweak.cpp:2025
 #: src/components/docking.h:119
 msgctxt "dockingbay"
 msgid "Hangar"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1979 src/screens/gm/tweak.cpp:2026
+#: src/screens/gm/tweak.cpp:1980 src/screens/gm/tweak.cpp:2027
 #: src/components/docking.h:125
 msgctxt "dockingbay"
 msgid "Supply"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1980 src/screens/gm/tweak.cpp:2027
+#: src/screens/gm/tweak.cpp:1981 src/screens/gm/tweak.cpp:2028
 #: src/components/docking.h:128
 msgctxt "dockingbay"
 msgid "Thermal"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1981 src/screens/gm/tweak.cpp:2028
+#: src/screens/gm/tweak.cpp:1982 src/screens/gm/tweak.cpp:2029
 #: src/components/docking.h:131
 msgctxt "dockingbay"
 msgid "Repair"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1982 src/screens/gm/tweak.cpp:2029
+#: src/screens/gm/tweak.cpp:1983 src/screens/gm/tweak.cpp:2030
 #: src/components/docking.h:134
 msgctxt "dockingbay"
 msgid "Storage"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:1984 src/components/docking.h:114
+#: src/screens/gm/tweak.cpp:1985 src/components/docking.h:114
 msgctxt "dockingbay"
 msgid "Unknown type"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2034
+#: src/screens/gm/tweak.cpp:2035
 msgctxt "tweak-text"
 msgid "Move time:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2041
+#: src/screens/gm/tweak.cpp:2042
 msgctxt "tweak-text"
 msgid "Transfer rate:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2172 src/screens/gm/tweak.cpp:3745
-#: src/screens/gm/tweak.cpp:4938 src/screens/gm/tweak.cpp:4990
-#: src/screens/gm/tweak.cpp:5003
+#: src/screens/gm/tweak.cpp:2173 src/screens/gm/tweak.cpp:3771
+#: src/screens/gm/tweak.cpp:4964 src/screens/gm/tweak.cpp:5016
+#: src/screens/gm/tweak.cpp:5029
 msgctxt "tweak-text"
 msgid "Size:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2539 src/screens/gm/tweak.cpp:2579
+#: src/screens/gm/tweak.cpp:2540 src/screens/gm/tweak.cpp:2580
 msgctxt "tweak-text"
 msgid "Hackable"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2540 src/screens/gm/tweak.cpp:2580
+#: src/screens/gm/tweak.cpp:2541 src/screens/gm/tweak.cpp:2581
 msgctxt "tweak-text"
 msgid "Health current/max:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2565 src/screens/gm/tweak.cpp:2605
+#: src/screens/gm/tweak.cpp:2566 src/screens/gm/tweak.cpp:2606
 msgctxt "tweak-text"
 msgid "Heat:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2566 src/screens/gm/tweak.cpp:2606
+#: src/screens/gm/tweak.cpp:2567 src/screens/gm/tweak.cpp:2607
 msgctxt "tweak-text"
 msgid "Energy rate factor:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2570 src/screens/gm/tweak.cpp:2610
+#: src/screens/gm/tweak.cpp:2571 src/screens/gm/tweak.cpp:2611
 msgctxt "tweak-text"
 msgid "Value x power level x 0.08 = energy drained/sec"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2572 src/screens/gm/tweak.cpp:2612
+#: src/screens/gm/tweak.cpp:2573 src/screens/gm/tweak.cpp:2613
 msgctxt "tweak-text"
 msgid "Heat added/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2573 src/screens/gm/tweak.cpp:2613
+#: src/screens/gm/tweak.cpp:2574 src/screens/gm/tweak.cpp:2614
 msgctxt "tweak-text"
 msgid "Coolant change/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2574 src/screens/gm/tweak.cpp:2614
+#: src/screens/gm/tweak.cpp:2575 src/screens/gm/tweak.cpp:2615
 msgctxt "tweak-text"
 msgid "Power change/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:2575 src/screens/gm/tweak.cpp:2615
+#: src/screens/gm/tweak.cpp:2576 src/screens/gm/tweak.cpp:2616
 msgctxt "tweak-text"
 msgid "Auto repair/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3224
+#: src/screens/gm/tweak.cpp:3194 src/screens/gm/tweak.cpp:3204
+msgctxt "tweak"
+msgid "Show existing"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:3199
+msgctxt "tweak"
+msgid "Show all"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:3250
 msgctxt "tweak-group"
 msgid "Identity"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3225
+#: src/screens/gm/tweak.cpp:3251
 msgctxt "tweak-group"
 msgid "Position & movement"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3226
+#: src/screens/gm/tweak.cpp:3252
 msgctxt "tweak-group"
 msgid "AI & pathfinding"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3227
+#: src/screens/gm/tweak.cpp:3253
 msgctxt "tweak-group"
 msgid "Combat"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3228
+#: src/screens/gm/tweak.cpp:3254
 msgctxt "tweak-group"
 msgid "Projectiles"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3229
+#: src/screens/gm/tweak.cpp:3255
 msgctxt "tweak-group"
 msgid "Ship systems"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3230
+#: src/screens/gm/tweak.cpp:3256
 msgctxt "tweak-group"
 msgid "Player"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3231
+#: src/screens/gm/tweak.cpp:3257
 msgctxt "tweak-group"
 msgid "Sensors"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3232
+#: src/screens/gm/tweak.cpp:3258
 msgctxt "tweak-group"
 msgid "Drones"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3233
+#: src/screens/gm/tweak.cpp:3259
 msgctxt "tweak-group"
 msgid "Comms & docking"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3234
+#: src/screens/gm/tweak.cpp:3260
 msgctxt "tweak-group"
 msgid "Countermeasures"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3235
+#: src/screens/gm/tweak.cpp:3261
 msgctxt "tweak-group"
 msgid "World"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3236
+#: src/screens/gm/tweak.cpp:3262
 msgctxt "tweak-group"
 msgid "Rendering"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3237
+#: src/screens/gm/tweak.cpp:3263
 msgctxt "tweak-group"
 msgid "Scripting"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3365
+#: src/screens/gm/tweak.cpp:3391
 msgctxt "tweak-text"
 msgid "Shape:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3389 src/screens/gm/tweak.cpp:4055
-#: src/screens/gm/tweak.cpp:4562 src/screens/gm/tweak.cpp:4572
-#: src/screens/gm/tweak.cpp:4943
+#: src/screens/gm/tweak.cpp:3415 src/screens/gm/tweak.cpp:4081
+#: src/screens/gm/tweak.cpp:4588 src/screens/gm/tweak.cpp:4598
+#: src/screens/gm/tweak.cpp:4969
 msgctxt "tweak-text"
 msgid "Radius:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3404
+#: src/screens/gm/tweak.cpp:3430
 msgctxt "tweak-button"
 msgid "Sync radar trace radius to physics radius"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3424
+#: src/screens/gm/tweak.cpp:3450
 msgctxt "tweak-text"
 msgid "Size (W x H):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3485
+#: src/screens/gm/tweak.cpp:3511
 msgctxt "tweak-tab"
 msgid "Callsign"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3490
+#: src/screens/gm/tweak.cpp:3516
 msgctxt "tweak-tab"
 msgid "Type name"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3491
+#: src/screens/gm/tweak.cpp:3517
 msgctxt "tweak-typename"
 msgid ""
 "The ship type name used internally by EmptyEpsilon, such as 'Atlantis', and "
@@ -4651,22 +4661,22 @@ msgid ""
 "science database."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3492
+#: src/screens/gm/tweak.cpp:3518
 msgctxt "tweak-text"
 msgid "Type name:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3493
+#: src/screens/gm/tweak.cpp:3519
 msgctxt "tweak-text"
 msgid "Localized type name:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3496
+#: src/screens/gm/tweak.cpp:3522
 msgctxt "tweak-tab"
 msgid "Coolant"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3497
+#: src/screens/gm/tweak.cpp:3523
 msgctxt "tweak-coolant"
 msgid ""
 "Adds heat accumulation to ship systems possessed by this entity, and a "
@@ -4674,22 +4684,22 @@ msgid ""
 "ship systems don't generate heat."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3498
+#: src/screens/gm/tweak.cpp:3524
 msgctxt "tweak-text"
 msgid "Capacity:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3499
+#: src/screens/gm/tweak.cpp:3525
 msgctxt "tweak-text"
 msgid "Maximum per system:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3500
+#: src/screens/gm/tweak.cpp:3526
 msgctxt "tweak-text"
 msgid "Automatic coolant distribution"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3504
+#: src/screens/gm/tweak.cpp:3530
 msgctxt "tweak-hull"
 msgid ""
 "Structural hit points. If an entity with a hull has zero hull points, its "
@@ -4700,117 +4710,117 @@ msgid ""
 "this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3505
+#: src/screens/gm/tweak.cpp:3531
 msgctxt "tweak-text"
 msgid "Hull:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3506
+#: src/screens/gm/tweak.cpp:3532
 msgctxt "tweak-text"
 msgid "Entity can be destroyed"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3507
+#: src/screens/gm/tweak.cpp:3533
 msgctxt "tweak-text"
 msgid "Damage indicator:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3512 src/screens/gm/tweak.cpp:5040
+#: src/screens/gm/tweak.cpp:3538 src/screens/gm/tweak.cpp:5066
 msgctxt "tweak-text"
 msgid "Energy damage"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3530 src/screens/gm/tweak.cpp:5058
+#: src/screens/gm/tweak.cpp:3556 src/screens/gm/tweak.cpp:5084
 msgctxt "tweak-text"
 msgid "Kinetic damage"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3548 src/screens/gm/tweak.cpp:5076
+#: src/screens/gm/tweak.cpp:3574 src/screens/gm/tweak.cpp:5102
 msgctxt "tweak-text"
 msgid "EMP damage"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3566
+#: src/screens/gm/tweak.cpp:3592
 msgctxt "tweak-tab"
 msgid "Impulse engine"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3568
+#: src/screens/gm/tweak.cpp:3594
 msgctxt "tweak-text"
 msgid "Sound:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3569
+#: src/screens/gm/tweak.cpp:3595
 msgctxt "tweak-text"
 msgid "Speed forward:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3570
+#: src/screens/gm/tweak.cpp:3596
 msgctxt "tweak-text"
 msgid "Speed reverse:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3572
+#: src/screens/gm/tweak.cpp:3598
 msgctxt "tweak-text"
 msgid "Acceleration reverse:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3573
+#: src/screens/gm/tweak.cpp:3599
 msgctxt "tweak-text"
 msgid "Actual speed:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3574
+#: src/screens/gm/tweak.cpp:3600
 msgctxt "tweak-text"
 msgid "Impulse engine system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3576
+#: src/screens/gm/tweak.cpp:3602
 msgctxt "tweak-text"
 msgid "Impulse command"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3582
+#: src/screens/gm/tweak.cpp:3608
 msgctxt "tweak-text"
 msgid "Impulse speed:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3608
+#: src/screens/gm/tweak.cpp:3634
 msgctxt "tweak-tab"
 msgid "Maneuvering thrusters"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3610
+#: src/screens/gm/tweak.cpp:3636
 msgctxt "tweak-text"
 msgid "Rotational speed (deg/sec):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3611
+#: src/screens/gm/tweak.cpp:3637
 msgctxt "tweak-text"
 msgid "Rotation request:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3612
+#: src/screens/gm/tweak.cpp:3638
 msgctxt "tweak-text"
 msgid "Maneuvering thrusters system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3614
+#: src/screens/gm/tweak.cpp:3640
 msgctxt "tweak-text"
 msgid "Heading command"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3618
+#: src/screens/gm/tweak.cpp:3644
 msgctxt "tweak-text"
 msgid "Target heading:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3637
+#: src/screens/gm/tweak.cpp:3663
 msgctxt "tweak-tab"
 msgid "Combat thrusters"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3638
+#: src/screens/gm/tweak.cpp:3664
 msgctxt "tweak-combatmaneuvering"
 msgid ""
 "Boost and strafe capability. Charge is consumed on use and recharges over "
@@ -4821,82 +4831,82 @@ msgid ""
 "engine system."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3639
+#: src/screens/gm/tweak.cpp:3665
 msgctxt "tweak-text"
 msgid "Charge available:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3640
+#: src/screens/gm/tweak.cpp:3666
 msgctxt "tweak-text"
 msgid "Recharge from 0 in sec.:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3641
+#: src/screens/gm/tweak.cpp:3667
 msgctxt "tweak-text"
 msgid "Boost"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3642
+#: src/screens/gm/tweak.cpp:3668
 msgctxt "tweak-text"
 msgid "Boost request:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3643
+#: src/screens/gm/tweak.cpp:3669
 msgctxt "tweak-text"
 msgid "Boost active:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3644
+#: src/screens/gm/tweak.cpp:3670
 msgctxt "tweak-text"
 msgid "Boost speed:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3645
+#: src/screens/gm/tweak.cpp:3671
 msgctxt "tweak-text"
 msgid "Boost max time:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3646
+#: src/screens/gm/tweak.cpp:3672
 msgctxt "tweak-text"
 msgid "Boost heat/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3647
+#: src/screens/gm/tweak.cpp:3673
 msgctxt "tweak-text"
 msgid "Strafe"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3648
+#: src/screens/gm/tweak.cpp:3674
 msgctxt "tweak-text"
 msgid "Strafe request:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3649
+#: src/screens/gm/tweak.cpp:3675
 msgctxt "tweak-text"
 msgid "Strafe active:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3650
+#: src/screens/gm/tweak.cpp:3676
 msgctxt "tweak-text"
 msgid "Strafe speed:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3651
+#: src/screens/gm/tweak.cpp:3677
 msgctxt "tweak-text"
 msgid "Strafe max time:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3652
+#: src/screens/gm/tweak.cpp:3678
 msgctxt "tweak-text"
 msgid "Strafe heat/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3655
+#: src/screens/gm/tweak.cpp:3681
 msgctxt "tweak-tab"
 msgid "Beam system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3656
+#: src/screens/gm/tweak.cpp:3682
 msgctxt "tweak-beam-system"
 msgid ""
 "Ship system providing beam weapon configuration. Beam frequency affects "
@@ -4911,109 +4921,109 @@ msgid ""
 "into the system."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3657 src/screens/gm/tweak.cpp:3766
+#: src/screens/gm/tweak.cpp:3683 src/screens/gm/tweak.cpp:3792
 msgctxt "tweak-text"
 msgid "Frequency:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3658
+#: src/screens/gm/tweak.cpp:3684
 msgctxt "tweak-text"
 msgid "System target:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3659
+#: src/screens/gm/tweak.cpp:3685
 msgctxt "tweak-text"
 msgid "Beam weapons system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3662
+#: src/screens/gm/tweak.cpp:3688
 msgctxt "tweak-text"
 msgid "Beam mounts"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3663 src/screens/gm/tweak.cpp:3742
+#: src/screens/gm/tweak.cpp:3689 src/screens/gm/tweak.cpp:3768
 msgctxt "tweak-vector"
 msgid "Mount"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3665
+#: src/screens/gm/tweak.cpp:3691
 msgctxt "tweak-text"
 msgid "Beam arc:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3666
+#: src/screens/gm/tweak.cpp:3692
 msgctxt "tweak-text"
 msgid "Beam direction:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3667 src/screens/gm/tweak.cpp:3695
-#: src/screens/gm/tweak.cpp:4700
+#: src/screens/gm/tweak.cpp:3693 src/screens/gm/tweak.cpp:3721
+#: src/screens/gm/tweak.cpp:4726
 msgctxt "tweak-text"
 msgid "Range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3668 src/screens/gm/tweak.cpp:3699
+#: src/screens/gm/tweak.cpp:3694 src/screens/gm/tweak.cpp:3725
 msgctxt "tweak-text"
 msgid "Cycle time:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3669
+#: src/screens/gm/tweak.cpp:3695
 msgctxt "tweak-text"
 msgid "Damage:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3670
+#: src/screens/gm/tweak.cpp:3696
 msgctxt "tweak-text"
 msgid "Energy per fire:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3671
+#: src/screens/gm/tweak.cpp:3697
 msgctxt "tweak-text"
 msgid "Heat per fire:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3672 src/screens/gm/tweak.cpp:3703
+#: src/screens/gm/tweak.cpp:3698 src/screens/gm/tweak.cpp:3729
 msgctxt "tweak-text"
 msgid "Arc color:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3673 src/screens/gm/tweak.cpp:3704
+#: src/screens/gm/tweak.cpp:3699 src/screens/gm/tweak.cpp:3730
 msgctxt "tweak-text"
 msgid "Arc color fire:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3674 src/screens/gm/tweak.cpp:4710
-#: src/screens/gm/tweak.cpp:4725
+#: src/screens/gm/tweak.cpp:3700 src/screens/gm/tweak.cpp:4736
+#: src/screens/gm/tweak.cpp:4751
 msgctxt "tweak-text"
 msgid "Damage type:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3675 src/screens/gm/tweak.cpp:3706
+#: src/screens/gm/tweak.cpp:3701 src/screens/gm/tweak.cpp:3732
 msgctxt "tweak-text"
 msgid "Cooldown:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3677
+#: src/screens/gm/tweak.cpp:3703
 msgctxt "tweak-text"
 msgid "Turret arc:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3678
+#: src/screens/gm/tweak.cpp:3704
 msgctxt "tweak-text"
 msgid "Turret direction:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3679
+#: src/screens/gm/tweak.cpp:3705
 msgctxt "tweak-text"
 msgid "Turret rotation rate:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3682
+#: src/screens/gm/tweak.cpp:3708
 msgctxt "tweak-tab"
 msgid "Utility beam system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3683
+#: src/screens/gm/tweak.cpp:3709
 msgctxt "tweak-utility-beam"
 msgid ""
 "Ship system providing a configurable utility beam.\n"
@@ -5021,102 +5031,102 @@ msgid ""
 "Callback members inside custom_beam_modes can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3684
+#: src/screens/gm/tweak.cpp:3710
 msgctxt "tweak-text"
 msgid "Custom beam mode:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3685
+#: src/screens/gm/tweak.cpp:3711
 msgctxt "tweak-text"
 msgid "Effect target entity:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3686
+#: src/screens/gm/tweak.cpp:3712
 msgctxt "tweak-text"
 msgid "Active:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3687
+#: src/screens/gm/tweak.cpp:3713
 msgctxt "tweak-text"
 msgid "Was active:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3688
+#: src/screens/gm/tweak.cpp:3714
 msgctxt "tweak-text"
 msgid "Is firing:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3690
+#: src/screens/gm/tweak.cpp:3716
 msgctxt "tweak-text"
 msgid "Arc:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3691
+#: src/screens/gm/tweak.cpp:3717
 msgctxt "tweak-text"
 msgid "Max arc:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3692
+#: src/screens/gm/tweak.cpp:3718
 msgctxt "tweak-text"
 msgid "Fixed arc:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3693
+#: src/screens/gm/tweak.cpp:3719
 msgctxt "tweak-text"
 msgid "Bearing:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3694
+#: src/screens/gm/tweak.cpp:3720
 msgctxt "tweak-text"
 msgid "Fixed bearing:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3696
+#: src/screens/gm/tweak.cpp:3722
 msgctxt "tweak-text"
 msgid "Max range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3697
+#: src/screens/gm/tweak.cpp:3723
 msgctxt "tweak-text"
 msgid "Fixed range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3698
+#: src/screens/gm/tweak.cpp:3724
 msgctxt "tweak-text"
 msgid "Target coordinates:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3700
+#: src/screens/gm/tweak.cpp:3726
 msgctxt "tweak-text"
 msgid "Strength:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3701
+#: src/screens/gm/tweak.cpp:3727
 msgctxt "tweak-text"
 msgid "Energy use per sec.:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3702
+#: src/screens/gm/tweak.cpp:3728
 msgctxt "tweak-text"
 msgid "Heat per sec.:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3707 src/screens/gm/tweak.cpp:4346
+#: src/screens/gm/tweak.cpp:3733 src/screens/gm/tweak.cpp:4372
 msgctxt "tweak-text"
 msgid "Allowed crew positions"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3727
+#: src/screens/gm/tweak.cpp:3753
 msgctxt "tweak-text"
 msgid "Utility beam system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3730
+#: src/screens/gm/tweak.cpp:3756
 msgctxt "tweak-tab"
 msgid "Missile system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3731
+#: src/screens/gm/tweak.cpp:3757
 msgctxt "tweak-missile-system"
 msgid ""
 "Ship system and storage for missiles and mines. Defines current stock and "
@@ -5127,72 +5137,72 @@ msgid ""
 "and firing generates heat into, the Missile weapon system."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3732
+#: src/screens/gm/tweak.cpp:3758
 msgctxt "tweak-text"
 msgid "Weapon stocks"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3737
+#: src/screens/gm/tweak.cpp:3763
 msgctxt "tweak-text"
 msgid "Mines:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3738
+#: src/screens/gm/tweak.cpp:3764
 msgctxt "tweak-text"
 msgid "Missile weapons system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3741
+#: src/screens/gm/tweak.cpp:3767
 msgctxt "tweak-text"
 msgid "Weapon tube mounts"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3743
+#: src/screens/gm/tweak.cpp:3769
 msgctxt "tweak-text"
 msgid "Direction:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3744
+#: src/screens/gm/tweak.cpp:3770
 msgctxt "tweak-text"
 msgid "Load time:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3746
+#: src/screens/gm/tweak.cpp:3772
 msgctxt "tweak-text"
 msgid "Allow homing in this tube"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3747
+#: src/screens/gm/tweak.cpp:3773
 msgctxt "tweak-text"
 msgid "Allow nuke in this tube"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3748
+#: src/screens/gm/tweak.cpp:3774
 msgctxt "tweak-text"
 msgid "Allow mine in this tube"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3749
+#: src/screens/gm/tweak.cpp:3775
 msgctxt "tweak-text"
 msgid "Allow EMP in this tube"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3750
+#: src/screens/gm/tweak.cpp:3776
 msgctxt "tweak-text"
 msgid "Allow HVLI in this tube"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3752
+#: src/screens/gm/tweak.cpp:3778
 msgctxt "tweak-text"
 msgid "Type loaded:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3755
+#: src/screens/gm/tweak.cpp:3781
 msgctxt "tweak-text"
 msgid "Fire count:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3759
+#: src/screens/gm/tweak.cpp:3785
 msgctxt "tweak-shields"
 msgid ""
 "Shield generators, including active state, frequency, calibration time, and "
@@ -5201,37 +5211,37 @@ msgid ""
 "segments have separate front and rear shield ship systems."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3760
+#: src/screens/gm/tweak.cpp:3786
 msgctxt "tweak-text"
 msgid "Front shield system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3762
+#: src/screens/gm/tweak.cpp:3788
 msgctxt "tweak-text"
 msgid "Rear shield system (2+ segments only)"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3765
+#: src/screens/gm/tweak.cpp:3791
 msgctxt "tweak-text"
 msgid "Seconds to recalibrate:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3767
+#: src/screens/gm/tweak.cpp:3793
 msgctxt "tweak-text"
 msgid "Energy use/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3768
+#: src/screens/gm/tweak.cpp:3794
 msgctxt "tweak-vector"
 msgid "Shield segments"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3769
+#: src/screens/gm/tweak.cpp:3795
 msgctxt "tweak-text"
 msgid "Level current/max:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3774
+#: src/screens/gm/tweak.cpp:3800
 msgctxt "tweak-warp"
 msgid ""
 "Ship system for the warp propulsion drive. Maximum level sets the highest "
@@ -5241,57 +5251,57 @@ msgid ""
 "heat generation."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3775 src/screens/gm/tweak.cpp:3818
+#: src/screens/gm/tweak.cpp:3801 src/screens/gm/tweak.cpp:3844
 msgctxt "tweak-text"
 msgid "Charge time:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3776
+#: src/screens/gm/tweak.cpp:3802
 msgctxt "tweak-text"
 msgid "Decharge time:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3777
+#: src/screens/gm/tweak.cpp:3803
 msgctxt "tweak-text"
 msgid "Maximum level:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3778
+#: src/screens/gm/tweak.cpp:3804
 msgctxt "tweak-text"
 msgid "Speed/level:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3779
+#: src/screens/gm/tweak.cpp:3805
 msgctxt "tweak-text"
 msgid "Heat per level:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3780
+#: src/screens/gm/tweak.cpp:3806
 msgctxt "tweak-text"
 msgid "Energy per level/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3781
+#: src/screens/gm/tweak.cpp:3807
 msgctxt "tweak-text"
 msgid "Warp drive system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3783
+#: src/screens/gm/tweak.cpp:3809
 msgctxt "tweak-text"
 msgid "Warp commands"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3790
+#: src/screens/gm/tweak.cpp:3816
 msgctxt "tweak-text"
 msgid "Warp factor:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3812
+#: src/screens/gm/tweak.cpp:3838
 msgctxt "tweak-text"
 msgid "Current warp factor:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3817
+#: src/screens/gm/tweak.cpp:3843
 msgctxt "tweak-jump"
 msgid ""
 "Ship system for the jump propulsion drive. Minimum and maximum distance "
@@ -5300,67 +5310,67 @@ msgid ""
 "heat."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3819
+#: src/screens/gm/tweak.cpp:3845
 msgctxt "tweak-text"
 msgid "Energy per km charge:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3820
+#: src/screens/gm/tweak.cpp:3846
 msgctxt "tweak-text"
 msgid "Heat per jump:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3821
+#: src/screens/gm/tweak.cpp:3847
 msgctxt "tweak-text"
 msgid "Activation delay:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3822
+#: src/screens/gm/tweak.cpp:3848
 msgctxt "tweak-text"
 msgid "Distance min/max:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3861
+#: src/screens/gm/tweak.cpp:3887
 msgctxt "tweak-text"
 msgid "Jump drive system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3863
+#: src/screens/gm/tweak.cpp:3889
 msgctxt "tweak-text"
 msgid "Jump commands"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3870
+#: src/screens/gm/tweak.cpp:3896
 msgctxt "tweak-text"
 msgid "Jump distance:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3897
+#: src/screens/gm/tweak.cpp:3923
 msgctxt "tweak-text"
 msgid "Seconds to jump:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3909
+#: src/screens/gm/tweak.cpp:3935
 msgctxt "tweak-button"
 msgid "Initiate jump"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3917
+#: src/screens/gm/tweak.cpp:3943
 msgctxt "tweak-button"
 msgid "Abort jump"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3925
+#: src/screens/gm/tweak.cpp:3951
 msgctxt "tweak-text"
 msgid "Just jumped:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3939
+#: src/screens/gm/tweak.cpp:3965
 msgctxt "tweak-tab"
 msgid "AI controller"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3940
+#: src/screens/gm/tweak.cpp:3966
 msgctxt "tweak-ai"
 msgid ""
 "Autonomous ship behavior. Set orders (attack, defend, dock, etc.), target "
@@ -5374,17 +5384,17 @@ msgid ""
 "This component can't be removed from an entity using the tweaks menu."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3945
+#: src/screens/gm/tweak.cpp:3971
 msgctxt "tweak-text"
 msgid "Order target:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3950
+#: src/screens/gm/tweak.cpp:3976
 msgctxt "tweak-tab"
 msgid "Orbit"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3951
+#: src/screens/gm/tweak.cpp:3977
 msgctxt "tweak-orbit"
 msgid ""
 "Defines simple orbital movement by this entity around another entity (orbit "
@@ -5394,27 +5404,27 @@ msgid ""
 "Combine with Spin and Planet renderer to roughly simulate planetary rotation."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3952
+#: src/screens/gm/tweak.cpp:3978
 msgctxt "tweak-text"
 msgid "Orbit center target:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3953
+#: src/screens/gm/tweak.cpp:3979
 msgctxt "tweak-text"
 msgid "Orbit center coordinates:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3954
+#: src/screens/gm/tweak.cpp:3980
 msgctxt "tweak-text"
 msgid "Orbit distance:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3955
+#: src/screens/gm/tweak.cpp:3981
 msgctxt "tweak-text"
 msgid "Orbit period (seconds):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3961
+#: src/screens/gm/tweak.cpp:3987
 msgctxt "tweak-faction"
 msgid ""
 "The faction to which this entity belongs. An entity's faction determines "
@@ -5423,7 +5433,7 @@ msgid ""
 "left of the GM screen."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3967
+#: src/screens/gm/tweak.cpp:3993
 msgctxt "tweak-spin"
 msgid ""
 "Makes the entity rotate continuously at the given rate in degrees per "
@@ -5435,17 +5445,17 @@ msgid ""
 "own rotation."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3968
+#: src/screens/gm/tweak.cpp:3994
 msgctxt "tweak-text"
 msgid "Rotation rate (deg/sec):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3971
+#: src/screens/gm/tweak.cpp:3997
 msgctxt "tweak-tab"
 msgid "Life time"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3972
+#: src/screens/gm/tweak.cpp:3998
 msgctxt "tweak-lifetime"
 msgid ""
 "Defines a time-limited existence for this entity, and automatically destroys "
@@ -5459,34 +5469,34 @@ msgid ""
 "Callback member on_expire can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3973
+#: src/screens/gm/tweak.cpp:3999
 msgctxt "tweak-text"
 msgid "Remaining lifetime (seconds):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3976
+#: src/screens/gm/tweak.cpp:4002
 msgctxt "tweak-tab"
 msgid "Warp jammer"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3977
+#: src/screens/gm/tweak.cpp:4003
 msgctxt "tweak-warp-jammer"
 msgid ""
 "Creates an area in which where warp and jump drives can't be activated. "
 "Useful for trapping or containing ships."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3978
+#: src/screens/gm/tweak.cpp:4004
 msgctxt "tweak-text"
 msgid "Jamming range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3982
+#: src/screens/gm/tweak.cpp:4008
 msgctxt "tweak-tab"
 msgid "Zone"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3983
+#: src/screens/gm/tweak.cpp:4009
 msgctxt "tweak-zone"
 msgid ""
 "A named region, typically visible on radar as a colored region with a label, "
@@ -5500,47 +5510,47 @@ msgid ""
 "triangles and zone_dirty are internal and can't be tweaked."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:3987
+#: src/screens/gm/tweak.cpp:4013
 msgctxt "tweak-text"
 msgid "Zone outline color:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4003
+#: src/screens/gm/tweak.cpp:4029
 msgctxt "tweak-text"
 msgid "Zone fill color:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4019
+#: src/screens/gm/tweak.cpp:4045
 msgctxt "tweak-text"
 msgid "Label:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4028
+#: src/screens/gm/tweak.cpp:4054
 msgctxt "tweak-text"
 msgid "Label offset:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4037 src/screens/gm/tweak.cpp:4944
+#: src/screens/gm/tweak.cpp:4063 src/screens/gm/tweak.cpp:4970
 msgctxt "tweak-text"
 msgid "Skybox:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4046 src/screens/gm/tweak.cpp:4945
+#: src/screens/gm/tweak.cpp:4072 src/screens/gm/tweak.cpp:4971
 msgctxt "tweak-text"
 msgid "Skybox fade distance:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4064
+#: src/screens/gm/tweak.cpp:4090
 msgctxt "tweak-text"
 msgid "Outline points:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4114
+#: src/screens/gm/tweak.cpp:4140
 msgctxt "tweak-tab"
 msgid "Database"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4115
+#: src/screens/gm/tweak.cpp:4141
 msgctxt "tweak-database"
 msgid ""
 "Adds a Science database entry for this entity. Defines the name, "
@@ -5551,37 +5561,37 @@ msgid ""
 "on the map, use the Databse button on the GM screen."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4116
+#: src/screens/gm/tweak.cpp:4142
 msgctxt "tweak-text"
 msgid "Parent entry:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4117 src/screens/gm/tweak.cpp:4490
+#: src/screens/gm/tweak.cpp:4143 src/screens/gm/tweak.cpp:4516
 msgctxt "tweak-text"
 msgid "Name:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4118
+#: src/screens/gm/tweak.cpp:4144
 msgctxt "tweak-text"
 msgid "Key-value pairs:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4120
+#: src/screens/gm/tweak.cpp:4146
 msgctxt "tweak-text"
 msgid "Description:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4121 src/screens/gm/tweak.cpp:5112
+#: src/screens/gm/tweak.cpp:4147 src/screens/gm/tweak.cpp:5138
 msgctxt "tweak-text"
 msgid "Image:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4124
+#: src/screens/gm/tweak.cpp:4150
 msgctxt "tweak-tab"
 msgid "Move to"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4125
+#: src/screens/gm/tweak.cpp:4151
 msgctxt "tweak-moveto"
 msgid ""
 "Moves the entity to the target location in a straight line at a fixed rate "
@@ -5598,34 +5608,34 @@ msgid ""
 "Callback member on_arrival can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4127
+#: src/screens/gm/tweak.cpp:4153
 msgctxt "tweak-text"
 msgid "Target position:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4130
+#: src/screens/gm/tweak.cpp:4156
 msgctxt "tweak-tab"
 msgid "Avoid object"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4131
+#: src/screens/gm/tweak.cpp:4157
 msgctxt "tweak-avoid-object"
 msgid ""
 "Marks this entity as an obstacle for AI pathfinding. AI-controlled entities "
 "will route this entity at the given avoidance range."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4132 src/screens/gm/tweak.cpp:4138
+#: src/screens/gm/tweak.cpp:4158 src/screens/gm/tweak.cpp:4164
 msgctxt "tweak-text"
 msgid "Avoidance range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4135
+#: src/screens/gm/tweak.cpp:4161
 msgctxt "tweak-tab"
 msgid "Delayed avoid object"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4136
+#: src/screens/gm/tweak.cpp:4162
 msgctxt "tweak-delayed-avoid-object"
 msgid ""
 "Marks this entity as an obstacle for AI pathfinding after an activation "
@@ -5633,33 +5643,33 @@ msgid ""
 "activation delay countdown expires, then avoid it using the given range."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4137
+#: src/screens/gm/tweak.cpp:4163
 msgctxt "tweak-text"
 msgid "Activation delay (seconds):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4141
+#: src/screens/gm/tweak.cpp:4167
 msgctxt "tweak-tab"
 msgid "Target"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4142
+#: src/screens/gm/tweak.cpp:4168
 msgctxt "tweak-target"
 msgid ""
 "The entity targeted by this entity's weapons (beam/missile) or AI orders."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4143
+#: src/screens/gm/tweak.cpp:4169
 msgctxt "tweak-text"
 msgid "Target entity:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4157
+#: src/screens/gm/tweak.cpp:4183
 msgctxt "tweak-tab"
 msgid "Internal rooms"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4158
+#: src/screens/gm/tweak.cpp:4184
 msgctxt "tweak-missile-internalrooms"
 msgid ""
 "Defines the ship's interior room layout, assigned ship systems for repair, "
@@ -5668,27 +5678,27 @@ msgid ""
 "crew."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4159
+#: src/screens/gm/tweak.cpp:4185
 msgctxt "tweak-text"
 msgid "Auto repair"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4160
+#: src/screens/gm/tweak.cpp:4186
 msgctxt "tweak-text"
 msgid "Rooms:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4161
+#: src/screens/gm/tweak.cpp:4187
 msgctxt "tweak-text"
 msgid "Doors:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4164
+#: src/screens/gm/tweak.cpp:4190
 msgctxt "tweak-tab"
 msgid "Internal repair crew"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4165
+#: src/screens/gm/tweak.cpp:4191
 msgctxt "tweak-internalrepaircrew"
 msgid ""
 "Sets the repair and unhack rates for interior repair crew. Affects how "
@@ -5696,22 +5706,22 @@ msgid ""
 "room for that system."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4166
+#: src/screens/gm/tweak.cpp:4192
 msgctxt "tweak-text"
 msgid "Damage repaired/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4167
+#: src/screens/gm/tweak.cpp:4193
 msgctxt "tweak-text"
 msgid "Hacking undone/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4180
+#: src/screens/gm/tweak.cpp:4206
 msgctxt "tweak-tab"
 msgid "Pickup"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4181
+#: src/screens/gm/tweak.cpp:4207
 msgctxt "tweak-pickup"
 msgid ""
 "If present, this component makes this entity collectible by other entities. "
@@ -5722,52 +5732,52 @@ msgid ""
 "Callback member callback can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4182
+#: src/screens/gm/tweak.cpp:4208
 msgctxt "tweak-text"
 msgid "Only players can pick up this entity"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4183
+#: src/screens/gm/tweak.cpp:4209
 msgctxt "tweak-text"
 msgid "Give energy:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4184
+#: src/screens/gm/tweak.cpp:4210
 msgctxt "tweak-text"
 msgid "Give probe:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4185
+#: src/screens/gm/tweak.cpp:4211
 msgctxt "tweak-text"
 msgid "Give homing:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4186
+#: src/screens/gm/tweak.cpp:4212
 msgctxt "tweak-text"
 msgid "Give nuke:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4187
+#: src/screens/gm/tweak.cpp:4213
 msgctxt "tweak-text"
 msgid "Give mine:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4188
+#: src/screens/gm/tweak.cpp:4214
 msgctxt "tweak-text"
 msgid "Give EMP:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4189
+#: src/screens/gm/tweak.cpp:4215
 msgctxt "tweak-text"
 msgid "Give HVLI:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4192
+#: src/screens/gm/tweak.cpp:4218
 msgctxt "tweak-tab"
 msgid "Collision callback"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4193
+#: src/screens/gm/tweak.cpp:4219
 msgctxt "tweak-collision-callback"
 msgid ""
 "Triggers a Lua script callback when another entity touches this one. "
@@ -5777,17 +5787,17 @@ msgid ""
 "Callback member callback can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4194
+#: src/screens/gm/tweak.cpp:4220
 msgctxt "tweak-text"
 msgid "Execute only if players collide"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4197
+#: src/screens/gm/tweak.cpp:4223
 msgctxt "tweak-tab"
 msgid "Docking bay"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4198
+#: src/screens/gm/tweak.cpp:4224
 msgctxt "tweak-docking-bay"
 msgid ""
 "Allows Docking port entities of a dock class that matches one of its lists "
@@ -5807,52 +5817,52 @@ msgid ""
 "this entity is destroyed, any internally docked entities are also destroyed."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4199
+#: src/screens/gm/tweak.cpp:4225
 msgctxt "tweak-text"
 msgid "External dock classes:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4200
+#: src/screens/gm/tweak.cpp:4226
 msgctxt "tweak-text"
 msgid "Internal dock classes:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4201
+#: src/screens/gm/tweak.cpp:4227
 msgctxt "tweak-text"
 msgid "Docking bay services (overrides berths if defined)"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4208
+#: src/screens/gm/tweak.cpp:4234
 msgctxt "tweak-text"
 msgid "Share energy with docked entity"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4228
+#: src/screens/gm/tweak.cpp:4254
 msgctxt "tweak-text"
 msgid "Repair docked entity's hull"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4248
+#: src/screens/gm/tweak.cpp:4274
 msgctxt "tweak-text"
 msgid "Charge docked entity's shields"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4268
+#: src/screens/gm/tweak.cpp:4294
 msgctxt "tweak-text"
 msgid "Restock docked entity's probes"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4288
+#: src/screens/gm/tweak.cpp:4314
 msgctxt "tweak-text"
 msgid "Restock docked AI-controlled entity's missiles"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4327
+#: src/screens/gm/tweak.cpp:4353
 msgctxt "tweak-tab"
 msgid "Docking port"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4328
+#: src/screens/gm/tweak.cpp:4354
 msgctxt "tweak-docking-port"
 msgid ""
 "Allows this entity to dock with an entity that possesses a Docking bay "
@@ -5864,47 +5874,47 @@ msgid ""
 "while docked."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4329
+#: src/screens/gm/tweak.cpp:4355
 msgctxt "tweak-text"
 msgid "Dock class:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4330
+#: src/screens/gm/tweak.cpp:4356
 msgctxt "tweak-text"
 msgid "Dock subclass:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4331
+#: src/screens/gm/tweak.cpp:4357
 msgctxt "tweak-text"
 msgid "Docking state:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4334
+#: src/screens/gm/tweak.cpp:4360
 msgctxt "tweak-text"
 msgid "Dock target:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4335
+#: src/screens/gm/tweak.cpp:4361
 msgctxt "tweak-text"
 msgid "Docked offset:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4336
+#: src/screens/gm/tweak.cpp:4362
 msgctxt "tweak-text"
 msgid "Auto-reload missiles"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4337
+#: src/screens/gm/tweak.cpp:4363
 msgctxt "tweak-text"
 msgid "Reload timer:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4340
+#: src/screens/gm/tweak.cpp:4366
 msgctxt "tweak-tab"
 msgid "Player controller"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4341
+#: src/screens/gm/tweak.cpp:4367
 msgctxt "tweak-player-controller"
 msgid ""
 "If present, this component enables player control of this entity. Entities "
@@ -5912,27 +5922,27 @@ msgid ""
 "available crew positions, control code, main screen display, and alert level."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4342
+#: src/screens/gm/tweak.cpp:4368
 msgctxt "tweak-text"
 msgid "Control code:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4343
+#: src/screens/gm/tweak.cpp:4369
 msgctxt "tweak-text"
 msgid "Main screen:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4344
+#: src/screens/gm/tweak.cpp:4370
 msgctxt "tweak-text"
 msgid "Main screen overlay:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4345
+#: src/screens/gm/tweak.cpp:4371
 msgctxt "tweak-text"
 msgid "Alert level:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4371
+#: src/screens/gm/tweak.cpp:4397
 msgctxt "tweak-reactor"
 msgid ""
 "Ship system that generates and stores energy. Sets energy capacity and "
@@ -5942,22 +5952,22 @@ msgid ""
 "energy."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4373
+#: src/screens/gm/tweak.cpp:4399
 msgctxt "tweak-text"
 msgid "Explodes when fully overloaded"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4374
+#: src/screens/gm/tweak.cpp:4400
 msgctxt "tweak-text"
 msgid "Reactor system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4378
+#: src/screens/gm/tweak.cpp:4404
 msgctxt "tweak-tab"
 msgid "Radar range"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4379
+#: src/screens/gm/tweak.cpp:4405
 msgctxt "tweak-radar"
 msgid ""
 "Enables radar on player screens. Short-range radar is used on Helms, Weapons "
@@ -5976,22 +5986,22 @@ msgid ""
 "the weapons targeting component, see Target."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4380
+#: src/screens/gm/tweak.cpp:4406
 msgctxt "tweak-text"
 msgid "Short-range radar range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4381
+#: src/screens/gm/tweak.cpp:4407
 msgctxt "tweak-text"
 msgid "Long-range radar range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4384
+#: src/screens/gm/tweak.cpp:4410
 msgctxt "tweak-tab"
 msgid "Scanner"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4385
+#: src/screens/gm/tweak.cpp:4411
 msgctxt "tweak-scanner"
 msgid ""
 "Science scanner for detailed entity analysis. Sets the delay and max delay "
@@ -5999,28 +6009,28 @@ msgid ""
 "minigame."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4386
+#: src/screens/gm/tweak.cpp:4412
 msgctxt "tweak-text"
 msgid "Scan delay:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4387 src/screens/gm/tweak.cpp:4404
-#: src/screens/gm/tweak.cpp:4701
+#: src/screens/gm/tweak.cpp:4413 src/screens/gm/tweak.cpp:4430
+#: src/screens/gm/tweak.cpp:4727
 msgctxt "tweak-text"
 msgid "Target:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4388
+#: src/screens/gm/tweak.cpp:4414
 msgctxt "tweak-text"
 msgid "Source:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4391
+#: src/screens/gm/tweak.cpp:4417
 msgctxt "tweak-tab"
 msgid "Comms receiver"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4393
+#: src/screens/gm/tweak.cpp:4419
 msgctxt "tweak-comms-receiver"
 msgid ""
 "Allows this entity to communicate with other ships and stations.\n"
@@ -6028,17 +6038,17 @@ msgid ""
 "Callback member callback can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4394
+#: src/screens/gm/tweak.cpp:4420
 msgctxt "tweak-text"
 msgid "Script:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4397
+#: src/screens/gm/tweak.cpp:4423
 msgctxt "tweak-tab"
 msgid "Comms transmitter"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4399
+#: src/screens/gm/tweak.cpp:4425
 msgctxt "tweak-comms-transmitter"
 msgid ""
 "Allows this entity to communicate with other ships and stations.\n"
@@ -6046,27 +6056,27 @@ msgid ""
 "Callback members inside script_replies can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4401
+#: src/screens/gm/tweak.cpp:4427
 msgctxt "tweak-text"
 msgid "Open delay:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4402
+#: src/screens/gm/tweak.cpp:4428
 msgctxt "tweak-text"
 msgid "Target name:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4403
+#: src/screens/gm/tweak.cpp:4429
 msgctxt "tweak-text"
 msgid "Incoming message:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4407
+#: src/screens/gm/tweak.cpp:4433
 msgctxt "tweak-tab"
 msgid "Scan probe launcher"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4408
+#: src/screens/gm/tweak.cpp:4434
 msgctxt "tweak-scan-probe-launcher"
 msgid ""
 "If present, this component allows this ship to launch sensor probes. Defines "
@@ -6076,22 +6086,22 @@ msgid ""
 "Callback member on_launch can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4409
+#: src/screens/gm/tweak.cpp:4435
 msgctxt "tweak-text"
 msgid "Probes:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4410
+#: src/screens/gm/tweak.cpp:4436
 msgctxt "tweak-text"
 msgid "Restocking sec/probe:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4413
+#: src/screens/gm/tweak.cpp:4439
 msgctxt "tweak-tab"
 msgid "Radar link"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4414
+#: src/screens/gm/tweak.cpp:4440
 msgctxt "tweak-radar-link"
 msgid ""
 "Determines whether this entity is capable of receiving a radar link from "
@@ -6100,35 +6110,35 @@ msgid ""
 "Callback members on_link and on_unlink can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4415
+#: src/screens/gm/tweak.cpp:4441
 msgctxt "tweak-text"
 msgid "Linked entity:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4418
+#: src/screens/gm/tweak.cpp:4444
 msgctxt "tweak-tab"
 msgid "Allow radar link"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4419
+#: src/screens/gm/tweak.cpp:4445
 msgctxt "tweak-radar-link"
 msgid ""
 "Marks this entity as a radar-linked probe. Its owner entity can link the "
 "probe's radar to Probe Views on the Science and Operations crew screens."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4420 src/screens/gm/tweak.cpp:4709
-#: src/screens/gm/tweak.cpp:4724 src/screens/gm/tweak.cpp:5021
+#: src/screens/gm/tweak.cpp:4446 src/screens/gm/tweak.cpp:4735
+#: src/screens/gm/tweak.cpp:4750 src/screens/gm/tweak.cpp:5047
 msgctxt "tweak-text"
 msgid "Owner:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4423
+#: src/screens/gm/tweak.cpp:4449
 msgctxt "tweak-tab"
 msgid "Share short-range radar"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4424
+#: src/screens/gm/tweak.cpp:4450
 msgctxt "tweak-share-radar"
 msgid ""
 "Shares this entity's short-range radar sensor data with friendly entities, "
@@ -6136,12 +6146,12 @@ msgid ""
 "typically have this component."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4427
+#: src/screens/gm/tweak.cpp:4453
 msgctxt "tweak-tab"
 msgid "Hacking"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4428
+#: src/screens/gm/tweak.cpp:4454
 msgctxt "tweak-hacking"
 msgid ""
 "If present, this component enables hacking minigames against neutral and "
@@ -6150,97 +6160,97 @@ msgid ""
 "system."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4429
+#: src/screens/gm/tweak.cpp:4455
 msgctxt "tweak-text"
 msgid "Effectiveness:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4432
+#: src/screens/gm/tweak.cpp:4458
 msgctxt "tweak-tab"
 msgid "Hacking target"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4439
+#: src/screens/gm/tweak.cpp:4465
 msgctxt "tweak-text"
 msgid "Difficulty:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4450 src/screens/gm/tweak.cpp:4478
+#: src/screens/gm/tweak.cpp:4476 src/screens/gm/tweak.cpp:4504
 msgctxt "hacking"
 msgid "Global default"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4451
+#: src/screens/gm/tweak.cpp:4477
 msgctxt "hacking"
 msgid "Simple"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4452
+#: src/screens/gm/tweak.cpp:4478
 msgctxt "hacking"
 msgid "Normal"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4453
+#: src/screens/gm/tweak.cpp:4479
 msgctxt "hacking"
 msgid "Difficult"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4454
+#: src/screens/gm/tweak.cpp:4480
 msgctxt "hacking"
 msgid "Fiendish"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4467
+#: src/screens/gm/tweak.cpp:4493
 msgctxt "tweak-text"
 msgid "Game:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4479
+#: src/screens/gm/tweak.cpp:4505
 msgctxt "hacking"
 msgid "Mine"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4480
+#: src/screens/gm/tweak.cpp:4506
 msgctxt "hacking"
 msgid "Lights"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4481
+#: src/screens/gm/tweak.cpp:4507
 msgctxt "hacking"
 msgid "All"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4489
+#: src/screens/gm/tweak.cpp:4515
 msgctxt "tweak-tab"
 msgid "Camera"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4491
+#: src/screens/gm/tweak.cpp:4517
 msgctxt "tweak-text"
 msgid "Pitch:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4492
+#: src/screens/gm/tweak.cpp:4518
 msgctxt "tweak-text"
 msgid "Roll:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4493
+#: src/screens/gm/tweak.cpp:4519
 msgctxt "tweak-text"
 msgid "Z position:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4494
+#: src/screens/gm/tweak.cpp:4520
 msgctxt "tweak-text"
 msgid "Field of view:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4496
+#: src/screens/gm/tweak.cpp:4522
 msgctxt "tweak-tab"
 msgid "Self-destruct"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4497
+#: src/screens/gm/tweak.cpp:4523
 msgctxt "tweak-self-destruct"
 msgid ""
 "If present, this component enables the self-destruct function on player "
@@ -6249,76 +6259,76 @@ msgid ""
 "damage and radius."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4500
+#: src/screens/gm/tweak.cpp:4526
 msgctxt "tweak-text"
 msgid "Blast radius:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4501
+#: src/screens/gm/tweak.cpp:4527
 msgctxt "tweak-text"
 msgid "Blast damage:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4542
+#: src/screens/gm/tweak.cpp:4568
 msgctxt "tweak-text"
 msgid "Code {index}:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4543
+#: src/screens/gm/tweak.cpp:4569
 msgctxt "tweak-text"
 msgid "Confirmed {index}:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4544
+#: src/screens/gm/tweak.cpp:4570
 msgctxt "tweak-text"
 msgid "Entry position {index}:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4545
+#: src/screens/gm/tweak.cpp:4571
 msgctxt "tweak-text"
 msgid "Show position {index}:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4550
+#: src/screens/gm/tweak.cpp:4576
 msgctxt "tweak-tab"
 msgid "Radar block"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4551
+#: src/screens/gm/tweak.cpp:4577
 msgctxt "tweak-radar-block"
 msgid ""
 "If present, this component causes this entity to block radar sensor signals "
 "around, and optionally also behind, it over the given radius."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4552
+#: src/screens/gm/tweak.cpp:4578
 msgctxt "tweak-text"
 msgid "Radar obstruction casts shadow"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4553
+#: src/screens/gm/tweak.cpp:4579
 msgctxt "tweak-text"
 msgid "Obstruction radius:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4556
+#: src/screens/gm/tweak.cpp:4582
 msgctxt "tweak-tab"
 msgid "Never radar blocked"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4557
+#: src/screens/gm/tweak.cpp:4583
 msgctxt "tweak-never-radar-blocked"
 msgid ""
 "If present, this entity is never obstructed on the long-range radar by "
 "entities with the Radar block component, such as nebulae."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4560
+#: src/screens/gm/tweak.cpp:4586
 msgctxt "tweak-tab"
 msgid "Gravity"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4561
+#: src/screens/gm/tweak.cpp:4587
 msgctxt "tweak-gravity"
 msgid ""
 "Defines this entity's gravitational attraction, which pulls nearby entities "
@@ -6327,84 +6337,84 @@ msgid ""
 "Callback member on_teleportation can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4563
+#: src/screens/gm/tweak.cpp:4589
 msgctxt "tweak-text"
 msgid "Attraction force:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4564
+#: src/screens/gm/tweak.cpp:4590
 msgctxt "tweak-text"
 msgid "Proximity damage"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4565
+#: src/screens/gm/tweak.cpp:4591
 msgctxt "tweak-text"
 msgid "Wormhole target:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4568
+#: src/screens/gm/tweak.cpp:4594
 msgctxt "tweak-tab"
 msgid "Radar trace"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4569
+#: src/screens/gm/tweak.cpp:4595
 msgctxt "tweak-radar-trace"
 msgid ""
 "Controls how this entity appears on radar. Defines its icon, display size, "
 "color (if not set by faction), and visibility flags."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4570
+#: src/screens/gm/tweak.cpp:4596
 msgctxt "tweak-text"
 msgid "Icon:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4571
+#: src/screens/gm/tweak.cpp:4597
 msgctxt "tweak-text"
 msgid "Size (min/max):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4573
+#: src/screens/gm/tweak.cpp:4599
 msgctxt "tweak-text"
 msgid "Color:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4574
+#: src/screens/gm/tweak.cpp:4600
 msgctxt "tweak-text"
 msgid "Flags"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4580
+#: src/screens/gm/tweak.cpp:4606
 msgctxt "tweak-text"
 msgid "Align rotation with transform facing"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4600
+#: src/screens/gm/tweak.cpp:4626
 msgctxt "tweak-text"
 msgid "Color by faction"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4620
+#: src/screens/gm/tweak.cpp:4646
 msgctxt "tweak-text"
 msgid "Render as arrow if not scanned"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4640
+#: src/screens/gm/tweak.cpp:4666
 msgctxt "tweak-text"
 msgid "Use additive blending"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4660
+#: src/screens/gm/tweak.cpp:4686
 msgctxt "tweak-text"
 msgid "Render on long-range radar"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4677
+#: src/screens/gm/tweak.cpp:4703
 msgctxt "tweak-tab"
 msgid "Raw radar signature"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4678
+#: src/screens/gm/tweak.cpp:4704
 msgctxt "tweak-raw-radar-signature"
 msgid ""
 "Permanent radar signature values (gravitational, electrical, thermal) that "
@@ -6412,27 +6422,27 @@ msgid ""
 "Operations radars."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4679 src/screens/gm/tweak.cpp:4686
+#: src/screens/gm/tweak.cpp:4705 src/screens/gm/tweak.cpp:4712
 msgctxt "tweak-text"
 msgid "Gravitational:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4680 src/screens/gm/tweak.cpp:4687
+#: src/screens/gm/tweak.cpp:4706 src/screens/gm/tweak.cpp:4713
 msgctxt "tweak-text"
 msgid "Electrical:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4681 src/screens/gm/tweak.cpp:4688
+#: src/screens/gm/tweak.cpp:4707 src/screens/gm/tweak.cpp:4714
 msgctxt "tweak-text"
 msgid "Thermal:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4684
+#: src/screens/gm/tweak.cpp:4710
 msgctxt "tweak-tab"
 msgid "Dynamic radar signature"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4685
+#: src/screens/gm/tweak.cpp:4711
 msgctxt "tweak-dynamic-radar-signature"
 msgid ""
 "Live radar signature values updated by the game engine during play, "
@@ -6440,29 +6450,29 @@ msgid ""
 "signature component."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4691
+#: src/screens/gm/tweak.cpp:4717
 msgctxt "tweak-tab"
 msgid "Missile flight"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4692
+#: src/screens/gm/tweak.cpp:4718
 msgctxt "tweak-missile-flight"
 msgid ""
 "Parameters relevant if this entity is a missile in flight. Defines maximum "
 "travel speed and flight timeout before self-destruction."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4694
+#: src/screens/gm/tweak.cpp:4720
 msgctxt "tweak-text"
 msgid "Timeout:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4697
+#: src/screens/gm/tweak.cpp:4723
 msgctxt "tweak-tab"
 msgid "Missile homing"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4698
+#: src/screens/gm/tweak.cpp:4724
 msgctxt "tweak-missile-homing"
 msgid ""
 "Defines this entity's homing guidance system, turn rate for tracking, "
@@ -6470,120 +6480,120 @@ msgid ""
 "this entity is a missile."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4699
+#: src/screens/gm/tweak.cpp:4725
 msgctxt "tweak-text"
 msgid "Turn rate:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4704
+#: src/screens/gm/tweak.cpp:4730
 msgctxt "tweak-tab"
 msgid "Explode on touch"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4705
+#: src/screens/gm/tweak.cpp:4731
 msgctxt "tweak-explode-on-touch"
 msgid ""
 "Explodes upon collision with another entity. Defines center/edge damage "
 "falloff, blast radius, owner, damage type, and explosion sound."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4706 src/screens/gm/tweak.cpp:4721
+#: src/screens/gm/tweak.cpp:4732 src/screens/gm/tweak.cpp:4747
 msgctxt "tweak-text"
 msgid "Damage at center:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4707 src/screens/gm/tweak.cpp:4722
+#: src/screens/gm/tweak.cpp:4733 src/screens/gm/tweak.cpp:4748
 msgctxt "tweak-text"
 msgid "Damage at edge:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4708 src/screens/gm/tweak.cpp:4723
+#: src/screens/gm/tweak.cpp:4734 src/screens/gm/tweak.cpp:4749
 msgctxt "tweak-text"
 msgid "Blast range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4712 src/screens/gm/tweak.cpp:4727
+#: src/screens/gm/tweak.cpp:4738 src/screens/gm/tweak.cpp:4753
 msgctxt "tweak-text"
 msgid "Explosion SFX:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4715
+#: src/screens/gm/tweak.cpp:4741
 msgctxt "tweak-tab"
 msgid "Explode on timeout"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4716
+#: src/screens/gm/tweak.cpp:4742
 msgctxt "tweak-explode-on-timeout"
 msgid ""
 "Marker component for missiles or other weapons that detonate when their "
 "Missile flight component flight timer expires."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4719
+#: src/screens/gm/tweak.cpp:4745
 msgctxt "tweak-tab"
 msgid "Delayed explode on touch"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4720
+#: src/screens/gm/tweak.cpp:4746
 msgctxt "tweak-delayed-explode-on-touch"
 msgid ""
 "Contact detonation with an arming period. Doesn't trigger until the trigger "
 "holdoff delay expires after first contact."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4728
+#: src/screens/gm/tweak.cpp:4754
 msgctxt "tweak-text"
 msgid "Holdoff/delay:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4729
+#: src/screens/gm/tweak.cpp:4755
 msgctxt "tweak-text"
 msgid "Triggered"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4732
+#: src/screens/gm/tweak.cpp:4758
 msgctxt "tweak-tab"
 msgid "Particle emitter"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4733
+#: src/screens/gm/tweak.cpp:4759
 msgctxt "tweak-constant-particle"
 msgid ""
 "Defines a continuous particle effect that this entity emits. The color "
 "shifts from start to end colors linearly across each particle's lifetime."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4734
+#: src/screens/gm/tweak.cpp:4760
 msgctxt "tweak-text"
 msgid "Delay/Interval:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4735
+#: src/screens/gm/tweak.cpp:4761
 msgctxt "tweak-text"
 msgid "Travel random range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4736
+#: src/screens/gm/tweak.cpp:4762
 msgctxt "tweak-text"
 msgid "Start size:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4737
+#: src/screens/gm/tweak.cpp:4763
 msgctxt "tweak-text"
 msgid "End size:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4739
+#: src/screens/gm/tweak.cpp:4765
 msgctxt "tweak-text"
 msgid "Start color:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4740
+#: src/screens/gm/tweak.cpp:4766
 msgctxt "tweak-text"
 msgid "End color:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4744
+#: src/screens/gm/tweak.cpp:4770
 msgctxt "tweak-mesh-render"
 msgid ""
 "3D mesh rendering. Defines the model file, its scale, and its offset, and "
@@ -6591,42 +6601,42 @@ msgid ""
 "the resources directory."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4796
+#: src/screens/gm/tweak.cpp:4822
 msgctxt "tweak-text"
 msgid "Specular texture:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4819
+#: src/screens/gm/tweak.cpp:4845
 msgctxt "tweak-text"
 msgid "Illumination texture:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4842
+#: src/screens/gm/tweak.cpp:4868
 msgctxt "tweak-text"
 msgid "Normal texture:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4867
+#: src/screens/gm/tweak.cpp:4893
 msgctxt "tweak-text"
 msgid "Mesh offset:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4889
+#: src/screens/gm/tweak.cpp:4915
 msgctxt "tweak-text"
 msgid "Bank angle:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4890
+#: src/screens/gm/tweak.cpp:4916
 msgctxt "tweak-text"
 msgid "Illumination modulation:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4893
+#: src/screens/gm/tweak.cpp:4919
 msgctxt "tweak-tab"
 msgid "Engine emitter"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4894
+#: src/screens/gm/tweak.cpp:4920
 msgctxt "tweak-energy-emitter"
 msgid ""
 "Engine exhaust particle effects for ships. Each emitter has a position on "
@@ -6635,34 +6645,34 @@ msgid ""
 "emitters_dirty is an internal flag and can't be tweaked."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4895
+#: src/screens/gm/tweak.cpp:4921
 msgctxt "tweak-text"
 msgid "Last particle time:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4901
+#: src/screens/gm/tweak.cpp:4927
 msgctxt "tweak-text"
 msgid "Emitters:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4935
+#: src/screens/gm/tweak.cpp:4961
 msgctxt "tweak-tab"
 msgid "Billboard renderer"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4936
+#: src/screens/gm/tweak.cpp:4962
 msgctxt "tweak-billboard-renderer"
 msgid ""
 "Flat sprite billboard. Renders a 2D texture facing the camera at a "
 "configurable size."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4941
+#: src/screens/gm/tweak.cpp:4967
 msgctxt "tweak-tab"
 msgid "Nebula renderer"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4942
+#: src/screens/gm/tweak.cpp:4968
 msgctxt "tweak-nebula-renderer"
 msgid ""
 "Nebula cloud rendering. Defines how far from the nebula it should be visible "
@@ -6671,106 +6681,106 @@ msgid ""
 "clouds_dirty is an internal flag and can't be tweaked."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4946
+#: src/screens/gm/tweak.cpp:4972
 msgctxt "tweak-text"
 msgid "Fog color:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4947
+#: src/screens/gm/tweak.cpp:4973
 msgctxt "tweak-text"
 msgid "Render range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4948
+#: src/screens/gm/tweak.cpp:4974
 msgctxt "tweak-text"
 msgid "Cloud density:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4949
+#: src/screens/gm/tweak.cpp:4975
 msgctxt "tweak-text"
 msgid "In-nebula visibility distance:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4950
+#: src/screens/gm/tweak.cpp:4976
 msgctxt "tweak-text"
 msgid "Seed (0=default):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4954
+#: src/screens/gm/tweak.cpp:4980
 msgctxt "tweak-text"
 msgid "Clouds:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4988
+#: src/screens/gm/tweak.cpp:5014
 msgctxt "tweak-tab"
 msgid "Planet renderer"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4989
+#: src/screens/gm/tweak.cpp:5015
 msgctxt "tweak-planet-renderer"
 msgid ""
 "Spherical planet rendering with surface texture, cloud layer, atmosphere "
 "glow, and size properties."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4991
+#: src/screens/gm/tweak.cpp:5017
 msgctxt "tweak-text"
 msgid "Cloud size:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4992
+#: src/screens/gm/tweak.cpp:5018
 msgctxt "tweak-text"
 msgid "Atmosphere size:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4993
+#: src/screens/gm/tweak.cpp:5019
 msgctxt "tweak-text"
 msgid "Distance from movement plane:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4995
+#: src/screens/gm/tweak.cpp:5021
 msgctxt "tweak-text"
 msgid "Cloud texture:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4996
+#: src/screens/gm/tweak.cpp:5022
 msgctxt "tweak-text"
 msgid "Atmosphere texture:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:4997
+#: src/screens/gm/tweak.cpp:5023
 msgctxt "tweak-text"
 msgid "Atmosphere color:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5000
+#: src/screens/gm/tweak.cpp:5026
 msgctxt "tweak-tab"
 msgid "Explosion effect"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5001
+#: src/screens/gm/tweak.cpp:5027
 msgctxt "tweak-explosion-effect"
 msgid ""
 "Defines and initates a visual effect for an explosion. Controls the "
 "explosion's size and remaining lifetime."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5004
+#: src/screens/gm/tweak.cpp:5030
 msgctxt "tweak-text"
 msgid "Radar"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5005
+#: src/screens/gm/tweak.cpp:5031
 msgctxt "tweak-text"
 msgid "Electrical"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5008
+#: src/screens/gm/tweak.cpp:5034
 msgctxt "tweak-tab"
 msgid "Drone controller"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5009
+#: src/screens/gm/tweak.cpp:5035
 msgctxt "tweak-drone-controller"
 msgid ""
 "Allows this entity to control other entities that have the Drone link "
@@ -6778,39 +6788,39 @@ msgid ""
 "energy drained per second while controlling a drone."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5010
+#: src/screens/gm/tweak.cpp:5036
 msgctxt "tweak-text"
 msgid "Control range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5011
+#: src/screens/gm/tweak.cpp:5037
 msgctxt "tweak-text"
 msgid "Energy drain/sec:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5014
+#: src/screens/gm/tweak.cpp:5040
 msgctxt "tweak-tab"
 msgid "Drone link"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5015
+#: src/screens/gm/tweak.cpp:5041
 msgctxt "tweak-drone-link"
 msgid ""
 "Links this ship to a controllable drone entity that has the Allow drone link "
 "component."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5016
+#: src/screens/gm/tweak.cpp:5042
 msgctxt "tweak-text"
 msgid "Linked drone:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5019
+#: src/screens/gm/tweak.cpp:5045
 msgctxt "tweak-tab"
 msgid "Allow drone link"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5020
+#: src/screens/gm/tweak.cpp:5046
 msgctxt "tweak-drone-link"
 msgid ""
 "Marks this entity as a drone that can be controlled by an entity with the "
@@ -6818,24 +6828,24 @@ msgid ""
 "link with this drone."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5024
+#: src/screens/gm/tweak.cpp:5050
 msgctxt "tweak-tab"
 msgid "Docking bay system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5025
+#: src/screens/gm/tweak.cpp:5051
 msgctxt "tweak-docking-bay-system"
 msgid ""
 "Ship system for docking bay operations. Affects the speed of docking "
 "operations based on system health."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5029
+#: src/screens/gm/tweak.cpp:5055
 msgctxt "tweak-tab"
 msgid "Sensors system"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5030
+#: src/screens/gm/tweak.cpp:5056
 msgctxt "tweak-sensors-system"
 msgid ""
 "Ship system for the sensors array. Affects drone control range and energy "
@@ -6844,12 +6854,12 @@ msgid ""
 "and lock delay of the science scanning dialog, all based on system health."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5034
+#: src/screens/gm/tweak.cpp:5060
 msgctxt "tweak-tab"
 msgid "Destroyed by area damage"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5035
+#: src/screens/gm/tweak.cpp:5061
 msgctxt "tweak-destroyed-by-area-damage"
 msgid ""
 "If present, this entity can be destroyed by area-of-effect explosions, even "
@@ -6857,12 +6867,12 @@ msgid ""
 "this entity."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5093
+#: src/screens/gm/tweak.cpp:5119
 msgctxt "tweak-tab"
 msgid "Scan state"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5094
+#: src/screens/gm/tweak.cpp:5120
 msgctxt "tweak-scan-state"
 msgid ""
 "Configures scanning behavior for this entity. Sets whether the first scan "
@@ -6873,57 +6883,57 @@ msgid ""
 "can't be tweaked via this dialog."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5095
+#: src/screens/gm/tweak.cpp:5121
 msgctxt "tweak-text"
 msgid "Use both simple and full scan stages"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5096
+#: src/screens/gm/tweak.cpp:5122
 msgctxt "tweak-text"
 msgid "Complexity (sliders):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5097
+#: src/screens/gm/tweak.cpp:5123
 msgctxt "tweak-text"
 msgid "Depth (wins required):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5100
+#: src/screens/gm/tweak.cpp:5126
 msgctxt "tweak-tab"
 msgid "Science description"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5101
+#: src/screens/gm/tweak.cpp:5127
 msgctxt "tweak-science-description"
 msgid "Science descriptions shown at different scan levels."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5102
+#: src/screens/gm/tweak.cpp:5128
 msgctxt "tweak-text"
 msgid "Not scanned:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5103
+#: src/screens/gm/tweak.cpp:5129
 msgctxt "tweak-text"
 msgid "Friend or foe identified:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5104
+#: src/screens/gm/tweak.cpp:5130
 msgctxt "tweak-text"
 msgid "Simple scan:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5105
+#: src/screens/gm/tweak.cpp:5131
 msgctxt "tweak-text"
 msgid "Full scan:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5108
+#: src/screens/gm/tweak.cpp:5134
 msgctxt "tweak-tab"
 msgid "Briefing"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5109
+#: src/screens/gm/tweak.cpp:5135
 msgctxt "tweak-briefing"
 msgid ""
 "A sequence of pages displayed on the BriefingScreen. Each page can show a "
@@ -6931,37 +6941,37 @@ msgid ""
 "duration."
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5110
+#: src/screens/gm/tweak.cpp:5136
 msgctxt "tweak-text"
 msgid "Page:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5111
+#: src/screens/gm/tweak.cpp:5137
 msgctxt "tweak-text"
 msgid "Caption:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5113
+#: src/screens/gm/tweak.cpp:5139
 msgctxt "tweak-text"
 msgid "Audio:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5114
+#: src/screens/gm/tweak.cpp:5140
 msgctxt "tweak-text"
 msgid "Duration (sec):"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5197
+#: src/screens/gm/tweak.cpp:5238
 msgctxt "tweak-nav"
 msgid "Back"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5279
+#: src/screens/gm/tweak.cpp:5328
 msgctxt "tweak-button"
 msgid "Remove component"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:5284
+#: src/screens/gm/tweak.cpp:5333
 msgctxt "tweak-button"
 msgid "Create component"
 msgstr ""
