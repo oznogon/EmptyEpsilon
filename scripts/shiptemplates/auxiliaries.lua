@@ -315,8 +315,7 @@ variation = template
 
 -- Heracles (PlayerControl variant)
 variation2 = variation
-    :copy("Hylas")
-    :setName("Heracles")
+    :copy("Heracles")
     :setLocaleName(_("playerShip", "Heracles"))
     :setType("playership")
     :setDescription(
