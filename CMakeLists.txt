@@ -70,8 +70,6 @@ add_subdirectory("${SERIOUS_PROTON_DIR}" "${PROJECT_BINARY_DIR}/SeriousProton" E
 set(EXTERNALS_DIR "${PROJECT_BINARY_DIR}/externals")
 set(DOWNLOADS_DIR "${PROJECT_BINARY_DIR}/downloads")
 
-# OpenSSL 1.1 DLLs (required by Hue V2 device for HTTPS)
-include(cmake/DependencyOpenSSL.cmake)
 file(MAKE_DIRECTORY "${EXTERNAL_DIR}" "${DOWNLOADS_DIR}")
 
 # Discord
@@ -762,7 +760,13 @@ else()
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${MAIN_SOURCES})
 endif()
 
-openssl11_copy_dlls(${PROJECT_NAME})
+if(WIN32)
+    # Add OpenSSL, required for Hue V2 control
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:OpenSSL::SSL>" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:OpenSSL::Crypto>" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+    )
+endif()
 
 target_compile_definitions(${PROJECT_NAME}
     PUBLIC
