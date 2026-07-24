@@ -218,7 +218,7 @@ void PhilipsHueV1Device::updateLoop()
                         post_data = "{\"on\":true, \"sat\":"+string(info.saturation)+", \"bri\":"+string(info.brightness)+",\"hue\":"+string(info.hue)+", \"transitiontime\": "+string(info.transitiontime)+"}";
                     else
                         post_data = "{\"on\":false, \"transitiontime\": "+string(info.transitiontime)+"}";
-                    auto response = http.request("put", string{ "/api/" } + username + "/lights/" + string(n + 1) + "/state", post_data);
+                    auto response = http.request("PUT", string{ "/api/" } + username + "/lights/" + string(n + 1) + "/state", post_data);
                     if (response.status != 200)
                     {
                         LOG(WARNING) << "Failed to set light [" << (n + 1) << "] philips hue bridge: " << response.status;

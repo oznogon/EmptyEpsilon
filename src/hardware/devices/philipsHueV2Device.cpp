@@ -193,7 +193,7 @@ void PhilipsHueV2Device::updateLoop()
                     }
                     else post_data = "{\"on\":{\"on\":false}}";
 
-                    auto response = http.request("put", string{ "/clip/v2/resource/light/" } + info.light_id, post_data);
+                    auto response = http.request("PUT", string{ "/clip/v2/resource/light/" } + info.light_id, post_data);
                     if (response.status != 200)
                     {
                         LOG(Warning, "Failed to set light [", info.light_id, "] philips hue v2 bridge: ", response.status);
