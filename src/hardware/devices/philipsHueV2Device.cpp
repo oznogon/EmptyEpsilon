@@ -159,6 +159,45 @@ int PhilipsHueV2Device::getChannelCount()
     return light_count * 4;
 }
 
+static void hueSatToXY(float hue_deg, float sat, float& x, float& y)
+{
+    const float r_x = 0.6915f, r_y = 0.3083f;
+    const float g_x = 0.17f, g_y = 0.7f;
+    const float b_x = 0.1532f, b_y = 0.0475f;
+
+    if (sat <= 0.0f)
+    {
+        x = 0.3333f;
+        y = 0.3333f;
+        return;
+    }
+
+    float t;
+    float edge_x, edge_y;
+
+    if (hue_deg < 120.0f)
+    {
+        t = hue_deg / 120.0f;
+        edge_x = r_x + t * (g_x - r_x);
+        edge_y = r_y + t * (g_y - r_y);
+    }
+    else if (hue_deg < 240.0f)
+    {
+        t = (hue_deg - 120.0f) / 120.0f;
+        edge_x = g_x + t * (b_x - g_x);
+        edge_y = g_y + t * (b_y - g_y);
+    }
+    else
+    {
+        t = (hue_deg - 240.0f) / 120.0f;
+        edge_x = b_x + t * (r_x - b_x);
+        edge_y = b_y + t * (r_y - b_y);
+    }
+
+    x = edge_x + (1.0f - sat) * (0.3333f - edge_x);
+    y = edge_y + (1.0f - sat) * (0.3333f - edge_y);
+}
+
 void PhilipsHueV2Device::updateLoop()
 {
     sp::io::http::Request http(ip_address, port, sp::io::http::Request::Scheme::Https);
@@ -186,10 +225,12 @@ void PhilipsHueV2Device::updateLoop()
                     string post_data;
                     if (info.brightness > 0.0f)
                     {
-                        float hue_val = info.hue * 360.0f;
-                        float sat_val = info.saturation * 100.0f;
-                        float bri_val = info.brightness * 100.0f;
-                        post_data = "{\"on\":{\"on\":true},\"dimming\":{\"brightness\":" + string(bri_val) + "},\"color\":{\"hue\":" + string(hue_val) + ",\"saturation\":" + string(sat_val) + "},\"dynamics\":{\"duration\":" + string(info.transitiontime * 100) + "}}";
+                        float hue_deg = info.hue * 360.0f;
+                        float sat = info.saturation;
+                        float cx, cy;
+                        hueSatToXY(hue_deg, sat, cx, cy);
+                        int bri_int = static_cast<int>(info.brightness * 100.0f);
+                        post_data = "{\"on\":{\"on\":true},\"dimming\":{\"brightness\":" + string(bri_int) + "},\"color\":{\"xy\":{\"x\":" + string(cx, 4) + ",\"y\":" + string(cy, 4) + "}},\"dynamics\":{\"duration\":" + string(info.transitiontime * 100) + "}}";
                     }
                     else post_data = "{\"on\":{\"on\":false}}";
 
