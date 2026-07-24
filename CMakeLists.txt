@@ -136,10 +136,7 @@ else()
 endif()
 
 if(NOT meshoptimizer_POPULATED)
-  if(COMMAND FetchContent_Populate)
-    FetchContent_Populate(meshoptimizer)
-  endif()
-  add_subdirectory(${meshoptimizer_SOURCE_DIR} ${meshoptimizer_BINARY_DIR} EXCLUDE_FROM_ALL)
+  FetchContent_MakeAvailable(meshoptimizer)
 endif()
 
 set(GUI_LIB_SOURCES
@@ -836,6 +833,9 @@ if(WITH_DISCORD)
         set(discord_install_prefix "${CMAKE_INSTALL_DATADIR}/emptyepsilon")
     endif()
 
+    if(POLICY CMP0177)
+        cmake_policy(SET CMP0177 OLD)
+    endif()
     install(PROGRAMS "$<TARGET_PROPERTY:discord,IMPORTED_LOCATION>" DESTINATION "${discord_install_prefix}/plugins")
 endif()
 
