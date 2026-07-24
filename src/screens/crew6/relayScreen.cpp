@@ -12,6 +12,7 @@
 #include "components/radar.h"
 #include "components/drone.h"
 #include "components/name.h"
+#include "components/comms.h"
 #include "components/faction.h"
 #include "components/shiplog.h"
 
@@ -71,6 +72,20 @@ static bool isVisibleOnRelay(sp::ecs::Entity entity)
         if (glm::length2(transform.getPosition() - target_transform->getPosition()) < r * r)
             return true;
     }
+    return false;
+}
+
+static bool isRelayTargetable(sp::ecs::Entity entity)
+{
+    if (!isVisibleOnRelay(entity)) return false;
+
+    if (entity.hasComponent<CommsReceiver>()) return true;
+
+    if (canHack(entity)) return true;
+
+    if (auto arl = entity.getComponent<AllowRadarLink>())
+        if (arl->owner == my_spaceship) return true;
+
     return false;
 }
 
@@ -533,7 +548,7 @@ void RelayScreen::onUpdate()
         // Select visible targetable entities.
         if (keys.relay_next_target.getDown())
         {
-            targets.setNextTarget(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
+            targets.setNextTarget(transform->getPosition(), view_range, TargetsContainer::Targetable, isRelayTargetable);
             if (targets.get())
             {
                 my_player_info->commandSetCommsTarget(targets.get());
@@ -543,7 +558,7 @@ void RelayScreen::onUpdate()
         }
         if (keys.relay_prev_target.getDown())
         {
-            targets.setPrevTarget(transform->getPosition(), view_range, TargetsContainer::Targetable, isVisibleOnRelay);
+            targets.setPrevTarget(transform->getPosition(), view_range, TargetsContainer::Targetable, isRelayTargetable);
             if (targets.get())
             {
                 my_player_info->commandSetCommsTarget(targets.get());
@@ -559,6 +574,7 @@ void RelayScreen::onUpdate()
                 [](sp::ecs::Entity entity)
                 {
                     if (!isVisibleOnRelay(entity)) return false;
+                    if (!entity.hasComponent<CommsReceiver>() && !canHack(entity)) return false;
                     auto ss = entity.getComponent<ScanState>();
                     bool fof_known = !ss || ss->getStateFor(my_spaceship) >= ScanState::State::FriendOrFoeIdentified;
                     return fof_known && Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy;
@@ -576,6 +592,7 @@ void RelayScreen::onUpdate()
                 [](sp::ecs::Entity entity)
                 {
                     if (!isVisibleOnRelay(entity)) return false;
+                    if (!entity.hasComponent<CommsReceiver>() && !canHack(entity)) return false;
                     auto ss = entity.getComponent<ScanState>();
                     bool fof_known = !ss || ss->getStateFor(my_spaceship) >= ScanState::State::FriendOrFoeIdentified;
                     return fof_known && Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy;
