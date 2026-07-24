@@ -842,7 +842,7 @@ void CinematicViewScreen::update(float delta)
             if (locked_modes.size() > 1)
             {
                 do {
-                    new_mode = locked_modes[irandom(0, locked_modes.size() - 1)];
+                    new_mode = locked_modes[irandom(0, static_cast<int>(locked_modes.size()) - 1)];
                 } while (new_mode == active_camera_mode);
             }
 

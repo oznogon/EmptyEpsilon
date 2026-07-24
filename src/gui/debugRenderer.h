@@ -20,9 +20,7 @@ private:
     float fps = 0.0f;
     int fps_counter = 0;
 
-    bool show_fps = true;
     bool show_datarate = true;
-    bool show_threat = true;
     bool show_timing_graph = false;
     bool show_atlas = false;
 

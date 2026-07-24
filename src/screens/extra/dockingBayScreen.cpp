@@ -1038,12 +1038,12 @@ void DockingBayScreen::updateBerthsLabels()
             ->setCustomIcon(1, bay->getTypeIcon(berth.type))
             ->setCustomLabel(2, bay->getTypeName(berth.type));
 
-        target_berth->setEntryIcon(i, bay->getTypeIcon(berth.type));
+        target_berth->setEntryIcon(static_cast<int>(i), bay->getTypeIcon(berth.type));
 
         if (berth.docked_entity == sp::ecs::Entity() && berth.move_progress <= 0.0f)
         {
             target_berth->setEntryName(
-                i,
+                static_cast<int>(i),
                 tr("dockingbay", "{i} ({type})").format({
                     {"i" , static_cast<string>(static_cast<int>(i) + 1)},
                     {"type", bay->getTypeName(berth.type)}
@@ -1053,7 +1053,7 @@ void DockingBayScreen::updateBerthsLabels()
         else
         {
             target_berth->setEntryName(
-                i,
+                static_cast<int>(i),
                 tr("dockingbay", "{i} -Occupied-").format({
                     {"i" , static_cast<string>(static_cast<int>(i) + 1)}
                 })

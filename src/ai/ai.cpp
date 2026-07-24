@@ -142,8 +142,8 @@ void ShipAI::runLight(float delta)
                 if (warp)
                 {
                     warp->request = (rotation_diff < 30.0f && distance > 2000.0f)
-                        ? 1.0f
-                        : 0.0f;
+                        ? 1
+                        : 0;
                 }
 
                 if (distance > 10000.0f
@@ -922,8 +922,8 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
             if (warp)
             {
                 warp->request = (rotation_diff < 30.0f && distance > 2000.0f)
-                    ? 1.0f
-                    : 0.0f;
+                    ? 1
+                    : 0;
             }
 
             if (distance > 10000.0f

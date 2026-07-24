@@ -18,14 +18,14 @@ class AISystem : public sp::ecs::System
 {
     size_t next_heavy_index = 0;
     static constexpr int MAX_HEAVY_PER_FRAME = 4;
-
+#ifdef DEBUG
     float log_timer = 0.0f;
     float total_light_time = 0.0f;
     float total_heavy_time = 0.0f;
     int total_ai_count = 0;
     int frame_count = 0;
     int immediate_heavy_count = 0;
-
+#endif
     struct LastAIState {
         AIOrder orders = AIOrder::Idle;
         glm::vec2 order_target_location{};

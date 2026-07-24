@@ -11,7 +11,7 @@ public:
 
     static bool process(const Path& input, Indices& output)
     {
-        int n = input.size();
+        int n = static_cast<int>(input.size());
         if (n < 3) return false;
 
         int* indexes = new int[n];
@@ -67,7 +67,7 @@ private:
     static float area(const Path &input)
     {
         float result = 0;
-        int p0 = input.size() - 1;
+        int p0 = static_cast<int>(input.size()) - 1;
 
         for (unsigned int p1 = 0; p1 < input.size(); p1++)
         {

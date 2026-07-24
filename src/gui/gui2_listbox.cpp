@@ -235,7 +235,7 @@ void GuiListbox::entriesChanged()
         auto* btn = new GuiToggleButton(scroll_container, id + "_ENTRY_" + string(static_cast<int>(n)), entries[n].name,
             [this, n](bool)
             {
-                setSelectionIndex(n);
+                setSelectionIndex(static_cast<int>(n));
                 callback();
             }
         );

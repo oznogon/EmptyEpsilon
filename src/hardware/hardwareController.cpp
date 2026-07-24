@@ -293,7 +293,7 @@ void HardwareController::createNewHardwareMappingState(int channel_number, std::
         {
             state.variable = condition.substr(0, condition.find(compare_string)).strip();
             state.compare_operator = compare_operator;
-            state.compare_value = condition.substr(condition.find(compare_string) +  compare_string.length() ).strip().toFloat();
+            state.compare_value = condition.substr(static_cast<int>(condition.find(compare_string) + compare_string.length())).strip().toFloat();
         }
     }
 

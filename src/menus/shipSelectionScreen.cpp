@@ -1417,7 +1417,7 @@ void CrewPositionSelection::spawnUI(RenderLayer* render_layer)
     {
         destroy();
         uint8_t window_flags = PreferencesManager::get("ship_window_flags", "1").toInt();
-        new WindowScreen(render_layer, window_angle->getText().toInt(), window_flags);
+        new WindowScreen(render_layer, static_cast<float>(window_angle->getText().toInt()), window_flags);
     }
     else
     {

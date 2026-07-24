@@ -25,6 +25,7 @@
 #include "components/ai.h"
 #include "components/docking.h"
 #include "components/warpdrive.h"
+
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
 
@@ -327,7 +328,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
             {
                 int warp_level = static_cast<int>(value);
                 my_player_info->commandDroneWarp(warp_level);
-                warp_slider->setValue(warp_level);
+                warp_slider->setValue(static_cast<float>(warp_level));
             }
         );
         warp_slider
@@ -739,7 +740,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
     // Grow the row vector as needed.
     while (tube_rows.size() < missiletubes->mounts.size())
     {
-        uint32_t row_idx = tube_rows.size();
+        uint32_t row_idx = static_cast<uint32_t>(tube_rows.size());
         TubeRow row;
         row.layout = new GuiElement(tube_rows_layout, "TUBE_ROW_" + string(row_idx));
         row.layout->setAttribute("layout", "horizontal");
@@ -1231,14 +1232,14 @@ void DroneOperationsScreen::onUpdate()
 
         if (auto warp = drone.getComponent<WarpDrive>())
         {
-            warp_slider->setValue(warp->request);
+            warp_slider->setValue(static_cast<float>(warp->request));
             warp_label->setValue(string(warp->current, 1));
 
-            if (warp_slider->getRangeMin() != warp->max_level)
+            if (warp_slider->getRangeMin() != static_cast<float>(warp->max_level))
             {
                 warp_slider
                     ->clearSnapValues()
-                    ->setRange(warp->max_level, 0.0f);
+                    ->setRange(static_cast<float>(warp->max_level), 0.0f);
                 for (int n = 0; n <= warp->max_level; n++)
                     warp_slider->addSnapValue(static_cast<float>(n), 0.5f);
             }

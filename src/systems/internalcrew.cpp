@@ -54,9 +54,9 @@ void InternalCrewSystem::update(float delta)
 
         if (ic.position.x < -0.5f)
         {
-            int n=irandom(0, ir->rooms.size() - 1);
-            ic.position.x = ir->rooms[n].position.x + (ir->rooms[n].size.x > 0 ? irandom(0, ir->rooms[n].size.x - 1) : 0);
-            ic.position.y = ir->rooms[n].position.y + (ir->rooms[n].size.y > 0 ? irandom(0, ir->rooms[n].size.y - 1) : 0);
+            int n = irandom(0, static_cast<int>(ir->rooms.size()) - 1);
+            ic.position.x = static_cast<float>(ir->rooms[n].position.x + (ir->rooms[n].size.x > 0 ? irandom(0, ir->rooms[n].size.x - 1) : 0));
+            ic.position.y = static_cast<float>(ir->rooms[n].position.y + (ir->rooms[n].size.y > 0 ? irandom(0, ir->rooms[n].size.y - 1) : 0));
             ic.target_position = glm::ivec2(ic.position);
         }
 

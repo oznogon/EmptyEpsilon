@@ -288,7 +288,7 @@ private:
 
         update_funcs.push_back([entry, getter]()
         {
-            if (!entry->hasFocus()) entry->setText(string(getter(), 2));
+            if (!entry->hasFocus()) entry->setText(string(static_cast<float>(getter()), 2));
         });
     }
 

@@ -131,13 +131,13 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     heading_hint = new GuiLabel(helms_controls, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(sp::Alignment::Center)->setSize(0, 0);
 
-    auto energy_display = new EnergyInfoDisplay(helms_controls, "ENERGY_DISPLAY", 0.45);
+    auto energy_display = new EnergyInfoDisplay(helms_controls, "ENERGY_DISPLAY", 0.45f);
     energy_display->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 40);
     (new GuiTextTooltip(energy_display, "HELMS_ENERGY_TIP", tr("tooltips", "Current reactor energy level."), 20.0f))->setWidth(280.0f);
-    auto heading_display = new HeadingInfoDisplay(helms_controls, "HEADING_DISPLAY", 0.45);
+    auto heading_display = new HeadingInfoDisplay(helms_controls, "HEADING_DISPLAY", 0.45f);
     heading_display->setPosition(20, 140, sp::Alignment::TopLeft)->setSize(240, 40);
     (new GuiTextTooltip(heading_display, "HEADING_TIP", tr("tooltips", "Current ship heading in degrees."), 20.0f))->setWidth(280.0f);
-    auto velocity_display = new VelocityInfoDisplay(helms_controls, "VELOCITY_DISPLAY", 0.45);
+    auto velocity_display = new VelocityInfoDisplay(helms_controls, "VELOCITY_DISPLAY", 0.45f);
     velocity_display->setPosition(20, 180, sp::Alignment::TopLeft)->setSize(240, 40);
     (new GuiTextTooltip(velocity_display, "VELOCITY_TIP", tr("tooltips", "Current ship velocity."), 20.0f))->setWidth(280.0f);
 

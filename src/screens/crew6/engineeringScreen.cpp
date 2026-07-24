@@ -648,7 +648,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                             addSystemEffect(tr("shields", "Charge rate"), toNearbyIntString(effectiveness * 100.0f) + "%");
 
                             // Add damage negation/vulnerability rate effect.
-                            const float damage_negate = 1.0f - shields->getDamageFactor(shield_index);
+                            const float damage_negate = 1.0f - shields->getDamageFactor(static_cast<int>(shield_index));
                             if (damage_negate < 0.0f)
                                 addSystemEffect(tr("Extra damage taken"), toNearbyIntString(-damage_negate * 100.0f) + "%");
                             else

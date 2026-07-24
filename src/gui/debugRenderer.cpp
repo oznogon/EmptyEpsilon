@@ -59,7 +59,7 @@ DebugRenderer::DebugRenderer(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 25.0f);
 
     high_latency_button = new GuiToggleButton(contents, "DEBUG_HIGH_LATENCY", tr("debug", "Sim high latency (+250ms)"),
-        [this](bool value)
+        [](bool value)
         { if (game_server) game_server->simulate_high_latency = value; }
     );
     high_latency_button
@@ -67,7 +67,7 @@ DebugRenderer::DebugRenderer(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, 25.0f);
 
     random_latency_button = new GuiToggleButton(contents, "DEBUG_RANDOM_LATENCY", tr("debug", "Sim random latency (0-250ms)"),
-        [this](bool value)
+        [](bool value)
         { if (game_server) game_server->simulate_random_latency = value; }
     );
     random_latency_button

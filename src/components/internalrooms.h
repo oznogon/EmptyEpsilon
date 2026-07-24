@@ -58,6 +58,6 @@ public:
 class InternalRepairCrew
 {
 public:
-    float repair_per_second = 0.007;
-    float unhack_per_second = 0.007;
+    float repair_per_second = 0.007f;
+    float unhack_per_second = 0.007f;
 };

@@ -52,7 +52,7 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
 
             item
                 ->setSize(50, 50)
-                ->setPosition(x * 50 - field_size * 25, 25 + y * 50 - field_size * 25, sp::Alignment::Center);
+                ->setPosition(static_cast<float>(x * 50 - field_size * 25), static_cast<float>(25 + y * 50 - field_size * 25), sp::Alignment::Center);
             board.emplace_back(item);
         }
     }

@@ -14,7 +14,7 @@ LightsOut::LightsOut(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
         {
             board.emplace_back(new LightsOutToggleButton(owner, "", "", [this, x, y](bool value) {onFieldClick(x, y); } ));
             board.back()->setSize(50, 50);
-            board.back()->setPosition(x * 50 - grid_size * 25, 25 + y * 50 - grid_size * 25, sp::Alignment::Center);
+            board.back()->setPosition(static_cast<float>(x * 50 - grid_size * 25), static_cast<float>(25 + y * 50 - grid_size * 25), sp::Alignment::Center);
         }
     }
     reset();

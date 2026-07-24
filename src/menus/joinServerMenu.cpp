@@ -71,7 +71,7 @@ JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
         new GameClient(VERSION_NUMBER, target.port);
 #endif
     }
-    else new GameClient(VERSION_NUMBER, target.address, target.port);
+    else new GameClient(VERSION_NUMBER, target.address, static_cast<int>(target.port));
 }
 
 void JoinServerScreen::update(float delta)

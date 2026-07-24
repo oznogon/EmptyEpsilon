@@ -4,9 +4,9 @@ GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
 : GuiElement(owner, id), rect_width(rect.size.x)
 {
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
-    // Calculate scrolling a one-line entry by scrollbar arrow buttons.
     scrollbar
         ->setClickChange(
+            static_cast<int>(
             sp::RenderTarget::getDefaultFont()->prepare(
                 "1",
                 32,
@@ -15,6 +15,7 @@ GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
                 rect.size,
                 sp::Alignment::TopLeft
             ).getUsedAreaSize().y
+            )
         )
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
         ->setSize(50.0f, GuiElement::GuiSizeMax);
@@ -34,13 +35,14 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string tex
 
 unsigned int GuiAdvancedScrollText::getEntryCount() const
 {
-    return entries.size();
+    return static_cast<unsigned int>(entries.size());
 }
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::setTextSize(float text_size)
 {
     this->text_size = std::max(1.0f, text_size);
     scrollbar->setClickChange(
+        static_cast<int>(
         sp::RenderTarget::getDefaultFont()->prepare(
             "1",
             32,
@@ -49,6 +51,7 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::setTextSize(float text_size)
             rect.size,
             sp::Alignment::TopLeft
         ).getUsedAreaSize().y
+        )
     );
 
     return this;
@@ -178,12 +181,12 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     }
 
     // Calculate how many lines we have to display in total.
-    const int line_count = (draw_offset - text_size - 12.0f) + scrollbar->getValue();
+    const int line_count = static_cast<int>((draw_offset - text_size - 12.0f) + scrollbar->getValue());
 
     // When auto-scrolling and the content exceeds the viewport, extend the
     // scroll range by text_size + 12 so the draw_offset initial offset doesn't
     // push the last entry below the viewport.
-    const int scroll_range_extent = (auto_scroll_down && line_count >= rect.size.y)
+    const int scroll_range_extent = (auto_scroll_down && line_count >= static_cast<int>(rect.size.y))
         ? line_count + static_cast<int>(text_size + 12.0f)
         : line_count;
 
@@ -192,7 +195,7 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     {
         scrollbar
             ->setRange(0, scroll_range_extent)
-            ->setValueSize(rect.size.y);
+            ->setValueSize(static_cast<int>(rect.size.y));
         if (auto_scroll_down) scrollbar->setValue(scroll_range_extent);
     }
 
@@ -201,6 +204,6 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 
 bool GuiAdvancedScrollText::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    scrollbar->setValue(scrollbar->getValue() - value * text_size * 3.0f);
+    scrollbar->setValue(scrollbar->getValue() - static_cast<int>(value * text_size * 3.0f));
     return true;
 }

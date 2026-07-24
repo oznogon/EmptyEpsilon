@@ -23,40 +23,44 @@ void AISystem::update(float delta)
     struct AIEntry { sp::ecs::Entity entity; AIController* controller; };
     std::vector<AIEntry> ai_list;
 
-    for(auto [entity, ai] : sp::ecs::Query<AIController>()) {
+    for (auto [entity, ai] : sp::ecs::Query<AIController>())
+    {
         // Skip AI for drones actively controlled by a player ship.
         if (auto adl = entity.getComponent<AllowDroneLink>())
+        {
             if (auto dl = adl->owner.getComponent<DroneLink>())
-                if (dl->linked_drone == entity)
-                    continue;
+                if (dl->linked_drone == entity) continue;
+        }
 
         if (ai.new_name.length() && (!ai.ai || ai.ai->canSwitchAI()))
         {
             auto f = ShipAIFactory::getAIFactory(ai.new_name);
             ai.ai = nullptr;
-            if (f)
-                ai.ai = f(entity);
+            if (f) ai.ai = f(entity);
             ai.new_name = "";
         }
-        if (ai.ai)
-            ai_list.push_back({entity, &ai});
+
+        if (ai.ai) ai_list.push_back({entity, &ai});
     }
 
     if (ai_list.empty()) return;
 
     // Perf tracking.
     sp::SystemStopwatch sw;
-
+#ifdef DEBUG
     int immediate_heavy_count = 0;
+#endif
 
     // PASS 1: Light update — all entities, every frame.
     // Entities whose AI orders changed since last check get an immediate
     // heavy update so that GM-issued orders (via UI, Lua, or network)
     // take effect on the same frame instead of being deferred to the
     // round-robin schedule.
-    for (auto& entry : ai_list) {
+    for (auto& entry : ai_list)
+    {
         auto entity_id = entry.entity.getIndex();
         auto it = last_ai_state.find(entity_id);
+
         if (it == last_ai_state.end())
         {
             // First time seeing this entity: store state without triggering
@@ -83,13 +87,17 @@ void AISystem::update(float delta)
                 entry.controller->ai->clearPath();
                 entry.controller->ai->resetTargetDelay();
                 entry.controller->ai->runHeavy(delta);
+#ifdef DEBUG
                 immediate_heavy_count++;
+#endif
             }
         }
 
         entry.controller->ai->runLight(delta);
     }
+#ifdef DEBUG
     float light_time = sw.restart();
+#endif
 
     // PASS 2: Heavy update — round-robin, MAX_HEAVY_PER_FRAME entities.
     if (ai_list.size() <= static_cast<size_t>(MAX_HEAVY_PER_FRAME))
@@ -106,8 +114,8 @@ void AISystem::update(float delta)
             next_heavy_index = (next_heavy_index + 1) % ai_list.size();
         }
     }
+#ifdef DEBUG
     float heavy_time = sw.restart();
-
     total_light_time += light_time;
     total_heavy_time += heavy_time;
     total_ai_count = std::max(total_ai_count, static_cast<int>(ai_list.size()));
@@ -129,12 +137,12 @@ void AISystem::update(float delta)
         metrics_snapshot.immediate_heavy_count = immediate_heavy_count;
         metrics_snapshot.heavy_budget = MAX_HEAVY_PER_FRAME;
 
-        LOG(DEBUG) << "[AISystem] " << total_ai_count << " AIs | "
-                  << "light=" << light_per_frame_us << "us | "
-                  << "heavy=" << heavy_per_frame_us << "us | "
-                  << "total=" << total_ms << "ms/frame "
-                  << "imm_heavy=" << immediate_heavy_count
-                  << " (budget=" << MAX_HEAVY_PER_FRAME << "/frame)";
+        LOG(Debug, "[AISystem] ", total_ai_count, " AIs | ",
+                   "light=", light_per_frame_us, "us | ",
+                   "heavy=", heavy_per_frame_us, "us | ",
+                   "total=", total_ms, "ms/frame ",
+                   "imm_heavy=", immediate_heavy_count,
+                   " (budget=", MAX_HEAVY_PER_FRAME, "/frame)");
         immediate_heavy_count = 0;
         log_timer = 0.0f;
         total_light_time = 0.0f;
@@ -142,4 +150,5 @@ void AISystem::update(float delta)
         total_ai_count = 0;
         frame_count = 0;
     }
+#endif
 }

@@ -68,7 +68,7 @@ bool UDMXDevice::configure(std::unordered_map<string, string> settings)
 void UDMXDevice::setChannelData(int channel, float value)
 {
 #ifdef _WIN32
-    UDMX_ChannelSet(channel, value * 255);
+    UDMX_ChannelSet(channel, static_cast<long>(value * 255));
 #endif
 }
 

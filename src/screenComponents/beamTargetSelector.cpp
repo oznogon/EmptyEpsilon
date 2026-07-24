@@ -35,7 +35,7 @@ void GuiBeamTargetSelector::onUpdate()
         if (keys.weapons_beam_subsystem_target_previous.getDown())
         {
             if (getSelectionIndex() <= 0)
-                setSelectionIndex(entries.size() - 1);
+                setSelectionIndex(static_cast<int>(entries.size()) - 1);
             else
                 setSelectionIndex(getSelectionIndex() - 1);
         }

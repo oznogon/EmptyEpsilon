@@ -193,7 +193,7 @@ static string getThemeDisplayName(const string& theme_name)
             line = line.strip();
             if (line.startswith("# display_name:"))
             {
-                string display_name = line.substr(strlen("# display_name:")).strip();
+                string display_name = line.substr(static_cast<int>(strlen("# display_name:"))).strip();
                 if (!display_name.empty())
                     return display_name;
                 break;
@@ -770,7 +770,7 @@ void OptionsMenu::setupGraphicsOptions()
                 graphics_draw_distance_slider->setValue(dist);
                 PreferencesManager::set("default_draw_distance", string(static_cast<int>(dist)));
                 graphics_draw_distance_overlay_label->setText(tr("options", "Draw distance: {dist}").format({
-                    {"dist", string(static_cast<int>(dist / 1000.0f), 1)}
+                    {"dist", string(static_cast<float>(static_cast<int>(dist / 1000.0f)), 1)}
                 }) + DISTANCE_UNIT_1K);
             }
         );
@@ -779,7 +779,7 @@ void OptionsMenu::setupGraphicsOptions()
         (new GuiTextTooltip(graphics_draw_distance_slider, "DRAW_DISTANCE_TIP", tr("tooltips", "Set how far the main screen camera renders objects."), 20.0f))->setWidth(280.0f);
 
         graphics_draw_distance_overlay_label = new GuiLabel(graphics_draw_distance_slider, "GRAPHICS_DRAW_DISTANCE_SLIDER_LABEL", tr("options", "Draw distance: {dist}").format({
-            {"dist", string(static_cast<int>(initial_draw_distance / 1000.0f), 1)}
+            {"dist", string(static_cast<float>(static_cast<int>(initial_draw_distance / 1000.0f)), 1)}
         }) + DISTANCE_UNIT_1K, GuiElement::GuiSizeLabel);
         graphics_draw_distance_overlay_label
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

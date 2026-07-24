@@ -69,7 +69,7 @@ int GuiEntryList::addEntry(string name, string value)
     {
         auto it = std::lower_bound(entries.begin(), entries.end(), name,
             [](const GuiEntry& entry, const string& n) { return entry.name < n; });
-        int index = it - entries.begin();
+        int index = static_cast<int>(it - entries.begin());
         entries.emplace(it, name, value);
         entriesChanged();
         return index;
@@ -77,7 +77,7 @@ int GuiEntryList::addEntry(string name, string value)
 
     entries.emplace_back(name, value);
     entriesChanged();
-    return entries.size() - 1;
+    return static_cast<int>(entries.size() - 1);
 }
 
 int GuiEntryList::indexByValue(string value) const
@@ -109,7 +109,7 @@ void GuiEntryList::clear()
 
 int GuiEntryList::entryCount() const
 {
-    return entries.size();
+    return static_cast<int>(entries.size());
 }
 
 string GuiEntryList::getEntryName(int index) const

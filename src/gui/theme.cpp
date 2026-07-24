@@ -148,12 +148,12 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             // Parse comma-separated list of inheritances.
             // (i.e. "corners, custom-palette")
             const string inherit_str = base_input["inherit"];
-            size_t pos = 0;
+            int pos = 0;
 
-            while (pos < inherit_str.length())
+            while (pos < static_cast<int>(inherit_str.length()))
             {
-                size_t comma = inherit_str.find(',', pos);
-                if (comma == string::npos) comma = inherit_str.length();
+                int comma = inherit_str.find(',', pos);
+                if (comma == static_cast<int>(string::npos)) comma = static_cast<int>(inherit_str.length());
                 string parent = inherit_str.substr(pos, comma - pos).strip();
                 if (!parent.empty()) parent_names.push_back(parent);
                 pos = comma + 1;

@@ -59,12 +59,12 @@ LuaConsole::LuaConsole()
     entry->upCallback([this](string s) {
         string text = history.movePrevious(s);
         entry->setText(text);
-        entry->setCursorPosition(text.size());
+        entry->setCursorPosition(static_cast<int>(text.size()));
     });
     entry->downCallback([this](string s) {
         string text = history.moveNext(s);
         entry->setText(text);
-        entry->setCursorPosition(text.size());
+        entry->setCursorPosition(static_cast<int>(text.size()));
     });
 
     top->hide();
@@ -180,6 +180,6 @@ string ConsoleHistory::moveNext(string s) {
 void ConsoleHistory::append(string s)
 {
     entries.push_back(s);
-    position = entries.size();
+    position = static_cast<unsigned int>(entries.size());
     pending = "";
 }

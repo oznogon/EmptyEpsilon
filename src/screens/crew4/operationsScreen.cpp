@@ -221,7 +221,7 @@ void OperationScreen::onDraw(sp::RenderTarget& target)
     // the science screen bottom margin to fill the vacated space.
     if (ships_log)
         ships_log->setVisible(my_spaceship.hasComponent<ShipLog>());
-    science->setMargins(0, 0, 0, my_spaceship.hasComponent<ShipLog>() ? 50 : 0);
+    science->setMargins(0, 0, 0, my_spaceship.hasComponent<ShipLog>() ? 50.0f : 0.0f);
 }
 
 void OperationScreen::onUpdate()

@@ -4,7 +4,7 @@
 
 static inline float polygonArea(const std::vector<glm::vec2>& path)
 {
-    int size = path.size();
+    int size = static_cast<int>(path.size());
     // Don't bother with paths that aren't at least triangles.
     if (size < 3) return 0;
 

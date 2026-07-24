@@ -120,7 +120,7 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
     }
 
     // Sort all render lists back-to-front once
-    for (int n = render_lists.size() - 1; n >= 0; n--)
+    for (int n = static_cast<int>(render_lists.size()) - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
         std::sort(render_list.begin(), render_list.end(),
@@ -130,7 +130,7 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
     }
 
     // Opaque passes (back to front)
-    for (int n = render_lists.size() - 1; n >= 0; n--)
+    for (int n = static_cast<int>(render_lists.size()) - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
         glm::mat4 projection;
@@ -164,7 +164,7 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
     glDepthMask(true);
 
     // Transparent passes, non-nebula first, back to front
-    for (int n = render_lists.size() - 1; n >= 0; n--)
+    for (int n = static_cast<int>(render_lists.size()) - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
         glm::mat4 projection;
@@ -190,7 +190,7 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
     }
 
     // Nebula clouds rendered last so alpha blending occludes effects behind them.
-    for (int n=render_lists.size() - 1; n >= 0; n--)
+    for (int n = static_cast<int>(render_lists.size()) - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
         glm::mat4 projection;

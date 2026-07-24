@@ -4,6 +4,7 @@
 #include "gui/theme.h"
 #include "gui/gui2_button.h"
 #include "i18n.h"
+#include "vectorUtils.h"
 
 GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -66,7 +67,7 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
     }
 
     // Bail if there's not enough space to draw the signal.
-    int point_count = rect.size.x / 4 - 1;
+    int point_count = static_cast<int>(rect.size.x) / 4 - 1;
     if (point_count < 2) return;
 
     std::vector<glm::vec2> r;

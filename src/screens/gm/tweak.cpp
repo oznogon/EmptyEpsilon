@@ -490,7 +490,7 @@ public:
         // Update list.
         if (update_func)
         {
-            const int count = update_func();
+            const int count = static_cast<int>(update_func());
             while (count > entryCount())
                 addEntry(string(entryCount() + 1), entryCount());
             while (count < entryCount())
@@ -2312,11 +2312,11 @@ private:
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiTextTweak(row); \
-        ui->update_func = [this, ui]() -> string { if (auto v = entity.getComponent<COMPONENT>()) return string(v->VALUE, 3); return ui->getText(); }; \
-        ui->callback([this](string text) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = text.toFloat(); }); \
+        ui->update_func = [this, ui]() -> string { if (auto v = entity.getComponent<COMPONENT>()) return string(static_cast<float>(v->VALUE), 3); return ui->getText(); }; \
+        ui->callback([this](string text) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = static_cast<decltype(v->VALUE)>(text.toFloat()); }); \
         new_page->apply_functions.push_back([this, ui]() { \
             string text = ui->getText(); \
-            if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = text.toFloat(); } \
+            if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = static_cast<decltype(v->VALUE)>(text.toFloat()); } \
         }); \
     } while(0)
 // Add a text field to tweak a float value for the given component, using
@@ -2326,7 +2326,7 @@ private:
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiTextTweak(row); \
-        ui->update_func = [this, ui]() -> string { if (auto v = entity.getComponent<COMPONENT>()) return string(v->GETTER(), 3); return ui->getText(); }; \
+        ui->update_func = [this, ui]() -> string { if (auto v = entity.getComponent<COMPONENT>()) return string(static_cast<float>(v->GETTER()), 3); return ui->getText(); }; \
         ui->callback([this](string text) { if (auto v = entity.getComponent<COMPONENT>()) v->SETTER(text.toFloat()); }); \
         new_page->apply_functions.push_back([this, ui]() { \
             string text = ui->getText(); \
@@ -2362,12 +2362,12 @@ private:
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
-        auto ui = new GuiSliderTweak(row, "", MIN_VALUE, MAX_VALUE, 0u, [this](float number) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = number; }); \
-        for (float i = MIN_VALUE; i <= MAX_VALUE; i++) \
+        auto ui = new GuiSliderTweak(row, "", static_cast<float>(MIN_VALUE), static_cast<float>(MAX_VALUE), 0u, [this](float number) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = static_cast<decltype(v->VALUE)>(number); }); \
+        for (float i = static_cast<float>(MIN_VALUE); i <= static_cast<float>(MAX_VALUE); i++) \
             ui->addSnapValue(i, 0.5f); \
         ui->update_func = [this, ui]() -> float { \
             if (auto v = entity.getComponent<COMPONENT>()) \
-                return v->VALUE; \
+                return static_cast<float>(v->VALUE); \
             return ui->value_entry->getText().toFloat(); }; \
         new_page->apply_functions.push_back([this, ui]() { \
             string text = ui->value_entry->getText(); \
@@ -2397,7 +2397,7 @@ private:
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         vector_selector = new GuiVectorTweak(row, "VECTOR_SELECTOR"); \
         vector_selector->update_func = [this]() -> size_t { if (auto v = entity.getComponent<COMPONENT>()) return v->VECTOR.size(); return 0; }; \
-        auto add = new GuiButton(row, "", tr("tweak-button", "Add"), [this, vector_selector](){ if (auto v = entity.getComponent<COMPONENT>()) { v->VECTOR.emplace_back(); vector_selector->setSelectionIndex(v->VECTOR.size()); } }); \
+        auto add = new GuiButton(row, "", tr("tweak-button", "Add"), [this, vector_selector](){ if (auto v = entity.getComponent<COMPONENT>()) { v->VECTOR.emplace_back(); vector_selector->setSelectionIndex(static_cast<int>(v->VECTOR.size())); } }); \
         add->setTextSize(20.0f)->setSize(50.0f, GuiElement::GuiSizeMax); \
         auto del = new GuiButton(row, "", tr("tweak-button", "Del"), [this](){ auto v = entity.getComponent<COMPONENT>(); if (v && v->VECTOR.size() > 0) v->VECTOR.pop_back(); }); \
         del->setTextSize(20.0f)->setSize(50.0f, GuiElement::GuiSizeMax); \
@@ -2415,7 +2415,7 @@ private:
         }; \
         ui->callback([this, vector_selector](string text) { auto v = entity.getComponent<COMPONENT>(); \
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = text.toFloat(); \
+                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = static_cast<decltype(v->VECTOR[vector_selector->getSelectionIndex()].VALUE)>(text.toFloat()); \
         }); \
     } while(0)
 // Add text fields to tweak a float value and its corresponding maximum value
@@ -2528,7 +2528,7 @@ private:
         }); \
         for (int enum_value = MIN_VALUE; enum_value <= MAX_VALUE; enum_value++) \
             ui->addEntry(STRING_CONVERT_FUNCTION(static_cast<decltype(decltype(COMPONENT::VECTOR)::value_type::VALUE)>(enum_value)), string(enum_value)); \
-        ui->update_func = [this, vector_selector, ui]() -> float { auto v = entity.getComponent<COMPONENT>(); \
+        ui->update_func = [this, vector_selector, ui]() -> int { auto v = entity.getComponent<COMPONENT>(); \
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
                 return static_cast<int>(v->VECTOR[vector_selector->getSelectionIndex()].VALUE) - static_cast<int>(MIN_VALUE); \
             return ui->getSelectionIndex(); \
@@ -2714,7 +2714,7 @@ private:
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiTextTweak(row); \
-        ui->update_func = [this]() -> string { if (auto v = entity.getComponent<COMPONENT>()) return string(v->ARRAY[INDEX]); return ""; }; \
+        ui->update_func = [this]() -> string { if (auto v = entity.getComponent<COMPONENT>()) return string(static_cast<float>(v->ARRAY[INDEX])); return ""; }; \
         ui->callback([this](string text) { if (auto v = entity.getComponent<COMPONENT>()) v->ARRAY[INDEX] = text.toInt(); }); \
     } while(0)
 // Add fields to tweak an integer X/Y-coordinate value for the given component.
@@ -3712,7 +3712,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     ADD_PAGE(tr("tweak-tab", "Beam system"), BeamWeaponSys);
     new_page->description =  tr("tweak-beam-system", "Ship system providing beam weapon configuration. Beam frequency affects damage against shields.\n\nEach beam weapon has a mount that defines its firing arc, the direction the arc points in, and its range, damage, and cycle time. It also optionally supports functioning as a rotating turret with a defined speed in tracking targets. If a turret arc is defined, the beam direction rotates the beam arc within the larger turret arc and direction. Beam and turret performance are affected by the Beam weapon system, and firing generates additional heat into the system.");
-    ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Frequency:"), BeamWeaponSys, 0u, BeamWeaponSys::max_frequency, frequency);
+    ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Frequency:"), BeamWeaponSys, 0.0f, BeamWeaponSys::max_frequency, frequency);
     ADD_ENUM_TWEAK(tr("tweak-text", "System target:"), BeamWeaponSys, system_target, -1, static_cast<int>(ShipSystem::Type::COUNT) - 1, getLocaleSystemName);
     ADD_LABEL(tr("tweak-text", "Beam weapons system"));
     ADD_SHIP_SYSTEM_TWEAK(BeamWeaponSys);
@@ -3821,7 +3821,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_SHIP_SYSTEM_TWEAK_MEMBER(Shields, rear_system);
     ADD_BOOL_TWEAK(tr("tweak-text", "Active"), Shields, active);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Seconds to recalibrate:"), Shields, calibration_time);
-    ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Frequency:"), Shields, 0u, 20u, frequency);
+    ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Frequency:"), Shields, 0.0f, 20.0f, frequency);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy use/sec:"), Shields, energy_use_per_second);
     ADD_VECTOR(tr("tweak-vector", "Shield segments"), Shields, entries);
     ADD_VECTOR_VALUE_MAX_TWEAK(tr("tweak-text", "Level current/max:"), Shields, entries, level, max);
@@ -4564,7 +4564,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
             (new GuiLabel(row, "", label, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
             auto ui = new GuiTextTweak(row);
-            ui->update_func = [this, ui, index]() -> string { if (auto v = entity.getComponent<SelfDestruct>()) return string(v->code[index], 0); return ui->getText(); };
+            ui->update_func = [this, ui, index]() -> string { if (auto v = entity.getComponent<SelfDestruct>()) return string(static_cast<float>(v->code[index]), 0); return ui->getText(); };
             ui->callback([this, index](string text) { if (auto v = entity.getComponent<SelfDestruct>()) v->code[index] = text.toInt(); });
             new_page->apply_functions.push_back([this, ui, index]() { string text = ui->getText(); if (!text.empty()) { if (auto v = entity.getComponent<SelfDestruct>()) v->code[index] = text.toInt(); } });
         };
@@ -5215,12 +5215,12 @@ void GuiEntityTweak::open(sp::ecs::Entity e, string select_component)
                 int page_index = component_groups[group].page_indices[component_index];
                 if (page_labels[page_index].find(select_component) != -1)
                 {
-                    showGroupComponents(group);
+                    showGroupComponents(static_cast<int>(group));
                     for (size_t fi = 0; fi < filtered_indices.size(); fi++)
                     {
                         if (filtered_indices[fi] == static_cast<int>(page_index))
                         {
-                            component_list->setSelectionIndex(fi + 1);
+                            component_list->setSelectionIndex(static_cast<int>(fi) + 1);
                             break;
                         }
                     }

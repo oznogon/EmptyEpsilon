@@ -314,10 +314,10 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     if (distance > super_sector_size) sector_size = super_sector_size;
     const float sub_sector_size = sector_size / 8.0f;
 
-    int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.position.x) / scale) / sector_size) + 1;
-    int sector_x_max = floor((view_position.x + (rect.position.x + rect.size.x - radar_screen_center.x) / scale) / sector_size);
-    int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.position.y) / scale) / sector_size) + 1;
-    int sector_y_max = floor((view_position.y + (rect.position.y + rect.size.y - radar_screen_center.y) / scale) / sector_size);
+    int sector_x_min = static_cast<int>(floor((view_position.x - (radar_screen_center.x - rect.position.x) / scale) / sector_size)) + 1;
+    int sector_x_max = static_cast<int>(floor((view_position.x + (rect.position.x + rect.size.x - radar_screen_center.x) / scale) / sector_size));
+    int sector_y_min = static_cast<int>(floor((view_position.y - (radar_screen_center.y - rect.position.y) / scale) / sector_size)) + 1;
+    int sector_y_max = static_cast<int>(floor((view_position.y + (rect.position.y + rect.size.y - radar_screen_center.y) / scale) / sector_size));
     auto& sector_grid_style = radar_sector_grid_style->get(getState());
     glm::u8vec4 color = sector_grid_style.color;
     glm::u8vec4 subsector_grid_color({color.r, color.g, color.b, color.a / 2});
@@ -363,10 +363,10 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
         renderer.drawLine(worldToScreen(glm::vec2((sector_x_min - 1) * sector_size, y)), worldToScreen(glm::vec2((sector_x_max + 1) * sector_size, y)), 1.0f, color);
     }
 
-    int sub_sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.position.x) / scale) / sub_sector_size) + 1;
-    int sub_sector_x_max = floor((view_position.x + (rect.position.x + rect.size.x - radar_screen_center.x) / scale) / sub_sector_size);
-    int sub_sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.position.y) / scale) / sub_sector_size) + 1;
-    int sub_sector_y_max = floor((view_position.y + (rect.position.y + rect.size.y - radar_screen_center.y) / scale) / sub_sector_size);
+    int sub_sector_x_min = static_cast<int>(floor((view_position.x - (radar_screen_center.x - rect.position.x) / scale) / sub_sector_size)) + 1;
+    int sub_sector_x_max = static_cast<int>(floor((view_position.x + (rect.position.x + rect.size.x - radar_screen_center.x) / scale) / sub_sector_size));
+    int sub_sector_y_min = static_cast<int>(floor((view_position.y - (radar_screen_center.y - rect.position.y) / scale) / sub_sector_size)) + 1;
+    int sub_sector_y_max = static_cast<int>(floor((view_position.y + (rect.position.y + rect.size.y - radar_screen_center.y) / scale) / sub_sector_size));
 
     for(int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
     {

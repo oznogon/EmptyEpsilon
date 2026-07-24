@@ -187,7 +187,7 @@ void AutoConnectScreen::update(float delta)
                                 {
                                     // TODO currently all ship windows share one angle
                                     uint8_t window_flags = PreferencesManager::get("ship_window_flags", "1").toInt();
-                                    new WindowScreen(layer, pos.ship_window_angle, window_flags);
+                                    new WindowScreen(layer, static_cast<float>(pos.ship_window_angle), window_flags);
                                 }
                                 else
                                     my_player_info->spawnUI(idx, layer);

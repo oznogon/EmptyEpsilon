@@ -693,7 +693,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     }
 
     // Responsive layout for custom button sidebar. 1440x900 vpixels is 16:10, so this would roughly be the threshold.
-    int current_width = getRect().size.x;
+    int current_width = static_cast<int>(getRect().size.x);
     info_sidebar->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight);
     sidebar_selector
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)

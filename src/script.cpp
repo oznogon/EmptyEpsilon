@@ -106,7 +106,7 @@ static int luaRequire(lua_State* L)
 static int luaTranslate(lua_State* L)
 {
     if (lua_type(L, 1) == LUA_TNUMBER) {
-        auto n = luaL_checkinteger(L, 1);
+        auto n = static_cast<int>(luaL_checkinteger(L, 1));
         auto str_1 = luaL_checkstring(L, 2);
         auto str_2 = luaL_checkstring(L, 3);
         auto str_3 = luaL_optstring(L, 4, nullptr);
@@ -326,7 +326,7 @@ static int luaCreateAdditionalScript(lua_State* L)
             // Numbers
             else if (ltype == LUA_TNUMBER)
             {
-                float value = lua_tonumber(LL, 3);
+                float value = static_cast<float>(lua_tonumber(LL, 3));
                 (*ptr)->setGlobal(name, value);
             }
             else
@@ -481,9 +481,7 @@ static int luaSetBriefingPage(lua_State* L)
     if (!briefing)
         briefing = &entity.getOrAddComponent<Briefing>();
 
-    int index = luaL_checkinteger(L, 2);
-    if (index < 1)
-        return luaL_error(L, "setBriefingPage() index must be >= 1");
+    int index = static_cast<int>(luaL_checkinteger(L, 2));
 
     int zero_index = index - 1;
     if (zero_index >= static_cast<int>(briefing->pages.size()))
@@ -553,7 +551,7 @@ static int luaSetBriefingMapPage(lua_State* L)
     if (!briefing)
         briefing = &entity.getOrAddComponent<Briefing>();
 
-    int index = luaL_checkinteger(L, 2);
+    int index = static_cast<int>(luaL_checkinteger(L, 2));
     if (index < 1)
         return luaL_error(L, "setBriefingMapPage() index must be >= 1");
 
@@ -577,7 +575,7 @@ static int luaAddBriefingMapKeyframe(lua_State* L)
     if (!briefing)
         return luaL_error(L, "addBriefingMapKeyframe() requires a briefing component");
 
-    int page_idx = luaL_checkinteger(L, 2);
+    int page_idx = static_cast<int>(luaL_checkinteger(L, 2));
     if (page_idx < 1)
         return luaL_error(L, "addBriefingMapKeyframe() page index must be >= 1");
 
@@ -585,7 +583,7 @@ static int luaAddBriefingMapKeyframe(lua_State* L)
     if (zero_page >= static_cast<int>(briefing->pages.size()))
         return luaL_error(L, "addBriefingMapKeyframe() page index out of range");
 
-    int kf_idx = luaL_checkinteger(L, 3);
+    int kf_idx = static_cast<int>(luaL_checkinteger(L, 3));
     if (kf_idx < 1)
         return luaL_error(L, "addBriefingMapKeyframe() keyframe index must be >= 1");
 
@@ -619,7 +617,7 @@ static int luaAddBriefingMapEntity(lua_State* L)
     if (!briefing)
         return luaL_error(L, "addBriefingMapEntity() requires a briefing component");
 
-    int page_idx = luaL_checkinteger(L, 2);
+    int page_idx = static_cast<int>(luaL_checkinteger(L, 2));
     if (page_idx < 1)
         return luaL_error(L, "addBriefingMapEntity() page index must be >= 1");
 
@@ -627,7 +625,7 @@ static int luaAddBriefingMapEntity(lua_State* L)
     if (zero_page >= static_cast<int>(briefing->pages.size()))
         return luaL_error(L, "addBriefingMapEntity() page index out of range");
 
-    int kf_idx = luaL_checkinteger(L, 3);
+    int kf_idx = static_cast<int>(luaL_checkinteger(L, 3));
     if (kf_idx < 1)
         return luaL_error(L, "addBriefingMapEntity() keyframe index must be >= 1");
 
@@ -707,7 +705,7 @@ static BriefingMapEntity* findBriefingMapEntity(lua_State* L, int entity_arg, in
         return nullptr;
     }
 
-    int page_idx = luaL_checkinteger(L, page_arg);
+    int page_idx = static_cast<int>(luaL_checkinteger(L, page_arg));
     if (page_idx < 1)
     {
         luaL_error(L, "page index must be >= 1");
@@ -721,7 +719,7 @@ static BriefingMapEntity* findBriefingMapEntity(lua_State* L, int entity_arg, in
         return nullptr;
     }
 
-    int kf_idx = luaL_checkinteger(L, kf_arg);
+    int kf_idx = static_cast<int>(luaL_checkinteger(L, kf_arg));
     if (kf_idx < 1)
     {
         luaL_error(L, "keyframe index must be >= 1");
@@ -841,17 +839,20 @@ static int luaGetAllObjects(lua_State* L)
 
 static int luaGetObjectsInRadius(lua_State* L)
 {
-    float x = luaL_checknumber(L, 1);
-    float y = luaL_checknumber(L, 2);
-    float r = luaL_checknumber(L, 3);
+    float x = static_cast<float>(luaL_checknumber(L, 1));
+    float y = static_cast<float>(luaL_checknumber(L, 2));
+    float r = static_cast<float>(luaL_checknumber(L, 3));
 
     glm::vec2 position(x, y);
     lua_newtable(L);
     int idx = 1;
-    for(auto entity : sp::TransformQuery::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
-        auto entity_transform = entity.getComponent<sp::Transform>();
-        if (entity_transform) {
-            if (glm::length2(entity_transform->getPosition() - position) < r*r) {
+
+    for (auto entity : sp::TransformQuery::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r)))
+    {
+        if (auto entity_transform = entity.getComponent<sp::Transform>())
+        {
+            if (glm::length2(entity_transform->getPosition() - position) < r * r)
+            {
                 sp::script::Convert<sp::ecs::Entity>::toLua(L, entity);
                 lua_rawseti(L, -2, idx++);
             }
@@ -865,22 +866,29 @@ static int luaGetEnemiesInRadiusFor(lua_State* L)
     lua_newtable(L);
     int idx = 1;
     auto source = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
+
     if (!source) return 1;
-    float r = luaL_checknumber(L, 2);
+
+    float r = static_cast<float>(luaL_checknumber(L, 2));
     auto source_transform = source.getComponent<sp::Transform>();
     if (!source_transform) return 1;
+
     auto position = source_transform->getPosition();
-    for(auto entity : sp::TransformQuery::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
-        auto entity_transform = entity.getComponent<sp::Transform>();
-        if (entity_transform) {
-            if (glm::length2(entity_transform->getPosition() - position) < r*r) {
-                if (Faction::getRelation(entity, source) == FactionRelation::Enemy) {
+    for (auto entity : sp::TransformQuery::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r)))
+    {
+        if (auto entity_transform = entity.getComponent<sp::Transform>())
+        {
+            if (glm::length2(entity_transform->getPosition() - position) < r*r)
+            {
+                if (Faction::getRelation(entity, source) == FactionRelation::Enemy)
+                {
                     sp::script::Convert<sp::ecs::Entity>::toLua(L, entity);
                     lua_rawseti(L, -2, idx++);
                 }
             }
         }
     }
+
     return 1;
 }
 
@@ -1195,7 +1203,7 @@ static nlohmann::json luaToJSONImpl(lua_State* L, int lua_index) {
                 is_array = false;
                 lua_pop(L, 1);
             } else {
-                int idx = lua_tointeger(L, -2);
+                int idx = static_cast<int>(lua_tointeger(L, -2));
                 index_max = std::max(idx, index_max);
                 index_min = std::min(idx, index_min);
             }

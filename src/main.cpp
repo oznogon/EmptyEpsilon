@@ -6,12 +6,6 @@
 #include <string.h>
 #include <i18n.h>
 #include <multiplayer_proxy.h>
-#ifdef _MSC_VER
-#include <direct.h>
-#else
-#include <unistd.h>
-#include <sys/stat.h>
-#endif
 #include <sys/types.h>
 #include "textureManager.h"
 #include "soundManager.h"
@@ -133,10 +127,10 @@ int main(int argc, char** argv)
 
     if (PreferencesManager::get("headless") == "")
     {
-#ifdef _WIN32
-        mkdir(configuration_path.c_str());
-#else
-        mkdir(configuration_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+        std::error_code ec;
+        std::filesystem::create_directories(std::filesystem::path(configuration_path.c_str()), ec);
+        if (ec && !(ec == std::errc::file_exists || ec == std::errc::directory_not_empty))
+            LOG(Error, "Failed to create configuration directory: ", ec.message());
 // On macOS non-debug builds, redirect the log to the configuration directory if
 // invoked as an app bundle.
 #ifdef __APPLE__
@@ -151,8 +145,6 @@ int main(int argc, char** argv)
         // If not, we might be invoked as a binary and can log to STDOUT.
         else Logging::setLogStdout();
 #endif // __APPLE__
-
-#endif // _WIN32
     }
 
     if (PreferencesManager::get("proxy") != "") return runProxyServer();
@@ -423,7 +415,7 @@ void returnToShipSelection(RenderLayer* render_layer)
         for (size_t n = 0; n < window_render_layers.size(); n++)
         {
             if (window_render_layers[n] == render_layer)
-                new SecondMonitorScreen(n);
+                new SecondMonitorScreen(static_cast<int>(n));
         }
     }
     // If we're using autoconnect, return to the autoconnect screen instead

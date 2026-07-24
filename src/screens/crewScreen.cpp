@@ -334,7 +334,7 @@ void CrewScreen::showNextTab(int offset)
     for (unsigned int n = 0; n < tabs.size(); n++)
         if (tabs[n].element->isVisible()) current = n;
 
-    int next = (current + offset + tabs.size()) % tabs.size();
+    int next = (current + offset + static_cast<int>(tabs.size())) % static_cast<int>(tabs.size());
 
     showTab(tabs[next].element);
 }

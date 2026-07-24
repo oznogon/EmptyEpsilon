@@ -12,7 +12,7 @@ void SfxSystem::update(float delta)
         sfx.played = true;
 
         if (transform)
-            soundManager->playSound(sfx.sound, transform->getPosition(), 400.0, 0.6, sfx.pitch, sfx.volume);
+            soundManager->playSound(sfx.sound, transform->getPosition(), 400.0f, 0.6f, sfx.pitch, sfx.volume);
         else
             soundManager->playSound(sfx.sound, sfx.pitch, sfx.volume);
     }

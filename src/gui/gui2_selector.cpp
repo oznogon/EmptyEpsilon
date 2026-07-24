@@ -138,7 +138,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
                 popup_buttons.push_back(new GuiToggleButton(popup_scroll, "", entries[n].name,
                     [this, n](bool b)
                     {
-                        setSelectionIndex(n);
+                        setSelectionIndex(static_cast<int>(n));
                         callback();
                         popup->hide();
                     }
