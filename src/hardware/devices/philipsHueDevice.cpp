@@ -3,7 +3,9 @@
 #include "philipsHueDevice.h"
 #include "hardware/serialDriver.h"
 #include "logging.h"
-#ifndef _MSC_VER
+#ifdef _MSC_VER
+#include <io.h>
+#else
 #include <unistd.h>
 #endif
 #include "io/json.h"
@@ -133,7 +135,11 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
                 return false;
 
             if (userfile != "")
+#ifdef _MSC_VER
+                _unlink(userfile.c_str());
+#else
                 unlink(userfile.c_str());
+#endif
         }
         else
         {
