@@ -20,7 +20,7 @@ However, each such group has needed to implement features to facilitate this usa
 - Adds or updates hardware integration compatibility with theatrical sound/lighting devices and protocols.
 - Reduces backward compatiblity with EE 2024.12.08 from a hardline to best-effort; scenarios written for EE 2024.12.08 are not guaranteed to work on this fork.
 - Has a weaker emphasis on localization during the process of updating the primary English interface.
-- Migrates from SDL2 to SDL3.
+- Migrates from SDL2 to SDL3; SDL3 is now vendored via FetchContent in SeriousProton.
 - Improves build support for macOS, Android, and Linux and Windows on architectures beyond `x86_64`.
 
 ## Download and install
