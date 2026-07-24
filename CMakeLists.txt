@@ -69,6 +69,9 @@ add_subdirectory("${SERIOUS_PROTON_DIR}" "${PROJECT_BINARY_DIR}/SeriousProton" E
 
 set(EXTERNALS_DIR "${PROJECT_BINARY_DIR}/externals")
 set(DOWNLOADS_DIR "${PROJECT_BINARY_DIR}/downloads")
+
+# OpenSSL 1.1 DLLs (required by Hue V2 device for HTTPS)
+include(cmake/DependencyOpenSSL.cmake)
 file(MAKE_DIRECTORY "${EXTERNAL_DIR}" "${DOWNLOADS_DIR}")
 
 # Discord
@@ -577,7 +580,8 @@ set(MAIN_SOURCES
     src/hardware/devices/sACNDMXDevice.cpp
     src/hardware/devices/uDMXDevice.cpp
     src/hardware/devices/virtualOutputDevice.cpp
-    src/hardware/devices/philipsHueDevice.cpp
+    src/hardware/devices/philipsHueV1Device.cpp
+    src/hardware/devices/philipsHueV2Device.cpp
     src/script/components.cpp
     src/script/dataStorage.h
     src/script/dataStorage.cpp
@@ -598,7 +602,8 @@ set(MAIN_SOURCES
     src/GMActions.h
     src/hardware/devices/dmx512SerialDevice.h
     src/hardware/devices/enttecDMXProDevice.h
-    src/hardware/devices/philipsHueDevice.h
+    src/hardware/devices/philipsHueV1Device.h
+    src/hardware/devices/philipsHueV2Device.h
     src/hardware/devices/sACNDMXDevice.h
     src/hardware/devices/uDMXDevice.h
     src/hardware/devices/virtualOutputDevice.h
@@ -756,6 +761,8 @@ if(ANDROID)
 else()
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${MAIN_SOURCES})
 endif()
+
+openssl11_copy_dlls(${PROJECT_NAME})
 
 target_compile_definitions(${PROJECT_NAME}
     PUBLIC

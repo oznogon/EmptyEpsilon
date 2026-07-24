@@ -1,6 +1,4 @@
-//The Hue bridge returns its info in JSON form, so the json11 library takes this role.
-
-#include "philipsHueDevice.h"
+#include "philipsHueV1Device.h"
 #include "hardware/serialDriver.h"
 #include "logging.h"
 #ifdef _MSC_VER
@@ -12,13 +10,13 @@
 
 #include "io/http/request.h"
 
-PhilipsHueDevice::PhilipsHueDevice()
+PhilipsHueV1Device::PhilipsHueV1Device()
 {
     userfile = "philips_hue.name";
     run_thread = false;
 }
 
-PhilipsHueDevice::~PhilipsHueDevice()
+PhilipsHueV1Device::~PhilipsHueV1Device()
 {
     if (run_thread)
     {
@@ -27,7 +25,7 @@ PhilipsHueDevice::~PhilipsHueDevice()
     }
 }
 
-bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
+bool PhilipsHueV1Device::configure(std::unordered_map<string, string> settings)
 {
     if (settings.find("ip") != settings.end())
     {
@@ -48,7 +46,6 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         port = settings["port"].toInt();
     }
 
-    //If no user name set, try to read it from the userfile.
     if (username == "")
     {
         FILE* f = fopen(userfile.c_str(), "rt");
@@ -61,9 +58,8 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         }
     }
 
-    LOG(INFO) << "Attempting to connect to Hue bridge " << ip_address << " on port " << port;
+    LOG(INFO) << "Attempting to connect to Hue V1 bridge " << ip_address << " on port " << port;
 
-    //If no username was set, or no username was read from the userfile, then we need to request one from the philips hue bridge.
     int retry_counter = 120 / 5;
     while(username == "")
     {
@@ -71,12 +67,9 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
 
         LOG(INFO) << "No philips hue username. Going to request one. Be sure to press the button on the hue bridge.";
         auto response = http.post("/api", "{\"devicetype\":\"EmptyEpsilon#EmptyEpsilon\"}");
-        if (response.status == 200) // OK
+        if (response.status == 200)
         {
             const auto& body = response.body;
-            //The body should contain:
-            //  [{"success":{"username": "83b7780291a6ceffbe0bd049104df"}}]
-            //As we don't have a full json parse, we just cheat.
             int idx = body.find("\"username\"");
             if (idx > 0)
             {
@@ -104,7 +97,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
             LOG(WARNING) << response.body;
             if (response.status < 0)
                 return false;
-            if (response.status == 404) // Not found
+            if (response.status == 404)
                 return false;
         }
 
@@ -122,16 +115,15 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
     {
         sp::io::http::Request http(ip_address,port);
         auto response = http.get(string{ "/api/" } + username + "/lights");
-        if (response.status != 200) // !OK
+        if (response.status != 200)
         {
             LOG(WARNING) << "Failed to validate username on philips hue bridge: " << response.status;
             LOG(WARNING) << response.body;
             username = "";
 
-            //Don't delete the username file is the philips hue bridge cannot be accessed, only if it responds with the username not working.
             if (response.status < 0)
                 return false;
-            if (response.status == 404) // Not Found
+            if (response.status == 404)
                 return false;
 
             if (userfile != "")
@@ -169,22 +161,19 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
             {
                 LOG(ERROR) << "Json parsing failed: " << err;
             }
-
-
-
         }
     }
 
     if (username != "")
     {
         run_thread = true;
-        update_thread = std::thread(&PhilipsHueDevice::updateLoop, this);
+        update_thread = std::thread(&PhilipsHueV1Device::updateLoop, this);
         return true;
     }
     return false;
 }
 
-void PhilipsHueDevice::setChannelData(int channel, float value)
+void PhilipsHueV1Device::setChannelData(int channel, float value)
 {
     int light_idx = channel / 4;
     if (light_idx < 0 || light_idx >= light_count)
@@ -200,12 +189,12 @@ void PhilipsHueDevice::setChannelData(int channel, float value)
     }
 }
 
-int PhilipsHueDevice::getChannelCount()
+int PhilipsHueV1Device::getChannelCount()
 {
     return light_count * 4;
 }
 
-void PhilipsHueDevice::updateLoop()
+void PhilipsHueV1Device::updateLoop()
 {
     sp::io::http::Request http(ip_address,port);
 
@@ -230,7 +219,7 @@ void PhilipsHueDevice::updateLoop()
                     else
                         post_data = "{\"on\":false, \"transitiontime\": "+string(info.transitiontime)+"}";
                     auto response = http.request("put", string{ "/api/" } + username + "/lights/" + string(n + 1) + "/state", post_data);
-                    if (response.status != 200) // !OK
+                    if (response.status != 200)
                     {
                         LOG(WARNING) << "Failed to set light [" << (n + 1) << "] philips hue bridge: " << response.status;
                         LOG(WARNING) << response.body;
