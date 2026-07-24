@@ -134,7 +134,7 @@ void GuiScanningDialog::onUpdate()
     }
 
     // Handle abort scan input binding.
-    if (keys.science_scan_abort.isDiscreteStepDown() || keys.science_scan_toggle.isDiscreteStepDown())
+    if (keys.science_scan_abort.isDiscreteStepDown())
         my_player_info->commandScanCancel();
 }
 

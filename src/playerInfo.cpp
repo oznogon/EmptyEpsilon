@@ -1345,8 +1345,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 }
             }
 
-            scanner->target = {};
-            scanner->source = {};
+            scanner->delay = 0.0f;
         }
         break;
     case CMD_SET_SYSTEM_POWER_REQUEST:

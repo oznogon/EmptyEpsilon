@@ -63,13 +63,14 @@ public:
     void setToClosestTo(glm::vec2 position, float max_range, ESelectionType selection_type);
 
     // Select next/previous target by selection type, and optionally also by
-    // friend-or-foe state.
-    void setNextTarget(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof = KnownFriendOrFoe::Any);
-    void setPrevTarget(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof = KnownFriendOrFoe::Any);
+    // friend-or-foe state. Set short_range >= 0 to filter out entities masked
+    // on radar (e.g., behind a nebula).
+    void setNextTarget(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof = KnownFriendOrFoe::Any, float short_range = -1.0f);
+    void setPrevTarget(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof = KnownFriendOrFoe::Any, float short_range = -1.0f);
     // Select next/previous target by selection type and a function-defined
     // filter.
-    void setNextTarget(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter);
-    void setPrevTarget(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter);
+    void setNextTarget(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter, float short_range = -1.0f);
+    void setPrevTarget(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter, float short_range = -1.0f);
 
 private:
     std::vector<sp::ecs::Entity> entries;
@@ -81,8 +82,8 @@ private:
     void sortByDistance(glm::vec2 position, std::vector<sp::ecs::Entity>& entities);
     bool isValidTarget(sp::ecs::Entity entity, ESelectionType selection_type);
     // Return a vector of entities that match the given condition.
-    std::vector<sp::ecs::Entity> populateEntities(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof);
-    std::vector<sp::ecs::Entity> populateEntities(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter);
+    std::vector<sp::ecs::Entity> populateEntities(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof, float short_range);
+    std::vector<sp::ecs::Entity> populateEntities(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter, float short_range);
     void setTarget(ESelectionType selection_type);
     void setNextTarget(glm::vec2 position, const std::vector<sp::ecs::Entity>& entities, ESelectionType selection_type = ESelectionType::Targetable);
     void setPrevTarget(glm::vec2 position, const std::vector<sp::ecs::Entity>& entities, ESelectionType selection_type = ESelectionType::Targetable);
