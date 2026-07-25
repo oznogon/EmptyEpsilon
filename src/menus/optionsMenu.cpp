@@ -194,8 +194,7 @@ static string getThemeDisplayName(const string& theme_name)
             if (line.startswith("# display_name:"))
             {
                 string display_name = line.substr(static_cast<int>(strlen("# display_name:"))).strip();
-                if (!display_name.empty())
-                    return display_name;
+                if (!display_name.empty()) return display_name;
                 break;
             }
             line = stream->readLine();
@@ -601,6 +600,21 @@ void OptionsMenu::setupGraphicsOptions()
             })
             ->setSelectionIndex(fsaa_index)
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+        // Don't show FSAA options that aren't available.
+        int actual_samples;
+        SDL_GL_GetAttribute(SDL_GL_MULTISAMPLESAMPLES, &actual_samples);
+        if (actual_samples < 8)
+        {
+            fsaa_selector->removeEntry(3);
+            if (actual_samples < 4)
+            {
+                fsaa_selector->removeEntry(2);
+                if (actual_samples < 2)
+                    fsaa_selector->removeEntry(1);
+            }
+        }
+
         (new GuiTextTooltip(fsaa_selector, "FSAA_TIP", tr("tooltips", "Set the level of full-screen antialiasing for smoother edges. Requires restart."), 20.0f))->setWidth(280.0f);
 
         (new GuiLabel(graphics_page, "THEME_APPLICATION_LABEL", tr("options", "Restart EmptyEpsilon to apply full-screen antialiasing changes"), 20.0f))
