@@ -8698,9 +8698,7 @@ function friendlyComms(comms_data)
     end
     addCommsReply(_("shipAssist-comms", "Report status"), function()
         msg = _("shipAssist-comms", "Hull: ")
-            .. math.floor(
-                comms_target:getHull() / comms_target:getHullMax() * 100
-            )
+            .. comms_target:getHullPercentage()
             .. "%\n"
         local shields = comms_target:getShieldCount()
         if shields == 1 then

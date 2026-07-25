@@ -201,7 +201,7 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
         if (auto hull = my_spaceship.getComponent<Hull>())
         {
             const float hull_fraction = hull->current / hull->max;
-            hull_display->setValue(string(static_cast<int>(100.0f * hull_fraction)) + "%");
+            hull_display->setValue(string(hull->percentage()) + "%");
             if (hull_fraction <= 0.25f)
                 hull_display->setBackColor(glm::u8vec4(255, 0, 0, 255));
             else

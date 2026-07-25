@@ -166,6 +166,14 @@ function Entity:getHullMax()
     end
     return 0
 end
+--- Returns this entity's hull as a percentage (0-100).
+--- Example: stbo:getHullPercentage()
+function Entity:getHullPercentage()
+    if self.components.hull then
+        return self.components.hull.percentage
+    end
+    return 0
+end
 --- Sets this entity's hull points.
 --- If set to a value larger than the maximum, this sets the value to the limit.
 --- If set to a value less than 0, this sets the value to 0.

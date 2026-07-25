@@ -3766,7 +3766,7 @@ function stationStatusReport()
     addCommsReply(_("stationAssist-comms", "Report status"), function()
         msg = string.format(
             _("stationAssist-comms", "Hull:%s"),
-            math.floor(comms_target:getHull() / comms_target:getHullMax() * 100)
+            comms_target:getHullPercentage()
         )
         local shields = comms_target:getShieldCount()
         if shields == 1 then
@@ -4839,7 +4839,7 @@ function friendlyComms(comms_data)
     addCommsReply(_("shipAssist-comms", "Report status"), function()
         msg = string.format(
             _("shipAssist-comms", "Hull: %d%%\n"),
-            math.floor(comms_target:getHull() / comms_target:getHullMax() * 100)
+            comms_target:getHullPercentage()
         )
         shields = comms_target:getShieldCount()
         if shields == 1 then

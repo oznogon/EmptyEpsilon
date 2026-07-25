@@ -1139,7 +1139,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         if (hull->max > 0.0f)
         {
             const string hull_value = static_cast<string>("{hull}%").format({
-                {"hull", static_cast<int>((hull->current / hull->max) * 100.0f)}
+                {"hull", hull->percentage()}
             });
 
             entity_hull->setValue(hull_value);

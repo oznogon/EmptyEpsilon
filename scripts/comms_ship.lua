@@ -255,7 +255,7 @@ end
 function getStatusReport(ship)
     local msg = string.format(
         _("shipAssist-comms", "Hull: %d%%\n"),
-        math.floor(ship:getHull() / ship:getHullMax() * 100)
+        ship:getHullPercentage()
     )
 
     local shields = ship:getShieldCount()

@@ -6193,7 +6193,7 @@ function friendlyComms()
     addCommsReply(_("shipAssist-comms", "Report status"), function()
         msg = string.format(
             _("shipAssist-comms", "Hull: %d%%\n"),
-            math.floor(comms_target:getHull() / comms_target:getHullMax() * 100)
+            comms_target:getHullPercentage()
         )
         shields = comms_target:getShieldCount()
         if shields == 1 then
@@ -10979,9 +10979,7 @@ function update(delta)
                 homeStation:getCallSign(),
                 shield_label,
                 math.floor(lowest_shield / shield_max * 100),
-                math.floor(
-                    homeStation:getHull() / homeStation:getHullMax() * 100
-                )
+                homeStation:getHullPercentage()
             )
         else
             home_station_health = nil

@@ -5,10 +5,12 @@
 #include "multiplayer_server.h"
 #include "playerInfo.h"
 #include "ecs/query.h"
+
 #include "components/name.h"
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/collision.h"
+
 #include "systems/collision.h"
 
 #include "screenComponents/indicatorOverlays.h"
@@ -282,7 +284,10 @@ void SpectatorScreen::update(float delta)
             info[trMark("gm_info", "Shields")] = shields_value;
         }
         if (auto hull = target.getComponent<Hull>())
-            info[trMark("gm_info", "Hull")] = string(int(100.0f * hull->current / hull->max)) + "%";
+        {
+            if (hull->max > 1.0f)
+                info[trMark("gm_info", "Hull")] = string(hull->percentage()) + "%";
+        }
 
         for (auto i = info.begin(); i != info.end(); i++)
             selection_info[i->first] = i->second;

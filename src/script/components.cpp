@@ -89,6 +89,15 @@
             t->SET(sp::script::Convert<decltype(std::declval<T>().GET())>::fromLua(L, -1)); \
         } \
     };
+#define BIND_MEMBER_GET(T, NAME, GET) \
+    sp::script::ComponentHandler<T>::members[NAME] = { \
+        [](lua_State* L, const void* ptr) -> int { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<decltype(std::declval<T>().GET())>::toLua(L, t->GET()); \
+        }, [](lua_State* L, void* ptr) -> void { \
+            (void)L; (void)ptr; \
+        } \
+    };
 #define BIND_MEMBER_FLAG(T, MEMBER, NAME, MASK) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const void* ptr) { \
@@ -406,6 +415,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_energy", (1 << int(DamageType::Energy)));
     BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_kinetic", (1 << int(DamageType::Kinetic)));
     BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_emp", (1 << int(DamageType::EMP)));
+    BIND_MEMBER_GET(Hull, "percentage", percentage);
 
     sp::script::ComponentHandler<Shields>::name("shields");
     BIND_MEMBER_NAMED(Shields, front_system.health, "front_health");

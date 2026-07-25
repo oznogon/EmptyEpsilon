@@ -1556,7 +1556,7 @@ function stationStatusReport()
     addCommsReply(tableSelectRandom(status_prompts), function()
         msg = string.format(
             _("situationReport-comms", "Hull:%s%%"),
-            math.floor(comms_target:getHull() / comms_target:getHullMax() * 100)
+            comms_target:getHullPercentage()
         )
         local shields = comms_target:getShieldCount()
         if shields == 1 then
@@ -21254,7 +21254,7 @@ function friendlyShipComms()
     addCommsReply(tableSelectRandom(report_status_prompts), function()
         msg = string.format(
             _("shipAssist-comms", "Hull: %d%%\n"),
-            math.floor(comms_target:getHull() / comms_target:getHullMax() * 100)
+            comms_target:getHullPercentage()
         )
         local shields = comms_target:getShieldCount()
         if shields == 1 then
@@ -24564,9 +24564,7 @@ function friendlyServiceJonqueComms(comms_data)
     }
     addCommsReply(tableRemoveRandom(report_status_prompts), function()
         msg = _("ship-comms", "Hull: ")
-            .. math.floor(
-                comms_target:getHull() / comms_target:getHullMax() * 100
-            )
+            .. comms_target:getHullPercentage()
             .. "%\n"
         local shields = comms_target:getShieldCount()
         if shields == 1 then
@@ -24864,9 +24862,7 @@ function neutralServiceJonqueComms(comms_data)
     }
     addCommsReply(tableRemoveRandom(report_status_prompts), function()
         msg = _("ship-comms", "Hull: ")
-            .. math.floor(
-                comms_target:getHull() / comms_target:getHullMax() * 100
-            )
+            .. comms_target:getHullPercentage()
             .. "%\n"
         local shields = comms_target:getShieldCount()
         if shields == 1 then
