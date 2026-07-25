@@ -1,8 +1,9 @@
 #include "discord.h"
+#include <discord_game_sdk.h>
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+
 #include "components/name.h"
-#include <discord_game_sdk.h>
 
 static IDiscordCore* core;
 static IDiscordActivityManager* activityManager;
@@ -15,7 +16,7 @@ DiscordRichPresence::DiscordRichPresence(const std::filesystem::path& discord_sd
 {
     if (!discord)
     {
-        LOG(WARNING) << "Failed to initialize discord. Not using rich presence.";
+        LOG(Warning, "[discord] Failed to initialize Discord. Not using rich presence.");
         return;
     }
 
@@ -23,7 +24,7 @@ DiscordRichPresence::DiscordRichPresence(const std::filesystem::path& discord_sd
 
     if (!discord_create)
     {
-        LOG(WARNING) << "Failed to load discord factory function. Not using rich presence.";
+        LOG(Warning, "[discord] Failed to load Discord factory function. Not using rich presence.");
         return;
     }
 
@@ -33,10 +34,9 @@ DiscordRichPresence::DiscordRichPresence(const std::filesystem::path& discord_sd
     params.events = &events;
     params.event_data = nullptr;
 
-
     if (discord_create(DISCORD_VERSION, &params, &core) != DiscordResult_Ok)
     {
-        LOG(WARNING) << "Discord not installed or not running. Not using discord rich presence";
+        LOG(Warning, "[discord] Discord not installed or not running. Not using rich presence.");
         return;
     }
 
@@ -47,15 +47,12 @@ DiscordRichPresence::~DiscordRichPresence() = default;
 
 void DiscordRichPresence::update(float delta)
 {
-    if (!core)
-        return;
+    if (!core) return;
 
     core->run_callbacks(core);
 
-    if (updateDelay >= 0.0f)
-        updateDelay -= delta;
-    if (updateDelay >= 0.0f)
-        return;
+    if (updateDelay >= 0.0f) updateDelay -= delta;
+    if (updateDelay >= 0.0f) return;
 
     DiscordActivity activity;
     memset(&activity, 0, sizeof(activity));
@@ -70,7 +67,7 @@ void DiscordRichPresence::update(float delta)
             name += " [" + type_name->type_name + "]";
         strncpy(activity.details, name.c_str(), sizeof(activity.details));
 
-        for(int idx=0; idx<int(CrewPosition::MAX); idx++)
+        for (int idx = 0; idx < static_cast<int>(CrewPosition::MAX); idx++)
         {
             auto cp = CrewPosition(idx);
             if (my_player_info->hasPosition(cp))
@@ -89,6 +86,7 @@ void DiscordRichPresence::update(float delta)
                 break;
             }
         }
+
         if (my_player_info->isOnlyMainScreen(0))
         {
             strncpy(activity.state, "Captain", sizeof(activity.state));
@@ -100,6 +98,6 @@ void DiscordRichPresence::update(float delta)
     {
         activityManager->update_activity(activityManager, &activity, nullptr, nullptr);
         previousActivity = activity;
-        updateDelay = 4.0;
+        updateDelay = 4.0f;
     }
 }
