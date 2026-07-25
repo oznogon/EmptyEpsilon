@@ -3,7 +3,7 @@
 #include "multiplayer_server.h"
 #include "random.h"
 #include "gameGlobalInfo.h"
-#include "preferencesManager.h"
+#include "preferenceManager.h"
 
 #include "components/selfdestruct.h"
 #include "components/collision.h"
@@ -104,7 +104,7 @@ bool SelfDestructSystem::activate(sp::ecs::Entity entity)
                 if (self_destruct->show_position[n] == self_destruct->entry_position[n])
                     self_destruct->show_position[n] = CrewPosition::MAX;
 
-                    for (int i = 0; i < n; i++)
+                for (int i = 0; i < n; i++)
                 {
                     if (self_destruct->show_position[n] == self_destruct->show_position[i])
                         self_destruct->show_position[n] = CrewPosition::MAX;
