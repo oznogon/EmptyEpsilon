@@ -595,6 +595,7 @@ set(MAIN_SOURCES
     src/ai/missileVolleyAI.h
     src/epsilonServer.h
     src/featureDefs.h
+    src/format.h
     src/gameGlobalInfo.h
     src/glObjects.h
     src/GMActions.h
