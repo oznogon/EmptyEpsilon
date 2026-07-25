@@ -145,7 +145,9 @@ nebula-rendering 20260622 -- dynamic lighting
 
 sdl3 20260719 -- breaking-change migration to SDL3
 
-GinjaNinja32/multicast-ip -- allow setting sACN multicast behavior
-GinjaNinja32/get-wall-clock -- add getWallClock() Lua function
+GinjaNinja32/multicast-ip 20260720 -- allow setting sACN multicast behavior
+GinjaNinja32/get-wall-clock 20260720 -- add getWallClock() Lua function
 
-sdl-fake-gestures -- add rudimentary fingerDown/Up gestures
+sdl-fake-gestures 20260722 -- add rudimentary fingerDown/Up gestures
+
+hue-v2 20260725 -- Add Hue V2 device support, with SSL baggage
