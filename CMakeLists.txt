@@ -580,7 +580,6 @@ set(MAIN_SOURCES
     src/hardware/devices/uDMXDevice.cpp
     src/hardware/devices/virtualOutputDevice.cpp
     src/hardware/devices/philipsHueV1Device.cpp
-    src/hardware/devices/philipsHueV2Device.cpp
     src/script/components.cpp
     src/script/dataStorage.h
     src/script/dataStorage.cpp
@@ -602,7 +601,6 @@ set(MAIN_SOURCES
     src/hardware/devices/dmx512SerialDevice.h
     src/hardware/devices/enttecDMXProDevice.h
     src/hardware/devices/philipsHueV1Device.h
-    src/hardware/devices/philipsHueV2Device.h
     src/hardware/devices/sACNDMXDevice.h
     src/hardware/devices/uDMXDevice.h
     src/hardware/devices/virtualOutputDevice.h
@@ -736,6 +734,10 @@ if (WITH_DISCORD)
 endif()
 if (STEAMSDK)
   list(APPEND MAIN_SOURCES src/steamrichpresence.cpp src/steamrichpresence.h)
+endif()
+
+if(WITH_SSL)
+  list(APPEND MAIN_SOURCES src/hardware/devices/philipsHueV2Device.cpp src/hardware/devices/philipsHueV2Device.h)
 endif()
 
 if (WIN32)

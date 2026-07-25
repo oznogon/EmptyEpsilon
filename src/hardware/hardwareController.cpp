@@ -27,7 +27,9 @@
 #include "devices/sACNDMXDevice.h"
 #include "devices/uDMXDevice.h"
 #include "devices/philipsHueV1Device.h"
+#ifdef HAVE_OPENSSL
 #include "devices/philipsHueV2Device.h"
+#endif
 
 #include "hardwareMappingEffects.h"
 
@@ -116,7 +118,11 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
         else if (settings["device"] == "PhilipsHueV1Device")
             device = new PhilipsHueV1Device();
         else if (settings["device"] == "PhilipsHueV2Device")
+#ifdef HAVE_OPENSSL
             device = new PhilipsHueV2Device();
+#else
+            LOG(Error, "[hardware] Philips Hue V2 hardware devices require SSL. Build EmptyEpsilon with the WITH_SSL=ON flag.");
+#endif
         else
             LOG(ERROR) << "Unknown device definition in [hardware] section: " << settings["device"];
         if (device)
