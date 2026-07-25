@@ -3,7 +3,7 @@
 #include "logging.h"
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
-#include "preferencesManager.h"
+#include "preferenceManager.h"
 #include "ecs/query.h"
 
 #include "components/collision.h"

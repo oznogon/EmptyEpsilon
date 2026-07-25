@@ -11,23 +11,27 @@
 
 static PrometheusMetricsServer* metrics_server = nullptr;
 
-
 EpsilonServer::EpsilonServer(int server_port)
 : GameServer("Server", VERSION_NUMBER, server_port)
 {
     if (!game_server.isAlive()) return;
 
-    int metrics_port = PreferencesManager::get("metrics_server").toInt();
-    // Initialize metrics server if defined on a valid port.
-    if (metrics_port > 1024
-        && metrics_port < 65535
-        && !metrics_server)
+    const int metrics_port = PreferencesManager::get("metrics_server").toInt();
+    if (metrics_port >= 1024)
     {
-        metrics_server = new PrometheusMetricsServer(metrics_port);
-        setCollectNetworkStats(true);
+        if (metrics_port > 65535)
+            LOG(Warning, "[server] metrics_server ", string(metrics_port), " is out of valid range (1024 to 65535). Prometheus metrics endpoint not enabled.");
+        else
+        {
+            LOG(Info, "[server] Prometheus metrics endpoint enabled at /metrics on port ", metrics_port);
+            new PrometheusMetricsServer(metrics_port);
+            setCollectNetworkStats(true);
+        }
     }
+    else if (metrics_port == 0)
+        LOG(Warning, "[server] metrics_server is either not set or not an integer. Prometheus metrics endpoint not enabled.");
     else
-        LOG(Warning, "Invalid metrics_port ", string(metrics_port), ". Network stats collection not enabled.");
+        LOG(Warning, "[server] metrics_server ", string(metrics_port), " is invalid. Prometheus metrics endpoint not enabled.");
 
     new GameGlobalInfo();
     new GameMasterActions();
@@ -42,7 +46,7 @@ EpsilonServer::EpsilonServer(int server_port)
 
 void EpsilonServer::onNewClient(int32_t client_id)
 {
-    LOG(Info, "New client: ", client_id);
+    LOG(Info, "[server] New client: ", client_id);
     // Assign the connected client's PlayerInfo.
     PlayerInfo* info = new PlayerInfo();
     info->client_id = client_id;
@@ -50,7 +54,7 @@ void EpsilonServer::onNewClient(int32_t client_id)
 
 void EpsilonServer::onDisconnectClient(int32_t client_id)
 {
-    LOG(Info, "Client left: ", client_id);
+    LOG(Info, "[server] Client left: ", client_id);
 
     // Destroy the disconnected client's PlayerInfo.
     foreach (PlayerInfo, i, player_info_list)

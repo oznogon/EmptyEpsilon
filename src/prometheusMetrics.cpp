@@ -249,7 +249,6 @@ static void collectGameMetrics(string& output)
         string escaped_name = escapeLabelValue(ship_name);
 
         ship_info_lines += "ee_player_ship_info{ship=\"" + escaped_name
-            + "\",password=\"" + escapeLabelValue(pc.control_code)
             + "\"} 1\n";
 
         auto hull = entity.getComponent<Hull>();
@@ -275,7 +274,7 @@ static void collectGameMetrics(string& output)
 
     if (!ship_info_lines.empty())
         writeGaugeMetric(output, "ee_player_ship_info",
-            "Active player ship name and access password (always 1)",
+            "Active player ship name (always 1)",
             ship_info_lines);
 
     writeGaugeMetric(

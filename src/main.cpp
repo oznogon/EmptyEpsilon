@@ -111,7 +111,7 @@ int main(int argc, char** argv)
     Logging::setLogStdout();
 #endif
 
-    LOG(Info, "Starting...");
+    LOG(Info, "[main] Starting EmptyEpsilon...");
     auto configuration_path = initConfiguration(argc, argv);
 
     new Engine();
@@ -130,7 +130,7 @@ int main(int argc, char** argv)
         std::error_code ec;
         std::filesystem::create_directories(std::filesystem::path(configuration_path.c_str()), ec);
         if (ec && !(ec == std::errc::file_exists || ec == std::errc::directory_not_empty))
-            LOG(Error, "Failed to create configuration directory: ", ec.message());
+            LOG(Error, "[main] Failed to create configuration directory: ", ec.message());
 // On macOS non-debug builds, redirect the log to the configuration directory if
 // invoked as an app bundle.
 #ifdef __APPLE__
@@ -165,37 +165,20 @@ int main(int argc, char** argv)
     {
         int port_nr = PreferencesManager::get("httpserver").toInt();
         if (port_nr < 80) port_nr = 80;
-        LOG(Info, "Enabling HTTP script access on port: ", port_nr, "\nNOTE: This is potentially a risk!");
+        LOG(Info, "[main] Enabling HTTP script access on port: ", port_nr, "\nNOTE: This is potentially a risk!");
         new EEHttpServer(port_nr, PreferencesManager::get("www_directory", "www"));
-    }
-
-    if (PreferencesManager::get("metrics_server").toInt() != 0)
-    {
-        int metrics_port = PreferencesManager::get("metrics_server").toInt();
-
-        if (metrics_port == 0)
-        {
-            LOG(Warning, "metrics_port ", string(metrics_port), " either not set or not an integer. Prometheus metrics endpoint not enabled.");
-        }
-        else if (metrics_port < 1024 || metrics_port > 65535)
-        {
-            LOG(Warning, "metrics_port ", string(metrics_port), " is out of valid range (1024 to 65535). Prometheus metrics endpoint not enabled.");
-        }
-        else
-        {
-            LOG(Info, "Prometheus metrics endpoint enabled at /metrics on port ", metrics_port);
-            new PrometheusMetricsServer(metrics_port);
-        }
     }
 
     string theme_name = PreferencesManager::get("guitheme", "default");
     if (!GuiTheme::loadTheme(theme_name, "gui/" + theme_name + ".theme.txt"))
     {
-        LOG(Error, "Failed to load " + theme_name + " theme, trying default. Resources missing or contains errors? Check gui/" + theme_name + ".theme.txt");
+        LOG(Error, "[main] Failed to load " + theme_name + " theme, trying default. Resources missing or contains errors? Check gui/" + theme_name + ".theme.txt");
 
         if (!GuiTheme::loadTheme("default", "gui/default.theme.txt"))
         {
-            LOG(Error, "Failed to load default theme, exiting. Check gui/default.theme.txt"); //Yes, we may try to load twice default theme but this should be a rare error case which always finish in exit
+            // We might try to load the default theme twice, but this should be
+            // a rare error case which always exits.
+            LOG(Error, "[main] Failed to load default theme, exiting. Check gui/default.theme.txt");
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing or contains errors? Check gui/default.theme.txt", nullptr);
             return 1;
         }
@@ -229,7 +212,7 @@ int main(int argc, char** argv)
     bold_font = active_theme->getStyle("bold")->get(GuiElement::State::Normal).font;
     if (!main_font || !bold_font)
     {
-        LOG(Error, "Can't load UI beacuse either the main and/or bold fonts are missing from the theme.");
+        LOG(Error, "[main] Can't load UI beacuse either the main and/or bold fonts are missing from the theme.");
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load main or bold font, resources missing?", nullptr);
         return 1;
     }
@@ -273,7 +256,7 @@ int main(int argc, char** argv)
     if (!tutorial.empty())
     {
         bool repeat_tutorial = PreferencesManager::get("repeat_tutorial", "false") == "true";
-        LOG(Debug, "Starting tutorial: ", tutorial);
+        LOG(Debug, "[main] Starting tutorial: ", tutorial);
         new TutorialGame(repeat_tutorial, tutorial);
     }
     else if (server_scenario.empty())
@@ -291,15 +274,16 @@ int main(int argc, char** argv)
 
         if (server_port == 0)
         {
-            LOG(Warning, "server_port ", string(server_port), " either not set or not an integer. Using default port ", string(DEFAULT_SERVER_PORT));
+            server_port = DEFAULT_SERVER_PORT;
+            LOG(Warning, "[main] server_port is either not set or not an integer. Using default port ", string(DEFAULT_SERVER_PORT));
         }
         else if (server_port < 1024 || server_port > 65535)
         {
-            LOG(Warning, "server_port ", string(server_port), " is out of valid range (1024 to 65535). Using default port ", string(DEFAULT_SERVER_PORT));
             server_port = DEFAULT_SERVER_PORT;
+            LOG(Warning, "[main] server_port ", string(server_port), " is out of valid range (1024 to 65535). Using default port ", string(DEFAULT_SERVER_PORT));
         }
 
-        LOG(Info, "Launching server_scenario " + server_scenario + " on port " + string(server_port));
+        LOG(Info, "[main] Launching server_scenario " + server_scenario + " on port " + string(server_port));
         new EpsilonServer(server_port);
 
         // Exit returning 1 if server is invalid.
@@ -392,15 +376,16 @@ void returnToMainMenu(RenderLayer* render_layer)
         // This is the same process as server_port and could be made DRY.
         if (headless_port == 0)
         {
-            LOG(Warning, "server_port ", string(headless_port), " either not set or not an integer. Using default port ", string(DEFAULT_SERVER_PORT));
+            headless_port = DEFAULT_SERVER_PORT;
+            LOG(Warning, "[main] server_port is either not set or not an integer. Using default port ", string(DEFAULT_SERVER_PORT));
         }
         else if (headless_port < 1024 || headless_port > 65535)
         {
-            LOG(Warning, "server_port ", string(headless_port), " is out of valid range (1024 to 65535). Using default port ", string(DEFAULT_SERVER_PORT));
             headless_port = DEFAULT_SERVER_PORT;
+            LOG(Warning, "[main] server_port ", string(headless_port), " is out of valid range (1024 to 65535). Using default port ", string(DEFAULT_SERVER_PORT));
         }
 
-        LOG(Info, "Launching scenario " + headless + " as a headless server on port " + string(headless_port));
+        LOG(Info, "[main] Launching scenario " + headless + " as a headless server on port " + string(headless_port));
         new EpsilonServer(headless_port);
 
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
@@ -410,7 +395,7 @@ void returnToMainMenu(RenderLayer* render_layer)
         gameGlobalInfo->startScenario(headless, loadScenarioSettingsFromPrefs());
 
         if (PreferencesManager::get("startpaused") != "1")
-            engine->setGameSpeed(1.0);
+            engine->setGameSpeed(1.0f);
     }
     else if (!PreferencesManager::get("autoconnect").empty())
     {
