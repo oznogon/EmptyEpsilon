@@ -473,8 +473,9 @@ Keys::Keys() :
     weapons_aim_right("WEAPONS_AIM_RIGHT", "H"),
 
     // Science crew screen
-    science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
-    science_scan_abort("SCIENCE_SCAN_ABORT", "D"),
+    science_scan_object("SCIENCE_SCAN_OBJECT"),
+    science_scan_abort("SCIENCE_SCAN_ABORT"),
+    science_scan_toggle("SCIENCE_SCAN_TOGGLE", "S"),
     science_select_next_scannable("SCIENCE_SELECT_NEXT_SCANNABLE", "C"),
     science_select_prev_scannable("SCIENCE_SELECT_PREV_SCANNABLE"),
     science_next_target("SCIENCE_TARGET_NEXT"),
@@ -1054,6 +1055,8 @@ void Keys::init()
     science_scan_object.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     science_scan_abort.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Abort scan"));
     science_scan_abort.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    science_scan_toggle.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object/abort scan"));
+    science_scan_toggle.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
     science_select_next_scannable.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |

@@ -1214,7 +1214,7 @@ void ScienceScreen::onUpdate()
     if (science_scanner && science_scanner->delay == 0.0f)
     {
         // Initiate a scan on scannable objects.
-        if (keys.science_scan_object.isDiscreteStepDown() && science_scanner && science_scanner->delay == 0.0f)
+        if (keys.science_scan_object.isDiscreteStepDown() || keys.science_scan_toggle.isDiscreteStepDown())
         {
             auto obj = targets.get();
 
@@ -1321,42 +1321,50 @@ void ScienceScreen::onUpdate()
 
         if (science_scanner && science_scanner->delay == 0.0f && (lrr || use_probe_view))
         {
+            float effective_short_range = -1.0f;
+            if (!use_probe_view && lrr)
+            {
+                effective_short_range = lrr->short_range;
+                if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
+                    effective_short_range = sensorsScaleShortRange(effective_short_range, sensors->getSystemEffectiveness());
+            }
+
             // Select previous/next scannable entity.
             if (keys.science_select_next_scannable.isDiscreteStepDown() || keys.science_select_next_scannable.isRepeatReady())
             {
-                targets.setNextTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
+                targets.setNextTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable, TargetsContainer::KnownFriendOrFoe::Any, effective_short_range);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
 
             if (keys.science_select_prev_scannable.isDiscreteStepDown() || keys.science_select_prev_scannable.isRepeatReady())
             {
-                targets.setPrevTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
+                targets.setPrevTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable, TargetsContainer::KnownFriendOrFoe::Any, effective_short_range);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
 
             // Select previous/next hostile entity.
             if (keys.science_enemy_next_target.isDiscreteStepDown() || keys.science_enemy_next_target.isRepeatReady())
             {
-                targets.setNextTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+                targets.setNextTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile, effective_short_range);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
 
             if (keys.science_enemy_prev_target.isDiscreteStepDown() || keys.science_enemy_prev_target.isRepeatReady())
             {
-                targets.setPrevTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+                targets.setPrevTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile, effective_short_range);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
 
             // Select previous/next selectable entity.
             if (keys.science_next_target.isDiscreteStepDown() || keys.science_next_target.isRepeatReady())
             {
-                targets.setNextTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
+                targets.setNextTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::Any, effective_short_range);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
 
             if (keys.science_prev_target.isDiscreteStepDown() || keys.science_prev_target.isRepeatReady())
             {
-                targets.setPrevTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
+                targets.setPrevTarget(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::Any, effective_short_range);
                 if (targets.get()) my_player_info->commandSetScanTarget(targets.get());
             }
         }

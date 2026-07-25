@@ -3,6 +3,7 @@
 #include "ecs/query.h"
 
 #include "systems/collision.h"
+#include "systems/radarblock.h"
 
 #include "components/hull.h"
 #include "components/collision.h"
@@ -56,7 +57,7 @@ sp::ecs::Entity TargetsContainer::get()
     return entries[0];
 }
 
-std::vector<sp::ecs::Entity> TargetsContainer::populateEntities(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter)
+std::vector<sp::ecs::Entity> TargetsContainer::populateEntities(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter, float short_range)
 {
     std::vector<sp::ecs::Entity> entities;
 
@@ -64,6 +65,7 @@ std::vector<sp::ecs::Entity> TargetsContainer::populateEntities(glm::vec2 positi
     {
         if (isValidTarget(entity, selection_type)
             && glm::distance(position, transform.getPosition()) <= max_range
+            && (short_range < 0.0f || !RadarBlockSystem::isRadarBlockedFrom(position, entity, short_range))
             && filter(entity))
         {
             entities.push_back(entity);
@@ -74,14 +76,15 @@ std::vector<sp::ecs::Entity> TargetsContainer::populateEntities(glm::vec2 positi
     return entities;
 }
 
-std::vector<sp::ecs::Entity> TargetsContainer::populateEntities(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof)
+std::vector<sp::ecs::Entity> TargetsContainer::populateEntities(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof, float short_range)
 {
     std::vector<sp::ecs::Entity> entities;
 
     for (auto [entity, transform] : sp::ecs::Query<sp::Transform>())
     {
         if (isValidTarget(entity, selection_type)
-            && glm::distance(position, transform.getPosition()) <= max_range)
+            && glm::distance(position, transform.getPosition()) <= max_range
+            && (short_range < 0.0f || !RadarBlockSystem::isRadarBlockedFrom(position, entity, short_range)))
         {
             switch (known_fof)
             {
@@ -250,24 +253,24 @@ bool TargetsContainer::isFoFKnown(sp::ecs::Entity entity)
     return ss->getStateFor(my_spaceship) >= ScanState::State::FriendOrFoeIdentified;
 }
 
-void TargetsContainer::setNextTarget(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof)
+void TargetsContainer::setNextTarget(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof, float short_range)
 {
-    setNextTarget(position, populateEntities(position, max_range, selection_type, known_fof), selection_type);
+    setNextTarget(position, populateEntities(position, max_range, selection_type, known_fof, short_range), selection_type);
 }
 
-void TargetsContainer::setPrevTarget(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof)
+void TargetsContainer::setPrevTarget(glm::vec2 position, float max_range, ESelectionType selection_type, KnownFriendOrFoe known_fof, float short_range)
 {
-    setPrevTarget(position, populateEntities(position, max_range, selection_type, known_fof), selection_type);
+    setPrevTarget(position, populateEntities(position, max_range, selection_type, known_fof, short_range), selection_type);
 }
 
-void TargetsContainer::setNextTarget(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter)
+void TargetsContainer::setNextTarget(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter, float short_range)
 {
-    setNextTarget(position, populateEntities(position, max_range, selection_type, filter), selection_type);
+    setNextTarget(position, populateEntities(position, max_range, selection_type, filter, short_range), selection_type);
 }
 
-void TargetsContainer::setPrevTarget(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter)
+void TargetsContainer::setPrevTarget(glm::vec2 position, float max_range, ESelectionType selection_type, std::function<bool(sp::ecs::Entity)> filter, float short_range)
 {
-    setPrevTarget(position, populateEntities(position, max_range, selection_type, filter), selection_type);
+    setPrevTarget(position, populateEntities(position, max_range, selection_type, filter, short_range), selection_type);
 }
 
 void TargetsContainer::setTarget(ESelectionType selection_type)
@@ -373,8 +376,8 @@ void TargetsContainer::sortByDistance(glm::vec2 position, std::vector<sp::ecs::E
         {
             auto transform_a = a.getComponent<sp::Transform>();
             auto transform_b = b.getComponent<sp::Transform>();
-            if (!transform_a) return bool(transform_b);
-            if (!transform_b) return bool(transform_a);
+            if (!transform_a) return static_cast<bool>(transform_b);
+            if (!transform_b) return static_cast<bool>(transform_a);
 
             return glm::distance(position, transform_a->getPosition()) < glm::distance(position, transform_b->getPosition());
         }
